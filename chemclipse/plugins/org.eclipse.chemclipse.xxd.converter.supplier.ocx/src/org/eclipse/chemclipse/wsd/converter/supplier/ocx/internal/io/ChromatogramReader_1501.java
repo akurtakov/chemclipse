@@ -615,10 +615,12 @@ public class ChromatogramReader_1501 extends AbstractChromatogramReader implemen
 			IRetentionIndexEntry retentionIndexEntry = new RetentionIndexEntry(retentionTime, retentionIndex, name);
 			separationColumnIndices.put(retentionIndexEntry);
 		}
-		//
+		/*
+		 * Transfer the column
+		 */
 		ISeparationColumn separationColumnSource = reader1501.readSeparationColumn(dataInputStream);
 		ISeparationColumn separationColumnSink = separationColumnIndices.getSeparationColumn();
-		separationColumnSource.copyFrom(separationColumnSink);
+		separationColumnSink.copyFrom(separationColumnSource);
 		//
 		if(closeStream) {
 			dataInputStream.close();
