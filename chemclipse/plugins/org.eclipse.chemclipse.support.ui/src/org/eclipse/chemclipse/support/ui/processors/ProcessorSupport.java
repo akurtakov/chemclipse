@@ -166,6 +166,8 @@ public class ProcessorSupport {
 			imageFileName = IApplicationImage.IMAGE_SAVE;
 			if(processSupplier.getName().contains("*.CAL")) {
 				imageFileName = IApplicationImage.IMAGE_SAMPLE_CALIBRATION;
+			} else if(processSupplier.getName().contains("CSV")) {
+				imageFileName = IApplicationImage.IMAGE_CSV;
 			} else if(processSupplier.getName().contains("Excel")) {
 				imageFileName = IApplicationImage.IMAGE_EXCEL_DOCUMENT;
 			} else if(processSupplier.getName().contains("ZIP")) {
