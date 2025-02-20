@@ -28,4 +28,13 @@ public class VendorChromatogram extends AbstractChromatogramWSD implements IVend
 
 		return extractNameFromFile("Chromatogram");
 	}
+
+	@Override
+	public boolean isParseSeparationColumnEnabled() {
+
+		/*
+		 * Assume that the column has been set and saved already.
+		 */
+		return false;
+	}
 }

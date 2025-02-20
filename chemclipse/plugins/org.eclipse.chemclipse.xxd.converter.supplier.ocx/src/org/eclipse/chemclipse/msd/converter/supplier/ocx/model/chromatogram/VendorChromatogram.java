@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2018 Lablicate GmbH.
+ * Copyright (c) 2008, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -7,7 +7,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.supplier.ocx.model.chromatogram;
 
@@ -26,5 +26,14 @@ public class VendorChromatogram extends AbstractChromatogramMSD implements IVend
 	public String getName() {
 
 		return extractNameFromFile("Chromatogram");
+	}
+
+	@Override
+	public boolean isParseSeparationColumnEnabled() {
+
+		/*
+		 * Assume that the column has been set and saved already.
+		 */
+		return false;
 	}
 }

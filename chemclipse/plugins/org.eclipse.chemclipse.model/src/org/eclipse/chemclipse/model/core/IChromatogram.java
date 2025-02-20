@@ -41,6 +41,16 @@ public interface IChromatogram extends SegmentedMeasurement, IMeasurement, IChro
 
 	void setColumnDetails(String columnDetails);
 
+	/*
+	 * By default, the separation column could be
+	 * parsed on import. If that shall be suppressed
+	 * the return must be overridden to false.
+	 */
+	default boolean isParseSeparationColumnEnabled() {
+
+		return true;
+	}
+
 	/**
 	 * Use this map to store references to objects that are
 	 * related to the chromatogram by external processes.

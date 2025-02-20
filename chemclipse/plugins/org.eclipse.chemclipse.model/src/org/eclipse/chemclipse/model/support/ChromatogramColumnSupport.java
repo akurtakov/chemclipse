@@ -26,20 +26,32 @@ public class ChromatogramColumnSupport {
 	public static void parseSeparationColumn(IChromatogram chromatogram) {
 
 		if(PreferenceSupplier.isParseSeparationColumnFromHeader()) {
-			ColumnField columnField = PreferenceSupplier.getSeparationColumnField();
-			SeparationColumnMapping separationColumnMapping = getSeparationColumnMapping();
-			boolean parseReferences = PreferenceSupplier.isParseSeparationColumnReferencedChromatograms();
-			parseSeparationColumn(chromatogram, columnField, separationColumnMapping, parseReferences);
+			if(chromatogram.isParseSeparationColumnEnabled()) {
+				ColumnField columnField = PreferenceSupplier.getSeparationColumnField();
+				SeparationColumnMapping separationColumnMapping = getSeparationColumnMapping();
+				boolean parseReferences = PreferenceSupplier.isParseSeparationColumnReferencedChromatograms();
+				parseSeparationColumn(chromatogram, columnField, separationColumnMapping, parseReferences);
+			}
 		}
 	}
 
 	public static void parseSeparationColumn(IChromatogram chromatogram, ColumnField columnField, SeparationColumnMapping separationColumnMapping, boolean parseReferences) {
 
 		if(!separationColumnMapping.isEmpty()) {
-			mapSeparationColumn(chromatogram, columnField, separationColumnMapping);
+			/*
+			 * Master
+			 */
+			if(chromatogram.isParseSeparationColumnEnabled()) {
+				mapSeparationColumn(chromatogram, columnField, separationColumnMapping);
+			}
+			/*
+			 * References
+			 */
 			if(parseReferences) {
 				for(IChromatogram chromatogramReference : chromatogram.getReferencedChromatograms()) {
-					mapSeparationColumn(chromatogramReference, columnField, separationColumnMapping);
+					if(chromatogramReference.isParseSeparationColumnEnabled()) {
+						mapSeparationColumn(chromatogramReference, columnField, separationColumnMapping);
+					}
 				}
 			}
 		}
