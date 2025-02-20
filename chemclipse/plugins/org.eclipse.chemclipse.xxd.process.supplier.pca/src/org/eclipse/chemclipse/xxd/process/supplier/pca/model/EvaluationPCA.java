@@ -22,6 +22,7 @@ public class EvaluationPCA {
 
 	private ISamplesPCA<? extends IVariable, ? extends ISample> samples = null;
 	private IResultsPCA<? extends IResultPCA, ? extends IVariable> results = null;
+	@SuppressWarnings("unused")
 	private ISamplesPCA<? extends IVariable, ? extends ISample> predict = null;
 	/*
 	 * The feature data matrix can be calculated after samples and results are set.
