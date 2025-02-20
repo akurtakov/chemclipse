@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022 Lablicate GmbH.
+ * Copyright (c) 2022, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -14,6 +14,8 @@ package org.eclipse.chemclipse.xxd.process.ui.menu;
 import org.eclipse.swt.graphics.Image;
 
 public interface IMenuIcon {
+
+	public static final String EXTENSION_POINT_ID = "org.eclipse.chemclipse.xxd.process.ui.menu.icon";
 
 	Image getImage();
 }

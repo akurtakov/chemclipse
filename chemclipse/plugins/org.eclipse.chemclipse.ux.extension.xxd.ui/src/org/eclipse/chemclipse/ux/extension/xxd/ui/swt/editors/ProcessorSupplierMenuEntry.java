@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2024 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -35,7 +35,6 @@ public class ProcessorSupplierMenuEntry<T> extends AbstractChartMenuEntry implem
 	private final BiConsumer<IProcessSupplier<T>, IProcessSupplierContext> executionConsumer;
 	private final IProcessSupplierContext context;
 	//
-	private static final String MENU_ICON = "org.eclipse.chemclipse.xxd.process.ui.menu.icon";
 	private static final Logger logger = Logger.getLogger(ProcessorSupplierMenuEntry.class);
 
 	public ProcessorSupplierMenuEntry(IProcessSupplier<T> processorSupplier, IProcessSupplierContext context, BiConsumer<IProcessSupplier<T>, IProcessSupplierContext> executionConsumer) {
@@ -65,7 +64,7 @@ public class ProcessorSupplierMenuEntry<T> extends AbstractChartMenuEntry implem
 	public Image getIcon() {
 
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
-		IConfigurationElement[] config = registry.getConfigurationElementsFor(MENU_ICON);
+		IConfigurationElement[] config = registry.getConfigurationElementsFor(IMenuIcon.EXTENSION_POINT_ID);
 		try {
 			for(IConfigurationElement element : config) {
 				// NOTE: some process type suppliers add hard-coded prefixes
