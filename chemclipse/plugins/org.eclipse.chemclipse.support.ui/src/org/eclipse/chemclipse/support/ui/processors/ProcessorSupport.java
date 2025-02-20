@@ -27,7 +27,7 @@ import org.eclipse.chemclipse.support.util.ValueParserSupport;
 public class ProcessorSupport {
 
 	private static final Logger logger = Logger.getLogger(ProcessorSupport.class);
-	//
+
 	public static final String PROCESSOR_IMAGE_DEFAULT = IApplicationImage.IMAGE_EXECUTE_EXTENSION;
 	/*
 	 * The processors must not contain the following persistence delimiters.
@@ -36,7 +36,7 @@ public class ProcessorSupport {
 	 */
 	private static final String VALUE_DELIMITER = "§";
 	private static final String PROCESSOR_DELIMITER = "%";
-	//
+
 	private static ValueParserSupport valueParseSupport = new ValueParserSupport();
 
 	public static List<Processor> getActiveProcessors(Set<IProcessSupplier<?>> processSuppliers, String settings) {
@@ -82,7 +82,7 @@ public class ProcessorSupport {
 	public static String getActiveProcessors(List<Processor> processors) {
 
 		StringBuilder builder = new StringBuilder();
-		//
+
 		if(processors != null) {
 			List<Processor> activeProcessors = processors.stream().filter(Processor::isActive).toList();
 			Iterator<Processor> iterator = activeProcessors.iterator();
@@ -90,7 +90,7 @@ public class ProcessorSupport {
 				Processor processor = iterator.next();
 				if(isValid(processor)) {
 					IProcessSupplier<?> processSupplier = processor.getProcessSupplier();
-					//
+
 					builder.append(processSupplier.getId());
 					builder.append(VALUE_DELIMITER);
 					builder.append(processor.getImageFileName());
@@ -98,7 +98,7 @@ public class ProcessorSupport {
 					builder.append(processor.isActive());
 					builder.append(VALUE_DELIMITER);
 					builder.append(processor.getIndex());
-					//
+
 					if(iterator.hasNext()) {
 						builder.append(PROCESSOR_DELIMITER);
 					}
@@ -107,7 +107,7 @@ public class ProcessorSupport {
 				}
 			}
 		}
-		//
+
 		return builder.toString();
 	}
 
@@ -126,7 +126,7 @@ public class ProcessorSupport {
 			}
 			Collections.sort(processors, (p1, p2) -> Integer.compare(p1.getIndex(), p2.getIndex()));
 		}
-		//
+
 		return processorsFiltered;
 	}
 
@@ -166,6 +166,8 @@ public class ProcessorSupport {
 			imageFileName = IApplicationImage.IMAGE_SAVE;
 			if(processSupplier.getName().contains("*.CAL")) {
 				imageFileName = IApplicationImage.IMAGE_SAMPLE_CALIBRATION;
+			} else if(processSupplier.getName().contains("CSV")) {
+				imageFileName = IApplicationImage.IMAGE_CSV;
 			} else if(processSupplier.getName().contains("Excel")) {
 				imageFileName = IApplicationImage.IMAGE_EXCEL_DOCUMENT;
 			} else if(processSupplier.getName().contains("ZIP")) {
@@ -252,7 +254,7 @@ public class ProcessorSupport {
 			if(processSupplier.getName().contains("Add Peaks to DB")) {
 				imageFileName = IApplicationImage.IMAGE_ADD_PEAKS_TO_QUANTITATION_TABLE;
 			}
-		} else if(processSupplier.getCategory().equals("Peak Massspectrum Filter") || processSupplier.getCategory().equals("Scan Massspectrum Filter")) {
+		} else if(processSupplier.getCategory().equals("Peak Mass Spectrum Filter") || processSupplier.getCategory().equals("Scan Mass Spectrum Filter")) {
 			imageFileName = IApplicationImage.IMAGE_MASS_SPECTRUM;
 			if(processSupplier.getName().contains("Savitzky-Golay")) {
 				imageFileName = IApplicationImage.IMAGE_FILTER_SAVITZKY_GOLAY;
@@ -273,7 +275,7 @@ public class ProcessorSupport {
 		} else if(processSupplier.getCategory().equals("System")) {
 			imageFileName = IApplicationImage.IMAGE_PREFERENCES;
 		}
-		//
+
 		return imageFileName;
 	}
 
@@ -285,7 +287,7 @@ public class ProcessorSupport {
 			 */
 			TreeMap<Integer, Processor> processorMap = new TreeMap<>();
 			int indexActive = -1;
-			//
+
 			for(int i = 0; i < processors.size(); i++) {
 				Processor processor = processors.get(i);
 				if(processor.isActive()) {
@@ -295,7 +297,7 @@ public class ProcessorSupport {
 					}
 				}
 			}
-			//
+
 			if(indexActive >= 0) {
 				Integer indexSwitch = moveUp ? processorMap.lowerKey(indexActive) : processorMap.higherKey(indexActive);
 				if(indexSwitch != null) {
@@ -319,7 +321,7 @@ public class ProcessorSupport {
 				return processor;
 			}
 		}
-		//
+
 		return null;
 	}
 
@@ -339,18 +341,18 @@ public class ProcessorSupport {
 		if(processor == null) {
 			return false;
 		}
-		//
+
 		IProcessSupplier<?> processSupplier = processor.getProcessSupplier();
 		String id = processSupplier.getId();
 		if(id.contains(VALUE_DELIMITER) || id.contains(PROCESSOR_DELIMITER)) {
 			return false;
 		}
-		//
+
 		String imageFileName = processor.getImageFileName();
 		if(imageFileName.contains(VALUE_DELIMITER) || imageFileName.contains(PROCESSOR_DELIMITER)) {
 			return false;
 		}
-		//
+
 		return true;
 	}
 

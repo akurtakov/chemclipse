@@ -53,7 +53,6 @@ import org.eclipse.swtchart.extensions.menu.IChartMenuEntry;
 
 public class ChartPCR extends LineChart {
 
-	private static final String MENU_ICON = "org.eclipse.chemclipse.xxd.process.ui.menu.icon"; //$NON-NLS-1$
 	private static final Logger logger = Logger.getLogger(ChartPCR.class);
 	//
 	private IPlate plate;
@@ -145,7 +144,7 @@ public class ChartPCR extends LineChart {
 				public Image getIcon() {
 
 					IExtensionRegistry registry = Platform.getExtensionRegistry();
-					IConfigurationElement[] config = registry.getConfigurationElementsFor(MENU_ICON);
+					IConfigurationElement[] config = registry.getConfigurationElementsFor(IMenuIcon.EXTENSION_POINT_ID);
 					try {
 						for(IConfigurationElement element : config) {
 							final String id = element.getAttribute("id"); //$NON-NLS-1$
