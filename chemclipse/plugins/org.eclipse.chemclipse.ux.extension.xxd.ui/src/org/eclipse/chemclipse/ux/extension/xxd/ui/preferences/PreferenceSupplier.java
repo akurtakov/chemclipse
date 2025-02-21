@@ -112,6 +112,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_STACK_POSITION_OVERLAY_NMR = PartSupport.PARTSTACK_BOTTOM_CENTER;
 	public static final String P_STACK_POSITION_OVERLAY_VSD = "stackPositionOverlayVSD";
 	public static final String DEF_STACK_POSITION_OVERLAY_VSD = PartSupport.PARTSTACK_BOTTOM_RIGHT;
+	public static final String P_STACK_POSITION_OVERLAY_MALDI = "stackPositionOverlayMALDI";
+	public static final String DEF_STACK_POSITION_OVERLAY_MALDI = PartSupport.PARTSTACK_BOTTOM_LEFT;
 	public static final String P_STACK_POSITION_BASELINE_CHROMATOGRAM = "stackPositionBaseline";
 	public static final String DEF_STACK_POSITION_BASELINE_CHROMATOGRAM = PartSupport.PARTSTACK_BOTTOM_LEFT;
 	public static final String P_STACK_POSITION_TARGETS = "stackPositionTargets";
@@ -1018,6 +1020,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_STACK_POSITION_OVERLAY_CHROMATOGRAM_EXTRA, DEF_STACK_POSITION_OVERLAY_CHROMATOGRAM_EXTRA);
 		putDefault(P_STACK_POSITION_OVERLAY_NMR, DEF_STACK_POSITION_OVERLAY_NMR);
 		putDefault(P_STACK_POSITION_OVERLAY_VSD, DEF_STACK_POSITION_OVERLAY_VSD);
+		putDefault(P_STACK_POSITION_OVERLAY_MALDI, DEF_STACK_POSITION_OVERLAY_MALDI);
 		putDefault(P_STACK_POSITION_BASELINE_CHROMATOGRAM, DEF_STACK_POSITION_BASELINE_CHROMATOGRAM);
 		putDefault(P_STACK_POSITION_TARGETS, DEF_STACK_POSITION_TARGETS);
 		putDefault(P_STACK_POSITION_SCAN_CHART, DEF_STACK_POSITION_SCAN_CHART);
