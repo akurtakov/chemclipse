@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2024 Lablicate GmbH.
+ * Copyright (c) 2020, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -23,7 +23,7 @@ import org.eclipse.jface.preference.IPreferencePage;
 public class GroupHandlerOverlay extends AbstractGroupHandler {
 
 	public static final String NAME = "Overlay";
-	//
+
 	private static final String IMAGE_HIDE = IApplicationImage.IMAGE_CHROMATOGRAM_OVERLAY_ACTIVE;
 	private static final String IMAGE_SHOW = IApplicationImage.IMAGE_CHROMATOGRAM_OVERLAY_DEFAULT;
 
@@ -39,11 +39,12 @@ public class GroupHandlerOverlay extends AbstractGroupHandler {
 	public List<IPartHandler> getPartHandlerMandatory() {
 
 		List<IPartHandler> partHandler = new ArrayList<>();
-		//
+
 		partHandler.add(new PartHandler("Overlay (Chromatogram)", PartSupport.PARTDESCRIPTOR_OVERLAY_CHROMATOGRAM, PreferenceSupplier.P_STACK_POSITION_OVERLAY_CHROMATOGRAM_DEFAULT));
 		partHandler.add(new PartHandler("Overlay (NMR)", PartSupport.PARTDESCRIPTOR_OVERLAY_NMR, PreferenceSupplier.P_STACK_POSITION_OVERLAY_NMR));
 		partHandler.add(new PartHandler("Overlay (VSD)", PartSupport.PARTDESCRIPTOR_OVERLAY_VSD, PreferenceSupplier.P_STACK_POSITION_OVERLAY_VSD));
-		//
+		partHandler.add(new PartHandler("Overlay (MALDI)", PartSupport.PARTDESCRIPTOR_OVERLAY_MALDI, PreferenceSupplier.P_STACK_POSITION_OVERLAY_MALDI));
+
 		return partHandler;
 	}
 
