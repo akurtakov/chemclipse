@@ -17,6 +17,13 @@
             id="org.eclipse.chemclipse.msd.converter.supplier.mzml">
       </icon>
    </extension>
+   <extension
+         point="org.eclipse.chemclipse.xxd.process.ui.menu.icon">
+      <icon
+            class="org.eclipse.chemclipse.msd.converter.supplier.mzml.ui.icon.MenuIcon"
+            id="org.eclipse.chemclipse.msd.converter.supplier.mzml.ms">
+      </icon>
+   </extension>
       <extension
          point="org.eclipse.ui.editors">
       <editor
