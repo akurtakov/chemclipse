@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.chemclipse.nmr.converter.scanSupplier">
+      <ScanSupplier
+            description="Reads nmrML spectra."
+            exportConverter="org.eclipse.chemclipse.nmr.converter.supplier.nmrml.converter.ScanExportConverter"
+            fileExtension=".nmrML"
+            filterName="NMR Markup Language (*.nmrML)"
+            id="org.eclipse.chemclipse.nmr.converter.supplier.nmrml"
+            importConverter="org.eclipse.chemclipse.nmr.converter.supplier.nmrml.converter.ScanImportConverter"
+            importMagicNumberMatcher="org.eclipse.chemclipse.nmr.converter.supplier.nmrml.converter.MagicNumberMatcher"
+            isExportable="false"
+            isImportable="true">
+      </ScanSupplier>
+   </extension>
+</plugin>
