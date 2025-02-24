@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.chemclipse.nmr.converter.supplier.nmrml.feature"
+      label="nmrML Converter"
+      version="0.9.0.qualifier"
+      provider-name="ChemClipse"
+      plugin="org.eclipse.chemclipse.feature.branding">
+
+   <description url="http://www.chemclipse.net">
+      This is the nmrML converter.
+   </description>
+
+   <copyright url="http://www.lablicate.net">
+      Copyright (c) 2021 Lablicate GmbH.
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <url>
+      <discovery label="nmrML.org" url="https://www.nmrml.org/"/>
+   </url>
+
+   <plugin
+         id="org.eclipse.chemclipse.nmr.converter.supplier.nmrml"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
