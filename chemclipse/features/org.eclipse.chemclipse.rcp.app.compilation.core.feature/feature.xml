@@ -324,4 +324,8 @@
          id="org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.feature"
          version="0.0.0"/>
 
+   <includes
+         id="org.eclipse.chemclipse.nmr.processing.supplier.base.feature"
+         version="0.0.0"/>
+
 </feature>
