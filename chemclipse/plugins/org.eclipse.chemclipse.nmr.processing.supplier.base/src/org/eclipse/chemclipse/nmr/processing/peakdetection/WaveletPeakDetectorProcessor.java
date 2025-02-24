@@ -22,8 +22,8 @@ import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.core.PeakList;
 import org.eclipse.chemclipse.model.core.PeakPosition;
 import org.eclipse.chemclipse.model.detector.IMeasurementPeakDetector;
-import org.eclipse.chemclipse.nmr.model.core.SpectrumMeasurement;
-import org.eclipse.chemclipse.nmr.model.core.SpectrumSignal;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumSignal;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
 import org.eclipse.chemclipse.processing.detector.Detector;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -53,7 +53,7 @@ public class WaveletPeakDetectorProcessor implements IMeasurementPeakDetector<Wa
 		SubMonitor convert = SubMonitor.convert(monitor, getName(), detectorInputItems.size() * 100);
 		LinkedHashMap<T, PeakList> map = new LinkedHashMap<>();
 		for(T measurement : detectorInputItems) {
-			if(measurement instanceof SpectrumMeasurement spectrumMeasurement) {
+			if(measurement instanceof ISpectrumMeasurement spectrumMeasurement) {
 				map.put(measurement, detect(spectrumMeasurement.getSignals(), configuration, messageConsumer, convert.split(100)));
 			}
 		}
@@ -61,7 +61,7 @@ public class WaveletPeakDetectorProcessor implements IMeasurementPeakDetector<Wa
 	}
 
 	@SuppressWarnings("unused")
-	private PeakList detect(List<? extends SpectrumSignal> signals, WaveletPeakDetectorSettings configuration, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
+	private PeakList detect(List<? extends ISpectrumSignal> signals, WaveletPeakDetectorSettings configuration, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
 		/*
 		 * TODO detect the peaks
@@ -69,7 +69,7 @@ public class WaveletPeakDetectorProcessor implements IMeasurementPeakDetector<Wa
 		SubMonitor subMonitor = SubMonitor.convert(monitor, signals.size());
 		List<PeakPosition> peakPositions = new ArrayList<>();
 		int index = 0;
-		for(SpectrumSignal signal : signals) {
+		for(ISpectrumSignal signal : signals) {
 			double x = signal.getX();
 			double y = signal.getY();
 			subMonitor.worked(1);
@@ -84,7 +84,7 @@ public class WaveletPeakDetectorProcessor implements IMeasurementPeakDetector<Wa
 	public boolean acceptsIMeasurements(Collection<? extends IMeasurement> items) {
 
 		for(IMeasurement measurement : items) {
-			if(!(measurement instanceof SpectrumMeasurement)) {
+			if(!(measurement instanceof ISpectrumMeasurement)) {
 				return false;
 			}
 		}

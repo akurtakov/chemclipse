@@ -30,8 +30,8 @@ import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
 import org.eclipse.chemclipse.nmr.model.core.AcquisitionParameter;
 import org.eclipse.chemclipse.nmr.model.core.FIDMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.FIDSignal;
-import org.eclipse.chemclipse.nmr.model.core.SpectrumMeasurement;
-import org.eclipse.chemclipse.nmr.model.core.SpectrumSignal;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumSignal;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.AbstractFIDSignalFilter;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.ZeroFillingProcessor;
@@ -96,10 +96,10 @@ public class FourierTransformationProcessor extends AbstractFIDSignalFilter<Four
 		return nmrSpectrum;
 	}
 
-	private static final class FFTFilteredMeasurement extends FilteredMeasurement<FIDMeasurement, FourierTransformationSettings> implements SpectrumMeasurement {
+	private static final class FFTFilteredMeasurement extends FilteredMeasurement<FIDMeasurement, FourierTransformationSettings> implements ISpectrumMeasurement {
 
 		private static final long serialVersionUID = -3570180428815391262L;
-		private List<? extends SpectrumSignal> signals;
+		private List<? extends ISpectrumSignal> signals;
 
 		public FFTFilteredMeasurement(FilterContext<FIDMeasurement, FourierTransformationSettings> filterContext, List<FFTSpectrumSignal> signals) {
 
@@ -108,7 +108,7 @@ public class FourierTransformationProcessor extends AbstractFIDSignalFilter<Four
 		}
 
 		@Override
-		public List<? extends SpectrumSignal> getSignals() {
+		public List<? extends ISpectrumSignal> getSignals() {
 
 			return signals;
 		}
@@ -120,7 +120,7 @@ public class FourierTransformationProcessor extends AbstractFIDSignalFilter<Four
 		}
 	}
 
-	private static final class FFTSpectrumSignal implements SpectrumSignal, Serializable {
+	private static final class FFTSpectrumSignal implements ISpectrumSignal, Serializable {
 
 		private static final long serialVersionUID = 343539516695828431L;
 		private BigDecimal shift;

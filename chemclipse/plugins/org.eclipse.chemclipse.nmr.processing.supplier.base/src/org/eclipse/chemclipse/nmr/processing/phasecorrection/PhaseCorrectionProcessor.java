@@ -20,7 +20,7 @@ import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
 import org.eclipse.chemclipse.nmr.model.core.AcquisitionParameter;
 import org.eclipse.chemclipse.nmr.model.core.FilteredSpectrumMeasurement;
-import org.eclipse.chemclipse.nmr.model.core.SpectrumMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.AbstractSpectrumSignalFilter;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions.SpectrumData;
@@ -49,9 +49,9 @@ public class PhaseCorrectionProcessor extends AbstractSpectrumSignalFilter<Phase
 	}
 
 	@Override
-	protected IMeasurement doFiltering(FilterContext<SpectrumMeasurement, PhaseCorrectionSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
+	protected IMeasurement doFiltering(FilterContext<ISpectrumMeasurement, PhaseCorrectionSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
-		SpectrumMeasurement measurement = context.getFilteredObject();
+		ISpectrumMeasurement measurement = context.getFilteredObject();
 		SpectrumData spectrumData = UtilityFunctions.toComplexSpectrumData(measurement);
 		AcquisitionParameter parameter = measurement.getAcquisitionParameter();
 		double sweepWidth = parameter.toPPM(parameter.getSpectralWidth()).doubleValue();

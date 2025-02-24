@@ -116,4 +116,18 @@
             isImportable="true">
       </ScanSupplier>
    </extension>
+   <extension
+         point="org.eclipse.chemclipse.nmr.converter.scanSupplier">
+      <ScanSupplier
+            description="Reads JCAMP-DX spectra."
+            exportConverter="org.eclipse.chemclipse.nmr.converter.supplier.jcampdx.converter.ScanExportConverterNMR"
+            fileExtension=".dx"
+            filterName="JCAMP-DX NMR (*.dx)"
+            id="org.eclipse.chemclipse.nmr.converter.supplier.jcampdx"
+            importConverter="org.eclipse.chemclipse.nmr.converter.supplier.jcampdx.converter.ScanImportConverterNMR"
+            importMagicNumberMatcher="org.eclipse.chemclipse.nmr.converter.supplier.jcampdx.io.MagicNumberMatcherNMR"
+            isExportable="false"
+            isImportable="true">
+      </ScanSupplier>
+   </extension>
 </plugin>

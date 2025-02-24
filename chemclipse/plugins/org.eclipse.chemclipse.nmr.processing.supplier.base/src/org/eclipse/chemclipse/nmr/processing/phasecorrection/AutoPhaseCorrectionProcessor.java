@@ -34,7 +34,7 @@ import org.apache.commons.math3.random.UncorrelatedRandomVectorGenerator;
 import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
 import org.eclipse.chemclipse.nmr.model.core.FilteredSpectrumMeasurement;
-import org.eclipse.chemclipse.nmr.model.core.SpectrumMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.AbstractSpectrumSignalFilter;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions.SpectrumData;
@@ -135,7 +135,7 @@ public class AutoPhaseCorrectionProcessor extends AbstractSpectrumSignalFilter<A
 	}
 
 	@Override
-	protected IMeasurement doFiltering(FilterContext<SpectrumMeasurement, AutoPhaseCorrectionSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
+	protected IMeasurement doFiltering(FilterContext<ISpectrumMeasurement, AutoPhaseCorrectionSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
 		SpectrumData spectrumData = UtilityFunctions.toComplexSpectrumData(context.getFilteredObject());
 		perform(spectrumData, context.getFilterConfig());

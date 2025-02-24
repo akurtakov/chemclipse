@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2024 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  *
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -28,7 +28,7 @@ import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.core.ISignal;
 import org.eclipse.chemclipse.model.core.PeakList;
 import org.eclipse.chemclipse.model.detector.IMeasurementPeakDetector;
-import org.eclipse.chemclipse.nmr.model.core.SpectrumMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
 import org.eclipse.chemclipse.numeric.equations.Equations;
@@ -67,7 +67,7 @@ public class FirstDerivativePeakDetector implements IMeasurementPeakDetector<Fir
 		for(T measurement : detectorInputItems) {
 			IFirstDerivativeDetectorSlopes slopes;
 			FirstDerivativePeakDetectorSettings configuration;
-			if(measurement instanceof SpectrumMeasurement spectrumMeasurement) {
+			if(measurement instanceof ISpectrumMeasurement spectrumMeasurement) {
 				if(globalConfiguration == null) {
 					configuration = new FirstDerivativePeakDetectorSettings();
 				} else {
@@ -115,7 +115,7 @@ public class FirstDerivativePeakDetector implements IMeasurementPeakDetector<Fir
 
 	private boolean canProcess(IMeasurement measurement) {
 
-		if(measurement instanceof SpectrumMeasurement) {
+		if(measurement instanceof ISpectrumMeasurement) {
 			return true;
 		}
 		return false;

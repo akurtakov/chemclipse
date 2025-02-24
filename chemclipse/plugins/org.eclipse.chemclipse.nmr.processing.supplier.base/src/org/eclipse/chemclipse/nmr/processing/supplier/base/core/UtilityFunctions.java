@@ -21,8 +21,8 @@ import java.util.List;
 import org.apache.commons.math3.complex.Complex;
 import org.eclipse.chemclipse.nmr.model.core.AcquisitionParameter;
 import org.eclipse.chemclipse.nmr.model.core.FIDSignal;
-import org.eclipse.chemclipse.nmr.model.core.SpectrumMeasurement;
-import org.eclipse.chemclipse.nmr.model.core.SpectrumSignal;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumSignal;
 
 public class UtilityFunctions {
 
@@ -39,19 +39,19 @@ public class UtilityFunctions {
 		return new ComplexFIDData(array, times);
 	}
 
-	public static Complex[] toComplexArray(List<? extends SpectrumSignal> signals) {
+	public static Complex[] toComplexArray(List<? extends ISpectrumSignal> signals) {
 
 		Complex[] array = new Complex[signals.size()];
 		for(int i = 0; i < array.length; i++) {
-			SpectrumSignal signal = signals.get(i);
+			ISpectrumSignal signal = signals.get(i);
 			array[i] = new Complex(signal.getY(), signal.getImaginaryY());
 		}
 		return array;
 	}
 
-	public static SpectrumData toComplexSpectrumData(SpectrumMeasurement measurement) {
+	public static SpectrumData toComplexSpectrumData(ISpectrumMeasurement measurement) {
 
-		List<? extends SpectrumSignal> signals = measurement.getSignals();
+		List<? extends ISpectrumSignal> signals = measurement.getSignals();
 		AcquisitionParameter parameter = measurement.getAcquisitionParameter();
 		Complex[] array = new Complex[signals.size()];
 		BigDecimal[] chemicalShift = new BigDecimal[signals.size()];
@@ -59,7 +59,7 @@ public class UtilityFunctions {
 		int i = 0;
 		int maxIndex = 0;
 		double maxValue = Double.MIN_NORMAL;
-		for(SpectrumSignal signal : signals) {
+		for(ISpectrumSignal signal : signals) {
 			double real = signal.getY();
 			array[i] = new Complex(real, signal.getImaginaryY());
 			frequency[i] = signal.getFrequency();
@@ -226,12 +226,12 @@ public class UtilityFunctions {
 			this.parameter = parameter;
 		}
 
-		public List<SpectrumSignal> toSignal() {
+		public List<ISpectrumSignal> toSignal() {
 
 			if(signals.length != frequency.length) {
 				throw new IllegalStateException("chemicalShift length differs from signals length");
 			}
-			List<SpectrumSignal> list = new ArrayList<>(frequency.length);
+			List<ISpectrumSignal> list = new ArrayList<>(frequency.length);
 			for(int i = 0; i < frequency.length; i++) {
 				list.add(new ComplexSpectrumSignal(frequency[i], signals[i]));
 			}

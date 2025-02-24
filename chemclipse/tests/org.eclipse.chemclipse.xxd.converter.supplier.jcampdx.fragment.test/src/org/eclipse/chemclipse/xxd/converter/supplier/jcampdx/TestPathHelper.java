@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024 Lablicate GmbH.
+ * Copyright (c) 2024, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -26,4 +26,8 @@ public class TestPathHelper extends PathResolver {
 	 */
 	public static final String GRAPE = "testData/grape.jdx";
 	public static final String PEPSI = "testData/pepsi.jdx";
+	/*
+	 * NMR
+	 */
+	public static final String REAL_SPECTRUM_ASCII_FREE_FORMAT_NUMERIC = "testData/BRUKAFFN.DX";
 }

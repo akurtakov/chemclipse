@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2023 Lablicate GmbH.
+ * Copyright (c) 2018, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -23,7 +23,7 @@ import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.model.core.PeakList;
 import org.eclipse.chemclipse.nmr.model.core.AcquisitionParameter;
 import org.eclipse.chemclipse.nmr.model.core.FIDMeasurement;
-import org.eclipse.chemclipse.nmr.model.core.SpectrumMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.model.selection.IDataNMRSelection;
 import org.eclipse.chemclipse.nmr.model.selection.IDataNMRSelection.ChangeType;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
@@ -85,7 +85,7 @@ public class ExtendedNMRScanUI implements PropertyChangeListener {
 				AcquisitionParameter acquisitionParameter;
 				boolean enableArea;
 				ISeriesData peakSeriesData = null;
-				if(measurement instanceof SpectrumMeasurement spectrumMeasurement) {
+				if(measurement instanceof ISpectrumMeasurement spectrumMeasurement) {
 					acquisitionParameter = spectrumMeasurement.getAcquisitionParameter();
 					chartNMR.setPPMconverter(new AbstractAxisScaleConverter() {
 

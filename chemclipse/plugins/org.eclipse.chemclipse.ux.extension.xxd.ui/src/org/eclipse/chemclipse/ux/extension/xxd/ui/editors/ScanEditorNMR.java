@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2024 Lablicate GmbH.
+ * Copyright (c) 2018, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -37,7 +37,7 @@ import org.eclipse.chemclipse.nmr.converter.core.ScanConverterNMR;
 import org.eclipse.chemclipse.nmr.model.core.FIDMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.FilteredFIDMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.FilteredSpectrumMeasurement;
-import org.eclipse.chemclipse.nmr.model.core.SpectrumMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.model.selection.DataNMRSelection;
 import org.eclipse.chemclipse.nmr.model.selection.IDataNMRSelection;
 import org.eclipse.chemclipse.processing.ProcessorFactory;
@@ -368,7 +368,7 @@ public class ScanEditorNMR implements IScanEditorNMR {
 					filteredFIDMeasurement.setSignals(measurement.getSignals());
 				}
 			} else if(to instanceof FilteredSpectrumMeasurement<?> filteredSpectrumMeasurement) {
-				if(from instanceof SpectrumMeasurement spectrumMeasurement) {
+				if(from instanceof ISpectrumMeasurement spectrumMeasurement) {
 					filteredSpectrumMeasurement.setSignals(spectrumMeasurement.getSignals());
 				}
 			}
