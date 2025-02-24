@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.editors;
 
@@ -237,14 +237,6 @@ public class ScanEditorNMR implements IScanEditorNMR {
 
 		extendedNMRScanUI.update(selection);
 		measurementsUI.update(selection);
-		// selection.addObserver(new Observer() {
-		//
-		// @Override
-		// public void update(Observable o, Object arg) {
-		//
-		// extendedMeasurementResultUI.update(selection.getMeasurement().getMeasurementResults(), "");
-		// }
-		// });
 	}
 
 	private static String addToSelection(IComplexSignalMeasurement<?> measurement, DataNMRSelection selection) {
@@ -295,7 +287,6 @@ public class ScanEditorNMR implements IScanEditorNMR {
 				settingsUI.setActiveContext(null, null);
 			}
 		});
-		// extendedMeasurementResultUI = new ExtendedMeasurementResultUI(composite);
 	}
 
 	private final class UpdatingObserver<FilteredType, ConfigType> implements PropertyChangeListener {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2023 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,13 +9,12 @@
  * Contributors:
  * Christoph Läubrich - initial API and implementation
  * Matthias Mailänder - add even/odd validation
+ * Philip Wenig - get rid of system settings
  *******************************************************************************/
 package org.eclipse.chemclipse.processing.supplier;
 
 import java.io.IOException;
 
-import org.eclipse.chemclipse.support.settings.SystemSettingsStrategy;
-import org.eclipse.chemclipse.support.settings.parser.SettingsParser;
 import org.eclipse.chemclipse.support.settings.serialization.JSONSerialization;
 import org.eclipse.chemclipse.support.settings.serialization.SettingsSerialization;
 
@@ -100,30 +99,17 @@ public interface IProcessorPreferences<SettingType> {
 		return defaultInstance;
 	}
 
-	default SettingType getSystemSettings() throws IOException {
-
-		IProcessSupplier<SettingType> supplier = getSupplier();
-		SettingsParser<SettingType> settingsParser = supplier.getSettingsParser();
-		if(settingsParser.getSystemSettingsStrategy() == SystemSettingsStrategy.NEW_INSTANCE) {
-			return settingsParser.createDefaultInstance();
-		}
-		return null;
-	}
-
 	default SettingType getSettings() throws IOException {
 
-		if(isUseSystemDefaults()) {
-			return getSystemSettings();
-		} else {
-			return getUserSettings();
-		}
+		return getUserSettings();
 	}
 
 	default boolean requiresUserSettings() {
 
-		IProcessSupplier<SettingType> supplier = getSupplier();
-		SystemSettingsStrategy strategy = supplier.getSettingsParser().getSystemSettingsStrategy();
-		return strategy == SystemSettingsStrategy.NONE || strategy == SystemSettingsStrategy.DYNAMIC;
+		/*
+		 * TODO - UserSettings Refactor
+		 */
+		return true;
 	}
 
 	/**

@@ -48,6 +48,7 @@ import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.CellLabelProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.IElementComparer;
@@ -60,6 +61,9 @@ import org.eclipse.jface.viewers.TreeNodeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.dnd.Clipboard;
+import org.eclipse.swt.dnd.TextTransfer;
+import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -70,6 +74,7 @@ public class NMRMeasurementsUI implements PropertyChangeListener {
 	private static final Image IMAGE_FREQUENCY = ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SCAN_NMR, IApplicationImage.SIZE_16x16);
 	private static final Image IMAGE_FID = ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SCAN_FID, IApplicationImage.SIZE_16x16);
 	private static final TreeNode[] EMPTY = new TreeNode[0];
+	//
 	private TreeViewer treeViewer;
 	private DataNMRSelection selection;
 	private ProcessorFactory filterFactory;
@@ -158,14 +163,15 @@ public class NMRMeasurementsUI implements PropertyChangeListener {
 		contextMenu.addMenuListener(new IMenuListener() {
 
 			@Override
-			public void menuAboutToShow(IMenuManager mgr) {
+			public void menuAboutToShow(IMenuManager menuManager) {
 
 				Set<IComplexSignalMeasurement<?>> measurements = Collections.singleton(selection.getMeasurement());
-				addFilter(mgr, measurements);
-				mgr.add(new Separator());
-				addDetectors(mgr, measurements);
-				mgr.add(new Separator());
-				mgr.add(new DeleteAction());
+				addFilter(menuManager, measurements);
+				menuManager.add(new Separator());
+				addDetectors(menuManager, measurements);
+				menuManager.add(new Separator());
+				menuManager.add(new DeleteAction());
+				menuManager.add(new FilterInfoAction());
 			}
 
 			private void addDetectors(IMenuManager mgr, Set<IComplexSignalMeasurement<?>> measurements) {
@@ -242,6 +248,38 @@ public class NMRMeasurementsUI implements PropertyChangeListener {
 				Object element = structuredSelection.getFirstElement();
 				if(element instanceof TreeNode treeNode) {
 					remove(treeNode, selection);
+				}
+			}
+		}
+	}
+
+	private final class FilterInfoAction extends Action {
+
+		public FilterInfoAction() {
+
+			setText("Filter Info");
+		}
+
+		@Override
+		public void run() {
+
+			if(selection != null) {
+				/*
+				 * Copy settings
+				 */
+				TextTransfer textTransfer = TextTransfer.getInstance();
+				Object[] data = new Object[]{selection.getMeasurement().getFilterStatistics()};
+				if(data != null && data.length > 0) {
+					String text = data[0].toString();
+					if(text.isBlank()) {
+						MessageDialog.openInformation(Display.getDefault().getActiveShell(), "Filter Settings", "Please select the fid data to retrieve the specific settings.");
+					} else {
+						Transfer[] dataTypes = new Transfer[]{textTransfer};
+						Clipboard clipboard = new Clipboard(Display.getDefault());
+						clipboard.setContents(data, dataTypes);
+						clipboard.dispose();
+						MessageDialog.openInformation(Display.getDefault().getActiveShell(), "Filter Settings", "The instrument specific filter settings have been copied to clipboard.");
+					}
 				}
 			}
 		}

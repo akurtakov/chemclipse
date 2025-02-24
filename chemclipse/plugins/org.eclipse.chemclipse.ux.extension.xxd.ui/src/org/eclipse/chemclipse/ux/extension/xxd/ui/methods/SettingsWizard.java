@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2024 Lablicate GmbH.
+ * Copyright (c) 2018, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -68,13 +68,8 @@ public class SettingsWizard extends Wizard {
 		//
 		if(wizardDialog.open() == Window.OK) {
 			preferences.setAskForSettings(!settingsPreferencePage.getIsDontAskAgainEdited());
-			boolean useSystem = settingsPreferencePage.getIsUseSystemDefaultsEdited();
-			if(useSystem) {
-				preferences.setUseSystemDefaults(true);
-			} else {
-				preferences.setUseSystemDefaults(false);
-				preferences.setUserSettings(settingsPreferencePage.getSettingsEdited());
-			}
+			preferences.setUseSystemDefaults(false);
+			preferences.setUserSettings(settingsPreferencePage.getSettingsEdited());
 			return true;
 		} else {
 			return false;

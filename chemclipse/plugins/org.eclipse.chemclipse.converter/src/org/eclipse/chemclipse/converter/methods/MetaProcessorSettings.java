@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2024 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -21,13 +21,10 @@ import org.eclipse.chemclipse.processing.methods.ListProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
-import org.eclipse.chemclipse.support.settings.SystemSettings;
-import org.eclipse.chemclipse.support.settings.SystemSettingsStrategy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@SystemSettings(SystemSettingsStrategy.NEW_INSTANCE)
 public class MetaProcessorSettings {
 
 	@JsonProperty(value = "Settings", defaultValue = "")

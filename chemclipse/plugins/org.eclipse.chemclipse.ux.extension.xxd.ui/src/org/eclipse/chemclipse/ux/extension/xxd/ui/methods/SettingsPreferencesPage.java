@@ -60,15 +60,12 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 	private static final String DATA_URL = "DATA_URL";
 	private static final int MAX_LENGTH_LITERATURE_REFERENCE = 97; // 100 = 97 + ...
 	//
-	private AtomicReference<Button> buttonDefault = new AtomicReference<>();
-	private AtomicReference<Button> buttonUser = new AtomicReference<>();
 	private AtomicReference<SettingsUI<?>> settingsUI = new AtomicReference<>();
 	private AtomicReference<ComboViewer> comboViewerLiterature = new AtomicReference<>();
 	private AtomicReference<Button> buttonLink = new AtomicReference<>();
 	private AtomicReference<Button> buttonRestoreDefaults = new AtomicReference<>();
 	//
 	private boolean isDontAskAgain;
-	private boolean isUseSystemDefaults;
 	private String jsonSettings;
 	//
 	private final IProcessorPreferences<T> preferences;
@@ -109,11 +106,6 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 		return jsonSettings;
 	}
 
-	public boolean getIsUseSystemDefaultsEdited() {
-
-		return isUseSystemDefaults;
-	}
-
 	private Composite createOptionSection(Composite parent) {
 
 		Composite composite = new Composite(parent, SWT.NONE);
@@ -121,9 +113,7 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		//
 		createLiteratureSection(composite);
-		createSystemOptions(composite);
-		createLabelSeparator(composite);
-		createUserOptions(composite);
+		createSettingsUI(composite);
 		createProcessSection(composite);
 		//
 		return composite;
@@ -247,48 +237,11 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 		buttonLink.set(button);
 	}
 
-	private void createSystemOptions(Composite parent) {
-
-		buttonDefault.set(createButtonDefault(parent));
-	}
-
-	private Button createButtonDefault(Composite parent) {
-
-		Button button = new Button(parent, SWT.RADIO);
-		button.setText(ExtensionMessages.useSystemOptions);
-		if(preferences.requiresUserSettings()) {
-			button.setEnabled(false);
-			button.setToolTipText(ExtensionMessages.noSystemOptionsAvailable);
-		}
-		//
-		return button;
-	}
-
-	private void createLabelSeparator(Composite parent) {
-
-		Label label = new Label(parent, SWT.HORIZONTAL | SWT.SEPARATOR);
-		label.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-	}
-
 	private void createLabelText(Composite parent, String text) {
 
 		Label label = new Label(parent, SWT.NONE);
 		label.setText(text);
 		label.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-	}
-
-	private void createUserOptions(Composite parent) {
-
-		createButtonUser(parent);
-		createSettingsUI(parent);
-	}
-
-	private void createButtonUser(Composite parent) {
-
-		Button button = new Button(parent, SWT.RADIO);
-		button.setText(ExtensionMessages.useSpecificOptions);
-		//
-		buttonUser.set(button);
 	}
 
 	private void createSettingsUI(Composite parent) {
@@ -329,20 +282,15 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 			@Override
 			public void handleEvent(Event event) {
 
-				jsonSettings = null;
-				if(buttonUser.get().getSelection()) {
-					IStatus validate = settingsUI.get().getControl().validate();
-					if(validate.isOK()) {
-						setErrorMessage(null);
-						setPageComplete(true);
-					} else {
-						setErrorMessage(validate.getMessage());
-						setPageComplete(false);
-					}
-				} else {
+				IStatus validate = settingsUI.get().getControl().validate();
+				if(validate.isOK()) {
 					setErrorMessage(null);
 					setPageComplete(true);
+				} else {
+					setErrorMessage(validate.getMessage());
+					setPageComplete(false);
 				}
+
 				/*
 				 * User Specific Settings
 				 */
@@ -365,31 +313,18 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				settingsUI.get().setEnabled(buttonUser.get().getSelection());
 				validationListener.handleEvent(null);
-				isUseSystemDefaults = buttonDefault.get().getSelection();
 			}
 		};
 	}
 
 	private void addButtonRememberSettings(Composite parent, SelectionListener selectionListener) {
 
-		buttonDefault.get().addSelectionListener(selectionListener);
-		buttonUser.get().addSelectionListener(selectionListener);
-		//
 		if(preferences.getDialogBehaviour() == DialogBehavior.NONE) {
 			isDontAskAgain = false;
 			addLabelNoOption(parent);
 		} else {
 			addButtonDontAskAgain(parent);
-		}
-		/*
-		 * Defaults
-		 */
-		if(preferences.isUseSystemDefaults() && !preferences.requiresUserSettings()) {
-			buttonDefault.get().setSelection(true);
-		} else {
-			buttonUser.get().setSelection(true);
 		}
 		//
 		selectionListener.widgetSelected(null);

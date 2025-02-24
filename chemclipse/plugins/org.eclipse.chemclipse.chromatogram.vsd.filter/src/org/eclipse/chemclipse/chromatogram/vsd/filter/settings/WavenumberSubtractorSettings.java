@@ -13,14 +13,11 @@ package org.eclipse.chemclipse.chromatogram.vsd.filter.settings;
 
 import org.eclipse.chemclipse.chromatogram.vsd.filter.model.WavenumberSignals;
 import org.eclipse.chemclipse.chromatogram.vsd.filter.validators.WavenumberSignalsValidator;
-import org.eclipse.chemclipse.support.settings.SystemSettings;
-import org.eclipse.chemclipse.support.settings.SystemSettingsStrategy;
 import org.eclipse.chemclipse.support.settings.ValidatorSettingsProperty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
-@SystemSettings(SystemSettingsStrategy.NONE)
 public class WavenumberSubtractorSettings {
 
 	@JsonProperty(value = "Nominalize Wavenumber", defaultValue = "false")

@@ -269,12 +269,9 @@ public class ExtensionMessages extends NLS {
 	public static String options;
 	public static String systemDefault;
 	public static String resetSettingsForSelectedProcessors;
-	public static String useSystemOptions;
-	public static String noSystemOptionsAvailable;
 	public static String rememberDecision;
 	public static String resetDefaults;
 	public static String resetPlate;
-	public static String useSpecificOptions;
 	public static String processorOffersNoOptions;
 	public static String editProcessorOptions;
 	public static String selectOptionsForProcessorName;

@@ -8,24 +8,19 @@
  *
  * Contributors:
  * Alexander Stark - initial API and implementation
+ * Philip Wenig - get rid of system settings
  *******************************************************************************/
 package org.eclipse.chemclipse.nmr.processing.supplier.base.settings;
 
 import org.eclipse.chemclipse.support.settings.DoubleSettingsProperty;
-import org.eclipse.chemclipse.support.settings.SystemSettings;
-import org.eclipse.chemclipse.support.settings.SystemSettingsStrategy;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@SystemSettings(SystemSettingsStrategy.NEW_INSTANCE)
 public class ExponentialApodizationSettings {
 
 	@JsonProperty(value = "Exponential Line Broadening Factor", defaultValue = "0.0")
 	@DoubleSettingsProperty()
 	private double exponentialLineBroadeningFactor = 0;
-
-	public ExponentialApodizationSettings() {
-	}
 
 	public double getExponentialLineBroadeningFactor() {
 
@@ -35,5 +30,11 @@ public class ExponentialApodizationSettings {
 	public void setExponentialLineBroadeningFactor(double exponentialLineBroadeningFactor) {
 
 		this.exponentialLineBroadeningFactor = exponentialLineBroadeningFactor;
+	}
+
+	@Override
+	public String toString() {
+
+		return "ExponentialApodizationSettings [exponentialLineBroadeningFactor=" + exponentialLineBroadeningFactor + "]";
 	}
 }

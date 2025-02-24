@@ -8,6 +8,7 @@
  * 
  * Contributors:
  * Christoph Läubrich - initial API and implementation
+ * Philip Wenig - get rid of system settings
  *******************************************************************************/
 package org.eclipse.chemclipse.nmr.model.core;
 
@@ -17,10 +18,6 @@ import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 
 public interface ISpectrumMeasurement extends IComplexSignalMeasurement<ISpectrumSignal> {
 
-	/**
-	 * 
-	 * @return the Acquisition Parameter for this spectral measurement
-	 */
 	AcquisitionParameter getAcquisitionParameter();
 
 	/**
@@ -30,4 +27,9 @@ public interface ISpectrumMeasurement extends IComplexSignalMeasurement<ISpectru
 	 */
 	@Override
 	List<? extends ISpectrumSignal> getSignals();
+
+	default String getFilterStatistics() {
+
+		return "";
+	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024 Lablicate GmbH.
+ * Copyright (c) 2024, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -16,13 +16,10 @@ import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.settings.IChromatogramClassifierSettings;
 import org.eclipse.chemclipse.support.literature.LiteratureReference;
-import org.eclipse.chemclipse.support.settings.SystemSettings;
-import org.eclipse.chemclipse.support.settings.SystemSettingsStrategy;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
-@SystemSettings(SystemSettingsStrategy.NEW_INSTANCE)
 public class NoiseSegmentSetterSettings implements IChromatogramClassifierSettings {
 
 	@JsonProperty(value = "Use Only New Segment", defaultValue = "false")

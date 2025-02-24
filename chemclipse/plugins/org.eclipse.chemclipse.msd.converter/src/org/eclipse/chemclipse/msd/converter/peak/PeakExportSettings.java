@@ -20,14 +20,11 @@ import org.eclipse.chemclipse.model.settings.AbstractProcessSettings;
 import org.eclipse.chemclipse.model.settings.IProcessSettings;
 import org.eclipse.chemclipse.support.settings.FileSettingProperty;
 import org.eclipse.chemclipse.support.settings.FileSettingProperty.DialogType;
-import org.eclipse.chemclipse.support.settings.SystemSettings;
-import org.eclipse.chemclipse.support.settings.SystemSettingsStrategy;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
-@SystemSettings(SystemSettingsStrategy.NONE)
 public class PeakExportSettings extends AbstractProcessSettings implements IProcessSettings {
 
 	@JsonProperty(value = "Export Folder", defaultValue = "")
@@ -74,21 +71,6 @@ public class PeakExportSettings extends AbstractProcessSettings implements IProc
 	public void setFilenamePattern(String filenamePattern) {
 
 		this.filenamePattern = filenamePattern;
-	}
-
-	/**
-	 * Method that check if system settings are available, this is used in conjunction with the SystemSettings annotation but can also be called by user code.
-	 * 
-	 * @return
-	 */
-	public static SystemSettingsStrategy getSystemSettingsStrategy() {
-
-		String folder = PreferenceSupplier.getChromatogramExportFolder();
-		if(folder != null && !folder.isEmpty()) {
-			return SystemSettingsStrategy.NEW_INSTANCE;
-		} else {
-			return SystemSettingsStrategy.NONE;
-		}
 	}
 
 	@JsonIgnore

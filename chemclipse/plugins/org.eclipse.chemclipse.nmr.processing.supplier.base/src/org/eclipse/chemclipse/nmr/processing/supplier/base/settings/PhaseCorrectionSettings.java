@@ -19,8 +19,6 @@ package org.eclipse.chemclipse.nmr.processing.supplier.base.settings;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeSupport;
 
-import org.eclipse.chemclipse.support.settings.SystemSettings;
-import org.eclipse.chemclipse.support.settings.SystemSettingsStrategy;
 import org.eclipse.chemclipse.support.text.ILabel;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -30,7 +28,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * since it participates in the dynamic settings framework
  *
  */
-@SystemSettings(SystemSettingsStrategy.NEW_INSTANCE)
 public final class PhaseCorrectionSettings extends PropertyChangeSupport implements Cloneable {
 
 	private static final long serialVersionUID = 8441565462969403390L;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -8,6 +8,7 @@
  *
  * Contributors:
  * Christoph Läubrich - initial API and implementation
+ * Philip Wenig - get rid of system settings
  *******************************************************************************/
 package org.eclipse.chemclipse.nmr.model.core;
 
@@ -17,10 +18,6 @@ import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 
 public interface FIDMeasurement extends IComplexSignalMeasurement<FIDSignal> {
 
-	/**
-	 * 
-	 * @return the acquisition parameter for thsi fid measurement
-	 */
 	AcquisitionParameter getAcquisitionParameter();
 
 	/**
@@ -32,4 +29,9 @@ public interface FIDMeasurement extends IComplexSignalMeasurement<FIDSignal> {
 	List<? extends FIDSignal> getSignals();
 
 	DataDimension getDataDimension();
+
+	default String getFilterStatistics() {
+
+		return "";
+	}
 }

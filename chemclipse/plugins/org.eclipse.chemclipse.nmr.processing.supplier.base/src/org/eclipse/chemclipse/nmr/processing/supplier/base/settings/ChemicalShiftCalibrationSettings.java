@@ -12,12 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.nmr.processing.supplier.base.settings;
 
-import org.eclipse.chemclipse.support.settings.SystemSettings;
-import org.eclipse.chemclipse.support.settings.SystemSettingsStrategy;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@SystemSettings(SystemSettingsStrategy.NEW_INSTANCE)
 public class ChemicalShiftCalibrationSettings {
 
 	@JsonProperty("Location of calibration peak [ppm]")

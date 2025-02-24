@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 import org.eclipse.chemclipse.support.l10n.TranslationSupport;
 import org.eclipse.chemclipse.support.settings.parser.InputValue;
@@ -44,7 +43,6 @@ import org.eclipse.swt.widgets.Listener;
 
 public class SettingsUI<T> extends Composite {
 
-	private static final Logger logger = Logger.getLogger(SettingsUI.class);
 	private final SettingsUIControl control;
 
 	public SettingsUI(Composite parent, IProcessorPreferences<T> preferences, boolean showProfileToolbar) throws IOException {
@@ -73,29 +71,17 @@ public class SettingsUI<T> extends Composite {
 
 	private SettingsUIProvider<T> loadSettingsUIProvider(IProcessorPreferences<T> preferences) {
 
-		try {
-			T settings = preferences.getUserSettings();
-			if(settings == null) {
-				/*
-				 * Check the available system settings.
-				 * If it fails, try to create default settings.
-				 */
-				settings = preferences.getSystemSettings();
-				if(settings == null) {
-					settings = preferences.getSupplier().getSettingsParser().createDefaultInstance();
-				}
-			}
-			@SuppressWarnings("unchecked")
-			SettingsUIProvider<T> uiProvider = Adapters.adapt(settings, SettingsUIProvider.class);
-			if(uiProvider != null) {
-				return uiProvider;
-			}
-		} catch(IOException e) {
-			/*
-			 * The settings provider is not available.
-			 */
-			logger.error("Can't get user-settings for processor " + preferences.getSupplier().getId() + " with settingsclass " + preferences.getSupplier().getSettingsClass());
+		T settings = preferences.getUserSettings();
+		if(settings == null) {
+			settings = preferences.getSupplier().getSettingsParser().createDefaultInstance();
 		}
+		//
+		@SuppressWarnings("unchecked")
+		SettingsUIProvider<T> uiProvider = Adapters.adapt(settings, SettingsUIProvider.class);
+		if(uiProvider != null) {
+			return uiProvider;
+		}
+
 		return new DefaultSettingsUIProvider<>();
 	}
 

@@ -8,21 +8,20 @@
  *
  * Contributors:
  * Jan Holy - initial API and implementation
+ * Philip Wenig - get rid of system settings
  *******************************************************************************/
 package org.eclipse.chemclipse.nmr.processing.supplier.base.settings;
 
 import java.io.Serializable;
 
 import org.eclipse.chemclipse.nmr.processing.supplier.base.settings.support.DigitalFilterTreatmentOptions;
-import org.eclipse.chemclipse.support.settings.SystemSettings;
-import org.eclipse.chemclipse.support.settings.SystemSettingsStrategy;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@SystemSettings(SystemSettingsStrategy.NEW_INSTANCE)
 public class DigitalFilterRemovalSettings implements Serializable {
 
 	private static final long serialVersionUID = 7271244127560614155L;
+	//
 	@JsonProperty("Group delay of digital filter")
 	private int leftRotationFid = 0;
 	@JsonProperty("Weighting factor for first fid point")
@@ -59,4 +58,11 @@ public class DigitalFilterRemovalSettings implements Serializable {
 
 		this.treatmentOptions = treatmentOptions;
 	}
+
+	@Override
+	public String toString() {
+
+		return "DigitalFilterRemovalSettings [leftRotationFid=" + leftRotationFid + ", dcOffsetMultiplicationFactor=" + dcOffsetMultiplicationFactor + ", treatmentOptions=" + treatmentOptions + "]";
+	}
+
 }

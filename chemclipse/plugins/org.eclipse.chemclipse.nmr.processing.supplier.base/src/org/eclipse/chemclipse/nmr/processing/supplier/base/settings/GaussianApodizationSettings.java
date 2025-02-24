@@ -8,24 +8,19 @@
  *
  * Contributors:
  * Alexander Stark - initial API and implementation
+ * Philip Wenig - get rid of system settings
  *******************************************************************************/
 package org.eclipse.chemclipse.nmr.processing.supplier.base.settings;
 
 import org.eclipse.chemclipse.support.settings.DoubleSettingsProperty;
-import org.eclipse.chemclipse.support.settings.SystemSettings;
-import org.eclipse.chemclipse.support.settings.SystemSettingsStrategy;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@SystemSettings(SystemSettingsStrategy.NEW_INSTANCE)
 public class GaussianApodizationSettings {
 
 	@JsonProperty(value = "Gaussian Line Broadening Factor", defaultValue = "0.0")
 	@DoubleSettingsProperty()
 	private double gaussianLineBroadeningFactor = 0;
-
-	public GaussianApodizationSettings() {
-	}
 
 	public void setGaussianLineBroadeningFactor(double gaussianLineBroadeningFactor) {
 
@@ -35,5 +30,11 @@ public class GaussianApodizationSettings {
 	public double getGaussianLineBroadeningFactor() {
 
 		return gaussianLineBroadeningFactor;
+	}
+
+	@Override
+	public String toString() {
+
+		return "GaussianApodizationSettings [gaussianLineBroadeningFactor=" + gaussianLineBroadeningFactor + "]";
 	}
 }

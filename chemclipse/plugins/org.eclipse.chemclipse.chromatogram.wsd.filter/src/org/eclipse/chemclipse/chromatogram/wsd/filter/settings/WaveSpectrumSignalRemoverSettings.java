@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023 Lablicate GmbH.
+ * Copyright (c) 2023, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -13,13 +13,10 @@ package org.eclipse.chemclipse.chromatogram.wsd.filter.settings;
 
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.support.settings.StringSettingsProperty;
-import org.eclipse.chemclipse.support.settings.SystemSettings;
-import org.eclipse.chemclipse.support.settings.SystemSettingsStrategy;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
-@SystemSettings(SystemSettingsStrategy.NONE)
 public class WaveSpectrumSignalRemoverSettings {
 
 	@JsonProperty(value = "Wavelengths", defaultValue = "200 202")

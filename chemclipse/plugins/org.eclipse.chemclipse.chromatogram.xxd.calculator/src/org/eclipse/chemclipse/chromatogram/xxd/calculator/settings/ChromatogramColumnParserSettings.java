@@ -17,13 +17,10 @@ import org.eclipse.chemclipse.chromatogram.xxd.classifier.settings.IChromatogram
 import org.eclipse.chemclipse.model.columns.SeparationColumnMapping;
 import org.eclipse.chemclipse.model.core.support.ColumnField;
 import org.eclipse.chemclipse.support.literature.LiteratureReference;
-import org.eclipse.chemclipse.support.settings.SystemSettings;
-import org.eclipse.chemclipse.support.settings.SystemSettingsStrategy;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
-@SystemSettings(SystemSettingsStrategy.NEW_INSTANCE)
 public class ChromatogramColumnParserSettings implements IChromatogramClassifierSettings {
 
 	@JsonProperty(value = "Column Field")

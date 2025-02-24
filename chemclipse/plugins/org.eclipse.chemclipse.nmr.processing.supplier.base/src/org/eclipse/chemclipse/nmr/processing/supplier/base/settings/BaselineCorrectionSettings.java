@@ -8,16 +8,14 @@
  *
  * Contributors:
  * Alexander Stark - initial API and implementation
+ * Philip Wenig - get rid of system settings
  *******************************************************************************/
 package org.eclipse.chemclipse.nmr.processing.supplier.base.settings;
 
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
-import org.eclipse.chemclipse.support.settings.SystemSettings;
-import org.eclipse.chemclipse.support.settings.SystemSettingsStrategy;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@SystemSettings(SystemSettingsStrategy.NEW_INSTANCE)
 public class BaselineCorrectionSettings {
 
 	static final int DEFAULT_OMIT_PERCENT_OF_SPECTRUM = 5;
@@ -41,7 +39,8 @@ public class BaselineCorrectionSettings {
 	@IntSettingsProperty(minValue = 1)
 	private int polynomialOrder = 2;
 
-	public BaselineCorrectionSettings(){
+	public BaselineCorrectionSettings() {
+
 	}
 
 	public int getPolynomialOrder() {

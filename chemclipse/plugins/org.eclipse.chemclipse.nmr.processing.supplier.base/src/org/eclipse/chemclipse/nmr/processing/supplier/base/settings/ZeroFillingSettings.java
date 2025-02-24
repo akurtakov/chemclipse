@@ -7,25 +7,18 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.nmr.processing.supplier.base.settings;
 
 import org.eclipse.chemclipse.nmr.processing.supplier.base.settings.support.ZeroFillingFactor;
-import org.eclipse.chemclipse.support.settings.SystemSettings;
-import org.eclipse.chemclipse.support.settings.SystemSettingsStrategy;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@SystemSettings(SystemSettingsStrategy.NEW_INSTANCE)
 public class ZeroFillingSettings {
 
 	@JsonProperty(value = "Zero Filling", defaultValue = "AUTO")
 	private ZeroFillingFactor zeroFillingFactor = ZeroFillingFactor.AUTO;
-
-	public ZeroFillingSettings() {
-
-	}
 
 	public ZeroFillingFactor getZeroFillingFactor() {
 
@@ -35,5 +28,11 @@ public class ZeroFillingSettings {
 	public void setZeroFillingFactor(ZeroFillingFactor zeroFillingFactor) {
 
 		this.zeroFillingFactor = zeroFillingFactor;
+	}
+
+	@Override
+	public String toString() {
+
+		return "ZeroFillingSettings [zeroFillingFactor=" + zeroFillingFactor + "]";
 	}
 }

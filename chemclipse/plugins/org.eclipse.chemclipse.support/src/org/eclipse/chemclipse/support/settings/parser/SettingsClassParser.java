@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2024 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -14,8 +14,6 @@ package org.eclipse.chemclipse.support.settings.parser;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -31,8 +29,6 @@ import org.eclipse.chemclipse.support.settings.LabelProperty;
 import org.eclipse.chemclipse.support.settings.LongSettingsProperty;
 import org.eclipse.chemclipse.support.settings.ShortSettingsProperty;
 import org.eclipse.chemclipse.support.settings.StringSettingsProperty;
-import org.eclipse.chemclipse.support.settings.SystemSettings;
-import org.eclipse.chemclipse.support.settings.SystemSettingsStrategy;
 import org.eclipse.chemclipse.support.settings.ValidatorSettingsProperty;
 import org.eclipse.chemclipse.support.settings.validation.EvenOddValidatorByte;
 import org.eclipse.chemclipse.support.settings.validation.EvenOddValidatorInteger;
@@ -179,34 +175,6 @@ public class SettingsClassParser<SettingType> implements SettingsParser<SettingT
 			}
 		}
 		return inputValues;
-	}
-
-	@Override
-	public SystemSettingsStrategy getSystemSettingsStrategy() {
-
-		Class<?> clazz = getSettingClass();
-		if(clazz == null) {
-			return SystemSettingsStrategy.NULL;
-		}
-		SystemSettings annotation = clazz.getAnnotation(SystemSettings.class);
-		if(annotation != null) {
-			String checkMethod = annotation.dynamicCheckMethod();
-			if(annotation.value() == SystemSettingsStrategy.DYNAMIC && !checkMethod.isEmpty()) {
-				try {
-					Method method = clazz.getMethod(checkMethod);
-					Object result = method.invoke(null);
-					if(result instanceof SystemSettingsStrategy systemSettingsStrategy) {
-						return systemSettingsStrategy;
-					}
-				} catch(NoSuchMethodException | SecurityException
-						| IllegalAccessException | IllegalArgumentException
-						| InvocationTargetException e) {
-					throw new RuntimeException("specified dynamic check method can't be used", e);
-				}
-			}
-			return annotation.value();
-		}
-		return SystemSettingsStrategy.NULL;
 	}
 
 	@Override
