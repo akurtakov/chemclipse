@@ -103,11 +103,11 @@ import org.eclipse.ui.PlatformUI;
 public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI, ConfigurableUI<PeakScanListUIConfig> {
 
 	private static final Logger logger = Logger.getLogger(ExtendedPeakScanListUI.class);
-	//
+
 	private static final String MENU_CATEGORY = "Peaks/Scans";
 	private static final String DESCRIPTION_PEAKS = "Number Peaks:";
 	private static final String DESCRIPTION_SCANS = "Scans:";
-	//
+
 	private AtomicReference<Composite> toolbarMain = new AtomicReference<>();
 	private AtomicReference<Button> buttonToolbarInfo = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfoTop = new AtomicReference<>();
@@ -121,20 +121,20 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 	private AtomicReference<ScanIdentifierUI> scanIdentifierControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonTableEdit = new AtomicReference<>();
 	private AtomicReference<PeakScanListUI> tableViewer = new AtomicReference<>();
-	//
+
 	private IChromatogramSelection chromatogramSelection;
-	//
+
 	private boolean showScans = true;
 	private boolean showPeaks = true;
 	private boolean showScansInRange = true;
 	private boolean showPeaksInRange = true;
 	private boolean showPeakProfilesSelectionAll = true;
 	private boolean moveRetentionTimeOnPeakSelection = true;
-	//
+
 	private int currentModCount;
 	private InteractionMode interactionMode = InteractionMode.SOURCE;
 	private RetentionTimeRange lastRange;
-	//
+
 	private final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
 	public ExtendedPeakScanListUI(Composite parent, int style) {
@@ -172,7 +172,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 		updateFromPreferences();
 		updateLabel();
 		buttonSave.get().setEnabled(false);
-		//
+
 		if(chromatogramSelection == null) {
 			tableViewer.get().clear();
 			currentModCount = -1;
@@ -224,13 +224,13 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfoTop(this);
 		createToolbarSearch(this);
 		createPeakTable(this);
 		createToolbarInfoBottom(this);
-		//
+
 		initialize();
 	}
 
@@ -239,7 +239,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 		enableToolbar(toolbarInfoTop, buttonToolbarInfo.get(), IApplicationImage.IMAGE_INFO, TOOLTIP_INFO, true);
 		enableToolbar(toolbarSearch, buttonToolbarSearch.get(), IMAGE_SEARCH, TOOLTIP_SEARCH, false);
 		enableToolbar(toolbarInfoBottom, buttonToolbarInfo.get(), IApplicationImage.IMAGE_INFO, TOOLTIP_INFO, true);
-		//
+
 		enableEdit(tableViewer, buttonTableEdit.get(), IMAGE_EDIT_ENTRY, false);
 		buttonComparison.get().setEnabled(false);
 		buttonMerge.get().setEnabled(false);
@@ -255,7 +255,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(11, false));
-		//
+
 		createButtonInfo(composite);
 		createButtonSearch(composite);
 		createButtonEdit(composite);
@@ -267,7 +267,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 		createButtonSave(composite);
 		createButtonHelp(composite);
 		createButtonSettings(composite);
-		//
+
 		toolbarMain.set(composite);
 	}
 
@@ -300,7 +300,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return informationUI;
 	}
 
@@ -317,7 +317,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 				updateLabel();
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -326,7 +326,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 		PeakScanListUI peakScanListUI = new PeakScanListUI(parent, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		Table table = peakScanListUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		table.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -340,16 +340,16 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 		 */
 		Display display = peakScanListUI.getTable().getDisplay();
 		ITableSettings tableSettings = peakScanListUI.getTableSettings();
-		//
+
 		addDeleteMenuItem(display, tableSettings, "Peak/Scan (Delete Identifications)");
 		addAnalysisActiveMenuItem(tableSettings, "Peaks (Activate for Analysis)", true);
 		addAnalysisActiveMenuItem(tableSettings, "Peaks (Deactivate for Analysis)", false);
 		addInternalStandardsMenuItem(display, tableSettings, "Peaks (Edit Internal Standard)");
 		addClassifierMenuItem(display, tableSettings, "Peaks (Edit Classifier)");
-		//
+
 		addKeyEventProcessors(display, tableSettings);
 		peakScanListUI.applySettings(tableSettings);
-		//
+
 		tableViewer.set(peakScanListUI);
 	}
 

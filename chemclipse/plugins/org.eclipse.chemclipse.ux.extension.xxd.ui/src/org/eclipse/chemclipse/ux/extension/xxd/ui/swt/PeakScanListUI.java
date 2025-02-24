@@ -33,7 +33,7 @@ public class PeakScanListUI extends ExtendedTableViewer {
 
 	private final String[] titles = PeakScanListLabelProvider.TITLES;
 	private final int[] bounds = PeakScanListLabelProvider.BOUNDS;
-	//
+
 	private final PeakScanListLabelProvider labelProvider = new PeakScanListLabelProvider();
 	private final PeakScanListTableComparator tableComparator = new PeakScanListTableComparator();
 	private final PeakScanListFilter listFilter = new PeakScanListFilter();
@@ -51,7 +51,7 @@ public class PeakScanListUI extends ExtendedTableViewer {
 			double chromatogramPeakArea = chromatogram.getPeakIntegratedArea();
 			labelProvider.setChromatogramPeakArea(chromatogramPeakArea);
 			tableComparator.setChromatogramPeakArea(chromatogramPeakArea);
-			//
+
 			List<Object> input = new ArrayList<>();
 			/*
 			 * Peaks
@@ -65,7 +65,7 @@ public class PeakScanListUI extends ExtendedTableViewer {
 			if(showScans) {
 				input.addAll(ChromatogramDataSupport.getIdentifiedScans(chromatogramSelection, showScansInRange));
 			}
-			//
+
 			super.setInput(input);
 		} else {
 			clear();
