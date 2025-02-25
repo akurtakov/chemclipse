@@ -41,7 +41,7 @@ import org.eclipse.chemclipse.processing.filter.Filtered;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.actions.IMeasurementFilterAction;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.actions.MeasurementFilterAction;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuListener;
@@ -224,7 +224,7 @@ public class NMRMeasurementsUI implements PropertyChangeListener {
 					}
 				};
 				for(IMeasurementFilter<?> filter : filters) {
-					IAction action = new IMeasurementFilterAction(filter, measurements, consumer, processSupplierContext);
+					IAction action = new MeasurementFilterAction(filter, measurements, consumer, processSupplierContext);
 					mgr.add(action);
 				}
 			}
