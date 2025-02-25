@@ -37,22 +37,22 @@ public class PeakScanListTableComparator extends AbstractRecordTableComparator i
 	public int compare(Viewer viewer, Object e1, Object e2) {
 
 		int sortOrder = 0;
-		//
+
 		Object object1 = null;
 		Object object2 = null;
-		//
+
 		if(e1 instanceof IPeak || e1 instanceof IScan) {
 			object1 = e1;
 		}
-		//
+
 		if(e2 instanceof IPeak || e2 instanceof IScan) {
 			object2 = e2;
 		}
-		//
+
 		if(object1 != null && object2 != null) {
 			sortOrder = getSortOrder(object1, object2);
 		}
-		//
+
 		if(getDirection() == ASCENDING) {
 			sortOrder = -sortOrder;
 		}
@@ -62,7 +62,7 @@ public class PeakScanListTableComparator extends AbstractRecordTableComparator i
 	private int getSortOrder(Object object1, Object object2) {
 
 		int sortOrder = 0;
-		//
+
 		switch(getPropertyIndex()) {
 			case 0:
 				sortOrder = Boolean.compare(isActiveForAnalysis(object2), isActiveForAnalysis(object1));
@@ -109,28 +109,28 @@ public class PeakScanListTableComparator extends AbstractRecordTableComparator i
 			case 12:
 				if(object1 instanceof IChromatogramPeakMSD chromatogramPeak1 && object2 instanceof IChromatogramPeakMSD chromatogramPeak2) {
 					switch(getPropertyIndex()) {
-						case 9:
+						case 11:
 							sortOrder = chromatogramPeak2.getScanMax() - chromatogramPeak1.getScanMax();
 							break;
-						case 10:
+						case 12:
 							sortOrder = Float.compare(chromatogramPeak2.getSignalToNoiseRatio(), chromatogramPeak1.getSignalToNoiseRatio());
 							break;
 					}
 				} else if(object1 instanceof IChromatogramPeakCSD chromatogramPeak1 && object2 instanceof IChromatogramPeakCSD chromatogramPeak2) {
 					switch(getPropertyIndex()) {
-						case 9:
+						case 11:
 							sortOrder = chromatogramPeak2.getScanMax() - chromatogramPeak1.getScanMax();
 							break;
-						case 10:
+						case 12:
 							sortOrder = Float.compare(chromatogramPeak2.getSignalToNoiseRatio(), chromatogramPeak1.getSignalToNoiseRatio());
 							break;
 					}
 				} else if(object1 instanceof IChromatogramPeakWSD chromatogramPeak1 && object2 instanceof IChromatogramPeakWSD chromatogramPeak2) {
 					switch(getPropertyIndex()) {
-						case 9:
+						case 11:
 							sortOrder = chromatogramPeak2.getScanMax() - chromatogramPeak1.getScanMax();
 							break;
-						case 10:
+						case 12:
 							sortOrder = Float.compare(chromatogramPeak2.getSignalToNoiseRatio(), chromatogramPeak1.getSignalToNoiseRatio());
 							break;
 					}
@@ -169,7 +169,7 @@ public class PeakScanListTableComparator extends AbstractRecordTableComparator i
 					sortOrder = 0;
 				}
 		}
-		//
+
 		return sortOrder;
 	}
 
