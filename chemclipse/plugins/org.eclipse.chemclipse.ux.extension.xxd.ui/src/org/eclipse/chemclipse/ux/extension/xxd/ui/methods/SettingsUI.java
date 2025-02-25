@@ -202,11 +202,15 @@ public class SettingsUI<T> extends Composite {
 		public void addChangeListener(Listener listener) {
 
 			for(WidgetItem widgetItem : widgetItems) {
+				/*
+				 * Listen to changes
+				 */
 				Control control = widgetItem.getControl();
 				control.addListener(SWT.Selection, listener);
 				control.addListener(SWT.KeyUp, listener);
 				control.addListener(SWT.MouseUp, listener);
 				control.addListener(SWT.MouseDoubleClick, listener);
+				control.addListener(SWT.Modify, listener);
 				//
 				if(control instanceof IChangeListener changeListener) {
 					changeListener.addChangeListener(listener);
