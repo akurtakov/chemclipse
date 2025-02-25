@@ -13,10 +13,10 @@
 package org.eclipse.chemclipse.nmr.processing.supplier.base.core;
 
 import org.eclipse.chemclipse.model.core.IMeasurement;
-import org.eclipse.chemclipse.nmr.model.core.SpectrumMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.processing.DataCategory;
 
-public abstract class AbstractSpectrumSignalFilter<ConfigType> extends AbstractComplexSignalFilter<ConfigType, SpectrumMeasurement> {
+public abstract class AbstractSpectrumSignalFilter<ConfigType> extends AbstractComplexSignalFilter<ConfigType, ISpectrumMeasurement> {
 
 	private static final long serialVersionUID = -597003482088833773L;
 
@@ -34,10 +34,10 @@ public abstract class AbstractSpectrumSignalFilter<ConfigType> extends AbstractC
 	@Override
 	public boolean acceptsIMeasurement(IMeasurement item) {
 
-		return item instanceof SpectrumMeasurement spectrumMeasurement && accepts(spectrumMeasurement);
+		return item instanceof ISpectrumMeasurement spectrumMeasurement && accepts(spectrumMeasurement);
 	}
 
-	protected boolean accepts(SpectrumMeasurement item) {
+	protected boolean accepts(ISpectrumMeasurement item) {
 
 		return true;
 	}

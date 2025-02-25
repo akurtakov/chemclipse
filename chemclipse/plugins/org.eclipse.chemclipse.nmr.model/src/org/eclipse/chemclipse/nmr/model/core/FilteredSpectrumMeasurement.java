@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -22,7 +22,7 @@ import org.eclipse.chemclipse.model.core.FilteredMeasurement;
 import org.eclipse.chemclipse.processing.filter.FilterContext;
 
 /**
- * This class is meant as a class for Filters that wants to filter some aspects of a {@link SpectrumMeasurement}, the class simply delegates to an original {@link SpectrumMeasurement} and returns all his data to the caller.
+ * This class is meant as a class for Filters that wants to filter some aspects of a {@link ISpectrumMeasurement}, the class simply delegates to an original {@link ISpectrumMeasurement} and returns all his data to the caller.
  * A filter can now extend this class and return for example a filtered set of signals.
  * 
  * <b>Important</b> This class is not meant for format readers, these should extend {@link AbstractMeasurement} instead and implement the interface on a reader specific class
@@ -30,17 +30,17 @@ import org.eclipse.chemclipse.processing.filter.FilterContext;
  * @author Christoph Läubrich
  *
  */
-public class FilteredSpectrumMeasurement<ConfigType> extends FilteredMeasurement<SpectrumMeasurement, ConfigType> implements SpectrumMeasurement {
+public class FilteredSpectrumMeasurement<ConfigType> extends FilteredMeasurement<ISpectrumMeasurement, ConfigType> implements ISpectrumMeasurement {
 
 	private static final long serialVersionUID = -4028057722405624626L;
-	private transient List<? extends SpectrumSignal> signals;
+	private transient List<? extends ISpectrumSignal> signals;
 
-	public FilteredSpectrumMeasurement(FilterContext<SpectrumMeasurement, ConfigType> context) {
+	public FilteredSpectrumMeasurement(FilterContext<ISpectrumMeasurement, ConfigType> context) {
 		super(context);
 	}
 
 	@Override
-	public List<? extends SpectrumSignal> getSignals() {
+	public List<? extends ISpectrumSignal> getSignals() {
 
 		if(signals != null) {
 			return signals;
@@ -48,7 +48,7 @@ public class FilteredSpectrumMeasurement<ConfigType> extends FilteredMeasurement
 		return getFilteredObject().getSignals();
 	}
 
-	public void setSignals(List<? extends SpectrumSignal> signals) {
+	public void setSignals(List<? extends ISpectrumSignal> signals) {
 
 		this.signals = signals;
 	}
@@ -65,16 +65,16 @@ public class FilteredSpectrumMeasurement<ConfigType> extends FilteredMeasurement
 		if(signals == null) {
 			out.writeObject(null);
 		} else {
-			ArrayList<SpectrumSignal> serList = new ArrayList<>(signals.size());
-			for(SpectrumSignal spectrumSignal : signals) {
+			ArrayList<ISpectrumSignal> spectrumSignals = new ArrayList<>(signals.size());
+			for(ISpectrumSignal spectrumSignal : signals) {
 				if(spectrumSignal instanceof Serializable) {
 					// we can add it as is
-					serList.add(spectrumSignal);
+					spectrumSignals.add(spectrumSignal);
 				} else {
-					serList.add(new SerializableSpectrumSignal(spectrumSignal));
+					spectrumSignals.add(new SerializableSpectrumSignal(spectrumSignal));
 				}
 			}
-			out.writeObject(serList);
+			out.writeObject(spectrumSignals);
 		}
 	}
 
@@ -82,17 +82,17 @@ public class FilteredSpectrumMeasurement<ConfigType> extends FilteredMeasurement
 	private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
 
 		in.defaultReadObject();
-		signals = (List<? extends SpectrumSignal>)in.readObject();
+		signals = (List<? extends ISpectrumSignal>)in.readObject();
 	}
 
-	private static final class SerializableSpectrumSignal implements SpectrumSignal, Serializable {
+	private static final class SerializableSpectrumSignal implements ISpectrumSignal, Serializable {
 
 		private static final long serialVersionUID = -5726100506736511582L;
 		private BigDecimal frequency;
 		private Number absorptiveIntensity;
 		private Number dispersiveIntensity;
 
-		public SerializableSpectrumSignal(SpectrumSignal copyfrom) {
+		public SerializableSpectrumSignal(ISpectrumSignal copyfrom) {
 			frequency = copyfrom.getFrequency();
 			absorptiveIntensity = copyfrom.getAbsorptiveIntensity();
 			dispersiveIntensity = copyfrom.getDispersiveIntensity();

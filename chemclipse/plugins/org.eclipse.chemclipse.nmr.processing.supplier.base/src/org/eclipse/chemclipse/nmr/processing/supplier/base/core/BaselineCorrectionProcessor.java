@@ -24,8 +24,8 @@ import org.apache.commons.math3.fitting.WeightedObservedPoint;
 import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
 import org.eclipse.chemclipse.nmr.model.core.FilteredSpectrumMeasurement;
-import org.eclipse.chemclipse.nmr.model.core.SpectrumMeasurement;
-import org.eclipse.chemclipse.nmr.model.core.SpectrumSignal;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumSignal;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.settings.BaselineCorrectionSettings;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
 import org.eclipse.chemclipse.processing.filter.Filter;
@@ -52,7 +52,7 @@ public class BaselineCorrectionProcessor extends AbstractSpectrumSignalFilter<Ba
 	}
 
 	@Override
-	protected IMeasurement doFiltering(FilterContext<SpectrumMeasurement, BaselineCorrectionSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
+	protected IMeasurement doFiltering(FilterContext<ISpectrumMeasurement, BaselineCorrectionSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
 		BaselineCorrectionSettings config = context.getFilterConfig();
 		// read parameters
@@ -127,16 +127,16 @@ public class BaselineCorrectionProcessor extends AbstractSpectrumSignalFilter<Ba
 		return new DoubleUnaryOperator[]{polyFuncReal::value, polyFuncImag::value};
 	}
 
-	private static List<WeightedObservedPointSpectrumSignal> initSignalData(SpectrumMeasurement measurement, double cutPercentage) {
+	private static List<WeightedObservedPointSpectrumSignal> initSignalData(ISpectrumMeasurement measurement, double cutPercentage) {
 
-		List<? extends SpectrumSignal> signals = measurement.getSignals();
+		List<? extends ISpectrumSignal> signals = measurement.getSignals();
 		int size = signals.size();
 		List<WeightedObservedPointSpectrumSignal> convertedSignals = new ArrayList<>();
 		double fittingWeight = 1.0; // weight = 1.0 if none
 		int lowerCut = (int)Math.round(size * cutPercentage * 0.01);
 		int upperCut = size - lowerCut + 1;
 		for(int i = 0; i < size; i++) {
-			SpectrumSignal signal = signals.get(i);
+			ISpectrumSignal signal = signals.get(i);
 			double chemicalShift = signal.getFrequency().doubleValue();
 			double realPart = signal.getY();
 			boolean cut = i <= lowerCut || i >= upperCut;
@@ -160,7 +160,7 @@ public class BaselineCorrectionProcessor extends AbstractSpectrumSignalFilter<Ba
 		return Math.sqrt(sum / (1.0 + count));
 	}
 
-	private static final class WeightedObservedPointSpectrumSignal implements SpectrumSignal {
+	private static final class WeightedObservedPointSpectrumSignal implements ISpectrumSignal {
 
 		private SignalWeightedObservedPoint real;
 		private SignalWeightedObservedPoint imag;

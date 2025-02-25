@@ -24,7 +24,7 @@ import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
 import org.eclipse.chemclipse.nmr.model.core.FIDMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.FilteredFIDMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.FilteredSpectrumMeasurement;
-import org.eclipse.chemclipse.nmr.model.core.SpectrumMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions.ComplexFIDData;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions.SpectrumData;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.settings.DirectCurrentCorrectionSettings;
@@ -114,7 +114,7 @@ public class DirectCurrentCorrection extends AbstractComplexSignalFilter<DirectC
 	@Override
 	public boolean acceptsIMeasurement(IMeasurement item) {
 
-		return item instanceof FIDMeasurement || item instanceof SpectrumMeasurement;
+		return item instanceof FIDMeasurement || item instanceof ISpectrumMeasurement;
 	}
 
 	@Override
@@ -133,7 +133,7 @@ public class DirectCurrentCorrection extends AbstractComplexSignalFilter<DirectC
 			FilteredFIDMeasurement<DirectCurrentCorrectionSettings> filtered = new FilteredFIDMeasurement<>(FilterContext.create(fid, this, context.getFilterConfig()));
 			filtered.setSignals(fidData.toSignal());
 			return filtered;
-		} else if(measurement instanceof SpectrumMeasurement spectrum) {
+		} else if(measurement instanceof ISpectrumMeasurement spectrum) {
 			SpectrumData spectrumData = UtilityFunctions.toComplexSpectrumData(spectrum);
 			FilteredSpectrumMeasurement<DirectCurrentCorrectionSettings> filtered = new FilteredSpectrumMeasurement<>(FilterContext.create(spectrum, this, context.getFilterConfig()));
 			directCurrentCorrectionSpectrum(spectrumData);

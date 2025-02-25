@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -16,12 +16,12 @@ import java.math.BigDecimal;
 import org.eclipse.chemclipse.model.core.IComplexSignal;
 
 /**
- * The {@link SpectrumSignal} consists of an acquisition time and an intensity
+ * The {@link ISpectrumSignal} consists of an acquisition time and an intensity
  *
  * @author Christoph Läubrich
  *
  */
-public interface SpectrumSignal extends IComplexSignal {
+public interface ISpectrumSignal extends IComplexSignal {
 
 	/**
 	 *

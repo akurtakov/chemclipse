@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
-import org.eclipse.chemclipse.nmr.model.core.SpectrumMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.model.selection.IDataNMRSelection;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
@@ -67,7 +67,7 @@ public class ExtendedNMROverlayUI extends Composite implements PropertyChangeLis
 
 	private ChartNMR chartNMR;
 	/**
-	 * A mapping between (active) {@link IScanEditorNMR} and selected {@link SpectrumMeasurement}s
+	 * A mapping between (active) {@link IScanEditorNMR} and selected {@link ISpectrumMeasurement}s
 	 */
 	private AtomicReference<Map<IScanEditorNMR, OverlayDataNMRSelection>> dataNMREditors = new AtomicReference<Map<IScanEditorNMR, OverlayDataNMRSelection>>(Collections.emptyMap());
 	private EPartService partservice = Activator.getDefault().getPartService();
@@ -245,7 +245,7 @@ public class ExtendedNMROverlayUI extends Composite implements PropertyChangeLis
 			double yOffset = 0;
 			for(OverlayDataNMRSelection selection : spectras) {
 				IComplexSignalMeasurement<?> measurement = selection.getMeasurement();
-				if(measurement instanceof SpectrumMeasurement spectrumMeasurement) {
+				if(measurement instanceof ISpectrumMeasurement spectrumMeasurement) {
 					ILineSeriesData lineSeriesData = getLineSeriesData(spectrumMeasurement, "NMR_" + i++, measurement.getDataName(), yOffset);
 					ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
 					lineSeriesSettings.setLineColor(color);
@@ -276,7 +276,7 @@ public class ExtendedNMROverlayUI extends Composite implements PropertyChangeLis
 		return max;
 	}
 
-	private ILineSeriesData getLineSeriesData(SpectrumMeasurement spectrumMeasurement, String id, String label, double yOffset) {
+	private ILineSeriesData getLineSeriesData(ISpectrumMeasurement spectrumMeasurement, String id, String label, double yOffset) {
 
 		ILineSeriesData lineSeriesData = new LineSeriesData(ChartNMR.createSignalSeries(id, spectrumMeasurement.getSignals(), yOffset, 0d));
 		lineSeriesData.getSettings().setDescription(label);
@@ -330,9 +330,9 @@ public class ExtendedNMROverlayUI extends Composite implements PropertyChangeLis
 		@Override
 		public IComplexSignalMeasurement<?>[] getMeasurements() {
 
-			List<SpectrumMeasurement> specras = new ArrayList<>();
+			List<ISpectrumMeasurement> specras = new ArrayList<>();
 			for(IComplexSignalMeasurement<?> m : editor.getScanSelection().getMeasurements()) {
-				if(m instanceof SpectrumMeasurement spectrumMeasurement) {
+				if(m instanceof ISpectrumMeasurement spectrumMeasurement) {
 					specras.add(spectrumMeasurement);
 				}
 			}

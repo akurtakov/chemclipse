@@ -24,7 +24,7 @@ import java.util.function.Consumer;
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
-import org.eclipse.chemclipse.nmr.model.core.SpectrumMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.model.selection.IDataNMRSelection;
 import org.eclipse.chemclipse.processing.ProcessorFactory;
 import org.eclipse.chemclipse.processing.filter.Filtered;
@@ -148,7 +148,7 @@ public class NMRSpectrumSelection {
 					List<Object> list = new ArrayList<>();
 					list.add(NULL);
 					for(IComplexSignalMeasurement<?> measurement : measurements) {
-						if(measurement instanceof SpectrumMeasurement) {
+						if(measurement instanceof ISpectrumMeasurement) {
 							list.add(measurement);
 						}
 					}
@@ -158,7 +158,7 @@ public class NMRSpectrumSelection {
 						@Override
 						public String getText(Object element) {
 
-							if(element instanceof SpectrumMeasurement measurement) {
+							if(element instanceof ISpectrumMeasurement measurement) {
 								return getName(measurement);
 							}
 							return "-";
@@ -187,18 +187,18 @@ public class NMRSpectrumSelection {
 			public void menuAboutToShow(IMenuManager mgr) {
 
 				Iterator<?> iterator = viewer.getStructuredSelection().iterator();
-				Map<SpectrumMeasurement, IDataNMRSelection> items = new LinkedHashMap<>();
+				Map<ISpectrumMeasurement, IDataNMRSelection> items = new LinkedHashMap<>();
 				while(iterator.hasNext()) {
 					Object object = iterator.next();
 					if(object instanceof IDataNMRSelection selection) {
 						IComplexSignalMeasurement<?> measurement = selection.getMeasurement();
-						if(measurement instanceof SpectrumMeasurement spectrumMeasurement) {
+						if(measurement instanceof ISpectrumMeasurement spectrumMeasurement) {
 							items.put(spectrumMeasurement, selection);
 						}
 					}
 				}
 				if(!items.isEmpty()) {
-					Set<SpectrumMeasurement> measurements = items.keySet();
+					Set<ISpectrumMeasurement> measurements = items.keySet();
 					BiPredicate<IMeasurementFilter<?>, Map<String, ?>> acceptor = new BiPredicate<IMeasurementFilter<?>, Map<String, ?>>() {
 
 						@Override

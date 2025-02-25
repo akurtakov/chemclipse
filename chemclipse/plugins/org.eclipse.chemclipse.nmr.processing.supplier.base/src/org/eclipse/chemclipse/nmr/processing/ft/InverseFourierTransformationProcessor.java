@@ -30,7 +30,7 @@ import org.eclipse.chemclipse.nmr.model.core.AcquisitionParameter;
 import org.eclipse.chemclipse.nmr.model.core.DataDimension;
 import org.eclipse.chemclipse.nmr.model.core.FIDMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.FIDSignal;
-import org.eclipse.chemclipse.nmr.model.core.SpectrumMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.AbstractSpectrumSignalFilter;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.settings.InverseFourierTransformationSettings;
@@ -58,10 +58,10 @@ public class InverseFourierTransformationProcessor extends AbstractSpectrumSigna
 	}
 
 	@Override
-	protected IMeasurement doFiltering(FilterContext<SpectrumMeasurement, InverseFourierTransformationSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
+	protected IMeasurement doFiltering(FilterContext<ISpectrumMeasurement, InverseFourierTransformationSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
 		// IFFT spectrum to fid
-		SpectrumMeasurement spectrumMeasurement = context.getFilteredObject();
+		ISpectrumMeasurement spectrumMeasurement = context.getFilteredObject();
 		Complex[] spectrumSignals = UtilityFunctions.toComplexArray(spectrumMeasurement.getSignals());
 		UtilityFunctions.rightShiftNMRComplexData(spectrumSignals, spectrumSignals.length / 2);
 		Complex[] fid = inverseFourierTransformNmrData(spectrumSignals);
@@ -87,12 +87,12 @@ public class InverseFourierTransformationProcessor extends AbstractSpectrumSigna
 		return fid;
 	}
 
-	private static final class InverseFFTFilteredMeasurement extends FilteredMeasurement<SpectrumMeasurement, InverseFourierTransformationSettings> implements FIDMeasurement {
+	private static final class InverseFFTFilteredMeasurement extends FilteredMeasurement<ISpectrumMeasurement, InverseFourierTransformationSettings> implements FIDMeasurement {
 
 		private static final long serialVersionUID = -3240032383041201512L;
 		private List<InverseFFTSpectrumSignal> signals;
 
-		public InverseFFTFilteredMeasurement(FilterContext<SpectrumMeasurement, InverseFourierTransformationSettings> filterContext, List<InverseFFTSpectrumSignal> signals) {
+		public InverseFFTFilteredMeasurement(FilterContext<ISpectrumMeasurement, InverseFourierTransformationSettings> filterContext, List<InverseFFTSpectrumSignal> signals) {
 
 			super(filterContext);
 			this.signals = Collections.unmodifiableList(signals);

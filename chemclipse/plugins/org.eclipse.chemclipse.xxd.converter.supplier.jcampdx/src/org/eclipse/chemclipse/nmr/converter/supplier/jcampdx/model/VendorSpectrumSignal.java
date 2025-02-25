@@ -1,51 +1,46 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ * 
  * Contributors:
- * Christoph Läubrich - initial API and implementation
+ * Matthias Mailänder - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.nmr.processing.supplier.base.core;
+package org.eclipse.chemclipse.nmr.converter.supplier.jcampdx.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
-import org.apache.commons.math3.complex.Complex;
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumSignal;
 
-public final class ComplexSpectrumSignal implements ISpectrumSignal, Serializable {
+public class VendorSpectrumSignal implements ISpectrumSignal {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = -3361359307799587392L;
-	private Complex complex;
-	private BigDecimal frequency;
+	private double frequency;
+	private double real;
 
-	public ComplexSpectrumSignal(BigDecimal frequency, Complex complex) {
+	public VendorSpectrumSignal(double frequency, double real) {
+
 		this.frequency = frequency;
-		this.complex = complex;
+		this.real = real;
 	}
 
 	@Override
 	public BigDecimal getFrequency() {
 
-		return frequency;
+		return BigDecimal.valueOf(frequency);
 	}
 
 	@Override
 	public Number getAbsorptiveIntensity() {
 
-		return complex.getReal();
+		return real;
 	}
 
 	@Override
 	public Number getDispersiveIntensity() {
 
-		return complex.getImaginary();
+		return BigDecimal.ZERO;
 	}
 }
