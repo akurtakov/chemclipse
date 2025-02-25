@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -37,9 +37,9 @@ public interface ITotalScanSignalsFilter<ConfigType> extends Filter<ConfigType> 
 	 *            a {@link IProgressMonitor} to report progress of the filtering or <code>null</code> if no progress is desired
 	 * @return a {@link IProcessingResult} that describes the outcome of the filtering, the result will be {@link Boolean#TRUE} if any item in the list was filter or {@link Boolean#FALSE} if no item was filtered or there was an error. The messages of the {@link IProcessingResult} may contain further information
 	 * @throws IllegalArgumentException
-	 *             if any of the given {@link ITotalScanSignals} are incompatible with this filter ({@link #acceptsITotalScanSignals(ITotalScanSignals)} returns <code>false</code> for them)
+	 *             if any of the given {@link ITotalScanSignals} are incompatible with this filter ({@link #acceptsTotalScanSignals(ITotalScanSignals)} returns <code>false</code> for them)
 	 */
-	IProcessingResult<Boolean> filterITotalScanSignalss(FilterList<ITotalScanSignals> filterItems, ConfigType configuration, IProgressMonitor monitor) throws IllegalArgumentException;
+	IProcessingResult<Boolean> filterTotalScanSignals(FilterList<ITotalScanSignals> filterItems, ConfigType configuration, IProgressMonitor monitor) throws IllegalArgumentException;
 
 	/**
 	 * Checks if the given {@link ITotalScanSignals} is compatible with this filter, that means that this filter can be applied without throwing an {@link IllegalArgumentException}
@@ -48,7 +48,7 @@ public interface ITotalScanSignalsFilter<ConfigType> extends Filter<ConfigType> 
 	 *            the {@link ITotalScanSignals} to check
 	 * @return <code>true</code> if this {@link ITotalScanSignals} can be applied, <code>false</code> otherwise
 	 */
-	boolean acceptsITotalScanSignals(ITotalScanSignals item);
+	boolean acceptsTotalScanSignals(ITotalScanSignals item);
 
 	/**
 	 * Creates a new configuration that is specially suited for the given {@link ITotalScanSignals} type

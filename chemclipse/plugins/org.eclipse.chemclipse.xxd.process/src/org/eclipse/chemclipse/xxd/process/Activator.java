@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2018 Lablicate GmbH.
+ * Copyright (c) 2012, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -63,7 +63,7 @@ public class Activator implements BundleActivator {
 	 * 
 	 * @return an array holding all currently active {@link IProcessTypeSupplier}
 	 */
-	public static IProcessTypeSupplier[] geIProcessTypeSuppliers() {
+	public static IProcessTypeSupplier[] getProcessTypeSuppliers() {
 
 		ServiceTracker<IProcessTypeSupplier, IProcessTypeSupplier> tracker = processTypeSupplierTracker.get();
 		if(tracker != null) {

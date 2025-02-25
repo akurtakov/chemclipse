@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2024 Lablicate GmbH.
+ * Copyright (c) 2008, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -115,7 +115,7 @@ public class Chromatogram_9_Test extends TestCase {
 	public void testGetExtractedIonSignals_1() {
 
 		IExtractedIonSignals signals = extractedIonSignalExtractor.getExtractedIonSignals();
-		assertEquals("IExtractedIonSignalssize", 99, signals.size());
+		assertEquals("IExtractedIonSignals size", 99, signals.size());
 	}
 
 	public void testGetExtractedIonSignals_2() {

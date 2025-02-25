@@ -56,7 +56,7 @@ public class ProcessTypeSupport implements IProcessSupplierContext {
 			}
 		}
 		//
-		IProcessTypeSupplier[] dynamic = Activator.geIProcessTypeSuppliers();
+		IProcessTypeSupplier[] dynamic = Activator.getProcessTypeSuppliers();
 		for(IProcessTypeSupplier typeSupplier : dynamic) {
 			for(IProcessSupplier<?> supplier : typeSupplier.getProcessorSuppliers()) {
 				if(supplier.matchesId(processorId)) {
@@ -80,7 +80,7 @@ public class ProcessTypeSupport implements IProcessSupplierContext {
 
 		Set<IProcessSupplier<?>> supplier = new TreeSet<>((o1, o2) -> o1.getId().compareTo(o2.getId()));
 		addMatchingSupplier(dataTypes, supplier, localProcessSupplier.toArray(new IProcessTypeSupplier[0]));
-		addMatchingSupplier(dataTypes, supplier, Activator.geIProcessTypeSuppliers());
+		addMatchingSupplier(dataTypes, supplier, Activator.getProcessTypeSuppliers());
 		//
 		return supplier;
 	}
@@ -92,7 +92,7 @@ public class ProcessTypeSupport implements IProcessSupplierContext {
 			typeSupplier.getProcessorSuppliers().forEach(consumer);
 		}
 		//
-		for(IProcessTypeSupplier typeSupplier : Activator.geIProcessTypeSuppliers()) {
+		for(IProcessTypeSupplier typeSupplier : Activator.getProcessTypeSuppliers()) {
 			typeSupplier.getProcessorSuppliers().forEach(consumer);
 		}
 	}
