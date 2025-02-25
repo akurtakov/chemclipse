@@ -21,7 +21,7 @@ import java.util.List;
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.model.core.PeakList;
 import org.eclipse.chemclipse.nmr.model.core.AcquisitionParameter;
-import org.eclipse.chemclipse.nmr.model.core.FIDMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.IMeasurementFID;
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.model.selection.IDataNMRSelection;
 import org.eclipse.chemclipse.nmr.model.selection.IDataNMRSelection.ChangeType;
@@ -106,7 +106,7 @@ public class ExtendedNMRScanUI implements PropertyChangeListener {
 					if(peakList != null) {
 						peakSeriesData = ChartNMR.createPeakSeries(SERIES_ID + ".peaks", spectrumMeasurement.getSignals(), peakList.getResult(), 0, 0);
 					}
-				} else if(measurement instanceof FIDMeasurement fidMeasurement) {
+				} else if(measurement instanceof IMeasurementFID fidMeasurement) {
 					acquisitionParameter = fidMeasurement.getAcquisitionParameter();
 					chartNMR.setPPMconverter(null);
 					chartNMR.modifyChart(true);

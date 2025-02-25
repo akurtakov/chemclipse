@@ -31,7 +31,7 @@ import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.core.PeakList;
 import org.eclipse.chemclipse.model.detector.IMeasurementPeakDetector;
 import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
-import org.eclipse.chemclipse.nmr.model.core.FIDMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.IMeasurementFID;
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.model.selection.DataNMRSelection;
 import org.eclipse.chemclipse.nmr.model.selection.IDataNMRSelection.ChangeType;
@@ -127,7 +127,7 @@ public class NMRMeasurementsUI implements PropertyChangeListener {
 			public Image getImage(Object element) {
 
 				element = getMeasurement(element);
-				if(element instanceof FIDMeasurement) {
+				if(element instanceof IMeasurementFID) {
 					return IMAGE_FID;
 				}
 				if(element instanceof ISpectrumMeasurement) {

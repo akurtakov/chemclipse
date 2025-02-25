@@ -17,8 +17,8 @@ import java.math.BigDecimal;
 
 import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
-import org.eclipse.chemclipse.nmr.model.core.FIDMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.FilteredFIDMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.IMeasurementFID;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.AbstractFIDSignalFilter;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions.ComplexFIDData;
@@ -48,7 +48,7 @@ public class ExponentialApodizationFunctionProcessor extends AbstractFIDSignalFi
 	}
 
 	@Override
-	protected IMeasurement doFiltering(FilterContext<FIDMeasurement, ExponentialApodizationSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
+	protected IMeasurement doFiltering(FilterContext<IMeasurementFID, ExponentialApodizationSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
 		double broadeningFactor = context.getFilterConfig().getExponentialLineBroadeningFactor();
 		if(broadeningFactor > 0 || broadeningFactor < 0) {

@@ -21,7 +21,7 @@ import org.eclipse.chemclipse.model.core.IComplexSignal;
  * @author Christoph Läubrich
  *
  */
-public interface FIDSignal extends IComplexSignal {
+public interface ISignalFID extends IComplexSignal {
 
 	/**
 	 * 

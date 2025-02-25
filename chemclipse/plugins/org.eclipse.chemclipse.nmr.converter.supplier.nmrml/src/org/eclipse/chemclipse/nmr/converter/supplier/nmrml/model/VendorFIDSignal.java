@@ -14,9 +14,9 @@ package org.eclipse.chemclipse.nmr.converter.supplier.nmrml.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import org.eclipse.chemclipse.nmr.model.core.FIDSignal;
+import org.eclipse.chemclipse.nmr.model.core.ISignalFID;
 
-public class VendorFIDSignal implements FIDSignal, Serializable {
+public class VendorFIDSignal implements ISignalFID, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Double time;
