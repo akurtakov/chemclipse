@@ -49,8 +49,7 @@ public class PeakDetectorPart extends AbstractPart<ExtendedPeakDetectorUI> {
 				return false;
 			} else {
 				Object object = objects.get(0);
-				if(object instanceof IChromatogramSelection) {
-					IChromatogramSelection chromatogramSelection = (IChromatogramSelection)object;
+				if(object instanceof IChromatogramSelection chromatogramSelection) {
 					getControl().update(chromatogramSelection);
 					return true;
 				}

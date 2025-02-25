@@ -45,8 +45,8 @@ public class ScanBrowsePart extends AbstractPart<ExtendedScanBrowseUI> {
 		if(objects.size() == 1) {
 			Object object = objects.get(0);
 			if(isChromatogramTopic(topic)) {
-				if(object instanceof IChromatogramSelection) {
-					getControl().update((IChromatogramSelection)object);
+				if(object instanceof IChromatogramSelection chromatogramSelection) {
+					getControl().update(chromatogramSelection);
 					return true;
 				}
 			}

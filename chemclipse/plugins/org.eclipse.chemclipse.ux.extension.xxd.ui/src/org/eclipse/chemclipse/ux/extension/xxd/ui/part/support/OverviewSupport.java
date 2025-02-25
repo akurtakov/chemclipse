@@ -56,8 +56,7 @@ public class OverviewSupport {
 			Object object = objects.get(0);
 			if(object instanceof IChromatogramOverview chromatogramOverview) {
 				return fireUpdate(chromatogramOverview);
-			} else if(object instanceof IChromatogramSelection) {
-				IChromatogramSelection chromatogramSelection = (IChromatogramSelection)object;
+			} else if(object instanceof IChromatogramSelection chromatogramSelection) {
 				return updateChromatogramSelection(chromatogramSelection);
 			} else if(object instanceof File file) {
 				return updateFile(file, topic);
