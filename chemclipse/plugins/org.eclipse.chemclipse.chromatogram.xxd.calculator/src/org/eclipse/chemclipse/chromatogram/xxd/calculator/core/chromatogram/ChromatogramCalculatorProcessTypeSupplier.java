@@ -20,7 +20,7 @@ import java.util.List;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.exceptions.NoChromatogramCalculatorSupplierAvailableException;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.settings.IChromatogramCalculatorSettings;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessorSupplier;
+import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
@@ -54,7 +54,7 @@ public class ChromatogramCalculatorProcessTypeSupplier implements IProcessTypeSu
 		}
 	}
 
-	private static final class ChromatogramCalculatorProcessorSupplier extends ChromatogramSelectionProcessorSupplier<IChromatogramCalculatorSettings> {
+	private static final class ChromatogramCalculatorProcessorSupplier extends ChromatogramSelectionProcessSupplier<IChromatogramCalculatorSettings> {
 
 		@SuppressWarnings("unchecked")
 		public ChromatogramCalculatorProcessorSupplier(IChromatogramCalculatorSupplier supplier, IProcessTypeSupplier parent) {

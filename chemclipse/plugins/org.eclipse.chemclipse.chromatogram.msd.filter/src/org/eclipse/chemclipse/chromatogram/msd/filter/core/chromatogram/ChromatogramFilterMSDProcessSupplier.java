@@ -22,7 +22,7 @@ import org.eclipse.chemclipse.chromatogram.filter.core.chromatogram.IChromatogra
 import org.eclipse.chemclipse.chromatogram.filter.exceptions.NoChromatogramFilterSupplierAvailableException;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessorSupplier;
+import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.eclipse.chemclipse.processing.core.ICategories;
@@ -56,7 +56,7 @@ public class ChromatogramFilterMSDProcessSupplier implements IProcessTypeSupplie
 		}
 	}
 
-	private static final class ChromatogramFilterMSDProcessorSupplier extends ChromatogramSelectionProcessorSupplier<IChromatogramFilterSettings> {
+	private static final class ChromatogramFilterMSDProcessorSupplier extends ChromatogramSelectionProcessSupplier<IChromatogramFilterSettings> {
 
 		private IChromatogramFilterSupplier supplier;
 

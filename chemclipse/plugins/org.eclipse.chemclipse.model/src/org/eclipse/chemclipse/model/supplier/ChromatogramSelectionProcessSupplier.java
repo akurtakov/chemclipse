@@ -23,14 +23,14 @@ import org.eclipse.chemclipse.processing.supplier.IProcessTypeSupplier;
 import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
 import org.eclipse.core.runtime.IProgressMonitor;
 
-public abstract class ChromatogramSelectionProcessorSupplier<SettingsClass> extends AbstractProcessSupplier<SettingsClass> implements IChromatogramSelectionProcessSupplier<SettingsClass> {
+public abstract class ChromatogramSelectionProcessSupplier<SettingsClass> extends AbstractProcessSupplier<SettingsClass> implements IChromatogramSelectionProcessSupplier<SettingsClass> {
 
-	protected ChromatogramSelectionProcessorSupplier(String id, String name, String description, Class<SettingsClass> settingsClass, IProcessTypeSupplier parent, DataType... dataTypes) {
+	protected ChromatogramSelectionProcessSupplier(String id, String name, String description, Class<SettingsClass> settingsClass, IProcessTypeSupplier parent, DataType... dataTypes) {
 
 		super(id, name, description, settingsClass, parent, convert(dataTypes));
 	}
 
-	protected ChromatogramSelectionProcessorSupplier(String id, String name, String description, Class<SettingsClass> settingsClass, IProcessTypeSupplier parent, int b, DataCategory... dataTypes) {
+	protected ChromatogramSelectionProcessSupplier(String id, String name, String description, Class<SettingsClass> settingsClass, IProcessTypeSupplier parent, int b, DataCategory... dataTypes) {
 
 		super(id, name, description, settingsClass, parent, dataTypes);
 	}

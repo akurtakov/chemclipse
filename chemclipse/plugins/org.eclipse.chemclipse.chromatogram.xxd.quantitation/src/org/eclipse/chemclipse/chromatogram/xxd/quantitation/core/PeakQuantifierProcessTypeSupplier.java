@@ -22,7 +22,7 @@ import org.eclipse.chemclipse.chromatogram.xxd.quantitation.settings.IPeakQuanti
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessorSupplier;
+import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
@@ -56,7 +56,7 @@ public class PeakQuantifierProcessTypeSupplier implements IProcessTypeSupplier {
 		}
 	}
 
-	private static final class PeakQuantifierProcessorSupplier extends ChromatogramSelectionProcessorSupplier<IPeakQuantifierSettings> {
+	private static final class PeakQuantifierProcessorSupplier extends ChromatogramSelectionProcessSupplier<IPeakQuantifierSettings> {
 
 		@SuppressWarnings("unchecked")
 		public PeakQuantifierProcessorSupplier(IPeakQuantifierSupplier supplier, IProcessTypeSupplier parent) {

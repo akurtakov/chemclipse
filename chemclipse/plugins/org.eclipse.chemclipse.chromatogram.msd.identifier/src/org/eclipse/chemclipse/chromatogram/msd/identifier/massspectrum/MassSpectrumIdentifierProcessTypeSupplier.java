@@ -19,7 +19,7 @@ import java.util.List;
 import org.eclipse.chemclipse.chromatogram.msd.identifier.settings.IMassSpectrumIdentifierSettings;
 import org.eclipse.chemclipse.model.exceptions.NoIdentifierAvailableException;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessorSupplier;
+import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.eclipse.chemclipse.processing.core.ICategories;
@@ -54,7 +54,7 @@ public class MassSpectrumIdentifierProcessTypeSupplier implements IProcessTypeSu
 		}
 	}
 
-	private static final class MassSpectrumIdentifierProcessorSupplier extends ChromatogramSelectionProcessorSupplier<IMassSpectrumIdentifierSettings> {
+	private static final class MassSpectrumIdentifierProcessorSupplier extends ChromatogramSelectionProcessSupplier<IMassSpectrumIdentifierSettings> {
 
 		private IMassSpectrumIdentifierSupplier supplier;
 

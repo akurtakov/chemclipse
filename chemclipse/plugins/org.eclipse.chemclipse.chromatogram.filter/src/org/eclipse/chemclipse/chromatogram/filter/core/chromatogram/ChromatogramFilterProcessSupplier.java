@@ -20,7 +20,7 @@ import java.util.List;
 import org.eclipse.chemclipse.chromatogram.filter.exceptions.NoChromatogramFilterSupplierAvailableException;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessorSupplier;
+import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
@@ -54,7 +54,7 @@ public class ChromatogramFilterProcessSupplier implements IProcessTypeSupplier {
 		}
 	}
 
-	private static final class ChromatogramFilterProcessorSupplier extends ChromatogramSelectionProcessorSupplier<IChromatogramFilterSettings> {
+	private static final class ChromatogramFilterProcessorSupplier extends ChromatogramSelectionProcessSupplier<IChromatogramFilterSettings> {
 
 		private IChromatogramFilterSupplier supplier;
 

@@ -25,7 +25,7 @@ import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.model.settings.AbstractProcessSettings;
 import org.eclipse.chemclipse.model.settings.IProcessSettings;
-import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessorSupplier;
+import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
@@ -60,7 +60,7 @@ public class ChromatogramReportsProcessSupplier implements IProcessTypeSupplier 
 		}
 	}
 
-	private static final class ChromatogramReportProcessorSupplier extends ChromatogramSelectionProcessorSupplier<IChromatogramReportSettings> {
+	private static final class ChromatogramReportProcessorSupplier extends ChromatogramSelectionProcessSupplier<IChromatogramReportSettings> {
 
 		private IChromatogramReportSupplier supplier;
 

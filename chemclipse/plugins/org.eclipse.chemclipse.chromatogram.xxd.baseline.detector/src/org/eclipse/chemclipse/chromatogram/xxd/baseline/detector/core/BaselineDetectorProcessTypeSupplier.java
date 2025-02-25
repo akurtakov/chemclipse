@@ -20,7 +20,7 @@ import java.util.List;
 import org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.exceptions.NoBaselineDetectorAvailableException;
 import org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.settings.IBaselineDetectorSettings;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessorSupplier;
+import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
@@ -55,7 +55,7 @@ public class BaselineDetectorProcessTypeSupplier implements IProcessTypeSupplier
 		return supplierList;
 	}
 
-	private static final class BaselineDetectorProcessorSupplier extends ChromatogramSelectionProcessorSupplier<IBaselineDetectorSettings> {
+	private static final class BaselineDetectorProcessorSupplier extends ChromatogramSelectionProcessSupplier<IBaselineDetectorSettings> {
 
 		@SuppressWarnings("unchecked")
 		public BaselineDetectorProcessorSupplier(IBaselineDetectorSupplier supplier, IProcessTypeSupplier parent) {

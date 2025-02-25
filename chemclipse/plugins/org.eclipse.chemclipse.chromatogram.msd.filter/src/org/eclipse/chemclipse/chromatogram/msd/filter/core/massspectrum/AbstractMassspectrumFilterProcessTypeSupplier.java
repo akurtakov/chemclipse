@@ -20,7 +20,7 @@ import java.util.function.Function;
 import org.eclipse.chemclipse.chromatogram.msd.filter.exceptions.NoMassSpectrumFilterSupplierAvailableException;
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.IMassSpectrumFilterSettings;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessorSupplier;
+import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
@@ -62,7 +62,7 @@ public abstract class AbstractMassspectrumFilterProcessTypeSupplier implements I
 		}
 	}
 
-	private static final class MassSpectrumFilterProcessorSupplier extends ChromatogramSelectionProcessorSupplier<IMassSpectrumFilterSettings> {
+	private static final class MassSpectrumFilterProcessorSupplier extends ChromatogramSelectionProcessSupplier<IMassSpectrumFilterSettings> {
 
 		private final IMassSpectrumFilterSupplier supplier;
 		private final Function<IChromatogramSelection, List<IScanMSD>> extractionFunction;
