@@ -24,6 +24,7 @@ import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessorSuppl
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
+import org.eclipse.chemclipse.processing.core.MessageType;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessTypeSupplier;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -67,7 +68,7 @@ public class BaselineDetectorProcessTypeSupplier implements IProcessTypeSupplier
 		public IChromatogramSelection apply(IChromatogramSelection chromatogramSelection, IBaselineDetectorSettings processSettings, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
 			if(processSettings == null) {
-				messageConsumer.addMessages(BaselineDetector.setBaseline(chromatogramSelection, getId(), monitor));
+				messageConsumer.addMessage(getCategory(), "The baseline detector settings must not be null.", MessageType.ERROR);
 			} else {
 				messageConsumer.addMessages(BaselineDetector.setBaseline(chromatogramSelection, processSettings, getId(), monitor));
 			}

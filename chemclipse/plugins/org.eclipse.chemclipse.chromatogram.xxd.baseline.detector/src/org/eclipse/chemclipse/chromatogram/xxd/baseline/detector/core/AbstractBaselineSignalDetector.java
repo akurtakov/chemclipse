@@ -8,6 +8,7 @@
  * 
  * Contributors:
  * Jan Holy - initial API and implementation
+ * Philip Wenig - get rid of system settings
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.core;
 
@@ -46,17 +47,6 @@ public abstract class AbstractBaselineSignalDetector extends AbstractBaselineDet
 		IProcessingInfo<?> processingInfo = validate(chromatogramSelection, baselineDetectorSettings, monitor);
 		if(!processingInfo.hasErrorMessages()) {
 			return process(chromatogramSelection, baselineDetectorSettings, monitor);
-		} else {
-			return processingInfo;
-		}
-	}
-
-	@Override
-	public IProcessingInfo<?> setBaseline(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		IProcessingInfo<?> processingInfo = validate(chromatogramSelection, monitor);
-		if(!processingInfo.hasErrorMessages()) {
-			return process(chromatogramSelection, null, monitor);
 		} else {
 			return processingInfo;
 		}

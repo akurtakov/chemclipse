@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2024 Lablicate GmbH.
+ * Copyright (c) 2013, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  * Matthias Mailänder - remove the window size enum
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.settings;
@@ -34,12 +34,12 @@ public class BaselineDetectorSettings extends AbstractBaselineDetectorSettings {
 	@JsonProperty(value = "Number of Iterations", defaultValue = "100")
 	@JsonPropertyDescription(value = "The number of iterations to apply the SNIP filter.")
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_ITERATIONS, maxValue = PreferenceSupplier.MAX_ITERATIONS)
-	private int iterations = PreferenceSupplier.DEF_ITERATIONS;
+	private int iterations = 100;
 	@JsonProperty(value = "Window Size", defaultValue = "5")
 	@JsonPropertyDescription(value = "Window Size: 3, 5, 7, ..., 45")
 	@JsonDeserialize(using = WindowSizeDeserializer.class)
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_WINDOW_SIZE, maxValue = PreferenceSupplier.MAX_WINDOW_SIZE, validation = Validation.ODD_NUMBER_INCLUDING_ZERO)
-	private int windowSize = PreferenceSupplier.DEF_WINDOW_SIZE;
+	private int windowSize = 5;
 
 	public int getWindowSize() {
 

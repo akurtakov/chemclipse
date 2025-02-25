@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2023 Lablicate GmbH.
+ * Copyright (c) 2014, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  * Christoph Läubrich - add generics, remove obsolete methods
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.core;
@@ -20,7 +20,6 @@ import org.eclipse.chemclipse.chromatogram.msd.filter.result.IMassSpectrumFilter
 import org.eclipse.chemclipse.chromatogram.msd.filter.result.MassSpectrumFilterResult;
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.IMassSpectrumFilterSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.calculator.FilterSupplier;
-import org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.settings.MassSpectrumFilterSettings;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -35,24 +34,29 @@ public class MassSpectrumFilter extends AbstractMassSpectrumFilter {
 	@Override
 	public IProcessingInfo<IMassSpectrumFilterResult> applyFilter(List<IScanMSD> massSpectra, IMassSpectrumFilterSettings filterSettings, IProgressMonitor monitor) {
 
-		if(filterSettings == null) {
-			filterSettings = PreferenceSupplier.getMassSpectrumFilterSettings();
+		/*
+		 * Settings
+		 */
+		MassSpectrumFilterSettings massSpectrumFilterSettings;
+		if(filterSettings instanceof MassSpectrumFilterSettings settings) {
+			massSpectrumFilterSettings = settings;
+		} else {
+			massSpectrumFilterSettings = new MassSpectrumFilterSettings();
 		}
+		/*
+		 * Filter
+		 */
 		IProcessingInfo<IMassSpectrumFilterResult> processingInfo = validate(massSpectra, filterSettings);
 		if(!processingInfo.hasErrorMessages()) {
-			if(filterSettings instanceof MassSpectrumFilterSettings massSpectrumFilterSettings) {
-				FilterSupplier filterSupplier = new FilterSupplier();
-				int iterations = massSpectrumFilterSettings.getIterations();
-				int transitions = massSpectrumFilterSettings.getTransitions();
-				double magnificationFactor = massSpectrumFilterSettings.getMagnificationFactor();
-				filterSupplier.applySnipFilter(massSpectra, iterations, transitions, magnificationFactor, monitor);
-				//
-				processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, DESCRIPTION, "The mass spectrum has been optimized successfully."));
-				IMassSpectrumFilterResult massSpectrumFilterResult = new MassSpectrumFilterResult(ResultStatus.OK, "The SNIP filter has been applied successfully.");
-				processingInfo.setProcessingResult(massSpectrumFilterResult);
-			} else {
-				processingInfo.addErrorMessage(DESCRIPTION, "The filter settings instance is not a type of: " + MassSpectrumFilterSettings.class);
-			}
+			FilterSupplier filterSupplier = new FilterSupplier();
+			int iterations = massSpectrumFilterSettings.getIterations();
+			int transitions = massSpectrumFilterSettings.getTransitions();
+			double magnificationFactor = massSpectrumFilterSettings.getMagnificationFactor();
+			filterSupplier.applySnipFilter(massSpectra, iterations, transitions, magnificationFactor, monitor);
+			//
+			processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, DESCRIPTION, "The mass spectrum has been optimized successfully."));
+			IMassSpectrumFilterResult massSpectrumFilterResult = new MassSpectrumFilterResult(ResultStatus.OK, "The SNIP filter has been applied successfully.");
+			processingInfo.setProcessingResult(massSpectrumFilterResult);
 		}
 		//
 		return processingInfo;

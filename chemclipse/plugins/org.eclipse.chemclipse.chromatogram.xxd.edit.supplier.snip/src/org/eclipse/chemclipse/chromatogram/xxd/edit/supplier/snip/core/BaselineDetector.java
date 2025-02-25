@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  * Christoph Läubrich - use static {@link SnipCalculator} method, remove warnings and make method static for reuse
  * Matthias Mailänder - remove the window size enum
  *******************************************************************************/
@@ -16,7 +16,6 @@ package org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.core;
 import org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.core.AbstractBaselineDetector;
 import org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.settings.IBaselineDetectorSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.calculator.SnipCalculator;
-import org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.settings.BaselineDetectorSettings;
 import org.eclipse.chemclipse.model.baseline.IBaselineModel;
 import org.eclipse.chemclipse.model.core.IChromatogram;
@@ -44,13 +43,6 @@ public class BaselineDetector extends AbstractBaselineDetector {
 			}
 		}
 		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<?> setBaseline(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		BaselineDetectorSettings baselineDetectorSettings = PreferenceSupplier.getBaselineDetectorSettings();
-		return setBaseline(chromatogramSelection, baselineDetectorSettings, monitor);
 	}
 
 	/**

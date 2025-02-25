@@ -7,7 +7,7 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.core;
 
@@ -76,26 +76,6 @@ public class BaselineDetector {
 		if(detector != null && chromatogramSelection != null) {
 			processingInfo = detector.setBaseline(chromatogramSelection, baselineDetectorSettings, monitor);
 			chromatogramSelection.getChromatogram().setDirty(true);
-		} else {
-			processingInfo = getNoDetectorAvailableProcessingInfo();
-		}
-		return processingInfo;
-	}
-
-	/**
-	 * See also other set baseline method. This method needs no settings.
-	 * 
-	 * @param chromatogramSelection
-	 * @param detectorId
-	 * @param monitor
-	 * @return IProcessingInfo
-	 */
-	public static IProcessingInfo<?> setBaseline(IChromatogramSelection chromatogramSelection, final String detectorId, IProgressMonitor monitor) {
-
-		IProcessingInfo<?> processingInfo;
-		IBaselineDetector detector = getBaselineDetector(detectorId);
-		if(detector != null) {
-			processingInfo = detector.setBaseline(chromatogramSelection, monitor);
 		} else {
 			processingInfo = getNoDetectorAvailableProcessingInfo();
 		}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2023 Lablicate GmbH.
+ * Copyright (c) 2014, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  * Christoph Läubrich - adjust to new API
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.core;
@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IPeakFilterSettings;
 import org.eclipse.chemclipse.chromatogram.msd.filter.core.peak.AbstractPeakFilter;
 import org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.calculator.FilterSupplier;
-import org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.settings.PeakFilterSettings;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
@@ -38,27 +37,38 @@ public class PeakFilter extends AbstractPeakFilter {
 	@Override
 	public IProcessingInfo<IPeakFilterResult> applyFilter(List<IPeakMSD> peaks, IPeakFilterSettings filterSettings, IProgressMonitor monitor) {
 
+		/*
+		 * Settings
+		 */
 		PeakFilterSettings peakFilterSettings;
 		if(filterSettings instanceof PeakFilterSettings settings) {
 			peakFilterSettings = settings;
 		} else {
-			peakFilterSettings = PreferenceSupplier.getPeakFilterSettings();
+			peakFilterSettings = new PeakFilterSettings();
 		}
+		/*
+		 * Filter
+		 */
 		FilterSupplier filterSupplier = new FilterSupplier();
+		int iterations = peakFilterSettings.getIterations();
+		int transitions = peakFilterSettings.getTransitions();
+		double magnificationFactor = peakFilterSettings.getMagnificationFactor();
+		filterSupplier.applySnipFilter(getMassSpectra(peaks), iterations, transitions, magnificationFactor, monitor);
+		IProcessingInfo<IPeakFilterResult> processingInfo = new ProcessingInfo<>();
+		processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, DESCRIPTION, "The mass spectrum has been optimized successfully."));
+		IPeakFilterResult peakFilterResult = new PeakFilterResult(ResultStatus.OK, "The SNIP filter has been applied successfully.");
+		processingInfo.setProcessingResult(peakFilterResult);
+		//
+		return processingInfo;
+	}
+
+	private List<IScanMSD> getMassSpectra(List<IPeakMSD> peaks) {
+
 		List<IScanMSD> massSpectra = new ArrayList<>();
 		for(IPeakMSD peakMSD : peaks) {
 			massSpectra.add(peakMSD.getPeakModel().getPeakMassSpectrum());
 		}
 		//
-		int iterations = peakFilterSettings.getIterations();
-		int transitions = peakFilterSettings.getTransitions();
-		double magnificationFactor = peakFilterSettings.getMagnificationFactor();
-		filterSupplier.applySnipFilter(massSpectra, iterations, transitions, magnificationFactor, monitor);
-		IProcessingInfo<IPeakFilterResult> processingInfo = new ProcessingInfo<>();
-		//
-		processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, DESCRIPTION, "The mass spectrum has been optimized successfully."));
-		IPeakFilterResult peakFilterResult = new PeakFilterResult(ResultStatus.OK, "The SNIP filter has been applied successfully.");
-		processingInfo.setProcessingResult(peakFilterResult);
-		return processingInfo;
+		return massSpectra;
 	}
 }

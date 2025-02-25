@@ -2,24 +2,6 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.eclipse.ui.preferencePages">
-      <page
-            category="org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.ui.preferences.baselineDetectorPreferencePage"
-            class="org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.ui.preferences.PreferencePage"
-            id="org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.ui"
-            name="SNIP Detector/Filter">
-      </page>
-   </extension>
-   <extension
-         point="org.eclipse.ui.preferencePages">
-      <page
-            category="org.eclipse.chemclipse.chromatogram.msd.filter.ui.preferences.filterPreferencePage"
-            class="org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.ui.preferences.PreferencePage"
-            id="org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.ui.peak"
-            name="SNIP Detector/Filter">
-      </page>
-   </extension>
-   <extension
          point="org.eclipse.chemclipse.xxd.process.ui.menu.icon">
       <icon
             class="org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.ui.icon.SnipBaselineMenuIcon"
