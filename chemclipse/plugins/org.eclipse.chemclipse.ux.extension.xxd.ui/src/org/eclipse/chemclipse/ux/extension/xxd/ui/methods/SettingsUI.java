@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 import org.eclipse.chemclipse.support.l10n.TranslationSupport;
@@ -43,33 +44,35 @@ import org.eclipse.swt.widgets.Listener;
 
 public class SettingsUI<T> extends Composite {
 
-	private final SettingsUIControl control;
+	private AtomicReference<SettingsUIControl> control = new AtomicReference<>();
 
 	public SettingsUI(Composite parent, IProcessorPreferences<T> preferences, boolean showProfileToolbar) throws IOException {
 
 		super(parent, SWT.NONE);
-		setLayout(new FillLayout());
-		control = loadSettingsUIProvider(preferences).createUI(this, preferences, showProfileToolbar);
+		createControl(preferences, showProfileToolbar);
 	}
 
 	@Override
 	public void setEnabled(boolean enabled) {
 
-		control.setEnabled(enabled);
+		control.get().setEnabled(enabled);
 		super.setEnabled(enabled);
 	}
 
 	public SettingsUIControl getControl() {
 
-		return control;
+		return control.get();
 	}
 
-	public void update(IProcessorPreferences<T> preferences) {
+	private void createControl(IProcessorPreferences<T> preferences, boolean showProfileToolbar) throws IOException {
 
-		loadSettingsUIProvider(preferences);
+		setLayout(new FillLayout());
+		//
+		SettingsUIProvider<T> settingsUIProvider = createSettingsUIProvider(preferences);
+		control.set(settingsUIProvider.createUI(this, preferences, showProfileToolbar));
 	}
 
-	private SettingsUIProvider<T> loadSettingsUIProvider(IProcessorPreferences<T> preferences) {
+	private SettingsUIProvider<T> createSettingsUIProvider(IProcessorPreferences<T> preferences) {
 
 		T settings = preferences.getUserSettings();
 		if(settings == null) {
@@ -77,12 +80,12 @@ public class SettingsUI<T> extends Composite {
 		}
 		//
 		@SuppressWarnings("unchecked")
-		SettingsUIProvider<T> uiProvider = Adapters.adapt(settings, SettingsUIProvider.class);
-		if(uiProvider != null) {
-			return uiProvider;
+		SettingsUIProvider<T> settingsUIProvider = Adapters.adapt(settings, SettingsUIProvider.class);
+		if(settingsUIProvider == null) {
+			settingsUIProvider = new DefaultSettingsUIProvider<>();
 		}
-
-		return new DefaultSettingsUIProvider<>();
+		//
+		return settingsUIProvider;
 	}
 
 	private static final class DefaultSettingsUIProvider<T> implements SettingsUIProvider<T> {
@@ -136,26 +139,37 @@ public class SettingsUI<T> extends Composite {
 
 		private void createOptionWidgets(Composite parent) {
 
+			TranslationService translationService = TranslationSupport.getTranslationService();
 			for(WidgetItem widgetItem : widgetItems) {
 				Label label = new Label(parent, SWT.NONE);
-				String contributorURI = widgetItem.getInputValue().getContributorURI();
-				TranslationService translationService = TranslationSupport.getTranslationService();
-				if(widgetItem.getInputValue().getLabel() != null && !widgetItem.getInputValue().getLabel().isEmpty()) {
-					label.setText(translationService.translate(widgetItem.getInputValue().getLabel(), contributorURI));
-				} else {
-					label.setText(widgetItem.getInputValue().getName());
-				}
-				if(widgetItem.getInputValue().getTooltip() != null && !widgetItem.getInputValue().getTooltip().isEmpty()) {
-					label.setToolTipText(translationService.translate(widgetItem.getInputValue().getTooltip(), contributorURI));
-				} else {
-					label.setToolTipText(widgetItem.getInputValue().getDescription());
-				}
+				label.setText(getLabelText(widgetItem, translationService));
+				label.setToolTipText(getLabelToolTipText(widgetItem, translationService));
 				GridData data = new GridData(SWT.LEFT, SWT.TOP, false, false);
 				data.verticalIndent = 5;
 				data.horizontalIndent = 5;
 				label.setLayoutData(data);
 				labels.add(label);
 				widgetItem.initializeControl(parent);
+			}
+		}
+
+		private String getLabelText(WidgetItem widgetItem, TranslationService translationService) {
+
+			if(widgetItem.getInputValue().getLabel() != null && !widgetItem.getInputValue().getLabel().isEmpty()) {
+				String contributorURI = widgetItem.getInputValue().getContributorURI();
+				return translationService.translate(widgetItem.getInputValue().getLabel(), contributorURI);
+			} else {
+				return widgetItem.getInputValue().getName();
+			}
+		}
+
+		private String getLabelToolTipText(WidgetItem widgetItem, TranslationService translationService) {
+
+			if(widgetItem.getInputValue().getTooltip() != null && !widgetItem.getInputValue().getTooltip().isEmpty()) {
+				String contributorURI = widgetItem.getInputValue().getContributorURI();
+				return translationService.translate(widgetItem.getInputValue().getTooltip(), contributorURI);
+			} else {
+				return widgetItem.getInputValue().getDescription();
 			}
 		}
 
