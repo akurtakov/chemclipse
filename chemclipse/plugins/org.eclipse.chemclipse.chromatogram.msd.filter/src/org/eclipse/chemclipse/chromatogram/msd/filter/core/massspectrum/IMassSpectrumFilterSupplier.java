@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2019 Lablicate GmbH.
+ * Copyright (c) 2014, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -42,5 +42,5 @@ public interface IMassSpectrumFilterSupplier {
 	 * 
 	 * @return the config class for this supplier
 	 */
-	Class<? extends IMassSpectrumFilterSettings> getConfigClass();
+	Class<? extends IMassSpectrumFilterSettings> getSettingsClass();
 }
