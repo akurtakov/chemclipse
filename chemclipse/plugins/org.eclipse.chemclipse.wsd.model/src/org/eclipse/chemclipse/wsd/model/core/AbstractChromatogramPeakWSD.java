@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2023 Lablicate GmbH.
+ * Copyright (c) 2018, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -105,22 +105,6 @@ public abstract class AbstractChromatogramPeakWSD extends AbstractPeakWSD implem
 	public IChromatogramWSD getChromatogram() {
 
 		return chromatogram;
-	}
-
-	@Override
-	public boolean equals(Object otherObject) {
-
-		if(this == otherObject) {
-			return true;
-		}
-		if(otherObject == null) {
-			return false;
-		}
-		if(getClass() != otherObject.getClass()) {
-			return false;
-		}
-		AbstractChromatogramPeakWSD other = (AbstractChromatogramPeakWSD)otherObject;
-		return getPeakModel().equals(other.getPeakModel()) && chromatogram == other.getChromatogram();
 	}
 
 	@Override
