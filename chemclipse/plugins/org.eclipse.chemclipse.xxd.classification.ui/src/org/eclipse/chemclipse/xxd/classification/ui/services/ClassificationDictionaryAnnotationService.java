@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2024 Lablicate GmbH.
+ * Copyright (c) 2022, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.classification.ui.services;
 
-import org.eclipse.chemclipse.ux.extension.xxd.ui.methods.IAnnotationWidgetService;
+import org.eclipse.chemclipse.ux.extension.ui.methods.IAnnotationWidgetService;
 import org.eclipse.chemclipse.xxd.classification.service.ClassificationDictionarySerializationService;
 import org.eclipse.chemclipse.xxd.classification.ui.swt.ClassificationDictionaryEditor;
 import org.eclipse.swt.SWT;

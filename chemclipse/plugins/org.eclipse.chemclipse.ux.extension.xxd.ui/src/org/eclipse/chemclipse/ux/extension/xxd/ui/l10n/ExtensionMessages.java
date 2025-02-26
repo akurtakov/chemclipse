@@ -257,28 +257,7 @@ public class ExtensionMessages extends NLS {
 	public static String completeMethod;
 	public static String rememberDecisionDontShowAgain;
 	public static String revertDecisionInSettings;
-	public static String editStoredDataForSelectedProcessor;
-	public static String removeStoredDataResetDefaultsForSelectedProcessor;
-	public static String removeAllStoredDataResetDefaults;
-	public static String resetSettingsForAllProcessors;
-	public static String expandAllProcessorItems;
-	public static String collapseAllProcessorItems;
-	public static String displaySettings;
-	public static String yes;
-	public static String no;
-	public static String options;
-	public static String systemDefault;
-	public static String resetSettingsForSelectedProcessors;
-	public static String rememberDecision;
-	public static String resetDefaults;
 	public static String resetPlate;
-	public static String processorOffersNoOptions;
-	public static String editProcessorOptions;
-	public static String selectOptionsForProcessorName;
-	public static String manageProcessorOptions;
-	public static String managePreferences;
-	public static String processorOptionsBelowSelectToManageRemoveState;
-	public static String chooseLocation;
 	public static String text;
 	public static String namedTrace;
 	public static String unknown;
@@ -333,10 +312,6 @@ public class ExtensionMessages extends NLS {
 	public static String fluorescence;
 	public static String pcrExport;
 	public static String plateChart;
-	public static String literatureReferences;
-	public static String literatureReference;
-	public static String noLinkIsSupplierYet;
-	public static String openInExternalBrowser;
 	public static String transmittance;
 	public static String absorbance;
 	public static String wavenumber;
@@ -347,7 +322,7 @@ public class ExtensionMessages extends NLS {
 	public static String tooltipRecordMethod;
 	public static String recordMethodMessage;
 	public static String descriptionRecordMethod;
-	//
+
 	static {
 		NLS.initializeMessages("org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.messages", ExtensionMessages.class); //$NON-NLS-1$
 	}

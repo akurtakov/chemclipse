@@ -10,7 +10,7 @@
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - move method to open wizard, refactor for new settings
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.methods;
+package org.eclipse.chemclipse.ux.extension.ui.methods;
 
 import java.io.IOException;
 import java.text.MessageFormat;
@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences.DialogBehavior;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
+import org.eclipse.chemclipse.ux.extension.ui.l10n.Messages;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.Wizard;
@@ -56,10 +56,10 @@ public class SettingsWizard extends Wizard {
 	public static <T> boolean openEditPreferencesWizard(Shell shell, IProcessorPreferences<T> preferences, boolean showProfileToolbar) throws IOException {
 
 		IProcessSupplier<T> processorSupplier = preferences.getSupplier();
-		SettingsWizard settingsWizard = new SettingsWizard(ExtensionMessages.editProcessorOptions);
+		SettingsWizard settingsWizard = new SettingsWizard(Messages.editProcessorOptions);
 		//
 		SettingsPreferencesPage<T> settingsPreferencePage = new SettingsPreferencesPage<>(preferences, showProfileToolbar);
-		settingsPreferencePage.setTitle(MessageFormat.format(ExtensionMessages.selectOptionsForProcessorName, processorSupplier.getName()));
+		settingsPreferencePage.setTitle(MessageFormat.format(Messages.selectOptionsForProcessorName, processorSupplier.getName()));
 		settingsPreferencePage.setMessage(processorSupplier.getDescription());
 		settingsWizard.addPage(settingsPreferencePage);
 		//
@@ -84,10 +84,10 @@ public class SettingsWizard extends Wizard {
 	 */
 	public static void openManagePreferencesWizard(Shell shell, Supplier<Collection<IProcessorPreferences<?>>> preferenceSupplier) {
 
-		SettingsWizard wizard = new SettingsWizard(ExtensionMessages.manageProcessorOptions);
+		SettingsWizard wizard = new SettingsWizard(Messages.manageProcessorOptions);
 		SettingsPreferencesEditPage page = new SettingsPreferencesEditPage(preferenceSupplier);
-		page.setTitle(ExtensionMessages.managePreferences);
-		page.setDescription(ExtensionMessages.processorOptionsBelowSelectToManageRemoveState);
+		page.setTitle(Messages.managePreferences);
+		page.setDescription(Messages.processorOptionsBelowSelectToManageRemoveState);
 		wizard.addPage(page);
 		WizardDialog wizardDialog = new WizardDialog(shell, wizard) {
 

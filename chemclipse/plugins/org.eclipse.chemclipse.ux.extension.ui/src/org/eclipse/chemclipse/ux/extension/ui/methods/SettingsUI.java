@@ -10,7 +10,7 @@
  * Christoph Läubrich - initial API and implementation
  * Philip Wenig - enable profiles
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.methods;
+package org.eclipse.chemclipse.ux.extension.ui.methods;
 
 import static org.eclipse.chemclipse.support.ui.swt.ControlBuilder.createContainer;
 
@@ -25,9 +25,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 import org.eclipse.chemclipse.support.l10n.TranslationSupport;
 import org.eclipse.chemclipse.support.settings.parser.InputValue;
-import org.eclipse.chemclipse.ux.extension.ui.methods.SettingsUIProvider;
+import org.eclipse.chemclipse.ux.extension.ui.l10n.Messages;
 import org.eclipse.chemclipse.ux.extension.ui.methods.SettingsUIProvider.SettingsUIControl;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.IStatus;
@@ -176,7 +175,7 @@ public class SettingsUI<T> extends Composite {
 		private void createNoOptionsMessage(Composite parent) {
 
 			Label label = new Label(parent, SWT.NONE);
-			label.setText(ExtensionMessages.processorOffersNoOptions);
+			label.setText(Messages.processorOffersNoOptions);
 			label.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		}
 
