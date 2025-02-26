@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2020 Lablicate GmbH.
+ * Copyright (c) 2014, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -28,6 +28,7 @@ public abstract class AbstractChromatogramPeakCSD extends AbstractPeakCSD implem
 	 * @throws PeakException
 	 */
 	public AbstractChromatogramPeakCSD(IPeakModelCSD peakModel, IChromatogramCSD chromatogram) throws IllegalArgumentException, PeakException {
+
 		super(peakModel);
 		validateChromatogram(chromatogram);
 		validateRetentionTimes(chromatogram, peakModel);
@@ -39,6 +40,7 @@ public abstract class AbstractChromatogramPeakCSD extends AbstractPeakCSD implem
 	}
 
 	public AbstractChromatogramPeakCSD(IPeakModelCSD peakModel, IChromatogramCSD chromatogram, String modelDescription) throws IllegalArgumentException, PeakException {
+
 		this(peakModel, chromatogram);
 		setModelDescription(modelDescription);
 	}
@@ -82,22 +84,6 @@ public abstract class AbstractChromatogramPeakCSD extends AbstractPeakCSD implem
 	public IChromatogramCSD getChromatogram() {
 
 		return chromatogram;
-	}
-
-	@Override
-	public boolean equals(Object otherObject) {
-
-		if(this == otherObject) {
-			return true;
-		}
-		if(otherObject == null) {
-			return false;
-		}
-		if(getClass() != otherObject.getClass()) {
-			return false;
-		}
-		AbstractChromatogramPeakCSD other = (AbstractChromatogramPeakCSD)otherObject;
-		return getPeakModel().equals(other.getPeakModel()) && chromatogram == other.getChromatogram();
 	}
 
 	@Override
