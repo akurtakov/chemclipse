@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2023 Lablicate GmbH.
+ * Copyright (c) 2011, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  * Christoph Läubrich - change to static access, tune method signatures
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.internal.core.support;
@@ -18,8 +18,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.exceptions.ClassifierException;
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.IWncIon;
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.IWncIons;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.TargetTrace;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.TargetTraces;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.settings.ClassifierSettings;
 import org.eclipse.chemclipse.model.support.IRetentionTimeRange;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
@@ -28,18 +28,18 @@ import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignal;
 
 public class Calculator {
 
-	public IWncIons calculateIonPercentages(IChromatogramSelectionMSD chromatogramSelection, ClassifierSettings classifierSettings) throws ClassifierException {
+	public TargetTraces calculateIonPercentages(IChromatogramSelectionMSD chromatogramSelection, ClassifierSettings classifierSettings) throws ClassifierException {
 
 		return calculateIonPercentages(chromatogramSelection.getChromatogram(), chromatogramSelection, classifierSettings);
 	}
 
-	public static IWncIons calculateIonPercentages(IChromatogramMSD chromatogram, IRetentionTimeRange range, ClassifierSettings classifierSettings) throws ClassifierException {
+	public static TargetTraces calculateIonPercentages(IChromatogramMSD chromatogram, IRetentionTimeRange range, ClassifierSettings classifierSettings) throws ClassifierException {
 
-		IWncIons wncIons = classifierSettings.getWNCIons();
+		TargetTraces targetTraces = classifierSettings.getTargetTraces();
 		Map<Integer, Double> ionAbundanceValues = extractIonValues(chromatogram, range);
 		double factorMax = calculateFactorMax(ionAbundanceValues);
 		double factorSum = calculateFactorSum(ionAbundanceValues);
-		return calculateAndSetIntensityValues(ionAbundanceValues, wncIons, factorMax, factorSum);
+		return calculateAndSetIntensityValues(ionAbundanceValues, targetTraces, factorMax, factorSum);
 	}
 
 	private static Map<Integer, Double> extractIonValues(IChromatogramMSD chromatogram, IRetentionTimeRange range) {
@@ -94,11 +94,11 @@ public class Calculator {
 		return 100.0d / sumAbundance;
 	}
 
-	private static IWncIons calculateAndSetIntensityValues(Map<Integer, Double> ionAbundanceValues, IWncIons wncIons, double factorMax, double factorSum) {
+	private static TargetTraces calculateAndSetIntensityValues(Map<Integer, Double> ionAbundanceValues, TargetTraces targetTraces, double factorMax, double factorSum) {
 
 		double percentageMaxIntensity;
 		double percentageSumIntensity;
-		IWncIon wncIon;
+		TargetTrace targetTrace;
 		/*
 		 * Calculate the percentages.
 		 */
@@ -107,14 +107,14 @@ public class Calculator {
 			percentageMaxIntensity = factorMax * entry.getValue();
 			percentageSumIntensity = factorSum * entry.getValue();
 			/*
-			 * Get the wncIon if not null and assign the calculated intensities.
+			 * Get the targetTrace if not null and assign the calculated intensities.
 			 */
-			wncIon = wncIons.getWNCIon(entry.getKey());
-			if(wncIon != null) {
-				wncIon.setPercentageMaxIntensity(percentageMaxIntensity);
-				wncIon.setPercentageSumIntensity(percentageSumIntensity);
+			targetTrace = targetTraces.getTargetTrace(entry.getKey());
+			if(targetTrace != null) {
+				targetTrace.setPercentageMaxIntensity(percentageMaxIntensity);
+				targetTrace.setPercentageSumIntensity(percentageSumIntensity);
 			}
 		}
-		return wncIons;
+		return targetTraces;
 	}
 }

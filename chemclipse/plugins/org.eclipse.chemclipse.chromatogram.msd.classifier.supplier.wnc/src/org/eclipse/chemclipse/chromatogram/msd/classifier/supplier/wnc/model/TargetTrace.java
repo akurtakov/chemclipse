@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2022 Lablicate GmbH.
+ * Copyright (c) 2011, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,20 +7,21 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model;
 
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.preferences.PreferenceSupplier;
 
-public class WncIon implements IWncIon {
+public class TargetTrace {
 
 	private int ion;
 	private String name;
 	private double percentageMaxIntensity;
 	private double percentageSumIntensity;
 
-	public WncIon(int ion, String name) {
+	public TargetTrace(int ion, String name) {
+
 		this.ion = ion;
 		/*
 		 * Some characters are not allowed.
@@ -32,43 +33,36 @@ public class WncIon implements IWncIon {
 		this.name = name;
 	}
 
-	@Override
 	public int getIon() {
 
 		return ion;
 	}
 
-	@Override
 	public String getName() {
 
 		return name;
 	}
 
-	@Override
 	public double getPercentageMaxIntensity() {
 
 		return percentageMaxIntensity;
 	}
 
-	@Override
 	public void setPercentageMaxIntensity(double percentageMaxIntensity) {
 
 		this.percentageMaxIntensity = percentageMaxIntensity;
 	}
 
-	@Override
 	public double getPercentageSumIntensity() {
 
 		return percentageSumIntensity;
 	}
 
-	@Override
 	public void setPercentageSumIntensity(double percentageSumIntensity) {
 
 		this.percentageSumIntensity = percentageSumIntensity;
 	}
 
-	// -----------------------------equals, hashCode, toString
 	@Override
 	public boolean equals(Object otherObject) {
 
@@ -81,7 +75,7 @@ public class WncIon implements IWncIon {
 		if(getClass() != otherObject.getClass()) {
 			return false;
 		}
-		WncIon other = (WncIon)otherObject;
+		TargetTrace other = (TargetTrace)otherObject;
 		return ion == other.getIon() && name.equals(other.getName());
 	}
 
@@ -103,5 +97,4 @@ public class WncIon implements IWncIon {
 		builder.append("]");
 		return builder.toString();
 	}
-	// -----------------------------equals, hashCode, toString
 }

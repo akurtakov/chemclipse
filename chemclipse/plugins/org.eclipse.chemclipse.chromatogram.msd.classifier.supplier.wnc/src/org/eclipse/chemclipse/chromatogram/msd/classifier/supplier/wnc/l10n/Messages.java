@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023 Lablicate GmbH.
+ * Copyright (c) 2023, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * matthias - initial API and implementation
+ * Matthias Mailänder - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.l10n;
 
@@ -21,7 +21,7 @@ public class Messages extends NLS {
 	public static String chromatogramNotClassified;
 	public static String msdChromatogramsOnly;
 	public static String percentageAreaOfSelectedIons;
-	public static String wncIons;
+	public static String targetTraces;
 	public static String wncClassifier;
 	//
 	static {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2023 Lablicate GmbH.
+ * Copyright (c) 2011, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,15 +7,15 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.internal.preferences;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.IWncIon;
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.IWncIons;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.TargetTrace;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.TargetTraces;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.internal.provider.WncIonContentProvider;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.internal.provider.WncIonLabelProvider;
@@ -41,18 +41,18 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;;
 
-public class WncIonsListComposite {
+public class TargetTracesListComposite {
 
-	private IWncIons wncIons;
+	private TargetTraces targetTraces;
 	private TableViewer tableViewer;
-	private String[] titles = {"Name", "ion"};
+	private String[] titles = {"Name", "m/z"};
 	private int[] bounds = {100, 100};
 	private FontMetrics fontMetrics;
 	private static final int WIDTH_HINT = 400;
 
-	public WncIonsListComposite() {
+	public TargetTracesListComposite() {
 
-		wncIons = PreferenceSupplier.getWNCIons();
+		targetTraces = PreferenceSupplier.getTargetTraces();
 	}
 
 	public Control createContents(Composite parent) {
@@ -148,11 +148,11 @@ public class WncIonsListComposite {
 			public void widgetSelected(SelectionEvent e) {
 
 				Shell shell = Display.getCurrent().getActiveShell();
-				WncIonDialog dialog = new WncIonDialog(shell);
+				TargetTraceDialog dialog = new TargetTraceDialog(shell);
 				if(IDialogConstants.OK_ID == dialog.open()) {
-					IWncIon wncIon = dialog.getWNCIon();
-					if(wncIon != null) {
-						wncIons.add(wncIon);
+					TargetTrace targetTrace = dialog.getTargetTrace();
+					if(targetTrace != null) {
+						targetTraces.add(targetTrace);
 						setTableViewerInput();
 					}
 				}
@@ -171,13 +171,13 @@ public class WncIonsListComposite {
 
 				IStructuredSelection structuredSelection = (IStructuredSelection)tableViewer.getSelection();
 				Object object = structuredSelection.getFirstElement();
-				if(object instanceof IWncIon wncIon) {
+				if(object instanceof TargetTrace targetTrace) {
 					Shell shell = Display.getCurrent().getActiveShell();
-					WncIonDialog dialog = new WncIonDialog(shell, wncIon);
+					TargetTraceDialog dialog = new TargetTraceDialog(shell, targetTrace);
 					if(IDialogConstants.OK_ID == dialog.open()) {
-						wncIon = dialog.getWNCIon();
-						if(wncIon != null) {
-							wncIons.add(wncIon);
+						targetTrace = dialog.getTargetTrace();
+						if(targetTrace != null) {
+							targetTraces.add(targetTrace);
 							setTableViewerInput();
 						}
 					}
@@ -198,15 +198,15 @@ public class WncIonsListComposite {
 				List<Integer> removeIons = new ArrayList<>();
 				IStructuredSelection structuredSelection = (IStructuredSelection)tableViewer.getSelection();
 				for(Object object : structuredSelection.toArray()) {
-					if(object instanceof IWncIon wncIon) {
-						removeIons.add(wncIon.getIon());
+					if(object instanceof TargetTrace targetTrace) {
+						removeIons.add(targetTrace.getIon());
 					}
 				}
 				/*
 				 * Remove the objects.
 				 */
 				for(Integer ion : removeIons) {
-					wncIons.remove(ion);
+					targetTraces.remove(ion);
 				}
 				setTableViewerInput();
 			}
@@ -216,7 +216,7 @@ public class WncIonsListComposite {
 
 	private void setTableViewerInput() {
 
-		tableViewer.setInput(wncIons);
+		tableViewer.setInput(targetTraces);
 	}
 
 	private GridData setButtonLayoutData(Button button) {
@@ -238,7 +238,7 @@ public class WncIonsListComposite {
 
 	public boolean performOk() {
 
-		PreferenceSupplier.storeWNCIons(wncIons);
+		PreferenceSupplier.storeTargetTraces(targetTraces);
 		return true;
 	}
 }

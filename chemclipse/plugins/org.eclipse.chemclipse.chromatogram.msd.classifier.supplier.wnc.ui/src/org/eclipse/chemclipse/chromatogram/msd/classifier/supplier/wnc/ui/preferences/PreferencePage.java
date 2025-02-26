@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2023 Lablicate GmbH.
+ * Copyright (c) 2011, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This
  * program and the accompanying materials are made available under the terms of
@@ -7,32 +7,32 @@
  * available at http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.preferences;
 
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.Activator;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.internal.preferences.TargetTracesListComposite;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.l10n.Messages;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.IWorkbench;
-
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.Activator;
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.internal.preferences.WncIonsListComposite;
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.l10n.Messages;
+import org.eclipse.ui.IWorkbenchPreferencePage;
 
 public class PreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
-	private WncIonsListComposite wncIonsListComposite;
+	private TargetTracesListComposite targetTracesListComposite;
 
 	public PreferencePage() {
+
 		super(GRID);
 		setPreferenceStore(Activator.getDefault().getPreferenceStore());
 		setDescription(Messages.wncClassifierSettings);
-		wncIonsListComposite = new WncIonsListComposite();
+		targetTracesListComposite = new TargetTracesListComposite();
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		/*
 		 * The ion list composite shows the ions.
 		 */
-		wncIonsListComposite.createContents(composite);
+		targetTracesListComposite.createContents(composite);
 		return composite;
 	}
 
@@ -75,6 +75,6 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 	@Override
 	public boolean performOk() {
 
-		return wncIonsListComposite.performOk();
+		return targetTracesListComposite.performOk();
 	}
 }

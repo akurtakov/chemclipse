@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2023 Lablicate GmbH.
+ * Copyright (c) 2011, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -7,11 +7,11 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.internal.provider;
 
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.IWncIon;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.TargetTrace;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
@@ -34,13 +34,13 @@ public class WncIonLabelProvider extends AbstractChemClipseLabelProvider {
 	public String getColumnText(Object element, int columnIndex) {
 
 		String text = "";
-		if(element instanceof IWncIon wncIon) {
+		if(element instanceof TargetTrace targetTrace) {
 			switch(columnIndex) {
-				case 0: // Name
-					text = wncIon.getName();
+				case 0:
+					text = targetTrace.getName();
 					break;
-				case 1: // ion
-					int ion = wncIon.getIon();
+				case 1:
+					int ion = targetTrace.getIon();
 					if(ion == IIon.TIC_ION) {
 						text = IIon.TIC_DESCRIPTION;
 					} else {

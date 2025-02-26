@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2023 Lablicate GmbH.
+ * Copyright (c) 2011, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,25 +7,37 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.settings;
 
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.IWncIons;
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.WncIons;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.TargetTraces;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.settings.AbstractChromatogramClassifierSettings;
+import org.eclipse.chemclipse.support.settings.StringSettingsProperty;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 public class ClassifierSettings extends AbstractChromatogramClassifierSettings {
 
-	private IWncIons wncIons;
+	@JsonProperty(value = "Traces", defaultValue = PreferenceSupplier.DEFAULT_TRACES)
+	@JsonPropertyDescription(value = "List the m/z traces to inspect.")
+	@StringSettingsProperty(allowEmpty = true, isMultiLine = true)
+	private String traces = PreferenceSupplier.DEFAULT_TRACES;
 
-	public ClassifierSettings() {
+	public String getTraces() {
 
-		wncIons = new WncIons();
+		return traces;
 	}
 
-	public IWncIons getWNCIons() {
+	public void setTraces(String traces) {
 
-		return wncIons;
+		this.traces = traces;
+	}
+
+	public TargetTraces getTargetTraces() {
+
+		return PreferenceSupplier.getTargetTraces(traces);
 	}
 }

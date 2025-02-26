@@ -13,7 +13,7 @@
    <extension
          point="org.eclipse.core.runtime.adapters">
       <factory
-            adaptableType="org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.result.IWncClassifierResult"
+            adaptableType="org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.result.WncClassifierResult"
             class="org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.internal.WncAdapterFactory">
          <adapter
                type="org.eclipse.jface.viewers.IStructuredContentProvider">

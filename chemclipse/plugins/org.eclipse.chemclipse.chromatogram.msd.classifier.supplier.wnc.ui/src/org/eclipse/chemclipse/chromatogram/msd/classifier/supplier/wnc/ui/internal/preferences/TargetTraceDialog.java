@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2023 Lablicate GmbH.
+ * Copyright (c) 2011, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,12 +7,11 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.internal.preferences;
 
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.IWncIon;
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.WncIon;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.TargetTrace;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.l10n.Messages;
 import org.eclipse.chemclipse.logging.core.Logger;
@@ -31,26 +30,27 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-public class WncIonDialog extends TitleAreaDialog {
+public class TargetTraceDialog extends TitleAreaDialog {
 
-	private static final Logger logger = Logger.getLogger(WncIonDialog.class);
+	private static final Logger logger = Logger.getLogger(TargetTraceDialog.class);
+	//
 	private String title;
 	private String message;
 	private Text textName;
 	private Text textIon;
-	private IWncIon wncIon;
+	private TargetTrace targetTrace;
 
-	public WncIonDialog(Shell shell) {
+	public TargetTraceDialog(Shell shell) {
 
 		this(shell, null);
 	}
 
-	public WncIonDialog(Shell shell, IWncIon wncIon) {
+	public TargetTraceDialog(Shell shell, TargetTrace targetTrace) {
 
 		super(shell);
-		this.title = Messages.wncIon;
+		this.title = Messages.targetTrace;
 		this.message = Messages.addIonToAnalyze;
-		this.wncIon = wncIon;
+		this.targetTrace = targetTrace;
 	}
 
 	/**
@@ -58,9 +58,9 @@ public class WncIonDialog extends TitleAreaDialog {
 	 * 
 	 * @return IWNCIon
 	 */
-	public IWncIon getWNCIon() {
+	public TargetTrace getTargetTrace() {
 
-		return wncIon;
+		return targetTrace;
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class WncIonDialog extends TitleAreaDialog {
 			try {
 				int ion = getIon();
 				String name = getName();
-				wncIon = new WncIon(ion, name);
+				targetTrace = new TargetTrace(ion, name);
 			} catch(Exception e) {
 				logger.warn(e);
 			}
@@ -126,8 +126,8 @@ public class WncIonDialog extends TitleAreaDialog {
 		gridDataText.widthHint = 300;
 		textName = new Text(elementComposite, SWT.BORDER);
 		textName.setLayoutData(gridDataText);
-		if(wncIon != null) {
-			textName.setText(wncIon.getName());
+		if(targetTrace != null) {
+			textName.setText(targetTrace.getName());
 		}
 		textName.addKeyListener(new KeyAdapter() {
 
@@ -146,8 +146,8 @@ public class WncIonDialog extends TitleAreaDialog {
 		 * ion Input
 		 */
 		textIon = new Text(elementComposite, SWT.BORDER);
-		if(wncIon != null) {
-			textIon.setText(Integer.toString(wncIon.getIon()));
+		if(targetTrace != null) {
+			textIon.setText(Integer.toString(targetTrace.getIon()));
 		}
 		textIon.addKeyListener(new KeyAdapter() {
 

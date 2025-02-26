@@ -34,9 +34,9 @@ import junit.framework.TestCase;
 @Ignore
 public class ChromatogramTestCase extends TestCase {
 
-	IChromatogramMSD chromatogram;
-	IChromatogramSelectionMSD chromatogramSelection;
-	File chromatogramFile;
+	protected IChromatogramMSD chromatogram;
+	protected IChromatogramSelectionMSD chromatogramSelection;
+	protected File chromatogramFile;
 
 	@Override
 	protected void setUp() throws Exception {

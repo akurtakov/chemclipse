@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2024 Lablicate GmbH.
+ * Copyright (c) 2011, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -17,10 +17,8 @@ import java.util.StringTokenizer;
 
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.Activator;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.l10n.Messages;
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.IWncIon;
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.IWncIons;
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.WncIon;
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.WncIons;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.TargetTrace;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.TargetTraces;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.settings.ClassifierSettings;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.support.preferences.AbstractPreferenceSupplier;
@@ -28,8 +26,10 @@ import org.eclipse.chemclipse.support.preferences.IPreferenceSupplier;
 
 public class PreferenceSupplier extends AbstractPreferenceSupplier implements IPreferenceSupplier {
 
-	public static final String P_WNC_IONS = "wncIons"; //$NON-NLS-1$
-	public static final String DEF_WNC_IONS = Messages.wncIons;
+	public static final String DEFAULT_TRACES = "Water:18;Nitrogen:28;Oxygen:32;Carbon Dioxide:44;Solvent Tailing:84;Column Bleed:207";
+	//
+	public static final String P_TARGET_TRACES = "targetTraces"; //$NON-NLS-1$
+	public static final String DEF_TARGET_TRACES = Messages.targetTraces;
 	public static final String ENTRY_DELIMITER = ";"; //$NON-NLS-1$
 	public static final String VALUE_DELIMITER = ":"; //$NON-NLS-1$
 	//
@@ -53,15 +53,20 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	@Override
 	public void initializeDefaults() {
 
-		putDefault(P_WNC_IONS, DEF_WNC_IONS);
+		putDefault(P_TARGET_TRACES, DEF_TARGET_TRACES);
 	}
 
 	public static ClassifierSettings getClassifierSettings() {
 
 		ClassifierSettings classifierSettings = new ClassifierSettings();
-		IWncIons wncIons = getWNCIons();
-		classifierSettings.getWNCIons().add(wncIons);
+		TargetTraces targetTraces = getTargetTraces();
+		classifierSettings.getTargetTraces().add(targetTraces);
 		return classifierSettings;
+	}
+
+	public static TargetTraces getTargetTraces() {
+
+		return getTargetTraces(INSTANCE().get(P_TARGET_TRACES, DEF_TARGET_TRACES));
 	}
 
 	/**
@@ -69,15 +74,14 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	 * 
 	 * @return List<IWNCIon>
 	 */
-	public static IWncIons getWNCIons() {
+	public static TargetTraces getTargetTraces(String content) {
 
 		/*
 		 * E.g. "water:18;nitrogen:28;carbon dioxide:44"
 		 */
-		IWncIons ions = new WncIons();
-		String preferenceEntry = INSTANCE().get(P_WNC_IONS, DEF_WNC_IONS);
-		if(!preferenceEntry.isEmpty()) {
-			String[] items = parseString(preferenceEntry);
+		TargetTraces ions = new TargetTraces();
+		if(!content.isEmpty()) {
+			String[] items = parseString(content);
 			if(items.length > 0) {
 				String name;
 				Integer ion;
@@ -88,7 +92,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 						if(values.length > 1) {
 							name = values[0];
 							ion = Integer.parseInt(values[1]);
-							ions.add(new WncIon(ion, name));
+							ions.add(new TargetTrace(ion, name));
 						}
 					} catch(NumberFormatException e) {
 						logger.warn(e);
@@ -127,23 +131,23 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	/**
 	 * Stores the ions.
 	 * 
-	 * @param wncIons
+	 * @param targetTraces
 	 */
-	public static void storeWNCIons(IWncIons wncIons) {
+	public static void storeTargetTraces(TargetTraces targetTraces) {
 
 		String values = ""; //$NON-NLS-1$
-		if(wncIons != null) {
+		if(targetTraces != null) {
 			StringBuilder builder = new StringBuilder();
-			List<Integer> keys = new ArrayList<>(wncIons.getKeys());
+			List<Integer> keys = new ArrayList<>(targetTraces.getKeys());
 			int size = keys.size();
 			if(size >= 1) {
 				for(int index = 0; index < size; index++) {
 					int ion = keys.get(index);
-					IWncIon wncIon = wncIons.getWNCIon(ion);
-					if(wncIon != null) {
-						builder.append(wncIon.getName());
+					TargetTrace targetTrace = targetTraces.getTargetTrace(ion);
+					if(targetTrace != null) {
+						builder.append(targetTrace.getName());
 						builder.append(VALUE_DELIMITER);
-						builder.append(wncIon.getIon());
+						builder.append(targetTrace.getIon());
 						builder.append(ENTRY_DELIMITER);
 					}
 				}
@@ -151,6 +155,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 			values = builder.toString();
 		}
 		//
-		INSTANCE().put(P_WNC_IONS, values);
+		INSTANCE().put(P_TARGET_TRACES, values);
 	}
 }

@@ -7,21 +7,20 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.internal.core.support;
 
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.IWncIon;
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.IWncIons;
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.WncIon;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.TargetTrace;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.TargetTraces;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.settings.ClassifierSettings;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 
 public class Calculator_2_ITest extends ChromatogramTestCase {
 
 	private Calculator calculator;
-	private IWncIons wncIons;
-	private IWncIon wncIon;
+	private TargetTraces targetTraces;
+	private TargetTrace targetTrace;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -29,66 +28,70 @@ public class Calculator_2_ITest extends ChromatogramTestCase {
 		super.setUp();
 		calculator = new Calculator();
 		ClassifierSettings classifierSettings = new ClassifierSettings();
-		wncIons = classifierSettings.getWNCIons();
-		wncIons.add(new WncIon(18, "water"));
-		wncIons.add(new WncIon(28, "nitrogen"));
-		wncIons.add(new WncIon(32, "carbon dioxide"));
-		wncIons.add(new WncIon(84, "solvent tailing"));
-		wncIons.add(new WncIon(207, "column bleed"));
+		targetTraces = classifierSettings.getTargetTraces();
 		IChromatogramSelectionMSD chromatogramSelection = getChromatogramSelection();
-		wncIons = calculator.calculateIonPercentages(chromatogramSelection, classifierSettings);
+		targetTraces = calculator.calculateIonPercentages(chromatogramSelection, classifierSettings);
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
 
 		calculator = null;
-		wncIons = null;
+		targetTraces = null;
 		super.tearDown();
 	}
 
 	public void testCalculatedWncIons_1() {
 
-		wncIon = wncIons.getWNCIon(18);
-		assertEquals(18, wncIon.getIon());
-		assertEquals("water", wncIon.getName());
-		assertEquals(21.002375405306804d, wncIon.getPercentageMaxIntensity());
-		assertEquals(1.977177063160481d, wncIon.getPercentageSumIntensity());
+		targetTrace = targetTraces.getTargetTrace(18);
+		assertEquals(18, targetTrace.getIon());
+		assertEquals("Water", targetTrace.getName());
+		assertEquals(21.002375405306804d, targetTrace.getPercentageMaxIntensity());
+		assertEquals(1.977177063160481d, targetTrace.getPercentageSumIntensity());
 	}
 
 	public void testCalculatedWncIons_2() {
 
-		wncIon = wncIons.getWNCIon(28);
-		assertEquals(28, wncIon.getIon());
-		assertEquals("nitrogen", wncIon.getName());
-		assertEquals(99.99999999999999d, wncIon.getPercentageMaxIntensity());
-		assertEquals(9.414064004688226d, wncIon.getPercentageSumIntensity());
+		targetTrace = targetTraces.getTargetTrace(28);
+		assertEquals(28, targetTrace.getIon());
+		assertEquals("Nitrogen", targetTrace.getName());
+		assertEquals(99.99999999999999d, targetTrace.getPercentageMaxIntensity());
+		assertEquals(9.414064004688226d, targetTrace.getPercentageSumIntensity());
 	}
 
 	public void testCalculatedWncIons_3() {
 
-		wncIon = wncIons.getWNCIon(32);
-		assertEquals(32, wncIon.getIon());
-		assertEquals("carbon dioxide", wncIon.getName());
-		assertEquals(24.744202936490822d, wncIon.getPercentageMaxIntensity());
-		assertEquals(2.3294351018911894d, wncIon.getPercentageSumIntensity());
+		targetTrace = targetTraces.getTargetTrace(32);
+		assertEquals(32, targetTrace.getIon());
+		assertEquals("Oxygen", targetTrace.getName());
+		assertEquals(24.744202936490822d, targetTrace.getPercentageMaxIntensity());
+		assertEquals(2.3294351018911894d, targetTrace.getPercentageSumIntensity());
 	}
 
 	public void testCalculatedWncIons_4() {
 
-		wncIon = wncIons.getWNCIon(84);
-		assertEquals(84, wncIon.getIon());
-		assertEquals("solvent tailing", wncIon.getName());
-		assertEquals(4.285515151830384d, wncIon.getPercentageMaxIntensity());
-		assertEquals(0.40344113932392417d, wncIon.getPercentageSumIntensity());
+		targetTrace = targetTraces.getTargetTrace(44);
+		assertEquals(44, targetTrace.getIon());
+		assertEquals("Carbon Dioxide", targetTrace.getName());
+		assertEquals(21.7383894585452d, targetTrace.getPercentageMaxIntensity());
+		assertEquals(2.0464658972158434d, targetTrace.getPercentageSumIntensity());
 	}
 
 	public void testCalculatedWncIons_5() {
 
-		wncIon = wncIons.getWNCIon(207);
-		assertEquals(207, wncIon.getIon());
-		assertEquals("column bleed", wncIon.getName());
-		assertEquals(6.292490758325699d, wncIon.getPercentageMaxIntensity());
-		assertEquals(0.5923791074778729d, wncIon.getPercentageSumIntensity());
+		targetTrace = targetTraces.getTargetTrace(84);
+		assertEquals(84, targetTrace.getIon());
+		assertEquals("Solvent Tailing", targetTrace.getName());
+		assertEquals(4.285515151830384d, targetTrace.getPercentageMaxIntensity());
+		assertEquals(0.40344113932392417d, targetTrace.getPercentageSumIntensity());
+	}
+
+	public void testCalculatedWncIons_6() {
+
+		targetTrace = targetTraces.getTargetTrace(207);
+		assertEquals(207, targetTrace.getIon());
+		assertEquals("Column Bleed", targetTrace.getName());
+		assertEquals(6.292490758325699d, targetTrace.getPercentageMaxIntensity());
+		assertEquals(0.5923791074778729d, targetTrace.getPercentageSumIntensity());
 	}
 }

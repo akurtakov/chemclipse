@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2023 Lablicate GmbH.
+ * Copyright (c) 2011, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model;
 
@@ -15,59 +15,52 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class WncIons implements IWncIons {
+public class TargetTraces {
 
-	private Map<Integer, IWncIon> ions;
+	private Map<Integer, TargetTrace> ions;
 
-	public WncIons() {
+	public TargetTraces() {
 
 		ions = new TreeMap<>();
 	}
 
-	@Override
-	public void add(IWncIon wncIon) {
+	public void add(TargetTrace targetTrace) {
 
-		if(wncIon != null) {
-			ions.put(wncIon.getIon(), wncIon);
+		if(targetTrace != null) {
+			ions.put(targetTrace.getIon(), targetTrace);
 		}
 	}
 
-	@Override
-	public void remove(IWncIon wncIon) {
+	public void remove(TargetTrace targetTrace) {
 
-		if(wncIon != null) {
-			remove(wncIon.getIon());
+		if(targetTrace != null) {
+			remove(targetTrace.getIon());
 		}
 	}
 
-	@Override
 	public void remove(Integer ion) {
 
 		ions.remove(ion);
 	}
 
-	@Override
-	public IWncIon getWNCIon(int ion) {
+	public TargetTrace getTargetTrace(int ion) {
 
 		return ions.get(ion);
 	}
 
-	@Override
 	public Object[] toArray() {
 
 		return ions.values().toArray();
 	}
 
-	@Override
-	public void add(IWncIons wncIons) {
+	public void add(TargetTraces targetTraces) {
 
-		Set<Integer> keys = wncIons.getKeys();
+		Set<Integer> keys = targetTraces.getKeys();
 		for(Integer key : keys) {
-			ions.put(key, wncIons.getWNCIon(key));
+			ions.put(key, targetTraces.getTargetTrace(key));
 		}
 	}
 
-	@Override
 	public Set<Integer> getKeys() {
 
 		return ions.keySet();

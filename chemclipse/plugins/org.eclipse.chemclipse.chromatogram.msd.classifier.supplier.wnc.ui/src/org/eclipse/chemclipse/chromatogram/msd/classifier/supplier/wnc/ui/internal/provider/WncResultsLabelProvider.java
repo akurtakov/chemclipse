@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2023 Lablicate GmbH.
+ * Copyright (c) 2011, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -7,13 +7,13 @@
  * and is available at http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.internal.provider;
 
 import java.text.DecimalFormat;
 
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.IWncIon;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.TargetTrace;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.l10n.Messages;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
@@ -37,19 +37,19 @@ public class WncResultsLabelProvider extends AbstractChemClipseLabelProvider {
 
 		DecimalFormat decimalFormat = getDecimalFormat();
 		String text = ""; //$NON-NLS-1$
-		if(element instanceof IWncIon wncIon) {
+		if(element instanceof TargetTrace targetTrace) {
 			switch(columnIndex) {
-				case 0: // Name
-					text = wncIon.getName();
+				case 0:
+					text = targetTrace.getName();
 					break;
-				case 1: // ion
-					text = Integer.toString(wncIon.getIon());
+				case 1:
+					text = Integer.toString(targetTrace.getIon());
 					break;
-				case 2: // Percentage Sum Intensity
-					text = decimalFormat.format(wncIon.getPercentageSumIntensity());
+				case 2:
+					text = decimalFormat.format(targetTrace.getPercentageSumIntensity());
 					break;
-				case 3: // Percentage Max Intensity
-					text = decimalFormat.format(wncIon.getPercentageMaxIntensity());
+				case 3:
+					text = decimalFormat.format(targetTrace.getPercentageMaxIntensity());
 					break;
 				default:
 					text = Messages.nv;

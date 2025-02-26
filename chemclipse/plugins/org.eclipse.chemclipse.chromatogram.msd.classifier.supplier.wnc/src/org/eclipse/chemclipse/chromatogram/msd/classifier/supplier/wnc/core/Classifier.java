@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  * Alexander Kerner - Generics
  * Christoph Läubrich - adjust to new API
  *******************************************************************************/
@@ -16,9 +16,8 @@ package org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.core;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.exceptions.ClassifierException;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.internal.core.support.Calculator;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.l10n.Messages;
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.IWncIons;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.TargetTraces;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.preferences.PreferenceSupplier;
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.result.IWncClassifierResult;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.result.WncClassifierResult;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.settings.ClassifierSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.core.AbstractChromatogramClassifier;
@@ -61,12 +60,10 @@ public class Classifier extends AbstractChromatogramClassifier {
 			try {
 				IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 				if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
-					IWncIons resultWncIons = Calculator.calculateIonPercentages(chromatogramMSD, chromatogramSelection, classifierSettings);
-					IWncClassifierResult chromatogramClassifierResult = new WncClassifierResult(ResultStatus.OK, Messages.chromatogramClassified, resultWncIons);
-					//
+					TargetTraces targetTraces = Calculator.calculateIonPercentages(chromatogramMSD, chromatogramSelection, classifierSettings);
+					WncClassifierResult chromatogramClassifierResult = new WncClassifierResult(ResultStatus.OK, Messages.chromatogramClassified, targetTraces);
 					IMeasurementResult<?> measurementResult = new MeasurementResult(Messages.wncClassifier, IDENTIFIER, Messages.percentageAreaOfSelectedIons, chromatogramClassifierResult);
 					chromatogramSelection.getChromatogram().addMeasurementResult(measurementResult);
-					//
 					processingInfo.setProcessingResult(chromatogramClassifierResult);
 				} else {
 					processingInfo.addWarnMessage(Messages.wncClassifier, Messages.msdChromatogramsOnly);
