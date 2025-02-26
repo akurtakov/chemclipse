@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2024 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -40,13 +40,13 @@ import org.eclipse.swt.widgets.Shell;
  * @author Christoph Läubrich
  *
  */
-public class IMeasurementFilterAction extends AbstractFilterAction<IMeasurementFilter<?>, Collection<? extends IMeasurement>> {
+public class MeasurementFilterAction extends AbstractFilterAction<IMeasurementFilter<?>, Collection<? extends IMeasurement>> {
 
 	private Collection<? extends IMeasurement> measurements;
 	private IProcessSupplierContext processTypeSupport;
 	private Object settings;
 
-	public IMeasurementFilterAction(IMeasurementFilter<?> filter, Collection<? extends IMeasurement> measurements, Consumer<Collection<? extends IMeasurement>> resultConsumer, IProcessSupplierContext processTypeSupport) {
+	public MeasurementFilterAction(IMeasurementFilter<?> filter, Collection<? extends IMeasurement> measurements, Consumer<Collection<? extends IMeasurement>> resultConsumer, IProcessSupplierContext processTypeSupport) {
 
 		super(filter, resultConsumer);
 		this.measurements = measurements;

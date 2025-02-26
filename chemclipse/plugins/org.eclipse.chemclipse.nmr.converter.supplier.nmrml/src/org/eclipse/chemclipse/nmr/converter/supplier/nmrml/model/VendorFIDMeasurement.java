@@ -19,10 +19,10 @@ import java.util.List;
 import org.eclipse.chemclipse.model.core.AbstractMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.AcquisitionParameter;
 import org.eclipse.chemclipse.nmr.model.core.DataDimension;
-import org.eclipse.chemclipse.nmr.model.core.FIDMeasurement;
-import org.eclipse.chemclipse.nmr.model.core.FIDSignal;
+import org.eclipse.chemclipse.nmr.model.core.IMeasurementFID;
+import org.eclipse.chemclipse.nmr.model.core.ISignalFID;
 
-public final class VendorFIDMeasurement extends AbstractMeasurement implements FIDMeasurement, AcquisitionParameter {
+public final class VendorFIDMeasurement extends AbstractMeasurement implements IMeasurementFID, AcquisitionParameter {
 
 	private static final long serialVersionUID = 1L;
 	private final List<VendorFIDSignal> signals = new ArrayList<>();
@@ -32,7 +32,7 @@ public final class VendorFIDMeasurement extends AbstractMeasurement implements F
 	private BigDecimal carrierFrequency;
 
 	@Override
-	public List<? extends FIDSignal> getSignals() {
+	public List<? extends ISignalFID> getSignals() {
 
 		return Collections.unmodifiableList(signals);
 	}

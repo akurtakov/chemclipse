@@ -19,7 +19,7 @@ import java.util.List;
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.settings.IWaveSpectrumIdentifierSettings;
 import org.eclipse.chemclipse.model.exceptions.NoIdentifierAvailableException;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessorSupplier;
+import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
@@ -54,7 +54,7 @@ public class WaveSpectrumIdentifierProcessTypeSupplier implements IProcessTypeSu
 		}
 	}
 
-	private static final class WaveSpectrumIdentifierProcessorSupplier extends ChromatogramSelectionProcessorSupplier<IWaveSpectrumIdentifierSettings> {
+	private static final class WaveSpectrumIdentifierProcessorSupplier extends ChromatogramSelectionProcessSupplier<IWaveSpectrumIdentifierSettings> {
 
 		private IWaveSpectrumIdentifierSupplier supplier;
 

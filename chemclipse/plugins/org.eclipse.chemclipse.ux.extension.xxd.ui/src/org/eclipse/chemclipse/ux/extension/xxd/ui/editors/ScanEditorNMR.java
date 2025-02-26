@@ -34,9 +34,9 @@ import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
 import org.eclipse.chemclipse.nmr.converter.core.ScanConverterNMR;
-import org.eclipse.chemclipse.nmr.model.core.FIDMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.FilteredFIDMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.FilteredSpectrumMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.IMeasurementFID;
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.model.selection.DataNMRSelection;
 import org.eclipse.chemclipse.nmr.model.selection.IDataNMRSelection;
@@ -199,7 +199,7 @@ public class ScanEditorNMR implements IScanEditorNMR {
 								selection.addMeasurement(measurement);
 							}
 							for(IComplexSignalMeasurement<?> measurement : result) {
-								if(measurement instanceof FIDMeasurement) {
+								if(measurement instanceof IMeasurementFID) {
 									selection.setActiveMeasurement(measurement);
 									break;
 								}
@@ -355,7 +355,7 @@ public class ScanEditorNMR implements IScanEditorNMR {
 		private void copySignals(IComplexSignalMeasurement<?> from, IComplexSignalMeasurement<?> to) {
 
 			if(to instanceof FilteredFIDMeasurement<?> filteredFIDMeasurement) {
-				if(from instanceof FIDMeasurement measurement) {
+				if(from instanceof IMeasurementFID measurement) {
 					filteredFIDMeasurement.setSignals(measurement.getSignals());
 				}
 			} else if(to instanceof FilteredSpectrumMeasurement<?> filteredSpectrumMeasurement) {

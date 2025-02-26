@@ -21,7 +21,7 @@ import org.eclipse.chemclipse.converter.chromatogram.ChromatogramExportSettings;
 import org.eclipse.chemclipse.converter.core.IConverterSupport;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessorSupplier;
+import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.processing.converter.ISupplier;
@@ -53,7 +53,7 @@ public class ChromatogramConverterMSDProcessTypeSupplier implements IProcessType
 		return list;
 	}
 
-	private static final class ChromatogramConverterMSDProcessorSupplier extends ChromatogramSelectionProcessorSupplier<ChromatogramExportSettings> {
+	private static final class ChromatogramConverterMSDProcessorSupplier extends ChromatogramSelectionProcessSupplier<ChromatogramExportSettings> {
 
 		private ISupplier supplier;
 

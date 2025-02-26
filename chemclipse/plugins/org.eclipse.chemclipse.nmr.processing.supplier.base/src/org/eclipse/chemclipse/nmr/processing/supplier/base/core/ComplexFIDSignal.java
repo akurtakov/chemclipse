@@ -16,9 +16,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import org.apache.commons.math3.complex.Complex;
-import org.eclipse.chemclipse.nmr.model.core.FIDSignal;
+import org.eclipse.chemclipse.nmr.model.core.ISignalFID;
 
-public class ComplexFIDSignal implements FIDSignal, Serializable {
+public class ComplexFIDSignal implements ISignalFID, Serializable {
 
 	/**
 	 *
@@ -28,6 +28,7 @@ public class ComplexFIDSignal implements FIDSignal, Serializable {
 	private BigDecimal time;
 
 	public ComplexFIDSignal(BigDecimal time, Complex complex) {
+
 		this.time = time;
 		this.complex = complex;
 	}

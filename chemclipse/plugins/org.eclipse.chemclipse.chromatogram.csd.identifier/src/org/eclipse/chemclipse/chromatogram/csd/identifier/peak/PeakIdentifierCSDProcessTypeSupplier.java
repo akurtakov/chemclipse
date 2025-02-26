@@ -22,7 +22,7 @@ import org.eclipse.chemclipse.chromatogram.csd.identifier.settings.IPeakIdentifi
 import org.eclipse.chemclipse.csd.model.core.selection.IChromatogramSelectionCSD;
 import org.eclipse.chemclipse.model.exceptions.NoIdentifierAvailableException;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessorSupplier;
+import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
@@ -56,7 +56,7 @@ public class PeakIdentifierCSDProcessTypeSupplier implements IProcessTypeSupplie
 		}
 	}
 
-	private static final class PeakIdentifierProcessorSupplier extends ChromatogramSelectionProcessorSupplier<IPeakIdentifierSettingsCSD> {
+	private static final class PeakIdentifierProcessorSupplier extends ChromatogramSelectionProcessSupplier<IPeakIdentifierSettingsCSD> {
 
 		private IPeakIdentifierSupplierCSD supplier;
 

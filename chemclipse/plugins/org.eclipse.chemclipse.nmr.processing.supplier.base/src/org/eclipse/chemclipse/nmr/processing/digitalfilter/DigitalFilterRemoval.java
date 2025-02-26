@@ -20,8 +20,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.math3.complex.Complex;
 import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
-import org.eclipse.chemclipse.nmr.model.core.FIDMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.FilteredFIDMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.IMeasurementFID;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.AbstractFIDSignalFilter;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions.ComplexFIDData;
@@ -45,7 +45,7 @@ public class DigitalFilterRemoval extends AbstractFIDSignalFilter<DigitalFilterR
 	}
 
 	@Override
-	protected boolean accepts(FIDMeasurement item) {
+	protected boolean accepts(IMeasurementFID item) {
 
 		return item.getHeaderData(MARKER) == null;
 	}
@@ -57,7 +57,7 @@ public class DigitalFilterRemoval extends AbstractFIDSignalFilter<DigitalFilterR
 	}
 
 	@Override
-	protected IMeasurement doFiltering(FilterContext<FIDMeasurement, DigitalFilterRemovalSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
+	protected IMeasurement doFiltering(FilterContext<IMeasurementFID, DigitalFilterRemovalSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
 		DigitalFilterRemovalSettings config = context.getFilterConfig();
 		double multiplicationFactor = config.getDcOffsetMultiplicationFactor();

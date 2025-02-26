@@ -21,7 +21,7 @@ import org.eclipse.chemclipse.chromatogram.peak.detector.core.IPeakDetectorSuppo
 import org.eclipse.chemclipse.chromatogram.peak.detector.exceptions.NoPeakDetectorAvailableException;
 import org.eclipse.chemclipse.chromatogram.wsd.peak.detector.settings.IPeakDetectorSettingsWSD;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessorSupplier;
+import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
@@ -56,7 +56,7 @@ public class PeakDetectorWSDProcessTypeSupplier implements IProcessTypeSupplier 
 		}
 	}
 
-	private static final class PeakDetectorProcessorSupplier extends ChromatogramSelectionProcessorSupplier<IPeakDetectorSettingsWSD> {
+	private static final class PeakDetectorProcessorSupplier extends ChromatogramSelectionProcessSupplier<IPeakDetectorSettingsWSD> {
 
 		private final IPeakDetectorSupplier supplier;
 

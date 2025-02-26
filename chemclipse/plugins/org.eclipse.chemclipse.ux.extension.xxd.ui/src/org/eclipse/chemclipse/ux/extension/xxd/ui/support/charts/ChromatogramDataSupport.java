@@ -154,8 +154,8 @@ public class ChromatogramDataSupport {
 	 */
 	public IChromatogramSelection getChromatogramSelection(Object object) {
 
-		if(object instanceof IChromatogramSelection) {
-			return (IChromatogramSelection)object;
+		if(object instanceof IChromatogramSelection chromatogramSelection) {
+			return chromatogramSelection;
 		} else if(object instanceof IChromatogramCSD chromatogramCSD) {
 			return new ChromatogramSelectionCSD(chromatogramCSD);
 		} else if(object instanceof IChromatogramMSD chromatogramMSD) {

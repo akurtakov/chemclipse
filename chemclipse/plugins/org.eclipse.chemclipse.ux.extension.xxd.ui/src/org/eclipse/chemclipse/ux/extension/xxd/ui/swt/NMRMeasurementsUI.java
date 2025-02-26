@@ -31,7 +31,7 @@ import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.core.PeakList;
 import org.eclipse.chemclipse.model.detector.IMeasurementPeakDetector;
 import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
-import org.eclipse.chemclipse.nmr.model.core.FIDMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.IMeasurementFID;
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.model.selection.DataNMRSelection;
 import org.eclipse.chemclipse.nmr.model.selection.IDataNMRSelection.ChangeType;
@@ -41,7 +41,7 @@ import org.eclipse.chemclipse.processing.filter.Filtered;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.actions.IMeasurementFilterAction;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.actions.MeasurementFilterAction;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuListener;
@@ -127,7 +127,7 @@ public class NMRMeasurementsUI implements PropertyChangeListener {
 			public Image getImage(Object element) {
 
 				element = getMeasurement(element);
-				if(element instanceof FIDMeasurement) {
+				if(element instanceof IMeasurementFID) {
 					return IMAGE_FID;
 				}
 				if(element instanceof ISpectrumMeasurement) {
@@ -224,7 +224,7 @@ public class NMRMeasurementsUI implements PropertyChangeListener {
 					}
 				};
 				for(IMeasurementFilter<?> filter : filters) {
-					IAction action = new IMeasurementFilterAction(filter, measurements, consumer, processSupplierContext);
+					IAction action = new MeasurementFilterAction(filter, measurements, consumer, processSupplierContext);
 					mgr.add(action);
 				}
 			}

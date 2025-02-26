@@ -20,18 +20,18 @@ import java.util.List;
 
 import org.apache.commons.math3.complex.Complex;
 import org.eclipse.chemclipse.nmr.model.core.AcquisitionParameter;
-import org.eclipse.chemclipse.nmr.model.core.FIDSignal;
+import org.eclipse.chemclipse.nmr.model.core.ISignalFID;
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumSignal;
 
 public class UtilityFunctions {
 
-	public static ComplexFIDData toComplexFIDData(Collection<? extends FIDSignal> signals) {
+	public static ComplexFIDData toComplexFIDData(Collection<? extends ISignalFID> signals) {
 
 		Complex[] array = new Complex[signals.size()];
 		BigDecimal[] times = new BigDecimal[signals.size()];
 		int i = 0;
-		for(FIDSignal signal : signals) {
+		for(ISignalFID signal : signals) {
 			array[i] = new Complex(signal.getY(), signal.getImaginaryY());
 			times[i] = signal.getSignalTime();
 			i++;
@@ -199,7 +199,7 @@ public class UtilityFunctions {
 		return dataArray;
 	}
 
-	public static boolean lengthIsPowerOfTwo(List<? extends FIDSignal> signals) {
+	public static boolean lengthIsPowerOfTwo(List<? extends ISignalFID> signals) {
 
 		if(signals.isEmpty()) {
 			throw new IllegalArgumentException("Signals length can't be 0");
@@ -251,12 +251,12 @@ public class UtilityFunctions {
 			this.times = times;
 		}
 
-		public List<FIDSignal> toSignal() {
+		public List<ISignalFID> toSignal() {
 
 			if(signals.length != times.length) {
 				throw new IllegalStateException("times length differs from signals length");
 			}
-			List<FIDSignal> list = new ArrayList<>(times.length);
+			List<ISignalFID> list = new ArrayList<>(times.length);
 			for(int i = 0; i < times.length; i++) {
 				list.add(new ComplexFIDSignal(times[i], signals[i]));
 			}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -30,12 +30,13 @@ import org.eclipse.chemclipse.processing.filter.FilterContext;
  * @author Christoph Läubrich
  *
  */
-public class FilteredFIDMeasurement<ConfigType> extends FilteredMeasurement<FIDMeasurement, ConfigType> implements FIDMeasurement {
+public class FilteredFIDMeasurement<ConfigType> extends FilteredMeasurement<IMeasurementFID, ConfigType> implements IMeasurementFID {
 
 	private static final long serialVersionUID = -4499531764775929976L;
-	private transient List<? extends FIDSignal> signals;
+	private transient List<? extends ISignalFID> signals;
 
-	public FilteredFIDMeasurement(FilterContext<FIDMeasurement, ConfigType> context) {
+	public FilteredFIDMeasurement(FilterContext<IMeasurementFID, ConfigType> context) {
+
 		super(context);
 	}
 
@@ -53,7 +54,7 @@ public class FilteredFIDMeasurement<ConfigType> extends FilteredMeasurement<FIDM
 	}
 
 	@Override
-	public List<? extends FIDSignal> getSignals() {
+	public List<? extends ISignalFID> getSignals() {
 
 		if(signals != null) {
 			return signals;
@@ -61,7 +62,7 @@ public class FilteredFIDMeasurement<ConfigType> extends FilteredMeasurement<FIDM
 		return getFilteredObject().getSignals();
 	}
 
-	public final void setSignals(List<? extends FIDSignal> signals) {
+	public final void setSignals(List<? extends ISignalFID> signals) {
 
 		this.signals = signals;
 	}
@@ -72,8 +73,8 @@ public class FilteredFIDMeasurement<ConfigType> extends FilteredMeasurement<FIDM
 		if(signals == null) {
 			out.writeObject(null);
 		} else {
-			ArrayList<FIDSignal> serList = new ArrayList<>(signals.size());
-			for(FIDSignal fidSignal : signals) {
+			ArrayList<ISignalFID> serList = new ArrayList<>(signals.size());
+			for(ISignalFID fidSignal : signals) {
 				if(fidSignal instanceof Serializable) {
 					// we can add it as is
 					serList.add(fidSignal);
@@ -89,17 +90,18 @@ public class FilteredFIDMeasurement<ConfigType> extends FilteredMeasurement<FIDM
 	private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
 
 		in.defaultReadObject();
-		signals = (List<? extends FIDSignal>)in.readObject();
+		signals = (List<? extends ISignalFID>)in.readObject();
 	}
 
-	private static final class SerializableFIDSignal implements FIDSignal, Serializable {
+	private static final class SerializableFIDSignal implements ISignalFID, Serializable {
 
 		private static final long serialVersionUID = -2997689760733045361L;
 		private BigDecimal signalTime;
 		private Number realComponent;
 		private Number imaginaryComponent;
 
-		public SerializableFIDSignal(FIDSignal tocopy) {
+		public SerializableFIDSignal(ISignalFID tocopy) {
+
 			signalTime = tocopy.getSignalTime();
 			realComponent = tocopy.getRealComponent();
 			imaginaryComponent = tocopy.getImaginaryComponent();

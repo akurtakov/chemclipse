@@ -20,7 +20,7 @@ import java.util.List;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.core.settings.peaks.IPeakIntegrationSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.exceptions.NoIntegratorAvailableException;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessorSupplier;
+import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
@@ -54,7 +54,7 @@ public class PeakIntegratorProcessTypeSupplier implements IProcessTypeSupplier {
 		}
 	}
 
-	private static final class PeakIntegratorProcessorSupplier extends ChromatogramSelectionProcessorSupplier<IPeakIntegrationSettings> {
+	private static final class PeakIntegratorProcessorSupplier extends ChromatogramSelectionProcessSupplier<IPeakIntegrationSettings> {
 
 		@SuppressWarnings("unchecked")
 		public PeakIntegratorProcessorSupplier(IPeakIntegratorSupplier supplier, IProcessTypeSupplier parent) {

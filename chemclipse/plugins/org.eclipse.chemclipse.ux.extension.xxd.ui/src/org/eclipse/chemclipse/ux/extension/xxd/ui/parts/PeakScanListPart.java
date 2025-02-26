@@ -91,8 +91,7 @@ public class PeakScanListPart extends AbstractPart<ExtendedPeakScanListUI> {
 				unloadData();
 				return false;
 			} else if(isChromatogramEvent(topic)) {
-				if(object instanceof IChromatogramSelection) {
-					IChromatogramSelection chromatogramSelection = (IChromatogramSelection)object;
+				if(object instanceof IChromatogramSelection chromatogramSelection) {
 					getControl().updateChromatogramSelection(chromatogramSelection);
 					return true;
 				}

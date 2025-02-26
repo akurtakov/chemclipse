@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -39,7 +39,7 @@ public interface IScanFilter<ConfigType> extends Filter<ConfigType> {
 	 * @throws IllegalArgumentException
 	 *             if any of the given {@link IScan} are incompatible with this filter ({@link #acceptsIScan(IScan)} returns <code>false</code> for them)
 	 */
-	IProcessingResult<Boolean> filterIScans(FilterList<IScan> filterItems, ConfigType configuration, IProgressMonitor monitor) throws IllegalArgumentException;
+	IProcessingResult<Boolean> filterScans(FilterList<IScan> filterItems, ConfigType configuration, IProgressMonitor monitor) throws IllegalArgumentException;
 
 	/**
 	 * Checks if the given {@link IScan} is compatible with this filter, that means that this filter can be applied without throwing an {@link IllegalArgumentException}

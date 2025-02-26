@@ -21,9 +21,9 @@ import java.util.List;
 import org.apache.commons.math3.complex.Complex;
 import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
-import org.eclipse.chemclipse.nmr.model.core.FIDMeasurement;
-import org.eclipse.chemclipse.nmr.model.core.FIDSignal;
 import org.eclipse.chemclipse.nmr.model.core.FilteredFIDMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.IMeasurementFID;
+import org.eclipse.chemclipse.nmr.model.core.ISignalFID;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.settings.ZeroFillingSettings;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.settings.support.ZeroFillingFactor;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
@@ -50,9 +50,9 @@ public class ZeroFillingProcessor extends AbstractFIDSignalFilter<ZeroFillingSet
 	}
 
 	@Override
-	protected IMeasurement doFiltering(FilterContext<FIDMeasurement, ZeroFillingSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
+	protected IMeasurement doFiltering(FilterContext<IMeasurementFID, ZeroFillingSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
-		List<? extends FIDSignal> signals = context.getFilteredObject().getSignals();
+		List<? extends ISignalFID> signals = context.getFilteredObject().getSignals();
 		int signalsize = signals.size();
 		if(signalsize < 2) {
 			messageConsumer.addErrorMessage(getName(), "At least two datapoints are requred for zerofilling");
@@ -64,7 +64,7 @@ public class ZeroFillingProcessor extends AbstractFIDSignalFilter<ZeroFillingSet
 		if(zeroFillLength == signalsize) {
 			return fidMeasurement;
 		}
-		List<FIDSignal> newSignals = new ArrayList<>(zeroFillLength);
+		List<ISignalFID> newSignals = new ArrayList<>(zeroFillLength);
 		newSignals.addAll(signals);
 		BigDecimal step = signals.get(1).getSignalTime().subtract(signals.get(0).getSignalTime());
 		for(int i = signalsize; i < zeroFillLength; i++) {
@@ -74,7 +74,7 @@ public class ZeroFillingProcessor extends AbstractFIDSignalFilter<ZeroFillingSet
 		return fidMeasurement;
 	}
 
-	private static final class ZeroFIDSignal implements FIDSignal {
+	private static final class ZeroFIDSignal implements ISignalFID {
 
 		private BigDecimal time;
 

@@ -28,14 +28,14 @@ import org.eclipse.chemclipse.model.core.FilteredMeasurement;
 import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
 import org.eclipse.chemclipse.nmr.model.core.AcquisitionParameter;
-import org.eclipse.chemclipse.nmr.model.core.FIDMeasurement;
-import org.eclipse.chemclipse.nmr.model.core.FIDSignal;
+import org.eclipse.chemclipse.nmr.model.core.IMeasurementFID;
+import org.eclipse.chemclipse.nmr.model.core.ISignalFID;
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumSignal;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.AbstractFIDSignalFilter;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions;
-import org.eclipse.chemclipse.nmr.processing.supplier.base.core.ZeroFillingProcessor;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions.ComplexFIDData;
+import org.eclipse.chemclipse.nmr.processing.supplier.base.core.ZeroFillingProcessor;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.settings.FourierTransformationSettings;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.settings.support.ZeroFillingFactor;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
@@ -56,10 +56,10 @@ public class FourierTransformationProcessor extends AbstractFIDSignalFilter<Four
 	}
 
 	@Override
-	protected IMeasurement doFiltering(FilterContext<FIDMeasurement, FourierTransformationSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
+	protected IMeasurement doFiltering(FilterContext<IMeasurementFID, FourierTransformationSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
-		FIDMeasurement measurement = context.getFilteredObject();
-		List<? extends FIDSignal> signals = measurement.getSignals();
+		IMeasurementFID measurement = context.getFilteredObject();
+		List<? extends ISignalFID> signals = measurement.getSignals();
 		// check if length of data is OK; warn if zero filling has to be applied
 		if(!UtilityFunctions.lengthIsPowerOfTwo(signals)) {
 			int fillLength = ZeroFillingProcessor.getZeroFillLength(signals.size(), ZeroFillingFactor.AUTO);
@@ -96,12 +96,12 @@ public class FourierTransformationProcessor extends AbstractFIDSignalFilter<Four
 		return nmrSpectrum;
 	}
 
-	private static final class FFTFilteredMeasurement extends FilteredMeasurement<FIDMeasurement, FourierTransformationSettings> implements ISpectrumMeasurement {
+	private static final class FFTFilteredMeasurement extends FilteredMeasurement<IMeasurementFID, FourierTransformationSettings> implements ISpectrumMeasurement {
 
 		private static final long serialVersionUID = -3570180428815391262L;
 		private List<? extends ISpectrumSignal> signals;
 
-		public FFTFilteredMeasurement(FilterContext<FIDMeasurement, FourierTransformationSettings> filterContext, List<FFTSpectrumSignal> signals) {
+		public FFTFilteredMeasurement(FilterContext<IMeasurementFID, FourierTransformationSettings> filterContext, List<FFTSpectrumSignal> signals) {
 
 			super(filterContext);
 			this.signals = Collections.unmodifiableList(signals);

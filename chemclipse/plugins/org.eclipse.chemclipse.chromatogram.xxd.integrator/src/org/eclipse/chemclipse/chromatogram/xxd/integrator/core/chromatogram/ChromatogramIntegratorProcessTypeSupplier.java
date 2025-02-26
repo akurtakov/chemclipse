@@ -20,7 +20,7 @@ import java.util.List;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.core.settings.chromatogram.IChromatogramIntegrationSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.exceptions.NoIntegratorAvailableException;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessorSupplier;
+import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
@@ -54,7 +54,7 @@ public class ChromatogramIntegratorProcessTypeSupplier implements IProcessTypeSu
 		}
 	}
 
-	private static final class ChromatogramIntegratorProcessorSupplier extends ChromatogramSelectionProcessorSupplier<IChromatogramIntegrationSettings> {
+	private static final class ChromatogramIntegratorProcessorSupplier extends ChromatogramSelectionProcessSupplier<IChromatogramIntegrationSettings> {
 
 		@SuppressWarnings("unchecked")
 		public ChromatogramIntegratorProcessorSupplier(IChromatogramIntegratorSupplier supplier, IProcessTypeSupplier parent) {

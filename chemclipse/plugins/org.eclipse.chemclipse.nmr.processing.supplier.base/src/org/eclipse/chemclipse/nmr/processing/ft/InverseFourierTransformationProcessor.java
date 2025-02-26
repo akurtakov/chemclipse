@@ -28,8 +28,8 @@ import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
 import org.eclipse.chemclipse.nmr.model.core.AcquisitionParameter;
 import org.eclipse.chemclipse.nmr.model.core.DataDimension;
-import org.eclipse.chemclipse.nmr.model.core.FIDMeasurement;
-import org.eclipse.chemclipse.nmr.model.core.FIDSignal;
+import org.eclipse.chemclipse.nmr.model.core.IMeasurementFID;
+import org.eclipse.chemclipse.nmr.model.core.ISignalFID;
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.AbstractSpectrumSignalFilter;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions;
@@ -87,7 +87,7 @@ public class InverseFourierTransformationProcessor extends AbstractSpectrumSigna
 		return fid;
 	}
 
-	private static final class InverseFFTFilteredMeasurement extends FilteredMeasurement<ISpectrumMeasurement, InverseFourierTransformationSettings> implements FIDMeasurement {
+	private static final class InverseFFTFilteredMeasurement extends FilteredMeasurement<ISpectrumMeasurement, InverseFourierTransformationSettings> implements IMeasurementFID {
 
 		private static final long serialVersionUID = -3240032383041201512L;
 		private List<InverseFFTSpectrumSignal> signals;
@@ -117,7 +117,7 @@ public class InverseFourierTransformationProcessor extends AbstractSpectrumSigna
 		}
 	}
 
-	private static final class InverseFFTSpectrumSignal implements FIDSignal, Serializable {
+	private static final class InverseFFTSpectrumSignal implements ISignalFID, Serializable {
 
 		private static final long serialVersionUID = -8417725272449006279L;
 		private BigDecimal time;

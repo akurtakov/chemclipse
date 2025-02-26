@@ -16,7 +16,7 @@ import java.util.List;
 
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 
-public interface FIDMeasurement extends IComplexSignalMeasurement<FIDSignal> {
+public interface IMeasurementFID extends IComplexSignalMeasurement<ISignalFID> {
 
 	AcquisitionParameter getAcquisitionParameter();
 
@@ -26,10 +26,11 @@ public interface FIDMeasurement extends IComplexSignalMeasurement<FIDSignal> {
 	 * @return the signals that makes up this {@link FIDMeasurement}
 	 */
 	@Override
-	List<? extends FIDSignal> getSignals();
+	List<? extends ISignalFID> getSignals();
 
 	DataDimension getDataDimension();
 
+	@Override
 	default String getFilterStatistics() {
 
 		return "";

@@ -41,13 +41,12 @@ public class ChromatogramType implements EventHandler {
 		//
 		if(topic.equals(IChemClipseEvents.TOPIC_CHROMATOGRAM_XXD_UPDATE_SELECTION)) {
 			Object object = event.getProperty(IChemClipseEvents.EVENT_BROKER_DATA);
-			if(object instanceof IChromatogramSelection) {
-				chromatogramSelection = (IChromatogramSelection)object;
-				if(chromatogramSelection instanceof IChromatogramSelectionCSD) {
+			if(object instanceof IChromatogramSelection chromatogramSelectionEvent) {
+				if(chromatogramSelectionEvent instanceof IChromatogramSelectionCSD) {
 					chromatogramType = CHROMATOGRAM_TYPE_CSD;
-				} else if(chromatogramSelection instanceof IChromatogramSelectionMSD) {
+				} else if(chromatogramSelectionEvent instanceof IChromatogramSelectionMSD) {
 					chromatogramType = CHROMATOGRAM_TYPE_MSD;
-				} else if(chromatogramSelection instanceof IChromatogramSelectionWSD) {
+				} else if(chromatogramSelectionEvent instanceof IChromatogramSelectionWSD) {
 					chromatogramType = CHROMATOGRAM_TYPE_WSD;
 				}
 			}

@@ -46,8 +46,8 @@ public class ChromatogramHeatmapPart extends AbstractPart<ChromatogramHeatmapUI>
 			Object object = null;
 			if(isUpdateEvent(topic)) {
 				object = objects.get(0);
-				if(object instanceof IChromatogramSelection) {
-					getControl().update((IChromatogramSelection)object);
+				if(object instanceof IChromatogramSelection chromatogramSelection) {
+					getControl().update(chromatogramSelection);
 					return true;
 				}
 			} else if(isCloseEvent(topic)) {

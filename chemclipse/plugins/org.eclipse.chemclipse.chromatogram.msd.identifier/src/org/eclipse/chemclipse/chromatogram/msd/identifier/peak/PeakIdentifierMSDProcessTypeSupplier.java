@@ -20,7 +20,7 @@ import java.util.List;
 import org.eclipse.chemclipse.chromatogram.msd.identifier.settings.IPeakIdentifierSettingsMSD;
 import org.eclipse.chemclipse.model.exceptions.NoIdentifierAvailableException;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessorSupplier;
+import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.eclipse.chemclipse.processing.core.ICategories;
@@ -55,7 +55,7 @@ public class PeakIdentifierMSDProcessTypeSupplier implements IProcessTypeSupplie
 		}
 	}
 
-	private static final class PeakIdentifierProcessorSupplier extends ChromatogramSelectionProcessorSupplier<IPeakIdentifierSettingsMSD> {
+	private static final class PeakIdentifierProcessorSupplier extends ChromatogramSelectionProcessSupplier<IPeakIdentifierSettingsMSD> {
 
 		private IPeakIdentifierSupplierMSD supplier;
 

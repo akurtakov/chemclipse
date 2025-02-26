@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2024 Lablicate GmbH.
+ * Copyright (c) 2018, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -26,9 +26,9 @@ public class TargetSupport {
 	 * @param object
 	 * @return {@link String}
 	 */
-	public static String getBestTargetLibraryField(Object object) {
+	public static String getBestTargetLibraryField(ITargetSupplier targetSupplier) {
 
-		IIdentificationTarget identificationTarget = getBestIdentificationTarget(object);
+		IIdentificationTarget identificationTarget = getBestIdentificationTarget(targetSupplier);
 		if(identificationTarget != null) {
 			LibraryField libraryField = PreferenceSupplier.getBestTargetLibraryField();
 			String name = libraryField.getTransformer().apply(identificationTarget);
@@ -36,7 +36,7 @@ public class TargetSupport {
 				return name;
 			}
 		}
-		//
+
 		return "";
 	}
 
@@ -46,26 +46,22 @@ public class TargetSupport {
 	 * @param object
 	 * @return {@link IIdentificationTarget}
 	 */
-	public static IIdentificationTarget getBestIdentificationTarget(Object object) {
+	public static IIdentificationTarget getBestIdentificationTarget(ITargetSupplier targetSupplier) {
 
-		if(object instanceof ITargetSupplier targetSupplier) {
-			/*
-			 * Is Retention Index used for QC?
-			 */
-			float retentionIndex = 0;
-			if(PreferenceSupplier.isUseRetentionIndexQC()) {
-				if(object instanceof IPeak peak) {
-					retentionIndex = peak.getPeakModel().getPeakMaximum().getRetentionIndex();
-				} else if(object instanceof IScan scan) {
-					retentionIndex = scan.getRetentionIndex();
-				}
+		/*
+		 * Is Retention Index used for QC?
+		 */
+		float retentionIndex = 0;
+		if(PreferenceSupplier.isUseRetentionIndexQC()) {
+			if(targetSupplier instanceof IPeak peak) {
+				retentionIndex = peak.getPeakModel().getPeakMaximum().getRetentionIndex();
+			} else if(targetSupplier instanceof IScan scan) {
+				retentionIndex = scan.getRetentionIndex();
 			}
-			/*
-			 * Best Match
-			 */
-			return IIdentificationTarget.getIdentificationTarget(targetSupplier.getTargets(), retentionIndex);
 		}
-		//
-		return null;
+		/*
+		 * Best Match
+		 */
+		return IIdentificationTarget.getIdentificationTarget(targetSupplier.getTargets(), retentionIndex);
 	}
 }

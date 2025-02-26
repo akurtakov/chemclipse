@@ -20,7 +20,7 @@ import java.util.List;
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.exceptions.NoChromatogramClassifierSupplierAvailableException;
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.settings.IChromatogramClassifierSettings;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessorSupplier;
+import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
@@ -56,7 +56,7 @@ public class ChromatogramClassifierProcessTypeSupport implements IProcessTypeSup
 		}
 	}
 
-	private static final class ChromatogramClassifierProcessorSupplier extends ChromatogramSelectionProcessorSupplier<IChromatogramClassifierSettings> {
+	private static final class ChromatogramClassifierProcessorSupplier extends ChromatogramSelectionProcessSupplier<IChromatogramClassifierSettings> {
 
 		private final IChromatogramClassifier classifier;
 

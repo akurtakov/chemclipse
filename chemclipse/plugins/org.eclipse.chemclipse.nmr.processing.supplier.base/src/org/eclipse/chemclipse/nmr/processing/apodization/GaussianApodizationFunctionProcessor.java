@@ -18,8 +18,8 @@ import java.math.RoundingMode;
 
 import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
-import org.eclipse.chemclipse.nmr.model.core.FIDMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.FilteredFIDMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.IMeasurementFID;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.AbstractFIDSignalFilter;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions.ComplexFIDData;
@@ -51,7 +51,7 @@ public class GaussianApodizationFunctionProcessor extends AbstractFIDSignalFilte
 	}
 
 	@Override
-	protected IMeasurement doFiltering(FilterContext<FIDMeasurement, GaussianApodizationSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
+	protected IMeasurement doFiltering(FilterContext<IMeasurementFID, GaussianApodizationSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
 		double gaussianLineBroadeningFactor = context.getFilterConfig().getGaussianLineBroadeningFactor();
 		if(gaussianLineBroadeningFactor > 0) {

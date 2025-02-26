@@ -21,9 +21,9 @@ import org.apache.commons.math3.complex.Complex;
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
-import org.eclipse.chemclipse.nmr.model.core.FIDMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.FilteredFIDMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.FilteredSpectrumMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.IMeasurementFID;
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions.ComplexFIDData;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.core.UtilityFunctions.SpectrumData;
@@ -114,7 +114,7 @@ public class DirectCurrentCorrection extends AbstractComplexSignalFilter<DirectC
 	@Override
 	public boolean acceptsIMeasurement(IMeasurement item) {
 
-		return item instanceof FIDMeasurement || item instanceof ISpectrumMeasurement;
+		return item instanceof IMeasurementFID || item instanceof ISpectrumMeasurement;
 	}
 
 	@Override
@@ -127,7 +127,7 @@ public class DirectCurrentCorrection extends AbstractComplexSignalFilter<DirectC
 	protected IMeasurement doFiltering(FilterContext<IComplexSignalMeasurement<?>, DirectCurrentCorrectionSettings> context, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
 		IComplexSignalMeasurement<?> measurement = context.getFilteredObject();
-		if(measurement instanceof FIDMeasurement fid) {
+		if(measurement instanceof IMeasurementFID fid) {
 			ComplexFIDData fidData = UtilityFunctions.toComplexFIDData(fid.getSignals());
 			directCurrentCorrectionFID(fidData);
 			FilteredFIDMeasurement<DirectCurrentCorrectionSettings> filtered = new FilteredFIDMeasurement<>(FilterContext.create(fid, this, context.getFilterConfig()));

@@ -28,7 +28,7 @@ import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.model.selection.IDataNMRSelection;
 import org.eclipse.chemclipse.processing.ProcessorFactory;
 import org.eclipse.chemclipse.processing.filter.Filtered;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.actions.IMeasurementFilterAction;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.actions.MeasurementFilterAction;
 import org.eclipse.chemclipse.xxd.process.support.ProcessTypeSupport;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -232,7 +232,7 @@ public class NMRSpectrumSelection {
 						}
 					};
 					for(IMeasurementFilter<?> filter : filters) {
-						mgr.add(new IMeasurementFilterAction(filter, measurements, consumer, processTypeSupport));
+						mgr.add(new MeasurementFilterAction(filter, measurements, consumer, processTypeSupport));
 					}
 				}
 			}

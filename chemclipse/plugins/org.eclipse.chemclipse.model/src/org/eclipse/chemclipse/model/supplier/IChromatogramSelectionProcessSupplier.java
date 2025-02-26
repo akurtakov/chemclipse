@@ -51,11 +51,9 @@ public interface IChromatogramSelectionProcessSupplier<SettingType> extends IPro
 			public <X> void execute(IProcessorPreferences<X> preferences, ProcessExecutionContext context) throws Exception {
 
 				IProcessSupplier<X> supplier = preferences.getSupplier();
-				if(supplier instanceof IChromatogramSelectionProcessSupplier<?>) {
-					IChromatogramSelectionProcessSupplier<X> chromatogramSelectionProcessSupplier = (IChromatogramSelectionProcessSupplier<X>)supplier;
+				if(supplier instanceof IChromatogramSelectionProcessSupplier<X> chromatogramSelectionProcessSupplier) {
 					updateResult(chromatogramSelectionProcessSupplier.apply(getResult(), preferences.getSettings(), context));
-				} else if(supplier instanceof IMeasurementProcessSupplier<?>) {
-					IMeasurementProcessSupplier<X> measurementProcessSupplier = (IMeasurementProcessSupplier<X>)supplier;
+				} else if(supplier instanceof IMeasurementProcessSupplier<X> measurementProcessSupplier) {
 					IChromatogram chromatogram = getResult().getChromatogram();
 					measurementProcessSupplier.applyProcessor(Collections.singleton(chromatogram), preferences.getSettings(), context);
 				}
@@ -82,8 +80,8 @@ public interface IChromatogramSelectionProcessSupplier<SettingType> extends IPro
 			@Override
 			public IProcessExecutionConsumer<IChromatogramSelection> withResult(Object initialResult) {
 
-				if(initialResult instanceof IChromatogramSelection) {
-					return IChromatogramSelectionProcessSupplier.createConsumer((IChromatogramSelection)initialResult);
+				if(initialResult instanceof IChromatogramSelection chromatogramSelection) {
+					return IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection);
 				}
 				return null;
 			}

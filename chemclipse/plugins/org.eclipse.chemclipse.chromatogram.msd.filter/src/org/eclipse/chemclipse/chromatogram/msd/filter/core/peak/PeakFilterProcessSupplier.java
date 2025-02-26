@@ -20,7 +20,7 @@ import java.util.List;
 import org.eclipse.chemclipse.chromatogram.filter.exceptions.NoPeakFilterSupplierAvailableException;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IPeakFilterSettings;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessorSupplier;
+import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.eclipse.chemclipse.processing.core.ICategories;
@@ -55,7 +55,7 @@ public class PeakFilterProcessSupplier implements IProcessTypeSupplier {
 		}
 	}
 
-	private static final class PeakFilterProcessorSupplier extends ChromatogramSelectionProcessorSupplier<IPeakFilterSettings> {
+	private static final class PeakFilterProcessorSupplier extends ChromatogramSelectionProcessSupplier<IPeakFilterSettings> {
 
 		@SuppressWarnings("unchecked")
 		public PeakFilterProcessorSupplier(IPeakFilterSupplier supplier, IProcessTypeSupplier parent) {
