@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  * Christoph Läubrich - make this configurable, null check for scan
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.swt;
@@ -80,12 +80,12 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 	private static final String POSTFIX_NONE = "";
 	private static final String POSTFIX_SHIFTED = " SHIFTED (+1)";
 	//
-	private Button buttonOptimizedScan;
-	private Button buttonToolbarInfo;
+	private AtomicReference<Button> buttonOptimizedScan = new AtomicReference<>();
+	private AtomicReference<Button> buttonToolbarInfo = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfoTop = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfoBottom = new AtomicReference<>();
-	private ScanChartUI scanChartUI;
-	private Button buttonToolbarEdit;
+	private AtomicReference<ScanChartUI> scanChartControl = new AtomicReference<>();
+	private AtomicReference<Button> buttonToolbarEdit = new AtomicReference<>();
 	private AtomicReference<Composite> toolbarEdit = new AtomicReference<>();
 	//
 	private IScanMSD scan1 = null;
@@ -153,11 +153,11 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 			scan1Optimized = null;
 			if(scanMSD == null) {
 				scan1 = null;
-				buttonOptimizedScan.setEnabled(false);
+				buttonOptimizedScan.get().setEnabled(false);
 			} else {
 				try {
 					scan1 = scanMSD.makeDeepCopy().normalize(NORMALIZATION_FACTOR);
-					buttonOptimizedScan.setEnabled(true);
+					buttonOptimizedScan.get().setEnabled(true);
 				} catch(CloneNotSupportedException e) {
 					logger.warn(e);
 				}
@@ -167,11 +167,11 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 			scan2Optimized = null;
 			if(scanMSD == null) {
 				scan2 = null;
-				buttonOptimizedScan.setEnabled(false);
+				buttonOptimizedScan.get().setEnabled(false);
 			} else {
 				try {
 					scan2 = scanMSD.makeDeepCopy().normalize(NORMALIZATION_FACTOR);
-					buttonOptimizedScan.setEnabled(true);
+					buttonOptimizedScan.get().setEnabled(true);
 				} catch(CloneNotSupportedException e) {
 					logger.warn(e);
 				}
@@ -205,7 +205,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 	@Override
 	public void dispose() {
 
-		scanChartUI.dispose();
+		scanChartControl.get().dispose();
 	}
 
 	private void updateIdentificationTarget(IIdentificationTarget identificationTarget) {
@@ -223,7 +223,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 					@Override
 					public void run() {
 
-						buttonOptimizedScan.setEnabled(true);
+						buttonOptimizedScan.get().setEnabled(true);
 						updateChart();
 					}
 				});
@@ -235,7 +235,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		try {
 			if(runnable.requireProgressMonitor()) {
 				DisplayUtils.executeInUserInterfaceThread(() -> {
-					ProgressMonitorDialog monitor = new ProgressMonitorDialog(scanChartUI.getShell());
+					ProgressMonitorDialog monitor = new ProgressMonitorDialog(scanChartControl.get().getShell());
 					monitor.run(true, true, runnable);
 					return null;
 				});
@@ -296,9 +296,9 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 					scan2Shifted.addIon(getIon(ion + 1, abundance));
 				}
 			}
-			scanChartUI.setInput(firstScan, scan2Shifted, mirrored);
+			scanChartControl.get().setInput(firstScan, scan2Shifted, mirrored);
 		} else {
-			scanChartUI.setInput(firstScan, secondScan, mirrored);
+			scanChartControl.get().setInput(firstScan, secondScan, mirrored);
 		}
 	}
 
@@ -332,7 +332,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 			}
 		}
 		//
-		scanChartUI.setInput(scanDifference1, scanDifference2, mirrored);
+		scanChartControl.get().setInput(scanDifference1, scanDifference2, mirrored);
 	}
 
 	private void updateScanNormal() {
@@ -343,13 +343,13 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		if(scan1 != null) {
 			IScanMSD firstScan = (scan1Optimized != null) ? scan1Optimized : scan1;
 			toolbarInfoTop.get().setText(scanDataSupport.getMassSpectrumLabel(firstScan, PREFIX_U, TITLE_UNKNOWN, POSTFIX_NONE));
-			scanChartUI.setInput(firstScan);
+			scanChartControl.get().setInput(firstScan);
 		} else if(scan2 != null) {
 			IScanMSD secondScan = (scan2Optimized != null) ? scan2Optimized : scan2;
 			toolbarInfoTop.get().setText(scanDataSupport.getMassSpectrumLabel(secondScan, PREFIX_U, TITLE_UNKNOWN, POSTFIX_NONE));
-			scanChartUI.setInput(secondScan);
+			scanChartControl.get().setInput(secondScan);
 		} else {
-			scanChartUI.setInput(null);
+			scanChartControl.get().setInput(null);
 		}
 	}
 
@@ -375,9 +375,9 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 	private void initialize() {
 
-		enableToolbar(toolbarInfoTop, buttonToolbarInfo, IApplicationImage.IMAGE_INFO, TOOLTIP_INFO, true);
-		enableToolbar(toolbarInfoBottom, buttonToolbarInfo, IApplicationImage.IMAGE_INFO, TOOLTIP_INFO, true);
-		enableToolbar(toolbarEdit, buttonToolbarEdit, IApplicationImage.IMAGE_EDIT, TOOLTIP_EDIT, false);
+		enableToolbar(toolbarInfoTop, buttonToolbarInfo.get(), IApplicationImage.IMAGE_INFO, TOOLTIP_INFO, true);
+		enableToolbar(toolbarInfoBottom, buttonToolbarInfo.get(), IApplicationImage.IMAGE_INFO, TOOLTIP_INFO, true);
+		enableToolbar(toolbarEdit, buttonToolbarEdit.get(), IApplicationImage.IMAGE_EDIT, TOOLTIP_EDIT, false);
 	}
 
 	private void createToolbarMain(Composite parent) {
@@ -388,12 +388,22 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(6, false));
 		//
-		buttonToolbarInfo = createButtonToggleToolbar(composite, Arrays.asList(toolbarInfoTop, toolbarInfoBottom), IMAGE_INFO, TOOLTIP_INFO);
-		buttonToolbarEdit = createButtonToggleToolbar(composite, toolbarEdit, IMAGE_EDIT, TOOLTIP_EDIT);
+		createButtonToggleInfo(composite);
+		createButtonToggleEdit(composite);
 		createResetButton(composite);
 		createSaveButton(composite);
-		buttonOptimizedScan = createOptimizedScanButton(composite);
+		createOptimizedScanButton(composite);
 		createSettingsButton(composite);
+	}
+
+	private void createButtonToggleInfo(Composite parent) {
+
+		buttonToolbarInfo.set(createButtonToggleToolbar(parent, Arrays.asList(toolbarInfoTop, toolbarInfoBottom), IMAGE_INFO, TOOLTIP_INFO));
+	}
+
+	private void createButtonToggleEdit(Composite parent) {
+
+		buttonToolbarEdit.set(createButtonToggleToolbar(parent, toolbarEdit, IMAGE_EDIT, TOOLTIP_EDIT));
 	}
 
 	private void createToolbarOptions(Composite parent) {
@@ -539,8 +549,10 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 	private void createScanChart(Composite parent) {
 
-		scanChartUI = new ScanChartUI(parent, SWT.BORDER);
+		ScanChartUI scanChartUI = new ScanChartUI(parent, SWT.BORDER);
 		scanChartUI.setLayoutData(new GridData(GridData.FILL_BOTH));
+		//
+		scanChartControl.set(scanChartUI);
 	}
 
 	private void createToolbarInfoTop(Composite parent) {
@@ -602,7 +614,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		return button;
 	}
 
-	private Button createOptimizedScanButton(Composite parent) {
+	private void createOptimizedScanButton(Composite parent) {
 
 		Button button = new Button(parent, SWT.PUSH);
 		button.setToolTipText("Show optimized scan.");
@@ -633,7 +645,8 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 				}
 			}
 		});
-		return button;
+		//
+		buttonOptimizedScan.set(button);
 	}
 
 	private void createSettingsButton(Composite parent) {
@@ -652,7 +665,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 		scan1Optimized = null;
 		scan2Optimized = null;
-		buttonOptimizedScan.setEnabled(true);
+		buttonOptimizedScan.get().setEnabled(true);
 		updateChart();
 	}
 
