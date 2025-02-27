@@ -9,6 +9,13 @@
       </icon>
    </extension>
    <extension
+         point="org.eclipse.chemclipse.xxd.process.ui.menu.icon">
+      <icon
+            class="org.eclipse.chemclipse.msd.converter.supplier.mzdata.ui.icon.MenuIcon"
+            id="org.eclipse.chemclipse.msd.converter.supplier.mzdata.ms">
+      </icon>
+   </extension>
+   <extension
          point="org.eclipse.ui.editors">
       <editor
             class="org.eclipse.chemclipse.ux.extension.xxd.ui.editors.ChromatogramEditor3x"

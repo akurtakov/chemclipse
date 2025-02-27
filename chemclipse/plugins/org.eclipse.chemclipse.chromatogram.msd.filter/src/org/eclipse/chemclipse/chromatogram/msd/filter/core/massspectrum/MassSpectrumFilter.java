@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2018 Lablicate GmbH.
+ * Copyright (c) 2014, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -46,6 +46,7 @@ public class MassSpectrumFilter {
 	 * This class is a singleton. Use only static methods.
 	 */
 	private MassSpectrumFilter() {
+
 	}
 
 	/**
@@ -138,7 +139,8 @@ public class MassSpectrumFilter {
 			supplier.setFilterName(element.getAttribute(FILTER_NAME));
 			try {
 				supplier.setConfigClass(element.createExecutableExtension(FILTER_CONFIG).getClass().asSubclass(IMassSpectrumFilterSettings.class));
-			} catch(Exception e) {
+			} catch(CoreException e) {
+				logger.warn(e);
 				// can't use it then
 			}
 			filterSupport.add(supplier);

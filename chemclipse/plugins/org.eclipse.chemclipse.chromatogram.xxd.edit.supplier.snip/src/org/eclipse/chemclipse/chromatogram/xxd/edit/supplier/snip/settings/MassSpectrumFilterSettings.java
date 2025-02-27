@@ -25,10 +25,12 @@ public class MassSpectrumFilterSettings extends AbstractMassSpectrumFilterSettin
 	@JsonPropertyDescription(value = "The number of iterations to run the filter.")
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_ITERATIONS, maxValue = PreferenceSupplier.MAX_ITERATIONS)
 	private int iterations = 100;
+
 	@JsonProperty(value = "Magnification Factor", defaultValue = "1.0")
 	@JsonPropertyDescription(value = "The magnification factor run the filter.")
 	@DoubleSettingsProperty(minValue = PreferenceSupplier.MIN_MAGNIFICATION_FACTOR, maxValue = PreferenceSupplier.MAX_MAGNIFICATION_FACTOR)
 	private double magnificationFactor = 1.0d;
+
 	@JsonProperty(value = "Transitions", defaultValue = "1")
 	@JsonPropertyDescription(value = "The number of transitions run the filter.")
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_TRANSITIONS, maxValue = PreferenceSupplier.MAX_TRANSITIONS)

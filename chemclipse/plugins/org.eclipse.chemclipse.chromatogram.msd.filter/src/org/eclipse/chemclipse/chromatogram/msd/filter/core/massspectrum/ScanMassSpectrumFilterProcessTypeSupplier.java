@@ -15,28 +15,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
+import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.supplier.IProcessTypeSupplier;
 import org.osgi.service.component.annotations.Component;
 
 @Component(service = IProcessTypeSupplier.class)
-public class PeakMassspectrumFilterProcessTypeSupplier extends AbstractMassspectrumFilterProcessTypeSupplier {
+public class ScanMassSpectrumFilterProcessTypeSupplier extends AbstractMassSpectrumFilterProcessTypeSupplier {
 
-	public PeakMassspectrumFilterProcessTypeSupplier() {
+	public ScanMassSpectrumFilterProcessTypeSupplier() {
 
-		super(ICategories.PEAK_MASS_SPECTRUM_FILTER, "mzfilter.msd.peak.", new Function<IChromatogramSelection, List<IScanMSD>>() {
+		super(ICategories.SCAN_MASS_SPECTRUM_FILTER, "mzfilter.msd.scan.", new Function<IChromatogramSelection, List<IScanMSD>>() {
 
 			@Override
 			public List<IScanMSD> apply(IChromatogramSelection chromatogramSelection) {
 
 				List<IScanMSD> massspectras = new ArrayList<>();
-				List<?> peaks = chromatogramSelection.getChromatogram().getPeaks(chromatogramSelection);
-				for(Object object : peaks) {
-					if(object instanceof IPeakMSD peakMSD) {
-						massspectras.add(peakMSD.getExtractedMassSpectrum());
+				IChromatogram chromatogram = chromatogramSelection.getChromatogram();
+				int startScan = chromatogram.getScanNumber(chromatogramSelection.getStartRetentionTime());
+				int stopScan = chromatogram.getScanNumber(chromatogramSelection.getStopRetentionTime());
+				for(int scanIndex = startScan; scanIndex <= stopScan; scanIndex++) {
+					IScan scan = chromatogram.getScan(scanIndex);
+					if(scan instanceof IScanMSD scanMSD) {
+						massspectras.add(scanMSD);
 					}
 				}
 				return massspectras;

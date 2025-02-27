@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2022 Lablicate GmbH.
+ * Copyright (c) 2014, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -24,6 +24,7 @@ public class MassSpectrumFilterSettings extends AbstractMassSpectrumFilterSettin
 	@JsonPropertyDescription(value = "List the ions, separated by a white space.")
 	@StringSettingsProperty(regExp = "(\\d+[;|\\s]?)+", description = "must be space separated digits.", isMultiLine = false, allowEmpty = false)
 	private String ionsToRemove = "18 28 84 207";
+
 	@JsonProperty(value = "Mode", defaultValue = "INCLUDE")
 	@JsonPropertyDescription(value = "Gives the mode to use (include = remove all ions given in the list, exclude = remove all ions not in the list)")
 	private MarkedTraceModus markMode = MarkedTraceModus.INCLUDE;

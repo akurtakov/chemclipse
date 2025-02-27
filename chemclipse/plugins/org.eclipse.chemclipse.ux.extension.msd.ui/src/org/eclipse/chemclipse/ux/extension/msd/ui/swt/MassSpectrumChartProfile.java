@@ -22,6 +22,7 @@ import java.util.Locale;
 import org.eclipse.chemclipse.chromatogram.msd.filter.core.massspectrum.IMassSpectrumFilterSupplier;
 import org.eclipse.chemclipse.chromatogram.msd.filter.core.massspectrum.IMassSpectrumFilterSupport;
 import org.eclipse.chemclipse.chromatogram.msd.filter.core.massspectrum.MassSpectrumFilter;
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IMassSpectrumPeak;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
@@ -39,11 +40,17 @@ import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.ux.extension.msd.ui.internal.provider.UpdateMenuEntry;
+import org.eclipse.chemclipse.xxd.process.ui.menu.IMenuIcon;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -71,8 +78,10 @@ import org.eclipse.swtchart.extensions.menu.IChartMenuEntry;
 
 public class MassSpectrumChartProfile extends LineChart implements IMassSpectrumChart {
 
+	private static final Logger logger = Logger.getLogger(MassSpectrumChartProfile.class);
+
 	private static final int MAX_NUMBER_MZ = 25000;
-	//
+
 	private IScanMSD massSpectrum = null;
 
 	public MassSpectrumChartProfile() {
@@ -161,6 +170,28 @@ public class MassSpectrumChartProfile extends LineChart implements IMassSpectrum
 				public String getCategory() {
 
 					return ICategories.FILTER;
+				}
+
+				@Override
+				public Image getIcon() {
+
+					IExtensionRegistry registry = Platform.getExtensionRegistry();
+					IConfigurationElement[] config = registry.getConfigurationElementsFor(IMenuIcon.EXTENSION_POINT_ID);
+					try {
+						for(IConfigurationElement element : config) {
+							final String id = element.getAttribute("id");
+							if(!supplier.getId().equals(id)) {
+								continue;
+							}
+							final Object object = element.createExecutableExtension("class");
+							if(object instanceof IMenuIcon menuIcon) {
+								return menuIcon.getImage();
+							}
+						}
+					} catch(CoreException e) {
+						logger.warn(e);
+					}
+					return null;
 				}
 
 				@Override
@@ -304,6 +335,28 @@ public class MassSpectrumChartProfile extends LineChart implements IMassSpectrum
 				public String getCategory() {
 
 					return "Export";
+				}
+
+				@Override
+				public Image getIcon() {
+
+					IExtensionRegistry registry = Platform.getExtensionRegistry();
+					IConfigurationElement[] config = registry.getConfigurationElementsFor(IMenuIcon.EXTENSION_POINT_ID);
+					try {
+						for(IConfigurationElement element : config) {
+							final String id = element.getAttribute("id");
+							if(!supplier.getId().equals(id)) {
+								continue;
+							}
+							final Object object = element.createExecutableExtension("class");
+							if(object instanceof IMenuIcon menuIcon) {
+								return menuIcon.getImage();
+							}
+						}
+					} catch(CoreException e) {
+						logger.warn(e);
+					}
+					return null;
 				}
 
 				@Override

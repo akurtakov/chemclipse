@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2018 Lablicate GmbH.
+ * Copyright (c) 2014, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -22,9 +22,11 @@ public class MassSpectrumFilterSettings extends AbstractMassSpectrumFilterSettin
 	@JsonProperty(value = "Subtract Mass Spectrum", defaultValue = "18:200;28:1000;32:500")
 	@JsonPropertyDescription(value = "This is the mass spectrum used for subtraction.")
 	private String subtractMassSpectrum = "18:200;28:1000;32:500";
+
 	@JsonProperty(value = "Use Nominal Mass", defaultValue = "true")
 	@JsonPropertyDescription(value = "Use the nominal mass schema.")
 	private boolean useNominalMasses = true;
+
 	@JsonProperty(value = "Normalize Data", defaultValue = "true")
 	@JsonPropertyDescription(value = "Normalize the intensities.")
 	private boolean useNormalize = true;

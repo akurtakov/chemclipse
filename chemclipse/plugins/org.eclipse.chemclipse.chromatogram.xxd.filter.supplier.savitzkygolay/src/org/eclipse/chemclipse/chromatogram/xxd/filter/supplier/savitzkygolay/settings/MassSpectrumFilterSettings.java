@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2022 Lablicate GmbH.
+ * Copyright (c) 2018, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -22,10 +22,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class MassSpectrumFilterSettings extends AbstractMassSpectrumFilterSettings {
 
 	private static final Logger logger = Logger.getLogger(MassSpectrumFilterSettings.class);
-	//
+
 	@JsonProperty(value = "Order", defaultValue = "2")
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_ORDER, maxValue = PreferenceSupplier.MAX_ORDER)
 	private int order = 2;
+
 	@JsonProperty(value = "Width", defaultValue = "5")
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_WIDTH, maxValue = PreferenceSupplier.MAX_WIDTH)
 	private int width = 5;

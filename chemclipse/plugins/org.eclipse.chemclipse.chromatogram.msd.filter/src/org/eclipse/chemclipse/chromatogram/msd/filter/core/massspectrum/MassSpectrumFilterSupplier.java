@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2018 Lablicate GmbH.
+ * Copyright (c) 2014, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -18,7 +18,7 @@ public class MassSpectrumFilterSupplier implements IMassSpectrumFilterSupplier {
 	private String id = "";
 	private String description = "";
 	private String filterName = "";
-	private Class<? extends IMassSpectrumFilterSettings> configClass;
+	private Class<? extends IMassSpectrumFilterSettings> settingsClass;
 
 	@Override
 	public String getDescription() {
@@ -115,13 +115,13 @@ public class MassSpectrumFilterSupplier implements IMassSpectrumFilterSupplier {
 	// ------------------------------------hashCode, equals, toString
 
 	@Override
-	public Class<? extends IMassSpectrumFilterSettings> getConfigClass() {
+	public Class<? extends IMassSpectrumFilterSettings> getSettingsClass() {
 
-		return configClass;
+		return settingsClass;
 	}
 
-	public void setConfigClass(Class<? extends IMassSpectrumFilterSettings> configClass) {
+	public void setConfigClass(Class<? extends IMassSpectrumFilterSettings> settingsClass) {
 
-		this.configClass = configClass;
+		this.settingsClass = settingsClass;
 	}
 }
