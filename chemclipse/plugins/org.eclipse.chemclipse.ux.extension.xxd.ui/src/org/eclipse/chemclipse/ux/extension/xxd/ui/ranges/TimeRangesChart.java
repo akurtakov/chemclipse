@@ -344,6 +344,15 @@ public class TimeRangesChart extends ChromatogramPeakChart {
 		//
 		if(width != 0) {
 			/*
+			 * Toggle start/stop. It's also possible to select
+			 * the time range "right to left" instead of "left to right".
+			 */
+			if(xStart > xStop) {
+				int tmp = xStart;
+				xStart = xStop;
+				xStop = tmp;
+			}
+			/*
 			 * Selected Width
 			 */
 			double factorWidth = 100.0d / width;
