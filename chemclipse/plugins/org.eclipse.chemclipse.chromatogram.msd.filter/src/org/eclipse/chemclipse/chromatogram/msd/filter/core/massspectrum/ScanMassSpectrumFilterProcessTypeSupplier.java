@@ -24,9 +24,9 @@ import org.eclipse.chemclipse.processing.supplier.IProcessTypeSupplier;
 import org.osgi.service.component.annotations.Component;
 
 @Component(service = IProcessTypeSupplier.class)
-public class ScanMassspectrumFilterProcessTypeSupplier extends AbstractMassSpectrumFilterProcessTypeSupplier {
+public class ScanMassSpectrumFilterProcessTypeSupplier extends AbstractMassSpectrumFilterProcessTypeSupplier {
 
-	public ScanMassspectrumFilterProcessTypeSupplier() {
+	public ScanMassSpectrumFilterProcessTypeSupplier() {
 
 		super(ICategories.SCAN_MASS_SPECTRUM_FILTER, "mzfilter.msd.scan.", new Function<IChromatogramSelection, List<IScanMSD>>() {
 

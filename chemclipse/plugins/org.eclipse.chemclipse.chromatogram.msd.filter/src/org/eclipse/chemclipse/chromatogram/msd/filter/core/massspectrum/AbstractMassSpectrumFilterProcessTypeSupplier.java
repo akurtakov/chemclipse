@@ -28,13 +28,13 @@ import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessTypeSupplier;
 import org.eclipse.core.runtime.IProgressMonitor;
 
-public abstract class AbstractMassspectrumFilterProcessTypeSupplier implements IProcessTypeSupplier {
+public abstract class AbstractMassSpectrumFilterProcessTypeSupplier implements IProcessTypeSupplier {
 
 	private final String category;
 	private final String prefix;
 	private final Function<IChromatogramSelection, List<IScanMSD>> extractionFunction;
 
-	public AbstractMassspectrumFilterProcessTypeSupplier(String category, String prefix, Function<IChromatogramSelection, List<IScanMSD>> extractionFunction) {
+	public AbstractMassSpectrumFilterProcessTypeSupplier(String category, String prefix, Function<IChromatogramSelection, List<IScanMSD>> extractionFunction) {
 
 		this.category = category;
 		this.prefix = prefix;
@@ -70,7 +70,7 @@ public abstract class AbstractMassspectrumFilterProcessTypeSupplier implements I
 		@SuppressWarnings("unchecked")
 		public MassSpectrumFilterProcessorSupplier(String prefix, IMassSpectrumFilterSupplier supplier, Function<IChromatogramSelection, List<IScanMSD>> extractionFunction, IProcessTypeSupplier parent) {
 
-			super(prefix + supplier.getId(), supplier.getFilterName(), supplier.getDescription(), (Class<IMassSpectrumFilterSettings>)supplier.getConfigClass(), parent, DataType.MSD);
+			super(prefix + supplier.getId(), supplier.getFilterName(), supplier.getDescription(), (Class<IMassSpectrumFilterSettings>)supplier.getSettingsClass(), parent, DataType.MSD);
 			this.supplier = supplier;
 			this.extractionFunction = extractionFunction;
 		}
