@@ -48,24 +48,24 @@ import jakarta.xml.bind.Unmarshaller;
 public class MassSpectrumReaderVersion105 extends AbstractMassSpectraReader implements IMassSpectraReader {
 
 	public static final String VERSION = "1.05";
-	//
+
 	private static final Logger logger = Logger.getLogger(MassSpectrumReaderVersion105.class);
 
 	@Override
 	public IMassSpectra read(File file, IProgressMonitor monitor) throws IOException {
 
 		IStandaloneMassSpectrum massSpectrum = null;
-		//
+
 		try {
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(file);
 			NodeList nodeList = document.getElementsByTagName(ReaderVersion105.NODE_MZ_DATA);
-			//
+
 			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 			MzData mzData = (MzData)unmarshaller.unmarshal(nodeList.item(0));
-			//
+
 			massSpectrum = new StandaloneMassSpectrum();
 			massSpectrum.setFile(file);
 			massSpectrum.setIdentifier(file.getName());
@@ -79,7 +79,7 @@ public class MassSpectrumReaderVersion105 extends AbstractMassSpectraReader impl
 		} catch(ParserConfigurationException e) {
 			logger.warn(e);
 		}
-		//
+
 		IVendorMassSpectra massSpectra = new VendorMassSpectra();
 		massSpectra.setName(file.getName());
 		massSpectra.addMassSpectrum(massSpectrum);

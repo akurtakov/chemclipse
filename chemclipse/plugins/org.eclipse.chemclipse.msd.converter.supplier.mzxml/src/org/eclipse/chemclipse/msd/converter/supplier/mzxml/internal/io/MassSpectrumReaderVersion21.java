@@ -30,6 +30,7 @@ import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.msd.converter.io.AbstractMassSpectraReader;
 import org.eclipse.chemclipse.msd.converter.io.IMassSpectraReader;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v21.model.DataProcessing;
+import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v21.model.Maldi;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v21.model.MsRun;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v21.model.ObjectFactory;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v21.model.Peaks;
@@ -61,17 +62,17 @@ public class MassSpectrumReaderVersion21 extends AbstractMassSpectraReader imple
 	public IMassSpectra read(File file, IProgressMonitor monitor) throws IOException {
 
 		IStandaloneMassSpectrum massSpectrum = null;
-		//
+
 		try {
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(file);
 			NodeList nodeList = document.getElementsByTagName(AbstractChromatogramReaderVersion.NODE_MS_RUN);
-			//
+
 			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 			MsRun msrun = (MsRun)unmarshaller.unmarshal(nodeList.item(0));
-			//
+
 			massSpectrum = new VendorMassSpectrum();
 			massSpectrum.setFile(file);
 			massSpectrum.setIdentifier(file.getName());
@@ -95,6 +96,14 @@ public class MassSpectrumReaderVersion21 extends AbstractMassSpectraReader imple
 					} else if(polarity.equals("-")) {
 						massSpectrum.setPolarity(Polarity.NEGATIVE);
 					}
+				}
+				/*
+				 * Plate
+				 */
+				Maldi maldi = scan.getMaldi();
+				if(maldi != null) {
+					massSpectrum.setPlate(maldi.getPlateID());
+					massSpectrum.setPosition(maldi.getSpotID());
 				}
 				/*
 				 * Get the ions.

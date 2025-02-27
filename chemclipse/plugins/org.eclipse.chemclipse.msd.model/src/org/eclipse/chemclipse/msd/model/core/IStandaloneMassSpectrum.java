@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2024 Lablicate GmbH.
+ * Copyright (c) 2022, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -50,6 +50,20 @@ public interface IStandaloneMassSpectrum extends IRegularMassSpectrum {
 	String getSampleName();
 
 	void setSampleName(String name);
+
+	/**
+	 * @return ID of the MALDI target
+	 */
+	String getPlate();
+
+	void setPlate(String plate);
+
+	/**
+	 * @return location (coordinate) on the plate
+	 */
+	String getPosition();
+
+	void setPosition(String plateLocation);
 
 	String getDescription();
 
