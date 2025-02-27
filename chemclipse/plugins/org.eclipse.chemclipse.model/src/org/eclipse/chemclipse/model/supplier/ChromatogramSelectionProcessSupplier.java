@@ -8,6 +8,7 @@
  * 
  * Contributors:
  * Christoph Läubrich - initial API and implementation
+ * Philip Wenig - fix constructor parameter
  *******************************************************************************/
 package org.eclipse.chemclipse.model.supplier;
 
@@ -30,7 +31,7 @@ public abstract class ChromatogramSelectionProcessSupplier<SettingsClass> extend
 		super(id, name, description, settingsClass, parent, convert(dataTypes));
 	}
 
-	protected ChromatogramSelectionProcessSupplier(String id, String name, String description, Class<SettingsClass> settingsClass, IProcessTypeSupplier parent, int b, DataCategory... dataTypes) {
+	protected ChromatogramSelectionProcessSupplier(String id, String name, String description, Class<SettingsClass> settingsClass, IProcessTypeSupplier parent, DataCategory... dataTypes) {
 
 		super(id, name, description, settingsClass, parent, dataTypes);
 	}
