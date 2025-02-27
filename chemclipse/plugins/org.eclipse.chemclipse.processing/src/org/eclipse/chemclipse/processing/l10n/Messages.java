@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2024 Lablicate GmbH.
+ * Copyright (c) 2023, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -38,6 +38,7 @@ public class Messages extends NLS {
 	public static String scanIdentifier;
 	public static String peakMassSpectrumFilter;
 	public static String scanMassSpectrumFilter;
+	public static String massSpectrumFilter;
 	public static String system;
 	public static String userMethods;
 	public static String userInterface;

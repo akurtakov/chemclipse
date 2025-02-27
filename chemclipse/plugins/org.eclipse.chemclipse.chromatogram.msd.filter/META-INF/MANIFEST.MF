@@ -28,6 +28,7 @@ Bundle-Vendor: ChemClipse
 Import-Package: org.eclipse.chemclipse.support.settings.parser,
  org.osgi.service.component.annotations;version="1.2.0"
 Service-Component: OSGI-INF/org.eclipse.chemclipse.chromatogram.msd.filter.core.chromatogram.ChromatogramFilterMSDProcessSupplier.xml,
+ OSGI-INF/org.eclipse.chemclipse.chromatogram.msd.filter.core.massspectrum.MassSpectrumFilterProcessSupplier.xml,
  OSGI-INF/org.eclipse.chemclipse.chromatogram.msd.filter.core.massspectrum.PeakMassSpectrumFilterProcessTypeSupplier.xml,
  OSGI-INF/org.eclipse.chemclipse.chromatogram.msd.filter.core.massspectrum.ScanMassSpectrumFilterProcessTypeSupplier.xml,
  OSGI-INF/org.eclipse.chemclipse.chromatogram.msd.filter.core.peak.PeakFilterProcessSupplier.xml

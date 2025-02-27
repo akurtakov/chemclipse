@@ -10,7 +10,7 @@
  * Christoph Läubrich - initial API and implementation
  * Philip Wenig - support process method resume option
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.swt.editors;
+package org.eclipse.chemclipse.ux.extension.ui.editors;
 
 import java.util.function.BiConsumer;
 
@@ -34,7 +34,7 @@ public class ProcessorSupplierMenuEntry<T> extends AbstractChartMenuEntry implem
 	private final IProcessSupplier<T> processorSupplier;
 	private final BiConsumer<IProcessSupplier<T>, IProcessSupplierContext> executionConsumer;
 	private final IProcessSupplierContext context;
-	//
+
 	private static final Logger logger = Logger.getLogger(ProcessorSupplierMenuEntry.class);
 
 	public ProcessorSupplierMenuEntry(IProcessSupplier<T> processorSupplier, IProcessSupplierContext context, BiConsumer<IProcessSupplier<T>, IProcessSupplierContext> executionConsumer) {

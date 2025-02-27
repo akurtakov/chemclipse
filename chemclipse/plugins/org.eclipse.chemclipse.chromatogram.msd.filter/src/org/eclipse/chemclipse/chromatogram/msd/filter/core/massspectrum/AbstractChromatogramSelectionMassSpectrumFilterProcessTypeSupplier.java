@@ -28,13 +28,13 @@ import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessTypeSupplier;
 import org.eclipse.core.runtime.IProgressMonitor;
 
-public abstract class AbstractMassSpectrumFilterProcessTypeSupplier implements IProcessTypeSupplier {
+public abstract class AbstractChromatogramSelectionMassSpectrumFilterProcessTypeSupplier implements IProcessTypeSupplier {
 
 	private final String category;
 	private final String prefix;
 	private final Function<IChromatogramSelection, List<IScanMSD>> extractionFunction;
 
-	public AbstractMassSpectrumFilterProcessTypeSupplier(String category, String prefix, Function<IChromatogramSelection, List<IScanMSD>> extractionFunction) {
+	public AbstractChromatogramSelectionMassSpectrumFilterProcessTypeSupplier(String category, String prefix, Function<IChromatogramSelection, List<IScanMSD>> extractionFunction) {
 
 		this.category = category;
 		this.prefix = prefix;
@@ -78,8 +78,8 @@ public abstract class AbstractMassSpectrumFilterProcessTypeSupplier implements I
 		@Override
 		public IChromatogramSelection apply(IChromatogramSelection chromatogramSelection, IMassSpectrumFilterSettings processSettings, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
-			List<IScanMSD> massspectras = extractionFunction.apply(chromatogramSelection);
-			messageConsumer.addMessages(MassSpectrumFilter.applyFilter(massspectras, processSettings, supplier.getId(), monitor));
+			List<IScanMSD> massSpectras = extractionFunction.apply(chromatogramSelection);
+			messageConsumer.addMessages(MassSpectrumFilter.applyFilter(massSpectras, processSettings, supplier.getId(), monitor));
 			chromatogramSelection.getChromatogram().setDirty(true);
 			return chromatogramSelection;
 		}

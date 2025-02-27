@@ -92,6 +92,7 @@ import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.swt.ui.preferences.PreferencePageSystem;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.swt.ui.support.Fonts;
+import org.eclipse.chemclipse.ux.extension.ui.editors.ProcessorSupplierMenuEntry;
 import org.eclipse.chemclipse.ux.extension.ui.methods.ProcessSettingsSupport;
 import org.eclipse.chemclipse.ux.extension.ui.methods.SettingsWizard;
 import org.eclipse.chemclipse.ux.extension.ui.support.PartSupport;
