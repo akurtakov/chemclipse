@@ -49,15 +49,15 @@ public class MassSpectrumReaderVersion110 extends AbstractMassSpectraReader impl
 	public IMassSpectra read(File file, IProgressMonitor monitor) throws IOException {
 
 		IStandaloneMassSpectrum massSpectrum = null;
-		//
+
 		try {
-			//
+
 			massSpectrum = new VendorMassSpectrum();
 			massSpectrum.setFile(file);
 			massSpectrum.setIdentifier(file.getName());
-			//
+
 			MzMLType mzML = XmlReader110.getMzML(file);
-			//
+
 			FileDescriptionType fileDescription = mzML.getFileDescription();
 			if(fileDescription != null) {
 				ParamGroupType fileContent = fileDescription.getFileContent();
@@ -69,12 +69,15 @@ public class MassSpectrumReaderVersion110 extends AbstractMassSpectraReader impl
 					}
 				}
 			}
-			//
+
 			double[] mzs = null;
 			double[] intensities = null;
-			//
+
 			RunType run = mzML.getRun();
 			for(SpectrumType spectrum : run.getSpectrumList().getSpectrum()) {
+
+				massSpectrum.setPosition(spectrum.getSpotID());
+
 				for(CVParamType cvParam : spectrum.getCvParam()) {
 					if(cvParam.getAccession().equals("MS:1000127") && cvParam.getName().equals("centroid spectrum")) {
 						massSpectrum.setMassSpectrumType(MassSpectrumType.CENTROID);
@@ -101,7 +104,7 @@ public class MassSpectrumReaderVersion110 extends AbstractMassSpectraReader impl
 		} catch(DataFormatException e) {
 			logger.warn(e);
 		}
-		//
+
 		IVendorMassSpectra massSpectra = new VendorMassSpectra();
 		massSpectra.setName(file.getName());
 		massSpectra.addMassSpectrum(massSpectrum);

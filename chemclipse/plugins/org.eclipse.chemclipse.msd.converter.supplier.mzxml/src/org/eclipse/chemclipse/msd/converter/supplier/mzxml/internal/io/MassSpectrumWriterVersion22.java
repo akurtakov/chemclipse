@@ -27,6 +27,7 @@ import org.eclipse.chemclipse.msd.converter.io.IMassSpectraWriter;
 import org.eclipse.chemclipse.msd.converter.massspectrum.MassSpectrumConverter;
 import org.eclipse.chemclipse.msd.converter.massspectrum.MassSpectrumConverterSupport;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.DataProcessing;
+import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.Maldi;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.MsRun;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.MzXML;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.ObjectFactory;
@@ -39,6 +40,7 @@ import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
+import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.core.runtime.IProduct;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -157,9 +159,22 @@ public class MassSpectrumWriterVersion22 implements IMassSpectraWriter {
 			scan.setMsLevel(BigInteger.valueOf(regularMassSpectrum.getMassSpectrometer()));
 			scan.setCentroided(regularMassSpectrum.getMassSpectrumType() == MassSpectrumType.CENTROID);
 		}
+		if(scanMSD instanceof IStandaloneMassSpectrum standaloneMassSpectrum) {
+			scan.setMaldi(createMaldi(standaloneMassSpectrum));
+		}
 		scan.setPeaksCount(BigInteger.valueOf(scanMSD.getNumberOfIons()));
 		scan.setPeaks(createPeaks(scanMSD));
 		return scan;
+	}
+
+	private Maldi createMaldi(IStandaloneMassSpectrum standaloneMassSpectrum) {
+
+		Maldi maldi = new Maldi();
+		if(maldi != null) {
+			maldi.setPlateID(standaloneMassSpectrum.getPlate());
+			maldi.setSpotID(standaloneMassSpectrum.getPosition());
+		}
+		return null;
 	}
 
 	private Peaks createPeaks(IScanMSD scanMSD) {

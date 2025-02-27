@@ -30,6 +30,7 @@ import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.msd.converter.io.AbstractMassSpectraReader;
 import org.eclipse.chemclipse.msd.converter.io.IMassSpectraReader;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.DataProcessing;
+import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.Maldi;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.MsRun;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.MzXML;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.ObjectFactory;
@@ -55,25 +56,25 @@ import jakarta.xml.bind.Unmarshaller;
 public class MassSpectrumReaderVersion22 extends AbstractMassSpectraReader implements IMassSpectraReader {
 
 	public static final String VERSION = "mzXML_2.2";
-	//
+
 	private static final Logger logger = Logger.getLogger(MassSpectrumReaderVersion22.class);
 
 	@Override
 	public IMassSpectra read(File file, IProgressMonitor monitor) throws IOException {
 
 		IStandaloneMassSpectrum massSpectrum = null;
-		//
+
 		try {
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			documentBuilderFactory.setNamespaceAware(true);
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(file);
 			NodeList nodeList = document.getElementsByTagName(AbstractChromatogramReaderVersion.NODE_MZXML);
-			//
+
 			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 			MzXML mzXML = (MzXML)unmarshaller.unmarshal(nodeList.item(0));
-			//
+
 			massSpectrum = new VendorMassSpectrum();
 			massSpectrum.setFile(file);
 			massSpectrum.setIdentifier(file.getName());
@@ -97,6 +98,14 @@ public class MassSpectrumReaderVersion22 extends AbstractMassSpectraReader imple
 					} else if(scan.getPolarity().equals("-")) {
 						massSpectrum.setPolarity(Polarity.NEGATIVE);
 					}
+				}
+				/*
+				 * Plate
+				 */
+				Maldi maldi = scan.getMaldi();
+				if(maldi != null) {
+					massSpectrum.setPlate(maldi.getPlateID());
+					massSpectrum.setPosition(maldi.getSpotID());
 				}
 				/*
 				 * Get the ions.

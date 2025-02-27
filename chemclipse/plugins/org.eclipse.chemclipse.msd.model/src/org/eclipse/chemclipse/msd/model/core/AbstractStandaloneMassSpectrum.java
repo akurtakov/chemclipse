@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2024 Lablicate GmbH.
+ * Copyright (c) 2022, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -24,9 +24,11 @@ public abstract class AbstractStandaloneMassSpectrum extends AbstractRegularMass
 	 * Renew the serialVersionUID any time you have changed some fields or
 	 * methods.
 	 */
-	private static final long serialVersionUID = 7180911179209208598L;
-	//
+	private static final long serialVersionUID = 7180911179209208599L;
+
 	private File file;
+	private String plate;
+	private String position;
 	private String sample;
 	private String description;
 	private String operator;
@@ -44,6 +46,30 @@ public abstract class AbstractStandaloneMassSpectrum extends AbstractRegularMass
 	public void setFile(File file) {
 
 		this.file = file;
+	}
+
+	@Override
+	public String getPlate() {
+
+		return plate;
+	}
+
+	@Override
+	public void setPlate(String plate) {
+
+		this.plate = plate;
+	}
+
+	@Override
+	public String getPosition() {
+
+		return position;
+	}
+
+	@Override
+	public void setPosition(String position) {
+
+		this.position = position;
 	}
 
 	@Override

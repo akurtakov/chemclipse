@@ -111,7 +111,7 @@ public class MassSpectrumWriterVersion110 implements IMassSpectraWriter {
 		for(IScanMSD massSpectrum : massSpectra.getList()) {
 			if(massSpectrum instanceof IStandaloneMassSpectrum standaloneMassSpectrum) {
 				SourceFileType sourceFile = XmlWriter110.createSourceFile(standaloneMassSpectrum.getFile());
-				//
+
 				if(massSpectra.getConverterId().equals("org.eclipse.chemclipse.msd.converter.supplier.mzdata.ms")) {
 					CVParamType cvParamFileFormat = new CVParamType();
 					cvParamFileFormat.setCvRef(XmlWriter110.MS);
@@ -242,6 +242,9 @@ public class MassSpectrumWriterVersion110 implements IMassSpectraWriter {
 				spectrum.getCvParam().add(XmlWriter110.createSpectrumDimension(massSpectrum));
 				spectrum.getCvParam().add(XmlWriter110.createSpectrumLevel(massSpectrum));
 				spectrum.getCvParam().add(XmlWriter110.createSpectrumType(massSpectrum));
+			}
+			if(scanMSD instanceof IStandaloneMassSpectrum standaloneMassSpectrum) {
+				spectrum.setSpotID(standaloneMassSpectrum.getPosition());
 			}
 			spectrum.setDefaultArrayLength(scanMSD.getNumberOfIons());
 			spectrumList.getSpectrum().add(spectrum);
