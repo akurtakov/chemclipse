@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2024 Lablicate GmbH.
+ * Copyright (c) 2018, 2025 Lablicate GmbH.
  *
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -10,7 +10,7 @@
  * Dr. Philip Wenig - initial API and implementation
  * Alexander Kerner - Generics, Logging
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.msd.ui.internal.support;
+package org.eclipse.chemclipse.ux.extension.msd.ui.support;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
