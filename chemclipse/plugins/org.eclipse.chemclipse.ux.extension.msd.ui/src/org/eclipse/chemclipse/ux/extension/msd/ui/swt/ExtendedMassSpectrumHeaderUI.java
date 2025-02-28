@@ -42,6 +42,7 @@ public class ExtendedMassSpectrumHeaderUI extends Composite {
 			offset = addHeaderLine(builder, styleRanges, "Data", massSpectrum.getMassSpectrumType().label(), offset);
 			offset = addHeaderLine(builder, styleRanges, "Technique", "MS" + massSpectrum.getMassSpectrometer(), offset);
 			offset = addHeaderLine(builder, styleRanges, "Ions", Integer.toString(massSpectrum.getNumberOfIons()), offset);
+			offset = addHeaderLine(builder, styleRanges, "Polarity", massSpectrum.getPolarity().label(), offset);
 			if(massSpectrum instanceof IStandaloneMassSpectrum standaloneMassSpectrum) {
 				offset = addHeaderLine(builder, styleRanges, "Name", standaloneMassSpectrum.getName(), offset);
 				offset = addHeaderLine(builder, styleRanges, "File", standaloneMassSpectrum.getFile().getName(), offset);
