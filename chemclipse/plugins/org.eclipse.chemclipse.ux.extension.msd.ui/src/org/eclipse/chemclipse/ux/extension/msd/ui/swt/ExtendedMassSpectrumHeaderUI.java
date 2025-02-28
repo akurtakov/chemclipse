@@ -40,8 +40,11 @@ public class ExtendedMassSpectrumHeaderUI extends Composite {
 				addHeaderLine(builder, "Name", standaloneMassSpectrum.getName());
 				addHeaderLine(builder, "File", standaloneMassSpectrum.getFile().getName());
 				addHeaderLine(builder, "Sample", standaloneMassSpectrum.getSampleName());
+				addHeaderLine(builder, "Description", standaloneMassSpectrum.getDescription());
 				addHeaderLine(builder, "Instrument", standaloneMassSpectrum.getInstrument());
 				addHeaderLine(builder, "Operator", standaloneMassSpectrum.getOperator());
+				addHeaderLine(builder, "Plate", standaloneMassSpectrum.getPlate());
+				addHeaderLine(builder, "Position", standaloneMassSpectrum.getPosition());
 				if(standaloneMassSpectrum.getDate() != null) {
 					addHeaderLine(builder, "Date", ValueFormat.getDateFormatEnglish().format(standaloneMassSpectrum.getDate()));
 				}
