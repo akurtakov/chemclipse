@@ -35,7 +35,7 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
-import org.eclipse.chemclipse.ux.extension.msd.ui.internal.support.DatabaseImportRunnable;
+import org.eclipse.chemclipse.ux.extension.msd.ui.support.DatabaseImportRunnable;
 import org.eclipse.chemclipse.ux.extension.ui.methods.SettingsUIProvider;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;

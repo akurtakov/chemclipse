@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2024 Lablicate GmbH.
+ * Copyright (c) 2013, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -38,7 +38,7 @@ import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.support.ui.workbench.EditorSupport;
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
-import org.eclipse.chemclipse.ux.extension.msd.ui.internal.support.DatabaseImportRunnable;
+import org.eclipse.chemclipse.ux.extension.msd.ui.support.DatabaseImportRunnable;
 import org.eclipse.chemclipse.ux.extension.msd.ui.swt.MassSpectrumLibraryUI;
 import org.eclipse.chemclipse.ux.extension.ui.editors.IChemClipseEditor;
 import org.eclipse.core.runtime.IProgressMonitor;
