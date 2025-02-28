@@ -11,17 +11,21 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.msd.ui.swt;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyleRange;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Text;
 
 public class ExtendedMassSpectrumHeaderUI extends Composite {
 
-	private Text text;
+	private StyledText styledText;
 
 	public ExtendedMassSpectrumHeaderUI(Composite parent, int style) {
 
@@ -32,39 +36,54 @@ public class ExtendedMassSpectrumHeaderUI extends Composite {
 	public void updateMassSpectrum(IRegularMassSpectrum massSpectrum) {
 
 		StringBuilder builder = new StringBuilder();
+		List<StyleRange> styleRanges = new ArrayList<>();
 		if(massSpectrum != null) {
-			addHeaderLine(builder, "Data", massSpectrum.getMassSpectrumType().label());
-			addHeaderLine(builder, "Technique", "MS" + massSpectrum.getMassSpectrometer());
-			addHeaderLine(builder, "Ions", Integer.toString(massSpectrum.getNumberOfIons()));
+			int offset = 0;
+			offset = addHeaderLine(builder, styleRanges, "Data", massSpectrum.getMassSpectrumType().label(), offset);
+			offset = addHeaderLine(builder, styleRanges, "Technique", "MS" + massSpectrum.getMassSpectrometer(), offset);
+			offset = addHeaderLine(builder, styleRanges, "Ions", Integer.toString(massSpectrum.getNumberOfIons()), offset);
 			if(massSpectrum instanceof IStandaloneMassSpectrum standaloneMassSpectrum) {
-				addHeaderLine(builder, "Name", standaloneMassSpectrum.getName());
-				addHeaderLine(builder, "File", standaloneMassSpectrum.getFile().getName());
-				addHeaderLine(builder, "Sample", standaloneMassSpectrum.getSampleName());
-				addHeaderLine(builder, "Description", standaloneMassSpectrum.getDescription());
-				addHeaderLine(builder, "Instrument", standaloneMassSpectrum.getInstrument());
-				addHeaderLine(builder, "Operator", standaloneMassSpectrum.getOperator());
-				addHeaderLine(builder, "Plate", standaloneMassSpectrum.getPlate());
-				addHeaderLine(builder, "Position", standaloneMassSpectrum.getPosition());
+				offset = addHeaderLine(builder, styleRanges, "Name", standaloneMassSpectrum.getName(), offset);
+				offset = addHeaderLine(builder, styleRanges, "File", standaloneMassSpectrum.getFile().getName(), offset);
+				offset = addHeaderLine(builder, styleRanges, "Sample", standaloneMassSpectrum.getSampleName(), offset);
+				offset = addHeaderLine(builder, styleRanges, "Description", standaloneMassSpectrum.getDescription(), offset);
+				offset = addHeaderLine(builder, styleRanges, "Instrument", standaloneMassSpectrum.getInstrument(), offset);
+				offset = addHeaderLine(builder, styleRanges, "Operator", standaloneMassSpectrum.getOperator(), offset);
+				offset = addHeaderLine(builder, styleRanges, "Plate", standaloneMassSpectrum.getPlate(), offset);
+				offset = addHeaderLine(builder, styleRanges, "Position", standaloneMassSpectrum.getPosition(), offset);
 				if(standaloneMassSpectrum.getDate() != null) {
-					addHeaderLine(builder, "Date", ValueFormat.getDateFormatEnglish().format(standaloneMassSpectrum.getDate()));
+					offset = addHeaderLine(builder, styleRanges, "Date", ValueFormat.getDateFormatEnglish().format(standaloneMassSpectrum.getDate()), offset);
 				}
 			}
 		}
 
-		text.setText(builder.toString());
+		styledText.setText(builder.toString());
+		styledText.setStyleRanges(styleRanges.toArray(new StyleRange[styleRanges.size()]));
 	}
 
-	private void addHeaderLine(StringBuilder builder, String key, String value) {
+	private int addHeaderLine(StringBuilder builder, List<StyleRange> styleRanges, String key, String value, int offset) {
+
+		if(value == null) {
+			return offset;
+		}
 
 		builder.append(key);
 		builder.append(": ");
 		builder.append(value);
-		builder.append("\n");
+		builder.append(System.lineSeparator());
+
+		StyleRange styleRange = new StyleRange();
+		styleRange.start = offset;
+		styleRange.length = key.length();
+		styleRange.fontStyle = SWT.BOLD;
+		styleRanges.add(styleRange);
+
+		return offset + key.length() + 2 + value.length() + System.lineSeparator().length();
 	}
 
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		text = new Text(this, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
+		styledText = new StyledText(this, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 	}
 }
