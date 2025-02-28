@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2024 Lablicate GmbH.
+ * Copyright (c) 2018, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -10,7 +10,7 @@
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - move method to open wizard, refactor for new settings
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.methods;
+package org.eclipse.chemclipse.ux.extension.ui.methods;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -54,7 +54,7 @@ public class ProcessSettingsSupport {
 				if(preferences.keys().length == 0) {
 					continue;
 				}
-				//
+
 				IProcessSupplier<?> processSupplier = context.getSupplier(childrenName);
 				if(processSupplier != null) {
 					if(!dynamicPreferencesOnly) {
@@ -68,7 +68,7 @@ public class ProcessSettingsSupport {
 			}
 		} catch(BackingStoreException e) {
 		}
-		//
+
 		return processorPreferences;
 	}
 

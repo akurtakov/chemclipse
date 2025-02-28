@@ -24,7 +24,7 @@ import org.eclipse.chemclipse.processing.supplier.IProcessTypeSupplier;
 import org.osgi.service.component.annotations.Component;
 
 @Component(service = IProcessTypeSupplier.class)
-public class ScanMassSpectrumFilterProcessTypeSupplier extends AbstractMassSpectrumFilterProcessTypeSupplier {
+public class ScanMassSpectrumFilterProcessTypeSupplier extends AbstractChromatogramSelectionMassSpectrumFilterProcessTypeSupplier {
 
 	public ScanMassSpectrumFilterProcessTypeSupplier() {
 

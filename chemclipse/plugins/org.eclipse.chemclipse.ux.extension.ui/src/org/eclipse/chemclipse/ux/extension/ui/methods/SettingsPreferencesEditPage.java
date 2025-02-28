@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2024 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -10,7 +10,7 @@
  * Christoph Läubrich - initial API and implementation
  * Philip Wenig - enable profiles, refactoring page
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.methods;
+package org.eclipse.chemclipse.ux.extension.ui.methods;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -26,7 +26,7 @@ import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences.DialogBe
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
+import org.eclipse.chemclipse.ux.extension.ui.l10n.Messages;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
@@ -154,7 +154,7 @@ public class SettingsPreferencesEditPage extends WizardPage {
 	private void createToolItemEdit(ToolBar toolBar) {
 
 		ToolItem toolItem = new ToolItem(toolBar, SWT.PUSH);
-		toolItem.setToolTipText(ExtensionMessages.editStoredDataForSelectedProcessor);
+		toolItem.setToolTipText(Messages.editStoredDataForSelectedProcessor);
 		toolItem.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -183,7 +183,7 @@ public class SettingsPreferencesEditPage extends WizardPage {
 		});
 		//
 		toolItem.setEnabled(false);
-		toolItem.setToolTipText(ExtensionMessages.removeStoredDataResetDefaultsForSelectedProcessor);
+		toolItem.setToolTipText(Messages.removeStoredDataResetDefaultsForSelectedProcessor);
 		toolItem.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DELETE, IApplicationImageProvider.SIZE_16x16));
 		//
 		toolItemDeleteControl.set(toolItem);
@@ -192,14 +192,14 @@ public class SettingsPreferencesEditPage extends WizardPage {
 	private void createToolItemDeleteAll(ToolBar toolBar) {
 
 		ToolItem toolItem = new ToolItem(toolBar, SWT.PUSH);
-		toolItem.setToolTipText(ExtensionMessages.removeAllStoredDataResetDefaults);
+		toolItem.setToolTipText(Messages.removeAllStoredDataResetDefaults);
 		toolItem.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DELETE_ALL, IApplicationImageProvider.SIZE_16x16));
 		toolItem.addSelectionListener(new SelectionAdapter() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				if(MessageDialog.openConfirm(e.display.getActiveShell(), ExtensionMessages.settings, ExtensionMessages.resetSettingsForAllProcessors)) {
+				if(MessageDialog.openConfirm(e.display.getActiveShell(), Messages.settings, Messages.resetSettingsForAllProcessors)) {
 					for(IProcessorPreferences<?> preferences : preferenceSupplier.get()) {
 						preferences.reset();
 					}
@@ -212,7 +212,7 @@ public class SettingsPreferencesEditPage extends WizardPage {
 	private void createToolItemExpand(ToolBar toolBar) {
 
 		ToolItem toolItem = new ToolItem(toolBar, SWT.PUSH);
-		toolItem.setToolTipText(ExtensionMessages.expandAllProcessorItems);
+		toolItem.setToolTipText(Messages.expandAllProcessorItems);
 		toolItem.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -229,7 +229,7 @@ public class SettingsPreferencesEditPage extends WizardPage {
 	private void createToolItemCollapse(ToolBar toolBar) {
 
 		ToolItem toolItem = new ToolItem(toolBar, SWT.PUSH);
-		toolItem.setToolTipText(ExtensionMessages.collapseAllProcessorItems);
+		toolItem.setToolTipText(Messages.collapseAllProcessorItems);
 		toolItem.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -270,7 +270,7 @@ public class SettingsPreferencesEditPage extends WizardPage {
 
 		TreeViewerColumn column = new TreeViewerColumn(treeViewer, SWT.CENTER);
 		column.getColumn().setWidth(125);
-		column.getColumn().setText(ExtensionMessages.displaySettings);
+		column.getColumn().setText(Messages.displaySettings);
 		column.setLabelProvider(new ColumnLabelProvider() {
 
 			@Override
@@ -279,9 +279,9 @@ public class SettingsPreferencesEditPage extends WizardPage {
 				IProcessorPreferences<?> preferences = getEntry(element);
 				if(preferences != null) {
 					if(preferences.getDialogBehaviour() == DialogBehavior.SHOW) {
-						return ExtensionMessages.yes;
+						return Messages.yes;
 					} else {
-						return ExtensionMessages.no;
+						return Messages.no;
 					}
 				}
 				//
@@ -294,7 +294,7 @@ public class SettingsPreferencesEditPage extends WizardPage {
 
 		TreeViewerColumn column = new TreeViewerColumn(treeViewer, SWT.NONE);
 		column.getColumn().setWidth(500);
-		column.getColumn().setText(ExtensionMessages.options);
+		column.getColumn().setText(Messages.options);
 		column.setLabelProvider(new ColumnLabelProvider() {
 
 			@Override
@@ -307,7 +307,7 @@ public class SettingsPreferencesEditPage extends WizardPage {
 				IProcessorPreferences<Object> preferences = getEntry(element);
 				if(preferences != null) {
 					if(preferences.isUseSystemDefaults()) {
-						return "(" + ExtensionMessages.systemDefault + ")";
+						return "(" + Messages.systemDefault + ")";
 					} else {
 						return preferences.getUserSettingsAsString();
 					}
@@ -320,7 +320,7 @@ public class SettingsPreferencesEditPage extends WizardPage {
 
 	private void resetSettings(Shell shell) {
 
-		if(MessageDialog.openConfirm(shell, ExtensionMessages.settings, ExtensionMessages.resetSettingsForSelectedProcessors)) {
+		if(MessageDialog.openConfirm(shell, Messages.settings, Messages.resetSettingsForSelectedProcessors)) {
 			Object[] array = treeViewerControl.get().getStructuredSelection().toArray();
 			for(Object object : array) {
 				getEntry(object).reset();

@@ -22,7 +22,6 @@ import org.eclipse.chemclipse.swt.ui.services.IMoleculeImageService;
 import org.eclipse.chemclipse.swt.ui.services.IScanIdentifierService;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModelMSD;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.methods.IAnnotationWidgetService;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.services.IEditorService;
 import org.eclipse.core.runtime.Platform;
@@ -43,7 +42,7 @@ public class Activator extends AbstractActivatorUI {
 	private DataUpdateSupport dataUpdateSupport;
 
 	private ServiceTracker<IMoleculeImageService, IMoleculeImageService> moleculeImageServiceTracker = null;
-	private ServiceTracker<IAnnotationWidgetService, IAnnotationWidgetService> annotationWidgetServiceTracker = null;
+
 	private ServiceTracker<IScanIdentifierService, IScanIdentifierService> scanIdentifierServiceTracker = null;
 	private ServiceTracker<IEditorService, IEditorService> editorServiceTracker = null;
 	private static ServiceTracker<IProcessSupplierContext, IProcessSupplierContext> processSupplierServiceTracker;
@@ -125,11 +124,6 @@ public class Activator extends AbstractActivatorUI {
 		return moleculeImageServiceTracker.getServices();
 	}
 
-	public Object[] getAnnotationWidgetServices() {
-
-		return annotationWidgetServiceTracker.getServices();
-	}
-
 	public Object[] getScanIdentifierServices() {
 
 		return scanIdentifierServiceTracker.getServices();
@@ -153,16 +147,13 @@ public class Activator extends AbstractActivatorUI {
 
 		moleculeImageServiceTracker = new ServiceTracker<>(context, IMoleculeImageService.class, null);
 		moleculeImageServiceTracker.open();
-		//
-		annotationWidgetServiceTracker = new ServiceTracker<>(context, IAnnotationWidgetService.class, null);
-		annotationWidgetServiceTracker.open();
-		//
+
 		scanIdentifierServiceTracker = new ServiceTracker<>(context, IScanIdentifierService.class, null);
 		scanIdentifierServiceTracker.open();
-		//
+
 		editorServiceTracker = new ServiceTracker<>(context, IEditorService.class, null);
 		editorServiceTracker.open();
-		//
+
 		processSupplierServiceTracker = new ServiceTracker<>(context, IProcessSupplierContext.class, null);
 		processSupplierServiceTracker.open();
 	}
@@ -170,7 +161,6 @@ public class Activator extends AbstractActivatorUI {
 	private void stopServices() {
 
 		moleculeImageServiceTracker.close();
-		annotationWidgetServiceTracker.close();
 		scanIdentifierServiceTracker.close();
 		editorServiceTracker.close();
 		processSupplierServiceTracker.close();

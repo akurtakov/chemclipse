@@ -12,40 +12,55 @@
 package org.eclipse.chemclipse.ux.extension.msd.ui.swt;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Consumer;
 
-import org.eclipse.chemclipse.chromatogram.msd.filter.core.massspectrum.IMassSpectrumFilterSupplier;
-import org.eclipse.chemclipse.chromatogram.msd.filter.core.massspectrum.IMassSpectrumFilterSupport;
-import org.eclipse.chemclipse.chromatogram.msd.filter.core.massspectrum.MassSpectrumFilter;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IMassSpectrumPeak;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.notifier.UpdateNotifier;
+import org.eclipse.chemclipse.model.supplier.IScanProcessSupplier;
 import org.eclipse.chemclipse.msd.converter.massspectrum.MassSpectrumConverter;
 import org.eclipse.chemclipse.msd.converter.massspectrum.MassSpectrumConverterSupport;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
 import org.eclipse.chemclipse.processing.converter.ISupplier;
+import org.eclipse.chemclipse.processing.core.DefaultProcessingResult;
 import org.eclipse.chemclipse.processing.core.ICategories;
+import org.eclipse.chemclipse.processing.core.IMessageProvider;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
+import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
+import org.eclipse.chemclipse.processing.supplier.IProcessSupplier.SupplierType;
+import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
+import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
+import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
+import org.eclipse.chemclipse.ux.extension.msd.ui.handlers.DynamicHandler;
 import org.eclipse.chemclipse.ux.extension.msd.ui.internal.provider.UpdateMenuEntry;
+import org.eclipse.chemclipse.ux.extension.ui.editors.ProcessorSupplierMenuEntry;
+import org.eclipse.chemclipse.ux.extension.ui.methods.ProcessSettingsSupport;
+import org.eclipse.chemclipse.ux.extension.ui.methods.SettingsWizard;
+import org.eclipse.chemclipse.xxd.process.comparators.CategoryNameComparator;
+import org.eclipse.chemclipse.xxd.process.support.ProcessTypeSupport;
 import org.eclipse.chemclipse.xxd.process.ui.menu.IMenuIcon;
+import org.eclipse.core.commands.Category;
+import org.eclipse.core.commands.Command;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -75,6 +90,8 @@ import org.eclipse.swtchart.extensions.linecharts.LineChart;
 import org.eclipse.swtchart.extensions.linecharts.LineSeriesData;
 import org.eclipse.swtchart.extensions.marker.LabelMarker;
 import org.eclipse.swtchart.extensions.menu.IChartMenuEntry;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.commands.ICommandService;
 
 public class MassSpectrumChartProfile extends LineChart implements IMassSpectrumChart {
 
@@ -83,6 +100,13 @@ public class MassSpectrumChartProfile extends LineChart implements IMassSpectrum
 	private static final int MAX_NUMBER_MZ = 25000;
 
 	private IScanMSD massSpectrum = null;
+
+	private IScanMSD menuCache = null;
+	private final List<IChartMenuEntry> cachedMenuEntries = new ArrayList<>();
+
+	private IProcessSupplierContext processTypeSupport = new ProcessTypeSupport();
+
+	private ICommandService commandService = PlatformUI.getWorkbench().getService(ICommandService.class);
 
 	public MassSpectrumChartProfile() {
 
@@ -120,6 +144,7 @@ public class MassSpectrumChartProfile extends LineChart implements IMassSpectrum
 				createAnnotations(standaloneMassSpectrum);
 			}
 			addSeriesData(lineSeriesDataList, MAX_NUMBER_MZ);
+			updateMenu();
 			UpdateNotifier.update(massSpectrum);
 		}
 	}
@@ -136,7 +161,6 @@ public class MassSpectrumChartProfile extends LineChart implements IMassSpectrum
 		chartSettings.setCreateMenu(true);
 
 		chartSettings.addMenuEntry(new UpdateMenuEntry());
-		addMassSpectrumFilter(chartSettings);
 		addMassSpectrumExport(chartSettings);
 
 		RangeRestriction rangeRestriction = chartSettings.getRangeRestriction();
@@ -154,56 +178,120 @@ public class MassSpectrumChartProfile extends LineChart implements IMassSpectrum
 		applySettings(chartSettings);
 	}
 
-	private void addMassSpectrumFilter(IChartSettings chartSettings) {
+	private void updateMenu() {
 
-		IMassSpectrumFilterSupport massSpectrumFilterSupport = MassSpectrumFilter.getMassSpectrumFilterSupport();
-		for(IMassSpectrumFilterSupplier supplier : massSpectrumFilterSupport.getSuppliers()) {
-			chartSettings.addMenuEntry(new IChartMenuEntry() {
+		IChartSettings chartSettings = getChartSettings();
+		if(processTypeSupport != null && menuCache != massSpectrum) {
+			/*
+			 * Clean the Menu
+			 */
+			for(IChartMenuEntry cachedEntry : cachedMenuEntries) {
+				chartSettings.removeMenuEntry(cachedEntry);
+			}
+			cachedMenuEntries.clear();
+			/*
+			 * Dynamic Menu Items
+			 */
+			List<IProcessSupplier<?>> processSupplierList = new ArrayList<>(processTypeSupport.getSupplier(this::isValidSupplier));
+			Collections.sort(processSupplierList, new CategoryNameComparator());
+			for(IProcessSupplier<?> processSupplier : processSupplierList) {
+				IChartMenuEntry chartMenuEntry = new ProcessorSupplierMenuEntry<>(processSupplier, processTypeSupport, this::executeSupplier);
+				cachedMenuEntries.add(chartMenuEntry);
+				chartSettings.addMenuEntry(chartMenuEntry);
+				addCommand(processSupplier, chartMenuEntry);
+			}
+			/*
+			 * Apply the menu items.
+			 */
+			applySettings(chartSettings);
+			menuCache = massSpectrum;
+		}
+	}
+
+	private boolean isValidSupplier(IProcessSupplier<?> supplier) {
+
+		if(supplier.getType() == SupplierType.STRUCTURAL) {
+			return false;
+		}
+
+		return supplier.getCategory() == ICategories.MASS_SPECTRUM_FILTER;
+	}
+
+	private void addCommand(IProcessSupplier<?> supplier, IChartMenuEntry cachedEntry) {
+
+		Command command = commandService.getCommand(supplier.getId());
+		Category category = commandService.getCategory(supplier.getCategory());
+		command.define(supplier.getName(), supplier.getDescription(), category);
+		command.setHandler(new DynamicHandler(cachedEntry, this));
+	}
+
+	private <C> void executeSupplier(IProcessSupplier<C> processSupplier, IProcessSupplierContext processSupplierContext) {
+
+		try {
+			Shell shell = getShell();
+			IProcessorPreferences<C> settings = SettingsWizard.getSettings(shell, ProcessSettingsSupport.getWorkspacePreferences(processSupplier), true);
+			if(settings == null) {
+				return;
+			}
+			/*
+			 * Apply
+			 */
+			processMassSpectrum(new IRunnableWithProgress() {
 
 				@Override
-				public String getName() {
+				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 
-					return supplier.getFilterName();
-				}
+					executeMethod(massSpectrum, new Consumer<IScanMSD>() {
 
-				@Override
-				public String getCategory() {
+						@Override
+						public void accept(IScanMSD scanMSD) {
 
-					return ICategories.FILTER;
-				}
-
-				@Override
-				public Image getIcon() {
-
-					IExtensionRegistry registry = Platform.getExtensionRegistry();
-					IConfigurationElement[] config = registry.getConfigurationElementsFor(IMenuIcon.EXTENSION_POINT_ID);
-					try {
-						for(IConfigurationElement element : config) {
-							final String id = element.getAttribute("id");
-							if(!supplier.getId().equals(id)) {
-								continue;
-							}
-							final Object object = element.createExecutableExtension("class");
-							if(object instanceof IMenuIcon menuIcon) {
-								return menuIcon.getImage();
-							}
+							DefaultProcessingResult<Object> processingInfo = new DefaultProcessingResult<>();
+							IProcessSupplier.applyProcessor(settings, IScanProcessSupplier.createConsumer(scanMSD), new ProcessExecutionContext(monitor, processingInfo, processSupplierContext));
+							updateResult(processingInfo);
 						}
-					} catch(CoreException e) {
-						logger.warn(e);
-					}
-					return null;
+					});
 				}
+			}, shell);
+		} catch(IOException e) {
+			DefaultProcessingResult<Object> processingInfo = new DefaultProcessingResult<>();
+			processingInfo.addErrorMessage(processSupplier.getName(), "The process method can't be applied.", e);
+			updateResult(processingInfo);
+		}
+	}
 
-				@Override
-				public void execute(Shell shell, ScrollableChart scrollableChart) {
+	private void processMassSpectrum(IRunnableWithProgress runnable, Shell shell) {
 
-					if(massSpectrum != null) {
-						MassSpectrumFilter.applyFilter(massSpectrum, supplier.getId(), new NullProgressMonitor());
-						massSpectrum.setDirty(true);
-						update();
-					}
-				}
-			});
+		ProgressMonitorDialog monitor = new ProgressMonitorDialog(shell);
+		try {
+			monitor.run(true, true, runnable);
+			massSpectrum.setDirty(true);
+			update();
+		} catch(InterruptedException e) {
+			logger.error(e);
+			Thread.currentThread().interrupt();
+		} catch(InvocationTargetException e) {
+			logger.warn(e);
+			logger.warn(e.getCause());
+		}
+	}
+
+	public void updateResult(IMessageProvider processingInfo) {
+
+		getDisplay().asyncExec(new Runnable() {
+
+			@Override
+			public void run() {
+
+				ProcessingInfoPartSupport.getInstance().update(processingInfo, true);
+			}
+		});
+	}
+
+	private void executeMethod(IScanMSD scanMSD, Consumer<IScanMSD> consumer) {
+
+		if(scanMSD != null) {
+			consumer.accept(scanMSD);
 		}
 	}
 

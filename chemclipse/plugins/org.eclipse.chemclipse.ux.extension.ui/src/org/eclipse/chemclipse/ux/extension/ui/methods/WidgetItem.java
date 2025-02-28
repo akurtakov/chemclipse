@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2024 Lablicate GmbH.
+ * Copyright (c) 2018, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -11,7 +11,7 @@
  * Christoph Läubrich - support file selection, refactor for new settings model, use validators, support for longs
  * Matthias Mailänder - add labeled combo boxes
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.methods;
+package org.eclipse.chemclipse.ux.extension.ui.methods;
 
 import java.io.File;
 
@@ -25,8 +25,8 @@ import org.eclipse.chemclipse.support.text.ILabel;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.provider.AdapterLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
+import org.eclipse.chemclipse.ux.extension.ui.Activator;
+import org.eclipse.chemclipse.ux.extension.ui.l10n.Messages;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.fieldassist.ControlDecoration;
@@ -397,7 +397,7 @@ public class WidgetItem {
 		//
 		Button button = new Button(composite, SWT.PUSH);
 		button.setText(" ... ");
-		button.setToolTipText(ExtensionMessages.chooseLocation);
+		button.setToolTipText(Messages.chooseLocation);
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override

@@ -18,6 +18,7 @@ import java.util.MissingResourceException;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.support.ui.activator.AbstractActivatorUI;
 import org.eclipse.chemclipse.ux.extension.ui.definitions.TileDefinition;
+import org.eclipse.chemclipse.ux.extension.ui.methods.IAnnotationWidgetService;
 import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplier;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
@@ -36,7 +37,9 @@ public class Activator extends AbstractActivatorUI {
 
 	private static Activator plugin;
 	private static final Logger logger = Logger.getLogger(Activator.class);
+
 	private ServiceTracker<TileDefinition, TileDefinition> tileServiceTracker;
+	private ServiceTracker<IAnnotationWidgetService, IAnnotationWidgetService> annotationWidgetServiceTracker = null;
 
 	public Activator() {
 
@@ -51,6 +54,8 @@ public class Activator extends AbstractActivatorUI {
 		initializeImageRegistry();
 		tileServiceTracker = new ServiceTracker<>(context, TileDefinition.class, null);
 		tileServiceTracker.open();
+		annotationWidgetServiceTracker = new ServiceTracker<>(context, IAnnotationWidgetService.class, null);
+		annotationWidgetServiceTracker.open();
 	}
 
 	@Override
@@ -59,7 +64,7 @@ public class Activator extends AbstractActivatorUI {
 		plugin = null;
 		super.stop(context);
 		tileServiceTracker.close();
-		tileServiceTracker = null;
+		annotationWidgetServiceTracker.close();
 	}
 
 	public static Activator getDefault() {
@@ -98,5 +103,10 @@ public class Activator extends AbstractActivatorUI {
 		IPath path = new Path(string);
 		URL url = FileLocator.find(bundle, path, null);
 		return url;
+	}
+
+	public Object[] getAnnotationWidgetServices() {
+
+		return annotationWidgetServiceTracker.getServices();
 	}
 }
