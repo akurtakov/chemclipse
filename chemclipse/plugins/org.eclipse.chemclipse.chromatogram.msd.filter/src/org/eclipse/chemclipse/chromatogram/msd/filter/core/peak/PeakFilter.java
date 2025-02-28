@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2019 Lablicate GmbH.
+ * Copyright (c) 2013, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -49,6 +49,7 @@ public class PeakFilter {
 	 * This class is a singleton. Use only static methods.
 	 */
 	private PeakFilter() {
+
 	}
 
 	/**
@@ -172,6 +173,7 @@ public class PeakFilter {
 				try {
 					IPeakFilterSettings instance = (IPeakFilterSettings)element.createExecutableExtension(FILTER_SETTINGS);
 					supplier.setSettingsClass(instance.getClass());
+					supplier.getLiteratureReferences().addAll(instance.getLiteratureReferences());
 				} catch(CoreException e) {
 					logger.warn(e);
 					// settings class is optional, set null instead

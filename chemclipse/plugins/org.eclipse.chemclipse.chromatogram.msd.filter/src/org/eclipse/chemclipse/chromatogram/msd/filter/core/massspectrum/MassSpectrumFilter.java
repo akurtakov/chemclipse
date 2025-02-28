@@ -138,7 +138,10 @@ public class MassSpectrumFilter {
 			supplier.setDescription(element.getAttribute(DESCRIPTION));
 			supplier.setFilterName(element.getAttribute(FILTER_NAME));
 			try {
-				supplier.setConfigClass(element.createExecutableExtension(FILTER_CONFIG).getClass().asSubclass(IMassSpectrumFilterSettings.class));
+				Object executableExtension = element.createExecutableExtension(FILTER_CONFIG);
+				IMassSpectrumFilterSettings instance = (IMassSpectrumFilterSettings)executableExtension;
+				supplier.getLiteratureReferences().addAll(instance.getLiteratureReferences());
+				supplier.setConfigClass(instance.getClass().asSubclass(IMassSpectrumFilterSettings.class));
 			} catch(CoreException e) {
 				logger.warn(e);
 				// can't use it then

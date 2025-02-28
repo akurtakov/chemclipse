@@ -30,11 +30,12 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 public class BaselineDetectorSettings extends AbstractBaselineDetectorSettings {
 
 	private static final Logger logger = Logger.getLogger(BaselineDetectorSettings.class);
-	//
+
 	@JsonProperty(value = "Number of Iterations", defaultValue = "100")
 	@JsonPropertyDescription(value = "The number of iterations to apply the SNIP filter.")
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_ITERATIONS, maxValue = PreferenceSupplier.MAX_ITERATIONS)
 	private int iterations = 100;
+
 	@JsonProperty(value = "Window Size", defaultValue = "5")
 	@JsonPropertyDescription(value = "Window Size: 3, 5, 7, ..., 45")
 	@JsonDeserialize(using = WindowSizeDeserializer.class)

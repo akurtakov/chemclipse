@@ -11,7 +11,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.core.massspectrum;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.IMassSpectrumFilterSettings;
+import org.eclipse.chemclipse.support.literature.LiteratureReference;
 
 public class MassSpectrumFilterSupplier implements IMassSpectrumFilterSupplier {
 
@@ -19,6 +23,7 @@ public class MassSpectrumFilterSupplier implements IMassSpectrumFilterSupplier {
 	private String description = "";
 	private String filterName = "";
 	private Class<? extends IMassSpectrumFilterSettings> settingsClass;
+	private List<LiteratureReference> literatureReference = new ArrayList<>();
 
 	@Override
 	public String getDescription() {
@@ -73,6 +78,12 @@ public class MassSpectrumFilterSupplier implements IMassSpectrumFilterSupplier {
 		if(id != null) {
 			this.id = id;
 		}
+	}
+
+	@Override
+	public List<LiteratureReference> getLiteratureReferences() {
+
+		return literatureReference;
 	}
 
 	// ------------------------------------hashCode, equals, toString

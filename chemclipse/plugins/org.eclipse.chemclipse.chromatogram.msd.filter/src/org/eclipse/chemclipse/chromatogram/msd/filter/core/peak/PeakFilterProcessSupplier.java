@@ -61,6 +61,7 @@ public class PeakFilterProcessSupplier implements IProcessTypeSupplier {
 		public PeakFilterProcessorSupplier(IPeakFilterSupplier supplier, IProcessTypeSupplier parent) {
 
 			super(supplier.getId(), supplier.getFilterName(), supplier.getDescription(), (Class<IPeakFilterSettings>)supplier.getSettingsClass(), parent, DataType.MSD);
+			getLiteratureReferences().addAll(supplier.getLiteratureReferences());
 		}
 
 		@Override
