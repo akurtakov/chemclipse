@@ -9,7 +9,7 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.methods;
+package org.eclipse.chemclipse.ux.extension.ui.methods;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,9 +21,9 @@ import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
+import org.eclipse.chemclipse.ux.extension.ui.Activator;
+import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
+import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierMethods;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -246,13 +246,13 @@ public class ResumeMethodDialog extends TitleAreaDialog {
 		button.setLayoutData(new GridData(SWT.RIGHT, SWT.BOTTOM, true, false));
 		button.setText(ExtensionMessages.rememberDecisionDontShowAgain);
 		button.setToolTipText(ExtensionMessages.revertDecisionInSettings);
-		button.setSelection(!Activator.getDefault().getPreferenceStore().getBoolean(PreferenceSupplier.P_SHOW_RESUME_METHOD_DIALOG));
+		button.setSelection(!Activator.getDefault().getPreferenceStore().getBoolean(PreferenceSupplierMethods.P_SHOW_RESUME_METHOD_DIALOG));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				Activator.getDefault().getPreferenceStore().setValue(PreferenceSupplier.P_SHOW_RESUME_METHOD_DIALOG, !button.getSelection());
+				Activator.getDefault().getPreferenceStore().setValue(PreferenceSupplierMethods.P_SHOW_RESUME_METHOD_DIALOG, !button.getSelection());
 			}
 		});
 		//

@@ -1,0 +1,59 @@
+/*******************************************************************************
+ * Copyright (c) 2025 Lablicate GmbH.
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ * Matthias Mailänder - initial API and implementation
+ *******************************************************************************/
+package org.eclipse.chemclipse.ux.extension.ui.methods;
+
+import java.io.File;
+import java.util.Map;
+
+import org.eclipse.chemclipse.converter.methods.MethodConverter;
+import org.eclipse.chemclipse.model.core.support.HeaderField;
+import org.eclipse.chemclipse.processing.converter.ISupplier;
+import org.eclipse.chemclipse.ux.extension.ui.editors.ProcessMethodEditor;
+import org.eclipse.chemclipse.ux.extension.ui.provider.AbstractSupplierFileEditorSupport;
+import org.eclipse.chemclipse.ux.extension.ui.provider.ISupplierFileEditorSupport;
+
+public class MethodEditorSupport extends AbstractSupplierFileEditorSupport implements ISupplierFileEditorSupport {
+
+	public MethodEditorSupport() {
+
+		super(MethodConverter.getMethodConverterSupport().getSupplier());
+	}
+
+	@Override
+	public String getType() {
+
+		return TYPE_MTH;
+	}
+
+	@Override
+	public boolean openEditor(File file, Map<HeaderField, String> headerMap) {
+
+		return openEditor(file, headerMap, false);
+	}
+
+	@Override
+	public boolean openEditor(File file, Map<HeaderField, String> headerMap, boolean batch) {
+
+		if(isSupplierFile(file)) {
+			openEditor(file, null, ProcessMethodEditor.ID, ProcessMethodEditor.CONTRIBUTION_URI, ProcessMethodEditor.ICON_URI, ProcessMethodEditor.TOOLTIP, headerMap, batch);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean openEditor(File file, Map<HeaderField, String> headerMap, ISupplier supplier) {
+
+		return openEditor(file, headerMap, false);
+	}
+}

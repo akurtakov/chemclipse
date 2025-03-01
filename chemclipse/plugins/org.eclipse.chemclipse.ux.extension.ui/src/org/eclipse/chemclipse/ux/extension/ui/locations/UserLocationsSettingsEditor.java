@@ -31,7 +31,7 @@ import org.eclipse.chemclipse.support.ui.swt.ITableSettings;
 import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.ux.extension.ui.methods.SettingsUIProvider;
-import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplier;
+import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierDataExplorer;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
@@ -335,10 +335,10 @@ public class UserLocationsSettingsEditor implements SettingsUIProvider.SettingsU
 				fileDialog.setText("User Locations");
 				fileDialog.setFilterExtensions(new String[]{UserLocations.FILTER_EXTENSION});
 				fileDialog.setFilterNames(new String[]{UserLocations.FILTER_NAME});
-				fileDialog.setFilterPath(PreferenceSupplier.getUserLocationsTemplateFolder());
+				fileDialog.setFilterPath(PreferenceSupplierDataExplorer.getUserLocationsTemplateFolder());
 				String pathname = fileDialog.open();
 				if(pathname != null) {
-					PreferenceSupplier.setUserLocationsTemplateFolder(fileDialog.getFilterPath());
+					PreferenceSupplierDataExplorer.setUserLocationsTemplateFolder(fileDialog.getFilterPath());
 					File file = new File(pathname);
 					settings.importItems(file);
 					setTableViewerInput();
@@ -366,10 +366,10 @@ public class UserLocationsSettingsEditor implements SettingsUIProvider.SettingsU
 				fileDialog.setFilterExtensions(new String[]{UserLocations.FILTER_EXTENSION});
 				fileDialog.setFilterNames(new String[]{UserLocations.FILTER_NAME});
 				fileDialog.setFileName(UserLocations.FILE_NAME);
-				fileDialog.setFilterPath(PreferenceSupplier.getUserLocationsTemplateFolder());
+				fileDialog.setFilterPath(PreferenceSupplierDataExplorer.getUserLocationsTemplateFolder());
 				String pathname = fileDialog.open();
 				if(pathname != null) {
-					PreferenceSupplier.setUserLocationsTemplateFolder(fileDialog.getFilterPath());
+					PreferenceSupplierDataExplorer.setUserLocationsTemplateFolder(fileDialog.getFilterPath());
 					File file = new File(pathname);
 					if(settings.exportItems(file)) {
 						MessageDialog.openInformation(button.getShell(), "User Location List", "The user locations have been exported successfully.");

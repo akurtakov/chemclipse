@@ -10,7 +10,7 @@
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - make UI configurable, support selection of existing process methods, support for init with different datatypes
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.swt.editors;
+package org.eclipse.chemclipse.ux.extension.ui.editors;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,10 +33,10 @@ import org.eclipse.chemclipse.support.updates.IUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.support.PartSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.MethodTreeViewer;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ProcessMethodHeader;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ProcessMethodProfiles;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ProcessMethodToolbar;
+import org.eclipse.chemclipse.ux.extension.ui.swt.MethodTreeViewer;
+import org.eclipse.chemclipse.ux.extension.ui.swt.ProcessMethodHeader;
+import org.eclipse.chemclipse.ux.extension.ui.swt.ProcessMethodProfiles;
+import org.eclipse.chemclipse.ux.extension.ui.swt.ProcessMethodToolbar;
 import org.eclipse.chemclipse.xxd.process.ui.preferences.PreferencePageChromatogramExport;
 import org.eclipse.chemclipse.xxd.process.ui.preferences.PreferencePageReportExport;
 import org.eclipse.jface.viewers.StructuredSelection;

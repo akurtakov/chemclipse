@@ -33,7 +33,7 @@ import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
-import org.eclipse.chemclipse.ux.extension.ui.l10n.Messages;
+import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -127,9 +127,9 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 		 * Create the literature references only on demand.
 		 */
 		if(useLiterature) {
-			createLabelText(parent, Messages.literatureReferences);
+			createLabelText(parent, ExtensionMessages.literatureReferences);
 			createReferenceSection(parent, literatureReferences);
-			createLabelText(parent, Messages.settings);
+			createLabelText(parent, ExtensionMessages.settings);
 		}
 	}
 
@@ -161,7 +161,7 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 				if(element instanceof LiteratureReference literatureReference) {
 					String title = literatureReference.getTitle();
 					if(title.isEmpty()) {
-						return Messages.literatureReference;
+						return ExtensionMessages.literatureReference;
 					} else {
 						if(title.length() > MAX_LENGTH_LITERATURE_REFERENCE) {
 							title = title.substring(0, MAX_LENGTH_LITERATURE_REFERENCE) + "...";
@@ -174,7 +174,7 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 		});
 		//
 		Combo combo = comboViewer.getCombo();
-		combo.setToolTipText(Messages.literatureReferences);
+		combo.setToolTipText(ExtensionMessages.literatureReferences);
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		combo.addSelectionListener(new SelectionAdapter() {
 
@@ -206,14 +206,14 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 		//
 		buttonLink.get().setData(DATA_URL, url);
 		buttonLink.get().setEnabled(!url.isEmpty());
-		buttonLink.get().setToolTipText(!url.isEmpty() ? url : Messages.noLinkIsSupplierYet);
+		buttonLink.get().setToolTipText(!url.isEmpty() ? url : ExtensionMessages.noLinkIsSupplierYet);
 	}
 
 	private void createButtonDOI(Composite parent) {
 
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
-		button.setToolTipText(Messages.openInExternalBrowser);
+		button.setToolTipText(ExtensionMessages.openInExternalBrowser);
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXTERNAL_BROWSER, IApplicationImage.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
@@ -341,7 +341,7 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 	private void addButtonDontAskAgain(Composite parent) {
 
 		Button button = new Button(parent, SWT.CHECK);
-		button.setText(Messages.rememberDecision);
+		button.setText(ExtensionMessages.rememberDecision);
 		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		button.addSelectionListener(new SelectionAdapter() {
 
@@ -360,7 +360,7 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
-		button.setToolTipText(Messages.resetDefaults);
+		button.setToolTipText(ExtensionMessages.resetDefaults);
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_RESET, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 

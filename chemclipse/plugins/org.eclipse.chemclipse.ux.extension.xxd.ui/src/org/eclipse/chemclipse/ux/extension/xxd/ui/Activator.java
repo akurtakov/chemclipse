@@ -24,8 +24,6 @@ import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModelMSD;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.services.IEditorService;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.osgi.service.datalocation.Location;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
@@ -102,12 +100,6 @@ public class Activator extends AbstractActivatorUI {
 	public ScopedPreferenceStore getPreferenceStoreSubtract() {
 
 		return preferenceStoreSubtract;
-	}
-
-	public String getSettingsPath() {
-
-		Location location = Platform.getUserLocation();
-		return location.getURL().getPath();
 	}
 
 	public DataUpdateSupport getDataUpdateSupport() {

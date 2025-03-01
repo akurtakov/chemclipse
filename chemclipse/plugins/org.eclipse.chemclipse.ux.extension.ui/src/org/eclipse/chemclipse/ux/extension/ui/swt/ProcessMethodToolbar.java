@@ -10,7 +10,7 @@
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - make UI configurable, support selection of existing process methods, support for init with different datatypes
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.swt;
+package org.eclipse.chemclipse.ux.extension.ui.swt;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,9 +39,9 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.settings.OperatingSystemUtils;
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
+import org.eclipse.chemclipse.ux.extension.ui.methods.MethodSupport;
+import org.eclipse.chemclipse.ux.extension.ui.methods.ProcessingWizard;
 import org.eclipse.chemclipse.ux.extension.ui.methods.SettingsWizard;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.methods.MethodSupport;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.methods.ProcessingWizard;
 import org.eclipse.core.runtime.Adapters;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;

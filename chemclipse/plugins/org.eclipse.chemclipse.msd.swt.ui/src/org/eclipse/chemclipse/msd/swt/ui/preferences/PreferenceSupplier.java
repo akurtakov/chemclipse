@@ -26,20 +26,23 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final int DEF_FILTER_LIMIT_IONS = 8000;
 	public static final int MIN_FILTER_LIMIT_IONS = 10;
 	public static final int MAX_FILTER_LIMIT_IONS = 1000000;
-	//
+
 	public static final String P_PATH_MASS_SPECTRUM_LIBRARIES = "pathMassSpectrumLibraries";
 	public static final String DEF_PATH_MASS_SPECTRUM_LIBRARIES = "";
-	//
+
 	public static final String P_LIBRARY_MSD_LIMIT_SORTING = "libraryMSDLimitSorting";
 	public static final int DEF_LIBRARY_MSD_LIMIT_SORTING = 10000;
 	public static final int MIN_LIBRARY_MSD_LIMIT_SORTING = 500;
 	public static final int MAX_LIBRARY_MSD_LIMIT_SORTING = 30000;
-	//
+
 	public static final String P_USE_PROFILE_MASS_SPECTRUM_VIEW = "useProfileMassSpectrumView";
 	public static final boolean DEF_USE_PROFILE_MASS_SPECTRUM_VIEW = false;
-	//
+
 	public static final String P_SHOW_MASS_SPECTRUM_SELECTION_COMBO = "showMassSpectrumSelectionCombo";
 	public static final boolean DEF_SHOW_MASS_SPECTRUM_SELECTION_COMBO = false;
+
+	public static final String P_MASS_SPECTRUM_SHOW_METHODS_TOOLBAR = "massSpectrumShowMethodsToolbar";
+	public static final boolean DEF_MASS_SPECTRUM_SHOW_METHODS_TOOLBAR = false;
 
 	public static IPreferenceSupplier INSTANCE() {
 
@@ -61,6 +64,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_LIBRARY_MSD_LIMIT_SORTING, Integer.toString(DEF_LIBRARY_MSD_LIMIT_SORTING));
 		putDefault(PreferenceSupplier.P_USE_PROFILE_MASS_SPECTRUM_VIEW, PreferenceSupplier.DEF_USE_PROFILE_MASS_SPECTRUM_VIEW);
 		putDefault(PreferenceSupplier.P_SHOW_MASS_SPECTRUM_SELECTION_COMBO, PreferenceSupplier.DEF_SHOW_MASS_SPECTRUM_SELECTION_COMBO);
+		putDefault(PreferenceSupplier.P_MASS_SPECTRUM_SHOW_METHODS_TOOLBAR, PreferenceSupplier.DEF_MASS_SPECTRUM_SHOW_METHODS_TOOLBAR);
 	}
 
 	public static String getPathMassSpectrumLibraries() {

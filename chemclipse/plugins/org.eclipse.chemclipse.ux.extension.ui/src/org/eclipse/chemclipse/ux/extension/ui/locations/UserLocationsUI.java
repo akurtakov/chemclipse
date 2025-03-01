@@ -25,7 +25,7 @@ import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
 import org.eclipse.chemclipse.support.validators.PathValidator;
-import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplier;
+import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierDataExplorer;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -276,10 +276,10 @@ public class UserLocationsUI extends Composite {
 					fileDialog.setText(IMPORT_TITLE);
 					fileDialog.setFilterExtensions(new String[]{UserLocations.FILTER_EXTENSION});
 					fileDialog.setFilterNames(new String[]{UserLocations.FILTER_NAME});
-					fileDialog.setFilterPath(PreferenceSupplier.getUserLocationsTemplateFolder());
+					fileDialog.setFilterPath(PreferenceSupplierDataExplorer.getUserLocationsTemplateFolder());
 					String path = fileDialog.open();
 					if(path != null) {
-						PreferenceSupplier.setUserLocationsTemplateFolder(fileDialog.getFilterPath());
+						PreferenceSupplierDataExplorer.setUserLocationsTemplateFolder(fileDialog.getFilterPath());
 						File file = new File(path);
 						userLocations.importItems(file);
 						MessageDialog.openInformation(e.display.getActiveShell(), IMPORT_TITLE, MESSAGE_IMPORT_SUCCESSFUL);
@@ -310,10 +310,10 @@ public class UserLocationsUI extends Composite {
 					fileDialog.setFilterExtensions(new String[]{UserLocations.FILTER_EXTENSION});
 					fileDialog.setFilterNames(new String[]{UserLocations.FILTER_NAME});
 					fileDialog.setFileName(UserLocations.FILE_NAME);
-					fileDialog.setFilterPath(PreferenceSupplier.getUserLocationsTemplateFolder());
+					fileDialog.setFilterPath(PreferenceSupplierDataExplorer.getUserLocationsTemplateFolder());
 					String path = fileDialog.open();
 					if(path != null) {
-						PreferenceSupplier.setUserLocationsTemplateFolder(fileDialog.getFilterPath());
+						PreferenceSupplierDataExplorer.setUserLocationsTemplateFolder(fileDialog.getFilterPath());
 						File file = new File(path);
 						if(userLocations.exportItems(file)) {
 							MessageDialog.openInformation(e.display.getActiveShell(), EXPORT_TITLE, MESSAGE_EXPORT_SUCCESSFUL);

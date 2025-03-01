@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024 Lablicate GmbH.
+ * Copyright (c) 2021, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,9 +9,19 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences;
+package org.eclipse.chemclipse.ux.extension.ui.methods;
 
-import org.eclipse.chemclipse.converter.preferences.PreferenceSupplier;
+public class MethodCancelException extends Exception {
 
-public class PreferenceSupplierConverter extends PreferenceSupplier {
+	private static final long serialVersionUID = 1373953878031223890L;
+
+	public MethodCancelException() {
+
+		super();
+	}
+
+	public MethodCancelException(String message) {
+
+		super(message);
+	}
 }

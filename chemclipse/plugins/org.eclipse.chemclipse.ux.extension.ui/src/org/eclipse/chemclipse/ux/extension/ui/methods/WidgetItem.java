@@ -26,7 +26,7 @@ import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.provider.AdapterLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.ux.extension.ui.Activator;
-import org.eclipse.chemclipse.ux.extension.ui.l10n.Messages;
+import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.fieldassist.ControlDecoration;
@@ -397,7 +397,7 @@ public class WidgetItem {
 		//
 		Button button = new Button(composite, SWT.PUSH);
 		button.setText(" ... ");
-		button.setToolTipText(Messages.chooseLocation);
+		button.setToolTipText(ExtensionMessages.chooseLocation);
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override

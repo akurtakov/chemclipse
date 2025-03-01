@@ -14,21 +14,37 @@ package org.eclipse.chemclipse.ux.extension.msd.ui.swt;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import org.eclipse.chemclipse.model.notifier.UpdateNotifier;
+import org.eclipse.chemclipse.model.supplier.IScanProcessSupplier;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.msd.swt.ui.preferences.PreferenceSupplier;
+import org.eclipse.chemclipse.processing.core.IMessageProvider;
+import org.eclipse.chemclipse.processing.core.IProcessingInfo;
+import org.eclipse.chemclipse.processing.core.ProcessingInfo;
+import org.eclipse.chemclipse.processing.methods.IProcessMethod;
+import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
+import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
+import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
+import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
+import org.eclipse.chemclipse.swt.ui.components.IMethodListener;
+import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.ux.extension.msd.ui.Activator;
+import org.eclipse.chemclipse.ux.extension.ui.methods.MethodSupportUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ChartGridSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
+import org.eclipse.chemclipse.xxd.process.support.ProcessTypeSupport;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.preference.IPreferencePage;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -51,6 +67,10 @@ public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI
 
 	private AtomicReference<Composite> toolbarMainControl = new AtomicReference<>();
 	private AtomicReference<MassSpectraSelectionUI> toolbarSelectionControl = new AtomicReference<>();
+	private AtomicReference<MethodSupportUI> toolbarMethodControl = new AtomicReference<>();
+
+	private IProcessSupplierContext processTypeSupport = new ProcessTypeSupport();
+
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 	private ChartGridSupport chartGridSupport = new ChartGridSupport();
 
@@ -69,6 +89,7 @@ public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI
 		this.massSpectra = massSpectra;
 		createControl();
 		toolbarSelectionControl.get().update(massSpectra);
+		toolbarMethodControl.get().updateInput();
 		massSpectrum = massSpectra.getMassSpectrum(1);
 		massSpectrumChart.update(massSpectrum);
 	}
@@ -102,6 +123,7 @@ public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI
 
 		createToolbarMain(composite);
 		createToolbarSelection(composite);
+		createToolbarMethod(composite);
 		createMassSpectrumChart(composite);
 	}
 
@@ -130,13 +152,14 @@ public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalAlignment = GridData.END;
 		composite.setLayoutData(gridData);
-		composite.setLayout(new GridLayout(4, false));
-		//
+		composite.setLayout(new GridLayout(5, false));
+
 		createButtonToggleSelection(composite);
+		createButtonToggleMethod(composite);
 		createButtonToggleChartGrid(composite);
 		createToggleChartSeriesLegendButton(composite);
 		createButtonSettings(composite);
-		//
+
 		toolbarMainControl.set(composite);
 	}
 
@@ -148,6 +171,63 @@ public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI
 		toolbarSelectionControl.set(massSpectraSelectionUI);
 		massSpectraSelectionUI.update(massSpectra);
 		massSpectraSelectionUI.addSelectionChangeListener(createSelectionChangedListener());
+	}
+
+	private void createToolbarMethod(Composite parent) {
+
+		MethodSupportUI methodSupportUI = new MethodSupportUI(parent, SWT.NONE);
+		methodSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		methodSupportUI.setMethodListener(new IMethodListener() {
+
+			@Override
+			public void execute(IProcessMethod processMethod, IProgressMonitor monitor) {
+
+				executeMethod(massSpectrum, new Consumer<IScanMSD>() {
+
+					@Override
+					public void accept(IScanMSD scanMSD) {
+
+						IProcessingInfo<?> processingInfo = new ProcessingInfo<>();
+						ProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, processingInfo, processTypeSupport), IScanProcessSupplier.createConsumer(scanMSD));
+						scanMSD.setDirty(true);
+						update(scanMSD);
+						UpdateNotifier.update(scanMSD);
+						UpdateNotifierUI.update(getDisplay(), scanMSD);
+						updateResult(processingInfo);
+
+						DisplayUtils.getDisplay().syncExec(new Runnable() {
+
+							@Override
+							public void run() {
+
+								massSpectrumChart.update();
+							}
+						});
+					}
+				});
+			}
+		});
+
+		toolbarMethodControl.set(methodSupportUI);
+	}
+
+	private void executeMethod(IScanMSD massSpectrum, Consumer<IScanMSD> consumer) {
+
+		if(massSpectrum != null) {
+			consumer.accept(massSpectrum);
+		}
+	}
+
+	private void updateResult(IMessageProvider processingInfo) {
+
+		getDisplay().asyncExec(new Runnable() {
+
+			@Override
+			public void run() {
+
+				ProcessingInfoPartSupport.getInstance().update(processingInfo, true);
+			}
+		});
 	}
 
 	private void createErrorMessagePage(Composite parent) {
@@ -169,6 +249,22 @@ public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI
 				preferenceStore.setValue(PreferenceSupplier.P_SHOW_MASS_SPECTRUM_SELECTION_COMBO, toolbarSelectionControl.get().isVisible());
 			}
 		});
+
+		return button;
+	}
+
+	private Button createButtonToggleMethod(Composite parent) {
+
+		Button button = createButtonToggleToolbar(parent, toolbarMethodControl, IApplicationImage.IMAGE_METHOD, "the method toolbar.");
+		button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				preferenceStore.setValue(PreferenceSupplier.P_MASS_SPECTRUM_SHOW_METHODS_TOOLBAR, toolbarMethodControl.get().isVisible());
+			}
+		});
+
 		return button;
 	}
 
