@@ -267,14 +267,16 @@ public class ExtendedMassSpectrumOverlayUI extends Composite implements IExtende
 
 	private ILineSeriesData getLineSeriesData(IScanMSD scanMSD) {
 
+		String seriesName = scanMSD.getIdentifier();
 		if(scanMSD instanceof IStandaloneMassSpectrum massSpectrum) {
-			ILineSeriesData lineSeriesData = new LineSeriesData(getSeriesDataProcessed(scanMSD, massSpectrum.getName()));
-			ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
-			lineSeriesSettings.setLineColor(Colors.RED);
-			lineSeriesSettings.setEnableArea(true);
-			return lineSeriesData;
+			seriesName = massSpectrum.getName();
 		}
-		return null;
+
+		ILineSeriesData lineSeriesData = new LineSeriesData(getSeriesDataProcessed(scanMSD, seriesName));
+		ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
+		lineSeriesSettings.setLineColor(Colors.RED);
+		lineSeriesSettings.setEnableArea(true);
+		return lineSeriesData;
 	}
 
 	private ISeriesData getSeriesDataProcessed(IScanMSD scanMSD, String id) {
