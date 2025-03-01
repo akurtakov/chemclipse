@@ -66,7 +66,9 @@ import org.eclipse.swtchart.extensions.core.ScrollableChart;
 public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI {
 
 	private AtomicReference<Composite> toolbarMainControl = new AtomicReference<>();
+	private AtomicReference<Button> buttonToolbarSelection = new AtomicReference<>();
 	private AtomicReference<MassSpectraSelectionUI> toolbarSelectionControl = new AtomicReference<>();
+	private AtomicReference<Button> buttonToolbarMethod = new AtomicReference<>();
 	private AtomicReference<MethodSupportUI> toolbarMethodControl = new AtomicReference<>();
 
 	private IProcessSupplierContext processTypeSupport = new ProcessTypeSupport();
@@ -106,6 +108,12 @@ public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI
 		createPages(this);
 	}
 
+	private void initialize() {
+
+		enableToolbar(toolbarSelectionControl, buttonToolbarSelection.get(), IApplicationImage.IMAGE_EXPAND_ALL, "the selection toolbar.", false);
+		enableToolbar(toolbarMethodControl, buttonToolbarMethod.get(), IApplicationImage.IMAGE_METHOD, "the method toolbar.", false);
+	}
+
 	private void createPages(Composite parent) {
 
 		if(massSpectra != null && massSpectra.getMassSpectrum(1) != null) {
@@ -125,6 +133,8 @@ public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI
 		createToolbarSelection(composite);
 		createToolbarMethod(composite);
 		createMassSpectrumChart(composite);
+
+		initialize();
 	}
 
 	private void createMassSpectrumChart(Composite composite) {
@@ -154,8 +164,8 @@ public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(5, false));
 
-		createButtonToggleSelection(composite);
-		createButtonToggleMethod(composite);
+		buttonToolbarSelection.set(createButtonToggleSelection(composite));
+		buttonToolbarMethod.set(createButtonToggleMethod(composite));
 		createButtonToggleChartGrid(composite);
 		createToggleChartSeriesLegendButton(composite);
 		createButtonSettings(composite);
@@ -176,6 +186,7 @@ public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI
 	private void createToolbarMethod(Composite parent) {
 
 		MethodSupportUI methodSupportUI = new MethodSupportUI(parent, SWT.NONE);
+		methodSupportUI.setVisible(PreferenceSupplier.isMethodToolbarVisible());
 		methodSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		methodSupportUI.setMethodListener(new IMethodListener() {
 
@@ -240,7 +251,7 @@ public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI
 
 	private Button createButtonToggleSelection(Composite parent) {
 
-		Button button = createButtonToggleToolbar(parent, toolbarSelectionControl, IApplicationImage.IMAGE_EXPAND_ALL, "Selection toolbar.");
+		Button button = createButtonToggleToolbar(parent, toolbarSelectionControl, IApplicationImage.IMAGE_EXPAND_ALL, "the selection toolbar.");
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override

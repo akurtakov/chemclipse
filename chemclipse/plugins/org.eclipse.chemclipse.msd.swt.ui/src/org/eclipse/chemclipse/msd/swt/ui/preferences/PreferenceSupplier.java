@@ -91,4 +91,9 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		return INSTANCE().getBoolean(P_SHOW_MASS_SPECTRUM_SELECTION_COMBO);
 	}
+
+	public static boolean isMethodToolbarVisible() {
+
+		return INSTANCE().getBoolean(P_MASS_SPECTRUM_SHOW_METHODS_TOOLBAR);
+	}
 }
