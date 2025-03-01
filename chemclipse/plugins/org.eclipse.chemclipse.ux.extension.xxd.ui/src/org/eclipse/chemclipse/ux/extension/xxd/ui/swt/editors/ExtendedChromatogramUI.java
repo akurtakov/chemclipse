@@ -141,7 +141,7 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ScanChartSuppor
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ChromatogramBaselinesUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ChromatogramReferencesUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ProcessorToolbarUI;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ToolbarConfig;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.IToolbarConfig;
 import org.eclipse.chemclipse.vsd.model.core.IChromatogramVSD;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
 import org.eclipse.chemclipse.wsd.model.core.selection.IChromatogramSelectionWSD;
@@ -204,7 +204,7 @@ import org.eclipse.swtchart.extensions.model.ICustomSeries;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.commands.ICommandService;
 
-public class ExtendedChromatogramUI extends Composite implements ToolbarConfig, IExtendedPartUI {
+public class ExtendedChromatogramUI extends Composite implements IToolbarConfig, IExtendedPartUI {
 
 	private static final Logger logger = Logger.getLogger(ExtendedChromatogramUI.class);
 
