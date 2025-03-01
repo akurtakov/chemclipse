@@ -73,6 +73,7 @@ public abstract class AbstractChromatogramSelectionMassSpectrumFilterProcessType
 			super(prefix + supplier.getId(), supplier.getFilterName(), supplier.getDescription(), (Class<IMassSpectrumFilterSettings>)supplier.getSettingsClass(), parent, DataType.MSD);
 			this.supplier = supplier;
 			this.extractionFunction = extractionFunction;
+			getLiteratureReferences().addAll(supplier.getLiteratureReferences());
 		}
 
 		@Override

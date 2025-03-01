@@ -60,6 +60,7 @@ public class MassSpectrumFilterProcessSupplier implements IProcessTypeSupplier {
 		public MassSpectrumFilterProcessorSupplier(IMassSpectrumFilterSupplier supplier, IProcessTypeSupplier parent) {
 
 			super(supplier.getId(), supplier.getFilterName(), supplier.getDescription(), (Class<IMassSpectrumFilterSettings>)supplier.getSettingsClass(), parent, DataType.MSD);
+			getLiteratureReferences().addAll(supplier.getLiteratureReferences());
 		}
 
 		@Override

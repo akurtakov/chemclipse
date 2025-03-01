@@ -12,7 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.core.massspectrum;
 
+import java.util.List;
+
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.IMassSpectrumFilterSettings;
+import org.eclipse.chemclipse.support.literature.LiteratureReference;
 
 public interface IMassSpectrumFilterSupplier {
 
@@ -43,4 +46,6 @@ public interface IMassSpectrumFilterSupplier {
 	 * @return the config class for this supplier
 	 */
 	Class<? extends IMassSpectrumFilterSettings> getSettingsClass();
+
+	List<LiteratureReference> getLiteratureReferences();
 }

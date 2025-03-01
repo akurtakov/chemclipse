@@ -11,8 +11,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.settings;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.AbstractMassSpectrumFilterSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.preferences.PreferenceSupplier;
+import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.support.literature.LiteratureReference;
 import org.eclipse.chemclipse.support.settings.DoubleSettingsProperty;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
 
@@ -20,6 +25,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 public class MassSpectrumFilterSettings extends AbstractMassSpectrumFilterSettings {
+
+	private static final Logger logger = Logger.getLogger(MassSpectrumFilterSettings.class);
 
 	@JsonProperty(value = "Iterations", defaultValue = "100")
 	@JsonPropertyDescription(value = "The number of iterations to run the filter.")
@@ -64,5 +71,25 @@ public class MassSpectrumFilterSettings extends AbstractMassSpectrumFilterSettin
 	public void setTransitions(int transitions) {
 
 		this.transitions = transitions;
+	}
+
+	@Override
+	public List<LiteratureReference> getLiteratureReferences() {
+
+		List<LiteratureReference> literatureReferences = new ArrayList<>();
+		literatureReferences.add(createLiteratureReference("0168583X88900638.ris", "10.1016/0168-583X(88)90063-8"));
+		return literatureReferences;
+	}
+
+	private static LiteratureReference createLiteratureReference(String file, String doi) {
+
+		String content;
+		try {
+			content = new String(BaselineDetectorSettings.class.getResourceAsStream(file).readAllBytes());
+		} catch(Exception e) {
+			content = doi;
+			logger.warn(e);
+		}
+		return new LiteratureReference(content);
 	}
 }

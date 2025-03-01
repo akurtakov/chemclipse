@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2018 Lablicate GmbH.
+ * Copyright (c) 2013, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -11,7 +11,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.core.peak;
 
+import java.util.List;
+
 import org.eclipse.chemclipse.chromatogram.filter.settings.IPeakFilterSettings;
+import org.eclipse.chemclipse.support.literature.LiteratureReference;
 
 public interface IPeakFilterSupplier {
 
@@ -43,4 +46,6 @@ public interface IPeakFilterSupplier {
 	 * @return
 	 */
 	Class<? extends IPeakFilterSettings> getSettingsClass();
+
+	List<LiteratureReference> getLiteratureReferences();
 }
