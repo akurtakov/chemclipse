@@ -271,6 +271,7 @@ public class ExtendedMassSpectrumOverlayUI extends Composite implements IExtende
 		if(scanMSD instanceof IStandaloneMassSpectrum massSpectrum) {
 			seriesName = massSpectrum.getName();
 		}
+		seriesName += scanSelections.indexOf(scanMSD);
 
 		ILineSeriesData lineSeriesData = new LineSeriesData(getSeriesDataProcessed(scanMSD, seriesName));
 		ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
