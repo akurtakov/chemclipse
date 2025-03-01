@@ -22,6 +22,7 @@ import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.swt.ui.support.IColorScheme;
 import org.eclipse.chemclipse.ux.extension.msd.ui.views.MassSpectrumRulerChart;
@@ -57,9 +58,9 @@ import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.ISeriesData;
 import org.eclipse.swtchart.extensions.core.ISeriesModificationListener;
 import org.eclipse.swtchart.extensions.core.SeriesData;
+import org.eclipse.swtchart.extensions.linecharts.ICompressionSupport;
 import org.eclipse.swtchart.extensions.linecharts.ILineSeriesData;
 import org.eclipse.swtchart.extensions.linecharts.ILineSeriesSettings;
-import org.eclipse.swtchart.extensions.linecharts.LineChart;
 import org.eclipse.swtchart.extensions.linecharts.LineSeriesData;
 
 import jakarta.inject.Inject;
@@ -154,7 +155,7 @@ public class ExtendedMassSpectrumOverlayUI extends Composite implements IExtende
 		Button button = new Button(parent, SWT.PUSH);
 		button.setToolTipText("Open a new Overlay");
 		button.setText("");
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_PLUS, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_PLUS, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -173,7 +174,7 @@ public class ExtendedMassSpectrumOverlayUI extends Composite implements IExtende
 		Button button = new Button(parent, SWT.PUSH);
 		button.setToolTipText("Reset the Overlay");
 		button.setText("");
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_RESET, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_RESET, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -246,22 +247,20 @@ public class ExtendedMassSpectrumOverlayUI extends Composite implements IExtende
 		MassSpectrumRulerChart chart = chartControl.get();
 		chart.deleteSeries();
 		if(!scanSelections.isEmpty()) {
-			List<ILineSeriesData> lineSeriesDataList = new ArrayList<ILineSeriesData>();
+			List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
 			Color color = colorSchemeNormal.getColor();
 			for(IScanMSD scanMSD : scanSelections) {
 				/*
 				 * Get the data.
 				 */
 				ILineSeriesData lineSeriesData = getLineSeriesData(scanMSD);
-				if(lineSeriesData != null) {
-					ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
-					lineSeriesSettings.setLineColor(color);
-					lineSeriesSettings.setEnableArea(false);
-					lineSeriesDataList.add(lineSeriesData);
-					color = colorSchemeNormal.getNextColor();
-				}
+				ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
+				lineSeriesSettings.setLineColor(color);
+				lineSeriesSettings.setEnableArea(false);
+				lineSeriesDataList.add(lineSeriesData);
+				color = colorSchemeNormal.getNextColor();
 			}
-			chart.addSeriesData(lineSeriesDataList, LineChart.MEDIUM_COMPRESSION);
+			chart.addSeriesData(lineSeriesDataList, ICompressionSupport.MEDIUM_COMPRESSION);
 		}
 	}
 
@@ -273,11 +272,7 @@ public class ExtendedMassSpectrumOverlayUI extends Composite implements IExtende
 		}
 		seriesName += scanSelections.indexOf(scanMSD);
 
-		ILineSeriesData lineSeriesData = new LineSeriesData(getSeriesDataProcessed(scanMSD, seriesName));
-		ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
-		lineSeriesSettings.setLineColor(Colors.RED);
-		lineSeriesSettings.setEnableArea(true);
-		return lineSeriesData;
+		return new LineSeriesData(getSeriesDataProcessed(scanMSD, seriesName));
 	}
 
 	private ISeriesData getSeriesDataProcessed(IScanMSD scanMSD, String id) {
