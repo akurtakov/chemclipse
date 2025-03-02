@@ -12,37 +12,49 @@
 package org.eclipse.chemclipse.ux.extension.msd.ui.swt;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Consumer;
 
-import org.eclipse.chemclipse.chromatogram.msd.identifier.massspectrum.IMassSpectrumIdentifierSupplier;
-import org.eclipse.chemclipse.chromatogram.msd.identifier.massspectrum.IMassSpectrumIdentifierSupport;
-import org.eclipse.chemclipse.chromatogram.msd.identifier.massspectrum.MassSpectrumIdentifier;
+import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.model.supplier.IScanProcessSupplier;
 import org.eclipse.chemclipse.msd.converter.massspectrum.MassSpectrumConverter;
 import org.eclipse.chemclipse.msd.converter.massspectrum.MassSpectrumConverterSupport;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.processing.converter.ISupplier;
+import org.eclipse.chemclipse.processing.core.DefaultProcessingResult;
 import org.eclipse.chemclipse.processing.core.ICategories;
+import org.eclipse.chemclipse.processing.core.IMessageProvider;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
+import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
+import org.eclipse.chemclipse.processing.supplier.IProcessSupplier.SupplierType;
+import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
+import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
+import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
-import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
-import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
-import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
+import org.eclipse.chemclipse.ux.extension.msd.ui.handlers.DynamicHandler;
 import org.eclipse.chemclipse.ux.extension.msd.ui.internal.provider.UpdateMenuEntry;
+import org.eclipse.chemclipse.ux.extension.ui.editors.ProcessorSupplierMenuEntry;
+import org.eclipse.chemclipse.ux.extension.ui.methods.ProcessSettingsSupport;
+import org.eclipse.chemclipse.ux.extension.ui.methods.SettingsWizard;
+import org.eclipse.chemclipse.xxd.process.comparators.CategoryNameComparator;
+import org.eclipse.chemclipse.xxd.process.support.ProcessTypeSupport;
+import org.eclipse.core.commands.Category;
+import org.eclipse.core.commands.Command;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.FileDialog;
@@ -61,8 +73,19 @@ import org.eclipse.swtchart.extensions.core.ScrollableChart;
 import org.eclipse.swtchart.extensions.core.SecondaryAxisSettings;
 import org.eclipse.swtchart.extensions.core.SeriesData;
 import org.eclipse.swtchart.extensions.menu.IChartMenuEntry;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.commands.ICommandService;
 
 public class MassSpectrumChartCentroid extends BarChart implements IMassSpectrumChart {
+
+	private static final Logger logger = Logger.getLogger(MassSpectrumChartProfile.class);
+
+	private IScanMSD menuCache = null;
+	private final List<IChartMenuEntry> cachedMenuEntries = new ArrayList<>();
+
+	private IProcessSupplierContext processTypeSupport = new ProcessTypeSupport();
+
+	private ICommandService commandService = PlatformUI.getWorkbench().getService(ICommandService.class);
 
 	private static final int MAX_NUMBER_MZ = 50000;
 
@@ -101,6 +124,7 @@ public class MassSpectrumChartCentroid extends BarChart implements IMassSpectrum
 			IBarSeriesData barSeriesData = new BarSeriesData(seriesData);
 			barSeriesDataList.add(barSeriesData);
 			addSeriesData(barSeriesDataList, MAX_NUMBER_MZ);
+			updateMenu();
 		}
 	}
 
@@ -115,7 +139,6 @@ public class MassSpectrumChartCentroid extends BarChart implements IMassSpectrum
 		chartSettings.setCreateMenu(true);
 
 		chartSettings.addMenuEntry(new UpdateMenuEntry());
-		addMassSpectrumIdentifier(chartSettings);
 		addMassSpectrumExport(chartSettings);
 
 		RangeRestriction rangeRestriction = chartSettings.getRangeRestriction();
@@ -131,6 +154,123 @@ public class MassSpectrumChartCentroid extends BarChart implements IMassSpectrum
 		setPrimaryAxisSet(chartSettings);
 		addSecondaryAxisSet(chartSettings);
 		applySettings(chartSettings);
+	}
+
+	private void updateMenu() {
+
+		IChartSettings chartSettings = getChartSettings();
+		if(processTypeSupport != null && menuCache != massSpectrum) {
+			/*
+			 * Clean the Menu
+			 */
+			for(IChartMenuEntry cachedEntry : cachedMenuEntries) {
+				chartSettings.removeMenuEntry(cachedEntry);
+			}
+			cachedMenuEntries.clear();
+			/*
+			 * Dynamic Menu Items
+			 */
+			List<IProcessSupplier<?>> processSupplierList = new ArrayList<>(processTypeSupport.getSupplier(this::isValidSupplier));
+			Collections.sort(processSupplierList, new CategoryNameComparator());
+			for(IProcessSupplier<?> processSupplier : processSupplierList) {
+				IChartMenuEntry chartMenuEntry = new ProcessorSupplierMenuEntry<>(processSupplier, processTypeSupport, this::executeSupplier);
+				cachedMenuEntries.add(chartMenuEntry);
+				chartSettings.addMenuEntry(chartMenuEntry);
+				addCommand(processSupplier, chartMenuEntry);
+			}
+			/*
+			 * Apply the menu items.
+			 */
+			applySettings(chartSettings);
+			menuCache = massSpectrum;
+		}
+	}
+
+	private boolean isValidSupplier(IProcessSupplier<?> supplier) {
+
+		if(supplier.getType() == SupplierType.STRUCTURAL) {
+			return false;
+		}
+
+		return supplier.getCategory() == ICategories.SCAN_IDENTIFIER;
+	}
+
+	private void addCommand(IProcessSupplier<?> supplier, IChartMenuEntry cachedEntry) {
+
+		Command command = commandService.getCommand(supplier.getId());
+		Category category = commandService.getCategory(supplier.getCategory());
+		command.define(supplier.getName(), supplier.getDescription(), category);
+		command.setHandler(new DynamicHandler(cachedEntry, this));
+	}
+
+	private <C> void executeSupplier(IProcessSupplier<C> processSupplier, IProcessSupplierContext processSupplierContext) {
+
+		try {
+			Shell shell = getShell();
+			IProcessorPreferences<C> settings = SettingsWizard.getSettings(shell, ProcessSettingsSupport.getWorkspacePreferences(processSupplier), true);
+			if(settings == null) {
+				return;
+			}
+			/*
+			 * Apply
+			 */
+			processMassSpectrum(new IRunnableWithProgress() {
+
+				@Override
+				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+
+					executeMethod(massSpectrum, new Consumer<IScanMSD>() {
+
+						@Override
+						public void accept(IScanMSD scanMSD) {
+
+							DefaultProcessingResult<Object> processingInfo = new DefaultProcessingResult<>();
+							IProcessSupplier.applyProcessor(settings, IScanProcessSupplier.createConsumer(scanMSD), new ProcessExecutionContext(monitor, processingInfo, processSupplierContext));
+							updateResult(processingInfo);
+						}
+					});
+				}
+			}, shell);
+		} catch(IOException e) {
+			DefaultProcessingResult<Object> processingInfo = new DefaultProcessingResult<>();
+			processingInfo.addErrorMessage(processSupplier.getName(), "The process method can't be applied.", e);
+			updateResult(processingInfo);
+		}
+	}
+
+	private void processMassSpectrum(IRunnableWithProgress runnable, Shell shell) {
+
+		ProgressMonitorDialog monitor = new ProgressMonitorDialog(shell);
+		try {
+			monitor.run(true, true, runnable);
+			massSpectrum.setDirty(true);
+			update();
+		} catch(InterruptedException e) {
+			logger.error(e);
+			Thread.currentThread().interrupt();
+		} catch(InvocationTargetException e) {
+			logger.warn(e);
+			logger.warn(e.getCause());
+		}
+	}
+
+	public void updateResult(IMessageProvider processingInfo) {
+
+		getDisplay().asyncExec(new Runnable() {
+
+			@Override
+			public void run() {
+
+				ProcessingInfoPartSupport.getInstance().update(processingInfo, true);
+			}
+		});
+	}
+
+	private void executeMethod(IScanMSD scanMSD, Consumer<IScanMSD> consumer) {
+
+		if(scanMSD != null) {
+			consumer.accept(scanMSD);
+		}
 	}
 
 	private void setPrimaryAxisSet(IChartSettings chartSettings) {
@@ -173,7 +313,7 @@ public class MassSpectrumChartCentroid extends BarChart implements IMassSpectrum
 		int size = ions.size();
 		double[] xSeries = new double[size];
 		double[] ySeries = new double[size];
-		//
+
 		for(int i = 0; i < size; i++) {
 			IIon ion = ions.get(i);
 			xSeries[i] = ion.getIon();
@@ -181,42 +321,6 @@ public class MassSpectrumChartCentroid extends BarChart implements IMassSpectrum
 		}
 
 		return new SeriesData(xSeries, ySeries, "Mass Spectrum");
-	}
-
-	private void addMassSpectrumIdentifier(IChartSettings chartSettings) {
-
-		IMassSpectrumIdentifierSupport massSpectrumIdentifierSupport = MassSpectrumIdentifier.getMassSpectrumIdentifierSupport();
-		for(IMassSpectrumIdentifierSupplier supplier : massSpectrumIdentifierSupport.getSuppliers()) {
-			chartSettings.addMenuEntry(new IChartMenuEntry() {
-
-				@Override
-				public String getName() {
-
-					return supplier.getIdentifierName();
-				}
-
-				@Override
-				public String getCategory() {
-
-					return ICategories.IDENTIFIER;
-				}
-
-				@Override
-				public Image getIcon() {
-
-					return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_IDENTIFY_MASS_SPECTRUM, IApplicationImageProvider.SIZE_16x16);
-				}
-
-				@Override
-				public void execute(Shell shell, ScrollableChart scrollableChart) {
-
-					if(massSpectrum != null) {
-						MassSpectrumIdentifier.identify(massSpectrum, supplier.getId(), new NullProgressMonitor());
-						update();
-					}
-				}
-			});
-		}
 	}
 
 	private void addMassSpectrumExport(IChartSettings chartSettings) {

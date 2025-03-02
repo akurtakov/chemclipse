@@ -57,7 +57,7 @@ public interface IScanProcessSupplier<SettingType> extends IProcessSupplier<Sett
 			public <X> boolean canExecute(IProcessorPreferences<X> preferences) {
 
 				IProcessSupplier<X> supplier = preferences.getSupplier();
-				return (supplier instanceof IScanProcessSupplier<?>) || (supplier instanceof IMeasurementProcessSupplier<?>);
+				return (supplier instanceof IScanProcessSupplier<?>);
 			}
 
 			private void updateResult(IScan newScan) {
