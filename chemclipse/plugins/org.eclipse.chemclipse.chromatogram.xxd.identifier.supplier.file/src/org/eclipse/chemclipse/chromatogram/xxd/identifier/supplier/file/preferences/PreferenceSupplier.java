@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2024 Lablicate GmbH.
+ * Copyright (c) 2014, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -186,7 +186,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		MassSpectrumLibraryIdentifierSettings settings = new MassSpectrumLibraryIdentifierSettings();
 		initialize(settings);
-		//
+
 		return settings;
 	}
 
@@ -379,7 +379,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		settings.setLimitMatchFactor(INSTANCE().getFloat(P_LIMIT_MATCH_FACTOR_FILE, DEF_LIMIT_MATCH_FACTOR_FILE));
 		settings.setMinMatchFactor(INSTANCE().getFloat(P_MIN_MATCH_FACTOR, DEF_MIN_MATCH_FACTOR));
 		settings.setMinReverseMatchFactor(INSTANCE().getFloat(P_MIN_REVERSE_MATCH_FACTOR, DEF_MIN_REVERSE_MATCH_FACTOR));
-		//
+
 		settings.setDeltaCalculation(getDeltaCalculation());
 		settings.setDeltaWindow(INSTANCE().getFloat(P_DELTA_WINDOW, DEF_DELTA_WINDOW));
 		settings.setPenaltyCalculation(getPenaltyCalculation());

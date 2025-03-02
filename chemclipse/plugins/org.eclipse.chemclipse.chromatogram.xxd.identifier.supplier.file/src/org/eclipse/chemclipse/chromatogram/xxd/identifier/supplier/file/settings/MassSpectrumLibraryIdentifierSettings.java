@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2024 Lablicate GmbH.
+ * Copyright (c) 2014, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -30,25 +30,31 @@ public class MassSpectrumLibraryIdentifierSettings extends AbstractMassSpectrumI
 
 	@JsonProperty(value = "Library File", defaultValue = "")
 	@JsonPropertyDescription("Select the library file.")
-	@FileSettingProperty(dialogType = DialogType.OPEN_DIALOG, extensionNames = {"AMDIS (*.msl)", "NIST (*.msp)"}, validExtensions = {"*.msl;*.MSL", "*.msp;*.MSP"}, onlyDirectory = false, allowEmpty = false)
+	@FileSettingProperty(dialogType = DialogType.OPEN_DIALOG, onlyDirectory = false, allowEmpty = false)
 	private File libraryFile;
+
 	@JsonProperty(value = "Pre-Optimization", defaultValue = "false")
 	private boolean usePreOptimization = false;
+
 	@JsonProperty(value = "Threshold Pre-Optimization", defaultValue = "0.12")
 	@DoubleSettingsProperty(minValue = PreferenceSupplier.MIN_THRESHOLD_PRE_OPTIMIZATION, maxValue = PreferenceSupplier.MAX_THRESHOLD_PRE_OPTIMIZATION, step = 0.1)
 	private double thresholdPreOptimization = 0.12;
+
 	@JsonProperty(value = "Number of Targets", defaultValue = "15")
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_NUMBER_OF_TARGETS, maxValue = PreferenceSupplier.MAX_NUMBER_OF_TARGETS)
 	private int numberOfTargets = 15;
+
 	@JsonProperty(value = "Min. Match Factor", defaultValue = "80.0")
 	@FloatSettingsProperty(minValue = PreferenceSupplier.MIN_FACTOR, maxValue = PreferenceSupplier.MAX_FACTOR)
 	private float minMatchFactor = 80.0f;
+
 	@JsonProperty(value = "Min. Reverse Match Factor", defaultValue = "80.0")
 	@FloatSettingsProperty(minValue = PreferenceSupplier.MIN_FACTOR, maxValue = PreferenceSupplier.MAX_FACTOR)
 	private float minReverseMatchFactor = 80.0f;
-	//
+
 	@JsonIgnore
 	private String alternateIdentifierId = "";
+
 	@JsonIgnore
 	private String massSpectraFiles = "";
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2024 Lablicate GmbH.
+ * Copyright (c) 2022, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -38,9 +38,11 @@ public class IdentifierSettings extends AbstractIdentifierSettingsMSD implements
 	@JsonProperty(value = "Use Normalized Scan", defaultValue = "true")
 	@JsonPropertyDescription(value = "When merging scan, normalize the intensities.")
 	private boolean useNormalizedScan = true;
+
 	@JsonProperty(value = "Calculation Type", defaultValue = "SUM")
 	@JsonPropertyDescription(value = "Defines how to create combined scans.")
 	private CalculationType calculationType = CalculationType.SUM;
+
 	@JsonProperty(value = "Use Peaks Instead Of Scans", defaultValue = "false")
 	@JsonPropertyDescription(value = "Use peaks instead of scans to calculate the combined spectrum.")
 	private boolean usePeaksInsteadOfScans = false;
@@ -51,33 +53,42 @@ public class IdentifierSettings extends AbstractIdentifierSettingsMSD implements
 	@JsonPropertyDescription(value = "Run an identification if no target exists with a Match Factor >= the given limit.")
 	@FloatSettingsProperty(minValue = IIdentifierSettings.MIN_LIMIT_MATCH_FACTOR, maxValue = IIdentifierSettings.MAX_LIMIT_MATCH_FACTOR)
 	private float limitMatchFactor = IIdentifierSettings.DEF_LIMIT_MATCH_FACTOR;
+
 	@JsonProperty(value = "Library File", defaultValue = "")
 	@JsonPropertyDescription("Select the library file.")
 	@FileSettingProperty(dialogType = DialogType.OPEN_DIALOG, extensionNames = {"AMDIS (*.msl)"}, validExtensions = {"*.msl;*.MSL"}, onlyDirectory = false, allowEmpty = false)
 	private File libraryFile;
+
 	@JsonProperty(value = "Mass Spectrum Comparator", defaultValue = DEFAULT_COMPARATOR_ID)
 	@JsonPropertyDescription(value = "Select the algorithm used for mass spectrum comparison calculation.")
 	@ComboSettingsProperty(MassSpectrumComparatorDynamicSettingProperty.class)
 	private String massSpectrumComparatorId = DEFAULT_COMPARATOR_ID;
+
 	@JsonProperty(value = "Pre-Optimization", defaultValue = "false")
 	private boolean usePreOptimization = false;
+
 	@JsonProperty(value = "Threshold Pre-Optimization", defaultValue = "0.12")
 	@DoubleSettingsProperty(minValue = PreferenceSupplier.MIN_THRESHOLD_PRE_OPTIMIZATION, maxValue = PreferenceSupplier.MAX_THRESHOLD_PRE_OPTIMIZATION, step = 0.1)
 	private double thresholdPreOptimization = 0.12;
+
 	@JsonProperty(value = "Number of Targets", defaultValue = "15")
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_NUMBER_OF_TARGETS, maxValue = PreferenceSupplier.MAX_NUMBER_OF_TARGETS)
 	private int numberOfTargets = 15;
+
 	@JsonProperty(value = "Min. Match Factor", defaultValue = "80.0")
 	@FloatSettingsProperty(minValue = PreferenceSupplier.MIN_FACTOR, maxValue = PreferenceSupplier.MAX_FACTOR)
 	private float minMatchFactor = 80.0f;
+
 	@JsonProperty(value = "Min. Reverse Match Factor", defaultValue = "80.0")
 	@FloatSettingsProperty(minValue = PreferenceSupplier.MIN_FACTOR, maxValue = PreferenceSupplier.MAX_FACTOR)
 	private float minReverseMatchFactor = 80.0f;
-	//
+
 	@JsonIgnore
 	private String alternateIdentifierId = "";
+
 	@JsonIgnore
 	private String massSpectraFiles = "";
+
 	@JsonIgnore
 	private IMassSpectrumComparator comparator = null; // The comparator will be created dynamically.
 
