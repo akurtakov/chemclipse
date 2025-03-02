@@ -94,7 +94,7 @@ public class FileIdentifier {
 		for(Map.Entry<String, IMassSpectra> database : databases.entrySet()) {
 			compareMassSpectraAgainstDatabase(massSpectra.getList(), database.getValue().getList(), fileIdentifierSettings, identifier, database.getKey(), monitor);
 		}
-		//
+
 		return massSpectra;
 	}
 

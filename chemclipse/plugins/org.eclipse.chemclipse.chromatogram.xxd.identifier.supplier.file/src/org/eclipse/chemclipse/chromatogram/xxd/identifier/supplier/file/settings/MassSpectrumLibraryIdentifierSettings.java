@@ -13,6 +13,7 @@
 package org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings;
 
 import java.io.File;
+import java.util.StringJoiner;
 
 import org.eclipse.chemclipse.chromatogram.msd.identifier.settings.AbstractMassSpectrumIdentifierSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.preferences.PreferenceSupplier;
@@ -21,6 +22,7 @@ import org.eclipse.chemclipse.support.settings.FileSettingProperty;
 import org.eclipse.chemclipse.support.settings.FileSettingProperty.DialogType;
 import org.eclipse.chemclipse.support.settings.FloatSettingsProperty;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
+import org.eclipse.chemclipse.support.util.FileListUtil;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -62,10 +64,27 @@ public class MassSpectrumLibraryIdentifierSettings extends AbstractMassSpectrumI
 	public String getMassSpectraFiles() {
 
 		if(libraryFile != null) {
+			if(libraryFile.isDirectory()) {
+				return getAllContainingFilesAbsolutePath(libraryFile);
+			}
 			return libraryFile.getAbsolutePath();
 		} else {
 			return massSpectraFiles;
 		}
+	}
+
+	private static String getAllContainingFilesAbsolutePath(File directory) {
+
+		StringJoiner joiner = new StringJoiner(FileListUtil.SEPARATOR_TOKEN);
+		File[] files = directory.listFiles();
+		if(files != null) {
+			for(File file : files) {
+				if(file.isFile()) {
+					joiner.add(file.getAbsolutePath());
+				}
+			}
+		}
+		return joiner.toString();
 	}
 
 	@Override
