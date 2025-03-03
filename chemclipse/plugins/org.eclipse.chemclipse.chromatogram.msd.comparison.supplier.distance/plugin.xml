@@ -34,7 +34,7 @@
             highResolutionMS="false">
       </ComparisonSupplier>
       <ComparisonSupplier
-            comparatorName="Cosine Mutliply (m/z * Intensity)"
+            comparatorName="Cosine Multiply (m/z * Intensity)"
             description="The comparator uses the cosine match, based on the multiplication of the ion and intensity: m/z * Intensity"
             id="org.eclipse.chemclipse.chromatogram.msd.comparison.supplier.distance.cosinemultiply"
             massSpectrumComparator="org.eclipse.chemclipse.chromatogram.msd.comparison.supplier.distance.comparator.CosineMultiplyComparator"

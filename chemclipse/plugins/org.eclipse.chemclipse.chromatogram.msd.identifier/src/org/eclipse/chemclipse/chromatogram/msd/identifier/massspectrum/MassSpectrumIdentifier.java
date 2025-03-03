@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2020 Lablicate GmbH.
+ * Copyright (c) 2010, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This
  * program and the accompanying materials are made available under the terms of
@@ -39,7 +39,7 @@ import org.eclipse.core.runtime.Platform;
 public class MassSpectrumIdentifier {
 
 	private static final Logger logger = Logger.getLogger(MassSpectrumIdentifier.class);
-	//
+
 	private static final String EXTENSION_POINT = "org.eclipse.chemclipse.chromatogram.msd.identifier.massSpectrumIdentifier";
 	private static final String NO_IDENTIFIER_AVAILABLE = "There is no suitable mass spectrum identifier available";
 
@@ -181,7 +181,7 @@ public class MassSpectrumIdentifier {
 		if("".equals(filterId)) {
 			return null;
 		}
-		//
+
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 		IConfigurationElement[] elements = registry.getConfigurationElementsFor(EXTENSION_POINT);
 		for(IConfigurationElement element : elements) {
@@ -189,7 +189,7 @@ public class MassSpectrumIdentifier {
 				return element;
 			}
 		}
-		//
+
 		return null;
 	}
 

@@ -56,12 +56,12 @@ import org.eclipse.core.runtime.SubMonitor;
 public class FileIdentifier {
 
 	private static final Logger logger = Logger.getLogger(FileIdentifier.class);
-	//
+
 	public static final String IDENTIFIER = "File Identifier";
-	//
+
 	private static final Comparator<IComparisonResult> RESULT_COMPARATOR = Collections.reverseOrder(IComparisonResult.MATCH_FACTOR_COMPARATOR);
 	private static final TargetBuilderMSD TARGETBUILDER = new TargetBuilderMSD();
-	//
+
 	private final DatabasesCache databasesCache = new DatabasesCache(PreferenceSupplier.getMassSpectraFiles());
 
 	public IMassSpectra runIdentification(List<IScanMSD> massSpectraList, ILibraryIdentifierSettings fileIdentifierSettings, IProgressMonitor monitor) throws FileNotFoundException {
@@ -94,7 +94,7 @@ public class FileIdentifier {
 		for(Map.Entry<String, IMassSpectra> database : databases.entrySet()) {
 			compareMassSpectraAgainstDatabase(massSpectra.getList(), database.getValue().getList(), fileIdentifierSettings, identifier, database.getKey(), monitor);
 		}
-		//
+
 		return massSpectra;
 	}
 
@@ -139,7 +139,7 @@ public class FileIdentifier {
 		for(Map.Entry<String, IMassSpectra> database : databases.entrySet()) {
 			comparePeaksAgainstDatabase(peaksToIdentify, database.getValue().getList(), peakIdentifierSettings, identifier, database.getKey(), monitor);
 		}
-		//
+
 		return identificationResults;
 	}
 
@@ -147,12 +147,12 @@ public class FileIdentifier {
 
 		FileListUtil fileListUtil = new FileListUtil();
 		List<String> files = fileListUtil.getFiles(massSpectraFiles);
-		//
+
 		logger.info(IDENTIFIER);
 		for(String file : files) {
 			logger.info("Use: " + file);
 		}
-		//
+
 		return files;
 	}
 
@@ -169,7 +169,7 @@ public class FileIdentifier {
 		if(isValid(identificationTarget)) {
 			massSpectra.addMassSpectra(databasesCache.getDatabaseMassSpectra(identificationTarget, monitor));
 		}
-		//
+
 		return massSpectra;
 	}
 
@@ -185,7 +185,7 @@ public class FileIdentifier {
 			String id = identificationTarget.getIdentifier();
 			return IDENTIFIER.equals(id);
 		}
-		//
+
 		return false;
 	}
 
@@ -208,15 +208,15 @@ public class FileIdentifier {
 
 		int matched = 0;
 		long start = System.currentTimeMillis();
-		//
+
 		SubMonitor subMonitor = SubMonitor.convert(monitor, "Comparing against database " + databaseName + " with " + references.size() + " massspectra", unknownList.size());
 		IMassSpectrumComparator massSpectrumComparator = fileIdentifierSettings.getMassSpectrumComparator();
 		IMassSpectrumComparisonSupplier comparisonSupplier = massSpectrumComparator.getMassSpectrumComparisonSupplier();
 		String comparatorName = comparisonSupplier != null ? comparisonSupplier.getComparatorName() : "";
-		//
+
 		int count = 1;
 		int total = unknownList.size();
-		//
+
 		for(T item : unknownList) {
 			/*
 			 * Abort condition.
@@ -242,18 +242,18 @@ public class FileIdentifier {
 					unknown.getTargets().add(massSpectrumTarget);
 				}
 			}
-			//
+
 			count++;
 			subMonitor.worked(1);
 		}
-		//
+
 		if(UserManagement.isDevMode()) {
 			long end = System.currentTimeMillis();
 			NumberFormat integerFormat = ValueFormat.getDecimalFormatEnglish("0");
 			NumberFormat timeFormat = ValueFormat.getDecimalFormatEnglish("0.000");
 			logger.info("Identification of " + integerFormat.format(unknownList.size()) + " unknown items against database " + databaseName + " with " + integerFormat.format(references.size()) + " mass spectra took " + timeFormat.format((end - start) / 1000.0d) + " seconds and yields " + matched + " matches");
 		}
-		//
+
 		return matched;
 	}
 
@@ -264,12 +264,12 @@ public class FileIdentifier {
 		 * Define the number of items where no more splitting occurs
 		 */
 		private static final int THRESHOLD = 400;
-		//
+
 		private final IScanMSD unknown;
 		private final List<? extends IScanMSD> references;
 		private final IFileIdentifierSettings settings;
 		private final IMassSpectrumComparator spectrumComparator;
-		//
+
 		private MatchConstraints matchConstraints;
 
 		public FindMatchingSpectras(IScanMSD unknown, List<? extends IScanMSD> references, IFileIdentifierSettings settings, IMassSpectrumComparator spectrumComparator) {
@@ -308,7 +308,7 @@ public class FileIdentifier {
 			Map<IComparisonResult, IScanMSD> results = new IdentityHashMap<>();
 			float minMatchFactor = settings.getMinMatchFactor();
 			float minReverseMatchFactor = settings.getMinReverseMatchFactor();
-			//
+
 			for(IScanMSD reference : references) {
 				IProcessingInfo<IComparisonResult> infoCompare = spectrumComparator.compare(unknown, reference, matchConstraints);
 				IComparisonResult comparisonResult = infoCompare.getProcessingResult();
