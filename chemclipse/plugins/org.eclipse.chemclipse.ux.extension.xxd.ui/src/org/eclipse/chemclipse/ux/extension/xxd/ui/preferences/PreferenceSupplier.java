@@ -819,9 +819,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final int DEF_DELTA_MILLISECONDS_PEAK_SELECTION = 2000; // 2 seconds
 	public static final String P_CHROMATOGRAM_MARK_ANALYSIS_SEGMENTS = "chromatogramMarkAnalysisSegments";
 	public static final boolean DEF_CHROMATOGRAM_MARK_ANALYSIS_SEGMENTS = false;
-	public static final String P_SHOW_RESUME_METHOD_DIALOG = "showResumeMethodDialog";
-	public static final boolean DEF_SHOW_RESUME_METHOD_DIALOG = true;
-	public static final String P_SHOW_RETENTION_INDEX_MARKER = "showRetenetionIndexMarker";
+	public static final String P_SHOW_RETENTION_INDEX_MARKER = "showRetentionIndexMarker";
 	public static final boolean DEF_SHOW_RETENTION_INDEX_MARKER = false;
 	/*
 	 * Calibration Chart
@@ -939,11 +937,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String P_QUANTITATION_REFERENCE_LIST = "quantitationReferenceList";
 	public static final String DEF_QUANTITATION_REFERENCE_LIST = "";
 	/*
-	 * Processor
-	 */
-	public static final String P_PROCESSOR_SELECTION_DATA_CATEGORY = "processorSelectionDataCategory";
-	public static final boolean DEF_PROCESSOR_SELECTION_DATA_CATEGORY = true;
-	/*
 	 * Molecules
 	 */
 	public static final String P_MOLECULE_PATH_EXPORT = "moleculePathExport";
@@ -966,11 +959,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	 */
 	public static final String P_EDITOR_TSD = "editorTSD";
 	public static final String DEF_EDITOR_TSD = ChromatogramEditorTSD.CONTRIBUTION_URI;
-	/*
-	 * Methods
-	 */
-	public static final String P_CREATE_METHOD_ENABLE_RESUME = "createMethodEnableResume";
-	public static final boolean DEF_CREATE_METHOD_ENABLE_RESUME = true;
 	/*
 	 * Quick-Access Processors
 	 * The basic setting is initialized with DataCategory elements
@@ -1276,16 +1264,12 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_MERGE_PEAKS_CALCULATION_TYPE, DEF_MERGE_PEAKS_CALCULATION_TYPE);
 		putDefault(P_MERGE_PEAKS_IDENTIFICATION_TARGETS, DEF_MERGE_PEAKS_IDENTIFICATION_TARGETS);
 		putDefault(P_MERGE_PEAKS_DELETE_ORIGINS, DEF_MERGE_PEAKS_DELETE_ORIGINS);
-		/*
-		 * Methods
-		 */
-		putDefault(P_CREATE_METHOD_ENABLE_RESUME, DEF_CREATE_METHOD_ENABLE_RESUME);
-		//
+
 		putDefault(P_FILTER_PATH_CHROMATOGRAM_MSD, DEF_FILTER_PATH_CHROMATOGRAM_MSD);
 		putDefault(P_FILTER_PATH_CHROMATOGRAM_CSD, DEF_FILTER_PATH_CHROMATOGRAM_CSD);
 		putDefault(P_FILTER_PATH_CHROMATOGRAM_WSD, DEF_FILTER_PATH_CHROMATOGRAM_WSD);
 		putDefault(P_FILTER_PATH_RETENTION_INDICES, DEF_FILTER_PATH_RETENTION_INDICES);
-		//
+
 		putDefault(P_LIST_PATH_IMPORT, DEF_LIST_PATH_IMPORT);
 		putDefault(P_LIST_PATH_EXPORT, DEF_LIST_PATH_EXPORT);
 	}
@@ -1462,7 +1446,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_CHROMATOGRAM_LOAD_PROCESS_METHOD, DEF_CHROMATOGRAM_LOAD_PROCESS_METHOD);
 		putDefault(P_DELTA_MILLISECONDS_PEAK_SELECTION, DEF_DELTA_MILLISECONDS_PEAK_SELECTION);
 		putDefault(P_CHROMATOGRAM_MARK_ANALYSIS_SEGMENTS, DEF_CHROMATOGRAM_MARK_ANALYSIS_SEGMENTS);
-		putDefault(P_SHOW_RESUME_METHOD_DIALOG, DEF_SHOW_RESUME_METHOD_DIALOG);
 		putDefault(P_SHOW_RETENTION_INDEX_MARKER, DEF_SHOW_RETENTION_INDEX_MARKER);
 		/*
 		 * Time Ranges
@@ -1481,10 +1464,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		 * Instruments
 		 */
 		putDefault(P_INSTRUMENTS_TEMPLATE_FOLDER, DEF_INSTRUMENTS_TEMPLATE_FOLDER);
-		/*
-		 * Processor
-		 */
-		putDefault(P_PROCESSOR_SELECTION_DATA_CATEGORY, DEF_PROCESSOR_SELECTION_DATA_CATEGORY);
 		/*
 		 * Editors
 		 */
@@ -1524,11 +1503,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static boolean isActivateTargetDragAndDropWindows() {
 
 		return INSTANCE().getBoolean(P_ACTIVATE_TARGET_DND_WINDOWS, DEF_ACTIVATE_TARGET_DND_WINDOWS);
-	}
-
-	public static boolean isCreateMethodEnableResume() {
-
-		return INSTANCE().getBoolean(P_CREATE_METHOD_ENABLE_RESUME, DEF_CREATE_METHOD_ENABLE_RESUME);
 	}
 
 	public static String getFilterPathRetentionIndices() {

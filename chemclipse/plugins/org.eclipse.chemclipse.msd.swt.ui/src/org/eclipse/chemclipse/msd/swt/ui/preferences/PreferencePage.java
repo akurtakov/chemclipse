@@ -41,17 +41,18 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		IntegerFieldEditor filterLimitIonsEditor = new IntegerFieldEditor(PreferenceSupplier.P_FILTER_LIMIT_IONS, "Number of Ions in View <=", getFieldEditorParent());
 		filterLimitIonsEditor.setValidRange(PreferenceSupplier.MIN_FILTER_LIMIT_IONS, PreferenceSupplier.MAX_FILTER_LIMIT_IONS);
 		addField(filterLimitIonsEditor);
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
-		//
+
 		addField(new DirectoryFieldEditor(PreferenceSupplier.P_PATH_MASS_SPECTRUM_LIBRARIES, "Path mass spectrum libraries.", getFieldEditorParent()));
 		IntegerFieldEditor libraryMSDLimitSortingEditor = new IntegerFieldEditor(PreferenceSupplier.P_LIBRARY_MSD_LIMIT_SORTING, "Disable sorting above number of entries:", getFieldEditorParent());
 		libraryMSDLimitSortingEditor.setValidRange(PreferenceSupplier.MIN_LIBRARY_MSD_LIMIT_SORTING, PreferenceSupplier.MAX_LIBRARY_MSD_LIMIT_SORTING);
 		addField(libraryMSDLimitSortingEditor);
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
-		//
+
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_PROFILE_MASS_SPECTRUM_VIEW, "Use profile mass spectrum view.", getFieldEditorParent()));
+		addField(new BooleanFieldEditor(PreferenceSupplier.P_MASS_SPECTRUM_SHOW_METHODS_TOOLBAR, "Show Methods Toolbar", getFieldEditorParent()));
 	}
 
 	/*

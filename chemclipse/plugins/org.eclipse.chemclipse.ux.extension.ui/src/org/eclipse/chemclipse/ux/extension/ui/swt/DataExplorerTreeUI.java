@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2024 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -22,7 +22,7 @@ import java.util.function.Function;
 import org.eclipse.chemclipse.processing.converter.ISupplier;
 import org.eclipse.chemclipse.processing.converter.ISupplierFileIdentifier;
 import org.eclipse.chemclipse.ux.extension.ui.Activator;
-import org.eclipse.chemclipse.ux.extension.ui.l10n.Messages;
+import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.ux.extension.ui.listener.DataExplorerDragListener;
 import org.eclipse.chemclipse.ux.extension.ui.provider.DataExplorerContentProvider;
 import org.eclipse.chemclipse.ux.extension.ui.provider.DataExplorerLabelProvider;
@@ -146,7 +146,7 @@ public class DataExplorerTreeUI {
 				try {
 					persistentPreferenceStore.save();
 				} catch(IOException e) {
-					Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.getDefault().getBundle().getSymbolicName(), Messages.storingPreferencesFailed, e));
+					Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.getDefault().getBundle().getSymbolicName(), ExtensionMessages.storingPreferencesFailed, e));
 				}
 			}
 		}

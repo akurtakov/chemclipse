@@ -93,7 +93,11 @@ import org.eclipse.chemclipse.swt.ui.preferences.PreferencePageSystem;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.swt.ui.support.Fonts;
 import org.eclipse.chemclipse.ux.extension.ui.editors.ProcessorSupplierMenuEntry;
+import org.eclipse.chemclipse.ux.extension.ui.methods.MethodCancelException;
+import org.eclipse.chemclipse.ux.extension.ui.methods.MethodParameters;
+import org.eclipse.chemclipse.ux.extension.ui.methods.MethodSupportUI;
 import org.eclipse.chemclipse.ux.extension.ui.methods.ProcessSettingsSupport;
+import org.eclipse.chemclipse.ux.extension.ui.methods.ResumeMethodSupport;
 import org.eclipse.chemclipse.ux.extension.ui.methods.SettingsWizard;
 import org.eclipse.chemclipse.ux.extension.ui.support.PartSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ChartGridSupport;
@@ -110,10 +114,6 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.charts.TargetReferenc
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.charts.TargetReferenceSettings;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.handlers.DynamicHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.methods.MethodCancelException;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.methods.MethodParameters;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.methods.MethodSupportUI;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.methods.ResumeMethodSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.ChromatogramAxisIntensity;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.ChromatogramAxisMilliseconds;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.ChromatogramAxisMinutes;
@@ -141,7 +141,7 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ScanChartSuppor
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ChromatogramBaselinesUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ChromatogramReferencesUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ProcessorToolbarUI;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ToolbarConfig;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.IToolbarConfig;
 import org.eclipse.chemclipse.vsd.model.core.IChromatogramVSD;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
 import org.eclipse.chemclipse.wsd.model.core.selection.IChromatogramSelectionWSD;
@@ -204,7 +204,7 @@ import org.eclipse.swtchart.extensions.model.ICustomSeries;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.commands.ICommandService;
 
-public class ExtendedChromatogramUI extends Composite implements ToolbarConfig, IExtendedPartUI {
+public class ExtendedChromatogramUI extends Composite implements IToolbarConfig, IExtendedPartUI {
 
 	private static final Logger logger = Logger.getLogger(ExtendedChromatogramUI.class);
 

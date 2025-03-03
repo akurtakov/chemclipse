@@ -43,11 +43,11 @@ import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.swt.ui.preferences.PreferencePageSystem;
-import org.eclipse.chemclipse.ux.extension.ui.l10n.Messages;
+import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.ux.extension.ui.model.DataExplorerTreeSettings;
 import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferencePage;
 import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferencePageUserLocations;
-import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplier;
+import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierDataExplorer;
 import org.eclipse.chemclipse.ux.extension.ui.provider.DataExplorerContentProvider;
 import org.eclipse.chemclipse.ux.extension.ui.provider.ISupplierFileEditorSupport;
 import org.eclipse.chemclipse.ux.extension.ui.provider.LazyFileExplorerContentProvider;
@@ -163,7 +163,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 				try {
 					persistentPreferenceStore.save();
 				} catch(IOException e) {
-					logger.warn(Messages.storingPreferencesFailed);
+					logger.warn(ExtensionMessages.storingPreferencesFailed);
 				}
 			}
 		}
@@ -193,7 +193,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 
 	protected String getUserLocationPreferenceKey() {
 
-		return PreferenceSupplier.P_USER_LOCATION_PATH;
+		return PreferenceSupplierDataExplorer.P_USER_LOCATION_PATH;
 	}
 
 	protected String getPreferenceKey(DataExplorerTreeRoot root) {
@@ -389,7 +389,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 				if(userLocation != null) {
 					if(MessageDialog.openQuestion(e.display.getActiveShell(), "User Selection", "Would you like to delete the user selection?")) {
 						userLocations.remove(userLocation);
-						PreferenceSupplier.setUserLocations(userLocations.save());
+						PreferenceSupplierDataExplorer.setUserLocations(userLocations.save());
 						IPreferenceStore preferenceStore = dataExplorerTreeSettings.getPreferenceStore();
 						preferenceStore.setValue(getUserLocationPreferenceKey(), "");
 						updateUserLocations();
@@ -413,7 +413,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 	private void addUserLocationButton(Composite parent, DataExplorerTreeUI dataExplorerTreeUI) {
 
 		Button button = new Button(parent, SWT.PUSH);
-		button.setText(Messages.selectUserLocation);
+		button.setText(ExtensionMessages.selectUserLocation);
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_FOLDER_OPENED, IApplicationImageProvider.SIZE_16x16));
 		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		button.addSelectionListener(new SelectionAdapter() {
@@ -422,7 +422,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 			public void widgetSelected(SelectionEvent e) {
 
 				DirectoryDialog directoryDialog = new DirectoryDialog(e.display.getActiveShell(), SWT.READ_ONLY);
-				directoryDialog.setText(Messages.selectDirectory);
+				directoryDialog.setText(ExtensionMessages.selectDirectory);
 				String pathname = directoryDialog.open();
 				if(pathname != null) {
 					File directory = new File(pathname);
@@ -540,7 +540,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 	private void updateFileAndFolders(DataExplorerTreeUI dataExplorerTreeUI, MenuManager menuManager) {
 
 		TreeViewer treeViewer = dataExplorerTreeUI.getTreeViewer();
-		menuManager.add(new Action(Messages.scanForFilesystemUpdates, ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_REFRESH, IApplicationImageProvider.SIZE_16x16)) {
+		menuManager.add(new Action(ExtensionMessages.scanForFilesystemUpdates, ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_REFRESH, IApplicationImageProvider.SIZE_16x16)) {
 
 			@Override
 			public void run() {
@@ -592,7 +592,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 
 		UserLocation userLocation = new UserLocation(name, directory.getAbsolutePath());
 		userLocations.add(userLocation);
-		PreferenceSupplier.setUserLocations(userLocations.save());
+		PreferenceSupplierDataExplorer.setUserLocations(userLocations.save());
 		updateUserLocations(userLocation);
 		switchUserLocation(shell);
 	}
@@ -602,7 +602,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 		if(files.length >= 1) {
 			if(files[0] instanceof File file) {
 				if(file.isDirectory()) {
-					menuManager.add(new Action(Messages.setAsMethodDirectory, ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_METHOD, IApplicationImageProvider.SIZE_16x16)) {
+					menuManager.add(new Action(ExtensionMessages.setAsMethodDirectory, ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_METHOD, IApplicationImageProvider.SIZE_16x16)) {
 
 						@Override
 						public void run() {
@@ -622,7 +622,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 			if(files[0] instanceof File file) {
 				if(file.isFile()) {
 					if(file.getName().endsWith(MethodConverter.FILE_EXTENSION)) {
-						menuManager.add(new Action(Messages.setAsActiveMethod, ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_METHOD, IApplicationImageProvider.SIZE_16x16)) {
+						menuManager.add(new Action(ExtensionMessages.setAsActiveMethod, ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_METHOD, IApplicationImageProvider.SIZE_16x16)) {
 
 							@Override
 							public void run() {
@@ -668,7 +668,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 		}
 		//
 		for(ISupplier activeFileSupplier : supplierSet) {
-			menuManager.add(new Action(NLS.bind(Messages.openAs, activeFileSupplier.getFilterName()), ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_FILE, IApplicationImageProvider.SIZE_16x16)) {
+			menuManager.add(new Action(NLS.bind(ExtensionMessages.openAs, activeFileSupplier.getFilterName()), ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_FILE, IApplicationImageProvider.SIZE_16x16)) {
 
 				@Override
 				public void run() {
@@ -704,7 +704,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 	private void openFiles(DataExplorerTreeUI dataExplorerTreeUI, MenuManager menuManager, Object[] files) {
 
 		if(files.length == 1 && files[0] instanceof File file && file.isDirectory()) {
-			menuManager.add(new Action(Messages.openAllContainedMeasurements, ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_FOLDER, IApplicationImageProvider.SIZE_16x16)) {
+			menuManager.add(new Action(ExtensionMessages.openAllContainedMeasurements, ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_FOLDER, IApplicationImageProvider.SIZE_16x16)) {
 
 				@Override
 				public void run() {
@@ -741,8 +741,8 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 	private void createButtonBatchOpen(Composite parent, DataExplorerTreeUI dataExplorerTreeUI) {
 
 		Button button = new Button(parent, SWT.PUSH);
-		button.setText(Messages.openSelectedMeasurements);
-		button.setToolTipText(Messages.tryToOpenAllSelectedFiles);
+		button.setText(ExtensionMessages.openSelectedMeasurements);
+		button.setToolTipText(ExtensionMessages.tryToOpenAllSelectedFiles);
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_IMPORT, IApplicationImageProvider.SIZE_16x16));
 		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		button.addSelectionListener(new SelectionAdapter() {
@@ -802,7 +802,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 
 		boolean success = false;
 		if(file != null) {
-			boolean openFirstDataMatchOnly = PreferenceSupplier.isOpenFirstDataMatchOnly();
+			boolean openFirstDataMatchOnly = PreferenceSupplierDataExplorer.isOpenFirstDataMatchOnly();
 			Map<ISupplierFileIdentifier, Collection<ISupplier>> identifiers = getIdentifierSupplier().apply(file);
 			for(Entry<ISupplierFileIdentifier, Collection<ISupplier>> entry : identifiers.entrySet()) {
 				ISupplierFileIdentifier identifier = entry.getKey();
@@ -845,7 +845,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 	private void updateUserLocations(UserLocation userLocation) {
 
 		userLocations.clear();
-		userLocations.load(PreferenceSupplier.getUserLocations());
+		userLocations.load(PreferenceSupplierDataExplorer.getUserLocations());
 		/*
 		 * Update combo viewer and selection.
 		 */

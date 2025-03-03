@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2024 Lablicate GmbH.
+ * Copyright (c) 2018, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -10,7 +10,7 @@
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - rework categories handling, support different datatype selections
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.methods;
+package org.eclipse.chemclipse.ux.extension.ui.methods;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -32,9 +32,9 @@ import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
+import org.eclipse.chemclipse.ux.extension.ui.Activator;
+import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
+import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierMethods;
 import org.eclipse.chemclipse.xxd.process.comparators.NameComparator;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -176,17 +176,17 @@ public class ProcessingWizardPage extends WizardPage {
 
 	private static void setDataTypeSelectionDefault(DataCategory dataCategory) {
 
-		preferenceStore.setDefault(PreferenceSupplier.P_PROCESSOR_SELECTION_DATA_CATEGORY + dataCategory.name(), PreferenceSupplier.DEF_PROCESSOR_SELECTION_DATA_CATEGORY);
+		preferenceStore.setDefault(PreferenceSupplierMethods.P_PROCESSOR_SELECTION_DATA_CATEGORY + dataCategory.name(), PreferenceSupplierMethods.DEF_PROCESSOR_SELECTION_DATA_CATEGORY);
 	}
 
 	private static boolean getDataTypeSelection(DataCategory dataCategory) {
 
-		return preferenceStore.getBoolean(PreferenceSupplier.P_PROCESSOR_SELECTION_DATA_CATEGORY + dataCategory.name());
+		return preferenceStore.getBoolean(PreferenceSupplierMethods.P_PROCESSOR_SELECTION_DATA_CATEGORY + dataCategory.name());
 	}
 
 	private static void setDataTypeSelection(DataCategory dataCategory, boolean selection) {
 
-		preferenceStore.setValue(PreferenceSupplier.P_PROCESSOR_SELECTION_DATA_CATEGORY + dataCategory.name(), selection);
+		preferenceStore.setValue(PreferenceSupplierMethods.P_PROCESSOR_SELECTION_DATA_CATEGORY + dataCategory.name(), selection);
 	}
 
 	public IProcessEntry getProcessEntry() {

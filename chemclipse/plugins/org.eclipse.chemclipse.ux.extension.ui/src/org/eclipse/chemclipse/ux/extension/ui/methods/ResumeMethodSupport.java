@@ -9,11 +9,11 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.methods;
+package org.eclipse.chemclipse.ux.extension.ui.methods;
 
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
+import org.eclipse.chemclipse.ux.extension.ui.Activator;
+import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierMethods;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
@@ -33,7 +33,7 @@ public class ResumeMethodSupport {
 			methodParameters.setProfile(processMethod.getActiveProfile());
 			if(processMethod.isSupportResume()) {
 				IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-				if(preferenceStore.getBoolean(PreferenceSupplier.P_SHOW_RESUME_METHOD_DIALOG)) {
+				if(preferenceStore.getBoolean(PreferenceSupplierMethods.P_SHOW_RESUME_METHOD_DIALOG)) {
 					/*
 					 * Show the dialog.
 					 */

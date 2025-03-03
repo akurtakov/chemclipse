@@ -11,7 +11,7 @@
  * Alexander Kerner - Generics
  * Christoph Läubrich - refactoring for new method API, optimize E4 access
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.editors;
+package org.eclipse.chemclipse.ux.extension.ui.editors;
 
 import java.io.File;
 import java.util.Arrays;
@@ -36,10 +36,8 @@ import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.ui.workbench.EditorSupport;
 import org.eclipse.chemclipse.support.ui.workbench.PartSupport;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
-import org.eclipse.chemclipse.ux.extension.ui.editors.IChemClipseEditor;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.methods.MethodFileSupport;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.part.support.ProcessMethodNotifications;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.editors.ExtendedMethodUI;
+import org.eclipse.chemclipse.ux.extension.ui.methods.MethodFileSupport;
+import org.eclipse.chemclipse.ux.extension.ui.support.ProcessMethodNotifications;
 import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.e4.ui.di.Focus;
@@ -57,12 +55,12 @@ import jakarta.inject.Inject;
 public class ProcessMethodEditor implements IModificationHandler, IChemClipseEditor {
 
 	private static final Logger logger = Logger.getLogger(ProcessMethodEditor.class);
-	//
-	public static final String ID = "org.eclipse.chemclipse.ux.extension.xxd.ui.part.processMethodEditor";
-	public static final String CONTRIBUTION_URI = "bundleclass://org.eclipse.chemclipse.ux.extension.xxd.ui/org.eclipse.chemclipse.ux.extension.xxd.ui.editors.ProcessMethodEditor";
+
+	public static final String ID = "org.eclipse.chemclipse.ux.extension.ui.part.processMethodEditor";
+	public static final String CONTRIBUTION_URI = "bundleclass://org.eclipse.chemclipse.ux.extension.ui/org.eclipse.chemclipse.ux.extension.ui.editors.ProcessMethodEditor";
 	public static final String ICON_URI = ApplicationImageFactory.getInstance().getURI(IApplicationImage.IMAGE_METHOD, IApplicationImageProvider.SIZE_16x16);
 	public static final String TOOLTIP = "Process Method Editor";
-	//
+
 	@Inject
 	private MPart part;
 	@Inject
@@ -73,7 +71,7 @@ public class ProcessMethodEditor implements IModificationHandler, IChemClipseEdi
 	private ProcessMethodNotifications notifications;
 	@Inject
 	private PartSupport partsupport;
-	//
+
 	private File processMethodFile;
 	private ExtendedMethodUI extendedMethodUI;
 	private IProcessMethod currentProcessMethod;
@@ -149,12 +147,12 @@ public class ProcessMethodEditor implements IModificationHandler, IChemClipseEdi
 			logger.warn(message);
 			throw new RuntimeException(message);
 		}
-		//
+
 		DataCategory[] categories = currentProcessMethod.getDataCategories().toArray(new DataCategory[]{});
 		if(categories == null || categories.length == 0) {
 			categories = DataCategory.chromatographyCategories();
 		}
-		//
+
 		String processMethodName = currentProcessMethod.getName();
 		logger.info("Process Method Name: " + processMethodName);
 		String label = processMethodName.isEmpty() ? part.getLabel() : processMethodName;
@@ -171,7 +169,7 @@ public class ProcessMethodEditor implements IModificationHandler, IChemClipseEdi
 			logger.warn(message);
 			throw new RuntimeException(message);
 		}
-		//
+
 		extendedMethodUI = new ExtendedMethodUI(parent, SWT.NONE, processSupplierContext, categories);
 		extendedMethodUI.setModificationHandler(this);
 		extendedMethodUI.setProcessMethod(currentProcessMethod);

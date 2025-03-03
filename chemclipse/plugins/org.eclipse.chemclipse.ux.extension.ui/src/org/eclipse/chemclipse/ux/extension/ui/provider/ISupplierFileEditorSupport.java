@@ -30,7 +30,7 @@ import org.eclipse.chemclipse.support.events.IPerspectiveAndViewIds;
 import org.eclipse.chemclipse.support.ui.workbench.EditorSupport;
 import org.eclipse.chemclipse.ux.extension.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.ui.editors.IChromatogramEditor;
-import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplier;
+import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierDataExplorer;
 import org.eclipse.chemclipse.vsd.model.core.IChromatogramVSD;
 import org.eclipse.chemclipse.vsd.model.core.ISpectrumVSD;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
@@ -96,7 +96,7 @@ public interface ISupplierFileEditorSupport extends ISupplierFileIdentifier {
 			boolean openEditor = true;
 			if(file != null) {
 				boolean sourceIsDirectory = file.isDirectory();
-				if(!PreferenceSupplier.isOpenEditorMultipleTimes()) {
+				if(!PreferenceSupplierDataExplorer.isOpenEditorMultipleTimes()) {
 					List<MPart> parts = modelService.findElements(application, null, MPart.class, null);
 					if(parts != null) {
 						exitloop:

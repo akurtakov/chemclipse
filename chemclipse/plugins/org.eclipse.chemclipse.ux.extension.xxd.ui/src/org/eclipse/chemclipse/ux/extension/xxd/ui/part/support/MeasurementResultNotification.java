@@ -13,6 +13,7 @@
 package org.eclipse.chemclipse.ux.extension.xxd.ui.part.support;
 
 import org.eclipse.chemclipse.model.core.IMeasurementResult;
+import org.eclipse.chemclipse.ux.extension.ui.support.AbstractNotifications;
 import org.eclipse.e4.core.di.annotations.Creatable;
 
 import jakarta.inject.Singleton;

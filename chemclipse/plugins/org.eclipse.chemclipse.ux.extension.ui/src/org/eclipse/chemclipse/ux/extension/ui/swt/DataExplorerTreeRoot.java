@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2024 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -22,8 +22,8 @@ import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.support.settings.ApplicationSettings;
 import org.eclipse.chemclipse.support.settings.OperatingSystemUtils;
 import org.eclipse.chemclipse.support.settings.UserManagement;
-import org.eclipse.chemclipse.ux.extension.ui.l10n.Messages;
-import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplier;
+import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
+import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierDataExplorer;
 import org.eclipse.core.resources.ResourcesPlugin;
 
 /*
@@ -32,10 +32,10 @@ import org.eclipse.core.resources.ResourcesPlugin;
 public enum DataExplorerTreeRoot {
 
 	NONE(""), // //$NON-NLS-1$
-	DRIVES(Messages.drives), //
-	HOME(Messages.home), //
-	WORKSPACE(Messages.workspace), //
-	USER_LOCATION(Messages.userLocation);
+	DRIVES(ExtensionMessages.drives), //
+	HOME(ExtensionMessages.home), //
+	WORKSPACE(ExtensionMessages.workspace), //
+	USER_LOCATION(ExtensionMessages.userLocation);
 
 	private static final Logger logger = Logger.getLogger(DataExplorerTreeRoot.class);
 	//
@@ -56,13 +56,13 @@ public enum DataExplorerTreeRoot {
 
 		switch(this) {
 			case DRIVES:
-				return PreferenceSupplier.P_SELECTED_DRIVE_PATH;
+				return PreferenceSupplierDataExplorer.P_SELECTED_DRIVE_PATH;
 			case HOME:
-				return PreferenceSupplier.P_SELECTED_HOME_PATH;
+				return PreferenceSupplierDataExplorer.P_SELECTED_HOME_PATH;
 			case WORKSPACE:
-				return PreferenceSupplier.P_SELECTED_WORKSPACE_PATH;
+				return PreferenceSupplierDataExplorer.P_SELECTED_WORKSPACE_PATH;
 			case USER_LOCATION:
-				return PreferenceSupplier.P_SELECTED_USER_LOCATION_PATH;
+				return PreferenceSupplierDataExplorer.P_SELECTED_USER_LOCATION_PATH;
 			case NONE:
 			default:
 				return "selected" + name() + "Path"; //$NON-NLS-1$ //$NON-NLS-2$
@@ -109,7 +109,7 @@ public enum DataExplorerTreeRoot {
 
 	private static File getUserLocation() {
 
-		String userLocationPath = PreferenceSupplier.getUserLocationPath();
+		String userLocationPath = PreferenceSupplierDataExplorer.getUserLocationPath();
 		File userLocation = new File(userLocationPath);
 		if(!userLocation.exists()) {
 			userLocation = new File(UserManagement.getUserHome());
@@ -121,7 +121,7 @@ public enum DataExplorerTreeRoot {
 
 		List<File> rootFiles = new ArrayList<>();
 		for(File root : roots) {
-			if((!PreferenceSupplier.showNetworkShares()) && isWindowsNetworkDriveRoot(root)) {
+			if((!PreferenceSupplierDataExplorer.showNetworkShares()) && isWindowsNetworkDriveRoot(root)) {
 				continue;
 			}
 			rootFiles.add(root);

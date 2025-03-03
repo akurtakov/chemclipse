@@ -35,6 +35,6 @@ public class PreferencePageUserLocations extends FieldEditorPreferencePage imple
 	@Override
 	protected void createFieldEditors() {
 
-		addField(new UserLocationsFieldEditor(PreferenceSupplier.P_USER_LOCATIONS, "User Locations", getFieldEditorParent()));
+		addField(new UserLocationsFieldEditor(PreferenceSupplierDataExplorer.P_USER_LOCATIONS, "User Locations", getFieldEditorParent()));
 	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2023 Lablicate GmbH.
+ * Copyright (c) 2018, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -10,7 +10,7 @@
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - add support for different datatype sets
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.methods;
+package org.eclipse.chemclipse.ux.extension.ui.methods;
 
 import java.util.Collections;
 import java.util.Map;
@@ -18,7 +18,7 @@ import java.util.Map;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.methods.IProcessEntry;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
+import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
 import org.eclipse.jface.dialogs.DialogSettings;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.jface.wizard.WizardDialog;

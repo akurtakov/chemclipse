@@ -16,7 +16,7 @@ import org.eclipse.chemclipse.support.preferences.IPreferenceSupplier;
 import org.eclipse.chemclipse.support.settings.UserManagement;
 import org.eclipse.chemclipse.ux.extension.ui.Activator;
 
-public class PreferenceSupplier extends AbstractPreferenceSupplier implements IPreferenceSupplier {
+public class PreferenceSupplierDataExplorer extends AbstractPreferenceSupplier implements IPreferenceSupplier {
 
 	public static final String P_SELECTED_DRIVE_PATH = "selectedDrivePath";
 	public static final String DEF_SELECTED_DRIVE_PATH = "";
@@ -26,25 +26,25 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_SELECTED_WORKSPACE_PATH = "";
 	public static final String P_SELECTED_USER_LOCATION_PATH = "selectedUserLocationPath";
 	public static final String DEF_SELECTED_USER_LOCATION_PATH = "";
-	//
+
 	public static final String P_USER_LOCATION_PATH = "userLocation";
 	public static final String DEF_USER_LOCATION_PATH = UserManagement.getUserHome();
 	public static final String P_SHOW_NETWORK_SHARES = "showWindowsNetworkDrive";
 	public static final boolean DEF_SHOW_NETWORK_SHARES = true;
-	//
+
 	public static final String P_OPEN_FIRST_DATA_MATCH_ONLY = "openFirstDataMatchOnly";
 	public static final boolean DEF_OPEN_FIRST_DATA_MATCH_ONLY = true;
 	public static final String P_OPEN_EDITOR_MULTIPLE_TIMES = "openEditorMultipleTimes";
 	public static final boolean DEF_OPEN_EDITOR_MULTIPLE_TIMES = true;
 	public static final String P_USER_LOCATIONS = "userLocations";
 	public static final String DEF_USER_LOCATIONS = "";
-	//
+
 	public static final String P_USER_LOCATIONS_TEMPLATE_FOLDER = "userLocationsTemplateFolder";
 	public static final String DEF_USER_LOCATIONS_TEMPLATE_FOLDER = "";
 
 	public static IPreferenceSupplier INSTANCE() {
 
-		return INSTANCE(PreferenceSupplier.class);
+		return INSTANCE(PreferenceSupplierDataExplorer.class);
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_OPEN_FIRST_DATA_MATCH_ONLY, DEF_OPEN_FIRST_DATA_MATCH_ONLY);
 		putDefault(P_OPEN_EDITOR_MULTIPLE_TIMES, DEF_OPEN_EDITOR_MULTIPLE_TIMES);
 		putDefault(P_USER_LOCATIONS, DEF_USER_LOCATIONS);
-		//
+
 		putDefault(P_USER_LOCATIONS_TEMPLATE_FOLDER, DEF_USER_LOCATIONS_TEMPLATE_FOLDER);
 	}
 

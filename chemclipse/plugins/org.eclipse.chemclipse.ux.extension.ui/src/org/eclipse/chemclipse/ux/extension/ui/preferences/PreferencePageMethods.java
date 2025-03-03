@@ -11,33 +11,27 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.ui.preferences;
 
-import org.eclipse.chemclipse.support.ui.preferences.fieldeditors.LabelFieldEditor;
-import org.eclipse.chemclipse.support.ui.preferences.fieldeditors.SpacerFieldEditor;
 import org.eclipse.chemclipse.ux.extension.ui.Activator;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-public class PreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
+public class PreferencePageMethods extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
-	public PreferencePage() {
+	public PreferencePageMethods() {
 
 		super(GRID);
 		setPreferenceStore(Activator.getDefault().getPreferenceStore());
-		setTitle("Drive Settings");
+		setTitle("Process Methods");
 		setDescription("");
 	}
 
 	@Override
 	public void createFieldEditors() {
 
-		addField(new BooleanFieldEditor(PreferenceSupplierDataExplorer.P_OPEN_FIRST_DATA_MATCH_ONLY, "Open First Data Match Only", getFieldEditorParent()));
-		addField(new BooleanFieldEditor(PreferenceSupplierDataExplorer.P_OPEN_EDITOR_MULTIPLE_TIMES, "Open Editor Multiple Times", getFieldEditorParent()));
-		//
-		addField(new SpacerFieldEditor(getFieldEditorParent()));
-		addField(new LabelFieldEditor("Microsoft Windows", getFieldEditorParent()));
-		addField(new BooleanFieldEditor(PreferenceSupplierDataExplorer.P_SHOW_NETWORK_SHARES, "Show Network Shares (requires restart)", getFieldEditorParent()));
+		addField(new BooleanFieldEditor(PreferenceSupplierMethods.P_CREATE_METHOD_ENABLE_RESUME, "Create Methods (enable resume)", getFieldEditorParent()));
+		addField(new BooleanFieldEditor(PreferenceSupplierMethods.P_SHOW_RESUME_METHOD_DIALOG, "Show Resume Method Dialog", getFieldEditorParent()));
 	}
 
 	@Override

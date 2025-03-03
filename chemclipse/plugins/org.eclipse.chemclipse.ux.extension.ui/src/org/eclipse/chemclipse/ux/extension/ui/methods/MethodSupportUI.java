@@ -10,7 +10,7 @@
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - make helper method public static to read all configured methods, set processinginfo to the results view
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.methods;
+package org.eclipse.chemclipse.ux.extension.ui.methods;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,7 +27,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.converter.methods.MethodConverter;
 import org.eclipse.chemclipse.logging.core.Logger;
-import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.methods.IProcessEntry;
@@ -45,12 +44,11 @@ import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.swt.ui.components.IMethodListener;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
+import org.eclipse.chemclipse.ux.extension.ui.Activator;
+import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
+import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierConverter;
+import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierMethods;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierConverter;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.part.support.SupplierEditorSupport;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -86,7 +84,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 	private EventHandler eventHandler = null;
 	private IEventBroker eventBroker = Activator.getDefault().getEventBroker();
 	private IMethodListener methodListener = null;
-	private SupplierEditorSupport supplierEditorSupport = new SupplierEditorSupport(DataType.MTH, () -> Activator.getDefault().getEclipseContext());
+	private MethodEditorSupport supplierEditorSupport = new MethodEditorSupport();
 	//
 	private ProcessMethod processMethodMacroRecorder = null;
 
@@ -358,7 +356,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 						processMethodMacroRecorder.setDescription(ExtensionMessages.descriptionRecordMethod);
 						processMethodMacroRecorder.setOperator(UserManagement.getCurrentUser());
 						processMethodMacroRecorder.setCategory(ExtensionMessages.process);
-						processMethodMacroRecorder.setSupportResume(PreferenceSupplier.isCreateMethodEnableResume());
+						processMethodMacroRecorder.setSupportResume(PreferenceSupplierMethods.isCreateMethodEnableResume());
 						//
 						if(MethodFileSupport.saveProccessMethod(e.display.getActiveShell(), processMethodMacroRecorder)) {
 							File file = processMethodMacroRecorder.getSourceFile();

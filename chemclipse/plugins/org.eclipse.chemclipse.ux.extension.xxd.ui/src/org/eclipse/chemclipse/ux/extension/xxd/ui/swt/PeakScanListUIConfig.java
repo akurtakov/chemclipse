@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -11,7 +11,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.swt;
 
-public interface PeakScanListUIConfig extends ToolbarConfig, TableConfig {
+public interface PeakScanListUIConfig extends IToolbarConfig, TableConfig {
 
 	/**
 	 * Defines how the UI interacts with the Chromatogram selection

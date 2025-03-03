@@ -19,13 +19,14 @@ import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.support.ui.activator.AbstractActivatorUI;
 import org.eclipse.chemclipse.ux.extension.ui.definitions.TileDefinition;
 import org.eclipse.chemclipse.ux.extension.ui.methods.IAnnotationWidgetService;
-import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplier;
+import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierDataExplorer;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.osgi.service.datalocation.Location;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
@@ -50,7 +51,7 @@ public class Activator extends AbstractActivatorUI {
 
 		super.start(context);
 		plugin = this;
-		initializePreferenceStore(PreferenceSupplier.INSTANCE());
+		initializePreferenceStore(PreferenceSupplierDataExplorer.INSTANCE());
 		initializeImageRegistry();
 		tileServiceTracker = new ServiceTracker<>(context, TileDefinition.class, null);
 		tileServiceTracker.open();
@@ -70,6 +71,12 @@ public class Activator extends AbstractActivatorUI {
 	public static Activator getDefault() {
 
 		return plugin;
+	}
+
+	public String getSettingsPath() {
+
+		Location location = Platform.getUserLocation();
+		return location.getURL().getPath();
 	}
 
 	public TileDefinition[] getTileDefinitions() {
