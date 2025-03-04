@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Matthias Mailänder - initial API and implementation
+ * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.identifier.massspectrum;
 
@@ -17,11 +17,11 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.msd.identifier.settings.IMassSpectrumIdentifierSettings;
-import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.exceptions.NoIdentifierAvailableException;
-import org.eclipse.chemclipse.model.supplier.ScanProcessSupplier;
+import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
+import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
-import org.eclipse.chemclipse.msd.model.core.IScanMSD;
+import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
@@ -54,7 +54,7 @@ public class MassSpectrumIdentifierProcessTypeSupplier implements IProcessTypeSu
 		}
 	}
 
-	private static final class MassSpectrumIdentifierProcessorSupplier extends ScanProcessSupplier<IMassSpectrumIdentifierSettings> {
+	private static final class MassSpectrumIdentifierProcessorSupplier extends ChromatogramSelectionProcessSupplier<IMassSpectrumIdentifierSettings> {
 
 		private IMassSpectrumIdentifierSupplier supplier;
 
@@ -66,19 +66,19 @@ public class MassSpectrumIdentifierProcessTypeSupplier implements IProcessTypeSu
 		}
 
 		@Override
-		public IScan apply(IScan scan, IMassSpectrumIdentifierSettings processSettings, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
+		public IChromatogramSelection apply(IChromatogramSelection chromatogramSelection, IMassSpectrumIdentifierSettings processSettings, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
-			if(scan instanceof IScanMSD scanMSD) {
+			if(chromatogramSelection instanceof IChromatogramSelectionMSD chromatogramSelectionMSD) {
 				if(processSettings instanceof IMassSpectrumIdentifierSettings) {
-					messageConsumer.addMessages(MassSpectrumIdentifier.identify(scanMSD, processSettings, supplier.getId(), monitor));
+					messageConsumer.addMessages(MassSpectrumIdentifier.identify(chromatogramSelectionMSD.getSelectedScan(), processSettings, supplier.getId(), monitor));
 				} else {
-					messageConsumer.addMessages(MassSpectrumIdentifier.identify(scanMSD, supplier.getId(), monitor));
+					messageConsumer.addMessages(MassSpectrumIdentifier.identify(chromatogramSelectionMSD.getSelectedScan(), supplier.getId(), monitor));
 				}
 			} else {
 				messageConsumer.addWarnMessage(getName(), "Only MSD chromatogram supported, skip processing");
 			}
-			scan.setDirty(true);
-			return scan;
+			chromatogramSelection.getChromatogram().setDirty(true);
+			return chromatogramSelection;
 		}
 
 		@Override

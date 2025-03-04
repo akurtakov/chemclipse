@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Philip Wenig - initial API and implementation
+ * Matthias Mailänder - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.identifier.massspectrum;
 
@@ -17,11 +17,11 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.msd.identifier.settings.IMassSpectrumIdentifierSettings;
+import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.exceptions.NoIdentifierAvailableException;
-import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.supplier.ChromatogramSelectionProcessSupplier;
+import org.eclipse.chemclipse.model.supplier.ScanProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
-import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
@@ -30,7 +30,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.osgi.service.component.annotations.Component;
 
 @Component(service = IProcessTypeSupplier.class)
-public class ChromatogramSelectionMassSpectrumIdentifierProcessTypeSupplier implements IProcessTypeSupplier {
+public class ScanMassSpectrumIdentifierProcessTypeSupplier implements IProcessTypeSupplier {
 
 	@Override
 	public String getCategory() {
@@ -54,31 +54,31 @@ public class ChromatogramSelectionMassSpectrumIdentifierProcessTypeSupplier impl
 		}
 	}
 
-	private static final class MassSpectrumIdentifierProcessorSupplier extends ChromatogramSelectionProcessSupplier<IMassSpectrumIdentifierSettings> {
+	private static final class MassSpectrumIdentifierProcessorSupplier extends ScanProcessSupplier<IMassSpectrumIdentifierSettings> {
 
 		private IMassSpectrumIdentifierSupplier supplier;
 
 		@SuppressWarnings("unchecked")
 		public MassSpectrumIdentifierProcessorSupplier(IMassSpectrumIdentifierSupplier supplier, IProcessTypeSupplier parent) {
 
-			super("MassSpectrumIdentifier." + supplier.getId(), supplier.getIdentifierName(), supplier.getDescription(), (Class<IMassSpectrumIdentifierSettings>)supplier.getSettingsClass(), parent, DataType.MSD);
+			super("ScanMassSpectrumIdentifier." + supplier.getId(), supplier.getIdentifierName(), supplier.getDescription(), (Class<IMassSpectrumIdentifierSettings>)supplier.getSettingsClass(), parent, DataType.MSD);
 			this.supplier = supplier;
 		}
 
 		@Override
-		public IChromatogramSelection apply(IChromatogramSelection chromatogramSelection, IMassSpectrumIdentifierSettings processSettings, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
+		public IScan apply(IScan scan, IMassSpectrumIdentifierSettings processSettings, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
-			if(chromatogramSelection instanceof IChromatogramSelectionMSD chromatogramSelectionMSD) {
+			if(scan instanceof IScanMSD scanMSD) {
 				if(processSettings instanceof IMassSpectrumIdentifierSettings) {
-					messageConsumer.addMessages(MassSpectrumIdentifier.identify(chromatogramSelectionMSD.getSelectedScan(), processSettings, supplier.getId(), monitor));
+					messageConsumer.addMessages(MassSpectrumIdentifier.identify(scanMSD, processSettings, supplier.getId(), monitor));
 				} else {
-					messageConsumer.addMessages(MassSpectrumIdentifier.identify(chromatogramSelectionMSD.getSelectedScan(), supplier.getId(), monitor));
+					messageConsumer.addMessages(MassSpectrumIdentifier.identify(scanMSD, supplier.getId(), monitor));
 				}
 			} else {
-				messageConsumer.addWarnMessage(getName(), "Only MSD chromatogram supported, skip processing");
+				messageConsumer.addWarnMessage(getName(), "Only standalone mass spectra (e.g. MALDI-TOF) are supported. Skip processing");
 			}
-			chromatogramSelection.getChromatogram().setDirty(true);
-			return chromatogramSelection;
+			scan.setDirty(true);
+			return scan;
 		}
 
 		@Override
