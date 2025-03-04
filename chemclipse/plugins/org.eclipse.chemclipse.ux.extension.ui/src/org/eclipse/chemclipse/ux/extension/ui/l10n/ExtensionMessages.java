@@ -58,7 +58,6 @@ public class ExtensionMessages extends NLS {
 	public static String resetSettingsForAllProcessors;
 	public static String resetSettingsForSelectedProcessors;
 	public static String selectOptionsForProcessorName;
-
 	public static String processMethodFilename;
 	public static String saveProcessMethodAs;
 	public static String requestedConverterDoesNotExist;
