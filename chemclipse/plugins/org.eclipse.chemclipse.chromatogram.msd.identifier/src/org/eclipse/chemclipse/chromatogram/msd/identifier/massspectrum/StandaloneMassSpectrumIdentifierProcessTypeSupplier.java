@@ -30,12 +30,12 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.osgi.service.component.annotations.Component;
 
 @Component(service = IProcessTypeSupplier.class)
-public class ScanMassSpectrumIdentifierProcessTypeSupplier implements IProcessTypeSupplier {
+public class StandaloneMassSpectrumIdentifierProcessTypeSupplier implements IProcessTypeSupplier {
 
 	@Override
 	public String getCategory() {
 
-		return ICategories.SCAN_IDENTIFIER;
+		return ICategories.MASS_SPECTRUM_IDENTIFIER;
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class ScanMassSpectrumIdentifierProcessTypeSupplier implements IProcessTy
 			List<IProcessSupplier<?>> list = new ArrayList<>();
 			for(String processorId : support.getAvailableIdentifierIds()) {
 				IMassSpectrumIdentifierSupplier supplier = support.getIdentifierSupplier(processorId);
-				list.add(new MassSpectrumIdentifierProcessorSupplier(supplier, this));
+				list.add(new StandaloneMassSpectrumIdentifierProcessorSupplier(supplier, this));
 			}
 			return list;
 		} catch(NoIdentifierAvailableException e) {
@@ -54,12 +54,12 @@ public class ScanMassSpectrumIdentifierProcessTypeSupplier implements IProcessTy
 		}
 	}
 
-	private static final class MassSpectrumIdentifierProcessorSupplier extends ScanProcessSupplier<IMassSpectrumIdentifierSettings> {
+	private static final class StandaloneMassSpectrumIdentifierProcessorSupplier extends ScanProcessSupplier<IMassSpectrumIdentifierSettings> {
 
 		private IMassSpectrumIdentifierSupplier supplier;
 
 		@SuppressWarnings("unchecked")
-		public MassSpectrumIdentifierProcessorSupplier(IMassSpectrumIdentifierSupplier supplier, IProcessTypeSupplier parent) {
+		public StandaloneMassSpectrumIdentifierProcessorSupplier(IMassSpectrumIdentifierSupplier supplier, IProcessTypeSupplier parent) {
 
 			super("ScanMassSpectrumIdentifier." + supplier.getId(), supplier.getIdentifierName(), supplier.getDescription(), (Class<IMassSpectrumIdentifierSettings>)supplier.getSettingsClass(), parent, DataType.MSD);
 			this.supplier = supplier;
@@ -74,10 +74,8 @@ public class ScanMassSpectrumIdentifierProcessTypeSupplier implements IProcessTy
 				} else {
 					messageConsumer.addMessages(MassSpectrumIdentifier.identify(scanMSD, supplier.getId(), monitor));
 				}
-			} else {
-				messageConsumer.addWarnMessage(getName(), "Only standalone mass spectra (e.g. MALDI-TOF) are supported. Skip processing");
+				scan.setDirty(true);
 			}
-			scan.setDirty(true);
 			return scan;
 		}
 
