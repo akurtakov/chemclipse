@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.core.massspectrum;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,9 +19,11 @@ import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.msd.filter.exceptions.NoMassSpectrumFilterSupplierAvailableException;
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.IMassSpectrumFilterSettings;
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.supplier.ScanProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
+import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
@@ -31,6 +34,8 @@ import org.osgi.service.component.annotations.Component;
 
 @Component(service = IProcessTypeSupplier.class)
 public class MassSpectrumFilterProcessSupplier implements IProcessTypeSupplier {
+
+	private static final Logger logger = Logger.getLogger(MassSpectrumFilterProcessSupplier.class);
 
 	@Override
 	public String getCategory() {
@@ -64,16 +69,33 @@ public class MassSpectrumFilterProcessSupplier implements IProcessTypeSupplier {
 		}
 
 		@Override
-		public IScan apply(IScan scan, IMassSpectrumFilterSettings processSettings, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
+		public IScan apply(IScan scan, IMassSpectrumFilterSettings massSpectrumFilterSettings, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
 			if(scan instanceof IScanMSD scanMSD) {
-				if(processSettings instanceof IMassSpectrumFilterSettings) {
-					messageConsumer.addMessages(MassSpectrumFilter.applyFilter(scanMSD, processSettings, getId(), monitor));
-				}
-			} else {
-				messageConsumer.addWarnMessage(getName(), "Only MSD scans supported. Processing skipped");
+				messageConsumer.addMessages(MassSpectrumFilter.applyFilter(scanMSD, massSpectrumFilterSettings, getId(), monitor));
 			}
 			return scan;
+		}
+
+		@Override
+		public boolean isValidFor(IScan scan) {
+
+			if(!(scan instanceof IScanMSD)) {
+				return false;
+			}
+			if(scan instanceof IRegularMassSpectrum regularMassSpectrum) {
+				try {
+					IMassSpectrumFilterSettings instance = getSettingsClass().getDeclaredConstructor().newInstance();
+					return instance.appliesToMassSpectrumTypes().contains(regularMassSpectrum.getMassSpectrumType());
+				} catch(InstantiationException | IllegalAccessException
+						| IllegalArgumentException | InvocationTargetException
+						| NoSuchMethodException | SecurityException e) {
+					logger.error(e);
+				}
+				return true;
+			} else {
+				return true;
+			}
 		}
 	}
 }

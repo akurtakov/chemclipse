@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2018 Lablicate GmbH.
+ * Copyright (c) 2014, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -11,7 +11,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.settings;
 
+import java.util.List;
+
 import org.eclipse.chemclipse.model.settings.IProcessSettings;
+import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 
 public interface IMassSpectrumFilterSettings extends IProcessSettings {
+
+	List<MassSpectrumType> appliesToMassSpectrumTypes();
 }

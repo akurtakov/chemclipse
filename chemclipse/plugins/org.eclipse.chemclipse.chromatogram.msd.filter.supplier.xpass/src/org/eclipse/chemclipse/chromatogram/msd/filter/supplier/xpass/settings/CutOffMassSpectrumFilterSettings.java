@@ -12,9 +12,11 @@
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.settings;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.IMassSpectrumFilterSettings;
+import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.support.literature.LiteratureReference;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
 
@@ -35,5 +37,11 @@ public class CutOffMassSpectrumFilterSettings implements IMassSpectrumFilterSett
 	public List<LiteratureReference> getLiteratureReferences() {
 
 		return new ArrayList<>();
+	}
+
+	@Override
+	public List<MassSpectrumType> appliesToMassSpectrumTypes() {
+
+		return Arrays.asList(MassSpectrumType.CENTROID);
 	}
 }

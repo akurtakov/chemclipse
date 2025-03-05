@@ -11,8 +11,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.ionremover.settings;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.AbstractMassSpectrumFilterSettings;
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
+import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.support.settings.StringSettingsProperty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -47,5 +51,11 @@ public class MassSpectrumFilterSettings extends AbstractMassSpectrumFilterSettin
 	public void setMarkMode(MarkedTraceModus markMode) {
 
 		this.markMode = markMode;
+	}
+
+	@Override
+	public List<MassSpectrumType> appliesToMassSpectrumTypes() {
+
+		return Arrays.asList(MassSpectrumType.CENTROID);
 	}
 }
