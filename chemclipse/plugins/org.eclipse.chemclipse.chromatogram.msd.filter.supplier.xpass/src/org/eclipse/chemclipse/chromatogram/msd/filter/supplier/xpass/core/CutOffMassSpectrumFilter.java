@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2023 Lablicate GmbH.
+ * Copyright (c) 2020, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -17,26 +17,22 @@ import java.util.List;
 import org.eclipse.chemclipse.chromatogram.msd.filter.core.massspectrum.AbstractMassSpectrumFilter;
 import org.eclipse.chemclipse.chromatogram.msd.filter.result.IMassSpectrumFilterResult;
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.IMassSpectrumFilterSettings;
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.settings.CutOfMassSpectrumFilterSettings;
+import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.settings.CutOffMassSpectrumFilterSettings;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.IProgressMonitor;
 
-public class CutOfMassSpectrumFilter extends AbstractMassSpectrumFilter {
-
-	public CutOfMassSpectrumFilter() {
-
-	}
+public class CutOffMassSpectrumFilter extends AbstractMassSpectrumFilter {
 
 	@Override
 	public IProcessingInfo<IMassSpectrumFilterResult> applyFilter(List<IScanMSD> massSpectra, IMassSpectrumFilterSettings massSpectrumFilterSettings, IProgressMonitor monitor) {
 
-		CutOfMassSpectrumFilterSettings settings;
-		if(massSpectrumFilterSettings instanceof CutOfMassSpectrumFilterSettings cutOfMassSpectrumFilterSettings) {
+		CutOffMassSpectrumFilterSettings settings;
+		if(massSpectrumFilterSettings instanceof CutOffMassSpectrumFilterSettings cutOfMassSpectrumFilterSettings) {
 			settings = cutOfMassSpectrumFilterSettings;
 		} else {
-			settings = new CutOfMassSpectrumFilterSettings();
+			settings = new CutOffMassSpectrumFilterSettings();
 		}
 		for(IScanMSD massSpectrum : massSpectra) {
 			List<IIon> ions = new ArrayList<>(massSpectrum.getIons());
