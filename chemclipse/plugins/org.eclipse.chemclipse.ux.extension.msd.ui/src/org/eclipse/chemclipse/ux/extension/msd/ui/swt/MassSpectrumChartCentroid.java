@@ -192,7 +192,7 @@ public class MassSpectrumChartCentroid extends BarChart implements IMassSpectrum
 			return false;
 		}
 
-		return supplier.getCategory() == ICategories.SCAN_IDENTIFIER;
+		return supplier.getCategory() == ICategories.MASS_SPECTRUM_IDENTIFIER;
 	}
 
 	private void addCommand(IProcessSupplier<?> supplier, IChartMenuEntry cachedEntry) {

@@ -17,7 +17,7 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.chemclipse.processing.l10n.messages"; //$NON-NLS-1$
-	//
+
 	public static String baselineDetector;
 	public static String chromatogramCalculator;
 	public static String chromatogramClassifier;
@@ -39,6 +39,7 @@ public class Messages extends NLS {
 	public static String peakMassSpectrumFilter;
 	public static String scanMassSpectrumFilter;
 	public static String massSpectrumFilter;
+	public static String massSpectrumIdentifier;
 	public static String system;
 	public static String userMethods;
 	public static String userInterface;
@@ -47,7 +48,7 @@ public class Messages extends NLS {
 	public static String procedures;
 	public static String identifier;
 	public static String export;
-	//
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}
