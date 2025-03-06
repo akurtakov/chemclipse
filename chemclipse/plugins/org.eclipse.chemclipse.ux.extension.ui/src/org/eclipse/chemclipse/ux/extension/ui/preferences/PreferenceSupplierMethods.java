@@ -21,7 +21,6 @@ public class PreferenceSupplierMethods extends AbstractPreferenceSupplier implem
 	public static final boolean DEF_SHOW_RESUME_METHOD_DIALOG = true;
 	public static final String P_CREATE_METHOD_ENABLE_RESUME = "createMethodEnableResume";
 	public static final boolean DEF_CREATE_METHOD_ENABLE_RESUME = true;
-
 	public static final String P_PROCESSOR_SELECTION_DATA_CATEGORY = "processorSelectionDataCategory";
 	public static final boolean DEF_PROCESSOR_SELECTION_DATA_CATEGORY = true;
 
@@ -41,8 +40,17 @@ public class PreferenceSupplierMethods extends AbstractPreferenceSupplier implem
 
 		putDefault(P_SHOW_RESUME_METHOD_DIALOG, DEF_SHOW_RESUME_METHOD_DIALOG);
 		putDefault(P_CREATE_METHOD_ENABLE_RESUME, DEF_CREATE_METHOD_ENABLE_RESUME);
-
 		putDefault(P_PROCESSOR_SELECTION_DATA_CATEGORY, DEF_PROCESSOR_SELECTION_DATA_CATEGORY);
+	}
+
+	public static boolean isShowResumeMethodDialog() {
+
+		return INSTANCE().getBoolean(P_SHOW_RESUME_METHOD_DIALOG, DEF_SHOW_RESUME_METHOD_DIALOG);
+	}
+
+	public static void setShowResumeMethodDialog(boolean showResumeMethodDialog) {
+
+		INSTANCE().setBoolean(P_SHOW_RESUME_METHOD_DIALOG, showResumeMethodDialog);
 	}
 
 	public static boolean isCreateMethodEnableResume() {

@@ -12,9 +12,7 @@
 package org.eclipse.chemclipse.ux.extension.ui.methods;
 
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
-import org.eclipse.chemclipse.ux.extension.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierMethods;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
 
@@ -32,8 +30,7 @@ public class ResumeMethodSupport {
 			 */
 			methodParameters.setProfile(processMethod.getActiveProfile());
 			if(processMethod.isSupportResume()) {
-				IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-				if(preferenceStore.getBoolean(PreferenceSupplierMethods.P_SHOW_RESUME_METHOD_DIALOG)) {
+				if(PreferenceSupplierMethods.isShowResumeMethodDialog()) {
 					/*
 					 * Show the dialog.
 					 */

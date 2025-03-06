@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
-import org.eclipse.chemclipse.ux.extension.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierMethods;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -246,13 +245,13 @@ public class ResumeMethodDialog extends TitleAreaDialog {
 		button.setLayoutData(new GridData(SWT.RIGHT, SWT.BOTTOM, true, false));
 		button.setText(ExtensionMessages.rememberDecisionDontShowAgain);
 		button.setToolTipText(ExtensionMessages.revertDecisionInSettings);
-		button.setSelection(!Activator.getDefault().getPreferenceStore().getBoolean(PreferenceSupplierMethods.P_SHOW_RESUME_METHOD_DIALOG));
+		button.setSelection(!PreferenceSupplierMethods.isShowResumeMethodDialog());
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				Activator.getDefault().getPreferenceStore().setValue(PreferenceSupplierMethods.P_SHOW_RESUME_METHOD_DIALOG, !button.getSelection());
+				PreferenceSupplierMethods.setShowResumeMethodDialog(!button.getSelection());
 			}
 		});
 		//
