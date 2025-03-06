@@ -25,9 +25,9 @@
             id="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.nominalize">
       </MassSpectrumFilterSupplier>      
       <MassSpectrumFilterSupplier
-            config="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.settings.CutOfMassSpectrumFilterSettings"
+            config="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.settings.CutOffMassSpectrumFilterSettings"
             description="Removes ions which counts are below a given threshold."
-            filter="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.core.CutOfMassSpectrumFilter"
+            filter="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.core.CutOffMassSpectrumFilter"
             filterName="Min Ion Count"
             id="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.threshold">
       </MassSpectrumFilterSupplier>

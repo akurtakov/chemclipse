@@ -29,8 +29,8 @@ public class CutOffMassSpectrumFilter extends AbstractMassSpectrumFilter {
 	public IProcessingInfo<IMassSpectrumFilterResult> applyFilter(List<IScanMSD> massSpectra, IMassSpectrumFilterSettings massSpectrumFilterSettings, IProgressMonitor monitor) {
 
 		CutOffMassSpectrumFilterSettings settings;
-		if(massSpectrumFilterSettings instanceof CutOffMassSpectrumFilterSettings cutOfMassSpectrumFilterSettings) {
-			settings = cutOfMassSpectrumFilterSettings;
+		if(massSpectrumFilterSettings instanceof CutOffMassSpectrumFilterSettings cutOffMassSpectrumFilterSettings) {
+			settings = cutOffMassSpectrumFilterSettings;
 		} else {
 			settings = new CutOffMassSpectrumFilterSettings();
 		}
