@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2024 Lablicate GmbH.
+ * Copyright (c) 2020, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -20,7 +20,7 @@ import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CutOfMassSpectrumFilterSettings implements IMassSpectrumFilterSettings {
+public class CutOffMassSpectrumFilterSettings implements IMassSpectrumFilterSettings {
 
 	@JsonProperty(value = "Threshold", defaultValue = "1000")
 	@IntSettingsProperty(minValue = 0)
