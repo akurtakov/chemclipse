@@ -9,7 +9,7 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.ui.methods;
+package org.eclipse.chemclipse.processing.system;
 
 public class DynamicProcessSettings {
 }

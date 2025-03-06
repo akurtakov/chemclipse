@@ -64,6 +64,7 @@ import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier.SupplierType;
+import org.eclipse.chemclipse.processing.system.ProcessSettingsSupport;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
@@ -96,7 +97,6 @@ import org.eclipse.chemclipse.ux.extension.ui.editors.ProcessorSupplierMenuEntry
 import org.eclipse.chemclipse.ux.extension.ui.methods.MethodCancelException;
 import org.eclipse.chemclipse.ux.extension.ui.methods.MethodParameters;
 import org.eclipse.chemclipse.ux.extension.ui.methods.MethodSupportUI;
-import org.eclipse.chemclipse.ux.extension.ui.methods.ProcessSettingsSupport;
 import org.eclipse.chemclipse.ux.extension.ui.methods.ResumeMethodSupport;
 import org.eclipse.chemclipse.ux.extension.ui.methods.SettingsWizard;
 import org.eclipse.chemclipse.ux.extension.ui.support.PartSupport;
