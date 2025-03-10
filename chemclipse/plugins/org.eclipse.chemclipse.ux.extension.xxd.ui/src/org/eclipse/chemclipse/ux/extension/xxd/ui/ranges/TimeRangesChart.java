@@ -217,14 +217,25 @@ public class TimeRangesChart extends ChromatogramPeakChart {
 						timeRangePointsMarker.setPointSelection(pointSelection);
 					}
 				} else {
+					/*
+					 * Reset cursor
+					 */
 					stopBaselineSelection(event.x, event.y);
-					if(TimeRangeModus.BASELINE.equals(timeRangeModus)) {
-						fireUpdatePeakRange(xStart, yStart, xStop, yStop);
-					} else {
-						adjustTimeRange(event);
-					}
+					int x1 = xStart;
+					int y1 = yStart;
+					int x2 = xStop;
+					int y2 = yStop;
 					setCursorDefault();
 					resetSelectedRange();
+					/*
+					 * If uncaught exceptions are thrown, the cursor
+					 * reset shall be not affected.
+					 */
+					if(TimeRangeModus.BASELINE.equals(timeRangeModus)) {
+						fireUpdatePeakRange(x1, y1, x2, y2);
+					} else {
+						adjustTimeRange(event, x1, x2);
+					}
 				}
 			}
 		}
@@ -272,7 +283,7 @@ public class TimeRangesChart extends ChromatogramPeakChart {
 		});
 	}
 
-	private void adjustTimeRange(Event event) {
+	private void adjustTimeRange(Event event, int xStart, int xStop) {
 
 		/*
 		 * Prevent an accidental selection.

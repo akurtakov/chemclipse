@@ -694,8 +694,8 @@ public class ExtendedPeakDetectorUI extends Composite implements IExtendedPartUI
 
 		if(detectionType.equals(DETECTION_TYPE_BASELINE)) {
 			if(isControlKeyPressed(event)) {
-				stopBaselineSelection(event.x, event.y);
 				setCursorDefault();
+				stopBaselineSelection(event.x, event.y);
 			}
 		} else if(detectionType.startsWith(DETECTION_TYPE_BOX)) {
 			if(event.button == IMouseSupport.MOUSE_BUTTON_LEFT) {

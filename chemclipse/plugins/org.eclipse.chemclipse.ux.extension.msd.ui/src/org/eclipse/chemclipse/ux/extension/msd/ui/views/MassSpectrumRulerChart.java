@@ -86,13 +86,19 @@ public class MassSpectrumRulerChart extends MassSpectrumChartProfile {
 		super.handleMouseUpEvent(event);
 		if(isControlKeyPressed(event)) {
 			stopBaselineSelection(event.x, event.y);
-			calculateDimension();
+			int x1 = xStart;
+			int x2 = xStop;
 			setCursorDefault();
 			resetSelectedRange();
+			/*
+			 * If uncaught exceptions are thrown, the cursor
+			 * reset shall be not affected.
+			 */
+			calculateDimension(x1, x2);
 		}
 	}
 
-	private void calculateDimension() {
+	private void calculateDimension(int xStart, int xStop) {
 
 		BaseChart baseChart = getBaseChart();
 		IAxisSet axisSet = baseChart.getAxisSet();

@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.custom;
 
@@ -88,9 +88,17 @@ public class ManualSelectionChart extends TimeRangesChromatogramUI {
 				if(manualDetectionEnabled) {
 					if(isControlKeyPressed(event)) {
 						stopBaselineSelection(event.x, event.y);
-						extractPeak();
+						int x1 = xStart;
+						int y1 = yStart;
+						int x2 = xStop;
+						int y2 = yStop;
 						setCursorDefault();
 						resetSelectedRange();
+						/*
+						 * If uncaught exceptions are thrown, the cursor
+						 * reset shall be not affected.
+						 */
+						extractPeak(x1, y1, x2, y2);
 					}
 				}
 			}
@@ -197,7 +205,7 @@ public class ManualSelectionChart extends TimeRangesChromatogramUI {
 		baseChart.redraw();
 	}
 
-	private void extractPeak() {
+	private void extractPeak(int xStart, int yStart, int xStop, int yStop) {
 
 		if(chromatogram != null) {
 			SelectionCoordinates selectionCoordinates = extractSelectionCoordinates(xStart, yStart, xStop, yStop);

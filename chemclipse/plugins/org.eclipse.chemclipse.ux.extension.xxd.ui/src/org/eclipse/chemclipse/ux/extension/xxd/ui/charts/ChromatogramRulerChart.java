@@ -86,13 +86,21 @@ public class ChromatogramRulerChart extends ChromatogramChart {
 		super.handleMouseUpEvent(event);
 		if(isControlKeyPressed(event)) {
 			stopBaselineSelection(event.x, event.y);
-			calculateDimension(event);
+			int x1 = xStart;
+			int y1 = yStart;
+			int x2 = xStop;
+			int y2 = yStop;
 			setCursorDefault();
 			resetSelectedRange();
+			/*
+			 * If uncaught exceptions are thrown, the cursor
+			 * reset shall be not affected.
+			 */
+			calculateDimension(event, x1, y1, x2, y2);
 		}
 	}
 
-	private void calculateDimension(Event event) {
+	private void calculateDimension(Event event, int xStart, int yStart, int xStop, int yStop) {
 
 		BaseChart baseChart = getBaseChart();
 		IAxisSet axisSet = baseChart.getAxisSet();
