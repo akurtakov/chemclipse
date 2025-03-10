@@ -11,15 +11,21 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.identifier.chromatogram;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.chemclipse.model.exceptions.ValueMustNotBeNullException;
 import org.eclipse.chemclipse.model.identifier.IIdentifierSettings;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
+import org.eclipse.chemclipse.support.literature.LiteratureReference;
 
 public abstract class AbstractChromatogramIdentifier implements IChromatogramIdentifier {
 
 	private static final String DESCRIPTION = "ChromatogramIdentifier";
+
+	private List<LiteratureReference> literatureReferences = new ArrayList<>();
 
 	public IProcessingInfo<?> validate(IChromatogramSelection chromatogramSelection, IIdentifierSettings identifierSettings) {
 
@@ -60,5 +66,11 @@ public abstract class AbstractChromatogramIdentifier implements IChromatogramIde
 		if(identifierSettings == null) {
 			throw new ValueMustNotBeNullException("The identifier settings must not be null.");
 		}
+	}
+
+	@Override
+	public List<LiteratureReference> getLiteratureReferences() {
+
+		return literatureReferences;
 	}
 }

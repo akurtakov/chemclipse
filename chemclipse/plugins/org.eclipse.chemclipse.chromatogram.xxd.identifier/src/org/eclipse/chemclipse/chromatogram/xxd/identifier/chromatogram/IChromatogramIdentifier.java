@@ -11,9 +11,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.identifier.chromatogram;
 
+import java.util.List;
+
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.settings.IChromatogramIdentifierSettings;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
+import org.eclipse.chemclipse.support.literature.LiteratureReference;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public interface IChromatogramIdentifier {
@@ -38,4 +41,6 @@ public interface IChromatogramIdentifier {
 	 * @return {@link IProcessingInfo}
 	 */
 	IProcessingInfo<?> identify(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor);
+
+	List<LiteratureReference> getLiteratureReferences();
 }
