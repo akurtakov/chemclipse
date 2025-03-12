@@ -297,7 +297,7 @@ public class TimeRangesChart extends ChromatogramPeakChart {
 				/*
 				 * Update
 				 */
-				updateTimeRange(timeRange);
+				updateTimeRange(timeRange, xStart, xStop);
 			} else {
 				/*
 				 * Add a new TimeRange
@@ -339,14 +339,14 @@ public class TimeRangesChart extends ChromatogramPeakChart {
 						String identifier = timeRangeDialog.getIdentifier();
 						TimeRange timeRangeAdd = new TimeRange(identifier, 0, 0);
 						timeRanges.add(timeRangeAdd);
-						updateTimeRange(timeRangeAdd);
+						updateTimeRange(timeRangeAdd, xStart, xStop);
 					}
 				}
 			}
 		}
 	}
 
-	private void updateTimeRange(TimeRange timeRange) {
+	private void updateTimeRange(TimeRange timeRange, int xStart, int xStop) {
 
 		BaseChart baseChart = getBaseChart();
 		IAxisSet axisSet = baseChart.getAxisSet();
