@@ -64,10 +64,10 @@ import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier.SupplierType;
-import org.eclipse.chemclipse.processing.system.ProcessSettingsSupport;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
+import org.eclipse.chemclipse.processing.system.ProcessSettingsSupport;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
@@ -80,8 +80,6 @@ import org.eclipse.chemclipse.support.history.ProcessSupplierEntry;
 import org.eclipse.chemclipse.support.history.ProcessSupplierSupport;
 import org.eclipse.chemclipse.support.settings.UserManagement;
 import org.eclipse.chemclipse.support.text.ValueFormat;
-import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
@@ -101,8 +99,10 @@ import org.eclipse.chemclipse.ux.extension.ui.methods.ResumeMethodSupport;
 import org.eclipse.chemclipse.ux.extension.ui.methods.SettingsWizard;
 import org.eclipse.chemclipse.ux.extension.ui.support.PartSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ChartGridSupport;
+import org.eclipse.chemclipse.ux.extension.ui.swt.IColumnUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
+import org.eclipse.chemclipse.ux.extension.ui.swt.SeparationColumnUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.actions.ILabelEditSettings;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.actions.TargetLabelEditAction;
@@ -140,8 +140,8 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.PeakChartSuppor
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ScanChartSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ChromatogramBaselinesUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ChromatogramReferencesUI;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ProcessorToolbarUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.IToolbarConfig;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ProcessorToolbarUI;
 import org.eclipse.chemclipse.vsd.model.core.IChromatogramVSD;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
 import org.eclipse.chemclipse.wsd.model.core.selection.IChromatogramSelectionWSD;
@@ -166,9 +166,6 @@ import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.preference.IPreferencePage;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MenuEvent;
 import org.eclipse.swt.events.MenuListener;
@@ -180,7 +177,6 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
@@ -248,7 +244,7 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 	private AtomicReference<Composite> toolbarMainControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonToolbarInfo = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfoControl = new AtomicReference<>();
-	private AtomicReference<ComboViewer> comboViewerColumnsControl = new AtomicReference<>();
+	private AtomicReference<SeparationColumnUI> comboViewerColumnsControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonToolbarEdit = new AtomicReference<>();
 	private AtomicReference<Composite> toolbarEditControl = new AtomicReference<>();
 	private AtomicReference<ChromatogramBaselinesUI> chromatogramBaselinesControl = new AtomicReference<>();
@@ -1333,7 +1329,7 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 		createProcessorToolbarUI(composite);
 		createButtonToggleInfo(composite);
 		createButtonTargetLabels(composite);
-		createComboViewerColumns(composite);
+		createSeparationColumnUI(composite);
 		createButtonToggleReferences(composite);
 		createButtonToggleEdit(composite);
 		createButtonToggleAlignment(composite);
@@ -1409,54 +1405,34 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 		return this;
 	}
 
-	private void createComboViewerColumns(Composite parent) {
+	private void createSeparationColumnUI(Composite parent) {
 
-		ComboViewer comboViewer = new EnhancedComboViewer(parent, SWT.READ_ONLY);
-		Combo combo = comboViewer.getCombo();
-		comboViewer.setContentProvider(new ArrayContentProvider());
-		comboViewer.setLabelProvider(new AbstractLabelProvider() {
+		SeparationColumnUI separationColumnUI = new SeparationColumnUI(parent, SWT.NONE);
+		separationColumnUI.setColumnUpdateListener(new IColumnUpdateListener() {
 
 			@Override
-			public String getText(Object element) {
+			public void update(Shell shell, ISeparationColumn separationColumn) {
 
-				if(element instanceof ISeparationColumn separationColumn) {
-					return SeparationColumnFactory.getColumnLabel(separationColumn, 10);
-				}
-				return null;
-			}
-		});
-
-		combo.setToolTipText("Select a separation column.");
-		GridData gridData = new GridData();
-		gridData.widthHint = 100;
-		combo.setLayoutData(gridData);
-		combo.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-
-				Object object = comboViewer.getStructuredSelection().getFirstElement();
-				if(object instanceof ISeparationColumn separationColumn && chromatogramSelection != null) {
-					/*
-					 * Set the column
-					 */
-					IChromatogram chromatogram = chromatogramSelection.getChromatogram();
-					chromatogram.getSeparationColumnIndices().setSeparationColumn(separationColumn);
-					/*
-					 * Transfer to references?
-					 */
-					if(preferenceStore.getBoolean(PreferenceSupplier.P_CHROMATOGRAM_TRANSFER_COLUMN_TYPE_TO_REFERENCES)) {
-						for(IChromatogram chromatogramReference : chromatogram.getReferencedChromatograms()) {
-							chromatogramReference.getSeparationColumnIndices().setSeparationColumn(separationColumn);
+				if(separationColumn != null) {
+					if(chromatogramSelection != null) {
+						/*
+						 * Set the column and transfer to references on demand
+						 */
+						IChromatogram chromatogram = chromatogramSelection.getChromatogram();
+						chromatogram.getSeparationColumnIndices().setSeparationColumn(separationColumn);
+						if(preferenceStore.getBoolean(PreferenceSupplier.P_CHROMATOGRAM_TRANSFER_COLUMN_TYPE_TO_REFERENCES)) {
+							for(IChromatogram chromatogramReference : chromatogram.getReferencedChromatograms()) {
+								chromatogramReference.getSeparationColumnIndices().setSeparationColumn(separationColumn);
+							}
 						}
-					}
 
-					updateLabel();
+						updateLabel();
+					}
 				}
 			}
 		});
 
-		comboViewerColumnsControl.set(comboViewer);
+		comboViewerColumnsControl.set(separationColumnUI);
 	}
 
 	private void createButtonToggleReferences(Composite parent) {
@@ -1807,14 +1783,7 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 	private void setSeparationColumnSelection() {
 
 		if(chromatogramSelection != null) {
-			ISeparationColumn separationColumn = chromatogramSelection.getChromatogram().getSeparationColumnIndices().getSeparationColumn();
-			if(separationColumn != null) {
-				if(!separationColumns.contains(separationColumn)) {
-					separationColumns.add(0, separationColumn);
-					comboViewerColumnsControl.get().setInput(separationColumns);
-				}
-				comboViewerColumnsControl.get().setSelection(new StructuredSelection(separationColumn));
-			}
+			comboViewerColumnsControl.get().select(chromatogramSelection.getChromatogram().getSeparationColumnIndices().getSeparationColumn());
 		}
 	}
 
