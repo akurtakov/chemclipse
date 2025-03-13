@@ -18,17 +18,18 @@
       </programArgs>
       <programArgsLin>--launcher.GTK_version 3
       </programArgsLin>
-      <vmArgs>-Xms512M
--Xmx2G
--Dapplication.name=ChemClipse
+      <vmArgs>-Dapplication.name=ChemClipse
 -Dapplication.version=0.8.x
 -Dosgi.instance.area=@user.home/ChemClipse/0.8.x
 -Dosgi.user.area=@user.home/.chemclipse/0.8.x
--XX:-UseGCOverheadLimit
+-XX:+UseG1GC
+-XX:+UseStringDeduplication
 --add-modules=ALL-SYSTEM
       </vmArgs>
       <vmArgsMac>-XstartOnFirstThread
       </vmArgsMac>
+      <vmArgsWin>-Djavax.net.ssl.trustStoreType=Windows-ROOT -Djavax.net.ssl.trustStore=NONE
+      </vmArgsWin>
    </launcherArgs>
 
    <windowImages i16="/org.eclipse.chemclipse.rcp.compilation.community.ui/icons/logo_16x16.png" i32="/org.eclipse.chemclipse.rcp.compilation.community.ui/icons/logo_32x32.png" i48="/org.eclipse.chemclipse.rcp.compilation.community.ui/icons/logo_48x48.png" i64="/org.eclipse.chemclipse.rcp.compilation.community.ui/icons/logo_64x64.png" i128="/org.eclipse.chemclipse.rcp.compilation.community.ui/icons/logo_128x128.png"/>
