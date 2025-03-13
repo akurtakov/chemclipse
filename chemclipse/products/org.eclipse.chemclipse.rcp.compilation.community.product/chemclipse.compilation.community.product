@@ -22,7 +22,6 @@
 -Dapplication.version=0.8.x
 -Dosgi.instance.area=@user.home/ChemClipse/0.8.x
 -Dosgi.user.area=@user.home/.chemclipse/0.8.x
--XX:-UseGCOverheadLimit
 --add-modules=ALL-SYSTEM
       </vmArgs>
       <vmArgsMac>-XstartOnFirstThread
