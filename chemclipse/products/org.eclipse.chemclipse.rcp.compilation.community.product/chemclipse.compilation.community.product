@@ -23,6 +23,7 @@
 -Dosgi.instance.area=@user.home/ChemClipse/0.8.x
 -Dosgi.user.area=@user.home/.chemclipse/0.8.x
 -XX:+UseG1GC
+-XX:+UseStringDeduplication
 --add-modules=ALL-SYSTEM
       </vmArgs>
       <vmArgsMac>-XstartOnFirstThread
