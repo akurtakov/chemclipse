@@ -53,14 +53,6 @@
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.ecf.core.ssl.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.ecf.filetransfer.ssl.feature"
-         version="0.0.0"/>
-
-   <includes
          id="org.eclipse.ecf.filetransfer.feature"
          version="0.0.0"/>
 
@@ -489,14 +481,6 @@
          version="0.0.0"/>
 
    <plugin
-         id="org.eclipse.ecf.ssl"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.ecf.provider.filetransfer.ssl"
-         version="0.0.0"/>
-
-   <plugin
          id="org.eclipse.search"
          version="0.0.0"/>
 
@@ -590,10 +574,6 @@
 
    <plugin
          id="org.eclipse.equinox.cm"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.apache.commons.jxpath"
          version="0.0.0"/>
 
    <plugin
