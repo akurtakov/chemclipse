@@ -23,6 +23,7 @@ import org.eclipse.chemclipse.converter.methods.MethodConverter;
 import org.eclipse.chemclipse.converter.quantitation.QuantDBConverter;
 import org.eclipse.chemclipse.converter.sequence.SequenceConverter;
 import org.eclipse.chemclipse.csd.converter.chromatogram.ChromatogramConverterCSD;
+import org.eclipse.chemclipse.fsd.converter.chromatogram.ChromatogramConverterFSD;
 import org.eclipse.chemclipse.fsd.converter.core.ScanConverterFSD;
 import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.core.IMeasurementInfo;
@@ -45,6 +46,7 @@ import org.eclipse.chemclipse.ux.extension.ui.provider.AbstractSupplierFileEdito
 import org.eclipse.chemclipse.ux.extension.ui.provider.ISupplierEditorSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.editors.ChromatogramEditorCSD;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.editors.ChromatogramEditorFSD;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.editors.ChromatogramEditorMSD;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.editors.ChromatogramEditorVSD;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.editors.ChromatogramEditorWSD;
@@ -71,7 +73,7 @@ public class SupplierEditorSupport extends AbstractSupplierFileEditorSupport imp
 
 	private static final Object NO_EXECUTE_METHOD = new Object();
 	private String type = "";
-	//
+
 	private String elementId = "";
 	private String contributionURI = "";
 	private String iconURI = "";
@@ -109,6 +111,9 @@ public class SupplierEditorSupport extends AbstractSupplierFileEditorSupport imp
 			case TSD:
 				supplier = ChromatogramConverterTSD.getInstance().getChromatogramConverterSupport().getSupplier();
 				break;
+			case FSD:
+				supplier = ChromatogramConverterFSD.getInstance().getChromatogramConverterSupport().getSupplier();
+				break;
 			case SCAN_VSD:
 				supplier = ScanConverterVSD.getScanConverterSupport().getSupplier();
 				break;
@@ -142,7 +147,7 @@ public class SupplierEditorSupport extends AbstractSupplierFileEditorSupport imp
 			default:
 				// No action
 		}
-		//
+
 		return supplier;
 	}
 
@@ -188,7 +193,7 @@ public class SupplierEditorSupport extends AbstractSupplierFileEditorSupport imp
 		} finally {
 			parameterContext.dispose();
 		}
-		//
+
 		return openEditor(file, headerMap, false);
 	}
 
@@ -289,6 +294,15 @@ public class SupplierEditorSupport extends AbstractSupplierFileEditorSupport imp
 				tooltip = editorService.getTooltip();
 				topicUpdateRawfile = IChemClipseEvents.TOPIC_CHROMATOGRAM_TSD_UPDATE_RAWFILE;
 				topicUpdateOverview = IChemClipseEvents.TOPIC_CHROMATOGRAM_TSD_UPDATE_OVERVIEW;
+				break;
+			case FSD:
+				type = TYPE_FSD;
+				elementId = ChromatogramEditorFSD.ID;
+				contributionURI = ChromatogramEditorFSD.CONTRIBUTION_URI;
+				iconURI = ChromatogramEditorFSD.ICON_URI;
+				tooltip = ChromatogramEditorFSD.TOOLTIP;
+				topicUpdateRawfile = IChemClipseEvents.TOPIC_CHROMATOGRAM_FSD_UPDATE_RAWFILE;
+				topicUpdateOverview = IChemClipseEvents.TOPIC_CHROMATOGRAM_FSD_UPDATE_OVERVIEW;
 				break;
 			case SCAN_VSD:
 				type = TYPE_SCAN_VSD;

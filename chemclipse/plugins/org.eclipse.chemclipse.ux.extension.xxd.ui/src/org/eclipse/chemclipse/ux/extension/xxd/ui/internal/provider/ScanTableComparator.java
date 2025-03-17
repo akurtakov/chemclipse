@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2024 Lablicate GmbH.
+ * Copyright (c) 2017, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -12,6 +12,7 @@
 package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider;
 
 import org.eclipse.chemclipse.csd.model.core.IScanCSD;
+import org.eclipse.chemclipse.fsd.model.core.IScanSignalFSD;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IIonTransition;
@@ -52,6 +53,9 @@ public class ScanTableComparator extends AbstractRecordTableComparator implement
 				break;
 			case VSD:
 				sortOrder = getVSD(viewer, e1, e2);
+				break;
+			case FSD:
+				sortOrder = getFSD(viewer, e1, e2);
 				break;
 			default:
 				sortOrder = 0;
@@ -180,7 +184,7 @@ public class ScanTableComparator extends AbstractRecordTableComparator implement
 
 		int sortOrder = 0;
 		if(e1 instanceof IScanSignalWSD scanSignalWSD1 && e2 instanceof IScanSignalWSD scanSignalWSD2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = Float.compare(scanSignalWSD2.getWavelength(), scanSignalWSD1.getWavelength());
@@ -205,7 +209,7 @@ public class ScanTableComparator extends AbstractRecordTableComparator implement
 
 		int sortOrder = 0;
 		if(e1 instanceof ISignalVSD signal1 && e2 instanceof ISignalVSD signal2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = Double.compare(signal2.getWavenumber(), signal1.getWavenumber());
@@ -218,11 +222,36 @@ public class ScanTableComparator extends AbstractRecordTableComparator implement
 					sortOrder = 0;
 			}
 		}
-		//
+
 		if(getDirection() == ASCENDING) {
 			sortOrder = -sortOrder;
 		}
-		//
+
+		return sortOrder;
+	}
+
+	private int getFSD(Viewer viewer, Object e1, Object e2) {
+
+		int sortOrder = 0;
+		if(e1 instanceof IScanSignalFSD scanSignalFSD1 && e2 instanceof IScanSignalFSD scanSignalFSD2) {
+
+			switch(getPropertyIndex()) {
+				case 0:
+					sortOrder = Float.compare(scanSignalFSD2.getWavelength(), scanSignalFSD1.getWavelength());
+					break;
+				case 1:
+					sortOrder = Float.compare(scanSignalFSD2.getFluorescence(), scanSignalFSD1.getFluorescence());
+					break;
+				case 2: // rel. fluorescence == fluorescence
+					sortOrder = Float.compare(scanSignalFSD2.getFluorescence(), scanSignalFSD1.getFluorescence());
+					break;
+				default:
+					sortOrder = 0;
+			}
+		}
+		if(getDirection() == ASCENDING) {
+			sortOrder = -sortOrder;
+		}
 		return sortOrder;
 	}
 }

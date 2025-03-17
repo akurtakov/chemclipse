@@ -100,7 +100,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn="org.eclipse.chemclipse.wsd.converter.core.AbstractScanExportConverter:org.eclipse.chemclipse.wsd.converter.core.IScanExportConverter"/>
+                  <meta.attribute kind="java" basedOn="org.eclipse.chemclipse.fsd.converter.core.AbstractScanExportConverter:org.eclipse.chemclipse.fsd.converter.core.IScanExportConverter"/>
                </appinfo>
             </annotation>
          </attribute>
@@ -110,7 +110,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn="org.eclipse.chemclipse.wsd.converter.core.AbstractScanImportConverter:org.eclipse.chemclipse.wsd.converter.core.IScanImportConverter"/>
+                  <meta.attribute kind="java" basedOn="org.eclipse.chemclipse.fsd.converter.core.AbstractScanImportConverter:org.eclipse.chemclipse.fsd.converter.core.IScanImportConverter"/>
                </appinfo>
             </annotation>
          </attribute>

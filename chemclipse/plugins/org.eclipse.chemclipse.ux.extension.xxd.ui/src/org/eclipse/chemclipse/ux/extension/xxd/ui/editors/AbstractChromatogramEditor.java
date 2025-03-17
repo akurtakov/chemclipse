@@ -25,6 +25,9 @@ import org.eclipse.chemclipse.converter.exceptions.NoChromatogramConverterAvaila
 import org.eclipse.chemclipse.csd.converter.chromatogram.ChromatogramConverterCSD;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.csd.model.core.selection.ChromatogramSelectionCSD;
+import org.eclipse.chemclipse.fsd.converter.chromatogram.ChromatogramConverterFSD;
+import org.eclipse.chemclipse.fsd.model.core.IChromatogramFSD;
+import org.eclipse.chemclipse.fsd.model.core.selection.ChromatogramSelectionFSD;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IMeasurementResult;
@@ -394,6 +397,8 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 					chromatogramSelection = new ChromatogramSelectionWSD(chromatogram);
 				} else if(object instanceof IChromatogramVSD chromatogram) {
 					chromatogramSelection = new ChromatogramSelectionVSD(chromatogram);
+				} else if(object instanceof IChromatogramFSD chromatogram) {
+					chromatogramSelection = new ChromatogramSelectionFSD(chromatogram);
 				}
 				chromatogramFile = null;
 			}
@@ -445,8 +450,10 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 					processingInfo = ChromatogramConverterCSD.getInstance().convert(chromatogramFile, chromatogramCSD, converterId, monitor);
 				} else if(chromatogram instanceof IChromatogramWSD chromatogramWSD) {
 					processingInfo = ChromatogramConverterWSD.getInstance().convert(chromatogramFile, chromatogramWSD, converterId, monitor);
+				} else if(chromatogram instanceof IChromatogramFSD chromatogramFSD) {
+					processingInfo = ChromatogramConverterFSD.getInstance().convert(chromatogramFile, chromatogramFSD, converterId, monitor);
 				}
-				//
+
 				if(processingInfo != null) {
 					Object object = processingInfo.getProcessingResult();
 					if(object instanceof File) {

@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.chemclipse.csd.converter.chromatogram.ChromatogramConverterCSD;
+import org.eclipse.chemclipse.fsd.converter.chromatogram.ChromatogramConverterFSD;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.IMeasurementInfo;
@@ -66,7 +67,7 @@ public class OverviewSupport {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -81,7 +82,7 @@ public class OverviewSupport {
 		if(chromatogram != null) {
 			return fireUpdate(chromatogram);
 		}
-		//
+
 		return false;
 	}
 
@@ -92,7 +93,7 @@ public class OverviewSupport {
 			 * Only load the overview if it is a new file.
 			 */
 			lastDisplayedFile = file.getAbsolutePath();
-			//
+
 			if(topic.equals(IChemClipseEvents.TOPIC_SCAN_NMR_UPDATE_RAWFILE)) {
 				/*
 				 * NMR
@@ -135,7 +136,7 @@ public class OverviewSupport {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -153,12 +154,15 @@ public class OverviewSupport {
 			case IChemClipseEvents.TOPIC_CHROMATOGRAM_WSD_UPDATE_RAWFILE:
 				processingInfo = ChromatogramConverterWSD.getInstance().convertOverview(file, new NullProgressMonitor());
 				break;
+			case IChemClipseEvents.TOPIC_CHROMATOGRAM_FSD_UPDATE_RAWFILE:
+				processingInfo = ChromatogramConverterFSD.getInstance().convertOverview(file, new NullProgressMonitor());
+				break;
 		}
-		//
+
 		if(processingInfo != null) {
 			chromatogramOverview = processingInfo.getProcessingResult();
 		}
-		//
+
 		return chromatogramOverview;
 	}
 
@@ -168,7 +172,7 @@ public class OverviewSupport {
 			overviewListener.update(object);
 			return true;
 		}
-		//
+
 		return false;
 	}
 
@@ -178,6 +182,7 @@ public class OverviewSupport {
 		topics.add(IChemClipseEvents.TOPIC_CHROMATOGRAM_MSD_UPDATE_RAWFILE);
 		topics.add(IChemClipseEvents.TOPIC_CHROMATOGRAM_CSD_UPDATE_RAWFILE);
 		topics.add(IChemClipseEvents.TOPIC_CHROMATOGRAM_WSD_UPDATE_RAWFILE);
+		topics.add(IChemClipseEvents.TOPIC_CHROMATOGRAM_FSD_UPDATE_RAWFILE);
 		topics.add(IChemClipseEvents.TOPIC_SCAN_NMR_UPDATE_RAWFILE);
 		topics.add(IChemClipseEvents.TOPIC_SCAN_VSD_UPDATE_RAWFILE);
 		topics.add(IChemClipseEvents.TOPIC_MASS_SPECTRUM_UPDATE_RAWFILE);

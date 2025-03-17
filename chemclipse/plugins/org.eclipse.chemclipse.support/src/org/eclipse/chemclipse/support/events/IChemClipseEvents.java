@@ -24,6 +24,7 @@ public interface IChemClipseEvents {
 	String TOPIC_CHROMATOGRAM_WSD_UPDATE_RAWFILE = "chromatogram/wsd/update/rawfile";
 	String TOPIC_CHROMATOGRAM_VSD_UPDATE_RAWFILE = "chromatogram/vsd/update/rawfile";
 	String TOPIC_CHROMATOGRAM_TSD_UPDATE_RAWFILE = "chromatogram/tsd/update/rawfile";
+	String TOPIC_CHROMATOGRAM_FSD_UPDATE_RAWFILE = "chromatogram/fsd/update/rawfile";
 	String TOPIC_SCAN_VSD_UPDATE_RAWFILE = "scan/vsd/update/rawfile";
 	String TOPIC_SCAN_WSD_UPDATE_RAWFILE = "scan/wsd/update/rawfile";
 	String TOPIC_SCAN_FSD_UPDATE_RAWFILE = "scan/fsd/update/rawfile";
@@ -40,6 +41,7 @@ public interface IChemClipseEvents {
 	String TOPIC_CHROMATOGRAM_WSD_UPDATE_OVERVIEW = "chromatogram/wsd/update/overview";
 	String TOPIC_CHROMATOGRAM_VSD_UPDATE_OVERVIEW = "chromatogram/isd/update/overview";
 	String TOPIC_CHROMATOGRAM_TSD_UPDATE_OVERVIEW = "chromatogram/tsd/update/overview";
+	String TOPIC_CHROMATOGRAM_FSD_UPDATE_OVERVIEW = "chromatogram/fsd/update/overview";
 	String TOPIC_SCAN_NMR_UPDATE_OVERVIEW = "scan/nmr/update/overview";
 	String TOPIC_SCAN_VSD_UPDATE_OVERVIEW = "scan/vsd/update/overview";
 	String TOPIC_SCAN_WSD_UPDATE_OVERVIEW = "scan/wsd/update/overview";

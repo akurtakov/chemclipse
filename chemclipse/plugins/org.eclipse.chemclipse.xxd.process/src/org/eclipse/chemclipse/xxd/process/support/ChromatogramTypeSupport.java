@@ -19,6 +19,9 @@ import java.util.List;
 import org.eclipse.chemclipse.csd.converter.chromatogram.ChromatogramConverterCSD;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.csd.model.core.selection.ChromatogramSelectionCSD;
+import org.eclipse.chemclipse.fsd.converter.chromatogram.ChromatogramConverterFSD;
+import org.eclipse.chemclipse.fsd.model.core.IChromatogramFSD;
+import org.eclipse.chemclipse.fsd.model.core.selection.ChromatogramSelectionFSD;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.model.types.DataType;
@@ -41,7 +44,7 @@ public class ChromatogramTypeSupport {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramTypeSupport.class);
 	private static final String DESCRIPTION = "Chromatogram Type Support";
-	//
+
 	private final List<ISupplierFileIdentifier> supplierEditorSupportList = new ArrayList<>();
 
 	public ChromatogramTypeSupport(DataType[] dataTypes) {
@@ -79,6 +82,11 @@ public class ChromatogramTypeSupport {
 					IChromatogramWSD chromatogramWSD = processingInfoWSD.getProcessingResult();
 					chromatogramSelection = new ChromatogramSelectionWSD(chromatogramWSD, fireUpdate);
 					break;
+				case FSD:
+					IProcessingInfo<IChromatogramFSD> processingInfoFSD = ChromatogramConverterFSD.getInstance().convert(file, monitor);
+					IChromatogramFSD chromatogramFSD = processingInfoFSD.getProcessingResult();
+					chromatogramSelection = new ChromatogramSelectionFSD(chromatogramFSD, fireUpdate);
+					break;
 				case VSD:
 					IProcessingInfo<IChromatogramVSD> processingInfoISD = ChromatogramConverterVSD.getInstance().convert(file, monitor);
 					IChromatogramVSD chromatogramISD = processingInfoISD.getProcessingResult();
@@ -87,7 +95,7 @@ public class ChromatogramTypeSupport {
 				default:
 					// No action
 			}
-			//
+
 			if(chromatogramSelection != null) {
 				processingInfo.setProcessingResult(chromatogramSelection);
 			} else {
@@ -100,7 +108,7 @@ public class ChromatogramTypeSupport {
 			processingInfo.addErrorMessage(DESCRIPTION, message);
 			logger.warn(message);
 		}
-		//
+
 		return processingInfo;
 	}
 
@@ -116,7 +124,7 @@ public class ChromatogramTypeSupport {
 				}
 			}
 		}
-		//
+
 		DataType dataType;
 		switch(type) {
 			case ISupplierFileIdentifier.TYPE_MSD:
@@ -131,11 +139,14 @@ public class ChromatogramTypeSupport {
 			case ISupplierFileIdentifier.TYPE_VSD:
 				dataType = DataType.VSD;
 				break;
+			case ISupplierFileIdentifier.TYPE_FSD:
+				dataType = DataType.FSD;
+				break;
 			default:
 				dataType = null;
 				break;
 		}
-		//
+
 		return dataType;
 	}
 

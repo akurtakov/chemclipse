@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2021 Lablicate GmbH.
+ * Copyright (c) 2017, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -18,11 +18,11 @@ import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.model.signals.TotalScanSignal;
 import org.eclipse.chemclipse.model.signals.TotalScanSignalExtractor;
 import org.eclipse.chemclipse.model.signals.TotalScanSignals;
+import org.eclipse.chemclipse.model.wavelengths.IMarkedWavelengths;
+import org.eclipse.chemclipse.model.wavelengths.MarkedWavelengths;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
 import org.eclipse.chemclipse.wsd.model.core.IScanWSD;
 import org.eclipse.chemclipse.wsd.model.core.selection.IChromatogramSelectionWSD;
-import org.eclipse.chemclipse.wsd.model.core.support.IMarkedWavelengths;
-import org.eclipse.chemclipse.wsd.model.core.support.MarkedWavelengths;
 
 public class TotalWavelengthSignalExtractor extends TotalScanSignalExtractor implements ITotalWavelengthSignalExtractor {
 

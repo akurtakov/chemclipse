@@ -38,6 +38,8 @@ import org.eclipse.chemclipse.model.core.MarkedTraces;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.model.traces.NamedTrace;
 import org.eclipse.chemclipse.model.traces.NamedTraces;
+import org.eclipse.chemclipse.model.wavelengths.IMarkedWavelengths;
+import org.eclipse.chemclipse.model.wavelengths.MarkedWavelengths;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIons;
@@ -80,8 +82,6 @@ import org.eclipse.chemclipse.vsd.model.core.selection.IChromatogramSelectionVSD
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
 import org.eclipse.chemclipse.wsd.model.core.IScanWSD;
 import org.eclipse.chemclipse.wsd.model.core.selection.IChromatogramSelectionWSD;
-import org.eclipse.chemclipse.wsd.model.core.support.IMarkedWavelengths;
-import org.eclipse.chemclipse.wsd.model.core.support.MarkedWavelengths;
 import org.eclipse.chemclipse.wsd.model.xwc.IExtractedWavelengthSignal;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.e4.ui.model.application.MApplication;

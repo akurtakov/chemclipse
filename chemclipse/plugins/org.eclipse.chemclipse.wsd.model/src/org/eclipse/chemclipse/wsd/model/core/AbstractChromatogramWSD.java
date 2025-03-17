@@ -52,7 +52,7 @@ public abstract class AbstractChromatogramWSD extends AbstractChromatogram imple
 		if(noiseCalculator != null) {
 			noiseCalculator.reset();
 		}
-		//
+
 		setNoiseCalculator(noiseCalculator);
 	}
 

@@ -221,14 +221,14 @@ public class ChromatogramEditor3x extends EditorPart implements IChromatogramEdi
 				activatePart = (partThis == partRef);
 			}
 		}
-		//
+
 		return activatePart;
 	}
 
 	private DataType getDataType() {
 
 		DataType dataType = null;
-		//
+
 		Object object = part.getObject();
 		if(object instanceof Map<?, ?> map) {
 			String path = (String)map.get(EditorSupport.MAP_FILE);
@@ -244,9 +244,11 @@ public class ChromatogramEditor3x extends EditorPart implements IChromatogramEdi
 				dataType = DataType.VSD;
 			} else if(isMatch(file, getSupplierFileIdentifier(DataType.WSD))) {
 				dataType = DataType.WSD;
+			} else if(isMatch(file, getSupplierFileIdentifier(DataType.FSD))) {
+				dataType = DataType.FSD;
 			}
 		}
-		//
+
 		return dataType;
 	}
 
@@ -263,7 +265,7 @@ public class ChromatogramEditor3x extends EditorPart implements IChromatogramEdi
 				isMatch = true;
 			}
 		}
-		//
+
 		return isMatch;
 	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024 Lablicate GmbH.
+ * Copyright (c) 2024, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -23,13 +23,14 @@ public class MethodProcessSupport_1_Test extends MethodProcessSupportTestCase {
 		DataCategory[] methodCategories = new DataCategory[]{};
 		List<DataCategory[]> processCategories = Collections.emptyList();
 		DataCategory[] dataCategories = MethodProcessSupport.getDataTypes(getProcessMethod(methodCategories, processCategories));
-		//
+
 		assertNotNull(dataCategories);
-		assertEquals(4, dataCategories.length);
+		assertEquals(5, dataCategories.length);
 		assertEquals("CSD", dataCategories[0].name());
-		assertEquals("MSD", dataCategories[1].name());
-		assertEquals("VSD", dataCategories[2].name());
-		assertEquals("WSD", dataCategories[3].name());
+		assertEquals("FSD", dataCategories[1].name());
+		assertEquals("MSD", dataCategories[2].name());
+		assertEquals("VSD", dataCategories[3].name());
+		assertEquals("WSD", dataCategories[4].name());
 	}
 
 	public void test2() {
@@ -37,7 +38,7 @@ public class MethodProcessSupport_1_Test extends MethodProcessSupportTestCase {
 		DataCategory[] methodCategories = new DataCategory[]{DataCategory.CSD};
 		List<DataCategory[]> processCategories = Collections.emptyList();
 		DataCategory[] dataCategories = MethodProcessSupport.getDataTypes(getProcessMethod(methodCategories, processCategories));
-		//
+
 		assertNotNull(dataCategories);
 		assertEquals(1, dataCategories.length);
 		assertEquals("CSD", dataCategories[0].name());
@@ -48,7 +49,7 @@ public class MethodProcessSupport_1_Test extends MethodProcessSupportTestCase {
 		DataCategory[] methodCategories = new DataCategory[]{DataCategory.CSD, DataCategory.MSD};
 		List<DataCategory[]> processCategories = Collections.emptyList();
 		DataCategory[] dataCategories = MethodProcessSupport.getDataTypes(getProcessMethod(methodCategories, processCategories));
-		//
+
 		assertNotNull(dataCategories);
 		assertEquals(2, dataCategories.length);
 		assertEquals("CSD", dataCategories[0].name());
@@ -60,7 +61,7 @@ public class MethodProcessSupport_1_Test extends MethodProcessSupportTestCase {
 		DataCategory[] methodCategories = new DataCategory[]{DataCategory.CSD, DataCategory.MSD, DataCategory.WSD};
 		List<DataCategory[]> processCategories = Collections.emptyList();
 		DataCategory[] dataCategories = MethodProcessSupport.getDataTypes(getProcessMethod(methodCategories, processCategories));
-		//
+
 		assertNotNull(dataCategories);
 		assertEquals(3, dataCategories.length);
 		assertEquals("CSD", dataCategories[0].name());
@@ -73,7 +74,7 @@ public class MethodProcessSupport_1_Test extends MethodProcessSupportTestCase {
 		DataCategory[] methodCategories = new DataCategory[]{DataCategory.CSD, DataCategory.MSD, DataCategory.WSD, DataCategory.VSD};
 		List<DataCategory[]> processCategories = Collections.emptyList();
 		DataCategory[] dataCategories = MethodProcessSupport.getDataTypes(getProcessMethod(methodCategories, processCategories));
-		//
+
 		assertNotNull(dataCategories);
 		assertEquals(4, dataCategories.length);
 		assertEquals("CSD", dataCategories[0].name());
@@ -87,7 +88,7 @@ public class MethodProcessSupport_1_Test extends MethodProcessSupportTestCase {
 		DataCategory[] methodCategories = new DataCategory[]{DataCategory.MSD, DataCategory.WSD, DataCategory.VSD};
 		List<DataCategory[]> processCategories = Collections.emptyList();
 		DataCategory[] dataCategories = MethodProcessSupport.getDataTypes(getProcessMethod(methodCategories, processCategories));
-		//
+
 		assertNotNull(dataCategories);
 		assertEquals(3, dataCategories.length);
 		assertEquals("MSD", dataCategories[0].name());
@@ -100,7 +101,7 @@ public class MethodProcessSupport_1_Test extends MethodProcessSupportTestCase {
 		DataCategory[] methodCategories = new DataCategory[]{DataCategory.WSD, DataCategory.VSD};
 		List<DataCategory[]> processCategories = Collections.emptyList();
 		DataCategory[] dataCategories = MethodProcessSupport.getDataTypes(getProcessMethod(methodCategories, processCategories));
-		//
+
 		assertNotNull(dataCategories);
 		assertEquals(2, dataCategories.length);
 		assertEquals("VSD", dataCategories[0].name());
@@ -112,7 +113,7 @@ public class MethodProcessSupport_1_Test extends MethodProcessSupportTestCase {
 		DataCategory[] methodCategories = new DataCategory[]{DataCategory.VSD};
 		List<DataCategory[]> processCategories = Collections.emptyList();
 		DataCategory[] dataCategories = MethodProcessSupport.getDataTypes(getProcessMethod(methodCategories, processCategories));
-		//
+
 		assertNotNull(dataCategories);
 		assertEquals(1, dataCategories.length);
 		assertEquals("VSD", dataCategories[0].name());

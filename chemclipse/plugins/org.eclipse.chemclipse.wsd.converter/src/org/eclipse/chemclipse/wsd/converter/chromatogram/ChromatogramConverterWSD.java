@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2019 Lablicate GmbH.
+ * Copyright (c) 2013, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -26,6 +26,7 @@ public class ChromatogramConverterWSD extends AbstractChromatogramConverter<IChr
 	private static IChromatogramConverter<IChromatogramPeakWSD, IChromatogramWSD> instance = null;
 
 	public ChromatogramConverterWSD() {
+
 		super("org.eclipse.chemclipse.wsd.converter.chromatogramSupplier", IChromatogramWSD.class, DataCategory.WSD);
 	}
 
@@ -34,7 +35,7 @@ public class ChromatogramConverterWSD extends AbstractChromatogramConverter<IChr
 		if(instance == null) {
 			instance = new ChromatogramConverterWSD();
 		}
-		//
+
 		return instance;
 	}
 

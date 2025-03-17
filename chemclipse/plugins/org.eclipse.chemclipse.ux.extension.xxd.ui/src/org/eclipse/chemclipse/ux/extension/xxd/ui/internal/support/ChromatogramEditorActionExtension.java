@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2021 Lablicate GmbH.
+ * Copyright (c) 2018, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -21,6 +21,7 @@ public class ChromatogramEditorActionExtension {
 	private boolean msd = false;
 	private boolean csd = false;
 	private boolean wsd = false;
+	private boolean fsd = false;
 
 	public String getLabel() {
 
@@ -80,6 +81,16 @@ public class ChromatogramEditorActionExtension {
 	public void setWSD(boolean wsd) {
 
 		this.wsd = wsd;
+	}
+
+	public boolean isFSD() {
+
+		return fsd;
+	}
+
+	public void setFSD(boolean fsd) {
+
+		this.fsd = fsd;
 	}
 
 	public String getUniqueId() {

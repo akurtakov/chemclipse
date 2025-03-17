@@ -26,6 +26,7 @@ public enum DataType implements ILabel {
 	CSD("Current Selective Cata (CSD)"), //
 	WSD("Wavelength Selective Data (WSD)"), //
 	VSD("Vibrational Spectroscopy Data (VSD)"), //
+	FSD("Fluorescence Spectroscopy Data (FSD)"), //
 	SCAN_VSD("Vibrational Spectroscopy Scan (FT-IR, Raman)"), //
 	SCAN_WSD("Wavelength Selective Scan (UV/Vis)"), //
 	SCAN_FSD("Fluorescence Spectroscopy Scan (FS)"), //
@@ -63,6 +64,8 @@ public enum DataType implements ILabel {
 				return DataType.CSD;
 			case VSD:
 				return DataType.VSD;
+			case FSD:
+				return DataType.FSD;
 			case NMR:
 				return DataType.NMR;
 			case MALDI:
@@ -85,6 +88,8 @@ public enum DataType implements ILabel {
 				return DataCategory.CSD;
 			case VSD:
 				return DataCategory.VSD;
+			case FSD:
+				return DataCategory.FSD;
 			case NMR:
 				return DataCategory.NMR;
 			case MALDI:
@@ -132,7 +137,7 @@ public enum DataType implements ILabel {
 		for(int i = 0; i < categories.length; i++) {
 			categories[i] = dataTypes[i].toDataCategory();
 		}
-		//
+
 		return categories;
 	}
 
@@ -142,7 +147,7 @@ public enum DataType implements ILabel {
 		for(int i = 0; i < categories.length; i++) {
 			dataTypes[i] = fromDataCategory(categories[i]);
 		}
-		//
+
 		return dataTypes;
 	}
 }

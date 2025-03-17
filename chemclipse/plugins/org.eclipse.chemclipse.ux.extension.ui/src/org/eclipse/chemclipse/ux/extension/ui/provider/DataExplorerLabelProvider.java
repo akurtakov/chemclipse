@@ -166,6 +166,9 @@ public class DataExplorerLabelProvider extends ColumnLabelProvider implements IL
 				case ISupplierFileIdentifier.TYPE_WSD:
 					descriptor = ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_CHROMATOGRAM_WSD, IApplicationImageProvider.SIZE_16x16);
 					break;
+				case ISupplierFileIdentifier.TYPE_FSD:
+					descriptor = ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_CHROMATOGRAM_WSD, IApplicationImageProvider.SIZE_16x16); // TODO
+					break;
 				case ISupplierFileIdentifier.TYPE_TSD:
 					descriptor = ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_CHROMATOGRAM_TSD, IApplicationImageProvider.SIZE_16x16);
 					break;

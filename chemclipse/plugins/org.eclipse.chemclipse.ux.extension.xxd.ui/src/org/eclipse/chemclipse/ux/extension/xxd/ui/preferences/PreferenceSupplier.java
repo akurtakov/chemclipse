@@ -872,6 +872,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_SHOW_DATA_VSD = true;
 	public static final String P_SHOW_DATA_TSD = "showDataTSD";
 	public static final boolean DEF_SHOW_DATA_TSD = true;
+	public static final String P_SHOW_DATA_FSD = "showDataFSD";
+	public static final boolean DEF_SHOW_DATA_FSD = true;
 	public static final String P_SHOW_LIBRARY_MSD = "showLibraryMSD";
 	public static final boolean DEF_SHOW_LIBRARY_MSD = true;
 	public static final String P_SHOW_SCANS_MSD = "showScansMSD";
@@ -972,6 +974,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_FILTER_PATH_CHROMATOGRAM_CSD = "";
 	public static final String P_FILTER_PATH_CHROMATOGRAM_WSD = "filterPathChromatogramWSD";
 	public static final String DEF_FILTER_PATH_CHROMATOGRAM_WSD = "";
+	public static final String P_FILTER_PATH_CHROMATOGRAM_FSD = "filterPathChromatogramFSD";
+	public static final String DEF_FILTER_PATH_CHROMATOGRAM_FSD = "";
 	public static final String P_FILTER_PATH_RETENTION_INDICES = "filterPathRetentionIndices";
 	public static final String DEF_FILTER_PATH_RETENTION_INDICES = "";
 	//
@@ -1214,6 +1218,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_SHOW_DATA_WSD, DEF_SHOW_DATA_WSD);
 		putDefault(P_SHOW_DATA_VSD, DEF_SHOW_DATA_VSD);
 		putDefault(P_SHOW_DATA_TSD, DEF_SHOW_DATA_TSD);
+		putDefault(P_SHOW_DATA_FSD, DEF_SHOW_DATA_FSD);
 		putDefault(P_SHOW_LIBRARY_MSD, DEF_SHOW_LIBRARY_MSD);
 		putDefault(P_SHOW_SCANS_MSD, DEF_SHOW_SCANS_MSD);
 		putDefault(P_SHOW_DATA_SCAN_VSD, DEF_SHOW_DATA_SCAN_VSD);

@@ -1,17 +1,17 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2022 Lablicate GmbH.
- *
+ * Copyright (c) 2025 Lablicate GmbH.
+ * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Philip Wenig - initial API and implementation
+ * Matthias Mailänder - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.wsd.model.core.support;
+package org.eclipse.chemclipse.fsd.converter.core;
 
-import org.eclipse.chemclipse.model.core.IMarkedTrace;
+import org.eclipse.chemclipse.converter.io.AbstractChromatogramReader;
 
-public interface IMarkedWavelength extends IMarkedTrace {
+public abstract class AbstractChromatogramFSDReader extends AbstractChromatogramReader implements IChromatogramFSDReader {
 }

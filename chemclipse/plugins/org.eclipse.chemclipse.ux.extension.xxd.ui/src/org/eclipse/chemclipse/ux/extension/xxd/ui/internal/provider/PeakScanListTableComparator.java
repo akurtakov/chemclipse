@@ -13,6 +13,7 @@
 package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider;
 
 import org.eclipse.chemclipse.csd.model.core.IChromatogramPeakCSD;
+import org.eclipse.chemclipse.fsd.model.core.IChromatogramPeakFSD;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.core.ITargetSupplier;
@@ -129,6 +130,15 @@ public class PeakScanListTableComparator extends AbstractRecordTableComparator i
 							break;
 					}
 				} else if(object1 instanceof IChromatogramPeakWSD chromatogramPeak1 && object2 instanceof IChromatogramPeakWSD chromatogramPeak2) {
+					switch(getPropertyIndex()) {
+						case 11:
+							sortOrder = chromatogramPeak2.getScanMax() - chromatogramPeak1.getScanMax();
+							break;
+						case 12:
+							sortOrder = Float.compare(chromatogramPeak2.getSignalToNoiseRatio(), chromatogramPeak1.getSignalToNoiseRatio());
+							break;
+					}
+				} else if(object1 instanceof IChromatogramPeakFSD chromatogramPeak1 && object2 instanceof IChromatogramPeakFSD chromatogramPeak2) {
 					switch(getPropertyIndex()) {
 						case 11:
 							sortOrder = chromatogramPeak2.getScanMax() - chromatogramPeak1.getScanMax();
