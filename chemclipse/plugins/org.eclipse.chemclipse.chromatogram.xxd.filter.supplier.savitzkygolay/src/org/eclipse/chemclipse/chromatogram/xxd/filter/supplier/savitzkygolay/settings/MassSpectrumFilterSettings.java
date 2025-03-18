@@ -13,12 +13,14 @@
 package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.settings;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.AbstractMassSpectrumFilterSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.support.literature.LiteratureReference;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
 
@@ -84,5 +86,11 @@ public class MassSpectrumFilterSettings extends AbstractMassSpectrumFilterSettin
 			logger.warn(e);
 		}
 		return new LiteratureReference(content);
+	}
+
+	@Override
+	public List<MassSpectrumType> appliesToMassSpectrumTypes() {
+
+		return Arrays.asList(MassSpectrumType.PROFILE);
 	}
 }

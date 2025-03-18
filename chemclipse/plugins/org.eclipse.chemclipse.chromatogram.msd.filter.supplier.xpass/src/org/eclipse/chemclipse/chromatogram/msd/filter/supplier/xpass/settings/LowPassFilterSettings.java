@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2021 Lablicate GmbH.
+ * Copyright (c) 2014, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -11,8 +11,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.settings;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.AbstractMassSpectrumFilterSettings;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.preferences.PreferenceSupplier;
+import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -33,5 +37,11 @@ public class LowPassFilterSettings extends AbstractMassSpectrumFilterSettings {
 	public void setNumberLowest(int numberLowest) {
 
 		this.numberLowest = numberLowest;
+	}
+
+	@Override
+	public List<MassSpectrumType> appliesToMassSpectrumTypes() {
+
+		return Arrays.asList(MassSpectrumType.CENTROID);
 	}
 }

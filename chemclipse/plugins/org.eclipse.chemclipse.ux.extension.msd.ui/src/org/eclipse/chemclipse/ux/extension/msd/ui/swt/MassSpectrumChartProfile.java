@@ -28,6 +28,7 @@ import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.notifier.UpdateNotifier;
 import org.eclipse.chemclipse.model.supplier.IScanProcessSupplier;
+import org.eclipse.chemclipse.model.supplier.ScanProcessSupplier;
 import org.eclipse.chemclipse.msd.converter.massspectrum.MassSpectrumConverter;
 import org.eclipse.chemclipse.msd.converter.massspectrum.MassSpectrumConverterSupport;
 import org.eclipse.chemclipse.msd.model.core.IIon;
@@ -214,7 +215,15 @@ public class MassSpectrumChartProfile extends LineChart implements IMassSpectrum
 			return false;
 		}
 
-		return supplier.getCategory() == ICategories.MASS_SPECTRUM_FILTER;
+		if(supplier.getCategory() != ICategories.MASS_SPECTRUM_FILTER) {
+			return false;
+		}
+
+		if(supplier instanceof ScanProcessSupplier scanProcessSupplier) {
+			return scanProcessSupplier.isValidFor(massSpectrum);
+		}
+
+		return false;
 	}
 
 	private void addCommand(IProcessSupplier<?> supplier, IChartMenuEntry cachedEntry) {

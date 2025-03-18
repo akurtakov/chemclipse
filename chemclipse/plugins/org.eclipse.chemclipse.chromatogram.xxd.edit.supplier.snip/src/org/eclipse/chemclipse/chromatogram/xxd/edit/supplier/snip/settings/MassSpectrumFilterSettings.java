@@ -12,11 +12,13 @@
 package org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.settings;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.AbstractMassSpectrumFilterSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.support.literature.LiteratureReference;
 import org.eclipse.chemclipse.support.settings.DoubleSettingsProperty;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
@@ -91,5 +93,11 @@ public class MassSpectrumFilterSettings extends AbstractMassSpectrumFilterSettin
 			logger.warn(e);
 		}
 		return new LiteratureReference(content);
+	}
+
+	@Override
+	public List<MassSpectrumType> appliesToMassSpectrumTypes() {
+
+		return Arrays.asList(MassSpectrumType.PROFILE);
 	}
 }

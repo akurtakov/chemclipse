@@ -21,7 +21,9 @@ import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.exceptions.NoIdentifierAvailableException;
 import org.eclipse.chemclipse.model.supplier.ScanProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
+import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
+import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
@@ -84,5 +86,15 @@ public class StandaloneMassSpectrumIdentifierProcessTypeSupplier implements IPro
 
 			return super.matchesId(id) || supplier.getId().equals(id);
 		}
+
+		@Override
+		public boolean isValidFor(IScan scan) {
+
+			if(scan instanceof IRegularMassSpectrum regularMassSpectrum) {
+				return regularMassSpectrum.getMassSpectrumType().equals(MassSpectrumType.CENTROID);
+			}
+			return false;
+		}
 	}
+
 }

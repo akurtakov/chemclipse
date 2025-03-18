@@ -21,6 +21,8 @@ import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
 
 public interface IScanProcessSupplier<SettingType> extends IProcessSupplier<SettingType> {
 
+	boolean isValidFor(IScan scan);
+
 	/**
 	 * Apply this processor to the given {@link IScan}
 	 * 

@@ -11,8 +11,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.subtract.settings;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.AbstractMassSpectrumFilterSettings;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
+import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
@@ -59,5 +63,11 @@ public class MassSpectrumFilterSettings extends AbstractMassSpectrumFilterSettin
 	public void setUseNormalize(boolean useNormalize) {
 
 		this.useNormalize = useNormalize;
+	}
+
+	@Override
+	public List<MassSpectrumType> appliesToMassSpectrumTypes() {
+
+		return Arrays.asList(MassSpectrumType.CENTROID);
 	}
 }
