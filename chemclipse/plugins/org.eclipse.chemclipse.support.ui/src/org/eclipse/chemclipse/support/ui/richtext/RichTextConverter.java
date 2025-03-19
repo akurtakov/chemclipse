@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024 Lablicate GmbH.
+ * Copyright (c) 2024, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -11,6 +11,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.support.ui.richtext;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.HashMap;
@@ -19,12 +21,39 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JEditorPane;
+import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.EditorKit;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.rtf.RTFEditorKit;
 
 public class RichTextConverter {
 
 	private static final String MIME_TYPE_RTF = "text/rtf";
 	private static final String MIME_TYPE_HTML = "text/html";
+
+	public static String convertRtfToHtml(String content) {
+
+		String html;
+		try (InputStream inputStream = new ByteArrayInputStream(content.getBytes())) {
+			/*
+			 * RTF
+			 */
+			RTFEditorKit rtfEditorKit = new RTFEditorKit();
+			DefaultStyledDocument styledDocument = new DefaultStyledDocument();
+			rtfEditorKit.read(inputStream, styledDocument, 0);
+			/*
+			 * HTML
+			 */
+			HTMLEditorKit htmlEditorKit = new HTMLEditorKit();
+			StringWriter writer = new StringWriter();
+			htmlEditorKit.write(writer, styledDocument, 0, styledDocument.getLength());
+			html = writer.toString();
+		} catch(Exception e) {
+			html = "";
+		}
+
+		return html;
+	}
 
 	public static String convertRtfToHtml(String content, boolean bodyOnly) {
 
