@@ -16,6 +16,7 @@ import java.text.DecimalFormat;
 import java.util.Set;
 
 import org.eclipse.chemclipse.csd.model.core.IChromatogramPeakCSD;
+import org.eclipse.chemclipse.fsd.model.core.IChromatogramPeakFSD;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.core.IPeakModel;
@@ -257,6 +258,16 @@ public class PeakScanListLabelProvider extends AbstractChemClipseLabelProvider {
 							break;
 					}
 				} else if(peak instanceof IChromatogramPeakWSD chromatogramPeak) {
+					switch(columnIndex) {
+						case 11:
+							text = Integer.toString(chromatogramPeak.getScanMax());
+							break;
+						case 12:
+							float sn = chromatogramPeak.getSignalToNoiseRatio();
+							text = Float.isNaN(sn) ? NO_VALUE : decimalFormat.format(sn);
+							break;
+					}
+				} else if(peak instanceof IChromatogramPeakFSD chromatogramPeak) {
 					switch(columnIndex) {
 						case 11:
 							text = Integer.toString(chromatogramPeak.getScanMax());

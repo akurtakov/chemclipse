@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
+import org.eclipse.chemclipse.fsd.model.core.IChromatogramFSD;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.model.supplier.IChromatogramSelectionProcessSupplier;
@@ -61,7 +62,7 @@ public class EditorProcessTypeSupplier implements IProcessTypeSupplier {
 
 		public OpenEditorSupplier(IProcessTypeSupplier parent) {
 
-			super("org.eclipse.chemclipse.ux.extension.xxd.ui.editors.EditorProcessTypeSupplier.OpenEditorSupplier", "Open Editor", "Opens an editor with the given dataset", null, parent, DataCategory.MSD, DataCategory.CSD, DataCategory.WSD);
+			super("org.eclipse.chemclipse.ux.extension.xxd.ui.editors.EditorProcessTypeSupplier.OpenEditorSupplier", "Open Editor", "Opens an editor with the given dataset", null, parent, DataCategory.MSD, DataCategory.CSD, DataCategory.WSD, DataCategory.FSD);
 		}
 
 		@Override
@@ -84,6 +85,8 @@ public class EditorProcessTypeSupplier implements IProcessTypeSupplier {
 							new SupplierEditorSupport(DataType.CSD, () -> eclipseContext).openEditor(chromatogram);
 						} else if(chromatogram instanceof IChromatogramVSD) {
 							new SupplierEditorSupport(DataType.VSD, () -> eclipseContext).openEditor(chromatogram);
+						} else if(chromatogram instanceof IChromatogramFSD) {
+							new SupplierEditorSupport(DataType.FSD, () -> eclipseContext).openEditor(chromatogram);
 						}
 					}
 				});

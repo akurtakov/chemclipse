@@ -58,7 +58,7 @@ public enum DataCategory implements ILabel {
 
 	public static DataCategory[] chromatographyCategories() {
 
-		return new DataCategory[]{CSD, MSD, VSD, WSD};
+		return new DataCategory[]{CSD, MSD, VSD, WSD, FSD};
 	}
 
 	public static DataCategory[] spectroscopyCategories() {

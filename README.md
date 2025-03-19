@@ -8,6 +8,7 @@ Currently it offers workflows in the following areas:
   * flame-ionization detectors (GC/FID)
   * wavelength-selective detectors (HPLC-DAD/UV-Vis)
   * vibrational-spectroscopy detectors (GC-IR, HPLC-Raman)
+  * fluorescence-spectroscopy detectors (HPLC-FLD)
 * mass spectrometry (MALDI-TOF MS)
 * molecular spectroscopy
   * nuclear magnetic resonance (NMR)

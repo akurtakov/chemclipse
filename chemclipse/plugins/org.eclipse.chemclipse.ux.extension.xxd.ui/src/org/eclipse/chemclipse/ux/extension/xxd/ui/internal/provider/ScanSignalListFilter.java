@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2024 Lablicate GmbH.
+ * Copyright (c) 2018, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -12,6 +12,7 @@
 package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider;
 
 import org.eclipse.chemclipse.csd.model.core.IScanCSD;
+import org.eclipse.chemclipse.fsd.model.core.IScanSignalFSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IIonTransition;
 import org.eclipse.chemclipse.vsd.model.core.ISignalVSD;
@@ -73,8 +74,12 @@ public class ScanSignalListFilter extends ViewerFilter {
 			if(Double.toString(scanSignalVSD.getWavenumber()).contains(searchText)) {
 				return true;
 			}
+		} else if(element instanceof IScanSignalFSD scanSignalFSD) {
+			if(Double.toString(scanSignalFSD.getWavelength()).contains(searchText)) {
+				return true;
+			}
 		}
-		//
+
 		return false;
 	}
 }

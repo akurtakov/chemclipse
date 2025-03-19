@@ -16,9 +16,9 @@ import org.eclipse.osgi.util.NLS;
 public class FluorescenceSpectroscopy extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.chemclipse.fsd.converter.ui.l10n.messages"; //$NON-NLS-1$
-	//
+
 	public static String saveFluorescence;
-	//
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, FluorescenceSpectroscopy.class);
 	}

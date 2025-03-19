@@ -17,6 +17,8 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.chemclipse.csd.converter.chromatogram.ChromatogramConverterCSD;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
+import org.eclipse.chemclipse.fsd.converter.chromatogram.ChromatogramConverterFSD;
+import org.eclipse.chemclipse.fsd.model.core.IChromatogramFSD;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
@@ -75,10 +77,15 @@ public class ChromatogramExportRunnable implements IRunnableWithProgress {
 						processingInfo = ChromatogramConverterWSD.getInstance().convert(file, chromatogramWSD, supplier.getId(), monitor);
 					}
 					break;
+				case FSD:
+					if(chromatogram instanceof IChromatogramFSD chromatogramFSD) {
+						processingInfo = ChromatogramConverterFSD.getInstance().convert(file, chromatogramFSD, supplier.getId(), monitor);
+					}
+					break;
 				default:
 					// Do nothing
 			}
-			//
+
 			if(processingInfo != null) {
 				ProcessingInfoPartSupport.getInstance().update(processingInfo);
 				data = processingInfo.getProcessingResult();

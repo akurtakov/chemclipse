@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2023 Lablicate GmbH.
+ * Copyright (c) 2016, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,7 +9,7 @@
  * Contributors:
  * Dr. Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.wsd.model.core.support;
+package org.eclipse.chemclipse.model.wavelengths;
 
 import java.util.Collection;
 import java.util.Set;
@@ -35,7 +35,7 @@ public interface IMarkedWavelengths extends IMarkedTraces<IMarkedWavelength> {
 	void add(Collection<? extends Number> wavelengths);
 
 	/**
-	 * Adds the ion range with magnification factor = 1.
+	 * Adds the wavelength range with magnification factor = 1.
 	 * Deprecated because wavelength could be double values
 	 * 
 	 * @param wavelengthStart

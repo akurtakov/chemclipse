@@ -41,7 +41,7 @@ public class DataExplorerUI extends MultiDataExplorerTreeUI {
 	public DataExplorerUI(Composite parent, ISupplierFileIdentifier supplierFileIdentifier) {
 
 		super(parent, SWT.NONE, new DataExplorerTreeSettings(Activator.getDefault().getPreferenceStore()));
-		//
+
 		this.supplierFileIdentifier = supplierFileIdentifier;
 		setSupplierFileEditorSupport();
 	}
@@ -50,10 +50,10 @@ public class DataExplorerUI extends MultiDataExplorerTreeUI {
 	protected List<Class<? extends IPreferencePage>> addPreferencePages() {
 
 		List<Class<? extends IPreferencePage>> preferencePages = new ArrayList<>();
-		//
+
 		preferencePages.add(PreferencePageFileExplorer.class);
 		preferencePages.add(PreferencePage.class);
-		//
+
 		return preferencePages;
 	}
 
@@ -104,6 +104,12 @@ public class DataExplorerUI extends MultiDataExplorerTreeUI {
 		 */
 		if(preferenceStore.getBoolean(PreferenceSupplier.P_SHOW_DATA_TSD)) {
 			editorSupportList.add(new SupplierEditorSupport(DataType.TSD, () -> context));
+		}
+		/*
+		 * FSD
+		 */
+		if(preferenceStore.getBoolean(PreferenceSupplier.P_SHOW_DATA_FSD)) {
+			editorSupportList.add(new SupplierEditorSupport(DataType.FSD, () -> context));
 		}
 		/*
 		 * VSD
@@ -159,7 +165,7 @@ public class DataExplorerUI extends MultiDataExplorerTreeUI {
 		if(preferenceStore.getBoolean(PreferenceSupplier.P_SHOW_DATA_QUANT_DB)) {
 			editorSupportList.add(new SupplierEditorSupport(DataType.QDB, () -> context));
 		}
-		//
+
 		editorSupportList.add(new GenericSupplierEditorSupport(supplierFileIdentifier, () -> context));
 		setSupplierFileIdentifier(editorSupportList);
 		expandLastDirectoryPath();

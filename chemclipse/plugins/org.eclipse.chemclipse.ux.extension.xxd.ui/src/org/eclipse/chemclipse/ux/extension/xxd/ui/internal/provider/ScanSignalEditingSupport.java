@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2024 Lablicate GmbH.
+ * Copyright (c) 2018, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -12,6 +12,7 @@
 package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider;
 
 import org.eclipse.chemclipse.csd.model.core.IScanCSD;
+import org.eclipse.chemclipse.fsd.model.core.IScanSignalFSD;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
@@ -63,6 +64,8 @@ public class ScanSignalEditingSupport extends EditingSupport {
 				return Float.toString(scanSignalWSD.getAbsorbance());
 			} else if(element instanceof IScanCSD scanCSD) {
 				return Float.toString(scanCSD.getTotalSignal());
+			} else if(element instanceof IScanSignalFSD scanSignalFSD) {
+				return Float.toString(scanSignalFSD.getFluorescence());
 			}
 		}
 		return null;
@@ -80,12 +83,15 @@ public class ScanSignalEditingSupport extends EditingSupport {
 				} else if(element instanceof IScanSignalWSD scanSignalWSD) {
 					scanSignalWSD.setAbsorbance(abundance);
 					updateTable();
-				} else if(element instanceof IScanCSD) {
-					/*
-					 * IScanCSD scanCSD = (IScanCSD)element;
-					 */
-					logger.info("It's not possible to edit the CSD scan total signal at the moment.");
+				} else if(element instanceof IScanSignalFSD scanSignalFSD) {
+					scanSignalFSD.setFluorescence(abundance);
+					updateTable();
 				}
+			} else if(element instanceof IScanCSD) {
+				/*
+				 * IScanCSD scanCSD = (IScanCSD)element;
+				 */
+				logger.info("It's not possible to edit the CSD scan total signal at the moment.");
 			}
 		}
 	}

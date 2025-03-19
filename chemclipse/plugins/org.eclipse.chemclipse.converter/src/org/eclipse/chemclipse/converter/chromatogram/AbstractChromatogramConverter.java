@@ -47,7 +47,7 @@ public abstract class AbstractChromatogramConverter<P extends IPeak, T extends I
 	private final Class<T> type;
 	private final DataCategory dataCategory;
 
-	public AbstractChromatogramConverter(String extensionPoint, Class<T> type, DataCategory dataCategory) {
+	protected AbstractChromatogramConverter(String extensionPoint, Class<T> type, DataCategory dataCategory) {
 
 		this.extensionPoint = extensionPoint;
 		this.type = type;

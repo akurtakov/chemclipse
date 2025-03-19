@@ -22,6 +22,7 @@ public interface ISupplierFileIdentifier extends SupplierContext {
 	String TYPE_WSD = "WSD";
 	String TYPE_TSD = "TSD";
 	String TYPE_VSD = "VSD";
+	String TYPE_FSD = "FSD";
 	String TYPE_NMR = "NMR";
 	String TYPE_DATABASE_MSD = "DATABASE_MSD";
 	String TYPE_DATABASE_CSD = "DATABASE_CSD";

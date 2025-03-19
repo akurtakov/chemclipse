@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2020 Lablicate GmbH.
+ * Copyright (c) 2018, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -19,8 +19,9 @@ public interface IChromatogramPeakWSD extends IPeakWSD, IChromatogramPeak {
 	/**
 	 * Returns the chromatogram to which this peak belongs to.
 	 *
-	 * @return {@link IChromatogramCSD}
+	 * @return {@link IChromatogramWSD}
 	 */
+	@Override
 	IChromatogramWSD getChromatogram();
 
 	/**

@@ -39,6 +39,15 @@
          </with>
       </definition>
       <definition
+            id="org.eclipse.chemclipse.ux.extension.ui.definitions.isChromatogramTypeFSD">
+         <with
+               variable="org.eclipse.chemclipse.ux.extension.ui.definitions.chromatogramType">
+            <equals
+                  value="CHROMATOGRAM_TYPE_FSD">
+            </equals>
+         </with>
+      </definition>
+      <definition
             id="org.eclipse.chemclipse.ux.extension.ui.definitions.isChromatogramTypeCWSD">
          <with
                variable="org.eclipse.chemclipse.ux.extension.ui.definitions.chromatogramType">

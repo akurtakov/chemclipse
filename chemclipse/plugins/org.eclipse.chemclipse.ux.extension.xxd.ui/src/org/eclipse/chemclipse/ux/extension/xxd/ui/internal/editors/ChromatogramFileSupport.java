@@ -24,6 +24,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.eclipse.chemclipse.converter.chromatogram.IChromatogramConverterSupport;
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.csd.converter.chromatogram.ChromatogramConverterCSD;
+import org.eclipse.chemclipse.fsd.converter.chromatogram.ChromatogramConverterFSD;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.types.DataType;
@@ -198,10 +199,13 @@ public class ChromatogramFileSupport {
 			case TSD:
 				converterSupport = ChromatogramConverterTSD.getInstance().getChromatogramConverterSupport();
 				break;
+			case FSD:
+				converterSupport = ChromatogramConverterFSD.getInstance().getChromatogramConverterSupport();
+				break;
 			default:
 				// Do nothing
 		}
-		//
+
 		return converterSupport;
 	}
 

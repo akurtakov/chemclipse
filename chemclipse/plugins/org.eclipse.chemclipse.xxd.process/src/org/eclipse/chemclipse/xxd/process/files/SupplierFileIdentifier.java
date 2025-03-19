@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2024 Lablicate GmbH.
+ * Copyright (c) 2018, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -18,6 +18,7 @@ import org.eclipse.chemclipse.converter.methods.MethodConverter;
 import org.eclipse.chemclipse.converter.quantitation.QuantDBConverter;
 import org.eclipse.chemclipse.converter.sequence.SequenceConverter;
 import org.eclipse.chemclipse.csd.converter.chromatogram.ChromatogramConverterCSD;
+import org.eclipse.chemclipse.fsd.converter.chromatogram.ChromatogramConverterFSD;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.nmr.converter.core.ScanConverterNMR;
@@ -59,6 +60,9 @@ public class SupplierFileIdentifier extends AbstractSupplierFileIdentifier imple
 			case VSD:
 				supplier = ChromatogramConverterVSD.getInstance().getChromatogramConverterSupport().getSupplier();
 				break;
+			case FSD:
+				supplier = ChromatogramConverterFSD.getInstance().getChromatogramConverterSupport().getSupplier();
+				break;
 			case SCAN_VSD:
 				supplier = ScanConverterVSD.getScanConverterSupport().getSupplier();
 				break;
@@ -83,7 +87,7 @@ public class SupplierFileIdentifier extends AbstractSupplierFileIdentifier imple
 			default:
 				// No action
 		}
-		//
+
 		return supplier;
 	}
 
@@ -98,6 +102,9 @@ public class SupplierFileIdentifier extends AbstractSupplierFileIdentifier imple
 				break;
 			case CSD:
 				type = TYPE_CSD;
+				break;
+			case FSD:
+				type = TYPE_FSD;
 				break;
 			case WSD:
 				type = TYPE_WSD;

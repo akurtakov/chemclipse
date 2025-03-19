@@ -40,7 +40,7 @@ public abstract class AbstractChromatogramPeakWSD extends AbstractPeakWSD implem
 		this.chromatogram = chromatogram;
 	}
 
-	public AbstractChromatogramPeakWSD(IPeakModelWSD peakModel, IChromatogramWSD chromatogram, String modelDescription) throws IllegalArgumentException, PeakException {
+	protected AbstractChromatogramPeakWSD(IPeakModelWSD peakModel, IChromatogramWSD chromatogram, String modelDescription) throws IllegalArgumentException, PeakException {
 
 		this(peakModel, chromatogram);
 		setModelDescription(modelDescription);
