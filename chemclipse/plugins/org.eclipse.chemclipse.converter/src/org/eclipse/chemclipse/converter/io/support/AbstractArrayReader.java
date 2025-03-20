@@ -15,19 +15,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.eclipse.chemclipse.logging.core.Logger;
 
 public abstract class AbstractArrayReader implements IArrayReader {
 
 	private static final Logger logger = Logger.getLogger(AbstractArrayReader.class);
-	//
+
 	private int position;
 	private byte[] data;
 	private int length;
-	private Map<Byte, String> charMap = new HashMap<>();
 
 	protected AbstractArrayReader(byte[] data) {
 
@@ -44,12 +41,12 @@ public abstract class AbstractArrayReader implements IArrayReader {
 
 		int length = (int)file.length();
 		byte[] data = new byte[length];
-		//
+
 		try (FileInputStream fileInputStream = new FileInputStream(file)) {
 			fileInputStream.read(data);
 			fileInputStream.close();
 		}
-		//
+
 		return data;
 	}
 
@@ -64,13 +61,6 @@ public abstract class AbstractArrayReader implements IArrayReader {
 		position = 0;
 		this.data = data;
 		this.length = data.length;
-		//
-		charMap.put((byte)-60, "Ä");
-		charMap.put((byte)-42, "Ö");
-		charMap.put((byte)-36, "Ü");
-		charMap.put((byte)-28, "ä");
-		charMap.put((byte)-10, "ö");
-		charMap.put((byte)-4, "ü");
 	}
 
 	@Override
@@ -399,22 +389,8 @@ public abstract class AbstractArrayReader implements IArrayReader {
 		for(int i = 0; i < length; i++) {
 			bytes[i] = data[position++];
 		}
-		//
-		return getCorrectedString(bytes);
-	}
 
-	private String getCorrectedString(byte[] bytes) {
-
-		StringBuilder builder = new StringBuilder();
-		for(byte b : bytes) {
-			if(charMap.containsKey(b)) {
-				builder.append(charMap.get(b));
-			} else {
-				builder.append((char)b);
-			}
-		}
-		//
-		return builder.toString().trim();
+		return new String(bytes);
 	}
 
 	@Override
@@ -477,7 +453,7 @@ public abstract class AbstractArrayReader implements IArrayReader {
 		} catch(UnsupportedEncodingException e) {
 			logger.warn(e);
 		}
-		//
+
 		return result;
 	}
 }
