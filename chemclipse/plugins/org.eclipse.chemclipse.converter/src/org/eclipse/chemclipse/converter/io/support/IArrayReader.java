@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2018 Lablicate GmbH.
+ * Copyright (c) 2012, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -47,10 +47,9 @@ public interface IArrayReader extends IBigEndianArrayReader, ILittleEndianArrayR
 	/**
 	 * The first byte defines the length of the string.
 	 * 
-	 * @param readBytes
 	 * @return String
 	 */
-	String readBytesAsStringWithLengthIndex(int readBytes);
+	String readBytesAsStringWithLengthIndex();
 
 	/**
 	 * Reads the number of bytes as a String.

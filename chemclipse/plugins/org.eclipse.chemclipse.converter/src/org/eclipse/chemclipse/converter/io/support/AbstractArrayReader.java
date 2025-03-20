@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2023 Lablicate GmbH.
+ * Copyright (c) 2012, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -377,40 +377,27 @@ public abstract class AbstractArrayReader implements IArrayReader {
 
 	// ------------------------------------------------------------------------------
 	/**
-	 * This method reads a given amount of bytes (in the way agilent has stored
-	 * them) and returns the specific result. For Example: If you want to read
-	 * the DataName from the binary file, you would call the method like this:
-	 * getBytes(61); The Data is stored in the way, that the first byte is an
-	 * value of the data length in the byte array. So, the method first reads
-	 * one byte to determine the length of data and afterwards reads the
-	 * specified 61 bytes and returns only a byte array of the determined
-	 * length.
+	 * This method reads length-prefixed (Pascal) string given amount of bytes
+	 * and returns the specific result. The Data is stored in the way, that
+	 * the first byte is an value of the data length in the byte array. So,
+	 * the method first reads one byte to determine the length of data and
+	 * afterwards returns only a byte array of the determined length.
 	 * 
-	 * @param readBytes
-	 * @return byte[]
+	 * @return String
 	 */
 	@Override
-	public String readBytesAsStringWithLengthIndex(int readBytes) {
+	public String readBytesAsStringWithLengthIndex() {
 
-		int length;
-		byte[] tmp = new byte[readBytes];
 		/*
 		 * The first byte defines the length of the string.
 		 */
-		length = data[position++];
+		int length = data[position++];
 		byte[] bytes = new byte[length];
 		/*
 		 * Reading the bytes from the array.
 		 */
-		for(int i = 0; i < readBytes; i++) {
-			tmp[i] = data[position++];
-		}
-		/*
-		 * Reading the bytes and copying only the length of the string from the
-		 * array.
-		 */
 		for(int i = 0; i < length; i++) {
-			bytes[i] = tmp[i];
+			bytes[i] = data[position++];
 		}
 		//
 		return getCorrectedString(bytes);
