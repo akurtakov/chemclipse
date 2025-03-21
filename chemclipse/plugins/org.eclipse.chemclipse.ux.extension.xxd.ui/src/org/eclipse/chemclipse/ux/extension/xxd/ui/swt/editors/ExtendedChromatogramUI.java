@@ -199,6 +199,8 @@ import org.eclipse.swtchart.extensions.menu.ResetChartHandler;
 import org.eclipse.swtchart.extensions.model.ICustomSeries;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.commands.ICommandService;
+import org.eclipse.ui.internal.keys.model.KeyController;
+import org.eclipse.ui.keys.IBindingService;
 
 public class ExtendedChromatogramUI extends Composite implements IToolbarConfig, IExtendedPartUI {
 
@@ -604,15 +606,28 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 			IChartMenuEntry cachedEntry = new ProcessorSupplierMenuEntry<>(supplier, processTypeSupport, this::executeSupplier);
 			addCommand(supplier, cachedEntry);
 		}
+		restoreKeyBindingsFromSettings();
 	}
 
 	private void addCommand(IProcessSupplier<?> supplier, IChartMenuEntry cachedEntry) {
 
 		Command command = commandService.getCommand(supplier.getId());
 		Category category = commandService.getCategory(supplier.getCategory());
+		if(!category.isDefined()) {
+			category.define(supplier.getCategory(), "");
+		}
 		command.define(supplier.getName(), supplier.getDescription(), category);
 		command.setHandler(new DynamicHandler(cachedEntry, chromatogramChartControl.get()));
 		addMainMenu(supplier, command);
+	}
+
+	@SuppressWarnings("restriction")
+	private void restoreKeyBindingsFromSettings() {
+
+		IBindingService bindingService = PlatformUI.getWorkbench().getService(IBindingService.class);
+		KeyController keyController = new KeyController();
+		keyController.init(PlatformUI.getWorkbench());
+		keyController.saveBindings(bindingService);
 	}
 
 	private void addMainMenu(IProcessSupplier<?> supplier, Command command) {
