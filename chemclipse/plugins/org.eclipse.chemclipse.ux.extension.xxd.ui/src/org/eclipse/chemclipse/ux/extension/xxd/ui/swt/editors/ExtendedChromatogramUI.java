@@ -610,6 +610,9 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 
 		Command command = commandService.getCommand(supplier.getId());
 		Category category = commandService.getCategory(supplier.getCategory());
+		if(!category.isDefined()) {
+			category.define(supplier.getCategory(), "");
+		}
 		command.define(supplier.getName(), supplier.getDescription(), category);
 		command.setHandler(new DynamicHandler(cachedEntry, chromatogramChartControl.get()));
 		addMainMenu(supplier, command);
