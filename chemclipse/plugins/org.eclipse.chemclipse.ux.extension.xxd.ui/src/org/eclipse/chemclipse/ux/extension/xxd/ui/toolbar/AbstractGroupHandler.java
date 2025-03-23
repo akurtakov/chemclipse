@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2024 Lablicate GmbH.
+ * Copyright (c) 2020, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -39,13 +39,13 @@ import org.eclipse.swt.widgets.Display;
 public abstract class AbstractGroupHandler implements IGroupHandler {
 
 	private static final Logger logger = Logger.getLogger(AbstractGroupHandler.class);
-	//
+
 	private static final String COMMAND_ID = "org.eclipse.chemclipse.ux.extension.xxd.ui.command.partHandler";
 	private static final String SETTINGS_CONTRIBUTION_URI = "bundleclass://org.eclipse.chemclipse.ux.extension.xxd.ui/org.eclipse.chemclipse.ux.extension.xxd.ui.toolbar.SettingsHandler";
 	private static final String ACTION_CONTRIBUTION_URI = "bundleclass://org.eclipse.chemclipse.ux.extension.xxd.ui/org.eclipse.chemclipse.ux.extension.xxd.ui.toolbar.ActionHandler";
 	private static final String MAIN_MENU_VIEW = "org.eclipse.chemclipse.rcp.app.ui.menu.view";
 	private static final String MAIN_MENU_VIEW_PREFIX = "org.eclipse.chemclipse.ux.extension.xxd.ui.view";
-	//
+
 	private static final String TOOL_ITEM_ID = "org.eclipse.chemclipse.ux.extension.xxd.ui.directtoolitem";
 	private static final String HANDLED_MENU_ITEM = "org.eclipse.chemclipse.ux.extension.xxd.ui.handledmenuitem";
 	private static final String DIRECT_MENU_ITEM = "org.eclipse.chemclipse.ux.extension.xxd.ui.directmenuitem";
@@ -71,7 +71,7 @@ public abstract class AbstractGroupHandler implements IGroupHandler {
 
 		EModelService modelService = ContextAddon.getModelService();
 		MApplication application = ContextAddon.getApplication();
-		//
+
 		if(modelService != null && application != null) {
 			/*
 			 * Try to get tool item to modify the tooltip and image.
@@ -153,7 +153,7 @@ public abstract class AbstractGroupHandler implements IGroupHandler {
 		} else {
 			partHandlers = getPartHandler();
 		}
-		//
+
 		for(IPartHandler partHandler : partHandlers) {
 			partHandler.action(show);
 		}
@@ -167,7 +167,7 @@ public abstract class AbstractGroupHandler implements IGroupHandler {
 			String toolItemId = getDirectToolItemId();
 			return PartSupport.getDirectToolItem(toolItemId, modelService, application);
 		}
-		//
+
 		return null;
 	}
 
@@ -181,7 +181,7 @@ public abstract class AbstractGroupHandler implements IGroupHandler {
 				return command;
 			}
 		}
-		//
+
 		return null;
 	}
 
@@ -191,7 +191,7 @@ public abstract class AbstractGroupHandler implements IGroupHandler {
 		if(menuElement instanceof MHandledMenuItem handledMenuItem) {
 			return handledMenuItem;
 		}
-		//
+
 		return null;
 	}
 
@@ -201,7 +201,7 @@ public abstract class AbstractGroupHandler implements IGroupHandler {
 		if(menuElement instanceof MDirectMenuItem directMenuItem) {
 			return directMenuItem;
 		}
-		//
+
 		return null;
 	}
 
@@ -211,7 +211,7 @@ public abstract class AbstractGroupHandler implements IGroupHandler {
 		if(menuElement instanceof MMenuSeparator menuSeparator) {
 			return menuSeparator;
 		}
-		//
+
 		return null;
 	}
 
@@ -222,7 +222,7 @@ public abstract class AbstractGroupHandler implements IGroupHandler {
 				return menuElement;
 			}
 		}
-		//
+
 		return null;
 	}
 
@@ -232,16 +232,16 @@ public abstract class AbstractGroupHandler implements IGroupHandler {
 			return;
 		}
 		List<MenuContribution> menuContributions = new ArrayList<>();
-		//
+
 		List<IPartHandler> partHandlersMandatory = getPartHandlerMandatory();
 		List<IPartHandler> partHandlersAdditional = getPartHandlerAdditional();
 		int offset = partHandlersMandatory.size();
-		//
+
 		populateHandler(menu, modelService, partHandlersMandatory, menuContributions, 0);
 		populateHandlerAdditional(menu, modelService, partHandlersAdditional, menuContributions, offset);
 		populateActionMenu(menu, modelService, menuContributions);
 		populateSettingsMenu(menu, modelService, menuContributions);
-		//
+
 		addMenuItems(menu, menuContributions);
 	}
 
@@ -356,7 +356,7 @@ public abstract class AbstractGroupHandler implements IGroupHandler {
 		 */
 		String separatorId = getSettingsSeparatorId();
 		populateSeparator(menu, separatorId, modelService, menuContributions);
-		//
+
 		String settingsElementId = getSettingsElementId();
 		MDirectMenuItem settingsMenuItem = getDirectItem(menu, settingsElementId);
 		if(settingsMenuItem == null) {

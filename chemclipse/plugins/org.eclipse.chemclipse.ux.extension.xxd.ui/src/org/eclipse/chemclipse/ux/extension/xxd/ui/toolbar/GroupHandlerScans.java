@@ -40,7 +40,6 @@ public class GroupHandlerScans extends AbstractGroupHandler {
 
 		List<IPartHandler> partHandler = new ArrayList<>();
 
-		partHandler.add(new PartHandler("Targets", PartSupport.PARTDESCRIPTOR_TARGETS, PreferenceSupplier.P_STACK_POSITION_TARGETS));
 		partHandler.add(new PartHandler("Scan Chart", PartSupport.PARTDESCRIPTOR_SCAN_CHART, PreferenceSupplier.P_STACK_POSITION_SCAN_CHART));
 		partHandler.add(new PartHandler("Scan Table", PartSupport.PARTDESCRIPTOR_SCAN_TABLE, PreferenceSupplier.P_STACK_POSITION_SCAN_TABLE));
 
@@ -52,7 +51,6 @@ public class GroupHandlerScans extends AbstractGroupHandler {
 
 		List<IPartHandler> partHandler = new ArrayList<>();
 
-		partHandler.add(new PartHandler("Molecule", PartSupport.PARTDESCRIPTOR_MOLECULE, PreferenceSupplier.P_STACK_POSITION_MOLECULE));
 		partHandler.add(new PartHandler("Scan Browse", PartSupport.PARTDESCRIPTOR_SCAN_BROWSE, PreferenceSupplier.P_STACK_POSITION_SCAN_BROWSE));
 		partHandler.add(new PartHandler("Scan Subtract", PartSupport.PARTDESCRIPTOR_SUBTRACT_SCAN, PreferenceSupplier.P_STACK_POSITION_SUBTRACT_SCAN_PART));
 		partHandler.add(new PartHandler("Scan Combined", PartSupport.PARTDESCRIPTOR_COMBINED_SCAN, PreferenceSupplier.P_STACK_POSITION_COMBINED_SCAN_PART));

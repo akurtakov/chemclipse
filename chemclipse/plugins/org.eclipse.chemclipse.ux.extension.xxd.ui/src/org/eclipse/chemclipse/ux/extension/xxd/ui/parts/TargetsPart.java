@@ -72,7 +72,7 @@ public class TargetsPart extends AbstractPart<ExtendedTargetsUI> {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 
