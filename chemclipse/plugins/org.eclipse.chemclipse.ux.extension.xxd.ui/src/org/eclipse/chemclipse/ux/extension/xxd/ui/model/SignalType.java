@@ -9,10 +9,26 @@
  * Contributors:
  * Dr. Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.support;
+package org.eclipse.chemclipse.ux.extension.xxd.ui.model;
 
-public enum SignalType {
-	AUTO_DETECT, //
-	CENTROID, //
-	PROFILE
+import org.eclipse.chemclipse.support.text.ILabel;
+
+public enum SignalType implements ILabel {
+
+	AUTO_DETECT("Auto-Detect"), //
+	CENTROID("Centroid"), //
+	PROFILE("Profile");
+
+	private String label = "";
+
+	private SignalType(String label) {
+
+		this.label = label;
+	}
+
+	@Override
+	public String label() {
+
+		return label;
+	}
 }
