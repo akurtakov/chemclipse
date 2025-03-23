@@ -9,7 +9,7 @@
  * Contributors:
  * Dr. Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.model;
+package org.eclipse.chemclipse.model.types;
 
 import org.eclipse.chemclipse.support.text.ILabel;
 
