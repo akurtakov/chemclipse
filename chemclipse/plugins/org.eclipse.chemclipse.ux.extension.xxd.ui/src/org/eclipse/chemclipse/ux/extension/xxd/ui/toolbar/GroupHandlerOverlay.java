@@ -41,9 +41,6 @@ public class GroupHandlerOverlay extends AbstractGroupHandler {
 		List<IPartHandler> partHandler = new ArrayList<>();
 
 		partHandler.add(new PartHandler("Overlay (Chromatogram)", PartSupport.PARTDESCRIPTOR_OVERLAY_CHROMATOGRAM, PreferenceSupplier.P_STACK_POSITION_OVERLAY_CHROMATOGRAM_DEFAULT));
-		partHandler.add(new PartHandler("Overlay (NMR)", PartSupport.PARTDESCRIPTOR_OVERLAY_NMR, PreferenceSupplier.P_STACK_POSITION_OVERLAY_NMR));
-		partHandler.add(new PartHandler("Overlay (VSD)", PartSupport.PARTDESCRIPTOR_OVERLAY_VSD, PreferenceSupplier.P_STACK_POSITION_OVERLAY_VSD));
-		partHandler.add(new PartHandler("Overlay (MALDI)", PartSupport.PARTDESCRIPTOR_OVERLAY_MALDI, PreferenceSupplier.P_STACK_POSITION_OVERLAY_MALDI));
 
 		return partHandler;
 	}
@@ -52,6 +49,11 @@ public class GroupHandlerOverlay extends AbstractGroupHandler {
 	public List<IPartHandler> getPartHandlerAdditional() {
 
 		List<IPartHandler> partHandler = new ArrayList<>();
+
+		partHandler.add(new PartHandler("Overlay (NMR)", PartSupport.PARTDESCRIPTOR_OVERLAY_NMR, PreferenceSupplier.P_STACK_POSITION_OVERLAY_NMR));
+		partHandler.add(new PartHandler("Overlay (VSD)", PartSupport.PARTDESCRIPTOR_OVERLAY_VSD, PreferenceSupplier.P_STACK_POSITION_OVERLAY_VSD));
+		partHandler.add(new PartHandler("Overlay (MALDI)", PartSupport.PARTDESCRIPTOR_OVERLAY_MALDI, PreferenceSupplier.P_STACK_POSITION_OVERLAY_MALDI));
+
 		return partHandler;
 	}
 

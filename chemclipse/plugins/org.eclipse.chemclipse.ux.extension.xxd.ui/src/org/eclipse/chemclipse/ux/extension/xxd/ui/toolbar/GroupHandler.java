@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.toolbar;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +26,7 @@ public class GroupHandler {
 	private static Map<String, IGroupHandler> deactivateMap = new HashMap<>();
 	private static Map<String, Boolean> visibilityMap = new HashMap<>();
 	private static Map<String, IPartHandler> partHandlerMap = new HashMap<>();
-	//
+
 	static {
 		/*
 		 * Group Handlers
@@ -34,6 +35,7 @@ public class GroupHandler {
 		initialize(new GroupHandlerOverlay());
 		initialize(new GroupHandlerScans());
 		initialize(new GroupHandlerPeaks());
+		initialize(new GroupHandlerTargets());
 		initialize(new GroupHandlerChromatogram());
 		initialize(new GroupHandlerISTD());
 		initialize(new GroupHandlerMiscellaneous());
@@ -46,11 +48,16 @@ public class GroupHandler {
 
 	}
 
+	/**
+	 * Show mandatory parts by default for these groups.
+	 */
 	public static void activateReferencedParts() {
 
-		IGroupHandler groupHandler = getGroupHandler(GroupHandlerScans.NAME);
-		if(groupHandler != null) {
-			groupHandler.setPartStatus(true);
+		for(String handlerName : Arrays.asList(GroupHandlerScans.NAME, GroupHandlerTargets.NAME)) {
+			IGroupHandler groupHandler = getGroupHandler(handlerName);
+			if(groupHandler != null) {
+				groupHandler.setPartStatus(true);
+			}
 		}
 	}
 
@@ -58,7 +65,7 @@ public class GroupHandler {
 
 		IGroupHandler groupHandler = null;
 		boolean visible = false;
-		//
+
 		if(elementId.endsWith(Action.SHOW.id())) {
 			groupHandler = activateMap.get(elementId);
 			visible = true;
@@ -66,7 +73,7 @@ public class GroupHandler {
 			groupHandler = deactivateMap.get(elementId);
 			visible = false;
 		}
-		//
+
 		if(groupHandler != null) {
 			groupHandler.setPartStatus(visible);
 		}
@@ -98,7 +105,7 @@ public class GroupHandler {
 				return groupHandler.getPreferencePages();
 			}
 		}
-		//
+
 		return Collections.emptyList();
 	}
 
@@ -126,7 +133,7 @@ public class GroupHandler {
 		activateMap.put(groupHandler.getActionElementId(Action.SHOW), groupHandler);
 		deactivateMap.put(groupHandler.getActionElementId(Action.HIDE), groupHandler);
 		visibilityMap.put(name, false);
-		//
+
 		for(IPartHandler partHandler : groupHandler.getPartHandler()) {
 			String elementId = groupHandler.getPartElementId(partHandler);
 			partHandlerMap.put(elementId, partHandler);

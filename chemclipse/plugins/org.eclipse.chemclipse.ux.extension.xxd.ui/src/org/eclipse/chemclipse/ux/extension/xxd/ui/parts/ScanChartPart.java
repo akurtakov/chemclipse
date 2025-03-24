@@ -69,7 +69,7 @@ public class ScanChartPart extends AbstractPart<ExtendedScanChartUI> {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 
