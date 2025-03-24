@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2018 Lablicate GmbH.
+ * Copyright (c) 2017, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,10 +9,26 @@
  * Contributors:
  * Dr. Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.support;
+package org.eclipse.chemclipse.model.types;
 
-public enum SignalType {
-	AUTO_DETECT, //
-	CENTROID, //
-	PROFILE
+import org.eclipse.chemclipse.support.text.ILabel;
+
+public enum SignalType implements ILabel {
+
+	AUTO_DETECT("Auto-Detect"), //
+	CENTROID("Centroid"), //
+	PROFILE("Profile");
+
+	private String label = "";
+
+	private SignalType(String label) {
+
+		this.label = label;
+	}
+
+	@Override
+	public String label() {
+
+		return label;
+	}
 }
