@@ -13,6 +13,7 @@ package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.core;
 
 import java.util.Collection;
 
+import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.filter.XPassFilter;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.settings.LowPassFilterSettings;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.filter.IPeakFilter;
