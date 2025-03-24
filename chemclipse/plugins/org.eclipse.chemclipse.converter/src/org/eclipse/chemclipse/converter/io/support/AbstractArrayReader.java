@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2023 Lablicate GmbH.
+ * Copyright (c) 2012, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -15,19 +15,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.eclipse.chemclipse.logging.core.Logger;
 
 public abstract class AbstractArrayReader implements IArrayReader {
 
 	private static final Logger logger = Logger.getLogger(AbstractArrayReader.class);
-	//
+
 	private int position;
 	private byte[] data;
 	private int length;
-	private Map<Byte, String> charMap = new HashMap<>();
 
 	protected AbstractArrayReader(byte[] data) {
 
@@ -44,12 +41,12 @@ public abstract class AbstractArrayReader implements IArrayReader {
 
 		int length = (int)file.length();
 		byte[] data = new byte[length];
-		//
+
 		try (FileInputStream fileInputStream = new FileInputStream(file)) {
 			fileInputStream.read(data);
 			fileInputStream.close();
 		}
-		//
+
 		return data;
 	}
 
@@ -64,13 +61,6 @@ public abstract class AbstractArrayReader implements IArrayReader {
 		position = 0;
 		this.data = data;
 		this.length = data.length;
-		//
-		charMap.put((byte)-60, "Ä");
-		charMap.put((byte)-42, "Ö");
-		charMap.put((byte)-36, "Ü");
-		charMap.put((byte)-28, "ä");
-		charMap.put((byte)-10, "ö");
-		charMap.put((byte)-4, "ü");
 	}
 
 	@Override
@@ -377,57 +367,30 @@ public abstract class AbstractArrayReader implements IArrayReader {
 
 	// ------------------------------------------------------------------------------
 	/**
-	 * This method reads a given amount of bytes (in the way agilent has stored
-	 * them) and returns the specific result. For Example: If you want to read
-	 * the DataName from the binary file, you would call the method like this:
-	 * getBytes(61); The Data is stored in the way, that the first byte is an
-	 * value of the data length in the byte array. So, the method first reads
-	 * one byte to determine the length of data and afterwards reads the
-	 * specified 61 bytes and returns only a byte array of the determined
-	 * length.
+	 * This method reads length-prefixed (Pascal) string given amount of bytes
+	 * and returns the specific result. The Data is stored in the way, that
+	 * the first byte is an value of the data length in the byte array. So,
+	 * the method first reads one byte to determine the length of data and
+	 * afterwards returns only a byte array of the determined length.
 	 * 
-	 * @param readBytes
-	 * @return byte[]
+	 * @return String
 	 */
 	@Override
-	public String readBytesAsStringWithLengthIndex(int readBytes) {
+	public String readBytesAsStringWithLengthIndex() {
 
-		int length;
-		byte[] tmp = new byte[readBytes];
 		/*
 		 * The first byte defines the length of the string.
 		 */
-		length = data[position++];
+		int length = data[position++];
 		byte[] bytes = new byte[length];
 		/*
 		 * Reading the bytes from the array.
 		 */
-		for(int i = 0; i < readBytes; i++) {
-			tmp[i] = data[position++];
-		}
-		/*
-		 * Reading the bytes and copying only the length of the string from the
-		 * array.
-		 */
 		for(int i = 0; i < length; i++) {
-			bytes[i] = tmp[i];
+			bytes[i] = data[position++];
 		}
-		//
-		return getCorrectedString(bytes);
-	}
 
-	private String getCorrectedString(byte[] bytes) {
-
-		StringBuilder builder = new StringBuilder();
-		for(byte b : bytes) {
-			if(charMap.containsKey(b)) {
-				builder.append(charMap.get(b));
-			} else {
-				builder.append((char)b);
-			}
-		}
-		//
-		return builder.toString().trim();
+		return new String(bytes);
 	}
 
 	@Override
@@ -490,7 +453,7 @@ public abstract class AbstractArrayReader implements IArrayReader {
 		} catch(UnsupportedEncodingException e) {
 			logger.warn(e);
 		}
-		//
+
 		return result;
 	}
 }
