@@ -60,7 +60,7 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 	private static final String EDIT_TOOLTIP = "Edit the selected retention index entry.";
 	private static final String REMOVE_TOOLTIP = "Remove Selected Entries";
 	private static final String REMOVE_ALL_TOOLTIP = "Remove All Entries";
-	//
+
 	private static final String IMPORT_TITLE_FILE = "Import *.cal File";
 	private static final String IMPORT_TITLE = "Import Template";
 	private static final String EXPORT_TITLE = "Export Template";
@@ -71,22 +71,22 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 	private static final String MESSAGE_REMOVE_ALL = "Do you want to delete all marker?";
 	private static final String MESSAGE_EXPORT_SUCCESSFUL = "Marker have been exported successfully.";
 	private static final String MESSAGE_EXPORT_FAILED = "Failed to export the marker.";
-	//
+
 	private static final String TOOLTIP_ADJUST_POSITION = "the retention time adjust toolbar.";
 	private static final String IMAGE_ADJUST_POSITION = IApplicationImage.IMAGE_ADJUST_CHROMATOGRAMS;
-	//
+
 	private static final String CATEGORY = "Retention Indices";
 	private static final String DELETE = "Delete";
-	//
+
 	private AtomicReference<Button> buttonSearchControl = new AtomicReference<Button>();
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private AtomicReference<Button> buttonShiftControl = new AtomicReference<>();
 	private AtomicReference<RetentionTimeShifterUI> toolbarShift = new AtomicReference<>();
 	private AtomicReference<RetentionIndexTableViewerUI> tableViewer = new AtomicReference<>();
-	//
+
 	private List<Button> buttons = new ArrayList<>();
 	private List<Listener> listeners = new ArrayList<>();
-	//
+
 	private RetentionIndexMarker retentionIndexMarker = new RetentionIndexMarker();
 
 	public RetentionIndexMarkerEditor(Composite parent, int style) {
@@ -167,12 +167,12 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 		gridLayout.marginWidth = 0;
 		gridLayout.marginHeight = 0;
 		setLayout(gridLayout);
-		//
+
 		createToolbarMain(this);
 		createToolbarSearch(this);
 		createAdjustSection(this);
 		createTableSection(this);
-		//
+
 		initialize();
 	}
 
@@ -190,7 +190,7 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(9, false));
-		//
+
 		createButtonToggleSearch(composite);
 		createButtonToggleShift(composite);
 		add(createButtonAdd(composite));
@@ -256,13 +256,15 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 
 		RetentionIndexTableViewerUI retentionIndexListUI = new RetentionIndexTableViewerUI(parent, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 		Table table = retentionIndexListUI.getTable();
+		table.setFocus();
+
 		GridData gridData = new GridData(GridData.FILL_BOTH);
 		gridData.widthHint = 600;
 		gridData.heightHint = 400;
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.grabExcessVerticalSpace = true;
 		table.setLayoutData(gridData);
-		//
+
 		retentionIndexListUI.setUpdateListener(new IUpdateListenerUI() {
 
 			@Override
@@ -271,7 +273,7 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 				updateInput();
 			}
 		});
-		//
+
 		table.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -292,13 +294,13 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 				toolbarShift.get().setInput(settings);
 			}
 		});
-		//
+
 		Shell shell = retentionIndexListUI.getTable().getShell();
 		ITableSettings tableSettings = retentionIndexListUI.getTableSettings();
 		addDeleteMenuEntry(shell, tableSettings);
 		addKeyEventProcessors(shell, tableSettings);
 		retentionIndexListUI.applySettings(tableSettings);
-		//
+
 		tableViewer.set(retentionIndexListUI);
 	}
 
