@@ -1,0 +1,202 @@
+/*******************************************************************************
+ * Copyright (c) 2025 Lablicate GmbH.
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ * Lorenz Gerber - initial API and implementation
+ *******************************************************************************/
+package org.eclipse.chemclipse.xxd.process.supplier.pca.core;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.model.statistics.IVariable;
+import org.eclipse.chemclipse.model.statistics.Target;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IDataInputEntry;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.PeakSampleData;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Sample;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Samples;
+import org.eclipse.core.runtime.IProgressMonitor;
+
+public class PcaExtractionFileLongText implements IExtractionData {
+
+	private static final Logger logger = Logger.getLogger(PcaExtractionFileLongText.class);
+	public static final String DESCRIPTION = "PCA Data Long Format";
+	public static final String FILE_EXTENSION = ".pdl";
+	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
+	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
+	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
+	private final List<IDataInputEntry> dataInputEntries;
+
+	public PcaExtractionFileLongText(List<IDataInputEntry> dataInputEntries) {
+
+		this.dataInputEntries = dataInputEntries;
+	}
+
+	@Override
+	public Samples process(IProgressMonitor monitor) {
+
+		return extract();
+	}
+
+	private Samples extract() {
+
+		Map<String, Sample> sampleMap = new HashMap<>();
+		Map<String, Map<String, Target>> samplesVariablesMap = new HashMap<>();
+		ArrayList<LongDataLine> longImport = new ArrayList<>();
+		for(IDataInputEntry dataInputEntry : dataInputEntries) {
+			String inputFile = dataInputEntry.getInputFile();
+			File file = new File(inputFile);
+			if(file.exists()) {
+				try (FileReader reader = new FileReader(file)) {
+					/*
+					 * Data
+					 */
+					CSVFormat csvFormat = CSVFormat.TDF.builder().setHeader().build();
+					CSVParser parser = new CSVParser(reader, csvFormat);
+					for(CSVRecord record : parser.getRecords()) {
+						/*
+						 * Sample
+						 * GroupName
+						 * Classification
+						 * Description
+						 * Variables...
+						 */
+						int size = record.size();
+						if(size == 7) {
+							/*
+							 * Header
+							 */
+							String sampleName = record.get(0).trim();
+							String sampleNameLong = record.get(1).trim();
+							String variableName = record.get(2).trim();
+							String variableNameLong = record.get(3).trim();
+							Double value = Double.parseDouble(record.get(4).trim().replaceAll(",", "."));
+							String groupName = record.get(5).trim();
+							String description = record.get(6).trim();
+							//
+							LongDataLine line = new LongDataLine(sampleName, sampleNameLong, variableName, variableNameLong, value, groupName, description);
+							longImport.add(line);
+							if(!sampleName.isEmpty()) {
+								Sample sample = sampleMap.get(sampleName);
+								if(sample == null) {
+									sample = new Sample(sampleName, sampleNameLong, groupName, "0", description);
+									sampleMap.put(sampleName, sample);
+								}
+								Map<String, Target> variablesMap = samplesVariablesMap.get(sampleName);
+								if(variablesMap == null) {
+									variablesMap = new HashMap<>();
+									samplesVariablesMap.put(sampleName, variablesMap);
+								}
+								String targetName = variableName;
+								Target target = new Target(targetName);
+								target.setValue(Double.toString(value));
+								target.setDescription(variableNameLong);
+								variablesMap.put(targetName, target);
+							}
+						}
+					}
+					parser.close();
+				} catch(FileNotFoundException e) {
+					logger.warn(e);
+				} catch(IOException e) {
+					logger.warn(e);
+				}
+			}
+		}
+		/*
+		 * extract all variables
+		 */
+		List<Sample> sampleList = new ArrayList<>(sampleMap.values());
+		Collections.sort(sampleList, (s1, s2) -> s1.getSampleName().compareTo(s2.getSampleName()));
+		Samples samples = new Samples(sampleList);
+		List<? extends IVariable> variables = extractVariables(samplesVariablesMap);
+		samples.getVariables().addAll(variables);
+		setExtractData(samplesVariablesMap, samples);
+		return samples;
+	}
+
+	/**
+	 * Map - sample id, Map
+	 * Map - variable id, IVariable
+	 * 
+	 * @param samplesVariablesMap
+	 * @return
+	 */
+	private List<? extends IVariable> extractVariables(Map<String, Map<String, Target>> samplesVariablesMap) {
+
+		Map<String, Target> targets = new HashMap<>();
+		/*
+		 * Map the variables
+		 */
+		for(Map<String, Target> variableMap : samplesVariablesMap.values()) {
+			for(Target mappedVariable : variableMap.values()) {
+				//
+				String key = mappedVariable.getTarget();
+				Target target = targets.get(key);
+				if(target == null) {
+					target = new Target(key);
+					target.setDescription(mappedVariable.getDescription());
+					targets.put(key, target);
+				}
+			}
+		}
+		List<? extends IVariable> variables = new ArrayList<>(targets.values());
+		Collections.sort(variables, Comparable::compareTo);
+		return variables;
+	}
+
+	private void setExtractData(Map<String, Map<String, Target>> samplesVariablesMap, Samples samples) {
+
+		List<IVariable> variables = samples.getVariables();
+		for(Sample sample : samples.getSamples()) {
+			Iterator<IVariable> iterator = variables.iterator();
+			Map<String, Target> extractPeak = samplesVariablesMap.get(sample.getSampleName());
+			while(iterator.hasNext()) {
+				String variable = iterator.next().getValue();
+				Target target = extractPeak.get(variable);
+				boolean addEmpty = true;
+				if(target != null) {
+					try {
+						double value = Double.parseDouble(target.getValue());
+						PeakSampleData sampleData = new PeakSampleData(value, null);
+						sample.getSampleData().add(sampleData);
+						addEmpty = false;
+					} catch(NumberFormatException e) {
+						logger.warn(e);
+					}
+				}
+				if(addEmpty) {
+					PeakSampleData sampleData = new PeakSampleData();
+					sample.getSampleData().add(sampleData);
+				}
+			}
+		}
+	}
+
+	private Map<Integer, String> extractIndexMap(CSVParser parser) {
+
+		Map<Integer, String> indexMap = new HashMap<>();
+		Map<String, Integer> headerMap = parser.getHeaderMap();
+		for(Map.Entry<String, Integer> entry : headerMap.entrySet()) {
+			indexMap.put(entry.getValue(), entry.getKey());
+		}
+		return indexMap;
+	}
+}

@@ -20,6 +20,7 @@ import java.util.Objects;
 public abstract class AbstractSample<D extends ISampleData<?>> implements ISample {
 
 	private String sampleName = "";
+	private String sampleNameLong = "";
 	private String groupName = "";
 	private String classification = "";
 	private String description = "";
@@ -45,6 +46,18 @@ public abstract class AbstractSample<D extends ISampleData<?>> implements ISampl
 	public void setSampleName(String sampleName) {
 
 		this.sampleName = sampleName;
+	}
+
+	@Override
+	public String getSampleNameLong() {
+
+		return sampleNameLong;
+	}
+
+	@Override
+	public void setSampleNameLong(String sampleNameLong) {
+
+		this.sampleNameLong = sampleNameLong;
 	}
 
 	@Override

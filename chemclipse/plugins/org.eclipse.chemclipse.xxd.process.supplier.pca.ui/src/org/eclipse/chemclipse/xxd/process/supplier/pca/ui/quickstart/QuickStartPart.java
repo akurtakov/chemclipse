@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2024 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,6 +9,7 @@
  * Contributors:
  * Christoph Läubrich - initial API and implementation
  * Matthias Mailänder - add a tile for MALDI-TOF MS spectra
+ * Lorenz Gerber - add tile for long format text import
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.quickstart;
 
@@ -34,6 +35,7 @@ public class QuickStartPart {
 		tileContainer.addTaskTile(new PeakTileDefinition());
 		tileContainer.addTaskTile(new ScanTileDefinition());
 		tileContainer.addTaskTile(new FileTileDefinition());
+		tileContainer.addTaskTile(new FilesLongFormatTileDefinition());
 		tileContainer.addTaskTile(new MassSpectrumTileDefinition());
 		/*
 		 * Additional
