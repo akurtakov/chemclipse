@@ -14,17 +14,17 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.core;
 public class LongDataLine {
 
 	private String sampleName;
-	private String sampleNameLong;
+	private String sampleDetails;
 	private String variableName;
 	private String variableNameLong;
 	private double value;
 	private String groupName;
 	private String description;
 
-	public LongDataLine(String sampleName, String sampleNameLong, String variableName, String variableNameLong, double value, String groupName, String description) {
+	public LongDataLine(String sampleName, String sampleDetails, String variableName, String variableNameLong, double value, String groupName, String description) {
 
 		this.sampleName = sampleName;
-		this.sampleNameLong = sampleNameLong;
+		this.sampleDetails = sampleDetails;
 		this.variableName = variableName;
 		this.variableNameLong = variableNameLong;
 		this.value = value;
@@ -37,9 +37,9 @@ public class LongDataLine {
 		return sampleName;
 	}
 
-	public String getSampleNameLong() {
+	public String getSampleDetails() {
 
-		return sampleNameLong;
+		return sampleDetails;
 	}
 
 	public String getVariableName() {

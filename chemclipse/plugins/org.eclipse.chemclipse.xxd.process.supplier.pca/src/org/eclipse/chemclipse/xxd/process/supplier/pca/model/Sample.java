@@ -34,10 +34,10 @@ public class Sample extends AbstractSample<PeakSampleData> {
 		setDescription(description);
 	}
 
-	public Sample(String sampleName, String sampleNameLong, String groupName, String classification, String description) {
+	public Sample(String sampleName, String sampleDetails, String groupName, String classification, String description) {
 
 		super(sampleName);
-		setSampleNameLong(sampleNameLong);
+		setSampleDetails(sampleDetails);
 		setGroupName(groupName);
 		setClassification(classification);
 		setDescription(description);

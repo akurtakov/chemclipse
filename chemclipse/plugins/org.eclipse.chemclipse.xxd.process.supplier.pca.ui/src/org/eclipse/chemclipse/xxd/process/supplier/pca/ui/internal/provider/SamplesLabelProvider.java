@@ -22,7 +22,7 @@ import org.eclipse.swt.graphics.Image;
 public class SamplesLabelProvider extends AbstractChemClipseLabelProvider {
 
 	public static final String SAMPLE_NAME = "Sample Name";
-	public static final String SAMPLE_NAME_LONG = "Sample Name Long";
+	public static final String SAMPLE_NAME_LONG = "Sample Details";
 	public static final String USE = "Use";
 	public static final String PREDICT = "Predict";
 	public static final String COLOR = "Color";
@@ -90,7 +90,7 @@ public class SamplesLabelProvider extends AbstractChemClipseLabelProvider {
 					text = sample.getSampleName() != null ? sample.getSampleName() : "";
 					break;
 				case 1:
-					text = sample.getSampleNameLong() != null ? sample.getSampleNameLong() : "";
+					text = sample.getSampleDetails() != null ? sample.getSampleDetails() : "";
 					break;
 				case 2:
 					text = ""; // Checkbox

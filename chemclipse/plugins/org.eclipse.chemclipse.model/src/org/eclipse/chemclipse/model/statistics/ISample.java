@@ -20,9 +20,9 @@ public interface ISample {
 
 	void setSampleName(String sampleName);
 
-	String getSampleNameLong();
+	String getSampleDetails();
 
-	void setSampleNameLong(String sampleNameLong);
+	void setSampleDetails(String sampleDetails);
 
 	String getGroupName();
 

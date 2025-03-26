@@ -84,19 +84,19 @@ public class PcaExtractionFileLongText implements IExtractionData {
 							 * Header
 							 */
 							String sampleName = record.get(0).trim();
-							String sampleNameLong = record.get(1).trim();
+							String sampleDetails = record.get(1).trim();
 							String variableName = record.get(2).trim();
 							String variableNameLong = record.get(3).trim();
 							Double value = Double.parseDouble(record.get(4).trim().replaceAll(",", "."));
 							String groupName = record.get(5).trim();
 							String description = record.get(6).trim();
 							//
-							LongDataLine line = new LongDataLine(sampleName, sampleNameLong, variableName, variableNameLong, value, groupName, description);
+							LongDataLine line = new LongDataLine(sampleName, sampleDetails, variableName, variableNameLong, value, groupName, description);
 							longImport.add(line);
 							if(!sampleName.isEmpty()) {
 								Sample sample = sampleMap.get(sampleName);
 								if(sample == null) {
-									sample = new Sample(sampleName, sampleNameLong, groupName, "0", description);
+									sample = new Sample(sampleName, sampleDetails, groupName, "0", description);
 									sampleMap.put(sampleName, sample);
 								}
 								Map<String, Target> variablesMap = samplesVariablesMap.get(sampleName);
