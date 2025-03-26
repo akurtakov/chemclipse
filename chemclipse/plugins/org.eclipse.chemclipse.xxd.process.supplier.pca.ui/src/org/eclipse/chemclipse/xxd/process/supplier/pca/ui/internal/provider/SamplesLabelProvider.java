@@ -22,6 +22,7 @@ import org.eclipse.swt.graphics.Image;
 public class SamplesLabelProvider extends AbstractChemClipseLabelProvider {
 
 	public static final String SAMPLE_NAME = "Sample Name";
+	public static final String SAMPLE_NAME_LONG = "Sample Details";
 	public static final String USE = "Use";
 	public static final String PREDICT = "Predict";
 	public static final String COLOR = "Color";
@@ -29,10 +30,11 @@ public class SamplesLabelProvider extends AbstractChemClipseLabelProvider {
 	public static final String CLASSIFICATION = "Classification";
 	public static final String DESCRIPTION = "Description";
 	//
-	public static final int INDEX_COLOR = 3;
+	public static final int INDEX_COLOR = 4;
 	//
 	public static String[] TITLES = {//
 			SAMPLE_NAME, //
+			SAMPLE_NAME_LONG, //
 			USE, //
 			PREDICT, //
 			COLOR, //
@@ -42,7 +44,8 @@ public class SamplesLabelProvider extends AbstractChemClipseLabelProvider {
 	};
 	//
 	public static int[] BOUNDS = {//
-			300, //
+			150, //
+			250, //
 			30, //
 			30, //
 			30, //
@@ -56,7 +59,7 @@ public class SamplesLabelProvider extends AbstractChemClipseLabelProvider {
 
 		if(columnIndex == 0) {
 			return getImage(element);
-		} else if(columnIndex == 1) {
+		} else if(columnIndex == 2) {
 			if(element instanceof ISample sample) {
 				if(sample.isSelected()) {
 					return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SELECTED, IApplicationImageProvider.SIZE_16x16);
@@ -64,7 +67,7 @@ public class SamplesLabelProvider extends AbstractChemClipseLabelProvider {
 					return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DESELECTED, IApplicationImageProvider.SIZE_16x16);
 				}
 			}
-		} else if(columnIndex == 2) {
+		} else if(columnIndex == 3) {
 			if(element instanceof ISample sample) {
 				if(sample.isPredicted()) {
 					return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SELECTED, IApplicationImageProvider.SIZE_16x16);
@@ -87,21 +90,24 @@ public class SamplesLabelProvider extends AbstractChemClipseLabelProvider {
 					text = sample.getSampleName() != null ? sample.getSampleName() : "";
 					break;
 				case 1:
-					text = ""; // Checkbox
+					text = sample.getSampleDetails() != null ? sample.getSampleDetails() : "";
 					break;
 				case 2:
 					text = ""; // Checkbox
 					break;
 				case 3:
-					text = ""; // Color
+					text = ""; // Checkbox
 					break;
 				case 4:
-					text = sample.getGroupName() != null ? sample.getGroupName() : "";
+					text = ""; // Color
 					break;
 				case 5:
-					text = sample.getClassification() != null ? sample.getClassification() : "";
+					text = sample.getGroupName() != null ? sample.getGroupName() : "";
 					break;
 				case 6:
+					text = sample.getClassification() != null ? sample.getClassification() : "";
+					break;
+				case 7:
 					text = sample.getDescription() != null ? sample.getDescription() : "";
 					break;
 			}
