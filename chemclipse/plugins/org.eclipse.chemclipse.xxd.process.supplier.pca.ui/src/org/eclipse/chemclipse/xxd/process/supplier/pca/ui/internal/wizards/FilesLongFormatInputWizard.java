@@ -55,7 +55,12 @@ public class FilesLongFormatInputWizard extends Wizard implements IInputWizard {
 	@Override
 	public List<IDataInputEntry> getDataInputEntries() {
 
-		return filesLongFormatSettingsWizardPage.getDataInputEntries();
+		return filesLongFormatSettingsWizardPage.getMainDataInputEntries();
+	}
+
+	public List<IDataInputEntry> getFilterDataInputEntries() {
+
+		return filesLongFormatSettingsWizardPage.getFilterDataInputEntries();
 	}
 
 	@Override
@@ -74,9 +79,10 @@ public class FilesLongFormatInputWizard extends Wizard implements IInputWizard {
 	public boolean performFinish() {
 
 		List<IDataInputEntry> dataInputEntries = getDataInputEntries();
+		List<IDataInputEntry> filterDataInputEntries = getFilterDataInputEntries();
 		File file = getFile(dataInputEntries);
 		if(file != null && file.getName().endsWith(PcaExtractionFileLongText.FILE_EXTENSION)) {
-			extractionData = new PcaExtractionFileLongText(dataInputEntries);
+			extractionData = new PcaExtractionFileLongText(dataInputEntries, filterDataInputEntries);
 			return true;
 		}
 		return false;
