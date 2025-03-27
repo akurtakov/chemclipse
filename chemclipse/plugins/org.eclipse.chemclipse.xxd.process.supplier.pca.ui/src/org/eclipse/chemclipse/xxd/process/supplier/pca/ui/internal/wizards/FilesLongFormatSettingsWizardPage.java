@@ -24,6 +24,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.core.PcaExtractionFileLon
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Algorithm;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.DataInputEntry;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IDataInputEntry;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.preferences.PreferenceSupplier;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
@@ -44,8 +45,10 @@ import org.eclipse.swt.widgets.Text;
 public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPage {
 
 	private File file;
-	private Text textFile;
+	private Text dataTextFile;
+	private Text filterTextFile;
 	private Algorithm[] algorithms = Algorithm.values();
+	private ISamplesPCA<?, ?> samples;
 
 	public FilesLongFormatSettingsWizardPage() {
 
@@ -74,20 +77,36 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 		createLabel(composite, "Algorithm:");
 		createComboViewerAlgorithm(composite);
 		//
-		createLabel(composite, "Main File Data Matrix:");
-		textFile = createTextFile(composite);
-		createButtonSelectFile(composite);
+		createLabel(composite, "Main Data File:");
+		dataTextFile = createTextMainFile(composite);
+		createButtonSelectDataFile(composite);
+		//
+		createLabel(composite, "Filter Data File:");
+		filterTextFile = createTextFilterFile(composite);
+		createButtonSelectFilterFile(composite);
 		//
 		setControl(composite);
 	}
 
-	public List<IDataInputEntry> getDataInputEntries() {
+	public List<IDataInputEntry> getMainDataInputEntries() {
 
 		List<IDataInputEntry> dataInputEntries = new ArrayList<>();
-		String path = textFile.getText().trim();
-		File file = new File(path);
-		if(file.exists()) {
-			DataInputEntry dataInputEntry = new DataInputEntry(path);
+		String dataPath = dataTextFile.getText().trim();
+		File dataFile = new File(dataPath);
+		if(dataFile.exists()) {
+			DataInputEntry dataInputEntry = new DataInputEntry(dataPath);
+			dataInputEntries.add(dataInputEntry);
+		}
+		return dataInputEntries;
+	}
+
+	public List<IDataInputEntry> getFilterDataInputEntries() {
+
+		List<IDataInputEntry> dataInputEntries = new ArrayList<>();
+		String filterPath = filterTextFile.getText().trim();
+		File filterFile = new File(filterPath);
+		if(filterFile.exists()) {
+			DataInputEntry dataInputEntry = new DataInputEntry(filterPath);
 			dataInputEntries.add(dataInputEntry);
 		}
 		return dataInputEntries;
@@ -162,11 +181,11 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 		return comboViewer;
 	}
 
-	private Text createTextFile(Composite parent) {
+	private Text createTextMainFile(Composite parent) {
 
 		Text text = new Text(parent, SWT.BORDER);
 		text.setText("");
-		text.setToolTipText("Path to data matrix file.");
+		text.setToolTipText("Path to long format data  file.");
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		//
 		if(file != null) {
@@ -178,7 +197,23 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 		return text;
 	}
 
-	private void createButtonSelectFile(Composite parent) {
+	private Text createTextFilterFile(Composite parent) {
+
+		Text text = new Text(parent, SWT.BORDER);
+		text.setText("");
+		text.setToolTipText("Path to long format filter file.");
+		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		//
+		if(file != null) {
+			text.setText(file.getAbsolutePath());
+		} else {
+			text.setText("");
+		}
+		//
+		return text;
+	}
+
+	private void createButtonSelectDataFile(Composite parent) {
 
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
@@ -199,7 +234,35 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 					File file = new File(path);
 					if(file.exists()) {
 						PreferenceSupplier.setPathImportFile(fileDialog.getFilterPath());
-						textFile.setText(file.getAbsolutePath());
+						dataTextFile.setText(file.getAbsolutePath());
+					}
+				}
+			}
+		});
+	}
+
+	private void createButtonSelectFilterFile(Composite parent) {
+
+		Button button = new Button(parent, SWT.PUSH);
+		button.setText("");
+		button.setToolTipText("Select the filter data file.");
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_FILE, IApplicationImageProvider.SIZE_16x16));
+		button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
+				fileDialog.setText("Import");
+				fileDialog.setFilterExtensions(new String[]{PcaExtractionFileLongText.FILTER_EXTENSION + ";"});
+				fileDialog.setFilterNames(new String[]{PcaExtractionFileLongText.FILTER_NAME + ";"});
+				fileDialog.setFilterPath(PreferenceSupplier.getPathImportFile());
+				String path = fileDialog.open();
+				if(path != null) {
+					File file = new File(path);
+					if(file.exists()) {
+						PreferenceSupplier.setPathImportFile(fileDialog.getFilterPath());
+						filterTextFile.setText(file.getAbsolutePath());
 					}
 				}
 			}

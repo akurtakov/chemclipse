@@ -43,10 +43,12 @@ public class PcaExtractionFileLongText implements IExtractionData {
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
 	private final List<IDataInputEntry> dataInputEntries;
+	private final List<IDataInputEntry> filterDataInputEntries;
 
-	public PcaExtractionFileLongText(List<IDataInputEntry> dataInputEntries) {
+	public PcaExtractionFileLongText(List<IDataInputEntry> dataInputEntries, List<IDataInputEntry> filterDataInputEntries) {
 
 		this.dataInputEntries = dataInputEntries;
+		this.filterDataInputEntries = filterDataInputEntries;
 	}
 
 	@Override
@@ -59,7 +61,22 @@ public class PcaExtractionFileLongText implements IExtractionData {
 
 		Map<String, Sample> sampleMap = new HashMap<>();
 		Map<String, Map<String, Target>> samplesVariablesMap = new HashMap<>();
-		ArrayList<LongDataLine> longImport = new ArrayList<>();
+		readFile(dataInputEntries, sampleMap, samplesVariablesMap, "0");
+		readFile(filterDataInputEntries, sampleMap, samplesVariablesMap, "1");
+		/*
+		 * extract all variables
+		 */
+		List<Sample> sampleList = new ArrayList<>(sampleMap.values());
+		Collections.sort(sampleList, (s1, s2) -> s1.getSampleName().compareTo(s2.getSampleName()));
+		Samples samples = new Samples(sampleList);
+		List<? extends IVariable> variables = extractVariables(samplesVariablesMap);
+		samples.getVariables().addAll(variables);
+		setExtractData(samplesVariablesMap, samples);
+		return samples;
+	}
+
+	private void readFile(List<IDataInputEntry> dataInputEntries, Map<String, Sample> sampleMap, Map<String, Map<String, Target>> samplesVariablesMap, String classification) {
+
 		for(IDataInputEntry dataInputEntry : dataInputEntries) {
 			String inputFile = dataInputEntry.getInputFile();
 			File file = new File(inputFile);
@@ -71,13 +88,6 @@ public class PcaExtractionFileLongText implements IExtractionData {
 					CSVFormat csvFormat = CSVFormat.TDF.builder().setHeader().build();
 					CSVParser parser = new CSVParser(reader, csvFormat);
 					for(CSVRecord record : parser.getRecords()) {
-						/*
-						 * Sample
-						 * GroupName
-						 * Classification
-						 * Description
-						 * Variables...
-						 */
 						int size = record.size();
 						if(size == 7) {
 							/*
@@ -90,13 +100,10 @@ public class PcaExtractionFileLongText implements IExtractionData {
 							Double value = Double.parseDouble(record.get(4).trim().replaceAll(",", "."));
 							String groupName = record.get(5).trim();
 							String description = record.get(6).trim();
-							//
-							LongDataLine line = new LongDataLine(sampleName, sampleDetails, variableName, variableNameLong, value, groupName, description);
-							longImport.add(line);
 							if(!sampleName.isEmpty()) {
 								Sample sample = sampleMap.get(sampleName);
 								if(sample == null) {
-									sample = new Sample(sampleName, sampleDetails, groupName, "0", description);
+									sample = new Sample(sampleName, sampleDetails, groupName, classification, description);
 									sampleMap.put(sampleName, sample);
 								}
 								Map<String, Target> variablesMap = samplesVariablesMap.get(sampleName);
@@ -120,16 +127,6 @@ public class PcaExtractionFileLongText implements IExtractionData {
 				}
 			}
 		}
-		/*
-		 * extract all variables
-		 */
-		List<Sample> sampleList = new ArrayList<>(sampleMap.values());
-		Collections.sort(sampleList, (s1, s2) -> s1.getSampleName().compareTo(s2.getSampleName()));
-		Samples samples = new Samples(sampleList);
-		List<? extends IVariable> variables = extractVariables(samplesVariablesMap);
-		samples.getVariables().addAll(variables);
-		setExtractData(samplesVariablesMap, samples);
-		return samples;
 	}
 
 	/**
@@ -188,15 +185,5 @@ public class PcaExtractionFileLongText implements IExtractionData {
 				}
 			}
 		}
-	}
-
-	private Map<Integer, String> extractIndexMap(CSVParser parser) {
-
-		Map<Integer, String> indexMap = new HashMap<>();
-		Map<String, Integer> headerMap = parser.getHeaderMap();
-		for(Map.Entry<String, Integer> entry : headerMap.entrySet()) {
-			indexMap.put(entry.getValue(), entry.getKey());
-		}
-		return indexMap;
 	}
 }
