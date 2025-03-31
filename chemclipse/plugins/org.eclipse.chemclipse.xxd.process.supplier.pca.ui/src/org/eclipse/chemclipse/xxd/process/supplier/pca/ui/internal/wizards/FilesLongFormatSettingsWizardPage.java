@@ -48,6 +48,7 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 	private Text dataTextFile;
 	private Text filterTextFile;
 	private Algorithm[] algorithms = Algorithm.values();
+	@SuppressWarnings("unused")
 	private ISamplesPCA<?, ?> samples;
 
 	public FilesLongFormatSettingsWizardPage() {
