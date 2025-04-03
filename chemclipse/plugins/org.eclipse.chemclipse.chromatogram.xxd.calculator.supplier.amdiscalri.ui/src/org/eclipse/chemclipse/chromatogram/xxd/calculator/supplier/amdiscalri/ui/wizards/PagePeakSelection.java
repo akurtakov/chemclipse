@@ -105,7 +105,7 @@ public class PagePeakSelection extends AbstractExtendedWizardPage {
 					List<IPeak> selectedPeaks = new ArrayList<>();
 					IPeak selectedPeak = peaks.get(0);
 					selectedPeaks.add(selectedPeak);
-					chromatogramSelection.getSelectedPeaks().add(selectedPeak);
+					chromatogramSelection.setSelectedPeaks(selectedPeaks);
 					updateChromatogramChart(chromatogramSelection);
 					updateSelectedPeaksInChart(selectedPeaks);
 					if(selectedPeak instanceof IPeakMSD peakMSD) {
