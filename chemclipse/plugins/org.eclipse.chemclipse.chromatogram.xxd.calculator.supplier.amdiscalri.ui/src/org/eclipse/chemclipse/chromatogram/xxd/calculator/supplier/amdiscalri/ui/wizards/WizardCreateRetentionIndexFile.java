@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  * Christoph Läubrich - adjust to wizard API
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.wizards;
@@ -16,21 +16,15 @@ import java.io.File;
 import java.util.Date;
 
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.io.CalibrationFileWriter;
-import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.preferences.PreferenceSupplier;
-import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.Activator;
 import org.eclipse.chemclipse.csd.converter.chromatogram.ChromatogramConverterCSD;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.csd.model.core.selection.IChromatogramSelectionCSD;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.eclipse.chemclipse.support.ui.wizards.AbstractFileWizard;
-import org.eclipse.chemclipse.support.ui.wizards.ChromatogramWizardElements;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.wizards.InputEntriesWizardPage;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.wizards.InputWizardSettings;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
@@ -52,8 +46,6 @@ public class WizardCreateRetentionIndexFile extends AbstractFileWizard {
 	private static final String CALIBRATION_FILE_EXTENSION = ".cal";
 	//
 	private PageCalibrationSettings pageCalibrationSettings;
-	private InputEntriesWizardPage pageInputEntriesMSD;
-	private InputEntriesWizardPage pageInputEntriesCSD;
 	private PagePeakSelection pagePeakSelection;
 	private PagePeakAssignment pagePeakAssignment;
 	private PageCalibrationTable pageCalibrationTable;
@@ -67,30 +59,11 @@ public class WizardCreateRetentionIndexFile extends AbstractFileWizard {
 	public void addPages() {
 
 		super.addPages();
-		/*
-		 * Pages must implement IExtendedWizardPage / extend AbstractExtendedWizardPage
-		 */
-		InputWizardSettings inputWizardSettingsMSD = InputWizardSettings.create(Activator.getDefault().getPreferenceStore(), PreferenceSupplier.P_FILTER_PATH_MODELS_MSD, DataType.MSD);
-		inputWizardSettingsMSD.setTitle("Open Chromatogram (MSD) Files");
-		inputWizardSettingsMSD.setDescription("Select a chromatogram/chromatograms file to open.");
-		//
-		InputWizardSettings inputWizardSettingsCSD = InputWizardSettings.create(Activator.getDefault().getPreferenceStore(), PreferenceSupplier.P_FILTER_PATH_MODELS_CSD, DataType.CSD);
-		inputWizardSettingsCSD.setTitle("Open Chromatogram (CSD) Files");
-		inputWizardSettingsCSD.setDescription("Select a chromatogram/chromatograms file to open.");
-		//
-		pageCalibrationSettings = new PageCalibrationSettings(wizardElements);
-		pageInputEntriesMSD = new InputEntriesWizardPage(inputWizardSettingsMSD);
-		pageInputEntriesCSD = new InputEntriesWizardPage(inputWizardSettingsCSD);
-		pagePeakSelection = new PagePeakSelection(wizardElements);
-		pagePeakAssignment = new PagePeakAssignment(wizardElements);
-		pageCalibrationTable = new PageCalibrationTable(wizardElements);
-		//
-		addPage(pageCalibrationSettings);
-		addPage(pageInputEntriesMSD);
-		addPage(pageInputEntriesCSD);
-		addPage(pagePeakSelection);
-		addPage(pagePeakAssignment);
-		addPage(pageCalibrationTable);
+
+		addPage(pageCalibrationSettings = new PageCalibrationSettings(wizardElements));
+		addPage(pagePeakSelection = new PagePeakSelection(wizardElements));
+		addPage(pagePeakAssignment = new PagePeakAssignment(wizardElements));
+		addPage(pageCalibrationTable = new PageCalibrationTable(wizardElements));
 	}
 
 	@Override
@@ -99,32 +72,7 @@ public class WizardCreateRetentionIndexFile extends AbstractFileWizard {
 		IWizardPage nextPage = super.getNextPage(page);
 		//
 		if(page == pageCalibrationSettings) {
-			/*
-			 * Show MSD or file selection.
-			 */
-			if(wizardElements.isUseMassSpectrometryData()) {
-				nextPage = pageInputEntriesMSD;
-			} else {
-				nextPage = pageInputEntriesCSD;
-			}
-		} else if(page == pageInputEntriesMSD) {
 			nextPage = pagePeakSelection;
-			wizardElements.clearSelectedChromatograms();
-			ChromatogramWizardElements elements = new ChromatogramWizardElements();
-			for(File file : pageInputEntriesMSD.getSelectedItems().keySet()) {
-				elements.addSelectedChromatogram(file.getAbsolutePath());
-			}
-			wizardElements.addElements(elements);
-			pageInputEntriesMSD.savePath();
-		} else if(page == pageInputEntriesCSD) {
-			nextPage = pagePeakSelection;
-			wizardElements.clearSelectedChromatograms();
-			ChromatogramWizardElements elements = new ChromatogramWizardElements();
-			for(File file : pageInputEntriesCSD.getSelectedItems().keySet()) {
-				elements.addSelectedChromatogram(file.getAbsolutePath());
-			}
-			wizardElements.addElements(elements);
-			pageInputEntriesCSD.savePath();
 		} else if(page == pagePeakSelection) {
 			nextPage = pagePeakAssignment;
 		} else if(page == pagePeakAssignment) {
@@ -139,17 +87,9 @@ public class WizardCreateRetentionIndexFile extends AbstractFileWizard {
 
 	private void setPreviousPages() {
 
-		if(wizardElements.isUseMassSpectrometryData()) {
-			pagePeakSelection.setPreviousPage(pageInputEntriesMSD);
-		} else {
-			pagePeakSelection.setPreviousPage(pageInputEntriesCSD);
-		}
-		//
+		pagePeakSelection.setPreviousPage(pageCalibrationSettings);
 		pageCalibrationTable.setPreviousPage(pagePeakAssignment);
 		pagePeakAssignment.setPreviousPage(pagePeakSelection);
-		//
-		pageInputEntriesMSD.setPreviousPage(pageCalibrationSettings);
-		pageInputEntriesCSD.setPreviousPage(pageCalibrationSettings);
 	}
 
 	@Override
@@ -157,11 +97,7 @@ public class WizardCreateRetentionIndexFile extends AbstractFileWizard {
 
 		boolean canFinish = pageCalibrationSettings.canFinish();
 		if(canFinish) {
-			if(wizardElements.isUseMassSpectrometryData()) {
-				canFinish = !wizardElements.getSelectedChromatograms().isEmpty();
-			} else {
-				canFinish = !wizardElements.getSelectedChromatograms().isEmpty();
-			}
+			canFinish = !wizardElements.getSelectedChromatograms().isEmpty();
 		}
 		if(canFinish) {
 			canFinish = pagePeakSelection.canFinish();

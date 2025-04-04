@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  * Alexander Kerner - Generics
  *******************************************************************************/
 package org.eclipse.chemclipse.model.selection;
@@ -256,7 +256,7 @@ public abstract class AbstractChromatogramSelection implements IChromatogramSele
 			selectedPeaks.clear();
 		}
 
-		return Collections.unmodifiableList(selectedPeaks);
+		return selectedPeaks;
 	}
 
 	@Override

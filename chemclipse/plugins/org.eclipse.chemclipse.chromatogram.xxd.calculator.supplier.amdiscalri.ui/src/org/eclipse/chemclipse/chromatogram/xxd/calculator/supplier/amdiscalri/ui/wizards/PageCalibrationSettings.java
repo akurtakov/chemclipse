@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2024 Lablicate GmbH.
+ * Copyright (c) 2016, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,13 +7,23 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.wizards;
 
 import java.io.File;
+import java.util.Set;
 
+import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.preferences.PreferenceSupplier;
+import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.Activator;
+import org.eclipse.chemclipse.model.types.DataType;
+import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.support.ui.wizards.AbstractExtendedWizardPage;
+import org.eclipse.chemclipse.support.ui.wizards.ChromatogramWizardElements;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.wizards.InputEntriesWizard;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.wizards.InputWizardSettings;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -87,6 +97,7 @@ public class PageCalibrationSettings extends AbstractExtendedWizardPage {
 		createButtonMSDField(composite);
 		createButtonCSDField(composite);
 		createPeakIdentificationField(composite);
+		createDataFileSection(composite);
 		//
 		validateSelection();
 		setControl(composite);
@@ -124,7 +135,9 @@ public class PageCalibrationSettings extends AbstractExtendedWizardPage {
 		});
 		//
 		buttonSelectCalibrationFile = new Button(composite, SWT.PUSH);
-		buttonSelectCalibrationFile.setText("Select *.cal");
+		buttonSelectCalibrationFile.setText("");
+		buttonSelectCalibrationFile.setToolTipText("Select *.cal");
+		buttonSelectCalibrationFile.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_FILE_ADD, IApplicationImage.SIZE_16x16));
 		buttonSelectCalibrationFile.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -142,6 +155,39 @@ public class PageCalibrationSettings extends AbstractExtendedWizardPage {
 					wizardElements.setPathRetentionIndexFile(pathRetentionIndexFile);
 					validateSelection();
 				}
+			}
+		});
+	}
+
+	private void createDataFileSection(Composite parent) {
+
+		Text text = new Text(parent, SWT.BORDER | SWT.READ_ONLY);
+		text.setText("");
+		text.setToolTipText("Data File");
+		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+
+		Button button = new Button(parent, SWT.PUSH);
+		button.setText("");
+		button.setToolTipText("Select the chromatogram.");
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_FILE_ADD, IApplicationImage.SIZE_16x16));
+		button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				DataType dataType = wizardElements.isUseMassSpectrometryData() ? DataType.MSD : DataType.CSD;
+				IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+				InputWizardSettings inputWizardSettings = InputWizardSettings.create(preferenceStore, PreferenceSupplier.P_FILTER_PATH_MODELS, dataType);
+				inputWizardSettings.setTitle("Import Chromatograms");
+				inputWizardSettings.setDescription("Select chromatograms files to be imported.");
+				Set<File> files = InputEntriesWizard.openWizard(getShell(), inputWizardSettings).keySet();
+				wizardElements.clearSelectedChromatograms();
+				ChromatogramWizardElements elements = new ChromatogramWizardElements();
+				for(File file : files) {
+					elements.addSelectedChromatogram(file.getAbsolutePath());
+					text.setText(file.getAbsolutePath());
+				}
+				wizardElements.addElements(elements);
 			}
 		});
 	}

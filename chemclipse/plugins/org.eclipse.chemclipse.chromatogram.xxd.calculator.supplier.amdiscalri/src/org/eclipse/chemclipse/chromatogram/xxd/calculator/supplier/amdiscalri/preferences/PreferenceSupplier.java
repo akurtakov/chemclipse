@@ -75,6 +75,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	 */
 	public static final String P_FILTER_PATH_INDEX_FILES = "filterPathIndexFiles";
 	public static final String DEF_FILTER_PATH_INDEX_FILES = "";
+	public static final String P_FILTER_PATH_MODELS = "filterPathModels";
+	public static final String DEF_FILTER_PATH_MODELS = "";
 	public static final String P_FILTER_PATH_MODELS_MSD = "filterPathModelsMSD";
 	public static final String DEF_FILTER_PATH_MODELS_MSD = "";
 	public static final String P_FILTER_PATH_MODELS_CSD = "filterPathModelsCSD";
@@ -118,6 +120,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_STANDARD_DIRECTORY_IMPORT_CALIBRATION_FILES, DEF_STANDARD_DIRECTORY_IMPORT_CALIBRATION_FILES);
 		//
 		putDefault(P_FILTER_PATH_INDEX_FILES, DEF_FILTER_PATH_INDEX_FILES);
+		putDefault(P_FILTER_PATH_MODELS, DEF_FILTER_PATH_MODELS);
 		putDefault(P_FILTER_PATH_MODELS_MSD, DEF_FILTER_PATH_MODELS_MSD);
 		putDefault(P_FILTER_PATH_MODELS_CSD, DEF_FILTER_PATH_MODELS_CSD);
 		putDefault(P_LIST_PATH_IMPORT_FILE, DEF_LIST_PATH_IMPORT_FILE);
