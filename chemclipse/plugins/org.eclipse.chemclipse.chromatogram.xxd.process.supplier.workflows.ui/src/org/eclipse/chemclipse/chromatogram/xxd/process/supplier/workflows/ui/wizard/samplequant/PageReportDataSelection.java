@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2024 Lablicate GmbH.
+ * Copyright (c) 2016, 2025 Lablicate GmbH.
  *
  * All rights reserved.
  * 
@@ -222,7 +222,7 @@ public class PageReportDataSelection extends AbstractExtendedWizardPage {
 
 				Shell shell = Display.getCurrent().getActiveShell();
 				FileDialog fileDialog = new FileDialog(shell, SWT.READ_ONLY);
-				fileDialog.setText("Selec the additional report data.");
+				fileDialog.setText("Select the additional report data.");
 				fileDialog.setFilterExtensions(new String[]{"*.txt"});
 				fileDialog.setFilterNames(new String[]{"targets.txt"});
 				fileDialog.setFilterPath(PreferenceSupplier.INSTANCE().getPreferences().get(PreferenceSupplier.P_SAMPLEQUANT_FILTER_PATH_TARGETS, PreferenceSupplier.DEF_SAMPLEQUANT_FILTER_PATH_TARGETS));

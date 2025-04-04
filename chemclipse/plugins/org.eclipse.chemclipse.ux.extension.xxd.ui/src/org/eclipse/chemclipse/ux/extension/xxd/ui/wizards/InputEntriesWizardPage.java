@@ -25,7 +25,6 @@ import org.eclipse.chemclipse.ux.extension.ui.swt.DataExplorerTreeRoot;
 import org.eclipse.chemclipse.ux.extension.ui.swt.DataExplorerTreeUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.MultiDataExplorerTreeUI;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.wizard.IWizard;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -34,12 +33,9 @@ public class InputEntriesWizardPage extends WizardPage {
 
 	private final class WizardMultiDataExplorerTreeUI extends MultiDataExplorerTreeUI {
 
-		private InputEntriesWizardPage page;
-
-		private WizardMultiDataExplorerTreeUI(Composite parent, IPreferenceStore preferenceStore, InputEntriesWizardPage page) {
+		private WizardMultiDataExplorerTreeUI(Composite parent, IPreferenceStore preferenceStore) {
 
 			super(parent, SWT.NONE, new DataExplorerTreeSettings(preferenceStore));
-			this.page = page;
 		}
 
 		@Override
@@ -71,9 +67,9 @@ public class InputEntriesWizardPage extends WizardPage {
 		@Override
 		protected void handleDoubleClick(File file) {
 
-			IWizard wizard = page.getWizard();
-			if(wizard.canFinish()) {
-				wizard.performFinish();
+			if(!selectedItems.isEmpty()) {
+				setPageComplete(true);
+				getWizard().getContainer().showPage(getNextPage());
 			}
 		}
 	}
@@ -113,7 +109,7 @@ public class InputEntriesWizardPage extends WizardPage {
 	@Override
 	public void createControl(Composite parent) {
 
-		multiDataExplorerTreeUI = new WizardMultiDataExplorerTreeUI(parent, inputWizardSettings.getPreferenceStore(), this);
+		multiDataExplorerTreeUI = new WizardMultiDataExplorerTreeUI(parent, inputWizardSettings.getPreferenceStore());
 		multiDataExplorerTreeUI.setSupplierFileIdentifier(inputWizardSettings.getSupplierFileEditorSupportList());
 		multiDataExplorerTreeUI.expandLastDirectoryPath();
 		//

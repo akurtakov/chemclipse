@@ -29,7 +29,7 @@ public abstract class AbstractChromatogramSelection implements IChromatogramSele
 	private int stopRetentionTime;
 	private float startAbundance;
 	private float stopAbundance;
-	//
+
 	private List<IPeak> selectedPeaks = new ArrayList<>();
 	private List<IScan> selectedIdentifiedScans = new ArrayList<>();
 	/*
@@ -47,7 +47,7 @@ public abstract class AbstractChromatogramSelection implements IChromatogramSele
 		if(chromatogram == null) {
 			throw new ChromatogramIsNullException("The chromatogram must not be null.");
 		}
-		//
+
 		this.chromatogram = chromatogram;
 		overlaySelected = true;
 		lockOffset = false;
@@ -220,7 +220,7 @@ public abstract class AbstractChromatogramSelection implements IChromatogramSele
 		this.stopRetentionTime = stopRetentionTime;
 		this.startAbundance = startAbundance;
 		this.stopAbundance = stopAbundance;
-		//
+
 		if(validate) {
 			setStartRetentionTime(startRetentionTime, false);
 			setStopRetentionTime(stopRetentionTime, false);
@@ -245,7 +245,7 @@ public abstract class AbstractChromatogramSelection implements IChromatogramSele
 		if(!selectedPeaks.isEmpty()) {
 			return validatePeak(selectedPeaks.get(0));
 		}
-		//
+
 		return null;
 	}
 
@@ -281,7 +281,7 @@ public abstract class AbstractChromatogramSelection implements IChromatogramSele
 		if(!selectedIdentifiedScans.isEmpty()) {
 			return selectedIdentifiedScans.get(0);
 		}
-		//
+
 		return null;
 	}
 

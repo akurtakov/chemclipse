@@ -47,12 +47,12 @@ import org.eclipse.swt.widgets.TableItem;
 public class PagePeakSelection extends AbstractExtendedWizardPage {
 
 	private static final Logger logger = Logger.getLogger(PagePeakSelection.class);
-	//
+
 	private RetentionIndexWizardElements wizardElements;
 	private ChromatogramPeakChart chromatogramPeakChart;
 	private ExtendedScanChartUI extendedScanChartUI;
 	private PeakTableRetentionIndexViewerUI peakTableViewerUI;
-	//
+
 	private static final int PEAK_SHOW = 1;
 	private static final int PEAKS_DELETE = 2;
 
@@ -98,14 +98,14 @@ public class PagePeakSelection extends AbstractExtendedWizardPage {
 				Composite parent = extendedScanChartUI.getParent();
 				parent.layout(false);
 				parent.redraw();
-				//
+
 				List<? extends IPeak> peaks = chromatogram.getPeaks();
 				peakTableViewerUI.setInput(peaks);
 				if(!peaks.isEmpty()) {
 					List<IPeak> selectedPeaks = new ArrayList<>();
 					IPeak selectedPeak = peaks.get(0);
 					selectedPeaks.add(selectedPeak);
-					chromatogramSelection.getSelectedPeaks().add(selectedPeak);
+					chromatogramSelection.setSelectedPeaks(selectedPeaks);
 					updateChromatogramChart(chromatogramSelection);
 					updateSelectedPeaksInChart(selectedPeaks);
 					if(selectedPeak instanceof IPeakMSD peakMSD) {
@@ -123,11 +123,11 @@ public class PagePeakSelection extends AbstractExtendedWizardPage {
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setBackgroundMode(SWT.INHERIT_DEFAULT);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		createChromatogramField(composite);
 		createScanChart(composite);
 		createPeakTableField(composite);
-		//
+
 		validateSelection();
 		setControl(composite);
 	}
@@ -162,7 +162,7 @@ public class PagePeakSelection extends AbstractExtendedWizardPage {
 				updateSelectedPeaksInChart(getSelectionChromatogramPeakList());
 			}
 		});
-		//
+
 		peakTableViewerUI.getControl().addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -217,7 +217,7 @@ public class PagePeakSelection extends AbstractExtendedWizardPage {
 
 		IChromatogramSelection chromatogramSelection = null;
 		ChromatogramImportRunnable runnable = new ChromatogramImportRunnable(wizardElements);
-		//
+
 		try {
 			getContainer().run(true, false, runnable);
 			IChromatogram chromatogram = runnable.getChromatogram();
@@ -235,7 +235,7 @@ public class PagePeakSelection extends AbstractExtendedWizardPage {
 		} catch(ChromatogramIsNullException e) {
 			logger.warn(e);
 		}
-		//
+
 		return chromatogramSelection;
 	}
 
@@ -263,13 +263,13 @@ public class PagePeakSelection extends AbstractExtendedWizardPage {
 		if(wizardElements.getSelectedChromatograms().isEmpty()) {
 			message = "No chromatogram has been selected.";
 		}
-		//
+
 		if(message == null) {
 			if(wizardElements.getChromatogramSelection() == null) {
 				message = "The chromatogram couldn't be loaded.";
 			}
 		}
-		//
+
 		if(message == null) {
 			IChromatogram chromatogram = wizardElements.getChromatogramSelection().getChromatogram();
 			if(chromatogram == null || chromatogram.getPeaks().isEmpty()) {
