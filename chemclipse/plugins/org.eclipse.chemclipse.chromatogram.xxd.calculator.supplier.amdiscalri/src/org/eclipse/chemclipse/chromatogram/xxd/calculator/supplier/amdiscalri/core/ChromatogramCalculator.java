@@ -27,14 +27,14 @@ public class ChromatogramCalculator extends AbstractChromatogramCalculator {
 	public IProcessingInfo<?> applyCalculator(IChromatogramSelection chromatogramSelection, IChromatogramCalculatorSettings chromatogramCalculatorSettings, IProgressMonitor monitor) {
 
 		IProcessingInfo<?> processingInfo = new ProcessingInfo<>();
-		//
+
 		if(chromatogramCalculatorSettings instanceof CalculatorSettings calculatorSettings) {
 			RetentionIndexCalculator calculator = new RetentionIndexCalculator();
 			IProcessingInfo<?> calculatorInfo = calculator.calculateIndices(chromatogramSelection, calculatorSettings);
 			chromatogramSelection.getChromatogram().setDirty(true);
 			processingInfo.addMessages(calculatorInfo);
 		}
-		//
+
 		return processingInfo;
 	}
 

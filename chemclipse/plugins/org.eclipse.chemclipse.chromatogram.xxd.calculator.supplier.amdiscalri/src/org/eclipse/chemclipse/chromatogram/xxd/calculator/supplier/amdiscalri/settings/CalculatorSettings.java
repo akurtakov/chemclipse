@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2024 Lablicate GmbH.
+ * Copyright (c) 2014, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -30,15 +30,19 @@ public class CalculatorSettings extends AbstractChromatogramCalculatorSettings i
 	@JsonPropertyDescription("Select the file that contains the retention time / index entries.")
 	@FileSettingProperty(dialogType = DialogType.OPEN_DIALOG, extensionNames = {"AMDIS (*.cal)"}, validExtensions = {"*.cal;*.CAL"}, onlyDirectory = false, allowEmpty = false)
 	private File calibrationFile;
+
 	@JsonProperty(value = "Calculator Strategy", defaultValue = "FILES")
 	@JsonPropertyDescription(value = "The strategy defines the data source, that shall be used for RI calculation.")
 	private CalculatorStrategy calculatorStrategy = CalculatorStrategy.FILES;
+
 	@JsonProperty(value = "Use Default Column", defaultValue = "true")
 	@JsonPropertyDescription("In case of no match, the default column is used.")
 	private boolean useDefaultColumn = true;
+
 	@JsonProperty(value = "Process Referenced Chromatograms", defaultValue = "true")
 	@JsonPropertyDescription("Referenced chromatgrams will be also processed.")
 	private boolean processReferencedChromatograms = true;
+
 	@JsonIgnore
 	private List<String> retentionIndexFiles = new ArrayList<>();
 

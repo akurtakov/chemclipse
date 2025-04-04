@@ -375,13 +375,13 @@ public class WidgetItem {
 	private Control createFileWidget(Composite parent) {
 
 		FileSettingProperty fileSettingProperty = inputValue.getFileSettingProperty();
-		//
+
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		GridLayout layout = new GridLayout(2, false);
 		layout.verticalSpacing = 0;
 		composite.setLayout(layout);
-		//
+
 		Text text = new Text(composite, SWT.BORDER);
 		text.setToolTipText(inputValue.getDescription());
 		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true));
@@ -394,7 +394,7 @@ public class WidgetItem {
 				currentSelection = new File(text.getText());
 			}
 		});
-		//
+
 		Button button = new Button(composite, SWT.PUSH);
 		button.setText(" ... ");
 		button.setToolTipText(ExtensionMessages.chooseLocation);
@@ -402,6 +402,8 @@ public class WidgetItem {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+
+				text.setFocus();
 
 				boolean filechooser;
 				int style;
