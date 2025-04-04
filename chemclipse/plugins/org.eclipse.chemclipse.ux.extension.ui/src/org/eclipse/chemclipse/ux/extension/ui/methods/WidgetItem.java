@@ -403,6 +403,8 @@ public class WidgetItem {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
+				text.setFocus();
+
 				boolean filechooser;
 				int style;
 				/*
