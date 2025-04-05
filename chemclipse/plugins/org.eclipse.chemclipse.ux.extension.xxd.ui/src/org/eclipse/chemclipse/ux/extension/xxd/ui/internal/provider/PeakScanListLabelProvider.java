@@ -63,16 +63,18 @@ public class PeakScanListLabelProvider extends AbstractChemClipseLabelProvider {
 	public static final String QUANTIFIER = ExtensionMessages.quantifier;
 	public static final String CLASSIFIER = ExtensionMessages.classifier;
 	public static final String PEAK_MODEL = ExtensionMessages.peakModel;
-	//
+
 	public static final String PEAK = "PEAK";
 	public static final String SCAN = "SCAN";
-	//
+
 	private static final String BLANK = "";
 	private static final String NO_VALUE = "--";
 	private static final String ISTD = "ISTD";
-	//
+
 	private double chromatogramPeakArea = 0.0d;
-	//
+
+	public static final int INDEX_BEST_TARGET = 4;
+
 	public static final String[] TITLES = { //
 			ACTIVE_FOR_ANALYSIS, //
 			TYPE, //

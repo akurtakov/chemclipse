@@ -17,16 +17,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.core.IPeak;
+import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
+import org.eclipse.chemclipse.model.targets.TargetSupport;
 import org.eclipse.chemclipse.msd.model.core.IPeaksMSD;
 import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
+import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.PeakScanListEditingSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.PeakScanListFilter;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.PeakScanListLabelProvider;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.PeakScanListTableComparator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ChromatogramDataSupport;
+import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.widgets.Composite;
 
 public class PeakScanListUI extends ExtendedTableViewer {
@@ -37,6 +43,8 @@ public class PeakScanListUI extends ExtendedTableViewer {
 	private final PeakScanListLabelProvider labelProvider = new PeakScanListLabelProvider();
 	private final PeakScanListTableComparator tableComparator = new PeakScanListTableComparator();
 	private final PeakScanListFilter listFilter = new PeakScanListFilter();
+
+	private List<? extends IPeak> peaks;
 
 	public PeakScanListUI(Composite parent, int style) {
 
@@ -57,8 +65,10 @@ public class PeakScanListUI extends ExtendedTableViewer {
 			 * Peaks
 			 */
 			if(showPeaks) {
-				input.addAll(ChromatogramDataSupport.getPeaks(chromatogramSelection, showPeaksInRange));
-			}
+				peaks = ChromatogramDataSupport.getPeaks(chromatogramSelection, showPeaksInRange);
+				input.addAll(peaks);
+			} else
+				peaks.clear();
 			/*
 			 * Scans
 			 */
@@ -98,6 +108,7 @@ public class PeakScanListUI extends ExtendedTableViewer {
 		setComparator(tableComparator);
 		setFilters(listFilter);
 		setEditingSupport();
+		setColorProviderDuplicateTargets();
 	}
 
 	private void setEditingSupport() {
@@ -108,5 +119,60 @@ public class PeakScanListUI extends ExtendedTableViewer {
 			String label = tableViewerColumn.getColumn().getText();
 			tableViewerColumn.setEditingSupport(new PeakScanListEditingSupport(this, label));
 		}
+	}
+
+	private void setColorProviderDuplicateTargets() {
+
+		List<TableViewerColumn> tableViewerColumns = getTableViewerColumns();
+		TableViewerColumn tableViewerColumn = tableViewerColumns.get(PeakScanListLabelProvider.INDEX_BEST_TARGET);
+		if(tableViewerColumn != null) {
+			tableViewerColumn.setLabelProvider(new StyledCellLabelProvider() {
+
+				@Override
+				public void update(ViewerCell cell) {
+
+					super.update(cell);
+					if(cell != null) {
+						Object element = cell.getElement();
+						if(element instanceof IPeak peak) {
+							cell.setText(TargetSupport.getBestTargetLibraryField(peak));
+							if(hasDuplicateTarget(peak)) {
+								cell.setBackground(Colors.LIGHT_RED);
+								cell.setForeground(Colors.BLACK);
+							}
+						}
+					}
+				}
+			});
+		}
+	}
+
+	private boolean hasDuplicateTarget(IPeak comparisonPeak) {
+
+		IIdentificationTarget comparisonTarget = TargetSupport.getBestIdentificationTarget(comparisonPeak);
+		if(comparisonTarget == null)
+			return false;
+
+		for(IPeak peak : peaks) {
+			if(comparisonPeak == peak)
+				continue;
+
+			IIdentificationTarget peakTarget = TargetSupport.getBestIdentificationTarget(peak);
+			if(peakTarget == null)
+				continue;
+
+			if(!comparisonTarget.getLibraryInformation().getCasNumber().isEmpty()) {
+				if(peakTarget.getLibraryInformation().getCasNumber().equals(comparisonTarget.getLibraryInformation().getCasNumber())) {
+					return true;
+				}
+			}
+
+			if(!comparisonTarget.getLibraryInformation().getName().isEmpty()) {
+				if(peakTarget.getLibraryInformation().getName().equals(comparisonTarget.getLibraryInformation().getName())) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
