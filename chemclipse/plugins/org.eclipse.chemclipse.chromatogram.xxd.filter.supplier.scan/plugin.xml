@@ -65,6 +65,13 @@
             filterName="Recalculate Scan Delay/Interval"
             filterSettings="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.settings.FilterSettingsDelayInterval"
             id="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.delayinterval">
-      </ChromatogramFilterSupplier>                       
+      </ChromatogramFilterSupplier>
+      <ChromatogramFilterSupplier
+            description="This filter set the chromatogram to a given scan density."
+            filter="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.core.FilterScanDensity"
+            filterName="Scan Density"
+            filterSettings="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.settings.FilterSettingsScanDensity"
+            id="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scandensity">
+      </ChromatogramFilterSupplier>                            
    </extension>
 </plugin>
