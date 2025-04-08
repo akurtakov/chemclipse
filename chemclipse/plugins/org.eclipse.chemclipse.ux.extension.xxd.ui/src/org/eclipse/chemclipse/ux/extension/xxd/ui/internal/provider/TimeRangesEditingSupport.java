@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2024 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -56,6 +56,8 @@ public class TimeRangesEditingSupport extends EditingSupport {
 				return formatValue(timeRange.getStart());
 			} else if(column.equals(TimeRangesLabelProvider.STOP)) {
 				return formatValue(timeRange.getStop());
+			} else if(column.equals(TimeRangesLabelProvider.TRACES)) {
+				return timeRange.getTraces();
 			}
 		}
 		return false;
@@ -69,6 +71,8 @@ public class TimeRangesEditingSupport extends EditingSupport {
 				timeRange.updateStart(parseValue(value));
 			} else if(column.equals(TimeRangesLabelProvider.STOP)) {
 				timeRange.updateStop(parseValue(value));
+			} else if(column.equals(TimeRangesLabelProvider.TRACES)) {
+				timeRange.setTraces(value.toString().trim());
 			}
 			//
 			tableViewer.refresh();

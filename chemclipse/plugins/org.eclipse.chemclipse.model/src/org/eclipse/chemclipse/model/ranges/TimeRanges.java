@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2024 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -30,6 +30,7 @@ import java.util.Set;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.util.TimeRangeListUtil;
+import org.eclipse.chemclipse.support.util.ValueParserSupport;
 
 public class TimeRanges {
 
@@ -126,13 +127,16 @@ public class TimeRanges {
 
 		TimeRange timeRange = null;
 		//
-		if(!"".equals(item)) {
+		if(item != null && !item.isBlank()) {
+			ValueParserSupport valueParserSupport = new ValueParserSupport();
 			String[] values = item.split("\\" + TimeRangeListUtil.SEPARATOR_ENTRY);
-			String identifier = ((values.length > 0) ? values[0].trim() : "");
-			int start = ((values.length > 1) ? calculateRetentionTime(values[1]) : 0);
-			int maximum = ((values.length > 2) ? calculateRetentionTime(values[2]) : 0);
-			int stop = ((values.length > 3) ? calculateRetentionTime(values[3]) : 0);
+			String identifier = valueParserSupport.parseString(values, 0, "");
+			int start = calculateRetentionTime(valueParserSupport.parseDouble(values, 1, 0));
+			int maximum = calculateRetentionTime(valueParserSupport.parseDouble(values, 2, 0));
+			int stop = calculateRetentionTime(valueParserSupport.parseDouble(values, 3, 0));
+			String traces = valueParserSupport.parseString(values, 4, "");
 			timeRange = new TimeRange(identifier, start, maximum, stop);
+			timeRange.setTraces(traces);
 		}
 		//
 		return timeRange;
@@ -205,7 +209,7 @@ public class TimeRanges {
 
 	private void loadSettings(String timeRanges) {
 
-		if(!"".equals(timeRanges)) {
+		if(timeRanges != null && !timeRanges.isBlank()) {
 			String[] items = timeRangeListUtil.parseString(timeRanges);
 			if(items.length > 0) {
 				for(String item : items) {
@@ -218,13 +222,9 @@ public class TimeRanges {
 		}
 	}
 
-	private int calculateRetentionTime(String minutes) {
+	private int calculateRetentionTime(double minutes) {
 
-		try {
-			return (int)(Double.parseDouble(minutes.trim()) * TimeRange.MINUTE_FACTOR);
-		} catch(NumberFormatException e) {
-			return 0;
-		}
+		return (int)(minutes * TimeRange.MINUTE_FACTOR);
 	}
 
 	private String calculateRetentionTimeMinutes(int retentionTime) {
@@ -234,18 +234,21 @@ public class TimeRanges {
 
 	private void extractTimeRange(TimeRange timeRange, StringBuilder builder) {
 
-		builder.append(timeRange.getIdentifier());
-		builder.append(" ");
-		builder.append(TimeRangeListUtil.SEPARATOR_ENTRY);
-		builder.append(" ");
-		builder.append(calculateRetentionTimeMinutes(timeRange.getStart()));
-		builder.append(" ");
-		builder.append(TimeRangeListUtil.SEPARATOR_ENTRY);
-		builder.append(" ");
-		builder.append(calculateRetentionTimeMinutes(timeRange.getMaximum()));
-		builder.append(" ");
-		builder.append(TimeRangeListUtil.SEPARATOR_ENTRY);
-		builder.append(" ");
-		builder.append(calculateRetentionTimeMinutes(timeRange.getStop()));
+		List<String> values = new ArrayList<>();
+		values.add(timeRange.getIdentifier());
+		values.add(calculateRetentionTimeMinutes(timeRange.getStart()));
+		values.add(calculateRetentionTimeMinutes(timeRange.getMaximum()));
+		values.add(calculateRetentionTimeMinutes(timeRange.getStop()));
+		values.add(timeRange.getTraces());
+		Iterator<String> iterator = values.iterator();
+
+		while(iterator.hasNext()) {
+			builder.append(iterator.next());
+			if(iterator.hasNext()) {
+				builder.append(" ");
+				builder.append(TimeRangeListUtil.SEPARATOR_ENTRY);
+				builder.append(" ");
+			}
+		}
 	}
 }

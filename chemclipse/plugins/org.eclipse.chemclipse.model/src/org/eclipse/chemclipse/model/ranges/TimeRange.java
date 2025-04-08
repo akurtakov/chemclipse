@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2024 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -39,6 +39,12 @@ public class TimeRange {
 	private int maximum = 0;
 	private int stop = 0;
 	/*
+	 * For GC-MS, HPLC-DAD, ... it is sometimes necessary to
+	 * use specific traces e.g. m/z values for the given range.
+	 * Designed to be used with TraceFactory.parseTraces(...).
+	 */
+	private String traces = "";
+	/*
 	 * Transient
 	 */
 	private boolean locked = false;
@@ -58,6 +64,7 @@ public class TimeRange {
 	public TimeRange(TimeRange timeRange) throws IllegalArgumentException {
 
 		this(timeRange.getIdentifier(), timeRange.getStart(), timeRange.getMaximum(), timeRange.getStop());
+		setTraces(timeRange.getTraces());
 	}
 
 	/**
@@ -174,6 +181,16 @@ public class TimeRange {
 		}
 	}
 
+	public String getTraces() {
+
+		return traces;
+	}
+
+	public void setTraces(String traces) {
+
+		this.traces = traces;
+	}
+
 	public boolean isLocked() {
 
 		return locked;
@@ -236,6 +253,6 @@ public class TimeRange {
 	@Override
 	public String toString() {
 
-		return "TimeRange [identifier=" + identifier + ", start=" + start + ", maximum=" + maximum + ", stop=" + stop + "]";
+		return "TimeRange [identifier=" + identifier + ", start=" + start + ", maximum=" + maximum + ", stop=" + stop + ", traces=" + traces + "]";
 	}
 }

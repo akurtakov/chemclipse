@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2024 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -16,6 +16,7 @@ import java.text.DecimalFormat;
 import org.eclipse.chemclipse.model.ranges.TimeRange;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.util.TimeRangeListUtil;
+import org.eclipse.chemclipse.support.util.ValueParserSupport;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
@@ -34,6 +35,7 @@ public class TimeRangeValidator implements IValidator<Object> {
 	private int retentionTimeStart = 0;
 	private int retentionTimeMaximum = 0;
 	private int retentionTimeStop = 0;
+	private String traces = "";
 	//
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish();
 
@@ -122,14 +124,16 @@ public class TimeRangeValidator implements IValidator<Object> {
 
 		String message = null;
 		try {
+			ValueParserSupport valueParserSupport = new ValueParserSupport();
 			String[] values = value.split(TimeRangeListUtil.SEPARATOR_ENTRY);
-			if(values.length == 4) {
-				identifier = values[0].trim();
-				retentionTimeStart = (int)(Double.parseDouble(values[1].trim()) * TimeRange.MINUTE_FACTOR);
-				retentionTimeMaximum = (int)(Double.parseDouble(values[2].trim()) * TimeRange.MINUTE_FACTOR);
-				retentionTimeStop = (int)(Double.parseDouble(values[3].trim()) * TimeRange.MINUTE_FACTOR);
+			if(values.length >= 4) {
+				identifier = valueParserSupport.parseString(values, 0, "");
+				retentionTimeStart = (int)(valueParserSupport.parseDouble(values, 1, 0) * TimeRange.MINUTE_FACTOR);
+				retentionTimeMaximum = (int)(valueParserSupport.parseDouble(values, 2, 0) * TimeRange.MINUTE_FACTOR);
+				retentionTimeStop = (int)(valueParserSupport.parseDouble(values, 3, 0) * TimeRange.MINUTE_FACTOR);
+				traces = valueParserSupport.parseString(values, 4, "");
 				//
-				if("".equals(identifier)) {
+				if(identifier.isEmpty()) {
 					message = "Please specify an identifier.";
 				} else if(retentionTimeStart > retentionTimeMaximum) {
 					message = "Start > Maximum";
@@ -178,5 +182,10 @@ public class TimeRangeValidator implements IValidator<Object> {
 	public int getRetentionTimeStop() {
 
 		return retentionTimeStop;
+	}
+
+	public String getTraces() {
+
+		return traces;
 	}
 }

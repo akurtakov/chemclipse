@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2024 Lablicate GmbH.
+ * Copyright (c) 2019, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -32,17 +32,20 @@ public class TimeRangesLabelProvider extends AbstractChemClipseLabelProvider {
 	public static final String START = ExtensionMessages.startTimeMin;
 	public static final String MAXIMUM = ExtensionMessages.maximumTimeMin;
 	public static final String STOP = ExtensionMessages.stopTimeMin;
+	public static final String TRACES = ExtensionMessages.traces;
 	//
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.000");
 	//
 	public static final String[] TITLES = { //
 			START, //
 			STOP, //
-			IDENTIFIER //
+			IDENTIFIER, //
+			TRACES //
 	};
 	public static final int[] BOUNDS = { //
 			130, //
 			130, //
+			200, //
 			200 //
 	};
 
@@ -69,6 +72,9 @@ public class TimeRangesLabelProvider extends AbstractChemClipseLabelProvider {
 					break;
 				case 2:
 					text = timeRange.getIdentifier();
+					break;
+				case 3:
+					text = timeRange.getTraces();
 					break;
 			}
 		}

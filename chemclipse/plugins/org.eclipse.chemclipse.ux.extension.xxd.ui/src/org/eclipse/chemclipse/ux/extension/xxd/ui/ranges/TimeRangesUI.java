@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.chemclipse.model.comparator.TimeRangeComparator;
 import org.eclipse.chemclipse.model.ranges.TimeRange;
@@ -35,6 +36,8 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -44,6 +47,7 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
 
 public class TimeRangesUI extends Composite implements IExtendedPartUI {
 
@@ -52,12 +56,13 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 	 */
 	private static final String NO_SELECTION = "--";
 	//
-	private Button buttonPrevious;
-	private ComboViewer comboViewer;
-	private Button buttonNext;
-	private TimeRangeUI timeRangeUI;
-	private Button buttonAdd;
-	private Button buttonDelete;
+	private AtomicReference<Button> buttonPrevious = new AtomicReference<>();
+	private AtomicReference<ComboViewer> comboViewerControl = new AtomicReference<>();
+	private AtomicReference<Button> buttonNext = new AtomicReference<>();
+	private AtomicReference<TimeRangeUI> timeRangeControl = new AtomicReference<>();
+	private AtomicReference<Button> buttonAdd = new AtomicReference<>();
+	private AtomicReference<Button> buttonDelete = new AtomicReference<>();
+	private AtomicReference<Text> textTracesControl = new AtomicReference<>();
 	/*
 	 * TimeRanges is the object, that contains a map of ranges.
 	 * TimeRange is the currently selected time range.
@@ -95,7 +100,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 	public void select(TimeRange timeRange) {
 
 		this.timeRange = timeRange;
-		Combo combo = comboViewer.getCombo();
+		Combo combo = comboViewerControl.get().getCombo();
 		//
 		if(timeRange != null) {
 			String[] items = combo.getItems();
@@ -120,19 +125,21 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 
 	private void createControl() {
 
-		GridLayout gridLayout = new GridLayout(8, false);
+		GridLayout gridLayout = new GridLayout(10, false);
 		gridLayout.marginWidth = 0;
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
 		//
-		buttonPrevious = createButtonPrevious(this);
-		comboViewer = createComboViewer(this);
-		buttonNext = createButtonNext(this);
-		timeRangeUI = createTimeRangeUI(this);
+		createButtonPrevious(this);
+		createComboViewer(this);
+		createButtonNext(this);
+		createTimeRangeUI(this);
 		createSeparator(this);
-		buttonAdd = createButtonAdd(this);
-		buttonDelete = createButtonDelete(this);
+		createTextTraces(this);
+		createSeparator(this);
+		createButtonAdd(this);
+		createButtonDelete(this);
 		createButtonSettings(this);
 		//
 		initialize();
@@ -143,7 +150,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 		updateComboViewer();
 	}
 
-	private Button createButtonPrevious(Composite parent) {
+	private void createButtonPrevious(Composite parent) {
 
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
@@ -162,10 +169,10 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 			}
 		});
 		//
-		return button;
+		buttonPrevious.set(button);
 	}
 
-	private ComboViewer createComboViewer(Composite composite) {
+	private void createComboViewer(Composite composite) {
 
 		ComboViewer comboViewer = new EnhancedComboViewer(composite, SWT.READ_ONLY);
 		Combo combo = comboViewer.getCombo();
@@ -175,8 +182,8 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 			@Override
 			public String getText(Object element) {
 
-				if(element instanceof TimeRange selectedTimeRange) {
-					return selectedTimeRange.getIdentifier();
+				if(element instanceof TimeRange timeRange) {
+					return timeRange.getIdentifier();
 				} else if(element instanceof String text) {
 					return text;
 				}
@@ -206,10 +213,10 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 			}
 		});
 		//
-		return comboViewer;
+		comboViewerControl.set(comboViewer);
 	}
 
-	private Button createButtonNext(Composite parent) {
+	private void createButtonNext(Composite parent) {
 
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
@@ -228,10 +235,10 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 			}
 		});
 		//
-		return button;
+		buttonNext.set(button);
 	}
 
-	private TimeRangeUI createTimeRangeUI(Composite parent) {
+	private void createTimeRangeUI(Composite parent) {
 
 		TimeRangeUI timeRangeUI = new TimeRangeUI(parent, SWT.NONE);
 		timeRangeUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -244,10 +251,32 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 			}
 		});
 		//
-		return timeRangeUI;
+		timeRangeControl.set(timeRangeUI);
 	}
 
-	private Button createButtonAdd(Composite parent) {
+	private void createTextTraces(Composite parent) {
+
+		Text text = new Text(parent, SWT.BORDER);
+		text.setText("");
+		text.setToolTipText("Modify traces for the given time range.");
+		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		text.addKeyListener(new KeyAdapter() {
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+
+				if(timeRange != null) {
+					timeRange.setTraces(text.getText().trim());
+					fireUpdate(timeRange);
+				}
+			}
+
+		});
+
+		textTracesControl.set(text);
+	}
+
+	private void createButtonAdd(Composite parent) {
 
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
@@ -274,7 +303,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 			}
 		});
 		//
-		return button;
+		buttonAdd.set(button);
 	}
 
 	private Label createSeparator(Composite parent) {
@@ -286,7 +315,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 		return label;
 	}
 
-	private Button createButtonDelete(Composite parent) {
+	private void createButtonDelete(Composite parent) {
 
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
@@ -298,7 +327,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 			public void widgetSelected(SelectionEvent e) {
 
 				if(MessageDialog.openQuestion(e.display.getActiveShell(), timeRangeLabels.getTitle(), timeRangeLabels.getDeleteMessage())) {
-					Object object = comboViewer.getStructuredSelection().getFirstElement();
+					Object object = comboViewerControl.get().getStructuredSelection().getFirstElement();
 					if(object instanceof TimeRange selectedTimeRange) {
 						timeRanges.remove(selectedTimeRange);
 						updateComboViewer();
@@ -308,7 +337,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 			}
 		});
 		//
-		return button;
+		buttonDelete.set(button);
 	}
 
 	private void createButtonSettings(Composite parent) {
@@ -330,7 +359,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 
 	private void updateLabels() {
 
-		timeRangeUI.update();
+		timeRangeControl.get().update();
 		/*
 		 * Layout the outer composites to
 		 * enable more space for the labels.
@@ -351,13 +380,15 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 	private void updateComboViewer() {
 
 		timeRange = null;
+		ComboViewer comboViewer = comboViewerControl.get();
+
 		if(timeRanges != null) {
 			/*
 			 * Sort
 			 */
-			buttonPrevious.setEnabled(true);
-			buttonAdd.setEnabled(true);
-			buttonNext.setEnabled(true);
+			buttonPrevious.get().setEnabled(true);
+			buttonAdd.get().setEnabled(true);
+			buttonNext.get().setEnabled(true);
 			/*
 			 * Create the sorted ranges and add the no selection
 			 * entry at the beginning.
@@ -368,13 +399,14 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 			timeRangesInput.add(NO_SELECTION); // "No Selection"
 			timeRangesInput.addAll(timeRangesSorted);
 			//
+
 			Combo combo = comboViewer.getCombo();
 			String currentSelection = combo.getText();
 			comboViewer.setInput(timeRangesInput);
 			//
 			int index = 0;
 			if(combo.getItemCount() > 1) {
-				buttonDelete.setEnabled(true);
+				buttonDelete.get().setEnabled(true);
 				for(int i = 0; i < timeRangesSorted.size(); i++) {
 					TimeRange timeRangeSorted = timeRangesSorted.get(i);
 					if(timeRangeSorted.getIdentifier().equals(currentSelection)) {
@@ -383,14 +415,14 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 					}
 				}
 			} else {
-				buttonDelete.setEnabled(false);
+				buttonDelete.get().setEnabled(false);
 			}
 			combo.select(index);
 		} else {
-			buttonPrevious.setEnabled(false);
-			buttonNext.setEnabled(false);
-			buttonAdd.setEnabled(false);
-			buttonDelete.setEnabled(false);
+			buttonPrevious.get().setEnabled(false);
+			buttonNext.get().setEnabled(false);
+			buttonAdd.get().setEnabled(false);
+			buttonDelete.get().setEnabled(false);
 			comboViewer.setInput(null);
 		}
 	}
@@ -409,8 +441,12 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 		 * If one range is modified, all other ranges
 		 * shall be updated.
 		 */
-		timeRangeUI.setInput(timeRanges, timeRange);
-		buttonDelete.setEnabled(timeRange != null);
+		boolean enabled = timeRange != null;
+		timeRangeControl.get().setInput(timeRanges, timeRange);
+		textTracesControl.get().setText(enabled ? timeRange.getTraces() : "");
+		textTracesControl.get().setEnabled(enabled);
+		buttonDelete.get().setEnabled(enabled);
+
 		/*
 		 * To prevent update cycle dead loops.
 		 */
