@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2018 Lablicate GmbH.
+ * Copyright (c) 2013, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -21,10 +21,12 @@ public class PeakRetentionTimeComparator implements Comparator<IPeak> {
 	private SortOrder sortOrder;
 
 	public PeakRetentionTimeComparator() {
+
 		sortOrder = SortOrder.ASC;
 	}
 
 	public PeakRetentionTimeComparator(SortOrder sortOrder) {
+
 		this.sortOrder = sortOrder;
 	}
 
@@ -33,7 +35,7 @@ public class PeakRetentionTimeComparator implements Comparator<IPeak> {
 
 		int retentionTime1 = peak1.getPeakModel().getRetentionTimeAtPeakMaximum();
 		int retentionTime2 = peak2.getPeakModel().getRetentionTimeAtPeakMaximum();
-		//
+
 		int returnValue;
 		switch(sortOrder) {
 			case ASC:
