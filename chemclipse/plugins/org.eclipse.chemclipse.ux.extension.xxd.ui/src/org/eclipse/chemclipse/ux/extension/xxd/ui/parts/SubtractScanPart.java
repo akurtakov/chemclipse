@@ -13,6 +13,7 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.parts;
 
 import java.util.List;
 
+import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
@@ -71,6 +72,11 @@ public class SubtractScanPart extends AbstractPart<ExtendedSubtractScanUI> {
 						getControl().update(object);
 						return true;
 					}
+				} else if(IChemClipseEvents.TOPIC_PEAK_XXD_UPDATE_SELECTION.equals(topic)) {
+					if(object instanceof IPeakMSD) {
+						getControl().update(object);
+						return true;
+					}
 				}
 			}
 		}
@@ -81,7 +87,7 @@ public class SubtractScanPart extends AbstractPart<ExtendedSubtractScanUI> {
 	@Override
 	protected boolean isUpdateTopic(String topic) {
 
-		return isSessionSubtractTopic(topic) || isChromatogramTopic(topic) || isCloseEvent(topic);
+		return isSessionSubtractTopic(topic) || isChromatogramTopic(topic) || isPeakTopic(topic) || isCloseEvent(topic);
 	}
 
 	private boolean isSessionSubtractTopic(String topic) {
@@ -92,6 +98,11 @@ public class SubtractScanPart extends AbstractPart<ExtendedSubtractScanUI> {
 	private boolean isChromatogramTopic(String topic) {
 
 		return IChemClipseEvents.TOPIC_CHROMATOGRAM_XXD_UPDATE_SELECTION.equals(topic);
+	}
+
+	private boolean isPeakTopic(String topic) {
+
+		return IChemClipseEvents.TOPIC_PEAK_XXD_UPDATE_SELECTION.equals(topic);
 	}
 
 	private boolean isCloseEvent(String topic) {
