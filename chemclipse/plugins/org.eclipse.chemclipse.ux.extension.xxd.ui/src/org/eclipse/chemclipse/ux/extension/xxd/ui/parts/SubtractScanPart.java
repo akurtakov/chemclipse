@@ -65,7 +65,6 @@ public class SubtractScanPart extends AbstractPart<ExtendedSubtractScanUI> {
 							getControl().update(objectSelection);
 						}
 					}
-					//
 					return true;
 				} else if(IChemClipseEvents.TOPIC_CHROMATOGRAM_XXD_UPDATE_SELECTION.equals(topic)) {
 					if(object instanceof IChromatogramSelectionMSD) {
@@ -80,7 +79,7 @@ public class SubtractScanPart extends AbstractPart<ExtendedSubtractScanUI> {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 

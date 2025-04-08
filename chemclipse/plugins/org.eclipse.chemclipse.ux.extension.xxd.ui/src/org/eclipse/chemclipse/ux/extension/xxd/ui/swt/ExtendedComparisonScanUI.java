@@ -63,13 +63,13 @@ import jakarta.inject.Inject;
 public class ExtendedComparisonScanUI extends Composite implements IExtendedPartUI {
 
 	private static final Logger logger = Logger.getLogger(ExtendedComparisonScanUI.class);
-	//
+
 	private static final float NORMALIZATION_FACTOR = 1000.0f;
-	//
+
 	private static final String OPTION_UPDATE_SCAN_1 = "UPDATE_SCAN_1";
 	private static final String OPTION_UPDATE_SCAN_2 = "UPDATE_SCAN_2";
 	private static final String OPTION_LIBRARY_SEARCH = "LIBRARY_SEARCH";
-	//
+
 	private static final String PREFIX_U = "[U]";
 	private static final String PREFIX_R = "[R]";
 	private static final String PREFIX_UR = "[U-R]";
@@ -79,7 +79,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 	private static final String TITLE_REFERENCE = "REFERENCE MS";
 	private static final String POSTFIX_NONE = "";
 	private static final String POSTFIX_SHIFTED = " SHIFTED (+1)";
-	//
+
 	private AtomicReference<Button> buttonOptimizedScan = new AtomicReference<>();
 	private AtomicReference<Button> buttonToolbarInfo = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfoTop = new AtomicReference<>();
@@ -87,17 +87,17 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 	private AtomicReference<ScanChartUI> scanChartControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonToolbarEdit = new AtomicReference<>();
 	private AtomicReference<Composite> toolbarEdit = new AtomicReference<>();
-	//
+
 	private IScanMSD scan1 = null;
 	private IScanMSD scan2 = null;
 	private IScanMSD scan1Optimized = null;
 	private IScanMSD scan2Optimized = null;
-	//
+
 	private String displayOption = OPTION_LIBRARY_SEARCH;
 	private boolean displayDifference = false;
 	private boolean displayMirrored = true;
 	private boolean displayShifted = false;
-	//
+
 	private final ScanDataSupport scanDataSupport = new ScanDataSupport();
 
 	@Inject
@@ -281,10 +281,10 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 		IScanMSD firstScan = (scan1Optimized != null) ? scan1Optimized : scan1;
 		IScanMSD secondScan = (scan2Optimized != null) ? scan2Optimized : scan2;
-		//
+
 		toolbarInfoTop.get().setText(scanDataSupport.getMassSpectrumLabel(firstScan, PREFIX_U, TITLE_UNKNOWN, POSTFIX_NONE));
 		toolbarInfoBottom.get().setText(scanDataSupport.getMassSpectrumLabel(secondScan, PREFIX_R, TITLE_REFERENCE, shifted ? POSTFIX_SHIFTED : POSTFIX_NONE));
-		//
+
 		if(shifted) {
 			IScanMSD scan2Shifted = new ScanMSD();
 			IExtractedIonSignal extractedIonSignalScan2 = secondScan.getExtractedIonSignal();
@@ -306,18 +306,18 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 		IScanMSD firstScan = (scan1Optimized != null) ? scan1Optimized : scan1;
 		IScanMSD secondScan = (scan2Optimized != null) ? scan2Optimized : scan2;
-		//
+
 		toolbarInfoTop.get().setText(scanDataSupport.getMassSpectrumLabel(firstScan, PREFIX_UR, TITLE_UNKNOWN, POSTFIX_NONE));
 		toolbarInfoBottom.get().setText(scanDataSupport.getMassSpectrumLabel(secondScan, PREFIX_UR, TITLE_REFERENCE, shifted ? POSTFIX_SHIFTED : POSTFIX_NONE));
-		//
+
 		IExtractedIonSignal extractedIonSignalReference = firstScan.getExtractedIonSignal();
 		IExtractedIonSignal extractedIonSignalComparison = secondScan.getExtractedIonSignal();
 		int startIon = (extractedIonSignalReference.getStartIon() < extractedIonSignalComparison.getStartIon()) ? extractedIonSignalReference.getStartIon() : extractedIonSignalComparison.getStartIon();
 		int stopIon = (extractedIonSignalReference.getStopIon() > extractedIonSignalComparison.getStopIon()) ? extractedIonSignalReference.getStopIon() : extractedIonSignalComparison.getStopIon();
-		//
+
 		IScanMSD scanDifference1 = new ScanMSD();
 		IScanMSD scanDifference2 = new ScanMSD();
-		//
+
 		for(int ion = startIon; ion <= stopIon; ion++) {
 			float abundance = extractedIonSignalReference.getAbundance(ion) - extractedIonSignalComparison.getAbundance(ion);
 			if(abundance > 0) {
@@ -331,7 +331,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 				}
 			}
 		}
-		//
+
 		scanChartControl.get().setInput(scanDifference1, scanDifference2, mirrored);
 	}
 
@@ -339,7 +339,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 		toolbarInfoTop.get().setText("");
 		toolbarInfoBottom.get().setText("");
-		//
+
 		if(scan1 != null) {
 			IScanMSD firstScan = (scan1Optimized != null) ? scan1Optimized : scan1;
 			toolbarInfoTop.get().setText(scanDataSupport.getMassSpectrumLabel(firstScan, PREFIX_U, TITLE_UNKNOWN, POSTFIX_NONE));
@@ -363,13 +363,13 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfoTop(this);
 		createToolbarOptions(this);
 		createScanChart(this);
 		createToolbarInfoBottom(this);
-		//
+
 		initialize();
 	}
 
@@ -387,7 +387,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(6, false));
-		//
+
 		createButtonToggleInfo(composite);
 		createButtonToggleEdit(composite);
 		createResetButton(composite);
@@ -412,11 +412,11 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(3, false));
-		//
+
 		createUpdateGroup(composite);
 		createDisplayGroup(composite);
 		createMirrorOptionSection(composite);
-		//
+
 		toolbarEdit.set(composite);
 	}
 
@@ -428,7 +428,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		group.setToolTipText("Select the display option.");
 		group.setLayout(new RowLayout(SWT.HORIZONTAL));
 		group.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		Button updateScan1 = new Button(group, SWT.RADIO);
 		updateScan1.setText("Scan 1");
 		updateScan1.setSelection(displayOption.equals(OPTION_UPDATE_SCAN_1));
@@ -441,7 +441,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 				updateChart();
 			}
 		});
-		//
+
 		Button updateScan2 = new Button(group, SWT.RADIO);
 		updateScan2.setText("Scan 2");
 		updateScan2.setSelection(displayOption.equals(OPTION_UPDATE_SCAN_2));
@@ -454,7 +454,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 				updateChart();
 			}
 		});
-		//
+
 		Button updateLibraryScan = new Button(group, SWT.RADIO);
 		updateLibraryScan.setText("Library Search");
 		updateLibraryScan.setSelection(displayOption.equals(OPTION_LIBRARY_SEARCH));
@@ -478,7 +478,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		group.setText("");
 		group.setLayout(new RowLayout(SWT.HORIZONTAL));
 		group.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		Button buttonNormalModus = new Button(group, SWT.RADIO);
 		buttonNormalModus.setText(LABEL_UR_NORMAL);
 		buttonNormalModus.setToolTipText("Use the normal modus.");
@@ -492,7 +492,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 				updateChart();
 			}
 		});
-		//
+
 		Button buttonDifferenceModus = new Button(group, SWT.RADIO);
 		buttonDifferenceModus.setText(LABEL_UR_DIFFERENCE);
 		buttonDifferenceModus.setToolTipText("Use the difference modus.");
@@ -515,7 +515,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(2, false));
-		//
+
 		Button buttonMirrored = new Button(composite, SWT.PUSH);
 		buttonMirrored.setText("");
 		buttonMirrored.setToolTipText("Set whether the data shall be displayed normal or mirrored.");
@@ -530,7 +530,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 				updateChart();
 			}
 		});
-		//
+
 		Button buttonShifted = new Button(composite, SWT.PUSH);
 		buttonShifted.setText("");
 		buttonShifted.setToolTipText("Set whether the data shall be shifted or not.");
@@ -551,7 +551,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 		ScanChartUI scanChartUI = new ScanChartUI(parent, SWT.BORDER);
 		scanChartUI.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		scanChartControl.set(scanChartUI);
 	}
 
@@ -569,7 +569,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return informationUI;
 	}
 
@@ -637,7 +637,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 					if(scan2 != null && scan2.getOptimizedMassSpectrum() != null) {
 						scan2Optimized = scan2.getOptimizedMassSpectrum().makeDeepCopy().normalize(NORMALIZATION_FACTOR);
 					}
-					//
+
 					button.setEnabled(false);
 					updateChart();
 				} catch(CloneNotSupportedException e) {
@@ -645,7 +645,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 				}
 			}
 		});
-		//
+
 		buttonOptimizedScan.set(button);
 	}
 
