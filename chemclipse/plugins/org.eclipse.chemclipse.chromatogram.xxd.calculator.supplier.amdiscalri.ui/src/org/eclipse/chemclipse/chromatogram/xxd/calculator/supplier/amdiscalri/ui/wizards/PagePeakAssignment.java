@@ -20,6 +20,7 @@ import java.util.Set;
 
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.impl.AlkaneIdentifier;
 import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.model.comparator.PeakRetentionTimeComparator;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.exceptions.ReferenceMustNotBeNullException;
@@ -64,7 +65,7 @@ import org.eclipse.swt.widgets.Text;
 public class PagePeakAssignment extends AbstractExtendedWizardPage {
 
 	private static final Logger logger = Logger.getLogger(PagePeakAssignment.class);
-	//
+
 	private RetentionIndexWizardElements wizardElements;
 	private PeakTableRetentionIndexViewerUI peakTableViewerUI;
 	private PeakTargetsViewerUI targetsViewerUI;
@@ -74,9 +75,9 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 	private Button buttonNext;
 	private String[] availableStandards;
 	private int indexSelectedStandard;
-	//
+
 	private String databaseName;
-	//
+
 	private static final int ACTION_INCREASE_INDEX = 1;
 	private static final int ACTION_DECREASE_INDEX = 2;
 
@@ -87,7 +88,7 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 		setDescription("Please assign the alkanes.");
 		this.wizardElements = wizardElements;
 		availableStandards = wizardElements.getAvailableStandards();
-		//
+
 		File file = new File(AlkaneIdentifier.getDatabase());
 		databaseName = file.getName();
 	}
@@ -128,9 +129,10 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 				 */
 				IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 				List<? extends IPeak> peaks = chromatogram.getPeaks();
+				peaks.sort(new PeakRetentionTimeComparator());
 				peakTableViewerUI.setInput(peaks);
 				peakTableViewerUI.getTable().setSelection(0);
-				//
+
 				if(!peaks.isEmpty()) {
 					IPeak peak = peaks.get(0);
 					Set<IIdentificationTarget> targets = peak.getTargets();
@@ -141,7 +143,7 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 				peakTableViewerUI.setInput(null);
 				textCurrentIndexName.setText("");
 			}
-			//
+
 			updateLabel();
 			validateSelection();
 		}
@@ -152,14 +154,14 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(3, false));
-		//
+
 		createRetentionIndexField(composite);
 		createAutoAssignField(composite);
 		createPeakTableField(composite);
 		createTargetSpinnerField(composite);
 		createAssignIndexField(composite);
 		createPeakTargetsField(composite);
-		//
+
 		validateSelection();
 		setControl(composite);
 	}
@@ -172,10 +174,10 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 		gridDataComposite.horizontalSpan = 3;
 		composite.setLayoutData(gridDataComposite);
 		composite.setLayout(new GridLayout(2, true));
-		//
+
 		Combo comboStartIndex = createComboStartIndex(composite);
 		Combo comboStopIndex = createComboStopIndex(composite);
-		//
+
 		labelIndexRange = createLabelIndexRange(composite);
 		/*
 		 * Auto-Complete
@@ -190,7 +192,7 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		combo.setItems(availableStandards);
 		combo.setToolTipText("Start Index");
-		//
+
 		combo.addModifyListener(new ModifyListener() {
 
 			@Override
@@ -199,7 +201,7 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 				setStartIndexName(combo);
 			}
 		});
-		//
+
 		return combo;
 	}
 
@@ -215,7 +217,7 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		combo.setItems(availableStandards);
 		combo.setToolTipText("Stop Index");
-		//
+
 		combo.addModifyListener(new ModifyListener() {
 
 			@Override
@@ -224,7 +226,7 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 				setStopIndexName(combo);
 			}
 		});
-		//
+
 		return combo;
 	}
 
@@ -242,7 +244,7 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 		gridDataLabel.grabExcessHorizontalSpace = true;
 		gridDataLabel.horizontalSpan = 2;
 		label.setLayoutData(gridDataLabel);
-		//
+
 		return label;
 	}
 
@@ -252,7 +254,7 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 		button.setText("Auto Assign Standards");
 		button.setToolTipText("Automatically assign the selected index range.");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXECUTE, IApplicationImageProvider.SIZE_16x16));
-		//
+
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = 3;
 		button.setLayoutData(gridData);
@@ -270,7 +272,7 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 						IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 						List<? extends IPeak> chromatogramPeaks = chromatogram.getPeaks();
 						List<String> selectedIndices = wizardElements.getSelectedIndices();
-						//
+
 						if(chromatogramPeaks.size() == selectedIndices.size()) {
 							for(int i = 0; i < chromatogramPeaks.size(); i++) {
 								IPeak chromatogramPeak = chromatogramPeaks.get(i);
@@ -330,13 +332,13 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 				setCurrentIndexName(ACTION_DECREASE_INDEX);
 			}
 		});
-		//
+
 		textCurrentIndexName = new Text(parent, SWT.BORDER);
 		textCurrentIndexName.setText("");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.grabExcessHorizontalSpace = true;
 		textCurrentIndexName.setLayoutData(gridData);
-		//
+
 		buttonNext = new Button(parent, SWT.PUSH);
 		buttonNext.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_NEXT, IApplicationImageProvider.SIZE_16x16));
 		buttonNext.addSelectionListener(new SelectionAdapter() {
@@ -379,7 +381,7 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 		if(deleteOtherTargets) {
 			peak.getTargets().clear();
 		}
-		//
+
 		try {
 			float factor = 100.0f;
 			IPeakLibraryInformation libraryInformation = new PeakLibraryInformation();
@@ -486,7 +488,7 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 				}
 				break;
 		}
-		//
+
 		textCurrentIndexName.setText(availableStandards[indexSelectedStandard]);
 	}
 
@@ -590,7 +592,7 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 				return list.toArray(new IContentProposal[0]);
 			}
 		};
-		//
+
 		autoComplete(combo, proposalProvider);
 	}
 }
