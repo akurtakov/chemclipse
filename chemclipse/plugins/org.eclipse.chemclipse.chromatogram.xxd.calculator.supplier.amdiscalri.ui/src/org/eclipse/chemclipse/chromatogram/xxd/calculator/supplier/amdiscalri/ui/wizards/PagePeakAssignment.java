@@ -20,6 +20,7 @@ import java.util.Set;
 
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.impl.AlkaneIdentifier;
 import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.model.comparator.PeakRetentionTimeComparator;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.exceptions.ReferenceMustNotBeNullException;
@@ -128,6 +129,7 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 				 */
 				IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 				List<? extends IPeak> peaks = chromatogram.getPeaks();
+				peaks.sort(new PeakRetentionTimeComparator());
 				peakTableViewerUI.setInput(peaks);
 				peakTableViewerUI.getTable().setSelection(0);
 				//
