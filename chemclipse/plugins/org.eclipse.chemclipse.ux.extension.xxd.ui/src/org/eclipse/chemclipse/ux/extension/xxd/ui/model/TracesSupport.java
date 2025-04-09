@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2024 Lablicate GmbH.
+ * Copyright (c) 2022, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -33,6 +33,20 @@ public class TracesSupport {
 
 	private static final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
+	public static TracesExportOption getTracesExportOption() {
+
+		try {
+			return TracesExportOption.valueOf(preferenceStore.getString(PreferenceSupplier.P_TRACES_EXPORT_OPTION));
+		} catch(Exception e) {
+			return TracesExportOption.SIMPLE_TEXT;
+		}
+	}
+
+	public static void setTracesExportOption(TracesExportOption tracesExportOption) {
+
+		preferenceStore.setValue(PreferenceSupplier.P_TRACES_EXPORT_OPTION, tracesExportOption.name());
+	}
+
 	public static String getTraces(Object scan) {
 
 		String traces;
@@ -52,11 +66,10 @@ public class TracesSupport {
 		return traces;
 	}
 
-	public static void copyTracesToClipboard(Display display, Object scan) {
+	public static void copyTracesToClipboard(Display display, TracesExportOption tracesExportOption, Object scan) {
 
 		String traces = getTraces(scan);
 		if(!traces.isEmpty()) {
-			TracesExportOption tracesExportOption = TracesSupport.getTracesExportOption();
 			switch(tracesExportOption) {
 				case NAMED_TRACE:
 					/*
@@ -111,14 +124,5 @@ public class TracesSupport {
 	private static boolean isSortTraces() {
 
 		return preferenceStore.getBoolean(PreferenceSupplier.P_SORT_COPY_TRACES);
-	}
-
-	private static TracesExportOption getTracesExportOption() {
-
-		try {
-			return TracesExportOption.valueOf(preferenceStore.getString(PreferenceSupplier.P_TRACES_EXPORT_OPTION));
-		} catch(Exception e) {
-			return TracesExportOption.SIMPLE_TEXT;
-		}
 	}
 }

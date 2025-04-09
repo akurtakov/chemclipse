@@ -46,7 +46,6 @@ import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.model.TracesSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageScans;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ScanDataSupport;
 import org.eclipse.chemclipse.vsd.model.core.IScanVSD;
@@ -91,7 +90,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private Button buttonToolbarEdit;
 	private AtomicReference<Composite> toolbarEdit = new AtomicReference<>();
-	private Button buttonCopyTraces;
+	private AtomicReference<TracesClipboardUI> tracesClipboardControl = new AtomicReference<>();
 	private Button buttonSaveScan;
 	private ScanWebIdentifierUI scanWebIdentifierUI; // show database link
 	//
@@ -245,6 +244,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 		setInfoBottom();
 		scanTableUI.setInput(getScan());
 		scanWebIdentifierUI.setInput(getScan());
+		tracesClipboardControl.get().updateOption();
 		updateEditFields();
 		updateButtonStatus();
 		//
@@ -374,7 +374,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 		buttonToolbarInfo = createButtonToggleToolbar(composite, Arrays.asList(toolbarInfoTop, toolbarInfoBottom), IMAGE_INFO, TOOLTIP_INFO);
 		buttonToolbarSearch = createButtonToggleToolbar(composite, toolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH);
 		buttonToolbarEdit = createButtonToggleToolbar(composite, toolbarEdit, IMAGE_EDIT, TOOLTIP_EDIT);
-		buttonCopyTraces = createButtonCopyTracesClipboard(composite);
+		createTracesClipboardUI(composite);
 		scanWebIdentifierUI = createScanWebIdentifierUI(composite);
 		createResetButton(composite);
 		buttonSaveScan = createSaveButton(composite);
@@ -422,7 +422,8 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 	private void updateButtonStatus() {
 
 		IScan scan = getScan();
-		buttonCopyTraces.setEnabled(scan instanceof IScanMSD || scan instanceof IScanWSD);
+		tracesClipboardControl.get().setInput(scan);
+		tracesClipboardControl.get().setEnabled(scan instanceof IScanMSD || scan instanceof IScanWSD);
 		buttonSaveScan.setEnabled(isSaveEnabled());
 		buttonDeleteOptimized.setEnabled(isOptimizedScan());
 		updateLabel(labelOptimized, isOptimizedScan() ? "Optimized" : "");
@@ -476,22 +477,10 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 		return null;
 	}
 
-	private Button createButtonCopyTracesClipboard(Composite parent) {
+	private void createTracesClipboardUI(Composite parent) {
 
-		Button button = new Button(parent, SWT.PUSH);
-		button.setToolTipText("Copy the traces to clipboard.");
-		button.setText("");
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_COPY_CLIPBOARD, IApplicationImageProvider.SIZE_16x16));
-		button.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-
-				TracesSupport.copyTracesToClipboard(e.display, getScan());
-			}
-		});
-		//
-		return button;
+		TracesClipboardUI tracesClipboardUI = new TracesClipboardUI(parent, SWT.NONE);
+		tracesClipboardControl.set(tracesClipboardUI);
 	}
 
 	private void createResetButton(Composite parent) {

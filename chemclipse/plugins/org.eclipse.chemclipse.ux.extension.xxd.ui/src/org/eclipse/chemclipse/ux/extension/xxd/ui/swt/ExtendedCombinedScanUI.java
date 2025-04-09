@@ -45,7 +45,6 @@ import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModelMSD;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.model.TracesSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageScans;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageSubtract;
 import org.eclipse.chemclipse.vsd.model.core.selection.IChromatogramSelectionVSD;
@@ -84,7 +83,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 	private ScanTableUI scanTableUI;
 	private AtomicReference<TargetsListUI> tableViewer = new AtomicReference<>();
 	private CLabel labelEdit;
-	private Button buttonCopyTraces;
+	private AtomicReference<TracesClipboardUI> tracesClipboardControl = new AtomicReference<>();
 	private Button buttonLocked;
 	private ScanIdentifierUI scanIdentifierUI;
 	/*
@@ -168,7 +167,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 		buttonLocked = createButtonLocked(composite);
 		scanIdentifierUI = createScanIdentifierUI(composite);
-		buttonCopyTraces = createButtonCopyTracesClipboard(composite);
+		createTracesClipboardUI(composite);
 		createButtonAddSubstract(composite);
 		createButtonSave(composite);
 		createButtonSettings(composite);
@@ -353,22 +352,10 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 		return scanIdentifierUI;
 	}
 
-	private Button createButtonCopyTracesClipboard(Composite parent) {
+	private void createTracesClipboardUI(Composite parent) {
 
-		Button button = new Button(parent, SWT.PUSH);
-		button.setToolTipText("Copy the traces to clipboard.");
-		button.setText("");
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_COPY_CLIPBOARD, IApplicationImageProvider.SIZE_16x16));
-		button.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-
-				TracesSupport.copyTracesToClipboard(e.display, combinedScan);
-			}
-		});
-		//
-		return button;
+		TracesClipboardUI tracesClipboardUI = new TracesClipboardUI(parent, SWT.NONE);
+		tracesClipboardControl.set(tracesClipboardUI);
 	}
 
 	private void createButtonAddSubstract(Composite parent) {
@@ -482,6 +469,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 
 		update(chromatogramSelection);
 		scanIdentifierUI.updateIdentifier();
+		tracesClipboardControl.get().updateOption();
 	}
 
 	private void updateScan() {
@@ -503,7 +491,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 				}
 				break;
 		}
-		//
+
 		updateButtons();
 	}
 
@@ -533,6 +521,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 	private void updateButtons() {
 
 		boolean enabled = combinedScan instanceof ICombinedMassSpectrum;
-		buttonCopyTraces.setEnabled(enabled);
+		tracesClipboardControl.get().setInput(combinedScan);
+		tracesClipboardControl.get().setEnabled(enabled);
 	}
 }

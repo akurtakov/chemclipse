@@ -46,7 +46,6 @@ import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModelMSD;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.model.TracesSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageScans;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageSubtract;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
@@ -94,7 +93,7 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 	private CLabel labelSubtract;
 	private CLabel labelOptimized;
 	//
-	private Button buttonCopyTraces;
+	private AtomicReference<TracesClipboardUI> tracesClipboardControl = new AtomicReference<>();
 	private Button buttonSave;
 	private Button buttonDeleteOptimized;
 	//
@@ -228,6 +227,8 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 		} else {
 			updateScan(scan);
 		}
+		//
+		tracesClipboardControl.get().setInput(scan);
 	}
 
 	private void updateScan(IScan scan) {
@@ -318,7 +319,7 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 		buttonToolbarTypes = createButtonToggleToolbar(composite, toolbarTypes, IMAGE_TYPES, TOOLTIP_TYPES);
 		buttonToolbarEdit = createButtonToggleToolbar(composite, toolbarEdit, IMAGE_EDIT, TOOLTIP_EDIT);
-		buttonCopyTraces = createButtonCopyTracesClipboard(composite);
+		createTracesClipboardUI(composite);
 		createScanIdentifierUI(composite);
 		scanWebIdentifierUI = createScanWebIdentifierUI(composite);
 		createResetButton(composite);
@@ -637,34 +638,23 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 
 		buttonChartGrid.setEnabled(true);
 		boolean enabled = isMassSpectrum();
-		//
+
 		scanIdentifierControl.get().setEnabled(enabled || isWaveSpectrum());
 		if(!enabled) {
 			scanWebIdentifierUI.setEnabled(false);
 		}
-		buttonCopyTraces.setEnabled(scan instanceof IScanMSD || scan instanceof IScanWSD);
+
+		tracesClipboardControl.get().setEnabled(scan instanceof IScanMSD || scan instanceof IScanWSD);
 		buttonSave.setEnabled(enabled);
 		buttonDeleteOptimized.setEnabled(enabled && isOptimizedScan());
 		buttonSubtractOption.setEnabled(enabled);
 		scanFilterUI.setEnabled(enabled);
 	}
 
-	private Button createButtonCopyTracesClipboard(Composite parent) {
+	private void createTracesClipboardUI(Composite parent) {
 
-		Button button = new Button(parent, SWT.PUSH);
-		button.setToolTipText("Copy the traces to clipboard.");
-		button.setText("");
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_COPY_CLIPBOARD, IApplicationImageProvider.SIZE_16x16));
-		button.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-
-				TracesSupport.copyTracesToClipboard(e.display, scan);
-			}
-		});
-		//
-		return button;
+		TracesClipboardUI tracesClipboardUI = new TracesClipboardUI(parent, SWT.NONE);
+		tracesClipboardControl.set(tracesClipboardUI);
 	}
 
 	private ScanWebIdentifierUI createScanWebIdentifierUI(Composite parent) {
@@ -701,6 +691,7 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 
 				updateScan(scan);
 				scanIdentifierControl.get().updateIdentifier();
+				tracesClipboardControl.get().updateOption();
 				fireUpdate();
 			}
 		};
