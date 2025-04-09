@@ -86,6 +86,9 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 		filterTextFile = createTextFilterFile(composite);
 		createButtonSelectFilterFile(composite);
 		//
+		createLabel(composite, "Number of Samples to Filter:");
+		createSpinnerFilter(composite);
+		//
 		setControl(composite);
 	}
 
@@ -137,6 +140,29 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 			public void widgetSelected(SelectionEvent e) {
 
 				analysisSettings.setNumberOfPrincipalComponents(spinner.getSelection());
+			}
+		});
+		//
+		return spinner;
+	}
+
+	private Spinner createSpinnerFilter(Composite parent) {
+
+		Spinner spinner = new Spinner(parent, SWT.BORDER);
+		spinner.setToolTipText("Number of Samples to Filter");
+		spinner.setMinimum(PreferenceSupplier.MIN_NUMBER_OF_COMPONENTS);
+		spinner.setIncrement(1);
+		spinner.setSelection(analysisSettings.getNumberOfSamplesToFilter());
+		spinner.setMaximum(PreferenceSupplier.MAX_NUMBER_OF_COMPONENTS);
+		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
+		gridData.horizontalSpan = 2;
+		spinner.setLayoutData(gridData);
+		spinner.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				analysisSettings.setNumberOfSamplesToFilter(spinner.getSelection());
 			}
 		});
 		//

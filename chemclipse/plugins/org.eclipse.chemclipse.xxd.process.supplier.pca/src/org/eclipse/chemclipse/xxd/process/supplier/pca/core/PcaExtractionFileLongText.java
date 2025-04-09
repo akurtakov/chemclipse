@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -44,11 +45,15 @@ public class PcaExtractionFileLongText implements IExtractionData {
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
 	private final List<IDataInputEntry> dataInputEntries;
 	private final List<IDataInputEntry> filterDataInputEntries;
+	private int numberOfSamplesToFilter;
+	private final boolean filter;
 
-	public PcaExtractionFileLongText(List<IDataInputEntry> dataInputEntries, List<IDataInputEntry> filterDataInputEntries) {
+	public PcaExtractionFileLongText(List<IDataInputEntry> dataInputEntries, List<IDataInputEntry> filterDataInputEntries, int numberOfSamplesToFilter) {
 
 		this.dataInputEntries = dataInputEntries;
 		this.filterDataInputEntries = filterDataInputEntries;
+		this.numberOfSamplesToFilter = numberOfSamplesToFilter;
+		this.filter = !filterDataInputEntries.isEmpty();
 	}
 
 	@Override
@@ -61,12 +66,36 @@ public class PcaExtractionFileLongText implements IExtractionData {
 
 		Map<String, Sample> sampleMap = new HashMap<>();
 		Map<String, Map<String, Target>> samplesVariablesMap = new HashMap<>();
-		readFile(dataInputEntries, sampleMap, samplesVariablesMap, "0");
-		readFile(filterDataInputEntries, sampleMap, samplesVariablesMap, "1");
+		Map<String, Target> targetMap = new HashMap<>();
+		Map<String, Integer> filterOverlap = new HashMap<>();
+		if(filter) {
+			readFilterFile(filterDataInputEntries, targetMap);
+		}
+		readFile(dataInputEntries, sampleMap, samplesVariablesMap, targetMap, filterOverlap, "0");
+		if(filter) {
+			readFile(filterDataInputEntries, sampleMap, samplesVariablesMap, targetMap, filterOverlap, "1");
+			List<Map.Entry<String, Integer>> filterOverlapList = new ArrayList<>(filterOverlap.entrySet());
+			Collections.sort(filterOverlapList, (s1, s2) -> s1.getValue().compareTo(s2.getValue()));
+			filterOverlapList = filterOverlapList.reversed();
+			List<Map.Entry<String, Integer>> extractedSamples = new ArrayList<>();
+			if(this.numberOfSamplesToFilter > filterOverlapList.size()) {
+				this.numberOfSamplesToFilter = filterOverlapList.size();
+			}
+			for(int i = 0; i < this.numberOfSamplesToFilter; i++) {
+				extractedSamples.add(filterOverlapList.get(i));
+			}
+			filterOverlap.clear();
+			for(Map.Entry<String, Integer> entry : extractedSamples) {
+				filterOverlap.put(entry.getKey(), entry.getValue());
+			}
+		}
 		/*
 		 * extract all variables
 		 */
 		List<Sample> sampleList = new ArrayList<>(sampleMap.values());
+		if(filter) {
+			sampleList = sampleList.stream().filter(s -> filterOverlap.containsKey(s.getSampleName())).collect(Collectors.toList());
+		}
 		Collections.sort(sampleList, (s1, s2) -> s1.getSampleName().compareTo(s2.getSampleName()));
 		Samples samples = new Samples(sampleList);
 		List<? extends IVariable> variables = extractVariables(samplesVariablesMap);
@@ -75,7 +104,50 @@ public class PcaExtractionFileLongText implements IExtractionData {
 		return samples;
 	}
 
-	private void readFile(List<IDataInputEntry> dataInputEntries, Map<String, Sample> sampleMap, Map<String, Map<String, Target>> samplesVariablesMap, String classification) {
+	private void readFilterFile(List<IDataInputEntry> dataInputEntries, Map<String, Target> targetMap) {
+
+		for(IDataInputEntry dataInputEntry : dataInputEntries) {
+			String inputFile = dataInputEntry.getInputFile();
+			File file = new File(inputFile);
+			if(file.exists()) {
+				try (FileReader reader = new FileReader(file)) {
+					/*
+					 * Data
+					 */
+					CSVFormat csvFormat = CSVFormat.TDF.builder().setHeader().build();
+					CSVParser parser = new CSVParser(reader, csvFormat);
+					for(CSVRecord record : parser.getRecords()) {
+						int size = record.size();
+						if(size == 7) {
+							/*
+							 * Header
+							 */
+							String sampleName = record.get(0).trim();
+							String variableName = record.get(2).trim();
+							String variableNameLong = record.get(3).trim();
+							Double value = Double.parseDouble(record.get(4).trim().replaceAll(",", "."));
+							if(!sampleName.isEmpty()) {
+								if(!targetMap.containsKey(variableName)) {
+									String targetName = variableName;
+									Target target = new Target(targetName);
+									target.setValue(Double.toString(value));
+									target.setDescription(variableNameLong);
+									targetMap.put(targetName, target);
+								}
+							}
+						}
+					}
+					parser.close();
+				} catch(FileNotFoundException e) {
+					logger.warn(e);
+				} catch(IOException e) {
+					logger.warn(e);
+				}
+			}
+		}
+	}
+
+	private void readFile(List<IDataInputEntry> dataInputEntries, Map<String, Sample> sampleMap, Map<String, Map<String, Target>> samplesVariablesMap, Map<String, Target> targetMap, Map<String, Integer> filterOverlap, String classification) {
 
 		for(IDataInputEntry dataInputEntry : dataInputEntries) {
 			String inputFile = dataInputEntry.getInputFile();
@@ -116,6 +188,14 @@ public class PcaExtractionFileLongText implements IExtractionData {
 								target.setValue(Double.toString(value));
 								target.setDescription(variableNameLong);
 								variablesMap.put(targetName, target);
+								if(targetMap.containsKey(targetName)) {
+									if(filterOverlap.containsKey(sampleName)) {
+										int count = filterOverlap.get(sampleName) + 1;
+										filterOverlap.replace(sampleName, count);
+									} else {
+										filterOverlap.put(sampleName, 1);
+									}
+								}
 							}
 						}
 					}
