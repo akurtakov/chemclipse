@@ -62,6 +62,10 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 	private static final Pattern casNumberPattern = Pattern.compile("(CAS(NO|#)?:[ ]+)([0-9-]*)", Pattern.CASE_INSENSITIVE);
 	private static final Pattern databaseNamePattern = Pattern.compile("(DB(NO|#)?:)(.*)", Pattern.CASE_INSENSITIVE);
 	private static final Pattern referenceIdentifierPattern = Pattern.compile("(REFID:)(.*)", Pattern.CASE_INSENSITIVE);
+
+	private static final Pattern inchiKeyPattern = Pattern.compile("(InChIKey:)(.*)", Pattern.CASE_INSENSITIVE);
+	private static final Pattern inchiPattern = Pattern.compile("(InChI:)(.*)", Pattern.CASE_INSENSITIVE);
+
 	private static final Pattern smilesPattern = Pattern.compile("(SMILES:)(.*)", Pattern.CASE_INSENSITIVE);
 	private static final Pattern retentionTimePattern = Pattern.compile("(RT:)(.*)", Pattern.CASE_INSENSITIVE);
 	private static final Pattern relativeRetentionTimePattern = Pattern.compile("(RRT:)(.*)", Pattern.CASE_INSENSITIVE);
@@ -247,6 +251,13 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 
 		String database = extractContentAsString(massSpectrumData, databaseNamePattern, 3);
 		libraryInformation.setDatabase(database);
+
+		String inchiKey = extractContentAsString(massSpectrumData, inchiKeyPattern, 2);
+		libraryInformation.setInChIKey(inchiKey);
+
+		String inchi = extractContentAsString(massSpectrumData, inchiPattern, 2);
+		libraryInformation.setInChI(inchi);
+
 		String smiles = extractContentAsString(massSpectrumData, smilesPattern, 2);
 		libraryInformation.setSmiles(smiles);
 
