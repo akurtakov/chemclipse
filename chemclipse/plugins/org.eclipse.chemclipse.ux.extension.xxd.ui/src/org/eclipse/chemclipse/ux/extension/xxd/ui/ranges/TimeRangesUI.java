@@ -267,7 +267,9 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 
 				if(timeRange != null) {
 					timeRange.setTraces(text.getText().trim());
-					fireUpdate(timeRange);
+					if(e.keyCode == SWT.LF || e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR) {
+						fireUpdate(timeRange);
+					}
 				}
 			}
 
