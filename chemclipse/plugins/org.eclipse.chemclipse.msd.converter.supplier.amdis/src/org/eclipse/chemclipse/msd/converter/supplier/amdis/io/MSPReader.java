@@ -25,6 +25,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.io.FilenameUtils;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
@@ -86,11 +87,13 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 	@Override
 	public IMassSpectra read(File file, IProgressMonitor monitor) throws IOException {
 
-		List<String> massSpectraData = getMassSpectraData(file);
-
-		IMassSpectra massSpectra = extractMassSpectra(massSpectraData, monitor);
+		IMassSpectra massSpectra = new MassSpectra();
 		massSpectra.setConverterId(CONVERTER_ID);
 		massSpectra.setName(file.getName());
+
+		List<String> massSpectraData = getMassSpectraData(file);
+		extractMassSpectra(massSpectra, massSpectraData, monitor);
+
 		/*
 		 * Compound Information (*.CID)
 		 */
@@ -170,14 +173,14 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 	}
 
 	/**
-	 * Returns a mass spectra object or null, if something has gone wrong.
+	 * Adds parsed mass spectra to the massSpectra object.
 	 * 
+	 * @param massSpectra
 	 * @param massSpectraData
-	 * @return IMassSpectra
+	 * @param monitor
 	 */
-	private IMassSpectra extractMassSpectra(List<String> massSpectraData, IProgressMonitor monitor) {
+	private void extractMassSpectra(IMassSpectra massSpectra, List<String> massSpectraData, IProgressMonitor monitor) {
 
-		IMassSpectra massSpectra = new MassSpectra();
 		String referenceIdentifierMarker = org.eclipse.chemclipse.msd.converter.preferences.PreferenceSupplier.getReferenceIdentifierMarker();
 		String referenceIdentifierPrefix = org.eclipse.chemclipse.msd.converter.preferences.PreferenceSupplier.getReferenceIdentifierPrefix();
 
@@ -189,7 +192,7 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 			monitor.beginTask("Extract mass spectra", massSpectraData.size());
 			for(String massSpectrumData : massSpectraData) {
 				if(monitor.isCanceled()) {
-					return massSpectra;
+					return;
 				}
 				addMassSpectrum(massSpectra, massSpectrumData, referenceIdentifierMarker, referenceIdentifierPrefix);
 				monitor.worked(1);
@@ -210,7 +213,6 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 				}
 			}
 		}
-		return massSpectra;
 	}
 
 	/**
@@ -223,6 +225,7 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 
 		IVendorLibraryMassSpectrum massSpectrum = new VendorLibraryMassSpectrum();
 		ILibraryInformation libraryInformation = massSpectrum.getLibraryInformation();
+		libraryInformation.setDatabase(FilenameUtils.removeExtension(massSpectra.getName()));
 		/*
 		 * Extract name and reference identifier.
 		 * Additionally, add the reference identifier if it is stored as a pattern.
@@ -250,7 +253,7 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 		libraryInformation.setCasNumber(casNumber);
 
 		String database = extractContentAsString(massSpectrumData, databaseNamePattern, 3);
-		libraryInformation.setDatabase(database);
+		libraryInformation.setReferenceIdentifier(database);
 
 		String inchiKey = extractContentAsString(massSpectrumData, inchiKeyPattern, 2);
 		libraryInformation.setInChIKey(inchiKey);

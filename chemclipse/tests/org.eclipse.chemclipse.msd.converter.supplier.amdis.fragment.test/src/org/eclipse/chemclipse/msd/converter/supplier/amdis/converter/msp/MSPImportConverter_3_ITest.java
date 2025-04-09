@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2024 Lablicate GmbH.
+ * Copyright (c) 2016, 2025 Lablicate GmbH.
  *
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -51,7 +51,7 @@ public class MSPImportConverter_3_ITest extends TestCase {
 		assertEquals(1, massSpectra.size());
 	}
 
-	public void test_2()  {
+	public void test_2() {
 
 		IScanMSD massSpectrum = massSpectra.getMassSpectrum(1);
 		ILibraryMassSpectrum libraryMassSpectrum = (ILibraryMassSpectrum)massSpectrum;
@@ -60,7 +60,8 @@ public class MSPImportConverter_3_ITest extends TestCase {
 		assertEquals(0.0f, massSpectrum.getRetentionIndex());
 		assertEquals("+EI Scan (rt: 10.818 min)", libraryMassSpectrum.getLibraryInformation().getName());
 		assertEquals("", libraryMassSpectrum.getLibraryInformation().getCasNumber());
-		assertEquals("365", libraryMassSpectrum.getLibraryInformation().getDatabase());
+		assertEquals("365", libraryMassSpectrum.getLibraryInformation().getReferenceIdentifier());
+		assertEquals("Lib3", libraryMassSpectrum.getLibraryInformation().getDatabase());
 		assertEquals(65, massSpectrum.getNumberOfIons());
 		assertEquals(0.80f, massSpectrum.getIon(50.0156d).getAbundance());
 		assertEquals(0.07f, massSpectrum.getIon(50.0785d).getAbundance());

@@ -68,6 +68,7 @@ public class MassBankMS2ImportConverter_ITest extends ImportConverterMspTestCase
 		assertEquals("VFMQMACUYWGDOJ-AWEZNQCLSA-N", libraryInformation.getInChIKey());
 		assertEquals("CC(=O)N[C@@H](CC1=CC=CC=C1)C2=CC(=CC(=O)O2)OC", libraryInformation.getSmiles());
 		assertEquals("N-[(1S)-1-(4-methoxy-6-oxopyran-2-yl)-2-phenylethyl]acetamide", libraryInformation.getSynonyms().iterator().next());
-		assertEquals("MSBNK-AAFC-AC000854", libraryInformation.getDatabase());
+		assertEquals("MSBNK-AAFC-AC000854", libraryInformation.getReferenceIdentifier());
+		assertEquals("MassBank", libraryInformation.getDatabase());
 	}
 }
