@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.io;
 
@@ -16,7 +16,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.impl.RetentionIndexExtractor;
-import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.settings.IndexExportSettings;
 import org.eclipse.chemclipse.converter.exceptions.FileIsNotWriteableException;
 import org.eclipse.chemclipse.model.columns.ISeparationColumnIndices;
@@ -40,7 +39,7 @@ public class ChromatogramWriter {
 		ISeparationColumnIndices separationColumnIndices = retentionIndexExtractor.extract(chromatogram, deriveMissingIndices, useCuratedNames);
 		CalibrationFileWriter calibrationFileWriter = new CalibrationFileWriter();
 		calibrationFileWriter.write(file, separationColumnIndices);
-		if(PreferenceSupplier.isOpenReportAfterProcessing()) {
+		if(indexExportSettings.isOpenCalibrationFileAfterProcessing()) {
 			UpdateNotifier.update(CalibrationFileWriter.TOPIC_PROCESSING_FILE_CREATED, file);
 		}
 	}

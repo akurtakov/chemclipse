@@ -7,7 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * 
  * Contributors:
- * Dr. Philip Wenig - initial API and implementation
+ * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.core;
 
@@ -40,6 +40,7 @@ public class ChromatogramExportConverter extends AbstractChromatogramExportConve
 				IndexExportSettings indexExportSettings = new IndexExportSettings();
 				indexExportSettings.setUseCuratedNames(PreferenceSupplier.isCalibrationExportUseCuratedNames());
 				indexExportSettings.setDeriveMissingIndices(PreferenceSupplier.isCalibrationExportDeriveMissingIndices());
+				indexExportSettings.setOpenCalibrationFileAfterProcessing(PreferenceSupplier.isOpenCalibrationFileAfterProcessing());
 				writer.writeChromatogram(file, chromatogram, indexExportSettings, monitor);
 				processingInfo.setProcessingResult(file);
 			} catch(IOException e) {

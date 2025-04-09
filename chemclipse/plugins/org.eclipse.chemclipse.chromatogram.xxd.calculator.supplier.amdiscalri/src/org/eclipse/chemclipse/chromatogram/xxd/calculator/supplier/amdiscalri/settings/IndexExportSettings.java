@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2024 Lablicate GmbH.
+ * Copyright (c) 2023, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -22,6 +22,9 @@ public class IndexExportSettings {
 	@JsonProperty(value = "Derive Missing Indices", defaultValue = "true")
 	@JsonPropertyDescription(value = "If alkane indices are missing, try to calculate them existing peak retention indices.")
 	private boolean deriveMissingIndices = true;
+	@JsonProperty(value = "Open Calibration File", defaultValue = "false")
+	@JsonPropertyDescription(value = "Opens the calibration file with the system application if available after processing.")
+	private boolean openCalibrationFileAfterProcessing = false;
 
 	public boolean isUseCuratedNames() {
 
@@ -41,5 +44,15 @@ public class IndexExportSettings {
 	public void setDeriveMissingIndices(boolean deriveMissingIndices) {
 
 		this.deriveMissingIndices = deriveMissingIndices;
+	}
+
+	public boolean isOpenCalibrationFileAfterProcessing() {
+
+		return openCalibrationFileAfterProcessing;
+	}
+
+	public void setOpenCalibrationFileAfterProcessing(boolean openCalibrationFileAfterProcessing) {
+
+		this.openCalibrationFileAfterProcessing = openCalibrationFileAfterProcessing;
 	}
 }

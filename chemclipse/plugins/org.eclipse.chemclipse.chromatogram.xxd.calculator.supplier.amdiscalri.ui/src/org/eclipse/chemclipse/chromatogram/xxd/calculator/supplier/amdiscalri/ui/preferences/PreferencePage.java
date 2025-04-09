@@ -37,7 +37,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		addField(new LabelFieldEditor("Export Options", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_CALIBRATION_EXPORT_USE_CURATED_NAMES, "Use Curated Names", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_CALIBRATION_EXPORT_DERIVE_MISSING_INDICES, "Derive Missing Indices", getFieldEditorParent()));
-		addField(new BooleanFieldEditor(PreferenceSupplier.P_OPEN_REPORT_AFTER_PROCESSING, "Open report after processing", getFieldEditorParent()));
+		addField(new BooleanFieldEditor(PreferenceSupplier.P_OPEN_CALIBRATION_FILE_AFTER_PROCESSING, "Open calibration file after processing", getFieldEditorParent()));
 		//
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Import Calibration Files (*.cal)", getFieldEditorParent()));

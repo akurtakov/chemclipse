@@ -42,8 +42,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_USE_DEFAULT_COLUMN = true;
 	public static final String P_PROCESS_REFERENCED_CHROMATOGRAMS = "processReferencedChromatograms";
 	public static final boolean DEF_PROCESS_REFERENCED_CHROMATOGRAMS = true;
-	public static final String P_OPEN_REPORT_AFTER_PROCESSING = "openReportAfterProcessing";
-	public static final boolean DEF_OPEN_REPORT_AFTER_PROCESSING = true;
+	public static final String P_OPEN_CALIBRATION_FILE_AFTER_PROCESSING = "openCalibrationFileAfterProcessing";
+	public static final boolean DEF_OPEN_CALIBRATION_FILE_AFTER_PROCESSING = false;
 	public static final String P_USE_DIRECTORY_IMPORT_CALIBRATION_FILES = "useDirectoryImportCalibrationFiles";
 	public static final boolean DEF_USE_DIRECTORY_IMPORT_CALIBRATION_FILES = false;
 	public static final String P_STANDARD_DIRECTORY_IMPORT_CALIBRATION_FILES = "standardDirectoryImportCalibrationFiles";
@@ -110,12 +110,12 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_CALCULATOR_STRATEGY, DEF_CALCULATOR_STRATEGY);
 		putDefault(P_USE_DEFAULT_COLUMN, Boolean.toString(DEF_USE_DEFAULT_COLUMN));
 		putDefault(P_PROCESS_REFERENCED_CHROMATOGRAMS, Boolean.toString(DEF_PROCESS_REFERENCED_CHROMATOGRAMS));
+		putDefault(P_OPEN_CALIBRATION_FILE_AFTER_PROCESSING, DEF_OPEN_CALIBRATION_FILE_AFTER_PROCESSING);
 		putDefault(P_NUMBER_OF_TARGETS, Integer.toString(DEF_NUMBER_OF_TARGETS));
 		putDefault(P_MIN_MATCH_FACTOR, Float.toString(DEF_MIN_MATCH_FACTOR));
 		putDefault(P_MIN_REVERSE_MATCH_FACTOR, Float.toString(DEF_MIN_REVERSE_MATCH_FACTOR));
 		putDefault(P_CALIBRATION_EXPORT_USE_CURATED_NAMES, Boolean.toString(DEF_CALIBRATION_EXPORT_USE_CURATED_NAMES));
 		putDefault(P_CALIBRATION_EXPORT_DERIVE_MISSING_INDICES, Boolean.toString(DEF_CALIBRATION_EXPORT_DERIVE_MISSING_INDICES));
-		putDefault(P_OPEN_REPORT_AFTER_PROCESSING, Boolean.toString(DEF_OPEN_REPORT_AFTER_PROCESSING));
 		putDefault(P_USE_DIRECTORY_IMPORT_CALIBRATION_FILES, DEF_USE_DIRECTORY_IMPORT_CALIBRATION_FILES);
 		putDefault(P_STANDARD_DIRECTORY_IMPORT_CALIBRATION_FILES, DEF_STANDARD_DIRECTORY_IMPORT_CALIBRATION_FILES);
 		//
@@ -214,9 +214,9 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		INSTANCE().putBoolean(P_CALIBRATION_EXPORT_DERIVE_MISSING_INDICES, value);
 	}
 
-	public static boolean isOpenReportAfterProcessing() {
+	public static boolean isOpenCalibrationFileAfterProcessing() {
 
-		return INSTANCE().getBoolean(P_OPEN_REPORT_AFTER_PROCESSING, DEF_OPEN_REPORT_AFTER_PROCESSING);
+		return INSTANCE().getBoolean(P_OPEN_CALIBRATION_FILE_AFTER_PROCESSING, DEF_OPEN_CALIBRATION_FILE_AFTER_PROCESSING);
 	}
 
 	public static boolean isUseDirectoryImportCalibrationFiles() {
