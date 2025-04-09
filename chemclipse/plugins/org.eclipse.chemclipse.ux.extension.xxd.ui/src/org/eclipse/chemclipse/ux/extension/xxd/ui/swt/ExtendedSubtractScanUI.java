@@ -12,11 +12,16 @@
 package org.eclipse.chemclipse.ux.extension.xxd.ui.swt;
 
 import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Consumer;
 
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.support.CalculationType;
+import org.eclipse.chemclipse.model.targets.TargetSupport;
+import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
@@ -26,13 +31,20 @@ import org.eclipse.chemclipse.msd.swt.ui.support.DatabaseFileSupport;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
+import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModelMSD;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageScans;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageSubtract;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.runnables.LibraryServiceRunnable;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.Clipboard;
 import org.eclipse.swt.dnd.TextTransfer;
@@ -54,15 +66,17 @@ import jakarta.inject.Inject;
 public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI {
 
 	private static final Logger logger = Logger.getLogger(ExtendedSubtractScanUI.class);
-	//
+
 	private TabFolder tabFolder;
 	private ScanChartUI scanChartUI;
 	private ExtendedScanTableUI extendedScanTableUI;
-	//
+
 	private AtomicReference<Button> buttonSelectedScanControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonCombinedScanControl = new AtomicReference<>();
-	//
+	private AtomicReference<Button> buttonComparisonScanControl = new AtomicReference<>();
+
 	private IScanMSD scanMSD = null;
+	private IPeakMSD peakMSD = null;
 	private IChromatogramSelectionMSD chromatogramSelectionMSD = null;
 
 	@Inject
@@ -87,24 +101,26 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 			this.chromatogramSelectionMSD = chromatogramSelectionMSD;
 		} else if(object instanceof IScanMSD scanMSD) {
 			this.scanMSD = scanMSD;
+		} else if(object instanceof IPeakMSD peakMSD) {
+			this.peakMSD = peakMSD;
 		} else if(object == null) {
 			chromatogramSelectionMSD = null;
 		}
-		//
+
 		updateScanData(scanMSD);
 	}
 
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout layout = new GridLayout(1, true);
 		composite.setLayout(layout);
-		//
+
 		createToolbarMain(composite);
 		createScanTabFolderSection(composite);
-		//
+
 		loadSessionMassSpectrum(composite.getDisplay());
 		updateWidgets();
 	}
@@ -115,10 +131,11 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
-		composite.setLayout(new GridLayout(6, false));
-		//
+		composite.setLayout(new GridLayout(7, false));
+
 		createAddSelectedScanButton(composite);
 		createAddCombinedScanButton(composite);
+		createAddComparisonScanButton(composite);
 		createClearSessionButton(composite);
 		createButtonCopyTracesClipboard(composite);
 		createSaveButton(composite);
@@ -130,7 +147,7 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		composite.setLayout(new GridLayout(1, true));
-		//
+
 		tabFolder = new TabFolder(composite, SWT.BOTTOM);
 		tabFolder.setBackground(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -142,7 +159,7 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 				updateScanData(scanMSD);
 			}
 		});
-		//
+
 		createScanChart(tabFolder);
 		createScanTable(tabFolder);
 	}
@@ -154,7 +171,7 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 		Composite composite = new Composite(tabFolder, SWT.NONE);
 		composite.setLayout(new GridLayout(1, true));
 		tabItem.setControl(composite);
-		//
+
 		scanChartUI = new ScanChartUI(composite, SWT.BORDER);
 		scanChartUI.setLayoutData(new GridData(GridData.FILL_BOTH));
 	}
@@ -167,12 +184,12 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 		composite.setBackground(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 		composite.setLayout(new GridLayout(1, true));
 		tabItem.setControl(composite);
-		//
+
 		extendedScanTableUI = new ExtendedScanTableUI(composite, SWT.NONE);
 		extendedScanTableUI.setLayoutData(new GridData(GridData.FILL_BOTH));
 		extendedScanTableUI.forceEnableEditModus(true);
 		extendedScanTableUI.setFireUpdate(false);
-		//
+
 		extendedScanTableUI.addEditListener(new EditListener() {
 
 			@Override
@@ -206,7 +223,7 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 				}
 			}
 		});
-		//
+
 		buttonSelectedScanControl.set(button);
 	}
 
@@ -231,8 +248,55 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 				}
 			}
 		});
-		//
+
 		buttonCombinedScanControl.set(button);
+	}
+
+	private void createAddComparisonScanButton(Composite parent) {
+
+		Button button = new Button(parent, SWT.PUSH);
+		button.setToolTipText("Add comparison scan to subtract spectrum.");
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_COMPARISON_SCAN, IApplicationImage.SIZE_16x16));
+		button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				if(peakMSD != null && !peakMSD.getTargets().isEmpty()) {
+
+					IIdentificationTarget identificationTarget = TargetSupport.getBestIdentificationTarget(peakMSD);
+					LibraryServiceRunnable runnable = new LibraryServiceRunnable(identificationTarget, new Consumer<IScanMSD>() {
+
+						@Override
+						public void accept(IScanMSD referenceMassSpectrum) {
+
+							saveSessionMassSpectrum(e.display, referenceMassSpectrum);
+						}
+					});
+
+					try {
+						if(runnable.requireProgressMonitor()) {
+							DisplayUtils.executeInUserInterfaceThread(() -> {
+								ProgressMonitorDialog monitor = new ProgressMonitorDialog(getShell());
+								monitor.run(true, true, runnable);
+								return null;
+							});
+						} else {
+							DisplayUtils.executeBusy(() -> {
+								runnable.run(new NullProgressMonitor());
+								return null;
+							});
+						}
+					} catch(InterruptedException ex) {
+						Thread.currentThread().interrupt();
+					} catch(ExecutionException ex) {
+						Activator.getDefault().getLog().log(new Status(IStatus.ERROR, getClass().getName(), "Fetch comparison scan failed.", ex));
+					}
+				}
+			}
+		});
+
+		buttonComparisonScanControl.set(button);
 	}
 
 	private void createClearSessionButton(Composite parent) {
@@ -249,7 +313,6 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 				messageBox.setText("Clear Session");
 				messageBox.setMessage("Would you like to clear the session subtract scan?");
 				if(messageBox.open() == SWT.YES) {
-					//
 					scanMSD = null;
 					updateScanData(scanMSD);
 					saveSessionMassSpectrum(e.display, null);
@@ -279,7 +342,7 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 				clipboard.dispose();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -341,7 +404,7 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 				extendedScanTableUI.setInput(scanMSD);
 			}
 		}
-		//
+
 		updateWidgets();
 	}
 
@@ -361,7 +424,7 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 
 		PreferenceSupplierModelMSD.setSessionSubtractMassSpectrum(scanMSD);
 		PreferenceSupplierModelMSD.storeSessionSubtractMassSpectrum();
-		//
+
 		if(display != null) {
 			fireUpdateEvent(display);
 		}
