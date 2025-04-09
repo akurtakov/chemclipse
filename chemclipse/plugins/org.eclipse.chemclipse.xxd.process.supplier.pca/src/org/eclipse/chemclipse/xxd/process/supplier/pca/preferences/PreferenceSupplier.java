@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2024 Lablicate GmbH.
+ * Copyright (c) 2018, 2025 Lablicate GmbH.
  * 
  * All rights reserved.
  * This program and the accompanying materials are made available under the
@@ -8,6 +8,7 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Lorenz Gerber - parameter for long format filter
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.preferences;
 
@@ -34,6 +35,11 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final int MIN_NUMBER_OF_COMPONENTS = 3;
 	public static final int MAX_NUMBER_OF_COMPONENTS = 1000;
 	public static final int DEF_NUMBER_OF_COMPONENTS = 3;
+	//
+	public static final String P_NUMBER_OF_SAMPLES_TO_FILTER = "numberOfSamplesToFilter";
+	public static final int MIN_NUMBER_OF_SAMPLES_TO_FILTER = 2;
+	public static final int MAX_NUMBER_OF_SAMPLES_TO_FILTER = 2000;
+	public static final int DEF_NUMBER_OF_SAMPLES_TO_FILTER = 100;
 	//
 	public static final String P_RETENTION_TIME_WINDOW_PEAKS = "retentionTimeWindowPeaks";
 	public static final double DEF_RETENTION_TIME_WINDOW_PEAKS = 0.1;
@@ -102,6 +108,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		IAnalysisSettings analysisSettings = new AnalysisSettings();
 		analysisSettings.setNumberOfPrincipalComponents(getNumberOfPrincipalComponents());
+		analysisSettings.setNumberOfSamplesToFilter(getNumberOfSamplesToFilter());
 		analysisSettings.setAlgorithm(getAlgorithm());
 		analysisSettings.setRemoveUselessVariables(isRemoveUselessVariables());
 		analysisSettings.setLabelOptionPCA(getLabelOptionPCA());
@@ -112,6 +119,11 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static int getNumberOfPrincipalComponents() {
 
 		return INSTANCE().getInteger(P_NUMBER_OF_COMPONENTS, DEF_NUMBER_OF_COMPONENTS);
+	}
+
+	public static int getNumberOfSamplesToFilter() {
+
+		return INSTANCE().getInteger(P_NUMBER_OF_SAMPLES_TO_FILTER, DEF_NUMBER_OF_SAMPLES_TO_FILTER);
 	}
 
 	public static String getColorScheme() {

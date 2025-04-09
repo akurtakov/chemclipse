@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2024 Lablicate GmbH.
+ * Copyright (c) 2017, 2025 Lablicate GmbH.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -21,6 +21,7 @@ public class AnalysisSettings implements IAnalysisSettings {
 
 	private String title = "";
 	private int numberOfPrincipalComponents = PreferenceSupplier.getNumberOfPrincipalComponents();
+	private int numberOfSamplesToFilter = PreferenceSupplier.getNumberOfSamplesToFilter();
 	private Algorithm algorithm = PreferenceSupplier.getAlgorithm();
 	private boolean removeUselessVariables = PreferenceSupplier.isRemoveUselessVariables();
 	private LabelOptionPCA labelOptionPCA = PreferenceSupplier.getLabelOptionPCA();
@@ -36,6 +37,7 @@ public class AnalysisSettings implements IAnalysisSettings {
 	public AnalysisSettings(IAnalysisSettings analysisSettings) {
 
 		this.numberOfPrincipalComponents = analysisSettings.getNumberOfPrincipalComponents();
+		this.numberOfSamplesToFilter = analysisSettings.getNumberOfSamplesToFilter();
 		this.algorithm = analysisSettings.getAlgorithm();
 		this.removeUselessVariables = analysisSettings.isRemoveUselessVariables();
 		this.labelOptionPCA = analysisSettings.getLabelOptionPCA();
@@ -65,6 +67,17 @@ public class AnalysisSettings implements IAnalysisSettings {
 	public void setNumberOfPrincipalComponents(int numberOfPrincipalComponents) {
 
 		this.numberOfPrincipalComponents = numberOfPrincipalComponents;
+	}
+
+	@Override
+	public int getNumberOfSamplesToFilter() {
+
+		return numberOfSamplesToFilter;
+	}
+
+	public void setNumberOfSamplesToFilter(int numberOfSamplesToFilter) {
+
+		this.numberOfSamplesToFilter = numberOfSamplesToFilter;
 	}
 
 	@Override

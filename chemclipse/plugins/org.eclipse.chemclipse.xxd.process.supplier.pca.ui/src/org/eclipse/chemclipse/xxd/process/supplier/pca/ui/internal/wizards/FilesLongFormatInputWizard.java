@@ -82,7 +82,7 @@ public class FilesLongFormatInputWizard extends Wizard implements IInputWizard {
 		List<IDataInputEntry> filterDataInputEntries = getFilterDataInputEntries();
 		File file = getFile(dataInputEntries);
 		if(file != null && file.getName().endsWith(PcaExtractionFileLongText.FILE_EXTENSION)) {
-			extractionData = new PcaExtractionFileLongText(dataInputEntries, filterDataInputEntries);
+			extractionData = new PcaExtractionFileLongText(dataInputEntries, filterDataInputEntries, getAnalysisSettings().getNumberOfSamplesToFilter());
 			return true;
 		}
 		return false;
