@@ -76,14 +76,14 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 	private static final Pattern exactMassPattern = Pattern.compile("(ExactMass:)(.*)", Pattern.CASE_INSENSITIVE);
 	private static final Pattern ionModePattern = Pattern.compile("(Ion_mode:)(.*)", Pattern.CASE_INSENSITIVE);
 	private static final Pattern spectrumTypePattern = Pattern.compile("(Spectrum_type:)(.*)", Pattern.CASE_INSENSITIVE);
-	//
+
 	private static final String RETENTION_INDICES_DELIMITER = ", ";
 
 	@Override
 	public IMassSpectra read(File file, IProgressMonitor monitor) throws IOException {
 
 		List<String> massSpectraData = getMassSpectraData(file);
-		//
+
 		IMassSpectra massSpectra = extractMassSpectra(massSpectraData, monitor);
 		massSpectra.setConverterId(CONVERTER_ID);
 		massSpectra.setName(file.getName());
@@ -107,7 +107,7 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 				ConverterMOL.transfer(moleculeStructureMap, massSpectra);
 			}
 		}
-		//
+
 		return massSpectra;
 	}
 
@@ -120,7 +120,7 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 
 		Charset charset = PreferenceSupplier.getCharsetImportMSP();
 		List<String> massSpectraData = new ArrayList<>();
-		//
+
 		try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), charset))) {
 			StringBuilder builder = new StringBuilder();
 			String line;
@@ -132,7 +132,7 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 				 * StringBuilder. In all other cases append the found lines to the
 				 * StringBuilder.
 				 */
-				if(line.length() == 0) {
+				if(line.isEmpty()) {
 					addMassSpectrumData(builder, massSpectraData);
 					builder = new StringBuilder();
 				} else {
@@ -145,7 +145,7 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 			 */
 			addMassSpectrumData(builder, massSpectraData);
 		}
-		//
+
 		return massSpectraData;
 	}
 
@@ -176,7 +176,7 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 		IMassSpectra massSpectra = new MassSpectra();
 		String referenceIdentifierMarker = org.eclipse.chemclipse.msd.converter.preferences.PreferenceSupplier.getReferenceIdentifierMarker();
 		String referenceIdentifierPrefix = org.eclipse.chemclipse.msd.converter.preferences.PreferenceSupplier.getReferenceIdentifierPrefix();
-		//
+
 		if(massSpectraData.size() > 1) {
 			/*
 			 * Iterates through the saved mass spectrum text data and converts it to
@@ -227,23 +227,29 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 		extractNameAndReferenceIdentifier(massSpectrum, name, referenceIdentifierMarker, referenceIdentifierPrefix);
 		String referenceIdentifier = extractContentAsString(massSpectrumData, referenceIdentifierPattern, 2);
 		massSpectrum.getLibraryInformation().setReferenceIdentifier(referenceIdentifier);
-		//
+
 		String formula = extractContentAsString(massSpectrumData, formulaPattern, 2);
 		libraryInformation.setFormula(formula);
+
 		double molWeight = extractContentAsDouble(massSpectrumData, molweightPattern);
 		libraryInformation.setMolWeight(molWeight);
+
 		Set<String> synonyms = extractSynonyms(massSpectrumData, synonymPattern);
 		massSpectrum.getLibraryInformation().setSynonyms(synonyms);
+
 		String comments = extractContentAsString(massSpectrumData, commentsPattern, 2);
 		String comment = extractContentAsString(massSpectrumData, commentPattern, 2);
 		String commentData = comments + comment;
 		libraryInformation.setComments(commentData.trim());
+
 		String casNumber = extractContentAsString(massSpectrumData, casNumberPattern, 3);
 		libraryInformation.setCasNumber(casNumber);
+
 		String database = extractContentAsString(massSpectrumData, databaseNamePattern, 3);
 		libraryInformation.setDatabase(database);
 		String smiles = extractContentAsString(massSpectrumData, smilesPattern, 2);
 		libraryInformation.setSmiles(smiles);
+
 		int retentionTime = extractContentAsInt(massSpectrumData, retentionTimePattern, 2);
 		if(retentionTime == 0) {
 			retentionTime = extractContentAsInt(massSpectrumData, nameRetentionTimePattern, 2);
@@ -253,13 +259,13 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 		massSpectrum.setRelativeRetentionTime(relativeRetentionTime);
 		String retentionIndices = extractContentAsString(massSpectrumData, retentionIndexPattern, 2);
 		extractRetentionIndices(massSpectrum, retentionIndices, RETENTION_INDICES_DELIMITER);
-		//
+
 		String instrument = extractContentAsString(massSpectrumData, instrumentPattern, 2);
 		massSpectrum.putProperty(IRegularLibraryMassSpectrum.PROPERTY_INSTRUMENT_NAME, instrument);
-		//
+
 		String instrumentType = extractContentAsString(massSpectrumData, instrumentTypePattern, 2);
 		massSpectrum.putProperty(IRegularLibraryMassSpectrum.PROPERTY_INSTRUMENT_TYPE, instrumentType);
-		//
+
 		String ionMode = extractContentAsString(massSpectrumData, ionModePattern, 2);
 		if(ionMode.equals("POSITIVE")) {
 			massSpectrum.setPolarity(Polarity.POSITIVE);
@@ -275,10 +281,13 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 		}
 		String precursorType = extractContentAsString(massSpectrumData, precursorTypePattern, 2);
 		massSpectrum.putProperty(IRegularLibraryMassSpectrum.PROPERTY_PRECURSOR_TYPE, precursorType);
+
 		double precursorMZ = extractContentAsDouble(massSpectrumData, precursorMassPattern);
 		massSpectrum.setPrecursorIon(precursorMZ);
+
 		double exactMass = extractContentAsDouble(massSpectrumData, exactMassPattern);
 		massSpectrum.setNeutralMass(exactMass);
+
 		String collisionEnergy = extractContentAsString(massSpectrumData, collisionEnergyPattern, 2);
 		massSpectrum.putProperty(IRegularLibraryMassSpectrum.PROPERTY_COLLISION_ENERGY, collisionEnergy);
 		/*
@@ -309,7 +318,7 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 		if(data.matches()) {
 			ionData = data.group(5);
 		}
-		//
+
 		IIon amdisIon = null;
 		double ion;
 		float abundance;
