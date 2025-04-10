@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2022 Lablicate GmbH.
+ * Copyright (c) 2020, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -10,6 +10,8 @@
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.model.traces;
+
+import java.util.Objects;
 
 public class NamedTrace {
 
@@ -40,5 +42,30 @@ public class NamedTrace {
 	public void setTraces(String traces) {
 
 		this.traces = traces;
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(identifier);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+
+		if(this == obj)
+			return true;
+		if(obj == null)
+			return false;
+		if(getClass() != obj.getClass())
+			return false;
+		NamedTrace other = (NamedTrace)obj;
+		return Objects.equals(identifier, other.identifier);
+	}
+
+	@Override
+	public String toString() {
+
+		return "NamedTrace [identifier=" + identifier + ", traces=" + traces + "]";
 	}
 }

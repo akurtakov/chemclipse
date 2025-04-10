@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2024 Lablicate GmbH.
+ * Copyright (c) 2020, 2025 Lablicate GmbH.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -15,6 +15,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.chemclipse.model.traces.NamedTrace;
 import org.eclipse.chemclipse.model.traces.NamedTraces;
@@ -38,6 +39,7 @@ import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -54,27 +56,23 @@ import org.eclipse.swt.widgets.Text;
 
 public class NamedTracesUI extends Composite {
 
-	private static final String TOOLTIP_TEXT = "Enter/modify the traces.";
-	//
-	public static final String IMPORT_TITLE = "Import " + NamedTraces.DESCRIPTION;
-	public static final String EXPORT_TITLE = "Export " + NamedTraces.DESCRIPTION;
-	public static final String MESSAGE_IMPORT_SUCCESSFUL = "Named traces have been imported successfully.";
-	public static final String MESSAGE_EXPORT_SUCCESSFUL = "Named traces have been exported successfully.";
-	public static final String MESSAGE_EXPORT_FAILED = "Failed to export the named traces.";
-	//
-	private ComboViewer comboViewer;
-	private Text textTraces;
-	private Button buttonAdd;
-	private Button buttonDelete;
-	private Button buttonImport;
-	private Button buttonExport;
-	//
+	private static final String TOOLTIP_TEXT = "Edit the traces.";
+	private static final String IMPORT_TITLE = "Import " + NamedTraces.DESCRIPTION;
+	private static final String EXPORT_TITLE = "Export " + NamedTraces.DESCRIPTION;
+	private static final String NO_SELECTION = "--";
+
+	private AtomicReference<ComboViewer> comboViewerControl = new AtomicReference<>();
+	private AtomicReference<Text> textTraces = new AtomicReference<>();
+	private AtomicReference<Button> buttonAdd = new AtomicReference<>();
+	private AtomicReference<Button> buttonDelete = new AtomicReference<>();
+	private AtomicReference<Button> buttonImport = new AtomicReference<>();
+	private AtomicReference<Button> buttonExport = new AtomicReference<>();
+
 	private NamedTraces namedTraces = null;
 	private NamedTrace namedTrace = null;
-	//
+	private boolean allowNoSelection = false;
+
 	private IUpdateListener updateListener = null;
-	//
-	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
 	public NamedTracesUI(Composite parent, int style) {
 
@@ -84,7 +82,13 @@ public class NamedTracesUI extends Composite {
 
 	public void setInput(NamedTraces namedTraces) {
 
+		this.setInput(namedTraces, false);
+	}
+
+	public void setInput(NamedTraces namedTraces, boolean allowNoSelection) {
+
 		this.namedTraces = namedTraces;
+		this.allowNoSelection = allowNoSelection;
 		updateInput(null);
 	}
 
@@ -102,16 +106,24 @@ public class NamedTracesUI extends Composite {
 
 	public String[] getItems() {
 
-		return comboViewer.getCombo().getItems();
+		return comboViewerControl.get().getCombo().getItems();
 	}
 
 	public void select(int index) {
 
+		/*
+		 * Increase index, because the first item
+		 * is the empty selection operator.
+		 */
+		if(allowNoSelection) {
+			index++;
+		}
+
 		if(index >= 0 && index < getItems().length) {
-			comboViewer.getCombo().select(index);
-			Object object = comboViewer.getStructuredSelection().getFirstElement();
-			if(object instanceof NamedTrace selectedNamedTrace) {
-				namedTrace = selectedNamedTrace;
+			comboViewerControl.get().getCombo().select(index);
+			Object object = comboViewerControl.get().getStructuredSelection().getFirstElement();
+			if(object instanceof NamedTrace trace) {
+				namedTrace = trace;
 				updateNamedTrace();
 			}
 		}
@@ -145,15 +157,15 @@ public class NamedTracesUI extends Composite {
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
 		//
-		comboViewer = createComboViewer(this);
-		textTraces = createText(this);
-		buttonAdd = createButtonAdd(this);
-		buttonDelete = createButtonDelete(this);
-		buttonImport = createButtonImport(this);
-		buttonExport = createButtonExport(this);
+		createComboViewer(this);
+		createText(this);
+		createButtonAdd(this);
+		createButtonDelete(this);
+		createButtonImport(this);
+		createButtonExport(this);
 	}
 
-	private ComboViewer createComboViewer(Composite composite) {
+	private void createComboViewer(Composite composite) {
 
 		ComboViewer comboViewer = new EnhancedComboViewer(composite, SWT.READ_ONLY);
 		Combo combo = comboViewer.getCombo();
@@ -165,6 +177,8 @@ public class NamedTracesUI extends Composite {
 
 				if(element instanceof NamedTrace namedTrace) {
 					return namedTrace.getIdentifier();
+				} else if(element instanceof String value) {
+					return value;
 				}
 				return null;
 			}
@@ -184,16 +198,18 @@ public class NamedTracesUI extends Composite {
 				Object object = comboViewer.getStructuredSelection().getFirstElement();
 				if(object instanceof NamedTrace selectedNamedTrace) {
 					namedTrace = selectedNamedTrace;
-					updateNamedTrace();
-					fireUpdate();
+				} else {
+					namedTrace = null;
 				}
+				updateNamedTrace();
+				fireUpdate();
 			}
 		});
 		//
-		return comboViewer;
+		comboViewerControl.set(comboViewer);
 	}
 
-	private Text createText(Composite parent) {
+	private void createText(Composite parent) {
 
 		Text text = new Text(parent, SWT.BORDER);
 		text.setText("");
@@ -217,10 +233,10 @@ public class NamedTracesUI extends Composite {
 			}
 		});
 		//
-		return text;
+		textTraces.set(text);
 	}
 
-	private Button createButtonAdd(Composite parent) {
+	private void createButtonAdd(Composite parent) {
 
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
@@ -246,10 +262,11 @@ public class NamedTracesUI extends Composite {
 				}
 			}
 		});
-		return button;
+
+		buttonAdd.set(button);
 	}
 
-	private Button createButtonDelete(Composite parent) {
+	private void createButtonDelete(Composite parent) {
 
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
@@ -261,7 +278,7 @@ public class NamedTracesUI extends Composite {
 			public void widgetSelected(SelectionEvent e) {
 
 				if(MessageDialog.openQuestion(e.display.getActiveShell(), "Named Trace", "Would you like to delete the selected named trace?")) {
-					Object object = comboViewer.getStructuredSelection().getFirstElement();
+					Object object = comboViewerControl.get().getStructuredSelection().getFirstElement();
 					if(object instanceof NamedTrace selectedNamedTrace) {
 						namedTrace = null;
 						namedTraces.remove(selectedNamedTrace);
@@ -271,10 +288,11 @@ public class NamedTracesUI extends Composite {
 				}
 			}
 		});
-		return button;
+
+		buttonDelete.set(button);
 	}
 
-	private Button createButtonImport(Composite parent) {
+	private void createButtonImport(Composite parent) {
 
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
@@ -286,6 +304,7 @@ public class NamedTracesUI extends Composite {
 			public void widgetSelected(SelectionEvent e) {
 
 				if(namedTraces != null) {
+					IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 					FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 					fileDialog.setText(IMPORT_TITLE);
 					fileDialog.setFilterExtensions(new String[]{NamedTraces.FILTER_EXTENSION});
@@ -296,17 +315,18 @@ public class NamedTracesUI extends Composite {
 						preferenceStore.setValue(PreferenceSupplier.P_NAMED_TRACES_TEMPLATE_FOLDER, fileDialog.getFilterPath());
 						File file = new File(path);
 						namedTraces.importItems(file);
-						MessageDialog.openInformation(e.display.getActiveShell(), IMPORT_TITLE, MESSAGE_IMPORT_SUCCESSFUL);
+						MessageDialog.openInformation(e.display.getActiveShell(), IMPORT_TITLE, "Named traces have been imported successfully.");
 						updateInput(null);
 						fireUpdate();
 					}
 				}
 			}
 		});
-		return button;
+
+		buttonImport.set(button);
 	}
 
-	private Button createButtonExport(Composite parent) {
+	private void createButtonExport(Composite parent) {
 
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
@@ -318,6 +338,7 @@ public class NamedTracesUI extends Composite {
 			public void widgetSelected(SelectionEvent e) {
 
 				if(namedTraces != null) {
+					IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 					FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 					fileDialog.setOverwrite(true);
 					fileDialog.setText(EXPORT_TITLE);
@@ -330,18 +351,25 @@ public class NamedTracesUI extends Composite {
 						preferenceStore.setValue(PreferenceSupplier.P_NAMED_TRACES_TEMPLATE_FOLDER, fileDialog.getFilterPath());
 						File file = new File(path);
 						if(namedTraces.exportItems(file)) {
-							MessageDialog.openInformation(e.display.getActiveShell(), EXPORT_TITLE, MESSAGE_EXPORT_SUCCESSFUL);
+							MessageDialog.openInformation(e.display.getActiveShell(), EXPORT_TITLE, "Named traces have been exported successfully.");
 						} else {
-							MessageDialog.openWarning(e.display.getActiveShell(), EXPORT_TITLE, MESSAGE_EXPORT_FAILED);
+							MessageDialog.openWarning(e.display.getActiveShell(), EXPORT_TITLE, "Failed to export the named traces.");
 						}
 					}
 				}
 			}
 		});
-		return button;
+
+		buttonExport.set(button);
 	}
 
 	private void updateInput(String identifier) {
+
+		List<Object> input = new ArrayList<Object>();
+		if(allowNoSelection) {
+			input.add(NO_SELECTION);
+		}
+		ComboViewer comboViewer = comboViewerControl.get();
 
 		namedTrace = null;
 		if(namedTraces != null) {
@@ -350,60 +378,85 @@ public class NamedTracesUI extends Composite {
 			 */
 			List<NamedTrace> traces = new ArrayList<>(namedTraces.values());
 			Collections.sort(traces, (t1, t2) -> t1.getIdentifier().compareTo(t2.getIdentifier()));
+			input.addAll(traces);
 			/*
-			 * Populate the combo viewer
+			 * Set selection
 			 */
-			Combo combo = comboViewer.getCombo();
-			int selectionIndex = combo.getSelectionIndex();
-			comboViewer.setInput(traces);
-			int itemCount = combo.getItemCount();
-			/*
-			 * Set the last selection if possible.
-			 */
-			if(itemCount > 0) {
-				int index = -1;
-				if(identifier == null) {
-					index = (selectionIndex >= 0 && selectionIndex < itemCount) ? selectionIndex : 0;
-				} else {
-					exitloop:
-					for(int i = 0; i < traces.size(); i++) {
-						if(identifier.equals(traces.get(i).getIdentifier())) {
-							index = i;
-							break exitloop;
-						}
-					}
+			Object object = comboViewer.getStructuredSelection().getFirstElement();
+			if(identifier == null) {
+				if(object instanceof NamedTrace selection) {
+					namedTrace = getNamedTrace(selection.getIdentifier());
 				}
-				/*
-				 * Set the selected item.
-				 */
-				if(index >= 0 && index < itemCount) {
-					combo.select(index);
-					namedTrace = traces.get(index);
+			} else {
+				namedTrace = getNamedTrace(identifier);
+			}
+		}
+
+		comboViewer.setInput(input);
+		Object selection = determineSelection(input, namedTrace);
+		if(selection != null) {
+			comboViewer.setSelection(new StructuredSelection(selection));
+			if(namedTrace == null) {
+				if(selection instanceof NamedTrace trace) {
+					namedTrace = trace;
 				}
 			}
-			//
-			buttonAdd.setEnabled(true);
-			buttonDelete.setEnabled(itemCount > 0);
-			buttonImport.setEnabled(true);
-			buttonExport.setEnabled(true);
-		} else {
-			/*
-			 * Settings
-			 */
-			buttonAdd.setEnabled(false);
-			buttonDelete.setEnabled(false);
-			buttonImport.setEnabled(false);
-			buttonExport.setEnabled(false);
-			comboViewer.setInput(null);
 		}
-		//
+
 		updateNamedTrace();
+		updateWidgets();
+	}
+
+	private NamedTrace getNamedTrace(String identifier) {
+
+		for(NamedTrace namedTrace : namedTraces.values()) {
+			if(namedTrace.getIdentifier().equals(identifier)) {
+				return namedTrace;
+			}
+		}
+
+		return namedTrace;
+	}
+
+	private Object determineSelection(List<Object> input, NamedTrace namedTrace) {
+
+		if(namedTrace != null) {
+			return namedTrace;
+		} else {
+			if(allowNoSelection) {
+				return NO_SELECTION;
+			} else {
+				if(!input.isEmpty()) {
+					return input.get(0);
+				}
+			}
+		}
+
+		return null;
+	}
+
+	private void updateWidgets() {
+
+		boolean tracesAvailable = namedTraces != null;
+		enableWidgets(tracesAvailable);
+		if(tracesAvailable) {
+			int indexDelete = allowNoSelection ? 0 : -1;
+			buttonDelete.get().setEnabled(comboViewerControl.get().getCombo().getSelectionIndex() > indexDelete);
+		}
+	}
+
+	private void enableWidgets(boolean enabled) {
+
+		buttonAdd.get().setEnabled(enabled);
+		buttonDelete.get().setEnabled(enabled);
+		buttonImport.get().setEnabled(enabled);
+		buttonExport.get().setEnabled(enabled);
 	}
 
 	private void updateNamedTrace() {
 
-		textTraces.setText(namedTrace != null ? namedTrace.getTraces() : "");
-		buttonDelete.setEnabled(namedTrace != null);
+		textTraces.get().setText(namedTrace != null ? namedTrace.getTraces() : "");
+		buttonDelete.get().setEnabled(namedTrace != null);
 	}
 
 	private boolean validate(IValidator<Object> validator, ControlDecoration controlDecoration, Text text) {
