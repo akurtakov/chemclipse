@@ -53,7 +53,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class MSLReader extends AbstractMassSpectraReader implements IMassSpectraReader {
 
 	private static final Logger logger = Logger.getLogger(MSLReader.class);
-	//
+
 	private static final String CONVERTER_ID = "org.eclipse.chemclipse.msd.converter.supplier.amdis.massspectrum.msl";
 	/**
 	 * Pre-compile all patterns to be a little bit faster.
@@ -78,7 +78,7 @@ public class MSLReader extends AbstractMassSpectraReader implements IMassSpectra
 	private static final Pattern DATA = Pattern.compile("(.*)(Num Peaks:)(\\s*)(\\d*)(.*)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL);
 	private static final Pattern SOURCE = Pattern.compile("(SOURCE:)(.*)", Pattern.CASE_INSENSITIVE);
 	private static final Pattern IONS = Pattern.compile("([+]?\\d+\\.?\\d*)(\\s+)([+-]?\\d+\\.?\\d*([eE][+-]?\\d+)?)"); // "(\\d+)(\\s+)(\\d+)" or "(\\d+)(\\s+)([+-]?\\d+\\.?\\d*([eE][+-]?\\d+)?)"
-	//
+
 	private static final String RETENTION_INDICES_DELIMITER = ", ";
 	private static final String LINE_DELIMITER = "\r\n";
 
@@ -110,7 +110,7 @@ public class MSLReader extends AbstractMassSpectraReader implements IMassSpectra
 				ConverterMOL.transfer(moleculeStructureMap, massSpectra);
 			}
 		}
-		//
+
 		return massSpectra;
 	}
 
@@ -163,7 +163,7 @@ public class MSLReader extends AbstractMassSpectraReader implements IMassSpectra
 		 * Extracts all ions and stored them.
 		 */
 		extractIons(massSpectrum, massSpectrumData);
-		//
+
 		return massSpectrum;
 	}
 
@@ -200,7 +200,7 @@ public class MSLReader extends AbstractMassSpectraReader implements IMassSpectra
 					String diameter = valueParserSupport.parseString(values, 6, "");
 					String phase = valueParserSupport.parseString(values, 7, "");
 					String thickness = valueParserSupport.parseString(values, 8, "");
-					//
+
 					ISeparationColumn separationColumn = SeparationColumnFactory.getSeparationColumn(name, length, diameter, phase);
 					separationColumn.setSeparationColumnType(separationColumnType);
 					separationColumn.setSeparationColumnPackaging(separationColumnPackaging);
@@ -358,7 +358,7 @@ public class MSLReader extends AbstractMassSpectraReader implements IMassSpectra
 		if(data.matches()) {
 			ionData = data.group(5);
 		}
-		//
+
 		IIon amdisIon = null;
 		double ion;
 		float abundance;
@@ -403,7 +403,7 @@ public class MSLReader extends AbstractMassSpectraReader implements IMassSpectra
 		while(matcher.find()) {
 			contentList.add(matcher.group(group).trim().replace("\0", " "));
 		}
-		//
+
 		return contentList;
 	}
 
@@ -423,7 +423,7 @@ public class MSLReader extends AbstractMassSpectraReader implements IMassSpectra
 		} catch(Exception e) {
 			logger.warn(e);
 		}
-		//
+
 		return content;
 	}
 }
