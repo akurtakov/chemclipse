@@ -17,11 +17,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
+import java.util.AbstractMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -84,15 +87,17 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 
 	private static final String RETENTION_INDICES_DELIMITER = ", ";
 
+	private File file;
+
 	@Override
 	public IMassSpectra read(File file, IProgressMonitor monitor) throws IOException {
 
-		IMassSpectra massSpectra = new MassSpectra();
+		this.file = file;
+
+		ConcurrentHashMap<Integer, String> massSpectraData = getMassSpectraData(file);
+		IMassSpectra massSpectra = extractMassSpectra(massSpectraData, monitor);
 		massSpectra.setConverterId(CONVERTER_ID);
 		massSpectra.setName(file.getName());
-
-		List<String> massSpectraData = getMassSpectraData(file);
-		extractMassSpectra(massSpectra, massSpectraData, monitor);
 
 		/*
 		 * Compound Information (*.CID)
@@ -119,18 +124,19 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 	}
 
 	/**
-	 * Returns a list of mass spectral data.
+	 * Returns an indexed map of mass spectral data so it can be sorted afterward.
 	 * 
 	 * @throws IOException
 	 */
-	private List<String> getMassSpectraData(File file) throws IOException {
+	private ConcurrentHashMap<Integer, String> getMassSpectraData(File file) throws IOException {
 
 		Charset charset = PreferenceSupplier.getCharsetImportMSP();
-		List<String> massSpectraData = new ArrayList<>();
+		ConcurrentHashMap<Integer, String> massSpectraData = new ConcurrentHashMap<>();
 
 		try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), charset))) {
 			StringBuilder builder = new StringBuilder();
 			String line;
+			int entryNumber = 0;
 			while((line = bufferedReader.readLine()) != null) {
 				/*
 				 * The mass spectra are divided by empty lines. If the builder has
@@ -140,17 +146,18 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 				 * StringBuilder.
 				 */
 				if(line.isEmpty()) {
-					addMassSpectrumData(builder, massSpectraData);
+					addMassSpectrumData(entryNumber, builder, massSpectraData);
 					builder = new StringBuilder();
 				} else {
 					builder.append(line);
 					builder.append(LINE_END);
 				}
+				entryNumber++;
 			}
 			/*
 			 * Don't forget to add the last mass spectrum.
 			 */
-			addMassSpectrumData(builder, massSpectraData);
+			addMassSpectrumData(entryNumber, builder, massSpectraData);
 		}
 
 		return massSpectraData;
@@ -163,12 +170,12 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 	 * @param builder
 	 * @param massSpectraData
 	 */
-	private void addMassSpectrumData(StringBuilder builder, List<String> massSpectraData) {
+	private void addMassSpectrumData(int entryNumber, StringBuilder builder, ConcurrentHashMap<Integer, String> massSpectraData) {
 
 		String massSpectrumData;
 		if(builder.length() > 0) {
 			massSpectrumData = builder.toString();
-			massSpectraData.add(massSpectrumData);
+			massSpectraData.put(entryNumber, massSpectrumData);
 		}
 	}
 
@@ -179,40 +186,51 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 	 * @param massSpectraData
 	 * @param monitor
 	 */
-	private void extractMassSpectra(IMassSpectra massSpectra, List<String> massSpectraData, IProgressMonitor monitor) {
+	private IMassSpectra extractMassSpectra(ConcurrentHashMap<Integer, String> indexedMassSpectraData, IProgressMonitor monitor) {
 
 		String referenceIdentifierMarker = org.eclipse.chemclipse.msd.converter.preferences.PreferenceSupplier.getReferenceIdentifierMarker();
 		String referenceIdentifierPrefix = org.eclipse.chemclipse.msd.converter.preferences.PreferenceSupplier.getReferenceIdentifierPrefix();
 
-		if(massSpectraData.size() > 1) {
+		ConcurrentHashMap<Integer, IVendorLibraryMassSpectrum> indexedMassSpectra = new ConcurrentHashMap<>();
+
+		if(indexedMassSpectraData.size() > 1) {
 			/*
 			 * Iterates through the saved mass spectrum text data and converts it to
-			 * a mass spectrum.
+			 * a mass spectrum. Use a tree map to retain ordering.
 			 */
-			monitor.beginTask("Extract mass spectra", massSpectraData.size());
-			for(String massSpectrumData : massSpectraData) {
+			monitor.beginTask("Extract mass spectra", indexedMassSpectraData.size());
+
+			indexedMassSpectraData.entrySet().parallelStream().forEach(massSpectrumData -> {
 				if(monitor.isCanceled()) {
 					return;
 				}
-				addMassSpectrum(massSpectra, massSpectrumData, referenceIdentifierMarker, referenceIdentifierPrefix);
+				addMassSpectrum(indexedMassSpectra, massSpectrumData, referenceIdentifierMarker, referenceIdentifierPrefix);
 				monitor.worked(1);
-			}
-		} else if(massSpectraData.size() == 1) {
+			});
+		} else if(indexedMassSpectraData.size() == 1) {
 			/*
 			 * Sometimes, mass spectra are not separated by an empty line.
 			 * Hence, check if several name patterns can be detected in the text.
 			 */
-			String[] splittedMassSpectra = massSpectraData.get(0).split("(NAME:|name:)");
+			String[] splittedMassSpectra = indexedMassSpectraData.entrySet().iterator().next().getValue().split("(NAME:|name:)");
+			int index = 0;
 			for(String splittedMassSpectrum : splittedMassSpectra) {
 				if(!splittedMassSpectrum.equals("")) {
 					if(splittedMassSpectra.length == 1) {
-						addMassSpectrum(massSpectra, splittedMassSpectrum, referenceIdentifierMarker, referenceIdentifierPrefix);
+						Entry<Integer, String> entry = new AbstractMap.SimpleEntry<>(index, splittedMassSpectrum);
+						addMassSpectrum(indexedMassSpectra, entry, referenceIdentifierMarker, referenceIdentifierPrefix);
 					} else {
-						addMassSpectrum(massSpectra, "NAME:" + splittedMassSpectrum, referenceIdentifierMarker, referenceIdentifierPrefix);
+						Entry<Integer, String> entry = new AbstractMap.SimpleEntry<>(index, "NAME:" + splittedMassSpectrum);
+						addMassSpectrum(indexedMassSpectra, entry, referenceIdentifierMarker, referenceIdentifierPrefix);
 					}
+					index++;
 				}
 			}
 		}
+		IMassSpectra massSpectra = new MassSpectra();
+		TreeMap<Integer, IVendorLibraryMassSpectrum> sortedMassSpectra = new TreeMap<>(indexedMassSpectra);
+		massSpectra.addMassSpectra(sortedMassSpectra.values());
+		return massSpectra;
 	}
 
 	/**
@@ -221,15 +239,17 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 	 * @param massSpectra
 	 * @param massSpectrumData
 	 */
-	private void addMassSpectrum(IMassSpectra massSpectra, String massSpectrumData, String referenceIdentifierMarker, String referenceIdentifierPrefix) {
+	private void addMassSpectrum(ConcurrentHashMap<Integer, IVendorLibraryMassSpectrum> indexedMassSpectra, Entry<Integer, String> massSpectrumEntry, String referenceIdentifierMarker, String referenceIdentifierPrefix) {
 
 		IVendorLibraryMassSpectrum massSpectrum = new VendorLibraryMassSpectrum();
 		ILibraryInformation libraryInformation = massSpectrum.getLibraryInformation();
-		libraryInformation.setDatabase(FilenameUtils.removeExtension(massSpectra.getName()));
+		libraryInformation.setDatabase(FilenameUtils.removeExtension(file.getName()));
 		/*
 		 * Extract name and reference identifier.
 		 * Additionally, add the reference identifier if it is stored as a pattern.
 		 */
+		String massSpectrumData = massSpectrumEntry.getValue();
+
 		String name = extractContentAsString(massSpectrumData, namePattern, 2);
 		extractNameAndReferenceIdentifier(massSpectrum, name, referenceIdentifierMarker, referenceIdentifierPrefix);
 		String referenceIdentifier = extractContentAsString(massSpectrumData, referenceIdentifierPattern, 2);
@@ -313,7 +333,7 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 		 * fragment.
 		 */
 		if(!massSpectrum.isEmpty()) {
-			massSpectra.addMassSpectrum(massSpectrum);
+			indexedMassSpectra.put(massSpectrumEntry.getKey(), massSpectrum);
 		}
 	}
 
