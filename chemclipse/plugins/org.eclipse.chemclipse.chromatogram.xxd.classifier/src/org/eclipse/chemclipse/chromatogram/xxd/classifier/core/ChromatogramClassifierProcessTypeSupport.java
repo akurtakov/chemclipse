@@ -9,6 +9,7 @@
  * Contributors:
  * Christoph Läubrich - initial API and implementation
  * Philip Wenig - refactor menu categories
+ * Lorenz Gerber - forward processing infos
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.classifier.core;
 
@@ -70,7 +71,7 @@ public class ChromatogramClassifierProcessTypeSupport implements IProcessTypeSup
 		@Override
 		public IChromatogramSelection apply(IChromatogramSelection chromatogramSelection, IChromatogramClassifierSettings processSettings, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
-			classifier.applyClassifier(chromatogramSelection, processSettings, monitor);
+			messageConsumer.addMessages(classifier.applyClassifier(chromatogramSelection, processSettings, monitor));
 			return chromatogramSelection;
 		}
 	}
