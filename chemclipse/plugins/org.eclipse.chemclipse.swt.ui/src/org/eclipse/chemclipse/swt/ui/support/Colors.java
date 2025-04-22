@@ -421,10 +421,18 @@ public class Colors {
 		return new RGB(rgba[0], rgba[1], rgba[2]);
 	}
 
-	public static int getColorRgba(int r, int g, int b, double alpha) {
+	/**
+	 * Alpha in the range 0 - 255.
+	 * 
+	 * @param r
+	 * @param g
+	 * @param b
+	 * @param alpha
+	 * @return int
+	 */
+	public static int getColorRgba(int r, int g, int b, int alpha) {
 
-		int a = (int)(alpha * 255);
-		return ((a & 0xFF) << 24) | ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | ((b & 0xFF) << 0);
+		return ((alpha & 0xFF) << 24) | ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | ((b & 0xFF) << 0);
 	}
 
 	public static String getColorRgbaHtml(int color) {
@@ -433,8 +441,8 @@ public class Colors {
 		int r = (value >> 16) & 0xFF;
 		int g = (value >> 8) & 0xFF;
 		int b = (value >> 0) & 0xFF;
-		double alpha = ((value >> 24) & 0xff) / 255;
-		return "rgba(" + r + " ," + g + ", " + b + ", " + alpha + ")";
+		double alpha = ((value >> 24) & 0xff) / 255.0d;
+		return "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
 	}
 
 	public static String getColorRgbHtml(int color) {
@@ -443,6 +451,6 @@ public class Colors {
 		int r = (value >> 16) & 0xFF;
 		int g = (value >> 8) & 0xFF;
 		int b = (value >> 0) & 0xFF;
-		return "rgb(" + r + " ," + g + ", " + b + ")";
+		return "rgb(" + r + "," + g + "," + b + ")";
 	}
 }
