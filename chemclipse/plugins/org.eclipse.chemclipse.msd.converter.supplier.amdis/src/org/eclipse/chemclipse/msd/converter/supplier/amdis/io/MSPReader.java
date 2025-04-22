@@ -198,16 +198,14 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 			/*
 			 * Iterates through the saved mass spectrum text data and converts it to
 			 * a mass spectrum. Use a tree map to retain ordering.
+			 * Monitor cancel and worked crash with parallelStream as the monitor thread can't be accessed from another thread.
+			 * Display.getDefault().asyncExec(...) can't be used here, as the model bundle must not contain UI dependencies.
 			 */
-			monitor.beginTask("Extract mass spectra", indexedMassSpectraData.size());
-
+			monitor.beginTask("Extract mass spectra", IProgressMonitor.UNKNOWN);
 			indexedMassSpectraData.entrySet().parallelStream().forEach(massSpectrumData -> {
-				if(monitor.isCanceled()) {
-					return;
-				}
 				addMassSpectrum(indexedMassSpectra, massSpectrumData, referenceIdentifierMarker, referenceIdentifierPrefix);
-				monitor.worked(1);
 			});
+			monitor.done();
 		} else if(indexedMassSpectraData.size() == 1) {
 			/*
 			 * Sometimes, mass spectra are not separated by an empty line.

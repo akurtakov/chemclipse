@@ -311,18 +311,18 @@ public class MSLReader extends AbstractMassSpectraReader implements IMassSpectra
 		 * Iterates through the saved mass spectrum text data and converts it to
 		 * a mass spectrum.
 		 * Unordered parallelization for speed. Use a tree map to retain sorting.
+		 * Monitor cancel and worked crash with parallelStream as the monitor thread can't be accessed from another thread.
+		 * Display.getDefault().asyncExec(...) can't be used here, as the model bundle must not contain UI dependencies.
 		 */
-		monitor.beginTask("Extract mass spectra", indexedMassSpectraData.size());
+		monitor.beginTask("Extract mass spectra", IProgressMonitor.UNKNOWN);
 		ConcurrentHashMap<Integer, IVendorLibraryMassSpectrum> indexedMassSpectra = new ConcurrentHashMap<>();
 		indexedMassSpectraData.entrySet().parallelStream().forEach(massSpectrumData -> {
-			if(monitor.isCanceled()) {
-				return;
-			}
 			addMassSpectrum(indexedMassSpectra, massSpectrumData, referenceIdentifierMarker, referenceIdentifierPrefix);
-			monitor.worked(1);
 		});
 		TreeMap<Integer, IVendorLibraryMassSpectrum> sortedMassSpectra = new TreeMap<>(indexedMassSpectra);
 		massSpectra.addMassSpectra(sortedMassSpectra.values());
+		monitor.done();
+
 		return massSpectra;
 	}
 
