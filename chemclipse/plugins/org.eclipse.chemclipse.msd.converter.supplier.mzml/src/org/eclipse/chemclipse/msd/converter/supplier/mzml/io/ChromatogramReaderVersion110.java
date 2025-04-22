@@ -134,6 +134,7 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 				massSpectrum.setCycleNumber(cycleNumber);
 			}
 			setRetentionTime(spectrum, massSpectrum);
+			massSpectrum.setIdentifier(spectrum.getId());
 			readIons(spectrum, massSpectrum, chromatogram);
 			chromatogram.addScan(massSpectrum);
 			monitor.worked(1);
