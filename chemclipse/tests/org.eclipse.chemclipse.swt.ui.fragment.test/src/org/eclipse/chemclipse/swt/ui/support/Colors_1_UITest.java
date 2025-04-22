@@ -13,10 +13,12 @@
 package org.eclipse.chemclipse.swt.ui.support;
 
 import org.eclipse.swt.graphics.Color;
+import org.junit.Ignore;
 
 import junit.framework.TestCase;
 
-public class Colors_1_Test extends TestCase {
+@Ignore
+public class Colors_1_UITest extends TestCase {
 
 	private Color color = Colors.RED;
 
