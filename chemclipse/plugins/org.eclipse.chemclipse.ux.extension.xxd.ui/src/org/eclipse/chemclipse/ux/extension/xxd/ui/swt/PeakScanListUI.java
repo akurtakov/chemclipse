@@ -68,8 +68,9 @@ public class PeakScanListUI extends ExtendedTableViewer {
 			if(showPeaks) {
 				peaks = ChromatogramDataSupport.getPeaks(chromatogramSelection, showPeaksInRange);
 				input.addAll(peaks);
-			} else
+			} else {
 				peaks.clear();
+			}
 			/*
 			 * Scans
 			 */
@@ -151,21 +152,18 @@ public class PeakScanListUI extends ExtendedTableViewer {
 	private boolean hasDuplicateTarget(IPeak comparisonPeak) {
 
 		IIdentificationTarget comparisonTarget = TargetSupport.getBestIdentificationTarget(comparisonPeak);
-		if(comparisonTarget == null)
+		if(comparisonTarget == null) {
 			return false;
+		}
 
 		for(IPeak peak : peaks) {
-			if(comparisonPeak == peak)
+			if(comparisonPeak == peak) {
 				continue;
+			}
 
 			IIdentificationTarget peakTarget = TargetSupport.getBestIdentificationTarget(peak);
-			if(peakTarget == null)
+			if(peakTarget == null) {
 				continue;
-
-			if(!comparisonTarget.getLibraryInformation().getCasNumber().isEmpty()) {
-				if(peakTarget.getLibraryInformation().getCasNumber().equals(comparisonTarget.getLibraryInformation().getCasNumber())) {
-					return true;
-				}
 			}
 
 			if(!comparisonTarget.getLibraryInformation().getName().isEmpty()) {
