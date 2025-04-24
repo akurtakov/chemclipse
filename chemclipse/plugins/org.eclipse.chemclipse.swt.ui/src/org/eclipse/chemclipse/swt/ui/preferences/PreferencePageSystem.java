@@ -55,11 +55,15 @@ public class PreferencePageSystem extends FieldEditorPreferencePage implements I
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_SHOW_AREA_WITHOUT_DECIMALS, "Show area without decimals", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_SORT_CASE_SENSITIVE, "Sort: Case Sensitive", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_SEARCH_CASE_SENSITIVE, "Search: Case sensitive", getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_RETENTION_INDEX_QC, "QC: Use Retention Index", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_BEST_TARGET_LIBRARY_FIELD, "Best Target", LibraryField.getOptions(), getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_ION_ROUND_METHOD, "Ion Round Method", IonRoundMethod.getOptions(), getFieldEditorParent()));
+
+		addField(new SpacerFieldEditor(getFieldEditorParent()));
+		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_RICH_TEXT_EDITOR, "Use Rich Text Editor (Restart Required)", getFieldEditorParent()));
+		addField(new BooleanFieldEditor(PreferenceSupplier.P_RUN_BROWSER_CHECK, "Run Browser Check (Rich Text Editor)", getFieldEditorParent()));
 		/*
 		 * Clear the Ion Round Method Cache on change.
 		 */

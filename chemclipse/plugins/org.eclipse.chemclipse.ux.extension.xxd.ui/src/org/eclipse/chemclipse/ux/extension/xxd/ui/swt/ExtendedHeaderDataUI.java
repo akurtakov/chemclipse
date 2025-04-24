@@ -30,8 +30,8 @@ import org.eclipse.chemclipse.swt.ui.components.DataMapSupportUI;
 import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
+import org.eclipse.chemclipse.swt.ui.support.RichTextSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.nebula.widgets.richtext.RichTextEditor;
 import org.eclipse.swt.SWT;
@@ -279,13 +279,8 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText("Findings");
 		//
-		Control editor;
-		boolean useRichTextEditor = isUseRichTextEditor();
-		if(useRichTextEditor) {
-			/*
-			 * RTF
-			 */
-			RichTextEditor richTextEditor = new RichTextEditor(tabFolder, SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL | SWT.WRAP);
+		Control editor = RichTextSupport.createEditor(tabFolder, SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL | SWT.WRAP);
+		if(editor instanceof RichTextEditor richTextEditor) {
 			richTextEditor.addModifyListener(new ModifyListener() {
 
 				@Override
@@ -296,12 +291,7 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 					}
 				}
 			});
-			editor = richTextEditor;
-		} else {
-			/*
-			 * ASCII
-			 */
-			Text plainTextEditor = new Text(tabFolder, SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL | SWT.WRAP);
+		} else if(editor instanceof Text plainTextEditor) {
 			plainTextEditor.addModifyListener(new ModifyListener() {
 
 				@Override
@@ -312,26 +302,10 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 					}
 				}
 			});
-			editor = plainTextEditor;
 		}
 		//
 		tabItem.setControl(editor);
 		findingsControl.set(editor);
-	}
-
-	private boolean isUseRichTextEditor() {
-
-		boolean useRichTextEditor = PreferenceSupplier.isHeaderDataUseRichTextEditor();
-		if(useRichTextEditor) {
-			/*
-			 * TODO: Check if WebKit is available - otherwise disable the rich text option
-			 * ---
-			 * org.eclipse.swt.SWTError: No more handles because there is no underlying browser available.
-			 * Please ensure that WebKit with its GTK 3.x/4.x bindings is installed.
-			 */
-		}
-		//
-		return useRichTextEditor;
 	}
 
 	private void addDeleteMenuEntry(Shell shell, ITableSettings tableSettings) {
@@ -412,7 +386,6 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 	private void updateData() {
 
 		enableButtonDelete();
-		//
 		if(measurementInfo != null) {
 			/*
 			 * Key Value Table
@@ -438,12 +411,7 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 
 	private void updateFindings(String content) {
 
-		Control control = findingsControl.get();
-		if(control instanceof RichTextEditor richTextEditor) {
-			richTextEditor.setText(content);
-		} else if(control instanceof Text plainTextEditor) {
-			plainTextEditor.setText(content);
-		}
+		RichTextSupport.setEditorText(findingsControl.get(), content);
 	}
 
 	private void updateInfoToolbar() {
