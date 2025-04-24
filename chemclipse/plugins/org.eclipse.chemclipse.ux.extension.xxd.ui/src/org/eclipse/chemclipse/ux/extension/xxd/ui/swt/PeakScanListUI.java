@@ -19,6 +19,8 @@ import java.util.List;
 
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IPeak;
+import org.eclipse.chemclipse.model.core.IScan;
+import org.eclipse.chemclipse.model.core.ITargetSupplier;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.model.targets.TargetSupport;
@@ -45,7 +47,7 @@ public class PeakScanListUI extends ExtendedTableViewer {
 	private final PeakScanListTableComparator tableComparator = new PeakScanListTableComparator();
 	private final PeakScanListFilter listFilter = new PeakScanListFilter();
 
-	private List<? extends IPeak> peaks;
+	private List<ITargetSupplier> targetSuppliers = new ArrayList<>();
 
 	public PeakScanListUI(Composite parent, int style) {
 
@@ -61,23 +63,20 @@ public class PeakScanListUI extends ExtendedTableViewer {
 			labelProvider.setChromatogramPeakArea(chromatogramPeakArea);
 			tableComparator.setChromatogramPeakArea(chromatogramPeakArea);
 
-			List<Object> input = new ArrayList<>();
 			/*
 			 * Peaks
 			 */
 			if(showPeaks) {
-				peaks = ChromatogramDataSupport.getPeaks(chromatogramSelection, showPeaksInRange);
-				input.addAll(peaks);
-			} else
-				peaks.clear();
+				targetSuppliers.addAll(ChromatogramDataSupport.getPeaks(chromatogramSelection, showPeaksInRange));
+			}
 			/*
 			 * Scans
 			 */
 			if(showScans) {
-				input.addAll(ChromatogramDataSupport.getIdentifiedScans(chromatogramSelection, showScansInRange));
+				targetSuppliers.addAll(ChromatogramDataSupport.getIdentifiedScans(chromatogramSelection, showScansInRange));
 			}
 
-			super.setInput(input);
+			super.setInput(targetSuppliers);
 		} else {
 			clear();
 		}
@@ -141,6 +140,12 @@ public class PeakScanListUI extends ExtendedTableViewer {
 								cell.setBackground(Colors.LIGHT_RED);
 								cell.setForeground(Colors.BLACK);
 							}
+						} else if(element instanceof IScan scan) {
+							cell.setText(TargetSupport.getBestTargetLibraryField(scan));
+							if(hasDuplicateTarget(scan)) {
+								cell.setBackground(Colors.LIGHT_RED);
+								cell.setForeground(Colors.BLACK);
+							}
 						}
 					}
 				}
@@ -148,28 +153,25 @@ public class PeakScanListUI extends ExtendedTableViewer {
 		}
 	}
 
-	private boolean hasDuplicateTarget(IPeak comparisonPeak) {
+	private boolean hasDuplicateTarget(ITargetSupplier comparisonTargetSupplier) {
 
-		IIdentificationTarget comparisonTarget = TargetSupport.getBestIdentificationTarget(comparisonPeak);
-		if(comparisonTarget == null)
+		IIdentificationTarget comparisonTarget = TargetSupport.getBestIdentificationTarget(comparisonTargetSupplier);
+		if(comparisonTarget == null) {
 			return false;
+		}
 
-		for(IPeak peak : peaks) {
-			if(comparisonPeak == peak)
+		for(ITargetSupplier targetSupplier : targetSuppliers) {
+			if(comparisonTargetSupplier == targetSupplier) {
 				continue;
+			}
 
-			IIdentificationTarget peakTarget = TargetSupport.getBestIdentificationTarget(peak);
-			if(peakTarget == null)
+			IIdentificationTarget identificationTarget = TargetSupport.getBestIdentificationTarget(targetSupplier);
+			if(identificationTarget == null) {
 				continue;
-
-			if(!comparisonTarget.getLibraryInformation().getCasNumber().isEmpty()) {
-				if(peakTarget.getLibraryInformation().getCasNumber().equals(comparisonTarget.getLibraryInformation().getCasNumber())) {
-					return true;
-				}
 			}
 
 			if(!comparisonTarget.getLibraryInformation().getName().isEmpty()) {
-				if(peakTarget.getLibraryInformation().getName().equals(comparisonTarget.getLibraryInformation().getName())) {
+				if(identificationTarget.getLibraryInformation().getName().equals(comparisonTarget.getLibraryInformation().getName())) {
 					return true;
 				}
 			}
