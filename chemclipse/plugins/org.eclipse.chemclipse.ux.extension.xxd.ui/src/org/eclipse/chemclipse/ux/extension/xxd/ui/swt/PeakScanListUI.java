@@ -63,6 +63,7 @@ public class PeakScanListUI extends ExtendedTableViewer {
 			labelProvider.setChromatogramPeakArea(chromatogramPeakArea);
 			tableComparator.setChromatogramPeakArea(chromatogramPeakArea);
 
+			targetSuppliers.clear();
 			/*
 			 * Peaks
 			 */
