@@ -157,7 +157,7 @@ public class PeakScanListUI extends ExtendedTableViewer {
 	private boolean hasDuplicateTarget(ITargetSupplier comparisonTargetSupplier) {
 
 		IIdentificationTarget comparisonTarget = TargetSupport.getBestIdentificationTarget(comparisonTargetSupplier);
-		if(comparisonTarget == null) {
+		if(comparisonTarget == null || comparisonTarget.getLibraryInformation().getName().isEmpty()) {
 			return false;
 		}
 
@@ -171,10 +171,8 @@ public class PeakScanListUI extends ExtendedTableViewer {
 				continue;
 			}
 
-			if(!comparisonTarget.getLibraryInformation().getName().isEmpty()) {
-				if(identificationTarget.getLibraryInformation().getName().equals(comparisonTarget.getLibraryInformation().getName())) {
-					return true;
-				}
+			if(identificationTarget.getLibraryInformation().getName().equals(comparisonTarget.getLibraryInformation().getName())) {
+				return true;
 			}
 		}
 		return false;
