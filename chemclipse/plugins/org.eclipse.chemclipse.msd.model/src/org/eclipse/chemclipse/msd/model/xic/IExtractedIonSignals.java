@@ -184,29 +184,34 @@ public interface IExtractedIonSignals {
 	 */
 	default float[] getValues(IScanRange range, int ion) {
 
-		float[] values = new float[range.getWidth()];
-		int counter = 0;
-		for(int scan = range.getStartScan(); scan <= range.getStopScan(); scan++) {
-			try {
-				IExtractedIonSignal signal = getExtractedIonSignal(scan);
-				/*
-				 * If the ion represents the TIC than use the total signal,
-				 * otherwise get the abundance of the given ion.
-				 */
-				if(ion == IIon.TIC_ION) {
-					values[counter] = signal.getTotalSignal();
-				} else {
-					values[counter] = signal.getAbundance(ion);
+		int width = range.getWidth();
+		float[] values = new float[width];
+
+		if(width > 0) {
+			int counter = 0;
+			for(int scan = range.getStartScan(); scan <= range.getStopScan(); scan++) {
+				try {
+					IExtractedIonSignal signal = getExtractedIonSignal(scan);
+					/*
+					 * If the ion represents the TIC than use the total signal,
+					 * otherwise get the abundance of the given ion.
+					 */
+					if(ion == IIon.TIC_ION) {
+						values[counter] = signal.getTotalSignal();
+					} else {
+						values[counter] = signal.getAbundance(ion);
+					}
+				} catch(NoExtractedIonSignalStoredException e) {
+					values[counter] = 0;
+				} finally {
+					/*
+					 * Increment counters position.
+					 */
+					counter++;
 				}
-			} catch(NoExtractedIonSignalStoredException e) {
-				values[counter] = 0;
-			} finally {
-				/*
-				 * Increment counters position.
-				 */
-				counter++;
 			}
 		}
+
 		return values;
 	}
 }

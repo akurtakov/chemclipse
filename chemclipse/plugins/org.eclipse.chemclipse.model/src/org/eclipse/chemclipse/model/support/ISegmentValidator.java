@@ -16,12 +16,17 @@ public interface ISegmentValidator {
 
 	default boolean acceptSegment(float[] values, double mean) {
 
-		double[] doubles = new double[values.length];
-		for(int i = 0; i < doubles.length; i++) {
-			doubles[i] = values[i];
+		boolean acceptSegment = false;
+		if(values.length > 0) {
+			double[] doubles = new double[values.length];
+			for(int i = 0; i < doubles.length; i++) {
+				doubles[i] = values[i];
+			}
+			//
+			acceptSegment = acceptSegment(doubles, mean);
 		}
-		//
-		return acceptSegment(doubles, mean);
+
+		return acceptSegment;
 	}
 
 	boolean acceptSegment(double[] values, double mean);
