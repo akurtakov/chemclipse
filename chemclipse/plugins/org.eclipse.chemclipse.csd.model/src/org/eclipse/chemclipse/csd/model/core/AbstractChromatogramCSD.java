@@ -30,23 +30,6 @@ public abstract class AbstractChromatogramCSD extends AbstractChromatogram imple
 
 	private static final long serialVersionUID = -1514838958855146167L;
 
-	protected AbstractChromatogramCSD() {
-
-		updateNoiseFactor();
-	}
-
-	@Override
-	public void updateNoiseFactor() {
-
-		String noiseCalculatorId = getNoiseCalculatorId();
-		INoiseCalculator noiseCalculator = NoiseCalculator.getNoiseCalculator(noiseCalculatorId);
-		if(noiseCalculator != null) {
-			noiseCalculator.reset();
-		}
-		//
-		setNoiseCalculator(noiseCalculator);
-	}
-
 	@Override
 	public IScanCSD getSupplierScan(int scan) {
 
@@ -86,11 +69,12 @@ public abstract class AbstractChromatogramCSD extends AbstractChromatogram imple
 
 		super.addMeasurementResult(chromatogramResult);
 		if(chromatogramResult instanceof NoiseSegmentMeasurementResult) {
-			recalculateTheNoiseFactor();
+			recalculateNoiseFactor();
 		}
 	}
 
-	private String getNoiseCalculatorId() {
+	@Override
+	protected String getNoiseCalculatorId() {
 
 		NoiseSegmentMeasurementResult noiseSegmentMeasurementResult = getMeasurementResult(NoiseSegmentMeasurementResult.class);
 		if(noiseSegmentMeasurementResult != null) {
@@ -98,6 +82,12 @@ public abstract class AbstractChromatogramCSD extends AbstractChromatogram imple
 		} else {
 			return PreferenceSupplier.getSelectedNoiseCalculatorId();
 		}
+	}
+
+	@Override
+	protected INoiseCalculator createNoiseCalculator(String id) {
+
+		return NoiseCalculator.getNoiseCalculator(id);
 	}
 
 	@SuppressWarnings("unchecked")

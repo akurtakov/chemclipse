@@ -44,19 +44,6 @@ public abstract class AbstractChromatogramFSD extends AbstractChromatogram imple
 	protected AbstractChromatogramFSD() {
 
 		baselineModels = new HashMap<>();
-		updateNoiseFactor();
-	}
-
-	@Override
-	public void updateNoiseFactor() {
-
-		String noiseCalculatorId = getNoiseCalculatorId();
-		INoiseCalculator noiseCalculator = NoiseCalculator.getNoiseCalculator(noiseCalculatorId);
-		if(noiseCalculator != null) {
-			noiseCalculator.reset();
-		}
-
-		setNoiseCalculator(noiseCalculator);
 	}
 
 	@Override
@@ -133,11 +120,12 @@ public abstract class AbstractChromatogramFSD extends AbstractChromatogram imple
 
 		super.addMeasurementResult(chromatogramResult);
 		if(chromatogramResult instanceof NoiseSegmentMeasurementResult) {
-			recalculateTheNoiseFactor();
+			recalculateNoiseFactor();
 		}
 	}
 
-	private String getNoiseCalculatorId() {
+	@Override
+	protected String getNoiseCalculatorId() {
 
 		NoiseSegmentMeasurementResult noiseSegmentMeasurementResult = getMeasurementResult(NoiseSegmentMeasurementResult.class);
 		if(noiseSegmentMeasurementResult != null) {
@@ -145,6 +133,12 @@ public abstract class AbstractChromatogramFSD extends AbstractChromatogram imple
 		} else {
 			return PreferenceSupplier.getSelectedNoiseCalculatorId();
 		}
+	}
+
+	@Override
+	protected INoiseCalculator createNoiseCalculator(String id) {
+
+		return NoiseCalculator.getNoiseCalculator(id);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -14,8 +14,12 @@ package org.eclipse.chemclipse.model.implementation;
 
 import org.eclipse.chemclipse.model.core.AbstractChromatogram;
 import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.core.INoiseCalculator;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 
+/**
+ * Chromatogram shall be used only for testing purposes.
+ */
 public class Chromatogram extends AbstractChromatogram implements IChromatogram {
 
 	private static final long serialVersionUID = -8477205385713705933L;
@@ -26,8 +30,14 @@ public class Chromatogram extends AbstractChromatogram implements IChromatogram 
 	}
 
 	@Override
-	public void updateNoiseFactor() {
+	protected String getNoiseCalculatorId() {
 
+		return "";
 	}
 
+	@Override
+	protected INoiseCalculator createNoiseCalculator(String id) {
+
+		return null;
+	}
 }

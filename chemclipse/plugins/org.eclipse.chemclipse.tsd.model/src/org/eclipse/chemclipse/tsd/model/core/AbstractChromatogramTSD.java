@@ -12,8 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.tsd.model.core;
 
+import org.eclipse.chemclipse.chromatogram.xxd.calculator.core.noise.NoiseCalculator;
+import org.eclipse.chemclipse.chromatogram.xxd.calculator.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.model.core.AbstractChromatogram;
 import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.core.INoiseCalculator;
 
 public abstract class AbstractChromatogramTSD extends AbstractChromatogram implements IChromatogramTSD {
 
@@ -25,12 +28,6 @@ public abstract class AbstractChromatogramTSD extends AbstractChromatogram imple
 		this(null);
 	}
 
-	@Override
-	public void updateNoiseFactor() {
-
-		// TODO - Noise Calculation
-	}
-
 	public AbstractChromatogramTSD(IChromatogram chromatogram) {
 
 		this.chromatogram = chromatogram;
@@ -40,5 +37,17 @@ public abstract class AbstractChromatogramTSD extends AbstractChromatogram imple
 	public IChromatogram getChromatogram() {
 
 		return chromatogram;
+	}
+
+	@Override
+	protected String getNoiseCalculatorId() {
+
+		return PreferenceSupplier.getSelectedNoiseCalculatorId();
+	}
+
+	@Override
+	protected INoiseCalculator createNoiseCalculator(String id) {
+
+		return NoiseCalculator.getNoiseCalculator(id);
 	}
 }

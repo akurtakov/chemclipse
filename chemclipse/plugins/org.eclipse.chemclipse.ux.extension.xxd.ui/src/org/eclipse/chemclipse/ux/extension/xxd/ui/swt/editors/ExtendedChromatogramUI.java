@@ -75,11 +75,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.comparator.SortOrder;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
-import org.eclipse.chemclipse.support.history.EditInformation;
-import org.eclipse.chemclipse.support.history.IEditHistory;
-import org.eclipse.chemclipse.support.history.ProcessSupplierEntry;
-import org.eclipse.chemclipse.support.history.ProcessSupplierSupport;
-import org.eclipse.chemclipse.support.settings.UserManagement;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
@@ -134,7 +129,9 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageProc
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.segments.AnalysisSegmentColorScheme;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.segments.AnalysisSegmentPaintListener;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.support.AuditTrailSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.DisplayType;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.support.NoiseFactorSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ChromatogramChartSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ChromatogramDataSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.PeakChartSupport;
@@ -771,8 +768,11 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 
 							DefaultProcessingResult<Object> processingInfo = new DefaultProcessingResult<>();
 							IProcessSupplier.applyProcessor(settings, IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection), new ProcessExecutionContext(monitor, processingInfo, processSupplierContext));
+							IChromatogram chromatogram = chromatogramSelection.getChromatogram();
+							chromatogram.setDirty(true);
 							updateResult(processingInfo);
-							updateAuditTrail(processingInfo, processSupplier);
+							AuditTrailSupport.updateAuditTrail(chromatogram, processingInfo, processSupplier);
+							NoiseFactorSupport.updateNoiseFactor(chromatogram, processSupplier);
 						}
 					});
 				}
@@ -810,42 +810,6 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 				ProcessingInfoPartSupport.getInstance().update(processingInfo, true);
 			}
 		});
-	}
-
-	private void updateAuditTrail(IMessageProvider processingInfo, IProcessMethod processMethod) {
-
-		if(!processingInfo.hasErrorMessages()) {
-			processMethod.forEach(p -> updateAuditTrail(p.getName(), processTypeSupport.getSupplier(p.getProcessorId())));
-		}
-	}
-
-	private void updateAuditTrail(IMessageProvider processingInfo, IProcessSupplier<?> processSupplier) {
-
-		if(!processingInfo.hasErrorMessages()) {
-			updateAuditTrail(processSupplier.getCategory() + ": " + processSupplier.getName(), processSupplier);
-		}
-	}
-
-	private void updateAuditTrail(String description, IProcessSupplier<?> processSupplier) {
-
-		IChromatogram chromatogram = getChromatogramSelection().getChromatogram();
-		IEditHistory editHistory = chromatogram.getEditHistory();
-		/*
-		 * Normal description
-		 */
-		editHistory.add(new EditInformation(description, UserManagement.getCurrentUser()));
-		/*
-		 * Detailed step to recover process method
-		 */
-		if(processSupplier != null) {
-			IProcessorPreferences<?> processorPreferences = ProcessSettingsSupport.getWorkspacePreferences(processSupplier);
-			ProcessSupplierEntry processSupplierEntry = new ProcessSupplierEntry();
-			processSupplierEntry.setId(processSupplier.getId());
-			processSupplierEntry.setName(processSupplier.getName());
-			processSupplierEntry.setDescription(processSupplier.getDescription());
-			processSupplierEntry.setUserSettings(processorPreferences.getUserSettingsAsString());
-			editHistory.add(ProcessSupplierSupport.createEditInformation(processSupplierEntry));
-		}
 	}
 
 	private boolean isValidSupplier(IProcessSupplier<?> supplier) {
@@ -1283,9 +1247,11 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 
 						IProcessingInfo<?> processingInfo = new ProcessingInfo<>();
 						ProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, processingInfo, processTypeSupport), IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection));
-						chromatogramSelection.getChromatogram().setDirty(true); // TODO: check each entry
+						IChromatogram chromatogram = chromatogramSelection.getChromatogram();
+						chromatogram.setDirty(true);
 						updateResult(processingInfo);
-						updateAuditTrail(processingInfo, processMethod);
+						AuditTrailSupport.updateAuditTrail(chromatogram, processingInfo, processMethod, processTypeSupport);
+						NoiseFactorSupport.updateNoiseFactor(chromatogram, processMethod, processTypeSupport);
 						forceReset(true);
 						UpdateNotifierUI.update(getDisplay(), chromatogramSelection.getSelectedScan());
 					}

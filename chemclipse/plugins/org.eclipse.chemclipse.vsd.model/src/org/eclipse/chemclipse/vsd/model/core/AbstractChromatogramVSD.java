@@ -12,19 +12,16 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.vsd.model.core;
 
+import org.eclipse.chemclipse.chromatogram.xxd.calculator.core.noise.NoiseCalculator;
+import org.eclipse.chemclipse.chromatogram.xxd.calculator.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.model.core.AbstractChromatogram;
+import org.eclipse.chemclipse.model.core.INoiseCalculator;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.vsd.model.core.selection.ChromatogramSelectionVSD;
 
 public abstract class AbstractChromatogramVSD extends AbstractChromatogram implements IChromatogramVSD {
 
 	private static final long serialVersionUID = -2463054178850833466L;
-
-	@Override
-	public void updateNoiseFactor() {
-
-		// TODO - Noise Calculation
-	}
 
 	@Override
 	public void fireUpdate(IChromatogramSelection chromatogramSelection) {
@@ -36,4 +33,17 @@ public abstract class AbstractChromatogramVSD extends AbstractChromatogram imple
 			chromatogramSelectionISD.update(true);
 		}
 	}
+
+	@Override
+	protected String getNoiseCalculatorId() {
+
+		return PreferenceSupplier.getSelectedNoiseCalculatorId();
+	}
+
+	@Override
+	protected INoiseCalculator createNoiseCalculator(String id) {
+
+		return NoiseCalculator.getNoiseCalculator(id);
+	}
+
 }

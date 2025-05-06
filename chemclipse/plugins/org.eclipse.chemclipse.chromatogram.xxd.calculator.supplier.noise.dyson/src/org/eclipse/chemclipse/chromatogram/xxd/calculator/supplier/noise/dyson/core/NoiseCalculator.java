@@ -18,8 +18,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.eclipse.chemclipse.model.core.AbstractNoiseCalculator;
 import org.eclipse.chemclipse.model.core.IChromatogram;
-import org.eclipse.chemclipse.model.core.INoiseCalculator;
 import org.eclipse.chemclipse.model.results.ChromatogramSegmentation;
 import org.eclipse.chemclipse.model.results.NoiseSegmentMeasurementResult;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
@@ -37,17 +37,15 @@ import org.eclipse.core.runtime.IProgressMonitor;
 /*
  * S/N = intensity / noiseValue
  */
-public class NoiseCalculator implements INoiseCalculator {
+public class NoiseCalculator extends AbstractNoiseCalculator {
 
-	private static final String CALCULATOR_ID = "org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.noise.dyson";
-	//
-	private IChromatogram chromatogram = null;
 	private float noiseFactor = Float.NaN;
+	private boolean runCalculation = true;
 
 	@Override
 	public void reset() {
 
-		this.chromatogram = null;
+		runCalculation = true;
 	}
 
 	@Override
@@ -75,9 +73,9 @@ public class NoiseCalculator implements INoiseCalculator {
 
 	private void setNoiseFactor(IChromatogram chromatogram) {
 
-		if(this.chromatogram != chromatogram) {
+		if(runCalculation) {
 			noiseFactor = calculateNoiseFactor(chromatogram);
-			this.chromatogram = chromatogram;
+			runCalculation = false;
 		}
 	}
 
@@ -231,7 +229,7 @@ public class NoiseCalculator implements INoiseCalculator {
 				int width = (int)Math.round(widths.stream().mapToDouble(Integer::doubleValue).average().orElse(0));
 				ChromatogramSegmentation chromatogramSegmentation = new ChromatogramSegmentation(chromatogram, width);
 				chromatogram.addMeasurementResult(chromatogramSegmentation);
-				NoiseSegmentMeasurementResult noiseSegmentMeasurementResult = new NoiseSegmentMeasurementResult(noiseSegments, chromatogramSegmentation, CALCULATOR_ID);
+				NoiseSegmentMeasurementResult noiseSegmentMeasurementResult = new NoiseSegmentMeasurementResult(noiseSegments, chromatogramSegmentation, getId());
 				chromatogram.addMeasurementResult(noiseSegmentMeasurementResult);
 				//
 				return noiseSegments;

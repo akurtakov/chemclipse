@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.exceptions.NoNoiseCalculatorAvailableException;
 import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.model.core.AbstractNoiseCalculator;
 import org.eclipse.chemclipse.model.core.INoiseCalculator;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -121,16 +122,20 @@ public class NoiseCalculator {
 	public static INoiseCalculator getNoiseCalculator(String calculatorId) {
 
 		IConfigurationElement element = getConfigurationElement(calculatorId);
-		INoiseCalculator instance = null;
 		if(element != null) {
 			try {
-				instance = (INoiseCalculator)element.createExecutableExtension(NOISE_CALCULATOR);
+				if(element.createExecutableExtension(NOISE_CALCULATOR) instanceof INoiseCalculator noiseCalculator) {
+					if(noiseCalculator instanceof AbstractNoiseCalculator calculator) {
+						calculator.setId(calculatorId);
+					}
+					return noiseCalculator;
+				}
 			} catch(CoreException e) {
 				logger.warn(e);
 			}
 		}
 		//
-		return instance;
+		return null;
 	}
 
 	/**

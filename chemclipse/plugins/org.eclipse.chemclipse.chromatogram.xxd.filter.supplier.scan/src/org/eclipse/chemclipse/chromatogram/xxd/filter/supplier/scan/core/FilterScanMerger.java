@@ -159,7 +159,6 @@ public class FilterScanMerger extends AbstractChromatogramFilter {
 			chromatogram.setScanDelay(chromatogram.getStartRetentionTime());
 			chromatogram.setScanInterval(newScanInterval);
 			chromatogram.recalculateScanNumbers();
-			chromatogram.recalculateTheNoiseFactor();
 			chromatogramSelection.reset();
 		}
 	}

@@ -22,6 +22,8 @@ public interface INoiseCalculator {
 
 	void reset();
 
+	String getId();
+
 	String getName();
 
 	float getNoiseFactor();

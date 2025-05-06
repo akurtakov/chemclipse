@@ -18,8 +18,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
+import org.eclipse.chemclipse.model.core.AbstractNoiseCalculator;
 import org.eclipse.chemclipse.model.core.IChromatogram;
-import org.eclipse.chemclipse.model.core.INoiseCalculator;
 import org.eclipse.chemclipse.model.results.ChromatogramSegmentation;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.model.signals.TotalScanSignals;
@@ -41,15 +41,15 @@ import org.eclipse.core.runtime.SubMonitor;
 /*
  * S/N = Math.sqrt(intensity) * noiseFactor
  */
-public class NoiseCalculator implements INoiseCalculator {
+public class NoiseCalculator extends AbstractNoiseCalculator {
 
-	private IChromatogram chromatogram = null;
 	private float noiseFactor = Float.NaN;
+	private boolean runCalculation = true;
 
 	@Override
 	public void reset() {
 
-		this.chromatogram = null;
+		runCalculation = true;
 	}
 
 	@Override
@@ -80,9 +80,7 @@ public class NoiseCalculator implements INoiseCalculator {
 
 		if(chromatogram instanceof IChromatogramMSD) {
 			return getNoiseSegments(chromatogram, IIon.TIC_ION, monitor);
-		}
-		//
-		if(chromatogram != null) {
+		} else if(chromatogram != null) {
 			ChromatogramSegmentation segmentation = chromatogram.getMeasurementResult(ChromatogramSegmentation.class);
 			if(segmentation != null) {
 				ISegmentValidator segmentValidator = new SegmentValidatorClassic();
@@ -101,14 +99,15 @@ public class NoiseCalculator implements INoiseCalculator {
 				return result;
 			}
 		}
+
 		return Collections.emptyList();
 	}
 
 	private void setNoiseFactor(IChromatogram chromatogram) {
 
-		if(this.chromatogram != chromatogram) {
+		if(runCalculation) {
 			noiseFactor = calculateNoiseFactor(chromatogram);
-			this.chromatogram = chromatogram;
+			runCalculation = false;
 		}
 	}
 

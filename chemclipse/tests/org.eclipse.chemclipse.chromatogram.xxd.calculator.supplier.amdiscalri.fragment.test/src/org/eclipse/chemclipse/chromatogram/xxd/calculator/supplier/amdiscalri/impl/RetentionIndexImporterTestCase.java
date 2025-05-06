@@ -17,8 +17,11 @@ import java.io.File;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.PathResolver;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.model.RetentionIndexFileOption;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.settings.RetentionIndexImporterSettings;
+import org.eclipse.chemclipse.model.core.AbstractChromatogram;
 import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.core.INoiseCalculator;
 import org.eclipse.chemclipse.model.implementation.Chromatogram;
+import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.junit.Ignore;
 
 import junit.framework.TestCase;
@@ -55,7 +58,7 @@ public class RetentionIndexImporterTestCase extends TestCase {
 		retentionIndexImporter.apply(chromatogram, settings);
 	}
 
-	private class MyChromatogram extends Chromatogram {
+	private class MyChromatogram extends AbstractChromatogram {
 
 		private static final long serialVersionUID = 688258405302662443L;
 
@@ -67,6 +70,23 @@ public class RetentionIndexImporterTestCase extends TestCase {
 			 */
 			String name = getFile().getName();
 			return name.substring(0, name.length() - 4);
+		}
+
+		@Override
+		public void fireUpdate(IChromatogramSelection chromatogramSelection) {
+
+		}
+
+		@Override
+		protected String getNoiseCalculatorId() {
+
+			return null;
+		}
+
+		@Override
+		protected INoiseCalculator createNoiseCalculator(String id) {
+
+			return null;
 		}
 	}
 }

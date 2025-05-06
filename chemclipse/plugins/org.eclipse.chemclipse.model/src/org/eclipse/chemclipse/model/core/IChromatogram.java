@@ -174,7 +174,7 @@ public interface IChromatogram extends SegmentedMeasurement, IMeasurement, IChro
 	/**
 	 * Recalculates the noise factor.
 	 */
-	void recalculateTheNoiseFactor();
+	void recalculateNoiseFactor();
 
 	/**
 	 * Calculates the signal to noise (S/N) ratio of the given abundance.

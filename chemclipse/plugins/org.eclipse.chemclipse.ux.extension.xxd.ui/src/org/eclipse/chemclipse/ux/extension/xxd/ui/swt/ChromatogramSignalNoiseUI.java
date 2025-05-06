@@ -156,7 +156,7 @@ public class ChromatogramSignalNoiseUI extends Composite implements IExtendedPar
 				if(chromatogramSelection != null) {
 					IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 					if(chromatogram != null) {
-						chromatogram.recalculateTheNoiseFactor();
+						chromatogram.recalculateNoiseFactor();
 						chromatogram.setDirty(true);
 						updateInput();
 					}
@@ -253,7 +253,7 @@ public class ChromatogramSignalNoiseUI extends Composite implements IExtendedPar
 							List<INoiseSegment> noiseSegments = getNoiseSegmentSelection();
 							noiseSegmentMeasurementResult.getResult().removeAll(noiseSegments);
 						}
-						chromatogram.recalculateTheNoiseFactor();
+						chromatogram.recalculateNoiseFactor();
 						chromatogram.setDirty(true);
 						updateInput();
 					}
@@ -293,7 +293,7 @@ public class ChromatogramSignalNoiseUI extends Composite implements IExtendedPar
 							if(noiseSegmentMeasurementResult != null) {
 								noiseSegmentMeasurementResult.getResult().clear();
 							}
-							chromatogram.recalculateTheNoiseFactor();
+							chromatogram.recalculateNoiseFactor();
 							chromatogram.setDirty(true);
 							updateInput();
 						}

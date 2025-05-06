@@ -72,7 +72,6 @@ public class BaselineSubtractProcessor {
 		 * Recalculate chromatogram values.
 		 */
 		chromatogram.recalculateScanNumbers();
-		chromatogram.recalculateTheNoiseFactor();
 		chromatogram.getPeaks().clear();
 		baselineModel.removeBaseline();
 	}

@@ -43,7 +43,6 @@ public class BaselineFilter extends AbstractChromatogramFilter implements IChrom
 				scan.adjustTotalSignal(Float.MIN_VALUE);
 			}
 		}
-		chromatogram.recalculateTheNoiseFactor();
 		chromatogram.getPeaks().clear();
 		baselineModel.removeBaseline();
 		chromatogramSelection.getChromatogram().setDirty(true);

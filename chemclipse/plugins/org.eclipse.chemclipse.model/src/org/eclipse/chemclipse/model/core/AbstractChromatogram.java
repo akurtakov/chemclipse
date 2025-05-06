@@ -114,6 +114,8 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 	private int modCount;
 	/*
 	 * Noise Calculator
+	 * This can't be created directly here, as implementations are
+	 * located at a higher level (including a MSD specific version).
 	 */
 	private INoiseCalculator noiseCalculator = null;
 	/*
@@ -153,19 +155,47 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 		return processDataMap;
 	}
 
-	public abstract void updateNoiseFactor();
-
 	@Override
-	public void recalculateTheNoiseFactor() {
+	public void recalculateNoiseFactor() {
 
 		/*
 		 * This effectively resets the calculator
 		 */
-		updateNoiseFactor();
+		updateNoiseFactorCalculator();
 		for(IPeak peak : getPeaks()) {
 			if(peak instanceof IChromatogramPeak chromatogramPeak) {
 				chromatogramPeak.resetSignalToNoiseRatio();
 			}
+		}
+	}
+
+	protected abstract String getNoiseCalculatorId();
+
+	protected abstract INoiseCalculator createNoiseCalculator(String id);
+
+	private void updateNoiseFactorCalculator() {
+
+		String id = getNoiseCalculatorId();
+		INoiseCalculator noiseCalculator = getNoiseCalculator();
+		/*
+		 * If the noise calculator has changed, create a new one.
+		 * Otherwise, reset the status to trigger a new calculation.
+		 */
+		INoiseCalculator noiseCalculatorNew = null;
+		if(noiseCalculator != null) {
+			if(noiseCalculator.getId().equals(id)) {
+				noiseCalculator.reset();
+			} else {
+				noiseCalculatorNew = createNoiseCalculator(id);
+			}
+		} else {
+			noiseCalculatorNew = createNoiseCalculator(id);
+		}
+		/*
+		 * Add the new calculator on demand.
+		 */
+		if(noiseCalculatorNew != null) {
+			setNoiseCalculator(noiseCalculatorNew);
 		}
 	}
 
@@ -615,11 +645,6 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 	 */
 	protected void fireUpdateChange(final boolean forceReload) {
 
-		/**
-		 * Before the listeners should be informed, internally some values
-		 * should be marked to be recalculated if they are needed.
-		 */
-		recalculateTheNoiseFactor();
 		/**
 		 * Inform all listeners if a chromatogram value has changed, for example
 		 * a mass spectrum.<br/>

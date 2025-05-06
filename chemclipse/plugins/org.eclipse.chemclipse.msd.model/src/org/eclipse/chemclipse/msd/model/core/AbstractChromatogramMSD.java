@@ -72,19 +72,6 @@ public abstract class AbstractChromatogramMSD extends AbstractChromatogram imple
 
 		ionTransitionSettings = new IonTransitionSettings();
 		immutableZeroIon = new ImmutableZeroIon();
-		updateNoiseFactor();
-	}
-
-	@Override
-	public void updateNoiseFactor() {
-
-		String noiseCalculatorId = getNoiseCalculatorId();
-		INoiseCalculator noiseCalculator = NoiseCalculator.getNoiseCalculator(noiseCalculatorId);
-		if(noiseCalculator != null) {
-			noiseCalculator.reset();
-		}
-		//
-		setNoiseCalculator(noiseCalculator);
 	}
 
 	@Override
@@ -103,7 +90,7 @@ public abstract class AbstractChromatogramMSD extends AbstractChromatogram imple
 
 		super.addMeasurementResult(chromatogramResult);
 		if(chromatogramResult instanceof NoiseSegmentMeasurementResult) {
-			recalculateTheNoiseFactor();
+			recalculateNoiseFactor();
 		}
 	}
 
@@ -282,7 +269,8 @@ public abstract class AbstractChromatogramMSD extends AbstractChromatogram imple
 		}
 	}
 
-	private String getNoiseCalculatorId() {
+	@Override
+	protected String getNoiseCalculatorId() {
 
 		NoiseSegmentMeasurementResult noiseSegmentMeasurementResult = getMeasurementResult(NoiseSegmentMeasurementResult.class);
 		if(noiseSegmentMeasurementResult != null) {
@@ -290,6 +278,12 @@ public abstract class AbstractChromatogramMSD extends AbstractChromatogram imple
 		} else {
 			return PreferenceSupplier.getSelectedNoiseCalculatorId();
 		}
+	}
+
+	@Override
+	protected INoiseCalculator createNoiseCalculator(String id) {
+
+		return NoiseCalculator.getNoiseCalculator(id);
 	}
 
 	@SuppressWarnings("unchecked")
