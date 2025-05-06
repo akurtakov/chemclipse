@@ -1402,6 +1402,8 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 						 */
 						IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 						chromatogram.getSeparationColumnIndices().setSeparationColumn(separationColumn);
+						chromatogram.setDirty(true);
+
 						if(preferenceStore.getBoolean(PreferenceSupplier.P_CHROMATOGRAM_TRANSFER_COLUMN_TYPE_TO_REFERENCES)) {
 							for(IChromatogram chromatogramReference : chromatogram.getReferencedChromatograms()) {
 								chromatogramReference.getSeparationColumnIndices().setSeparationColumn(separationColumn);
