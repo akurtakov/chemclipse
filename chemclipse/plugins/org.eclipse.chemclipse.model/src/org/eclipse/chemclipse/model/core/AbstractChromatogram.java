@@ -73,12 +73,12 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 	 * the chromatogram.<br/> It is important e.g. for the GUI to known when it
 	 * has to update itself.
 	 */
-	private final List<IChromatogramUpdateListener> updateSupport;
+	private final List<IChromatogramUpdateListener> updateSupport = new ArrayList<>(5);
 	/*
 	 * EditHistory stores all information about the edit operations processed on
 	 * the chromatogram.
 	 */
-	private final IEditHistory editHistory;
+	private final IEditHistory editHistory = new EditHistory();
 	/*
 	 * The baseline model map.
 	 * A chromatogram could contain several baseline models.
@@ -101,8 +101,8 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 	private List<IIntegrationEntry> chromatogramIntegrationEntries = new ArrayList<>();
 	private List<IIntegrationEntry> backgroundIntegrationEntries = new ArrayList<>();
 	//
-	private final IMethod method;
-	private ISeparationColumnIndices separationColumnIndices;
+	private IMethod method = new TripleQuadMethod();
+	private ISeparationColumnIndices separationColumnIndices = SeparationColumnFactory.getSeparationColumnIndices(SeparationColumnType.DEFAULT);
 	/*
 	 * This set contains all the peaks of the chromatogram.
 	 * Specific chromatogram implementations might define
@@ -129,11 +129,7 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 	 */
 	protected AbstractChromatogram() {
 
-		updateSupport = new ArrayList<>(5);
-		editHistory = new EditHistory();
 		baselineModelMap.put(DEFAULT_BASELINE_ID, new BaselineModel(this));
-		method = new TripleQuadMethod();
-		separationColumnIndices = SeparationColumnFactory.getSeparationColumnIndices(SeparationColumnType.DEFAULT);
 		putHeaderData(COLUMN_DETAILS, "");
 	}
 

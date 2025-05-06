@@ -64,15 +64,9 @@ public abstract class AbstractChromatogramMSD extends AbstractChromatogram imple
 	//
 	public static final int DEFAULT_SEGMENT_WIDTH = 10;
 	//
-	private final IIonTransitionSettings ionTransitionSettings;
-	private ImmutableZeroIon immutableZeroIon;
+	private IIonTransitionSettings ionTransitionSettings = new IonTransitionSettings();
+	private ImmutableZeroIon immutableZeroIon = new ImmutableZeroIon();
 	private IScanMSD combinedMassSpectrum;
-
-	protected AbstractChromatogramMSD() {
-
-		ionTransitionSettings = new IonTransitionSettings();
-		immutableZeroIon = new ImmutableZeroIon();
-	}
 
 	@Override
 	public <ResultType extends IMeasurementResult<?>> ResultType getMeasurementResult(Class<ResultType> type) {
