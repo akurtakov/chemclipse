@@ -10,9 +10,8 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.internal.support;
+package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.model;
 
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.model.ScanRemoverPattern;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.preferences.PreferenceSupplier;
 
 import junit.framework.TestCase;
