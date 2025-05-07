@@ -54,6 +54,10 @@ public class AlkanePatternDetectorMSD {
 			IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(file, monitor);
 			chromatogramMSD = processingInfo.getProcessingResult();
 			/*
+			 * S/N
+			 */
+			chromatogramMSD.recalculateNoiseFactor();
+			/*
 			 * Create a selection
 			 */
 			IChromatogramSelectionMSD chromatogramSelectionMSD = new ChromatogramSelectionMSD(chromatogramMSD);
