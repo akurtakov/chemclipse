@@ -51,6 +51,10 @@ public class AlkanePatternDetectorCSD {
 			IProcessingInfo<IChromatogramCSD> processingInfo = ChromatogramConverterCSD.getInstance().convert(file, monitor);
 			chromatogramCSD = processingInfo.getProcessingResult();
 			/*
+			 * S/N
+			 */
+			chromatogramCSD.recalculateNoiseFactor();
+			/*
 			 * Create a selection
 			 */
 			IChromatogramSelectionCSD chromatogramSelectionCSD = new ChromatogramSelectionCSD(chromatogramCSD);
