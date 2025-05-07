@@ -42,7 +42,7 @@ public class ScalingPareto extends AbstractScaling {
 	@Override
 	public <V extends IVariable, S extends ISample> void process(ISamples<V, S> samples) {
 
-		boolean onlySeleted = isOnlySelected();
+		boolean onlySelected = isOnlySelected();
 		int centeringType = getCenteringType();
 		List<V> variables = samples.getVariables();
 		List<S> samplesList = samples.getSamples();
@@ -52,7 +52,7 @@ public class ScalingPareto extends AbstractScaling {
 				double deviationSqrt = Math.sqrt(getStandartDeviation(samplesList, i, centeringType));
 				for(ISample sample : samplesList) {
 					ISampleData<?> sampleData = sample.getSampleData().get(i);
-					if((sample.isSelected() || !onlySeleted)) {
+					if((sample.isSelected() || !onlySelected)) {
 						double data = getData(sampleData);
 						double scaleData = (data - mean) / deviationSqrt;
 						sampleData.setModifiedData(scaleData);
