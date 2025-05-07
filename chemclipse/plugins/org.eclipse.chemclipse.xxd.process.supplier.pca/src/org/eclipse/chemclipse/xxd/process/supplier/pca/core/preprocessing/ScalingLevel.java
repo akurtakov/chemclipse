@@ -42,7 +42,7 @@ public class ScalingLevel extends AbstractScaling {
 	@Override
 	public <V extends IVariable, S extends ISample> void process(ISamples<V, S> samples) {
 
-		boolean onlySeleted = isOnlySelected();
+		boolean onlySelected = isOnlySelected();
 		int centeringType = getCenteringType();
 		List<V> variables = samples.getVariables();
 		List<S> samplesList = samples.getSamples();
@@ -51,7 +51,7 @@ public class ScalingLevel extends AbstractScaling {
 				double mean = getCenteringValue(samplesList, i, centeringType);
 				for(ISample sample : samplesList) {
 					ISampleData<?> sampleData = sample.getSampleData().get(i);
-					if((sample.isSelected() || !onlySeleted)) {
+					if((sample.isSelected() || !onlySelected)) {
 						double data = getData(sampleData);
 						double scaleData = (data - mean) / mean;
 						sampleData.setModifiedData(scaleData);

@@ -137,13 +137,15 @@ public class ProcessorPCA {
 				 */
 				principalComponentAnalysis.predict();
 				/*
-				 * Collect PCA results
+				 * Check compute Status
 				 */
 				if(!principalComponentAnalysis.getComputeStatus()) {
 					return null;
 				}
 				subMonitor.worked(20);
-				//
+				/*
+				 * Collect PCA results
+				 */
 				List<double[]> loadingVectors = getLoadingVectors(principalComponentAnalysis, numberOfPrincipalComponents);
 				double[] explainedVariances = this.getExplainedVariances(principalComponentAnalysis, numberOfPrincipalComponents);
 				double[] cumulativeExplainedVariances = this.getCumulativeExplainedVariances(explainedVariances);
