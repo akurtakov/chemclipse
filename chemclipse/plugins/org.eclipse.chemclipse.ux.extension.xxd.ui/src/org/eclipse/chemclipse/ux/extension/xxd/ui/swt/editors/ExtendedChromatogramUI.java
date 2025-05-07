@@ -769,7 +769,6 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 							DefaultProcessingResult<Object> processingInfo = new DefaultProcessingResult<>();
 							IProcessSupplier.applyProcessor(settings, IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection), new ProcessExecutionContext(monitor, processingInfo, processSupplierContext));
 							IChromatogram chromatogram = chromatogramSelection.getChromatogram();
-							chromatogram.setDirty(true);
 							updateResult(processingInfo);
 							AuditTrailSupport.updateAuditTrail(chromatogram, processingInfo, processSupplier);
 							NoiseFactorSupport.updateNoiseFactor(chromatogram, processSupplier);
@@ -1248,7 +1247,6 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 						IProcessingInfo<?> processingInfo = new ProcessingInfo<>();
 						ProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, processingInfo, processTypeSupport), IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection));
 						IChromatogram chromatogram = chromatogramSelection.getChromatogram();
-						chromatogram.setDirty(true);
 						updateResult(processingInfo);
 						AuditTrailSupport.updateAuditTrail(chromatogram, processingInfo, processMethod, processTypeSupport);
 						NoiseFactorSupport.updateNoiseFactor(chromatogram, processMethod, processTypeSupport);
