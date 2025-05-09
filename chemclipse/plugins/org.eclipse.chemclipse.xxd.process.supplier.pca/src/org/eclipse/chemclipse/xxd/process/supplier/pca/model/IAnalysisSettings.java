@@ -53,4 +53,8 @@ public interface IAnalysisSettings {
 	void setColorScheme(String colorScheme);
 
 	String getColorScheme();
+
+	boolean getCrossValidation();
+
+	void setCrossValidation(boolean crossValidation);
 }

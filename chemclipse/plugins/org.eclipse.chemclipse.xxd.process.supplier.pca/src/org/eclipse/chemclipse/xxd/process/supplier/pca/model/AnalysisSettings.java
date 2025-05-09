@@ -25,6 +25,7 @@ public class AnalysisSettings implements IAnalysisSettings {
 	private int numberOfSamplesToFilter = PreferenceSupplier.getNumberOfSamplesToFilter();
 	private Algorithm algorithm = PreferenceSupplier.getAlgorithm();
 	private boolean removeUselessVariables = PreferenceSupplier.isRemoveUselessVariables();
+	private boolean crossValidation = false;
 	private LabelOptionPCA labelOptionPCA = PreferenceSupplier.getLabelOptionPCA();
 	private String colorScheme = PreferenceSupplier.getColorScheme();
 	private String groupName = "--";
@@ -40,6 +41,7 @@ public class AnalysisSettings implements IAnalysisSettings {
 		this.numberOfPrincipalComponents = analysisSettings.getNumberOfPrincipalComponents();
 		this.numberOfSamplesToFilter = analysisSettings.getNumberOfSamplesToFilter();
 		this.algorithm = analysisSettings.getAlgorithm();
+		this.crossValidation = analysisSettings.getCrossValidation();
 		this.removeUselessVariables = analysisSettings.isRemoveUselessVariables();
 		this.labelOptionPCA = analysisSettings.getLabelOptionPCA();
 		//
@@ -91,6 +93,18 @@ public class AnalysisSettings implements IAnalysisSettings {
 	public void setAlgorithm(Algorithm algorithm) {
 
 		this.algorithm = algorithm;
+	}
+
+	@Override
+	public boolean getCrossValidation() {
+
+		return this.crossValidation;
+	}
+
+	@Override
+	public void setCrossValidation(boolean crossValidation) {
+
+		this.crossValidation = crossValidation;
 	}
 
 	@Override
