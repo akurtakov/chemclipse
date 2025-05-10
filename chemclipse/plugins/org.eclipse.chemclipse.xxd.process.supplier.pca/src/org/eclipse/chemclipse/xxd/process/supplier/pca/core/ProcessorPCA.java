@@ -9,7 +9,7 @@
  * 
  * Contributors:
  * Jan Holy - initial API and implementation
- * Lorenz Gerber - PCA adapter, algorithm, opls target group
+ * Lorenz Gerber - PCA adapter, algorithm, opls target group, CV
  * Philip Wenig - get rid of JavaFX, feature selection
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.core;
@@ -46,6 +46,8 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ResultPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ResultsPCA;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
+import org.ejml.data.DMatrixRMaj;
+import org.ejml.dense.row.CommonOps_DDRM;
 
 public class ProcessorPCA {
 
@@ -106,65 +108,105 @@ public class ProcessorPCA {
 				Map<String, Boolean> variablesSelectionMap = getVariablesSelectionMap(masterEvaluationPCA != null ? masterEvaluationPCA.getSamples().getVariables() : Collections.emptyList());
 				subMonitor.worked(20);
 				/*
-				 * Preprocessing
+				 * Looping over Samples
 				 */
-				IPreprocessingSettings preprocessingSettings = analysisSettings.getPreprocessingSettings();
-				preprocessingSettings.process(samples, monitor);
-				subMonitor.worked(20);
-				/*
-				 * Variable Extraction
-				 */
-				int numberOfPrincipalComponents = analysisSettings.getNumberOfPrincipalComponents();
-				Algorithm algorithm = analysisSettings.getAlgorithm();
-				boolean[] selectedVariables = getSelectedVariables(samples, analysisSettings, variablesSelectionMap);
-				Map<ISample, double[]> extractData = extractData(samples, algorithm, analysisSettings, selectedVariables);
-				int numberPredictionSamples = numberPredictionSamples(extractData);
-				assignVariables(results, samples, selectedVariables, variablesSelectionMap);
-				int numberVariables = getNumSampleVars(extractData);
-				subMonitor.worked(20);
-				/*
-				 * Prepare PCA Calculation
-				 */
-				IMultivariateCalculator principalComponentAnalysis = setupPCA(extractData, numberPredictionSamples, numberVariables, numberOfPrincipalComponents, algorithm, analysisSettings.getOplsTargetGroupName());
-				subMonitor.worked(20);
-				/*
-				 * Compute PCA
-				 */
-				principalComponentAnalysis.compute();
-				subMonitor.worked(20);
-				/*
-				 * Predict samples
-				 */
-				principalComponentAnalysis.predict();
-				/*
-				 * Check compute Status
-				 */
-				if(!principalComponentAnalysis.getComputeStatus()) {
-					return null;
+				List<Integer> useSample = new ArrayList<>();
+				for(int i = 0; i < samples.getSamples().size(); i++) {
+					if(samples.getSamples().get(i).isSelected() && !samples.getSamples().get(i).isPredicted()) {
+						useSample.add(i);
+					}
 				}
-				subMonitor.worked(20);
-				/*
-				 * Collect PCA results
-				 */
-				List<double[]> loadingVectors = getLoadingVectors(principalComponentAnalysis, numberOfPrincipalComponents);
-				double[] explainedVariances = this.getExplainedVariances(principalComponentAnalysis, numberOfPrincipalComponents);
-				double[] cumulativeExplainedVariances = this.getCumulativeExplainedVariances(explainedVariances);
-				results.setLoadingVectors(loadingVectors);
-				results.setExplainedVariances(explainedVariances);
-				results.setCumulativeExplainedVariances(cumulativeExplainedVariances);
-				setEigenSpaceAndErrorValues(principalComponentAnalysis, extractData, results);
-				subMonitor.worked(20);
-				/*
-				 * Feature Data Matrix
-				 */
-				evaluationPCA = new EvaluationPCA(samples, results);
-				calculateFeatureDataMatrix(evaluationPCA);
-				subMonitor.worked(20);
+				DMatrixRMaj cvScoresPredicted = new DMatrixRMaj(useSample.size(), analysisSettings.getNumberOfPrincipalComponents());
+				DMatrixRMaj cvScoresModel = new DMatrixRMaj(useSample.size(), analysisSettings.getNumberOfPrincipalComponents());
+				int counter = 0;
+				if(!analysisSettings.getCrossValidation()) {
+					counter = useSample.size();
+				}
+				for(int i = counter; i <= useSample.size(); i++) {
+					/*
+					 * Run first all leave-out predictions, as the last run,
+					 * build the full model.
+					 */
+					ISample currentSample = null;
+					if(i != useSample.size()) {
+						samples.getSamples().get(useSample.get(i)).setPredicted(true);
+						currentSample = samples.getSamples().get(useSample.get(i));
+					}
+					/*
+					 * Preprocess
+					 */
+					IPreprocessingSettings preprocessingSettings = analysisSettings.getPreprocessingSettings();
+					preprocessingSettings.process(samples, monitor);
+					/*
+					 * Variable Extraction
+					 */
+					int numberOfPrincipalComponents = analysisSettings.getNumberOfPrincipalComponents();
+					Algorithm algorithm = analysisSettings.getAlgorithm();
+					boolean[] selectedVariables = getSelectedVariables(samples, analysisSettings, variablesSelectionMap);
+					Map<ISample, double[]> extractData = extractData(samples, algorithm, analysisSettings, selectedVariables);
+					int numberPredictionSamples = numberPredictionSamples(extractData);
+					assignVariables(results, samples, selectedVariables, variablesSelectionMap);
+					int numberVariables = getNumSampleVars(extractData);
+					subMonitor.worked(20);
+					/*
+					 * Prepare PCA Calculation
+					 */
+					IMultivariateCalculator principalComponentAnalysis = setupPCA(extractData, numberPredictionSamples, numberVariables, numberOfPrincipalComponents, algorithm, analysisSettings.getOplsTargetGroupName());
+					subMonitor.worked(20);
+					/*
+					 * Compute PCA
+					 */
+					principalComponentAnalysis.compute();
+					subMonitor.worked(20);
+					/*
+					 * Predict samples
+					 */
+					principalComponentAnalysis.predict();
+					if(i != useSample.size()) {
+						double[] scores = principalComponentAnalysis.getScoreVector(currentSample);
+						DMatrixRMaj row = new DMatrixRMaj(1, scores.length, true, scores);
+						CommonOps_DDRM.insert(row, cvScoresPredicted, i, 0);
+						samples.getSamples().get(useSample.get(i)).setPredicted(false);
+					} else {
+						/*
+						 * Finishing work for the actual Model
+						 */
+						for(int j = 0; j < useSample.size(); j++) {
+							DMatrixRMaj source = new DMatrixRMaj(1, analysisSettings.getNumberOfPrincipalComponents(), true, principalComponentAnalysis.getScoreVector(samples.getSamples().get(useSample.get(j))));
+							CommonOps_DDRM.insert(source, cvScoresModel, j, 0);
+						}
+						CommonOps_DDRM.subtractEquals(cvScoresPredicted, cvScoresModel);
+						CommonOps_DDRM.elementPower(cvScoresPredicted, 2.0, null);
+						/*
+						 * Check compute Status
+						 */
+						if(!principalComponentAnalysis.getComputeStatus()) {
+							return null;
+						}
+						subMonitor.worked(20);
+						/*
+						 * Collect PCA results
+						 */
+						List<double[]> loadingVectors = getLoadingVectors(principalComponentAnalysis, numberOfPrincipalComponents);
+						double[] explainedVariances = this.getExplainedVariances(principalComponentAnalysis, numberOfPrincipalComponents);
+						double[] cumulativeExplainedVariances = this.getCumulativeExplainedVariances(explainedVariances);
+						results.setLoadingVectors(loadingVectors);
+						results.setExplainedVariances(explainedVariances);
+						results.setCumulativeExplainedVariances(cumulativeExplainedVariances);
+						setEigenSpaceAndErrorValues(principalComponentAnalysis, extractData, results);
+						subMonitor.worked(20);
+						/*
+						 * Feature Data Matrix
+						 */
+						evaluationPCA = new EvaluationPCA(samples, results);
+						calculateFeatureDataMatrix(evaluationPCA);
+						subMonitor.worked(20);
+					}
+				}
 			} finally {
 				SubMonitor.done(subMonitor);
 			}
 		}
-		//
 		return evaluationPCA;
 	}
 
