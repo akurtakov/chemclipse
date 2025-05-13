@@ -104,7 +104,7 @@ public class RichTextSupport {
 		}
 	}
 
-	private static boolean isUseRichTextEditor() {
+	public static boolean isUseRichTextEditor() {
 
 		boolean useRichTextEditor = PreferenceSupplier.isUseRichTextEditor();
 		if(useRichTextEditor) {
