@@ -13,6 +13,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.ui.parts;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.chemclipse.model.notifier.UpdateNotifier;
@@ -64,6 +65,11 @@ public abstract class AbstractUpdater<T extends Composite> {
 		dataUpdateSupport.add(updateListener);
 		setControl(control);
 		subscribeAdditionalTopics();
+	}
+
+	public List<Object> getUpdates(String topic) {
+
+		return dataUpdateSupport != null ? dataUpdateSupport.getUpdates(topic) : Collections.emptyList();
 	}
 
 	@Focus
