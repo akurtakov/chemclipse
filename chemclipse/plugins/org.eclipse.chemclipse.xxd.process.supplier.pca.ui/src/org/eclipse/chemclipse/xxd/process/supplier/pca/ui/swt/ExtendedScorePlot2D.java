@@ -74,6 +74,8 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 	private UserSelection userSelection = new UserSelection();
 	//
 	private Composite control;
+	//
+	private boolean highlightClick = false;
 
 	public ExtendedScorePlot2D(Composite parent, int style) {
 
@@ -302,6 +304,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 					 */
 					userSelection.reset();
 					userSelection.setSingleClick(false);
+					highlightClick = true;
 				}
 			}
 		});
@@ -381,6 +384,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 						List<ISample> highlightedSamples = new ArrayList<>();
 						highlightedSamples.add(resultDelta.getResultPCA().getSample());
 						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, highlightedSamples.toArray());
+						highlightClick = true;
 					}
 				}
 			}
@@ -469,9 +473,8 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 						} else {
 							highlightedSamples.add(resultDelta.getResultPCA().getSample());
 						}
-						// List<ISample> highlightedSamples = new ArrayList<>();
-						// highlightedSamples.add(resultDelta.getResultPCA().getSample());
 						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, highlightedSamples.toArray());
+						highlightClick = true;
 					}
 				}
 				userSelection.reset();
@@ -571,7 +574,13 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 		PrincipalComponentUI principalComponentUI = principalComponentControl.get();
 		int pcX = principalComponentUI.getPCX();
 		int pcY = principalComponentUI.getPCY();
+		BaseChart baseChart = scorePlotControl.get().getBaseChart();
+		Range rangeX = baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS).getRange();
+		Range rangeY = baseChart.getAxisSet().getYAxis(BaseChart.ID_PRIMARY_Y_AXIS).getRange();
 		updatePlot(pcX, pcY);
+		if(highlightClick) {
+			scorePlotControl.get().updateRange(rangeX, rangeY);
+		}
 	}
 
 	private void updateWidgets() {
