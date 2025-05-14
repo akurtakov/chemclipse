@@ -35,6 +35,7 @@ import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.chemclipse.support.ui.swt.ITableSettings;
+import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
 import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
@@ -61,6 +62,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.Preference
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePageScorePlot;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.ColorSupport;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -631,6 +633,43 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 					sample.setSelected(!sample.isSelected());
 				}
 				sampleListUI.updateContent();
+			}
+		});
+		tableSettings.addMenuEntry(new ITableMenuEntry() {
+
+			@Override
+			public String getCategory() {
+
+				return "";
+			}
+
+			@Override
+			public String getName() {
+
+				return "Apply Selection to Classification Column";
+			}
+
+			@Override
+			public void execute(ExtendedTableViewer extendedTableViewer) {
+
+				Shell shell = DisplayUtils.getShell();
+				Display display = DisplayUtils.getDisplay();
+				InputDialog inputDialog = new InputDialog(shell, "Apply Selected Samples to Classification columm", "Enter Character to apply:", "", null);
+				if(inputDialog.open() == InputDialog.OK) {
+					String userInput = inputDialog.getValue();
+					if(userInput.length() == 1) {
+						for(ISample sample : evaluationPCA.getHighlightedSamples()) {
+							sample.setClassification(userInput);
+						}
+						sampleListUI.updateContent();
+					}
+				}
+				// Main event loop
+				while(!shell.isDisposed()) {
+					if(!display.readAndDispatch()) {
+						display.sleep();
+					}
+				}
 			}
 		});
 		tableSettings.addMenuEntry(new ITableMenuEntry() {
