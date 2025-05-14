@@ -176,7 +176,13 @@ public class ProcessorPCA {
 							CommonOps_DDRM.insert(source, cvScoresModel, j, 0);
 						}
 						CommonOps_DDRM.subtractEquals(cvScoresPredicted, cvScoresModel);
-						CommonOps_DDRM.elementPower(cvScoresPredicted, 2.0, null);
+						DMatrixRMaj diffSquared = new DMatrixRMaj(cvScoresPredicted.getNumRows(), cvScoresPredicted.getNumCols());
+						CommonOps_DDRM.elementPower(cvScoresPredicted, 2.0, diffSquared);
+						DMatrixRMaj modelSquared = new DMatrixRMaj(cvScoresModel.getNumRows(), cvScoresModel.getNumCols());
+						CommonOps_DDRM.elementPower(cvScoresModel, 2.0, modelSquared);
+						double press = CommonOps_DDRM.elementSum(diffSquared);
+						double ss = CommonOps_DDRM.elementSum(modelSquared);
+						double q2 = 1.0 - (press / ss);
 						/*
 						 * Check compute Status
 						 */
