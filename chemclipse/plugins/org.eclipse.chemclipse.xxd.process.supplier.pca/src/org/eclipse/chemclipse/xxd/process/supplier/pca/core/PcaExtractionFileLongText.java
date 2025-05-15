@@ -178,6 +178,13 @@ public class PcaExtractionFileLongText implements IExtractionData {
 								if(sample == null) {
 									sample = new Sample(sampleName, sampleDetails, groupName, classification, description);
 									sampleMap.put(sampleName, sample);
+								} else {
+									if(classification.equals("1")) {
+										sampleName = sampleName + "_F";
+										sampleDetails = "Filter File Name exists in DB!";
+										sample = new Sample(sampleName, sampleDetails, groupName, classification, description);
+										sampleMap.put(sampleName, sample);
+									}
 								}
 								Map<String, Target> variablesMap = samplesVariablesMap.get(sampleName);
 								if(variablesMap == null) {
