@@ -16,8 +16,8 @@ import org.eclipse.chemclipse.support.text.ILabel;
 
 public enum Algorithm implements ILabel {
 
-	SVD("SVD"), //
-	NIPALS("NIPALS"), //
+	SVD("PCA-SVD"), //
+	NIPALS("PCA-NIPALS"), //
 	OPLS("OPLS");
 
 	private String label = "";
