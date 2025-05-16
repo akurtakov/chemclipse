@@ -182,6 +182,7 @@ public class ProcessorPCA {
 						CommonOps_DDRM.elementPower(cvScoresModel, 2.0, modelSquared);
 						double press = CommonOps_DDRM.elementSum(diffSquared);
 						double ss = CommonOps_DDRM.elementSum(modelSquared);
+						@SuppressWarnings("unused")
 						double q2 = 1.0 - (press / ss);
 						/*
 						 * Check compute Status
