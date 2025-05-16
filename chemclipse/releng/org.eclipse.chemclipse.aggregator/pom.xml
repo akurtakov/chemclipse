@@ -22,7 +22,6 @@
 		</developer>
 	</developers>
 	<modules>
-		<module>../org.eclipse.chemclipse.targetplatform</module>
 		<module>../../plugins</module>
 		<module>../../tests</module>
 		<module>../../features</module>
