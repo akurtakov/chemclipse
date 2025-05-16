@@ -107,6 +107,7 @@ public abstract class AbstractChromatogramPeakMSD extends AbstractPeakMSD implem
 		 * The value INITIAL_SN_VALUE (-1.0f) means, that the signal to noise value has been not set yet.
 		 */
 		if(signalToNoiseRatio == INITIAL_SN_VALUE) {
+			chromatogram.recalculateNoiseFactor();
 			float totalSignal = getPeakModel().getPeakAbundance();
 			signalToNoiseRatio = chromatogram.getSignalToNoiseRatio(totalSignal);
 		}

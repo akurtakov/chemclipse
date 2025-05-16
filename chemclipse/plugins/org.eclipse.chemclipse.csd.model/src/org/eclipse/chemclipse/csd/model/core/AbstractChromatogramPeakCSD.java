@@ -16,8 +16,9 @@ import org.eclipse.chemclipse.model.exceptions.PeakException;
 
 public abstract class AbstractChromatogramPeakCSD extends AbstractPeakCSD implements IChromatogramPeakCSD {
 
-	private IChromatogramCSD chromatogram;
 	private static final float INITIAL_SN_VALUE = -1.0f;
+	//
+	private IChromatogramCSD chromatogram;
 	private float signalToNoiseRatio = INITIAL_SN_VALUE;
 
 	/**
@@ -53,6 +54,12 @@ public abstract class AbstractChromatogramPeakCSD extends AbstractPeakCSD implem
 		return chromatogram.getScanNumber(retentionTime);
 	}
 
+	@Override
+	public void resetSignalToNoiseRatio() {
+
+		signalToNoiseRatio = INITIAL_SN_VALUE;
+	}
+
 	// TODO JUnit
 	@Override
 	public float getSignalToNoiseRatio() {
@@ -61,9 +68,11 @@ public abstract class AbstractChromatogramPeakCSD extends AbstractPeakCSD implem
 		 * The value INITIAL_SN_VALUE (-1.0f) means, that the signal to noise value has been not set yet.
 		 */
 		if(signalToNoiseRatio == INITIAL_SN_VALUE) {
+			chromatogram.recalculateNoiseFactor();
 			float totalSignal = getPeakModel().getPeakAbundance();
 			signalToNoiseRatio = chromatogram.getSignalToNoiseRatio(totalSignal);
 		}
+
 		return signalToNoiseRatio;
 	}
 
