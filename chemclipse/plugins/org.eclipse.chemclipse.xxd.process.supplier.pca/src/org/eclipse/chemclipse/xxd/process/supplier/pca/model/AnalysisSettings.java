@@ -14,6 +14,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.model;
 
+import java.util.TreeMap;
+
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.IPreprocessingSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.PreprocessingSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.preferences.PreferenceSupplier;
@@ -26,6 +28,7 @@ public class AnalysisSettings implements IAnalysisSettings {
 	private Algorithm algorithm = PreferenceSupplier.getAlgorithm();
 	private boolean removeUselessVariables = PreferenceSupplier.isRemoveUselessVariables();
 	private boolean crossValidation = false;
+	private TreeMap<Integer, Integer> filterDistribution = new TreeMap<>();
 	private LabelOptionPCA labelOptionPCA = PreferenceSupplier.getLabelOptionPCA();
 	private String colorScheme = PreferenceSupplier.getColorScheme();
 	private String groupName = "--";
@@ -42,6 +45,7 @@ public class AnalysisSettings implements IAnalysisSettings {
 		this.numberOfSamplesToFilter = analysisSettings.getNumberOfSamplesToFilter();
 		this.algorithm = analysisSettings.getAlgorithm();
 		this.crossValidation = analysisSettings.getCrossValidation();
+		this.filterDistribution = analysisSettings.getFilterDistribution();
 		this.removeUselessVariables = analysisSettings.isRemoveUselessVariables();
 		this.labelOptionPCA = analysisSettings.getLabelOptionPCA();
 		//
@@ -165,5 +169,17 @@ public class AnalysisSettings implements IAnalysisSettings {
 	public void setPreprocessingSettings(IPreprocessingSettings preprocessingSettings) {
 
 		this.preprocessingSettings = preprocessingSettings;
+	}
+
+	@Override
+	public TreeMap<Integer, Integer> getFilterDistribution() {
+
+		return filterDistribution;
+	}
+
+	@Override
+	public void setFilterDistribution(TreeMap<Integer, Integer> distribution) {
+
+		this.filterDistribution = distribution;
 	}
 }
