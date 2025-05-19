@@ -21,7 +21,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import org.apache.commons.csv.CSVFormat;
@@ -30,6 +33,7 @@ import org.apache.commons.csv.CSVRecord;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.model.statistics.Target;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IDataInputEntry;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.PeakSampleData;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Sample;
@@ -69,6 +73,7 @@ public class PcaExtractionFileLongText implements IExtractionData {
 		Map<String, Map<String, Target>> samplesVariablesMap = new HashMap<>();
 		Map<String, Target> targetMap = new HashMap<>();
 		Map<String, Integer> filterOverlap = new HashMap<>();
+		TreeMap<Integer, Integer> filterDistribution = new TreeMap<>();
 		if(filter) {
 			readFilterFile(filterDataInputEntries, targetMap);
 		}
@@ -78,6 +83,7 @@ public class PcaExtractionFileLongText implements IExtractionData {
 			List<Map.Entry<String, Integer>> filterOverlapList = new ArrayList<>(filterOverlap.entrySet());
 			Collections.sort(filterOverlapList, (s1, s2) -> s1.getValue().compareTo(s2.getValue()));
 			filterOverlapList = filterOverlapList.reversed();
+			filterDistribution = createDistribution(filterOverlapList);
 			List<Map.Entry<String, Integer>> extractedSamples = new ArrayList<>();
 			if(this.numberOfSamplesToFilter > filterOverlapList.size()) {
 				this.numberOfSamplesToFilter = filterOverlapList.size();
@@ -102,7 +108,29 @@ public class PcaExtractionFileLongText implements IExtractionData {
 		List<? extends IVariable> variables = extractVariables(samplesVariablesMap);
 		samples.getVariables().addAll(variables);
 		setExtractData(samplesVariablesMap, samples);
+		filterDistribution.put(1, 10);
+		IAnalysisSettings settings = samples.getAnalysisSettings();
+		settings.setFilterDistribution(filterDistribution);
+		samples.setAnalysisSettings(settings);
 		return samples;
+	}
+
+	private TreeMap<Integer, Integer> createDistribution(List<Map.Entry<String, Integer>> overlaps) {
+
+		TreeMap<Integer, Integer> filterDistribution = new TreeMap<>();
+		ListIterator<Entry<String, Integer>> iterator = overlaps.listIterator();
+		while(iterator.hasNext()) {
+			Map.Entry<String, Integer> entry = iterator.next();
+			String key = entry.getKey();
+			int value = entry.getValue();
+			if(filterDistribution.containsKey(value)) {
+				int oldCount = filterDistribution.get(value);
+				filterDistribution.put(value, oldCount + 1);
+			} else {
+				filterDistribution.put(value, 1);
+			}
+		}
+		return filterDistribution;
 	}
 
 	private void readFilterFile(List<IDataInputEntry> dataInputEntries, Map<String, Target> targetMap) {

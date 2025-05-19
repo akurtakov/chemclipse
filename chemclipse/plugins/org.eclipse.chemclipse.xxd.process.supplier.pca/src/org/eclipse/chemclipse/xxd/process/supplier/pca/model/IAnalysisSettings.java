@@ -14,6 +14,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.model;
 
+import java.util.TreeMap;
+
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.IPreprocessingSettings;
 
 public interface IAnalysisSettings {
@@ -57,4 +59,8 @@ public interface IAnalysisSettings {
 	boolean getCrossValidation();
 
 	void setCrossValidation(boolean crossValidation);
+
+	TreeMap<Integer, Integer> getFilterDistribution();
+
+	void setFilterDistribution(TreeMap<Integer, Integer> distribution);
 }

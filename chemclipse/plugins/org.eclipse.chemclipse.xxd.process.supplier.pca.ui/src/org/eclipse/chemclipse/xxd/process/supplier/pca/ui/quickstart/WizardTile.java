@@ -10,10 +10,12 @@
  * Contributors:
  * Christoph Läubrich - initial API and implementation
  * Philip Wenig - formatting
+ * Lorenz Gerber - Filter Distribution
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.quickstart;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.chemclipse.logging.core.Logger;
@@ -70,6 +72,8 @@ public abstract class WizardTile implements TileDefinition {
 						public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 
 							ISamplesPCA<?, ?> samples = extractionData.process(monitor);
+							TreeMap<Integer, Integer> filterDisribution = samples.getAnalysisSettings().getFilterDistribution();
+							analysisSettings.setFilterDistribution(filterDisribution);
 							samples.setAnalysisSettings(analysisSettings);
 							evaluation.set(samples);
 						}
