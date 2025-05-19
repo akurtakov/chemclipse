@@ -78,22 +78,25 @@ public class WidgetItem {
 
 	public void restoreDefaults() {
 
+		restoreDefaults(control);
+	}
+
+	public void restoreDefaults(Control control) {
+
 		if(control instanceof Text text) {
 			text.setText((String)inputValue.getDefaultValue());
 		} else if(control instanceof Button button) {
 			button.setSelection(Boolean.valueOf((String)inputValue.getDefaultValue()));
 		} else if(control instanceof Combo combo) {
 			Object enumValue = getEnumFrom(inputValue.getDefaultValue(), inputValue.getRawType());
-			if(enumValue instanceof ILabel labelledEnum) {
-				setSelection(combo, labelledEnum.label());
+			if(enumValue instanceof ILabel labeledEnum) {
+				setSelection(combo, labeledEnum);
 			} else {
 				setSelection(combo, enumValue.toString());
 			}
 		} else if(control instanceof Composite composite) {
 			for(Control child : composite.getChildren()) {
-				if(child instanceof Text text) {
-					text.setText((String)inputValue.getDefaultValue());
-				}
+				restoreDefaults(child);
 			}
 		}
 	}
@@ -110,17 +113,32 @@ public class WidgetItem {
 		return defaultValue;
 	}
 
-	private void setSelection(Combo combo, String selection) {
+	private void setSelection(Combo combo, Object selection) {
 
-		String[] items = combo.getItems();
-		int selectedIndex = -1;
-		for(int i = 0; i < items.length; i++) {
-			if(items[i].equals(selection)) {
-				selectedIndex = i;
-				break;
+		if(selection != null) {
+			String label;
+			if(selection instanceof ILabel labeledEnum) {
+				label = labeledEnum.label();
+			} else {
+				label = selection.toString();
+			}
+
+			String[] items = combo.getItems();
+			int selectedIndex = -1;
+			for(int i = 0; i < items.length; i++) {
+				if(items[i].equals(label)) {
+					selectedIndex = i;
+					break;
+				}
+			}
+
+			combo.select(selectedIndex);
+			if(selection instanceof Enum<?> enumeration) {
+				currentSelection = enumeration.name();
+			} else {
+				currentSelection = label;
 			}
 		}
-		combo.select(selectedIndex);
 	}
 
 	public ControlDecoration getControlDecoration() {
