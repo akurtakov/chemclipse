@@ -13,6 +13,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core;
 
+import org.eclipse.chemclipse.model.core.IChromatogramPeak;
 import org.eclipse.chemclipse.model.exceptions.PeakException;
 
 /**
@@ -25,10 +26,8 @@ import org.eclipse.chemclipse.model.exceptions.PeakException;
  */
 public abstract class AbstractChromatogramPeakMSD extends AbstractPeakMSD implements IChromatogramPeakMSD {
 
-	private static final float INITIAL_SN_VALUE = -1.0f;
-	//
+	private float signalToNoiseRatio = IChromatogramPeak.INITIAL_SN_VALUE;
 	private IChromatogramMSD chromatogram;
-	private float signalToNoiseRatio = INITIAL_SN_VALUE;
 
 	/**
 	 * Construct a peak.
@@ -48,6 +47,7 @@ public abstract class AbstractChromatogramPeakMSD extends AbstractPeakMSD implem
 		 * successfully.
 		 */
 		this.chromatogram = chromatogram;
+		this.signalToNoiseRatio = checkSignalToNoiseRatio(chromatogram);
 	}
 
 	protected AbstractChromatogramPeakMSD(IPeakModelMSD peakModel, IChromatogramMSD chromatogram, String modelDescription) throws IllegalArgumentException, PeakException {
@@ -99,20 +99,10 @@ public abstract class AbstractChromatogramPeakMSD extends AbstractPeakMSD implem
 		signalToNoiseRatio = INITIAL_SN_VALUE;
 	}
 
-	// TODO JUnit
 	@Override
 	public float getSignalToNoiseRatio() {
 
-		/*
-		 * The value INITIAL_SN_VALUE (-1.0f) means, that the signal to noise value has been not set yet.
-		 */
-		if(signalToNoiseRatio == INITIAL_SN_VALUE) {
-			chromatogram.recalculateNoiseFactor();
-			float totalSignal = getPeakModel().getPeakAbundance();
-			signalToNoiseRatio = chromatogram.getSignalToNoiseRatio(totalSignal);
-		}
-		//
-		return signalToNoiseRatio;
+		return getSignalToNoiseRatio(chromatogram, signalToNoiseRatio);
 	}
 
 	@Override

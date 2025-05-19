@@ -16,6 +16,8 @@ package org.eclipse.chemclipse.model.core;
 
 public interface IChromatogramPeak extends IPeak {
 
+	public static final float INITIAL_SN_VALUE = -1.0f;
+
 	void resetSignalToNoiseRatio();
 
 	/**
@@ -48,4 +50,37 @@ public interface IChromatogramPeak extends IPeak {
 	}
 
 	IChromatogram getChromatogram();
+
+	default float getSignalToNoiseRatio(IChromatogram chromatogram, float signalToNoiseRatio) {
+
+		/*
+		 * The value INITIAL_SN_VALUE (-1.0f) means, that the signal to noise value has been not set yet.
+		 */
+		if(signalToNoiseRatio == INITIAL_SN_VALUE) {
+			chromatogram.recalculateNoiseFactor();
+			float totalSignal = getPeakModel().getPeakAbundance();
+			signalToNoiseRatio = chromatogram.getSignalToNoiseRatio(totalSignal);
+		}
+
+		return signalToNoiseRatio;
+	}
+
+	default float checkSignalToNoiseRatio(IChromatogram chromatogram) {
+
+		/*
+		 * Use a big abundance to avoid creating a rounded zero value.
+		 */
+		int abundance = 10000000;
+		if(chromatogram.getNoiseCalculator() != null) {
+			return chromatogram.getSignalToNoiseRatio(abundance);
+		} else {
+			chromatogram.recalculateNoiseFactor();
+			float signalToNoiseRatio = chromatogram.getSignalToNoiseRatio(abundance);
+			if(signalToNoiseRatio > 0) {
+				return signalToNoiseRatio;
+			} else {
+				return INITIAL_SN_VALUE;
+			}
+		}
+	}
 }
