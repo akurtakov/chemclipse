@@ -121,7 +121,6 @@ public class PcaExtractionFileLongText implements IExtractionData {
 		ListIterator<Entry<String, Integer>> iterator = overlaps.listIterator();
 		while(iterator.hasNext()) {
 			Map.Entry<String, Integer> entry = iterator.next();
-			String key = entry.getKey();
 			int value = entry.getValue();
 			if(filterDistribution.containsKey(value)) {
 				int oldCount = filterDistribution.get(value);
