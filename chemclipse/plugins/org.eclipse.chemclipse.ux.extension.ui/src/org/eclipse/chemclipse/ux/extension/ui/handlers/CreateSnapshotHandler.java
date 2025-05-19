@@ -86,6 +86,7 @@ public class CreateSnapshotHandler {
 			try {
 				gc = new GC(compositeParent);
 				image = new Image(DisplayUtils.getDisplay(), compositeParent.getBounds());
+				compositeParent.print(gc);
 				gc.copyArea(image, 0, 0);
 			} finally {
 				gc.dispose();
