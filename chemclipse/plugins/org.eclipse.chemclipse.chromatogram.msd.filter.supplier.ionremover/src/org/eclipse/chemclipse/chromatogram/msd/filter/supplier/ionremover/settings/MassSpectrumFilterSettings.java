@@ -32,7 +32,7 @@ public class MassSpectrumFilterSettings extends AbstractMassSpectrumFilterSettin
 
 	@JsonProperty(value = "Mode", defaultValue = "INCLUDE")
 	@JsonPropertyDescription(value = "Gives the mode to use (include = remove all ions given in the list, exclude = remove all ions not in the list)")
-	private MarkedTraceModus markMode = MarkedTraceModus.INCLUDE;
+	private MarkedTraceModus markedTraceModus = MarkedTraceModus.INCLUDE;
 
 	public String getIonsToRemove() {
 
@@ -44,14 +44,14 @@ public class MassSpectrumFilterSettings extends AbstractMassSpectrumFilterSettin
 		this.ionsToRemove = ionsToRemove;
 	}
 
-	public MarkedTraceModus getMarkMode() {
+	public MarkedTraceModus getMarkedTraceModus() {
 
-		return markMode;
+		return markedTraceModus;
 	}
 
-	public void setMarkMode(MarkedTraceModus markMode) {
+	public void setMarkedTraceModus(MarkedTraceModus markedTraceModus) {
 
-		this.markMode = markMode;
+		this.markedTraceModus = markedTraceModus;
 	}
 
 	@Override

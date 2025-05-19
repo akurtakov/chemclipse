@@ -45,7 +45,7 @@ public class MassSpectrumFilter extends AbstractMassSpectrumFilter {
 		if(!processingInfo.hasErrorMessages()) {
 			if(filterSettings instanceof MassSpectrumFilterSettings massSpectrumFilterSettings) {
 				TraceSettingUtil settingIon = new TraceSettingUtil();
-				IMarkedIons markedIons = new MarkedIons(settingIon.extractTraces(settingIon.deserialize(massSpectrumFilterSettings.getIonsToRemove())), massSpectrumFilterSettings.getMarkMode());
+				IMarkedIons markedIons = new MarkedIons(settingIon.extractTraces(settingIon.deserialize(massSpectrumFilterSettings.getIonsToRemove())), massSpectrumFilterSettings.getMarkedTraceModus());
 				for(IScanMSD massSpectrum : massSpectra) {
 					massSpectrum.removeIons(markedIons);
 				}
