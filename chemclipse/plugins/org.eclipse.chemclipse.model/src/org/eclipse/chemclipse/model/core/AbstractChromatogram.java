@@ -117,7 +117,6 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 	 * This can't be created directly here, as implementations are
 	 * located at a higher level (including a MSD specific version).
 	 */
-	private boolean runNoiseFactorReset = true;
 	private INoiseCalculator noiseCalculator = null;
 	/*
 	 * Transient
@@ -200,10 +199,6 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 	public float getSignalToNoiseRatio(float abundance) {
 
 		if(noiseCalculator != null) {
-			if(runNoiseFactorReset) {
-				resetNoiseFactor();
-				runNoiseFactorReset = false;
-			}
 			return noiseCalculator.getSignalToNoiseRatio(this, abundance);
 		}
 
