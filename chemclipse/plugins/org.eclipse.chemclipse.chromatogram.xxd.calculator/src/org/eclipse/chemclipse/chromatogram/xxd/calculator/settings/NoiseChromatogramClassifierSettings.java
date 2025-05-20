@@ -34,7 +34,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 public class NoiseChromatogramClassifierSettings implements IChromatogramClassifierSettings {
 
-	@JsonProperty(value = "Chromatogram Segmentation Width", defaultValue = "9")
+	@JsonProperty(value = "Chromatogram Segmentation Width", defaultValue = "7")
 	@JsonPropertyDescription(value = "Segment Width: 5, 7, 9, ..., 19")
 	@JsonDeserialize(using = SegmentWidthDeserializier.class)
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_SEGMENT_SIZE, maxValue = PreferenceSupplier.MAX_SEGMENT_SIZE, validation = Validation.ODD_NUMBER)

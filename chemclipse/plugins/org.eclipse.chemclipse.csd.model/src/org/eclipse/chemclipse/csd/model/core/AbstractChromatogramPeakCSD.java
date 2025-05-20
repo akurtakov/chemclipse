@@ -12,12 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.csd.model.core;
 
-import org.eclipse.chemclipse.model.core.IChromatogramPeak;
 import org.eclipse.chemclipse.model.exceptions.PeakException;
 
 public abstract class AbstractChromatogramPeakCSD extends AbstractPeakCSD implements IChromatogramPeakCSD {
 
-	private float signalToNoiseRatio = IChromatogramPeak.INITIAL_SN_VALUE;
 	private IChromatogramCSD chromatogram;
 
 	/**
@@ -38,7 +36,6 @@ public abstract class AbstractChromatogramPeakCSD extends AbstractPeakCSD implem
 		 * successfully.
 		 */
 		this.chromatogram = chromatogram;
-		this.signalToNoiseRatio = checkSignalToNoiseRatio(chromatogram);
 	}
 
 	public AbstractChromatogramPeakCSD(IPeakModelCSD peakModel, IChromatogramCSD chromatogram, String modelDescription) throws IllegalArgumentException, PeakException {
@@ -55,15 +52,10 @@ public abstract class AbstractChromatogramPeakCSD extends AbstractPeakCSD implem
 	}
 
 	@Override
-	public void resetSignalToNoiseRatio() {
-
-		signalToNoiseRatio = INITIAL_SN_VALUE;
-	}
-
-	@Override
 	public float getSignalToNoiseRatio() {
 
-		return getSignalToNoiseRatio(chromatogram, signalToNoiseRatio);
+		return getSignalToNoiseRatio(chromatogram);
+
 	}
 
 	@Override

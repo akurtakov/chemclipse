@@ -117,6 +117,7 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 	 * This can't be created directly here, as implementations are
 	 * located at a higher level (including a MSD specific version).
 	 */
+	private boolean runNoiseFactorReset = true;
 	private INoiseCalculator noiseCalculator = null;
 	/*
 	 * Transient
@@ -131,6 +132,7 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 
 		baselineModelMap.put(DEFAULT_BASELINE_ID, new BaselineModel(this));
 		putHeaderData(COLUMN_DETAILS, "");
+		resetNoiseFactor();
 	}
 
 	@Override
@@ -152,24 +154,7 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 	}
 
 	@Override
-	public void recalculateNoiseFactor() {
-
-		/*
-		 * This effectively resets the calculator
-		 */
-		updateNoiseFactorCalculator();
-		for(IPeak peak : getPeaks()) {
-			if(peak instanceof IChromatogramPeak chromatogramPeak) {
-				chromatogramPeak.resetSignalToNoiseRatio();
-			}
-		}
-	}
-
-	protected abstract String getNoiseCalculatorId();
-
-	protected abstract INoiseCalculator createNoiseCalculator(String id);
-
-	private void updateNoiseFactorCalculator() {
+	public void resetNoiseFactor() {
 
 		String id = getNoiseCalculatorId();
 		INoiseCalculator noiseCalculator = getNoiseCalculator();
@@ -195,6 +180,10 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 		}
 	}
 
+	protected abstract String getNoiseCalculatorId();
+
+	protected abstract INoiseCalculator createNoiseCalculator(String id);
+
 	@Override
 	public INoiseCalculator getNoiseCalculator() {
 
@@ -211,9 +200,13 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 	public float getSignalToNoiseRatio(float abundance) {
 
 		if(noiseCalculator != null) {
+			if(runNoiseFactorReset) {
+				resetNoiseFactor();
+				runNoiseFactorReset = false;
+			}
 			return noiseCalculator.getSignalToNoiseRatio(this, abundance);
 		}
-		//
+
 		return 0;
 	}
 

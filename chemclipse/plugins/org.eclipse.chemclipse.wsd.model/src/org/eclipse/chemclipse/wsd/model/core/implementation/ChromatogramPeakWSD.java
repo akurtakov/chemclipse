@@ -29,9 +29,4 @@ public class ChromatogramPeakWSD extends AbstractChromatogramPeakWSD implements 
 
 		super(peakModel, chromatogram);
 	}
-
-	@Override
-	public void resetSignalToNoiseRatio() {
-
-	}
 }

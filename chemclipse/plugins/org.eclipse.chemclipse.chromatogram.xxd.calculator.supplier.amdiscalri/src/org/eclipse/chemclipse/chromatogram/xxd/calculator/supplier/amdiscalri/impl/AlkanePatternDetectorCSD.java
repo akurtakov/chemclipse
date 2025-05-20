@@ -53,7 +53,7 @@ public class AlkanePatternDetectorCSD {
 			/*
 			 * S/N
 			 */
-			chromatogramCSD.recalculateNoiseFactor();
+			chromatogramCSD.resetNoiseFactor();
 			/*
 			 * Create a selection
 			 */

@@ -35,7 +35,7 @@ public class NoiseFactorSupport {
 					 * Only specific action shall trigger a noise factor recalculation.
 					 */
 					if(category.equals(ICategories.CHROMATOGRAM_FILTER) || category.equals(ICategories.SCAN_MASS_SPECTRUM_FILTER) || category.equals(ICategories.SCAN_FILTER)) {
-						chromatogram.recalculateNoiseFactor();
+						chromatogram.resetNoiseFactor();
 					}
 				}
 			}

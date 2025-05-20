@@ -137,7 +137,7 @@ public class NoiseChromatogramSupport {
 							 * Add the noise segment
 							 */
 							noiseSegmentMeasurementResult.getResult().add(noiseSegment);
-							chromatogram.recalculateNoiseFactor();
+							chromatogram.resetNoiseFactor();
 						}
 						//
 						chromatogram.setDirty(true);

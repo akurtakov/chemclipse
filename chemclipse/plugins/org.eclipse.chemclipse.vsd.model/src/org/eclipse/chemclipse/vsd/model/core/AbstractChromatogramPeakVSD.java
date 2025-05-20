@@ -12,12 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.vsd.model.core;
 
-import org.eclipse.chemclipse.model.core.IChromatogramPeak;
 import org.eclipse.chemclipse.model.exceptions.PeakException;
 
 public class AbstractChromatogramPeakVSD extends AbstractPeakVSD implements IChromatogramPeakVSD {
 
-	private float signalToNoiseRatio = IChromatogramPeak.INITIAL_SN_VALUE;
 	private IChromatogramVSD chromatogram;
 
 	public AbstractChromatogramPeakVSD(IPeakModelVSD peakModel, IChromatogramVSD chromatogram) throws IllegalArgumentException, PeakException {
@@ -30,7 +28,6 @@ public class AbstractChromatogramPeakVSD extends AbstractPeakVSD implements IChr
 		 * successfully.
 		 */
 		this.chromatogram = chromatogram;
-		this.signalToNoiseRatio = checkSignalToNoiseRatio(chromatogram);
 	}
 
 	public AbstractChromatogramPeakVSD(IPeakModelVSD peakModel, IChromatogramVSD chromatogram, String modelDescription) throws IllegalArgumentException, PeakException {
@@ -46,15 +43,9 @@ public class AbstractChromatogramPeakVSD extends AbstractPeakVSD implements IChr
 	}
 
 	@Override
-	public void resetSignalToNoiseRatio() {
-
-		signalToNoiseRatio = INITIAL_SN_VALUE;
-	}
-
-	@Override
 	public float getSignalToNoiseRatio() {
 
-		return getSignalToNoiseRatio(chromatogram, signalToNoiseRatio);
+		return getSignalToNoiseRatio(chromatogram);
 	}
 
 	@Override

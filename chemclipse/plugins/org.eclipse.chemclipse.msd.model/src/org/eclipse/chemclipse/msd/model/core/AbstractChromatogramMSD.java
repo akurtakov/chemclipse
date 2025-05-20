@@ -84,7 +84,7 @@ public abstract class AbstractChromatogramMSD extends AbstractChromatogram imple
 
 		super.addMeasurementResult(chromatogramResult);
 		if(chromatogramResult instanceof NoiseSegmentMeasurementResult) {
-			recalculateNoiseFactor();
+			resetNoiseFactor();
 		}
 	}
 
