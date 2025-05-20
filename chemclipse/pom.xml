@@ -31,6 +31,8 @@
 		<buildTimestamp>${maven.build.timestamp}</buildTimestamp>
 		<buildId>${buildTimestamp}</buildId>
 		<releaseName>0.9.0</releaseName>
+		<maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+		<maven.compiler.failOnWarning>true</maven.compiler.failOnWarning>
 	</properties>
 	<build>
 		<!-- PLUGINS -->
