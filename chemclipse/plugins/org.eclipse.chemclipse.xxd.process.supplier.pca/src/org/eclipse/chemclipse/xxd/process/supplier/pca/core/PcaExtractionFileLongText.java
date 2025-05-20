@@ -108,7 +108,6 @@ public class PcaExtractionFileLongText implements IExtractionData {
 		List<? extends IVariable> variables = extractVariables(samplesVariablesMap);
 		samples.getVariables().addAll(variables);
 		setExtractData(samplesVariablesMap, samples);
-		filterDistribution.put(1, 10);
 		IAnalysisSettings settings = samples.getAnalysisSettings();
 		settings.setFilterDistribution(filterDistribution);
 		samples.setAnalysisSettings(settings);
