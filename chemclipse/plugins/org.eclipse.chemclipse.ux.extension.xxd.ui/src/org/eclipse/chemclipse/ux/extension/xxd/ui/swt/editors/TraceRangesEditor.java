@@ -94,6 +94,11 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 		setInput();
 	}
 
+	public void refresh() {
+
+		listControl.get().refresh();
+	}
+
 	public void clear() {
 
 		traceRanges.clear();
