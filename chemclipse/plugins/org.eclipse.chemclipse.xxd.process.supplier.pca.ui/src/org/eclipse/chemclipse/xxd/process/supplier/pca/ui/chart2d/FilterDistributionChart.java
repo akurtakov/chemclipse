@@ -135,7 +135,7 @@ public class FilterDistributionChart extends BarChart {
 
 	private String[] getCategories(IAnalysisSettings settings) {
 
-		Set<Integer> keys = settings.getFilterDistribution().keySet();
+		Set<Integer> keys = settings.getFilterDistribution().reversed().keySet();
 		String[] categories = keys.stream().map(x -> x.toString()).toArray(String[]::new);
 		return categories;
 	}
@@ -144,9 +144,9 @@ public class FilterDistributionChart extends BarChart {
 
 		String label = "Counts";
 		double[] ySeries = new double[settings.getFilterDistribution().values().size()];
-		int index = 0;
+		int index = settings.getFilterDistribution().values().size() - 1;
 		for(Map.Entry<Integer, Integer> entry : settings.getFilterDistribution().entrySet()) {
-			ySeries[index++] = (double)entry.getValue();
+			ySeries[index--] = (double)entry.getValue();
 		}
 		getChartSettings().getPrimaryAxisSettingsY().setTitle(label);
 		applySettings(getChartSettings());
