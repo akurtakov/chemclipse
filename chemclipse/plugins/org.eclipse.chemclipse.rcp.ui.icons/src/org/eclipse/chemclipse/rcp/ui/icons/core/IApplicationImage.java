@@ -497,4 +497,6 @@ public interface IApplicationImage extends IApplicationImageProvider {
 	String IMAGE_COLUMN = "column.gif";
 	String IMAGE_BOOK = "book.png";
 	String IMAGE_BOOKMARK = "bookmark.png";
+	String IMAGE_INTENSITY_RANGE = "intensityRange.gif";
+	String IMAGE_OPTIMIZE_PATTERN = "optimizePattern.gif";
 }
