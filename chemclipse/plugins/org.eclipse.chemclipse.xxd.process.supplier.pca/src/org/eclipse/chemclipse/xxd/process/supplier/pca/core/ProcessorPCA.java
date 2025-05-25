@@ -180,10 +180,12 @@ public class ProcessorPCA {
 						CommonOps_DDRM.elementPower(cvScoresPredicted, 2.0, diffSquared);
 						DMatrixRMaj modelSquared = new DMatrixRMaj(cvScoresModel.getNumRows(), cvScoresModel.getNumCols());
 						CommonOps_DDRM.elementPower(cvScoresModel, 2.0, modelSquared);
-						double press = CommonOps_DDRM.elementSum(diffSquared);
-						double ss = CommonOps_DDRM.elementSum(modelSquared);
-						@SuppressWarnings("unused")
-						double q2 = 1.0 - (press / ss);
+						DMatrixRMaj press = CommonOps_DDRM.sumCols(diffSquared, null);
+						DMatrixRMaj ss = CommonOps_DDRM.sumCols(modelSquared, null);
+						DMatrixRMaj q2 = new DMatrixRMaj(1, ss.getNumCols());
+						DMatrixRMaj divided = new DMatrixRMaj(1, ss.getNumCols());
+						CommonOps_DDRM.elementDiv(press, ss, divided);
+						CommonOps_DDRM.subtract(1, divided, q2);
 						/*
 						 * Check compute Status
 						 */
