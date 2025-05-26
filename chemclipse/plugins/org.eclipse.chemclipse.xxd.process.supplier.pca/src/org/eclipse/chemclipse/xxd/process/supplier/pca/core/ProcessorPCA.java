@@ -202,6 +202,7 @@ public class ProcessorPCA {
 						results.setLoadingVectors(loadingVectors);
 						results.setExplainedVariances(explainedVariances);
 						results.setCumulativeExplainedVariances(cumulativeExplainedVariances);
+						results.setCrossValidations(q2.getData());
 						setEigenSpaceAndErrorValues(principalComponentAnalysis, extractData, results);
 						subMonitor.worked(20);
 						/*

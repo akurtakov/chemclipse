@@ -35,4 +35,8 @@ public interface IResultsPCA<R extends IResultPCA, V extends IVariable> {
 	double[] getCumulativeExplainedVariances();
 
 	void setCumulativeExplainedVariances(double[] cumulativeExplainedVariances);
+
+	double[] getCrossValidations();
+
+	void setCrossValidations(double[] crossValidations);
 }
