@@ -6,7 +6,7 @@ pipeline {
 		githubPush()
 	}
 	parameters {
-		booleanParam(name: 'CODESIGN', defaultValue: false, description: 'Sign the artifacts.')
+		booleanParam(name: 'JARSIGN', defaultValue: false, description: 'Sign the artifacts.')
 		booleanParam(name: 'PUBLISH_PRODUCTS', defaultValue: false, description: 'Copy to the compiled products for Windows, macOS and Linux')
 	}
 	tools {
@@ -25,7 +25,7 @@ pipeline {
 			steps {
 				withCredentials([file(credentialsId: 'secret-subkeys.asc', variable: 'KEYRING'), string(credentialsId: 'gpg-passphrase', variable: 'MAVEN_GPG_PASSPHRASE')]) {
 				sh '''
-					mvn -B ${params.CODESIGN ? '-P eclipse-sign' : ''} \\
+					mvn -B ${params.JARSIGN ? '-P eclipse-sign' : ''} \\
 					    -Pgpg-sign -Dtycho.pgp.signer.bc.secretKeys="${KEYRING}" \\
 						-Dtycho.localArtifacts=ignore \\
 						-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \\
