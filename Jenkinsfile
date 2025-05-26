@@ -24,7 +24,7 @@ pipeline {
 		stage('Build') {
 			steps {
 				withCredentials([file(credentialsId: 'secret-subkeys.asc', variable: 'KEYRING'), string(credentialsId: 'gpg-passphrase', variable: 'MAVEN_GPG_PASSPHRASE')]) {
-				sh """
+				sh '''
 					mvn -B ${params.CODESIGN ? '-P eclipse-sign' : ''} \\
 					    -Pgpg-sign -Dtycho.pgp.signer.bc.secretKeys="${KEYRING}" \\
 						-Dtycho.localArtifacts=ignore \\
@@ -33,7 +33,7 @@ pipeline {
 						-Dmaven.repo.local=$WORKSPACE/.mvn \\
 						-f chemclipse/releng/org.eclipse.chemclipse.aggregator/pom.xml \\
 						clean install
-				"""
+				'''
 
 				archiveArtifacts 'chemclipse/products/org.eclipse.chemclipse.rcp.compilation.community.product/target/products/*.zip,chemclipse/products/org.eclipse.chemclipse.rcp.compilation.community.product/target/products/*.tar.gz'
 				}
