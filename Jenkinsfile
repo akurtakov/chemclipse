@@ -23,10 +23,11 @@ pipeline {
 	stages {
 		stage('Build') {
 			steps {
+				def jarSign = params.JARSIGN ? '-P eclipse-sign' : ''
 				withCredentials([file(credentialsId: 'secret-subkeys.asc', variable: 'KEYRING'), string(credentialsId: 'gpg-passphrase', variable: 'MAVEN_GPG_PASSPHRASE')]) {
 					sh '''
-						mvn -B ${params.JARSIGN ? '-P eclipse-sign' : ''} \\
-							-Pgpg-sign -Dtycho.pgp.signer.bc.secretKeys="${KEYRING}" \\
+						mvn \\
+							-B ${jarSign} -Pgpg-sign -Dtycho.pgp.signer.bc.secretKeys="${KEYRING}" \\
 							-Dtycho.localArtifacts=ignore \\
 							-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \\
 							-Dmaven.test.failure.ignore=true \\
