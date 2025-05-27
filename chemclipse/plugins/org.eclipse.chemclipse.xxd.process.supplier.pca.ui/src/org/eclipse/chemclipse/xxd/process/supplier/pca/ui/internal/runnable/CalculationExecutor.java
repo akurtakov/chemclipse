@@ -17,8 +17,11 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.model.statistics.IVariable;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.core.CrossValidatorOPLS;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.ProcessorPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Algorithm;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -50,6 +53,14 @@ public class CalculationExecutor implements IRunnableWithProgress {
 			try {
 				ProcessorPCA processorPCA = new ProcessorPCA();
 				evaluationPCA = processorPCA.process(samples, masterEvaluationPCA, monitor);
+				IAnalysisSettings settings = samples.getAnalysisSettings();
+				if(!settings.getCrossValidation()) {
+					if(settings.getAlgorithm() == Algorithm.OPLS) {
+						CrossValidatorOPLS crossValidator = new CrossValidatorOPLS();
+						double[] q2 = crossValidator.crossValidate(samples, masterEvaluationPCA, monitor);
+						evaluationPCA.addCrossValidation(q2);
+					}
+				}
 			} catch(Exception e) {
 				logger.error(e);
 			}
