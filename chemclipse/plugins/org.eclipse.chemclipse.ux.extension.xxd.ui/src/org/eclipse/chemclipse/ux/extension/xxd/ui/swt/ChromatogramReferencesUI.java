@@ -455,15 +455,17 @@ public class ChromatogramReferencesUI extends Composite {
 
 		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 		HeaderField headerField = HeaderUtil.getHeaderField(preferenceStore.getString(PreferenceSupplier.P_CHROMATOGRAM_TRANSFER_NAME_TO_REFERENCES_HEADER_FIELD));
-		//
+
 		for(IChromatogramSelection chromatogramSelection : chromatogramSelections) {
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 			HeaderUtil.setHeaderData(chromatogram, headerField, chromatogram.getName(), false);
-			//
+
 			masterSelection.getChromatogram().addReferencedChromatogram(chromatogram);
 			if(comboChromatograms != null) {
 				comboChromatograms.data.add(chromatogramSelection);
 			}
+
+			masterSelection.getChromatogram().setDirty(true);
 		}
 	}
 
