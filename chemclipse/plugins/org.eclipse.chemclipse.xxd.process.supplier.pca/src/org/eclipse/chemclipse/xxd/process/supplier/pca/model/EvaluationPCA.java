@@ -77,4 +77,9 @@ public class EvaluationPCA {
 
 		return this.highlightedVariables;
 	}
+
+	public void addCrossValidation(double[] crossValidation) {
+
+		this.results.setCrossValidations(crossValidation);
+	}
 }
