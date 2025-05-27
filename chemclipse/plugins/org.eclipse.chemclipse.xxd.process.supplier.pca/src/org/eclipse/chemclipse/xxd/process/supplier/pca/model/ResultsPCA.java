@@ -22,6 +22,7 @@ public class ResultsPCA implements IResultsPCA<IResultPCA, IVariable> {
 	private List<double[]> loadingVectors;
 	private double[] explainedVariances;
 	private double[] cumulativeExplainedVariances;
+	private double[] crossValidations;
 	private List<IVariable> extractedVariables;
 	private List<IResultPCA> pcaResultList;
 	//
@@ -86,5 +87,17 @@ public class ResultsPCA implements IResultsPCA<IResultPCA, IVariable> {
 	public void setCumulativeExplainedVariances(double[] cumulativeExplainedVariances) {
 
 		this.cumulativeExplainedVariances = cumulativeExplainedVariances;
+	}
+
+	@Override
+	public double[] getCrossValidations() {
+
+		return this.crossValidations;
+	}
+
+	@Override
+	public void setCrossValidations(double[] crossValidations) {
+
+		this.crossValidations = crossValidations;
 	}
 }
