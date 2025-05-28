@@ -54,7 +54,7 @@ public class CalculationExecutor implements IRunnableWithProgress {
 				ProcessorPCA processorPCA = new ProcessorPCA();
 				evaluationPCA = processorPCA.process(samples, masterEvaluationPCA, monitor);
 				IAnalysisSettings settings = samples.getAnalysisSettings();
-				if(!settings.getCrossValidation()) {
+				if(settings.getCrossValidation()) {
 					if(settings.getAlgorithm() == Algorithm.OPLS) {
 						CrossValidatorOPLS crossValidator = new CrossValidatorOPLS();
 						double[] q2 = crossValidator.crossValidate(samples, masterEvaluationPCA, monitor);
