@@ -42,9 +42,15 @@ public class RichTextSupport {
 	public static Control createEditor(Composite parent, int style) {
 
 		if(isUseRichTextEditor()) {
-			return new RichTextEditor(parent, style);
+			try {
+				return new RichTextEditor(parent, style);
+			} catch(Exception e) {
+				logger.warn("Failed to create the Rich Text Editor - use is deactivated now.");
+				PreferenceSupplier.setUseRichTextEditor(false);
+				return createTextEditor(parent, style);
+			}
 		} else {
-			return new Text(parent, style);
+			return createTextEditor(parent, style);
 		}
 	}
 
@@ -58,9 +64,15 @@ public class RichTextSupport {
 	public static Scrollable createViewer(Composite parent, int style) {
 
 		if(isUseRichTextEditor()) {
-			return new RichTextViewer(parent, style);
+			try {
+				return new RichTextViewer(parent, style);
+			} catch(Exception e) {
+				logger.warn("Failed to create the Rich Text Viewer - use is deactivated now.");
+				PreferenceSupplier.setUseRichTextEditor(false);
+				return createTextEditor(parent, style);
+			}
 		} else {
-			return new Text(parent, style);
+			return createTextEditor(parent, style);
 		}
 	}
 
@@ -137,5 +149,10 @@ public class RichTextSupport {
 		}
 		//
 		return useRichTextEditor;
+	}
+
+	private static Text createTextEditor(Composite parent, int style) {
+
+		return new Text(parent, style);
 	}
 }

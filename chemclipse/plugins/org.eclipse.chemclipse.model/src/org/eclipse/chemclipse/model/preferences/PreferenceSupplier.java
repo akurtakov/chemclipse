@@ -266,6 +266,11 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		return INSTANCE().getBoolean(P_USE_RICH_TEXT_EDITOR, DEF_USE_RICH_TEXT_EDITOR);
 	}
 
+	public static void setUseRichTextEditor(boolean use) {
+
+		INSTANCE().setBoolean(P_USE_RICH_TEXT_EDITOR, use);
+	}
+
 	public static boolean isRunBrowserCheck() {
 
 		return INSTANCE().getBoolean(P_RUN_BROWSER_CHECK, DEF_RUN_BROWSER_CHECK);
