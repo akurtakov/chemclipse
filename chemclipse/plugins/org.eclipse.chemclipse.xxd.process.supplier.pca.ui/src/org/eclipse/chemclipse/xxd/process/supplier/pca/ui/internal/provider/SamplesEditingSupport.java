@@ -34,7 +34,9 @@ public class SamplesEditingSupport extends EditingSupport {
 
 		super(tableViewer);
 		this.column = column;
-		if(SamplesLabelProvider.USE.equals(column)) {
+		if(SamplesLabelProvider.SAMPLE_NAME_LONG.equals(column)) {
+			this.cellEditor = new TextCellEditor(tableViewer.getTable());
+		} else if(SamplesLabelProvider.USE.equals(column)) {
 			this.cellEditor = new CheckboxCellEditor(tableViewer.getTable());
 		} else if(SamplesLabelProvider.PREDICT.equals(column)) {
 			this.cellEditor = new CheckboxCellEditor(tableViewer.getTable());
@@ -63,6 +65,8 @@ public class SamplesEditingSupport extends EditingSupport {
 
 		if(element instanceof ISample sample) {
 			switch(column) {
+				case SamplesLabelProvider.SAMPLE_NAME_LONG:
+					return sample.getDescription() != null ? sample.getSampleDetails() : "";
 				case SamplesLabelProvider.USE:
 					return sample.isSelected();
 				case SamplesLabelProvider.PREDICT:
@@ -85,6 +89,9 @@ public class SamplesEditingSupport extends EditingSupport {
 
 		if(element instanceof ISample sample) {
 			switch(column) {
+				case SamplesLabelProvider.SAMPLE_NAME_LONG:
+					sample.setSampleDetails((String)value);
+					break;
 				case SamplesLabelProvider.USE:
 					sample.setSelected((boolean)value);
 					break;
