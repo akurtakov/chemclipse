@@ -361,7 +361,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 					/*
 					 * Prepare a result object with loading vectors per variable
 					 */
-					for(int i = 0; i < resultsPCA.getExtractedVariables().size(); i++) {
+					for(int i = 0; i < selectedFeatures.size(); i++) {
 						double[] variableLoading = getVariableLoading(resultsPCA, i);
 						IPoint pointResult = getPoint(variableLoading, pcX, pcY, i);
 						if(pointResult.getX() > rangeX.lower && pointResult.getX() < rangeX.upper && pointResult.getY() > rangeY.lower && pointResult.getY() < rangeY.upper) {
@@ -443,7 +443,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 					/*
 					 * Prepare a result object with loading vectors per variable
 					 */
-					for(int i = 0; i < resultsPCA.getExtractedVariables().size(); i++) {
+					for(int i = 0; i < selectedFeatures.size(); i++) {
 						double[] variableLoading = getVariableLoading(resultsPCA, i);
 						IPoint pointResult = getPoint(variableLoading, pcX, pcY, i);
 						if(pointResult.getX() > rangeX.lower && pointResult.getX() < rangeX.upper && pointResult.getY() > rangeY.lower && pointResult.getY() < rangeY.upper) {
