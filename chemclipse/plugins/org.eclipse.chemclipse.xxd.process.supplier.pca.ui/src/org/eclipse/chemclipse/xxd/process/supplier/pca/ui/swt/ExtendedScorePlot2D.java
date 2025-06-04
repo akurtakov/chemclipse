@@ -102,6 +102,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 										}
 									}
 								}
+								highlightClick = true;
 								evaluationPCA.setHighlightedSamples(samples);
 								setInput(evaluationPCA);
 							}
@@ -304,7 +305,6 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 					 */
 					userSelection.reset();
 					userSelection.setSingleClick(false);
-					highlightClick = true;
 				}
 			}
 		});
@@ -384,7 +384,6 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 						List<ISample> highlightedSamples = new ArrayList<>();
 						highlightedSamples.add(resultDelta.getResultPCA().getSample());
 						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, highlightedSamples.toArray());
-						highlightClick = true;
 					}
 				}
 			}
@@ -474,7 +473,6 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 							highlightedSamples.add(resultDelta.getResultPCA().getSample());
 						}
 						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, highlightedSamples.toArray());
-						highlightClick = true;
 					}
 				}
 				userSelection.reset();
@@ -580,6 +578,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 		updatePlot(pcX, pcY);
 		if(highlightClick) {
 			scorePlotControl.get().updateRange(rangeX, rangeY);
+			highlightClick = false;
 		}
 	}
 
