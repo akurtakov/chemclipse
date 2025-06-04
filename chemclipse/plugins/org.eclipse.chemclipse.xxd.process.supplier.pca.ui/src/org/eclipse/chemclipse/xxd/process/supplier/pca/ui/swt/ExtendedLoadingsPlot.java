@@ -100,6 +100,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 									}
 								}
 								evaluationPCA.setHighlightedVariables(selectedVariables);
+								highlightClick = true;
 								setInput(evaluationPCA);
 							}
 						}
@@ -308,7 +309,6 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 					 */
 					userSelection.reset();
 					userSelection.setSingleClick(false);
-					highlightClick = true;
 				}
 			}
 		});
@@ -389,7 +389,6 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 						List<Feature> featureList = new ArrayList<>();
 						featureList.add(featureDelta.getFeature());
 						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE, featureList.toArray());
-						highlightClick = true;
 					}
 				}
 			}
@@ -484,7 +483,6 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 							highlighted.add(featureDelta.getFeature());
 						}
 						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE, highlighted.toArray());
-						highlightClick = true;
 					}
 					userSelection.reset();
 				}
@@ -583,6 +581,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 		 */
 		if(highlightClick) {
 			plotControl.get().updateRange(rangeX, rangeY);
+			highlightClick = false;
 		}
 	}
 
