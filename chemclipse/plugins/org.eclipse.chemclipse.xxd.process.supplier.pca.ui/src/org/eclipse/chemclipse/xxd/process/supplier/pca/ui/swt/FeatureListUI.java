@@ -24,6 +24,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.provider.Feat
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.provider.FeatureEditingSupport;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.provider.FeatureLabelProvider;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.provider.FeatureListFilter;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.provider.VisualSelectionFilter;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.ViewerComparator;
@@ -37,6 +38,7 @@ public class FeatureListUI extends ExtendedTableViewer {
 	private final ITableLabelProvider labelProvider = new FeatureLabelProvider();
 	private final ViewerComparator comparator = new FeatureComparator();
 	private final FeatureListFilter listFilter = new FeatureListFilter();
+	private final VisualSelectionFilter selectFilter = new VisualSelectionFilter();
 	//
 	private IUpdateListener updateListener = null;
 
@@ -70,6 +72,12 @@ public class FeatureListUI extends ExtendedTableViewer {
 	public void setSearchText(String searchText, boolean caseSensitive) {
 
 		listFilter.setSearchText(searchText, caseSensitive);
+		refresh();
+	}
+
+	public void enableVisualSelection(boolean enable) {
+
+		selectFilter.setMode(enable);
 		refresh();
 	}
 
@@ -146,7 +154,7 @@ public class FeatureListUI extends ExtendedTableViewer {
 		setLabelProvider(labelProvider);
 		setContentProvider(new ListContentProvider());
 		setComparator(comparator);
-		setFilters(listFilter);
+		setFilters(listFilter, selectFilter);
 		setEditingSupport();
 	}
 

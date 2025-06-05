@@ -59,9 +59,12 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableItem;
 
 public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI {
 
+	private static final String TOOLTIP_FILTER_VISUAL_SELECTED = "Filter Visual Selected Features.";
+	private static final String IMAGE_FILTER_VISUAL_SELECTED = IApplicationImage.IMAGE_FILTER;
 	private Button buttonToolbarSearch;
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private AtomicReference<FeatureListUI> listControl = new AtomicReference<>();
@@ -101,6 +104,11 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 										}
 									}
 									if(features.size() >= 0) {
+										List<? extends IVariable> test = evaluationPCA.getSamples().getVariables();
+										test.forEach(x -> x.setVisualSelected(false));
+										for(Feature feature : features) {
+											feature.getVariable().setVisualSelected(true);
+										}
 										listControl.get().setSelection(new StructuredSelection(features));
 										listControl.get().reveal(features.get(0));
 									}
@@ -151,10 +159,11 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
-		composite.setLayout(new GridLayout(6, false));
+		composite.setLayout(new GridLayout(7, false));
 		//
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 		buttonToolbarSearch = createButtonToggleToolbar(composite, toolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH);
+		createButtonFilterSelected(composite);
 		createButtonCleanVariables(composite);
 		createButtonReset(composite);
 		createButtonExport(composite);
@@ -246,9 +255,17 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 			UpdateNotifierUI.update(getDisplay(), IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE, selectedElements.toArray());
 		} else if(Feature.class.isInstance(selectedElements.get(0))) {
 			ArrayList<Feature> features = new ArrayList<>();
+			List<? extends IVariable> test = evaluationPCA.getSamples().getVariables();
+			test.forEach(x -> x.setVisualSelected(false));
+			for(Feature feature : features) {
+				feature.getVariable().setVisualSelected(true);
+			}
 			for(Object element : selectedElements) {
 				if(Feature.class.isInstance(element)) {
 					features.add((Feature)element);
+					if(!((Feature)element).getVariable().isVisualSelected()) {
+						((Feature)element).getVariable().setVisualSelected(true);
+					}
 				}
 			}
 			UpdateNotifierUI.update(getDisplay(), IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE, selectedElements.toArray());
@@ -301,6 +318,33 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 		});
 		//
 		return button;
+	}
+
+	private void createButtonFilterSelected(Composite parent) {
+
+		Button button = new Button(parent, SWT.TOGGLE);
+		button.setText("");
+		setButtonImage(button, IMAGE_FILTER_VISUAL_SELECTED, PREFIX_ENABLE, PREFIX_DISABLE, TOOLTIP_FILTER_VISUAL_SELECTED, false);
+		button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				boolean active = button.getSelection();
+				setButtonImage(button, IMAGE_FILTER_VISUAL_SELECTED, PREFIX_ENABLE, PREFIX_DISABLE, TOOLTIP_FILTER_VISUAL_SELECTED, active);
+				TableItem[] selectedTableItems = listControl.get().getTable().getSelection();
+				List<Feature> selectedFeatures = new ArrayList<>();
+				for(TableItem item : selectedTableItems) {
+					selectedFeatures.add((Feature)item.getData());
+				}
+				listControl.get().enableVisualSelection(active);
+				if(active) {
+					listControl.get().getTable().selectAll();
+				} else {
+					UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE, selectedFeatures.toArray());
+				}
+			}
+		});
 	}
 
 	private Button createButtonExport(Composite parent) {

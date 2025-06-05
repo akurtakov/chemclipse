@@ -16,6 +16,7 @@ public abstract class AbstractVariable implements IVariable {
 
 	private String description;
 	private boolean selected;
+	private boolean visualSelected;
 	private String type;
 	private String value;
 	private String classification;
@@ -49,6 +50,12 @@ public abstract class AbstractVariable implements IVariable {
 	}
 
 	@Override
+	public boolean isVisualSelected() {
+
+		return this.visualSelected;
+	}
+
+	@Override
 	public void setDescription(String description) {
 
 		this.description = description;
@@ -58,6 +65,12 @@ public abstract class AbstractVariable implements IVariable {
 	public void setSelected(boolean selected) {
 
 		this.selected = selected;
+	}
+
+	@Override
+	public void setVisualSelected(boolean visualSelected) {
+
+		this.visualSelected = visualSelected;
 	}
 
 	@Override

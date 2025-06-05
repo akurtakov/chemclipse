@@ -22,9 +22,13 @@ public interface IVariable extends Comparable<IVariable> {
 
 	boolean isSelected();
 
+	boolean isVisualSelected();
+
 	void setDescription(String description);
 
 	void setSelected(boolean selected);
+
+	void setVisualSelected(boolean visualSelected);
 
 	void setType(String type);
 
