@@ -261,7 +261,7 @@ public class ChromatogramPeakChart extends ChromatogramChart implements ITraceSu
 			settingsTIC.setEnableArea(enableChromatogramArea);
 			settingsTIC.setVisible(peakChartSettings.isShowChromatogramTIC());
 			lineSeriesDataList.add(lineSeriesDataTIC);
-			//
+
 			if(containsTraces) {
 				if(chromatogramSelection instanceof IChromatogramSelectionMSD chromatogramSelectionMSD) {
 					/*

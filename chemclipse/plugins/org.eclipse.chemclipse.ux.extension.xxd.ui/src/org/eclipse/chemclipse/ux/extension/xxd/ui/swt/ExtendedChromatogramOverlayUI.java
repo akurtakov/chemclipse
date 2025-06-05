@@ -1209,7 +1209,7 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 		BaseChart baseChart = chartControl.get().getBaseChart();
 		Derivative derivative = getSelectedDerivative();
 		String seriesId = chromatogramName + OverlayChartSupport.OVERLAY_START_MARKER + displayType + OverlayChartSupport.DELIMITER_SIGNAL_DERIVATIVE + derivative + OverlayChartSupport.OVERLAY_STOP_MARKER;
-		Color color = chromatogramChartSupport.getSeriesColor(chromatogramName, displayType);
+		Color color = Colors.getColor(preferenceStore.getString(PreferenceSupplier.P_COLOR_CHROMATOGRAM));
 		String displayTypeInfo = " (" + displayType.getShortcut() + ")";
 		boolean addTypeInfo = preferenceStore.getBoolean(PreferenceSupplier.P_OVERLAY_ADD_TYPE_INFO);
 		/*
@@ -1220,7 +1220,7 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 		for(Number ion : ions) {
 			markedIons.add(ion.intValue());
 		}
-		//
+
 		if(chromatogram instanceof IChromatogramMSD) {
 			String description = ChromatogramDataSupport.getReferenceLabel(chromatogram, 0, addTypeInfo);
 			description += displayTypeInfo;
@@ -1315,19 +1315,21 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 		BaseChart baseChart = chartControl.get().getBaseChart();
 		Derivative derivative = getSelectedDerivative();
 		String seriesId = chromatogramName + OverlayChartSupport.OVERLAY_START_MARKER + displayType + OverlayChartSupport.DELIMITER_SIGNAL_DERIVATIVE + derivative + OverlayChartSupport.OVERLAY_STOP_MARKER;
-		Color color = chromatogramChartSupport.getSeriesColor(chromatogramName, displayType);
+
 		boolean addTypeInfo = preferenceStore.getBoolean(PreferenceSupplier.P_OVERLAY_ADD_TYPE_INFO);
 		/*
 		 * TIC
 		 */
 		availableSeriesIds.add(seriesId);
 		selectionSeries.add(seriesId);
+		ILineSeriesData lineSeriesData = chromatogramChartSupport.getLineSeriesData(chromatogram, seriesId, displayType, derivative, getColorTIC(), null, false);
 		if(!baseChart.isSeriesContained(seriesId)) {
-			ILineSeriesData lineSeriesData = chromatogramChartSupport.getLineSeriesData(chromatogram, seriesId, displayType, derivative, color, null, false);
 			String description = ChromatogramDataSupport.getReferenceLabel(chromatogram, 0, addTypeInfo);
 			ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
 			lineSeriesSettings.setDescription(description);
 			lineSeriesDataList.add(lineSeriesData);
+		} else {
+			lineSeriesData.getSettings().setLineColor(getColorTIC());
 		}
 		/*
 		 * References
@@ -1343,8 +1345,8 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 					availableSeriesIds.add(referenceSeriesId);
 					selectionSeries.add(referenceSeriesId);
 					if(!baseChart.isSeriesContained(referenceSeriesId)) {
-						color = chromatogramChartSupport.getSeriesColor(referenceChromatogramName, displayType);
-						ILineSeriesData lineSeriesData = chromatogramChartSupport.getLineSeriesData(referencedChromatogram, referenceSeriesId, displayType, derivative, color, null, false);
+						Color color = chromatogramChartSupport.getSeriesColor(referenceChromatogramName, displayType);
+						lineSeriesData = chromatogramChartSupport.getLineSeriesData(referencedChromatogram, referenceSeriesId, displayType, derivative, color, null, false);
 						ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
 						lineSeriesSettings.setDescription(description);
 						lineSeriesDataList.add(lineSeriesData);
@@ -1352,6 +1354,15 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 				}
 			}
 		}
+	}
+
+	private Color getColorTIC() {
+
+		Color color = Colors.getColor(preferenceStore.getString(PreferenceSupplier.P_COLOR_CHROMATOGRAM));
+		if(getDisplayType().size() > 1) {
+			color = Colors.getColor(preferenceStore.getString(PreferenceSupplier.P_COLOR_CHROMATOGRAM_INACTIVE));
+		}
+		return color;
 	}
 
 	/**
