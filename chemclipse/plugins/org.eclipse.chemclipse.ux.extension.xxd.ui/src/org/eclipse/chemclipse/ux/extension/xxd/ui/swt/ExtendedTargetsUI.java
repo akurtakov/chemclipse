@@ -941,7 +941,11 @@ public class ExtendedTargetsUI extends Composite implements IExtendedPartUI {
 
 	private boolean isChromatogramActive() {
 
-		return tabControl.get().getSelectionIndex() == INDEX_CHROMATOGRAM;
+		TabFolder tabFolder = tabControl.get();
+		if(tabFolder == null) {
+			return false;
+		}
+		return tabFolder.getSelectionIndex() == INDEX_CHROMATOGRAM;
 	}
 
 	private void fireUpdate() {
