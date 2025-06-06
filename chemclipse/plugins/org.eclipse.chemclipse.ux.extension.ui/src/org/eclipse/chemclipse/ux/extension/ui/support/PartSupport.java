@@ -19,7 +19,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.descriptor.basic.MPartDescriptor;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
@@ -38,8 +37,6 @@ import org.eclipse.swt.widgets.Control;
 
 public class PartSupport {
 
-	private static final Logger logger = Logger.getLogger(PartSupport.class);
-	//
 	public static final String PERSPECTIVE_DATA_ANALYSIS = "org.eclipse.chemclipse.ux.extension.xxd.ui.perspective.main";
 	public static final String AREA = "org.eclipse.chemclipse.rcp.app.ui.editor";
 	/*
@@ -389,8 +386,6 @@ public class PartSupport {
 			} else {
 				hidePart(part, partService);
 			}
-			//
-			logger.info("Visibility changed to '" + visible + "' for the part id: " + part.getElementId());
 		}
 	}
 

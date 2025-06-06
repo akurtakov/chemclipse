@@ -177,8 +177,6 @@ public class DataUpdateSupport {
 			 */
 			eventBroker.subscribe(topic, eventHandler);
 			handlerMap.put(topic, eventHandler);
-			//
-			logger.info("Subscription added on topic '" + topic + "' and properties '" + Arrays.asList(properties) + "'.");
 		}
 	}
 
@@ -229,7 +227,6 @@ public class DataUpdateSupport {
 		 */
 		String topic = event.getTopic();
 		if(topic.matches(IChemClipseEvents.EDITOR_CLOSE_REGEX)) {
-			logger.info("Handle editor close event: " + topic);
 			/*
 			 * Clear the given topics.
 			 */
@@ -238,7 +235,6 @@ public class DataUpdateSupport {
 				if(object instanceof List<?> elements) {
 					for(Object element : elements) {
 						if(element instanceof String topicToBeCleared) {
-							logger.info("Clear mapped objects of topic: " + topicToBeCleared);
 							objectMap.remove(topicToBeCleared);
 						}
 					}
