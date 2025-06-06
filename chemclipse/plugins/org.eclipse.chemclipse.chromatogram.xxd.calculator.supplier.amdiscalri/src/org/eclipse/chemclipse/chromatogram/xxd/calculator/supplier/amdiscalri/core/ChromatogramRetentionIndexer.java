@@ -72,8 +72,9 @@ public class ChromatogramRetentionIndexer implements IProcessTypeSupplier {
 			if(processSettings.isStoreInChromatogram()) {
 				ISeparationColumnIndices separationColumnIndices = chromatogram.getSeparationColumnIndices();
 				RetentionIndexSupport.transferRetentionIndexMarker(retentionIndexMarker, separationColumnIndices);
+				chromatogramSelection.getChromatogram().setDirty(true);
 			}
-			//
+
 			return chromatogramSelection;
 		}
 	}
