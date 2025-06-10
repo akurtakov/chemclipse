@@ -15,4 +15,5 @@
       </description>
    </category-def>
    <repository-reference location="https://download.eclipse.org/releases/2025-06/" enabled="true" />
+   <repository-reference location="https://download.eclipse.org/oomph/simrel-orbit/2023-06/" enabled="true" />
 </site>
