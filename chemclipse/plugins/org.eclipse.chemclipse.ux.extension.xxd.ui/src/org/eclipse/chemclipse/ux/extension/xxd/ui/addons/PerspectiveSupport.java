@@ -77,8 +77,6 @@ public class PerspectiveSupport {
 					GroupHandler.updateGroupHandlerMenu();
 				}
 			} else if(topic.equals(IChemClipseEvents.TOPIC_PART_CLOSED)) {
-				Object object = objects.get(0);
-				logger.info("Part has been closed: " + object);
 				GroupHandler.updateGroupHandlerMenu();
 			}
 		});

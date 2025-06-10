@@ -17,7 +17,6 @@ import java.util.EnumMap;
 import java.util.List;
 
 import org.eclipse.chemclipse.csd.model.core.IScanCSD;
-import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.msd.model.core.IIon;
@@ -46,8 +45,6 @@ import org.eclipse.swt.widgets.Composite;
 
 public class ScanTableUI extends ExtendedTableViewer {
 
-	private static final Logger logger = Logger.getLogger(ScanTableUI.class);
-	//
 	private EnumMap<DataType, ITableLabelProvider> labelProviderMap;
 	private EnumMap<DataType, ViewerComparator> viewerComparatorMap;
 	private EnumMap<DataType, IContentProvider> contentProviderMap;
@@ -190,7 +187,6 @@ public class ScanTableUI extends ExtendedTableViewer {
 			/*
 			 * Lazy (Virtual)
 			 */
-			logger.info("Lazy (Virtual) Modus");
 			setContentProvider(contentProvider);
 			setUseHashlookup(true);
 			setComparator(null);
@@ -198,7 +194,6 @@ public class ScanTableUI extends ExtendedTableViewer {
 			/*
 			 * Normal
 			 */
-			logger.info("Normal Modus");
 			setContentProvider(contentProvider);
 			setUseHashlookup(false);
 			ViewerComparator viewerComparator = getViewerComparator(dataType);
