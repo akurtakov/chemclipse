@@ -18,7 +18,7 @@
 	<unit id="org.apache.commons.codec"/>
 	<unit id="org.apache.commons.commons-collections4"/>
 	<unit id="org.apache.commons.commons-compress"/>
-	<unit id="org.apache.commons.io"/>
+	<unit id="org.apache.commons.commons-io"/>
 	<unit id="org.apache.commons.lang3"/>
 	<unit id="org.apache.httpcomponents.httpclient"/>
 	<unit id="org.apache.httpcomponents.httpcore"/>
