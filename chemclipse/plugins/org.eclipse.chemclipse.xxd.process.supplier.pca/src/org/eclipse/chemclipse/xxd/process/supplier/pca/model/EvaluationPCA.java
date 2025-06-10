@@ -70,6 +70,12 @@ public class EvaluationPCA {
 
 	public void setHighlightedVariables(List<IVariable> variables) {
 
+		for(IVariable variable : variables) {
+			int index = samples.getVariables().indexOf(variable);
+			if(index > -1) {
+				samples.getVariables().get(index).setSelected(true);
+			}
+		}
 		this.highlightedVariables = variables;
 	}
 
