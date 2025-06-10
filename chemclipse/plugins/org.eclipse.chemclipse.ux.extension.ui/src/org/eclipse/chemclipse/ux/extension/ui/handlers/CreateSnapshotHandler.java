@@ -23,6 +23,7 @@ import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
@@ -85,7 +86,8 @@ public class CreateSnapshotHandler {
 			GC gc = null;
 			try {
 				gc = new GC(compositeParent);
-				image = new Image(DisplayUtils.getDisplay(), compositeParent.getBounds());
+				Rectangle bounds = compositeParent.getBounds();
+				image = new Image(DisplayUtils.getDisplay(), bounds.x, bounds.y);
 				compositeParent.print(gc);
 				gc.copyArea(image, 0, 0);
 			} finally {

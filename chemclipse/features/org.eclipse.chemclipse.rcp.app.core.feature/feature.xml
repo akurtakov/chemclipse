@@ -624,4 +624,8 @@
          id="org.tukaani.xz"
          version="0.0.0"/>
 
+   <plugin
+         id="com.github.weisj.jsvg"
+         version="0.0.0"/>
+
 </feature>
