@@ -119,8 +119,7 @@ public class PcaExtractionFileText implements IExtractionData {
 					/*
 					 * Data
 					 */
-					CSVFormat csvFormat = CSVFormat.TDF.builder().setHeader().build();
-					CSVParser parser = new CSVParser(reader, csvFormat);
+					CSVParser parser = new CSVParser(reader, CSVFormat.TDF.withHeader());
 					Map<Integer, String> indexMap = extractIndexMap(parser);
 					for(CSVRecord record : parser.getRecords()) {
 						/*
