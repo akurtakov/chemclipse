@@ -24,6 +24,10 @@
       <discovery label="Chemical Markup Language" url="https://xml-cml.org"/>
    </url>
 
+   <includes
+         id="org.eclipse.chemclipse.xml.feature"
+         version="0.0.0"/>
+
    <plugin
          id="org.eclipse.chemclipse.xxd.converter.supplier.cml"
          version="0.0.0"/>

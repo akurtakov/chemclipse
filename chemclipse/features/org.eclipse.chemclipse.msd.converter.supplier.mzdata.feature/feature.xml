@@ -3,7 +3,8 @@
       id="org.eclipse.chemclipse.msd.converter.supplier.mzdata.feature"
       label="MSD mzData"
       version="0.9.0.qualifier"
-      provider-name="ChemClipse" plugin="org.eclipse.chemclipse.feature.branding"
+      provider-name="ChemClipse"
+      plugin="org.eclipse.chemclipse.feature.branding"
       license-feature="org.eclipse.license"
       license-feature-version="2.0.2.qualifier">
 
@@ -23,18 +24,16 @@
       <discovery label="mzData" url="https://www.psidev.info/mass-spectrometry-workgroup#mzdata"/>
    </url>
 
+   <includes
+         id="org.eclipse.chemclipse.xml.feature"
+         version="0.0.0"/>
+
    <plugin
          id="org.eclipse.chemclipse.msd.converter.supplier.mzdata"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="org.eclipse.chemclipse.msd.converter.supplier.mzdata.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
 </feature>
