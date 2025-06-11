@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.feature"
-      label="Nucleotide BLAST"
+      id="org.eclipse.chemclipse.xml.feature"
+      label="ChemClipse"
       version="0.9.0.qualifier"
       provider-name="ChemClipse"
       plugin="org.eclipse.chemclipse.feature.branding"
@@ -9,7 +9,7 @@
       license-feature-version="2.0.2.qualifier">
 
    <description url="https://www.chemclipse.net">
-      This plugin uses NCBI BLAST+ to identify based on DNA sequences.
+      Essential packages for XML.
    </description>
 
    <copyright url="https://www.chemclipse.net">
@@ -20,16 +20,12 @@
       %license
    </license>
 
-   <includes
-         id="org.eclipse.chemclipse.xml.feature"
+   <plugin
+         id="com.sun.xml.bind.jaxb-osgi"
          version="0.0.0"/>
 
    <plugin
-         id="org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn"
-         version="0.0.0"/>
-
-   <plugin
-         id="jakarta.annotation-api"
+         id="org.glassfish.hk2.osgi-resource-locator"
          version="0.0.0"/>
 
    <plugin
