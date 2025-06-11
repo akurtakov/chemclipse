@@ -10,5 +10,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.junit;bundle-version="4.8.1",
  org.eclipse.chemclipse.xxd.converter.supplier.ocx;bundle-version="0.9.0",
  org.apache.commons.commons-collections4;bundle-version="4.4.0",
- wrapped.org.apache.xmlbeans.xmlbeans;bundle-version="3.1.0",
- org.apache.commons.commons-compress;bundle-version="1.22.0"
+ org.apache.commons.commons-compress;bundle-version="1.22.0",
+ org.apache.xmlbeans;bundle-version="3.1.0"

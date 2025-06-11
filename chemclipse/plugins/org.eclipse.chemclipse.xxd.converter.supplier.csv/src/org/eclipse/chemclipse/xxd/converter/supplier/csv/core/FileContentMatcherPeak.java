@@ -30,8 +30,7 @@ public class FileContentMatcherPeak extends AbstractFileContentMatcher implement
 	public boolean checkFileFormat(File file) {
 
 		try {
-			CSVFormat csvFormat = CSVFormat.EXCEL.builder().setHeader().build();
-			try (CSVParser parser = new CSVParser(new FileReader(file), csvFormat)) {
+			try (CSVParser parser = new CSVParser(new FileReader(file), CSVFormat.EXCEL.withHeader())) {
 				String[] array = parser.getHeaderMap().keySet().toArray(new String[0]);
 				return Arrays.equals(array, CSVPeakConverter.HEADERS);
 			}

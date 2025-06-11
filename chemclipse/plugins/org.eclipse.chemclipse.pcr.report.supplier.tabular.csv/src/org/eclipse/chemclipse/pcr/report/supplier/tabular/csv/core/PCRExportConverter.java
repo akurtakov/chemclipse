@@ -68,8 +68,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 	public IProcessingInfo<File> convert(File file, IPlate plate, IProgressMonitor monitor) {
 
 		decimalFormat.applyPattern("#,##0.00");
-		CSVFormat csvFormat = CSVFormat.RFC4180.builder() //
-				.setDelimiter(PreferenceSupplier.getDelimiter().getCharacter()).build();
+		CSVFormat csvFormat = CSVFormat.RFC4180.withDelimiter(PreferenceSupplier.getDelimiter().getCharacter());
 		IProcessingInfo<File> processingInfo = new ProcessingInfo<>();
 		if(plate != null) {
 			try (CSVPrinter csvPrinter = new CSVPrinter(new FileWriter(file, false), csvFormat)) {

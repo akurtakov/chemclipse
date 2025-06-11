@@ -20,10 +20,10 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.chemclipse.csd.model;bundle-version="0.9.0",
  wrapped.org.ejml.ejml-core;bundle-version="0.43.0",
  wrapped.org.ejml.ejml-ddense;bundle-version="0.43.0",
- org.apache.commons.commons-csv;bundle-version="1.8.0",
  org.apache.poi;bundle-version="4.1.1",
  org.apache.poi.ooxml;bundle-version="4.1.1",
- org.apache.poi.ooxml.schemas;bundle-version="4.1.1"
+ org.apache.poi.ooxml.schemas;bundle-version="4.1.1",
+ org.apache.commons.csv;bundle-version="1.8.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.chemclipse.xxd.process.supplier.pca.core,

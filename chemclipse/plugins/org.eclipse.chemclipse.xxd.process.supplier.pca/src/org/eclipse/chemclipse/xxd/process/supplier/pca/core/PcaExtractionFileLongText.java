@@ -141,8 +141,7 @@ public class PcaExtractionFileLongText implements IExtractionData {
 					/*
 					 * Data
 					 */
-					CSVFormat csvFormat = CSVFormat.TDF.builder().setHeader().build();
-					CSVParser parser = new CSVParser(reader, csvFormat);
+					CSVParser parser = new CSVParser(reader, CSVFormat.TDF.withHeader());
 					for(CSVRecord record : parser.getRecords()) {
 						int size = record.size();
 						if(size == 7) {
@@ -184,8 +183,7 @@ public class PcaExtractionFileLongText implements IExtractionData {
 					/*
 					 * Data
 					 */
-					CSVFormat csvFormat = CSVFormat.TDF.builder().setHeader().build();
-					CSVParser parser = new CSVParser(reader, csvFormat);
+					CSVParser parser = new CSVParser(reader, CSVFormat.TDF.withHeader());
 					for(CSVRecord record : parser.getRecords()) {
 						int size = record.size();
 						if(size == 7) {
