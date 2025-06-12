@@ -48,6 +48,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.Activator;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePage;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -105,23 +106,11 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 									if(features.size() >= 0) {
 										List<? extends IVariable> test = evaluationPCA.getSamples().getVariables();
 										test.forEach(x -> x.setVisualSelected(false));
-										ArrayList<String> featureText = new ArrayList<>();
 										for(Feature feature : features) {
 											feature.getVariable().setVisualSelected(true);
-											featureText.add(feature.getVariable().getValue());
 										}
-										TableItem[] tableItems = listControl.get().getTable().getItems();
-										List<TableItem> tableItemList = Arrays.asList(tableItems);
-										List<String> peakNumbers = tableItemList.stream().map(x -> x.getText()).toList();
-										ArrayList<Integer> toHighlight = new ArrayList<>();
-										for(String number : featureText) {
-											if(peakNumbers.contains(number)) {
-												toHighlight.add(peakNumbers.indexOf(number));
-											}
-										}
-										listControl.get().getTable().deselectAll();
-										listControl.get().getTable().select(toHighlight.stream().mapToInt(i -> i).toArray());
-										listControl.get().getTable().showItem(listControl.get().getTable().getItem(toHighlight.stream().mapToInt(i -> i).sorted().findFirst().getAsInt()));
+										listControl.get().setSelection(new StructuredSelection(features));
+										listControl.get().reveal(features.get(0));
 									}
 								}
 							}
@@ -349,11 +338,8 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 					selectedFeatures.add((Feature)item.getData());
 				}
 				listControl.get().enableVisualSelection(active);
-				if(active) {
-					listControl.get().getTable().selectAll();
-				} else {
-					UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE, selectedFeatures.toArray());
-				}
+				updateInput();
+				UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE, selectedFeatures.toArray());
 			}
 		});
 	}
@@ -426,7 +412,6 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 		toolbarInfo.get().setText("Loading...");
 		//
 		getDisplay().asyncExec(() -> {
-
 			updateWidgets();
 			updateInfoLabel();
 		});
