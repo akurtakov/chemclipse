@@ -24,10 +24,6 @@
       <discovery label="mzData" url="https://www.psidev.info/mass-spectrometry-workgroup#mzdata"/>
    </url>
 
-   <includes
-         id="org.eclipse.chemclipse.xml.feature"
-         version="0.0.0"/>
-
    <plugin
          id="org.eclipse.chemclipse.msd.converter.supplier.mzdata"
          version="0.0.0"/>

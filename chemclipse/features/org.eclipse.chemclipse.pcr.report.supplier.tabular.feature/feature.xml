@@ -43,12 +43,4 @@
          id="org.eclipse.chemclipse.pcr.report.supplier.tabular.excel.ui"
          version="0.0.0"/>
 
-   <plugin
-         id="org.apache.commons.commons-collections4"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.apache.commons.csv"
-         version="0.0.0"/>
-
 </feature>

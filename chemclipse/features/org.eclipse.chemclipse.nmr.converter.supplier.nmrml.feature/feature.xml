@@ -22,10 +22,6 @@
       <discovery label="nmrML.org" url="https://www.nmrml.org/"/>
    </url>
 
-   <includes
-         id="org.eclipse.chemclipse.xml.feature"
-         version="0.0.0"/>
-
    <plugin
          id="org.eclipse.chemclipse.nmr.converter.supplier.nmrml"
          version="0.0.0"/>

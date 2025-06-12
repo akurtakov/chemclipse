@@ -24,10 +24,6 @@
       <discovery label="RDML" url="http://rdml.org/"/>
    </url>
 
-   <includes
-         id="org.eclipse.chemclipse.xml.feature"
-         version="0.0.0"/>
-
    <plugin
          id="org.eclipse.chemclipse.pcr.converter.supplier.rdml"
          version="0.0.0"/>

@@ -20,10 +20,6 @@
       %license
    </license>
 
-   <includes
-         id="org.eclipse.chemclipse.xml.feature"
-         version="0.0.0"/>
-
    <plugin
          id="org.eclipse.chemclipse.msd.converter.supplier.mzxml"
          version="0.0.0"/>
