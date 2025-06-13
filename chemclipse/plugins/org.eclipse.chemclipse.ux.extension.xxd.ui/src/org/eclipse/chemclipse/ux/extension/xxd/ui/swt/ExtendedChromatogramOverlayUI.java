@@ -1209,7 +1209,7 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 		BaseChart baseChart = chartControl.get().getBaseChart();
 		Derivative derivative = getSelectedDerivative();
 		String seriesId = chromatogramName + OverlayChartSupport.OVERLAY_START_MARKER + displayType + OverlayChartSupport.DELIMITER_SIGNAL_DERIVATIVE + derivative + OverlayChartSupport.OVERLAY_STOP_MARKER;
-		Color color = Colors.getColor(preferenceStore.getString(PreferenceSupplier.P_COLOR_CHROMATOGRAM));
+		Color color = chromatogramChartSupport.getSeriesColor(chromatogramName, displayType);
 		String displayTypeInfo = " (" + displayType.getShortcut() + ")";
 		boolean addTypeInfo = preferenceStore.getBoolean(PreferenceSupplier.P_OVERLAY_ADD_TYPE_INFO);
 		/*
@@ -1315,21 +1315,23 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 		BaseChart baseChart = chartControl.get().getBaseChart();
 		Derivative derivative = getSelectedDerivative();
 		String seriesId = chromatogramName + OverlayChartSupport.OVERLAY_START_MARKER + displayType + OverlayChartSupport.DELIMITER_SIGNAL_DERIVATIVE + derivative + OverlayChartSupport.OVERLAY_STOP_MARKER;
-
+		Color colorTIC = getColorTIC(chromatogramChartSupport.getSeriesColor(chromatogramName, displayType));
 		boolean addTypeInfo = preferenceStore.getBoolean(PreferenceSupplier.P_OVERLAY_ADD_TYPE_INFO);
 		/*
 		 * TIC
 		 */
 		availableSeriesIds.add(seriesId);
 		selectionSeries.add(seriesId);
-		ILineSeriesData lineSeriesData = chromatogramChartSupport.getLineSeriesData(chromatogram, seriesId, displayType, derivative, getColorTIC(), null, false);
+		ILineSeriesData lineSeriesData = chromatogramChartSupport.getLineSeriesData(chromatogram, seriesId, displayType, derivative, colorTIC, null, false);
 		if(!baseChart.isSeriesContained(seriesId)) {
 			String description = ChromatogramDataSupport.getReferenceLabel(chromatogram, 0, addTypeInfo);
 			ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
 			lineSeriesSettings.setDescription(description);
 			lineSeriesDataList.add(lineSeriesData);
 		} else {
-			lineSeriesData.getSettings().setLineColor(getColorTIC());
+			if(baseChart.getSeriesSettings(seriesId) instanceof ILineSeriesSettings lineSeriesSettings) {
+				lineSeriesSettings.setLineColor(colorTIC);
+			}
 		}
 		/*
 		 * References
@@ -1350,18 +1352,24 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 						ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
 						lineSeriesSettings.setDescription(description);
 						lineSeriesDataList.add(lineSeriesData);
+					} else {
+						if(baseChart.getSeriesSettings(referenceSeriesId) instanceof ILineSeriesSettings lineSeriesSettings) {
+							lineSeriesSettings.setLineColor(colorTIC);
+						}
 					}
 				}
 			}
 		}
 	}
 
-	private Color getColorTIC() {
+	private Color getColorTIC(Color colorDefault) {
 
-		Color color = Colors.getColor(preferenceStore.getString(PreferenceSupplier.P_COLOR_CHROMATOGRAM));
-		if(getDisplayType().size() > 1) {
+		Color color = colorDefault;
+		Set<DisplayType> displayType = getDisplayType();
+		if(displayType.size() > 1) {
 			color = Colors.getColor(preferenceStore.getString(PreferenceSupplier.P_COLOR_CHROMATOGRAM_INACTIVE));
 		}
+
 		return color;
 	}
 
