@@ -45,6 +45,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		addField(new ExtendedIntegerFieldEditor(PreferenceSupplier.P_NUMBER_OF_COMPONENTS, "Number of Components", PreferenceSupplier.MIN_NUMBER_OF_COMPONENTS, PreferenceSupplier.MAX_NUMBER_OF_COMPONENTS, getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_ALGORITHM, "Algorithm:", Algorithm.getOptions(), getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_REMOVE_USELESS_VARIABLES, "Remove Useless Variables", getFieldEditorParent()));
+		addField(new BooleanFieldEditor(PreferenceSupplier.P_CROSS_VALIDATION, "Run Cross-validation", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_LABEL_OPTION_PCA, "Label Option", LabelOptionPCA.getOptions(), getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_COLOR_SCHEME, "Color Scheme", Colors.getAvailableColorSchemes(), getFieldEditorParent()));
 	}
