@@ -27,7 +27,7 @@ public class AnalysisSettings implements IAnalysisSettings {
 	private int numberOfSamplesToFilter = PreferenceSupplier.getNumberOfSamplesToFilter();
 	private Algorithm algorithm = PreferenceSupplier.getAlgorithm();
 	private boolean removeUselessVariables = PreferenceSupplier.isRemoveUselessVariables();
-	private boolean crossValidation = false;
+	private boolean crossValidation = PreferenceSupplier.isCrossValidation();
 	private TreeMap<Integer, Integer> filterDistribution = new TreeMap<>();
 	private LabelOptionPCA labelOptionPCA = PreferenceSupplier.getLabelOptionPCA();
 	private String colorScheme = PreferenceSupplier.getColorScheme();

@@ -78,7 +78,7 @@ public class ProcessorPCA extends AbstractProcessorMultivariateAanalysis {
 
 		EvaluationPCA evaluationPCA = null;
 		if(samples != null) {
-			SubMonitor subMonitor = SubMonitor.convert(monitor, "Run PCA", 160);
+			SubMonitor subMonitor = SubMonitor.convert(monitor, "Calculate " + masterEvaluationPCA.getSamples().getAnalysisSettings().getAlgorithm(), 160);
 			try {
 				/*
 				 * Settings

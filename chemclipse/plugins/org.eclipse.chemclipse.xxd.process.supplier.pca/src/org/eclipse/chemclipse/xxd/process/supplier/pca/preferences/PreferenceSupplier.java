@@ -44,6 +44,9 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	//
 	public static final String P_RETENTION_TIME_WINDOW_PEAKS = "retentionTimeWindowPeaks";
 	public static final double DEF_RETENTION_TIME_WINDOW_PEAKS = 0.1;
+	//
+	public static final String P_CROSS_VALIDATION = "crossValidation";
+	public static final boolean DEF_CROSS_VALIDATION = false;
 	/*
 	 * Score Plot general Settings
 	 */
@@ -94,6 +97,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_LABEL_OPTION_PCA, DEF_LABEL_OPTION_PCA);
 		putDefault(P_NUMBER_OF_COMPONENTS, Integer.toString(DEF_NUMBER_OF_COMPONENTS));
 		putDefault(P_RETENTION_TIME_WINDOW_PEAKS, Double.toString(DEF_RETENTION_TIME_WINDOW_PEAKS));
+		putDefault(P_CROSS_VALIDATION, Boolean.toString(DEF_CROSS_VALIDATION));
 		putDefault(P_SCORE_PLOT_2D_SYMBOL_SIZE, Integer.toString(DEF_SCORE_PLOT_2D_SYMBOL_SIZE));
 		putDefault(P_SCORE_PLOT_2D_SYMBOL_TYPE, DEF_SCORE_PLOT_2D_SYMBOL_TYPE);
 		putDefault(P_SCORE_PLOT_2D_HIGHLIGHT_SYMBOL_TYPE, DEF_SCORE_PLOT_2D_HIGHLIGHT_SYMBOL_TYPE);
@@ -112,6 +116,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		analysisSettings.setNumberOfSamplesToFilter(getNumberOfSamplesToFilter());
 		analysisSettings.setAlgorithm(getAlgorithm());
 		analysisSettings.setRemoveUselessVariables(isRemoveUselessVariables());
+		analysisSettings.setCrossValidation(isCrossValidation());
 		analysisSettings.setLabelOptionPCA(getLabelOptionPCA());
 		//
 		return analysisSettings;
@@ -173,5 +178,10 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		} catch(Exception e) {
 			return LabelOptionPCA.SAMPLE_NAME;
 		}
+	}
+
+	public static Boolean isCrossValidation() {
+
+		return INSTANCE().getBoolean(P_CROSS_VALIDATION, DEF_CROSS_VALIDATION);
 	}
 }
