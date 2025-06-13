@@ -71,11 +71,11 @@ public class ChromatogramChartSupport {
 
 	public static final String EDITOR_TAB = "_EditorTab#";
 	public static final String REFERENCE_MARKER = "_Reference#";
-	//
+
 	private IColorScheme colorScheme;
 	private final Map<String, Color> usedColors = new HashMap<>();
 	private LineStyle lineStyle;
-	//
+
 	private boolean showArea = false;
 	private final IPreferenceStore preferenceStore;
 
@@ -100,11 +100,10 @@ public class ChromatogramChartSupport {
 
 	public void loadUserSettings() {
 
-		//
 		colorScheme = Colors.getColorScheme(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCHEME_DISPLAY_OVERLAY));
 		lineStyle = LineStyle.valueOf(preferenceStore.getString(PreferenceSupplier.P_LINE_STYLE_DISPLAY_OVERLAY));
 		showArea = preferenceStore.getBoolean(PreferenceSupplier.P_OVERLAY_SHOW_AREA);
-		//
+
 		resetColorMaps();
 	}
 
@@ -210,11 +209,11 @@ public class ChromatogramChartSupport {
 
 		Color color = getSeriesColor(seriesId, dataType);
 		LineStyle lineStyle = getLineStyle(dataType);
-		//
+
 		int length = extractedWavelengthSignals.getExtractedWavelengthSignals().size();
 		double[] xSeries = new double[length];
 		double[] ySeries = new double[length];
-		//
+
 		int index = 0;
 		for(IExtractedWavelengthSignal extractedWavelengthSignal : extractedWavelengthSignals.getExtractedWavelengthSignals()) {
 			/*
@@ -224,7 +223,7 @@ public class ChromatogramChartSupport {
 			ySeries[index] = extractedWavelengthSignal.getAbundance(wavelength);
 			index++;
 		}
-		//
+
 		ISeriesData seriesData = new SeriesData(xSeries, ySeries, seriesId);
 		ILineSeriesData lineSeriesData = new LineSeriesData(seriesData);
 		ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
@@ -233,7 +232,7 @@ public class ChromatogramChartSupport {
 		lineSeriesSettings.setEnableArea(showArea);
 		ILineSeriesSettings lineSeriesSettingsHighlight = (ILineSeriesSettings)lineSeriesSettings.getSeriesSettingsHighlight();
 		lineSeriesSettingsHighlight.setLineWidth(2);
-		//
+
 		return lineSeriesData;
 	}
 
@@ -250,25 +249,25 @@ public class ChromatogramChartSupport {
 				baselineModel = chromatogram.getBaselineModel();
 			}
 		}
-		//
+
 		LineStyle lineStyle = getLineStyle(displayType);
 		boolean condenseCycleNumberScans = preferenceStore.getBoolean(PreferenceSupplier.P_CONDENSE_CYCLE_NUMBER_SCANS);
 		boolean handleScanCycleSeriesTIC = chromatogram.containsScanCycles() && condenseCycleNumberScans && displayType.equals(DisplayType.TIC);
-		//
+
 		double[] xSeries;
 		double[] ySeries;
-		//
+
 		if(handleScanCycleSeriesTIC) {
 			/*
 			 * TandemMS + Cycles
 			 */
 			ITotalScanSignalExtractor totalIonSignalExtractor = new TotalScanSignalExtractor(chromatogram);
 			ITotalScanSignals totalScanSignals = totalIonSignalExtractor.getTotalScanSignals(startScan, stopScan, false, condenseCycleNumberScans);
-			//
+
 			int length = totalScanSignals.size();
 			xSeries = new double[length];
 			ySeries = new double[length];
-			//
+
 			int index = 0;
 			for(ITotalScanSignal totalScanSignal : totalScanSignals.getTotalScanSignals()) {
 				/*
@@ -304,7 +303,7 @@ public class ChromatogramChartSupport {
 			int length = stopScan - startScan + 1;
 			xSeries = new double[length];
 			ySeries = new double[length];
-			//
+
 			int index = 0;
 			for(int i = startScan; i <= stopScan; i++) {
 				/*
@@ -372,24 +371,22 @@ public class ChromatogramChartSupport {
 		lineSeriesSettings.setEnableArea(showArea);
 		ILineSeriesSettings lineSeriesSettingsHighlight = (ILineSeriesSettings)lineSeriesSettings.getSeriesSettingsHighlight();
 		lineSeriesSettingsHighlight.setLineWidth(2);
-		//
+
 		return lineSeriesData;
 	}
 
 	private ILineSeriesData getLineSeriesData(IChromatogram chromatogram, int startScan, int stopScan, String seriesId, Derivative derivative, Color color, List<ITrace> traces, boolean baseline, boolean useRetentionIndex) {
 
 		IBaselineModel baselineModel = baseline ? chromatogram.getBaselineModel() : null;
-		//
 		double[] xSeries;
 		double[] ySeries;
-		//
 		/*
 		 * Normal
 		 */
 		int length = stopScan - startScan + 1;
 		xSeries = new double[length];
 		ySeries = new double[length];
-		//
+
 		int index = 0;
 		for(int i = startScan; i <= stopScan; i++) {
 			/*
@@ -456,7 +453,7 @@ public class ChromatogramChartSupport {
 		lineSeriesSettings.setEnableArea(showArea);
 		ILineSeriesSettings lineSeriesSettingsHighlight = (ILineSeriesSettings)lineSeriesSettings.getSeriesSettingsHighlight();
 		lineSeriesSettingsHighlight.setLineWidth(2);
-		//
+
 		return lineSeriesData;
 	}
 
@@ -494,7 +491,7 @@ public class ChromatogramChartSupport {
 				compressionToLength = ICompressionSupport.MEDIUM_COMPRESSION;
 				break;
 		}
-		//
+
 		return compressionToLength;
 	}
 
@@ -519,10 +516,9 @@ public class ChromatogramChartSupport {
 		 * refreshUpdateOverlayChart
 		 * Select which series shall be displayed.
 		 */
-		//
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 		IMarkedTraces<?> markedSignals = null;
-		//
+
 		if(chromatogramSelection instanceof IChromatogramSelectionMSD chromatogramSelectionMSD) {
 			if(dataType.equals(DisplayType.SIC) || dataType.equals(DisplayType.XIC)) {
 				markedSignals = chromatogramSelectionMSD.getSelectedIons();
@@ -559,7 +555,7 @@ public class ChromatogramChartSupport {
 	private double getIntensity(IScan scan, DisplayType dataType, IMarkedTraces<? extends IMarkedTrace> signals) {
 
 		double intensity = Double.NaN;
-		//
+
 		if(dataType.equals(DisplayType.TIC)) {
 			intensity = scan.getTotalSignal();
 		} else if(dataType.equals(DisplayType.BPC)) {
@@ -674,7 +670,6 @@ public class ChromatogramChartSupport {
 	private double getIntensity(IScan scan, List<ITrace> traces) {
 
 		double intensity = 0;
-		//
 		for(ITrace trace : traces) {
 			if(trace instanceof TraceHighResMSD traceHighResMSD) {
 				if(scan instanceof IScanMSD scanMSD) {
@@ -689,7 +684,7 @@ public class ChromatogramChartSupport {
 				}
 			}
 		}
-		//
+
 		return intensity;
 	}
 
