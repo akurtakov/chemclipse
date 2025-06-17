@@ -102,6 +102,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private AtomicReference<Spinner> spinnerControlPC = new AtomicReference<>();
 	private AtomicReference<ComboViewer> comboViewerAlgorithmControl = new AtomicReference<>();
+	private AtomicReference<Button> checkboxCrossvalidationControl = new AtomicReference<>();
 	private AtomicReference<ComboViewer> comboViewerOplsTarget = new AtomicReference<>();
 	private AtomicReference<SamplesListUI> sampleListControl = new AtomicReference<>();
 	private AtomicReference<ComboViewer> labelOptionControl = new AtomicReference<>();
@@ -184,13 +185,14 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
-		composite.setLayout(new GridLayout(6, false));
+		composite.setLayout(new GridLayout(7, false));
 		//
 		createLabel(composite, "Number of PCs:");
 		createSpinnerPrincipleComponents(composite);
 		createLabel(composite, "Algorithm:");
 		createComboViewerAlgorithm(composite);
 		createButtonRun(composite);
+		createCheckboxCrossValidation(composite);
 		createSettingsButton(composite);
 	}
 
@@ -291,6 +293,29 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 		});
 		//
 		return button;
+	}
+
+	private void createCheckboxCrossValidation(Composite parent) {
+
+		Button button = new Button(parent, SWT.CHECK);
+		button.setToolTipText("Run Crossvalidation if available for selected Algorithm.");
+		button.setText("Cross Validate");
+		button.setSelection(PreferenceSupplier.isCrossValidation());
+		button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				if(samples != null) {
+					IAnalysisSettings analysisSettings = samples.getAnalysisSettings();
+					if(analysisSettings != null) {
+						analysisSettings.setCrossValidation(button.getSelection());
+					}
+				}
+			}
+		});
+		//
+		checkboxCrossvalidationControl.set(button);
 	}
 
 	private void createSettingsButton(Composite parent) {
@@ -771,6 +796,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 			preprocessingSettingsControl.get().setInput(analysisSettings.getPreprocessingSettings());
 			spinnerControlPC.get().setSelection(analysisSettings.getNumberOfPrincipalComponents());
 			comboViewerAlgorithmControl.get().setSelection(new StructuredSelection(analysisSettings.getAlgorithm()));
+			checkboxCrossvalidationControl.get().setSelection(analysisSettings.getCrossValidation());
 		} else {
 			preprocessingSettingsControl.get().setInput(null);
 		}

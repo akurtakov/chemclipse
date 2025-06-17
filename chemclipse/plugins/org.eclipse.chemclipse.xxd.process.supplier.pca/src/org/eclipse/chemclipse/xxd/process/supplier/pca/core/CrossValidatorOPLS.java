@@ -125,6 +125,12 @@ public class CrossValidatorOPLS extends AbstractProcessorMultivariateAanalysis {
 						DMatrixRMaj divided = new DMatrixRMaj(1, cvScoresModel.getNumCols());
 						CommonOps_DDRM.elementDiv(press, ss, divided);
 						CommonOps_DDRM.subtract(1, divided, q2);
+						double[] result = q2.data;
+						for(int k = 0; k < result.length; k++) {
+							if(result[k] < 0) {
+								result[k] = 0;
+							}
+						}
 					}
 				}
 			} finally {
