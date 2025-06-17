@@ -39,4 +39,8 @@ public interface IResultsPCA<R extends IResultPCA, V extends IVariable> {
 	double[] getCrossValidations();
 
 	void setCrossValidations(double[] crossValidations);
+
+	double[] getCumulativeCrossValidations();
+
+	void setCumulativeCrossValidations(double[] cumulativeCrossValidations);
 }

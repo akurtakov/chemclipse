@@ -88,4 +88,9 @@ public class EvaluationPCA {
 
 		this.results.setCrossValidations(crossValidation);
 	}
+
+	public void addCumulativeCrossValidation(double[] cumulativeCrossValidation) {
+
+		this.results.setCumulativeCrossValidations(cumulativeCrossValidation);
+	}
 }
