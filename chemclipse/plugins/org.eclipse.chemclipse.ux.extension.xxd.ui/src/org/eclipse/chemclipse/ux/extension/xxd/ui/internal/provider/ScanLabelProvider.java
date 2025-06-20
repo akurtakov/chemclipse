@@ -35,7 +35,7 @@ import org.eclipse.swt.graphics.Image;
 public class ScanLabelProvider extends ColumnLabelProvider implements ITableLabelProvider {
 
 	public static final String NO_VALUE = "n.a.";
-	//
+
 	public static final String INTENSITY = Activator.getDefault().getPreferenceStore().getString(PreferenceSupplier.P_TITLE_Y_AXIS_INTENSITY);
 	public static final String RELATIVE_INTENSITY = Activator.getDefault().getPreferenceStore().getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
 	public static final String ION = Activator.getDefault().getPreferenceStore().getString(PreferenceSupplier.P_TITLE_X_AXIS_MZ);
@@ -47,7 +47,7 @@ public class ScanLabelProvider extends ColumnLabelProvider implements ITableLabe
 	public static final String DAUGHTER_RESOLUTION = Activator.getDefault().getPreferenceStore().getString(PreferenceSupplier.P_TITLE_X_AXIS_DAUGHTER_RESOLUTION);
 	public static final String COLLISION_ENERGY = Activator.getDefault().getPreferenceStore().getString(PreferenceSupplier.P_TITLE_X_AXIS_COLLISION_ENERGY);
 	public static final String WAVENUMBER = "Wavenumber";
-	//
+
 	public static final String[] TITLES_MSD_NOMINAL = {ION, INTENSITY, RELATIVE_INTENSITY};
 	public static final int[] BOUNDS_MSD_NOMINAL = {150, 150, 150};
 	public static final String[] TITLES_MSD_TANDEM = {ION, INTENSITY, RELATIVE_INTENSITY, PARENT_ION, PARENT_RESOLUTION, DAUGHTER_ION, DAUGHTER_RESOLUTION, COLLISION_ENERGY};
@@ -64,9 +64,9 @@ public class ScanLabelProvider extends ColumnLabelProvider implements ITableLabe
 	public static final int[] BOUNDS_FSD = {150, 150, 150};
 	public static final String[] TITLES_EMPTY = {NO_VALUE};
 	public static final int[] BOUNDS_EMPTY = {150};
-	//
+
 	private DataType dataType;
-	//
+
 	private DecimalFormat decimalFormatNominalMSD;
 	private DecimalFormat decimalFormatPrecursorMSD;
 	private DecimalFormat decimalFormatTandemMSD;
@@ -74,10 +74,10 @@ public class ScanLabelProvider extends ColumnLabelProvider implements ITableLabe
 	private DecimalFormat decimalFormatCSD;
 	private DecimalFormat decimalFormatWSD;
 	private DecimalFormat decimalFormatFSD;
-	//
+
 	private DecimalFormat decimalFormatIntensity;
 	private DecimalFormat decimalFormatRelativeIntensity;
-	//
+
 	private double relativeIntensityFactorPositive = 0.0d;
 	private double relativeIntensityFactorNegative = 0.0d;
 
