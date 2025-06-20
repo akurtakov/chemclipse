@@ -35,7 +35,7 @@ import org.eclipse.swt.graphics.Image;
 public class ScanLabelProvider extends ColumnLabelProvider implements ITableLabelProvider {
 
 	public static final String NO_VALUE = "n.a.";
-	//
+
 	public static final String INTENSITY = Activator.getDefault().getPreferenceStore().getString(PreferenceSupplier.P_TITLE_Y_AXIS_INTENSITY);
 	public static final String RELATIVE_INTENSITY = Activator.getDefault().getPreferenceStore().getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
 	public static final String ION = Activator.getDefault().getPreferenceStore().getString(PreferenceSupplier.P_TITLE_X_AXIS_MZ);
@@ -47,7 +47,7 @@ public class ScanLabelProvider extends ColumnLabelProvider implements ITableLabe
 	public static final String DAUGHTER_RESOLUTION = Activator.getDefault().getPreferenceStore().getString(PreferenceSupplier.P_TITLE_X_AXIS_DAUGHTER_RESOLUTION);
 	public static final String COLLISION_ENERGY = Activator.getDefault().getPreferenceStore().getString(PreferenceSupplier.P_TITLE_X_AXIS_COLLISION_ENERGY);
 	public static final String WAVENUMBER = "Wavenumber";
-	//
+
 	public static final String[] TITLES_MSD_NOMINAL = {ION, INTENSITY, RELATIVE_INTENSITY};
 	public static final int[] BOUNDS_MSD_NOMINAL = {150, 150, 150};
 	public static final String[] TITLES_MSD_TANDEM = {ION, INTENSITY, RELATIVE_INTENSITY, PARENT_ION, PARENT_RESOLUTION, DAUGHTER_ION, DAUGHTER_RESOLUTION, COLLISION_ENERGY};
@@ -64,19 +64,20 @@ public class ScanLabelProvider extends ColumnLabelProvider implements ITableLabe
 	public static final int[] BOUNDS_FSD = {150, 150, 150};
 	public static final String[] TITLES_EMPTY = {NO_VALUE};
 	public static final int[] BOUNDS_EMPTY = {150};
-	//
+
 	private DataType dataType;
-	//
+
 	private DecimalFormat decimalFormatNominalMSD;
+	private DecimalFormat decimalFormatPrecursorMSD;
 	private DecimalFormat decimalFormatTandemMSD;
 	private DecimalFormat decimalFormatHighResMSD;
 	private DecimalFormat decimalFormatCSD;
 	private DecimalFormat decimalFormatWSD;
 	private DecimalFormat decimalFormatFSD;
-	//
+
 	private DecimalFormat decimalFormatIntensity;
 	private DecimalFormat decimalFormatRelativeIntensity;
-	//
+
 	private double relativeIntensityFactorPositive = 0.0d;
 	private double relativeIntensityFactorNegative = 0.0d;
 
@@ -84,7 +85,8 @@ public class ScanLabelProvider extends ColumnLabelProvider implements ITableLabe
 
 		this.dataType = dataType;
 		decimalFormatNominalMSD = ValueFormat.getDecimalFormatEnglish("0.0");
-		decimalFormatTandemMSD = ValueFormat.getDecimalFormatEnglish("0.0");
+		decimalFormatPrecursorMSD = ValueFormat.getDecimalFormatEnglish("0.######"); // Transition 128 > 78.4 but can also be high-res
+		decimalFormatTandemMSD = ValueFormat.getDecimalFormatEnglish("0.0#####"); // m/z: normal 28.3 or with but can also be high-res
 		decimalFormatHighResMSD = ValueFormat.getDecimalFormatEnglish("0.000###");
 		decimalFormatCSD = ValueFormat.getDecimalFormatEnglish("0.0000");
 		decimalFormatWSD = ValueFormat.getDecimalFormatEnglish("0.0");
@@ -168,9 +170,14 @@ public class ScanLabelProvider extends ColumnLabelProvider implements ITableLabe
 		if(element instanceof IIon ion) {
 			IIonTransition ionTransition = ion.getIonTransition();
 			switch(columnIndex) {
-				case 0: // m/z (normal 28.3 or with Transition 128 > 78.4)
+				case 0:
 					String mz = decimalFormatTandemMSD.format(ion.getIon());
-					text = (ionTransition == null) ? mz : Integer.toString((int)ionTransition.getQ1StartIon()) + " > " + mz;
+					if(ionTransition != null) {
+						String q1 = decimalFormatPrecursorMSD.format(ionTransition.getQ1StartIon());
+						text = q1 + " > " + mz;
+					} else {
+						text = mz;
+					}
 					break;
 				case 1:
 					text = decimalFormatIntensity.format(ion.getAbundance());
