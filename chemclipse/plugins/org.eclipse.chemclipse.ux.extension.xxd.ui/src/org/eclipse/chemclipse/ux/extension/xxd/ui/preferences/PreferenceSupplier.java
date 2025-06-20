@@ -535,7 +535,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_CHROMATOGRAM_PEAKS_ACTIVE_ISTD_MARKER_TYPE = PlotSymbolType.DIAMOND.toString();
 	public static final String P_CHROMATOGRAM_PEAKS_INACTIVE_ISTD_MARKER_TYPE = "chromatogramPeaksInactiveIstdMarkerType";
 	public static final String DEF_CHROMATOGRAM_PEAKS_INACTIVE_ISTD_MARKER_TYPE = PlotSymbolType.DIAMOND.toString();
-	//
+
 	public static final String P_COLOR_CHROMATOGRAM_PEAKS_ACTIVE_NORMAL = "colorChromatogramPeaksActiveNormal";
 	public static final String DEF_COLOR_CHROMATOGRAM_PEAKS_ACTIVE_NORMAL = "128, 128, 128";
 	public static final String P_COLOR_CHROMATOGRAM_PEAKS_ACTIVE_NORMAL_TARGETS_HIDDEN = "colorChromatogramPeaksActiveNormalTargetsHidden";
@@ -548,28 +548,28 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_COLOR_CHROMATOGRAM_PEAKS_ACTIVE_ISTD_TARGETS_HIDDEN = "128,0,0";
 	public static final String P_COLOR_CHROMATOGRAM_PEAKS_INACTIVE_ISTD = "colorChromatogramPeaksInactiveIstd";
 	public static final String DEF_COLOR_CHROMATOGRAM_PEAKS_INACTIVE_ISTD = "192, 192, 192";
-	//
+
 	public static final String P_CHROMATOGRAM_SCAN_LABEL_SYMBOL_SIZE = "chromatogramScanLabelSymbolSize";
 	public static final String P_CHROMATOGRAM_SCAN_LABEL_FONT_NAME = "chromatogramScanLabelFontName";
 	public static final String DEF_CHROMATOGRAM_SCAN_LABEL_FONT_NAME = Resources.DEFAULT_FONT_NAME;
 	public static final String P_CHROMATOGRAM_SCAN_LABEL_FONT_SIZE = "chromatogramScanLabelFontSize";
 	public static final String P_CHROMATOGRAM_SCAN_LABEL_FONT_STYLE = "chromatogramScanLabelFontStyle";
 	public static final int DEF_CHROMATOGRAM_SCAN_LABEL_FONT_STYLE = SWT.NORMAL;
-	//
+
 	public static final String P_CHROMATOGRAM_ACTIVE_TARGET_LABEL_FONT_COLOR = "chromatogramActiveTargetLabelFontColor";
 	public static final String DEF_CHROMATOGRAM_ACTIVE_TARGET_LABEL_FONT_COLOR = "0, 0, 0";
 	public static final String P_CHROMATOGRAM_INACTIVE_TARGET_LABEL_FONT_COLOR = "chromatogramActiveTargetLabelFontColor";
 	public static final String DEF_CHROMATOGRAM_INACTIVE_TARGET_LABEL_FONT_COLOR = "109, 109, 109";
 	public static final String P_CHROMATOGRAM_ID_TARGET_LABEL_FONT_COLOR = "chromatogramActiveTargetLabelFontColor";
 	public static final String DEF_CHROMATOGRAM_ID_TARGET_LABEL_FONT_COLOR = "0, 0, 0";
-	//
+
 	public static final String P_CHROMATOGRAM_ACTIVE_TARGET_LABEL_FONT_DARK_COLOR = "chromatogramActiveTargetLabelFontDarkColor";
 	public static final String DEF_CHROMATOGRAM_ACTIVE_TARGET_LABEL_FONT_DARK_COLOR = "255, 255, 255";
 	public static final String P_CHROMATOGRAM_INACTIVE_TARGET_LABEL_FONT_DARK_COLOR = "chromatogramActiveTargetLabelFontDarkColor";
 	public static final String DEF_CHROMATOGRAM_INACTIVE_TARGET_LABEL_FONT_DARK_COLOR = "109, 109, 109";
 	public static final String P_CHROMATOGRAM_ID_TARGET_LABEL_FONT_DARK_COLOR = "chromatogramActiveTargetLabelFontDarkColor";
 	public static final String DEF_CHROMATOGRAM_ID_TARGET_LABEL_FONT_DARK_COLOR = "255, 255, 255";
-	//
+
 	public static final String P_COLOR_CHROMATOGRAM_IDENTIFIED_SCAN = "colorChromatogramIdentifiedScan";
 	public static final String DEF_COLOR_CHROMATOGRAM_IDENTIFIED_SCAN = "128,0,0";
 	public static final String P_CHROMATOGRAM_SCAN_MARKER_TYPE = "chromatogramScanMarkerType";
@@ -630,7 +630,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_CHROMATOGRAM_SHOW_METHODS_TOOLBAR = false;
 	public static final String P_CHROMATOGRAM_SHOW_REFERENCES_COMBO = "chromatogramShowReferencesCombo";
 	public static final boolean DEF_CHROMATOGRAM_SHOW_REFERENCES_COMBO = false;
-	//
+
 	public static final String P_TITLE_X_AXIS_MILLISECONDS = "titleXAxisMilliseconds";
 	public static final String DEF_TITLE_X_AXIS_MILLISECONDS = "Time [ms]";
 	public static final String P_FORMAT_X_AXIS_MILLISECONDS = "formatXAxisMilliseconds";
@@ -654,11 +654,11 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_GRIDLINE_COLOR_X_AXIS_MILLISECONDS = "192,192,192";
 	public static final String P_SHOW_X_AXIS_TITLE_MILLISECONDS = "showXAxisTitleMilliseconds";
 	public static final boolean DEF_SHOW_X_AXIS_TITLE_MILLISECONDS = true;
-	//
+
 	public static final String P_TITLE_X_AXIS_RETENTION_INDEX = "titleXAxisRetentionIndex";
 	public static final String DEF_TITLE_X_AXIS_RETENTION_INDEX = "Retention Index";
 	public static final String P_FORMAT_X_AXIS_RETENTION_INDEX = "formatXAxisRetentionIndex";
-	public static final String DEF_FORMAT_X_AXIS_RETENTION_INDEX = "0.0";
+	public static final String DEF_FORMAT_X_AXIS_RETENTION_INDEX = "0.#";
 	public static final String P_SHOW_X_AXIS_RETENTION_INDEX = "showXAxisRetentionIndex";
 	public static final boolean DEF_SHOW_X_AXIS_RETENTION_INDEX = false;
 	public static final String P_POSITION_X_AXIS_RETENTION_INDEX = "positionXAxisRetentionIndex";
@@ -678,11 +678,11 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_GRIDLINE_COLOR_X_AXIS_RETENTION_INDEX = "192,192,192";
 	public static final String P_SHOW_X_AXIS_TITLE_RETENTION_INDEX = "showXAxisTitleRetentionIndex";
 	public static final boolean DEF_SHOW_X_AXIS_TITLE_RETENTION_INDEX = true;
-	//
+
 	public static final String P_TITLE_X_AXIS_SECONDS = "titleXAxisSeconds";
 	public static final String DEF_TITLE_X_AXIS_SECONDS = "Time [s]";
 	public static final String P_FORMAT_X_AXIS_SECONDS = "formatXAxisSeconds";
-	public static final String DEF_FORMAT_X_AXIS_SECONDS = "0.00#";
+	public static final String DEF_FORMAT_X_AXIS_SECONDS = "0.###";
 	public static final String P_SHOW_X_AXIS_SECONDS = "showXAxisSeconds";
 	public static final boolean DEF_SHOW_X_AXIS_SECONDS = false;
 	public static final String P_POSITION_X_AXIS_SECONDS = "positionXAxisSeconds";
@@ -706,7 +706,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String P_TITLE_X_AXIS_MINUTES = "titleXAxisMinutes";
 	public static final String DEF_TITLE_X_AXIS_MINUTES = "Time [min]";
 	public static final String P_FORMAT_X_AXIS_MINUTES = "formatXAxisMinutes";
-	public static final String DEF_FORMAT_X_AXIS_MINUTES = "0.00#";
+	public static final String DEF_FORMAT_X_AXIS_MINUTES = "0.###";
 	public static final String P_SHOW_X_AXIS_MINUTES = "showXAxisMinutes";
 	public static final boolean DEF_SHOW_X_AXIS_MINUTES = true;
 	public static final String P_POSITION_X_AXIS_MINUTES = "positionXAxisMinutes";
@@ -778,11 +778,11 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_GRIDLINE_COLOR_Y_AXIS_INTENSITY = "192,192,192";
 	public static final String P_SHOW_Y_AXIS_TITLE_INTENSITY = "showYAxisTitleIntensity";
 	public static final boolean DEF_SHOW_Y_AXIS_TITLE_INTENSITY = true;
-	//
+
 	public static final String P_TITLE_Y_AXIS_RELATIVE_INTENSITY = "titleYAxisRelativeIntensity";
 	public static final String DEF_TITLE_Y_AXIS_RELATIVE_INTENSITY = "Intensity [%]";
 	public static final String P_FORMAT_Y_AXIS_RELATIVE_INTENSITY = "formatYAxisRelativeIntensity";
-	public static final String DEF_FORMAT_Y_AXIS_RELATIVE_INTENSITY = "0.00#";
+	public static final String DEF_FORMAT_Y_AXIS_RELATIVE_INTENSITY = "0.###";
 	public static final String P_SHOW_Y_AXIS_RELATIVE_INTENSITY = "showYAxisRelativeIntensity";
 	public static final boolean DEF_SHOW_Y_AXIS_RELATIVE_INTENSITY = true;
 	public static final String P_POSITION_Y_AXIS_RELATIVE_INTENSITY = "positionYAxisRelativeIntensity";
@@ -802,7 +802,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY = "192,192,192";
 	public static final String P_SHOW_Y_AXIS_TITLE_RELATIVE_INTENSITY = "showYAxisTitleRelativeIntensity";
 	public static final boolean DEF_SHOW_Y_AXIS_TITLE_RELATIVE_INTENSITY = true;
-	//
+
 	public static final String P_CHROMATOGRAM_SELECTED_ACTION_ID = "chromatogramSelectedActionId";
 	public static final String DEF_CHROMATOGRAM_SELECTED_ACTION_ID = "";
 	public static final String P_CHROMATOGRAM_SAVE_AS_FOLDER = "chromatogramSaveAsFolder";
@@ -822,7 +822,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	 */
 	public static final String P_COLOR_SCHEME_DISPLAY_CALIBRATION = "colorSchemeDisplayCalibration";
 	public static final String DEF_COLOR_SCHEME_DISPLAY_CALIBRATION = Colors.COLOR_SCHEME_PRINT;
-	//
+
 	public static final String P_SHOW_X_AXIS_CONCENTRATION_CALIBRATION = "showXAxisConcentrationCalibration";
 	public static final boolean DEF_SHOW_X_AXIS_CONCENTRATION_CALIBRATION = true;
 	public static final String P_POSITION_X_AXIS_CONCENTRATION_CALIBRATION = "positionXAxisConcentrationCalibration";
@@ -833,7 +833,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_GRIDLINE_STYLE_X_AXIS_CONCENTRATION_CALIBRATION = LineStyle.DOT.toString();
 	public static final String P_GRIDLINE_COLOR_X_AXIS_CONCENTRATION_CALIBRATION = "gridlineColorXAxisConcentrationCalibration";
 	public static final String DEF_GRIDLINE_COLOR_X_AXIS_CONCENTRATION_CALIBRATION = "192,192,192";
-	//
+
 	public static final String P_SHOW_Y_AXIS_RESPONSE_CALIBRATION = "showYAxisResponseCalibration";
 	public static final boolean DEF_SHOW_Y_AXIS_RESPONSE_CALIBRATION = true;
 	public static final String P_POSITION_Y_AXIS_RESPONSE_CALIBRATION = "positionYAxisResponseCalibration";
@@ -844,7 +844,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_GRIDLINE_STYLE_Y_AXIS_RESPONSE_CALIBRATION = LineStyle.NONE.toString();
 	public static final String P_GRIDLINE_COLOR_Y_AXIS_RESPONSE_CALIBRATION = "gridlineColorYAxisResponseCalibration";
 	public static final String DEF_GRIDLINE_COLOR_Y_AXIS_RESPONSE_CALIBRATION = "192,192,192";
-	//
+
 	public static final String P_SHOW_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION = "showYAxisRelativeResponseCalibration";
 	public static final boolean DEF_SHOW_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION = true;
 	public static final String P_POSITION_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION = "positionYAxisRelativeResponseCalibration";
@@ -963,7 +963,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	 */
 	public static final String P_QUICK_ACCESS_PROCESSORS = "quickAccessProcessors";
 	public static final String DEF_QUICK_ACCESS_PROCESSORS = "";
-	//
+
 	public static final String P_FILTER_PATH_CHROMATOGRAM_MSD = "filterPathChromatogramMSD";
 	public static final String DEF_FILTER_PATH_CHROMATOGRAM_MSD = "";
 	public static final String P_FILTER_PATH_CHROMATOGRAM_CSD = "filterPathChromatogramCSD";
@@ -974,7 +974,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_FILTER_PATH_CHROMATOGRAM_FSD = "";
 	public static final String P_FILTER_PATH_RETENTION_INDICES = "filterPathRetentionIndices";
 	public static final String DEF_FILTER_PATH_RETENTION_INDICES = "";
-	//
+
 	public static final String P_LIST_PATH_IMPORT = "listPathImport";
 	public static final String DEF_LIST_PATH_IMPORT = "";
 	public static final String P_LIST_PATH_EXPORT = "listPathExport";
@@ -1073,14 +1073,14 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_ENABLE_MULTI_SUBTRACT, DEF_ENABLE_MULTI_SUBTRACT);
 		putDefault(P_TARGET_IDENTIFER, DEF_TARGET_IDENTIFER);
 		putDefault(P_SCAN_IDENTIFER, DEF_SCAN_IDENTIFER);
-		//
+
 		putDefault(P_SCAN_CHART_ENABLE_FIXED_RANGE_X, DEF_SCAN_CHART_ENABLE_FIXED_RANGE_X);
 		putDefault(P_SCAN_CHART_FIXED_RANGE_START_X, DEF_SCAN_CHART_FIXED_RANGE_START_X);
 		putDefault(P_SCAN_CHART_FIXED_RANGE_STOP_X, DEF_SCAN_CHART_FIXED_RANGE_STOP_X);
 		putDefault(P_SCAN_CHART_ENABLE_FIXED_RANGE_Y, DEF_SCAN_CHART_ENABLE_FIXED_RANGE_Y);
 		putDefault(P_SCAN_CHART_FIXED_RANGE_START_Y, DEF_SCAN_CHART_FIXED_RANGE_START_Y);
 		putDefault(P_SCAN_CHART_FIXED_RANGE_STOP_Y, DEF_SCAN_CHART_FIXED_RANGE_STOP_Y);
-		//
+
 		putDefault(P_TITLE_X_AXIS_MZ, DEF_TITLE_X_AXIS_MZ);
 		putDefault(P_TITLE_X_AXIS_PARENT_MZ, DEF_TITLE_X_AXIS_PARENT_MZ);
 		putDefault(P_TITLE_X_AXIS_PARENT_RESOLUTION, DEF_TITLE_X_AXIS_PARENT_RESOLUTION);
@@ -1088,10 +1088,10 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_TITLE_X_AXIS_DAUGHTER_RESOLUTION, DEF_TITLE_X_AXIS_DAUGHTER_RESOLUTION);
 		putDefault(P_TITLE_X_AXIS_COLLISION_ENERGY, DEF_TITLE_X_AXIS_COLLISION_ENERGY);
 		putDefault(P_TITLE_X_AXIS_WAVELENGTH, DEF_TITLE_X_AXIS_WAVELENGTH);
-		//
+
 		putDefault(P_TRACES_VIRTUAL_TABLE, DEF_TRACES_VIRTUAL_TABLE);
 		putDefault(P_LIMIT_SIM_TRACES, DEF_LIMIT_SIM_TRACES);
-		//
+
 		putDefault(P_HEATMAP_SCALE_INTENSITY_MIN_MSD, DEF_HEATMAP_SCALE_INTENSITY_MIN_MSD);
 		putDefault(P_HEATMAP_SCALE_INTENSITY_MAX_MSD, DEF_HEATMAP_SCALE_INTENSITY_MAX_MSD);
 		putDefault(P_HEATMAP_SCALE_INTENSITY_MIN_WSD, DEF_HEATMAP_SCALE_INTENSITY_MIN_WSD);
@@ -1125,25 +1125,25 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		 */
 		putDefault(P_COLOR_SCHEME_DISPLAY_PEAKS, DEF_COLOR_SCHEME_DISPLAY_PEAKS);
 		putDefault(P_SHOW_AREA_DISPLAY_PEAKS, DEF_SHOW_AREA_DISPLAY_PEAKS);
-		//
+
 		putDefault(P_SHOW_X_AXIS_MILLISECONDS_PEAKS, DEF_SHOW_X_AXIS_MILLISECONDS_PEAKS);
 		putDefault(P_POSITION_X_AXIS_MILLISECONDS_PEAKS, DEF_POSITION_X_AXIS_MILLISECONDS_PEAKS);
 		putDefault(P_COLOR_X_AXIS_MILLISECONDS_PEAKS, DEF_COLOR_X_AXIS_MILLISECONDS_PEAKS);
 		putDefault(P_GRIDLINE_STYLE_X_AXIS_MILLISECONDS_PEAKS, DEF_GRIDLINE_STYLE_X_AXIS_MILLISECONDS_PEAKS);
 		putDefault(P_GRIDLINE_COLOR_X_AXIS_MILLISECONDS_PEAKS, DEF_GRIDLINE_COLOR_X_AXIS_MILLISECONDS_PEAKS);
-		//
+
 		putDefault(P_SHOW_X_AXIS_MINUTES_PEAKS, DEF_SHOW_X_AXIS_MINUTES_PEAKS);
 		putDefault(P_POSITION_X_AXIS_MINUTES_PEAKS, DEF_POSITION_X_AXIS_MINUTES_PEAKS);
 		putDefault(P_COLOR_X_AXIS_MINUTES_PEAKS, DEF_COLOR_X_AXIS_MINUTES_PEAKS);
 		putDefault(P_GRIDLINE_STYLE_X_AXIS_MINUTES_PEAKS, DEF_GRIDLINE_STYLE_X_AXIS_MINUTES_PEAKS);
 		putDefault(P_GRIDLINE_COLOR_X_AXIS_MINUTES_PEAKS, DEF_GRIDLINE_COLOR_X_AXIS_MINUTES_PEAKS);
-		//
+
 		putDefault(P_SHOW_Y_AXIS_INTENSITY_PEAKS, DEF_SHOW_Y_AXIS_INTENSITY_PEAKS);
 		putDefault(P_POSITION_Y_AXIS_INTENSITY_PEAKS, DEF_POSITION_Y_AXIS_INTENSITY_PEAKS);
 		putDefault(P_COLOR_Y_AXIS_INTENSITY_PEAKS, DEF_COLOR_Y_AXIS_INTENSITY_PEAKS);
 		putDefault(P_GRIDLINE_STYLE_Y_AXIS_INTENSITY_PEAKS, DEF_GRIDLINE_STYLE_Y_AXIS_INTENSITY_PEAKS);
 		putDefault(P_GRIDLINE_COLOR_Y_AXIS_INTENSITY_PEAKS, DEF_GRIDLINE_COLOR_Y_AXIS_INTENSITY_PEAKS);
-		//
+
 		putDefault(P_SHOW_Y_AXIS_RELATIVE_INTENSITY_PEAKS, DEF_SHOW_Y_AXIS_RELATIVE_INTENSITY_PEAKS);
 		putDefault(P_POSITION_Y_AXIS_RELATIVE_INTENSITY_PEAKS, DEF_POSITION_Y_AXIS_RELATIVE_INTENSITY_PEAKS);
 		putDefault(P_COLOR_Y_AXIS_RELATIVE_INTENSITY_PEAKS, DEF_COLOR_Y_AXIS_RELATIVE_INTENSITY_PEAKS);
@@ -1178,25 +1178,25 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		 * Edit History
 		 */
 		putDefault(P_EDIT_HISTORY_HIDE_PROCESS_METHOD_ENTRIES, DEF_EDIT_HISTORY_HIDE_PROCESS_METHOD_ENTRIES);
-		//
+
 		initializeChromatogramDefaults();
 		/*
 		 * Calibration Chart
 		 */
 		putDefault(P_COLOR_SCHEME_DISPLAY_CALIBRATION, DEF_COLOR_SCHEME_DISPLAY_CALIBRATION);
-		//
+
 		putDefault(P_SHOW_X_AXIS_CONCENTRATION_CALIBRATION, DEF_SHOW_X_AXIS_CONCENTRATION_CALIBRATION);
 		putDefault(P_POSITION_X_AXIS_CONCENTRATION_CALIBRATION, DEF_POSITION_X_AXIS_CONCENTRATION_CALIBRATION);
 		putDefault(P_COLOR_X_AXIS_CONCENTRATION_CALIBRATION, DEF_COLOR_X_AXIS_CONCENTRATION_CALIBRATION);
 		putDefault(P_GRIDLINE_STYLE_X_AXIS_CONCENTRATION_CALIBRATION, DEF_GRIDLINE_STYLE_X_AXIS_CONCENTRATION_CALIBRATION);
 		putDefault(P_GRIDLINE_COLOR_X_AXIS_CONCENTRATION_CALIBRATION, DEF_GRIDLINE_COLOR_X_AXIS_CONCENTRATION_CALIBRATION);
-		//
+
 		putDefault(P_SHOW_Y_AXIS_RESPONSE_CALIBRATION, DEF_SHOW_Y_AXIS_RESPONSE_CALIBRATION);
 		putDefault(P_POSITION_Y_AXIS_RESPONSE_CALIBRATION, DEF_POSITION_Y_AXIS_RESPONSE_CALIBRATION);
 		putDefault(P_COLOR_Y_AXIS_RESPONSE_CALIBRATION, DEF_COLOR_Y_AXIS_RESPONSE_CALIBRATION);
 		putDefault(P_GRIDLINE_STYLE_Y_AXIS_RESPONSE_CALIBRATION, DEF_GRIDLINE_STYLE_Y_AXIS_RESPONSE_CALIBRATION);
 		putDefault(P_GRIDLINE_COLOR_Y_AXIS_RESPONSE_CALIBRATION, DEF_GRIDLINE_COLOR_Y_AXIS_RESPONSE_CALIBRATION);
-		//
+
 		putDefault(P_SHOW_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION, DEF_SHOW_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION);
 		putDefault(P_POSITION_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION, DEF_POSITION_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION);
 		putDefault(P_COLOR_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION, DEF_COLOR_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION);
@@ -1298,22 +1298,22 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_CHROMATOGRAM_PEAKS_INACTIVE_NORMAL_MARKER_TYPE, DEF_CHROMATOGRAM_PEAKS_INACTIVE_NORMAL_MARKER_TYPE);
 		putDefault(P_CHROMATOGRAM_PEAKS_ACTIVE_ISTD_MARKER_TYPE, DEF_CHROMATOGRAM_PEAKS_ACTIVE_ISTD_MARKER_TYPE);
 		putDefault(P_CHROMATOGRAM_PEAKS_INACTIVE_ISTD_MARKER_TYPE, DEF_CHROMATOGRAM_PEAKS_INACTIVE_ISTD_MARKER_TYPE);
-		//
+
 		putDefault(P_COLOR_CHROMATOGRAM_PEAKS_ACTIVE_NORMAL, DEF_COLOR_CHROMATOGRAM_PEAKS_ACTIVE_NORMAL);
 		putDefault(P_COLOR_CHROMATOGRAM_PEAKS_ACTIVE_NORMAL_TARGETS_HIDDEN, DEF_COLOR_CHROMATOGRAM_PEAKS_ACTIVE_NORMAL_TARGETS_HIDDEN);
 		putDefault(P_COLOR_CHROMATOGRAM_PEAKS_INACTIVE_NORMAL, DEF_COLOR_CHROMATOGRAM_PEAKS_INACTIVE_NORMAL);
 		putDefault(P_COLOR_CHROMATOGRAM_PEAKS_ACTIVE_ISTD, DEF_COLOR_CHROMATOGRAM_PEAKS_ACTIVE_ISTD);
 		putDefault(P_COLOR_CHROMATOGRAM_PEAKS_ACTIVE_ISTD_TARGETS_HIDDEN, DEF_COLOR_CHROMATOGRAM_PEAKS_ACTIVE_ISTD_TARGETS_HIDDEN);
 		putDefault(P_COLOR_CHROMATOGRAM_PEAKS_INACTIVE_ISTD, DEF_COLOR_CHROMATOGRAM_PEAKS_INACTIVE_ISTD);
-		//
+
 		putDefault(P_CHROMATOGRAM_ACTIVE_TARGET_LABEL_FONT_COLOR, DEF_CHROMATOGRAM_ACTIVE_TARGET_LABEL_FONT_COLOR);
 		putDefault(P_CHROMATOGRAM_INACTIVE_TARGET_LABEL_FONT_COLOR, DEF_CHROMATOGRAM_INACTIVE_TARGET_LABEL_FONT_COLOR);
 		putDefault(P_CHROMATOGRAM_ID_TARGET_LABEL_FONT_COLOR, DEF_CHROMATOGRAM_ID_TARGET_LABEL_FONT_COLOR);
-		//
+
 		putDefault(P_CHROMATOGRAM_ACTIVE_TARGET_LABEL_FONT_DARK_COLOR, DEF_CHROMATOGRAM_ACTIVE_TARGET_LABEL_FONT_DARK_COLOR);
 		putDefault(P_CHROMATOGRAM_INACTIVE_TARGET_LABEL_FONT_DARK_COLOR, DEF_CHROMATOGRAM_INACTIVE_TARGET_LABEL_FONT_DARK_COLOR);
 		putDefault(P_CHROMATOGRAM_ID_TARGET_LABEL_FONT_DARK_COLOR, DEF_CHROMATOGRAM_ID_TARGET_LABEL_FONT_DARK_COLOR);
-		//
+
 		putDefault(P_CHROMATOGRAM_SCAN_LABEL_SYMBOL_SIZE, DEF_SYMBOL_SIZE);
 		putDefault(P_CHROMATOGRAM_SCAN_LABEL_FONT_NAME, DEF_CHROMATOGRAM_SCAN_LABEL_FONT_NAME);
 		putDefault(P_CHROMATOGRAM_SCAN_LABEL_FONT_SIZE, DEF_FONT_SIZE);
@@ -1344,7 +1344,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_CHROMATOGRAM_PROCESSOR_TOOLBAR, DEF_CHROMATOGRAM_PROCESSOR_TOOLBAR);
 		putDefault(P_CHROMATOGRAM_SHOW_METHODS_TOOLBAR, DEF_CHROMATOGRAM_SHOW_METHODS_TOOLBAR);
 		putDefault(P_CHROMATOGRAM_SHOW_REFERENCES_COMBO, DEF_CHROMATOGRAM_SHOW_REFERENCES_COMBO);
-		//
+
 		putDefault(P_TITLE_X_AXIS_MILLISECONDS, DEF_TITLE_X_AXIS_MILLISECONDS);
 		putDefault(P_FORMAT_X_AXIS_MILLISECONDS, DEF_FORMAT_X_AXIS_MILLISECONDS);
 		putDefault(P_SHOW_X_AXIS_MILLISECONDS, DEF_SHOW_X_AXIS_MILLISECONDS);
@@ -1357,7 +1357,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_GRIDLINE_STYLE_X_AXIS_MILLISECONDS, DEF_GRIDLINE_STYLE_X_AXIS_MILLISECONDS);
 		putDefault(P_GRIDLINE_COLOR_X_AXIS_MILLISECONDS, DEF_GRIDLINE_COLOR_X_AXIS_MILLISECONDS);
 		putDefault(P_SHOW_X_AXIS_TITLE_MILLISECONDS, DEF_SHOW_X_AXIS_TITLE_MILLISECONDS);
-		//
+
 		putDefault(P_TITLE_X_AXIS_RETENTION_INDEX, DEF_TITLE_X_AXIS_RETENTION_INDEX);
 		putDefault(P_FORMAT_X_AXIS_RETENTION_INDEX, DEF_FORMAT_X_AXIS_RETENTION_INDEX);
 		putDefault(P_SHOW_X_AXIS_RETENTION_INDEX, DEF_SHOW_X_AXIS_RETENTION_INDEX);
@@ -1370,7 +1370,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_GRIDLINE_STYLE_X_AXIS_RETENTION_INDEX, DEF_GRIDLINE_STYLE_X_AXIS_RETENTION_INDEX);
 		putDefault(P_GRIDLINE_COLOR_X_AXIS_RETENTION_INDEX, DEF_GRIDLINE_COLOR_X_AXIS_RETENTION_INDEX);
 		putDefault(P_SHOW_X_AXIS_TITLE_RETENTION_INDEX, DEF_SHOW_X_AXIS_TITLE_RETENTION_INDEX);
-		//
+
 		putDefault(P_TITLE_X_AXIS_SECONDS, DEF_TITLE_X_AXIS_SECONDS);
 		putDefault(P_FORMAT_X_AXIS_SECONDS, DEF_FORMAT_X_AXIS_SECONDS);
 		putDefault(P_SHOW_X_AXIS_SECONDS, DEF_SHOW_X_AXIS_SECONDS);
@@ -1383,7 +1383,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_GRIDLINE_STYLE_X_AXIS_SECONDS, DEF_GRIDLINE_STYLE_X_AXIS_SECONDS);
 		putDefault(P_GRIDLINE_COLOR_X_AXIS_SECONDS, DEF_GRIDLINE_COLOR_X_AXIS_SECONDS);
 		putDefault(P_SHOW_X_AXIS_TITLE_SECONDS, DEF_SHOW_X_AXIS_TITLE_SECONDS);
-		//
+
 		putDefault(P_TITLE_X_AXIS_MINUTES, DEF_TITLE_X_AXIS_MINUTES);
 		putDefault(P_FORMAT_X_AXIS_MINUTES, DEF_FORMAT_X_AXIS_MINUTES);
 		putDefault(P_SHOW_X_AXIS_MINUTES, DEF_SHOW_X_AXIS_MINUTES);
@@ -1398,7 +1398,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_SHOW_X_AXIS_TITLE_MINUTES, DEF_SHOW_X_AXIS_TITLE_MINUTES);
 		putDefault(P_SHOW_X_AXIS_LINE_MINUTES, DEF_SHOW_X_AXIS_LINE_MINUTES);
 		putDefault(P_SHOW_X_AXIS_POSITION_MARKER_MINUTES, DEF_SHOW_X_AXIS_POSITION_MARKER_MINUTES);
-		//
+
 		putDefault(P_TITLE_X_AXIS_SCANS, DEF_TITLE_X_AXIS_SCANS);
 		putDefault(P_FORMAT_X_AXIS_SCANS, DEF_FORMAT_X_AXIS_SCANS);
 		putDefault(P_SHOW_X_AXIS_SCANS, DEF_SHOW_X_AXIS_SCANS);
@@ -1411,7 +1411,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_GRIDLINE_STYLE_X_AXIS_SCANS, DEF_GRIDLINE_STYLE_X_AXIS_SCANS);
 		putDefault(P_GRIDLINE_COLOR_X_AXIS_SCANS, DEF_GRIDLINE_COLOR_X_AXIS_SCANS);
 		putDefault(P_SHOW_X_AXIS_TITLE_SCANS, DEF_SHOW_X_AXIS_TITLE_SCANS);
-		//
+
 		putDefault(P_TITLE_Y_AXIS_INTENSITY, DEF_TITLE_Y_AXIS_INTENSITY);
 		putDefault(P_FORMAT_Y_AXIS_INTENSITY, DEF_FORMAT_Y_AXIS_INTENSITY);
 		putDefault(P_SHOW_Y_AXIS_INTENSITY, DEF_SHOW_Y_AXIS_INTENSITY);
@@ -1424,7 +1424,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_GRIDLINE_STYLE_Y_AXIS_INTENSITY, DEF_GRIDLINE_STYLE_Y_AXIS_INTENSITY);
 		putDefault(P_GRIDLINE_COLOR_Y_AXIS_INTENSITY, DEF_GRIDLINE_COLOR_Y_AXIS_INTENSITY);
 		putDefault(P_SHOW_Y_AXIS_TITLE_INTENSITY, DEF_SHOW_Y_AXIS_TITLE_INTENSITY);
-		//
+
 		putDefault(P_TITLE_Y_AXIS_RELATIVE_INTENSITY, DEF_TITLE_Y_AXIS_RELATIVE_INTENSITY);
 		putDefault(P_FORMAT_Y_AXIS_RELATIVE_INTENSITY, DEF_FORMAT_Y_AXIS_RELATIVE_INTENSITY);
 		putDefault(P_SHOW_Y_AXIS_RELATIVE_INTENSITY, DEF_SHOW_Y_AXIS_RELATIVE_INTENSITY);
@@ -1437,7 +1437,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_GRIDLINE_STYLE_Y_AXIS_RELATIVE_INTENSITY, DEF_GRIDLINE_STYLE_Y_AXIS_RELATIVE_INTENSITY);
 		putDefault(P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY, DEF_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY);
 		putDefault(P_SHOW_Y_AXIS_TITLE_RELATIVE_INTENSITY, DEF_SHOW_Y_AXIS_TITLE_RELATIVE_INTENSITY);
-		//
+
 		putDefault(P_CHROMATOGRAM_SELECTED_ACTION_ID, DEF_CHROMATOGRAM_SELECTED_ACTION_ID);
 		putDefault(P_CHROMATOGRAM_SAVE_AS_FOLDER, DEF_CHROMATOGRAM_SAVE_AS_FOLDER);
 		putDefault(P_CHROMATOGRAM_LOAD_PROCESS_METHOD, DEF_CHROMATOGRAM_LOAD_PROCESS_METHOD);
@@ -1482,14 +1482,14 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_LINE_STYLE_DISPLAY_OVERLAY, DEF_LINE_STYLE_DISPLAY_OVERLAY);
 		putDefault(P_SHOW_OPTIMIZED_CHROMATOGRAM_XWC, DEF_SHOW_OPTIMIZED_CHROMATOGRAM_XWC);
 		putDefault(P_MODULO_AUTO_MIRROR_CHROMATOGRAMS, DEF_MODULO_AUTO_MIRROR_CHROMATOGRAMS);
-		//
+
 		putDefault(P_CHROMATOGRAM_OVERLAY_NAMED_TRACES, DEF_CHROMATOGRAM_OVERLAY_NAMED_TRACES);
-		//
+
 		putDefault(P_OVERLAY_SHIFT_X, DEF_OVERLAY_SHIFT_X);
 		putDefault(P_INDEX_SHIFT_X, DEF_INDEX_SHIFT_X);
 		putDefault(P_OVERLAY_SHIFT_Y, DEF_OVERLAY_SHIFT_Y);
 		putDefault(P_INDEX_SHIFT_Y, DEF_INDEX_SHIFT_Y);
-		//
+
 		putDefault(P_OVERLAY_SHOW_AREA, DEF_OVERLAY_SHOW_AREA);
 		putDefault(P_OVERLAY_AUTOFOCUS_PROFILE_SETTINGS, DEF_OVERLAY_AUTOFOCUS_PROFILE_SETTINGS);
 		putDefault(P_OVERLAY_AUTOFOCUS_SHIFT_SETTINGS, DEF_OVERLAY_AUTOFOCUS_SHIFT_SETTINGS);

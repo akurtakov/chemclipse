@@ -60,6 +60,7 @@ import org.eclipse.swtchart.extensions.core.BaseChart;
 import org.eclipse.swtchart.extensions.core.ChartType;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.IPrimaryAxisSettings;
+import org.eclipse.swtchart.extensions.core.ISecondaryAxisSettings;
 import org.eclipse.swtchart.extensions.core.ISeriesData;
 import org.eclipse.swtchart.extensions.core.RangeRestriction;
 import org.eclipse.swtchart.extensions.core.ScrollableChart;
@@ -476,7 +477,7 @@ public class ScanChartUI extends ScrollableChart {
 		int height = preferenceStore.getInt(PreferenceSupplier.P_SCAN_LABEL_FONT_SIZE);
 		int style = preferenceStore.getInt(PreferenceSupplier.P_SCAN_LABEL_FONT_STYLE);
 		systemFont = Fonts.getCachedFont(getBaseChart().getDisplay(), name, height, style);
-		//
+
 		labelHighestIntensities = preferenceStore.getInt(PreferenceSupplier.P_SCAN_LABEL_HIGHEST_INTENSITIES);
 		addModuloLabels = preferenceStore.getBoolean(PreferenceSupplier.P_SCAN_LABEL_MODULO_INTENSITIES);
 		boolean enableCompress = preferenceStore.getBoolean(PreferenceSupplier.P_SCAN_CHART_ENABLE_COMPRESS);
@@ -546,6 +547,10 @@ public class ScanChartUI extends ScrollableChart {
 			default:
 				scanDataSupport.setDataTypeMSD(chartSettings);
 				break;
+		}
+
+		for(ISecondaryAxisSettings secondaryAxisSettings : chartSettings.getSecondaryAxisSettingsListY()) {
+			secondaryAxisSettings.setDecimalFormat(new DecimalFormat());
 		}
 
 		applySettings(chartSettings);

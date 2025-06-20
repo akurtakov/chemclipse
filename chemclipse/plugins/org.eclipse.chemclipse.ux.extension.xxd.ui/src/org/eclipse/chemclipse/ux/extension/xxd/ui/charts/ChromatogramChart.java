@@ -40,11 +40,11 @@ import org.eclipse.swtchart.extensions.linecharts.LineChart;
 public class ChromatogramChart extends LineChart implements IRangeSupport {
 
 	private final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-	//
+
 	private String titleSeconds = "";
 	private String titleMinutes = "";
 	private String titleRelativeIntensity = "";
-	//
+
 	private Range selectedRangeX = null;
 	private Range selectedRangeY = null;
 
@@ -134,7 +134,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		adjustAxisSeconds();
 		adjustAxisMinutes();
 		adjustAxisRelativeIntensity();
-		//
+
 		if(applySettings) {
 			IChartSettings chartSettings = getChartSettings();
 			applySettings(chartSettings);
@@ -164,7 +164,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		titleSeconds = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_SECONDS);
 		titleMinutes = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_MINUTES);
 		titleRelativeIntensity = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
-		//
+
 		IChartSettings chartSettings = getChartSettings();
 		chartSettings.setTitle("");
 		chartSettings.setOrientation(SWT.HORIZONTAL);
@@ -174,7 +174,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		chartSettings.setBackground(null);
 		chartSettings.setBackgroundChart(null);
 		chartSettings.setBackgroundPlotArea(null);
-		//
+
 		RangeRestriction rangeRestriction = chartSettings.getRangeRestriction();
 		rangeRestriction.setZeroX(true);
 		rangeRestriction.setZeroY(true);
@@ -182,9 +182,9 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		rangeRestriction.setReferenceZoomZeroY(true);
 		rangeRestriction.setRestrictZoomX(false);
 		rangeRestriction.setRestrictZoomY(true);
-		//
+
 		modifyAxes(true);
-		//
+
 		setData("org.eclipse.e4.ui.css.CssClassName", "ChromatogramChart");
 	}
 
@@ -193,17 +193,17 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		IChartSettings chartSettings = getChartSettings();
 		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
 		primaryAxisSettingsX.setTitle(preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_MILLISECONDS));
-		//
+
 		String positionNode = PreferenceSupplier.P_POSITION_X_AXIS_MILLISECONDS;
 		String patternNode = PreferenceSupplier.P_FORMAT_X_AXIS_MILLISECONDS;
 		String colorNode = PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_COLOR_X_AXIS_MILLISECONDS_DARKTHEME : PreferenceSupplier.P_COLOR_X_AXIS_MILLISECONDS;
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_X_AXIS_MILLISECONDS;
 		String gridColorNode = PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_MILLISECONDS;
-		//
+
 		ChartSupport.setAxisSettingsExtended(primaryAxisSettingsX, positionNode, patternNode, colorNode, gridLineStyleNode, gridColorNode);
 		primaryAxisSettingsX.setVisible(ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_MILLISECONDS));
 		primaryAxisSettingsX.setTitleVisible(ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_TITLE_MILLISECONDS));
-		//
+
 		String name = preferenceStore.getString(PreferenceSupplier.P_FONT_NAME_X_AXIS_MILLISECONDS);
 		int height = preferenceStore.getInt(PreferenceSupplier.P_FONT_SIZE_X_AXIS_MILLISECONDS);
 		int style = preferenceStore.getInt(PreferenceSupplier.P_FONT_STYLE_X_AXIS_MILLISECONDS);
@@ -215,17 +215,17 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		IChartSettings chartSettings = getChartSettings();
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle(preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_INTENSITY));
-		//
+
 		String positionNode = PreferenceSupplier.P_POSITION_Y_AXIS_INTENSITY;
 		String patternNode = PreferenceSupplier.P_FORMAT_Y_AXIS_INTENSITY;
 		String colorNode = PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_COLOR_Y_AXIS_INTENSITY_DARKTHEME : PreferenceSupplier.P_COLOR_Y_AXIS_INTENSITY;
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_Y_AXIS_INTENSITY;
 		String gridColorNode = PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_INTENSITY;
-		//
+
 		ChartSupport.setAxisSettingsExtended(primaryAxisSettingsY, positionNode, patternNode, colorNode, gridLineStyleNode, gridColorNode);
 		primaryAxisSettingsY.setVisible(ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_INTENSITY));
 		primaryAxisSettingsY.setTitleVisible(ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_TITLE_INTENSITY));
-		//
+
 		String name = preferenceStore.getString(PreferenceSupplier.P_FONT_NAME_Y_AXIS_INTENSITY);
 		int height = preferenceStore.getInt(PreferenceSupplier.P_FONT_SIZE_Y_AXIS_INTENSITY);
 		int style = preferenceStore.getInt(PreferenceSupplier.P_FONT_STYLE_Y_AXIS_INTENSITY);
@@ -236,7 +236,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 
 		IChartSettings chartSettings = getChartSettings();
 		ISecondaryAxisSettings axisSettings = ChartSupport.getSecondaryAxisSettingsY(titleRelativeIntensity, chartSettings);
-		//
+
 		String positionNode = PreferenceSupplier.P_POSITION_Y_AXIS_RELATIVE_INTENSITY;
 		String patternNode = PreferenceSupplier.P_FORMAT_Y_AXIS_RELATIVE_INTENSITY;
 		String colorNode = PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_COLOR_Y_AXIS_RELATIVE_INTENSITY_DARKTHEME : PreferenceSupplier.P_COLOR_Y_AXIS_RELATIVE_INTENSITY;
@@ -244,13 +244,13 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		String gridColorNode = PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY;
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_RELATIVE_INTENSITY);
 		boolean isShowAxisTitle = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_TITLE_RELATIVE_INTENSITY);
-		//
+
 		String title = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
 		String name = preferenceStore.getString(PreferenceSupplier.P_FONT_NAME_Y_AXIS_RELATIVE_INTENSITY);
 		int height = preferenceStore.getInt(PreferenceSupplier.P_FONT_SIZE_Y_AXIS_RELATIVE_INTENSITY);
 		int style = preferenceStore.getInt(PreferenceSupplier.P_FONT_STYLE_Y_AXIS_RELATIVE_INTENSITY);
 		Font titleFont = Fonts.getCachedFont(getBaseChart().getDisplay(), name, height, style);
-		//
+
 		if(isShowAxis) {
 			if(axisSettings == null) {
 				ISecondaryAxisSettings secondaryAxisSettingsY = new SecondaryAxisSettings(title, new PercentageConverter(SWT.VERTICAL, true));
@@ -283,7 +283,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 
 		IChartSettings chartSettings = getChartSettings();
 		ISecondaryAxisSettings axisSettings = getAxisSettingsSeconds(chartSettings);
-		//
+
 		String positionNode = PreferenceSupplier.P_POSITION_X_AXIS_SECONDS;
 		String patternNode = PreferenceSupplier.P_FORMAT_X_AXIS_SECONDS;
 		String colorNode = PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_COLOR_X_AXIS_SECONDS_DARKTHEME : PreferenceSupplier.P_COLOR_X_AXIS_SECONDS;
@@ -291,13 +291,13 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		String gridColorNode = PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_SECONDS;
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_SECONDS);
 		boolean isShowAxisTitle = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_TITLE_SECONDS);
-		//
+
 		String title = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_SECONDS);
 		String name = preferenceStore.getString(PreferenceSupplier.P_FONT_NAME_X_AXIS_SECONDS);
 		int height = preferenceStore.getInt(PreferenceSupplier.P_FONT_SIZE_X_AXIS_SECONDS);
 		int style = preferenceStore.getInt(PreferenceSupplier.P_FONT_STYLE_X_AXIS_SECONDS);
 		Font titleFont = Fonts.getCachedFont(getBaseChart().getDisplay(), name, height, style);
-		//
+
 		if(isShowAxis) {
 			if(axisSettings == null) {
 				ISecondaryAxisSettings secondaryAxisSettingsX = new SecondaryAxisSettings(title, new MillisecondsToSecondsConverter());
@@ -330,7 +330,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 
 		IChartSettings chartSettings = getChartSettings();
 		ISecondaryAxisSettings axisSettings = getAxisSettingsMinutes(chartSettings);
-		//
+
 		String positionNode = PreferenceSupplier.P_POSITION_X_AXIS_MINUTES;
 		String patternNode = PreferenceSupplier.P_FORMAT_X_AXIS_MINUTES;
 		String colorNode = PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_COLOR_X_AXIS_MINUTES_DARKTHEME : PreferenceSupplier.P_COLOR_X_AXIS_MINUTES;
@@ -338,7 +338,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		String gridColorNode = PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_MINUTES;
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_MINUTES);
 		boolean isShowAxisTitle = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_TITLE_MINUTES);
-		//
+
 		String title = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_MINUTES);
 		String name = preferenceStore.getString(PreferenceSupplier.P_FONT_NAME_X_AXIS_MINUTES);
 		int height = preferenceStore.getInt(PreferenceSupplier.P_FONT_SIZE_X_AXIS_MINUTES);
@@ -346,7 +346,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		Font titleFont = Fonts.getCachedFont(getBaseChart().getDisplay(), name, height, style);
 		boolean drawAxisLine = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_LINE_MINUTES);
 		boolean drawPositionMarker = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_POSITION_MARKER_MINUTES);
-		//
+
 		if(isShowAxis) {
 			if(axisSettings == null) {
 				ISecondaryAxisSettings secondaryAxisSettingsX = new SecondaryAxisSettings(title, new MillisecondsToMinuteConverter());
