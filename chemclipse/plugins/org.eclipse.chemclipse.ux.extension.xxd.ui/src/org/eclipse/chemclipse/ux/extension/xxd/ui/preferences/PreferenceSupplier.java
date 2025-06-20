@@ -658,7 +658,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String P_TITLE_X_AXIS_RETENTION_INDEX = "titleXAxisRetentionIndex";
 	public static final String DEF_TITLE_X_AXIS_RETENTION_INDEX = "Retention Index";
 	public static final String P_FORMAT_X_AXIS_RETENTION_INDEX = "formatXAxisRetentionIndex";
-	public static final String DEF_FORMAT_X_AXIS_RETENTION_INDEX = "0.0";
+	public static final String DEF_FORMAT_X_AXIS_RETENTION_INDEX = "0.#";
 	public static final String P_SHOW_X_AXIS_RETENTION_INDEX = "showXAxisRetentionIndex";
 	public static final boolean DEF_SHOW_X_AXIS_RETENTION_INDEX = false;
 	public static final String P_POSITION_X_AXIS_RETENTION_INDEX = "positionXAxisRetentionIndex";
@@ -682,7 +682,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String P_TITLE_X_AXIS_SECONDS = "titleXAxisSeconds";
 	public static final String DEF_TITLE_X_AXIS_SECONDS = "Time [s]";
 	public static final String P_FORMAT_X_AXIS_SECONDS = "formatXAxisSeconds";
-	public static final String DEF_FORMAT_X_AXIS_SECONDS = "0.00#";
+	public static final String DEF_FORMAT_X_AXIS_SECONDS = "0.###";
 	public static final String P_SHOW_X_AXIS_SECONDS = "showXAxisSeconds";
 	public static final boolean DEF_SHOW_X_AXIS_SECONDS = false;
 	public static final String P_POSITION_X_AXIS_SECONDS = "positionXAxisSeconds";
@@ -706,7 +706,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String P_TITLE_X_AXIS_MINUTES = "titleXAxisMinutes";
 	public static final String DEF_TITLE_X_AXIS_MINUTES = "Time [min]";
 	public static final String P_FORMAT_X_AXIS_MINUTES = "formatXAxisMinutes";
-	public static final String DEF_FORMAT_X_AXIS_MINUTES = "0.00#";
+	public static final String DEF_FORMAT_X_AXIS_MINUTES = "0.###";
 	public static final String P_SHOW_X_AXIS_MINUTES = "showXAxisMinutes";
 	public static final boolean DEF_SHOW_X_AXIS_MINUTES = true;
 	public static final String P_POSITION_X_AXIS_MINUTES = "positionXAxisMinutes";
@@ -782,7 +782,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String P_TITLE_Y_AXIS_RELATIVE_INTENSITY = "titleYAxisRelativeIntensity";
 	public static final String DEF_TITLE_Y_AXIS_RELATIVE_INTENSITY = "Intensity [%]";
 	public static final String P_FORMAT_Y_AXIS_RELATIVE_INTENSITY = "formatYAxisRelativeIntensity";
-	public static final String DEF_FORMAT_Y_AXIS_RELATIVE_INTENSITY = "0.00#";
+	public static final String DEF_FORMAT_Y_AXIS_RELATIVE_INTENSITY = "0.###";
 	public static final String P_SHOW_Y_AXIS_RELATIVE_INTENSITY = "showYAxisRelativeIntensity";
 	public static final boolean DEF_SHOW_Y_AXIS_RELATIVE_INTENSITY = true;
 	public static final String P_POSITION_Y_AXIS_RELATIVE_INTENSITY = "positionYAxisRelativeIntensity";
