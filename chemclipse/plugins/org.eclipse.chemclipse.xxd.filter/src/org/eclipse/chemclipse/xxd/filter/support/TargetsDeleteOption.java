@@ -19,7 +19,8 @@ public enum TargetsDeleteOption implements ILabel {
 	ALL_TARGETS("All Targets"), //
 	UNVERIFIED_TARGETS("Unverified Targets"), //
 	EMPTY_SMILES("Targets without SMILES"), //
-	PROPERTY_IDENTIFIER("By Property (Identifier)");
+	PROPERTY_IDENTIFIER("By Property (Identifier)"), //
+	PROPERTY_LEVEL("By Property (Level)"); //
 
 	private String label = "";
 
