@@ -68,6 +68,7 @@ public class ScanLabelProvider extends ColumnLabelProvider implements ITableLabe
 	private DataType dataType;
 	//
 	private DecimalFormat decimalFormatNominalMSD;
+	private DecimalFormat decimalFormatPrecursorMSD;
 	private DecimalFormat decimalFormatTandemMSD;
 	private DecimalFormat decimalFormatHighResMSD;
 	private DecimalFormat decimalFormatCSD;
@@ -84,7 +85,8 @@ public class ScanLabelProvider extends ColumnLabelProvider implements ITableLabe
 
 		this.dataType = dataType;
 		decimalFormatNominalMSD = ValueFormat.getDecimalFormatEnglish("0.0");
-		decimalFormatTandemMSD = ValueFormat.getDecimalFormatEnglish("0.0");
+		decimalFormatPrecursorMSD = ValueFormat.getDecimalFormatEnglish("0.######"); // Transition 128 > 78.4 but can also be high-res
+		decimalFormatTandemMSD = ValueFormat.getDecimalFormatEnglish("0.0#####"); // m/z: normal 28.3 or with but can also be high-res
 		decimalFormatHighResMSD = ValueFormat.getDecimalFormatEnglish("0.000###");
 		decimalFormatCSD = ValueFormat.getDecimalFormatEnglish("0.0000");
 		decimalFormatWSD = ValueFormat.getDecimalFormatEnglish("0.0");
@@ -168,9 +170,14 @@ public class ScanLabelProvider extends ColumnLabelProvider implements ITableLabe
 		if(element instanceof IIon ion) {
 			IIonTransition ionTransition = ion.getIonTransition();
 			switch(columnIndex) {
-				case 0: // m/z (normal 28.3 or with Transition 128 > 78.4)
+				case 0:
 					String mz = decimalFormatTandemMSD.format(ion.getIon());
-					text = (ionTransition == null) ? mz : Integer.toString((int)ionTransition.getQ1StartIon()) + " > " + mz;
+					if(ionTransition != null) {
+						String q1 = decimalFormatPrecursorMSD.format(ionTransition.getQ1StartIon());
+						text = q1 + " > " + mz;
+					} else {
+						text = mz;
+					}
 					break;
 				case 1:
 					text = decimalFormatIntensity.format(ion.getAbundance());
