@@ -30,30 +30,32 @@ public class QueryEntity {
 
 	public static String fromCAS(String cas) {
 
-		String select = Wikidata.PROP + Wikidata.STATEMENT + Wikidata.WIKIBASE + Wikidata.BIGDATA + Wikidata.WDT + //
-				"SELECT DISTINCT ?item WHERE {\n" //
-				+ "  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }\n" //
-				+ "  {\n" //
-				+ "    SELECT DISTINCT ?item WHERE {\n" //
-				+ "      ?item p:P231 ?cas.\n" //
-				+ "      ?cas (ps:P231) \"" + cas + "\".\n" //
-				+ "    }\n" //
-				+ "  }\n" //
-				+ "}"; //
+		String select = Wikidata.PROP + Wikidata.STATEMENT + Wikidata.WIKIBASE + Wikidata.BIGDATA + Wikidata.WDT + """
+				SELECT DISTINCT ?item WHERE {
+				  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+				  {
+				    SELECT DISTINCT ?item WHERE {
+				      ?item p:P231 ?cas.
+				      ?cas (ps:P231) "%s".
+				    }
+				  }
+				}
+				""".formatted(cas);
 		return query(select);
 	}
 
 	// TODO: case insensitive query that is not super slow
 	public static String fromName(String name) {
 
-		String select = Wikidata.PROP + Wikidata.BIGDATA + Wikidata.SCHEMA + Wikidata.WIKIBASE + Wikidata.WD + Wikidata.WDT + //
-				"SELECT distinct ?item WHERE { \n" + //
-				"  ?item ?label \"" + name.toLowerCase() + "\"@en . \n" + //
-				"  ?item wdt:P31 wd:Q113145171 . \n" + //
-				"  ?article schema:about ?item . \n" + //
-				"  ?article schema:inLanguage \"en\" . \n" + //
-				"  SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }\n" + //
-				"}";
+		String select = Wikidata.PROP + Wikidata.BIGDATA + Wikidata.SCHEMA + Wikidata.WIKIBASE + Wikidata.WD + Wikidata.WDT + """
+				SELECT distinct ?item WHERE {
+				  ?item ?label "%s"@en .
+				  ?item wdt:P31 wd:Q113145171 .
+				  ?article schema:about ?item .
+				  ?article schema:inLanguage "en" .
+				  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+				}
+				""".formatted(name.toLowerCase());
 		return query(select);
 	}
 
