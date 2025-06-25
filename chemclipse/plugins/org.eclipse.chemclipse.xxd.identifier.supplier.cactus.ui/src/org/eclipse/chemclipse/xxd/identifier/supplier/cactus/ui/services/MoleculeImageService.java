@@ -81,7 +81,6 @@ public class MoleculeImageService implements IMoleculeImageService {
 			String linewidth = "&linewidth=" + PreferenceSupplier.getLineWidth();
 			String symbolFontSize = "&symbolfontsize=" + PreferenceSupplier.getSymbolFontSize();
 			uri = uri + "/image" + size + linewidth + symbolFontSize;
-			System.out.println(uri);
 			ImageData data = new ImageData(new URI(uri).toURL().openStream());
 			data.type = SWT.IMAGE_GIF;
 			return new Image(display, data);
