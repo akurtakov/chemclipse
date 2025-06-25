@@ -12,15 +12,21 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.identifier.supplier.wikidata.query;
 
-import org.apache.jena.query.Query;
-import org.apache.jena.query.QueryExecution;
-import org.apache.jena.query.QueryExecutionFactory;
-import org.apache.jena.query.QueryFactory;
-import org.apache.jena.query.QuerySolution;
-import org.apache.jena.query.ResultSet;
-import org.apache.jena.rdf.model.RDFNode;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+import org.eclipse.chemclipse.logging.core.Logger;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class QueryEntity {
+
+	private static final Logger logger = Logger.getLogger(QueryEntity.class);
 
 	public static String fromCAS(String cas) {
 
@@ -53,15 +59,30 @@ public class QueryEntity {
 
 	private static String query(String queryString) {
 
-		Query query = QueryFactory.create(queryString);
-		try (QueryExecution qexec = QueryExecutionFactory.sparqlService(Wikidata.ENDPOINT, query)) {
-			ResultSet results = qexec.execSelect();
-			while(results.hasNext()) {
-				QuerySolution solution = results.next();
-				RDFNode entity = solution.get("item");
-				return entity.toString();
+		String url;
+		try {
+			url = Wikidata.ENDPOINT + "?query=" + java.net.URLEncoder.encode(queryString, "UTF-8");
+			HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).header("Accept", "application/json").build();
+			HttpClient client = HttpClient.newHttpClient();
+			HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+			ObjectMapper mapper = new ObjectMapper();
+			JsonNode root = mapper.readTree(response.body());
+			JsonNode bindings = root.path("results").path("bindings");
+			for(JsonNode binding : bindings) {
+				JsonNode picNode = binding.path("item").path("value");
+				if(!picNode.isMissingNode()) {
+					return picNode.asText();
+				}
 			}
+		} catch(UnsupportedEncodingException e) {
+			logger.error(e);
+		} catch(IOException e) {
+			logger.error(e);
+		} catch(InterruptedException e) {
+			logger.error(e);
 		}
+
 		return null;
 	}
 }

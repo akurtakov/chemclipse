@@ -12,7 +12,6 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.identifier.supplier.wikidata;
 
-import org.apache.jena.query.ARQ;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
@@ -33,7 +32,6 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext bundleContext) throws Exception {
 
 		Activator.context = bundleContext;
-		ARQ.init();
 	}
 
 	/*

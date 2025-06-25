@@ -15,7 +15,7 @@ package org.eclipse.chemclipse.xxd.identifier.supplier.wikidata.query;
 public class Wikidata {
 
 	public static final String ENDPOINT = "https://query.wikidata.org/sparql";
-	//
+
 	public static final String PROP = "PREFIX p: <http://www.wikidata.org/prop/>\n";
 	public static final String STATEMENT = "PREFIX ps: <http://www.wikidata.org/prop/statement/>\n";
 	public static final String WIKIBASE = "PREFIX wikibase: <http://wikiba.se/ontology#>\n";
