@@ -44,8 +44,4 @@
          id="org.eclipse.chemclipse.feature.branding"
          version="0.0.0"/>
 
-   <plugin
-         id="org.eclipse.chemclipse.swt.win32"
-         version="0.0.0"/>
-
 </feature>

@@ -69,10 +69,6 @@
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.chemclipse.rcp.connector.supplier.microsoft.office.feature"
-         version="0.0.0"/>
-
-   <includes
          id="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.feature"
          version="0.0.0"/>
 
