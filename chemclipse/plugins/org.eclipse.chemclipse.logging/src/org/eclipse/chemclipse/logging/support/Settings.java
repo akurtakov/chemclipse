@@ -16,8 +16,8 @@ package org.eclipse.chemclipse.logging.support;
 import java.io.File;
 import java.util.Properties;
 
-import org.eclipse.chemclipse.logging.Activator;
 import org.eclipse.chemclipse.logging.core.Logger;
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.Version;
 
 public class Settings {
@@ -123,7 +123,7 @@ public class Settings {
 		} else {
 			applicationVersion = DEFAULT_APPLICATION_VERSION;
 			try {
-				Version bundleVersion = Activator.getContext().getBundle().getVersion();
+				Version bundleVersion = FrameworkUtil.getBundle(Settings.class).getVersion();
 				StringBuilder builder = new StringBuilder();
 				builder.append(bundleVersion.getMajor());
 				builder.append(".");
