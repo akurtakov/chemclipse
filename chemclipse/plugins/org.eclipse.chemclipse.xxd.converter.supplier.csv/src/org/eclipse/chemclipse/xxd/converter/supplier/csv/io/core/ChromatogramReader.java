@@ -83,7 +83,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader implements
 			String zeroMarker = PreferenceSupplier.getImportZeroMarker();
 			zeroMarker = zeroMarker.startsWith(ZERO_VALUE) ? zeroMarker : ZERO_VALUE;
 			char delimiter = PreferenceSupplier.getImportDelimiter().getCharacter();
-			CSVParser csvParser = new CSVParser(fileReader, CSVFormat.newFormat(delimiter).withHeader());
+			CSVParser csvParser = CSVParser.parse(fileReader, CSVFormat.newFormat(delimiter).builder().setHeader().get());
 			chromatogram = new VendorChromatogram();
 			if(!overview) {
 				/*
