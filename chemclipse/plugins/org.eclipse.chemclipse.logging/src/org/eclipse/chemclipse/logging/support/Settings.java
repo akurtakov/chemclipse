@@ -16,8 +16,8 @@ package org.eclipse.chemclipse.logging.support;
 import java.io.File;
 import java.util.Properties;
 
-import org.eclipse.chemclipse.logging.Activator;
 import org.eclipse.chemclipse.logging.core.Logger;
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.Version;
 
 public class Settings {
@@ -30,16 +30,16 @@ public class Settings {
 	 */
 	public static final String D_APPLICATION_NAME = "application.name";
 	public static final String D_APPLICATION_VERSION = "application.version";
-	//
+
 	private static final String DEFAULT_APPLICATION_NAME = "ChemClipse";
 	private static final String DEFAULT_APPLICATION_VERSION = "0.9.x";
-	//
+
 	private static final String D_OSGI_INSTANCE_AREA = "osgi.instance.area";
 	private static final String D_OSGI_USER_AREA = "osgi.user.area";
-	//
+
 	private static File fileSettingsFolder = null; // will be initialized
 	private static File fileWorkspaceFolder = null; // will be initialized
-	//
+
 	private static final Logger logger = Logger.getLogger(Settings.class);
 
 	/**
@@ -59,7 +59,7 @@ public class Settings {
 		if(isRunInitialization()) {
 			initialize();
 		}
-		//
+
 		return fileSettingsFolder;
 	}
 
@@ -68,7 +68,7 @@ public class Settings {
 		if(isRunInitialization()) {
 			initialize();
 		}
-		//
+
 		return fileWorkspaceFolder;
 	}
 
@@ -78,7 +78,7 @@ public class Settings {
 	 */
 	public static final File getSystemMethodDirectory() {
 
-		File folder = new File(Settings.getSystemDirectory(), "methods");
+		File folder = new File(getSystemDirectory(), "methods");
 		if(!folder.exists()) {
 			folder.mkdirs();
 		}
@@ -91,7 +91,7 @@ public class Settings {
 	 */
 	public static final File getSystemConfigDirectory() {
 
-		File folder = new File(Settings.getSystemDirectory(), "configurations");
+		File folder = new File(getSystemDirectory(), "configurations");
 		if(!folder.exists()) {
 			folder.mkdirs();
 		}
@@ -100,7 +100,7 @@ public class Settings {
 
 	public static final File getSystemPluginDirectory() {
 
-		File folder = new File(Settings.getSystemDirectory(), "plugins");
+		File folder = new File(getSystemDirectory(), "plugins");
 		if(!folder.exists()) {
 			folder.mkdirs();
 		}
@@ -115,7 +115,7 @@ public class Settings {
 	public static final String getVersionIdentifier() {
 
 		String applicationVersion;
-		//
+
 		Properties properties = System.getProperties();
 		Object version = properties.get(D_APPLICATION_VERSION);
 		if(version != null && version instanceof String setVersion) {
@@ -123,7 +123,7 @@ public class Settings {
 		} else {
 			applicationVersion = DEFAULT_APPLICATION_VERSION;
 			try {
-				Version bundleVersion = Activator.getContext().getBundle().getVersion();
+				Version bundleVersion = FrameworkUtil.getBundle(Settings.class).getVersion();
 				StringBuilder builder = new StringBuilder();
 				builder.append(bundleVersion.getMajor());
 				builder.append(".");
