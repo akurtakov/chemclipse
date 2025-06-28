@@ -77,7 +77,7 @@ public class ChromatogramReader_1_MSD_0903_ITest extends ChromatogramReaderMSDTe
 
 	public void testReader_11() {
 
-		assertEquals(8351, chromatogram.getScanInterval());
+		assertEquals(710, chromatogram.getScanInterval());
 	}
 
 	public void testChromatogramReader_12() {

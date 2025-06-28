@@ -66,7 +66,7 @@ public class ChromatogramReader_3_FID_1300_ITest extends ChromatogramReaderFIDTe
 
 	public void testReader_9() {
 
-		assertEquals(1554, chromatogram.getScanInterval());
+		assertEquals(50, chromatogram.getScanInterval());
 	}
 
 	public void testReader_10() {

@@ -41,6 +41,7 @@ import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.IScan;
+import org.eclipse.chemclipse.model.support.ChromatogramSupport;
 import org.eclipse.chemclipse.msd.converter.supplier.ocx.io.ChromatogramReaderMSD;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.internal.support.ReaderHelper;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.preferences.PreferenceSupplier;
@@ -188,14 +189,7 @@ public class ChromatogramReaderCSD extends AbstractChromatogramCSDReader impleme
 				chromatogramFID.setConverterId(Format.CONVERTER_ID_CHROMATOGRAM);
 				File fileConverted = new File(file.getAbsolutePath().replace(".ocb", "-fromMSD.ocb"));
 				chromatogramFID.setFile(fileConverted);
-				// Delay
-				int startRetentionTime = chromatogramFID.getStartRetentionTime();
-				int scanDelay = startRetentionTime;
-				chromatogramFID.setScanDelay(scanDelay);
-				// Interval
-				int endRetentionTime = chromatogramFID.getStopRetentionTime();
-				int scanInterval = endRetentionTime / chromatogramFID.getNumberOfScans();
-				chromatogramFID.setScanInterval(scanInterval);
+				ChromatogramSupport.calculateScanIntervalAndDelay(chromatogramFID);
 			}
 		}
 		//
