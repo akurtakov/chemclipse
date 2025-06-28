@@ -40,7 +40,7 @@ public class ChromatogramSupport_1_Test extends TestCase {
 	public void test1() {
 
 		ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
-		//
+
 		assertEquals(0, chromatogram.getScanDelay());
 		assertEquals(100, chromatogram.getScanInterval());
 	}
@@ -48,9 +48,8 @@ public class ChromatogramSupport_1_Test extends TestCase {
 	public void test2() {
 
 		chromatogram.addScan(getScan(0));
-		//
+
 		ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
-		//
 		assertEquals(0, chromatogram.getScanDelay());
 		assertEquals(100, chromatogram.getScanInterval());
 	}
@@ -59,9 +58,8 @@ public class ChromatogramSupport_1_Test extends TestCase {
 
 		chromatogram.addScan(getScan(0));
 		chromatogram.addScan(getScan(500));
-		//
+
 		ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
-		//
 		assertEquals(0, chromatogram.getScanDelay());
 		assertEquals(500, chromatogram.getScanInterval());
 	}
@@ -71,9 +69,8 @@ public class ChromatogramSupport_1_Test extends TestCase {
 		chromatogram.addScan(getScan(0));
 		chromatogram.addScan(getScan(500));
 		chromatogram.addScan(getScan(1000));
-		//
+
 		ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
-		//
 		assertEquals(0, chromatogram.getScanDelay());
 		assertEquals(500, chromatogram.getScanInterval());
 	}
@@ -83,9 +80,8 @@ public class ChromatogramSupport_1_Test extends TestCase {
 		chromatogram.addScan(getScan(500));
 		chromatogram.addScan(getScan(1000));
 		chromatogram.addScan(getScan(1500));
-		//
+
 		ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
-		//
 		assertEquals(500, chromatogram.getScanDelay());
 		assertEquals(500, chromatogram.getScanInterval());
 	}
@@ -96,9 +92,8 @@ public class ChromatogramSupport_1_Test extends TestCase {
 		chromatogram.addScan(getScan(1000));
 		chromatogram.addScan(getScan(1250));
 		chromatogram.addScan(getScan(1500));
-		//
+
 		ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
-		//
 		assertEquals(750, chromatogram.getScanDelay());
 		assertEquals(250, chromatogram.getScanInterval());
 	}
@@ -110,7 +105,7 @@ public class ChromatogramSupport_1_Test extends TestCase {
 		 */
 		IScan scan = new Scan(2500);
 		scan.setRetentionTime(retentionTime);
-		//
+
 		return scan;
 	}
 }

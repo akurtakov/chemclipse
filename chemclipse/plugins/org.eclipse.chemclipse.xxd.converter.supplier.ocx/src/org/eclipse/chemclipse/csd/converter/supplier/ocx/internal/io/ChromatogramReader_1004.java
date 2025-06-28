@@ -39,6 +39,7 @@ import org.eclipse.chemclipse.model.core.PeakType;
 import org.eclipse.chemclipse.model.exceptions.PeakException;
 import org.eclipse.chemclipse.model.implementation.IntegrationEntry;
 import org.eclipse.chemclipse.model.implementation.PeakIntensityValues;
+import org.eclipse.chemclipse.model.support.ChromatogramSupport;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.internal.support.BaselineElement;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.internal.support.IBaselineElement;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.settings.Format;
@@ -255,14 +256,7 @@ public class ChromatogramReader_1004 extends AbstractChromatogramReader implemen
 
 		chromatogram.setConverterId(Format.CONVERTER_ID_CHROMATOGRAM);
 		chromatogram.setFile(file);
-		// Delay
-		int startRetentionTime = chromatogram.getStartRetentionTime();
-		int scanDelay = startRetentionTime;
-		chromatogram.setScanDelay(scanDelay);
-		// Interval
-		int endRetentionTime = chromatogram.getStopRetentionTime();
-		int scanInterval = endRetentionTime / chromatogram.getNumberOfScans();
-		chromatogram.setScanInterval(scanInterval);
+		ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
 	}
 
 	private List<IIntegrationEntry> readIntegrationEntries(DataInputStream dataInputStream) throws IOException {

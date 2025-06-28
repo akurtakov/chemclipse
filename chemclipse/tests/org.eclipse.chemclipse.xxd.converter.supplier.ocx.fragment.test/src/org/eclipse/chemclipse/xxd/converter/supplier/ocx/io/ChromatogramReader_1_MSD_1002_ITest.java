@@ -13,8 +13,8 @@
 package org.eclipse.chemclipse.xxd.converter.supplier.ocx.io;
 
 import org.eclipse.chemclipse.msd.model.core.IIonTransitionSettings;
-import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.TestPathHelper;
 
 public class ChromatogramReader_1_MSD_1002_ITest extends ChromatogramReaderMSDTestCase {
@@ -78,7 +78,7 @@ public class ChromatogramReader_1_MSD_1002_ITest extends ChromatogramReaderMSDTe
 
 	public void testReader_11() {
 
-		assertEquals(8351, chromatogram.getScanInterval());
+		assertEquals(710, chromatogram.getScanInterval());
 	}
 
 	public void testChromatogramReader_12() {

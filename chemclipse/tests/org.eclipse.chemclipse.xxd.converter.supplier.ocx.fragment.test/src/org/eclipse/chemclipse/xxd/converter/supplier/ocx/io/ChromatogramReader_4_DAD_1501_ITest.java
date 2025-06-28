@@ -70,7 +70,7 @@ public class ChromatogramReader_4_DAD_1501_ITest extends ChromatogramReaderWSDTe
 
 	public void testReader_8() {
 
-		assertEquals(753, chromatogram.getScanInterval());
+		assertEquals(400, chromatogram.getScanInterval());
 	}
 
 	public void testReader_9() {

@@ -23,7 +23,7 @@ public class AllTests {
 
 		TestAssembler testAssembler = new TestAssembler(Activator.getContext().getBundle().getBundleContext().getBundles());
 		TestSuite suite = new TestSuite("Run all tests.");
-		String bundleAndPackageName = "org.eclipse.chemclipse.xxd.converter.supplier.chemclipse";
+		String bundleAndPackageName = "org.eclipse.chemclipse.xxd.converter.supplier.ocx";
 		testAssembler.assembleTests(suite, bundleAndPackageName, bundleAndPackageName, "*_Test"); // Unit
 		testAssembler.assembleTests(suite, bundleAndPackageName, bundleAndPackageName, "*_ITest"); // Integration
 		return suite;

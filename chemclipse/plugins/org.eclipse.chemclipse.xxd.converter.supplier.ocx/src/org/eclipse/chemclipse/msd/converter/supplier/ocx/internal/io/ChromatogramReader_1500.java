@@ -63,6 +63,7 @@ import org.eclipse.chemclipse.model.quantitation.IInternalStandard;
 import org.eclipse.chemclipse.model.quantitation.IQuantitationEntry;
 import org.eclipse.chemclipse.model.quantitation.InternalStandard;
 import org.eclipse.chemclipse.model.quantitation.QuantitationFlag;
+import org.eclipse.chemclipse.model.support.ChromatogramSupport;
 import org.eclipse.chemclipse.model.targets.ITargetDisplaySettings;
 import org.eclipse.chemclipse.model.targets.LibraryField;
 import org.eclipse.chemclipse.msd.converter.supplier.ocx.io.ChromatogramReaderMSD;
@@ -275,14 +276,7 @@ public class ChromatogramReader_1500 extends AbstractChromatogramReader implemen
 
 		chromatogram.setConverterId(Format.CONVERTER_ID_CHROMATOGRAM);
 		chromatogram.setFile(file);
-		// Delay
-		int startRetentionTime = chromatogram.getStartRetentionTime();
-		int scanDelay = startRetentionTime;
-		chromatogram.setScanDelay(scanDelay);
-		// Interval
-		int endRetentionTime = chromatogram.getStopRetentionTime();
-		int scanInterval = endRetentionTime / chromatogram.getNumberOfScans();
-		chromatogram.setScanInterval(scanInterval);
+		ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
 	}
 
 	private void readScanProxies(ZipFile zipFile, String directoryPrefix, File file, IChromatogramMSD chromatogram) throws IOException {
