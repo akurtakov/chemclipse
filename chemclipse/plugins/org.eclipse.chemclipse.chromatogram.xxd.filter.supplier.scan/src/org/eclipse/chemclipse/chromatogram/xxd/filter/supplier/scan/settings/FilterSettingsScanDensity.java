@@ -24,6 +24,9 @@ public class FilterSettingsScanDensity extends AbstractChromatogramFilterSetting
 	@JsonPropertyDescription(value = "Define the target scan density of the chromatogram.")
 	@IntSettingsProperty(minValue = 1, maxValue = 1000)
 	private int scansPerSecond = 2;
+	@JsonProperty(value = "Duplicated Scan (Merge Traces)", defaultValue = "true")
+	@JsonPropertyDescription(value = "The traces of both start and stop scan shall be merged.")
+	private boolean mergeScans = true;
 	@JsonProperty(value = "Process Referenced Chromatograms", defaultValue = "true")
 	@JsonPropertyDescription("Referenced chromatgrams will be also processed.")
 	private boolean processReferencedChromatograms = true;
@@ -36,6 +39,16 @@ public class FilterSettingsScanDensity extends AbstractChromatogramFilterSetting
 	public void setScansPerSecond(int scansPerSecond) {
 
 		this.scansPerSecond = scansPerSecond;
+	}
+
+	public boolean isMergeScans() {
+
+		return mergeScans;
+	}
+
+	public void setMergeScans(boolean mergeScans) {
+
+		this.mergeScans = mergeScans;
 	}
 
 	public boolean isProcessReferencedChromatograms() {
