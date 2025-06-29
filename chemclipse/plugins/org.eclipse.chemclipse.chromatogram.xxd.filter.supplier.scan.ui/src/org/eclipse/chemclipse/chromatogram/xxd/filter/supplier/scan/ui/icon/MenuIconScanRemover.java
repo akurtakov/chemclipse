@@ -18,7 +18,7 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.xxd.process.ui.menu.IMenuIcon;
 import org.eclipse.swt.graphics.Image;
 
-public class MenuIcon implements IMenuIcon {
+public class MenuIconScanRemover implements IMenuIcon {
 
 	@Override
 	public Image getImage() {

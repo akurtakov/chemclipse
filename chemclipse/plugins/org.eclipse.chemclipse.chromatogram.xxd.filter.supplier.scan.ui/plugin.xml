@@ -13,8 +13,12 @@
    <extension
          point="org.eclipse.chemclipse.xxd.process.ui.menu.icon">
       <icon
-            class="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.ui.icon.MenuIcon"
-            id="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scanremover">
+            class="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.ui.icon.MenuIconScanDensity"
+            id="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scandensity">
       </icon>
+      <icon
+            class="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.ui.icon.MenuIconScanRemover"
+            id="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scanremover">
+      </icon>      
    </extension>  
 </plugin>
