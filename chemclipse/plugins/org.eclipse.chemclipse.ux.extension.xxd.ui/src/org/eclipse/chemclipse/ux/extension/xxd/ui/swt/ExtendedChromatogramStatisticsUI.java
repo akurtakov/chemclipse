@@ -170,9 +170,20 @@ public class ExtendedChromatogramStatisticsUI extends Composite implements IExte
 		dataMap.put("Scans Total", Integer.toString(chromatogram.getNumberOfScans()));
 		dataMap.put("Scans Delay [ms]", Integer.toString(chromatogram.getScanDelay()));
 		dataMap.put("Scan Interval [ms]", Integer.toString(chromatogram.getScanInterval()));
+		dataMap.put("Scans / Second", ValueFormat.getDecimalFormatEnglish("0.###").format(getScansPerSecond(chromatogram)));
 		dataMap.put("Scans Selection", Integer.toString(scanStop - scanStart + 1));
 		dataMap.put("Scan Selection Start", Integer.toString(scanStart));
 		dataMap.put("Scan Selection Stop", Integer.toString(scanStop));
+	}
+
+	private double getScansPerSecond(IChromatogram chromatogram) {
+
+		int scanInterval = chromatogram.getScanInterval();
+		if(scanInterval > 0) {
+			return 1000.0d / scanInterval;
+		}
+
+		return 0;
 	}
 
 	private void addPeakData(IChromatogramSelection chromatogramSelection, Map<String, String> dataMap) {
