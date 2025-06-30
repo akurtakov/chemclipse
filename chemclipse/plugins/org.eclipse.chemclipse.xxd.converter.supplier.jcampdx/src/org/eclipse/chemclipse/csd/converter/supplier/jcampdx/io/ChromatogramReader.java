@@ -32,6 +32,7 @@ import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.identifier.LibraryInformation;
 import org.eclipse.chemclipse.model.implementation.IdentificationTarget;
+import org.eclipse.chemclipse.model.support.ChromatogramSupport;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ChromatogramReader extends AbstractChromatogramCSDReader {
@@ -167,16 +168,9 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 						name = "";
 					}
 				}
-				/*
-				 * Set the scan delay and interval
-				 * file and converter id.
-				 */
-				int scanDelay = chromatogram.getScan(1).getRetentionTime();
-				chromatogram.setScanDelay(scanDelay);
-				int scanInterval = chromatogram.getStartRetentionTime() / chromatogram.getNumberOfScans();
-				chromatogram.setScanInterval(scanInterval);
-				//
+
 				chromatogram.setFile(file);
+				ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
 				chromatogram.setConverterId(CONVERTER_ID_CSD);
 			}
 		}

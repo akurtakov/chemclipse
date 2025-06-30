@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
+import org.eclipse.chemclipse.model.support.ChromatogramSupport;
 import org.eclipse.chemclipse.wsd.converter.io.AbstractChromatogramWSDReader;
 import org.eclipse.chemclipse.wsd.converter.supplier.arw.model.IVendorChromatogram;
 import org.eclipse.chemclipse.wsd.converter.supplier.arw.model.VendorChromatogram;
@@ -136,22 +137,8 @@ public class ChromatogramReader extends AbstractChromatogramWSDReader {
 			int steps = PreferenceSupplier.getNormalizationSteps();
 			ScanRasterizer.normalize(chromatogram, steps);
 		}
-		calculateScanIntervalAndDelay(chromatogram, monitor);
+		ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
 		return chromatogram;
-	}
-
-	private void calculateScanIntervalAndDelay(IChromatogramWSD chromatogram, IProgressMonitor monitor) {
-
-		/*
-		 * Calculate the scanInterval and scanDelay.
-		 */
-		int numberOfScans = chromatogram.getNumberOfScans();
-		if(numberOfScans > 0) {
-			int scanInterval = (chromatogram.getStopRetentionTime() - chromatogram.getStartRetentionTime() + 1) / chromatogram.getNumberOfScans();
-			int scanDelay = chromatogram.getStartRetentionTime();
-			chromatogram.setScanInterval(scanInterval);
-			chromatogram.setScanDelay(scanDelay);
-		}
 	}
 
 	private float extractIntensity(String value) {

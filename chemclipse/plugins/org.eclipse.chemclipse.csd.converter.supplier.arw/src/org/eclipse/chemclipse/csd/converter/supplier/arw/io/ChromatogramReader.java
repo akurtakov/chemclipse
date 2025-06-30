@@ -28,6 +28,7 @@ import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
+import org.eclipse.chemclipse.model.support.ChromatogramSupport;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ChromatogramReader extends AbstractChromatogramCSDReader {
@@ -80,13 +81,6 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 
 	private void calculateScanIntervalAndDelay(IChromatogramCSD chromatogram, IProgressMonitor monitor) {
 
-		/*
-		 * Calculate the scanInterval and scanDelay.
-		 */
-		int scanInterval = chromatogram.getStopRetentionTime() / chromatogram.getNumberOfScans();
-		int scanDelay = chromatogram.getStartRetentionTime() - scanInterval;
-		scanDelay = (scanDelay < 0) ? 0 : scanDelay;
-		chromatogram.setScanInterval(scanInterval);
-		chromatogram.setScanDelay(scanDelay);
+		ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
 	}
 }

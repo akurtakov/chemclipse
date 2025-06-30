@@ -26,6 +26,7 @@ import org.eclipse.chemclipse.model.identifier.IComparisonResult;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.identifier.LibraryInformation;
 import org.eclipse.chemclipse.model.implementation.IdentificationTarget;
+import org.eclipse.chemclipse.model.support.ChromatogramSupport;
 import org.eclipse.chemclipse.msd.converter.io.AbstractChromatogramMSDReader;
 import org.eclipse.chemclipse.msd.converter.supplier.jcampdx.model.IVendorChromatogram;
 import org.eclipse.chemclipse.msd.converter.supplier.jcampdx.model.IVendorIon;
@@ -217,12 +218,8 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 		 * Set the scan delay and interval
 		 * file and converter id.
 		 */
-		int scanDelay = chromatogram.getScan(1).getRetentionTime();
-		chromatogram.setScanDelay(scanDelay);
-		int scanInterval = chromatogram.getStartRetentionTime() / chromatogram.getNumberOfScans();
-		chromatogram.setScanInterval(scanInterval);
-		//
 		chromatogram.setFile(file);
+		ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
 		chromatogram.setConverterId(CONVERTER_ID_MSD);
 		/*
 		 * Close the streams
