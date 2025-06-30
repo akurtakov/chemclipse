@@ -16,6 +16,9 @@ import org.eclipse.chemclipse.model.core.IChromatogram;
 
 public class ChromatogramSupport {
 
+	private static final int DEFAULT_SCAN_DELAY = 0;
+	private static final int DEFAULT_SCAN_INTERVAL = 100;
+
 	public static void calculateScanIntervalAndDelay(IChromatogram chromatogram) {
 
 		int startRetentionTime = chromatogram.getStartRetentionTime();
@@ -25,14 +28,14 @@ public class ChromatogramSupport {
 		/*
 		 * Delay
 		 */
-		int scanDelay = 0;
+		int scanDelay = DEFAULT_SCAN_DELAY;
 		if(startRetentionTime > 0) {
 			scanDelay = startRetentionTime;
 		}
 		/*
 		 * Interval
 		 */
-		int scanInterval = 100;
+		int scanInterval = DEFAULT_SCAN_INTERVAL;
 		if(numberOfScans >= 1 && deltaRetentionTime > 0) {
 			float calculation = deltaRetentionTime / (numberOfScans - 1) / 10.0f;
 			scanInterval = Math.round(calculation) * 10;

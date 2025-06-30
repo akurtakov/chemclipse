@@ -19,9 +19,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.core.support.HeaderField;
+import org.eclipse.chemclipse.model.support.ChromatogramSupport;
 import org.eclipse.chemclipse.model.support.HeaderUtil;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
@@ -32,9 +32,6 @@ import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
 import org.eclipse.chemclipse.support.traces.TraceHighResMSD;
 
 public class HighResolutionSupport {
-
-	private static final int DEFAULT_SCAN_DELAY = 0;
-	private static final int DEFAULT_SCAN_INTERVAL = 100;
 
 	public static List<IChromatogramMSD> extractHighResolutionData(IChromatogramMSD chromatogramMSD, HeaderField headerField, Set<TraceHighResMSD> traces) {
 
@@ -90,41 +87,11 @@ public class HighResolutionSupport {
 					}
 				}
 				//
-				calculateScanIntervalAndDelay(chromatogramReferenceMSD);
+				ChromatogramSupport.calculateScanIntervalAndDelay(chromatogramReferenceMSD);
 				chromatograms.add(chromatogramReferenceMSD);
 			}
 		}
 		//
 		return chromatograms;
-	}
-
-	private static void calculateScanIntervalAndDelay(IChromatogram chromatogram) {
-
-		int startRetentionTime = chromatogram.getStartRetentionTime();
-		int stopRetentionTime = chromatogram.getStopRetentionTime();
-		float deltaRetentionTime = stopRetentionTime - startRetentionTime + 1;
-		int numberOfScans = chromatogram.getNumberOfScans();
-		/*
-		 * Delay
-		 */
-		int scanDelay = DEFAULT_SCAN_DELAY;
-		if(startRetentionTime > 0) {
-			scanDelay = startRetentionTime;
-		}
-		/*
-		 * Interval
-		 */
-		int scanInterval = DEFAULT_SCAN_INTERVAL;
-		if(numberOfScans > 0 && deltaRetentionTime > 0) {
-			float calculation = deltaRetentionTime / numberOfScans / 10.0f;
-			scanInterval = Math.round(calculation) * 10;
-		}
-		/*
-		 * Adjust the scan delay and interval.
-		 * But don't recalculate the retention times here:
-		 * chromatogram.recalculateRetentionTimes();
-		 */
-		chromatogram.setScanDelay(scanDelay);
-		chromatogram.setScanInterval(scanInterval);
 	}
 }
