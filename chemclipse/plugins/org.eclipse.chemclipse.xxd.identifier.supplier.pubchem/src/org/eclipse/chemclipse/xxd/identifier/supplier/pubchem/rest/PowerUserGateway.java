@@ -59,10 +59,10 @@ public class PowerUserGateway {
 		return UrlEscapers.urlFragmentEscaper().escape(url); // e.g. space and +
 	}
 
-	public static String getCanonicalSMILES(ILibraryInformation libraryInformation) {
+	public static String getSMILES(ILibraryInformation libraryInformation) {
 
 		String smiles = null;
-		String uri = getBestCompound(libraryInformation) + "/property/CanonicalSMILES/TXT";
+		String uri = getBestCompound(libraryInformation) + "/property/smiles/TXT";
 		try {
 			smiles = IOUtils.toString(new URI(uri).toURL(), StandardCharsets.UTF_8);
 			smiles = smiles.trim();

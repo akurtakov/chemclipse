@@ -31,7 +31,7 @@ public class Vioxx_Test extends TestCase {
 
 	public void testSMILES() {
 
-		String smiles = PowerUserGateway.getCanonicalSMILES(libraryInformation);
+		String smiles = PowerUserGateway.getSMILES(libraryInformation);
 		assertEquals("CS(=O)(=O)C1=CC=C(C=C1)C2=C(C(=O)OC2)C3=CC=CC=C3", smiles);
 	}
 
