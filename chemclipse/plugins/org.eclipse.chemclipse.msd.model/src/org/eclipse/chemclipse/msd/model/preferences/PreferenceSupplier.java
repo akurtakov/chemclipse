@@ -39,6 +39,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_USE_PEAKS_INSTEAD_OF_SCANS = false;
 	public static final String P_COPY_TRACES_CLIPBOARD = "copyTracesClipboard";
 	public static final int DEF_COPY_TRACES_CLIPBOARD = 5;
+	public static final String P_DELETE_TARGETS_OPTIMIZE_SCAN = "deleteTargetsOptimizeScan";
+	public static final boolean DEF_DELETE_TARGETS_OPTIMIZE_SCAN = true;
 	//
 	private static final String DELIMITER_ION_ABUNDANCE = ":";
 	private static final String DELIMITER_IONS = ";";
@@ -67,6 +69,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_CALCULATION_TYPE, DEF_CALCULATION_TYPE);
 		putDefault(P_USE_PEAKS_INSTEAD_OF_SCANS, Boolean.toString(DEF_USE_PEAKS_INSTEAD_OF_SCANS));
 		putDefault(P_COPY_TRACES_CLIPBOARD, Integer.toString(DEF_COPY_TRACES_CLIPBOARD));
+		putDefault(P_DELETE_TARGETS_OPTIMIZE_SCAN, DEF_DELETE_TARGETS_OPTIMIZE_SCAN);
 	}
 
 	public static void loadSessionSubtractMassSpectrum() {
@@ -193,6 +196,11 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static int getCopyTracesClipboard() {
 
 		return INSTANCE().getInteger(P_COPY_TRACES_CLIPBOARD, DEF_COPY_TRACES_CLIPBOARD);
+	}
+
+	public static boolean isDeleteTargetsOptimizeScan() {
+
+		return INSTANCE().getBoolean(P_DELETE_TARGETS_OPTIMIZE_SCAN);
 	}
 
 	private static IScanMSD getSubtractMassSpectrum() {

@@ -90,6 +90,7 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 
 		boolean focus = super.setFocus();
 		updateScanData(scanMSD);
+
 		return focus;
 	}
 
@@ -106,6 +107,7 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 		}
 
 		updateScanData(scanMSD);
+		updateWidgets();
 	}
 
 	private void createControl() {
@@ -253,11 +255,12 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				if(peakMSD != null && !peakMSD.getTargets().isEmpty()) {
-
+				if(isValidComparisonScanPeak()) {
+					/*
+					 * Retrieve the comparison mass spectrum of the best target.
+					 */
 					IIdentificationTarget identificationTarget = TargetSupport.getBestIdentificationTarget(peakMSD);
 					LibraryServiceRunnable runnable = new LibraryServiceRunnable(identificationTarget, referenceMassSpectrum -> saveSessionMassSpectrum(e.display, referenceMassSpectrum));
-
 					try {
 						if(runnable.requireProgressMonitor()) {
 							DisplayUtils.executeInUserInterfaceThread(() -> {
@@ -412,6 +415,12 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 		boolean enabled = chromatogramSelectionMSD != null;
 		buttonSelectedScanControl.get().setEnabled(enabled);
 		buttonCombinedScanControl.get().setEnabled(enabled);
+		buttonComparisonScanControl.get().setEnabled(isValidComparisonScanPeak());
+	}
+
+	private boolean isValidComparisonScanPeak() {
+
+		return peakMSD != null && !peakMSD.getTargets().isEmpty();
 	}
 
 	private void fireUpdateEvent(Display display) {

@@ -20,6 +20,7 @@ import org.eclipse.chemclipse.chromatogram.msd.filter.core.massspectrum.MassSpec
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
+import org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
@@ -153,7 +154,9 @@ public class ScanFilterUI extends Composite {
 							 * Clear all identification results and
 							 * then run apply the filter.
 							 */
-							optimizedMassSpectrum.getTargets().clear();
+							if(PreferenceSupplier.isDeleteTargetsOptimizeScan()) {
+								optimizedMassSpectrum.getTargets().clear();
+							}
 							MassSpectrumFilter.applyFilter(optimizedMassSpectrum, supplier.getId(), new NullProgressMonitor());
 							fireUpdate(e.display);
 						}
