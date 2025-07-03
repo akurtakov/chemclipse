@@ -315,7 +315,7 @@ public abstract class AbstractMultivariateCalculator implements IMultivariateCal
 		}
 		for(int i = 0; i < matrix.numCols; i++) {
 			if(colSums.get(i) == 0 || Double.isNaN(colSums.get(i))) {
-				CommonOps_DDRM.insert(randCol, matrix, 0, i);
+				CommonOps_DDRM.insert(CommonOps_DDRM.add(randCol, CommonOps_DDRM.extractColumn(matrix, i, null), null), matrix, 0, i);
 			}
 		}
 	}
