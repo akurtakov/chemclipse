@@ -10,6 +10,7 @@
  * Contributors:
  * Jan Holy - initial API and implementation
  * Philip Wenig - refactoring
+ * Lorenz Gerber - improve description
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing;
 
@@ -31,13 +32,13 @@ public class Normalization2Norm extends AbstractDataModificator implements INorm
 	@Override
 	public String getDescription() {
 
-		return "Euclidean norm, standard norm or 2-norm is the square root of the sum of the squares of the values.";
+		return "Vector 2-norm is the square root of the sum of the squares of the values.";
 	}
 
 	@Override
 	public String getName() {
 
-		return "Normalization 2-Norm";
+		return "Sample Normalization 2-Norm";
 	}
 
 	@Override

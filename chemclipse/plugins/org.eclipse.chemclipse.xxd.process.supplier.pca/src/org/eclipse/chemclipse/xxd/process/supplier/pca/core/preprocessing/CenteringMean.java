@@ -10,6 +10,7 @@
  * Contributors:
  * Jan Holy - initial API and implementation
  * Philip Wenig - refactoring
+ * Lorenz Gerber - improve description
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing;
 
@@ -25,7 +26,7 @@ public class CenteringMean extends AbstractCentering {
 	@Override
 	public String getDescription() {
 
-		return "Mean centering";
+		return "In Mean centering, the mean is subtracted from each value which centeres the feature around the mean.";
 	}
 
 	@Override

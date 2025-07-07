@@ -31,7 +31,7 @@ public class ScalingAuto extends AbstractScaling {
 	@Override
 	public String getDescription() {
 
-		return "Auto Scaling";
+		return "In Auto Scaling (Z-score), the feature is centered then scaled using division by the standard deviation.";
 	}
 
 	@Override

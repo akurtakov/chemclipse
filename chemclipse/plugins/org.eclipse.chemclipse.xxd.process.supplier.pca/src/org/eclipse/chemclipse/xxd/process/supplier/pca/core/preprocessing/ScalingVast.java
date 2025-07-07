@@ -10,6 +10,7 @@
  * Contributors:
  * Jan Holy - initial API and implementation
  * Philip Wenig - refactoring
+ * Lorenz Gerber - improve description
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing;
 
@@ -30,7 +31,7 @@ public class ScalingVast extends AbstractScaling {
 	@Override
 	public String getDescription() {
 
-		return "Vast Scaling";
+		return "In Vast Scaling, the feature is centred then scaled using divison by the variance and finally rescaled using multiplication by the mean";
 	}
 
 	@Override
