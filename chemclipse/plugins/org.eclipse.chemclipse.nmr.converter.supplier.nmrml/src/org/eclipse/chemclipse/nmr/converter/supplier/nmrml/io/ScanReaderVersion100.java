@@ -35,6 +35,7 @@ import org.eclipse.chemclipse.nmr.converter.supplier.nmrml.internal.v100.model.A
 import org.eclipse.chemclipse.nmr.converter.supplier.nmrml.internal.v100.model.AcquisitionParameterSet1DType;
 import org.eclipse.chemclipse.nmr.converter.supplier.nmrml.internal.v100.model.BinaryDataArrayType;
 import org.eclipse.chemclipse.nmr.converter.supplier.nmrml.internal.v100.model.CVParamType;
+import org.eclipse.chemclipse.nmr.converter.supplier.nmrml.internal.v100.model.ContactType;
 import org.eclipse.chemclipse.nmr.converter.supplier.nmrml.internal.v100.model.FirstDimensionProcessingParameterSetType;
 import org.eclipse.chemclipse.nmr.converter.supplier.nmrml.internal.v100.model.FirstDimensionProcessingParameterSetType.WindowFunction;
 import org.eclipse.chemclipse.nmr.converter.supplier.nmrml.internal.v100.model.NmrMLType;
@@ -66,12 +67,21 @@ public class ScanReaderVersion100 {
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(file);
 			NodeList nodeList = document.getElementsByTagName("nmrML");
+
 			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 			NmrMLType nmrML = (NmrMLType)unmarshaller.unmarshal(nodeList.item(0));
+
 			VendorFIDMeasurement measurement = new VendorFIDMeasurement();
 			measurement.setDataName(nmrML.getId());
 			measurements.add(measurement);
+
+			if(nmrML.getContactList() != null) {
+				for(ContactType contact : nmrML.getContactList().getContact()) {
+					measurement.setOperator(contact.getFullname());
+				}
+			}
+
 			Acquisition1DType acquisition1D = nmrML.getAcquisition().getAcquisition1D();
 			BinaryDataArrayType fidData = acquisition1D.getFidData();
 			ByteBuffer byteBuffer = ByteBuffer.wrap(fidData.getValue());
@@ -96,6 +106,7 @@ public class ScanReaderVersion100 {
 					buffer[index] = floatBuffer.get(index);
 				}
 			}
+
 			AcquisitionParameterSet1DType acquisitionParameterSet = acquisition1D.getAcquisitionParameterSet();
 			AcquisitionDimensionParameterSetType directDimensionParameterSet = acquisitionParameterSet.getDirectDimensionParameterSet();
 
@@ -115,6 +126,7 @@ public class ScanReaderVersion100 {
 				measurement.addSignal(signal);
 				time += timeStep;
 			}
+
 			// TODO: apply those settings
 			SpectrumListType spectrumList = nmrML.getSpectrumList();
 			if(spectrumList != null) {
