@@ -24,11 +24,14 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Variance;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swtchart.IAxis;
 import org.eclipse.swtchart.IBarSeries.BarWidthStyle;
+import org.eclipse.swtchart.Range;
 import org.eclipse.swtchart.extensions.barcharts.BarChart;
 import org.eclipse.swtchart.extensions.barcharts.BarSeriesData;
 import org.eclipse.swtchart.extensions.barcharts.IBarSeriesData;
 import org.eclipse.swtchart.extensions.barcharts.IBarSeriesSettings;
+import org.eclipse.swtchart.extensions.core.BaseChart;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.IPrimaryAxisSettings;
 import org.eclipse.swtchart.extensions.core.ISeriesData;
@@ -136,6 +139,7 @@ public class VarianceChart extends BarChart {
 				chartSettings.setTitle("Explained Variance");
 				chartSettings.setTitleVisible(true);
 			}
+			primaryAxisSettingsY.setTitleVisible(false);
 			applySettings(chartSettings);
 			//
 			List<IBarSeriesData> barSeriesDataList = new ArrayList<>();
@@ -154,8 +158,8 @@ public class VarianceChart extends BarChart {
 				barSeriesDataList.add(barSeriesData2);
 			}
 			addSeriesData(barSeriesDataList);
-			chartSettings.getPrimaryAxisSettingsY().setTitle("");
-			applySettings(chartSettings);
+			IAxis axisY = getBaseChart().getAxisSet().getYAxis(BaseChart.ID_PRIMARY_Y_AXIS);
+			axisY.setRange(new Range(0, 1));
 		} else {
 			getBaseChart().redraw();
 		}
