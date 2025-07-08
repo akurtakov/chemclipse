@@ -10,6 +10,7 @@
  * Contributors:
  * Jan Holy - initial API and implementation
  * Philip Wenig - refactoring
+ * Lorenz Gerber - improve description
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing;
 
@@ -30,7 +31,7 @@ public class ScalingPareto extends AbstractScaling {
 	@Override
 	public String getDescription() {
 
-		return "Pareto Scaling";
+		return "In Pareto Scaling, the feature is centered then scaled using division by the square root of the standard deviation";
 	}
 
 	@Override

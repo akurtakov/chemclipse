@@ -10,6 +10,7 @@
  * Contributors:
  * Jan Holy - initial API and implementation
  * Philip Wenig - refactoring
+ * Lorenz Gerber - improve description
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing;
 
@@ -31,13 +32,13 @@ public class Normalization1Norm extends AbstractDataModificator implements INorm
 	@Override
 	public String getDescription() {
 
-		return "Taxicab norm or Manhattan norm or simply 1-norm is the sum of absolute values";
+		return "Vector 1-norm is the sum of absolute values";
 	}
 
 	@Override
 	public String getName() {
 
-		return "Normalization 1-Norm";
+		return "Sample Normalization 1-Norm";
 	}
 
 	@Override

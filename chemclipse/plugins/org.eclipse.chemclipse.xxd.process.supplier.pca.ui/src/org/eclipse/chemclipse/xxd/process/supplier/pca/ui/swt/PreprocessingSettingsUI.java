@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Lorenz Gerber - improve labels/description
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt;
 
@@ -61,11 +62,11 @@ import org.eclipse.swt.widgets.Label;
 public class PreprocessingSettingsUI extends Composite {
 
 	private static final String KEY_IMAGE = "IMAGE";
-	private static final String LABEL_NORMALIZE = "Normalize Data:";
+	private static final String LABEL_NORMALIZE = "Normalize Samples:";
 	private static final String LABEL_REPLACE = "Replace Data:";
 	private static final String LABEL_TRANSFORM = "Transform Data:";
-	private static final String LABEL_CENTER = "Center Data:";
-	private static final String LABEL_SCALE = "Scale Data:";
+	private static final String LABEL_CENTER = "Center Variables:";
+	private static final String LABEL_SCALE = "Scale Variables:";
 	//
 	private IPreprocessingSettings preprocessingSettings = new PreprocessingSettings();
 	//

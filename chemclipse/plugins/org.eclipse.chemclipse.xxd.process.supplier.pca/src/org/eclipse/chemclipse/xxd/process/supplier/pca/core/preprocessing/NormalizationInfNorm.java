@@ -10,6 +10,7 @@
  * Contributors:
  * Jan Holy - initial API and implementation
  * Philip Wenig - refactoring
+ * Lorenz Gerber - improve description
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing;
 
@@ -31,13 +32,13 @@ public class NormalizationInfNorm extends AbstractDataModificator implements INo
 	@Override
 	public String getDescription() {
 
-		return "The uniform norm (or sup norm) also called the supremum norm, the Chebyshev norm or the infinity norm.";
+		return "Vector infinity norm is the max of all values.";
 	}
 
 	@Override
 	public String getName() {
 
-		return "Normalization Inf-Norm";
+		return "Sample Normalization Inf-Norm";
 	}
 
 	@Override

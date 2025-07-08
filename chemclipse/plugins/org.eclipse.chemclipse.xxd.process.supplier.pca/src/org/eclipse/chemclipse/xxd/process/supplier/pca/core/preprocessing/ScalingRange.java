@@ -10,6 +10,7 @@
  * Contributors:
  * Jan Holy - initial API and implementation
  * Philip Wenig - refactoring
+ * Lorenz Gerber - fix algo, improve description
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing;
 
@@ -30,7 +31,7 @@ public class ScalingRange extends AbstractScaling {
 	@Override
 	public String getDescription() {
 
-		return "Range scaling";
+		return "In Range scaling, the feature is re-scaled to a specific range [0,1], no centering";
 	}
 
 	@Override
@@ -55,19 +56,17 @@ public class ScalingRange extends AbstractScaling {
 	public <V extends IVariable, S extends ISample> void process(ISamples<V, S> samples) {
 
 		boolean onlySelected = isOnlySelected();
-		int centeringType = getCenteringType();
 		List<V> variables = samples.getVariables();
 		List<S> samplesList = samples.getSamples();
 		for(int i = 0; i < variables.size(); i++) {
 			if(useVariable(samples, i)) {
-				double mean = getCenteringValue(samplesList, i, centeringType);
 				double max = getMax(samplesList, i);
 				double min = getMin(samplesList, i);
 				for(ISample sample : samplesList) {
 					ISampleData<?> sampleData = sample.getSampleData().get(i);
 					if((sample.isSelected() || !onlySelected)) {
 						double data = getData(sampleData);
-						double scaleData = (data - mean) / (max - min);
+						double scaleData = (data - min) / (max - min);
 						sampleData.setModifiedData(scaleData);
 					}
 				}

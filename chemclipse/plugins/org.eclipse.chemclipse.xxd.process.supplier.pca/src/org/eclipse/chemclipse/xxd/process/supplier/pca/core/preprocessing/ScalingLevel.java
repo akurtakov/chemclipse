@@ -10,6 +10,7 @@
  * Contributors:
  * Jan Holy - initial API and implementation
  * Philip Wenig - refactoring
+ * Lorenz Gerber - improve description
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing;
 
@@ -30,7 +31,7 @@ public class ScalingLevel extends AbstractScaling {
 	@Override
 	public String getDescription() {
 
-		return "Level Scaling";
+		return "In Level Scaling, the feature is centered then scaled using division by the mean";
 	}
 
 	@Override
