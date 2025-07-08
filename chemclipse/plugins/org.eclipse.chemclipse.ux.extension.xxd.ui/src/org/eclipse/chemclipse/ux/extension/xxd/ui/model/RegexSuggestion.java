@@ -17,7 +17,7 @@ import org.eclipse.chemclipse.support.text.ILabel;
 public enum RegexSuggestion implements ILabel {
 
 	GROUP("Group", "()"), //
-	MARKER_OPTIONAL("Marker (optional", "?"), //
+	MARKER_OPTIONAL("Marker (optional)", "?"), //
 	MARKER_MANDATORY("Marker (mandatory)", "+"), //
 	MARKER_MATCH_ALL("Marker (match all)", ".*"), //
 	CHARACTER("Character (a)", "\\w"), //

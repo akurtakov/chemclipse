@@ -185,6 +185,21 @@ public class ScanChartUI extends ScrollableChart {
 		useBackgroundFromStyleSheet();
 	}
 
+	public void activateLabelMarkerX() {
+
+		addSeriesLabelMarker(labelPaintListenerX);
+	}
+
+	public void activateLabelMarkerY() {
+
+		addSeriesLabelMarker(labelPaintListenerY);
+	}
+
+	public void setChartType(ChartType chartType) {
+
+		super.setChartType(chartType);
+	}
+
 	public void setInput(IScan scan) {
 
 		prepareChart();
@@ -344,6 +359,11 @@ public class ScanChartUI extends ScrollableChart {
 	public void setSignalType(SignalType signalType) {
 
 		this.signalType = signalType;
+	}
+
+	public void setLabelOption(LabelOption labelOption) {
+
+		this.labelOption = labelOption;
 	}
 
 	private void setDefaultDataAndSignalType() {
@@ -557,7 +577,7 @@ public class ScanChartUI extends ScrollableChart {
 		addSeriesLabelMarker(labelPaintListener);
 	}
 
-	private void addBarSeriesData(List<IBarSeriesData> barSeriesDataList) {
+	protected void addBarSeriesData(List<IBarSeriesData> barSeriesDataList) {
 
 		/*
 		 * Suspend the update when adding new data to improve the performance.
@@ -661,27 +681,30 @@ public class ScanChartUI extends ScrollableChart {
 
 	private String getLabel(double value) {
 
-		String label;
-		switch(labelOption) {
-			case NOMIMAL:
-				if(value > -1.0d && value < 0.0d || (value > 0.0d && value < 1.0d)) {
-					label = decimalFormatLowIntensity.format(value);
-				} else {
-					label = decimalFormatNormalIntensity.format(value);
-				}
-				break;
-			case EXACT:
-				label = decimalFormatHighResolution.format(value);
-				break;
-			case CUSTOM:
-				label = customLabels.get(value);
-				if(label == null) {
+		String label = "";
+		if(labelOption != null) {
+			switch(labelOption) {
+				case NOMIMAL:
+					if(value > -1.0d && value < 0.0d || (value > 0.0d && value < 1.0d)) {
+						label = decimalFormatLowIntensity.format(value);
+					} else {
+						label = decimalFormatNormalIntensity.format(value);
+					}
+					break;
+				case EXACT:
+					label = decimalFormatHighResolution.format(value);
+					break;
+				case CUSTOM:
+					label = customLabels.get(value);
+					if(label == null) {
+						label = "";
+					}
+					break;
+				default:
 					label = "";
-				}
-				break;
-			default:
-				label = "";
+			}
 		}
+
 		return label;
 	}
 

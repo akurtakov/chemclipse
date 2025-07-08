@@ -13,6 +13,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.swt;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -22,6 +23,9 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
+import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
+import org.eclipse.chemclipse.model.types.DataType;
+import org.eclipse.chemclipse.model.types.SignalType;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
@@ -33,28 +37,54 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
+import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
+import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
+import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.charts.LabelOption;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.model.ComparisonScanOption;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageScans;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.runnables.LibraryServiceRunnable;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ScanChartSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ScanDataSupport;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.swt.widgets.TabFolder;
+import org.eclipse.swt.widgets.TabItem;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swtchart.extensions.barcharts.IBarSeriesData;
+import org.eclipse.swtchart.extensions.barcharts.IBarSeriesSettings;
+import org.eclipse.swtchart.extensions.core.BaseChart;
+import org.eclipse.swtchart.extensions.core.ChartType;
+import org.eclipse.swtchart.extensions.core.IChartSettings;
+import org.eclipse.swtchart.extensions.core.IExtendedChart;
+import org.eclipse.swtchart.extensions.core.ISecondaryAxisSettings;
+import org.eclipse.swtchart.extensions.core.RangeRestriction;
 
 import jakarta.inject.Inject;
 
@@ -64,39 +94,45 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 	private static final float NORMALIZATION_FACTOR = 1000.0f;
 
-	private static final String OPTION_UPDATE_SCAN_1 = "UPDATE_SCAN_1";
-	private static final String OPTION_UPDATE_SCAN_2 = "UPDATE_SCAN_2";
-	private static final String OPTION_LIBRARY_SEARCH = "LIBRARY_SEARCH";
-
 	private static final String PREFIX_U = "[U]";
 	private static final String PREFIX_R = "[R]";
 	private static final String PREFIX_UR = "[U-R]";
-	private static final String LABEL_UR_NORMAL = "[U,R]";
-	private static final String LABEL_UR_DIFFERENCE = PREFIX_UR;
 	private static final String TITLE_UNKNOWN = "UNKNOWN MS";
 	private static final String TITLE_REFERENCE = "REFERENCE MS";
 	private static final String POSTFIX_NONE = "";
-	private static final String POSTFIX_SHIFTED = " SHIFTED (+1)";
+	private static final String POSTFIX_SHIFTED = "SHIFTED";
+	private static final String IMAGE_HYBRID = IApplicationImage.IMAGE_BACKWARD;
+	private static final String TOOLTIP_HYBRID = "the hybrid search.";
 
-	private AtomicReference<Button> buttonOptimizedScan = new AtomicReference<>();
+	private AtomicReference<TabFolder> tabFolderControl = new AtomicReference<>();
+	private AtomicReference<ComboViewer> comboViewerOptionControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonToolbarInfo = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfoTop = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfoBottom = new AtomicReference<>();
 	private AtomicReference<ScanChartUI> scanChartControl = new AtomicReference<>();
-	private AtomicReference<Button> buttonToolbarEdit = new AtomicReference<>();
-	private AtomicReference<Composite> toolbarEdit = new AtomicReference<>();
+	private AtomicReference<Button> buttonToolbarHybrid = new AtomicReference<>();
+	private AtomicReference<Button> buttonOptimizedScan = new AtomicReference<>();
+	private AtomicReference<Button> buttonMirroredReference = new AtomicReference<>();
+	private AtomicReference<Button> buttonDifferenceSpectrum = new AtomicReference<>();
+	private AtomicReference<Button> buttonShiftReferenceSpectrum = new AtomicReference<>();
+	private AtomicReference<Spinner> spinnerShiftReferenceSpectrum = new AtomicReference<>();
+	private AtomicReference<Composite> toolbarHybridSearch = new AtomicReference<>();
+	private AtomicReference<Text> textWeightUnknownControl = new AtomicReference<>();
+	private AtomicReference<Text> textWeightReferenceControl = new AtomicReference<>();
+	private AtomicReference<ScanChartUI> scanChartStackTopControl = new AtomicReference<>();
+	private AtomicReference<ScanChartUI> scanChartStackBottomControl = new AtomicReference<>();
 
-	private IScanMSD scan1 = null;
-	private IScanMSD scan2 = null;
-	private IScanMSD scan1Optimized = null;
-	private IScanMSD scan2Optimized = null;
+	private boolean showDifferenceSpectrum = false;
+	private boolean useMirroredSpectrum = true;
+	private boolean useOptimizedSpectrum = false;
+	private boolean shiftReferenceSpectrum = false;
+	private int shiftMass = 1;
 
-	private String displayOption = OPTION_LIBRARY_SEARCH;
-	private boolean displayDifference = false;
-	private boolean displayMirrored = true;
-	private boolean displayShifted = false;
+	private IScanMSD scanUnknown = null;
+	private IScanMSD scanReference = null;
 
-	private final ScanDataSupport scanDataSupport = new ScanDataSupport();
+	private ScanChartSupport scanChartSupport = new ScanChartSupport();
+	private ScanDataSupport scanDataSupport = new ScanDataSupport();
 
 	@Inject
 	public ExtendedComparisonScanUI(Composite parent, int style) {
@@ -109,95 +145,65 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 	@Focus
 	public boolean setFocus() {
 
-		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
-		String topic = getLastTopic(dataUpdateSupport.getTopics());
-		List<Object> objects = dataUpdateSupport.getUpdates(topic);
-		if(!objects.isEmpty()) {
-			Object last = objects.get(0);
-			if(last instanceof IScanMSD scanMSD) {
-				IIdentificationTarget identificationTarget = IIdentificationTarget.getIdentificationTarget(scanMSD);
-				update(scanMSD, identificationTarget);
-			} else if(last instanceof IPeakMSD peakMSD) {
-				IIdentificationTarget identificationTarget = IIdentificationTarget.getIdentificationTarget(peakMSD);
-				update(peakMSD.getExtractedMassSpectrum(), identificationTarget);
-			} else if(last instanceof Object[] values) {
-				Object first = values[0];
-				Object second = values[1];
-				if(IChemClipseEvents.TOPIC_SCAN_TARGET_UPDATE_COMPARISON.equals(topic)) {
-					if(first instanceof IScanMSD unknownMassSpectrum && second instanceof IIdentificationTarget identificationTarget) {
-						update(unknownMassSpectrum, identificationTarget);
-					}
-				} else if(IChemClipseEvents.TOPIC_SCAN_REFERENCE_UPDATE_COMPARISON.equals(topic)) {
-					if(first instanceof IScanMSD unknownMassSpectrum && second instanceof IScanMSD referenceMassSpectrum) {
-						update(unknownMassSpectrum, referenceMassSpectrum);
-					}
-				}
-			}
-		}
-		Display.getDefault().asyncExec(this::updateChart);
+		updateOnFocus();
 		return true;
 	}
 
 	public void clear() {
 
-		IScanMSD scanMSD1 = null;
-		IScanMSD scanMSD2 = null;
-		update(scanMSD1, scanMSD2);
+		IScanMSD unknown = null;
+		IScanMSD reference = null;
+		update(unknown, reference);
 	}
 
 	public void update(IScanMSD scanMSD) {
 
-		if(displayOption.equals(OPTION_UPDATE_SCAN_1)) {
-			scan1Optimized = null;
-			if(scanMSD == null) {
-				scan1 = null;
-				buttonOptimizedScan.get().setEnabled(false);
-			} else {
-				try {
-					scan1 = scanMSD.makeDeepCopy().normalize(NORMALIZATION_FACTOR);
-					buttonOptimizedScan.get().setEnabled(true);
-				} catch(CloneNotSupportedException e) {
-					logger.warn(e);
-				}
-			}
-			Display.getDefault().asyncExec(this::updateChart);
-		} else if(displayOption.equals(OPTION_UPDATE_SCAN_2)) {
-			scan2Optimized = null;
-			if(scanMSD == null) {
-				scan2 = null;
-				buttonOptimizedScan.get().setEnabled(false);
-			} else {
-				try {
-					scan2 = scanMSD.makeDeepCopy().normalize(NORMALIZATION_FACTOR);
-					buttonOptimizedScan.get().setEnabled(true);
-				} catch(CloneNotSupportedException e) {
-					logger.warn(e);
-				}
-			}
-			Display.getDefault().asyncExec(this::updateChart);
+		boolean update = false;
+		switch(getComparisonScanOption()) {
+			case UNKNOWN:
+				assignScan(scanMSD, true);
+				update = true;
+				break;
+			case REFERENCE:
+				assignScan(scanMSD, false);
+				update = true;
+				break;
+			default:
+				break;
+		}
+
+		if(update) {
+			updateInput();
 		}
 	}
 
 	public void update(IIdentificationTarget identificationTarget) {
 
-		if(displayOption.equals(OPTION_LIBRARY_SEARCH)) {
+		if(isLibrarySearch()) {
 			updateIdentificationTarget(identificationTarget);
 		}
 	}
 
 	public void update(IScanMSD unknownMassSpectrum, IIdentificationTarget identificationTarget) {
 
-		if(displayOption.equals(OPTION_LIBRARY_SEARCH)) {
-			scan1 = copyScan(unknownMassSpectrum);
+		if(isLibrarySearch()) {
+			scanUnknown = copyScan(unknownMassSpectrum);
+			updateMolecularWeightUnknown();
 			updateIdentificationTarget(identificationTarget);
 		}
 	}
 
+	/**
+	 * Update unknown and reference
+	 * 
+	 * @param unknownMassSpectrum
+	 * @param referenceMassSpectrum
+	 */
 	public void update(IScanMSD unknownMassSpectrum, IScanMSD referenceMassSpectrum) {
 
-		scan1 = copyScan(unknownMassSpectrum);
-		scan2 = copyScan(referenceMassSpectrum);
-		Display.getDefault().asyncExec(this::updateChart);
+		scanUnknown = copyScan(unknownMassSpectrum);
+		scanReference = copyScan(referenceMassSpectrum);
+		updateInput();
 	}
 
 	@Override
@@ -206,21 +212,34 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		scanChartControl.get().dispose();
 	}
 
+	private boolean isLibrarySearch() {
+
+		return ComparisonScanOption.LIBRARY_SEARCH.equals(getComparisonScanOption());
+	}
+
+	private ComparisonScanOption getComparisonScanOption() {
+
+		Object selection = comboViewerOptionControl.get().getStructuredSelection().getFirstElement();
+		if(selection instanceof ComparisonScanOption comparisonScanOption) {
+			return comparisonScanOption;
+		} else {
+			return ComparisonScanOption.LIBRARY_SEARCH;
+		}
+	}
+
 	private void updateIdentificationTarget(IIdentificationTarget identificationTarget) {
 
-		scan1Optimized = null;
-		scan2Optimized = null;
+		updateMolecularWeightReference(identificationTarget);
 		LibraryServiceRunnable runnable = new LibraryServiceRunnable(identificationTarget, referenceMassSpectrum -> {
 
-			scan2 = copyScan(referenceMassSpectrum);
+			scanReference = copyScan(referenceMassSpectrum);
 			Display.getDefault().asyncExec(() -> {
 
-				buttonOptimizedScan.get().setEnabled(true);
 				updateChart();
 			});
 		});
 		/*
-		 * 
+		 * Create a runnable to update the reference.
 		 */
 		try {
 			if(runnable.requireProgressMonitor()) {
@@ -238,116 +257,101 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		} catch(InterruptedException e) {
 			Thread.currentThread().interrupt();
 		} catch(ExecutionException e) {
-			Activator.getDefault().getLog().log(Status.error("Update scan failed.", e));
+			Activator.getDefault().getLog().log(Status.error("Updating the reference scan failed.", e));
 		}
 	}
 
-	private static IScanMSD copyScan(IScanMSD scan) {
+	private void updateMolecularWeightUnknown() {
 
-		if(scan != null) {
-			try {
-				return scan.makeDeepCopy().normalize(NORMALIZATION_FACTOR);
-			} catch(CloneNotSupportedException e) {
-				// fail silently
-			}
-		}
-		return null;
-	}
-
-	private void updateChart() {
-
-		if(scan1 != null && scan2 != null) {
-			if(displayDifference) {
-				updateScanComparisonDifference(displayMirrored, displayShifted);
-			} else {
-				updateScanComparisonNormal(displayMirrored, displayShifted);
-			}
+		ILibraryInformation libraryInformation = IIdentificationTarget.getLibraryInformation(scanUnknown);
+		if(libraryInformation != null) {
+			textWeightUnknownControl.get().setText(Integer.toString((int)Math.round(libraryInformation.getMolWeight())));
 		} else {
-			updateScanNormal();
+			textWeightUnknownControl.get().setText("");
 		}
 	}
 
-	private void updateScanComparisonNormal(boolean mirrored, boolean shifted) {
+	private void updateMolecularWeightReference(IIdentificationTarget identificationTarget) {
 
-		IScanMSD firstScan = (scan1Optimized != null) ? scan1Optimized : scan1;
-		IScanMSD secondScan = (scan2Optimized != null) ? scan2Optimized : scan2;
+		if(identificationTarget != null) {
+			ILibraryInformation libraryInformation = identificationTarget.getLibraryInformation();
+			textWeightReferenceControl.get().setText(Integer.toString((int)Math.round(libraryInformation.getMolWeight())));
+		} else {
+			textWeightReferenceControl.get().setText("");
+		}
+	}
 
-		toolbarInfoTop.get().setText(scanDataSupport.getMassSpectrumLabel(firstScan, PREFIX_U, TITLE_UNKNOWN, POSTFIX_NONE));
-		toolbarInfoBottom.get().setText(scanDataSupport.getMassSpectrumLabel(secondScan, PREFIX_R, TITLE_REFERENCE, shifted ? POSTFIX_SHIFTED : POSTFIX_NONE));
+	private void updateStackCharts() {
 
-		if(shifted) {
-			IScanMSD scan2Shifted = new ScanMSD();
-			IExtractedIonSignal extractedIonSignalScan2 = secondScan.getExtractedIonSignal();
-			int startIon = extractedIonSignalScan2.getStartIon();
-			int stopIon = extractedIonSignalScan2.getStopIon();
+		updateStackChart(scanChartStackTopControl.get(), scanReference, Colors.BLACK, "Reference");
+		updateStackChart(scanChartStackBottomControl.get(), scanUnknown, Colors.RED, "Unknown");
+	}
+
+	private void updateStackChart(ScanChartUI scanChartUI, IScanMSD scanMSD, Color color, String label) {
+
+		scanChartUI.deleteSeries();
+		List<IBarSeriesData> barSeriesDataList = new ArrayList<>();
+		IBarSeriesData barSeriesDataScan = scanChartSupport.getBarSeriesData(scanMSD, label, false);
+		IBarSeriesSettings barSeriesSettings = barSeriesDataScan.getSettings();
+		barSeriesSettings.setBarColor(color);
+		barSeriesSettings.setBarOverlay(true);
+		barSeriesDataList.add(barSeriesDataScan);
+		scanChartUI.addBarSeriesData(barSeriesDataList);
+	}
+
+	private void clearStackCharts() {
+
+		scanChartStackTopControl.get().deleteSeries();
+		scanChartStackBottomControl.get().deleteSeries();
+	}
+
+	private void updateScanComparisonNormal() {
+
+		updateToolbarInfoSpecial(PREFIX_U, PREFIX_R);
+		ScanChartUI scanChartUI = scanChartControl.get();
+		if(shiftReferenceSpectrum) {
+			IScanMSD scanReferenceShifted = new ScanMSD();
+			IExtractedIonSignal extractedIonSignalScanReference = scanReference.getExtractedIonSignal();
+			int startIon = extractedIonSignalScanReference.getStartIon();
+			int stopIon = extractedIonSignalScanReference.getStopIon();
 			for(int ion = startIon; ion <= stopIon; ion++) {
-				float abundance = extractedIonSignalScan2.getAbundance(ion);
+				float abundance = extractedIonSignalScanReference.getAbundance(ion);
 				if(abundance > 0) {
-					scan2Shifted.addIon(getIon(ion + 1, abundance));
+					scanReferenceShifted.addIon(getIon(ion + shiftMass, abundance));
 				}
 			}
-			scanChartControl.get().setInput(firstScan, scan2Shifted, mirrored);
+			scanChartUI.setInput(scanUnknown, scanReferenceShifted, useMirroredSpectrum);
 		} else {
-			scanChartControl.get().setInput(firstScan, secondScan, mirrored);
+			scanChartUI.setInput(scanUnknown, scanReference, useMirroredSpectrum);
+		}
+		/*
+		 * Post modify if hybrid search is active.
+		 */
+		if(toolbarHybridSearch.get().isVisible()) {
+			IChartSettings chartSettings = scanChartUI.getChartSettings();
+			chartSettings.getPrimaryAxisSettingsX().setTitle("Delta [m/z]");
+			RangeRestriction rangeRestriction = chartSettings.getRangeRestriction();
+			rangeRestriction.setZeroX(false);
+			rangeRestriction.setZeroY(false);
+			rangeRestriction.setForceZeroMinY(false);
+			rangeRestriction.setRestrictZoomX(false);
+			scanChartUI.applySettings(chartSettings);
+			int molWeightUnknown = getMolWeight(textWeightUnknownControl);
+			int molWeightReference = getMolWeight(textWeightReferenceControl);
+			BaseChart baseChart = scanChartUI.getBaseChart();
+			baseChart.shiftSeries("Scan -- scan1", IExtendedChart.X_AXIS, -molWeightUnknown);
+			baseChart.shiftSeries("Scan -- scan2", IExtendedChart.X_AXIS, -molWeightReference);
+			scanChartUI.adjustRange(true);
 		}
 	}
 
-	private void updateScanComparisonDifference(boolean mirrored, boolean shifted) {
+	private int getMolWeight(AtomicReference<Text> textControl) {
 
-		IScanMSD firstScan = (scan1Optimized != null) ? scan1Optimized : scan1;
-		IScanMSD secondScan = (scan2Optimized != null) ? scan2Optimized : scan2;
-
-		toolbarInfoTop.get().setText(scanDataSupport.getMassSpectrumLabel(firstScan, PREFIX_UR, TITLE_UNKNOWN, POSTFIX_NONE));
-		toolbarInfoBottom.get().setText(scanDataSupport.getMassSpectrumLabel(secondScan, PREFIX_UR, TITLE_REFERENCE, shifted ? POSTFIX_SHIFTED : POSTFIX_NONE));
-
-		IExtractedIonSignal extractedIonSignalReference = firstScan.getExtractedIonSignal();
-		IExtractedIonSignal extractedIonSignalComparison = secondScan.getExtractedIonSignal();
-		int startIon = (extractedIonSignalReference.getStartIon() < extractedIonSignalComparison.getStartIon()) ? extractedIonSignalReference.getStartIon() : extractedIonSignalComparison.getStartIon();
-		int stopIon = (extractedIonSignalReference.getStopIon() > extractedIonSignalComparison.getStopIon()) ? extractedIonSignalReference.getStopIon() : extractedIonSignalComparison.getStopIon();
-
-		IScanMSD scanDifference1 = new ScanMSD();
-		IScanMSD scanDifference2 = new ScanMSD();
-
-		for(int ion = startIon; ion <= stopIon; ion++) {
-			float abundance = extractedIonSignalReference.getAbundance(ion) - extractedIonSignalComparison.getAbundance(ion);
-			if(abundance > 0) {
-				scanDifference1.addIon(getIon(ion, abundance));
-			} else if(abundance < 0) {
-				abundance *= -1;
-				if(shifted) {
-					scanDifference2.addIon(getIon(ion + 1, abundance));
-				} else {
-					scanDifference2.addIon(getIon(ion, abundance));
-				}
-			}
+		try {
+			return Integer.parseInt(textControl.get().getText().trim());
+		} catch(NumberFormatException e) {
+			return 0;
 		}
-
-		scanChartControl.get().setInput(scanDifference1, scanDifference2, mirrored);
-	}
-
-	private void updateScanNormal() {
-
-		toolbarInfoTop.get().setText("");
-		toolbarInfoBottom.get().setText("");
-
-		if(scan1 != null) {
-			IScanMSD firstScan = (scan1Optimized != null) ? scan1Optimized : scan1;
-			toolbarInfoTop.get().setText(scanDataSupport.getMassSpectrumLabel(firstScan, PREFIX_U, TITLE_UNKNOWN, POSTFIX_NONE));
-			scanChartControl.get().setInput(firstScan);
-		} else if(scan2 != null) {
-			IScanMSD secondScan = (scan2Optimized != null) ? scan2Optimized : scan2;
-			toolbarInfoTop.get().setText(scanDataSupport.getMassSpectrumLabel(secondScan, PREFIX_U, TITLE_UNKNOWN, POSTFIX_NONE));
-			scanChartControl.get().setInput(secondScan);
-		} else {
-			scanChartControl.get().setInput(null);
-		}
-	}
-
-	private IIon getIon(int mz, float abundance) {
-
-		IIon ion = null;
-		ion = new Ion(mz, abundance);
-		return ion;
 	}
 
 	private void createControl() {
@@ -356,8 +360,8 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 		createToolbarMain(this);
 		createToolbarInfoTop(this);
-		createToolbarOptions(this);
-		createScanChart(this);
+		createToolbarHybridSearch(this);
+		createTabFolderCharts(this);
 		createToolbarInfoBottom(this);
 
 		initialize();
@@ -367,22 +371,28 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 		enableToolbar(toolbarInfoTop, buttonToolbarInfo.get(), IApplicationImage.IMAGE_INFO, TOOLTIP_INFO, true);
 		enableToolbar(toolbarInfoBottom, buttonToolbarInfo.get(), IApplicationImage.IMAGE_INFO, TOOLTIP_INFO, true);
-		enableToolbar(toolbarEdit, buttonToolbarEdit.get(), IApplicationImage.IMAGE_EDIT, TOOLTIP_EDIT, false);
+		enableToolbar(toolbarHybridSearch, buttonToolbarHybrid.get(), IMAGE_HYBRID, TOOLTIP_HYBRID, false);
+		comboViewerOptionControl.get().setInput(ComparisonScanOption.values());
+		comboViewerOptionControl.get().setSelection(new StructuredSelection(ComparisonScanOption.LIBRARY_SEARCH));
 	}
 
 	private void createToolbarMain(Composite parent) {
 
 		Composite composite = new Composite(parent, SWT.NONE);
-		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
-		gridData.horizontalAlignment = SWT.END;
-		composite.setLayoutData(gridData);
-		composite.setLayout(new GridLayout(6, false));
+		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		composite.setLayout(new GridLayout(12, false));
 
 		createButtonToggleInfo(composite);
-		createButtonToggleEdit(composite);
+		createComboViewerComparisonScanOption(composite);
 		createResetButton(composite);
 		createSaveButton(composite);
-		createOptimizedScanButton(composite);
+		createButtonToggleHybrid(composite);
+		createButtonOptimizedSpectrum(composite);
+		createButtonMirroredSpectrum(composite);
+		createButtonDifferenceSpectrum(composite);
+		createButtonShiftReferenceSpectrum(composite);
+		createSpinnerShiftReferenceSpectrum(composite);
+		createToggleLegendButton(composite);
 		createSettingsButton(composite);
 	}
 
@@ -391,158 +401,152 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		buttonToolbarInfo.set(createButtonToggleToolbar(parent, Arrays.asList(toolbarInfoTop, toolbarInfoBottom), IMAGE_INFO, TOOLTIP_INFO));
 	}
 
-	private void createButtonToggleEdit(Composite parent) {
+	private void createComboViewerComparisonScanOption(Composite parent) {
 
-		buttonToolbarEdit.set(createButtonToggleToolbar(parent, toolbarEdit, IMAGE_EDIT, TOOLTIP_EDIT));
+		ComboViewer comboViewer = new EnhancedComboViewer(parent, SWT.READ_ONLY);
+		Combo combo = comboViewer.getCombo();
+		comboViewer.setContentProvider(ArrayContentProvider.getInstance());
+		comboViewer.setLabelProvider(new AbstractLabelProvider() {
+
+			@Override
+			public String getText(Object element) {
+
+				if(element instanceof ComparisonScanOption comparisonScanOption) {
+					return comparisonScanOption.label();
+				}
+				return null;
+			}
+		});
+
+		combo.setToolTipText("Comparison Scan Option");
+		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		combo.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				Object object = comboViewer.getStructuredSelection().getFirstElement();
+				if(object instanceof ComparisonScanOption) {
+					updateChart();
+				}
+			}
+		});
+
+		comboViewerOptionControl.set(comboViewer);
 	}
 
-	private void createToolbarOptions(Composite parent) {
+	private void createToolbarHybridSearch(Composite parent) {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
-		composite.setLayout(new GridLayout(3, false));
+		composite.setLayout(new GridLayout(3, true));
 
-		createUpdateGroup(composite);
-		createDisplayGroup(composite);
-		createMirrorOptionSection(composite);
+		createTextWeightUnknown(composite);
+		createLabel(composite, "MW (Unknown vs. Reference)");
+		createTextWeightReference(composite);
 
-		toolbarEdit.set(composite);
+		toolbarHybridSearch.set(composite);
 	}
 
-	private void createUpdateGroup(Composite parent) {
+	private void createLabel(Composite parent, String text) {
 
-		Group group = new Group(parent, SWT.NONE);
-		group.setBackground(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
-		group.setText("");
-		group.setToolTipText("Select the display option.");
-		group.setLayout(new RowLayout(SWT.HORIZONTAL));
-		group.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-
-		Button updateScan1 = new Button(group, SWT.RADIO);
-		updateScan1.setText("Scan 1");
-		updateScan1.setSelection(displayOption.equals(OPTION_UPDATE_SCAN_1));
-		updateScan1.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-
-				displayOption = OPTION_UPDATE_SCAN_1;
-				updateChart();
-			}
-		});
-
-		Button updateScan2 = new Button(group, SWT.RADIO);
-		updateScan2.setText("Scan 2");
-		updateScan2.setSelection(displayOption.equals(OPTION_UPDATE_SCAN_2));
-		updateScan2.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-
-				displayOption = OPTION_UPDATE_SCAN_2;
-				updateChart();
-			}
-		});
-
-		Button updateLibraryScan = new Button(group, SWT.RADIO);
-		updateLibraryScan.setText("Library Search");
-		updateLibraryScan.setSelection(displayOption.equals(OPTION_LIBRARY_SEARCH));
-		updateLibraryScan.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-
-				displayOption = OPTION_LIBRARY_SEARCH;
-				updateChart();
-			}
-		});
+		Label label = new Label(parent, SWT.NONE);
+		label.setText(text);
+		label.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, true, true));
 	}
 
-	private void createDisplayGroup(Composite parent) {
+	private void createTextWeightUnknown(Composite parent) {
 
-		Group group = new Group(parent, SWT.NONE);
-		group.setText("");
-		group.setToolTipText("Select the display pre-processing.");
-		group.setBackground(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
-		group.setText("");
-		group.setLayout(new RowLayout(SWT.HORIZONTAL));
-		group.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-
-		Button buttonNormalModus = new Button(group, SWT.RADIO);
-		buttonNormalModus.setText(LABEL_UR_NORMAL);
-		buttonNormalModus.setToolTipText("Use the normal modus.");
-		buttonNormalModus.setSelection(!displayDifference);
-		buttonNormalModus.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-
-				displayDifference = false;
-				updateChart();
-			}
-		});
-
-		Button buttonDifferenceModus = new Button(group, SWT.RADIO);
-		buttonDifferenceModus.setText(LABEL_UR_DIFFERENCE);
-		buttonDifferenceModus.setToolTipText("Use the difference modus.");
-		buttonDifferenceModus.setSelection(displayDifference);
-		buttonDifferenceModus.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-
-				displayDifference = true;
-				updateChart();
-			}
-		});
+		textWeightUnknownControl.set(createText(parent));
 	}
 
-	private void createMirrorOptionSection(Composite parent) {
+	private void createTextWeightReference(Composite parent) {
 
-		Composite composite = new Composite(parent, SWT.NONE);
-		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
-		gridData.horizontalAlignment = SWT.END;
-		composite.setLayoutData(gridData);
-		composite.setLayout(new GridLayout(2, false));
-
-		Button buttonMirrored = new Button(composite, SWT.PUSH);
-		buttonMirrored.setText("");
-		buttonMirrored.setToolTipText("Set whether the data shall be displayed normal or mirrored.");
-		buttonMirrored.setImage(ApplicationImageFactory.getInstance().getImage(displayMirrored ? IApplicationImage.IMAGE_MIRRORED_MASS_SPECTRUM : IApplicationImage.IMAGE_MASS_SPECTRUM, IApplicationImageProvider.SIZE_16x16));
-		buttonMirrored.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-
-				displayMirrored = !displayMirrored;
-				buttonMirrored.setImage(ApplicationImageFactory.getInstance().getImage(displayMirrored ? IApplicationImage.IMAGE_MIRRORED_MASS_SPECTRUM : IApplicationImage.IMAGE_MASS_SPECTRUM, IApplicationImageProvider.SIZE_16x16));
-				updateChart();
-			}
-		});
-
-		Button buttonShifted = new Button(composite, SWT.PUSH);
-		buttonShifted.setText("");
-		buttonShifted.setToolTipText("Set whether the data shall be shifted or not.");
-		buttonShifted.setImage(ApplicationImageFactory.getInstance().getImage(displayShifted ? IApplicationImage.IMAGE_SHIFTED_MASS_SPECTRUM : IApplicationImage.IMAGE_MASS_SPECTRUM, IApplicationImageProvider.SIZE_16x16));
-		buttonShifted.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-
-				displayShifted = !displayShifted;
-				buttonShifted.setImage(ApplicationImageFactory.getInstance().getImage(displayShifted ? IApplicationImage.IMAGE_SHIFTED_MASS_SPECTRUM : IApplicationImage.IMAGE_MASS_SPECTRUM, IApplicationImageProvider.SIZE_16x16));
-				updateChart();
-			}
-		});
+		textWeightReferenceControl.set(createText(parent));
 	}
 
-	private void createScanChart(Composite parent) {
+	private Text createText(Composite parent) {
 
-		ScanChartUI scanChartUI = new ScanChartUI(parent, SWT.BORDER);
+		Text text = new Text(parent, SWT.BORDER);
+		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		text.addKeyListener(new KeyAdapter() {
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+
+				if(e.keyCode == SWT.LF || e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR) {
+					updateChart();
+				}
+			}
+		});
+
+		return text;
+	}
+
+	private void createTabFolderCharts(Composite parent) {
+
+		TabFolder tabFolder = new TabFolder(parent, SWT.BOTTOM);
+		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
+
+		createScanChartComparison(tabFolder);
+		createScanChartStacked(tabFolder);
+
+		tabFolderControl.set(tabFolder);
+	}
+
+	private void createScanChartComparison(TabFolder tabFolder) {
+
+		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
+		tabItem.setText("Comparison");
+
+		ScanChartUI scanChartUI = new ScanChartUI(tabFolder, SWT.BORDER);
 		scanChartUI.setLayoutData(new GridData(GridData.FILL_BOTH));
 
+		tabItem.setControl(scanChartUI);
 		scanChartControl.set(scanChartUI);
+	}
+
+	private void createScanChartStacked(TabFolder tabFolder) {
+
+		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
+		tabItem.setText("Stacked");
+
+		Composite composite = new Composite(tabFolder, SWT.BORDER);
+		composite.setLayout(new GridLayout(1, true));
+
+		ScanChartUI scanChartTop = createScanChartStacked(composite);
+		ScanChartUI scanChartBottom = createScanChartStacked(composite);
+		scanChartBottom.addLinkedScrollableChart(scanChartTop);
+
+		scanChartStackTopControl.set(scanChartTop);
+		scanChartStackBottomControl.set(scanChartBottom);
+		tabItem.setControl(composite);
+	}
+
+	private ScanChartUI createScanChartStacked(Composite parent) {
+
+		ScanChartUI scanChartUI = new ScanChartUI(parent, SWT.NONE);
+		scanChartUI.setLayoutData(new GridData(GridData.FILL_BOTH));
+		scanChartUI.setChartType(ChartType.BAR);
+		scanChartUI.setDataType(DataType.MSD_NOMINAL);
+		scanChartUI.setSignalType(SignalType.CENTROID);
+		scanChartUI.setLabelOption(LabelOption.NOMIMAL);
+		scanChartUI.activateLabelMarkerX();
+		/*
+		 * Settings
+		 */
+		IChartSettings chartSettings = scanChartUI.getChartSettings();
+		chartSettings.setHorizontalSliderVisible(false);
+		chartSettings.setVerticalSliderVisible(false);
+		chartSettings.getPrimaryAxisSettingsX().setVisible(false);
+		chartSettings.getPrimaryAxisSettingsY().setVisible(false);
+		for(ISecondaryAxisSettings secondaryAxisSettings : chartSettings.getSecondaryAxisSettingsListY()) {
+			secondaryAxisSettings.setVisible(false);
+		}
+		scanChartUI.applySettings(chartSettings);
+
+		return scanChartUI;
 	}
 
 	private void createToolbarInfoTop(Composite parent) {
@@ -589,54 +593,185 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				try {
-					if(scan1 != null) {
-						DatabaseFileSupport.saveMassSpectrum(DisplayUtils.getShell(), scan1, "UnknownMS");
-					}
-					if(scan2 != null) {
-						DatabaseFileSupport.saveMassSpectrum(DisplayUtils.getShell(), scan2, "ReferenceMS");
-					}
-				} catch(NoConverterAvailableException e1) {
-					logger.warn(e1);
-				}
+				saveMassSpectrum(scanUnknown, "UnknownMS");
+				saveMassSpectrum(scanReference, "ReferenceMS");
 			}
 		});
 		return button;
 	}
 
-	private void createOptimizedScanButton(Composite parent) {
+	private void saveMassSpectrum(IScanMSD scanMSD, String fileName) {
 
-		Button button = new Button(parent, SWT.PUSH);
-		button.setToolTipText("Show optimized scan.");
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_PLUS, IApplicationImageProvider.SIZE_16x16));
+		if(scanMSD != null) {
+			try {
+				DatabaseFileSupport.saveMassSpectrum(DisplayUtils.getShell(), scanMSD, fileName);
+			} catch(NoConverterAvailableException e1) {
+				logger.warn(e1);
+			}
+		}
+	}
+
+	private void createButtonToggleHybrid(Composite parent) {
+
+		Button button = createButtonToggleToolbar(parent, toolbarHybridSearch, IMAGE_HYBRID, TOOLTIP_HYBRID);
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
 			public void widgetSelected(SelectionEvent s) {
 
-				try {
-					/*
-					 * Scan 1
-					 */
-					if(scan1 != null && scan1.getOptimizedMassSpectrum() != null) {
-						scan1Optimized = scan1.getOptimizedMassSpectrum().makeDeepCopy().normalize(NORMALIZATION_FACTOR);
-					}
-					/*
-					 * Scan 2
-					 */
-					if(scan2 != null && scan2.getOptimizedMassSpectrum() != null) {
-						scan2Optimized = scan2.getOptimizedMassSpectrum().makeDeepCopy().normalize(NORMALIZATION_FACTOR);
-					}
+				updateChart();
+			}
+		});
 
-					button.setEnabled(false);
-					updateChart();
-				} catch(CloneNotSupportedException e) {
-					logger.warn(e);
-				}
+		buttonToolbarHybrid.set(button);
+	}
+
+	private void createButtonOptimizedSpectrum(Composite parent) {
+
+		Button button = new Button(parent, SWT.TOGGLE);
+		button.setText("");
+		button.setToolTipText("Use the optimized mass spectrum if available.");
+		updateButtonOptimized(button);
+		button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent s) {
+
+				useOptimizedSpectrum = !useOptimizedSpectrum;
+				updateButtonOptimized(button);
+				updateInput();
 			}
 		});
 
 		buttonOptimizedScan.set(button);
+	}
+
+	private void updateButtonOptimized(Button button) {
+
+		setButtonImage(button, IApplicationImage.IMAGE_PLUS, PREFIX_ENABLE, PREFIX_DISABLE, "using the optimized mass spectrum if available.", useOptimizedSpectrum);
+	}
+
+	private void createButtonMirroredSpectrum(Composite parent) {
+
+		Button button = new Button(parent, SWT.TOGGLE);
+		button.setText("");
+		button.setToolTipText("Show the reference in mirrored modus.");
+		updateButtonMirrored(button);
+		button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent s) {
+
+				useMirroredSpectrum = !useMirroredSpectrum;
+				updateButtonMirrored(button);
+				updateInput();
+			}
+		});
+
+		buttonMirroredReference.set(button);
+	}
+
+	private void updateButtonMirrored(Button button) {
+
+		setButtonImage(button, IApplicationImage.IMAGE_MIRRORED_MASS_SPECTRUM, PREFIX_ENABLE, PREFIX_DISABLE, "showing the reference in mirrored modus.", useMirroredSpectrum);
+	}
+
+	private void createButtonDifferenceSpectrum(Composite parent) {
+
+		Button button = new Button(parent, SWT.TOGGLE);
+		button.setText("");
+		button.setToolTipText("Show both unknown and reference in difference modus.");
+		updateButtonDifference(button);
+		button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent s) {
+
+				showDifferenceSpectrum = !showDifferenceSpectrum;
+				updateButtonDifference(button);
+				updateInput();
+			}
+		});
+
+		buttonDifferenceSpectrum.set(button);
+	}
+
+	private void updateButtonDifference(Button button) {
+
+		setButtonImage(button, IApplicationImage.IMAGE_SUBTRACT_SCAN_DEFAULT, PREFIX_ENABLE, PREFIX_DISABLE, "showing the difference spectrum.", showDifferenceSpectrum);
+	}
+
+	private void createButtonShiftReferenceSpectrum(Composite parent) {
+
+		Button button = new Button(parent, SWT.TOGGLE);
+		button.setText("");
+		button.setToolTipText("Shift the reference spectrum.");
+		updateButtonShiftReference(button);
+		button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent s) {
+
+				shiftReferenceSpectrum = !shiftReferenceSpectrum;
+				updateButtonShiftReference(button);
+				updateInput();
+			}
+		});
+
+		buttonShiftReferenceSpectrum.set(button);
+	}
+
+	private void updateButtonShiftReference(Button button) {
+
+		setButtonImage(button, IApplicationImage.IMAGE_SHIFTED_MASS_SPECTRUM, PREFIX_ENABLE, PREFIX_DISABLE, "showing the reference spectrum with a mass shift.", shiftReferenceSpectrum);
+	}
+
+	private void createSpinnerShiftReferenceSpectrum(Composite parent) {
+
+		Spinner spinner = new Spinner(parent, SWT.BORDER);
+		spinner.setMinimum(1);
+		spinner.setMaximum(50);
+		spinner.setPageIncrement(1);
+		spinner.setSelection(shiftMass);
+		spinner.setToolTipText("Determine the shitf mass.");
+		GridData gridData = new GridData();
+		gridData.widthHint = 80;
+		spinner.setLayoutData(gridData);
+
+		spinner.addKeyListener(new KeyAdapter() {
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+
+				if(e.keyCode == SWT.LF || e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR) {
+					updateShiftMass();
+				}
+			}
+		});
+
+		spinner.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseUp(MouseEvent e) {
+
+				if(e.button == 1) {
+					updateShiftMass();
+				}
+			}
+		});
+
+		spinnerShiftReferenceSpectrum.set(spinner);
+	}
+
+	private void updateShiftMass() {
+
+		shiftMass = spinnerShiftReferenceSpectrum.get().getSelection();
+		updateInput();
+	}
+
+	private void createToggleLegendButton(Composite parent) {
+
+		createButtonToggleChartLegend(parent, scanChartControl, IMAGE_LEGEND);
 	}
 
 	private void createSettingsButton(Composite parent) {
@@ -644,17 +779,168 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		createSettingsButton(parent, Arrays.asList(PreferencePageScans.class), display -> applySettings());
 	}
 
+	private void updateInput() {
+
+		updateWidgets();
+		Display.getDefault().asyncExec(this::updateChart);
+	}
+
+	private void updateWidgets() {
+
+		boolean enabled = scanUnknown != null && scanReference != null;
+		toolbarHybridSearch.get().setEnabled(enabled);
+	}
+
 	private void reset() {
 
-		scan1Optimized = null;
-		scan2Optimized = null;
-		buttonOptimizedScan.get().setEnabled(true);
 		updateChart();
 	}
 
 	private void applySettings() {
 
 		updateChart();
+	}
+
+	private void assignScan(IScanMSD scanMSD, boolean unknown) {
+
+		if(scanMSD == null) {
+			if(unknown) {
+				scanUnknown = null;
+			} else {
+				scanReference = null;
+			}
+		} else {
+			IScanMSD copy = copyScan(scanMSD);
+			if(unknown) {
+				scanUnknown = copy;
+			} else {
+				scanReference = copy;
+			}
+		}
+	}
+
+	private void updateScanComparisonDifference() {
+
+		updateToolbarInfoDifference();
+		IExtractedIonSignal extractedIonSignalReference = scanUnknown.getExtractedIonSignal();
+		IExtractedIonSignal extractedIonSignalComparison = scanReference.getExtractedIonSignal();
+		int startIon = (extractedIonSignalReference.getStartIon() < extractedIonSignalComparison.getStartIon()) ? extractedIonSignalReference.getStartIon() : extractedIonSignalComparison.getStartIon();
+		int stopIon = (extractedIonSignalReference.getStopIon() > extractedIonSignalComparison.getStopIon()) ? extractedIonSignalReference.getStopIon() : extractedIonSignalComparison.getStopIon();
+
+		IScanMSD scanDifference1 = new ScanMSD();
+		IScanMSD scanDifference2 = new ScanMSD();
+
+		for(int ion = startIon; ion <= stopIon; ion++) {
+			float abundance = extractedIonSignalReference.getAbundance(ion) - extractedIonSignalComparison.getAbundance(ion);
+			if(abundance > 0) {
+				scanDifference1.addIon(getIon(ion, abundance));
+			} else if(abundance < 0) {
+				abundance *= -1;
+				if(shiftReferenceSpectrum) {
+					scanDifference2.addIon(getIon(ion + shiftMass, abundance));
+				} else {
+					scanDifference2.addIon(getIon(ion, abundance));
+				}
+			}
+		}
+
+		scanChartControl.get().setInput(scanDifference1, scanDifference2, useMirroredSpectrum);
+	}
+
+	private IIon getIon(int mz, float abundance) {
+
+		return new Ion(mz, abundance);
+	}
+
+	private void updateToolbarInfoDifference() {
+
+		updateToolbarInfoSpecial(PREFIX_UR, PREFIX_UR);
+	}
+
+	private void updateToolbarInfoSpecial(String prefixUnknown, String prefixReference) {
+
+		toolbarInfoTop.get().setText(scanDataSupport.getMassSpectrumLabel(scanUnknown, prefixUnknown, TITLE_UNKNOWN, POSTFIX_NONE));
+		toolbarInfoBottom.get().setText(scanDataSupport.getMassSpectrumLabel(scanReference, prefixReference, TITLE_REFERENCE, shiftReferenceSpectrum ? POSTFIX_SHIFTED + " (" + shiftMass + ")" : POSTFIX_NONE));
+	}
+
+	private void updateScanNormal() {
+
+		toolbarInfoTop.get().setText("");
+		toolbarInfoBottom.get().setText("");
+
+		if(scanUnknown != null) {
+			toolbarInfoTop.get().setText(scanDataSupport.getMassSpectrumLabel(scanUnknown, PREFIX_U, TITLE_UNKNOWN, POSTFIX_NONE));
+			scanChartControl.get().setInput(scanUnknown);
+		} else if(scanReference != null) {
+			IScanMSD secondScan = scanReference;
+			toolbarInfoTop.get().setText(scanDataSupport.getMassSpectrumLabel(secondScan, PREFIX_U, TITLE_UNKNOWN, POSTFIX_NONE));
+			scanChartControl.get().setInput(secondScan);
+		} else {
+			scanChartControl.get().setInput(null);
+		}
+	}
+
+	private void updateOnFocus() {
+
+		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
+		String topic = getLastTopic(dataUpdateSupport.getTopics());
+		List<Object> objects = dataUpdateSupport.getUpdates(topic);
+		if(!objects.isEmpty()) {
+			Object last = objects.get(0);
+			if(last instanceof IScanMSD scanMSD) {
+				IIdentificationTarget identificationTarget = IIdentificationTarget.getIdentificationTarget(scanMSD);
+				update(scanMSD, identificationTarget);
+			} else if(last instanceof IPeakMSD peakMSD) {
+				IIdentificationTarget identificationTarget = IIdentificationTarget.getIdentificationTarget(peakMSD);
+				update(peakMSD.getExtractedMassSpectrum(), identificationTarget);
+			} else if(last instanceof Object[] values) {
+				Object first = values[0];
+				Object second = values[1];
+				if(IChemClipseEvents.TOPIC_SCAN_TARGET_UPDATE_COMPARISON.equals(topic)) {
+					if(first instanceof IScanMSD unknownMassSpectrum && second instanceof IIdentificationTarget identificationTarget) {
+						update(unknownMassSpectrum, identificationTarget);
+					}
+				} else if(IChemClipseEvents.TOPIC_SCAN_REFERENCE_UPDATE_COMPARISON.equals(topic)) {
+					if(first instanceof IScanMSD unknownMassSpectrum && second instanceof IScanMSD referenceMassSpectrum) {
+						update(unknownMassSpectrum, referenceMassSpectrum);
+					}
+				}
+			}
+		}
+	}
+
+	private IScanMSD copyScan(IScanMSD scanMSD) {
+
+		if(scanMSD != null) {
+			try {
+				IScanMSD massSpectrum = scanMSD;
+				if(useOptimizedSpectrum) {
+					IScanMSD massSpectrumOptimized = scanMSD.getOptimizedMassSpectrum();
+					if(massSpectrumOptimized != null) {
+						massSpectrum = massSpectrumOptimized;
+					}
+				}
+				return massSpectrum.makeDeepCopy().normalize(NORMALIZATION_FACTOR);
+			} catch(CloneNotSupportedException e) {
+			}
+		}
+
+		return null;
+	}
+
+	private void updateChart() {
+
+		if(scanUnknown != null && scanReference != null) {
+			if(showDifferenceSpectrum) {
+				updateScanComparisonDifference();
+			} else {
+				updateScanComparisonNormal();
+			}
+			updateStackCharts();
+		} else {
+			updateScanNormal();
+			clearStackCharts();
+		}
 	}
 
 	private String getLastTopic(List<String> topics) {
@@ -674,6 +960,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 				return topic;
 			}
 		}
+
 		return "";
 	}
 }

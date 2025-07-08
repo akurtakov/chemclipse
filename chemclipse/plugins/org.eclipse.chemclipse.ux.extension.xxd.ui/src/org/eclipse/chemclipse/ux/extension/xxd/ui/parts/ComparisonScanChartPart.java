@@ -63,10 +63,14 @@ public class ComparisonScanChartPart extends AbstractPart<ExtendedComparisonScan
 					IIdentificationTarget identificationTarget = null;
 					if(object instanceof IScanMSD scanMSD) {
 						identificationTarget = IIdentificationTarget.getIdentificationTarget(scanMSD);
+						scan = scanMSD;
 					} else if(object instanceof IPeakMSD peakMSD) {
 						identificationTarget = IIdentificationTarget.getIdentificationTarget(peakMSD);
+						scan = peakMSD.getPeakModel().getPeakMassSpectrum();
 					}
-
+					/*
+					 * Scan/Peak with or without target.
+					 */
 					if(identificationTarget != null) {
 						getControl().update(scan, identificationTarget);
 						return true;
@@ -78,7 +82,6 @@ public class ComparisonScanChartPart extends AbstractPart<ExtendedComparisonScan
 					if(object instanceof Object[] values) {
 						Object object1 = values[0];
 						Object object2 = values[1];
-
 						if(object1 instanceof IScanMSD unknownMassSpectrum && object2 instanceof IIdentificationTarget identificationTarget) {
 							getControl().update(unknownMassSpectrum, identificationTarget);
 						}
@@ -87,7 +90,6 @@ public class ComparisonScanChartPart extends AbstractPart<ExtendedComparisonScan
 					if(object instanceof Object[] values) {
 						Object object1 = values[0];
 						Object object2 = values[1];
-
 						if(object1 instanceof IScanMSD unknownMassSpectrum && object2 instanceof IScanMSD referenceMassSpectrum) {
 							getControl().update(unknownMassSpectrum, referenceMassSpectrum);
 						}
