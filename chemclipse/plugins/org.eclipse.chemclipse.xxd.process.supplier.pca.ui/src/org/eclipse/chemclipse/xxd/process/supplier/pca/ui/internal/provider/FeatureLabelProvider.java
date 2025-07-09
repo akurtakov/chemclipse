@@ -20,7 +20,6 @@ import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
-import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.ui.provider.AbstractChemClipseLabelProvider;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Feature;
 import org.eclipse.swt.graphics.Image;
@@ -33,7 +32,7 @@ public class FeatureLabelProvider extends AbstractChemClipseLabelProvider {
 	public static final String DESCRIPTION = "Description";
 	//
 	public static final int BOUND_SAMPLE = 100;
-	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.0000");
+	private DecimalFormat decimalFormat = getDecimalFormat();
 	//
 	public static String[] TITLES = {//
 			VARIABLE, //
@@ -48,6 +47,11 @@ public class FeatureLabelProvider extends AbstractChemClipseLabelProvider {
 			150, //
 			200 //
 	};
+
+	public FeatureLabelProvider() {
+
+		super("#,##0.00##");
+	}
 
 	@Override
 	public Image getColumnImage(Object element, int columnIndex) {
