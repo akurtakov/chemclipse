@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Lorenz Gerber - add Feature Mode
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.provider;
 
@@ -22,6 +23,7 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.provider.AbstractChemClipseLabelProvider;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Feature;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.FeatureMode;
 import org.eclipse.swt.graphics.Image;
 
 public class FeatureLabelProvider extends AbstractChemClipseLabelProvider {
@@ -33,6 +35,7 @@ public class FeatureLabelProvider extends AbstractChemClipseLabelProvider {
 	//
 	public static final int BOUND_SAMPLE = 100;
 	private DecimalFormat decimalFormat = getDecimalFormat();
+	private FeatureMode featureMode = FeatureMode.ORIGINAL;
 	//
 	public static String[] TITLES = {//
 			VARIABLE, //
@@ -48,9 +51,10 @@ public class FeatureLabelProvider extends AbstractChemClipseLabelProvider {
 			200 //
 	};
 
-	public FeatureLabelProvider() {
+	public FeatureLabelProvider(String pattern, FeatureMode featureMode) {
 
-		super("#,##0.00##");
+		super(pattern);
+		this.featureMode = featureMode;
 	}
 
 	@Override
@@ -95,7 +99,12 @@ public class FeatureLabelProvider extends AbstractChemClipseLabelProvider {
 					int index = columnIndex - 4;
 					List<ISampleData<?>> sampleData = feature.getSampleData();
 					if(sampleData.size() > index) {
-						double value = sampleData.get(index).getData();
+						double value = 0.0;
+						if(featureMode.equals(FeatureMode.ORIGINAL)) {
+							value = sampleData.get(index).getData();
+						} else {
+							value = sampleData.get(index).getModifiedData();
+						}
 						text = Double.isNaN(value) ? "NaN" : decimalFormat.format(value);
 					} else {
 						text = "--";

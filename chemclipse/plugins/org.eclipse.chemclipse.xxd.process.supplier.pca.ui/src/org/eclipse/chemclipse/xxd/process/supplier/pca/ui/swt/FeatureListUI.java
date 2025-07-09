@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Lorenz Gerber - add Feature Mode
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt;
 
@@ -25,6 +26,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.provider.Feat
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.provider.FeatureLabelProvider;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.provider.FeatureListFilter;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.provider.VisualSelectionFilter;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.FeatureMode;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.ViewerComparator;
@@ -37,12 +39,14 @@ public class FeatureListUI extends ExtendedTableViewer {
 	private static final String[] TITLES = FeatureLabelProvider.TITLES;
 	private static final int[] BOUNDS = FeatureLabelProvider.BOUNDS;
 	//
-	private final ITableLabelProvider labelProvider = new FeatureLabelProvider();
+	private final FeatureLabelProvider labelProviderOriginal = new FeatureLabelProvider("#,##0", FeatureMode.ORIGINAL);
+	private final FeatureLabelProvider labelProviderPreprocessed = new FeatureLabelProvider("0.00##", FeatureMode.PREPROCESSED);
 	private final ViewerComparator comparator = new FeatureComparator();
 	private final FeatureListFilter listFilter = new FeatureListFilter();
 	private final VisualSelectionFilter selectFilter = new VisualSelectionFilter();
 	//
 	private IUpdateListener updateListener = null;
+	private FeatureMode featureMode = FeatureMode.ORIGINAL;
 
 	public FeatureListUI(Composite parent, int style) {
 
@@ -94,9 +98,18 @@ public class FeatureListUI extends ExtendedTableViewer {
 		}
 	}
 
+	public void setFeatureMode(FeatureMode featureMode) {
+
+		this.featureMode = featureMode;
+	}
+
 	private void createColumnsDefault() {
 
-		createColumns(TITLES, BOUNDS, labelProvider, comparator);
+		if(featureMode.equals(FeatureMode.ORIGINAL)) {
+			createColumns(TITLES, BOUNDS, labelProviderOriginal, comparator);
+		} else {
+			createColumns(TITLES, BOUNDS, labelProviderPreprocessed, comparator);
+		}
 	}
 
 	private void setContentProviders() {
@@ -147,7 +160,11 @@ public class FeatureListUI extends ExtendedTableViewer {
 		}
 		//
 		super.setInput(null);
-		createColumns(titles, bounds, labelProvider, comparator);
+		if(featureMode.equals(FeatureMode.ORIGINAL)) {
+			createColumns(titles, bounds, labelProviderOriginal, comparator);
+		} else {
+			createColumns(titles, bounds, labelProviderPreprocessed, comparator);
+		}
 	}
 
 	private void createColumns(String[] titles, int[] bounds, ITableLabelProvider labelProvider, ViewerComparator comparator) {
@@ -195,9 +212,7 @@ public class FeatureListUI extends ExtendedTableViewer {
 
 	private int getStyle(String label) {
 
-		if(FeatureLabelProvider.USE.equals(label)) {
-			return SWT.CENTER;
-		} else if(FeatureLabelProvider.CLASSIFICATION.equals(label)) {
+		if(FeatureLabelProvider.CLASSIFICATION.equals(label)) {
 			return SWT.LEFT;
 		} else if(FeatureLabelProvider.DESCRIPTION.equals(label)) {
 			return SWT.LEFT;

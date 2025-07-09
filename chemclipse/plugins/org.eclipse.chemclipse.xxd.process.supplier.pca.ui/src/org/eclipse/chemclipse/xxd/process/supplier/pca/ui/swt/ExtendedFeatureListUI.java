@@ -27,6 +27,8 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.ui.editors.SystemEditor;
 import org.eclipse.chemclipse.support.ui.menu.ITableMenuEntry;
+import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
+import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.chemclipse.support.ui.swt.ITableSettings;
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
@@ -46,8 +48,11 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.model.FeatureDataMatrix;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.Activator;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePage;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.FeatureMode;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -55,6 +60,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
@@ -68,6 +74,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 	private Button buttonToolbarSearch;
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private AtomicReference<FeatureListUI> listControl = new AtomicReference<>();
+	private AtomicReference<ComboViewer> comboViewerFeatureMode = new AtomicReference<>();
 	private Button buttonToolbarInfo;
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	//
@@ -110,7 +117,9 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 											feature.getVariable().setVisualSelected(true);
 										}
 										listControl.get().setSelection(new StructuredSelection(features));
-										listControl.get().reveal(features.get(0));
+										if(features.size() > 0) {
+											listControl.get().reveal(features.get(0));
+										}
 									}
 								}
 							}
@@ -159,8 +168,9 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
-		composite.setLayout(new GridLayout(7, false));
+		composite.setLayout(new GridLayout(8, false));
 		//
+		createComboViewerFeatureMode(composite);
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 		buttonToolbarSearch = createButtonToggleToolbar(composite, toolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH);
 		createButtonFilterSelected(composite);
@@ -431,5 +441,49 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 		String marker = "".equals(searchText) ? "" : "*";
 		String search = "".equals(searchText) ? "" : " (" + searchText + ")";
 		toolbarInfo.get().setText("Features" + marker + ": " + count + search);
+	}
+
+	private void createComboViewerFeatureMode(Composite parent) {
+
+		ComboViewer comboViewer = new EnhancedComboViewer(parent, SWT.READ_ONLY);
+		comboViewer.setContentProvider(ArrayContentProvider.getInstance());
+		comboViewer.setLabelProvider(new AbstractLabelProvider() {
+
+			@Override
+			public String getText(Object element) {
+
+				if(element instanceof FeatureMode featureMode) {
+					return featureMode.label();
+				}
+				return null;
+			}
+		});
+		Combo combo = comboViewer.getCombo();
+		combo.setToolTipText("Show Original or Pre-processed Data");
+		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		combo.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				Object object = comboViewer.getStructuredSelection().getFirstElement();
+				if(object instanceof FeatureMode featureMode) {
+					if(evaluationPCA != null) {
+						if(featureMode.equals(FeatureMode.ORIGINAL)) {
+							listControl.get().setFeatureMode(FeatureMode.ORIGINAL);
+							updateInput();
+						} else {
+							listControl.get().setFeatureMode(FeatureMode.PREPROCESSED);
+							updateInput();
+						}
+					}
+				}
+			}
+		});
+		//
+		comboViewer.setInput(FeatureMode.values());
+		comboViewer.setSelection(new StructuredSelection(FeatureMode.ORIGINAL));
+		//
+		comboViewerFeatureMode.set(comboViewer);
 	}
 }
