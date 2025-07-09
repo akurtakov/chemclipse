@@ -28,7 +28,9 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.provider.Visu
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.ViewerComparator;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.TableColumn;
 
 public class FeatureListUI extends ExtendedTableViewer {
 
@@ -151,6 +153,7 @@ public class FeatureListUI extends ExtendedTableViewer {
 	private void createColumns(String[] titles, int[] bounds, ITableLabelProvider labelProvider, ViewerComparator comparator) {
 
 		createColumns(titles, bounds);
+		setColumnStyle();
 		setLabelProvider(labelProvider);
 		setContentProvider(new ListContentProvider());
 		setComparator(comparator);
@@ -180,5 +183,25 @@ public class FeatureListUI extends ExtendedTableViewer {
 			return true;
 		}
 		return false;
+	}
+
+	private void setColumnStyle() {
+
+		TableColumn[] columns = getTable().getColumns();
+		for(TableColumn column : columns) {
+			column.setAlignment(getStyle(column.getText()));
+		}
+	}
+
+	private int getStyle(String label) {
+
+		if(FeatureLabelProvider.USE.equals(label)) {
+			return SWT.CENTER;
+		} else if(FeatureLabelProvider.CLASSIFICATION.equals(label)) {
+			return SWT.LEFT;
+		} else if(FeatureLabelProvider.DESCRIPTION.equals(label)) {
+			return SWT.LEFT;
+		}
+		return SWT.RIGHT;
 	}
 }
