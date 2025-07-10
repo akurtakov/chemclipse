@@ -34,6 +34,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing.Normal
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing.NormalizationInfNorm;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing.ScalingAuto;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing.ScalingLevel;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing.ScalingNone;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing.ScalingPareto;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing.ScalingRange;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing.ScalingVast;
@@ -239,17 +240,17 @@ public class PreprocessingSettingsUI extends Composite {
 
 				if(comboViewerScaling != null) {
 					Object object = comboViewer.getStructuredSelection().getFirstElement();
+					Object objectScaling = comboViewerScaling.getStructuredSelection().getFirstElement();
 					preprocessingSettings.setCentering(null);
 					Combo combo = comboViewerScaling.getCombo();
 					//
 					if(object instanceof CenteringMean) {
-						comboViewerScaling.setInput(scalingInputMean);
 						combo.setEnabled(true);
+						setCentering(preprocessingSettings, ICentering.MEAN, objectScaling);
 					} else if(object instanceof CenteringMedian) {
-						comboViewerScaling.setInput(scalingInputMedian);
 						combo.setEnabled(true);
+						setCentering(preprocessingSettings, ICentering.MEDIAN, objectScaling);
 					} else {
-						comboViewerScaling.setInput(scaleInputEmpty);
 						combo.setEnabled(false);
 					}
 				}
@@ -259,6 +260,23 @@ public class PreprocessingSettingsUI extends Composite {
 		});
 		//
 		return comboViewer;
+	}
+
+	private void setCentering(IPreprocessingSettings settings, int centering, Object object) {
+
+		if(object instanceof ScalingNone) {
+			settings.setCentering(new ScalingNone(centering));
+		} else if(object instanceof ScalingAuto) {
+			settings.setCentering(new ScalingAuto(centering));
+		} else if(object instanceof ScalingVast) {
+			settings.setCentering(new ScalingVast(centering));
+		} else if(object instanceof ScalingLevel) {
+			settings.setCentering(new ScalingLevel(centering));
+		} else if(object instanceof ScalingPareto) {
+			settings.setCentering(new ScalingPareto(centering));
+		} else if(object instanceof ScalingRange) {
+			settings.setCentering(new ScalingRange(centering));
+		}
 	}
 
 	private ComboViewer createComboViewerScale(Composite parent) {
@@ -365,7 +383,7 @@ public class PreprocessingSettingsUI extends Composite {
 
 	private Object[] createScaleElements(int centeringType) {
 
-		return new Object[]{"--", new ScalingAuto(centeringType), new ScalingLevel(centeringType), new ScalingPareto(centeringType), new ScalingRange(centeringType), new ScalingVast(centeringType)};
+		return new Object[]{new ScalingNone(centeringType), new ScalingAuto(centeringType), new ScalingLevel(centeringType), new ScalingPareto(centeringType), new ScalingRange(centeringType), new ScalingVast(centeringType)};
 	}
 
 	private void updateWidgets() {
