@@ -41,7 +41,6 @@ public class ScorePlot extends AbtractPlotPCA {
 			IResultsPCA<? extends IResultPCA, ?> resultsPCA = evaluationPCA.getResults();
 			List<ISample> highlightedSamples = evaluationPCA.getHighlightedSamples();
 			addSeriesData(SeriesConverter.sampleToSeries(resultsPCA, highlightedSamples, pcX, pcY, extractedResults));
-			update(pcX, pcY, resultsPCA.getExplainedVariances());
 		}
 		redraw();
 	}

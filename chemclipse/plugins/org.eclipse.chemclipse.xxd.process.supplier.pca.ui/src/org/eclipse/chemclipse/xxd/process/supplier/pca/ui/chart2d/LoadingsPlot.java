@@ -61,7 +61,6 @@ public class LoadingsPlot extends AbtractPlotPCA {
 			}
 			//
 			addSeriesData(series);
-			update(pcX, pcY, resultsPCA.getExplainedVariances());
 		}
 		redraw();
 	}
