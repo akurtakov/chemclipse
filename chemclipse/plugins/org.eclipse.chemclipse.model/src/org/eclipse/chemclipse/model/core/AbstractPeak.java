@@ -346,6 +346,12 @@ public abstract class AbstractPeak implements IPeak {
 	}
 
 	@Override
+	public void clearClassifier() {
+
+		classifier.clear();
+	}
+
+	@Override
 	public void addClassifier(String classifier) {
 
 		if(classifier != null && !classifier.trim().isEmpty()) {

@@ -19,6 +19,8 @@ public interface IClassifier {
 
 	Collection<String> getClassifier();
 
+	void clearClassifier();
+
 	void addClassifier(String classifier);
 
 	void removeClassifier(String classifier);

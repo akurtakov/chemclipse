@@ -357,6 +357,12 @@ public abstract class AbstractLibraryInformation implements ILibraryInformation 
 	}
 
 	@Override
+	public void clearClassifier() {
+
+		classification.clear();
+	}
+
+	@Override
 	public void addClassifier(String classifier) {
 
 		classification.add(classifier);
