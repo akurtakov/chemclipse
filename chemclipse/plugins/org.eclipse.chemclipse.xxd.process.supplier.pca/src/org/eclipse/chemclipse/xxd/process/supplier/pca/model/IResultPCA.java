@@ -29,9 +29,9 @@ public interface IResultPCA {
 
 	void setScoreVector(double[] eigenSpace);
 
-	double getErrorMemberShip();
+	double getErrorMetric();
 
-	void setErrorMemberShip(double errorMemberShip);
+	void setErrorMetric(double errorMetric);
 
 	void setSampleData(double[] sampleData);
 

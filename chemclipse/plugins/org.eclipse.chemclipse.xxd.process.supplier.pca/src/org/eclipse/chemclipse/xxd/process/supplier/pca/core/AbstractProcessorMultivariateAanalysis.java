@@ -275,7 +275,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 			ISample sample = entry.getKey();
 			IResultPCA pcaResult = new ResultPCA(sample);
 			pcaResult.setScoreVector(principalComponentAnalysis.getScoreVector(sample));
-			pcaResult.setErrorMemberShip(principalComponentAnalysis.getErrorMetric(sampleData));
+			pcaResult.setErrorMetric(principalComponentAnalysis.getErrorMetric(sampleData));
 			pcaResult.setSampleData(sampleData);
 			resultsList.add(pcaResult);
 		}

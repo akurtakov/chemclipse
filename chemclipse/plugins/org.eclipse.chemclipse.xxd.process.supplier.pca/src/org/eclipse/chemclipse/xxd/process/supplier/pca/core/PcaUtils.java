@@ -293,7 +293,7 @@ public class PcaUtils {
 	 * @param pcaResults
 	 * @param inverse
 	 */
-	public static void sortPcaResultsListByErrorMemberShip(List<IResultPCA> pcaResults, boolean inverse) {
+	public static void sortPcaResultsListByErrorMetric(List<IResultPCA> pcaResults, boolean inverse) {
 
 		int i = 1;
 		if(inverse) {
@@ -301,7 +301,7 @@ public class PcaUtils {
 		}
 		final int inv = i;
 		Comparator<IResultPCA> comparator = (arg0, arg1) -> {
-			return inv * Double.compare(arg0.getErrorMemberShip(), arg1.getErrorMemberShip());
+			return inv * Double.compare(arg0.getErrorMetric(), arg1.getErrorMetric());
 		};
 		Collections.sort(pcaResults, comparator);
 	}

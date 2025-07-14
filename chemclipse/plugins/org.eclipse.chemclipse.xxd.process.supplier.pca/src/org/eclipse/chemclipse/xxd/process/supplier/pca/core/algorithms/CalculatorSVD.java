@@ -48,20 +48,13 @@ public class CalculatorSVD extends AbstractMultivariateCalculator {
 		setLoadings(svd.getV(null, true));
 		DMatrixRMaj W = svd.getW(null);
 		SingularOps_DDRM.descendingOrder(null, false, W, getLoadings(), true);
-		getLoadings().reshape(getNumComps(), getMean().length, true);
+		getLoadings().reshape(getNumComps(), getSampleData().getNumCols(), true);
 	}
 
 	private void computeScores() {
 
-		double[] concatMeans = new double[getSampleData().getNumRows() * getSampleData().getNumCols()];
-		for(int i = 0; i < getSampleData().getNumRows(); i++) {
-			System.arraycopy(getMean(), 0, concatMeans, i * getSampleData().getNumCols(), getSampleData().getNumCols());
-		}
-		DMatrixRMaj means = DMatrixRMaj.wrap(getSampleData().getNumRows(), getSampleData().getNumCols(), concatMeans);
-		// DMatrixRMaj sample = DMatrixRMaj.wrap(getSampleData().getNumRows(), getSampleData().getNumCols(), getSampleData().data);
 		DMatrixRMaj sample = getSampleData().copy();
 		DMatrixRMaj rotated = new DMatrixRMaj(getNumComps(), getSampleData().getNumRows());
-		CommonOps_DDRM.subtract(sample, means, sample);
 		DMatrixRMaj loadings = new DMatrixRMaj(getLoadings());
 		CommonOps_DDRM.transpose(sample);
 		CommonOps_DDRM.mult(loadings, sample, rotated);

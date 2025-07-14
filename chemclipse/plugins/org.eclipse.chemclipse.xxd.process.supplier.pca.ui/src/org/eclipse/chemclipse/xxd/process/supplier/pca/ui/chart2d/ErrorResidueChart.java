@@ -164,7 +164,7 @@ public class ErrorResidueChart extends BarChart {
 		for(int i = 0; i < size; i++) {
 			IResultPCA pcaResult = pcaResultList.get(i);
 			xSeries[i] = i;
-			ySeries[i] = pcaResult.getErrorMemberShip();
+			ySeries[i] = pcaResult.getErrorMetric();
 		}
 		//
 		return new SeriesData(xSeries, ySeries, "Error Residues");

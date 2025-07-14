@@ -28,7 +28,6 @@ public abstract class AbstractMultivariateCalculator implements IMultivariateCal
 	private DMatrixRMaj loadings;
 	private DMatrixRMaj scores;
 	private DMatrixRMaj scoresPrediction;
-	private double[] mean;
 	private int numComps;
 	private DMatrixRMaj sampleData;
 	private DMatrixRMaj predictionData;
@@ -58,7 +57,6 @@ public abstract class AbstractMultivariateCalculator implements IMultivariateCal
 		}
 		sampleData = new DMatrixRMaj(numSamples, numVars);
 		predictionData = new DMatrixRMaj(numPredictionSamples, numVars);
-		this.mean = new double[numVars];
 		sampleIndex = 0;
 		sampleIndexPrediction = 0;
 		this.numComps = numComponents;
@@ -79,11 +77,6 @@ public abstract class AbstractMultivariateCalculator implements IMultivariateCal
 
 	@Override
 	public void addObservation(double[] obsData, ISample sampleKey, String groupName, String classificationName) {
-		/*
-		 * if(obsData.length < sampleData.getNumCols()) {
-		 * this.invalidatePca();
-		 * }
-		 */
 
 		for(int i = 0; i < obsData.length; i++) {
 			sampleData.set(sampleIndex, i, obsData[i]);
@@ -96,11 +89,6 @@ public abstract class AbstractMultivariateCalculator implements IMultivariateCal
 
 	@Override
 	public void addPrediction(double[] obsData, ISample sampleKey, String groupName, String classificationName) {
-		/*
-		 * if(obsData.length < sampleData.getNumCols()) {
-		 * this.invalidatePca();
-		 * }
-		 */
 
 		for(int i = 0; i < obsData.length; i++) {
 			predictionData.set(sampleIndexPrediction, i, obsData[i]);
@@ -149,10 +137,8 @@ public abstract class AbstractMultivariateCalculator implements IMultivariateCal
 	 */
 	private double[] applyLoadings(double[] obs) {
 
-		DMatrixRMaj mean = DMatrixRMaj.wrap(sampleData.getNumCols(), 1, this.mean);
 		DMatrixRMaj sample = new DMatrixRMaj(sampleData.getNumCols(), 1, true, obs);
 		DMatrixRMaj rotated = new DMatrixRMaj(numComps, 1);
-		CommonOps_DDRM.subtract(sample, mean, sample);
 		CommonOps_DDRM.mult(loadings, sample, rotated);
 		return rotated.data;
 	}
@@ -245,11 +231,6 @@ public abstract class AbstractMultivariateCalculator implements IMultivariateCal
 		return CommonOps_DDRM.elementSum(component) / 100;
 	}
 
-	protected double[] getMean() {
-
-		return mean;
-	}
-
 	protected int getNumComps() {
 
 		return numComps;
@@ -284,8 +265,6 @@ public abstract class AbstractMultivariateCalculator implements IMultivariateCal
 		DMatrixRMaj sample = new DMatrixRMaj(sampleData.getNumCols(), 1);
 		DMatrixRMaj rotated = DMatrixRMaj.wrap(numComps, 1, scoreVector);
 		CommonOps_DDRM.multTransA(loadings, rotated, sample);
-		DMatrixRMaj mean = DMatrixRMaj.wrap(sampleData.getNumCols(), 1, this.mean);
-		CommonOps_DDRM.add(sample, mean, sample);
 		return sample.data;
 	}
 
