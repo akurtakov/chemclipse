@@ -21,7 +21,7 @@ public class ResultPCA implements IResultPCA {
 	private ISample sample;
 	private boolean isDisplayed;
 	private double[] scoreVector;
-	private double errorMemberShip;
+	private double errorMetric;
 	private double[] sampleData;
 	private boolean isSelected;
 
@@ -39,9 +39,9 @@ public class ResultPCA implements IResultPCA {
 	}
 
 	@Override
-	public double getErrorMemberShip() {
+	public double getErrorMetric() {
 
-		return errorMemberShip;
+		return errorMetric;
 	}
 
 	@Override
@@ -75,9 +75,9 @@ public class ResultPCA implements IResultPCA {
 	}
 
 	@Override
-	public void setErrorMemberShip(double errorMemberShip) {
+	public void setErrorMetric(double errorMetric) {
 
-		this.errorMemberShip = errorMemberShip;
+		this.errorMetric = errorMetric;
 	}
 
 	@Override
