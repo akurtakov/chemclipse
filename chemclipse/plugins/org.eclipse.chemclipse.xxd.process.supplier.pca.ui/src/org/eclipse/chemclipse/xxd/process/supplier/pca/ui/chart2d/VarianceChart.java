@@ -15,11 +15,14 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.chemclipse.model.statistics.ISample;
+import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Variance;
 import org.eclipse.swt.SWT;
@@ -41,7 +44,7 @@ import org.eclipse.swtchart.extensions.core.SeriesData;
 public class VarianceChart extends BarChart {
 
 	private Variance variance = Variance.EXPLAINED;
-	private EvaluationPCA evaluationPCA;
+	private EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA;
 
 	public VarianceChart() {
 
@@ -61,7 +64,7 @@ public class VarianceChart extends BarChart {
 		updateChart();
 	}
 
-	public void setInput(EvaluationPCA evaluationPCA) {
+	public void setInput(EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA) {
 
 		this.evaluationPCA = evaluationPCA;
 		updateChart();

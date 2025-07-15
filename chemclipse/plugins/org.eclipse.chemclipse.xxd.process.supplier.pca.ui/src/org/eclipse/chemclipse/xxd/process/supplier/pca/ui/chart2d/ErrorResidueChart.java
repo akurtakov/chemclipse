@@ -15,6 +15,8 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.chemclipse.model.statistics.ISample;
+import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
@@ -49,10 +51,10 @@ public class ErrorResidueChart extends BarChart {
 		createControl();
 	}
 
-	public void setInput(EvaluationPCA evaluationPCA) {
+	public void setInput(EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA) {
 
 		if(evaluationPCA != null) {
-			IResultsPCA<?, ?> resultsPCA = evaluationPCA.getResults();
+			IResultsPCA<IResultPCA, ?> resultsPCA = evaluationPCA.getResults();
 			updateChart(resultsPCA);
 		} else {
 			updateChart(null);
@@ -116,7 +118,7 @@ public class ErrorResidueChart extends BarChart {
 		}
 	}
 
-	private void updateChart(IResultsPCA<?, ?> pcaResults) {
+	private void updateChart(IResultsPCA<IResultPCA, ?> pcaResults) {
 
 		deleteSeries();
 		if(pcaResults != null) {
@@ -140,9 +142,9 @@ public class ErrorResidueChart extends BarChart {
 		}
 	}
 
-	private String[] getCategories(IResultsPCA<? extends IResultPCA, ?> pcaResults) {
+	private String[] getCategories(IResultsPCA<IResultPCA, ?> pcaResults) {
 
-		List<? extends IResultPCA> pcaResultList = pcaResults.getPcaResultList();
+		List<IResultPCA> pcaResultList = pcaResults.getPcaResultList();
 		int size = pcaResultList.size();
 		String[] categories = new String[size];
 		//
@@ -154,9 +156,9 @@ public class ErrorResidueChart extends BarChart {
 		return categories;
 	}
 
-	private ISeriesData getSeries(IResultsPCA<? extends IResultPCA, ?> pcaResults) {
+	private ISeriesData getSeries(IResultsPCA<IResultPCA, ?> pcaResults) {
 
-		List<? extends IResultPCA> pcaResultList = pcaResults.getPcaResultList();
+		List<IResultPCA> pcaResultList = pcaResults.getPcaResultList();
 		int size = pcaResultList.size();
 		double[] xSeries = new double[size];
 		double[] ySeries = new double[size];

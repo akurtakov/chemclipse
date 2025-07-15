@@ -39,13 +39,11 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class PcaExtractionFileText implements IExtractionData {
 
 	private static final Logger logger = Logger.getLogger(PcaExtractionFileText.class);
-
 	public static final String DESCRIPTION = "PCA Data Matrix";
 	public static final String FILE_EXTENSION = ".pdm";
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-
 	private static final String DELIMITER = "\t";
 	private final List<IDataInputEntry> dataInputEntries;
 
@@ -77,10 +75,8 @@ public class PcaExtractionFileText implements IExtractionData {
 		 * Data
 		 */
 		for(int j = 0; j < 20; j++) {
-
 			int sampleNumber = j + 1;
 			double type = Math.random();
-
 			printWriter.print("Sample ");
 			if(sampleNumber < 10) {
 				printWriter.print("0");
@@ -110,7 +106,6 @@ public class PcaExtractionFileText implements IExtractionData {
 
 		Map<String, Sample> sampleMap = new HashMap<>();
 		Map<String, Map<String, Target>> samplesVariablesMap = new HashMap<>();
-
 		for(IDataInputEntry dataInputEntry : dataInputEntries) {
 			String inputFile = dataInputEntry.getInputFile();
 			File file = new File(inputFile);
@@ -187,10 +182,9 @@ public class PcaExtractionFileText implements IExtractionData {
 		List<Sample> sampleList = new ArrayList<>(sampleMap.values());
 		Collections.sort(sampleList, (s1, s2) -> s1.getSampleName().compareTo(s2.getSampleName()));
 		Samples samples = new Samples(sampleList);
-		List<? extends IVariable> variables = extractVariables(samplesVariablesMap);
+		List<IVariable> variables = extractVariables(samplesVariablesMap);
 		samples.getVariables().addAll(variables);
 		setExtractData(samplesVariablesMap, samples);
-
 		return samples;
 	}
 
@@ -201,7 +195,7 @@ public class PcaExtractionFileText implements IExtractionData {
 	 * @param samplesVariablesMap
 	 * @return
 	 */
-	private List<? extends IVariable> extractVariables(Map<String, Map<String, Target>> samplesVariablesMap) {
+	private List<IVariable> extractVariables(Map<String, Map<String, Target>> samplesVariablesMap) {
 
 		Map<String, Target> targets = new HashMap<>();
 		/*
@@ -218,8 +212,7 @@ public class PcaExtractionFileText implements IExtractionData {
 				}
 			}
 		}
-
-		List<? extends IVariable> variables = new ArrayList<>(targets.values());
+		List<IVariable> variables = new ArrayList<>(targets.values());
 		Collections.sort(variables, Comparable::compareTo);
 		return variables;
 	}
@@ -227,14 +220,12 @@ public class PcaExtractionFileText implements IExtractionData {
 	private void setExtractData(Map<String, Map<String, Target>> samplesVariablesMap, Samples samples) {
 
 		List<IVariable> variables = samples.getVariables();
-
 		for(Sample sample : samples.getSamples()) {
 			Iterator<IVariable> iterator = variables.iterator();
 			Map<String, Target> extractPeak = samplesVariablesMap.get(sample.getSampleName());
 			while(iterator.hasNext()) {
 				String variable = iterator.next().getValue();
 				Target target = extractPeak.get(variable);
-
 				boolean addEmpty = true;
 				if(target != null) {
 					try {
@@ -246,7 +237,6 @@ public class PcaExtractionFileText implements IExtractionData {
 						logger.warn(e);
 					}
 				}
-
 				if(addEmpty) {
 					PeakSampleData sampleData = new PeakSampleData();
 					sample.getSampleData().add(sampleData);
@@ -259,11 +249,9 @@ public class PcaExtractionFileText implements IExtractionData {
 
 		Map<Integer, String> indexMap = new HashMap<>();
 		Map<String, Integer> headerMap = parser.getHeaderMap();
-
 		for(Map.Entry<String, Integer> entry : headerMap.entrySet()) {
 			indexMap.put(entry.getValue(), entry.getKey());
 		}
-
 		return indexMap;
 	}
 }

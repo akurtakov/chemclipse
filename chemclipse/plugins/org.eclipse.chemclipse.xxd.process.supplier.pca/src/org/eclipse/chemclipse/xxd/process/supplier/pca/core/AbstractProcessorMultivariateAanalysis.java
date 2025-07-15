@@ -49,14 +49,14 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 		return numberPredictedSamples;
 	}
 
-	protected void calculateFeatureDataMatrix(EvaluationPCA evaluationPCA) {
+	protected void calculateFeatureDataMatrix(EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA) {
 
-		ISamplesPCA<? extends IVariable, ? extends ISample> samplesPCA = evaluationPCA.getSamples();
+		ISamplesPCA<IVariable, ISample> samplesPCA = evaluationPCA.getSamples();
 		/*
 		 * Feature Data Matrix
 		 */
-		List<? extends IVariable> variables = samplesPCA.getVariables();
-		List<? extends ISample> samples = samplesPCA.getSamples();
+		List<IVariable> variables = samplesPCA.getVariables();
+		List<ISample> samples = samplesPCA.getSamples();
 		/*
 		 * Samples
 		 */
@@ -93,10 +93,10 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 		evaluationPCA.setFeatureDataMatrix(new FeatureDataMatrix(sampleNames, features));
 	}
 
-	protected <V extends IVariable, S extends ISample> Map<ISample, double[]> extractData(ISamples<V, S> samples, Algorithm algorithm, IAnalysisSettings settings, boolean[] isSelectedVariable) {
+	protected <V extends IVariable, S extends ISample> Map<S, double[]> extractData(ISamples<V, S> samples, Algorithm algorithm, IAnalysisSettings settings, boolean[] isSelectedVariable) {
 
-		Map<ISample, double[]> selectedSamples = new HashMap<>();
-		List<? extends IVariable> variables = samples.getVariables();
+		Map<S, double[]> selectedSamples = new HashMap<>();
+		List<V> variables = samples.getVariables();
 		/*
 		 * Variables
 		 */
@@ -121,7 +121,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 		}
 		//
 		final Set<String> classifications = samples.getSamples().stream().map(s -> s.getClassification()).distinct().collect(Collectors.toList()).stream().limit(2).collect(Collectors.toSet());
-		for(ISample sample : samples.getSamples()) {
+		for(S sample : samples.getSamples()) {
 			double[] selectedSampleData = null;
 			if(sample.isSelected()) {
 				List<? extends ISampleData<?>> data = sample.getSampleData();
@@ -138,7 +138,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 		}
 		//
 		if(algorithm.equals(Algorithm.OPLS)) {
-			Map<ISample, double[]> classificationSelected = selectedSamples.entrySet().stream().filter(e -> classifications.contains(e.getKey().getClassification())).collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
+			Map<S, double[]> classificationSelected = selectedSamples.entrySet().stream().filter(e -> classifications.contains(e.getKey().getClassification())).collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
 			return classificationSelected;
 		}
 		//
@@ -147,7 +147,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 
 	protected <V extends IVariable, S extends ISample> boolean[] getSelectedVariables(ISamples<V, S> samples, IAnalysisSettings settings, Map<String, Boolean> variablesSelectionMap) {
 
-		List<? extends IVariable> variables = samples.getVariables();
+		List<V> variables = samples.getVariables();
 		boolean[] selectedVariables = new boolean[variables.size()];
 		Arrays.fill(selectedVariables, true);
 		//
@@ -284,7 +284,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 		pcaResults.getPcaResultList().addAll(resultsList);
 	}
 
-	protected void assignVariables(IResultsPCA<IResultPCA, IVariable> pcaResults, ISamples<? extends IVariable, ? extends ISample> samples, boolean[] isSelectedVariables, Map<String, Boolean> variablesSelectionMap) {
+	protected void assignVariables(IResultsPCA<IResultPCA, IVariable> pcaResults, ISamples<IVariable, ISample> samples, boolean[] isSelectedVariables, Map<String, Boolean> variablesSelectionMap) {
 
 		/*
 		 * Clear the variables.
@@ -302,7 +302,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 		}
 	}
 
-	protected Map<String, Boolean> getVariablesSelectionMap(List<? extends IVariable> templateVariables) {
+	protected Map<String, Boolean> getVariablesSelectionMap(List<IVariable> templateVariables) {
 
 		/*
 		 * Map existing variables. They have been probably deactivated.

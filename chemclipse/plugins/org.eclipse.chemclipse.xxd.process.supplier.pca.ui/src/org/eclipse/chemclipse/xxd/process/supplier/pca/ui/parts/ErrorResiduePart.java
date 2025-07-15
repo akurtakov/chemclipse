@@ -15,12 +15,12 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.parts;
 
 import java.util.List;
 
-import jakarta.inject.Inject;
-
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d.ErrorResidueChart;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+
+import jakarta.inject.Inject;
 
 public class ErrorResiduePart extends AbstractPartPCA<ErrorResidueChart> {
 
@@ -36,6 +36,7 @@ public class ErrorResiduePart extends AbstractPartPCA<ErrorResidueChart> {
 		return new ErrorResidueChart(parent, SWT.NONE);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected boolean updateData(List<Object> objects, String topic) {
 

@@ -69,7 +69,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 	private AtomicReference<ScorePlot> scorePlotControl = new AtomicReference<>();
 	private AtomicReference<PrincipalComponentUI> principalComponentControl = new AtomicReference<>();
 	//
-	private EvaluationPCA evaluationPCA = null;
+	private EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA = null;
 	//
 	private UserSelection userSelection = new UserSelection();
 	//
@@ -113,7 +113,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 		});
 	}
 
-	public void setInput(EvaluationPCA evaluationPCA) {
+	public void setInput(EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA) {
 
 		this.evaluationPCA = evaluationPCA;
 		updatePlot();
@@ -276,9 +276,9 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 					PrincipalComponentUI principalComponentUI = principalComponentControl.get();
 					int pcX = principalComponentUI.getPCX();
 					int pcY = principalComponentUI.getPCY();
-					IResultsPCA<? extends IResultPCA, ? extends IVariable> resultsPCA = evaluationPCA.getResults();
+					IResultsPCA<IResultPCA, IVariable> resultsPCA = evaluationPCA.getResults();
 					List<ISample> samplesHighlighted = evaluationPCA.getHighlightedSamples();
-					List<? extends IResultPCA> resultList = resultsPCA.getPcaResultList();
+					List<IResultPCA> resultList = resultsPCA.getPcaResultList();
 					/*
 					 * get samples within box selection
 					 */
@@ -351,8 +351,8 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 					PrincipalComponentUI principalComponentUI = principalComponentControl.get();
 					int pcX = principalComponentUI.getPCX();
 					int pcY = principalComponentUI.getPCY();
-					IResultsPCA<? extends IResultPCA, ? extends IVariable> resultsPCA = evaluationPCA.getResults();
-					List<? extends IResultPCA> resultList = resultsPCA.getPcaResultList();
+					IResultsPCA<IResultPCA, IVariable> resultsPCA = evaluationPCA.getResults();
+					List<IResultPCA> resultList = resultsPCA.getPcaResultList();
 					List<ResultDelta> resultDeltas = new ArrayList<>();
 					/*
 					 * prepare result object with score vectors per variable
@@ -432,8 +432,8 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 					PrincipalComponentUI principalComponentUI = principalComponentControl.get();
 					int pcX = principalComponentUI.getPCX();
 					int pcY = principalComponentUI.getPCY();
-					IResultsPCA<? extends IResultPCA, ? extends IVariable> resultsPCA = evaluationPCA.getResults();
-					List<? extends IResultPCA> resultList = resultsPCA.getPcaResultList();
+					IResultsPCA<IResultPCA, IVariable> resultsPCA = evaluationPCA.getResults();
+					List<IResultPCA> resultList = resultsPCA.getPcaResultList();
 					List<ResultDelta> resultDeltas = new ArrayList<>();
 					/*
 					 * prepare result object with score vectors per variable

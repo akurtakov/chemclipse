@@ -22,6 +22,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.core.ProcessorPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Algorithm;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -30,18 +31,18 @@ public class CalculationExecutor implements IRunnableWithProgress {
 
 	private static final Logger logger = Logger.getLogger(CalculationExecutor.class);
 	//
-	private ISamplesPCA<? extends IVariable, ? extends ISample> samples = null;
-	private EvaluationPCA masterEvaluationPCA = null;
+	private ISamplesPCA<IVariable, ISample> samples = null;
+	private EvaluationPCA<IVariable, ISample, IResultPCA> masterEvaluationPCA = null;
 	//
-	private EvaluationPCA evaluationPCA = null;
+	private EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA = null;
 
-	public CalculationExecutor(ISamplesPCA<? extends IVariable, ? extends ISample> samples, EvaluationPCA masterEvaluationPCA) {
+	public CalculationExecutor(ISamplesPCA<IVariable, ISample> samples, EvaluationPCA<IVariable, ISample, IResultPCA> masterEvaluationPCA) {
 
 		this.samples = samples;
 		this.masterEvaluationPCA = masterEvaluationPCA;
 	}
 
-	public EvaluationPCA getEvaluationPCA() {
+	public EvaluationPCA<IVariable, ISample, IResultPCA> getEvaluationPCA() {
 
 		return evaluationPCA;
 	}

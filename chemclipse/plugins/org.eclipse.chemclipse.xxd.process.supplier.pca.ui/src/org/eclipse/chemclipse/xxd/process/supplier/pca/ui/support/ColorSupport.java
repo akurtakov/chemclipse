@@ -32,7 +32,7 @@ public class ColorSupport {
 	public static final String COLOR_GROUP_DEFAULT = "Unknown";
 	public static final Color COLOR_FALLBACK = Colors.DARK_RED;
 
-	public static Map<String, Color> getColorMapResults(List<? extends IResultPCA> resultList, LabelOptionPCA labelOptionPCA, String colorScheme) {
+	public static Map<String, Color> getColorMapResults(List<IResultPCA> resultList, LabelOptionPCA labelOptionPCA, String colorScheme) {
 
 		Set<String> colorGroups = new HashSet<>();
 		for(IResultPCA pcaResult : resultList) {

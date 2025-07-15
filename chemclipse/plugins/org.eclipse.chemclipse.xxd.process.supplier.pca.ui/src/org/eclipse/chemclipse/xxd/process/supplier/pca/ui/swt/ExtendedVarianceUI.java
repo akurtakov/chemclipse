@@ -14,11 +14,14 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt;
 
 import java.util.Arrays;
 
+import org.eclipse.chemclipse.model.statistics.ISample;
+import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Variance;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d.VarianceChart;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePage;
@@ -38,7 +41,7 @@ import org.eclipse.swt.widgets.Display;
 public class ExtendedVarianceUI extends Composite implements IExtendedPartUI {
 
 	private VarianceChart plot;
-	private EvaluationPCA evaluationPCA = null;
+	private EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA = null;
 
 	public ExtendedVarianceUI(Composite parent, int style) {
 
@@ -46,7 +49,7 @@ public class ExtendedVarianceUI extends Composite implements IExtendedPartUI {
 		createControl();
 	}
 
-	public void setInput(EvaluationPCA evaluationPCA) {
+	public void setInput(EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA) {
 
 		this.evaluationPCA = evaluationPCA;
 		updatePlot();
