@@ -33,20 +33,6 @@ public interface IPenaltyCalculationSettings extends IProcessSettings {
 	float MAX_PENALTY_MATCH_FACTOR = 100.0f;
 
 	/**
-	 * Limit Match Factor
-	 * 
-	 * @return float
-	 */
-	float getLimitMatchFactor();
-
-	/**
-	 * Only identify the peak if no target is available with a match factor >= the limit.
-	 * 
-	 * @param limitMatchFactor
-	 */
-	void setLimitMatchFactor(float limitMatchFactor);
-
-	/**
 	 * Retention Time / Index Penalty Calculation
 	 */
 	PenaltyCalculation getPenaltyCalculation();

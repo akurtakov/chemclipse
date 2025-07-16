@@ -20,7 +20,7 @@ import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.processing.Processor;
 import org.eclipse.chemclipse.processing.filter.Filter;
 import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
-import org.eclipse.chemclipse.xxd.filter.settings.DeleteTargetsFilterSettings;
+import org.eclipse.chemclipse.xxd.filter.peaks.settings.DeleteTargetsFilterSettings;
 import org.eclipse.chemclipse.xxd.filter.targets.TargetsFilter;
 import org.eclipse.core.runtime.SubMonitor;
 import org.osgi.service.component.annotations.Component;

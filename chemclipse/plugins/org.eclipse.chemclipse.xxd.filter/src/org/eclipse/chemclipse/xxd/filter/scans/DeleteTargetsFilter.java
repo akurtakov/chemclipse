@@ -22,7 +22,7 @@ import org.eclipse.chemclipse.processing.core.MessageType;
 import org.eclipse.chemclipse.processing.core.ProcessingMessage;
 import org.eclipse.chemclipse.processing.filter.Filter;
 import org.eclipse.chemclipse.processing.filter.FilterList;
-import org.eclipse.chemclipse.xxd.filter.settings.DeleteTargetsFilterSettings;
+import org.eclipse.chemclipse.xxd.filter.peaks.settings.DeleteTargetsFilterSettings;
 import org.eclipse.chemclipse.xxd.filter.targets.TargetsFilter;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
