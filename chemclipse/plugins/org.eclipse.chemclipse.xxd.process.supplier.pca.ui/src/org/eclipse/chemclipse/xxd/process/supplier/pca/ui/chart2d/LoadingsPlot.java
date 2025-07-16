@@ -16,11 +16,8 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d;
 
 import java.util.List;
 
-import org.eclipse.chemclipse.model.statistics.ISample;
-import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.SeriesConverter;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swtchart.extensions.scattercharts.IScatterSeriesData;
@@ -49,11 +46,11 @@ public class LoadingsPlot extends AbtractPlotPCA {
 		}
 	}
 
-	public void setInput(EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA, int pcX, int pcY) {
+	public void setInput(EvaluationPCA evaluationPCA, int pcX, int pcY) {
 
 		deleteSeries();
 		if(evaluationPCA != null) {
-			IResultsPCA<IResultPCA, IVariable> resultsPCA = evaluationPCA.getResults();
+			IResultsMVA resultsPCA = evaluationPCA.getResults();
 			List<IScatterSeriesData> series;
 			if(labelType == LABEL_RETENTION_TIME_MINUTES) {
 				series = SeriesConverter.basisVectorsToSeries(resultsPCA, evaluationPCA.getHighlightedVariables(), pcX, pcY);

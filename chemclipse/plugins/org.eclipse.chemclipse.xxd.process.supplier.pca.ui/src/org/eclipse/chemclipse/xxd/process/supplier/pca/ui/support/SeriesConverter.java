@@ -21,8 +21,8 @@ import java.util.Map;
 import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultMVA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.LabelOptionPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.Activator;
@@ -37,7 +37,7 @@ import org.eclipse.swtchart.extensions.scattercharts.ScatterSeriesData;
 
 public class SeriesConverter {
 
-	public static List<IScatterSeriesData> basisVectorsToSeries(IResultsPCA<IResultPCA, IVariable> pcaResults, List<IVariable> highlighted, int pcX, int pcY) {
+	public static List<IScatterSeriesData> basisVectorsToSeries(IResultsMVA pcaResults, List<IVariable> highlighted, int pcX, int pcY) {
 
 		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 		List<IScatterSeriesData> scatterSeriesDataList = new ArrayList<>();
@@ -71,7 +71,7 @@ public class SeriesConverter {
 		return scatterSeriesDataList;
 	}
 
-	public static List<IScatterSeriesData> basisVectorsToSeriesDescription(IResultsPCA<IResultPCA, IVariable> pcaResults, int pcX, int pcY) {
+	public static List<IScatterSeriesData> basisVectorsToSeriesDescription(IResultsMVA pcaResults, int pcX, int pcY) {
 
 		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 		List<IScatterSeriesData> scatterSeriesDataList = new ArrayList<>();
@@ -113,7 +113,7 @@ public class SeriesConverter {
 		return scatterSeriesDataList;
 	}
 
-	public static List<IScatterSeriesData> sampleToSeries(IResultsPCA<IResultPCA, ?> resultsPCA, List<ISample> highlighted, int pcX, int pcY, Map<ISample, IResultPCA> extractedPcaResults) {
+	public static List<IScatterSeriesData> sampleToSeries(IResultsMVA resultsPCA, List<ISample> highlighted, int pcX, int pcY, Map<ISample, IResultMVA> extractedPcaResults) {
 
 		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 		List<IScatterSeriesData> scatterSeriesDataList = new ArrayList<>();
@@ -121,11 +121,11 @@ public class SeriesConverter {
 		/*
 		 * Group Colors
 		 */
-		List<IResultPCA> resultList = resultsPCA.getPcaResultList();
+		List<IResultMVA> resultList = resultsPCA.getPcaResultList();
 		LabelOptionPCA labelOptionPCA = resultsPCA.getPcaSettings().getLabelOptionPCA();
 		//
 		for(int i = 0; i < resultList.size(); i++) {
-			IResultPCA pcaResult = resultList.get(i);
+			IResultMVA pcaResult = resultList.get(i);
 			/*
 			 * Create the series.
 			 */

@@ -21,10 +21,11 @@ import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.exception.MathIllegalArgumentException;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Algorithm;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ICrossValidationProcessor;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IEvaluation;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IMultivariateCalculator;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResult;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ResultsPCA;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -32,9 +33,9 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.ejml.data.DMatrixRMaj;
 import org.ejml.dense.row.CommonOps_DDRM;
 
-public class CrossValidatorOPLS extends AbstractProcessorMultivariateAanalysis {
+public class CrossValidatorOPLS extends AbstractProcessorMultivariateAanalysis implements ICrossValidationProcessor {
 
-	public double[] crossValidate(ISamplesPCA<IVariable, ISample> samples, EvaluationPCA<IVariable, ISample, IResultPCA> masterEvaluationPCA, IProgressMonitor monitor) throws MathIllegalArgumentException {
+	public double[] crossValidate(ISamplesPCA<IVariable, ISample> samples, IEvaluation<IVariable, ISample, IResult> masterEvaluation, IProgressMonitor monitor) throws MathIllegalArgumentException {
 
 		/*
 		 * Settings
@@ -49,7 +50,7 @@ public class CrossValidatorOPLS extends AbstractProcessorMultivariateAanalysis {
 				/*
 				 * Template Map
 				 */
-				Map<String, Boolean> variablesSelectionMap = getVariablesSelectionMap(masterEvaluationPCA != null ? masterEvaluationPCA.getSamples().getVariables() : Collections.emptyList());
+				Map<String, Boolean> variablesSelectionMap = getVariablesSelectionMap(masterEvaluation != null ? masterEvaluation.getSamples().getVariables() : Collections.emptyList());
 				subMonitor.worked(5);
 				/*
 				 * Looping over Samples

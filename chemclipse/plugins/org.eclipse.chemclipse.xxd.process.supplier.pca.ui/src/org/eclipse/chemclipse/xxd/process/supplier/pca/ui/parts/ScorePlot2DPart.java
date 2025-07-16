@@ -35,7 +35,6 @@ public class ScorePlot2DPart extends AbstractPartPCA<ExtendedScorePlot2D> {
 		return new ExtendedScorePlot2D(parent, SWT.NONE);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected boolean updateData(List<Object> objects, String topic) {
 

@@ -47,9 +47,9 @@ import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.io.SampleTemplateIO;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Algorithm;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IEvaluation;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResult;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.LabelOptionPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Sample;
@@ -110,7 +110,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 	private AtomicReference<PreprocessingSettingsUI> preprocessingSettingsControl = new AtomicReference<>();
 	//
 	private ISamplesPCA<IVariable, ISample> samples = null;
-	private EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA = null;
+	private IEvaluation<IVariable, ISample, IResult> evaluation = null;
 	private ArrayList<String> oplsGroupTargets = new ArrayList<>();
 	//
 	private Composite control;
@@ -128,7 +128,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 			@Override
 			public void update(String topic, List<Object> objects) {
 
-				if(evaluationPCA != null) {
+				if(evaluation != null) {
 					if(DataUpdateSupport.isVisible(control)) {
 						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic)) {
 							if(objects.size() == 1) {
@@ -280,7 +280,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 	private Button createButtonRun(Composite parent) {
 
 		Button button = new Button(parent, SWT.PUSH);
-		button.setToolTipText("Run the PCA analysis.");
+		button.setToolTipText("Run the Multivariate analysis.");
 		button.setText("");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXECUTE, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
@@ -684,7 +684,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				if(inputDialog.open() == InputDialog.OK) {
 					String userInput = inputDialog.getValue();
 					if(userInput.length() == 1) {
-						for(ISample sample : evaluationPCA.getHighlightedSamples()) {
+						for(ISample sample : evaluation.getHighlightedSamples()) {
 							sample.setClassification(userInput);
 						}
 						sampleListUI.updateContent();
@@ -771,7 +771,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 					/*
 					 * Run with or without dialog.
 					 */
-					CalculationExecutor runnable = new CalculationExecutor(samples, evaluationPCA);
+					CalculationExecutor runnable = new CalculationExecutor(samples, evaluation);
 					Shell shell = display.getActiveShell();
 					if(shell != null) {
 						ProgressMonitorDialog monitor = new ProgressMonitorDialog(shell);
@@ -779,7 +779,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 					} else {
 						runnable.run(new NullProgressMonitor());
 					}
-					evaluationPCA = runnable.getEvaluationPCA();
+					evaluation = runnable.getEvaluation();
 				}
 			} catch(InterruptedException e) {
 				logger.warn(e);
@@ -787,7 +787,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 			} catch(InvocationTargetException e) {
 				logger.warn(e.getCause());
 			}
-			fireUpdate(display, evaluationPCA);
+			fireUpdate(display, evaluation);
 		}
 	}
 
@@ -821,9 +821,9 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 		comboViewerOplsTarget.get().setSelection(new StructuredSelection(selection));
 	}
 
-	private void fireUpdate(Display display, EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA) {
+	private void fireUpdate(Display display, IEvaluation<IVariable, ISample, IResult> evaluation) {
 
-		UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_PCA_UPDATE_SELECTION, evaluationPCA);
+		UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_PCA_UPDATE_SELECTION, evaluation);
 	}
 
 	private void updateControls() {

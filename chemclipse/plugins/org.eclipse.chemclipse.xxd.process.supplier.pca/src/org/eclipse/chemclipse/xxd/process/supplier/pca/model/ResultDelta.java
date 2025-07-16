@@ -17,12 +17,12 @@ import java.util.Objects;
 
 public class ResultDelta {
 
-	private IResultPCA resultPCA = null;
+	private IResultMVA resultPCA = null;
 	private double deltaX = 0;
 	private double deltaY = 0;
 	private double distance = 0;
 
-	public ResultDelta(IResultPCA resultPCA, double deltaX, double deltaY) {
+	public ResultDelta(IResultMVA resultPCA, double deltaX, double deltaY) {
 
 		this.resultPCA = resultPCA;
 		this.deltaX = deltaX;
@@ -30,7 +30,7 @@ public class ResultDelta {
 		this.distance = Math.sqrt(Math.pow(this.deltaX, 2) + Math.pow(this.deltaY, 2));
 	}
 
-	public IResultPCA getResultPCA() {
+	public IResultMVA getResultPCA() {
 
 		return resultPCA;
 	}

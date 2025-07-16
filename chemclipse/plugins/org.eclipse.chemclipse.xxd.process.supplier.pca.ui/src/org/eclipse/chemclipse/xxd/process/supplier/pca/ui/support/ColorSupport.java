@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Lorenz Gerber - Specific result type for multivariate analysis (MVA)
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support;
 
@@ -23,7 +24,7 @@ import java.util.Set;
 import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.swt.ui.support.IColorScheme;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultMVA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.LabelOptionPCA;
 import org.eclipse.swt.graphics.Color;
 
@@ -32,10 +33,10 @@ public class ColorSupport {
 	public static final String COLOR_GROUP_DEFAULT = "Unknown";
 	public static final Color COLOR_FALLBACK = Colors.DARK_RED;
 
-	public static Map<String, Color> getColorMapResults(List<IResultPCA> resultList, LabelOptionPCA labelOptionPCA, String colorScheme) {
+	public static Map<String, Color> getColorMapResults(List<IResultMVA> resultList, LabelOptionPCA labelOptionPCA, String colorScheme) {
 
 		Set<String> colorGroups = new HashSet<>();
-		for(IResultPCA pcaResult : resultList) {
+		for(IResultMVA pcaResult : resultList) {
 			String colorGroup = getColorGroup(pcaResult.getSample(), labelOptionPCA);
 			if(colorGroup != null) {
 				colorGroups.add(colorGroup);
