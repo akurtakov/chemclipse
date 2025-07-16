@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
@@ -45,6 +46,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.io.FeatureDataMatrixIO;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Feature;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.FeatureDataMatrix;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.Activator;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePage;
@@ -78,7 +80,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 	private Button buttonToolbarInfo;
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	//
-	private EvaluationPCA evaluationPCA = null;
+	private EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA = null;
 	private FeatureDataMatrix featureDataMatrix = null;
 	//
 	private Composite control;
@@ -111,7 +113,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 										}
 									}
 									if(features.size() >= 0) {
-										List<? extends IVariable> test = evaluationPCA.getSamples().getVariables();
+										List<IVariable> test = evaluationPCA.getSamples().getVariables();
 										test.forEach(x -> x.setVisualSelected(false));
 										for(Feature feature : features) {
 											feature.getVariable().setVisualSelected(true);
@@ -130,7 +132,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 		});
 	}
 
-	public void setInput(EvaluationPCA evaluationPCA) {
+	public void setInput(EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA) {
 
 		if(doUpdate(evaluationPCA)) {
 			this.evaluationPCA = evaluationPCA;
@@ -138,7 +140,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 		}
 	}
 
-	private boolean doUpdate(EvaluationPCA evaluationPCA) {
+	private boolean doUpdate(EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA) {
 
 		return this.evaluationPCA != evaluationPCA;
 	}
@@ -265,7 +267,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 			UpdateNotifierUI.update(getDisplay(), IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE, selectedElements.toArray());
 		} else if(Feature.class.isInstance(selectedElements.get(0))) {
 			ArrayList<Feature> features = new ArrayList<>();
-			List<? extends IVariable> test = evaluationPCA.getSamples().getVariables();
+			List<IVariable> test = evaluationPCA.getSamples().getVariables();
 			test.forEach(x -> x.setVisualSelected(false));
 			for(Feature feature : features) {
 				feature.getVariable().setVisualSelected(true);

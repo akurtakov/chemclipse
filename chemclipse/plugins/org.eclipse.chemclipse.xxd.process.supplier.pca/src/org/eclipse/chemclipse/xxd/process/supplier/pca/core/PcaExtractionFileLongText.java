@@ -105,7 +105,7 @@ public class PcaExtractionFileLongText implements IExtractionData {
 		}
 		Collections.sort(sampleList, (s1, s2) -> s1.getSampleName().compareTo(s2.getSampleName()));
 		Samples samples = new Samples(sampleList);
-		List<? extends IVariable> variables = extractVariables(samplesVariablesMap);
+		List<IVariable> variables = extractVariables(samplesVariablesMap);
 		samples.getVariables().addAll(variables);
 		setExtractData(samplesVariablesMap, samples);
 		IAnalysisSettings settings = samples.getAnalysisSettings();
@@ -248,7 +248,7 @@ public class PcaExtractionFileLongText implements IExtractionData {
 	 * @param samplesVariablesMap
 	 * @return
 	 */
-	private List<? extends IVariable> extractVariables(Map<String, Map<String, Target>> samplesVariablesMap) {
+	private List<IVariable> extractVariables(Map<String, Map<String, Target>> samplesVariablesMap) {
 
 		Map<String, Target> targets = new HashMap<>();
 		/*
@@ -266,7 +266,7 @@ public class PcaExtractionFileLongText implements IExtractionData {
 				}
 			}
 		}
-		List<? extends IVariable> variables = new ArrayList<>(targets.values());
+		List<IVariable> variables = new ArrayList<>(targets.values());
 		Collections.sort(variables, Comparable::compareTo);
 		return variables;
 	}

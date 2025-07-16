@@ -20,6 +20,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
@@ -64,7 +65,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 	private AtomicReference<LoadingsPlot> plotControl = new AtomicReference<>();
 	private AtomicReference<PrincipalComponentUI> principalComponentControl = new AtomicReference<>();
 	//
-	private EvaluationPCA evaluationPCA = null;
+	private EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA = null;
 	//
 	private UserSelection userSelection = new UserSelection();
 	//
@@ -110,7 +111,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 		});
 	}
 
-	public void setInput(EvaluationPCA evaluationPCA) {
+	public void setInput(EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA) {
 
 		this.evaluationPCA = evaluationPCA;
 		updateInput();
@@ -272,7 +273,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 					PrincipalComponentUI principalComponentUI = principalComponentControl.get();
 					int pcX = principalComponentUI.getPCX();
 					int pcY = principalComponentUI.getPCY();
-					IResultsPCA<? extends IResultPCA, ? extends IVariable> resultsPCA = evaluationPCA.getResults();
+					IResultsPCA<IResultPCA, IVariable> resultsPCA = evaluationPCA.getResults();
 					List<Feature> featuresSelected = evaluationPCA.getFeatureDataMatrix().getFeatures().stream().filter(x -> x.getVariable().isSelected()).toList();
 					/*
 					 * Get all currently selected features
@@ -355,7 +356,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 					PrincipalComponentUI principalComponentUI = principalComponentControl.get();
 					int pcX = principalComponentUI.getPCX();
 					int pcY = principalComponentUI.getPCY();
-					IResultsPCA<? extends IResultPCA, ? extends IVariable> resultsPCA = evaluationPCA.getResults();
+					IResultsPCA<IResultPCA, IVariable> resultsPCA = evaluationPCA.getResults();
 					List<FeatureDelta> featureDeltas = new ArrayList<>();
 					List<Feature> selectedFeatures = evaluationPCA.getFeatureDataMatrix().getFeatures().stream().filter(f -> f.getVariable().isSelected()).toList();
 					/*
@@ -436,7 +437,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 					PrincipalComponentUI principalComponentUI = principalComponentControl.get();
 					int pcX = principalComponentUI.getPCX();
 					int pcY = principalComponentUI.getPCY();
-					IResultsPCA<? extends IResultPCA, ? extends IVariable> resultsPCA = evaluationPCA.getResults();
+					IResultsPCA<IResultPCA, IVariable> resultsPCA = evaluationPCA.getResults();
 					List<FeatureDelta> featureDeltas = new ArrayList<>();
 					List<Feature> selectedFeatures = evaluationPCA.getFeatureDataMatrix().getFeatures().stream().filter(f -> f.getVariable().isSelected()).toList();
 					/*
@@ -518,7 +519,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 		plotControl.set(plot);
 	}
 
-	private double[] getVariableLoading(IResultsPCA<? extends IResultPCA, ? extends IVariable> results, int number) {
+	private double[] getVariableLoading(IResultsPCA<IResultPCA, IVariable> results, int number) {
 
 		double[] variableLoading = new double[results.getLoadingVectors().size()];
 		for(int i = 0; i < results.getLoadingVectors().size(); i++) {

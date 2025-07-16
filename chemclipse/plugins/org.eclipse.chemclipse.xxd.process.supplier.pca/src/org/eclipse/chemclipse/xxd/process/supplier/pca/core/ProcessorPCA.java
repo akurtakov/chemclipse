@@ -27,6 +27,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Algorithm;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IMultivariateCalculator;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ResultsPCA;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -34,17 +35,17 @@ import org.eclipse.core.runtime.SubMonitor;
 
 public class ProcessorPCA extends AbstractProcessorMultivariateAanalysis {
 
-	public <V extends IVariable, S extends ISample> void cleanUnusedVariables(EvaluationPCA evaluationPCA, IProgressMonitor monitor) {
+	public <V extends IVariable, S extends ISample> void cleanUnusedVariables(EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA, IProgressMonitor monitor) {
 
 		if(evaluationPCA != null) {
-			ISamplesPCA<? extends IVariable, ? extends ISample> samples = evaluationPCA.getSamples();
+			ISamplesPCA<IVariable, ISample> samples = evaluationPCA.getSamples();
 			if(samples != null) {
 				/*
 				 * Collect
 				 */
 				List<IVariable> removeVariables = new ArrayList<>();
-				List<? extends IVariable> variables = samples.getVariables();
-				List<? extends ISample> sampleList = samples.getSamples();
+				List<IVariable> variables = samples.getVariables();
+				List<ISample> sampleList = samples.getSamples();
 				List<Integer> indices = new ArrayList<>();
 				//
 				for(int i = 0; i < variables.size(); i++) {
@@ -74,9 +75,9 @@ public class ProcessorPCA extends AbstractProcessorMultivariateAanalysis {
 		}
 	}
 
-	public <V extends IVariable, S extends ISample> EvaluationPCA process(ISamplesPCA<V, S> samples, EvaluationPCA masterEvaluationPCA, IProgressMonitor monitor) throws MathIllegalArgumentException {
+	public EvaluationPCA<IVariable, ISample, IResultPCA> process(ISamplesPCA<IVariable, ISample> samples, EvaluationPCA<IVariable, ISample, IResultPCA> masterEvaluationPCA, IProgressMonitor monitor) throws MathIllegalArgumentException {
 
-		EvaluationPCA evaluationPCA = null;
+		EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA = null;
 		if(samples != null) {
 			SubMonitor subMonitor = SubMonitor.convert(monitor, "Calculate " + samples.getAnalysisSettings().getAlgorithm(), 160);
 			try {
@@ -150,7 +151,7 @@ public class ProcessorPCA extends AbstractProcessorMultivariateAanalysis {
 				/*
 				 * Feature Data Matrix
 				 */
-				evaluationPCA = new EvaluationPCA(samples, results);
+				evaluationPCA = new EvaluationPCA<IVariable, ISample, IResultPCA>(samples, results);
 				calculateFeatureDataMatrix(evaluationPCA);
 				subMonitor.worked(20);
 			} finally {

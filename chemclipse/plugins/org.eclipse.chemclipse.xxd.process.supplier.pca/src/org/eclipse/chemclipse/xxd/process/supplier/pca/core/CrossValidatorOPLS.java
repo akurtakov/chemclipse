@@ -24,6 +24,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Algorithm;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IMultivariateCalculator;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ResultsPCA;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -33,7 +34,7 @@ import org.ejml.dense.row.CommonOps_DDRM;
 
 public class CrossValidatorOPLS extends AbstractProcessorMultivariateAanalysis {
 
-	public double[] crossValidate(ISamplesPCA<? extends IVariable, ? extends ISample> samples, EvaluationPCA masterEvaluationPCA, IProgressMonitor monitor) throws MathIllegalArgumentException {
+	public double[] crossValidate(ISamplesPCA<IVariable, ISample> samples, EvaluationPCA<IVariable, ISample, IResultPCA> masterEvaluationPCA, IProgressMonitor monitor) throws MathIllegalArgumentException {
 
 		/*
 		 * Settings

@@ -19,12 +19,12 @@ import java.util.List;
 import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.model.statistics.IVariable;
 
-public class EvaluationPCA {
+public class EvaluationPCA<V extends IVariable, S extends ISample, R extends IResultPCA> {
 
-	private ISamplesPCA<? extends IVariable, ? extends ISample> samples = null;
-	private IResultsPCA<? extends IResultPCA, ? extends IVariable> results = null;
+	private ISamplesPCA<V, S> samples = null;
+	private IResultsPCA<R, V> results = null;
 	@SuppressWarnings("unused")
-	private ISamplesPCA<? extends IVariable, ? extends ISample> predict = null;
+	private ISamplesPCA<V, S> predict = null;
 	/*
 	 * The feature data matrix can be calculated after samples and results are set.
 	 */
@@ -32,18 +32,18 @@ public class EvaluationPCA {
 	private List<ISample> highlightedSamples = new ArrayList<ISample>();
 	private List<IVariable> highlightedVariables = new ArrayList<IVariable>();
 
-	public EvaluationPCA(ISamplesPCA<? extends IVariable, ? extends ISample> samples, IResultsPCA<? extends IResultPCA, ? extends IVariable> results) {
+	public EvaluationPCA(ISamplesPCA<V, S> samples, IResultsPCA<R, V> results) {
 
 		this.samples = samples;
 		this.results = results;
 	}
 
-	public ISamplesPCA<? extends IVariable, ? extends ISample> getSamples() {
+	public ISamplesPCA<V, S> getSamples() {
 
 		return samples;
 	}
 
-	public IResultsPCA<? extends IResultPCA, ? extends IVariable> getResults() {
+	public IResultsPCA<R, V> getResults() {
 
 		return results;
 	}

@@ -49,6 +49,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.io.SampleTemplateIO;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Algorithm;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.LabelOptionPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Sample;
@@ -109,7 +110,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 	private AtomicReference<PreprocessingSettingsUI> preprocessingSettingsControl = new AtomicReference<>();
 	//
 	private ISamplesPCA<IVariable, ISample> samples = null;
-	private EvaluationPCA evaluationPCA = null;
+	private EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA = null;
 	private ArrayList<String> oplsGroupTargets = new ArrayList<>();
 	//
 	private Composite control;
@@ -820,7 +821,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 		comboViewerOplsTarget.get().setSelection(new StructuredSelection(selection));
 	}
 
-	private void fireUpdate(Display display, EvaluationPCA evaluationPCA) {
+	private void fireUpdate(Display display, EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA) {
 
 		UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_PCA_UPDATE_SELECTION, evaluationPCA);
 	}

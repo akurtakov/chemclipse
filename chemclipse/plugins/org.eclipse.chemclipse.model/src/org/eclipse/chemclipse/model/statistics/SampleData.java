@@ -20,12 +20,14 @@ public class SampleData<T> implements ISampleData<T> {
 	private double normalizedData;
 
 	public SampleData() {
+
 		this.data = Double.NaN;
 		this.normalizedData = Double.NaN;
 		this.dataObject = null;
 	}
 
 	public SampleData(double data, T data2) {
+
 		this();
 		this.data = data;
 		this.dataObject = data2;

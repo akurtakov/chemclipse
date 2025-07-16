@@ -15,12 +15,12 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.parts;
 
 import java.util.List;
 
-import jakarta.inject.Inject;
-
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt.ExtendedVarianceUI;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+
+import jakarta.inject.Inject;
 
 public class VariancePart extends AbstractPartPCA<ExtendedVarianceUI> {
 
@@ -36,6 +36,7 @@ public class VariancePart extends AbstractPartPCA<ExtendedVarianceUI> {
 		return new ExtendedVarianceUI(parent, SWT.NONE);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected boolean updateData(List<Object> objects, String topic) {
 
