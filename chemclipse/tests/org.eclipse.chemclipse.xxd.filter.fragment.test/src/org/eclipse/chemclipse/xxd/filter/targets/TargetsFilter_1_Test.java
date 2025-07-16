@@ -21,7 +21,7 @@ import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.identifier.LibraryInformation;
 import org.eclipse.chemclipse.model.implementation.IdentificationTarget;
-import org.eclipse.chemclipse.xxd.filter.settings.DeleteTargetsFilterSettings;
+import org.eclipse.chemclipse.xxd.filter.peaks.settings.DeleteTargetsFilterSettings;
 import org.eclipse.chemclipse.xxd.filter.support.TargetsDeleteOption;
 
 import junit.framework.TestCase;

@@ -10,7 +10,7 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.xxd.filter.settings;
+package org.eclipse.chemclipse.xxd.filter.peaks.settings;
 
 import org.eclipse.chemclipse.support.settings.StringSettingsProperty;
 import org.eclipse.chemclipse.xxd.filter.support.TargetsDeleteOption;

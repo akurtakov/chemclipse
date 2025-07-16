@@ -1,0 +1,15 @@
+TY  - JOUR
+T1  - An integrated method for spectrum extraction and compound identification from gas chromatography/mass spectrometry data
+AU  - Stein, S.E.
+JO  - Journal of the American Society for Mass Spectrometry
+VL  - 10
+IS  - 8
+SP  - 770
+EP  - 781
+PY  - 1999
+DA  - 1999/08/01/
+SN  - 1044-0305
+DO  - https://doi.org/10.1016/S1044-0305(99)00047-1
+UR  - https://www.sciencedirect.com/science/article/pii/S1044030599000471
+AB  - A method is presented for extracting individual component spectra from gas chromatography/mass spectrometry (GC/MS) data files and then using these spectra to identify target compounds by matching spectra in a reference library. It extends a published “model peak” approach which uses selected ion chromatograms as models for component shape. On the basis of this shape, individual mass spectral peak abundance profiles are extracted to produce a “purified” spectrum. In the present work, ion-counting noise is explicitly treated and a number of characteristic features of GC/MS data are taken into account. This allows spectrum extraction to be reliably performed down to very low signal levels and for overlapping components. A spectrum match factor for compound identification is developed that incorporates a number of new corrections, some of which employ information derived from chromatographic behavior. Test results suggest that the ability of this system to identify compounds is comparable to that of conventional analysis.
+ER  - 

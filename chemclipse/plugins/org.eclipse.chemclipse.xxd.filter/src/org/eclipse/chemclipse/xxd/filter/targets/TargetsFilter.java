@@ -26,7 +26,7 @@ import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.core.ITargetSupplier;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
-import org.eclipse.chemclipse.xxd.filter.settings.DeleteTargetsFilterSettings;
+import org.eclipse.chemclipse.xxd.filter.peaks.settings.DeleteTargetsFilterSettings;
 
 public class TargetsFilter {
 
