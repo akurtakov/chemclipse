@@ -36,7 +36,6 @@ public class VariancePart extends AbstractPartPCA<ExtendedVarianceUI> {
 		return new ExtendedVarianceUI(parent, SWT.NONE);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected boolean updateData(List<Object> objects, String topic) {
 

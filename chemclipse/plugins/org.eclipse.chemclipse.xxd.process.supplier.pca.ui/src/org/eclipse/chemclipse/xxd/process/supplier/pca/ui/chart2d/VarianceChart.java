@@ -9,21 +9,19 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Lorenz Gerber - refactor
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.chemclipse.model.statistics.ISample;
-import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Variance;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -44,7 +42,7 @@ import org.eclipse.swtchart.extensions.core.SeriesData;
 public class VarianceChart extends BarChart {
 
 	private Variance variance = Variance.EXPLAINED;
-	private EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA;
+	private EvaluationPCA evaluationPCA;
 
 	public VarianceChart() {
 
@@ -64,7 +62,7 @@ public class VarianceChart extends BarChart {
 		updateChart();
 	}
 
-	public void setInput(EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA) {
+	public void setInput(EvaluationPCA evaluationPCA) {
 
 		this.evaluationPCA = evaluationPCA;
 		updateChart();
@@ -126,7 +124,7 @@ public class VarianceChart extends BarChart {
 		deleteSeries();
 		if(evaluationPCA != null) {
 			//
-			IResultsPCA<?, ?> resultsPCA = evaluationPCA.getResults();
+			IResultsMVA resultsPCA = evaluationPCA.getResults();
 			//
 			IChartSettings chartSettings = getChartSettings();
 			IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
@@ -168,7 +166,7 @@ public class VarianceChart extends BarChart {
 		}
 	}
 
-	private String[] getCategories(IResultsPCA<?, ?> pcaResults) {
+	private String[] getCategories(IResultsMVA pcaResults) {
 
 		int size = pcaResults.getCumulativeExplainedVariances().length;
 		String[] categories = new String[size];
@@ -180,7 +178,7 @@ public class VarianceChart extends BarChart {
 		return categories;
 	}
 
-	private ISeriesData getSeriesVariance(IResultsPCA<?, ?> pcaResults) {
+	private ISeriesData getSeriesVariance(IResultsMVA pcaResults) {
 
 		double[] ySeries;
 		String label;
@@ -202,7 +200,7 @@ public class VarianceChart extends BarChart {
 		return new SeriesData(xSeries, ySeries, label);
 	}
 
-	private ISeriesData getSeriesQ2(IResultsPCA<?, ?> pcaResults) {
+	private ISeriesData getSeriesQ2(IResultsMVA pcaResults) {
 
 		double[] ySeries;
 		String label;

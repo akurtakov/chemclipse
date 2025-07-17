@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Lorenz Gerber - change name of results object
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.core;
 
@@ -20,8 +21,8 @@ import java.util.List;
 
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IDataInputEntry;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultMVA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
 
 public class ResultExport {
 
@@ -33,7 +34,7 @@ public class ResultExport {
 		decimalFormat = ValueFormat.getDecimalFormatEnglish();
 	}
 
-	public void exportToTextFile(File file, IResultsPCA<?, ?> pcaResults, List<IDataInputEntry> dataInputEntries) throws FileNotFoundException {
+	public void exportToTextFile(File file, IResultsMVA pcaResults, List<IDataInputEntry> dataInputEntries) throws FileNotFoundException {
 
 		PrintWriter printWriter = new PrintWriter(file);
 		if(pcaResults != null) {
@@ -78,7 +79,7 @@ public class ResultExport {
 			/*
 			 * Data
 			 */
-			for(IResultPCA pcaResult : pcaResults.getPcaResultList()) {
+			for(IResultMVA pcaResult : pcaResults.getPcaResultList()) {
 				String sampleName = pcaResult.getSample().getSampleName();
 				printWriter.print(sampleName);
 				printWriter.print(TAB);
@@ -102,7 +103,7 @@ public class ResultExport {
 			}
 			printWriter.println("");
 			//
-			for(IResultPCA pcaResult : pcaResults.getPcaResultList()) {
+			for(IResultMVA pcaResult : pcaResults.getPcaResultList()) {
 				/*
 				 * Print the PCs
 				 */

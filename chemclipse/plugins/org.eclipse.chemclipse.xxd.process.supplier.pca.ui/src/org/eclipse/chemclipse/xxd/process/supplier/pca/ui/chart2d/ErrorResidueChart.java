@@ -9,21 +9,20 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Lorenz Gerber - Specific result type for multivariate analysis (MVA)
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.chemclipse.model.statistics.ISample;
-import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultMVA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swtchart.IBarSeries.BarWidthStyle;
@@ -51,10 +50,10 @@ public class ErrorResidueChart extends BarChart {
 		createControl();
 	}
 
-	public void setInput(EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA) {
+	public void setInput(EvaluationPCA evaluationPCA) {
 
 		if(evaluationPCA != null) {
-			IResultsPCA<IResultPCA, ?> resultsPCA = evaluationPCA.getResults();
+			IResultsMVA resultsPCA = evaluationPCA.getResults();
 			updateChart(resultsPCA);
 		} else {
 			updateChart(null);
@@ -118,7 +117,7 @@ public class ErrorResidueChart extends BarChart {
 		}
 	}
 
-	private void updateChart(IResultsPCA<IResultPCA, ?> pcaResults) {
+	private void updateChart(IResultsMVA pcaResults) {
 
 		deleteSeries();
 		if(pcaResults != null) {
@@ -142,29 +141,29 @@ public class ErrorResidueChart extends BarChart {
 		}
 	}
 
-	private String[] getCategories(IResultsPCA<IResultPCA, ?> pcaResults) {
+	private String[] getCategories(IResultsMVA pcaResults) {
 
-		List<IResultPCA> pcaResultList = pcaResults.getPcaResultList();
+		List<IResultMVA> pcaResultList = pcaResults.getPcaResultList();
 		int size = pcaResultList.size();
 		String[] categories = new String[size];
 		//
 		for(int i = 0; i < size; i++) {
-			IResultPCA pcaResult = pcaResultList.get(i);
+			IResultMVA pcaResult = pcaResultList.get(i);
 			categories[i] = pcaResult.getSample().getSampleName();
 		}
 		//
 		return categories;
 	}
 
-	private ISeriesData getSeries(IResultsPCA<IResultPCA, ?> pcaResults) {
+	private ISeriesData getSeries(IResultsMVA pcaResults) {
 
-		List<IResultPCA> pcaResultList = pcaResults.getPcaResultList();
+		List<IResultMVA> pcaResultList = pcaResults.getPcaResultList();
 		int size = pcaResultList.size();
 		double[] xSeries = new double[size];
 		double[] ySeries = new double[size];
 		//
 		for(int i = 0; i < size; i++) {
-			IResultPCA pcaResult = pcaResultList.get(i);
+			IResultMVA pcaResult = pcaResultList.get(i);
 			xSeries[i] = i;
 			ySeries[i] = pcaResult.getErrorMetric();
 		}

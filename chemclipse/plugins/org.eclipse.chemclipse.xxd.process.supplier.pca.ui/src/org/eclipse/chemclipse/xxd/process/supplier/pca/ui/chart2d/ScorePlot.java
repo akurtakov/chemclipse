@@ -19,27 +19,26 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.chemclipse.model.statistics.ISample;
-import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultMVA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.SeriesConverter;
 import org.eclipse.swt.widgets.Composite;
 
 public class ScorePlot extends AbtractPlotPCA {
 
-	private final Map<ISample, IResultPCA> extractedResults = new HashMap<>();
+	private final Map<ISample, IResultMVA> extractedResults = new HashMap<>();
 
 	public ScorePlot(Composite parent, int style) {
 
 		super(parent, style, "Score Plot");
 	}
 
-	public void setInput(EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA, int pcX, int pcY) {
+	public void setInput(EvaluationPCA evaluationPCA, int pcX, int pcY) {
 
 		deleteSeries();
 		if(evaluationPCA != null) {
-			IResultsPCA<IResultPCA, ?> resultsPCA = evaluationPCA.getResults();
+			IResultsMVA resultsPCA = evaluationPCA.getResults();
 			List<ISample> highlightedSamples = evaluationPCA.getHighlightedSamples();
 			addSeriesData(SeriesConverter.sampleToSeries(resultsPCA, highlightedSamples, pcX, pcY, extractedResults));
 		}

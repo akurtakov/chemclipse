@@ -16,7 +16,7 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.model;
 
 import org.eclipse.chemclipse.model.statistics.ISample;
 
-public class ResultPCA implements IResultPCA {
+public class ResultMVA implements IResultMVA {
 
 	private ISample sample;
 	private boolean isDisplayed;
@@ -25,7 +25,7 @@ public class ResultPCA implements IResultPCA {
 	private double[] sampleData;
 	private boolean isSelected;
 
-	public ResultPCA(ISample sample) {
+	public ResultMVA(ISample sample) {
 
 		this.isDisplayed = true;
 		this.sample = sample;
@@ -100,5 +100,15 @@ public class ResultPCA implements IResultPCA {
 	public boolean isSelected() {
 
 		return this.isSelected;
+	}
+
+	@Override
+	public void setCrossValidations(double[] crossValidation) {
+
+	}
+
+	@Override
+	public void setCumulativeCrossValidations(double[] cumulativeCrossValidation) {
+
 	}
 }

@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.chemclipse.model.statistics.ISample;
-import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
@@ -35,8 +34,8 @@ import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultMVA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ResultDelta;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.Activator;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d.ScorePlot;
@@ -69,7 +68,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 	private AtomicReference<ScorePlot> scorePlotControl = new AtomicReference<>();
 	private AtomicReference<PrincipalComponentUI> principalComponentControl = new AtomicReference<>();
 	//
-	private EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA = null;
+	private EvaluationPCA evaluationPCA = null;
 	//
 	private UserSelection userSelection = new UserSelection();
 	//
@@ -113,7 +112,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 		});
 	}
 
-	public void setInput(EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA) {
+	public void setInput(EvaluationPCA evaluationPCA) {
 
 		this.evaluationPCA = evaluationPCA;
 		updatePlot();
@@ -276,14 +275,14 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 					PrincipalComponentUI principalComponentUI = principalComponentControl.get();
 					int pcX = principalComponentUI.getPCX();
 					int pcY = principalComponentUI.getPCY();
-					IResultsPCA<IResultPCA, IVariable> resultsPCA = evaluationPCA.getResults();
+					IResultsMVA resultsPCA = evaluationPCA.getResults();
 					List<ISample> samplesHighlighted = evaluationPCA.getHighlightedSamples();
-					List<IResultPCA> resultList = resultsPCA.getPcaResultList();
+					List<IResultMVA> resultList = resultsPCA.getPcaResultList();
 					/*
 					 * get samples within box selection
 					 */
 					for(int i = 0; i < resultList.size(); i++) {
-						IResultPCA pcaResult = resultList.get(i);
+						IResultMVA pcaResult = resultList.get(i);
 						IPoint pointResult = getPoint(pcaResult, pcX, pcY, i);
 						if(pointResult.getX() > pXStart && pointResult.getX() < pXStop && pointResult.getY() < pYStart && pointResult.getY() > pYStop) {
 							if(samplesHighlighted.contains(resultList.get(i).getSample())) {
@@ -351,8 +350,8 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 					PrincipalComponentUI principalComponentUI = principalComponentControl.get();
 					int pcX = principalComponentUI.getPCX();
 					int pcY = principalComponentUI.getPCY();
-					IResultsPCA<IResultPCA, IVariable> resultsPCA = evaluationPCA.getResults();
-					List<IResultPCA> resultList = resultsPCA.getPcaResultList();
+					IResultsMVA resultsPCA = evaluationPCA.getResults();
+					List<IResultMVA> resultList = resultsPCA.getPcaResultList();
 					List<ResultDelta> resultDeltas = new ArrayList<>();
 					/*
 					 * prepare result object with score vectors per variable
@@ -432,8 +431,8 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 					PrincipalComponentUI principalComponentUI = principalComponentControl.get();
 					int pcX = principalComponentUI.getPCX();
 					int pcY = principalComponentUI.getPCY();
-					IResultsPCA<IResultPCA, IVariable> resultsPCA = evaluationPCA.getResults();
-					List<IResultPCA> resultList = resultsPCA.getPcaResultList();
+					IResultsMVA resultsPCA = evaluationPCA.getResults();
+					List<IResultMVA> resultList = resultsPCA.getPcaResultList();
 					List<ResultDelta> resultDeltas = new ArrayList<>();
 					/*
 					 * prepare result object with score vectors per variable
@@ -508,7 +507,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 		scorePlotControl.set(scorePlot);
 	}
 
-	private IPoint getPoint(IResultPCA pcaResult, int pcX, int pcY, int i) {
+	private IPoint getPoint(IResultMVA pcaResult, int pcX, int pcY, int i) {
 
 		double[] eigenSpace = pcaResult.getScoreVector();
 		double rX = 0;

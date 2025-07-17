@@ -37,7 +37,6 @@ public class FeatureTablePart extends AbstractPartPCA<ExtendedFeatureListUI> {
 		return new ExtendedFeatureListUI(parent, SWT.NONE);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected boolean updateData(List<Object> objects, String topic) {
 

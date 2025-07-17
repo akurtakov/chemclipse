@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Lorenz Gerber - Refactor name
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.model;
 
@@ -16,15 +17,15 @@ import java.util.List;
 
 import org.eclipse.chemclipse.model.statistics.IVariable;
 
-public interface IResultsPCA<R extends IResultPCA, V extends IVariable> {
+public interface IResultsMVA extends IResults<IResultMVA, IVariable> {
 
 	List<double[]> getLoadingVectors();
 
 	double[] getExplainedVariances();
 
-	List<V> getExtractedVariables();
+	List<IVariable> getExtractedVariables();
 
-	List<R> getPcaResultList();
+	List<IResultMVA> getPcaResultList();
 
 	IAnalysisSettings getPcaSettings();
 
@@ -35,12 +36,4 @@ public interface IResultsPCA<R extends IResultPCA, V extends IVariable> {
 	double[] getCumulativeExplainedVariances();
 
 	void setCumulativeExplainedVariances(double[] cumulativeExplainedVariances);
-
-	double[] getCrossValidations();
-
-	void setCrossValidations(double[] crossValidations);
-
-	double[] getCumulativeCrossValidations();
-
-	void setCumulativeCrossValidations(double[] cumulativeCrossValidations);
 }

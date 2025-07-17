@@ -40,7 +40,7 @@ import org.eclipse.chemclipse.model.statistics.ISamples;
 import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.msd.model.core.IPeaksMSD;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IDataInputEntry;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultMVA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Sample;
 import org.ejml.data.DMatrixRMaj;
 import org.ejml.dense.row.factory.DecompositionFactory_DDRM;
@@ -119,12 +119,12 @@ public class PcaUtils {
 	/**
 	 * 
 	 * @param pcaResults
-	 * @return all groupName {@link IResultPCA#getOplsTargetGroupName()}
+	 * @return all groupName {@link IResultMVA#getOplsTargetGroupName()}
 	 */
-	public static Set<String> getGroupNames(List<IResultPCA> pcaResults) {
+	public static Set<String> getGroupNames(List<IResultMVA> pcaResults) {
 
 		Set<String> groupNames = new HashSet<>();
-		for(IResultPCA pcaResult : pcaResults) {
+		for(IResultMVA pcaResult : pcaResults) {
 			String groupName = pcaResult.getSample().getGroupName();
 			groupNames.add(groupName);
 		}
@@ -257,9 +257,9 @@ public class PcaUtils {
 	 * 
 	 * @param pcaResults
 	 */
-	public static void sortPcaResultsByGroup(List<IResultPCA> pcaResults) {
+	public static void sortPcaResultsByGroup(List<IResultMVA> pcaResults) {
 
-		Comparator<IResultPCA> comparator = (arg0, arg1) -> {
+		Comparator<IResultMVA> comparator = (arg0, arg1) -> {
 			String name0 = arg0.getSample().getGroupName();
 			String name1 = arg1.getSample().getGroupName();
 			if(name0 == null && name1 == null) {
@@ -280,9 +280,9 @@ public class PcaUtils {
 	 * 
 	 * @param samples
 	 */
-	public static void sortPcaResultsByName(List<IResultPCA> samples) {
+	public static void sortPcaResultsByName(List<IResultMVA> samples) {
 
-		Comparator<IResultPCA> comparator = (arg0, arg1) -> {
+		Comparator<IResultMVA> comparator = (arg0, arg1) -> {
 			return arg0.getSample().getSampleName().compareTo(arg1.getSample().getSampleName());
 		};
 		Collections.sort(samples, comparator);
@@ -293,14 +293,14 @@ public class PcaUtils {
 	 * @param pcaResults
 	 * @param inverse
 	 */
-	public static void sortPcaResultsListByErrorMetric(List<IResultPCA> pcaResults, boolean inverse) {
+	public static void sortPcaResultsListByErrorMetric(List<IResultMVA> pcaResults, boolean inverse) {
 
 		int i = 1;
 		if(inverse) {
 			i = -1;
 		}
 		final int inv = i;
-		Comparator<IResultPCA> comparator = (arg0, arg1) -> {
+		Comparator<IResultMVA> comparator = (arg0, arg1) -> {
 			return inv * Double.compare(arg0.getErrorMetric(), arg1.getErrorMetric());
 		};
 		Collections.sort(pcaResults, comparator);

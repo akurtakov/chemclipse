@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2025 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -8,34 +8,15 @@
  * SPDX-License-Identifier: EPL-2.0
  * 
  * Contributors:
- * Philip Wenig - initial API and implementation
- * Lorenz Gerber - add select
+ * Lorenz Gerber - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.model;
 
 import org.eclipse.chemclipse.model.statistics.ISample;
+import org.eclipse.chemclipse.model.statistics.IVariable;
+import org.eclipse.core.runtime.IProgressMonitor;
 
-public interface IResultPCA {
+public interface ICrossValidationProcessor {
 
-	ISample getSample();
-
-	double[] getSampleData();
-
-	boolean isDisplayed();
-
-	void setDisplayed(boolean displayed);
-
-	double[] getScoreVector();
-
-	void setScoreVector(double[] eigenSpace);
-
-	double getErrorMetric();
-
-	void setErrorMetric(double errorMetric);
-
-	void setSampleData(double[] sampleData);
-
-	void toggleSelected();
-
-	boolean isSelected();
+	public double[] crossValidate(ISamplesPCA<IVariable, ISample> samples, IEvaluation<IVariable, ISample, IResult> masterEvaluation, IProgressMonitor monitor);
 }

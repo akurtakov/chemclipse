@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Lorenz Gerber - ResultsPCA implements IResultsMVA
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.model;
 
@@ -17,7 +18,7 @@ import java.util.List;
 
 import org.eclipse.chemclipse.model.statistics.IVariable;
 
-public class ResultsPCA implements IResultsPCA<IResultPCA, IVariable> {
+public class ResultsPCA implements IResultsMVA {
 
 	private List<double[]> loadingVectors;
 	private double[] explainedVariances;
@@ -25,7 +26,7 @@ public class ResultsPCA implements IResultsPCA<IResultPCA, IVariable> {
 	private double[] crossValidations;
 	private double[] cumulativeCrossValidations;
 	private List<IVariable> extractedVariables;
-	private List<IResultPCA> pcaResultList;
+	private List<IResultMVA> pcaResultList;
 	//
 	private IAnalysisSettings analysisSettings;
 
@@ -49,7 +50,7 @@ public class ResultsPCA implements IResultsPCA<IResultPCA, IVariable> {
 	}
 
 	@Override
-	public List<IResultPCA> getPcaResultList() {
+	public List<IResultMVA> getPcaResultList() {
 
 		return pcaResultList;
 	}

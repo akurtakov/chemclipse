@@ -35,7 +35,6 @@ public class LoadingsPlotPart extends AbstractPartPCA<ExtendedLoadingsPlot> {
 		return new ExtendedLoadingsPlot(parent, SWT.NONE);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected boolean updateData(List<Object> objects, String topic) {
 

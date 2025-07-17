@@ -36,7 +36,6 @@ public class ErrorResiduePart extends AbstractPartPCA<ErrorResidueChart> {
 		return new ErrorResidueChart(parent, SWT.NONE);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected boolean updateData(List<Object> objects, String topic) {
 

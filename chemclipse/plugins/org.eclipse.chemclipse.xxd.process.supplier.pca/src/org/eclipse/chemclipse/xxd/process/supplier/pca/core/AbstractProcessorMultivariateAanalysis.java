@@ -31,15 +31,16 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.core.algorithms.Calculato
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.algorithms.CalculatorSVD;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.exception.MathIllegalArgumentException;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Algorithm;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Feature;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.FeatureDataMatrix;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IEvaluation;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IMultivariateCalculator;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultPCA;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResult;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultMVA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ResultPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ResultMVA;
 
 public abstract class AbstractProcessorMultivariateAanalysis {
 
@@ -49,7 +50,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 		return numberPredictedSamples;
 	}
 
-	protected void calculateFeatureDataMatrix(EvaluationPCA<IVariable, ISample, IResultPCA> evaluationPCA) {
+	protected void calculateFeatureDataMatrix(IEvaluation<IVariable, ISample, IResult> evaluationPCA) {
 
 		ISamplesPCA<IVariable, ISample> samplesPCA = evaluationPCA.getSamples();
 		/*
@@ -264,16 +265,16 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 		return principalComponentAnalysis;
 	}
 
-	protected void setEigenSpaceAndErrorValues(IMultivariateCalculator principalComponentAnalysis, Map<ISample, double[]> pcaPeakMap, IResultsPCA<IResultPCA, IVariable> pcaResults) {
+	protected void setEigenSpaceAndErrorValues(IMultivariateCalculator principalComponentAnalysis, Map<ISample, double[]> pcaPeakMap, IResultsMVA pcaResults) {
 
 		/*
 		 * Set the eigen space and error membership values.
 		 */
-		List<IResultPCA> resultsList = new ArrayList<>();
+		List<IResultMVA> resultsList = new ArrayList<>();
 		for(Entry<ISample, double[]> entry : pcaPeakMap.entrySet()) {
 			double[] sampleData = entry.getValue();
 			ISample sample = entry.getKey();
-			IResultPCA pcaResult = new ResultPCA(sample);
+			IResultMVA pcaResult = new ResultMVA(sample);
 			pcaResult.setScoreVector(principalComponentAnalysis.getScoreVector(sample));
 			pcaResult.setErrorMetric(principalComponentAnalysis.getErrorMetric(sampleData));
 			pcaResult.setSampleData(sampleData);
@@ -284,7 +285,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 		pcaResults.getPcaResultList().addAll(resultsList);
 	}
 
-	protected void assignVariables(IResultsPCA<IResultPCA, IVariable> pcaResults, ISamples<IVariable, ISample> samples, boolean[] isSelectedVariables, Map<String, Boolean> variablesSelectionMap) {
+	protected void assignVariables(IResultsMVA pcaResults, ISamples<IVariable, ISample> samples, boolean[] isSelectedVariables, Map<String, Boolean> variablesSelectionMap) {
 
 		/*
 		 * Clear the variables.
