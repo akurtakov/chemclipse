@@ -725,9 +725,11 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 			public void update(Display display) {
 
 				updateInput();
-				UpdateNotifierUI.update(display, scanUnknown);
-				UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "Scan Chart identification has been performed.");
-				ChromatogramUpdateSupport.fireUpdateChromatogramSelection(display, scanUnknown);
+				if(scanUnknownMaster != null) {
+					UpdateNotifierUI.update(display, scanUnknownMaster);
+					UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "Scan Chart identification has been performed.");
+					ChromatogramUpdateSupport.fireUpdateChromatogramSelection(display, scanUnknownMaster);
+				}
 			}
 		});
 
