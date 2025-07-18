@@ -39,9 +39,9 @@ public class PreferencePageSubtract extends FieldEditorPreferencePage implements
 		addField(new BooleanFieldEditor(PreferenceSupplierModelMSD.P_USE_NORMALIZED_SCAN, "Use normalized scan", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplierModelMSD.P_CALCULATION_TYPE, "Calculation Type", CalculationType.getOptions(), getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplierModelMSD.P_USE_PEAKS_INSTEAD_OF_SCANS, "Use peaks instead of scans", getFieldEditorParent()));
+		addField(new BooleanFieldEditor(PreferenceSupplierModelMSD.P_DELETE_TARGETS_OPTIMIZE_SCAN, "Delete Targets (Optimize Scan)", getFieldEditorParent()));
 		addField(new TextFieldEditor(PreferenceSupplierModelMSD.P_SUBTRACT_MASS_SPECTRUM, "Subtract mass spectrum", getFieldEditorParent()));
 		addField(new SpinnerFieldEditor(PreferenceSupplierModelMSD.P_COPY_TRACES_CLIPBOARD, "Copy Traces", PreferenceSupplierModelMSD.MIN_TRACES, PreferenceSupplierModelMSD.MAX_TRACES, getFieldEditorParent()));
-		addField(new BooleanFieldEditor(PreferenceSupplierModelMSD.P_DELETE_TARGETS_OPTIMIZE_SCAN, "Delete Targets (Optimize Scan)", getFieldEditorParent()));
 	}
 
 	public void init(IWorkbench workbench) {

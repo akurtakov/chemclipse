@@ -20,7 +20,10 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.subtract.calculator.SubtractCalculator;
+import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.subtract.settings.MassSpectrumFilterSettings;
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
+import org.eclipse.chemclipse.csd.model.core.IScanCSD;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
@@ -39,22 +42,32 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
+import org.eclipse.chemclipse.support.ui.updates.IUpdateListenerUI;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
+import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
+import org.eclipse.chemclipse.swt.ui.services.IScanIdentifierService;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
+import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.charts.LabelOption;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModelMSD;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.model.ComparisonScanOption;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageScans;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageSubtract;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.runnables.LibraryServiceRunnable;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.support.ChromatogramUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ScanChartSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ScanDataSupport;
+import org.eclipse.chemclipse.vsd.model.core.IScanVSD;
+import org.eclipse.chemclipse.wsd.model.core.IScanWSD;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.preference.IPreferencePage;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -85,6 +98,7 @@ import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.IExtendedChart;
 import org.eclipse.swtchart.extensions.core.ISecondaryAxisSettings;
 import org.eclipse.swtchart.extensions.core.RangeRestriction;
+import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import jakarta.inject.Inject;
 
@@ -111,7 +125,9 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 	private AtomicReference<InformationUI> toolbarInfoBottom = new AtomicReference<>();
 	private AtomicReference<ScanChartUI> scanChartControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonToolbarHybrid = new AtomicReference<>();
-	private AtomicReference<Button> buttonOptimizedScan = new AtomicReference<>();
+	private AtomicReference<Button> buttonSubtractReference = new AtomicReference<>();
+	private AtomicReference<Button> buttonUseOptimizedScan = new AtomicReference<>();
+	private AtomicReference<ScanIdentifierUI> scanIdentifierControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonMirroredReference = new AtomicReference<>();
 	private AtomicReference<Button> buttonDifferenceSpectrum = new AtomicReference<>();
 	private AtomicReference<Button> buttonShiftReferenceSpectrum = new AtomicReference<>();
@@ -128,6 +144,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 	private boolean shiftReferenceSpectrum = false;
 	private int shiftMass = 1;
 
+	private IScanMSD scanUnknownMaster = null;
 	private IScanMSD scanUnknown = null;
 	private IScanMSD scanReference = null;
 
@@ -161,6 +178,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		boolean update = false;
 		switch(getComparisonScanOption()) {
 			case UNKNOWN:
+				scanUnknownMaster = scanMSD;
 				assignScan(scanMSD, true);
 				update = true;
 				break;
@@ -181,15 +199,18 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 		if(isLibrarySearch()) {
 			updateIdentificationTarget(identificationTarget);
+			updateIdentifierControl();
 		}
 	}
 
-	public void update(IScanMSD unknownMassSpectrum, IIdentificationTarget identificationTarget) {
+	public void update(IScanMSD massSpectrum, IIdentificationTarget identificationTarget) {
 
 		if(isLibrarySearch()) {
-			scanUnknown = copyScan(unknownMassSpectrum);
+			scanUnknownMaster = massSpectrum;
+			scanUnknown = copyScan(massSpectrum);
 			updateMolecularWeightUnknown();
 			updateIdentificationTarget(identificationTarget);
+			updateIdentifierControl();
 		}
 	}
 
@@ -201,9 +222,8 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 	 */
 	public void update(IScanMSD unknownMassSpectrum, IScanMSD referenceMassSpectrum) {
 
-		scanUnknown = copyScan(unknownMassSpectrum);
-		scanReference = copyScan(referenceMassSpectrum);
-		updateInput();
+		scanUnknownMaster = unknownMassSpectrum;
+		updateInput(unknownMassSpectrum, referenceMassSpectrum);
 	}
 
 	@Override
@@ -380,14 +400,16 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		composite.setLayout(new GridLayout(12, false));
+		composite.setLayout(new GridLayout(14, false));
 
 		createButtonToggleInfo(composite);
 		createComboViewerComparisonScanOption(composite);
 		createResetButton(composite);
 		createSaveButton(composite);
 		createButtonToggleHybrid(composite);
+		createButtonSubtractReference(composite);
 		createButtonOptimizedSpectrum(composite);
+		createScanIdentifierUI(composite);
 		createButtonMirroredSpectrum(composite);
 		createButtonDifferenceSpectrum(composite);
 		createButtonShiftReferenceSpectrum(composite);
@@ -626,24 +648,90 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		buttonToolbarHybrid.set(button);
 	}
 
+	private void createButtonSubtractReference(Composite parent) {
+
+		Button button = new Button(parent, SWT.PUSH);
+		button.setText("");
+		button.setToolTipText("Subtract the reference spectrum.");
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SUBTRACT_SCAN_DEFAULT, IApplicationImageProvider.SIZE_16x16));
+		button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				IScanMSD scanMSD = subtractScanMSD(scanUnknown, scanReference);
+				scanUnknown = copyScan(scanMSD, false);
+				if(scanUnknownMaster != null) {
+					scanUnknownMaster.setOptimizedMassSpectrum(scanUnknown);
+				}
+				useOptimizedSpectrum = true;
+				updateButtonOptimized(buttonUseOptimizedScan.get());
+				updateInput();
+			}
+		});
+
+		buttonSubtractReference.set(button);
+	}
+
+	private IScanMSD subtractScanMSD(IScanMSD scanSource, IScanMSD scanSubtract) {
+
+		/*
+		 * Settings
+		 */
+		MassSpectrumFilterSettings settings = new MassSpectrumFilterSettings();
+		settings.setUseNominalMasses(PreferenceSupplierModelMSD.isUseNominalMZ());
+		settings.setUseNormalize(PreferenceSupplierModelMSD.isUseNormalizedScan());
+		settings.setSubtractMassSpectrum(PreferenceSupplierModelMSD.getMassSpectrum(scanReference));
+		/*
+		 * Subtract
+		 */
+		SubtractCalculator subtractCalculator = new SubtractCalculator();
+		subtractCalculator.subtractMassSpectrum(scanSource, settings);
+		scanSource = copyScan(scanSource);
+
+		return scanSource;
+	}
+
 	private void createButtonOptimizedSpectrum(Composite parent) {
 
 		Button button = new Button(parent, SWT.TOGGLE);
 		button.setText("");
 		button.setToolTipText("Use the optimized mass spectrum if available.");
+		button.setSelection(useOptimizedSpectrum);
 		updateButtonOptimized(button);
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
 			public void widgetSelected(SelectionEvent s) {
 
-				useOptimizedSpectrum = !useOptimizedSpectrum;
+				useOptimizedSpectrum = button.getSelection();
 				updateButtonOptimized(button);
-				updateInput();
+				if(scanUnknownMaster != null) {
+					scanUnknown = copyScan(scanUnknownMaster, false);
+				}
+				updateInput(scanUnknown, scanReference);
 			}
 		});
 
-		buttonOptimizedScan.set(button);
+		buttonUseOptimizedScan.set(button);
+	}
+
+	private void createScanIdentifierUI(Composite parent) {
+
+		ScanIdentifierUI scanIdentifierUI = new ScanIdentifierUI(parent, SWT.NONE);
+		scanIdentifierUI.setUpdateListener(new IUpdateListenerUI() {
+
+			@Override
+			public void update(Display display) {
+
+				updateInput();
+				UpdateNotifierUI.update(display, scanUnknown);
+				UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "Scan Chart identification has been performed.");
+				ChromatogramUpdateSupport.fireUpdateChromatogramSelection(display, scanUnknown);
+			}
+		});
+
+		scanIdentifierControl.set(scanIdentifierUI);
 	}
 
 	private void updateButtonOptimized(Button button) {
@@ -776,7 +864,80 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 	private void createSettingsButton(Composite parent) {
 
-		createSettingsButton(parent, Arrays.asList(PreferencePageScans.class), display -> applySettings());
+		ISettingsHandler settingsHandler = new ISettingsHandler() {
+
+			@Override
+			public void apply(Display display) {
+
+				applySettings();
+			}
+		};
+
+		Button button = createSettingsButtonBasic(parent);
+		button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent event) {
+
+				/*
+				 * Dynamically show different settings, based on the selected scan type.
+				 */
+				List<Class<? extends IPreferencePage>> preferencePages = getPreferencePages();
+				showPreferencesDialog(event, preferencePages, settingsHandler, true);
+			}
+		});
+	}
+
+	private List<Class<? extends IPreferencePage>> getPreferencePages() {
+
+		/*
+		 * Default pages
+		 */
+		List<Class<? extends IPreferencePage>> preferencePages = new ArrayList<>();
+		preferencePages.add(PreferencePageScans.class);
+		preferencePages.add(PreferencePageSubtract.class);
+		/*
+		 * Additional pages.
+		 */
+		DataType scanDataType = getScanDataType();
+		Object[] scanIdentifierServices = Activator.getDefault().getScanIdentifierServices();
+		if(scanIdentifierServices != null) {
+			for(Object object : scanIdentifierServices) {
+				if(object instanceof IScanIdentifierService scanIdentifierService) {
+					DataType dataType = scanIdentifierService.getDataType();
+					if(scanDataType.equals(dataType)) {
+						Class<? extends IWorkbenchPreferencePage> preferencePage = scanIdentifierService.getPreferencePage();
+						if(preferencePage != null) {
+							preferencePages.add(preferencePage);
+						}
+					}
+				}
+			}
+		}
+
+		return preferencePages;
+	}
+
+	private DataType getScanDataType() {
+
+		if(scanUnknown instanceof IScanCSD) {
+			return DataType.CSD;
+		} else if(scanUnknown instanceof IScanMSD) {
+			return DataType.MSD;
+		} else if(scanUnknown instanceof IScanWSD) {
+			return DataType.WSD;
+		} else if(scanUnknown instanceof IScanVSD) {
+			return DataType.VSD;
+		}
+
+		return DataType.NONE;
+	}
+
+	private void updateInput(IScanMSD unknownMassSpectrum, IScanMSD referenceMassSpectrum) {
+
+		scanUnknown = copyScan(unknownMassSpectrum);
+		scanReference = copyScan(referenceMassSpectrum);
+		updateInput();
 	}
 
 	private void updateInput() {
@@ -789,6 +950,14 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 		boolean enabled = scanUnknown != null && scanReference != null;
 		toolbarHybridSearch.get().setEnabled(enabled);
+		buttonSubtractReference.get().setEnabled(enabled);
+		updateIdentifierControl();
+	}
+
+	private void updateIdentifierControl() {
+
+		scanIdentifierControl.get().setInput(scanUnknown);
+		scanIdentifierControl.get().setEnabled(scanUnknown != null);
 	}
 
 	private void reset() {
@@ -798,6 +967,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 	private void applySettings() {
 
+		scanIdentifierControl.get().updateIdentifier();
 		updateChart();
 	}
 
@@ -902,7 +1072,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 					}
 				} else if(IChemClipseEvents.TOPIC_SCAN_REFERENCE_UPDATE_COMPARISON.equals(topic)) {
 					if(first instanceof IScanMSD unknownMassSpectrum && second instanceof IScanMSD referenceMassSpectrum) {
-						update(unknownMassSpectrum, referenceMassSpectrum);
+						updateInput(unknownMassSpectrum, referenceMassSpectrum);
 					}
 				}
 			}
@@ -910,6 +1080,11 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 	}
 
 	private IScanMSD copyScan(IScanMSD scanMSD) {
+
+		return copyScan(scanMSD, useOptimizedSpectrum);
+	}
+
+	private IScanMSD copyScan(IScanMSD scanMSD, boolean useOptimizedSpectrum) {
 
 		if(scanMSD != null) {
 			try {
