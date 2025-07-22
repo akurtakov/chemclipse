@@ -80,9 +80,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 
 		super(parent, style);
 		createControl();
-		DataUpdateSupport dataUpdateSupport = new DataUpdateSupport(Activator.getDefault().getEventBroker());
-		dataUpdateSupport.subscribe(IChemClipseEvents.TOPIC_PCA_UPDATE_RESULT, IChemClipseEvents.EVENT_BROKER_DATA);
-		dataUpdateSupport.subscribe(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, IChemClipseEvents.EVENT_BROKER_DATA);
+		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
 		dataUpdateSupport.add(new IDataUpdateListener() {
 
 			@Override
@@ -296,7 +294,6 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 					 * Send Update event.
 					 */
 					if(!samplesHighlighted.isEmpty()) {
-						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_RESULT, samplesHighlighted.toArray());
 						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, samplesHighlighted.toArray());
 					}
 					/*

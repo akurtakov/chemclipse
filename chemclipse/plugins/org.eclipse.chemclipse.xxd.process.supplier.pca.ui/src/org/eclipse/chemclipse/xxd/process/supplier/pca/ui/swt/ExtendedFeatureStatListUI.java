@@ -51,10 +51,7 @@ public class ExtendedFeatureStatListUI extends Composite implements IExtendedPar
 		super(parent, style);
 		createControl();
 		//
-		DataUpdateSupport dataUpdateSupport = new DataUpdateSupport(Activator.getDefault().getEventBroker());
-		dataUpdateSupport.subscribe(IChemClipseEvents.TOPIC_PCA_UPDATE_RESULT, IChemClipseEvents.EVENT_BROKER_DATA);
-		dataUpdateSupport.subscribe(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE, IChemClipseEvents.EVENT_BROKER_DATA);
-		dataUpdateSupport.subscribe(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE, IChemClipseEvents.EVENT_BROKER_DATA);
+		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
 		dataUpdateSupport.add(new IDataUpdateListener() {
 
 			@Override
