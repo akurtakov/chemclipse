@@ -10,6 +10,7 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Matthias Mailänder - allow for data unloading
+ * Lorenz Gerber - reset initalUpdate on unloading
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.ui.parts;
 
@@ -138,6 +139,7 @@ public abstract class AbstractUpdater<T extends Composite> {
 	protected void unloadData() {
 
 		dataUpdateSupport.clearObjects();
+		initialUpdate = true;
 	}
 
 	/**
