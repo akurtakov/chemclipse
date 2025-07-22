@@ -46,7 +46,7 @@ public abstract class AbstractPartPCA<T extends Composite> extends AbstractPart<
 	@Override
 	protected boolean isUpdateTopic(String topic) {
 
-		return isUpdateSelection(topic) || isUpdateColorSchemeEvent(topic) || isUpdateFeaturesEvent(topic) || isUpdateLabelsEvent(topic) || isUnloadEvent(topic);
+		return isUpdateSelection(topic) || isUpdateColorSchemeEvent(topic) || isUpdateFeaturesEvent(topic) || isUpdateLabelsEvent(topic) || isUpdateResultEvent(topic) || isUnloadEvent(topic);
 	}
 
 	protected boolean isUpdateSelection(String topic) {
@@ -67,6 +67,11 @@ public abstract class AbstractPartPCA<T extends Composite> extends AbstractPart<
 	protected boolean isUpdateLabelsEvent(String topic) {
 
 		return topic.equals(IChemClipseEvents.TOPIC_PCA_UPDATE_LABELS);
+	}
+
+	protected boolean isUpdateResultEvent(String topic) {
+
+		return topic.equals(IChemClipseEvents.TOPIC_PCA_UPDATE_RESULT);
 	}
 
 	protected boolean isUnloadEvent(String topic) {

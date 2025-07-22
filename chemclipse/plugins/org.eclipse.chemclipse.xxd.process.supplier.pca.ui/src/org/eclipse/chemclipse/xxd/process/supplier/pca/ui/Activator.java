@@ -16,7 +16,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.ui.activator.AbstractActivatorUI;
+import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.preferences.PreferenceSupplier;
 import org.eclipse.e4.core.contexts.EclipseContextFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -52,6 +54,8 @@ public class Activator extends AbstractActivatorUI {
 	public static final String ICON_NORM_TRANS_POWER = "ICON_NORM_TRANS_POWER"; // $NON-NLS-1$
 	//
 	private static Activator plugin;
+	//
+	private DataUpdateSupport dataUpdateSupport;
 
 	/**
 	 * Returns the shared instance
@@ -102,6 +106,15 @@ public class Activator extends AbstractActivatorUI {
 		return eclipseContext.get(IEventBroker.class);
 	}
 
+	public DataUpdateSupport getDataUpdateSupport() {
+
+		if(dataUpdateSupport == null) {
+			dataUpdateSupport = new DataUpdateSupport(getEventBroker());
+			initialize(dataUpdateSupport);
+		}
+		return dataUpdateSupport;
+	}
+
 	private Map<String, String> getImageHashMap() {
 
 		Map<String, String> imageHashMap = new HashMap<String, String>();
@@ -130,5 +143,13 @@ public class Activator extends AbstractActivatorUI {
 		imageHashMap.put(ICON_NORM_TRANS_POWER, "icons/trans_power.jpg"); // $NON-NLS-1$
 		//
 		return imageHashMap;
+	}
+
+	private void initialize(DataUpdateSupport dataUpdateSupport) {
+
+		dataUpdateSupport.subscribe(IChemClipseEvents.TOPIC_PCA_UPDATE_RESULT, IChemClipseEvents.EVENT_BROKER_DATA);
+		dataUpdateSupport.subscribe(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE, IChemClipseEvents.EVENT_BROKER_DATA);
+		dataUpdateSupport.subscribe(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE, IChemClipseEvents.EVENT_BROKER_DATA);
+		dataUpdateSupport.subscribe(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, IChemClipseEvents.EVENT_BROKER_DATA);
 	}
 }
