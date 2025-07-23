@@ -158,6 +158,13 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 		updateControls();
 	}
 
+	public void reloadData() {
+
+		if(this.evaluation != null) {
+			UpdateNotifierUI.update(DisplayUtils.getDisplay(), IChemClipseEvents.TOPIC_PCA_UPDATE_SELECTION, this.evaluation);
+		}
+	}
+
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
