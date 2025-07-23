@@ -18,6 +18,7 @@ import java.util.List;
 
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt.ExtendedFeatureListUI;
+import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
@@ -29,6 +30,13 @@ public class FeatureTablePart extends AbstractPartPCA<ExtendedFeatureListUI> {
 	public FeatureTablePart(Composite parent) {
 
 		super(parent);
+	}
+
+	@Focus
+	private void onFocus() {
+
+		super.setFocus();
+		getControl().updateSelection();
 	}
 
 	@Override
@@ -49,6 +57,13 @@ public class FeatureTablePart extends AbstractPartPCA<ExtendedFeatureListUI> {
 				Object object = objects.get(0);
 				if(object instanceof EvaluationPCA evaluationPCA) {
 					getControl().setInput(evaluationPCA);
+					return true;
+				}
+			} else if(isUpdateResultEvent(topic)) {
+				Object object = objects.get(0);
+				if(object instanceof EvaluationPCA evaluationPCA) {
+					getControl().setInput(evaluationPCA);
+					getControl().updateSelection();
 					return true;
 				}
 			}
