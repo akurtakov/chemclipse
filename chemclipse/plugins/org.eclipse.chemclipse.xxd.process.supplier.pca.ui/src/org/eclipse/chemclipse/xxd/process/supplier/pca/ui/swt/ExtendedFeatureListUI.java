@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
@@ -133,6 +134,36 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 			this.evaluationPCA = evaluationPCA;
 			updateInput(true);
 		}
+	}
+
+	public void updateSelection() {
+
+		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
+		List<Object> objects = dataUpdateSupport.getUpdates(getLastTopic(dataUpdateSupport.getTopics()));
+		if(!objects.isEmpty()) {
+			Object object = objects.get(0);
+			ArrayList<Feature> features = new ArrayList<>();
+			if(object instanceof Object[] values) {
+				int length = values.length;
+				for(int i = 0; i < length; i++) {
+					if(values[i] instanceof Feature feature) {
+						features.add(feature);
+					}
+				}
+			}
+			UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE, features.toArray());
+		}
+	}
+
+	private String getLastTopic(List<String> topics) {
+
+		Collections.reverse(topics);
+		for(String topic : topics) {
+			if(topic.equals(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE)) {
+				return topic;
+			}
+		}
+		return "";
 	}
 
 	private boolean doUpdate(EvaluationPCA evaluationPCA) {
