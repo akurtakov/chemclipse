@@ -76,5 +76,6 @@ public class PCAEditor {
 	public void setFocus() {
 
 		analysisEditorUI.setFocus();
+		analysisEditorUI.reloadData();
 	}
 }
