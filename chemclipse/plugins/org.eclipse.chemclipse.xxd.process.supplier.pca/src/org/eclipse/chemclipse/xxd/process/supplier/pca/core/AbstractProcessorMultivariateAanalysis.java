@@ -62,8 +62,10 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 		 * Samples
 		 */
 		List<String> sampleNames = new ArrayList<>();
+		List<String> groupNames = new ArrayList<>();
 		for(ISample sample : samples) {
 			sampleNames.add(sample.getSampleName());
+			groupNames.add(sample.getGroupName());
 		}
 		/*
 		 * variable.getClassification() //
@@ -91,7 +93,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 			}
 		}
 		//
-		evaluationPCA.setFeatureDataMatrix(new FeatureDataMatrix(sampleNames, features));
+		evaluationPCA.setFeatureDataMatrix(new FeatureDataMatrix(sampleNames, groupNames, features));
 	}
 
 	protected <V extends IVariable, S extends ISample> Map<S, double[]> extractData(ISamples<V, S> samples, Algorithm algorithm, IAnalysisSettings settings, boolean[] isSelectedVariable) {
