@@ -20,10 +20,12 @@ public class FeatureDataMatrix {
 
 	private List<String> sampleNames = new ArrayList<>();
 	private List<Feature> features = new ArrayList<>();
+	private List<String> groupNames = new ArrayList<>();
 
-	public FeatureDataMatrix(List<String> sampleNames, List<Feature> features) {
+	public FeatureDataMatrix(List<String> sampleNames, List<String> groupNames, List<Feature> features) {
 
 		this.sampleNames = sampleNames;
+		this.groupNames = groupNames;
 		this.features = features;
 	}
 
@@ -41,6 +43,11 @@ public class FeatureDataMatrix {
 	public List<String> getSampleNames() {
 
 		return Collections.unmodifiableList(sampleNames);
+	}
+
+	public List<String> getGroupNames() {
+
+		return groupNames;
 	}
 
 	public List<Feature> getFeatures() {

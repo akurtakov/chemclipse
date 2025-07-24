@@ -26,6 +26,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.provider.Feat
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.provider.FeatureLabelProvider;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.provider.FeatureListFilter;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.provider.VisualSelectionFilter;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.FeatureColumnLabels;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.FeatureMode;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.TableViewerColumn;
@@ -47,6 +48,7 @@ public class FeatureListUI extends ExtendedTableViewer {
 	//
 	private IUpdateListener updateListener = null;
 	private FeatureMode featureMode = FeatureMode.ORIGINAL;
+	private FeatureColumnLabels columnLabels = FeatureColumnLabels.SAMPLENAMES;
 
 	public FeatureListUI(Composite parent, int style) {
 
@@ -103,6 +105,11 @@ public class FeatureListUI extends ExtendedTableViewer {
 		this.featureMode = featureMode;
 	}
 
+	public void setColumnLabels(FeatureColumnLabels labels) {
+
+		this.columnLabels = labels;
+	}
+
 	private void createColumnsDefault() {
 
 		if(featureMode.equals(FeatureMode.ORIGINAL)) {
@@ -125,7 +132,12 @@ public class FeatureListUI extends ExtendedTableViewer {
 		 * Labels and bounds
 		 */
 		String variableName = featureDataMatrix.getVariableName();
-		List<String> sampleNames = featureDataMatrix.getSampleNames();
+		List<String> columnNames;
+		if(columnLabels.equals(FeatureColumnLabels.SAMPLENAMES)) {
+			columnNames = featureDataMatrix.getSampleNames();
+		} else {
+			columnNames = featureDataMatrix.getGroupNames();
+		}
 		//
 		List<String> titleList = new ArrayList<>();
 		List<Integer> boundList = new ArrayList<>();
@@ -147,7 +159,7 @@ public class FeatureListUI extends ExtendedTableViewer {
 		/*
 		 * Sample labels
 		 */
-		for(String sampleName : sampleNames) {
+		for(String sampleName : columnNames) {
 			titleList.add(sampleName);
 			boundList.add(FeatureLabelProvider.BOUND_SAMPLE);
 		}

@@ -49,6 +49,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.model.FeatureDataMatrix;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.Activator;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePage;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.FeatureColumnLabels;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.FeatureMode;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -196,8 +197,9 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
-		composite.setLayout(new GridLayout(8, false));
+		composite.setLayout(new GridLayout(9, false));
 		//
+		createComboViewerColumnLabels(composite);
 		createComboViewerFeatureMode(composite);
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 		buttonToolbarSearch = createButtonToggleToolbar(composite, toolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH);
@@ -511,6 +513,50 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 		//
 		comboViewer.setInput(FeatureMode.values());
 		comboViewer.setSelection(new StructuredSelection(FeatureMode.ORIGINAL));
+		//
+		comboViewerFeatureMode.set(comboViewer);
+	}
+
+	private void createComboViewerColumnLabels(Composite parent) {
+
+		ComboViewer comboViewer = new EnhancedComboViewer(parent, SWT.READ_ONLY);
+		comboViewer.setContentProvider(ArrayContentProvider.getInstance());
+		comboViewer.setLabelProvider(new AbstractLabelProvider() {
+
+			@Override
+			public String getText(Object element) {
+
+				if(element instanceof FeatureColumnLabels featureColumnLabel) {
+					return featureColumnLabel.label();
+				}
+				return null;
+			}
+		});
+		Combo combo = comboViewer.getCombo();
+		combo.setToolTipText("Select Column Label");
+		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		combo.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				Object object = comboViewer.getStructuredSelection().getFirstElement();
+				if(object instanceof FeatureColumnLabels featureColumnLabel) {
+					if(evaluationPCA != null) {
+						if(featureColumnLabel.equals(FeatureColumnLabels.SAMPLENAMES)) {
+							listControl.get().setColumnLabels(FeatureColumnLabels.SAMPLENAMES);
+							updateInput();
+						} else {
+							listControl.get().setColumnLabels(FeatureColumnLabels.GROUPNAMES);
+							updateInput();
+						}
+					}
+				}
+			}
+		});
+		//
+		comboViewer.setInput(FeatureColumnLabels.values());
+		comboViewer.setSelection(new StructuredSelection(FeatureColumnLabels.SAMPLENAMES));
 		//
 		comboViewerFeatureMode.set(comboViewer);
 	}
