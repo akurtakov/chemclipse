@@ -28,7 +28,7 @@ public abstract class AbstractReport extends AbstractChromatogramReportGenerator
 	public IProcessingInfo<File> report(File file, boolean append, List<IChromatogram> chromatograms, IChromatogramReportSettings settings, IProgressMonitor monitor) {
 
 		IProcessingInfo<File> processingInfo = new ProcessingInfo<>();
-		processingInfo.addErrorMessage("ChemClipse Chromatogram Report", "Please override this method");
+		processingInfo.addErrorMessage("Chromatogram Report", "Please override this method");
 		return processingInfo;
 	}
 
