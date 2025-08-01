@@ -35,7 +35,7 @@ public class Report3 extends AbstractReport {
 
 		file = SpecificationValidator.validateSpecification(file);
 		IProcessingInfo<File> processingInfo = super.validate(file);
-		//
+
 		if(!processingInfo.hasErrorMessages()) {
 			if(settings instanceof ReportSettings3 reportSettings) {
 				try {
@@ -44,7 +44,7 @@ public class Report3 extends AbstractReport {
 					processingInfo.setProcessingResult(file);
 				} catch(IOException e) {
 					logger.warn(e);
-					processingInfo.addErrorMessage("Quantitation Report", "The report couldn't be created. An error occured.");
+					processingInfo.addErrorMessage("Quantitation Report", "The report couldn't be created. An error occured.", e);
 				}
 			} else {
 				logger.warn("The settings are not of type: " + ReportSettings3.class);
