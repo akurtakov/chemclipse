@@ -17,7 +17,7 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-public class AbstractBackgroundTestCase extends TestCase {
+public abstract class AbstractBackgroundTestCase extends TestCase {
 
 	List<String> parameterBackground = new ArrayList<>();
 
