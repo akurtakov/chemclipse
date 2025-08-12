@@ -119,6 +119,14 @@ public interface IExtendedPartUI {
 		return button;
 	}
 
+	/**
+	 * The context is the id of your linked help via contexts.xml and controls.xml, e.g.:
+	 * org.eclipse.chemclipse.ux.extension.xxd.ui.chromatogram_editor
+	 * 
+	 * @param parent
+	 * @param context
+	 * @return {@link Button}
+	 */
 	default Button createButtonHelp(Composite parent, String context) {
 
 		/*
@@ -132,7 +140,11 @@ public interface IExtendedPartUI {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				PlatformUI.getWorkbench().getHelpSystem().displayHelp(context);
+				if(context != null && !context.isBlank()) {
+					PlatformUI.getWorkbench().getHelpSystem().displayHelp(context);
+				} else {
+					PlatformUI.getWorkbench().getHelpSystem().displayHelp();
+				}
 			}
 		});
 
