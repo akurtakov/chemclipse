@@ -24,7 +24,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 public abstract class AbstractReport extends AbstractChromatogramReportGenerator {
 
-	abstract IProcessingInfo<File> report(File file, boolean append, List<IChromatogram> chromatograms, IChromatogramReportSettings settings, IProgressMonitor monitor);
+	public abstract IProcessingInfo<File> report(File file, boolean append, List<IChromatogram> chromatograms, IChromatogramReportSettings settings, IProgressMonitor monitor);
 
 	@Override
 	public IProcessingInfo<File> generate(File file, boolean append, IChromatogram chromatogram, IChromatogramReportSettings settings, IProgressMonitor monitor) {
