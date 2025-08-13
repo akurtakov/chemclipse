@@ -62,11 +62,11 @@ public class ReportWriter1 {
 	private static final String RESULTS_DELIMITER = "---";
 	private static final String NO_VALUE = "--";
 	private static final String HORIZONTAL_RULE = "------------------------------";
-	//
+
 	private PeakQuantitationsExtractor peakQuantitationsExtractor = new PeakQuantitationsExtractor();
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.0####");
 	private DateFormat dateFormat = ValueFormat.getDateFormatEnglish();
-	//
+
 	private IonAbundanceComparator ionComparator = new IonAbundanceComparator(SortOrder.DESC);
 	private PeakRetentionTimeComparator peakComparator = new PeakRetentionTimeComparator(SortOrder.ASC);
 
@@ -76,7 +76,7 @@ public class ReportWriter1 {
 			printWriter.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			printWriter.println("ASCII Report");
 			printWriter.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-			//
+
 			for(IChromatogram chromatogram : chromatograms) {
 				printHeader(printWriter, chromatogram, monitor);
 				reportChromatogram(printWriter, chromatogram, monitor);
@@ -98,7 +98,7 @@ public class ReportWriter1 {
 		} else {
 			printHeaderLine(printWriter, "Date", "");
 		}
-		//
+
 		printHeaderLine(printWriter, "Info", chromatogramOverview.getShortInfo());
 		printHeaderLine(printWriter, "Misc", chromatogramOverview.getMiscInfo());
 		printHeaderLine(printWriter, "Misc (separated)", chromatogramOverview.getMiscInfoSeparated());
@@ -116,7 +116,7 @@ public class ReportWriter1 {
 		for(Map.Entry<String, String> entry : chromatogramOverview.getHeaderDataMap().entrySet()) {
 			printHeaderLine(printWriter, entry.getKey(), entry.getValue());
 		}
-		//
+
 		printWriter.println(HORIZONTAL_RULE);
 	}
 
@@ -141,7 +141,7 @@ public class ReportWriter1 {
 		 */
 		List<IPeak> peaks = new ArrayList<>(chromatogram.getPeaks());
 		Collections.sort(peaks, peakComparator);
-		//
+
 		printWriter.println("");
 		printWriter.println("NAME: " + chromatogram.getName());
 		printWriter.println("TYPE: " + getChromatogramType(chromatogram));
@@ -275,7 +275,7 @@ public class ReportWriter1 {
 		if(peak instanceof IChromatogramPeak reportedPeak) {
 			chromatogramPeak = reportedPeak;
 		}
-		//
+
 		printWriter.print("[" + number + "]");
 		printWriter.print(DELIMITER);
 		printWriter.print(decimalFormat.format(peakModel.getRetentionTimeAtPeakMaximum() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
@@ -457,7 +457,7 @@ public class ReportWriter1 {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -505,6 +505,10 @@ public class ReportWriter1 {
 		printWriter.print("Miscellaneous");
 		printWriter.print(DELIMITER);
 		printWriter.print("Comments");
+		printWriter.print(DELIMITER);
+		printWriter.print("Reference ID");
+		printWriter.print(DELIMITER);
+		printWriter.print("RI");
 		printWriter.println("");
 	}
 
@@ -552,6 +556,10 @@ public class ReportWriter1 {
 			printWriter.print(libraryInformation.getMiscellaneous());
 			printWriter.print(DELIMITER);
 			printWriter.print(libraryInformation.getComments());
+			printWriter.print(DELIMITER);
+			printWriter.print(libraryInformation.getReferenceIdentifier());
+			printWriter.print(DELIMITER);
+			printWriter.print(decimalFormat.format(libraryInformation.getRetentionIndex()));
 			printWriter.println("");
 		}
 	}

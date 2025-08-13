@@ -20,17 +20,11 @@ import org.eclipse.chemclipse.chromatogram.xxd.report.chromatogram.AbstractChrom
 import org.eclipse.chemclipse.chromatogram.xxd.report.settings.IChromatogramReportSettings;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.processing.core.ProcessingInfo;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public abstract class AbstractReport extends AbstractChromatogramReportGenerator {
 
-	public IProcessingInfo<File> report(File file, boolean append, List<IChromatogram> chromatograms, IChromatogramReportSettings settings, IProgressMonitor monitor) {
-
-		IProcessingInfo<File> processingInfo = new ProcessingInfo<>();
-		processingInfo.addErrorMessage("ChemClipse Chromatogram Report", "Please override this method");
-		return processingInfo;
-	}
+	abstract IProcessingInfo<File> report(File file, boolean append, List<IChromatogram> chromatograms, IChromatogramReportSettings settings, IProgressMonitor monitor);
 
 	@Override
 	public IProcessingInfo<File> generate(File file, boolean append, IChromatogram chromatogram, IChromatogramReportSettings settings, IProgressMonitor monitor) {

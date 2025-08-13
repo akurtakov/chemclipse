@@ -35,7 +35,7 @@ public class Report4 extends AbstractReport {
 
 		file = SpecificationValidator.validateSpecification(file);
 		IProcessingInfo<File> processingInfo = super.validate(file);
-		//
+
 		if(!processingInfo.hasErrorMessages()) {
 			if(settings instanceof ReportSettings4) {
 				ReportWriter4 chromatogramReport = new ReportWriter4();
@@ -44,13 +44,13 @@ public class Report4 extends AbstractReport {
 					processingInfo.setProcessingResult(file);
 				} catch(IOException e) {
 					logger.warn(e);
-					processingInfo.addErrorMessage("ChemClipse Chromatogram Report", "The report couldn't be created. An error occured.");
+					processingInfo.addErrorMessage("Chromatogram Report", "The report couldn't be created. An error occured.", e);
 				}
 			} else {
 				logger.warn("The settings are not of type: " + ReportSettings4.class);
 			}
 		}
-		//
+
 		return processingInfo;
 	}
 
