@@ -81,7 +81,6 @@ public class ChromatogramWriterVersion110 extends AbstractChromatogramWriter imp
 
 		MzMLType mzML = new MzMLType();
 		mzML.setVersion(XmlReader110.VERSION);
-		mzML.setId(chromatogram.getFile().getName());
 		SourceFileListType sourceFileList = createSourceFileList(chromatogram);
 		mzML.setFileDescription(createFileDescription(chromatogram, sourceFileList));
 		SoftwareListType softwareList = XmlWriter110.createSoftwareList();
