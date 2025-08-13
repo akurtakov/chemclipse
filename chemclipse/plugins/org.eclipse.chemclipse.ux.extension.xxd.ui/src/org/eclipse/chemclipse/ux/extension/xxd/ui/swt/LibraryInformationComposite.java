@@ -33,7 +33,7 @@ public abstract class LibraryInformationComposite extends Composite implements I
 
 	private AtomicReference<Button> buttonToolbarInfoControl = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
-	//
+
 	private ILibraryInformation libraryInformation = null;
 
 	public LibraryInformationComposite(Composite parent, int style) {
@@ -93,11 +93,16 @@ public abstract class LibraryInformationComposite extends Composite implements I
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
-	private void updateToolbarInfo() {
+	protected AtomicReference<InformationUI> getToolbarInfo() {
+
+		return toolbarInfo;
+	}
+
+	protected void updateToolbarInfo() {
 
 		if(libraryInformation != null) {
 			toolbarInfo.get().setText(libraryInformation.getName());
