@@ -123,7 +123,6 @@ public class ChromatogramWriterVersion110 extends AbstractChromatogramWriter imp
 				run.setStartTimeStamp(date);
 			}
 			MzMLType mzML = new MzMLType();
-			mzML.setId(chromatogram.getFile().getName());
 			//
 			CVListType cvList = new CVListType();
 			cvList.setCount(BigInteger.valueOf(2));
