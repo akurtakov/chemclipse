@@ -59,7 +59,7 @@ public abstract class AbstractEvaluation<V extends IVariable, S extends ISample,
 		for(IVariable variable : variables) {
 			int index = samples.getVariables().indexOf(variable);
 			if(index > -1) {
-				samples.getVariables().get(index).setSelected(true);
+				samples.getVariables().get(index).setVisualSelected(true);
 			}
 		}
 		this.highlightedVariables = variables;
