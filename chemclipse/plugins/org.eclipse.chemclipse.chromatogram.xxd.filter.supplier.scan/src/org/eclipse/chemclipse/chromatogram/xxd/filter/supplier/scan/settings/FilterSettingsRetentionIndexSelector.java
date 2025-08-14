@@ -13,7 +13,9 @@
 package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.settings;
 
 import org.eclipse.chemclipse.chromatogram.filter.settings.AbstractChromatogramFilterSettings;
+import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.model.RetentionIndexOption;
 import org.eclipse.chemclipse.model.support.ColumnIndexSupport;
+import org.eclipse.chemclipse.support.model.SeparationColumnType;
 import org.eclipse.chemclipse.support.settings.StringSettingsProperty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -31,6 +33,18 @@ public class FilterSettingsRetentionIndexSelector extends AbstractChromatogramFi
 	@JsonProperty(value = "Remove White-Space", defaultValue = "false")
 	@JsonPropertyDescription(value = "Remove white space when searching.")
 	private boolean removeWhiteSpace = false;
+	@JsonProperty(value = "Match Partly", defaultValue = "false")
+	@JsonPropertyDescription(value = "If true, the search column must not match the column name or type completely.")
+	private boolean matchPartly = false;
+	@JsonProperty(value = "Separation Column (Fallback)", defaultValue = "DEFAULT")
+	@JsonPropertyDescription(value = "Use the following separation column if the above column can't be matched.")
+	private SeparationColumnType separationColumnTypeFallback = SeparationColumnType.DEFAULT;
+	@JsonProperty(value = "Retention Index Option", defaultValue = "AUTO")
+	@JsonPropertyDescription(value = "Use the following value when assigning the retention index value.")
+	private RetentionIndexOption retentionIndexOption = RetentionIndexOption.AUTO;
+	@JsonProperty(value = "Delete Unrelated Indices", defaultValue = "false")
+	@JsonPropertyDescription(value = "Delete all indices, wich are not matched by the above settings.")
+	private boolean deleteUnrelatedIndices = false;
 
 	public String getSearchColumn() {
 
@@ -60,5 +74,45 @@ public class FilterSettingsRetentionIndexSelector extends AbstractChromatogramFi
 	public void setRemoveWhiteSpace(boolean removeWhiteSpace) {
 
 		this.removeWhiteSpace = removeWhiteSpace;
+	}
+
+	public boolean isMatchPartly() {
+
+		return matchPartly;
+	}
+
+	public void setMatchPartly(boolean matchPartly) {
+
+		this.matchPartly = matchPartly;
+	}
+
+	public SeparationColumnType getSeparationColumnTypeFallback() {
+
+		return separationColumnTypeFallback;
+	}
+
+	public void setSeparationColumnTypeFallback(SeparationColumnType separationColumnTypeFallback) {
+
+		this.separationColumnTypeFallback = separationColumnTypeFallback;
+	}
+
+	public RetentionIndexOption getRetentionIndexOption() {
+
+		return retentionIndexOption;
+	}
+
+	public void setRetentionIndexOption(RetentionIndexOption retentionIndexOption) {
+
+		this.retentionIndexOption = retentionIndexOption;
+	}
+
+	public boolean isDeleteUnrelatedIndices() {
+
+		return deleteUnrelatedIndices;
+	}
+
+	public void setDeleteUnrelatedIndices(boolean deleteUnrelatedIndices) {
+
+		this.deleteUnrelatedIndices = deleteUnrelatedIndices;
 	}
 }

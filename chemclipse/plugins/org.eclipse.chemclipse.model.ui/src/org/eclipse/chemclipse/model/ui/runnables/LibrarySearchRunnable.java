@@ -60,9 +60,10 @@ public class LibrarySearchRunnable implements IRunnableWithProgress {
 		String searchColumn = retentionIndexLibrarySettings.getSearchColumn();
 		boolean caseSensitive = retentionIndexLibrarySettings.isCaseSensitive();
 		boolean removeWhiteSpace = retentionIndexLibrarySettings.isRemoveWhiteSpace();
+		boolean matchPartly = retentionIndexLibrarySettings.isMatchPartly();
 		//
 		for(ILibraryInformation libraryInformation : libraryInformations) {
-			float retentionIndexColumn = ColumnIndexSupport.getRetentionIndex(retentionIndex, libraryInformation.getColumnIndexMarkers(), searchColumn, caseSensitive, removeWhiteSpace);
+			float retentionIndexColumn = ColumnIndexSupport.getRetentionIndex(retentionIndex, libraryInformation.getColumnIndexMarkers(), searchColumn, caseSensitive, removeWhiteSpace, matchPartly);
 			libraryInformation.setRetentionIndex(retentionIndexColumn);
 		}
 		/*

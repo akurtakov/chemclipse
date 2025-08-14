@@ -20,6 +20,7 @@ public class RetentionIndexLibrarySettings {
 	private String searchColumn = "DB5";
 	private boolean caseSensitive = false;
 	private boolean removeWhiteSpace = false;
+	private boolean matchPartly = false;
 	private int retentionIndexDelta = 10;
 	private String specificDatabase = ""; // If empty, take all.
 	//
@@ -53,6 +54,16 @@ public class RetentionIndexLibrarySettings {
 	public void setRemoveWhiteSpace(boolean removeWhiteSpace) {
 
 		this.removeWhiteSpace = removeWhiteSpace;
+	}
+
+	public boolean isMatchPartly() {
+
+		return matchPartly;
+	}
+
+	public void setMatchPartly(boolean matchPartly) {
+
+		this.matchPartly = matchPartly;
 	}
 
 	public int getRetentionIndexDelta() {
