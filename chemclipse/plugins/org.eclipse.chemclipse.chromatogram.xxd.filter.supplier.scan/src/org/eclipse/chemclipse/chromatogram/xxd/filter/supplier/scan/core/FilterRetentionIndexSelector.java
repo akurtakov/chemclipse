@@ -12,19 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.core;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.eclipse.chemclipse.chromatogram.filter.core.chromatogram.AbstractChromatogramFilter;
 import org.eclipse.chemclipse.chromatogram.filter.result.ChromatogramFilterResult;
 import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResult;
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
+import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.model.RetentionIndexOption;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.settings.FilterSettingsRetentionIndexSelector;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.core.IScan;
+import org.eclipse.chemclipse.model.identifier.IColumnIndexMarker;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
@@ -32,6 +37,7 @@ import org.eclipse.chemclipse.model.support.ColumnIndexSupport;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.MessageType;
 import org.eclipse.chemclipse.processing.core.ProcessingMessage;
+import org.eclipse.chemclipse.support.model.SeparationColumnType;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public class FilterRetentionIndexSelector extends AbstractChromatogramFilter {
@@ -62,45 +68,112 @@ public class FilterRetentionIndexSelector extends AbstractChromatogramFilter {
 
 		String searchColumn = settings.getSearchColumn();
 		if(!searchColumn.isEmpty()) {
-			/*
-			 * Settings
-			 */
-			boolean caseSensitive = settings.isCaseSensitive();
-			boolean removeWhiteSpace = settings.isRemoveWhiteSpace();
-			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
-			if(ColumnIndexSupport.COLUMN_TYPE_CHROMATOGRAM.equals(searchColumn)) {
-				searchColumn = chromatogram.getSeparationColumnIndices().getSeparationColumn().getSeparationColumnType().label();
-			}
-			/*
-			 * Scans
-			 */
-			int startScan = chromatogram.getScanNumber(chromatogramSelection.getStartRetentionTime());
-			int stopScan = chromatogram.getScanNumber(chromatogramSelection.getStopRetentionTime());
-			for(int i = startScan; i <= stopScan; i++) {
-				IScan scan = chromatogram.getScan(i);
-				if(!scan.getTargets().isEmpty()) {
-					selectColumnRetentionIndex(scan, searchColumn, caseSensitive, removeWhiteSpace);
-				}
-			}
-			/*
-			 * Peaks
-			 */
-			List<? extends IPeak> peaks = chromatogram.getPeaks(chromatogramSelection.getStartRetentionTime(), chromatogramSelection.getStopRetentionTime());
-			for(IPeak peak : peaks) {
-				selectColumnRetentionIndex(peak.getPeakModel().getPeakMaximum(), searchColumn, caseSensitive, removeWhiteSpace);
+			adjustSearchColumn(chromatogramSelection, settings);
+			assignRetentionIndexScans(chromatogramSelection, settings);
+			assignRetentionIndexPeaks(chromatogramSelection, settings);
+		}
+	}
+
+	private void adjustSearchColumn(IChromatogramSelection chromatogramSelection, FilterSettingsRetentionIndexSelector settings) {
+
+		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
+		if(ColumnIndexSupport.COLUMN_TYPE_CHROMATOGRAM.equals(settings.getSearchColumn())) {
+			settings.setSearchColumn(chromatogram.getSeparationColumnIndices().getSeparationColumn().getSeparationColumnType().label());
+		}
+	}
+
+	private void assignRetentionIndexScans(IChromatogramSelection chromatogramSelection, FilterSettingsRetentionIndexSelector settings) {
+
+		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
+		int startScan = chromatogram.getScanNumber(chromatogramSelection.getStartRetentionTime());
+		int stopScan = chromatogram.getScanNumber(chromatogramSelection.getStopRetentionTime());
+		for(int i = startScan; i <= stopScan; i++) {
+			IScan scan = chromatogram.getScan(i);
+			if(!scan.getTargets().isEmpty()) {
+				selectColumnRetentionIndex(scan, settings);
 			}
 		}
 	}
 
-	private void selectColumnRetentionIndex(IScan scan, String searchColumn, boolean caseSensitive, boolean removeWhiteSpace) {
+	private void assignRetentionIndexPeaks(IChromatogramSelection chromatogramSelection, FilterSettingsRetentionIndexSelector settings) {
+
+		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
+		List<? extends IPeak> peaks = chromatogram.getPeaks(chromatogramSelection.getStartRetentionTime(), chromatogramSelection.getStopRetentionTime());
+		for(IPeak peak : peaks) {
+			selectColumnRetentionIndex(peak.getPeakModel().getPeakMaximum(), settings);
+		}
+	}
+
+	private void selectColumnRetentionIndex(IScan scan, FilterSettingsRetentionIndexSelector settings) {
 
 		float retentionIndexTarget = scan.getRetentionIndex();
+		String searchColumn = settings.getSearchColumn();
+		boolean caseSensitive = settings.isCaseSensitive();
+		boolean removeWhiteSpace = settings.isRemoveWhiteSpace();
+		boolean matchPartly = settings.isMatchPartly();
+		SeparationColumnType separationColumnTypeFallback = settings.getSeparationColumnTypeFallback();
+		RetentionIndexOption retentionIndexOption = settings.getRetentionIndexOption();
+		boolean deleteUnrelatedIndices = settings.isDeleteUnrelatedIndices();
+
 		Set<IIdentificationTarget> identificationTargets = scan.getTargets();
-		//
 		for(IIdentificationTarget identificationTarget : identificationTargets) {
 			ILibraryInformation libraryInformation = identificationTarget.getLibraryInformation();
-			float retentionIndex = ColumnIndexSupport.getRetentionIndex(retentionIndexTarget, libraryInformation.getColumnIndexMarkers(), searchColumn, caseSensitive, removeWhiteSpace);
+			List<IColumnIndexMarker> columnIndexMarkers = ColumnIndexSupport.getColumnIndexMarker(libraryInformation.getColumnIndexMarkers(), searchColumn, caseSensitive, removeWhiteSpace, matchPartly, separationColumnTypeFallback);
+			float retentionIndex = 0.0f;
+			if(!columnIndexMarkers.isEmpty()) {
+				Collections.sort(columnIndexMarkers, (c1, c2) -> Float.compare(c1.getRetentionIndex(), c2.getRetentionIndex()));
+				switch(retentionIndexOption) {
+					case MIN:
+						retentionIndex = columnIndexMarkers.get(0).getRetentionIndex();
+						break;
+					case MAX:
+						retentionIndex = columnIndexMarkers.get(columnIndexMarkers.size() - 1).getRetentionIndex();
+						break;
+					case MEAN:
+					case MEDIAN:
+						DescriptiveStatistics descriptiveStatistics = createDescriptiveStatistics(columnIndexMarkers);
+						double retentionIndexCalculated = RetentionIndexOption.MEAN.equals(retentionIndexOption) ? descriptiveStatistics.getMean() : descriptiveStatistics.getPercentile(50);
+						retentionIndex = Math.round(retentionIndexCalculated);
+						break;
+					default:
+						/*
+						 * BEST
+						 */
+						float deltaReference = Float.MAX_VALUE;
+						for(IColumnIndexMarker columnIndexMarker : columnIndexMarkers) {
+							float delta = Math.abs(retentionIndexTarget - columnIndexMarker.getRetentionIndex());
+							if(delta < deltaReference) {
+								retentionIndex = columnIndexMarker.getRetentionIndex();
+								deltaReference = delta;
+							}
+						}
+						break;
+				}
+				/*
+				 * Remove Entries
+				 */
+				if(deleteUnrelatedIndices) {
+					Set<IColumnIndexMarker> columnIndexMarkerSet = new HashSet<>(libraryInformation.getColumnIndexMarkers());
+					columnIndexMarkerSet.removeAll(columnIndexMarkers);
+					for(IColumnIndexMarker columnIndexMarker : columnIndexMarkerSet) {
+						libraryInformation.delete(columnIndexMarker);
+					}
+				}
+			}
+			/*
+			 * Assign the retention index.
+			 */
 			libraryInformation.setRetentionIndex(retentionIndex);
 		}
+	}
+
+	private DescriptiveStatistics createDescriptiveStatistics(List<IColumnIndexMarker> columnIndexMarkers) {
+
+		DescriptiveStatistics descriptiveStatistics = new DescriptiveStatistics();
+		for(IColumnIndexMarker columnIndexMarker : columnIndexMarkers) {
+			descriptiveStatistics.addValue(columnIndexMarker.getRetentionIndex());
+		}
+
+		return descriptiveStatistics;
 	}
 }

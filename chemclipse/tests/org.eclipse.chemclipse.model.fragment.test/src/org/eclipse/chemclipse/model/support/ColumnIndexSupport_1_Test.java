@@ -39,24 +39,24 @@ public class ColumnIndexSupport_1_Test {
 	@Test
 	public void test1() {
 
-		assertEquals(1456.7f, ColumnIndexSupport.getRetentionIndex(columnIndexMarkers, "ffap x", false, false), 0);
+		assertEquals(1456.7f, ColumnIndexSupport.getRetentionIndex(columnIndexMarkers, "ffap x", false, false, true), 0);
 	}
 
 	@Test
 	public void test2() {
 
-		assertEquals(1456.7f, ColumnIndexSupport.getRetentionIndex(columnIndexMarkers, "FFAP X", true, false), 0);
+		assertEquals(1456.7f, ColumnIndexSupport.getRetentionIndex(columnIndexMarkers, "FFAP X", true, false, true), 0);
 	}
 
 	@Test
 	public void test3() {
 
-		assertEquals(1456.7f, ColumnIndexSupport.getRetentionIndex(columnIndexMarkers, "ffapx", false, true), 0);
+		assertEquals(1456.7f, ColumnIndexSupport.getRetentionIndex(columnIndexMarkers, "ffapx", false, true, true), 0);
 	}
 
 	@Test
 	public void test4() {
 
-		assertEquals(1456.7f, ColumnIndexSupport.getRetentionIndex(columnIndexMarkers, "FFAPX", true, true), 0);
+		assertEquals(1456.7f, ColumnIndexSupport.getRetentionIndex(columnIndexMarkers, "FFAPX", true, true, true), 0);
 	}
 }
