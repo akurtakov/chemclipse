@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.msd.converter.supplier.mzml.io;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.util.List;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -36,6 +37,7 @@ import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.DataProcess
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.DataProcessingType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.FileDescriptionType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.InstrumentConfigurationListType;
+import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.InstrumentConfigurationType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.MzMLType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.ObjectFactory;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.ParamGroupType;
@@ -193,8 +195,15 @@ public class MassSpectrumWriterVersion110 implements IMassSpectraWriter {
 	private RunType createRun(IMassSpectra massSpectra, DataProcessingListType dataProcessingList, SourceFileListType sourceFileList, InstrumentConfigurationListType instrumentConfigurationList) {
 
 		RunType run = new RunType();
-		run.setDefaultInstrumentConfigurationRef(instrumentConfigurationList.getInstrumentConfiguration().get(0));
-		run.setDefaultSourceFileRef(sourceFileList.getSourceFile().get(0));
+
+		List<InstrumentConfigurationType> instrumentConfiguration = instrumentConfigurationList.getInstrumentConfiguration();
+		if(!instrumentConfiguration.isEmpty())
+			run.setDefaultInstrumentConfigurationRef(instrumentConfiguration.get(0));
+
+		List<SourceFileType> sourceFile = sourceFileList.getSourceFile();
+		if(!sourceFile.isEmpty())
+			run.setDefaultSourceFileRef(sourceFileList.getSourceFile().get(0));
+
 		run.setId(massSpectra.getName());
 		SpectrumListType spectrumList = createSpectrumList(massSpectra, dataProcessingList);
 		run.setSpectrumList(spectrumList);
