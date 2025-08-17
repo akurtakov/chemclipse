@@ -18,13 +18,13 @@ import org.eclipse.chemclipse.chromatogram.wsd.identifier.chromatogram.AbstractC
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.chromatogram.IChromatogramIdentifierSettings;
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.io.LocalNucleotideBLAST;
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.preferences.PreferenceSupplier;
-import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.settings.IdentifierSettings;
+import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.settings.LocalIdentifierSettings;
 import org.eclipse.chemclipse.model.identifier.IChromatogramIdentificationResult;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.wsd.model.core.selection.IChromatogramSelectionWSD;
 import org.eclipse.core.runtime.IProgressMonitor;
 
-public class ChromatogramIdentifier extends AbstractChromatogramIdentifier {
+public class ChromatogramIdentifierLocal extends AbstractChromatogramIdentifier {
 
 	private static final String DESCRIPTION = "Nucleotide BLAST";
 
@@ -33,7 +33,7 @@ public class ChromatogramIdentifier extends AbstractChromatogramIdentifier {
 
 		IProcessingInfo<IChromatogramIdentificationResult> processingInfo = validate(chromatogramSelection, chromatogramIdentifierSettings);
 		if(!processingInfo.hasErrorMessages()) {
-			if(chromatogramIdentifierSettings instanceof IdentifierSettings settings) {
+			if(chromatogramIdentifierSettings instanceof LocalIdentifierSettings settings) {
 				try {
 					LocalNucleotideBLAST.run(chromatogramSelection.getChromatogram(), settings);
 					processingInfo.addInfoMessage(DESCRIPTION, "The chromatogram has been identified.");

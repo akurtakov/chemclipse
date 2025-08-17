@@ -26,9 +26,9 @@ import org.eclipse.chemclipse.support.settings.FileSettingProperty.DialogType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
-public class IdentifierSettings extends AbstractIdentifierSettingsWSD implements IChromatogramIdentifierSettings {
+public class LocalIdentifierSettings extends AbstractIdentifierSettingsWSD implements IChromatogramIdentifierSettings {
 
-	private static final Logger logger = Logger.getLogger(IdentifierSettings.class);
+	private static final Logger logger = Logger.getLogger(LocalIdentifierSettings.class);
 
 	@JsonProperty(value = "Database Folder", defaultValue = "")
 	@JsonPropertyDescription("Select the located where update_blastdb downloaded the databases to.")
@@ -84,7 +84,7 @@ public class IdentifierSettings extends AbstractIdentifierSettingsWSD implements
 
 		String content;
 		try {
-			content = new String(IdentifierSettings.class.getResourceAsStream(file).readAllBytes());
+			content = new String(LocalIdentifierSettings.class.getResourceAsStream(file).readAllBytes());
 		} catch(Exception e) {
 			content = doi;
 			logger.warn(e);

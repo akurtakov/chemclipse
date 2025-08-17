@@ -14,7 +14,7 @@ package org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.prefe
 
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.chromatogram.IChromatogramIdentifierSettings;
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.Activator;
-import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.settings.IdentifierSettings;
+import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.settings.LocalIdentifierSettings;
 import org.eclipse.chemclipse.support.preferences.AbstractPreferenceSupplier;
 import org.eclipse.chemclipse.support.preferences.IPreferenceSupplier;
 
@@ -47,13 +47,13 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 	public static IChromatogramIdentifierSettings getIdentifierSettings() {
 
-		IdentifierSettings settings = new IdentifierSettings();
+		LocalIdentifierSettings settings = new LocalIdentifierSettings();
 		settings.setDatabase(getDatabase());
 		initialize(settings);
 		return settings;
 	}
 
-	private static void initialize(IdentifierSettings settings) {
+	private static void initialize(LocalIdentifierSettings settings) {
 
 		settings.setDatabase(INSTANCE().get(P_DATABASE, DEF_DATABASE));
 	}
