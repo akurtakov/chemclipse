@@ -43,7 +43,7 @@ public class FilterSettingsRetentionIndexSelector extends AbstractChromatogramFi
 	@JsonPropertyDescription(value = "Use the following value when assigning the retention index value.")
 	private RetentionIndexOption retentionIndexOption = RetentionIndexOption.AUTO;
 	@JsonProperty(value = "Delete Unrelated Indices", defaultValue = "false")
-	@JsonPropertyDescription(value = "Delete all indices, wich are not matched by the above settings.")
+	@JsonPropertyDescription(value = "Delete all indices, which are not matched by the above settings.")
 	private boolean deleteUnrelatedIndices = false;
 
 	public String getSearchColumn() {
