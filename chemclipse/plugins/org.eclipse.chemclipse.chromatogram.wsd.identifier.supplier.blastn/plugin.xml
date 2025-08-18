@@ -5,10 +5,20 @@
          point="org.eclipse.chemclipse.chromatogram.wsd.identifier.chromatogramIdentifier">
       <ChromatogramIdentificationSupplier
             description="Run a local BLAST nucleotide search."
-            id="org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn"
-            identifier="org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.core.ChromatogramIdentifier"
-            identifierName="Local Nucleotide BLAST"
-            identifierSettings="org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.settings.IdentifierSettings">
+            id="org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.local"
+            identifier="org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.core.ChromatogramIdentifierLocal"
+            identifierName="Nucleotide BLAST (Local)"
+            identifierSettings="org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.settings.LocalIdentifierSettings">
+      </ChromatogramIdentificationSupplier>
+   </extension>
+   <extension
+         point="org.eclipse.chemclipse.chromatogram.wsd.identifier.chromatogramIdentifier">
+      <ChromatogramIdentificationSupplier
+            description="Run a BLAST nucleotide search on a web server."
+            id="org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.web"
+            identifier="org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.core.ChromatogramIdentifierWeb"
+            identifierName="Nucleotide BLAST (Web)"
+            identifierSettings="org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.settings.WebIdentifierSettings">
       </ChromatogramIdentificationSupplier>
    </extension>
 </plugin>

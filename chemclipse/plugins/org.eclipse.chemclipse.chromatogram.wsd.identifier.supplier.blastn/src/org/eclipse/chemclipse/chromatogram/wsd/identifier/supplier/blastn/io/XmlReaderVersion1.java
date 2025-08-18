@@ -12,7 +12,6 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.io;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -23,6 +22,7 @@ import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.model.
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.model.xml.v1.ObjectFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import jakarta.xml.bind.JAXBContext;
@@ -31,13 +31,13 @@ import jakarta.xml.bind.Unmarshaller;
 
 public class XmlReaderVersion1 {
 
-	public static BlastOutput getBlastOutput(File file) throws SAXException, IOException, JAXBException, ParserConfigurationException {
+	public static BlastOutput getBlastOutput(InputSource inputSource) throws SAXException, IOException, JAXBException, ParserConfigurationException {
 
 		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		documentBuilderFactory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
 
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-		Document document = documentBuilder.parse(file);
+		Document document = documentBuilder.parse(inputSource);
 
 		JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
@@ -45,5 +45,4 @@ public class XmlReaderVersion1 {
 		NodeList topNode = document.getElementsByTagName("BlastOutput");
 		return (BlastOutput)unmarshaller.unmarshal(topNode.item(0));
 	}
-
 }

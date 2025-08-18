@@ -13,6 +13,7 @@
 package org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.io;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -21,25 +22,19 @@ import java.io.PrintWriter;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.model.xml.v1.BlastOutput;
-import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.model.xml.v1.Hit;
-import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.model.xml.v1.Hsp;
-import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.model.xml.v1.Iteration;
-import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.settings.IdentifierSettings;
+import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.settings.LocalIdentifierSettings;
 import org.eclipse.chemclipse.logging.core.Logger;
-import org.eclipse.chemclipse.model.identifier.ComparisonResult;
-import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
-import org.eclipse.chemclipse.model.identifier.LibraryInformation;
-import org.eclipse.chemclipse.model.implementation.IdentificationTarget;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import jakarta.xml.bind.JAXBException;
 
-public class LocalNucleotideBLAST {
+public class LocalNucleotideBLAST extends AbstractNucleotideBLAST {
 
 	private static final Logger logger = Logger.getLogger(LocalNucleotideBLAST.class);
 
-	public static void run(IChromatogramWSD chromatogram, IdentifierSettings settings) throws IOException, InterruptedException {
+	public static void run(IChromatogramWSD chromatogram, LocalIdentifierSettings settings) throws IOException, InterruptedException {
 
 		File fasta = File.createTempFile(chromatogram.getSampleName() + "_", ".fsa");
 		writeFASTA(chromatogram, fasta);
@@ -50,7 +45,9 @@ public class LocalNucleotideBLAST {
 		int exitCode = process.waitFor();
 		if(exitCode == 0) {
 			try {
-				transferTargets(chromatogram, xml);
+				InputSource inputSource = new InputSource(new FileInputStream(xml));
+				BlastOutput blastOutput = XmlReaderVersion1.getBlastOutput(inputSource);
+				transferTargets(chromatogram, blastOutput);
 			} catch(SAXException | IOException | JAXBException
 					| ParserConfigurationException e) {
 				logger.error(e);
@@ -70,7 +67,7 @@ public class LocalNucleotideBLAST {
 		}
 	}
 
-	private static ProcessBuilder buildProcess(IdentifierSettings settings, File fasta, File xml) {
+	private static ProcessBuilder buildProcess(LocalIdentifierSettings settings, File fasta, File xml) {
 
 		ProcessBuilder processBuilder = new ProcessBuilder("blastn");
 		processBuilder.command().add("-db");
@@ -103,25 +100,5 @@ public class LocalNucleotideBLAST {
 				logger.error(new String(b, off, len));
 			}
 		};
-	}
-
-	private static void transferTargets(IChromatogramWSD chromatogram, File xml) throws SAXException, IOException, JAXBException, ParserConfigurationException {
-
-		BlastOutput blastOutput = XmlReaderVersion1.getBlastOutput(xml);
-		for(Iteration iteration : blastOutput.getIterations().getIteration()) {
-			for(Hit hit : iteration.getHits().getHit()) {
-				ILibraryInformation libraryInformation = new LibraryInformation();
-				libraryInformation.setName(hit.getDef());
-				libraryInformation.setDatabase(blastOutput.getDb());
-				libraryInformation.setMiscellaneous(hit.getId());
-				libraryInformation.setComments(hit.getAccession());
-				for(Hsp hsp : hit.getHsps().getHsp()) {
-					ComparisonResult comparisionResult = new ComparisonResult((float)hsp.getBitScore(), (float)hsp.getScore(), (float)hsp.getEvalue(), hsp.getIdentity().floatValue()); // TODO: wrong model
-					IdentificationTarget identificationTarget = new IdentificationTarget(libraryInformation, comparisionResult);
-					identificationTarget.setIdentifier(blastOutput.getVersion());
-					chromatogram.getTargets().add(identificationTarget);
-				}
-			}
-		}
 	}
 }
