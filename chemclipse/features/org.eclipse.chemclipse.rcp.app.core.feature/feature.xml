@@ -217,14 +217,6 @@
          version="0.0.0"/>
 
    <plugin
-         id="org.eclipse.ecf.filetransfer"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.ecf.provider.filetransfer"
-         version="0.0.0"/>
-
-   <plugin
          id="org.eclipse.emf.common"
          version="0.0.0"/>
 
