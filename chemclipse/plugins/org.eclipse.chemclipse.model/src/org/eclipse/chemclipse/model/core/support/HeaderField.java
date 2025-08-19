@@ -12,6 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.core.support;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import org.eclipse.chemclipse.support.text.ILabel;
 
 public enum HeaderField implements ILabel {
@@ -36,6 +39,11 @@ public enum HeaderField implements ILabel {
 	public String label() {
 
 		return label;
+	}
+
+	public static String[] getItems() {
+
+		return Arrays.stream(HeaderField.values()).map(Enum::name).collect(Collectors.toList()).toArray(new String[HeaderField.values().length]);
 	}
 
 	public static String[][] getOptions() {
