@@ -217,15 +217,7 @@
          version="0.0.0"/>
 
    <plugin
-         id="org.eclipse.ecf"
-         version="0.0.0"/>
-
-   <plugin
          id="org.eclipse.ecf.filetransfer"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.ecf.identity"
          version="0.0.0"/>
 
    <plugin
