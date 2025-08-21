@@ -97,8 +97,10 @@ public class ChromatogramWriterVersion110 extends AbstractChromatogramWriter imp
 	private RunType createRun(IChromatogramMSD chromatogram, DataProcessingListType dataProcessingList, SourceFileListType sourceFileList, InstrumentConfigurationListType instrumentConfigurationList) {
 
 		RunType run = new RunType();
-		run.setDefaultInstrumentConfigurationRef(instrumentConfigurationList.getInstrumentConfiguration().get(0));
-		run.setDefaultSourceFileRef(sourceFileList.getSourceFile().get(0));
+		run.setDefaultInstrumentConfigurationRef(instrumentConfigurationList.getInstrumentConfiguration().getFirst());
+		if(sourceFileList != null && !sourceFileList.getSourceFile().isEmpty()) {
+			run.setDefaultSourceFileRef(sourceFileList.getSourceFile().getFirst());
+		}
 		run.setId(chromatogram.getName());
 		SpectrumListType spectrumList = createSpectrumList(chromatogram, dataProcessingList);
 		run.setSpectrumList(spectrumList);
@@ -222,8 +224,13 @@ public class ChromatogramWriterVersion110 extends AbstractChromatogramWriter imp
 
 		SourceFileListType sourceFileListType = new SourceFileListType();
 		sourceFileListType.setCount(BigInteger.valueOf(1));
-		SourceFileType sourceFile = XmlWriter110.createSourceFile(chromatogram.getFile());
-		//
+
+		File file = chromatogram.getFile();
+		SourceFileType sourceFile = XmlWriter110.createSourceFile(file);
+		if(sourceFile == null) {
+			return null;
+		}
+
 		if(chromatogram.getConverterId().equals("org.eclipse.chemclipse.xxd.converter.supplier.chemclipse")) {
 			CVParamType cvParamFileFormat = new CVParamType();
 			cvParamFileFormat.setCvRef(XmlWriter110.MS);
@@ -344,7 +351,9 @@ public class ChromatogramWriterVersion110 extends AbstractChromatogramWriter imp
 	private FileDescriptionType createFileDescription(IChromatogramMSD chromatogram, SourceFileListType sourceFiles) {
 
 		FileDescriptionType fileDescriptionType = new FileDescriptionType();
-		fileDescriptionType.setSourceFileList(sourceFiles);
+		if(sourceFiles != null) {
+			fileDescriptionType.setSourceFileList(sourceFiles);
+		}
 		fileDescriptionType.setFileContent(createFileContent(chromatogram));
 		ParamGroupType paramGroupType = XmlWriter110.createOperator(chromatogram.getOperator());
 		if(paramGroupType != null) {

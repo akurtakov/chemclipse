@@ -79,7 +79,9 @@ public class ChromatogramWriterVersion110 extends AbstractChromatogramWriter imp
 			InstrumentConfigurationListType instrumentConfigurationList = createInstrumentConfigurationList(softwareList.getSoftware().get(0));
 			run.setDefaultInstrumentConfigurationRef(instrumentConfigurationList.getInstrumentConfiguration().get(0));
 			SourceFileListType sourceFileList = createSourceFileList(chromatogram);
-			run.setDefaultSourceFileRef(sourceFileList.getSourceFile().get(0));
+			if(sourceFileList != null && !sourceFileList.getSourceFile().isEmpty()) {
+				run.setDefaultSourceFileRef(sourceFileList.getSourceFile().getFirst());
+			}
 			run.setId(chromatogram.getName());
 			//
 			DataProcessingListType dataProcessingList = createDataProcessingList(softwareList.getSoftware().get(0));
@@ -254,7 +256,13 @@ public class ChromatogramWriterVersion110 extends AbstractChromatogramWriter imp
 
 		SourceFileListType sourceFileListType = new SourceFileListType();
 		sourceFileListType.setCount(BigInteger.valueOf(1));
-		SourceFileType sourceFile = XmlWriter110.createSourceFile(chromatogram.getFile());
+
+		File file = chromatogram.getFile();
+		SourceFileType sourceFile = XmlWriter110.createSourceFile(file);
+		if(sourceFile == null) {
+			return null;
+		}
+
 		if(chromatogram.getConverterId().equals("org.eclipse.chemclipse.xxd.converter.supplier.chemclipse")) {
 			CVParamType cvParamFileFormat = new CVParamType();
 			cvParamFileFormat.setCvRef(XmlWriter110.MS);

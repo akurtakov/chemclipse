@@ -113,7 +113,12 @@ public class MassSpectrumWriterVersion110 implements IMassSpectraWriter {
 		sourceFileListType.setCount(BigInteger.valueOf(1));
 		for(IScanMSD massSpectrum : massSpectra.getList()) {
 			if(massSpectrum instanceof IStandaloneMassSpectrum standaloneMassSpectrum) {
-				SourceFileType sourceFile = XmlWriter110.createSourceFile(standaloneMassSpectrum.getFile());
+
+				File file = standaloneMassSpectrum.getFile();
+				SourceFileType sourceFile = XmlWriter110.createSourceFile(file);
+				if(sourceFile == null) {
+					break;
+				}
 
 				if(massSpectra.getConverterId().equals("org.eclipse.chemclipse.msd.converter.supplier.mzdata.ms")) {
 					CVParamType cvParamFileFormat = new CVParamType();
@@ -197,18 +202,20 @@ public class MassSpectrumWriterVersion110 implements IMassSpectraWriter {
 		RunType run = new RunType();
 
 		List<InstrumentConfigurationType> instrumentConfiguration = instrumentConfigurationList.getInstrumentConfiguration();
-		if(!instrumentConfiguration.isEmpty())
-			run.setDefaultInstrumentConfigurationRef(instrumentConfiguration.get(0));
+		if(!instrumentConfiguration.isEmpty()) {
+			run.setDefaultInstrumentConfigurationRef(instrumentConfiguration.getFirst());
+		}
 
 		List<SourceFileType> sourceFile = sourceFileList.getSourceFile();
-		if(!sourceFile.isEmpty())
-			run.setDefaultSourceFileRef(sourceFileList.getSourceFile().get(0));
+		if(!sourceFile.isEmpty()) {
+			run.setDefaultSourceFileRef(sourceFileList.getSourceFile().getFirst());
+		}
 
 		run.setId(massSpectra.getName());
 		SpectrumListType spectrumList = createSpectrumList(massSpectra, dataProcessingList);
 		run.setSpectrumList(spectrumList);
 		writeScans(massSpectra, spectrumList);
-		IScanMSD scanMSD = massSpectra.getList().get(0);
+		IScanMSD scanMSD = massSpectra.getList().getFirst();
 		if(scanMSD instanceof IStandaloneMassSpectrum standaloneMassSpectrum) {
 			setDate(run, standaloneMassSpectrum);
 		}

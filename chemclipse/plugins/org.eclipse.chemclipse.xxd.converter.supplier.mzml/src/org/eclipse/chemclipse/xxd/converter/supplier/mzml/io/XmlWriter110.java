@@ -421,6 +421,10 @@ public class XmlWriter110 {
 
 	public static SourceFileType createSourceFile(File file) {
 
+		if(file == null || !file.exists()) {
+			return null;
+		}
+
 		SourceFileType sourceFile = new SourceFileType();
 		sourceFile.setLocation(file.getAbsolutePath());
 		sourceFile.setId(file.getName());
