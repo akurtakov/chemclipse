@@ -75,7 +75,7 @@ public class XmlWriter110 {
 
 	public static ParamGroupType createOperator(String operator) {
 
-		if(!operator.isEmpty()) {
+		if(operator != null && !operator.isEmpty()) {
 			ParamGroupType paramGroupType = new ParamGroupType();
 			CVParamType cvParam = new CVParamType();
 			cvParam.setCvRef(MS);
