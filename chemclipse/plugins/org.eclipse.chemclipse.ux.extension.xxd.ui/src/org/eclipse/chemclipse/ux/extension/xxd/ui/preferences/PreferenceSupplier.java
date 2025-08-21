@@ -816,7 +816,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String P_CHROMATOGRAM_MARK_ANALYSIS_SEGMENTS = "chromatogramMarkAnalysisSegments";
 	public static final boolean DEF_CHROMATOGRAM_MARK_ANALYSIS_SEGMENTS = false;
 	public static final String P_SHOW_RETENTION_INDEX_MARKER = "showRetentionIndexMarker";
-	public static final boolean DEF_SHOW_RETENTION_INDEX_MARKER = false;
+	public static final boolean DEF_SHOW_RETENTION_INDEX_MARKER = true;
 	/*
 	 * Calibration Chart
 	 */
