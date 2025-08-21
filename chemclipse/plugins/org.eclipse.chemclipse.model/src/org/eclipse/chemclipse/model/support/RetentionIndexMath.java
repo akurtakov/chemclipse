@@ -90,6 +90,26 @@ public class RetentionIndexMath {
 		return (int)Math.round(calculateX(retentionIndex, retentionIndexLow, retentionIndexHigh, retentionTimeLow, retentionTimeHigh));
 	}
 
+	public static int rasterAlkaneIndex(float value) {
+
+		/*
+		 * Alkane are rastered in steps of 100 indices.
+		 */
+		int retentionIndex = Math.round(value);
+		if(retentionIndex % 100 == 0) {
+			return retentionIndex;
+		} else if((retentionIndex - 1) % 100 == 0) {
+			return --retentionIndex;
+		} else if((retentionIndex + 1) % 100 == 0) {
+			return ++retentionIndex;
+		} else {
+			/*
+			 * On purpose - underlying RI calculation needs to be inspected.
+			 */
+			return retentionIndex;
+		}
+	}
+
 	private static double calculateX(double y, double yLower, double yHigher, double xLower, double xHigher) {
 
 		double x = 0;

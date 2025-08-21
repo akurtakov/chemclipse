@@ -48,6 +48,7 @@ import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.model.supplier.IChromatogramSelectionProcessSupplier;
 import org.eclipse.chemclipse.model.support.IAnalysisSegment;
+import org.eclipse.chemclipse.model.support.RetentionIndexMath;
 import org.eclipse.chemclipse.model.targets.ITargetDisplaySettings;
 import org.eclipse.chemclipse.model.targets.TargetReference;
 import org.eclipse.chemclipse.model.targets.TargetReferenceType;
@@ -1777,7 +1778,10 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 			ISeparationColumnIndices separationColumnIndices = chromatogramSelection.getChromatogram().getSeparationColumnIndices();
 			List<PositionMarker> positionMarkers = new ArrayList<>();
 			for(IRetentionIndexEntry retentionIndexEntry : separationColumnIndices.values()) {
-				positionMarkers.add(new PositionMarker(retentionIndexEntry.getName(), retentionIndexEntry.getRetentionTime(), Math.round(retentionIndexEntry.getRetentionIndex())));
+				String identifier = retentionIndexEntry.getName();
+				int retentionTime = retentionIndexEntry.getRetentionTime();
+				int retentionIndex = RetentionIndexMath.rasterAlkaneIndex(retentionIndexEntry.getRetentionIndex());
+				positionMarkers.add(new PositionMarker(identifier, retentionTime, retentionIndex));
 			}
 			retentionIndexMarker.clear();
 			retentionIndexMarker.getPositionMarkers().addAll(positionMarkers);
