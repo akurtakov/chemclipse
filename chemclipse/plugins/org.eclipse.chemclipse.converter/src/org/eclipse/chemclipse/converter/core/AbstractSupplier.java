@@ -150,7 +150,7 @@ public abstract class AbstractSupplier implements ISupplierSetter {
 		if(magicNumberMatcher != null) {
 			return magicNumberMatcher.checkFileFormat(file);
 		}
-		//
+
 		return false;
 	}
 
@@ -166,7 +166,7 @@ public abstract class AbstractSupplier implements ISupplierSetter {
 		if(fileContentMatcher != null) {
 			return fileContentMatcher.checkFileFormat(file);
 		}
-		//
+
 		return false;
 	}
 

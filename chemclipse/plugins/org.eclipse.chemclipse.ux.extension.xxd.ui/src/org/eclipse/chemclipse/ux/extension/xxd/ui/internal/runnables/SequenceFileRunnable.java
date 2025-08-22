@@ -35,7 +35,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 public class SequenceFileRunnable implements IRunnableWithProgress {
 
 	private static final Logger logger = Logger.getLogger(SequenceFileRunnable.class);
-	//
+
 	private ISupplierEditorSupport supplierEditorSupport = new SupplierEditorSupport(DataType.SEQ, () -> Activator.getDefault().getEclipseContext());
 	private File file;
 	private List<File> files;
@@ -74,7 +74,7 @@ public class SequenceFileRunnable implements IRunnableWithProgress {
 		} else {
 			subMonitor.worked(1);
 		}
-		//
+
 		if(file.isDirectory()) {
 			for(File subfile : file.listFiles()) {
 				if(subfile.isDirectory()) {

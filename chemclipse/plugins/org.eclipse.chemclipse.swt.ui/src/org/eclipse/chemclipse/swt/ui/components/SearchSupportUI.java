@@ -34,7 +34,7 @@ public class SearchSupportUI extends Composite {
 
 	private AtomicReference<Text> textControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonControl = new AtomicReference<>();
-	//
+
 	private ISearchListener searchListener;
 	private boolean caseSensitive = PreferenceSupplier.isSearchCaseSensitive();
 
@@ -93,17 +93,17 @@ public class SearchSupportUI extends Composite {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(3, false);
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		createButtonSearch(composite);
 		createTextSearch(composite);
 		createButtonCaseSensitive(composite);
-		//
+
 		initialize();
 	}
 
@@ -126,7 +126,7 @@ public class SearchSupportUI extends Composite {
 				runSearch();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -170,7 +170,7 @@ public class SearchSupportUI extends Composite {
 				}
 			}
 		});
-		//
+
 		textControl.set(text);
 	}
 
@@ -191,7 +191,7 @@ public class SearchSupportUI extends Composite {
 				runSearch();
 			}
 		});
-		//
+
 		buttonControl.set(button);
 	}
 

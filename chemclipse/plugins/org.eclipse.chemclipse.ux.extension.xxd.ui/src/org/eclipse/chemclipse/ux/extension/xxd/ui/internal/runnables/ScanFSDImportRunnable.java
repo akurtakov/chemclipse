@@ -27,7 +27,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 public class ScanFSDImportRunnable implements IRunnableWithProgress {
 
 	private static final Logger logger = Logger.getLogger(ScanFSDImportRunnable.class);
-	//
+
 	private File file;
 	private ISpectrumFSD spectrumFSD = null;
 

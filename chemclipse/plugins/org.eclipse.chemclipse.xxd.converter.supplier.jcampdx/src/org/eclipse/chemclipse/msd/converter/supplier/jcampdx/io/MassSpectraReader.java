@@ -39,7 +39,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class MassSpectraReader extends AbstractMassSpectraReader implements IMassSpectraReader {
 
 	public static final String CONVERTER_ID_MSD_LIBRARY = "org.eclipse.chemclipse.msd.converter.supplier.jcampdx.library.jdx";
-	//
+
 	private static final Logger logger = Logger.getLogger(MassSpectraReader.class);
 	private static final String COMMENT_MARKER = "$$";
 	private static final String HEADER_MARKER = "##";
@@ -69,7 +69,7 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 	private static final String XYDATA_MARKER_NOMINAL = "##XYDATA=(X Y)";
 	private static final String PEAK_TABLE_MARKER_TYPE1 = "##PEAK TABLE=(XY..XY)";
 	private static final String PEAK_TABLE_MARKER_TYPE2 = "##PEAK TABLE= (XY..XY)";
-	//
+
 	private static final Pattern ionPattern = Pattern.compile("(\\d+\\.?\\d{0,5})(.*?)(\\d+\\.?\\d{0,5})");
 
 	@Override
@@ -86,11 +86,11 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 
 		String referenceIdentifierMarker = PreferenceSupplier.getReferenceIdentifierMarker();
 		String referenceIdentifierPrefix = PreferenceSupplier.getReferenceIdentifierPrefix();
-		//
+
 		IMassSpectra massSpectra = new MassSpectra();
 		IVendorLibraryMassSpectrum massSpectrum = null;
 		IVendorIon ion;
-		//
+
 		try (FileReader fileReader = new FileReader(file)) {
 			try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
 				String line;
@@ -149,7 +149,7 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 						libraryInformation.setName(name);
 						libraryInformation.setComments("JCAMP-DX");
 						massSpectrum.setLibraryInformation(libraryInformation);
-						//
+
 						readIons = false;
 						/*
 						 * Read the next line.
@@ -231,7 +231,7 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 				if(massSpectrum != null && !massSpectrum.getIons().isEmpty()) {
 					massSpectra.addMassSpectrum(massSpectrum);
 				}
-				//
+
 				massSpectra.setName(file.getName());
 				massSpectra.setConverterId(CONVERTER_ID_MSD_LIBRARY);
 				/*
@@ -239,7 +239,7 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 				 */
 			}
 		}
-		//
+
 		return massSpectra;
 	}
 
@@ -344,7 +344,7 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 						break exitloop;
 					}
 				}
-				//
+
 			}
 		}
 		return nameMarkerAvailable;

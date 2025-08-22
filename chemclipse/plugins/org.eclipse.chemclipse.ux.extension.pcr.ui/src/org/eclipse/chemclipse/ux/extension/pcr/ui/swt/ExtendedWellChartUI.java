@@ -55,12 +55,12 @@ import org.eclipse.swtchart.extensions.linecharts.LineSeriesData;
 public class ExtendedWellChartUI extends Composite implements IExtendedPartUI {
 
 	private static final Logger logger = Logger.getLogger(ExtendedWellChartUI.class);
-	//
+
 	private Button buttonToolbarInfo;
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private Combo comboChannels;
 	private AtomicReference<ChartPCR> chartControl = new AtomicReference<>();
-	//
+
 	private IWell well = null;
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 	private boolean colorCompensation = true;
@@ -122,12 +122,12 @@ public class ExtendedWellChartUI extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		comboChannels = createComboChannels(this);
 		createChart(this);
-		//
+
 		initialize();
 	}
 
@@ -143,7 +143,7 @@ public class ExtendedWellChartUI extends Composite implements IExtendedPartUI {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(5, false));
-		//
+
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 		createButtonToggleChartLegend(composite, chartControl, IMAGE_LEGEND);
 		createResetButton(composite);
@@ -202,7 +202,7 @@ public class ExtendedWellChartUI extends Composite implements IExtendedPartUI {
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -218,7 +218,7 @@ public class ExtendedWellChartUI extends Composite implements IExtendedPartUI {
 				updateChart();
 			}
 		});
-		//
+
 		return combo;
 	}
 
@@ -229,7 +229,7 @@ public class ExtendedWellChartUI extends Composite implements IExtendedPartUI {
 		IChartSettings chartSettings = chart.getChartSettings();
 		chartSettings.setTitleVisible(false);
 		chart.applySettings(chartSettings);
-		//
+
 		chartControl.set(chart);
 	}
 
@@ -245,7 +245,7 @@ public class ExtendedWellChartUI extends Composite implements IExtendedPartUI {
 			 */
 			ColorCodes colorCodes = new ColorCodes();
 			colorCodes.load(preferenceStore.getString(PreferenceSupplier.P_PCR_WELL_COLOR_CODES));
-			//
+
 			List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
 			int index = comboChannels.getSelectionIndex();
 			if(index == 0) {
@@ -262,7 +262,7 @@ public class ExtendedWellChartUI extends Composite implements IExtendedPartUI {
 					logger.warn(e);
 				}
 			}
-			//
+
 			chartControl.get().addSeriesData(lineSeriesDataList);
 		} else {
 			chartControl.get().adjustRange(true);

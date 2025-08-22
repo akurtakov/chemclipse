@@ -52,7 +52,7 @@ public class FeatureStatTablePart extends AbstractPartPCA<ExtendedFeatureStatLis
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 }

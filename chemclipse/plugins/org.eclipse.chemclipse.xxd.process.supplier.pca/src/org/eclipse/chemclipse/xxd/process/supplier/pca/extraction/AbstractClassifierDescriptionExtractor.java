@@ -108,7 +108,7 @@ public abstract class AbstractClassifierDescriptionExtractor {
 						stringBuilder.append(" ");
 					}
 				}
-				//
+
 				samples.getVariables().get(i).setClassification(stringBuilder.toString());
 			}
 			/*
@@ -126,7 +126,7 @@ public abstract class AbstractClassifierDescriptionExtractor {
 						stringBuilder.append(" ");
 					}
 				}
-				//
+
 				samples.getVariables().get(i).setDescription(stringBuilder.toString());
 			}
 		}

@@ -46,7 +46,7 @@ public class ChromatogramBaselinesUI extends Composite {
 	private Button buttonAdd;
 	private Button buttonDelete;
 	private IChromatogram chromatogram;
-	//
+
 	private IUpdateListener updateListener;
 
 	public ChromatogramBaselinesUI(Composite parent, int style) {
@@ -69,13 +69,13 @@ public class ChromatogramBaselinesUI extends Composite {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(3, false);
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		comboViewer = createComboViewer(composite);
 		buttonAdd = createButtonAdd(composite);
 		buttonDelete = createButtonDelete(composite);
@@ -97,7 +97,7 @@ public class ChromatogramBaselinesUI extends Composite {
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select a chromatogram baseline.");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		combo.addSelectionListener(new SelectionAdapter() {
@@ -114,7 +114,7 @@ public class ChromatogramBaselinesUI extends Composite {
 				}
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -138,7 +138,7 @@ public class ChromatogramBaselinesUI extends Composite {
 							if(newText == null || newText.isBlank()) {
 								return "Please select a valid baseline id.";
 							}
-							//
+
 							for(String baselineId : chromatogram.getBaselineIds()) {
 								if(newText.equals(baselineId)) {
 									return "The baseline id exists already.";
@@ -147,7 +147,7 @@ public class ChromatogramBaselinesUI extends Composite {
 							return null;
 						}
 					});
-					//
+
 					if(inputDialog.open() == Window.OK) {
 						chromatogram.setActiveBaseline(inputDialog.getValue().trim());
 						updateData();
@@ -156,7 +156,7 @@ public class ChromatogramBaselinesUI extends Composite {
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -185,19 +185,19 @@ public class ChromatogramBaselinesUI extends Composite {
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
 	private void updateData() {
 
 		if(chromatogram != null) {
-			//
+
 			String activeBaseline = chromatogram.getActiveBaseline();
 			List<String> baselineIds = new ArrayList<>(chromatogram.getBaselineIds());
 			Collections.sort(baselineIds);
 			comboViewer.setInput(baselineIds);
-			//
+
 			int index = -1;
 			exitloop:
 			for(int i = 0; i < baselineIds.size(); i++) {
@@ -206,11 +206,11 @@ public class ChromatogramBaselinesUI extends Composite {
 					break exitloop;
 				}
 			}
-			//
+
 			if(index != -1) {
 				comboViewer.getCombo().select(index);
 			}
-			//
+
 			buttonAdd.setEnabled(true);
 			buttonDelete.setEnabled(!chromatogram.getActiveBaseline().equals(IChromatogramBaseline.DEFAULT_BASELINE_ID));
 		} else {

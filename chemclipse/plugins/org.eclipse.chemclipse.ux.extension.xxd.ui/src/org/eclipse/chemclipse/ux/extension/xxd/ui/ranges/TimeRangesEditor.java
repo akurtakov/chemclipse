@@ -57,12 +57,12 @@ public class TimeRangesEditor extends Composite {
 
 	private TimeRangesUI timeRangesUI;
 	private TimeRangesListUI timeRangesListUI;
-	//
+
 	private String clipStartIdentifier = "";
-	//
+
 	private TimeRanges timeRanges;
 	private TimeRangeLabels timeRangeLabels = new TimeRangeLabels();
-	//
+
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
 	public TimeRangesEditor(Composite parent, int style) {
@@ -99,7 +99,7 @@ public class TimeRangesEditor extends Composite {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		createTimeRangesSection(this);
 		timeRangesListUI = createTimeRangesListUI(this);
 	}
@@ -161,7 +161,7 @@ public class TimeRangesEditor extends Composite {
 					fileDialog.setText("Chromatogram (*.ocb)");
 					fileDialog.setFilterExtensions(new String[]{"*.ocb"});
 					fileDialog.setFilterPath(preferenceStore.getString(PreferenceSupplier.P_TIME_RANGE_TEMPLATE_FOLDER));
-					//
+
 					String pathname = fileDialog.open();
 					if(pathname != null) {
 						preferenceStore.setValue(PreferenceSupplier.P_TIME_RANGE_TEMPLATE_FOLDER, fileDialog.getFilterPath());
@@ -331,7 +331,7 @@ public class TimeRangesEditor extends Composite {
 				}
 			}
 		});
-		//
+
 		return timeRangesListUI;
 	}
 
@@ -405,14 +405,14 @@ public class TimeRangesEditor extends Composite {
 			IProcessingInfo<IChromatogramCSD> processingInfoCSD = ChromatogramConverterCSD.getInstance().convert(file, monitor);
 			chromatogram = processingInfoCSD.getProcessingResult();
 		}
-		//
+
 		return chromatogram;
 	}
 
 	private TimeRanges extractTimeRanges(IChromatogram chromatogram) {
 
 		TimeRanges timeRanges = new TimeRanges();
-		//
+
 		if(chromatogram != null && timeRanges != null) {
 			for(IPeak peak : chromatogram.getPeaks()) {
 				IPeakModel peakModel = peak.getPeakModel();
@@ -425,7 +425,7 @@ public class TimeRangesEditor extends Composite {
 				}
 			}
 		}
-		//
+
 		return timeRanges;
 	}
 }

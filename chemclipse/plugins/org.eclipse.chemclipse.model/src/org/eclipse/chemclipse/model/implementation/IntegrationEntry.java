@@ -19,7 +19,7 @@ import org.eclipse.chemclipse.model.core.IntegrationType;
 public class IntegrationEntry implements IIntegrationEntry {
 
 	private static final long serialVersionUID = -4615194962387454532L;
-	//
+
 	private final double signal;
 	private final double integratedArea;
 	private IntegrationType integrationType = IntegrationType.NONE;

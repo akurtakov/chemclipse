@@ -36,7 +36,7 @@ public class MassSpectrumLibraryExplorer {
 		MultiDataExplorerTreeUI explorerUI = new MultiDataExplorerTreeUI(parent, SWT.NONE, new DataExplorerTreeSettings(Activator.getDefault().getPreferenceStore()));
 		explorerUI.setSupplierFileIdentifier((Collections.singleton(DatabaseSupport.getInstanceEditorSupport())));
 		explorerUI.expandLastDirectoryPath();
-		//
+
 		dataExplorerControl.set(explorerUI);
 	}
 

@@ -30,17 +30,17 @@ public class LibraryTextEditingSupport extends EditingSupport {
 	private TextCellEditor cellEditor;
 	private ExtendedTableViewer tableViewer;
 	private String columnLabel;
-	//
+
 	private DecimalFormat decimalFormat;
 
 	public LibraryTextEditingSupport(ExtendedTableViewer tableViewer, String columnLabel) {
 
 		super(tableViewer);
-		//
+
 		this.tableViewer = tableViewer;
 		this.columnLabel = columnLabel;
 		this.decimalFormat = ValueFormat.getDecimalFormatEnglish();
-		//
+
 		cellEditor = new TextCellEditor(tableViewer.getTable());
 	}
 
@@ -62,7 +62,7 @@ public class LibraryTextEditingSupport extends EditingSupport {
 		Object object = null;
 		if(element instanceof IRegularLibraryMassSpectrum libraryMassSpectrum) {
 			ILibraryInformation libraryInformation = libraryMassSpectrum.getLibraryInformation();
-			//
+
 			switch(columnLabel) {
 				case MassSpectrumListUI.NAME:
 					object = libraryInformation.getName();
@@ -107,7 +107,7 @@ public class LibraryTextEditingSupport extends EditingSupport {
 
 		if(element instanceof IRegularLibraryMassSpectrum libraryMassSpectrum) {
 			ILibraryInformation libraryInformation = libraryMassSpectrum.getLibraryInformation();
-			//
+
 			switch(columnLabel) {
 				case MassSpectrumListUI.NAME:
 					libraryInformation.setName(value.toString());

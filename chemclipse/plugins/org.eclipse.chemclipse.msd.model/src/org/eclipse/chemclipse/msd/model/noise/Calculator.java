@@ -112,7 +112,7 @@ public class Calculator {
 		int rejected = 0;
 		@SuppressWarnings("unused")
 		int accepted = 0;
-		//
+
 		List<INoiseSegmentMSD> noiseSegments = new ArrayList<INoiseSegmentMSD>();
 		for(IAnalysisSegment analysisSegment : analysisSegments) {
 			/*

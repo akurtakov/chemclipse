@@ -49,32 +49,32 @@ public class FilterPreferencePage extends FieldEditorPreferencePage implements I
 		addField(new LabelFieldEditor(Messages.chromotogramSelectionFilter, getFieldEditorParent()));
 		addField(new DoubleFieldEditor(PreferenceSupplier.P_START_RETENTION_TIME_MINUTES, Messages.startRetentionTimeMinutes, PreferenceSupplier.MIN_RETENTION_TIME_MINUTES, PreferenceSupplier.MAX_RETENTION_TIME_MINUTES, getFieldEditorParent()));
 		addField(new DoubleFieldEditor(PreferenceSupplier.P_STOP_RETENTION_TIME_MINUTES, Messages.stopRetentionTimeMinutes, PreferenceSupplier.MIN_RETENTION_TIME_MINUTES, PreferenceSupplier.MAX_RETENTION_TIME_MINUTES, getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor(Messages.scanTargetsToPeakTransfer, getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_STTP_TRANSFER_CLOSEST_SCAN, Messages.transferClosestScan, getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_STTP_USE_BEST_TARGET_ONLY, Messages.useBestTargetOnly, getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor(Messages.peakTargetsReferenceChromatogram, getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_PTTR_USE_BEST_TARGET_ONLY, Messages.useBestTargetOnly, getFieldEditorParent()));
 		addField(new DoubleFieldEditor(PreferenceSupplier.P_DELTA_RETENTION_TIME_MINUTES, Messages.deltaRetentionTimeMinutes, PreferenceSupplier.MIN_RETENTION_TIME_MINUTES, PreferenceSupplier.MAX_RETENTION_TIME_MINUTES, getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor(Messages.scanTargetsToReferenceChromatogramsTransfer, getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_STTR_USE_BEST_TARGET_ONLY, Messages.useBestTargetOnly, getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_RETENTION_INDEX_QC, Messages.qcUseRententionIndexProcessor, getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_ION_ROUND_METHOD, Messages.ionRoundMethod, IonRoundMethod.getOptions(), getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor(Messages.scanMaximaDetectorUI, getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceSupplier.P_MAX_DETECTOR_TARGET_NAME, Messages.targetName, getFieldEditorParent()));
 		addField(new FloatFieldEditor(PreferenceSupplier.P_MAX_DETECTOR_MATCH_FACTOR, Messages.matchFactor, PreferenceSupplier.MIN_FACTOR, PreferenceSupplier.MAX_FACTOR, getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_MAX_DETECTOR_MINIMA, Messages.detectMinima, getFieldEditorParent()));
 		addField(new ExtendedIntegerFieldEditor(PreferenceSupplier.P_MAX_DETECTOR_COUNT, Messages.countIncludingZero, PreferenceSupplier.MIN_COUNT_MARKER, PreferenceSupplier.MAX_COUNT_MARKER, getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new ExtendedIntegerFieldEditor(PreferenceSupplier.P_TRANSFORM_MZ, Messages.transformMZ, PreferenceSupplier.MIN_MZ, PreferenceSupplier.MAX_MZ, getFieldEditorParent()));
 	}

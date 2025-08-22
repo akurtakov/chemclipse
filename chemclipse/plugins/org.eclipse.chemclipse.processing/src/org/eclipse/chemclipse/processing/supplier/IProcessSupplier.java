@@ -145,7 +145,7 @@ public interface IProcessSupplier<SettingType> {
 			if(transformer != null) {
 				consumer = transformer.transform(consumer, processorPreferences, mustSplit ? context.split() : context);
 			}
-			//
+
 			context.setContextObject(IProcessExecutionConsumer.class, consumer);
 			if(canDirectExecute) {
 				consumer.execute(processorPreferences, mustSplit ? context.split() : context);

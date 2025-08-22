@@ -37,13 +37,13 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class PcaExtractionFileBinary implements IExtractionData {
 
 	private static final Logger logger = Logger.getLogger(PcaExtractionFileBinary.class);
-	//
+
 	public static final String DESCRIPTION = "PCA Data Binary";
 	public static final String FILE_EXTENSION = ".pdb";
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-	//
+
 	private File file;
 
 	public PcaExtractionFileBinary(File file) {
@@ -103,7 +103,7 @@ public class PcaExtractionFileBinary implements IExtractionData {
 	private Samples extract() {
 
 		Samples samples = null;
-		//
+
 		try (DataInputStream dataInputStream = new DataInputStream(new FileInputStream(file))) {
 			/*
 			 * Samples
@@ -140,7 +140,7 @@ public class PcaExtractionFileBinary implements IExtractionData {
 					boolean isSelected = dataInputStream.readBoolean();
 					String classification = dataInputStream.readUTF();
 					String descripttion = dataInputStream.readUTF();
-					//
+
 					IVariable variable = null;
 					if(type.equals(IRetentionTime.TYPE)) {
 						double retentionTimeMinutes = Double.parseDouble(value);
@@ -153,7 +153,7 @@ public class PcaExtractionFileBinary implements IExtractionData {
 						int peakNumber = (int)Math.round(Double.parseDouble(value));
 						variable = new PeakNumber(peakNumber);
 					}
-					//
+
 					if(variable != null) {
 						variable.setSelected(isSelected);
 						variable.setClassification(classification);
@@ -167,7 +167,7 @@ public class PcaExtractionFileBinary implements IExtractionData {
 		} catch(Exception e) {
 			logger.warn(e);
 		}
-		//
+
 		return samples;
 	}
 }

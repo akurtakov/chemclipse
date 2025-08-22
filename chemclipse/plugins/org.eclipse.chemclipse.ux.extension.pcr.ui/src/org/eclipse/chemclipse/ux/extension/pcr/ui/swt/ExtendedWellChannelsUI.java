@@ -41,14 +41,14 @@ public class ExtendedWellChannelsUI extends Composite implements IExtendedPartUI
 	private Button buttonToolbarInfo;
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private Combo comboChannels;
-	//
+
 	private Text textId;
 	private Text textDetectionName;
 	private Text textName;
 	private Text textTime;
 	private Text textTemperature;
 	private Text textCrossingPoint;
-	//
+
 	private IWell well = null;
 
 	@Inject
@@ -67,12 +67,12 @@ public class ExtendedWellChannelsUI extends Composite implements IExtendedPartUI
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		comboChannels = createComboChannels(this);
 		createChannelDataSection(this);
-		//
+
 		initialize();
 	}
 
@@ -88,7 +88,7 @@ public class ExtendedWellChannelsUI extends Composite implements IExtendedPartUI
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(2, false));
-		//
+
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 		createResetButton(composite);
 	}
@@ -113,7 +113,7 @@ public class ExtendedWellChannelsUI extends Composite implements IExtendedPartUI
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -129,7 +129,7 @@ public class ExtendedWellChannelsUI extends Composite implements IExtendedPartUI
 				updateChannelData();
 			}
 		});
-		//
+
 		return combo;
 	}
 
@@ -143,19 +143,19 @@ public class ExtendedWellChannelsUI extends Composite implements IExtendedPartUI
 		 */
 		createLabel(composite, "ID:");
 		textId = createText(composite);
-		//
+
 		createLabel(composite, "Detection Name:");
 		textDetectionName = createText(composite);
-		//
+
 		createLabel(composite, "Name:");
 		textName = createText(composite);
-		//
+
 		createLabel(composite, "Time:");
 		textTime = createText(composite);
-		//
+
 		createLabel(composite, "Temperature:");
 		textTemperature = createText(composite);
-		//
+
 		createLabel(composite, "Crossing Point:");
 		textCrossingPoint = createText(composite);
 	}
@@ -189,7 +189,7 @@ public class ExtendedWellChannelsUI extends Composite implements IExtendedPartUI
 		textTime.setText("");
 		textTemperature.setText("");
 		textCrossingPoint.setText("");
-		//
+
 		if(well != null) {
 			int index = comboChannels.getSelectionIndex();
 			if(index >= 0) {

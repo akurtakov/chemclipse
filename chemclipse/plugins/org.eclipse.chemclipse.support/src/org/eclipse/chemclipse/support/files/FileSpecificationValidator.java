@@ -28,12 +28,12 @@ public class FileSpecificationValidator {
 		if(file == null) {
 			return null;
 		}
-		//
+
 		if(file.isDirectory()) {
 			validateAndPatchDirectory(file, directoryExtension);
 		} else {
 		}
-		//
+
 		return file;
 	}
 
@@ -41,14 +41,14 @@ public class FileSpecificationValidator {
 
 		String fileName = file.getName().toLowerCase();
 		directoryExtension = directoryExtension.toLowerCase();
-		//
+
 		if(!fileName.endsWith(directoryExtension)) {
 			file = new File(file.getAbsolutePath() + directoryExtension);
 			if(!file.mkdir()) {
 				logger.info("The directory already exists: " + file.getAbsolutePath());
 			}
 		}
-		//
+
 		return file;
 	}
 }

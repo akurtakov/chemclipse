@@ -80,9 +80,9 @@ import org.eclipse.swt.widgets.Text;
 public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 
 	private static final Logger logger = Logger.getLogger(ExtendedScanTableUI.class);
-	//
+
 	private final ScanDataSupport scanDataSupport = new ScanDataSupport();
-	//
+
 	private AtomicReference<Composite> toolbarMain = new AtomicReference<>();
 	private Button buttonToolbarInfo;
 	private AtomicReference<InformationUI> toolbarInfoTop = new AtomicReference<>();
@@ -94,10 +94,10 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 	private AtomicReference<TracesClipboardUI> tracesClipboardControl = new AtomicReference<>();
 	private Button buttonSaveScan;
 	private ScanWebIdentifierUI scanWebIdentifierUI; // show database link
-	//
+
 	private CLabel labelOptimized;
 	private Button buttonDeleteOptimized;
-	//
+
 	private Label labelX;
 	private Text textX;
 	private Label labelY;
@@ -107,7 +107,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 	 */
 	private ScanTableUI scanTableUI;
 	private Object object;
-	//
+
 	private DeleteMenuEntry deleteMenuEntry;
 	private DeleteKeyEventProcessor deleteKeyEventProcessor;
 	/*
@@ -115,7 +115,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 	 */
 	private boolean forceEnableEditModus = false;
 	private boolean fireUpdate = true;
-	//
+
 	private EditListener editListener = null;
 
 	private class DeleteMenuEntry implements ITableMenuEntry {
@@ -222,7 +222,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 
 		enableToolbar(toolbarEdit, buttonToolbarEdit, IMAGE_EDIT, TOOLTIP_EDIT, enabled);
 		buttonToolbarEdit.setEnabled(enabled);
-		//
+
 		scanTableUI.setEditEnabled(enabled);
 		ITableSettings tableSettings = scanTableUI.getTableSettings();
 		if(enabled) {
@@ -232,7 +232,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 			tableSettings.removeMenuEntry(deleteMenuEntry);
 			tableSettings.removeKeyEventProcessor(deleteKeyEventProcessor);
 		}
-		//
+
 		scanTableUI.applySettings(tableSettings);
 		Composite main = toolbarMain.get();
 		main.layout(true);
@@ -248,7 +248,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 		tracesClipboardControl.get().updateOption();
 		updateEditFields();
 		updateButtonStatus();
-		//
+
 		if(toolbarSearch.get().isVisible()) {
 			applySearch();
 		}
@@ -271,11 +271,11 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 			String titleX = tableViewerColumns.get(0).getColumn().getText();
 			labelX.setText(titleX + ":");
 			textX.setToolTipText(titleX);
-			//
+
 			String titleY = tableViewerColumns.get(1).getColumn().getText();
 			labelY.setText(titleY + ":");
 			textY.setToolTipText(titleY);
-			//
+
 			toolbarEdit.get().layout(true);
 		}
 	}
@@ -284,7 +284,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 
 		boolean isLibraryMassSpectrum = false;
 		enableEditModus(false);
-		//
+
 		IScan scan = getScan();
 		if(scan != null) {
 			isLibraryMassSpectrum = (scan instanceof ILibraryMassSpectrum);
@@ -299,7 +299,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 
 		IScan scan = getScan();
 		boolean isLibraryMassSpectrum = enableEditModus();
-		//
+
 		if(forceEnableEditModus || isLibraryMassSpectrum) {
 			String editInformation = scanTableUI.isEditEnabled() ? "Edit is enabled." : "Edit is disabled.";
 			toolbarInfoTop.get().setText(scanDataSupport.getScanLabel(scan) + " - " + editInformation);
@@ -337,21 +337,21 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout layout = new GridLayout(1, true);
 		composite.setLayout(layout);
-		//
+
 		deleteMenuEntry = new DeleteMenuEntry();
 		deleteKeyEventProcessor = new DeleteKeyEventProcessor();
-		//
+
 		createToolbarMain(composite);
 		createToolbarInfoTop(composite);
 		createToolbarEdit(composite);
 		createToolbarSearch(composite);
 		createTable(composite);
 		createToolbarInfoBottom(composite);
-		//
+
 		initialize();
 	}
 
@@ -361,7 +361,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 		enableToolbar(toolbarSearch, buttonToolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH, false);
 		enableToolbar(toolbarEdit, buttonToolbarEdit, IMAGE_EDIT, TOOLTIP_EDIT, false);
 		enableToolbar(toolbarInfoBottom, buttonToolbarInfo, IApplicationImage.IMAGE_INFO, TOOLTIP_INFO, true);
-		//
+
 		enableEditModus(false); // Disable the edit modus by default.
 	}
 
@@ -370,7 +370,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		composite.setLayout(new GridLayout(10, false));
-		//
+
 		labelOptimized = createInfoLabelOptimized(composite);
 		buttonToolbarInfo = createButtonToggleToolbar(composite, Arrays.asList(toolbarInfoTop, toolbarInfoBottom), IMAGE_INFO, TOOLTIP_INFO);
 		buttonToolbarSearch = createButtonToggleToolbar(composite, toolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH);
@@ -381,7 +381,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 		buttonSaveScan = createSaveButton(composite);
 		buttonDeleteOptimized = createDeleteOptimizedButton(composite);
 		createSettingsButton(composite);
-		//
+
 		toolbarMain.set(composite);
 	}
 
@@ -513,7 +513,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 				try {
 					if(object instanceof IScanMSD scanMSD) {
 						IScanMSD optimizedScanMSD = scanMSD.getOptimizedMassSpectrum();
-						//
+
 						if(optimizedScanMSD != null) {
 							DatabaseFileSupport.saveMassSpectrum(e.display.getActiveShell(), optimizedScanMSD, "Scan[optimized]");
 						} else {
@@ -523,7 +523,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 						IPeakModelMSD peakModelMSD = peakMSD.getPeakModel();
 						IScanMSD scanMSD = peakModelMSD.getPeakMassSpectrum();
 						IScanMSD optimizedScanMSD = scanMSD.getOptimizedMassSpectrum();
-						//
+
 						if(optimizedScanMSD != null) {
 							DatabaseFileSupport.saveMassSpectrum(e.display.getActiveShell(), optimizedScanMSD, "Peak[optimized]");
 						} else {
@@ -580,7 +580,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return informationUI;
 	}
 
@@ -590,14 +590,14 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(6, false));
-		//
+
 		labelX = createLabel(composite);
 		textX = createText(composite);
 		labelY = createLabel(composite);
 		textY = createText(composite);
 		createButtonAdd(composite);
 		createButtonDelete(composite);
-		//
+
 		toolbarEdit.set(composite);
 	}
 
@@ -613,7 +613,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 				applySearch();
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -682,7 +682,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 
 		scanTableUI = new ScanTableUI(parent, SWT.VIRTUAL | SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		scanTableUI.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		Table table = scanTableUI.getTable();
 		table.addSelectionListener(new SelectionAdapter() {
 
@@ -693,7 +693,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 				fireEditEvent();
 			}
 		});
-		//
+
 		table.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -729,7 +729,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 				Object object = iterator.next();
 				deleteSignal(object);
 			}
-			//
+
 			scanTableUI.refresh();
 			fireScanUpdate();
 		}
@@ -769,7 +769,7 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 
 		String x = textX.getText().trim();
 		String y = textY.getText().trim();
-		//
+
 		if("".equals(x) || "".equals(y)) {
 			MessageDialog.openError(shell, "Add Signal", "The values must be not empty.");
 		} else {
@@ -804,12 +804,12 @@ public class ExtendedScanTableUI extends Composite implements IExtendedPartUI {
 					 */
 					// Not supported yet.
 				}
-				//
+
 				textX.setText("");
 				textY.setText("");
 				scanTableUI.refresh();
 				fireScanUpdate();
-				//
+
 			} catch(Exception e) {
 				MessageDialog.openError(shell, "Add Signal", "Something has gone wrong to add the signal.");
 			}

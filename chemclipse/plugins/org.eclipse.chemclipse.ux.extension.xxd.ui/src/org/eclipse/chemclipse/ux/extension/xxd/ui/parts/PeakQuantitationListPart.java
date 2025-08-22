@@ -64,7 +64,7 @@ public class PeakQuantitationListPart extends AbstractPart<ExtendedPeakQuantitat
 				return false;
 			}
 		}
-		//
+
 		return false;
 	}
 

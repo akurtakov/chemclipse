@@ -64,7 +64,7 @@ public class FilterIonRounding extends AbstractSystemProcessSettings {
 		} catch(IOException e) {
 			content = "https://doi.org/10.1002/rcm.9294";
 		}
-		//
+
 		return new LiteratureReference(content);
 	}
 }

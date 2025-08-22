@@ -25,7 +25,7 @@ public class NamedTracesEditingSupport extends EditingSupport {
 	private CellEditor cellEditor;
 	private ExtendedTableViewer tableViewer;
 	private String column;
-	//
+
 	private TraceValidator traceValidator = new TraceValidator();
 
 	public NamedTracesEditingSupport(ExtendedTableViewer tableViewer, String column) {

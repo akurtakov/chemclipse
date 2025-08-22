@@ -96,29 +96,29 @@ import jakarta.annotation.PreDestroy;
 public abstract class AbstractChromatogramEditor extends AbstractUpdater<ExtendedChromatogramUI> implements IChromatogramEditor {
 
 	private static final Logger logger = Logger.getLogger(AbstractChromatogramEditor.class);
-	//
+
 	public static final String ICON_URI = ApplicationImageFactory.getInstance().getURI(IApplicationImage.IMAGE_CHROMATOGRAM, IApplicationImageProvider.SIZE_16x16);
 	public static final String TOOLTIP = ExtensionMessages.chromatogramEditor;
-	//
+
 	private static final String TOPIC_CHROMATOGRAM = IChemClipseEvents.TOPIC_CHROMATOGRAM_XXD_UPDATE_SELECTION;
 	private static final String TOPIC_SCAN = IChemClipseEvents.TOPIC_SCAN_XXD_UPDATE_SELECTION;
 	private static final String TOPIC_PEAK = IChemClipseEvents.TOPIC_PEAK_XXD_UPDATE_SELECTION;
 	private static final String TOPIC_EDITOR_UPDATE = IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE;
 	private static final String TOPIC_EDITOR_ADJUST = IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_ADJUST;
 	private static final String TOPIC_TOOLBAR_UPDATE = IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_TOOLBAR_UPDATE;
-	//
+
 	private final DataType dataType;
 	private final MPart part;
 	private final MDirtyable dirtyable;
-	//
+
 	private File chromatogramFile = null;
 	private ExtendedChromatogramUI extendedChromatogramUI;
-	//
+
 	private final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 	private final Shell shell;
 	private final ObjectChangedListener<IMeasurementResult<?>> updateMeasurementResult = new MeasurementResultListener();
 	private final IProcessSupplierContext processSupplierContext;
-	//
+
 	private final ObjectChangedListener<Object> updateMenuListener = (type, newObject, oldObject) -> {
 
 		if(extendedChromatogramUI != null) {
@@ -140,13 +140,13 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 	protected AbstractChromatogramEditor(DataType dataType, Composite parent, MPart part, MDirtyable dirtyable, IProcessSupplierContext processSupplierContext, Shell shell) {
 
 		super(TOPIC_CHROMATOGRAM, Activator.getDefault().getDataUpdateSupport());
-		//
+
 		this.dataType = dataType;
 		this.part = part;
 		this.dirtyable = dirtyable;
 		this.processSupplierContext = processSupplierContext;
 		this.shell = shell;
-		//
+
 		initialize(parent);
 	}
 
@@ -179,12 +179,12 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 		chromatogramFile = null;
 		notifications.removeObjectChangedListener(updateMenuListener);
 		measurementNotification.removeObjectChangedListener(updateMeasurementResult);
-		//
+
 		UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_SCAN_XXD_UPDATE_SELECTION, null);
 		UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_PEAK_XXD_UPDATE_SELECTION, null);
 		UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_CHROMATOGRAM_XXD_UPDATE_SELECTION, null);
 		UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_CLOSE, "ChromatogramEditor4x Close");
-		//
+
 		partSupport.closePart(part);
 		extendedChromatogramUI.dispose();
 	}
@@ -271,7 +271,7 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 		extendedChromatogramUI.updateChromatogramSelection(chromatogramSelection);
 		processChromatogram(chromatogramSelection);
 		setControl(extendedChromatogramUI);
-		//
+
 		if(chromatogramSelection != null) {
 			part.setLabel(ChromatogramDataSupport.getChromatogramEditorLabel(chromatogramSelection, false));
 			part.setTooltip(ChromatogramDataSupport.getReferenceLabel(chromatogramSelection.getChromatogram(), 0, false));
@@ -313,7 +313,7 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 				extendedChromatogramUI.updateToolbar();
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -390,7 +390,7 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 		} catch(Exception e) {
 			logger.error(e);
 		}
-		//
+
 		return chromatogramSelection;
 	}
 
@@ -399,7 +399,7 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 		IChromatogramSelection chromatogramSelection = null;
 		ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
 		ChromatogramImportRunnable runnable = new ChromatogramImportRunnable(file, dataType);
-		//
+
 		try {
 			/*
 			 * No fork, otherwise it might crash when loading a chromatogram takes too long.
@@ -415,7 +415,7 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 		}
 		chromatogramSelection = runnable.getChromatogramSelection();
 		chromatogramFile = file;
-		//
+
 		return chromatogramSelection;
 	}
 
@@ -427,7 +427,7 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 			String converterId = chromatogram.getConverterId();
 			if(converterId != null && !converterId.equals("") && chromatogramFile != null) {
 				monitor.subTask(ExtensionMessages.saveChromatogram);
-				//
+
 				IProcessingInfo<?> processingInfo = null;
 				if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
 					processingInfo = ChromatogramConverterMSD.getInstance().convert(chromatogramFile, chromatogramMSD, converterId, monitor);
@@ -473,31 +473,31 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 
 			if(type == ChangeType.SELECTED) {
 				boolean mustRedraw = false;
-				//
+
 				if(oldPaintListener != null) {
 					extendedChromatogramUI.getChromatogramChart().getBaseChart().getPlotArea().removeCustomPaintListener(oldPaintListener);
 					mustRedraw = true;
 					oldPaintListener = null;
 				}
-				//
+
 				if(oldObserver != null) {
 					oldObserver.removePropertyChangeListener(this);
 					oldObserver = null;
 				}
-				//
+
 				ICustomPaintListener paintListener = Adapters.adapt(newObject, ICustomPaintListener.class);
 				if(paintListener != null) {
 					oldPaintListener = paintListener;
 					extendedChromatogramUI.getChromatogramChart().getBaseChart().getPlotArea().addCustomPaintListener(paintListener);
 					mustRedraw = true;
 				}
-				//
+
 				PropertyChangeSupport observable = Adapters.adapt(newObject, PropertyChangeSupport.class);
 				if(observable != null) {
 					oldObserver = observable;
 					observable.addPropertyChangeListener(this);
 				}
-				//
+
 				if(mustRedraw) {
 					Display.getDefault().asyncExec(this::redraw);
 				}

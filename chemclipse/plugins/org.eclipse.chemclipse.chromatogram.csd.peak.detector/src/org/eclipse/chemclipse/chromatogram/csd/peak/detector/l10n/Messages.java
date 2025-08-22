@@ -17,11 +17,11 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.chemclipse.chromatogram.csd.peak.detector.l10n.messages"; //$NON-NLS-1$
-	//
+
 	public static String noPeakDetectorAvailable;
 	public static String onlyCSDchromatogramSupported;
 	public static String peakDetectorCSD;
-	//
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}

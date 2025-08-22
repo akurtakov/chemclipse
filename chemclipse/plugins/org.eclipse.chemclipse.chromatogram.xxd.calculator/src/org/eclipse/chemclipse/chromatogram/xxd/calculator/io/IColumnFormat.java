@@ -16,9 +16,9 @@ public interface IColumnFormat {
 
 	String HEADER_VALUE_DELIMITER = "=";
 	String RI_VALUE_DELIMITER = " ";
-	//
+
 	String COLUMN_MARKER = "#";
-	//
+
 	String COLUMN_NAME = "#COLUMN_NAME";
 	String COLUMN_LENGTH = "#COLUMN_LENGTH";
 	String COLUMN_DIAMETER = "#COLUMN_DIAMETER";

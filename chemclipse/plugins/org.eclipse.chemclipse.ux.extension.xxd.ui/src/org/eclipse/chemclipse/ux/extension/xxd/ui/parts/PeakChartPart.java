@@ -46,17 +46,17 @@ public class PeakChartPart extends AbstractPart<ExtendedPeakChartUI> {
 		if(objects.size() == 1) {
 			Object object = objects.get(0);
 			IPeak peak = null;
-			//
+
 			if(isUpdateEvent(topic)) {
 				if(object instanceof IPeak newPeak) {
 					peak = newPeak;
 				}
 			}
-			//
+
 			getControl().update(peak);
 			return true;
 		}
-		//
+
 		return false;
 	}
 

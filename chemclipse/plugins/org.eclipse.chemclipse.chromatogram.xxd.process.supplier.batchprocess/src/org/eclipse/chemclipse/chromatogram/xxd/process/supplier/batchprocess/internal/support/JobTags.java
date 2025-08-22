@@ -40,7 +40,7 @@ public interface JobTags {
 	 */
 	String CHROMATOGRAM_PROCESS_ENTRIES = "ProcessEntries";
 	String CHROMATOGRAM_PROCESS_ENTRY = "ProcessEntry";
-	//
+
 	String PROCESSOR_ID = "id";
 	String PROCESSOR_NAME = "name";
 	String PROCESSOR_DESCRIPTION = "description";
@@ -48,6 +48,6 @@ public interface JobTags {
 	String PROCESSOR_SYMBOLIC_NAME = "symbolicName";
 	String PROCESSOR_CLASS_NAME = "className";
 	String PROCESSOR_DATA_TYPES = "dataTypes";
-	//
+
 	String DELIMITER_DATA_TYPE = ",";
 }

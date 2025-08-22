@@ -20,11 +20,11 @@ import org.eclipse.swt.graphics.Image;
 public class CasNumbersLabelProvider extends AbstractChemClipseLabelProvider {
 
 	public static final String CAS_NUMBER = "CAS#";
-	//
+
 	public static final String[] TITLES = { //
 			CAS_NUMBER //
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			100 //
 	};

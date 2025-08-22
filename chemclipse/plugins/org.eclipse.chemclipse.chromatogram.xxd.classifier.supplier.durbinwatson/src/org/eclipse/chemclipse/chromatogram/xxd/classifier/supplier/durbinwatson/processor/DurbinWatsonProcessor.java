@@ -61,7 +61,7 @@ public class DurbinWatsonProcessor {
 		if(valuesOriginal.length < maxWidth) {
 			maxWidth = valuesOriginal.length;
 		}
-		//
+
 		for(int derivative = minDerivative; derivative <= maxDerivative; derivative++) {
 			for(int order = minOrder; order <= maxOrder; order++) {
 				for(int width = minWidth; width <= maxWidth; width++) {
@@ -122,7 +122,7 @@ public class DurbinWatsonProcessor {
 		for(ITotalScanSignal signal : totalScanSignals.getTotalScanSignals()) {
 			ticValues[column++] = signal.getTotalSignal();
 		}
-		//
+
 		return ticValues;
 	}
 }

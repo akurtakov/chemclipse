@@ -76,9 +76,9 @@ public class DatabaseEditor extends EditorPart implements IChemClipseEditor {
 	public static final String CONTRIBUTION_URI = "bundleclass://org.eclipse.chemclipse.ux.extension.msd.ui/org.eclipse.chemclipse.ux.extension.msd.ui.editors.DatabaseEditor";
 	public static final String ICON_URI = ApplicationImageFactory.getInstance().getURI(IApplicationImage.IMAGE_MASS_SPECTRUM_DATABASE, IApplicationImageProvider.SIZE_16x16);
 	public static final String TOOLTIP = "Mass Spectrum Library - Detector Type: MSD";
-	//
+
 	private static final Logger logger = Logger.getLogger(DatabaseEditor.class);
-	//
+
 	private boolean isDirty = false;
 	/*
 	 * Injected member in constructor
@@ -205,11 +205,11 @@ public class DatabaseEditor extends EditorPart implements IChemClipseEditor {
 
 		setSite(site);
 		setInput(input);
-		//
+
 		String fileName = input.getName();
 		fileName = fileName.substring(0, fileName.length() - 4);
 		setPartName(fileName);
-		//
+
 		if(input instanceof IFileEditorInput fileEditorInput) {
 			File file = fileEditorInput.getFile().getLocation().toFile();
 			importMassSpectra(file, true);
@@ -352,7 +352,7 @@ public class DatabaseEditor extends EditorPart implements IChemClipseEditor {
 		 */
 		List<String> clearTopics = Arrays.asList(IChemClipseEvents.TOPIC_SCAN_XXD_UPDATE_SELECTION);
 		UpdateNotifier.update(IChemClipseEvents.TOPIC_EDITOR_LIBRARY_CLOSE, clearTopics);
-		//
+
 		if(modelService != null) {
 			MPartStack partStack = (MPartStack)modelService.find(IPerspectiveAndViewIds.EDITOR_PART_STACK_ID, application);
 			part.setToBeRendered(false);

@@ -50,7 +50,7 @@ public class Colors {
 	 * Map specific colors
 	 */
 	private static final Map<Integer, Map<RGB, Color>> COLOR_MAP_RGB = new HashMap<Integer, Map<RGB, Color>>(); // Alpha and Colors
-	//
+
 	public static final Color LIGHT_RED = Colors.getColor(new RGB(249, 154, 152));
 	public static final Color LIGHT_GREEN = Colors.getColor(new RGB(166, 255, 139));
 	public static final Color LIGHT_YELLOW = Colors.getColor(new RGB(255, 254, 136));
@@ -193,38 +193,38 @@ public class Colors {
 	public static String[][] getAvailableColorSchemes() {
 
 		String[][] elements = new String[8][2];
-		//
+
 		elements[0][0] = COLOR_SCHEME_RED;
 		elements[0][1] = COLOR_SCHEME_RED;
-		//
+
 		elements[1][0] = COLOR_SCHEME_RED_CONTRAST;
 		elements[1][1] = COLOR_SCHEME_RED_CONTRAST;
-		//
+
 		elements[2][0] = COLOR_SCHEME_GRADIENT;
 		elements[2][1] = COLOR_SCHEME_GRADIENT;
-		//
+
 		elements[3][0] = COLOR_SCHEME_HIGH_CONTRAST;
 		elements[3][1] = COLOR_SCHEME_HIGH_CONTRAST;
-		//
+
 		elements[4][0] = COLOR_SCHEME_PUBLICATION;
 		elements[4][1] = COLOR_SCHEME_PUBLICATION;
-		//
+
 		elements[5][0] = COLOR_SCHEME_PRINT;
 		elements[5][1] = COLOR_SCHEME_PRINT;
-		//
+
 		elements[6][0] = COLOR_SCHEME_GRAYSCALE;
 		elements[6][1] = COLOR_SCHEME_GRAYSCALE;
-		//
+
 		elements[7][0] = COLOR_SCHEME_UNLIMITED;
 		elements[7][1] = COLOR_SCHEME_UNLIMITED;
-		//
+
 		return elements;
 	}
 
 	public static IColorScheme getColorScheme(String colorSchemeId) {
 
 		IColorScheme colorScheme;
-		//
+
 		switch(colorSchemeId) {
 			case COLOR_SCHEME_GRADIENT:
 				colorScheme = new ColorScheme(colorsGradient);
@@ -257,7 +257,7 @@ public class Colors {
 				colorScheme = new ColorScheme(colorsGradientRed);
 				break;
 		}
-		//
+
 		return colorScheme;
 	}
 
@@ -291,7 +291,7 @@ public class Colors {
 			color = new Color(display, rgb, alpha);
 			alphaColors.put(rgb, color);
 		}
-		//
+
 		return color;
 	}
 
@@ -385,7 +385,7 @@ public class Colors {
 			Color color = display.getSystemColor(colorId);
 			colors.add(color);
 		}
-		//
+
 		return colors;
 	}
 
@@ -396,7 +396,7 @@ public class Colors {
 			Color color = getColor(rgb);
 			colors.add(color);
 		}
-		//
+
 		return colors;
 	}
 

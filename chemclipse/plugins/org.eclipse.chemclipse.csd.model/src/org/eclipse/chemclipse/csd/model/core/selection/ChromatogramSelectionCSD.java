@@ -158,9 +158,9 @@ public class ChromatogramSelectionCSD extends AbstractChromatogramSelection impl
 	public void update(boolean forceReload) {
 
 		super.update(forceReload);
-		//
+
 		setSelectedScan(selectedScan, false);
-		//
+
 		fireUpdateChange(forceReload);
 	}
 }

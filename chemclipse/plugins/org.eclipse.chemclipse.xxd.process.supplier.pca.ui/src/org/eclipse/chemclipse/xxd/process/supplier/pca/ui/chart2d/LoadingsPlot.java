@@ -26,7 +26,7 @@ public class LoadingsPlot extends AbtractPlotPCA {
 
 	public static final int LABEL_RETENTION_TIME_MINUTES = 1;
 	public static final int LABEL_DESCRIPTION = 2;
-	//
+
 	private int labelType = LABEL_RETENTION_TIME_MINUTES;
 
 	public LoadingsPlot(Composite parent, int style) {
@@ -57,7 +57,7 @@ public class LoadingsPlot extends AbtractPlotPCA {
 			} else {
 				series = SeriesConverter.basisVectorsToSeriesDescription(resultsPCA, pcX, pcY);
 			}
-			//
+
 			addSeriesData(series);
 		}
 		redraw();

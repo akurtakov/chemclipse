@@ -89,7 +89,7 @@ public class TraceRange {
 
 		this.scanIndicesColumn2 = scanIndicesColumn2 == null ? "" : scanIndicesColumn2;
 		scanIndices.clear();
-		//
+
 		List<TraceGeneric> genericTraces = TraceFactory.parseTraces(this.scanIndicesColumn2, TraceGeneric.class);
 		for(TraceGeneric traceGeneric : genericTraces) {
 			scanIndices.add(traceGeneric.getTrace());
@@ -148,7 +148,7 @@ public class TraceRange {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -159,7 +159,7 @@ public class TraceRange {
 		} else if(retentionTimeColumn1 >= retentionTimeColumn1Start && retentionTimeColumn1 <= retentionTimeColumn1Stop) {
 			return true;
 		}
-		//
+
 		return false;
 	}
 

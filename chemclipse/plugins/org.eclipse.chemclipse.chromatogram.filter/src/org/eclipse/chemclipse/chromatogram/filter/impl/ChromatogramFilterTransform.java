@@ -43,7 +43,7 @@ public class ChromatogramFilterTransform extends AbstractChromatogramFilter impl
 			if(chromatogramFilterSettings instanceof FilterSettingsTransform filterSettings) {
 				IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 				IChromatogram chromatogramReference = null;
-				//
+
 				if(chromatogram instanceof IChromatogramCSD chromatogramCSD) {
 					int mz = filterSettings.getMz();
 					chromatogramReference = convertToMSD(chromatogramCSD, mz);
@@ -58,7 +58,7 @@ public class ChromatogramFilterTransform extends AbstractChromatogramFilter impl
 				}
 			}
 		}
-		//
+
 		return processingInfo;
 	}
 
@@ -88,10 +88,10 @@ public class ChromatogramFilterTransform extends AbstractChromatogramFilter impl
 				scanMSD.addIon(new Ion(mz, scan.getTotalSignal()));
 				chromatogramMSD.addScan(scanMSD);
 			} catch(Exception e) {
-				//
+
 			}
 		}
-		//
+
 		return chromatogramMSD;
 	}
 
@@ -112,7 +112,7 @@ public class ChromatogramFilterTransform extends AbstractChromatogramFilter impl
 			scanCSD.setRetentionIndex(scan.getRetentionIndex());
 			chromatogramCSD.addScan(scanCSD);
 		}
-		//
+
 		return chromatogramCSD;
 	}
 }

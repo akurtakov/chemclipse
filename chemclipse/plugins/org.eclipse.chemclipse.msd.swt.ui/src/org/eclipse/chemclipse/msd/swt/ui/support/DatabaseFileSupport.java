@@ -78,7 +78,7 @@ public class DatabaseFileSupport {
 		if(massSpectrum == null) {
 			return;
 		}
-		//
+
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE);
 		dialog.setFilterPath(Activator.getDefault().getSettingsPath());
 		dialog.setFileName(fileName);
@@ -148,7 +148,7 @@ public class DatabaseFileSupport {
 					logger.warn(e);
 				}
 			}
-			//
+
 			for(IIdentificationTarget peakTarget : peak.getTargets()) {
 				try {
 					/*

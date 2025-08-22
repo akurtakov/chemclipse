@@ -56,18 +56,18 @@ import org.eclipse.swt.widgets.Listener;
 public class SettingsPreferencesPage<T> extends WizardPage {
 
 	private static final Logger logger = Logger.getLogger(SettingsPreferencesPage.class);
-	//
+
 	private static final String DATA_URL = "DATA_URL";
 	private static final int MAX_LENGTH_LITERATURE_REFERENCE = 97; // 100 = 97 + ...
-	//
+
 	private AtomicReference<SettingsUI<?>> settingsUI = new AtomicReference<>();
 	private AtomicReference<ComboViewer> comboViewerLiterature = new AtomicReference<>();
 	private AtomicReference<Button> buttonLink = new AtomicReference<>();
 	private AtomicReference<Button> buttonRestoreDefaults = new AtomicReference<>();
-	//
+
 	private boolean isDontAskAgain;
 	private String jsonSettings;
-	//
+
 	private final IProcessorPreferences<T> preferences;
 	private final boolean showProfileToolbar;
 
@@ -84,15 +84,15 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 		ScrolledComposite scrolledComposite = new ScrolledComposite(parent, SWT.V_SCROLL | SWT.H_SCROLL);
 		scrolledComposite.setLayout(new GridLayout(1, true));
 		scrolledComposite.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		Composite control = createOptionSection(scrolledComposite);
-		//
+
 		scrolledComposite.setMinSize(control.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 		scrolledComposite.setContent(control);
 		scrolledComposite.setExpandVertical(true);
 		scrolledComposite.setExpandHorizontal(true);
 		scrolledComposite.setAlwaysShowScrollBars(false);
-		//
+
 		setControl(scrolledComposite);
 	}
 
@@ -111,11 +111,11 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(1, true));
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		createLiteratureSection(composite);
 		createSettingsUI(composite);
 		createProcessSection(composite);
-		//
+
 		return composite;
 	}
 
@@ -138,10 +138,10 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		createComboViewerLiterature(composite);
 		createButtonDOI(composite);
-		//
+
 		comboViewerLiterature.get().setInput(literatureReferences);
 		if(!literatureReferences.isEmpty()) {
 			comboViewerLiterature.get().setSelection(new StructuredSelection(literatureReferences.get(0)));
@@ -172,7 +172,7 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 				return null;
 			}
 		});
-		//
+
 		Combo combo = comboViewer.getCombo();
 		combo.setToolTipText(ExtensionMessages.literatureReferences);
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -184,7 +184,7 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 				updateLiteratureSelection();
 			}
 		});
-		//
+
 		comboViewerLiterature.set(comboViewer);
 	}
 
@@ -203,7 +203,7 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 			url = literatureReference.getUrl();
 			UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_LITERATURE_UPDATE, literatureReference.getContent());
 		}
-		//
+
 		buttonLink.get().setData(DATA_URL, url);
 		buttonLink.get().setEnabled(!url.isEmpty());
 		buttonLink.get().setToolTipText(!url.isEmpty() ? url : ExtensionMessages.noLinkIsSupplierYet);
@@ -233,7 +233,7 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 				}
 			}
 		});
-		//
+
 		buttonLink.set(button);
 	}
 
@@ -247,14 +247,14 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 	private void createSettingsUI(Composite parent) {
 
 		SettingsUI<?> control = null;
-		//
+
 		try {
 			control = new SettingsUI<>(parent, preferences, showProfileToolbar);
 			control.setLayoutData(new GridData(GridData.FILL_BOTH));
 		} catch(IOException e) {
 			throw new RuntimeException("Reading the settings failed.", e);
 		}
-		//
+
 		settingsUI.set(control);
 	}
 
@@ -262,16 +262,16 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 
 		Listener validationListener = createValidationListener();
 		SelectionListener selectionListener = createSelectionListener(validationListener);
-		//
+
 		Composite composite = new Composite(parent, SWT.NONE);
 		GridData gridData = new GridData(GridData.GRAB_HORIZONTAL);
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(2, false));
-		//
+
 		addButtonRememberSettings(composite, selectionListener);
 		addButtonRestoreDefaults(composite, selectionListener);
-		//
+
 		settingsUI.get().getControl().addChangeListener(validationListener);
 	}
 
@@ -322,7 +322,7 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 		} else {
 			addButtonDontAskAgain(parent);
 		}
-		//
+
 		selectionListener.widgetSelected(null);
 	}
 
@@ -347,7 +347,7 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 				isDontAskAgain = button.getSelection();
 			}
 		});
-		//
+
 		isDontAskAgain = preferences.getDialogBehaviour() != DialogBehavior.SHOW;
 		button.setSelection(isDontAskAgain);
 	}
@@ -367,7 +367,7 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 			}
 		});
 		button.addSelectionListener(selectionListener);
-		//
+
 		buttonRestoreDefaults.set(button);
 	}
 }

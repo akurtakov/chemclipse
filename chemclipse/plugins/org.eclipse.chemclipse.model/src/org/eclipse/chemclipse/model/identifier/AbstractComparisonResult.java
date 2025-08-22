@@ -17,7 +17,7 @@ package org.eclipse.chemclipse.model.identifier;
 public abstract class AbstractComparisonResult implements IComparisonResult {
 
 	private static final long serialVersionUID = 1295884624032029498L;
-	//
+
 	private boolean isMatch = false;
 	private float matchFactor = 0.0f;
 	private float matchFactorDirect = 0.0f;
@@ -188,7 +188,7 @@ public abstract class AbstractComparisonResult implements IComparisonResult {
 		if(result < 0) {
 			return 0;
 		}
-		//
+
 		return result;
 	}
 

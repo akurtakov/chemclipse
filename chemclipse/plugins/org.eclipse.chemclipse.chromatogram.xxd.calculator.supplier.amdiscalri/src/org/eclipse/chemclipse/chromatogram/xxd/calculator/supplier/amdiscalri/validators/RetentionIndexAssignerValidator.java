@@ -21,14 +21,14 @@ import org.eclipse.core.runtime.IStatus;
 public class RetentionIndexAssignerValidator extends ValueParserSupport implements IValidator<String> {
 
 	public static final String EXAMPLE_SINGLE = "600 | Hexane";
-	//
+
 	public static final String WHITE_SPACE = " ";
 	public static final String SEPARATOR_TOKEN = ";";
 	public static final String SEPARATOR_ENTRY = "|";
-	//
+
 	private static final String ERROR_MESSAGE = "";
 	private static final String ERROR_TOKEN = "The item must not contain: " + SEPARATOR_TOKEN;
-	//
+
 	private int retentionIndex = 0;
 	private String name = "";
 
@@ -57,7 +57,7 @@ public class RetentionIndexAssignerValidator extends ValueParserSupport implemen
 				}
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

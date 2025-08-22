@@ -32,7 +32,7 @@ public class VisualSelectionFilter extends ViewerFilter {
 		if(selected) {
 			if(element instanceof Feature feature) {
 				IVariable variable = feature.getVariable();
-				//
+
 				if(variable.isVisualSelected()) {
 					return true;
 				} else {
@@ -40,7 +40,7 @@ public class VisualSelectionFilter extends ViewerFilter {
 				}
 			}
 		}
-		//
+
 		return true;
 	}
 }

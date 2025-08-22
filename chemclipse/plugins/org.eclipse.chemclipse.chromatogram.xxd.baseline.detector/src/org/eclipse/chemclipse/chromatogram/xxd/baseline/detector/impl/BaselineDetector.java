@@ -41,7 +41,7 @@ public class BaselineDetector extends AbstractBaselineDetector {
 				}
 			}
 		}
-		//
+
 		return processingInfo;
 	}
 
@@ -50,7 +50,7 @@ public class BaselineDetector extends AbstractBaselineDetector {
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 		int scanStart = chromatogramSelection.getStartScan();
 		int scanStop = chromatogramSelection.getStopScan();
-		//
+
 		float intensity = 0;
 		if(scanStart > 0 && scanStop > 0) {
 			intensity = Float.MAX_VALUE;
@@ -59,7 +59,7 @@ public class BaselineDetector extends AbstractBaselineDetector {
 				intensity = Math.min(intensity, scan.getTotalSignal());
 			}
 		}
-		//
+
 		return intensity;
 	}
 }

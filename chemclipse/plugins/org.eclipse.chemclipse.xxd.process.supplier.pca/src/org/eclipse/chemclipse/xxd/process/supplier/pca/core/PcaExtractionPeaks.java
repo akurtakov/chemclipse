@@ -37,7 +37,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class PcaExtractionPeaks implements IExtractionData {
 
 	private static final Logger logger = Logger.getLogger(PcaExtractionPeaks.class);
-	//
+
 	private final List<IDataInputEntry> dataInputEntries;
 	private final ExtractionSettings extractionSettings;
 
@@ -77,7 +77,7 @@ public class PcaExtractionPeaks implements IExtractionData {
 
 		List<IPeak> peaks = new ArrayList<>();
 		File file = new File(peakFile.getInputFile());
-		//
+
 		IProcessingInfo<IPeaksMSD> processingInfo = PeakConverterMSD.convert(file, monitor);
 		if(processingInfo.getProcessingResult() != null) {
 			/*

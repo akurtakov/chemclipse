@@ -39,12 +39,12 @@ public class TaskTileContainer {
 	public static final Color DEFAULT_COLOR_DESCRIPTION = Colors.WHITE;
 	public static final Color DEFAULT_COLOR_INACTIVE = Colors.getColor(139, 23, 23);
 	public static final Color DEFAULT_COLOR_ACTIVE = Colors.getColor(114, 20, 22);
-	//
+
 	private final List<TaskTile> taskTiles = new ArrayList<>();
 	private final Composite container;
 	private final Supplier<IEclipseContext> contextSupplier;
 	private final Color[] colors;
-	//
+
 	private final MouseMoveListener tileMouseMoveListener = mouseMove -> {
 		for(TaskTile taskTile : taskTiles) {
 			if(taskTile == mouseMove.widget) {
@@ -64,11 +64,11 @@ public class TaskTileContainer {
 
 		this.contextSupplier = contextSupplier;
 		this.colors = colors;
-		//
+
 		container = new Composite(parent, SWT.NONE);
 		container.setLayout(new GridLayout(columns, true));
 		container.setBackgroundMode(SWT.INHERIT_DEFAULT);
-		//
+
 		MouseTrackAdapter mouseTrackAdapter = new MouseTrackAdapter() {
 
 			@Override
@@ -79,7 +79,7 @@ public class TaskTileContainer {
 				}
 			}
 		};
-		//
+
 		container.addMouseTrackListener(mouseTrackAdapter);
 		parent.addMouseTrackListener(mouseTrackAdapter);
 	}
@@ -91,7 +91,7 @@ public class TaskTileContainer {
 		taskTile.addMouseMoveListener(tileMouseMoveListener);
 		taskTiles.add(taskTile);
 		container.layout();
-		//
+
 		return taskTile;
 	}
 
@@ -104,15 +104,15 @@ public class TaskTileContainer {
 
 		boolean largeText = tileDefinition.getIcon() == null && tileDefinition.getTitle().length() == 1;
 		int style = SWT.NONE;
-		//
+
 		if(canExecute(tileDefinition)) {
 			style |= TaskTile.HIGHLIGHT;
 		}
-		//
+
 		if(largeText) {
 			style |= TaskTile.LARGE_TITLE;
 		}
-		//
+
 		return style;
 	}
 

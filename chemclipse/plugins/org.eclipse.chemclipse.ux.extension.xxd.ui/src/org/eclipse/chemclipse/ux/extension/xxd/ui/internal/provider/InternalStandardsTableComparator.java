@@ -47,11 +47,11 @@ public class InternalStandardsTableComparator extends AbstractRecordTableCompara
 					sortOrder = 0;
 			}
 		}
-		//
+
 		if(getDirection() == ASCENDING) {
 			sortOrder = -sortOrder;
 		}
-		//
+
 		return sortOrder;
 	}
 }

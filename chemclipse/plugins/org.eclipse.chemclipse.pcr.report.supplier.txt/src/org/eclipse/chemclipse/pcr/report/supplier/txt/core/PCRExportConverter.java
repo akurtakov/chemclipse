@@ -40,11 +40,11 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class PCRExportConverter extends AbstractPlateExportConverter implements IPlateExportConverter {
 
 	private static final Logger logger = Logger.getLogger(PCRExportConverter.class);
-	//
+
 	private static final String DESCRIPTION = "PCR Export";
 	private static final String TAB = "\t";
 	private static final String SAMPLE_SUBSET_ALL = "--";
-	//
+
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.000");
 
 	@Override
@@ -54,7 +54,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 		if(plate != null) {
 			try {
 				PrintWriter printWriter = new PrintWriter(file);
-				//
+
 				Map<String, String> headerDataMap = plate.getHeaderDataMap();
 				printWriter.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 				printWriter.println(headerDataMap.getOrDefault(IPlate.NAME, ""));
@@ -65,7 +65,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 				printWriter.print("Detection Format: ");
 				printWriter.println((plate.getDetectionFormat() == null) ? "--" : plate.getDetectionFormat().getName());
 				printWriter.println("");
-				//
+
 				List<String> sampleSubsets = new ArrayList<>(getSampleSubsets(plate));
 				Collections.sort(sampleSubsets);
 				for(String sampleSubset : sampleSubsets) {
@@ -73,9 +73,9 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 					printWriter.println("");
 				}
 				printWriter.println("");
-				//
+
 				printDetectionFormats(plate, printWriter);
-				//
+
 				printWriter.flush();
 				printWriter.close();
 				processingInfo.setProcessingResult(file);
@@ -86,7 +86,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 		} else {
 			processingInfo.addErrorMessage(DESCRIPTION, "The PCR plate is not available.");
 		}
-		//
+
 		return processingInfo;
 	}
 
@@ -94,7 +94,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 
 		Set<String> sampleSubsets = new HashSet<String>();
 		sampleSubsets.add(SAMPLE_SUBSET_ALL);
-		//
+
 		for(IWell well : plate.getWells()) {
 			String sampleSubset = well.getSampleSubset();
 			if(!"".equals(sampleSubset)) {
@@ -108,7 +108,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 
 		printWriter.print("Sample Subset: ");
 		printWriter.println(targetSubset);
-		//
+
 		printWriter.print("Position");
 		printWriter.print(TAB);
 		printWriter.print("Name");
@@ -116,7 +116,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 		printWriter.print("Subset");
 		printWriter.print(TAB);
 		printWriter.print("Target");
-		//
+
 		IDetectionFormat detectionFormat = plate.getDetectionFormat();
 		if(detectionFormat != null) {
 			for(IChannelSpecification channelSpecification : detectionFormat.getChannelSpecifications()) {
@@ -127,10 +127,10 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 			printWriter.print(TAB);
 			printWriter.print("Crossing Points...");
 		}
-		//
+
 		printWriter.println("");
-		//
-		//
+
+
 		for(IWell well : plate.getWells()) {
 			if(!well.isEmptyMeasurement()) {
 				/*
@@ -146,7 +146,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 					printWriter.print(well.getSampleSubset());
 					printWriter.print(TAB);
 					printWriter.print(well.getTargetName());
-					//
+
 					List<Integer> keys = new ArrayList<>(well.getChannels().keySet());
 					Collections.sort(keys);
 					for(int key : keys) {
@@ -180,7 +180,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 				printWriter.print("===> ");
 				printWriter.print(channelSpecification.getHeaderDataOrDefault(IChannelSpecification.NAME, ""));
 				printWriter.println("");
-				//
+
 				Map<String, String> dataMapChannel = channelSpecification.getHeaderDataMap();
 				for(Map.Entry<String, String> entry : dataMapChannel.entrySet()) {
 					printValue(printWriter, TAB, entry.getKey(), dataMapChannel);

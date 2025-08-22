@@ -38,13 +38,13 @@ public class PeakIdentifier extends AbstractPeakIdentifierMSD {
 			identifierSettings = PreferenceSupplier.getPeakIdentifierSettings();
 		}
 		IProcessingInfo<IPeakIdentificationResults> processingInfo = new ProcessingInfo<>(new PeakIdentificationResults());
-		//
+
 		if(identifierSettings instanceof PeakIdentifierSettings peakIdentifierSettings) {
 			BasePeakIdentifier basePeakIdentifier = new BasePeakIdentifier();
 			basePeakIdentifier.identifyPeaks(peaks, peakIdentifierSettings, monitor);
 			processingInfo.addInfoMessage("BasePeakIdentifier", "Peaks have been identified.");
 		}
-		//
+
 		return processingInfo;
 	}
 }

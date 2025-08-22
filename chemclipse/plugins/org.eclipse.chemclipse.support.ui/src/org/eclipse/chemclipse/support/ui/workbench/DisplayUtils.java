@@ -167,7 +167,7 @@ public class DisplayUtils {
 	public static Display getDisplay() {
 
 		Display display = null;
-		//
+
 		display = Display.getDefault();
 		if(display == null) {
 			logger.info("Default Display is null.");
@@ -184,11 +184,11 @@ public class DisplayUtils {
 				}
 			}
 		}
-		//
+
 		if(display == null) {
 			logger.warn("Display is null!");
 		}
-		//
+
 		return display;
 	}
 
@@ -211,7 +211,7 @@ public class DisplayUtils {
 			return null;
 		}
 		Shell shell = null;
-		//
+
 		Display display = getDisplay();
 		if(display != null) {
 			try {
@@ -220,7 +220,7 @@ public class DisplayUtils {
 				logger.error(e);
 			}
 		}
-		//
+
 		if(shell == null) {
 			if(display != null) {
 				Shell[] shells = display.getShells();
@@ -237,7 +237,7 @@ public class DisplayUtils {
 			}
 			logger.error("Shell is null!");
 		}
-		//
+
 		return shell;
 	}
 

@@ -100,7 +100,7 @@ public class PeakReaderMSD implements IPeakReader {
 		} else if(version.equals(Format.CHROMATOGRAM_VERSION_1502)) {
 			peakReader = new PeakReader_1502();
 		}
-		//
+
 		if(peakReader != null) {
 			processingInfo = peakReader.read(file, monitor);
 		}

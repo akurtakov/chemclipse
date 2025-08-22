@@ -41,7 +41,7 @@ public class IndexAssignerListFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof IndexNameMarker indexNameMarker) {
 			String name = (caseSensitive) ? indexNameMarker.getName() : indexNameMarker.getName().toLowerCase();
 			searchText = (caseSensitive) ? searchText : searchText.toLowerCase();
@@ -49,7 +49,7 @@ public class IndexAssignerListFilter extends ViewerFilter {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

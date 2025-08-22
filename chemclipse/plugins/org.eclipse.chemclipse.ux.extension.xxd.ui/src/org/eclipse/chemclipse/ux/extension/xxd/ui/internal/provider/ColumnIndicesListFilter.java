@@ -37,7 +37,7 @@ public class ColumnIndicesListFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof IColumnIndexMarker marker) {
 			/*
 			 * Search Text
@@ -50,40 +50,40 @@ public class ColumnIndicesListFilter extends ViewerFilter {
 			if(contains(searchText, Float.toString(marker.getRetentionIndex()))) {
 				return true;
 			}
-			//
+
 			if(contains(searchText, column.getName())) {
 				return true;
 			}
-			//
+
 			if(contains(searchText, column.getSeparationColumnType().label())) {
 				return true;
 			}
-			//
+
 			if(contains(searchText, column.getSeparationColumnPackaging().label())) {
 				return true;
 			}
-			//
+
 			if(contains(searchText, column.getCalculationType())) {
 				return true;
 			}
-			//
+
 			if(contains(searchText, column.getLength())) {
 				return true;
 			}
-			//
+
 			if(contains(searchText, column.getDiameter())) {
 				return true;
 			}
-			//
+
 			if(contains(searchText, column.getPhase())) {
 				return true;
 			}
-			//
+
 			if(contains(searchText, column.getThickness())) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 

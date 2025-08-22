@@ -33,16 +33,16 @@ public class LibraryInformationResolver {
 	public static List<ILibraryInformation> retrieveBySynonym(String searchTerm) {
 
 		List<ILibraryInformation> libraryInformations = new ArrayList<>();
-		//
+
 		LibraryInformationResolverSettings settings = new LibraryInformationResolverSettings();
 		settings.setResolverOption(ResolverOption.SYNONYM);
 		settings.setSearchExact(true);
 		settings.setCaseSensitive(false);
-		//
+
 		for(ILibraryInformationResolverService service : Activator.getDefault().getLibraryInformationResolverServices()) {
 			libraryInformations.addAll(service.retrieve(settings, searchTerm, new NullProgressMonitor()));
 		}
-		//
+
 		return libraryInformations;
 	}
 }

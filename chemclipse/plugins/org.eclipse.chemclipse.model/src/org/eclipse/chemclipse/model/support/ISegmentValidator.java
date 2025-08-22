@@ -22,7 +22,7 @@ public interface ISegmentValidator {
 			for(int i = 0; i < doubles.length; i++) {
 				doubles[i] = values[i];
 			}
-			//
+
 			acceptSegment = acceptSegment(doubles, mean);
 		}
 

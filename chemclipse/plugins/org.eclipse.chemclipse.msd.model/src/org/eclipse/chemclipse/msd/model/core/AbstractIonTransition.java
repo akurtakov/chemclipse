@@ -18,7 +18,7 @@ package org.eclipse.chemclipse.msd.model.core;
 public abstract class AbstractIonTransition implements IIonTransition {
 
 	private static final long serialVersionUID = 96311762449505536L;
-	//
+
 	private String compoundName = "";
 	private double q1StartIon;
 	private double q1StopIon;
@@ -29,7 +29,7 @@ public abstract class AbstractIonTransition implements IIonTransition {
 	private double q3Resolution;
 	private int transitionGroup;
 	private int dwell;
-	//
+
 	private int q1Ion;
 	private double q3Ion;
 
@@ -78,10 +78,10 @@ public abstract class AbstractIonTransition implements IIonTransition {
 		this.q1Resolution = filter1Resolution;
 		this.q3Resolution = filter3Resolution;
 		this.transitionGroup = transitionGroup;
-		//
+
 		q1Ion = AbstractIon.getIon((filter1FirstIon + filter1LastIon) / 2.0d);
 		q3Ion = AbstractIon.getIon((filter3FirstIon + filter3LastIon) / 2.0d, 1);
-		//
+
 		dwell = 100; // Default value
 	}
 

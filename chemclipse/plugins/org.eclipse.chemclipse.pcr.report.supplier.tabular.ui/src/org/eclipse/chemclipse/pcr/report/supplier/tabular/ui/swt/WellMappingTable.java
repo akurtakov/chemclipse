@@ -69,17 +69,17 @@ public class WellMappingTable extends Composite implements IChangeListener, IExt
 	private static final String FILTER_EXTENSION = "*.txt";
 	private static final String FILTER_NAME = "Well Mapping (*.txt)";
 	private static final String FILE_NAME = "WellMapping.txt";
-	//
+
 	private static final String CATEGORY = "PCR Report";
 	private static final String DELETE = "Delete";
-	//
+
 	public static final String EXAMPLE = "New Subset | (\\d*) | 1 | 25 | positive | negative";
-	//
+
 	private AtomicReference<WellMappingListUI> tableViewer = new AtomicReference<>();
-	//
+
 	private List<Button> buttons = new ArrayList<>();
 	private List<Listener> listeners = new ArrayList<>();
-	//
+
 	private WellMappings wellMappings = new WellMappings();
 
 	public WellMappingTable(Composite parent, int style) {
@@ -141,10 +141,10 @@ public class WellMappingTable extends Composite implements IChangeListener, IExt
 		gridLayout.marginWidth = 0;
 		gridLayout.marginHeight = 0;
 		setLayout(gridLayout);
-		//
+
 		createToolbarMain(this);
 		createTableSection(this);
-		//
+
 		initialize();
 	}
 
@@ -160,7 +160,7 @@ public class WellMappingTable extends Composite implements IChangeListener, IExt
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(7, false));
-		//
+
 		add(createButtonAdd(composite));
 		add(createButtonEdit(composite));
 		add(createButtonRemove(composite));
@@ -178,7 +178,7 @@ public class WellMappingTable extends Composite implements IChangeListener, IExt
 
 		WellMappingListUI wellMappingListUI = new WellMappingListUI(parent, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 		wellMappingListUI.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		wellMappingListUI.setUpdateListener(new IUpdateListener() {
 
 			@Override
@@ -187,13 +187,13 @@ public class WellMappingTable extends Composite implements IChangeListener, IExt
 				setViewerInput();
 			}
 		});
-		//
+
 		Shell shell = wellMappingListUI.getTable().getShell();
 		ITableSettings tableSettings = wellMappingListUI.getTableSettings();
 		addDeleteMenuEntry(shell, tableSettings);
 		addKeyEventProcessors(shell, tableSettings);
 		wellMappingListUI.applySettings(tableSettings);
-		//
+
 		tableViewer.set(wellMappingListUI);
 	}
 
@@ -219,7 +219,7 @@ public class WellMappingTable extends Composite implements IChangeListener, IExt
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -250,7 +250,7 @@ public class WellMappingTable extends Composite implements IChangeListener, IExt
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -268,7 +268,7 @@ public class WellMappingTable extends Composite implements IChangeListener, IExt
 				deleteItems(e.display.getActiveShell());
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -289,7 +289,7 @@ public class WellMappingTable extends Composite implements IChangeListener, IExt
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -318,7 +318,7 @@ public class WellMappingTable extends Composite implements IChangeListener, IExt
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -352,7 +352,7 @@ public class WellMappingTable extends Composite implements IChangeListener, IExt
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 

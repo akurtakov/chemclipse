@@ -111,20 +111,20 @@ public class IdentificationTargetComparator implements Comparator<IIdentificatio
 		if(SortOrder.DESC.equals(sortOrder) && sortIndex != 0) {
 			sortIndex *= -1;
 		}
-		//
+
 		return sortIndex;
 	}
 
 	private float calculateDeltaRetentionIndex(ILibraryInformation libraryInformation) {
 
 		float deltaRI = 0.0f;
-		//
+
 		if(PreferenceSupplier.isUseRetentionIndexQC()) {
 			if(retentionIndexSource != 0.0f) {
 				deltaRI = Math.abs(retentionIndexSource - libraryInformation.getRetentionIndex());
 			}
 		}
-		//
+
 		return deltaRI;
 	}
 }

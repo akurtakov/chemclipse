@@ -63,7 +63,7 @@ public class ExtendedFSDScanUI extends Composite implements IExtendedPartUI {
 	private void updateScan() {
 
 		chartFSD.deleteSeries();
-		//
+
 		if(spectrumFSD != null) {
 			List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
 			lineSeriesDataList.add(getExcitationLineSeriesData());
@@ -94,7 +94,7 @@ public class ExtendedFSDScanUI extends Composite implements IExtendedPartUI {
 
 		double[] xSeries;
 		double[] ySeries;
-		//
+
 		if(signalsFSD != null) {
 			int size = signalsFSD.size();
 			xSeries = new double[size];
@@ -115,7 +115,7 @@ public class ExtendedFSDScanUI extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createScanChart(this);
 	}
@@ -126,7 +126,7 @@ public class ExtendedFSDScanUI extends Composite implements IExtendedPartUI {
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(8, false));
-		//
+
 		createToggleChartSeriesLegendButton(composite);
 		createToggleLegendMarkerButton(composite);
 		createToggleRangeSelectorButton(composite);
@@ -229,7 +229,7 @@ public class ExtendedFSDScanUI extends Composite implements IExtendedPartUI {
 		chartSettings.setCreateMenu(true);
 		chartSettings.setEnableRangeSelector(true);
 		chartSettings.setShowRangeSelectorInitially(false);
-		//
+
 		chartFSD.applySettings(chartSettings);
 	}
 }

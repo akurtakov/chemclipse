@@ -59,7 +59,7 @@ public abstract class AbstractLibraryInformationPart<T extends LibraryInformatio
 				} else {
 					ILibraryInformation libraryInformation = null;
 					boolean update = true;
-					//
+
 					if(object instanceof ILibraryMassSpectrum libraryMassSpectrum) {
 						libraryInformation = libraryMassSpectrum.getLibraryInformation();
 					} else if(object instanceof IIdentificationTarget identificationTarget) {
@@ -74,7 +74,7 @@ public abstract class AbstractLibraryInformationPart<T extends LibraryInformatio
 							update = false;
 						}
 					}
-					//
+
 					if(update) {
 						getControl().setInput(libraryInformation);
 						return true;
@@ -82,7 +82,7 @@ public abstract class AbstractLibraryInformationPart<T extends LibraryInformatio
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 

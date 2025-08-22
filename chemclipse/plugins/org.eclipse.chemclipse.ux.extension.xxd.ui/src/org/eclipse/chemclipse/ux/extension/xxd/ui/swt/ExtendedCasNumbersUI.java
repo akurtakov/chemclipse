@@ -58,12 +58,12 @@ public class ExtendedCasNumbersUI extends LibraryInformationComposite {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createToolbarSearch(this);
 		createTableSection(this);
-		//
+
 		initialize();
 	}
 
@@ -71,7 +71,7 @@ public class ExtendedCasNumbersUI extends LibraryInformationComposite {
 
 		initializeToolbarInfo();
 		enableToolbar(toolbarSearch, buttonToolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH, false);
-		//
+
 		applySettings();
 	}
 
@@ -82,7 +82,7 @@ public class ExtendedCasNumbersUI extends LibraryInformationComposite {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(3, false));
-		//
+
 		createButtonToolbarInfo(composite);
 		buttonToolbarSearch = createButtonToggleToolbar(composite, toolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH);
 		createButtonSettings(composite);
@@ -100,7 +100,7 @@ public class ExtendedCasNumbersUI extends LibraryInformationComposite {
 				listControl.get().setSearchText(searchText, caseSensitive);
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -109,7 +109,7 @@ public class ExtendedCasNumbersUI extends LibraryInformationComposite {
 		CasNumbersListUI listUI = new CasNumbersListUI(parent, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		Table table = listUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		listControl.set(listUI);
 	}
 

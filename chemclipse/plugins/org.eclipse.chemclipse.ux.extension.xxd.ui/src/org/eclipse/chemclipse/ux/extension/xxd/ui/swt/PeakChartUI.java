@@ -47,7 +47,7 @@ public class PeakChartUI extends ScrollableChart {
 	private static final float HEIGHT_50 = 0.5f;
 	private static final float HEIGHT_15 = 0.15f;
 	private static final float HEIGHT_0 = 0.0f;
-	//
+
 	private PeakChartSupport peakChartSupport = new PeakChartSupport();
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
@@ -71,7 +71,7 @@ public class PeakChartUI extends ScrollableChart {
 
 		prepareChart();
 		if(peak != null) {
-			//
+
 			modifyChart(peak);
 			List<ILineSeriesData> lineSeriesDataList = getPeakSeriesData(peak, false, "");
 			addLineSeriesData(lineSeriesDataList);
@@ -82,7 +82,7 @@ public class PeakChartUI extends ScrollableChart {
 
 		prepareChart();
 		if(peak1 != null) {
-			//
+
 			modifyChart(peak1);
 			List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
 			lineSeriesDataList.addAll(getPeakSeriesData(peak1, false, "Peak1"));
@@ -114,7 +114,7 @@ public class PeakChartUI extends ScrollableChart {
 		String titleX1 = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_MINUTES);
 		String titleY = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_INTENSITY);
 		String titleY1 = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
-		//
+
 		ChartSupport.setPrimaryAxisSet(chartSettings, titleX, false, titleY);
 		ChartSupport.clearSecondaryAxes(chartSettings);
 		ChartSupport.addSecondaryAxisX(chartSettings, titleX1);
@@ -167,7 +167,7 @@ public class PeakChartUI extends ScrollableChart {
 			lineSeriesDataList.add(peakChartSupport.getPeakWidth(peak, false, HEIGHT_85, mirrored, color, postfix));
 			lineSeriesDataList.add(peakChartSupport.getPeakWidth(peak, false, HEIGHT_15, mirrored, color, postfix));
 		}
-		//
+
 		return lineSeriesDataList;
 	}
 
@@ -183,20 +183,20 @@ public class PeakChartUI extends ScrollableChart {
 		 */
 		IChartSettings chartSettings = getChartSettings();
 		chartSettings.setCreateMenu(true);
-		//
+
 		RangeRestriction rangeRestriction = chartSettings.getRangeRestriction();
 		rangeRestriction.setRestrictFrame(true);
 		rangeRestriction.setExtendTypeY(RangeRestriction.ExtendType.RELATIVE);
 		rangeRestriction.setExtendMinY(0.0d);
 		rangeRestriction.setExtendMaxY(0.1d);
-		//
+
 		applySettings(chartSettings);
 	}
 
 	private void modifyChart(IPeak peak) {
 
 		IChartSettings chartSettings = getChartSettings();
-		//
+
 		if(peak instanceof IPeakMSD) {
 			setDataType(chartSettings);
 		} else if(peak instanceof IPeakCSD) {
@@ -204,7 +204,7 @@ public class PeakChartUI extends ScrollableChart {
 		} else if(peak instanceof IPeakWSD) {
 			setDataType(chartSettings);
 		}
-		//
+
 		applySettings(chartSettings);
 	}
 
@@ -228,7 +228,7 @@ public class PeakChartUI extends ScrollableChart {
 					ILineSeries<?> lineSeries = (ILineSeries<?>)createSeries(optimizedSeriesData, lineSeriesSettings);
 					baseChart.applySeriesSettings(lineSeries, lineSeriesSettings);
 				} catch(SeriesException e) {
-					//
+
 				}
 			}
 			baseChart.suspendUpdate(false);

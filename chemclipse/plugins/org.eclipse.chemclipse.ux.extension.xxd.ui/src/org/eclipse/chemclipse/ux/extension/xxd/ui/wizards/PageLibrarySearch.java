@@ -68,16 +68,16 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 	private AtomicReference<ExtendedLiteratureUI> literatureControl = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfoTop = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfoBottom = new AtomicReference<>();
-	//
+
 	private LibrarySearchSettings librarySearchSettings;
 	private Button buttonDefault;
 
 	public PageLibrarySearch(LibrarySearchSettings librarySearchSettings) {
 
 		super(PageLibrarySearch.class.getName());
-		//
+
 		this.librarySearchSettings = librarySearchSettings;
-		//
+
 		setTitle("Library Search Review");
 		setMessage("Review the retrieved library entries.");
 	}
@@ -98,13 +98,13 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		createToolbarMain(composite);
 		createToolbarInfoTop(composite);
 		createToolbarSearch(composite);
 		createDataSection(composite);
 		createToolbarInfoBottom(composite);
-		//
+
 		initialize();
 		setControl(composite);
 	}
@@ -115,15 +115,15 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 		 * Default button of the wizard.
 		 */
 		buttonDefault = getShell().getDefaultButton();
-		//
+
 		enableToolbar(toolbarInfoTop, buttonToolbarInfoControl.get(), IApplicationImage.IMAGE_INFO, TOOLTIP_INFO, true);
 		enableToolbar(toolbarInfoBottom, buttonToolbarInfoControl.get(), IApplicationImage.IMAGE_INFO, TOOLTIP_INFO, true);
 		enableToolbar(toolbarSearch, buttonToolbarSearchControl.get(), IMAGE_SEARCH, TOOLTIP_SEARCH, false);
-		//
+
 		TargetsListUI targetsListUI = targetListControl.get();
 		targetsListUI.setInput(librarySearchSettings.getIdentificationTargets());
 		targetListControl.get().updateSourceRange(librarySearchSettings.getRetentionTime(), librarySearchSettings.getRetentionIndex());
-		//
+
 		updateInfoToolbars();
 	}
 
@@ -134,7 +134,7 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(2, false));
-		//
+
 		createButtonToggleInfo(composite);
 		createButtonToggleSearch(composite);
 	}
@@ -159,12 +159,12 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 				} else {
 					button = buttonDefault;
 				}
-				//
+
 				Shell shell = getShell();
 				shell.getDisplay().asyncExec(() -> shell.setDefaultButton(button));
 			}
 		});
-		//
+
 		buttonToolbarSearchControl.set(button);
 	}
 
@@ -177,7 +177,7 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 			targetListControl.get().setSearchText(searchText, caseSensitive);
 			updateInfoToolbarBottom();
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -186,7 +186,7 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new FillLayout());
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		SashForm sashForm = new SashForm(composite, SWT.VERTICAL);
 		createTargetList(sashForm);
 		createDetailsSection(sashForm);
@@ -197,7 +197,7 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfoTop.set(informationUI);
 	}
 
@@ -205,7 +205,7 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfoBottom.set(informationUI);
 	}
 
@@ -214,7 +214,7 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 		TargetsListUI targetListUI = new TargetsListUI(parent, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		targetListUI.setComparator(true);
 		Table table = targetListUI.getTable();
-		//
+
 		table.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -229,7 +229,7 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 				toggleManuallyVerfied(getSelectedCell(table, e));
 			}
 		});
-		//
+
 		targetListUI.addSelectionChangedListener(event -> {
 
 			IIdentificationTarget identificationTarget = getIdentificationTarget();
@@ -240,7 +240,7 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 			moleculeControl.get().setInput(libraryInformation);
 			updateLiterature(libraryInformation);
 		});
-		//
+
 		targetListControl.set(targetListUI);
 	}
 
@@ -253,7 +253,7 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 				literature.add(flavorMarker.getLiteratureReference());
 			}
 		}
-		//
+
 		literatureControl.get().setInput(new ArrayList<>(literature));
 	}
 
@@ -274,17 +274,17 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 					return identificationTarget;
 				}
 			}
-			//
+
 			if(!visible && rectangle.intersects(clientArea)) {
 				visible = true;
 			}
-			//
+
 			if(!visible) {
 				return null;
 			}
 			index++;
 		}
-		//
+
 		return null;
 	}
 
@@ -300,7 +300,7 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 			for(IFlavorMarker flavorMarker : libraryInformation.getFlavorMarkers()) {
 				flavorMarker.setManuallyVerified(manuallyVerified);
 			}
-			//
+
 			targetListControl.get().refresh();
 			flavorMarkerControl.get().updateInput();
 		}
@@ -312,7 +312,7 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 		if(object instanceof IIdentificationTarget identificationTarget) {
 			return identificationTarget;
 		}
-		//
+
 		return null;
 	}
 
@@ -320,7 +320,7 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new FillLayout());
-		//
+
 		SashForm sashForm = new SashForm(composite, SWT.HORIZONTAL);
 		createFlavorMarkerSection(sashForm);
 		createColumnSection(sashForm);
@@ -332,14 +332,14 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 	private void createFlavorMarkerSection(Composite parent) {
 
 		ExtendedFlavorMarkerUI extendedFlavorMarkerUI = new ExtendedFlavorMarkerUI(parent, SWT.BORDER);
-		//
+
 		flavorMarkerControl.set(extendedFlavorMarkerUI);
 	}
 
 	private void createColumnSection(Composite parent) {
 
 		TabFolder tabFolder = new TabFolder(parent, SWT.BOTTOM);
-		//
+
 		createColumnIndicesSection(tabFolder);
 		createSynonymsSection(tabFolder);
 	}
@@ -348,10 +348,10 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 
 		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText("Column Indices");
-		//
+
 		ExtendedColumnIndicesUI extendedColumnIndicesUI = new ExtendedColumnIndicesUI(tabFolder, SWT.BORDER);
 		tabItem.setControl(extendedColumnIndicesUI);
-		//
+
 		columnIndicesControl.set(extendedColumnIndicesUI);
 	}
 
@@ -359,10 +359,10 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 
 		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText("Synonyms");
-		//
+
 		ExtendedSynonymsUI extendedSynonymsUI = new ExtendedSynonymsUI(tabFolder, SWT.BORDER);
 		tabItem.setControl(extendedSynonymsUI);
-		//
+
 		synonymsControl.set(extendedSynonymsUI);
 	}
 
@@ -393,7 +393,7 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 		builder.append(" | ");
 		builder.append("Retention Index: ");
 		builder.append(librarySearchSettings.getRetentionIndex());
-		//
+
 		toolbarInfoTop.get().setText(builder.toString());
 	}
 
@@ -405,7 +405,7 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 		builder.append(" | ");
 		builder.append("Filtered: ");
 		builder.append(targetListControl.get().getTable().getItemCount());
-		//
+
 		toolbarInfoBottom.get().setText(builder.toString());
 	}
 }

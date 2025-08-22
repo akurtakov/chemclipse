@@ -47,7 +47,7 @@ import org.osgi.service.component.annotations.Component;
 public class ChromatogramFileExportProcessSupplier implements IProcessTypeSupplier {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramFileExportProcessSupplier.class);
-	//
+
 	private static final String ID = "org.eclipse.chemclipse.xxd.converter.supplier.chemclipse.ui.processors.chromatogramFileExportProcessSupplier";
 	private static final String NAME = "Open Chromatography Binary [Specific Version] (*.ocb)";
 	private static final String DESCRIPTION = "Exports the chromatogram to a file.";
@@ -92,7 +92,7 @@ public class ChromatogramFileExportProcessSupplier implements IProcessTypeSuppli
 								shell = new Shell(display);
 								disposeShell = true;
 							}
-							//
+
 							FileDialog fileDialog = new FileDialog(display.getActiveShell(), SWT.SAVE);
 							fileDialog.setOverwrite(true);
 							fileDialog.setText(VersionConstants.DESCRIPTION_CHROMATOGRAM);
@@ -109,7 +109,7 @@ public class ChromatogramFileExportProcessSupplier implements IProcessTypeSuppli
 									PreferenceSupplier.setListPathExport(fileDialog.getFilterPath());
 									ChromatogramVersion chromatogramVersion = processSettings.getChromatogramVersion();
 									String version = chromatogramVersion.getVersion();
-									//
+
 									File file = new File(path);
 									if(chromatogram instanceof IChromatogramCSD chromatogramCSD) {
 										/*
@@ -144,14 +144,14 @@ public class ChromatogramFileExportProcessSupplier implements IProcessTypeSuppli
 							}
 						});
 					}
-					//
+
 					return null;
 				});
 			} catch(Exception e) {
 				logger.warn(e);
 				Thread.currentThread().interrupt();
 			}
-			//
+
 			return chromatogramSelection;
 		}
 	}

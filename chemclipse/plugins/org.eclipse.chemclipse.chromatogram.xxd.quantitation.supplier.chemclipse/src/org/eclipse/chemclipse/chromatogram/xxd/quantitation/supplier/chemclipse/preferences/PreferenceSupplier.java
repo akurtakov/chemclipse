@@ -27,32 +27,32 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_SELECTED_QUANTITATION_DATABASE = "";
 	public static final String P_FILTER_PATH_NEW_QUANT_DB = "filterPathNewQuantDB";
 	public static final String DEF_FILTER_PATH_NEW_QUANT_DB = "";
-	//
+
 	public static final double MIN_RETENTION_TIME = 0.0d;
 	public static final double MAX_RETENTION_TIME = Double.MAX_VALUE;
 	public static final String P_RETENTION_TIME_NEGATIVE_DEVIATION = "retentionTimeNegativeDeviation";
 	public static final double DEF_RETENTION_TIME_NEGATIVE_DEVIATION = 0.5d; // Minutes
 	public static final String P_RETENTION_TIME_POSITIVE_DEVIATION = "retentionTimePositiveDeviation";
 	public static final double DEF_RETENTION_TIME_POSITIVE_DEVIATION = 0.5d; // Minutes
-	//
+
 	public static final float MIN_RETENTION_INDEX = 0.0f;
 	public static final float MAX_RETENTION_INDEX = Float.MAX_VALUE;
 	public static final String P_RETENTION_INDEX_NEGATIVE_DEVIATION = "retentionIndexNegativeDeviation";
 	public static final float DEF_RETENTION_INDEX_NEGATIVE_DEVIATION = 10.0f; // Index
 	public static final String P_RETENTION_INDEX_POSITIVE_DEVIATION = "retentionIndexPositiveDeviation";
 	public static final float DEF_RETENTION_INDEX_POSITIVE_DEVIATION = 10.0f; // Index
-	//
+
 	public static final String QUANTITATION_STRATEGY_NONE = "NONE";
 	public static final String QUANTITATION_STRATEGY_RETENTION_TIME = "RT";
 	public static final String QUANTITATION_STRATEGY_REFERENCES = "REFS";
 	public static final String QUANTITATION_STRATEGY_NAME = "NAME";
-	//
+
 	public static final String[][] QUANTITATION_STRATEGY_OPTIONS = new String[][]{//
 			{"None", QUANTITATION_STRATEGY_NONE}, //
 			{"Retention Time", QUANTITATION_STRATEGY_RETENTION_TIME}, //
 			{"References", QUANTITATION_STRATEGY_REFERENCES}, //
 			{"Name", QUANTITATION_STRATEGY_NAME}};
-	//
+
 	public static final String P_QUANTITATION_STRATEGY = "quantitationStrategy";
 	public static final String DEF_QUANTITATION_STRATEGY = QUANTITATION_STRATEGY_NONE;
 

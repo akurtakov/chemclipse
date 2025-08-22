@@ -42,7 +42,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_APPEND_FILES, "Append report files", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_BEST_MATCH, "Use Best Match", getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Area% Report", getFieldEditorParent()));
 		addField(new IntegerFieldEditor(PreferenceSupplier.P_DELTA_RETENTION_TIME_LEFT, "Delta Retention Time Left [ms]", getFieldEditorParent()));

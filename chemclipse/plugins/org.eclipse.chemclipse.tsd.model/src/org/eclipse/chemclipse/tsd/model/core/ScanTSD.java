@@ -17,7 +17,7 @@ import org.eclipse.chemclipse.numeric.statistics.Calculations;
 public class ScanTSD extends AbstractScanTSD {
 
 	private static final long serialVersionUID = 2994914620573856493L;
-	//
+
 	private int driftInterval = 100; // µs
 	private float[] signals = new float[0];
 

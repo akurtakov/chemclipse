@@ -51,15 +51,15 @@ import org.eclipse.swtchart.extensions.linecharts.ILineSeriesSettings;
 public class ImageRunnableGeneric implements Runnable {
 
 	private static final Logger logger = Logger.getLogger(ImageRunnableGeneric.class);
-	//
+
 	private ChromatogramChartSupport chromatogramChartSupport = new ChromatogramChartSupport();
 	private PeakChartSupport peakChartSupport = new PeakChartSupport();
 	private ScanChartSupport scanChartSupport = new ScanChartSupport();
 	private PeakRetentionTimeComparator peakRetentionTimeComparator = new PeakRetentionTimeComparator(SortOrder.ASC);
-	//
+
 	private File file;
 	private IChromatogram chromatogram;
-	//
+
 	private IChromatogramImageReportSettings settings;
 
 	public ImageRunnableGeneric(File file, IChromatogram chromatogram, IChromatogramImageReportSettings settings) {
@@ -88,7 +88,7 @@ public class ImageRunnableGeneric implements Runnable {
 			rangeRestriction.setZeroY(false);
 			chromatogramChart.applySettings(chartSettings);
 			List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
-			//
+
 			lineSeriesDataList.add(chromatogramChartSupport.getLineSeriesDataChromatogram(chromatogram, chromatogram.getName(), Colors.RED));
 			BaseChart baseChart = chromatogramChart.getBaseChart();
 			if(settings.isPeaks()) {
@@ -166,7 +166,7 @@ public class ImageRunnableGeneric implements Runnable {
 			lineSeriesSettings.setSymbolSize(5);
 			lineSeriesSettings.setSymbolColor(Colors.DARK_GRAY);
 			lineSeriesDataList.add(lineSeriesData);
-			//
+
 			IPlotArea plotArea = baseChart.getPlotArea();
 			int indexSeries = lineSeriesDataList.size() - 1;
 			PeakLabelMarker peakLabelMarker = new PeakLabelMarker(baseChart, indexSeries, peaks);
@@ -185,7 +185,7 @@ public class ImageRunnableGeneric implements Runnable {
 			lineSeriesSettings.setSymbolSize(5);
 			lineSeriesSettings.setSymbolColor(Colors.DARK_GRAY);
 			lineSeriesDataList.add(lineSeriesData);
-			//
+
 			IPlotArea plotArea = baseChart.getPlotArea();
 			int indexSeries = lineSeriesDataList.size() - 1;
 			ScanLabelMarker scanLabelMarker = new ScanLabelMarker(baseChart, indexSeries, scans);

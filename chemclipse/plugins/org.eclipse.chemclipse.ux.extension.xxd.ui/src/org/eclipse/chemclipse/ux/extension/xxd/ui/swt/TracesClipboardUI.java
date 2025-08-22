@@ -56,16 +56,16 @@ public class TracesClipboardUI extends Composite {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(1, false);
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		gridLayout.marginWidth = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		createButtonClipboard(composite);
-		//
+
 		initialize();
 	}
 
@@ -88,7 +88,7 @@ public class TracesClipboardUI extends Composite {
 				copyToClipboard(e.display);
 			}
 		});
-		//
+
 		buttonClipboard.set(button);
 	}
 
@@ -111,7 +111,7 @@ public class TracesClipboardUI extends Composite {
 				}
 			});
 		}
-		//
+
 		button.setMenu(menu);
 	}
 

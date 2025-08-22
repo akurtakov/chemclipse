@@ -63,7 +63,7 @@ public class ErrorResidueChart extends BarChart {
 	private void createControl() {
 
 		IChartSettings chartSettings = getChartSettings();
-		//
+
 		chartSettings.setTitle("Error Residues");
 		chartSettings.setTitleVisible(true);
 		if(PreferencesSupport.isDarkTheme()) {
@@ -74,13 +74,13 @@ public class ErrorResidueChart extends BarChart {
 		chartSettings.setOrientation(SWT.HORIZONTAL);
 		chartSettings.setHorizontalSliderVisible(false);
 		chartSettings.setVerticalSliderVisible(false);
-		//
+
 		RangeRestriction rangeRestriction = chartSettings.getRangeRestriction();
 		rangeRestriction.setZeroX(false);
 		rangeRestriction.setZeroY(false);
 		rangeRestriction.setForceZeroMinY(true);
 		rangeRestriction.setRestrictFrame(true);
-		//
+
 		chartSettings.setShowAxisZeroMarker(true);
 		if(PreferencesSupport.isDarkTheme()) {
 			chartSettings.setColorAxisZeroMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
@@ -90,9 +90,9 @@ public class ErrorResidueChart extends BarChart {
 		chartSettings.setShowSeriesLabelMarker(false);
 		chartSettings.setCreateMenu(true);
 		chartSettings.setEnableCompress(false);
-		//
+
 		setPrimaryAxisSet(chartSettings);
-		//
+
 		applySettings(chartSettings);
 	}
 
@@ -106,7 +106,7 @@ public class ErrorResidueChart extends BarChart {
 		} else {
 			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
 		}
-		//
+
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle("Error Values");
 		primaryAxisSettingsY.setDecimalFormat(ValueFormat.getDecimalFormatEnglish());
@@ -121,13 +121,13 @@ public class ErrorResidueChart extends BarChart {
 
 		deleteSeries();
 		if(pcaResults != null) {
-			//
+
 			IChartSettings chartSettings = getChartSettings();
 			IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
 			primaryAxisSettingsX.setEnableCategory(true);
 			primaryAxisSettingsX.setCategorySeries(getCategories(pcaResults));
 			applySettings(chartSettings);
-			//
+
 			List<IBarSeriesData> barSeriesDataList = new ArrayList<>();
 			ISeriesData seriesData = getSeries(pcaResults);
 			IBarSeriesData barSeriesData = new BarSeriesData(seriesData);
@@ -146,12 +146,12 @@ public class ErrorResidueChart extends BarChart {
 		List<IResultMVA> pcaResultList = pcaResults.getPcaResultList();
 		int size = pcaResultList.size();
 		String[] categories = new String[size];
-		//
+
 		for(int i = 0; i < size; i++) {
 			IResultMVA pcaResult = pcaResultList.get(i);
 			categories[i] = pcaResult.getSample().getSampleName();
 		}
-		//
+
 		return categories;
 	}
 
@@ -161,13 +161,13 @@ public class ErrorResidueChart extends BarChart {
 		int size = pcaResultList.size();
 		double[] xSeries = new double[size];
 		double[] ySeries = new double[size];
-		//
+
 		for(int i = 0; i < size; i++) {
 			IResultMVA pcaResult = pcaResultList.get(i);
 			xSeries[i] = i;
 			ySeries[i] = pcaResult.getErrorMetric();
 		}
-		//
+
 		return new SeriesData(xSeries, ySeries, "Error Residues");
 	}
 }

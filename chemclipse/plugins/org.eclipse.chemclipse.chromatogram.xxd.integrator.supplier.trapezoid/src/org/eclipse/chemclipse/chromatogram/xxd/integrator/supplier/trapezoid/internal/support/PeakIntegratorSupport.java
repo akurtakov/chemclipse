@@ -69,7 +69,7 @@ public class PeakIntegratorSupport {
 			IChromatogramWSD chromatogramWSD = chromatogramSelectionWSD.getChromatogram();
 			peaks = chromatogramWSD.getPeaks(chromatogramSelectionWSD);
 		}
-		//
+
 		return calculatePeakIntegrationResults(peaks, peakIntegrationSettings, monitor);
 	}
 

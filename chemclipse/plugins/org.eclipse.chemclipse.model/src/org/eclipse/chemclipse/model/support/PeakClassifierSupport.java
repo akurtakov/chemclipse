@@ -37,7 +37,7 @@ public class PeakClassifierSupport {
 			Collections.sort(classifier);
 			return StringUtils.join(classifier, " " + SEPARATOR + " ");
 		}
-		//
+
 		return "";
 	}
 

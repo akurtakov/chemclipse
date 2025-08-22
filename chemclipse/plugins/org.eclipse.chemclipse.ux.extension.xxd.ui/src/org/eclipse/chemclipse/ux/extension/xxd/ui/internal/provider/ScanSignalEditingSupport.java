@@ -26,7 +26,7 @@ import org.eclipse.jface.viewers.TextCellEditor;
 public class ScanSignalEditingSupport extends EditingSupport {
 
 	private static final Logger logger = Logger.getLogger(ScanSignalEditingSupport.class);
-	//
+
 	private CellEditor cellEditor;
 	private ExtendedTableViewer tableViewer;
 	private String column;

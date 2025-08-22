@@ -37,7 +37,7 @@ public class ChromatogramConverterCSD extends AbstractChromatogramConverter<IChr
 		if(instance == null) {
 			instance = new ChromatogramConverterCSD();
 		}
-		//
+
 		return instance;
 	}
 

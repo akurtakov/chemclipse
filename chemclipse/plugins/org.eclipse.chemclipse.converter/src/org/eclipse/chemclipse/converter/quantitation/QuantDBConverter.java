@@ -39,7 +39,7 @@ public class QuantDBConverter {
 	public static final String DEFAULT_QUANT_DB_FILE_NAME = "QuantitationDatabase.ocq";
 	public static final String[] DEFAULT_QUANT_DB_FILE_EXTENSIONS = new String[]{"*.ocq"};
 	public static final String[] DEFAULT_QUANT_DB_FILE_NAMES = new String[]{"Quantitation Database (*.ocq)"};
-	//
+
 	private static final Logger logger = Logger.getLogger(QuantDBConverter.class);
 	private static final String EXTENSION_POINT = "org.eclipse.chemclipse.converter.quantitationDatabaseSupplier";
 	/*
@@ -68,14 +68,14 @@ public class QuantDBConverter {
 
 		QuantDBConverterSupport converterSupport = getQuantDBConverterSupport();
 		for(ISupplier supplier : converterSupport.getSupplier()) {
-			//
+
 			IProcessingInfo<IQuantitationDatabase> processinInfo = convert(file, supplier.getId(), monitor);
 			IQuantitationDatabase quantitationDatabase = processinInfo.getProcessingResult();
 			if(quantitationDatabase != null) {
 				return processinInfo;
 			}
 		}
-		//
+
 		return getNoImportConverterAvailableProcessingInfo(file);
 	}
 
@@ -103,11 +103,11 @@ public class QuantDBConverter {
 				break exitloop;
 			}
 		}
-		//
+
 		if(processingInfo == null) {
 			processingInfo = getNoExportConverterAvailableProcessingInfo(file);
 		}
-		//
+
 		return processingInfo;
 	}
 
@@ -163,7 +163,7 @@ public class QuantDBConverter {
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 		IConfigurationElement[] extensions = registry.getConfigurationElementsFor(EXTENSION_POINT);
 		for(IConfigurationElement element : extensions) {
-			//
+
 			supplier = new QuantDBSupplier();
 			supplier.setFileExtension(element.getAttribute(FILE_EXTENSION));
 			supplier.setFileName(element.getAttribute(FILE_NAME));

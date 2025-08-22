@@ -23,7 +23,7 @@ public class QuantReferencesComparator extends AbstractRecordTableComparator imp
 
 		int sortOrder = 0;
 		if(e1 instanceof String s1 && e2 instanceof String s2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = s2.compareTo(s1);

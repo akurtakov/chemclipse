@@ -56,7 +56,7 @@ import org.eclipse.swt.widgets.Control;
 public class ChromatogramActionUI extends Composite {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramActionUI.class);
-	//
+
 	private static final String EXTENSION_POINT = "org.eclipse.chemclipse.ux.extension.xxd.ui.chromatogramEditorActionSupplier";
 	private static final String EXTENSION_LABEL = "label"; //$NON-NLS-1$
 	private static final String EXTENSION_DESCRIPTION = "description"; //$NON-NLS-1$
@@ -64,10 +64,10 @@ public class ChromatogramActionUI extends Composite {
 	private static final String EXTENSION_MSD = "MSD"; //$NON-NLS-1$
 	private static final String EXTENSION_CSD = "CSD"; //$NON-NLS-1$
 	private static final String EXTENSION_WSD = "WSD"; //$NON-NLS-1$
-	//
+
 	private ComboViewer comboChromatogramAction;
 	private Button buttonChromatogramAction;
-	//
+
 	private IChromatogramSelection chromatogramSelection;
 	private String selectedActionId = "";
 	private final HashMap<String, ChromatogramEditorActionExtension> actionHashMap = new HashMap<>();
@@ -84,7 +84,7 @@ public class ChromatogramActionUI extends Composite {
 		this.chromatogramSelection = chromatogramSelection;
 		boolean enabled = enableChromatogramActionMenu(chromatogramSelection);
 		comboChromatogramAction.getCombo().setEnabled(enabled);
-		//
+
 		if(enabled) {
 			boolean success = setChromatogramActionItems(comboChromatogramAction.getCombo(), chromatogramSelection);
 			buttonChromatogramAction.setEnabled(success);
@@ -96,13 +96,13 @@ public class ChromatogramActionUI extends Composite {
 	private void initialize() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(2, false);
 		gridLayout.horizontalSpacing = 0;
 		gridLayout.marginWidth = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		comboChromatogramAction = createChromatogramActionCombo(composite);
 		buttonChromatogramAction = createChromatogramActionButton(composite);
 	}
@@ -123,7 +123,7 @@ public class ChromatogramActionUI extends Composite {
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select a chromatogram action.");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
@@ -143,7 +143,7 @@ public class ChromatogramActionUI extends Composite {
 				}
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -153,7 +153,7 @@ public class ChromatogramActionUI extends Composite {
 		button.setToolTipText("Execute the selected chromatogram action.");
 		button.setText("");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXECUTE_EXTENSION, IApplicationImageProvider.SIZE_16x16));
-		//
+
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -174,7 +174,7 @@ public class ChromatogramActionUI extends Composite {
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -208,7 +208,7 @@ public class ChromatogramActionUI extends Composite {
 				success = true;
 			}
 		}
-		//
+
 		return success;
 	}
 

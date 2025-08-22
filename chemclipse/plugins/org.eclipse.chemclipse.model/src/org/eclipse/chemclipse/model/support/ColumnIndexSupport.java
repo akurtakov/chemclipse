@@ -113,7 +113,7 @@ public class ColumnIndexSupport {
 				ISeparationColumn separationColumn = columnIndexMarker.getSeparationColumn();
 				String separationColumnType = adjustValue(separationColumn.getSeparationColumnType().label(), caseSensitive, removeWhiteSpace);
 				String name = adjustValue(separationColumn.getName(), caseSensitive, removeWhiteSpace);
-				//
+
 				if(matchPartly) {
 					if(separationColumnType.contains(searchColumn) || name.contains(searchColumn)) {
 						retentionIndices.add(columnIndexMarker.getRetentionIndex());

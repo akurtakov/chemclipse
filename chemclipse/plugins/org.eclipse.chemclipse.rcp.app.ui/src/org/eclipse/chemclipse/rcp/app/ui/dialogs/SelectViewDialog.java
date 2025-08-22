@@ -135,7 +135,7 @@ public class SelectViewDialog extends Dialog implements ISelectionChangedListene
 		 * Enable / disable the OK button.
 		 */
 		validateSelection();
-		//
+
 		return composite;
 	}
 

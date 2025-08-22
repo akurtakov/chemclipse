@@ -26,7 +26,7 @@ public class ChromatogramType implements EventHandler {
 
 	public static final String CHROMATOGRAM_TYPE = "org.eclipse.chemclipse.ux.extension.ui.definitions.chromatogramType";
 	public static final String CHROMATOGRAM_SELECTION = "org.eclipse.chemclipse.ux.extension.ui.chromatogramSelection";
-	//
+
 	public static final String CHROMATOGRAM_TYPE_MSD = "CHROMATOGRAM_TYPE_MSD";
 	public static final String CHROMATOGRAM_TYPE_CSD = "CHROMATOGRAM_TYPE_CSD";
 	public static final String CHROMATOGRAM_TYPE_WSD = "CHROMATOGRAM_TYPE_WSD";
@@ -39,7 +39,7 @@ public class ChromatogramType implements EventHandler {
 		String topic = event.getTopic();
 		IChromatogramSelection chromatogramSelection = null;
 		String chromatogramType = CHROMATOGRAM_TYPE_NONE;
-		//
+
 		if(topic.equals(IChemClipseEvents.TOPIC_CHROMATOGRAM_XXD_UPDATE_SELECTION)) {
 			Object object = event.getProperty(IChemClipseEvents.EVENT_BROKER_DATA);
 			if(object instanceof IChromatogramSelection chromatogramSelectionEvent) {
@@ -76,12 +76,12 @@ public class ChromatogramType implements EventHandler {
 
 		IEclipseContext eclipseContext = Activator.getDefault().getEclipseContext();
 		Object object = eclipseContext.get(ChromatogramType.CHROMATOGRAM_SELECTION);
-		//
+
 		IChromatogramSelection currentChromatogramSelection = null;
 		if(object instanceof IChromatogramSelection chromatogramSelection) {
 			currentChromatogramSelection = chromatogramSelection;
 		}
-		//
+
 		return currentChromatogramSelection;
 	}
 
@@ -94,12 +94,12 @@ public class ChromatogramType implements EventHandler {
 
 		IEclipseContext eclipseContext = Activator.getDefault().getEclipseContext();
 		Object object = eclipseContext.get(ChromatogramType.CHROMATOGRAM_SELECTION);
-		//
+
 		IChromatogramSelectionMSD currentChromatogramSelectionMSD = null;
 		if(object instanceof IChromatogramSelectionMSD chromatogramSelectionMSD) {
 			currentChromatogramSelectionMSD = chromatogramSelectionMSD;
 		}
-		//
+
 		return currentChromatogramSelectionMSD;
 	}
 
@@ -112,12 +112,12 @@ public class ChromatogramType implements EventHandler {
 
 		IEclipseContext eclipseContext = Activator.getDefault().getEclipseContext();
 		Object object = eclipseContext.get(ChromatogramType.CHROMATOGRAM_SELECTION);
-		//
+
 		IChromatogramSelectionCSD currentChromatogramSelectionCSD = null;
 		if(object instanceof IChromatogramSelectionCSD chromatogramSelectionCSD) {
 			currentChromatogramSelectionCSD = chromatogramSelectionCSD;
 		}
-		//
+
 		return currentChromatogramSelectionCSD;
 	}
 
@@ -130,12 +130,12 @@ public class ChromatogramType implements EventHandler {
 
 		IEclipseContext eclipseContext = Activator.getDefault().getEclipseContext();
 		Object object = eclipseContext.get(ChromatogramType.CHROMATOGRAM_SELECTION);
-		//
+
 		IChromatogramSelectionWSD currentChromatogramSelectionWSD = null;
 		if(object instanceof IChromatogramSelectionWSD chromatogramSelectionWSD) {
 			currentChromatogramSelectionWSD = chromatogramSelectionWSD;
 		}
-		//
+
 		return currentChromatogramSelectionWSD;
 	}
 }

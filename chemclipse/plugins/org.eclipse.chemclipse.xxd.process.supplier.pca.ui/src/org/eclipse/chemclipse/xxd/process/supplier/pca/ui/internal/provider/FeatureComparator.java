@@ -30,7 +30,7 @@ public class FeatureComparator extends AbstractRecordTableComparator implements 
 		if(e1 instanceof Feature feature1 && e2 instanceof Feature feature2) {
 			IVariable variable1 = feature1.getVariable();
 			IVariable variable2 = feature2.getVariable();
-			//
+
 			int columnIndex = getPropertyIndex();
 			switch(columnIndex) {
 				case 0:
@@ -55,7 +55,7 @@ public class FeatureComparator extends AbstractRecordTableComparator implements 
 					int index = columnIndex - 4;
 					List<ISampleData<?>> sampleData1 = feature1.getSampleData();
 					List<ISampleData<?>> sampleData2 = feature2.getSampleData();
-					//
+
 					if(sampleData1.size() > index && sampleData2.size() > index) {
 						sortOrder = Double.compare(sampleData2.get(index).getData(), sampleData1.get(index).getData());
 					} else {

@@ -33,11 +33,11 @@ import org.eclipse.swt.widgets.Text;
 public class DataMapSupportUI extends Composite {
 
 	public static final String HEADER_ENTRY = "Header Entry";
-	//
+
 	private Text textKey;
 	private Text textValue;
 	private Button buttonAdd;
-	//
+
 	private IUpdateListener updateListener;
 	private IMeasurementInfo measurementInfo;
 
@@ -68,17 +68,17 @@ public class DataMapSupportUI extends Composite {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(3, false);
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		textKey = createTextKey(composite);
 		textValue = createTextValue(composite);
 		buttonAdd = createButtonAdd(composite);
-		//
+
 		updateWidget();
 	}
 
@@ -96,7 +96,7 @@ public class DataMapSupportUI extends Composite {
 				updateWidget();
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -114,7 +114,7 @@ public class DataMapSupportUI extends Composite {
 				updateWidget();
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -133,7 +133,7 @@ public class DataMapSupportUI extends Composite {
 				addEntry(e.display.getActiveShell());
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -145,7 +145,7 @@ public class DataMapSupportUI extends Composite {
 			 */
 			String key = textKey.getText().trim();
 			String value = textValue.getText().trim();
-			//
+
 			if(key.isEmpty()) {
 				MessageDialog.openError(shell, HEADER_ENTRY, "The header key must be not empty.");
 			} else if(measurementInfo.headerDataContainsKey(key)) {
@@ -164,7 +164,7 @@ public class DataMapSupportUI extends Composite {
 
 		textKey.setEnabled(measurementInfo != null);
 		textValue.setEnabled(measurementInfo != null);
-		//
+
 		boolean enabled = false;
 		if(measurementInfo != null) {
 			String key = textKey.getText().trim();
@@ -175,7 +175,7 @@ public class DataMapSupportUI extends Composite {
 				}
 			}
 		}
-		//
+
 		buttonAdd.setEnabled(enabled);
 	}
 

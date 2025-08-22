@@ -33,7 +33,7 @@ public class FilterSupportVSD {
 			int stopRetentionTime = chromatogramSelection.getStopRetentionTime();
 			int startScan = chromatogram.getScanNumber(startRetentionTime);
 			int stopScan = chromatogram.getScanNumber(stopRetentionTime);
-			//
+
 			SignalType signalType = SignalType.RAMAN;
 			CombinedScanCalculator combinedScanCalculator = new CombinedScanCalculator();
 			for(int i = startScan; i <= stopScan; i++) {
@@ -45,7 +45,7 @@ public class FilterSupportVSD {
 			}
 			scanCombinedISD = combinedScanCalculator.createScan(calculationType, signalType);
 		}
-		//
+
 		return scanCombinedISD;
 	}
 }

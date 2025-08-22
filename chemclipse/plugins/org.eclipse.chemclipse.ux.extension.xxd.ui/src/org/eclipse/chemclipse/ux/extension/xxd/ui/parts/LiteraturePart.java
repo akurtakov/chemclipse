@@ -53,7 +53,7 @@ public class LiteraturePart extends AbstractPart<ExtendedLiteratureUI> {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 

@@ -61,7 +61,7 @@ public class ExtendedVarianceUI extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		plot = createPlot(this);
 	}
@@ -73,7 +73,7 @@ public class ExtendedVarianceUI extends Composite implements IExtendedPartUI {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(2, false));
-		//
+
 		createComboViewerVariance(composite);
 		createSettingsButton(composite);
 	}
@@ -101,7 +101,7 @@ public class ExtendedVarianceUI extends Composite implements IExtendedPartUI {
 				return null;
 			}
 		});
-		//
+
 		Combo combo = comboViewer.getCombo();
 		combo.setToolTipText("Select the variance");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -116,9 +116,9 @@ public class ExtendedVarianceUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		comboViewer.setSelection(new StructuredSelection(Variance.EXPLAINED));
-		//
+
 		return comboViewer;
 	}
 

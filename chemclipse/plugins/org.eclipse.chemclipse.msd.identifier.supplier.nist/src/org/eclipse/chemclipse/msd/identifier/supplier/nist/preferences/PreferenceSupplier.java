@@ -159,7 +159,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		settings.setTimeoutInMinutes(INSTANCE().getInteger(P_TIMEOUT_IN_MINUTES, DEF_TIMEOUT_IN_MINUTES));
 		settings.setMinMatchFactor(INSTANCE().getFloat(P_MIN_MATCH_FACTOR, DEF_MIN_MATCH_FACTOR));
 		settings.setMinReverseMatchFactor(INSTANCE().getFloat(P_MIN_REVERSE_MATCH_FACTOR, DEF_MIN_REVERSE_MATCH_FACTOR));
-		//
+
 		return settings;
 	}
 
@@ -173,7 +173,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		settings.setTimeoutInMinutes(INSTANCE().getInteger(P_TIMEOUT_IN_MINUTES, DEF_TIMEOUT_IN_MINUTES));
 		settings.setMinMatchFactor(INSTANCE().getFloat(P_MIN_MATCH_FACTOR, DEF_MIN_MATCH_FACTOR));
 		settings.setMinReverseMatchFactor(INSTANCE().getFloat(P_MIN_REVERSE_MATCH_FACTOR, DEF_MIN_REVERSE_MATCH_FACTOR));
-		//
+
 		return settings;
 	}
 
@@ -183,7 +183,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		settings.setNistFolder(PreferenceSupplier.getNistInstallationFolder());
 		settings.setUseOptimizedMassSpectrum(INSTANCE().getBoolean(P_USE_OPTIMIZED_MASS_SPECTRUM, DEF_USE_OPTIMIZED_MASS_SPECTRUM));
 		settings.setWaitInSeconds(INSTANCE().getInteger(P_WAIT_IN_SECONDS, DEF_WAIT_IN_SECONDS));
-		//
+
 		return settings;
 	}
 

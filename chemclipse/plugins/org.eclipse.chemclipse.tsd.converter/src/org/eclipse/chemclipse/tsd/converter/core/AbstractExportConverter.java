@@ -34,7 +34,7 @@ public abstract class AbstractExportConverter extends AbstractChromatogramExport
 		} catch(Exception e) {
 			processingInfo.addErrorMessage(DESCRIPTION, "Failed to export the chromatogram to file: " + file);
 		}
-		//
+
 		return processingInfo;
 	}
 }

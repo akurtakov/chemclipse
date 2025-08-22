@@ -48,10 +48,10 @@ public class ScanTableUI extends ExtendedTableViewer {
 	private EnumMap<DataType, ITableLabelProvider> labelProviderMap;
 	private EnumMap<DataType, ViewerComparator> viewerComparatorMap;
 	private EnumMap<DataType, IContentProvider> contentProviderMap;
-	//
+
 	private ScanSignalListFilter scanSignalListFilter;
 	private IScan scan = null;
-	//
+
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
 	public ScanTableUI(Composite parent, int style) {
@@ -87,7 +87,7 @@ public class ScanTableUI extends ExtendedTableViewer {
 			 */
 			super.setInput(null); // Can only enable the hash look up before input has been set
 			IScanMSD optimizedScanMSD = scanMSD.getOptimizedMassSpectrum();
-			//
+
 			List<IIon> ions;
 			if(optimizedScanMSD != null) {
 				ions = optimizedScanMSD.getIons();
@@ -95,7 +95,7 @@ public class ScanTableUI extends ExtendedTableViewer {
 				ions = scanMSD.getIons();
 			}
 			int size = ions.size();
-			//
+
 			DataType dataType = DataType.MSD_NOMINAL;
 			if(scanMSD.isTandemMS()) {
 				dataType = DataType.MSD_TANDEM;
@@ -104,7 +104,7 @@ public class ScanTableUI extends ExtendedTableViewer {
 					dataType = DataType.MSD_HIGHRES;
 				}
 			}
-			//
+
 			setLabelAndContentProviders(dataType);
 			super.setInput(ions);
 			setItemCount(size);
@@ -145,7 +145,7 @@ public class ScanTableUI extends ExtendedTableViewer {
 		setComparator(null);
 		setContentProvider(new ArrayContentProvider());
 		setLabelProvider(getTableLabelProvider(DataType.NONE));
-		//
+
 		String[] titles = getTitles(dataType);
 		int[] bounds = getBounds(dataType);
 		createColumns(titles, bounds);
@@ -155,10 +155,10 @@ public class ScanTableUI extends ExtendedTableViewer {
 		ITableLabelProvider labelProvider = getTableLabelProvider(dataType);
 		setLabelProvider(labelProvider);
 		if(labelProvider instanceof ScanLabelProvider scanLabelProvider) {
-			//
+
 			double minIntensity = 0.0f;
 			double maxIntensity = 0.0f;
-			//
+
 			if(scan instanceof IScanCSD) {
 				float intensity = scan.getTotalSignal();
 				if(intensity >= 0) {
@@ -178,10 +178,10 @@ public class ScanTableUI extends ExtendedTableViewer {
 				minIntensity = scanVSD.getProcessedSignals().stream().mapToDouble(ISignalVSD::getIntensity).min().getAsDouble();
 				maxIntensity = scanVSD.getProcessedSignals().stream().mapToDouble(ISignalVSD::getIntensity).max().getAsDouble();
 			}
-			//
+
 			scanLabelProvider.setTotalIntensity(minIntensity, maxIntensity);
 		}
-		//
+
 		IContentProvider contentProvider = getContentProvider(dataType);
 		if(useVirtualTableSettings(scan, dataType)) {
 			/*
@@ -199,7 +199,7 @@ public class ScanTableUI extends ExtendedTableViewer {
 			ViewerComparator viewerComparator = getViewerComparator(dataType);
 			setComparator(viewerComparator);
 		}
-		//
+
 		scanSignalListFilter = new ScanSignalListFilter();
 		setFilters(scanSignalListFilter);
 		setEditingSupport();

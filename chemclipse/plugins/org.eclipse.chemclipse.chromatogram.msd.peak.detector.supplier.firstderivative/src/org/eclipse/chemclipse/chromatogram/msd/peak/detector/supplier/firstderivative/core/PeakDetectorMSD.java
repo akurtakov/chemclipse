@@ -148,7 +148,7 @@ public class PeakDetectorMSD extends BasePeakDetector implements IPeakDetectorMS
 			Threshold threshold = peakDetectorSettings.getThreshold();
 			int windowSize = peakDetectorSettings.getMovingAverageWindowSize();
 			List<IRawPeak> rawPeaks = new ArrayList<>();
-			//
+
 			if(noiseSegments != null && !noiseSegments.isEmpty()) {
 				/*
 				 * Initial retention time range before running the detection using
@@ -227,7 +227,7 @@ public class PeakDetectorMSD extends BasePeakDetector implements IPeakDetectorMS
 		Set<Integer> traces = ions.getIonsNominal().stream().map(e -> e.intValue()).collect(Collectors.toSet());
 		DetectorType detectorType = peakDetectorSettings.getDetectorType();
 		boolean optimizeBaseline = peakDetectorSettings.isOptimizeBaseline();
-		//
+
 		for(IRawPeak rawPeak : rawPeaks) {
 			try {
 				/*
@@ -265,7 +265,7 @@ public class PeakDetectorMSD extends BasePeakDetector implements IPeakDetectorMS
 				logger.error(e);
 			}
 		}
-		//
+
 		chromatogram.setDirty(true);
 		return peaks;
 	}
@@ -362,7 +362,7 @@ public class PeakDetectorMSD extends BasePeakDetector implements IPeakDetectorMS
 		 */
 		int stopScanOptimized = optimizeRightBaseline(chromatogram, startScan, centerScan, stopScan, ions);
 		int startScanOptimized = optimizeLeftBaseline(chromatogram, startScan, centerScan, stopScanOptimized, ions);
-		//
+
 		return new ScanRange(startScanOptimized, stopScanOptimized);
 	}
 
@@ -391,7 +391,7 @@ public class PeakDetectorMSD extends BasePeakDetector implements IPeakDetectorMS
 				stopScanOptimized = i;
 			}
 		}
-		//
+
 		return stopScanOptimized;
 	}
 
@@ -417,7 +417,7 @@ public class PeakDetectorMSD extends BasePeakDetector implements IPeakDetectorMS
 				backgroundEquation = Equations.createLinearEquation(p1, p2);
 			}
 		}
-		//
+
 		return startScanOptimized;
 	}
 

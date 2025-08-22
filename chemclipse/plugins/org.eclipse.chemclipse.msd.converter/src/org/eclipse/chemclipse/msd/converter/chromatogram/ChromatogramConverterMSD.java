@@ -56,7 +56,7 @@ public final class ChromatogramConverterMSD extends AbstractChromatogramConverte
 		if(instance == null) {
 			instance = new ChromatogramConverterMSD();
 		}
-		//
+
 		return instance;
 	}
 
@@ -92,7 +92,7 @@ public final class ChromatogramConverterMSD extends AbstractChromatogramConverte
 				directory = file;
 			}
 		}
-		//
+
 		return directory;
 	}
 
@@ -108,7 +108,7 @@ public final class ChromatogramConverterMSD extends AbstractChromatogramConverte
 				}
 			}
 		}
-		//
+
 		return null;
 	}
 
@@ -117,7 +117,7 @@ public final class ChromatogramConverterMSD extends AbstractChromatogramConverte
 		if(PreferenceSupplier.isParseRetentionIndexDataMassLib()) {
 			String fileName = PreferenceSupplier.isUseChromatogramNameMassLib() ? chromatogramMSD.getName() : PreferenceSupplier.getDefaultNameMassLib();
 			File file = getFile(directory, fileName, ".inf");
-			//
+
 			if(file != null) {
 				MassLibConverter massLibConverter = new MassLibConverter();
 				try {
@@ -136,13 +136,13 @@ public final class ChromatogramConverterMSD extends AbstractChromatogramConverte
 		if(PreferenceSupplier.isParseTargetDataMassLib()) {
 			String fileName = PreferenceSupplier.isUseChromatogramNameMassLib() ? chromatogramMSD.getName() : PreferenceSupplier.getDefaultNameMassLib();
 			File file = getFile(directory, fileName, ".inf");
-			//
+
 			if(file != null) {
 				MassLibConverter massLibConverter = new MassLibConverter();
 				LibraryInformationSupport libraryInformationSupport = new LibraryInformationSupport();
 				String referenceIdentifierMarker = PreferenceSupplier.getReferenceIdentifierMarker();
 				String referenceIdentifierPrefix = PreferenceSupplier.getReferenceIdentifierPrefix();
-				//
+
 				try {
 					IProcessingInfo<Map<Integer, String>> processingInfo = massLibConverter.parseTargets(file);
 					Map<Integer, String> targets = processingInfo.getProcessingResult();
@@ -168,7 +168,7 @@ public final class ChromatogramConverterMSD extends AbstractChromatogramConverte
 		if(PreferenceSupplier.isParseRetentionIndexDataAMDIS()) {
 			String fileName = PreferenceSupplier.isUseChromatogramNameAMDIS() ? chromatogramMSD.getName() : PreferenceSupplier.getDefaultNameAMDIS();
 			File file = getFile(directory, fileName, ".cal");
-			//
+
 			if(file != null) {
 				try {
 					AMDISConverter amdisConverter = new AMDISConverter();

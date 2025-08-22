@@ -68,12 +68,12 @@ public class ChromatogramWriter extends AbstractChromatogramWriter implements IC
 			try {
 				List<IChromatogramPeakMSD> chromatogramPeaks = new ArrayList<>(chromatogram.getPeaks());
 				Collections.sort(chromatogramPeaks, chromatogramPeakComparator);
-				//
+
 				for(IChromatogramPeakMSD chromatogramPeak : chromatogramPeaks) {
 					IPeakMassSpectrum peakMassSpectrum = chromatogramPeak.getExtractedMassSpectrum();
 					float retentionIndex = peakMassSpectrum.getRetentionIndex();
 					List<IIdentificationTarget> peakTargets = IIdentificationTarget.getTargetsSorted(chromatogramPeak.getTargets(), retentionIndex);
-					//
+
 					List<String> targetValues = new ArrayList<>();
 					targetValues.add(decimalFormat.format(peakMassSpectrum.getLowestIon().getIon())); // mzLo
 					targetValues.add(decimalFormat.format(peakMassSpectrum.getHighestIon().getIon())); // mzHi

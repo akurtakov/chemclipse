@@ -23,12 +23,12 @@ public class ChromatogramListLabelProvider extends AbstractChemClipseLabelProvid
 
 	public static final String NAME = "Name";
 	public static final String PATH = "Path";
-	//
+
 	public static String[] TITLES = {//
 			NAME, //
 			PATH //
 	};
-	//
+
 	public static int[] BOUNDS = {//
 			250, //
 			300 //

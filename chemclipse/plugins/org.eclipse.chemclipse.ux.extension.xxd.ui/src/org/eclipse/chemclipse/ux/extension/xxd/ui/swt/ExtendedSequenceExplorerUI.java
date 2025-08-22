@@ -59,12 +59,12 @@ import org.eclipse.swt.widgets.Table;
 public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPartUI {
 
 	private static final Logger logger = Logger.getLogger(ExtendedSequenceExplorerUI.class);
-	//
+
 	private Composite toolbarSearch;
 	private ComboViewer rootFolderComboViewer;
 	private ComboViewer subFolderComboViewer;
 	private SequenceFilesUI sequenceFilesUI;
-	//
+
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 	private ISupplierEditorSupport supplierEditorSupport = new SupplierEditorSupport(DataType.SEQ, () -> Activator.getDefault().getEclipseContext());
 
@@ -85,11 +85,11 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 
 		setLayout(new GridLayout(1, true));
 		setBackground(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
-		//
+
 		createToolbarMain(this);
 		toolbarSearch = createToolbarSearch(this);
 		createSequenceSelection(this);
-		//
+
 		PartSupport.setCompositeVisibility(toolbarSearch, false);
 		applySettings();
 	}
@@ -101,7 +101,7 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(3, false));
-		//
+
 		createButtonToggleToolbarSearch(composite);
 		createResetButton(composite);
 		createSettingsButton(composite);
@@ -122,7 +122,7 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 				button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SEARCH, IApplicationImageProvider.SIZE_16x16, visible));
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -137,7 +137,6 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				//
 			}
 		});
 	}
@@ -166,7 +165,7 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 				sequenceFilesUI.setSearchText(searchText, caseSensitive);
 			}
 		});
-		//
+
 		return searchSupportUI;
 	}
 
@@ -175,7 +174,7 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		composite.setLayout(new GridLayout(2, false));
-		//
+
 		rootFolderComboViewer = createRootFolderComboViewer(composite);
 		createRootFolderButton(composite);
 		subFolderComboViewer = createSubFolderComboViewer(composite);
@@ -199,7 +198,7 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select a folder.");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		combo.addSelectionListener(new SelectionAdapter() {
@@ -219,7 +218,7 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 				}
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -246,7 +245,7 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -266,7 +265,7 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select a sub folder.");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = 2;
@@ -283,7 +282,7 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 				}
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -294,7 +293,7 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 		gridData.horizontalSpan = 2;
 		Table table = sequenceFilesUI.getTable();
 		table.setLayoutData(gridData);
-		//
+
 		table.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -306,7 +305,7 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 				}
 			}
 		});
-		//
+
 		return sequenceFilesUI;
 	}
 
@@ -334,7 +333,7 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -355,12 +354,12 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 
 		Collections.sort(files);
 		rootFolderComboViewer.setInput(files);
-		//
+
 		if(!files.isEmpty()) {
 			int index = getSelectedDirectoryIndex(files, preferenceStore.getString(PreferenceSupplier.P_SEQUENCE_EXPLORER_PATH_PARENT_FOLDER));
 			File file = files.get(index);
 			rootFolderComboViewer.getCombo().select(index);
-			//
+
 			List<File> subfiles = getDirectories(file);
 			setSubFolderContent(subfiles);
 		}
@@ -370,7 +369,7 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 
 		Collections.sort(files);
 		subFolderComboViewer.setInput(files);
-		//
+
 		if(!files.isEmpty()) {
 			int index = getSelectedDirectoryIndex(files, preferenceStore.getString(PreferenceSupplier.P_SEQUENCE_EXPLORER_PATH_SUB_FOLDER));
 			File file = files.get(index);
@@ -419,7 +418,7 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 			List<File> files = getDirectories(file);
 			setRootFolderContent(files);
 		}
-		//
+
 		if(preferenceStore.getBoolean(PreferenceSupplier.P_SEQUENCE_EXPLORER_USE_SUBFOLDER)) {
 			subFolderComboViewer.getCombo().setEnabled(true);
 		} else {

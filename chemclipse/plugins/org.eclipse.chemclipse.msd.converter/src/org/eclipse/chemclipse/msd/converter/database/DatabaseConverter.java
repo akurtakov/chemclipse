@@ -149,7 +149,7 @@ public class DatabaseConverter {
 			logger.info(e);
 			processingInfo = getNoImportConverterAvailableProcessingInfo(file);
 		}
-		//
+
 		return processingInfo;
 	}
 

@@ -73,7 +73,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 		for(IVariable variable : variables) {
 			features.add(new Feature(variable));
 		}
-		//
+
 		for(int i = 0; i < samples.size(); i++) {
 			if(samples.get(i).isSelected()) {
 				ISample sample = samples.get(i);
@@ -84,7 +84,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 				}
 			}
 		}
-		//
+
 		evaluationPCA.setFeatureDataMatrix(new FeatureDataMatrix(sampleNames, groupNames, features));
 	}
 
@@ -114,7 +114,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 				numSelected++;
 			}
 		}
-		//
+
 		final Set<String> classifications = samples.getSamples().stream().map(s -> s.getClassification()).distinct().collect(Collectors.toList()).stream().limit(2).collect(Collectors.toSet());
 		for(S sample : samples.getSamples()) {
 			double[] selectedSampleData = null;
@@ -131,12 +131,12 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 				selectedSamples.put(sample, selectedSampleData);
 			}
 		}
-		//
+
 		if(algorithm.equals(Algorithm.OPLS)) {
 			Map<S, double[]> classificationSelected = selectedSamples.entrySet().stream().filter(e -> classifications.contains(e.getKey().getClassification())).collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
 			return classificationSelected;
 		}
-		//
+
 		return selectedSamples;
 	}
 
@@ -145,14 +145,14 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 		List<V> variables = samples.getVariables();
 		boolean[] selectedVariables = new boolean[variables.size()];
 		Arrays.fill(selectedVariables, true);
-		//
+
 		for(int i = 0; i < selectedVariables.length; i++) {
 			/*
 			 * Variable
 			 */
 			IVariable variable = variables.get(i);
 			variable.setSelected(true);
-			//
+
 			if(isVariableSelected(variable, variablesSelectionMap)) {
 				if(settings.isRemoveUselessVariables()) {
 					if(isInvalidVariable(samples, i)) {
@@ -165,7 +165,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 				variable.setSelected(false);
 			}
 		}
-		//
+
 		return selectedVariables;
 	}
 
@@ -184,7 +184,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 			double[] loadingVector = principalComponentAnalysis.getLoadingVector(principalComponent);
 			loadingVectors.add(loadingVector);
 		}
-		//
+
 		return loadingVectors;
 	}
 
@@ -195,7 +195,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 		for(int i = 0; i < numberOfPrincipalComponents; i++) {
 			explainedVariances[i] = 100.0 / summedVariance * principalComponentAnalysis.getExplainedVariance(i);
 		}
-		//
+
 		return explainedVariances;
 	}
 
@@ -207,7 +207,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 			cumulativeExplainedVariances[i] = cumVarTemp + explainedVariances[i];
 			cumVarTemp = cumulativeExplainedVariances[i];
 		}
-		//
+
 		return cumulativeExplainedVariances;
 	}
 
@@ -217,7 +217,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 		if(it.hasNext()) {
 			return it.next().getValue().length;
 		}
-		//
+
 		return -1;
 	}
 
@@ -255,7 +255,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 				principalComponentAnalysis.addObservation(entry.getValue(), entry.getKey(), entry.getKey().getGroupName(), entry.getKey().getClassification());
 			}
 		}
-		//
+
 		return principalComponentAnalysis;
 	}
 
@@ -274,7 +274,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 			pcaResult.setSampleData(sampleData);
 			resultsList.add(pcaResult);
 		}
-		//
+
 		pcaResults.getPcaResultList().clear();
 		pcaResults.getPcaResultList().addAll(resultsList);
 	}
@@ -306,7 +306,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 		for(IVariable variable : templateVariables) {
 			variablesSelectionMap.put(variable.getValue(), variable.isSelected());
 		}
-		//
+
 		return variablesSelectionMap;
 	}
 
@@ -315,7 +315,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 		if(variable.isSelected()) {
 			return variablesSelectionMap.getOrDefault(variable.getValue(), true);
 		}
-		//
+
 		return false;
 	}
 }

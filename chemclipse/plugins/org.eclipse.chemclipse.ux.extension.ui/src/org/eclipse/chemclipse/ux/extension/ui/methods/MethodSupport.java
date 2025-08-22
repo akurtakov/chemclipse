@@ -58,7 +58,7 @@ public class MethodSupport {
 				MethodParameters methodParameters = ResumeMethodSupport.selectMethodParameters(shell, processMethod);
 				processMethod.setActiveProfile(methodParameters.getProfile());
 				processMethod.setResumeIndex(methodParameters.getResumeIndex());
-				//
+
 				ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
 				dialog.run(true, false, monitor -> methodListener.execute(processMethod, monitor));
 			} catch(InvocationTargetException e) {

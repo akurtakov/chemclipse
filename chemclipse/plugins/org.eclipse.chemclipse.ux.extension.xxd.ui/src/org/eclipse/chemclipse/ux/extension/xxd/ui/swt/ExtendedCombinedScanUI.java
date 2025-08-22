@@ -72,11 +72,11 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI {
 
 	private static final Logger logger = Logger.getLogger(ExtendedCombinedScanUI.class);
-	//
+
 	private static final int INDEX_CHART = 0;
 	private static final int INDEX_TABLE = 1;
 	private static final int INDEX_TARGETS = 2;
-	//
+
 	private Button buttonToolbarInfo;
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private TabFolder tabFolder;
@@ -93,7 +93,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 	private IChromatogramSelection chromatogramSelection = null;
 	private IScan combinedScan = null;
 	private boolean locked = false;
-	//
+
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish();
 
 	public ExtendedCombinedScanUI(Composite parent, int style) {
@@ -119,7 +119,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 		if(!locked) {
 			chromatogramSelection = null;
 			combinedScan = null;
-			//
+
 			CalculationType calculationType = PreferenceSupplierModelMSD.getCalculationType();
 			if(object instanceof IChromatogramSelectionMSD chromatogramSelectionMSD) {
 				this.chromatogramSelection = chromatogramSelectionMSD;
@@ -130,7 +130,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 				this.chromatogramSelection = chromatogramSelectionVSD;
 				combinedScan = FilterSupportVSD.getCombinedSpectrum(chromatogramSelectionVSD, false, calculationType);
 			}
-			//
+
 			toolbarInfo.get().setText(getCombinedRangeInfo(object));
 			scanIdentifierUI.setInput(combinedScan);
 			updateScan();
@@ -140,11 +140,11 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createTabFolderSection(this);
-		//
+
 		initialize();
 	}
 
@@ -163,7 +163,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		composite.setLayout(new GridLayout(8, false));
-		//
+
 		labelEdit = createInfoLabelEdit(composite);
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 		buttonLocked = createButtonLocked(composite);
@@ -178,7 +178,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -187,7 +187,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		composite.setLayout(new GridLayout(1, true));
-		//
+
 		tabFolder = new TabFolder(composite, SWT.BOTTOM);
 		tabFolder.setBackground(getDisplay().getSystemColor(SWT.COLOR_LIST_BACKGROUND));
 		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -199,7 +199,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 				updateScan();
 			}
 		});
-		//
+
 		createScanChart(tabFolder);
 		createScanTable(tabFolder);
 		createTargetsTable(tabFolder);
@@ -212,7 +212,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 		Composite composite = new Composite(tabFolder, SWT.NONE);
 		composite.setLayout(new GridLayout(1, true));
 		tabItem.setControl(composite);
-		//
+
 		scanChartUI = new ScanChartUI(composite, SWT.BORDER);
 		scanChartUI.setLayoutData(new GridData(GridData.FILL_BOTH));
 	}
@@ -225,7 +225,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 		composite.setBackground(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 		composite.setLayout(new GridLayout(1, true));
 		tabItem.setControl(composite);
-		//
+
 		scanTableUI = new ScanTableUI(composite, SWT.VIRTUAL | SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		scanTableUI.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
 	}
@@ -238,7 +238,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 		composite.setBackground(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 		composite.setLayout(new GridLayout(1, true));
 		tabItem.setControl(composite);
-		//
+
 		TargetsListUI targetsListUI = new TargetsListUI(composite, SWT.BORDER);
 		targetsListUI.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
 		targetsListUI.getControl().addMouseListener(new MouseAdapter() {
@@ -249,7 +249,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 				propagateTarget(e.display);
 			}
 		});
-		//
+
 		tableViewer.set(targetsListUI);
 	}
 
@@ -349,7 +349,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 				}
 			}
 		});
-		//
+
 		return scanIdentifierUI;
 	}
 
@@ -391,7 +391,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 
 		PreferenceSupplierModelMSD.setSessionSubtractMassSpectrum(scanMSD);
 		PreferenceSupplierModelMSD.storeSessionSubtractMassSpectrum();
-		//
+
 		if(display != null) {
 			fireUpdateEvent(display);
 		}
@@ -462,7 +462,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 				}
 			}
 		}
-		//
+
 		return preferencePages;
 	}
 

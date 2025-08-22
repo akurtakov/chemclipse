@@ -16,7 +16,7 @@ public abstract class AbstractScanSignalWSD implements IScanSignalWSD {
 
 	private static final long serialVersionUID = -1057079378330160588L;
 	private static final int MAX_PRECISION = 6;
-	//
+
 	private float wavelength;
 	private float abundance;
 

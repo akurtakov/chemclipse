@@ -47,7 +47,7 @@ public class ChromatogramLengthModifier implements IRunnableWithProgress {
 				chromatogramSelection.setSelectedPeak(null);
 				chromatogramSelection.setSelectedScan(null);
 				chromatogramSelection.setSelectedIdentifiedScan(null);
-				//
+
 				chromatogram.getBaselineModel().removeBaseline();
 				chromatogram.removeAllBackgroundIntegrationEntries();
 				chromatogram.removeAllChromatogramIntegrationEntries();
@@ -59,7 +59,7 @@ public class ChromatogramLengthModifier implements IRunnableWithProgress {
 				 */
 				float retentionTimeRange = chromatogramLength - scanDelay;
 				int scanInterval = Math.round(retentionTimeRange / scanRange);
-				//
+
 				chromatogram.setScanDelay(scanDelay);
 				chromatogram.setScanInterval(scanInterval);
 				chromatogram.recalculateRetentionTimes();
@@ -70,7 +70,7 @@ public class ChromatogramLengthModifier implements IRunnableWithProgress {
 				if(chromatogramSelection.getStartRetentionTime() < startRetentionTime) {
 					chromatogramSelection.setStartRetentionTime(startRetentionTime);
 				}
-				//
+
 				int stopRetentionTime = chromatogram.getStopRetentionTime();
 				if(chromatogramSelection.getStopRetentionTime() > stopRetentionTime) {
 					chromatogramSelection.setStopRetentionTime(stopRetentionTime);

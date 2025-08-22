@@ -40,10 +40,10 @@ public class ProcessorToolbarUI extends Composite {
 	private DataCategory dataCategory = DataCategory.AUTO_DETECT;
 	private List<Processor> processors = new ArrayList<>();
 	private List<Button> buttons = new ArrayList<>();
-	//
+
 	private IProcessSupplierContext processSupplierContext = new ProcessTypeSupport();
 	private PreferencesProcessSupport preferencesProcessSupport = new PreferencesProcessSupport(DataCategory.AUTO_DETECT);
-	//
+
 	private Composite control;
 
 	public ProcessorToolbarUI(Composite parent, int style) {
@@ -56,7 +56,7 @@ public class ProcessorToolbarUI extends Composite {
 
 		this.dataCategory = dataCategory;
 		preferencesProcessSupport.setDataCategory(dataCategory);
-		//
+
 		if(this.isVisible()) {
 			updateInput();
 		}
@@ -71,7 +71,7 @@ public class ProcessorToolbarUI extends Composite {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		GridLayout gridLayout = new GridLayout(1, true);
@@ -79,9 +79,9 @@ public class ProcessorToolbarUI extends Composite {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginWidth = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		createToolbarMain(composite);
-		//
+
 		initialize();
 	}
 
@@ -135,7 +135,7 @@ public class ProcessorToolbarUI extends Composite {
 				buttons.add(createButton(parent, processor, executionListener, processSupplierContext));
 			}
 		}
-		//
+
 		updateLayout(parent);
 	}
 
@@ -159,7 +159,7 @@ public class ProcessorToolbarUI extends Composite {
 		if(dataCategory != null) {
 			return processor.getProcessSupplier().getSupportedDataTypes().contains(dataCategory);
 		}
-		//
+
 		return false;
 	}
 
@@ -169,7 +169,7 @@ public class ProcessorToolbarUI extends Composite {
 		button.setText("");
 		button.setToolTipText(getToolTipText(processor));
 		button.setImage(ApplicationImageFactory.getInstance().getImage(processor.getImageFileName(), IApplicationImageProvider.SIZE_16x16));
-		//
+
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -178,7 +178,7 @@ public class ProcessorToolbarUI extends Composite {
 				executionListener.accept(processor.getProcessSupplier(), processSupplierContext);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -192,7 +192,7 @@ public class ProcessorToolbarUI extends Composite {
 			builder.append(": ");
 			builder.append(description);
 		}
-		//
+
 		return builder.toString();
 	}
 }

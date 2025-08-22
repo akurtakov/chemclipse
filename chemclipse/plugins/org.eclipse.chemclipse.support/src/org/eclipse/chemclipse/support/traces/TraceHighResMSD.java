@@ -45,7 +45,7 @@ public class TraceHighResMSD extends TraceGenericDelta {
 		if(getDelta() > 0 && getMZ() > 0) {
 			ppm = (int)Math.round((getDelta() / getMZ()) * ITrace.MILLION);
 		}
-		//
+
 		return ppm;
 	}
 
@@ -66,7 +66,7 @@ public class TraceHighResMSD extends TraceGenericDelta {
 			builder.append(ITrace.POSTFIX_UNIT_PPM);
 		}
 		builder.append(getScaleFactorAsString());
-		//
+
 		return builder.toString();
 	}
 }

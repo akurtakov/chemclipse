@@ -111,7 +111,7 @@ public class EditorUpdateSupport {
 						if(object instanceof IMassSpectrumEditor editor) {
 							selection = editor.getScanSelection();
 						}
-						//
+
 						if(selection != null) {
 							dataSelections.add(selection);
 						}
@@ -205,14 +205,14 @@ public class EditorUpdateSupport {
 	private List<IChromatogramSelection> getChromatogramSelectionsByPart(EPartService partService) {
 
 		List<IChromatogramSelection> chromatogramSelections = new ArrayList<>();
-		//
+
 		Collection<MPart> parts = partService.getParts();
 		if(parts != null) {
 			for(MPart part : parts) {
 				chromatogramSelections.addAll(extractChromatogramSelections(part.getObject()));
 			}
 		}
-		//
+
 		return chromatogramSelections;
 	}
 
@@ -237,7 +237,7 @@ public class EditorUpdateSupport {
 				}
 			}
 		}
-		//
+
 		return chromatogramSelections;
 	}
 
@@ -258,7 +258,7 @@ public class EditorUpdateSupport {
 	private List<IChromatogramSelection> extractChromatogramSelections(Object object) {
 
 		List<IChromatogramSelection> chromatogramSelections = new ArrayList<>();
-		//
+
 		if(object != null) {
 			/*
 			 * MSD/CSD/WSD or specialized Editor
@@ -279,7 +279,7 @@ public class EditorUpdateSupport {
 				}
 			}
 		}
-		//
+
 		return chromatogramSelections;
 	}
 }

@@ -24,7 +24,7 @@ public class VersionConstants {
 	public static final String FILTER_EXTENSION_CHROMATOGRAM = "*" + FILE_EXTENSION_CHROMATOGRAM;
 	public static final String FILTER_NAME_CHROMATOGRAM = DESCRIPTION_CHROMATOGRAM + " (*" + FILE_EXTENSION_CHROMATOGRAM + ")";
 	public static final String CONVERTER_ID_CHROMATOGRAM = "org.eclipse.chemclipse.xxd.converter.supplier.chemclipse";
-	//
+
 	public static final String DESCRIPTION_METHOD = "Open Chromatography Method";
 	public static final String FILE_EXTENSION_METHOD = ".ocm";
 	public static final String FILE_NAME_METHOD = DESCRIPTION_METHOD.replaceAll("\\s", "") + FILE_EXTENSION_METHOD;

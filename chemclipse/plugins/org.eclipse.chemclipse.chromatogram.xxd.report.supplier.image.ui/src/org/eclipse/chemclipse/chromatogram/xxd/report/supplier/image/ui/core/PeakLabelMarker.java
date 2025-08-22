@@ -32,13 +32,13 @@ public class PeakLabelMarker extends LabelMarker {
 	private List<String> getPeakLabels(List<? extends IPeak> peaks) {
 
 		List<String> labels = new ArrayList<>();
-		//
+
 		if(peaks != null) {
 			for(int i = 1; i <= peaks.size(); i++) {
 				labels.add("P" + i);
 			}
 		}
-		//
+
 		return labels;
 	}
 }

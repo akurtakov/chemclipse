@@ -33,10 +33,10 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 public class CalculationExecutor implements IRunnableWithProgress {
 
 	private static final Logger logger = Logger.getLogger(CalculationExecutor.class);
-	//
+
 	private ISamplesPCA<IVariable, ISample> samples = null;
 	private IEvaluation<IVariable, ISample, IResult> masterEvaluation = null;
-	//
+
 	private IEvaluation<IVariable, ISample, IResult> evaluation = null;
 
 	public CalculationExecutor(ISamplesPCA<IVariable, ISample> samples, IEvaluation<IVariable, ISample, IResult> masterEvaluation) {

@@ -43,7 +43,7 @@ public class PathResolver {
 		if("".equals(string) && string == null) {
 			throw new IOException();
 		}
-		//
+
 		IPath path = new Path(string);
 		URL url = FileLocator.find(bundle, path, null);
 		return FileLocator.resolve(url).getPath();

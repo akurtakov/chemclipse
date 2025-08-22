@@ -41,7 +41,7 @@ public class SynonymsListUI extends ExtendedTableViewer {
 	private void createColumns() {
 
 		createColumns(titles, bounds);
-		//
+
 		setLabelProvider(new SynonymsListLabelProvider());
 		setContentProvider(new SynonymsListContentProvider());
 		setComparator(new SynonymsListTableComparator());

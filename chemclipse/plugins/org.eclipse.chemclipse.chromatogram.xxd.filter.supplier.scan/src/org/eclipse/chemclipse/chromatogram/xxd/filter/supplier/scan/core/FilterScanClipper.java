@@ -58,7 +58,7 @@ public class FilterScanClipper extends AbstractChromatogramFilter {
 				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.EXCEPTION, e.getMessage()));
 			}
 		}
-		//
+
 		return processingInfo;
 	}
 
@@ -102,7 +102,7 @@ public class FilterScanClipper extends AbstractChromatogramFilter {
 			} catch(NumberFormatException e) {
 			}
 		}
-		//
+
 		return scanNumbers;
 	}
 }

@@ -54,7 +54,7 @@ public class MatlabParafacPeakExportConverter extends AbstractPeakExportConverte
 				IProcessingInfo<File> processingInfoWriter = peakWriter.write(file, peaks, append);
 				processingInfo.addMessages(processingInfoWriter);
 				processingInfo.setProcessingResult(processingInfoWriter.getProcessingResult());
-				//
+
 			} catch(FileNotFoundException e) {
 				logger.warn(e);
 				processingMessage = new ProcessingMessage(MessageType.ERROR, "Export Peaks", "The given file was not found: " + file.getAbsolutePath());

@@ -64,7 +64,7 @@ public class TraceTandemMSD extends AbstractTrace {
 		builder.append(" @");
 		builder.append(getCollisionEnergy());
 		builder.append(getScaleFactorAsString());
-		//
+
 		return builder.toString();
 	}
 }

@@ -17,9 +17,9 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.chemclipse.chromatogram.csd.identifier.ui.l10n.messages"; //$NON-NLS-1$
-	//
+
 	public static String csdIdentifierPreferences;
-	//
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}

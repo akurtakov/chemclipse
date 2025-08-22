@@ -96,7 +96,7 @@ public interface IProcessorPreferences<SettingType> {
 		} catch(IOException e) {
 			return null;
 		}
-		//
+
 		return defaultInstance;
 	}
 

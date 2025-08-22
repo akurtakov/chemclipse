@@ -70,7 +70,7 @@ public class FilterSupplier {
 		for(IIon ion : ions) {
 			intensityValues[counter++] = ion.getAbundance();
 		}
-		//
+
 		return intensityValues;
 	}
 }

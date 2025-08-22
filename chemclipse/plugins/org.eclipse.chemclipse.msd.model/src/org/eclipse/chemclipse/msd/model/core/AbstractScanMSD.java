@@ -61,12 +61,12 @@ public abstract class AbstractScanMSD extends AbstractScan implements IScanMSD {
 	 * Renew the serialVersionUID any time you have changed some fields or methods.
 	 */
 	private static final long serialVersionUID = -5705437012632871947L;
-	//
+
 	private static final Logger logger = Logger.getLogger(AbstractScanMSD.class);
-	//
+
 	private static final float NORMALIZATION_BASE = 100.0f;
 	private static final int LIMIT_SIM_MEASUREMENT = 10; // 10 m/z values
-	//
+
 	private boolean isNormalized = false;
 	private float normalizationBase = 0.0f;
 	private List<IIon> ionsList;
@@ -149,7 +149,7 @@ public abstract class AbstractScanMSD extends AbstractScan implements IScanMSD {
 			logger.warn("The ion must be not null.");
 			return this;
 		}
-		//
+
 		boolean addNew = true;
 		if(checkIntensityCollisions()) {
 			for(IIon actualIon : ionsList) {
@@ -237,7 +237,7 @@ public abstract class AbstractScanMSD extends AbstractScan implements IScanMSD {
 			// TODO maybe log warning?
 			return this;
 		}
-		//
+
 		List<IIon> ionsToRemove = new ArrayList<>();
 		/*
 		 * Get the list of ions for removal.
@@ -258,7 +258,7 @@ public abstract class AbstractScanMSD extends AbstractScan implements IScanMSD {
 			// TODO maybe log warning?
 			return this;
 		}
-		//
+
 		Set<Integer> nominalIons = markedIons.getIonsNominal();
 		MarkedTraceModus markedTraceModus = markedIons.getMarkedTraceModus();
 		switch(markedTraceModus) {
@@ -287,7 +287,7 @@ public abstract class AbstractScanMSD extends AbstractScan implements IScanMSD {
 				 */
 				break;
 		}
-		//
+
 		return this;
 	}
 
@@ -746,7 +746,7 @@ public abstract class AbstractScanMSD extends AbstractScan implements IScanMSD {
 			int counterHighRes = 0;
 			int size = ionsList.size();
 			int limit = 10;
-			//
+
 			if(size <= limit) {
 				/*
 				 * Check all
@@ -773,7 +773,7 @@ public abstract class AbstractScanMSD extends AbstractScan implements IScanMSD {
 					}
 				}
 			}
-			//
+
 			return counterHighRes > counterNominal;
 		}
 	}
@@ -930,7 +930,7 @@ public abstract class AbstractScanMSD extends AbstractScan implements IScanMSD {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 }

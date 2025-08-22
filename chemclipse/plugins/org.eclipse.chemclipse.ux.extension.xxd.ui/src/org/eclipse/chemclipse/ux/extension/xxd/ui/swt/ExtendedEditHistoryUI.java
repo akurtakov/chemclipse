@@ -64,7 +64,7 @@ public class ExtendedEditHistoryUI extends Composite implements IExtendedPartUI 
 	private AtomicReference<Button> buttonToolbarSearch = new AtomicReference<>();
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private AtomicReference<EditHistoryListUI> tableViewer = new AtomicReference<>();
-	//
+
 	private IEditHistory editHistory = null;
 
 	public ExtendedEditHistoryUI(Composite parent, int style) {
@@ -82,12 +82,12 @@ public class ExtendedEditHistoryUI extends Composite implements IExtendedPartUI 
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createToolbarSearch(this);
 		createEditHistoryListUI();
-		//
+
 		initialize();
 	}
 
@@ -104,7 +104,7 @@ public class ExtendedEditHistoryUI extends Composite implements IExtendedPartUI 
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(4, false));
-		//
+
 		createButtonToggleToolbarInfo(composite);
 		createButtonToggleToolbarSearch(composite);
 		createButtonMethod(composite);
@@ -143,7 +143,7 @@ public class ExtendedEditHistoryUI extends Composite implements IExtendedPartUI 
 					fileDialog.setFilterNames(new String[]{MethodConverter.FILTER_NAME});
 					fileDialog.setFileName(MethodConverter.FILE_NAME);
 					fileDialog.setFilterPath(MethodConverter.getUserMethodDirectory().getAbsolutePath());
-					//
+
 					String pathname = fileDialog.open();
 					if(pathname != null) {
 						File file = new File(pathname);
@@ -159,7 +159,7 @@ public class ExtendedEditHistoryUI extends Composite implements IExtendedPartUI 
 						processMethod.setOperator(UserManagement.getCurrentUser());
 						processMethod.setCategory(ExtensionMessages.process);
 						processMethod.setSupportResume(org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierMethods.isCreateMethodEnableResume());
-						//
+
 						for(ProcessSupplierEntry processSupplierEntry : processSupplierEntries) {
 							ProcessEntry processEntry = new ProcessEntry(processMethod);
 							processEntry.setProcessorId(processSupplierEntry.getId());
@@ -185,7 +185,7 @@ public class ExtendedEditHistoryUI extends Composite implements IExtendedPartUI 
 	private List<ProcessSupplierEntry> getProcessSupplierEntry() {
 
 		List<ProcessSupplierEntry> processSupplierEntries = new ArrayList<>();
-		//
+
 		if(editHistory != null) {
 			for(IEditInformation editInformation : editHistory) {
 				if(ProcessSupplierSupport.isProcessSupplierEntry(editInformation)) {
@@ -196,7 +196,7 @@ public class ExtendedEditHistoryUI extends Composite implements IExtendedPartUI 
 				}
 			}
 		}
-		//
+
 		return processSupplierEntries;
 	}
 
@@ -216,7 +216,7 @@ public class ExtendedEditHistoryUI extends Composite implements IExtendedPartUI 
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -232,7 +232,7 @@ public class ExtendedEditHistoryUI extends Composite implements IExtendedPartUI 
 				tableViewer.get().setSearchText(searchText, caseSensitive);
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -268,7 +268,7 @@ public class ExtendedEditHistoryUI extends Composite implements IExtendedPartUI 
 				}
 			}
 		}
-		//
+
 		return editHistoryFiltered;
 	}
 }

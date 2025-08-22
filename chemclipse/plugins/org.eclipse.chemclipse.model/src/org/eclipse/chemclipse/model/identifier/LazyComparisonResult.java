@@ -17,7 +17,7 @@ import java.util.function.DoubleSupplier;
 public class LazyComparisonResult extends AbstractComparisonResult {
 
 	private static final long serialVersionUID = 1L;
-	//
+
 	private DoubleSupplier matchFactorSupplier;
 	private DoubleSupplier reverseMatchFactorSupplier;
 	private DoubleSupplier matchFactorDirectSupplier;

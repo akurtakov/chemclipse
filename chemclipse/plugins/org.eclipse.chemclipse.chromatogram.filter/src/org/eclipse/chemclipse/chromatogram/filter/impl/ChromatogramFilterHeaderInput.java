@@ -39,7 +39,7 @@ public class ChromatogramFilterHeaderInput extends AbstractChromatogramFilter im
 				}
 			}
 		}
-		//
+
 		return processingInfo;
 	}
 

@@ -25,7 +25,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 	public static final String P_NOISE_CALCULATOR_ID = "noiseCalculatorId";
 	public static final String DEF_NOISE_CALCULATOR_ID = "org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.noise.dyson";
-	//
+
 	public static final String P_SEGMENT_WIDTH = "segmentWidth";
 	public static final String DEF_SEGMENT_WIDTH = "9";
 	public static final int MIN_SEGMENT_SIZE = 5;

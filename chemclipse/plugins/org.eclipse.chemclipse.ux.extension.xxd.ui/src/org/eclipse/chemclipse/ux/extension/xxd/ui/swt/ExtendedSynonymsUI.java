@@ -64,12 +64,12 @@ public class ExtendedSynonymsUI extends LibraryInformationComposite implements I
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createToolbarSearch(this);
 		createTableSection(this);
-		//
+
 		initialize();
 	}
 
@@ -77,7 +77,7 @@ public class ExtendedSynonymsUI extends LibraryInformationComposite implements I
 
 		initializeToolbarInfo();
 		enableToolbar(toolbarSearch, buttonToolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH, false);
-		//
+
 		applySettings();
 	}
 
@@ -88,7 +88,7 @@ public class ExtendedSynonymsUI extends LibraryInformationComposite implements I
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(3, false));
-		//
+
 		createButtonToolbarInfo(composite);
 		buttonToolbarSearch = createButtonToggleToolbar(composite, toolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH);
 		createButtonSettings(composite);
@@ -106,7 +106,7 @@ public class ExtendedSynonymsUI extends LibraryInformationComposite implements I
 				listControl.get().setSearchText(searchText, caseSensitive);
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -115,7 +115,7 @@ public class ExtendedSynonymsUI extends LibraryInformationComposite implements I
 		SynonymsListUI synonymsListUI = new SynonymsListUI(parent, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		Table table = synonymsListUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		ITableSettings tableSettings = synonymsListUI.getTableSettings();
 		tableSettings.addMenuEntry(new ITableMenuEntry() {
 
@@ -155,7 +155,7 @@ public class ExtendedSynonymsUI extends LibraryInformationComposite implements I
 				}
 			}
 		});
-		//
+
 		listControl.set(synonymsListUI);
 	}
 

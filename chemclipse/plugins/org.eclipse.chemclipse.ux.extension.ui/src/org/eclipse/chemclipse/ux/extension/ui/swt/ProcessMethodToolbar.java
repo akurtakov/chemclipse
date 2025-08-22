@@ -78,7 +78,7 @@ public class ProcessMethodToolbar extends ToolBar {
 	private ToolItem buttonClipboard;
 	private ToolItem buttonModifyDescription;
 	private ToolItem buttonModifySettings;
-	//
+
 	private ProcessMethod processMethod;
 	private StructuredViewer structuredViewer;
 	private IProcessSupplierContext processingSupport;
@@ -140,11 +140,11 @@ public class ProcessMethodToolbar extends ToolBar {
 
 		boolean isEditable = isEditable(processMethod);
 		buttonAdd.setEnabled(isEditable);
-		//
+
 		IStructuredSelection selection = structuredViewer.getStructuredSelection();
 		boolean canEdit = processMethod != null && !processMethod.isFinal();
 		boolean writeable = canEdit && !selection.isEmpty();
-		//
+
 		Iterator<?> iterator = selection.iterator();
 		while(iterator.hasNext() && writeable) {
 			Object object = iterator.next();
@@ -153,7 +153,7 @@ public class ProcessMethodToolbar extends ToolBar {
 				writeable = false;
 			}
 		}
-		//
+
 		boolean readOnly = processMethod != null && (processMethod.isReadOnly() || this.readOnly);
 		buttonCopy.setEnabled(writeable && !readOnly);
 		buttonRemove.setEnabled(writeable && !readOnly);
@@ -170,7 +170,7 @@ public class ProcessMethodToolbar extends ToolBar {
 		Clipboard clipboard = new Clipboard(display);
 		StringBuilder builder = new StringBuilder();
 		String lineDelimiter = OperatingSystemUtils.getLineDelimiter();
-		//
+
 		List<Object> objects = new ArrayList<>();
 		Object input = structuredViewer.getInput();
 		if(input instanceof ProcessMethod processMethod) {
@@ -204,7 +204,7 @@ public class ProcessMethodToolbar extends ToolBar {
 				builder.append(lineDelimiter);
 			}
 		}
-		//
+
 		Object[] data = new Object[]{builder.toString()};
 		TextTransfer textTransfer = TextTransfer.getInstance();
 		Transfer[] dataTypes = new Transfer[]{textTransfer};
@@ -217,7 +217,7 @@ public class ProcessMethodToolbar extends ToolBar {
 		if(preferences == null) {
 			return false;
 		}
-		//
+
 		if(preferences.getSupplier().getSettingsParser().getInputValues().isEmpty()) {
 			if(showHint) {
 				MessageDialog.openInformation(shell, "Settings", "This processor does not offer any options.");
@@ -227,7 +227,7 @@ public class ProcessMethodToolbar extends ToolBar {
 			 */
 			return true;
 		}
-		//
+
 		try {
 			return SettingsWizard.openEditPreferencesWizard(shell, preferences, false);
 		} catch(IOException e) {
@@ -265,7 +265,7 @@ public class ProcessMethodToolbar extends ToolBar {
 					container.removeProcessEntry(processEntry);
 				}
 			}
-			//
+
 			fireUpdate();
 			select(Collections.emptyList());
 		}
@@ -304,19 +304,19 @@ public class ProcessMethodToolbar extends ToolBar {
 		item.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ADD, IApplicationImageProvider.SIZE_16x16));
 		item.setToolTipText("Add a process method.");
 		final Menu menu = new Menu(toolBar.getShell(), SWT.POP_UP);
-		//
+
 		toolBar.addDisposeListener(e -> menu.dispose());
-		//
+
 		item.addListener(SWT.Selection, event -> {
 			if(event.detail == SWT.ARROW) {
 				Rectangle rectangle = item.getBounds();
 				Point point = new Point(rectangle.x, rectangle.y + rectangle.height);
 				point = toolBar.toDisplay(point);
-				//
+
 				for(MenuItem menuItem : menu.getItems()) {
 					menuItem.dispose();
 				}
-				//
+
 				Collection<IProcessMethod> userMethods = MethodConverter.getUserMethods();
 				for(IProcessMethod method : userMethods) {
 					MenuItem menuItem = new MenuItem(menu, SWT.NONE);
@@ -330,11 +330,11 @@ public class ProcessMethodToolbar extends ToolBar {
 						}
 					});
 				}
-				//
+
 				if(!userMethods.isEmpty()) {
 					new MenuItem(menu, SWT.SEPARATOR);
 				}
-				//
+
 				MenuItem loadItem = new MenuItem(menu, SWT.NONE);
 				loadItem.setText("Load from file...");
 				loadItem.addSelectionListener(new SelectionAdapter() {
@@ -347,7 +347,7 @@ public class ProcessMethodToolbar extends ToolBar {
 						fileDialog.setFileName(MethodConverter.FILE_NAME);
 						fileDialog.setFilterExtensions(new String[]{MethodConverter.FILTER_EXTENSION});
 						fileDialog.setFilterNames(new String[]{MethodConverter.FILTER_NAME});
-						//
+
 						String filePath = fileDialog.open();
 						if(filePath != null) {
 							File file = new File(filePath);
@@ -370,7 +370,7 @@ public class ProcessMethodToolbar extends ToolBar {
 							contextList.put(processSupplierContext, supplier.getName());
 						}
 					}
-					//
+
 					contextList.put(processingSupport, processMethod.getName());
 					Map<IProcessSupplierContext, IProcessEntry> map = ProcessingWizard.open(getShell(), contextList, dataCategories);
 					if(map != null) {
@@ -381,7 +381,7 @@ public class ProcessMethodToolbar extends ToolBar {
 							if(!edit) {
 								continue;
 							}
-							//
+
 							IProcessEntry newEntry;
 							if(supplierContext == processingSupport) {
 								// add to global context
@@ -390,7 +390,7 @@ public class ProcessMethodToolbar extends ToolBar {
 								// add to local context
 								newEntry = selectedEntry.addProcessEntry(editedEntry);
 							}
-							//
+
 							fireUpdate();
 							select(Collections.singletonList(newEntry));
 						}
@@ -398,7 +398,7 @@ public class ProcessMethodToolbar extends ToolBar {
 				}
 			}
 		});
-		//
+
 		return item;
 	}
 
@@ -415,7 +415,7 @@ public class ProcessMethodToolbar extends ToolBar {
 				deleteSelectedProcessEntries(toolBar.getShell());
 			}
 		});
-		//
+
 		return item;
 	}
 
@@ -459,11 +459,11 @@ public class ProcessMethodToolbar extends ToolBar {
 						}
 					}
 				}
-				//
+
 				fireUpdate();
 			}
 		});
-		//
+
 		return item;
 	}
 
@@ -480,7 +480,7 @@ public class ProcessMethodToolbar extends ToolBar {
 				moveProcessEntriesUp();
 			}
 		});
-		//
+
 		return item;
 	}
 
@@ -497,7 +497,7 @@ public class ProcessMethodToolbar extends ToolBar {
 				moveProcessEntriesDown();
 			}
 		});
-		//
+
 		return item;
 	}
 
@@ -514,7 +514,7 @@ public class ProcessMethodToolbar extends ToolBar {
 				copyToClipboard(e.display);
 			}
 		});
-		//
+
 		return item;
 	}
 
@@ -541,7 +541,7 @@ public class ProcessMethodToolbar extends ToolBar {
 							}
 							return null;
 						});
-						//
+
 						if(inputDialog.open() == Window.OK) {
 							String description = inputDialog.getValue().trim();
 							processEntry.setDescription(description);
@@ -551,7 +551,7 @@ public class ProcessMethodToolbar extends ToolBar {
 				}
 			}
 		});
-		//
+
 		return item;
 	}
 
@@ -574,7 +574,7 @@ public class ProcessMethodToolbar extends ToolBar {
 				}
 			}
 		});
-		//
+
 		return item;
 	}
 
@@ -583,7 +583,7 @@ public class ProcessMethodToolbar extends ToolBar {
 		if(method != null) {
 			List<IProcessEntry> copied = new ArrayList<>();
 			method.forEach(entry -> copied.add(processMethod.addProcessEntry(entry)));
-			//
+
 			fireUpdate();
 			select(copied);
 		}
@@ -625,7 +625,7 @@ public class ProcessMethodToolbar extends ToolBar {
 			}
 			offset++;
 		}
-		//
+
 		fireUpdate();
 		structuredViewer.setSelection(selection);
 	}
@@ -656,7 +656,7 @@ public class ProcessMethodToolbar extends ToolBar {
 			}
 			offset++;
 		}
-		//
+
 		fireUpdate();
 		structuredViewer.setSelection(selection);
 	}

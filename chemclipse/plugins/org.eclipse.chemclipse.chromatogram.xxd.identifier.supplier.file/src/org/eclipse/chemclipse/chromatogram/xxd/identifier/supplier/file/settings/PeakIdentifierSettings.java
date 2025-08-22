@@ -49,7 +49,7 @@ public class PeakIdentifierSettings extends AbstractPeakIdentifierSettingsMSD im
 	@JsonProperty(value = "Min. Reverse Match Factor", defaultValue = "80.0")
 	@FloatSettingsProperty(minValue = PreferenceSupplier.MIN_FACTOR, maxValue = PreferenceSupplier.MAX_FACTOR)
 	private float minReverseMatchFactor = 80.0f;
-	//
+
 	@JsonIgnore
 	private String alternateIdentifierId = "";
 	@JsonIgnore

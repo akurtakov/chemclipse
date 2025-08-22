@@ -79,7 +79,7 @@ public class PeakReader_0801 extends AbstractZipReader implements IPeakReader {
 
 		IPeaksMSD peaks = new PeaksMSD();
 		DataInputStream dataInputStream = getDataInputStream(zipFile, Format.FILE_PEAKS);
-		//
+
 		int numberOfPeaks = dataInputStream.readInt();
 		for(int i = 1; i <= numberOfPeaks; i++) {
 			try {
@@ -104,12 +104,12 @@ public class PeakReader_0801 extends AbstractZipReader implements IPeakReader {
 		String integratorDescription = readString(dataInputStream); // Integrator Description
 		String modelDescription = readString(dataInputStream); // Model Description
 		PeakType peakType = PeakType.valueOf(readString(dataInputStream)); // Peak Type
-		//
+
 		float startBackgroundAbundance = dataInputStream.readFloat(); // Start Background Abundance
 		float stopBackgroundAbundance = dataInputStream.readFloat(); // Stop Background Abundance
-		//
+
 		IPeakMassSpectrum peakMaximum = readPeakMassSpectrum(dataInputStream);
-		//
+
 		int numberOfRetentionTimes = dataInputStream.readInt(); // Number Retention Times
 		IPeakIntensityValues intensityValues = new PeakIntensityValues(Float.MAX_VALUE);
 		for(int i = 1; i <= numberOfRetentionTimes; i++) {
@@ -118,7 +118,7 @@ public class PeakReader_0801 extends AbstractZipReader implements IPeakReader {
 			intensityValues.addIntensityValue(retentionTime, relativeIntensity);
 		}
 		intensityValues.normalize();
-		//
+
 		IPeakModelMSD peakModel = new PeakModelMSD(peakMaximum, intensityValues, startBackgroundAbundance, stopBackgroundAbundance);
 		peakModel.setStrictModel(true); // Legacy
 		IPeakMSD peak = new PeakMSD(peakModel);
@@ -126,7 +126,7 @@ public class PeakReader_0801 extends AbstractZipReader implements IPeakReader {
 		peak.setIntegratorDescription(integratorDescription);
 		peak.setModelDescription(modelDescription);
 		peak.setPeakType(peakType);
-		//
+
 		List<IIntegrationEntry> integrationEntries = readIntegrationEntries(dataInputStream);
 		peak.setIntegratedArea(integrationEntries, integratorDescription);
 		/*
@@ -137,7 +137,7 @@ public class PeakReader_0801 extends AbstractZipReader implements IPeakReader {
 		 * Quantitation Results
 		 */
 		readPeakQuantitationEntries(dataInputStream, peak, monitor);
-		//
+
 		return peak;
 	}
 
@@ -184,18 +184,18 @@ public class PeakReader_0801 extends AbstractZipReader implements IPeakReader {
 
 		int numberOfPeakTargets = dataInputStream.readInt(); // Number Peak Targets
 		for(int i = 1; i <= numberOfPeakTargets; i++) {
-			//
+
 			String identifier = readString(dataInputStream); // Identifier
-			//
+
 			String casNumber = readString(dataInputStream); // CAS-Number
 			String comments = readString(dataInputStream); // Comments
 			String miscellaneous = readString(dataInputStream); // Miscellaneous
 			String name = readString(dataInputStream); // Name
-			//
+
 			float matchFactor = dataInputStream.readFloat(); // Match Factor
 			float reverseMatchFactor = dataInputStream.readFloat(); // Reverse Match Factor
 			float probability = dataInputStream.readFloat(); // Probability
-			//
+
 			IPeakLibraryInformation libraryInformation = new PeakLibraryInformation();
 			libraryInformation.setCasNumber(casNumber);
 			libraryInformation.setComments(comments);
@@ -216,7 +216,7 @@ public class PeakReader_0801 extends AbstractZipReader implements IPeakReader {
 
 		int numberOfQuantitationEntries = dataInputStream.readInt(); // Number Quantitation Entries
 		for(int i = 1; i <= numberOfQuantitationEntries; i++) {
-			//
+
 			String name = readString(dataInputStream); // Name
 			String chemicalClass = readString(dataInputStream); // Chemical Class
 			double concentration = dataInputStream.readDouble(); // Concentration
@@ -233,14 +233,14 @@ public class PeakReader_0801 extends AbstractZipReader implements IPeakReader {
 			if(isSignal) {
 				signal = dataInputStream.readDouble();
 			}
-			//
+
 			IQuantitationEntry quantitationEntry = new QuantitationEntry(name, concentration, concentrationUnit, area);
 			quantitationEntry.setSignal(signal);
 			quantitationEntry.setChemicalClass(chemicalClass);
 			quantitationEntry.setCalibrationMethod(calibrationMethod);
 			quantitationEntry.setUsedCrossZero(usedCrossZero);
 			quantitationEntry.setDescription(description);
-			//
+
 			peak.addQuantitationEntry(quantitationEntry);
 		}
 	}

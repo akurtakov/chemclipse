@@ -38,7 +38,7 @@ public class PeakDetectorVSD {
 	private static final String PEAK_DETECTOR_NAME = "peakDetectorName";
 	private static final String PEAK_DETECTOR = "peakDetector";
 	private static final String PEAK_DETECTOR_SETTINGS = "peakDetectorSettings";
-	//
+
 	private static final String NO_PEAK_DETECTOR_AVAILABLE = "There is no peak detector available.";
 
 	private PeakDetectorVSD() {

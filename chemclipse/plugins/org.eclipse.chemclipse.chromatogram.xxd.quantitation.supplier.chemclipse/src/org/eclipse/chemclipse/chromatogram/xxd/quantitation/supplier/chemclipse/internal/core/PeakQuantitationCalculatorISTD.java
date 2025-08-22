@@ -41,9 +41,9 @@ public class PeakQuantitationCalculatorISTD extends AbstractPeakQuantitationCalc
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 		List<? extends IPeak> internalStandardPeaks = getInternalStandardPeaks(chromatogram);
 		IPeak peakToQuantify = chromatogramSelection.getSelectedPeak();
-		//
+
 		quantifyPeak(internalStandardPeaks, peakToQuantify);
-		//
+
 		return processingInfo;
 	}
 
@@ -53,11 +53,11 @@ public class PeakQuantitationCalculatorISTD extends AbstractPeakQuantitationCalc
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 		List<? extends IPeak> internalStandardPeaks = getInternalStandardPeaks(chromatogram);
 		List<? extends IPeak> peaksToQuantify = getPeaksToQuantify(chromatogramSelection);
-		//
+
 		for(IPeak peakToQuantify : peaksToQuantify) {
 			quantifyPeak(internalStandardPeaks, peakToQuantify);
 		}
-		//
+
 		return processingInfo;
 	}
 
@@ -79,7 +79,7 @@ public class PeakQuantitationCalculatorISTD extends AbstractPeakQuantitationCalc
 		for(IPeak peakToQuantify : peaks) {
 			quantifyPeak(internalStandardPeaks, peakToQuantify);
 		}
-		//
+
 		return processingInfo;
 	}
 
@@ -100,7 +100,7 @@ public class PeakQuantitationCalculatorISTD extends AbstractPeakQuantitationCalc
 						String chemicalClass = internalStandard.getChemicalClass();
 						double integratedArea = peakToQuantify.getIntegratedArea();
 						double concentrationCalculated = ((concentration / peakAreaISTD) * integratedArea) * compensationFactor;
-						//
+
 						IQuantitationEntry quantitationEntryMSD = new QuantitationEntry(nameOfStandard, concentrationCalculated, concentrationUnit, integratedArea);
 						quantitationEntryMSD.setSignal(ISignal.TOTAL_INTENSITY);
 						quantitationEntryMSD.setCalibrationMethod(CalibrationMethod.ISTD.toString());
@@ -164,7 +164,7 @@ public class PeakQuantitationCalculatorISTD extends AbstractPeakQuantitationCalc
 				peaksToQuantify.add(peak);
 			}
 		}
-		//
+
 		return peaksToQuantify;
 	}
 }

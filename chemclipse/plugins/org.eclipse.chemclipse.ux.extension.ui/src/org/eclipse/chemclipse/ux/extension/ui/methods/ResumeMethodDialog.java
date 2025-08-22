@@ -46,7 +46,7 @@ public class ResumeMethodDialog extends TitleAreaDialog {
 	private AtomicReference<ComboViewer> comboViewerProfileControl = new AtomicReference<>();
 	private AtomicReference<ComboViewer> comboViewerResumeControl = new AtomicReference<>();
 	private AtomicReference<Label> labelResumeControl = new AtomicReference<>();
-	//
+
 	private String profile = ProcessEntryContainer.DEFAULT_PROFILE;
 	private int resumeIndex = 0;
 	private ProcessEntryContainer container;
@@ -94,16 +94,16 @@ public class ResumeMethodDialog extends TitleAreaDialog {
 		Composite composite = new Composite(control, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		composite.setLayout(new GridLayout(1, true));
-		//
+
 		createLabel(composite, ExtensionMessages.selectProfile);
 		createComboViewerProfile(composite);
 		createLabel(composite, ExtensionMessages.resumeFollowingEntryDefaultComplete);
 		createComboViewerResume(composite);
 		createLabelResume(composite);
 		createButtonResumeMethodOption(composite);
-		//
+
 		initialize();
-		//
+
 		return control;
 	}
 
@@ -134,7 +134,7 @@ public class ResumeMethodDialog extends TitleAreaDialog {
 
 		List<Object> processEntries = new ArrayList<>();
 		processEntries.add(ExtensionMessages.completeMethod);
-		//
+
 		if(container != null) {
 			for(IProcessEntry processEntry : container) {
 				processEntries.add(processEntry);
@@ -158,7 +158,7 @@ public class ResumeMethodDialog extends TitleAreaDialog {
 		Label label = new Label(parent, SWT.NONE);
 		label.setText(message);
 		label.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return label;
 	}
 
@@ -178,7 +178,7 @@ public class ResumeMethodDialog extends TitleAreaDialog {
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText(ExtensionMessages.selectProfile);
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
@@ -194,7 +194,7 @@ public class ResumeMethodDialog extends TitleAreaDialog {
 				}
 			}
 		});
-		//
+
 		comboViewerProfileControl.set(comboViewer);
 	}
 
@@ -216,7 +216,7 @@ public class ResumeMethodDialog extends TitleAreaDialog {
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText(ExtensionMessages.resumeFollowingEntryDefaultComplete);
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
@@ -236,7 +236,7 @@ public class ResumeMethodDialog extends TitleAreaDialog {
 				}
 			}
 		});
-		//
+
 		comboViewerResumeControl.set(comboViewer);
 	}
 
@@ -255,7 +255,7 @@ public class ResumeMethodDialog extends TitleAreaDialog {
 				PreferenceSupplierMethods.setShowResumeMethodDialog(!button.getSelection());
 			}
 		});
-		//
+
 		return button;
 	}
 }

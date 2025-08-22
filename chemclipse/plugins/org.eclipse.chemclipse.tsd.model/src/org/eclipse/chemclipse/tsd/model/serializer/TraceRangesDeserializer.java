@@ -27,7 +27,7 @@ public class TraceRangesDeserializer extends JsonDeserializer<TraceRanges> {
 
 		TraceRanges traceRanges = new TraceRanges();
 		traceRanges.load(jsonParser.getText());
-		//
+
 		return traceRanges;
 	}
 }

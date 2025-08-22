@@ -147,7 +147,7 @@ public abstract class AbstractActivatorUI extends AbstractUIPlugin {
 			MApplication application = eclipseContext.get(MApplication.class);
 			EModelService modelService = eclipseContext.get(EModelService.class);
 			EPartService partService = eclipseContext.get(EPartService.class);
-			//
+
 			if(application == null || modelService == null || partService == null || partSupport == null || perspectiveSupport == null) {
 				logger.warn(application == null ? "MApplication is null!" : "MApplication is set.");
 				logger.warn(modelService == null ? "EModelService is null!" : "EModelService is set.");
@@ -159,7 +159,7 @@ public abstract class AbstractActivatorUI extends AbstractUIPlugin {
 				logger.info("The context has been initialized successfully.");
 			}
 		}
-		//
+
 		return eclipseContext;
 	}
 

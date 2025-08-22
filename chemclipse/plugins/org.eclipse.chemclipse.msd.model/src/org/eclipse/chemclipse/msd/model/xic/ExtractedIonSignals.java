@@ -43,7 +43,7 @@ import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
 public class ExtractedIonSignals implements IExtractedIonSignals {
 
 	private static final Logger logger = Logger.getLogger(ExtractedIonSignals.class);
-	//
+
 	private List<IExtractedIonSignal> signals;
 	private int startIon = IExtractedIonSignal.ION_NOT_SET;
 	private int stopIon = IExtractedIonSignal.ION_NOT_SET;
@@ -179,11 +179,11 @@ public class ExtractedIonSignals implements IExtractedIonSignals {
 		int correction = startScan - 1;
 		scan -= correction;
 		int index = scan - 1;
-		//
+
 		if(index < 0 || index >= signals.size()) {
 			throw new NoExtractedIonSignalStoredException("The requested scan: " + scan + " is not available.");
 		}
-		//
+
 		return signals.get(index);
 	}
 

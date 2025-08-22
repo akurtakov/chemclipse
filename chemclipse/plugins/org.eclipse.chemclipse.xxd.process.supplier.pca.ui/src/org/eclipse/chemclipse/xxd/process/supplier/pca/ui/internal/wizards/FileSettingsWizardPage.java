@@ -48,10 +48,10 @@ import org.eclipse.swt.widgets.Text;
 public class FileSettingsWizardPage extends AbstractAnalysisWizardPage {
 
 	private static final Logger logger = Logger.getLogger(FileSettingsWizardPage.class);
-	//
+
 	private File file;
 	private Text textFile;
-	//
+
 	private Algorithm[] algorithms = Algorithm.values();
 
 	public FileSettingsWizardPage() {
@@ -71,22 +71,22 @@ public class FileSettingsWizardPage extends AbstractAnalysisWizardPage {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(3, false));
-		//
+
 		createLabel(composite, "Title:");
 		createTextTitle(composite, 2);
-		//
+
 		createLabel(composite, "Number of PCs:");
 		createSpinnerPrincipleComponents(composite);
-		//
+
 		createLabel(composite, "Algorithm:");
 		createComboViewerAlgorithm(composite);
-		//
+
 		createLabel(composite, "File Data Matrix:");
 		textFile = createTextFile(composite);
 		createButtonSelectFile(composite);
-		//
+
 		createButtonDemoFile(composite);
-		//
+
 		setControl(composite);
 	}
 
@@ -128,7 +128,7 @@ public class FileSettingsWizardPage extends AbstractAnalysisWizardPage {
 				analysisSettings.setNumberOfPrincipalComponents(spinner.getSelection());
 			}
 		});
-		//
+
 		return spinner;
 	}
 
@@ -148,7 +148,7 @@ public class FileSettingsWizardPage extends AbstractAnalysisWizardPage {
 				return null;
 			}
 		});
-		//
+
 		Combo combo = comboViewer.getCombo();
 		combo.setToolTipText("PCA Algorithm");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
@@ -165,9 +165,9 @@ public class FileSettingsWizardPage extends AbstractAnalysisWizardPage {
 				}
 			}
 		});
-		//
+
 		combo.select(getSelectedAlgorithmIndex());
-		//
+
 		return comboViewer;
 	}
 
@@ -177,13 +177,13 @@ public class FileSettingsWizardPage extends AbstractAnalysisWizardPage {
 		text.setText("");
 		text.setToolTipText("Path to data matrix file.");
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		if(file != null) {
 			text.setText(file.getAbsolutePath());
 		} else {
 			text.setText("");
 		}
-		//
+
 		return text;
 	}
 
@@ -241,14 +241,14 @@ public class FileSettingsWizardPage extends AbstractAnalysisWizardPage {
 					 * Demo File
 					 */
 					File file = new File(path);
-					//
+
 					try (PrintWriter printWriter = new PrintWriter(file)) {
 						PcaExtractionFileText.exportDemoContent(printWriter);
 						printWriter.flush();
 					} catch(Exception e1) {
 						logger.warn(e1);
 					}
-					//
+
 					if(file.exists()) {
 						PreferenceSupplier.setPathExportFile(fileDialog.getFilterPath());
 						textFile.setText(file.getAbsolutePath());

@@ -17,12 +17,12 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.chemclipse.pcr.model.l10n.messages"; //$NON-NLS-1$
-	//
+
 	public static String allSubsets;
 	public static String coordinate;
 	public static String sampleID;
 	public static String sampleCoordinate;
-	//
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}

@@ -73,7 +73,7 @@ public class ChromatogramWriterVersion110 extends AbstractChromatogramWriter imp
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 			Marshaller marshaller = jaxbContext.createMarshaller();
-			//
+
 			RunType run = new RunType();
 			SoftwareListType softwareList = XmlWriter110.createSoftwareList();
 			InstrumentConfigurationListType instrumentConfigurationList = createInstrumentConfigurationList(softwareList.getSoftware().get(0));
@@ -83,33 +83,33 @@ public class ChromatogramWriterVersion110 extends AbstractChromatogramWriter imp
 				run.setDefaultSourceFileRef(sourceFileList.getSourceFile().getFirst());
 			}
 			run.setId(chromatogram.getName());
-			//
+
 			DataProcessingListType dataProcessingList = createDataProcessingList(softwareList.getSoftware().get(0));
 			SpectrumListType spectrumList = new SpectrumListType();
 			spectrumList.setDefaultDataProcessingRef(dataProcessingList.getDataProcessing().get(0));
 			ChromatogramListType chromatogramList = new ChromatogramListType();
 			chromatogramList.setDefaultDataProcessingRef(dataProcessingList.getDataProcessing().get(0));
 			chromatogramList.setCount(BigInteger.valueOf(1)); // TODO export referenced chromatograms
-			//
+
 			int scans = chromatogram.getNumberOfScans();
 			spectrumList.setCount(BigInteger.valueOf(scans));
 			float[] totalSignals = new float[scans];
 			float[] retentionTimes = new float[scans];
 			writeScans(chromatogram, totalSignals, retentionTimes, spectrumList);
 			run.setSpectrumList(spectrumList);
-			//
+
 			BinaryDataArrayListType binaryDataArrayList = new BinaryDataArrayListType();
 			binaryDataArrayList.setCount(BigInteger.valueOf(2));
 			boolean compression = PreferenceSupplier.getChromatogramSaveCompression();
-			//
+
 			BinaryDataArrayType totalSignalsBinaryDataArrayType = XmlWriter110.createBinaryData(totalSignals, compression);
 			totalSignalsBinaryDataArrayType.getCvParam().add(XmlWriter110.createIntensityArrayType());
 			binaryDataArrayList.getBinaryDataArray().add(totalSignalsBinaryDataArrayType);
-			//
+
 			BinaryDataArrayType retentionTimesBinaryDataArrayType = XmlWriter110.createBinaryData(retentionTimes, compression);
 			retentionTimesBinaryDataArrayType.getCvParam().add(XmlWriter110.createRetentionTimeType());
 			binaryDataArrayList.getBinaryDataArray().add(retentionTimesBinaryDataArrayType);
-			//
+
 			ChromatogramType defaultPDA = new ChromatogramType();
 			float wavelength = chromatogram.getWavelengths().iterator().next(); // TODO: not default wavelength
 			defaultPDA.setId(wavelength + "nm");
@@ -119,19 +119,19 @@ public class ChromatogramWriterVersion110 extends AbstractChromatogramWriter imp
 			defaultPDA.setBinaryDataArrayList(binaryDataArrayList);
 			chromatogramList.getChromatogram().add(defaultPDA);
 			run.setChromatogramList(chromatogramList);
-			//
+
 			XMLGregorianCalendar date = XmlWriter110.createDate(chromatogram.getDate());
 			if(date != null) {
 				run.setStartTimeStamp(date);
 			}
 			MzMLType mzML = new MzMLType();
-			//
+
 			CVListType cvList = new CVListType();
 			cvList.setCount(BigInteger.valueOf(2));
 			cvList.getCv().add(XmlWriter110.MS);
 			cvList.getCv().add(XmlWriter110.UO);
 			mzML.setCvList(cvList);
-			//
+
 			mzML.setFileDescription(createFileDescription(chromatogram, sourceFileList));
 			mzML.setInstrumentConfigurationList(instrumentConfigurationList);
 			mzML.setSoftwareList(softwareList);
@@ -162,10 +162,10 @@ public class ChromatogramWriterVersion110 extends AbstractChromatogramWriter imp
 			spectrum.getCvParam().add(createProfileType());
 			IScanWSD scanWSD = (IScanWSD)scan;
 			// full spectra
-			//
+
 			spectrum.getCvParam().add(createHighestObservedWavelength(scanWSD));
 			spectrum.getCvParam().add(createLowestObservedWavelength(scanWSD));
-			//
+
 			List<IScanSignalWSD> scanSignals = scanWSD.getScanSignals();
 			float[] wavelength = new float[scanSignals.size()];
 			float[] absorbance = new float[scanSignals.size()];
@@ -177,16 +177,16 @@ public class ChromatogramWriterVersion110 extends AbstractChromatogramWriter imp
 			}
 			BinaryDataArrayListType binaryDataArrayList = new BinaryDataArrayListType();
 			binaryDataArrayList.setCount(BigInteger.valueOf(2));
-			//
+
 			boolean compression = PreferenceSupplier.getChromatogramSaveCompression();
 			BinaryDataArrayType wavelengthsBinaryDataArrayType = XmlWriter110.createBinaryData(wavelength, compression);
 			wavelengthsBinaryDataArrayType.getCvParam().add(createWavelengthType());
 			binaryDataArrayList.getBinaryDataArray().add(wavelengthsBinaryDataArrayType);
-			//
+
 			BinaryDataArrayType absorbancesBinaryDataArrayType = XmlWriter110.createBinaryData(absorbance, compression);
 			absorbancesBinaryDataArrayType.getCvParam().add(XmlWriter110.createIntensityArrayType());
 			binaryDataArrayList.getBinaryDataArray().add(absorbancesBinaryDataArrayType);
-			//
+
 			spectrum.setBinaryDataArrayList(binaryDataArrayList);
 			spectrum.setDefaultArrayLength(wavelength.length);
 			spectrumList.getSpectrum().add(spectrum);

@@ -24,7 +24,7 @@ public class InstrumentComparator extends AbstractRecordTableComparator implemen
 
 		int sortOrder = 0;
 		if(e1 instanceof Instrument instrument1 && e2 instanceof Instrument instrument2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = instrument2.getIdentifier().compareTo(instrument1.getIdentifier());

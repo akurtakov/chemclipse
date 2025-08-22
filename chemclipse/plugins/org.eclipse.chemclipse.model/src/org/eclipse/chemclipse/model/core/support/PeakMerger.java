@@ -54,7 +54,7 @@ public class PeakMerger {
 				peak.getTargets().addAll(identificationTargets);
 			}
 		}
-		//
+
 		return peak;
 	}
 
@@ -75,7 +75,7 @@ public class PeakMerger {
 				retentionTimeIntensityMap.put(retentionTime, abundance);
 			}
 		}
-		//
+
 		return create(retentionTimeIntensityMap);
 	}
 
@@ -98,29 +98,29 @@ public class PeakMerger {
 		if(startBackgroundAbundance == Float.MAX_VALUE) {
 			startBackgroundAbundance = 0.0f;
 		}
-		//
+
 		if(stopBackgroundAbundance == Float.MIN_VALUE) {
 			stopBackgroundAbundance = 0.0f;
 		}
-		//
+
 		return new BackgroundAbundanceRange(startBackgroundAbundance, stopBackgroundAbundance);
 	}
 
 	public static List<IIdentificationTarget> mergeIdentificationTargets(List<? extends IPeak> peaks) {
 
 		List<IIdentificationTarget> identificationTargets = new ArrayList<>();
-		//
+
 		for(IPeak peak : peaks) {
 			identificationTargets.addAll(peak.getTargets());
 		}
-		//
+
 		return identificationTargets;
 	}
 
 	public static float mergeTotalSignal(List<? extends IPeak> peaks) {
 
 		float totalSignal = Float.MIN_VALUE;
-		//
+
 		for(IPeak peak : peaks) {
 			/*
 			 * Peaks to merge
@@ -129,7 +129,7 @@ public class PeakMerger {
 			IScan scan = peakModel.getPeakMaximum();
 			totalSignal = Math.max(totalSignal, scan.getTotalSignal());
 		}
-		//
+
 		return totalSignal;
 	}
 
@@ -155,7 +155,7 @@ public class PeakMerger {
 			peakIntensityValues.addIntensityValue(entry.getKey(), entry.getValue());
 		}
 		peakIntensityValues.normalize();
-		//
+
 		return peakIntensityValues;
 	}
 }

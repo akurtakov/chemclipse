@@ -42,7 +42,7 @@ public class FINReader extends AbstractMassSpectraReader implements IMassSpectra
 		massSpectra.setConverterId("");
 		massSpectra.setName(file.getName());
 		parse(massSpectra, file);
-		//
+
 		return massSpectra;
 	}
 
@@ -75,7 +75,7 @@ public class FINReader extends AbstractMassSpectraReader implements IMassSpectra
 				boolean append = false;
 				String component = null;
 				StringBuilder builder = new StringBuilder();
-				//
+
 				String line;
 				while((line = bufferedReader.readLine()) != null) {
 					if(line.startsWith(MARKER_START)) {

@@ -34,28 +34,28 @@ public class QuantitationCompoundSupport {
 		IScan scan = peakModel.getPeakMaximum();
 		int retentionTime = scan.getRetentionTime();
 		float retentionIndex = scan.getRetentionIndex();
-		//
+
 		IQuantitationCompound quantitationCompound = new QuantitationCompound(name, concentrationUnit, retentionTime);
 		quantitationCompound.setChemicalClass(chemicalClass);
-		//
+
 		IRetentionTimeWindow retentionTimeWindow = quantitationCompound.getRetentionTimeWindow();
 		if(retentionTime > 0) {
 			retentionTimeWindow.setAllowedNegativeDeviation((int)(PreferenceSupplier.getRetentionTimeNegativeDeviation() * AbstractChromatogram.MINUTE_CORRELATION_FACTOR));
 			retentionTimeWindow.setAllowedPositiveDeviation((int)(PreferenceSupplier.getRetentionTimePositiveDeviation() * AbstractChromatogram.MINUTE_CORRELATION_FACTOR));
 		}
-		//
+
 		IRetentionIndexWindow retentionIndexWindow = quantitationCompound.getRetentionIndexWindow();
 		retentionIndexWindow.setRetentionIndex(retentionIndex);
 		if(retentionIndex > 0) {
 			retentionIndexWindow.setAllowedNegativeDeviation(PreferenceSupplier.getRetentionIndexNegativeDeviation());
 			retentionIndexWindow.setAllowedPositiveDeviation(PreferenceSupplier.getRetentionIndexPositiveDeviation());
 		}
-		//
+
 		IQuantitationPeak quantitationPeakMSD = new QuantitationPeakMSD((IPeakMSD)peak, concentration, concentrationUnit);
 		quantitationCompound.getQuantitationPeaks().add(quantitationPeakMSD);
-		//
+
 		quantitationCompound.setQuantitationSignalTIC();
-		//
+
 		return quantitationCompound;
 	}
 

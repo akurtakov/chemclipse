@@ -91,10 +91,10 @@ public class CalculatorSupport {
 			} catch(NoExtractedIonSignalStoredException e) {
 			}
 		}
-		//
+
 		ICombinedMassSpectrum noiseMassSpectrum = combinedMassSpectrumCalculator.createMassSpectrum(CalculationType.SUM);
 		noiseMassSpectrum.normalize(NORMALIZATION_FACTOR);
-		//
+
 		return noiseMassSpectrum;
 	}
 

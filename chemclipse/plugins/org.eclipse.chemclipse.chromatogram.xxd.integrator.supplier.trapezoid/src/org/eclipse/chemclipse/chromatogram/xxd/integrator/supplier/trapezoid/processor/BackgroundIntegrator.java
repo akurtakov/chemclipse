@@ -33,7 +33,7 @@ public class BackgroundIntegrator extends AbstractIntegrator {
 		int startScan = chromatogram.getScanNumber(chromatogramSelection.getStartRetentionTime());
 		int stopScan = chromatogram.getScanNumber(chromatogramSelection.getStopRetentionTime());
 		IBaselineModel baselineModel = chromatogram.getBaselineModel();
-		//
+
 		try {
 			ITotalScanSignalExtractor totalIonSignalExtractor = new TotalScanSignalExtractor(chromatogram);
 			ITotalScanSignals totalIonSignals = totalIonSignalExtractor.getTotalScanSignals();

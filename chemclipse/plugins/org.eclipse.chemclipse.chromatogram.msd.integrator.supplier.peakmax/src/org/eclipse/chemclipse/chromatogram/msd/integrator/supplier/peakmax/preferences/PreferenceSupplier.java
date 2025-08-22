@@ -27,7 +27,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_SELECTED_IONS = "0"; // 103;104 | 0 = TIC
 	public static final String P_USE_AREA_CONSTRAINT = "useAreaConstraint";
 	public static final boolean DEF_USE_AREA_CONSTRAINT = true;
-	//
+
 	public static final int MIN_RETENTION_TIME = 0; // = 0.0 minutes
 	public static final int MAX_RETENTION_TIME = 60000; // = 1.0 minutes
 
@@ -63,7 +63,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		for(int trace : settingIon.extractTraces(settingIon.deserialize(ions))) {
 			markedTraces.add(new MarkedIon(trace));
 		}
-		//
+
 		return peakIntegrationSettings;
 	}
 

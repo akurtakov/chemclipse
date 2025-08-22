@@ -24,7 +24,7 @@ public class TimeRangesComparator extends AbstractRecordTableComparator implemen
 
 		int sortOrder = 0;
 		if(e1 instanceof TimeRange timeRange1 && e2 instanceof TimeRange timeRange2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = Integer.compare(timeRange2.getStart(), timeRange1.getStart());
@@ -40,7 +40,7 @@ public class TimeRangesComparator extends AbstractRecordTableComparator implemen
 					break;
 			}
 		}
-		//
+
 		if(getDirection() == ASCENDING) {
 			sortOrder = -sortOrder;
 		}

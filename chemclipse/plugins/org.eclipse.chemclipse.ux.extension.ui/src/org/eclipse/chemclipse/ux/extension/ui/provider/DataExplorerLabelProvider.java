@@ -95,7 +95,7 @@ public class DataExplorerLabelProvider extends ColumnLabelProvider implements IL
 
 		if(element instanceof File file) {
 			ImageDescriptor descriptor = null;
-			//
+
 			if(file.getName().equals("") || file.getParent() == null) {
 				descriptor = ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_DRIVE, IApplicationImageProvider.SIZE_16x16);
 			} else {

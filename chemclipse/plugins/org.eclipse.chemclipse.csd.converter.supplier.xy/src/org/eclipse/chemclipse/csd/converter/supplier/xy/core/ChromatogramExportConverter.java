@@ -32,7 +32,7 @@ import org.eclipse.osgi.util.NLS;
 public class ChromatogramExportConverter extends AbstractChromatogramExportConverter implements IChromatogramExportConverter {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramExportConverter.class);
-	//
+
 	private static final String DESCRIPTION = "XY Export Converter";
 	private static final String FILE_EXTENSION = ".xy";
 

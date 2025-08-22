@@ -51,11 +51,11 @@ public class TargetDisplaySettingsPage extends WizardPage {
 	protected TargetDisplaySettingsPage(Collection<? extends ITargetReference> targetReferenes, ITargetDisplaySettings targetDisplaySettings, TargetDisplaySettingsWizardListener settingsWizardListener) {
 
 		super(TargetDisplaySettingsPage.class.getName());
-		//
+
 		setImageDescriptor(ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_LABELS, IApplicationImage.SIZE_64x64));
 		setTitle("Peak/Scan Labels");
 		setDescription("Select the labels and options to be displayed in the chromatogram.");
-		//
+
 		this.targetReferenes = targetReferenes;
 		this.targetDisplaySettings = targetDisplaySettings;
 		this.settingsWizardListener = settingsWizardListener;
@@ -66,7 +66,7 @@ public class TargetDisplaySettingsPage extends WizardPage {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(1, true));
-		//
+
 		addTargetSettingsEditor(composite);
 		addPreviewButton(composite);
 		setControl(composite);
@@ -91,7 +91,7 @@ public class TargetDisplaySettingsPage extends WizardPage {
 					notifyListener();
 				}
 			});
-			//
+
 			if(preview) {
 				notifyListener();
 			}

@@ -34,7 +34,7 @@ public class FeatureStatComparator extends AbstractRecordTableComparator impleme
 			DescriptiveStatistics stats = new DescriptiveStatistics();
 			List<ISampleData<?>> sampleData1 = feature1.getSampleData();
 			List<ISampleData<?>> sampleData2 = feature2.getSampleData();
-			//
+
 			int columnIndex = getPropertyIndex();
 			switch(columnIndex) {
 				case 0:

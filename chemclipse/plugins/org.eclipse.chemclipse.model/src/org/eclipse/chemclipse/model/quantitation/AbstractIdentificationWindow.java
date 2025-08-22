@@ -18,7 +18,7 @@ public abstract class AbstractIdentificationWindow implements IIdentificationWin
 	 * Renew the UUID on change.
 	 */
 	private static final long serialVersionUID = -1544984148413303660L;
-	//
+
 	private float allowedNegativeDeviation; // Sets the negative deviation (>= 0)
 	private float allowedPositiveDeviation; // Sets the positive deviation (>= 0)
 

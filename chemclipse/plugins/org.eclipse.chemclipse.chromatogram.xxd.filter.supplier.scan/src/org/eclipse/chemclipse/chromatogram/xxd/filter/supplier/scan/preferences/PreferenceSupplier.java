@@ -30,14 +30,14 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 	public static final Character REMOVE_SIGN = 'X';
 	public static final Character PRESERVE_SIGN = 'O';
-	//
+
 	public static final double MIN_SCAN_SELECTOR_VALUE = 0.0d;
 	public static final double MAX_SCAN_SELECTOR_VALUE = Double.MAX_VALUE;
-	//
+
 	public static final String P_REMOVER_PATTERN = "removerPattern";
 	public static final String DEF_REMOVER_PATTERN = "XO";
 	public static final String CHECK_REMOVER_PATTERN = "^[OX]+";
-	//
+
 	public static final String P_SCAN_SELECTOR_OPTION = "scanSelectorOption";
 	public static final String DEF_SCAN_SELECTOR_OPTION = ScanSelectorOption.RETENTION_TIME_MS.name();
 	public static final String P_SCAN_SELECTOR_VALUE = "scanSelectorValue";
@@ -46,12 +46,12 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_MERGE_SCANS = true;
 	public static final String P_CLIP_SCAN_NUMBER_PATTERN = "clipScanNumberPattern";
 	public static final String DEF_CLIP_SCAN_NUMBER_PATTERN = "1";
-	//
+
 	public static final String P_OBFUSCATE_SCANS = "obfuscateScans";
 	public static final boolean DEF_OBFUSCATE_SCANS = true;
 	public static final String P_OBFUSCATE_PEAKS = "obfuscatePeaks";
 	public static final boolean DEF_OBFUSCATE_PEAKS = false;
-	//
+
 	public static final String P_INTERVAL_RESET_RETENTION_TIMES = "intervalResetRetentionTimes";
 	public static final boolean DEF_INTERVAL_RESET_RETENTION_TIMES = false;
 
@@ -88,7 +88,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		FilterSettingsRemover filterSettings = new FilterSettingsRemover();
 		filterSettings.setScanRemoverPattern(INSTANCE().get(P_REMOVER_PATTERN, DEF_REMOVER_PATTERN));
-		//
+
 		return filterSettings;
 	}
 
@@ -96,7 +96,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		FilterSettingsDuplicator settings = new FilterSettingsDuplicator();
 		settings.setMergeScans(INSTANCE().getBoolean(P_MERGE_SCANS, DEF_MERGE_SCANS));
-		//
+
 		return settings;
 	}
 
@@ -105,7 +105,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		FilterSettingsObfuscator settings = new FilterSettingsObfuscator();
 		settings.setScans(INSTANCE().getBoolean(P_OBFUSCATE_SCANS, DEF_OBFUSCATE_SCANS));
 		settings.setPeaks(INSTANCE().getBoolean(P_OBFUSCATE_PEAKS, DEF_OBFUSCATE_PEAKS));
-		//
+
 		return settings;
 	}
 
@@ -113,7 +113,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		FilterSettingsDelayInterval settings = new FilterSettingsDelayInterval();
 		settings.setResetRetentionTimes(INSTANCE().getBoolean(P_INTERVAL_RESET_RETENTION_TIMES, DEF_INTERVAL_RESET_RETENTION_TIMES));
-		//
+
 		return settings;
 	}
 
@@ -132,7 +132,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		FilterSettingsScanSelector settings = new FilterSettingsScanSelector();
 		settings.setScanSelectorOption(getScanSelectorOption());
 		settings.setScanSelectorValue(getScanSelectorValue());
-		//
+
 		return settings;
 	}
 

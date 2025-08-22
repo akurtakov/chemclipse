@@ -51,7 +51,7 @@ public class ChromatogramExportConverter extends AbstractChromatogramExportConve
 			} else if(chromatogram instanceof IChromatogramWSD) {
 				writer = new ChromatogramWriter();
 			}
-			//
+
 			if(writer != null) {
 				try {
 					writer.writeChromatogram(file, chromatogram, monitor);

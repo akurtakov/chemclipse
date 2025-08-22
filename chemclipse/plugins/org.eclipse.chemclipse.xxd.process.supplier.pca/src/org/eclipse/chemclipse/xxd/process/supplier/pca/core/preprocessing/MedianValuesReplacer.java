@@ -51,7 +51,7 @@ public class MedianValuesReplacer extends AbstractDataModificator implements IRe
 						}
 					}
 				}
-				//
+
 				int lenght = collectedValues.size();
 				collectedValues.sort(Double::compare);
 				double median = 0;
@@ -59,7 +59,7 @@ public class MedianValuesReplacer extends AbstractDataModificator implements IRe
 					median = lenght % 2 == 0 ? (collectedValues.get(lenght / 2 - 1) + collectedValues.get(lenght / 2)) / 2.0 // even
 							: collectedValues.get(lenght / 2); //
 				}
-				//
+
 				for(S sample : sampleList) {
 					if(sample.isSelected() || !isOnlySelected()) {
 						ISampleData<?> sampleData = sample.getSampleData().get(i);

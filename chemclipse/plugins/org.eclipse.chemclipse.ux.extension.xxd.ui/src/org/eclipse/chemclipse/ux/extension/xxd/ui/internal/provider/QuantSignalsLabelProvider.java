@@ -29,14 +29,14 @@ public class QuantSignalsLabelProvider extends AbstractChemClipseLabelProvider {
 	public static final String RELATIVE_RESPONSE = ExtensionMessages.relativeResponse;
 	public static final String UNCERTAINTY = ExtensionMessages.uncertainty;
 	public static final String USE = ExtensionMessages.use;
-	//
+
 	public static final String[] TITLES = { //
 			SIGNAL, //
 			RELATIVE_RESPONSE, //
 			UNCERTAINTY, //
 			USE //
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			100, //
 			100, //
@@ -56,7 +56,7 @@ public class QuantSignalsLabelProvider extends AbstractChemClipseLabelProvider {
 				return ApplicationImageFactory.getInstance().getImage(fileName, IApplicationImageProvider.SIZE_16x16);
 			}
 		}
-		//
+
 		return null;
 	}
 

@@ -155,7 +155,7 @@ public class NamedTracesUI extends Composite {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		createComboViewer(this);
 		createText(this);
 		createButtonAdd(this);
@@ -204,7 +204,7 @@ public class NamedTracesUI extends Composite {
 				fireUpdate();
 			}
 		});
-		//
+
 		comboViewerControl.set(comboViewer);
 	}
 
@@ -214,10 +214,10 @@ public class NamedTracesUI extends Composite {
 		text.setText("");
 		text.setToolTipText(TOOLTIP_TEXT);
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		TraceValidator traceValidator = new TraceValidator();
 		ControlDecoration controlDecoration = new ControlDecoration(text, SWT.LEFT | SWT.TOP);
-		//
+
 		text.addModifyListener(event -> {
 
 			if(namedTrace != null) {
@@ -227,7 +227,7 @@ public class NamedTracesUI extends Composite {
 				}
 			}
 		});
-		//
+
 		textTraces.set(text);
 	}
 

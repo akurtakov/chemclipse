@@ -112,20 +112,20 @@ public class GeometricDistanceCalculator implements IMatchCalculator {
 	private List<Integer> getIonList(IIonRange ionRange) {
 
 		List<Integer> ionList = new ArrayList<Integer>();
-		//
+
 		int startIon = ionRange.getStartIon();
 		int stopIon = ionRange.getStopIon();
 		for(int ion = startIon; ion <= stopIon; ion++) {
 			ionList.add(ion);
 		}
-		//
+
 		return ionList;
 	}
 
 	private List<Integer> getIonList(IScanMSD massSpectrum) {
 
 		List<Integer> ionList = new ArrayList<Integer>();
-		//
+
 		IExtractedIonSignal signal = massSpectrum.getExtractedIonSignal();
 		int startIon = signal.getStartIon();
 		int stopIon = signal.getStopIon();
@@ -134,7 +134,7 @@ public class GeometricDistanceCalculator implements IMatchCalculator {
 				ionList.add(ion);
 			}
 		}
-		//
+
 		return ionList;
 	}
 }

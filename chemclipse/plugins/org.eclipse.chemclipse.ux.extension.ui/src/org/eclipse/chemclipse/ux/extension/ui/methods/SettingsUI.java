@@ -67,7 +67,7 @@ public class SettingsUI<T> extends Composite {
 	private void createControl(IProcessorPreferences<T> preferences, boolean showProfileToolbar) throws IOException {
 
 		setLayout(new FillLayout());
-		//
+
 		SettingsUIProvider<T> settingsUIProvider = createSettingsUIProvider(preferences);
 		control.set(settingsUIProvider.createUI(this, preferences, showProfileToolbar));
 	}
@@ -78,13 +78,13 @@ public class SettingsUI<T> extends Composite {
 		if(settings == null) {
 			settings = preferences.getSupplier().getSettingsParser().createDefaultInstance();
 		}
-		//
+
 		@SuppressWarnings("unchecked")
 		SettingsUIProvider<T> settingsUIProvider = Adapters.adapt(settings, SettingsUIProvider.class);
 		if(settingsUIProvider == null) {
 			settingsUIProvider = new DefaultSettingsUIProvider<>();
 		}
-		//
+
 		return settingsUIProvider;
 	}
 
@@ -109,7 +109,7 @@ public class SettingsUI<T> extends Composite {
 			container = createContainer(parent);
 			this.preferences = preferences;
 			container.setLayout(new GridLayout(2, false));
-			//
+
 			List<InputValue> inputValues = preferences.getSupplier().getSettingsParser().getInputValues();
 			Map<InputValue, Object> valuesMap = preferences.getSerialization().fromObject(inputValues, preferences.getSettings());
 			if(valuesMap != null) {
@@ -117,7 +117,7 @@ public class SettingsUI<T> extends Composite {
 					widgetItems.add(new WidgetItem(entry.getKey(), entry.getValue()));
 				}
 			}
-			//
+
 			if(!widgetItems.isEmpty()) {
 				createOptionWidgets(container);
 			} else {
@@ -131,7 +131,7 @@ public class SettingsUI<T> extends Composite {
 			for(WidgetItem widgetItem : widgetItems) {
 				widgetItem.getControl().setEnabled(enabled);
 			}
-			//
+
 			for(Label label : labels) {
 				label.setEnabled(enabled);
 			}
@@ -200,7 +200,7 @@ public class SettingsUI<T> extends Composite {
 				InputValue inputValue = widgetItem.getInputValue();
 				values.put(inputValue, widgetItem.getValue());
 			}
-			//
+
 			return preferences.getSerialization().toString(values);
 		}
 
@@ -225,12 +225,12 @@ public class SettingsUI<T> extends Composite {
 				control.addListener(SWT.MouseUp, listener);
 				control.addListener(SWT.MouseDoubleClick, listener);
 				control.addListener(SWT.Modify, listener);
-				//
+
 				if(control instanceof IChangeListener changeListener) {
 					changeListener.addChangeListener(listener);
 				}
 			}
-			//
+
 			Event event = new Event();
 			event.display = container.getShell().getDisplay();
 			event.widget = container;

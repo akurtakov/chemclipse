@@ -39,7 +39,7 @@ public class NominalizeScanFilter extends AbstractMassSpectrumFilter {
 		if(filterSettings == null) {
 			filterSettings = PreferenceSupplier.getNominalizeFilterSettings();
 		}
-		//
+
 		IProcessingInfo<IMassSpectrumFilterResult> processingInfo = validate(massSpectra, filterSettings);
 		if(!processingInfo.hasErrorMessages()) {
 			if(filterSettings instanceof NominalizeFilterSettings) {
@@ -49,7 +49,7 @@ public class NominalizeScanFilter extends AbstractMassSpectrumFilter {
 				for(IScanMSD massSpectrum : massSpectra) {
 					XPassFilter.nominalize(massSpectrum);
 				}
-				//
+
 				processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, DESCRIPTION, "The mass spectrum has been nominalized successfully."));
 				IMassSpectrumFilterResult massSpectrumFilterResult = new MassSpectrumFilterResult(ResultStatus.OK, "The Nominalize filter has been applied successfully.");
 				processingInfo.setProcessingResult(massSpectrumFilterResult);
@@ -57,7 +57,7 @@ public class NominalizeScanFilter extends AbstractMassSpectrumFilter {
 				processingInfo.addErrorMessage(DESCRIPTION, "The filter settings instance is not a type of: " + LowPassFilterSettings.class);
 			}
 		}
-		//
+
 		return processingInfo;
 	}
 }

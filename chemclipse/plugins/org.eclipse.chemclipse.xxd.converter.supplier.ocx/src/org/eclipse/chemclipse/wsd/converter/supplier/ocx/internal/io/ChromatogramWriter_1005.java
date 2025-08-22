@@ -79,7 +79,7 @@ public class ChromatogramWriter_1005 extends AbstractChromatogramWriter implemen
 		String version = Format.CHROMATOGRAM_VERSION_1005;
 		dataOutputStream.writeInt(version.length()); // Length Version
 		dataOutputStream.writeChars(version); // Version
-		//
+
 		dataOutputStream.flush();
 		zipOutputStream.closeEntry();
 	}
@@ -121,7 +121,7 @@ public class ChromatogramWriter_1005 extends AbstractChromatogramWriter implemen
 			dataOutputStream.writeInt(chromatogram.getSupplierScan(scan).getTimeSegmentId()); // Time Segment Id
 			dataOutputStream.writeInt(chromatogram.getSupplierScan(scan).getCycleNumber()); // Cycle Number
 		}
-		//
+
 		dataOutputStream.flush();
 		zipOutputStream.closeEntry();
 	}
@@ -130,7 +130,7 @@ public class ChromatogramWriter_1005 extends AbstractChromatogramWriter implemen
 
 		// the things we want in chromatogram folder rn ==> SCANS, MISC, HISTORY, BASELINE.
 		// others might be added later
-		//
+
 		ZipEntry zipEntry;
 		/*
 		 * Create the chromatogram folder
@@ -159,7 +159,7 @@ public class ChromatogramWriter_1005 extends AbstractChromatogramWriter implemen
 		zipOutputStream.putNextEntry(zipEntry);
 		dataOutputStream = new DataOutputStream(zipOutputStream);
 		IMethod method = chromatogram.getMethod();
-		//
+
 		writeString(dataOutputStream, method.getInstrumentName());
 		writeString(dataOutputStream, method.getIonSource());
 		dataOutputStream.writeDouble(method.getSamplingRate());
@@ -168,7 +168,7 @@ public class ChromatogramWriter_1005 extends AbstractChromatogramWriter implemen
 		writeString(dataOutputStream, method.getStopMode());
 		dataOutputStream.writeInt(method.getStopTime());
 		dataOutputStream.writeInt(method.getTimeFilterPeakWidth());
-		//
+
 		dataOutputStream.flush();
 		zipOutputStream.closeEntry();
 	}
@@ -217,7 +217,7 @@ public class ChromatogramWriter_1005 extends AbstractChromatogramWriter implemen
 		dataOutputStream = new DataOutputStream(zipOutputStream);
 		int scans = chromatogram.getNumberOfScans();
 		dataOutputStream.writeInt(scans); // Number of Scans
-		//
+
 		IBaselineModel baselineModel = chromatogram.getBaselineModel();
 		// Scans
 		for(int scan = 1; scan <= scans; scan++) {
@@ -226,7 +226,7 @@ public class ChromatogramWriter_1005 extends AbstractChromatogramWriter implemen
 			dataOutputStream.writeInt(retentionTime); // Retention Time
 			dataOutputStream.writeFloat(backgroundAbundance); // Background Abundance
 		}
-		//
+
 		dataOutputStream.flush();
 		zipOutputStream.closeEntry();
 	}
@@ -248,7 +248,7 @@ public class ChromatogramWriter_1005 extends AbstractChromatogramWriter implemen
 			dataOutputStream.writeLong(editInformation.getDate().getTime()); // Date
 			writeString(dataOutputStream, editInformation.getDescription()); // Description
 		}
-		//
+
 		dataOutputStream.flush();
 		zipOutputStream.closeEntry();
 	}
@@ -263,11 +263,11 @@ public class ChromatogramWriter_1005 extends AbstractChromatogramWriter implemen
 		zipEntry = new ZipEntry(directoryPrefix + Format.FILE_MISC_WSD);
 		zipOutputStream.putNextEntry(zipEntry);
 		dataOutputStream = new DataOutputStream(zipOutputStream);
-		//
+
 		dataOutputStream.writeLong(chromatogram.getDate().getTime()); // Date
 		writeString(dataOutputStream, chromatogram.getMiscInfo()); // Miscellaneous Info
 		writeString(dataOutputStream, chromatogram.getOperator()); // Operator
-		//
+
 		dataOutputStream.flush();
 		zipOutputStream.closeEntry();
 	}

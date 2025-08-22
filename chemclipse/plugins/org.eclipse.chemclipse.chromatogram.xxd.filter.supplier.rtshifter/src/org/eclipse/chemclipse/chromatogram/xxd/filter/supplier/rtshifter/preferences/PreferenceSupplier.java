@@ -24,25 +24,25 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 	public static final int MIN_MILLISECONDS_SHIFT = Integer.MIN_VALUE;
 	public static final int MAX_MILLISECONDS_SHIFT = Integer.MAX_VALUE;
-	//
+
 	public static final String P_MILLISECONDS_SHIFT = "millisecondsShift";
 	public static final int DEF_MILLISECONDS_SHIFT = 0;
 	public static final String P_SHIFT_ALL_SCANS = "shiftAllScans";
 	public static final boolean DEF_SHIFT_ALL_SCANS = true;
-	//
+
 	public static final int MIN_LIMIT_FACTOR = 4;
 	public static final int MAX_LIMIT_FACTOR = 10000000;
-	//
+
 	public static final String P_STRETCH_MILLISECONDS_SCAN_DELAY = "stretchMillisecondsScanDelay";
 	public static final int DEF_STRETCH_MILLISECONDS_SCAN_DELAY = 0;
 	public static final int STRETCH_MILLISECONDS_SCAN_DELAY_MIN = 0;
 	public static final int STRETCH_MILLISECONDS_SCAN_DELAY_MAX = Integer.MAX_VALUE;
-	//
+
 	public static final String P_STRETCH_MILLISECONDS_LENGTH = "stretchMillisecondsLength";
 	public static final int DEF_STRETCH_MILLISECONDS_LENGTH = 6000000; // = 100.0 minutes;
 	public static final int STRETCH_MILLISECONDS_LENGTH_MIN = 0;
 	public static final int STRETCH_MILLISECONDS_LENGTH_MAX = Integer.MAX_VALUE;
-	//
+
 	public static final String P_LIMIT_FACTOR = "limitFactor";
 	public static final int DEF_LIMIT_FACTOR = 4;
 

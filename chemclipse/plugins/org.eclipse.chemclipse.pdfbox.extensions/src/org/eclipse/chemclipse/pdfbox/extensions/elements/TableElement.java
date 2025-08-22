@@ -24,7 +24,7 @@ public class TableElement extends AbstractElement<TableElement> {
 	private float textOffsetX = 0.0f;
 	private float textOffsetY = 0.0f;
 	private float lineWidth = 1.0f;
-	//
+
 	private PDTable pdTable = new PDTable();
 
 	public TableElement(float x, float y, float columnHeight) {

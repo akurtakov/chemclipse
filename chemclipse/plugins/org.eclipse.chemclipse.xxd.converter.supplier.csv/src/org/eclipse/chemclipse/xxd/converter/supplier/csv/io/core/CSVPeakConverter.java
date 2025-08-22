@@ -72,7 +72,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class CSVPeakConverter implements IPeakExportConverter, IPeakImportConverter {
 
 	public static final Charset CHARSET = StandardCharsets.UTF_8;
-	//
+
 	private static final String HEADER_NAME = "Name";
 	private static final String HEADER_AREA = "Area";
 	private static final String HEADER_RRT = "RRT [min]";
@@ -85,9 +85,9 @@ public class CSVPeakConverter implements IPeakExportConverter, IPeakImportConver
 	private static final Pattern SEPERATOR_VALUE_PATTERN = Pattern.compile(String.valueOf(SEPERATOR_VALUE), Pattern.LITERAL);
 	private static final Pattern SEPERATOR_RECORD_PATTERN = Pattern.compile(String.valueOf(SEPERATOR_RECORD), Pattern.LITERAL);
 	private static final String NAME = "CSV Peak Export";
-	//
+
 	private static final DecimalFormat NUMBER_FORMAT = new DecimalFormat("0.000", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
-	//
+
 	public static final String[] HEADERS = {HEADER_NAME, HEADER_RT, HEADER_RRT, HEADER_RI, HEADER_AREA, "S/N", "CAS", HEADER_MZ, HEADER_INTENSITIES};
 
 	// export

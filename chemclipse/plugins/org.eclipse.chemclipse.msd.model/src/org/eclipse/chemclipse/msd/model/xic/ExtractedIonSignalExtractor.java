@@ -116,7 +116,7 @@ public class ExtractedIonSignalExtractor implements IExtractedIonSignalExtractor
 		for(int scan = startScan; scan <= stopScan; scan++) {
 			extractSignals(extractedIonSignals, chromatogram.getSupplierScan(scan), startIon, stopIon);
 		}
-		//
+
 		return extractedIonSignals;
 	}
 

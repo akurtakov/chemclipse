@@ -48,13 +48,13 @@ public class ProcessingInfoUI {
 
 	private static final int DETAILS_MAX_HEIGHT = 300;
 	private static final int DETAILS_MIN_HEIGHT = 50;
-	//
+
 	private TableViewer tableViewer;
 	private ProcessingInfoTableComparator processingInfoTableComparator;
 	private Clipboard clipboard;
 	private String[] titles = {"Type", "Description", "Message", "Date", "Proposed Solution"};
 	private int[] bounds = {100, 100, 100, 100, 100};
-	//
+
 	private static final String DELIMITER = "\t";
 
 	public ProcessingInfoUI(Composite parent) {

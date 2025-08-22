@@ -75,7 +75,7 @@ public class Activator implements BundleActivator {
 			eclipseContext = EclipseContextFactory.getServiceContext(context);
 			eclipseContext.set(Logger.class, logger);
 		}
-		//
+
 		return eclipseContext;
 	}
 }

@@ -45,14 +45,14 @@ public abstract class AbstractChromatogramReaderVersion extends AbstractChromato
 	public static final String NODE_MZXML = "mzXML";
 	public static final String NODE_MS_RUN = "msRun";
 	public static final String NODE_SCAN = "scan";
-	//
+
 	private static final Logger logger = Logger.getLogger(AbstractChromatogramReaderVersion.class);
 
 	@Override
 	public IChromatogramOverview readOverview(File file, IProgressMonitor monitor) throws IOException {
 
 		IVendorChromatogram chromatogram = null;
-		//
+
 		try {
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 			inputFactory.setProperty(XMLInputFactory.IS_COALESCING, true);
@@ -66,10 +66,10 @@ public abstract class AbstractChromatogramReaderVersion extends AbstractChromato
 			 */
 			chromatogram = new VendorChromatogram();
 			while(filteredEventReader.hasNext()) {
-				//
+
 				int retentionTime = 0;
 				float totalSignal = 0.0f;
-				//
+
 				XMLEvent xmlEvent = filteredEventReader.nextEvent();
 				Iterator<? extends Attribute> attributes = xmlEvent.asStartElement().getAttributes();
 				while(attributes.hasNext()) {
@@ -86,7 +86,7 @@ public abstract class AbstractChromatogramReaderVersion extends AbstractChromato
 						totalSignal = Float.valueOf(attribute.getValue());
 					}
 				}
-				//
+
 				IVendorScan massSpectrum = new VendorScan();
 				massSpectrum.setRetentionTime(retentionTime);
 				massSpectrum.addIon(new VendorIon(IIon.TIC_ION, totalSignal));
@@ -95,7 +95,7 @@ public abstract class AbstractChromatogramReaderVersion extends AbstractChromato
 		} catch(XMLStreamException e) {
 			logger.warn(e);
 		}
-		//
+
 		return chromatogram;
 	}
 }

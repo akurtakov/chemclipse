@@ -28,12 +28,12 @@ public abstract class AbstractRetentionTimeModifier {
 		IScan firstScan = chromatogram.getScan(1);
 		int scanDelay = firstScan.getRetentionTime();
 		chromatogram.setScanDelay(scanDelay);
-		//
+
 		int startRetentionTime = firstScan.getRetentionTime();
 		if(chromatogramSelection.getStartRetentionTime() < startRetentionTime) {
 			chromatogramSelection.setStartRetentionTime(startRetentionTime);
 		}
-		//
+
 		int stopRetentionTime = chromatogram.getStopRetentionTime();
 		if(chromatogramSelection.getStopRetentionTime() > stopRetentionTime) {
 			chromatogramSelection.setStopRetentionTime(stopRetentionTime);

@@ -39,7 +39,7 @@ public class QuantCompoundLabelProvider extends AbstractChemClipseLabelProvider 
 	public static final String RETENTION_INDEX = ExtensionMessages.retentionIndex;
 	public static final String RETENTION_INDEX_LOWER = ExtensionMessages.retentionIndexLower;
 	public static final String RETENTION_INDEX_UPPER = ExtensionMessages.retentionIndexUpper;
-	//
+
 	public static final String[] TITLES = {//
 			NAME, //
 			CHEMICAL_CLASS, //
@@ -54,7 +54,7 @@ public class QuantCompoundLabelProvider extends AbstractChemClipseLabelProvider 
 			RETENTION_INDEX_LOWER, //
 			RETENTION_INDEX_UPPER //
 	};
-	//
+
 	public static final int BOUNDS[] = { //
 			200, //
 			100, //
@@ -87,7 +87,7 @@ public class QuantCompoundLabelProvider extends AbstractChemClipseLabelProvider 
 				return ApplicationImageFactory.getInstance().getImage(fileName, IApplicationImageProvider.SIZE_16x16);
 			}
 		}
-		//
+
 		return null;
 	}
 
@@ -99,7 +99,7 @@ public class QuantCompoundLabelProvider extends AbstractChemClipseLabelProvider 
 		if(element instanceof IQuantitationCompound compound) {
 			IRetentionTimeWindow retentionTimeWindow = compound.getRetentionTimeWindow();
 			IRetentionIndexWindow retentionIndexWindow = compound.getRetentionIndexWindow();
-			//
+
 			switch(columnIndex) {
 				case 0:
 					text = compound.getName();

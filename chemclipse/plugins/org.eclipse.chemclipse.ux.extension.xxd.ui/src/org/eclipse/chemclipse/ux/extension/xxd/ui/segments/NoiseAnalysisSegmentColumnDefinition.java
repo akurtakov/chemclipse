@@ -43,7 +43,7 @@ public class NoiseAnalysisSegmentColumnDefinition extends AnalysisSegmentColumnD
 				if(element instanceof TreeNode treeNode) {
 					element = treeNode.getValue();
 				}
-				//
+
 				if(element instanceof INoiseSegment noiseSegment) {
 					List<TraceGeneric> traces = TraceFactory.parseTraces(noiseSegment.getTraces(), TraceGeneric.class);
 					if(!traces.isEmpty()) {
@@ -51,7 +51,7 @@ public class NoiseAnalysisSegmentColumnDefinition extends AnalysisSegmentColumnD
 						if(value == IIon.TIC_ION) {
 							return "TIC";
 						}
-						//
+
 						return String.valueOf((int)value);
 					}
 				}

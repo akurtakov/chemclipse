@@ -373,7 +373,7 @@ public class PeakBuilderMSD {
 		totalIonSignal = totalIonSignals.getTotalScanSignal(scanRange.getStopScan());
 		float stopBackgroundAbundance = totalIonSignal.getTotalSignal();
 		backgroundAbundanceRange = new BackgroundAbundanceRange(startBackgroundAbundance, stopBackgroundAbundance);
-		//
+
 		LinearEquation backgroundEquation = getBackgroundEquation(totalIonSignals, scanRange, backgroundAbundanceRange);
 		ITotalScanSignals peakIntensityTotalIonSignals = adjustTotalIonSignals(totalIonSignals, backgroundEquation);
 		IPeakIntensityValues peakIntensityValues = getPeakIntensityValues(peakIntensityTotalIonSignals);
@@ -413,7 +413,7 @@ public class PeakBuilderMSD {
 		 */
 		ITotalScanSignals totalIonSignals = getTotalIonSignals(chromatogram, scanRange, excludedIons);
 		backgroundAbundanceRange = checkBackgroundAbundanceRange(totalIonSignals, scanRange, backgroundAbundanceRange);
-		//
+
 		LinearEquation backgroundEquation = getBackgroundEquation(totalIonSignals, scanRange, backgroundAbundanceRange);
 		ITotalScanSignals peakIntensityTotalIonSignals = adjustTotalIonSignals(totalIonSignals, backgroundEquation);
 		IPeakIntensityValues peakIntensityValues = getPeakIntensityValues(peakIntensityTotalIonSignals);
@@ -452,7 +452,7 @@ public class PeakBuilderMSD {
 		totalIonSignal = totalIonSignals.getTotalScanSignal(scanRange.getStopScan());
 		float stopBackgroundAbundance = totalIonSignal.getTotalSignal();
 		backgroundAbundanceRange = new BackgroundAbundanceRange(startBackgroundAbundance, stopBackgroundAbundance);
-		//
+
 		LinearEquation backgroundEquation = getBackgroundEquation(totalIonSignals, scanRange, backgroundAbundanceRange);
 		ITotalScanSignals peakIntensityTotalIonSignals = adjustTotalIonSignals(totalIonSignals, backgroundEquation);
 		IPeakIntensityValues peakIntensityValues = getPeakIntensityValues(peakIntensityTotalIonSignals);
@@ -487,7 +487,7 @@ public class PeakBuilderMSD {
 		 * BackgroundAbundanceRange
 		 */
 		backgroundAbundanceRange = checkBackgroundAbundanceRange(totalIonSignals, scanRange, backgroundAbundanceRange);
-		//
+
 		LinearEquation backgroundEquation = getBackgroundEquation(totalIonSignals, scanRange, backgroundAbundanceRange);
 		ITotalScanSignals peakIntensityTotalIonSignals = adjustTotalIonSignals(totalIonSignals, backgroundEquation);
 		IPeakIntensityValues peakIntensityValues = getPeakIntensityValues(peakIntensityTotalIonSignals);
@@ -536,7 +536,7 @@ public class PeakBuilderMSD {
 		totalIonSignal = totalIonSignals.getTotalScanSignal(scanRange.getStopScan());
 		float stopBackgroundAbundance = totalIonSignal.getTotalSignal();
 		backgroundAbundanceRange = new BackgroundAbundanceRange(startBackgroundAbundance, stopBackgroundAbundance);
-		//
+
 		LinearEquation backgroundEquation = getBackgroundEquation(totalIonSignals, scanRange, backgroundAbundanceRange);
 		ITotalScanSignals peakIntensityTotalIonSignals = adjustTotalIonSignals(totalIonSignals, backgroundEquation);
 		IPeakIntensityValues peakIntensityValues = getPeakIntensityValues(peakIntensityTotalIonSignals);

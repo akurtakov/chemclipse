@@ -53,22 +53,22 @@ import jakarta.inject.Inject;
 public class ScanEditorWSD implements IScanEditorWSD {
 
 	private static final Logger logger = Logger.getLogger(ScanEditorWSD.class);
-	//
+
 	public static final String ID = "org.eclipse.chemclipse.ux.extension.xxd.ui.part.scanEditorWSD";
 	public static final String CONTRIBUTION_URI = "bundleclass://org.eclipse.chemclipse.ux.extension.xxd.ui/org.eclipse.chemclipse.ux.extension.xxd.ui.editors.ScanEditorWSD";
 	public static final String ICON_URI = ApplicationImageFactory.getInstance().getURI(IApplicationImage.IMAGE_SCAN_VSD, IApplicationImageProvider.SIZE_16x16); // TODO
 	public static final String TOOLTIP = ExtensionMessages.editorWSD;
-	//
+
 	private final MPart part;
 	private final MDirtyable dirtyable;
 	private final EModelService modelService;
 	private final MApplication application;
-	//
+
 	private File scanFile;
 	private ExtendedWSDScanUI extendedScanWSDEditorUI;
-	//
+
 	private ISpectrumWSD spectrumWSD = null;
-	//
+
 	private final Shell shell;
 
 	@Inject
@@ -79,7 +79,7 @@ public class ScanEditorWSD implements IScanEditorWSD {
 		this.modelService = modelService;
 		this.application = application;
 		this.shell = shell;
-		//
+
 		initialize(parent);
 	}
 
@@ -94,7 +94,7 @@ public class ScanEditorWSD implements IScanEditorWSD {
 
 		List<String> clearTopics = Arrays.asList();
 		UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_EDITOR_WSD_CLOSE, clearTopics);
-		//
+
 		if(modelService != null && application != null) {
 			MPartStack partStack = (MPartStack)modelService.find(IPerspectiveAndViewIds.EDITOR_PART_STACK_ID, application);
 			part.setToBeRendered(false);
@@ -139,7 +139,7 @@ public class ScanEditorWSD implements IScanEditorWSD {
 	private synchronized ISpectrumWSD loadScan() {
 
 		ISpectrumWSD spectrumWSD = null;
-		//
+
 		try {
 			Object object = part.getObject();
 			if(object instanceof Map<?, ?> map) {
@@ -153,7 +153,7 @@ public class ScanEditorWSD implements IScanEditorWSD {
 		} catch(Exception e) {
 			logger.error(e);
 		}
-		//
+
 		return spectrumWSD;
 	}
 
@@ -173,7 +173,7 @@ public class ScanEditorWSD implements IScanEditorWSD {
 			logger.warn(e);
 			Thread.currentThread().interrupt();
 		}
-		//
+
 		scanFile = file;
 		return runnable.getSpectrumWSD();
 	}

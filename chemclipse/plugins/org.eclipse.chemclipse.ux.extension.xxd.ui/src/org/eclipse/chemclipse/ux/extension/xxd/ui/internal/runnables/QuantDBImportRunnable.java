@@ -28,7 +28,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 public class QuantDBImportRunnable implements IRunnableWithProgress {
 
 	private static final Logger logger = Logger.getLogger(QuantDBImportRunnable.class);
-	//
+
 	private File file;
 	private IQuantitationDatabase quantitationDatabase = null;
 

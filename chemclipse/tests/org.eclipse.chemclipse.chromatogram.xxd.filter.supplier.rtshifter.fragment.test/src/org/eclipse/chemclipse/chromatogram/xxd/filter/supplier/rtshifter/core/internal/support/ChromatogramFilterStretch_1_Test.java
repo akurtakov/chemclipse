@@ -61,7 +61,7 @@ public class ChromatogramFilterStretch_1_Test extends ChromatogramTestCase {
 			FilterSettingsStretch settings = new FilterSettingsStretch();
 			settings.setScanDelay(3200);
 			settings.setChromatogramLength(60000);
-			//
+
 			RetentionTimeStretcher.stretchChromatogram(chromatogramSelection, settings);
 			assertEquals(10, chromatogram.getNumberOfScans());
 			assertEquals(3200, chromatogram.getScanDelay());

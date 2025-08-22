@@ -37,16 +37,16 @@ public class SynonymsEditUI extends Composite {
 	private static final String ACTION_ADD = "ACTION_ADD";
 	private static final String ACTION_DELETE = "ACTION_DELETE";
 	private static final String ACTION_SELECT = "ACTION_SELECT";
-	//
+
 	private SynonymsListUI synonymsListUI;
-	//
+
 	private Button buttonCancel;
 	private Button buttonDelete;
 	private Button buttonAdd;
-	//
+
 	private Text textSynonym;
 	private Button buttonSynonymAdd;
-	//
+
 	private ILibraryInformation libraryInformation;
 
 	public SynonymsEditUI(Composite parent, int style) {
@@ -70,10 +70,10 @@ public class SynonymsEditUI extends Composite {
 		setLayout(new FillLayout());
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setLayout(new GridLayout(4, false));
-		//
+
 		createButtonField(composite);
 		createTableField(composite);
-		//
+
 		enableButtonFields(ACTION_INITIALIZE);
 	}
 
@@ -85,7 +85,7 @@ public class SynonymsEditUI extends Composite {
 		textSynonym = new Text(composite, SWT.BORDER);
 		textSynonym.setText("");
 		textSynonym.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		buttonSynonymAdd = new Button(composite, SWT.PUSH);
 		buttonSynonymAdd.setText("Add");
 		buttonSynonymAdd.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXECUTE, IApplicationImage.SIZE_16x16));
@@ -124,7 +124,7 @@ public class SynonymsEditUI extends Composite {
 		GridData gridDataComposite = new GridData();
 		gridDataComposite.horizontalAlignment = SWT.RIGHT;
 		compositeButtons.setLayoutData(gridDataComposite);
-		//
+
 		buttonCancel = new Button(compositeButtons, SWT.PUSH);
 		buttonCancel.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CANCEL, IApplicationImage.SIZE_16x16));
 		buttonCancel.addSelectionListener(new SelectionAdapter() {
@@ -135,7 +135,7 @@ public class SynonymsEditUI extends Composite {
 				enableButtonFields(ACTION_CANCEL);
 			}
 		});
-		//
+
 		buttonDelete = new Button(compositeButtons, SWT.PUSH);
 		buttonDelete.setEnabled(false);
 		buttonDelete.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DELETE, IApplicationImage.SIZE_16x16));
@@ -151,7 +151,7 @@ public class SynonymsEditUI extends Composite {
 					messageBox.setText("Delete synonyms?");
 					messageBox.setMessage("Would you like to delete the synonyms?");
 					if(messageBox.open() == SWT.OK) {
-						//
+
 						enableButtonFields(ACTION_DELETE);
 						TableItem[] tableItems = table.getSelection();
 						for(TableItem tableItem : tableItems) {
@@ -165,7 +165,7 @@ public class SynonymsEditUI extends Composite {
 				}
 			}
 		});
-		//
+
 		buttonAdd = new Button(compositeButtons, SWT.PUSH);
 		buttonAdd.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ADD, IApplicationImage.SIZE_16x16));
 		buttonAdd.addSelectionListener(new SelectionAdapter() {
@@ -185,7 +185,7 @@ public class SynonymsEditUI extends Composite {
 		gridData.horizontalSpan = 4;
 		compositeTable.setLayoutData(gridData);
 		compositeTable.setLayout(new FillLayout());
-		//
+
 		synonymsListUI = new SynonymsListUI(compositeTable, SWT.BORDER | SWT.MULTI);
 		synonymsListUI.getTable().addSelectionListener(new SelectionAdapter() {
 
@@ -217,7 +217,7 @@ public class SynonymsEditUI extends Composite {
 				break;
 			case ACTION_SELECT:
 				buttonAdd.setEnabled(true);
-				//
+
 				if(synonymsListUI.getTable().getSelectionIndex() >= 0) {
 					buttonDelete.setEnabled(true);
 				} else {
@@ -232,7 +232,7 @@ public class SynonymsEditUI extends Composite {
 		buttonCancel.setEnabled(enabled);
 		buttonDelete.setEnabled(enabled);
 		buttonAdd.setEnabled(enabled);
-		//
+
 		textSynonym.setEnabled(enabled);
 		buttonSynonymAdd.setEnabled(enabled);
 	}

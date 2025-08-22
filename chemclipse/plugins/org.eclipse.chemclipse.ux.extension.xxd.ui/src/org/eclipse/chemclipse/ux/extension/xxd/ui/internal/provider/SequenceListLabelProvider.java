@@ -37,7 +37,7 @@ public class SequenceListLabelProvider extends AbstractChemClipseLabelProvider {
 			ExtensionMessages.multiplier, //
 			ExtensionMessages.injectionVolume //
 	};
-	//
+
 	public static int[] BOUNDS = {//
 			200, //
 			150, //
@@ -78,7 +78,7 @@ public class SequenceListLabelProvider extends AbstractChemClipseLabelProvider {
 		DecimalFormat decimalFormat = getDecimalFormat();
 		String text = "";
 		if(element instanceof ISequenceRecord sequenceRecord) {
-			//
+
 			switch(columnIndex) {
 				case 0:
 					text = sequenceRecord.getSampleName();

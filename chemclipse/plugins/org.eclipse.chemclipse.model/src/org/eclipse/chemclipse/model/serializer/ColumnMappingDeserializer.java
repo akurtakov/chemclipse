@@ -28,7 +28,7 @@ public class ColumnMappingDeserializer extends JsonDeserializer<SeparationColumn
 
 		SeparationColumnMapping separationColumnMapping = new SeparationColumnMapping();
 		separationColumnMapping.load(jsonParser.getText());
-		//
+
 		return separationColumnMapping;
 	}
 }

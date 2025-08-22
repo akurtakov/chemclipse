@@ -27,9 +27,9 @@ import org.eclipse.chemclipse.wsd.model.core.implementation.ScanSignalWSD;
 public class ExtractedWavelengthSignal implements IExtractedWavelengthSignal {
 
 	private static final Logger logger = Logger.getLogger(ExtractedWavelengthSignal.class);
-	//
+
 	private static final float NORMALIZATION_BASE = 1000.0f;
-	//
+
 	private float[] abundanceValues;
 	private int startWavelength;
 	private int stopWavelength;
@@ -178,7 +178,7 @@ public class ExtractedWavelengthSignal implements IExtractedWavelengthSignal {
 		if(maxIntensity == 0) {
 			return 0;
 		}
-		//
+
 		for(int i = 0; i < abundanceValues.length; i++) {
 			if(abundanceValues[i] == maxIntensity) {
 				return i + startWavelength;

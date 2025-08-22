@@ -27,7 +27,7 @@ public class IdentifierListLabelProvider extends AbstractChemClipseLabelProvider
 			"File Name", //
 			"File Path" //
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			100, //
 			150, //

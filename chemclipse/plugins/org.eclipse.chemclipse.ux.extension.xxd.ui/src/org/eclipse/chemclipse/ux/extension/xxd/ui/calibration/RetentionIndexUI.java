@@ -45,10 +45,10 @@ public class RetentionIndexUI extends Composite implements IExtendedPartUI {
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private AtomicReference<CalibrationEditUI> toolbarEdit = new AtomicReference<>();
 	private AtomicReference<RetentionIndexTableViewerUI> retentionIndexListUI = new AtomicReference<>();
-	//
+
 	private IUpdateListenerUI updateListener = null;
 	private ISeparationColumnIndices separationColumnIndices = null;
-	//
+
 	private IEventBroker eventBroker = Activator.getDefault().getEventBroker();
 
 	public RetentionIndexUI(Composite parent, int style) {
@@ -121,17 +121,17 @@ public class RetentionIndexUI extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(1, true);
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		createToolbarSearch(composite);
 		createToolbarEdit(composite);
 		createTableField(composite);
-		//
+
 		initialize();
 	}
 
@@ -160,7 +160,7 @@ public class RetentionIndexUI extends Composite implements IExtendedPartUI {
 				fireUpdate(Display.getDefault());
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -215,7 +215,7 @@ public class RetentionIndexUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		toolbarEdit.set(calibrationEditUI);
 	}
 
@@ -223,7 +223,7 @@ public class RetentionIndexUI extends Composite implements IExtendedPartUI {
 
 		RetentionIndexTableViewerUI tableViewer = new RetentionIndexTableViewerUI(composite, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 		tableViewer.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		tableViewer.setUpdateListener(new IUpdateListenerUI() {
 
 			@Override
@@ -232,7 +232,7 @@ public class RetentionIndexUI extends Composite implements IExtendedPartUI {
 				notifyLibraryUpdate();
 			}
 		});
-		//
+
 		tableViewer.getTable().addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -242,7 +242,7 @@ public class RetentionIndexUI extends Composite implements IExtendedPartUI {
 				fireUpdate(e.display);
 			}
 		});
-		//
+
 		retentionIndexListUI.set(tableViewer);
 	}
 

@@ -31,16 +31,16 @@ public class RetentionIndexWizardElements extends ChromatogramWizardElements {
 	private String startIndexName = "";
 	private String stopIndexName = "";
 	private boolean useAlreadyDetectedPeaks = false;
-	//
+
 	private IChromatogramSelection chromatogramSelection;
 	private ISeparationColumnIndices separationColumnIndices = new SeparationColumnIndices();
-	//
+
 	private boolean retentionIndexDataIsValidated = false;
 
 	public List<String> getSelectedIndices() {
 
 		List<String> selectedIndices = new ArrayList<>();
-		//
+
 		boolean addIndex = false;
 		for(String standard : availableStandards) {
 			if(standard.equals(startIndexName)) {
@@ -62,7 +62,7 @@ public class RetentionIndexWizardElements extends ChromatogramWizardElements {
 				selectedIndices.add(standard);
 			}
 		}
-		//
+
 		return selectedIndices;
 	}
 

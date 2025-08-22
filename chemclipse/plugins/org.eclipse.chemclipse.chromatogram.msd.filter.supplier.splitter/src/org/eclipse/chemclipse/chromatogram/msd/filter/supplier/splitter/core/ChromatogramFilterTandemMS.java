@@ -59,7 +59,7 @@ public class ChromatogramFilterTandemMS extends AbstractChromatogramFilterMSD {
 		IProcessingInfo<IChromatogramFilterResult> validation = validate(chromatogramSelection, chromatogramFilterSettings);
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = new ProcessingInfo<>();
 		processingInfo.addMessages(validation);
-		//
+
 		if(!processingInfo.hasErrorMessages()) {
 			HeaderField headerField = getHeaderField(chromatogramFilterSettings);
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
@@ -75,7 +75,7 @@ public class ChromatogramFilterTandemMS extends AbstractChromatogramFilterMSD {
 					splitSpecificIonTransitions(chromatogramMSD, headerField, decimalFormat, specificTransitions);
 				}
 			}
-			//
+
 			chromatogramSelection.getChromatogram().setDirty(true);
 			processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "The chromatogram was splitted into MS/MS reference chromatograms."));
 		}
@@ -103,7 +103,7 @@ public class ChromatogramFilterTandemMS extends AbstractChromatogramFilterMSD {
 			IChromatogramMSD chromatogramReferenceMSD = new ChromatogramMSD();
 			chromatogramReferenceMSD.setConverterId(chromatogramMSD.getConverterId());
 			HeaderUtil.setHeaderData(chromatogramReferenceMSD, headerField, ionTransitionLabel);
-			//
+
 			for(IScan scan : chromatogramMSD.getScans()) {
 				if(scan instanceof IScanMSD scanMSD) {
 					VendorScan vendorScanMSD = null;
@@ -118,7 +118,7 @@ public class ChromatogramFilterTandemMS extends AbstractChromatogramFilterMSD {
 								identifier = ScanSupport.getLabelTandemMS(ionTransition);
 								ionTransitionLabelMap.put(ionTransition, identifier);
 							}
-							//
+
 							if(ionTransitionLabel.equals(identifier)) {
 								/*
 								 * Create scan on demand.
@@ -137,7 +137,7 @@ public class ChromatogramFilterTandemMS extends AbstractChromatogramFilterMSD {
 					}
 				}
 			}
-			//
+
 			calculateScanIntervalAndDelay(chromatogramReferenceMSD);
 			chromatogramMSD.addReferencedChromatogram(chromatogramReferenceMSD);
 		}
@@ -149,10 +149,10 @@ public class ChromatogramFilterTandemMS extends AbstractChromatogramFilterMSD {
 		for(IIonTransition ionTransition : chromatogramMSD.getIonTransitionSettings().getIonTransitions()) {
 			ionTransitions.add(ScanSupport.getLabelTandemMS(ionTransition));
 		}
-		//
+
 		List<String> ionTransitionLabels = new ArrayList<>(ionTransitions);
 		Collections.sort(ionTransitionLabels);
-		//
+
 		return ionTransitionLabels;
 	}
 
@@ -188,11 +188,11 @@ public class ChromatogramFilterTandemMS extends AbstractChromatogramFilterMSD {
 				}
 			}
 		}
-		//
+
 		IChromatogramMSD chromatogramReferenceMSD = new ChromatogramMSD();
 		chromatogramReferenceMSD.setConverterId(chromatogramMSD.getConverterId());
 		HeaderUtil.setHeaderData(chromatogramReferenceMSD, headerField, "Specific Ion Transitions");
-		//
+
 		List<IScan> vendorScans = new ArrayList<>();
 		for(Map.Entry<String, List<IIon>> entry : scanMap.entrySet()) {
 			int retentionTime = (int)Math.round(Double.valueOf(entry.getKey()) * IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
@@ -201,7 +201,7 @@ public class ChromatogramFilterTandemMS extends AbstractChromatogramFilterMSD {
 			vendorScanMSD.addIons(entry.getValue(), true);
 			vendorScans.add(vendorScanMSD);
 		}
-		//
+
 		Collections.sort(vendorScans, (s1, s2) -> Integer.compare(s1.getRetentionTime(), s2.getRetentionTime()));
 		chromatogramReferenceMSD.addScans(vendorScans);
 		calculateScanIntervalAndDelay(chromatogramReferenceMSD);
@@ -243,7 +243,7 @@ public class ChromatogramFilterTandemMS extends AbstractChromatogramFilterMSD {
 		if(chromatogramFilterSettings instanceof FilterSettingsTandemMS filterSettingsTandemMS) {
 			headerField = filterSettingsTandemMS.getHeaderField();
 		}
-		//
+
 		return headerField;
 	}
 
@@ -268,7 +268,7 @@ public class ChromatogramFilterTandemMS extends AbstractChromatogramFilterMSD {
 					break;
 			}
 		}
-		//
+
 		return decimalFormat;
 	}
 
@@ -289,7 +289,7 @@ public class ChromatogramFilterTandemMS extends AbstractChromatogramFilterMSD {
 				}
 			}
 		}
-		//
+
 		return specificTransitions;
 	}
 }

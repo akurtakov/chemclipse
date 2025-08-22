@@ -55,16 +55,16 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 	private Composite toolbarInfoTop;
 	private RetentionIndexUI retentionIndexUI;
 	private Composite toolbarInfoBottom;
-	//
+
 	private Label labelInfoTop;
 	private Label labelInfoBottom;
-	//
+
 	private Button buttonAddLibrary;
 	private Button buttonRemoveLibrary;
-	//
+
 	private ComboViewer comboViewerSeparationColumn;
 	private final List<ISeparationColumn> separationColumns = SeparationColumnFactory.getSeparationColumns();
-	//
+
 	private File retentionIndexFile;
 	private ISeparationColumnIndices separationColumnIndices = null;
 
@@ -122,12 +122,12 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 		setLayout(new FillLayout());
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		createToolbarMain(composite);
 		toolbarInfoTop = createToolbarInfoTop(composite);
 		retentionIndexUI = createRetentionIndexUI(composite);
 		toolbarInfoBottom = createToolbarInfoBottom(composite);
-		//
+
 		initialize();
 	}
 
@@ -136,10 +136,10 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 		comboViewerSeparationColumn.setInput(separationColumns);
 		buttonAddLibrary.setEnabled(false);
 		buttonRemoveLibrary.setEnabled(false);
-		//
+
 		PartSupport.setCompositeVisibility(toolbarInfoTop, true);
 		PartSupport.setCompositeVisibility(toolbarInfoBottom, true);
-		//
+
 		retentionIndexUI.setSearchVisibility(false);
 		retentionIndexUI.setEditVisibility(false);
 		retentionIndexUI.enableTableEdit(false);
@@ -153,7 +153,7 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 		gridDataStatus.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridDataStatus);
 		composite.setLayout(new GridLayout(8, false));
-		//
+
 		createButtonToggleToolbarInfo(composite);
 		comboViewerSeparationColumn = createComboViewerSeparationColumn(composite);
 		createButtonToggleToolbarSearch(composite);
@@ -180,7 +180,7 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 				button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_INFO, IApplicationImageProvider.SIZE_16x16, visible));
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -200,7 +200,7 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText(ExtensionMessages.selectChromatogramColumn);
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		combo.addSelectionListener(new SelectionAdapter() {
@@ -215,7 +215,7 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 				}
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -234,7 +234,7 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 				button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SEARCH, IApplicationImageProvider.SIZE_16x16, visible));
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -257,7 +257,7 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -277,7 +277,7 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 				updateLabel();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -296,7 +296,7 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 				MessageDialog.openConfirm(e.display.getActiveShell(), ExtensionMessages.retentionIndexCalculator, ExtensionMessages.retentionIndexLibraryAdded);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -315,7 +315,7 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 				MessageDialog.openConfirm(e.display.getActiveShell(), ExtensionMessages.retentionIndexCalculator, ExtensionMessages.retentionIndexLibraryRemoved);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -338,12 +338,12 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		labelInfoTop = new Label(composite, SWT.NONE);
 		labelInfoTop.setBackground(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 		labelInfoTop.setText("");
 		labelInfoTop.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return composite;
 	}
 
@@ -369,12 +369,12 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		labelInfoBottom = new Label(composite, SWT.NONE);
 		labelInfoBottom.setBackground(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 		labelInfoBottom.setText("");
 		labelInfoBottom.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return composite;
 	}
 
@@ -405,7 +405,7 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 	private String getSeparationColumnDetails(ISeparationColumn separationColumn) {
 
 		StringBuilder builder = new StringBuilder();
-		//
+
 		builder.append(separationColumn.getSeparationColumnType().label());
 		builder.append(" ");
 		builder.append(separationColumn.getLength());
@@ -413,7 +413,7 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 		builder.append(separationColumn.getDiameter());
 		builder.append(" ");
 		builder.append(separationColumn.getPhase());
-		//
+
 		return builder.toString().trim();
 	}
 

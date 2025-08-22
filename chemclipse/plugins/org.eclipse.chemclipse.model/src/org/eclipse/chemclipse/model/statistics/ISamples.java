@@ -41,7 +41,7 @@ public interface ISamples<V extends IVariable, S extends ISample> {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 }

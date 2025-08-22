@@ -71,7 +71,7 @@ public class MethodReaderWriter_1401 extends ObjectStreamMethodFormat {
 		readMap(stream, ObjectStreamMethodFormat::readString, ObjectStreamMethodFormat::readString, processMethod.getMetaData()::put);
 		readItems(stream, processEntryDeserialization(processMethod), processMethod.getEntries()::add);
 		processMethod.setReadOnly(stream.readBoolean());
-		//
+
 		return processMethod;
 	}
 

@@ -55,11 +55,11 @@ public class MinimumTracesFilter extends AbstractPeakFilter<MinimumTracesFilterS
 	public void filterPeaks(IChromatogramSelection chromatogramSelection, MinimumTracesFilterSettings configuration, ProcessExecutionContext context) throws IllegalArgumentException {
 
 		Collection<IPeak> peaks = getReadOnlyPeaks(chromatogramSelection);
-		//
+
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
-		//
+
 		SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), peaks.size());
 		int minIons = configuration.getMinNumberOfIons();
 		List<IPeak> peaksToDelete = new ArrayList<>();
@@ -74,7 +74,7 @@ public class MinimumTracesFilter extends AbstractPeakFilter<MinimumTracesFilterS
 			}
 			subMonitor.worked(1);
 		}
-		//
+
 		deletePeaks(peaksToDelete, chromatogramSelection);
 		resetPeakSelection(chromatogramSelection);
 	}

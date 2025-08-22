@@ -38,7 +38,7 @@ public class DataTypeTypeSelectionWizard {
 
 	public static final int DEFAULT_WIDTH = 200;
 	public static final int DEFAULT_HEIGHT = 300;
-	//
+
 	private static final String PREFIX = "DataTypeTypeSelectionWizard.";
 	private static final DataCategoryGroup[] GROUPS = DataCategoryGroup.defaultGroups();
 
@@ -50,7 +50,7 @@ public class DataTypeTypeSelectionWizard {
 				preferenceStore.setDefault(categoryPreferenceKey(group, category), true);
 			}
 		}
-		//
+
 		SelectionPage selectionPage = new SelectionPage(preferenceStore);
 		selectionPage.setDescription(description);
 		WizardDialog wizardDialog = new WizardDialog(shell, new SinglePageWizard("Select Data Categories", selectionPage));

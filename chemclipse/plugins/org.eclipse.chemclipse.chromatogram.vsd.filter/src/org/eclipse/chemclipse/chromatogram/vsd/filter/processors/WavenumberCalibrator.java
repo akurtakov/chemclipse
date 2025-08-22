@@ -74,7 +74,7 @@ public class WavenumberCalibrator implements IProcessTypeSupplier {
 					IChromatogramVSD chromatogramISD = chromatogramSelectionISD.getChromatogram();
 					int startScan = chromatogramISD.getScanNumber(chromatogramSelection.getStartRetentionTime());
 					int stopScan = chromatogramISD.getScanNumber(chromatogramSelection.getStopRetentionTime());
-					//
+
 					for(int scan = startScan; scan <= stopScan; scan++) {
 						IScan scanX = chromatogramISD.getScan(scan);
 						if(scanX instanceof IScanVSD scanISD) {
@@ -98,7 +98,7 @@ public class WavenumberCalibrator implements IProcessTypeSupplier {
 		private List<Double> getWavenumbers(String selection) {
 
 			List<Double> wavelengths = new ArrayList<>();
-			//
+
 			String lineDelimiter = OperatingSystemUtils.getLineDelimiter();
 			String delimiter = selection.contains(lineDelimiter) ? lineDelimiter : "\n";
 			String[] lines = selection.split(delimiter);
@@ -112,7 +112,7 @@ public class WavenumberCalibrator implements IProcessTypeSupplier {
 					}
 				}
 			}
-			//
+
 			return wavelengths;
 		}
 	}

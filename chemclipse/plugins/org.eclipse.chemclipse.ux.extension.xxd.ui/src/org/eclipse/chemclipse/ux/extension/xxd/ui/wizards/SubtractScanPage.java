@@ -43,13 +43,13 @@ public class SubtractScanPage extends WizardPage {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout());
-		//
+
 		createLabel(composite);
 		createButtonNominalMZ(composite);
 		createButtonNormalize(composite);
 		createButtonMultiSubtract(composite);
 		createButtonShowDialog(composite);
-		//
+
 		setControl(composite);
 	}
 
@@ -58,7 +58,7 @@ public class SubtractScanPage extends WizardPage {
 		Label label = new Label(parent, SWT.NONE);
 		label.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		label.setText("Select a scan in the chromatogram. It will be subtracted from the current selection.");
-		//
+
 		return label;
 	}
 
@@ -78,7 +78,7 @@ public class SubtractScanPage extends WizardPage {
 				PreferenceSupplierModelMSD.setUseNominalMZ(useNominalMZ);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -98,7 +98,7 @@ public class SubtractScanPage extends WizardPage {
 				PreferenceSupplierModelMSD.setUseNormalizedScan(useNormalizedScan);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -109,7 +109,7 @@ public class SubtractScanPage extends WizardPage {
 		boolean isSubtractMany = preferenceStore.getBoolean(PreferenceSupplier.P_ENABLE_MULTI_SUBTRACT);
 		String textSubtractOne = "Modus: One Scan Subtract";
 		String textSubtractMany = "Modus: Multi Scan Subtract";
-		//
+
 		Button button = new Button(parent, SWT.CHECK);
 		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		button.setText(isSubtractMany ? textSubtractMany : textSubtractOne);
@@ -127,7 +127,7 @@ public class SubtractScanPage extends WizardPage {
 				button.setImage(isSubtractMany ? imageSubtractMany : imageSubtractOne);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -145,7 +145,7 @@ public class SubtractScanPage extends WizardPage {
 				preferenceStore.setValue(PreferenceSupplier.P_SHOW_SUBTRACT_DIALOG, button.getSelection());
 			}
 		});
-		//
+
 		return button;
 	}
 }

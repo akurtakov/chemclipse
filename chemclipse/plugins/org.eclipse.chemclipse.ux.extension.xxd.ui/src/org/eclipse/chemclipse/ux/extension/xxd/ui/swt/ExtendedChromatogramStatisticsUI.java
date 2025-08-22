@@ -51,7 +51,7 @@ public class ExtendedChromatogramStatisticsUI extends Composite implements IExte
 	private Button buttonToolbarInfo;
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private AtomicReference<KeyValueListUI> tableControl = new AtomicReference<>();
-	//
+
 	private IChromatogramSelection chromatogramSelection = null;
 	private PeakQuantitationsExtractor peakQuantitationsExtractor = new PeakQuantitationsExtractor();
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish();
@@ -71,11 +71,11 @@ public class ExtendedChromatogramStatisticsUI extends Composite implements IExte
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createTable(this);
-		//
+
 		initialize();
 	}
 
@@ -91,10 +91,10 @@ public class ExtendedChromatogramStatisticsUI extends Composite implements IExte
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(2, false));
-		//
+
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 		createSettingsButton(composite);
-		//
+
 		return composite;
 	}
 
@@ -102,7 +102,7 @@ public class ExtendedChromatogramStatisticsUI extends Composite implements IExte
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -111,7 +111,7 @@ public class ExtendedChromatogramStatisticsUI extends Composite implements IExte
 		KeyValueListUI keyValueListUI = new KeyValueListUI(parent, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		Table table = keyValueListUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		tableControl.set(keyValueListUI);
 	}
 
@@ -144,11 +144,11 @@ public class ExtendedChromatogramStatisticsUI extends Composite implements IExte
 			addScanData(chromatogramSelection, dataMap);
 			addPeakData(chromatogramSelection, dataMap);
 			addIonTransitionData(chromatogramSelection, dataMap);
-			//
+
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 			info = ChromatogramDataSupport.getChromatogramLabel(chromatogram);
 		}
-		//
+
 		toolbarInfo.get().setText(info);
 		tableControl.get().setInput(dataMap);
 	}
@@ -240,7 +240,7 @@ public class ExtendedChromatogramStatisticsUI extends Composite implements IExte
 		for(IPeak peak : peaks) {
 			peakArea += peak.getIntegratedArea();
 		}
-		//
+
 		return peakArea;
 	}
 }

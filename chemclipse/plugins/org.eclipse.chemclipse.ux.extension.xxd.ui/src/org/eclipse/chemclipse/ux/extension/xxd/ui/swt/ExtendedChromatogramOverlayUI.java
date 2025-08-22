@@ -410,7 +410,7 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 		GridData gridData = new GridData();
 		gridData.minimumWidth = 150;
 		combo.setLayoutData(gridData);
-		//
+
 		combo.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -1152,7 +1152,7 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 			int length = chromatogram.getNumberOfScans() / modulo;
 			int i = 0;
 			int j = 0;
-			//
+
 			for(IScan scan : chromatogramWSD.getScans()) {
 				if(j % modulo == 0) {
 					if(scan instanceof IScanWSD scanWSD) {
@@ -1192,7 +1192,7 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 				}
 				j++;
 			}
-			//
+
 			for(ILineSeriesData lineSeriesData : lineSeriesMap.values()) {
 				String seriesId = lineSeriesData.getSeriesData().getId();
 				availableSeriesIds.add(seriesId);
@@ -1263,7 +1263,7 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 
 		String seriesId;
 		Color color;
-		//
+
 		BaseChart baseChart = chartControl.get().getBaseChart();
 		Derivative derivative = getSelectedDerivative();
 		IMarkedWavelengths markedWavelengths = new MarkedWavelengths();
@@ -1276,7 +1276,7 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 			availableSeriesIds.add(seriesId);
 			selectionSeries.add(seriesId);
 			color = chromatogramChartSupport.getSeriesColor(seriesId, displayType);
-			//
+
 			if(!baseChart.isSeriesContained(seriesId)) {
 				ILineSeriesData lineSeriesData = chromatogramChartSupport.getLineSeriesData(chromatogram, seriesId, displayType, derivative, color, markedWavelengths, false);
 				ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
@@ -1298,7 +1298,7 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 					availableSeriesIds.add(seriesId);
 					selectionSeries.add(seriesId);
 					color = chromatogramChartSupport.getSeriesColor(seriesId, displayType);
-					//
+
 					if(!baseChart.isSeriesContained(seriesId)) {
 						ILineSeriesData lineSeriesData = chromatogramChartSupport.getLineSeriesData(referencedChromatogram, seriesId, displayType, derivative, color, markedWavelengths, false);
 						ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
@@ -1384,7 +1384,7 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 		if(object instanceof Derivative derivative) {
 			return derivative;
 		}
-		//
+
 		return Derivative.NONE;
 	}
 

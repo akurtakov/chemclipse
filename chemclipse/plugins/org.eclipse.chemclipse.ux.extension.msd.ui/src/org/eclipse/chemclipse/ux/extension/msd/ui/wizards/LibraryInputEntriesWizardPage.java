@@ -52,11 +52,11 @@ public class LibraryInputEntriesWizardPage extends WizardPage {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new FillLayout());
-		//
+
 		DataExplorerTreeUI treeUI = new DataExplorerTreeUI(parent, DataExplorerTreeRoot.DRIVES, Collections.singleton(DatabaseSupport.getInstanceEditorSupport()));
 		treeUI.expandLastDirectoryPath(Activator.getDefault().getPreferenceStore());
 		libraryViewer = treeUI.getTreeViewer();
-		//
+
 		setControl(composite);
 	}
 }

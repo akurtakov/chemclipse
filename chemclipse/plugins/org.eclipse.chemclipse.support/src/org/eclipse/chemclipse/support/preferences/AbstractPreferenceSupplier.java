@@ -25,7 +25,7 @@ public abstract class AbstractPreferenceSupplier implements IPreferenceSupplier 
 
 	private static final Logger logger = Logger.getLogger(AbstractPreferenceSupplier.class);
 	private static final Map<String, IPreferenceSupplier> INSTANCES = new HashMap<>();
-	//
+
 	private Map<String, String> defaultValues = new HashMap<String, String>();
 
 	public AbstractPreferenceSupplier() {
@@ -52,7 +52,7 @@ public abstract class AbstractPreferenceSupplier implements IPreferenceSupplier 
 				preferenceSupplier = new PreferenceSupplierFallback();
 			}
 		}
-		//
+
 		return preferenceSupplier;
 	}
 

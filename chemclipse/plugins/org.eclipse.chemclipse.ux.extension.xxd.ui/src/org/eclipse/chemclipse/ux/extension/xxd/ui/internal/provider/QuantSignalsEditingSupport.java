@@ -96,7 +96,7 @@ public class QuantSignalsEditingSupport extends EditingSupport {
 			try {
 				result = Double.parseDouble(stringValue);
 			} catch(NumberFormatException e) {
-				//
+
 			}
 		}
 		return result;

@@ -18,7 +18,7 @@ import org.eclipse.chemclipse.model.core.AbstractSignal;
 public class SignalFSD extends AbstractSignal implements ISignalFSD, Comparable<ISignalFSD> {
 
 	private static final long serialVersionUID = -8194790301556998815L;
-	//
+
 	private float wavelength = 0; // nm
 	private double intensity = 0;
 

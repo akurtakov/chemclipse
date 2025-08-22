@@ -52,7 +52,7 @@ public class ErrorResiduePart extends AbstractPartPCA<ErrorResidueChart> {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 }

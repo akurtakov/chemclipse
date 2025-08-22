@@ -277,7 +277,7 @@ public class MassSpectrumFileSupport {
 		} catch(InterruptedException e) {
 			logger.warn(e);
 		}
-		//
+
 		File data = runnable.getData();
 		if(data == null) {
 			MessageDialog.openInformation(shell, "Save Mass Spectrum", "There is not suitable mass spectrum converter available.");

@@ -28,7 +28,7 @@ import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignal;
 public abstract class AbstractRegularMassSpectrum extends AbstractScanMSD implements IRegularMassSpectrum {
 
 	private static final long serialVersionUID = 6051414280468344074L;
-	//
+
 	private short massSpectrometer;
 	private MassSpectrumType massSpectrumType;
 	private double precursorIon;

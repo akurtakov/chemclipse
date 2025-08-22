@@ -17,7 +17,7 @@ import org.eclipse.chemclipse.model.core.ISignal;
 public class ResponseSignal implements IResponseSignal {
 
 	private static final long serialVersionUID = -4768367983343261439L;
-	//
+
 	private double signal = ISignal.TOTAL_INTENSITY;
 	private double concentration = 0.0d;
 	private double response = 0.0d;

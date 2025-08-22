@@ -52,7 +52,7 @@ public class QuantitationCompound extends AbstractQuantitationCompound implement
 			 */
 			getQuantitationSignals().clear();
 			getResponseSignals().clear();
-			//
+
 			if(isUseTIC()) {
 				createTablesTIC(quantitationPeaks);
 			} else {
@@ -72,15 +72,15 @@ public class QuantitationCompound extends AbstractQuantitationCompound implement
 			 */
 			QuantitationSupport integrationQuantitationSupport = new QuantitationSupport(peak);
 			if(integrationQuantitationSupport.validateTIC()) {
-				//
+
 				double ion = ISignal.TOTAL_INTENSITY;
 				double response = integrationQuantitationSupport.getIntegrationArea(ion);
-				//
+
 				if(firstPeak) {
 					IQuantitationSignal quantitationSignal = new QuantitationSignal(ion, IQuantitationSignal.ABSOLUTE_RELATIVE_RESPONSE);
 					getQuantitationSignals().add(quantitationSignal);
 				}
-				//
+
 				IResponseSignal concentrationResponseEntry = new ResponseSignal(ion, concentration, response);
 				getResponseSignals().add(concentrationResponseEntry);
 				/*
@@ -102,13 +102,13 @@ public class QuantitationCompound extends AbstractQuantitationCompound implement
 				 * The integrated area needs to use the TIC mode. Otherwise, wrong areas/response values would be calculated.
 				 */
 				QuantitationSupport integrationQuantitationSupport = new QuantitationSupport(peak);
-				//
+
 				IScanMSD massSpectrum = peakMSD.getExtractedMassSpectrum();
 				IExtractedIonSignal extractedIonSignal = massSpectrum.getExtractedIonSignal();
 				List<Double> selectedQuantitationIons = getSelectedQunatitationIons(extractedIonSignal);
-				//
+
 				if(integrationQuantitationSupport.validateXIC(selectedQuantitationIons)) {
-					//
+
 					for(double ion : selectedQuantitationIons) {
 						float abundance = extractedIonSignal.getAbundance((int)ion);
 						float totalSignalMassSpectrum = extractedIonSignal.getTotalSignal();
@@ -145,7 +145,7 @@ public class QuantitationCompound extends AbstractQuantitationCompound implement
 							 */
 							concentrationResponseEntry = new ResponseSignal(ion, concentration, response);
 						}
-						//
+
 						getResponseSignals().add(concentrationResponseEntry);
 					}
 					/*

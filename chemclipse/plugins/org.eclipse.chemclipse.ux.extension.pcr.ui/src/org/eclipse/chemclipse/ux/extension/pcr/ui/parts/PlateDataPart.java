@@ -58,7 +58,7 @@ public class PlateDataPart extends AbstractPart<ExtendedPlateDataUI> {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 

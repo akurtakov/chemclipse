@@ -64,7 +64,7 @@ public abstract class AbstractChromatogramReader extends AbstractChromatogramMSD
 			 */
 			ZipEntry zipEntry = zipEntries.nextElement();
 			String name = zipEntry.getName();
-			//
+
 			if(isDirectory && zipEntry.isDirectory()) {
 				if(name.equals(entryName)) {
 					return new DataInputStream(new BufferedInputStream(zipFile.getInputStream(zipEntry)));

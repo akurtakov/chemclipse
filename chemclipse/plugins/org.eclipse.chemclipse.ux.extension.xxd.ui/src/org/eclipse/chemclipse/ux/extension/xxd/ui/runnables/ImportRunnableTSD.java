@@ -25,7 +25,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 public class ImportRunnableTSD implements IRunnableWithProgress {
 
 	private static final Logger logger = Logger.getLogger(ImportRunnableTSD.class);
-	//
+
 	private File file;
 	private IChromatogramTSD chromatogramTSD = null;
 

@@ -43,11 +43,11 @@ public class MassSpectrumExtractionSupport {
 		Set<Integer> mzSet = new HashSet<>();
 		List<Sample> samplesList = new ArrayList<>();
 		List<IScanMSD> libraryMassSpectra = new ArrayList<>();
-		//
+
 		for(IMassSpectra massSpectra : dataInput.values()) {
 			for(IScanMSD scanMSD : massSpectra.getList()) {
 				if(scanMSD instanceof ILibraryMassSpectrum libraryMassSpectrum) {
-					//
+
 					IExtractedIonSignal extractedIonSignal = scanMSD.getExtractedIonSignal();
 					int startMZ = extractedIonSignal.getStartIon();
 					int stopMZ = extractedIonSignal.getStopIon();
@@ -56,7 +56,7 @@ public class MassSpectrumExtractionSupport {
 							mzSet.add(i);
 						}
 					}
-					//
+
 					libraryMassSpectra.add(scanMSD);
 					ILibraryInformation libraryInformation = libraryMassSpectrum.getLibraryInformation();
 					String name = libraryInformation.getName();
@@ -74,7 +74,7 @@ public class MassSpectrumExtractionSupport {
 		List<IVariable> variables = new ArrayList<>();
 		List<Integer> ions = new ArrayList<>(mzSet);
 		Collections.sort(ions);
-		//
+
 		for(int ion : ions) {
 			variables.add(new MassToChargeRatio((double)ion));
 		}
@@ -83,11 +83,11 @@ public class MassSpectrumExtractionSupport {
 		 * Data
 		 */
 		for(int i = 0; i < samplesList.size(); i++) {
-			//
+
 			Sample sample = samplesList.get(i);
 			IScanMSD libraryMassSpectrum = libraryMassSpectra.get(i);
 			IExtractedIonSignal extractedIonSignal = libraryMassSpectrum.getExtractedIonSignal();
-			//
+
 			List<PeakSampleData> sampleData = sample.getSampleData();
 			for(int ion : ions) {
 				double value = extractedIonSignal.getAbundance(ion);
@@ -95,7 +95,7 @@ public class MassSpectrumExtractionSupport {
 				sampleData.add(peakSampleData);
 			}
 		}
-		//
+
 		return samples;
 	}
 }

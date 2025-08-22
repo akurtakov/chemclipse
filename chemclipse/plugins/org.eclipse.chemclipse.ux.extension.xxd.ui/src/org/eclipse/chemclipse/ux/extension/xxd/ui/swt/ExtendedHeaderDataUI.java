@@ -50,7 +50,7 @@ import org.eclipse.swt.widgets.Text;
 public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 
 	private static final String MENU_CATEGORY_HEADER_ENTRIES = "Header Entries";
-	//
+
 	private AtomicReference<Button> buttonToolbarInfo = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private AtomicReference<Button> buttonToolbarSearch = new AtomicReference<>();
@@ -62,7 +62,7 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 	private AtomicReference<HeaderDataListUI> tableViewer = new AtomicReference<>();
 	private AtomicReference<Text> miscellaneousControl = new AtomicReference<>();
 	private AtomicReference<Control> findingsControl = new AtomicReference<>();
-	//
+
 	private IMeasurementInfo measurementInfo = null;
 
 	public ExtendedHeaderDataUI(Composite parent, int style) {
@@ -80,13 +80,13 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createToolbarSearch(this);
 		createToolbarEdit(this);
 		createTabFolderSection(this);
-		//
+
 		initialize();
 	}
 
@@ -105,7 +105,7 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(5, false));
-		//
+
 		createButtonToggleInfo(composite);
 		createButtonToggleSearch(composite);
 		createButtonToggleEdit(composite);
@@ -137,7 +137,7 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -150,7 +150,7 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 			tableViewer.get().setSearchText(searchText, caseSensitive);
 			updateInfoToolbar();
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -159,7 +159,7 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 		DataMapSupportUI headerMapSupportUI = new DataMapSupportUI(parent, SWT.NONE);
 		headerMapSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		headerMapSupportUI.setUpdateListener(() -> updateInput());
-		//
+
 		toolbarEdit.set(headerMapSupportUI);
 	}
 
@@ -174,7 +174,7 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 				deleteEntries(e.display.getActiveShell());
 			}
 		});
-		//
+
 		buttonDelete.set(button);
 	}
 
@@ -203,7 +203,7 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 
 		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText("Table");
-		//
+
 		HeaderDataListUI headerDataListUI = new HeaderDataListUI(tabFolder, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		Table table = headerDataListUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -226,7 +226,7 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 		ITableSettings tableSettings = headerDataListUI.getTableSettings();
 		addDeleteMenuEntry(shell, tableSettings);
 		headerDataListUI.applySettings(tableSettings);
-		//
+
 		tabItem.setControl(headerDataListUI.getControl());
 		tableViewer.set(headerDataListUI);
 	}
@@ -235,7 +235,7 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 
 		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText("Miscellaneous");
-		//
+
 		Text text = new Text(tabFolder, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL | SWT.WRAP);
 		text.addModifyListener(e -> {
 
@@ -243,7 +243,7 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 				measurementInfo.setMiscInfo(text.getText().trim());
 			}
 		});
-		//
+
 		tabItem.setControl(text);
 		miscellaneousControl.set(text);
 	}
@@ -252,7 +252,7 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 
 		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText("Findings");
-		//
+
 		Control editor = RichTextSupport.createEditor(tabFolder, SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL | SWT.WRAP);
 		if(editor instanceof RichTextEditor richTextEditor) {
 			richTextEditor.addModifyListener(e -> {
@@ -269,7 +269,7 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 				}
 			});
 		}
-		//
+
 		tabItem.setControl(editor);
 		findingsControl.set(editor);
 	}
@@ -327,7 +327,7 @@ public class ExtendedHeaderDataUI extends Composite implements IExtendedPartUI {
 				if(!keysNotRemoved.isEmpty()) {
 					MessageDialog.openWarning(DisplayUtils.getShell(), DataMapSupportUI.HEADER_ENTRY, "The following keys can't be removed: " + keysNotRemoved);
 				}
-				//
+
 				updateInput();
 			}
 		}

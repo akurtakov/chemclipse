@@ -24,7 +24,7 @@ import org.eclipse.chemclipse.model.core.ISignal;
 public class QuantitationSupport {
 
 	private static final Logger logger = Logger.getLogger(QuantitationSupport.class);
-	//
+
 	private IPeak peak;
 	private Map<Double, Double> integratedSignals;
 
@@ -122,7 +122,7 @@ public class QuantitationSupport {
 				integratedIons.put(integrationEntry.getSignal(), integrationEntry.getIntegratedArea());
 			}
 		}
-		//
+
 		return integratedIons;
 	}
 }

@@ -20,7 +20,7 @@ import org.eclipse.jface.viewers.ViewerFilter;
 public class PerspectiveSwitcherViewerFilter extends ViewerFilter {
 
 	private static final Logger logger = Logger.getLogger(PerspectiveSwitcherViewerFilter.class);
-	//
+
 	private String searchPattern;
 	private boolean caseInsensitive;
 

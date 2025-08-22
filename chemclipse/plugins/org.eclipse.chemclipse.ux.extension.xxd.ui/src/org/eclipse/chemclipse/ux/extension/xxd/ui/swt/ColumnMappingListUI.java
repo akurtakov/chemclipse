@@ -28,7 +28,7 @@ public class ColumnMappingListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = ColumMappingLabelProvider.TITLES;
 	private static final int[] BOUNDS = ColumMappingLabelProvider.BOUNDS;
-	//
+
 	private ColumMappingLabelProvider labelProvider = new ColumMappingLabelProvider();
 	private ColumMappingComparator tableComparator = new ColumMappingComparator();
 	private ColumMappingFilter listFilter = new ColumMappingFilter();

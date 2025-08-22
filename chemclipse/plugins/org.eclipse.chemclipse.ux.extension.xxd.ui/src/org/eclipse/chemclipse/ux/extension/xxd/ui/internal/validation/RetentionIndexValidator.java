@@ -21,7 +21,7 @@ public class RetentionIndexValidator implements IValidator<Object> {
 
 	private static final String ERROR = ExtensionMessages.enterCorrectRetentionIndexExample + " 600";
 	private static final String ERROR_VALUE_RANGE = ExtensionMessages.retentionIndexMustNotBeNegative;
-	//
+
 	private float retentionIndex = 0.0f;
 
 	@Override
@@ -29,7 +29,7 @@ public class RetentionIndexValidator implements IValidator<Object> {
 
 		String message = null;
 		this.retentionIndex = 0.0f;
-		//
+
 		if(value == null) {
 			message = ERROR;
 		} else {
@@ -48,7 +48,7 @@ public class RetentionIndexValidator implements IValidator<Object> {
 				message = ERROR;
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

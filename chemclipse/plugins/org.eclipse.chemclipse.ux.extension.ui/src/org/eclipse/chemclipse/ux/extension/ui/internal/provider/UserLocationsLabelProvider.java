@@ -23,7 +23,7 @@ public class UserLocationsLabelProvider extends AbstractChemClipseLabelProvider 
 
 	public static final String NAME = "Name";
 	public static final String PATH = "Path";
-	//
+
 	public static final String[] TITLES = { //
 			NAME, //
 			PATH //

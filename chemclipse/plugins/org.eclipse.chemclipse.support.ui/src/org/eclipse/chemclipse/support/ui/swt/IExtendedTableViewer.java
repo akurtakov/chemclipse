@@ -59,7 +59,7 @@ public interface IExtendedTableViewer {
 		if(provider == null) {
 			return;
 		}
-		//
+
 		for(ColumnDefinition<?, ?> definition : provider.getColumnDefinitions()) {
 			addColumn(definition);
 		}

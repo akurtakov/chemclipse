@@ -27,7 +27,7 @@ import org.eclipse.chemclipse.support.util.ValueParserSupport;
 public class PeakQuantifierSupport {
 
 	private static final Logger logger = Logger.getLogger(PeakQuantifierSupport.class);
-	//
+
 	private static final String MARKER_COMPENSATION = "x";
 	private static final String PATTERN_DECIMAL_FORMAT = "0.#####";
 
@@ -42,7 +42,7 @@ public class PeakQuantifierSupport {
 	public static IInternalStandard getInternalStandard(String name, String value) {
 
 		IInternalStandard internalStandard = null;
-		//
+
 		if(name != null && value != null) {
 			if(!name.isBlank()) {
 				String[] parts = value.trim().split(" ");
@@ -59,14 +59,14 @@ public class PeakQuantifierSupport {
 							logger.warn(e);
 						}
 					}
-					//
+
 					if(concentration > 0 && !unit.isBlank()) {
 						internalStandard = new InternalStandard(name, concentration, unit, compensationFactor);
 					}
 				}
 			}
 		}
-		//
+
 		return internalStandard;
 	}
 
@@ -90,7 +90,7 @@ public class PeakQuantifierSupport {
 				 */
 				Collections.sort(internalStandards, (s1, s2) -> s1.getName().compareTo(s2.getName()));
 				IInternalStandard internalStandard = internalStandards.get(0);
-				//
+
 				StringBuilder builder = new StringBuilder();
 				builder.append(ValueFormat.getDecimalFormatEnglish(PATTERN_DECIMAL_FORMAT).format(internalStandard.getConcentration()));
 				builder.append(" ");
@@ -98,18 +98,18 @@ public class PeakQuantifierSupport {
 				builder.append(" ");
 				builder.append(MARKER_COMPENSATION);
 				builder.append(ValueFormat.getDecimalFormatEnglish(PATTERN_DECIMAL_FORMAT).format(internalStandard.getCompensationFactor()));
-				//
+
 				int size = internalStandards.size();
 				if(size > 1) {
 					builder.append(" [*");
 					builder.append(size);
 					builder.append("]");
 				}
-				//
+
 				concentrations = builder.toString();
 			}
 		}
-		//
+
 		return concentrations;
 	}
 
@@ -133,7 +133,7 @@ public class PeakQuantifierSupport {
 				 */
 				Collections.sort(quantitationEntries, (q1, q2) -> q1.getName().compareTo(q2.getName()));
 				IQuantitationEntry quantitationEntry = quantitationEntries.get(0);
-				//
+
 				StringBuilder builder = new StringBuilder();
 				builder.append(ValueFormat.getDecimalFormatEnglish(PATTERN_DECIMAL_FORMAT).format(quantitationEntry.getConcentration()));
 				builder.append(" ");
@@ -144,11 +144,11 @@ public class PeakQuantifierSupport {
 					builder.append(size);
 					builder.append("]");
 				}
-				//
+
 				concentrations = builder.toString();
 			}
 		}
-		//
+
 		return concentrations;
 	}
 }

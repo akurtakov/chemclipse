@@ -24,7 +24,7 @@ import java.util.Map;
 public abstract class AbstractMeasurement extends AbstractMeasurementInfo implements IMeasurement, IMeasurementInfo {
 
 	private static final long serialVersionUID = 3213312019738373785L;
-	//
+
 	private transient Map<String, IMeasurementResult<?>> measurementResultsMap;
 
 	protected AbstractMeasurement() {

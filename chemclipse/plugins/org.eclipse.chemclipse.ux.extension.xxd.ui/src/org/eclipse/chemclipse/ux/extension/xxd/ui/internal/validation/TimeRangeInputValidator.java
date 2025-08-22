@@ -31,7 +31,7 @@ public class TimeRangeInputValidator implements IInputValidator {
 		if(identifier != null) {
 			this.identifier = identifier;
 		}
-		//
+
 		if(timeRangeLabels != null) {
 			this.timeRangeLabels = timeRangeLabels;
 		}
@@ -49,7 +49,7 @@ public class TimeRangeInputValidator implements IInputValidator {
 		} else {
 			return status.getMessage();
 		}
-		//
+
 		return null;
 	}
 }

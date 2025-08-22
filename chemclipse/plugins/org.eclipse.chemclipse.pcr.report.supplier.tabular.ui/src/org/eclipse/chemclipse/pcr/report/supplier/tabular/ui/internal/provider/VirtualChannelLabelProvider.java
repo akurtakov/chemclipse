@@ -27,7 +27,7 @@ public class VirtualChannelLabelProvider extends AbstractChemClipseLabelProvider
 			"Source Channels", //
 			"Target Channel", //
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			150, //
 			150, //

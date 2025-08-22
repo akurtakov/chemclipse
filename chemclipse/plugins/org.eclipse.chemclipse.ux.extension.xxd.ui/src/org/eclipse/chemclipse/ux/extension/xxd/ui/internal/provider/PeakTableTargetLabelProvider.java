@@ -68,7 +68,7 @@ public class PeakTableTargetLabelProvider extends LabelProvider implements ITabl
 					text = "n.v.";
 			}
 		}
-		//
+
 		return text;
 	}
 

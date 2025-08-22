@@ -68,7 +68,7 @@ public class JobWriter {
 			EndElement chromatogramEnd = eventFactory.createEndElement("", "", JobTags.BATCH_PROCESS_JOB);
 			eventWriter.add(chromatogramEnd);
 			eventWriter.add(eventFactory.createEndDocument());
-			//
+
 			bufferedOutputStream.flush();
 			eventWriter.flush();
 			eventWriter.close();
@@ -213,7 +213,7 @@ public class JobWriter {
 
 		StartElement entriesStart = eventFactory.createStartElement("", "", JobTags.CHROMATOGRAM_PROCESS_ENTRIES);
 		EndElement entriesEnd = eventFactory.createEndElement("", "", JobTags.CHROMATOGRAM_PROCESS_ENTRIES);
-		//
+
 		eventWriter.add(entriesStart);
 		for(IProcessEntry processEntry : processMethod) {
 			writeChromatogramProcessEntry(eventWriter, eventFactory, processEntry);
@@ -233,7 +233,7 @@ public class JobWriter {
 
 		StartElement entryStart = eventFactory.createStartElement("", "", JobTags.CHROMATOGRAM_PROCESS_ENTRY);
 		EndElement entryEnd = eventFactory.createEndElement("", "", JobTags.CHROMATOGRAM_PROCESS_ENTRY);
-		//
+
 		eventWriter.add(entryStart);
 		eventWriter.add(eventFactory.createAttribute(JobTags.PROCESSOR_ID, processEntry.getProcessorId()));
 		eventWriter.add(eventFactory.createAttribute(JobTags.PROCESSOR_NAME, processEntry.getName()));

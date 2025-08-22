@@ -33,7 +33,7 @@ public class QuantitationReferenceInputValidator implements IInputValidator {
 		if(target == null || target.isEmpty()) {
 			return "The quantitation reference must be not empty.";
 		}
-		//
+
 		for(String item : items) {
 			if(item.equals(target)) {
 				return "The quantitation reference exists already.";

@@ -663,7 +663,7 @@ public class ChromatogramChartSupport {
 				}
 			}
 		}
-		//
+
 		return intensity;
 	}
 

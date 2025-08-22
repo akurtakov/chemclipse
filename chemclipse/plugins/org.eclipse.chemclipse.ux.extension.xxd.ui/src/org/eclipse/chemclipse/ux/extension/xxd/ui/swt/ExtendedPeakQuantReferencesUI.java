@@ -64,10 +64,10 @@ public class ExtendedPeakQuantReferencesUI extends Composite implements IExtende
 	private Button buttonDeleteReference;
 	private AtomicReference<QuantReferencesListUI> tableViewer = new AtomicReference<>();
 	private Button buttonTableEdit;
-	//
+
 	private QuantReferenceValidator validator;
 	private ControlDecoration controlDecoration;
-	//
+
 	private IPeak peak;
 	private PeakDataSupport peakDataSupport = new PeakDataSupport();
 	private QuantReferencesListUtil quantReferencesUtil = new QuantReferencesListUtil();
@@ -107,12 +107,12 @@ public class ExtendedPeakQuantReferencesUI extends Composite implements IExtende
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createToolbarEdit(this);
 		createTable(this);
-		//
+
 		initialize();
 	}
 
@@ -121,7 +121,7 @@ public class ExtendedPeakQuantReferencesUI extends Composite implements IExtende
 		enableToolbar(toolbarInfo, buttonToolbarInfo, IMAGE_INFO, TOOLTIP_INFO, true);
 		enableToolbar(toolbarEdit, buttonToolbarEdit, IMAGE_EDIT, TOOLTIP_EDIT, false);
 		enableEdit(tableViewer, buttonTableEdit, IMAGE_EDIT_ENTRY, false);
-		//
+
 		clearLabelInputErrors();
 		applySettings();
 	}
@@ -133,7 +133,7 @@ public class ExtendedPeakQuantReferencesUI extends Composite implements IExtende
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(4, false));
-		//
+
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 		buttonToolbarEdit = createButtonToggleToolbar(composite, toolbarEdit, IMAGE_EDIT, TOOLTIP_EDIT);
 		buttonTableEdit = createButtonToggleEditTable(composite, tableViewer, IMAGE_EDIT_ENTRY);
@@ -144,7 +144,7 @@ public class ExtendedPeakQuantReferencesUI extends Composite implements IExtende
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -155,13 +155,13 @@ public class ExtendedPeakQuantReferencesUI extends Composite implements IExtende
 		composite.setLayoutData(gridData);
 		int columns = 3;
 		composite.setLayout(new GridLayout(columns, false));
-		//
+
 		labelInputErrors = createLabel(composite, columns);
-		//
+
 		comboQuantReferences = createComboQuantReferences(composite);
 		buttonAddReference = createButtonAdd(composite);
 		buttonDeleteReference = createButtonDelete(composite);
-		//
+
 		toolbarEdit.set(composite);
 	}
 
@@ -172,7 +172,7 @@ public class ExtendedPeakQuantReferencesUI extends Composite implements IExtende
 		gridData.horizontalSpan = horizontalSpan;
 		gridData.grabExcessHorizontalSpace = true;
 		label.setLayoutData(gridData);
-		//
+
 		return label;
 	}
 
@@ -182,10 +182,10 @@ public class ExtendedPeakQuantReferencesUI extends Composite implements IExtende
 		combo.setText("");
 		combo.setToolTipText("Select a quantitation reference or type in a new reference name.");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		validator = new QuantReferenceValidator();
 		controlDecoration = new ControlDecoration(combo, SWT.LEFT | SWT.TOP);
-		//
+
 		combo.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -197,7 +197,7 @@ public class ExtendedPeakQuantReferencesUI extends Composite implements IExtende
 				}
 			}
 		});
-		//
+
 		return combo;
 	}
 
@@ -252,7 +252,7 @@ public class ExtendedPeakQuantReferencesUI extends Composite implements IExtende
 		QuantReferencesListUI quantReferencesListUI = new QuantReferencesListUI(parent, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		Table table = quantReferencesListUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		tableViewer.set(quantReferencesListUI);
 	}
 
@@ -285,7 +285,7 @@ public class ExtendedPeakQuantReferencesUI extends Composite implements IExtende
 		messageBox.setText("Delete Quantitation References");
 		messageBox.setMessage("Would you like to delete the selected quantitations?");
 		if(messageBox.open() == SWT.YES) {
-			//
+
 			Iterator<?> iterator = tableViewer.get().getStructuredSelection().iterator();
 			while(iterator.hasNext()) {
 				Object object = iterator.next();
@@ -310,7 +310,7 @@ public class ExtendedPeakQuantReferencesUI extends Composite implements IExtende
 
 		updateLabel();
 		updateWidgets();
-		//
+
 		if(peak != null) {
 			tableViewer.get().setInput(peak.getQuantitationReferences());
 		} else {
@@ -322,7 +322,7 @@ public class ExtendedPeakQuantReferencesUI extends Composite implements IExtende
 
 		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 		boolean useTargetList = preferenceStore.getBoolean(PreferenceSupplier.P_USE_QUANTITATION_REFERENCE_LIST);
-		//
+
 		String[] items;
 		if(useTargetList) {
 			items = quantReferencesUtil.parseString(preferenceStore.getString(PreferenceSupplier.P_QUANTITATION_REFERENCE_LIST));
@@ -330,7 +330,7 @@ public class ExtendedPeakQuantReferencesUI extends Composite implements IExtende
 		} else {
 			items = new String[]{};
 		}
-		//
+
 		comboQuantReferences.setItems(items);
 	}
 

@@ -111,7 +111,7 @@ public class TotalScanSignals implements ITotalScanSignals {
 		startScan = chromatogram.getScanNumber(chromatogramSelection.getStartRetentionTime());
 		stopScan = chromatogram.getScanNumber(chromatogramSelection.getStopRetentionTime());
 		signals = new ArrayList<>();
-		//
+
 		for(int scan = startScan; scan <= stopScan; scan++) {
 			/*
 			 * Extract the signals.

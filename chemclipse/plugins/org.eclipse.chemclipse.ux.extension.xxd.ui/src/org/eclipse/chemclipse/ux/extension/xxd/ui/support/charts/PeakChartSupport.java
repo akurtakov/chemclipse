@@ -91,7 +91,7 @@ public class PeakChartSupport {
 		lineSeriesSettings.setAreaStrict(areaStrict);
 		ILineSeriesSettings lineSeriesSettingsHighlight = (ILineSeriesSettings)lineSeriesSettings.getSeriesSettingsHighlight();
 		lineSeriesSettingsHighlight.setLineWidth(2);
-		//
+
 		return lineSeriesData;
 	}
 
@@ -100,7 +100,7 @@ public class PeakChartSupport {
 		int size = peaks.size();
 		double[] xSeries = new double[size];
 		double[] ySeries = new double[size];
-		//
+
 		int index = 0;
 		for(IPeak peak : peaks) {
 			IPeakModel peakModel = peak.getPeakModel();
@@ -111,14 +111,14 @@ public class PeakChartSupport {
 			} else {
 				ySeries[index] = peakModel.getPeakAbundance(retentionTime);
 			}
-			//
+
 			if(mirrored) {
 				ySeries[index] = ySeries[index] * -1;
 			}
-			//
+
 			index++;
 		}
-		//
+
 		return new SeriesData(xSeries, ySeries, id);
 	}
 
@@ -162,7 +162,7 @@ public class PeakChartSupport {
 				ySeries[i] *= -1;
 			}
 		}
-		//
+
 		return new SeriesData(xSeries, ySeries, id);
 	}
 
@@ -171,7 +171,7 @@ public class PeakChartSupport {
 		String id = "Increasing Tangent" + postfix;
 		double[] xSeries = new double[2];
 		double[] ySeries = new double[2];
-		//
+
 		if(peak != null) {
 			IPeakModel peakModel = peak.getPeakModel();
 			if(peakModel.areInflectionPointsAvailable()) {
@@ -190,13 +190,13 @@ public class PeakChartSupport {
 					double startRetentionTime = peakModel.getStartRetentionTime();
 					x = intersection.getX() < startRetentionTime ? startRetentionTime : intersection.getX();
 					xSeries[0] = x;
-					//
+
 					if(includeBackground) {
 						ySeries[0] = intersection.getY() + peakModel.getBackgroundAbundance((int)x);
 					} else {
 						ySeries[0] = intersection.getY();
 					}
-					//
+
 					if(mirrored) {
 						ySeries[0] = ySeries[0] * -1;
 					}
@@ -212,13 +212,13 @@ public class PeakChartSupport {
 					double stopRetentionTime = peakModel.getStopRetentionTime();
 					x = intersection.getX() > stopRetentionTime ? stopRetentionTime : intersection.getX();
 					xSeries[1] = intersection.getX();
-					//
+
 					if(includeBackground) {
 						ySeries[1] = intersection.getY() + peakModel.getBackgroundAbundance((int)x);
 					} else {
 						ySeries[1] = intersection.getY();
 					}
-					//
+
 					if(mirrored) {
 						ySeries[1] = ySeries[1] * -1;
 					}
@@ -226,7 +226,7 @@ public class PeakChartSupport {
 				}
 			}
 		}
-		//
+
 		return new SeriesData(xSeries, ySeries, id);
 	}
 
@@ -235,7 +235,7 @@ public class PeakChartSupport {
 		String id = "Decreasing Tangent" + postfix;
 		double[] xSeries = new double[2];
 		double[] ySeries = new double[2];
-		//
+
 		if(peak != null) {
 			IPeakModel peakModel = peak.getPeakModel();
 			if(peakModel.areInflectionPointsAvailable()) {
@@ -260,8 +260,8 @@ public class PeakChartSupport {
 					} else {
 						ySeries[0] = intersection.getY();
 					}
-					//
-					//
+
+
 					if(mirrored) {
 						ySeries[0] = ySeries[0] * -1;
 					}
@@ -282,8 +282,8 @@ public class PeakChartSupport {
 					} else {
 						ySeries[1] = intersection.getY();
 					}
-					//
-					//
+
+
 					if(mirrored) {
 						ySeries[1] = ySeries[1] * -1;
 					}
@@ -291,7 +291,7 @@ public class PeakChartSupport {
 				}
 			}
 		}
-		//
+
 		return new SeriesData(xSeries, ySeries, id);
 	}
 
@@ -300,7 +300,7 @@ public class PeakChartSupport {
 		String id = "Peak Perpendicular" + postfix;
 		double[] xSeries = new double[2];
 		double[] ySeries = new double[2];
-		//
+
 		if(peak != null) {
 			IPeakModel peakModel = peak.getPeakModel();
 			xSeries[0] = peakModel.getRetentionTimeAtPeakMaximumByInflectionPoints();
@@ -309,11 +309,11 @@ public class PeakChartSupport {
 			} else {
 				ySeries[0] = 0.0d;
 			}
-			//
+
 			if(mirrored) {
 				ySeries[0] = ySeries[0] * -1;
 			}
-			//
+
 			if(peakModel.areInflectionPointsAvailable()) {
 				try {
 					IPoint intersection = peakModel.calculateIntersection();
@@ -329,7 +329,7 @@ public class PeakChartSupport {
 					} else {
 						ySeries[1] = intersection.getY();
 					}
-					//
+
 					if(mirrored) {
 						ySeries[1] = ySeries[1] * -1;
 					}
@@ -337,7 +337,7 @@ public class PeakChartSupport {
 				}
 			}
 		}
-		//
+
 		return new SeriesData(xSeries, ySeries, id);
 	}
 
@@ -346,7 +346,7 @@ public class PeakChartSupport {
 		String id = "Peak Width" + postfix;
 		double[] xSeries = new double[2];
 		double[] ySeries = new double[2];
-		//
+
 		if(peak != null) {
 			IPeakModel peakModel = peak.getPeakModel();
 			double x;
@@ -374,7 +374,7 @@ public class PeakChartSupport {
 						} else {
 							ySeries[0] = p1.getY();
 						}
-						//
+
 						if(mirrored) {
 							ySeries[0] = ySeries[0] * -1;
 						}
@@ -396,7 +396,7 @@ public class PeakChartSupport {
 						} else {
 							ySeries[1] = p2.getY();
 						}
-						//
+
 						if(mirrored) {
 							ySeries[1] = ySeries[1] * -1;
 						}
@@ -406,7 +406,7 @@ public class PeakChartSupport {
 			}
 			id = "Peak" + postfix + " Width at " + decimalFormat.format(height * 100) + "%";
 		}
-		//
+
 		return new SeriesData(xSeries, ySeries, id);
 	}
 
@@ -417,19 +417,19 @@ public class PeakChartSupport {
 		int size = retentionTimes.size();
 		double[] xSeries = new double[size];
 		double[] ySeries = new double[size];
-		//
+
 		int index = 0;
 		for(int retentionTime : peakModel.getRetentionTimes()) {
 			xSeries[index] = retentionTime;
 			ySeries[index] = peakModel.getBackgroundAbundance(retentionTime);
-			//
+
 			if(mirrored) {
 				ySeries[index] = ySeries[index] * -1;
 			}
-			//
+
 			index++;
 		}
-		//
+
 		return new SeriesData(xSeries, ySeries, id);
 	}
 }

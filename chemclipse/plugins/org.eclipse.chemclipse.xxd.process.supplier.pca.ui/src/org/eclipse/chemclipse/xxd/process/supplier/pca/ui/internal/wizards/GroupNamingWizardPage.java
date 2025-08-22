@@ -40,7 +40,7 @@ public class GroupNamingWizardPage extends AbstractAnalysisWizardPage {
 
 	private AtomicReference<SampleGroupAssignerListUI> sampleGroupAssignerListControl = new AtomicReference<>();
 	private AtomicReference<Text> textGroupNameControl = new AtomicReference<Text>();
-	//
+
 	private List<ISample> samples;
 
 	public GroupNamingWizardPage(ISamplesPCA<IVariable, ISample> samplesPCA) {
@@ -65,10 +65,10 @@ public class GroupNamingWizardPage extends AbstractAnalysisWizardPage {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(composite);
 		createSampleGroupAssignerListUI(composite);
-		//
+
 		setControl(parent);
 		initialize();
 	}
@@ -83,7 +83,7 @@ public class GroupNamingWizardPage extends AbstractAnalysisWizardPage {
 		SampleGroupAssignerListUI sampleGroupAssignerListUI = new SampleGroupAssignerListUI(composite, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION);
 		Table table = sampleGroupAssignerListUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		sampleGroupAssignerListControl.set(sampleGroupAssignerListUI);
 	}
 
@@ -92,7 +92,7 @@ public class GroupNamingWizardPage extends AbstractAnalysisWizardPage {
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		composite.setLayout(new GridLayout(5, false));
-		//
+
 		createLabelGroupName(composite);
 		createTextGroupName(composite);
 		createButtonAssign(composite);
@@ -104,7 +104,7 @@ public class GroupNamingWizardPage extends AbstractAnalysisWizardPage {
 
 		Label label = new Label(parent, SWT.NONE);
 		label.setText("Group Name:");
-		//
+
 		return label;
 	}
 
@@ -122,7 +122,7 @@ public class GroupNamingWizardPage extends AbstractAnalysisWizardPage {
 				assignGroupName();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -144,7 +144,7 @@ public class GroupNamingWizardPage extends AbstractAnalysisWizardPage {
 				}
 			}
 		});
-		//
+
 		textGroupNameControl.set(text);
 	}
 
@@ -165,7 +165,7 @@ public class GroupNamingWizardPage extends AbstractAnalysisWizardPage {
 				refreshSamplesList();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -186,7 +186,7 @@ public class GroupNamingWizardPage extends AbstractAnalysisWizardPage {
 				refreshSamplesList();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -209,13 +209,13 @@ public class GroupNamingWizardPage extends AbstractAnalysisWizardPage {
 	private List<ISample> extractSamples(List<ISample> samples) {
 
 		List<ISample> samplesCopy = new ArrayList<ISample>();
-		//
+
 		for(ISample sample : samples) {
 			ISample sampleCopy = new Sample(sample.getSampleName(), sample.getGroupName(), sample.getDescription());
 			sampleCopy.setSelected(false);
 			samplesCopy.add(sampleCopy);
 		}
-		//
+
 		return samplesCopy;
 	}
 }

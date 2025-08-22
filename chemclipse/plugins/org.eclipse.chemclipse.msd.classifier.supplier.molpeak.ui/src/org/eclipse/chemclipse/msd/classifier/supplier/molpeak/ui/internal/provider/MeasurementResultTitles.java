@@ -38,7 +38,7 @@ public class MeasurementResultTitles implements ColumnDefinitionProvider {
 				return entry.getKey();
 			}
 		}).create());
-		//
+
 		list.add(defaultSortableColumn("Precentage [%]", 150, new Function<Map.Entry<String, Double>, Double>() {
 
 			@Override
@@ -47,7 +47,7 @@ public class MeasurementResultTitles implements ColumnDefinitionProvider {
 				return entry.getValue();
 			}
 		}).create());
-		//
+
 		list.add(defaultSortableColumn("Note", 100, new Function<Map.Entry<String, Double>, String>() {
 
 			@Override
@@ -56,7 +56,7 @@ public class MeasurementResultTitles implements ColumnDefinitionProvider {
 				return "";
 			}
 		}).create());
-		//
+
 		return list;
 	}
 }

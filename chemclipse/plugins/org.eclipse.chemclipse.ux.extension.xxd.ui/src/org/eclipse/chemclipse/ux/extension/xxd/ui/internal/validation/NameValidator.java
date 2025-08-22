@@ -20,7 +20,7 @@ import org.eclipse.core.runtime.IStatus;
 public class NameValidator implements IValidator<Object> {
 
 	private static final String ERROR = ExtensionMessages.enterCorrectName;
-	//
+
 	private String name = "";
 
 	@Override
@@ -28,7 +28,7 @@ public class NameValidator implements IValidator<Object> {
 
 		String message = null;
 		this.name = "";
-		//
+
 		if(value == null) {
 			message = ERROR;
 		} else {
@@ -43,7 +43,7 @@ public class NameValidator implements IValidator<Object> {
 				message = ERROR;
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

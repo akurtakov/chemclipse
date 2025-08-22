@@ -38,7 +38,7 @@ public class ChromatogramFilter extends AbstractChromatogramFilterMSD {
 
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = new ProcessingInfo<>();
 		processingInfo.addMessages(validate(chromatogramSelection, chromatogramFilterSettings));
-		//
+
 		if(!processingInfo.hasErrorMessages()) {
 			if(chromatogramFilterSettings instanceof ChromatogramFilterSettings filterSettings) {
 				try {

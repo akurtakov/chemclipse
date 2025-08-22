@@ -30,7 +30,7 @@ import org.eclipse.chemclipse.wsd.model.core.IScanWSD;
 public class UnknownIdentifier {
 
 	public static final String IDENTIFIER = "Unknown Identifier";
-	//
+
 	private static final TargetBuilderMSD TARGETBUILDER_MSD = new TargetBuilderMSD();
 	private static final TargetBuilderCSD TARGETBUILDER_CSD = new TargetBuilderCSD();
 	private static final TargetBuilderWSD TARGETBUILDER_WSD = new TargetBuilderWSD();

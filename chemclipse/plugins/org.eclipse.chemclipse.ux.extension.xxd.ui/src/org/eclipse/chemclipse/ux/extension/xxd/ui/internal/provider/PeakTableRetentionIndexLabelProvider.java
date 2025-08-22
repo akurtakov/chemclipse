@@ -55,7 +55,7 @@ public class PeakTableRetentionIndexLabelProvider extends LabelProvider implemen
 		if(element instanceof IPeak peak) {
 			IPeakModel peakModel = peak.getPeakModel();
 			IScan peakMaximum = peakModel.getPeakMaximum();
-			//
+
 			switch(columnIndex) {
 				case 0:
 					text = decimalFormat.format(peakMaximum.getRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR);

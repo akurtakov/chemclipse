@@ -23,7 +23,7 @@ public class DeltaCalculationSupport {
 		double retentionIndexUnknown = Math.round(scanUnknown.getRetentionIndex());
 		int retentionTimeReference = scanReference.getRetentionTime();
 		double[] retentionIndicesReference = new double[]{scanReference.getRetentionIndex()};
-		//
+
 		return useTarget(retentionTimeUnknown, retentionIndexUnknown, retentionTimeReference, retentionIndicesReference, deltaCalculationSettings);
 	}
 

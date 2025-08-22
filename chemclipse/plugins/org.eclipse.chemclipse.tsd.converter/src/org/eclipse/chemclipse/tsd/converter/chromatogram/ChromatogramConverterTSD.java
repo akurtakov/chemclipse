@@ -50,7 +50,7 @@ public class ChromatogramConverterTSD implements IChromatogramConverter<IChromat
 		if(instance == null) {
 			instance = new ChromatogramConverterTSD();
 		}
-		//
+
 		return instance;
 	}
 
@@ -58,19 +58,19 @@ public class ChromatogramConverterTSD implements IChromatogramConverter<IChromat
 	public IChromatogramConverterSupport getChromatogramConverterSupport() {
 
 		ChromatogramConverterSupport chromatogramConverterSupport = new ChromatogramConverterSupport(DataCategory.TSD);
-		//
+
 		List<ChromatogramSupplier> chromatogramSuppliers = getChromatogramSupplier(getConverterServicesTSD());
 		for(ChromatogramSupplier chromatogramSupplier : chromatogramSuppliers) {
 			chromatogramConverterSupport.add(chromatogramSupplier);
 		}
-		//
+
 		return chromatogramConverterSupport;
 	}
 
 	public IChromatogram extract(IChromatogramTSD chromatogramTSD, TraceRangeMatcher traceRangeMatcher, IProgressMonitor monitor) {
 
 		IChromatogram chromatogram = null;
-		//
+
 		exitloop:
 		for(IConverterServiceTSD converterServiceTSD : getConverterServicesTSD()) {
 			try {
@@ -81,14 +81,14 @@ public class ChromatogramConverterTSD implements IChromatogramConverter<IChromat
 			} catch(IOException e) {
 			}
 		}
-		//
+
 		return chromatogram;
 	}
 
 	private List<ChromatogramSupplier> getChromatogramSupplier(List<IConverterServiceTSD> converterServices) {
 
 		List<ChromatogramSupplier> chromatogramSupplier = new ArrayList<>();
-		//
+
 		for(IConverterServiceTSD converterServiceTSD : converterServices) {
 			/*
 			 * Header
@@ -112,7 +112,7 @@ public class ChromatogramConverterTSD implements IChromatogramConverter<IChromat
 				chromatogramSupplier.add(supplier);
 			}
 		}
-		//
+
 		return chromatogramSupplier;
 	}
 
@@ -148,7 +148,7 @@ public class ChromatogramConverterTSD implements IChromatogramConverter<IChromat
 		if(PreferenceSupplier.isUseAdapterISD()) {
 			converterServices.addAll(getConverterAdapterServicesISD());
 		}
-		//
+
 		return converterServices;
 	}
 
@@ -173,13 +173,13 @@ public class ChromatogramConverterTSD implements IChromatogramConverter<IChromat
 	private List<IConverterServiceTSD> getConverterAdapterServices(List<ISupplier> suppliers, TypeTSD typeTSD) {
 
 		List<IConverterServiceTSD> converterServices = new ArrayList<>();
-		//
+
 		for(ISupplier supplierx : suppliers) {
 			if(supplierx.isImportable()) {
 				converterServices.add(new ConverterAdapterServiceTSD(supplierx, typeTSD));
 			}
 		}
-		//
+
 		return converterServices;
 	}
 
@@ -206,7 +206,7 @@ public class ChromatogramConverterTSD implements IChromatogramConverter<IChromat
 				return importConverterTSD.convert(file, monitor);
 			}
 		}
-		//
+
 		return null;
 	}
 

@@ -31,7 +31,7 @@ public class RetentionIndexSupport {
 		for(IRetentionIndexEntry retentionIndexEntry : retentionIndexMarker) {
 			retentionIndexMap.put(Math.round(retentionIndexEntry.getRetentionIndex()), retentionIndexEntry.getRetentionTime());
 		}
-		//
+
 		return retentionIndexMap;
 	}
 
@@ -67,7 +67,7 @@ public class RetentionIndexSupport {
 
 		RetentionIndexMarker retentionIndexMarker = new RetentionIndexMarker();
 		transferRetentionIndexMarker(separationColumnIndices, retentionIndexMarker);
-		//
+
 		return getRetentionIndexMarker(retentionIndexMarker, chromatogram, extrapolateLeft, extrapolateRight);
 	}
 

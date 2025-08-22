@@ -72,7 +72,7 @@ public class ChromatogramFilterReshape extends AbstractChromatogramFilter implem
 				double segmentWidthDefault = filterSettings.getSegmentWidthDefault();
 				boolean resetRetentionTimes = filterSettings.isResetRetentionTimes();
 				String recurringPeakName = filterSettings.getRecurringPeakName();
-				//
+
 				int segmentWidth = 0;
 				switch(filterSettings.getRangeOption()) {
 					case RETENTION_TIME_MIN:
@@ -93,7 +93,7 @@ public class ChromatogramFilterReshape extends AbstractChromatogramFilter implem
 				 */
 				List<List<IScan>> stackedScans = new ArrayList<>();
 				List<IPeak> peaks = getRecurringPeaks(chromatogram, recurringPeakName);
-				//
+
 				if(!peaks.isEmpty()) {
 					/*
 					 * Determine the optimal width
@@ -104,7 +104,7 @@ public class ChromatogramFilterReshape extends AbstractChromatogramFilter implem
 					Collections.sort(peaks, (p1, p2) -> Integer.compare(getRetentionTime(p1), getRetentionTime(p2)));
 					int startRetentionTime = chromatogram.getStartRetentionTime();
 					int stopRetentionTime = chromatogram.getStopRetentionTime();
-					//
+
 					for(int i = 0; i <= max; i++) {
 						int retentionTime = getRetentionTime(peaks.get(i));
 						if(i == 0) {
@@ -122,7 +122,7 @@ public class ChromatogramFilterReshape extends AbstractChromatogramFilter implem
 							offsetRight = Math.min(getRetentionTime(peakNext) - retentionTime, offsetRight);
 						}
 					}
-					//
+
 					int offset = Math.min(offsetLeft, offsetRight);
 					for(IPeak peak : peaks) {
 						List<IScan> scans = new ArrayList<>();
@@ -194,7 +194,7 @@ public class ChromatogramFilterReshape extends AbstractChromatogramFilter implem
 				}
 			}
 		}
-		//
+
 		return processingInfo;
 	}
 
@@ -228,7 +228,7 @@ public class ChromatogramFilterReshape extends AbstractChromatogramFilter implem
 			}
 		} catch(CloneNotSupportedException e) {
 		}
-		//
+
 		return copy;
 	}
 
@@ -255,7 +255,7 @@ public class ChromatogramFilterReshape extends AbstractChromatogramFilter implem
 				}
 			}
 		}
-		//
+
 		return peaks;
 	}
 
@@ -300,7 +300,7 @@ public class ChromatogramFilterReshape extends AbstractChromatogramFilter implem
 	private IChromatogram createChromatogramReference(IChromatogram chromatogram) {
 
 		IChromatogram chromatogramReference = null;
-		//
+
 		if(chromatogram instanceof IChromatogramCSD) {
 			chromatogramReference = new ChromatogramCSD();
 		} else if(chromatogram instanceof IChromatogramMSD) {
@@ -310,12 +310,12 @@ public class ChromatogramFilterReshape extends AbstractChromatogramFilter implem
 		} else if(chromatogram instanceof IChromatogramVSD) {
 			chromatogramReference = new ChromatogramVSD();
 		}
-		//
+
 		if(chromatogramReference != null) {
 			chromatogramReference.setFile(chromatogram.getFile());
 			chromatogramReference.setConverterId(chromatogram.getConverterId());
 		}
-		//
+
 		return chromatogramReference;
 	}
 }

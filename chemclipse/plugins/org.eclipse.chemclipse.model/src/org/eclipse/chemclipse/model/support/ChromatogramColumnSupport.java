@@ -73,7 +73,7 @@ public class ChromatogramColumnSupport {
 
 		SeparationColumnMapping separationColumnMapping = new SeparationColumnMapping();
 		separationColumnMapping.load(PreferenceSupplier.getSeparationColumnMappings());
-		//
+
 		return separationColumnMapping;
 	}
 
@@ -84,7 +84,7 @@ public class ChromatogramColumnSupport {
 				return SeparationColumnFactory.getSeparationColumn(columnMapping.getValue());
 			}
 		}
-		//
+
 		return null;
 	}
 }

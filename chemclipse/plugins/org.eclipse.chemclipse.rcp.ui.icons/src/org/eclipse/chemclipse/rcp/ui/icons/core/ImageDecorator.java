@@ -22,7 +22,7 @@ import org.eclipse.swt.graphics.Point;
 public class ImageDecorator extends CompositeImageDescriptor {
 
 	private static final Logger logger = Logger.getLogger(ImageDecorator.class);
-	//
+
 	private Image image = null;
 	private String size = "";
 	private Point point = null;

@@ -23,7 +23,7 @@ public class RetentionIndexLibrarySettings {
 	private boolean matchPartly = false;
 	private int retentionIndexDelta = 10;
 	private String specificDatabase = ""; // If empty, take all.
-	//
+
 	private List<IRetentionIndexLibraryService> retentionIndexLibraryServices = new ArrayList<>();
 
 	public String getSearchColumn() {

@@ -40,7 +40,7 @@ public class RetentionIndexExtractor {
 		separationColumnIndices.setSeparationColumn(chromatogram.getSeparationColumnIndices().getSeparationColumn());
 		Set<Integer> availableIndices = new HashSet<>();
 		TreeMap<Integer, Integer> retentionIndexPeakMap = new TreeMap<>();
-		//
+
 		for(IPeak peak : getPeaks(chromatogram)) {
 			IPeakModel peakModel = peak.getPeakModel();
 			IScan peakMaximum = peakModel.getPeakMaximum();
@@ -93,7 +93,7 @@ public class RetentionIndexExtractor {
 				List<IRetentionIndexEntry> derivedRetentionIndexEntries = new ArrayList<>();
 				int minAlkane = (int)Math.round(retentionIndexPeakMap.firstKey() / 100.0d);
 				int maxAlkane = (int)Math.round(retentionIndexPeakMap.lastKey() / 100.0d);
-				//
+
 				for(int alkane = minAlkane; alkane <= maxAlkane; alkane++) {
 					int retentionIndex = alkane * 100;
 					if(!availableIndices.contains(retentionIndex)) {
@@ -135,7 +135,7 @@ public class RetentionIndexExtractor {
 				}
 			}
 		}
-		//
+
 		return separationColumnIndices;
 	}
 
@@ -150,7 +150,7 @@ public class RetentionIndexExtractor {
 		if(retentionIndex == RetentionIndexCalculator.INDEX_MISSING) {
 			retentionIndex = RetentionIndexCalculator.getRetentionIndex(libraryInformation);
 		}
-		//
+
 		return retentionIndex;
 	}
 

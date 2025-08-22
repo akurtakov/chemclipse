@@ -23,7 +23,7 @@ public class WncIonContentProvider implements IStructuredContentProvider {
 		if(inputElement instanceof TargetTraces targetTraces) {
 			return targetTraces.toArray();
 		}
-		//
+
 		return new Object[0];
 	}
 }

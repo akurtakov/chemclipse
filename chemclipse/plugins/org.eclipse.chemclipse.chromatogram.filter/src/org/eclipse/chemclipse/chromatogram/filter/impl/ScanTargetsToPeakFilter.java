@@ -48,7 +48,7 @@ public class ScanTargetsToPeakFilter extends AbstractTransferFilter {
 				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, Messages.targetsTransferredSuccessfully));
 			}
 		}
-		//
+
 		return processingInfo;
 	}
 
@@ -63,7 +63,7 @@ public class ScanTargetsToPeakFilter extends AbstractTransferFilter {
 
 		List<IScan> identifiedScans = extractIdentifiedScans(chromatogramSelection);
 		List<? extends IPeak> peaks = extractPeaks(chromatogramSelection);
-		//
+
 		for(IPeak peak : peaks) {
 			List<IScan> targetScans = getScansInPeakRange(peak, identifiedScans, settings);
 			for(IScan targetScan : targetScans) {
@@ -80,13 +80,13 @@ public class ScanTargetsToPeakFilter extends AbstractTransferFilter {
 	private List<IScan> getScansInPeakRange(IPeak peak, List<IScan> scans, ScanTargetsToPeakSettings settings) {
 
 		List<IScan> targetScans = new ArrayList<>();
-		//
+
 		IPeakModel peakModel = peak.getPeakModel();
 		int startRetentionTime = peakModel.getStartRetentionTime();
 		int stopRetentionTime = peakModel.getStopRetentionTime();
 		int peakMaxRetentionTime = peakModel.getRetentionTimeAtPeakMaximum();
 		boolean transferClosestScan = settings.isTransferClosestScan();
-		//
+
 		for(IScan scan : scans) {
 			int retentionTime = scan.getRetentionTime();
 			if(retentionTime >= startRetentionTime && retentionTime <= stopRetentionTime) {
@@ -102,7 +102,7 @@ public class ScanTargetsToPeakFilter extends AbstractTransferFilter {
 						int delta = Math.abs(peakMaxRetentionTime - scan.getRetentionTime());
 						IScan scanClosest = targetScans.get(0);
 						int deltaClosest = Math.abs(peakMaxRetentionTime - scanClosest.getRetentionTime());
-						//
+
 						if(delta < deltaClosest) {
 							targetScans.clear();
 							targetScans.add(scan);
@@ -111,7 +111,7 @@ public class ScanTargetsToPeakFilter extends AbstractTransferFilter {
 				}
 			}
 		}
-		//
+
 		return targetScans;
 	}
 }

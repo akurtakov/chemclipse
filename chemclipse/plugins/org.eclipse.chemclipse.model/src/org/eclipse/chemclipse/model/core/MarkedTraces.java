@@ -19,7 +19,7 @@ import java.util.Set;
 public class MarkedTraces extends ArrayList<IMarkedTrace> implements IMarkedTraces<IMarkedTrace> {
 
 	private static final long serialVersionUID = -7575358523289086994L;
-	//
+
 	private MarkedTraceModus markedTraceModus;
 
 	public MarkedTraces() {
@@ -42,11 +42,11 @@ public class MarkedTraces extends ArrayList<IMarkedTrace> implements IMarkedTrac
 	public Set<Integer> getTraces() {
 
 		Set<Integer> traces = new HashSet<Integer>();
-		//
+
 		for(IMarkedTrace markedTrace : this) {
 			traces.add(markedTrace.castTrace());
 		}
-		//
+
 		return traces;
 	}
 }

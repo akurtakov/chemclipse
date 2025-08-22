@@ -45,7 +45,7 @@ public class ConverterFactory {
 			};
 			UNIT_CONVERTER_MAP.put(unit, unitConverter);
 		}
-		//
+
 		return UNIT_CONVERTER_MAP.get(unit);
 	}
 
@@ -68,7 +68,7 @@ public class ConverterFactory {
 			};
 			PAGE_BASE_CONVERTER_MAP.put(pageBase, baseConverter);
 		}
-		//
+
 		return PAGE_BASE_CONVERTER_MAP.get(pageBase);
 	}
 }

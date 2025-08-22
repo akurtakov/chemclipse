@@ -32,7 +32,7 @@ public interface IProcessTypeSupplier extends IProcessSupplierContext {
 				return (IProcessSupplier<T>)supplier;
 			}
 		}
-		//
+
 		return null;
 	}
 

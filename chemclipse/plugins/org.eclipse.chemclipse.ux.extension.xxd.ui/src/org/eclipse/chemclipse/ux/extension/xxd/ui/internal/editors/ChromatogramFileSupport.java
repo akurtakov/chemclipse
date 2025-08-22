@@ -67,7 +67,7 @@ public class ChromatogramFileSupport {
 		fileDialog.setFileName(chromatogram.getName());
 		fileDialog.setText("Save Chromatogram As...");
 		fileDialog.setOverwrite(true);
-		//
+
 		IChromatogramConverterSupport chromatogramConverterSupport = getChromatogramConvertSupport(dataType);
 		if(chromatogramConverterSupport != null) {
 			/*
@@ -167,7 +167,7 @@ public class ChromatogramFileSupport {
 		 */
 		fileDialog.setFilterNames(namesSorted);
 		fileDialog.setFilterExtensions(extensionsSorted);
-		//
+
 		return exportSupplierMap;
 	}
 
@@ -215,7 +215,7 @@ public class ChromatogramFileSupport {
 		if(file == null || chromatogram == null || supplier == null) {
 			return;
 		}
-		//
+
 		ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
 		ChromatogramExportRunnable runnable = new ChromatogramExportRunnable(file, chromatogram, supplier, dataType);
 		try {
@@ -226,7 +226,7 @@ public class ChromatogramFileSupport {
 			logger.warn(e);
 			Thread.currentThread().interrupt();
 		}
-		//
+
 		File data = runnable.getData();
 		if(data == null) {
 			MessageDialog.openInformation(shell, "Save Chromatogram", "There is not suitable chromatogram converter available.");
@@ -281,7 +281,7 @@ public class ChromatogramFileSupport {
 				 */
 				filename = removeFileExtensions(filename, selectedSupplier);
 				filename = filename.concat(selectedSupplier.getFileExtension());
-				//
+
 				String filenameDialog = filePath;
 				if(!filename.equals(filenameDialog)) {
 					/*
@@ -335,7 +335,7 @@ public class ChromatogramFileSupport {
 
 		int start = 0;
 		int stop = 0;
-		//
+
 		if(supplier.getDirectoryExtension().equals("")) {
 			/*
 			 * Remove the file extension.

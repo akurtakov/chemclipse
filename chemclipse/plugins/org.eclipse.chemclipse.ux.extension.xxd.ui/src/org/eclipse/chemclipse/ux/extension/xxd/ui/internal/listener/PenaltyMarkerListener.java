@@ -82,7 +82,7 @@ public class PenaltyMarkerListener extends AbstractBaseChartPaintListener implem
 			Range range = axisX.getRange();
 			double min = range.lower;
 			double max = range.upper;
-			//
+
 			if(retentionTime >= min && retentionTime <= max) {
 				int width = e.width;
 				double rangeX = max - min + 1;
@@ -92,13 +92,13 @@ public class PenaltyMarkerListener extends AbstractBaseChartPaintListener implem
 					GC gc = e.gc;
 					Color colorBackground = gc.getBackground();
 					Color colorForeground = gc.getForeground();
-					//
+
 					gc.setForeground(Colors.DARK_GRAY);
 					gc.setLineStyle(SWT.LINE_SOLID);
 					gc.drawLine(offsetX, 0, offsetX, e.height);
 					drawLabel(e, offsetX, labelTop, true);
 					drawLabel(e, offsetX, labelBottom, false);
-					//
+
 					gc.setBackground(colorBackground);
 					gc.setForeground(colorForeground);
 				}
@@ -119,7 +119,7 @@ public class PenaltyMarkerListener extends AbstractBaseChartPaintListener implem
 			int offsetHeight = level * labelSize.y + level * 10;
 			int offsetTextX = offset - textOffsetX - 2;
 			int widthX = textWidth + 4;
-			//
+
 			if(top) {
 				gc.setBackground(Colors.DARK_GRAY);
 				gc.fillRectangle(offsetTextX, 15 + offsetHeight, widthX, 25);

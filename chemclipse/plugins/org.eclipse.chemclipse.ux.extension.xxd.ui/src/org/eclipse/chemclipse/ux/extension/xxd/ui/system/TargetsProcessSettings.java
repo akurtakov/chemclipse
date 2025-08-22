@@ -37,7 +37,7 @@ public class TargetsProcessSettings implements ISystemProcessSettings {
 	@JsonProperty(value = "Show Deviation Retention Index", defaultValue = "false")
 	@JsonPropertyDescription(value = "Show the retention index deviation in brackets.")
 	private boolean showDeviationRT = false;
-	//
+
 	@JsonProperty(value = "Retention Time: Use absolute deviation", defaultValue = "false")
 	@JsonPropertyDescription(value = "Use an absolute or relative calculation.")
 	private boolean useAbsoluteDeviationRetentionTime = false;
@@ -57,7 +57,7 @@ public class TargetsProcessSettings implements ISystemProcessSettings {
 	@JsonPropertyDescription(value = "Absolute deviation retention time in milliseconds (Warn)")
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_DEVIATION_RETENTION_TIME, maxValue = PreferenceSupplier.MAX_DEVIATION_RETENTION_TIME)
 	private int retentionTimeDeviationAbsWarn = 2000;
-	//
+
 	@JsonProperty(value = "Retention Index: Use absolute deviation", defaultValue = "false")
 	@JsonPropertyDescription(value = "Use an absolute or relative calculation.")
 	private boolean useAbsoluteDeviationRetentionIndex = false;

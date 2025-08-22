@@ -83,14 +83,14 @@ public class ChromatogramWriterMSD extends AbstractChromatogramWriter implements
 		 */
 		IChromatogramMSDZipWriter chromatogramWriter = getChromatogramWriter(version);
 		chromatogram.enforceLoadScanProxies(monitor);
-		//
+
 		return chromatogramWriter;
 	}
 
 	private IChromatogramMSDZipWriter getChromatogramWriter(String version) {
 
 		IChromatogramMSDZipWriter chromatogramWriter = null;
-		//
+
 		if(version.equals(Format.CHROMATOGRAM_VERSION_0701)) {
 			chromatogramWriter = new ChromatogramWriter_0701();
 		} else if(version.equals(Format.CHROMATOGRAM_VERSION_0801)) {
@@ -134,7 +134,7 @@ public class ChromatogramWriterMSD extends AbstractChromatogramWriter implements
 		} else {
 			chromatogramWriter = new ChromatogramWriter_1502();
 		}
-		//
+
 		return chromatogramWriter;
 	}
 }

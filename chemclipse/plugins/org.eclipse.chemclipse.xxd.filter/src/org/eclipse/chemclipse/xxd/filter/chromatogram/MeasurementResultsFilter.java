@@ -75,7 +75,7 @@ public class MeasurementResultsFilter implements IProcessTypeSupplier {
 				default:
 					break;
 			}
-			//
+
 			return chromatogramSelection;
 		}
 
@@ -101,7 +101,7 @@ public class MeasurementResultsFilter implements IProcessTypeSupplier {
 						}
 					}
 				}
-				//
+
 				deleteMeasurementResults(chromatogram, identifiers);
 			}
 		}

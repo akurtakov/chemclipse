@@ -66,23 +66,23 @@ import org.eclipse.swt.widgets.Table;
 public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIControl, IExtendedPartUI {
 
 	private static final int WARN_NUMBER_IMPORT_ENTRIES = 500;
-	//
+
 	public static final String DESCRIPTION = "Target List";
 	public static final String FILE_EXTENSION = ".txt";
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-	//
+
 	private Composite control;
-	//
+
 	private AtomicReference<Button> buttonSearchControl = new AtomicReference<>();
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private AtomicReference<TargetTemplateListUI> targetTemplateListControl = new AtomicReference<>();
-	//
+
 	private List<Listener> listeners = new ArrayList<>();
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 	private IProcessorPreferences<TargetTemplates> preferences = null;
-	//
+
 	private TargetTemplates settings = new TargetTemplates();
 
 	public TargetsSettingsEditor(Composite parent, IProcessorPreferences<TargetTemplates> preferences, TargetTemplates targetTemplates) {
@@ -94,7 +94,7 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 		if(targetTemplates != null) {
 			this.settings.load(targetTemplates.save());
 		}
-		//
+
 		control = createControl(parent);
 	}
 
@@ -151,13 +151,13 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 		gridLayout.marginWidth = 0;
 		gridLayout.marginHeight = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		createButtonSection(composite);
 		createToolbarSearch(composite);
 		createTableSection(composite);
-		//
+
 		initialize();
-		//
+
 		return composite;
 	}
 
@@ -174,7 +174,7 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(9, false));
-		//
+
 		createButtonToggleToolbar(composite);
 		createButtonAdd(composite);
 		createButtonEdit(composite);
@@ -204,7 +204,7 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 				targetTemplateListControl.get().setSearchText(searchText, caseSensitive);
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -218,7 +218,7 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.grabExcessVerticalSpace = true;
 		table.setLayoutData(gridData);
-		//
+
 		targetTemplateListControl.set(targetTemplateListUI);
 	}
 
@@ -244,7 +244,7 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -281,7 +281,7 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -307,7 +307,7 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -328,7 +328,7 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -352,11 +352,11 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 					fileDialog.setFilterPath(preferenceStore.getString(PreferenceSupplier.P_TARGET_TEMPLATE_LIBRARY_IMPORT_FOLDER));
 					String pathname = fileDialog.open();
 					if(pathname != null) {
-						//
+
 						File file = new File(pathname);
 						String path = file.getParentFile().getAbsolutePath();
 						preferenceStore.setValue(PreferenceSupplier.P_TARGET_TEMPLATE_LIBRARY_IMPORT_FOLDER, path);
-						//
+
 						ProgressMonitorDialog dialog = new ProgressMonitorDialog(e.display.getActiveShell());
 						DatabaseImportRunnable databaseImportRunnable = new DatabaseImportRunnable(file);
 						try {
@@ -382,7 +382,7 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -412,7 +412,7 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -447,7 +447,7 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -465,7 +465,7 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 				settings.save();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -486,7 +486,7 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 				targetTemplate.setComments(libraryInformation.getComments());
 				targetTemplate.setContributor(libraryInformation.getContributor());
 				targetTemplate.setReferenceId(libraryInformation.getReferenceIdentifier());
-				//
+
 				settings.add(targetTemplate);
 			}
 		}

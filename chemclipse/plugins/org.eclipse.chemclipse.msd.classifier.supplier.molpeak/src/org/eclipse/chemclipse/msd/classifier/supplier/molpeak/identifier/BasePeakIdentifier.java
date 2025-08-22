@@ -61,36 +61,36 @@ public class BasePeakIdentifier {
 	public static final String GUAIACYL = "Guaiacyl";
 	public static final String PHYDROXYPHENYL = "p-Hydroxyphenyl";
 	public static final String CARBOHYDRATE = "Carbohydrate";
-	//
+
 	private static final ArrayList<Integer> SYRINGYL_BASE = new ArrayList<>();
 	private static final ArrayList<Integer> GUAIACYL_BASE = new ArrayList<>();
 	private static final ArrayList<Integer> PHYDROXYPHENYL_BASE = new ArrayList<>();
 	private static final ArrayList<Integer> CARBOHYDRATE_BASE = new ArrayList<>();
-	//
+
 	private final TargetBuilderMSD targetBuilder;
 	// These one's are run when initializing the class
 	private static final IMassSpectra references = getStandardsMassSpectra();
 	private static final IScanMSD syringyl = getSyringyl();
-	//
+
 	private final String massSpectraFiles;
 	static {
 		Integer[] syringyl = {149, 154, 167, 181, 182, 192, 194, 208, 210};
 		Integer[] guaiacyl = {109, 123, 136, 137, 138, 140, 150, 151, 152, 162, 164, 168, 178};
 		Integer[] pHydroxyPhenyl = {94, 107, 108, 120, 121, 124, 134};
 		Integer[] carbohydrate = {29, 31, 39, 41, 42, 43, 44, 45, 46, 55, 56, 57, 58, 59, 60, 68, 69, 73, 81, 82, 84, 85, 87, 95, 96, 98, 114, 126, 142};
-		//
+
 		for(Integer mz : syringyl) {
 			SYRINGYL_BASE.add(mz);
 		}
-		//
+
 		for(Integer mz : guaiacyl) {
 			GUAIACYL_BASE.add(mz);
 		}
-		//
+
 		for(Integer mz : pHydroxyPhenyl) {
 			PHYDROXYPHENYL_BASE.add(mz);
 		}
-		//
+
 		for(Integer mz : carbohydrate) {
 			CARBOHYDRATE_BASE.add(mz);
 		}
@@ -106,7 +106,7 @@ public class BasePeakIdentifier {
 
 		List<IPeakMSD> peaksNotFound = new ArrayList<>();
 		float limitMatchFactor = settings.getLimitMatchFactor();
-		//
+
 		for(int i = 0; i < peaks.size(); i++) {
 			IPeakMSD peak = peaks.get(i);
 			if(LimitSupport.doIdentify(peak.getTargets(), limitMatchFactor)) {
@@ -142,7 +142,7 @@ public class BasePeakIdentifier {
 		setFileIdentifierSettings(peakIdentifierSettings);
 		PeakIdentifierFile peakIdentifier = new PeakIdentifierFile();
 		peakIdentifier.identify(peaksNotFound, peakIdentifierSettings, monitor);
-		//
+
 		for(IPeakMSD peak : peaksNotFound) {
 			Set<IIdentificationTarget> peakTargets = peak.getTargets();
 			if(containsMoreThanOneBasePeakIdentification(peakTargets)) {
@@ -155,7 +155,7 @@ public class BasePeakIdentifier {
 						break exitloop;
 					}
 				}
-				//
+
 				if(peakTargetToRemove != null) {
 					peak.getTargets().remove(peakTargetToRemove);
 				}
@@ -167,7 +167,7 @@ public class BasePeakIdentifier {
 
 		List<IScanMSD> scansNotFound = new ArrayList<>();
 		float limitMatchFactor = settings.getLimitMatchFactor();
-		//
+
 		for(int i = 0; i < massSpectrumList.size(); i++) {
 			IScanMSD massSpectrum = massSpectrumList.get(i);
 			if(LimitSupport.doIdentify(massSpectrum.getTargets(), limitMatchFactor)) {
@@ -195,7 +195,7 @@ public class BasePeakIdentifier {
 		setFileIdentifierSettings(massSpectrumIdentifierSettings);
 		MassSpectrumIdentifierFile massSpectrumIdentifier = new MassSpectrumIdentifierFile();
 		massSpectrumIdentifier.identify(scansNotFound, massSpectrumIdentifierSettings, monitor);
-		//
+
 		for(IScanMSD scan : scansNotFound) {
 			if(containsMoreThanOneBasePeakIdentificationMassSpectrum(scan.getTargets())) {
 				IIdentificationTarget targetToRemove = null;
@@ -207,7 +207,7 @@ public class BasePeakIdentifier {
 						break exitloop;
 					}
 				}
-				//
+
 				if(targetToRemove != null) {
 					scan.getTargets().remove(targetToRemove);
 				}
@@ -263,7 +263,7 @@ public class BasePeakIdentifier {
 				}
 			}
 		}
-		//
+
 		return massSpectra;
 	}
 

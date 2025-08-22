@@ -133,7 +133,7 @@ public interface IProcessEntry extends ProcessEntryContainer {
 		if(supplier == null) {
 			return null;
 		}
-		//
+
 		return new ProcessEntryProcessorPreferences<>(supplier, this);
 	}
 
@@ -150,59 +150,59 @@ public interface IProcessEntry extends ProcessEntryContainer {
 		if(other == null) {
 			return false;
 		}
-		//
+
 		if(other == this) {
 			return true;
 		}
-		//
+
 		if(isReadOnly() != other.isReadOnly()) {
 			return false;
 		}
-		//
+
 		if(!getName().equals(other.getName())) {
 			return false;
 		}
-		//
+
 		if(!getDescription().equals(other.getDescription())) {
 			return false;
 		}
-		//
+
 		Map<String, String> settingsMap = getSettingsMap();
 		for(Map.Entry<String, String> entry : settingsMap.entrySet()) {
-			//
+
 			String settings = entry.getValue();
 			if(settings == null) {
 				settings = "";
 			}
-			//
+
 			String otherSettings = other.getSettings(entry.getKey());
 			if(otherSettings == null) {
 				otherSettings = "";
 			}
-			//
+
 			if(!otherSettings.equals(settings)) {
 				return false;
 			}
 		}
-		//
+
 		if(!getProcessorId().equals(other.getProcessorId())) {
 			return false;
 		}
-		//
+
 		return entriesEquals(other);
 	}
 
 	public static IProcessSupplierContext getContext(IProcessEntry processEntry, IProcessSupplierContext defaultContext) {
 
 		ProcessEntryContainer processEntryContainer = processEntry.getParent();
-		//
+
 		if(processEntryContainer instanceof IProcessEntry processEntryParent) {
 			IProcessSupplier<?> processSupplier = getContext(processEntryParent, defaultContext).getSupplier(processEntryParent.getProcessorId());
 			if(processSupplier instanceof IProcessSupplierContext processSupplierContext) {
 				return processSupplierContext;
 			}
 		}
-		//
+
 		return defaultContext;
 	}
 }

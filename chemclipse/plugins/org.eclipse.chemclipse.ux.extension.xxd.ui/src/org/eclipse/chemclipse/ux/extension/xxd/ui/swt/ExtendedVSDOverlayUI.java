@@ -52,9 +52,9 @@ import jakarta.inject.Inject;
 public class ExtendedVSDOverlayUI extends Composite implements IExtendedPartUI {
 
 	private AtomicReference<ChartVSD> chartControl = new AtomicReference<>();
-	//
+
 	private EditorUpdateSupport editorUpdateSupport = new EditorUpdateSupport();
-	//
+
 	private List<ISpectrumVSD> scanSelections = new ArrayList<>();
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 	private IColorScheme colorSchemeNormal = Colors.getColorScheme(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCHEME_DISPLAY_OVERLAY));
@@ -76,7 +76,7 @@ public class ExtendedVSDOverlayUI extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createOverlayChart(this);
 	}
@@ -88,7 +88,7 @@ public class ExtendedVSDOverlayUI extends Composite implements IExtendedPartUI {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(3, false));
-		//
+
 		createButtonToggleChartLegend(composite, chartControl, IMAGE_LEGEND);
 		createResetButton(composite);
 		createSettingsButton(composite);
@@ -126,7 +126,7 @@ public class ExtendedVSDOverlayUI extends Composite implements IExtendedPartUI {
 
 		ChartVSD chartVSD = new ChartVSD(parent, SWT.BORDER, true); // TODO
 		chartVSD.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		chartControl.set(chartVSD);
 	}
 
@@ -140,11 +140,11 @@ public class ExtendedVSDOverlayUI extends Composite implements IExtendedPartUI {
 		ChartVSD chartVSD = chartControl.get();
 		chartVSD.deleteSeries();
 		if(!scanSelections.isEmpty()) {
-			//
+
 			List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
 			int i = 1;
 			Color color = colorSchemeNormal.getColor();
-			//
+
 			for(ISpectrumVSD spectrumVSD : scanSelections) {
 				/*
 				 * Get the data.
@@ -153,11 +153,11 @@ public class ExtendedVSDOverlayUI extends Composite implements IExtendedPartUI {
 				ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
 				lineSeriesSettings.setLineColor(color);
 				lineSeriesSettings.setEnableArea(false);
-				//
+
 				lineSeriesDataList.add(lineSeriesData);
 				color = colorSchemeNormal.getNextColor();
 			}
-			//
+
 			chartVSD.addSeriesData(lineSeriesDataList, LineChart.MEDIUM_COMPRESSION);
 		}
 	}
@@ -168,7 +168,7 @@ public class ExtendedVSDOverlayUI extends Composite implements IExtendedPartUI {
 		ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
 		lineSeriesSettings.setLineColor(Colors.RED);
 		lineSeriesSettings.setEnableArea(true);
-		//
+
 		return lineSeriesData;
 	}
 
@@ -176,7 +176,7 @@ public class ExtendedVSDOverlayUI extends Composite implements IExtendedPartUI {
 
 		double[] xSeries;
 		double[] ySeries;
-		//
+
 		if(spectrumVSD != null) {
 			int size = spectrumVSD.getScanVSD().getProcessedSignals().size();
 			xSeries = new double[size];
@@ -191,7 +191,7 @@ public class ExtendedVSDOverlayUI extends Composite implements IExtendedPartUI {
 			xSeries = new double[0];
 			ySeries = new double[0];
 		}
-		//
+
 		return new SeriesData(xSeries, ySeries, id);
 	}
 }

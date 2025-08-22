@@ -37,7 +37,7 @@ import org.eclipse.chemclipse.support.text.ValueFormat;
 public class TargetBuilderMSD {
 
 	private static final Logger logger = Logger.getLogger(TargetBuilderMSD.class);
-	//
+
 	private static final String UNKNOWN = "???";
 
 	public IIdentificationTarget getPeakTarget(IScanMSD reference, IComparisonResult comparisonResult, String identifier) {
@@ -61,7 +61,7 @@ public class TargetBuilderMSD {
 		ILibraryInformation libraryInformation = new PeakLibraryInformation();
 		initializeLibraryInformation(libraryInformation, reference);
 		libraryInformation.setDatabase(database);
-		//
+
 		IIdentificationTarget peakTarget = null;
 		try {
 			peakTarget = new IdentificationTarget(libraryInformation, comparisonResult);
@@ -97,7 +97,7 @@ public class TargetBuilderMSD {
 		ILibraryInformation libraryInformation = new LibraryInformation();
 		initializeLibraryInformation(libraryInformation, reference);
 		libraryInformation.setDatabase(database);
-		//
+
 		IdentificationTarget identificationEntry = null;
 		try {
 			identificationEntry = new IdentificationTarget(libraryInformation, comparisonResult);
@@ -151,7 +151,7 @@ public class TargetBuilderMSD {
 			libraryInformation.setCasNumber(UNKNOWN);
 			libraryInformation.setMiscellaneous(UNKNOWN);
 		}
-		//
+
 		libraryInformation.setRetentionTime(reference.getRetentionTime());
 		libraryInformation.setRetentionIndex(reference.getRetentionIndex());
 	}
@@ -168,7 +168,7 @@ public class TargetBuilderMSD {
 			List<IIon> ionsSorted = new ArrayList<>(unknown.getIons());
 			Collections.sort(ionsSorted, (s1, s2) -> Float.compare(s2.getAbundance(), s1.getAbundance()));
 			boolean includeIntensityPercent = targetUnknownSettings.isIncludeIntensityPercent();
-			//
+
 			int size = (ionsSorted.size() >= numberMZ) ? numberMZ : ionsSorted.size();
 			double maxIntensity = !ionsSorted.isEmpty() ? ionsSorted.get(0).getAbundance() : 0;
 			double factorMax = maxIntensity > 0 ? (100 / maxIntensity) : 0;
@@ -191,10 +191,10 @@ public class TargetBuilderMSD {
 					builder.append(UnknownTargetBuilder.DELIMITER_TRACES);
 				}
 			}
-			//
+
 			traces = builder.toString();
 		}
-		//
+
 		return traces;
 	}
 }

@@ -24,7 +24,7 @@ import org.eclipse.jface.preference.IPreferencePage;
 public class GroupHandlerISTD extends AbstractGroupHandler {
 
 	public static final String NAME = "ISTD";
-	//
+
 	private static final String IMAGE_HIDE = IApplicationImage.IMAGE_INTERNAL_STANDARDS_ACTIVE;
 	private static final String IMAGE_SHOW = IApplicationImage.IMAGE_INTERNAL_STANDARDS_DEFAULT;
 
@@ -40,10 +40,10 @@ public class GroupHandlerISTD extends AbstractGroupHandler {
 	public List<IPartHandler> getPartHandlerMandatory() {
 
 		List<IPartHandler> partHandler = new ArrayList<>();
-		//
+
 		partHandler.add(new PartHandler("Internal Standards", PartSupport.PARTDESCRIPTOR_INTERNAL_STANDARDS, PreferenceSupplier.P_STACK_POSITION_INTERNAL_STANDARDS));
 		partHandler.add(new PartHandler("Quantitation References", PartSupport.PARTDESCRIPTOR_PEAK_QUANTITATION_REFERENCES, PreferenceSupplier.P_STACK_POSITION_PEAK_QUANTITATION_REFERENCES));
-		//
+
 		return partHandler;
 	}
 
@@ -51,9 +51,9 @@ public class GroupHandlerISTD extends AbstractGroupHandler {
 	public List<IPartHandler> getPartHandlerAdditional() {
 
 		List<IPartHandler> partHandler = new ArrayList<>();
-		//
+
 		partHandler.add(new PartHandler("Quantitation", PartSupport.PARTDESCRIPTOR_QUANTITATION, PreferenceSupplier.P_STACK_POSITION_QUANTITATION));
-		//
+
 		return partHandler;
 	}
 

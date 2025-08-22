@@ -36,13 +36,13 @@ import org.eclipse.chemclipse.support.util.ValueParserSupport;
 public class TimeRanges {
 
 	private static final Logger logger = Logger.getLogger(TimeRanges.class);
-	//
+
 	public static final String DESCRIPTION = "Time Ranges";
 	public static final String FILE_EXTENSION = ".tra";
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-	//
+
 	private TimeRangeListUtil timeRangeListUtil = new TimeRangeListUtil();
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.000");
 	/*
@@ -127,7 +127,7 @@ public class TimeRanges {
 	public TimeRange extractTimeRange(String item) {
 
 		TimeRange timeRange = null;
-		//
+
 		if(item != null && !item.isBlank()) {
 			ValueParserSupport valueParserSupport = new ValueParserSupport();
 			String[] values = item.split("\\" + TimeRangeListUtil.SEPARATOR_ENTRY);
@@ -139,7 +139,7 @@ public class TimeRanges {
 			timeRange = new TimeRange(identifier, start, maximum, stop);
 			timeRange.setTraces(traces);
 		}
-		//
+
 		return timeRange;
 	}
 
@@ -192,7 +192,7 @@ public class TimeRanges {
 			 */
 			List<TimeRange> timeRanges = new ArrayList<>(values());
 			Collections.sort(timeRanges, (r1, r2) -> Integer.compare(r1.getStart(), r2.getStart()));
-			//
+
 			Iterator<TimeRange> iterator = timeRanges.iterator();
 			while(iterator.hasNext()) {
 				StringBuilder builder = new StringBuilder();

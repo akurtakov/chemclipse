@@ -25,11 +25,11 @@ public class WavenumberSignalsUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = WavenumberSignalsLabelProvider.TITLES;
 	private static final int[] BOUNDS = WavenumberSignalsLabelProvider.BOUNDS;
-	//
+
 	private WavenumberSignalsLabelProvider labelProvider = new WavenumberSignalsLabelProvider();
 	private WavenumberSignalsComparator tableComparator = new WavenumberSignalsComparator();
 	private WavenumberSignalsFilter listFilter = new WavenumberSignalsFilter();
-	//
+
 	private IUpdateListener updateListener;
 
 	public WavenumberSignalsUI(Composite parent, int style) {

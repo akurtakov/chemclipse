@@ -76,7 +76,7 @@ public class ScansInputWizard extends Wizard implements IInputWizard {
 		ExtractionType scanAlignment = scanSettingsWizardPage.getExtractionType();
 		int maximalNumberScans = scanSettingsWizardPage.getMaximalNumberScans();
 		pcaExtractionData = new PcaExtractionScans(retentionTimeWindow, maximalNumberScans, dataInputs, scanAlignment, useDefaultProperties);
-		//
+
 		return true;
 	}
 }

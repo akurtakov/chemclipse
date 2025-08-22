@@ -93,11 +93,11 @@ public class FilterScanMerger extends AbstractChromatogramFilter {
 					IScan scan = chromatogram.getScan(i);
 					Map.Entry<Integer, IScan> scanEntryNext = scanMap.higherEntry(scan.getRetentionTime());
 					if(scanEntryNext != null) {
-						//
+
 						IScan scanNext = scanEntryNext.getValue();
 						int retentionTimeCenter = (int)((scanNext.getRetentionTime() + scan.getRetentionTime()) / 2.0d);
 						float totalSignalMerged = (float)((scan.getTotalSignal() + scanNext.getTotalSignal()) / 2.0d);
-						//
+
 						if(scan instanceof IScanCSD) {
 							/*
 							 * CSD
@@ -183,7 +183,7 @@ public class FilterScanMerger extends AbstractChromatogramFilter {
 				scanSignal.setAbsorbance(scanSignal.getAbsorbance() + scanSignalWSD.getAbsorbance());
 			}
 		}
-		//
+
 		return scanSignals;
 	}
 
@@ -207,7 +207,7 @@ public class FilterScanMerger extends AbstractChromatogramFilter {
 				scanSignal.setIntensity(scanSignal.getIntensity() + signal.getIntensity());
 			}
 		}
-		//
+
 		return scanSignals;
 	}
 }

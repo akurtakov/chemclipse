@@ -79,7 +79,7 @@ public class PeakDetectorSupport {
 	public static IPeak extractPeakByScanRange(IChromatogram chromatogram, int startScan, int stopScan, boolean includeBackground, boolean optimizeRange, Set<Integer> traces) {
 
 		IPeak peak = null;
-		//
+
 		try {
 			if(startScan > 0 && startScan < stopScan) {
 				/*
@@ -114,7 +114,7 @@ public class PeakDetectorSupport {
 		} catch(PeakException e) {
 			logger.warn(e);
 		}
-		//
+
 		return peak;
 	}
 
@@ -128,7 +128,7 @@ public class PeakDetectorSupport {
 	public static IPeak extractPeakByScanRange(IChromatogram chromatogram, int startScan, int stopScan, float startIntensity, float stopIntensity, Set<Integer> traces) {
 
 		IPeak peak = null;
-		//
+
 		try {
 			if(startScan > 0 && startScan < stopScan) {
 				/*
@@ -158,7 +158,7 @@ public class PeakDetectorSupport {
 		} catch(PeakException e) {
 			logger.warn(e);
 		}
-		//
+
 		return peak;
 	}
 
@@ -220,7 +220,7 @@ public class PeakDetectorSupport {
 				stopScanOptimized = i;
 			}
 		}
-		//
+
 		return new ScanRange(startScanOptimized, stopScanOptimized);
 	}
 

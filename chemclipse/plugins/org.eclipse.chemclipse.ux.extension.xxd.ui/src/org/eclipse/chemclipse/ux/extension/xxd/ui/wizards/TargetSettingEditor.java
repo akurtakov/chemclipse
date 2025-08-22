@@ -49,7 +49,7 @@ public class TargetSettingEditor {
 
 	private AtomicReference<Label> rotationLabelControl = new AtomicReference<>();
 	private AtomicReference<TargetReferenceListUI> listControl = new AtomicReference<>();
-	//
+
 	private ITargetDisplaySettings targetDisplaySettings;
 	private TargetDisplaySettingsPage targetDisplaySettingsPage;
 	private Collection<? extends ITargetReference> targetReferences;
@@ -59,7 +59,7 @@ public class TargetSettingEditor {
 		this.targetDisplaySettings = targetDisplaySettings;
 		this.targetDisplaySettingsPage = settingsPage;
 		this.targetReferences = targetReferences;
-		//
+
 		createControl(parent);
 	}
 
@@ -69,19 +69,19 @@ public class TargetSettingEditor {
 		composite.setBackgroundMode(SWT.INHERIT_DEFAULT);
 		composite.setLayout(new GridLayout(9, false));
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		createLabel(composite, "Display Option: ");
 		createComboViewerDisplayOption(composite);
 		createCheckBoxPeaks(composite);
 		createCheckBoxScans(composite);
-		//
+
 		new Label(composite, SWT.SEPARATOR | SWT.VERTICAL);
-		//
+
 		createLabel(composite, "Display Field: ");
 		createComboViewerLibraryField(composite);
 		createLabel(composite, "Collision Detection Depth: ");
 		createComboViewerCollision(composite);
-		//
+
 		createSectionRotation(composite);
 		createSectionTableEdit(composite);
 		createSectionListUI(composite);
@@ -147,7 +147,7 @@ public class TargetSettingEditor {
 				return null;
 			}
 		});
-		//
+
 		comboViewer.setInput(DisplayOption.values());
 		comboViewer.setSelection(new StructuredSelection(targetDisplaySettings.getDisplayOption()));
 		comboViewer.addSelectionChangedListener(event -> {
@@ -163,7 +163,7 @@ public class TargetSettingEditor {
 			combo.setBackground(combo.getBackground());
 		}
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return comboViewer;
 	}
 
@@ -171,7 +171,7 @@ public class TargetSettingEditor {
 
 		Label label = new Label(parent, SWT.NONE);
 		label.setText(text);
-		//
+
 		return label;
 	}
 
@@ -192,7 +192,7 @@ public class TargetSettingEditor {
 				return null;
 			}
 		});
-		//
+
 		comboViewer.setInput(LibraryField.values());
 		comboViewer.setSelection(new StructuredSelection(targetDisplaySettings.getLibraryField()));
 		comboViewer.addSelectionChangedListener(event -> {
@@ -201,7 +201,7 @@ public class TargetSettingEditor {
 			listControl.get().refresh();
 			fireUpdate();
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -216,7 +216,7 @@ public class TargetSettingEditor {
 			targetDisplaySettings.setCollisionDetectionDepth(((Integer)comboViewer.getStructuredSelection().getFirstElement()));
 			fireUpdate();
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -237,7 +237,7 @@ public class TargetSettingEditor {
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = 8;
 		scale.setLayoutData(gridData);
-		//
+
 		scale.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -249,7 +249,7 @@ public class TargetSettingEditor {
 				fireUpdate();
 			}
 		});
-		//
+
 		return scale;
 	}
 
@@ -261,7 +261,7 @@ public class TargetSettingEditor {
 		composite.setLayoutData(gridData);
 		composite.setBackgroundMode(SWT.INHERIT_DEFAULT);
 		composite.setLayout(new GridLayout(4, false));
-		//
+
 		createButtonCheckOperation(composite, true);
 		createButtonCheckOperation(composite, false);
 		createSpinnerSelectHighestPeaks(composite);
@@ -273,7 +273,7 @@ public class TargetSettingEditor {
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		searchSupportUI.setSearchListener((searchText, caseSensitive) -> listControl.get().setSearchText(searchText, caseSensitive));
-		//
+
 		return searchSupportUI;
 	}
 
@@ -293,7 +293,7 @@ public class TargetSettingEditor {
 				fireUpdate();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -308,14 +308,14 @@ public class TargetSettingEditor {
 		GridData gridData = new GridData();
 		gridData.widthHint = 80;
 		spinner.setLayoutData(gridData);
-		//
+
 		spinner.addModifyListener(e -> {
 
 			selectHighestTargets(spinner.getSelection());
 			listControl.get().refresh();
 			fireUpdate();
 		});
-		//
+
 		return spinner;
 	}
 
@@ -324,7 +324,7 @@ public class TargetSettingEditor {
 		setTargetVisibility(false);
 		List<ITargetReference> targetReferencesSorted = new ArrayList<>(targetReferences);
 		Collections.sort(targetReferencesSorted, (r1, r2) -> Double.compare(r2.getSignal().getY(), r1.getSignal().getY()));
-		//
+
 		for(int i = 0; i < selection; i++) {
 			ITargetReference targetReference = targetReferencesSorted.get(i);
 			targetDisplaySettings.setVisible(targetReference, true);
@@ -353,7 +353,7 @@ public class TargetSettingEditor {
 				fireUpdate();
 			}
 		});
-		//
+
 		listControl.set(targetReferenceListUI);
 	}
 
@@ -366,7 +366,7 @@ public class TargetSettingEditor {
 		}
 		builder.append(value);
 		builder.append("°) ");
-		//
+
 		return builder.toString();
 	}
 

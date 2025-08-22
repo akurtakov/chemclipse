@@ -23,9 +23,9 @@ public class ColorCodeLabelProvider extends AbstractChemClipseLabelProvider {
 
 	public static final String NAME = ExtensionMessages.name;
 	public static final String COLOR = ExtensionMessages.color;
-	//
+
 	public static final int INDEX_COLOR = 1;
-	//
+
 	public static final String[] TITLES = { //
 			NAME, //
 			COLOR//

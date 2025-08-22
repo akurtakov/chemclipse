@@ -40,18 +40,18 @@ public class CalibrationChartSupport {
 		int size = signalEntries.size();
 		double[] xSeries = new double[size];
 		double[] ySeries = new double[size];
-		//
+
 		for(int i = 0; i < size; i++) {
 			IResponseSignal concentrationResponseEntry = signalEntries.get(i);
 			xSeries[i] = concentrationResponseEntry.getConcentration();
 			ySeries[i] = concentrationResponseEntry.getResponse();
 		}
-		//
+
 		ILineSeriesData lineSeriesData = getLineSeriesData(xSeries, ySeries, label, color);
 		ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
 		lineSeriesSettings.setSymbolType(PlotSymbolType.CIRCLE);
 		lineSeriesSettings.setSymbolSize(5);
-		//
+
 		return lineSeriesData;
 	}
 
@@ -101,7 +101,7 @@ public class CalibrationChartSupport {
 				logger.warn("ISTD shouldn't be used here.");
 				break;
 		}
-		//
+
 		return lineSeriesData;
 	}
 
@@ -128,11 +128,11 @@ public class CalibrationChartSupport {
 		 */
 		xSeries[1] = pointMax.getX();
 		ySeries[1] = equation.calculateY(pointMax.getX());
-		//
+
 		ILineSeriesData lineSeriesData = getLineSeriesData(xSeries, ySeries, label, color);
 		ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
 		lineSeriesSettings.setLineStyle(LineStyle.SOLID);
-		//
+
 		return lineSeriesData;
 	}
 
@@ -159,7 +159,7 @@ public class CalibrationChartSupport {
 				points.add(new Point(x, y));
 			}
 		}
-		//
+
 		double[] xSeries = new double[points.size()];
 		double[] ySeries = new double[points.size()];
 		for(int index = 0; index < points.size(); index++) {
@@ -167,11 +167,11 @@ public class CalibrationChartSupport {
 			xSeries[index] = point.getX();
 			ySeries[index] = point.getY();
 		}
-		//
+
 		ILineSeriesData lineSeriesData = getLineSeriesData(xSeries, ySeries, label, color);
 		ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
 		lineSeriesSettings.setLineStyle(LineStyle.SOLID);
-		//
+
 		return lineSeriesData;
 	}
 
@@ -190,18 +190,18 @@ public class CalibrationChartSupport {
 			x += entry.getConcentration();
 			y += entry.getResponse();
 		}
-		//
+
 		x /= size;
 		y /= size;
-		//
+
 		double[] xSeries = new double[]{x};
 		double[] ySeries = new double[]{y};
-		//
+
 		ILineSeriesData lineSeriesData = getLineSeriesData(xSeries, ySeries, label, color);
 		ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
 		lineSeriesSettings.setSymbolSize(6);
 		lineSeriesSettings.setSymbolType(PlotSymbolType.CROSS);
-		//
+
 		return lineSeriesData;
 	}
 
@@ -209,7 +209,7 @@ public class CalibrationChartSupport {
 
 		double[] xSeries = {0};
 		double[] ySeries = {0};
-		//
+
 		return getLineSeriesData(xSeries, ySeries, label, color);
 	}
 
@@ -225,7 +225,7 @@ public class CalibrationChartSupport {
 		lineSeriesSettings.setSymbolType(PlotSymbolType.NONE);
 		lineSeriesSettings.setSymbolColor(color);
 		lineSeriesSettings.setSymbolSize(1);
-		//
+
 		return lineSeriesData;
 	}
 }

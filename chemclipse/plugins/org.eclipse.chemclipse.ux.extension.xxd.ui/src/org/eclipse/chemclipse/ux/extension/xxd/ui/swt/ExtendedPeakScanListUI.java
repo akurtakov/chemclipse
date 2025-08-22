@@ -540,7 +540,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 					logger.warn(e);
 				}
 			}
-			//
+
 			updateChromatogramSelection();
 		}
 	}
@@ -650,14 +650,14 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 	private IScan getScan(Object object) {
 
 		IScan scan = null;
-		//
+
 		if(object instanceof IPeak peak) {
 			IPeakModel peakModel = peak.getPeakModel();
 			scan = peakModel.getPeakMaximum();
 		} else if(object instanceof IScan scanx) {
 			scan = scanx;
 		}
-		//
+
 		return scan;
 	}
 
@@ -672,7 +672,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 				}
 			}
 		}
-		//
+
 		chromatogramSelection.getChromatogram().setDirty(true);
 		UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "Peaks/Scans unknown targets have been set.");
 	}
@@ -682,13 +682,13 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 		if(interactionMode != InteractionMode.SOURCE && interactionMode != InteractionMode.BIDIRECTIONAL) {
 			return;
 		}
-		//
+
 		IStructuredSelection selection = tableViewer.get().getStructuredSelection();
 		buttonComparison.get().setEnabled(false);
 		buttonMerge.get().setEnabled(false);
 		buttonDelete.get().setEnabled(false);
 		scanIdentifierControl.get().setEnabled(false); // setInput enables/disables the control.
-		//
+
 		if(!selection.isEmpty()) {
 			buttonDelete.get().setEnabled(true);
 			List<?> list = selection.toList();
@@ -704,7 +704,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 				List<IPeak> selectedPeaks = new ArrayList<>();
 				List<IScan> selectedIdentifiedScans = new ArrayList<>();
 				List<IScan> scansIdentify = new ArrayList<>();
-				//
+
 				for(Object item : list) {
 					if(item instanceof IPeak peak) {
 						selectedPeaks.add(peak);
@@ -714,9 +714,9 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 						scansIdentify.add(scan);
 					}
 				}
-				//
+
 				scanIdentifierControl.get().setInput(scansIdentify);
-				//
+
 				chromatogramSelection.setSelectedPeaks(selectedPeaks);
 				chromatogramSelection.setSelectedIdentifiedScans(selectedIdentifiedScans);
 				chromatogramSelection.getChromatogram().setDirty(true);
@@ -734,14 +734,14 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 					if(moveRetentionTimeOnPeakSelection) {
 						ChromatogramDataSupport.adjustChromatogramSelection(peak, chromatogramSelection);
 					}
-					//
+
 					IScan scan = peak.getPeakModel().getPeakMaximum();
 					scanIdentifierControl.get().setInput(scan);
 					chromatogramSelection.setSelectedPeak(peak);
 					List<IScan> selectedIdentifiedScans = new ArrayList<>();
 					chromatogramSelection.setSelectedIdentifiedScans(selectedIdentifiedScans);
 					chromatogramSelection.setSelectedScan(null);
-					//
+
 					UpdateNotifierUI.update(display, peak);
 					UpdateNotifierUI.update(display, identificationTarget);
 					if(peak instanceof IPeakMSD peakMSD) {
@@ -752,12 +752,12 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 					 * Fire updates
 					 */
 					IIdentificationTarget identificationTarget = IIdentificationTarget.getIdentificationTarget(scan);
-					//
+
 					scanIdentifierControl.get().setInput(scan);
 					chromatogramSelection.setSelectedScan(scan);
 					chromatogramSelection.setSelectedIdentifiedScan(scan);
 					chromatogramSelection.setSelectedPeaks(new ArrayList<IPeak>());
-					//
+
 					UpdateNotifierUI.update(display, scan);
 					UpdateNotifierUI.update(display, identificationTarget);
 					if(scan instanceof IScanMSD scanMSD) {
@@ -796,7 +796,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 				}
 			}
 		});
-		//
+
 		buttonComparison.set(button);
 	}
 
@@ -838,13 +838,13 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 						chromatogramSelectionMSD.setSelectedPeak(chromatogramPeakMSD);
 						chromatogramMSD.setDirty(true);
 						updateChromatogramSelection();
-						//
+
 						UpdateNotifierUI.update(e.display, chromatogramPeakMSD);
 					}
 				}
 			}
 		});
-		//
+
 		buttonMerge.set(button);
 	}
 
@@ -862,7 +862,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 				deletePeaksOrIdentifications(parent.getDisplay());
 			}
 		});
-		//
+
 		buttonDelete.set(button);
 	}
 
@@ -880,7 +880,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 				}
 			}
 		});
-		//
+
 		scanIdentifierControl.set(scanIdentifierUI);
 	}
 
@@ -899,7 +899,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 	private IScanMSD getScanMSD(Object object) {
 
 		IScanMSD massSpectrum;
-		//
+
 		if(object instanceof IPeakMSD peak) {
 			massSpectrum = peak.getPeakModel().getPeakMassSpectrum();
 		} else if(object instanceof IScanMSD scanMSD) {
@@ -907,7 +907,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 		} else {
 			massSpectrum = null;
 		}
-		//
+
 		return massSpectrum;
 	}
 
@@ -951,7 +951,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 						} else {
 							peaks = getPeakList(table, indices);
 						}
-						//
+
 						if(!peaks.isEmpty()) {
 							DatabaseFileSupport.savePeaks(e.display.getActiveShell(), peaks, chromatogram.getName());
 						}
@@ -964,14 +964,14 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 						} else {
 							scans = getScanList(table, indices);
 						}
-						//
+
 						MassSpectra massSpectra = new MassSpectra();
 						for(IScan scan : scans) {
 							if(scan instanceof IScanMSD scanMSD) {
 								massSpectra.addMassSpectrum(scanMSD);
 							}
 						}
-						//
+
 						if(!massSpectra.isEmpty()) {
 							DatabaseFileSupport.saveMassSpectra(e.display.getActiveShell(), massSpectra, chromatogram.getName());
 						}
@@ -981,7 +981,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 				}
 			}
 		});
-		//
+
 		buttonSave.set(button);
 	}
 
@@ -1014,7 +1014,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 			 */
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 			String chromatogramLabel = ChromatogramDataSupport.getChromatogramLabel(chromatogram);
-			//
+
 			int peaks = 0;
 			int scans = 0;
 			for(TableItem tableItem : tableViewer.get().getTable().getItems()) {
@@ -1025,7 +1025,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 					scans++;
 				}
 			}
-			//
+
 			StringBuilder builder = new StringBuilder();
 			builder.append(DESCRIPTION_PEAKS);
 			builder.append(" ");
@@ -1038,7 +1038,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 			builder.append(scans);
 			builder.append(" / ");
 			builder.append(ChromatogramDataSupport.getIdentifiedScans(chromatogram).size());
-			//
+
 			toolbarInfoTop.get().setText(chromatogramLabel);
 			toolbarInfoBottom.get().setText(builder.toString());
 		}
@@ -1085,7 +1085,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 		Table table = tableViewer.get().getTable();
 		int[] indices = table.getSelectionIndices();
 		List<IChromatogramPeakMSD> peaksMSD;
-		//
+
 		if(indices.length >= 2) {
 			peaksMSD = new ArrayList<>();
 			for(IPeak peak : getPeakList(table, indices)) {
@@ -1096,7 +1096,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 		} else {
 			peaksMSD = Collections.emptyList();
 		}
-		//
+
 		return peaksMSD;
 	}
 
@@ -1132,12 +1132,12 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 			if(chromatogramSelection.getChromatogram().getModCount() != currentModCount) {
 				return true;
 			}
-			//
+
 			if(lastRange != null && !lastRange.contentEquals(chromatogramSelection)) {
 				return true;
 			}
 		}
-		//
+
 		return referenceChanged;
 	}
 

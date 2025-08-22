@@ -48,7 +48,7 @@ public class TraceHighResWSD extends TraceGenericDelta {
 			builder.append(getDelta());
 		}
 		builder.append(getScaleFactorAsString());
-		//
+
 		return builder.toString();
 	}
 }

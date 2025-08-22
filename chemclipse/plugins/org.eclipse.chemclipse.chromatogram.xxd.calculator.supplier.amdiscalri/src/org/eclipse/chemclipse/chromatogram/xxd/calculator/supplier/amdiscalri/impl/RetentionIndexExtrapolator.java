@@ -41,7 +41,7 @@ public class RetentionIndexExtrapolator {
 			 */
 			TreeMap<Integer, IRetentionIndexEntry> definedAlkanes = new TreeMap<>();
 			Set<Integer> missingAlkanes = mapRanges(retentionIndexMarker, definedAlkanes);
-			//
+
 			extrapolateMiddleSection(retentionIndexMarker, definedAlkanes, missingAlkanes);
 			extrapolateStartSection(retentionIndexMarker, definedAlkanes, missingAlkanes);
 			extrapolateEndSection(retentionIndexMarker, definedAlkanes, missingAlkanes);
@@ -54,7 +54,7 @@ public class RetentionIndexExtrapolator {
 		 * Create the alkane range C1 - C99
 		 */
 		Set<Integer> missingAlkanes = IntStream.rangeClosed(1, 99).boxed().collect(Collectors.toCollection(HashSet::new));
-		//
+
 		for(IRetentionIndexEntry retentionIndexEntry : retentionIndexMarker) {
 			int alkaneNumber = extractAlkaneNumber(retentionIndexEntry.getName());
 			if(alkaneNumber > RetentionIndexCalculator.ALKANE_MISSING) {
@@ -62,7 +62,7 @@ public class RetentionIndexExtrapolator {
 				missingAlkanes.remove(alkaneNumber);
 			}
 		}
-		//
+
 		return missingAlkanes;
 	}
 
@@ -167,7 +167,7 @@ public class RetentionIndexExtrapolator {
 				}
 			}
 		}
-		//
+
 		return retentionIndexEntry;
 	}
 
@@ -178,7 +178,7 @@ public class RetentionIndexExtrapolator {
 				return retentionIndexEntry;
 			}
 		}
-		//
+
 		return null;
 	}
 
@@ -211,7 +211,7 @@ public class RetentionIndexExtrapolator {
 		if(retentionIndexEntry1 != null && retentionIndexEntry2 != null) {
 			distance = retentionIndexEntry2.getRetentionTime() - retentionIndexEntry1.getRetentionTime();
 		}
-		//
+
 		return distance;
 	}
 }

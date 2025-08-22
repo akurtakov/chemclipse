@@ -22,7 +22,7 @@ public class EnhancedCombo {
 
 		Combo combo = new Combo(parent, style);
 		initialize(combo);
-		//
+
 		return combo;
 	}
 

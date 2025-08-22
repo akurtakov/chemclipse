@@ -38,11 +38,11 @@ public class IntegrationAreaTableComparator extends AbstractRecordTableComparato
 					sortOrder = 0;
 			}
 		}
-		//
+
 		if(getDirection() == ASCENDING) {
 			sortOrder = -sortOrder;
 		}
-		//
+
 		return sortOrder;
 	}
 }

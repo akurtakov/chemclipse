@@ -31,7 +31,7 @@ public class SampleGroupAssignerListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = SampleGroupAssignerLabelProvider.TITLES;
 	private static final int[] BOUNDS = SampleGroupAssignerLabelProvider.BOUNDS;
-	//
+
 	private final ITableLabelProvider labelProvider = new SampleGroupAssignerLabelProvider();
 	private final ViewerComparator comparator = new SamplesComparator();
 	private final SamplesListFilter listFilter = new SamplesListFilter();

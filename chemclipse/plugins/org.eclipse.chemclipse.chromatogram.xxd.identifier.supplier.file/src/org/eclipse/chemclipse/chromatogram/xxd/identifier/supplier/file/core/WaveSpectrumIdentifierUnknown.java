@@ -40,14 +40,14 @@ public class WaveSpectrumIdentifierUnknown extends AbstractWaveSpectrumIdentifie
 		} else {
 			unknownSettings = PreferenceSupplier.getWaveSpectrumUnknownSettings();
 		}
-		//
+
 		IProcessingInfo<WaveSpectra> processingInfo = new ProcessingInfo<>();
 		TargetUnknownSettings targetUnknownSettings = UnknownSettingsSupport.getTargetUnknownSettings(unknownSettings);
 		float limitMatchFactor = unknownSettings.getLimitMatchFactor();
 		UnknownIdentifier unknownIdentifier = new UnknownIdentifier();
 		unknownIdentifier.runIdentificationScan(waveSpectraList, limitMatchFactor, targetUnknownSettings);
 		processingInfo.addInfoMessage(FileIdentifier.IDENTIFIER, "Wave spectra have been identified.");
-		//
+
 		return processingInfo;
 	}
 }

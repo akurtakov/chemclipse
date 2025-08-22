@@ -36,7 +36,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 
 		addField(new RetentionTimeMinutesFieldEditor(PreferenceSupplier.P_OVERLAY_X_OFFSET, "Retention time offset (minutes):", PreferenceSupplier.MIN_X_OFFSET, PreferenceSupplier.MAX_X_OFFSET, getFieldEditorParent()));
 		addField(new IntegerFieldEditor(PreferenceSupplier.P_OVERLAY_Y_OFFSET, "Abundance offset:", getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new DirectoryFieldEditor(PreferenceSupplier.P_PATH_OPEN_CHROMATOGRAMS, "Path Chromatograms", getFieldEditorParent()));
 	}

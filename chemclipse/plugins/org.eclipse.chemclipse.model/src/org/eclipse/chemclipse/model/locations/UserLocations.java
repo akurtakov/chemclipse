@@ -33,13 +33,13 @@ import org.eclipse.chemclipse.support.util.UserLocationListUtil;
 public class UserLocations {
 
 	private static final Logger logger = Logger.getLogger(UserLocations.class);
-	//
+
 	public static final String DESCRIPTION = "User Locations";
 	public static final String FILE_EXTENSION = ".ulo";
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-	//
+
 	private final Map<String, UserLocation> userLocationMap = new HashMap<>();
 
 	public UserLocations() {
@@ -112,14 +112,14 @@ public class UserLocations {
 	public UserLocation extractUserLocation(String item) {
 
 		UserLocation userLocation = null;
-		//
+
 		if(!"".equals(item)) {
 			String[] values = item.split("\\" + UserLocationListUtil.SEPARATOR_ENTRY);
 			String name = ((values.length > 0) ? values[0].trim() : "");
 			String path = ((values.length > 1) ? values[1].trim() : "");
 			userLocation = new UserLocation(name, path);
 		}
-		//
+
 		return userLocation;
 	}
 
@@ -144,7 +144,7 @@ public class UserLocations {
 				builder.append(UserLocationListUtil.SEPARATOR_TOKEN);
 			}
 		}
-		//
+
 		return builder.toString().trim();
 	}
 
@@ -173,7 +173,7 @@ public class UserLocations {
 			 */
 			List<UserLocation> userLocations = new ArrayList<>(values());
 			Collections.sort(userLocations, (r1, r2) -> r1.getName().compareTo(r2.getName()));
-			//
+
 			Iterator<UserLocation> iterator = userLocations.iterator();
 			while(iterator.hasNext()) {
 				StringBuilder builder = new StringBuilder();

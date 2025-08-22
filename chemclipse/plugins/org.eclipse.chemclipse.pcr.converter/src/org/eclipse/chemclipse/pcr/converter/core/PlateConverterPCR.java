@@ -100,7 +100,7 @@ public class PlateConverterPCR {
 		} catch(NoConverterAvailableException e) {
 			logger.info(e);
 		}
-		//
+
 		return getProcessingErrorImport(file);
 	}
 

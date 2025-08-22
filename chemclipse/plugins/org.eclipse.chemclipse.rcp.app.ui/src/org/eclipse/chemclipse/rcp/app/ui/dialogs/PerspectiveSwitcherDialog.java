@@ -86,7 +86,7 @@ public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChang
 	@Inject
 	@Preference(nodePath = "org.eclipse.chemclipse.rcp.app.ui.dialogs.PerspectiveSwitcherDialog")
 	private IEclipsePreferences preferences;
-	//
+
 	private PerspectiveSwitcherViewerFilter perspectiveSwitcherViewerFilter = new PerspectiveSwitcherViewerFilter();
 	private List<MPerspective> perspectives = new ArrayList<>();
 	private MPerspective selectedPerspective = null;
@@ -102,7 +102,7 @@ public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChang
 
 		super.configureShell(shell);
 		shell.setText("Select Perspective");
-		//
+
 		initialize();
 	}
 
@@ -115,7 +115,7 @@ public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChang
 		if(tableViewerControl.get().getStructuredSelection().getFirstElement() instanceof MPerspective perspective) {
 			selectedPerspective = perspective;
 		}
-		//
+
 		validateSelection();
 	}
 
@@ -141,7 +141,7 @@ public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChang
 		 * Enable / disable the OK button.
 		 */
 		validateSelection();
-		//
+
 		return composite;
 	}
 
@@ -185,7 +185,7 @@ public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChang
 		Text text = new Text(parent, SWT.SINGLE | SWT.BORDER | SWT.SEARCH | SWT.ICON_CANCEL);
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		text.setText("");
-		//
+
 		text.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -196,7 +196,7 @@ public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChang
 				validateSelection();
 			}
 		});
-		//
+
 		text.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -207,7 +207,7 @@ public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChang
 				validateSelection();
 			}
 		});
-		//
+
 		textControl.set(text);
 	}
 
@@ -236,7 +236,7 @@ public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChang
 		 * Select the perspective in double click.
 		 */
 		tableViewer.addDoubleClickListener(event -> okPressed());
-		//
+
 		tableViewerControl.set(tableViewer);
 	}
 

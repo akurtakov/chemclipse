@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.TableColumn;
 public class TableSupport {
 
 	private static final Logger logger = Logger.getLogger(TableSupport.class);
-	//
+
 	private static final String VALUE_DELIMITER = " ";
 
 	public static void setColumnOrder(Table table, String columnOrder) {
@@ -71,7 +71,7 @@ public class TableSupport {
 			builder.append(i);
 			builder.append(VALUE_DELIMITER);
 		}
-		//
+
 		return builder.toString().trim();
 	}
 
@@ -82,7 +82,7 @@ public class TableSupport {
 			builder.append(tableColumn.getWidth());
 			builder.append(VALUE_DELIMITER);
 		}
-		//
+
 		return builder.toString().trim();
 	}
 
@@ -91,7 +91,7 @@ public class TableSupport {
 		if(columnInfo.isEmpty()) {
 			return new int[0];
 		}
-		//
+
 		String[] values = columnInfo.split(VALUE_DELIMITER);
 		int size = values.length;
 		int[] columns = new int[size];
@@ -102,7 +102,7 @@ public class TableSupport {
 				logger.warn(e);
 			}
 		}
-		//
+
 		return columns;
 	}
 

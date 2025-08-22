@@ -24,12 +24,12 @@ public class IdentifierListTableComparator extends AbstractRecordTableComparator
 
 		int sortOrder = 0;
 		if(e1 instanceof IdentifierFile identifierFile1 && e2 instanceof IdentifierFile identifierFile2) {
-			//
+
 			String column1 = identifierFile1.getSeparationColumn().getName();
 			String column2 = identifierFile2.getSeparationColumn().getName();
 			String type1 = identifierFile1.getSeparationColumn().getSeparationColumnType().label();
 			String type2 = identifierFile2.getSeparationColumn().getSeparationColumnType().label();
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = column2.compareTo(column1);

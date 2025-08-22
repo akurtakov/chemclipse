@@ -214,7 +214,7 @@ public class PeakBuilderWSD {
 					extractedWavelengthSignalMax = extractedWavelengthSignalMax.getTotalSignal() < extractedWavelengthSignal.getTotalSignal() ? extractedWavelengthSignal : extractedWavelengthSignalMax;
 				}
 			}
-			//
+
 			if(extractedWavelengthSignalMax != null) {
 				IScanWSD peakScanWSD = new ScanWSD();
 				int retentionTime = extractedWavelengthSignalMax.getRetentionTime();
@@ -338,7 +338,7 @@ public class PeakBuilderWSD {
 				extractedWavelengthSignal.setAbundance(i, 0);
 			}
 		}
-		//
+
 		return extractedWavelengthSignals;
 	}
 
@@ -381,7 +381,7 @@ public class PeakBuilderWSD {
 		if(extractedWavelengthSignals == null || scanRange == null || backgroundAbundanceRange == null) {
 			throw new PeakException("The given signals, scanRange or backgroundAbundanceRange must not be null.");
 		}
-		//
+
 		IExtractedWavelengthSignal extractedWavelengthSignal;
 		// P1
 		extractedWavelengthSignal = extractedWavelengthSignals.getExtractedWavelengthSignal(scanRange.getStartScan());
@@ -436,7 +436,7 @@ public class PeakBuilderWSD {
 		int start = extractedWavelengthSignals.getStartScan();
 		int stop = extractedWavelengthSignals.getStopScan();
 		ITotalScanSignals peakIntensityTotalScanSignals = new TotalScanSignals(start, stop);
-		//
+
 		for(int scan = start; scan <= stop; scan++) {
 			IExtractedWavelengthSignal extractedWavelengthSignal = extractedWavelengthSignals.getExtractedWavelengthSignal(scan);
 			int retentionTime = extractedWavelengthSignal.getRetentionTime();
@@ -447,11 +447,11 @@ public class PeakBuilderWSD {
 			if(adjustedSignal < 0.0f) {
 				adjustedSignal = 0.0f;
 			}
-			//
+
 			ITotalScanSignal totalScanSignal = new TotalScanSignal(retentionTime, 0.0f, adjustedSignal);
 			peakIntensityTotalScanSignals.add(totalScanSignal);
 		}
-		//
+
 		TotalScanSignalsModifier.normalize(peakIntensityTotalScanSignals, IPeakIntensityValues.MAX_INTENSITY);
 		return peakIntensityTotalScanSignals;
 	}
@@ -495,7 +495,7 @@ public class PeakBuilderWSD {
 			 */
 			peakScanWSD = new ScanWSD(scanWSD, percentage);
 		}
-		//
+
 		return peakScanWSD;
 	}
 

@@ -70,7 +70,7 @@ public class DeletePeaksFilterSettings_v1 implements ISettingsMigrationHandler<D
 		} catch(Exception e) {
 			success = false;
 		}
-		//
+
 		return success;
 	}
 }

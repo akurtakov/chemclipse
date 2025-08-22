@@ -48,7 +48,7 @@ public class PointYComparator implements Comparator<IPoint> {
 		if(point1 == null || point2 == null) {
 			return 0;
 		}
-		//
+
 		int result;
 		switch(sortOrder) {
 			case ASCENDING:

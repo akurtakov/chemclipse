@@ -36,7 +36,7 @@ public class PeakTargetsViewerUI extends ExtendedTableViewer {
 	private void createColumns() {
 
 		createColumns(titles, bounds);
-		//
+
 		setLabelProvider(new PeakTargetsLabelProvider());
 		setContentProvider(new ListContentProvider());
 		setComparator(new PeakTargetsTableComparator());

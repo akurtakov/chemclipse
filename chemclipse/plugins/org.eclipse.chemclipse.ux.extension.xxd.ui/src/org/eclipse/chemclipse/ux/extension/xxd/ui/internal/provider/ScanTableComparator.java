@@ -68,7 +68,7 @@ public class ScanTableComparator extends AbstractRecordTableComparator implement
 
 		int sortOrder = 0;
 		if(e1 instanceof IIon ion1 && e2 instanceof IIon ion2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = Double.compare(ion2.getIon(), ion1.getIon());
@@ -95,7 +95,7 @@ public class ScanTableComparator extends AbstractRecordTableComparator implement
 		if(e1 instanceof IIon ion1 && e2 instanceof IIon ion2) {
 			IIonTransition ionTransition1 = ion1.getIonTransition();
 			IIonTransition ionTransition2 = ion2.getIonTransition();
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = Double.compare(ion2.getIon(), ion1.getIon());
@@ -135,7 +135,7 @@ public class ScanTableComparator extends AbstractRecordTableComparator implement
 
 		int sortOrder = 0;
 		if(e1 instanceof IIon ion1 && e2 instanceof IIon ion2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = Double.compare(ion2.getIon(), ion1.getIon());
@@ -160,7 +160,7 @@ public class ScanTableComparator extends AbstractRecordTableComparator implement
 
 		int sortOrder = 0;
 		if(e1 instanceof IScanCSD scanCSD1 && e2 instanceof IScanCSD scanCSD2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = Integer.compare(scanCSD2.getRetentionTime(), scanCSD1.getRetentionTime());

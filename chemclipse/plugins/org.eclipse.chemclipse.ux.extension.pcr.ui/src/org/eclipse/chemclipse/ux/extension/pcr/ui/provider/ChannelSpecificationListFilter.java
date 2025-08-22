@@ -39,21 +39,21 @@ public class ChannelSpecificationListFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof Map.Entry<?, ?> entry) {
 			String search = (caseSensitive) ? searchTextExtended : searchTextExtended.toLowerCase();
 			String key = (caseSensitive) ? (String)entry.getKey() : ((String)entry.getKey()).toLowerCase();
 			String value = (caseSensitive) ? (String)entry.getValue() : ((String)entry.getValue()).toLowerCase();
-			//
+
 			if(key.matches(search)) {
 				return true;
 			}
-			//
+
 			if(value.matches(search)) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

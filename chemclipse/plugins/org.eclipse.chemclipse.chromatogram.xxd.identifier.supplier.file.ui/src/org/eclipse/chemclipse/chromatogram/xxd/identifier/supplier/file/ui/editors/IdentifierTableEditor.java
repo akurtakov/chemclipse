@@ -46,10 +46,10 @@ public class IdentifierTableEditor extends FieldEditor {
 	private Button buttonAddDirectory;
 	private Button buttonRemove;
 	private Button buttonRemoveAll;
-	//
+
 	private String[] fileExtensions = new String[]{};
 	private String[] fileNames = new String[]{};
-	//
+
 	private IdentifierFileListUI identifierFileListUI;
 	private IdentifierFileListUtil identifierFileListUtil = new IdentifierFileListUtil();
 
@@ -138,7 +138,7 @@ public class IdentifierTableEditor extends FieldEditor {
 				}
 			}
 		}
-		//
+
 		String[] items = files.toArray(new String[files.size()]);
 		String storedContent = identifierFileListUtil.createList(items);
 		if(storedContent != null) {
@@ -153,7 +153,7 @@ public class IdentifierTableEditor extends FieldEditor {
 		GridData gridDataControl = new GridData();
 		gridDataControl.horizontalSpan = numColumns;
 		control.setLayoutData(gridDataControl);
-		//
+
 		identifierFileListUI = createDataSection(parent);
 		compositeButtons = createButtonSection(parent);
 	}
@@ -166,7 +166,7 @@ public class IdentifierTableEditor extends FieldEditor {
 		gridData.horizontalAlignment = GridData.FILL;
 		gridData.grabExcessHorizontalSpace = true;
 		identifierFileListUI.getTable().setLayoutData(gridData);
-		//
+
 		return identifierFileListUI;
 	}
 
@@ -176,7 +176,7 @@ public class IdentifierTableEditor extends FieldEditor {
 		GridData gridData = new GridData();
 		gridData.verticalAlignment = GridData.BEGINNING;
 		composite.setLayoutData(gridData);
-		//
+
 		return composite;
 	}
 
@@ -199,7 +199,7 @@ public class IdentifierTableEditor extends FieldEditor {
 				addFileDB(e.display.getActiveShell());
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -214,7 +214,7 @@ public class IdentifierTableEditor extends FieldEditor {
 				addDirectoryDB(e.display.getActiveShell());
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -229,7 +229,7 @@ public class IdentifierTableEditor extends FieldEditor {
 				remove();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -244,7 +244,7 @@ public class IdentifierTableEditor extends FieldEditor {
 				removeAll();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -258,7 +258,7 @@ public class IdentifierTableEditor extends FieldEditor {
 		int widthHint = convertHorizontalDLUsToPixels(button, IDialogConstants.BUTTON_WIDTH);
 		data.widthHint = Math.max(widthHint, button.computeSize(SWT.DEFAULT, SWT.DEFAULT, true).x);
 		button.setLayoutData(data);
-		//
+
 		return button;
 	}
 
@@ -287,7 +287,7 @@ public class IdentifierTableEditor extends FieldEditor {
 		setPresentsDefaultValue(false);
 		Table table = identifierFileListUI.getTable();
 		int[] indices = table.getSelectionIndices();
-		//
+
 		int offset = 0;
 		for(int index : indices) {
 			index -= offset;
@@ -296,7 +296,7 @@ public class IdentifierTableEditor extends FieldEditor {
 				offset++;
 			}
 		}
-		//
+
 		selectionChanged();
 	}
 
@@ -316,38 +316,38 @@ public class IdentifierTableEditor extends FieldEditor {
 	private IdentifierFile selectDatabaseFile(Shell shell) {
 
 		IdentifierFile identifierFile = null;
-		//
+
 		FileDialog fileDialog = new FileDialog(shell, SWT.OPEN);
 		fileDialog.setText("Select a Database");
 		fileDialog.setFilterPath(PreferenceSupplier.getFilterPathIdentifierFiles());
 		fileDialog.setFilterExtensions(fileExtensions);
 		fileDialog.setFilterNames(fileNames);
-		//
+
 		String filterPath = fileDialog.open();
 		if(filterPath != null) {
 			File file = new File(filterPath);
 			PreferenceSupplier.setFilterPathIdentifierFiles(file.getParentFile().getAbsolutePath());
 			identifierFile = addIdentifier(file);
 		}
-		//
+
 		return identifierFile;
 	}
 
 	private IdentifierFile selectDatabaseDirectory(Shell shell) {
 
 		IdentifierFile identifierFile = null;
-		//
+
 		DirectoryDialog directoryDialog = new DirectoryDialog(shell, SWT.OPEN);
 		directoryDialog.setText("Select a Database");
 		directoryDialog.setFilterPath(PreferenceSupplier.getFilterPathIdentifierFiles());
-		//
+
 		String filterPath = directoryDialog.open();
 		if(filterPath != null) {
 			File file = new File(filterPath);
 			PreferenceSupplier.setFilterPathIdentifierFiles(file.getAbsolutePath());
 			identifierFile = addIdentifier(file);
 		}
-		//
+
 		return identifierFile;
 	}
 
@@ -368,7 +368,7 @@ public class IdentifierTableEditor extends FieldEditor {
 				}
 			}
 		}
-		//
+
 		return identifierFile;
 	}
 
@@ -392,7 +392,7 @@ public class IdentifierTableEditor extends FieldEditor {
 			GridLayout layout = new GridLayout();
 			layout.marginWidth = 0;
 			compositeButtons.setLayout(layout);
-			//
+
 			createButtons(compositeButtons);
 			compositeButtons.addDisposeListener(event -> {
 				buttonAddFile = null;
@@ -403,7 +403,7 @@ public class IdentifierTableEditor extends FieldEditor {
 		} else {
 			checkParent(compositeButtons, parent);
 		}
-		//
+
 		selectionChanged();
 		return compositeButtons;
 	}
@@ -424,7 +424,7 @@ public class IdentifierTableEditor extends FieldEditor {
 		} else {
 			checkParent(identifierFileListUI.getTable(), parent);
 		}
-		//
+
 		return identifierFileListUI;
 	}
 
@@ -452,7 +452,7 @@ public class IdentifierTableEditor extends FieldEditor {
 				}
 			}
 		}
-		//
+
 		this.fileExtensions = extensions.toArray(new String[extensions.size()]);
 		this.fileNames = names.toArray(new String[names.size()]);
 	}

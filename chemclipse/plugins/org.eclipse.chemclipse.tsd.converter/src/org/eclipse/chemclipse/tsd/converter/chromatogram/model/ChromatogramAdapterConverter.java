@@ -58,7 +58,7 @@ public class ChromatogramAdapterConverter extends AbstractImportConverter {
 	public IProcessingInfo<IChromatogramTSD> convert(File file, IProgressMonitor monitor) {
 
 		IProcessingInfo<IChromatogramTSD> processingInfo = new ProcessingInfo<>();
-		//
+
 		IChromatogramTSD chromatogramTSD = null;
 		switch(typeTSD) {
 			case GC_MS:
@@ -73,13 +73,13 @@ public class ChromatogramAdapterConverter extends AbstractImportConverter {
 			default:
 				break;
 		}
-		//
+
 		if(chromatogramTSD != null) {
 			processingInfo.setProcessingResult(chromatogramTSD);
 		} else {
 			processingInfo.addErrorMessage("TSD Adapter", "The adapter type is not supported yet: " + typeTSD.label());
 		}
-		//
+
 		return processingInfo;
 	}
 
@@ -113,7 +113,7 @@ public class ChromatogramAdapterConverter extends AbstractImportConverter {
 		 */
 		int min;
 		int max;
-		//
+
 		if(PreferenceSupplier.isUseAdapterFixedRangeMSD()) {
 			min = PreferenceSupplier.getAdapterMinTraceMSD();
 			max = PreferenceSupplier.getAdapterMaxTraceMSD();
@@ -146,11 +146,11 @@ public class ChromatogramAdapterConverter extends AbstractImportConverter {
 				}
 			}
 		}
-		//
+
 		IChromatogramTSD chromatogram = new ChromatogramAdapterMSD(chromatogramMSD);
 		chromatogram.setFile(file);
 		chromatogram.addScans(scans);
-		//
+
 		return chromatogram;
 	}
 
@@ -163,7 +163,7 @@ public class ChromatogramAdapterConverter extends AbstractImportConverter {
 		 */
 		int min;
 		int max;
-		//
+
 		if(PreferenceSupplier.isUseAdapterFixedRangeWSD()) {
 			min = PreferenceSupplier.getAdapterMinTraceWSD();
 			max = PreferenceSupplier.getAdapterMaxTraceWSD();
@@ -196,11 +196,11 @@ public class ChromatogramAdapterConverter extends AbstractImportConverter {
 				}
 			}
 		}
-		//
+
 		IChromatogramTSD chromatogram = new ChromatogramAdapterWSD(chromatogramWSD);
 		chromatogram.setFile(file);
 		chromatogram.addScans(scans);
-		//
+
 		return chromatogram;
 	}
 
@@ -213,7 +213,7 @@ public class ChromatogramAdapterConverter extends AbstractImportConverter {
 		 */
 		int min;
 		int max;
-		//
+
 		if(PreferenceSupplier.isUseAdapterFixedRangeISD()) {
 			min = PreferenceSupplier.getAdapterMinTraceISD();
 			max = PreferenceSupplier.getAdapterMaxTraceISD();
@@ -246,18 +246,18 @@ public class ChromatogramAdapterConverter extends AbstractImportConverter {
 				}
 			}
 		}
-		//
+
 		IChromatogramTSD chromatogram = new ChromatogramAdapterISD(chromatogramISD);
 		chromatogram.setFile(file);
 		chromatogram.addScans(scans);
-		//
+
 		return chromatogram;
 	}
 
 	private Map<Integer, Float> getIntensitiesISD(IScanVSD scanISD) {
 
 		Map<Integer, Float> intensities = new HashMap<>();
-		//
+
 		Iterator<ISignalVSD> iterator = scanISD.getProcessedSignals().iterator();
 		while(iterator.hasNext()) {
 			ISignalVSD signal = iterator.next();
@@ -265,7 +265,7 @@ public class ChromatogramAdapterConverter extends AbstractImportConverter {
 			float intensity = (float)signal.getIntensity() + intensities.getOrDefault(wavenumber, 0.0f);
 			intensities.put(wavenumber, intensity);
 		}
-		//
+
 		return intensities;
 	}
 }

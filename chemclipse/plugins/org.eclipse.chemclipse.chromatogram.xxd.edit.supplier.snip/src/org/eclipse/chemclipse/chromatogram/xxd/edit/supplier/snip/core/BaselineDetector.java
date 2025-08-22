@@ -110,7 +110,7 @@ public class BaselineDetector extends AbstractBaselineDetector {
 
 		ITotalScanSignal actualTotalIonSignal;
 		ITotalScanSignal nextTotalIonSignal;
-		//
+
 		int size = stopScan - startScan;
 		SubMonitor subMonitor = SubMonitor.convert(monitor, "Apply baseline", size);
 		try {
@@ -119,7 +119,7 @@ public class BaselineDetector extends AbstractBaselineDetector {
 			 * .getNextTotalIonSignal();
 			 */
 			for(int scan = startScan; scan < stopScan; scan++) {
-				//
+
 				actualTotalIonSignal = totalIonSignals.getTotalScanSignal(scan);
 				nextTotalIonSignal = totalIonSignals.getNextTotalScanSignal(scan);
 				/*

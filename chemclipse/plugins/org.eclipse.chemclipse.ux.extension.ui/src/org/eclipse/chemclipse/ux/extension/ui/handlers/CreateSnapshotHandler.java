@@ -80,7 +80,7 @@ public class CreateSnapshotHandler {
 	private Image getImage(Composite composite) {
 
 		Image image = null;
-		//
+
 		if(composite != null && composite.getParent() != null) {
 			Composite compositeParent = composite.getParent();
 			GC gc = null;

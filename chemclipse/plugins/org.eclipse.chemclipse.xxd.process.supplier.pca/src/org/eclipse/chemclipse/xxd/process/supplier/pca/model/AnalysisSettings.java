@@ -32,7 +32,7 @@ public class AnalysisSettings implements IAnalysisSettings {
 	private LabelOptionPCA labelOptionPCA = PreferenceSupplier.getLabelOptionPCA();
 	private String colorScheme = PreferenceSupplier.getColorScheme();
 	private String groupName = "--";
-	//
+
 	private IPreprocessingSettings preprocessingSettings = new PreprocessingSettings();
 
 	public AnalysisSettings() {
@@ -48,7 +48,7 @@ public class AnalysisSettings implements IAnalysisSettings {
 		this.filterDistribution = analysisSettings.getFilterDistribution();
 		this.removeUselessVariables = analysisSettings.isRemoveUselessVariables();
 		this.labelOptionPCA = analysisSettings.getLabelOptionPCA();
-		//
+
 		this.preprocessingSettings = new PreprocessingSettings(analysisSettings.getPreprocessingSettings());
 	}
 

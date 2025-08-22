@@ -41,11 +41,11 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 
 		addField(new ExtendedIntegerFieldEditor(PreferenceSupplier.P_MILLISECONDS_SHIFT, "Shift Retention Time [ms]", PreferenceSupplier.MIN_MILLISECONDS_SHIFT, PreferenceSupplier.MAX_MILLISECONDS_SHIFT, getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_SHIFT_ALL_SCANS, "Shift all scans", getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new ExtendedIntegerFieldEditor(PreferenceSupplier.P_STRETCH_MILLISECONDS_SCAN_DELAY, "Stretch Scan Delay [ms]", PreferenceSupplier.STRETCH_MILLISECONDS_SCAN_DELAY_MIN, PreferenceSupplier.STRETCH_MILLISECONDS_SCAN_DELAY_MAX, getFieldEditorParent()));
 		addField(new ExtendedIntegerFieldEditor(PreferenceSupplier.P_STRETCH_MILLISECONDS_LENGTH, "Stretch Length [ms]", PreferenceSupplier.STRETCH_MILLISECONDS_LENGTH_MIN, PreferenceSupplier.STRETCH_MILLISECONDS_LENGTH_MAX, getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new ExtendedIntegerFieldEditor(PreferenceSupplier.P_LIMIT_FACTOR, "Limit Factor (Gap Filler):", PreferenceSupplier.MIN_LIMIT_FACTOR, PreferenceSupplier.MAX_LIMIT_FACTOR, getFieldEditorParent()));
 	}

@@ -29,7 +29,7 @@ public class ChromatogramIntegrator extends AbstractIntegrator {
 
 		double chromatogramArea = 0.0d;
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
-		//
+
 		try {
 			ITotalScanSignalExtractor totalScanSignalExtractor = new TotalScanSignalExtractor(chromatogram);
 			int startScan = chromatogram.getScanNumber(chromatogramSelection.getStartRetentionTime());

@@ -36,7 +36,7 @@ public class ProcessorLabelProvider extends AbstractChemClipseLabelProvider {
 			SupportMessages.labelDescription, //
 			SupportMessages.labelID //
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			200, //
 			100, //
@@ -51,7 +51,7 @@ public class ProcessorLabelProvider extends AbstractChemClipseLabelProvider {
 		for(DataCategory dataType : dataTypes) {
 			types.add(dataType.name());
 		}
-		//
+
 		Collections.sort(types);
 		StringBuilder builder = new StringBuilder();
 		Iterator<String> iterator = types.iterator();
@@ -61,7 +61,7 @@ public class ProcessorLabelProvider extends AbstractChemClipseLabelProvider {
 				builder.append(", "); //$NON-NLS-1$
 			}
 		}
-		//
+
 		return builder.toString();
 	}
 
@@ -73,7 +73,7 @@ public class ProcessorLabelProvider extends AbstractChemClipseLabelProvider {
 				return ApplicationImageFactory.getInstance().getImage(processor.getImageFileName(), IApplicationImage.SIZE_16x16);
 			}
 		}
-		//
+
 		return null;
 	}
 

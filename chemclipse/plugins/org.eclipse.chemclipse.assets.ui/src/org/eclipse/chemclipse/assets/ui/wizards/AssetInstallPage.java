@@ -57,9 +57,9 @@ import org.eclipse.swt.widgets.FileDialog;
 public class AssetInstallPage extends WizardPage {
 
 	private static final Logger logger = Logger.getLogger(AssetInstallPage.class);
-	//
+
 	private TableViewer tableViewer;
-	//
+
 	private List<AssetItem> assets = new ArrayList<>();
 	private List<AssetItem> deletedItems = new ArrayList<>();
 	private List<AssetItem> newItems = new ArrayList<>();
@@ -85,11 +85,11 @@ public class AssetInstallPage extends WizardPage {
 	public void createControl(Composite parent) {
 
 		Composite composite = createDefault(parent, 2);
-		//
+
 		tableViewer = createTableViewer(composite);
 		createToolBarManager(composite);
 		updateInput();
-		//
+
 		setControl(composite);
 	}
 
@@ -98,7 +98,7 @@ public class AssetInstallPage extends WizardPage {
 		TableViewer tableViewer = createTable(parent, false);
 		createColumns(tableViewer);
 		maximize(tableViewer.getControl());
-		//
+
 		return tableViewer;
 	}
 
@@ -133,7 +133,7 @@ public class AssetInstallPage extends WizardPage {
 				return super.getImage(element);
 			}
 		}));
-		//
+
 		createColumn(tableViewer, new SimpleColumnDefinition<>("Asset", 400, AssetItem::getName));
 		createColumn(tableViewer, new SimpleColumnDefinition<>("Description", 300, AssetItem::getDescription));
 	}
@@ -141,23 +141,23 @@ public class AssetInstallPage extends WizardPage {
 	private ToolBarManager createToolBarManager(Composite parent) {
 
 		ToolBarManager toolBarManager = new ToolBarManager(SWT.VERTICAL | SWT.FLAT);
-		//
+
 		Action actionAddAsset = createActionAddAsset();
 		Action actionAddAssets = createActionAddAssets();
 		Action actionDeleteAsset = createActionDeleteAsset();
 		actionDeleteAsset.setEnabled(false);
 		Action actionDeleteAssets = createActionDeleteAssets();
-		//
+
 		toolBarManager.add(actionAddAsset);
 		toolBarManager.add(actionAddAssets);
 		toolBarManager.add(actionDeleteAsset);
 		toolBarManager.add(actionDeleteAssets);
-		//
+
 		tableViewer.addSelectionChangedListener(e -> actionDeleteAsset.setEnabled(!e.getSelection().isEmpty()));
 		tableViewer.addSelectionChangedListener(e -> actionDeleteAssets.setEnabled(!assets.isEmpty()));
-		//
+
 		top(toolBarManager.createControl(parent));
-		//
+
 		return toolBarManager;
 	}
 
@@ -180,14 +180,14 @@ public class AssetInstallPage extends WizardPage {
 					filterNames.add(assetType.label() + " (" + extension + ")");
 					filterExtensions.add(extension);
 				}
-				//
+
 				String extensionsAll = String.join(";", filterExtensions);
 				filterNames.add(0, "All Assets (*.*)");
 				filterExtensions.add(0, extensionsAll);
-				//
+
 				fileDialog.setFilterNames(filterNames.toArray(new String[filterNames.size()]));
 				fileDialog.setFilterExtensions(filterExtensions.toArray(new String[filterExtensions.size()]));
-				//
+
 				String open = fileDialog.open();
 				if(open != null) {
 					File file = new File(open);
@@ -219,7 +219,7 @@ public class AssetInstallPage extends WizardPage {
 				 */
 				fileDialog.setFilterNames(new String[]{"Zipped Assets (*.zip)"});
 				fileDialog.setFilterExtensions(new String[]{"*.zip"});
-				//
+
 				String open = fileDialog.open();
 				if(open != null) {
 					/*
@@ -241,7 +241,7 @@ public class AssetInstallPage extends WizardPage {
 							 */
 							List<String> messages = new ArrayList<>();
 							List<AssetItem> assetItems = new ArrayList<>();
-							//
+
 							Enumeration<? extends ZipEntry> zipEntries = zipFile.entries();
 							while(zipEntries.hasMoreElements()) {
 								ZipEntry zipEntry = zipEntries.nextElement();
@@ -317,7 +317,7 @@ public class AssetInstallPage extends WizardPage {
 		} catch(IOException e) {
 			logger.warn(e);
 		}
-		//
+
 		return bytes;
 	}
 
@@ -338,7 +338,7 @@ public class AssetInstallPage extends WizardPage {
 		} catch(IOException e) {
 			logger.warn(e);
 		}
-		//
+
 		return file;
 	}
 
@@ -357,7 +357,7 @@ public class AssetInstallPage extends WizardPage {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -370,10 +370,10 @@ public class AssetInstallPage extends WizardPage {
 	private String addNewAsset(AssetItem assetItem) {
 
 		String message = null;
-		//
+
 		AssetType assetType = assetItem.getAssetType();
 		String name = assetItem.getName();
-		//
+
 		if(new File(assetType.directory(), name).exists()) {
 			message = "The asset is installed already: " + name + ".";
 		} else {
@@ -387,7 +387,7 @@ public class AssetInstallPage extends WizardPage {
 				newItems.add(assetItem);
 			}
 		}
-		//
+
 		return message;
 	}
 
@@ -398,7 +398,7 @@ public class AssetInstallPage extends WizardPage {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -416,7 +416,7 @@ public class AssetInstallPage extends WizardPage {
 				assetItem = new AssetItem(file, assetType);
 			}
 		}
-		//
+
 		return assetItem;
 	}
 
@@ -455,7 +455,7 @@ public class AssetInstallPage extends WizardPage {
 							deleteAsset(assetItem);
 						}
 					}
-					//
+
 					if(!assetItems.isEmpty()) {
 						tableViewer.remove(assetItems.toArray());
 					}
@@ -484,7 +484,7 @@ public class AssetInstallPage extends WizardPage {
 						 */
 						List<Object> items = new ArrayList<>();
 						items.addAll((List<?>)object);
-						//
+
 						for(Object item : items) {
 							if(item instanceof AssetItem assetItem) {
 								assetItems.add(assetItem);
@@ -506,7 +506,7 @@ public class AssetInstallPage extends WizardPage {
 	private void updateInput() {
 
 		assets.clear();
-		//
+
 		for(AssetType type : AssetType.values()) {
 			File directory = type.directory();
 			File[] listFiles = directory.listFiles();
@@ -518,7 +518,7 @@ public class AssetInstallPage extends WizardPage {
 				}
 			}
 		}
-		//
+
 		tableViewer.setInput(assets);
 	}
 }

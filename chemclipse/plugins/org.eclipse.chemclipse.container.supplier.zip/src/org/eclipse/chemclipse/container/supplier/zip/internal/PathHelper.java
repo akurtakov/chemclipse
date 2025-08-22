@@ -42,7 +42,7 @@ public class PathHelper {
 		builder.append(ZIP_CONTAINER);
 		builder.append(File.separator);
 		builder.append(directory);
-		//
+
 		File file = new File(builder.toString());
 		/*
 		 * Create the directory if it not exists.

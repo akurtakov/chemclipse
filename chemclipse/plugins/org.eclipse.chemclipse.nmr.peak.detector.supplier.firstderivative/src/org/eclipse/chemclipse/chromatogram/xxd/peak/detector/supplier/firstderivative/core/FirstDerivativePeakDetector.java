@@ -45,7 +45,7 @@ import org.osgi.service.component.annotations.Component;
 public class FirstDerivativePeakDetector implements IMeasurementPeakDetector<FirstDerivativePeakDetectorSettings> {
 
 	private static TranslationService translationService = TranslationSupport.getTranslationService();
-	//
+
 	public static String DETECTOR_DESCRIPTION = translationService.translate("%FirstDerivative", Activator.getContributorURI());
 
 	@Override

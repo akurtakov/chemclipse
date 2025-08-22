@@ -24,7 +24,7 @@ public class CalibrationFile {
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-	//
+
 	private File file;
 	private ISeparationColumnIndices separationColumnIndices;
 

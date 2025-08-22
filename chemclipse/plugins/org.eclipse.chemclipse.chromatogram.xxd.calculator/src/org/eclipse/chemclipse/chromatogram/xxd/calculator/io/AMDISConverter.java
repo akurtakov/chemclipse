@@ -50,7 +50,7 @@ public class AMDISConverter {
 	public ISeparationColumnIndices parse(File file) {
 
 		ISeparationColumnIndices separationColumnIndices = new SeparationColumnIndices();
-		//
+
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
 			/*
 			 * Column Specification
@@ -59,7 +59,7 @@ public class AMDISConverter {
 			String length = "";
 			String diameter = "";
 			String phase = "";
-			//
+
 			String line;
 			while((line = bufferedReader.readLine()) != null) {
 				/*
@@ -103,7 +103,7 @@ public class AMDISConverter {
 							for(int i = 5; i < values.length; i++) {
 								peakName += " " + values[i];
 							}
-							//
+
 							IRetentionIndexEntry retentionIndexEntry = new RetentionIndexEntry(retentionTime, retentionIndex, peakName);
 							separationColumnIndices.put(retentionIndexEntry);
 						} else {
@@ -122,7 +122,7 @@ public class AMDISConverter {
 		} catch(IOException e) {
 			logger.error(e);
 		}
-		//
+
 		return separationColumnIndices;
 	}
 

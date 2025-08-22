@@ -32,7 +32,7 @@ public class ChannelMappings extends ArrayList<ChannelMapping> {
 	public static final String WHITE_SPACE = " ";
 	public static final String SEPARATOR_TOKEN = ";";
 	public static final String SEPARATOR_ENTRY = "|";
-	//
+
 	private static final Logger logger = Logger.getLogger(ChannelMappings.class);
 	private static final long serialVersionUID = 8201753784134562323L;
 
@@ -153,7 +153,7 @@ public class ChannelMappings extends ArrayList<ChannelMapping> {
 
 		String lineDelimiterSpecific = OperatingSystemUtils.getLineDelimiter();
 		String lineDelimiterGeneric = "\n";
-		//
+
 		String[] decodedArray;
 		if(stringList.contains(SEPARATOR_TOKEN)) {
 			decodedArray = stringList.split(SEPARATOR_TOKEN);
@@ -171,11 +171,11 @@ public class ChannelMappings extends ArrayList<ChannelMapping> {
 	private void extractSetting(ChannelMapping mapping, StringBuilder builder) {
 
 		List<String> entries = new ArrayList<>();
-		//
+
 		entries.add(mapping.getSubset());
 		entries.add(String.valueOf(mapping.getChannel()));
 		entries.add(mapping.getLabel());
-		//
+
 		compile(builder, entries);
 	}
 

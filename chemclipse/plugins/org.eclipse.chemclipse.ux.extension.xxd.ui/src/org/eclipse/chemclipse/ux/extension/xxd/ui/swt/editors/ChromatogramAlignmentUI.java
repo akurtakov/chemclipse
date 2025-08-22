@@ -48,18 +48,18 @@ import org.eclipse.swt.widgets.Shell;
 public class ChromatogramAlignmentUI extends Composite implements IChromatogramSelectionUpdateListener {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramAlignmentUI.class);
-	//
+
 	private static final String MODIFY_LENGTH_SHORTEST = "MODIFY_LENGTH_SHORTEST";
 	private static final String MODIFY_LENGTH_SELECTED = "MODIFY_LENGTH_SELECTED";
 	private static final String MODIFY_LENGTH_LONGEST = "MODIFY_LENGTH_LONGEST";
 	private static final String MODIFY_LENGTH_ADJUST = "MODIFY_LENGTH_ADJUST";
-	//
+
 	private ChromatogramSourceCombo chromatogramSourceCombo;
 	private List<Button> buttons = new ArrayList<>();
-	//
+
 	private IChromatogramSelection chromatogramSelectionSource = null;
 	private List<IChromatogramSelection> chromatogramSelectionsInternal = new ArrayList<>();
-	//
+
 	private EditorUpdateSupport editorUpdateSupport = new EditorUpdateSupport();
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
@@ -88,13 +88,13 @@ public class ChromatogramAlignmentUI extends Composite implements IChromatogramS
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(8, false);
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		chromatogramSourceCombo = createChromatogramSourceCombo(composite);
 		createVerticalSeparator(composite);
 		buttons.add(createButtonShrinkChromatograms(composite));
@@ -109,7 +109,7 @@ public class ChromatogramAlignmentUI extends Composite implements IChromatogramS
 
 		ChromatogramSourceCombo chromatogramSourceCombo = new ChromatogramSourceCombo(parent, SWT.NONE);
 		chromatogramSourceCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		Combo combo = chromatogramSourceCombo.getCombo();
 		combo.addSelectionListener(new SelectionAdapter() {
 
@@ -119,7 +119,7 @@ public class ChromatogramAlignmentUI extends Composite implements IChromatogramS
 				enableButtons();
 			}
 		});
-		//
+
 		return chromatogramSourceCombo;
 	}
 
@@ -137,7 +137,7 @@ public class ChromatogramAlignmentUI extends Composite implements IChromatogramS
 				modifyChromatogramLength(e.display.getActiveShell(), MODIFY_LENGTH_SHORTEST);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -155,7 +155,7 @@ public class ChromatogramAlignmentUI extends Composite implements IChromatogramS
 				modifyChromatogramLength(e.display.getActiveShell(), MODIFY_LENGTH_SELECTED);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -173,7 +173,7 @@ public class ChromatogramAlignmentUI extends Composite implements IChromatogramS
 				modifyChromatogramLength(e.display.getActiveShell(), MODIFY_LENGTH_LONGEST);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -191,7 +191,7 @@ public class ChromatogramAlignmentUI extends Composite implements IChromatogramS
 				modifyChromatogramLength(e.display.getActiveShell(), MODIFY_LENGTH_ADJUST);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -211,7 +211,7 @@ public class ChromatogramAlignmentUI extends Composite implements IChromatogramS
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -417,7 +417,7 @@ public class ChromatogramAlignmentUI extends Composite implements IChromatogramS
 				selections.addAll(editorUpdateSupport.getChromatogramSelections());
 			}
 		}
-		//
+
 		return selections;
 	}
 }

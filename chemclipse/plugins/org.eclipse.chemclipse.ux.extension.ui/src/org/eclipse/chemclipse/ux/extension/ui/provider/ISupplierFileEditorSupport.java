@@ -89,7 +89,7 @@ public interface ISupplierFileEditorSupport extends ISupplierFileIdentifier {
 		EModelService modelService = Activator.getDefault().getModelService();
 		MApplication application = Activator.getDefault().getApplication();
 		EPartService partService = Activator.getDefault().getPartService();
-		//
+
 		if(modelService != null && application != null && partService != null) {
 			/*
 			 * Check if editor is already open?
@@ -188,7 +188,7 @@ public interface ISupplierFileEditorSupport extends ISupplierFileIdentifier {
 					part.setObject(map);
 					part.setLabel(file.getName());
 				}
-				//
+
 				part.setIconURI(iconURI);
 				part.setTooltip(tooltip);
 				part.setCloseable(true);

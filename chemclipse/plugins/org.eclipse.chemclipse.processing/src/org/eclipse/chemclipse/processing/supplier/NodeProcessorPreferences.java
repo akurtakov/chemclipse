@@ -20,11 +20,11 @@ import org.osgi.service.prefs.Preferences;
 public final class NodeProcessorPreferences<T> implements IProcessorPreferences<T> {
 
 	private static final Logger logger = Logger.getLogger(NodeProcessorPreferences.class);
-	//
+
 	public static final String KEY_USE_SYSTEM_DEFAULTS = "useSystemDefaults";
 	public static final String KEY_USER_SETTINGS = "userSettings";
 	public static final String KEY_ASK_FOR_SETTINGS = "askForSettings";
-	//
+
 	private IProcessSupplier<T> supplier;
 	private Preferences preferences;
 
@@ -45,7 +45,7 @@ public final class NodeProcessorPreferences<T> implements IProcessorPreferences<
 		if(supplier.getSettingsClass() == null) {
 			return DialogBehavior.NONE;
 		}
-		//
+
 		trySync();
 		boolean askForSettings = preferences.getBoolean(KEY_ASK_FOR_SETTINGS, true);
 		if(askForSettings) {
@@ -86,7 +86,7 @@ public final class NodeProcessorPreferences<T> implements IProcessorPreferences<
 		if(supplier.getSettingsClass() == null) {
 			return true;
 		}
-		//
+
 		trySync();
 		return preferences.getBoolean(KEY_USE_SYSTEM_DEFAULTS, true);
 	}

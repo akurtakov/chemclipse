@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ChromatogramFilterSettings extends AbstractChromatogramFilterSettings {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramFilterSettings.class);
-	//
+
 	@JsonProperty(value = "Backfolding Runs", defaultValue = "3")
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_BACKFOLDING_RUNS, maxValue = PreferenceSupplier.MAX_BACKFOLDING_RUNS)
 	private int numberOfBackfoldingRuns = 3;

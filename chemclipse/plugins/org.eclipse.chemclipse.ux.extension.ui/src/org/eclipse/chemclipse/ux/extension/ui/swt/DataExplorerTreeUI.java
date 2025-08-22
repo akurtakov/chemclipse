@@ -42,7 +42,7 @@ import org.eclipse.swt.widgets.Display;
 public class DataExplorerTreeUI {
 
 	private AtomicReference<TreeViewer> treeViewerControl = new AtomicReference<>();
-	//
+
 	private DataExplorerTreeRoot dataExplorerTreeRoot = null;
 	private File directory = null;
 	private IPreferenceStore preferenceStore = null;
@@ -86,7 +86,7 @@ public class DataExplorerTreeUI {
 
 		this.preferenceStore = preferenceStore;
 		this.preferenceKey = preferenceKey;
-		//
+
 		File selection = new File(preferenceStore.getString(preferenceKey));
 		if(selection.exists()) {
 			/*
@@ -95,7 +95,7 @@ public class DataExplorerTreeUI {
 			TreeViewer treeViewer = treeViewerControl.get();
 			treeViewer.expandToLevel(selection, 1);
 			treeViewer.setSelection(new StructuredSelection(selection), true);
-			//
+
 			Display.getDefault().asyncExec(() -> treeViewer.setSelection(StructuredSelection.EMPTY));
 		}
 	}
@@ -128,12 +128,12 @@ public class DataExplorerTreeUI {
 			} else {
 				directoryPath = file;
 			}
-			//
+
 			if(directoryPath != null) {
 				preferenceStore.setValue(preferenceKey, directoryPath.getAbsolutePath());
 			}
 		}
-		//
+
 		if(preferenceStore.needsSaving()) {
 			if(preferenceStore instanceof IPersistentPreferenceStore persistentPreferenceStore) {
 				try {
@@ -155,7 +155,7 @@ public class DataExplorerTreeUI {
 	private void createTreeViewer(Composite parent, Function<File, Map<ISupplierFileIdentifier, Collection<ISupplier>>> identifier) {
 
 		TreeViewer treeViewer = new TreeViewer(parent, SWT.MULTI | SWT.VIRTUAL);
-		//
+
 		treeViewer.setUseHashlookup(true);
 		treeViewer.setExpandPreCheckFilters(true);
 		treeViewer.setContentProvider(new DataExplorerContentProvider(identifier));
@@ -190,7 +190,7 @@ public class DataExplorerTreeUI {
 				}
 			}
 		}
-		//
+
 		return counter;
 	}
 }

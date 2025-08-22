@@ -184,12 +184,12 @@ public interface IConverterSupport {
 		if(suppliers.isEmpty()) {
 			throw new NoConverterAvailableException();
 		}
-		//
+
 		ArrayList<String> list = new ArrayList<>();
 		for(ISupplier supplier : suppliers) {
 			list.add(supplier.getId());
 		}
-		//
+
 		return list;
 	}
 

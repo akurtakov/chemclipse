@@ -27,13 +27,13 @@ public class IntegrationAreaLabelProvider extends AbstractChemClipseLabelProvide
 	public static final String AREA = ExtensionMessages.area;
 	public static final String TRACE = ExtensionMessages.trace;
 	public static final String TYPE = ExtensionMessages.type;
-	//
+
 	public static final String[] TITLES = { //
 			AREA, //
 			TRACE, //
 			TYPE //
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			150, //
 			150, //

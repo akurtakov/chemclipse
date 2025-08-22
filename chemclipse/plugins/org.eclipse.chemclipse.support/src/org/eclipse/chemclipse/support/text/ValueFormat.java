@@ -29,12 +29,12 @@ public class ValueFormat {
 	public static final String DEFAULT_DECIMAL_PATTERN = "0.###"; // $NON-NLS-1$
 	public static final String DEFAULT_DATE_PATTERN = "yyyy/MM/dd"; // $NON-NLS-1$
 	public static final String FULL_DATE_PATTERN = "yyyy/MM/dd HH:mm:ss"; // $NON-NLS-1$
-	//
+
 	private static Map<String, DecimalFormat> decimalFormatsEnglish = null;
 	private static Map<String, DecimalFormat> decimalFormatsGerman = null;
 	private static Map<String, SimpleDateFormat> simpleDateFormatsEnglish = null;
 	private static Map<String, SimpleDateFormat> simpleDateFormatsGerman = null;
-	//
+
 	private static final String DEFAULT_NUMBER_FORMAT = "DNF"; // $NON-NLS-1$
 	private static Map<String, NumberFormat> numberFormatsEnglish = null;
 	static {
@@ -42,7 +42,7 @@ public class ValueFormat {
 		decimalFormatsGerman = new HashMap<String, DecimalFormat>();
 		simpleDateFormatsEnglish = new HashMap<String, SimpleDateFormat>();
 		simpleDateFormatsGerman = new HashMap<String, SimpleDateFormat>();
-		//
+
 		numberFormatsEnglish = new HashMap<String, NumberFormat>();
 	}
 

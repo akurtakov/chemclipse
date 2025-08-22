@@ -31,7 +31,7 @@ public class WavenumberSignalsFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof WavenumberSignal signal) {
 			/*
 			 * Only Wavenumber
@@ -40,7 +40,7 @@ public class WavenumberSignalsFilter extends ViewerFilter {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

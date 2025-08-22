@@ -39,7 +39,7 @@ public class BasePeakClassifier {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -50,21 +50,21 @@ public class BasePeakClassifier {
 				return false;
 			}
 		}
-		//
+
 		return true;
 	}
 
 	public static List<IPeakMSD> getPeaks(IChromatogramSelection chromatogramSelection) {
 
 		List<IPeakMSD> peaks = new ArrayList<>();
-		//
+
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 		for(IPeak peak : chromatogram.getPeaks()) {
 			if(peak instanceof IPeakMSD peakMSD) {
 				peaks.add(peakMSD);
 			}
 		}
-		//
+
 		return peaks;
 	}
 
@@ -82,20 +82,20 @@ public class BasePeakClassifier {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 
 	public static ILigninRatios calculateLigninRatios(IChromatogramSelection chromatogramSelection) {
 
 		ILigninRatios ligninRatios = new LigninRatios();
-		//
+
 		double counterS = 0;
 		double counterG = 0;
 		double counterH = 0;
 		double counterC = 0;
 		double counterU = 0;
-		//
+
 		List<IPeakMSD> peaks = getPeaks(chromatogramSelection);
 		boolean countArea = arePeaksIntegrated(peaks);
 		/*
@@ -139,7 +139,7 @@ public class BasePeakClassifier {
 			resultMap.put(BasePeakIdentifier.CARBOHYDRATE, counterC / size * 100);
 			resultMap.put("No Match", counterU / size * 100);
 		}
-		//
+
 		return ligninRatios;
 	}
 }

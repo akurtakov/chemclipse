@@ -52,9 +52,9 @@ public class Activator extends AbstractActivatorUI {
 	public static final String ICON_NORM_TRANS_LOG = "ICON_NORM_TRANS_LOG"; // $NON-NLS-1$
 	public static final String ICON_NORM_TRANS_NONE = "ICON_NORM_TRANS_NONE"; // $NON-NLS-1$
 	public static final String ICON_NORM_TRANS_POWER = "ICON_NORM_TRANS_POWER"; // $NON-NLS-1$
-	//
+
 	private static Activator plugin;
-	//
+
 	private DataUpdateSupport dataUpdateSupport;
 
 	/**
@@ -118,7 +118,7 @@ public class Activator extends AbstractActivatorUI {
 	private Map<String, String> getImageHashMap() {
 
 		Map<String, String> imageHashMap = new HashMap<String, String>();
-		//
+
 		imageHashMap.put(ICON_NORM_1NORM, "icons/1norm.jpg"); // $NON-NLS-1$
 		imageHashMap.put(ICON_NORM_2NORM, "icons/2norm.jpg"); // $NON-NLS-1$
 		imageHashMap.put(ICON_NORM_INFNORM, "icons/infnorm.jpg"); // $NON-NLS-1$
@@ -141,7 +141,7 @@ public class Activator extends AbstractActivatorUI {
 		imageHashMap.put(ICON_NORM_TRANS_LOG, "icons/trans_log.jpg"); // $NON-NLS-1$
 		imageHashMap.put(ICON_NORM_TRANS_NONE, "icons/trans_none.jpg"); // $NON-NLS-1$
 		imageHashMap.put(ICON_NORM_TRANS_POWER, "icons/trans_power.jpg"); // $NON-NLS-1$
-		//
+
 		return imageHashMap;
 	}
 

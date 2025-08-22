@@ -25,7 +25,7 @@ public class CasSupport {
 
 	public static final int MAX_ID = 1000000000;
 	public static final String CAS_DEFAULT = "0-00-0";
-	//
+
 	private static final String SEPARATOR = "-";
 	private static final char SEPARATOR_CHAR = '-';
 
@@ -51,7 +51,7 @@ public class CasSupport {
 				checksumValue = Integer.toString(checksum);
 			}
 		}
-		//
+
 		return checksumValue;
 	}
 
@@ -82,7 +82,7 @@ public class CasSupport {
 							int casNumber = Integer.parseInt(cas.replaceAll(SEPARATOR, ""));
 							return verifyChecksum(casNumber);
 						} catch(NumberFormatException e) {
-							//
+
 						}
 					}
 				}
@@ -100,14 +100,14 @@ public class CasSupport {
 			String casNumber = Integer.toString(cas);
 			int length = casNumber.length() - 1;
 			int checksum = calculateChecksumFromPrefix(casNumber.substring(0, length));
-			//
+
 			char character = casNumber.charAt(length);
 			if(Character.isDigit(character)) {
 				int casChecksum = Integer.parseInt(Character.toString(character));
 				return casChecksum == checksum;
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -124,7 +124,7 @@ public class CasSupport {
 				factor--;
 			}
 		}
-		//
+
 		return (sum % 10);
 	}
 
@@ -151,13 +151,13 @@ public class CasSupport {
 					int length = cas.length();
 					if(length >= 4) {
 						StringBuilder builder = new StringBuilder();
-						//
+
 						builder.append(cas.substring(0, length - 3));
 						builder.append(SEPARATOR);
 						builder.append(cas.substring(length - 3, length - 1));
 						builder.append(SEPARATOR);
 						builder.append(cas.substring(length - 1, length));
-						//
+
 						cas = builder.toString();
 					}
 				}
@@ -165,7 +165,7 @@ public class CasSupport {
 		} else {
 			cas = CAS_DEFAULT;
 		}
-		//
+
 		return cas;
 	}
 }

@@ -41,9 +41,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class ChromatogramReader extends AbstractChromatogramMSDReader {
 
 	public static final String CONVERTER_ID_MSD = "org.eclipse.chemclipse.msd.converter.supplier.jcampdx";
-	//
+
 	private static final Logger logger = Logger.getLogger(ChromatogramReader.class);
-	//
+
 	private static final String HEADER_MASSFINDER_3 = "##PROGRAM=MassFinder3";
 	private static final String HEADER_MASSFINDER_4 = "##PROGRAM=MassFinder4";
 	private static final String HEADER_MARKER = "##";
@@ -83,7 +83,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 		IVendorChromatogram chromatogram = new VendorChromatogram();
 		IVendorScan massSpectrum = null;
 		IVendorIon ion;
-		//
+
 		FileReader fileReader = new FileReader(file);
 		BufferedReader bufferedReader = new BufferedReader(fileReader);
 		String line;
@@ -95,7 +95,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 		 */
 		boolean adjustTotalSignal = false;
 		float totalSignalFromFile = 0.0f;
-		//
+
 		while((line = bufferedReader.readLine()) != null) {
 			/*
 			 * Each scan starts with the marker:
@@ -226,14 +226,14 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 		 */
 		bufferedReader.close();
 		fileReader.close();
-		//
+
 		return chromatogram;
 	}
 
 	private IChromatogramMSD readChromatogramOverview(File file, IProgressMonitor monitor) throws IOException {
 
 		IVendorChromatogram chromatogram = new VendorChromatogram();
-		//
+
 		FileReader fileReader = new FileReader(file);
 		BufferedReader bufferedReader = new BufferedReader(fileReader);
 		String line;
@@ -271,7 +271,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 						 */
 						massSpectrum.setRetentionTime(retentionTime);
 						retentionTimeIsAvailable = false;
-						//
+
 						if(retentionTime >= 0) {
 							massSpectrum.addIon(ion);
 							chromatogram.addScan(massSpectrum);
@@ -287,7 +287,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 		 */
 		bufferedReader.close();
 		fileReader.close();
-		//
+
 		return chromatogram;
 	}
 
@@ -333,10 +333,10 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 				}
 			}
 		}
-		//
+
 		bufferedReader.close();
 		fileReader.close();
-		//
+
 		return isValidFormat;
 	}
 }

@@ -23,12 +23,11 @@ public class SplitSelectionPaintListener implements ICustomPaintListener {
 
 	private static final String LABEL_PERPENDICULAR_DROP = "P";
 	private static final String LABEL_TANGENT_SKIM = "T";
-	//
+
 	private int x1;
 	private int y1;
 	private int x2;
 	private int y2;
-	//
 
 	@Override
 	public void paintControl(PaintEvent e) {

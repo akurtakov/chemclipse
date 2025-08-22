@@ -30,7 +30,7 @@ import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
 public final class UserMethodProcessSupplier extends AbstractProcessSupplier<Void> implements ProcessEntryContainer, IProcessExecutor {
 
 	private static final String SKIP_MESSAGE = "SKIP CHECK: Is this method used?";
-	//
+
 	private final IProcessMethod processMethod;
 
 	public UserMethodProcessSupplier(IProcessMethod processMethod, MethodProcessTypeSupplier processTypeSupplier) {
@@ -120,7 +120,7 @@ public final class UserMethodProcessSupplier extends AbstractProcessSupplier<Voi
 		if(sourceFile != null) {
 			return MethodProcessSupport.getID(method, "user:" + sourceFile.getName());
 		}
-		//
+
 		return MethodProcessSupport.getID(method, "user");
 	}
 }

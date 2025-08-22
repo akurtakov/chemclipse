@@ -29,7 +29,7 @@ import org.eclipse.chemclipse.support.model.SeparationColumnType;
 public abstract class AbstractLibraryInformation implements ILibraryInformation {
 
 	private static final long serialVersionUID = 3604067975171089730L;
-	//
+
 	private String name = "";
 	private final Set<String> synonyms = new LinkedHashSet<>();
 	private final List<String> casNumbers = new ArrayList<>();

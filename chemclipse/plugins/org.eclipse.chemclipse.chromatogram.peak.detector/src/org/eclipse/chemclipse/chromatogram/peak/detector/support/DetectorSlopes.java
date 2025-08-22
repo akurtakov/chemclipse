@@ -28,7 +28,7 @@ public class DetectorSlopes implements IDetectorSlopes {
 
 	public static final int SAVITZKYGOLAY_DERIVATIVE = 0;
 	public static final int SAVITZKYGOLAY_ORDER = 3;
-	//
+
 	private List<IDetectorSlope> slopes;
 	private int startScan;
 	private int stopScan;

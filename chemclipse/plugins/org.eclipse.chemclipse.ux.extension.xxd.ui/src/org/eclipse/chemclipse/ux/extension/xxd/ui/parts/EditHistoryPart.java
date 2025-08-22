@@ -46,7 +46,7 @@ public class EditHistoryPart extends AbstractPart<ExtendedEditHistoryUI> {
 
 		if(objects.size() == 1) {
 			Object object = objects.get(0);
-			//
+
 			if(isEditHistoryTopic(topic)) {
 				if(object instanceof IEditHistory editHistory) {
 					getControl().setInput(editHistory);
@@ -59,7 +59,7 @@ public class EditHistoryPart extends AbstractPart<ExtendedEditHistoryUI> {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 

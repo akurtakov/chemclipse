@@ -45,7 +45,7 @@ public class EditHistoryListUI extends ExtendedTableViewer {
 	private void createColumns() {
 
 		createColumns(EditHistoryLabelProvider.TITLES, EditHistoryLabelProvider.BOUNDS);
-		//
+
 		setLabelProvider(labelProvider);
 		setContentProvider(contentProvider);
 		setComparator(comparator);

@@ -34,7 +34,7 @@ import org.eclipse.e4.core.di.annotations.Execute;
 public class GenericSupplierEditorSupport implements ISupplierFileEditorSupport {
 
 	private static final Object NO_EXECUTE_METHOD = new Object();
-	//
+
 	private final Supplier<IEclipseContext> contextSupplier;
 	private final ISupplierFileIdentifier fileIdentifier;
 

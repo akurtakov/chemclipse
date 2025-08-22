@@ -29,7 +29,7 @@ public class MethodProcessSupport {
 		if(qualifier != null) {
 			return id + ":" + qualifier;
 		}
-		//
+
 		return id;
 	}
 
@@ -73,7 +73,7 @@ public class MethodProcessSupport {
 				}
 			}
 		}
-		//
+
 		DataCategory[] dataCategories = categorySet.toArray(new DataCategory[categorySet.size()]);
 		Arrays.sort(dataCategories, (c1, c2) -> c1.name().compareTo(c2.name()));
 		return dataCategories;

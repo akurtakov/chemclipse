@@ -35,7 +35,7 @@ public class ChromatogramCalculator {
 	private static final String CALCULATOR_NAME = "calculatorName";
 	private static final String CALCULATOR = "calculator";
 	private static final String CALCULATOR_SETTINGS = "calculatorSettings";
-	//
+
 	private static final String PROCESSING_DESCRIPTION = "Chromatogram Calculator";
 	private static final String NO_CHROMATOGRAM_CALCULATOR_AVAILABLE = "There is no chromatogram calculator available.";
 

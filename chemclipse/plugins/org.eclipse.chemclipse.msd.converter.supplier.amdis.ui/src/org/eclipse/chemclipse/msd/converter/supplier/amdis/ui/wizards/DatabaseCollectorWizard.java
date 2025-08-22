@@ -30,12 +30,12 @@ import org.eclipse.ui.IWorkbench;
 public class DatabaseCollectorWizard extends Wizard implements IImportWizard {
 
 	private static final Logger logger = Logger.getLogger(DatabaseCollectorWizard.class);
-	//
+
 	public static final int DEFAULT_WIDTH = 350;
 	public static final int DEFAULT_HEIGHT = 200;
-	//
+
 	private static final String DESCRIPTION = "Database Collector";
-	//
+
 	private DatabaseCollectorPage databaseCollectorPage;
 
 	public DatabaseCollectorWizard() {
@@ -58,7 +58,7 @@ public class DatabaseCollectorWizard extends Wizard implements IImportWizard {
 			List<File> librarySourceFiles = databaseCollectorPage.getLibrarySourceFiles();
 			int sizeSourceFiles = librarySourceFiles.size();
 			SubMonitor subMonitor = SubMonitor.convert(monitor, DESCRIPTION, sizeSourceFiles * 2);
-			//
+
 			try {
 				/*
 				 * Load concatenate and save the *.msl library.
@@ -92,7 +92,7 @@ public class DatabaseCollectorWizard extends Wizard implements IImportWizard {
 				SubMonitor.done(subMonitor);
 			}
 		};
-		//
+
 		try {
 			getContainer().run(true, false, runnableWithProgress);
 			MessageDialog.openInformation(getShell(), DESCRIPTION, "The databases have been collected and saved.");
@@ -100,7 +100,7 @@ public class DatabaseCollectorWizard extends Wizard implements IImportWizard {
 			MessageDialog.openError(getShell(), DESCRIPTION, e.getMessage());
 			return false;
 		}
-		//
+
 		return true;
 	}
 

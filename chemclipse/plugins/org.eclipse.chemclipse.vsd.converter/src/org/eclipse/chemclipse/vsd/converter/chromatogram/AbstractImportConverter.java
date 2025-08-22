@@ -37,7 +37,7 @@ public abstract class AbstractImportConverter extends AbstractChromatogramImport
 		} catch(Exception e) {
 			processingInfo.addErrorMessage(DESCRIPTION, "Failed to load the file: " + file);
 		}
-		//
+
 		return processingInfo;
 	}
 
@@ -51,7 +51,7 @@ public abstract class AbstractImportConverter extends AbstractChromatogramImport
 		} catch(Exception e) {
 			processingInfo.addErrorMessage(DESCRIPTION, "Failed to load the overview of the file: " + file);
 		}
-		//
+
 		return processingInfo;
 	}
 

@@ -47,7 +47,7 @@ public class NMROverlayPart extends AbstractPart<ExtendedNMROverlayUI> {
 			getControl().setFocus();
 			return true;
 		}
-		//
+
 		return false;
 	}
 

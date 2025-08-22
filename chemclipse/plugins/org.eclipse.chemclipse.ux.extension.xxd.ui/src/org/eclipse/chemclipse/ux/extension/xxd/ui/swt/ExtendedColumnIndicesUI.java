@@ -59,12 +59,12 @@ public class ExtendedColumnIndicesUI extends LibraryInformationComposite impleme
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createToolbarSearch(this);
 		createTableSection(this);
-		//
+
 		initialize();
 	}
 
@@ -72,7 +72,7 @@ public class ExtendedColumnIndicesUI extends LibraryInformationComposite impleme
 
 		initializeToolbarInfo();
 		enableToolbar(toolbarSearch, buttonToolbarSearchControl.get(), IMAGE_SEARCH, TOOLTIP_SEARCH, false);
-		//
+
 		applySettings();
 	}
 
@@ -83,7 +83,7 @@ public class ExtendedColumnIndicesUI extends LibraryInformationComposite impleme
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(3, false));
-		//
+
 		createButtonToolbarInfo(composite);
 		createButtonToggleSearch(composite);
 		createButtonSettings(composite);
@@ -107,7 +107,7 @@ public class ExtendedColumnIndicesUI extends LibraryInformationComposite impleme
 				listControl.get().setSearchText(searchText, caseSensitive);
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -116,7 +116,7 @@ public class ExtendedColumnIndicesUI extends LibraryInformationComposite impleme
 		ColumnIndicesListUI listUI = new ColumnIndicesListUI(parent, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		Table table = listUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		listControl.set(listUI);
 	}
 

@@ -27,7 +27,7 @@ public class CellElement extends TextElement {
 	public static int BORDER_TOP = 1 << 2;
 	public static int BORDER_BOTTOM = 1 << 3;
 	public static int BORDER_ALL = BORDER_LEFT | BORDER_RIGHT | BORDER_TOP | BORDER_BOTTOM;
-	//
+
 	private int border = BORDER_NONE;
 
 	public CellElement(String text, float maxWidth) {

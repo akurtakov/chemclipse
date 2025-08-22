@@ -62,32 +62,32 @@ import jakarta.xml.bind.Unmarshaller;
 public class ChromatogramReaderVersion32 extends AbstractChromatogramReaderVersion implements IChromatogramMSDReader {
 
 	public static final String VERSION = "mzXML_3.2";
-	//
+
 	private static final Logger logger = Logger.getLogger(ChromatogramReaderVersion32.class);
-	//
+
 	private Inflater inflater = new Inflater();
 
 	@Override
 	public IChromatogramMSD read(File file, IProgressMonitor monitor) throws IOException {
 
 		IVendorChromatogram chromatogram = null;
-		//
+
 		try {
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			documentBuilderFactory.setNamespaceAware(true);
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(file);
 			NodeList nodeList = document.getElementsByTagName(NODE_MZXML);
-			//
+
 			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 			MzXML mzXML = (MzXML)unmarshaller.unmarshal(nodeList.item(0));
-			//
+
 			chromatogram = new VendorChromatogram();
 			MsRun msRun = mzXML.getMsRun();
 			boolean isTandemMeasurement = isTandemMeasurement(msRun);
 			int cycleNumber = isTandemMeasurement ? 1 : 0;
-			//
+
 			for(MsInstrument instrument : msRun.getMsInstrument()) {
 				chromatogram.setInstrument(instrument.getMsManufacturer().getTheValue() + " " + instrument.getMsModel().getTheValue());
 				chromatogram.setIonisation(instrument.getMsIonisation().getTheValue());
@@ -124,12 +124,12 @@ public class ChromatogramReaderVersion32 extends AbstractChromatogramReaderVersi
 				// MS, MS/MS
 				short msLevel = scan.getMsLevel().shortValue();
 				massSpectrum.setMassSpectrometer(msLevel);
-				//
+
 				if(!scan.getPrecursorMz().isEmpty()) {
 					PrecursorMz precursor = scan.getPrecursorMz().get(0);
 					massSpectrum.setPrecursorIon(precursor.getValue());
 				}
-				//
+
 				if(msLevel < 2) {
 					cycleNumber++;
 				}

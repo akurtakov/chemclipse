@@ -23,7 +23,7 @@ import org.eclipse.swt.widgets.Control;
 public class BooleanEdit extends EditValue<Boolean> {
 
 	private static final long serialVersionUID = 6116766646926264825L;
-	//
+
 	private final Button button;
 	private final boolean initialValue;
 	private boolean currentValue;

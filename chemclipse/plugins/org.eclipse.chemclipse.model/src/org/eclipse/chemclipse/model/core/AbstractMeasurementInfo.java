@@ -53,10 +53,10 @@ public abstract class AbstractMeasurementInfo implements IMeasurementInfo {
 	private static final String DATA_NAME = "Data Name";
 	private static final String FINDINGS = "Findings";
 	private static final String TAGS = "Tags";
-	//
+
 	private Set<String> protectKeys = new HashSet<>();
 	private Map<String, String> headerMap = new HashMap<>();
-	//
+
 	private DateFormat dateFormat = ValueFormat.getDateFormatEnglish(ValueFormat.FULL_DATE_PATTERN);
 
 	public AbstractMeasurementInfo() {
@@ -77,7 +77,7 @@ public abstract class AbstractMeasurementInfo implements IMeasurementInfo {
 		headerMap.put(DATA_NAME, "");
 		headerMap.put(FINDINGS, "");
 		headerMap.put(TAGS, "");
-		//
+
 		protectKeys.addAll(headerMap.keySet());
 	}
 

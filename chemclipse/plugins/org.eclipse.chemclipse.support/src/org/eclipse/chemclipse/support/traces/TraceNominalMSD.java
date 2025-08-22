@@ -35,7 +35,7 @@ public class TraceNominalMSD extends TraceGeneric {
 		StringBuilder builder = new StringBuilder();
 		builder.append(getMZ());
 		builder.append(getScaleFactorAsString());
-		//
+
 		return builder.toString();
 	}
 }

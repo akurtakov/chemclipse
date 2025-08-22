@@ -38,12 +38,12 @@ public class ChromatogramSelectionHandler implements ICustomSelectionHandler {
 			BaseChart baseChart = extendedChromatogramUI.getChromatogramChart().getBaseChart();
 			Range rangeX = baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS).getRange();
 			Range rangeY = baseChart.getAxisSet().getYAxis(BaseChart.ID_PRIMARY_Y_AXIS).getRange();
-			//
+
 			int startRetentionTime = (int)rangeX.lower;
 			int stopRetentionTime = (int)rangeX.upper;
 			float startAbundance = (float)rangeY.lower;
 			float stopAbundance = (float)rangeY.upper;
-			//
+
 			extendedChromatogramUI.setChromatogramSelectionRange(startRetentionTime, stopRetentionTime, startAbundance, stopAbundance);
 		}
 	}

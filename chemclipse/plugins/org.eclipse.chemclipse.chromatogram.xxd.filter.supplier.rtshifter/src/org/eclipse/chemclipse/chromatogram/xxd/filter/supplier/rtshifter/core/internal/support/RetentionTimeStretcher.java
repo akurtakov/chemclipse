@@ -31,18 +31,18 @@ public class RetentionTimeStretcher extends AbstractRetentionTimeModifier {
 		if(chromatogramSelection == null || chromatogramSelection.getChromatogram() == null) {
 			throw new FilterException("The chromatogram must not be null.");
 		}
-		//
+
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 		int scanRange = chromatogram.getNumberOfScans() - 1;
 		if(scanRange > 0) {
 			float retentionTimeRange = filterSettings.getChromatogramLength() - filterSettings.getScanDelay();
 			int scanInterval = Math.round(retentionTimeRange / scanRange);
-			//
+
 			chromatogram.setScanDelay(filterSettings.getScanDelay());
 			chromatogram.setScanInterval(scanInterval);
 			chromatogram.recalculateRetentionTimes();
 		}
-		//
+
 		adjustScanDelayAndRetentionTimeRange(chromatogramSelection);
 	}
 }

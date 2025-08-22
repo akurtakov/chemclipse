@@ -21,9 +21,9 @@ import org.eclipse.core.runtime.IStatus;
 public class NamedTraceValidator implements IValidator<Object> {
 
 	private static final String ERROR = "Please enter a correct identifier.";
-	//
+
 	private TraceValidator traceValidator = new TraceValidator();
-	//
+
 	private String identifier = "";
 	private String traces = "";
 
@@ -31,7 +31,7 @@ public class NamedTraceValidator implements IValidator<Object> {
 	public IStatus validate(Object value) {
 
 		String message = null;
-		//
+
 		if(value == null) {
 			message = ERROR;
 		} else {
@@ -39,7 +39,7 @@ public class NamedTraceValidator implements IValidator<Object> {
 				String[] values = value.toString().trim().split("\\" + NamedTraceListUtil.SEPARATOR_ENTRY);
 				String identifier = values.length > 0 ? values[0].trim() : "";
 				String traces = values.length > 1 ? values[1].trim() : "";
-				//
+
 				if("".equals(identifier)) {
 					message = ERROR;
 				} else {
@@ -55,7 +55,7 @@ public class NamedTraceValidator implements IValidator<Object> {
 				message = ERROR;
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

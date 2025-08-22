@@ -27,7 +27,7 @@ public class ClassificationDictionaryDeserializer extends JsonDeserializer<Class
 
 		ClassificationDictionary classificationDictionary = new ClassificationDictionary();
 		classificationDictionary.load(jsonParser.getText());
-		//
+
 		return classificationDictionary;
 	}
 }

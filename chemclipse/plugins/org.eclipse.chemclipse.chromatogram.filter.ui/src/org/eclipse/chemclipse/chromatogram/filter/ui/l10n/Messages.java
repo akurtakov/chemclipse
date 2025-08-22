@@ -17,7 +17,7 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.chemclipse.chromatogram.filter.ui.l10n.messages"; //$NON-NLS-1$
-	//
+
 	public static String chromotogramSelectionFilter;
 	public static String countIncludingZero;
 	public static String deltaRetentionTimeMinutes;
@@ -40,7 +40,7 @@ public class Messages extends NLS {
 	public static String transferClosestScan;
 	public static String useBestTargetOnly;
 	public static String transformMZ;
-	//
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}

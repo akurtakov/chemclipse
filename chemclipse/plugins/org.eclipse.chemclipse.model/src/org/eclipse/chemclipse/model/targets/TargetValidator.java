@@ -25,10 +25,10 @@ import org.eclipse.core.runtime.IStatus;
 public class TargetValidator implements IValidator<Object> {
 
 	public static final String IDENTIFIER = "Manual";
-	//
+
 	private static final String ERROR_TARGET = "Please enter target, e.g.: " + TargetListUtil.EXAMPLE;
 	private static final String ERROR_TOKEN = "The target must not contain: " + TargetListUtil.SEPARATOR_TOKEN;
-	//
+
 	private String name = "";
 	private String casNumber = "";
 	private String comments = "";
@@ -46,7 +46,7 @@ public class TargetValidator implements IValidator<Object> {
 		comments = "";
 		contributor = "";
 		referenceId = "";
-		//
+
 		String message = null;
 		if(value == null) {
 			message = ERROR_TARGET;
@@ -64,19 +64,19 @@ public class TargetValidator implements IValidator<Object> {
 					String[] values = text.trim().split("\\" + TargetListUtil.SEPARATOR_ENTRY); // The pipe needs to be escaped.
 					if(values.length > 0) {
 						name = values[0].trim();
-						//
+
 						if(values.length > 1) {
 							casNumber = values[1].trim();
 						}
-						//
+
 						if(values.length > 2) {
 							comments = values[2].trim();
 						}
-						//
+
 						if(values.length > 3) {
 							contributor = values[3].trim();
 						}
-						//
+
 						if(values.length > 4) {
 							referenceId = values[4].trim();
 						}
@@ -88,7 +88,7 @@ public class TargetValidator implements IValidator<Object> {
 				message = ERROR_TARGET;
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {
@@ -132,7 +132,7 @@ public class TargetValidator implements IValidator<Object> {
 		IComparisonResult comparisonResult = ComparisonResult.COMPARISON_RESULT_BEST_MATCH;
 		IIdentificationTarget identificationTarget = new IdentificationTarget(libraryInformation, comparisonResult);
 		identificationTarget.setIdentifier(IDENTIFIER);
-		//
+
 		return identificationTarget;
 	}
 }

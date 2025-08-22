@@ -30,9 +30,9 @@ public class SamplesLabelProvider extends AbstractChemClipseLabelProvider {
 	public static final String GROUP_NAME = "Group Name";
 	public static final String CLASSIFICATION = "Classification";
 	public static final String DESCRIPTION = "Description";
-	//
+
 	public static final int INDEX_COLOR = 4;
-	//
+
 	public static String[] TITLES = {//
 			SAMPLE_NAME, //
 			SAMPLE_NAME_LONG, //
@@ -43,7 +43,7 @@ public class SamplesLabelProvider extends AbstractChemClipseLabelProvider {
 			CLASSIFICATION, //
 			DESCRIPTION //
 	};
-	//
+
 	public static int[] BOUNDS = {//
 			150, //
 			250, //
@@ -85,7 +85,7 @@ public class SamplesLabelProvider extends AbstractChemClipseLabelProvider {
 
 		String text = "";
 		if(element instanceof ISample sample) {
-			//
+
 			switch(columnIndex) {
 				case 0:
 					text = sample.getSampleName() != null ? sample.getSampleName() : "";

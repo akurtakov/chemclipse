@@ -37,7 +37,7 @@ public class ChromatogramAnalysisSegment implements IAnalysisSegment {
 		if(children == null) {
 			return Collections.emptyList();
 		}
-		//
+
 		return children;
 	}
 
@@ -53,7 +53,7 @@ public class ChromatogramAnalysisSegment implements IAnalysisSegment {
 		if(startScan < 1) {
 			return 1;
 		}
-		//
+
 		return startScan;
 	}
 
@@ -64,7 +64,7 @@ public class ChromatogramAnalysisSegment implements IAnalysisSegment {
 		if(stopScan < getStartScan()) {
 			return chromatogram.getNumberOfScans();
 		}
-		//
+
 		return stopScan;
 	}
 

@@ -28,9 +28,9 @@ import org.eclipse.chemclipse.numeric.statistics.Calculations;
 public class ExtractedIonSignal implements IExtractedIonSignal {
 
 	private static final Logger logger = Logger.getLogger(ExtractedIonSignal.class);
-	//
+
 	private static final float NORMALIZATION_BASE = 1000.0f;
-	//
+
 	private float[] abundanceValues = null;
 	private int startIon = ION_NOT_SET;
 	private int stopIon = ION_NOT_SET;
@@ -188,7 +188,7 @@ public class ExtractedIonSignal implements IExtractedIonSignal {
 		if(maxIntensity == 0) {
 			return 0;
 		}
-		//
+
 		for(int i = 0; i < abundanceValues.length; i++) {
 			if(abundanceValues[i] == maxIntensity) {
 				return i + startIon;

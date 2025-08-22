@@ -25,7 +25,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 	public static final float MIN_FACTOR = 0.0f;
 	public static final float MAX_FACTOR = 100.0f;
-	//
+
 	public static final String P_LIMIT_MATCH_FACTOR = "limitMatchFactor";
 	public static final float DEF_LIMIT_MATCH_FACTOR = 80.0f;
 	public static final String P_MATCH_QUALITY = "matchQuality";
@@ -53,7 +53,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		MassSpectrumIdentifierSettings settings = new MassSpectrumIdentifierSettings();
 		assignDefaultValues(settings);
-		//
+
 		return settings;
 	}
 
@@ -61,7 +61,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		PeakIdentifierSettings settings = new PeakIdentifierSettings();
 		assignDefaultValues(settings);
-		//
+
 		return settings;
 	}
 

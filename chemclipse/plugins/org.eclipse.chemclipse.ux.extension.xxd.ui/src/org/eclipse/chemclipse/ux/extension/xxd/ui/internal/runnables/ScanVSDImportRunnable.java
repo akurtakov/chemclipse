@@ -27,7 +27,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 public class ScanVSDImportRunnable implements IRunnableWithProgress {
 
 	private static final Logger logger = Logger.getLogger(ScanVSDImportRunnable.class);
-	//
+
 	private File file;
 	private ISpectrumVSD spectrumVSD = null;
 

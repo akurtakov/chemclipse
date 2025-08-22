@@ -50,10 +50,10 @@ public class ReportSupplierSelectionWizardPage extends WizardPage {
 		Composite container = new Composite(parent, SWT.NONE);
 		GridLayout layout = new GridLayout(1, true);
 		container.setLayout(layout);
-		//
+
 		GridData layoutData = new GridData(GridData.GRAB_HORIZONTAL | GridData.GRAB_VERTICAL | GridData.HORIZONTAL_ALIGN_FILL | GridData.VERTICAL_ALIGN_CENTER);
 		layoutData.widthHint = convertHorizontalDLUsToPixels(IDialogConstants.MINIMUM_MESSAGE_AREA_WIDTH);
-		//
+
 		createReportSelection(container, layoutData);
 		/*
 		 * Set the control, otherwise an error will be thrown.

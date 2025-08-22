@@ -34,7 +34,7 @@ public class TargetTemplatesEditor extends Composite {
 
 	private TargetTemplatesUI targetTemplatesUI;
 	private TargetTemplateListUI targetTemplateListUI;
-	//
+
 	private TargetTemplates targetTemplates;
 
 	public TargetTemplatesEditor(Composite parent, int style) {
@@ -57,7 +57,7 @@ public class TargetTemplatesEditor extends Composite {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		targetTemplatesUI = createTargetTemplatesUI(this);
 		targetTemplateListUI = createTargetTemplateListUI(this);
 	}
@@ -66,7 +66,7 @@ public class TargetTemplatesEditor extends Composite {
 
 		TargetTemplatesUI targetTemplatesUI = new TargetTemplatesUI(parent, SWT.NONE);
 		targetTemplatesUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		targetTemplatesUI.setUpdateListener(new IUpdateListener() {
 
 			@Override
@@ -75,7 +75,7 @@ public class TargetTemplatesEditor extends Composite {
 				updateTargetTemplatesTable();
 			}
 		});
-		//
+
 		return targetTemplatesUI;
 	}
 
@@ -142,7 +142,7 @@ public class TargetTemplatesEditor extends Composite {
 				}
 			}
 		});
-		//
+
 		return targetTemplateListUI;
 	}
 

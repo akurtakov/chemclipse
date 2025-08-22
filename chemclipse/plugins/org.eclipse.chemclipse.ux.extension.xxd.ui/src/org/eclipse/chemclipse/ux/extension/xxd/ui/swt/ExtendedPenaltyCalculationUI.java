@@ -37,13 +37,13 @@ public class ExtendedPenaltyCalculationUI extends Composite implements IExtended
 
 	private static final String TOOLTIP_CALCULATION = "calculation details.";
 	private static final String IMAGE_CALCULATION = IApplicationImage.IMAGE_CALCULATE;
-	//
+
 	private Button buttonToolbarInfo;
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private Button buttonToolbarCalculation;
 	private AtomicReference<PenaltyCalculationUI> toolbarCalculation = new AtomicReference<>();
 	private AtomicReference<PenaltyCalculationChart> chartControl = new AtomicReference<>();
-	//
+
 	private final PeakDataSupport peakDataSupport = new PeakDataSupport();
 	private IPeak peak = null;
 
@@ -74,12 +74,12 @@ public class ExtendedPenaltyCalculationUI extends Composite implements IExtended
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createToolbarCalculation(this);
 		createChart(this);
-		//
+
 		initialize();
 	}
 
@@ -97,7 +97,7 @@ public class ExtendedPenaltyCalculationUI extends Composite implements IExtended
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(3, false));
-		//
+
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 		buttonToolbarCalculation = createButtonToggleToolbar(composite, toolbarCalculation, IMAGE_CALCULATION, TOOLTIP_CALCULATION);
 		createButtonSettings(composite);
@@ -107,7 +107,7 @@ public class ExtendedPenaltyCalculationUI extends Composite implements IExtended
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -128,7 +128,7 @@ public class ExtendedPenaltyCalculationUI extends Composite implements IExtended
 				}
 			}
 		});
-		//
+
 		toolbarCalculation.set(penaltyCalculationUI);
 	}
 
@@ -136,7 +136,7 @@ public class ExtendedPenaltyCalculationUI extends Composite implements IExtended
 
 		PenaltyCalculationChart penaltyCalculationChart = new PenaltyCalculationChart(parent, SWT.BORDER);
 		penaltyCalculationChart.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		chartControl.set(penaltyCalculationChart);
 	}
 

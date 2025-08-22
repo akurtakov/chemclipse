@@ -44,7 +44,7 @@ import org.osgi.service.component.annotations.Component;
 public class CombinedScanProcessSupplier implements IProcessTypeSupplier {
 
 	private static final Logger logger = Logger.getLogger(CombinedScanProcessSupplier.class);
-	//
+
 	private static final String ID = "org.eclipse.chemclipse.msd.converter.supplier.amdis.processors.combinedScanProcessSupplier";
 	private static final String NAME = "Export Chromatogram Combined Scan (*.msl)";
 	private static final String DESCRIPTION = "Export a combined scan chromatogram.";
@@ -98,7 +98,7 @@ public class CombinedScanProcessSupplier implements IProcessTypeSupplier {
 					builder.append("Use Peaks instead of Scans:");
 					builder.append(" ");
 					builder.append(usePeaksInsteadOfScans);
-					//
+
 					ILibraryInformation libraryInformation = new LibraryInformation();
 					libraryInformation.setName(chromatogramSelectionMSD.getChromatogram().getName());
 					libraryInformation.setComments(builder.toString());
@@ -114,7 +114,7 @@ public class CombinedScanProcessSupplier implements IProcessTypeSupplier {
 				logger.warn(e);
 				Thread.currentThread().interrupt();
 			}
-			//
+
 			return chromatogramSelection;
 		}
 	}

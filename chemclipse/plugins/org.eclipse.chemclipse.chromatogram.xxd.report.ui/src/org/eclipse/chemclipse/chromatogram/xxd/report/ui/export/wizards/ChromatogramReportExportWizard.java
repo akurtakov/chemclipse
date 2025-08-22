@@ -101,7 +101,7 @@ public class ChromatogramReportExportWizard extends Wizard implements IExportWiz
 								 */
 								if(chromatogramReportFile.isDirectory()) {
 									appendReport = false;
-									//
+
 									if(!reportFolderOrFile.endsWith(File.separator)) {
 										reportFolderOrFile += File.separator;
 									}

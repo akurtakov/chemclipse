@@ -54,7 +54,7 @@ public class RetentionIndexImporter {
 	private ISeparationColumnIndices getSeparationColumnIndices(File chromatogramFile, String chromatogramName, RetentionIndexImporterSettings processSettings) {
 
 		ISeparationColumnIndices separationColumnIndices = null;
-		//
+
 		RetentionIndexFileOption retentionIndexFileOption = processSettings.getRetentionIndexFileOption();
 		File file = getCalibrationFile(chromatogramFile, chromatogramName, processSettings);
 		if(file != null) {
@@ -67,14 +67,14 @@ public class RetentionIndexImporter {
 					break;
 			}
 		}
-		//
+
 		return separationColumnIndices;
 	}
 
 	private File getCalibrationFile(File chromatogramFile, String chromatogramName, RetentionIndexImporterSettings processSettings) {
 
 		File file = null;
-		//
+
 		if(chromatogramFile != null) {
 			/*
 			 * Settings
@@ -85,7 +85,7 @@ public class RetentionIndexImporter {
 			boolean matchName = !fileNamePattern.isEmpty();
 			boolean regularExpression = false;
 			String extension = caseSensitive ? retentionIndexFileOption.extension() : retentionIndexFileOption.extension().toLowerCase();
-			//
+
 			if(matchName) {
 				if(fileNamePattern.equals(PLACEHOLDER_CHROMATOGRAM_NAME)) {
 					fileNamePattern = caseSensitive ? chromatogramName : chromatogramName.toLowerCase();
@@ -131,7 +131,7 @@ public class RetentionIndexImporter {
 				}
 			}
 		}
-		//
+
 		return file;
 	}
 
@@ -148,7 +148,7 @@ public class RetentionIndexImporter {
 		 * Sort alpha-numerically
 		 */
 		Collections.sort(files, (f1, f2) -> f1.getName().compareTo(f2.getName()));
-		//
+
 		return files;
 	}
 }

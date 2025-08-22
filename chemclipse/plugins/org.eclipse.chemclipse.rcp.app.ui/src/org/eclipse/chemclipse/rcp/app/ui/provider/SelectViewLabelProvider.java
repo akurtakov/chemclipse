@@ -32,7 +32,7 @@ public class SelectViewLabelProvider extends LabelProvider implements ITableLabe
 
 	private static final Logger logger = Logger.getLogger(SelectViewLabelProvider.class);
 	private Map<URI, Image> imageMap = new HashMap<>();
-	//
+
 	@Inject
 	private TranslationService translationService;
 

@@ -15,7 +15,7 @@ package org.eclipse.chemclipse.model.identifier;
 public class ComparisonResult extends AbstractComparisonResult {
 
 	private static final long serialVersionUID = 6897854010927446632L;
-	//
+
 	public static final IComparisonResult COMPARISON_RESULT_NO_MATCH = new ComparisonResultFinal(FACTOR_NO_MATCH, false);
 	public static final IComparisonResult COMPARISON_RESULT_BEST_MATCH = new ComparisonResultFinal(FACTOR_BEST_MATCH, true);
 

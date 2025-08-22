@@ -36,11 +36,11 @@ public class TimeRangesAnnotationService extends TimeRangesSerializationService 
 		gridData.heightHint = 200;
 		gridData.widthHint = 500;
 		timeRangesEditor.setLayoutData(gridData);
-		//
+
 		if(currentSelection instanceof String) {
 			timeRangesEditor.load((String)currentSelection);
 		}
-		//
+
 		return timeRangesEditor;
 	}
 

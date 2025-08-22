@@ -34,7 +34,7 @@ public class QuantCompoundListUI extends ExtendedTableViewer {
 	private IBaseLabelProvider labelProvider = new QuantCompoundLabelProvider();
 	private ViewerComparator tableComparator = new QuantCompoundTableComparator();
 	private QuantCompoundListFilter viewerFilter = new QuantCompoundListFilter();
-	//
+
 	private IQuantitationDatabase quantitationDatabase;
 
 	public QuantCompoundListUI(Composite parent, int style) {

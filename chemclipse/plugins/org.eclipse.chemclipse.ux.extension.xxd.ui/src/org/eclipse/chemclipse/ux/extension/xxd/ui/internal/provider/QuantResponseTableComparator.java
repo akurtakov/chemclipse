@@ -24,7 +24,7 @@ public class QuantResponseTableComparator extends AbstractRecordTableComparator 
 
 		int sortOrder = 0;
 		if(e1 instanceof IResponseSignal entry1 && e2 instanceof IResponseSignal entry2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = Double.compare(entry2.getSignal(), entry1.getSignal());

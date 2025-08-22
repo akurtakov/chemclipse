@@ -41,7 +41,7 @@ public class SubtractScanWizard extends Wizard {
 		page.setTitle("Subtract Scan Preferences");
 		page.setDescription("The following options are available to subtract a scan.");
 		wizard.addPage(page);
-		//
+
 		WizardDialog wizardDialog = new WizardDialog(shell, wizard) {
 
 			@Override
@@ -61,7 +61,7 @@ public class SubtractScanWizard extends Wizard {
 
 			}
 		};
-		//
+
 		wizardDialog.setMinimumPageSize(SubtractScanWizard.DEFAULT_WIDTH, SubtractScanWizard.DEFAULT_HEIGHT);
 		wizardDialog.open();
 	}

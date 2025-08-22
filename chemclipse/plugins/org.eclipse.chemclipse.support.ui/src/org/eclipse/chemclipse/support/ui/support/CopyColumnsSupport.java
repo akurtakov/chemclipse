@@ -34,10 +34,10 @@ public class CopyColumnsSupport {
 			try {
 				columns.add(Integer.parseInt(value));
 			} catch(NumberFormatException e) {
-				//
+
 			}
 		}
-		//
+
 		return columns.stream().mapToInt(Integer::intValue).toArray();
 	}
 }

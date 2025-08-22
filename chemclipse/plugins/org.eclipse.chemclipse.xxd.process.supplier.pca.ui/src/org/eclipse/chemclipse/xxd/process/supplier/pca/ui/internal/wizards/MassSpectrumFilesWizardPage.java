@@ -41,12 +41,12 @@ public class MassSpectrumFilesWizardPage extends DataInputPageWizard {
 		InputWizardSettings inputWizardSettings = InputWizardSettings.create(Activator.getDefault().getPreferenceStore(), PreferenceSupplier.N_INPUT_FILE, DataType.MSD_DATABASE);
 		inputWizardSettings.setTitle("Mass Spectrum Input Files");
 		inputWizardSettings.setDescription("This wizard lets you select several database input files.");
-		//
+
 		List<IDataInputEntry> dataInputEntries = new ArrayList<>();
 		for(File file : InputEntriesWizard.openWizard(getShell(), inputWizardSettings).keySet()) {
 			dataInputEntries.add(new DataInputEntry(file.getAbsolutePath()));
 		}
-		//
+
 		addInputFiles(dataInputEntries);
 		update();
 	}

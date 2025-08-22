@@ -48,7 +48,7 @@ public class ExtendedFlavorMarkerUI extends LibraryInformationComposite {
 
 		ILibraryInformation libraryInformation = getLibraryInformation();
 		updateLiterature(null);
-		//
+
 		if(libraryInformation != null) {
 			List<IFlavorMarker> flavorMarkers = libraryInformation.getFlavorMarkers();
 			listControl.get().setInput(flavorMarkers);
@@ -70,12 +70,12 @@ public class ExtendedFlavorMarkerUI extends LibraryInformationComposite {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createToolbarSearch(this);
 		createDataSection(this);
-		//
+
 		initialize();
 	}
 
@@ -83,7 +83,7 @@ public class ExtendedFlavorMarkerUI extends LibraryInformationComposite {
 
 		initializeToolbarInfo();
 		enableToolbar(toolbarSearch, buttonToolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH, false);
-		//
+
 		applySettings();
 	}
 
@@ -94,7 +94,7 @@ public class ExtendedFlavorMarkerUI extends LibraryInformationComposite {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(3, false));
-		//
+
 		createButtonToolbarInfo(composite);
 		buttonToolbarSearch = createButtonToggleToolbar(composite, toolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH);
 		createButtonSettings(composite);
@@ -105,7 +105,7 @@ public class ExtendedFlavorMarkerUI extends LibraryInformationComposite {
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		searchSupportUI.setSearchListener((searchText, caseSensitive) -> listControl.get().setSearchText(searchText, caseSensitive));
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -114,7 +114,7 @@ public class ExtendedFlavorMarkerUI extends LibraryInformationComposite {
 		FlavorMarkerListUI listUI = new FlavorMarkerListUI(parent, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		Table table = listUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		listUI.addSelectionChangedListener(event -> {
 
 			Object object = listUI.getStructuredSelection().getFirstElement();
@@ -124,7 +124,7 @@ public class ExtendedFlavorMarkerUI extends LibraryInformationComposite {
 				updateLiterature(null);
 			}
 		});
-		//
+
 		listControl.set(listUI);
 	}
 
@@ -134,7 +134,7 @@ public class ExtendedFlavorMarkerUI extends LibraryInformationComposite {
 		if(flavorMarker != null) {
 			content = flavorMarker.getLiteratureReference();
 		}
-		//
+
 		UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_LITERATURE_UPDATE, content);
 	}
 

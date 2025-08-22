@@ -20,7 +20,7 @@ public class HelpContext {
 	}
 
 	public static final String PREFIX = "org.eclipse.chemclipse.xxd.process.supplier.pca.ui."; //$NON-NLS-1$
-	//
+
 	public static final String LOADINGS_PLOT = PREFIX + "loadings_plot"; //$NON-NLS-1$
 	public static final String SCORE_PLOT = PREFIX + "score_plot"; //$NON-NLS-1$
 }

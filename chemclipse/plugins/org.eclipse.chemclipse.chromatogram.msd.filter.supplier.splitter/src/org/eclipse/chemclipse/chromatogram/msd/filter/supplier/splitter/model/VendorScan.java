@@ -26,7 +26,7 @@ public class VendorScan extends AbstractRegularMassSpectrum implements IRegularM
 
 		IRegularMassSpectrum massSpectrum = (IRegularMassSpectrum)super.clone();
 		IIon clonedIon;
-		//
+
 		for(IIon ion : getIons()) {
 			clonedIon = new Ion(ion.getIon(), ion.getAbundance());
 			massSpectrum.addIon(clonedIon);

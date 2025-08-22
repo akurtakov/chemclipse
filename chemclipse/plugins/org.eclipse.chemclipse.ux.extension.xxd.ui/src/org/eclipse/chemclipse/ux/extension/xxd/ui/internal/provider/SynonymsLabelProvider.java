@@ -24,7 +24,7 @@ public class SynonymsLabelProvider extends AbstractChemClipseLabelProvider {
 	public static final String[] TITLES = { //
 			ExtensionMessages.synonym //
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			100 //
 	};

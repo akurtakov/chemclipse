@@ -49,13 +49,13 @@ public class PreferencePageChromatogramPeaks extends FieldEditorPreferencePage i
 		addField(new ColorFieldEditor(PreferenceSupplier.P_COLOR_CHROMATOGRAM_SELECTED_PEAK, "Color:", getFieldEditorParent()));
 		addField(new SpinnerFieldEditor(PreferenceSupplier.P_CHROMATOGRAM_SELECTED_PEAK_SCAN_MARKER_SIZE, "Marker Size:", PreferenceSupplier.MIN_SYMBOL_SIZE, PreferenceSupplier.MAX_SYMBOL_SIZE, getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_CHROMATOGRAM_SELECTED_PEAK_SCAN_MARKER_TYPE, "Marker Type:", PreferenceSupport.SYMBOL_TYPES, getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor(FIELD_PEAK_LABELS, getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceSupplier.P_CHROMATOGRAM_PEAK_LABEL_FONT_NAME, "Font Name:", getFieldEditorParent()));
 		addField(new SpinnerFieldEditor(PreferenceSupplier.P_CHROMATOGRAM_PEAK_LABEL_FONT_SIZE, "Font Size:", PreferenceSupplier.MIN_FONT_SIZE, PreferenceSupplier.MAX_FONT_SIZE, getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_CHROMATOGRAM_PEAK_LABEL_FONT_STYLE, "Font Style:", ChartOptions.FONT_STYLES, getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor(FIELD_PEAKS, getFieldEditorParent()));
 		addField(new SpinnerFieldEditor(PreferenceSupplier.P_CHROMATOGRAM_PEAK_LABEL_SYMBOL_SIZE, "Symbol Size:", PreferenceSupplier.MIN_SYMBOL_SIZE, PreferenceSupplier.MAX_SYMBOL_SIZE, getFieldEditorParent()));
@@ -71,7 +71,7 @@ public class PreferencePageChromatogramPeaks extends FieldEditorPreferencePage i
 		addField(new ColorFieldEditor(PreferenceSupplier.P_COLOR_CHROMATOGRAM_PEAKS_ACTIVE_ISTD, "Color (Active ISTD):", getFieldEditorParent()));
 		addField(new ColorFieldEditor(PreferenceSupplier.P_COLOR_CHROMATOGRAM_PEAKS_ACTIVE_ISTD_TARGETS_HIDDEN, "Color (Active ISTD - Targets Hidden):", getFieldEditorParent()));
 		addField(new ColorFieldEditor(PreferenceSupplier.P_COLOR_CHROMATOGRAM_PEAKS_INACTIVE_ISTD, "Color (Inactive ISTD):", getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor(FIELD_MISCELLANEOUS, getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_MOVE_RETENTION_TIME_ON_PEAK_SELECTION, "Move retention time on peak selection", getFieldEditorParent()));

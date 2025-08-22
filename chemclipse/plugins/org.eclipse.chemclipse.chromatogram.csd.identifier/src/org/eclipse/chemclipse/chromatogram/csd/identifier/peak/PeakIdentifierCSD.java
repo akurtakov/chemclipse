@@ -42,7 +42,7 @@ import org.eclipse.core.runtime.Platform;
 public class PeakIdentifierCSD {
 
 	private static final Logger logger = Logger.getLogger(PeakIdentifierCSD.class);
-	//
+
 	private static final String EXTENSION_POINT = "org.eclipse.chemclipse.chromatogram.csd.identifier.peakIdentifier"; //$NON-NLS-1$
 
 	/**

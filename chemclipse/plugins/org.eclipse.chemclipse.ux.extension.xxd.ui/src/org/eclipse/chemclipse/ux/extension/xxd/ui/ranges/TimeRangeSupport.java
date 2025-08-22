@@ -34,7 +34,7 @@ public class TimeRangeSupport {
 				return timeRange;
 			}
 		}
-		//
+
 		return null;
 	}
 
@@ -46,7 +46,7 @@ public class TimeRangeSupport {
 		} else {
 			timeRange.setLocked(false);
 		}
-		//
+
 		return locked;
 	}
 
@@ -92,7 +92,7 @@ public class TimeRangeSupport {
 				return timeRange;
 			}
 		}
-		//
+
 		return null;
 	}
 
@@ -128,7 +128,7 @@ public class TimeRangeSupport {
 				return timeRange;
 			}
 		}
-		//
+
 		return null;
 	}
 }

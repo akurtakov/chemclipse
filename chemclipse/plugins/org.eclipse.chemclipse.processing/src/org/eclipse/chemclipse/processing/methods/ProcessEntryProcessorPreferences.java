@@ -53,7 +53,7 @@ public final class ProcessEntryProcessorPreferences<T> implements IProcessorPref
 		if(processSupplier.getSettingsClass() == null) {
 			return true;
 		}
-		//
+
 		String jsonSettings = processEntry.getSettings();
 		return jsonSettings == null || jsonSettings.isEmpty() || "{}".equals(jsonSettings);
 	}

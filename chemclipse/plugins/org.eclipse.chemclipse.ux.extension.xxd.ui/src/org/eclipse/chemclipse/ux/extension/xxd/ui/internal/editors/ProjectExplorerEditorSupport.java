@@ -40,7 +40,7 @@ import org.eclipse.ui.ide.IDE;
 public class ProjectExplorerEditorSupport extends AbstractSupplierFileEditorSupport implements ISupplierEditorSupport {
 
 	private static final Logger logger = Logger.getLogger(ProjectExplorerEditorSupport.class);
-	//
+
 	private String type = "";
 	private static final String DATA_EXPLORER = ExtensionMessages.dataExplorer;
 
@@ -60,7 +60,7 @@ public class ProjectExplorerEditorSupport extends AbstractSupplierFileEditorSupp
 			default:
 				// No action
 		}
-		//
+
 		return supplier;
 	}
 
@@ -101,7 +101,7 @@ public class ProjectExplorerEditorSupport extends AbstractSupplierFileEditorSupp
 			if(!project.exists()) {
 				project.create(null);
 			}
-			//
+
 			if(!project.isOpen()) {
 				project.open(null);
 			}
@@ -111,7 +111,7 @@ public class ProjectExplorerEditorSupport extends AbstractSupplierFileEditorSupp
 			IPath path = new Path(file.getAbsolutePath());
 			IFile input = project.getFile(path.lastSegment());
 			input.createLink(path, IResource.REPLACE, null);
-			//
+
 			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 			if(page != null) {
 				IDE.openEditor(page, input);

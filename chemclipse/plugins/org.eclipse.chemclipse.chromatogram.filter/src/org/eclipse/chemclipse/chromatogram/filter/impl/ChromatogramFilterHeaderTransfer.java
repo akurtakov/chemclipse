@@ -39,14 +39,14 @@ public class ChromatogramFilterHeaderTransfer extends AbstractChromatogramFilter
 				IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 				HeaderField headerFieldSource = filterSettings.getHeaderFieldSource();
 				String dataSoure = HeaderUtil.getHeaderData(chromatogram, headerFieldSource, "");
-				//
+
 				HeaderField headerFieldSink = filterSettings.getHeaderFieldSink();
 				for(IChromatogram chromatogramReference : chromatogram.getReferencedChromatograms()) {
 					HeaderUtil.setHeaderData(chromatogramReference, headerFieldSink, dataSoure);
 				}
 			}
 		}
-		//
+
 		return processingInfo;
 	}
 

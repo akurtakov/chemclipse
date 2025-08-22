@@ -33,12 +33,12 @@ public abstract class AbstractTransferFilter extends AbstractChromatogramFilter 
 	protected List<IScan> extractIdentifiedScans(IChromatogramSelection chromatogramSelection) {
 
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
-		//
+
 		int startRetentionTime = chromatogramSelection.getStartRetentionTime();
 		int stopRetentionTime = chromatogramSelection.getStopRetentionTime();
 		int startScan = chromatogram.getScanNumber(startRetentionTime);
 		int stopScan = chromatogram.getScanNumber(stopRetentionTime);
-		//
+
 		List<IScan> identifiedScans = new ArrayList<>();
 		for(int i = startScan; i <= stopScan; i++) {
 			IScan scan = chromatogram.getScan(i);
@@ -46,7 +46,7 @@ public abstract class AbstractTransferFilter extends AbstractChromatogramFilter 
 				identifiedScans.add(scan);
 			}
 		}
-		//
+
 		return identifiedScans;
 	}
 

@@ -18,7 +18,7 @@ import java.util.function.UnaryOperator;
 public class Sequence<T extends ISequenceRecord> extends AbstractFileAttributes<T> implements ISequence<T> {
 
 	private static final long serialVersionUID = 5584821269053736876L;
-	//
+
 	private String sequenceId = "";
 	private String info = "";
 	private String method = "";

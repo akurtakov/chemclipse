@@ -30,7 +30,7 @@ public class IonListTableComparator extends AbstractRecordTableComparator implem
 		if(e1 instanceof IIon ion1 && e2 instanceof IIon ion2) {
 			IIonTransition ionTransition1 = ion1.getIonTransition();
 			IIonTransition ionTransition2 = ion2.getIonTransition();
-			//
+
 			switch(getPropertyIndex()) {
 				case 0: // m/z
 					sortOrder = Double.compare(ion2.getIon(), ion1.getIon());

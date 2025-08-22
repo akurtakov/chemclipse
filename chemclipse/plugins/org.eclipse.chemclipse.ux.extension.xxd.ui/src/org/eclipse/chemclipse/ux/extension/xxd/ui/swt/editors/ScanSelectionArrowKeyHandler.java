@@ -78,7 +78,7 @@ public class ScanSelectionArrowKeyHandler extends AbstractHandledEventProcessor 
 			 */
 			IScan selectedScan = chromatogramSelection.getChromatogram().getScan(scanNumber);
 			UpdateNotifierUI.update(display, selectedScan);
-			//
+
 			if(selectedScan != null) {
 				/*
 				 * The selection should slide with the selected scans.
@@ -94,7 +94,7 @@ public class ScanSelectionArrowKeyHandler extends AbstractHandledEventProcessor 
 				} else if(scanRetentionTime >= stopRetentionTime) {
 					ChromatogramSelectionSupport.moveRetentionTimeWindow(chromatogramSelection, MoveDirection.RIGHT, 5);
 				}
-				//
+
 				chromatogramSelection.setSelectedScan(selectedScan, false);
 				extendedChromatogramUI.updateSelection();
 			}

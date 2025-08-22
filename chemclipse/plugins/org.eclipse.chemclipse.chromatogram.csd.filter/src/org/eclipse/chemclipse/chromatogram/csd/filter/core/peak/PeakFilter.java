@@ -40,7 +40,7 @@ public class PeakFilter {
 	private static final String DESCRIPTION = "description"; //$NON-NLS-1$
 	private static final String FILTER_NAME = "filterName"; //$NON-NLS-1$
 	private static final String FILTER = "filter"; //$NON-NLS-1$
-	//
+
 	private static final String PROCESSING_DESCRIPTION = ICategories.PEAK_FILTER;
 	private static final String NO_PEAK_FILTER_AVAILABLE = Messages.noPeakFilterAvailable;
 

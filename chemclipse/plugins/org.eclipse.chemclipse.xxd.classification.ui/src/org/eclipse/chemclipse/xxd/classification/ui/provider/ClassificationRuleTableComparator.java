@@ -24,7 +24,7 @@ public class ClassificationRuleTableComparator extends AbstractRecordTableCompar
 
 		int sortOrder = 0;
 		if(e1 instanceof ClassificationRule rule1 && e2 instanceof ClassificationRule rule2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = rule2.getSearchExpression().compareTo(rule1.getSearchExpression());
@@ -36,12 +36,12 @@ public class ClassificationRuleTableComparator extends AbstractRecordTableCompar
 					sortOrder = rule2.getReference().compareTo(rule1.getReference());
 					break;
 			}
-			//
+
 			if(getDirection() == ASCENDING) {
 				sortOrder = -sortOrder;
 			}
 		}
-		//
+
 		return sortOrder;
 	}
 }

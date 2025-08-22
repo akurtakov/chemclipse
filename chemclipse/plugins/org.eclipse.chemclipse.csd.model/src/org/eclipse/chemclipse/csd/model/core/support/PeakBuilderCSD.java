@@ -131,7 +131,7 @@ public class PeakBuilderCSD {
 		IScanCSD supplierScanCSD = getPeakScan(totalScanSignals, backgroundEquation);
 		IPeakModelCSD peakModel = new PeakModelCSD(supplierScanCSD, peakIntensityValues, backgroundAbundanceRange.getStartBackgroundAbundance(), backgroundAbundanceRange.getStopBackgroundAbundance());
 		ChromatogramPeakCSD cp = new ChromatogramPeakCSD(peakModel, chromatogram);
-		//
+
 		return cp;
 	}
 
@@ -200,7 +200,7 @@ public class PeakBuilderCSD {
 		IScanCSD supplierScanCSD = getPeakScan(totalScanSignals, backgroundEquation);
 		IPeakModelCSD peakModel = new PeakModelCSD(supplierScanCSD, peakIntensityValues, backgroundAbundanceRange.getStartBackgroundAbundance(), backgroundAbundanceRange.getStopBackgroundAbundance());
 		ChromatogramPeakCSD chromatogramPeak = new ChromatogramPeakCSD(peakModel, chromatogram);
-		//
+
 		return chromatogramPeak;
 	}
 

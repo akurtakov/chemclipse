@@ -51,19 +51,19 @@ public class TargetsProcessSupplier extends AbstractSystemProcessSettings {
 
 			if(settings instanceof TargetsProcessSettings processSettings) {
 				IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-				//
+
 				preferenceStore.setValue(PreferenceSupplier.P_USE_TARGET_LIST, processSettings.isUseTargetList());
 				preferenceStore.setValue(PreferenceSupplier.P_PROPAGATE_TARGET_ON_UPDATE, processSettings.isPropagateTargetOnUpdate());
 				preferenceStore.setValue(PreferenceSupplier.P_TARGETS_TABLE_SORTABLE, processSettings.isTargetsTableSortable());
 				preferenceStore.setValue(PreferenceSupplier.P_TARGETS_TABLE_SHOW_DEVIATION_RT, processSettings.isShowDeviationRT());
 				preferenceStore.setValue(PreferenceSupplier.P_TARGETS_TABLE_SHOW_DEVIATION_RI, processSettings.isShowDeviationRI());
-				//
+
 				preferenceStore.setValue(PreferenceSupplier.P_USE_ABSOLUTE_DEVIATION_RETENTION_TIME, processSettings.isUseAbsoluteDeviationRetentionTime());
 				preferenceStore.setValue(PreferenceSupplier.P_RETENTION_TIME_DEVIATION_REL_OK, processSettings.getRetentionTimeDeviationRelOK());
 				preferenceStore.setValue(PreferenceSupplier.P_RETENTION_TIME_DEVIATION_REL_WARN, processSettings.getRetentionTimeDeviationRelWarn());
 				preferenceStore.setValue(PreferenceSupplier.P_RETENTION_TIME_DEVIATION_ABS_OK, processSettings.getRetentionTimeDeviationAbsOK());
 				preferenceStore.setValue(PreferenceSupplier.P_RETENTION_TIME_DEVIATION_ABS_WARN, processSettings.getRetentionTimeDeviationAbsWarn());
-				//
+
 				preferenceStore.setValue(PreferenceSupplier.P_USE_ABSOLUTE_DEVIATION_RETENTION_INDEX, processSettings.isUseAbsoluteDeviationRetentionIndex());
 				preferenceStore.setValue(PreferenceSupplier.P_RETENTION_INDEX_DEVIATION_REL_OK, processSettings.getRetentionIndexDeviationRelOK());
 				preferenceStore.setValue(PreferenceSupplier.P_RETENTION_INDEX_DEVIATION_REL_WARN, processSettings.getRetentionIndexDeviationRelWarn());

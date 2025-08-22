@@ -25,7 +25,7 @@ public class ProcessSupplierListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = ProcessorLabelProvider.TITLES;
 	private static final int[] BOUNDS = ProcessorLabelProvider.BOUNDS;
-	//
+
 	private IBaseLabelProvider labelProvider = new ProcessorLabelProvider();
 	private ViewerComparator tableComparator = new ProcessorTableComparator();
 	private ProcessorListFilter viewerFilter = new ProcessorListFilter();

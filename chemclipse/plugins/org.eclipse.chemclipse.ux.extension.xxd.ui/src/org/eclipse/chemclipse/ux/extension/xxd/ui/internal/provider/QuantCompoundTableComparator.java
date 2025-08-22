@@ -28,10 +28,10 @@ public class QuantCompoundTableComparator extends AbstractRecordTableComparator 
 		if(e1 instanceof IQuantitationCompound compound1 && e2 instanceof IQuantitationCompound compound2) {
 			IRetentionTimeWindow retentionTimeWindow1 = compound1.getRetentionTimeWindow();
 			IRetentionIndexWindow retentionIndexWindow1 = compound1.getRetentionIndexWindow();
-			//
+
 			IRetentionTimeWindow retentionTimeWindow2 = compound2.getRetentionTimeWindow();
 			IRetentionIndexWindow retentionIndexWindow2 = compound2.getRetentionIndexWindow();
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = compound2.getName().compareTo(compound1.getName());

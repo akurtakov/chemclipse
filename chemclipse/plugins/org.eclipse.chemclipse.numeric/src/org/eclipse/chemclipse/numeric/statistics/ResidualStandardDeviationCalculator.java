@@ -32,36 +32,36 @@ public class ResidualStandardDeviationCalculator {
 			double sampleFactor = 1.0d / denominator;
 			double[] yValues = new double[size];
 			double[] xValues = new double[size];
-			//
+
 			int i = 0;
 			for(double[] pair : data) {
 				double y = pair[0];
 				double x = pair[1];
-				//
+
 				yValues[i] = y;
 				xValues[i] = x;
 				i++;
 			}
-			//
+
 			double yMean = StatUtils.mean(yValues);
 			double xMean = StatUtils.mean(xValues);
-			//
+
 			double sumYMeanSquare = 0;
 			double sumXMeanSquare = 0;
 			double sumXMeanYMean = 0;
-			//
+
 			for(double[] pair : data) {
 				double y = pair[0];
 				double x = pair[1];
-				//
+
 				double ym = y - yMean;
 				double xm = x - xMean;
-				//
+
 				sumYMeanSquare += Math.pow(ym, 2);
 				sumXMeanSquare += Math.pow(xm, 2);
 				sumXMeanYMean += xm * ym;
 			}
-			//
+
 			double sumXMeanYMeanSquare = Math.pow(sumXMeanYMean, 2);
 			/*
 			 * Prevent dividing by zero
@@ -70,7 +70,7 @@ public class ResidualStandardDeviationCalculator {
 				result = Math.sqrt(sampleFactor * (sumYMeanSquare - (sumXMeanYMeanSquare / sumXMeanSquare)));
 			}
 		}
-		//
+
 		return result;
 	}
 }

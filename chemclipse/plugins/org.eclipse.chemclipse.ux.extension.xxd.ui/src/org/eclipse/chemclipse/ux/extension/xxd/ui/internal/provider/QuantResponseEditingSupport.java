@@ -76,7 +76,7 @@ public class QuantResponseEditingSupport extends EditingSupport {
 			try {
 				result = Double.parseDouble(stringValue);
 			} catch(NumberFormatException e) {
-				//
+
 			}
 		}
 		return result;

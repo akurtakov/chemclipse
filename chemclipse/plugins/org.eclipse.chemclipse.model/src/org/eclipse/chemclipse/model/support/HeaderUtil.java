@@ -22,7 +22,7 @@ public class HeaderUtil {
 	public static String getHeaderData(IChromatogram chromatogram, HeaderField headerField, String defaultData) {
 
 		String headerData = null;
-		//
+
 		if(chromatogram != null) {
 			if(headerField != null) {
 				switch(headerField) {
@@ -55,7 +55,7 @@ public class HeaderUtil {
 				}
 			}
 		}
-		//
+
 		if(headerData == null || headerData.isEmpty()) {
 			return defaultData;
 		} else {

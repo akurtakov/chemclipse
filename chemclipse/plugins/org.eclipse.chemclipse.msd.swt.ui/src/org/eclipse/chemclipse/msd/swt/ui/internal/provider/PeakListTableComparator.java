@@ -35,7 +35,7 @@ public class PeakListTableComparator extends AbstractRecordTableComparator imple
 			ILibraryInformation libraryInformation1 = IIdentificationTarget.getLibraryInformation(peak1);
 			IPeakModelMSD peakModel2 = peak2.getPeakModel();
 			ILibraryInformation libraryInformation2 = IIdentificationTarget.getLibraryInformation(peak2);
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = Boolean.compare(peak2.isActiveForAnalysis(), peak1.isActiveForAnalysis());

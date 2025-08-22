@@ -58,7 +58,7 @@ public class PlateChartsPart extends AbstractPart<ExtendedPlateChartsUI> {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 

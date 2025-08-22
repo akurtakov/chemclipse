@@ -28,7 +28,7 @@ public class TargetReferenceListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = TargetReferenceLabelProvider.TITLES;
 	private static final int[] BOUNDS = TargetReferenceLabelProvider.BOUNDS;
-	//
+
 	private TargetReferenceLabelProvider labelProvider = new TargetReferenceLabelProvider();
 	private TargetReferenceTableComparator tableComparator = new TargetReferenceTableComparator();
 	private TargetReferenceFilter targetReferenceFilter = new TargetReferenceFilter();
@@ -45,7 +45,7 @@ public class TargetReferenceListUI extends ExtendedTableViewer {
 		labelProvider.setTargetDisplaySettings(targetDisplaySettings);
 		tableComparator.setTargetDisplaySettings(targetDisplaySettings);
 		targetReferenceFilter.setTargetDisplaySettings(targetDisplaySettings);
-		//
+
 		if(editingSupport != null) {
 			editingSupport.setTargetDisplaySettings(targetDisplaySettings);
 		}

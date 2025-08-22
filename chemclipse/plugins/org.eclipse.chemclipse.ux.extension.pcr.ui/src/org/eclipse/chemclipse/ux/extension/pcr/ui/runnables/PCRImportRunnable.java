@@ -27,7 +27,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 public class PCRImportRunnable implements IRunnableWithProgress {
 
 	private static final Logger logger = Logger.getLogger(PCRImportRunnable.class);
-	//
+
 	private File file;
 	private IPlate plate = null;
 

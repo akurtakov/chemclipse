@@ -36,11 +36,11 @@ public class ColumnMappingAnnotationService extends ColumnMappingSerializationSe
 		gridData.heightHint = 200;
 		gridData.widthHint = 500;
 		columnMappingListEditor.setLayoutData(gridData);
-		//
+
 		if(currentSelection instanceof String) {
 			columnMappingListEditor.load((String)currentSelection);
 		}
-		//
+
 		return columnMappingListEditor;
 	}
 

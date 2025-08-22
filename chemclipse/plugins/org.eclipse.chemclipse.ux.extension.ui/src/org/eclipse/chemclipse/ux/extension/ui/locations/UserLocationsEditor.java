@@ -34,7 +34,7 @@ public class UserLocationsEditor extends Composite {
 
 	private UserLocationsUI userLocationsUI;
 	private UserLocationsListUI userLocationsListUI;
-	//
+
 	private UserLocations userLocations;
 	private IUpdateListener updateListener = null;
 
@@ -69,7 +69,7 @@ public class UserLocationsEditor extends Composite {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		userLocationsUI = createUserLocationsUI(this);
 		userLocationsListUI = createUserLocationsListUI(this);
 	}
@@ -83,7 +83,7 @@ public class UserLocationsEditor extends Composite {
 			updateUserLocationsTable();
 			fireUpdate();
 		});
-		//
+
 		return userLocationsUI;
 	}
 
@@ -153,7 +153,7 @@ public class UserLocationsEditor extends Composite {
 				}
 			}
 		});
-		//
+
 		return userLocationsListUI;
 	}
 

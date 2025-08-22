@@ -71,9 +71,9 @@ public class ProjectLabelProvider extends LabelProvider implements ILabelProvide
 					image = imageRegistry.get(Activator.ICON_FOLDER_CLOSED);
 				}
 			}
-			//
+
 		}
-		//
+
 		return image;
 	}
 

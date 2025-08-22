@@ -34,34 +34,34 @@ public class FeatureListFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof Feature feature) {
 			IVariable variable = feature.getVariable();
-			//
+
 			String value = variable.getValue();
 			String classification = variable.getClassification() == null ? "" : variable.getClassification();
 			String description = variable.getDescription() == null ? "" : variable.getDescription();
-			//
+
 			if(!caseSensitive) {
 				searchText = searchText.toLowerCase();
 				value = value.toLowerCase();
 				classification = classification.toLowerCase();
 				description = description.toLowerCase();
 			}
-			//
+
 			if(value.contains(searchText)) {
 				return true;
 			}
-			//
+
 			if(classification.contains(searchText)) {
 				return true;
 			}
-			//
+
 			if(description.contains(searchText)) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

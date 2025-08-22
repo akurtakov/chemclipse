@@ -56,7 +56,7 @@ import jakarta.xml.bind.Unmarshaller;
 public class MassSpectrumReaderVersion21 extends AbstractMassSpectraReader implements IMassSpectraReader {
 
 	public static final String VERSION = "mzXML_2.1";
-	//
+
 	private static final Logger logger = Logger.getLogger(MassSpectrumReaderVersion21.class);
 
 	@Override
@@ -138,7 +138,7 @@ public class MassSpectrumReaderVersion21 extends AbstractMassSpectraReader imple
 						values[index] = floatBuffer.get(index);
 					}
 				}
-				//
+
 				for(int peakIndex = 0; peakIndex < values.length - 1; peakIndex += 2) {
 					/*
 					 * Get m/z and intensity (m/z-int)
@@ -154,7 +154,7 @@ public class MassSpectrumReaderVersion21 extends AbstractMassSpectraReader imple
 		} catch(ParserConfigurationException e) {
 			logger.warn(e);
 		}
-		//
+
 		IVendorMassSpectra massSpectra = new VendorMassSpectra();
 		massSpectra.setName(file.getName());
 		massSpectra.addMassSpectrum(massSpectrum);

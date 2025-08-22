@@ -35,19 +35,19 @@ public class WavenumberSignals extends ArrayList<WavenumberSignal> {
 
 	private static final long serialVersionUID = 5390614556584324943L;
 	private static final Logger logger = Logger.getLogger(WavenumberSignals.class);
-	//
+
 	public static final String DESCRIPTION = "Wavenumber Signals";
 	public static final String FILE_EXTENSION = ".wns";
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-	//
+
 	public static final String WHITE_SPACE = " ";
 	public static final String SEPARATOR_TOKEN = ";";
 	public static final String SEPARATOR_ENTRY = "|";
-	//
+
 	public static final String DEMO_ENTRY = "200 " + SEPARATOR_ENTRY + " 9999";
-	//
+
 	private WavenumberSignalsValidator validator = new WavenumberSignalsValidator();
 
 	public Set<String> keySet() {
@@ -56,7 +56,7 @@ public class WavenumberSignals extends ArrayList<WavenumberSignal> {
 		for(WavenumberSignal setting : this) {
 			keys.add(Double.toString(setting.getWavenumber()));
 		}
-		//
+
 		return keys;
 	}
 
@@ -122,10 +122,10 @@ public class WavenumberSignals extends ArrayList<WavenumberSignal> {
 
 		boolean success = false;
 		try (PrintWriter printWriter = new PrintWriter(file)) {
-			//
+
 			List<WavenumberSignal> settings = new ArrayList<>(this);
 			Collections.sort(settings, (s1, s2) -> Double.compare(s1.getWavenumber(), s2.getWavenumber()));
-			//
+
 			for(WavenumberSignal setting : settings) {
 				StringBuilder builder = new StringBuilder();
 				extractSetting(setting, builder);
@@ -136,21 +136,21 @@ public class WavenumberSignals extends ArrayList<WavenumberSignal> {
 		} catch(FileNotFoundException e) {
 			logger.warn(e);
 		}
-		//
+
 		return success;
 	}
 
 	private WavenumberSignal extract(String text) {
 
 		WavenumberSignal setting = null;
-		//
+
 		IStatus status = validator.validate(text);
 		if(status.isOK()) {
 			setting = validator.getSetting();
 		} else {
 			logger.warn(status.getMessage());
 		}
-		//
+
 		return setting;
 	}
 
@@ -172,10 +172,10 @@ public class WavenumberSignals extends ArrayList<WavenumberSignal> {
 	private void extractSetting(WavenumberSignal setting, StringBuilder builder) {
 
 		List<String> entries = new ArrayList<>();
-		//
+
 		entries.add(Double.toString(setting.getWavenumber()));
 		entries.add(Double.toString(setting.getIntensity()));
-		//
+
 		compile(builder, entries);
 	}
 
@@ -196,7 +196,7 @@ public class WavenumberSignals extends ArrayList<WavenumberSignal> {
 
 		String lineDelimiterSpecific = OperatingSystemUtils.getLineDelimiter();
 		String lineDelimiterGeneric = "\n";
-		//
+
 		String[] decodedArray;
 		if(stringList.contains(SEPARATOR_TOKEN)) {
 			decodedArray = stringList.split(SEPARATOR_TOKEN);
@@ -208,7 +208,7 @@ public class WavenumberSignals extends ArrayList<WavenumberSignal> {
 			decodedArray = new String[1];
 			decodedArray[0] = stringList;
 		}
-		//
+
 		return decodedArray;
 	}
 }

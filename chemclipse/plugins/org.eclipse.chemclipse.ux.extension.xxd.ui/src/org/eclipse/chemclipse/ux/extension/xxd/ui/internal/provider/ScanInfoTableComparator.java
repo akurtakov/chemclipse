@@ -24,7 +24,7 @@ public class ScanInfoTableComparator extends AbstractRecordTableComparator imple
 
 		int sortOrder = 0;
 		if(e1 instanceof IScanMSD ion1 && e2 instanceof IScanMSD ion2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = Integer.compare(ion2.getScanNumber(), ion1.getScanNumber());

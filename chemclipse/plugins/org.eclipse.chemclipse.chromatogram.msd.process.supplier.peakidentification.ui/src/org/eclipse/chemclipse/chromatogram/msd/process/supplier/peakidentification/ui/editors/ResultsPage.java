@@ -111,7 +111,7 @@ public class ResultsPage implements IMultiEditorPage {
 			ISelection selection = event.getSelection();
 			if(selection instanceof IStructuredSelection structuredSelection) {
 				Object element = structuredSelection.getFirstElement();
-				//
+
 				if(element instanceof IPeakMSD peakMSD) {
 					UpdateNotifierUI.update(Display.getDefault(), peakMSD);
 				}

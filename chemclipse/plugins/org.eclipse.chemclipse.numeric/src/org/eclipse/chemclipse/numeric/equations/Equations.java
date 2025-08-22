@@ -124,7 +124,7 @@ public class Equations {
 			valuesA[i][1] = 1.0;
 			valuesB[i][0] = y;
 		}
-		//
+
 		GaussJordan gj = new GaussJordan();
 		double[][] a = gj.AtA(valuesA);
 		double[][] b = gj.AtB(valuesA, valuesB);
@@ -172,16 +172,16 @@ public class Equations {
 		if(eq1.equals(eq2)) {
 			throw new SolverException("There could be no intersection found. The equations are congruent.");
 		}
-		//
+
 		double denominator = eq1.getA() - eq2.getA();
 		double numerator = eq2.getB() - eq1.getB();
 		if(denominator == 0.0d) {
 			throw new SolverException("There could be no intersection found. The equations are parallel.");
 		}
-		//
+
 		double x = numerator / denominator;
 		double y = eq1.calculateY(x);
-		//
+
 		return new Point(x, y);
 	}
 
@@ -219,11 +219,11 @@ public class Equations {
 			valuesA[i][2] = 1.0;
 			valuesB[i][0] = y;
 		}
-		//
+
 		GaussJordan gaussJordan = new GaussJordan();
 		double[][] a = gaussJordan.AtA(valuesA);
 		double[][] b = gaussJordan.AtB(valuesA, valuesB);
-		//
+
 		try {
 			double[] result = gaussJordan.solve(a, b);
 			return new QuadraticEquation(result[0], result[1], result[2]);

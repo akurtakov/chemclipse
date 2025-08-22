@@ -43,7 +43,7 @@ public interface IChromatogramSelectionProcessSupplier<SettingType> extends IPro
 		if(chromatogramSelection == null) {
 			return null;
 		}
-		//
+
 		return new IProcessExecutionConsumer<IChromatogramSelection>() {
 
 			AtomicReference<IChromatogramSelection> result = new AtomicReference<>(chromatogramSelection);

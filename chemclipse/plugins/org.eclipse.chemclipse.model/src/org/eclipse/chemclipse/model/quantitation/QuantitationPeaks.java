@@ -21,7 +21,7 @@ public class QuantitationPeaks extends ArrayList<IQuantitationPeak> implements I
 
 	private static final long serialVersionUID = -4303659297540195715L;
 	private static final Logger logger = Logger.getLogger(QuantitationPeaks.class);
-	//
+
 	private String concentrationUnit = "";
 
 	public QuantitationPeaks(String concentrationUnit) {

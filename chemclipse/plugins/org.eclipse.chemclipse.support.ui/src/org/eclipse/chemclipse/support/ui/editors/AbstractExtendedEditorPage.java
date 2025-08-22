@@ -33,7 +33,7 @@ import org.eclipse.ui.forms.widgets.TableWrapLayout;
 public abstract class AbstractExtendedEditorPage implements IExtendedEditorPage {
 
 	protected static final int HORIZONTAL_INDENT = 15;
-	//
+
 	private FormToolkit toolkit;
 	private Composite control;
 	private ScrolledForm scrolledForm;
@@ -94,7 +94,7 @@ public abstract class AbstractExtendedEditorPage implements IExtendedEditorPage 
 	protected TableWrapLayout createFormTableWrapLayout(boolean makeColumnsEqualWidth, int numColumns) {
 
 		TableWrapLayout tableWrapLayout = new TableWrapLayout();
-		//
+
 		tableWrapLayout.topMargin = 12;
 		tableWrapLayout.bottomMargin = 12;
 		tableWrapLayout.leftMargin = 6;
@@ -103,27 +103,27 @@ public abstract class AbstractExtendedEditorPage implements IExtendedEditorPage 
 		tableWrapLayout.verticalSpacing = 17;
 		tableWrapLayout.makeColumnsEqualWidth = makeColumnsEqualWidth;
 		tableWrapLayout.numColumns = numColumns;
-		//
+
 		return tableWrapLayout;
 	}
 
 	protected Section createSection(Composite parent, int colspan) {
 
 		Section section = toolkit.createSection(parent, Section.EXPANDED);
-		//
+
 		section.clientVerticalSpacing = 2;
 		section.setLayout(createSectionTableWrapLayout(true, 1));
 		TableWrapData tableWrapData = new TableWrapData(TableWrapData.FILL_GRAB);
 		tableWrapData.colspan = colspan;
 		section.setLayoutData(tableWrapData);
-		//
+
 		return section;
 	}
 
 	protected Composite createClientInfo(Section section) {
 
 		Composite client = toolkit.createComposite(section, SWT.WRAP);
-		//
+
 		GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 1;
 		gridLayout.marginWidth = 2;
@@ -131,7 +131,7 @@ public abstract class AbstractExtendedEditorPage implements IExtendedEditorPage 
 		gridLayout.marginTop = 2;
 		gridLayout.marginLeft = 6;
 		client.setLayout(gridLayout);
-		//
+
 		return client;
 	}
 
@@ -165,7 +165,7 @@ public abstract class AbstractExtendedEditorPage implements IExtendedEditorPage 
 	protected TableWrapLayout createSectionTableWrapLayout(boolean makeColumnsEqualWidth, int numColumns) {
 
 		TableWrapLayout tableWrapLayout = new TableWrapLayout();
-		//
+
 		tableWrapLayout.topMargin = 2;
 		tableWrapLayout.bottomMargin = 2;
 		tableWrapLayout.leftMargin = 2;
@@ -174,14 +174,14 @@ public abstract class AbstractExtendedEditorPage implements IExtendedEditorPage 
 		tableWrapLayout.verticalSpacing = 0;
 		tableWrapLayout.makeColumnsEqualWidth = makeColumnsEqualWidth;
 		tableWrapLayout.numColumns = numColumns;
-		//
+
 		return tableWrapLayout;
 	}
 
 	protected Section createSection(Composite parent, int colspan, String text, String description) {
 
 		Section section = toolkit.createSection(parent, Section.EXPANDED | Section.TWISTIE | Section.DESCRIPTION | Section.TITLE_BAR);
-		//
+
 		section.clientVerticalSpacing = 2;
 		section.setText(text);
 		section.setDescription(description);
@@ -189,7 +189,7 @@ public abstract class AbstractExtendedEditorPage implements IExtendedEditorPage 
 		TableWrapData tableWrapData = new TableWrapData(TableWrapData.FILL_GRAB);
 		tableWrapData.colspan = colspan;
 		section.setLayoutData(tableWrapData);
-		//
+
 		return section;
 	}
 
@@ -201,7 +201,7 @@ public abstract class AbstractExtendedEditorPage implements IExtendedEditorPage 
 	protected Composite createClient(Section section, int numColumns) {
 
 		Composite client = toolkit.createComposite(section, SWT.WRAP);
-		//
+
 		GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = numColumns;
 		gridLayout.marginWidth = 2;
@@ -209,7 +209,7 @@ public abstract class AbstractExtendedEditorPage implements IExtendedEditorPage 
 		gridLayout.marginTop = 10;
 		gridLayout.marginLeft = 15;
 		client.setLayout(gridLayout);
-		//
+
 		return client;
 	}
 }

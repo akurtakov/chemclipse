@@ -40,7 +40,7 @@ public class ChromatogramFilterMSD extends AbstractChromatogramFilterMSD {
 
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = new ProcessingInfo<>();
 		processingInfo.addMessages(validate(chromatogramSelection, chromatogramFilterSettings));
-		//
+
 		if(!processingInfo.hasErrorMessages()) {
 			if(chromatogramFilterSettings instanceof FilterSettings filterSettings) {
 				try {

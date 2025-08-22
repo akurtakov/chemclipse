@@ -39,13 +39,13 @@ public class WizardCreateRetentionIndexFile extends AbstractFileWizard {
 	 */
 	public static final int PREFERRED_WIDTH = 300;
 	public static final int PREFERRED_HEIGHT = 600;
-	//
+
 	private static final Logger logger = Logger.getLogger(WizardCreateRetentionIndexFile.class);
-	//
+
 	private RetentionIndexWizardElements wizardElements = new RetentionIndexWizardElements();
-	//
+
 	private static final String CALIBRATION_FILE_EXTENSION = ".cal";
-	//
+
 	private PageCalibrationSettings pageCalibrationSettings;
 	private PagePeakSelection pagePeakSelection;
 	private PagePeakAssignment pagePeakAssignment;
@@ -71,7 +71,7 @@ public class WizardCreateRetentionIndexFile extends AbstractFileWizard {
 	public IWizardPage getNextPage(IWizardPage page) {
 
 		IWizardPage nextPage = super.getNextPage(page);
-		//
+
 		if(page == pageCalibrationSettings) {
 			nextPage = pagePeakSelection;
 		} else if(page == pagePeakSelection) {
@@ -81,7 +81,7 @@ public class WizardCreateRetentionIndexFile extends AbstractFileWizard {
 		} else if(page == pageCalibrationTable) {
 			nextPage = null;
 		}
-		//
+
 		setPreviousPages();
 		return nextPage;
 	}

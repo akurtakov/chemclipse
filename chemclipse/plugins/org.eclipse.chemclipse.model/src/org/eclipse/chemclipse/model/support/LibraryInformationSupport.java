@@ -157,7 +157,7 @@ public class LibraryInformationSupport {
 					return true;
 				}
 			}
-			//
+
 			return false;
 		}
 	}
@@ -175,7 +175,7 @@ public class LibraryInformationSupport {
 						 */
 						setNameTraditionally = false;
 						libraryInformation.setName(values[0].trim());
-						//
+
 						StringBuilder builder = new StringBuilder();
 						if(referenceIdentifierPrefix != null) {
 							builder.append(referenceIdentifierPrefix);
@@ -191,7 +191,7 @@ public class LibraryInformationSupport {
 					}
 				}
 			}
-			//
+
 			if(setNameTraditionally) {
 				libraryInformation.setName(name);
 			}

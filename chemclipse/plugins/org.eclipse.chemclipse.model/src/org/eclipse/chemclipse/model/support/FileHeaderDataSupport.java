@@ -38,13 +38,13 @@ public class FileHeaderDataSupport {
 	public static String save(FileHeaderData fileHeaderData) {
 
 		StringBuilder builder = new StringBuilder();
-		//
+
 		builder.append(fileHeaderData.getHeaderField().name());
 		builder.append(VALUE_DELIMITER);
 		builder.append(fileHeaderData.getRegularExpression());
 		builder.append(VALUE_DELIMITER);
 		builder.append(Integer.toString(fileHeaderData.getGroupIndex()));
-		//
+
 		return builder.toString();
 	}
 

@@ -85,7 +85,7 @@ public class ScanWriter {
 
 		ILibraryInformation libraryInformation = new LibraryInformation();
 		libraryInformation.setName(NLS.bind(ConverterMessages.scan, scanNumber));
-		//
+
 		return new IdentificationTarget(libraryInformation, ComparisonResult.COMPARISON_RESULT_BEST_MATCH);
 	}
 }

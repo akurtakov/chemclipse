@@ -59,14 +59,14 @@ public class UserLocationsSettingsEditor implements SettingsUIProvider.SettingsU
 	private static final String MESSAGE_REMOVE = "Do you want to delete the selected user locations?";
 	private static final String CATEGORY = "User Locations";
 	private static final String DELETE = "Delete";
-	//
+
 	private AtomicReference<Button> buttonToolbarSearch = new AtomicReference<>();
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private AtomicReference<UserLocationsListUI> listControl = new AtomicReference<>();
-	//
+
 	private List<Listener> listeners = new ArrayList<>();
 	private List<Button> buttons = new ArrayList<>();
-	//
+
 	private Composite control;
 	private IProcessorPreferences<UserLocations> preferences = null;
 	private UserLocations settings = new UserLocations();
@@ -80,17 +80,17 @@ public class UserLocationsSettingsEditor implements SettingsUIProvider.SettingsU
 		if(userLocations != null) {
 			this.settings.load(userLocations.save());
 		}
-		//
+
 		Composite composite = new Composite(parent, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(1, true);
 		gridLayout.marginWidth = 0;
 		gridLayout.marginHeight = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		createToolbarMain(composite);
 		createToolbarSearch(composite);
 		createTableSection(composite);
-		//
+
 		setTableViewerInput();
 		initialize();
 		setControl(composite);
@@ -164,7 +164,7 @@ public class UserLocationsSettingsEditor implements SettingsUIProvider.SettingsU
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(7, false));
-		//
+
 		createButtonToggleToolbar(composite);
 		add(createButtonAdd(composite));
 		add(createButtonEdit(composite));
@@ -196,7 +196,7 @@ public class UserLocationsSettingsEditor implements SettingsUIProvider.SettingsU
 				listControl.get().setSearchText(searchText, caseSensitive);
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -206,13 +206,13 @@ public class UserLocationsSettingsEditor implements SettingsUIProvider.SettingsU
 		Table table = userLocationsListUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
 		userLocationsListUI.setEditEnabled(true);
-		//
+
 		Shell shell = table.getShell();
 		ITableSettings tableSettings = userLocationsListUI.getTableSettings();
 		addDeleteMenuEntry(shell, tableSettings);
 		addKeyEventProcessors(shell, tableSettings);
 		userLocationsListUI.applySettings(tableSettings);
-		//
+
 		listControl.set(userLocationsListUI);
 	}
 
@@ -238,7 +238,7 @@ public class UserLocationsSettingsEditor implements SettingsUIProvider.SettingsU
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -271,7 +271,7 @@ public class UserLocationsSettingsEditor implements SettingsUIProvider.SettingsU
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -296,7 +296,7 @@ public class UserLocationsSettingsEditor implements SettingsUIProvider.SettingsU
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -317,7 +317,7 @@ public class UserLocationsSettingsEditor implements SettingsUIProvider.SettingsU
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -346,7 +346,7 @@ public class UserLocationsSettingsEditor implements SettingsUIProvider.SettingsU
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -380,7 +380,7 @@ public class UserLocationsSettingsEditor implements SettingsUIProvider.SettingsU
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 

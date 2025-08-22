@@ -50,7 +50,7 @@ public class CopyToClipboardProvider {
 		 */
 		addContent(extendedTableViewer, builder, columns, valueDelimiter, lineDelimiter);
 		addNoContentMessageOnDemand(builder);
-		//
+
 		transferToClipboard(clipboard, builder.toString());
 	}
 
@@ -58,7 +58,7 @@ public class CopyToClipboardProvider {
 
 		String[] titles = getTitles(extendedTableViewer);
 		int size = titles.length;
-		//
+
 		List<String> elements = new ArrayList<>();
 		for(int column : columns) {
 			if(column >= 0 && column < size) {
@@ -66,7 +66,7 @@ public class CopyToClipboardProvider {
 			}
 		}
 		print(builder, elements, valueDelimiter, lineDelimiter);
-		//
+
 		return columns;
 	}
 
@@ -76,7 +76,7 @@ public class CopyToClipboardProvider {
 		int size = table.getColumnCount();
 		int[] indices = table.getSelectionIndices();
 		lineDelimiter = indices.length > 1 ? lineDelimiter : null;
-		//
+
 		TableItem selection;
 		for(int index : table.getSelectionIndices()) {
 			/*
@@ -119,7 +119,7 @@ public class CopyToClipboardProvider {
 	private int[] getColumns(ExtendedTableViewer extendedTableViewer) {
 
 		Table table = extendedTableViewer.getTable();
-		//
+
 		int[] columns;
 		String copyColumnsToClipBoard = extendedTableViewer.getCopyColumnsToClipboard();
 		if(copyColumnsToClipBoard.isEmpty()) {
@@ -132,7 +132,7 @@ public class CopyToClipboardProvider {
 		} else {
 			columns = CopyColumnsSupport.getColumns(copyColumnsToClipBoard);
 		}
-		//
+
 		return columns;
 	}
 
@@ -144,7 +144,7 @@ public class CopyToClipboardProvider {
 		for(TableViewerColumn tableViewerColumn : tableViewerColumns) {
 			titles[i++] = tableViewerColumn.getColumn().getText();
 		}
-		//
+
 		return titles;
 	}
 

@@ -33,7 +33,7 @@ public class MassSpectrumIdentifierFile extends AbstractMassSpectrumIdentifier {
 	public IProcessingInfo<IMassSpectra> identify(List<IScanMSD> massSpectraList, IMassSpectrumIdentifierSettings identifierSettings, IProgressMonitor monitor) {
 
 		IProcessingInfo<IMassSpectra> processingInfo = new ProcessingInfo<>();
-		//
+
 		try {
 			MassSpectrumLibraryIdentifierSettings massSpectrumIdentifierSettings;
 			if(identifierSettings instanceof MassSpectrumLibraryIdentifierSettings settings) {
@@ -41,7 +41,7 @@ public class MassSpectrumIdentifierFile extends AbstractMassSpectrumIdentifier {
 			} else {
 				massSpectrumIdentifierSettings = PreferenceSupplier.getMassSpectrumIdentifierSettings();
 			}
-			//
+
 			FileIdentifier fileIdentifier = new FileIdentifier();
 			IMassSpectra massSpectra = fileIdentifier.runIdentification(massSpectraList, massSpectrumIdentifierSettings, monitor);
 			processingInfo.setProcessingResult(massSpectra);
@@ -49,7 +49,7 @@ public class MassSpectrumIdentifierFile extends AbstractMassSpectrumIdentifier {
 		} catch(FileNotFoundException e) {
 			processingInfo.addErrorMessage(FileIdentifier.IDENTIFIER, "An I/O error ocurred.");
 		}
-		//
+
 		return processingInfo;
 	}
 }

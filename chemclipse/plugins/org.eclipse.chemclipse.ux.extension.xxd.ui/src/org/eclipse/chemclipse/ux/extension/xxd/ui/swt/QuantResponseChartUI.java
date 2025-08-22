@@ -54,7 +54,7 @@ public class QuantResponseChartUI extends Composite implements IExtendedPartUI {
 
 	private CalibrationChartSupport calibrationChartSupport = new CalibrationChartSupport();
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-	//
+
 	private Button buttonToolbarInfo;
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private AtomicReference<CalibrationChart> chartControl = new AtomicReference<>();
@@ -75,14 +75,14 @@ public class QuantResponseChartUI extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(composite);
 		createToolbarInfo(composite);
 		createCalibrationChart(composite);
-		//
+
 		initialize();
 	}
 
@@ -98,7 +98,7 @@ public class QuantResponseChartUI extends Composite implements IExtendedPartUI {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(5, false));
-		//
+
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 		createButtonToggleChartLegend(composite, chartControl, IMAGE_LEGEND);
 		createButtonToggleLegendMarker(composite, chartControl, IMAGE_LEGEND_MARKER);
@@ -110,7 +110,7 @@ public class QuantResponseChartUI extends Composite implements IExtendedPartUI {
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -146,7 +146,7 @@ public class QuantResponseChartUI extends Composite implements IExtendedPartUI {
 
 		CalibrationChart calibrationChart = new CalibrationChart(parent, SWT.NONE);
 		calibrationChart.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		chartControl.set(calibrationChart);
 	}
 
@@ -165,15 +165,15 @@ public class QuantResponseChartUI extends Composite implements IExtendedPartUI {
 
 		CalibrationChart calibrationChart = chartControl.get();
 		calibrationChart.deleteSeries();
-		//
+
 		if(quantitationCompound != null) {
-			//
+
 			toolbarInfo.get().setText("Quantitation Compound: " + quantitationCompound.getName());
-			//
+
 			List<ILineSeriesData> lineSeriesDataList = new ArrayList<ILineSeriesData>();
 			ILineSeriesData lineSeriesDataPoints;
 			ILineSeriesData lineSeriesDataEquation;
-			//
+
 			IColorScheme colors = Colors.getColorScheme(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCHEME_DISPLAY_CALIBRATION));
 			calibrationChart.setConcentrationLabel(quantitationCompound.getConcentrationUnit());
 			boolean useCrossZero = quantitationCompound.isCrossZero();
@@ -210,7 +210,7 @@ public class QuantResponseChartUI extends Composite implements IExtendedPartUI {
 				}
 				colors.incrementColor();
 			}
-			//
+
 			calibrationChart.addSeriesData(lineSeriesDataList, LineChart.NO_COMPRESSION);
 		} else {
 			toolbarInfo.get().setText("");

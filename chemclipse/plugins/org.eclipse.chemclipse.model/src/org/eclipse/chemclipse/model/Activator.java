@@ -33,7 +33,7 @@ import org.osgi.util.tracker.ServiceTracker;
 public class Activator implements BundleActivator {
 
 	private static final Logger logger = Logger.getLogger(Activator.class);
-	//
+
 	private static Activator plugin;
 	private IEclipseContext eclipseContext = null;
 	private Bundle bundle;
@@ -103,7 +103,7 @@ public class Activator implements BundleActivator {
 			eclipseContext = EclipseContextFactory.getServiceContext(bundle.getBundleContext());
 			eclipseContext.set(Logger.class, logger);
 		}
-		//
+
 		return eclipseContext;
 	}
 
@@ -115,7 +115,7 @@ public class Activator implements BundleActivator {
 				services.add(service);
 			}
 		}
-		//
+
 		return services;
 	}
 

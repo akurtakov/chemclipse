@@ -50,10 +50,10 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 	private ExtractionOption extractionOption = ExtractionOption.RETENTION_TIME_MS;
 	private ValueOption valueOption = ValueOption.AREA;
 	private int groupWindow = 1500; // 1.5 sec
-	//
+
 	private DataBindingContext dataBindingContext = new DataBindingContext();
 	private IObservableValue<Integer> groupValueWindow = new WritableValue<>();
-	//
+
 	private AtomicReference<Label> labelGroupControl = new AtomicReference<>();
 	private AtomicReference<Text> textGroupControl = new AtomicReference<>();
 
@@ -62,7 +62,7 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 		super("Main Properties");
 		setTitle("PCA");
 		setDescription("Set main PCA parameters.");
-		//
+
 		groupValueWindow.setValue(groupWindow);
 	}
 
@@ -71,9 +71,9 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(2, false));
-		//
+
 		WizardPageSupport.create(this, dataBindingContext);
-		//
+
 		createLabel(composite, "Title:");
 		createTextTitle(composite, 1);
 		createLabel(composite, "Description:");
@@ -88,9 +88,9 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 		createSpinnerPrincipleComponents(composite);
 		createLabel(composite, "Algorithm:");
 		createComboViewerAlgorithm(composite);
-		//
+
 		updateWidgets();
-		//
+
 		setControl(composite);
 	}
 
@@ -129,7 +129,7 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 				return null;
 			}
 		});
-		//
+
 		Combo combo = comboViewer.getCombo();
 		combo.setToolTipText("Description Option");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -144,10 +144,10 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 				}
 			}
 		});
-		//
+
 		comboViewer.setInput(DescriptionOption.values());
 		comboViewer.setSelection(new StructuredSelection(DescriptionOption.NAME));
-		//
+
 		return comboViewer;
 	}
 
@@ -167,7 +167,7 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select an extraction option.");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		combo.addSelectionListener(new SelectionAdapter() {
@@ -182,10 +182,10 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 				}
 			}
 		});
-		//
+
 		comboViewer.setInput(ExtractionOption.values());
 		comboViewer.setSelection(new StructuredSelection(ExtractionOption.RETENTION_TIME_MS));
-		//
+
 		return comboViewer;
 	}
 
@@ -204,7 +204,7 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 				return null;
 			}
 		});
-		//
+
 		Combo combo = comboViewer.getCombo();
 		combo.setToolTipText("Value Option (in case of concentration: take care that only one conc. is set.");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -219,10 +219,10 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 				}
 			}
 		});
-		//
+
 		comboViewer.setInput(ValueOption.values());
 		comboViewer.setSelection(new StructuredSelection(ValueOption.AREA));
-		//
+
 		return comboViewer;
 	}
 
@@ -236,7 +236,7 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 
 		Label label = new Label(parent, SWT.NONE);
 		label.setText(text);
-		//
+
 		return label;
 	}
 
@@ -244,7 +244,7 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 
 		Text text = new Text(parent, SWT.BORDER);
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		UpdateValueStrategy<String, Integer> widgetToModel = UpdateValueStrategy.create(IConverter.create(String.class, Integer.class, o1 -> {
 			try {
 				return Integer.parseInt(o1);
@@ -253,17 +253,17 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 			}
 			return null;
 		}));
-		//
+
 		widgetToModel.setBeforeSetValidator(o1 -> {
 			if(o1 > 0) {
 				return ValidationStatus.ok();
 			}
 			return ValidationStatus.error("Warning: The value must be positive.");
 		});
-		//
+
 		UpdateValueStrategy<Integer, String> modelToWidget = UpdateValueStrategy.create(IConverter.create(Integer.class, String.class, o1 -> Integer.toString((o1))));
 		dataBindingContext.bindValue(WidgetProperties.text(SWT.Modify).observe(text), groupValueWindow, widgetToModel, modelToWidget);
-		//
+
 		textGroupControl.set(text);
 	}
 
@@ -283,7 +283,7 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 				analysisSettings.setNumberOfPrincipalComponents(spinner.getSelection());
 			}
 		});
-		//
+
 		return spinner;
 	}
 
@@ -302,7 +302,7 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 				return null;
 			}
 		});
-		//
+
 		Combo combo = comboViewer.getCombo();
 		combo.setToolTipText("PCA Algorithm");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -317,10 +317,10 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 				}
 			}
 		});
-		//
+
 		comboViewer.setInput(algorithms);
 		comboViewer.setSelection(new StructuredSelection(analysisSettings.getAlgorithm()));
-		//
+
 		return comboViewer;
 	}
 
@@ -339,7 +339,7 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 			default:
 				break;
 		}
-		//
+
 		labelGroupControl.get().setEnabled(enabled);
 		textGroupControl.get().setEnabled(enabled);
 	}

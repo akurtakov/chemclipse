@@ -43,11 +43,11 @@ public class DeleteQuantitationsFilter extends AbstractPeakFilter<DeleteQuantita
 	public void filterPeaks(IChromatogramSelection chromatogramSelection, DeleteQuantitationsFilterSettings configuration, ProcessExecutionContext context) throws IllegalArgumentException {
 
 		Collection<IPeak> peaks = getReadOnlyPeaks(chromatogramSelection);
-		//
+
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
-		//
+
 		if(configuration.isDeleteQuantitations()) {
 			SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), peaks.size());
 			for(IPeak peak : peaks) {

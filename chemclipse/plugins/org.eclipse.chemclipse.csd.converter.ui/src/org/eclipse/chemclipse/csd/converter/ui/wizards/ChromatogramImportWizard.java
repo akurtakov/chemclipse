@@ -106,7 +106,7 @@ public class ChromatogramImportWizard extends Wizard implements IImportWizard {
 					 */
 					IProcessingInfo<IChromatogramCSD> processingInfo = ChromatogramConverterCSD.getInstance().convert(inputFile, monitor);
 					IChromatogramCSD chromatogram = processingInfo.getProcessingResult();
-					//
+
 					String directory = importDirectory;
 					if(!importDirectory.endsWith(File.separator)) {
 						directory += File.separator;

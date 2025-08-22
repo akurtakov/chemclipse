@@ -27,7 +27,7 @@ public class ColumnIndicesComparator extends AbstractRecordTableComparator imple
 		if(e1 instanceof IColumnIndexMarker marker1 && e2 instanceof IColumnIndexMarker marker2) {
 			ISeparationColumn column1 = marker1.getSeparationColumn();
 			ISeparationColumn column2 = marker2.getSeparationColumn();
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = Float.compare(marker1.getRetentionIndex(), marker2.getRetentionIndex());
@@ -60,11 +60,11 @@ public class ColumnIndicesComparator extends AbstractRecordTableComparator imple
 					sortOrder = 0;
 			}
 		}
-		//
+
 		if(getDirection() == ASCENDING) {
 			sortOrder = -sortOrder;
 		}
-		//
+
 		return sortOrder;
 	}
 }

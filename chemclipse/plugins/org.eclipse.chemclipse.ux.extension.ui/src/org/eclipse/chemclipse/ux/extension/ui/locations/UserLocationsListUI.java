@@ -26,7 +26,7 @@ public class UserLocationsListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = UserLocationsLabelProvider.TITLES;
 	private static final int[] BOUNDS = UserLocationsLabelProvider.BOUNDS;
-	//
+
 	private ITableLabelProvider labelProvider = new UserLocationsLabelProvider();
 	private ViewerComparator tableComparator = new UserLocationsComparator();
 	private UserLocationsFilter listFilter = new UserLocationsFilter();

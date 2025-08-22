@@ -65,7 +65,7 @@ public class TargetsLabelProvider extends AbstractChemClipseLabelProvider {
 			CONTRIBUTOR, //
 			REFERENCE_ID, //
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			30, //
 			30, //
@@ -106,7 +106,7 @@ public class TargetsLabelProvider extends AbstractChemClipseLabelProvider {
 			if(element instanceof IIdentificationTarget identificationTarget) {
 				IComparisonResult comparisonResult = identificationTarget.getComparisonResult();
 				IRatingSupplier ratingSupplier = comparisonResult.getRatingSupplier();
-				//
+
 				String fileName;
 				switch(ratingSupplier.getStatus()) {
 					case VERY_GOOD:

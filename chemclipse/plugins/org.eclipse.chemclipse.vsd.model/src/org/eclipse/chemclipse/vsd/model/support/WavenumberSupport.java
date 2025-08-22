@@ -32,14 +32,14 @@ public class WavenumberSupport {
 		List<Integer> traces = extractTracesList(scanISD, maxCopyTraces, sortTraces);
 		Iterator<Integer> iterator = traces.iterator();
 		StringBuilder builder = new StringBuilder();
-		//
+
 		while(iterator.hasNext()) {
 			builder.append(iterator.next());
 			if(iterator.hasNext()) {
 				builder.append(" ");
 			}
 		}
-		//
+
 		return builder.toString();
 	}
 
@@ -49,7 +49,7 @@ public class WavenumberSupport {
 		if(scanISD != null) {
 			List<ISignalVSD> scanSignals = new ArrayList<>(scanISD.getProcessedSignals());
 			Collections.sort(scanSignals, (i1, i2) -> Double.compare(i2.getIntensity(), i1.getIntensity()));
-			//
+
 			exitloop:
 			for(ISignalVSD scanSignal : scanSignals) {
 				/*
@@ -59,7 +59,7 @@ public class WavenumberSupport {
 				if(!traces.contains(trace)) {
 					traces.add(trace);
 				}
-				//
+
 				if(traces.size() >= maxCopyTraces) {
 					break exitloop;
 				}
@@ -71,7 +71,7 @@ public class WavenumberSupport {
 		if(sortTraces) {
 			Collections.sort(traces);
 		}
-		//
+
 		return traces;
 	}
 }

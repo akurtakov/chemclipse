@@ -20,13 +20,13 @@ public class ImageReportSettings extends DefaultChromatogramReportSettings imple
 
 	@JsonProperty(value = "Width", defaultValue = "1920")
 	private int width = 1920;
-	//
+
 	@JsonProperty(value = "Height", defaultValue = "1080")
 	private int height = 1080;
-	//
+
 	@JsonProperty(value = "Add Peaks", defaultValue = "false")
 	private boolean peaks = false;
-	//
+
 	@JsonProperty(value = "Add Labelled Scans", defaultValue = "false")
 	private boolean scans = false;
 	///

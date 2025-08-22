@@ -78,7 +78,7 @@ import org.eclipse.swt.widgets.Control;
 public class ChromatogramReferencesUI extends Composite {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramReferencesUI.class);
-	//
+
 	private AtomicReference<Button> buttonPreviousControl = new AtomicReference<>();
 	private AtomicReference<ComboViewer> comboViewerReferencesControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonNextControl = new AtomicReference<>();
@@ -88,7 +88,7 @@ public class ChromatogramReferencesUI extends Composite {
 	private AtomicReference<Button> buttonRemoveAllControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonOpenControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonRefreshControl = new AtomicReference<>();
-	//
+
 	private ComboContainer comboChromatograms = null;
 	private ISelectionChangedListener selectionChangeListener = null;
 	private HashMap<IChromatogram, IChromatogramSelection> referenceSelections = new HashMap<>();
@@ -118,7 +118,7 @@ public class ChromatogramReferencesUI extends Composite {
 		 */
 		selectionChangeListener = comboChromatograms;
 		comboViewerReferences.addSelectionChangedListener(selectionChangeListener);
-		//
+
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 		List<IChromatogramSelection> chromatogramSelections = new ArrayList<>();
 		chromatogramSelections.add(chromatogramSelection);
@@ -126,7 +126,7 @@ public class ChromatogramReferencesUI extends Composite {
 			chromatogramSelections.add(createChromatogramSelection(chromatogramReference));
 		}
 		comboChromatograms.data = chromatogramSelections;
-		//
+
 		comboViewerReferences.setInput(comboChromatograms.data);
 	}
 
@@ -140,7 +140,7 @@ public class ChromatogramReferencesUI extends Composite {
 		if(comboChromatograms != null) {
 			return Collections.unmodifiableList(comboChromatograms.data);
 		}
-		//
+
 		return Collections.emptyList();
 	}
 
@@ -148,13 +148,13 @@ public class ChromatogramReferencesUI extends Composite {
 	public void update() {
 
 		List<IChromatogramSelection> chromatogramMasterAndReferences = new ArrayList<>();
-		//
+
 		if(comboChromatograms != null && comboChromatograms.master != null) {
-			//
+
 			IChromatogramSelection masterSelection = comboChromatograms.master;
 			chromatogramMasterAndReferences.add(masterSelection);
 			List<IChromatogram> referencedChromatograms = masterSelection.getChromatogram().getReferencedChromatograms();
-			//
+
 			for(IChromatogram referencedChromatogram : referencedChromatograms) {
 				IChromatogramSelection referenceSelection = referenceSelections.get(referencedChromatogram);
 				if(referenceSelection == null) {
@@ -166,7 +166,7 @@ public class ChromatogramReferencesUI extends Composite {
 				chromatogramMasterAndReferences.add(referenceSelection);
 			}
 		}
-		//
+
 		if(comboChromatograms != null) {
 			comboChromatograms.setInput(chromatogramMasterAndReferences);
 			comboChromatograms.refreshUI();
@@ -202,13 +202,13 @@ public class ChromatogramReferencesUI extends Composite {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(9, false);
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		createButtonSelectPreviousChromatogram(composite);
 		createComboChromatograms(composite);
 		createButtonSelectNextChromatogram(composite);
@@ -218,7 +218,7 @@ public class ChromatogramReferencesUI extends Composite {
 		createButtonImportReferences(composite);
 		createButtonOpenReference(composite);
 		createButtonRefresh(composite);
-		//
+
 		initialize();
 	}
 
@@ -245,7 +245,7 @@ public class ChromatogramReferencesUI extends Composite {
 				}
 			}
 		});
-		//
+
 		buttonPreviousControl.set(button);
 	}
 
@@ -274,10 +274,10 @@ public class ChromatogramReferencesUI extends Composite {
 				return "N/A";
 			}
 		});
-		//
+
 		combo.setToolTipText("Select a referenced chromatogram.");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		comboViewerReferencesControl.set(comboViewer);
 	}
 
@@ -299,7 +299,7 @@ public class ChromatogramReferencesUI extends Composite {
 				}
 			}
 		});
-		//
+
 		buttonNextControl.set(button);
 	}
 
@@ -328,7 +328,7 @@ public class ChromatogramReferencesUI extends Composite {
 				}
 			}
 		});
-		//
+
 		buttonRemoveControl.set(button);
 	}
 
@@ -359,7 +359,7 @@ public class ChromatogramReferencesUI extends Composite {
 				}
 			}
 		});
-		//
+
 		buttonRemoveAllControl.set(button);
 	}
 
@@ -397,7 +397,7 @@ public class ChromatogramReferencesUI extends Composite {
 				}
 			}
 		});
-		//
+
 		buttonAddControl.set(button);
 	}
 
@@ -423,7 +423,7 @@ public class ChromatogramReferencesUI extends Composite {
 						if(!chromatogramFiles.isEmpty()) {
 							IChromatogramSelection masterSelection = comboChromatograms.master;
 							if(masterSelection != null) {
-								//
+
 								List<File> files = new ArrayList<>(chromatogramFiles);
 								ProgressMonitorDialog progressMonitorDialog = new ProgressMonitorDialog(e.display.getActiveShell());
 								ChromatogramImportRunnable runnable = new ChromatogramImportRunnable(files, dataType);
@@ -447,7 +447,7 @@ public class ChromatogramReferencesUI extends Composite {
 				}
 			}
 		});
-		//
+
 		buttonImportControl.set(button);
 	}
 
@@ -484,7 +484,7 @@ public class ChromatogramReferencesUI extends Composite {
 					int index = comboChromatograms.currentIndex();
 					IChromatogramSelection chromatogramSelection = comboChromatograms.data.get(index);
 					IChromatogram chromatogram = chromatogramSelection.getChromatogram();
-					//
+
 					DataType dataType = null;
 					if(chromatogram instanceof IChromatogramMSD) {
 						dataType = DataType.MSD;
@@ -495,7 +495,7 @@ public class ChromatogramReferencesUI extends Composite {
 					} else if(chromatogram instanceof IChromatogramVSD) {
 						dataType = DataType.VSD;
 					}
-					//
+
 					if(dataType != null) {
 						ISupplierEditorSupport supplierEditorSupport = new SupplierEditorSupport(dataType, () -> Activator.getDefault().getEclipseContext());
 						e.display.asyncExec(() -> supplierEditorSupport.openEditor(chromatogram));
@@ -503,7 +503,7 @@ public class ChromatogramReferencesUI extends Composite {
 				}
 			}
 		});
-		//
+
 		buttonOpenControl.set(button);
 	}
 
@@ -521,7 +521,7 @@ public class ChromatogramReferencesUI extends Composite {
 				update();
 			}
 		});
-		//
+
 		buttonRefreshControl.set(button);
 	}
 
@@ -532,7 +532,7 @@ public class ChromatogramReferencesUI extends Composite {
 				if(comboChromatograms != null) {
 					int size = comboChromatograms.data.size();
 					int selectionIndex = comboChromatograms.currentIndex();
-					//
+
 					buttonPreviousControl.get().setEnabled(selectionIndex > 0);
 					buttonNextControl.get().setEnabled(selectionIndex < size - 1);
 					buttonRemoveControl.get().setEnabled(selectionIndex > 0); // 0 is the master can't be removed
@@ -552,7 +552,7 @@ public class ChromatogramReferencesUI extends Composite {
 
 		private final AtomicReference<ComboViewer> viewerReference = new AtomicReference<>();
 		private final Consumer<IChromatogramSelection> listener;
-		//
+
 		private IChromatogramSelection master;
 		private IStructuredSelection selection = StructuredSelection.EMPTY;
 		private List<IChromatogramSelection> data = Collections.emptyList();

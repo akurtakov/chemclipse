@@ -31,7 +31,7 @@ public class TraceRangeLabelProvider extends AbstractChemClipseLabelProvider {
 	public static final String NAME = "Name";
 	public static final String TRACES = "Traces";
 	public static final String SECOND_DIMENSION_HINT = "Second Dimension Hint";
-	//
+
 	public static final String[] TITLES = { //
 			RETENTION_TIME_COLUMN1_START, //
 			RETENTION_TIME_COLUMN1_STOP, //

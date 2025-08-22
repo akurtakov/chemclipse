@@ -52,7 +52,7 @@ public class ScanRasterizer {
 					isInfrared = signal instanceof SignalInfrared;
 					wavenumberOriginal.put((float)signal.getWavenumber(), (float)signal.getIntensity());
 				}
-				//
+
 				Map<Integer, Float> wavenumbersAdjusted = RasterizeCalculator.apply(wavenumberOriginal, steps);
 				if(wavenumbersAdjusted != null) {
 					/*
@@ -60,7 +60,7 @@ public class ScanRasterizer {
 					 */
 					List<Integer> wavenumbers = new ArrayList<>(wavenumbersAdjusted.keySet());
 					Collections.sort(wavenumbers);
-					//
+
 					scanVSD.getProcessedSignals().clear();
 					for(int wavenumber : wavenumbers) {
 						scanVSD.getProcessedSignals().add(getSignalVSD(isInfrared, wavenumber, wavenumbersAdjusted.get(wavenumber)));

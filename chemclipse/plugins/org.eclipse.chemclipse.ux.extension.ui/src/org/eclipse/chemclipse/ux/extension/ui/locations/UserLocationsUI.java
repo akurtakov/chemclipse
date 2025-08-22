@@ -52,23 +52,23 @@ import org.eclipse.swt.widgets.Text;
 public class UserLocationsUI extends Composite {
 
 	private static final String TOOLTIP_TEXT = "Enter/modify the user locations.";
-	//
+
 	public static final String IMPORT_TITLE = "Import " + UserLocations.DESCRIPTION;
 	public static final String EXPORT_TITLE = "Export " + UserLocations.DESCRIPTION;
 	public static final String MESSAGE_IMPORT_SUCCESSFUL = "User locations have been imported successfully.";
 	public static final String MESSAGE_EXPORT_SUCCESSFUL = "User locations have been exported successfully.";
 	public static final String MESSAGE_EXPORT_FAILED = "Failed to export the user locations.";
-	//
+
 	private ComboViewer comboViewer;
 	private Text textPath;
 	private Button buttonAdd;
 	private Button buttonDelete;
 	private Button buttonImport;
 	private Button buttonExport;
-	//
+
 	private UserLocations userLocations = null;
 	private UserLocation userLocation = null;
-	//
+
 	private IUpdateListener updateListener = null;
 
 	public UserLocationsUI(Composite parent, int style) {
@@ -129,7 +129,7 @@ public class UserLocationsUI extends Composite {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		comboViewer = createComboViewer(this);
 		textPath = createText(this);
 		buttonAdd = createButtonAdd(this);
@@ -174,7 +174,7 @@ public class UserLocationsUI extends Composite {
 				}
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -184,10 +184,10 @@ public class UserLocationsUI extends Composite {
 		text.setText("");
 		text.setToolTipText(TOOLTIP_TEXT);
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		PathValidator pathValidator = new PathValidator(true);
 		ControlDecoration controlDecoration = new ControlDecoration(text, SWT.LEFT | SWT.TOP);
-		//
+
 		text.addModifyListener(event -> {
 
 			if(userLocation != null) {
@@ -197,7 +197,7 @@ public class UserLocationsUI extends Composite {
 				}
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -338,12 +338,12 @@ public class UserLocationsUI extends Composite {
 			if(comboViewer.getStructuredSelection().getFirstElement() instanceof UserLocation ul) {
 				userLocation = ul;
 			}
-			//
+
 			comboViewer.setInput(userLocationsSorted);
 			if(userLocation != null && userLocationsSorted.contains(userLocation)) {
 				comboViewer.setSelection(new StructuredSelection(userLocation));
 			}
-			//
+
 			buttonAdd.setEnabled(true);
 			buttonDelete.setEnabled(!userLocationsSorted.isEmpty());
 			buttonImport.setEnabled(true);
@@ -358,7 +358,7 @@ public class UserLocationsUI extends Composite {
 			buttonExport.setEnabled(false);
 			comboViewer.setInput(null);
 		}
-		//
+
 		updateUserLocation();
 	}
 

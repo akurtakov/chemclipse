@@ -32,7 +32,7 @@ import org.eclipse.osgi.util.NLS;
 public class ChromatogramScanExportConverter extends AbstractChromatogramExportConverter implements IChromatogramExportConverter {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramScanExportConverter.class);
-	//
+
 	public static final String DESCRIPTION = "NIST Chromatogram Scans";
 	public static final String FILE_EXTENSION = ".msl";
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;

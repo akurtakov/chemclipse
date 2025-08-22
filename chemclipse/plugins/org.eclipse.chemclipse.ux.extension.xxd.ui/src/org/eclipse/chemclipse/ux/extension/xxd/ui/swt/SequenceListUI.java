@@ -27,7 +27,7 @@ public class SequenceListUI extends ExtendedTableViewer {
 
 	private static final String[] LABELS = SequenceListLabelProvider.TITLES;
 	private static final int[] BOUNDS = SequenceListLabelProvider.BOUNDS;
-	//
+
 	private SequenceListLabelProvider labelProvider = new SequenceListLabelProvider();
 	private ListContentProvider contentProvider = new ListContentProvider();
 	private SequenceListTableComparator comparator = new SequenceListTableComparator();

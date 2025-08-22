@@ -28,7 +28,7 @@ public class TargetTemplateListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = TargetTemplateLabelProvider.TITLES;
 	private static final int[] BOUNDS = TargetTemplateLabelProvider.BOUNDS;
-	//
+
 	private TargetTemplateLabelProvider labelProvider = new TargetTemplateLabelProvider();
 	private TargetTemplateComparator tableComparator = new TargetTemplateComparator();
 	private TargetTemplateFilter listFilter = new TargetTemplateFilter();

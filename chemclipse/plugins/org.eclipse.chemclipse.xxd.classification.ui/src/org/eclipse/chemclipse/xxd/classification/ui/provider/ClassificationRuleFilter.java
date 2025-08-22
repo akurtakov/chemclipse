@@ -33,32 +33,32 @@ public class ClassificationRuleFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof ClassificationRule rule) {
 			String searchExpression = rule.getSearchExpression();
 			String classification = rule.getClassification();
 			String reference = rule.getReference().label();
-			//
+
 			if(!caseSensitive) {
 				searchText = searchText.toLowerCase();
 				searchExpression = searchExpression.toLowerCase();
 				classification = classification.toLowerCase();
 				reference = reference.toLowerCase();
 			}
-			//
+
 			if(searchExpression.contains(searchText)) {
 				return true;
 			}
-			//
+
 			if(classification.contains(searchText)) {
 				return true;
 			}
-			//
+
 			if(reference.contains(searchText)) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

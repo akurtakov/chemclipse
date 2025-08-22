@@ -51,10 +51,10 @@ public class InternalStandardDialog extends Dialog {
 
 		Composite composite = (Composite)super.createDialogArea(parent);
 		composite.setLayout(new GridLayout(1, true));
-		//
+
 		ExtendedInternalStandardsUI extendedInternalStandardsUI = createExtendedInternalStandardsUI(composite);
 		extendedInternalStandardsUI.update(peak);
-		//
+
 		return composite;
 	}
 
@@ -62,7 +62,7 @@ public class InternalStandardDialog extends Dialog {
 
 		ExtendedInternalStandardsUI extendedInternalStandardsUI = new ExtendedInternalStandardsUI(parent, SWT.NONE);
 		extendedInternalStandardsUI.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		return extendedInternalStandardsUI;
 	}
 }

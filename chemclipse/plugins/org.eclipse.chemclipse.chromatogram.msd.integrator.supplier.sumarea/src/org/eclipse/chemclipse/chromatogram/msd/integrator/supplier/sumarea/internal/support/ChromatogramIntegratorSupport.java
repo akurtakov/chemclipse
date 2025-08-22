@@ -91,7 +91,7 @@ public class ChromatogramIntegratorSupport {
 			 * Set the integration entries.
 			 */
 			chromatogram.setIntegratedArea(chromatogramIntegrationEntries, backgroundIntegrationEntries, INTEGRATOR_DESCRIPTION);
-			//
+
 			return chromatogramIntegrationResults;
 		} catch(ChromatogramIsNullException e) {
 			logger.warn(e);

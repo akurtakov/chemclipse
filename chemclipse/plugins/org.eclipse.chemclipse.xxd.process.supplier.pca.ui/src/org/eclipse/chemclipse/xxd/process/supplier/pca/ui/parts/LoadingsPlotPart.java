@@ -54,7 +54,7 @@ public class LoadingsPlotPart extends AbstractPartPCA<ExtendedLoadingsPlot> {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 }

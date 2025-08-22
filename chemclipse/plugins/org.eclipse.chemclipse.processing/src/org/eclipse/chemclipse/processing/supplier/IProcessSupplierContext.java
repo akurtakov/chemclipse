@@ -44,7 +44,7 @@ public interface IProcessSupplierContext {
 				supplier.add(processSupplier);
 			}
 		});
-		//
+
 		return supplier;
 	}
 
@@ -53,7 +53,7 @@ public interface IProcessSupplierContext {
 		if(dataTypes == null) {
 			return test -> true;
 		}
-		//
+
 		return new Predicate<IProcessSupplier<?>>() {
 
 			@Override
@@ -75,7 +75,7 @@ public interface IProcessSupplierContext {
 			if(supplier == null) {
 				return false;
 			}
-			//
+
 			Set<DataCategory> supportedDataTypes = supplier.getSupportedDataTypes();
 			for(DataCategory dataCategory : dataCategories) {
 				if(supportedDataTypes.contains(dataCategory)) {

@@ -55,14 +55,14 @@ public class CalibrationChart extends LineChart {
 	private void initialize() {
 
 		IChartSettings chartSettings = getChartSettings();
-		//
+
 		chartSettings.setOrientation(SWT.HORIZONTAL);
 		chartSettings.setHorizontalSliderVisible(false);
 		chartSettings.setVerticalSliderVisible(false);
 		chartSettings.getRangeRestriction().setZeroX(true);
 		chartSettings.getRangeRestriction().setZeroY(true);
 		chartSettings.setCreateMenu(true);
-		//
+
 		modifyAxes(true);
 	}
 
@@ -71,7 +71,7 @@ public class CalibrationChart extends LineChart {
 		modifyXAxisConcentration();
 		modifyYAxisResponse();
 		modifyYAxisRelativeResponse();
-		//
+
 		if(applySettings) {
 			IChartSettings chartSettings = getChartSettings();
 			applySettings(chartSettings);
@@ -83,14 +83,14 @@ public class CalibrationChart extends LineChart {
 		IChartSettings chartSettings = getChartSettings();
 		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
 		primaryAxisSettingsX.setTitle(TITLE_X_AXIS_CONCENTRATION);
-		//
+
 		String positionNode = PreferenceSupplier.P_POSITION_X_AXIS_CONCENTRATION_CALIBRATION;
 		String pattern = "0.0##";
 		String colorNode = PreferenceSupplier.P_COLOR_X_AXIS_CONCENTRATION_CALIBRATION;
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_X_AXIS_CONCENTRATION_CALIBRATION;
 		String gridColorNode = PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_CONCENTRATION_CALIBRATION;
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_CONCENTRATION_CALIBRATION);
-		//
+
 		ChartSupport.setAxisSettings(primaryAxisSettingsX, positionNode, pattern, colorNode, gridLineStyleNode, gridColorNode);
 		primaryAxisSettingsX.setVisible(isShowAxis);
 	}
@@ -100,14 +100,14 @@ public class CalibrationChart extends LineChart {
 		IChartSettings chartSettings = getChartSettings();
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle(TITLE_Y_AXIS_RESPONSE);
-		//
+
 		String positionNode = PreferenceSupplier.P_POSITION_Y_AXIS_RESPONSE_CALIBRATION;
 		String pattern = "0.0#E0";
 		String colorNode = PreferenceSupplier.P_COLOR_Y_AXIS_RESPONSE_CALIBRATION;
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_Y_AXIS_RESPONSE_CALIBRATION;
 		String gridColorNode = PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_RESPONSE_CALIBRATION;
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_RESPONSE_CALIBRATION);
-		//
+
 		ChartSupport.setAxisSettings(primaryAxisSettingsY, positionNode, pattern, colorNode, gridLineStyleNode, gridColorNode);
 		primaryAxisSettingsY.setVisible(isShowAxis);
 	}
@@ -116,14 +116,14 @@ public class CalibrationChart extends LineChart {
 
 		IChartSettings chartSettings = getChartSettings();
 		ISecondaryAxisSettings axisSettings = ChartSupport.getSecondaryAxisSettingsY(TITLE_Y_AXIS_RELATIVE_RESPONSE, chartSettings);
-		//
+
 		String positionNode = PreferenceSupplier.P_POSITION_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION;
 		String pattern = "0.00";
 		String colorNode = PreferenceSupplier.P_COLOR_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION;
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION;
 		String gridColorNode = PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION;
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION);
-		//
+
 		if(isShowAxis) {
 			if(axisSettings == null) {
 				ISecondaryAxisSettings secondaryAxisSettingsY = new SecondaryAxisSettings(TITLE_Y_AXIS_RELATIVE_RESPONSE, new PercentageConverter(SWT.VERTICAL, true));

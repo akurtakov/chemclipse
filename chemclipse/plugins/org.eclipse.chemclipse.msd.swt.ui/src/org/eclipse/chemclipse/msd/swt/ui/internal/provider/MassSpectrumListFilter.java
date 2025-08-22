@@ -55,13 +55,13 @@ public class MassSpectrumListFilter extends ViewerFilter {
 		 * ILibraryMassSpectrum
 		 */
 		if(element instanceof ILibraryMassSpectrum libraryMassSpectrum) {
-			//
+
 			ILibraryInformation libraryInformation = libraryMassSpectrum.getLibraryInformation();
 			if(libraryInformationSupport.containsSearchText(libraryInformation, searchText, caseSensitive)) {
 				return true;
 			}
 		} else if(element instanceof IScanMSD massSpectrum) {
-			//
+
 			for(IIdentificationTarget massSpectrumTarget : massSpectrum.getTargets()) {
 				IIdentificationTarget identificationEntry = (IIdentificationTarget)massSpectrumTarget;
 				ILibraryInformation libraryInformation = identificationEntry.getLibraryInformation();

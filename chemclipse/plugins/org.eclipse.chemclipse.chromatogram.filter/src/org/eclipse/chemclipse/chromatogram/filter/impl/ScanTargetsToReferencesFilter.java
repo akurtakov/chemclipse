@@ -40,7 +40,7 @@ public class ScanTargetsToReferencesFilter extends AbstractTransferFilter {
 				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, Messages.targetsTransferredSuccessfully));
 			}
 		}
-		//
+
 		return processingInfo;
 	}
 

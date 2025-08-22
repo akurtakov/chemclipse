@@ -58,15 +58,15 @@ public class SettingsWizard extends Wizard {
 
 		IProcessSupplier<T> processorSupplier = preferences.getSupplier();
 		SettingsWizard settingsWizard = new SettingsWizard(ExtensionMessages.editProcessorOptions);
-		//
+
 		SettingsPreferencesPage<T> settingsPreferencePage = new SettingsPreferencesPage<>(preferences, showProfileToolbar);
 		settingsPreferencePage.setTitle(MessageFormat.format(ExtensionMessages.selectOptionsForProcessorName, processorSupplier.getName()));
 		settingsPreferencePage.setMessage(processorSupplier.getDescription());
 		settingsWizard.addPage(settingsPreferencePage);
-		//
+
 		WizardDialog wizardDialog = new WizardDialog(shell, settingsWizard);
 		wizardDialog.setMinimumPageSize(SettingsWizard.DEFAULT_WIDTH, SettingsWizard.DEFAULT_HEIGHT);
-		//
+
 		if(wizardDialog.open() == Window.OK) {
 			preferences.setAskForSettings(!settingsPreferencePage.getIsDontAskAgainEdited());
 			preferences.setUseSystemDefaults(false);
@@ -109,7 +109,7 @@ public class SettingsWizard extends Wizard {
 
 			}
 		};
-		//
+
 		wizardDialog.setMinimumPageSize(SettingsWizard.DEFAULT_WIDTH, SettingsWizard.DEFAULT_HEIGHT);
 		wizardDialog.open();
 	}

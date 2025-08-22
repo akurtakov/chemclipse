@@ -43,14 +43,14 @@ import org.eclipse.ui.PlatformUI;
 public interface IExtendedPartUI {
 
 	Logger logger = Logger.getLogger(IExtendedPartUI.class);
-	//
+
 	String PREFIX_SHOW = "Show";
 	String PREFIX_HIDE = "Hide";
 	String PREFIX_ENABLE = "Enable";
 	String PREFIX_DISABLE = "Disable";
-	//
+
 	String TITLE_SETTINGS = "Settings";
-	//
+
 	String TOOLTIP_TABLE = "the table content edit modus.";
 	String TOOLTIP_INFO = "additional information.";
 	String TOOLTIP_RESULTS = "results information.";
@@ -61,7 +61,7 @@ public interface IExtendedPartUI {
 	String TOOLTIP_LEGEND_MARKER = "the chart legend marker.";
 	String TOOLTIP_CHART_GRID = "the chart grid.";
 	String TOOLTIP_RETENTION_INDICES = "displaying retention index marker";
-	//
+
 	String IMAGE_INFO = IApplicationImage.IMAGE_INFO;
 	String IMAGE_RESULTS = IApplicationImage.IMAGE_RESULTS;
 	String IMAGE_EDIT = IApplicationImage.IMAGE_EDIT;
@@ -87,7 +87,7 @@ public interface IExtendedPartUI {
 		button.setText("");
 		button.setToolTipText(tooltip);
 		button.setImage(ApplicationImageFactory.getInstance().getImage(image, IApplicationImageProvider.SIZE_16x16));
-		//
+
 		return button;
 	}
 
@@ -115,7 +115,7 @@ public interface IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -185,11 +185,11 @@ public interface IExtendedPartUI {
 					ExtendedTableViewer tableViewer = viewer.get();
 					tableViewer.setEditEnabled(edit);
 				}
-				//
+
 				setButtonImage(button, image, PREFIX_ENABLE, PREFIX_DISABLE, TOOLTIP_TABLE, edit);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -223,7 +223,7 @@ public interface IExtendedPartUI {
 				setButtonImage(button, image, PREFIX_ENABLE, PREFIX_DISABLE, TOOLTIP_CHART_GRID, isGridDisplayed);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -244,7 +244,7 @@ public interface IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -266,7 +266,7 @@ public interface IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -299,7 +299,7 @@ public interface IExtendedPartUI {
 				showPreferencesDialog(event, supplierPreferencePages.get(), settingsHandler, sortByTitle);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -312,7 +312,7 @@ public interface IExtendedPartUI {
 		button.setText("");
 		button.setToolTipText("Open the Settings");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CONFIGURE, IApplicationImage.SIZE_16x16));
-		//
+
 		return button;
 	}
 
@@ -342,7 +342,7 @@ public interface IExtendedPartUI {
 			if(sortByTitle) {
 				Collections.sort(pages, (p1, p2) -> p1.getTitle().compareTo(p2.getTitle()));
 			}
-			//
+
 			int i = 1;
 			for(IPreferencePage preferencePage : pages) {
 				preferenceManager.addToRoot(new PreferenceNode(Integer.toString(i++), preferencePage));
@@ -353,7 +353,7 @@ public interface IExtendedPartUI {
 			PreferenceDialog preferenceDialog = new PreferenceDialog(event.display.getActiveShell(), preferenceManager);
 			preferenceDialog.create();
 			preferenceDialog.setMessage(TITLE_SETTINGS);
-			//
+
 			if(preferenceDialog.open() == Window.OK) {
 				try {
 					if(settingsHandler != null) {
@@ -398,7 +398,7 @@ public interface IExtendedPartUI {
 				tableViewer.setEditEnabled(edit);
 			}
 		}
-		//
+
 		setButtonImage(button, image, PREFIX_ENABLE, PREFIX_DISABLE, TOOLTIP_TABLE, edit);
 	}
 

@@ -51,12 +51,12 @@ public class AutoPhaseCorrectionProcessor extends AbstractSpectrumSignalFilter<A
 
 	private static final long serialVersionUID = 5088365386062088062L;
 	private static final String NAME = "Auto Phase Correction";
-	//
+
 	private static final int DEFAULT_MAXIMUM_EVALUATIONS = 2000;
 	private static int maximumEvaluations = DEFAULT_MAXIMUM_EVALUATIONS;
 	private static final int DEFAULT_MAXIMUM_ITERATIONS = 2000;
 	private static int maximumIterations = DEFAULT_MAXIMUM_ITERATIONS;
-	//
+
 	static AutoPhaseCorrectionProcessor aPCP = new AutoPhaseCorrectionProcessor();
 
 	public static int getMaxEvaluations() {
@@ -148,14 +148,14 @@ public class AutoPhaseCorrectionProcessor extends AbstractSpectrumSignalFilter<A
 	private static void perform(SpectrumData spectrumData, final AutoPhaseCorrectionSettings settings) {
 
 		Complex[] fourierTransformedSignals = spectrumData.signals;
-		//
+
 		/*
 		 * ACME algorithm - Chen et al., J Magn Res 2002, 158 (1), 164–168.
 		 */
 		// parts of optimizer
 		CalculateACMEEntropy calculateACMEEntropyFcn = new CalculateACMEEntropy(fourierTransformedSignals, settings);
 		SimplexOptimizer nestedSimplexOptimizer = new SimplexOptimizer(1e-10, 1e-30);
-		//
+
 		PhaseCorrectionValue<Double> initialGuessValues;
 		if(settings.isCorrectOnlyZerothPhase()) {
 			// optimize only PHC0 value
@@ -168,10 +168,10 @@ public class AutoPhaseCorrectionProcessor extends AbstractSpectrumSignalFilter<A
 		// Steps along the canonical axes representing box edges
 		// NelderMeadSimplex nelderMeadSimplex = new NelderMeadSimplex(new double[] { 1,
 		// 5 });
-		//
+
 		// generator for MultiStartMultivariateOptimizer
 		RandomVectorGenerator vectorGenerator = createRandomVectorGenerator(initialGuessValues.getLengthOfValues());
-		//
+
 		// optimizer
 		int numberOfRestarts = settings.getNumberOfOptimizationCycles(); // if 1 optimizer behaves like a MultivariateOptimizer
 		MultiStartMultivariateOptimizer multiStartPhaseOptimizer = //
@@ -245,23 +245,23 @@ public class AutoPhaseCorrectionProcessor extends AbstractSpectrumSignalFilter<A
 			for(int i = 0; i <= cutPartOfSpectrum; i++) {
 				nmrDataReal[i] = 0;
 			}
-			//
+
 			int forInitialization = nmrDataReal.length - cutPartOfSpectrum + 1;
 			for(int i = forInitialization; i < nmrDataReal.length; i++) {
 				nmrDataReal[i] = 0;
 			}
-			//
+
 			// calculation of first derivatives
 			double[] derivativeArrayA = new double[dataSize - 2];
 			System.arraycopy(nmrDataReal, 2, derivativeArrayA, 0, derivativeArrayA.length);
 			double[] derivativeArrayB = new double[dataSize - 2];
 			System.arraycopy(nmrDataReal, 0, derivativeArrayB, 0, derivativeArrayA.length - 2);
 			double[] derivativeArrayC = new double[dataSize - 2];
-			//
+
 			for(int i = 0; i < dataSize - 2; i++) {
 				derivativeArrayC[i] = Math.abs((derivativeArrayA[i] - derivativeArrayB[i]) / (stepsize * 2));
 			}
-			//
+
 			double[] penaltyArray = new double[dataSize - 2];
 			double derivativeArrayCSum = Arrays.stream(derivativeArrayC).sum();
 			for(int i = 0; i < dataSize - 2; i++) {
@@ -273,7 +273,7 @@ public class AutoPhaseCorrectionProcessor extends AbstractSpectrumSignalFilter<A
 					penaltyArray[p] = 1.0;
 				}
 			}
-			//
+
 			double[] probabilityDistribution = new double[dataSize - 2];
 			for(int i = 0; i < dataSize - 2; i++) {
 				probabilityDistribution[i] = -penaltyArray[i] * Math.log(penaltyArray[i]);
@@ -286,7 +286,7 @@ public class AutoPhaseCorrectionProcessor extends AbstractSpectrumSignalFilter<A
 				nmrDataRealAbsolute[i] = nmrDataReal[i] - Math.abs(nmrDataReal[i]);
 			}
 			double nmrDataRealAbsoluteSum = Arrays.stream(nmrDataRealAbsolute).sum();
-			//
+
 			if(nmrDataRealAbsoluteSum < 0) {
 				double[] tempSquare = new double[nmrDataReal.length];
 				for(int i = 0; i < nmrDataReal.length; i++) {
@@ -329,7 +329,7 @@ public class AutoPhaseCorrectionProcessor extends AbstractSpectrumSignalFilter<A
 			zerothPhase = settings.getZerothOrderValue() * Math.PI / 180;
 			firstPhase = settings.getFirstOrderValue() * Math.PI / 180;
 		}
-		//
+
 		Complex complexFactor = new Complex(0.0, 1.0); // sqrt(-1)
 		double[] phasingArray = UtilityFunctions.generateLinearlySpacedVector(0, dataSize, dataSize);
 		Complex[] phaseCorrection = new Complex[dataSize];

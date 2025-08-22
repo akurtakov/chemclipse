@@ -84,7 +84,7 @@ public abstract class AbstractProcessSettings implements IProcessSettings {
 		fileName = replaceVariable(fileName, VARIABLE_CHROMATOGRAM_DATANAME, chromatogram.getDataName(), "DataName");
 		fileName = replaceVariable(fileName, VARIABLE_CHROMATOGRAM_SAMPLEGROUP, chromatogram.getSampleGroup(), "SampleGroup");
 		fileName = replaceVariable(fileName, VARIABLE_CHROMATOGRAM_SHORTINFO, chromatogram.getShortInfo(), "ShortInfo");
-		//
+
 		return fileName;
 	}
 

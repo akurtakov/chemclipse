@@ -26,7 +26,7 @@ public class TargetTemplateLabelProvider extends AbstractChemClipseLabelProvider
 	public static final String COMMENTS = "Comments";
 	public static final String CONTRIBUTOR = "Contributor";
 	public static final String REFERENCE_ID = "Reference ID";
-	//
+
 	public static final String[] TITLES = { //
 			NAME, //
 			CAS, //

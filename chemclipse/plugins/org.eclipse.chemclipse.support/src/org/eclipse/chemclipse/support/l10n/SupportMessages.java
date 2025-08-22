@@ -19,7 +19,7 @@ public class SupportMessages extends NLS {
 
 	public static String taskPrepareProject;
 	public static String taskOpenEditor;
-	//
+
 	public static String processingError;
 	public static String processingProcessInterrupted;
 	public static String processingSomethingWrong;
@@ -33,7 +33,7 @@ public class SupportMessages extends NLS {
 	public static String processingSelectFileName;
 	public static String processingFileExists;
 	public static String processingSelectValidFolderFile;
-	//
+
 	public static String labelSelectCreateProject;
 	public static String labelSelectCreateProjectInfo;
 	public static String labelSelectExistingProject;
@@ -43,7 +43,7 @@ public class SupportMessages extends NLS {
 	public static String labelFileCreationProjectPath;
 	public static String labelSelectFileName;
 	public static String labelSelectProject;
-	//
+
 	public static String labelInstrumentName;
 	public static String labelAddInstrument;
 	public static String labelDeleteInstrument;
@@ -51,7 +51,7 @@ public class SupportMessages extends NLS {
 	public static String labelQuestionDeleteInstruments;
 	public static String labelTypeInInstrument;
 	public static String labelInstrumentExists;
-	//
+
 	public static String labelDilution;
 	public static String labelAddDilution;
 	public static String labelDeleteDilution;
@@ -59,19 +59,19 @@ public class SupportMessages extends NLS {
 	public static String labelQuestionDeleteDilutions;
 	public static String labelTypeInDilution;
 	public static String labelDilutionExists;
-	//
+
 	public static String labelCopyLinesInfo;
 	public static String labelCopySelectionClipboard;
-	//
+
 	public static String columnDate;
 	public static String columnDescription;
 	public static String columnEditor;
-	//
+
 	public static String labelNoDescription;
 	public static String labelNotAvailable;
 	public static String labelSelectEntries;
 	public static String labelSupplierAndExtensions;
-	//
+
 	static {
 		NLS.initializeMessages("org.eclipse.chemclipse.support.l10n.messages", SupportMessages.class); //$NON-NLS-1$
 	}

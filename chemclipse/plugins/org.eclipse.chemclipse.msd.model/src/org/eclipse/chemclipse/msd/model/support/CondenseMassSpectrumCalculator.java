@@ -32,7 +32,7 @@ public class CondenseMassSpectrumCalculator {
 
 		double mzMapped = condenseNominal ? AbstractIon.getIon(mz) : mz;
 		Double intensityMapped = mappedTraces.get(mzMapped);
-		//
+
 		if(intensityMapped == null) {
 			mappedTraces.put(mzMapped, intensity);
 		} else {

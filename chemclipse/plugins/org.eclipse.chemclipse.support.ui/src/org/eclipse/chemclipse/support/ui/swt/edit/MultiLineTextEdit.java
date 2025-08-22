@@ -33,7 +33,7 @@ import org.eclipse.swt.widgets.Text;
 public class MultiLineTextEdit extends EditValue<List<String>> {
 
 	private static final long serialVersionUID = -855951035397214724L;
-	//
+
 	private final Text text;
 	private final List<String> initialValues = new ArrayList<>();
 	private List<String> editedValues = new CopyOnWriteArrayList<>();

@@ -37,7 +37,7 @@ public class SavitzkyGolayProcessor {
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 			TotalScanSignalExtractor signalExtractor = new TotalScanSignalExtractor(chromatogram);
 			ITotalScanSignals totalScanSignals = signalExtractor.getTotalScanSignals(chromatogramSelection, validatePositive);
-			//
+
 			double[] sgTic = smooth(totalScanSignals, filterSettings, monitor);
 			int i = 0;
 			for(ITotalScanSignal signal : totalScanSignals.getTotalScanSignals()) {
@@ -48,7 +48,7 @@ public class SavitzkyGolayProcessor {
 			 */
 			int startScan = totalScanSignals.getStartScan();
 			int stopScan = totalScanSignals.getStopScan();
-			//
+
 			for(int scan = startScan; scan <= stopScan; scan++) {
 				monitor.subTask("Set Savitzky-Golay TIC: " + scan);
 				IScan scanRecord = chromatogram.getScan(scan);
@@ -62,7 +62,7 @@ public class SavitzkyGolayProcessor {
 				}
 				scanRecord.adjustTotalSignal(intensity);
 			}
-			//
+
 			chromatogram.setDirty(true);
 			chromatogramFilterResult = new ChromatogramFilterResult(ResultStatus.OK, MessageFormat.format("Smoothed {0} scans.", totalScanSignals.getTotalScanSignals().size()));
 		} catch(ChromatogramIsNullException e) {
@@ -96,7 +96,7 @@ public class SavitzkyGolayProcessor {
 		for(ITotalScanSignal signal : totalScanSignals.getTotalScanSignals()) {
 			ticValues[column++] = signal.getTotalSignal();
 		}
-		//
+
 		int derivative = filterSettings.getDerivative();
 		int order = filterSettings.getOrder();
 		int width = filterSettings.getWidth();

@@ -50,7 +50,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		subtractFilterSettingsChromatogram.setSubtractMassSpectrum(PreferenceSupplierMSD.getSessionSubtractMassSpectrumAsString());
 		subtractFilterSettingsChromatogram.setUseNominalMasses(PreferenceSupplierMSD.isUseNominalMZ());
 		subtractFilterSettingsChromatogram.setUseNormalize(PreferenceSupplierMSD.isUseNormalizedScan());
-		//
+
 		return subtractFilterSettingsChromatogram;
 	}
 
@@ -60,7 +60,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		peakFilterSettings.setSubtractMassSpectrum(PreferenceSupplierMSD.getSessionSubtractMassSpectrumAsString());
 		peakFilterSettings.setUseNominalMasses(PreferenceSupplierMSD.isUseNominalMZ());
 		peakFilterSettings.setUseNormalize(PreferenceSupplierMSD.isUseNormalizedScan());
-		//
+
 		return peakFilterSettings;
 	}
 
@@ -70,7 +70,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		massSpectrumFilterSettings.setSubtractMassSpectrum(PreferenceSupplierMSD.getSessionSubtractMassSpectrumAsString());
 		massSpectrumFilterSettings.setUseNominalMasses(PreferenceSupplierMSD.isUseNominalMZ());
 		massSpectrumFilterSettings.setUseNormalize(PreferenceSupplierMSD.isUseNormalizedScan());
-		//
+
 		return massSpectrumFilterSettings;
 	}
 }

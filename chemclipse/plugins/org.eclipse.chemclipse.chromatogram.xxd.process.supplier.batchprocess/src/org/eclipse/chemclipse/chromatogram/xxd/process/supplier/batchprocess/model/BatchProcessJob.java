@@ -25,13 +25,13 @@ public class BatchProcessJob {
 
 	public static final DataType[] DATA_TYPES = new DataType[]{DataType.CSD, DataType.MSD, DataType.WSD, DataType.VSD};
 	public static final DataType DATA_TYPE_DEFAULT = DataType.MSD;
-	//
+
 	public static final String DESCRIPTION = "Batch Job";
 	public static final String FILE_EXTENSION = ".obj";
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-	//
+
 	private DataType dataType = DATA_TYPE_DEFAULT;
 	private List<IChromatogramInputEntry> chromatogramInputEntries = new ArrayList<>();
 	private IProcessMethod processMethod;

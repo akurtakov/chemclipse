@@ -29,7 +29,7 @@ public class WellMappingLabelProvider extends AbstractChemClipseLabelProvider {
 			"positive", //
 			"negative", //
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			150, //
 			200, //

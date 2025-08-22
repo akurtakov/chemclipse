@@ -24,7 +24,7 @@ public class TargetTemplateComparator extends AbstractRecordTableComparator impl
 
 		int sortOrder = 0;
 		if(e1 instanceof TargetTemplate targetTemplate1 && e2 instanceof TargetTemplate targetTemplate2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = targetTemplate2.getName().compareTo(targetTemplate1.getName());

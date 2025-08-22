@@ -40,9 +40,9 @@ public class EnhancedTreeViewer extends Composite {
 
 	private static final String POPUP_MENU_ID = "#PopUpMenu"; // $NON-NLS-1$
 	private static final String POPUP_MENU_POSTFIX = "PopUpMenu"; // $NON-NLS-1$
-	//
+
 	private TreeViewer treeViewer;
-	//
+
 	private Clipboard clipboard;
 
 	public EnhancedTreeViewer(Composite parent, int style) {
@@ -78,7 +78,7 @@ public class EnhancedTreeViewer extends Composite {
 			clipboard.dispose();
 		}
 		clipboard = new Clipboard(Display.getDefault());
-		//
+
 		treeViewer = new TreeViewer(this, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		treeViewer.getTree().setLayout(new FillLayout());
 		treeViewer.getTree().addKeyListener(new KeyAdapter() {
@@ -133,7 +133,7 @@ public class EnhancedTreeViewer extends Composite {
 			action.setText(SupportMessages.labelCopySelectionClipboard);
 			manager.add(action);
 		});
-		//
+
 		Menu menu = menuManager.createContextMenu(treeViewer.getTree());
 		treeViewer.getTree().setMenu(menu);
 	}
@@ -150,7 +150,7 @@ public class EnhancedTreeViewer extends Composite {
 		for(TreeItem treeItem : tree.getSelection()) {
 			rootItems.add(getRootItem(treeItem));
 		}
-		//
+
 		for(TreeItem treeItem : rootItems) {
 			copyTreeToClipboard(treeItem, builder, "");
 			builder.append(lineDelimiter);
@@ -183,12 +183,12 @@ public class EnhancedTreeViewer extends Composite {
 	private void copyTreeToClipboard(TreeItem treeItem, StringBuilder builder, String intend) {
 
 		String endOfLine = OperatingSystemUtils.getLineDelimiter();
-		//
+
 		if(!treeItem.getText().equals("")) {
 			builder.append(intend + treeItem.getText());
 			builder.append(endOfLine);
 		}
-		//
+
 		for(TreeItem treeSubItem : treeItem.getItems()) {
 			copyTreeToClipboard(treeSubItem, builder, intend + OperatingSystemUtils.TAB);
 		}

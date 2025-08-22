@@ -173,7 +173,7 @@ public class QuantCompoundEditingSupport extends EditingSupport {
 			try {
 				result = Float.parseFloat(text);
 			} catch(NumberFormatException e) {
-				//
+
 			}
 		}
 		return result;
@@ -186,7 +186,7 @@ public class QuantCompoundEditingSupport extends EditingSupport {
 			try {
 				result = Double.parseDouble(text);
 			} catch(NumberFormatException e) {
-				//
+
 			}
 		}
 		return result;

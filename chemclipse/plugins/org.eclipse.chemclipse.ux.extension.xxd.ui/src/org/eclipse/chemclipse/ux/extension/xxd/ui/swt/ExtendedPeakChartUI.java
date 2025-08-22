@@ -61,16 +61,16 @@ import org.eclipse.swtchart.extensions.events.IHandledEventProcessor;
 public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 
 	private static final Logger logger = Logger.getLogger(ExtendedPeakChartUI.class);
-	//
+
 	private static final String DETECTION_TYPE_TANGENT = "DETECTION_TYPE_TANGENT";
 	private static final String DETECTION_TYPE_PERPENDICULAR = "DETECTION_TYPE_TYPE_PERPENDICULAR";
 	private static final String DETECTION_TYPE_NONE = "";
-	//
+
 	private Map<String, String> detectionTypeDescriptions;
-	//
+
 	private static final char KEY_TANGENT = IKeyboardSupport.KEY_CODE_LC_T;
 	private static final char KEY_PERPENDICULAR = IKeyboardSupport.KEY_CODE_LC_P;
-	//
+
 	private Composite toolbarInfo;
 	private Label labelPeak;
 	private Label labelDetectionType;
@@ -78,17 +78,17 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 	private Button buttonDetectionTypePerpendicular;
 	private Button buttonAddPeak;
 	private PeakChartUI peakChart;
-	//
+
 	private IPeak peak = null; // Original Peak
 	private IPeak peakSplitted1 = null; // #1 after split
 	private IPeak peakSplitted2 = null; // #2 after split
 	private SplitSelectionPaintListener splitSelectionPaintListener;
-	//
+
 	private int xStart;
 	private int xStop;
-	//
+
 	private String detectionType = DETECTION_TYPE_NONE;
-	//
+
 	private PeakDataSupport peakDataSupport = new PeakDataSupport();
 
 	private class KeyPressedEventProcessor extends AbstractHandledEventProcessor implements IHandledEventProcessor {
@@ -174,7 +174,7 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 		this.peak = peak;
 		resetSplittedPeaks();
 		labelPeak.setText(peakDataSupport.getPeakLabel(peak));
-		//
+
 		if(peak instanceof IChromatogramPeakCSD || peak instanceof IChromatogramPeakMSD) {
 			buttonDetectionTypeTangent.setEnabled(true);
 			buttonDetectionTypePerpendicular.setEnabled(true);
@@ -197,11 +197,11 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		toolbarInfo = createToolbarInfo(this);
 		createPeakChart(this);
-		//
+
 		PartSupport.setCompositeVisibility(toolbarInfo, true);
 	}
 
@@ -211,7 +211,7 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(9, false));
-		//
+
 		labelDetectionType = createDetectionTypeLabel(composite);
 		createButtonToggleToolbarInfo(composite);
 		buttonDetectionTypeTangent = createDetectionTypeTangentButton(composite);
@@ -239,11 +239,11 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		labelPeak = new Label(composite, SWT.NONE);
 		labelPeak.setText("");
 		labelPeak.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return composite;
 	}
 
@@ -262,7 +262,7 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 				button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_INFO, IApplicationImageProvider.SIZE_16x16, visible));
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -281,7 +281,7 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 				setDetectionType(DETECTION_TYPE_TANGENT);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -300,7 +300,7 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 				setDetectionType(DETECTION_TYPE_PERPENDICULAR);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -447,7 +447,7 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 		chartSettings.addHandledEventProcessor(new KeyPressedEventProcessor(KEY_PERPENDICULAR));
 		chartSettings.addHandledEventProcessor(new MouseDoubleClickEventProcessor());
 		peakChart.applySettings(chartSettings);
-		//
+
 		IPlotArea plotArea = getPlotArea();
 		splitSelectionPaintListener = new SplitSelectionPaintListener();
 		plotArea.addCustomPaintListener(splitSelectionPaintListener);
@@ -547,7 +547,7 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 			IAxis retentionTime = baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS);
 			Range millisecondsRange = retentionTime.getRange();
 			double millisecondsWidth = millisecondsRange.upper - millisecondsRange.lower;
-			//
+
 			if(xStart == xStop) {
 				/*
 				 * Perpendicular Drop
@@ -556,7 +556,7 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 				int stopRetentionTime;
 				float startAbundance;
 				float stopAbundance;
-				//
+
 				double percentageDrop = (factorWidth * xStart) / 100.0d;
 				int dropRetentionTime = (int)(millisecondsRange.lower + millisecondsWidth * percentageDrop);
 				IPeakModel peakModel = peak.getPeakModel();
@@ -576,7 +576,7 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 				startAbundance = peakModel.getBackgroundAbundance(startRetentionTime);
 				stopAbundance = peakModel.getBackgroundAbundance(stopRetentionTime);
 				peakSplitted2 = extractPeakByCoordinates(startRetentionTime, stopRetentionTime, startAbundance, stopAbundance);
-				//
+
 				if(peakSplitted1 != null || peakSplitted2 != null) {
 					buttonAddPeak.setEnabled(true);
 				}
@@ -586,15 +586,15 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 				 */
 				float startAbundance;
 				float stopAbundance;
-				//
+
 				double percentageStartWidth = (factorWidth * xStart) / 100.0d;
 				double percentageStopWidth = (factorWidth * xStop) / 100.0d;
 				int startRetentionTimeSkim = (int)(millisecondsRange.lower + millisecondsWidth * percentageStartWidth);
 				int stopRetentionTimeSkim = (int)(millisecondsRange.lower + millisecondsWidth * percentageStopWidth);
-				//
+
 				IPeakModel peakModel = peak.getPeakModel();
 				int retentionTimeAtMaximum = peakModel.getRetentionTimeAtPeakMaximum();
-				//
+
 				if(startRetentionTimeSkim < retentionTimeAtMaximum && stopRetentionTimeSkim < retentionTimeAtMaximum) {
 					/*
 					 * Left Skim Peak 1
@@ -634,13 +634,13 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 					peakSplitted1 = extractPeakByCoordinates(startRetentionTimeSkim, stopRetentionTimeSkim, startAbundance, stopAbundance);
 					peakSplitted2 = null;
 				}
-				//
+
 				if(peakSplitted1 != null) {
 					buttonAddPeak.setEnabled(true);
 				}
 			}
 		}
-		//
+
 		setDetectionType(DETECTION_TYPE_NONE);
 		updatePeaks();
 	}
@@ -648,7 +648,7 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 	private IPeak extractPeakByCoordinates(int startRetentionTime, int stopRetentionTime, float startAbundance, float stopAbundance) {
 
 		IPeak peakSplitted = null;
-		//
+
 		if(peak instanceof IChromatogramPeakMSD chromatogramPeakMSD) {
 			/*
 			 * Peak Detection MSD
@@ -676,7 +676,7 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 				logger.warn(e);
 			}
 		}
-		//
+
 		return peakSplitted;
 	}
 

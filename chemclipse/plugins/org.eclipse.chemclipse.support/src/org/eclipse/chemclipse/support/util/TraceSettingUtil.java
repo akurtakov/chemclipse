@@ -28,7 +28,7 @@ public class TraceSettingUtil implements IStringSerialization<String> {
 	public static final String SEPARATOR_SEMICOLON = ";"; // Legacy
 	public static final String SEPARATOR_WHITESPACE = " ";
 	public static final String RANGE_SEPARATOR = "-";
-	//
+
 	private ObjectMapper objectMapper;
 
 	public TraceSettingUtil() {

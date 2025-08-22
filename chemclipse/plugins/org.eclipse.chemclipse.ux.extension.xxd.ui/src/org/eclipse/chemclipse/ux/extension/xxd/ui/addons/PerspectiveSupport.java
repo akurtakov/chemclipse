@@ -86,7 +86,7 @@ public class PerspectiveSupport {
 
 		EModelService modelService = ContextAddon.getModelService();
 		MApplication application = ContextAddon.getApplication();
-		//
+
 		if(modelService != null && application != null) {
 			Display display = Display.getDefault();
 			display.asyncExec(() -> {

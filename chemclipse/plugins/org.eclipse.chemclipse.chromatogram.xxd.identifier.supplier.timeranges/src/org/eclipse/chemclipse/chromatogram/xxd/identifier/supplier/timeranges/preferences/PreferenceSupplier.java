@@ -20,7 +20,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 	public static final float MIN_FACTOR = 0.0f;
 	public static final float MAX_FACTOR = 100.0f;
-	//
+
 	public static final String P_LIMIT_MATCH_FACTOR_UNKNOWN = "limitMatchFactor";
 	public static final float DEF_LIMIT_MATCH_FACTOR_UNKOWN = 80.0f;
 	public static final String P_MATCH_QUALITY_UNKNOWN = "matchQuality";

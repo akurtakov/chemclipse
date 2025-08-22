@@ -32,7 +32,7 @@ public class ComparatorCache {
 	private static final int NUMBER_TOP_IONS = 12;
 	private static Map<Integer, Set<Integer>> unknownTopIons = null;
 	private static Map<Integer, Set<Integer>> referenceTopIons = null;
-	//
+
 	private IonAbundanceComparator ionAbundanceComparator;
 
 	public ComparatorCache() {
@@ -97,13 +97,13 @@ public class ComparatorCache {
 					hits++;
 				}
 			}
-			//
+
 			double percentageHits = hits / (double)referenceIons.size();
 			if(percentageHits >= thresholdPreOptimization) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -119,7 +119,7 @@ public class ComparatorCache {
 		for(int i = 0; i < size; i++) {
 			topIons.add(AbstractIon.getIon(ions.get(i).getIon()));
 		}
-		//
+
 		return topIons;
 	}
 

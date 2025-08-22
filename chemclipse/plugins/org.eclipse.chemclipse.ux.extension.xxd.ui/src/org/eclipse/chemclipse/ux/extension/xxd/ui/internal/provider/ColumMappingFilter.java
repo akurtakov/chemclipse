@@ -35,9 +35,9 @@ public class ColumMappingFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof Map.Entry<?, ?> setting) {
-			//
+
 			if(!caseSensitive) {
 				searchText = searchText.toLowerCase();
 			}
@@ -57,12 +57,12 @@ public class ColumMappingFilter extends ViewerFilter {
 			} else {
 				value = object.toString();
 			}
-			//
+
 			if(contains(searchText, caseSensitive, value)) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 

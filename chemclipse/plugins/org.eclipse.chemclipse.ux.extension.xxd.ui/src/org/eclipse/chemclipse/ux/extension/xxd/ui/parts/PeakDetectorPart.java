@@ -56,7 +56,7 @@ public class PeakDetectorPart extends AbstractPart<ExtendedPeakDetectorUI> {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 

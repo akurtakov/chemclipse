@@ -52,7 +52,7 @@ public class OSGiProcessSupplierContext implements IProcessSupplierContext {
 				return supplier;
 			}
 		}
-		//
+
 		return null;
 	}
 

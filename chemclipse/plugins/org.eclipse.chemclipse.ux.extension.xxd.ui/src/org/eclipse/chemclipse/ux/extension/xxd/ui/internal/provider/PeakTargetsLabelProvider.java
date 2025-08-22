@@ -44,7 +44,7 @@ public class PeakTargetsLabelProvider extends LabelProvider implements ITableLab
 			if(element instanceof IIdentificationTarget identificationTarget) {
 				IComparisonResult comparisonResult = identificationTarget.getComparisonResult();
 				IRatingSupplier ratingSupplier = comparisonResult.getRatingSupplier();
-				//
+
 				String fileName;
 				switch(ratingSupplier.getStatus()) {
 					case VERY_GOOD:
@@ -66,7 +66,7 @@ public class PeakTargetsLabelProvider extends LabelProvider implements ITableLab
 						fileName = "";
 						break;
 				}
-				//
+
 				if(!fileName.isEmpty()) {
 					return ApplicationImageFactory.getInstance().getImage(fileName, IApplicationImage.SIZE_16x16);
 				}

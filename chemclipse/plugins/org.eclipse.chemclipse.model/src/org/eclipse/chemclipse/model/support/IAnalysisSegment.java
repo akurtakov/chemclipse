@@ -63,7 +63,7 @@ public interface IAnalysisSegment extends IScanRange, IRetentionTimeRange {
 				list.add(segment);
 			}
 		}
-		//
+
 		Collections.sort(list, (o1, o2) -> o1.getStartScan() - o2.getStartScan());
 		return list;
 	}

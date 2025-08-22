@@ -84,11 +84,11 @@ public class AreaPercentFilter extends AbstractPeakFilter<AreaPercentFilterSetti
 	public void filterPeaks(IChromatogramSelection chromatogramSelection, AreaPercentFilterSettings configuration, ProcessExecutionContext context) throws IllegalArgumentException {
 
 		Collection<IPeak> peaks = getReadOnlyPeaks(chromatogramSelection);
-		//
+
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
-		//
+
 		SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), peaks.size());
 		double areaSum = calculateAreaSum(peaks);
 		AreaPredicate<?> predicate = getPredicate(configuration);
@@ -99,7 +99,7 @@ public class AreaPercentFilter extends AbstractPeakFilter<AreaPercentFilterSetti
 			processPeak(treatmentOption, peak, compareAreaValue, predicate, peaksToDelete);
 			subMonitor.worked(1);
 		}
-		//
+
 		deletePeaks(peaksToDelete, chromatogramSelection);
 		resetPeakSelection(chromatogramSelection);
 	}

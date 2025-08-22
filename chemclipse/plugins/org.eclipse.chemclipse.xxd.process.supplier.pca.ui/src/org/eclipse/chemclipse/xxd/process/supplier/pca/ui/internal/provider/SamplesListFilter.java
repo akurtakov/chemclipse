@@ -33,13 +33,13 @@ public class SamplesListFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof ISample sample) {
 			String name = sample.getSampleName();
 			String groupName = (sample.getGroupName() != null) ? sample.getGroupName() : "";
 			String classification = (sample.getClassification() != null) ? sample.getClassification() : "";
 			String description = (sample.getDescription() != null) ? sample.getDescription() : "";
-			//
+
 			if(!caseSensitive) {
 				searchText = searchText.toLowerCase();
 				name = name.toLowerCase();
@@ -47,24 +47,24 @@ public class SamplesListFilter extends ViewerFilter {
 				classification = classification.toLowerCase();
 				description = description.toLowerCase();
 			}
-			//
+
 			if(name.contains(searchText)) {
 				return true;
 			}
-			//
+
 			if(groupName.contains(searchText)) {
 				return true;
 			}
-			//
+
 			if(classification.contains(searchText)) {
 				return true;
 			}
-			//
+
 			if(description.contains(searchText)) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

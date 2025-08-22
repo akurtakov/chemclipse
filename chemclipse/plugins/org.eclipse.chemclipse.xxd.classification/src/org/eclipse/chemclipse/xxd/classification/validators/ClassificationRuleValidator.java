@@ -49,12 +49,12 @@ public class ClassificationRuleValidator extends ValueParserSupport implements I
 						if(searchExpression.isBlank()) {
 							message = "Rule can't be blank.";
 						}
-						//
+
 						classification = parseString(values, 1);
 						if(classification.isBlank()) {
 							message = "A classification name needs to be set.";
 						}
-						//
+
 						try {
 							reference = Reference.valueOf(parseString(values, 2));
 						} catch(Exception e) {
@@ -68,7 +68,7 @@ public class ClassificationRuleValidator extends ValueParserSupport implements I
 				message = "Value has to be a string.";
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {
@@ -82,7 +82,7 @@ public class ClassificationRuleValidator extends ValueParserSupport implements I
 		setting.setSearchExpression(searchExpression);
 		setting.setClassification(classification);
 		setting.setReference(reference);
-		//
+
 		return setting;
 	}
 }

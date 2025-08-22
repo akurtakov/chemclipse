@@ -38,23 +38,23 @@ import org.eclipse.swt.widgets.Text;
 public class MassSpectrumEditListUI extends Composite {
 
 	private static final Logger logger = Logger.getLogger(MassSpectrumEditListUI.class);
-	//
+
 	private static final String ACTION_INITIALIZE = "ACTION_INITIALIZE";
 	private static final String ACTION_CANCEL = "ACTION_CANCEL";
 	private static final String ACTION_ADD = "ACTION_ADD";
 	private static final String ACTION_DELETE = "ACTION_DELETE";
 	private static final String ACTION_SELECT = "ACTION_SELECT";
-	//
+
 	private MassSpectrumIonsListUI massSpectrumIonsListUI;
-	//
+
 	private Button buttonCancel;
 	private Button buttonDelete;
 	private Button buttonAdd;
-	//
+
 	private Text textMz;
 	private Text textIntensity;
 	private Button buttonIonAdd;
-	//
+
 	private IScanMSD massSpectrum;
 
 	public MassSpectrumEditListUI(Composite parent, int style) {
@@ -78,10 +78,10 @@ public class MassSpectrumEditListUI extends Composite {
 		setLayout(new FillLayout());
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setLayout(new GridLayout(7, false));
-		//
+
 		createButtonField(composite);
 		createTableField(composite);
-		//
+
 		enableButtonFields(ACTION_INITIALIZE);
 	}
 
@@ -89,18 +89,18 @@ public class MassSpectrumEditListUI extends Composite {
 
 		Label labelMz = new Label(composite, SWT.NONE);
 		labelMz.setText("m/z");
-		//
+
 		textMz = new Text(composite, SWT.BORDER);
 		textMz.setText("");
 		textMz.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		Label labelIntensity = new Label(composite, SWT.NONE);
 		labelIntensity.setText("abundance");
-		//
+
 		textIntensity = new Text(composite, SWT.BORDER);
 		textIntensity.setText("");
 		textIntensity.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		buttonIonAdd = new Button(composite, SWT.PUSH);
 		buttonIonAdd.setText("Add");
 		buttonIonAdd.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXECUTE, IApplicationImage.SIZE_16x16));
@@ -150,7 +150,7 @@ public class MassSpectrumEditListUI extends Composite {
 		GridData gridDataComposite = new GridData();
 		gridDataComposite.horizontalAlignment = SWT.RIGHT;
 		compositeButtons.setLayoutData(gridDataComposite);
-		//
+
 		buttonCancel = new Button(compositeButtons, SWT.PUSH);
 		buttonCancel.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CANCEL, IApplicationImage.SIZE_16x16));
 		buttonCancel.addSelectionListener(new SelectionAdapter() {
@@ -161,7 +161,7 @@ public class MassSpectrumEditListUI extends Composite {
 				enableButtonFields(ACTION_CANCEL);
 			}
 		});
-		//
+
 		buttonDelete = new Button(compositeButtons, SWT.PUSH);
 		buttonDelete.setEnabled(false);
 		buttonDelete.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DELETE, IApplicationImage.SIZE_16x16));
@@ -178,7 +178,7 @@ public class MassSpectrumEditListUI extends Composite {
 						messageBox.setText("Delete ions?");
 						messageBox.setMessage("Would you like to delete the ions?");
 						if(messageBox.open() == SWT.OK) {
-							//
+
 							enableButtonFields(ACTION_DELETE);
 							TableItem[] tableItems = table.getSelection();
 							for(TableItem tableItem : tableItems) {
@@ -193,7 +193,7 @@ public class MassSpectrumEditListUI extends Composite {
 				}
 			}
 		});
-		//
+
 		buttonAdd = new Button(compositeButtons, SWT.PUSH);
 		buttonAdd.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ADD, IApplicationImage.SIZE_16x16));
 		buttonAdd.addSelectionListener(new SelectionAdapter() {
@@ -213,7 +213,7 @@ public class MassSpectrumEditListUI extends Composite {
 		gridData.horizontalSpan = 7;
 		compositeTable.setLayoutData(gridData);
 		compositeTable.setLayout(new FillLayout());
-		//
+
 		massSpectrumIonsListUI = new MassSpectrumIonsListUI(compositeTable, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		massSpectrumIonsListUI.getTable().addSelectionListener(new SelectionAdapter() {
 
@@ -246,7 +246,7 @@ public class MassSpectrumEditListUI extends Composite {
 				break;
 			case ACTION_SELECT:
 				buttonAdd.setEnabled(true);
-				//
+
 				if(massSpectrumIonsListUI.getTable().getSelectionIndex() >= 0) {
 					buttonDelete.setEnabled(true);
 				} else {
@@ -261,7 +261,7 @@ public class MassSpectrumEditListUI extends Composite {
 		buttonCancel.setEnabled(enabled);
 		buttonDelete.setEnabled(enabled);
 		buttonAdd.setEnabled(enabled);
-		//
+
 		textMz.setEnabled(enabled);
 		textIntensity.setEnabled(enabled);
 		buttonIonAdd.setEnabled(enabled);

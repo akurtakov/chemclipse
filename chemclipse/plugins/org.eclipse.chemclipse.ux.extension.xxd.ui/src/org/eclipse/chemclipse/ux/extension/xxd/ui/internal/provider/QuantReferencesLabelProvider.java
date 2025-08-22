@@ -21,7 +21,7 @@ import org.eclipse.swt.graphics.Image;
 public class QuantReferencesLabelProvider extends AbstractChemClipseLabelProvider {
 
 	public static final String NAME = ExtensionMessages.name;
-	//
+
 	public static final String[] TITLES = { //
 			NAME //
 	};

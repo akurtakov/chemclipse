@@ -44,10 +44,10 @@ import org.eclipse.swt.widgets.Display;
 public class ScanFilterUI extends Composite {
 
 	private static final Logger logger = Logger.getLogger(ScanFilterUI.class);
-	//
+
 	private ComboViewer comboViewer;
 	private Button button;
-	//
+
 	private IScan scan = null;
 	private IUpdateListenerUI updateListener = null;
 
@@ -60,7 +60,7 @@ public class ScanFilterUI extends Composite {
 	public void setInput(IScan scan) {
 
 		this.scan = scan;
-		//
+
 		boolean enabled = scan instanceof IScanMSD;
 		comboViewer.getCombo().setEnabled(enabled);
 		button.setEnabled(enabled);
@@ -74,17 +74,17 @@ public class ScanFilterUI extends Composite {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(2, false);
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		gridLayout.marginWidth = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		comboViewer = createComboViewer(composite);
 		button = createButton(composite);
-		//
+
 		IMassSpectrumFilterSupport massSpectrumFilterSupport = MassSpectrumFilter.getMassSpectrumFilterSupport();
 		Collection<IMassSpectrumFilterSupplier> suppliers = massSpectrumFilterSupport.getSuppliers();
 		comboViewer.setInput(suppliers);
@@ -109,13 +109,13 @@ public class ScanFilterUI extends Composite {
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select a scan filter.");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.widthHint = 200;
 		combo.setLayoutData(gridData);
-		//
+
 		return comboViewer;
 	}
 
@@ -148,7 +148,7 @@ public class ScanFilterUI extends Composite {
 								logger.warn(e1);
 							}
 						}
-						//
+
 						if(optimizedMassSpectrum != null) {
 							/*
 							 * Clear all identification results and

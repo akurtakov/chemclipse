@@ -17,9 +17,9 @@ import org.eclipse.osgi.util.NLS;
 public class UltravioletVisibleSpectroscopy extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.chemclipse.wsd.converter.ui.l10n.messages"; //$NON-NLS-1$
-	//
+
 	public static String saveUVVis;
-	//
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, UltravioletVisibleSpectroscopy.class);
 	}

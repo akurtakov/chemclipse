@@ -40,14 +40,14 @@ import org.eclipse.swt.widgets.Text;
 public class PageCalibrationSettings extends AbstractExtendedWizardPage {
 
 	private RetentionIndexWizardElements wizardElements;
-	//
+
 	private Button checkBoxUseExistingCalibrationFile;
 	private Text textPathRetentionIndexFile;
 	private Button buttonSelectCalibrationFile;
-	//
+
 	private Button buttonMSD;
 	private Button buttonCSD;
-	//
+
 	private Button checkBoxUseExistingPeaks;
 
 	public PageCalibrationSettings(RetentionIndexWizardElements wizardElements) {
@@ -90,14 +90,14 @@ public class PageCalibrationSettings extends AbstractExtendedWizardPage {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(2, false));
-		//
+
 		createCalibrationFileField(composite);
 		createLabelDataField(composite);
 		createButtonMSDField(composite);
 		createButtonCSDField(composite);
 		createPeakIdentificationField(composite);
 		createDataFileSection(composite);
-		//
+
 		validateSelection();
 		setControl(composite);
 	}
@@ -119,7 +119,7 @@ public class PageCalibrationSettings extends AbstractExtendedWizardPage {
 				validateSelection();
 			}
 		});
-		//
+
 		textPathRetentionIndexFile = new Text(composite, SWT.BORDER);
 		textPathRetentionIndexFile.setText("");
 		textPathRetentionIndexFile.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -128,7 +128,7 @@ public class PageCalibrationSettings extends AbstractExtendedWizardPage {
 			wizardElements.setPathRetentionIndexFile(textPathRetentionIndexFile.getText().trim());
 			validateSelection();
 		});
-		//
+
 		buttonSelectCalibrationFile = new Button(composite, SWT.PUSH);
 		buttonSelectCalibrationFile.setText("");
 		buttonSelectCalibrationFile.setToolTipText("Select *.cal");

@@ -36,7 +36,7 @@ public class FlavorMarkerListFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof IFlavorMarker marker) {
 			/*
 			 * Search Text
@@ -48,16 +48,16 @@ public class FlavorMarkerListFilter extends ViewerFilter {
 			if(contains(searchText, marker.getOdor())) {
 				return true;
 			}
-			//
+
 			if(contains(searchText, marker.getMatrix())) {
 				return true;
 			}
-			//
+
 			if(contains(searchText, marker.getSolvent())) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 

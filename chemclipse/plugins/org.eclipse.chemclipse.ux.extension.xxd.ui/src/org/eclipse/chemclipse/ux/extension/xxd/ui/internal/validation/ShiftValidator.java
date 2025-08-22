@@ -26,7 +26,7 @@ public class ShiftValidator implements IValidator<Object> {
 
 		this.shift = 0.0d;
 		boolean parseError = true;
-		//
+
 		if(value != null) {
 			if(value instanceof String text) {
 				try {
@@ -37,7 +37,7 @@ public class ShiftValidator implements IValidator<Object> {
 				}
 			}
 		}
-		//
+
 		if(parseError) {
 			return ValidationStatus.error(ExtensionMessages.enterValidNumber);
 		} else {

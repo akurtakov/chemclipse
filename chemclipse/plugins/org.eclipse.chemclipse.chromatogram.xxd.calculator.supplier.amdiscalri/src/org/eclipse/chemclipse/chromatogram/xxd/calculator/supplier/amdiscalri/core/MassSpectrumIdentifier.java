@@ -35,7 +35,7 @@ public class MassSpectrumIdentifier extends AbstractMassSpectrumIdentifier {
 	public IProcessingInfo<IMassSpectra> identify(List<IScanMSD> massSpectraList, IMassSpectrumIdentifierSettings massSpectrumIdentifierSettings, IProgressMonitor monitor) {
 
 		IProcessingInfo<IMassSpectra> processingInfo = new ProcessingInfo<>();
-		//
+
 		try {
 			AlkaneIdentifier alkaneIdentifier = new AlkaneIdentifier();
 			MassSpectrumIdentifierAlkaneSettings alkaneSettings;
@@ -52,7 +52,7 @@ public class MassSpectrumIdentifier extends AbstractMassSpectrumIdentifier {
 			logger.warn(e);
 			processingInfo.addErrorMessage("Alkanes Identifier", "Some has gone wrong.");
 		}
-		//
+
 		return processingInfo;
 	}
 }

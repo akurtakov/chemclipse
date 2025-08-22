@@ -58,7 +58,7 @@ public class WellDataPart extends AbstractPart<ExtendedWellDataUI> {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 

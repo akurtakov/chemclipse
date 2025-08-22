@@ -29,13 +29,13 @@ public class TargetTemplates extends HashMap<String, TargetTemplate> {
 
 	private static final long serialVersionUID = -439374805911311705L;
 	private static final Logger logger = Logger.getLogger(TargetTemplates.class);
-	//
+
 	public static final String DESCRIPTION = "Target Templates";
 	public static final String FILE_EXTENSION = ".txt";
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-	//
+
 	private TargetListUtil targetListUtil = new TargetListUtil();
 
 	public TargetTemplates() {
@@ -154,7 +154,7 @@ public class TargetTemplates extends HashMap<String, TargetTemplate> {
 	public TargetTemplate extractTargetTemplate(String item) {
 
 		TargetTemplate targetTemplate = null;
-		//
+
 		if(!"".equals(item)) {
 			String[] values = item.split("\\" + TargetListUtil.SEPARATOR_ENTRY);
 			targetTemplate = new TargetTemplate();
@@ -164,7 +164,7 @@ public class TargetTemplates extends HashMap<String, TargetTemplate> {
 			targetTemplate.setContributor((values.length > 3) ? values[3].trim() : "");
 			targetTemplate.setReferenceId((values.length > 4) ? values[4].trim() : "");
 		}
-		//
+
 		return targetTemplate;
 	}
 

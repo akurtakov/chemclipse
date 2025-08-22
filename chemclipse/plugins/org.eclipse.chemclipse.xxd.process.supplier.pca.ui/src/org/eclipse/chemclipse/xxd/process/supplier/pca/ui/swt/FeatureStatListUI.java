@@ -38,7 +38,7 @@ public class FeatureStatListUI extends org.eclipse.chemclipse.support.ui.swt.Ext
 	private final FeatureListFilter listFilter = new FeatureListFilter();
 	private final VisualSelectionFilter selectFilter = new VisualSelectionFilter();
 	private final FeatureStatLabelProvider labelProvider = new FeatureStatLabelProvider("#,##0.####");
-	//
+
 	private IUpdateListener updateListener = null;
 
 	public FeatureStatListUI(Composite parent, int style) {
@@ -94,7 +94,7 @@ public class FeatureStatListUI extends org.eclipse.chemclipse.support.ui.swt.Ext
 		 * Labels and bounds
 		 */
 		String variableName = featureDataMatrix.getVariableName();
-		//
+
 		List<String> titleList = new ArrayList<>();
 		List<Integer> boundList = new ArrayList<>();
 		/*
@@ -108,18 +108,18 @@ public class FeatureStatListUI extends org.eclipse.chemclipse.support.ui.swt.Ext
 			if(FeatureLabelProvider.VARIABLE.equals(title)) {
 				title = variableName;
 			}
-			//
+
 			titleList.add(title);
 			boundList.add(BOUNDS[i]);
 		}
-		//
+
 		String[] titles = titleList.toArray(new String[titleList.size()]);
 		int size = boundList.size();
 		int[] bounds = new int[size];
 		for(int i = 0; i < size; i++) {
 			bounds[i] = boundList.get(i);
 		}
-		//
+
 		super.setInput(null);
 		createColumns(titles, bounds, labelProvider, comparator);
 	}

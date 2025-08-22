@@ -172,7 +172,7 @@ public abstract class AbstractMarkedWavelengths implements IMarkedWavelengths {
 		for(IMarkedWavelength markedWavelength : markedWavelengths) {
 			traces.add(markedWavelength.castTrace());
 		}
-		//
+
 		return traces;
 	}
 }

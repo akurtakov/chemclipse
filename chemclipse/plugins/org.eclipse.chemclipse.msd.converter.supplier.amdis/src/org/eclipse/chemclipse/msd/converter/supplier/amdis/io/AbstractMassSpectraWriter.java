@@ -76,7 +76,7 @@ public abstract class AbstractMassSpectraWriter extends AbstractWriter implement
 
 		IMassSpectra massSpectraChunk;
 		List<IMassSpectra> splittedMassSpectra = new ArrayList<>();
-		//
+
 		massSpectraChunk = new MassSpectra();
 		int counter = 1;
 		/*
@@ -95,7 +95,7 @@ public abstract class AbstractMassSpectraWriter extends AbstractWriter implement
 			}
 		}
 		splittedMassSpectra.add(massSpectraChunk);
-		//
+
 		return splittedMassSpectra;
 	}
 

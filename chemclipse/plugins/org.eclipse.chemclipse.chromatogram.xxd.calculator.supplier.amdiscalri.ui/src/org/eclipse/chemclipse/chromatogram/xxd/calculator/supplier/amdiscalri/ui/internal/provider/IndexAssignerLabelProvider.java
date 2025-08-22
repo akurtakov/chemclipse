@@ -24,12 +24,12 @@ public class IndexAssignerLabelProvider extends LabelProvider implements ITableL
 
 	public static final String RETENTION_INDEX = "Retention Index";
 	public static final String NAME = "Name";
-	//
+
 	public static final String[] TITLES = { //
 			RETENTION_INDEX, //
 			NAME //
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			150, //
 			200 //

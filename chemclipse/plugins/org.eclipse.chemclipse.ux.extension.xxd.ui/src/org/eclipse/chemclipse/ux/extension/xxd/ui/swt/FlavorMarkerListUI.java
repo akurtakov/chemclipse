@@ -28,11 +28,10 @@ public class FlavorMarkerListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = FlavorMarkerLabelProvider.TITLES;
 	private static final int[] BOUNDS = FlavorMarkerLabelProvider.BOUNDS;
-	//
+
 	private final FlavorMarkerLabelProvider labelProvider = new FlavorMarkerLabelProvider();
 	private final FlavorMarkerComparator comparator = new FlavorMarkerComparator();
 	private final FlavorMarkerListFilter listFilter = new FlavorMarkerListFilter();
-	//
 
 	public FlavorMarkerListUI(Composite parent, int style) {
 

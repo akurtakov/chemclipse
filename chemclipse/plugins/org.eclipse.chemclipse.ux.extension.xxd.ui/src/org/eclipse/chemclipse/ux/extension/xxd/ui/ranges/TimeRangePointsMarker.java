@@ -30,7 +30,7 @@ import org.eclipse.swtchart.extensions.marker.IBaseChartPaintListener;
 public class TimeRangePointsMarker extends AbstractBaseChartPaintListener implements IBaseChartPaintListener {
 
 	private List<Point> pointSelection = new ArrayList<>();
-	//
+
 	private static final String START = "Start";
 	private static final String MAX = "Max";
 	private static final String STOP = "Stop";
@@ -64,19 +64,19 @@ public class TimeRangePointsMarker extends AbstractBaseChartPaintListener implem
 						GC gc = e.gc;
 						Color colorBackground = gc.getBackground();
 						Color colorForeground = gc.getForeground();
-						//
+
 						gc.setForeground(Colors.DARK_GRAY);
 						gc.setLineStyle(SWT.LINE_DASHDOT);
 						gc.drawLine(x, 0, x, e.height);
 						gc.drawLine(0, y, e.width, y);
-						//
+
 						String label = getLabel(i, pointSelection);
 						Point labelSize = gc.textExtent(label);
 						gc.setBackground(Colors.DARK_GRAY);
 						gc.fillRectangle(x - 20, 15, 40, 25);
 						gc.setForeground(Colors.WHITE);
 						gc.drawText(label, x - (int)(labelSize.x / 2.0d), 19, SWT.DRAW_TRANSPARENT);
-						//
+
 						gc.setBackground(colorBackground);
 						gc.setForeground(colorForeground);
 					}
@@ -98,7 +98,7 @@ public class TimeRangePointsMarker extends AbstractBaseChartPaintListener implem
 				label = MAX;
 			}
 		}
-		//
+
 		return label;
 	}
 }

@@ -26,7 +26,7 @@ public class GapFiller {
 	public static void autofillScans(IChromatogramSelection chromatogramSelection, FilterSettingsGapFiller filterSettings) {
 
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
-		//
+
 		int scanInterval = chromatogram.getScanInterval();
 		if(scanInterval > 0) {
 			/*
@@ -40,18 +40,18 @@ public class GapFiller {
 			int limit = scanInterval * limitFactor;
 			int startScan = chromatogram.getScanNumber(chromatogramSelection.getStartRetentionTime()) + 1;
 			int stopScan = chromatogram.getScanNumber(chromatogramSelection.getStopRetentionTime());
-			//
+
 			for(int i = startScan; i <= stopScan; i++) {
 				/*
 				 * Try to detect the gap.
 				 */
 				IScan scanGapStart = chromatogram.getScan(i - 1);
 				IScan scanGapEnd = chromatogram.getScan(i);
-				//
+
 				int retentionTimeGapStart = scanGapStart.getRetentionTime();
 				int retentionTimeGapEnd = scanGapEnd.getRetentionTime();
 				int intervalGap = retentionTimeGapEnd - retentionTimeGapStart;
-				//
+
 				if(intervalGap > limit) {
 					/*
 					 * Start/Stop of the gap.

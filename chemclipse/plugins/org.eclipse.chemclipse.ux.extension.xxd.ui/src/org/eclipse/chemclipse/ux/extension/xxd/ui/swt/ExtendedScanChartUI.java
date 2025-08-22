@@ -205,7 +205,7 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 								setSubtractModus(display, false, false);
 								updateInfoLabels();
 							}
-							//
+
 							ChromatogramUpdateSupport.fireUpdateChromatogramSelection(display, scanSource);
 							updateScan(scanSource);
 						}
@@ -222,7 +222,7 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 		} else {
 			updateScan(scan);
 		}
-		//
+
 		tracesClipboardControl.get().setInput(scan);
 	}
 
@@ -243,17 +243,17 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 		 */
 		boolean isFixedRangeX = preferenceStore.getBoolean(PreferenceSupplier.P_SCAN_CHART_ENABLE_FIXED_RANGE_X);
 		boolean isFixedRangeY = preferenceStore.getBoolean(PreferenceSupplier.P_SCAN_CHART_ENABLE_FIXED_RANGE_Y);
-		//
+
 		if(isFixedRangeX || isFixedRangeY) {
 			BaseChart baseChart = chartControl.get().getBaseChart();
-			//
+
 			if(isFixedRangeX) {
 				double startX = preferenceStore.getDouble(PreferenceSupplier.P_SCAN_CHART_FIXED_RANGE_START_X);
 				double stopX = preferenceStore.getDouble(PreferenceSupplier.P_SCAN_CHART_FIXED_RANGE_STOP_X);
 				IAxis axisX = baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS);
 				axisX.setRange(new Range(startX, stopX));
 			}
-			//
+
 			if(isFixedRangeY) {
 				double startY = preferenceStore.getDouble(PreferenceSupplier.P_SCAN_CHART_FIXED_RANGE_START_Y);
 				double stopY = preferenceStore.getDouble(PreferenceSupplier.P_SCAN_CHART_FIXED_RANGE_STOP_Y);
@@ -267,7 +267,7 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 
 		IScanMSD optimizedMassSpectrum = getOptimizedScanMSD();
 		ScanChartUI scanChartUI = chartControl.get();
-		//
+
 		if(optimizedMassSpectrum != null) {
 			scanChartUI.setInput(optimizedMassSpectrum);
 		} else {
@@ -470,7 +470,7 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 		this.subtractModus = subtractModus;
 		String fileName = this.subtractModus ? IApplicationImage.IMAGE_SUBTRACT_SCAN_ACTIVE : IApplicationImage.IMAGE_SUBTRACT_SCAN_DEFAULT;
 		buttonSubtractOption.get().setImage(ApplicationImageFactory.getInstance().getImage(fileName, IApplicationImageProvider.SIZE_16x16));
-		//
+
 		if(this.subtractModus && showDialog) {
 			if(preferenceStore.getBoolean(PreferenceSupplier.P_SHOW_SUBTRACT_DIALOG)) {
 				if(display != null) {
@@ -544,7 +544,7 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 				logger.warn(e);
 			}
 		}
-		//
+
 		return optimizedMassSpectrum;
 	}
 
@@ -714,7 +714,7 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 				fireUpdate();
 			}
 		};
-		//
+
 		Button button = createSettingsButtonBasic(parent);
 		button.addSelectionListener(new SelectionAdapter() {
 
@@ -756,7 +756,7 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		}
-		//
+
 		return preferencePages;
 	}
 
@@ -885,7 +885,7 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 		} else {
 			index = (combo.getSelectionIndex() < items.length) ? combo.getSelectionIndex() : 0;
 		}
-		//
+
 		combo.setItems(items);
 		combo.select(index);
 	}

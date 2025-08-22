@@ -60,7 +60,7 @@ public class ZeroCutOffFilter implements IProcessTypeSupplier {
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 			int startScan = chromatogram.getScanNumber(chromatogramSelection.getStartRetentionTime());
 			int stopScan = chromatogram.getScanNumber(chromatogramSelection.getStopRetentionTime());
-			//
+
 			for(int i = startScan; i <= stopScan; i++) {
 				IScan scan = chromatogram.getScan(i);
 				float totalSignal = scan.getTotalSignal();
@@ -68,7 +68,7 @@ public class ZeroCutOffFilter implements IProcessTypeSupplier {
 					scan.adjustTotalSignal(0);
 				}
 			}
-			//
+
 			return chromatogramSelection;
 		}
 	}

@@ -35,7 +35,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 
 		addField(new BooleanFieldEditor(PreferenceSupplierDataExplorer.P_OPEN_FIRST_DATA_MATCH_ONLY, "Open First Data Match Only", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplierDataExplorer.P_OPEN_EDITOR_MULTIPLE_TIMES, "Open Editor Multiple Times", getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Microsoft Windows", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplierDataExplorer.P_SHOW_NETWORK_SHARES, "Show Network Shares (requires restart)", getFieldEditorParent()));

@@ -24,11 +24,10 @@ public class ColumnIndicesListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = ColumnIndicesLabelProvider.TITLES;
 	private static final int[] BOUNDS = ColumnIndicesLabelProvider.BOUNDS;
-	//
+
 	private final ColumnIndicesLabelProvider labelProvider = new ColumnIndicesLabelProvider();
 	private final ColumnIndicesComparator comparator = new ColumnIndicesComparator();
 	private final ColumnIndicesListFilter listFilter = new ColumnIndicesListFilter();
-	//
 
 	public ColumnIndicesListUI(Composite parent, int style) {
 

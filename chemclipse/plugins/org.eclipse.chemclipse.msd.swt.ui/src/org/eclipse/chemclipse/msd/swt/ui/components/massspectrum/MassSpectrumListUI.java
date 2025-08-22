@@ -46,7 +46,7 @@ import org.eclipse.swt.widgets.Shell;
 public class MassSpectrumListUI extends ExtendedTableViewer {
 
 	private static final Logger logger = Logger.getLogger(MassSpectrumListUI.class);
-	//
+
 	public static final String NAME = "Name";
 	public static final String RETENTION_TIME = "Retention Time";
 	public static final String RELATIVE_RETENTION_TIME = "Relative Retention Time";
@@ -62,7 +62,7 @@ public class MassSpectrumListUI extends ExtendedTableViewer {
 	public static final String REFERENCE_IDENTIFIER = "Reference Identifier";
 	public static final String COMMENTS = "Comments";
 	public static final String SPLASH = "Splash";
-	//
+
 	private String[] titles = {//
 			NAME, //
 			RETENTION_TIME, //
@@ -97,7 +97,7 @@ public class MassSpectrumListUI extends ExtendedTableViewer {
 			100, //
 			300 //
 	};
-	//
+
 	private ITableLabelProvider labelProvider;
 	private IStructuredContentProvider normalContentProvider;
 	private ILazyContentProvider lazyContentProvider;
@@ -127,7 +127,7 @@ public class MassSpectrumListUI extends ExtendedTableViewer {
 					if(massSpectrumListFilter.matchElement(scanMSD)) {
 						filteredMassSpectra.addMassSpectrum(scanMSD);
 					}
-					//
+
 					if(monitor.isCanceled()) {
 						break exitloop;
 					}
@@ -214,12 +214,12 @@ public class MassSpectrumListUI extends ExtendedTableViewer {
 	private void createColumns() {
 
 		createColumns(titles, bounds);
-		//
+
 		labelProvider = new MassSpectrumListLabelProvider();
 		normalContentProvider = new MassSpectrumListContentProvider();
 		lazyContentProvider = new MassSpectrumListContentProviderLazy(this);
 		tableComparator = new MassSpectrumListTableComparator();
-		//
+
 		setLabelAndContentProviders(isVirtualTable());
 		massSpectrumListFilter = new MassSpectrumListFilter();
 		setFilters(new ViewerFilter[]{massSpectrumListFilter});
@@ -254,7 +254,7 @@ public class MassSpectrumListUI extends ExtendedTableViewer {
 		excludeFromEditing.add(BASE_PEAK);
 		excludeFromEditing.add(BASE_PEAK_ABUNDANCE);
 		excludeFromEditing.add(NUMBER_OF_IONS);
-		//
+
 		List<TableViewerColumn> tableViewerColumns = getTableViewerColumns();
 		for(TableViewerColumn tableViewerColumn : tableViewerColumns) {
 			String columnLabel = tableViewerColumn.getColumn().getText();

@@ -51,7 +51,7 @@ public class ScanSignalListFilter extends ViewerFilter {
 		if(!caseSensitive) {
 			searchText = searchText.toLowerCase();
 		}
-		//
+
 		if(element instanceof IIon ion) {
 			IIonTransition ionTransition = ion.getIonTransition();
 			if(ionTransition != null) {

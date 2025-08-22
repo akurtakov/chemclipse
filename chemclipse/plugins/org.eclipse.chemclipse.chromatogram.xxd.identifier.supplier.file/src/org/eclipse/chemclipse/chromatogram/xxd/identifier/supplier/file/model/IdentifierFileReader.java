@@ -37,7 +37,7 @@ public class IdentifierFileReader {
 		if(isSeparationColumnFile(file)) {
 			separationColumn = extractSeparationColumn(file);
 		}
-		//
+
 		return separationColumn;
 	}
 
@@ -48,7 +48,7 @@ public class IdentifierFileReader {
 		 * Otherwise use default.
 		 */
 		ISeparationColumn separationColumn = SeparationColumnFactory.getSeparationColumn(SeparationColumnType.DEFAULT);
-		//
+
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
 			/*
 			 * Column Specification
@@ -57,7 +57,7 @@ public class IdentifierFileReader {
 			String length = "";
 			String diameter = "";
 			String phase = "";
-			//
+
 			String line;
 			while((line = bufferedReader.readLine()) != null) {
 				if(line.startsWith(IColumnFormat.COLUMN_MARKER)) {
@@ -84,7 +84,7 @@ public class IdentifierFileReader {
 		} catch(IOException e) {
 			logger.error(e);
 		}
-		//
+
 		return separationColumn;
 	}
 
@@ -97,7 +97,7 @@ public class IdentifierFileReader {
 				isSeparationColumnFile = true;
 			}
 		}
-		//
+
 		return isSeparationColumnFile;
 	}
 

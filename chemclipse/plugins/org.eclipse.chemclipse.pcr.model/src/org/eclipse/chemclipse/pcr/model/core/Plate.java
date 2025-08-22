@@ -26,7 +26,7 @@ import org.eclipse.chemclipse.pcr.model.l10n.Messages;
 public class Plate extends AbstractMeasurementInfo implements IPlate {
 
 	private static final long serialVersionUID = -7209280707411376156L;
-	//
+
 	private String name = "";
 	private IDetectionFormat detectionFormat = null;
 	private List<IDetectionFormat> detectionFormats = new ArrayList<>();
@@ -73,13 +73,13 @@ public class Plate extends AbstractMeasurementInfo implements IPlate {
 		for(IWell well : wells) {
 			subsets.add(well.getSampleSubset());
 		}
-		//
+
 		List<String> sampleSubsets = new ArrayList<>(subsets);
 		Collections.sort(sampleSubsets);
 		if(sampleSubsets.isEmpty() || !sampleSubsets.get(0).equals(Messages.allSubsets)) {
 			sampleSubsets.set(0, Messages.allSubsets); // All subsets
 		}
-		//
+
 		return sampleSubsets;
 	}
 
@@ -87,7 +87,7 @@ public class Plate extends AbstractMeasurementInfo implements IPlate {
 	public void setActiveSubset(String activeSubset) {
 
 		activeSubset = (Messages.allSubsets.equals(activeSubset)) ? "" : activeSubset;
-		//
+
 		for(IWell well : wells) {
 			well.setActiveSubset(activeSubset);
 		}

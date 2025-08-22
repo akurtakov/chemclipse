@@ -90,11 +90,11 @@ public class SettingsClassParser<SettingType> implements SettingsParser<SettingT
 				JavaType javaType = objectMapper.getSerializationConfig().constructType(clazz);
 				BeanDescription beanDescription = objectMapper.getSerializationConfig().introspect(javaType);
 				List<BeanPropertyDefinition> properties = beanDescription.findProperties();
-				//
+
 				for(BeanPropertyDefinition property : properties) {
 					AnnotatedField annotatedField = property.getField();
 					if(annotatedField != null) {
-						//
+
 						InputValue inputValue = new InputValue();
 						String contributorURI = "platform:/plugin/" + FrameworkUtil.getBundle(clazz).getSymbolicName();
 						inputValue.setContributorURI(contributorURI);

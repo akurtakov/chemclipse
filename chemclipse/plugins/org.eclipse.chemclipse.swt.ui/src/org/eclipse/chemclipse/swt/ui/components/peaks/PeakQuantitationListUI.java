@@ -36,7 +36,7 @@ public class PeakQuantitationListUI extends ExtendedTableViewer {
 	 */
 	public static final int INDEX_QUANTITATIONS = PeakQuantitation.INDEX_QUANTITATIONS;
 	private static final int DEFAULT_COLUMN_WIDTH = 100;
-	//
+
 	private static final String[] TITLES = { //
 			TIME, //
 			NAME, //
@@ -46,7 +46,7 @@ public class PeakQuantitationListUI extends ExtendedTableViewer {
 			CLASSIFIER, //
 			QUANTIFIER //
 	};
-	//
+
 	private static final int[] BOUNDS = { //
 			100, //
 			200, //
@@ -77,7 +77,7 @@ public class PeakQuantitationListUI extends ExtendedTableViewer {
 			} else {
 				titles = new String[length];
 				bounds = new int[length];
-				//
+
 				for(int i = 0; i < length; i++) {
 					titles[i] = quantitationTitles.get(i);
 					bounds[i] = DEFAULT_COLUMN_WIDTH;
@@ -101,7 +101,7 @@ public class PeakQuantitationListUI extends ExtendedTableViewer {
 	private void setColumns(String[] titles, int bounds[]) {
 
 		createColumns(titles, bounds);
-		//
+
 		setLabelProvider(new PeakQuantitationListLabelProvider());
 		setContentProvider(new ListContentProvider());
 		setComparator(new PeakQuantitationListTableComparator());

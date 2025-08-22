@@ -24,7 +24,7 @@ public class FlavorMarkerComparator extends AbstractRecordTableComparator implem
 
 		int sortOrder = 0;
 		if(e1 instanceof IFlavorMarker marker1 && e2 instanceof IFlavorMarker marker2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					/*
@@ -45,11 +45,11 @@ public class FlavorMarkerComparator extends AbstractRecordTableComparator implem
 					sortOrder = 0;
 			}
 		}
-		//
+
 		if(getDirection() == ASCENDING) {
 			sortOrder = -sortOrder;
 		}
-		//
+
 		return sortOrder;
 	}
 }

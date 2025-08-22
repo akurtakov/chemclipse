@@ -40,23 +40,23 @@ public class WellDataListFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof Map.Entry) {
 			Map.Entry<String, String> entry = (Map.Entry<String, String>)element;
-			//
+
 			String search = (caseSensitive) ? searchTextExtended : searchTextExtended.toLowerCase();
 			String key = (caseSensitive) ? entry.getKey() : entry.getKey().toLowerCase();
 			String value = (caseSensitive) ? entry.getValue() : entry.getValue().toLowerCase();
-			//
+
 			if(key.matches(search)) {
 				return true;
 			}
-			//
+
 			if(value.matches(search)) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

@@ -46,7 +46,7 @@ public class XmlReader110 {
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		Document document = documentBuilder.parse(file);
 		NodeList topNode = document.getElementsByTagName("mzML");
-		//
+
 		JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 		return (MzMLType)unmarshaller.unmarshal(topNode.item(0));

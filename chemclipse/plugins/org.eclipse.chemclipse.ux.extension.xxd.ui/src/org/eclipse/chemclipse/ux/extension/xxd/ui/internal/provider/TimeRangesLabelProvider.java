@@ -34,9 +34,9 @@ public class TimeRangesLabelProvider extends AbstractChemClipseLabelProvider {
 	public static final String MAXIMUM = ExtensionMessages.maximumTimeMin;
 	public static final String STOP = ExtensionMessages.stopTimeMin;
 	public static final String TRACES = ExtensionMessages.traces;
-	//
+
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.000");
-	//
+
 	public static final String[] TITLES = { //
 			START, //
 			STOP, //

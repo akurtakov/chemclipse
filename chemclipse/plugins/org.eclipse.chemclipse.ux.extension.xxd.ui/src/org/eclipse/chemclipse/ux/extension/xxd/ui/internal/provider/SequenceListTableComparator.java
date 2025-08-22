@@ -24,7 +24,7 @@ public class SequenceListTableComparator extends AbstractRecordTableComparator i
 
 		int sortOrder = 0;
 		if(e1 instanceof ISequenceRecord sequenceRecord1 && e2 instanceof ISequenceRecord sequenceRecord2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = sequenceRecord2.getSampleName().compareTo(sequenceRecord1.getSampleName());

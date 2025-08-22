@@ -271,7 +271,7 @@ public class Calculations {
 			}
 			mean = getMean(data);
 		}
-		//
+
 		return mean;
 	}
 
@@ -294,7 +294,7 @@ public class Calculations {
 			}
 			median = getMedian(data);
 		}
-		//
+
 		return median;
 	}
 

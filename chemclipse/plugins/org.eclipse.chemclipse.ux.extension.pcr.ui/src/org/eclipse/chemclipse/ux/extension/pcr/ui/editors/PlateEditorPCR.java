@@ -56,21 +56,21 @@ public class PlateEditorPCR implements IChemClipseEditor {
 
 	private static final Logger logger = Logger.getLogger(PlateEditorPCR.class);
 	private final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-	//
+
 	public static final String ID = "org.eclipse.chemclipse.ux.extension.xxd.ui.part.plateEditorPCR";
 	public static final String CONTRIBUTION_URI = "bundleclass://org.eclipse.chemclipse.ux.extension.pcr.ui/org.eclipse.chemclipse.ux.extension.pcr.ui.editors.PlateEditorPCR";
 	public static final String ICON_URI = ApplicationImageFactory.getInstance().getURI(IApplicationImage.IMAGE_PLATE_PCR, IApplicationImageProvider.SIZE_16x16);
 	public static final String TOOLTIP = "PCR Editor";
-	//
+
 	private final MPart part;
 	private final MDirtyable dirtyable;
 	private final EModelService modelService;
 	private final MApplication application;
-	//
+
 	private File plateFile;
 	private IPlate plate = null;
 	private ExtendedPCRPlateUI extendedPCRPlateUI;
-	//
+
 	private final Shell shell;
 
 	@Inject
@@ -81,7 +81,7 @@ public class PlateEditorPCR implements IChemClipseEditor {
 		this.modelService = modelService;
 		this.application = application;
 		this.shell = shell;
-		//
+
 		initialize(parent);
 	}
 
@@ -95,7 +95,7 @@ public class PlateEditorPCR implements IChemClipseEditor {
 	protected void preDestroy() {
 
 		unloadPlate();
-		//
+
 		if(modelService != null && application != null) {
 			MPartStack partStack = (MPartStack)modelService.find(IPerspectiveAndViewIds.EDITOR_PART_STACK_ID, application);
 			part.setToBeRendered(false);
@@ -163,7 +163,7 @@ public class PlateEditorPCR implements IChemClipseEditor {
 			boolean batch = (boolean)map.get(EditorSupport.MAP_BATCH);
 			plate = loadPlate(file, batch);
 		}
-		//
+
 		return plate;
 	}
 
@@ -183,7 +183,7 @@ public class PlateEditorPCR implements IChemClipseEditor {
 			logger.warn(e);
 			Thread.currentThread().interrupt();
 		}
-		//
+
 		plateFile = file;
 		return runnable.getPlate();
 	}

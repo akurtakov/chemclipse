@@ -78,7 +78,7 @@ public class PeakIdentifierFilter implements IProcessTypeSupplier {
 			float matchQuality = processSettings.getMatchQuality();
 			PeakFilterOption peakFilterOption = processSettings.getPeakFilterOption();
 			TimeRanges timeRanges = processSettings.getTimeRanges();
-			//
+
 			for(TimeRange timeRange : timeRanges.values()) {
 				List<IPeak> peaks = getPeaksInFocus(chromatogram, timeRange, limitMatchFactor);
 				if(!peaks.isEmpty()) {
@@ -102,7 +102,7 @@ public class PeakIdentifierFilter implements IProcessTypeSupplier {
 					peak.getTargets().add(identificationTarget);
 				}
 			}
-			//
+
 			return chromatogramSelection;
 		}
 
@@ -119,7 +119,7 @@ public class PeakIdentifierFilter implements IProcessTypeSupplier {
 					}
 				}
 			}
-			//
+
 			return peaks;
 		}
 	}

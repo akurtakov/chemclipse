@@ -47,13 +47,13 @@ public class ProcessMethodHeader extends Composite {
 	private Text textDescription;
 	private Button buttonResume;
 	private Button buttonFinalize;
-	//
+
 	private ProcessMethod processMethod = null;
-	//
+
 	private IUpdateListener updateListener = null;
 	private IModificationHandler modificationHandler = null;
 	private IProcessSupplierContext processingSupport = null;
-	//
+
 	private String[] knownCategories = new String[]{};
 
 	public ProcessMethodHeader(Composite parent, int style) {
@@ -90,7 +90,7 @@ public class ProcessMethodHeader extends Composite {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		textName = createNameSection(this);
 		textOperator = createOperatorSection(this);
 		textDescription = createDescriptionSection(this);
@@ -103,7 +103,7 @@ public class ProcessMethodHeader extends Composite {
 
 		Label label = new Label(parent, SWT.NONE);
 		label.setText("Name:");
-		//
+
 		Text text = new Text(parent, SWT.BORDER);
 		text.setText("");
 		text.setToolTipText("The name of this method that is used for display");
@@ -119,7 +119,7 @@ public class ProcessMethodHeader extends Composite {
 				}
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -127,7 +127,7 @@ public class ProcessMethodHeader extends Composite {
 
 		Label label = new Label(parent, SWT.NONE);
 		label.setText("Operator:");
-		//
+
 		Text text = new Text(parent, SWT.BORDER);
 		text.setText("");
 		text.setToolTipText("The operator is the person who has created / currently manages this method");
@@ -143,7 +143,7 @@ public class ProcessMethodHeader extends Composite {
 				}
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -151,7 +151,7 @@ public class ProcessMethodHeader extends Composite {
 
 		Label label = new Label(parent, SWT.NONE);
 		label.setText("Description:");
-		//
+
 		Text text = new Text(parent, SWT.BORDER);
 		text.setText("");
 		text.setToolTipText("Description");
@@ -167,7 +167,7 @@ public class ProcessMethodHeader extends Composite {
 				}
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -175,7 +175,7 @@ public class ProcessMethodHeader extends Composite {
 
 		Label label = new Label(parent, SWT.NONE);
 		label.setText("Enable Resume:");
-		//
+
 		Button button = new Button(parent, SWT.CHECK);
 		button.setText("");
 		button.setToolTipText("This option allows to resume the method at a selected entry.");
@@ -192,7 +192,7 @@ public class ProcessMethodHeader extends Composite {
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -200,7 +200,7 @@ public class ProcessMethodHeader extends Composite {
 
 		Label label = new Label(parent, SWT.NONE);
 		label.setText("Category:");
-		//
+
 		Text text = new Text(parent, SWT.BORDER);
 		text.setText("");
 		text.setToolTipText("The category groups similar methods under a common name");
@@ -216,7 +216,7 @@ public class ProcessMethodHeader extends Composite {
 				}
 			}
 		});
-		//
+
 		autoComplete(text, new IContentProposalProvider() {
 
 			@Override
@@ -247,11 +247,11 @@ public class ProcessMethodHeader extends Composite {
 					});
 					knownCategories = categories.toArray(new String[0]);
 				}
-				//
+
 				return knownCategories;
 			}
 		});
-		//
+
 		return text;
 	}
 

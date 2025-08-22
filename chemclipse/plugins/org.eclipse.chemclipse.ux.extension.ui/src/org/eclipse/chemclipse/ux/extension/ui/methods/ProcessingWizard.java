@@ -53,11 +53,11 @@ public class ProcessingWizard extends Wizard {
 		WizardDialog wizardDialog = new WizardDialog(shell, wizard);
 		wizardDialog.setMinimumPageSize(ProcessingWizard.DEFAULT_WIDTH, ProcessingWizard.DEFAULT_HEIGHT);
 		wizardDialog.create();
-		//
+
 		if(wizardDialog.open() == WizardDialog.OK) {
 			return Collections.singletonMap(wizardPage.getProcessSupplierContext(), wizardPage.getProcessEntry());
 		}
-		//
+
 		return null;
 	}
 }

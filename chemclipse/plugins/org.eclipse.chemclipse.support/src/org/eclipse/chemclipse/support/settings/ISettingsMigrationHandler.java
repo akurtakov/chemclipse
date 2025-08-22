@@ -24,7 +24,7 @@ public interface ISettingsMigrationHandler<T> {
 		 */
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-		//
+
 		return objectMapper;
 	}
 

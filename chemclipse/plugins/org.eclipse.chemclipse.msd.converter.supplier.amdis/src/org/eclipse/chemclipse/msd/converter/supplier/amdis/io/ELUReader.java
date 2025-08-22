@@ -52,7 +52,7 @@ public class ELUReader implements IPeakReader {
 	 * We could try to add additional filter options in this class.
 	 */
 	private static final Logger logger = Logger.getLogger(ELUReader.class);
-	//
+
 	private static final Pattern HEADER_PATTERN = Pattern.compile("(NAME.*)");
 	private static final Pattern HITS_PATTERN = Pattern.compile("(NAME)");
 	private static final Pattern PEAK_DATA_PATTERN = Pattern.compile("(NAME)(.*?)(^$)", Pattern.DOTALL | Pattern.MULTILINE);
@@ -61,7 +61,7 @@ public class ELUReader implements IPeakReader {
 	private static final Pattern PROFILE_PATTERN = Pattern.compile("([0-9]+)");
 	private static final Pattern PEAK_PATTERN = Pattern.compile("(NUM PEAKS)(.*)", Pattern.DOTALL | Pattern.MULTILINE);
 	private static final Pattern ION_PATTERN = Pattern.compile("\\((\\d+),(\\d+) ?(\\w[\\d.]*)?\\)");
-	//
+
 	private static final String NEW_LINE = "\n";
 	private static final String CARRIAGE_RETURN = "\r";
 
@@ -121,7 +121,7 @@ public class ELUReader implements IPeakReader {
 					scanIntervals.add(retentionTime / scan);
 				}
 			} catch(NumberFormatException e) {
-				//
+
 			}
 		}
 		/*
@@ -160,7 +160,7 @@ public class ELUReader implements IPeakReader {
 					scanRetentionTimes.put(scan, retentionTime);
 				}
 			} catch(NumberFormatException e) {
-				//
+
 			}
 		}
 		/*
@@ -192,7 +192,7 @@ public class ELUReader implements IPeakReader {
 				scanIntervals.add(scanInterval);
 			}
 		}
-		//
+
 		int size = scanIntervals.size();
 		double[] values = new double[size];
 		for(int index = 0; index < size; index++) {
@@ -248,10 +248,10 @@ public class ELUReader implements IPeakReader {
 	private IPeakMSD extractPeak(String peakData, int scanInterval) {
 
 		IPeakMSD peak = null;
-		//
+
 		String header = extractHeader(peakData, HEADER_PATTERN, "");
 		int peakStartRetentionTime = extractPeakStartRetentionTime(peakData, scanInterval);
-		//
+
 		if(peakStartRetentionTime > 0) {
 			try {
 				/*
@@ -273,7 +273,7 @@ public class ELUReader implements IPeakReader {
 				logger.warn("PeakModel fails for AMDIS (ELU) component: " + header);
 			}
 		}
-		//
+
 		return peak;
 	}
 
@@ -286,7 +286,7 @@ public class ELUReader implements IPeakReader {
 				totalSignal = signal;
 			}
 		}
-		//
+
 		return totalSignal;
 	}
 
@@ -323,7 +323,7 @@ public class ELUReader implements IPeakReader {
 		if(matcher.find()) {
 			value = matcher.group();
 		}
-		//
+
 		return value;
 	}
 
@@ -334,7 +334,7 @@ public class ELUReader implements IPeakReader {
 			int maxScan = Integer.parseInt(matcher.group(4));
 			int startScan = Integer.parseInt(matcher.group(7));
 			int stopScan = Integer.parseInt(matcher.group(9));
-			//
+
 			peakModel.setTemporarilyInfo(TEMP_INFO_START_SCAN, startScan);
 			peakModel.setTemporarilyInfo(TEMP_INFO_STOP_SCAN, stopScan);
 			peakModel.setTemporarilyInfo(TEMP_INFO_MAX_SCAN, maxScan);
@@ -349,7 +349,7 @@ public class ELUReader implements IPeakReader {
 			String profileData = matcher.group().replace(NEW_LINE, " ").replace(CARRIAGE_RETURN, " ");
 			extractProfile(peakIntensityValues, profileData, peakStartRetentionTime, scanInterval);
 		}
-		//
+
 		return peakIntensityValues;
 	}
 
@@ -362,7 +362,7 @@ public class ELUReader implements IPeakReader {
 				float relativeIntensity = Float.parseFloat(matcher.group(1));
 				peakIntensityValues.addIntensityValue(retentionTime, relativeIntensity);
 			} catch(NumberFormatException e) {
-				//
+
 			}
 			retentionTime += scanInterval;
 		}
@@ -376,7 +376,7 @@ public class ELUReader implements IPeakReader {
 			String massSpectrumData = matcher.group().replace(NEW_LINE, " ").replace(CARRIAGE_RETURN, " ");
 			extractPeakIons(massSpectrumData, peakMassSpectrum);
 		}
-		//
+
 		return peakMassSpectrum;
 	}
 

@@ -24,7 +24,7 @@ public class ClassificationRuleLabelProvider extends AbstractChemClipseLabelProv
 	public static final String SEARCH_EXPRESSION = "Search Expression";
 	public static final String CLASSIFICATION = "Classification";
 	public static final String REFERENCE = "Reference";
-	//
+
 	public static final String[] TITLES = { //
 			SEARCH_EXPRESSION, //
 			CLASSIFICATION, //

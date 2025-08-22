@@ -63,7 +63,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		} finally {
 			zipFile.close();
 		}
-		//
+
 		return chromatogram;
 	}
 
@@ -99,12 +99,12 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 	private IChromatogramOverview readOverviewFromZipFile(ZipFile zipFile, String directoryPrefix, IProgressMonitor monitor) throws IOException {
 
 		DataInputStream dataInputStream = getDataInputStream(zipFile, directoryPrefix + Format.FILE_TIC_WSD);
-		//
+
 		IVendorChromatogram chromatogram = new VendorChromatogram();
 		readScansOverview(dataInputStream, chromatogram, monitor);
-		//
+
 		dataInputStream.close();
-		//
+
 		return chromatogram;
 	}
 
@@ -147,12 +147,12 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 			subMonitor.worked(20);
 			readMiscellaneous(getDataInputStream(object, directoryPrefix + Format.FILE_MISC_WSD), closeStream, chromatogram, monitor);
 			subMonitor.worked(20);
-			//
+
 			setAdditionalInformation(file, chromatogram, monitor);
 		} finally {
 			SubMonitor.done(subMonitor);
 		}
-		//
+
 		return chromatogram;
 	}
 
@@ -162,24 +162,24 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		for(int scan = 1; scan <= scans; ++scan) {
 			IScanWSD scanObject = new VendorScan();
 			int scanSignals = dataInputStream.readInt();
-			//
+
 			for(int scanSignal = 0; scanSignal < scanSignals; ++scanSignal) {
 				IScanSignalWSD scanSignalObject = new VendorScanSignal();
 				int wavelength = dataInputStream.readInt();
 				float abundance = dataInputStream.readFloat();
-				//
+
 				scanSignalObject.setWavelength(wavelength);
 				scanSignalObject.setAbsorbance(abundance);
-				//
+
 				scanObject.addScanSignal(scanSignalObject);
 			}
-			//
+
 			int retentionTime = dataInputStream.readInt();
 			float retentionIndex = dataInputStream.readFloat();
 			float totalSignal = dataInputStream.readFloat();
 			int timeSegmentId = dataInputStream.readInt();
 			int cycleNumber = dataInputStream.readInt();
-			//
+
 			scanObject.setRetentionTime(retentionTime);
 			scanObject.setRetentionIndex(retentionIndex);
 			scanObject.setTimeSegmentId(timeSegmentId);
@@ -192,7 +192,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 	private void readMethod(DataInputStream dataInputStream, boolean closeStream, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
 
 		IMethod method = chromatogram.getMethod();
-		//
+
 		method.setInstrumentName(readString(dataInputStream));
 		method.setIonSource(readString(dataInputStream));
 		method.setSamplingRate(dataInputStream.readDouble());
@@ -201,7 +201,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		method.setStopMode(readString(dataInputStream));
 		method.setStopTime(dataInputStream.readInt());
 		method.setTimeFilterPeakWidth(dataInputStream.readInt());
-		//
+
 		if(closeStream) {
 			dataInputStream.close();
 		}
@@ -213,18 +213,18 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		for(int scan = 1; scan <= scans; ++scan) {
 			IScanWSD scanWSD = new VendorScan();
 			int scanSignals = dataInputStream.readInt();
-			//
+
 			for(int scanSignal = 0; scanSignal < scanSignals; ++scanSignal) {
 				IScanSignalWSD scanSignalObject = new VendorScanSignal();
 				int wavelength = dataInputStream.readInt();
 				float abundance = dataInputStream.readFloat();
-				//
+
 				scanSignalObject.setWavelength(wavelength);
 				scanSignalObject.setAbsorbance(abundance);
-				//
+
 				scanWSD.addScanSignal(scanSignalObject);
 			}
-			//
+
 			int retentionTime = dataInputStream.readInt();
 			int retentionTimeColumn1 = dataInputStream.readInt();
 			int retentionTimeColumn2 = dataInputStream.readInt();
@@ -240,7 +240,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 			float totalSignal = dataInputStream.readFloat();
 			int timeSegmentId = dataInputStream.readInt();
 			int cycleNumber = dataInputStream.readInt();
-			//
+
 			scanWSD.setRetentionTime(retentionTime);
 			scanWSD.setRetentionTimeColumn1(retentionTimeColumn1);
 			scanWSD.setRetentionTimeColumn2(retentionTimeColumn2);
@@ -250,7 +250,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 			scanWSD.adjustTotalSignal(totalSignal);
 			chromatogram.addScan(scanWSD);
 		}
-		//
+
 		if(closeStream) {
 			dataInputStream.close();
 		}
@@ -266,7 +266,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 			IBaselineElement baselineElement = new BaselineElement(retentionTime, backgroundAbundance);
 			baselineElements.add(baselineElement);
 		}
-		//
+
 		IBaselineModel baselineModel = chromatogram.getBaselineModel();
 		for(int index = 0; index < (scans - 1); ++index) {
 			/*
@@ -285,7 +285,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 			 */
 			baselineModel.addBaseline(startRetentionTime, stopRetentionTime, startBackgroundAbundance, stopBackgroundAbundance, false);
 		}
-		//
+
 		if(closeStream) {
 			dataInputStream.close();
 		}
@@ -298,12 +298,12 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		for(int i = 1; i <= numEntries; ++i) {
 			long time = dataInputStream.readLong();
 			String description = readString(dataInputStream);
-			//
+
 			Date date = new Date(time);
 			IEditInformation editInformation = new EditInformation(date, description);
 			editHistory.add(editInformation);
 		}
-		//
+
 		if(closeStream) {
 			dataInputStream.close();
 		}
@@ -316,14 +316,14 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		String miscInfoSeparated = readString(dataInputStream);
 		String dataName = readString(dataInputStream);
 		String operator = readString(dataInputStream);
-		//
+
 		Date date = new Date(time);
 		chromatogram.setDate(date);
 		chromatogram.setMiscInfo(miscInfo);
 		chromatogram.setMiscInfoSeparated(miscInfoSeparated);
 		chromatogram.setDataName(dataName);
 		chromatogram.setOperator(operator);
-		//
+
 		dataInputStream.close();
 	}
 
@@ -335,9 +335,9 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		if(version.equals(Format.CHROMATOGRAM_VERSION_1100)) {
 			isValid = true;
 		}
-		//
+
 		dataInputStream.close();
-		//
+
 		return isValid;
 	}
 

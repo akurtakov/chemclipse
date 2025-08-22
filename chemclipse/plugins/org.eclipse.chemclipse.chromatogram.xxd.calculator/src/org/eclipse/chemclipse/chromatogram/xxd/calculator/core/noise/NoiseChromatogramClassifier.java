@@ -39,10 +39,10 @@ public class NoiseChromatogramClassifier extends AbstractChromatogramClassifier 
 	public IProcessingInfo<IChromatogramClassifierResult> applyClassifier(IChromatogramSelection chromatogramSelection, IChromatogramClassifierSettings chromatogramClassifierSettings, IProgressMonitor monitor) {
 
 		IProcessingInfo<IChromatogramClassifierResult> processingInfo = new ProcessingInfo<>();
-		//
+
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 		NoiseChromatogramClassifierSettings settings = getNoiseChromatogramClassifierSettings(chromatogramClassifierSettings);
-		//
+
 		NoiseSegmentMeasurementResult noiseSegmentMeasurementResult = NoiseChromatogramSupport.applyNoiseSettings(chromatogram, settings, monitor);
 		if(noiseSegmentMeasurementResult == null) {
 			processingInfo.addErrorMessage(NAME, "Can't find any noise segments in the given chromatogram.");
@@ -55,7 +55,7 @@ public class NoiseChromatogramClassifier extends AbstractChromatogramClassifier 
 			builder.append(" instead, you might want to adjust settings to get better results.");
 			processingInfo.addWarnMessage(NAME, builder.toString());
 		}
-		//
+
 		return processingInfo;
 	}
 

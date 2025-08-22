@@ -57,7 +57,7 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 
 	private static final String LABEL_AXIS_X = "X";
 	private static final String LABEL_AXIS_Y = "Y";
-	//
+
 	private Button buttonToolbarInfo;
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private Button buttonToolbarEdit;
@@ -66,9 +66,9 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 	private IntensityScaleUI intensityScaleMax;
 	private LightweightSystem lightweightSystem;
 	private IntensityGraphFigure intensityGraphFigure;
-	//
+
 	private IChromatogramTSD chromatogramTSD;
-	//
+
 	private ChromatogramHeatmapSupport chromatogramHeatmapSupport = new ChromatogramHeatmapSupport();
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
@@ -97,12 +97,12 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createToolbarEdit(this);
 		createCanvas(this);
-		//
+
 		initialize();
 	}
 
@@ -120,7 +120,7 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(5, false));
-		//
+
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 		buttonToolbarEdit = createButtonToggleToolbar(composite, toolbarEdit, IMAGE_EDIT, TOOLTIP_EDIT);
 		createColorMapComboViewer(composite);
@@ -132,7 +132,7 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -141,10 +141,10 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		composite.setLayout(new GridLayout(2, true));
-		//
+
 		intensityScaleMin = createIntensityScale(composite, "Min Scale Intensity");
 		intensityScaleMax = createIntensityScale(composite, "Max Scale Intensity");
-		//
+
 		toolbarEdit.set(composite);
 	}
 
@@ -163,7 +163,7 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 				updateHeatmap();
 			}
 		});
-		//
+
 		return intensityScaleUI;
 	}
 
@@ -183,7 +183,7 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select a color scheme.");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
@@ -200,7 +200,7 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 				}
 			}
 		});
-		//
+
 		ColorMap[] input = new ColorMap[6];
 		input[0] = new ColorMap(PredefinedColorMap.JET, true, true);
 		input[1] = new ColorMap(PredefinedColorMap.ColorSpectrum, true, true);
@@ -210,7 +210,7 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 		input[5] = new ColorMap(PredefinedColorMap.Shaded, true, true);
 		comboViewer.setInput(input);
 		combo.select(0);
-		//
+
 		return comboViewer;
 	}
 
@@ -218,10 +218,10 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 
 		Canvas canvas = new Canvas(parent, SWT.FILL | SWT.BORDER);
 		canvas.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		lightweightSystem = createLightweightSystem(canvas);
 		intensityGraphFigure = createIntensityGraphFigure();
-		//
+
 		return canvas;
 	}
 
@@ -264,7 +264,7 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 				updateHeatmap();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -314,7 +314,7 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 		} else {
 			toolbarInfo.get().setText("--");
 		}
-		//
+
 		updateHeatmap();
 	}
 
@@ -352,7 +352,7 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 			 */
 			intensityGraphFigure.getXAxis().setRange(chromatogramHeatmapData.getAxisRangeWidth());
 			intensityGraphFigure.getYAxis().setRange(chromatogramHeatmapData.getAxisRangeHeight());
-			//
+
 			intensityGraphFigure.setMin(chromatogramHeatmapData.getMinimum());
 			intensityGraphFigure.setMax(chromatogramHeatmapData.getMaximum());
 			/*
@@ -361,10 +361,10 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 			 */
 			intensityGraphFigure.setDataWidth(chromatogramHeatmapData.getDataWidth());
 			intensityGraphFigure.setDataHeight(chromatogramHeatmapData.getDataHeight());
-			//
+
 			intensityGraphFigure.getXAxis().setTitle(chromatogramHeatmapData.getAxisLabelX());
 			intensityGraphFigure.getYAxis().setTitle(chromatogramHeatmapData.getAxisLabelY());
-			//
+
 			intensityGraphFigure.setColorMap(new ColorMap(PredefinedColorMap.JET, true, true));
 			/*
 			 * Set the heatmap data

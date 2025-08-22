@@ -42,17 +42,17 @@ public class PeakRetentionTimeExtractor extends AbstractClassifierDescriptionExt
 		List<Sample> samplesList = new ArrayList<>();
 		peaks.keySet().forEach(d -> samplesList.add(new Sample(d.getSampleName(), d.getGroupName())));
 		Samples samples = new Samples(samplesList);
-		//
+
 		Map<String, List<IPeak>> peakMap = new LinkedHashMap<>();
 		peaks.forEach((dataInputEntry, peaksInput) -> peakMap.put(dataInputEntry.getSampleName(), peaksInput));
-		//
+
 		Map<String, SortedMap<Integer, IPeak>> extractPeaks = exctractPcaPeakMap(peakMap, retentionTimeWindow);
 		List<Integer> extractedRetentionTimes = calculateCondensedRetentionTimes(extractPeaks);
 		samples.getVariables().addAll(RetentionTime.create(extractedRetentionTimes));
-		//
+
 		setExtractData(extractPeaks, samples, valueOption);
 		setClassifierAndDescription(samples, descriptionOption);
-		//
+
 		return samples;
 	}
 
@@ -72,7 +72,7 @@ public class PeakRetentionTimeExtractor extends AbstractClassifierDescriptionExt
 		Map<String, TreeMap<Integer, IPeak>> pcaPeakRetentionTime = new LinkedHashMap<>();
 		Map<String, SortedMap<Integer, IPeak>> pcaPeakCondenseRetentionTime = new LinkedHashMap<>();
 		int totalCountPeak = 0;
-		//
+
 		for(Map.Entry<String, List<IPeak>> peakEnry : peakMap.entrySet()) {
 			String name = peakEnry.getKey();
 			List<IPeak> peaks = peakEnry.getValue();
@@ -84,7 +84,7 @@ public class PeakRetentionTimeExtractor extends AbstractClassifierDescriptionExt
 			totalCountPeak += peakTree.size();
 			pcaPeakRetentionTime.put(name, peakTree);
 		}
-		//
+
 		while(totalCountPeak != 0) {
 			SortedMap<Double, Collection<Integer>> weightRetentionTime = setWeightRetentionTimes(pcaPeakRetentionTime, retentionTimeWindow);
 			Iterator<Map.Entry<Double, Collection<Integer>>> it = weightRetentionTime.entrySet().iterator();
@@ -124,7 +124,7 @@ public class PeakRetentionTimeExtractor extends AbstractClassifierDescriptionExt
 				}
 			}
 		}
-		//
+
 		return pcaPeakCondenseRetentionTime;
 	}
 
@@ -168,7 +168,7 @@ public class PeakRetentionTimeExtractor extends AbstractClassifierDescriptionExt
 
 		List<IVariable> extractedRetentionTimes = samples.getVariables();
 		boolean useQuantitationValue = ValueOption.CONCENTRATION.equals(valueOption);
-		//
+
 		for(Sample sample : samples.getSamples()) {
 			Iterator<IVariable> it = extractedRetentionTimes.iterator();
 			SortedMap<Integer, IPeak> extractPeak = extractData.get(sample.getSampleName());
@@ -192,7 +192,7 @@ public class PeakRetentionTimeExtractor extends AbstractClassifierDescriptionExt
 							 */
 							value = peak.getIntegratedArea();
 						}
-						//
+
 						PeakSampleData sampleData = new PeakSampleData(value, peak);
 						sampleData.setPeak(peak);
 						sample.getSampleData().add(sampleData);
@@ -209,12 +209,12 @@ public class PeakRetentionTimeExtractor extends AbstractClassifierDescriptionExt
 
 		Map<Integer, Double> peakSum = new LinkedHashMap<>();
 		int step = 1;
-		//
+
 		if(retentionTimeWindow > 400) {
 			step = retentionTimeWindow / 400;
 			retentionTimeWindow = (retentionTimeWindow / step / 2) * step * 2;
 		}
-		//
+
 		for(TreeMap<Integer, IPeak> peaks : pcaPeakRetetntionTimeMap.values()) {
 			for(Integer retentionTime : peaks.keySet()) {
 				retentionTime = (retentionTime / step) * step;
@@ -230,7 +230,7 @@ public class PeakRetentionTimeExtractor extends AbstractClassifierDescriptionExt
 				}
 			}
 		}
-		//
+
 		SortedMap<Double, Collection<Integer>> sortedWeightRetentionTimes = new TreeMap<>((o1, o2) -> -Double.compare(o1, o2));
 		peakSum.forEach((k, v) -> {
 			if(!(v < 1)) {
@@ -244,7 +244,7 @@ public class PeakRetentionTimeExtractor extends AbstractClassifierDescriptionExt
 				}
 			}
 		});
-		//
+
 		return sortedWeightRetentionTimes;
 	}
 }

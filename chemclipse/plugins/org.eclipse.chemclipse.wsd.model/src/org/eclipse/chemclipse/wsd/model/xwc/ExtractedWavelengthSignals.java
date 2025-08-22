@@ -156,14 +156,14 @@ public class ExtractedWavelengthSignals implements IExtractedWavelengthSignals {
 			logger.warn(e);
 			return null;
 		}
-		//
+
 		IScanWSD scanWSD = new ScanWSD();
 		scanWSD.setParentChromatogram(getChromatogram());
 		IScanSignalWSD scanSignalWSD;
 		float abundance;
 		int startWavelength = extractedWavelengthSignal.getStartWavelength();
 		int stopWavelength = extractedWavelengthSignal.getStopWavelength();
-		//
+
 		for(int wavelength = startWavelength; wavelength <= stopWavelength; wavelength++) {
 			abundance = extractedWavelengthSignal.getAbundance(wavelength);
 			if(abundance > 0.0f) {
@@ -270,7 +270,7 @@ public class ExtractedWavelengthSignals implements IExtractedWavelengthSignals {
 
 		IExtractedWavelengthSignals extractedWavelengthSignals = new ExtractedWavelengthSignals(startScan, stopScan, chromatogram);
 		IExtractedWavelengthSignal extractedWavelengthSignal;
-		//
+
 		for(IExtractedWavelengthSignal signal : signals) {
 			extractedWavelengthSignal = new ExtractedWavelengthSignal(signal.getStartWavelength(), signal.getStopWavelength());
 			extractedWavelengthSignal.setRetentionTime(signal.getRetentionTime());

@@ -42,7 +42,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final int NUMBER_OF_USE_IONS_FOR_COEFFICIENT_MAX = 20;
 	public static final boolean DEF_USE_CHROMATOGRAM_SPECIFIC_IONS = false;
 	public static final boolean DEF_ADJUST_THRESHOLD_TRANSITIONS = true;
-	//
+
 	private static final Logger logger = Logger.getLogger(PreferenceSupplier.class);
 	private static IPreferenceSupplier preferenceSupplier = null;
 

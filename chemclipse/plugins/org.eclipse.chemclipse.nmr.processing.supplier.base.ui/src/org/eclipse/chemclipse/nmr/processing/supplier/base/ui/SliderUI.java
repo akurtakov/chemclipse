@@ -59,7 +59,7 @@ public class SliderUI {
 		composite.setLayout(new GridLayout(2, false));
 		textField = new Text(composite, SWT.BORDER);
 		scale = new Scale(composite, SWT.HORIZONTAL);
-		//
+
 		scale.setMinimum(0);
 		scale.setIncrement(1);
 		scale.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));

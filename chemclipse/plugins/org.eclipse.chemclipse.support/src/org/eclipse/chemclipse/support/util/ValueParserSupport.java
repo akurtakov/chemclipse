@@ -54,7 +54,7 @@ public class ValueParserSupport {
 			try {
 				result = Integer.parseInt(value);
 			} catch(NumberFormatException e) {
-				//
+
 			}
 		}
 		return result;
@@ -73,7 +73,7 @@ public class ValueParserSupport {
 			try {
 				result = Float.parseFloat(value);
 			} catch(NumberFormatException e) {
-				//
+
 			}
 		}
 		return result;
@@ -92,7 +92,7 @@ public class ValueParserSupport {
 			try {
 				result = Double.parseDouble(value);
 			} catch(NumberFormatException e) {
-				//
+
 			}
 		}
 		return result;

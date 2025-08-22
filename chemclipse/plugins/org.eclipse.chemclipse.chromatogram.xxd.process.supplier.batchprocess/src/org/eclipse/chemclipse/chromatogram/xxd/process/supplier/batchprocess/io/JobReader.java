@@ -46,7 +46,7 @@ public class JobReader {
 
 		ProcessMethod processMethod = new ProcessMethod(ProcessMethod.CHROMATOGRAPHY);
 		BatchProcessJob batchProcessJob = new BatchProcessJob(processMethod);
-		//
+
 		try {
 			readHeader(file, batchProcessJob);
 			readDataTypeEntries(file, batchProcessJob, monitor);
@@ -55,7 +55,7 @@ public class JobReader {
 		} catch(XMLStreamException e) {
 			throw new IOException(e);
 		}
-		//
+
 		return batchProcessJob;
 	}
 
@@ -190,7 +190,7 @@ public class JobReader {
 		XMLEvent event;
 		Attribute attribute;
 		String attributeName;
-		//
+
 		String id = "";
 		String name = "";
 		String description = "";
@@ -218,7 +218,7 @@ public class JobReader {
 			while(attributes.hasNext()) {
 				attribute = attributes.next();
 				attributeName = attribute.getName().getLocalPart();
-				//
+
 				if(attributeName.equals(JobTags.PROCESSOR_ID)) {
 					id = attribute.getValue();
 				} else if(attributeName.equals(JobTags.PROCESSOR_NAME)) {

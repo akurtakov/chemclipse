@@ -67,13 +67,13 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 
 	private AtomicReference<ScorePlot> scorePlotControl = new AtomicReference<>();
 	private AtomicReference<PrincipalComponentUI> principalComponentControl = new AtomicReference<>();
-	//
+
 	private EvaluationPCA evaluationPCA = null;
-	//
+
 	private UserSelection userSelection = new UserSelection();
-	//
+
 	private Composite control;
-	//
+
 	private boolean highlightClick = false;
 
 	public ExtendedScorePlot2D(Composite parent, int style) {
@@ -125,7 +125,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createScorePlot(this);
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(this, HelpContext.SCORE_PLOT);
@@ -139,7 +139,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(4, false));
-		//
+
 		createPrincipalComponentUI(composite);
 		createButtonReset(composite);
 		createSettingsButton(composite);
@@ -150,7 +150,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 
 		ScorePlot scorePlot = new ScorePlot(parent, SWT.BORDER);
 		scorePlot.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		IChartSettings chartSettings = scorePlot.getChartSettings();
 		chartSettings.addHandledEventProcessor(new IHandledEventProcessor() {
 
@@ -488,7 +488,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 					int y = Math.min(userSelection.getStartY(), userSelection.getStopY());
 					int width = Math.abs(userSelection.getStopX() - userSelection.getStartX());
 					int height = Math.abs(userSelection.getStopY() - userSelection.getStartY());
-					//
+
 					GC gc = e.gc;
 					gc.setBackground(Colors.RED);
 					gc.setForeground(Colors.DARK_RED);
@@ -500,7 +500,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		scorePlotControl.set(scorePlot);
 	}
 
@@ -514,7 +514,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 			rX = i;
 		}
 		double rY = eigenSpace[pcY - 1]; // e.g. 1 = PC2
-		//
+
 		return new Point(rX, rY);
 	}
 
@@ -529,7 +529,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 				updatePlot(pcX, pcY);
 			}
 		});
-		//
+
 		principalComponentControl.set(principalComponentUI);
 	}
 
@@ -547,7 +547,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 				applySettings();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -593,7 +593,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 
 		ScorePlot scorePlot = scorePlotControl.get();
 		scorePlot.deleteSeries();
-		//
+
 		if(evaluationPCA != null) {
 			scorePlot.setInput(evaluationPCA, pcX, pcY);
 		} else {

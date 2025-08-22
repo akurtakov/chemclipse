@@ -41,7 +41,7 @@ public class TargetLabelEditAction {
 
 	public static final boolean DEF_SHOW_PREVIEW = false;
 	public static final String P_SHOW_PREVIEW = "TargetLabelEditAction.showPreview";
-	//
+
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 	private List<Runnable> listeners = new CopyOnWriteArrayList<>();
 	private ILabelEditSettings labelEditSettings = null;
@@ -80,7 +80,7 @@ public class TargetLabelEditAction {
 							if(compare == 0) {
 								compare = targetReference1.getRetentionTimeMinutes().compareToIgnoreCase(targetReference2.getRetentionTimeMinutes());
 							}
-							//
+
 							return compare;
 						}
 					});
@@ -119,7 +119,7 @@ public class TargetLabelEditAction {
 					if(targetDisplaySettings == null) {
 						return;
 					}
-					//
+
 					if(showPreview) {
 						labelEditSettings.getChromatogramUI().update();
 						chromatogramChart.getBaseChart().redraw();

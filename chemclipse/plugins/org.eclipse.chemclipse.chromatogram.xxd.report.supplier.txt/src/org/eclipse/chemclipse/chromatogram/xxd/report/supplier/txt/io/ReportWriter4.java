@@ -41,9 +41,9 @@ public class ReportWriter4 {
 	private static final String DELIMITER = "\t";
 	private static final String ION_DELIMITER = " ";
 	private static final String NO_VALUE = "--";
-	//
+
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.0####");
-	//
+
 	private IonAbundanceComparator ionComparator = new IonAbundanceComparator(SortOrder.DESC);
 	private PeakRetentionTimeComparator peakComparator = new PeakRetentionTimeComparator(SortOrder.ASC);
 
@@ -147,7 +147,7 @@ public class ReportWriter4 {
 		if(peak instanceof IChromatogramPeak reportedPeak) {
 			chromatogramPeak = reportedPeak;
 		}
-		//
+
 		printWriter.print("[" + number + "]");
 		printWriter.print(DELIMITER);
 		printWriter.print(decimalFormat.format(peakModel.getRetentionTimeAtPeakMaximum() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR));

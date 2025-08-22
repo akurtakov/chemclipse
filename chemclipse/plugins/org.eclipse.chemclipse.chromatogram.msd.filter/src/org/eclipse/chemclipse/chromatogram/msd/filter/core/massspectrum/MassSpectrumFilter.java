@@ -39,7 +39,7 @@ public class MassSpectrumFilter {
 	private static final String FILTER_NAME = "filterName";
 	private static final String FILTER = "filter";
 	private static final String FILTER_CONFIG = "config";
-	//
+
 	private static final String PROCESSING_DESCRIPTION = "Mass Spectrum Filter";
 	private static final String NO_MASS_SPECTRUM_FILTER_AVAILABLE = "There is no mass spectrum filter available.";
 

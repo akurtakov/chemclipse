@@ -89,7 +89,7 @@ public class PeakIntegrator extends AbstractIntegrator {
 			double integratedArea = calculateIntegratedArea(integrationEntries);
 			result = getPeakIntegrationResult(peak, integratedArea, peakIntegrationSettings);
 		}
-		//
+
 		return result;
 	}
 
@@ -231,7 +231,7 @@ public class PeakIntegrator extends AbstractIntegrator {
 		boolean includeBackground = peakIntegrationSettings.isIncludeBackground();
 		boolean useAreaConstraint = peakIntegrationSettings.isUseAreaConstraint();
 		double scaleFactor = peakIntegrationSettings.getScaleFactor();
-		//
+
 		List<IIntegrationEntry> integrationEntries = new ArrayList<>();
 		if(peak instanceof IPeakMSD peakMSD) {
 			/*
@@ -240,7 +240,7 @@ public class PeakIntegrator extends AbstractIntegrator {
 			IPeakModelMSD peakModel = peakMSD.getPeakModel();
 			IPeakMassSpectrum massSpectrum = peakModel.getPeakMassSpectrum();
 			double integratedAreaTIC = calculateTICPeakArea(peak, baselineSupport, includeBackground, useAreaConstraint);
-			//
+
 			IIntegrationEntry integrationEntry;
 			if(!markedTraces.isEmpty() && !markedTraces.getTraces().contains(IMarkedTrace.TOTAL_SIGNAL_AS_INT)) {
 				Set<Integer> ions = markedTraces.getTraces();
@@ -271,7 +271,7 @@ public class PeakIntegrator extends AbstractIntegrator {
 			 */
 			IPeakModelWSD peakModel = peakWSD.getPeakModel();
 			double integratedAreaTIC = calculateTICPeakArea(peak, baselineSupport, includeBackground, useAreaConstraint);
-			//
+
 			IScan scan = peakModel.getPeakMaximum();
 			IIntegrationEntry integrationEntry;
 			if(scan instanceof IScanWSD scanWSD) {
@@ -293,7 +293,7 @@ public class PeakIntegrator extends AbstractIntegrator {
 				}
 			}
 		}
-		//
+
 		return integrationEntries;
 	}
 
@@ -311,7 +311,7 @@ public class PeakIntegrator extends AbstractIntegrator {
 		double integratedArea = 0.0d;
 		List<Integer> retentionTimes;
 		IPeakModel peakModel;
-		//
+
 		if(peak instanceof IPeakMSD peakMSD) {
 			peakModel = peakMSD.getPeakModel();
 			retentionTimes = peakModel.getRetentionTimes();
@@ -337,7 +337,7 @@ public class PeakIntegrator extends AbstractIntegrator {
 			int stopRetentionTime = retentionTimes.get(i + 1) - 1;
 			float peakAbundanceStart = peakModel.getPeakAbundance(startRetentionTime);
 			float peakAbundanceStop = peakModel.getPeakAbundance(stopRetentionTime);
-			//
+
 			integratedArea += calculateArea(startRetentionTime, stopRetentionTime, peakAbundanceStart, peakAbundanceStop);
 			/*
 			 * If the peak should be integrated as it is, skip the baseline
@@ -360,7 +360,7 @@ public class PeakIntegrator extends AbstractIntegrator {
 		if(integratedArea < minArea) {
 			integratedArea = 0.0d;
 		}
-		//
+
 		return integratedArea;
 	}
 
@@ -384,7 +384,7 @@ public class PeakIntegrator extends AbstractIntegrator {
 		 * peak baseline and peak abundance.
 		 */
 		double integratedArea = 0d;
-		//
+
 		IPeakModel peakModel;
 		if(peak instanceof IPeakMSD peakMSD) {
 			peakModel = peakMSD.getPeakModel();
@@ -474,7 +474,7 @@ public class PeakIntegrator extends AbstractIntegrator {
 			result.setWidth(peakWSD.getPeakModel().getWidthByInflectionPoints());
 			result.addIntegratedTraces(markedTraceSet);
 		}
-		//
+
 		return result;
 	}
 

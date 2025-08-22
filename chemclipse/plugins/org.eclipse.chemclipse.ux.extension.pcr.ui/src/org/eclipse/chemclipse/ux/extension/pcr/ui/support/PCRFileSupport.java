@@ -46,7 +46,7 @@ public class PCRFileSupport {
 		if(plate == null || shell == null) {
 			return null;
 		}
-		//
+
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE);
 		/*
 		 * Create the dialog.
@@ -55,7 +55,7 @@ public class PCRFileSupport {
 		dialog.setFileName(plate.getName());
 		dialog.setText("Save Plate As...");
 		dialog.setOverwrite(true);
-		//
+
 		IScanConverterSupport converterSupport = PlateConverterPCR.getScanConverterSupport();
 		if(converterSupport != null) {
 			String[] filterExtensions = converterSupport.getExportableFilterExtensions();
@@ -84,7 +84,7 @@ public class PCRFileSupport {
 		if(file == null || plate == null || supplier == null) {
 			return;
 		}
-		//
+
 		ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
 		PCRExportRunnable runnable = new PCRExportRunnable(file, plate, supplier);
 		try {
@@ -95,7 +95,7 @@ public class PCRFileSupport {
 			logger.warn(e);
 			Thread.currentThread().interrupt();
 		}
-		//
+
 		File data = runnable.getData();
 		if(data == null) {
 			MessageDialog.openInformation(shell, "Save PCR", "There is no suitable plate converter available.");
@@ -164,7 +164,7 @@ public class PCRFileSupport {
 			 */
 			filename = removeFileExtensions(filename, selectedSupplier);
 			filename = filename.concat(selectedSupplier.getFileExtension());
-			//
+
 			String filenameDialog = dialog.getFilterPath() + File.separator + dialog.getFileName();
 			if(!filename.equals(filenameDialog)) {
 				/*
@@ -213,7 +213,7 @@ public class PCRFileSupport {
 
 		int start = 0;
 		int stop = 0;
-		//
+
 		if(supplier.getDirectoryExtension().equals("")) {
 			/*
 			 * Remove the file extension.

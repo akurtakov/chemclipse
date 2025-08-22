@@ -37,9 +37,9 @@ import org.eclipse.swt.widgets.Label;
 public abstract class DataInputPageWizard extends WizardPage {
 
 	private static final String FILES = "Input Files: ";
-	//
+
 	private List<IDataInputEntry> dataInputEntries = new ArrayList<>();
-	//
+
 	private InputFilesTable inputFilesTable;
 	private Label countFiles;
 
@@ -69,11 +69,11 @@ public abstract class DataInputPageWizard extends WizardPage {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(1, true));
-		//
+
 		inputFilesTable = createInputFilesTable(composite);
 		countFiles = createLabel(composite, FILES + "0");
 		createToolbarBottom(composite);
-		//
+
 		setControl(composite);
 	}
 
@@ -120,7 +120,7 @@ public abstract class DataInputPageWizard extends WizardPage {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(3, false));
-		//
+
 		createButtonAdd(composite);
 		createButtonRemove(composite);
 		createButtonRemoveAll(composite);
@@ -140,7 +140,7 @@ public abstract class DataInputPageWizard extends WizardPage {
 				addFiles();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -159,7 +159,7 @@ public abstract class DataInputPageWizard extends WizardPage {
 				update();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -178,7 +178,7 @@ public abstract class DataInputPageWizard extends WizardPage {
 				update();
 			}
 		});
-		//
+
 		return button;
 	}
 

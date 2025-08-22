@@ -17,10 +17,10 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.chemclipse.chromatogram.csd.filter.ui.l10n.messages"; //$NON-NLS-1$ //
-	//
+
 	public static String filterCSD;
 	public static String filterCSDdescription;
-	//
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}

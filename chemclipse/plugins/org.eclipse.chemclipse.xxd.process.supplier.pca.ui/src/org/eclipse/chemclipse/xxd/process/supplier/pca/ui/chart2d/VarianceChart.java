@@ -71,18 +71,18 @@ public class VarianceChart extends BarChart {
 	private void createControl() {
 
 		IChartSettings chartSettings = getChartSettings();
-		//
+
 		chartSettings.setTitleVisible(false);
 		chartSettings.setOrientation(SWT.HORIZONTAL);
 		chartSettings.setHorizontalSliderVisible(false);
 		chartSettings.setVerticalSliderVisible(false);
-		//
+
 		RangeRestriction rangeRestriction = chartSettings.getRangeRestriction();
 		rangeRestriction.setZeroX(false);
 		rangeRestriction.setZeroY(false);
 		rangeRestriction.setForceZeroMinY(true);
 		rangeRestriction.setRestrictFrame(true);
-		//
+
 		chartSettings.setShowAxisZeroMarker(true);
 		if(PreferencesSupport.isDarkTheme()) {
 			chartSettings.setColorAxisZeroMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
@@ -92,9 +92,9 @@ public class VarianceChart extends BarChart {
 		chartSettings.setShowSeriesLabelMarker(false);
 		chartSettings.setCreateMenu(true);
 		chartSettings.setEnableCompress(false);
-		//
+
 		setPrimaryAxisSet(chartSettings);
-		//
+
 		applySettings(chartSettings);
 	}
 
@@ -108,7 +108,7 @@ public class VarianceChart extends BarChart {
 		} else {
 			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
 		}
-		//
+
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle("Variance");
 		primaryAxisSettingsY.setDecimalFormat(ValueFormat.getDecimalFormatEnglish());
@@ -123,9 +123,9 @@ public class VarianceChart extends BarChart {
 
 		deleteSeries();
 		if(evaluationPCA != null) {
-			//
+
 			IResultsMVA resultsPCA = evaluationPCA.getResults();
-			//
+
 			IChartSettings chartSettings = getChartSettings();
 			IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
 			primaryAxisSettingsX.setEnableCategory(true);
@@ -142,7 +142,7 @@ public class VarianceChart extends BarChart {
 			}
 			primaryAxisSettingsY.setTitleVisible(false);
 			applySettings(chartSettings);
-			//
+
 			List<IBarSeriesData> barSeriesDataList = new ArrayList<>();
 			ISeriesData seriesData = getSeriesVariance(resultsPCA);
 			IBarSeriesData barSeriesData = new BarSeriesData(seriesData);
@@ -170,11 +170,11 @@ public class VarianceChart extends BarChart {
 
 		int size = pcaResults.getCumulativeExplainedVariances().length;
 		String[] categories = new String[size];
-		//
+
 		for(int i = 0; i < size; i++) {
 			categories[i] = "PC" + (i + 1);
 		}
-		//
+
 		return categories;
 	}
 
@@ -182,7 +182,7 @@ public class VarianceChart extends BarChart {
 
 		double[] ySeries;
 		String label;
-		//
+
 		switch(variance) {
 			case CUMULATIVE:
 				ySeries = pcaResults.getCumulativeExplainedVariances();
@@ -193,7 +193,7 @@ public class VarianceChart extends BarChart {
 				label = "Explained Variances";
 				break;
 		}
-		//
+
 		getChartSettings().getPrimaryAxisSettingsY().setTitle(label);
 		applySettings(getChartSettings());
 		double[] xSeries = new double[ySeries.length];
@@ -204,7 +204,7 @@ public class VarianceChart extends BarChart {
 
 		double[] ySeries;
 		String label;
-		//
+
 		switch(variance) {
 			case CUMULATIVE:
 				ySeries = pcaResults.getCumulativeCrossValidations();
@@ -215,7 +215,7 @@ public class VarianceChart extends BarChart {
 				label = "CrossValidation Q2";
 				break;
 		}
-		//
+
 		getChartSettings().getPrimaryAxisSettingsY().setTitle(label);
 		applySettings(getChartSettings());
 		double[] xSeries = new double[ySeries.length];

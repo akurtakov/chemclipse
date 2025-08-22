@@ -66,7 +66,7 @@ public class TargetTransferSupport {
 		} else {
 			return "The source chromatogram contains no peaks.";
 		}
-		//
+
 		return null;
 	}
 
@@ -92,7 +92,7 @@ public class TargetTransferSupport {
 		} else {
 			return "The source chromatogram contains no identified scans.";
 		}
-		//
+
 		return null;
 	}
 

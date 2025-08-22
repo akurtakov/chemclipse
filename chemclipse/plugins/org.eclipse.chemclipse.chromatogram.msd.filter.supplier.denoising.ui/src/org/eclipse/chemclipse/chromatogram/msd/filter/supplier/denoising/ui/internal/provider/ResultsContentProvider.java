@@ -28,7 +28,7 @@ public class ResultsContentProvider implements IStructuredContentProvider {
 				return denoisingFilterResult.getNoiseMassSpectra().toArray();
 			}
 		}
-		//
+
 		return null;
 	}
 

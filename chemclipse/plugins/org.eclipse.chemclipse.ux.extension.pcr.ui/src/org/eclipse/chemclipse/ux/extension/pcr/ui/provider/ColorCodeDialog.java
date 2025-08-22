@@ -39,10 +39,10 @@ import org.eclipse.swt.widgets.Text;
 public class ColorCodeDialog extends TitleAreaDialog {
 
 	private static final Logger logger = Logger.getLogger(ColorCodeDialog.class);
-	//
+
 	private Text textName;
 	private Label colorWidget;
-	//
+
 	private ColorCode colorCode;
 
 	public ColorCodeDialog(Shell shell) {
@@ -93,18 +93,18 @@ public class ColorCodeDialog extends TitleAreaDialog {
 	protected Control createDialogArea(Composite parent) {
 
 		Composite composite = (Composite)super.createDialogArea(parent);
-		//
+
 		Composite compositeMain = new Composite(composite, SWT.FILL);
 		compositeMain.setLayout(new GridLayout(3, false));
 		GridData gridData = new GridData(GridData.GRAB_HORIZONTAL);
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.widthHint = 550;
 		composite.setLayoutData(gridData);
-		//
+
 		createTextElement(compositeMain);
 		createColorDisplayElement(compositeMain);
 		createColorButtonElement(compositeMain);
-		//
+
 		return composite;
 	}
 
@@ -171,7 +171,7 @@ public class ColorCodeDialog extends TitleAreaDialog {
 
 		setErrorMessage(null);
 		getButton(OK).setEnabled(true);
-		//
+
 		String name = getName();
 		if(name.equals("")) {
 			setErrorMessage(ExtensionMessages.nameMustBeSpecified);

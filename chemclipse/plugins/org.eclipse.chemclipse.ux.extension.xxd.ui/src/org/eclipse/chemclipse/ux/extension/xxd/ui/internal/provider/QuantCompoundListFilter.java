@@ -36,28 +36,28 @@ public class QuantCompoundListFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
-		//
+
+
 		if(element instanceof IQuantitationCompound quantitationCompound) {
-			//
+
 			String name = quantitationCompound.getName();
 			String chemicalClass = quantitationCompound.getChemicalClass();
-			//
+
 			if(!caseSensitive) {
 				searchText = searchText.toLowerCase();
 				name = name.toLowerCase();
 				chemicalClass = chemicalClass.toLowerCase();
 			}
-			//
+
 			if(name.matches(searchText)) {
 				return true;
 			}
-			//
+
 			if(chemicalClass.matches(searchText)) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

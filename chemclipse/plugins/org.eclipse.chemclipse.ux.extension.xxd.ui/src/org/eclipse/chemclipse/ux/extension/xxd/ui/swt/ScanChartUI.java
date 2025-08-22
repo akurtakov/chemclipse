@@ -126,7 +126,7 @@ public class ScanChartUI extends ScrollableChart {
 			int size = barSeriesValues.size();
 			int modulo = size / labelHighestIntensities;
 			int limit = (labelHighestIntensities < size) ? labelHighestIntensities : size;
-			//
+
 			for(int i = 0; i < size; i++) {
 				if(i < limit) {
 					BarSeriesValue barSeriesValue = barSeriesValues.get(i);
@@ -146,7 +146,7 @@ public class ScanChartUI extends ScrollableChart {
 			int limit = size - labelHighestIntensities;
 			limit = (limit < 0) ? 0 : limit;
 			int modulo = size / labelHighestIntensities;
-			//
+
 			for(int i = size - 1; i >= 0; i--) {
 				if(i >= limit) {
 					BarSeriesValue barSeriesValue = barSeriesValues.get(i);
@@ -210,14 +210,14 @@ public class ScanChartUI extends ScrollableChart {
 			extractCustomLabels(scan);
 			DataType usedDataType = determineDataType(scan);
 			SignalType usedSignalType = determineSignalType(scan);
-			//
+
 			modifyChart(usedDataType, usedSignalType);
 			determineLabelOption(usedDataType);
 			modifyChart(scan, null);
-			//
+
 			IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 			Color colorScan1 = Colors.getColor(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCAN_1));
-			//
+
 			if(usedSignalType.equals(SignalType.PROFILE)) {
 				setChartType(ChartType.LINE);
 				List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
@@ -249,18 +249,18 @@ public class ScanChartUI extends ScrollableChart {
 			extractCustomLabels(scan1);
 			DataType usedDataType = determineDataType(scan1);
 			SignalType usedSignalType = determineSignalType(scan1);
-			//
+
 			modifyChart(usedDataType, usedSignalType);
 			determineLabelOption(usedDataType);
 			modifyChart(mirrored);
 			modifyChart(scan1, scan2);
-			//
+
 			String labelScan1 = "scan1";
 			String labelScan2 = "scan2";
 			IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 			Color colorScan1 = Colors.getColor(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCAN_1));
 			Color colorScan2 = Colors.getColor(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCAN_2));
-			//
+
 			if(usedSignalType.equals(SignalType.PROFILE)) {
 				setChartType(ChartType.LINE);
 				List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
@@ -313,7 +313,7 @@ public class ScanChartUI extends ScrollableChart {
 		if(!forceZeroY && scan2 != null) {
 			forceZeroY = isForceZeroMinY(scan2);
 		}
-		//
+
 		IChartSettings chartSettings = getChartSettings();
 		RangeRestriction rangeRestriction = chartSettings.getRangeRestriction();
 		rangeRestriction.setForceZeroMinY(forceZeroY);
@@ -442,7 +442,7 @@ public class ScanChartUI extends ScrollableChart {
 		} else {
 			usedSignalType = signalType;
 		}
-		//
+
 		return usedSignalType;
 	}
 

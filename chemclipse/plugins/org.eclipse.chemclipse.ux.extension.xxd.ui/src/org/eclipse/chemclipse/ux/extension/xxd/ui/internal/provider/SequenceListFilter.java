@@ -36,17 +36,17 @@ public class SequenceListFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
-		//
+
+
 		if(element instanceof ISequenceRecord sequenceRecord) {
-			//
+
 			String dataFile = sequenceRecord.getDataFile();
 			String processMethod = sequenceRecord.getProcessMethod();
 			String reportMethod = sequenceRecord.getReportMethod();
 			String sampleName = sequenceRecord.getSampleName();
 			String substance = sequenceRecord.getSubstance();
 			String description = sequenceRecord.getDescription();
-			//
+
 			if(!caseSensitive) {
 				searchText = searchText.toLowerCase();
 				dataFile = dataFile.toLowerCase();
@@ -56,36 +56,36 @@ public class SequenceListFilter extends ViewerFilter {
 				substance = substance.toLowerCase();
 				description = description.toLowerCase();
 			}
-			//
+
 			if(dataFile.matches(searchText)) {
 				return true;
 			}
-			//
+
 			if(sequenceRecord.getDescription().matches(searchText)) {
 				return true;
 			}
-			//
+
 			if(processMethod.matches(searchText)) {
 				return true;
 			}
-			//
+
 			if(reportMethod.matches(searchText)) {
 				return true;
 			}
-			//
+
 			if(sampleName.matches(searchText)) {
 				return true;
 			}
-			//
+
 			if(substance.matches(searchText)) {
 				return true;
 			}
-			//
+
 			if(description.matches(searchText)) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

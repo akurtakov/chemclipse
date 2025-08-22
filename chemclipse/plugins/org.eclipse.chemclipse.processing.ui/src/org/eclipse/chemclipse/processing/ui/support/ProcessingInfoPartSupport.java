@@ -33,10 +33,10 @@ import org.eclipse.ui.PlatformUI;
 public class ProcessingInfoPartSupport {
 
 	private static final Logger logger = Logger.getLogger(ProcessingInfoPartSupport.class);
-	//
+
 	private static final String TITLE = "Processing Error";
 	private static final String MESSAGE = "Please check the 'Feedback' part.";
-	//
+
 	private UISynchronize uiSynchronize = null;
 	private ProcessingInfoUpdateNotifier processingInfoUpdateNotifier = null;
 
@@ -126,7 +126,7 @@ public class ProcessingInfoPartSupport {
 		if(messageProvider == null) {
 			return;
 		}
-		//
+
 		update(messageProvider, messageProvider.hasErrorMessages());
 	}
 
@@ -165,7 +165,7 @@ public class ProcessingInfoPartSupport {
 				}
 			};
 		}
-		//
+
 		return uiSynchronize;
 	}
 
@@ -174,7 +174,7 @@ public class ProcessingInfoPartSupport {
 		if(processingInfoUpdateNotifier == null) {
 			processingInfoUpdateNotifier = new ProcessingInfoUpdateNotifier();
 		}
-		//
+
 		return processingInfoUpdateNotifier;
 	}
 }

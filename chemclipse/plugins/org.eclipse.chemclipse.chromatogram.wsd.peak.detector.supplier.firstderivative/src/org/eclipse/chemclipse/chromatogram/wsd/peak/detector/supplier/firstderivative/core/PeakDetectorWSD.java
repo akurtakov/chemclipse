@@ -69,7 +69,7 @@ import org.eclipse.e4.core.services.translation.TranslationService;
 public class PeakDetectorWSD extends BasePeakDetector implements IPeakDetectorWSD {
 
 	private static final Logger logger = Logger.getLogger(PeakDetectorWSD.class);
-	//
+
 	private static final float NORMALIZATION_BASE = 100000.0f;
 
 	@Override
@@ -131,7 +131,7 @@ public class PeakDetectorWSD extends BasePeakDetector implements IPeakDetectorWS
 			Threshold threshold = peakDetectorSettings.getThreshold();
 			int windowSize = peakDetectorSettings.getMovingAverageWindowSize();
 			List<IRawPeak> rawPeaks = new ArrayList<>();
-			//
+
 			if(noiseSegments != null && !noiseSegments.isEmpty()) {
 				/*
 				 * Initial retention time range before running the detection using
@@ -210,7 +210,7 @@ public class PeakDetectorWSD extends BasePeakDetector implements IPeakDetectorWS
 		Set<Integer> traces = wavelengths.getWavelengths().stream().map(Float::intValue).collect(Collectors.toSet());
 		DetectorType detectorType = peakDetectorSettings.getDetectorType();
 		boolean optimizeBaseline = peakDetectorSettings.isOptimizeBaseline();
-		//
+
 		IChromatogramPeakWSD peak = null;
 		IScanRange scanRange = null;
 		for(IRawPeak rawPeak : rawPeaks) {
@@ -252,7 +252,7 @@ public class PeakDetectorWSD extends BasePeakDetector implements IPeakDetectorWS
 				logger.warn(e);
 			}
 		}
-		//
+
 		return peaks;
 	}
 
@@ -279,7 +279,7 @@ public class PeakDetectorWSD extends BasePeakDetector implements IPeakDetectorWS
 			 */
 			int startScan = signals.getStartScan();
 			int stopScan = signals.getStopScan();
-			//
+
 			for(int scan = startScan; scan < stopScan; scan++) {
 				ITotalScanSignal s1 = signals.getTotalScanSignal(scan);
 				ITotalScanSignal s2 = signals.getNextTotalScanSignal(scan);
@@ -296,7 +296,7 @@ public class PeakDetectorWSD extends BasePeakDetector implements IPeakDetectorWS
 			if(windowSize != 0) {
 				slopes.calculateMovingAverage(windowSize);
 			}
-			//
+
 			return slopes;
 		} catch(ChromatogramIsNullException e) {
 			logger.warn(e.getLocalizedMessage(), e);
@@ -326,7 +326,7 @@ public class PeakDetectorWSD extends BasePeakDetector implements IPeakDetectorWS
 		 */
 		int stopScanOptimized = optimizeRightBaseline(chromatogram, startScan, centerScan, stopScan, wavelengths);
 		int startScanOptimized = optimizeLeftBaseline(chromatogram, startScan, centerScan, stopScanOptimized, wavelengths);
-		//
+
 		return new ScanRange(startScanOptimized, stopScanOptimized);
 	}
 
@@ -355,7 +355,7 @@ public class PeakDetectorWSD extends BasePeakDetector implements IPeakDetectorWS
 				stopScanOptimized = i;
 			}
 		}
-		//
+
 		return stopScanOptimized;
 	}
 
@@ -381,7 +381,7 @@ public class PeakDetectorWSD extends BasePeakDetector implements IPeakDetectorWS
 				backgroundEquation = Equations.createLinearEquation(p1, p2);
 			}
 		}
-		//
+
 		return startScanOptimized;
 	}
 

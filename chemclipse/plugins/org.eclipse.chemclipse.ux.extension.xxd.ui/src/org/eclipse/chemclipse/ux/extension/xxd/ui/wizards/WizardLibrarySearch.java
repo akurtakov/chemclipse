@@ -19,7 +19,7 @@ public class WizardLibrarySearch extends Wizard {
 
 	public static final int DEFAULT_WIDTH = 500;
 	public static final int DEFAULT_HEIGHT = 400;
-	//
+
 	private PageLibrarySearch pageLibrarySearch;
 	private LibrarySearchSettings librarySearchSettings;
 

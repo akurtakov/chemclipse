@@ -76,7 +76,7 @@ public class BaselineCorrectionProcessor extends AbstractSpectrumSignalFilter<Ba
 			}
 			// Tentative sigma
 			double sigmaNull = calculateTentativeSigma(signals, fittingConstantU * sigmaOne);
-			//
+
 			if(Double.compare(sigmaNull, sigmaOne) == 0) {
 				DoubleUnaryOperator[] polyFunction = getPolyFunction(signals, baselineFitter, fittingConstantV * sigmaOne);
 				// apply baseline correction
@@ -88,7 +88,7 @@ public class BaselineCorrectionProcessor extends AbstractSpectrumSignalFilter<Ba
 					signal.subtract(realCorrection, imagCorrection);
 					baselineCorrectionBreakCheck += Math.sqrt(realCorrection * realCorrection + imagCorrection * imagCorrection);
 				}
-				//
+
 				// check if baseline correction is good enough
 				double breakCondition = negligibleFactorMinimum * sigmaOne;
 				if(baselineCorrectionBreakCheck < breakCondition) {
@@ -103,10 +103,10 @@ public class BaselineCorrectionProcessor extends AbstractSpectrumSignalFilter<Ba
 		if(iteration == maximumIterations - 1) {
 			messageConsumer.addWarnMessage(getName(), "maximum iterations reached!");
 		}
-		//
+
 		FilteredSpectrumMeasurement<?> filtered = new FilteredSpectrumMeasurement<>(context);
 		filtered.setSignals(signals);
-		//
+
 		return filtered;
 	}
 

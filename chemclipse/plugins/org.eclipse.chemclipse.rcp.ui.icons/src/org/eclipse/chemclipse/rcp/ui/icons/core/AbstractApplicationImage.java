@@ -37,7 +37,7 @@ public abstract class AbstractApplicationImage implements IApplicationImage {
 	private static final String FOLDER_ICONS = "icons";
 	private static final String EXTENSION_PNG = ".png";
 	private static final String EXTENSION_GIF = ".gif";
-	//
+
 	private Bundle bundle;
 	private Map<String, ImageDescriptor> imageDescriptorCache = new HashMap<>();
 	private Map<String, Image> imageCache = new HashMap<>();
@@ -61,7 +61,7 @@ public abstract class AbstractApplicationImage implements IApplicationImage {
 				}
 			}
 		}
-		//
+
 		return image;
 	}
 
@@ -78,7 +78,7 @@ public abstract class AbstractApplicationImage implements IApplicationImage {
 		InputStream inputStream = null;
 		URL url = FileLocator.find(bundle, new Path(getPath(fileName, size)), null);
 		inputStream = url.openConnection().getInputStream();
-		//
+
 		return inputStream;
 	}
 
@@ -86,7 +86,7 @@ public abstract class AbstractApplicationImage implements IApplicationImage {
 	public Collection<String> listImages(String size) {
 
 		List<String> images = new ArrayList<>();
-		//
+
 		try {
 			StringBuilder builder = new StringBuilder();
 			builder.append(PATH_SEPARATOR);
@@ -94,7 +94,7 @@ public abstract class AbstractApplicationImage implements IApplicationImage {
 			builder.append(PATH_SEPARATOR);
 			builder.append(size);
 			builder.append(PATH_SEPARATOR);
-			//
+
 			IPath path = new Path(builder.toString());
 			URL url = FileLocator.find(bundle, path, null);
 			File directory = new File(FileLocator.resolve(url).getPath().toString());
@@ -109,7 +109,7 @@ public abstract class AbstractApplicationImage implements IApplicationImage {
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
-		//
+
 		return images;
 	}
 
@@ -117,12 +117,12 @@ public abstract class AbstractApplicationImage implements IApplicationImage {
 	public String getURI(String fileName, String size) {
 
 		StringBuilder builder = new StringBuilder();
-		//
+
 		builder.append(PLATFORM_PREFIX);
 		builder.append(bundle.getSymbolicName());
 		builder.append(PATH_SEPARATOR);
 		builder.append(getPath(fileName, size));
-		//
+
 		return builder.toString();
 	}
 
@@ -136,13 +136,13 @@ public abstract class AbstractApplicationImage implements IApplicationImage {
 	protected String getPath(String fileName, String size) {
 
 		StringBuilder builder = new StringBuilder();
-		//
+
 		builder.append(FOLDER_ICONS);
 		builder.append(PATH_SEPARATOR);
 		builder.append(size);
 		builder.append(PATH_SEPARATOR);
 		builder.append(fileName);
-		//
+
 		return builder.toString();
 	}
 
@@ -165,7 +165,7 @@ public abstract class AbstractApplicationImage implements IApplicationImage {
 			} catch(Exception e) {
 			}
 		}
-		//
+
 		return imageDescriptor;
 	}
 }

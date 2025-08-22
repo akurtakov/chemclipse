@@ -38,11 +38,11 @@ public class WavenumberSignalsAnnotationService extends WavenumberSignalsSeriali
 		gridData.heightHint = 250;
 		gridData.widthHint = 500;
 		wavenumberSignalsEditor.setLayoutData(gridData);
-		//
+
 		if(currentSelection instanceof String text) {
 			wavenumberSignalsEditor.load(text);
 		}
-		//
+
 		editorControl.set(wavenumberSignalsEditor);
 		return wavenumberSignalsEditor;
 	}

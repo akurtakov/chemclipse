@@ -21,7 +21,7 @@ public class PolynomicalEquation9thDegree implements IEquation {
 	 * Renew the UUID on change.
 	 */
 	private static final long serialVersionUID = 6883637910982170361L;
-	//
+
 	private double a;
 	private double b;
 	private double c;

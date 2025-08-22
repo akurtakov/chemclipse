@@ -60,18 +60,18 @@ public class FilterDistributionChart extends BarChart {
 	private void createControl() {
 
 		IChartSettings chartSettings = getChartSettings();
-		//
+
 		chartSettings.setTitleVisible(false);
 		chartSettings.setOrientation(SWT.HORIZONTAL);
 		chartSettings.setHorizontalSliderVisible(false);
 		chartSettings.setVerticalSliderVisible(false);
-		//
+
 		RangeRestriction rangeRestriction = chartSettings.getRangeRestriction();
 		rangeRestriction.setZeroX(false);
 		rangeRestriction.setZeroY(false);
 		rangeRestriction.setForceZeroMinY(true);
 		rangeRestriction.setRestrictFrame(true);
-		//
+
 		chartSettings.setShowAxisZeroMarker(true);
 		if(PreferencesSupport.isDarkTheme()) {
 			chartSettings.setColorAxisZeroMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
@@ -81,9 +81,9 @@ public class FilterDistributionChart extends BarChart {
 		chartSettings.setShowSeriesLabelMarker(false);
 		chartSettings.setCreateMenu(true);
 		chartSettings.setEnableCompress(false);
-		//
+
 		setPrimaryAxisSet(chartSettings);
-		//
+
 		applySettings(chartSettings);
 	}
 
@@ -97,7 +97,7 @@ public class FilterDistributionChart extends BarChart {
 		} else {
 			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
 		}
-		//
+
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle("Count");
 		primaryAxisSettingsY.setDecimalFormat(ValueFormat.getDecimalFormatEnglish());
@@ -113,13 +113,13 @@ public class FilterDistributionChart extends BarChart {
 		deleteSeries();
 		if(settings != null) {
 			settings.getFilterDistribution();
-			//
+
 			IChartSettings chartSettings = getChartSettings();
 			IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
 			primaryAxisSettingsX.setEnableCategory(true);
 			primaryAxisSettingsX.setCategorySeries(getCategories(settings));
 			applySettings(chartSettings);
-			//
+
 			List<IBarSeriesData> barSeriesDataList = new ArrayList<>();
 			ISeriesData seriesData = getSeries(settings);
 			IBarSeriesData barSeriesData = new BarSeriesData(seriesData);

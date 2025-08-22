@@ -53,7 +53,7 @@ public class ChromatogramIndicesPart extends AbstractPart<ExtendedChromatogramIn
 			getControl().setInput(chromatogramSelection);
 			return true;
 		}
-		//
+
 		return false;
 	}
 

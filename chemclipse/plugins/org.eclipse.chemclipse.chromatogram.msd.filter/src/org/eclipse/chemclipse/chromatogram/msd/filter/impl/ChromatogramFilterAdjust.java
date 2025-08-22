@@ -59,7 +59,7 @@ public class ChromatogramFilterAdjust extends AbstractChromatogramFilterMSD {
 						 */
 						int startScan = chromatogram.getScanNumber(chromatogramSelection.getStartRetentionTime());
 						int stopScan = chromatogram.getScanNumber(chromatogramSelection.getStopRetentionTime());
-						//
+
 						for(int i = startScan; i <= stopScan; i++) {
 							IScan scan = chromatogram.getScan(i);
 							if(scan instanceof IScanMSD scanMSD) {
@@ -93,11 +93,11 @@ public class ChromatogramFilterAdjust extends AbstractChromatogramFilterMSD {
 						logger.warn(e);
 					}
 				}
-				//
+
 				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "Chromatogram Filter Adjust applied"));
 			}
 		}
-		//
+
 		return processingInfo;
 	}
 

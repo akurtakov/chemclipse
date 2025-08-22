@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class FilterSettings extends AbstractChromatogramFilterSettings {
 
 	private static final Logger logger = Logger.getLogger(FilterSettings.class);
-	//
+
 	@JsonProperty(value = "Coda Threshold", defaultValue = "0.75f")
 	@FloatSettingsProperty(minValue = PreferenceSupplier.CODA_THRESHOLD_MIN_VALUE, maxValue = PreferenceSupplier.CODA_THRESHOLD_MAX_VALUE, step = 0.05f)
 	private float codaThreshold;

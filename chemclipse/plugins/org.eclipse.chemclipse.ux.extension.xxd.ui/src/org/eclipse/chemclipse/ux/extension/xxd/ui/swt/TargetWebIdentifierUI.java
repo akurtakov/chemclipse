@@ -42,12 +42,12 @@ import org.eclipse.swt.widgets.MenuItem;
 public class TargetWebIdentifierUI extends Composite {
 
 	private ILibraryInformation libraryInformation;
-	//
+
 	private Button button;
 	private Menu menu;
-	//
+
 	private final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-	//
+
 	private List<ITargetIdentifierSupplier> identifierSuppliers = getTargetIdentifierSuppliers();
 	private ITargetIdentifierSupplier targetIdentifierSupplier;
 
@@ -84,18 +84,18 @@ public class TargetWebIdentifierUI extends Composite {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(1, false);
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		gridLayout.marginWidth = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		button = createButton(composite);
 		menu = createMenuIdentifier(button, identifierSuppliers);
 		button.setMenu(menu);
-		//
+
 		initialize();
 	}
 
@@ -118,14 +118,14 @@ public class TargetWebIdentifierUI extends Composite {
 				launchBrowser();
 			}
 		});
-		//
+
 		return button;
 	}
 
 	private Menu createMenuIdentifier(Button button, List<ITargetIdentifierSupplier> identifierSuppliers) {
 
 		Menu menu = new Menu(button);
-		//
+
 		for(ITargetIdentifierSupplier identifierSupplier : identifierSuppliers) {
 			/*
 			 * Identifier Handler
@@ -144,7 +144,7 @@ public class TargetWebIdentifierUI extends Composite {
 				}
 			});
 		}
-		//
+
 		return menu;
 	}
 
@@ -171,7 +171,7 @@ public class TargetWebIdentifierUI extends Composite {
 		ITargetIdentifierSupport targetIdentifierSupport = TargetIdentifier.getTargetIdentifierSupport();
 		List<ITargetIdentifierSupplier> identifierSuppliers = new ArrayList<>(targetIdentifierSupport.getSuppliers());
 		Collections.sort(identifierSuppliers, (s1, s2) -> s1.getIdentifierName().compareTo(s2.getIdentifierName()));
-		//
+
 		return identifierSuppliers;
 	}
 

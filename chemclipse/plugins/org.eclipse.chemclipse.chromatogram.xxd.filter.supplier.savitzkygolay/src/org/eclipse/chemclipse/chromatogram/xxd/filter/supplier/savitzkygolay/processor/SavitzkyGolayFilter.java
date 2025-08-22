@@ -101,7 +101,7 @@ public class SavitzkyGolayFilter {
 				startStopWeights[k][j] = weights[i][j];
 			}
 		}
-		//
+
 		for(int i = 0; i < derivativeCoefficients.length; i++) {
 			double coefficient = derivativeCoefficients[i];
 			for(int j = 0; j < startStopWeights[i].length; j++) {
@@ -161,7 +161,7 @@ public class SavitzkyGolayFilter {
 
 		int rows = t1.length;
 		int columns = t1[0].length;
-		//
+
 		double[][] array = new double[rows][columns];
 		for(int i = 0; i < rows; i++) {
 			for(int j = 0; j < columns; j++) {
@@ -179,7 +179,7 @@ public class SavitzkyGolayFilter {
 			 * Calculate the coefficient.
 			 */
 			int val1 = order + 1 - derivative;
-			//
+
 			double[][] t3 = createOnes(derivative, 1); // t3 one column
 			double[] t4 = createArray(val1, 1);
 			double[][] t34 = new double[t3.length][t4.length];
@@ -189,7 +189,7 @@ public class SavitzkyGolayFilter {
 					t34[i][j] = valt3 * t4[j];
 				}
 			}
-			//
+
 			double[] t5 = createArray(derivative, 0);
 			double[][] t6 = createOnes(1, val1); // t6 one row
 			double[][] t56 = new double[t5.length][t6[0].length];
@@ -199,7 +199,7 @@ public class SavitzkyGolayFilter {
 					t56[i][j] = valt5 * t6[0][j]; // t6 one row
 				}
 			}
-			//
+
 			int size = t34[0].length; // size of the columns
 			result = new double[size];
 			int rows = t34.length;
@@ -211,7 +211,7 @@ public class SavitzkyGolayFilter {
 				}
 				result[j] = product;
 			}
-			//
+
 		} else {
 			/*
 			 * Set a coefficient default value.
@@ -258,7 +258,7 @@ public class SavitzkyGolayFilter {
 				}
 				values[j] = newVal;
 			}
-			//
+
 			double newTic = 0;
 			for(int j = 0; j < width; j++) {
 				newTic += ticValues[j] * values[j];
@@ -293,7 +293,7 @@ public class SavitzkyGolayFilter {
 				}
 				values[j] = newVal;
 			}
-			//
+
 			double newTic = 0;
 			for(int j = 0, k = ticValues.length - width; j < width; j++, k++) {
 				newTic += ticValues[k] * values[j];

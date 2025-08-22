@@ -63,7 +63,7 @@ public class PreferencePageInstallation extends FieldEditorPreferencePage implem
 				return super.doCheckState();
 			}
 		};
-		//
+
 		pathEditor.setEmptyStringAllowed(true);
 		addField(pathEditor);
 		/*

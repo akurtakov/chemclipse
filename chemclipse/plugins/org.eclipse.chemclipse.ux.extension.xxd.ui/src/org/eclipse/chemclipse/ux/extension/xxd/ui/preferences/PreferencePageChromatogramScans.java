@@ -42,13 +42,13 @@ public class PreferencePageChromatogramScans extends FieldEditorPreferencePage i
 		addField(new ColorFieldEditor(PreferenceSupplier.P_COLOR_CHROMATOGRAM_SELECTED_SCAN, "Color:", getFieldEditorParent()));
 		addField(new SpinnerFieldEditor(PreferenceSupplier.P_CHROMATOGRAM_SELECTED_SCAN_MARKER_SIZE, "Marker Size:", PreferenceSupplier.MIN_SYMBOL_SIZE, PreferenceSupplier.MAX_SYMBOL_SIZE, getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_CHROMATOGRAM_SELECTED_SCAN_MARKER_TYPE, "Marker Type:", PreferenceSupport.SYMBOL_TYPES, getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Scan Labels", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceSupplier.P_CHROMATOGRAM_SCAN_LABEL_FONT_NAME, "Font Name:", getFieldEditorParent()));
 		addField(new SpinnerFieldEditor(PreferenceSupplier.P_CHROMATOGRAM_SCAN_LABEL_FONT_SIZE, "Font Size:", PreferenceSupplier.MIN_FONT_SIZE, PreferenceSupplier.MAX_FONT_SIZE, getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_CHROMATOGRAM_SCAN_LABEL_FONT_STYLE, "Font Style:", ChartOptions.FONT_STYLES, getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Scan", getFieldEditorParent()));
 		addField(new SpinnerFieldEditor(PreferenceSupplier.P_CHROMATOGRAM_SCAN_LABEL_SYMBOL_SIZE, "Marker Size:", PreferenceSupplier.MIN_SYMBOL_SIZE, PreferenceSupplier.MAX_SYMBOL_SIZE, getFieldEditorParent()));

@@ -28,10 +28,10 @@ public class PeakTargetsTableComparator extends AbstractRecordTableComparator im
 		if(e1 instanceof IIdentificationTarget identificationTarget1 && e2 instanceof IIdentificationTarget identificationTarget2) {
 			ILibraryInformation libraryInformation1 = identificationTarget1.getLibraryInformation();
 			IComparisonResult comparisonResult1 = identificationTarget1.getComparisonResult();
-			//
+
 			ILibraryInformation libraryInformation2 = identificationTarget2.getLibraryInformation();
 			IComparisonResult comparisonResult2 = identificationTarget2.getComparisonResult();
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = libraryInformation2.getName().compareTo(libraryInformation1.getName());

@@ -50,7 +50,7 @@ public class CalibrationEditUI extends Composite {
 	private static final String ACTION_DELETE = "ACTION_DELETE";
 	private static final String ACTION_ADD = "ACTION_ADD";
 	private static final String ACTION_SELECT = "ACTION_SELECT";
-	//
+
 	private Text textRetentionTime;
 	private Text textRetentionIndex;
 	private Combo comboReferences;
@@ -58,14 +58,14 @@ public class CalibrationEditUI extends Composite {
 	private Button buttonCancel;
 	private Button buttonDelete;
 	private Button buttonAdd;
-	//
+
 	private RetentionTimeValidator retentionTimeValidator;
 	private ControlDecoration controlDecorationRetentionTime;
 	private RetentionIndexValidator retentionIndexValidator;
 	private ControlDecoration controlDecorationRetentionIndex;
 	private CalibrationNameValidator calibrationNameValidator;
 	private ControlDecoration controlDecorationName;
-	//
+
 	private ICalibrationEditListener calibrationEditListener = null;
 	private List<IRetentionIndexEntry> retentionIndexEntries = new ArrayList<>();
 
@@ -98,13 +98,13 @@ public class CalibrationEditUI extends Composite {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(7, false);
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		textRetentionTime = createTextRetentionTime(composite);
 		textRetentionIndex = createTextRetentionIndex(composite);
 		comboReferences = createComboReferences(composite);
@@ -112,7 +112,7 @@ public class CalibrationEditUI extends Composite {
 		buttonCancel = createButtonCancel(composite);
 		buttonDelete = createButtonDelete(composite);
 		buttonAdd = createButtonAdd(composite);
-		//
+
 		enableButtonFields(ACTION_INITIALIZE);
 	}
 
@@ -122,7 +122,7 @@ public class CalibrationEditUI extends Composite {
 		text.setText("");
 		text.setToolTipText(ExtensionMessages.setRetentionTimeMinutes);
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		retentionTimeValidator = new RetentionTimeValidator();
 		controlDecorationRetentionTime = new ControlDecoration(text, SWT.LEFT | SWT.TOP);
 		text.addKeyListener(new KeyAdapter() {
@@ -133,7 +133,7 @@ public class CalibrationEditUI extends Composite {
 				validate();
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -143,7 +143,7 @@ public class CalibrationEditUI extends Composite {
 		text.setText("");
 		text.setToolTipText(ExtensionMessages.setRetentionIndex);
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		retentionIndexValidator = new RetentionIndexValidator();
 		controlDecorationRetentionIndex = new ControlDecoration(text, SWT.LEFT | SWT.TOP);
 		text.addKeyListener(new KeyAdapter() {
@@ -154,7 +154,7 @@ public class CalibrationEditUI extends Composite {
 				validate();
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -164,10 +164,10 @@ public class CalibrationEditUI extends Composite {
 		combo.setText("");
 		combo.setItems(getAvailableStandards());
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		calibrationNameValidator = new CalibrationNameValidator();
 		controlDecorationName = new ControlDecoration(combo, SWT.LEFT | SWT.TOP);
-		//
+
 		combo.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -183,7 +183,7 @@ public class CalibrationEditUI extends Composite {
 				validate();
 			}
 		});
-		//
+
 		combo.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -192,7 +192,7 @@ public class CalibrationEditUI extends Composite {
 				validate();
 			}
 		});
-		//
+
 		return combo;
 	}
 
@@ -215,7 +215,7 @@ public class CalibrationEditUI extends Composite {
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -234,7 +234,7 @@ public class CalibrationEditUI extends Composite {
 				enableButtonFields(ACTION_CANCEL);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -252,7 +252,7 @@ public class CalibrationEditUI extends Composite {
 				fireUpdateDelete();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -270,7 +270,7 @@ public class CalibrationEditUI extends Composite {
 				enableButtonFields(ACTION_ADD);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -297,7 +297,7 @@ public class CalibrationEditUI extends Composite {
 	private void enableButtonFields(String action) {
 
 		enableFields(false);
-		//
+
 		switch(action) {
 			case ACTION_INITIALIZE:
 				buttonAdd.setEnabled(true);
@@ -344,7 +344,7 @@ public class CalibrationEditUI extends Composite {
 	private boolean validate() {
 
 		buttonSet.setEnabled(false);
-		//
+
 		if(validate(retentionTimeValidator, controlDecorationRetentionTime, textRetentionTime.getText())) {
 			if(validate(retentionIndexValidator, controlDecorationRetentionIndex, textRetentionIndex.getText())) {
 				if(validate(calibrationNameValidator, controlDecorationName, comboReferences.getText())) {
@@ -353,7 +353,7 @@ public class CalibrationEditUI extends Composite {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 

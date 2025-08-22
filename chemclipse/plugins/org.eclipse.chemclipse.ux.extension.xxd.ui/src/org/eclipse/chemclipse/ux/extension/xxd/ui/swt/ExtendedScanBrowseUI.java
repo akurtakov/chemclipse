@@ -51,16 +51,16 @@ public class ExtendedScanBrowseUI extends Composite implements IExtendedPartUI {
 
 	private Composite toolbarInfo;
 	private Label labelInfo;
-	//
+
 	private Button buttonPreviousScan;
 	private ComboViewer comboViewerType;
 	private ComboViewer comboViewerSource;
 	private Button buttonNextScan;
 	private ScanChartUI scanChartUI;
-	//
+
 	private IChromatogramSelection chromatogramSelection;
 	private int masterRetentionTime;
-	//
+
 	private final ScanDataSupport scanDataSupport = new ScanDataSupport();
 
 	private enum Type {
@@ -105,15 +105,15 @@ public class ExtendedScanBrowseUI extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout layout = new GridLayout(1, true);
 		composite.setLayout(layout);
-		//
+
 		createToolbarMain(composite);
 		toolbarInfo = createToolbarInfo(composite);
 		scanChartUI = createScanChart(composite);
-		//
+
 		PartSupport.setCompositeVisibility(toolbarInfo, true);
 	}
 
@@ -123,13 +123,13 @@ public class ExtendedScanBrowseUI extends Composite implements IExtendedPartUI {
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(5, false));
-		//
+
 		comboViewerType = createComboViewerType(composite);
 		buttonPreviousScan = createPreviousReferenceScanButton(composite);
 		comboViewerSource = createComboViewerSource(composite);
 		buttonNextScan = createNextReferenceScanButton(composite);
 		createSettingsButton(composite);
-		//
+
 		return composite;
 	}
 
@@ -148,7 +148,7 @@ public class ExtendedScanBrowseUI extends Composite implements IExtendedPartUI {
 				return null;
 			}
 		});
-		//
+
 		Combo combo = comboViewer.getCombo();
 		combo.setToolTipText("Select the source of referenced scans.");
 		GridData gridData = new GridData();
@@ -163,10 +163,10 @@ public class ExtendedScanBrowseUI extends Composite implements IExtendedPartUI {
 				updateScan(scan);
 			}
 		});
-		//
+
 		comboViewer.setInput(Type.values());
 		combo.select(0);
-		//
+
 		return comboViewer;
 	}
 
@@ -204,7 +204,7 @@ public class ExtendedScanBrowseUI extends Composite implements IExtendedPartUI {
 				return label;
 			}
 		});
-		//
+
 		Combo combo = comboViewer.getCombo();
 		combo.setToolTipText("Editor References Scan");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -261,9 +261,9 @@ public class ExtendedScanBrowseUI extends Composite implements IExtendedPartUI {
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		labelInfo = createLabel(composite);
-		//
+
 		return composite;
 	}
 
@@ -286,7 +286,7 @@ public class ExtendedScanBrowseUI extends Composite implements IExtendedPartUI {
 
 		Combo combo = comboViewerSource.getCombo();
 		int index = combo.getSelectionIndex() + moveIndex;
-		//
+
 		if(moveIndex < 0) {
 			index = (index < 0) ? 0 : index;
 			combo.select(index);
@@ -305,7 +305,7 @@ public class ExtendedScanBrowseUI extends Composite implements IExtendedPartUI {
 			int scanNumber = chromatogram.getScanNumber(masterRetentionTime);
 			referenceScan = chromatogram.getScan(scanNumber);
 		}
-		//
+
 		updateChart(referenceScan);
 		updatePreviousAndNextButton();
 	}
@@ -409,7 +409,7 @@ public class ExtendedScanBrowseUI extends Composite implements IExtendedPartUI {
 		} else {
 			chromatogramSelections.addAll(editorUpdateSupport.getChromatogramSelections());
 		}
-		//
+
 		return chromatogramSelections;
 	}
 }

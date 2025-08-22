@@ -70,7 +70,7 @@ public class ScanExtractionSupport {
 		 * Extract data
 		 */
 		Map<String, NavigableMap<Integer, Float>> extractScans = extractScans(dataInput);
-		//
+
 		boolean similarChromatogram = true;
 		if(useDefaultProperties) {
 			Collection<NavigableMap<Integer, Float>> dataSet = extractScans.values();

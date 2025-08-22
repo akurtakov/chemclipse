@@ -23,7 +23,7 @@ public class LibrarySearchSupport {
 	public static List<IRetentionIndexLibraryService> getRetentionIndexLibraryServices() {
 
 		List<IRetentionIndexLibraryService> retentionIndexLibraryServices = new ArrayList<>();
-		//
+
 		Object[] services = Activator.getDefault().getRetentionIndexLibraryServices();
 		if(services != null) {
 			for(Object service : services) {
@@ -32,7 +32,7 @@ public class LibrarySearchSupport {
 				}
 			}
 		}
-		//
+
 		return retentionIndexLibraryServices;
 	}
 }

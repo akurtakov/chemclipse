@@ -29,7 +29,7 @@ public class ProcessExecutionContext implements IProcessSupplierContext, IMessag
 	private final IProcessSupplierContext context;
 	private final IMessageConsumer consumer;
 	private ProcessExecutionContext parent;
-	//
+
 	private final Map<Class<?>, Object> contextMap = new IdentityHashMap<>();
 
 	public ProcessExecutionContext(IProgressMonitor monitor, IMessageConsumer rootConsumer, IProcessSupplierContext rootContext) {

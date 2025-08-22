@@ -80,7 +80,7 @@ public class PeaksInputWizard extends Wizard implements IInputWizard {
 		int groupValueWindow = peakSettingsWizardPage.getGroupValueWindow();
 		ExtractionSettings extractionSettings = new ExtractionSettings(descriptionOption, extractionOption, valueOption, groupValueWindow);
 		pcaExtractionData = new PcaExtractionPeaks(dataInputs, extractionSettings);
-		//
+
 		return true;
 	}
 }

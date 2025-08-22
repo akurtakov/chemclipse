@@ -39,7 +39,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class ChromatogramReader extends AbstractChromatogramCSDReader {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramReader.class);
-	//
+
 	private static final String TAB = DelimiterFormat.TAB.value();
 	private static final String COMMA = ",";
 	private static final String SEMICOLON = ";";
@@ -72,7 +72,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 		 * Calculate the scanInterval and scanDelay.
 		 */
 		ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
-		//
+
 		return chromatogram;
 	}
 
@@ -83,7 +83,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 				boolean autoDetectFormat = PreferenceSupplier.isAutoDetectFormat();
 				DelimiterFormat delimiterFormat = PreferenceSupplier.getDelimiterFormat();
 				RetentionTimeFormat retentionTimeFormat = PreferenceSupplier.getRetentionTimeFormat();
-				//
+
 				String line;
 				while((line = bufferedReader.readLine()) != null) {
 					/*
@@ -103,12 +103,12 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 					} else {
 						values = line.split(delimiterFormat.value());
 					}
-					//
+
 					if(values != null && values.length >= 2) {
 						try {
 							String value = values[0].trim();
 							int retentionTime = -1;
-							//
+
 							if(autoDetectFormat) {
 								if(value.contains(".")) {
 									/*
@@ -160,7 +160,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 		} catch(IOException e1) {
 			logger.warn(e1);
 		}
-		//
+
 		return (chromatogram.getNumberOfScans() > 0) ? true : false;
 	}
 }

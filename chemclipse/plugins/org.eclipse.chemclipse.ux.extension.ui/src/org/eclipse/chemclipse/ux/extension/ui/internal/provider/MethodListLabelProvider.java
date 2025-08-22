@@ -36,7 +36,7 @@ public class MethodListLabelProvider extends AbstractChemClipseLabelProvider {
 
 	private final IProcessSupplierContext processTypeSupport;
 	private BiFunction<IProcessEntry, IProcessSupplierContext, IProcessorPreferences<?>> preferencesSupplier;
-	//
+
 	public static final String[] TITLES = {//
 			"", //
 			ExtensionMessages.name, //
@@ -45,7 +45,7 @@ public class MethodListLabelProvider extends AbstractChemClipseLabelProvider {
 			ExtensionMessages.settings, //
 			ExtensionMessages.id //
 	};
-	//
+
 	public static final int[] BOUNDS = {//
 			50, //
 			250, //
@@ -70,7 +70,7 @@ public class MethodListLabelProvider extends AbstractChemClipseLabelProvider {
 				 * Validate
 				 */
 				IStatus status = validate(processEntry);
-				//
+
 				if(status.matches(IStatus.ERROR)) {
 					return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_STATUS_ERROR, IApplicationImageProvider.SIZE_16x16);
 				}
@@ -110,11 +110,11 @@ public class MethodListLabelProvider extends AbstractChemClipseLabelProvider {
 		if(columnIndex == 0) {
 			return "";
 		}
-		//
+
 		if(element instanceof IProcessEntry processEntry) {
 			IProcessSupplierContext supplierContext = IProcessEntry.getContext(processEntry, processTypeSupport);
 			IProcessSupplier<?> processSupplier = supplierContext.getSupplier(processEntry.getProcessorId());
-			//
+
 			switch(columnIndex) {
 				case 1:
 					return processEntry.getName();
@@ -160,7 +160,7 @@ public class MethodListLabelProvider extends AbstractChemClipseLabelProvider {
 					return "";
 			}
 		}
-		//
+
 		return "n/a";
 	}
 
@@ -178,11 +178,11 @@ public class MethodListLabelProvider extends AbstractChemClipseLabelProvider {
 		if(processEntry == null) {
 			return ValidationStatus.error(ExtensionMessages.processorNotAvailable);
 		}
-		//
+
 		if(preferencesSupplier == null) {
 			return ValidationStatus.error(ExtensionMessages.preferenceSupplierNotAvailable);
 		}
-		//
+
 		if(processTypeSupport == null) {
 			return ValidationStatus.error(ExtensionMessages.processTypeSupportNotAvailable);
 		}
@@ -193,15 +193,15 @@ public class MethodListLabelProvider extends AbstractChemClipseLabelProvider {
 			return ValidationStatus.info(MessageFormat.format(ExtensionMessages.processorSkipValidationOptionSet, processEntry.getName()));
 		}
 		IProcessorPreferences<?> processorPreferences = preferencesSupplier.apply(processEntry, processTypeSupport);
-		//
+
 		if(processorPreferences == null) {
 			return ValidationStatus.error(MessageFormat.format(ExtensionMessages.processorPreferencesNotAvailable, processEntry.getName()));
 		}
-		//
+
 		if(processorPreferences.getSupplier().getSettingsClass() == null) {
 			return ValidationStatus.warning(MessageFormat.format(ExtensionMessages.processorHasNoSettingsClass, processEntry.getName()));
 		}
-		//
+
 		if(processorPreferences.isUseSystemDefaults()) {
 			return ValidationStatus.info(MessageFormat.format(ExtensionMessages.processorUsesSystemDefaultSettings, processEntry.getName()));
 		}

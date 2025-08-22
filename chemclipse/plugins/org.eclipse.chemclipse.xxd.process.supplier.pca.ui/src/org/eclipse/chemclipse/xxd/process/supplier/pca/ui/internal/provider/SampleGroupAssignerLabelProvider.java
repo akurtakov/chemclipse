@@ -25,14 +25,14 @@ public class SampleGroupAssignerLabelProvider extends AbstractChemClipseLabelPro
 	public static final String DESCRIPTION = "Description";
 	public static final String SELECT = "Select";
 	public static final String GROUP_NAME = "Group Name";
-	//
+
 	public static String[] TITLES = {//
 			SAMPLE_NAME, //
 			DESCRIPTION, //
 			SELECT, //
 			GROUP_NAME //
 	};
-	//
+
 	public static int[] BOUNDS = {//
 			100, //
 			200, //
@@ -62,7 +62,7 @@ public class SampleGroupAssignerLabelProvider extends AbstractChemClipseLabelPro
 
 		String text = "";
 		if(element instanceof ISample sample) {
-			//
+
 			switch(columnIndex) {
 				case 0:
 					text = sample.getSampleName() != null ? sample.getSampleName() : "";

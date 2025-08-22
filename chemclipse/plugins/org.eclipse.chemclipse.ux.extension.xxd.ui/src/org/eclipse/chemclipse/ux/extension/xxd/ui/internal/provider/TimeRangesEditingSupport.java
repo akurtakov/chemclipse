@@ -26,7 +26,7 @@ public class TimeRangesEditingSupport extends EditingSupport {
 	private CellEditor cellEditor;
 	private TimeRangesListUI tableViewer;
 	private String column;
-	//
+
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.000");
 
 	public TimeRangesEditingSupport(TimeRangesListUI tableViewer, String column) {
@@ -75,7 +75,7 @@ public class TimeRangesEditingSupport extends EditingSupport {
 			} else if(column.equals(TimeRangesLabelProvider.TRACES)) {
 				timeRange.setTraces(value.toString().trim());
 			}
-			//
+
 			tableViewer.refresh();
 			tableViewer.updateContent();
 		}

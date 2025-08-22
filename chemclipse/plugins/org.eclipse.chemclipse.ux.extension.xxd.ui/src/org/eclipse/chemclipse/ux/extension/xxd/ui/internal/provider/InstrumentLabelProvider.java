@@ -25,7 +25,7 @@ public class InstrumentLabelProvider extends AbstractChemClipseLabelProvider {
 	public static final String IDENTIFIER = ExtensionMessages.identifier;
 	public static final String NAME = ExtensionMessages.name;
 	public static final String DESCRIPTION = ExtensionMessages.description;
-	//
+
 	public static final String[] TITLES = { //
 			IDENTIFIER, //
 			NAME, //

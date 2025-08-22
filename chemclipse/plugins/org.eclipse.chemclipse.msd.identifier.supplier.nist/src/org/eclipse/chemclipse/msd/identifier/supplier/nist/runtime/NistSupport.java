@@ -26,7 +26,7 @@ import org.eclipse.chemclipse.support.runtime.IRuntimeSupport;
 public class NistSupport implements INistSupport {
 
 	private static final Logger logger = Logger.getLogger(NistSupport.class);
-	//
+
 	private IRuntimeSupport runtimeSupport;
 	private int numberOfUnknownEntriesToProcess = 1;
 

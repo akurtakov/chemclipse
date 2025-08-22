@@ -37,7 +37,7 @@ import org.eclipse.swt.widgets.Display;
 public class ExtendedQuantPeaksListUI extends Composite implements IExtendedPartUI {
 
 	private static final String DESCRIPTION = "Quantitation Peaks";
-	//
+
 	private Button buttonToolbarInfo;
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private IQuantitationCompound quantitationCompound;
@@ -59,14 +59,14 @@ public class ExtendedQuantPeaksListUI extends Composite implements IExtendedPart
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(composite);
 		createToolbarInfo(composite);
 		createTable(composite);
-		//
+
 		initialize();
 	}
 
@@ -83,7 +83,7 @@ public class ExtendedQuantPeaksListUI extends Composite implements IExtendedPart
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(4, false));
-		//
+
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 		createResponseTableButton(composite);
 		buttonTableEdit = createButtonToggleEditTable(composite, tableViewer, IMAGE_EDIT_ENTRY);
@@ -92,7 +92,6 @@ public class ExtendedQuantPeaksListUI extends Composite implements IExtendedPart
 
 	private void createResponseTableButton(Composite parent) {
 
-		//
 		Button button = new Button(parent, SWT.PUSH);
 		button.setToolTipText("Create Response Table");
 		button.setText("");
@@ -131,7 +130,7 @@ public class ExtendedQuantPeaksListUI extends Composite implements IExtendedPart
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -139,7 +138,7 @@ public class ExtendedQuantPeaksListUI extends Composite implements IExtendedPart
 
 		QuantPeakListUI quantPeakListUI = new QuantPeakListUI(parent, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		quantPeakListUI.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		tableViewer.set(quantPeakListUI);
 	}
 

@@ -33,10 +33,10 @@ public class NoiseSegmentSetter extends AbstractChromatogramClassifier {
 	public IProcessingInfo<IChromatogramClassifierResult> applyClassifier(IChromatogramSelection chromatogramSelection, IChromatogramClassifierSettings chromatogramClassifierSettings, IProgressMonitor monitor) {
 
 		IProcessingInfo<IChromatogramClassifierResult> processingInfo = new ProcessingInfo<>();
-		//
+
 		NoiseSegmentSetterSettings settings = getNoiseSegmentSetterSettings(chromatogramClassifierSettings);
 		NoiseChromatogramSupport.addNoiseSegment(chromatogramSelection, settings.isUseOnlyNewSegment());
-		//
+
 		return processingInfo;
 	}
 

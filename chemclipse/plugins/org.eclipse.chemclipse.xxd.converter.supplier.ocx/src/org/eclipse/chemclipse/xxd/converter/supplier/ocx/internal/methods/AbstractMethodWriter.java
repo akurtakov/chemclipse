@@ -82,7 +82,7 @@ public abstract class AbstractMethodWriter implements IMethodWriter {
 		zipOutputStream.putNextEntry(zipEntry);
 		DataOutputStream dataOutputStream = new DataOutputStream(zipOutputStream);
 		serializeData(processMethod, dataOutputStream);
-		//
+
 		dataOutputStream.flush();
 		zipOutputStream.closeEntry();
 	}

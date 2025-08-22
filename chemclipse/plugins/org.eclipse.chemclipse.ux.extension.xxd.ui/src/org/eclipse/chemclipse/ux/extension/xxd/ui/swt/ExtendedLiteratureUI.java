@@ -49,7 +49,7 @@ import org.eclipse.swt.widgets.Display;
 public class ExtendedLiteratureUI extends Composite implements IExtendedPartUI {
 
 	private static final String DATA_URL = "DATA_URL";
-	//
+
 	private AtomicReference<Button> buttonToolbarInfo = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private AtomicReference<Button> buttonToolbarSearch = new AtomicReference<>();
@@ -57,7 +57,7 @@ public class ExtendedLiteratureUI extends Composite implements IExtendedPartUI {
 	private AtomicReference<ComboViewer> comboViewerLiteratureControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonDOI = new AtomicReference<>();
 	private AtomicReference<LiteratureUI> literatureControl = new AtomicReference<>();
-	//
+
 	private List<LiteratureReference> literatureReferences = new ArrayList<>();
 
 	public ExtendedLiteratureUI(Composite parent, int style) {
@@ -74,7 +74,7 @@ public class ExtendedLiteratureUI extends Composite implements IExtendedPartUI {
 				literatureReferences.add(new LiteratureReference(content.toString()));
 			}
 		}
-		//
+
 		updateInput();
 	}
 
@@ -85,12 +85,12 @@ public class ExtendedLiteratureUI extends Composite implements IExtendedPartUI {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createToolbarSearch(this);
 		createDataSection(this);
-		//
+
 		initialize();
 	}
 
@@ -108,7 +108,7 @@ public class ExtendedLiteratureUI extends Composite implements IExtendedPartUI {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(5, false));
-		//
+
 		createButtonToolbarInfo(composite);
 		createButtonToolbarSearch(composite);
 		createComboViewerLiterature(composite);
@@ -120,7 +120,7 @@ public class ExtendedLiteratureUI extends Composite implements IExtendedPartUI {
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -136,7 +136,7 @@ public class ExtendedLiteratureUI extends Composite implements IExtendedPartUI {
 				literatureControl.get().updateSearchResult(searchText, caseSensitive);
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -146,7 +146,7 @@ public class ExtendedLiteratureUI extends Composite implements IExtendedPartUI {
 		styledText.setText("");
 		styledText.setToolTipText("Literature");
 		styledText.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		literatureControl.set(styledText);
 	}
 
@@ -181,7 +181,7 @@ public class ExtendedLiteratureUI extends Composite implements IExtendedPartUI {
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select a literature reference.");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
@@ -194,7 +194,7 @@ public class ExtendedLiteratureUI extends Composite implements IExtendedPartUI {
 				updateLiteratureSelection();
 			}
 		});
-		//
+
 		comboViewerLiteratureControl.set(comboViewer);
 	}
 
@@ -222,7 +222,7 @@ public class ExtendedLiteratureUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		buttonDOI.set(button);
 	}
 
@@ -252,7 +252,7 @@ public class ExtendedLiteratureUI extends Composite implements IExtendedPartUI {
 		if(!literatureReferences.isEmpty()) {
 			comboViewerLiteratureControl.get().setSelection(new StructuredSelection(literatureReferences.get(0)));
 		}
-		//
+
 		updateLiteratureSelection();
 	}
 
@@ -269,13 +269,13 @@ public class ExtendedLiteratureUI extends Composite implements IExtendedPartUI {
 		String content = "";
 		String title = "";
 		String url = "";
-		//
+
 		if(literatureReference != null) {
 			content = literatureReference.getContent();
 			title = literatureReference.getTitle();
 			url = literatureReference.getUrl();
 		}
-		//
+
 		literatureControl.get().setText(content);
 		toolbarInfo.get().setText("Title: " + title);
 		buttonDOI.get().setData(DATA_URL, url);

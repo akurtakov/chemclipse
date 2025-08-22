@@ -90,7 +90,7 @@ public class ReaderProxy_1003 extends AbstractZipReader implements IReaderProxy 
 	private IVendorIon readIon(DataInputStream dataInputStream, IIonTransitionSettings ionTransitionSettings) throws IOException {
 
 		IVendorIon ion;
-		//
+
 		double mz = dataInputStream.readDouble(); // m/z
 		float abundance = dataInputStream.readFloat(); // Abundance
 		/*
@@ -111,7 +111,7 @@ public class ReaderProxy_1003 extends AbstractZipReader implements IReaderProxy 
 			double filter1Resolution = dataInputStream.readDouble(); // q1 resolution
 			double filter3Resolution = dataInputStream.readDouble(); // q3 resolution
 			int transitionGroup = dataInputStream.readInt(); // transition group
-			//
+
 			IIonTransition ionTransition = ionTransitionSettings.getIonTransition(filter1FirstIon, filter1LastIon, filter3FirstIon, filter3LastIon, collisionEnergy, filter1Resolution, filter3Resolution, transitionGroup);
 			ion = new VendorIon(mz, abundance, ionTransition);
 		}
@@ -122,9 +122,9 @@ public class ReaderProxy_1003 extends AbstractZipReader implements IReaderProxy 
 
 		int numberOfMassSpectrumTargets = dataInputStream.readInt(); // Number Mass Spectrum Targets
 		for(int i = 1; i <= numberOfMassSpectrumTargets; i++) {
-			//
+
 			String identifier = readString(dataInputStream); // Identifier
-			//
+
 			String casNumber = readString(dataInputStream); // CAS-Number
 			String comments = readString(dataInputStream); // Comments
 			String miscellaneous = readString(dataInputStream); // Miscellaneous
@@ -136,11 +136,11 @@ public class ReaderProxy_1003 extends AbstractZipReader implements IReaderProxy 
 			}
 			String formula = readString(dataInputStream); // Formula
 			double molWeight = dataInputStream.readDouble(); // Mol Weight
-			//
+
 			float matchFactor = dataInputStream.readFloat(); // Match Factor
 			float reverseMatchFactor = dataInputStream.readFloat(); // Reverse Match Factor
 			float probability = dataInputStream.readFloat(); // Probability
-			//
+
 			ILibraryInformation libraryInformation = new LibraryInformation();
 			libraryInformation.setCasNumber(casNumber);
 			libraryInformation.setComments(comments);

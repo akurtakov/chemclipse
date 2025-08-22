@@ -35,7 +35,7 @@ public class ProcessMethodNotifications extends AbstractNotifications<IProcessMe
 			created((IProcessMethod)event.getProperty(IChemClipseEvents.EVENT_BROKER_DATA));
 		}
 	};
-	//
+
 	private EventHandler eventHandlerSelect = new EventHandler() {
 
 		@Override
@@ -44,7 +44,7 @@ public class ProcessMethodNotifications extends AbstractNotifications<IProcessMe
 			select((IProcessMethod)event.getProperty(IChemClipseEvents.EVENT_BROKER_DATA));
 		}
 	};
-	//
+
 	private EventHandler eventHandlerUpdate = new EventHandler() {
 
 		@Override

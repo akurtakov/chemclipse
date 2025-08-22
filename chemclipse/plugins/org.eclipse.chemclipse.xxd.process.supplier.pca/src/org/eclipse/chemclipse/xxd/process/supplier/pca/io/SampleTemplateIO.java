@@ -32,7 +32,7 @@ public class SampleTemplateIO {
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-	//
+
 	private static final String VALUE_DELIMITER = "\t";
 
 	private SampleTemplateIO() {

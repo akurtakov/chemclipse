@@ -24,7 +24,7 @@ public class NamedTracesComparator extends AbstractRecordTableComparator impleme
 
 		int sortOrder = 0;
 		if(e1 instanceof NamedTrace namedTrace1 && e2 instanceof NamedTrace namedTrace2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = namedTrace2.getIdentifier().compareTo(namedTrace1.getIdentifier());

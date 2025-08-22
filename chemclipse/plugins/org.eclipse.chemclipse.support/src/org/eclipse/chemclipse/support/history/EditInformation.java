@@ -21,7 +21,7 @@ public class EditInformation implements IEditInformation {
 	private Date date;
 	private String description = "";
 	private String editor = "";
-	//
+
 	public static final String NO_DESCRIPTION = SupportMessages.labelNoDescription;
 	public static final String NO_EDITOR = SupportMessages.labelNotAvailable;
 

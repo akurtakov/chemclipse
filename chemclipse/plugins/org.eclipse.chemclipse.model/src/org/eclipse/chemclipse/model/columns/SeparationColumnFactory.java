@@ -32,7 +32,7 @@ public class SeparationColumnFactory {
 			}
 			return label;
 		}
-		//
+
 		return "";
 	}
 
@@ -45,7 +45,7 @@ public class SeparationColumnFactory {
 			separationColumns.add(getSeparationColumn(SeparationColumnType.NON_POLAR));
 			separationColumns.add(getSeparationColumn(SeparationColumnType.SEMI_POLAR));
 		}
-		//
+
 		return separationColumns;
 	}
 
@@ -88,7 +88,7 @@ public class SeparationColumnFactory {
 		SeparationColumnMapping separationColumnMapping = new SeparationColumnMapping();
 		separationColumnMapping.load(PreferenceSupplier.getSeparationColumnMappings());
 		separationColumnMapping.putAll(getSeparationColumnMappingDefault());
-		//
+
 		return getSeparationColumnType(separationColumnMapping, name);
 	}
 
@@ -102,7 +102,7 @@ public class SeparationColumnFactory {
 		if(name != null) {
 			separationColumnType = separationColumnMapping.getOrDefault(name, SeparationColumnType.DEFAULT);
 		}
-		//
+
 		return separationColumnType;
 	}
 
@@ -126,7 +126,7 @@ public class SeparationColumnFactory {
 			addColumnMapping(separationColumnMapping, SeparationColumnType.SEMI_POLAR.name(), SeparationColumnType.SEMI_POLAR);
 			addColumnMapping(separationColumnMapping, SeparationColumnType.NON_POLAR.name(), SeparationColumnType.NON_POLAR);
 		}
-		//
+
 		return separationColumnMapping;
 	}
 

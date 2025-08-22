@@ -29,11 +29,11 @@ public class TimeRangesListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = TimeRangesLabelProvider.TITLES;
 	private static final int[] BOUNDS = TimeRangesLabelProvider.BOUNDS;
-	//
+
 	private TimeRangesLabelProvider labelProvider = new TimeRangesLabelProvider();
 	private TimeRangesComparator tableComparator = new TimeRangesComparator();
 	private TimeRangesFilter listFilter = new TimeRangesFilter();
-	//
+
 	private IUpdateListener updateListener;
 
 	public TimeRangesListUI(Composite parent, int style) {

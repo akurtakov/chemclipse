@@ -36,7 +36,7 @@ public class SavitzkyGolayTotalScanSignalOperation extends AbstractOperation imp
 
 	private IChromatogramSelectionMSD chromatogramSelection;
 	private ChromatogramFilterSettingsMSD filterSettings;
-	//
+
 	private ITotalScanSignals totalScanSignals;
 	private ITotalScanSignals previousTotalScanSignals;
 	private IChromatogramFilterResult chromatogramFilterResult;

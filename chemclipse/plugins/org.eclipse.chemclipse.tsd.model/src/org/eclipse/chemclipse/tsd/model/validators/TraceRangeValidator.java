@@ -54,7 +54,7 @@ public class TraceRangeValidator extends ValueParserSupport implements IValidato
 					name = "";
 					traces = "";
 					secondDimensionHint = SecondDimensionHint.NONE;
-					//
+
 					String[] values = text.trim().split("\\" + '|'); // The pipe needs to be escaped.
 					if(values.length > 1) {
 						/*
@@ -64,19 +64,19 @@ public class TraceRangeValidator extends ValueParserSupport implements IValidato
 						if(retentionTimeColumn1Start < 0.0d) {
 							message = "The retention time start (Column1) must not be < 0.";
 						}
-						//
+
 						retentionTimeColumn1Stop = (int)(parseDouble(values, 1) * IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 						if(retentionTimeColumn1Stop < 0.0d) {
 							message = "The retention time stop (Column1) must not be < 0.";
 						}
-						//
+
 						retentionTimeColumn2Start = (int)(parseDouble(values, 2) * IChromatogramOverview.SECOND_CORRELATION_FACTOR);
 						retentionTimeColumn2Stop = (int)(parseDouble(values, 3) * IChromatogramOverview.SECOND_CORRELATION_FACTOR);
 						scanIndicesColumn2 = parseString(values, 4);
 						name = parseString(values, 5);
 						traces = parseString(values, 6);
 						secondDimensionHint = getSecondDimensionHint(parseString(values, 7));
-						//
+
 					} else {
 						message = "Please enter a valid trace range.";
 					}
@@ -85,7 +85,7 @@ public class TraceRangeValidator extends ValueParserSupport implements IValidato
 				message = "Value has to be a string.";
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {
@@ -113,7 +113,7 @@ public class TraceRangeValidator extends ValueParserSupport implements IValidato
 		traceRange.setName(name);
 		traceRange.setTraces(traces);
 		traceRange.setSecondDimensionHint(secondDimensionHint);
-		//
+
 		return traceRange;
 	}
 }

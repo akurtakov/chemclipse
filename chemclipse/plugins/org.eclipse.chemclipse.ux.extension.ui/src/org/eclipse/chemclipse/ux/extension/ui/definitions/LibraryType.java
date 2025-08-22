@@ -23,7 +23,7 @@ public class LibraryType implements EventHandler {
 
 	public static final String LIBRARY_TYPE = "org.eclipse.chemclipse.ux.extension.ui.definitions.libraryType";
 	public static final String LIBRARY_SELECTION = "org.eclipse.chemclipse.ux.extension.ui.librarySelection";
-	//
+
 	public static final String LIBRARY_TYPE_MSD = "LIBRARY_TYPE_MSD";
 	public static final String LIBRARY_TYPE_NONE = "LIBRARY_TYPE_NONE";
 
@@ -37,7 +37,7 @@ public class LibraryType implements EventHandler {
 		 */
 		IMassSpectra librarySelection = null;
 		String libraryType = LIBRARY_TYPE_NONE;
-		//
+
 		if(IChemClipseEvents.TOPIC_LIBRARY_MSD_UPDATE_SELECTION.equals(topic)) {
 			librarySelection = (IMassSpectra)property;
 			libraryType = LIBRARY_TYPE_MSD;
@@ -66,12 +66,12 @@ public class LibraryType implements EventHandler {
 
 		IEclipseContext eclipseContext = Activator.getDefault().getEclipseContext();
 		Object object = eclipseContext.get(LIBRARY_SELECTION);
-		//
+
 		IMassSpectra currentMassSpectra = null;
 		if(object instanceof IMassSpectra massSpectra) {
 			currentMassSpectra = massSpectra;
 		}
-		//
+
 		return currentMassSpectra;
 	}
 }

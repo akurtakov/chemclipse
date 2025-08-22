@@ -100,14 +100,14 @@ public class ChromatogramOverviewPart extends AbstractPart<OverviewChartUI> {
 		int size = totalScanSignals.size();
 		double[] xSeries = new double[size];
 		double[] ySeries = new double[size];
-		//
+
 		int i = 0;
 		for(ITotalScanSignal totalScanSignal : totalScanSignals.getTotalScanSignals()) {
 			xSeries[i] = totalScanSignal.getRetentionTime();
 			ySeries[i] = totalScanSignal.getTotalSignal();
 			i++;
 		}
-		//
+
 		return new SeriesData(xSeries, ySeries, seriesId);
 	}
 }

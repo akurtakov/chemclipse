@@ -38,18 +38,18 @@ import org.eclipse.swt.widgets.Label;
 public class TaskTile extends Composite {
 
 	private static final Logger logger = Logger.getLogger(TaskTile.class);
-	//
+
 	public static final int LARGE_TITLE = (1 << 1);
 	public static final int HIGHLIGHT = (1 << 2);
 	public static final int WRAP_IMAGE = (1 << 3);
-	//
+
 	private Color colorInactive;
 	private Color colorActive;
-	//
+
 	private Label labelImage;
 	private Label textSection;
 	private Label textDesciption;
-	//
+
 	private final TileDefinition definition;
 	private final Consumer<TileDefinition> definitionConsumer;
 	private final Color[] colors;
@@ -58,7 +58,7 @@ public class TaskTile extends Composite {
 	public TaskTile(Composite parent, TileDefinition definition, Consumer<TileDefinition> definitionConsumer, Function<TileDefinition, Integer> styleFunction, Color[] colors) {
 
 		super(parent, SWT.NONE);
-		//
+
 		if(colors.length < 4) {
 			/*
 			 * Warn and create default colors.
@@ -70,12 +70,12 @@ public class TaskTile extends Composite {
 			Color colorDescription = TaskTileContainer.DEFAULT_COLOR_DESCRIPTION;
 			colors = new Color[]{colorActive, colorInactive, colorTitle, colorDescription};
 		}
-		//
+
 		this.definition = definition;
 		this.definitionConsumer = definitionConsumer;
 		this.styleFunction = styleFunction;
 		this.colors = colors;
-		//
+
 		initialize();
 		updateFromDefinition();
 	}
@@ -93,7 +93,7 @@ public class TaskTile extends Composite {
 		} else {
 			modifyLabelImage(false, wrapImage);
 		}
-		//
+
 		textSection.setText(section);
 		textDesciption.setText(description == null ? "" : description); //$NON-NLS-1$
 	}
@@ -209,7 +209,7 @@ public class TaskTile extends Composite {
 				return e.x >= 0 && e.x <= size.x && e.y >= 0 && e.y <= size.y;
 			}
 		});
-		//
+
 		control.addKeyListener(new KeyAdapter() {
 
 			@Override

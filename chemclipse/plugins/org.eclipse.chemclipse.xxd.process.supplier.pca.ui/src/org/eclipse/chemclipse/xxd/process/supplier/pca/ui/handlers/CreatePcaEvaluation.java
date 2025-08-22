@@ -32,7 +32,7 @@ public class CreatePcaEvaluation {
 
 	public static final String PCA_PERSPECTIVE = "org.eclipse.chemclipse.xxd.process.supplier.pca.perspective";
 	public static final String PCA_EDITOR_STACK = "org.eclipse.chemclipse.xxd.process.supplier.pca.ui.stackId.pcaeditorStack";
-	//
+
 	private static final String EDITOR_ID = "org.eclipse.chemclipse.xxd.process.supplier.pca.ui.part.pcaeditor";
 
 	public static void createPart(ISamplesPCA<?, ?> samples, IEclipseContext context, String title) {

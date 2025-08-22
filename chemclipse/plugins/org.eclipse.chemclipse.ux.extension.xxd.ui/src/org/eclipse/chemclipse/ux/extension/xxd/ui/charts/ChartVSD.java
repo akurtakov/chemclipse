@@ -67,7 +67,7 @@ public class ChartVSD extends LineChart {
 		chartSettings.getRangeRestriction().setZeroX(false);
 		chartSettings.getRangeRestriction().setZeroY(false);
 		chartSettings.getRangeRestriction().setForceZeroMinY(false);
-		//
+
 		setPrimaryAxisSetRaw(chartSettings);
 		addSecondaryAxisSetRaw(chartSettings);
 		applySettings(chartSettings);
@@ -82,7 +82,7 @@ public class ChartVSD extends LineChart {
 		primaryAxisSettingsX.setPosition(Position.Primary);
 		primaryAxisSettingsX.setVisible(true);
 		primaryAxisSettingsX.setReversed(false);
-		//
+
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle("Light measured by detector");
 		primaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.0#E0"), new DecimalFormatSymbols(Locale.ENGLISH)));
@@ -116,7 +116,7 @@ public class ChartVSD extends LineChart {
 		chartSettings.getRangeRestriction().setZeroX(false);
 		chartSettings.getRangeRestriction().setZeroY(false);
 		chartSettings.getRangeRestriction().setForceZeroMinY(false);
-		//
+
 		String yLabel = isAbsorbance ? ExtensionMessages.absorbance : ExtensionMessages.transmittance;
 		setPrimaryAxisSetProcessed(chartSettings, yLabel);
 		addSecondaryAxisSetProcessed(chartSettings, yLabel);
@@ -135,7 +135,7 @@ public class ChartVSD extends LineChart {
 		}
 		primaryAxisSettingsX.setVisible(true);
 		primaryAxisSettingsX.setReversed(true);
-		//
+
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle(yLabel);
 		primaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.0#E0"), new DecimalFormatSymbols(Locale.ENGLISH)));

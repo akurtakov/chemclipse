@@ -50,7 +50,7 @@ public class ExtendedRegularExpressionUI extends Composite implements IExtendedP
 	private static final String LINE_DELIMITER = OperatingSystemUtils.getLineDelimiter();
 	private static final String IMAGE_SHORTCUTS = IApplicationImage.IMAGE_QUESTION;
 	private static final String TOOLTIP_SHORTCUTS = "the regular expression shortcuts toolbar.";
-	//
+
 	private AtomicReference<Button> buttonToolbarInfo = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private AtomicReference<Button> buttonToolbarShortcuts = new AtomicReference<>();
@@ -78,12 +78,12 @@ public class ExtendedRegularExpressionUI extends Composite implements IExtendedP
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createToolbarShortcuts(this);
 		createTextSection(this);
-		//
+
 		initialize();
 	}
 
@@ -92,7 +92,7 @@ public class ExtendedRegularExpressionUI extends Composite implements IExtendedP
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		composite.setLayout(new GridLayout(6, false));
-		//
+
 		createButtonToggleToolbarInfo(composite);
 		createTextRegularExpression(composite);
 		createSpinnerGroup(composite);
@@ -119,7 +119,7 @@ public class ExtendedRegularExpressionUI extends Composite implements IExtendedP
 		text.setText("");
 		text.setToolTipText("Type in the regular expression here.");
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		text.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -130,7 +130,7 @@ public class ExtendedRegularExpressionUI extends Composite implements IExtendedP
 				}
 			}
 		});
-		//
+
 		regexControl.set(text);
 	}
 
@@ -145,7 +145,7 @@ public class ExtendedRegularExpressionUI extends Composite implements IExtendedP
 		GridData gridData = new GridData();
 		gridData.widthHint = 80;
 		spinner.setLayoutData(gridData);
-		//
+
 		spinner.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -156,7 +156,7 @@ public class ExtendedRegularExpressionUI extends Composite implements IExtendedP
 				}
 			}
 		});
-		//
+
 		spinner.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -167,7 +167,7 @@ public class ExtendedRegularExpressionUI extends Composite implements IExtendedP
 				}
 			}
 		});
-		//
+
 		groupControl.set(spinner);
 	}
 
@@ -185,7 +185,7 @@ public class ExtendedRegularExpressionUI extends Composite implements IExtendedP
 				updateInput();
 			}
 		});
-		//
+
 		processControl.set(button);
 	}
 
@@ -193,7 +193,7 @@ public class ExtendedRegularExpressionUI extends Composite implements IExtendedP
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -201,7 +201,7 @@ public class ExtendedRegularExpressionUI extends Composite implements IExtendedP
 
 		RegexShortcutsUI regexShortcutsUI = new RegexShortcutsUI(parent, SWT.NONE);
 		regexShortcutsUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarShortcuts.set(regexShortcutsUI);
 	}
 
@@ -211,7 +211,7 @@ public class ExtendedRegularExpressionUI extends Composite implements IExtendedP
 		styledText.setText("");
 		styledText.setToolTipText("Copy & Paste the content to validate here.");
 		styledText.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		contentControl.set(styledText);
 	}
 
@@ -250,13 +250,13 @@ public class ExtendedRegularExpressionUI extends Composite implements IExtendedP
 					List<StyleRange> styleRanges = new ArrayList<>();
 					Pattern pattern = Pattern.compile(regex);
 					int offset = 0;
-					//
+
 					for(String line : content.split(LINE_DELIMITER)) {
 						Matcher matcher = pattern.matcher(line);
 						int group = groupControl.get().getSelection();
 						int groups = matcher.groupCount();
 						boolean isMatchPartly = (group > 0);
-						//
+
 						if(group <= groups && matcher.find()) {
 							String keyword = matcher.group(group);
 							offset = append(builder, styleRanges, offset, line, keyword);
@@ -301,7 +301,7 @@ public class ExtendedRegularExpressionUI extends Composite implements IExtendedP
 
 		builder.append(line);
 		builder.append(LINE_DELIMITER);
-		//
+
 		if(line.contains(keyword)) {
 			int length = keyword.length();
 			int fromIndex = 0;
@@ -319,7 +319,7 @@ public class ExtendedRegularExpressionUI extends Composite implements IExtendedP
 				}
 			}
 		}
-		//
+
 		return offset + line.length() + LINE_DELIMITER.length();
 	}
 
@@ -334,7 +334,7 @@ public class ExtendedRegularExpressionUI extends Composite implements IExtendedP
 			styleRange.background = Colors.LIGHT_YELLOW;
 			styleRange.foreground = Colors.BLACK;
 		}
-		//
+
 		return styleRange;
 	}
 

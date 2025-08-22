@@ -92,7 +92,7 @@ public class SavitzkyGolaySmoothingFilter implements IScanFilter<MassSpectrumFil
 		chromatogramFilterSettings.setDerivative(configuration.getDerivative());
 		chromatogramFilterSettings.setOrder(configuration.getOrder());
 		chromatogramFilterSettings.setWidth(configuration.getWidth());
-		//
+
 		DefaultProcessingResult<Boolean> result = new DefaultProcessingResult<>();
 		for(ITotalScanSignals signals : filterItems) {
 			IChromatogramFilterResult filterResult = SavitzkyGolayProcessor.apply(signals, chromatogramFilterSettings, monitor);

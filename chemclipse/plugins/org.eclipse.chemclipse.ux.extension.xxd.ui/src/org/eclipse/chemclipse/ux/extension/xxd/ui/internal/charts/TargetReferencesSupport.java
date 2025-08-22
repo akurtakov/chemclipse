@@ -28,7 +28,7 @@ public class TargetReferencesSupport {
 
 	public static final DecimalFormat DECIMAL_FORMAT_RI = ValueFormat.getDecimalFormatEnglish("0.00");
 	public static final DecimalFormat DECIMAL_FORMAT_AREA_PERCENT = ValueFormat.getDecimalFormatEnglish("0.000");
-	//
+
 	private static final IPreferenceStore PREFERENCE_STORE = Activator.getDefault().getPreferenceStore();
 
 	public static FontData getPeakFontData() {
@@ -36,7 +36,7 @@ public class TargetReferencesSupport {
 		String name = PREFERENCE_STORE.getString(PreferenceSupplier.P_CHROMATOGRAM_PEAK_LABEL_FONT_NAME);
 		int height = PREFERENCE_STORE.getInt(PreferenceSupplier.P_CHROMATOGRAM_PEAK_LABEL_FONT_SIZE);
 		int style = PREFERENCE_STORE.getInt(PreferenceSupplier.P_CHROMATOGRAM_PEAK_LABEL_FONT_STYLE);
-		//
+
 		return new FontData(name, height, style);
 	}
 
@@ -45,7 +45,7 @@ public class TargetReferencesSupport {
 		String name = PREFERENCE_STORE.getString(PreferenceSupplier.P_CHROMATOGRAM_SCAN_LABEL_FONT_NAME);
 		int height = PREFERENCE_STORE.getInt(PreferenceSupplier.P_CHROMATOGRAM_SCAN_LABEL_FONT_SIZE);
 		int style = PREFERENCE_STORE.getInt(PreferenceSupplier.P_CHROMATOGRAM_SCAN_LABEL_FONT_STYLE);
-		//
+
 		return new FontData(name, height, style);
 	}
 

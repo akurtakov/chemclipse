@@ -45,11 +45,11 @@ public class ReaderHelper {
 		} else if(object instanceof ZipFile zipFile) {
 			dataInputStream = getDataInputStream(zipFile, entryName);
 		}
-		//
+
 		if(dataInputStream != null) {
 			version = readString(dataInputStream);
 		}
-		//
+
 		return version;
 	}
 

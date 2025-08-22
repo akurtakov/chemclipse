@@ -53,11 +53,11 @@ public class DeletePeaksByQuantitationFilter extends AbstractPeakFilter<DeletePe
 	public void filterPeaks(IChromatogramSelection chromatogramSelection, DeletePeaksByQuantitationFilterSettings configuration, ProcessExecutionContext context) throws IllegalArgumentException {
 
 		Collection<IPeak> peaks = getReadOnlyPeaks(chromatogramSelection);
-		//
+
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
-		//
+
 		if(isConfigurationValid(configuration)) {
 			List<IPeak> peaksToDelete = new ArrayList<>();
 			SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), peaks.size());
@@ -82,7 +82,7 @@ public class DeletePeaksByQuantitationFilter extends AbstractPeakFilter<DeletePe
 				String name = configuration.getName();
 				double concentration = configuration.getConcentration();
 				String unit = configuration.getUnit();
-				//
+
 				for(IQuantitationEntry quantitationEntry : peak.getQuantitationEntries()) {
 					if(name.isEmpty() || quantitationEntry.getName().equals(name)) {
 						if(quantitationEntry.getConcentrationUnit().equals(unit)) {
@@ -94,7 +94,7 @@ public class DeletePeaksByQuantitationFilter extends AbstractPeakFilter<DeletePe
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -112,7 +112,7 @@ public class DeletePeaksByQuantitationFilter extends AbstractPeakFilter<DeletePe
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 }

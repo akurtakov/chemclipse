@@ -58,12 +58,12 @@ import org.eclipse.ui.part.EditorPart;
 public class BatchJobEditor extends EditorPart implements IRunnableWithProgress {
 
 	private static final Logger logger = Logger.getLogger(BatchJobEditor.class);
-	//
+
 	private File file;
 	private boolean isDirty = false;
 	private BatchProcessJob batchProcessJob;
 	private BatchJobUI batchJobUI;
-	//
+
 	private IProcessSupplierContext supplierContext;
 
 	@Override
@@ -117,11 +117,11 @@ public class BatchJobEditor extends EditorPart implements IRunnableWithProgress 
 
 		setSite(site);
 		setInput(input);
-		//
+
 		String fileName = input.getName();
 		fileName = fileName.substring(0, fileName.length() - 4);
 		setPartName(fileName);
-		//
+
 		if(batchProcessJob == null && input instanceof IFileEditorInput fileEditorInput) {
 			file = fileEditorInput.getFile().getLocation().toFile();
 			ImportRunnable runnable = new ImportRunnable(file);
@@ -164,7 +164,7 @@ public class BatchJobEditor extends EditorPart implements IRunnableWithProgress 
 	public void createPartControl(Composite parent) {
 
 		parent.setLayout(new FillLayout());
-		//
+
 		supplierContext = new ProcessTypeSupport();
 		DataType dataType = batchProcessJob.getDataType();
 		batchJobUI = new BatchJobUI(parent, supplierContext, Activator.getDefault().getPreferenceStore(), PreferenceSupplier.P_FILTER_PATH_IMPORT_RECORDS, dataType, this);
@@ -185,7 +185,7 @@ public class BatchJobEditor extends EditorPart implements IRunnableWithProgress 
 		for(IChromatogramInputEntry entry : chromatogramInputEntries) {
 			files.add(new File(entry.getInputFile()));
 		}
-		//
+
 		return files;
 	}
 
@@ -193,12 +193,12 @@ public class BatchJobEditor extends EditorPart implements IRunnableWithProgress 
 
 		BatchProcessJob batchProcessJob = new BatchProcessJob(batchJobUI.getMethod().getProcessMethod());
 		batchProcessJob.setDataType(dataType);
-		//
+
 		List<IChromatogramInputEntry> entries = batchProcessJob.getChromatogramInputEntries();
 		for(File file : batchJobUI.getDataList().getFiles()) {
 			entries.add(new ChromatogramInputEntry(file.getAbsolutePath()));
 		}
-		//
+
 		return batchProcessJob;
 	}
 

@@ -56,7 +56,7 @@ public class ExtendedBaselineUI extends Composite implements IExtendedPartUI {
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private AtomicReference<ChromatogramChart> chartControl = new AtomicReference<>();
 	private IChromatogram chromatogram;
-	//
+
 	private ChromatogramChartSupport chromatogramChartSupport = new ChromatogramChartSupport();
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 	private IColorScheme colorScheme = Colors.getColorScheme(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCHEME_DISPLAY_BASELINE));
@@ -71,24 +71,24 @@ public class ExtendedBaselineUI extends Composite implements IExtendedPartUI {
 	public void update(IChromatogramSelection chromatogramSelection) {
 
 		toolbarInfo.get().setText(ChromatogramDataSupport.getChromatogramSelectionLabel(chromatogramSelection));
-		//
+
 		if(chromatogramSelection != null) {
 			chromatogram = chromatogramSelection.getChromatogram();
 		} else {
 			chromatogram = null;
 		}
-		//
+
 		refreshBaselineChart(chromatogram);
 	}
 
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createOverlayChart(this);
-		//
+
 		initialize();
 	}
 
@@ -104,7 +104,7 @@ public class ExtendedBaselineUI extends Composite implements IExtendedPartUI {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(4, false));
-		//
+
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 		createButtonToggleChartLegend(composite, chartControl, IMAGE_LEGEND);
 		createResetButton(composite);
@@ -115,7 +115,7 @@ public class ExtendedBaselineUI extends Composite implements IExtendedPartUI {
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -154,7 +154,7 @@ public class ExtendedBaselineUI extends Composite implements IExtendedPartUI {
 		IChartSettings chartSettings = chromatogramChart.getChartSettings();
 		chartSettings.setCreateMenu(true);
 		chromatogramChart.applySettings(chartSettings);
-		//
+
 		chartControl.set(chromatogramChart);
 	}
 
@@ -172,19 +172,19 @@ public class ExtendedBaselineUI extends Composite implements IExtendedPartUI {
 		if(chromatogram != null) {
 			List<ILineSeriesData> lineSeriesDataList = new ArrayList<ILineSeriesData>();
 			colorScheme.reset();
-			//
+
 			ILineSeriesData lineSeriesDataChromatogram = getLineSeriesData(chromatogram, "Chromatogram", false);
 			ILineSeriesSettings lineSeriesSettingsChromatogram = lineSeriesDataChromatogram.getSettings();
 			lineSeriesSettingsChromatogram.setLineColor(colorScheme.getColor());
 			lineSeriesSettingsChromatogram.setEnableArea(false);
 			lineSeriesDataList.add(lineSeriesDataChromatogram);
-			//
+
 			ILineSeriesData lineSeriesDataBaseline = getLineSeriesData(chromatogram, "Baseline", true);
 			ILineSeriesSettings lineSeriesSettingsBaseline = lineSeriesDataBaseline.getSettings();
 			lineSeriesSettingsBaseline.setLineColor(colorScheme.getNextColor());
 			lineSeriesSettingsBaseline.setEnableArea(false);
 			lineSeriesDataList.add(lineSeriesDataBaseline);
-			//
+
 			int compressionToLength = chromatogramChartSupport.getCompressionLength(compressionType, lineSeriesDataList.size());
 			chromatogramChart.addSeriesData(lineSeriesDataList, compressionToLength);
 		}
@@ -201,7 +201,7 @@ public class ExtendedBaselineUI extends Composite implements IExtendedPartUI {
 
 		double[] xSeries;
 		double[] ySeries;
-		//
+
 		if(chromatogram != null) {
 			IBaselineModel baselineModel = chromatogram.getBaselineModel();
 			int size = chromatogram.getNumberOfScans();
@@ -218,7 +218,7 @@ public class ExtendedBaselineUI extends Composite implements IExtendedPartUI {
 			xSeries = new double[0];
 			ySeries = new double[0];
 		}
-		//
+
 		return new SeriesData(xSeries, ySeries, id);
 	}
 }

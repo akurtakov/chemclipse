@@ -22,7 +22,7 @@ public abstract class AbstractQuantitationEntry implements IQuantitationEntry {
 
 	private static final long serialVersionUID = -9169349509443899583L;
 	private static final String DESCRIPTION_DELIMITER = " | ";
-	//
+
 	private List<Double> signals = new ArrayList<>();
 	private String name = "";
 	private String group = ""; // Used e.g. for repetitions

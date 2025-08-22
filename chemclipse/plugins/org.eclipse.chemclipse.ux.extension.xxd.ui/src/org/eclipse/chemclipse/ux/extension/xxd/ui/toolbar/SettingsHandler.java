@@ -42,7 +42,7 @@ public class SettingsHandler {
 			for(IPreferencePage preferencePage : preferencePages) {
 				preferenceManager.addToRoot(new PreferenceNode(Integer.toString(i++), preferencePage));
 			}
-			//
+
 			PreferenceDialog preferenceDialog = new PreferenceDialog(shell, preferenceManager);
 			preferenceDialog.create();
 			preferenceDialog.setMessage("Settings");

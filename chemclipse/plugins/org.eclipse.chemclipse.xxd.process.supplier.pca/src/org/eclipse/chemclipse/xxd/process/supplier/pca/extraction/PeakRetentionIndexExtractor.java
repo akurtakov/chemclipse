@@ -42,17 +42,17 @@ public class PeakRetentionIndexExtractor extends AbstractClassifierDescriptionEx
 		List<Sample> samplesList = new ArrayList<>();
 		peaks.keySet().forEach(d -> samplesList.add(new Sample(d.getSampleName(), d.getGroupName())));
 		Samples samples = new Samples(samplesList);
-		//
+
 		Map<String, List<IPeak>> peakMap = new LinkedHashMap<>();
 		peaks.forEach((dataInputEntry, peaksInput) -> peakMap.put(dataInputEntry.getSampleName(), peaksInput));
-		//
+
 		Map<String, SortedMap<Integer, IPeak>> extractPeaks = exctractPcaPeakMap(peakMap, retentionIndexWindow);
 		List<Integer> extractedRetentionIndices = calculateCondensedRetentionIndices(extractPeaks);
 		samples.getVariables().addAll(RetentionIndex.create(extractedRetentionIndices));
-		//
+
 		setExtractData(extractPeaks, samples, valueOption);
 		setClassifierAndDescription(samples, descriptionOption);
-		//
+
 		return samples;
 	}
 
@@ -72,7 +72,7 @@ public class PeakRetentionIndexExtractor extends AbstractClassifierDescriptionEx
 		Map<String, TreeMap<Integer, IPeak>> pcaPeakRetentionIndex = new LinkedHashMap<>();
 		Map<String, SortedMap<Integer, IPeak>> pcaPeakCondenseRetentionIndex = new LinkedHashMap<>();
 		int totalCountPeak = 0;
-		//
+
 		for(Map.Entry<String, List<IPeak>> peakEnry : peakMap.entrySet()) {
 			String name = peakEnry.getKey();
 			List<IPeak> peaks = peakEnry.getValue();
@@ -86,7 +86,7 @@ public class PeakRetentionIndexExtractor extends AbstractClassifierDescriptionEx
 			totalCountPeak += peakTree.size();
 			pcaPeakRetentionIndex.put(name, peakTree);
 		}
-		//
+
 		while(totalCountPeak != 0) {
 			SortedMap<Double, Collection<Integer>> weightRetentionIndex = setWeightRetentionIndices(pcaPeakRetentionIndex, retentionIndexWindow);
 			Iterator<Map.Entry<Double, Collection<Integer>>> it = weightRetentionIndex.entrySet().iterator();
@@ -124,7 +124,7 @@ public class PeakRetentionIndexExtractor extends AbstractClassifierDescriptionEx
 				}
 			}
 		}
-		//
+
 		return pcaPeakCondenseRetentionIndex;
 	}
 
@@ -168,7 +168,7 @@ public class PeakRetentionIndexExtractor extends AbstractClassifierDescriptionEx
 
 		List<IVariable> extractedRetentionIndices = samples.getVariables();
 		boolean useQuantitationValue = ValueOption.CONCENTRATION.equals(valueOption);
-		//
+
 		for(Sample sample : samples.getSamples()) {
 			Iterator<IVariable> it = extractedRetentionIndices.iterator();
 			SortedMap<Integer, IPeak> extractPeak = extractData.get(sample.getSampleName());
@@ -193,7 +193,7 @@ public class PeakRetentionIndexExtractor extends AbstractClassifierDescriptionEx
 								 */
 								value = peak.getIntegratedArea();
 							}
-							//
+
 							PeakSampleData sampleData = new PeakSampleData(value, peak);
 							sampleData.setPeak(peak);
 							sample.getSampleData().add(sampleData);

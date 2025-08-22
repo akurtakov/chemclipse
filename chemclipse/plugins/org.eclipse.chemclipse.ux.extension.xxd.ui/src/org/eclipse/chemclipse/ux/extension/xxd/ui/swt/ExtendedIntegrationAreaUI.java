@@ -31,9 +31,9 @@ public class ExtendedIntegrationAreaUI extends Composite implements IExtendedPar
 	private AtomicReference<Button> buttonToolbarControl = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private AtomicReference<IntegrationAreaUI> integrationAreaControl = new AtomicReference<>();
-	//
+
 	private Object object;
-	//
+
 	private PeakDataSupport peakDataSupport = new PeakDataSupport();
 
 	public ExtendedIntegrationAreaUI(Composite parent, int style) {
@@ -75,11 +75,11 @@ public class ExtendedIntegrationAreaUI extends Composite implements IExtendedPar
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createQuantitationTable(this);
-		//
+
 		initialize();
 	}
 
@@ -95,7 +95,7 @@ public class ExtendedIntegrationAreaUI extends Composite implements IExtendedPar
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		createButtonToggleToolbar(composite);
 	}
 
@@ -109,7 +109,7 @@ public class ExtendedIntegrationAreaUI extends Composite implements IExtendedPar
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -117,7 +117,7 @@ public class ExtendedIntegrationAreaUI extends Composite implements IExtendedPar
 
 		IntegrationAreaUI integrationAreaUI = new IntegrationAreaUI(parent, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		integrationAreaUI.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		integrationAreaControl.set(integrationAreaUI);
 	}
 }

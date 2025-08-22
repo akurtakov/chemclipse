@@ -33,13 +33,13 @@ import org.eclipse.chemclipse.support.text.ValueFormat;
 public class TargetReference implements ITargetReference {
 
 	private static final DecimalFormat FORMAT = ValueFormat.getDecimalFormatEnglish("0.000");
-	//
+
 	private String id = "";
 	private String retentionTimeMinutes = "";
 	private float retentionIndex = 0.0f;
 	private TargetReferenceType type = TargetReferenceType.NONE;
 	private ISignal signal = null;
-	//
+
 	private ITargetSupplier supplier = null;
 
 	public static String createID(TargetReferenceType type, int retentionTime) {
@@ -60,7 +60,7 @@ public class TargetReference implements ITargetReference {
 		this.type = type;
 		this.retentionTimeMinutes = retentionTimeMinutes;
 		this.retentionIndex = retentionIndex;
-		//
+
 		id = createID(type, retentionTimeMinutes);
 	}
 
@@ -150,7 +150,7 @@ public class TargetReference implements ITargetReference {
 		if(targetDisplaySettings == null) {
 			return always -> true;
 		}
-		//
+
 		return new Predicate<ITargetReference>() {
 
 			@Override

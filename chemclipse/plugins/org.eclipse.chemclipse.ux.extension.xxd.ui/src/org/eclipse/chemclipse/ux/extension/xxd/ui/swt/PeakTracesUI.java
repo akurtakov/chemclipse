@@ -64,15 +64,15 @@ import org.eclipse.swtchart.extensions.linecharts.ILineSeriesSettings;
 public class PeakTracesUI extends ScrollableChart {
 
 	private static final int NO_TRACE_SELECTION = 0;
-	//
+
 	private final ChromatogramChartSupport chromatogramChartSupport = new ChromatogramChartSupport();
 	private final PeakChartSupport peakChartSupport = new PeakChartSupport();
 	private final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-	//
+
 	private List<Integer> traces = new ArrayList<>();
 	private int selectedTrace = NO_TRACE_SELECTION;
 	private IPeak peak = null;
-	//
+
 	private PeakTracesOffsetListener peakTracesOffsetListener = new PeakTracesOffsetListener(this.getBaseChart());
 
 	public PeakTracesUI() {
@@ -117,9 +117,9 @@ public class PeakTracesUI extends ScrollableChart {
 		deleteSeries();
 		traces.clear();
 		peakTracesOffsetListener.setOffsetRetentionTime(0);
-		//
+
 		List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
-		//
+
 		if(peak instanceof IChromatogramPeakMSD chromatogramPeakMSD) {
 			lineSeriesDataList.addAll(extractSIC(chromatogramPeakMSD));
 		} else if(peak instanceof IChromatogramPeakWSD chromatogramPeakWSD) {
@@ -127,7 +127,7 @@ public class PeakTracesUI extends ScrollableChart {
 		} else if(peak != null) {
 			lineSeriesDataList.add(extractTIC(peak));
 		}
-		//
+
 		addLineSeriesData(lineSeriesDataList);
 	}
 
@@ -142,19 +142,19 @@ public class PeakTracesUI extends ScrollableChart {
 		List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
 		IChromatogramMSD chromatogram = chromatogramPeak.getChromatogram();
 		IPeakModelMSD peakModel = chromatogramPeak.getPeakModel();
-		//
+
 		int offsetRetentionTime = preferenceStore.getInt(PreferenceSupplier.P_PEAK_TRACES_OFFSET_RETENTION_TIME);
 		peakTracesOffsetListener.setOffsetRetentionTime(offsetRetentionTime);
-		//
+
 		int startRetentionTime = peakModel.getStartRetentionTime() - offsetRetentionTime;
 		int stopRetentionTime = peakModel.getStopRetentionTime() + offsetRetentionTime;
 		IPeakMassSpectrum massSpectrum = peakModel.getPeakMassSpectrum();
 		IChromatogramSelection chromatogramSelection = new ChromatogramSelection(chromatogram);
 		chromatogramSelection.setRangeRetentionTime(startRetentionTime, stopRetentionTime, false);
-		//
+
 		IColorScheme colors = Colors.getColorScheme(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCHEME_PEAK_TRACES));
 		traces.addAll(extractTraces(massSpectrum));
-		//
+
 		for(Integer trace : traces) {
 			IMarkedIons markedIons = new MarkedIons(MarkedTraceModus.INCLUDE);
 			markedIons.add(trace);
@@ -166,7 +166,7 @@ public class PeakTracesUI extends ScrollableChart {
 			lineSeriesDataList.add(lineSeriesData);
 			colors.incrementColor();
 		}
-		//
+
 		return lineSeriesDataList;
 	}
 
@@ -175,20 +175,20 @@ public class PeakTracesUI extends ScrollableChart {
 		List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
 		IChromatogramWSD chromatogram = chromatogramPeak.getChromatogram();
 		IPeakModelWSD peakModel = chromatogramPeak.getPeakModel();
-		//
+
 		int offsetRetentionTime = preferenceStore.getInt(PreferenceSupplier.P_PEAK_TRACES_OFFSET_RETENTION_TIME);
 		peakTracesOffsetListener.setOffsetRetentionTime(offsetRetentionTime);
-		//
+
 		int startRetentionTime = peakModel.getStartRetentionTime() - offsetRetentionTime;
 		int stopRetentionTime = peakModel.getStopRetentionTime() + offsetRetentionTime;
 		IScan peakMaximum = peakModel.getPeakMaximum();
 		if(peakMaximum instanceof IScanWSD scanWSD) {
 			IChromatogramSelection chromatogramSelection = new ChromatogramSelection(chromatogram);
 			chromatogramSelection.setRangeRetentionTime(startRetentionTime, stopRetentionTime, false);
-			//
+
 			IColorScheme colors = Colors.getColorScheme(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCHEME_PEAK_TRACES));
 			traces.addAll(extractTraces(scanWSD));
-			//
+
 			for(Integer trace : traces) {
 				IMarkedWavelengths markedWavelengths = new MarkedWavelengths();
 				markedWavelengths.add(trace);
@@ -201,7 +201,7 @@ public class PeakTracesUI extends ScrollableChart {
 				colors.incrementColor();
 			}
 		}
-		//
+
 		return lineSeriesDataList;
 	}
 
@@ -213,11 +213,11 @@ public class PeakTracesUI extends ScrollableChart {
 	private List<Integer> extractTraces(IScanMSD scanMSD) {
 
 		List<Integer> traces = new ArrayList<>();
-		//
+
 		List<IIon> ions = new ArrayList<>(scanMSD.getIons());
 		Collections.sort(ions, (i1, i2) -> Float.compare(i2.getAbundance(), i1.getAbundance()));
 		int maxDisplayTraces = preferenceStore.getInt(PreferenceSupplier.P_MAX_DISPLAY_PEAK_TRACES);
-		//
+
 		exitloop:
 		for(IIon ion : ions) {
 			/*
@@ -227,7 +227,7 @@ public class PeakTracesUI extends ScrollableChart {
 			if(!traces.contains(trace)) {
 				traces.add(trace);
 			}
-			//
+
 			if(traces.size() >= maxDisplayTraces) {
 				break exitloop;
 			}
@@ -242,11 +242,11 @@ public class PeakTracesUI extends ScrollableChart {
 	private List<Integer> extractTraces(IScanWSD scanWSD) {
 
 		List<Integer> traces = new ArrayList<>();
-		//
+
 		List<IScanSignalWSD> scanSignals = new ArrayList<>(scanWSD.getScanSignals());
 		Collections.sort(scanSignals, (s1, s2) -> Float.compare(s2.getAbsorbance(), s1.getAbsorbance()));
 		int maxDisplayTraces = preferenceStore.getInt(PreferenceSupplier.P_MAX_DISPLAY_PEAK_TRACES);
-		//
+
 		exitloop:
 		for(IScanSignalWSD scanSignal : scanSignals) {
 			/*
@@ -256,7 +256,7 @@ public class PeakTracesUI extends ScrollableChart {
 			if(!traces.contains(trace)) {
 				traces.add(trace);
 			}
-			//
+
 			if(traces.size() >= maxDisplayTraces) {
 				break exitloop;
 			}
@@ -275,27 +275,27 @@ public class PeakTracesUI extends ScrollableChart {
 		 */
 		IChartSettings chartSettings = getChartSettings();
 		chartSettings.setCreateMenu(true);
-		//
+
 		RangeRestriction rangeRestriction = chartSettings.getRangeRestriction();
 		rangeRestriction.setRestrictFrame(true);
 		rangeRestriction.setExtendTypeY(RangeRestriction.ExtendType.RELATIVE);
 		rangeRestriction.setExtendMinY(0.0d);
 		rangeRestriction.setExtendMaxY(0.1d);
-		//
+
 		String titleX = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_MILLISECONDS);
 		String titleY = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_INTENSITY);
 		String titleX1 = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_MINUTES);
 		String titleY1 = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
-		//
+
 		ChartSupport.setPrimaryAxisSet(chartSettings, titleX, false, titleY);
 		ChartSupport.clearSecondaryAxes(chartSettings);
 		ChartSupport.addSecondaryAxisX(chartSettings, titleX1);
 		ChartSupport.addSecondaryAxisY(chartSettings, titleY1);
-		//
+
 		BaseChart baseChart = getBaseChart();
 		IPlotArea plotArea = baseChart.getPlotArea();
 		plotArea.addCustomPaintListener(peakTracesOffsetListener);
-		//
+
 		applySettings(chartSettings);
 	}
 
@@ -319,7 +319,7 @@ public class PeakTracesUI extends ScrollableChart {
 					ILineSeries<?> lineSeries = (ILineSeries<?>)createSeries(optimizedSeriesData, lineSeriesSettings);
 					baseChart.applySeriesSettings(lineSeries, lineSeriesSettings);
 				} catch(SeriesException e) {
-					//
+
 				}
 			}
 			baseChart.suspendUpdate(false);

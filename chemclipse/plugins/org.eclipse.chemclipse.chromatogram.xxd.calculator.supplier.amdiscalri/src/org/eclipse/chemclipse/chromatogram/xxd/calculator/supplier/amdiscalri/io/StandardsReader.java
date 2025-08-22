@@ -39,7 +39,7 @@ public class StandardsReader {
 	public List<IRetentionIndexEntry> getStandardsList() {
 
 		List<IRetentionIndexEntry> retentionIndexEntries = new ArrayList<>();
-		//
+
 		IMassSpectra massSpectra = getStandardsMassSpectra();
 		for(IScanMSD massSpectrum : massSpectra.getList()) {
 			if(massSpectrum instanceof ILibraryMassSpectrum libraryMassSpectrum) {
@@ -50,7 +50,7 @@ public class StandardsReader {
 				retentionIndexEntries.add(retentionIndexEntry);
 			}
 		}
-		//
+
 		return retentionIndexEntries;
 	}
 }

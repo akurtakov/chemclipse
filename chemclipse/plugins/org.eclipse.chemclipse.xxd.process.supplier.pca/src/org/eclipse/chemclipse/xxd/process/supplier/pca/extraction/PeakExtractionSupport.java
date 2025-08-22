@@ -29,7 +29,7 @@ public class PeakExtractionSupport {
 		Samples samples;
 		DescriptionOption descriptionOption = extractionSettings.getDescriptionOption();
 		ValueOption valueOption = extractionSettings.getValueOption();
-		//
+
 		switch(extractionSettings.getExtractionOption()) {
 			case RETENTION_INDEX:
 				PeakRetentionIndexExtractor peakRetentionIndexExtractor = new PeakRetentionIndexExtractor();
@@ -46,7 +46,7 @@ public class PeakExtractionSupport {
 				samples = peakRetentionTimeExtractor.extractPeakData(peaks, retentionTimeWindow, descriptionOption, valueOption);
 				break;
 		}
-		//
+
 		return samples;
 	}
 }

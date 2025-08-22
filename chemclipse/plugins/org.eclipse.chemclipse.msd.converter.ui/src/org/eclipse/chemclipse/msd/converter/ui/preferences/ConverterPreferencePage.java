@@ -37,14 +37,14 @@ public class ConverterPreferencePage extends FieldEditorPreferencePage implement
 
 		addField(new StringFieldEditor(PreferenceSupplier.P_REFERENCE_IDENTIFIER_MARKER, "Reference ID Marker", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceSupplier.P_REFERENCE_IDENTIFIER_PREFIX, "Reference ID Prefix", getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("MassLib", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_MASSLIB_CHROMATOGRAM_NAME, "Use Chromatogram Name", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceSupplier.P_MASSLIB_DEFAULT_NAME, "Default Name", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_PARSE_MASSLIB_RETENTION_INDEX_DATA, "Parse Retention Index Data", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_PARSE_MASSLIB_TARGET_DATA, "Parse Target Data", getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("AMDIS", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_AMDIS_CHROMATOGRAM_NAME, "Use Chromatogram Name", getFieldEditorParent()));

@@ -18,9 +18,9 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.chemclipse.msd.identifier.supplier.nist.l10n.messages"; //$NON-NLS-1$
-	//
+
 	public static String nistDbIdentifier;
-	//
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}

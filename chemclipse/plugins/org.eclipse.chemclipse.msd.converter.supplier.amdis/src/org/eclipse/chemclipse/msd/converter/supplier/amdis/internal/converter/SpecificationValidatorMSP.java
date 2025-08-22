@@ -52,7 +52,7 @@ public class SpecificationValidatorMSP {
 				validFile = file;
 			}
 		}
-		//
+
 		return validFile;
 	}
 }

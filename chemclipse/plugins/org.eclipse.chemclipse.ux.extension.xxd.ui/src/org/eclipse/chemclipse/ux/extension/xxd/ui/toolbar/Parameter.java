@@ -23,7 +23,7 @@ public class Parameter implements IParameter {
 
 	private String id = "";
 	private String name = "";
-	//
+
 	private IParameterValues parameterValues = new IParameterValues() {
 
 		private Map<?, ?> map = new HashMap<>();

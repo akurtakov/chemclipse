@@ -129,7 +129,7 @@ public class MetaProcessorSettings {
 
 		ProcessEntryContainer parent = processEntry.getParent();
 		String activeProfile = parent.getActiveProfile().replace(" ", "").replaceAll("\\P{InBasic_Latin}", "");
-		//
+
 		if(parent instanceof ListProcessEntryContainer listProcessEntryContainer) {
 			String identifier = String.valueOf(listProcessEntryContainer.getEntries().indexOf(processEntry));
 			if(parent instanceof IProcessEntry parentProcessEntry) {

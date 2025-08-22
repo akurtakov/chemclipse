@@ -22,21 +22,21 @@ import org.eclipse.chemclipse.vsd.model.core.SignalType;
 public class ScanVSD extends AbstractScanVSD {
 
 	private static final long serialVersionUID = 4840397215574246595L;
-	//
+
 	private TreeSet<ISignalVSD> processedSignals = new TreeSet<ISignalVSD>();
 
 	@Override
 	public SignalType getSignalType() {
 
 		SignalType signalType = SignalType.RAMAN;
-		//
+
 		ISignalVSD signal = processedSignals.first();
 		if(signal != null) {
 			if(signal instanceof ISignalInfrared) {
 				signalType = SignalType.FTIR;
 			}
 		}
-		//
+
 		return signalType;
 	}
 
@@ -47,7 +47,7 @@ public class ScanVSD extends AbstractScanVSD {
 		for(ISignalVSD signal : processedSignals) {
 			totalSignal += signal.getIntensity();
 		}
-		//
+
 		return (float)totalSignal;
 	}
 

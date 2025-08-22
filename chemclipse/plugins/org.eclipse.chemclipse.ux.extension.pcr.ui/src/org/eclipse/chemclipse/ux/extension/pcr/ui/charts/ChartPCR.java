@@ -53,7 +53,7 @@ import org.eclipse.swtchart.extensions.menu.IChartMenuEntry;
 public class ChartPCR extends LineChart {
 
 	private static final Logger logger = Logger.getLogger(ChartPCR.class);
-	//
+
 	private IPlate plate;
 
 	public ChartPCR() {
@@ -90,7 +90,7 @@ public class ChartPCR extends LineChart {
 		chartSettings.getRangeRestriction().setZeroX(false);
 		chartSettings.getRangeRestriction().setZeroY(false);
 		chartSettings.setEnableTooltips(true);
-		//
+
 		setPrimaryAxisSet(chartSettings);
 		setExportMenu(chartSettings);
 		applySettings(chartSettings);
@@ -108,7 +108,7 @@ public class ChartPCR extends LineChart {
 		}
 		primaryAxisSettingsX.setPosition(Position.Primary);
 		primaryAxisSettingsX.setVisible(true);
-		//
+
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle(ExtensionMessages.fluorescence);
 		primaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.0#E0"), new DecimalFormatSymbols(Locale.ENGLISH))); //$NON-NLS-1$

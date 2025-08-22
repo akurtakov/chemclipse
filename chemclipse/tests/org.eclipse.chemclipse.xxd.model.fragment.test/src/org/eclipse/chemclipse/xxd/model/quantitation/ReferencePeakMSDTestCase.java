@@ -140,7 +140,7 @@ public class ReferencePeakMSDTestCase {
 			integrationEntries.add(integrationEntry);
 			referencePeakMSD.setIntegratedArea(integrationEntries, "Test Integrator TIC");
 		}
-		//
+
 		return referencePeakMSD;
 	}
 

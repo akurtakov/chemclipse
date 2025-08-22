@@ -65,41 +65,41 @@ import org.eclipse.swt.widgets.Text;
 public class ExtendedInternalStandardsUI extends Composite implements IExtendedPartUI {
 
 	private static final Logger logger = Logger.getLogger(ExtendedInternalStandardsUI.class);
-	//
+
 	private static final String MENU_CATEGORY_ISTD = "Internal Standards";
-	//
+
 	private static final String ACTION_INITIALIZE = "ACTION_INITIALIZE";
 	private static final String ACTION_CANCEL = "ACTION_CANCEL";
 	private static final String ACTION_ADD = "ACTION_ADD";
 	private static final String ACTION_DELETE = "ACTION_DELETE";
 	private static final String ACTION_SELECT = "ACTION_SELECT";
-	//
+
 	private Composite toolbarInfo;
 	private Composite toolbarModify;
 	private Composite toolbarAdd;
 	private Label labelPeak;
 	private Label labelInputErrors;
-	//
+
 	private ComboViewer comboName;
 	private Text textConcentration;
 	private ComboViewer comboViewerFactor;
 	private Text textFactor;
 	private Button buttonInsert;
-	//
+
 	private NameValidator nameValidator;
 	private ControlDecoration nameControlDecoration;
 	private ConcentrationValidator concentrationValidator;
 	private ControlDecoration concentrationControlDecoration;
 	private CompensationFactorValidator compensationFactorValidator;
 	private ControlDecoration compensationFactorControlDecoration;
-	//
+
 	private Button buttonCancel;
 	private Button buttonAdd;
 	private Button buttonDelete;
-	//
+
 	private InternalStandardsListUI internalStandardsListUI;
 	private IPeak peak;
-	//
+
 	private PeakDataSupport peakDataSupport = new PeakDataSupport();
 
 	public ExtendedInternalStandardsUI(Composite parent, int style) {
@@ -125,7 +125,7 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 
 		String editInformation = internalStandardsListUI.isEditEnabled() ? "Edit is enabled." : "Edit is disabled.";
 		labelPeak.setText(peakDataSupport.getPeakLabel(peak) + " - " + editInformation);
-		//
+
 		if(peak != null) {
 			internalStandardsListUI.setInput(peak.getInternalStandards());
 			/*
@@ -150,17 +150,17 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		toolbarInfo = createToolbarInfo(this);
 		toolbarModify = createToolbarModify(this);
 		toolbarAdd = createToolbarAdd(this);
 		createInternalStandardsList(this);
-		//
+
 		PartSupport.setCompositeVisibility(toolbarInfo, true);
 		PartSupport.setCompositeVisibility(toolbarModify, false);
 		PartSupport.setCompositeVisibility(toolbarAdd, false);
-		//
+
 		internalStandardsListUI.setEditEnabled(false);
 		enableButtonFields(ACTION_INITIALIZE);
 	}
@@ -172,7 +172,7 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(3, false));
-		//
+
 		createButtonToggleToolbarInfo(composite);
 		createButtonToggleToolbarModify(composite);
 		createButtonToggleEditModus(composite);
@@ -184,11 +184,11 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		labelPeak = new Label(composite, SWT.NONE);
 		labelPeak.setText("");
 		labelPeak.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return composite;
 	}
 
@@ -198,12 +198,12 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(4, false));
-		//
+
 		createErrorLabel(composite);
 		buttonCancel = createButtonCancel(composite);
 		buttonAdd = createButtonAdd(composite);
 		buttonDelete = createButtonDelete(composite);
-		//
+
 		return composite;
 	}
 
@@ -282,13 +282,13 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(5, false));
-		//
+
 		createTextName(composite);
 		createTextConcentration(composite);
 		createComboViewerFactor(composite);
 		createTextFactor(composite);
 		buttonInsert = createButtonInsert(composite);
-		//
+
 		return composite;
 	}
 
@@ -305,11 +305,11 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 				return element.toString();
 			}
 		});
-		//
+
 		combo.setText("");
 		combo.setToolTipText("Name of the internal standard (ISTD).");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		nameValidator = new NameValidator();
 		nameControlDecoration = new ControlDecoration(combo, SWT.LEFT | SWT.TOP);
 		combo.addKeyListener(new KeyAdapter() {
@@ -330,7 +330,7 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.minimumWidth = 80;
 		textConcentration.setLayoutData(gridData);
-		//
+
 		concentrationValidator = new ConcentrationValidator();
 		concentrationControlDecoration = new ControlDecoration(textConcentration, SWT.LEFT | SWT.TOP);
 		textConcentration.addKeyListener(new KeyAdapter() {
@@ -359,10 +359,10 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Response Option");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		comboViewerFactor.setInput(ResponseOption.values());
 		comboViewerFactor.setSelection(new StructuredSelection(ResponseOption.COMPENSATION_FACTOR));
 	}
@@ -375,7 +375,7 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.minimumWidth = 50;
 		textFactor.setLayoutData(gridData);
-		//
+
 		compensationFactorValidator = new CompensationFactorValidator();
 		compensationFactorControlDecoration = new ControlDecoration(textFactor, SWT.LEFT | SWT.TOP);
 		textFactor.addKeyListener(new KeyAdapter() {
@@ -402,7 +402,7 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 				addInternalStandard(e.display.getActiveShell());
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -421,7 +421,7 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 				button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_INFO, IApplicationImageProvider.SIZE_16x16, visible));
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -443,7 +443,7 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 					 */
 					PartSupport.setCompositeVisibility(toolbarAdd, false);
 				}
-				//
+
 				if(visible) {
 					button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EDIT_ACTIVE, IApplicationImageProvider.SIZE_16x16));
 				} else {
@@ -451,7 +451,7 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -472,7 +472,7 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 				updatePeak();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -584,16 +584,16 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 				double concentration = 0.0d;
 				String concentrationUnit = "";
 				double factor = 0.0d;
-				//
+
 				isInputValid = validate(nameValidator, nameControlDecoration, comboName);
 				name = nameValidator.getName();
-				//
+
 				if(isInputValid) {
 					isInputValid = validate(concentrationValidator, concentrationControlDecoration, textConcentration);
 					concentration = concentrationValidator.getConcentration();
 					concentrationUnit = concentrationValidator.getUnit();
 				}
-				//
+
 				if(isInputValid) {
 					isInputValid = validate(compensationFactorValidator, compensationFactorControlDecoration, textFactor);
 					factor = compensationFactorValidator.getCompensationFactor();
@@ -606,7 +606,7 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 					double compensationFactor = getCompensationFactor(factor);
 					IInternalStandard internalStandard = new InternalStandard(name, concentration, concentrationUnit, compensationFactor);
 					internalStandard.setChemicalClass(chemicalClass);
-					//
+
 					if(peak.getInternalStandards().contains(internalStandard)) {
 						MessageBox messageBox = new MessageBox(shell, SWT.ICON_WARNING | SWT.OK | SWT.CANCEL);
 						messageBox.setText("Add Internal Standard (ISTD)");
@@ -642,7 +642,7 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 				}
 			}
 		}
-		//
+
 		return compensationFactor;
 	}
 
@@ -669,7 +669,7 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 			case ACTION_SELECT:
 				buttonAdd.setEnabled(true);
 				buttonCancel.setEnabled(true);
-				//
+
 				if(internalStandardsListUI.getTable().getSelectionIndex() >= 0) {
 					buttonDelete.setEnabled(true);
 				} else {
@@ -684,7 +684,7 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 		buttonCancel.setEnabled(enabled);
 		buttonDelete.setEnabled(enabled);
 		buttonAdd.setEnabled(enabled);
-		//
+
 		comboName.getCombo().setEnabled(enabled);
 		textConcentration.setEnabled(enabled);
 		textFactor.setEnabled(enabled);

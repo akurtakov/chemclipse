@@ -20,7 +20,7 @@ public class ConcentrationValidator implements IValidator<Object> {
 
 	private static final String ERROR = "Please enter a correct concentration, e.g. 10 mg/L.";
 	private static final String ERROR_VALUE_RANGE = "The concentration must be not <= 0.";
-	//
+
 	private double concentration = 0.0d;
 	private String unit = "";
 
@@ -30,7 +30,7 @@ public class ConcentrationValidator implements IValidator<Object> {
 		String message = null;
 		this.concentration = 0.0d;
 		this.unit = "";
-		//
+
 		if(value == null) {
 			message = ERROR;
 		} else {
@@ -56,7 +56,7 @@ public class ConcentrationValidator implements IValidator<Object> {
 				message = ERROR;
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

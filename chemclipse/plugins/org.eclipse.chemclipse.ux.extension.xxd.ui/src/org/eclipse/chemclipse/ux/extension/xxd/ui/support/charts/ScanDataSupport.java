@@ -40,13 +40,13 @@ public class ScanDataSupport {
 	public static final String[] DATA_TYPES_CSD = new String[]{DataType.AUTO_DETECT.toString(), DataType.CSD.toString()};
 	public static final String[] DATA_TYPES_WSD = new String[]{DataType.AUTO_DETECT.toString(), DataType.WSD.toString()};
 	public static final String[] DATA_TYPES_VSD = new String[]{DataType.AUTO_DETECT.toString(), DataType.VSD.toString()};
-	//
+
 	public static final String[] SIGNAL_TYPES_DEFAULT = new String[]{SignalType.AUTO_DETECT.toString()};
 	public static final String[] SIGNAL_TYPES_MSD = new String[]{SignalType.AUTO_DETECT.toString(), SignalType.CENTROID.toString(), SignalType.PROFILE.toString()};
 	public static final String[] SIGNAL_TYPES_CSD = new String[]{SignalType.AUTO_DETECT.toString(), SignalType.CENTROID.toString()};
 	public static final String[] SIGNAL_TYPES_WSD = new String[]{SignalType.AUTO_DETECT.toString(), SignalType.CENTROID.toString(), SignalType.PROFILE.toString()};
 	public static final String[] SIGNAL_TYPES_VSD = new String[]{SignalType.AUTO_DETECT.toString(), SignalType.CENTROID.toString(), SignalType.PROFILE.toString()};
-	//
+
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.0##");
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
@@ -71,7 +71,7 @@ public class ScanDataSupport {
 				builder.append(scan.getScanNumber());
 				builder.append(" | ");
 			}
-			//
+
 			builder.append("RT: ");
 			builder.append(decimalFormat.format(scan.getRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
 			builder.append(" | ");
@@ -81,7 +81,7 @@ public class ScanDataSupport {
 			} else {
 				builder.append(decimalFormat.format(scan.getRetentionIndex()));
 			}
-			//
+
 			if(scan instanceof IRegularMassSpectrum massSpectrum) {
 				builder.append(" | ");
 				builder.append("Detector: MS");
@@ -90,11 +90,11 @@ public class ScanDataSupport {
 				builder.append("Type: ");
 				builder.append(massSpectrum.getMassSpectrumType().label());
 			}
-			//
+
 			builder.append(" | ");
 			builder.append("Signal: ");
 			builder.append(BigDecimal.valueOf(scan.getTotalSignal()).toBigInteger());
-			//
+
 			if(scan instanceof IScanMSD scanMSD) {
 				IScanMSD optimizedMassSpectrum = scanMSD.getOptimizedMassSpectrum();
 				if(optimizedMassSpectrum != null) {
@@ -115,7 +115,7 @@ public class ScanDataSupport {
 		builder.append(" ");
 		builder.append(title);
 		builder.append(" = ");
-		//
+
 		if(scanMSD != null) {
 			if(scanMSD instanceof IRegularLibraryMassSpectrum libraryMassSpectrum) {
 				ILibraryInformation libraryInformation = libraryMassSpectrum.getLibraryInformation();
@@ -135,13 +135,13 @@ public class ScanDataSupport {
 			} else {
 				builder.append(decimalFormat.format(scanMSD.getRetentionIndex()));
 			}
-			//
+
 			IScanMSD optimizedMassSpectrum = scanMSD.getOptimizedMassSpectrum();
 			if(optimizedMassSpectrum != null) {
 				builder.append(" | ");
 				builder.append("optimized");
 			}
-			//
+
 			if(!"".equals(postfix)) {
 				builder.append(" | ");
 				builder.append(postfix);
@@ -150,21 +150,21 @@ public class ScanDataSupport {
 		} else {
 			builder.append("No mass spectrum has been selected yet.");
 		}
-		//
+
 		return builder.toString();
 	}
 
 	public boolean containsOptimizedScan(IScan scan) {
 
 		boolean containsOptimizedScan = false;
-		//
+
 		if(scan instanceof IScanMSD scanMSD) {
 			IScanMSD optimizedMassSpectrum = scanMSD.getOptimizedMassSpectrum();
 			if(optimizedMassSpectrum != null) {
 				containsOptimizedScan = true;
 			}
 		}
-		//
+
 		return containsOptimizedScan;
 	}
 
@@ -173,7 +173,7 @@ public class ScanDataSupport {
 		String titleX = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_MZ);
 		String titleY = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_INTENSITY);
 		String titleY1 = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
-		//
+
 		ChartSupport.setPrimaryAxisSet(chartSettings, titleX, true, titleY);
 		ChartSupport.clearSecondaryAxes(chartSettings);
 		ChartSupport.addSecondaryAxisY(chartSettings, titleY1);
@@ -185,7 +185,7 @@ public class ScanDataSupport {
 		String titleX1 = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_MINUTES);
 		String titleY = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_INTENSITY);
 		String titleY1 = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
-		//
+
 		ChartSupport.setPrimaryAxisSet(chartSettings, titleX, false, titleY);
 		ChartSupport.clearSecondaryAxes(chartSettings);
 		ChartSupport.addSecondaryAxisX(chartSettings, titleX1);
@@ -197,7 +197,7 @@ public class ScanDataSupport {
 		String titleX = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_WAVELENGTH);
 		String titleY = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_INTENSITY);
 		String titleY1 = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
-		//
+
 		ChartSupport.setPrimaryAxisSet(chartSettings, titleX, true, titleY);
 		ChartSupport.clearSecondaryAxes(chartSettings);
 		ChartSupport.addSecondaryAxisY(chartSettings, titleY1);
@@ -208,7 +208,7 @@ public class ScanDataSupport {
 		String titleX = "Wavenumber";
 		String titleY = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_INTENSITY);
 		String titleY1 = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
-		//
+
 		ChartSupport.setPrimaryAxisSet(chartSettings, titleX, true, titleY);
 		ChartSupport.clearSecondaryAxes(chartSettings);
 		ChartSupport.addSecondaryAxisY(chartSettings, titleY1);

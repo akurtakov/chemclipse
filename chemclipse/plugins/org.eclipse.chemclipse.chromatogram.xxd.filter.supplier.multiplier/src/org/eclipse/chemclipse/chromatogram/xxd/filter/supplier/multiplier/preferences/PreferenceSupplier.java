@@ -24,7 +24,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final float DEF_MULTIPLIER = 1.0f;
 	public static final float MIN_MULTIPLIER = 1.0E-12f;
 	public static final float MAX_MULTIPLIER = Float.MAX_VALUE;
-	//
+
 	public static final String P_DIVISOR = "divisor";
 	public static final float DEF_DIVISOR = 1.0f;
 	public static final float MIN_DIVISOR = 1.0E-12f;

@@ -90,7 +90,7 @@ public class PerspectiveSwitchHandler {
 			if(perspectiveId != null) {
 				perspectiveSwitcher.changePerspective(perspectiveId);
 			}
-			//
+
 			for(String viewId : viewIds) {
 				perspectiveSwitcher.focusView(viewId);
 			}

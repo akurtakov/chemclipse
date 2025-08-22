@@ -46,7 +46,7 @@ public class ClassificationDictionaryValidator implements IValidator<Object> {
 				message = "The settings class is not of type: " + ClassificationDictionary.class.getName();
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

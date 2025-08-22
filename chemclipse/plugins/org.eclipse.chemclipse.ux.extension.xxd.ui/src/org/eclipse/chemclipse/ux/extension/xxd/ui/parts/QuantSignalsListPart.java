@@ -53,7 +53,7 @@ public class QuantSignalsListPart extends AbstractPart<ExtendedQuantSignalsListU
 				return false;
 			}
 		}
-		//
+
 		return false;
 	}
 

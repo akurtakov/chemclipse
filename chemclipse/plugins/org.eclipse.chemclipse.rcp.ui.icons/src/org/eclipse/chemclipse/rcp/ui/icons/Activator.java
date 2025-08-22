@@ -26,7 +26,6 @@ import org.osgi.framework.BundleContext;
  */
 public class Activator extends AbstractUIPlugin {
 
-	//
 	public static final String IMAGE_EMPTY = "icons/empty.png";
 	// The shared instance
 	private static Activator plugin;

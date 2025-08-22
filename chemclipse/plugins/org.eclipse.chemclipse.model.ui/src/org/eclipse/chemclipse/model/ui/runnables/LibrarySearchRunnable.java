@@ -30,7 +30,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 public class LibrarySearchRunnable implements IRunnableWithProgress {
 
 	private static final int MAX_RESULTS = 100;
-	//
+
 	private int retentionIndex = 0;
 	private RetentionIndexLibrarySettings retentionIndexLibrarySettings = new RetentionIndexLibrarySettings();
 	private List<IIdentificationTarget> identificationTargets = new ArrayList<>();
@@ -61,7 +61,7 @@ public class LibrarySearchRunnable implements IRunnableWithProgress {
 		boolean caseSensitive = retentionIndexLibrarySettings.isCaseSensitive();
 		boolean removeWhiteSpace = retentionIndexLibrarySettings.isRemoveWhiteSpace();
 		boolean matchPartly = retentionIndexLibrarySettings.isMatchPartly();
-		//
+
 		for(ILibraryInformation libraryInformation : libraryInformations) {
 			float retentionIndexColumn = ColumnIndexSupport.getRetentionIndex(retentionIndex, libraryInformation.getColumnIndexMarkers(), searchColumn, caseSensitive, removeWhiteSpace, matchPartly);
 			libraryInformation.setRetentionIndex(retentionIndexColumn);

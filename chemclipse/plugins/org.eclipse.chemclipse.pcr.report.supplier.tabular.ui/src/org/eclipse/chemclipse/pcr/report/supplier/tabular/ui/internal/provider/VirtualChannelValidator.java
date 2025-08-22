@@ -28,7 +28,7 @@ public class VirtualChannelValidator extends ValueParserSupport implements IVali
 	private static final String SEPARATOR_TOKEN = VirtualChannels.SEPARATOR_TOKEN;
 	private static final String SEPARATOR_ENTRY = VirtualChannels.SEPARATOR_ENTRY;
 	private static final String ERROR_TOKEN = "The item must not contain: " + SEPARATOR_TOKEN;
-	//
+
 	private String sample;
 	private int[] sources;
 	private LogicalOperator logicalOperator;
@@ -71,7 +71,7 @@ public class VirtualChannelValidator extends ValueParserSupport implements IVali
 		} else {
 			message = ERROR_ENTRY;
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

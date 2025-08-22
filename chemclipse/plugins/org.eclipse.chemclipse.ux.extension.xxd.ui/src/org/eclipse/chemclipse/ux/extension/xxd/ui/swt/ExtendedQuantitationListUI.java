@@ -38,9 +38,9 @@ public class ExtendedQuantitationListUI extends Composite implements IExtendedPa
 	private Button buttonToolbarInfo;
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private QuantitationListUI quantitationListUI;
-	//
+
 	private IPeak peak;
-	//
+
 	private PeakDataSupport peakDataSupport = new PeakDataSupport();
 
 	public ExtendedQuantitationListUI(Composite parent, int style) {
@@ -75,11 +75,11 @@ public class ExtendedQuantitationListUI extends Composite implements IExtendedPa
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createQuantitationTable(this);
-		//
+
 		initialize();
 	}
 
@@ -95,7 +95,7 @@ public class ExtendedQuantitationListUI extends Composite implements IExtendedPa
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 	}
 
@@ -103,7 +103,7 @@ public class ExtendedQuantitationListUI extends Composite implements IExtendedPa
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -119,7 +119,7 @@ public class ExtendedQuantitationListUI extends Composite implements IExtendedPa
 		addDeleteMenuEntry(shell, tableSettings);
 		addKeyEventProcessors(shell, tableSettings);
 		quantitationListUI.applySettings(tableSettings);
-		//
+
 		return quantitationListUI;
 	}
 
@@ -180,7 +180,7 @@ public class ExtendedQuantitationListUI extends Composite implements IExtendedPa
 					deleteQuantitationEntry(quantitationEntry);
 				}
 			}
-			//
+
 			updateObject();
 		}
 	}

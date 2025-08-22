@@ -47,7 +47,7 @@ public class SequenceFilesUI extends ExtendedTableViewer {
 
 		int column = 0;
 		int sortOrder = TargetsComparator.DESCENDING;
-		//
+
 		sequenceListTableComparator.setColumn(column);
 		sequenceListTableComparator.setDirection(sortOrder);
 		refresh();

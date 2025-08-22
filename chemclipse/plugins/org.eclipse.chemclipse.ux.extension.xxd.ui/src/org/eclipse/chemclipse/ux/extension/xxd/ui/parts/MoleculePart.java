@@ -79,7 +79,7 @@ public class MoleculePart extends AbstractPart<ExtendedMoleculeUI> {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 

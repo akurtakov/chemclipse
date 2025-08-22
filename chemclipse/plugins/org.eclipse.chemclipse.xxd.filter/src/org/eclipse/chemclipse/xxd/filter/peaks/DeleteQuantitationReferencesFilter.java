@@ -43,14 +43,14 @@ public class DeleteQuantitationReferencesFilter extends AbstractPeakFilter<Delet
 	public void filterPeaks(IChromatogramSelection chromatogramSelection, DeleteQuantitationReferencesFilterSettings configuration, ProcessExecutionContext context) throws IllegalArgumentException {
 
 		Collection<IPeak> peaks = getReadOnlyPeaks(chromatogramSelection);
-		//
+
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
-		//
+
 		String quantitationReference = configuration.getQuantitationReference();
 		boolean deleteReferencesCompletely = quantitationReference == null || quantitationReference.isEmpty() || quantitationReference.isBlank();
-		//
+
 		SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), peaks.size());
 		for(IPeak peak : peaks) {
 			if(deleteReferencesCompletely) {

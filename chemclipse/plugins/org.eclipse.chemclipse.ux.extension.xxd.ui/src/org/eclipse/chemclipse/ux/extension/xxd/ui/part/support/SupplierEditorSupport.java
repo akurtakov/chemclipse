@@ -245,7 +245,7 @@ public class SupplierEditorSupport extends AbstractSupplierFileEditorSupport imp
 		tooltip = "";
 		topicUpdateRawfile = "";
 		topicUpdateOverview = "";
-		//
+
 		switch(dataType) {
 			case MSD_NOMINAL:
 			case MSD_TANDEM:

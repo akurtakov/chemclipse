@@ -87,7 +87,7 @@ public class OverviewChartUI extends LineChart {
 				return IMouseSupport.MOUSE_BUTTON_LEFT;
 			}
 		});
-		//
+
 		setPrimaryAxisSet(chartSettings);
 		applySettings(chartSettings);
 	}
@@ -105,7 +105,7 @@ public class OverviewChartUI extends LineChart {
 		primaryAxisSettingsX.setPosition(Position.Primary);
 		primaryAxisSettingsX.setVisible(false);
 		primaryAxisSettingsX.setGridLineStyle(LineStyle.NONE);
-		//
+
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle("Intensity [counts]");
 		primaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.0#E0"), new DecimalFormatSymbols(Locale.ENGLISH)));

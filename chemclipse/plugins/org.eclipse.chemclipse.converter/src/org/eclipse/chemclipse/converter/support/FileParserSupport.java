@@ -68,7 +68,7 @@ public class FileParserSupport {
 		for(String prefix : filePrefixes) {
 			prefixes.add(prefix.toLowerCase());
 		}
-		//
+
 		List<File> files = new ArrayList<>();
 		for(File file : directory.listFiles()) {
 			String name = file.getName().toLowerCase();
@@ -82,7 +82,7 @@ public class FileParserSupport {
 				}
 			}
 		}
-		//
+
 		Collections.sort(files);
 		return files;
 	}
@@ -104,7 +104,7 @@ public class FileParserSupport {
 				file = new File(directory + File.separator + name.toUpperCase());
 			}
 		}
-		//
+
 		return file;
 	}
 }

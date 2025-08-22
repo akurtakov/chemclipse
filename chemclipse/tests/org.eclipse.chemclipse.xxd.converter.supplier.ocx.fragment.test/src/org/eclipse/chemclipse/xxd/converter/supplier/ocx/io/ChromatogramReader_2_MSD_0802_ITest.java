@@ -225,7 +225,7 @@ public class ChromatogramReader_2_MSD_0802_ITest extends ChromatogramReaderMSDTe
 		IIonTransitionSettings ionTransitionSettings = chromatogram.getIonTransitionSettings();
 		IIonTransitionGroup ionTransitionGroup = ionTransitionSettings.get(11);
 		IIonTransition ionTransition = ionTransitionGroup.get(0);
-		//
+
 		assertEquals(14, ionTransitionGroup.size());
 		assertEquals(10.0d, ionTransition.getCollisionEnergy(), 0);
 		assertEquals(161, ionTransition.getQ1Ion());
@@ -245,7 +245,7 @@ public class ChromatogramReader_2_MSD_0802_ITest extends ChromatogramReaderMSDTe
 		IIonTransitionSettings ionTransitionSettings = chromatogram.getIonTransitionSettings();
 		IIonTransitionGroup ionTransitionGroup = ionTransitionSettings.get(11);
 		IIonTransition ionTransition = ionTransitionGroup.get(12);
-		//
+
 		assertEquals(14, ionTransitionGroup.size());
 		assertEquals(15.0d, ionTransition.getCollisionEnergy(), 0);
 		assertEquals(359, ionTransition.getQ1Ion());

@@ -31,7 +31,7 @@ public class Activator extends AbstractActivatorUI {
 	public static final String ICON_VALID = "INFO_VALID"; // $NON-NLS-1$
 	public static final String ICON_INFO = "ICON_INFO"; // $NON-NLS-1$
 	public static final String ICON_UNKNOWN = "ICON_UNKNOWN"; // $NON-NLS-1$
-	//
+
 	private static Activator plugin;
 
 	/**
@@ -76,25 +76,25 @@ public class Activator extends AbstractActivatorUI {
 
 		IEclipseContext eclipseContext = getEclipseContext();
 		ProcessingInfoPartSupport processingInfoPartSupport = eclipseContext.get(ProcessingInfoPartSupport.class);
-		//
+
 		if(processingInfoPartSupport == null) {
 			processingInfoPartSupport = ContextInjectionFactory.make(ProcessingInfoPartSupport.class, eclipseContext);
 			eclipseContext.set(ProcessingInfoPartSupport.class, processingInfoPartSupport);
 		}
-		//
+
 		return processingInfoPartSupport;
 	}
 
 	private Map<String, String> getImageHashMap() {
 
 		Map<String, String> imageHashMap = new HashMap<String, String>();
-		//
+
 		imageHashMap.put(ICON_INFO, "icons/16x16/info.gif");
 		imageHashMap.put(ICON_VALID, "icons/16x16/valid.gif");
 		imageHashMap.put(ICON_WARN, "icons/16x16/warn.gif");
 		imageHashMap.put(ICON_ERROR, "icons/16x16/error.gif");
 		imageHashMap.put(ICON_UNKNOWN, "icons/16x16/unknown.gif");
-		//
+
 		return imageHashMap;
 	}
 }

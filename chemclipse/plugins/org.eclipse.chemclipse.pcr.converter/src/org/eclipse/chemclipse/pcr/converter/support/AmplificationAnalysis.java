@@ -85,14 +85,14 @@ public class AmplificationAnalysis {
 				}
 			}
 		}
-		//
+
 		return p0;
 	}
 
 	private static IPoint getPeakStart(List<IPoint> points) {
 
 		double threshold = getMedian(points) * 5;
-		//
+
 		IPoint peakStart = null;
 		IPoint p0 = null;
 		int counter = 0;
@@ -107,7 +107,7 @@ public class AmplificationAnalysis {
 						counter++;
 					}
 				}
-				//
+
 				if(counter >= 3) {
 					peakStart = points.get(i - 2);
 					break exitloop;
@@ -115,7 +115,7 @@ public class AmplificationAnalysis {
 			}
 			p0 = px;
 		}
-		//
+
 		return peakStart;
 	}
 

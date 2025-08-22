@@ -27,7 +27,7 @@ import org.eclipse.chemclipse.numeric.equations.LinearEquation;
 public abstract class AbstractPeakIntensityValues extends AbstractPeakIntensityValuesStrict implements IPeakIntensityValues {
 
 	private static final long serialVersionUID = 8193494258780090715L;
-	//
+
 	private NavigableMap<Integer, Float> intensityValues;
 	private float maxIntensity;
 

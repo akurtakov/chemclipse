@@ -31,7 +31,7 @@ public class FirstDerivativePeakDetectorSettings extends AbstractPeakDetectorSet
 	@JsonDeserialize(using = WindowSizeDeserializer.class)
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_WINDOW_SIZE, maxValue = PreferenceSupplier.MAX_WINDOW_SIZE, validation = Validation.ODD_NUMBER_INCLUDING_ZERO)
 	private int windowSize = 5;
-	//
+
 	@JsonProperty(value = "Threshold", defaultValue = "MEDIUM")
 	@LabelProperty(value = "%Threshold")
 	private Threshold threshold = Threshold.MEDIUM;

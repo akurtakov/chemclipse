@@ -42,7 +42,7 @@ public class MassSpectraSelectionUI extends Composite {
 	private AtomicReference<Button> buttonNextControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonRemoveControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonRefreshControl = new AtomicReference<>();
-	//
+
 	private IMassSpectra massSpectra;
 
 	public MassSpectraSelectionUI(Composite parent, int style) {
@@ -54,7 +54,7 @@ public class MassSpectraSelectionUI extends Composite {
 	public void update(IMassSpectra massSpectra) {
 
 		this.massSpectra = massSpectra;
-		//
+
 		ComboViewer comboViewer = comboViewerControl.get();
 		comboViewer.setInput(massSpectra.getList());
 		comboViewer.getCombo().select(0);
@@ -75,13 +75,13 @@ public class MassSpectraSelectionUI extends Composite {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(9, false);
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		buttonPreviousControl.set(createButtonSelectPreviousMassSpectrum(composite));
 		createComboChromatograms(composite);
 		buttonNextControl.set(createButtonSelectNextMassSpectrum(composite));

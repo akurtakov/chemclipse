@@ -34,9 +34,9 @@ public class NoiseSegmentLabelProvider extends AbstractChemClipseLabelProvider {
 	public static final String SCAN_WIDTH = "Width Scan";
 	public static final String USE = "Use";
 	public static final String NOISE_FACTOR = "Noise Factor";
-	//
+
 	public static final int INDEX_USE = 6;
-	//
+
 	public static final String[] TITLES = {//
 			RETENTION_TIME_START, //
 			RETENTION_TIME_STOP, //
@@ -47,7 +47,7 @@ public class NoiseSegmentLabelProvider extends AbstractChemClipseLabelProvider {
 			USE, //
 			NOISE_FACTOR //
 	};
-	//
+
 	public static final int BOUNDS[] = { //
 			100, //
 			100, //
@@ -70,7 +70,7 @@ public class NoiseSegmentLabelProvider extends AbstractChemClipseLabelProvider {
 				return ApplicationImageFactory.getInstance().getImage(fileName, IApplicationImageProvider.SIZE_16x16);
 			}
 		}
-		//
+
 		return null;
 	}
 
@@ -109,7 +109,7 @@ public class NoiseSegmentLabelProvider extends AbstractChemClipseLabelProvider {
 					text = "n.v.";
 			}
 		}
-		//
+
 		return text;
 	}
 

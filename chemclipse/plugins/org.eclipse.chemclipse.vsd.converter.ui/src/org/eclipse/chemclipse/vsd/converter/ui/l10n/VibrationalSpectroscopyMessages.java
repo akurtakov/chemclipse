@@ -17,10 +17,10 @@ import org.eclipse.osgi.util.NLS;
 public class VibrationalSpectroscopyMessages extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.chemclipse.vsd.converter.ui.l10n.messages"; //$NON-NLS-1$
-	//
+
 	public static String saveIR;
 	public static String saveRaman;
-	//
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, VibrationalSpectroscopyMessages.class);
 	}

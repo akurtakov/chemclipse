@@ -24,7 +24,7 @@ public class ValueScaling {
 	private float maxSignal;
 	private float pageWidthLandscape;
 	private float pageHeightLandscape;
-	//
+
 	private float topMargin = 50;
 	private float bottomMargin = 50;
 	private float leftMargin = 50;

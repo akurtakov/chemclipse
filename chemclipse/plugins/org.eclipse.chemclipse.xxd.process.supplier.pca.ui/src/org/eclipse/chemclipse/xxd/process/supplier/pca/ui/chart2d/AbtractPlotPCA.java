@@ -46,8 +46,8 @@ public abstract class AbtractPlotPCA extends ScatterChart implements IRangeSuppo
 
 	private DecimalFormat decimalFormat = new DecimalFormat(("0.00E0"), new DecimalFormatSymbols(Locale.ENGLISH));
 	private String title = "";
-	//
-	//
+
+
 	private Range selectedRangeX = null;
 	private Range selectedRangeY = null;
 
@@ -70,7 +70,7 @@ public abstract class AbtractPlotPCA extends ScatterChart implements IRangeSuppo
 			secondaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
 		}
 		chartSettings.getSecondaryAxisSettingsListX().add(secondaryAxisSettingsX);
-		//
+
 		ISecondaryAxisSettings secondaryAxisSettingsY = new SecondaryAxisSettings("PC2", new PassThroughConverter());
 		secondaryAxisSettingsY.setTitle("");
 		secondaryAxisSettingsY.setPosition(Position.Secondary);
@@ -89,7 +89,7 @@ public abstract class AbtractPlotPCA extends ScatterChart implements IRangeSuppo
 		for(String id : set) {
 			selection.remove(id);
 		}
-		//
+
 		getBaseChart().resetSeriesSettings();
 		for(String id : selection) {
 			getBaseChart().selectSeries(id);
@@ -103,7 +103,7 @@ public abstract class AbtractPlotPCA extends ScatterChart implements IRangeSuppo
 		for(String id : set) {
 			selection.remove(id);
 		}
-		//
+
 		getBaseChart().resetSeriesSettings();
 		for(String id : selection) {
 			getBaseChart().selectSeries(id);
@@ -127,7 +127,7 @@ public abstract class AbtractPlotPCA extends ScatterChart implements IRangeSuppo
 		chartSettings.setOrientation(SWT.HORIZONTAL);
 		chartSettings.setHorizontalSliderVisible(false);
 		chartSettings.setVerticalSliderVisible(false);
-		//
+
 		RangeRestriction rangeRestriction = chartSettings.getRangeRestriction();
 		rangeRestriction.setZeroX(false);
 		rangeRestriction.setZeroY(false);
@@ -135,7 +135,7 @@ public abstract class AbtractPlotPCA extends ScatterChart implements IRangeSuppo
 		rangeRestriction.setExtendTypeX(RangeRestriction.ExtendType.RELATIVE);
 		rangeRestriction.setExtendTypeY(RangeRestriction.ExtendType.RELATIVE);
 		rangeRestriction.setExtend(0.25d);
-		//
+
 		chartSettings.setShowAxisZeroMarker(true);
 		if(PreferencesSupport.isDarkTheme()) {
 			chartSettings.setColorAxisZeroMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
@@ -151,10 +151,10 @@ public abstract class AbtractPlotPCA extends ScatterChart implements IRangeSuppo
 		chartSettings.setUseSeriesLabelDescription(true);
 		chartSettings.setCreateMenu(true);
 		chartSettings.setEnableCompress(false);
-		//
+
 		setPrimaryAxisSet(chartSettings);
 		addSecondaryAxisSet(chartSettings);
-		//
+
 		applySettings(chartSettings);
 	}
 
@@ -173,7 +173,7 @@ public abstract class AbtractPlotPCA extends ScatterChart implements IRangeSuppo
 		} else {
 			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
 		}
-		//
+
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle("PC2");
 		primaryAxisSettingsY.setDecimalFormat(decimalFormat);
@@ -202,7 +202,7 @@ public abstract class AbtractPlotPCA extends ScatterChart implements IRangeSuppo
 			decimalFormat = ValueFormat.getDecimalFormatEnglish("0.0000");
 		}
 		StringBuilder builder = new StringBuilder();
-		//
+
 		builder.append("PC");
 		builder.append(" ");
 		builder.append(pc);
@@ -211,7 +211,7 @@ public abstract class AbtractPlotPCA extends ScatterChart implements IRangeSuppo
 		builder.append(decimalFormat.format(variance));
 		builder.append("%");
 		builder.append(")");
-		//
+
 		return builder.toString();
 	}
 

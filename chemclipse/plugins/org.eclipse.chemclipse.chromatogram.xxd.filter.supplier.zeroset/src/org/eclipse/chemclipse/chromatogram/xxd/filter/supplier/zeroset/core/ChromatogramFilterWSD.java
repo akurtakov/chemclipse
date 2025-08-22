@@ -87,7 +87,7 @@ public class ChromatogramFilterWSD extends AbstractChromatogramFilterWSD {
 		for(IScanSignalWSD scanSignal : scanWSD.getScanSignals()) {
 			minSignal = Math.min(minSignal, scanSignal.getAbsorbance());
 		}
-		//
+
 		return minSignal;
 	}
 

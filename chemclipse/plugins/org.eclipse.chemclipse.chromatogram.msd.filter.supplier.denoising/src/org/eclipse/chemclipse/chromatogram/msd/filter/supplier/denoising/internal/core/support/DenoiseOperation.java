@@ -33,7 +33,7 @@ import org.eclipse.core.runtime.Status;
 public class DenoiseOperation extends AbstractOperation {
 
 	private static final Logger logger = Logger.getLogger(DenoiseOperation.class);
-	//
+
 	private IChromatogramSelection chromatogramSelection;
 	private IExtractedIonSignals extractedIonSignals;
 	private IExtractedIonSignals previousExtractedIonSignals;

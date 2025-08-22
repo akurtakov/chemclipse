@@ -18,7 +18,7 @@ import org.eclipse.chemclipse.msd.model.core.IIon;
 public class VendorScan extends AbstractScanMSD implements IVendorScan {
 
 	private static final long serialVersionUID = -2545043408685013930L;
-	//
+
 	public static final int MAX_MASSFRAGMENTS = 65535;
 	public static final int MIN_RETENTION_TIME = 0;
 	public static final int MAX_RETENTION_TIME = Integer.MAX_VALUE;

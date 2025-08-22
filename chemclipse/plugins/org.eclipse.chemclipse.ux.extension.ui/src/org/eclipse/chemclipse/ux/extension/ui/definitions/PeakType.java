@@ -26,7 +26,7 @@ public class PeakType implements EventHandler {
 
 	public static final String PEAK_TYPE = "org.eclipse.chemclipse.ux.extension.ui.definitions.peakType";
 	public static final String PEAK_SELECTION = "org.eclipse.chemclipse.ux.extension.ui.peakSelection";
-	//
+
 	public static final String PEAK_TYPE_MSD = "PEAK_TYPE_MSD";
 	public static final String PEAK_TYPE_CSD = "PEAK_TYPE_CSD";
 	public static final String PEAK_TYPE_WSD = "PEAK_TYPE_WSD";
@@ -43,7 +43,7 @@ public class PeakType implements EventHandler {
 		 */
 		IPeak peakSelection = null;
 		String peakType = PEAK_TYPE_NONE;
-		//
+
 		if(topic.equals(IChemClipseEvents.TOPIC_PEAK_XXD_UPDATE_SELECTION)) {
 			if(property instanceof IPeakMSD peakMSD) {
 				peakSelection = peakMSD;
@@ -83,12 +83,12 @@ public class PeakType implements EventHandler {
 
 		IEclipseContext eclipseContext = Activator.getDefault().getEclipseContext();
 		Object object = eclipseContext.get(PEAK_SELECTION);
-		//
+
 		IPeak selectedPeak = null;
 		if(object instanceof IPeak peak) {
 			selectedPeak = peak;
 		}
-		//
+
 		return selectedPeak;
 	}
 
@@ -101,12 +101,12 @@ public class PeakType implements EventHandler {
 
 		IEclipseContext eclipseContext = Activator.getDefault().getEclipseContext();
 		Object object = eclipseContext.get(PEAK_SELECTION);
-		//
+
 		IPeakMSD peakSelectedMSD = null;
 		if(object instanceof IPeakMSD peakMSD) {
 			peakSelectedMSD = peakMSD;
 		}
-		//
+
 		return peakSelectedMSD;
 	}
 
@@ -119,12 +119,12 @@ public class PeakType implements EventHandler {
 
 		IEclipseContext eclipseContext = Activator.getDefault().getEclipseContext();
 		Object object = eclipseContext.get(PEAK_SELECTION);
-		//
+
 		IPeakCSD selectedPeakCSD = null;
 		if(object instanceof IPeakCSD peakCSD) {
 			selectedPeakCSD = peakCSD;
 		}
-		//
+
 		return selectedPeakCSD;
 	}
 
@@ -137,12 +137,12 @@ public class PeakType implements EventHandler {
 
 		IEclipseContext eclipseContext = Activator.getDefault().getEclipseContext();
 		Object object = eclipseContext.get(PEAK_SELECTION);
-		//
+
 		IPeakWSD selectedPeakWSD = null;
 		if(object instanceof IPeakWSD peakWSD) {
 			selectedPeakWSD = peakWSD;
 		}
-		//
+
 		return selectedPeakWSD;
 	}
 }

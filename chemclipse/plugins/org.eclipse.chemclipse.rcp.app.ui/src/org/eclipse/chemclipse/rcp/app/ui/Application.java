@@ -34,7 +34,7 @@ public class Application implements IApplication {
 		if(!PlatformUI.isWorkbenchRunning()) {
 			return;
 		}
-		//
+
 		final IWorkbench workbench = PlatformUI.getWorkbench();
 		final Display display = workbench.getDisplay();
 		display.syncExec(() -> {

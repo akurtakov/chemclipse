@@ -56,7 +56,7 @@ public class ProcessTypeSupport implements IProcessSupplierContext {
 				}
 			}
 		}
-		//
+
 		IProcessTypeSupplier[] dynamic = Activator.getProcessTypeSuppliers();
 		for(IProcessTypeSupplier typeSupplier : dynamic) {
 			for(IProcessSupplier<?> supplier : typeSupplier.getProcessorSuppliers()) {
@@ -65,7 +65,7 @@ public class ProcessTypeSupport implements IProcessSupplierContext {
 				}
 			}
 		}
-		//
+
 		return null;
 	}
 
@@ -82,7 +82,7 @@ public class ProcessTypeSupport implements IProcessSupplierContext {
 		Set<IProcessSupplier<?>> supplier = new TreeSet<>((o1, o2) -> o1.getId().compareTo(o2.getId()));
 		addMatchingSupplier(dataTypes, supplier, localProcessSupplier.toArray(new IProcessTypeSupplier[0]));
 		addMatchingSupplier(dataTypes, supplier, Activator.getProcessTypeSuppliers());
-		//
+
 		return supplier;
 	}
 
@@ -92,7 +92,7 @@ public class ProcessTypeSupport implements IProcessSupplierContext {
 		for(IProcessTypeSupplier typeSupplier : localProcessSupplier) {
 			typeSupplier.getProcessorSuppliers().forEach(consumer);
 		}
-		//
+
 		for(IProcessTypeSupplier typeSupplier : Activator.getProcessTypeSuppliers()) {
 			typeSupplier.getProcessorSuppliers().forEach(consumer);
 		}
@@ -108,7 +108,7 @@ public class ProcessTypeSupport implements IProcessSupplierContext {
 			}
 			return;
 		}
-		//
+
 		for(IProcessTypeSupplier processTypeSupplier : processTypeSuppliers) {
 			for(IProcessSupplier<?> processSupplier : processTypeSupplier.getProcessorSuppliers()) {
 				for(DataCategory category : dataTypes) {
@@ -147,7 +147,7 @@ public class ProcessTypeSupport implements IProcessSupplierContext {
 		for(IChromatogramSelection selection : chromatogramSelections) {
 			ProcessEntryContainer.applyProcessEntries(processMethod, executionContext.split(), IChromatogramSelectionProcessSupplier.createConsumer(selection));
 		}
-		//
+
 		return processingInfo;
 	}
 

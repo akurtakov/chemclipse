@@ -100,7 +100,7 @@ public class ShapeFilter extends AbstractPeakFilter<ShapeFilterSettings> {
 	public void filterPeaks(IChromatogramSelection chromatogramSelection, ShapeFilterSettings configuration, ProcessExecutionContext context) throws IllegalArgumentException {
 
 		Collection<IPeak> peaks = getReadOnlyPeaks(chromatogramSelection);
-		//
+
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
@@ -112,7 +112,7 @@ public class ShapeFilter extends AbstractPeakFilter<ShapeFilterSettings> {
 			processPeakSuperRange(treatmentOption, peak, predicate, peaksToDelete);
 			subMonitor.worked(1);
 		}
-		//
+
 		deletePeaks(peaksToDelete, chromatogramSelection);
 		resetPeakSelection(chromatogramSelection);
 	}

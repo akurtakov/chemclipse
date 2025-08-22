@@ -56,10 +56,10 @@ public class PeakQuantReferencesPart extends AbstractPart<ExtendedPeakQuantRefer
 			} else if(isCloseEvent(topic)) {
 				getControl().update(null);
 			}
-			//
+
 			return true;
 		}
-		//
+
 		return false;
 	}
 

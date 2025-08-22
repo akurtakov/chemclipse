@@ -93,7 +93,7 @@ public final class ClassifierDialog extends Dialog implements ColumnDefinitionPr
 		Composite container = (Composite)super.createDialogArea(parent);
 		listEdit = createListEdit(container);
 		fill(listEdit.getControl());
-		//
+
 		return container;
 	}
 

@@ -46,7 +46,7 @@ public abstract class AbstractChromatogramReader extends AbstractChromatogramMSD
 	public IChromatogramOverview readOverview(File file, IProgressMonitor monitor) throws IOException {
 
 		IVendorChromatogram chromatogram = null;
-		//
+
 		try {
 			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 			inputFactory.setProperty(XMLInputFactory.IS_COALESCING, true);
@@ -60,9 +60,9 @@ public abstract class AbstractChromatogramReader extends AbstractChromatogramMSD
 			 */
 			chromatogram = new VendorChromatogram();
 			while(filteredEventReader.hasNext()) {
-				//
+
 				int retentionTime = 0;
-				//
+
 				XMLEvent xmlEvent = filteredEventReader.nextEvent();
 				Iterator<? extends Attribute> attributes = xmlEvent.asStartElement().getAttributes();
 				while(attributes.hasNext()) {
@@ -77,7 +77,7 @@ public abstract class AbstractChromatogramReader extends AbstractChromatogramMSD
 						}
 					}
 				}
-				//
+
 				IVendorScan massSpectrum = new VendorScan();
 				massSpectrum.setRetentionTime(retentionTime);
 				chromatogram.addScan(massSpectrum);
@@ -85,7 +85,7 @@ public abstract class AbstractChromatogramReader extends AbstractChromatogramMSD
 		} catch(XMLStreamException e) {
 			logger.warn(e);
 		}
-		//
+
 		return chromatogram;
 	}
 }

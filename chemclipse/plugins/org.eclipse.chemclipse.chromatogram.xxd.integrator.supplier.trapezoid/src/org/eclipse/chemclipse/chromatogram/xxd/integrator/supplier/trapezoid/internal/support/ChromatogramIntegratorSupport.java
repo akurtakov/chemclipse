@@ -37,7 +37,7 @@ import org.eclipse.e4.core.services.translation.TranslationService;
 public class ChromatogramIntegratorSupport {
 
 	private static TranslationService translationService = TranslationSupport.getTranslationService();
-	//
+
 	public static final String INTEGRATOR_DESCRIPTION = translationService.translate("%Trapezoid", Activator.getContributorURI());
 
 	public IChromatogramIntegrationResults calculateChromatogramIntegrationResults(IChromatogramSelection chromatogramSelection, ChromatogramIntegrationSettings chromatogramIntegrationSettings, IProgressMonitor monitor) {
@@ -82,11 +82,11 @@ public class ChromatogramIntegratorSupport {
 		} else if(chromatogramSelection instanceof IChromatogramSelectionCSD) {
 			chromatogramIntegrationEntry = new IntegrationEntry(chromatogramArea * scaleFactor);
 		}
-		//
+
 		if(chromatogramIntegrationEntry != null) {
 			chromatogramIntegrationEntries.add(chromatogramIntegrationEntry);
 		}
-		//
+
 		return chromatogramIntegrationEntries;
 	}
 
@@ -104,11 +104,11 @@ public class ChromatogramIntegratorSupport {
 		} else if(chromatogramSelection instanceof IChromatogramSelectionCSD) {
 			backgroundIntegrationEntry = new IntegrationEntry(backgroundArea * scaleFactor);
 		}
-		//
+
 		if(backgroundIntegrationEntry != null) {
 			backgroundIntegrationEntries.add(backgroundIntegrationEntry);
 		}
-		//
+
 		return backgroundIntegrationEntries;
 	}
 

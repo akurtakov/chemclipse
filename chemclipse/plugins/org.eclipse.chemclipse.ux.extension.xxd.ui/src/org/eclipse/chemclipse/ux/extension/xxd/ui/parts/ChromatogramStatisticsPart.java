@@ -53,7 +53,7 @@ public class ChromatogramStatisticsPart extends AbstractPart<ExtendedChromatogra
 			getControl().setInput(chromatogramSelection);
 			return true;
 		}
-		//
+
 		return false;
 	}
 

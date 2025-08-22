@@ -35,18 +35,18 @@ public class QuantReferencesFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(!caseSensitive) {
 			searchText = searchText.toLowerCase();
 		}
-		//
+
 		if(element instanceof String value) {
 			if(!caseSensitive) {
 				value = value.toLowerCase();
 			}
 			return value.contains(searchText);
 		}
-		//
+
 		return false;
 	}
 }

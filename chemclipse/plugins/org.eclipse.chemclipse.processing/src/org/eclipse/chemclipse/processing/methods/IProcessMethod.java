@@ -115,43 +115,43 @@ public interface IProcessMethod extends ProcessEntryContainer {
 		if(other == null) {
 			return false;
 		}
-		//
+
 		if(other == this) {
 			return true;
 		}
-		//
+
 		if(isFinal() != other.isFinal()) {
 			return false;
 		}
-		//
+
 		if(!getName().equals(other.getName())) {
 			return false;
 		}
-		//
+
 		if(!getCategory().equals(other.getCategory())) {
 			return false;
 		}
-		//
+
 		if(!getDescription().equals(other.getDescription())) {
 			return false;
 		}
-		//
+
 		if(!getOperator().equals(other.getOperator())) {
 			return false;
 		}
-		//
+
 		if(getNumberOfEntries() != other.getNumberOfEntries()) {
 			return false;
 		}
-		//
+
 		if(getProfiles().equals(other.getProfiles())) {
 			return false;
 		}
-		//
+
 		if(includeMetadata && !getMetaData().equals(other.getMetaData())) {
 			return false;
 		}
-		//
+
 		return entriesEquals(other);
 	}
 }

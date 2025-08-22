@@ -45,7 +45,7 @@ public class JSONSerialization implements SettingsSerialization {
 
 			Class<?> sourceClass = type.getRawClass();
 			Class<?> destinationClass = MAPPINGS.get(sourceClass);
-			//
+
 			if(destinationClass == null) {
 				return null;
 			}
@@ -79,7 +79,7 @@ public class JSONSerialization implements SettingsSerialization {
 				}
 			}
 		}
-		//
+
 		return resultMap;
 	}
 
@@ -89,7 +89,7 @@ public class JSONSerialization implements SettingsSerialization {
 		for(InputValue inputValue : inputValues) {
 			inputValueMap.put(inputValue.getName(), inputValue);
 		}
-		//
+
 		return inputValueMap;
 	}
 
@@ -108,7 +108,7 @@ public class JSONSerialization implements SettingsSerialization {
 	private ObjectMapper createMapper() {
 
 		ObjectMapper objectMapper = new ObjectMapper();
-		//
+
 		SimpleModule simpleModule = new SimpleModule("ChemClipse", Version.unknownVersion());
 		simpleModule.setAbstractTypes(RESOLVER);
 		/*
@@ -124,10 +124,10 @@ public class JSONSerialization implements SettingsSerialization {
 				}
 			}
 		}
-		//
+
 		objectMapper.registerModule(simpleModule);
 		objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-		//
+
 		return objectMapper;
 	}
 

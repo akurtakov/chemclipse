@@ -43,7 +43,7 @@ public class LibraryService extends AbstractLibraryService implements ILibrarySe
 		} catch(ValueMustNotBeNullException e) {
 			processingInfo.addErrorMessage("Retention Index Identifier", "The identification target is not available.");
 		}
-		//
+
 		return processingInfo;
 	}
 

@@ -37,7 +37,7 @@ public class SavitzkyGolayPerIonOperation extends AbstractOperation implements I
 
 	private IChromatogramSelectionMSD chromatogramSelection;
 	private ChromatogramFilterSettingsMSD filterSettings;
-	//
+
 	private List<IScanMSD> previousScans;
 	private IChromatogramFilterResult chromatogramFilterResult;
 

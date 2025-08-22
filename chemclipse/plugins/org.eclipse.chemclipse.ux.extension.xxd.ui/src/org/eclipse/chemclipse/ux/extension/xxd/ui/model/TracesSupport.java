@@ -53,7 +53,7 @@ public class TracesSupport {
 		String traces;
 		int maxCopyTraces = getNumberOfTraces();
 		boolean sortTraces = isSortTraces();
-		//
+
 		if(scan instanceof IScanMSD scanMSD) {
 			traces = ScanSupport.extractTracesText(scanMSD, maxCopyTraces, sortTraces);
 		} else if(scan instanceof IScanWSD scanWSD) {
@@ -63,7 +63,7 @@ public class TracesSupport {
 		} else {
 			traces = "";
 		}
-		//
+
 		return traces;
 	}
 
@@ -105,7 +105,7 @@ public class TracesSupport {
 	private static IScan getScanInstance(Object scan) {
 
 		IScan scanInstance = null;
-		//
+
 		if(scan instanceof IScanMSD scanMSD) {
 			scanInstance = scanMSD;
 		} else if(scan instanceof IScanWSD scanWSD) {
@@ -113,7 +113,7 @@ public class TracesSupport {
 		} else if(scan instanceof IScanVSD scanVSD) {
 			scanInstance = scanVSD;
 		}
-		//
+
 		return scanInstance;
 	}
 

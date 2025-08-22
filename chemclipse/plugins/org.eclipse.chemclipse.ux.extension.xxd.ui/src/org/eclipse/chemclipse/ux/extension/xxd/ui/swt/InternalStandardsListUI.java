@@ -48,7 +48,7 @@ public class InternalStandardsListUI extends ExtendedTableViewer {
 	private void createColumns() {
 
 		createColumns(InternalStandardsLabelProvider.TITLES, InternalStandardsLabelProvider.BOUNDS);
-		//
+
 		setLabelProvider(new InternalStandardsLabelProvider());
 		setContentProvider(new ListContentProvider());
 		setComparator(new InternalStandardsTableComparator());

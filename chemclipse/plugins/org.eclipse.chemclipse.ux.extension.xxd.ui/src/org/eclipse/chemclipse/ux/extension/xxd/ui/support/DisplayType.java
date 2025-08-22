@@ -45,7 +45,7 @@ public enum DisplayType {
 			shortcutMap.put(displayType.shortcut, displayType);
 		}
 	}
-	//
+
 	private String shortcut;
 	private String description;
 

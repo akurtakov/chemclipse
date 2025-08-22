@@ -56,7 +56,7 @@ public class ChromtogramScanInfoPart extends AbstractPart<ExtendedScanInfoUI> {
 				return false;
 			}
 		}
-		//
+
 		return false;
 	}
 

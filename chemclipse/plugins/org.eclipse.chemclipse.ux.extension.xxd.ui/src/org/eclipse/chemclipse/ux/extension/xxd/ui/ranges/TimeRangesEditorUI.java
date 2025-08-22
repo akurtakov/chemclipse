@@ -60,7 +60,7 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 	public static final String REMOVE_ALL_TOOLTIP = "Remove all time ranges.";
 	public static final String IMPORT = "Import";
 	public static final String EXPORT = "Export";
-	//
+
 	public static final String IMPORT_TITLE = "Import";
 	public static final String EXPORT_TITLE = "Export";
 	public static final String DIALOG_TITLE = "Time Ranges";
@@ -70,9 +70,9 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 	public static final String MESSAGE_REMOVE_ALL = "Do you want to delete all time ranges?";
 	public static final String MESSAGE_EXPORT_SUCCESSFUL = "Time ranges have been exported successfully.";
 	public static final String MESSAGE_EXPORT_FAILED = "Failed to export the time ranges.";
-	//
+
 	public static final String EXAMPLE_ENTRY = "Styrene | 1.2 | 1.4 | 1.6";
-	//
+
 	private AtomicReference<TimeRangesListUI> listControl = new AtomicReference<>();
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private AtomicReference<Button> buttonToolbarSearchControl = new AtomicReference<>();
@@ -81,9 +81,9 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 	private AtomicReference<Button> buttonRemoveAllControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonImportControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonExportControl = new AtomicReference<>();
-	//
+
 	private TimeRanges timeRanges = new TimeRanges();
-	//
+
 	private Listener listener;
 
 	public TimeRangesEditorUI(Composite parent, int style) {
@@ -96,13 +96,13 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 	public void addChangeListener(Listener listener) {
 
 		this.listener = listener;
-		//
+
 		Table table = listControl.get().getTable();
 		table.addListener(SWT.Selection, listener);
 		table.addListener(SWT.KeyUp, listener);
 		table.addListener(SWT.MouseUp, listener);
 		table.addListener(SWT.MouseDoubleClick, listener);
-		//
+
 		buttonAddControl.get().addListener(SWT.KeyUp, listener);
 		buttonRemoveControl.get().addListener(SWT.KeyUp, listener);
 		buttonRemoveAllControl.get().addListener(SWT.KeyUp, listener);
@@ -156,11 +156,11 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 		gridLayout.marginWidth = 0;
 		gridLayout.marginHeight = 0;
 		setLayout(gridLayout);
-		//
+
 		createToolbarMain(this);
 		createToolbarSearch(this);
 		createTableSection(this);
-		//
+
 		initialize();
 	}
 
@@ -175,7 +175,7 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 		TimeRangesListUI timeRangesListUI = new TimeRangesListUI(parent, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 		Table table = timeRangesListUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		timeRangesListUI.setEditEnabled(true);
 		timeRangesListUI.setUpdateListener(new IUpdateListener() {
 
@@ -185,10 +185,10 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 				setInput();
 			}
 		});
-		//
+
 		ITableSettings tableSettings = timeRangesListUI.getTableSettings();
 		timeRangesListUI.applySettings(tableSettings);
-		//
+
 		listControl.set(timeRangesListUI);
 	}
 
@@ -199,7 +199,7 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(6, false));
-		//
+
 		createButtonToggleSearch(composite);
 		createButtonAdd(composite);
 		createButtonRemove(composite);
@@ -225,7 +225,7 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 				listControl.get().setSearchText(searchText, caseSensitive);
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -252,7 +252,7 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 				}
 			}
 		});
-		//
+
 		buttonAddControl.set(button);
 	}
 
@@ -273,7 +273,7 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 				}
 			}
 		});
-		//
+
 		buttonRemoveControl.set(button);
 	}
 
@@ -294,7 +294,7 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 				}
 			}
 		});
-		//
+
 		buttonRemoveAllControl.set(button);
 	}
 
@@ -323,7 +323,7 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 				}
 			}
 		});
-		//
+
 		buttonImportControl.set(button);
 	}
 
@@ -357,7 +357,7 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 				}
 			}
 		});
-		//
+
 		buttonExportControl.set(button);
 	}
 
@@ -366,7 +366,7 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 		List<TimeRange> timeRangesSorted = new ArrayList<>(timeRanges.values());
 		Collections.sort(timeRangesSorted, (s1, s2) -> Integer.compare(s1.getStart(), s2.getStart()));
 		listControl.get().setInput(timeRangesSorted);
-		//
+
 		if(listener != null) {
 			listener.handleEvent(new Event());
 		}

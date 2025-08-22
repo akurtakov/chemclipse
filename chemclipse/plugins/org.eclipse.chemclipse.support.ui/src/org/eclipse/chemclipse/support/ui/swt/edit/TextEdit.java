@@ -27,7 +27,7 @@ import org.eclipse.swt.widgets.Text;
 public class TextEdit extends EditValue<String> {
 
 	private static final long serialVersionUID = 2670106061643118051L;
-	//
+
 	private final Text text;
 	private final String initialText;
 	private String editedValue = "";

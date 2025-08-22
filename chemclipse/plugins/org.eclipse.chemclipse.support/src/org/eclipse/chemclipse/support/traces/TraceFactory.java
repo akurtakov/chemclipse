@@ -27,13 +27,13 @@ public class TraceFactory {
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-	//
+
 	private static final String LINE_DELIMITER_OS = OperatingSystemUtils.getLineDelimiter();
 	private static final String LINE_DELIMITER_GENERIC = "\n";
-	//
+
 	private static final String SEPARATOR_TRACE_ITEM = ",";
 	private static final String SEPARATOR_TRACE_RANGE = "-";
-	//
+
 	private static final Pattern PATTERN_GENERIC_DIGITS = Pattern.compile("(\\d+\\.?\\d+)(.*)");
 	private static final Pattern PATTERN_TANDEM_MSD = Pattern.compile("(\\d+)(\\s+>\\s+)(\\d+\\.?\\d?)(\\s+@)(\\d+)(.*)");
 
@@ -48,7 +48,7 @@ public class TraceFactory {
 	public static <T extends ITrace> List<T> parseTraces(String content, Class<T> clazz) {
 
 		List<T> elements = new ArrayList<>();
-		//
+
 		List<String> lines = splitLines(content);
 		for(String line : lines) {
 			if(!line.contains(SEPARATOR_TRACE_ITEM)) {
@@ -100,7 +100,7 @@ public class TraceFactory {
 				}
 			}
 		}
-		//
+
 		return elements;
 	}
 
@@ -113,7 +113,7 @@ public class TraceFactory {
 			 */
 			traceSpecific = clazz.getDeclaredConstructor().newInstance();
 			boolean success = false;
-			//
+
 			if(traceSpecific instanceof TraceNominalMSD traceNominalMSD) {
 				success = parseTraceNominalMSD(content, traceNominalMSD);
 			} else if(traceSpecific instanceof TraceTandemMSD traceTandemMSD) {
@@ -137,7 +137,7 @@ public class TraceFactory {
 			}
 		} catch(Exception e) {
 		}
-		//
+
 		return traceSpecific;
 	}
 
@@ -232,7 +232,7 @@ public class TraceFactory {
 					} else {
 						delta = parseDouble(range);
 					}
-					//
+
 					if(delta >= 0) {
 						traceSpecific.setDelta(delta);
 						if(parts.length > 1) {
@@ -407,7 +407,7 @@ public class TraceFactory {
 	private static List<String> splitLines(String content) {
 
 		List<String> lines = new ArrayList<>();
-		//
+
 		if(content.contains(LINE_DELIMITER_OS)) {
 			lines.addAll(Arrays.asList(content.split(LINE_DELIMITER_OS)));
 		} else if(content.contains(LINE_DELIMITER_GENERIC)) {
@@ -415,7 +415,7 @@ public class TraceFactory {
 		} else {
 			lines.add(content);
 		}
-		//
+
 		return lines;
 	}
 
@@ -500,7 +500,7 @@ public class TraceFactory {
 		if(valueInteger > 0) {
 			return Integer.toString(valueInteger).equals(content.trim());
 		}
-		//
+
 		return false;
 	}
 

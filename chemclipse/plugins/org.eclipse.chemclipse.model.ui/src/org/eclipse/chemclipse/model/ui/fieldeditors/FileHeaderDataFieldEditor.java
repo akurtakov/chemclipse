@@ -51,7 +51,7 @@ public class FileHeaderDataFieldEditor extends FieldEditor {
 		fileHeaderDataEditor = new FileHeaderDataEditor(parent, SWT.NONE);
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		fileHeaderDataEditor.setLayoutData(gridData);
-		//
+
 		fileHeaderDataEditor.addChangeListener(event -> {
 
 			String message = fileHeaderDataEditor.getMessage();

@@ -20,7 +20,7 @@ import org.eclipse.chemclipse.model.core.ISignal;
 public abstract class AbstractQuantitationCompound implements IQuantitationCompound {
 
 	private static final long serialVersionUID = 1901297052527290065L;
-	//
+
 	private String name = ""; // Styrene
 	private String chemicalClass = ""; // Styrene-Butadiene
 	private IRetentionTimeWindow retentionTimeWindow = new RetentionTimeWindow();
@@ -29,7 +29,7 @@ public abstract class AbstractQuantitationCompound implements IQuantitationCompo
 	private boolean useTIC = true;
 	private CalibrationMethod calibrationMethod = CalibrationMethod.LINEAR;
 	private boolean useCrossZero = true;
-	//
+
 	private IQuantitationSignals quantitationSignals = new QuantitationSignals();
 	private IResponseSignals responseSignals = new ResponseSignals();
 	private List<IQuantitationPeak> quantitationPeaks = new ArrayList<>();

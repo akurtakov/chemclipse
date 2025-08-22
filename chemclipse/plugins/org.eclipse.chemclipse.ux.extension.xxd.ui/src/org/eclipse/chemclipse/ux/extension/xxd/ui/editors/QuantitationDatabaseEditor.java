@@ -48,21 +48,21 @@ import jakarta.inject.Inject;
 public class QuantitationDatabaseEditor implements IQuantitationDatabaseEditor {
 
 	private static final Logger logger = Logger.getLogger(QuantitationDatabaseEditor.class);
-	//
+
 	public static final String ID = "org.eclipse.chemclipse.ux.extension.xxd.ui.part.quantitationDatabaseEditor";
 	public static final String CONTRIBUTION_URI = "bundleclass://org.eclipse.chemclipse.ux.extension.xxd.ui/org.eclipse.chemclipse.ux.extension.xxd.ui.editors.QuantitationDatabaseEditor";
 	public static final String ICON_URI = ApplicationImageFactory.getInstance().getURI(IApplicationImage.IMAGE_DATABASE, IApplicationImageProvider.SIZE_16x16);
 	public static final String TOOLTIP = ExtensionMessages.quantitationEditor;
-	//
+
 	private final MPart part;
 	private final MDirtyable dirtyable;
 	private final EModelService modelService;
 	private final MApplication application;
-	//
+
 	private File quantitationDatabaseFile;
 	private IQuantitationDatabase quantitationDatabase;
 	private ExtendedQuantCompoundListUI extendedQuantCompoundListUI;
-	//
+
 	private final Shell shell;
 
 	@Inject
@@ -73,7 +73,7 @@ public class QuantitationDatabaseEditor implements IQuantitationDatabaseEditor {
 		this.modelService = modelService;
 		this.application = application;
 		this.shell = shell;
-		//
+
 		initialize(parent);
 	}
 
@@ -143,7 +143,7 @@ public class QuantitationDatabaseEditor implements IQuantitationDatabaseEditor {
 			boolean batch = (boolean)map.get(EditorSupport.MAP_BATCH);
 			quantitationDatabase = loadQuantitationDatabase(file, batch);
 		}
-		//
+
 		return quantitationDatabase;
 	}
 
@@ -163,7 +163,7 @@ public class QuantitationDatabaseEditor implements IQuantitationDatabaseEditor {
 			logger.warn(e);
 			Thread.currentThread().interrupt();
 		}
-		//
+
 		quantitationDatabaseFile = file;
 		return runnable.getQuantitationDatabase();
 	}
