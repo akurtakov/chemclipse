@@ -275,10 +275,9 @@ public interface IExtendedPartUI {
 		return createSettingsButton(parent, preferencePages, settingsHandler, true);
 	}
 
-	@SuppressWarnings({"unchecked", "rawtypes"})
 	default Button createSettingsButton(Composite parent, List<Class<? extends IPreferencePage>> preferencePages, ISettingsHandler settingsHandler, boolean sortByTitle) {
 
-		return createSettingsButton(parent, new Supplier() {
+		return createSettingsButton(parent, new Supplier<>() {
 
 			@Override
 			public List<Class<? extends IPreferencePage>> get() {
