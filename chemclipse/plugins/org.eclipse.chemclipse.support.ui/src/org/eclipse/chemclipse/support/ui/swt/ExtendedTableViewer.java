@@ -68,7 +68,7 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 
 	private static final Logger logger = Logger.getLogger(ExtendedTableViewer.class);
 	private static final String MENU_TEXT = SupportMessages.tablePopUpMenu;
-	//
+
 	private ITableSettings tableSettings = new TableSettings();
 	private final List<TableViewerColumn> tableViewerColumns = new ArrayList<>();
 	private final Map<String, Set<ITableMenuEntry>> categoryMenuEntriesMap = new HashMap<>();
@@ -77,11 +77,11 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 	private final Set<KeyListener> userDefinedKeyListeners = new HashSet<>();
 	private final List<IColumnMoveListener> columnMoveListeners = new ArrayList<>();
 	private boolean editEnabled = true;
-	//
+
 	private boolean copyHeaderToClipboard = PreferenceSupplier.DEF_CLIPBOARD_COPY_HEADER;
 	private ValueDelimiter copyValueDelimiterClipboard = ValueDelimiter.TAB;
 	private String copyColumnsToClipboard = PreferenceSupplier.DEF_CLIPBOARD_COPY_COLUMNS;
-	//
+
 	private ControlListener controlListener = null;
 
 	public ExtendedTableViewer(Composite parent) {
@@ -92,7 +92,7 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 	public ExtendedTableViewer(Composite parent, int style) {
 
 		super(parent, style);
-		//
+
 		applySettings(tableSettings);
 		registerMenuListener();
 		setContentProvider(ArrayContentProvider.getInstance());
@@ -138,7 +138,7 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 		} else {
 			this.tableSettings = tableSettings;
 		}
-		//
+
 		createKeyListener();
 	}
 
@@ -160,7 +160,7 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 		 */
 		Table table = getTable();
 		table.setRedraw(false);
-		//
+
 		tableViewerColumns.clear();
 		table.clearAll();
 		while(table.getColumnCount() > 0) {
@@ -182,7 +182,7 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 				final int index = i;
 				final TableViewerColumn tableViewerColumn = createTableColumn(titles[i], bounds[i]);
 				final TableColumn tableColumn = tableViewerColumn.getColumn();
-				//
+
 				tableColumn.addSelectionListener(new SelectionAdapter() {
 
 					@Override
@@ -191,7 +191,7 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 						sortColumn(table, index, tableColumn);
 					}
 				});
-				//
+
 				tableColumn.addControlListener(new ControlAdapter() {
 
 					@Override
@@ -210,7 +210,7 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 						}
 					}
 				});
-				//
+
 				tableViewerColumns.add(tableViewerColumn);
 			}
 		}
@@ -313,7 +313,7 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 				return isColumnSelected(event, i);
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -330,7 +330,7 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 		Table table = getTable();
 		Rectangle clientArea = table.getClientArea();
 		Point point = new Point(event.x, event.y);
-		//
+
 		int index = table.getTopIndex();
 		while(index < table.getItemCount()) {
 			boolean visible = false;
@@ -342,18 +342,18 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 						return true;
 					}
 				}
-				//
+
 				if(!visible && rectangle.intersects(clientArea)) {
 					visible = true;
 				}
 			}
-			//
+
 			if(!visible) {
 				return false;
 			}
 			index++;
 		}
-		//
+
 		return false;
 	}
 
@@ -375,7 +375,7 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 		TableViewerColumn tableViewerColumn = createColumn(this, definition, editEnabled);
 		tableViewerColumn.getColumn().setMoveable(true);
 		tableViewerColumn.getColumn().addListener(SWT.Move, event -> fireColumnMoved());
-		//
+
 		tableViewerColumns.add(tableViewerColumn);
 		Comparator<C> comparator = definition.getComparator();
 		if(comparator != null) {
@@ -434,11 +434,11 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 				}
 			});
 		}
-		//
+
 		getTable().setHeaderVisible(true);
 		getTable().setLinesVisible(true);
 		updateColumnOrderAndWith();
-		//
+
 		return tableViewerColumn;
 	}
 
@@ -508,18 +508,18 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 		 */
 		Table table = getTable();
 		table.setMenu(null);
-		//
+
 		categoryMenuEntriesMap.clear();
 		menuEntryMap.clear();
 		menuManagerMap.clear();
-		//
+
 		String menuId = getClass().getCanonicalName();
 		MenuManager menuManager = new MenuManager(MENU_TEXT, menuId);
 		menuManager.setRemoveAllWhenShown(true); // Seems to remove sub menus. Solution needed!
-		//
+
 		addMenuItemsFromChartSettings();
 		createMenuItems(menuManager);
-		//
+
 		Menu menu = menuManager.createContextMenu(table);
 		table.setMenu(menu);
 	}
@@ -569,7 +569,7 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 
 		List<ITableMenuEntry> menuEntries = new ArrayList<>(tableMenuEntries);
 		Collections.sort(menuEntries, new TableMenuEntryComparator());
-		//
+
 		for(ITableMenuEntry menuEntry : menuEntries) {
 			menuManager.addMenuListener(manager -> {
 

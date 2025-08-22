@@ -26,7 +26,7 @@ public class ChannelMappingValidator extends ValueParserSupport implements IVali
 	private static final String SEPARATOR_TOKEN = ChannelMappings.SEPARATOR_TOKEN;
 	private static final String SEPARATOR_ENTRY = ChannelMappings.SEPARATOR_ENTRY;
 	private static final String ERROR_TOKEN = "The item must not contain: " + SEPARATOR_TOKEN;
-	//
+
 	private int channel;
 	private String subset;
 	private String label;
@@ -68,7 +68,7 @@ public class ChannelMappingValidator extends ValueParserSupport implements IVali
 		} else {
 			message = ERROR_ENTRY;
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

@@ -37,9 +37,9 @@ public class ImportDirectoryWizardPage extends WizardPage {
 	private static final String CONVERTER_LABEL_OCB = VersionConstants.FILE_EXTENSION_CHROMATOGRAM;
 	private static final String CONVERTER_ID_XY = "org.eclipse.chemclipse.csd.converter.supplier.xy";
 	private static final String CONVERTER_ID_OCB = VersionConstants.CONVERTER_ID_CHROMATOGRAM;
-	//
+
 	private Map<String, String> converterIds;
-	//
+
 	private Combo comboConverter;
 	private Text textDirectory;
 
@@ -67,10 +67,10 @@ public class ImportDirectoryWizardPage extends WizardPage {
 		Composite container = new Composite(parent, SWT.NONE);
 		GridLayout layout = new GridLayout(2, false);
 		container.setLayout(layout);
-		//
+
 		GridData layoutData = new GridData(GridData.GRAB_HORIZONTAL | GridData.GRAB_VERTICAL | GridData.HORIZONTAL_ALIGN_FILL | GridData.VERTICAL_ALIGN_CENTER);
 		layoutData.widthHint = convertHorizontalDLUsToPixels(IDialogConstants.MINIMUM_MESSAGE_AREA_WIDTH);
-		//
+
 		GridData gridDataCombo = new GridData(GridData.FILL_HORIZONTAL);
 		gridDataCombo.grabExcessHorizontalSpace = true;
 		gridDataCombo.horizontalSpan = 2;
@@ -78,12 +78,12 @@ public class ImportDirectoryWizardPage extends WizardPage {
 		comboConverter.select(1);
 		comboConverter.setItems(CONVERTER_LABEL_XY, CONVERTER_LABEL_OCB);
 		comboConverter.setLayoutData(gridDataCombo);
-		//
+
 		GridData gridDataText = new GridData(GridData.FILL_HORIZONTAL);
 		gridDataText.grabExcessHorizontalSpace = true;
 		textDirectory = new Text(container, SWT.BORDER);
 		textDirectory.setLayoutData(gridDataText);
-		//
+
 		Button button = new Button(container, SWT.NONE);
 		button.setText("Select the output folder");
 		button.addSelectionListener(new SelectionAdapter() {

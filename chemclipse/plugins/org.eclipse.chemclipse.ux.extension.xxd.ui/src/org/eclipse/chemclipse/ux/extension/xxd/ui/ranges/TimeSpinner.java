@@ -37,15 +37,15 @@ import org.eclipse.swt.widgets.Text;
 public class TimeSpinner extends Composite {
 
 	private static final int STEP_RETENTION_TIME = 1000; // milliseconds
-	//
+
 	private Text text;
 	private Button buttonDecrease;
 	private Button buttonIncrease;
-	//
+
 	private TimeRange.Marker marker;
 	private TimeRange timeRange = null;
 	private ITimeRangeUpdateListener updateListener = null;
-	//
+
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.000");
 
 	public TimeSpinner(Composite parent, int style, TimeRange.Marker marker) {
@@ -70,7 +70,7 @@ public class TimeSpinner extends Composite {
 
 		this.timeRange = timeRange;
 		boolean enabled = timeRange != null;
-		//
+
 		text.setEnabled(enabled);
 		text.setText(enabled ? extractRetentionTime() : "");
 		buttonDecrease.setEnabled(enabled);
@@ -84,11 +84,11 @@ public class TimeSpinner extends Composite {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		text = createText(this);
 		buttonDecrease = createButtonModify(this, false);
 		buttonIncrease = createButtonModify(this, true);
-		//
+
 		initialize();
 	}
 
@@ -102,10 +102,10 @@ public class TimeSpinner extends Composite {
 		Text text = new Text(parent, SWT.BORDER);
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		text.setText("");
-		//
+
 		ControlDecoration controlDecoration = new ControlDecoration(text, SWT.LEFT | SWT.TOP);
 		TimeRangeValidator validator = new TimeRangeValidator(marker);
-		//
+
 		text.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -121,7 +121,7 @@ public class TimeSpinner extends Composite {
 				}
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -168,7 +168,7 @@ public class TimeSpinner extends Composite {
 
 		assert (marker != null);
 		assert (timeRange != null);
-		//
+
 		int retentionTime = 0;
 		switch(marker) {
 			case START:
@@ -181,7 +181,7 @@ public class TimeSpinner extends Composite {
 				retentionTime = adjustTime(timeRange.getStop(), increase);
 				break;
 		}
-		//
+
 		updateRetentionTime(retentionTime);
 	}
 
@@ -190,7 +190,7 @@ public class TimeSpinner extends Composite {
 		assert (marker != null);
 		assert (timeRange != null);
 		assert (text != null);
-		//
+
 		switch(marker) {
 			case START:
 				timeRange.updateStart(retentionTime);
@@ -202,7 +202,7 @@ public class TimeSpinner extends Composite {
 				timeRange.updateStop(retentionTime);
 				break;
 		}
-		//
+
 		text.setText(extractRetentionTime());
 	}
 
@@ -210,9 +210,9 @@ public class TimeSpinner extends Composite {
 
 		assert (marker != null);
 		assert (text != null);
-		//
+
 		String description = "";
-		//
+
 		switch(marker) {
 			case START:
 				description = TimeRangesLabelProvider.START;
@@ -224,7 +224,7 @@ public class TimeSpinner extends Composite {
 				description = TimeRangesLabelProvider.STOP;
 				break;
 		}
-		//
+
 		text.setToolTipText(description);
 	}
 
@@ -232,7 +232,7 @@ public class TimeSpinner extends Composite {
 
 		assert (marker != null);
 		assert (timeRange != null);
-		//
+
 		String retentionTime = "";
 		switch(marker) {
 			case START:

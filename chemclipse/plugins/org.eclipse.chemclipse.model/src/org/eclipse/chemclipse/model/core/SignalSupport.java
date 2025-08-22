@@ -42,7 +42,7 @@ public class SignalSupport {
 
 		int sortOrder = 0;
 		int minSize = Math.min(signals1.size(), signals2.size());
-		//
+
 		exitloop:
 		for(int i = 0; i < minSize; i++) {
 			if(sortOrder == 0) {
@@ -51,7 +51,7 @@ public class SignalSupport {
 				break exitloop;
 			}
 		}
-		//
+
 		return sortOrder;
 	}
 }

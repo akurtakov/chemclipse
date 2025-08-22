@@ -70,17 +70,17 @@ public class VirtualChannelTable extends Composite implements IChangeListener, I
 	private static final String FILTER_EXTENSION = "*.txt";
 	private static final String FILTER_NAME = "Virtual Channels (*.txt)";
 	private static final String FILE_NAME = "VirtualChannels.txt";
-	//
+
 	private static final String CATEGORY = "PCR Report";
 	private static final String DELETE = "Delete";
-	//
+
 	public static final String EXAMPLE = "Sample | 1&2 | Channel 1 and 2 | 5";
-	//
+
 	private AtomicReference<VirtualChannelListUI> tableViewer = new AtomicReference<>();
-	//
+
 	private List<Button> buttons = new ArrayList<>();
 	private List<Listener> listeners = new ArrayList<>();
-	//
+
 	private VirtualChannels virtualChannels = new VirtualChannels();
 
 	public VirtualChannelTable(Composite parent, int style) {
@@ -142,10 +142,10 @@ public class VirtualChannelTable extends Composite implements IChangeListener, I
 		gridLayout.marginWidth = 0;
 		gridLayout.marginHeight = 0;
 		setLayout(gridLayout);
-		//
+
 		createToolbarMain(this);
 		createTableSection(this);
-		//
+
 		initialize();
 	}
 
@@ -161,7 +161,7 @@ public class VirtualChannelTable extends Composite implements IChangeListener, I
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(7, false));
-		//
+
 		add(createButtonAdd(composite));
 		add(createButtonEdit(composite));
 		add(createButtonRemove(composite));

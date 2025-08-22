@@ -45,7 +45,7 @@ public class ExtendedPlateDataUI extends Composite implements IExtendedPartUI {
 	private ComboViewer comboDetectionFormats;
 	private ComboViewer comboChannelSpecifications;
 	private ChannelSpecificationListUI channelSpecificationListUI;
-	//
+
 	private DetectionFormatComparator detectionFormatComparator = new DetectionFormatComparator();
 	private IPlate plate = null;
 
@@ -65,13 +65,13 @@ public class ExtendedPlateDataUI extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		comboDetectionFormats = createComboDetectionFormats(this);
 		comboChannelSpecifications = createComboChannelSpecifications(this);
 		channelSpecificationListUI = createChannelSpecificationTable(this);
-		//
+
 		initialize();
 	}
 
@@ -87,7 +87,7 @@ public class ExtendedPlateDataUI extends Composite implements IExtendedPartUI {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(2, false));
-		//
+
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 		createResetButton(composite);
 	}
@@ -115,7 +115,7 @@ public class ExtendedPlateDataUI extends Composite implements IExtendedPartUI {
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -153,7 +153,7 @@ public class ExtendedPlateDataUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -173,7 +173,7 @@ public class ExtendedPlateDataUI extends Composite implements IExtendedPartUI {
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select a channel specification.");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
@@ -191,7 +191,7 @@ public class ExtendedPlateDataUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -211,7 +211,7 @@ public class ExtendedPlateDataUI extends Composite implements IExtendedPartUI {
 
 		comboDetectionFormats.setInput(null);
 		updateChannelSpecification(null);
-		//
+
 		if(plate != null) {
 			/*
 			 * Available Formats
@@ -241,7 +241,7 @@ public class ExtendedPlateDataUI extends Composite implements IExtendedPartUI {
 
 		IChannelSpecification channelSpecification = null;
 		comboChannelSpecifications.setInput(null);
-		//
+
 		if(detectionFormat != null) {
 			List<IChannelSpecification> channelSpecifications = detectionFormat.getChannelSpecifications();
 			comboChannelSpecifications.setInput(channelSpecifications);
@@ -250,7 +250,7 @@ public class ExtendedPlateDataUI extends Composite implements IExtendedPartUI {
 				channelSpecification = channelSpecifications.get(plate.getActiveChannel());
 			}
 		}
-		//
+
 		channelSpecificationListUI.setInput(channelSpecification);
 	}
 }

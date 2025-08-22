@@ -121,7 +121,7 @@ public class ScanReader {
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		Document document = documentBuilder.parse(file);
 		NodeList topNode = document.getElementsByTagName("SpectroML");
-		//
+
 		JAXBContext jaxbContext = JAXBContext.newInstance(SpectroML.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 		return (SpectroML)unmarshaller.unmarshal(topNode.item(0));

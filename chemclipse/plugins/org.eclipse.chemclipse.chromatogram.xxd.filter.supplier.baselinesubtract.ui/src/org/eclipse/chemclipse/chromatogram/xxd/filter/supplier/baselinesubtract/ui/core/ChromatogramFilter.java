@@ -51,7 +51,7 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 					Shell temporaryShell = new Shell();
 					temporaryShell.setSize(0, 0);
 					temporaryShell.open();
-					//
+
 					subtractChromatogram(temporaryShell, chromatogramSelection);
 					temporaryShell.close();
 				});
@@ -73,7 +73,7 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 
 		IChromatogram chromatogramMaster = chromatogramSelectionMaster.getChromatogram();
 		ChromatogramEditorDialog dialog = new ChromatogramEditorDialog(shell, chromatogramMaster);
-		//
+
 		if(IDialogConstants.OK_ID == dialog.open()) {
 			IChromatogramSelection chromatogramSelectionSubtract = dialog.getChromatogramSelection();
 			if(chromatogramSelectionSubtract != null) {

@@ -93,12 +93,12 @@ import org.eclipse.swt.widgets.Table;
 public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 
 	private static final Logger logger = Logger.getLogger(AnalysisEditorUI.class);
-	//
+
 	public static final int DEFAULT_WIDTH = 500;
 	public static final int DEFAULT_HEIGHT = 600;
-	//
+
 	private static final String OPLS_GROUP_TARGET_NONE = "--";
-	//
+
 	private AtomicReference<Button> buttonToolbarSearchControl = new AtomicReference<>();
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private AtomicReference<Spinner> spinnerControlPC = new AtomicReference<>();
@@ -108,18 +108,18 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 	private AtomicReference<SamplesListUI> sampleListControl = new AtomicReference<>();
 	private AtomicReference<ComboViewer> labelOptionControl = new AtomicReference<>();
 	private AtomicReference<PreprocessingSettingsUI> preprocessingSettingsControl = new AtomicReference<>();
-	//
+
 	private ISamplesPCA<IVariable, ISample> samples = null;
 	private IEvaluation<IVariable, ISample, IResult> evaluation = null;
 	private ArrayList<String> oplsGroupTargets = new ArrayList<>();
-	//
+
 	private Composite control;
 
 	public AnalysisEditorUI(Composite parent, int style) {
 
 		super(parent, style);
 		createControl();
-		//
+
 		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
 		dataUpdateSupport.add(new IDataUpdateListener() {
 
@@ -168,10 +168,10 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createDataTab(this);
-		//
+
 		initialize();
 		control = this;
 	}
@@ -179,7 +179,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 	private void initialize() {
 
 		enableToolbar(toolbarSearch, buttonToolbarSearchControl.get(), IMAGE_SEARCH, TOOLTIP_EDIT, false);
-		//
+
 		oplsGroupTargets.add(OPLS_GROUP_TARGET_NONE);
 		comboViewerOplsTarget.get().setInput(oplsGroupTargets);
 		comboViewerOplsTarget.get().setSelection(new StructuredSelection(OPLS_GROUP_TARGET_NONE));
@@ -192,7 +192,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(7, false));
-		//
+
 		createLabel(composite, "Number of PCs:");
 		createSpinnerPrincipleComponents(composite);
 		createLabel(composite, "Algorithm:");
@@ -230,7 +230,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		spinnerControlPC.set(spinner);
 	}
 
@@ -249,7 +249,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				return null;
 			}
 		});
-		//
+
 		Combo combo = comboViewer.getCombo();
 		combo.setToolTipText("PCA Algorithm");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -275,10 +275,10 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		comboViewer.setInput(Algorithm.values());
 		comboViewer.setSelection(new StructuredSelection(Algorithm.NIPALS));
-		//
+
 		comboViewerAlgorithmControl.set(comboViewer);
 	}
 
@@ -297,7 +297,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				updateSampleList();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -320,7 +320,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		checkboxCrossvalidationControl.set(button);
 	}
 
@@ -348,7 +348,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				sampleListControl.get().setSearchText(searchText, caseSensitive);
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -357,7 +357,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 		IWizard wizard = new GroupNamingWizard(samples);
 		BatchProcessWizardDialog wizardDialog = new BatchProcessWizardDialog(shell, wizard);
 		wizardDialog.setMinimumPageSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		//
+
 		try {
 			if(wizardDialog.open() == Window.OK) {
 				updateSampleList();
@@ -371,10 +371,10 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 
 		TabFolder tabFolder = new TabFolder(parent, SWT.BOTTOM);
 		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		createSamplesSection(tabFolder);
 		createPreprocessingUI(tabFolder);
-		//
+
 		return tabFolder;
 	}
 
@@ -382,15 +382,15 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 
 		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText("Samples");
-		//
+
 		Composite composite = new Composite(tabFolder, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		composite.setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarSamples(composite);
 		createToolbarSearch(composite);
 		createSampleListUI(composite);
-		//
+
 		tabItem.setControl(composite);
 	}
 
@@ -401,7 +401,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(7, false));
-		//
+
 		createButtonToggleToolbar(composite);
 		createButtonNamingWizard(composite);
 		createComboViewerTargetOPLS(composite);
@@ -432,7 +432,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Label Option");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		combo.addSelectionListener(new SelectionAdapter() {
@@ -452,7 +452,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		comboViewer.setInput(LabelOptionPCA.values());
 		comboViewer.setSelection(new StructuredSelection(LabelOptionPCA.SAMPLE_NAME));
 		labelOptionControl.set(comboViewer);
@@ -475,7 +475,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		combo.setToolTipText("Using Classification Column for OPLS");
 		GridData gridData = new GridData();
 		gridData.widthHint = 250;
@@ -498,7 +498,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		comboViewerOplsTarget.set(comboViewer);
 	}
 
@@ -517,7 +517,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				// applyColorScheme(e.display);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -535,7 +535,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				applyColorScheme(e.display);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -570,7 +570,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -607,7 +607,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -637,7 +637,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				updateSampleList();
 			}
 		});
-		//
+
 		sampleListControl.set(sampleListUI);
 		ITableSettings tableSettings = sampleListUI.getTableSettings();
 		tableSettings.addMenuEntry(new ITableMenuEntry() {
@@ -749,10 +749,10 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 
 		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText("Preprocessing");
-		//
+
 		PreprocessingSettingsUI preprocessingSettingsUI = new PreprocessingSettingsUI(tabFolder, SWT.NONE);
 		preprocessingSettingsUI.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		tabItem.setControl(preprocessingSettingsUI);
 		preprocessingSettingsControl.set(preprocessingSettingsUI);
 	}
@@ -822,7 +822,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				selection = groupName;
 			}
 		}
-		//
+
 		comboViewerOplsTarget.get().setSelection(new StructuredSelection(selection));
 	}
 
@@ -875,7 +875,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 			IAnalysisSettings analysisSettings = samples.getAnalysisSettings();
 			analysisSettings.setColorScheme(colorScheme);
 			LabelOptionPCA labelOptionPCA = analysisSettings.getLabelOptionPCA();
-			//
+
 			List<ISample> sampleList = samples.getSamples();
 			Map<String, Color> colorMap = ColorSupport.getColorMapSamples(sampleList, labelOptionPCA, colorScheme);
 			for(ISample sample : sampleList) {
@@ -885,7 +885,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 			}
 			updateSampleList();
 		}
-		//
+
 		return colorScheme;
 	}
 
@@ -897,7 +897,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 		} else {
 			sampleListUI.updateInput(null);
 		}
-		//
+
 		updateOplsGroupTargets();
 		updateWidgets(samples.getAnalysisSettings());
 	}
@@ -906,7 +906,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 
 		oplsGroupTargets.clear();
 		oplsGroupTargets.add(OPLS_GROUP_TARGET_NONE);
-		//
+
 		if(samples != null) {
 			for(ISample sample : samples.getSamples()) {
 				if(sample.getGroupName() == null) {

@@ -94,7 +94,7 @@ public class ResultExport {
 			printWriter.println("-------------------------------------");
 			printWriter.println("Principal Components");
 			printWriter.println("-------------------------------------");
-			//
+
 			printWriter.print("File");
 			printWriter.print(TAB);
 			for(int i = 1; i <= pcaResults.getPcaSettings().getNumberOfPrincipalComponents(); i++) {
@@ -102,7 +102,7 @@ public class ResultExport {
 				printWriter.print(TAB);
 			}
 			printWriter.println("");
-			//
+
 			for(IResultMVA pcaResult : pcaResults.getPcaResultList()) {
 				/*
 				 * Print the PCs
@@ -123,7 +123,7 @@ public class ResultExport {
 			 */
 			printWriter.println("There are no results available yet.");
 		}
-		//
+
 		printWriter.flush();
 		printWriter.close();
 	}

@@ -33,7 +33,7 @@ public class PerspectiveSwitcherLabelProvider extends LabelProvider implements I
 
 	private static final Logger logger = Logger.getLogger(PerspectiveSwitcherLabelProvider.class);
 	private Map<URI, Image> imageMap = new HashMap<>();
-	//
+
 	@Inject
 	private TranslationService translationService;
 
@@ -58,7 +58,7 @@ public class PerspectiveSwitcherLabelProvider extends LabelProvider implements I
 				logger.warn(e);
 			}
 		}
-		//
+
 		return iconImage;
 	}
 
@@ -75,7 +75,7 @@ public class PerspectiveSwitcherLabelProvider extends LabelProvider implements I
 				iconImage.dispose();
 			}
 		}
-		//
+
 		imageMap.clear();
 	}
 
@@ -101,7 +101,7 @@ public class PerspectiveSwitcherLabelProvider extends LabelProvider implements I
 					text = "n.v.";
 			}
 		}
-		//
+
 		return text;
 	}
 }

@@ -54,25 +54,25 @@ import org.eclipse.swt.widgets.Text;
 public class TargetTemplatesUI extends Composite {
 
 	private static final String TOOLTIP_TEXT = "Enter/modify the target templates.";
-	//
+
 	public static final String IMPORT_TITLE = "Import Target Templates";
 	public static final String EXPORT_TITLE = "Export Target Templates";
 	public static final String MESSAGE_IMPORT_SUCCESSFUL = "Target templates have been imported successfully.";
 	public static final String MESSAGE_EXPORT_SUCCESSFUL = "Target templates have been exported successfully.";
 	public static final String MESSAGE_EXPORT_FAILED = "Failed to export the target templates.";
-	//
+
 	private ComboViewer comboViewer;
 	private Text textTargets;
 	private Button buttonAdd;
 	private Button buttonDelete;
 	private Button buttonImport;
 	private Button buttonExport;
-	//
+
 	private TargetTemplates targetTemplates = null;
 	private TargetTemplate targetTemplate = null;
-	//
+
 	private IUpdateListener updateListener = null;
-	//
+
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
 	public TargetTemplatesUI(Composite parent, int style) {
@@ -143,7 +143,7 @@ public class TargetTemplatesUI extends Composite {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		comboViewer = createComboViewer(this);
 		textTargets = createText(this);
 		buttonAdd = createButtonAdd(this);
@@ -188,7 +188,7 @@ public class TargetTemplatesUI extends Composite {
 				}
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -198,10 +198,10 @@ public class TargetTemplatesUI extends Composite {
 		text.setText("");
 		text.setToolTipText("Target Template");
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		TargetValidator targetValidator = new TargetValidator();
 		ControlDecoration controlDecoration = new ControlDecoration(text, SWT.LEFT | SWT.TOP);
-		//
+
 		text.addModifyListener(event -> {
 
 			if(targetTemplate != null) {
@@ -215,7 +215,7 @@ public class TargetTemplatesUI extends Composite {
 				}
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -380,7 +380,7 @@ public class TargetTemplatesUI extends Composite {
 					targetTemplate = traces.get(index);
 				}
 			}
-			//
+
 			buttonAdd.setEnabled(true);
 			buttonDelete.setEnabled(itemCount > 0);
 			buttonImport.setEnabled(true);
@@ -395,7 +395,7 @@ public class TargetTemplatesUI extends Composite {
 			buttonExport.setEnabled(false);
 			comboViewer.setInput(null);
 		}
-		//
+
 		updateTargetTemplate();
 	}
 

@@ -21,7 +21,7 @@ public class Activator implements BundleActivator {
 
 	private static Activator plugin;
 	private static BundleContext context;
-	//
+
 	private ServiceTracker<IConverterServiceTSD, IConverterServiceTSD> converterServiceTracker = null;
 
 	public static BundleContext getContext() {
@@ -37,7 +37,7 @@ public class Activator implements BundleActivator {
 
 		plugin = this;
 		Activator.context = bundleContext;
-		//
+
 		converterServiceTracker = new ServiceTracker<>(context, IConverterServiceTSD.class, null);
 		converterServiceTracker.open();
 	}
@@ -49,7 +49,7 @@ public class Activator implements BundleActivator {
 	public void stop(BundleContext bundleContext) throws Exception {
 
 		converterServiceTracker.close();
-		//
+
 		plugin = null;
 		Activator.context = null;
 	}

@@ -46,7 +46,7 @@ import org.eclipse.core.runtime.SubMonitor;
 public class MethodConverter {
 
 	public static final String DEFAULT_METHOD_CONVERTER_ID = "org.eclipse.chemclipse.xxd.converter.supplier.chemclipse.processMethodSupplier";
-	//
+
 	public static final String DESCRIPTION = "Process Method";
 	public static final String FILE_EXTENSION = ".ocm";
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
@@ -58,7 +58,7 @@ public class MethodConverter {
 	private static final String NAME_IMPORT = "Method Import Converter";
 	private static final String NAME_EXPORT = "Method Export Converter";
 	private static final int STREAM_BUFFER_SIZE = 1024 * 1024 * 5;
-	//
+
 	private static final Logger logger = Logger.getLogger(MethodConverter.class);
 	private static final String EXTENSION_POINT = "org.eclipse.chemclipse.converter.processMethodSupplier";
 
@@ -73,14 +73,14 @@ public class MethodConverter {
 
 		MethodConverterSupport converterSupport = getMethodConverterSupport();
 		for(ISupplier supplier : converterSupport.getSupplier()) {
-			//
+
 			IProcessingInfo<IProcessMethod> processinInfo = convert(file, supplier.getId(), monitor);
 			IProcessMethod processMethod = processinInfo.getProcessingResult();
 			if(processMethod != null) {
 				return processinInfo;
 			}
 		}
-		//
+
 		return getNoImportConverterAvailableProcessingInfo(file);
 	}
 
@@ -126,7 +126,7 @@ public class MethodConverter {
 			}
 			return info;
 		}
-		//
+
 		return errors;
 	}
 
@@ -160,7 +160,7 @@ public class MethodConverter {
 				} catch(IOException e) {
 					processingInfo.addErrorMessage(NAME_EXPORT, "An error occurred writing the method file: " + file, e);
 				}
-				//
+
 				return processingInfo;
 			}
 		}
@@ -219,7 +219,7 @@ public class MethodConverter {
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 		IConfigurationElement[] extensions = registry.getConfigurationElementsFor(EXTENSION_POINT);
 		for(IConfigurationElement element : extensions) {
-			//
+
 			supplier = new MethodSupplier();
 			supplier.setFileExtension(element.getAttribute(Converter.FILE_EXTENSION));
 			supplier.setFileName(element.getAttribute(Converter.FILE_NAME));

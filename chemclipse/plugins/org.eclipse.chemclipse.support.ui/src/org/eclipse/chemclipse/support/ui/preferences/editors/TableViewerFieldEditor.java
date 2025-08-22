@@ -49,7 +49,6 @@ public abstract class TableViewerFieldEditor<Value> extends FieldEditor {
 	// sorting
 	private int sortColumn = 0;
 	private int sortDirection = 0;
-	//
 
 	protected TableViewerFieldEditor(String name, String labelText, String[] columnNames, int[] columnWidth, Composite parent) {
 

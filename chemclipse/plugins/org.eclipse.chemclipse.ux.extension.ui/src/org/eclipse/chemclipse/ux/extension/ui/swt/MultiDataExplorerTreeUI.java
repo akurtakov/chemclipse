@@ -88,11 +88,11 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 
 	private static final Logger logger = Logger.getLogger(MultiDataExplorerTreeUI.class);
 	private static final String TAB_KEY_SUFFIX = "selectedTab"; //$NON-NLS-1$
-	//
+
 	private AtomicReference<TabFolder> tabFolderControl = new AtomicReference<>();
 	private AtomicReference<ComboViewer> comboViewerUserLocations = new AtomicReference<>();
 	private DataExplorerTreeUI[] dataExplorerTreeUIs;
-	//
+
 	private DataExplorerTreeSettings dataExplorerTreeSettings;
 	private UserLocations userLocations = new UserLocations();
 	private final SupplierFileIdentifierCache supplierFileIdentifierCache = new SupplierFileIdentifierCache(LazyFileExplorerContentProvider.MAX_CACHE_SIZE);
@@ -117,7 +117,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 		for(TabItem item : tabFolder.getSelection()) {
 			item.getControl().setFocus();
 		}
-		//
+
 		return true;
 	}
 
@@ -149,7 +149,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 		for(DataExplorerTreeUI dataExplorerTreeUI : dataExplorerTreeUIs) {
 			dataExplorerTreeUI.saveLastDirectoryPath(preferenceStore, getPreferenceKey(dataExplorerTreeUI.getRoot()));
 		}
-		//
+
 		int index = tabFolderControl.get().getSelectionIndex();
 		preferenceStore.setValue(getSelectedTabPreferenceKey(), index);
 		if(preferenceStore.needsSaving()) {
@@ -219,13 +219,13 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 	private void createDataExplorerTabFolder(Composite parent) {
 
 		TabFolder tabFolder = new TabFolder(parent, SWT.NONE);
-		//
+
 		DataExplorerTreeRoot[] dataExplorerTreeRoots = dataExplorerTreeSettings.getDataExplorerTreeRoots();
 		dataExplorerTreeUIs = new DataExplorerTreeUI[dataExplorerTreeRoots.length];
 		for(int i = 0; i < dataExplorerTreeRoots.length; i++) {
 			dataExplorerTreeUIs[i] = createDataExplorerTreeUI(tabFolder, dataExplorerTreeRoots[i]);
 		}
-		//
+
 		tabFolderControl.set(tabFolder);
 	}
 
@@ -233,16 +233,16 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 
 		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText(dataExplorerTreeRoot.toString());
-		//
+
 		Composite composite = new Composite(tabFolder, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		composite.setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(composite, dataExplorerTreeRoot);
 		DataExplorerTreeUI dataExplorerTreeUI = createDataExplorerTreeUI(composite, tabFolder, tabItem, dataExplorerTreeRoot);
 		createButtonLocation(composite, dataExplorerTreeUI);
 		createButtonBatchOpen(composite, dataExplorerTreeUI);
-		//
+
 		tabItem.setControl(composite);
 		return dataExplorerTreeUI;
 	}
@@ -252,7 +252,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		composite.setLayout(new GridLayout(4, false));
-		//
+
 		if(dataExplorerTreeRoot == DataExplorerTreeRoot.USER_LOCATION) {
 			createComboViewerLocations(composite);
 			createButtonDeleteLocation(composite);
@@ -304,12 +304,12 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 	private List<Class<? extends IPreferencePage>> getPreferencePages() {
 
 		List<Class<? extends IPreferencePage>> preferencePages = new ArrayList<>();
-		//
+
 		preferencePages.add(PreferencePageSystem.class);
 		preferencePages.add(PreferencePage.class);
 		preferencePages.add(PreferencePageUserLocations.class);
 		preferencePages.addAll(addPreferencePages());
-		//
+
 		return preferencePages;
 	}
 
@@ -329,7 +329,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select a user location.");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		combo.addSelectionListener(new SelectionAdapter() {
@@ -340,7 +340,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 				switchUserLocation(e.display.getActiveShell());
 			}
 		});
-		//
+
 		comboViewerUserLocations.set(comboViewer);
 	}
 
@@ -396,7 +396,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 				return dataExplorerTreeUI;
 			}
 		}
-		//
+
 		return null;
 	}
 
@@ -420,7 +420,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 						IPreferenceStore preferenceStore = dataExplorerTreeSettings.getPreferenceStore();
 						preferenceStore.setValue(getUserLocationPreferenceKey(), directory.getAbsolutePath());
 						dataExplorerTreeUI.getTreeViewer().setInput(new File[]{directory});
-						//
+
 						String name = directory.getName();
 						if(userLocations.get(name) == null) {
 							if(MessageDialog.openQuestion(e.display.getActiveShell(), "User Selection", "Would you like to bookmark the selected user selection?")) {
@@ -438,7 +438,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 		DataExplorerTreeUI dataExplorerTreeUI = new DataExplorerTreeUI(parent, dataExplorerTreeRoot, getIdentifierSupplier());
 		TreeViewer treeViewer = dataExplorerTreeUI.getTreeViewer();
 		treeViewer.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		ISelectionChangedListener selectionChangedListener = event -> {
 
 			Object[] array = treeViewer.getStructuredSelection().toArray();
@@ -448,7 +448,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 			}
 			handleSelection(files, dataExplorerTreeUI);
 		};
-		//
+
 		treeViewer.addSelectionChangedListener(selectionChangedListener);
 		treeViewer.addDoubleClickListener(event -> {
 
@@ -456,7 +456,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 				handleDoubleClick(file);
 			}
 		});
-		//
+
 		tabFolder.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -470,9 +470,9 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 				}
 			}
 		});
-		//
+
 		createContextMenu(dataExplorerTreeUI);
-		//
+
 		return dataExplorerTreeUI;
 	}
 
@@ -494,7 +494,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 			openFileAs(menuManager, selection);
 			openFiles(dataExplorerTreeUI, menuManager, selection);
 		});
-		//
+
 		Menu menu = menuManager.createContextMenu(treeViewer.getControl());
 		treeViewer.getControl().setMenu(menu);
 	}
@@ -506,7 +506,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 			 * Select a specific user location.
 			 */
 			addUserLocationButton(parent, dataExplorerTreeUI);
-			//
+
 			IPreferenceStore preferenceStore = dataExplorerTreeSettings.getPreferenceStore();
 			File directory = new File(preferenceStore.getString(getUserLocationPreferenceKey()));
 			if(directory.exists()) {
@@ -545,7 +545,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 								} else if(userLocations.get(name) != null) {
 									return "The name exists already.";
 								}
-								//
+
 								return null;
 							});
 							/*
@@ -614,7 +614,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 	private void openFileAs(MenuManager menuManager, Object[] files) {
 
 		Set<ISupplier> supplierSet = new TreeSet<>((supplier1, supplier2) -> supplier1.getId().compareTo(supplier2.getId()));
-		//
+
 		for(Object object : files) {
 			if(object instanceof File file) {
 				Map<ISupplierFileIdentifier, Collection<ISupplier>> map = getIdentifierSupplier().apply(file);
@@ -633,7 +633,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 				}
 			}
 		}
-		//
+
 		for(ISupplier activeFileSupplier : supplierSet) {
 			menuManager.add(new Action(NLS.bind(ExtensionMessages.openAs, activeFileSupplier.getFilterName()), ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_FILE, IApplicationImageProvider.SIZE_16x16)) {
 
@@ -701,7 +701,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 				}
 			}
 		}
-		//
+
 		return opened;
 	}
 
@@ -742,7 +742,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 			if(file.isDirectory()) {
 				contentProvider.refresh(file);
 			}
-			//
+
 			Collection<ISupplierFileIdentifier> identifiers = getIdentifierSupplier().apply(file).keySet();
 			for(ISupplierFileIdentifier identifier : identifiers) {
 				if(!identifier.isMatchMagicNumber(file) || !identifier.isMatchContent(file)) {
@@ -753,7 +753,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 					return;
 				}
 			}
-			//
+
 			UpdateNotifier.update(IChemClipseEvents.TOPIC_CHROMATOGRAM_XXD_UPDATE_NONE, null);
 		}
 	}
@@ -793,7 +793,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 		if(object instanceof UserLocation userLocation) {
 			return userLocation;
 		}
-		//
+
 		return null;
 	}
 

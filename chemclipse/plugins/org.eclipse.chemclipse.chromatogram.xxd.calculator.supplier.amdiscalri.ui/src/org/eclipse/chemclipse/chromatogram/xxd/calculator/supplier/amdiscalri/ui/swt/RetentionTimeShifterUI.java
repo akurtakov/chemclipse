@@ -41,10 +41,10 @@ public class RetentionTimeShifterUI extends Composite {
 
 	private AtomicReference<Text> textControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonControl = new AtomicReference<>();
-	//
+
 	private Listener listener;
 	private IUpdateListenerUI updateListener;
-	//
+
 	private List<IRetentionIndexEntry> settings = new ArrayList<>();
 
 	public RetentionTimeShifterUI(Composite parent, int style) {
@@ -56,7 +56,7 @@ public class RetentionTimeShifterUI extends Composite {
 	public void addChangeListener(Listener listener) {
 
 		this.listener = listener;
-		//
+
 		textControl.get().addListener(SWT.KeyUp, listener);
 		buttonControl.get().addListener(SWT.KeyUp, listener);
 	}
@@ -72,7 +72,7 @@ public class RetentionTimeShifterUI extends Composite {
 		if(settings != null) {
 			this.settings.addAll(settings);
 		}
-		//
+
 		if(listener != null) {
 			listener.handleEvent(new Event());
 		}
@@ -81,16 +81,16 @@ public class RetentionTimeShifterUI extends Composite {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(2, false);
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		createText(composite);
 		createButton(composite);
-		//
+
 		initialize();
 		validate();
 	}
@@ -119,7 +119,7 @@ public class RetentionTimeShifterUI extends Composite {
 				}
 			}
 		});
-		//
+
 		textControl.set(text);
 	}
 
@@ -137,7 +137,7 @@ public class RetentionTimeShifterUI extends Composite {
 				applyShift();
 			}
 		});
-		//
+
 		buttonControl.set(button);
 	}
 

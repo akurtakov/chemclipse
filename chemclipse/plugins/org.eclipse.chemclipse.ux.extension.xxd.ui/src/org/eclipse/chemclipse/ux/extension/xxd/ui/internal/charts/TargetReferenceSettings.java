@@ -25,7 +25,7 @@ public class TargetReferenceSettings {
 	private ITargetDisplaySettings targetDisplaySettings = null;
 	private boolean showReferenceId = false;
 	private int offset = 0;
-	//
+
 	private BaseChart baseChart = null; // Null is valid
 	private String label = "";
 	private String description = "";

@@ -39,11 +39,11 @@ public class PeakIdentifier extends AbstractPeakIdentifierMSD {
 	public IProcessingInfo<IPeakIdentificationResults> identify(List<? extends IPeakMSD> peaks, IPeakIdentifierSettingsMSD identifierSettings, IProgressMonitor monitor) {
 
 		IProcessingInfo<IPeakIdentificationResults> processingInfo = new ProcessingInfo<>();
-		//
+
 		if(identifierSettings == null) {
 			identifierSettings = PreferenceSupplier.getPeakIdentifierSettings();
 		}
-		//
+
 		if(identifierSettings instanceof PeakIdentifierSettings peakIdentifierSettings) {
 			try {
 				/*
@@ -56,7 +56,7 @@ public class PeakIdentifier extends AbstractPeakIdentifierMSD {
 						peaksToIdentify.add(peakMSD);
 					}
 				}
-				//
+
 				Identifier identifier = new Identifier();
 				IPeakIdentificationResults peakIdentificationResults = identifier.runPeakIdentification(peaksToIdentify, peakIdentifierSettings, processingInfo, monitor);
 				int numberOfIdentifiedPeaks = peakIdentificationResults.getIdentificationResults().size();
@@ -68,7 +68,7 @@ public class PeakIdentifier extends AbstractPeakIdentifierMSD {
 		} else {
 			processingInfo.addErrorMessage(Messages.nistDbIdentifier, "The settings are not of type: " + PeakIdentifierSettings.class);
 		}
-		//
+
 		return processingInfo;
 	}
 }

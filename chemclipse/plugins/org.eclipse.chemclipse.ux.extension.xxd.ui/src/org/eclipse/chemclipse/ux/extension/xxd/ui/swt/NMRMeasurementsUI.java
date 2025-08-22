@@ -72,7 +72,7 @@ public class NMRMeasurementsUI implements PropertyChangeListener {
 	private static final Image IMAGE_FREQUENCY = ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SCAN_NMR, IApplicationImage.SIZE_16x16);
 	private static final Image IMAGE_FID = ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SCAN_FID, IApplicationImage.SIZE_16x16);
 	private static final TreeNode[] EMPTY = new TreeNode[0];
-	//
+
 	private TreeViewer treeViewer;
 	private DataNMRSelection selection;
 	private ProcessorFactory filterFactory;
@@ -300,7 +300,7 @@ public class NMRMeasurementsUI implements PropertyChangeListener {
 		if(this.selection != null) {
 			this.selection.removeObserver(this);
 		}
-		//
+
 		this.selection = selection;
 		updateTree();
 		selection.addObserver(this);

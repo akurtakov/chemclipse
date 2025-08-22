@@ -74,7 +74,7 @@ public class SupportMessages extends NLS {
 	public static String wavelengthValueAlreadyExists;
 	public static String standardWavelengthRanges;
 	public static String enterWavelength;
-	//
+
 	static {
 		NLS.initializeMessages("org.eclipse.chemclipse.support.ui.l10n.messages", SupportMessages.class); //$NON-NLS-1$
 	}

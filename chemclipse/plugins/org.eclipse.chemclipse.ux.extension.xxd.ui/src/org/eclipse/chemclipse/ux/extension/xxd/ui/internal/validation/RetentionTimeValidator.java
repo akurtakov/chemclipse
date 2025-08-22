@@ -21,7 +21,7 @@ public class RetentionTimeValidator implements IValidator<Object> {
 
 	private static final String ERROR = ExtensionMessages.enterCorrectRetentionTimeMinutesExample + " 4.25";
 	private static final String ERROR_VALUE_RANGE = ExtensionMessages.retentionTimeMustNotBeNegative;
-	//
+
 	private double retentionTime = 0.0d;
 
 	@Override
@@ -29,7 +29,7 @@ public class RetentionTimeValidator implements IValidator<Object> {
 
 		String message = null;
 		this.retentionTime = 0.0d;
-		//
+
 		if(value == null) {
 			message = ERROR;
 		} else {
@@ -48,7 +48,7 @@ public class RetentionTimeValidator implements IValidator<Object> {
 				message = ERROR;
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

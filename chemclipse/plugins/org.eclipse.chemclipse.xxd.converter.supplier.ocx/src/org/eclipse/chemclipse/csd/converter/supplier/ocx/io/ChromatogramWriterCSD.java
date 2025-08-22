@@ -72,14 +72,14 @@ public class ChromatogramWriterCSD extends AbstractChromatogramWriter implements
 		monitor.setTaskName("Open Chromatography Binary");
 		monitor.subTask(ConverterMessages.exportChromatogram);
 		IChromatogramCSDZipWriter chromatogramWriter = getChromatogramWriter(version);
-		//
+
 		return chromatogramWriter;
 	}
 
 	private IChromatogramCSDZipWriter getChromatogramWriter(String version) {
 
 		IChromatogramCSDZipWriter chromatogramWriter = null;
-		//
+
 		if(version.equals(Format.CHROMATOGRAM_VERSION_1001)) {
 			chromatogramWriter = new ChromatogramWriter_1001();
 		} else if(version.equals(Format.CHROMATOGRAM_VERSION_1002)) {
@@ -109,7 +109,7 @@ public class ChromatogramWriterCSD extends AbstractChromatogramWriter implements
 		} else {
 			chromatogramWriter = new ChromatogramWriter_1502();
 		}
-		//
+
 		return chromatogramWriter;
 	}
 }

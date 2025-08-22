@@ -24,27 +24,27 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.model.LabelOptionPCA;
 public class PreferenceSupplier extends AbstractPreferenceSupplier implements IPreferenceSupplier {
 
 	public static final String N_INPUT_FILE = "INPUT_FILE";
-	//
+
 	public static final String P_ALGORITHM = "algorithm";
 	public static final String DEF_ALGORITHM = Algorithm.NIPALS.toString();
 	public static final String P_REMOVE_USELESS_VARIABLES = "removeUselessVariables";
 	public static final boolean DEF_REMOVE_USELESS_VARIABLES = true;
 	public static final String P_LABEL_OPTION_PCA = "labelOptionPCA";
 	public static final String DEF_LABEL_OPTION_PCA = LabelOptionPCA.GROUP_NAME.name();
-	//
+
 	public static final String P_NUMBER_OF_COMPONENTS = "numberOfComponents";
 	public static final int MIN_NUMBER_OF_COMPONENTS = 3;
 	public static final int MAX_NUMBER_OF_COMPONENTS = 1000;
 	public static final int DEF_NUMBER_OF_COMPONENTS = 3;
-	//
+
 	public static final String P_NUMBER_OF_SAMPLES_TO_FILTER = "numberOfSamplesToFilter";
 	public static final int MIN_NUMBER_OF_SAMPLES_TO_FILTER = 2;
 	public static final int MAX_NUMBER_OF_SAMPLES_TO_FILTER = 2000;
 	public static final int DEF_NUMBER_OF_SAMPLES_TO_FILTER = 100;
-	//
+
 	public static final String P_RETENTION_TIME_WINDOW_PEAKS = "retentionTimeWindowPeaks";
 	public static final double DEF_RETENTION_TIME_WINDOW_PEAKS = 0.1;
-	//
+
 	public static final String P_CROSS_VALIDATION = "crossValidation";
 	public static final boolean DEF_CROSS_VALIDATION = false;
 	/*
@@ -69,10 +69,10 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_LOADING_PLOT_2D_SYMBOL_TYPE = "CIRCLE";
 	public static final String P_LOADING_PLOT_2D_HIGHLIGHT_SYMBOL_TYPE = "loadingPlot2dHighlightSymbolType";
 	public static final String DEF_LOADING_PLOT_2D_HIGHLIGHT_SYMBOL_TYPE = "CROSS";
-	//
+
 	public static final String P_COLOR_SCHEME = "colorScheme";
 	public static final String DEF_COLOR_SCHEME = "Print";
-	//
+
 	public static final String P_PATH_IMPORT_FILE = "pathImportFile";
 	public static final String DEF_PATH_IMPORT_FILE = "";
 	public static final String P_PATH_EXPORT_FILE = "pathExportFile";
@@ -118,7 +118,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		analysisSettings.setRemoveUselessVariables(isRemoveUselessVariables());
 		analysisSettings.setCrossValidation(isCrossValidation());
 		analysisSettings.setLabelOptionPCA(getLabelOptionPCA());
-		//
+
 		return analysisSettings;
 	}
 

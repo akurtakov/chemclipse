@@ -21,7 +21,7 @@ public class UnknownSettingsSupport {
 	public static TargetUnknownSettings getTargetUnknownSettings(IUnknownSettings unknownSettings) {
 
 		TargetUnknownSettings targetUnknownSettings = new TargetUnknownSettings();
-		//
+
 		targetUnknownSettings.setTargetName(unknownSettings.getTargetName());
 		targetUnknownSettings.setMatchQuality(unknownSettings.getMatchQuality());
 		if(unknownSettings instanceof IUnknownSettingsMSD unknownSettingsMSD) {
@@ -32,7 +32,7 @@ public class UnknownSettingsSupport {
 		targetUnknownSettings.setMarkerStop(unknownSettings.getMarkerStop());
 		targetUnknownSettings.setIncludeRetentionTime(unknownSettings.isIncludeRetentionTime());
 		targetUnknownSettings.setIncludeRetentionIndex(unknownSettings.isIncludeRetentionIndex());
-		//
+
 		return targetUnknownSettings;
 	}
 }

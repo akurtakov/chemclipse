@@ -34,7 +34,7 @@ public class Format {
 	 * Chromatogram (*.ocb)
 	 */
 	public static final int CHROMATOGRAM_COMPRESSION_TYPE = ZipOutputStream.DEFLATED;
-	//
+
 	public static final String CHROMATOGRAM_VERSION_0701 = "0.7.0.1"; // Version 0.7.0, Release 1 (Nernst)
 	public static final String CHROMATOGRAM_VERSION_0801 = "0.8.0.1"; // Version 0.8.0, Release 1
 	public static final String CHROMATOGRAM_VERSION_0802 = "0.8.0.2"; // Version 0.8.0, Release 2
@@ -62,7 +62,7 @@ public class Format {
 	 */
 	public static final int METHOD_COMPRESSION_LEVEL = 0; // 0 - 9 => 0 no compression
 	public static final int METHOD_COMPRESSION_TYPE = ZipOutputStream.DEFLATED;
-	//
+
 	public static final String METHOD_VERSION_0001 = "0.0.0.1";
 	public static final String METHOD_VERSION_0002 = "0.0.0.2";
 	public static final String METHOD_VERSION_0003 = "0.0.0.3";
@@ -70,7 +70,7 @@ public class Format {
 	public static final String METHOD_VERSION_1401 = "1.4.0.1";
 	public static final String METHOD_VERSION_1402 = "1.4.0.2";
 	public static final String METHOD_VERSION_LATEST = METHOD_VERSION_1402;
-	//
+
 	public static final String DIR_SEPARATOR = "/";
 	public static final String WSD = "WSD";
 	public static final String MSD = "MSD";
@@ -107,10 +107,10 @@ public class Format {
 	 */
 	public static final String DIR_OVERVIEW = OVERVIEW + DIR_SEPARATOR;
 	public static final String FILE_TIC = DIR_OVERVIEW + TIC;
-	//
+
 	public static final String DIR_OVERVIEW_MSD = DIR_MSD + DIR_OVERVIEW;
 	public static final String FILE_TIC_MSD = DIR_OVERVIEW_MSD + TIC;
-	//
+
 	public static final String DIR_OVERVIEW_FID = DIR_FID_LEGACY + DIR_OVERVIEW;
 	public static final String FILE_TIC_FID = DIR_OVERVIEW_FID + TIC;
 	// WSD stuff

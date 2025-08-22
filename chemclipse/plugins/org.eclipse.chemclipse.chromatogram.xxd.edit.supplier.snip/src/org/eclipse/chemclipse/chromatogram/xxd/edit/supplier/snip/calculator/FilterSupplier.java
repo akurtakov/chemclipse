@@ -79,7 +79,7 @@ public class FilterSupplier {
 		for(int i = 0; i < extraValues; i++) {
 			intensityValues[counter++] = 1;
 		}
-		//
+
 		return intensityValues;
 	}
 

@@ -53,7 +53,7 @@ public class AnalysisSegmentSelectionChangedListener<X> implements ISelectionCha
 			if(scan != null) {
 				UpdateNotifierUI.update(Display.getDefault(), scan);
 			}
-			//
+
 			if(type.isInstance(element)) {
 				selectionConsumer.accept(type.cast(element));
 				return;

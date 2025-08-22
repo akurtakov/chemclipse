@@ -32,7 +32,7 @@ public class FeatureDataMatrixIO {
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-	//
+
 	private static final String VALUE_DELIMITER = "\t";
 
 	private FeatureDataMatrixIO() {
@@ -71,7 +71,7 @@ public class FeatureDataMatrixIO {
 				 */
 				for(Feature feature : featureDataMatrix.getFeatures()) {
 					IVariable variable = feature.getVariable();
-					//
+
 					printWriter.print(variable.getValue());
 					printWriter.print(VALUE_DELIMITER);
 					printWriter.print(variable.isSelected());
@@ -79,7 +79,7 @@ public class FeatureDataMatrixIO {
 					printWriter.print(variable.getClassification());
 					printWriter.print(VALUE_DELIMITER);
 					printWriter.print(variable.getDescription());
-					//
+
 					List<ISampleData<?>> sampleData = feature.getSampleData();
 					for(int i = 0; i < samplesSize; i++) {
 						double value = sampleData.get(i).getData();

@@ -57,7 +57,7 @@ public class ChromatogramBaselinePart extends AbstractPart<ExtendedBaselineUI> {
 				return false;
 			}
 		}
-		//
+
 		return false;
 	}
 

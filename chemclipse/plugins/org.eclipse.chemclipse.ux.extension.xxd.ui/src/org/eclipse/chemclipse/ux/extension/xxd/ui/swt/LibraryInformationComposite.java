@@ -68,7 +68,7 @@ public abstract class LibraryInformationComposite extends Composite implements I
 				setInput(identificationTarget.getLibraryInformation());
 			}
 		}
-		//
+
 		return true;
 	}
 

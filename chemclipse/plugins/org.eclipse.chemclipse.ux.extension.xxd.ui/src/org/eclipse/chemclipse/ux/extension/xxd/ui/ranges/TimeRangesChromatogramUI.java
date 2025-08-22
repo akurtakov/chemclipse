@@ -37,10 +37,10 @@ public class TimeRangesChromatogramUI extends Composite implements IExtendedPart
 
 	private AtomicReference<TimeRangesUI> rangesControl = new AtomicReference<>();
 	private AtomicReference<TimeRangesChart> chartControl = new AtomicReference<>();
-	//
+
 	private TimeRangeAdjustmentHandler timeRangeAdjustmentHandler = new TimeRangeAdjustmentHandler();
 	private TimeRangeSelectionHandler timeRangeSelectionHandler = new TimeRangeSelectionHandler();
-	//
+
 	private TimeRanges timeRanges = null;
 	private TimeRangeMarker timeRangeMarker;
 	private ITimeRangeUpdateListener updateListener;
@@ -103,17 +103,17 @@ public class TimeRangesChromatogramUI extends Composite implements IExtendedPart
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createTimeRangesUI(this);
 		createTimeRangesChart(this);
-		//
+
 		initialize();
 	}
 
 	private void initialize() {
 
 		enableToolbar(rangesControl, true);
-		//
+
 		timeRangeAdjustmentHandler.setUpdateListener(new ITimeRangeUpdateListener() {
 
 			@Override
@@ -123,7 +123,7 @@ public class TimeRangesChromatogramUI extends Composite implements IExtendedPart
 				fireUpdate(timeRange);
 			}
 		});
-		//
+
 		timeRangeSelectionHandler.setUpdateListener(new ITimeRangeUpdateListener() {
 
 			@Override
@@ -149,7 +149,7 @@ public class TimeRangesChromatogramUI extends Composite implements IExtendedPart
 				fireUpdate(timeRange);
 			}
 		});
-		//
+
 		rangesControl.set(timeRangesUI);
 	}
 
@@ -157,9 +157,9 @@ public class TimeRangesChromatogramUI extends Composite implements IExtendedPart
 
 		TimeRangesChart timeRangesChart = new TimeRangesChart(parent, SWT.NONE);
 		timeRangesChart.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		timeRangeMarker = addTimeRangeMarker(timeRangesChart);
-		//
+
 		IChartSettings chartSettings = timeRangesChart.getChartSettings();
 		chartSettings.addHandledEventProcessor(timeRangeAdjustmentHandler);
 		chartSettings.addHandledEventProcessor(timeRangeSelectionHandler);
@@ -228,7 +228,7 @@ public class TimeRangesChromatogramUI extends Composite implements IExtendedPart
 			}
 		});
 		timeRangesChart.applySettings(chartSettings);
-		//
+
 		timeRangesChart.setUpdateListener(new ITimeRangeUpdateListener() {
 
 			@Override
@@ -242,7 +242,7 @@ public class TimeRangesChromatogramUI extends Composite implements IExtendedPart
 				fireUpdate(timeRange);
 			}
 		});
-		//
+
 		BaseChart baseChart = timeRangesChart.getBaseChart();
 		IPlotArea plotArea = baseChart.getPlotArea();
 		plotArea.addMouseMoveListener(new MouseMoveListener() {
@@ -259,7 +259,7 @@ public class TimeRangesChromatogramUI extends Composite implements IExtendedPart
 				}
 			}
 		});
-		//
+
 		chartControl.set(timeRangesChart);
 	}
 
@@ -269,7 +269,7 @@ public class TimeRangesChromatogramUI extends Composite implements IExtendedPart
 		IPlotArea plotArea = baseChart.getPlotArea();
 		TimeRangeMarker timeRangeMarker = new TimeRangeMarker(baseChart);
 		plotArea.addCustomPaintListener(timeRangeMarker);
-		//
+
 		return timeRangeMarker;
 	}
 
@@ -318,7 +318,7 @@ public class TimeRangesChromatogramUI extends Composite implements IExtendedPart
 			 */
 			setTimeRangesVisible(false);
 		}
-		//
+
 		chartControl.get().getBaseChart().redraw();
 	}
 

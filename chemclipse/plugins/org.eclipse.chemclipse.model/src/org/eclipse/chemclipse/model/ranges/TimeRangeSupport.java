@@ -24,7 +24,7 @@ public class TimeRangeSupport {
 					timeRangeSink = new TimeRange(identifier, 0, 0);
 					timeRangesSink.add(timeRangeSink);
 				}
-				//
+
 				timeRangeSink.update(timeRangeSource.getStart(), timeRangeSource.getMaximum(), timeRangeSource.getStop());
 				timeRangeSink.setTraces(timeRangeSource.getTraces());
 			}

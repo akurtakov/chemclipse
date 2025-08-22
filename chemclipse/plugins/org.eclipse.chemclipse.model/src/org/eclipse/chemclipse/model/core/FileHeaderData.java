@@ -75,7 +75,7 @@ public class FileHeaderData {
 		if(pattern == null) {
 			pattern = Pattern.compile(regularExpression);
 		}
-		//
+
 		return pattern;
 	}
 

@@ -51,11 +51,11 @@ import org.eclipse.swt.widgets.ToolItem;
 public class SettingsPreferencesEditPage extends WizardPage {
 
 	private static final Logger logger = Logger.getLogger(SettingsPreferencesEditPage.class);
-	//
+
 	private AtomicReference<TreeViewer> treeViewerControl = new AtomicReference<>();
 	private AtomicReference<ToolItem> toolItemEditControl = new AtomicReference<>();
 	private AtomicReference<ToolItem> toolItemDeleteControl = new AtomicReference<>();
-	//
+
 	private final Supplier<Collection<IProcessorPreferences<?>>> preferenceSupplier;
 
 	public SettingsPreferencesEditPage(Supplier<Collection<IProcessorPreferences<?>>> preferenceSupplier) {
@@ -69,10 +69,10 @@ public class SettingsPreferencesEditPage extends WizardPage {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(2, false));
-		//
+
 		createTreeViewer(composite);
 		createToolBar(composite);
-		//
+
 		initialize();
 		setControl(composite);
 	}
@@ -89,11 +89,11 @@ public class SettingsPreferencesEditPage extends WizardPage {
 		treeViewer.getTree().setLinesVisible(true);
 		treeViewer.setContentProvider(new TreeNodeContentProvider());
 		treeViewer.getControl().setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		createColumnName(treeViewer);
 		createColumnAskSettings(treeViewer);
 		createColumnOptions(treeViewer);
-		//
+
 		treeViewer.addSelectionChangedListener(event -> {
 
 			ITreeSelection selection = treeViewer.getStructuredSelection();
@@ -108,9 +108,9 @@ public class SettingsPreferencesEditPage extends WizardPage {
 			toolItemEditControl.get().setEnabled(buttonsEnabled && array.length == 1);
 			toolItemDeleteControl.get().setEnabled(buttonsEnabled);
 		});
-		//
+
 		treeViewer.addDoubleClickListener(event -> doEdit());
-		//
+
 		treeViewer.getControl().addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -121,7 +121,7 @@ public class SettingsPreferencesEditPage extends WizardPage {
 				}
 			}
 		});
-		//
+
 		treeViewerControl.set(treeViewer);
 	}
 
@@ -129,7 +129,7 @@ public class SettingsPreferencesEditPage extends WizardPage {
 
 		ToolBar toolBar = new ToolBar(parent, SWT.VERTICAL | SWT.FLAT);
 		toolBar.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, true));
-		//
+
 		createToolItemEdit(toolBar);
 		createToolItemDelete(toolBar);
 		createToolItemDeleteAll(toolBar);
@@ -149,10 +149,10 @@ public class SettingsPreferencesEditPage extends WizardPage {
 				doEdit();
 			}
 		});
-		//
+
 		toolItem.setEnabled(false);
 		toolItem.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EDIT, IApplicationImageProvider.SIZE_16x16));
-		//
+
 		toolItemEditControl.set(toolItem);
 	}
 
@@ -167,11 +167,11 @@ public class SettingsPreferencesEditPage extends WizardPage {
 				resetSettings(e.display.getActiveShell());
 			}
 		});
-		//
+
 		toolItem.setEnabled(false);
 		toolItem.setToolTipText(ExtensionMessages.removeStoredDataResetDefaultsForSelectedProcessor);
 		toolItem.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DELETE, IApplicationImageProvider.SIZE_16x16));
-		//
+
 		toolItemDeleteControl.set(toolItem);
 	}
 
@@ -207,7 +207,7 @@ public class SettingsPreferencesEditPage extends WizardPage {
 				treeViewerControl.get().expandAll();
 			}
 		});
-		//
+
 		toolItem.setEnabled(true);
 		toolItem.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXPAND_ALL, IApplicationImageProvider.SIZE_16x16));
 	}
@@ -224,7 +224,7 @@ public class SettingsPreferencesEditPage extends WizardPage {
 				treeViewerControl.get().collapseAll();
 			}
 		});
-		//
+
 		toolItem.setEnabled(true);
 		toolItem.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_COLLAPSE_ALL, IApplicationImageProvider.SIZE_16x16));
 	}
@@ -241,12 +241,12 @@ public class SettingsPreferencesEditPage extends WizardPage {
 				if(element instanceof TreeNode treeNode) {
 					element = treeNode.getValue();
 				}
-				//
+
 				IProcessorPreferences<?> entry = getEntry(element);
 				if(entry != null) {
 					return entry.getSupplier().getName();
 				}
-				//
+
 				return super.getText(element);
 			}
 		});
@@ -270,7 +270,7 @@ public class SettingsPreferencesEditPage extends WizardPage {
 						return ExtensionMessages.no;
 					}
 				}
-				//
+
 				return "";
 			}
 		});
@@ -289,7 +289,7 @@ public class SettingsPreferencesEditPage extends WizardPage {
 				if(element instanceof TreeNode treeNode) {
 					element = treeNode.getValue();
 				}
-				//
+
 				IProcessorPreferences<Object> preferences = getEntry(element);
 				if(preferences != null) {
 					if(preferences.isUseSystemDefaults()) {
@@ -298,7 +298,7 @@ public class SettingsPreferencesEditPage extends WizardPage {
 						return preferences.getUserSettingsAsString();
 					}
 				}
-				//
+
 				return "";
 			}
 		});
@@ -319,7 +319,7 @@ public class SettingsPreferencesEditPage extends WizardPage {
 
 		ITreeSelection selection = treeViewerControl.get().getStructuredSelection();
 		IProcessorPreferences<?> processorPreferences = getEntry(selection.getFirstElement());
-		//
+
 		if(processorPreferences != null) {
 			try {
 				if(SettingsWizard.openEditPreferencesWizard(getShell(), processorPreferences, true)) {
@@ -343,7 +343,7 @@ public class SettingsPreferencesEditPage extends WizardPage {
 			TreeNode processorNode = new TreeNode(processorPreferences);
 			String category = processTypeSupplier != null ? processTypeSupplier.getCategory() : processorPreferences.getSupplier().getCategory();
 			TreeNode categoryNode = categories.get(category);
-			//
+
 			if(categoryNode == null) {
 				categoryNode = new TreeNode(category);
 				categoryNode.setChildren(new TreeNode[]{processorNode});
@@ -356,7 +356,7 @@ public class SettingsPreferencesEditPage extends WizardPage {
 			}
 			processorNode.setParent(categoryNode);
 		}
-		//
+
 		TreeViewer treeViewer = treeViewerControl.get();
 		treeViewer.setInput(categories.values().toArray(new TreeNode[0]));
 		treeViewer.refresh();
@@ -368,11 +368,11 @@ public class SettingsPreferencesEditPage extends WizardPage {
 		if(element instanceof TreeNode treeNode) {
 			element = treeNode.getValue();
 		}
-		//
+
 		if(element instanceof IProcessorPreferences<?>) {
 			return (IProcessorPreferences<T>)element;
 		}
-		//
+
 		return null;
 	}
 }

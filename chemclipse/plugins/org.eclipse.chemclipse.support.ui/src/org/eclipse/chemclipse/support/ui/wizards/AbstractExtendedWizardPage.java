@@ -82,7 +82,7 @@ public abstract class AbstractExtendedWizardPage extends WizardPage implements I
 		int day = dateTime.getDay();
 		int month = dateTime.getMonth();
 		int year = dateTime.getYear();
-		//
+
 		if(day < 1 || day > 12) {
 			message = errorMessage;
 		} else if(month < 0 || month > 11) {

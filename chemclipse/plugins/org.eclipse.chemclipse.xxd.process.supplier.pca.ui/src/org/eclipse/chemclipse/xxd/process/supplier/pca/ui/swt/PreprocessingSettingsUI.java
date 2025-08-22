@@ -68,18 +68,18 @@ public class PreprocessingSettingsUI extends Composite {
 	private static final String LABEL_TRANSFORM = "Transform Data:";
 	private static final String LABEL_CENTER = "Center Variables:";
 	private static final String LABEL_SCALE = "Scale Variables:";
-	//
+
 	private IPreprocessingSettings preprocessingSettings = new PreprocessingSettings();
-	//
+
 	private ComboViewer comboViewerNormalize;
 	private ComboViewer comboViewerReplacer;
 	private ComboViewer comboViewerTransformation;
 	private ComboViewer comboViewerCentering;
 	private ComboViewer comboViewerScaling;
-	//
+
 	private Label labelFormula;
 	private Canvas canvasFormula;
-	//
+
 	private Object[] normalizeInput = new Object[]{"--", new Normalization1Norm(), new Normalization2Norm(), new NormalizationInfNorm()};
 	private Object[] replacerInput = new Object[]{new MeanValuesReplacer(), new MedianValuesReplacer(), new SmallValuesReplacer()};
 	private Object[] transformationInput = new Object[]{"--", new TransformationLOG10(), new TransformationPower()};
@@ -109,27 +109,27 @@ public class PreprocessingSettingsUI extends Composite {
 
 		setLayout(new GridLayout(3, false));
 		setBackgroundMode(SWT.INHERIT_DEFAULT);
-		//
+
 		createLabel(this, LABEL_NORMALIZE);
 		comboViewerNormalize = createComboViewerNormalize(this);
 		createButtonInfoFormula(this, comboViewerNormalize);
-		//
+
 		createLabel(this, LABEL_REPLACE);
 		comboViewerReplacer = createComboViewerReplace(this);
 		createButtonInfoFormula(this, comboViewerReplacer);
-		//
+
 		createLabel(this, LABEL_TRANSFORM);
 		comboViewerTransformation = createComboViewerTransform(this);
 		createButtonInfoFormula(this, comboViewerTransformation);
-		//
+
 		createLabel(this, LABEL_CENTER);
 		comboViewerCentering = createComboViewerCenter(this);
 		createButtonInfoFormula(this, comboViewerCentering);
-		//
+
 		createLabel(this, LABEL_SCALE);
 		comboViewerScaling = createComboViewerScale(this);
 		createButtonInfoFormula(this, comboViewerScaling);
-		//
+
 		labelFormula = createLabelFormula(this);
 		canvasFormula = createCanvas(this);
 		/*
@@ -146,7 +146,7 @@ public class PreprocessingSettingsUI extends Composite {
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = 3;
 		composite.setLayoutData(gridData);
-		//
+
 		return createLabel(composite, "Formula:");
 	}
 
@@ -155,7 +155,7 @@ public class PreprocessingSettingsUI extends Composite {
 		Label label = new Label(parent, SWT.NONE);
 		label.setText(text);
 		label.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return label;
 	}
 
@@ -174,11 +174,11 @@ public class PreprocessingSettingsUI extends Composite {
 				} else {
 					preprocessingSettings.setNormalization(null);
 				}
-				//
+
 				updateFormulaDescription(comboViewer);
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -198,11 +198,11 @@ public class PreprocessingSettingsUI extends Composite {
 				} else {
 					preprocessingSettings.setReplacer(null);
 				}
-				//
+
 				updateFormulaDescription(comboViewer);
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -221,11 +221,11 @@ public class PreprocessingSettingsUI extends Composite {
 				} else {
 					preprocessingSettings.setTransformation(null);
 				}
-				//
+
 				updateFormulaDescription(comboViewer);
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -243,7 +243,7 @@ public class PreprocessingSettingsUI extends Composite {
 					Object objectScaling = comboViewerScaling.getStructuredSelection().getFirstElement();
 					preprocessingSettings.setCentering(null);
 					Combo combo = comboViewerScaling.getCombo();
-					//
+
 					if(object instanceof CenteringMean) {
 						combo.setEnabled(true);
 						setCentering(preprocessingSettings, ICentering.MEAN, objectScaling);
@@ -254,11 +254,11 @@ public class PreprocessingSettingsUI extends Composite {
 						combo.setEnabled(false);
 					}
 				}
-				//
+
 				updateFormulaDescription(comboViewer);
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -294,11 +294,11 @@ public class PreprocessingSettingsUI extends Composite {
 				} else {
 					preprocessingSettings.setCentering(null);
 				}
-				//
+
 				updateFormulaDescription(comboViewer);
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -320,12 +320,12 @@ public class PreprocessingSettingsUI extends Composite {
 				return null;
 			}
 		});
-		//
+
 		Combo combo = comboViewer.getCombo();
 		combo.select(0);
 		combo.setToolTipText(tooltip);
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return comboViewer;
 	}
 
@@ -335,7 +335,7 @@ public class PreprocessingSettingsUI extends Composite {
 		button.setText("");
 		button.setToolTipText("Show the formula.");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_INFO, IApplicationImageProvider.SIZE_16x16));
-		//
+
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -344,7 +344,7 @@ public class PreprocessingSettingsUI extends Composite {
 				updateFormulaDescription(comboViewer);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -354,7 +354,7 @@ public class PreprocessingSettingsUI extends Composite {
 		canvas.setToolTipText("Formula");
 		canvas.setData(KEY_IMAGE, null);
 		canvas.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_LIST_BACKGROUND));
-		//
+
 		GridData gridData = new GridData(GridData.FILL_BOTH);
 		gridData.horizontalSpan = 3;
 		canvas.setLayoutData(gridData);
@@ -377,7 +377,7 @@ public class PreprocessingSettingsUI extends Composite {
 				}
 			}
 		});
-		//
+
 		return canvas;
 	}
 
@@ -395,9 +395,9 @@ public class PreprocessingSettingsUI extends Composite {
 			selectComboItem(comboViewerNormalize, normalizeInput, preprocessingSettings.getNormalization());
 			selectComboItem(comboViewerReplacer, replacerInput, preprocessingSettings.getReplacer());
 			selectComboItem(comboViewerTransformation, transformationInput, preprocessingSettings.getTransformation());
-			//
+
 			ICentering centering = preprocessingSettings.getCentering();
-			//
+
 			if(centering != null) {
 				switch(centering.getCenteringType()) {
 					case 1:
@@ -427,7 +427,7 @@ public class PreprocessingSettingsUI extends Composite {
 
 		Combo combo = comboViewer.getCombo();
 		combo.select(0);
-		//
+
 		if(selectedPreprocessing != null) {
 			for(int i = 0; i < input.length; i++) {
 				Object object = input[i];
@@ -446,11 +446,11 @@ public class PreprocessingSettingsUI extends Composite {
 		String text = "--";
 		Image image = null;
 		Object object = comboViewer.getStructuredSelection().getFirstElement();
-		//
+
 		if(object instanceof IPreprocessing preprocessing) {
 			text = preprocessing.getDescription();
 		}
-		//
+
 		if(comboViewer == comboViewerNormalize) {
 			if(object instanceof Normalization1Norm) {
 				image = Activator.getDefault().getImage(Activator.ICON_NORM_1NORM);
@@ -492,7 +492,7 @@ public class PreprocessingSettingsUI extends Composite {
 				image = Activator.getDefault().getImage(Activator.ICON_NORM_SCALE_VAST);
 			}
 		}
-		//
+
 		labelFormula.setText(text);
 		canvasFormula.setData(KEY_IMAGE, image);
 		canvasFormula.redraw();

@@ -37,13 +37,13 @@ public class InformationUI extends Composite {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(1, false);
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		label = createLabel(composite);
 	}
 
@@ -52,7 +52,7 @@ public class InformationUI extends Composite {
 		Label label = new Label(parent, SWT.NONE);
 		label.setText("--");
 		label.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return label;
 	}
 }

@@ -26,7 +26,7 @@ public class ChannelMappingLabelProvider extends AbstractChemClipseLabelProvider
 			"Channel", //
 			"Label", //
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			150, //
 			100, //

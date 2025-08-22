@@ -28,11 +28,11 @@ public class TraceRangesListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = TraceRangeLabelProvider.TITLES;
 	private static final int[] BOUNDS = TraceRangeLabelProvider.BOUNDS;
-	//
+
 	private TraceRangeLabelProvider labelProvider = new TraceRangeLabelProvider();
 	private TraceRangeTableComparator tableComparator = new TraceRangeTableComparator();
 	private TraceRangeFilter listFilter = new TraceRangeFilter();
-	//
+
 	private IUpdateListener updateListener;
 
 	public TraceRangesListUI(Composite parent, int style) {

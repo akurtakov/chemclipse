@@ -56,7 +56,7 @@ public abstract class AbstractPeakModelStrict implements IPeakModel {
 		} else {
 			throw new SolverException("The increasing/decreasing equation is missing.");
 		}
-		//
+
 		return point;
 	}
 
@@ -69,7 +69,7 @@ public abstract class AbstractPeakModelStrict implements IPeakModel {
 		} else {
 			throw new SolverException("The increasing/decreasing equation is missing.");
 		}
-		//
+
 		return point;
 	}
 
@@ -84,7 +84,7 @@ public abstract class AbstractPeakModelStrict implements IPeakModel {
 			} catch(SolverException e) {
 			}
 		}
-		//
+
 		return abundance;
 	}
 
@@ -99,7 +99,7 @@ public abstract class AbstractPeakModelStrict implements IPeakModel {
 			} catch(SolverException e) {
 			}
 		}
-		//
+
 		return x;
 	}
 
@@ -127,7 +127,7 @@ public abstract class AbstractPeakModelStrict implements IPeakModel {
 				 */
 			}
 		}
-		//
+
 		return width;
 	}
 
@@ -147,7 +147,7 @@ public abstract class AbstractPeakModelStrict implements IPeakModel {
 				if(percentageHeightBaseline == null) {
 					return 0;
 				}
-				//
+
 				IPoint p1 = Equations.calculateIntersection(increasingInflectionPointEquation, percentageHeightBaseline);
 				IPoint p2 = Equations.calculateIntersection(decreasingInflectionPointEquation, percentageHeightBaseline);
 				width = (int)(p2.getX() - p1.getX() + 1);
@@ -161,7 +161,7 @@ public abstract class AbstractPeakModelStrict implements IPeakModel {
 				 */
 			}
 		}
-		//
+
 		return width;
 	}
 
@@ -172,7 +172,7 @@ public abstract class AbstractPeakModelStrict implements IPeakModel {
 		if(increasingInflectionPointEquation != null) {
 			abundance = (float)increasingInflectionPointEquation.calculateY(retentionTime);
 		}
-		//
+
 		return abundance;
 	}
 
@@ -183,7 +183,7 @@ public abstract class AbstractPeakModelStrict implements IPeakModel {
 		if(decreasingInflectionPointEquation != null) {
 			abundance = (float)decreasingInflectionPointEquation.calculateY(retentionTime);
 		}
-		//
+
 		return abundance;
 	}
 
@@ -229,7 +229,7 @@ public abstract class AbstractPeakModelStrict implements IPeakModel {
 			} catch(SolverException e) {
 			}
 		}
-		//
+
 		return tailing;
 	}
 
@@ -246,7 +246,7 @@ public abstract class AbstractPeakModelStrict implements IPeakModel {
 			increasingInflectionPointEquation = null;
 			decreasingInflectionPointEquation = null;
 		}
-		//
+
 		return areInflectionPointsAvailable();
 	}
 }

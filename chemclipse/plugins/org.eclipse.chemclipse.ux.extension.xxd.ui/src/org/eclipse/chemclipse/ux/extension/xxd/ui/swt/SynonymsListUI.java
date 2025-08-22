@@ -24,11 +24,10 @@ public class SynonymsListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = SynonymsLabelProvider.TITLES;
 	private static final int[] BOUNDS = SynonymsLabelProvider.BOUNDS;
-	//
+
 	private final SynonymsLabelProvider labelProvider = new SynonymsLabelProvider();
 	private final SynonymsComparator comparator = new SynonymsComparator();
 	private final SynonymsListFilter listFilter = new SynonymsListFilter();
-	//
 
 	public SynonymsListUI(Composite parent, int style) {
 

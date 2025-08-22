@@ -29,11 +29,11 @@ public class WellDataListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = WellDataLabelProvider.TITLES;
 	private static final int[] BOUNDS = WellDataLabelProvider.BOUNDS;
-	//
+
 	private WellDataTableComparator tableComparator = new WellDataTableComparator();
 	private WellDataListFilter listFilter = new WellDataListFilter();
 	private WellDataLabelProvider labelProvider = new WellDataLabelProvider();
-	//
+
 	private IWell well = null;
 
 	public WellDataListUI(Composite parent, int style) {
@@ -67,7 +67,7 @@ public class WellDataListUI extends ExtendedTableViewer {
 
 		int column = 0;
 		int sortOrder = IRecordTableComparator.DESCENDING;
-		//
+
 		tableComparator.setColumn(column);
 		tableComparator.setDirection(sortOrder);
 		refresh();

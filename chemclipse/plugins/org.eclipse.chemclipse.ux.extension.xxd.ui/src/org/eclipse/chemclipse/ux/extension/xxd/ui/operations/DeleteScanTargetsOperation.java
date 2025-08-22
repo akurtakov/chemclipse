@@ -83,7 +83,7 @@ public class DeleteScanTargetsOperation extends AbstractOperation {
 		if(chromatogramSelection != null) {
 			chromatogramSelection.setSelectedIdentifiedScan(null);
 			chromatogramSelection.update(true);
-			//
+
 			UpdateNotifierUI.update(display, chromatogramSelection);
 		}
 		UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_IDENTIFICATION_TARGETS_UPDATE_SELECTION, "Scan Targets were deleted.");

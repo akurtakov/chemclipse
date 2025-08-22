@@ -27,11 +27,11 @@ public class ListProcessEntryContainer extends AbstractProcessEntryContainer {
 
 	private final List<IProcessEntry> entries = new ArrayList<>();
 	private final List<IProcessEntry> view = Collections.unmodifiableList(entries);
-	//
+
 	private boolean readOnly = false;
 	private String description = "";
 	private String name = "";
-	//
+
 	/*
 	 * The default instrument is used for backward compatibility purposes.
 	 */
@@ -98,7 +98,7 @@ public class ListProcessEntryContainer extends AbstractProcessEntryContainer {
 		if(name != null && name.endsWith(".ocm")) {
 			name = name.substring(0, name.length() - 4);
 		}
-		//
+
 		this.name = name;
 	}
 
@@ -130,7 +130,7 @@ public class ListProcessEntryContainer extends AbstractProcessEntryContainer {
 				}
 			}
 		}
-		//
+
 		entry.setActiveProfile(getActiveProfile());
 		getEntries().add(entry);
 		return entry;
@@ -189,7 +189,7 @@ public class ListProcessEntryContainer extends AbstractProcessEntryContainer {
 
 		this.activeProfile = (activeProfile == null) ? DEFAULT_PROFILE : activeProfile;
 		this.profiles.add(this.activeProfile);
-		//
+
 		for(IProcessEntry processEntry : getEntries()) {
 			processEntry.setActiveProfile(this.activeProfile);
 		}

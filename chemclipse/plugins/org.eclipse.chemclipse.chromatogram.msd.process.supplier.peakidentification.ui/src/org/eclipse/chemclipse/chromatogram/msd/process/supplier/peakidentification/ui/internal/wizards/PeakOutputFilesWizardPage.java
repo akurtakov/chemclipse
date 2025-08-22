@@ -99,7 +99,7 @@ public class PeakOutputFilesWizardPage extends WizardPage {
 		 */
 		converterSupport = PeakConverterMSD.getPeakConverterSupport();
 		String[] filterNames = converterSupport.getFilterNames(IConverterSupport.EXPORT_SUPPLIER);
-		//
+
 		if(filterNames.length > 0) {
 			gridData = new GridData(GridData.FILL_HORIZONTAL);
 			gridData.horizontalSpan = 2;

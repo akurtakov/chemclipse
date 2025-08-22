@@ -27,7 +27,7 @@ public class MagicNumberMatcher extends AbstractMagicNumberMatcher implements IM
 		if(checkFileExtension(file, ".arw")) {
 			return !checkMagicCode(file, MAGIC_CODE_DAD);
 		}
-		//
+
 		return false;
 	}
 }

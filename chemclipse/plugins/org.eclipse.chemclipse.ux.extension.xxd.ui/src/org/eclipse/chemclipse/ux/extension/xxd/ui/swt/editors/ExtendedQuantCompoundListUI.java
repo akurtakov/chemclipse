@@ -59,10 +59,10 @@ import org.eclipse.swt.widgets.Text;
 public class ExtendedQuantCompoundListUI extends Composite implements IExtendedPartUI {
 
 	private static final Logger logger = Logger.getLogger(ExtendedQuantCompoundListUI.class);
-	//
+
 	private static final String DESCRIPTION = "Quantitation Database";
 	private static final String MENU_CATEGORY = "Compounds";
-	//
+
 	private Composite toolbarInfo;
 	private Label labelInfo;
 	private Composite toolbarModify;
@@ -77,10 +77,10 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 	private Composite toolbarSearch;
 	private SearchSupportUI searchSupportUI;
 	private QuantCompoundListUI quantCompoundListUI;
-	//
+
 	private QuantitationCompoundValidator validator = new QuantitationCompoundValidator();
 	private ControlDecoration controlDecoration;
-	//
+
 	private IQuantitationDatabase quantitationDatabase = null;
 	private IModificationHandler modificationHandler = null;
 	private ISaveHandler saveHandler = null;
@@ -112,19 +112,19 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		toolbarInfo = createToolbarInfo(this);
 		toolbarHeader = createToolbarHeader(this);
 		toolbarModify = createToolbarModify(this);
 		toolbarSearch = createToolbarSearch(this);
 		quantCompoundListUI = createTable(this);
-		//
+
 		PartSupport.setCompositeVisibility(toolbarInfo, true);
 		PartSupport.setCompositeVisibility(toolbarHeader, false);
 		PartSupport.setCompositeVisibility(toolbarModify, false);
 		PartSupport.setCompositeVisibility(toolbarSearch, false);
-		//
+
 		quantCompoundListUI.setEditEnabled(false);
 		clearLabelInputErrors();
 	}
@@ -136,7 +136,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(9, false));
-		//
+
 		createButtonToggleToolbarInfo(composite);
 		createButtonToggleToolbarHeader(composite);
 		createButtonToggleToolbarModify(composite);
@@ -163,7 +163,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 				button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_INFO, IApplicationImageProvider.SIZE_16x16, visible));
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -186,7 +186,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -209,13 +209,12 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
 	private void createResponseTableButton(Composite parent) {
 
-		//
 		Button button = new Button(parent, SWT.PUSH);
 		button.setToolTipText("Create Response Tables");
 		button.setText("");
@@ -256,11 +255,11 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		labelInfo = new Label(composite, SWT.NONE);
 		labelInfo.setText("");
 		labelInfo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return composite;
 	}
 
@@ -270,10 +269,10 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(2, false));
-		//
+
 		textOperator = createOperatorSection(composite);
 		textDescription = createDescriptionSection(composite);
-		//
+
 		return composite;
 	}
 
@@ -281,7 +280,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 
 		Label label = new Label(parent, SWT.NONE);
 		label.setText("Operator:");
-		//
+
 		Text text = new Text(parent, SWT.BORDER);
 		text.setText("");
 		text.setToolTipText("Operator");
@@ -293,7 +292,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 				setDirty(true);
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -301,7 +300,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 
 		Label label = new Label(parent, SWT.NONE);
 		label.setText("Description:");
-		//
+
 		Text text = new Text(parent, SWT.BORDER);
 		text.setText("");
 		text.setToolTipText("Description");
@@ -313,7 +312,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 				setDirty(true);
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -324,13 +323,13 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 		composite.setLayoutData(gridData);
 		int columns = 3;
 		composite.setLayout(new GridLayout(columns, false));
-		//
+
 		labelInputErrors = createLabel(composite, columns);
-		//
+
 		textSignal = createTextSignal(composite);
 		buttonAdd = createButtonAdd(composite);
 		buttonDelete = createButtonDelete(composite);
-		//
+
 		return composite;
 	}
 
@@ -341,7 +340,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 		gridData.horizontalSpan = horizontalSpan;
 		gridData.grabExcessHorizontalSpace = true;
 		label.setLayoutData(gridData);
-		//
+
 		return label;
 	}
 
@@ -351,7 +350,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 		text.setText("");
 		text.setToolTipText("Type in a new compound.");
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		controlDecoration = new ControlDecoration(text, SWT.LEFT | SWT.TOP);
 		text.addKeyListener(new KeyAdapter() {
 
@@ -364,7 +363,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 				}
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -382,7 +381,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 				addCompound(e.display.getActiveShell());
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -400,7 +399,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 				deleteCompounds(e.display.getActiveShell());
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -409,7 +408,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 		searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		searchSupportUI.setSearchListener((searchText, caseSensitive) -> quantCompoundListUI.setSearchText(searchText, caseSensitive));
-		//
+
 		return searchSupportUI;
 	}
 
@@ -430,7 +429,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 				updateInput();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -449,7 +448,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 				button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SEARCH, IApplicationImageProvider.SIZE_16x16, visible));
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -469,7 +468,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -570,7 +569,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 		addDeleteMenuEntry(shell, tableSettings);
 		addKeyEventProcessors(shell, tableSettings);
 		listUI.applySettings(tableSettings);
-		//
+
 		return listUI;
 	}
 

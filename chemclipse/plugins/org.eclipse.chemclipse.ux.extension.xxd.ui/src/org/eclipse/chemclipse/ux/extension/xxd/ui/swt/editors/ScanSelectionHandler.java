@@ -61,11 +61,11 @@ public class ScanSelectionHandler extends AbstractHandledEventProcessor implemen
 			int scanNumber = chromatogram.getScanNumber(retentionTime);
 			IScan scan = chromatogram.getScan(scanNumber);
 			if(scan != null) {
-				//
+
 				chromatogramSelection.setSelectedScan(scan);
 				extendedChromatogramUI.updateSelectedScan();
 				UpdateNotifierUI.update(event.display, scan);
-				//
+
 				showClickbindingHelp(baseChart, "Scan Selection", "Select scan at retention time.");
 			}
 		}

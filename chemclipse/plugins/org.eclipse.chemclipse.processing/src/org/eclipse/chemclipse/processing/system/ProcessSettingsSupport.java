@@ -35,13 +35,13 @@ import org.osgi.service.prefs.Preferences;
 public class ProcessSettingsSupport {
 
 	private static final Logger logger = Logger.getLogger(ProcessSettingsSupport.class);
-	//
+
 	public static final String DESCRIPTION = "Preferences";
 	public static final String FILE_EXTENSION = ".prefs";
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-	//
+
 	private static IEclipsePreferences preferences = null;
 
 	/**
@@ -81,7 +81,7 @@ public class ProcessSettingsSupport {
 				logger.warn(e);
 			}
 		}
-		//
+
 		return builder.toString();
 	}
 
@@ -133,7 +133,7 @@ public class ProcessSettingsSupport {
 		if(preferences == null) {
 			preferences = InstanceScope.INSTANCE.getNode(IProcessSupplier.class.getName());
 		}
-		//
+
 		return preferences;
 	}
 }

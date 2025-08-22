@@ -96,11 +96,11 @@ public class Converter {
 					availableConverters.add(supplier);
 				} else {
 					if(directoryExtension.contains(ISupplier.WILDCARD_NUMBER)) {
-						//
+
 						if(directoryExtension.startsWith(".")) {
 							directoryExtension = directoryExtension.substring(1, directoryExtension.length());
 						}
-						//
+
 						String[] directoryParts = directoryExtension.split("#");
 						if(directoryParts.length > 0) {
 							if(file.getName().matches(directoryParts[0])) {
@@ -129,7 +129,7 @@ public class Converter {
 								extensionMatcher = ISupplierFileIdentifier.getExtensionMatcher(supplierExtension);
 								regularExpressions.put(supplierExtension, extensionMatcher);
 							}
-							//
+
 							if(fileName.toLowerCase().matches(extensionMatcher)) {
 								availableConverters.add(supplier);
 							}
@@ -155,11 +155,11 @@ public class Converter {
 				}
 			}
 		}
-		//
+
 		if(availableConverters.isEmpty()) {
 			throw new NoConverterAvailableException("There is no converter available to process the file: " + file.toString());
 		}
-		//
+
 		return availableConverters;
 	}
 }

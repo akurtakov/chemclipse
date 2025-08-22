@@ -58,12 +58,12 @@ public class ProcessingWizardPage extends WizardPage {
 	private final Set<DataCategory> selectedDataTypes = new HashSet<>();
 	private final List<Button> dataCategorySelections = new ArrayList<>();
 	private final List<DataCategory> dataCategories = new ArrayList<>();
-	//
+
 	private ComboViewer comboViewerCategory;
 	private ComboViewer comboViewerProcessor;
 	private ProcessEntry processEntry;
 	private IProcessSupplierContext processContext;
-	//
+
 	private static IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
 	protected ProcessingWizardPage(Map<IProcessSupplierContext, String> contexts, DataCategory[] dataCategories) {
@@ -89,7 +89,7 @@ public class ProcessingWizardPage extends WizardPage {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		if(dataCategories.size() > 1) {
 			createLabel(composite, ExtensionMessages.selectDataCategories);
 			for(DataCategory dataCategory : dataCategories) {
@@ -109,17 +109,17 @@ public class ProcessingWizardPage extends WizardPage {
 				});
 			}
 		}
-		//
+
 		if(processSupplierContextMap.size() > 1) {
 			createLabel(composite, ExtensionMessages.context);
 			createComboViewerContext(composite);
 		}
-		//
+
 		createLabel(composite, ExtensionMessages.category);
 		comboViewerCategory = createComboViewerCategory(composite);
 		createLabel(composite, ExtensionMessages.processor);
 		comboViewerProcessor = createComboViewerProcessor(composite);
-		//
+
 		updateComboDataCategoryItems();
 		setControl(composite);
 		validate();
@@ -138,7 +138,7 @@ public class ProcessingWizardPage extends WizardPage {
 				return processSupplierContextMap.get(element);
 			}
 		});
-		//
+
 		comboViewer.setInput(processSupplierContextMap.keySet());
 		comboViewer.setSelection(new StructuredSelection(getProcessSupplierContext()));
 		comboViewer.addSelectionChangedListener(event -> {
@@ -164,7 +164,7 @@ public class ProcessingWizardPage extends WizardPage {
 				setDataTypeSelection(dataCategory, selection);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -207,7 +207,7 @@ public class ProcessingWizardPage extends WizardPage {
 				}
 			}
 		}
-		//
+
 		Set<IProcessSupplier<?>> processTypeSuppliers = new LinkedHashSet<>();
 		getProcessSupplierContext().visitSupplier(supplier -> {
 
@@ -218,7 +218,7 @@ public class ProcessingWizardPage extends WizardPage {
 				}
 			}
 		});
-		//
+
 		Map<String, ProcessCategory> categories = new TreeMap<>();
 		for(IProcessSupplier<?> supplier : processTypeSuppliers) {
 			String category = supplier.getCategory();
@@ -229,13 +229,13 @@ public class ProcessingWizardPage extends WizardPage {
 			}
 			processCategory.addSupplier(supplier, selectedDataTypes);
 		}
-		//
+
 		Object[] objects = categories.values().toArray();
 		comboViewerCategory.setInput(objects);
 		if(objects.length == 1) {
 			comboViewerCategory.setSelection(new StructuredSelection(objects[0]));
 		}
-		//
+
 		comboViewerCategory.getControl().setEnabled(objects.length > 1);
 		updateCategory();
 	}
@@ -256,7 +256,7 @@ public class ProcessingWizardPage extends WizardPage {
 				return "-";
 			}
 		});
-		//
+
 		combo.setToolTipText(ExtensionMessages.selectCategory);
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
@@ -269,7 +269,7 @@ public class ProcessingWizardPage extends WizardPage {
 				updateCategory();
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -312,7 +312,7 @@ public class ProcessingWizardPage extends WizardPage {
 				return "-";
 			}
 		});
-		//
+
 		combo.setToolTipText(ExtensionMessages.selectProcessor);
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
@@ -325,7 +325,7 @@ public class ProcessingWizardPage extends WizardPage {
 				validate();
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -360,19 +360,19 @@ public class ProcessingWizardPage extends WizardPage {
 				return;
 			}
 		}
-		//
+
 		if(comboViewerCategory.getSelection().isEmpty()) {
 			setPageComplete(false);
 			setErrorMessage(ExtensionMessages.selectCategory);
 			return;
 		}
-		//
+
 		if(comboViewerProcessor.getSelection().isEmpty()) {
 			setPageComplete(false);
 			setErrorMessage(ExtensionMessages.selectProcessor);
 			return;
 		}
-		//
+
 		setPageComplete(true);
 		setErrorMessage(null);
 		updateEntry();

@@ -42,7 +42,7 @@ public class TimeRangesValidator extends ValueParserSupport implements IValidato
 				message = "The settings class is not of type: " + TimeRanges.class.getName();
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

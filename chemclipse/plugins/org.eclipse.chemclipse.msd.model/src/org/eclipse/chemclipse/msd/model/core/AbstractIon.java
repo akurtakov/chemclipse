@@ -33,7 +33,7 @@ public abstract class AbstractIon implements IIon {
 	 */
 	private static final long serialVersionUID = -2481473608026036078L;
 	private static final int MAX_PRECISION = 6;
-	//
+
 	private double ion = 0.0d;
 	private float abundance = 0.0f;
 	private IIonTransition ionTransition;

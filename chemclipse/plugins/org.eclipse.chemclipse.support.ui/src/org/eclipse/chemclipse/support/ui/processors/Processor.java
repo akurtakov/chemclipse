@@ -24,7 +24,7 @@ public class Processor {
 	 */
 	public static final int INDEX_NONE = -1;
 	public static final int INDEX_MAX = Integer.MAX_VALUE;
-	//
+
 	private IProcessSupplier<?> processSupplier;
 	private boolean active = false;
 	private int index = INDEX_NONE; // position in list

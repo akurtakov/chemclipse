@@ -44,14 +44,14 @@ import org.eclipse.swt.widgets.TableItem;
 public class EnhancedTableViewer extends Composite {
 
 	private static final Logger logger = Logger.getLogger(EnhancedTableViewer.class);
-	//
+
 	private static final String POPUP_MENU_ID = "#PopUpMenu"; // $NON-NLS-1$
 	private static final String POPUP_MENU_POSTFIX = "PopUpMenu"; // $NON-NLS-1$
-	//
+
 	private TableViewer tableViewer;
 	private List<TableViewerColumn> tableViewerColumns;
 	private EnhancedViewerSorter sorter;
-	//
+
 	private Clipboard clipboard;
 
 	public EnhancedTableViewer(Composite parent, int style) {
@@ -121,12 +121,12 @@ public class EnhancedTableViewer extends Composite {
 	private void createControl() {
 
 		tableViewerColumns = new ArrayList<>();
-		//
+
 		if(clipboard != null && !clipboard.isDisposed()) {
 			clipboard.dispose();
 		}
 		clipboard = new Clipboard(Display.getDefault());
-		//
+
 		tableViewer = new TableViewer(this, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		final Table table = tableViewer.getTable();
 		table.setLayout(new FillLayout());
@@ -216,7 +216,7 @@ public class EnhancedTableViewer extends Composite {
 			action.setText(SupportMessages.labelCopySelectionClipboard);
 			manager.add(action);
 		});
-		//
+
 		Menu menu = menuManager.createContextMenu(tableViewer.getTable());
 		tableViewer.getTable().setMenu(menu);
 	}
@@ -227,7 +227,7 @@ public class EnhancedTableViewer extends Composite {
 		 * Clear existing columns and set the titles and bounds.
 		 */
 		clearTableViewerColumns(tableViewer);
-		//
+
 		for(int i = 0; i < titles.length; i++) {
 			/*
 			 * Column sort.
@@ -279,13 +279,13 @@ public class EnhancedTableViewer extends Composite {
 
 		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
 		tableViewerColumns.add(tableViewerColumn);
-		//
+
 		TableColumn tableColumn = tableViewerColumn.getColumn();
 		tableColumn.setText(title);
 		tableColumn.setWidth(bound);
 		tableColumn.setResizable(true);
 		tableColumn.setMoveable(true);
-		//
+
 		return tableColumn;
 	}
 
@@ -303,13 +303,13 @@ public class EnhancedTableViewer extends Composite {
 
 		Table table = tableViewer.getTable();
 		table.setRedraw(false);
-		//
+
 		tableViewerColumns.clear();
 		table.clearAll();
 		while(table.getColumnCount() > 0) {
 			table.getColumns()[0].dispose();
 		}
-		//
+
 		table.setRedraw(true);
 		tableViewer.refresh();
 	}

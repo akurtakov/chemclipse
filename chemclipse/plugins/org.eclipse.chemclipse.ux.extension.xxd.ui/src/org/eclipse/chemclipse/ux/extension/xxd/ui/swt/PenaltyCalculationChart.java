@@ -45,13 +45,13 @@ import org.eclipse.swtchart.extensions.linecharts.LineSeriesData;
 public class PenaltyCalculationChart extends ChromatogramChart {
 
 	private static final String SERIES_ID_PEAK = "Active Peak";
-	//
+
 	private final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 	private final PeakTracesOffsetListener peakTracesOffsetListener = new PeakTracesOffsetListener(this.getBaseChart());
 	private PenaltyMarkerListener unknownListener = new PenaltyMarkerListener(this.getBaseChart(), 0);
 	private PenaltyMarkerListener referenceListener = new PenaltyMarkerListener(this.getBaseChart(), 1);
 	private final PeakChartSupport peakChartSupport = new PeakChartSupport();
-	//
+
 	private IPeak peak = null;
 	private PenaltyCalculationModel penaltyCalculationModel = null;
 	private RetentionIndexMap retentionIndexMap = new RetentionIndexMap();
@@ -100,9 +100,9 @@ public class PenaltyCalculationChart extends ChromatogramChart {
 
 		deleteSeries(SERIES_ID_PEAK);
 		peakTracesOffsetListener.setOffsetRetentionTime(0);
-		//
+
 		if(peak != null) {
-			//
+
 			IPeakModel peakModel = peak.getPeakModel();
 			List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
 			ILineSeriesData lineSeriesData = peakChartSupport.getPeak(peak, false, false, Colors.RED, SERIES_ID_PEAK);
@@ -113,14 +113,14 @@ public class PenaltyCalculationChart extends ChromatogramChart {
 			peakTracesOffsetListener.setOffsetRetentionTime(offsetRetentionTime);
 			int startRetentionTime = peakModel.getStartRetentionTime() - offsetRetentionTime;
 			int stopRetentionTime = peakModel.getStopRetentionTime() + offsetRetentionTime;
-			//
+
 			ISeriesData seriesData = lineSeriesData.getSeriesData();
 			double[] xSeries = adjust(seriesData.getXSeries(), startRetentionTime, stopRetentionTime);
 			double[] ySeriesOld = seriesData.getYSeries();
 			double[] ySeries = adjust(ySeriesOld, ySeriesOld[0], ySeriesOld[ySeriesOld.length - 1]);
 			ILineSeriesData lineSeriesDataAdjusted = new LineSeriesData(new SeriesData(xSeries, ySeries, seriesData.getId()));
 			lineSeriesData.getSettings().transfer(lineSeriesDataAdjusted.getSettings());
-			//
+
 			lineSeriesDataList.add(lineSeriesDataAdjusted);
 			addSeriesData(lineSeriesDataList);
 		}
@@ -130,7 +130,7 @@ public class PenaltyCalculationChart extends ChromatogramChart {
 
 		referenceListener.reset();
 		unknownListener.reset();
-		//
+
 		if(penaltyCalculationModel != null && peak != null) {
 			PenaltyCalculation penaltyCalculation = penaltyCalculationModel.getPenaltyCalculation();
 			switch(penaltyCalculation) {
@@ -209,7 +209,7 @@ public class PenaltyCalculationChart extends ChromatogramChart {
 				int retentionTimeUnknown = peakMaximum.getRetentionTime();
 				String labelUnknown = "Unknown RI: " + (int)retentionIndexUnknown;
 				unknownListener.setData(retentionTimeUnknown, labelUnknown, "-- %");
-				//
+
 				double retentionIndexReference = penaltyCalculationModel.getReferenceValue();
 				int retentionTimeReference = retentionIndexMap.getRetentionTime((int)retentionIndexReference);
 				if(retentionTimeReference > -1) {
@@ -239,13 +239,13 @@ public class PenaltyCalculationChart extends ChromatogramChart {
 
 		int index = 0;
 		double[] seriesAdjusted = new double[series.length + 2];
-		//
+
 		seriesAdjusted[index++] = start;
 		for(double value : series) {
 			seriesAdjusted[index++] = value;
 		}
 		seriesAdjusted[index++] = stop;
-		//
+
 		return seriesAdjusted;
 	}
 
@@ -255,7 +255,7 @@ public class PenaltyCalculationChart extends ChromatogramChart {
 		if(peak instanceof IChromatogramPeak chromatogramPeak) {
 			chromatogram = chromatogramPeak.getChromatogram();
 		}
-		//
+
 		return chromatogram;
 	}
 }

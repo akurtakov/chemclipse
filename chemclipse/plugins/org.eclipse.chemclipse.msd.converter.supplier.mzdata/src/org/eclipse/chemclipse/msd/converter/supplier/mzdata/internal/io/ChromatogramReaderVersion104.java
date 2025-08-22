@@ -58,7 +58,7 @@ import jakarta.xml.bind.Unmarshaller;
 public class ChromatogramReaderVersion104 extends AbstractChromatogramReader implements IChromatogramMSDReader {
 
 	public static final String VERSION = "1.04";
-	//
+
 	private static final Logger logger = Logger.getLogger(ChromatogramReaderVersion104.class);
 
 	@Override
@@ -197,7 +197,7 @@ public class ChromatogramReaderVersion104 extends AbstractChromatogramReader imp
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		Document document = documentBuilder.parse(file);
 		NodeList nodeList = document.getElementsByTagName(ReaderVersion104.NODE_MZ_DATA);
-		//
+
 		JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 		return (MzData)unmarshaller.unmarshal(nodeList.item(0));

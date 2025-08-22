@@ -40,10 +40,10 @@ import org.eclipse.core.runtime.Platform;
 public abstract class AbstractChromatogramConverter<P extends IPeak, T extends IChromatogram> implements IChromatogramConverter<P, T> {
 
 	private static final Logger logger = Logger.getLogger(AbstractChromatogramConverter.class);
-	//
+
 	private static final String DESCRIPTION_IMPORT = "Chromatogram Import Converter";
 	private static final String DESCRIPTION_EXPORT = "Chromatogram Export Converter";
-	//
+
 	private String extensionPoint = "";
 	private final Class<T> type;
 	private final DataCategory dataCategory;
@@ -180,7 +180,7 @@ public abstract class AbstractChromatogramConverter<P extends IPeak, T extends I
 		IProcessingInfo processingInfo = new ProcessingInfo();
 		List<IProcessingMessage> processingMessagesError = new ArrayList<>();
 		IChromatogramConverterSupport converterSupport = getChromatogramConverterSupport();
-		//
+
 		try {
 			List<String> availableConverterIds = converterSupport.getAvailableConverterIds(file);
 			exitloop:
@@ -275,7 +275,7 @@ public abstract class AbstractChromatogramConverter<P extends IPeak, T extends I
 				processingInfo.addMessage(processingMessage);
 			}
 		}
-		//
+
 		return processingInfo;
 	}
 

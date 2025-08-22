@@ -22,7 +22,7 @@ import org.eclipse.swt.widgets.Display;
 public class CopyToClipboardEvent implements IKeyEventProcessor {
 
 	public static final int KEY_CODE_C = 99;
-	//
+
 	private CopyToClipboardProvider copyToClipboardProvider = new CopyToClipboardProvider();
 
 	@Override

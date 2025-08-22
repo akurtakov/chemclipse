@@ -36,11 +36,11 @@ public class RetentionIndexAssignerAnnotationService extends RetentionIndexAssig
 		gridData.heightHint = 250;
 		gridData.widthHint = 500;
 		editor.setLayoutData(gridData);
-		//
+
 		if(currentSelection instanceof String text) {
 			editor.load(text);
 		}
-		//
+
 		return editor;
 	}
 

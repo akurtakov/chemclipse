@@ -73,7 +73,7 @@ public class InternalStandard implements IInternalStandard {
 		if(compensationFactor > 0.0d) {
 			return 1.0d / compensationFactor;
 		}
-		//
+
 		return 0.0d;
 	}
 

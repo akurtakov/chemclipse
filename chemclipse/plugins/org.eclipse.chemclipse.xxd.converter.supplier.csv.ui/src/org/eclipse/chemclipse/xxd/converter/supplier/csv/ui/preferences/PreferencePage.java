@@ -45,7 +45,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		addField(new LabelFieldEditor("Import", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_IMPORT_DELIMITER, "Delimiter", Delimiter.getOptions(), getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceSupplier.P_IMPORT_ZERO_MARKER, "Zero Marker", getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Export", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_EXPORT_USE_TIC, "TIC (only)", getFieldEditorParent()));

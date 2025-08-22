@@ -45,7 +45,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 public class ChromatogramImportRunnable implements IRunnableWithProgress {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramImportRunnable.class);
-	//
+
 	private List<File> files = new ArrayList<>();
 	private DataType dataType;
 	private List<IChromatogramSelection> chromatogramSelections = new ArrayList<>();

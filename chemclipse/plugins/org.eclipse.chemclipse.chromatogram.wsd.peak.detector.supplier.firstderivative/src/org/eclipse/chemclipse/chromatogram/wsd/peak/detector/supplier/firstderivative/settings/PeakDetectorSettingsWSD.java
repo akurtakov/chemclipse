@@ -47,38 +47,38 @@ public class PeakDetectorSettingsWSD extends AbstractPeakDetectorWSDSettings {
 	@JsonProperty(value = "Threshold", defaultValue = "MEDIUM")
 	@LabelProperty(value = "%Threshold")
 	private Threshold threshold = Threshold.MEDIUM;
-	//
+
 	@JsonProperty(value = "Detector Type", defaultValue = "VV")
 	@LabelProperty(value = "Detector Type", tooltip = "Select the option to set the peak baseline.")
 	private DetectorType detectorType = DetectorType.VV;
-	//
+
 	@JsonProperty(value = "Min S/N Ratio", defaultValue = "0")
 	@LabelProperty(value = "%MinSignalToNoiseRatio")
 	@FloatSettingsProperty(minValue = 0f, maxValue = Float.MAX_VALUE)
 	private float minimumSignalToNoiseRatio;
-	//
+
 	@JsonProperty(value = "Window Size", defaultValue = "5")
 	@LabelProperty(value = "%WindowSize", tooltip = "%WindowSizeDescription")
 	@JsonDeserialize(using = WindowSizeDeserializer.class)
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_WINDOW_SIZE, maxValue = PreferenceSupplier.MAX_WINDOW_SIZE, validation = Validation.ODD_NUMBER_INCLUDING_ZERO)
 	private int windowSize = 5;
-	//
+
 	@JsonProperty(value = "Use Noise-Segments", defaultValue = "false")
 	@LabelProperty(value = "%UseNoiseSegments", tooltip = "%UseNoiseSegmentsDescription")
 	private boolean useNoiseSegments = false;
-	//
+
 	@JsonProperty(value = "Filter Mode", defaultValue = "EXCLUDE")
 	@LabelProperty(value = "%FilterMode")
 	private FilterMode filterMode = FilterMode.EXCLUDE;
-	//
+
 	@JsonProperty(value = "Wavelengths to filter", defaultValue = "")
 	@LabelProperty(value = "%FilterWavelengths")
 	private String filterWavelengths;
-	//
+
 	@JsonProperty(value = "Use Individual Wavelengths", defaultValue = "false")
 	@LabelProperty(value = "%UseIndividualWavelengths", tooltip = "%UseIndividualWavelengthsDescription")
 	private boolean useIndividualWavelengths = false;
-	//
+
 	@JsonProperty(value = "Optimize Baseline (VV)", defaultValue = "false")
 	@LabelProperty(value = "%OptimizeBaselineVV")
 	private boolean optimizeBaseline = false;
@@ -155,7 +155,7 @@ public class PeakDetectorSettingsWSD extends AbstractPeakDetectorWSDSettings {
 		if(StringUtils.isBlank(input)) {
 			return Collections.emptyList();
 		}
-		//
+
 		List<Number> waveLengths = new ArrayList<>();
 		String[] split = input.trim().split("[\\s.,;]+");
 		for(String value : split) {
@@ -165,7 +165,7 @@ public class PeakDetectorSettingsWSD extends AbstractPeakDetectorWSDSettings {
 				// invalid or empty string
 			}
 		}
-		//
+
 		return waveLengths;
 	}
 

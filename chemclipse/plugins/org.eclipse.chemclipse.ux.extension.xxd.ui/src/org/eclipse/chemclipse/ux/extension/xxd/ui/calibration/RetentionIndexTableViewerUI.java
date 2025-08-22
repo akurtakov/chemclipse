@@ -31,7 +31,7 @@ public class RetentionIndexTableViewerUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = RetentionIndexLabelProvider.TITLES;
 	private static final int[] BOUNDS = RetentionIndexLabelProvider.BOUNDS;
-	//
+
 	private LabelProvider labelProvider = new RetentionIndexLabelProvider();
 	private IContentProvider contentProvider = new ListContentProvider();
 	private RetentionIndexListFilter retentionIndexListFilter = new RetentionIndexListFilter();

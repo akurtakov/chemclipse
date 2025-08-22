@@ -105,14 +105,14 @@ public class OpenSnippetHandler {
 		MApplication application = eclipseContext.get(MApplication.class);
 		EModelService modelService = eclipseContext.get(EModelService.class);
 		EPartService partService = eclipseContext.get(EPartService.class);
-		//
+
 		logStatus(application, modelService, partService);
-		//
+
 		withEclipseContext(eclipseContext, childContextInitializer)//
 				.andThen(addToEditorStack(modelService, stackId, application))//
 				.andThen(openPart(partService))//
 				.accept(cloneSnippet(snippetId, modelService, application));
-		//
+
 	}
 
 	public static void openCompositeSnippet(String snippetId, IEclipseContext eclipseContext, BiFunction<IEclipseContext, MPart, Runnable> childContextInitializer) {
@@ -125,9 +125,9 @@ public class OpenSnippetHandler {
 		MApplication application = eclipseContext.get(MApplication.class);
 		EModelService modelService = eclipseContext.get(EModelService.class);
 		EPartService partService = eclipseContext.get(EPartService.class);
-		//
+
 		logStatus(application, modelService, partService);
-		//
+
 		withEclipseContext(eclipseContext, childContextInitializer)//
 				.andThen(addToEditorStack(modelService, stackId, application))//
 				.andThen(disableMove())//
@@ -180,7 +180,7 @@ public class OpenSnippetHandler {
 		if(parent == null) {
 			throw new IllegalArgumentException("IEclipseContext can't be null.");
 		}
-		//
+
 		return element -> {
 
 			IEclipseContext context = parent.createChild(element.getElementId() + ".composite");
@@ -213,7 +213,7 @@ public class OpenSnippetHandler {
 								}
 							}
 						}
-						//
+
 						if(runnable != null) {
 							runnable.run();
 						}
@@ -326,7 +326,7 @@ public class OpenSnippetHandler {
 		logger.info("Application: " + application);
 		logger.info("Model Service: " + modelService);
 		logger.info("Part Service: " + partService);
-		//
+
 		if(partService instanceof PartServiceImpl) {
 			logger.info("The correct part service is used.");
 		} else if(partService instanceof ApplicationPartServiceImpl) {

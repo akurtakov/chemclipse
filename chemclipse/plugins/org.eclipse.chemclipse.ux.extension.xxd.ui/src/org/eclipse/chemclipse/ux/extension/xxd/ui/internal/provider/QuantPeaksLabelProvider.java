@@ -26,15 +26,15 @@ public class QuantPeaksLabelProvider extends AbstractChemClipseLabelProvider {
 
 	public static final String CONCENTRATION = ExtensionMessages.concentration;
 	public static final String CONCENTRATION_UNIT = ExtensionMessages.unit;
-	//
+
 	private PeakDataSupport peakDataSupport = new PeakDataSupport();
-	//
+
 	public static final String[] TITLES = { //
 			CONCENTRATION, //
 			CONCENTRATION_UNIT, //
 			"Type" //
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			100, //
 			100, //

@@ -42,7 +42,7 @@ public abstract class AbstractPartHandler implements IPartHandler {
 	private EModelService modelService;
 	@Inject
 	private MApplication application;
-	//
+
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
 	public EPartService getPartService() {
@@ -98,12 +98,12 @@ public abstract class AbstractPartHandler implements IPartHandler {
 		String partId = getPartStackReference().getPartId();
 		EModelService modelService = getModelService();
 		MApplication application = getApplication();
-		//
+
 		isVisible = PartSupport.isPartVisible(partId, modelService, application);
 		if(isVisible) {
 			isVisible = PartSupport.isPartToBeRendered(partId, modelService, application);
 		}
-		//
+
 		return isVisible;
 	}
 
@@ -114,7 +114,7 @@ public abstract class AbstractPartHandler implements IPartHandler {
 		EPartService partService = getPartService();
 		EModelService modelService = getModelService();
 		MApplication application = getApplication();
-		//
+
 		if(isPartStackAssigned()) {
 			/*
 			 * Part Stack

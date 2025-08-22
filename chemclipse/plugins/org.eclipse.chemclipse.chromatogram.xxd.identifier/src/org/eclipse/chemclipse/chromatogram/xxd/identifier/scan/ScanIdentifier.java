@@ -21,7 +21,7 @@ import org.eclipse.core.runtime.Platform;
 public class ScanIdentifier {
 
 	private static final Logger logger = Logger.getLogger(ScanIdentifier.class);
-	//
+
 	private static final String EXTENSION_POINT = "org.eclipse.chemclipse.chromatogram.xxd.identifier.scanIdentifier";
 
 	private ScanIdentifier() {

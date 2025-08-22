@@ -45,7 +45,7 @@ public class PeakIdentifierUnknown implements IPeakIdentifierMSD, IPeakIdentifie
 		if(identifierSettings == null) {
 			identifierSettings = PreferenceSupplier.getPeakUnknownSettingsMSD();
 		}
-		//
+
 		IUnknownSettings unknownSettings = identifierSettings instanceof IUnknownSettings settings ? settings : null;
 		return runIdentification(peaks, unknownSettings);
 	}
@@ -56,7 +56,7 @@ public class PeakIdentifierUnknown implements IPeakIdentifierMSD, IPeakIdentifie
 		if(identifierSettings == null) {
 			identifierSettings = PreferenceSupplier.getPeakUnknownSettingsCSD();
 		}
-		//
+
 		IUnknownSettings unknownSettings = identifierSettings instanceof IUnknownSettings settings ? settings : null;
 		return runIdentification(peaks, unknownSettings);
 	}
@@ -67,7 +67,7 @@ public class PeakIdentifierUnknown implements IPeakIdentifierMSD, IPeakIdentifie
 		if(identifierSettings == null) {
 			identifierSettings = PreferenceSupplier.getPeakUnknownSettingsWSD();
 		}
-		//
+
 		IUnknownSettings unknownSettings = identifierSettings instanceof IUnknownSettings settings ? settings : null;
 		return runIdentification(peaks, unknownSettings);
 	}
@@ -75,7 +75,7 @@ public class PeakIdentifierUnknown implements IPeakIdentifierMSD, IPeakIdentifie
 	private IProcessingInfo<IPeakIdentificationResults> runIdentification(List<? extends IPeak> peaks, IUnknownSettings unknownSettings) {
 
 		IProcessingInfo<IPeakIdentificationResults> processingInfo = new ProcessingInfo<>();
-		//
+
 		if(unknownSettings != null) {
 			TargetUnknownSettings targetUnknownSettings = UnknownSettingsSupport.getTargetUnknownSettings(unknownSettings);
 			float limitMatchFactor = unknownSettings.getLimitMatchFactor();
@@ -88,7 +88,7 @@ public class PeakIdentifierUnknown implements IPeakIdentifierMSD, IPeakIdentifie
 		} else {
 			processingInfo.addErrorMessage(UnknownIdentifier.IDENTIFIER, "The settings are not of valid.");
 		}
-		//
+
 		return processingInfo;
 	}
 

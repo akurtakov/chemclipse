@@ -53,7 +53,7 @@ public interface IIdentificationTarget extends ITarget {
 		if(peak != null) {
 			return getIdentificationTarget(peak.getPeakModel().getPeakMaximum());
 		}
-		//
+
 		return null;
 	}
 
@@ -80,7 +80,7 @@ public interface IIdentificationTarget extends ITarget {
 		if(scan != null) {
 			return getIdentificationTarget(scan.getTargets(), scan.getRetentionIndex());
 		}
-		//
+
 		return null;
 	}
 
@@ -99,7 +99,7 @@ public interface IIdentificationTarget extends ITarget {
 			IdentificationTargetComparator identificationTargetComparator = new IdentificationTargetComparator(SortOrder.DESC, PreferenceSupplier.isUseRetentionIndexQC() ? retentionIndex : 0.0f);
 			Collections.sort(identificationTargets, identificationTargetComparator);
 		}
-		//
+
 		return identificationTargets;
 	}
 
@@ -116,7 +116,7 @@ public interface IIdentificationTarget extends ITarget {
 		if(identificationTarget != null) {
 			return identificationTarget.getLibraryInformation();
 		}
-		//
+
 		return null;
 	}
 
@@ -133,7 +133,7 @@ public interface IIdentificationTarget extends ITarget {
 			IdentificationTargetComparator comparator = new IdentificationTargetComparator(SortOrder.DESC, PreferenceSupplier.isUseRetentionIndexQC() ? retentionIndex : 0.0f);
 			return IIdentificationTarget.getIdentificationTarget(targets, comparator);
 		}
-		//
+
 		return null;
 	}
 
@@ -158,7 +158,7 @@ public interface IIdentificationTarget extends ITarget {
 				identificationTarget = targetsList.get(0);
 			}
 		}
-		//
+
 		return identificationTarget;
 	}
 
@@ -175,11 +175,11 @@ public interface IIdentificationTarget extends ITarget {
 		libraryInformation.setComments("");
 		libraryInformation.setContributor("");
 		libraryInformation.setReferenceIdentifier("");
-		//
+
 		IComparisonResult comparisonResult = new ComparisonResult(matchFactor, matchFactor, matchFactor, matchFactor);
 		IIdentificationTarget identificationTarget = new IdentificationTarget(libraryInformation, comparisonResult);
 		identificationTarget.setIdentifier(identifier); // $NON-NLS-N$
-		//
+
 		return identificationTarget;
 	}
 

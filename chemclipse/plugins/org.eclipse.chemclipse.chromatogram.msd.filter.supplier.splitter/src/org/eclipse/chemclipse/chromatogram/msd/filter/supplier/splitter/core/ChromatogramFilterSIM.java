@@ -40,14 +40,14 @@ public class ChromatogramFilterSIM extends AbstractChromatogramFilterMSD {
 		IProcessingInfo<IChromatogramFilterResult> validation = validate(chromatogramSelection, chromatogramFilterSettings);
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = new ProcessingInfo<>();
 		processingInfo.addMessages(validation);
-		//
+
 		FilterSettingsSIM filterSettings;
 		if(chromatogramFilterSettings instanceof FilterSettingsSIM filterSettingsSIM) {
 			filterSettings = filterSettingsSIM;
 		} else {
 			filterSettings = PreferenceSupplier.getFilterSettingsSIM();
 		}
-		//
+
 		if(!processingInfo.hasErrorMessages()) {
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 			if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
@@ -57,7 +57,7 @@ public class ChromatogramFilterSIM extends AbstractChromatogramFilterMSD {
 				List<IScanMSD> fullScans = new ArrayList<>();
 				List<IScanMSD> simScans = new ArrayList<>();
 				int limitIons = filterSettings.getLimitIons();
-				//
+
 				for(IScan scan : chromatogramMSD.getScans()) {
 					if(scan instanceof IScanMSD scanMSD) {
 						if(scanMSD.getNumberOfIons() <= limitIons) {
@@ -73,11 +73,11 @@ public class ChromatogramFilterSIM extends AbstractChromatogramFilterMSD {
 				addReferenceChromatogram(chromatogramMSD, fullScans);
 				addReferenceChromatogram(chromatogramMSD, simScans);
 			}
-			//
+
 			chromatogramSelection.getChromatogram().setDirty(true);
 			processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "The chromatogram was splitted into SCAN, SIM reference chromatograms."));
 		}
-		//
+
 		return processingInfo;
 	}
 

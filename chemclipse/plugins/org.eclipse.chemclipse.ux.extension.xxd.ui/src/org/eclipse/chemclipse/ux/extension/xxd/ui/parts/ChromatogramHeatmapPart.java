@@ -57,7 +57,7 @@ public class ChromatogramHeatmapPart extends AbstractPart<ChromatogramHeatmapUI>
 				return false;
 			}
 		}
-		//
+
 		return false;
 	}
 

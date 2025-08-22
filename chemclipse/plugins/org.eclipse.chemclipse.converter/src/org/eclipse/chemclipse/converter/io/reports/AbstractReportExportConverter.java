@@ -36,15 +36,15 @@ public abstract class AbstractReportExportConverter {
 			if(!folder.endsWith(File.separator)) {
 				folder += File.separator;
 			}
-			//
+
 			directory += folder;
-			//
+
 			File exportFolder = new File(directory);
 			if(!exportFolder.exists()) {
 				exportFolder.mkdir();
 			}
 		}
-		//
+
 		return new File(directory + fileName + extension);
 	}
 }

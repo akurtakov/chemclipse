@@ -28,7 +28,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 public class MethodImportRunnable implements IRunnableWithProgress {
 
 	private static final Logger logger = Logger.getLogger(MethodImportRunnable.class);
-	//
+
 	private File file;
 	private IProcessMethod processMethod = null;
 

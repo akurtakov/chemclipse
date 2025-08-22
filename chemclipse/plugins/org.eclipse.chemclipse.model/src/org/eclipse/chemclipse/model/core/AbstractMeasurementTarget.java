@@ -25,7 +25,7 @@ import org.eclipse.chemclipse.model.targets.LibraryField;
 public class AbstractMeasurementTarget extends AbstractMeasurement implements ITargetDisplaySettings {
 
 	private static final long serialVersionUID = 2812423308522878329L;
-	//
+
 	private boolean showPeakLabels = true;
 	private boolean showScanLabels = true;
 	private DisplayOption displayOption = DisplayOption.STANDARD;
@@ -114,7 +114,7 @@ public class AbstractMeasurementTarget extends AbstractMeasurement implements IT
 		if(targetReference == null) {
 			return false;
 		}
-		//
+
 		return visibilityMap.getOrDefault(targetReference.getID(), false);
 	}
 
@@ -130,7 +130,7 @@ public class AbstractMeasurementTarget extends AbstractMeasurement implements IT
 		if(targetReference == null) {
 			return false;
 		}
-		//
+
 		return visibilityMap.containsKey(targetReference.getID());
 	}
 

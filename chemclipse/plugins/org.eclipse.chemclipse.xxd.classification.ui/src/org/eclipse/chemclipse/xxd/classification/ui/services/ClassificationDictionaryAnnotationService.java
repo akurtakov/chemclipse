@@ -37,11 +37,11 @@ public class ClassificationDictionaryAnnotationService extends ClassificationDic
 		gridData.heightHint = 200;
 		gridData.widthHint = 500;
 		classificationDictionaryEditor.setLayoutData(gridData);
-		//
+
 		if(currentSelection instanceof String text) {
 			classificationDictionaryEditor.load(text);
 		}
-		//
+
 		return classificationDictionaryEditor;
 	}
 

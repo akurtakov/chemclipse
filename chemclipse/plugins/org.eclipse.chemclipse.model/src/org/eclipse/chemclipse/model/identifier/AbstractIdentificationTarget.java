@@ -18,7 +18,7 @@ import org.eclipse.chemclipse.model.targets.AbstractTarget;
 public abstract class AbstractIdentificationTarget extends AbstractTarget implements IIdentificationTarget {
 
 	private static final long serialVersionUID = 8447935680974437678L;
-	//
+
 	private ILibraryInformation libraryInformation;
 	private IComparisonResult comparisonResult;
 	private String identifier = "";

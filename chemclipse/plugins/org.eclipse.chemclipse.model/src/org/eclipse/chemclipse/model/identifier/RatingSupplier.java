@@ -15,10 +15,10 @@ package org.eclipse.chemclipse.model.identifier;
 public class RatingSupplier extends AbstractComparisonRatingSupplier {
 
 	private static final long serialVersionUID = 80242122334050614L;
-	//
+
 	private static final String ADVISE_INCOMPLETE = "Incomplete Target (Bad Conditions)";
 	private static final String ADVISE_IMPURITIES = "Convoluted Target (Impurities)";
-	//
+
 	private static final float MIN_LIMIT_MATCH_FACTOR = 20.0f;
 	private static final float MAX_LIMIT_MATCH_FACTOR = 80.0f;
 	private static final float MIN_LIMIT_REVERSE_MATCH_FACTOR = 20.0f;
@@ -39,7 +39,7 @@ public class RatingSupplier extends AbstractComparisonRatingSupplier {
 		IComparisonResult comparisonResult = getComparisonResult();
 		float matchFactor = comparisonResult.getMatchFactor();
 		float reverseMatchFactor = comparisonResult.getReverseMatchFactor();
-		//
+
 		if(matchFactor > 0 && reverseMatchFactor > 0) {
 			if(matchFactor >= MAX_LIMIT_MATCH_FACTOR && reverseMatchFactor <= MIN_LIMIT_REVERSE_MATCH_FACTOR) {
 				advise = ADVISE_INCOMPLETE;
@@ -47,7 +47,7 @@ public class RatingSupplier extends AbstractComparisonRatingSupplier {
 				advise = ADVISE_IMPURITIES;
 			}
 		}
-		//
+
 		return advise;
 	}
 
@@ -84,7 +84,7 @@ public class RatingSupplier extends AbstractComparisonRatingSupplier {
 		if(reverseMatchFactorDirect > 0.0f) {
 			rating = (rating + reverseMatchFactorDirect) / 2.0f;
 		}
-		//
+
 		return rating;
 	}
 }

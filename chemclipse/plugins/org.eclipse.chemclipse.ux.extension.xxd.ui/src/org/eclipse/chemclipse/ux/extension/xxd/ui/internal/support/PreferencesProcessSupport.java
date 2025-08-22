@@ -32,7 +32,7 @@ public class PreferencesProcessSupport {
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 	private IProcessSupplierContext processSupplierContext = new ProcessTypeSupport();
 	private Set<IProcessSupplier<?>> processSuppliers = new HashSet<>();
-	//
+
 	private Predicate<IProcessSupplier<?>> predicateProcessSupplier;
 	private DataCategory dataCategory = DataCategory.AUTO_DETECT;
 
@@ -47,7 +47,7 @@ public class PreferencesProcessSupport {
 				return processSupplier.getSupportedDataTypes().contains(getDataCategory());
 			}
 		};
-		//
+
 		updateProcessSuppliers();
 	}
 

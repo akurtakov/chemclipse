@@ -33,7 +33,7 @@ import org.eclipse.chemclipse.support.util.InstrumentListUtil;
 public class Instruments {
 
 	private static final Logger logger = Logger.getLogger(Instruments.class);
-	//
+
 	private InstrumentListUtil instrumentListUtil = new InstrumentListUtil();
 	private final Map<String, Instrument> instrumentMap = new HashMap<>();
 
@@ -107,7 +107,7 @@ public class Instruments {
 	public Instrument extractInstrument(String item) {
 
 		Instrument instrument = null;
-		//
+
 		if(!"".equals(item)) {
 			String[] values = item.split("\\" + InstrumentListUtil.SEPARATOR_ENTRY);
 			String identifier = ((values.length > 0) ? values[0].trim() : "");
@@ -115,7 +115,7 @@ public class Instruments {
 			String description = ((values.length > 2) ? values[2].trim() : "");
 			instrument = new Instrument(identifier, name, description);
 		}
-		//
+
 		return instrument;
 	}
 
@@ -168,7 +168,7 @@ public class Instruments {
 			 */
 			List<Instrument> instruments = new ArrayList<>(values());
 			Collections.sort(instruments, (r1, r2) -> r1.getIdentifier().compareTo(r2.getIdentifier()));
-			//
+
 			Iterator<Instrument> iterator = instruments.iterator();
 			while(iterator.hasNext()) {
 				StringBuilder builder = new StringBuilder();

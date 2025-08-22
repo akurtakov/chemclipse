@@ -69,27 +69,27 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(3, false));
-		//
+
 		createLabel(composite, "Title:");
 		createTextTitle(composite, 2);
-		//
+
 		createLabel(composite, "Number of PCs:");
 		createSpinnerPrincipleComponents(composite);
-		//
+
 		createLabel(composite, "Algorithm:");
 		createComboViewerAlgorithm(composite);
-		//
+
 		createLabel(composite, "Main Data File:");
 		dataTextFile = createTextMainFile(composite);
 		createButtonSelectDataFile(composite);
-		//
+
 		createLabel(composite, "Filter Data File:");
 		filterTextFile = createTextFilterFile(composite);
 		createButtonSelectFilterFile(composite);
-		//
+
 		createLabel(composite, "Number of Samples to Filter:");
 		createSpinnerFilter(composite);
-		//
+
 		setControl(composite);
 	}
 
@@ -143,7 +143,7 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 				analysisSettings.setNumberOfPrincipalComponents(spinner.getSelection());
 			}
 		});
-		//
+
 		return spinner;
 	}
 
@@ -166,7 +166,7 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 				analysisSettings.setNumberOfSamplesToFilter(spinner.getSelection());
 			}
 		});
-		//
+
 		return spinner;
 	}
 
@@ -186,7 +186,7 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 				return null;
 			}
 		});
-		//
+
 		Combo combo = comboViewer.getCombo();
 		combo.setToolTipText("PCA Algorithm");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
@@ -203,9 +203,9 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 				}
 			}
 		});
-		//
+
 		combo.select(getSelectedAlgorithmIndex());
-		//
+
 		return comboViewer;
 	}
 
@@ -215,13 +215,13 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 		text.setText("");
 		text.setToolTipText("Path to long format data  file.");
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		if(file != null) {
 			text.setText(file.getAbsolutePath());
 		} else {
 			text.setText("");
 		}
-		//
+
 		return text;
 	}
 
@@ -231,13 +231,13 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 		text.setText("");
 		text.setToolTipText("Path to long format filter file.");
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		if(file != null) {
 			text.setText(file.getAbsolutePath());
 		} else {
 			text.setText("");
 		}
-		//
+
 		return text;
 	}
 

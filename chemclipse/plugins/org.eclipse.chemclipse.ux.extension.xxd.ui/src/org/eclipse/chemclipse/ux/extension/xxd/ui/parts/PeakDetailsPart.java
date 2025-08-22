@@ -54,7 +54,7 @@ public class PeakDetailsPart extends AbstractPart<ExtendedPeakDetailsUI> {
 			getControl().update(peak);
 			return true;
 		}
-		//
+
 		return false;
 	}
 

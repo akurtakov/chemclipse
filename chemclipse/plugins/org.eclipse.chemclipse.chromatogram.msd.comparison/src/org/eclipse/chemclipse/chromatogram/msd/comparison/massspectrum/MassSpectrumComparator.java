@@ -66,7 +66,7 @@ public class MassSpectrumComparator {
 	private static final String SUPPORTS_NOMINAL_MS = "nominalMS";
 	private static final String SUPPORTS_TANDEM_MS = "tandemMS";
 	private static final String SUPPORTS_HIGH_RESOLUTION_MS = "highResolutionMS";
-	//
+
 	private static ComparatorCache comparatorCache;
 	private static IProcessingInfo<IComparisonResult> processingInfoComparisonSkip;
 	/*
@@ -125,7 +125,7 @@ public class MassSpectrumComparator {
 		} else {
 			processingInfo = processingInfoComparisonSkip;
 		}
-		//
+
 		return processingInfo;
 	}
 
@@ -181,7 +181,7 @@ public class MassSpectrumComparator {
 					converterId = "";
 					name = "n.a.";
 				}
-				//
+
 				comparatorArray[i][0] = name;
 				comparatorArray[i][1] = converterId;
 			}
@@ -194,7 +194,7 @@ public class MassSpectrumComparator {
 		if(comparatorArray == null) {
 			comparatorArray = new String[0][0];
 		}
-		//
+
 		return comparatorArray;
 	}
 
@@ -239,7 +239,7 @@ public class MassSpectrumComparator {
 		massSpectrumComparisonSupplier.setSupportsNominalMS(Boolean.valueOf(element.getAttribute(SUPPORTS_NOMINAL_MS)));
 		massSpectrumComparisonSupplier.setSupportsTandemMS(Boolean.valueOf(element.getAttribute(SUPPORTS_TANDEM_MS)));
 		massSpectrumComparisonSupplier.setSupportsHighResolutionMS(Boolean.valueOf(element.getAttribute(SUPPORTS_HIGH_RESOLUTION_MS)));
-		//
+
 		return massSpectrumComparisonSupplier;
 	}
 

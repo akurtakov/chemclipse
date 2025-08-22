@@ -30,13 +30,13 @@ public class SeparationColumnMapping extends HashMap<String, SeparationColumnTyp
 
 	private static final Logger logger = Logger.getLogger(SeparationColumnMapping.class);
 	private static final long serialVersionUID = 5357306927108529230L;
-	//
+
 	public static final String DESCRIPTION = "Separation Column Mapping";
 	public static final String FILE_EXTENSION = ".scm";
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-	//
+
 	public static final String SEPARATOR_TOKEN = ";";
 	public static final String SEPARATOR_ENTRY = "|";
 	public static final String LINE_DELIMITER = "\n";
@@ -133,7 +133,7 @@ public class SeparationColumnMapping extends HashMap<String, SeparationColumnTyp
 
 		String lineDelimiterSpecific = OperatingSystemUtils.getLineDelimiter();
 		String lineDelimiterGeneric = LINE_DELIMITER;
-		//
+
 		String[] decodedArray;
 		if(stringList.contains(SEPARATOR_TOKEN)) {
 			decodedArray = stringList.split(SEPARATOR_TOKEN);
@@ -145,7 +145,7 @@ public class SeparationColumnMapping extends HashMap<String, SeparationColumnTyp
 			decodedArray = new String[1];
 			decodedArray[0] = stringList;
 		}
-		//
+
 		return decodedArray;
 	}
 }

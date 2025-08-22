@@ -32,19 +32,19 @@ public class RetentionIndexLabelProvider extends LabelProvider implements ITable
 	public static final String RETENTION_TIME = ExtensionMessages.retentionTimeMinutes;
 	public static final String RETENTION_INDEX = ExtensionMessages.retentionIndex;
 	public static final String NAME = "Name";
-	//
+
 	public static final String[] TITLES = { //
 			RETENTION_TIME, //
 			RETENTION_INDEX, //
 			NAME //
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			200, //
 			150, //
 			200 //
 	};
-	//
+
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.0000");
 
 	@Override
@@ -68,7 +68,7 @@ public class RetentionIndexLabelProvider extends LabelProvider implements ITable
 		if(element instanceof Map.Entry<?, ?> entry) {
 			element = entry.getValue();
 		}
-		//
+
 		if(element instanceof IRetentionIndexEntry retentionIndexEntry) {
 			switch(columnIndex) {
 				case 0:

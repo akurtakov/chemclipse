@@ -213,7 +213,7 @@ public class BaselineModel implements IBaselineModel {
 
 		SortedMap<Integer, IBaselineSegment> sortedMap = baselineSegments.subMap(startRetentionTime, stopRetentionTime);
 		Set<Integer> keyToRemove = new HashSet<>();
-		//
+
 		for(Entry<Integer, IBaselineSegment> entry : sortedMap.entrySet()) {
 			int stopRetentionTimeRemoveSegment = entry.getValue().getStopRetentionTime();
 			if(stopRetentionTimeRemoveSegment <= stopRetentionTime) {

@@ -30,7 +30,7 @@ public class VirtualChannelFieldEditor extends FieldEditor {
 	public static final String REMOVE_ALL_TOOLTIP = "Remove all virtual channels";
 	public static final String IMPORT = "Import";
 	public static final String EXPORT = "Export";
-	//
+
 	public static final String IMPORT_TITLE = "Import virtual channels";
 	public static final String EXPORT_TITLE = "Export virtual channels";
 	public static final String DIALOG_TITLE = "virtual channels";
@@ -40,7 +40,7 @@ public class VirtualChannelFieldEditor extends FieldEditor {
 	public static final String MESSAGE_REMOVE_ALL = "Do you want to delete all virtual channels?";
 	public static final String MESSAGE_EXPORT_SUCCESSFUL = "virtual channel have been exported successfully.";
 	public static final String MESSAGE_EXPORT_FAILED = "Failed to export the virtual channels.";
-	//
+
 	private VirtualChannelTable editor;
 
 	public VirtualChannelFieldEditor(String name, String labelText, Composite parent) {

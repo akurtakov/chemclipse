@@ -38,14 +38,14 @@ public class PeakQuantitationsExtractor {
 	public PeakQuantitations extract(List<? extends IPeak> peaks, IChromatogramSelection chromatogramSelection) {
 
 		PeakQuantitations peakQuantitations = new PeakQuantitations();
-		//
+
 		if(peaks != null) {
 			/*
 			 * Sort peak list by retention time.
 			 */
 			peaks = new ArrayList<>(peaks);
 			Collections.sort(peaks, peakRetentionTimeComparator);
-			//
+
 			Set<String> quantitationColumns = new HashSet<String>();
 			for(IPeak peak : peaks) {
 				for(IQuantitationEntry quantitationEntry : peak.getQuantitationEntries()) {
@@ -78,11 +78,11 @@ public class PeakQuantitationsExtractor {
 				peakQuantitation.setIntegratedArea(peak.getIntegratedArea());
 				peakQuantitation.setClassifier(IClassifier.asString(peak));
 				peakQuantitation.setQuantifier(getQuantifier(peak));
-				//
+
 				for(String quantitationColumn : quantitationColumns) {
 					peakQuantitation.getConcentrations().add(getConcentration(peak, quantitationColumn));
 				}
-				//
+
 				peakQuantitation.setChromatogramSelection(chromatogramSelection);
 				peakQuantitation.setPeak(peak);
 				peakQuantitations.getQuantitationEntries().add(peakQuantitation);

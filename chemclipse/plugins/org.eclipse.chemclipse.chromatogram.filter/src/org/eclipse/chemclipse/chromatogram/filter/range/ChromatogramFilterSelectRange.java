@@ -93,12 +93,12 @@ public class ChromatogramFilterSelectRange implements IProcessTypeSupplier {
 				String startRT = ValueFormat.getDecimalFormatEnglish().format(startRetentionTime / IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 				context.addErrorMessage(Messages.selectRange, NLS.bind(Messages.startRetentionTimeOutsideRange, startRT));
 			}
-			//
+
 			if(stopRetentionTime <= chromatogramSelection.getChromatogram().getStartRetentionTime()) {
 				String stopRT = ValueFormat.getDecimalFormatEnglish().format(stopRetentionTime / IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 				context.addWarnMessage(Messages.selectRange, NLS.bind(Messages.stopRetentionTimeOutsideRange, stopRT));
 			}
-			//
+
 			float startAbundance = processSettings.getStartAbundance();
 			if(processSettings.isStartAbundanceRelative()) {
 				startAbundance = chromatogramSelection.getChromatogram().getMaxSignal() * processSettings.getStartAbundance() / 100;

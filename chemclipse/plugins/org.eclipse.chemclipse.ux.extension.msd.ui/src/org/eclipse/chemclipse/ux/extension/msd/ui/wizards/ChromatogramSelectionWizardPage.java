@@ -50,10 +50,10 @@ public class ChromatogramSelectionWizardPage extends WizardPage {
 		Composite container = new Composite(parent, SWT.NONE);
 		GridLayout layout = new GridLayout(1, true);
 		container.setLayout(layout);
-		//
+
 		GridData layoutData = new GridData(GridData.GRAB_HORIZONTAL | GridData.GRAB_VERTICAL | GridData.HORIZONTAL_ALIGN_FILL | GridData.VERTICAL_ALIGN_CENTER);
 		layoutData.widthHint = convertHorizontalDLUsToPixels(IDialogConstants.MINIMUM_MESSAGE_AREA_WIDTH);
-		//
+
 		createChromatogramReportExportFileSelection(container, layoutData);
 		/*
 		 * Set the control, otherwise an error will be thrown.
@@ -163,7 +163,7 @@ public class ChromatogramSelectionWizardPage extends WizardPage {
 						item.setText(1, file.getAbsolutePath());
 					}
 				}
-				//
+
 				updateCountFileLabel();
 			}
 		});

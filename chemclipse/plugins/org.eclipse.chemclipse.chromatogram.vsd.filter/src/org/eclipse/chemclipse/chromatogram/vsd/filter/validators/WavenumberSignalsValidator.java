@@ -24,7 +24,7 @@ public class WavenumberSignalsValidator extends ValueParserSupport implements IV
 	private static final String ERROR_ENTRY = "Please define a wavenumber and intensity.";
 	private static final String ERROR_TOKEN = "The restricted token '" + WavenumberSignals.SEPARATOR_TOKEN + "' is used.";
 	private static final String ERROR_EMPTY = "No wavenumber signals are available yet.";
-	//
+
 	private double wavenumber = 0.0d;
 	private double intensity = 0.0d;
 
@@ -33,7 +33,7 @@ public class WavenumberSignalsValidator extends ValueParserSupport implements IV
 
 		wavenumber = 0.0d;
 		intensity = 0.0d;
-		//
+
 		String message = null;
 		if(value == null) {
 			message = ERROR_ENTRY;
@@ -61,7 +61,7 @@ public class WavenumberSignalsValidator extends ValueParserSupport implements IV
 				message = ERROR_ENTRY;
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {
@@ -72,10 +72,10 @@ public class WavenumberSignalsValidator extends ValueParserSupport implements IV
 	public WavenumberSignal getSetting() {
 
 		WavenumberSignal setting = new WavenumberSignal();
-		//
+
 		setting.setWavenumber(wavenumber);
 		setting.setIntensity(intensity);
-		//
+
 		return setting;
 	}
 }

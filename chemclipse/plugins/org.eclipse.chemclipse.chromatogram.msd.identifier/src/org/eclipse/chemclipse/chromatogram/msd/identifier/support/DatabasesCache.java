@@ -49,7 +49,7 @@ public class DatabasesCache {
 	private static Map<String, IMassSpectra> massSpectraDatabases = new HashMap<>();
 	private static Map<String, Map<String, IScanMSD>> allDatabaseNames = new HashMap<>();
 	private static Map<String, Map<String, IScanMSD>> allDatabaseCasNumbers = new HashMap<>();
-	//
+
 	private final IonAbundanceComparator ionAbundanceComparator;
 	private final List<String> massSpectraFiles;
 
@@ -121,13 +121,13 @@ public class DatabasesCache {
 		 */
 		Set<String> databaseKeys = massSpectraDatabases.keySet();
 		Set<String> removeKeys = new HashSet<>();
-		//
+
 		for(String databaseKey : databaseKeys) {
 			if(!databaseNames.contains(databaseKey)) {
 				removeKeys.add(databaseKey);
 			}
 		}
-		//
+
 		for(String databaseKey : removeKeys) {
 			massSpectraDatabases.remove(databaseKey);
 			allDatabaseNames.remove(databaseKey);
@@ -139,7 +139,7 @@ public class DatabasesCache {
 		if(massSpectraDatabases.size() == 0) {
 			throw new FileNotFoundException();
 		}
-		//
+
 		return massSpectraDatabases;
 	}
 
@@ -153,7 +153,7 @@ public class DatabasesCache {
 
 		List<IScanMSD> massSpectra = new ArrayList<>();
 		if(identificationTarget != null) {
-			//
+
 			try {
 				/*
 				 * Only evaluate the target if it contains the signature
@@ -161,7 +161,7 @@ public class DatabasesCache {
 				 */
 				ILibraryInformation libraryInformation = identificationTarget.getLibraryInformation();
 				String databaseName = libraryInformation.getDatabase();
-				//
+
 				Map<String, Map<String, IScanMSD>> allDatabaseNames = getDatabaseNamesMap(monitor);
 				Map<String, Map<String, IScanMSD>> allDatabaseCasNumbers = getDatabaseCasNamesMap(monitor);
 				Map<String, IScanMSD> databaseNames = allDatabaseNames.get(databaseName);
@@ -237,13 +237,13 @@ public class DatabasesCache {
 			databaseNames = new HashMap<>();
 			allDatabaseNames.put(databaseName, databaseNames);
 		}
-		//
+
 		Map<String, IScanMSD> databaseCasNumbers = allDatabaseCasNumbers.get(databaseName);
 		if(databaseCasNumbers == null) {
 			databaseCasNumbers = new HashMap<>();
 			allDatabaseCasNumbers.put(databaseName, databaseCasNumbers);
 		}
-		//
+
 		for(IScanMSD reference : massSpectraDatabase.getList()) {
 			if(reference instanceof IRegularLibraryMassSpectrum libraryMassSpectrum) {
 				ILibraryInformation libraryInformation = libraryMassSpectrum.getLibraryInformation();

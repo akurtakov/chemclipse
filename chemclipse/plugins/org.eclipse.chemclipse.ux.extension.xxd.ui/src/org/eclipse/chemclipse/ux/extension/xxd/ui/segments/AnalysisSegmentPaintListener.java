@@ -35,11 +35,11 @@ import org.eclipse.swtchart.ISeries;
 public class AnalysisSegmentPaintListener<X extends IAnalysisSegment> implements ICustomPaintListener {
 
 	private static final int ALPHA = 100;
-	//
+
 	private final AnalysisSegmentColorScheme colorScheme;
 	private final Supplier<Collection<X>> segmentSupplier;
 	private final Predicate<X> selectionCheck;
-	//
+
 	private boolean paintArea = true;
 	private boolean paintLines = false;
 	private int alpha = ALPHA;

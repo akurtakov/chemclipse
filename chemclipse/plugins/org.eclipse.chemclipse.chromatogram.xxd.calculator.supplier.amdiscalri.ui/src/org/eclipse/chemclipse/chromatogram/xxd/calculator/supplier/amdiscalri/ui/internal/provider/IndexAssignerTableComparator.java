@@ -35,11 +35,11 @@ public class IndexAssignerTableComparator extends AbstractRecordTableComparator 
 					sortOrder = 0;
 			}
 		}
-		//
+
 		if(getDirection() == ASCENDING) {
 			sortOrder = -sortOrder;
 		}
-		//
+
 		return sortOrder;
 	}
 }

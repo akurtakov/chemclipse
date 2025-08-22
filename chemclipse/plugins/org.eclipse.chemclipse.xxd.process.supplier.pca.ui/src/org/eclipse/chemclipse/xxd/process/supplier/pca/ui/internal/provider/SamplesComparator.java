@@ -25,7 +25,7 @@ public class SamplesComparator extends AbstractRecordTableComparator implements 
 
 		int sortOrder = 0;
 		if(e1 instanceof ISample sample1 && e2 instanceof ISample sample2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					String name1 = sample1.getSampleName() != null ? sample1.getSampleName() : "";

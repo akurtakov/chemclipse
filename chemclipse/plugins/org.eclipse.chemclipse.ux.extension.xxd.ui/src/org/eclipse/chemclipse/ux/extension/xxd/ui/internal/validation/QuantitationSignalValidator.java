@@ -24,10 +24,10 @@ import org.eclipse.core.runtime.IStatus;
 public class QuantitationSignalValidator extends ValueParserSupport implements IValidator<Object> {
 
 	public static final String DEMO = "TIC | 100.0 | 0.0 | true";
-	//
+
 	private static final String DELIMITER = "|";
 	private static final String ERROR_TARGET = ExtensionMessages.enterSignalExample + ": " + DEMO;
-	//
+
 	private double signal;
 	private float relativeResponse;
 	private double uncertainty;
@@ -46,14 +46,14 @@ public class QuantitationSignalValidator extends ValueParserSupport implements I
 					message = ERROR_TARGET;
 				} else {
 					String[] values = text.trim().split("\\" + DELIMITER);
-					//
+
 					String signalValue = parseString(values, 0);
 					if("TIC".equals(signalValue)) {
 						signal = ISignal.TOTAL_INTENSITY;
 					} else {
 						signal = parseDouble(values, 0);
 					}
-					//
+
 					relativeResponse = parseFloat(values, 1);
 					uncertainty = parseDouble(values, 2);
 					use = parseBoolean(values, 3);
@@ -62,7 +62,7 @@ public class QuantitationSignalValidator extends ValueParserSupport implements I
 				message = ERROR_TARGET;
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

@@ -23,7 +23,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_IMPORT_DELIMITER = Delimiter.COMMA.name();
 	public static final String P_IMPORT_ZERO_MARKER = "importZeroMarker";
 	public static final String DEF_IMPORT_ZERO_MARKER = "0.0";
-	//
+
 	public static final String P_EXPORT_USE_TIC = "exportUseTic";
 	public static final boolean DEF_EXPORT_USE_TIC = false;
 	public static final String P_EXPORT_REFERENCES = "exportReferences";

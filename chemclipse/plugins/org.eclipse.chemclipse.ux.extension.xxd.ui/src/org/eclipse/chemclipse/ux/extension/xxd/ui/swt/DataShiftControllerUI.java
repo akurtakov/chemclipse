@@ -73,25 +73,25 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 	private static final String KEY_MIRROR_MODUS = "MirrorModus";
 	private static final String IMAGE_MIRROR = IApplicationImage.IMAGE_SHIFT_MIRROR;
 	private static final String TOOLTIP_MIRROR = "the mirror modus";
-	//
+
 	private Button buttonAutoMirror;
-	//
+
 	private Text textX;
 	private ComboViewer comboViewerX;
 	private Text textY;
 	private ComboViewer comboViewerY;
-	//
+
 	private ComboViewer comboViewerSelect;
 	private Button buttonMirrorSeries;
-	//
+
 	private Button buttonShiftLeft;
 	private Button buttonShiftRight;
 	private Button buttonShiftUp;
 	private Button buttonShiftDown;
-	//
+
 	private ScrollableChart scrollableChart = null;
 	private BaseChart baseChart = null;
-	//
+
 	private final OverlayChartSupport overlayChartSupport = new OverlayChartSupport();
 	private final Set<String> mirroredSeries = new HashSet<>();
 	private IPreferenceStore preferences = Activator.getDefault().getPreferenceStore();
@@ -146,7 +146,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 		if(scrollableChart != null) {
 			BaseChart baseChart = scrollableChart.getBaseChart();
 			IChartSettings chartSettings = scrollableChart.getChartSettings();
-			//
+
 			if(DisplayModus.MIRROR.equals(displayModus)) {
 				if(!mirroredSeries.contains(seriesId)) {
 					baseChart.multiplySeries(seriesId, IExtendedChart.Y_AXIS, -1.0d);
@@ -158,7 +158,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 					mirroredSeries.remove(seriesId);
 				}
 			}
-			//
+
 			updateWidgets();
 			scrollableChart.applySettings(chartSettings);
 			scrollableChart.adjustRange(true);
@@ -170,7 +170,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 
 		GridLayout gridLayout = new GridLayout(14, false);
 		setLayout(gridLayout);
-		//
+
 		buttonAutoMirror = createButtonAutoMirror(this);
 		createVerticalSeparator(this);
 		textX = createTextX(this);
@@ -185,7 +185,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 		buttonShiftRight = createButtonRight(this);
 		buttonShiftUp = createButtonUp(this);
 		buttonShiftDown = createButtonDown(this);
-		//
+
 		initialize();
 	}
 
@@ -204,10 +204,10 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
 		text.setLayoutData(gridData);
-		//
+
 		ShiftValidator shiftValidator = new ShiftValidator();
 		ControlDecoration controlDecoration = new ControlDecoration(text, SWT.LEFT | SWT.TOP);
-		//
+
 		text.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -225,7 +225,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				}
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -245,7 +245,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select the x axis.");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
@@ -261,7 +261,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				}
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -274,10 +274,10 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
 		text.setLayoutData(gridData);
-		//
+
 		ShiftValidator shiftValidator = new ShiftValidator();
 		ControlDecoration controlDecoration = new ControlDecoration(text, SWT.LEFT | SWT.TOP);
-		//
+
 		text.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -295,7 +295,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				}
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -315,7 +315,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select the y axis.");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
@@ -331,7 +331,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				}
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -361,7 +361,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -384,7 +384,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 					Object object = button.getData(KEY_MIRROR_MODUS);
 					DisplayModus displayModus = object instanceof DisplayModus dp ? dp : DisplayModus.NORMAL;
 					IChartSettings chartSettings = scrollableChart.getChartSettings();
-					//
+
 					if(DisplayModus.NORMAL.equals(displayModus)) {
 						/*
 						 * If status is normal, then mirror the series.
@@ -415,7 +415,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 							}
 						}
 					}
-					//
+
 					buttonAutoMirror.setData(KEY_MIRROR_MODUS, displayModus);
 					enableButton(buttonAutoMirror, IMAGE_MIRROR, TOOLTIP_MIRROR, DisplayModus.MIRROR.equals(displayModus));
 					scrollableChart.applySettings(chartSettings);
@@ -424,7 +424,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -449,7 +449,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Highlight the selected series.");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
@@ -471,7 +471,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				}
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -494,7 +494,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				updateComboViewerSelect(BaseChart.SELECTED_SERIES_NONE);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -517,7 +517,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -540,7 +540,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -563,7 +563,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -586,7 +586,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -602,7 +602,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 			List<IAxisSettings> axisSettings = baseChart.getAxisSettings(IExtendedChart.X_AXIS);
 			comboViewerX.setInput(axisSettings);
 			int size = axisSettings.size();
-			//
+
 			if(size > 0) {
 				/*
 				 * Get the shift value from the settings.
@@ -610,7 +610,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				double overlayShiftX = overlayChartSupport.getOverlayShiftX();
 				int indexShiftX = overlayChartSupport.getIndexShiftX();
 				Combo combo = comboViewerX.getCombo();
-				//
+
 				if(indexShiftX >= 0 && indexShiftX < size) {
 					DecimalFormat decimalFormat = baseChart.getDecimalFormat(IExtendedChart.X_AXIS, indexShiftX);
 					combo.select(indexShiftX);
@@ -635,7 +635,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 			List<IAxisSettings> axisSettings = baseChart.getAxisSettings(IExtendedChart.Y_AXIS);
 			comboViewerY.setInput(axisSettings);
 			int size = axisSettings.size();
-			//
+
 			if(size > 0) {
 				/*
 				 * Get the shift value from the settings.
@@ -643,7 +643,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				double absoluteShiftY = overlayChartSupport.getOverlayShiftY();
 				int indexShiftY = overlayChartSupport.getIndexShiftY();
 				Combo combo = comboViewerY.getCombo();
-				//
+
 				if(indexShiftY >= 0 && indexShiftY < size) {
 					DecimalFormat decimalFormat = baseChart.getDecimalFormat(IExtendedChart.Y_AXIS, indexShiftY);
 					combo.select(indexShiftY);
@@ -666,17 +666,17 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 		 */
 		String selectedSeries = getSelectedSeriesId();
 		boolean isSeriesSelected = !selectedSeries.equals(BaseChart.SELECTED_SERIES_NONE);
-		//
+
 		buttonShiftLeft.setEnabled(isSeriesSelected);
 		buttonShiftRight.setEnabled(isSeriesSelected);
 		buttonShiftUp.setEnabled(isSeriesSelected);
 		buttonShiftDown.setEnabled(isSeriesSelected);
-		//
+
 		DisplayModus displayModus = mirroredSeries.contains(selectedSeries) ? DisplayModus.MIRROR : DisplayModus.NORMAL;
 		buttonMirrorSeries.setEnabled(isSeriesSelected);
 		buttonMirrorSeries.setData(KEY_MIRROR_MODUS, displayModus);
 		enableButton(buttonMirrorSeries, IMAGE_MIRROR, TOOLTIP_MIRROR, DisplayModus.MIRROR.equals(displayModus));
-		//
+
 		boolean active = !mirroredSeries.isEmpty();
 		buttonAutoMirror.setData(KEY_MIRROR_MODUS, active ? DisplayModus.MIRROR : DisplayModus.NORMAL);
 		enableButton(buttonAutoMirror, IMAGE_MIRROR, TOOLTIP_MIRROR, active);
@@ -714,7 +714,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				shiftValue = axisScaleConverter.convertToPrimaryUnit(value);
 			}
 		}
-		//
+
 		return shiftValue;
 	}
 
@@ -749,10 +749,10 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 		if(seriesId.equals(SERIES_REDRAW)) {
 			seriesId = getSelectedSeriesId();
 		}
-		//
+
 		List<MappedSeriesSettings> mappedSettings = new ArrayList<>();
 		mappedSettings.add(new MappedSeriesSettings(BaseChart.SELECTED_SERIES_NONE, null));
-		//
+
 		if(baseChart != null) {
 			ISeriesSet seriesSet = baseChart.getSeriesSet();
 			if(seriesSet != null) {
@@ -779,11 +779,11 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				break exitloop;
 			}
 		}
-		//
+
 		if(index >= 0) {
 			comboViewerSelect.getCombo().select(index);
 		}
-		//
+
 		updateWidgets();
 	}
 
@@ -794,7 +794,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 		if(object instanceof MappedSeriesSettings mappedSeriesSettings) {
 			id = mappedSeriesSettings.getIdentifier();
 		}
-		//
+
 		return id;
 	}
 
@@ -838,7 +838,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 				} else if(seriesId.equals(series.getId())) {
 					shift = true;
 				}
-				//
+
 				if(shift) {
 					shiftX += deltaX;
 					shiftY += deltaY;
@@ -862,7 +862,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 			scrollableChart.adjustRange(true);
 			scrollableChart.setRange(IExtendedChart.X_AXIS, selectedRangeX);
 			scrollableChart.setRange(IExtendedChart.Y_AXIS, selectedRangeY);
-			//
+
 			persistOverlayShiftX();
 			persistOverlayShiftY();
 		}

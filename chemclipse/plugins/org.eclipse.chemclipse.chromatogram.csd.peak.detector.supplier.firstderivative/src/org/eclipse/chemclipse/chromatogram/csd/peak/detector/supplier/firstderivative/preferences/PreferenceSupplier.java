@@ -35,7 +35,7 @@ public class PreferenceSupplier extends AbstractFirstDerivativePreferenceSupplie
 	public static final boolean DEF_USE_NOISE_SEGMENTS_CSD = false;
 	public static final String P_OPTIMIZE_BASELINE_CSD = "optimizeBaselineCSD";
 	public static final boolean DEF_OPTIMIZE_BASELINE_CSD = false;
-	//
+
 	public static final String P_THRESHOLD_MSD = "thresholdMSD";
 	public static final String DEF_THRESHOLD_MSD = Threshold.MEDIUM.name();
 	public static final String P_DETECTOR_TYPE_MSD = "detectorTypeMSD";
@@ -54,7 +54,7 @@ public class PreferenceSupplier extends AbstractFirstDerivativePreferenceSupplie
 	public static final String DEF_MZ_VALUES_TO_FILTER_MSD = "";
 	public static final String P_USE_INDIVIDUAL_TRACES_MSD = "useIndividualTracesMSD";
 	public static final boolean DEF_USE_INDIVIDUAL_TRACES_MSD = false;
-	//
+
 	public static final String P_THRESHOLD_WSD = "thresholdWSD";
 	public static final String DEF_THRESHOLD_WSD = Threshold.MEDIUM.name();
 	public static final String P_DETECTOR_TYPE_WSD = "detectorTypeWSD";

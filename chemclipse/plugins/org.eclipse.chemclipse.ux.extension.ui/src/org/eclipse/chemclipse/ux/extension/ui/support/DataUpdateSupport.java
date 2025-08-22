@@ -33,13 +33,13 @@ import org.osgi.service.event.EventHandler;
 public class DataUpdateSupport {
 
 	private static final Logger logger = Logger.getLogger(DataUpdateSupport.class);
-	//
+
 	private IEventBroker eventBroker;
-	//
+
 	private Map<String, EventHandler> handlerMap = new HashMap<>();
 	private Map<String, Set<String>> propertiesMap = new HashMap<>();
 	private Map<String, List<Object>> objectMap = new HashMap<>();
-	//
+
 	private List<IDataUpdateListener> updateListeners = new ArrayList<>();
 	private List<String> topicList = new ArrayList<>();
 
@@ -132,12 +132,12 @@ public class DataUpdateSupport {
 				eventBroker.unsubscribe(eventHandler);
 			}
 		}
-		//
+
 		handlerMap.clear();
 		propertiesMap.clear();
 		objectMap.clear();
 		topicList.clear();
-		//
+
 		logger.info("Subscriptions have been completely removed.");
 	}
 
@@ -196,10 +196,10 @@ public class DataUpdateSupport {
 		if(!objectMap.containsKey(topic)) {
 			objectMap.put(topic, new ArrayList<>());
 		}
-		//
+
 		List<Object> objects = objectMap.get(topic);
 		objects.clear();
-		//
+
 		if(properties != null) {
 			for(String property : properties) {
 				Object object = event.getProperty(property);

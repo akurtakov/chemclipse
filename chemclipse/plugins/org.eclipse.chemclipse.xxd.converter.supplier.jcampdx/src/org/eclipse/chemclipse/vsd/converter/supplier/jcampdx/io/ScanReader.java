@@ -34,7 +34,7 @@ import jakarta.activation.UnsupportedDataTypeException;
 public class ScanReader {
 
 	private static final Logger logger = Logger.getLogger(ScanReader.class);
-	//
+
 	private static final String COMMENT_MARKER = "$$";
 	private static final String HEADER_MARKER = "##";
 	private static final String DATE = "##DATE=";

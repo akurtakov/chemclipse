@@ -30,7 +30,7 @@ public class WellMappingFieldEditor extends FieldEditor {
 	public static final String REMOVE_ALL_TOOLTIP = "Remove all well mappings";
 	public static final String IMPORT = "Import";
 	public static final String EXPORT = "Export";
-	//
+
 	public static final String IMPORT_TITLE = "Import Well Mappings";
 	public static final String EXPORT_TITLE = "Export Well Mappings";
 	public static final String DIALOG_TITLE = "Well Mappings";
@@ -40,7 +40,7 @@ public class WellMappingFieldEditor extends FieldEditor {
 	public static final String MESSAGE_REMOVE_ALL = "Do you want to delete all well mappings?";
 	public static final String MESSAGE_EXPORT_SUCCESSFUL = "Well mapping have been exported successfully.";
 	public static final String MESSAGE_EXPORT_FAILED = "Failed to export the well mappings.";
-	//
+
 	private WellMappingTable editor;
 
 	public WellMappingFieldEditor(String name, String labelText, Composite parent) {

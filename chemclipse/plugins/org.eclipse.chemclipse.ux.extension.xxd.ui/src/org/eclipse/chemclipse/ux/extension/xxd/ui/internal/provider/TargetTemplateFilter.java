@@ -36,14 +36,14 @@ public class TargetTemplateFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof TargetTemplate targetTemplate) {
 			String name = targetTemplate.getName();
 			String casNumber = targetTemplate.getCasNumber();
 			String comment = targetTemplate.getComments();
 			String contributor = targetTemplate.getContributor();
 			String referenceId = targetTemplate.getReferenceId();
-			//
+
 			if(!caseSensitive) {
 				searchText = searchText.toLowerCase();
 				name = name.toLowerCase();
@@ -52,28 +52,28 @@ public class TargetTemplateFilter extends ViewerFilter {
 				contributor = contributor.toLowerCase();
 				referenceId = referenceId.toLowerCase();
 			}
-			//
+
 			if(name.contains(searchText)) {
 				return true;
 			}
-			//
+
 			if(casNumber.contains(searchText)) {
 				return true;
 			}
-			//
+
 			if(comment.contains(searchText)) {
 				return true;
 			}
-			//
+
 			if(contributor.contains(searchText)) {
 				return true;
 			}
-			//
+
 			if(referenceId.contains(searchText)) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

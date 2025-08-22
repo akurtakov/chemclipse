@@ -24,10 +24,10 @@ import org.eclipse.core.runtime.IStatus;
 public class QuantitationCompoundValidator extends ValueParserSupport implements IValidator<Object> {
 
 	public static final String DEMO = "Styrene | mg/kg | 5.68";
-	//
+
 	private static final String DELIMITER = "|";
 	private static final String ERROR_TARGET = ExtensionMessages.enterCompoundExample + ": " + DEMO;
-	//
+
 	private String name;
 	private String concentrationUnit;
 	private int retentionTime;
@@ -45,7 +45,7 @@ public class QuantitationCompoundValidator extends ValueParserSupport implements
 					message = ERROR_TARGET;
 				} else {
 					String[] values = text.trim().split("\\" + DELIMITER);
-					//
+
 					name = parseString(values, 0);
 					concentrationUnit = parseString(values, 1);
 					retentionTime = (int)(parseDouble(values, 2, 0.0d) * IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
@@ -54,7 +54,7 @@ public class QuantitationCompoundValidator extends ValueParserSupport implements
 				message = ERROR_TARGET;
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

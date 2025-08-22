@@ -57,7 +57,7 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 	private static final String EDIT_TOOLTIP = "Edit the selected signal.";
 	private static final String REMOVE_TOOLTIP = "Remove Selected Signals.";
 	private static final String REMOVE_ALL_TOOLTIP = "Remove All Signals.";
-	//
+
 	private static final String IMPORT_TITLE = "Import Signals";
 	private static final String EXPORT_TITLE = "Export Signals";
 	private static final String MESSAGE_ADD = "You can create a new signal here.";
@@ -66,14 +66,14 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 	private static final String MESSAGE_REMOVE_ALL = "Do you want to delete all signals?";
 	private static final String MESSAGE_EXPORT_SUCCESSFUL = "Signals have been exported successfully.";
 	private static final String MESSAGE_EXPORT_FAILED = "Failed to export the signals.";
-	//
+
 	private AtomicReference<Button> buttonSearchControl = new AtomicReference<>();
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private AtomicReference<WavenumberSignalsUI> tableViewer = new AtomicReference<>();
-	//
+
 	private List<Button> buttons = new ArrayList<>();
 	private List<Listener> listeners = new ArrayList<>();
-	//
+
 	private WavenumberSignals wavenumberSignals = new WavenumberSignals();
 
 	public WavenumberSignalsEditor(Composite parent, int style) {
@@ -136,11 +136,11 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 		gridLayout.marginWidth = 0;
 		gridLayout.marginHeight = 0;
 		setLayout(gridLayout);
-		//
+
 		createToolbarMain(this);
 		createToolbarSearch(this);
 		createTableSection(this);
-		//
+
 		initialize();
 	}
 
@@ -157,7 +157,7 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(7, false));
-		//
+
 		createButtonToggleToolbar(composite);
 		add(createButtonAdd(composite));
 		add(createButtonEdit(composite));
@@ -190,7 +190,7 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 				tableViewer.get().setSearchText(searchText, caseSensitive);
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -198,7 +198,7 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 
 		WavenumberSignalsUI wavenumberSignalsUI = new WavenumberSignalsUI(parent, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 		wavenumberSignalsUI.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		wavenumberSignalsUI.setUpdateListener(new IUpdateListener() {
 
 			@Override
@@ -207,13 +207,13 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 				setViewerInput();
 			}
 		});
-		//
+
 		Shell shell = wavenumberSignalsUI.getTable().getShell();
 		ITableSettings tableSettings = wavenumberSignalsUI.getTableSettings();
 		addDeleteMenuEntry(shell, tableSettings);
 		addKeyEventProcessors(shell, tableSettings);
 		wavenumberSignalsUI.applySettings(tableSettings);
-		//
+
 		tableViewer.set(wavenumberSignalsUI);
 	}
 
@@ -239,7 +239,7 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -269,7 +269,7 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -287,7 +287,7 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 				deleteItems(e.display.getActiveShell());
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -308,7 +308,7 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -337,7 +337,7 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -371,7 +371,7 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 

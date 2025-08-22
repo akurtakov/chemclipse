@@ -205,7 +205,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 				activeIonRoundMethod = IonRoundMethod.DEFAULT;
 			}
 		}
-		//
+
 		return activeIonRoundMethod;
 	}
 

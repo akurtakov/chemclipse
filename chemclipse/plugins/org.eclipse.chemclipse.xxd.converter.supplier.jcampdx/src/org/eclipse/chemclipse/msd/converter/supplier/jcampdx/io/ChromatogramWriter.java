@@ -31,10 +31,10 @@ public class ChromatogramWriter extends AbstractChromatogramMSDWriter {
 	public void writeChromatogram(File file, IChromatogramMSD chromatogram, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotWriteableException, IOException {
 
 		PrintWriter printWriter = new PrintWriter(file);
-		//
+
 		writeHeader(chromatogram, printWriter, monitor);
 		writeScans(chromatogram, printWriter, monitor);
-		//
+
 		printWriter.flush();
 		printWriter.close();
 	}

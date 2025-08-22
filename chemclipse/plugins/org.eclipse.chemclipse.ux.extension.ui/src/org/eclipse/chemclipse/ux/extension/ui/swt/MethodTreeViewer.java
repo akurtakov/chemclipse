@@ -42,11 +42,11 @@ import org.eclipse.swt.widgets.Composite;
 public class MethodTreeViewer extends TreeViewer {
 
 	private final TreeViewerColumn[] columns = new TreeViewerColumn[MethodListLabelProvider.TITLES.length];
-	//
+
 	private IProcessSupplierContext processingSupport;
 	private BiFunction<IProcessEntry, IProcessSupplierContext, IProcessorPreferences<?>> preferencesSupplier;
 	private AtomicReference<ProcessMethodToolbar> toolbarButtons;
-	//
+
 	private IUpdateListener updateListener = null;
 
 	public MethodTreeViewer(Composite parent, int style) {
@@ -59,12 +59,12 @@ public class MethodTreeViewer extends TreeViewer {
 		this.processingSupport = processingSupport;
 		this.preferencesSupplier = preferencesSupplier;
 		this.toolbarButtons = toolbarButtons;
-		//
+
 		setUseHashlookup(true);
 		setExpandPreCheckFilters(true);
 		getTree().setLinesVisible(true);
 		getTree().setHeaderVisible(true);
-		//
+
 		enableTooltips(enableTooltips);
 		createTree();
 	}
@@ -110,11 +110,11 @@ public class MethodTreeViewer extends TreeViewer {
 						return processEntryContainer.getNumberOfEntries() > 0;
 					}
 				}
-				//
+
 				if(element instanceof ProcessEntryContainer processEntryContainer) {
 					return processEntryContainer.getNumberOfEntries() > 0;
 				}
-				//
+
 				return false;
 			}
 
@@ -133,11 +133,11 @@ public class MethodTreeViewer extends TreeViewer {
 				if(inputElement instanceof ProcessEntryContainer container) {
 					return entryList(container, false);
 				}
-				//
+
 				if(inputElement instanceof Object[] objects) {
 					return objects;
 				}
-				//
+
 				return new Object[0];
 			}
 
@@ -161,11 +161,11 @@ public class MethodTreeViewer extends TreeViewer {
 						return entryList(processEntryContainer, true);
 					}
 				}
-				//
+
 				if(parentElement instanceof ProcessEntryContainer processEntryContainer) {
 					return entryList(processEntryContainer, false);
 				}
-				//
+
 				return new Object[0];
 			}
 		});
@@ -174,13 +174,13 @@ public class MethodTreeViewer extends TreeViewer {
 	private void registerEventListeners() {
 
 		addSelectionChangedListener(event -> toolbarButtons.get().updateTableButtons());
-		//
+
 		addDoubleClickListener(event -> {
 
 			if(preferencesSupplier == null) {
 				return;
 			}
-			//
+
 			Object firstElement = getStructuredSelection().getFirstElement();
 			if(firstElement instanceof IProcessEntry entry) {
 				if(toolbarButtons.get().modifyProcessEntry(getControl().getShell(), entry, IProcessEntry.getContext(entry, processingSupport), true)) {
@@ -188,7 +188,7 @@ public class MethodTreeViewer extends TreeViewer {
 				}
 			}
 		});
-		//
+
 		getTree().addKeyListener(new KeyAdapter() {
 
 			@Override

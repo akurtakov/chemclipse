@@ -321,7 +321,7 @@ public class BatchProcessEditorPage implements IMultiEditorPage {
 
 		Label label = toolkit.createLabel(client, "Select an integrator:");
 		label.setLayoutData(gridDataLabel);
-		//
+
 		integratorComboBox = EnhancedCombo.create(client, SWT.READ_ONLY);
 		integratorComboBox.setLayoutData(gridData);
 		integratorComboBox.addSelectionListener(new SelectionAdapter() {
@@ -386,7 +386,7 @@ public class BatchProcessEditorPage implements IMultiEditorPage {
 
 		Label label = toolkit.createLabel(client, "Select an identifier:");
 		label.setLayoutData(gridDataLabel);
-		//
+
 		identifierComboBox = EnhancedCombo.create(client, SWT.READ_ONLY);
 		identifierComboBox.setLayoutData(gridData);
 		identifierComboBox.addSelectionListener(new SelectionAdapter() {

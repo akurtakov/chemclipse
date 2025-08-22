@@ -273,7 +273,7 @@ public class TimeRangesChart extends ChromatogramPeakChart {
 		IPlotArea plotArea = getBaseChart().getPlotArea();
 		plotArea.addCustomPaintListener(baselineSelectionPaintListener);
 		plotArea.addCustomPaintListener(timeRangePointsMarker);
-		//
+
 		getBaseChart().addCustomRangeSelectionHandler(new ICustomSelectionHandler() {
 
 			@Override
@@ -353,7 +353,7 @@ public class TimeRangesChart extends ChromatogramPeakChart {
 		IAxisSet axisSet = baseChart.getAxisSet();
 		Point rectangle = baseChart.getPlotArea().getSize();
 		int width = rectangle.x;
-		//
+
 		if(width != 0) {
 			/*
 			 * Toggle start/stop. It's also possible to select
@@ -384,7 +384,7 @@ public class TimeRangesChart extends ChromatogramPeakChart {
 			if(startRetentionTime < 0) {
 				startRetentionTime = 0;
 			}
-			//
+
 			if(stopRetentionTime < startRetentionTime) {
 				stopRetentionTime = 0;
 			}
@@ -393,7 +393,7 @@ public class TimeRangesChart extends ChromatogramPeakChart {
 			 */
 			timeRange.update(startRetentionTime, stopRetentionTime);
 		}
-		//
+
 		fireUpdateTimeRange(timeRange);
 	}
 

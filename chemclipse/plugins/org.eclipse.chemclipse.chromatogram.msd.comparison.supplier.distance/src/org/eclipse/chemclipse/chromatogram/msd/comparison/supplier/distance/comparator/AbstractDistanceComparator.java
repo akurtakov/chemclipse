@@ -49,7 +49,7 @@ public abstract class AbstractDistanceComparator extends AbstractMassSpectrumCom
 			float reverseMatchFactor = (1 - calculateMatch(referenceSignal, unknownSignal, distanceMeasure)) * 100;
 			float matchFactorDirect = (1 - calculateMatchDirect(unknownSignal, referenceSignal, distanceMeasure)) * 100;
 			float reverseMatchFactorDirect = (1 - calculateMatchDirect(referenceSignal, unknownSignal, distanceMeasure)) * 100;
-			//
+
 			IComparisonResult massSpectrumComparisonResult = new ComparisonResult(matchFactor, reverseMatchFactor, matchFactorDirect, reverseMatchFactorDirect);
 			processingInfo.setProcessingResult(massSpectrumComparisonResult);
 		}
@@ -104,7 +104,7 @@ public abstract class AbstractDistanceComparator extends AbstractMassSpectrumCom
 				ionList.add(ion);
 			}
 		}
-		//
+
 		double[] unknown = new double[ionList.size()];
 		double[] reference = new double[ionList.size()];
 		int j = 0;

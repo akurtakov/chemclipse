@@ -74,9 +74,9 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 	private AtomicReference<ComboViewer> comboViewerInput = new AtomicReference<>();
 	private AtomicReference<MoleculeUI> moleculeControl = new AtomicReference<>();
 	private AtomicReference<Text> textMolecule = new AtomicReference<>();
-	//
+
 	private ILibraryInformation libraryInformation;
-	//
+
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
 	public ExtendedMoleculeUI(Composite parent, int style) {
@@ -106,12 +106,12 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createToolbarEdit(this);
 		createTabFolderSection(this);
-		//
+
 		initialize();
 	}
 
@@ -133,7 +133,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(6, false));
-		//
+
 		createButtonToggleInfo(composite);
 		createButtonToggleEdit(composite);
 		createComboViewerServices(composite);
@@ -156,7 +156,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -166,11 +166,11 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(3, false));
-		//
+
 		createTextInput(composite);
 		createComboViewerInput(composite);
 		createButtonCalculate(composite);
-		//
+
 		toolbarEdit.set(composite);
 	}
 
@@ -190,7 +190,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		textInput.set(text);
 	}
 
@@ -207,7 +207,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 				if(element instanceof ImageServiceInput imageServiceInput) {
 					return imageServiceInput.label();
 				}
-				//
+
 				return null;
 			}
 		});
@@ -226,7 +226,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 				setTextInput();
 			}
 		});
-		//
+
 		comboViewerInput.set(comboViewer);
 	}
 
@@ -245,7 +245,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 				updateContent(e.display);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -254,7 +254,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 		TabFolder tabFolder = new TabFolder(parent, SWT.BOTTOM);
 		tabFolder.setBackgroundMode(SWT.INHERIT_DEFAULT);
 		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		createMoleculeImage(tabFolder);
 		createMoleculeContent(tabFolder);
 	}
@@ -263,7 +263,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 
 		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText("Molecule");
-		//
+
 		Composite composite = new Composite(tabFolder, SWT.BORDER);
 		composite.setLayout(new FillLayout());
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -289,7 +289,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		moleculeControl.set(moleculeUI);
 	}
 
@@ -297,11 +297,11 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 
 		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText("Content");
-		//
+
 		Text text = createTextMolecule(tabFolder);
 		text.setEditable(false);
 		tabItem.setControl(text);
-		//
+
 		textMolecule.set(text);
 	}
 
@@ -310,7 +310,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 		Text text = new Text(parent, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		text.setText("");
 		text.setToolTipText("Molecule Structure");
-		//
+
 		return text;
 	}
 
@@ -329,7 +329,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		comboViewerServices.set(comboViewer);
 	}
 
@@ -347,7 +347,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 				updateMoleculeService(e.display);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -371,7 +371,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 					fileDialog.setFilterNames(new String[]{"Portable Network Graphics  (*.png)"});
 					fileDialog.setFileName(getExportName());
 					fileDialog.setFilterPath(preferenceStore.getString(PreferenceSupplier.P_MOLECULE_PATH_EXPORT));
-					//
+
 					String pathname = fileDialog.open();
 					if(pathname != null) {
 						preferenceStore.setValue(PreferenceSupplier.P_MOLECULE_PATH_EXPORT, fileDialog.getFilterPath());
@@ -382,7 +382,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -407,7 +407,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		}
-		//
+
 		createSettingsButton(parent, preferencePages, new ISettingsHandler() {
 
 			@Override
@@ -436,7 +436,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 	private String getMoleculeInformation(ILibraryInformation libraryInformation) {
 
 		StringBuilder builder = new StringBuilder();
-		//
+
 		if(libraryInformation != null) {
 			builder.append(getInfo(libraryInformation.getName()));
 			builder.append(" | ");
@@ -444,7 +444,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 			builder.append(" | ");
 			builder.append(getInfo(libraryInformation.getSmiles()));
 		}
-		//
+
 		return builder.toString();
 	}
 
@@ -526,7 +526,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 	private ILibraryInformation createLibraryInformationByInput() {
 
 		ILibraryInformation libraryInformationByInput = new LibraryInformation();
-		//
+
 		ImageServiceInput imageInput = getImageInput();
 		String text = textInput.get().getText().trim();
 		switch(imageInput) {
@@ -537,7 +537,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 				libraryInformationByInput.setName(text);
 				break;
 		}
-		//
+
 		return libraryInformationByInput;
 	}
 
@@ -545,7 +545,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 
 		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
 		List<Object> objects = dataUpdateSupport.getUpdates(getLastTopic(dataUpdateSupport.getTopics()));
-		//
+
 		if(!objects.isEmpty()) {
 			Object object = objects.get(0);
 			if(object instanceof ILibraryMassSpectrum libraryMassSpectrum) {
@@ -570,7 +570,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 				return topic;
 			}
 		}
-		//
+
 		return "";
 	}
 

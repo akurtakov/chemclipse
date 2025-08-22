@@ -44,15 +44,15 @@ public class ImageDialog extends Dialog {
 
 	public static final int DEFAULT_WIDTH = 400;
 	public static final int DEFAULT_HEIGHT = 450;
-	//
+
 	private static final String FILE_NAME = "FileName"; //$NON-NLS-1$
 	private static final String EXTENSION_GIF = ".gif"; //$NON-NLS-1$
 	private static final String EXTENSION_PNG = ".png"; //$NON-NLS-1$
-	//
+
 	private Text textSearch;
 	private Table tableImages;
 	private String imageFileName = null;
-	//
+
 	private List<String> images = new ArrayList<>();
 
 	public ImageDialog(Shell parent) {
@@ -89,13 +89,13 @@ public class ImageDialog extends Dialog {
 
 		Composite composite = (Composite)super.createDialogArea(parent);
 		composite.setLayout(new GridLayout(2, false));
-		//
+
 		createToolbarTop(composite);
 		tableImages = createTableImages(composite);
-		//
+
 		initialize();
 		updateTable(""); //$NON-NLS-1$
-		//
+
 		return composite;
 	}
 
@@ -112,7 +112,7 @@ public class ImageDialog extends Dialog {
 		gridData.horizontalSpan = 3;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(2, false));
-		//
+
 		textSearch = createTextSearch(composite);
 		createButtonSearch(composite);
 	}
@@ -150,7 +150,7 @@ public class ImageDialog extends Dialog {
 				}
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -159,7 +159,7 @@ public class ImageDialog extends Dialog {
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText(""); //$NON-NLS-1$
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SEARCH, IApplicationImageProvider.SIZE_16x16));
-		//
+
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -168,7 +168,7 @@ public class ImageDialog extends Dialog {
 				runSearch();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -177,14 +177,14 @@ public class ImageDialog extends Dialog {
 		Table table = new Table(parent, SWT.BORDER | SWT.FULL_SELECTION | SWT.V_SCROLL);
 		table.setHeaderVisible(false);
 		table.setLinesVisible(true);
-		//
+
 		GridData gridData = new GridData(GridData.FILL_BOTH);
 		gridData.horizontalSpan = 2;
 		table.setLayoutData(gridData);
-		//
+
 		TableColumn tableColumn = new TableColumn(table, SWT.CENTER);
 		tableColumn.setWidth(DEFAULT_WIDTH - 50);
-		//
+
 		table.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -193,7 +193,7 @@ public class ImageDialog extends Dialog {
 				selectImage();
 			}
 		});
-		//
+
 		table.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -210,7 +210,7 @@ public class ImageDialog extends Dialog {
 				}
 			}
 		});
-		//
+
 		return table;
 	}
 
@@ -226,7 +226,7 @@ public class ImageDialog extends Dialog {
 		for(TableItem tableItem : tableImages.getItems()) {
 			tableItem.dispose();
 		}
-		//
+
 		for(String image : images) {
 			if(isValidImage(image)) {
 				if(imageMatchesSearch(image, searchTerm)) {
@@ -249,7 +249,7 @@ public class ImageDialog extends Dialog {
 		if(searchTerm == null || searchTerm.isEmpty()) {
 			return true;
 		}
-		//
+
 		return image.toLowerCase().contains(searchTerm.toLowerCase());
 	}
 

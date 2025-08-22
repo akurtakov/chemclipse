@@ -188,7 +188,7 @@ public class ChromatogramReportEntriesWizardPage extends WizardPage {
 						String fileName = "ChromatogramReport";
 						String[] filterExtensions = new String[]{"*.*"};
 						String[] filterNames = new String[]{"Chromatogram Report File (*.*)"};
-						//
+
 						try {
 							IChromatogramReportSupplier reportSupplier = getReportSupplier();
 							fileName = reportSupplier.getFileName();

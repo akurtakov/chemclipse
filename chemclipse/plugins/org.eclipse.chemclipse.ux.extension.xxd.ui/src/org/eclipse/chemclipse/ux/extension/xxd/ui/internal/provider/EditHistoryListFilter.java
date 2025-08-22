@@ -36,23 +36,23 @@ public class EditHistoryListFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof IEditInformation editInformation) {
 			String search = caseSensitive ? searchText : searchText.toLowerCase();
-			//
+
 			if(matches(search, editInformation.getDescription())) {
 				return true;
 			}
-			//
+
 			if(matches(search, editInformation.getEditor())) {
 				return true;
 			}
-			//
+
 			if(matches(search, editInformation.getDate().toString())) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 

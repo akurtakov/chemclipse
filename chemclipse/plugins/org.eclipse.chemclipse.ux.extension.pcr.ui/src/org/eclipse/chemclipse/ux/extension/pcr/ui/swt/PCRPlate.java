@@ -41,7 +41,7 @@ import org.eclipse.swt.widgets.Label;
 public class PCRPlate extends Composite {
 
 	private static final String LABEL_DATA = "LABEL_DATA";
-	//
+
 	private Map<Position, PCRWell> pcrWells = new HashMap<>();
 	private IWell well = null;
 	private Label wellDetailsLabel;
@@ -95,7 +95,7 @@ public class PCRPlate extends Composite {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(13, true);
 		gridLayout.marginLeft = 0;
@@ -119,7 +119,7 @@ public class PCRPlate extends Composite {
 				createDataWell(composite, position);
 			}
 		}
-		//
+
 		wellDetailsLabel = createLabel(composite);
 	}
 
@@ -144,7 +144,7 @@ public class PCRPlate extends Composite {
 		pcrWell.setContent(text, tooltip);
 		pcrWell.setLayoutData(new GridData(GridData.FILL_BOTH));
 		pcrWell.setColors(colorInactive, colorActive, colorText);
-		//
+
 		pcrWell.setSelectionHandler(new ISelectionHandler() {
 
 			@Override
@@ -153,7 +153,7 @@ public class PCRPlate extends Composite {
 				handleSelection(pcrWell);
 			}
 		});
-		//
+
 		pcrWell.addMouseMoveListener(new MouseMoveListener() {
 
 			@Override
@@ -163,7 +163,7 @@ public class PCRPlate extends Composite {
 				showWellDetails(pcrWell.getWell());
 			}
 		});
-		//
+
 		if(position != null) {
 			pcrWells.put(position, pcrWell);
 		}
@@ -208,7 +208,7 @@ public class PCRPlate extends Composite {
 					appendCrossingPointInfo(well, builder);
 					builder.append(" ] ");
 				}
-				//
+
 				wellDetailsLabel.setText(builder.toString());
 			}
 		}

@@ -50,10 +50,10 @@ public class ClipboardSettingsDialog extends Dialog {
 
 	public static final int DEFAULT_WIDTH = 300;
 	public static final int DEFAULT_HEIGHT = 500;
-	//
+
 	private ExtendedTableViewer extendedTableViewer;
 	private List<Button> columnCheckBoxes = new ArrayList<>();
-	//
+
 	private boolean copyHeader = true;
 	private ValueDelimiter valueDelimiter = ValueDelimiter.TAB;
 	private Set<Integer> columnSelections = new HashSet<>();
@@ -87,7 +87,7 @@ public class ClipboardSettingsDialog extends Dialog {
 				}
 			}
 		}
-		//
+
 		return PreferenceSupplier.DEF_CLIPBOARD_COPY_COLUMNS;
 	}
 
@@ -120,14 +120,14 @@ public class ClipboardSettingsDialog extends Dialog {
 
 		Composite composite = (Composite)super.createDialogArea(parent);
 		composite.setLayout(new GridLayout(1, true));
-		//
+
 		if(extendedTableViewer != null) {
 			initialize();
 			createSettingsSection(composite);
 		} else {
 			createInfoSection(composite);
 		}
-		//
+
 		return composite;
 	}
 
@@ -159,7 +159,7 @@ public class ClipboardSettingsDialog extends Dialog {
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		composite.setLayout(new GridLayout(4, false));
-		//
+
 		createLabel(composite, SupportMessages.tableColumns);
 		createButtonSelectAll(composite);
 		createButtonDeselectAll(composite);
@@ -170,7 +170,7 @@ public class ClipboardSettingsDialog extends Dialog {
 
 		List<TableViewerColumn> tableViewerColumns = extendedTableViewer.getTableViewerColumns();
 		int numberColumns = tableViewerColumns.size();
-		//
+
 		for(int i = 0; i < numberColumns; i++) {
 			/*
 			 * Columns
@@ -187,7 +187,7 @@ public class ClipboardSettingsDialog extends Dialog {
 			if(selected) {
 				columnSelections.add(i);
 			}
-			//
+
 			Button button = createButtonCheck(parent, title, tooltip, selected, selection -> {
 
 				if(selection) {
@@ -212,7 +212,7 @@ public class ClipboardSettingsDialog extends Dialog {
 		} else {
 			return true;
 		}
-		//
+
 		return false;
 	}
 
@@ -223,7 +223,7 @@ public class ClipboardSettingsDialog extends Dialog {
 		button.setToolTipText(tooltip);
 		button.setSelection(selection);
 		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -232,7 +232,7 @@ public class ClipboardSettingsDialog extends Dialog {
 				consumer.accept(button.getSelection());
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -241,7 +241,7 @@ public class ClipboardSettingsDialog extends Dialog {
 		Label label = new Label(parent, SWT.NONE);
 		label.setText(text);
 		label.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return label;
 	}
 
@@ -252,7 +252,7 @@ public class ClipboardSettingsDialog extends Dialog {
 		button.setToolTipText(SupportMessages.selectAll);
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CHECK_ALL, IApplicationImage.SIZE_16x16));
 		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -265,7 +265,7 @@ public class ClipboardSettingsDialog extends Dialog {
 				updateButtons(true);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -276,7 +276,7 @@ public class ClipboardSettingsDialog extends Dialog {
 		button.setToolTipText(SupportMessages.deselectAll);
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_UNCHECK_ALL, IApplicationImage.SIZE_16x16));
 		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -286,7 +286,7 @@ public class ClipboardSettingsDialog extends Dialog {
 				updateButtons(false);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -306,7 +306,7 @@ public class ClipboardSettingsDialog extends Dialog {
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText(SupportMessages.valueDelimiterToolTip);
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		combo.addSelectionListener(new SelectionAdapter() {
@@ -319,10 +319,10 @@ public class ClipboardSettingsDialog extends Dialog {
 				}
 			}
 		});
-		//
+
 		comboViewer.setInput(ValueDelimiter.values());
 		comboViewer.setSelection(new StructuredSelection(valueDelimiter));
-		//
+
 		return comboViewer;
 	}
 
@@ -339,7 +339,7 @@ public class ClipboardSettingsDialog extends Dialog {
 			List<TableViewerColumn> tableViewerColumns = extendedTableViewer.getTableViewerColumns();
 			return tableViewerColumns.size();
 		}
-		//
+
 		return -1;
 	}
 }

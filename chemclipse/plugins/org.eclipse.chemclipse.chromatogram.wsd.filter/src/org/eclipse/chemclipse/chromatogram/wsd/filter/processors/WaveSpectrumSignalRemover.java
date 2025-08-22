@@ -76,7 +76,7 @@ public class WaveSpectrumSignalRemover implements IProcessTypeSupplier {
 					IChromatogramWSD chromatogramWSD = chromatogramSelectionWSD.getChromatogram();
 					int startScan = chromatogramWSD.getScanNumber(chromatogramSelection.getStartRetentionTime());
 					int stopScan = chromatogramWSD.getScanNumber(chromatogramSelection.getStopRetentionTime());
-					//
+
 					for(int scan = startScan; scan <= stopScan; scan++) {
 						IScan scanX = chromatogramWSD.getScan(scan);
 						if(scanX instanceof IScanWSD scanWSD) {
@@ -113,7 +113,7 @@ public class WaveSpectrumSignalRemover implements IProcessTypeSupplier {
 		private Set<Integer> getWavelengthsToRemove(String selection) {
 
 			Set<Integer> wavelengths = new HashSet<>();
-			//
+
 			String[] values = selection.split(" ");
 			for(String value : values) {
 				try {
@@ -122,7 +122,7 @@ public class WaveSpectrumSignalRemover implements IProcessTypeSupplier {
 				} catch(NumberFormatException e) {
 				}
 			}
-			//
+
 			return wavelengths;
 		}
 	}

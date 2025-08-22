@@ -106,7 +106,7 @@ public class ReaderProxy_1007 extends AbstractZipReader implements IReaderProxy 
 		massSpectrum.setRetentionIndex(retentionIndex);
 		massSpectrum.setTimeSegmentId(timeSegmentId);
 		massSpectrum.setCycleNumber(cycleNumber);
-		//
+
 		int numberOfIons = dataInputStream.readInt(); // Number of ions
 		for(int i = 1; i <= numberOfIons; i++) {
 			/*
@@ -124,7 +124,7 @@ public class ReaderProxy_1007 extends AbstractZipReader implements IReaderProxy 
 	private IVendorIon readIon(DataInputStream dataInputStream, IIonTransitionSettings ionTransitionSettings) throws IOException {
 
 		IVendorIon ion;
-		//
+
 		double mz = dataInputStream.readDouble(); // m/z
 		float abundance = dataInputStream.readFloat(); // Abundance
 		/*
@@ -147,7 +147,7 @@ public class ReaderProxy_1007 extends AbstractZipReader implements IReaderProxy 
 			double filter3Resolution = dataInputStream.readDouble(); // q3 resolution
 			int transitionGroup = dataInputStream.readInt(); // transition group
 			int dwell = dataInputStream.readInt(); // dwell
-			//
+
 			IIonTransition ionTransition = ionTransitionSettings.getIonTransition(compoundName, filter1FirstIon, filter1LastIon, filter3FirstIon, filter3LastIon, collisionEnergy, filter1Resolution, filter3Resolution, transitionGroup);
 			ionTransition.setDwell(dwell);
 			ion = new VendorIon(mz, abundance, ionTransition);
@@ -159,10 +159,10 @@ public class ReaderProxy_1007 extends AbstractZipReader implements IReaderProxy 
 
 		int numberOfMassSpectrumTargets = dataInputStream.readInt(); // Number Mass Spectrum Targets
 		for(int i = 1; i <= numberOfMassSpectrumTargets; i++) {
-			//
+
 			String identifier = readString(dataInputStream); // Identifier
 			boolean manuallyVerified = dataInputStream.readBoolean();
-			//
+
 			String casNumber = readString(dataInputStream); // CAS-Number
 			String comments = readString(dataInputStream); // Comments
 			String referenceIdentifier = readString(dataInputStream);
@@ -185,7 +185,7 @@ public class ReaderProxy_1007 extends AbstractZipReader implements IReaderProxy 
 			float reverseMatchFactorDirect = dataInputStream.readFloat(); // Reverse Match Factor Direct
 			float probability = dataInputStream.readFloat(); // Probability
 			boolean isMatch = dataInputStream.readBoolean();
-			//
+
 			ILibraryInformation libraryInformation = new LibraryInformation();
 			libraryInformation.setCasNumber(casNumber);
 			libraryInformation.setComments(comments);
@@ -199,10 +199,10 @@ public class ReaderProxy_1007 extends AbstractZipReader implements IReaderProxy 
 			libraryInformation.setSmiles(smiles);
 			libraryInformation.setInChI(inChI);
 			libraryInformation.setMolWeight(molWeight);
-			//
+
 			IComparisonResult comparisonResult = new ComparisonResult(matchFactor, reverseMatchFactor, matchFactorDirect, reverseMatchFactorDirect, probability);
 			comparisonResult.setMatch(isMatch);
-			//
+
 			try {
 				IIdentificationTarget identificationEntry = new IdentificationTarget(libraryInformation, comparisonResult);
 				identificationEntry.setIdentifier(identifier);

@@ -37,14 +37,14 @@ public class ChromatogramColumnParser extends AbstractChromatogramClassifier {
 	public IProcessingInfo<IChromatogramClassifierResult> applyClassifier(IChromatogramSelection chromatogramSelection, IChromatogramClassifierSettings chromatogramClassifierSettings, IProgressMonitor monitor) {
 
 		IProcessingInfo<IChromatogramClassifierResult> processingInfo = new ProcessingInfo<>();
-		//
+
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 		ChromatogramColumnParserSettings chromatogramColumnParserSettings = getChromatogramColumnParserSettings(chromatogramClassifierSettings);
 		ColumnField columnField = chromatogramColumnParserSettings.getColumnField();
 		SeparationColumnMapping separationColumnMapping = chromatogramColumnParserSettings.getSeparationColumnMapping();
 		boolean parseReferences = chromatogramColumnParserSettings.isParseReferences();
 		ChromatogramColumnSupport.parseSeparationColumn(chromatogram, columnField, separationColumnMapping, parseReferences);
-		//
+
 		return processingInfo;
 	}
 

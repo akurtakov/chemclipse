@@ -27,7 +27,7 @@ public class WellMappingValidator extends ValueParserSupport implements IValidat
 	private static final String SEPARATOR_TOKEN = WellMappings.SEPARATOR_TOKEN;
 	private static final String SEPARATOR_ENTRY = WellMappings.SEPARATOR_ENTRY;
 	private static final String ERROR_TOKEN = "The item must not contain: " + SEPARATOR_TOKEN;
-	//
+
 	private String subset;
 	private String sample;
 	private int[] channels;
@@ -75,7 +75,7 @@ public class WellMappingValidator extends ValueParserSupport implements IValidat
 		} else {
 			message = ERROR_ENTRY;
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

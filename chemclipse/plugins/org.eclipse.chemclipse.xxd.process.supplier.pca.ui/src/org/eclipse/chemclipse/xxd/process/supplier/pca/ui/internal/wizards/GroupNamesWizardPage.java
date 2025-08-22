@@ -40,9 +40,9 @@ public class GroupNamesWizardPage extends WizardPage {
 	private final int STARTS_WITH_STRING = 1;
 	private final int ENDS_WITH_STRING = 2;
 	private final int REGEXP = 3;
-	//
+
 	private int selectNames = CONTAINS_STRING;
-	//
+
 	private InputFilesTable inputFilesTable;
 	private Text textGroupName;
 	private Button caseSensitive;
@@ -70,7 +70,7 @@ public class GroupNamesWizardPage extends WizardPage {
 		createOptionGroup(composite);
 		createToolbar(composite);
 		inputFilesTable = createInputFilesTable(composite);
-		//
+
 		setControl(composite);
 	}
 
@@ -106,7 +106,7 @@ public class GroupNamesWizardPage extends WizardPage {
 		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false));
 		group.setLayout(new GridLayout(1, false));
 		group.setText("Settings");
-		//
+
 		caseSensitive = createCheckBox(group, "Case Sensitive");
 		createRadioButton(group, "Contains String", true, CONTAINS_STRING);
 		createRadioButton(group, "Starts with String", false, STARTS_WITH_STRING);
@@ -130,7 +130,7 @@ public class GroupNamesWizardPage extends WizardPage {
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		composite.setLayout(new GridLayout(2, false));
-		//
+
 		createButtonProcess(composite);
 		createButtonReset(composite);
 	}
@@ -150,7 +150,7 @@ public class GroupNamesWizardPage extends WizardPage {
 				updateGroupNames();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -174,7 +174,7 @@ public class GroupNamesWizardPage extends WizardPage {
 				selectNames = option;
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -192,7 +192,7 @@ public class GroupNamesWizardPage extends WizardPage {
 				resetGroupNames();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -202,10 +202,10 @@ public class GroupNamesWizardPage extends WizardPage {
 		if(value.isEmpty()) {
 			return;
 		}
-		//
+
 		List<IDataInputEntry> filterInput = new ArrayList<>();
 		IInputWizard inputWizard = (IInputWizard)getWizard();
-		//
+
 		switch(selectNames) {
 			case CONTAINS_STRING:
 				if(!caseSensitive.getSelection()) {
@@ -235,7 +235,7 @@ public class GroupNamesWizardPage extends WizardPage {
 			default:
 				break;
 		}
-		//
+
 		String groupName = textGroupName.getText().trim();
 		filterInput.forEach(i -> i.setGroupName(groupName));
 		update();

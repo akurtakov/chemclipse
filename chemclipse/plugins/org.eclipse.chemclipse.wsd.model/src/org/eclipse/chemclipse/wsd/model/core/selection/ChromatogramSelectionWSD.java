@@ -44,7 +44,7 @@ public class ChromatogramSelectionWSD extends AbstractChromatogramSelection impl
 		 * valid scan and if exists a valid peak.
 		 */
 		super(chromatogram);
-		//
+
 		populateWavelengths(chromatogram);
 		reset(fireUpdate);
 	}
@@ -165,9 +165,9 @@ public class ChromatogramSelectionWSD extends AbstractChromatogramSelection impl
 	public void update(boolean forceReload) {
 
 		super.update(forceReload);
-		//
+
 		setSelectedScan(selectedScan, false);
-		//
+
 		fireUpdateChange(forceReload);
 	}
 

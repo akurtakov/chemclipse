@@ -59,7 +59,7 @@ public class WellChartPart extends AbstractPart<ExtendedWellChartUI> {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 

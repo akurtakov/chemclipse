@@ -21,7 +21,7 @@ public class KeyValueListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = KeyValueLabelProvider.TITLES;
 	private static final int[] BOUNDS = KeyValueLabelProvider.BOUNDS;
-	//
+
 	private KeyValueLabelProvider labelProvider = new KeyValueLabelProvider();
 
 	public KeyValueListUI(Composite parent, int style) {

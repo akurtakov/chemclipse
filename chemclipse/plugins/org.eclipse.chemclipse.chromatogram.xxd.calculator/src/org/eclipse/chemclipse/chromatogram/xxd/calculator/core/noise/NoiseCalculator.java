@@ -74,7 +74,7 @@ public class NoiseCalculator {
 					calculatorId = "";
 					name = "n.a.";
 				}
-				//
+
 				calculatorArray[i][0] = name;
 				calculatorArray[i][1] = calculatorId;
 			}
@@ -87,7 +87,7 @@ public class NoiseCalculator {
 		if(calculatorArray == null) {
 			calculatorArray = new String[0][0];
 		}
-		//
+
 		return calculatorArray;
 	}
 
@@ -108,7 +108,7 @@ public class NoiseCalculator {
 			supplier.setDetectorName(element.getAttribute(CALCULATOR_NAME));
 			noiseCalculatorSupport.add(supplier);
 		}
-		//
+
 		return noiseCalculatorSupport;
 	}
 
@@ -134,7 +134,7 @@ public class NoiseCalculator {
 				logger.warn(e);
 			}
 		}
-		//
+
 		return null;
 	}
 
@@ -149,7 +149,7 @@ public class NoiseCalculator {
 		if("".equals(detectorId)) {
 			return null;
 		}
-		//
+
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 		if(registry != null) {
 			IConfigurationElement[] elements = registry.getConfigurationElementsFor(EXTENSION_POINT);
@@ -159,7 +159,7 @@ public class NoiseCalculator {
 				}
 			}
 		}
-		//
+
 		return null;
 	}
 }

@@ -30,7 +30,7 @@ public abstract class AbstractRegularLibraryMassSpectrum extends AbstractRegular
 	 * methods.
 	 */
 	private static final long serialVersionUID = -3521383640386912035L;
-	//
+
 	private ILibraryInformation libraryInformation;
 	private String precursorType;
 	private double neutralMass = 0.0d;
@@ -112,7 +112,7 @@ public abstract class AbstractRegularLibraryMassSpectrum extends AbstractRegular
 		if(properties == null) {
 			properties = new HashMap<>();
 		}
-		//
+
 		properties.put(key, value);
 	}
 

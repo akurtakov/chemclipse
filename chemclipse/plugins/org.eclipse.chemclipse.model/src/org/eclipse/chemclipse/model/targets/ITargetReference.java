@@ -55,7 +55,7 @@ public interface ITargetReference extends ITargetSupplier {
 		if(identificationTarget != null) {
 			return libraryField.getTransformer().apply(identificationTarget);
 		}
-		//
+
 		return null;
 	}
 }

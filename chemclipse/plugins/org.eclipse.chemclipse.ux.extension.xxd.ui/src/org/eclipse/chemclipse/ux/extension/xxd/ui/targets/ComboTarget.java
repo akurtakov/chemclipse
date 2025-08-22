@@ -44,10 +44,10 @@ public class ComboTarget extends Composite {
 
 	private final TargetListUtil targetListUtil = new TargetListUtil();
 	private final TargetValidator targetValidator = new TargetValidator();
-	//
+
 	private Combo combo;
 	private ControlDecoration controlDecoration;
-	//
+
 	private ITargetUpdateListener targetUpdateListener = null;
 
 	public ComboTarget(Composite parent, int style) {
@@ -84,7 +84,7 @@ public class ComboTarget extends Composite {
 
 		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 		boolean useTargetList = preferenceStore.getBoolean(PreferenceSupplier.P_USE_TARGET_LIST);
-		//
+
 		String[] items;
 		if(useTargetList) {
 			items = targetListUtil.parseString(preferenceStore.getString(PreferenceSupplier.P_TARGET_LIST));
@@ -92,7 +92,7 @@ public class ComboTarget extends Composite {
 		} else {
 			items = new String[]{};
 		}
-		//
+
 		combo.setItems(items);
 	}
 
@@ -103,7 +103,7 @@ public class ComboTarget extends Composite {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		combo = createCombo(this);
 	}
 
@@ -113,7 +113,7 @@ public class ComboTarget extends Composite {
 		combo.setText("");
 		combo.setToolTipText("Select a target or type in a new substance name.");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		controlDecoration = new ControlDecoration(combo, SWT.LEFT | SWT.TOP);
 		combo.addKeyListener(new KeyAdapter() {
 

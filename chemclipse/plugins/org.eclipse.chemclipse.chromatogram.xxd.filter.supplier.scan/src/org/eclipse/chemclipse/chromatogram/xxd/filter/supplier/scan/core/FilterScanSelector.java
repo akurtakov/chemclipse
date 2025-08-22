@@ -81,7 +81,7 @@ public class FilterScanSelector implements IProcessTypeSupplier {
 			int startScan = chromatogram.getScanNumber(chromatogramSelection.getStartRetentionTime());
 			int stopScan = chromatogram.getScanNumber(chromatogramSelection.getStopRetentionTime());
 			int scanNumber = getScanNumber(chromatogram, filterSettingsScanSelector);
-			//
+
 			if(scanNumber >= startScan && scanNumber <= stopScan) {
 				IScan scan = chromatogram.getScan(scanNumber);
 				chromatogramSelection.setSelectedScan(scan);
@@ -117,7 +117,7 @@ public class FilterScanSelector implements IProcessTypeSupplier {
 					scanNumber = -1;
 					break;
 			}
-			//
+
 			return scanNumber;
 		}
 	}

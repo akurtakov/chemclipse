@@ -47,7 +47,7 @@ public class FilesInputWizard extends Wizard implements IInputWizard {
 	public void addPages() {
 
 		fileSettingsWizardPage.setFile(file);
-		//
+
 		addPage(fileSettingsWizardPage);
 		addPage(preprocessingWizardPage);
 	}
@@ -98,7 +98,7 @@ public class FilesInputWizard extends Wizard implements IInputWizard {
 				return file;
 			}
 		}
-		//
+
 		return null;
 	}
 }

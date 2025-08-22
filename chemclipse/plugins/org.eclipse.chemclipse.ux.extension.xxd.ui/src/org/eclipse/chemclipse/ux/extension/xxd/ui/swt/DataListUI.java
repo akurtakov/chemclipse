@@ -76,7 +76,7 @@ public class DataListUI implements ConfigurableUI<DataListUIConfig> {
 	private InputWizardSettings inputWizardSettings;
 	private Composite toolbarMain;
 	private InformationUI infoBottom;
-	//
+
 	private IPreferenceStore preferenceStore;
 	private String userPathKey;
 	private DataType[] dataTypes;
@@ -87,7 +87,7 @@ public class DataListUI implements ConfigurableUI<DataListUIConfig> {
 		this.preferenceStore = preferenceStore;
 		this.userPathKey = userPathKey;
 		this.dataTypes = dataTypes;
-		//
+
 		inputWizardSettings = createInputWizardSettings(dataTypes);
 		control = createControl(parent);
 		addDragAndDropSupport(control);
@@ -183,13 +183,13 @@ public class DataListUI implements ConfigurableUI<DataListUIConfig> {
 		final ToolItem item = new ToolItem(toolBar, style);
 		item.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ADD, IApplicationImageProvider.SIZE_16x16));
 		item.setToolTipText("Add items to the list.");
-		//
+
 		if(optionsAvailable) {
 			addFileSelectionMenu(toolBar, item);
 		} else {
 			addFileSelectionListener(item);
 		}
-		//
+
 		return item;
 	}
 
@@ -209,17 +209,17 @@ public class DataListUI implements ConfigurableUI<DataListUIConfig> {
 
 		final Menu menu = new Menu(toolBar.getShell(), SWT.POP_UP);
 		toolBar.addDisposeListener(e -> menu.dispose());
-		//
+
 		item.addListener(SWT.Selection, event -> {
 			if(event.detail == SWT.ARROW) {
 				Rectangle rectangle = item.getBounds();
 				Point point = new Point(rectangle.x, rectangle.y + rectangle.height);
 				point = toolBar.toDisplay(point);
-				//
+
 				for(MenuItem menuItem : menu.getItems()) {
 					menuItem.dispose();
 				}
-				//
+
 				for(DataType dataType : dataTypes) {
 					MenuItem menuItem = new MenuItem(menu, SWT.NONE);
 					menuItem.setText(dataType.name());
@@ -235,7 +235,7 @@ public class DataListUI implements ConfigurableUI<DataListUIConfig> {
 						}
 					});
 				}
-				//
+
 				menu.setLocation(point.x, point.y);
 				menu.setVisible(true);
 			} else {
@@ -260,11 +260,11 @@ public class DataListUI implements ConfigurableUI<DataListUIConfig> {
 		GridLayout layout = new GridLayout(1, true);
 		layout.marginHeight = layout.marginWidth = 0;
 		control.setLayout(layout);
-		//
+
 		createToolbarTop(control);
 		createTableViewer(control);
 		createToolbarBottom(control);
-		//
+
 		return control;
 	}
 
@@ -273,10 +273,10 @@ public class DataListUI implements ConfigurableUI<DataListUIConfig> {
 		tableViewer = new ExtendedTableViewer(composite, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		tableViewer.setContentProvider(ArrayContentProvider.getInstance());
 		tableViewer.setInput(files);
-		//
+
 		DataExplorerLabelProvider dataExplorerLabelProvider = new DataExplorerLabelProvider(inputWizardSettings.getSupplierFileEditorSupportList());
 		composite.addDisposeListener(e -> dataExplorerLabelProvider.dispose());
-		//
+
 		tableViewer.addColumn(new SimpleColumnDefinition<>("Name", 250, new ColumnLabelProvider() {
 
 			@Override
@@ -294,7 +294,7 @@ public class DataListUI implements ConfigurableUI<DataListUIConfig> {
 				return dataExplorerLabelProvider.getImage(element);
 			}
 		}, null, this::getName));
-		//
+
 		tableViewer.addColumn(new SimpleColumnDefinition<>("Path", 300, new ColumnLabelProvider() {
 
 			@Override
@@ -306,7 +306,7 @@ public class DataListUI implements ConfigurableUI<DataListUIConfig> {
 				return "-";
 			}
 		}, null, this::getPath));
-		//
+
 		tableViewer.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
 	}
 
@@ -317,7 +317,7 @@ public class DataListUI implements ConfigurableUI<DataListUIConfig> {
 		gridData.horizontalAlignment = SWT.END;
 		toolbarMain.setLayoutData(gridData);
 		toolbarMain.setLayout(new GridLayout(1, false));
-		//
+
 		Button button = new Button(toolbarMain, SWT.PUSH);
 		button.setToolTipText("Open the Settings");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CONFIGURE, IApplicationImageProvider.SIZE_16x16));
@@ -329,7 +329,7 @@ public class DataListUI implements ConfigurableUI<DataListUIConfig> {
 				IPreferencePage preferencePage = inputWizardSettings.getPreferencePage();
 				PreferenceManager preferenceManager = new PreferenceManager();
 				preferenceManager.addToRoot(new PreferenceNode("1", preferencePage));
-				//
+
 				PreferenceDialog preferenceDialog = new PreferenceDialog(DisplayUtils.getShell(), preferenceManager);
 				preferenceDialog.create();
 				preferenceDialog.setMessage("Settings");
@@ -350,7 +350,7 @@ public class DataListUI implements ConfigurableUI<DataListUIConfig> {
 		infoBottom.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 		ToolBar toolBar = new ToolBar(control, SWT.FLAT | SWT.END);
 		toolBar.setLayoutData(new GridData(SWT.END, SWT.CENTER, false, false));
-		//
+
 		createSortButton(toolBar);
 		createMoveUpButton(toolBar);
 		createMoveDownButton(toolBar);
@@ -419,7 +419,7 @@ public class DataListUI implements ConfigurableUI<DataListUIConfig> {
 				tableViewer.setSelection(selection);
 			}
 		});
-		//
+
 		return item;
 	}
 
@@ -482,7 +482,7 @@ public class DataListUI implements ConfigurableUI<DataListUIConfig> {
 		inputWizardSettings = InputWizardSettings.create(preferenceStore, userPathKey, dataTypes);
 		inputWizardSettings.setTitle("Select files");
 		inputWizardSettings.setDescription("Select items to process.");
-		//
+
 		return inputWizardSettings;
 	}
 

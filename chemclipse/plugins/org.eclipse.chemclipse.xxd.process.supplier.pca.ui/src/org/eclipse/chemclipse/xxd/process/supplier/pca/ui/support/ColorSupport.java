@@ -42,7 +42,7 @@ public class ColorSupport {
 				colorGroups.add(colorGroup);
 			}
 		}
-		//
+
 		return createColorMap(colorGroups, colorScheme);
 	}
 
@@ -55,7 +55,7 @@ public class ColorSupport {
 				colorGroups.add(colorGroup);
 			}
 		}
-		//
+
 		return createColorMap(colorGroups, colorScheme);
 	}
 
@@ -79,7 +79,7 @@ public class ColorSupport {
 				colorGroup = sample.getGroupName();
 				break;
 		}
-		//
+
 		return validateColorGroup(colorGroup);
 	}
 
@@ -96,7 +96,7 @@ public class ColorSupport {
 				colorGroup = ColorSupport.COLOR_GROUP_DEFAULT;
 			}
 		}
-		//
+
 		return colorGroup;
 	}
 
@@ -112,7 +112,7 @@ public class ColorSupport {
 		List<String> colorGroupList = new ArrayList<>(colorGroups);
 		Collections.sort(colorGroupList);
 		colorGroupList.add(COLOR_GROUP_DEFAULT);
-		//
+
 		for(String colorGroup : colorGroupList) {
 			Color color = colorMap.get(colorGroup);
 			if(color == null) {
@@ -120,7 +120,7 @@ public class ColorSupport {
 				colorScheme.incrementColor();
 			}
 		}
-		//
+
 		return colorMap;
 	}
 }

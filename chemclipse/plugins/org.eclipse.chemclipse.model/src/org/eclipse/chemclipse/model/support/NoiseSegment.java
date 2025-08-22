@@ -18,7 +18,7 @@ import java.util.Collections;
 public class NoiseSegment implements INoiseSegment {
 
 	private static final long serialVersionUID = 6666299719479935503L;
-	//
+
 	private IAnalysisSegment analysisSegment = null;
 	private double noiseFactor = 0.0d;
 	private String traces = "";

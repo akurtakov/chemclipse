@@ -19,7 +19,7 @@ import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 public class ParetoDistance implements DistanceMeasure {
 
 	private static final long serialVersionUID = -4594150285363092416L;
-	//
+
 	private double power = 0.75;
 
 	public ParetoDistance(double power) {

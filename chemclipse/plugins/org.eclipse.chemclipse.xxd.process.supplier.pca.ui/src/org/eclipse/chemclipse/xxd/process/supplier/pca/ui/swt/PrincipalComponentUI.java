@@ -27,14 +27,14 @@ public class PrincipalComponentUI extends Composite {
 	public static final int SPINNER_X = 1 << 0;
 	public static final int SPINNER_Y = 1 << 1;
 	public static final int SPINNER_Z = 1 << 2;
-	//
+
 	private int options = SPINNER_NONE;
 	int maximum = 3;
-	//
+
 	private Spinner spinnerX;
 	private Spinner spinnerY;
 	private Spinner spinnerZ;
-	//
+
 	private ISelectionListenerPCs selectionListener = null;
 
 	public PrincipalComponentUI(Composite parent, int style) {
@@ -76,17 +76,17 @@ public class PrincipalComponentUI extends Composite {
 			 * Max PCs
 			 */
 			int numberPrincipalComponents = analysisSettings.getNumberOfPrincipalComponents();
-			//
+
 			int selectionX = spinnerX.getSelection();
 			spinnerX.setSelection(selectionX <= numberPrincipalComponents ? selectionX : 1);
 			spinnerX.setMaximum(numberPrincipalComponents);
 			spinnerX.setEnabled(isSpinnerActive(SPINNER_X));
-			//
+
 			int selectionY = spinnerY.getSelection();
 			spinnerY.setSelection(selectionY <= numberPrincipalComponents ? selectionY : 1);
 			spinnerY.setMaximum(numberPrincipalComponents);
 			spinnerY.setEnabled(isSpinnerActive(SPINNER_Y));
-			//
+
 			int selectionZ = spinnerZ.getSelection();
 			spinnerZ.setSelection(selectionZ <= numberPrincipalComponents ? selectionZ : 1);
 			spinnerZ.setMaximum(numberPrincipalComponents);
@@ -95,11 +95,11 @@ public class PrincipalComponentUI extends Composite {
 			spinnerX.setSelection(1);
 			spinnerX.setMaximum(maximum);
 			spinnerX.setEnabled(false);
-			//
+
 			spinnerY.setSelection(2);
 			spinnerY.setMaximum(maximum);
 			spinnerY.setEnabled(false);
-			//
+
 			spinnerZ.setSelection(3);
 			spinnerZ.setMaximum(maximum);
 			spinnerZ.setEnabled(false);
@@ -113,13 +113,13 @@ public class PrincipalComponentUI extends Composite {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		createLabel(this, "PC (X):");
 		spinnerX = createSpinner(this, "Select the PC for the x axis.", maximum, isSpinnerActive(SPINNER_X), 1);
-		//
+
 		createLabel(this, "PC (Y):");
 		spinnerY = createSpinner(this, "Select the PC for the y axis.", maximum, isSpinnerActive(SPINNER_Y), 2);
-		//
+
 		createLabel(this, "PC (Z):");
 		spinnerZ = createSpinner(this, "Select the PC for the z axis.", maximum, isSpinnerActive(SPINNER_Z), 3);
 	}
@@ -148,7 +148,7 @@ public class PrincipalComponentUI extends Composite {
 				fireUpdate();
 			}
 		});
-		//
+
 		return spinner;
 	}
 

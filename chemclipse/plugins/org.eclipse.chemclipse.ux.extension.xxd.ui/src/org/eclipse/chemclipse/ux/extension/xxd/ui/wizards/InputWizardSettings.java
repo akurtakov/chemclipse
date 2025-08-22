@@ -30,7 +30,7 @@ public class InputWizardSettings {
 
 	public static final int DEFAULT_WIDTH = 500;
 	public static final int DEFAULT_HEIGHT = 400;
-	//
+
 	private String title = "Title";
 	private String description = "Description";
 	private IPreferenceStore preferenceStore;

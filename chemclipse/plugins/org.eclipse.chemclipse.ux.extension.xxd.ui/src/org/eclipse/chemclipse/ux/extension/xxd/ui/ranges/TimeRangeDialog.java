@@ -41,13 +41,13 @@ public class TimeRangeDialog extends Dialog {
 	private IInputValidator inputValidator = null;
 	private AtomicReference<Combo> comboControl = new AtomicReference<>();
 	private AtomicReference<Label> feedbackControl = new AtomicReference<>();
-	//
+
 	private String identifier = "";
 
 	public TimeRangeDialog(Shell shell, TimeRangeLabels timeRangeLabels, IInputValidator inputValidator) {
 
 		super(shell);
-		//
+
 		this.timeRangeLabels = timeRangeLabels;
 		this.inputValidator = inputValidator;
 	}
@@ -82,11 +82,11 @@ public class TimeRangeDialog extends Dialog {
 	protected Control createDialogArea(Composite parent) {
 
 		Composite composite = (Composite)super.createDialogArea(parent);
-		//
+
 		createComboViewer(composite);
 		createFeedbackLabel(composite);
 		assignIdentifier();
-		//
+
 		return composite;
 	}
 
@@ -98,13 +98,13 @@ public class TimeRangeDialog extends Dialog {
 		Combo combo = EnhancedCombo.create(parent, SWT.BORDER);
 		combo.setToolTipText("Select or type in a new name.");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		combo.addModifyListener(e -> assignIdentifier());
-		//
+
 		combo.setItems(timeRangeLabels.getProposals());
 		combo.setText(timeRangeLabels.getInitialValue());
 		enableProposals(combo);
-		//
+
 		comboControl.set(combo);
 	}
 
@@ -114,7 +114,7 @@ public class TimeRangeDialog extends Dialog {
 		label.setText("");
 		label.setToolTipText("Validation");
 		label.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		feedbackControl.set(label);
 	}
 
@@ -132,7 +132,7 @@ public class TimeRangeDialog extends Dialog {
 			}
 			return contentProposals.toArray(new IContentProposal[0]);
 		};
-		//
+
 		enableProposals(combo, contentProposalProvider);
 	}
 
@@ -141,7 +141,7 @@ public class TimeRangeDialog extends Dialog {
 		ContentProposalAdapter contentProposalAdapter = new ContentProposalAdapter(combo, new ComboContentAdapter(), contentProposalProvider, null, null);
 		contentProposalAdapter.setPropagateKeys(true);
 		contentProposalAdapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
-		//
+
 		return contentProposalAdapter;
 	}
 
@@ -160,12 +160,12 @@ public class TimeRangeDialog extends Dialog {
 		if(inputValidator != null) {
 			message = inputValidator.isValid(identifier);
 		}
-		//
+
 		Control button = getButton(IDialogConstants.OK_ID);
 		if(button != null) {
 			button.setEnabled(message == null);
 		}
-		//
+
 		Label label = feedbackControl.get();
 		if(message == null) {
 			label.setBackground(Colors.LIGHT_GREEN);

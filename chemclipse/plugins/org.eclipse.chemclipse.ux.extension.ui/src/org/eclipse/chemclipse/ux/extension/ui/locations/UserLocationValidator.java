@@ -21,9 +21,9 @@ import org.eclipse.core.runtime.IStatus;
 public class UserLocationValidator implements IValidator<Object> {
 
 	private static final String ERROR = "Please enter a correct name.";
-	//
+
 	private PathValidator pathValidator = new PathValidator(true);
-	//
+
 	private String name = "";
 	private String path = "";
 
@@ -33,7 +33,7 @@ public class UserLocationValidator implements IValidator<Object> {
 		String message = null;
 		this.name = "";
 		this.path = "";
-		//
+
 		if(value == null) {
 			message = ERROR;
 		} else {
@@ -41,7 +41,7 @@ public class UserLocationValidator implements IValidator<Object> {
 				String[] values = value.toString().trim().split("\\" + UserLocationListUtil.SEPARATOR_ENTRY);
 				String name = values.length > 0 ? values[0].trim() : "";
 				String path = values.length > 1 ? values[1].trim() : "";
-				//
+
 				if(name.isBlank()) {
 					message = ERROR;
 				} else {
@@ -57,7 +57,7 @@ public class UserLocationValidator implements IValidator<Object> {
 				message = ERROR;
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

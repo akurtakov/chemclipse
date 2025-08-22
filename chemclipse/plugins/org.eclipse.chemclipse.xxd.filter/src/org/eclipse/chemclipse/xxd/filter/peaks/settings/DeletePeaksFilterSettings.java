@@ -46,7 +46,7 @@ public class DeletePeaksFilterSettings extends AbstractSettingsMigrator<DeletePe
 		List<ISettingsMigrationHandler<DeletePeaksFilterSettings>> migrationHandler = new ArrayList<>();
 		migrationHandler.add(new DeletePeaksFilterSettings_v1());
 		migrationHandler.add(new DeletePeaksFilterSettings_v2());
-		//
+
 		return migrationHandler;
 	}
 

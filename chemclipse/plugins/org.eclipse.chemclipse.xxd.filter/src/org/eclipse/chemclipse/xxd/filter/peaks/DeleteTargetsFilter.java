@@ -53,7 +53,7 @@ public class DeleteTargetsFilter extends AbstractPeakFilter<DeleteTargetsFilterS
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
-		//
+
 		SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), peaks.size());
 		for(IPeak peak : peaks) {
 			TargetsFilter.filter(peak, configuration);

@@ -120,14 +120,14 @@ public class UtilityFunctions {
 				break;
 			}
 		}
-		//
+
 		int reverseIndex = array.length - 1;
 		for(; reverseIndex > 0; reverseIndex--) {
 			if(value.compareTo(BigDecimal.valueOf(array[reverseIndex].doubleValue())) != 1) {
 				break;
 			}
 		}
-		//
+
 		if(Double.compare(reverseIndex, index) == 0) {
 			return reverseIndex;
 		} else {

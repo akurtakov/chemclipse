@@ -17,7 +17,7 @@ import org.eclipse.osgi.util.NLS;
 public class ConverterMessages extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.chemclipse.converter.l10n.messages"; //$NON-NLS-1$
-	//
+
 	public static String exportChromatogram;
 	public static String importChromatogram;
 	public static String importChromatogramOverview;
@@ -40,7 +40,7 @@ public class ConverterMessages extends NLS {
 	public static String writeMassSpectra;
 	public static String noMassSpectraStored;
 	public static String readScans;
-	//
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, ConverterMessages.class);
 	}

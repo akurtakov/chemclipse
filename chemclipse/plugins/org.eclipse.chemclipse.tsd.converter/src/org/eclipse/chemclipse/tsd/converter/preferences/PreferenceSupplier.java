@@ -24,7 +24,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final int MAX_TRACE_WSD = 800;
 	public static final int MIN_TRACE_ISD = 1;
 	public static final int MAX_TRACE_ISD = 2000;
-	//
+
 	public static final String P_USE_ADAPTER_MSD = "useAdapterMSD";
 	public static final boolean DEF_USE_ADAPTER_MSD = true;
 	public static final String P_USE_ADAPTER_FIXED_RANGE_MSD = "useAdapterFixedRangeMSD";
@@ -33,7 +33,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final int DEF_ADAPTER_MIN_TRACE_MSD = 18;
 	public static final String P_ADAPTER_MAX_TRACE_MSD = "adapterMaxTraceMSD";
 	public static final int DEF_ADAPTER_MAX_TRACE_MSD = 600;
-	//
+
 	public static final String P_USE_ADAPTER_WSD = "useAdapterWSD";
 	public static final boolean DEF_USE_ADAPTER_WSD = true;
 	public static final String P_USE_ADAPTER_FIXED_RANGE_WSD = "useAdapterFixedRangeWSD";
@@ -42,7 +42,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final int DEF_ADAPTER_MIN_TRACE_WSD = 200;
 	public static final String P_ADAPTER_MAX_TRACE_WSD = "adapterMaxTraceWSD";
 	public static final int DEF_ADAPTER_MAX_TRACE_WSD = 600;
-	//
+
 	public static final String P_USE_ADAPTER_ISD = "useAdapterISD";
 	public static final boolean DEF_USE_ADAPTER_ISD = true;
 	public static final String P_USE_ADAPTER_FIXED_RANGE_ISD = "useAdapterFixedRangeISD";

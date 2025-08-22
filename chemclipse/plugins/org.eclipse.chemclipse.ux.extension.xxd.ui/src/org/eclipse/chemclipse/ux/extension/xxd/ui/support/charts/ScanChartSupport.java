@@ -93,7 +93,7 @@ public class ScanChartSupport {
 
 		List<Double> xSeries = new ArrayList<>(scans.size());
 		List<Double> ySeries = new ArrayList<>(scans.size());
-		//
+
 		for(IScan scan : scans) {
 			if(displayType.equals(DisplayType.TIC)) {
 				if(scan != null) {
@@ -114,7 +114,7 @@ public class ScanChartSupport {
 				}
 			}
 		}
-		//
+
 		ISeriesData seriesData = new SeriesData(xSeries.stream().mapToDouble(Double::doubleValue).toArray(), ySeries.stream().mapToDouble(Double::doubleValue).toArray(), seriesId);
 		ILineSeriesData lineSeriesData = new LineSeriesData(seriesData);
 		return lineSeriesData;
@@ -186,7 +186,7 @@ public class ScanChartSupport {
 			xSeries = new double[0];
 			ySeries = new double[0];
 		}
-		//
+
 		return new SeriesData(xSeries, ySeries, id);
 	}
 }

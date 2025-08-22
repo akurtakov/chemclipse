@@ -33,11 +33,11 @@ public class NistResultFileParser {
 	private static final String MATCH_FACTOR_PATTERN = "(MF:\\s*)(.*?)(;\\s*RMF:\\s*)(.*?)(;\\s*Prob:\\s*)(.*?)(;)";
 	private static final String CAS_PATTERN = "(CAS:\\s*)(.*?)(;)";
 	private static final String LIB_PATTERN = "(Mw:\\s*)(.*)(;\\s*Lib:.*<<)(.*)(>>;\\s*Id:\\s*)(.*)(\\.)";
-	//
+
 	private static final String DEFAULT_ID = "-1";
 	private static final String DEFAULT_RI = "0";
 	private static final String RI_MARKER = "; RI:";
-	//
+
 	private Pattern compoundPattern;
 	private Pattern identifierPattern;
 	private Pattern hitPattern;
@@ -90,7 +90,7 @@ public class NistResultFileParser {
 		} catch(IOException e) {
 			logger.warn(e);
 		}
-		//
+
 		return content;
 	}
 
@@ -117,7 +117,7 @@ public class NistResultFileParser {
 			extractAndAddHits(matcher.group(5), compound); // Hits
 			compounds.add(compound);
 		}
-		//
+
 		return compounds;
 	}
 
@@ -233,10 +233,10 @@ public class NistResultFileParser {
 			hit.setMolecularWeight(Integer.valueOf(matcher.group(2)));
 			hit.setLib(matcher.group(4));
 			String value = matcher.group(6); // NIST17 -> "4178; RI: 0"
-			//
+
 			String id = DEFAULT_ID;
 			String ri = DEFAULT_RI;
-			//
+
 			if(value.contains(RI_MARKER)) {
 				String[] values = value.split(RI_MARKER);
 				id = (values.length > 0) ? values[0].trim() : DEFAULT_ID;

@@ -35,7 +35,7 @@ public class ListEdit<V> extends EditValue<List<V>> {
 
 	private static final long serialVersionUID = 4293060148111233267L;
 	private static final String LIST_EDIT = "ListEdit"; //$NON-NLS-1$
-	//
+
 	private final TableViewer tableViewer;
 	private final List<V> initialValues = new ArrayList<>();
 	private final List<V> currentValues = new CopyOnWriteArrayList<V>();
@@ -55,7 +55,7 @@ public class ListEdit<V> extends EditValue<List<V>> {
 		ControlBuilder.createColumns(tableViewer, columnDefinitionProvider, false);
 		tableViewer.setInput(currentValues);
 		ToolBarManager toolbar = new ToolBarManager(SWT.VERTICAL);
-		//
+
 		addAction = new Action(SupportMessages.add, ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_ADD, IApplicationImageProvider.SIZE_16x16)) {
 
 			@Override
@@ -70,7 +70,7 @@ public class ListEdit<V> extends EditValue<List<V>> {
 				updateButtons(editModel);
 			}
 		};
-		//
+
 		deleteAction = new Action(SupportMessages.remove, ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_REMOVE, IApplicationImageProvider.SIZE_16x16)) {
 
 			@SuppressWarnings("unchecked")
@@ -92,7 +92,7 @@ public class ListEdit<V> extends EditValue<List<V>> {
 				updateButtons(editModel);
 			}
 		};
-		//
+
 		editAction = new Action(SupportMessages.remove, ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_EDIT, IApplicationImageProvider.SIZE_16x16)) {
 
 			@SuppressWarnings("unchecked")
@@ -108,7 +108,7 @@ public class ListEdit<V> extends EditValue<List<V>> {
 				updateButtons(editModel);
 			}
 		};
-		//
+
 		updateButtons(editModel);
 		toolbar.add(addAction);
 		toolbar.add(editAction);

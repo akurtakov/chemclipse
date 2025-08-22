@@ -18,7 +18,7 @@ import org.eclipse.chemclipse.vsd.model.core.ISignalInfrared;
 public class SignalInfrared extends AbstractSignalVSD implements ISignalInfrared {
 
 	private static final long serialVersionUID = -8802517559910089354L;
-	//
+
 	private double absorbance = 0.0d;
 	private double transmission = 0.0d;
 
@@ -52,11 +52,11 @@ public class SignalInfrared extends AbstractSignalVSD implements ISignalInfrared
 		if(transmission > 0) {
 			return transmission;
 		}
-		//
+
 		if(absorbance > 0) {
 			return 100 / Math.pow(10, absorbance);
 		}
-		//
+
 		return 100;
 	}
 
@@ -74,7 +74,7 @@ public class SignalInfrared extends AbstractSignalVSD implements ISignalInfrared
 		} else if(transmission > 0) {
 			return Math.log(1 / transmission);
 		}
-		//
+
 		return 0;
 	}
 

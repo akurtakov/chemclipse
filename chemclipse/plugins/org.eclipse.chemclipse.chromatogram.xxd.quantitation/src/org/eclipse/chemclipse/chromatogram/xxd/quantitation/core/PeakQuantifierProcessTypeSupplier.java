@@ -75,7 +75,7 @@ public class PeakQuantifierProcessTypeSupplier implements IProcessTypeSupplier {
 			} else {
 				messageConsumer.addMessages(PeakQuantifier.quantify(peaks, getId(), monitor));
 			}
-			//
+
 			return chromatogramSelection;
 		}
 	}

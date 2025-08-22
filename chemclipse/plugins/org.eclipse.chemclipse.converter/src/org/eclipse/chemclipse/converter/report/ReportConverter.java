@@ -94,7 +94,7 @@ public class ReportConverter {
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 		IConfigurationElement[] extensions = registry.getConfigurationElementsFor(EXTENSION_POINT);
 		for(IConfigurationElement element : extensions) {
-			//
+
 			supplier = new ReportSupplier();
 			supplier.setFileExtension(element.getAttribute(FILE_EXTENSION));
 			supplier.setFileName(element.getAttribute(FILE_NAME));

@@ -98,7 +98,7 @@ public class FilesLongFormatInputWizard extends Wizard implements IInputWizard {
 				return file;
 			}
 		}
-		//
+
 		return null;
 	}
 }

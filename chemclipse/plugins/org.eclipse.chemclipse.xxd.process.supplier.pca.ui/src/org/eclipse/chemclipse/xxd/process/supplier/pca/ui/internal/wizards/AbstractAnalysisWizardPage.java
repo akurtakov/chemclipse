@@ -44,9 +44,9 @@ public abstract class AbstractAnalysisWizardPage extends WizardPage {
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = horizontalSpan;
 		text.setLayoutData(gridData);
-		//
+
 		text.addModifyListener(e -> analysisSettings.setTitle(text.getText().trim()));
-		//
+
 		return text;
 	}
 }

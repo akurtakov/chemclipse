@@ -17,7 +17,7 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.chemclipse.chromatogram.filter.l10n.messages"; //$NON-NLS-1$
-	//
+
 	public static String chromatogramSelectionApplied;
 	public static String chromatogramSelectionInvalid;
 	public static String chromatogramSelectionReset;
@@ -32,7 +32,7 @@ public class Messages extends NLS {
 	public static String startRetentionTimeOutsideRange;
 	public static String stopRetentionTimeOutsideRange;
 	public static String targetsTransferredSuccessfully;
-	//
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}

@@ -27,7 +27,7 @@ public class TimeRangesDeserializer extends JsonDeserializer<TimeRanges> {
 
 		TimeRanges timeRanges = new TimeRanges();
 		timeRanges.load(jsonParser.getText());
-		//
+
 		return timeRanges;
 	}
 }

@@ -63,7 +63,7 @@ public class ApplicationImage extends AbstractApplicationImage implements IAppli
 				image = decoratedImage;
 			}
 		}
-		//
+
 		return image;
 	}
 }

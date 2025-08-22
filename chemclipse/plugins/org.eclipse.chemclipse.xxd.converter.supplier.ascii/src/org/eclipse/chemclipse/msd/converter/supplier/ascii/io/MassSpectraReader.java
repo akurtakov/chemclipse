@@ -68,7 +68,7 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 			}
 		}
 		bufferedReader.close();
-		//
+
 		massSpectra.addMassSpectrum(massSpectrum);
 		return massSpectra;
 	}

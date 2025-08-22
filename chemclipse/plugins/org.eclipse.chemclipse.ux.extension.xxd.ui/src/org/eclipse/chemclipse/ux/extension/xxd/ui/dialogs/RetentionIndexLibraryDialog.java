@@ -32,11 +32,11 @@ import org.eclipse.swt.widgets.Display;
 public class RetentionIndexLibraryDialog {
 
 	private static final Logger logger = Logger.getLogger(RetentionIndexLibraryDialog.class);
-	//
+
 	private Display display = null;
 	private int retentionTime = 0;
 	private int retentionIndex = 0;
-	//
+
 	private RetentionIndexLibrarySettingsDialog retentionIndexLibrarySettingsDialog = null;
 	private List<IIdentificationTarget> identificationTargets = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class RetentionIndexLibraryDialog {
 		this.display = display;
 		this.retentionTime = retentionTime;
 		this.retentionIndex = retentionIndex;
-		//
+
 		retentionIndexLibrarySettingsDialog = new RetentionIndexLibrarySettingsDialog(display.getActiveShell());
 	}
 
@@ -62,7 +62,7 @@ public class RetentionIndexLibraryDialog {
 	public boolean open() {
 
 		boolean success = false;
-		//
+
 		identificationTargets.clear();
 		if(retentionIndex > 0) {
 			retentionIndexLibrarySettingsDialog.create();
@@ -112,7 +112,7 @@ public class RetentionIndexLibraryDialog {
 		} else {
 			MessageDialog.openInformation(display.getActiveShell(), RetentionIndexLibrarySettingsDialog.TITLE, RetentionIndexLibrarySettingsDialog.ERROR_RETENTION_INDEX);
 		}
-		//
+
 		return success;
 	}
 }

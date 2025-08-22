@@ -185,7 +185,7 @@ public class PeakMaxPeakIntegrator implements IPeakMaxPeakIntegrator {
 
 		List<IIntegrationEntry> integrationEntries = new ArrayList<>();
 		IIntegrationEntry integrationEntry;
-		//
+
 		IPeakModel peakModel = peak.getPeakModel();
 		IScan scan = peakModel.getPeakMaximum();
 		double integratedAreaTIC = calculateTICPeakArea(peak, useAreaConstraint);
@@ -239,7 +239,7 @@ public class PeakMaxPeakIntegrator implements IPeakMaxPeakIntegrator {
 		if(integratedArea < minArea) {
 			integratedArea = 0.0d;
 		}
-		//
+
 		return integratedArea;
 	}
 
@@ -273,7 +273,7 @@ public class PeakMaxPeakIntegrator implements IPeakMaxPeakIntegrator {
 		}
 		result.setPurity(purity);
 		result.setSN(sn);
-		//
+
 		result.setStartRetentionTime(peak.getPeakModel().getStartRetentionTime());
 		result.setStopRetentionTime(peak.getPeakModel().getStopRetentionTime());
 		result.setTailing(peak.getPeakModel().getTailing());

@@ -49,7 +49,7 @@ public class ExtendedVSDScanUI extends Composite implements IExtendedPartUI {
 
 	private ChartVSD chartVSD;
 	private ISpectrumVSD spectrumVSD;
-	//
+
 	private Label labelDataInfo;
 	private boolean showRawData = false;
 	private boolean showAbsorbance = false;
@@ -74,17 +74,17 @@ public class ExtendedVSDScanUI extends Composite implements IExtendedPartUI {
 
 		chartVSD.deleteSeries();
 		String dataInfo = showRawData ? "Raw Data" : "Processed Data";
-		//
+
 		if(spectrumVSD != null) {
 			/*
 			 * Get the data.
 			 */
 			dataInfo += " | Rotation Angle: " + spectrumVSD.getScanVSD().getRotationAngle() + "°";
-			//
+
 			List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
 			ILineSeriesData lineSeriesData;
 			ILineSeriesSettings lineSeriesSettings;
-			//
+
 			if(showRawData) {
 				/*
 				 * Raw and Background Data
@@ -94,7 +94,7 @@ public class ExtendedVSDScanUI extends Composite implements IExtendedPartUI {
 				lineSeriesSettings.setLineColor(Colors.RED);
 				lineSeriesSettings.setEnableArea(false);
 				lineSeriesDataList.add(lineSeriesData);
-				//
+
 				lineSeriesData = new LineSeriesData(getSeriesData(spectrumVSD, "Background Signals", false));
 				lineSeriesSettings = lineSeriesData.getSettings();
 				lineSeriesSettings.setLineColor(Colors.BLACK);
@@ -110,10 +110,10 @@ public class ExtendedVSDScanUI extends Composite implements IExtendedPartUI {
 				lineSeriesSettings.setEnableArea(false);
 				lineSeriesDataList.add(lineSeriesData);
 			}
-			//
+
 			chartVSD.addSeriesData(lineSeriesDataList);
 		}
-		//
+
 		labelDataInfo.setText(dataInfo);
 	}
 
@@ -121,7 +121,7 @@ public class ExtendedVSDScanUI extends Composite implements IExtendedPartUI {
 
 		double[] xSeries;
 		double[] ySeries;
-		//
+
 		if(spectrumVSD != null) {
 			int size = spectrumVSD.getScanVSD().getProcessedSignals().size();
 			xSeries = new double[size];
@@ -144,14 +144,14 @@ public class ExtendedVSDScanUI extends Composite implements IExtendedPartUI {
 			xSeries = new double[0];
 			ySeries = new double[0];
 		}
-		//
+
 		return new SeriesData(xSeries, ySeries, id);
 	}
 
 	private ISeriesData getSeriesData(ISpectrumVSD spectrumVSD, String id, boolean raw) {
 
 		double[] ySeries;
-		//
+
 		if(spectrumVSD != null) {
 			if(raw) {
 				ySeries = spectrumVSD.getScanVSD().getRawSignals().clone();
@@ -161,14 +161,14 @@ public class ExtendedVSDScanUI extends Composite implements IExtendedPartUI {
 		} else {
 			ySeries = new double[0];
 		}
-		//
+
 		return new SeriesData(ySeries, id);
 	}
 
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createScanChart(this);
 	}
@@ -179,7 +179,7 @@ public class ExtendedVSDScanUI extends Composite implements IExtendedPartUI {
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(8, false));
-		//
+
 		createDataInfoLabel(composite);
 		createTransmittanceAbsorbanceButton(composite);
 		createRawProcessedButton(composite);
@@ -336,7 +336,7 @@ public class ExtendedVSDScanUI extends Composite implements IExtendedPartUI {
 		chartSettings.setCreateMenu(true);
 		chartSettings.setEnableRangeSelector(true);
 		chartSettings.setShowRangeSelectorInitially(false);
-		//
+
 		chartVSD.applySettings(chartSettings);
 	}
 }

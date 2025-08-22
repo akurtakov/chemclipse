@@ -58,7 +58,7 @@ public class ChromatogramReaderWSD extends AbstractChromatogramWSDReader impleme
 			try {
 				chromatogramOverview = chromatogramReader.readOverview(file, monitor);
 			} catch(Exception e) {
-				//
+
 			}
 		}
 		return chromatogramOverview;
@@ -79,7 +79,7 @@ public class ChromatogramReaderWSD extends AbstractChromatogramWSDReader impleme
 			try {
 				chromatogramWSD = chromatogramReader.read(file, monitor);
 			} catch(Exception e) {
-				//
+
 			}
 		}
 		return chromatogramWSD;
@@ -102,10 +102,10 @@ public class ChromatogramReaderWSD extends AbstractChromatogramWSDReader impleme
 		IChromatogramWSDZipReader chromatogramReader = null;
 		IChromatogramWSD chromatogramWSD = null;
 		ReaderHelper readerHelper = new ReaderHelper();
-		//
+
 		String version = readerHelper.getVersion(object, directoryPrefix);
 		chromatogramReader = getChromatogramReader(version);
-		//
+
 		if(chromatogramReader != null) {
 			if(object instanceof ZipInputStream zipInputStream) {
 				chromatogramWSD = chromatogramReader.read(zipInputStream, directoryPrefix, monitor);
@@ -113,14 +113,14 @@ public class ChromatogramReaderWSD extends AbstractChromatogramWSDReader impleme
 				chromatogramWSD = chromatogramReader.read(zipFile, directoryPrefix, monitor);
 			}
 		}
-		//
+
 		return chromatogramWSD;
 	}
 
 	private IChromatogramWSDZipReader getChromatogramReader(String version) {
 
 		IChromatogramWSDZipReader chromatogramReader = null;
-		//
+
 		if(version.equals(Format.CHROMATOGRAM_VERSION_1005)) {
 			chromatogramReader = new ChromatogramReader_1005();
 		} else if(version.equals(Format.CHROMATOGRAM_VERSION_1006)) {
@@ -142,7 +142,7 @@ public class ChromatogramReaderWSD extends AbstractChromatogramWSDReader impleme
 		} else if(version.equals(Format.CHROMATOGRAM_VERSION_1502)) {
 			chromatogramReader = new ChromatogramReader_1502();
 		}
-		//
+
 		return chromatogramReader;
 	}
 }

@@ -81,11 +81,11 @@ public class AsymmetryFilter extends AbstractPeakFilter<AsymmetryFilterSettings>
 	public void filterPeaks(IChromatogramSelection chromatogramSelection, AsymmetryFilterSettings configuration, ProcessExecutionContext context) throws IllegalArgumentException {
 
 		Collection<IPeak> peaks = getReadOnlyPeaks(chromatogramSelection);
-		//
+
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
-		//
+
 		SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), peaks.size());
 		FactorPredicate<?> predicate = getPredicate(configuration);
 		TreatmentOption treatmentOption = configuration.getFilterTreatmentOption();
@@ -94,7 +94,7 @@ public class AsymmetryFilter extends AbstractPeakFilter<AsymmetryFilterSettings>
 			processPeak(treatmentOption, peak, predicate, peaksToDelete);
 			subMonitor.worked(1);
 		}
-		//
+
 		deletePeaks(peaksToDelete, chromatogramSelection);
 		resetPeakSelection(chromatogramSelection);
 	}

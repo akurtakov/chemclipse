@@ -25,7 +25,7 @@ import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 public class DataNMRSelection extends PropertyChangeSupport implements IDataNMRSelection {
 
 	private static final long serialVersionUID = -6184349224960987655L;
-	//
+
 	private List<IComplexSignalMeasurement<?>> measurements = new ArrayList<>();
 	private IComplexSignalMeasurement<?> measurement;
 	private String name;

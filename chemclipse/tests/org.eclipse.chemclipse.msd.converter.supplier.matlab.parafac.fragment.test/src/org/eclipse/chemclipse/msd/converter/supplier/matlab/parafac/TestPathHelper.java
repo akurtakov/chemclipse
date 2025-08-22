@@ -23,7 +23,7 @@ public class TestPathHelper extends PathResolver {
 	public static final String TESTFILE_IMPORT_PEAKS = "testData/files/import/tests/peaks";
 	public static final String TESTFILE_IMPORT_PEAKS_EXTENSION = "testData/files/import/tests/peaks.mpl";
 	public static final String TESTFILE_IMPORT_TEST = "testData/files/import/tests/Test.mpl";
-	//
+
 	public static final String TESTFILE_IMPORT_PARAFAC_TEST_1 = "testData/files/import/parafac/test1.mpl";
 	public static final String TESTFILE_IMPORT_PARAFAC_TEST_2 = "testData/files/import/parafac/test2.mpl";
 	public static final String TESTFILE_IMPORT_PARAFAC_TEST_3 = "testData/files/import/parafac/test3.mpl";

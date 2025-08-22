@@ -62,13 +62,13 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 
 	private AtomicReference<LoadingsPlot> plotControl = new AtomicReference<>();
 	private AtomicReference<PrincipalComponentUI> principalComponentControl = new AtomicReference<>();
-	//
+
 	private EvaluationPCA evaluationPCA = null;
-	//
+
 	private UserSelection userSelection = new UserSelection();
-	//
+
 	private Composite control;
-	//
+
 	private boolean highlightClick = false;
 
 	public ExtendedLoadingsPlot(Composite parent, int style) {
@@ -121,7 +121,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createPlot(this);
 		PlatformUI.getWorkbench().getHelpSystem().setHelp(this, HelpContext.LOADINGS_PLOT);
@@ -135,7 +135,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(3, false));
-		//
+
 		createPrincipalComponentUI(composite);
 		createSettingsButton(composite);
 		createButtonHelp(composite, HelpContext.LOADINGS_PLOT);
@@ -145,7 +145,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 
 		LoadingsPlot plot = new LoadingsPlot(parent, SWT.BORDER);
 		plot.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		IChartSettings chartSettings = plot.getChartSettings();
 		chartSettings.addHandledEventProcessor(new IHandledEventProcessor() {
 
@@ -498,7 +498,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 					int y = Math.min(userSelection.getStartY(), userSelection.getStopY());
 					int width = Math.abs(userSelection.getStopX() - userSelection.getStartX());
 					int height = Math.abs(userSelection.getStopY() - userSelection.getStartY());
-					//
+
 					GC gc = e.gc;
 					gc.setBackground(Colors.RED);
 					gc.setForeground(Colors.DARK_RED);
@@ -510,7 +510,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		plotControl.set(plot);
 	}
 
@@ -532,7 +532,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 			rX = i;
 		}
 		double rY = variableLoading[pcY - 1]; // e.g. 1 = PC2
-		//
+
 		return new Point(rX, rY);
 	}
 
@@ -547,7 +547,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 				updatePlot(pcX, pcY);
 			}
 		});
-		//
+
 		principalComponentControl.set(principalComponentUI);
 	}
 
@@ -596,7 +596,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 
 		LoadingsPlot plot = plotControl.get();
 		plot.deleteSeries();
-		//
+
 		if(evaluationPCA != null) {
 			plot.setInput(evaluationPCA, pcX, pcY);
 		} else {

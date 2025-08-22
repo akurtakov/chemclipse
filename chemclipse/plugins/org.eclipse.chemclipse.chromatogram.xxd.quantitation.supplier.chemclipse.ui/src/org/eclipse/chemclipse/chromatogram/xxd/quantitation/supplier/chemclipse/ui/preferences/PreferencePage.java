@@ -46,13 +46,13 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_QUANTITATION_DATABASE_EDITOR, "Use Editor Quantitation DB", getFieldEditorParent()));
 		addField(new FileFieldEditor(PreferenceSupplier.P_SELECTED_QUANTITATION_DATABASE, "Selected Quantitation DB (*.ocq)", getFieldEditorParent()));
 		addField(new DirectoryFieldEditor(PreferenceSupplier.P_FILTER_PATH_NEW_QUANT_DB, "Path new Quantitation DBs", getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new DoubleFieldEditor(PreferenceSupplier.P_RETENTION_TIME_NEGATIVE_DEVIATION, "Retention Time Deviation (-)", PreferenceSupplier.MIN_RETENTION_TIME, PreferenceSupplier.MAX_RETENTION_TIME, getFieldEditorParent()));
 		addField(new DoubleFieldEditor(PreferenceSupplier.P_RETENTION_TIME_POSITIVE_DEVIATION, "Retention Time Deviation (+)", PreferenceSupplier.MIN_RETENTION_TIME, PreferenceSupplier.MAX_RETENTION_TIME, getFieldEditorParent()));
 		addField(new FloatFieldEditor(PreferenceSupplier.P_RETENTION_INDEX_NEGATIVE_DEVIATION, "Retention Index Deviation (-)", PreferenceSupplier.MIN_RETENTION_INDEX, PreferenceSupplier.MAX_RETENTION_INDEX, getFieldEditorParent()));
 		addField(new FloatFieldEditor(PreferenceSupplier.P_RETENTION_INDEX_POSITIVE_DEVIATION, "Retention Index Deviation (+)", PreferenceSupplier.MIN_RETENTION_INDEX, PreferenceSupplier.MAX_RETENTION_INDEX, getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new RadioGroupFieldEditor(PreferenceSupplier.P_QUANTITATION_STRATEGY, "Quantitation Strategy", 1, PreferenceSupplier.QUANTITATION_STRATEGY_OPTIONS, getFieldEditorParent()));
 	}

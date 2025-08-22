@@ -63,9 +63,9 @@ public class MoleculeServiceDialog extends Dialog {
 
 		Composite composite = (Composite)super.createDialogArea(parent);
 		composite.setLayout(new GridLayout(1, true));
-		//
+
 		createComboViewerMoleculeService(composite);
-		//
+
 		return composite;
 	}
 

@@ -37,7 +37,7 @@ import org.eclipse.swtchart.extensions.marker.IBaseChartPaintListener;
 public class TimeRangeMarker extends AbstractBaseChartPaintListener implements IBaseChartPaintListener {
 
 	private static final int INVISIBLE = -1;
-	//
+
 	private Set<TimeRange> timeRanges = new HashSet<>();
 	private TimeRange timeRangeSelection = null;
 	private TimeRange timeRangeHover = null;
@@ -81,7 +81,7 @@ public class TimeRangeMarker extends AbstractBaseChartPaintListener implements I
 
 		if(!getBaseChart().isBufferActive()) {
 			GC gc = e.gc;
-			//
+
 			TimeRange timeRangeLocked = TimeRangeSupport.getTimeRangeLocked(timeRanges);
 			if(timeRangeLocked != null) {
 				plotMarker(gc, timeRangeLocked);
@@ -90,7 +90,7 @@ public class TimeRangeMarker extends AbstractBaseChartPaintListener implements I
 					plotMarker(gc, timeRange);
 				}
 			}
-			//
+
 			gc.setAlpha(255);
 		}
 	}
@@ -107,14 +107,14 @@ public class TimeRangeMarker extends AbstractBaseChartPaintListener implements I
 		if(baseChart.getSeriesSet().getSeries().length > 0) {
 			IAxis xAxis = baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS);
 			IAxis yAxis = baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS);
-			//
+
 			if(xAxis != null && yAxis != null) {
 				/*
 				 * Settings
 				 */
 				boolean isSelected = timeRange.equals(timeRangeSelection);
 				boolean isHovered = timeRange.equals(timeRangeHover);
-				//
+
 				Range rangeX = xAxis.getRange();
 				IPlotArea plotArea = baseChart.getPlotArea();
 				Point rectangle = plotArea instanceof Scrollable scrollable ? scrollable.getSize() : plotArea.getSize();
@@ -181,12 +181,12 @@ public class TimeRangeMarker extends AbstractBaseChartPaintListener implements I
 	private void printLabel(GC gc, Point rectangle, TimeRange timeRange, int xStop, Color color) {
 
 		if(xStop > INVISIBLE) {
-			//
+
 			String label = timeRange.getIdentifier();
 			if(timeRange.isLocked()) {
 				label += " (locked)";
 			}
-			//
+
 			gc.setTransform(transform);
 			Point labelSize = gc.textExtent(label);
 			int xLabel = -labelSize.x - (rectangle.y - labelSize.x) + (rectangle.y / 20);

@@ -17,7 +17,7 @@ import org.eclipse.osgi.util.NLS;
 public class HeaderMessages extends NLS {
 
 	public static String sample;
-	//
+
 	static {
 		NLS.initializeMessages("org.eclipse.chemclipse.pcr.report.supplier.tabular.csv.l10n.messages", HeaderMessages.class); //$NON-NLS-1$
 	}

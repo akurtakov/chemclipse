@@ -48,7 +48,7 @@ public abstract class AbstractPreferencePageTask extends FieldEditorPreferencePa
 			for(IPartHandler partHandler : partHandlersMandatory) {
 				addField(new ComboFieldEditor(partHandler.getPartStackReference().getStackPositionKey(), partHandler.getName() + ":", PreferenceSupplier.PART_STACKS, getFieldEditorParent()));
 			}
-			//
+
 			List<IPartHandler> partHandlersAdditional = groupHandler.getPartHandlerAdditional();
 			if(!partHandlersAdditional.isEmpty()) {
 				addField(new SpacerFieldEditor(getFieldEditorParent()));

@@ -57,10 +57,10 @@ public class WriterIO_1501 extends AbstractIO_1501 {
 		dataOutputStream.writeInt(targetDisplaySettings.getRotation());
 		writeString(dataOutputStream, targetDisplaySettings.getLibraryField().name());
 		writeString(dataOutputStream, targetDisplaySettings.getDisplayOption().name());
-		//
+
 		Map<String, Boolean> visibilityMap = targetDisplaySettings.getVisibilityMap();
 		dataOutputStream.writeInt(visibilityMap.size());
-		//
+
 		for(Map.Entry<String, Boolean> entry : visibilityMap.entrySet()) {
 			writeString(dataOutputStream, entry.getKey());
 			dataOutputStream.writeBoolean(entry.getValue());
@@ -71,7 +71,7 @@ public class WriterIO_1501 extends AbstractIO_1501 {
 
 		ILibraryInformation libraryInformation = identificationTarget.getLibraryInformation();
 		IComparisonResult comparisonResult = identificationTarget.getComparisonResult();
-		//
+
 		writeString(dataOutputStream, identificationTarget.getIdentifier());
 		dataOutputStream.writeBoolean(identificationTarget.isVerified());
 		/*
@@ -114,7 +114,7 @@ public class WriterIO_1501 extends AbstractIO_1501 {
 		List<String> casNumbers = libraryInformation.getCasNumbers();
 		int size = casNumbers.size();
 		dataOutputStream.writeInt(size);
-		//
+
 		for(String casNumber : casNumbers) {
 			writeString(dataOutputStream, casNumber);
 		}
@@ -125,7 +125,7 @@ public class WriterIO_1501 extends AbstractIO_1501 {
 		Set<String> synonyms = libraryInformation.getSynonyms();
 		int size = synonyms.size();
 		dataOutputStream.writeInt(size);
-		//
+
 		for(String synonym : synonyms) {
 			writeString(dataOutputStream, synonym);
 		}
@@ -136,7 +136,7 @@ public class WriterIO_1501 extends AbstractIO_1501 {
 		List<IColumnIndexMarker> columnIndexMarkers = libraryInformation.getColumnIndexMarkers();
 		int size = columnIndexMarkers.size();
 		dataOutputStream.writeInt(size);
-		//
+
 		for(IColumnIndexMarker columnIndexMarker : columnIndexMarkers) {
 			dataOutputStream.writeFloat(columnIndexMarker.getRetentionIndex());
 			writeSeparationColumn(dataOutputStream, columnIndexMarker.getSeparationColumn());
@@ -148,7 +148,7 @@ public class WriterIO_1501 extends AbstractIO_1501 {
 		List<IFlavorMarker> flavorMarkers = libraryInformation.getFlavorMarkers();
 		int size = flavorMarkers.size();
 		dataOutputStream.writeInt(size);
-		//
+
 		for(IFlavorMarker flavorMarker : flavorMarkers) {
 			dataOutputStream.writeBoolean(flavorMarker.isManuallyVerified());
 			writeString(dataOutputStream, flavorMarker.getLiteratureReference());
@@ -164,7 +164,7 @@ public class WriterIO_1501 extends AbstractIO_1501 {
 
 		int size = odorThresholds.size();
 		dataOutputStream.writeInt(size);
-		//
+
 		for(IOdorThreshold odorThreshold : odorThresholds) {
 			writeString(dataOutputStream, odorThreshold.getContent());
 			writeString(dataOutputStream, odorThreshold.getUnit());

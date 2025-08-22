@@ -61,7 +61,7 @@ public class PeakTracesPart extends AbstractPart<ExtendedPeakTracesUI> {
 				return false;
 			}
 		}
-		//
+
 		return false;
 	}
 

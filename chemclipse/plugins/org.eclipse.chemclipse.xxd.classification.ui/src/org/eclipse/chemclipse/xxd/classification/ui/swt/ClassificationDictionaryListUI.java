@@ -28,12 +28,12 @@ public class ClassificationDictionaryListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = ClassificationRuleLabelProvider.TITLES;
 	private static final int[] BOUNDS = ClassificationRuleLabelProvider.BOUNDS;
-	//
+
 	private ClassificationRuleLabelProvider labelProvider = new ClassificationRuleLabelProvider();
 	private ClassificationRuleTableComparator tableComparator = new ClassificationRuleTableComparator();
-	//
+
 	private IUpdateListener updateListener;
-	//
+
 	private ClassificationRuleFilter listFilter = new ClassificationRuleFilter();
 
 	public ClassificationDictionaryListUI(Composite parent, int style) {

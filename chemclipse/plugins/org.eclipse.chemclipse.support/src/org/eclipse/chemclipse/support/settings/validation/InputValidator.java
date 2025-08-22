@@ -44,7 +44,7 @@ public class InputValidator implements IValidator<Object> {
 				message = parse(rawType, value.toString());
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

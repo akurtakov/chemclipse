@@ -36,26 +36,26 @@ public class NamedTracesFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof NamedTrace namedTrace) {
 			String identifier = namedTrace.getIdentifier();
 			String traces = namedTrace.getTraces();
-			//
+
 			if(!caseSensitive) {
 				searchText = searchText.toLowerCase();
 				identifier = identifier.toLowerCase();
 				traces = traces.toLowerCase();
 			}
-			//
+
 			if(identifier.contains(searchText)) {
 				return true;
 			}
-			//
+
 			if(traces.contains(searchText)) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

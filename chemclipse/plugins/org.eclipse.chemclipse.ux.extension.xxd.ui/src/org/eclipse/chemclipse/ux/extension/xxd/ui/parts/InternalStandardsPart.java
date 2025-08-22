@@ -55,7 +55,7 @@ public class InternalStandardsPart extends AbstractPart<ExtendedInternalStandard
 				return false;
 			}
 		}
-		//
+
 		return false;
 	}
 

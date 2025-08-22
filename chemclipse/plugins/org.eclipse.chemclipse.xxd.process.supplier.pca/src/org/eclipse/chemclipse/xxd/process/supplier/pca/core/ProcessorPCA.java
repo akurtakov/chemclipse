@@ -49,7 +49,7 @@ public class ProcessorPCA extends AbstractProcessorMultivariateAanalysis impleme
 				List<IVariable> variables = samples.getVariables();
 				List<ISample> sampleList = samples.getSamples();
 				List<Integer> indices = new ArrayList<>();
-				//
+
 				for(int i = 0; i < variables.size(); i++) {
 					IVariable variable = variables.get(i);
 					if(!variable.isSelected() || isInvalidVariable(samples, i)) {

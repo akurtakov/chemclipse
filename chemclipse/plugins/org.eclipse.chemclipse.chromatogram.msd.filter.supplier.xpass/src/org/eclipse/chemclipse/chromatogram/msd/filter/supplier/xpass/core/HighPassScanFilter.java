@@ -49,7 +49,7 @@ public class HighPassScanFilter extends AbstractMassSpectrumFilter {
 				for(IScanMSD massSpectrum : massSpectra) {
 					XPassFilter.applyHighPass(massSpectrum, number);
 				}
-				//
+
 				processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, DESCRIPTION, "The mass spectrum has been optimized successfully."));
 				IMassSpectrumFilterResult massSpectrumFilterResult = new MassSpectrumFilterResult(ResultStatus.OK, "The high pass filter has been applied successfully.");
 				processingInfo.setProcessingResult(massSpectrumFilterResult);
@@ -57,7 +57,7 @@ public class HighPassScanFilter extends AbstractMassSpectrumFilter {
 				processingInfo.addErrorMessage(DESCRIPTION, "The filter settings instance is not a type of: " + HighPassFilterSettings.class);
 			}
 		}
-		//
+
 		return processingInfo;
 	}
 }

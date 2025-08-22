@@ -65,7 +65,7 @@ public abstract class AbstractArrayWriter implements IArrayWriter {
 		if(writeBytes > maxLength) {
 			writeBytes = maxLength;
 		}
-		//
+
 		byte[] bytes = new byte[writeBytes];
 		int endIndex = writeBytes - 1;
 		if(endIndex > 0) {
@@ -78,7 +78,7 @@ public abstract class AbstractArrayWriter implements IArrayWriter {
 			} else {
 				length = entry.substring(0, endIndex).length();
 			}
-			//
+
 			byte[] bytesLength;
 			byte[] bytesEntry;
 			/*
@@ -100,7 +100,7 @@ public abstract class AbstractArrayWriter implements IArrayWriter {
 		writeBytes *= 2;
 		byte[] bytes = new byte[writeBytes];
 		byte[] bytesEntry = entry.getBytes();
-		//
+
 		int index = 0;
 		for(int i = 0; i < bytesEntry.length; i++) {
 			if(index < writeBytes) {

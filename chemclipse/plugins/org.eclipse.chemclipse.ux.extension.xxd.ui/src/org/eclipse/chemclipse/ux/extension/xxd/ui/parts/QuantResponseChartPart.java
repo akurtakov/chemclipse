@@ -53,7 +53,7 @@ public class QuantResponseChartPart extends AbstractPart<QuantResponseChartUI> {
 				return false;
 			}
 		}
-		//
+
 		return false;
 	}
 

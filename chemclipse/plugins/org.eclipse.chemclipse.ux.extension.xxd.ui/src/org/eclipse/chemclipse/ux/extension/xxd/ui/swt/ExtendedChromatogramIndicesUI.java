@@ -46,7 +46,7 @@ public class ExtendedChromatogramIndicesUI extends Composite implements IExtende
 	private AtomicReference<Button> buttonToolbarInfo = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private AtomicReference<RetentionIndexUI> retentionIndexControl = new AtomicReference<>();
-	//
+
 	private IChromatogramSelection chromatogramSelection = null;
 
 	public ExtendedChromatogramIndicesUI(Composite parent, int style) {
@@ -64,11 +64,11 @@ public class ExtendedChromatogramIndicesUI extends Composite implements IExtende
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createRetentionIndexUI(this);
-		//
+
 		initialize();
 	}
 
@@ -171,7 +171,7 @@ public class ExtendedChromatogramIndicesUI extends Composite implements IExtende
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -179,7 +179,7 @@ public class ExtendedChromatogramIndicesUI extends Composite implements IExtende
 
 		RetentionIndexUI retentionIndexUI = new RetentionIndexUI(parent, SWT.NONE);
 		retentionIndexUI.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		retentionIndexControl.set(retentionIndexUI);
 	}
 
@@ -204,13 +204,13 @@ public class ExtendedChromatogramIndicesUI extends Composite implements IExtende
 
 		String info = "--";
 		ISeparationColumnIndices separationColumnIndices = null;
-		//
+
 		if(chromatogramSelection != null) {
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 			info = ChromatogramDataSupport.getChromatogramLabel(chromatogram);
 			separationColumnIndices = chromatogram.getSeparationColumnIndices();
 		}
-		//
+
 		toolbarInfo.get().setText(info);
 		retentionIndexControl.get().setInput(separationColumnIndices);
 	}

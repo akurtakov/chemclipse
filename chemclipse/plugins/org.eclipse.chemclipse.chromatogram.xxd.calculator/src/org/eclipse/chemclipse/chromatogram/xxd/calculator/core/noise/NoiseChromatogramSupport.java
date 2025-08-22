@@ -46,25 +46,25 @@ public class NoiseChromatogramSupport {
 				return Collections.emptyList();
 			}
 		}
-		//
+
 		return noiseSegmentMeasurementResult.getSegments(range, includeBorders);
 	}
 
 	public static NoiseSegmentMeasurementResult applyNoiseSettings(IChromatogram chromatogram, NoiseChromatogramClassifierSettings settings, IProgressMonitor monitor) {
 
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
-		//
+
 		String noiseCalculatorId = settings.getNoiseCalculatorId();
 		INoiseCalculator noiseCalculator = settings.getNoiseCalculator();
 		if(noiseCalculator == null) {
 			throw new IllegalArgumentException("The noise calculator with the given id '" + noiseCalculatorId + "' is not available.");
 		}
-		//
+
 		int segmentWidth = settings.getSegmentWidth();
 		do {
 			ChromatogramSegmentation chromatogramSegmentation = new ChromatogramSegmentation(chromatogram, segmentWidth);
 			chromatogram.addMeasurementResult(chromatogramSegmentation);
-			//
+
 			List<INoiseSegment> noiseSegments = noiseCalculator.getNoiseSegments(chromatogram, subMonitor.split(80));
 			if(noiseSegments.isEmpty()) {
 				segmentWidth = SegmentWidth.getLower(segmentWidth);
@@ -76,18 +76,18 @@ public class NoiseChromatogramSupport {
 				NoiseSegmentMeasurementResult noiseSegmentMeasurementResult = new NoiseSegmentMeasurementResult(noiseSegments, chromatogramSegmentation, noiseCalculatorId);
 				chromatogram.addMeasurementResult(noiseSegmentMeasurementResult);
 				chromatogram.setDirty(true);
-				//
+
 				return noiseSegmentMeasurementResult;
 			}
 		} while(segmentWidth != 0);
-		//
+
 		return null;
 	}
 
 	public static String addNoiseSegment(IChromatogramSelection chromatogramSelection, boolean useOnlyNewSegment) {
 
 		String message = null;
-		//
+
 		if(chromatogramSelection != null) {
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 			if(chromatogram != null) {
@@ -102,7 +102,7 @@ public class NoiseChromatogramSupport {
 					if(scanRange.getWidth() % 2 == 0) {
 						scanRange = new ScanRange(startScan, stopScan - 1);
 					}
-					//
+
 					if(scanRange.getWidth() >= 5) {
 						/*
 						 * Validity Check
@@ -111,7 +111,7 @@ public class NoiseChromatogramSupport {
 						INoiseSegment noiseSegment = new NoiseSegment(analysisSegment, 0.0d);
 						noiseSegment.setUse(true);
 						noiseSegment.setUserSelection(true);
-						//
+
 						NoiseSegmentMeasurementResult noiseSegmentMeasurementResult = chromatogram.getMeasurementResult(NoiseSegmentMeasurementResult.class);
 						if(noiseSegmentMeasurementResult == null) {
 							INoiseCalculatorSupplier noiseCalculatorSupplier = getNoiseCalculatorSupplier(chromatogram);
@@ -139,7 +139,7 @@ public class NoiseChromatogramSupport {
 							noiseSegmentMeasurementResult.getResult().add(noiseSegment);
 							chromatogram.resetNoiseFactor();
 						}
-						//
+
 						chromatogram.setDirty(true);
 					} else {
 						message = "Select a range of odd width having at least 5 scans.";
@@ -147,14 +147,14 @@ public class NoiseChromatogramSupport {
 				}
 			}
 		}
-		//
+
 		return message;
 	}
 
 	private static INoiseCalculatorSupplier getNoiseCalculatorSupplier(IChromatogram chromatogram) {
 
 		Collection<INoiseCalculatorSupplier> noiseCalculatorSuppliers = NoiseCalculator.getNoiseCalculatorSupport().getCalculatorSupplier();
-		//
+
 		INoiseCalculator noiseCalculator = chromatogram.getNoiseCalculator();
 		if(noiseCalculator != null) {
 			for(INoiseCalculatorSupplier noiseCalculatorSupplier : noiseCalculatorSuppliers) {
@@ -164,7 +164,7 @@ public class NoiseChromatogramSupport {
 				}
 			}
 		}
-		//
+
 		return null;
 	}
 }

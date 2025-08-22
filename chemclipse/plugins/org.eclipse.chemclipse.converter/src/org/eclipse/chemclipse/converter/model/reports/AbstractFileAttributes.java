@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public abstract class AbstractFileAttributes<T extends ISequenceRecord> extends ArrayList<T> implements IFileAttributes {
 
 	private static final long serialVersionUID = 7859362563177957105L;
-	//
+
 	private String fileName = "";
 	private String canonicalPath = "";
 	private long creationTime = 0;

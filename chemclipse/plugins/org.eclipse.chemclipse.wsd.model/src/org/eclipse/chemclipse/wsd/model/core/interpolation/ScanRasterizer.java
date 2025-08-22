@@ -49,7 +49,7 @@ public class ScanRasterizer {
 				for(IScanSignalWSD scanSignalWSD : scanWSD.getScanSignals()) {
 					wavelengthOriginal.put(scanSignalWSD.getWavelength(), scanSignalWSD.getAbsorbance());
 				}
-				//
+
 				Map<Integer, Float> wavelengthsAdjusted = RasterizeCalculator.apply(wavelengthOriginal, steps);
 				if(wavelengthsAdjusted != null) {
 					/*
@@ -57,7 +57,7 @@ public class ScanRasterizer {
 					 */
 					List<Integer> wavelengths = new ArrayList<>(wavelengthsAdjusted.keySet());
 					Collections.sort(wavelengths);
-					//
+
 					scanWSD.deleteScanSignals();
 					for(int wavelength : wavelengths) {
 						scanWSD.addScanSignal(new ScanSignalWSD(wavelength, wavelengthsAdjusted.get(wavelength)));

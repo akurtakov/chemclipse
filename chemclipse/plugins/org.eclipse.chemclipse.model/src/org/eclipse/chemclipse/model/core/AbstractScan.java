@@ -30,7 +30,7 @@ public abstract class AbstractScan extends AbstractSignal implements IScan {
 	 */
 	private static final long serialVersionUID = 642924518234776409L;
 	private transient IChromatogram parentChromatogram;
-	//
+
 	private int retentionTime = 0;
 	private int retentionTimeColumn1 = 0; // GCxGC, LCxLC
 	private int retentionTimeColumn2 = 0; // GCxGC, LCxLC
@@ -44,11 +44,11 @@ public abstract class AbstractScan extends AbstractSignal implements IScan {
 	 */
 	private float retentionIndex = 0;
 	private Map<SeparationColumnType, Float> additionalRetentionIndices = null;
-	//
+
 	private int scanNumber = 0;
 	private int timeSegmentId = 1; // Default 1
 	private int cycleNumber = 1; // Default 1
-	//
+
 	private Set<IIdentificationTarget> identificationTargets = new HashSet<>();
 	/*
 	 * Do not persist (only for internal use)
@@ -180,7 +180,7 @@ public abstract class AbstractScan extends AbstractSignal implements IScan {
 		} else {
 			this.retentionIndex = 0.0f;
 		}
-		//
+
 		setDirty(true);
 	}
 
@@ -218,7 +218,7 @@ public abstract class AbstractScan extends AbstractSignal implements IScan {
 		if(retentionIndex < 0.0f) {
 			retentionIndex = 0.0f;
 		}
-		//
+
 		additionalRetentionIndices.put(separationColumnType, retentionIndex);
 	}
 

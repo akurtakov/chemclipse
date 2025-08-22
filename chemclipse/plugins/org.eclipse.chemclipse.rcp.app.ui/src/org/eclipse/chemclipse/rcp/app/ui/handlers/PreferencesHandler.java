@@ -30,11 +30,11 @@ public class PreferencesHandler {
 
 		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.window.preferences", null);
 		if(handlerService.canExecute(command)) {
-			//
+
 			List<String> preservePreferencePrefixes = new ArrayList<String>();
 			preservePreferencePrefixes.add("org.eclipse.chemclipse");
 			preservePreferencePrefixes.add("org.eclipse.swtchart");
-			//
+
 			List<String> preservePreferenceNodes = new ArrayList<String>();
 			preservePreferenceNodes.add("org.eclipse.equinox.internal.p2.ui.sdk.ProvisioningPreferencePage"); // Install/Update
 			preservePreferenceNodes.add("org.eclipse.equinox.internal.p2.ui.sdk.SitesPreferencePage"); // Available Software Sites
@@ -42,9 +42,9 @@ public class PreferencesHandler {
 			preservePreferenceNodes.add("org.eclipse.ui.preferencePages.Workbench"); // General
 			preservePreferenceNodes.add("org.eclipse.ui.net.NetPreferences"); // Network Connections
 			preservePreferenceNodes.add("org.eclipse.jsch.ui.SSHPreferences"); // SSH2
-			//
+
 			PreferencesSupport.cleanPreferences(preservePreferencePrefixes, preservePreferenceNodes);
-			//
+
 			handlerService.executeHandler(command);
 		} else {
 			logger.warn("Can't handle to open the preference dialog.");

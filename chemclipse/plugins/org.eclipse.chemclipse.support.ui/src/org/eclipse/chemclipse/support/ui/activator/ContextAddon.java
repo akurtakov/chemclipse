@@ -35,7 +35,7 @@ public class ContextAddon {
 	 * addons
 	 */
 	private static ContextAddon contextAddon = null;
-	//
+
 	@Inject
 	private MApplication application;
 	@Inject

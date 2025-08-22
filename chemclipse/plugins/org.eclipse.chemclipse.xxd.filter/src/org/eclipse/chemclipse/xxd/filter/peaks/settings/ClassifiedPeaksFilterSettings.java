@@ -44,13 +44,13 @@ public class ClassifiedPeaksFilterSettings {
 		if(classifications == null || classifications.isEmpty()) {
 			return Collections.emptySet();
 		}
-		//
+
 		HashSet<String> set = new HashSet<>();
 		String[] split = classifications.split(",");
 		for(String string : split) {
 			set.add(string.trim());
 		}
-		//
+
 		return set;
 	}
 

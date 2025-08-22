@@ -61,7 +61,7 @@ public class ScanTablePart extends AbstractPart<ExtendedScanTableUI> {
 				return false;
 			}
 		}
-		//
+
 		return false;
 	}
 

@@ -27,7 +27,7 @@ public class QuantPeaksTableComparator extends AbstractRecordTableComparator imp
 
 		int sortOrder = 0;
 		if(e1 instanceof IQuantitationPeak entry1 && e2 instanceof IQuantitationPeak entry2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = Double.compare(entry2.getConcentration(), entry1.getConcentration());

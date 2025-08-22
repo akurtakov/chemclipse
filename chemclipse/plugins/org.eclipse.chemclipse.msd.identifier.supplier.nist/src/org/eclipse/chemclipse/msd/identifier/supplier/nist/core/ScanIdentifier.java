@@ -36,11 +36,11 @@ public class ScanIdentifier extends AbstractMassSpectrumIdentifier {
 	public IProcessingInfo<IMassSpectra> identify(List<IScanMSD> massSpectrumList, IMassSpectrumIdentifierSettings identifierSettings, IProgressMonitor monitor) {
 
 		IProcessingInfo<IMassSpectra> processingInfo = new ProcessingInfo<>();
-		//
+
 		if(identifierSettings == null) {
 			identifierSettings = PreferenceSupplier.getScanIdentifierSettings();
 		}
-		//
+
 		if(identifierSettings instanceof ScanIdentifierSettings scanIdentifierSettings) {
 			try {
 				/*
@@ -53,7 +53,7 @@ public class ScanIdentifier extends AbstractMassSpectrumIdentifier {
 						scansToIdentify.add(scanMSD);
 					}
 				}
-				//
+
 				Identifier identifier = new Identifier();
 				IMassSpectra massSpectra = identifier.runMassSpectrumIdentification(scansToIdentify, scanIdentifierSettings, monitor);
 				processingInfo.setProcessingResult(massSpectra);
@@ -63,7 +63,7 @@ public class ScanIdentifier extends AbstractMassSpectrumIdentifier {
 		} else {
 			processingInfo.addErrorMessage(Messages.nistDbIdentifier, "The settings are not of type: " + ScanIdentifierSettings.class);
 		}
-		//
+
 		return processingInfo;
 	}
 }

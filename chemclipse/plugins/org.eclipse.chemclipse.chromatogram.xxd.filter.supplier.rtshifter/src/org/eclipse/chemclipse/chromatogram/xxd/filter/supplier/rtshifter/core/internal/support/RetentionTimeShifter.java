@@ -35,7 +35,7 @@ public class RetentionTimeShifter extends AbstractRetentionTimeModifier {
 		if(chromatogramSelection == null || chromatogramSelection.getChromatogram() == null) {
 			throw new FilterException("The chromatogram must not be null.");
 		}
-		//
+
 		List<Integer> scansToRemove = adjustRetentionTimesAndReturnScansToRemove(chromatogramSelection, filterSettings);
 		removeMarkedScans(chromatogramSelection, scansToRemove);
 		adjustScanDelayAndRetentionTimeRange(chromatogramSelection);
@@ -46,7 +46,7 @@ public class RetentionTimeShifter extends AbstractRetentionTimeModifier {
 		boolean isShiftAllScans = filterSettings.isShiftAllScans();
 		int millisecondToShift = filterSettings.getMillisecondsShift();
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
-		//
+
 		int startScan;
 		int stopScan;
 		if(isShiftAllScans) {
@@ -56,10 +56,10 @@ public class RetentionTimeShifter extends AbstractRetentionTimeModifier {
 			startScan = chromatogram.getScanNumber(chromatogramSelection.getStartRetentionTime());
 			stopScan = chromatogram.getScanNumber(chromatogramSelection.getStopRetentionTime());
 		}
-		//
+
 		int retentionTimeLeftBorder = getRetentionTimeLeftBorder(chromatogram, startScan);
 		int retentionTimeRightBorder = getRetentionTimeRightBorder(chromatogram, stopScan);
-		//
+
 		List<Integer> scansToRemove = new ArrayList<>();
 		/*
 		 * Adjust the retention times.

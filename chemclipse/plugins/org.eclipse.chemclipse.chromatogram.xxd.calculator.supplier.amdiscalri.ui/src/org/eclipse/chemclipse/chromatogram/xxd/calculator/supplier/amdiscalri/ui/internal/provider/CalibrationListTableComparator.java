@@ -24,12 +24,12 @@ public class CalibrationListTableComparator extends AbstractRecordTableComparato
 
 		int sortOrder = 0;
 		if(e1 instanceof CalibrationFile calibrationFile1 && e2 instanceof CalibrationFile calibrationFile2) {
-			//
+
 			String column1 = calibrationFile1.getSeparationColumnIndices().getSeparationColumn().getName();
 			String column2 = calibrationFile2.getSeparationColumnIndices().getSeparationColumn().getName();
 			String type1 = calibrationFile1.getSeparationColumnIndices().getSeparationColumn().getSeparationColumnType().label();
 			String type2 = calibrationFile2.getSeparationColumnIndices().getSeparationColumn().getSeparationColumnType().label();
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = column2.compareTo(column1);

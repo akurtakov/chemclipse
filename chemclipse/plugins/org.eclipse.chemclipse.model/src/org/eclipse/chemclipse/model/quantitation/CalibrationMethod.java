@@ -84,7 +84,7 @@ public enum CalibrationMethod implements ILabel {
 		for(CalibrationMethod calibrationMethod : calibrationMethods) {
 			options.add(calibrationMethod.name());
 		}
-		//
+
 		return options.toArray(new String[options.size()]);
 	}
 }

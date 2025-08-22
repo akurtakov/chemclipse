@@ -72,7 +72,7 @@ public class ChromatogramMoveArrowKeyHandler extends AbstractHandledEventProcess
 				 * (Retention Time)
 				 */
 				boolean useAlternateWindowMoveDirection = preferenceStore.getBoolean(PreferenceSupplier.P_ALTERNATE_WINDOW_MOVE_DIRECTION);
-				//
+
 				if(keyCode == SWT.ARROW_RIGHT) {
 					MoveDirection moveDirection = (useAlternateWindowMoveDirection) ? MoveDirection.LEFT : MoveDirection.RIGHT;
 					ChromatogramSelectionSupport.moveRetentionTimeWindow(chromatogramSelection, moveDirection, 20);
@@ -81,7 +81,7 @@ public class ChromatogramMoveArrowKeyHandler extends AbstractHandledEventProcess
 					ChromatogramSelectionSupport.moveRetentionTimeWindow(chromatogramSelection, moveDirection, 20);
 				}
 				extendedChromatogramUI.updateSelection();
-				//
+
 			} else if(keyCode == SWT.ARROW_UP || keyCode == SWT.ARROW_DOWN) {
 				/*
 				 * Up, Down
@@ -95,7 +95,7 @@ public class ChromatogramMoveArrowKeyHandler extends AbstractHandledEventProcess
 				} else {
 					newStopAbundance = (keyCode == SWT.ARROW_UP) ? stopAbundance + stopAbundance / 20.0f : stopAbundance - stopAbundance / 20.0f;
 				}
-				//
+
 				int startRetentionTime = chromatogramSelection.getStartRetentionTime();
 				int stopRetentionTime = chromatogramSelection.getStopRetentionTime();
 				float startAbundance = chromatogramSelection.getStartAbundance();

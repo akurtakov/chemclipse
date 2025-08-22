@@ -53,7 +53,7 @@ public class ChromatogramSignalNoisePart extends AbstractPart<ChromatogramSignal
 			getControl().setInput(chromatogramSelection);
 			return true;
 		}
-		//
+
 		return false;
 	}
 

@@ -51,11 +51,11 @@ import org.osgi.util.tracker.BundleTrackerCustomizer;
 public class MethodProcessTypeSupplier implements IProcessTypeSupplier, BundleTrackerCustomizer<Collection<IProcessSupplier<?>>> {
 
 	private static final Logger logger = Logger.getLogger(MethodProcessTypeSupplier.class);
-	//
+
 	private static final String PROCESSORS_ENTRY_PATH = "/OSGI-INF/processors/";
 	private static final String BUNDLE_PREFIX = "bundle:";
 	private static final String SYSTEM_PREFIX = "system:";
-	//
+
 	private BundleTracker<Collection<IProcessSupplier<?>>> bundleTracker;
 	private final List<IProcessSupplier<?>> systemMethods = new ArrayList<>();
 
@@ -95,7 +95,7 @@ public class MethodProcessTypeSupplier implements IProcessTypeSupplier, BundleTr
 
 		bundleTracker = new BundleTracker<>(bundleContext, Bundle.ACTIVE, this);
 		bundleTracker.open();
-		//
+
 		systemMethods.addAll(parseSystemMethods());
 	}
 
@@ -109,11 +109,11 @@ public class MethodProcessTypeSupplier implements IProcessTypeSupplier, BundleTr
 	public Collection<IProcessSupplier<?>> getProcessorSuppliers() {
 
 		List<IProcessSupplier<?>> processSupplierList = new ArrayList<>();
-		//
+
 		processSupplierList.addAll(parseUserMethods());
 		addTrackedProcessMethods(processSupplierList);
 		processSupplierList.addAll(systemMethods);
-		//
+
 		return processSupplierList;
 	}
 
@@ -144,7 +144,7 @@ public class MethodProcessTypeSupplier implements IProcessTypeSupplier, BundleTr
 				}
 			}
 		}
-		//
+
 		return processSupplier;
 	}
 
@@ -157,10 +157,10 @@ public class MethodProcessTypeSupplier implements IProcessTypeSupplier, BundleTr
 	private List<IProcessSupplier<?>> parseUserMethods() {
 
 		List<IProcessSupplier<?>> processSupplierList = new ArrayList<>();
-		//
+
 		Collection<IProcessMethod> userMethods = MethodConverter.getUserMethods();
 		Set<String> processSupplierIds = new HashSet<>();
-		//
+
 		for(IProcessMethod processMethod : userMethods) {
 			UserMethodProcessSupplier processSupplier = new UserMethodProcessSupplier(processMethod, this);
 			if(processSupplierIds.contains(processSupplier.getId())) {
@@ -170,7 +170,7 @@ public class MethodProcessTypeSupplier implements IProcessTypeSupplier, BundleTr
 			processSupplierList.add(processSupplier);
 			processSupplierIds.add(processSupplier.getId());
 		}
-		//
+
 		return processSupplierList;
 	}
 
@@ -178,7 +178,7 @@ public class MethodProcessTypeSupplier implements IProcessTypeSupplier, BundleTr
 
 		List<IProcessSupplier<?>> processSupplierList = new ArrayList<>();
 		Enumeration<URL> entries = bundle.findEntries(PROCESSORS_ENTRY_PATH, "*" + MethodConverter.FILE_EXTENSION, true);
-		//
+
 		if(entries != null) {
 			while(entries.hasMoreElements()) {
 				URL url = entries.nextElement();
@@ -190,7 +190,7 @@ public class MethodProcessTypeSupplier implements IProcessTypeSupplier, BundleTr
 						String urlPath = url.getPath().toString();
 						String absolutePath = PathResolver.getAbsolutePath(bundle, urlPath);
 						File sourceFile = new File(absolutePath);
-						//
+
 						String path = url.getPath().replace(PROCESSORS_ENTRY_PATH, "").replace(MethodConverter.FILE_EXTENSION, "");
 						String externalForm = url.toExternalForm();
 						IProcessingInfo<IProcessMethod> processingInfo = MethodConverter.load(inputStream, externalForm, null);
@@ -212,7 +212,7 @@ public class MethodProcessTypeSupplier implements IProcessTypeSupplier, BundleTr
 				}
 			}
 		}
-		//
+
 		return processSupplierList;
 	}
 
@@ -220,7 +220,7 @@ public class MethodProcessTypeSupplier implements IProcessTypeSupplier, BundleTr
 
 		List<IProcessSupplier<?>> processSupplierList = new ArrayList<>();
 		File systemMethodFolder = Settings.getSystemMethodDirectory();
-		//
+
 		if(systemMethodFolder.isDirectory()) {
 			File[] listFiles = systemMethodFolder.listFiles();
 			if(listFiles != null) {
@@ -247,7 +247,7 @@ public class MethodProcessTypeSupplier implements IProcessTypeSupplier, BundleTr
 				}
 			}
 		}
-		//
+
 		return processSupplierList;
 	}
 

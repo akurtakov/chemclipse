@@ -25,10 +25,10 @@ public class ChromatogramSelectionSupport {
 		int startRetentionTime = chromatogramSelection.getStartRetentionTime();
 		int stopRetentionTime = chromatogramSelection.getStopRetentionTime();
 		int retentionTimeMoveWindow = (stopRetentionTime - startRetentionTime) / retentionTimeDivider;
-		//
+
 		int startRetentionTimeNew = (MoveDirection.LEFT.equals(moveDirection)) ? startRetentionTime - retentionTimeMoveWindow : startRetentionTime + retentionTimeMoveWindow;
 		int stopRetentionTimeNew = (MoveDirection.LEFT.equals(moveDirection)) ? stopRetentionTime - retentionTimeMoveWindow : stopRetentionTime + retentionTimeMoveWindow;
-		//
+
 		startRetentionTimeNew = getValidatedStartRetentionTime(chromatogramSelection, startRetentionTimeNew);
 		stopRetentionTimeNew = getValidatedStopRetentionTime(chromatogramSelection, stopRetentionTimeNew);
 		chromatogramSelection.setRanges(startRetentionTimeNew, stopRetentionTimeNew, chromatogramSelection.getStartAbundance(), chromatogramSelection.getStopAbundance());

@@ -38,15 +38,15 @@ import org.eclipse.core.runtime.IStatus;
 public class RetentionIndexMarker extends HashSet<IRetentionIndexEntry> {
 
 	private static final Logger logger = Logger.getLogger(RetentionIndexMarker.class);
-	//
+
 	public static final String DESCRIPTION = "Retention Index Marker";
 	public static final String FILE_EXTENSION = ".rim";
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-	//
+
 	private static final long serialVersionUID = 7506362009667971730L;
-	//
+
 	private RetentionIndexEntryValidator validator = new RetentionIndexEntryValidator();
 
 	public Set<String> keySet() {
@@ -94,7 +94,7 @@ public class RetentionIndexMarker extends HashSet<IRetentionIndexEntry> {
 		StringBuilder builder = new StringBuilder();
 		List<IRetentionIndexEntry> indices = new ArrayList<>(settings);
 		Collections.sort(indices, (i1, i2) -> Integer.compare(i1.getRetentionTime(), i2.getRetentionTime()));
-		//
+
 		Iterator<IRetentionIndexEntry> iterator = indices.iterator();
 		while(iterator.hasNext()) {
 			IRetentionIndexEntry setting = iterator.next();
@@ -132,10 +132,10 @@ public class RetentionIndexMarker extends HashSet<IRetentionIndexEntry> {
 
 		boolean success = false;
 		try (PrintWriter printWriter = new PrintWriter(file)) {
-			//
+
 			List<IRetentionIndexEntry> settings = new ArrayList<>(this);
 			Collections.sort(settings, (r1, r2) -> Integer.compare(r1.getRetentionTime(), r2.getRetentionTime()));
-			//
+
 			for(IRetentionIndexEntry setting : settings) {
 				StringBuilder builder = new StringBuilder();
 				extractSetting(setting, builder);
@@ -146,21 +146,21 @@ public class RetentionIndexMarker extends HashSet<IRetentionIndexEntry> {
 		} catch(FileNotFoundException e) {
 			logger.warn(e);
 		}
-		//
+
 		return success;
 	}
 
 	private IRetentionIndexEntry extract(String text) {
 
 		IRetentionIndexEntry setting = null;
-		//
+
 		IStatus status = validator.validate(text);
 		if(status.isOK()) {
 			setting = validator.getSetting();
 		} else {
 			logger.warn(status.getMessage());
 		}
-		//
+
 		return setting;
 	}
 
@@ -183,11 +183,11 @@ public class RetentionIndexMarker extends HashSet<IRetentionIndexEntry> {
 
 		DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.0000");
 		List<String> entries = new ArrayList<>();
-		//
+
 		entries.add(decimalFormat.format(setting.getRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR)); // Minutes
 		entries.add(decimalFormat.format(setting.getRetentionIndex()));
 		entries.add(getFormattedString(setting.getName()));
-		//
+
 		compile(builder, entries);
 	}
 
@@ -200,7 +200,7 @@ public class RetentionIndexMarker extends HashSet<IRetentionIndexEntry> {
 
 		String osDelimiterSpecific = OperatingSystemUtils.getLineDelimiter();
 		String osDelimiterGeneric = "\n";
-		//
+
 		String[] array;
 		if(list.contains(RetentionIndexEntryValidator.SEPARATOR_TOKEN)) {
 			array = list.split(RetentionIndexEntryValidator.SEPARATOR_TOKEN);
@@ -212,7 +212,7 @@ public class RetentionIndexMarker extends HashSet<IRetentionIndexEntry> {
 			array = new String[1];
 			array[0] = list;
 		}
-		//
+
 		return array;
 	}
 

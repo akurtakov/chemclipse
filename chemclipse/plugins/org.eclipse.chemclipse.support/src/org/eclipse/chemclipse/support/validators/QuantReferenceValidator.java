@@ -19,7 +19,7 @@ import org.eclipse.core.runtime.IStatus;
 public class QuantReferenceValidator implements IValidator<Object> {
 
 	private static final String ERROR = "Please enter quantitation reference, e.g.: Styrene";
-	//
+
 	private String name = "";
 
 	@Override
@@ -38,7 +38,7 @@ public class QuantReferenceValidator implements IValidator<Object> {
 				message = ERROR;
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

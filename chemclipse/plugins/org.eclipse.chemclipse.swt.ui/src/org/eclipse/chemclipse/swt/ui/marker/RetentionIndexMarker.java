@@ -119,7 +119,7 @@ public class RetentionIndexMarker extends AbstractBaseChartPaintListener impleme
 		Range rangeX = elementSupport.getRangeX();
 		double min = rangeX.lower;
 		double max = rangeX.upper;
-		//
+
 		if(retentionTime >= min && retentionTime <= max) {
 			int width = e.width;
 			double widthX = max - min + 1;
@@ -132,23 +132,23 @@ public class RetentionIndexMarker extends AbstractBaseChartPaintListener impleme
 				GC gc = e.gc;
 				Color colorBackground = gc.getBackground();
 				Color colorForeground = gc.getForeground();
-				//
+
 				if(retentionIndex > 0) {
-					//
+
 					gc.setForeground(Colors.DARK_GRAY);
 					gc.setLineStyle(SWT.LINE_DASHDOT);
 					gc.drawLine(offset, 0, offset, e.height);
-					//
+
 					String label = showIdentifier ? positionMarker.getIdentifier() : Integer.toString(retentionIndex);
 					Point labelSize = gc.textExtent(label);
-					//
+
 					int offsetX = offset - 20;
 					int offsetY;
 					int boxWidth = 40;
 					int boxHeight = 25;
 					int labelX = offset - (int)(labelSize.x / 2.0d);
 					int labelY;
-					//
+
 					if(top) {
 						gc.setBackground(Colors.DARK_GRAY);
 						offsetY = 15;
@@ -176,7 +176,7 @@ public class RetentionIndexMarker extends AbstractBaseChartPaintListener impleme
 					elementRectangle.setColor(Colors.DARK_GRAY);
 					elementRectangle.setAlpha(255);
 					customSeries.getGraphicElements().add(elementRectangle);
-					//
+
 					ElementLine elementLine = new ElementLine();
 					elementLine.setX(retentionTime);
 					elementLine.setY(IElement.POSITION_TOP_Y);
@@ -187,7 +187,7 @@ public class RetentionIndexMarker extends AbstractBaseChartPaintListener impleme
 					elementLine.setLineStyle(LineStyle.DASHDOT);
 					elementLine.setLineWidth(2);
 					customSeries.getGraphicElements().add(elementLine);
-					//
+
 					TextElement textElement = new TextElement();
 					textElement.setLabel(label);
 					textElement.setColor(Colors.WHITE);
@@ -197,7 +197,7 @@ public class RetentionIndexMarker extends AbstractBaseChartPaintListener impleme
 					textElement.setRotation(0);
 					customSeries.getTextElements().add(textElement);
 				}
-				//
+
 				gc.setBackground(colorBackground);
 				gc.setForeground(colorForeground);
 			}

@@ -35,7 +35,7 @@ public class SynonymsListFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof String value) {
 			/*
 			 * Search Text
@@ -49,7 +49,7 @@ public class SynonymsListFilter extends ViewerFilter {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

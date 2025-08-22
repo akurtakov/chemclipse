@@ -34,7 +34,7 @@ import org.eclipse.swt.widgets.Text;
 public class TargetTraceDialog extends TitleAreaDialog {
 
 	private static final Logger logger = Logger.getLogger(TargetTraceDialog.class);
-	//
+
 	private String title;
 	private String message;
 	private Text textName;

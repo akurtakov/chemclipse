@@ -62,7 +62,7 @@ public class CombinedMassSpectrumCalculator {
 		if(ions == null || excludedIons == null) {
 			return;
 		}
-		//
+
 		Set<Integer> excludedIonsNominal = excludedIons.getIonsNominal();
 		for(IIon ion : ions) {
 			int mz = (int)ion.getIon();

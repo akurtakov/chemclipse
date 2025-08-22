@@ -32,7 +32,7 @@ public class BasePeakResultsContentProvider implements IStructuredContentProvide
 		} else if(inputElement instanceof ILigninRatios ligninRatios) {
 			return ligninRatios.getResults().entrySet().toArray();
 		}
-		//
+
 		return null;
 	}
 

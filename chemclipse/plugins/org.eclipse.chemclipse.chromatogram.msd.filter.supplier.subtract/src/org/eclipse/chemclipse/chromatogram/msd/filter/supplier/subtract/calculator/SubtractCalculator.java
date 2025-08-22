@@ -71,7 +71,7 @@ public class SubtractCalculator {
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 		int startScan = chromatogram.getScanNumber(chromatogramSelection.getStartRetentionTime());
 		int stopScan = chromatogram.getScanNumber(chromatogramSelection.getStopRetentionTime());
-		//
+
 		for(int scanNumber = startScan; scanNumber <= stopScan; scanNumber++) {
 			IScan scan = chromatogram.getScan(scanNumber);
 			if(scan instanceof IRegularMassSpectrum targetMassSpectrum) {
@@ -175,7 +175,7 @@ public class SubtractCalculator {
 				if(normalize) {
 					subtractMassSpectrum.normalize(NORMALIZATION_BASE);
 				}
-				//
+
 				if(useNominalMasses) {
 					/*
 					 * Use only nominal m/z values.
@@ -220,7 +220,7 @@ public class SubtractCalculator {
 		if(targetMassSpectrum == null || subtractMassSpectrumMap == null) {
 			return;
 		}
-		//
+
 		List<IIon> ionsToRemove = new ArrayList<>();
 		for(IIon ion : targetMassSpectrum.getIons()) {
 			/*
@@ -232,7 +232,7 @@ public class SubtractCalculator {
 			} else {
 				mz = ion.getIon();
 			}
-			//
+
 			Float subtractIntensity = subtractMassSpectrumMap.get(mz);
 			if(subtractIntensity != null && subtractIntensity > 0) {
 				/*

@@ -23,7 +23,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 	public static final int MIN_COMPRESSION_LEVEL = 0;
 	public static final int MAX_COMPRESSION_LEVEL = 9;
-	//
+
 	public static final HeaderField DEF_HEADER_FIELD = HeaderField.DATA_NAME;
 	/*
 	 * .ocb (measurement data container)
@@ -35,10 +35,10 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_CHROMATGRAM_EXPORT_REFERENCES_SEPARATELY = false;
 	public static final String P_CHROMATGRAM_EXPORT_REFERENCES_HEADER_FIELD = "chromatogramExportReferencesHeaderField";
 	public static final String DEF_CHROMATGRAM_EXPORT_REFERENCES_HEADER_FIELD = DEF_HEADER_FIELD.name();
-	//
+
 	public static final String P_FORCE_LOAD_ALTERNATE_DETECTOR = "forceLoadAlternateDetector"; // TODO REMOVE
 	public static final boolean DEF_FORCE_LOAD_ALTERNATE_DETECTOR = false;
-	//
+
 	public static final String P_USE_SCAN_PROXIES = "useScanProxies"; // TODO CHECK
 	public static final boolean DEF_USE_SCAN_PROXIES = false;
 	public static final String P_LOAD_SCAN_PROXIES_IN_BACKGROUND = "loadScanProxiesInBackground"; // TODO REMOVE
@@ -80,9 +80,9 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_USE_SCAN_PROXIES, Boolean.toString(DEF_USE_SCAN_PROXIES));
 		putDefault(P_LOAD_SCAN_PROXIES_IN_BACKGROUND, Boolean.toString(DEF_LOAD_SCAN_PROXIES_IN_BACKGROUND));
 		putDefault(P_MIN_BYTES_TO_LOAD_IN_BACKGROUND, Integer.toString(DEF_MIN_BYTES_TO_LOAD_IN_BACKGROUND));
-		//
+
 		putDefault(P_METHOD_COMPRESSION_LEVEL, Integer.toString(DEF_METHOD_COMPRESSION_LEVEL));
-		//
+
 		putDefault(P_LIST_PATH_IMPORT, DEF_LIST_PATH_IMPORT);
 		putDefault(P_LIST_PATH_EXPORT, DEF_LIST_PATH_EXPORT);
 	}

@@ -30,7 +30,7 @@ public class PeakIntegrationSettings extends AbstractPeakIntegrationSettings {
 
 	@JsonIgnore
 	private static final String TIC = "0";
-	//
+
 	@JsonProperty(value = "Traces to Integrate", defaultValue = TIC)
 	@LabelProperty(value = "%TracesToIntegrate", tooltip = "%TracesToIntegrateDescription")
 	@StringSettingsProperty(regExp = "(\\d+[;|\\s]?)+", description = "%MustBeSpaceSeparatedDigits", isMultiLine = false, allowEmpty = false)
@@ -60,7 +60,7 @@ public class PeakIntegrationSettings extends AbstractPeakIntegrationSettings {
 				}
 			}
 		}
-		//
+
 		return markedTraces;
 	}
 

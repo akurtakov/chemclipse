@@ -35,7 +35,7 @@ public class ScanUtil {
 	public static IScan createEmptyScan(IScan scanReference, int retentionTime) {
 
 		IScan scan = null;
-		//
+
 		if(scanReference instanceof IScanCSD) {
 			scan = new ScanCSD(0);
 		} else if(scanReference instanceof IScanMSD) {
@@ -45,11 +45,11 @@ public class ScanUtil {
 		} else if(scanReference instanceof IScanVSD) {
 			scan = new ScanVSD();
 		}
-		//
+
 		if(scan != null) {
 			scan.setRetentionTime(retentionTime);
 		}
-		//
+
 		return scan;
 	}
 }

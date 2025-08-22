@@ -25,7 +25,7 @@ public class ScanInfoListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = ScanInfoLabelProvider.TITLES;
 	private static final int[] BOUNDS = ScanInfoLabelProvider.BOUNDS;
-	//
+
 	private ITableLabelProvider labelProvider = new ScanInfoLabelProvider();
 	private ViewerComparator comparator = new ScanInfoTableComparator();
 
@@ -47,7 +47,7 @@ public class ScanInfoListUI extends ExtendedTableViewer {
 	private void createColumns() {
 
 		createColumns(TITLES, BOUNDS);
-		//
+
 		setLabelProvider(labelProvider);
 		setContentProvider(new ListContentProvider());
 		setComparator(comparator);

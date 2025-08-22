@@ -66,55 +66,55 @@ public abstract class ChromatogramPropertySource implements IPropertySource {
 
 		TextPropertyDescriptor textPropertyDescriptor;
 		ArrayList<IPropertyDescriptor> list = new ArrayList<IPropertyDescriptor>();
-		//
+
 		// textPropertyDescriptor = new TextPropertyDescriptor(MIN_SIGNAL, "Min Signal");
 		// textPropertyDescriptor.setCategory(RECORDS);
 		// list.add(textPropertyDescriptor);
-		//
+
 		// textPropertyDescriptor = new TextPropertyDescriptor(MAX_SIGNAL, "Max Signal");
 		// textPropertyDescriptor.setCategory(RECORDS);
 		// list.add(textPropertyDescriptor);
-		//
+
 		textPropertyDescriptor = new TextPropertyDescriptor(START_RETENTION_TIME, "Start Retention Time (Minutes)");
 		textPropertyDescriptor.setCategory(RECORDS);
 		list.add(textPropertyDescriptor);
-		//
+
 		textPropertyDescriptor = new TextPropertyDescriptor(STOP_RETENTION_TIME, "Stop Retention Time (Minutes)");
 		textPropertyDescriptor.setCategory(RECORDS);
 		list.add(textPropertyDescriptor);
-		//
+
 		textPropertyDescriptor = new TextPropertyDescriptor(NUMBER_OF_SCANS, "Scans");
 		textPropertyDescriptor.setCategory(RECORDS);
 		list.add(textPropertyDescriptor);
-		//
+
 		textPropertyDescriptor = new TextPropertyDescriptor(SCAN_DELAY, "Scan Delay (Milliseconds)");
 		textPropertyDescriptor.setCategory(RECORDS);
 		list.add(textPropertyDescriptor);
-		//
+
 		textPropertyDescriptor = new TextPropertyDescriptor(SCAN_INTERVAL, "Scan Interval (Milliseconds)");
 		textPropertyDescriptor.setCategory(RECORDS);
 		list.add(textPropertyDescriptor);
-		//
+
 		textPropertyDescriptor = new TextPropertyDescriptor(DATE, "Date");
 		textPropertyDescriptor.setCategory(RECORDS);
 		list.add(textPropertyDescriptor);
-		//
+
 		textPropertyDescriptor = new TextPropertyDescriptor(OPERATOR, "Operator");
 		textPropertyDescriptor.setCategory(RECORDS);
 		list.add(textPropertyDescriptor);
-		//
+
 		textPropertyDescriptor = new TextPropertyDescriptor(FILE, CATEGORY);
 		textPropertyDescriptor.setCategory(CATEGORY);
 		list.add(textPropertyDescriptor);
-		//
+
 		textPropertyDescriptor = new TextPropertyDescriptor(SIZE, "Size (MB)");
 		textPropertyDescriptor.setCategory(CATEGORY);
 		list.add(textPropertyDescriptor);
-		//
+
 		textPropertyDescriptor = new TextPropertyDescriptor(NAME, "Name");
 		textPropertyDescriptor.setCategory(CATEGORY);
 		list.add(textPropertyDescriptor);
-		//
+
 		return list.toArray(new IPropertyDescriptor[list.size()]);
 	}
 

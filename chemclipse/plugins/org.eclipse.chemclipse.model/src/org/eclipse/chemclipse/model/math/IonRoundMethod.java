@@ -102,14 +102,14 @@ public enum IonRoundMethod implements ILabel {
 
 		long result;
 		long basis = (long)value;
-		//
+
 		if(offset < MAX_OFFSET) {
 			long delta = Math.round((value - basis) * MAX_OFFSET);
 			result = (delta >= offset) ? basis + 1 : basis;
 		} else {
 			result = basis;
 		}
-		//
+
 		return result;
 	}
 

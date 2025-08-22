@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class DigitalFilterRemovalSettings implements Serializable {
 
 	private static final long serialVersionUID = 7271244127560614155L;
-	//
+
 	@JsonProperty("Group delay of digital filter")
 	private int leftRotationFid = 0;
 	@JsonProperty("Weighting factor for first fid point")

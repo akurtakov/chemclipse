@@ -56,7 +56,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 	 * If no selection is active, then timeRange is null.
 	 */
 	private static final String NO_SELECTION = "--";
-	//
+
 	private AtomicReference<Button> buttonPrevious = new AtomicReference<>();
 	private AtomicReference<ComboViewer> comboViewerControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonNext = new AtomicReference<>();
@@ -71,7 +71,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 	private TimeRanges timeRanges = null;
 	private TimeRange timeRange = null;
 	private TimeRangeLabels timeRangeLabels = new TimeRangeLabels();
-	//
+
 	private ITimeRangeUpdateListener updateListener = null;
 
 	public TimeRangesUI(Composite parent, int style) {
@@ -102,7 +102,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 
 		this.timeRange = timeRange;
 		Combo combo = comboViewerControl.get().getCombo();
-		//
+
 		if(timeRange != null) {
 			String[] items = combo.getItems();
 			exitloop:
@@ -115,7 +115,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 		} else {
 			combo.select(0);
 		}
-		//
+
 		updateTimeRange(timeRange, false);
 	}
 
@@ -131,7 +131,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		createButtonPrevious(this);
 		createComboViewer(this);
 		createButtonNext(this);
@@ -142,7 +142,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 		createButtonAdd(this);
 		createButtonDelete(this);
 		createButtonSettings(this);
-		//
+
 		initialize();
 	}
 
@@ -169,7 +169,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		buttonPrevious.set(button);
 	}
 
@@ -213,7 +213,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		comboViewerControl.set(comboViewer);
 	}
 
@@ -235,7 +235,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		buttonNext.set(button);
 	}
 
@@ -251,7 +251,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 				updateTimeRange(timeRange, true);
 			}
 		});
-		//
+
 		timeRangeControl.set(timeRangeUI);
 	}
 
@@ -305,7 +305,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		buttonAdd.set(button);
 	}
 
@@ -314,7 +314,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 		Label label = new Label(parent, SWT.NONE);
 		label.setText("|");
 		label.setForeground(Colors.GRAY);
-		//
+
 		return label;
 	}
 
@@ -339,7 +339,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		buttonDelete.set(button);
 	}
 
@@ -373,7 +373,7 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 				parent = getParent();
 			}
 		}
-		//
+
 		if(parent != null && !parent.isDisposed()) {
 			parent.layout(true);
 			parent.redraw();
@@ -401,12 +401,11 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 			List<Object> timeRangesInput = new ArrayList<>();
 			timeRangesInput.add(NO_SELECTION); // "No Selection"
 			timeRangesInput.addAll(timeRangesSorted);
-			//
 
 			Combo combo = comboViewer.getCombo();
 			String currentSelection = combo.getText();
 			comboViewer.setInput(timeRangesInput);
-			//
+
 			int index = 0;
 			if(combo.getItemCount() > 1) {
 				buttonDelete.get().setEnabled(true);

@@ -37,21 +37,21 @@ public class SequenceFilesFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof File file) {
-			//
+
 			String name = file.getName();
-			//
+
 			if(!caseSensitive) {
 				searchText = searchText.toLowerCase();
 				name = name.toLowerCase();
 			}
-			//
+
 			if(name.matches(searchText)) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

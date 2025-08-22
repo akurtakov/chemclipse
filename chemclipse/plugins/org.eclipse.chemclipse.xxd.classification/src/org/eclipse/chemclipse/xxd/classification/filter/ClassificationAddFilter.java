@@ -50,11 +50,11 @@ public class ClassificationAddFilter extends AbstractPeakFilter<ClassifierAddFil
 	public void filterPeaks(IChromatogramSelection chromatogramSelection, ClassifierAddFilterSettings configuration, ProcessExecutionContext context) throws IllegalArgumentException {
 
 		Collection<IPeak> peaks = getReadOnlyPeaks(chromatogramSelection);
-		//
+
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
-		//
+
 		String classification = configuration.getClassification();
 		boolean skipClassifiedPeak = configuration.isSkipClassifiedPeak();
 		SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), peaks.size());
@@ -68,11 +68,11 @@ public class ClassificationAddFilter extends AbstractPeakFilter<ClassifierAddFil
 					classify = false;
 				}
 			}
-			//
+
 			if(classify) {
 				peak.addClassifier(classification);
 			}
-			//
+
 			subMonitor.worked(1);
 		}
 	}

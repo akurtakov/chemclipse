@@ -44,10 +44,10 @@ public class CalibrationTableEditor extends FieldEditor {
 	private Button buttonRemove;
 	private Button buttonClear;
 	private SelectionListener selectionListener;
-	//
+
 	private String[] filterExtensions;
 	private String[] filterNames;
-	//
+
 	private CalibrationFileListUtil calibrationFileListUtil = new CalibrationFileListUtil();
 
 	public CalibrationTableEditor(String name, String labelText, Composite parent) {
@@ -138,7 +138,7 @@ public class CalibrationTableEditor extends FieldEditor {
 			}
 			items[i] = file;
 		}
-		//
+
 		String storedContent = calibrationFileListUtil.createList(items);
 		if(storedContent != null) {
 			getPreferenceStore().setValue(getPreferenceName(), storedContent);
@@ -152,7 +152,7 @@ public class CalibrationTableEditor extends FieldEditor {
 		GridData gridDataControl = new GridData();
 		gridDataControl.horizontalSpan = numColumns;
 		control.setLayoutData(gridDataControl);
-		//
+
 		GridData gridDataTable = new GridData(GridData.FILL_BOTH);
 		gridDataTable.verticalAlignment = GridData.FILL;
 		gridDataTable.horizontalAlignment = GridData.FILL;
@@ -160,7 +160,7 @@ public class CalibrationTableEditor extends FieldEditor {
 		gridDataTable.grabExcessHorizontalSpace = true;
 		calibrationFileListUI = getTableControl(parent);
 		calibrationFileListUI.getTable().setLayoutData(gridDataTable);
-		//
+
 		GridData gridDataButtons = new GridData();
 		gridDataButtons.verticalAlignment = GridData.BEGINNING;
 		compositeButtons = getButtonControl(parent);
@@ -250,16 +250,16 @@ public class CalibrationTableEditor extends FieldEditor {
 	private CalibrationFile selectCalibrationFile() {
 
 		CalibrationFile calibrationFile = null;
-		//
+
 		FileDialog fileDialog = new FileDialog(DisplayUtils.getShell(buttonAdd), SWT.OPEN);
 		fileDialog.setText("Select New Calibration File");
 		fileDialog.setFilterPath(PreferenceSupplier.getFilterPathIndexFiles());
-		//
+
 		if(filterExtensions != null && filterNames != null) {
 			fileDialog.setFilterExtensions(filterExtensions);
 			fileDialog.setFilterNames(filterNames);
 		}
-		//
+
 		String filterPath = fileDialog.open();
 		if(filterPath != null) {
 			File file = new File(filterPath);
@@ -278,7 +278,7 @@ public class CalibrationTableEditor extends FieldEditor {
 				}
 			}
 		}
-		//
+
 		return calibrationFile;
 	}
 
@@ -299,7 +299,7 @@ public class CalibrationTableEditor extends FieldEditor {
 			GridLayout layout = new GridLayout();
 			layout.marginWidth = 0;
 			compositeButtons.setLayout(layout);
-			//
+
 			createButtons(compositeButtons);
 			compositeButtons.addDisposeListener(event -> {
 				buttonAdd = null;
@@ -310,7 +310,7 @@ public class CalibrationTableEditor extends FieldEditor {
 		} else {
 			checkParent(compositeButtons, parent);
 		}
-		//
+
 		selectionChanged();
 		return compositeButtons;
 	}

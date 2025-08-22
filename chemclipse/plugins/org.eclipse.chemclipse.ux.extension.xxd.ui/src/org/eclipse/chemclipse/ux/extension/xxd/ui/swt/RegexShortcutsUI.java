@@ -47,10 +47,10 @@ public class RegexShortcutsUI extends Composite {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		createComboViewer(this);
 		createText(this);
-		//
+
 		initialize();
 	}
 
@@ -78,7 +78,7 @@ public class RegexShortcutsUI extends Composite {
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select the suggestion.");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
@@ -96,7 +96,7 @@ public class RegexShortcutsUI extends Composite {
 				}
 			}
 		});
-		//
+
 		comboControl.set(comboViewer);
 	}
 
@@ -106,7 +106,7 @@ public class RegexShortcutsUI extends Composite {
 		text.setText("");
 		text.setToolTipText("The regular expression command is displayed here.");
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		textControl.set(text);
 	}
 }

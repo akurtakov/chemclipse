@@ -41,7 +41,7 @@ public class RetentionIndexTypeSupport {
 					break;
 			}
 		}
-		//
+
 		return name;
 	}
 }

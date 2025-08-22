@@ -53,7 +53,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 		IVendorChromatogram chromatogram = new VendorChromatogram();
 		chromatogram.setFile(file);
 		chromatogram.setConverterId("");
-		//
+
 		IChromatogramArrayReader in = new ChromatogramArrayReader(file);
 		String input = in.readBytesAsString(in.getLength());
 		Matcher matcher = scanPattern.matcher(input);
@@ -75,7 +75,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 		 * Set scan delay and interval
 		 */
 		calculateScanIntervalAndDelay(chromatogram, monitor);
-		//
+
 		return chromatogram;
 	}
 

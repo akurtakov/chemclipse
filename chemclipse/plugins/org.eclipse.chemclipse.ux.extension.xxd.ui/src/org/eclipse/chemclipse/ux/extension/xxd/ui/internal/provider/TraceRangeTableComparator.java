@@ -50,12 +50,12 @@ public class TraceRangeTableComparator extends AbstractRecordTableComparator imp
 					sortOrder = traceRange2.getSecondDimensionHint().compareTo(traceRange1.getSecondDimensionHint());
 					break;
 			}
-			//
+
 			if(getDirection() == ASCENDING) {
 				sortOrder = -sortOrder;
 			}
 		}
-		//
+
 		return sortOrder;
 	}
 }

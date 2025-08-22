@@ -41,7 +41,7 @@ public class MassSpectrumListTableComparator extends AbstractRecordTableComparat
 			if(massSpectrum1.getOptimizedMassSpectrum() != null) {
 				massSpectrum1 = massSpectrum1.getOptimizedMassSpectrum();
 			}
-			//
+
 			if(massSpectrum2.getOptimizedMassSpectrum() != null) {
 				massSpectrum2 = massSpectrum2.getOptimizedMassSpectrum();
 			}

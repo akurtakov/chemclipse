@@ -54,7 +54,7 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 					Shell temporaryShell = new Shell();
 					temporaryShell.setSize(0, 0);
 					temporaryShell.open();
-					//
+
 					identifyScanMaxima(temporaryShell, chromatogramSelection, Display.getDefault(), monitor);
 					temporaryShell.close();
 				});
@@ -84,7 +84,7 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 				IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 				int startScan = chromatogramSelection.getStartScan();
 				int stopScan = chromatogramSelection.getStopScan();
-				//
+
 				List<IScanMSD> massSpectra = new ArrayList<>();
 				for(int i = startScan; i <= stopScan; i++) {
 					IScan scan = chromatogram.getScan(i);

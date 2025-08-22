@@ -33,7 +33,7 @@ public class ApplicationImageFactory {
 		if(applicationImage == null) {
 			applicationImage = new ApplicationImage(Activator.getDefault().getBundle());
 		}
-		//
+
 		return applicationImage;
 	}
 }

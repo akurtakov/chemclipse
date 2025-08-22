@@ -44,7 +44,7 @@ public class ScanRemoverPattern {
 			removeScan = patternRemove.get(getCurrentIndex());
 			position++;
 		}
-		//
+
 		return removeScan;
 	}
 
@@ -86,7 +86,7 @@ public class ScanRemoverPattern {
 		if(position < 0 || position >= patternRemove.size()) {
 			position = 0;
 		}
-		//
+
 		return position;
 	}
 }

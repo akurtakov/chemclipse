@@ -30,7 +30,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 public class SequenceImportRunnable implements IRunnableWithProgress {
 
 	private static final Logger logger = Logger.getLogger(SequenceImportRunnable.class);
-	//
+
 	private File file;
 	private ISequence<? extends ISequenceRecord> sequence;
 

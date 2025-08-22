@@ -32,7 +32,7 @@ import org.eclipse.osgi.util.NLS;
 public class ChromatogramPeakExportConverter extends AbstractChromatogramExportConverter implements IChromatogramExportConverter {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramPeakExportConverter.class);
-	//
+
 	public static final String DESCRIPTION = "NIST Chromatogram Peaks";
 	public static final String FILE_EXTENSION = ".msl";
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;

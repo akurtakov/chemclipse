@@ -56,7 +56,7 @@ public class ChromatogramHeatmapSupport {
 		try {
 			scaleIntensityMin = (scaleIntensityMin < 1.0d) ? 1.0d : scaleIntensityMin;
 			scaleIntensityMax = (scaleIntensityMax < 1.0d) ? 1.0d : scaleIntensityMax;
-			//
+
 			if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
 				return getHeatmap(chromatogramMSD, scaleIntensityMin, scaleIntensityMax);
 			} else if(chromatogram instanceof IChromatogramWSD chromatogramWSD) {
@@ -67,7 +67,7 @@ public class ChromatogramHeatmapSupport {
 		} catch(Exception e) {
 			logger.warn(e);
 		}
-		//
+
 		return Optional.empty();
 	}
 
@@ -76,21 +76,21 @@ public class ChromatogramHeatmapSupport {
 		IExtractedSingleWavelengthSignalExtractor extractor = new ExtractedSingleWavelengthSignalExtractor(chromatogram, true);
 		List<IExtractedSingleWavelengthSignals> signals = extractor.getExtractedWavelengthSignals();
 		if(signals.size() >= 2) {
-			//
+
 			int startScan = 1;
 			int stopScan = chromatogram.getNumberOfScans();
-			//
+
 			double startWavelength = signals.get(0).getWavelength();
 			double stopWavelength = signals.get(signals.size() - 1).getWavelength();
-			//
+
 			int dataHeight = signals.size(); // y -> wavelength
 			int dataWidth = stopScan - startScan + 1; // x -> scans
 			int divisor = calculateDivisor(dataWidth, dataHeight);
 			dataHeight /= divisor;
-			//
+
 			double startRetentionTime = chromatogram.getStartRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR;
 			double stopRetentionTime = chromatogram.getStopRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR;
-			//
+
 			float[] heatmapData = new float[dataHeight * dataWidth * 2];
 			int j = 0;
 			for(int signalNumber = signals.size() - 1; signalNumber >= 0; signalNumber--) {
@@ -110,20 +110,20 @@ public class ChromatogramHeatmapSupport {
 					j++;
 				}
 			}
-			//
+
 			float maxAbundance = -Float.MAX_VALUE;
 			float minAbundance = Float.MAX_VALUE;
 			for(float value : heatmapData) {
 				minAbundance = Float.min(minAbundance, value);
 				maxAbundance = Float.max(maxAbundance, value);
 			}
-			//
+
 			IPrimaryArrayWrapper arrayWrapper = new FloatArrayWrapper(heatmapData);
 			Range axisRangeWidth = new Range(startRetentionTime, stopRetentionTime);
 			Range axisRangeHeight = new Range(startWavelength, stopWavelength);
 			double minimum = minAbundance * scaleIntensityMin;
 			double maximum = maxAbundance / scaleIntensityMax;
-			//
+
 			return Optional.of(new ChromatogramHeatmapData(arrayWrapper, axisRangeWidth, axisRangeHeight, minimum, maximum, dataWidth, dataHeight));
 		}
 		return Optional.empty();
@@ -133,18 +133,18 @@ public class ChromatogramHeatmapSupport {
 
 		IExtractedIonSignalExtractor extractor = new ExtractedIonSignalExtractor(chromatogram);
 		IExtractedIonSignals signals = extractor.getExtractedIonSignals();
-		//
+
 		int startScan = signals.getStartScan();
 		int stopScan = signals.getStopScan();
-		//
+
 		int startIon = signals.getStartIon();
 		int stopIon = signals.getStopIon();
-		//
+
 		int dataWidth = stopScan - startScan + 1; // x -> scans
 		int dataHeight = stopIon - startIon + 1; // x -> m/z values
 		int divisor = calculateDivisor(dataHeight, dataWidth);
 		dataWidth /= divisor;
-		//
+
 		double startRetentionTime = chromatogram.getStartRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR;
 		double stopRetentionTime = chromatogram.getStopRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR;
 		/*
@@ -153,9 +153,9 @@ public class ChromatogramHeatmapSupport {
 		if(dataHeight <= 1 || dataWidth <= 1) {
 			return Optional.empty();
 		}
-		//
+
 		float[] heatmapData = new float[dataWidth * dataHeight * 2];
-		//
+
 		int i = 0;
 		for(int ion = stopIon; ion >= startIon; ion--) {
 			for(int scan = startScan; scan <= stopScan; scan++) {
@@ -165,7 +165,7 @@ public class ChromatogramHeatmapSupport {
 				if(divisor > 1 && scan % divisor != 0) {
 					continue;
 				}
-				//
+
 				try {
 					/*
 					 * XY data
@@ -178,20 +178,20 @@ public class ChromatogramHeatmapSupport {
 				i++;
 			}
 		}
-		//
+
 		float maxAbundance = -Float.MAX_VALUE;
 		float minAbundance = Float.MAX_VALUE;
 		for(float value : heatmapData) {
 			minAbundance = Float.min(minAbundance, value);
 			maxAbundance = Float.max(maxAbundance, value);
 		}
-		//
+
 		IPrimaryArrayWrapper arrayWrapper = new FloatArrayWrapper(heatmapData);
 		Range axisRangeWidth = new Range(startRetentionTime, stopRetentionTime);
 		Range axisRangeHeight = new Range(startIon, stopIon);
 		double minimum = minAbundance * scaleIntensityMin;
 		double maximum = maxAbundance / scaleIntensityMax;
-		//
+
 		return Optional.of(new ChromatogramHeatmapData(arrayWrapper, axisRangeWidth, axisRangeHeight, minimum, maximum, dataWidth, dataHeight));
 	}
 
@@ -215,12 +215,12 @@ public class ChromatogramHeatmapSupport {
 		int width = extractSignalLength(scansTSD);
 		int startSignal = 1;
 		int stopSignal = width;
-		//
+
 		int dataWidth = stopSignal - startSignal + 1; // x -> drift values
 		int dataHeight = stopScan - startScan + 1; // x -> scans
 		int divisor = calculateDivisor(dataWidth, dataHeight);
 		dataHeight /= divisor;
-		//
+
 		double startRetentionTime = chromatogram.getStartRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR;
 		double stopRetentionTime = chromatogram.getStopRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR;
 		/*
@@ -229,15 +229,15 @@ public class ChromatogramHeatmapSupport {
 		if(dataHeight <= 1 || dataWidth <= 1) {
 			return Optional.empty();
 		}
-		//
+
 		float[] heatmapData = new float[dataWidth * dataHeight * 2];
-		//
+
 		int i = 0;
 		int startJ = 0;
 		int stopJ = scansTSD.size() - 1;
 		int startK = 0;
 		int stopK = width - 1;
-		//
+
 		for(int j = stopJ; j >= startJ; j--) {
 			/*
 			 * Skip values on demand.
@@ -245,7 +245,7 @@ public class ChromatogramHeatmapSupport {
 			if(divisor > 1 && j % divisor != 0) {
 				continue;
 			}
-			//
+
 			IScanTSD scanTSD = scansTSD.get(j);
 			for(int k = startK; k <= stopK; k++) {
 				float[] signals = scanTSD.getSignals();
@@ -257,20 +257,20 @@ public class ChromatogramHeatmapSupport {
 				i++;
 			}
 		}
-		//
+
 		float maxAbudance = -Float.MAX_VALUE;
 		float minAbudance = Float.MAX_VALUE;
 		for(float value : heatmapData) {
 			minAbudance = Float.min(minAbudance, value);
 			maxAbudance = Float.max(maxAbudance, value);
 		}
-		//
+
 		IPrimaryArrayWrapper arrayWrapper = new FloatArrayWrapper(heatmapData);
 		Range axisRangeWidth = new Range(startSignal, stopSignal);
 		Range axisRangeHeight = new Range(startRetentionTime, stopRetentionTime);
 		double minimum = minAbudance * scaleIntensityMin;
 		double maximum = maxAbudance / scaleIntensityMax;
-		//
+
 		String axisLabelX = chromatogram.getLabelAxisX();
 		String axisLabelY = chromatogram.getLabelAxisY();
 		return Optional.of(new ChromatogramHeatmapData(arrayWrapper, axisRangeWidth, axisRangeHeight, minimum, maximum, dataWidth, dataHeight, axisLabelX, axisLabelY));
@@ -284,12 +284,12 @@ public class ChromatogramHeatmapSupport {
 		int height = extractSignalLength(scansTSD);
 		int startSignal = 1;
 		int stopSignal = height;
-		//
+
 		int dataWidth = stopScan - startScan + 1;
 		int dataHeight = stopSignal - startSignal + 1;
 		int divisor = calculateDivisor(dataWidth, dataHeight);
 		dataHeight /= divisor;
-		//
+
 		double startRetentionTime = chromatogram.getStartRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR;
 		double stopRetentionTime = chromatogram.getStopRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR;
 		/*
@@ -298,15 +298,15 @@ public class ChromatogramHeatmapSupport {
 		if(dataHeight <= 1 || dataWidth <= 1) {
 			return Optional.empty();
 		}
-		//
+
 		float[] heatmapData = new float[dataWidth * dataHeight * 2];
-		//
+
 		int i = 0;
 		int startJ = 0;
 		int stopJ = height - 1;
 		int startK = 0;
 		int stopK = scansTSD.size() - 1;
-		//
+
 		for(int j = stopJ; j >= startJ; j--) {
 			/*
 			 * Skip values on demand.
@@ -314,7 +314,7 @@ public class ChromatogramHeatmapSupport {
 			if(divisor > 1 && j % divisor != 0) {
 				continue;
 			}
-			//
+
 			for(int k = startK; k <= stopK; k++) {
 				IScanTSD scanTSD = scansTSD.get(k);
 				float[] signals = scanTSD.getSignals();
@@ -326,20 +326,20 @@ public class ChromatogramHeatmapSupport {
 				i++;
 			}
 		}
-		//
+
 		float maxAbundance = -Float.MAX_VALUE;
 		float minAbundance = Float.MAX_VALUE;
 		for(float value : heatmapData) {
 			minAbundance = Float.min(minAbundance, value);
 			maxAbundance = Float.max(maxAbundance, value);
 		}
-		//
+
 		IPrimaryArrayWrapper arrayWrapper = new FloatArrayWrapper(heatmapData);
 		Range axisRangeWidth = new Range(startRetentionTime, stopRetentionTime);
 		Range axisRangeHeight = new Range(startSignal, stopSignal);
 		double minimum = minAbundance * scaleIntensityMin;
 		double maximum = maxAbundance / scaleIntensityMax;
-		//
+
 		String axisLabelX = chromatogram.getLabelAxisX();
 		String axisLabelY = chromatogram.getLabelAxisY();
 		return Optional.of(new ChromatogramHeatmapData(arrayWrapper, axisRangeWidth, axisRangeHeight, minimum, maximum, dataWidth, dataHeight, axisLabelX, axisLabelY));
@@ -353,7 +353,7 @@ public class ChromatogramHeatmapSupport {
 				scansTSD.add(scanTSD);
 			}
 		}
-		//
+
 		return scansTSD;
 	}
 
@@ -363,7 +363,7 @@ public class ChromatogramHeatmapSupport {
 		for(IScanTSD scanTSD : scansTSD) {
 			width = Math.max(width, scanTSD.getSignals().length);
 		}
-		//
+
 		return width;
 	}
 

@@ -25,7 +25,7 @@ public class TraceGeneric extends AbstractTrace {
 		StringBuilder builder = new StringBuilder();
 		builder.append(getTrace());
 		builder.append(getScaleFactorAsString());
-		//
+
 		return builder.toString();
 	}
 }

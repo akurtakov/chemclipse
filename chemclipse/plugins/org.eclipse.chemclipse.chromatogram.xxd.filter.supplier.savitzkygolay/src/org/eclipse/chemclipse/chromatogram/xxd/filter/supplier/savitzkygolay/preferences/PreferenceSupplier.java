@@ -28,19 +28,19 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String P_DERIVATIVE = "derivative";
 	public static final int DEF_DERIVATIVE = MIN_DERIVATIVE;
 	public static final int STEP_DERIVATIVE = 1;
-	//
+
 	public static final int MIN_ORDER = 2;
 	public static final int MAX_ORDER = 5;
 	public static final String P_ORDER = "order";
 	public static final int DEF_ORDER = MIN_ORDER;
 	public static final int STEP_ORDER = 1;
-	//
+
 	public static final int MIN_WIDTH = 5;
 	public static final int MAX_WIDTH = 51;
 	public static final String P_WIDTH = "width";
 	public static final int DEF_WIDTH = 7;
 	public static final int STEP_WIDTH = 1;
-	//
+
 	public static final String P_PER_ION_CALCULATION = "perIonCalculation";
 	public static final boolean DEF_PER_ION_CALCULATION = true;
 

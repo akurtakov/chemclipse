@@ -47,7 +47,7 @@ public class FileHeaderDataEditor extends Composite {
 	private AtomicReference<ComboViewer> comboViewerControl = new AtomicReference<>();
 	private AtomicReference<Text> textControl = new AtomicReference<>();
 	private AtomicReference<Spinner> spinnerControl = new AtomicReference<>();
-	//
+
 	private FileHeaderData fileHeaderData = new FileHeaderData();
 	private List<Listener> listeners = new ArrayList<>();
 	private String message = null;
@@ -88,11 +88,11 @@ public class FileHeaderDataEditor extends Composite {
 		gridLayout.marginWidth = 0;
 		gridLayout.marginHeight = 0;
 		setLayout(gridLayout);
-		//
+
 		createComboViewerHeaderField(this);
 		createTextRegularExpression(this);
 		createSpinnerGroupIndex(this);
-		//
+
 		initialize();
 	}
 
@@ -136,9 +136,9 @@ public class FileHeaderDataEditor extends Composite {
 				}
 			}
 		});
-		//
+
 		comboViewer.setInput(HeaderField.values());
-		//
+
 		comboViewerControl.set(comboViewer);
 	}
 
@@ -148,7 +148,7 @@ public class FileHeaderDataEditor extends Composite {
 		text.setText("");
 		text.setToolTipText("Regular Expression");
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		IValidator<String> validator = value -> {
 
 			String message = null;
@@ -160,7 +160,7 @@ public class FileHeaderDataEditor extends Composite {
 					message = "The regular expression must not contain: '" + delimiter + "'.";
 				}
 			}
-			//
+
 			if(message != null) {
 				return ValidationStatus.error(message);
 			} else {
@@ -174,7 +174,7 @@ public class FileHeaderDataEditor extends Composite {
 				fileHeaderData.setRegularExpression(text.getText().trim());
 			}
 		});
-		//
+
 		textControl.set(text);
 	}
 
@@ -189,9 +189,9 @@ public class FileHeaderDataEditor extends Composite {
 		GridData gridData = new GridData();
 		gridData.widthHint = 80;
 		spinner.setLayoutData(gridData);
-		//
+
 		spinner.addModifyListener(e -> fileHeaderData.setGroupIndex(spinner.getSelection()));
-		//
+
 		spinnerControl.set(spinner);
 	}
 
@@ -216,7 +216,7 @@ public class FileHeaderDataEditor extends Composite {
 		comboViewerControl.get().setSelection(new StructuredSelection(fileHeaderData.getHeaderField()));
 		textControl.get().setText(fileHeaderData.getRegularExpression());
 		spinnerControl.get().setSelection(fileHeaderData.getGroupIndex());
-		//
+
 		for(Listener listener : listeners) {
 			listener.handleEvent(new Event());
 		}

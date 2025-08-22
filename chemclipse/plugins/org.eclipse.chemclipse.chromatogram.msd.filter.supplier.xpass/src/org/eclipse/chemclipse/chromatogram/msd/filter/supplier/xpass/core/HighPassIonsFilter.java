@@ -53,13 +53,13 @@ public class HighPassIonsFilter extends AbstractPeakFilter<HighPassFilterSetting
 	public void filterPeaks(IChromatogramSelection chromatogramSelection, HighPassFilterSettings configuration, ProcessExecutionContext context) throws IllegalArgumentException {
 
 		Collection<IPeak> peaks = getReadOnlyPeaks(chromatogramSelection);
-		//
+
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
-		//
+
 		int number = configuration.getNumberHighest();
-		//
+
 		SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), peaks.size());
 		for(IPeak peak : peaks) {
 			if(peak instanceof IPeakMSD peakMSD) {

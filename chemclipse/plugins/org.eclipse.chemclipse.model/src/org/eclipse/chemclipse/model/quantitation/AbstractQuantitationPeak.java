@@ -17,7 +17,7 @@ import org.eclipse.chemclipse.model.core.IPeak;
 public abstract class AbstractQuantitationPeak implements IQuantitationPeak {
 
 	private static final long serialVersionUID = 195271455326109557L;
-	//
+
 	private double concentration;
 	private String concentrationUnit;
 	private IPeak referencePeak;

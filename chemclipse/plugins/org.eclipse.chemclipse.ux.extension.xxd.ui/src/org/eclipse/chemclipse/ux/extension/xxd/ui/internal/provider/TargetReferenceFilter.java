@@ -21,7 +21,7 @@ public class TargetReferenceFilter extends ViewerFilter {
 
 	private String searchText;
 	private boolean caseSensitive;
-	//
+
 	private ITargetDisplaySettings targetDisplaySettings;
 
 	public void setTargetDisplaySettings(ITargetDisplaySettings targetDisplaySettings) {
@@ -44,20 +44,20 @@ public class TargetReferenceFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof ITargetReference targetReference && targetDisplaySettings != null) {
 			String libraryField = targetReference.getTargetLabel(targetDisplaySettings.getLibraryField());
-			//
+
 			if(!caseSensitive) {
 				searchText = searchText.toLowerCase();
 				libraryField = libraryField.toLowerCase();
 			}
-			//
+
 			if(libraryField.contains(searchText)) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

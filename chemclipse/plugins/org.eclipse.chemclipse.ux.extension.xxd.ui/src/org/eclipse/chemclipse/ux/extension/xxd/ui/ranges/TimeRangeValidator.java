@@ -31,13 +31,13 @@ public class TimeRangeValidator implements IValidator<Object> {
 	private TimeRange.Marker marker = null;
 	private TimeRange timeRange = null;
 	private int retentionTime = 0;
-	//
+
 	private String identifier = "";
 	private int retentionTimeStart = 0;
 	private int retentionTimeMaximum = 0;
 	private int retentionTimeStop = 0;
 	private String traces = "";
-	//
+
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish();
 
 	public TimeRangeValidator() {
@@ -77,7 +77,7 @@ public class TimeRangeValidator implements IValidator<Object> {
 				message = ERROR;
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {
@@ -117,7 +117,7 @@ public class TimeRangeValidator implements IValidator<Object> {
 		} catch(NumberFormatException e) {
 			message = ERROR;
 		}
-		//
+
 		return message;
 	}
 
@@ -133,7 +133,7 @@ public class TimeRangeValidator implements IValidator<Object> {
 				retentionTimeMaximum = (int)(valueParserSupport.parseDouble(values, 2, 0) * TimeRange.MINUTE_FACTOR);
 				retentionTimeStop = (int)(valueParserSupport.parseDouble(values, 3, 0) * TimeRange.MINUTE_FACTOR);
 				traces = valueParserSupport.parseString(values, 4, "");
-				//
+
 				if(identifier.isEmpty()) {
 					message = "Please specify an identifier.";
 				} else if(retentionTimeStart > retentionTimeMaximum) {

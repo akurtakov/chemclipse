@@ -34,16 +34,16 @@ public class ScanInfoLabelProvider extends AbstractChemClipseLabelProvider {
 	public static final String LABEL_SCAN = ExtensionMessages.scanCaps;
 	public static final String LABEL_DOTS = "...";
 	public static final String LABEL_BLANK = "--";
-	//
+
 	public static final String SCAN = ExtensionMessages.scanHash;
 	public static final String RETENTION_TIME = ExtensionMessages.timeMin;
 	public static final String COUNT_IONS = ExtensionMessages.countIons;
 	public static final String CLASSIFICATION = ExtensionMessages.simScan;
 	public static final String IONS = "m/z...";
-	//
+
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 	private int limitSimTraces = preferenceStore.getInt(PreferenceSupplier.P_LIMIT_SIM_TRACES);
-	//
+
 	public static final String[] TITLES = { //
 			SCAN, //
 			RETENTION_TIME, //
@@ -51,7 +51,7 @@ public class ScanInfoLabelProvider extends AbstractChemClipseLabelProvider {
 			CLASSIFICATION, //
 			IONS //
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			120, //
 			120, //

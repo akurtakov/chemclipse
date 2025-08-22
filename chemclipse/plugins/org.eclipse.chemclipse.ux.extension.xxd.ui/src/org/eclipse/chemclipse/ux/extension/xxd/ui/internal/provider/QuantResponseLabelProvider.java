@@ -27,13 +27,13 @@ public class QuantResponseLabelProvider extends AbstractChemClipseLabelProvider 
 	public static final String SIGNAL = ExtensionMessages.signal;
 	public static final String CONCENTRATION = ExtensionMessages.concentration;
 	public static final String RESPONSE = ExtensionMessages.response;
-	//
+
 	public static final String[] TITLES = { //
 			SIGNAL, //
 			CONCENTRATION, //
 			RESPONSE//
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			100, //
 			100, //
@@ -55,7 +55,7 @@ public class QuantResponseLabelProvider extends AbstractChemClipseLabelProvider 
 		DecimalFormat decimalFormat = getDecimalFormat();
 		String text = "";
 		if(element instanceof IResponseSignal responseSignal) {
-			//
+
 			switch(columnIndex) {
 				case 0:
 					text = SignalSupport.asText(responseSignal.getSignal(), decimalFormat);

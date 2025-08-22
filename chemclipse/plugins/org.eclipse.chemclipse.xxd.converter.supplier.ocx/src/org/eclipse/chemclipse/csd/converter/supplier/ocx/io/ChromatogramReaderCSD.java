@@ -114,10 +114,10 @@ public class ChromatogramReaderCSD extends AbstractChromatogramCSDReader impleme
 		IChromatogramCSDZipReader chromatogramReader = null;
 		IChromatogramCSD chromatogramCSD = null;
 		ReaderHelper readerHelper = new ReaderHelper();
-		//
+
 		String version = readerHelper.getVersion(object, directoryPrefix);
 		chromatogramReader = getChromatogramReader(version);
-		//
+
 		if(chromatogramReader != null) {
 			if(object instanceof ZipInputStream zipInputStream) {
 				chromatogramCSD = chromatogramReader.read(zipInputStream, directoryPrefix, monitor);
@@ -125,14 +125,14 @@ public class ChromatogramReaderCSD extends AbstractChromatogramCSDReader impleme
 				chromatogramCSD = chromatogramReader.read(zipFile, directoryPrefix, monitor);
 			}
 		}
-		//
+
 		return chromatogramCSD;
 	}
 
 	private IChromatogramCSDZipReader getChromatogramReader(String version) {
 
 		IChromatogramCSDZipReader chromatogramReader = null;
-		//
+
 		if(version.equals(Format.CHROMATOGRAM_VERSION_1001)) {
 			chromatogramReader = new ChromatogramReader_1001();
 		} else if(version.equals(Format.CHROMATOGRAM_VERSION_1002)) {
@@ -162,7 +162,7 @@ public class ChromatogramReaderCSD extends AbstractChromatogramCSDReader impleme
 		} else if(version.equals(Format.CHROMATOGRAM_VERSION_1502)) {
 			chromatogramReader = new ChromatogramReader_1502();
 		}
-		//
+
 		return chromatogramReader;
 	}
 
@@ -185,14 +185,14 @@ public class ChromatogramReaderCSD extends AbstractChromatogramCSDReader impleme
 					scanCSD.setCycleNumber(scan.getCycleNumber());
 					chromatogramFID.addScan(scanCSD);
 				}
-				//
+
 				chromatogramFID.setConverterId(Format.CONVERTER_ID_CHROMATOGRAM);
 				File fileConverted = new File(file.getAbsolutePath().replace(".ocb", "-fromMSD.ocb"));
 				chromatogramFID.setFile(fileConverted);
 				ChromatogramSupport.calculateScanIntervalAndDelay(chromatogramFID);
 			}
 		}
-		//
+
 		return chromatogramFID;
 	}
 }

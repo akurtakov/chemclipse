@@ -83,12 +83,12 @@ public class ScanSettingsWizardPage extends AbstractAnalysisWizardPage {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		WizardPageSupport.create(this, dataBindingContext);
-		//
+
 		createLabel(composite, "Title:");
 		createTextTitle(composite, 1);
-		//
+
 		createLabel(composite, "Retention Time Window [ms]:");
 		createVariableSection(composite);
 		createLabel(composite, "Maximum Number of Scans:");
@@ -96,12 +96,12 @@ public class ScanSettingsWizardPage extends AbstractAnalysisWizardPage {
 		createCheckBoxDefaultProperties(composite);
 		createRadioButtonClosestScan(composite, true);
 		createRadioButtonInterpolate(composite, false);
-		//
+
 		createLabel(composite, "Number of PCs:");
 		createSpinnerPrincipleComponents(composite);
 		createLabel(composite, "Algorithm:");
 		createComboViewerAlgorithm(composite);
-		//
+
 		setControl(composite);
 	}
 
@@ -116,7 +116,7 @@ public class ScanSettingsWizardPage extends AbstractAnalysisWizardPage {
 
 		Text text = new Text(parent, SWT.BORDER);
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		UpdateValueStrategy<String, Integer> widgetToModel = UpdateValueStrategy.create(IConverter.create(String.class, Integer.class, o1 -> {
 			try {
 				return Integer.parseInt(o1);
@@ -125,7 +125,7 @@ public class ScanSettingsWizardPage extends AbstractAnalysisWizardPage {
 			}
 			return null;
 		}));
-		//
+
 		widgetToModel.setBeforeSetValidator(o1 -> {
 			if(o1 instanceof Integer i) {
 				if(i > 0) {
@@ -134,7 +134,7 @@ public class ScanSettingsWizardPage extends AbstractAnalysisWizardPage {
 			}
 			return ValidationStatus.error("Warning: The value must be positive.");
 		});
-		//
+
 		UpdateValueStrategy<Integer, String> modelToWidget = UpdateValueStrategy.create(IConverter.create(Integer.class, String.class, o1 -> Integer.toString((o1))));
 		dataBindingContext.bindValue(WidgetProperties.text(SWT.Modify).observe(text), retentionTimeWindow, widgetToModel, modelToWidget);
 	}
@@ -147,7 +147,7 @@ public class ScanSettingsWizardPage extends AbstractAnalysisWizardPage {
 		spinner.setIncrement(1000);
 		spinner.setMaximum(Integer.MAX_VALUE);
 		dataBindingContext.bindValue(WidgetProperties.widgetSelection().observe(spinner), maximalNumberScans);
-		//
+
 		return spinner;
 	}
 
@@ -158,7 +158,7 @@ public class ScanSettingsWizardPage extends AbstractAnalysisWizardPage {
 		button.setToolTipText("Default Properties");
 		button.setSelection(true);
 		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -167,7 +167,7 @@ public class ScanSettingsWizardPage extends AbstractAnalysisWizardPage {
 				useDefaultProperties = button.getSelection();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -178,7 +178,7 @@ public class ScanSettingsWizardPage extends AbstractAnalysisWizardPage {
 		button.setToolTipText("Closest Scan");
 		button.setSelection(selected);
 		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -187,7 +187,7 @@ public class ScanSettingsWizardPage extends AbstractAnalysisWizardPage {
 				extractionType = ExtractionType.CLOSEST_SCAN;
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -198,7 +198,7 @@ public class ScanSettingsWizardPage extends AbstractAnalysisWizardPage {
 		button.setToolTipText("Interpolation");
 		button.setSelection(selected);
 		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -207,7 +207,7 @@ public class ScanSettingsWizardPage extends AbstractAnalysisWizardPage {
 				extractionType = ExtractionType.LINEAR_INTERPOLATION_SCAN;
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -227,7 +227,7 @@ public class ScanSettingsWizardPage extends AbstractAnalysisWizardPage {
 				analysisSettings.setNumberOfPrincipalComponents(spinner.getSelection());
 			}
 		});
-		//
+
 		return spinner;
 	}
 
@@ -247,7 +247,7 @@ public class ScanSettingsWizardPage extends AbstractAnalysisWizardPage {
 				return null;
 			}
 		});
-		//
+
 		Combo combo = comboViewer.getCombo();
 		combo.setToolTipText("PCA Algorithm");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -262,9 +262,9 @@ public class ScanSettingsWizardPage extends AbstractAnalysisWizardPage {
 				}
 			}
 		});
-		//
+
 		combo.select(getSelectedAlgorithmIndex(comboViewer));
-		//
+
 		return comboViewer;
 	}
 

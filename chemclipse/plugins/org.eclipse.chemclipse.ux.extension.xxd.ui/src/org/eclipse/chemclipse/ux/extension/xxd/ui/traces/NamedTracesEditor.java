@@ -34,9 +34,9 @@ public class NamedTracesEditor extends Composite {
 
 	private NamedTracesUI namedTracesUI;
 	private NamedTracesListUI namedTracesListUI;
-	//
+
 	private NamedTraces namedTraces;
-	//
+
 	private IUpdateListener updateListener = null;
 
 	public NamedTracesEditor(Composite parent, int style) {
@@ -70,7 +70,7 @@ public class NamedTracesEditor extends Composite {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		namedTracesUI = createNamedTracesUI(this);
 		namedTracesListUI = createNamedTracesListUI(this);
 	}
@@ -153,7 +153,7 @@ public class NamedTracesEditor extends Composite {
 				}
 			}
 		});
-		//
+
 		return namedTracesListUI;
 	}
 

@@ -49,9 +49,9 @@ import org.osgi.framework.ServiceReference;
 public class FilteredMeasurement<FilteredType extends IMeasurement, ConfigType> implements IMeasurement, Filtered<FilteredType, ConfigType> {
 
 	private static final long serialVersionUID = 2L;
-	//
+
 	private final FilteredType measurement;
-	//
+
 	private String dataName;
 	private String detailedInfo;
 	private Double sampleWeight;
@@ -68,10 +68,10 @@ public class FilteredMeasurement<FilteredType extends IMeasurement, ConfigType> 
 	private String operator;
 	private String findings;
 	private String tags;
-	//
+
 	private final Map<String, IMeasurementResult<?>> measurementResults = new HashMap<>(1);
 	private final Map<String, String> headerMap = new HashMap<>(1);
-	//
+
 	private transient FilterContext<FilteredType, ConfigType> context;
 
 	public FilteredMeasurement(FilterContext<FilteredType, ConfigType> context) {

@@ -24,11 +24,10 @@ public class CasNumbersListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = CasNumbersLabelProvider.TITLES;
 	private static final int[] BOUNDS = CasNumbersLabelProvider.BOUNDS;
-	//
+
 	private final CasNumbersLabelProvider labelProvider = new CasNumbersLabelProvider();
 	private final CasNumbersComparator comparator = new CasNumbersComparator();
 	private final CasNumbersListFilter listFilter = new CasNumbersListFilter();
-	//
 
 	public CasNumbersListUI(Composite parent, int style) {
 

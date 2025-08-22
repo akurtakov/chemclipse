@@ -17,12 +17,12 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.chemclipse.chromatogram.xxd.classifier.l10n.messages"; //$NON-NLS-1$ 4
-	//
+
 	public static String chromatogramNull;
 	public static String chromatogramSelectionNull;
 	public static String classifier;
 	public static String noChromatogramClassifierAvailable;
-	//
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}

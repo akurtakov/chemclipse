@@ -45,7 +45,7 @@ public class EditorServicesSupport {
 		if(editorService == null) {
 			editorService = new EditorServiceTSD();
 		}
-		//
+
 		return editorService;
 	}
 
@@ -66,7 +66,7 @@ public class EditorServicesSupport {
 			elements[counter][1] = editorService.getContributionURI();
 			counter++;
 		}
-		//
+
 		return elements;
 	}
 
@@ -80,7 +80,7 @@ public class EditorServicesSupport {
 				}
 			}
 		}
-		//
+
 		return editorServices;
 	}
 }

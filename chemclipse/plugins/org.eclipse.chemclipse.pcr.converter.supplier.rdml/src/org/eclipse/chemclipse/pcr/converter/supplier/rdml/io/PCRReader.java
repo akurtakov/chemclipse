@@ -53,7 +53,7 @@ public class PCRReader {
 	private IPCRReader chooseReader(InputStream inputStream) throws IOException {
 
 		IPCRReader pcrReader = null;
-		//
+
 		try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
 			final String header = bufferedReader.readLine();
 			if(header.contains("1.3")) {

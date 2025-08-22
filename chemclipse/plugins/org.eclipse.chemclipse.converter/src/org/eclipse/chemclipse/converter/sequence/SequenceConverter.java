@@ -56,7 +56,7 @@ public class SequenceConverter {
 
 		SequenceConverterSupport sequenceConverterSupport = getSequenceConverterSupport();
 		for(ISupplier supplier : sequenceConverterSupport.getSupplier()) {
-			//
+
 			if(file.getName().toLowerCase().endsWith(supplier.getFileExtension().toLowerCase())) {
 				IProcessingInfo<ISequence<?>> processinInfo = convert(file, supplier.getId(), monitor);
 				ISequence<?> sequence = processinInfo.getProcessingResult();
@@ -65,7 +65,7 @@ public class SequenceConverter {
 				}
 			}
 		}
-		//
+
 		return getNoImportConverterAvailableProcessingInfo(file);
 	}
 
@@ -118,7 +118,7 @@ public class SequenceConverter {
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 		IConfigurationElement[] extensions = registry.getConfigurationElementsFor(EXTENSION_POINT);
 		for(IConfigurationElement element : extensions) {
-			//
+
 			supplier = new SequenceSupplier();
 			supplier.setFileExtension(element.getAttribute(FILE_EXTENSION));
 			supplier.setFileName(element.getAttribute(FILE_NAME));

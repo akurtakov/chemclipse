@@ -28,7 +28,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 public class ScanWSDImportRunnable implements IRunnableWithProgress {
 
 	private static final Logger logger = Logger.getLogger(ScanWSDImportRunnable.class);
-	//
+
 	private File file;
 	private ISpectrumWSD spectrumWSD = null;
 

@@ -109,7 +109,7 @@ public class RichTextConverter {
 				}
 			}
 		}
-		//
+
 		return body;
 	}
 
@@ -131,7 +131,7 @@ public class RichTextConverter {
 			} catch(NumberFormatException e) {
 			}
 		}
-		//
+
 		return replacements;
 	}
 
@@ -149,7 +149,7 @@ public class RichTextConverter {
 			editorKitHTML.write(writer, jEditorPane.getDocument(), 0, jEditorPane.getDocument().getLength());
 			content = writer.toString();
 		}
-		//
+
 		return content;
 	}
 

@@ -56,19 +56,19 @@ public class MoleculeUI extends Composite implements IExtendedPartUI {
 
 	private static final double SCALE_DEFAULT = 1.0d;
 	private static final double SCALE_DELTA = 0.1d;
-	//
+
 	private static final String EMPTY_MESSAGE = "Please select a target to view a molecular structure.";
 	private static final String ERROR_MESSAGE = "The molecule image couldn't be created.";
-	//
+
 	private AtomicReference<Canvas> canvasMolecule = new AtomicReference<>();
-	//
+
 	private double scaleFactor = SCALE_DEFAULT;
 	private Image imageMolecule = null;
 	private Point renderedSize = null;
 	private ILibraryInformation renderedLibraryInformation = null;
 	private IMoleculeImageService moleculeImageService = null;
 	private ILibraryInformation libraryInformation = null;
-	//
+
 	private IUpdateListenerUI updateListenerUI = null;
 
 	public MoleculeUI(Composite parent, int style) {
@@ -141,7 +141,7 @@ public class MoleculeUI extends Composite implements IExtendedPartUI {
 
 		Canvas canvas = new Canvas(parent, SWT.FILL);
 		canvas.setBackground(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
-		//
+
 		canvas.addControlListener(new ControlAdapter() {
 
 			@Override
@@ -150,7 +150,7 @@ public class MoleculeUI extends Composite implements IExtendedPartUI {
 				canvas.redraw();
 			}
 		});
-		//
+
 		canvas.addMouseWheelListener(new MouseWheelListener() {
 
 			@Override
@@ -164,7 +164,7 @@ public class MoleculeUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		canvas.addPaintListener(new PaintListener() {
 
 			@Override
@@ -173,7 +173,7 @@ public class MoleculeUI extends Composite implements IExtendedPartUI {
 				drawImage(canvas, event);
 			}
 		});
-		//
+
 		canvas.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -200,7 +200,7 @@ public class MoleculeUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		Menu menu = new Menu(canvas);
 		MenuItem menuItem = new MenuItem(menu, SWT.NONE);
 		menuItem.setText("Molecule Service");
@@ -221,7 +221,7 @@ public class MoleculeUI extends Composite implements IExtendedPartUI {
 			}
 		});
 		canvas.setMenu(menu);
-		//
+
 		return canvas;
 	}
 
@@ -240,7 +240,7 @@ public class MoleculeUI extends Composite implements IExtendedPartUI {
 			FontData[] fontData = font.getFontData();
 			int width = gc.stringExtent(EMPTY_MESSAGE).x;
 			int height = fontData[0].getHeight();
-			//
+
 			Point size = canvas.getSize();
 			int x = (int)(size.x / 2.0d - width / 2.0d);
 			int y = (int)(size.y / 2.0d - height / 2.0d);
@@ -263,7 +263,7 @@ public class MoleculeUI extends Composite implements IExtendedPartUI {
 				int destY = 0;
 				int destWidth = bounds.width;
 				int destHeight = bounds.height;
-				//
+
 				if(scaleFactor != 1.0d) {
 					destWidth = (int)(bounds.width * scaleFactor);
 					destHeight = (int)(bounds.height * scaleFactor);
@@ -286,7 +286,7 @@ public class MoleculeUI extends Composite implements IExtendedPartUI {
 				FontData[] fontData = font.getFontData();
 				int width = gc.stringExtent(ERROR_MESSAGE).x;
 				int height = fontData[0].getHeight();
-				//
+
 				Point size = canvas.getSize();
 				int x = (int)(size.x / 2.0d - width / 2.0d);
 				int y = (int)(size.y / 2.0d - height / 2.0d);
@@ -308,7 +308,7 @@ public class MoleculeUI extends Composite implements IExtendedPartUI {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -357,12 +357,12 @@ public class MoleculeUI extends Composite implements IExtendedPartUI {
 		Point size = canvasMolecule.get().getSize();
 		int width = size.x;
 		int height = size.y;
-		//
+
 		if(scaleFactor != 1.0d) {
 			width += (int)(size.x * scaleFactor);
 			height += (int)(size.y * scaleFactor);
 		}
-		//
+
 		return adjustSize(width, height);
 	}
 
@@ -370,7 +370,7 @@ public class MoleculeUI extends Composite implements IExtendedPartUI {
 
 		width = (width <= 0) ? 1 : width;
 		height = (height <= 0) ? 1 : height;
-		//
+
 		return new Point(width, height);
 	}
 

@@ -38,11 +38,11 @@ public class TraceRangesAnnotationService extends TraceRangesSerializationServic
 		gridData.heightHint = 200;
 		gridData.widthHint = 500;
 		traceRangesEditor.setLayoutData(gridData);
-		//
+
 		if(currentSelection instanceof String) {
 			traceRangesEditor.load((String)currentSelection);
 		}
-		//
+
 		traceRangesEditorControl.set(traceRangesEditor);
 		return traceRangesEditor;
 	}

@@ -24,7 +24,7 @@ public class WavenumberSignalsLabelProvider extends LabelProvider implements ITa
 
 	public static final String WAVENUMBER = "Wavenumber";
 	public static final String INTENSITY = "Intensity";
-	//
+
 	public static final String[] TITLES = { //
 			WAVENUMBER, //
 			INTENSITY //

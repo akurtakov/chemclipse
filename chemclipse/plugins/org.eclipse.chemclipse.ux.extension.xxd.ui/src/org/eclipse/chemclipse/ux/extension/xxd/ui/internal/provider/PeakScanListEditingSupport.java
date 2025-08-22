@@ -32,7 +32,7 @@ public class PeakScanListEditingSupport extends EditingSupport {
 	private CellEditor cellEditor;
 	private final ExtendedTableViewer tableViewer;
 	private final String column;
-	//
+
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.000");
 	private DecimalFormat integerFormat = ValueFormat.getDecimalFormatEnglish("0");
 

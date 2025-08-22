@@ -32,10 +32,10 @@ public class PeakDataSupport {
 
 		StringBuilder builder = new StringBuilder();
 		if(peak != null) {
-			//
+
 			IPeakModel peakModel = peak.getPeakModel();
 			IScan scan = peakModel.getPeakMaximum();
-			//
+
 			builder.append("Peak");
 			builder.append(" | ");
 			builder.append("Center RT: ");
@@ -47,7 +47,7 @@ public class PeakDataSupport {
 			} else {
 				builder.append(decimalFormat.format(scan.getRetentionIndex()));
 			}
-			//
+
 			builder.append(" | ");
 			builder.append("Signal: ");
 			builder.append((int)peak.getIntegratedArea());

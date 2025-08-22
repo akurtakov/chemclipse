@@ -101,7 +101,7 @@ public class FeatureEditingSupport extends EditingSupport {
 					}
 					break;
 			}
-			//
+
 			tableViewer.refresh(element);
 			tableViewer.updateContent();
 		}

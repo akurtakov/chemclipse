@@ -28,12 +28,12 @@ import org.eclipse.chemclipse.support.preferences.IPreferenceSupplier;
 public class PreferenceSupplier extends AbstractPreferenceSupplier implements IPreferenceSupplier {
 
 	public static final String DEFAULT_TRACES = "Water:18;Nitrogen:28;Oxygen:32;Carbon Dioxide:44;Solvent Tailing:84;Column Bleed:207";
-	//
+
 	public static final String P_TARGET_TRACES = "targetTraces"; //$NON-NLS-1$
 	public static final String DEF_TARGET_TRACES = Messages.targetTraces;
 	public static final String ENTRY_DELIMITER = ";"; //$NON-NLS-1$
 	public static final String VALUE_DELIMITER = ":"; //$NON-NLS-1$
-	//
+
 	private static final Logger logger = Logger.getLogger(PreferenceSupplier.class);
 	private static IPreferenceSupplier preferenceSupplier = null;
 
@@ -101,7 +101,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 				}
 			}
 		}
-		//
+
 		return ions;
 	}
 
@@ -155,7 +155,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 			}
 			values = builder.toString();
 		}
-		//
+
 		INSTANCE().put(P_TARGET_TRACES, values);
 	}
 }

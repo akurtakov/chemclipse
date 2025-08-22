@@ -43,7 +43,7 @@ public class ChromatogramFilter extends AbstractChromatogramFilterMSD {
 
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = new ProcessingInfo<>();
 		processingInfo.addMessages(validate(chromatogramSelection, chromatogramFilterSettings));
-		//
+
 		if(!processingInfo.hasErrorMessages()) {
 			if(chromatogramFilterSettings instanceof FilterSettings filterSettings) {
 				try {
@@ -53,7 +53,7 @@ public class ChromatogramFilter extends AbstractChromatogramFilterMSD {
 					boolean adjustThresholdTransitions = filterSettings.isAdjustThresholdTransitions();
 					int numberOfUsedIonsForCoefficient = filterSettings.getNumberOfUsedIonsForCoefficient();
 					int segmentWidth = filterSettings.getSegmentWidth();
-					//
+
 					List<ICombinedMassSpectrum> noiseMassSpectra = Denoising.applyDenoisingFilter(chromatogramSelection, ionsToRemove, ionsToPreserve, adjustThresholdTransitions, numberOfUsedIonsForCoefficient, segmentWidth, monitor);
 					DenoisingFilterResult filterResult = new DenoisingFilterResult(ResultStatus.OK, "The chromatogram selection has been denoised successfully.", noiseMassSpectra);
 					IMeasurementResult<?> measurementResult = new MeasurementResult("MS Denoising Filter", "org.eclipse.chemclipse.chromatogram.msd.filter.supplier.denoising", "This list contains the calculated noise mass spectra.", filterResult);

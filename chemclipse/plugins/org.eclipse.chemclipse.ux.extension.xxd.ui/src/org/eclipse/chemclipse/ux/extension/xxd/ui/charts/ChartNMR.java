@@ -158,7 +158,7 @@ public class ChartNMR extends LineChart {
 		chartSettings.setVerticalSliderVisible(false);
 		chartSettings.getRangeRestriction().setZeroX(false);
 		chartSettings.getRangeRestriction().setZeroY(false);
-		//
+
 		setPrimaryAxisSetRaw(chartSettings);
 		addSecondaryAxisSetRaw(chartSettings);
 		applySettings(chartSettings);
@@ -177,7 +177,7 @@ public class ChartNMR extends LineChart {
 		primaryAxisSettingsX.setPosition(Position.Primary);
 		primaryAxisSettingsX.setVisible(false);
 		primaryAxisSettingsX.setReversed(false);
-		//
+
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle("Intensity");
 		primaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.0#E0"), new DecimalFormatSymbols(Locale.ENGLISH)));
@@ -228,7 +228,7 @@ public class ChartNMR extends LineChart {
 		chartSettings.setVerticalSliderVisible(false);
 		chartSettings.getRangeRestriction().setZeroX(false);
 		chartSettings.getRangeRestriction().setZeroY(false);
-		//
+
 		setPrimaryAxisSetProcessed(chartSettings);
 		addSecondaryAxisSetProcessed(chartSettings);
 		applySettings(chartSettings);
@@ -254,7 +254,7 @@ public class ChartNMR extends LineChart {
 			primaryAxisSettingsX.setGridLineStyle(LineStyle.NONE);
 		}
 		primaryAxisSettingsX.setExtraSpaceTitle(10);
-		//
+
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle("Intensity");
 		primaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.0#E0"), new DecimalFormatSymbols(Locale.ENGLISH)));

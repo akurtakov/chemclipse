@@ -72,7 +72,7 @@ import org.osgi.service.event.EventHandler;
 public class MethodSupportUI extends Composite implements IExtendedPartUI {
 
 	private static final Logger logger = Logger.getLogger(MethodSupportUI.class);
-	//
+
 	private AtomicReference<ComboViewer> methodsControl = new AtomicReference<>();
 	private AtomicReference<Button> addControl = new AtomicReference<>();
 	private AtomicReference<Button> editControl = new AtomicReference<>();
@@ -81,19 +81,19 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 	private AtomicReference<Button> deleteControl = new AtomicReference<>();
 	private AtomicReference<Button> directoryControl = new AtomicReference<>();
 	private AtomicReference<Button> executeControl = new AtomicReference<>();
-	//
+
 	private EventHandler eventHandler = null;
 	private IEventBroker eventBroker = Activator.getDefault().getEventBroker();
 	private IMethodListener methodListener = null;
 	private MethodEditorSupport supplierEditorSupport = new MethodEditorSupport();
-	//
+
 	private ProcessMethod processMethodMacroRecorder = null;
 
 	public MethodSupportUI(Composite parent, int style) {
 
 		super(parent, style);
 		createControl();
-		//
+
 		eventHandler = createEventHandler();
 		eventBroker.subscribe(IChemClipseEvents.TOPIC_METHOD_UPDATE, null, eventHandler, true);
 	}
@@ -142,13 +142,13 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(8, false);
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		createComboMethod(composite);
 		createButtonAddMethod(composite);
 		createButtonEditMethod(composite);
@@ -157,7 +157,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 		createButtonDeleteMethod(composite);
 		createButtonMethodDirectory(composite);
 		createButtonExecuteMethod(composite);
-		//
+
 		initialize();
 	}
 
@@ -182,7 +182,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select a process method.");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
@@ -199,7 +199,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 				enableWidgets();
 			}
 		});
-		//
+
 		methodsControl.set(comboViewer);
 	}
 
@@ -225,7 +225,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		addControl.set(button);
 	}
 
@@ -247,7 +247,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		editControl.set(button);
 	}
 
@@ -322,12 +322,12 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 						}
 						return;
 					}
-					//
+
 					MessageDialog.openInformation(e.display.getActiveShell(), ExtensionMessages.copyMethod, ExtensionMessages.cantCopyMethodFilesystem);
 				}
 			}
 		});
-		//
+
 		copyControl.set(button);
 	}
 
@@ -358,7 +358,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 						processMethodMacroRecorder.setOperator(UserManagement.getCurrentUser());
 						processMethodMacroRecorder.setCategory(ExtensionMessages.process);
 						processMethodMacroRecorder.setSupportResume(PreferenceSupplierMethods.isCreateMethodEnableResume());
-						//
+
 						if(MethodFileSupport.saveProccessMethod(e.display.getActiveShell(), processMethodMacroRecorder)) {
 							File file = processMethodMacroRecorder.getSourceFile();
 							if(file != null && file.exists()) {
@@ -374,7 +374,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		recordControl.set(button);
 	}
 
@@ -400,7 +400,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 							return;
 						}
 					}
-					//
+
 					File file = getFile(processMethod);
 					if(file != null && file.exists()) {
 						if(MessageDialog.openQuestion(e.display.getActiveShell(), ExtensionMessages.deleteMethod, MessageFormat.format(ExtensionMessages.shallDeleteMethod, file.getName()))) {
@@ -410,12 +410,12 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 						}
 						return;
 					}
-					//
+
 					MessageDialog.openInformation(e.display.getActiveShell(), ExtensionMessages.deleteMethod, ExtensionMessages.cantDeleteMethodFilesystem);
 				}
 			}
 		});
-		//
+
 		deleteControl.set(button);
 	}
 
@@ -437,7 +437,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		executeControl.set(button);
 	}
 
@@ -456,7 +456,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 				updateInput();
 			}
 		});
-		//
+
 		directoryControl.set(button);
 	}
 
@@ -465,7 +465,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 		DirectoryDialog directoryDialog = new DirectoryDialog(shell);
 		directoryDialog.setText(ExtensionMessages.methodDirectory);
 		directoryDialog.setFilterPath(MethodConverter.getUserMethodDirectory().getAbsolutePath());
-		//
+
 		String directoryPath = directoryDialog.open();
 		if(directoryPath != null && !directoryPath.equals("")) {
 			MethodConverter.setUserMethodDirectory(new File(directoryPath));
@@ -484,7 +484,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 		fileDialog.setFilterExtensions(new String[]{MethodConverter.FILTER_EXTENSION});
 		fileDialog.setFilterNames(new String[]{MethodConverter.FILTER_NAME});
 		fileDialog.setFilterPath(MethodConverter.getUserMethodDirectory().getAbsolutePath());
-		//
+
 		File file = null;
 		String filePath = fileDialog.open();
 		if(filePath != null && !filePath.equals("")) {
@@ -495,7 +495,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 			ProcessMethod processMethod = new ProcessMethod(ProcessMethod.CHROMATOGRAPHY);
 			processMethod.setOperator(UserManagement.getCurrentUser());
 			processMethod.setDescription(ExtensionMessages.processMethod);
-			//
+
 			IProcessingInfo<?> processingInfo = MethodConverter.convert(file, processMethod, MethodConverter.DEFAULT_METHOD_CONVERTER_ID, new NullProgressMonitor());
 			if(!processingInfo.hasErrorMessages()) {
 				PreferenceSupplierConverter.setSelectedMethodName(file.getName());
@@ -508,7 +508,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 				file = null;
 			}
 		}
-		//
+
 		return file;
 	}
 
@@ -527,7 +527,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 		} else {
 			methodsControl.get().setInput(null);
 		}
-		//
+
 		enableWidgets();
 	}
 
@@ -535,7 +535,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 
 		String selectedMethodName = PreferenceSupplierConverter.getSelectedMethodName();
 		Combo combo = methodsControl.get().getCombo();
-		//
+
 		exitloop:
 		for(int i = 0; i < combo.getItemCount(); i++) {
 			if(combo.getItem(i).equals(selectedMethodName)) {
@@ -543,7 +543,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 				break exitloop;
 			}
 		}
-		//
+
 		if(combo.getSelectionIndex() == -1) {
 			combo.select(0);
 			PreferenceSupplierConverter.setSelectedMethodName(combo.getItem(0));
@@ -562,7 +562,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 		 */
 		copyControl.get().setEnabled(true);
 		directoryControl.get().setEnabled(true);
-		//
+
 		IProcessMethod processMethod = getProcessMethod();
 		if(processMethod != null) {
 			boolean editable = getFile(processMethod) != null;
@@ -579,7 +579,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 		if(object instanceof IProcessMethod processMethod) {
 			return processMethod;
 		}
-		//
+
 		return null;
 	}
 
@@ -588,7 +588,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 		if(processMethod != null) {
 			return processMethod.getSourceFile();
 		}
-		//
+
 		return null;
 	}
 

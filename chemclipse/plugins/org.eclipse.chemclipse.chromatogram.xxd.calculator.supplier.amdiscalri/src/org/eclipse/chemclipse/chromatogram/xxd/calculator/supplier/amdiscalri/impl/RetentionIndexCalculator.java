@@ -45,13 +45,13 @@ import org.eclipse.chemclipse.support.model.SeparationColumnType;
 public class RetentionIndexCalculator {
 
 	private static final Logger logger = Logger.getLogger(RetentionIndexCalculator.class);
-	//
+
 	public static final String ALKANE_PREFIX = "C";
 	public static final String ALKANE_REGEX = "(" + ALKANE_PREFIX + ")(\\d+)";
 	public static final int ALKANE_MISSING = 0;
 	public static final int INDEX_MISSING = 0;
 	public static final float ALKANE_FACTOR = 100.0f;
-	//
+
 	private static final Pattern PATTERN_ALKANE = Pattern.compile(ALKANE_REGEX);
 	private static final String DESCRIPTION = "Retention Index Calculator";
 
@@ -75,7 +75,7 @@ public class RetentionIndexCalculator {
 		if(index > 0 && index <= standards.length) {
 			return standards[index - 1];
 		}
-		//
+
 		return "Alkane Missing";
 	}
 
@@ -89,7 +89,7 @@ public class RetentionIndexCalculator {
 		prefix.put(70, "Heptacontane");
 		prefix.put(80, "Octacontane");
 		prefix.put(90, "Nonacontane");
-		//
+
 		Map<Integer, String> postfix = new HashMap<>();
 		postfix.put(1, "Hen");
 		postfix.put(2, "Do");
@@ -100,7 +100,7 @@ public class RetentionIndexCalculator {
 		postfix.put(7, "Hepta");
 		postfix.put(8, "Octa");
 		postfix.put(9, "Nona");
-		//
+
 		List<String> standards = new ArrayList<>();
 		/*
 		 * C1 - C9
@@ -146,7 +146,7 @@ public class RetentionIndexCalculator {
 		for(int i = 3; i <= 9; i++) {
 			int carbon = i * 10;
 			String name = prefix.getOrDefault(carbon, "");
-			//
+
 			for(int j = 0; j <= 9; j++) {
 				StringBuilder builder = new StringBuilder();
 				builder.append("C");
@@ -169,7 +169,7 @@ public class RetentionIndexCalculator {
 				standards.add(builder.toString());
 			}
 		}
-		//
+
 		return standards.toArray(new String[standards.size()]);
 	}
 
@@ -208,7 +208,7 @@ public class RetentionIndexCalculator {
 		alkanesByCAS.put("638-68-6", "Triacontane");
 		alkanesByCAS.put("630-04-6", "Hentriacontane/Untriacontane");
 		alkanesByCAS.put("544-85-4", "Dotriacontane");
-		//
+
 		return alkanesByCAS;
 	}
 
@@ -257,7 +257,7 @@ public class RetentionIndexCalculator {
 			ArrayList<String> iupacNames = new ArrayList<>(alkanesByCAS.values());
 			alkaneNumber = iupacNames.stream().filter(v -> v.contains(name)).map(iupacNames::indexOf).findFirst().orElse(-1) + 1;
 		}
-		//
+
 		return alkaneNumber;
 	}
 
@@ -289,7 +289,7 @@ public class RetentionIndexCalculator {
 		} else {
 			processingInfo.addErrorMessage(DESCRIPTION, "The chromatogram selection is not available.");
 		}
-		//
+
 		return processingInfo;
 	}
 
@@ -317,7 +317,7 @@ public class RetentionIndexCalculator {
 		} else {
 			processingInfo.addErrorMessage(DESCRIPTION, "The chromatogram selection is not available.");
 		}
-		//
+
 		return processingInfo;
 	}
 
@@ -389,7 +389,7 @@ public class RetentionIndexCalculator {
 				separationColumnIndices = getFileIndices(chromatogramSelection, calculatorSettings);
 			}
 		}
-		//
+
 		return separationColumnIndices;
 	}
 
@@ -439,7 +439,7 @@ public class RetentionIndexCalculator {
 				separationColumnIndices = calibrationMap.get(SeparationColumnType.DEFAULT.name());
 			}
 		}
-		//
+
 		return separationColumnIndices;
 	}
 

@@ -40,7 +40,7 @@ public class ProjectExplorerFileIdentifier extends AbstractSupplierFileIdentifie
 			default:
 				// No action
 		}
-		//
+
 		return supplier;
 	}
 

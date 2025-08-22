@@ -48,7 +48,7 @@ public class PageUtil {
 	 * of the page settings. Internally, pt is used and the page base bottom left (0,0).
 	 */
 	private static final Logger logger = Logger.getLogger(PageUtil.class);
-	//
+
 	private static final String TEXT_SHORTEN_MARKER = "...";
 	/*
 	 * Initialized in constructor
@@ -66,11 +66,11 @@ public class PageUtil {
 		page = new PDPage(pageSettings.getPDRectangle());
 		this.document.addPage(page);
 		contentStream = new PDPageContentStream(document, page);
-		//
+
 		pageBaseConverter = ConverterFactory.getInstance(pageSettings.getPageBase());
 		unitConverter = ConverterFactory.getInstance(pageSettings.getUnit());
 		this.landscape = pageSettings.isLandscape();
-		//
+
 		if(this.landscape) {
 			page.setRotation(-90);
 			float x = 0;
@@ -169,7 +169,7 @@ public class PageUtil {
 		String text = textElement.getText();
 		if(text.length() > 0) {
 			float textHeight = 0.0f;
-			//
+
 			switch(textElement.getTextOption()) {
 				case NONE:
 					textHeight = printTextDefault(textElement);
@@ -186,11 +186,11 @@ public class PageUtil {
 					textHeight = printTextDefault(textElement);
 					break;
 			}
-			//
+
 			float minHeight = unitConverter.convertToPt(textElement.getMinHeight());
 			height = (textHeight > minHeight) ? textHeight : minHeight;
 		}
-		//
+
 		return unitConverter.convertFromPt(height);
 	}
 
@@ -207,7 +207,7 @@ public class PageUtil {
 		float height = unitConverter.convertToPt(imageElement.getHeight());
 		float x = calculateX(imageElement, width, width);
 		float y = calculateY(imageElement, height);
-		//
+
 		printImage(image, x, y, width, height);
 	}
 
@@ -224,7 +224,7 @@ public class PageUtil {
 		float y0 = getPositionBaseY(lineElement.getY());
 		float x1 = getPositionBaseX(lineElement.getX1());
 		float y1 = getPositionBaseY(lineElement.getY1());
-		//
+
 		contentStream.setStrokingColor(lineElement.getColor());
 		contentStream.setLineWidth(width);
 		contentStream.moveTo(x0, y0);
@@ -245,7 +245,7 @@ public class PageUtil {
 		float y = getPositionBaseY(boxElement.getY() + boxElement.getHeight());
 		float width = unitConverter.convertToPt(boxElement.getWidth());
 		float height = unitConverter.convertToPt(boxElement.getHeight());
-		//
+
 		contentStream.setNonStrokingColor(color);
 		contentStream.addRect(x, y, width, height);
 		contentStream.fill();
@@ -299,7 +299,7 @@ public class PageUtil {
 
 		PDTable pdTable = tableElement.getPDTable();
 		boolean isValid = pdTable.isValid();
-		//
+
 		if(isValid) {
 			/*
 			 * Width
@@ -318,7 +318,7 @@ public class PageUtil {
 				logger.warn("The table height (" + heightTable + ")is larger then the page height (" + heightPage + ").");
 			}
 		}
-		//
+
 		return isValid;
 	}
 
@@ -418,7 +418,7 @@ public class PageUtil {
 			float _extra = unitConverter.convertFromPt(0.3f); // Prevents a tiny gap
 			printBox(new BoxElement(_x, _y, pdTable.getWidth(), _height + _extra).setColor(color));
 		}
-		//
+
 		for(CellElement cell : cells) {
 			/*
 			 * Text
@@ -430,30 +430,30 @@ public class PageUtil {
 			 * Borders
 			 */
 			if(cell.isBorderSet()) {
-				//
+
 				float _xRight = _x + cell.getMaxWidth();
 				float _yHeight = _y + _height;
-				//
+
 				if(cell.isBorderSet(CellElement.BORDER_LEFT)) {
 					printLine(new LineElement(_x, _y, _x, _yHeight).setLineWidth(_lineWidth));
 				}
-				//
+
 				if(cell.isBorderSet(CellElement.BORDER_RIGHT)) {
 					printLine(new LineElement(_xRight, _y, _xRight, _yHeight).setLineWidth(_lineWidth));
 				}
-				//
+
 				if(cell.isBorderSet(CellElement.BORDER_TOP)) {
 					printLine(new LineElement(_x, _y, _xRight, _y).setLineWidth(_lineWidth));
 				}
-				//
+
 				if(cell.isBorderSet(CellElement.BORDER_BOTTOM)) {
 					printLine(new LineElement(_x, _yHeight, _xRight, _yHeight).setLineWidth(_lineWidth));
 				}
 			}
-			//
+
 			_x += cell.getMaxWidth();
 		}
-		//
+
 		return unitConverter.convertToPt(_height);
 	}
 
@@ -534,7 +534,7 @@ public class PageUtil {
 		float textHeight = calculateTextHeightPt(font, fontSize);
 		float x = calculateX(textElement, textWidth, maxWidth);
 		float y = calculateY(textElement, textHeight);
-		//
+
 		return printText(font, fontSize, color, x, y, text);
 	}
 
@@ -556,7 +556,7 @@ public class PageUtil {
 		float textHeight = calculateTextHeightPt(font, fontSize);
 		float x = unitConverter.convertToPt(textElement.getX());
 		float y = calculateY(textElement, textHeight);
-		//
+
 		String shortenedText = text; // default
 		ReferenceX referenceX = textElement.getReferenceX();
 		switch(referenceX) {
@@ -572,7 +572,7 @@ public class PageUtil {
 				shortenedText = shortenStringLeft(text, textWidth, maxWidth);
 				break;
 		}
-		//
+
 		return printText(font, fontSize, color, x, y, shortenedText);
 	}
 
@@ -595,14 +595,14 @@ public class PageUtil {
 		float textHeight = calculateTextHeightPt(font, fontSize);
 		float x = unitConverter.convertToPt(textElement.getX());
 		float y = calculateY(textElement, textHeight);
-		//
+
 		List<String> parts = cutStringMultiLine(text, textWidth, maxWidth);
 		float offset = 0.0f;
 		for(String part : parts) {
 			float height = printText(font, fontSize, color, x, y - offset, part);
 			offset += (height > minHeight) ? height : minHeight;
 		}
-		//
+
 		return offset;
 	}
 
@@ -626,7 +626,7 @@ public class PageUtil {
 		contentStream.newLineAtOffset(x, y);
 		contentStream.showText(text);
 		contentStream.endText();
-		//
+
 		return calculateTextHeightPt(font, fontSize);
 	}
 
@@ -693,7 +693,7 @@ public class PageUtil {
 			int stopIndex = startIndex + partLength;
 			elements.add(text.substring(startIndex, (stopIndex > textLength) ? textLength : stopIndex));
 		}
-		//
+
 		return elements;
 	}
 
@@ -711,14 +711,14 @@ public class PageUtil {
 				float textWidth = calculateTextWidthPt(font, fontSize, text);
 				float textHeight = calculateTextHeightPt(font, fontSize);
 				List<String> parts = cutStringMultiLine(text, textWidth, unitConverter.convertToPt(cell.getMaxWidth()));
-				//
+
 				float cellHeight = 0.0f;
 				Iterator<String> iterator = parts.iterator();
 				while(iterator.hasNext()) {
 					iterator.next();
 					cellHeight += (textHeight > minHeight) ? textHeight : minHeight;
 				}
-				//
+
 				rowHeight = Math.max(rowHeight, cellHeight);
 			}
 		}

@@ -59,7 +59,7 @@ public class ChartSupport {
 			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
 		}
 		primaryAxisSettingsX.setVisible(xAxisVisible);
-		//
+
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle(yAxisTitle);
 		primaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.0##E0"), new DecimalFormatSymbols(Locale.ENGLISH)));
@@ -166,13 +166,13 @@ public class ChartSupport {
 	public static ISecondaryAxisSettings getSecondaryAxisSettings(List<ISecondaryAxisSettings> secondaryAxisSettingsList, String title) {
 
 		ISecondaryAxisSettings secondaryAxisSettings = null;
-		//
+
 		for(ISecondaryAxisSettings secondaryAxisSetting : secondaryAxisSettingsList) {
 			if(title.equals(secondaryAxisSetting.getTitle())) {
 				secondaryAxisSettings = secondaryAxisSetting;
 			}
 		}
-		//
+
 		return secondaryAxisSettings;
 	}
 
@@ -188,7 +188,7 @@ public class ChartSupport {
 				return axis;
 			}
 		}
-		//
+
 		return null;
 	}
 }

@@ -33,7 +33,7 @@ public class XPassPeaksFilter {
 		 */
 		boolean usePeakArea = true;
 		List<IPeak> peaks = new ArrayList<>(filterItems);
-		//
+
 		switch(peakFilterOption) {
 			case HEIGHT:
 				usePeakArea = false;
@@ -72,7 +72,7 @@ public class XPassPeaksFilter {
 			}
 			subMonitor.worked(1);
 		}
-		//
+
 		return peaksToDelete;
 	}
 
@@ -83,7 +83,7 @@ public class XPassPeaksFilter {
 				return false;
 			}
 		}
-		//
+
 		return true;
 	}
 }

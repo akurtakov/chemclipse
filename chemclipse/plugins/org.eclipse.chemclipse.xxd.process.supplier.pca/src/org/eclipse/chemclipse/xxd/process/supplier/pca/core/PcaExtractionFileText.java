@@ -133,7 +133,7 @@ public class PcaExtractionFileText implements IExtractionData {
 							String groupName = record.get(1).trim();
 							String classification = record.get(2).trim();
 							String description = record.get(3).trim();
-							//
+
 							if(!name.isEmpty()) {
 								/*
 								 * Sample
@@ -151,7 +151,7 @@ public class PcaExtractionFileText implements IExtractionData {
 									variablesMap = new HashMap<>();
 									samplesVariablesMap.put(name, variablesMap);
 								}
-								//
+
 								for(int i = 4; i < size; i++) {
 									try {
 										String targetName = indexMap.getOrDefault(i, "");
@@ -203,7 +203,7 @@ public class PcaExtractionFileText implements IExtractionData {
 		 */
 		for(Map<String, Target> variableMap : samplesVariablesMap.values()) {
 			for(Target mappedVariable : variableMap.values()) {
-				//
+
 				String key = mappedVariable.getTarget();
 				Target target = targets.get(key);
 				if(target == null) {

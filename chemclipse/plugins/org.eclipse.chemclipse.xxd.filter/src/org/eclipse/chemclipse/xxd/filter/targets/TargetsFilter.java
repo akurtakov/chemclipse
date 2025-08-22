@@ -40,7 +40,7 @@ public class TargetsFilter {
 			 */
 			Set<IIdentificationTarget> targets = targetSupplier.getTargets();
 			String property = settings.getProperty() == null ? "" : settings.getProperty().trim();
-			//
+
 			switch(settings.getTargetDeleteOption()) {
 				case ALL_TARGETS:
 					targets.clear();
@@ -82,7 +82,7 @@ public class TargetsFilter {
 				delete.add(target);
 			}
 		}
-		//
+
 		removeTargets(targets, delete);
 	}
 
@@ -95,7 +95,7 @@ public class TargetsFilter {
 				delete.add(target);
 			}
 		}
-		//
+
 		removeTargets(targets, delete);
 	}
 
@@ -108,7 +108,7 @@ public class TargetsFilter {
 					delete.add(target);
 				}
 			}
-			//
+
 			removeTargets(targets, delete);
 		}
 	}

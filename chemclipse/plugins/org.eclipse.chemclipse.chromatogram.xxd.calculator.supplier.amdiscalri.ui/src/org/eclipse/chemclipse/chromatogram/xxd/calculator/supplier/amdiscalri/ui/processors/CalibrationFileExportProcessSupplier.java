@@ -41,7 +41,7 @@ import org.osgi.service.component.annotations.Component;
 public class CalibrationFileExportProcessSupplier implements IProcessTypeSupplier {
 
 	private static final Logger logger = Logger.getLogger(CalibrationFileExportProcessSupplier.class);
-	//
+
 	private static final String ID = "org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.processors.calibrationFileExportProcessSupplier";
 	private static final String NAME = "AMDIS RI Calibration UI (*.cal)";
 	private static final String DESCRIPTION = "Exports the calibration entries from the chromatogram to a file.";
@@ -86,7 +86,7 @@ public class CalibrationFileExportProcessSupplier implements IProcessTypeSupplie
 								shell = new Shell(display);
 								disposeShell = true;
 							}
-							//
+
 							FileDialog fileDialog = new FileDialog(display.getActiveShell(), SWT.SAVE);
 							fileDialog.setOverwrite(true);
 							fileDialog.setText(CalibrationFile.DESCRIPTION);
@@ -115,14 +115,14 @@ public class CalibrationFileExportProcessSupplier implements IProcessTypeSupplie
 							}
 						});
 					}
-					//
+
 					return null;
 				});
 			} catch(Exception e) {
 				logger.warn(e);
 				Thread.currentThread().interrupt();
 			}
-			//
+
 			return chromatogramSelection;
 		}
 	}

@@ -17,7 +17,7 @@ import org.eclipse.chemclipse.vsd.model.core.ISignalRaman;
 public class SignalRaman extends AbstractSignalVSD implements ISignalRaman {
 
 	private static final long serialVersionUID = -8694972698204376845L;
-	//
+
 	private double scattering = 0.0d;
 
 	public SignalRaman(double wavenumber, double scattering) {

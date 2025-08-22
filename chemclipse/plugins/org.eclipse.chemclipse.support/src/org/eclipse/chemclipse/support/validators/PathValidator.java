@@ -23,7 +23,7 @@ public class PathValidator implements IValidator<Object> {
 	private static final String ERROR = "Please enter valid path.";
 	private static final String ERROR_VALUE = "The path is not available.";
 	private static final String ERROR_DIRECTORY = "The path is not a directory.";
-	//
+
 	private boolean enforceDirectory = false;
 	private String path = "";
 
@@ -56,7 +56,7 @@ public class PathValidator implements IValidator<Object> {
 				message = ERROR;
 			}
 		}
-		//
+
 		if(message != null) {
 			path = "";
 			return ValidationStatus.error(message);

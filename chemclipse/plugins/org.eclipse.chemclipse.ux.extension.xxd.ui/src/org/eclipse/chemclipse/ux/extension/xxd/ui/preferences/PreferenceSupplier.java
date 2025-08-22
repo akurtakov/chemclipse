@@ -44,36 +44,36 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 			{ExtensionMessages.bottomCenter, PartSupport.PARTSTACK_BOTTOM_CENTER}, //
 			{ExtensionMessages.bottomRight, PartSupport.PARTSTACK_BOTTOM_RIGHT}//
 	};
-	//
+
 	public static final int MIN_SYMBOL_SIZE = 1;
 	public static final int MAX_SYMBOL_SIZE = 72;
 	public static final int DEF_SYMBOL_SIZE = 5;
-	//
+
 	public static final int MIN_FONT_SIZE = 1;
 	public static final int MAX_FONT_SIZE = 72;
 	public static final int DEF_FONT_SIZE = 11;
-	//
+
 	public static final int MIN_TRACES = 1;
 	public static final int MAX_TRACES = Integer.MAX_VALUE;
 	public static final int DEF_PEAK_TRACES = 5;
 	public static final int DEF_SCAN_TRACES = 5;
-	//
+
 	public static final int MIN_TRACES_VIRTUAL_TABLE = 2500;
 	public static final int MAX_TRACES_VIRTUAL_TABLE = 25000;
-	//
+
 	public static final int MIN_OFFSET_RETENTION_TIME = 0;
 	public static final int MAX_OFFSET_RETENTION_TIME = 120000; // 120 Seconds (2 Minutes)
 	public static final int DEF_OFFSET_RETENTION_TIME = 0;
-	//
+
 	public static final int MIN_SIM_IONS = 1;
 	public static final int MAX_SIM_IONS = 50;
-	//
+
 	public static final int MIN_LENGTH_NAME_EXPORT = 1;
 	public static final int MAX_LENGTH_NAME_EXPORT = 1000;
-	//
+
 	public static final int MIN_HEATMAP_SCALE_INTENSITY = 1;
 	public static final int MAX_HEATMAP_SCALE_INTENSITY = 10000;
-	//
+
 	public static final float MIN_DEVIATION_RELATIVE = 0.0f;
 	public static final float MAX_DEVIATION_RELATIVE = 100.0f;
 	public static final int MIN_DEVIATION_RETENTION_TIME = 0;
@@ -82,14 +82,14 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final float MAX_DEVIATION_RETENTION_INDEX = Float.MAX_VALUE;
 	public static final float MIN_MATCH_QUALITY = 0.0f;
 	public static final float MAX_MATCH_QUALITY = 100.0f;
-	//
+
 	public static final int MIN_MODULO_AUTO_MIRROR = 2;
 	public static final int MAX_MODULO_AUTO_MIRROR = 100;
 	public static final int DEF_MODULO_AUTO_MIRROR = 2;
-	//
+
 	public static final double MIN_RANGE = -Double.MAX_VALUE;
 	public static final double MAX_RANGE = Double.MAX_VALUE;
-	//
+
 	public static final int MIN_TIME_RANGE_SELECTION_OFFSET = -1; // No Selection
 	public static final int MAX_TIME_RANGE_SELECTION_OFFSET = Integer.MAX_VALUE;
 	/*
@@ -209,7 +209,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final int DEF_PEAK_TRACES_OFFSET_RETENTION_TIME = DEF_OFFSET_RETENTION_TIME;
 	public static final String P_CHROMATOGRAM_OVERLAY_NAMED_TRACES = "chromatogramOverlayNamedTraces";
 	public static final String DEF_CHROMATOGRAM_OVERLAY_NAMED_TRACES = NamedTraceUtil.getDefaultTraces();
-	//
+
 	public static final String P_OVERLAY_SHIFT_X = "overlayShiftX";
 	public static final double DEF_OVERLAY_SHIFT_X = 0.0d;
 	public static final double MIN_OVERLAY_SHIFT_X = 0.0d;
@@ -226,7 +226,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final int DEF_INDEX_SHIFT_Y = 0;
 	public static final int MIN_INDEX_SHIFT_Y = 0;
 	public static final int MAX_INDEX_SHIFT_Y = 100;
-	//
+
 	public static final String P_OVERLAY_SHOW_AREA = "overlayShowArea";
 	public static final boolean DEF_OVERLAY_SHOW_AREA = false;
 	public static final String P_OVERLAY_AUTOFOCUS_PROFILE_SETTINGS = "overlayAutofocusProfileSettings";
@@ -277,7 +277,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_TARGET_IDENTIFER = "org.eclipse.chemclipse.xxd.identifier.supplier.pubchem.identifier";
 	public static final String P_SCAN_IDENTIFER = "scanIdentifier";
 	public static final String DEF_SCAN_IDENTIFER = "";
-	//
+
 	public static final String P_SCAN_CHART_ENABLE_FIXED_RANGE_X = "scanChartEnableFixedRangeX";
 	public static final boolean DEF_SCAN_CHART_ENABLE_FIXED_RANGE_X = false;
 	public static final String P_SCAN_CHART_FIXED_RANGE_START_X = "scanChartFixedRangeStartX";
@@ -290,7 +290,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final double DEF_SCAN_CHART_FIXED_RANGE_START_Y = 0.0d;
 	public static final String P_SCAN_CHART_FIXED_RANGE_STOP_Y = "scanChartFixedRangeStopY";
 	public static final double DEF_SCAN_CHART_FIXED_RANGE_STOP_Y = 0.0d;
-	//
+
 	public static final String P_TITLE_X_AXIS_MZ = "titleXAxisMZ";
 	public static final String DEF_TITLE_X_AXIS_MZ = "Ion [m/z]";
 	public static final String P_TITLE_X_AXIS_PARENT_MZ = "titleXAxisParentMZ";
@@ -305,12 +305,12 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_TITLE_X_AXIS_COLLISION_ENERGY = "Collision Energy [eV]";
 	public static final String P_TITLE_X_AXIS_WAVELENGTH = "titleXAxisWavelength";
 	public static final String DEF_TITLE_X_AXIS_WAVELENGTH = "Wavelength [nm]";
-	//
+
 	public static final String P_TRACES_VIRTUAL_TABLE = "tracesVirtualTable";
 	public static final int DEF_TRACES_VIRTUAL_TABLE = 5000;
 	public static final String P_LIMIT_SIM_TRACES = "limitSimTraces";
 	public static final int DEF_LIMIT_SIM_TRACES = 5;
-	//
+
 	public static final String P_HEATMAP_SCALE_INTENSITY_MIN_MSD = "heatmapScaleIntensityMinMSD";
 	public static final int DEF_HEATMAP_SCALE_INTENSITY_MIN_MSD = 1;
 	public static final String P_HEATMAP_SCALE_INTENSITY_MAX_MSD = "heatmapScaleIntensityMaxMSD";
@@ -371,7 +371,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_COLOR_SCHEME_DISPLAY_PEAKS = Colors.COLOR_SCHEME_PRINT;
 	public static final String P_SHOW_AREA_DISPLAY_PEAKS = "showAreaDisplayPeaks";
 	public static final boolean DEF_SHOW_AREA_DISPLAY_PEAKS = false;
-	//
+
 	public static final String P_SHOW_X_AXIS_MILLISECONDS_PEAKS = "showXAxisMillisecondsPeaks";
 	public static final boolean DEF_SHOW_X_AXIS_MILLISECONDS_PEAKS = false;
 	public static final String P_POSITION_X_AXIS_MILLISECONDS_PEAKS = "positionXAxisMillisecondsPeaks";
@@ -382,7 +382,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_GRIDLINE_STYLE_X_AXIS_MILLISECONDS_PEAKS = LineStyle.DOT.toString();
 	public static final String P_GRIDLINE_COLOR_X_AXIS_MILLISECONDS_PEAKS = "gridlineColorXAxisMillisecondsPeaks";
 	public static final String DEF_GRIDLINE_COLOR_X_AXIS_MILLISECONDS_PEAKS = "192,192,192";
-	//
+
 	public static final String P_SHOW_X_AXIS_MINUTES_PEAKS = "showXAxisMinutesPeaks";
 	public static final boolean DEF_SHOW_X_AXIS_MINUTES_PEAKS = true;
 	public static final String P_POSITION_X_AXIS_MINUTES_PEAKS = "positionXAxisMinutesPeaks";
@@ -393,7 +393,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_GRIDLINE_STYLE_X_AXIS_MINUTES_PEAKS = LineStyle.DOT.toString();
 	public static final String P_GRIDLINE_COLOR_X_AXIS_MINUTES_PEAKS = "gridlineColorXAxisMinutesPeaks";
 	public static final String DEF_GRIDLINE_COLOR_X_AXIS_MINUTES_PEAKS = "192,192,192";
-	//
+
 	public static final String P_SHOW_Y_AXIS_INTENSITY_PEAKS = "showYAxisIntensityPeaks";
 	public static final boolean DEF_SHOW_Y_AXIS_INTENSITY_PEAKS = true;
 	public static final String P_POSITION_Y_AXIS_INTENSITY_PEAKS = "positionYAxisIntensityPeaks";
@@ -404,7 +404,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_GRIDLINE_STYLE_Y_AXIS_INTENSITY_PEAKS = LineStyle.NONE.toString();
 	public static final String P_GRIDLINE_COLOR_Y_AXIS_INTENSITY_PEAKS = "gridlineColorYAxisIntensityPeaks";
 	public static final String DEF_GRIDLINE_COLOR_Y_AXIS_INTENSITY_PEAKS = "192,192,192";
-	//
+
 	public static final String P_SHOW_Y_AXIS_RELATIVE_INTENSITY_PEAKS = "showYAxisRelativeIntensityPeaks";
 	public static final boolean DEF_SHOW_Y_AXIS_RELATIVE_INTENSITY_PEAKS = true;
 	public static final String P_POSITION_Y_AXIS_RELATIVE_INTENSITY_PEAKS = "positionYAxisRelativeIntensityPeaks";
@@ -454,7 +454,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final float DEF_RETENTION_INDEX_DEVIATION_ABS_WARN = 40.0f;
 	public static final String P_ACTIVATE_TARGET_DND_WINDOWS = "activateTargetDragAndDropWindows";
 	public static final boolean DEF_ACTIVATE_TARGET_DND_WINDOWS = false;
-	//
+
 	public static final String P_ADD_UNKNOWN_AFTER_DELETE_TARGETS_ALL = "addUnknownAfterDeleteTargetsAll";
 	public static final boolean DEF_ADD_UNKNOWN_AFTER_DELETE_TARGETS_ALL = false;
 	public static final String P_MATCH_QUALITY_UNKNOWN_TARGET = "matchQualityUnknownTarget";
@@ -702,7 +702,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_GRIDLINE_COLOR_X_AXIS_SECONDS = "192,192,192";
 	public static final String P_SHOW_X_AXIS_TITLE_SECONDS = "showXAxisTitleSeconds";
 	public static final boolean DEF_SHOW_X_AXIS_TITLE_SECONDS = true;
-	//
+
 	public static final String P_TITLE_X_AXIS_MINUTES = "titleXAxisMinutes";
 	public static final String DEF_TITLE_X_AXIS_MINUTES = "Time [min]";
 	public static final String P_FORMAT_X_AXIS_MINUTES = "formatXAxisMinutes";
@@ -730,7 +730,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_SHOW_X_AXIS_LINE_MINUTES = true;
 	public static final String P_SHOW_X_AXIS_POSITION_MARKER_MINUTES = "showXAxisPositionMarkerMinutes";
 	public static final boolean DEF_SHOW_X_AXIS_POSITION_MARKER_MINUTES = true;
-	//
+
 	public static final String P_TITLE_X_AXIS_SCANS = "titleXAxisScans";
 	public static final String DEF_TITLE_X_AXIS_SCANS = "Scan";
 	public static final String P_FORMAT_X_AXIS_SCANS = "formatXAxisScans";
@@ -754,7 +754,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_GRIDLINE_COLOR_X_AXIS_SCANS = "192,192,192";
 	public static final String P_SHOW_X_AXIS_TITLE_SCANS = "showXAxisTitleScans";
 	public static final boolean DEF_SHOW_X_AXIS_TITLE_SCANS = true;
-	//
+
 	public static final String P_TITLE_Y_AXIS_INTENSITY = "titleYAxisIntensity";
 	public static final String DEF_TITLE_Y_AXIS_INTENSITY = "Intensity";
 	public static final String P_FORMAT_Y_AXIS_INTENSITY = "formatYAxisIntensity";

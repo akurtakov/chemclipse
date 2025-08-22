@@ -26,7 +26,7 @@ public class DataExplorerPart {
 
 	@Inject
 	private ISupplierFileIdentifier supplierFileIdentifier;
-	//
+
 	private DataExplorerUI dataExplorerUI;
 
 	@PostConstruct

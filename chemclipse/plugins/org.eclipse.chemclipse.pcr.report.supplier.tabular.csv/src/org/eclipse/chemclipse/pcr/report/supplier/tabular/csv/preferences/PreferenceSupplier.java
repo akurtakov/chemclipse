@@ -28,7 +28,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_DELIMITER = Delimiter.SEMICOLON.name();
 	public static final String P_DECIMAL_SEPARATOR = "decimal-separator";
 	public static final String DEF_DECIMAL_SEPARATOR = DecimalSeparator.DOT.name();
-	//
+
 	public static final String P_CHANNEL_MAPPING = "channel-mapping";
 	public static final String DEF_CHANNEL_MAPPING = "";
 	public static final String P_WELL_MAPPING = "well-mapping";
@@ -67,7 +67,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		ChannelMappings channelMappings = new ChannelMappings();
 		channelMappings.load(INSTANCE().get(P_CHANNEL_MAPPING, DEF_CHANNEL_MAPPING));
-		//
+
 		return channelMappings;
 	}
 
@@ -75,7 +75,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		WellMappings wellMappings = new WellMappings();
 		wellMappings.load(INSTANCE().get(P_WELL_MAPPING, DEF_WELL_MAPPING));
-		//
+
 		return wellMappings;
 	}
 
@@ -83,7 +83,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		VirtualChannels virtualChannels = new VirtualChannels();
 		virtualChannels.load(INSTANCE().get(P_VIRTUAL_CHANNELS, DEF_VIRTUAL_CHANNELS));
-		//
+
 		return virtualChannels;
 	}
 

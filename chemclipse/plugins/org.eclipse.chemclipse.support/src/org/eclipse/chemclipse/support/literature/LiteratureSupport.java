@@ -21,7 +21,7 @@ public class LiteratureSupport {
 
 	public static final String LINE_DELIMITER = "\n";
 	public static final String ENTRY_DELIMITER = "  -";
-	//
+
 	private static final Map<String, String> RIS_IDENTIFIER_MAP = new HashMap<>();
 	private static final String RIS_IDENTIFIER = "TY  -";
 	private static final String RIS_PREFIX_T1 = "T1  -";
@@ -29,7 +29,7 @@ public class LiteratureSupport {
 	private static final String RIS_PREFIX_TITLE = "Title:";
 	private static final String RIS_END_RECORD = "ER";
 	private static final String RIS_UNKNOWN = "Unknown";
-	//
+
 	static {
 		RIS_IDENTIFIER_MAP.put("TY", "Reference");
 		RIS_IDENTIFIER_MAP.put("A1", "Primary Authors");
@@ -112,7 +112,7 @@ public class LiteratureSupport {
 		RIS_IDENTIFIER_MAP.put("Y2", "Access Date");
 		RIS_IDENTIFIER_MAP.put("ER", "End of Reference");
 	}
-	//
+
 	private static final Pattern PATTERN_DOI_ORG = Pattern.compile("(http)(s?)(://doi.org/)(.*?)(\\s+|$)");
 	private static final Pattern PATTERN_DOI_DX = Pattern.compile("(http)(s?)(://dx.doi.org/)(.*?)(\\s+|$)");
 	private static final Pattern PATTERN_URL = Pattern.compile("(http)(s?)(://)(.*?)(\\s+|$)");
@@ -126,7 +126,7 @@ public class LiteratureSupport {
 		if(content != null) {
 			return content.startsWith(RIS_IDENTIFIER);
 		}
-		//
+
 		return false;
 	}
 
@@ -153,14 +153,14 @@ public class LiteratureSupport {
 							}
 						}
 					}
-					//
+
 					builder.append(line);
 					builder.append(LINE_DELIMITER);
 				}
 			}
 			return builder.toString();
 		}
-		//
+
 		return "";
 	}
 
@@ -169,7 +169,7 @@ public class LiteratureSupport {
 		if(identifier != null) {
 			return RIS_END_RECORD.equals(identifier);
 		}
-		//
+
 		return false;
 	}
 
@@ -178,7 +178,7 @@ public class LiteratureSupport {
 		if(identifier != null) {
 			return RIS_IDENTIFIER_MAP.getOrDefault(identifier, RIS_UNKNOWN);
 		}
-		//
+
 		return RIS_UNKNOWN;
 	}
 
@@ -228,7 +228,7 @@ public class LiteratureSupport {
 				link = getContainedLink(content, LiteratureSupport.PATTERN_URL);
 			}
 		}
-		//
+
 		return link;
 	}
 
@@ -248,7 +248,7 @@ public class LiteratureSupport {
 				}
 			}
 		}
-		//
+
 		return url;
 	}
 }

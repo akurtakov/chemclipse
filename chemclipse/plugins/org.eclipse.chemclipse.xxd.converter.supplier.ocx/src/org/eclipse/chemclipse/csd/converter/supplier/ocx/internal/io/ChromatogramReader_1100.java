@@ -110,7 +110,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 
 		IVendorChromatogram chromatogram = null;
 		SubMonitor subMonitor = SubMonitor.convert(monitor, "Read Chromatogram", 100);
-		//
+
 		try {
 			boolean closeStream;
 			if(object instanceof ZipFile) {
@@ -139,19 +139,19 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 			subMonitor.worked(20);
 			readPeaks(getDataInputStream(object, directoryPrefix + Format.FILE_PEAKS_FID), closeStream, chromatogram, monitor);
 			subMonitor.worked(20);
-			//
+
 			setAdditionalInformation(file, chromatogram, monitor);
 		} finally {
 			SubMonitor.done(subMonitor);
 		}
-		//
+
 		return chromatogram;
 	}
 
 	private void readMethod(DataInputStream dataInputStream, boolean closeStream, IChromatogramCSD chromatogram, IProgressMonitor monitor) throws IOException {
 
 		IMethod method = chromatogram.getMethod();
-		//
+
 		method.setInstrumentName(readString(dataInputStream));
 		method.setIonSource(readString(dataInputStream));
 		method.setSamplingRate(dataInputStream.readDouble());
@@ -160,7 +160,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		method.setStopMode(readString(dataInputStream));
 		method.setStopTime(dataInputStream.readInt());
 		method.setTimeFilterPeakWidth(dataInputStream.readInt());
-		//
+
 		if(closeStream) {
 			dataInputStream.close();
 		}
@@ -176,7 +176,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 			int retentionTime = dataInputStream.readInt();
 			float totalSignal = dataInputStream.readFloat();
 			IVendorScan scanFID = new VendorScan(retentionTime, totalSignal);
-			//
+
 			int retentionTimeColumn1 = dataInputStream.readInt();
 			int retentionTimeColumn2 = dataInputStream.readInt();
 			float retentionIndex = dataInputStream.readFloat(); // Retention Index
@@ -190,7 +190,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 			}
 			int timeSegmentId = dataInputStream.readInt();
 			int cycleNumber = dataInputStream.readInt();
-			//
+
 			scanFID.setRetentionTimeColumn1(retentionTimeColumn1);
 			scanFID.setRetentionTimeColumn2(retentionTimeColumn2);
 			scanFID.setRetentionIndex(retentionIndex);
@@ -235,7 +235,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 			 */
 			baselineModel.addBaseline(startRetentionTime, stopRetentionTime, startBackgroundAbundance, stopBackgroundAbundance, false);
 		}
-		//
+
 		if(closeStream) {
 			dataInputStream.close();
 		}
@@ -254,7 +254,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 				logger.warn(e);
 			}
 		}
-		//
+
 		if(closeStream) {
 			dataInputStream.close();
 		}
@@ -269,10 +269,10 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		String modelDescription = readString(dataInputStream); // Model Description
 		PeakType peakType = PeakType.valueOf(readString(dataInputStream)); // Peak Type
 		int suggestedNumberOfComponents = dataInputStream.readInt(); // Suggest Number Of Components
-		//
+
 		float startBackgroundAbundance = dataInputStream.readFloat(); // Start Background Abundance
 		float stopBackgroundAbundance = dataInputStream.readFloat(); // Stop Background Abundance
-		//
+
 		int retentionTimeScan = dataInputStream.readInt();
 		float totalSignalScan = dataInputStream.readFloat();
 		IVendorScan peakMaximum = new VendorScan(retentionTimeScan, totalSignalScan);
@@ -289,13 +289,13 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		}
 		int timeSegmentId = dataInputStream.readInt();
 		int cycleNumber = dataInputStream.readInt();
-		//
+
 		peakMaximum.setRetentionIndex(retentionIndexScan);
 		peakMaximum.setRetentionTimeColumn1(retentionTimeColumn1);
 		peakMaximum.setRetentionTimeColumn2(retentionTimeColumn2);
 		peakMaximum.setTimeSegmentId(timeSegmentId);
 		peakMaximum.setCycleNumber(cycleNumber);
-		//
+
 		int numberOfRetentionTimes = dataInputStream.readInt(); // Number Retention Times
 		IPeakIntensityValues intensityValues = new PeakIntensityValues(Float.MAX_VALUE);
 		for(int i = 1; i <= numberOfRetentionTimes; i++) {
@@ -304,7 +304,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 			intensityValues.addIntensityValue(retentionTime, relativeIntensity);
 		}
 		intensityValues.normalize();
-		//
+
 		IPeakModelCSD peakModel = new PeakModelCSD(peakMaximum, intensityValues, startBackgroundAbundance, stopBackgroundAbundance);
 		peakModel.setStrictModel(true); // Legacy
 		IChromatogramPeakCSD peak = new ChromatogramPeakCSD(peakModel, chromatogram);
@@ -315,13 +315,13 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		peak.setModelDescription(modelDescription);
 		peak.setPeakType(peakType);
 		peak.setSuggestedNumberOfComponents(suggestedNumberOfComponents);
-		//
+
 		List<IIntegrationEntry> integrationEntries = readIntegrationEntries(dataInputStream);
 		peak.setIntegratedArea(integrationEntries, integratorDescription);
-		//
+
 		List<IInternalStandard> internalStandards = readInternalStandards(dataInputStream);
 		peak.addInternalStandards(internalStandards);
-		//
+
 		return peak;
 	}
 
@@ -369,9 +369,9 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		if(version.equals(Format.CHROMATOGRAM_VERSION_1100)) {
 			isValid = true;
 		}
-		//
+
 		dataInputStream.close();
-		//
+
 		return isValid;
 	}
 }

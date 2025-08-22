@@ -24,7 +24,7 @@ public class NamedTracesLabelProvider extends AbstractChemClipseLabelProvider {
 
 	public static final String IDENTIFIER = ExtensionMessages.identifier;
 	public static final String TRACES = ExtensionMessages.traces;
-	//
+
 	public static final String[] TITLES = { //
 			IDENTIFIER, //
 			TRACES //

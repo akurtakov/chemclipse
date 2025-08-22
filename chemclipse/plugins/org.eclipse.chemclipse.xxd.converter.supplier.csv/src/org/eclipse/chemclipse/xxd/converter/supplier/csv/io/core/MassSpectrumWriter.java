@@ -61,7 +61,7 @@ public class MassSpectrumWriter implements IMassSpectraWriter {
 			CSVPrinter csvFilePrinter = null;
 			try (FileWriter fileWriter = new FileWriter(file, append)) {
 				csvFilePrinter = new CSVPrinter(fileWriter, CSVFormat.EXCEL);
-				//
+
 				for(IScanMSD massSpectrum : massSpectra.getList()) {
 					/*
 					 * Try to make a deep copy and normalize.
@@ -74,7 +74,7 @@ public class MassSpectrumWriter implements IMassSpectraWriter {
 						logger.warn(e);
 						massSpectrumExport = massSpectrum;
 					}
-					//
+
 					csvFilePrinter.printRecord("m/z", "intensity");
 					List<IIon> ions = massSpectrum.getIons();
 					for(IIon ion : ions) {

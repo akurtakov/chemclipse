@@ -68,7 +68,7 @@ public class PhaseCorrectionProcessor extends AbstractSpectrumSignalFilter<Phase
 	private static Complex[] perform(SpectrumData spectrumData, final PhaseCorrectionSettings phaseCorrectionSettings, double firstDataOffset, double sweepWidth) {
 
 		Number[] deltaAxisPPM = spectrumData.chemicalShift;
-		//
+
 		double leftPhaseChange = 0;
 		double rightPhaseChange = 0;
 		Complex phaseCorrectionFactor = new Complex(0, (Math.PI / 180));
@@ -83,13 +83,13 @@ public class PhaseCorrectionProcessor extends AbstractSpectrumSignalFilter<Phase
 		leftPhaseChange = phaseCorrectionSettings.getFirstOrderPhaseCorrection();
 		// zeroOrderPhaseCorrection
 		rightPhaseChange = phaseCorrectionSettings.getZeroOrderPhaseCorrection();
-		//
+
 		double[] leftPhaseCorrection = UtilityFunctions.generateLinearlySpacedVector(0, 1, complexSize);
 		for(int i = 0; i < leftPhaseCorrection.length; i++) {
 			leftPhaseCorrection[i] *= leftPhaseChange;
 		}
 		double[] leftPhaseCorrectionDSP = new double[complexSize];
-		//
+
 		switch(phaseCorrectionSettings.getPivotPointSelection()) {
 			case LEFT:
 				// position off the peaks

@@ -24,7 +24,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 	public static final int MIN_LIMIT_IONS_SIM = 1;
 	public static final int MAX_LIMIT_IONS_SIM = Integer.MAX_VALUE;
-	//
+
 	public static final String P_LIMIT_IONS_SIM = "limitIonsSIM";
 	public static final int DEF_LIMIT_IONS_SIM = 5;
 
@@ -54,7 +54,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		FilterSettingsSIM settings = new FilterSettingsSIM();
 		settings.setLimitIons(INSTANCE().getInteger(P_LIMIT_IONS_SIM, DEF_LIMIT_IONS_SIM));
-		//
+
 		return settings;
 	}
 

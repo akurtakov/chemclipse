@@ -31,7 +31,7 @@ public class ImageReport extends AbstractChromatogramReportGenerator {
 	public IProcessingInfo<?> generate(File file, boolean append, IChromatogram chromatogram, IChromatogramReportSettings chromatogramReportSettings, IProgressMonitor monitor) {
 
 		IProcessingInfo<File> processingInfo = super.validate(file);
-		//
+
 		if(!processingInfo.hasErrorMessages()) {
 			if(chromatogramReportSettings instanceof IChromatogramImageReportSettings imageReportSettings) {
 				ImageRunnableGeneric imageRunnable = new ImageRunnableGeneric(file, chromatogram, imageReportSettings);

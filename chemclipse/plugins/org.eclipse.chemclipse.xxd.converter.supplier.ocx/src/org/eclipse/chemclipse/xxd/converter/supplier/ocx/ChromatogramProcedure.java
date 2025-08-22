@@ -39,11 +39,11 @@ import org.osgi.service.component.annotations.Component;
 public class ChromatogramProcedure implements Procedure<ChromatogramProcedureSettings> {
 
 	private static final String NAME = "Copy Chromatogram Selection";
-	//
+
 	private final IChromatogramImportConverter<IChromatogramMSD> MSD_IMPORT = new org.eclipse.chemclipse.msd.converter.supplier.ocx.converter.ChromatogramImportConverter();
 	private final IChromatogramImportConverter<IChromatogramCSD> CSD_IMPORT = new org.eclipse.chemclipse.csd.converter.supplier.ocx.converter.ChromatogramImportConverter();
 	private final IChromatogramImportConverter<IChromatogramWSD> WSD_IMPORT = new org.eclipse.chemclipse.wsd.converter.supplier.ocx.converter.ChromatogramImportConverter();
-	//
+
 	private final IChromatogramExportConverter MSD_EXPORT = new org.eclipse.chemclipse.msd.converter.supplier.ocx.converter.ChromatogramExportConverter();
 	private final IChromatogramExportConverter CSD_EXPORT = new org.eclipse.chemclipse.csd.converter.supplier.ocx.converter.ChromatogramExportConverter();
 	private final IChromatogramExportConverter WSD_EXPORT = new org.eclipse.chemclipse.wsd.converter.supplier.ocx.converter.ChromatogramExportConverter();
@@ -73,7 +73,7 @@ public class ChromatogramProcedure implements Procedure<ChromatogramProcedureSet
 		if(result instanceof IChromatogramSelection originalSelection) {
 			IChromatogram chromatogram = originalSelection.getChromatogram();
 			IChromatogramSelection copiedSelection;
-			//
+
 			if(chromatogram instanceof IChromatogramMSD) {
 				IChromatogramMSD chromatogramMSD = copyChromatogram(chromatogram, MSD_EXPORT, MSD_IMPORT, context);
 				if(chromatogramMSD == null) {
@@ -96,19 +96,19 @@ public class ChromatogramProcedure implements Procedure<ChromatogramProcedureSet
 				context.addErrorMessage(NAME, "Unsupported chromatogram type: " + chromatogram.getClass().getSimpleName());
 				return null;
 			}
-			//
+
 			IChromatogram copiedChromatogram = copiedSelection.getChromatogram();
 			if(settings.isAddAsReferenceChromatogram()) {
 				chromatogram.addReferencedChromatogram(copiedChromatogram);
 			}
-			//
+
 			if(settings.isCopyChromatogramSelectionRange()) {
 				copiedSelection.setRangeRetentionTime(originalSelection.getStartRetentionTime(), originalSelection.getStopRetentionTime());
 			}
-			//
+
 			copiedChromatogram.setFile(null);
 			copiedChromatogram.setDataName(settings.getName().replace(IProcessSettings.VARIABLE_CHROMATOGRAM_NAME, chromatogram.getName()));
-			//
+
 			return currentConsumer.withResult(copiedSelection);
 		}
 		return null;
@@ -117,17 +117,17 @@ public class ChromatogramProcedure implements Procedure<ChromatogramProcedureSet
 	private static <T extends IChromatogram> T copyChromatogram(IChromatogram chromatogram, IChromatogramExportConverter exporter, IChromatogramImportConverter<T> importer, ProcessExecutionContext context) {
 
 		SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), 100);
-		//
+
 		try {
 			File tempFile = File.createTempFile(chromatogram.getName(), ".ocb");
 			tempFile.deleteOnExit();
-			//
+
 			IProcessingInfo<File> convert = exporter.convert(tempFile, chromatogram, subMonitor.split(50));
 			if(convert.hasErrorMessages()) {
 				context.addMessages(convert);
 				return null;
 			}
-			//
+
 			IProcessingInfo<T> info = importer.convert(tempFile, subMonitor.split(50));
 			if(info.hasErrorMessages()) {
 				context.addMessages(info);

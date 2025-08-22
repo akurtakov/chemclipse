@@ -88,7 +88,7 @@ public class PartSupport {
 	public static final String PARTDESCRIPTOR_QUANT_PEAKS_LIST = "org.eclipse.chemclipse.ux.extension.xxd.ui.part.quantPeaksListPartDescriptor";
 	public static final String PARTDESCRIPTOR_QUANT_SIGNALS_LIST = "org.eclipse.chemclipse.ux.extension.xxd.ui.part.quantSignalsListPartDescriptor";
 	public static final String PARTDESCRIPTOR_PENALTY_CALCULATION = "org.eclipse.chemclipse.ux.extension.xxd.ui.partdescriptor.penaltyCalculationPartDescriptor";
-	//
+
 	public static final String PARTSTACK_NONE = "";
 	public static final String PARTSTACK_LEFT_TOP = "org.eclipse.chemclipse.ux.extension.xxd.ui.partstack.left.top";
 	public static final String PARTSTACK_LEFT_CENTER = "org.eclipse.chemclipse.ux.extension.xxd.ui.partstack.left.center"; // Default hidden
@@ -96,13 +96,13 @@ public class PartSupport {
 	public static final String PARTSTACK_BOTTOM_LEFT = "org.eclipse.chemclipse.ux.extension.xxd.ui.partstack.bottom.left";
 	public static final String PARTSTACK_BOTTOM_CENTER = "org.eclipse.chemclipse.ux.extension.xxd.ui.partstack.bottom.center";
 	public static final String PARTSTACK_BOTTOM_RIGHT = "org.eclipse.chemclipse.ux.extension.xxd.ui.partstack.bottom.right";
-	//
+
 	private static final String COMPATIBILITY_EDITOR_ELEMENT_ID = "org.eclipse.e4.ui.compatibility.editor";
-	//
+
 	private static Set<String> hiddenPartStacks = new HashSet<>();
-	//
+
 	private static Map<String, String> partMap = new HashMap<>();
-	//
+
 	static {
 		hiddenPartStacks.add(PARTSTACK_LEFT_CENTER);
 		hiddenPartStacks.add(PARTSTACK_RIGHT_TOP);
@@ -144,7 +144,7 @@ public class PartSupport {
 			MPartStack partStack = (MPartStack)modelService.find(partStackId, application);
 			partStack.getChildren().add(part);
 		}
-		//
+
 		return part;
 	}
 
@@ -167,7 +167,7 @@ public class PartSupport {
 		if(element instanceof MPartStack partStack) {
 			return partStack;
 		}
-		//
+
 		return null;
 	}
 
@@ -177,7 +177,7 @@ public class PartSupport {
 		if(element instanceof MToolBar toolbar) {
 			return toolbar;
 		}
-		//
+
 		return null;
 	}
 
@@ -187,7 +187,7 @@ public class PartSupport {
 		if(element instanceof MDirectToolItem directToolItem) {
 			return directToolItem;
 		}
-		//
+
 		return null;
 	}
 
@@ -197,7 +197,7 @@ public class PartSupport {
 		if(element instanceof MPart part) {
 			return part;
 		}
-		//
+
 		return null;
 	}
 
@@ -212,7 +212,7 @@ public class PartSupport {
 		if(part != null) {
 			return part.isVisible();
 		}
-		//
+
 		return false;
 	}
 
@@ -222,7 +222,7 @@ public class PartSupport {
 		if(part != null) {
 			return part.isToBeRendered();
 		}
-		//
+
 		return false;
 	}
 
@@ -347,13 +347,13 @@ public class PartSupport {
 		if(gridData != null) {
 			gridData.exclude = !visible;
 		}
-		//
+
 		Composite parent = control.getParent();
 		Composite parentParent = parent.getParent();
 		if(parentParent != null) {
 			parent = parentParent;
 		}
-		//
+
 		parent.layout(true);
 		parent.redraw();
 	}
@@ -443,7 +443,7 @@ public class PartSupport {
 			MPart part = getPart(partId, partStackId, partService, modelService, application);
 			visible = togglePartVisibility(part, partService);
 		}
-		//
+
 		return visible;
 	}
 

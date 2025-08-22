@@ -128,7 +128,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 			results.addAll(Arrays.asList(wizardCategory.getWizards()));
 			results.addAll(Arrays.asList(getAllWizards(wizardCategory.getCategories())));
 		}
-		//
+
 		return results.toArray(new IWizardDescriptor[0]);
 	}
 }

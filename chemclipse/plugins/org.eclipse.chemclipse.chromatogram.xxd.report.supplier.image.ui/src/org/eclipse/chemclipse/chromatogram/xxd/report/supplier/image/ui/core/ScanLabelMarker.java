@@ -32,13 +32,13 @@ public class ScanLabelMarker extends LabelMarker {
 	private List<String> getScanLabels(List<IScan> scans) {
 
 		List<String> labels = new ArrayList<>();
-		//
+
 		if(scans != null) {
 			for(int i = 1; i <= scans.size(); i++) {
 				labels.add("S" + i);
 			}
 		}
-		//
+
 		return labels;
 	}
 }

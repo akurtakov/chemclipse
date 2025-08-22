@@ -68,7 +68,7 @@ public class FeatureTablePart extends AbstractPartPCA<ExtendedFeatureListUI> {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 }

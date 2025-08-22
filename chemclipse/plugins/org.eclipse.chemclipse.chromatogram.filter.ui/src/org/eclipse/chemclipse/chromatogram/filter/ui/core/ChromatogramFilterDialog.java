@@ -36,7 +36,7 @@ public class ChromatogramFilterDialog extends Dialog {
 
 	private static final int WIDTH = 450;
 	private static final int HEIGHT = 150;
-	//
+
 	private IMaximaDetectorService maximaDetectorService = null;
 
 	public ChromatogramFilterDialog(Shell parentShell) {
@@ -76,10 +76,10 @@ public class ChromatogramFilterDialog extends Dialog {
 		layout.marginRight = 10;
 		layout.marginLeft = 10;
 		composite.setLayout(layout);
-		//
+
 		createLabel(composite);
 		createComboViewer(composite);
-		//
+
 		return composite;
 	}
 
@@ -106,7 +106,7 @@ public class ChromatogramFilterDialog extends Dialog {
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText(Messages.selectScanMaximaDetector);
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
@@ -122,7 +122,7 @@ public class ChromatogramFilterDialog extends Dialog {
 				}
 			}
 		});
-		//
+
 		comboViewer.setInput(Activator.getDefault().getMaximaDetectorServices());
 		return comboViewer;
 	}

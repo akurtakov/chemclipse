@@ -51,7 +51,7 @@ public class ProcessMethodProfiles extends Composite {
 	private AtomicReference<ComboViewer> comboViewerColumns = new AtomicReference<>();
 	private AtomicReference<Button> buttonAdd = new AtomicReference<>();
 	private AtomicReference<Button> buttonDelete = new AtomicReference<>();
-	//
+
 	private ProcessMethod processMethod;
 	private boolean enabledEdit = true;
 	private IUpdateListener updateListener = null;
@@ -86,12 +86,12 @@ public class ProcessMethodProfiles extends Composite {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		createComboViewerProfiles(this);
 		createComboViewerColumns(this);
 		createButtonAdd(this);
 		createButtonDelete(this);
-		//
+
 		updateProfilesColum();
 	}
 
@@ -132,7 +132,7 @@ public class ProcessMethodProfiles extends Composite {
 				}
 			}
 		});
-		//
+
 		comboViewerProfiles.set(comboViewer);
 	}
 
@@ -173,7 +173,7 @@ public class ProcessMethodProfiles extends Composite {
 				}
 			}
 		});
-		//
+
 		comboViewerColumns.set(comboViewer);
 	}
 
@@ -183,7 +183,7 @@ public class ProcessMethodProfiles extends Composite {
 		button.setText("");
 		button.setToolTipText("Add a new profile.");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ADD, IApplicationImageProvider.SIZE_16x16));
-		//
+
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -207,11 +207,11 @@ public class ProcessMethodProfiles extends Composite {
 									return "The profile exists already.";
 								}
 							}
-							//
+
 							return null;
 						}
 					});
-					//
+
 					if(IDialogConstants.OK_ID == dialog.open()) {
 						/*
 						 * Get the active profile and copy the settings.
@@ -228,7 +228,7 @@ public class ProcessMethodProfiles extends Composite {
 				}
 			}
 		});
-		//
+
 		buttonAdd.set(button);
 	}
 
@@ -238,7 +238,7 @@ public class ProcessMethodProfiles extends Composite {
 		button.setText("");
 		button.setToolTipText("Delete the profile.");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DELETE, IApplicationImageProvider.SIZE_16x16));
-		//
+
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -261,7 +261,7 @@ public class ProcessMethodProfiles extends Composite {
 				}
 			}
 		});
-		//
+
 		buttonDelete.set(button);
 	}
 
@@ -271,7 +271,7 @@ public class ProcessMethodProfiles extends Composite {
 		if(object instanceof String text) {
 			return text;
 		}
-		//
+
 		return ProcessEntryContainer.DEFAULT_PROFILE;
 	}
 
@@ -281,7 +281,7 @@ public class ProcessMethodProfiles extends Composite {
 		if(object instanceof SeparationColumnType separationColumnType) {
 			return separationColumnType;
 		}
-		//
+
 		return SeparationColumnType.DEFAULT;
 	}
 
@@ -292,7 +292,7 @@ public class ProcessMethodProfiles extends Composite {
 			String activeProfile = processMethod.getActiveProfile();
 			separationColumnType = processMethod.getProfileColumnsMap().getOrDefault(activeProfile, SeparationColumnType.DEFAULT);
 		}
-		//
+
 		return separationColumnType;
 	}
 
@@ -325,7 +325,7 @@ public class ProcessMethodProfiles extends Composite {
 			 * Get the selected profile.
 			 */
 			String activeProfile = processMethod.getActiveProfile();
-			//
+
 			int index = 0;
 			exitloop:
 			for(int i = 0; i < profiles.size(); i++) {

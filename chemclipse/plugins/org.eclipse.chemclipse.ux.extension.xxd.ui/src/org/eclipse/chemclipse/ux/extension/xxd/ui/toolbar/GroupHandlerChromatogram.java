@@ -24,7 +24,7 @@ import org.eclipse.jface.preference.IPreferencePage;
 public class GroupHandlerChromatogram extends AbstractGroupHandler {
 
 	public static final String NAME = "Chromatogram";
-	//
+
 	private static final String IMAGE_HIDE = IApplicationImage.IMAGE_CHROMATOGRAM_ACTIVE;
 	private static final String IMAGE_SHOW = IApplicationImage.IMAGE_CHROMATOGRAM_DEFAULT;
 
@@ -40,13 +40,13 @@ public class GroupHandlerChromatogram extends AbstractGroupHandler {
 	public List<IPartHandler> getPartHandlerMandatory() {
 
 		List<IPartHandler> partHandler = new ArrayList<>();
-		//
+
 		partHandler.add(new PartHandler("Baseline", PartSupport.PARTDESCRIPTOR_BASELINE, PreferenceSupplier.P_STACK_POSITION_BASELINE_CHROMATOGRAM));
 		partHandler.add(new PartHandler("Retention Indices", PartSupport.PARTDESCRIPTOR_CHROMATOGRAM_INDICES, PreferenceSupplier.P_STACK_POSITION_CHROMATOGRAM_INDICES));
 		partHandler.add(new PartHandler("Heatmap", PartSupport.PARTDESCRIPTOR_CHROMATOGRAM_HEATMAP, PreferenceSupplier.P_STACK_POSITION_CHROMATOGRAM_HEATMAP));
 		partHandler.add(new PartHandler("Scan Info", PartSupport.PARTDESCRIPTOR_CHROMATOGRAM_SCAN_INFO, PreferenceSupplier.P_STACK_POSITION_CHROMATOGRAM_SCAN_INFO));
 		partHandler.add(new PartHandler("Integration", PartSupport.PARTDESCRIPTOR_INTEGRATION_AREA, PreferenceSupplier.P_STACK_POSITION_INTEGRATION_AREA));
-		//
+
 		return partHandler;
 	}
 

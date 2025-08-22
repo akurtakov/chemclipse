@@ -32,7 +32,7 @@ public class WncResultsContentProvider implements IStructuredContentProvider {
 		} else if(inputElement instanceof TargetTraces targetTraces) {
 			return targetTraces.toArray();
 		}
-		//
+
 		return new Object[0];
 	}
 }

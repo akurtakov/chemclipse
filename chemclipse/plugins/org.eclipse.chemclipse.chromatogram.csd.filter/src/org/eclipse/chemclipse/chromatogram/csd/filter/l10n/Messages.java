@@ -17,7 +17,7 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.chemclipse.chromatogram.csd.filter.l10n.messages"; //$NON-NLS-1$
-	//
+
 	public static String invalidChromatogram;
 	public static String invalidChromatogramSelection;
 	public static String invalidFilterSettings;
@@ -26,7 +26,7 @@ public class Messages extends NLS {
 	public static String noChromatogramFilterAvailable;
 	public static String noPeakFilterAvailable;
 	public static String onlyCSDchromatogramSupported;
-	//
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}

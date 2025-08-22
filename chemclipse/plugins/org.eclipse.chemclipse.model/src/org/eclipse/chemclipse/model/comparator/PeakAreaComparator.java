@@ -34,7 +34,7 @@ public class PeakAreaComparator implements Comparator<IPeak> {
 
 		double integratedArea1 = peak1.getIntegratedArea();
 		double integratedArea2 = peak2.getIntegratedArea();
-		//
+
 		int returnValue;
 		switch(sortOrder) {
 			case ASC:

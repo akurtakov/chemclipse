@@ -26,7 +26,7 @@ public class ClassificationRuleEditingSupport extends EditingSupport {
 	private String column;
 	private CellEditor cellEditor;
 	private ClassificationDictionaryListUI tableViewer;
-	//
+
 	private String[] references = Reference.getItems();
 
 	public ClassificationRuleEditingSupport(ClassificationDictionaryListUI tableViewer, String column) {
@@ -84,7 +84,7 @@ public class ClassificationRuleEditingSupport extends EditingSupport {
 					classificationRule.setReference(getReference(value));
 					break;
 			}
-			//
+
 			tableViewer.refresh();
 			tableViewer.updateContent();
 		}

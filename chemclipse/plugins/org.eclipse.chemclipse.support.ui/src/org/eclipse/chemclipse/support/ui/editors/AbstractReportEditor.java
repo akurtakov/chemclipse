@@ -29,7 +29,7 @@ import org.eclipse.ui.part.MultiPageEditorPart;
 public abstract class AbstractReportEditor extends MultiPageEditorPart implements IReportEditor {
 
 	private static final Logger logger = Logger.getLogger(AbstractReportEditor.class);
-	//
+
 	private String currentUser;
 	private boolean isDirty = false;
 	private List<IMultiEditorPage> pages;
@@ -101,7 +101,7 @@ public abstract class AbstractReportEditor extends MultiPageEditorPart implement
 		 * Shows the edit history.
 		 */
 		int activePageIndex = getActivePage();
-		//
+
 		Iterator<IMultiEditorPage> iterator = pages.iterator();
 		exitloop:
 		while(iterator.hasNext()) {

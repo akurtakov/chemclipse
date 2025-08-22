@@ -51,7 +51,7 @@ public class FilterDistributionPart extends AbstractPartPCA<ExtendedFilterDistri
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 }

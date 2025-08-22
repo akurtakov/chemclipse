@@ -45,7 +45,7 @@ public class PhaseCorrectionSettingsEditorExtension implements EditorExtension {
 	private static final int ZERO_ORDER_RANGE = 180;
 	private static final int ZERO_ORDER_INCREMENT = 90;
 	private PhaseCorrectionSettings settings;
-	//
+
 	private static final char DEGREE = 0x00B0;
 
 	public PhaseCorrectionSettingsEditorExtension(PhaseCorrectionSettings settings) {
@@ -95,7 +95,7 @@ public class PhaseCorrectionSettingsEditorExtension implements EditorExtension {
 			composite.setLayout(new GridLayout(2, false));
 			Text textField = new Text(composite, SWT.BORDER);
 			ComboViewer pivotCombo = new EnhancedComboViewer(composite);
-			//
+
 			pivotCombo.setContentProvider(ArrayContentProvider.getInstance());
 			pivotCombo.setInput(PivotPointSelection.values());
 			pivotCombo.getControl().setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -110,7 +110,7 @@ public class PhaseCorrectionSettingsEditorExtension implements EditorExtension {
 				}
 				textField.setEnabled(selection == PivotPointSelection.USER_DEFINED);
 			});
-			//
+
 			DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish();
 			textField.addSelectionListener(new SelectionListener() {
 

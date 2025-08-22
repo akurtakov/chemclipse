@@ -37,7 +37,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_PARSE_COMPOUND_INFORMATION = true;
 	public static final String P_PARSE_MOL_INFORMATION = "parseMolInformation";
 	public static final boolean DEF_PARSE_MOL_INFORMATION = true;
-	//
+
 	public static final String P_CHARSET_IMPORT_MSL = "charsetImportMSL";
 	public static final String DEF_CHARSET_IMPORT_MSL = CharsetNIO.US_ASCII.name();
 	public static final String P_CHARSET_IMPORT_MSP = "charsetImportMSP";
@@ -46,7 +46,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_CHARSET_IMPORT_FIN = CharsetNIO.US_ASCII.name();
 	public static final String P_CHARSET_IMPORT_ELU = "charsetImportELU";
 	public static final String DEF_CHARSET_IMPORT_ELU = CharsetNIO.US_ASCII.name();
-	//
+
 	public static final String P_PATH_IMPORT = "pathImport";
 	public static final String DEF_PATH_IMPORT = "";
 	public static final String P_PATH_EXPORT = "pathExport";
@@ -74,12 +74,12 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_EXPORT_INTENSITIES_AS_INTEGER, Boolean.toString(DEF_EXPORT_INTENSITIES_AS_INTEGER));
 		putDefault(P_PARSE_COMPOUND_INFORMATION, Boolean.toString(DEF_PARSE_COMPOUND_INFORMATION));
 		putDefault(P_PARSE_MOL_INFORMATION, Boolean.toString(DEF_PARSE_MOL_INFORMATION));
-		//
+
 		putDefault(P_CHARSET_IMPORT_MSL, DEF_CHARSET_IMPORT_MSL);
 		putDefault(P_CHARSET_IMPORT_MSP, DEF_CHARSET_IMPORT_MSP);
 		putDefault(P_CHARSET_IMPORT_FIN, DEF_CHARSET_IMPORT_FIN);
 		putDefault(P_CHARSET_IMPORT_ELU, DEF_CHARSET_IMPORT_ELU);
-		//
+
 		putDefault(P_PATH_IMPORT, DEF_PATH_IMPORT);
 		putDefault(P_PATH_EXPORT, DEF_PATH_EXPORT);
 	}

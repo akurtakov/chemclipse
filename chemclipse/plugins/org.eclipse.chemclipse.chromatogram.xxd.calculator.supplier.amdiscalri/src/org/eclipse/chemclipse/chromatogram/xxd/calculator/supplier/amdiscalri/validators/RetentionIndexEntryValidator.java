@@ -23,14 +23,14 @@ import org.eclipse.core.runtime.IStatus;
 public class RetentionIndexEntryValidator extends ValueParserSupport implements IValidator<String> {
 
 	public static final String EXAMPLE_SINGLE = "22.549 | 1400.0 | C14";
-	//
+
 	public static final String WHITE_SPACE = " ";
 	public static final String SEPARATOR_TOKEN = ";";
 	public static final String SEPARATOR_ENTRY = "|";
-	//
+
 	private static final String ERROR_MESSAGE = "";
 	private static final String ERROR_TOKEN = "The item must not contain: " + SEPARATOR_TOKEN;
-	//
+
 	private int retentionTime = 0;
 	private float retentionIndex = 0.0f;
 	private String name = "";
@@ -66,7 +66,7 @@ public class RetentionIndexEntryValidator extends ValueParserSupport implements 
 				}
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

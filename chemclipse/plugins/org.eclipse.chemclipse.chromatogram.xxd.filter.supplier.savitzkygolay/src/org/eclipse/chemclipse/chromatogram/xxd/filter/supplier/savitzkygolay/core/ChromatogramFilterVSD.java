@@ -74,7 +74,7 @@ public class ChromatogramFilterVSD implements IProcessTypeSupplier {
 				ITotalScanSignals totalSignals = totalScanSignalExtractor.getTotalScanSignals(chromatogramSelection, false);
 				SavitzkyGolayProcessor.apply(totalSignals, processSettings, new NullProgressMonitor());
 				chromatogramVSD.setDirty(true);
-				//
+
 				Iterator<Integer> iteratorScans = totalSignals.iterator();
 				while(iteratorScans.hasNext()) {
 					int scanNumber = iteratorScans.next();
@@ -85,7 +85,7 @@ public class ChromatogramFilterVSD implements IProcessTypeSupplier {
 					}
 				}
 			}
-			//
+
 			return chromatogramSelection;
 		}
 	}

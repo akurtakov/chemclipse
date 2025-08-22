@@ -38,7 +38,7 @@ public abstract class AbstractPeakQuantitationCalculator {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -46,7 +46,7 @@ public abstract class AbstractPeakQuantitationCalculator {
 
 		double peakAreaQuantify = peakToQuantify.getIntegratedArea();
 		double peakAreaISTD = peakISTD.getIntegratedArea();
-		//
+
 		return (peakAreaQuantify > 0 && peakAreaISTD > 0);
 	}
 }

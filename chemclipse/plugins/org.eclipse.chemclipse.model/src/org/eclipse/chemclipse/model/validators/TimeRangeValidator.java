@@ -44,7 +44,7 @@ public class TimeRangeValidator extends ValueParserSupport implements IValidator
 					start = 0;
 					center = 0;
 					stop = 0;
-					//
+
 					String[] values = text.trim().split("\\" + '|'); // The pipe needs to be escaped.
 					if(values.length > 1) {
 						/*
@@ -54,26 +54,26 @@ public class TimeRangeValidator extends ValueParserSupport implements IValidator
 						if(identifier.isBlank()) {
 							message = "The identifier must not be blank.";
 						}
-						//
+
 						start = parseInteger(values, 1);
 						if(start < 0) {
 							message = "The start must not be < 0.";
 						}
-						//
+
 						center = parseInteger(values, 2);
 						if(start < 0) {
 							message = "The center must not be < 0.";
 						}
-						//
+
 						stop = parseInteger(values, 1);
 						if(stop < 0) {
 							message = "The stop must not be < 0.";
 						}
-						//
+
 						if(start > stop) {
 							message = "Start must not be > than stop.";
 						}
-						//
+
 					} else {
 						message = "Please enter a valid identifier.";
 					}
@@ -82,7 +82,7 @@ public class TimeRangeValidator extends ValueParserSupport implements IValidator
 				message = "Value has to be a string.";
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

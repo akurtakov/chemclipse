@@ -55,7 +55,7 @@ public class ClassificationRemoveFilter extends AbstractPeakFilter<ClassifierRem
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
-		//
+
 		String classification = getClassification(configuration);
 		boolean removeCompletely = classification.isEmpty();
 		SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), peaks.size());

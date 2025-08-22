@@ -45,7 +45,7 @@ public class SelectProjectWizardPage extends AbstractExtendedWizardPage {
 	private Text projectNameText;
 	private Combo comboExistingProjects;
 	private TreeViewer treeViewerProject;
-	//
+
 	private IWorkspaceRoot workspaceRoot;
 
 	public SelectProjectWizardPage(ISelection selection, IWizardElements wizardElements) {
@@ -81,7 +81,7 @@ public class SelectProjectWizardPage extends AbstractExtendedWizardPage {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(1, true));
-		//
+
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.verticalIndent = 5;
 		GridData gridDataTreeViewer = new GridData(GridData.FILL_HORIZONTAL);
@@ -200,7 +200,7 @@ public class SelectProjectWizardPage extends AbstractExtendedWizardPage {
 			enableWidgets(false);
 			validateTextSelection();
 		}
-		//
+
 		setControl(composite);
 	}
 
@@ -221,7 +221,7 @@ public class SelectProjectWizardPage extends AbstractExtendedWizardPage {
 				projectsAccessible.add(project);
 			}
 		}
-		//
+
 		String[] items = new String[projectsAccessible.size()];
 		int counter = 0;
 		for(IProject project : projectsAccessible) {
@@ -251,7 +251,7 @@ public class SelectProjectWizardPage extends AbstractExtendedWizardPage {
 	private void updateExistingProjectSelection() {
 
 		String message = null;
-		//
+
 		String projectName = comboExistingProjects.getText().trim();
 		if(projectName == null || projectName.equals("")) {
 			message = SupportMessages.processingSelectProject;
@@ -285,7 +285,7 @@ public class SelectProjectWizardPage extends AbstractExtendedWizardPage {
 	private void validateTreeViewSelection(Object object) {
 
 		String message = null;
-		//
+
 		if(object instanceof IFolder folder) {
 			if(!folder.exists()) {
 				message = SupportMessages.processingSelectValidFolder;
@@ -310,7 +310,7 @@ public class SelectProjectWizardPage extends AbstractExtendedWizardPage {
 	private void validateComboBoxSelection() {
 
 		String message = null;
-		//
+
 		String containerName = comboExistingProjects.getText().trim();
 		if(containerName == null || containerName.equals("")) {
 			message = SupportMessages.processingSelectProject;
@@ -340,7 +340,7 @@ public class SelectProjectWizardPage extends AbstractExtendedWizardPage {
 	private void validateTextSelection() {
 
 		String message = null;
-		//
+
 		String containerName = projectNameText.getText().trim();
 		if(containerName == null || containerName.equals("")) {
 			message = SupportMessages.processingTypeProjectName;

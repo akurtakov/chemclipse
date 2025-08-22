@@ -53,22 +53,22 @@ import jakarta.inject.Inject;
 public class ScanEditorFSD implements IScanEditorFSD {
 
 	private static final Logger logger = Logger.getLogger(ScanEditorFSD.class);
-	//
+
 	public static final String ID = "org.eclipse.chemclipse.ux.extension.xxd.ui.part.scanEditorFSD";
 	public static final String CONTRIBUTION_URI = "bundleclass://org.eclipse.chemclipse.ux.extension.xxd.ui/org.eclipse.chemclipse.ux.extension.xxd.ui.editors.ScanEditorFSD";
 	public static final String ICON_URI = ApplicationImageFactory.getInstance().getURI(IApplicationImage.IMAGE_SCAN_FSD, IApplicationImageProvider.SIZE_16x16);
 	public static final String TOOLTIP = ExtensionMessages.editorFSD;
-	//
+
 	private final MPart part;
 	private final MDirtyable dirtyable;
 	private final EModelService modelService;
 	private final MApplication application;
-	//
+
 	private File scanFile;
 	private ExtendedFSDScanUI extendedFSDScanUI;
-	//
+
 	private ISpectrumFSD spectrumFSD = null;
-	//
+
 	private final Shell shell;
 
 	@Inject
@@ -79,7 +79,7 @@ public class ScanEditorFSD implements IScanEditorFSD {
 		this.modelService = modelService;
 		this.application = application;
 		this.shell = shell;
-		//
+
 		initialize(parent);
 	}
 
@@ -94,7 +94,7 @@ public class ScanEditorFSD implements IScanEditorFSD {
 
 		List<String> clearTopics = Arrays.asList();
 		UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_EDITOR_FSD_CLOSE, clearTopics);
-		//
+
 		if(modelService != null && application != null) {
 			MPartStack partStack = (MPartStack)modelService.find(IPerspectiveAndViewIds.EDITOR_PART_STACK_ID, application);
 			part.setToBeRendered(false);
@@ -139,7 +139,7 @@ public class ScanEditorFSD implements IScanEditorFSD {
 	private synchronized ISpectrumFSD loadScan() {
 
 		ISpectrumFSD spectrumFSD = null;
-		//
+
 		try {
 			Object object = part.getObject();
 			if(object instanceof Map<?, ?> map) {
@@ -153,7 +153,7 @@ public class ScanEditorFSD implements IScanEditorFSD {
 		} catch(Exception e) {
 			logger.error(e);
 		}
-		//
+
 		return spectrumFSD;
 	}
 
@@ -173,7 +173,7 @@ public class ScanEditorFSD implements IScanEditorFSD {
 			logger.warn(e);
 			Thread.currentThread().interrupt();
 		}
-		//
+
 		scanFile = file;
 		return runnable.getSpectrumFSD();
 	}

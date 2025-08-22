@@ -49,11 +49,11 @@ public class TargetTransferDialog extends Dialog {
 	protected Control createDialogArea(Composite parent) {
 
 		Composite composite = (Composite)super.createDialogArea(parent);
-		//
+
 		PeakTargetTransferUI peakTargetTransferUI = new PeakTargetTransferUI(composite, SWT.NONE);
 		peakTargetTransferUI.update(chromatogramSelection);
 		peakTargetTransferUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return composite;
 	}
 }

@@ -52,7 +52,7 @@ public class SupplierFileIdentifierCache implements Function<File, Map<ISupplier
 	public Map<ISupplierFileIdentifier, Collection<ISupplier>> apply(File file) {
 
 		Map<ISupplierFileIdentifier, Collection<ISupplier>> list = supplierCache.get(file);
-		//
+
 		if(list == null) {
 			list = new LinkedHashMap<>();
 			for(ISupplierFileIdentifier supplierFileIdentifier : fileIdentifiers) {

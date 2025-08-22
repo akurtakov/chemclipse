@@ -37,7 +37,7 @@ import org.eclipse.swt.widgets.Label;
 public class ColorCodesFieldEditor extends FieldEditor {
 
 	private static final int NUMBER_COLUMNS = 2;
-	//
+
 	private Composite composite;
 	private ColorCodes colorCodes = new ColorCodes();
 	private ColorCodeTableUI colorCodeTableUI;
@@ -52,7 +52,7 @@ public class ColorCodesFieldEditor extends FieldEditor {
 	protected void doFillIntoGrid(Composite parent, int numColumns) {
 
 		getLabelControl(parent);
-		//
+
 		composite = new Composite(parent, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(NUMBER_COLUMNS, false);
 		gridLayout.marginWidth = 0;
@@ -60,7 +60,7 @@ public class ColorCodesFieldEditor extends FieldEditor {
 		composite.setLayout(gridLayout);
 		GridData gridData = new GridData(GridData.FILL_BOTH);
 		composite.setLayoutData(gridData);
-		//
+
 		createLabelSection(composite);
 		createTableSection(composite);
 		createButtonGroup(composite);
@@ -84,7 +84,7 @@ public class ColorCodesFieldEditor extends FieldEditor {
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.grabExcessVerticalSpace = true;
 		composite.setLayoutData(gridData);
-		//
+
 		colorCodeTableUI = new ColorCodeTableUI(composite, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
 		setTableViewerInput();
 	}
@@ -100,7 +100,7 @@ public class ColorCodesFieldEditor extends FieldEditor {
 		gridData.verticalAlignment = GridData.FILL;
 		gridData.horizontalAlignment = GridData.FILL;
 		composite.setLayoutData(gridData);
-		//
+
 		setButtonLayoutData(createButtonAdd(composite));
 		setButtonLayoutData(createButtonEdit(composite));
 		setButtonLayoutData(createButtonRemove(composite));
@@ -154,7 +154,7 @@ public class ColorCodesFieldEditor extends FieldEditor {
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -186,7 +186,7 @@ public class ColorCodesFieldEditor extends FieldEditor {
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 

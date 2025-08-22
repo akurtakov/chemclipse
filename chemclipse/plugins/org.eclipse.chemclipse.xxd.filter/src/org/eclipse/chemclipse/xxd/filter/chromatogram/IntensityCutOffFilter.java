@@ -59,7 +59,7 @@ public class IntensityCutOffFilter implements IProcessTypeSupplier {
 
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 			float maxIntensity;
-			//
+
 			switch(processSettings.getIntensityOption()) {
 				case RELATIVE:
 					maxIntensity = (float)(chromatogram.getMaxSignal() * (processSettings.getMaxIntensity() / 100.0d));
@@ -68,10 +68,10 @@ public class IntensityCutOffFilter implements IProcessTypeSupplier {
 					maxIntensity = processSettings.getMaxIntensity();
 					break;
 			}
-			//
+
 			int startScan = chromatogram.getScanNumber(chromatogramSelection.getStartRetentionTime());
 			int stopScan = chromatogram.getScanNumber(chromatogramSelection.getStopRetentionTime());
-			//
+
 			for(int i = startScan; i <= stopScan; i++) {
 				IScan scan = chromatogram.getScan(i);
 				float totalSignal = scan.getTotalSignal();
@@ -79,7 +79,7 @@ public class IntensityCutOffFilter implements IProcessTypeSupplier {
 					scan.adjustTotalSignal(maxIntensity);
 				}
 			}
-			//
+
 			return chromatogramSelection;
 		}
 	}

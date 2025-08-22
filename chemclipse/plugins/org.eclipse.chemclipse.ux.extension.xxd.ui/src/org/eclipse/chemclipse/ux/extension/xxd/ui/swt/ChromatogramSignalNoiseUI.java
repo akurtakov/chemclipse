@@ -64,7 +64,7 @@ public class ChromatogramSignalNoiseUI extends Composite implements IExtendedPar
 	private AtomicReference<InformationUI> toolbarInfoBottom = new AtomicReference<>();
 	private AtomicReference<ComboViewer> comboViewerNoiseCalculatorControl = new AtomicReference<>();
 	private AtomicReference<NoiseSegmentListUI> noiseSegmentListControl = new AtomicReference<>();
-	//
+
 	private IChromatogramSelection chromatogramSelection = null;
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.0000");
 
@@ -83,12 +83,12 @@ public class ChromatogramSignalNoiseUI extends Composite implements IExtendedPar
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfoTop(this);
 		createDataSection(this);
 		createToolbarInfoBottom(this);
-		//
+
 		initialize();
 	}
 
@@ -104,14 +104,14 @@ public class ChromatogramSignalNoiseUI extends Composite implements IExtendedPar
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		composite.setLayout(new GridLayout(6, false));
-		//
+
 		createButtonToggleToolbar(composite);
 		createComboViewerNoiseCalculator(composite);
 		createButtonAdd(composite);
 		createButtonDelete(composite);
 		createButtonReset(composite);
 		createSettingsButton(composite);
-		//
+
 		return composite;
 	}
 
@@ -134,7 +134,7 @@ public class ChromatogramSignalNoiseUI extends Composite implements IExtendedPar
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return informationUI;
 	}
 
@@ -147,7 +147,7 @@ public class ChromatogramSignalNoiseUI extends Composite implements IExtendedPar
 
 		NoiseSegmentListUI noiseSegmentListUI = new NoiseSegmentListUI(parent, SWT.BORDER | SWT.MULTI | SWT.FULL_SELECTION | SWT.V_SCROLL | SWT.H_SCROLL);
 		noiseSegmentListUI.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		noiseSegmentListUI.setUpdateListener(new IUpdateListener() {
 
 			@Override
@@ -163,7 +163,7 @@ public class ChromatogramSignalNoiseUI extends Composite implements IExtendedPar
 				}
 			}
 		});
-		//
+
 		noiseSegmentListControl.set(noiseSegmentListUI);
 	}
 
@@ -183,7 +183,7 @@ public class ChromatogramSignalNoiseUI extends Composite implements IExtendedPar
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select a noise calculator.");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
@@ -208,7 +208,7 @@ public class ChromatogramSignalNoiseUI extends Composite implements IExtendedPar
 				}
 			}
 		});
-		//
+
 		comboViewerNoiseCalculatorControl.set(comboViewer);
 	}
 
@@ -270,7 +270,7 @@ public class ChromatogramSignalNoiseUI extends Composite implements IExtendedPar
 				noiseSegments.add(noiseSegment);
 			}
 		}
-		//
+
 		return noiseSegments;
 	}
 
@@ -326,7 +326,7 @@ public class ChromatogramSignalNoiseUI extends Composite implements IExtendedPar
 		comboViewerNoiseCalculatorControl.get().setInput(null);
 		noiseSegmentListControl.get().clear();
 		toolbarInfoBottom.get().setText("");
-		//
+
 		if(chromatogramSelection != null) {
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 			if(chromatogram != null) {
@@ -349,7 +349,7 @@ public class ChromatogramSignalNoiseUI extends Composite implements IExtendedPar
 
 		Collection<INoiseCalculatorSupplier> noiseCalculatorSuppliers = NoiseCalculator.getNoiseCalculatorSupport().getCalculatorSupplier();
 		comboViewerNoiseCalculatorControl.get().setInput(noiseCalculatorSuppliers);
-		//
+
 		INoiseCalculator noiseCalculator = chromatogram.getNoiseCalculator();
 		if(noiseCalculator != null) {
 			exitloop:
@@ -390,7 +390,7 @@ public class ChromatogramSignalNoiseUI extends Composite implements IExtendedPar
 		} else {
 			builder.append("No chromatogram selected.");
 		}
-		//
+
 		return builder.toString();
 	}
 

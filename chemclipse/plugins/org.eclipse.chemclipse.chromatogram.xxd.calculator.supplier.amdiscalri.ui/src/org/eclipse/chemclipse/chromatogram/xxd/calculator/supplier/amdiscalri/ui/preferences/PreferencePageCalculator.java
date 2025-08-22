@@ -40,7 +40,7 @@ public class PreferencePageCalculator extends FieldEditorPreferencePage implemen
 		CalibrationTableEditor calibrationTableEditor = new CalibrationTableEditor(PreferenceSupplier.P_RETENTION_INDEX_FILES, "Retention Index Files:", getFieldEditorParent());
 		calibrationTableEditor.setFilterExtensionsAndNames(new String[]{"*.cal;*.CAL"}, new String[]{"AMDIS Calibration (*.cal)"});
 		addField(calibrationTableEditor);
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Calculator Options", getFieldEditorParent()));
 		addField(new RadioGroupFieldEditor(PreferenceSupplier.P_CALCULATOR_STRATEGY, "Calculator Strategy", 1, PreferenceSupplier.CALCULATOR_OPTIONS, getFieldEditorParent()));

@@ -42,7 +42,7 @@ public class ChromatogramTypeSupportUI extends ChromatogramTypeSupport {
 	public void openFiles(List<File> files) throws Exception {
 
 		Display display = DisplayUtils.getDisplay();
-		//
+
 		if(display != null) {
 			for(File file : files) {
 				if(file.exists()) {

@@ -21,7 +21,7 @@ import org.eclipse.chemclipse.wsd.model.core.ISignalWSD;
 public abstract class AbstractSignalWSD extends AbstractSignal implements ISignalWSD, Comparable<ISignalWSD> {
 
 	private static final long serialVersionUID = -3849935170783926023L;
-	//
+
 	private double wavelength = 0; // nm
 	private double absorbance = 0;
 	private double transmittance = 0;

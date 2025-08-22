@@ -42,7 +42,7 @@ public class ChromatogramFilterHighResMS extends AbstractChromatogramFilterMSD {
 		IProcessingInfo<IChromatogramFilterResult> validation = validate(chromatogramSelection, chromatogramFilterSettings);
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = new ProcessingInfo<>();
 		processingInfo.addMessages(validation);
-		//
+
 		if(!processingInfo.hasErrorMessages()) {
 			HeaderField headerField = getHeaderField(chromatogramFilterSettings);
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
@@ -58,7 +58,7 @@ public class ChromatogramFilterHighResMS extends AbstractChromatogramFilterMSD {
 					}
 				}
 			}
-			//
+
 			chromatogramSelection.getChromatogram().setDirty(true);
 			processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "The chromatogram was splitted into MS/MS reference chromatograms."));
 		}
@@ -78,7 +78,7 @@ public class ChromatogramFilterHighResMS extends AbstractChromatogramFilterMSD {
 		if(chromatogramFilterSettings instanceof FilterSettingsHighResMS filterSettingsHighResMS) {
 			binning = filterSettingsHighResMS.getBinning();
 		}
-		//
+
 		return binning;
 	}
 
@@ -88,7 +88,7 @@ public class ChromatogramFilterHighResMS extends AbstractChromatogramFilterMSD {
 		if(chromatogramFilterSettings instanceof FilterSettingsHighResMS filterSettingsHighResMS) {
 			headerField = filterSettingsHighResMS.getHeaderField();
 		}
-		//
+
 		return headerField;
 	}
 
@@ -107,11 +107,11 @@ public class ChromatogramFilterHighResMS extends AbstractChromatogramFilterMSD {
 				if(traceHighResMSD.getPPM() == 0) {
 					traceHighResMSD.setPPM(ppm);
 				}
-				//
+
 				specificTransitions.add(traceHighResMSD);
 			}
 		}
-		//
+
 		return specificTransitions;
 	}
 }

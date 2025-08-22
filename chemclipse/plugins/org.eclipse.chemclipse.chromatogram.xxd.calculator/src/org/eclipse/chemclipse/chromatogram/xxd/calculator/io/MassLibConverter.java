@@ -35,7 +35,7 @@ import org.eclipse.chemclipse.processing.core.ProcessingInfo;
 public class MassLibConverter {
 
 	private static final Logger logger = Logger.getLogger(MassLibConverter.class);
-	//
+
 	private Pattern patternColumn = Pattern.compile("(INFO1:)(\\s+)(\\w+)(\\s+)(\\w+-?\\w+)");
 	private Pattern patternIndices = Pattern.compile("(RETIND:)(\\s+)(\\d+:\\d+:?\\d+)(\\s+)(\\d*)");
 	private Pattern patternTargets = Pattern.compile("(SCANDESC:)(\\s+)(\\d+)(\\s+)(')(.*)(')");
@@ -52,7 +52,7 @@ public class MassLibConverter {
 
 		String[] values = time.trim().split(":");
 		int retentionTime = 0;
-		//
+
 		if(values.length == 2) {
 			retentionTime += getInteger(values[0]) * IChromatogram.MINUTE_CORRELATION_FACTOR; // Minutes
 			retentionTime += getInteger(values[1]) * IChromatogram.SECOND_CORRELATION_FACTOR; // Seconds
@@ -61,7 +61,7 @@ public class MassLibConverter {
 			retentionTime += getInteger(values[1]) * IChromatogram.MINUTE_CORRELATION_FACTOR; // Minutes
 			retentionTime += getInteger(values[2]) * IChromatogram.SECOND_CORRELATION_FACTOR; // Seconds
 		}
-		//
+
 		return retentionTime;
 	}
 
@@ -128,7 +128,7 @@ public class MassLibConverter {
 		} catch(IOException e) {
 			logger.warn(e);
 		}
-		//
+
 		processingInfo.setProcessingResult(separationColumnIndices);
 		return processingInfo;
 	}
@@ -137,7 +137,7 @@ public class MassLibConverter {
 
 		IProcessingInfo<Map<Integer, String>> processingInfo = new ProcessingInfo<>();
 		Map<Integer, String> targets = new HashMap<>();
-		//
+
 		try {
 			String content = FileUtils.readFileToString(file, StandardCharsets.US_ASCII);
 			Matcher matcherTargets = patternTargets.matcher(content);
@@ -149,7 +149,7 @@ public class MassLibConverter {
 		} catch(IOException e) {
 			logger.warn(e);
 		}
-		//
+
 		processingInfo.setProcessingResult(targets);
 		return processingInfo;
 	}

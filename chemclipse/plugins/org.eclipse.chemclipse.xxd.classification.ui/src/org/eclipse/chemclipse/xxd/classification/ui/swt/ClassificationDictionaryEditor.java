@@ -57,7 +57,7 @@ public class ClassificationDictionaryEditor extends Composite implements IChange
 	public static final String REMOVE_ALL_TOOLTIP = "Remove all classifications";
 	public static final String IMPORT = "Import";
 	public static final String EXPORT = "Export";
-	//
+
 	public static final String IMPORT_TITLE = "Import classifications";
 	public static final String EXPORT_TITLE = "Export classifications";
 	public static final String DIALOG_TITLE = "Classifications";
@@ -67,21 +67,21 @@ public class ClassificationDictionaryEditor extends Composite implements IChange
 	public static final String MESSAGE_REMOVE_ALL = "Do you want to delete all classifications?";
 	public static final String MESSAGE_EXPORT_SUCCESSFUL = "Classifications have been exported successfully.";
 	public static final String MESSAGE_EXPORT_FAILED = "Failed to export the classifications.";
-	//
+
 	public static final String EXAMPLE_ENTRY = "benz | aromatic compound";
-	//
+
 	private AtomicReference<ClassificationDictionaryListUI> listControl = new AtomicReference<>();
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
-	//
+
 	private Button buttonToolbarSearch;
 	private Button buttonAdd;
 	private Button buttonRemove;
 	private Button buttonRemoveAll;
 	private Button buttonImport;
 	private Button buttonExport;
-	//
+
 	private ClassificationDictionary classificationDictionary = new ClassificationDictionary();
-	//
+
 	private Listener listener;
 
 	public ClassificationDictionaryEditor(Composite parent, int style) {
@@ -94,13 +94,13 @@ public class ClassificationDictionaryEditor extends Composite implements IChange
 	public void addChangeListener(Listener listener) {
 
 		this.listener = listener;
-		//
+
 		Table table = listControl.get().getTable();
 		table.addListener(SWT.Selection, listener);
 		table.addListener(SWT.KeyUp, listener);
 		table.addListener(SWT.MouseUp, listener);
 		table.addListener(SWT.MouseDoubleClick, listener);
-		//
+
 		buttonAdd.addListener(SWT.KeyUp, listener);
 		buttonRemove.addListener(SWT.KeyUp, listener);
 		buttonRemoveAll.addListener(SWT.KeyUp, listener);
@@ -142,11 +142,11 @@ public class ClassificationDictionaryEditor extends Composite implements IChange
 		gridLayout.marginWidth = 0;
 		gridLayout.marginHeight = 0;
 		setLayout(gridLayout);
-		//
+
 		createToolbarMain(this);
 		createToolbarSearch(this);
 		createTableSection(this);
-		//
+
 		initialize();
 	}
 
@@ -161,7 +161,7 @@ public class ClassificationDictionaryEditor extends Composite implements IChange
 		ClassificationDictionaryListUI classificationDictionaryListUI = new ClassificationDictionaryListUI(parent, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 		Table table = classificationDictionaryListUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		classificationDictionaryListUI.setEditEnabled(true);
 		classificationDictionaryListUI.setUpdateListener(new IUpdateListener() {
 
@@ -171,10 +171,10 @@ public class ClassificationDictionaryEditor extends Composite implements IChange
 				setInput();
 			}
 		});
-		//
+
 		ITableSettings tableSettings = classificationDictionaryListUI.getTableSettings();
 		classificationDictionaryListUI.applySettings(tableSettings);
-		//
+
 		listControl.set(classificationDictionaryListUI);
 	}
 
@@ -185,7 +185,7 @@ public class ClassificationDictionaryEditor extends Composite implements IChange
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(6, false));
-		//
+
 		buttonToolbarSearch = createButtonToggleToolbar(composite, toolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH);
 		buttonAdd = createButtonAdd(composite);
 		buttonRemove = createButtonRemove(composite);
@@ -206,7 +206,7 @@ public class ClassificationDictionaryEditor extends Composite implements IChange
 				listControl.get().setSearchText(searchText, caseSensitive);
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -232,7 +232,7 @@ public class ClassificationDictionaryEditor extends Composite implements IChange
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -252,7 +252,7 @@ public class ClassificationDictionaryEditor extends Composite implements IChange
 				setInput();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -273,7 +273,7 @@ public class ClassificationDictionaryEditor extends Composite implements IChange
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -302,7 +302,7 @@ public class ClassificationDictionaryEditor extends Composite implements IChange
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -336,14 +336,14 @@ public class ClassificationDictionaryEditor extends Composite implements IChange
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
 	private void setInput() {
 
 		listControl.get().setInput(classificationDictionary);
-		//
+
 		if(listener != null) {
 			listener.handleEvent(new Event());
 		}

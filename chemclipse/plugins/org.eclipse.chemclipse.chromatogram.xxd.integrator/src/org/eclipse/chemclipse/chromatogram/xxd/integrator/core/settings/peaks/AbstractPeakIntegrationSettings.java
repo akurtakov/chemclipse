@@ -62,7 +62,7 @@ public abstract class AbstractPeakIntegrationSettings extends AbstractIntegratio
 		} else if(peak instanceof IPeakWSD peakWSD) {
 			startRetentionTime = peakWSD.getPeakModel().getStartRetentionTime();
 		}
-		//
+
 		boolean sumOn = getAreaSupport().isAreaSumOn(startRetentionTime);
 		return new SettingStatus(report, sumOn);
 	}

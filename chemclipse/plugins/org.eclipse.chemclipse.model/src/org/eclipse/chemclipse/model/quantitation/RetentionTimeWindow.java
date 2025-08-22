@@ -18,7 +18,7 @@ public class RetentionTimeWindow extends AbstractIdentificationWindow implements
 	 * Renew the UUID on change.
 	 */
 	private static final long serialVersionUID = -8489097558854054118L;
-	//
+
 	private int retentionTime; // milliseconds
 	private boolean useMilliseconds = true; // Otherwise use percentage deviation
 
@@ -54,7 +54,7 @@ public class RetentionTimeWindow extends AbstractIdentificationWindow implements
 
 		int leftBorder;
 		int rightBorder;
-		//
+
 		if(useMilliseconds) {
 			leftBorder = (int)(this.retentionTime - getAllowedNegativeDeviation());
 			rightBorder = (int)(this.retentionTime + getAllowedPositiveDeviation());
@@ -62,7 +62,7 @@ public class RetentionTimeWindow extends AbstractIdentificationWindow implements
 			leftBorder = (int)(this.retentionTime - this.retentionTime * getAllowedNegativeDeviation());
 			rightBorder = (int)(this.retentionTime + this.retentionTime * getAllowedPositiveDeviation());
 		}
-		//
+
 		if(retentionTime >= leftBorder && retentionTime <= rightBorder) {
 			return true;
 		} else {

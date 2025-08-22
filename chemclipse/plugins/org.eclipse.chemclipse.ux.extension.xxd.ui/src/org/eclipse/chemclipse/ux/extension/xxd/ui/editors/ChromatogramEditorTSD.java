@@ -46,20 +46,20 @@ import jakarta.inject.Inject;
 public class ChromatogramEditorTSD implements IChemClipseEditor {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramEditorTSD.class);
-	//
+
 	public static final String ID = "org.eclipse.chemclipse.ux.extension.xxd.ui.part.chromatogramEditorTSD";
 	public static final String CONTRIBUTION_URI = "bundleclass://org.eclipse.chemclipse.ux.extension.xxd.ui/org.eclipse.chemclipse.ux.extension.xxd.ui.editors.ChromatogramEditorTSD";
 	public static final String ICON_URI = ApplicationImageFactory.getInstance().getURI(IApplicationImage.IMAGE_CHROMATOGRAM_TSD, IApplicationImageProvider.SIZE_16x16);
 	public static final String TOOLTIP = ExtensionMessages.chromatogramEditorTSD;
-	//
+
 	private final MPart part;
 	private final MDirtyable dirtyable;
 	private final EModelService modelService;
 	private final MApplication application;
-	//
+
 	private File chromatogramFile;
 	private ChromatogramHeatmapUI chromatogramHeatmapUI;
-	//
+
 	private final Shell shell;
 
 	@Inject
@@ -70,7 +70,7 @@ public class ChromatogramEditorTSD implements IChemClipseEditor {
 		this.modelService = modelService;
 		this.application = application;
 		this.shell = shell;
-		//
+
 		initialize(parent);
 	}
 
@@ -126,7 +126,7 @@ public class ChromatogramEditorTSD implements IChemClipseEditor {
 			boolean batch = (boolean)map.get(EditorSupport.MAP_BATCH);
 			chromatogram = loadChromatogram(file, batch);
 		}
-		//
+
 		return chromatogram;
 	}
 
@@ -146,7 +146,7 @@ public class ChromatogramEditorTSD implements IChemClipseEditor {
 			logger.warn(e);
 			Thread.currentThread().interrupt();
 		}
-		//
+
 		chromatogramFile = file;
 		return runnable.getChromatogram();
 	}

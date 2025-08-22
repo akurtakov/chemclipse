@@ -40,27 +40,27 @@ public class ConverterMSD {
 	public static List<IIon> getFilteredIons(IScanMSD massSpectrum) {
 
 		List<IIon> ions;
-		//
+
 		IEclipsePreferences preferences = PreferenceSupplier.INSTANCE().getPreferences();
 		boolean filterMassSpectrum = preferences.getBoolean(PreferenceSupplier.P_FILTER_MASS_SPECTRUM, PreferenceSupplier.DEF_FILTER_MASS_SPECTRUM);
 		int filterLimitIons = preferences.getInt(PreferenceSupplier.P_FILTER_LIMIT_IONS, PreferenceSupplier.DEF_FILTER_LIMIT_IONS);
 		int numberOfIons = massSpectrum.getNumberOfIons();
-		//
+
 		if(filterMassSpectrum && numberOfIons > filterLimitIons) {
-			//
+
 			ions = new ArrayList<IIon>();
-			//
+
 			float[] intensities = new float[massSpectrum.getIons().size()];
 			int i = 0;
 			for(IIon ion : massSpectrum.getIons()) {
 				intensities[i++] = ion.getAbundance();
 			}
-			//
+
 			float maxIntensity = Calculations.getMax(intensities);
 			float medianIntensity = Calculations.getMedian(intensities);
 			float limitIntensity = medianIntensity + ((maxIntensity - medianIntensity) / 6.0f);
 			int moduloValue = numberOfIons / 100;
-			//
+
 			int j = 0;
 			for(IIon ion : massSpectrum.getIons()) {
 				float intensity = ion.getAbundance();

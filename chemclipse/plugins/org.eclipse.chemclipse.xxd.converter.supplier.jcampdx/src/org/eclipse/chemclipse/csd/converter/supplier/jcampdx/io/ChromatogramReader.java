@@ -38,9 +38,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class ChromatogramReader extends AbstractChromatogramCSDReader {
 
 	public static final String CONVERTER_ID_CSD = "org.eclipse.chemclipse.csd.converter.supplier.jcampdx";
-	//
+
 	private static final Logger logger = Logger.getLogger(ChromatogramReader.class);
-	//
+
 	private static final String HEADER_TITLE = "##TITLE=";
 	private static final String HEADER_PROGRAM = "##PROGRAM=";
 	private static final String RETENTION_TIME_MARKER = "##RETENTION_TIME=";
@@ -50,7 +50,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 	private static final String HIT_MARKER = "##HIT=";
 	// private static final String RRT_MARKER = "##RRT=";
 	// private static final String SCAN = "##SCAN";
-	//
+
 	private static final String XYDATA_MARKER_SPACE = "##XYDATA= (XY..XY)";
 	private static final String XYDATA_MARKER_SHORT = "##XYDATA=(X,Y)";
 	private static final String HEADER_MARKER = "##";
@@ -73,7 +73,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 	private IChromatogramCSD readChromatogram(File file) throws IOException {
 
 		IVendorChromatogram chromatogram = new VendorChromatogram();
-		//
+
 		try (FileReader fileReader = new FileReader(file)) {
 			try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
 				String line;
@@ -118,7 +118,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 								}
 							}
 						}
-						//
+
 						if(line != null) {
 							int retentionTime = getRetentionTime(line);
 							if(retentionTime >= 0 && abundance > 0) {
@@ -174,7 +174,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 				chromatogram.setConverterId(CONVERTER_ID_CSD);
 			}
 		}
-		//
+
 		return chromatogram;
 	}
 

@@ -39,25 +39,25 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final int MAX_COUNT_MARKER = Integer.MAX_VALUE;
 	public static final int MIN_MZ = 18;
 	public static final int MAX_MZ = 1000;
-	//
+
 	public static final String P_START_RETENTION_TIME_MINUTES = "startRetentionTimeMinutes";
 	public static final double DEF_START_RETENTION_TIME_MINUTES = 1;
 	public static final String P_STOP_RETENTION_TIME_MINUTES = "stopRetentionTimeMinutes";
 	public static final double DEF_STOP_RETENTION_TIME_MINUTES = 10;
-	//
+
 	public static final String P_STTP_TRANSFER_CLOSEST_SCAN = "scanTargetsToPeakTransferClosestScan";
 	public static final boolean DEF_STTP_TRANSFER_CLOSEST_SCAN = false;
 	public static final String P_STTP_USE_BEST_TARGET_ONLY = "scanTargetsToPeakUseBestTargetOnly";
 	public static final boolean DEF_STTP_USE_BEST_TARGET_ONLY = false;
-	//
+
 	public static final String P_PTTR_USE_BEST_TARGET_ONLY = "peakTargetsToReferencesUseBestTargetOnly";
 	public static final boolean DEF_PTTR_USE_BEST_TARGET_ONLY = false;
 	public static final String P_DELTA_RETENTION_TIME_MINUTES = "peakTargetsToReferencesDeltaRetentionTimeMinutes";
 	public static final double DEF_DELTA_RETENTION_TIME_MINUTES = 0.1;
-	//
+
 	public static final String P_STTR_USE_BEST_TARGET_ONLY = "scanTargetsToReferencesUseBestTargetOnly";
 	public static final boolean DEF_STTR_USE_BEST_TARGET_ONLY = false;
-	//
+
 	public static final String P_USE_RETENTION_INDEX_QC = "qcUseRetentionIndex";
 	public static final boolean DEF_USE_RETENTION_INDEX_QC = false;
 	public static final String P_ION_ROUND_METHOD = "ionRoundMethod";
@@ -95,25 +95,25 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		putDefault(P_START_RETENTION_TIME_MINUTES, Double.toString(DEF_START_RETENTION_TIME_MINUTES));
 		putDefault(P_STOP_RETENTION_TIME_MINUTES, Double.toString(DEF_STOP_RETENTION_TIME_MINUTES));
-		//
+
 		putDefault(P_STTP_TRANSFER_CLOSEST_SCAN, Boolean.toString(DEF_STTP_TRANSFER_CLOSEST_SCAN));
 		putDefault(P_STTP_USE_BEST_TARGET_ONLY, Boolean.toString(DEF_STTP_USE_BEST_TARGET_ONLY));
-		//
+
 		putDefault(P_PTTR_USE_BEST_TARGET_ONLY, Boolean.toString(DEF_PTTR_USE_BEST_TARGET_ONLY));
 		putDefault(P_DELTA_RETENTION_TIME_MINUTES, Double.toString(DEF_DELTA_RETENTION_TIME_MINUTES));
-		//
+
 		putDefault(P_STTR_USE_BEST_TARGET_ONLY, Boolean.toString(DEF_STTR_USE_BEST_TARGET_ONLY));
-		//
+
 		putDefault(P_USE_RETENTION_INDEX_QC, Boolean.toString(DEF_USE_RETENTION_INDEX_QC));
 		putDefault(P_ION_ROUND_METHOD, DEF_ION_ROUND_METHOD);
-		//
+
 		putDefault(P_MAX_DETECTOR_TARGET_NAME, DEF_MAX_DETECTOR_TARGET_NAME);
 		putDefault(P_MAX_DETECTOR_MATCH_FACTOR, Float.toString(DEF_MAX_DETECTOR_MATCH_FACTOR));
 		putDefault(P_MAX_DETECTOR_MINIMA, Boolean.toString(DEF_MAX_DETECTOR_MINIMA));
 		putDefault(P_MAX_DETECTOR_COUNT, Integer.toString(DEF_MAX_DETECTOR_COUNT));
-		//
+
 		putDefault(P_TRANSFORM_MZ, Integer.toString(DEF_TRANSFORM_MZ));
-		//
+
 	}
 
 	public static FilterSettingsSelection getFilterSettingsSelection() {
@@ -133,7 +133,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		FilterSettingsTransform filterSettings = new FilterSettingsTransform();
 		filterSettings.setMz(INSTANCE().getInteger(P_TRANSFORM_MZ, DEF_TRANSFORM_MZ));
-		//
+
 		return filterSettings;
 	}
 
@@ -200,7 +200,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		settings.setMatchFactor(INSTANCE().getFloat(P_MAX_DETECTOR_MATCH_FACTOR, DEF_MAX_DETECTOR_MATCH_FACTOR));
 		settings.setDetectMinima(INSTANCE().getBoolean(P_MAX_DETECTOR_MINIMA, DEF_MAX_DETECTOR_MINIMA));
 		settings.setCount(INSTANCE().getInteger(P_MAX_DETECTOR_COUNT, DEF_MAX_DETECTOR_COUNT));
-		//
+
 		return settings;
 	}
 }

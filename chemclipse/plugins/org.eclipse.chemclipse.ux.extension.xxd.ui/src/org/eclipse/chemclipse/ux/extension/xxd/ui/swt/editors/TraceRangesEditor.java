@@ -56,7 +56,7 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 	public static final String REMOVE_ALL_TOOLTIP = "Remove all stack ranges.";
 	public static final String IMPORT = "Import";
 	public static final String EXPORT = "Export";
-	//
+
 	public static final String IMPORT_TITLE = "Import";
 	public static final String EXPORT_TITLE = "Export";
 	public static final String DIALOG_TITLE = "Stack Ranges";
@@ -66,9 +66,9 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 	public static final String MESSAGE_REMOVE_ALL = "Do you want to delete all stack ranges?";
 	public static final String MESSAGE_EXPORT_SUCCESSFUL = "Stack ranges have been exported successfully.";
 	public static final String MESSAGE_EXPORT_FAILED = "Failed to export the stack ranges.";
-	//
+
 	public static final String EXAMPLE_ENTRY = "1.0 | 3.0 | 0 | 0 | 150 - 160";
-	//
+
 	private AtomicReference<TraceRangesListUI> listControl = new AtomicReference<>();
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private AtomicReference<Button> buttonToolbarSearch = new AtomicReference<>();
@@ -78,7 +78,7 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 	private AtomicReference<Button> buttonRemoveAll = new AtomicReference<>();
 	private AtomicReference<Button> buttonImport = new AtomicReference<>();
 	private AtomicReference<Button> buttonExport = new AtomicReference<>();
-	//
+
 	private TraceRanges traceRanges = new TraceRanges();
 	private Listener listener;
 
@@ -109,13 +109,13 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 	public void addChangeListener(Listener listener) {
 
 		this.listener = listener;
-		//
+
 		Table table = listControl.get().getTable();
 		table.addListener(SWT.Selection, listener);
 		table.addListener(SWT.KeyUp, listener);
 		table.addListener(SWT.MouseUp, listener);
 		table.addListener(SWT.MouseDoubleClick, listener);
-		//
+
 		buttonAdd.get().addListener(SWT.KeyUp, listener);
 		buttonEdit.get().addListener(SWT.KeyUp, listener);
 		buttonRemove.get().addListener(SWT.KeyUp, listener);
@@ -159,11 +159,11 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 		gridLayout.marginWidth = 0;
 		gridLayout.marginHeight = 0;
 		setLayout(gridLayout);
-		//
+
 		createToolbarMain(this);
 		createToolbarSearch(this);
 		createTableSection(this);
-		//
+
 		initialize();
 	}
 
@@ -178,7 +178,7 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 		TraceRangesListUI stackRangesListUI = new TraceRangesListUI(parent, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 		Table table = stackRangesListUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		stackRangesListUI.setEditEnabled(true);
 		stackRangesListUI.setUpdateListener(new IUpdateListener() {
 
@@ -188,10 +188,10 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 				setInput();
 			}
 		});
-		//
+
 		ITableSettings tableSettings = stackRangesListUI.getTableSettings();
 		stackRangesListUI.applySettings(tableSettings);
-		//
+
 		listControl.set(stackRangesListUI);
 	}
 
@@ -202,7 +202,7 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(7, false));
-		//
+
 		createButtonToggleToolbar(composite);
 		createButtonAdd(composite);
 		createButtonEdit(composite);
@@ -229,7 +229,7 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 				listControl.get().setSearchText(searchText, caseSensitive);
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -255,7 +255,7 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 				}
 			}
 		});
-		//
+
 		buttonAdd.set(button);
 	}
 
@@ -285,7 +285,7 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 				}
 			}
 		});
-		//
+
 		buttonEdit.set(button);
 	}
 
@@ -305,7 +305,7 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 				setInput();
 			}
 		});
-		//
+
 		buttonRemove.set(button);
 	}
 
@@ -326,7 +326,7 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 				}
 			}
 		});
-		//
+
 		buttonRemoveAll.set(button);
 	}
 
@@ -355,7 +355,7 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 				}
 			}
 		});
-		//
+
 		buttonImport.set(button);
 	}
 
@@ -389,7 +389,7 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 				}
 			}
 		});
-		//
+
 		buttonExport.set(button);
 	}
 
@@ -398,14 +398,14 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 		if(listControl.get().getStructuredSelection().getFirstElement() instanceof TraceRange traceRange) {
 			return traceRange;
 		}
-		//
+
 		return null;
 	}
 
 	private void setInput() {
 
 		listControl.get().setInput(traceRanges);
-		//
+
 		if(listener != null) {
 			listener.handleEvent(new Event());
 		}

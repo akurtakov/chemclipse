@@ -61,9 +61,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public abstract class AbstractChromatogramMSD extends AbstractChromatogram implements IChromatogramMSD {
 
 	private static final long serialVersionUID = 6481555040060687481L;
-	//
+
 	public static final int DEFAULT_SEGMENT_WIDTH = 10;
-	//
+
 	private IIonTransitionSettings ionTransitionSettings = new IonTransitionSettings();
 	private ImmutableZeroIon immutableZeroIon = new ImmutableZeroIon();
 	private IScanMSD combinedMassSpectrum;
@@ -75,7 +75,7 @@ public abstract class AbstractChromatogramMSD extends AbstractChromatogram imple
 		if(result == null && type == ChromatogramSegmentation.class) {
 			return type.cast(new ChromatogramSegmentation(this, PreferenceSupplier.getSelectedSegmentWidth()));
 		}
-		//
+
 		return result;
 	}
 

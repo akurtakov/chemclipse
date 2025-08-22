@@ -59,7 +59,7 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 	private static final String EDIT_TOOLTIP = "Edit the selected index name marker.";
 	private static final String REMOVE_TOOLTIP = "Remove Selected Marker";
 	private static final String REMOVE_ALL_TOOLTIP = "Remove All Marker";
-	//
+
 	private static final String IMPORT_TITLE = "Import Template";
 	private static final String EXPORT_TITLE = "Export Template";
 	private static final String DIALOG_TITLE = "Index Name Marker";
@@ -69,17 +69,17 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 	private static final String MESSAGE_REMOVE_ALL = "Do you want to delete all marker?";
 	private static final String MESSAGE_EXPORT_SUCCESSFUL = "Marker have been exported successfully.";
 	private static final String MESSAGE_EXPORT_FAILED = "Failed to export the marker.";
-	//
+
 	private static final String CATEGORY = "Retention Index Marker";
 	private static final String DELETE = "Delete";
-	//
+
 	private AtomicReference<Button> buttonSearchControl = new AtomicReference<Button>();
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private AtomicReference<IndexAssignerListUI> tableViewer = new AtomicReference<>();
-	//
+
 	private List<Button> buttons = new ArrayList<>();
 	private List<Listener> listeners = new ArrayList<>();
-	//
+
 	private RetentionIndexAssigner retentionIndexAssigner = new RetentionIndexAssigner();
 
 	public RetentionIndexAssignerEditor(Composite parent, int style) {
@@ -156,11 +156,11 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 		gridLayout.marginWidth = 0;
 		gridLayout.marginHeight = 0;
 		setLayout(gridLayout);
-		//
+
 		createToolbarMain(this);
 		createToolbarSearch(this);
 		createTableSection(this);
-		//
+
 		initialize();
 	}
 
@@ -177,7 +177,7 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(7, false));
-		//
+
 		createButtonToggleSearch(composite);
 		add(createButtonAdd(composite));
 		add(createButtonEdit(composite));
@@ -210,7 +210,7 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 				tableViewer.get().setSearchText(searchText, caseSensitive);
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -224,7 +224,7 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.grabExcessVerticalSpace = true;
 		table.setLayoutData(gridData);
-		//
+
 		indexAssignerListUI.setUpdateListener(new IUpdateListener() {
 
 			@Override
@@ -233,13 +233,13 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 				updateInput();
 			}
 		});
-		//
+
 		Shell shell = indexAssignerListUI.getTable().getShell();
 		ITableSettings tableSettings = indexAssignerListUI.getTableSettings();
 		addDeleteMenuEntry(shell, tableSettings);
 		addKeyEventProcessors(shell, tableSettings);
 		indexAssignerListUI.applySettings(tableSettings);
-		//
+
 		tableViewer.set(indexAssignerListUI);
 	}
 
@@ -265,7 +265,7 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -296,7 +296,7 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -314,7 +314,7 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 				deleteItems(e.display.getActiveShell());
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -335,7 +335,7 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -364,7 +364,7 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -398,7 +398,7 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 

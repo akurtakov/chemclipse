@@ -72,7 +72,7 @@ public class SiriusReader extends AbstractMassSpectraReader implements IMassSpec
 
 		VendorLibraryMassSpectrum massSpectrum = new VendorLibraryMassSpectrum();
 		ILibraryInformation libraryInformation = massSpectrum.getLibraryInformation();
-		//
+
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
 		String line;
 		while((line = bufferedReader.readLine()) != null) {

@@ -19,7 +19,7 @@ package org.eclipse.chemclipse.numeric.equations;
 public class QuadraticEquation implements IQuadraticEquation {
 
 	private static final long serialVersionUID = -5348071897593888033L;
-	//
+
 	private double a;
 	private double b;
 	private double c;
@@ -65,7 +65,7 @@ public class QuadraticEquation implements IQuadraticEquation {
 		if(denominator != 0) {
 			result = (c - y) / denominator;
 		}
-		//
+
 		return result;
 	}
 
@@ -88,13 +88,13 @@ public class QuadraticEquation implements IQuadraticEquation {
 		if(a == 0) {
 			return 0;
 		}
-		//
+
 		double p = b / a;
 		double q = c / a;
 		double x = 0;
 		double parameter1 = -(p / 2);
 		double parameter2 = Math.sqrt(Math.pow((p / 2), 2) - q);
-		//
+
 		switch(result) {
 			case NEGATIVE:
 				x = parameter1 - parameter2;
@@ -103,7 +103,7 @@ public class QuadraticEquation implements IQuadraticEquation {
 				x = parameter1 + parameter2;
 				break;
 		}
-		//
+
 		return x;
 	}
 

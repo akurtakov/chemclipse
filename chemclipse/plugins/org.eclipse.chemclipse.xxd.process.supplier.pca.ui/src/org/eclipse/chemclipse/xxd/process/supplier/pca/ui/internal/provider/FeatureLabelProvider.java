@@ -32,18 +32,18 @@ public class FeatureLabelProvider extends AbstractChemClipseLabelProvider {
 	public static final String USE = "Use";
 	public static final String CLASSIFICATION = "Classification";
 	public static final String DESCRIPTION = "Description";
-	//
+
 	public static final int BOUND_SAMPLE = 100;
 	private DecimalFormat decimalFormat = getDecimalFormat();
 	private FeatureMode featureMode = FeatureMode.ORIGINAL;
-	//
+
 	public static String[] TITLES = {//
 			VARIABLE, //
 			USE, //
 			CLASSIFICATION, //
 			DESCRIPTION //
 	};
-	//
+
 	public static int[] BOUNDS = {//
 			100, //
 			30, //
@@ -81,7 +81,7 @@ public class FeatureLabelProvider extends AbstractChemClipseLabelProvider {
 		String text = "";
 		if(element instanceof Feature feature) {
 			IVariable variable = feature.getVariable();
-			//
+
 			switch(columnIndex) {
 				case 0:
 					text = variable.getValue();

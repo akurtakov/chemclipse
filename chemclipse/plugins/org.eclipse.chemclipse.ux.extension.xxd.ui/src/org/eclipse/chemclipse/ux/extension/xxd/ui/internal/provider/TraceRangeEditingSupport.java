@@ -60,7 +60,7 @@ public class TraceRangeEditingSupport extends EditingSupport {
 					column.equals(TraceRangeLabelProvider.TRACES) || //
 					column.equals(TraceRangeLabelProvider.SECOND_DIMENSION_HINT); //
 		}
-		//
+
 		return canEdit;
 	}
 
@@ -100,7 +100,7 @@ public class TraceRangeEditingSupport extends EditingSupport {
 					traceRange.setSecondDimensionHint(secondDimensionValues[(int)value]);
 					break;
 			}
-			//
+
 			tableViewer.refresh();
 			tableViewer.updateContent();
 		}
@@ -121,7 +121,7 @@ public class TraceRangeEditingSupport extends EditingSupport {
 				break exitloop;
 			}
 		}
-		//
+
 		return index;
 	}
 }

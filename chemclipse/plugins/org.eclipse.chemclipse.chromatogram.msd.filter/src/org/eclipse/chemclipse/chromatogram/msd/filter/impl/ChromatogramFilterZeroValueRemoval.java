@@ -32,7 +32,7 @@ public class ChromatogramFilterZeroValueRemoval extends AbstractChromatogramFilt
 
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = new ProcessingInfo<>();
 		processingInfo.addMessages(validate(chromatogramSelection, chromatogramFilterSettings));
-		//
+
 		if(!processingInfo.hasErrorMessages()) {
 			if(chromatogramFilterSettings instanceof FilterSettingsAdjust) {
 				/*
@@ -69,11 +69,11 @@ public class ChromatogramFilterZeroValueRemoval extends AbstractChromatogramFilt
 					extract.updateSignal();
 				}
 				chromatogramSelection.getChromatogram().setDirty(true);
-				//
+
 				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "Chromatogram Filter Adjust applied"));
 			}
 		}
-		//
+
 		return processingInfo;
 	}
 

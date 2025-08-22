@@ -35,7 +35,7 @@ public class TraceRasteredWSD extends AbstractTrace {
 		StringBuilder builder = new StringBuilder();
 		builder.append(getWavelength());
 		builder.append(getScaleFactorAsString());
-		//
+
 		return builder.toString();
 	}
 }

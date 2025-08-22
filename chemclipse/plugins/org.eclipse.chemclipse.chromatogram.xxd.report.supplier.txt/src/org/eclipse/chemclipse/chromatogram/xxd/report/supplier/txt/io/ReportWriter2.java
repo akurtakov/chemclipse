@@ -42,7 +42,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class ReportWriter2 {
 
 	private static final String DELIMITER = "\t";
-	//
+
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.0000");
 	private DateFormat dateFormat = ValueFormat.getDateFormatEnglish();
 	/*
@@ -119,7 +119,7 @@ public class ReportWriter2 {
 		 * Data
 		 */
 		for(IPeak peakSource : chromatogramSource.getPeaks()) {
-			//
+
 			IPeakModel peakModelSource = peakSource.getPeakModel();
 			int retentionTime = peakModelSource.getRetentionTimeAtPeakMaximum();
 			/*
@@ -181,7 +181,7 @@ public class ReportWriter2 {
 
 		List<IChromatogram> referencedChromatograms = chromatogramSource.getReferencedChromatograms();
 		boolean addPeakArea = reportSettings.isAddPeakArea();
-		//
+
 		int i = 1;
 		for(IChromatogram referencedChromatogram : referencedChromatograms) {
 			String labelArea;
@@ -194,14 +194,14 @@ public class ReportWriter2 {
 			} else {
 				labelArea = "???" + i;
 			}
-			//
+
 			printWriter.print(labelArea + "%");
 			printWriter.print(DELIMITER);
 			if(addPeakArea) {
 				printWriter.print(labelArea);
 				printWriter.print(DELIMITER);
 			}
-			//
+
 			i++;
 		}
 	}
@@ -236,14 +236,14 @@ public class ReportWriter2 {
 			}
 			i++;
 		}
-		//
+
 		return peakAreaSumArray;
 	}
 
 	private void printAreaPercentSum(PrintWriter printWriter, double[] chromatogramAreaSumArray, double[] peakAreaSumArray, ReportSettings2 reportSettings) {
 
 		boolean addPeakArea = reportSettings.isAddPeakArea();
-		//
+
 		if(chromatogramAreaSumArray.length == peakAreaSumArray.length) {
 			int size = chromatogramAreaSumArray.length;
 			for(int i = 0; i < size; i++) {
@@ -262,14 +262,14 @@ public class ReportWriter2 {
 		List<IChromatogram> referencedChromatograms = chromatogram.getReferencedChromatograms();
 		int size = 1 + referencedChromatograms.size();
 		double[] chromatogramAreaSumArray = new double[size];
-		//
+
 		chromatogramAreaSumArray[0] = chromatogram.getPeakIntegratedArea();
-		//
+
 		int i = 1;
 		for(IChromatogram referencedChromatogram : referencedChromatograms) {
 			chromatogramAreaSumArray[i++] = referencedChromatogram.getPeakIntegratedArea();
 		}
-		//
+
 		return chromatogramAreaSumArray;
 	}
 
@@ -283,19 +283,19 @@ public class ReportWriter2 {
 	private IPeak getReferencedPeak(IPeak peakSource, ILibraryInformation libraryInformationSource, IChromatogram referencedChromatogram, ReportSettings2 reportSettings) {
 
 		if(peakSource != null && libraryInformationSource != null && referencedChromatogram != null) {
-			//
+
 			IPeakModel peakModelSource = peakSource.getPeakModel();
 			int retentionTimeSource = peakModelSource.getRetentionTimeAtPeakMaximum();
 			int startRetentionTime = peakModelSource.getStartRetentionTime() - reportSettings.getDeltaRetentionTimeLeft();
 			int stopRetentionTime = peakModelSource.getStopRetentionTime() - reportSettings.getDeltaRetentionTimeRight();
 			boolean useBestMatch = reportSettings.isUseBestMatch();
-			//
+
 			List<IPeak> peaksOfInterest = extractPeaksOfInterest(referencedChromatogram, startRetentionTime, stopRetentionTime);
 			if(!peaksOfInterest.isEmpty()) {
 				return extractBestMatchingPeak(peaksOfInterest, retentionTimeSource, libraryInformationSource, useBestMatch);
 			}
 		}
-		//
+
 		return null;
 	}
 
@@ -392,7 +392,7 @@ public class ReportWriter2 {
 		if(peak instanceof IChromatogramPeakMSD peakMSD) {
 			purity = peakMSD.getPurity();
 		}
-		//
+
 		return purity;
 	}
 
@@ -403,7 +403,7 @@ public class ReportWriter2 {
 		if(!quantitationEntries.isEmpty()) {
 			area = quantitationEntries.get(0).getArea();
 		}
-		//
+
 		return area;
 	}
 
@@ -418,7 +418,7 @@ public class ReportWriter2 {
 			}
 			peakAreaPercent = getPercentagePeakArea(chromatogramPeakArea, peak.getIntegratedArea());
 		}
-		//
+
 		return peakAreaPercent;
 	}
 
@@ -428,7 +428,7 @@ public class ReportWriter2 {
 		if(chromatogramPeakArea > 0) {
 			peakAreaPercent = (100.0d / chromatogramPeakArea) * integratedArea;
 		}
-		//
+
 		return peakAreaPercent;
 	}
 
@@ -438,7 +438,7 @@ public class ReportWriter2 {
 		if(peakModel instanceof IPeakModelMSD peakModelMSD) {
 			retentionIndex = peakModelMSD.getPeakMassSpectrum().getRetentionIndex();
 		}
-		//
+
 		return retentionIndex;
 	}
 }

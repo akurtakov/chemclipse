@@ -40,7 +40,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class AlkaneIdentifier {
 
 	public static final String IDENTIFIER = "Alkanes Identifier"; // $NON-NLS-N$
-	//
+
 	private final String massSpectraFiles; // Initialized in constructor.
 	private final DatabasesCache databasesCache; // Initialized in constructor.
 
@@ -99,7 +99,7 @@ public class AlkaneIdentifier {
 		if(isValid(identificationTarget)) {
 			massSpectra.addMassSpectra(databasesCache.getDatabaseMassSpectra(identificationTarget, monitor));
 		}
-		//
+
 		return massSpectra;
 	}
 

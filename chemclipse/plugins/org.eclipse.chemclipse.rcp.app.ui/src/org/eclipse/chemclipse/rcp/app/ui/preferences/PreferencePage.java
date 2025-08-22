@@ -80,7 +80,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		 */
 		Label label = new Label(composite, SWT.NONE);
 		label.setText("Selected Profile:");
-		//
+
 		selectedProfileFieldEditor = new Label(composite, SWT.NONE);
 		selectedProfileFieldEditor.setText(getPreferenceStore().getString(PreferenceSupplier.P_SELECTED_PROFILE));
 		selectedProfileFieldEditor.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -123,7 +123,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		availableProfilesCombo = EnhancedCombo.create(composite, SWT.NONE);
 		availableProfilesCombo.setItems(getProfileNames());
 		availableProfilesCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		Button loadProfile = new Button(composite, SWT.NONE);
 		loadProfile.setText("Load profile");
 		loadProfile.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -167,7 +167,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		 */
 		newProfileNameText = new Text(composite, SWT.BORDER);
 		newProfileNameText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		Button saveProfile = new Button(composite, SWT.NONE);
 		saveProfile.setText("Save settings as profile");
 		saveProfile.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));

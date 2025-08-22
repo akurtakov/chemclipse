@@ -25,10 +25,10 @@ public class ProcessorTableComparator extends AbstractRecordTableComparator impl
 
 		int sortOrder = 0;
 		if(e1 instanceof Processor processor1 && e2 instanceof Processor processor2) {
-			//
+
 			IProcessSupplier<?> processSupplier1 = processor1.getProcessSupplier();
 			IProcessSupplier<?> processSupplier2 = processor2.getProcessSupplier();
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = processSupplier2.getName().compareTo(processSupplier1.getName());
@@ -49,11 +49,11 @@ public class ProcessorTableComparator extends AbstractRecordTableComparator impl
 					sortOrder = 0;
 			}
 		}
-		//
+
 		if(getDirection() == ASCENDING) {
 			sortOrder = -sortOrder;
 		}
-		//
+
 		return sortOrder;
 	}
 }

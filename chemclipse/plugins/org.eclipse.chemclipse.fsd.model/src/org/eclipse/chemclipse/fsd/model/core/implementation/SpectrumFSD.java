@@ -21,7 +21,7 @@ import org.eclipse.chemclipse.model.core.AbstractMeasurementInfo;
 public class SpectrumFSD extends AbstractMeasurementInfo implements ISpectrumFSD {
 
 	private static final long serialVersionUID = -8354507225461817214L;
-	//
+
 	private TreeSet<ISignalFSD> emission = new TreeSet<>();
 	private TreeSet<ISignalFSD> excitation = new TreeSet<>();
 

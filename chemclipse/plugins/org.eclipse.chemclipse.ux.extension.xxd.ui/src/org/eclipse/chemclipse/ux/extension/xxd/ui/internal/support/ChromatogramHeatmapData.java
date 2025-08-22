@@ -31,7 +31,7 @@ public class ChromatogramHeatmapData {
 	public ChromatogramHeatmapData(IPrimaryArrayWrapper arrayWrapper, Range axisRangeWidth, Range axisRangeHeight, double minimum, double maximum, int dataWidth, int dataHeight) {
 
 		super();
-		//
+
 		this.axisRangeWidth = axisRangeWidth;
 		this.axisRangeHeight = axisRangeHeight;
 		this.arrayWrapper = arrayWrapper;
@@ -44,7 +44,7 @@ public class ChromatogramHeatmapData {
 	public ChromatogramHeatmapData(IPrimaryArrayWrapper arrayWrapper, Range axisRangeWidth, Range axisRangeHeight, double minimum, double maximum, int dataWidth, int dataHeight, String axisLabelX, String axisLabelY) {
 
 		super();
-		//
+
 		this.axisRangeWidth = axisRangeWidth;
 		this.axisRangeHeight = axisRangeHeight;
 		this.arrayWrapper = arrayWrapper;

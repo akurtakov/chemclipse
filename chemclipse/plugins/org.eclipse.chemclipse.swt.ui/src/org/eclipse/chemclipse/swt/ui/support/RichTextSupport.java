@@ -147,7 +147,7 @@ public class RichTextSupport {
 				useRichTextEditor = BROWSER_AVAILABLE;
 			}
 		}
-		//
+
 		return useRichTextEditor;
 	}
 

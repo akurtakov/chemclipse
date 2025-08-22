@@ -30,7 +30,7 @@ public class ColumnIndicesLabelProvider extends AbstractChemClipseLabelProvider 
 	public static final String DIAMETER = "Diameter";
 	public static final String PHASE = "Phase";
 	public static final String THICKNESS = "Thickness";
-	//
+
 	public static final String[] TITLES = { //
 			RETENTION_INDEX, //
 			NAME, //
@@ -42,7 +42,7 @@ public class ColumnIndicesLabelProvider extends AbstractChemClipseLabelProvider 
 			PHASE, //
 			THICKNESS //
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			100, //
 			100, //

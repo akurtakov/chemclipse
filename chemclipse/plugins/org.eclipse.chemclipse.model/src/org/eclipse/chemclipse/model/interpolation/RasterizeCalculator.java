@@ -37,13 +37,13 @@ public class RasterizeCalculator {
 				dataAdjusted = new HashMap<>();
 				Entry<Float, Float> firstWavelengthEntry = dataOriginal.firstEntry();
 				Entry<Float, Float> lastWavelengthEntry = dataOriginal.lastEntry();
-				//
+
 				int startWavelengh = Math.round(firstWavelengthEntry.getKey());
 				adjust(dataAdjusted, startWavelengh, firstWavelengthEntry, dataOriginal.ceilingEntry((float)(startWavelengh + 1)));
-				//
+
 				int stopWavelengh = Math.round(lastWavelengthEntry.getKey());
 				adjust(dataAdjusted, stopWavelengh, dataOriginal.floorEntry((float)(stopWavelengh - 1)), lastWavelengthEntry);
-				//
+
 				for(int wavelength = (startWavelengh + 1); wavelength <= (stopWavelengh - 1); wavelength++) {
 					if(wavelength % steps == 0) {
 						Entry<Float, Float> floorEntry = dataOriginal.floorEntry((float)wavelength);
@@ -53,7 +53,7 @@ public class RasterizeCalculator {
 				}
 			}
 		}
-		//
+
 		return dataAdjusted;
 	}
 

@@ -48,7 +48,7 @@ public abstract class AbstractCosineComparator extends AbstractMassSpectrumCompa
 					() -> calculateCosinePhiDirect(referenceSignal, unknownSignal), //
 					matchConstraints //
 			);
-			//
+
 			processingInfo.setProcessingResult(massSpectrumComparisonResult);
 		}
 		return processingInfo;
@@ -78,7 +78,7 @@ public abstract class AbstractCosineComparator extends AbstractMassSpectrumCompa
 		 */
 		ArrayRealVector unknownVector = new ArrayRealVector(unknown);
 		ArrayRealVector referenceVector = new ArrayRealVector(reference);
-		//
+
 		try {
 			return unknownVector.cosine(referenceVector) * 100;
 		} catch(MathArithmeticException | DimensionMismatchException e) {
@@ -96,7 +96,7 @@ public abstract class AbstractCosineComparator extends AbstractMassSpectrumCompa
 				ionList.add(ion);
 			}
 		}
-		//
+
 		double unknown[] = new double[ionList.size()];
 		double reference[] = new double[ionList.size()];
 		int j = 0;

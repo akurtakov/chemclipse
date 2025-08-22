@@ -73,7 +73,7 @@ public class HighResolutionSupport {
 				IChromatogramMSD chromatogramReferenceMSD = new ChromatogramMSD();
 				chromatogramReferenceMSD.setConverterId(chromatogramMSD.getConverterId());
 				HeaderUtil.setHeaderData(chromatogramReferenceMSD, headerField, trace.toString());
-				//
+
 				List<Integer> retentionTimes = new ArrayList<>(scans.keySet());
 				Collections.sort(retentionTimes);
 				for(int retentionTime : retentionTimes) {
@@ -86,12 +86,12 @@ public class HighResolutionSupport {
 						chromatogramReferenceMSD.addScan(scanMSD);
 					}
 				}
-				//
+
 				ChromatogramSupport.calculateScanIntervalAndDelay(chromatogramReferenceMSD);
 				chromatograms.add(chromatogramReferenceMSD);
 			}
 		}
-		//
+
 		return chromatograms;
 	}
 }

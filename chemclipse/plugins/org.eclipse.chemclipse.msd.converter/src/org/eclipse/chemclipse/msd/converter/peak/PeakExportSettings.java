@@ -65,7 +65,7 @@ public class PeakExportSettings extends AbstractProcessSettings implements IProc
 		if(filenamePattern == null) {
 			return VARIABLE_CHROMATOGRAM_NAME + VARIABLE_EXTENSION;
 		}
-		//
+
 		return filenamePattern;
 	}
 

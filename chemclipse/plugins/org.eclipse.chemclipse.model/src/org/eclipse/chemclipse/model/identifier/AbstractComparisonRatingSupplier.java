@@ -15,7 +15,7 @@ package org.eclipse.chemclipse.model.identifier;
 public abstract class AbstractComparisonRatingSupplier implements IRatingSupplier {
 
 	private static final long serialVersionUID = -4927422343294543420L;
-	//
+
 	private static final float RATING_VERY_GOOD = 90.0f;
 	private static final float RATING_GOOD = 80.0f;
 	private static final float RATING_AVERAGE = 70.0f;
@@ -31,7 +31,7 @@ public abstract class AbstractComparisonRatingSupplier implements IRatingSupplie
 
 		float rating = getScore();
 		RatingStatus ratingScheme;
-		//
+
 		if(rating >= RATING_VERY_GOOD) {
 			ratingScheme = RatingStatus.VERY_GOOD;
 		} else if(rating >= RATING_GOOD) {
@@ -43,7 +43,7 @@ public abstract class AbstractComparisonRatingSupplier implements IRatingSupplie
 		} else {
 			ratingScheme = RatingStatus.VERY_BAD;
 		}
-		//
+
 		return ratingScheme;
 	}
 

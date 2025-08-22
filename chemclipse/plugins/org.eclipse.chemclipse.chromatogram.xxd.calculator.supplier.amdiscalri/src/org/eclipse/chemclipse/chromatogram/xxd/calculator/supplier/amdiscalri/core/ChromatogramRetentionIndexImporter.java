@@ -60,7 +60,7 @@ public class ChromatogramRetentionIndexImporter implements IProcessTypeSupplier 
 			RetentionIndexImporter retentionIndexImporter = new RetentionIndexImporter();
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 			retentionIndexImporter.apply(chromatogram, processSettings);
-			//
+
 			return chromatogramSelection;
 		}
 	}

@@ -54,7 +54,7 @@ public class IntegrationAreaPart extends AbstractPart<ExtendedIntegrationAreaUI>
 			getControl().update(object);
 			return true;
 		}
-		//
+
 		return false;
 	}
 

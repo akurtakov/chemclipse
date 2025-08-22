@@ -29,7 +29,7 @@ public class SeparationColumnMapping extends HashMap<String, String> {
 
 	private static final long serialVersionUID = -7471629528422149178L;
 	private static final Logger logger = Logger.getLogger(SeparationColumnMapping.class);
-	//
+
 	public static final String SEPARATOR_TOKEN = ";";
 	public static final String SEPARATOR_ENTRY = "|";
 
@@ -121,7 +121,7 @@ public class SeparationColumnMapping extends HashMap<String, String> {
 
 		String lineDelimiterSpecific = OperatingSystemUtils.getLineDelimiter();
 		String lineDelimiterGeneric = "\n";
-		//
+
 		String[] decodedArray;
 		if(stringList.contains(SEPARATOR_TOKEN)) {
 			decodedArray = stringList.split(SEPARATOR_TOKEN);

@@ -39,13 +39,13 @@ public class FeatureListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = FeatureLabelProvider.TITLES;
 	private static final int[] BOUNDS = FeatureLabelProvider.BOUNDS;
-	//
+
 	private final FeatureLabelProvider labelProviderOriginal = new FeatureLabelProvider("#,##0", FeatureMode.ORIGINAL);
 	private final FeatureLabelProvider labelProviderPreprocessed = new FeatureLabelProvider("0.00##", FeatureMode.PREPROCESSED);
 	private final ViewerComparator comparator = new FeatureComparator();
 	private final FeatureListFilter listFilter = new FeatureListFilter();
 	private final VisualSelectionFilter selectFilter = new VisualSelectionFilter();
-	//
+
 	private IUpdateListener updateListener = null;
 	private FeatureMode featureMode = FeatureMode.ORIGINAL;
 	private FeatureColumnLabels columnLabels = FeatureColumnLabels.SAMPLENAMES;
@@ -138,7 +138,7 @@ public class FeatureListUI extends ExtendedTableViewer {
 		} else {
 			columnNames = featureDataMatrix.getGroupNames();
 		}
-		//
+
 		List<String> titleList = new ArrayList<>();
 		List<Integer> boundList = new ArrayList<>();
 		/*
@@ -152,7 +152,7 @@ public class FeatureListUI extends ExtendedTableViewer {
 			if(FeatureLabelProvider.VARIABLE.equals(title)) {
 				title = variableName;
 			}
-			//
+
 			titleList.add(title);
 			boundList.add(BOUNDS[i]);
 		}
@@ -163,14 +163,14 @@ public class FeatureListUI extends ExtendedTableViewer {
 			titleList.add(sampleName);
 			boundList.add(FeatureLabelProvider.BOUND_SAMPLE);
 		}
-		//
+
 		String[] titles = titleList.toArray(new String[titleList.size()]);
 		int size = boundList.size();
 		int[] bounds = new int[size];
 		for(int i = 0; i < size; i++) {
 			bounds[i] = boundList.get(i);
 		}
-		//
+
 		super.setInput(null);
 		if(featureMode.equals(FeatureMode.ORIGINAL)) {
 			createColumns(titles, bounds, labelProviderOriginal, comparator);

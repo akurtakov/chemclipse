@@ -53,11 +53,11 @@ public class SignalToNoisePeakFilter extends AbstractPeakFilter<SignalToNoisePea
 	public void filterPeaks(IChromatogramSelection chromatogramSelection, SignalToNoisePeakFilterSettings configuration, ProcessExecutionContext context) throws IllegalArgumentException {
 
 		Collection<IPeak> peaks = getReadOnlyPeaks(chromatogramSelection);
-		//
+
 		if(configuration == null) {
 			configuration = new SignalToNoisePeakFilterSettings();
 		}
-		//
+
 		float maxSignalToNoise = configuration.getMaxSignalToNoise();
 		float minSignalToNoise = configuration.getMinSignalToNoise();
 		List<IPeak> peaksToDelete = new ArrayList<>();
@@ -71,7 +71,7 @@ public class SignalToNoisePeakFilter extends AbstractPeakFilter<SignalToNoisePea
 				}
 			}
 		}
-		//
+
 		deletePeaks(peaksToDelete, chromatogramSelection);
 		resetPeakSelection(chromatogramSelection);
 	}

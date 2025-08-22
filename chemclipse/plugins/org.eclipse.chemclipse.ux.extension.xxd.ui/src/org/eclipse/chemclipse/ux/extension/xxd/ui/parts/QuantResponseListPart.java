@@ -53,7 +53,7 @@ public class QuantResponseListPart extends AbstractPart<ExtendedQuantResponseLis
 				return false;
 			}
 		}
-		//
+
 		return false;
 	}
 

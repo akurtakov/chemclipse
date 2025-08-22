@@ -55,7 +55,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class PCRExportConverter extends AbstractPlateExportConverter implements IPlateExportConverter {
 
 	public static final String TOPIC_PROCESSING_FILE_CREATED = "processing/file/created/pcr/excel"; // $NON-NLS-1$
-	//
+
 	private static final Logger logger = Logger.getLogger(PCRExportConverter.class);
 	private static final String DESCRIPTION = "PCR Excel Export";
 
@@ -63,7 +63,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 	public IProcessingInfo<File> convert(File file, IPlate plate, IProgressMonitor monitor) {
 
 		IProcessingInfo<File> processingInfo = new ProcessingInfo<>();
-		//
+
 		try (XSSFWorkbook workbook = new XSSFWorkbook();) {
 			XSSFSheet sheet = workbook.createSheet(HeaderMessages.results);
 			XSSFCellStyle style = workbook.createCellStyle();
@@ -82,7 +82,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 			headerStyle.setBorderTop(BorderStyle.THIN);
 			headerStyle.setBorderRight(BorderStyle.THIN);
 			headerStyle.setBorderLeft(BorderStyle.THIN);
-			//
+
 			if(plate != null) {
 				try {
 					Map<String, String> headerDataMap = plate.getHeaderDataMap();
@@ -138,7 +138,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 		if(Utils.isEmpty(plate, targetSubset)) {
 			return;
 		}
-		//
+
 		XSSFRow header = sheet.createRow(sheet.getLastRowNum() + 1);
 		XSSFCell positionHeaderCell = header.createCell(0);
 		positionHeaderCell.setCellValue(HeaderMessages.pos);
@@ -152,7 +152,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 		XSSFCell subsetHeaderCell = header.createCell(3);
 		subsetHeaderCell.setCellValue(HeaderMessages.subset);
 		subsetHeaderCell.setCellStyle(headerStyle);
-		//
+
 		ChannelMappings channelMappings = PreferenceSupplier.getChannelMappings();
 		for(ChannelMapping channelMapping : channelMappings) {
 			if(channelMapping.getSubset().equalsIgnoreCase(targetSubset)) {
@@ -198,7 +198,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 					String subset = dataMap.getOrDefault(IWell.SAMPLE_SUBSET, "");
 					subsetCell.setCellValue(subset);
 					subsetCell.setCellStyle(style);
-					//
+
 					List<Integer> keys = new ArrayList<>(well.getChannels().keySet());
 					Collections.sort(keys);
 					int cellNumber = 4;
@@ -206,11 +206,11 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 						IChannel channel = well.getChannels().get(key);
 						double crossingPoint = channel.getCrossingPoint();
 						XSSFCell channelCell = data.createCell(cellNumber);
-						//
+
 						if(channelCell.getColumnIndex() <= header.getLastCellNum() - 1) {
 							channelCell.setCellStyle(style);
 						}
-						//
+
 						if(crossingPoint > 0) {
 							empty = false;
 							channelCell.setCellValue(crossingPoint);

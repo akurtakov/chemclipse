@@ -57,7 +57,7 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 	private static final String ADD_TOOLTIP = "Add a new column mapping";
 	private static final String REMOVE_TOOLTIP = "Remove the selected column mappings";
 	private static final String REMOVE_ALL_TOOLTIP = "Remove All Mappings";
-	//
+
 	private static final String IMPORT_TITLE = "Import Mappings";
 	private static final String EXPORT_TITLE = "Export Mappings";
 	private static final String MESSAGE_ADD = "You can create a new column mapping here.";
@@ -65,10 +65,10 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 	private static final String MESSAGE_REMOVE_ALL = "Do you want to delete all column mappings?";
 	private static final String MESSAGE_EXPORT_SUCCESSFUL = "Column mappings have been exported successfully.";
 	private static final String MESSAGE_EXPORT_FAILED = "Failed to export the column mappings.";
-	//
+
 	private static final String CATEGORY = "Column Mapping";
 	private static final String DELETE = "Delete";
-	//
+
 	private List<Button> buttons = new ArrayList<>();
 	private AtomicReference<Button> buttonAdd = new AtomicReference<>();
 	private AtomicReference<Button> buttonRemove = new AtomicReference<>();
@@ -78,9 +78,9 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private AtomicReference<Button> buttonToolbarSearchControl = new AtomicReference<>();
 	private AtomicReference<ColumnMappingListUI> listControl = new AtomicReference<>();
-	//
+
 	private SeparationColumnMapping separationColumnMapping = new SeparationColumnMapping();
-	//
+
 	private Listener listener;
 
 	public ColumnMappingEditorUI(Composite parent, int style) {
@@ -119,13 +119,13 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 	public void addChangeListener(Listener listener) {
 
 		this.listener = listener;
-		//
+
 		Table table = listControl.get().getTable();
 		table.addListener(SWT.Selection, listener);
 		table.addListener(SWT.KeyUp, listener);
 		table.addListener(SWT.MouseUp, listener);
 		table.addListener(SWT.MouseDoubleClick, listener);
-		//
+
 		buttonAdd.get().addListener(SWT.KeyUp, listener);
 		buttonRemove.get().addListener(SWT.KeyUp, listener);
 		buttonRemoveAll.get().addListener(SWT.KeyUp, listener);
@@ -139,11 +139,11 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 		gridLayout.marginWidth = 0;
 		gridLayout.marginHeight = 0;
 		setLayout(gridLayout);
-		//
+
 		createToolbarMain(this);
 		createSearchSection(this);
 		createTableSection(this);
-		//
+
 		initialize();
 	}
 
@@ -160,7 +160,7 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(6, false));
-		//
+
 		createButtonToggleSearch(composite);
 		createButtonAdd(composite);
 		createButtonRemove(composite);
@@ -193,7 +193,7 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 				listControl.get().setSearchText(searchText, caseSensitive);
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -204,13 +204,13 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 		GridData gridData = new GridData(GridData.FILL_BOTH);
 		gridData.widthHint = 350;
 		table.setLayoutData(gridData);
-		//
+
 		Shell shell = table.getShell();
 		ITableSettings tableSettings = columnMappingListUI.getTableSettings();
 		addDeleteMenuEntry(shell, tableSettings);
 		addKeyEventProcessors(shell, tableSettings);
 		columnMappingListUI.applySettings(tableSettings);
-		//
+
 		listControl.set(columnMappingListUI);
 	}
 
@@ -244,7 +244,7 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 						return null;
 					}
 				});
-				//
+
 				if(IDialogConstants.OK_ID == dialog.open()) {
 					String item = dialog.getValue().trim();
 					if(!"".equals(item)) {
@@ -256,7 +256,7 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 				}
 			}
 		});
-		//
+
 		add(button);
 		buttonAdd.set(button);
 	}
@@ -275,7 +275,7 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 				deleteItems(e.display.getActiveShell());
 			}
 		});
-		//
+
 		add(button);
 		buttonRemove.set(button);
 	}
@@ -297,7 +297,7 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 				}
 			}
 		});
-		//
+
 		add(button);
 		buttonRemoveAll.set(button);
 	}
@@ -327,7 +327,7 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 				}
 			}
 		});
-		//
+
 		add(button);
 		buttonImport.set(button);
 	}
@@ -362,7 +362,7 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 				}
 			}
 		});
-		//
+
 		add(button);
 		buttonExport.set(button);
 	}

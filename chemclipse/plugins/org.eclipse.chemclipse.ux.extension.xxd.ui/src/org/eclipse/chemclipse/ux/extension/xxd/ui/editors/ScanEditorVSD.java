@@ -53,22 +53,22 @@ import jakarta.inject.Inject;
 public class ScanEditorVSD implements IScanEditorVSD {
 
 	private static final Logger logger = Logger.getLogger(ScanEditorVSD.class);
-	//
+
 	public static final String ID = "org.eclipse.chemclipse.ux.extension.xxd.ui.part.scanEditorVSD";
 	public static final String CONTRIBUTION_URI = "bundleclass://org.eclipse.chemclipse.ux.extension.xxd.ui/org.eclipse.chemclipse.ux.extension.xxd.ui.editors.ScanEditorVSD";
 	public static final String ICON_URI = ApplicationImageFactory.getInstance().getURI(IApplicationImage.IMAGE_SCAN_VSD, IApplicationImageProvider.SIZE_16x16);
 	public static final String TOOLTIP = ExtensionMessages.editorVSD;
-	//
+
 	private final MPart part;
 	private final MDirtyable dirtyable;
 	private final EModelService modelService;
 	private final MApplication application;
-	//
+
 	private File scanFile;
 	private ExtendedVSDScanUI extendedScanVSDEditorUI;
-	//
+
 	private ISpectrumVSD scanVSD = null;
-	//
+
 	private final Shell shell;
 
 	@Inject
@@ -79,7 +79,7 @@ public class ScanEditorVSD implements IScanEditorVSD {
 		this.modelService = modelService;
 		this.application = application;
 		this.shell = shell;
-		//
+
 		initialize(parent);
 	}
 
@@ -94,7 +94,7 @@ public class ScanEditorVSD implements IScanEditorVSD {
 
 		List<String> clearTopics = Arrays.asList();
 		UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_EDITOR_VSD_CLOSE, clearTopics);
-		//
+
 		if(modelService != null && application != null) {
 			MPartStack partStack = (MPartStack)modelService.find(IPerspectiveAndViewIds.EDITOR_PART_STACK_ID, application);
 			part.setToBeRendered(false);
@@ -139,7 +139,7 @@ public class ScanEditorVSD implements IScanEditorVSD {
 	private synchronized ISpectrumVSD loadScan() {
 
 		ISpectrumVSD scanVSD = null;
-		//
+
 		try {
 			Object object = part.getObject();
 			if(object instanceof Map<?, ?> map) {
@@ -153,7 +153,7 @@ public class ScanEditorVSD implements IScanEditorVSD {
 		} catch(Exception e) {
 			logger.error(e);
 		}
-		//
+
 		return scanVSD;
 	}
 
@@ -173,7 +173,7 @@ public class ScanEditorVSD implements IScanEditorVSD {
 			logger.warn(e);
 			Thread.currentThread().interrupt();
 		}
-		//
+
 		scanFile = file;
 		return runnable.getSpectrumVSD();
 	}

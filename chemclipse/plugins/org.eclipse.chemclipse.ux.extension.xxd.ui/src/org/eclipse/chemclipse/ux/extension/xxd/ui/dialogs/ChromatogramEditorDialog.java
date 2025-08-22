@@ -40,10 +40,10 @@ public class ChromatogramEditorDialog extends Dialog {
 
 	private static final int WIDTH = 450;
 	private static final int HEIGHT = 150;
-	//
+
 	private IChromatogram chromatogramMaster = null;
 	private IChromatogramSelection chromatogramSelection = null;
-	//
+
 	private ComboViewer comboViewer;
 	private EditorUpdateSupport editorUpdateSupport = new EditorUpdateSupport();
 
@@ -97,10 +97,10 @@ public class ChromatogramEditorDialog extends Dialog {
 		layout.marginRight = 10;
 		layout.marginLeft = 10;
 		composite.setLayout(layout);
-		//
+
 		createLabel(composite);
 		createComboViewer(composite);
-		//
+
 		return composite;
 	}
 
@@ -128,7 +128,7 @@ public class ChromatogramEditorDialog extends Dialog {
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select a chromatogram.");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
@@ -144,7 +144,7 @@ public class ChromatogramEditorDialog extends Dialog {
 				}
 			}
 		});
-		//
+
 		updateComboViewer(chromatogramMaster);
 	}
 
@@ -156,7 +156,7 @@ public class ChromatogramEditorDialog extends Dialog {
 		} else {
 			label = name + " " + type;
 		}
-		//
+
 		return label;
 	}
 

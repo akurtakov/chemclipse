@@ -17,7 +17,7 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.l10n.messages"; //$NON-NLS-1$
-	//
+
 	public static String addIonToAnalyze;
 	public static String ion;
 	public static String ionValueMustBeInteger;
@@ -29,7 +29,7 @@ public class Messages extends NLS {
 	public static String percentageSumIntensity;
 	public static String wncClassifierSettings;
 	public static String targetTrace;
-	//
+
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}

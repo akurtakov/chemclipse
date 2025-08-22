@@ -104,7 +104,7 @@ public class TraceRangeMatcher {
 				}
 			}
 		}
-		//
+
 		return selection;
 	}
 
@@ -126,7 +126,7 @@ public class TraceRangeMatcher {
 				traceIndices.addAll(traceRange.getTraceIndices());
 			}
 		}
-		//
+
 		return traceIndices;
 	}
 
@@ -141,7 +141,7 @@ public class TraceRangeMatcher {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 

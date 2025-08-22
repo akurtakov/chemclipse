@@ -30,7 +30,7 @@ public abstract class ModifierChromatogramFilter extends AbstractChromatogramFil
 		int startScan = chromatogram.getScanNumber(chromatogramSelection.getStartRetentionTime());
 		int stopScan = chromatogram.getScanNumber(chromatogramSelection.getStopRetentionTime());
 		ITotalScanSignals totalScanSignals;
-		//
+
 		try {
 			ITotalScanSignalExtractor totalScanSignalExtractor = new TotalScanSignalExtractor(chromatogram);
 			totalScanSignals = totalScanSignalExtractor.getTotalScanSignals(startScan, stopScan);

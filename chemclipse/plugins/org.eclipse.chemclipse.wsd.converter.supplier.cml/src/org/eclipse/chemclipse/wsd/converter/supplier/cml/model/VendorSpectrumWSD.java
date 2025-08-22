@@ -17,7 +17,7 @@ import org.eclipse.chemclipse.wsd.model.core.implementation.SpectrumWSD;
 public class VendorSpectrumWSD extends SpectrumWSD implements IVendorSpectrumWSD {
 
 	private static final long serialVersionUID = 3417781730819762939L;
-	//
+
 	private String casNumber = "";
 
 	@Override

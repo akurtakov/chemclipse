@@ -91,7 +91,7 @@ public class ColumMappingEditingSupport extends EditingSupport {
 				return i;
 			}
 		}
-		//
+
 		return 0; // Default
 	}
 }

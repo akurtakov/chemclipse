@@ -26,7 +26,7 @@ public class ScanFiller {
 	public static void autofillScans(IChromatogramSelection chromatogramSelection, FilterSettingsScanFiller filterSettings) {
 
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
-		//
+
 		if(!chromatogram.getScans().isEmpty()) {
 			int scanInterval = chromatogram.getScanInterval();
 			if(scanInterval > 0) {

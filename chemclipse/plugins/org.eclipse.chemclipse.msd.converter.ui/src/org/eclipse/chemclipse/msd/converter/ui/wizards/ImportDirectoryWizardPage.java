@@ -44,15 +44,15 @@ public class ImportDirectoryWizardPage extends WizardPage {
 		Composite container = new Composite(parent, SWT.NONE);
 		GridLayout layout = new GridLayout(2, false);
 		container.setLayout(layout);
-		//
+
 		GridData layoutData = new GridData(GridData.GRAB_HORIZONTAL | GridData.GRAB_VERTICAL | GridData.HORIZONTAL_ALIGN_FILL | GridData.VERTICAL_ALIGN_CENTER);
 		layoutData.widthHint = convertHorizontalDLUsToPixels(IDialogConstants.MINIMUM_MESSAGE_AREA_WIDTH);
-		//
+
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.grabExcessHorizontalSpace = true;
 		textDirectory = new Text(container, SWT.BORDER);
 		textDirectory.setLayoutData(gridData);
-		//
+
 		Button button = new Button(container, SWT.NONE);
 		button.setText("Select Folder");
 		button.addSelectionListener(new SelectionAdapter() {

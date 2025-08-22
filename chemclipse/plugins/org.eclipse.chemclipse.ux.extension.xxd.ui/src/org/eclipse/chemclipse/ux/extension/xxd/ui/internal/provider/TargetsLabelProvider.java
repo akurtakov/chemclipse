@@ -59,14 +59,14 @@ public class TargetsLabelProvider extends AbstractChemClipseLabelProvider {
 	public static final String RETENTION_INDEX = ExtensionMessages.retentionIndex;
 	public static final String REFERENCE_ID = ExtensionMessages.referenceID;
 	public static final String INLIB_FACTOR = ExtensionMessages.inLibFactor;
-	//
+
 	public static final int INDEX_RATING = 1;
 	public static final int INDEX_NAME = 2;
 	public static final int INDEX_RETENTION_TIME = 23;
 	public static final int INDEX_RETENTION_INDEX = 24;
-	//
+
 	private static final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-	//
+
 	public static final String[] TITLES = { //
 			VERIFIED, //
 			RATING, //
@@ -95,7 +95,7 @@ public class TargetsLabelProvider extends AbstractChemClipseLabelProvider {
 			RETENTION_INDEX, //
 			INLIB_FACTOR //
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			30, //
 			30, //
@@ -147,7 +147,7 @@ public class TargetsLabelProvider extends AbstractChemClipseLabelProvider {
 		DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.000");
 		DecimalFormat decimalFormatInteger = ValueFormat.getDecimalFormatEnglish("0");
 		boolean showRetentionIndexWithoutDecimals = PreferenceSupplierModel.showRetentionIndexWithoutDecimals();
-		//
+
 		String deltaRetentionIndex = "";
 		if(retentionIndex != null) {
 			if(preferenceStore.getBoolean(PreferenceSupplier.P_TARGETS_TABLE_SHOW_DEVIATION_RI)) {
@@ -168,7 +168,7 @@ public class TargetsLabelProvider extends AbstractChemClipseLabelProvider {
 		} else {
 			libraryRetentionIndex = decimalFormat.format(libraryInformation.getRetentionIndex());
 		}
-		//
+
 		return libraryRetentionIndex + deltaRetentionIndex;
 	}
 
@@ -193,7 +193,7 @@ public class TargetsLabelProvider extends AbstractChemClipseLabelProvider {
 			if(element instanceof IIdentificationTarget identificationTarget) {
 				IComparisonResult comparisonResult = identificationTarget.getComparisonResult();
 				IRatingSupplier ratingSupplier = comparisonResult.getRatingSupplier();
-				//
+
 				String fileName;
 				switch(ratingSupplier.getStatus()) {
 					case VERY_GOOD:
@@ -215,7 +215,7 @@ public class TargetsLabelProvider extends AbstractChemClipseLabelProvider {
 						fileName = "";
 						break;
 				}
-				//
+
 				if(!fileName.isEmpty()) {
 					return ApplicationImageFactory.getInstance().getImage(fileName, IApplicationImage.SIZE_16x16);
 				}
@@ -233,12 +233,12 @@ public class TargetsLabelProvider extends AbstractChemClipseLabelProvider {
 	public String getColumnText(Object element, int columnIndex) {
 
 		DecimalFormat decimalFormat = getDecimalFormat();
-		//
+
 		String text = "";
 		if(element instanceof IIdentificationTarget identificationTarget) {
 			ILibraryInformation libraryInformation = identificationTarget.getLibraryInformation();
 			IComparisonResult comparisonResult = identificationTarget.getComparisonResult();
-			//
+
 			switch(columnIndex) {
 				case 0:
 					text = "";

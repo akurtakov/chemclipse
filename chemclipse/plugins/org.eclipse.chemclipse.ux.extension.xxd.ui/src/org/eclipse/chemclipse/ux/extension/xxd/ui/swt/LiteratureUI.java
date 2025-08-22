@@ -31,7 +31,7 @@ import org.eclipse.swt.widgets.Composite;
 public class LiteratureUI extends StyledText {
 
 	private static final String LINE_DELIMITER = OperatingSystemUtils.getLineDelimiter();
-	//
+
 	private String content = "";
 
 	public LiteratureUI(Composite parent, int style) {
@@ -87,7 +87,7 @@ public class LiteratureUI extends StyledText {
 		Color color = Colors.DARK_RED;
 		StringBuilder builder = new StringBuilder();
 		List<StyleRange> styleRanges = new ArrayList<>();
-		//
+
 		String formattedRIS = LiteratureSupport.getFormattedRIS(content, false);
 		String[] lines = formattedRIS.split(LiteratureSupport.LINE_DELIMITER);
 		int offset = 0;
@@ -102,7 +102,7 @@ public class LiteratureUI extends StyledText {
 				}
 			}
 		}
-		//
+
 		super.setText(builder.toString());
 		super.setStyleRanges(styleRanges.toArray(new StyleRange[styleRanges.size()]));
 	}
@@ -112,7 +112,7 @@ public class LiteratureUI extends StyledText {
 		Color color = Colors.RED;
 		StringBuilder builder = new StringBuilder();
 		List<StyleRange> styleRanges = new ArrayList<>();
-		//
+
 		String[] lines = content.split(LiteratureSupport.LINE_DELIMITER);
 		for(String line : lines) {
 			if(line.contains(textSearch)) {
@@ -121,7 +121,7 @@ public class LiteratureUI extends StyledText {
 				offset = append(builder, styleRanges, offset, textSearch, data, color, true);
 			}
 		}
-		//
+
 		super.setText(builder.toString());
 		super.setStyleRanges(styleRanges.toArray(new StyleRange[styleRanges.size()]));
 	}
@@ -136,14 +136,14 @@ public class LiteratureUI extends StyledText {
 		}
 		builder.append(value);
 		builder.append(LINE_DELIMITER);
-		//
+
 		StyleRange styleRange = new StyleRange();
 		styleRange.start = offset;
 		styleRange.length = key.length();
 		styleRange.fontStyle = SWT.BOLD;
 		styleRange.foreground = color;
 		styleRanges.add(styleRange);
-		//
+
 		return offset + keyLength + value.length() + LINE_DELIMITER.length();
 	}
 }

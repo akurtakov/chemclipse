@@ -49,7 +49,7 @@ public class ExtendedWellDataUI extends Composite implements IExtendedPartUI {
 
 	private static final String MENU_CATEGORY_HEADER_ENTRIES = "Header Entries";
 	private static final String HEADER_ENTRY = "Header Entry";
-	//
+
 	private Button buttonToolbarInfo;
 	private AtomicReference<InformationUI> toolbarInfoTop = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfoBottom = new AtomicReference<>();
@@ -58,10 +58,10 @@ public class ExtendedWellDataUI extends Composite implements IExtendedPartUI {
 	private Button buttonToolbarEdit;
 	private AtomicReference<DataMapSupportUI> toolbarEdit = new AtomicReference<>();
 	private Button buttonDelete;
-	//
+
 	private Button buttonTableEdit;
 	private AtomicReference<WellDataListUI> tableViewer = new AtomicReference<>();
-	//
+
 	private IWell well;
 	private boolean editable;
 
@@ -88,14 +88,14 @@ public class ExtendedWellDataUI extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfoTop(this);
 		createToolbarEdit(this);
 		createToolbarSearch(this);
 		createWellDataTable(this);
 		createToolbarInfoBottom(this);
-		//
+
 		initialize();
 	}
 
@@ -105,7 +105,7 @@ public class ExtendedWellDataUI extends Composite implements IExtendedPartUI {
 		enableToolbar(toolbarSearch, buttonToolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH, false);
 		enableToolbar(toolbarEdit, buttonToolbarEdit, IMAGE_EDIT, TOOLTIP_EDIT, false);
 		enableToolbar(toolbarInfoBottom, buttonToolbarInfo, IApplicationImage.IMAGE_INFO, TOOLTIP_INFO, true);
-		//
+
 		enableEdit(tableViewer, buttonTableEdit, IMAGE_EDIT_ENTRY, false);
 	}
 
@@ -116,7 +116,7 @@ public class ExtendedWellDataUI extends Composite implements IExtendedPartUI {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(5, false));
-		//
+
 		buttonToolbarInfo = createButtonToggleToolbar(composite, Arrays.asList(toolbarInfoTop, toolbarInfoBottom), IMAGE_INFO, TOOLTIP_INFO);
 		buttonToolbarSearch = createButtonToggleToolbar(composite, toolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH);
 		buttonToolbarEdit = createButtonToggleToolbar(composite, toolbarEdit, IMAGE_EDIT, TOOLTIP_EDIT);
@@ -138,7 +138,7 @@ public class ExtendedWellDataUI extends Composite implements IExtendedPartUI {
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return informationUI;
 	}
 
@@ -154,7 +154,7 @@ public class ExtendedWellDataUI extends Composite implements IExtendedPartUI {
 				tableViewer.get().setSearchText(searchText, caseSensitive);
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -170,7 +170,7 @@ public class ExtendedWellDataUI extends Composite implements IExtendedPartUI {
 				updateInput();
 			}
 		});
-		//
+
 		toolbarEdit.set(headerMapSupportUI);
 	}
 
@@ -211,7 +211,7 @@ public class ExtendedWellDataUI extends Composite implements IExtendedPartUI {
 		ITableSettings tableSettings = wellDataListUI.getTableSettings();
 		addDeleteMenuEntry(shell, tableSettings);
 		wellDataListUI.applySettings(tableSettings);
-		//
+
 		tableViewer.set(wellDataListUI);
 	}
 
@@ -265,7 +265,7 @@ public class ExtendedWellDataUI extends Composite implements IExtendedPartUI {
 				if(!keysNotRemoved.isEmpty()) {
 					MessageDialog.openWarning(DisplayUtils.getShell(), HEADER_ENTRY, "The following keys can't be removed: " + keysNotRemoved);
 				}
-				//
+
 				updateInput();
 			}
 		}
@@ -279,7 +279,7 @@ public class ExtendedWellDataUI extends Composite implements IExtendedPartUI {
 		} else {
 			toolbarEdit.get().setInput(well);
 			tableViewer.get().setInput(well);
-			//
+
 			WellDataListUI wellDataListUI = tableViewer.get();
 			wellDataListUI.sortTable();
 			Table table = wellDataListUI.getTable();
@@ -287,7 +287,7 @@ public class ExtendedWellDataUI extends Composite implements IExtendedPartUI {
 				table.setSelection(0);
 			}
 		}
-		//
+
 		updateWidgets();
 		updateLabel();
 	}
@@ -301,7 +301,7 @@ public class ExtendedWellDataUI extends Composite implements IExtendedPartUI {
 	private void updateWidgets() {
 
 		boolean enabled = editable;
-		//
+
 		buttonTableEdit.setEnabled(enabled);
 		enableButtonDelete();
 	}

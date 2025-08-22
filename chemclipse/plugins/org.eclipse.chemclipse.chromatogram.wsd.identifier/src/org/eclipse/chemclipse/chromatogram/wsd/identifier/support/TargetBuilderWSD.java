@@ -76,7 +76,7 @@ public class TargetBuilderWSD {
 			 */
 			StringBuilder builder = new StringBuilder();
 			boolean includeIntensityPercent = targetUnknownSettings.isIncludeIntensityPercent();
-			//
+
 			long sizePositive = unknown.getScanSignals().stream().filter(s -> s.getAbsorbance() >= 0).count();
 			long sizeNegative = unknown.getScanSignals().stream().filter(s -> s.getAbsorbance() < 0).count();
 			/*
@@ -92,14 +92,14 @@ public class TargetBuilderWSD {
 					builder.append(extractTraces(unknown, false, includeIntensityPercent, numberNegative));
 					builder.append(UnknownTargetBuilder.DELIMITER_TRACES);
 				}
-				//
+
 				int numberPositive = numberWavelengths - numberNegative;
 				builder.append(extractTraces(unknown, true, includeIntensityPercent, numberPositive));
 			}
-			//
+
 			traces = builder.toString();
 		}
-		//
+
 		return traces;
 	}
 
@@ -107,7 +107,7 @@ public class TargetBuilderWSD {
 
 		StringBuilder builder = new StringBuilder();
 		final List<IScanSignalWSD> signalsSorted;
-		//
+
 		if(positive) {
 			signalsSorted = new ArrayList<>(unknown.getScanSignals().stream().filter(s -> s.getAbsorbance() >= 0).toList());
 			Collections.sort(signalsSorted, (s1, s2) -> Double.compare(s2.getAbsorbance(), s1.getAbsorbance()));
@@ -115,7 +115,7 @@ public class TargetBuilderWSD {
 			signalsSorted = new ArrayList<>(unknown.getScanSignals().stream().filter(s -> s.getAbsorbance() < 0).toList());
 			Collections.sort(signalsSorted, (s1, s2) -> Double.compare(s1.getAbsorbance(), s2.getAbsorbance()));
 		}
-		//
+
 		int size = (signalsSorted.size() >= numberWavelengths) ? numberWavelengths : signalsSorted.size();
 		double maxIntensity = !signalsSorted.isEmpty() ? signalsSorted.get(0).getAbsorbance() : 0;
 		final double factorMax;
@@ -143,7 +143,7 @@ public class TargetBuilderWSD {
 				builder.append(UnknownTargetBuilder.DELIMITER_TRACES);
 			}
 		}
-		//
+
 		return builder.toString();
 	}
 }

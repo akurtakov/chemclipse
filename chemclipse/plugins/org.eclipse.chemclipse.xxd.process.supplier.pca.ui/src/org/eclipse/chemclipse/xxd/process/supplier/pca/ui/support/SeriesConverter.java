@@ -42,11 +42,11 @@ public class SeriesConverter {
 		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 		List<IScatterSeriesData> scatterSeriesDataList = new ArrayList<>();
 		List<IVariable> variables = pcaResults.getExtractedVariables();
-		//
+
 		for(int i = 0; i < variables.size(); i++) {
 			IVariable variable = variables.get(i);
 			String name = variables.get(i).getValue();
-			//
+
 			double x = 0;
 			if(pcX != 0) {
 				x = pcaResults.getLoadingVectors().get(pcX - 1)[i];
@@ -76,7 +76,7 @@ public class SeriesConverter {
 		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 		List<IScatterSeriesData> scatterSeriesDataList = new ArrayList<>();
 		List<IVariable> variables = pcaResults.getExtractedVariables();
-		//
+
 		for(int i = 0; i < variables.size(); i++) {
 			IVariable variable = variables.get(i);
 			String description = variable.getDescription();
@@ -86,7 +86,7 @@ public class SeriesConverter {
 			} else {
 				name = description;
 			}
-			//
+
 			double x = 0;
 			if(pcX != 0) {
 				x = pcaResults.getLoadingVectors().get(pcX - 1)[i];
@@ -97,7 +97,7 @@ public class SeriesConverter {
 			ISeriesData seriesData = new SeriesData(new double[]{x}, new double[]{y}, name);
 			IScatterSeriesData scatterSeriesData = new ScatterSeriesData(seriesData);
 			IScatterSeriesSettings scatterSeriesSettings = scatterSeriesData.getSettings();
-			//
+
 			if(variable.isSelected()) {
 				scatterSeriesSettings.setSymbolColor(Colors.RED);
 			} else {
@@ -123,7 +123,7 @@ public class SeriesConverter {
 		 */
 		List<IResultMVA> resultList = resultsPCA.getPcaResultList();
 		LabelOptionPCA labelOptionPCA = resultsPCA.getPcaSettings().getLabelOptionPCA();
-		//
+
 		for(int i = 0; i < resultList.size(); i++) {
 			IResultMVA pcaResult = resultList.get(i);
 			/*
@@ -145,7 +145,7 @@ public class SeriesConverter {
 					description = sampleName;
 					break;
 			}
-			//
+
 			extractedPcaResults.put(pcaResult.getSample(), pcaResult);
 			if(!pcaResult.isDisplayed()) {
 				continue;
@@ -181,7 +181,7 @@ public class SeriesConverter {
 			scatterSeriesSettingsHighlight.setSymbolColor(Colors.RED);
 			scatterSeriesDataList.add(scatterSeriesData);
 		}
-		//
+
 		return scatterSeriesDataList;
 	}
 

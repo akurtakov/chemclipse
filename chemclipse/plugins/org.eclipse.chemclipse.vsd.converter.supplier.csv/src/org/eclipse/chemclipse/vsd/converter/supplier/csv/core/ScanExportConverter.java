@@ -28,7 +28,7 @@ public class ScanExportConverter extends AbstractScanExportConverter implements 
 
 		IProcessingInfo<File> processingInfo = new ProcessingInfo<>();
 		processingInfo.addInfoMessage("FTIR", "Export is not available");
-		//
+
 		return processingInfo;
 	}
 }

@@ -31,11 +31,11 @@ public class CasNumbersComparator extends AbstractRecordTableComparator implemen
 					sortOrder = 0;
 			}
 		}
-		//
+
 		if(getDirection() == ASCENDING) {
 			sortOrder = -sortOrder;
 		}
-		//
+
 		return sortOrder;
 	}
 }

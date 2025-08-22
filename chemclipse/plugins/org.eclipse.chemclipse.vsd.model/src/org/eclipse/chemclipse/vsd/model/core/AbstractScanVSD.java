@@ -40,7 +40,7 @@ public abstract class AbstractScanVSD extends AbstractScan implements IScanVSD {
 		if(getTotalSignal() == 0.0f) {
 			return;
 		}
-		//
+
 		double base = 100.0d;
 		double correctionFactor = ((base / getTotalSignal()) * totalSignal) / base;
 		/*
@@ -99,7 +99,7 @@ public abstract class AbstractScanVSD extends AbstractScan implements IScanVSD {
 				scanSignalsRemove.add(scanSignal);
 			}
 		}
-		//
+
 		getProcessedSignals().removeAll(scanSignalsRemove);
 	}
 
@@ -113,7 +113,7 @@ public abstract class AbstractScanVSD extends AbstractScan implements IScanVSD {
 				scanSignalsKeep.add(scanSignal);
 			}
 		}
-		//
+
 		getProcessedSignals().clear();
 		getProcessedSignals().addAll(scanSignalsKeep);
 	}

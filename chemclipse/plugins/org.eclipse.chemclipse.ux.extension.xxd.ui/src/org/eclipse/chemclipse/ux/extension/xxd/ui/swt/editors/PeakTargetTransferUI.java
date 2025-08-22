@@ -61,12 +61,12 @@ import org.eclipse.swt.widgets.Text;
 public class PeakTargetTransferUI extends Composite implements IChromatogramSelectionUpdateListener {
 
 	private static final Logger logger = Logger.getLogger(PeakTargetTransferUI.class);
-	//
+
 	private static final String DESCRIPTION = "Transfer Targets";
 	private static final String TYPE_PEAKS = "Peaks";
 	private static final String TYPE_SCANS = "Scans";
 	private static final String[] TYPE_ITEMS = new String[]{TYPE_PEAKS, TYPE_SCANS};
-	//
+
 	private Label labelSource;
 	private ChromatogramSourceCombo chromatogramSourceCombo;
 	private ComboViewer comboViewerSink;
@@ -74,9 +74,9 @@ public class PeakTargetTransferUI extends Composite implements IChromatogramSele
 	private Text textTimeDelta;
 	private Button checkBoxTransfer;
 	private Button buttonExecute;
-	//
+
 	private IChromatogramSelection chromatogramSelectionSource;
-	//
+
 	private ChromatogramDataSupport chromatogramDataSupport = new ChromatogramDataSupport();
 	private EditorUpdateSupport editorUpdateSupport = new EditorUpdateSupport();
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
@@ -97,28 +97,28 @@ public class PeakTargetTransferUI extends Composite implements IChromatogramSele
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(4, false);
 		composite.setLayout(gridLayout);
-		//
+
 		createLabelInfo(composite, "Chromatogram:");
 		labelSource = createLabelSource(composite);
-		//
+
 		createLabelInfo(composite, "Destination:");
 		chromatogramSourceCombo = createChromatogramSourceCombo(composite);
-		//
+
 		createLabelInfo(composite, "Target:");
 		comboViewerSink = createComboViewerSink(composite);
-		//
+
 		createLabelInfo(composite, "Type:");
 		comboType = createTypeCombo(composite);
-		//
+
 		createLabelInfo(composite, "Options:");
 		textTimeDelta = createTextTargetDelta(composite);
 		checkBoxTransfer = createCheckBoxTransferTargets(composite);
 		buttonExecute = createButtonExecute(composite);
-		//
+
 		updateInput();
 	}
 
@@ -144,7 +144,7 @@ public class PeakTargetTransferUI extends Composite implements IChromatogramSele
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = 3;
 		chromatogramSourceCombo.setLayoutData(gridData);
-		//
+
 		Combo combo = chromatogramSourceCombo.getCombo();
 		combo.addSelectionListener(new SelectionAdapter() {
 
@@ -154,7 +154,7 @@ public class PeakTargetTransferUI extends Composite implements IChromatogramSele
 				updateInput();
 			}
 		});
-		//
+
 		return chromatogramSourceCombo;
 	}
 
@@ -186,7 +186,7 @@ public class PeakTargetTransferUI extends Composite implements IChromatogramSele
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select a sink chromatogram.");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalSpan = 3;
@@ -199,7 +199,7 @@ public class PeakTargetTransferUI extends Composite implements IChromatogramSele
 				updateWidgets();
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -211,7 +211,7 @@ public class PeakTargetTransferUI extends Composite implements IChromatogramSele
 		} else {
 			label = name + " " + type;
 		}
-		//
+
 		return label;
 	}
 
@@ -232,7 +232,7 @@ public class PeakTargetTransferUI extends Composite implements IChromatogramSele
 				updateWidgets();
 			}
 		});
-		//
+
 		return combo;
 	}
 
@@ -242,10 +242,10 @@ public class PeakTargetTransferUI extends Composite implements IChromatogramSele
 		text.setText(Double.toString(preferenceStore.getDouble(PreferenceSupplier.P_CHROMATOGRAM_TRANSFER_DELTA_RETENTION_TIME)));
 		text.setToolTipText("Delta retention time in minutes.");
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		RetentionTimeValidator retentionTimeValidator = new RetentionTimeValidator();
 		ControlDecoration controlDecoration = new ControlDecoration(text, SWT.LEFT | SWT.TOP);
-		//
+
 		text.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -261,7 +261,7 @@ public class PeakTargetTransferUI extends Composite implements IChromatogramSele
 				}
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -280,7 +280,7 @@ public class PeakTargetTransferUI extends Composite implements IChromatogramSele
 				preferenceStore.setValue(PreferenceSupplier.P_CHROMATOGRAM_TRANSFER_BEST_TARGET_ONLY, button.getSelection());
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -301,14 +301,14 @@ public class PeakTargetTransferUI extends Composite implements IChromatogramSele
 				transferTargets(chromatogramSelectionSource, chromatogramSelectionSink, e.display.getActiveShell());
 			}
 		});
-		//
+
 		return button;
 	}
 
 	private void updateInput() {
 
 		labelSource.setText(ChromatogramDataSupport.getChromatogramEditorLabel(chromatogramSelectionSource));
-		//
+
 		if(chromatogramSourceCombo.isSourceReferences() && chromatogramSelectionSource != null) {
 			comboViewerSink.setInput(chromatogramSelectionSource.getChromatogram().getReferencedChromatograms());
 		} else if(chromatogramSourceCombo.isSourceEditors()) {
@@ -316,7 +316,7 @@ public class PeakTargetTransferUI extends Composite implements IChromatogramSele
 		} else {
 			comboViewerSink.setInput(null);
 		}
-		//
+
 		updateWidgets();
 	}
 
@@ -329,7 +329,7 @@ public class PeakTargetTransferUI extends Composite implements IChromatogramSele
 		 * Source and sink selected?
 		 */
 		chromatogramSourceCombo.setEnabled(chromatogramSelectionSource != null);
-		//
+
 		Object object = comboViewerSink.getStructuredSelection().getFirstElement();
 		if(object instanceof IChromatogramSelection || object instanceof IChromatogram) {
 			buttonExecute.setEnabled(true);
@@ -401,12 +401,12 @@ public class PeakTargetTransferUI extends Composite implements IChromatogramSele
 	private void transferPeakTargets(IChromatogramSelection chromatogramSelectionSource, IChromatogramSelection chromatogramSelectionSink, Shell shell) {
 
 		TargetTransferSupport targetTransferSupport = new TargetTransferSupport();
-		//
+
 		List<? extends IPeak> peaksSource = ChromatogramDataSupport.getPeaks(chromatogramSelectionSource, true);
 		List<? extends IPeak> peaksSink = ChromatogramDataSupport.getPeaks(chromatogramSelectionSink, false);
 		int retentionTimeDelta = (int)(preferenceStore.getDouble(PreferenceSupplier.P_CHROMATOGRAM_TRANSFER_DELTA_RETENTION_TIME) * AbstractChromatogram.MINUTE_CORRELATION_FACTOR);
 		boolean useBestTargetOnly = preferenceStore.getBoolean(PreferenceSupplier.P_CHROMATOGRAM_TRANSFER_BEST_TARGET_ONLY);
-		//
+
 		String message = targetTransferSupport.transferPeakTargets(peaksSource, peaksSink, retentionTimeDelta, useBestTargetOnly);
 		if(message != null) {
 			showWarnMessage(shell, message);
@@ -418,11 +418,11 @@ public class PeakTargetTransferUI extends Composite implements IChromatogramSele
 	private void transferScanTargets(IChromatogramSelection chromatogramSelectionSource, IChromatogramSelection chromatogramSelectionSink, Shell shell) {
 
 		TargetTransferSupport targetTransferSupport = new TargetTransferSupport();
-		//
+
 		List<IScan> scansSource = ChromatogramDataSupport.getIdentifiedScans(chromatogramSelectionSource.getChromatogram(), chromatogramSelectionSource);
 		IChromatogram chromatogramSink = chromatogramSelectionSink.getChromatogram();
 		boolean useBestTargetOnly = preferenceStore.getBoolean(PreferenceSupplier.P_CHROMATOGRAM_TRANSFER_BEST_TARGET_ONLY);
-		//
+
 		String message = targetTransferSupport.transferScanTargets(scansSource, chromatogramSink, useBestTargetOnly);
 		if(message != null) {
 			showWarnMessage(shell, message);

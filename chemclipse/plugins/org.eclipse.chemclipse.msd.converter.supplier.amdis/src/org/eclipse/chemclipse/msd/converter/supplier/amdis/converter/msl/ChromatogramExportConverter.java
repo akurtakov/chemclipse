@@ -72,7 +72,7 @@ public class ChromatogramExportConverter extends AbstractChromatogramExportConve
 				builder.append("Use Peaks instead of Scans:");
 				builder.append(" ");
 				builder.append(usePeaksInsteadOfScans);
-				//
+
 				ILibraryInformation libraryInformation = new LibraryInformation();
 				libraryInformation.setName(chromatogramSelectionMSD.getChromatogram().getName());
 				IIdentificationTarget identificationTarget = new IdentificationTarget(libraryInformation, ComparisonResult.COMPARISON_RESULT_BEST_MATCH);

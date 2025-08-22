@@ -153,7 +153,7 @@ public class MassSpectrumReaderVersion20 extends AbstractMassSpectraReader imple
 		} catch(ParserConfigurationException e) {
 			logger.warn(e);
 		}
-		//
+
 		IVendorMassSpectra massSpectra = new VendorMassSpectra();
 		massSpectra.setName(file.getName());
 		massSpectra.addMassSpectrum(massSpectrum);

@@ -42,12 +42,12 @@ public class PCAEditor {
 	public static final String ID = "org.eclipse.chemclipse.xxd.process.supplier.pca.ui.parts.PCAEditor";
 	public static final String LABEL = "PCA Editor";
 	public static final String TOOL_TIPS = "PCA Editor";
-	//
+
 	@Inject
 	private Composite parent;
 	@Inject
 	private IEclipseContext context;
-	//
+
 	private AnalysisEditorUI analysisEditorUI;
 
 	@SuppressWarnings("unchecked")
@@ -67,7 +67,7 @@ public class PCAEditor {
 		if(context != null) {
 			context.remove(ISamplesPCA.class);
 		}
-		//
+
 		List<String> clearTopics = Arrays.asList(IChemClipseEvents.TOPIC_PCA_UPDATE_SELECTION);
 		UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_EDITOR_PCA_CLOSE, clearTopics);
 	}

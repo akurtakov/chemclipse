@@ -50,7 +50,7 @@ public class Profiles {
 				logger.warn("The temporarily identifier directory could not be created: " + directory.getAbsolutePath());
 			}
 		}
-		//
+
 		return directory.listFiles();
 	}
 

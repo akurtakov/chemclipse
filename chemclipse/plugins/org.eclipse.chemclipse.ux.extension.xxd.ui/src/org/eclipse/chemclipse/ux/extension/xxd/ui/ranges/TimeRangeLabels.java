@@ -16,11 +16,11 @@ public class TimeRangeLabels {
 
 	public static final String DELIMITER = "|";
 	private static final String REPLACEMENT = "";
-	//
+
 	private String title;
 	private String initialValue;
 	private String[] proposals;
-	//
+
 	private String addMessage;
 	private String addError;
 	private String errorDelimiter;
@@ -67,7 +67,7 @@ public class TimeRangeLabels {
 		for(int i = 0; i < this.proposals.length; i++) {
 			this.proposals[i] = replaceDelimiter(this.proposals[i]);
 		}
-		//
+
 		addMessage = String.format("Add a new %s.", title);
 		addError = String.format("Please define a new %s.", title);
 		errorDelimiter = String.format("The %s must not contain the following delimiter '%s'.", title, DELIMITER);

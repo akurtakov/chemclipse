@@ -37,7 +37,7 @@ public class ChromatogramConverterVSD implements IChromatogramConverter<IChromat
 		if(instance == null) {
 			instance = new ChromatogramConverterVSD();
 		}
-		//
+
 		return instance;
 	}
 
@@ -49,7 +49,7 @@ public class ChromatogramConverterVSD implements IChromatogramConverter<IChromat
 		if(services == null) {
 			return chromatogramConverterSupport;
 		}
-		//
+
 		for(Object service : services) {
 			if(service instanceof IConverterServiceVSD converterServiceVSD) {
 				ChromatogramSupplier supplier = new ChromatogramSupplier();
@@ -72,7 +72,7 @@ public class ChromatogramConverterVSD implements IChromatogramConverter<IChromat
 				}
 			}
 		}
-		//
+
 		return chromatogramConverterSupport;
 	}
 
@@ -100,7 +100,7 @@ public class ChromatogramConverterVSD implements IChromatogramConverter<IChromat
 				}
 			}
 		}
-		//
+
 		return null;
 	}
 

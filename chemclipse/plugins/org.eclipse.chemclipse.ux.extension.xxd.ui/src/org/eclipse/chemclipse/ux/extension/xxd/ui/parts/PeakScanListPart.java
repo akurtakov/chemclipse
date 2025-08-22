@@ -36,7 +36,7 @@ public class PeakScanListPart extends AbstractPart<ExtendedPeakScanListUI> {
 
 	private static final Logger logger = Logger.getLogger(PeakScanListPart.class);
 	private static final String TOPIC = IChemClipseEvents.TOPIC_CHROMATOGRAM_XXD_UPDATE_SELECTION;
-	//
+
 	private boolean linkWithEditor = true;
 
 	@Inject
@@ -105,7 +105,7 @@ public class PeakScanListPart extends AbstractPart<ExtendedPeakScanListUI> {
 				linkWithEditor = false; // TODO Workaround: This otherwise breaks the table selection after undo.
 			}
 		}
-		//
+
 		return false;
 	}
 

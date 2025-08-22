@@ -43,14 +43,14 @@ public class ChromatogramFilterMSx extends AbstractChromatogramFilterMSD {
 		IProcessingInfo<IChromatogramFilterResult> validation = validate(chromatogramSelection, chromatogramFilterSettings);
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = new ProcessingInfo<>();
 		processingInfo.addMessages(validation);
-		//
+
 		if(!processingInfo.hasErrorMessages()) {
-			//
+
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 			if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
-				//
+
 				Map<Short, List<IScan>> splittedScanMap = new HashMap<>();
-				//
+
 				for(IScan scan : chromatogramMSD.getScans()) {
 					if(scan instanceof IRegularMassSpectrum massSpectrum) {
 						short massSpectrometer = massSpectrum.getMassSpectrometer();
@@ -74,15 +74,15 @@ public class ChromatogramFilterMSx extends AbstractChromatogramFilterMSD {
 					List<IScan> scans = splittedScanMap.get(key);
 					IChromatogramMSD chromatogramReference = new ChromatogramMSD();
 					chromatogramReference.setConverterId("");
-					//
+
 					for(IScan scan : scans) {
 						chromatogramReference.addScan(scan);
 					}
-					//
+
 					chromatogramMSD.addReferencedChromatogram(chromatogramReference);
 				}
 			}
-			//
+
 			chromatogramSelection.getChromatogram().setDirty(true);
 			processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "The chromatogram was splitted into MS2, MS3 ... reference chromatograms."));
 		}

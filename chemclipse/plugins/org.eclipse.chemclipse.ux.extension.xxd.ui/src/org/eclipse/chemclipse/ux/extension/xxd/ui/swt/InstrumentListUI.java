@@ -30,7 +30,7 @@ public class InstrumentListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = InstrumentLabelProvider.TITLES;
 	private static final int[] BOUNDS = InstrumentLabelProvider.BOUNDS;
-	//
+
 	private ITableLabelProvider labelProvider = new InstrumentLabelProvider();
 	private ViewerComparator tableComparator = new InstrumentComparator();
 	private InstrumentFilter listFilter = new InstrumentFilter();

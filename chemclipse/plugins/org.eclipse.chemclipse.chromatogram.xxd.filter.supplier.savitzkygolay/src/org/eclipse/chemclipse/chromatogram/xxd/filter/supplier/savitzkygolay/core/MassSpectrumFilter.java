@@ -49,7 +49,7 @@ public class MassSpectrumFilter extends AbstractMassSpectrumFilter {
 				int order = savitzkyGolayMassSpectrumFilterSettings.getOrder();
 				int width = savitzkyGolayMassSpectrumFilterSettings.getWidth();
 				filterSupplier.applySavitzkyGolayFilter(massSpectra, derivative, order, width, monitor);
-				//
+
 				processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, DESCRIPTION, "The mass spectrum has been successfully smoothed."));
 				IMassSpectrumFilterResult massSpectrumFilterResult = new MassSpectrumFilterResult(ResultStatus.OK, "The Savitzky-Golay filter has been applied successfully.");
 				processingInfo.setProcessingResult(massSpectrumFilterResult);

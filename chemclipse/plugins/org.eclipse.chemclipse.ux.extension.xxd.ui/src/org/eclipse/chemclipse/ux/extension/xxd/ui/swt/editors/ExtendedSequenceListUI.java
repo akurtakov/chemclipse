@@ -68,9 +68,9 @@ import org.eclipse.swt.widgets.Text;
 public class ExtendedSequenceListUI extends Composite implements IExtendedPartUI {
 
 	private static final Logger logger = Logger.getLogger(ExtendedSequenceListUI.class);
-	//
+
 	private static final String DESCRIPTION = "Sequence Editor";
-	//
+
 	private Text dataPath;
 	private Composite toolbarSearch;
 	private Composite toolbarDataPath;
@@ -78,7 +78,7 @@ public class ExtendedSequenceListUI extends Composite implements IExtendedPartUI
 	private SearchSupportUI searchSupportUI;
 	private MethodSupportUI methodSupportUI;
 	private SequenceListUI sequenceListUI;
-	//
+
 	private String initialDataPath = "";
 	private ISequence<? extends ISequenceRecord> sequence;
 	private final ChromatogramTypeSupportUI chromatogramTypeSupport = new ChromatogramTypeSupportUI(new DataType[]{DataType.CSD, DataType.MSD, DataType.WSD});
@@ -103,13 +103,13 @@ public class ExtendedSequenceListUI extends Composite implements IExtendedPartUI
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		toolbarSearch = createToolbarSearch(this);
 		toolbarDataPath = createToolbarDataPath(this);
 		toolbarMethod = createToolbarMethod(this);
 		createSequenceList(this);
-		//
+
 		PartSupport.setCompositeVisibility(toolbarSearch, false);
 		PartSupport.setCompositeVisibility(toolbarDataPath, false);
 		PartSupport.setCompositeVisibility(toolbarMethod, false);
@@ -122,7 +122,7 @@ public class ExtendedSequenceListUI extends Composite implements IExtendedPartUI
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(6, false));
-		//
+
 		createButtonToggleToolbarSearch(composite);
 		createButtonToggleToolbarDataPath(composite);
 		createButtonToggleToolbarMethod(composite);
@@ -136,7 +136,7 @@ public class ExtendedSequenceListUI extends Composite implements IExtendedPartUI
 		searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		searchSupportUI.setSearchListener((searchText, caseSensitive) -> sequenceListUI.setSearchText(searchText, caseSensitive));
-		//
+
 		return searchSupportUI;
 	}
 
@@ -145,12 +145,12 @@ public class ExtendedSequenceListUI extends Composite implements IExtendedPartUI
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		composite.setLayout(new GridLayout(4, false));
-		//
+
 		createDataPathLabel(composite);
 		createDataPathText(composite);
 		createSetDataPathButton(composite);
 		createSelectDataPathButton(composite);
-		//
+
 		return composite;
 	}
 
@@ -162,7 +162,7 @@ public class ExtendedSequenceListUI extends Composite implements IExtendedPartUI
 
 			IProcessingInfo<IChromatogramSelection> processingInfo = new ProcessingInfo<>();
 			TableItem[] tableItems = sequenceListUI.getTable().getItems();
-			//
+
 			for(TableItem tableItem : tableItems) {
 				Object object = tableItem.getData();
 				if(object instanceof ISequenceRecord sequenceRecord) {
@@ -187,10 +187,10 @@ public class ExtendedSequenceListUI extends Composite implements IExtendedPartUI
 					}
 				}
 			}
-			//
+
 			updateResult(processingInfo);
 		});
-		//
+
 		return methodSupportUI;
 	}
 
@@ -246,7 +246,7 @@ public class ExtendedSequenceListUI extends Composite implements IExtendedPartUI
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -276,7 +276,7 @@ public class ExtendedSequenceListUI extends Composite implements IExtendedPartUI
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -295,7 +295,7 @@ public class ExtendedSequenceListUI extends Composite implements IExtendedPartUI
 				button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SEARCH, IApplicationImageProvider.SIZE_16x16, visible));
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -318,7 +318,7 @@ public class ExtendedSequenceListUI extends Composite implements IExtendedPartUI
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -341,7 +341,7 @@ public class ExtendedSequenceListUI extends Composite implements IExtendedPartUI
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -359,19 +359,19 @@ public class ExtendedSequenceListUI extends Composite implements IExtendedPartUI
 				Table table = sequenceListUI.getTable();
 				int[] indices = table.getSelectionIndices();
 				List<File> files = new ArrayList<>();
-				//
+
 				String chromatogramProcessMethod = preferenceStore.getString(PreferenceSupplier.P_CHROMATOGRAM_LOAD_PROCESS_METHOD);
 				if(!"".equals(chromatogramProcessMethod)) {
 					// MessageDialog.openWarning(e.display.getActiveShell(), "Batch Open", "A default chromatogram processing method is currently set.");
 				}
-				//
+
 				for(int index : indices) {
 					Object object = table.getItem(index).getData();
 					if(object instanceof ISequenceRecord sequenceRecord) {
 						files.add(new File(sequence.getDataPath() + File.separator + sequenceRecord.getDataFile()));
 					}
 				}
-				//
+
 				try {
 					chromatogramTypeSupport.openFiles(files);
 				} catch(Exception e1) {
@@ -424,7 +424,7 @@ public class ExtendedSequenceListUI extends Composite implements IExtendedPartUI
 		sequenceListUI = new SequenceListUI(parent, SWT.VIRTUAL | SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		Table table = sequenceListUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		table.addMouseListener(new MouseAdapter() {
 
 			@Override

@@ -30,7 +30,7 @@ public class NamedTracesListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = NamedTracesLabelProvider.TITLES;
 	private static final int[] BOUNDS = NamedTracesLabelProvider.BOUNDS;
-	//
+
 	private ITableLabelProvider labelProvider = new NamedTracesLabelProvider();
 	private ViewerComparator tableComparator = new NamedTracesComparator();
 	private NamedTracesFilter listFilter = new NamedTracesFilter();

@@ -42,7 +42,7 @@ public class PeakFilter {
 	private static final String FILTER_NAME = "filterName";
 	private static final String FILTER = "filter";
 	private static final String FILTER_SETTINGS = "filterSettings";
-	//
+
 	private static final String PROCESSING_DESCRIPTION = "Peak Filter";
 	private static final String NO_PEAK_FILTER_AVAILABLE = "There is no peak filter available.";
 

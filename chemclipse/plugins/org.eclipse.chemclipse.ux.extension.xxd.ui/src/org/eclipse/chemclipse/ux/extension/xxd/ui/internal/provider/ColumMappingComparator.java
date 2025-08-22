@@ -36,11 +36,11 @@ public class ColumMappingComparator extends AbstractRecordTableComparator implem
 					sortOrder = 0;
 			}
 		}
-		//
+
 		if(getDirection() == ASCENDING) {
 			sortOrder = -sortOrder;
 		}
-		//
+
 		return sortOrder;
 	}
 }

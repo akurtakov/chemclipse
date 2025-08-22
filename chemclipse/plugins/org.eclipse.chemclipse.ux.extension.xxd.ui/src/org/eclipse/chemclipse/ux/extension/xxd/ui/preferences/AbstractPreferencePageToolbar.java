@@ -35,7 +35,7 @@ public abstract class AbstractPreferencePageToolbar extends PreferencePage imple
 
 	private static final int DEFAULT_WIDTH = 400;
 	private static final int DEFAULT_HEIGHT = 600;
-	//
+
 	private ProcessorToolbarSelectionUI processorToolbarSelectionUI;
 	private PreferencesProcessSupport preferencesProcessSupport;
 	private String preference = "";
@@ -46,10 +46,10 @@ public abstract class AbstractPreferencePageToolbar extends PreferencePage imple
 		setDescription(ExtensionMessages.selectProcessorToolbarItems);
 		noDefaultAndApplyButton();
 		setSize(new Point(DEFAULT_WIDTH, DEFAULT_HEIGHT));
-		//
+
 		setPreferenceStore(preferenceStore);
 		this.preference = preference + dataCategory.name();
-		//
+
 		preferencesProcessSupport = new PreferencesProcessSupport(dataCategory);
 	}
 
@@ -60,7 +60,7 @@ public abstract class AbstractPreferencePageToolbar extends PreferencePage imple
 			List<Processor> processors = processorToolbarSelectionUI.getProcessors();
 			getPreferenceStore().setValue(preference, ProcessorSupport.getActiveProcessors(processors));
 		}
-		//
+
 		return true;
 	}
 
@@ -81,7 +81,7 @@ public abstract class AbstractPreferencePageToolbar extends PreferencePage imple
 		ProcessorToolbarSelectionUI processorToolbarSelectionUI = new ProcessorToolbarSelectionUI(parent, SWT.NONE);
 		processorToolbarSelectionUI.setLayoutData(new GridData(GridData.FILL_BOTH));
 		processorToolbarSelectionUI.setInput(preferencesProcessSupport.getActiveProcessors());
-		//
+
 		return processorToolbarSelectionUI;
 	}
 }

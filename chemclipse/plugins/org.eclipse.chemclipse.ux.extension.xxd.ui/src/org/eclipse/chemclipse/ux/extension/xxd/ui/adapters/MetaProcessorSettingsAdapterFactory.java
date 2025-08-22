@@ -53,17 +53,17 @@ public class MetaProcessorSettingsAdapterFactory implements IAdapterFactory, Set
 
 		private final MetaProcessorSettings processorSettings;
 		private final ExtendedMethodUI extendedMethodUI;
-		//
+
 		private IProcessorPreferences<MetaProcessorSettings> preferences;
 		private List<Listener> listeners = new ArrayList<>();
-		//
+
 		boolean enableEditProfiles = false;
 		private int sizeProfiles = 1; // Default 1 profile
 
 		public SettingsUIControlImplementation(Composite parent, IProcessorPreferences<MetaProcessorSettings> preferences, boolean showProfileToolbar) throws IOException {
 
 			this.preferences = preferences;
-			//
+
 			processorSettings = preferences.getSettings();
 			extendedMethodUI = new ExtendedMethodUI(parent, SWT.READ_ONLY, Activator.getProcessSupplierContext(),
 					(processEntry, supplierContext) -> processorSettings.getProcessorPreferences(processEntry,
@@ -154,7 +154,7 @@ public class MetaProcessorSettingsAdapterFactory implements IAdapterFactory, Set
 					sizeProfiles = sizeProfilesChanged;
 				}
 			}
-			//
+
 			for(Listener listener : listeners) {
 				listener.handleEvent(event);
 			}
@@ -188,7 +188,7 @@ public class MetaProcessorSettingsAdapterFactory implements IAdapterFactory, Set
 					}
 				}
 			}
-			//
+
 			return enableEditProfiles;
 		}
 

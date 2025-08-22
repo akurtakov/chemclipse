@@ -37,13 +37,13 @@ public class QuadraticEquationChemStation extends QuadraticEquation {
 			 */
 			double a = getA();
 			double b = getB();
-			//
+
 			double result = 0.0d;
 			double denominator = a * 2;
 			if(denominator != 0) {
 				result = ((b - Math.sqrt(Math.pow(b, 2) - (4 * a * y))) / denominator);
 			}
-			//
+
 			return result;
 		}
 	}

@@ -35,11 +35,11 @@ public class WavenumberSignalsComparator extends AbstractRecordTableComparator i
 					sortOrder = 0;
 			}
 		}
-		//
+
 		if(getDirection() == ASCENDING) {
 			sortOrder = -sortOrder;
 		}
-		//
+
 		return sortOrder;
 	}
 }

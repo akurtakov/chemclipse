@@ -107,7 +107,7 @@ public class TotalScanSignalExtractor implements ITotalScanSignalExtractor {
 		if(startScan < 1 || startScan > chromatogram.getNumberOfScans() || stopScan < 1 || stopScan > chromatogram.getNumberOfScans()) {
 			return new TotalScanSignals(0, chromatogram);
 		}
-		//
+
 		ITotalScanSignals totalScanSignals;
 		if(condenseCycleNumberScans) {
 			/*
@@ -201,7 +201,7 @@ public class TotalScanSignalExtractor implements ITotalScanSignalExtractor {
 		 */
 		int startScan = chromatogram.getScanNumber(chromatogramSelection.getStartRetentionTime());
 		int stopScan = chromatogram.getScanNumber(chromatogramSelection.getStopRetentionTime());
-		//
+
 		if(condenseCycleNumberScans) {
 			return getTotalScanSignals(startScan, stopScan, validatePositive, true);
 		} else {

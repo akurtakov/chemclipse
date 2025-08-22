@@ -24,14 +24,14 @@ public class FlavorMarkerLabelProvider extends AbstractChemClipseLabelProvider {
 	public static final String ODOR = "Odor";
 	public static final String MATRIX = "Matrix";
 	public static final String SOLVENT = "Solvent";
-	//
+
 	public static final String[] TITLES = { //
 			VERIFIED_MANUALLY, //
 			ODOR, //
 			MATRIX, //
 			SOLVENT //
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			30, //
 			250, //

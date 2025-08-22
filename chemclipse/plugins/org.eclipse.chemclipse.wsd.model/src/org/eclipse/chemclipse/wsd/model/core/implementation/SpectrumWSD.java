@@ -21,7 +21,7 @@ import org.eclipse.chemclipse.wsd.model.core.ISpectrumWSD;
 public class SpectrumWSD extends AbstractMeasurementInfo implements ISpectrumWSD {
 
 	private static final long serialVersionUID = 1112263452696348714L;
-	//
+
 	private TreeSet<ISignalWSD> signals = new TreeSet<>();
 
 	@Override

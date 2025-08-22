@@ -62,7 +62,7 @@ public class ProxyReaderMSD {
 		} else if(version.equals(Format.CHROMATOGRAM_VERSION_1502)) {
 			scanReaderProxy = new ReaderProxy_1502();
 		}
-		//
+
 		if(scanReaderProxy != null) {
 			scanReaderProxy.readMassSpectrum(file, offset, massSpectrum, ionTransitionSettings);
 		}

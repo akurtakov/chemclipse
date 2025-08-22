@@ -48,7 +48,7 @@ public class PageCalibration {
 		control = new Composite(container, SWT.NONE);
 		control.setLayout(new FillLayout());
 		control.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_WHITE));
-		//
+
 		extendedTableViewer = new ExtendedRetentionIndexListUI(control, SWT.NONE);
 		extendedTableViewer.setInput(new StandardsReader().getStandardsList());
 	}

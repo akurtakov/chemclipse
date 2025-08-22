@@ -44,7 +44,7 @@ public class ScanReader {
 					double absorbance = Double.parseDouble(values[1].trim());
 					vendorScan.getScanVSD().getProcessedSignals().add(new SignalInfrared(wavelength, absorbance, 0));
 				} catch(NumberFormatException e) {
-					//
+
 				}
 			}
 		}

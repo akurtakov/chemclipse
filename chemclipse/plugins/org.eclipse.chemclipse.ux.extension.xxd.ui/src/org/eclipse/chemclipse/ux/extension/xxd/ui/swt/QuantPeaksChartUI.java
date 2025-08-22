@@ -52,7 +52,7 @@ public class QuantPeaksChartUI extends Composite implements IExtendedPartUI {
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 	private PeakChartSupport peakChartSupport = new PeakChartSupport();
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.000");
-	//
+
 	private AtomicReference<PeaksChart> chartControl = new AtomicReference<>();
 	private IQuantitationCompound quantitationCompound;
 
@@ -71,13 +71,13 @@ public class QuantPeaksChartUI extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(composite);
 		createPeaksChart(composite);
-		//
+
 		initialize();
 	}
 
@@ -92,7 +92,7 @@ public class QuantPeaksChartUI extends Composite implements IExtendedPartUI {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(3, false));
-		//
+
 		createButtonToggleChartLegend(composite, chartControl, IMAGE_LEGEND);
 		createResetButton(composite);
 		createSettingsButton(composite);
@@ -130,7 +130,7 @@ public class QuantPeaksChartUI extends Composite implements IExtendedPartUI {
 
 		PeaksChart peaksChart = new PeaksChart(parent, SWT.NONE);
 		peaksChart.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		chartControl.set(peaksChart);
 	}
 
@@ -151,14 +151,14 @@ public class QuantPeaksChartUI extends Composite implements IExtendedPartUI {
 		peaksChart.deleteSeries();
 		if(quantitationCompound != null) {
 			List<ILineSeriesData> lineSeriesDataList = new ArrayList<ILineSeriesData>();
-			//
+
 			int counter = 1;
 			IColorScheme colors = Colors.getColorScheme(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCHEME_DISPLAY_PEAKS));
 			boolean enableArea = preferenceStore.getBoolean(PreferenceSupplier.P_SHOW_AREA_DISPLAY_PEAKS);
-			//
+
 			for(Object object : quantitationCompound.getQuantitationPeaks()) {
 				if(object instanceof IQuantitationPeak quantitationPeak) {
-					//
+
 					StringBuilder builder = new StringBuilder();
 					builder.append("P");
 					builder.append(counter);
@@ -172,12 +172,12 @@ public class QuantPeaksChartUI extends Composite implements IExtendedPartUI {
 					ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
 					lineSeriesSettings.setEnableArea(enableArea);
 					lineSeriesDataList.add(lineSeriesData);
-					//
+
 					counter++;
 					colors.incrementColor();
 				}
 			}
-			//
+
 			peaksChart.addSeriesData(lineSeriesDataList, LineChart.NO_COMPRESSION);
 		}
 	}

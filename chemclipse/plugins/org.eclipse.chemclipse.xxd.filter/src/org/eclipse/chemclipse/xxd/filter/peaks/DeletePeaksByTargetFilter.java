@@ -54,11 +54,11 @@ public class DeletePeaksByTargetFilter extends AbstractPeakFilter<DeletePeaksByT
 	public void filterPeaks(IChromatogramSelection chromatogramSelection, DeletePeaksByTargetFilterSettings configuration, ProcessExecutionContext context) throws IllegalArgumentException {
 
 		Collection<IPeak> peaks = getReadOnlyPeaks(chromatogramSelection);
-		//
+
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
-		//
+
 		if(isConfigurationValid(configuration)) {
 			SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), peaks.size());
 			List<IPeak> peaksToDelete = new ArrayList<>();
@@ -78,7 +78,7 @@ public class DeletePeaksByTargetFilter extends AbstractPeakFilter<DeletePeaksByT
 		if(peak != null) {
 			if(isConfigurationValid(configuration)) {
 				String searchValue = getSearchValue(configuration);
-				//
+
 				for(IIdentificationTarget identificationTarget : peak.getTargets()) {
 					ILibraryInformation libraryInformation = identificationTarget.getLibraryInformation();
 					String targetValue = getTargetValue(configuration, libraryInformation);
@@ -96,7 +96,7 @@ public class DeletePeaksByTargetFilter extends AbstractPeakFilter<DeletePeaksByT
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -107,7 +107,7 @@ public class DeletePeaksByTargetFilter extends AbstractPeakFilter<DeletePeaksByT
 			boolean caseSensitive = configuration.isCaseSensitive();
 			value = caseSensitive ? value : value.toLowerCase();
 		}
-		//
+
 		return value;
 	}
 
@@ -125,14 +125,14 @@ public class DeletePeaksByTargetFilter extends AbstractPeakFilter<DeletePeaksByT
 				value = null;
 				break;
 		}
-		//
+
 		if(value != null) {
 			if(!configuration.isRegularExpression()) {
 				boolean caseSensitive = configuration.isCaseSensitive();
 				value = caseSensitive ? value : value.toLowerCase();
 			}
 		}
-		//
+
 		return value;
 	}
 
@@ -144,7 +144,7 @@ public class DeletePeaksByTargetFilter extends AbstractPeakFilter<DeletePeaksByT
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

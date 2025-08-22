@@ -59,7 +59,7 @@ public class PeakFilter extends AbstractPeakFilter {
 		processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, DESCRIPTION, "The mass spectrum has been optimized successfully."));
 		IPeakFilterResult peakFilterResult = new PeakFilterResult(ResultStatus.OK, "The SNIP filter has been applied successfully.");
 		processingInfo.setProcessingResult(peakFilterResult);
-		//
+
 		return processingInfo;
 	}
 
@@ -69,7 +69,7 @@ public class PeakFilter extends AbstractPeakFilter {
 		for(IPeakMSD peakMSD : peaks) {
 			massSpectra.add(peakMSD.getPeakModel().getPeakMassSpectrum());
 		}
-		//
+
 		return massSpectra;
 	}
 }

@@ -36,7 +36,7 @@ public class ExtendedPeakQuantitationListUI extends Composite implements IExtend
 	private Button buttonToolbarInfo;
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private AtomicReference<PeakQuantitationListUI> tableViewer = new AtomicReference<>();
-	//
+
 	private PeakQuantitations peakQuantitations;
 
 	public ExtendedPeakQuantitationListUI(Composite parent, int style) {
@@ -62,11 +62,11 @@ public class ExtendedPeakQuantitationListUI extends Composite implements IExtend
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createListUI(this);
-		//
+
 		initialize();
 	}
 
@@ -82,7 +82,7 @@ public class ExtendedPeakQuantitationListUI extends Composite implements IExtend
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 	}
 
@@ -90,7 +90,7 @@ public class ExtendedPeakQuantitationListUI extends Composite implements IExtend
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -98,7 +98,7 @@ public class ExtendedPeakQuantitationListUI extends Composite implements IExtend
 
 		PeakQuantitationListUI peakQuantitationListUI = new PeakQuantitationListUI(parent, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		peakQuantitationListUI.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		peakQuantitationListUI.getTable().addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -108,7 +108,7 @@ public class ExtendedPeakQuantitationListUI extends Composite implements IExtend
 				if(object instanceof PeakQuantitation peakQuantitation) {
 					IChromatogramSelection chromatogramSelection = peakQuantitation.getChromatogramSelection();
 					IPeak peak = peakQuantitation.getPeak();
-					//
+
 					if(chromatogramSelection != null) {
 						if(peak != null) {
 							chromatogramSelection.setSelectedPeak(peak);
@@ -121,7 +121,7 @@ public class ExtendedPeakQuantitationListUI extends Composite implements IExtend
 				}
 			}
 		});
-		//
+
 		tableViewer.set(peakQuantitationListUI);
 	}
 

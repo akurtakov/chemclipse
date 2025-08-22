@@ -28,13 +28,13 @@ public class MeasurementResultUI extends ExtendedTableViewer {
 	private ProxySelectionChangedListener selectionChangedListener;
 	private ProxyTableLabelProvider labelProvider;
 	private ProxyStructuredContentProvider contentProvider;
-	//
+
 	private IMeasurementResult<?> lastResult;
 
 	public MeasurementResultUI(Composite parent, int style) {
 
 		super(parent, style);
-		//
+
 		contentProvider = new ProxyStructuredContentProvider();
 		setContentProvider(contentProvider);
 		labelProvider = new ProxyTableLabelProvider();
@@ -67,7 +67,7 @@ public class MeasurementResultUI extends ExtendedTableViewer {
 			if(tableLabelProvider != null) {
 				setLabelProvider(tableLabelProvider);
 			}
-			//
+
 			setInput(measurementResult);
 		}
 		lastResult = measurementResult;
@@ -78,7 +78,7 @@ public class MeasurementResultUI extends ExtendedTableViewer {
 		if(measurementResult == null) {
 			return null;
 		}
-		//
+
 		T resultAdapted = Adapters.adapt(measurementResult, desiredType);
 		if(resultAdapted != null) {
 			return resultAdapted;

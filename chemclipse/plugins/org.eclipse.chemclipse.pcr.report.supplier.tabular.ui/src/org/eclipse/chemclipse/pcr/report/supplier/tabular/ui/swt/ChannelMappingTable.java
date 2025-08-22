@@ -69,17 +69,17 @@ public class ChannelMappingTable extends Composite implements IChangeListener, I
 	private static final String FILTER_EXTENSION = "*.txt";
 	private static final String FILTER_NAME = "Channel Mapping (*.txt)";
 	private static final String FILE_NAME = "ChannelMapping.txt";
-	//
+
 	private static final String CATEGORY = "PCR Report";
 	private static final String DELETE = "Delete";
-	//
+
 	public static final String EXAMPLE = "New Subset | 1 | Channel One";
-	//
+
 	private AtomicReference<ChannelMappingListUI> tableViewer = new AtomicReference<>();
-	//
+
 	private List<Button> buttons = new ArrayList<>();
 	private List<Listener> listeners = new ArrayList<>();
-	//
+
 	private ChannelMappings channelMappings = new ChannelMappings();
 
 	public ChannelMappingTable(Composite parent, int style) {
@@ -141,10 +141,10 @@ public class ChannelMappingTable extends Composite implements IChangeListener, I
 		gridLayout.marginWidth = 0;
 		gridLayout.marginHeight = 0;
 		setLayout(gridLayout);
-		//
+
 		createToolbarMain(this);
 		createTableSection(this);
-		//
+
 		initialize();
 	}
 
@@ -160,7 +160,7 @@ public class ChannelMappingTable extends Composite implements IChangeListener, I
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(7, false));
-		//
+
 		add(createButtonAdd(composite));
 		add(createButtonEdit(composite));
 		add(createButtonRemove(composite));
@@ -178,7 +178,7 @@ public class ChannelMappingTable extends Composite implements IChangeListener, I
 
 		ChannelMappingListUI channelMappingListUI = new ChannelMappingListUI(parent, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 		channelMappingListUI.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		channelMappingListUI.setUpdateListener(new IUpdateListener() {
 
 			@Override
@@ -187,13 +187,13 @@ public class ChannelMappingTable extends Composite implements IChangeListener, I
 				setViewerInput();
 			}
 		});
-		//
+
 		Shell shell = channelMappingListUI.getTable().getShell();
 		ITableSettings tableSettings = channelMappingListUI.getTableSettings();
 		addDeleteMenuEntry(shell, tableSettings);
 		addKeyEventProcessors(shell, tableSettings);
 		channelMappingListUI.applySettings(tableSettings);
-		//
+
 		tableViewer.set(channelMappingListUI);
 	}
 
@@ -219,7 +219,7 @@ public class ChannelMappingTable extends Composite implements IChangeListener, I
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -250,7 +250,7 @@ public class ChannelMappingTable extends Composite implements IChangeListener, I
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -268,7 +268,7 @@ public class ChannelMappingTable extends Composite implements IChangeListener, I
 				deleteItems(e.display.getActiveShell());
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -289,7 +289,7 @@ public class ChannelMappingTable extends Composite implements IChangeListener, I
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -318,7 +318,7 @@ public class ChannelMappingTable extends Composite implements IChangeListener, I
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -352,7 +352,7 @@ public class ChannelMappingTable extends Composite implements IChangeListener, I
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 

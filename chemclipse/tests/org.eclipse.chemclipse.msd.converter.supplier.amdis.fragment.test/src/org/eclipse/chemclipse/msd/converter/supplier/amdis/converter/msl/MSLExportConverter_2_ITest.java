@@ -98,7 +98,7 @@ public class MSLExportConverter_2_ITest extends ImportConverterMslTestCase {
 		scansMSD = new MassSpectra();
 		scansMSD.addMassSpectrum(scanMSD);
 		exportConverter.convert(exportFile, scansMSD, false, new NullProgressMonitor());
-		//
+
 		importFile = exportFile;
 		super.setUp();
 		/*
@@ -244,7 +244,7 @@ public class MSLExportConverter_2_ITest extends ImportConverterMslTestCase {
 	public void testImport12() {
 
 		List<IColumnIndexMarker> columnIndexMarkers = libraryInformation.getColumnIndexMarkers();
-		//
+
 		IColumnIndexMarker columnIndexMarker = columnIndexMarkers.get(4);
 		ISeparationColumn separationColumn = columnIndexMarker.getSeparationColumn();
 		assertEquals(1281.0f, columnIndexMarker.getRetentionIndex(), 0);

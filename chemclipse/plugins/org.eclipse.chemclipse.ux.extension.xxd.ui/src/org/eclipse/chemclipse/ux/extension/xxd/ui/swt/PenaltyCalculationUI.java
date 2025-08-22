@@ -49,9 +49,9 @@ public class PenaltyCalculationUI extends Composite {
 	private Spinner spinnerPenaltyLevelFactor;
 	private Spinner spinnerMaxPenalty;
 	private Button buttonCalculate;
-	//
+
 	private PenaltyCalculationModel penaltyCalculationModel;
-	//
+
 	private IUpdateListener updateListener;
 
 	public PenaltyCalculationUI(Composite parent, int style) {
@@ -77,7 +77,7 @@ public class PenaltyCalculationUI extends Composite {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		buttonClipboard = createButtonClipboard(this);
 		comboViewerPenaltyCalculation = createComboViewer(this);
 		textReferenceValue = createText(this, "Reference", 0.0d);
@@ -85,7 +85,7 @@ public class PenaltyCalculationUI extends Composite {
 		spinnerPenaltyLevelFactor = createSpinnerPenaltyLevelFactor(this);
 		spinnerMaxPenalty = createSpinnerMaxPenalty(this);
 		buttonCalculate = createButtonCalculate(this);
-		//
+
 		initialize();
 	}
 
@@ -93,7 +93,7 @@ public class PenaltyCalculationUI extends Composite {
 
 		comboViewerPenaltyCalculation.setInput(PenaltyCalculation.values());
 		comboViewerPenaltyCalculation.getCombo().select(0);
-		//
+
 		updateWidgets();
 	}
 
@@ -111,11 +111,11 @@ public class PenaltyCalculationUI extends Composite {
 				String lineDelimiter = OperatingSystemUtils.getLineDelimiter();
 				StringBuilder builder = new StringBuilder();
 				PenaltyCalculation penaltyCalculation = getPenaltySelection();
-				//
+
 				builder.append("Penalty Calculation: ");
 				builder.append(penaltyCalculation.label());
 				builder.append(lineDelimiter);
-				//
+
 				builder.append("Penalty Window: ");
 				String penaltyWindow;
 				switch(penaltyCalculation) {
@@ -137,16 +137,16 @@ public class PenaltyCalculationUI extends Composite {
 				}
 				builder.append(penaltyWindow);
 				builder.append(lineDelimiter);
-				//
+
 				builder.append("Penalty Calculation Level Factor: ");
 				builder.append(getValue(spinnerPenaltyLevelFactor));
 				builder.append(lineDelimiter);
-				//
+
 				builder.append("Max Penalty: ");
 				builder.append(getValue(spinnerMaxPenalty));
-				//
+
 				Object[] data = new Object[]{builder.toString()};
-				//
+
 				TextTransfer textTransfer = TextTransfer.getInstance();
 				Transfer[] dataTypes = new Transfer[]{textTransfer};
 				Clipboard clipboard = new Clipboard(Display.getDefault());
@@ -154,7 +154,7 @@ public class PenaltyCalculationUI extends Composite {
 				clipboard.dispose();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -174,7 +174,7 @@ public class PenaltyCalculationUI extends Composite {
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select the penalty calculation type.");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		combo.addSelectionListener(new SelectionAdapter() {
@@ -186,7 +186,7 @@ public class PenaltyCalculationUI extends Composite {
 				calculate();
 			}
 		});
-		//
+
 		return comboViewer;
 	}
 
@@ -196,7 +196,7 @@ public class PenaltyCalculationUI extends Composite {
 		text.setText(Double.toString(selection));
 		text.setToolTipText(tooltip);
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		text.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -208,7 +208,7 @@ public class PenaltyCalculationUI extends Composite {
 				}
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -237,7 +237,7 @@ public class PenaltyCalculationUI extends Composite {
 		spinner.setMinimum(min);
 		spinner.setMaximum(max);
 		spinner.setSelection(selection);
-		//
+
 		spinner.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -246,7 +246,7 @@ public class PenaltyCalculationUI extends Composite {
 				calculate();
 			}
 		});
-		//
+
 		spinner.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -258,7 +258,7 @@ public class PenaltyCalculationUI extends Composite {
 				}
 			}
 		});
-		//
+
 		return spinner;
 	}
 
@@ -276,7 +276,7 @@ public class PenaltyCalculationUI extends Composite {
 				calculate();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -286,7 +286,7 @@ public class PenaltyCalculationUI extends Composite {
 		if(object instanceof PenaltyCalculation penaltyCalculation) {
 			return penaltyCalculation;
 		}
-		//
+
 		return PenaltyCalculation.NONE;
 	}
 
@@ -299,7 +299,7 @@ public class PenaltyCalculationUI extends Composite {
 
 		boolean enabled = true;
 		PenaltyCalculation penaltyCalculation = getPenaltySelection();
-		//
+
 		switch(penaltyCalculation) {
 			case RETENTION_TIME_MS:
 				textReferenceValue.setToolTipText("Retention Time Reference [min]");
@@ -314,7 +314,7 @@ public class PenaltyCalculationUI extends Composite {
 				enabled = false;
 				break;
 		}
-		//
+
 		updateWidgets(enabled);
 		updateButtons();
 	}

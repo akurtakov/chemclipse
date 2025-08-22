@@ -51,7 +51,7 @@ public class QuantitationPart extends AbstractPart<ExtendedQuantitationListUI> {
 			getControl().update(peak);
 			return true;
 		}
-		//
+
 		return false;
 	}
 

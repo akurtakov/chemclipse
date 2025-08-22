@@ -84,7 +84,7 @@ public class ExtendedNMROverlayUI extends Composite implements PropertyChangeLis
 		} else {
 			colorSchemeNormal = Colors.getColorScheme(Colors.COLOR_SCHEME_RED);
 		}
-		//
+
 		createControl();
 	}
 
@@ -119,7 +119,7 @@ public class ExtendedNMROverlayUI extends Composite implements PropertyChangeLis
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createOverlayChart(this);
 	}
@@ -131,7 +131,7 @@ public class ExtendedNMROverlayUI extends Composite implements PropertyChangeLis
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(5, false));
-		//
+
 		createModeButtons(composite);
 		createToggleChartLegendButton(composite);
 		createResetButton(composite);
@@ -238,11 +238,11 @@ public class ExtendedNMROverlayUI extends Composite implements PropertyChangeLis
 		colorSchemeNormal.reset();
 		Collection<OverlayDataNMRSelection> spectras = dataNMREditors.get().values();
 		if(!spectras.isEmpty()) {
-			//
+
 			List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
 			int i = 1;
 			Color color = colorSchemeNormal.getColor();
-			//
+
 			double yOffset = 0;
 			for(OverlayDataNMRSelection selection : spectras) {
 				IComplexSignalMeasurement<?> measurement = selection.getMeasurement();
@@ -252,7 +252,7 @@ public class ExtendedNMROverlayUI extends Composite implements PropertyChangeLis
 					lineSeriesSettings.setLineColor(color);
 					lineSeriesSettings.setEnableArea(false);
 					selection.setColor(color);
-					//
+
 					lineSeriesDataList.add(lineSeriesData);
 					color = colorSchemeNormal.getNextColor();
 					if(mode == Mode.STACKED) {
@@ -260,7 +260,7 @@ public class ExtendedNMROverlayUI extends Composite implements PropertyChangeLis
 					}
 				}
 			}
-			//
+
 			chartNMR.addSeriesData(lineSeriesDataList, ICompressionSupport.MEDIUM_COMPRESSION);
 		}
 	}
@@ -296,7 +296,7 @@ public class ExtendedNMROverlayUI extends Composite implements PropertyChangeLis
 	private static final class OverlayDataNMRSelection extends PropertyChangeSupport implements IDataNMRSelection, IColorProvider {
 
 		private static final long serialVersionUID = -4487563421162708058L;
-		//
+
 		private IScanEditorNMR editor;
 		private IComplexSignalMeasurement<?> selection;
 		private Color color;

@@ -52,7 +52,7 @@ public class VariancePart extends AbstractPartPCA<ExtendedVarianceUI> {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 }

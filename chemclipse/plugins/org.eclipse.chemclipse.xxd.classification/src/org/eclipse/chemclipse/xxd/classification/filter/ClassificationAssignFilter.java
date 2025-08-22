@@ -52,11 +52,11 @@ public class ClassificationAssignFilter extends AbstractPeakFilter<ClassifierAss
 	public void filterPeaks(IChromatogramSelection chromatogramSelection, ClassifierAssignFilterSettings configuration, ProcessExecutionContext context) throws IllegalArgumentException {
 
 		Collection<IPeak> peaks = getReadOnlyPeaks(chromatogramSelection);
-		//
+
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
-		//
+
 		SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), peaks.size());
 		for(IPeak peak : peaks) {
 			ClassificationAssigner.apply(peak, configuration);

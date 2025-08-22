@@ -99,7 +99,7 @@ public class ReaderProxy_1502 extends AbstractZipReader implements IReaderProxy 
 		massSpectrum.setRetentionIndex(retentionIndex);
 		massSpectrum.setTimeSegmentId(timeSegmentId);
 		massSpectrum.setCycleNumber(cycleNumber);
-		//
+
 		int numberOfIons = dataInputStream.readInt(); // Number of ions
 		for(int i = 1; i <= numberOfIons; i++) {
 			/*
@@ -117,7 +117,7 @@ public class ReaderProxy_1502 extends AbstractZipReader implements IReaderProxy 
 	private IVendorIon readIon(DataInputStream dataInputStream, IIonTransitionSettings ionTransitionSettings) throws IOException {
 
 		IVendorIon ion;
-		//
+
 		double mz = dataInputStream.readDouble(); // m/z
 		float abundance = dataInputStream.readFloat(); // Abundance
 		/*
@@ -140,7 +140,7 @@ public class ReaderProxy_1502 extends AbstractZipReader implements IReaderProxy 
 			double filter3Resolution = dataInputStream.readDouble(); // q3 resolution
 			int transitionGroup = dataInputStream.readInt(); // transition group
 			int dwell = dataInputStream.readInt(); // dwell
-			//
+
 			IIonTransition ionTransition = ionTransitionSettings.getIonTransition(compoundName, filter1FirstIon, filter1LastIon, filter3FirstIon, filter3LastIon, collisionEnergy, filter1Resolution, filter3Resolution, transitionGroup);
 			ionTransition.setDwell(dwell);
 			ion = new VendorIon(mz, abundance, ionTransition);

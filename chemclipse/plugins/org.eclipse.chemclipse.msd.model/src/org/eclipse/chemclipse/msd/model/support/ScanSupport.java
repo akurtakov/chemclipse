@@ -49,7 +49,7 @@ public class ScanSupport {
 			}
 			label = builder.toString();
 		}
-		//
+
 		return label;
 	}
 
@@ -69,7 +69,7 @@ public class ScanSupport {
 			builder.append((int)ionTransition.getCollisionEnergy());
 			label = builder.toString();
 		}
-		//
+
 		return label;
 	}
 
@@ -94,7 +94,7 @@ public class ScanSupport {
 				builder.append(" ");
 			}
 		}
-		//
+
 		return builder.toString();
 	}
 
@@ -108,14 +108,14 @@ public class ScanSupport {
 		List<Integer> traces = extractTracesList(scanMSD, maxCopyTraces, sortTraces);
 		Iterator<Integer> iterator = traces.iterator();
 		StringBuilder builder = new StringBuilder();
-		//
+
 		while(iterator.hasNext()) {
 			builder.append(iterator.next());
 			if(iterator.hasNext()) {
 				builder.append(" ");
 			}
 		}
-		//
+
 		return builder.toString();
 	}
 
@@ -131,7 +131,7 @@ public class ScanSupport {
 			IScanMSD massSpectrum = scanMSD.getOptimizedMassSpectrum() != null ? scanMSD.getOptimizedMassSpectrum() : scanMSD;
 			List<IIon> ions = new ArrayList<>(massSpectrum.getIons());
 			Collections.sort(ions, (i1, i2) -> Float.compare(i2.getAbundance(), i1.getAbundance()));
-			//
+
 			exitloop:
 			for(IIon ion : ions) {
 				/*
@@ -141,7 +141,7 @@ public class ScanSupport {
 				if(!traces.contains(trace)) {
 					traces.add(trace);
 				}
-				//
+
 				if(traces.size() >= maxCopyTraces) {
 					break exitloop;
 				}
@@ -153,7 +153,7 @@ public class ScanSupport {
 		if(sortTraces) {
 			Collections.sort(traces);
 		}
-		//
+
 		return traces;
 	}
 }

@@ -24,7 +24,7 @@ import org.eclipse.chemclipse.model.support.ChromatogramSegment;
 public class ChromatogramSegmentation extends AnalysisSegmentMeasurementResult<ChromatogramSegment> {
 
 	private static final long serialVersionUID = 7162215390880261702L;
-	//
+
 	private final List<ChromatogramSegment> chromatogramSegments;
 	private final int segmentWidth;
 

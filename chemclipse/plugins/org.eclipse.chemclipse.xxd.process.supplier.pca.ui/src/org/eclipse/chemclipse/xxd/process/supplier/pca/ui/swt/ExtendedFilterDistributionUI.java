@@ -51,7 +51,7 @@ public class ExtendedFilterDistributionUI extends Composite implements IExtended
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		plot = createPlot(this);
 	}
@@ -63,7 +63,7 @@ public class ExtendedFilterDistributionUI extends Composite implements IExtended
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(2, false));
-		//
+
 		createSettingsButton(composite);
 	}
 

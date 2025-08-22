@@ -84,7 +84,7 @@ public class ChromatogramIndexCurator implements IProcessTypeSupplier {
 				ISeparationColumnIndices separationColumnIndicesChromatogram = chromatogram.getSeparationColumnIndices();
 				RetentionIndexSupport.transferRetentionIndexMarker(retentionIndexMarker, separationColumnIndicesChromatogram);
 			}
-			//
+
 			return chromatogramSelection;
 		}
 	}

@@ -53,7 +53,7 @@ public class QuantPeaksChartPart extends AbstractPart<QuantPeaksChartUI> {
 				return false;
 			}
 		}
-		//
+
 		return false;
 	}
 

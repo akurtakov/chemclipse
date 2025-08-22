@@ -40,7 +40,7 @@ public class WavenumberSignalsInputValidator implements IInputValidator {
 		} else {
 			return status.getMessage();
 		}
-		//
+
 		return null;
 	}
 }

@@ -22,7 +22,7 @@ import org.eclipse.chemclipse.support.settings.UserManagement;
 public class ProcessSupplierSupport {
 
 	public static final String IDENTIFIER_PROCESS_SUPPLIER = "ProcessSupplierEntry_";
-	//
+
 	private static final String DELIMITER = "_";
 	private static final String PLACEHOLER_EMPTY = "EMPTY";
 
@@ -38,7 +38,7 @@ public class ProcessSupplierSupport {
 		if(isProcessSupplierEntry(editInformation)) {
 			processSupplierEntry = fromPayload(editInformation.getDescription().replace(IDENTIFIER_PROCESS_SUPPLIER, ""));
 		}
-		//
+
 		return processSupplierEntry;
 	}
 
@@ -59,7 +59,7 @@ public class ProcessSupplierSupport {
 			values.add(processSupplierEntry.getName());
 			values.add(processSupplierEntry.getDescription());
 			values.add(processSupplierEntry.getUserSettings());
-			//
+
 			Iterator<String> iterator = values.iterator();
 			StringBuilder builder = new StringBuilder();
 			while(iterator.hasNext()) {
@@ -73,7 +73,7 @@ public class ProcessSupplierSupport {
 			 */
 			payload = encode(builder.toString());
 		}
-		//
+
 		return payload;
 	}
 
@@ -91,7 +91,7 @@ public class ProcessSupplierSupport {
 				processSupplierEntry.setUserSettings(decode(parts[3]));
 			}
 		}
-		//
+
 		return processSupplierEntry;
 	}
 

@@ -21,7 +21,7 @@ public class HeaderMessages extends NLS {
 	public static String analysis;
 	public static String subset;
 	public static String results;
-	//
+
 	static {
 		NLS.initializeMessages("org.eclipse.chemclipse.pcr.report.supplier.tabular.excel.l10n.messages", HeaderMessages.class); //$NON-NLS-1$
 	}

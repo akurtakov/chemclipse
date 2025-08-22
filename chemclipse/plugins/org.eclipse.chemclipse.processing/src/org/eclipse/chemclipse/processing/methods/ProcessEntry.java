@@ -26,7 +26,7 @@ public final class ProcessEntry extends ListProcessEntryContainer implements IPr
 	private final ProcessEntryContainer parent;
 	private final EnumSet<DataCategory> categories = EnumSet.noneOf(DataCategory.class);
 	private final Map<String, String> jsonSettingsMap = new HashMap<>();
-	//
+
 	private String processorId;
 	private String activeProfile = DEFAULT_PROFILE;
 	private boolean skipValidation = false;

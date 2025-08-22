@@ -61,7 +61,7 @@ public class ShiftIntensityFilter implements IProcessTypeSupplier {
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 			int startScan = chromatogram.getScanNumber(chromatogramSelection.getStartRetentionTime());
 			int stopScan = chromatogram.getScanNumber(chromatogramSelection.getStopRetentionTime());
-			//
+
 			float shiftIntensity;
 			IntensityOption intensityOption = processSettings.getIntensityOption();
 			switch(intensityOption) {
@@ -74,13 +74,13 @@ public class ShiftIntensityFilter implements IProcessTypeSupplier {
 					shiftIntensity = processSettings.getShiftIntensity();
 					break;
 			}
-			//
+
 			for(int i = startScan; i <= stopScan; i++) {
 				IScan scan = chromatogram.getScan(i);
 				float totalSignal = scan.getTotalSignal() + shiftIntensity;
 				scan.adjustTotalSignal(totalSignal);
 			}
-			//
+
 			return chromatogramSelection;
 		}
 	}

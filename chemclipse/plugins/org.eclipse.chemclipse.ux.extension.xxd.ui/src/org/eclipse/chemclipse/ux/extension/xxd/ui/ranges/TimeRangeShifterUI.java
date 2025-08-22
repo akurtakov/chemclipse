@@ -38,10 +38,10 @@ public class TimeRangeShifterUI extends Composite {
 
 	private AtomicReference<Text> textControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonControl = new AtomicReference<>();
-	//
+
 	private Collection<TimeRange> settings;
 	private IUpdateListener updateListener;
-	//
+
 	private Listener listener;
 
 	public TimeRangeShifterUI(Composite parent, int style) {
@@ -53,7 +53,7 @@ public class TimeRangeShifterUI extends Composite {
 	public void addChangeListener(Listener listener) {
 
 		this.listener = listener;
-		//
+
 		textControl.get().addListener(SWT.KeyUp, listener);
 		buttonControl.get().addListener(SWT.KeyUp, listener);
 	}
@@ -61,7 +61,7 @@ public class TimeRangeShifterUI extends Composite {
 	public void setInput(Collection<TimeRange> settings) {
 
 		this.settings = settings;
-		//
+
 		if(listener != null) {
 			listener.handleEvent(new Event());
 		}
@@ -75,16 +75,16 @@ public class TimeRangeShifterUI extends Composite {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(2, false);
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		createText(composite);
 		createButton(composite);
-		//
+
 		initialize();
 		validate();
 	}
@@ -113,7 +113,7 @@ public class TimeRangeShifterUI extends Composite {
 				}
 			}
 		});
-		//
+
 		textControl.set(text);
 	}
 
@@ -131,7 +131,7 @@ public class TimeRangeShifterUI extends Composite {
 				applyShift();
 			}
 		});
-		//
+
 		buttonControl.set(button);
 	}
 

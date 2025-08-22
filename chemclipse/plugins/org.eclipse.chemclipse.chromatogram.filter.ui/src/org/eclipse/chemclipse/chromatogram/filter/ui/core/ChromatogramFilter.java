@@ -52,7 +52,7 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IChromatogramFilterSettings chromatogramFilterSettings, IProgressMonitor monitor) {
 
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = validate(chromatogramSelection, chromatogramFilterSettings);
-		//
+
 		final MaxDetectorFilterSettings filterSettings;
 		if(chromatogramFilterSettings instanceof MaxDetectorFilterSettings maxDetectorFilterSettings) {
 			filterSettings = maxDetectorFilterSettings;
@@ -60,7 +60,7 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 			filterSettings = PreferenceSupplier.getMaxDetectorFilterSettings();
 			processingInfo.addWarnMessage(DESCRIPTION, NLS.bind(Messages.settingsNotOfType, MaxDetectorFilterSettings.class));
 		}
-		//
+
 		if(!processingInfo.hasErrorMessages()) {
 			Shell shell = DisplayUtils.getShell();
 			if(shell != null) {
@@ -76,7 +76,7 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 					Shell temporaryShell = new Shell();
 					temporaryShell.setSize(0, 0);
 					temporaryShell.open();
-					//
+
 					detectScanMaxima(temporaryShell, chromatogramSelection, filterSettings);
 					temporaryShell.close();
 				});
@@ -106,7 +106,7 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 				int startScan = chromatogramSelection.getStartScan();
 				int stopScan = chromatogramSelection.getStopScan();
 				int size = stopScan - startScan + 1;
-				//
+
 				Map<Double, IScan> scanMap = new HashMap<>();
 				double[] xValues = new double[size];
 				double[] yValues = new double[size];
@@ -118,7 +118,7 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 					scanMap.put(scan.getX(), scan);
 					j++;
 				}
-				//
+
 				List<IScan> scans = extractScanMarker(maximaDetectorService, scanMap, xValues, yValues);
 				scans = sortMarker(scans, filterSettings);
 				markScans(scans, filterSettings);
@@ -134,7 +134,7 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 		 */
 		IMaximaDetectorSettings maximaDetectorSettings = maximaDetectorService.getSettings();
 		double[] positionsX = maximaDetectorService.calculate(xValues, yValues, maximaDetectorSettings);
-		//
+
 		List<IScan> scans = new ArrayList<>();
 		for(double positionX : positionsX) {
 			IScan scan = scanMap.get(positionX);
@@ -142,7 +142,7 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 				scans.add(scan);
 			}
 		}
-		//
+
 		return scans;
 	}
 
@@ -158,7 +158,7 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 			} else {
 				Collections.sort(scans, (s1, s2) -> Float.compare(s2.getTotalSignal(), s1.getTotalSignal()));
 			}
-			//
+
 			int toIndex = scans.size() > count ? count : scans.size();
 			return scans.subList(0, toIndex);
 		} else {

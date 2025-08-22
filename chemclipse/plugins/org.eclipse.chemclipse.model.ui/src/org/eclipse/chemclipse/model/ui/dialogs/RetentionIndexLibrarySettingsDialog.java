@@ -46,19 +46,19 @@ public class RetentionIndexLibrarySettingsDialog extends TitleAreaDialog {
 	public static final String ERROR_NO_LIBRARY = "It was not possible to retrieve library entries.";
 	public static final String ERROR_RETENTION_INDEX = "Please select a component with a retention index > 0.";
 	public static final String ERROR_SELECT_COMPONENT = "Please select at least one component.";
-	//
+
 	private static final String USE_ALL_SERVICES = "All Available";
-	//
+
 	private static final int MIN_RETENTION_INDEX_DELTA = 1;
 	private static final int MAX_RETENTION_INDEX_DELTA = 50;
-	//
+
 	private AtomicReference<ComboViewer> comboViewerServicesControl = new AtomicReference<>();
 	private AtomicReference<Text> textSearchColumnControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonCaseSensitiveControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonRemoveWhitespaceControl = new AtomicReference<>();
 	private AtomicReference<Spinner> spinnerRetentionIndexDeltaControl = new AtomicReference<>();
 	private AtomicReference<Text> textSpecificDatabaseControl = new AtomicReference<>();
-	//
+
 	private List<IRetentionIndexLibraryService> retentionIndexLibraryServices = LibrarySearchSupport.getRetentionIndexLibraryServices();
 	private RetentionIndexLibrarySettings retentionIndexLibrarySettings = new RetentionIndexLibrarySettings();
 
@@ -84,19 +84,19 @@ public class RetentionIndexLibrarySettingsDialog extends TitleAreaDialog {
 	protected Control createDialogArea(Composite parent) {
 
 		Composite container = (Composite)super.createDialogArea(parent);
-		//
+
 		Composite composite = new Composite(container, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		GridLayout layout = new GridLayout(2, false);
 		composite.setLayout(layout);
-		//
+
 		createComboViewerServices(composite);
 		createSectionSearchColumn(composite);
 		createSectionCaseSensitive(composite);
 		createSectionRemoveWhiteSpace(composite);
 		createSectionRetentionIndexDelta(composite);
 		createSectionSpecificDatabase(composite);
-		//
+
 		initialize();
 		return container;
 	}
@@ -125,7 +125,7 @@ public class RetentionIndexLibrarySettingsDialog extends TitleAreaDialog {
 	private void createComboViewerServices(Composite parent) {
 
 		createLabel(parent, "Use Services:");
-		//
+
 		ComboViewer comboViewer = new EnhancedComboViewer(parent, SWT.READ_ONLY);
 		Combo combo = comboViewer.getCombo();
 		comboViewer.setContentProvider(ListContentProvider.getInstance());
@@ -142,7 +142,7 @@ public class RetentionIndexLibrarySettingsDialog extends TitleAreaDialog {
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select all or a specific retention index library service.");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
@@ -161,20 +161,20 @@ public class RetentionIndexLibrarySettingsDialog extends TitleAreaDialog {
 				}
 			}
 		});
-		//
+
 		comboViewerServicesControl.set(comboViewer);
 	}
 
 	private void createSectionSearchColumn(Composite parent) {
 
 		createLabel(parent, "Search Column:");
-		//
+
 		Text text = new Text(parent, SWT.BORDER);
 		text.setText("");
 		text.setToolTipText(ColumnIndexSupport.COLUMN_TYPES);
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		text.addModifyListener(e -> retentionIndexLibrarySettings.setSearchColumn(text.getText().trim()));
-		//
+
 		textSearchColumnControl.set(text);
 	}
 
@@ -195,7 +195,7 @@ public class RetentionIndexLibrarySettingsDialog extends TitleAreaDialog {
 				retentionIndexLibrarySettings.setCaseSensitive(button.getSelection());
 			}
 		});
-		//
+
 		buttonCaseSensitiveControl.set(button);
 	}
 
@@ -216,21 +216,21 @@ public class RetentionIndexLibrarySettingsDialog extends TitleAreaDialog {
 				retentionIndexLibrarySettings.setRemoveWhiteSpace(button.getSelection());
 			}
 		});
-		//
+
 		buttonRemoveWhitespaceControl.set(button);
 	}
 
 	private void createSectionRetentionIndexDelta(Composite parent) {
 
 		createLabel(parent, "Retention Index Delta:");
-		//
+
 		Spinner spinner = new Spinner(parent, SWT.BORDER);
 		spinner.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		spinner.setMinimum(MIN_RETENTION_INDEX_DELTA);
 		spinner.setMaximum(MAX_RETENTION_INDEX_DELTA);
 		spinner.setIncrement(1);
 		spinner.setSelection(5);
-		//
+
 		spinner.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -242,20 +242,20 @@ public class RetentionIndexLibrarySettingsDialog extends TitleAreaDialog {
 				}
 			}
 		});
-		//
+
 		spinnerRetentionIndexDeltaControl.set(spinner);
 	}
 
 	private void createSectionSpecificDatabase(Composite parent) {
 
 		createLabel(parent, "Specific Database:");
-		//
+
 		Text text = new Text(parent, SWT.BORDER);
 		text.setText("");
 		text.setToolTipText("If set, the name of the database to search must match. Otherwise, take all available into account.");
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		text.addModifyListener(e -> retentionIndexLibrarySettings.setSpecificDatabase(text.getText().trim()));
-		//
+
 		textSpecificDatabaseControl.set(text);
 	}
 

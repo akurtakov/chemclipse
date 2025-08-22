@@ -35,7 +35,7 @@ import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 public class MassSpectrumComparator extends AbstractMassSpectrumComparator implements IMassSpectrumComparator {
 
 	public static final String COMPARATOR_ID = "org.eclipse.chemclipse.chromatogram.msd.comparison.supplier.alfassi.geometric";
-	//
+
 	private static final int NORMALIZATION_FACTOR = 100;
 	private static final Logger logger = Logger.getLogger(MassSpectrumComparator.class);
 
@@ -54,7 +54,7 @@ public class MassSpectrumComparator extends AbstractMassSpectrumComparator imple
 				 */
 				IExtractedIonSignal signalU = unknownAdjusted.getExtractedIonSignal();
 				IExtractedIonSignal signalR = referenceAdjusted.getExtractedIonSignal();
-				//
+
 				float matchFactor = geometricDistanceCalculator.calculate(unknownAdjusted, referenceAdjusted, signalU.getIonRange()) * 100;
 				float reverseMatchFactor = geometricDistanceCalculator.calculate(referenceAdjusted, unknownAdjusted, signalR.getIonRange()) * 100;
 				float matchFactorDirect = geometricDistanceCalculator.calculate(unknownAdjusted, referenceAdjusted) * 100;

@@ -17,10 +17,10 @@ import org.eclipse.osgi.util.NLS;
 public class Messages extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.chemclipse.chromatogram.xxd.calculator.peak.resolution.ui.l10n.messages"; //$NON-NLS-1$
-	//
+
 	public static String peakRetentionTimeMinutes;
 	public static String peakResolution;
-	//
+
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

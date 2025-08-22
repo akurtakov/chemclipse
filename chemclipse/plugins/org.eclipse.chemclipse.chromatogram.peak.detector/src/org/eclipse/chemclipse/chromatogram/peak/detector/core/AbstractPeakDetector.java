@@ -27,11 +27,11 @@ public abstract class AbstractPeakDetector implements IPeakDetector {
 		if(chromatogramSelection == null) {
 			processingInfo.addErrorMessage("Peak Detector", "The chromatogram selection must not be null.");
 		}
-		//
+
 		if(peakDetectorSettings == null) {
 			processingInfo.addErrorMessage("Peak Detector", "The peak detector settings must not be null.");
 		}
-		//
+
 		return processingInfo;
 	}
 }

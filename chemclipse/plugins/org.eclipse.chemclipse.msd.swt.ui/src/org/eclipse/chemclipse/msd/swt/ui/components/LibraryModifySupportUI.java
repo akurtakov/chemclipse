@@ -56,23 +56,23 @@ import org.eclipse.swt.widgets.Text;
 public class LibraryModifySupportUI extends Composite {
 
 	private static final Logger logger = Logger.getLogger(LibraryModifySupportUI.class);
-	//
+
 	private static final String ACTION_INITIALIZE = "ACTION_INITIALIZE";
 	private static final String ACTION_CANCEL = "ACTION_CANCEL";
 	private static final String ACTION_DELETE = "ACTION_DELETE";
 	private static final String ACTION_IMPORT = "ACTION_IMPORT";
 	private static final String ACTION_SELECT = "ACTION_SELECT";
 	private static final String ACTION_ADD = "ACTION_ADD";
-	//
+
 	private Text textLibraryPath;
 	private Button buttonSelectLibrary;
 	private Button buttonMergeLibrary;
-	//
+
 	private Button buttonCancel;
 	private Button buttonDelete;
 	private Button buttonAdd;
 	private Button buttonImport;
-	//
+
 	private MassSpectrumListUI massSpectrumListUI;
 	private SearchSupportUI searchSupportUI;
 	private IMassSpectra massSpectra;
@@ -112,21 +112,21 @@ public class LibraryModifySupportUI extends Composite {
 				enableButtonFields(ACTION_SELECT);
 			}
 		});
-		//
+
 		enableButtonFields(ACTION_INITIALIZE);
 	}
 
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setBackground(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 		GridLayout gridLayout = new GridLayout(8, false);
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		createLibraryPathText(composite);
 		createSelectLibraryButton(composite);
 		createMergeLibraryButton(composite);
@@ -135,7 +135,7 @@ public class LibraryModifySupportUI extends Composite {
 		createAddLibraryButton(composite);
 		createImportLibraryButton(composite);
 		createResetSearchButton(composite);
-		//
+
 		enableButtonFields(ACTION_INITIALIZE);
 	}
 
@@ -165,15 +165,15 @@ public class LibraryModifySupportUI extends Composite {
 					if(extensions.length == names.length) {
 						String[] filterExtensions = new String[extensions.length + 1];
 						String[] filterNames = new String[extensions.length + 1];
-						//
+
 						filterExtensions[0] = "*.*";
 						filterNames[0] = "All files";
-						//
+
 						for(int i = 0; i < extensions.length; i++) {
 							filterExtensions[i + 1] = extensions[i].replace(".", "*.");
 							filterNames[i + 1] = names[i];
 						}
-						//
+
 						Shell shell = Display.getCurrent().getActiveShell();
 						FileDialog fileDialog = new FileDialog(shell, SWT.READ_ONLY);
 						fileDialog.setText("Select Library");
@@ -233,7 +233,7 @@ public class LibraryModifySupportUI extends Composite {
 					} catch(InterruptedException e1) {
 						logger.warn(e1);
 					}
-					//
+
 					IMassSpectra massSpectraImport = runnable.getMassSpectra();
 					if(massSpectraImport != null) {
 						textLibraryPath.setText("");
@@ -283,7 +283,7 @@ public class LibraryModifySupportUI extends Composite {
 						messageBox.setText("Delete library entries?");
 						messageBox.setMessage("Would you like to delete the library entries?");
 						if(messageBox.open() == SWT.OK) {
-							//
+
 							enableButtonFields(ACTION_DELETE);
 							TableItem[] tableItems = table.getSelection();
 							for(TableItem tableItem : tableItems) {
@@ -314,7 +314,7 @@ public class LibraryModifySupportUI extends Composite {
 			public void widgetSelected(SelectionEvent e) {
 
 				enableButtonFields(ACTION_ADD);
-				//
+
 				MessageBox messageBox = new MessageBox(Display.getCurrent().getActiveShell(), SWT.ICON_INFORMATION | SWT.OK | SWT.CANCEL);
 				messageBox.setText("Add library entry?");
 				messageBox.setMessage("Would you like to add a new library entry?");
@@ -329,7 +329,7 @@ public class LibraryModifySupportUI extends Composite {
 						libraryInformation.setName(name);
 						libraryInformation.setComments("This library entry has been added manually");
 						libraryInformation.setMiscellaneous(ValueFormat.getDateFormatEnglish().format(new Date()));
-						//
+
 						libraryMassSpectrum.addIon(new Ion(18.0d, 600.0f));
 						libraryMassSpectrum.addIon(new Ion(28.0d, 1000.0f));
 						libraryMassSpectrum.addIon(new Ion(32.0d, 250.0f));
@@ -342,12 +342,12 @@ public class LibraryModifySupportUI extends Composite {
 						if(searchSupportUI != null) {
 							searchSupportUI.setSearchText(name);
 						}
-						//
+
 					} catch(Exception exception) {
 						logger.warn(exception);
 					}
 				}
-				//
+
 				enableButtonFields(ACTION_INITIALIZE);
 			}
 		});
@@ -416,7 +416,7 @@ public class LibraryModifySupportUI extends Composite {
 			case ACTION_SELECT:
 				buttonAdd.setEnabled(true);
 				buttonImport.setEnabled(true);
-				//
+
 				if(massSpectrumListUI != null && massSpectrumListUI.getTable().getSelectionIndex() >= 0) {
 					buttonDelete.setEnabled(true);
 				} else {
@@ -435,7 +435,7 @@ public class LibraryModifySupportUI extends Composite {
 		buttonDelete.setEnabled(enabled);
 		buttonAdd.setEnabled(enabled);
 		buttonImport.setEnabled(enabled);
-		//
+
 		textLibraryPath.setEnabled(enabled);
 		buttonSelectLibrary.setEnabled(enabled);
 		buttonMergeLibrary.setEnabled(enabled);

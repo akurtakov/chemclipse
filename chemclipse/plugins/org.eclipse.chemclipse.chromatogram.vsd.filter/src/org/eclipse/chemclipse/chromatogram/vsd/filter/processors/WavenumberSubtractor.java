@@ -48,7 +48,7 @@ public class WavenumberSubtractor implements IProcessTypeSupplier {
 	private static final String ID = "org.eclipse.chemclipse.chromatogram.vsd.filter.processors.wavenumberSubtractor";
 	private static final String NAME = "Wavenumber Subtractor";
 	private static final String DESCRIPTION = "Cleans the spectra of an VSD chromatogram.";
-	//
+
 	private static final double NORMALIZED_INTENSITY = 100.0d;
 
 	@Override
@@ -84,7 +84,7 @@ public class WavenumberSubtractor implements IProcessTypeSupplier {
 				if(normalizeIntensity) {
 					normalizeIntensities(subtractSignals);
 				}
-				//
+
 				if(!subtractSignals.isEmpty()) {
 					/*
 					 * Settings
@@ -92,7 +92,7 @@ public class WavenumberSubtractor implements IProcessTypeSupplier {
 					IChromatogramVSD chromatogramISD = chromatogramSelectionISD.getChromatogram();
 					int startScan = chromatogramISD.getScanNumber(chromatogramSelection.getStartRetentionTime());
 					int stopScan = chromatogramISD.getScanNumber(chromatogramSelection.getStopRetentionTime());
-					//
+
 					for(int scan = startScan; scan <= stopScan; scan++) {
 						IScan scanX = chromatogramISD.getScan(scan);
 						if(scanX instanceof IScanVSD scanISD) {
@@ -113,7 +113,7 @@ public class WavenumberSubtractor implements IProcessTypeSupplier {
 		private SignalType getSignalType(IChromatogramSelectionVSD chromatogramSelectionISD) {
 
 			SignalType signalType = SignalType.RAMAN;
-			//
+
 			IChromatogramVSD chromatogram = chromatogramSelectionISD.getChromatogram();
 			List<IScan> scans = chromatogram.getScans();
 			if(!scans.isEmpty()) {
@@ -122,7 +122,7 @@ public class WavenumberSubtractor implements IProcessTypeSupplier {
 					signalType = scanISD.getSignalType();
 				}
 			}
-			//
+
 			return signalType;
 		}
 
@@ -184,7 +184,7 @@ public class WavenumberSubtractor implements IProcessTypeSupplier {
 		private List<ISignalVSD> getSubtractSignals(WavenumberSignals wavenumberSignals, SignalType signalType, boolean nominalizeWavenumber) {
 
 			List<ISignalVSD> signals = new ArrayList<>();
-			//
+
 			for(WavenumberSignal wavenumberSignal : wavenumberSignals) {
 				/*
 				 * Optimize
@@ -208,7 +208,7 @@ public class WavenumberSubtractor implements IProcessTypeSupplier {
 				}
 				signals.add(signal);
 			}
-			//
+
 			return signals;
 		}
 	}

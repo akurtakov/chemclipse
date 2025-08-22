@@ -93,7 +93,7 @@ public class BasePeakDetector extends AbstractPeakDetector {
 			peakStart += scanOffset;
 			peakMaximum += scanOffset;
 			peakStop += scanOffset;
-			//
+
 			rawPeak = new RawPeak(peakStart, peakMaximum, peakStop);
 			if(isValidRawPeak(rawPeak)) {
 				rawPeaks.add(rawPeak);

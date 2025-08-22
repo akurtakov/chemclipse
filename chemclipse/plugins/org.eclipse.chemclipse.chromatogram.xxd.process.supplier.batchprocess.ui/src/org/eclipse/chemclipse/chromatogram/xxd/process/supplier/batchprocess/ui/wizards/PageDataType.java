@@ -66,9 +66,9 @@ public class PageDataType extends AbstractExtendedWizardPage {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		createComboViewerDataTypes(composite);
-		//
+
 		setControl(composite);
 	}
 
@@ -85,11 +85,11 @@ public class PageDataType extends AbstractExtendedWizardPage {
 				if(element instanceof DataType dataType) {
 					return dataType.name();
 				}
-				//
+
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select the data type, that shall be batch processed.");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		combo.addSelectionListener(new SelectionAdapter() {
@@ -105,10 +105,10 @@ public class PageDataType extends AbstractExtendedWizardPage {
 				}
 			}
 		});
-		//
+
 		comboViewer.setInput(BatchProcessJob.DATA_TYPES);
 		comboViewer.setSelection(new StructuredSelection(BatchProcessJob.DATA_TYPE_DEFAULT));
-		//
+
 		return comboViewer;
 	}
 }

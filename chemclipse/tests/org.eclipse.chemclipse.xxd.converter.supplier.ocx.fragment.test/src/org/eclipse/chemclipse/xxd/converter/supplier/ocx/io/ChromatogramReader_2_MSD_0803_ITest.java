@@ -102,7 +102,7 @@ public class ChromatogramReader_2_MSD_0803_ITest extends ChromatogramReaderMSDTe
 	public void testChromatogramReader_12() {
 
 		IScanMSD massSpectrum = chromatogram.getSupplierScan(1);
-		//
+
 		assertEquals(6, massSpectrum.getNumberOfIons());
 		assertEquals(159.0d, massSpectrum.getLowestIon().getIon(), 0);
 		assertEquals(41303.0f, massSpectrum.getLowestIon().getAbundance(), 0);
@@ -118,7 +118,7 @@ public class ChromatogramReader_2_MSD_0803_ITest extends ChromatogramReaderMSDTe
 	public void testChromatogramReader_13() {
 
 		IScanMSD massSpectrum = chromatogram.getSupplierScan(92);
-		//
+
 		assertEquals(11, massSpectrum.getNumberOfIons());
 		assertEquals(135.0d, massSpectrum.getLowestIon().getIon(), 0);
 		assertEquals(24425.0f, massSpectrum.getLowestIon().getAbundance(), 0);
@@ -134,7 +134,7 @@ public class ChromatogramReader_2_MSD_0803_ITest extends ChromatogramReaderMSDTe
 	public void testChromatogramReader_14() {
 
 		IScanMSD massSpectrum = chromatogram.getSupplierScan(147);
-		//
+
 		assertEquals(10, massSpectrum.getNumberOfIons());
 		assertEquals(62.9d, massSpectrum.getLowestIon().getIon(), 0);
 		assertEquals(5871.0f, massSpectrum.getLowestIon().getAbundance(), 0);
@@ -150,7 +150,7 @@ public class ChromatogramReader_2_MSD_0803_ITest extends ChromatogramReaderMSDTe
 	public void testChromatogramReader_15() {
 
 		IScanMSD massSpectrum = chromatogram.getSupplierScan(207);
-		//
+
 		assertEquals(15, massSpectrum.getNumberOfIons());
 		assertEquals(78.9d, massSpectrum.getLowestIon().getIon(), 0);
 		assertEquals(96610.0f, massSpectrum.getLowestIon().getAbundance(), 0);
@@ -205,7 +205,7 @@ public class ChromatogramReader_2_MSD_0803_ITest extends ChromatogramReaderMSDTe
 		IIonTransitionSettings ionTransitionSettings = chromatogram.getIonTransitionSettings();
 		IIonTransitionGroup ionTransitionGroup = ionTransitionSettings.get(0);
 		IIonTransition ionTransition = ionTransitionGroup.get(0);
-		//
+
 		assertEquals(1, ionTransitionGroup.size());
 		assertEquals(15.0d, ionTransition.getCollisionEnergy(), 0);
 		assertEquals(292, ionTransition.getQ1Ion());
@@ -225,7 +225,7 @@ public class ChromatogramReader_2_MSD_0803_ITest extends ChromatogramReaderMSDTe
 		IIonTransitionSettings ionTransitionSettings = chromatogram.getIonTransitionSettings();
 		IIonTransitionGroup ionTransitionGroup = ionTransitionSettings.get(11);
 		IIonTransition ionTransition = ionTransitionGroup.get(0);
-		//
+
 		assertEquals(14, ionTransitionGroup.size());
 		assertEquals(10.0d, ionTransition.getCollisionEnergy(), 0);
 		assertEquals(161, ionTransition.getQ1Ion());
@@ -245,7 +245,7 @@ public class ChromatogramReader_2_MSD_0803_ITest extends ChromatogramReaderMSDTe
 		IIonTransitionSettings ionTransitionSettings = chromatogram.getIonTransitionSettings();
 		IIonTransitionGroup ionTransitionGroup = ionTransitionSettings.get(11);
 		IIonTransition ionTransition = ionTransitionGroup.get(12);
-		//
+
 		assertEquals(14, ionTransitionGroup.size());
 		assertEquals(15.0d, ionTransition.getCollisionEnergy(), 0);
 		assertEquals(359, ionTransition.getQ1Ion());

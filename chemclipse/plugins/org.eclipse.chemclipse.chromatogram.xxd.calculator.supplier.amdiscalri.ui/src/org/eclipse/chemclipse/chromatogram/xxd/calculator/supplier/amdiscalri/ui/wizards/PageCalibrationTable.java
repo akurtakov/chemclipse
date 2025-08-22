@@ -41,7 +41,7 @@ import org.eclipse.swt.widgets.TableItem;
 public class PageCalibrationTable extends AbstractExtendedWizardPage {
 
 	private RetentionIndexWizardElements wizardElements;
-	//
+
 	private Button checkBoxValidateRetentionIndices;
 	private ChromatogramPeakChart chromatogramPeakChart;
 	private ExtendedRetentionIndexListUI extendedRetentionIndexTableViewerUI;
@@ -89,11 +89,11 @@ public class PageCalibrationTable extends AbstractExtendedWizardPage {
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setBackgroundMode(SWT.INHERIT_DEFAULT);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		createCheckBoxField(composite);
 		createChromatogramField(composite);
 		createTableField(composite);
-		//
+
 		validateSelection();
 		setControl(composite);
 	}
@@ -128,7 +128,7 @@ public class PageCalibrationTable extends AbstractExtendedWizardPage {
 		extendedRetentionIndexTableViewerUI = new ExtendedRetentionIndexListUI(composite, SWT.NONE);
 		extendedRetentionIndexTableViewerUI.setInput(new StandardsReader().getStandardsList());
 		extendedRetentionIndexTableViewerUI.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		RetentionIndexTableViewerUI retentionIndexTableViewerUI = extendedRetentionIndexTableViewerUI.getRetentionIndexTableViewerUI();
 		retentionIndexTableViewerUI.getTable().addSelectionListener(new SelectionAdapter() {
 

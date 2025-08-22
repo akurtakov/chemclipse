@@ -33,7 +33,7 @@ public class TargetReferenceTableComparator extends AbstractRecordTableComparato
 
 		int sortOrder = 0;
 		if(e1 instanceof ITargetReference entry1 && e2 instanceof ITargetReference entry2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					if(targetDisplaySettings != null) {

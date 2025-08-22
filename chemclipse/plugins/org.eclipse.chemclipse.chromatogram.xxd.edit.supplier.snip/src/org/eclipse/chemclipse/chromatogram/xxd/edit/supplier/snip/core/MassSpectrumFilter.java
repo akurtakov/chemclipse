@@ -54,12 +54,12 @@ public class MassSpectrumFilter extends AbstractMassSpectrumFilter {
 			int transitions = massSpectrumFilterSettings.getTransitions();
 			double magnificationFactor = massSpectrumFilterSettings.getMagnificationFactor();
 			filterSupplier.applySnipFilter(massSpectra, iterations, transitions, magnificationFactor, monitor);
-			//
+
 			processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, DESCRIPTION, "The mass spectrum has been optimized successfully."));
 			IMassSpectrumFilterResult massSpectrumFilterResult = new MassSpectrumFilterResult(ResultStatus.OK, "The SNIP filter has been applied successfully.");
 			processingInfo.setProcessingResult(massSpectrumFilterResult);
 		}
-		//
+
 		return processingInfo;
 	}
 }

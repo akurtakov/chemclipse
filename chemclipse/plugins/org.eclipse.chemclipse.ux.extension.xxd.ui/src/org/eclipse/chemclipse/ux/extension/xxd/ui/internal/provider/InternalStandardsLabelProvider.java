@@ -30,7 +30,7 @@ public class InternalStandardsLabelProvider extends AbstractChemClipseLabelProvi
 	public static final String COMPENSATION_FACTOR = ExtensionMessages.compensationFactor;
 	public static final String RESPONSE_FACTOR = ExtensionMessages.responseFactor;
 	public static final String CHEMICAL_CLASS = ExtensionMessages.chemicalClass;
-	//
+
 	public static final String[] TITLES = {//
 			NAME, //
 			CONCENTRATION, //
@@ -39,7 +39,7 @@ public class InternalStandardsLabelProvider extends AbstractChemClipseLabelProvi
 			RESPONSE_FACTOR, //
 			CHEMICAL_CLASS //
 	};
-	//
+
 	public static final int BOUNDS[] = {//
 			170, //
 			170, //

@@ -66,7 +66,7 @@ public class ChartWSD extends LineChart {
 		chartSettings.getRangeRestriction().setZeroX(false);
 		chartSettings.getRangeRestriction().setZeroY(false);
 		chartSettings.getRangeRestriction().setForceZeroMinY(false);
-		//
+
 		String yLabel = isAbsorbance ? ExtensionMessages.absorbance : ExtensionMessages.transmittance;
 		setPrimaryAxisSetProcessed(chartSettings, yLabel);
 		addSecondaryAxisSetProcessed(chartSettings, yLabel);
@@ -85,7 +85,7 @@ public class ChartWSD extends LineChart {
 		}
 		primaryAxisSettingsX.setVisible(true);
 		primaryAxisSettingsX.setReversed(true);
-		//
+
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle(yLabel);
 		primaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.0#E0"), new DecimalFormatSymbols(Locale.ENGLISH)));

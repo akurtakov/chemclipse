@@ -41,7 +41,7 @@ public class ChromatogramSubtractor {
 		if(chromatogramMaster != null && chromatogramSubtract != null) {
 			int startScan = chromatogramMaster.getScanNumber(startRetentionTime);
 			int stopScan = chromatogramMaster.getScanNumber(stopRetentionTime);
-			//
+
 			for(int i = startScan; i <= stopScan; i++) {
 				IScan scanMaster = chromatogramMaster.getScan(i);
 				if(scanMaster instanceof IScanMSD scanMasterMSD && CHANNEL_WISE_SUBTRACTION) {
@@ -58,7 +58,7 @@ public class ChromatogramSubtractor {
 						float totalSignalMaster = scanMaster.getTotalSignal();
 						float totalSignalSubstract = scanSubtract.getTotalSignal();
 						float totalSignal = totalSignalMaster - totalSignalSubstract;
-						//
+
 						if(scanMaster instanceof IScanMSD scanMSD) {
 							if(totalSignal > 0) {
 								scanMaster.adjustTotalSignal(totalSignal);

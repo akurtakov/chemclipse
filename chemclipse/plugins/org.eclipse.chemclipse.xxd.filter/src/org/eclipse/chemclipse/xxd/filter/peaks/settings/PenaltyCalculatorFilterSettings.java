@@ -97,7 +97,7 @@ public class PenaltyCalculatorFilterSettings implements IPenaltyCalculationSetti
 
 		List<LiteratureReference> literatureReferences = new ArrayList<>();
 		literatureReferences.add(createLiteratureReference("S1044030599000471.ris", "10.1016/S1044-0305(99)00047-1"));
-		//
+
 		return literatureReferences;
 	}
 

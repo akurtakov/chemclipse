@@ -37,7 +37,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class ReportWriter3 {
 
 	private static final String DELIMITER = "\t";
-	//
+
 	private DecimalFormat decimalFormatRetentionTime = ValueFormat.getDecimalFormatEnglish("0.00");
 	private DecimalFormat decimalFormatAreaNormal = ValueFormat.getDecimalFormatEnglish("0.0#E0");
 	private DecimalFormat decimalFormatConcentration = ValueFormat.getDecimalFormatEnglish("0.000");
@@ -110,7 +110,7 @@ public class ReportWriter3 {
 		List<IPeak> sortedPeaks = new ArrayList<>();
 		sortedPeaks.addAll(chromatogram.getPeaks());
 		Collections.sort(sortedPeaks, (p1, p2) -> Integer.compare(p1.getPeakModel().getRetentionTimeAtPeakMaximum(), p2.getPeakModel().getRetentionTimeAtPeakMaximum()));
-		//
+
 		for(IPeak peak : sortedPeaks) {
 			IPeakModel peakModel = peak.getPeakModel();
 			float retentionIndex = peakModel.getPeakMaximum().getRetentionIndex();
@@ -125,7 +125,7 @@ public class ReportWriter3 {
 			List<IQuantitationEntry> sortedQuantitationEntries = new ArrayList<>();
 			sortedQuantitationEntries.addAll(peak.getQuantitationEntries());
 			Collections.sort(sortedQuantitationEntries, (q1, q2) -> q1.getName().compareTo(q2.getName()));
-			//
+
 			for(IQuantitationEntry quantitationEntry : sortedQuantitationEntries) {
 				printWriter.print("P" + i);
 				printWriter.print(DELIMITER);

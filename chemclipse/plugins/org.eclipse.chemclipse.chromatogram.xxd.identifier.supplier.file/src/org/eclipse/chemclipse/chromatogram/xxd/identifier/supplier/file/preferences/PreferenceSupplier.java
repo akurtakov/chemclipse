@@ -42,7 +42,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String POSTFIX_MSD = "MSD";
 	public static final String POSTFIX_CSD = "CSD";
 	public static final String POSTFIX_WSD = "WSD";
-	//
+
 	public static final float MIN_FACTOR = 0.0f;
 	public static final float MAX_FACTOR = 100.0f;
 	public static final int MIN_NUMBER_OF_TARGETS = 1;
@@ -51,19 +51,19 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final int MAX_NUMBER_OF_MZ = Integer.MAX_VALUE;
 	public static final int MIN_NUMBER_OF_WAVELENGTH = 0;
 	public static final int MAX_NUMBER_OF_WAVELENGTH = Integer.MAX_VALUE;
-	//
+
 	public static final String P_MASS_SPECTRA_FILES = "massSpectraFiles";
 	public static final String DEF_MASS_SPECTRA_FILES = "";
 	public static final String P_MASS_SPECTRUM_COMPARATOR_ID = "massSpectrumComparatorId";
 	public static final String DEF_MASS_SPECTRUM_COMPARATOR_ID = IMassSpectrumComparatorSettings.DEFAULT_COMPARATOR_ID;
-	//
+
 	public static final String P_USE_PRE_OPTIMIZATION = "usePreOptimization";
 	public static final Boolean DEF_USE_PRE_OPTIMIZATION = true;
 	public static final String P_THRESHOLD_PRE_OPTIMIZATION = "thresholdPreOptimization";
 	public static final double DEF_THRESHOLD_PRE_OPTIMIZATION = 0.1d;
 	public static final double MIN_THRESHOLD_PRE_OPTIMIZATION = 0.0d; // no restriction
 	public static final double MAX_THRESHOLD_PRE_OPTIMIZATION = 1.0d; // hardest restriction
-	//
+
 	public static final String P_NUMBER_OF_TARGETS = "numberOfTargets";
 	public static final int DEF_NUMBER_OF_TARGETS = 3;
 	/*
@@ -115,7 +115,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final float DEF_PENALTY_LEVEL_FACTOR = IPenaltyCalculationSettings.DEF_PENALTY_LEVEL_FACTOR;
 	public static final String P_MAX_PENALTY = "maxPenalty";
 	public static final float DEF_MAX_PENALTY = IPenaltyCalculationSettings.DEF_PENALTY_MATCH_FACTOR;
-	//
+
 	public static final String P_FILTER_PATH_IDENTIFIER_FILES = "filterPathIdentifierFiles";
 	public static final String DEF_FILTER_PATH_IDENTIFIER_FILES = "";
 	/*
@@ -150,11 +150,11 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_LIMIT_MATCH_FACTOR_FILE, Float.toString(DEF_LIMIT_MATCH_FACTOR_FILE));
 		putDefault(P_MIN_MATCH_FACTOR, Float.toString(DEF_MIN_MATCH_FACTOR));
 		putDefault(P_MIN_REVERSE_MATCH_FACTOR, Float.toString(DEF_MIN_REVERSE_MATCH_FACTOR));
-		//
+
 		setUnknownValues(POSTFIX_MSD);
 		setUnknownValues(POSTFIX_CSD);
 		setUnknownValues(POSTFIX_WSD);
-		//
+
 		putDefault(P_DELTA_CALCULATION, DEF_DELTA_CALCULATION);
 		putDefault(P_DELTA_WINDOW, Float.toString(DEF_DELTA_WINDOW));
 		putDefault(P_PENALTY_CALCULATION, DEF_PENALTY_CALCULATION);
@@ -162,11 +162,11 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_PENALTY_LEVEL_FACTOR, Float.toString(DEF_PENALTY_LEVEL_FACTOR));
 		putDefault(P_MAX_PENALTY, Float.toString(DEF_MAX_PENALTY));
 		putDefault(P_FILTER_PATH_IDENTIFIER_FILES, DEF_FILTER_PATH_IDENTIFIER_FILES);
-		//
+
 		putDefault(P_USE_NORMALIZED_SCAN, Boolean.toString(DEF_USE_NORMALIZED_SCAN));
 		putDefault(P_CALCULATION_TYPE, DEF_CALCULATION_TYPE);
 		putDefault(P_USE_PEAKS_INSTEAD_OF_SCANS, Boolean.toString(DEF_USE_PEAKS_INSTEAD_OF_SCANS));
-		//
+
 	}
 
 	private void setUnknownValues(String postfix) {
@@ -202,14 +202,14 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		settings.setLimitMatchFactor(INSTANCE().getFloat(P_LIMIT_MATCH_FACTOR_FILE, DEF_LIMIT_MATCH_FACTOR_FILE));
 		settings.setMinMatchFactor(INSTANCE().getFloat(P_MIN_MATCH_FACTOR, DEF_MIN_MATCH_FACTOR));
 		settings.setMinReverseMatchFactor(INSTANCE().getFloat(P_MIN_REVERSE_MATCH_FACTOR, DEF_MIN_REVERSE_MATCH_FACTOR));
-		//
+
 		settings.setDeltaCalculation(getDeltaCalculation());
 		settings.setDeltaWindow(INSTANCE().getFloat(P_DELTA_WINDOW, DEF_DELTA_WINDOW));
 		settings.setPenaltyCalculation(getPenaltyCalculation());
 		settings.setPenaltyWindow(INSTANCE().getFloat(P_PENALTY_WINDOW, DEF_PENALTY_WINDOW));
 		settings.setPenaltyLevelFactor(INSTANCE().getFloat(P_PENALTY_LEVEL_FACTOR, DEF_PENALTY_LEVEL_FACTOR));
 		settings.setMaxPenalty(INSTANCE().getFloat(P_MAX_PENALTY, DEF_MAX_PENALTY));
-		//
+
 		return settings;
 	}
 
@@ -219,7 +219,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		PeakUnknownSettingsMSD settings = new PeakUnknownSettingsMSD();
 		initalizeUnknownSettings(settings, postfix);
 		settings.setNumberOfMZ(INSTANCE().getInteger(P_NUMBER_OF_MZ_UNKNOWN + postfix, DEF_NUMBER_OF_MZ_UNKNOWN));
-		//
+
 		return settings;
 	}
 
@@ -227,7 +227,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		PeakUnknownSettingsCSD settings = new PeakUnknownSettingsCSD();
 		initalizeUnknownSettings(settings, POSTFIX_CSD);
-		//
+
 		return settings;
 	}
 
@@ -237,7 +237,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		PeakUnknownSettingsWSD settings = new PeakUnknownSettingsWSD();
 		initalizeUnknownSettings(settings, postfix);
 		settings.setNumberOfWavelengths(INSTANCE().getInteger(P_NUMBER_OF_WAVELENGTH_UNKNOWN + postfix, DEF_NUMBER_OF_WAVELENGTH_UNKNOWN));
-		//
+
 		return settings;
 	}
 
@@ -247,7 +247,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		MassSpectrumUnknownSettings settings = new MassSpectrumUnknownSettings();
 		initalizeUnknownSettings(settings, postfix);
 		settings.setNumberOfMZ(INSTANCE().getInteger(P_NUMBER_OF_MZ_UNKNOWN + postfix, DEF_NUMBER_OF_MZ_UNKNOWN));
-		//
+
 		return settings;
 	}
 
@@ -257,7 +257,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		WaveSpectrumUnknownSettings settings = new WaveSpectrumUnknownSettings();
 		initalizeUnknownSettings(settings, postfix);
 		settings.setNumberOfWavelengths(INSTANCE().getInteger(P_NUMBER_OF_WAVELENGTH_UNKNOWN + postfix, DEF_NUMBER_OF_WAVELENGTH_UNKNOWN));
-		//
+
 		return settings;
 	}
 
@@ -307,7 +307,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		settings.setCalculationType(getCalculationType());
 		settings.setUsePeaksInsteadOfScans(isUsePeaksInsteadOfScans());
 		initialize(settings);
-		//
+
 		return settings;
 	}
 

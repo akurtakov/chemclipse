@@ -46,11 +46,11 @@ public class PeakIdentifier extends AbstractPeakIdentifierMSD {
 			 * Run the identifier.
 			 */
 			processingInfo.addMessages(alkaneIdentifier.runPeakIdentification(peaks, alkaneSettings, monitor));
-			//
+
 		} catch(FileNotFoundException e) {
 			processingInfo.addErrorMessage("Alkane Identifier", "Some has gone wrong.", e);
 		}
-		//
+
 		return processingInfo;
 	}
 }

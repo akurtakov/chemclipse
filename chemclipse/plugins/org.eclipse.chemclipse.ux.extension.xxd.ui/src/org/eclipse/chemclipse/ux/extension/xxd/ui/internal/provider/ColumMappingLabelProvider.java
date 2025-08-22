@@ -24,7 +24,7 @@ public class ColumMappingLabelProvider extends AbstractChemClipseLabelProvider {
 
 	public static final String KEYWORD = "Keyword";
 	public static final String SEPRATION_COLUMN = "Separation Column";
-	//
+
 	public static final String[] TITLES = { //
 			KEYWORD, //
 			SEPRATION_COLUMN//

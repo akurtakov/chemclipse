@@ -59,7 +59,7 @@ public class WellChannelsPart extends AbstractPart<ExtendedWellChannelsUI> {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 

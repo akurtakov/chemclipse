@@ -93,7 +93,7 @@ public class LibraryService {
 		} catch(NoIdentifierAvailableException e) {
 			processingInfo = getNoIdentifierAvailableProcessingInfo();
 		}
-		//
+
 		return processingInfo;
 	}
 

@@ -56,19 +56,19 @@ public class ScanIdentifierUI extends Composite {
 
 	private static final Logger logger = Logger.getLogger(ScanIdentifierUI.class);
 	private static final String KEY_MENU_DATA = "keyMenuData";
-	//
+
 	private AtomicReference<Button> buttonExecute = new AtomicReference<>();
 	private Menu menuMSD = null;
 	private Menu menuWSD = null;
-	//
+
 	private List<IScan> scans = new ArrayList<>();
 	private IUpdateListenerUI updateListener = null;
-	//
+
 	private List<IMassSpectrumIdentifierSupplier> identifierSuppliersMSD = getIdentifierSuppliersMSD();
 	private IMassSpectrumIdentifierSupplier massSpectrumIdentifierSupplier;
 	private List<IWaveSpectrumIdentifierSupplier> identifierSuppliersWSD = getIdentifierSuppliersWSD();
 	private IWaveSpectrumIdentifierSupplier waveSpectrumIdentifierSupplier;
-	//
+
 	private final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
 	public ScanIdentifierUI(Composite parent, int style) {
@@ -85,7 +85,7 @@ public class ScanIdentifierUI extends Composite {
 			IMassSpectrumIdentifierSupplier identifierSupplier = identifierSuppliersMSD.get(i);
 			scanIdentifierMSD[i] = new String[]{identifierSupplier.getIdentifierName(), identifierSupplier.getId()};
 		}
-		//
+
 		return scanIdentifierMSD;
 	}
 
@@ -97,7 +97,7 @@ public class ScanIdentifierUI extends Composite {
 			IWaveSpectrumIdentifierSupplier identifierSupplier = identifierSuppliersWSD.get(i);
 			scanIdentifierWSD[i] = new String[]{identifierSupplier.getIdentifierName(), identifierSupplier.getId()};
 		}
-		//
+
 		return scanIdentifierWSD;
 	}
 
@@ -134,11 +134,11 @@ public class ScanIdentifierUI extends Composite {
 
 		Menu menu = buttonExecute.get().getMenu();
 		if(menu != null) {
-			//
+
 			DataType dataType = (DataType)menu.getData(KEY_MENU_DATA);
 			List<IScanMSD> scansMSD = new ArrayList<>();
 			List<IScanWSD> scansWSD = new ArrayList<>();
-			//
+
 			for(IScan scan : scans) {
 				if(scan instanceof IScanMSD scanMSD && DataType.MSD.equals(dataType)) {
 					IScanMSD optimizedMassSpectrum = scanMSD.getOptimizedMassSpectrum();
@@ -148,7 +148,7 @@ public class ScanIdentifierUI extends Composite {
 					scansWSD.add(scanWSD);
 				}
 			}
-			//
+
 			runIdentification(display, scansMSD, scansWSD, true);
 		}
 	}
@@ -159,7 +159,7 @@ public class ScanIdentifierUI extends Composite {
 		if(menuMSD != null) {
 			menuMSD.dispose();
 		}
-		//
+
 		if(menuWSD != null) {
 			menuWSD.dispose();
 		}
@@ -168,16 +168,16 @@ public class ScanIdentifierUI extends Composite {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(1, false);
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		gridLayout.marginWidth = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		createButtonExecute(composite);
-		//
+
 		initialize();
 	}
 
@@ -200,14 +200,14 @@ public class ScanIdentifierUI extends Composite {
 				runIdentification(e.display);
 			}
 		});
-		//
+
 		buttonExecute.set(button);
 	}
 
 	private void updateMenu() {
 
 		setEnabled(false);
-		//
+
 		if(!scans.isEmpty()) {
 			/*
 			 * Get the first scan to determine whether to use MSD or WSD.
@@ -301,7 +301,7 @@ public class ScanIdentifierUI extends Composite {
 
 		Menu menu = new Menu(button);
 		menu.setData(KEY_MENU_DATA, DataType.MSD);
-		//
+
 		for(IMassSpectrumIdentifierSupplier identifierSupplier : identifierSuppliers) {
 			/*
 			 * Identifier Handler
@@ -320,7 +320,7 @@ public class ScanIdentifierUI extends Composite {
 				}
 			});
 		}
-		//
+
 		return menu;
 	}
 
@@ -328,7 +328,7 @@ public class ScanIdentifierUI extends Composite {
 
 		Menu menu = new Menu(button);
 		menu.setData(KEY_MENU_DATA, DataType.WSD);
-		//
+
 		for(IWaveSpectrumIdentifierSupplier identifierSupplier : identifierSuppliers) {
 			/*
 			 * Identifier Handler
@@ -347,7 +347,7 @@ public class ScanIdentifierUI extends Composite {
 				}
 			});
 		}
-		//
+
 		return menu;
 	}
 
@@ -356,7 +356,7 @@ public class ScanIdentifierUI extends Composite {
 		IMassSpectrumIdentifierSupport massSpectrumIdentifierSupport = MassSpectrumIdentifier.getMassSpectrumIdentifierSupport();
 		List<IMassSpectrumIdentifierSupplier> identifierSuppliers = new ArrayList<>(massSpectrumIdentifierSupport.getSuppliers());
 		Collections.sort(identifierSuppliers, (s1, s2) -> s1.getIdentifierName().compareTo(s2.getIdentifierName()));
-		//
+
 		return identifierSuppliers;
 	}
 
@@ -365,7 +365,7 @@ public class ScanIdentifierUI extends Composite {
 		IWaveSpectrumIdentifierSupport waveSpectrumIdentifierSupport = WaveSpectrumIdentifier.getWaveSpectrumIdentifierSupport();
 		List<IWaveSpectrumIdentifierSupplier> identifierSuppliers = new ArrayList<>(waveSpectrumIdentifierSupport.getSuppliers());
 		Collections.sort(identifierSuppliers, (s1, s2) -> s1.getIdentifierName().compareTo(s2.getIdentifierName()));
-		//
+
 		return identifierSuppliers;
 	}
 
@@ -392,7 +392,7 @@ public class ScanIdentifierUI extends Composite {
 				logger.warn(e);
 			}
 		}
-		//
+
 		if(!waveSpectra.isEmpty() && waveSpectrumIdentifierSupplier != null) {
 			IRunnableWithProgress runnable = new WaveSpectrumIdentifierRunnable(waveSpectra, waveSpectrumIdentifierSupplier.getId());
 			ProgressMonitorDialog monitor = new ProgressMonitorDialog(display.getActiveShell());

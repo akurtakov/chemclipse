@@ -34,11 +34,11 @@ public class ScanDirectIdentifier extends AbstractMassSpectrumIdentifier {
 	public IProcessingInfo<IMassSpectra> identify(List<IScanMSD> massSpectrumList, IMassSpectrumIdentifierSettings identifierSettings, IProgressMonitor monitor) {
 
 		IProcessingInfo<IMassSpectra> processingInfo = new ProcessingInfo<>();
-		//
+
 		if(identifierSettings == null) {
 			identifierSettings = PreferenceSupplier.getScanDirectIdentifierSettings();
 		}
-		//
+
 		if(identifierSettings instanceof ScanDirectIdentifierSettings scanDirectIdentifierSettings) {
 			try {
 				Identifier identifier = new Identifier();
@@ -50,7 +50,7 @@ public class ScanDirectIdentifier extends AbstractMassSpectrumIdentifier {
 		} else {
 			processingInfo.addErrorMessage(Messages.nistDbIdentifier, "The settings are not of type: " + ScanDirectIdentifierSettings.class);
 		}
-		//
+
 		return processingInfo;
 	}
 }

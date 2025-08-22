@@ -43,7 +43,7 @@ public class ExtendedPCRPlateUI extends Composite implements IExtendedPartUI {
 	private PCRPlate pcrPlate;
 	private Combo comboSubsets;
 	private Combo comboChannels;
-	//
+
 	private IPlate plate;
 
 	public ExtendedPCRPlateUI(Composite parent, int style) {
@@ -61,7 +61,7 @@ public class ExtendedPCRPlateUI extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createPlateUI(this);
 	}
@@ -72,7 +72,7 @@ public class ExtendedPCRPlateUI extends Composite implements IExtendedPartUI {
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(4, false));
-		//
+
 		createDataInfoLabel(composite);
 		comboSubsets = createComboSubsets(composite);
 		comboChannels = createComboChannels(composite);
@@ -107,7 +107,7 @@ public class ExtendedPCRPlateUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		return combo;
 	}
 
@@ -131,7 +131,7 @@ public class ExtendedPCRPlateUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		return combo;
 	}
 

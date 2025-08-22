@@ -69,7 +69,7 @@ public class ChromatogramRetentionIndexRecalculator implements IProcessTypeSuppl
 					processChromatogram(chromatogramReference);
 				}
 			}
-			//
+
 			return chromatogramSelection;
 		}
 

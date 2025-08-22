@@ -31,11 +31,11 @@ public class PeakIdentifier {
 		if(file.isDirectory()) {
 			return false;
 		}
-		//
+
 		if(suppliers == null) {
 			suppliers = PeakConverterMSD.getPeakConverterSupport().getSupplier();
 		}
-		//
+
 		if(suppliers != null && !suppliers.isEmpty()) {
 			for(ISupplier supplier : suppliers) {
 				String supplierExtension = supplier.getFileExtension().toLowerCase();
@@ -46,7 +46,7 @@ public class PeakIdentifier {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -59,11 +59,11 @@ public class PeakIdentifier {
 		if(!file.isDirectory()) {
 			return false;
 		}
-		//
+
 		if(suppliers == null) {
 			suppliers = PeakConverterMSD.getPeakConverterSupport().getSupplier();
 		}
-		//
+
 		if(suppliers != null && !suppliers.isEmpty()) {
 			for(ISupplier supplier : suppliers) {
 				String directoryExtension = supplier.getDirectoryExtension().toUpperCase();

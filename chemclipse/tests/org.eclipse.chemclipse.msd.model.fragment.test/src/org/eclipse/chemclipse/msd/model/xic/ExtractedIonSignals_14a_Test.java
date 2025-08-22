@@ -52,7 +52,7 @@ public class ExtractedIonSignals_14a_Test {
 			}
 			chromatogram.addScan(supplierMassSpectrum);
 		}
-		//
+
 		((IScanMSD)chromatogram.getScan(1)).removeAllIons();
 		((IScanMSD)chromatogram.getScan(2)).removeAllIons();
 		((IScanMSD)chromatogram.getScan(3)).removeAllIons();

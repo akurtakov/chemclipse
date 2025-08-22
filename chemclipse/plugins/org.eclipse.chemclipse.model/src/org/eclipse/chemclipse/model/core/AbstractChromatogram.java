@@ -52,9 +52,9 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 
 	private static final long serialVersionUID = -2540103992883061431L;
 	private static final Logger logger = Logger.getLogger(AbstractChromatogram.class);
-	//
+
 	private static final String COLUMN_DETAILS = "Column Details";
-	//
+
 	private boolean finalized = false;
 	private String converterId = "";
 	private File file = null; // The file object of the chromatogram.
@@ -100,7 +100,7 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 	private String integratorDescription = "";
 	private List<IIntegrationEntry> chromatogramIntegrationEntries = new ArrayList<>();
 	private List<IIntegrationEntry> backgroundIntegrationEntries = new ArrayList<>();
-	//
+
 	private IMethod method = new TripleQuadMethod();
 	private ISeparationColumnIndices separationColumnIndices = SeparationColumnFactory.getSeparationColumnIndices(SeparationColumnType.DEFAULT);
 	/*
@@ -534,14 +534,14 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 
 		List<IScan> list = getScans();
 		list.clear();
-		//
+
 		int scanNumber = 1;
 		for(IScan scan : scans) {
 			scan.setParentChromatogram(this);
 			scan.setScanNumber(scanNumber);
 			scanNumber++;
 		}
-		//
+
 		list.addAll(scans);
 	}
 
@@ -566,7 +566,7 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 			baselineModel = new BaselineModel(this);
 			baselineModelMap.put(activeBaselineId, baselineModel);
 		}
-		//
+
 		return baselineModel;
 	}
 
@@ -661,7 +661,7 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 		if(file == null) {
 			return nameDefault;
 		}
-		//
+
 		StringTokenizer tokenizer = new StringTokenizer(getFile().getAbsolutePath(), File.separator);
 		int element = tokenizer.countTokens() - 1;
 		/*

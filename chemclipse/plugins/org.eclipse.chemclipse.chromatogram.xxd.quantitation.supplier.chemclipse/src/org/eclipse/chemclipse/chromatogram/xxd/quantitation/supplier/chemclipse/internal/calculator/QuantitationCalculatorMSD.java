@@ -118,7 +118,7 @@ public class QuantitationCalculatorMSD implements IQuantitationCalculatorMSD {
 		double signal = ISignal.TOTAL_INTENSITY;
 		IQuantitationEntry quantitationEntry = getQuantitationEntry(signal, quantitationCompound, integratedArea);
 		quantitationEntries.add(quantitationEntry);
-		//
+
 		return quantitationEntries;
 	}
 
@@ -133,7 +133,7 @@ public class QuantitationCalculatorMSD implements IQuantitationCalculatorMSD {
 	private List<IQuantitationEntry> getQuantitationEntriesXIC(IQuantitationCompound quantitationCompound, IPeakMSD peak, List<Double> selectedQuantitationIons, QuantitationSupport integrationQuantitationSupport) {
 
 		List<IQuantitationEntry> quantitationEntries = new ArrayList<>();
-		//
+
 		IScanMSD massSpectrum = peak.getExtractedMassSpectrum();
 		IExtractedIonSignal extractedIonSignal = massSpectrum.getExtractedIonSignal();
 		float totalSignalMassSpectrum = extractedIonSignal.getTotalSignal();
@@ -164,7 +164,7 @@ public class QuantitationCalculatorMSD implements IQuantitationCalculatorMSD {
 			}
 			quantitationEntries.add(quantitationEntry);
 		}
-		//
+
 		return quantitationEntries;
 	}
 
@@ -185,12 +185,12 @@ public class QuantitationCalculatorMSD implements IQuantitationCalculatorMSD {
 		boolean isCrossZero = quantitationCompound.isCrossZero();
 		double concentration = 0.0d;
 		String description = "";
-		//
+
 		CalibrationMethod calibrationMethod = quantitationCompound.getCalibrationMethod();
 		IResponseSignals responseSignals = quantitationCompound.getResponseSignals();
 		double minResponse = responseSignals.getMinResponseValue(signal);
 		double maxResponse = responseSignals.getMaxResponseValue(signal);
-		//
+
 		switch(calibrationMethod) {
 			case LINEAR:
 				/*
@@ -230,14 +230,14 @@ public class QuantitationCalculatorMSD implements IQuantitationCalculatorMSD {
 			default:
 				break;
 		}
-		//
+
 		IQuantitationEntry quantitationEntry = new QuantitationEntry(name, concentration, concentrationUnit, integratedArea);
 		quantitationEntry.setSignal(signal);
 		quantitationEntry.setCalibrationMethod(calibrationMethod.toString());
 		quantitationEntry.setUsedCrossZero(isCrossZero);
 		quantitationEntry.setChemicalClass(chemicalClass);
 		quantitationEntry.setDescription(description);
-		//
+
 		return quantitationEntry;
 	}
 

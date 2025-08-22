@@ -53,13 +53,13 @@ public class LowPassIonsFilter extends AbstractPeakFilter<LowPassFilterSettings>
 	public void filterPeaks(IChromatogramSelection chromatogramSelection, LowPassFilterSettings configuration, ProcessExecutionContext context) throws IllegalArgumentException {
 
 		Collection<IPeak> peaks = getReadOnlyPeaks(chromatogramSelection);
-		//
+
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
-		//
+
 		int number = configuration.getNumberLowest();
-		//
+
 		SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), peaks.size());
 		for(IPeak peak : peaks) {
 			if(peak instanceof IPeakMSD peakMSD) {

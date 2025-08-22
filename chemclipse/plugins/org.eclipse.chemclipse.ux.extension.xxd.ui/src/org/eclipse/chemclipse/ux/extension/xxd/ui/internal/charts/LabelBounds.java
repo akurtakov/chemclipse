@@ -28,9 +28,9 @@ import org.eclipse.swtchart.Resources;
 public class LabelBounds {
 
 	public static final boolean DEBUG_FENCES = false;
-	//
+
 	private static final Logger logger = Logger.getLogger(LabelBounds.class);
-	//
+
 	private final float[] pointArray = new float[10];
 	private final int[] transformedPoints = new int[10];
 	private final int width;

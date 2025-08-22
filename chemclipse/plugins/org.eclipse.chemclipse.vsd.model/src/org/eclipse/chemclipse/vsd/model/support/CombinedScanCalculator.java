@@ -71,7 +71,7 @@ public class CombinedScanCalculator {
 			}
 			scanISD.getProcessedSignals().add(signal);
 		}
-		//
+
 		return scanISD;
 	}
 
@@ -101,7 +101,7 @@ public class CombinedScanCalculator {
 					break;
 			}
 		}
-		//
+
 		return sumIntensity;
 	}
 }

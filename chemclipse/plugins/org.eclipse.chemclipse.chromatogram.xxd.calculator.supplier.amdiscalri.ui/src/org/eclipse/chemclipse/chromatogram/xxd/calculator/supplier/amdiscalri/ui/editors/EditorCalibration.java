@@ -42,14 +42,14 @@ import jakarta.annotation.PreDestroy;
 public class EditorCalibration extends MultiPageEditorPart {
 
 	private static final Logger logger = Logger.getLogger(EditorCalibration.class);
-	//
+
 	private PageCalibration pageCalibration;
 	private File file;
 	private boolean isDirty = false;
 	private boolean initialize = true;
-	//
+
 	private ISeparationColumnIndices separationColumnIndices;
-	//
+
 	private ArrayList<EventHandler> registeredEventHandler;
 	private List<Object> objects = new ArrayList<>();
 

@@ -33,7 +33,7 @@ public abstract class AbstractRegularMassSpectrumProxy extends AbstractRegularMa
 	 * methods.
 	 */
 	private static final long serialVersionUID = 6994933565324921239L;
-	//
+
 	private boolean isProxy = true;
 	/*
 	 * Both values are used in proxy modus to display

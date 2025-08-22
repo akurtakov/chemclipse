@@ -39,7 +39,7 @@ public enum DataExplorerTreeRoot {
 	USER_LOCATION(ExtensionMessages.userLocation);
 
 	private static final Logger logger = Logger.getLogger(DataExplorerTreeRoot.class);
-	//
+
 	private String label;
 
 	private DataExplorerTreeRoot(String label) {
@@ -99,7 +99,7 @@ public enum DataExplorerTreeRoot {
 				roots = new File[]{};
 				break;
 		}
-		//
+
 		return roots;
 	}
 

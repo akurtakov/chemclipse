@@ -33,20 +33,20 @@ public class TraceRangeFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof TraceRange traceRange) {
 			String name = traceRange.getName();
-			//
+
 			if(!caseSensitive) {
 				searchText = searchText.toLowerCase();
 				name = name.toLowerCase();
 			}
-			//
+
 			if(name.contains(searchText)) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

@@ -43,26 +43,26 @@ public class PeakTargetExtractor extends AbstractClassifierDescriptionExtractor 
 		List<Sample> samplesList = new ArrayList<>();
 		peaks.keySet().forEach(d -> samplesList.add(new Sample(d.getSampleName(), d.getGroupName())));
 		Samples samples = new Samples(samplesList);
-		//
+
 		Map<String, List<IPeak>> peakMap = new LinkedHashMap<>();
 		peaks.forEach((dataInputEntry, peaksInput) -> {
 			peakMap.put(dataInputEntry.getSampleName(), peaksInput);
 		});
-		//
+
 		Set<String> targets = extractPeakTargets(peaks.values());
 		Map<String, SortedMap<String, IPeak>> extractPeaks = exctractPcaPeakMap(peakMap);
 		samples.getVariables().addAll(Target.create(targets));
-		//
+
 		setExtractData(extractPeaks, samples, valueOption);
 		setClassifierAndDescription(samples, descriptionOption);
-		//
+
 		return samples;
 	}
 
 	private Set<String> extractPeakTargets(Collection<List<IPeak>> peaksCollection) {
 
 		Set<String> targets = new HashSet<>();
-		//
+
 		for(List<IPeak> peaks : peaksCollection) {
 			for(IPeak peak : peaks) {
 				ILibraryInformation libraryInformation = IIdentificationTarget.getLibraryInformation(peak);
@@ -71,19 +71,19 @@ public class PeakTargetExtractor extends AbstractClassifierDescriptionExtractor 
 				}
 			}
 		}
-		//
+
 		return targets;
 	}
 
 	private Map<String, SortedMap<String, IPeak>> exctractPcaPeakMap(Map<String, List<IPeak>> peakMap) {
 
 		Map<String, SortedMap<String, IPeak>> pcaPeaks = new LinkedHashMap<>();
-		//
+
 		for(Map.Entry<String, List<IPeak>> peakEnry : peakMap.entrySet()) {
 			String name = peakEnry.getKey();
 			List<IPeak> peaks = peakEnry.getValue();
 			TreeMap<String, IPeak> peakTree = new TreeMap<>();
-			//
+
 			for(IPeak peak : peaks) {
 				String target;
 				ILibraryInformation libraryInformation = IIdentificationTarget.getLibraryInformation(peak);
@@ -96,7 +96,7 @@ public class PeakTargetExtractor extends AbstractClassifierDescriptionExtractor 
 			}
 			pcaPeaks.put(name, peakTree);
 		}
-		//
+
 		return pcaPeaks;
 	}
 
@@ -104,7 +104,7 @@ public class PeakTargetExtractor extends AbstractClassifierDescriptionExtractor 
 
 		List<IVariable> extractedTargets = samples.getVariables();
 		boolean useQuantitationValue = ValueOption.CONCENTRATION.equals(valueOption);
-		//
+
 		for(Sample sample : samples.getSamples()) {
 			Iterator<IVariable> iterator = extractedTargets.iterator();
 			SortedMap<String, IPeak> extractPeak = extractData.get(sample.getSampleName());
@@ -127,7 +127,7 @@ public class PeakTargetExtractor extends AbstractClassifierDescriptionExtractor 
 						 */
 						value = peak.getIntegratedArea();
 					}
-					//
+
 					PeakSampleData sampleData = new PeakSampleData(value, peak);
 					sampleData.setPeak(peak);
 					sample.getSampleData().add(sampleData);

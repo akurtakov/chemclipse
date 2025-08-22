@@ -130,7 +130,7 @@ public class PeakDetectorCSD extends BasePeakDetector implements IPeakDetectorCS
 		Threshold threshold = peakDetectorSettings.getThreshold();
 		int windowSize = peakDetectorSettings.getMovingAverageWindowSize();
 		List<IRawPeak> rawPeaks = new ArrayList<>();
-		//
+
 		if(noiseSegments != null && !noiseSegments.isEmpty()) {
 			/*
 			 * Initial retention time range before running the detection using
@@ -199,7 +199,7 @@ public class PeakDetectorCSD extends BasePeakDetector implements IPeakDetectorCS
 		List<IChromatogramPeakCSD> peaks = new ArrayList<>();
 		DetectorType detectorType = peakDetectorSettings.getDetectorType();
 		boolean optimizeBaseline = peakDetectorSettings.isOptimizeBaseline();
-		//
+
 		for(IRawPeak rawPeak : rawPeaks) {
 			/*
 			 * Build the peak and add it.
@@ -266,7 +266,7 @@ public class PeakDetectorCSD extends BasePeakDetector implements IPeakDetectorCS
 		 */
 		int startScan = signals.getStartScan();
 		int stopScan = signals.getStopScan();
-		//
+
 		for(int scan = startScan; scan < stopScan; scan++) {
 			ITotalScanSignal s1 = signals.getTotalScanSignal(scan);
 			ITotalScanSignal s2 = signals.getNextTotalScanSignal(scan);
@@ -283,7 +283,7 @@ public class PeakDetectorCSD extends BasePeakDetector implements IPeakDetectorCS
 		if(windowSize != 0) {
 			slopes.calculateMovingAverage(windowSize);
 		}
-		//
+
 		return slopes;
 	}
 
@@ -303,7 +303,7 @@ public class PeakDetectorCSD extends BasePeakDetector implements IPeakDetectorCS
 
 		int stopScanOptimized = optimizeRightBaseline(chromatogram, startScan, centerScan, stopScan);
 		int startScanOptimized = optimizeLeftBaseline(chromatogram, startScan, centerScan, stopScanOptimized);
-		//
+
 		return new ScanRange(startScanOptimized, stopScanOptimized);
 	}
 
@@ -323,7 +323,7 @@ public class PeakDetectorCSD extends BasePeakDetector implements IPeakDetectorCS
 				stopScanOptimized = i;
 			}
 		}
-		//
+
 		return stopScanOptimized;
 	}
 
@@ -349,7 +349,7 @@ public class PeakDetectorCSD extends BasePeakDetector implements IPeakDetectorCS
 				backgroundEquation = Equations.createLinearEquation(p1, p2);
 			}
 		}
-		//
+
 		return startScanOptimized;
 	}
 

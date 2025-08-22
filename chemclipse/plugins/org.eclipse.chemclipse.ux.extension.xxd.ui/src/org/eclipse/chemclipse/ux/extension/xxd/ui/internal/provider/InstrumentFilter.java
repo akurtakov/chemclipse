@@ -33,32 +33,32 @@ public class InstrumentFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof Instrument instrument) {
 			String identifier = instrument.getIdentifier();
 			String name = instrument.getName();
 			String desciption = instrument.getDescription();
-			//
+
 			if(!caseSensitive) {
 				searchText = searchText.toLowerCase();
 				identifier = identifier.toLowerCase();
 				name = name.toLowerCase();
 				desciption = desciption.toLowerCase();
 			}
-			//
+
 			if(identifier.contains(searchText)) {
 				return true;
 			}
-			//
+
 			if(name.contains(searchText)) {
 				return true;
 			}
-			//
+
 			if(desciption.contains(searchText)) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

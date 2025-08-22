@@ -50,11 +50,11 @@ public class RawFileSelectionWizardPage extends WizardPage {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new FillLayout());
-		//
+
 		DataExplorerTreeUI treeUI = new DataExplorerTreeUI(composite, DataExplorerTreeRoot.DRIVES, Collections.singleton(new SupplierFileIdentifier(dataType)));
 		treeUI.expandLastDirectoryPath(new ScopedPreferenceStore(InstanceScope.INSTANCE, RawFileSelectionWizardPage.class.getName()));
 		treeViewer = treeUI.getTreeViewer();
-		//
+
 		setControl(composite);
 	}
 }

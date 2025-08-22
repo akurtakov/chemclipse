@@ -55,7 +55,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader implements
 		} else {
 			throw new UnknownVersionException();
 		}
-		//
+
 		return chromatogramReader;
 	}
 

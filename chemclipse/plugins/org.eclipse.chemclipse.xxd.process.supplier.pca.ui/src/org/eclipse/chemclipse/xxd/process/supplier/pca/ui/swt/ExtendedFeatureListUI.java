@@ -79,17 +79,17 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 	private AtomicReference<ComboViewer> comboViewerFeatureMode = new AtomicReference<>();
 	private Button buttonToolbarInfo;
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
-	//
+
 	private EvaluationPCA evaluationPCA = null;
 	private FeatureDataMatrix featureDataMatrix = null;
-	//
+
 	private Composite control;
 
 	public ExtendedFeatureListUI(Composite parent, int style) {
 
 		super(parent, style);
 		createControl();
-		//
+
 		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
 		dataUpdateSupport.add(new IDataUpdateListener() {
 
@@ -175,12 +175,12 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarSearch(this);
 		createList(this);
 		createToolbarInfo(this);
-		//
+
 		initialize();
 		control = this;
 	}
@@ -198,7 +198,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(9, false));
-		//
+
 		createComboViewerColumnLabels(composite);
 		createComboViewerFeatureMode(composite);
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
@@ -223,7 +223,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 				updateInfoLabel();
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -232,7 +232,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 		FeatureListUI featureListUI = new FeatureListUI(parent, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION | SWT.VIRTUAL);
 		Table table = featureListUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		ITableSettings tableSettings = featureListUI.getTableSettings();
 		tableSettings.addMenuEntry(new ITableMenuEntry() {
 
@@ -262,7 +262,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 			}
 		});
 		featureListUI.applySettings(tableSettings);
-		//
+
 		table.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -276,7 +276,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 				handleRowSelection(selectedElements);
 			}
 		});
-		//
+
 		featureListUI.setUpdateListener(new IUpdateListener() {
 
 			@Override
@@ -285,7 +285,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 				UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_PCA_UPDATE_FEATURES, evaluationPCA);
 			}
 		});
-		//
+
 		listControl.set(featureListUI);
 	}
 
@@ -316,7 +316,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -338,7 +338,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -356,7 +356,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 				updateInput(false);
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -417,7 +417,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -450,7 +450,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 
 		listControl.get().clear();
 		toolbarInfo.get().setText("Loading...");
-		//
+
 		getDisplay().asyncExec(() -> {
 			updateWidgets();
 			updateInfoLabel();
@@ -510,10 +510,10 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 				}
 			}
 		});
-		//
+
 		comboViewer.setInput(FeatureMode.values());
 		comboViewer.setSelection(new StructuredSelection(FeatureMode.ORIGINAL));
-		//
+
 		comboViewerFeatureMode.set(comboViewer);
 	}
 
@@ -554,10 +554,10 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 				}
 			}
 		});
-		//
+
 		comboViewer.setInput(FeatureColumnLabels.values());
 		comboViewer.setSelection(new StructuredSelection(FeatureColumnLabels.SAMPLENAMES));
-		//
+
 		comboViewerFeatureMode.set(comboViewer);
 	}
 }

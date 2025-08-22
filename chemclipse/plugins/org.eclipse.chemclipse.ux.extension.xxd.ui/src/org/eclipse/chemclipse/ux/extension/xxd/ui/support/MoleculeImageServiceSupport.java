@@ -56,7 +56,7 @@ public class MoleculeImageServiceSupport {
 				}
 			}
 		}
-		//
+
 		return moleculeImageServiceSelection;
 	}
 
@@ -79,7 +79,7 @@ public class MoleculeImageServiceSupport {
 					builder.append(")");
 					return builder.toString();
 				}
-				//
+
 				return null;
 			}
 		});
@@ -96,7 +96,7 @@ public class MoleculeImageServiceSupport {
 		 */
 		IMoleculeImageService moleculeImageService = null;
 		Object[] moleculeImageServices = MoleculeImageServiceSupport.getMoleculeImageServices();
-		//
+
 		if(moleculeImageServices != null) {
 			comboViewer.setInput(moleculeImageServices);
 			moleculeImageService = MoleculeImageServiceSupport.getMoleculeImageServiceSelection(moleculeImageServices);
@@ -106,7 +106,7 @@ public class MoleculeImageServiceSupport {
 		} else {
 			comboViewer.setInput(null);
 		}
-		//
+
 		return comboViewer;
 	}
 
@@ -122,7 +122,7 @@ public class MoleculeImageServiceSupport {
 				return moleculeImageService;
 			}
 		}
-		//
+
 		return null;
 	}
 
@@ -135,7 +135,7 @@ public class MoleculeImageServiceSupport {
 				moleculeImageServicesOffline.add(moleculeImageService);
 			}
 		}
-		//
+
 		return moleculeImageServicesOffline;
 	}
 }

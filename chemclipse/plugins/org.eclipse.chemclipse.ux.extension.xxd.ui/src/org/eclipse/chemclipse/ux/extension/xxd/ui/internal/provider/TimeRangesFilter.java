@@ -36,20 +36,20 @@ public class TimeRangesFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof TimeRange timeRange) {
 			String identifier = timeRange.getIdentifier();
-			//
+
 			if(!caseSensitive) {
 				searchText = searchText.toLowerCase();
 				identifier = identifier.toLowerCase();
 			}
-			//
+
 			if(identifier.contains(searchText)) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

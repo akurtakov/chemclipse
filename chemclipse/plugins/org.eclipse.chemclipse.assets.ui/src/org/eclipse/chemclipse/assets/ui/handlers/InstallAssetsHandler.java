@@ -69,7 +69,7 @@ public class InstallAssetsHandler {
 			 */
 			eventBroker.post(IChemClipseEvents.TOPIC_METHOD_UPDATE, null);
 			bundleReader.run();
-			//
+
 			MessageBox messageBox = new MessageBox(shell, SWT.YES | SWT.NO);
 			messageBox.setText("Update Assets");
 			messageBox.setMessage("A restart is required. Restart now?");

@@ -45,16 +45,16 @@ public class TargetsListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = TargetsLabelProvider.TITLES;
 	private static final int[] BOUNDS = TargetsLabelProvider.BOUNDS;
-	//
+
 	private final TargetsLabelProvider labelProvider = new TargetsLabelProvider();
 	private final TargetsComparator targetsComparator = new TargetsComparator();
 	private final TargetListFilter targetListFilter = new TargetListFilter();
-	//
+
 	private Integer retentionTime = null;
 	private Float retentionIndex = null;
-	//
+
 	private IUpdateListener updateListener;
-	//
+
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
 	public TargetsListUI(Composite parent, int style) {
@@ -88,7 +88,7 @@ public class TargetsListUI extends ExtendedTableViewer {
 	public TargetsListUI(Composite parent, String[] alternativeTitles, int style) {
 
 		super(parent, style | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
-		//
+
 		createColumns(alternativeTitles, BOUNDS);
 		setLabelProvider(labelProvider);
 		setContentProvider(new ListContentProvider());
@@ -110,7 +110,7 @@ public class TargetsListUI extends ExtendedTableViewer {
 				return false;
 			}
 		}
-		//
+
 		return true;
 	}
 
@@ -138,7 +138,7 @@ public class TargetsListUI extends ExtendedTableViewer {
 		if(getComparator() != null) {
 			int column = 0;
 			int sortOrder = IRecordTableComparator.DESCENDING;
-			//
+
 			targetsComparator.setColumn(column);
 			targetsComparator.setDirection(sortOrder);
 			refresh();
@@ -198,14 +198,14 @@ public class TargetsListUI extends ExtendedTableViewer {
 						if(element instanceof IIdentificationTarget identificationTarget) {
 							ILibraryInformation libraryInformation = identificationTarget.getLibraryInformation();
 							int retentionTimeTarget = libraryInformation.getRetentionTime();
-							//
+
 							if(retentionTime != null && retentionTimeTarget != 0) {
-								//
+
 								boolean useAbsoluteDeviation = preferenceStore.getBoolean(PreferenceSupplier.P_USE_ABSOLUTE_DEVIATION_RETENTION_TIME);
 								double deviation;
 								double deviationWarn;
 								double deviationError;
-								//
+
 								if(useAbsoluteDeviation) {
 									deviation = Math.abs(retentionTime - retentionTimeTarget);
 									deviationWarn = preferenceStore.getInt(PreferenceSupplier.P_RETENTION_TIME_DEVIATION_ABS_OK);
@@ -215,7 +215,7 @@ public class TargetsListUI extends ExtendedTableViewer {
 									deviationWarn = preferenceStore.getFloat(PreferenceSupplier.P_RETENTION_TIME_DEVIATION_REL_OK);
 									deviationError = preferenceStore.getFloat(PreferenceSupplier.P_RETENTION_TIME_DEVIATION_REL_WARN);
 								}
-								//
+
 								if(deviation < deviationWarn) {
 									cell.setBackground(Colors.LIGHT_GREEN);
 									cell.setForeground(Colors.BLACK);
@@ -227,7 +227,7 @@ public class TargetsListUI extends ExtendedTableViewer {
 									cell.setForeground(Colors.BLACK);
 								}
 							}
-							//
+
 							String text = TargetsLabelProvider.getRetentionTimeText(libraryInformation, retentionTime);
 							cell.setText(text);
 							super.update(cell);
@@ -253,14 +253,14 @@ public class TargetsListUI extends ExtendedTableViewer {
 						if(element instanceof IIdentificationTarget identificationTarget) {
 							ILibraryInformation libraryInformation = identificationTarget.getLibraryInformation();
 							float retentionIndexTarget = libraryInformation.getRetentionIndex();
-							//
+
 							if(retentionIndex != null && retentionIndexTarget != 0) {
-								//
+
 								boolean useAbsoluteDeviation = preferenceStore.getBoolean(PreferenceSupplier.P_USE_ABSOLUTE_DEVIATION_RETENTION_INDEX);
 								double deviation;
 								double deviationWarn;
 								double deviationError;
-								//
+
 								if(useAbsoluteDeviation) {
 									deviation = Math.abs(retentionIndex - retentionIndexTarget);
 									deviationWarn = preferenceStore.getFloat(PreferenceSupplier.P_RETENTION_INDEX_DEVIATION_ABS_OK);
@@ -270,7 +270,7 @@ public class TargetsListUI extends ExtendedTableViewer {
 									deviationWarn = preferenceStore.getFloat(PreferenceSupplier.P_RETENTION_INDEX_DEVIATION_REL_OK);
 									deviationError = preferenceStore.getFloat(PreferenceSupplier.P_RETENTION_INDEX_DEVIATION_REL_WARN);
 								}
-								//
+
 								if(deviation < deviationWarn) {
 									cell.setBackground(Colors.LIGHT_GREEN);
 									cell.setForeground(Colors.BLACK);
@@ -282,7 +282,7 @@ public class TargetsListUI extends ExtendedTableViewer {
 									cell.setForeground(Colors.BLACK);
 								}
 							}
-							//
+
 							String text = TargetsLabelProvider.getRetentionIndexText(libraryInformation, retentionIndex);
 							cell.setText(text);
 							super.update(cell);
@@ -298,7 +298,7 @@ public class TargetsListUI extends ExtendedTableViewer {
 		DragSource dragSource = new DragSource(this.getTable(), DND.DROP_COPY);
 		Transfer[] transfer = new Transfer[]{IdentificationTargetTransfer.getInstance()};
 		dragSource.setTransfer(transfer);
-		//
+
 		dragSource.addDragListener(new DragSourceListener() {
 
 			@Override

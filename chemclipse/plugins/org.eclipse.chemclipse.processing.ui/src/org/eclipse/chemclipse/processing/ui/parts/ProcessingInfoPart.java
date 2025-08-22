@@ -45,7 +45,7 @@ public class ProcessingInfoPart {
 
 	private static final String POPUP_MENU_ID = "#PopUpMenu"; // $NON-NLS-1$
 	private static final String POPUP_MENU_POSTFIX = "PopUpMenu"; // $NON-NLS-1$
-	//
+
 	@Inject
 	private Composite parent;
 	/*
@@ -78,7 +78,7 @@ public class ProcessingInfoPart {
 				}
 			}
 		});
-		//
+
 		initContextMenu();
 		processingInfoUI.update(updateNotifier.getProcessingInfo());
 	}

@@ -39,7 +39,7 @@ public class SupplierEditorSupport extends AbstractSupplierFileEditorSupport imp
 
 	private static final Object NO_EXECUTE_METHOD = new Object();
 	private String type = "";
-	//
+
 	private String elementId = "";
 	private String contributionURI = "";
 	private String iconURI = "";

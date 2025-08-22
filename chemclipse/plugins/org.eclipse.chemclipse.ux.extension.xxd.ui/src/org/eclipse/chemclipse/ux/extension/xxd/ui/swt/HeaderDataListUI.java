@@ -34,11 +34,11 @@ public class HeaderDataListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = HeaderDataLabelProvider.TITLES;
 	private static final int[] BOUNDS = HeaderDataLabelProvider.BOUNDS;
-	//
+
 	private HeaderDataLabelProvider labelProvider = new HeaderDataLabelProvider();
 	private HeaderDataTableComparator tableComparator = new HeaderDataTableComparator();
 	private HeaderDataListFilter listFilter = new HeaderDataListFilter();
-	//
+
 	private IMeasurementInfo measurementInfo;
 	private IUpdateListener updateListener = null;
 
@@ -88,7 +88,7 @@ public class HeaderDataListUI extends ExtendedTableViewer {
 
 		int column = 0;
 		int sortOrder = IRecordTableComparator.DESCENDING;
-		//
+
 		tableComparator.setColumn(column);
 		tableComparator.setDirection(sortOrder);
 		refresh();

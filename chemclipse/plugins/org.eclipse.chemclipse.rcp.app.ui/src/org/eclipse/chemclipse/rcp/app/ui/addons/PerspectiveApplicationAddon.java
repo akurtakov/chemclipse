@@ -51,7 +51,7 @@ public class PerspectiveApplicationAddon {
 			perspectiveId = IPerspectiveAndViewIds.PERSPECTIVE_WELCOME;
 			perspective = (MPerspective)modelService.find(perspectiveId, application);
 		}
-		//
+
 		MPerspectiveStack perspectiveStack = (MPerspectiveStack)modelService.find(IPerspectiveAndViewIds.STACK_PERSPECTIVES, application);
 		perspectiveStack.setSelectedElement(perspective);
 		if(eventBroker != null) {

@@ -40,17 +40,17 @@ import org.eclipse.swt.widgets.Table;
 public class ExtendedFeatureStatListUI extends Composite implements IExtendedPartUI {
 
 	private AtomicReference<FeatureStatListUI> listControl = new AtomicReference<>();
-	//
+
 	private IEvaluation<IVariable, ISample, IResult> evaluation = null;
 	private FeatureDataMatrix featureDataMatrix = null;
-	//
+
 	private Composite control;
 
 	public ExtendedFeatureStatListUI(Composite parent, int style) {
 
 		super(parent, style);
 		createControl();
-		//
+
 		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
 		dataUpdateSupport.add(new IDataUpdateListener() {
 
@@ -117,7 +117,7 @@ public class ExtendedFeatureStatListUI extends Composite implements IExtendedPar
 		FeatureStatListUI featureStatListUI = new FeatureStatListUI(parent, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION | SWT.VIRTUAL);
 		Table table = featureStatListUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		featureStatListUI.setUpdateListener(new IUpdateListener() {
 
 			@Override
@@ -126,7 +126,7 @@ public class ExtendedFeatureStatListUI extends Composite implements IExtendedPar
 				UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_PCA_UPDATE_FEATURES, evaluation);
 			}
 		});
-		//
+
 		listControl.set(featureStatListUI);
 	}
 
@@ -138,7 +138,7 @@ public class ExtendedFeatureStatListUI extends Composite implements IExtendedPar
 	private void updateInput() {
 
 		listControl.get().clear();
-		//
+
 		getDisplay().asyncExec(() -> {
 			updateWidgets();
 		});

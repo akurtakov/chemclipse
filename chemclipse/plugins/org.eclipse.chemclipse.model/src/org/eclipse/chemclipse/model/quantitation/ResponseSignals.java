@@ -67,13 +67,13 @@ public class ResponseSignals extends ArrayList<IResponseSignal> implements IResp
 			x += point.getX(); // Concentration
 			y += point.getY(); // Intensity
 		}
-		//
+
 		x /= size;
 		y /= size;
 		if(y == 0) {
 			return 0;
 		}
-		//
+
 		return x / y;
 	}
 
@@ -88,7 +88,7 @@ public class ResponseSignals extends ArrayList<IResponseSignal> implements IResp
 				}
 			}
 		}
-		//
+
 		return (minResponse == Double.MAX_VALUE) ? 0.0d : minResponse;
 	}
 
@@ -116,7 +116,7 @@ public class ResponseSignals extends ArrayList<IResponseSignal> implements IResp
 				minResponse = response;
 			}
 		}
-		//
+
 		return (minResponse == Double.MAX_VALUE) ? 0.0d : minResponse;
 	}
 

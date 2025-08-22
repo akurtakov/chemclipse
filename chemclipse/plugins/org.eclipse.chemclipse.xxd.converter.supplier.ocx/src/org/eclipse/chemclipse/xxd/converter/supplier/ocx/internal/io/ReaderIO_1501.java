@@ -58,12 +58,12 @@ public class ReaderIO_1501 extends AbstractIO_1501 {
 		String diameter = readString(dataInputStream);
 		String phase = readString(dataInputStream);
 		String thickness = readString(dataInputStream);
-		//
+
 		ISeparationColumn separationColumn = new SeparationColumn(name, separationColumnType, length, diameter, phase);
 		separationColumn.setSeparationColumnPackaging(separationColumnPackaging);
 		separationColumn.setCalculationType(calculationType);
 		separationColumn.setThickness(thickness);
-		//
+
 		return separationColumn;
 	}
 
@@ -81,7 +81,7 @@ public class ReaderIO_1501 extends AbstractIO_1501 {
 		targetDisplaySettings.setRotation(dataInputStream.readInt());
 		targetDisplaySettings.setLibraryField(readLibraryField(dataInputStream));
 		targetDisplaySettings.setDisplayOption(readDisplayOption(dataInputStream));
-		//
+
 		Map<String, Boolean> visibilityMap = new HashMap<>();
 		int size = dataInputStream.readInt();
 		for(int i = 0; i < size; i++) {
@@ -89,20 +89,20 @@ public class ReaderIO_1501 extends AbstractIO_1501 {
 			boolean value = dataInputStream.readBoolean();
 			visibilityMap.put(key, value);
 		}
-		//
+
 		targetDisplaySettings.putAll(visibilityMap);
 	}
 
 	private List<IIdentificationTarget> readIdentificationTargets(DataInputStream dataInputStream, boolean closeStream) throws IOException {
 
 		List<IIdentificationTarget> identificationTargets = new ArrayList<>();
-		//
+
 		int numberOfTargets = dataInputStream.readInt();
 		for(int i = 1; i <= numberOfTargets; i++) {
-			//
+
 			String identifier = readString(dataInputStream);
 			boolean manuallyVerified = dataInputStream.readBoolean();
-			//
+
 			int retentionTime = dataInputStream.readInt();
 			float retentionIndex = dataInputStream.readFloat();
 			List<String> casNumbers = readCasNumbers(dataInputStream);
@@ -157,11 +157,11 @@ public class ReaderIO_1501 extends AbstractIO_1501 {
 			libraryInformation.setMoleculeStructure(moleculeStructure);
 			assignColumnIndexMarker(libraryInformation, columnIndexMarkers);
 			assignFlavorMarker(libraryInformation, flavorMarkers);
-			//
+
 			IComparisonResult comparisonResult = new ChromatogramComparisonResult(matchFactor, reverseMatchFactor, matchFactorDirect, reverseMatchFactorDirect, probability);
 			comparisonResult.setMatch(isMatch);
 			comparisonResult.setInLibFactor(inLibFactor);
-			//
+
 			try {
 				IIdentificationTarget identificationTarget = new IdentificationTarget(libraryInformation, comparisonResult);
 				identificationTarget.setIdentifier(identifier);
@@ -171,11 +171,11 @@ public class ReaderIO_1501 extends AbstractIO_1501 {
 				logger.warn(e);
 			}
 		}
-		//
+
 		if(closeStream) {
 			dataInputStream.close();
 		}
-		//
+
 		return identificationTargets;
 	}
 
@@ -207,7 +207,7 @@ public class ReaderIO_1501 extends AbstractIO_1501 {
 		for(int i = 0; i < size; i++) {
 			casNumbers.add(readString(dataInputStream));
 		}
-		//
+
 		return casNumbers;
 	}
 
@@ -218,14 +218,14 @@ public class ReaderIO_1501 extends AbstractIO_1501 {
 		for(int i = 0; i < size; i++) {
 			synonyms.add(readString(dataInputStream));
 		}
-		//
+
 		return synonyms;
 	}
 
 	private List<IColumnIndexMarker> readColumnIndexMarkers(DataInputStream dataInputStream) throws IOException {
 
 		List<IColumnIndexMarker> columnIndexMarkers = new ArrayList<>();
-		//
+
 		int size = dataInputStream.readInt();
 		for(int i = 0; i < size; i++) {
 			float retentionIndex = dataInputStream.readFloat();
@@ -233,14 +233,14 @@ public class ReaderIO_1501 extends AbstractIO_1501 {
 			IColumnIndexMarker columnIndexMarker = new ColumnIndexMarker(separationColumn, retentionIndex);
 			columnIndexMarkers.add(columnIndexMarker);
 		}
-		//
+
 		return columnIndexMarkers;
 	}
 
 	private List<IFlavorMarker> readFlavorMarkers(DataInputStream dataInputStream) throws IOException {
 
 		List<IFlavorMarker> flavorMarkers = new ArrayList<>();
-		//
+
 		int size = dataInputStream.readInt();
 		for(int i = 0; i < size; i++) {
 			boolean manuallyVerified = dataInputStream.readBoolean();
@@ -249,7 +249,7 @@ public class ReaderIO_1501 extends AbstractIO_1501 {
 			String odor = readString(dataInputStream);
 			String samplePreparation = readString(dataInputStream);
 			String solvent = readString(dataInputStream);
-			//
+
 			IFlavorMarker flavorMarker = new FlavorMarker(odor, matrix, solvent);
 			flavorMarker.setManuallyVerified(manuallyVerified);
 			flavorMarker.setLiteratureReference(literatureReference);
@@ -257,7 +257,7 @@ public class ReaderIO_1501 extends AbstractIO_1501 {
 			readOdorThresholds(dataInputStream, flavorMarker);
 			flavorMarkers.add(flavorMarker);
 		}
-		//
+
 		return flavorMarkers;
 	}
 

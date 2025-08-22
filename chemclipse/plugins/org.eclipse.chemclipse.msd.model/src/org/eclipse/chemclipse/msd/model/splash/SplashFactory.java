@@ -30,32 +30,32 @@ import org.eclipse.chemclipse.msd.model.implementation.Ion;
 public class SplashFactory {
 
 	private static final Logger logger = Logger.getLogger(SplashFactory.class);
-	//
+
 	private static final float NORMALIZATION_FACTOR = 100f;
 	private static final int SPLASH_VERSION = 0;
 	private static final int SPECTRA_TYPE = 1; // MS
 	private static final String HASH_SEPERATOR = "-";
-	//
+
 	private static final double EPS_CORRECTION = 1.0e-7d;
-	//
+
 	private static final int PREFILTER_BASE = 3;
 	private static final int PREFILTER_LENGTH = 10;
 	private static final int PREFILTER_BIN_SIZE = 5;
-	//
+
 	private static final int SIMILARITY_BASE = 10;
 	private static final int SIMILARITY_LENGTH = 10;
 	private static final int SIMILARITY_BIN_SIZE = 100;
-	//
+
 	private static final char[] BASE_36_MAP = new char[]{ //
 			'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', //
 			'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', //
 			'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' //
 	};
-	//
+
 	private static final String ION_SEPERATOR = " ";
 	private static final long MZ_PRECISION_FACTOR = (long)Math.pow(10, 6);
 	private static final long INTENSITY_PRECISION_FACTOR = (long)Math.pow(10, 0);
-	//
+
 	private String splash;
 
 	public SplashFactory(IScanMSD massSpectrum) {

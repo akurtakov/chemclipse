@@ -90,19 +90,19 @@ public class PenaltyCalculationSupport {
 		if(Double.isNaN(valueUnknown) || valueUnknown < 0) {
 			return NO_PENALTY;
 		}
-		//
+
 		if(Double.isNaN(valueReference) || valueReference < 0) {
 			return NO_PENALTY;
 		}
-		//
+
 		if(Double.isNaN(valueWindow) || valueWindow <= 0) {
 			return NO_PENALTY;
 		}
-		//
+
 		if(Double.isNaN(penaltyCalculationLevelFactor) || penaltyCalculationLevelFactor <= 0) {
 			return NO_PENALTY;
 		}
-		//
+
 		if(Double.isNaN(maxPenalty) || maxPenalty <= IPenaltyCalculationSettings.MIN_PENALTY_MATCH_FACTOR || maxPenalty > IPenaltyCalculationSettings.MAX_PENALTY_MATCH_FACTOR) {
 			return NO_PENALTY;
 		}

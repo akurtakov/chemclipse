@@ -57,7 +57,7 @@ public class NoiseSegmentEditingSupport extends EditingSupport {
 				return noiseSegment.isUse();
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -68,7 +68,7 @@ public class NoiseSegmentEditingSupport extends EditingSupport {
 			if(column.equals(NoiseSegmentLabelProvider.USE)) {
 				noiseSegment.setUse(Boolean.valueOf(value.toString()));
 			}
-			//
+
 			tableViewer.refresh();
 			tableViewer.updateContent();
 		}

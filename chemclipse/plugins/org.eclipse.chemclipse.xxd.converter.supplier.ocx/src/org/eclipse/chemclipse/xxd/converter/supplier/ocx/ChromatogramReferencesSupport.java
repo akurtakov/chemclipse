@@ -40,11 +40,11 @@ public class ChromatogramReferencesSupport {
 		ChromatogramWriterMSD chromatogramWriterMSD = new ChromatogramWriterMSD();
 		ChromatogramWriterCSD chromatogramWriterCSD = new ChromatogramWriterCSD();
 		ChromatogramWriterWSD chromatogramWriterWSD = new ChromatogramWriterWSD();
-		//
+
 		HeaderField headerField = PreferenceSupplier.getChromatogramExportReferencesHeaderField();
 		List<IChromatogram> chromatogramReferences = chromatogram.getReferencedChromatograms();
 		DecimalFormat decimalFormat = getDecimalFormatIndex(chromatogramReferences.size());
-		//
+
 		int i = 1;
 		for(IChromatogram chromatogramReference : chromatogramReferences) {
 			if(!chromatogramReference.getScans().isEmpty()) {
@@ -86,7 +86,7 @@ public class ChromatogramReferencesSupport {
 		for(int i = 1; i < size; i++) {
 			builder.append("0");
 		}
-		//
+
 		return ValueFormat.getDecimalFormatEnglish(builder.toString());
 	}
 
@@ -95,7 +95,7 @@ public class ChromatogramReferencesSupport {
 		String extension = VersionConstants.FILE_EXTENSION_CHROMATOGRAM;
 		String identifier = HeaderUtil.getHeaderData(chromatogram, headerField, index);
 		String directory = file.getParentFile().getAbsolutePath();
-		//
+
 		StringBuilder builder = new StringBuilder();
 		builder.append(file.getName().substring(0, file.getName().length() - extension.length()));
 		builder.append("_");
@@ -104,7 +104,7 @@ public class ChromatogramReferencesSupport {
 		builder.append(identifier);
 		builder.append(extension);
 		String name = builder.toString();
-		//
+
 		return new File(directory + File.separator + name);
 	}
 }

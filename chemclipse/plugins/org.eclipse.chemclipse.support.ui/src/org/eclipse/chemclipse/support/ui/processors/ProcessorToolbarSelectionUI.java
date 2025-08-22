@@ -43,7 +43,7 @@ public class ProcessorToolbarSelectionUI extends Composite {
 	private Text textSearch;
 	private ProcessSupplierListUI processorListAvailable;
 	private ProcessSupplierListUI processorListActive;
-	//
+
 	private List<Processor> processors = new ArrayList<>();
 
 	public ProcessorToolbarSelectionUI(Composite parent, int style) {
@@ -72,7 +72,7 @@ public class ProcessorToolbarSelectionUI extends Composite {
 	private void createControl() {
 
 		setLayout(new GridLayout(3, false));
-		//
+
 		createToolbarTop(this);
 		createListSection(this);
 		createToolbarBottom(this);
@@ -85,7 +85,7 @@ public class ProcessorToolbarSelectionUI extends Composite {
 		gridData.horizontalSpan = 3;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(2, false));
-		//
+
 		textSearch = createTextSearch(composite);
 		createButtonSearch(composite);
 	}
@@ -123,7 +123,7 @@ public class ProcessorToolbarSelectionUI extends Composite {
 				}
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -132,7 +132,7 @@ public class ProcessorToolbarSelectionUI extends Composite {
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText(""); //$NON-NLS-1$
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SEARCH, IApplicationImageProvider.SIZE_16x16));
-		//
+
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -141,7 +141,7 @@ public class ProcessorToolbarSelectionUI extends Composite {
 				runSearch();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -161,7 +161,7 @@ public class ProcessorToolbarSelectionUI extends Composite {
 		processSupplierListUI.enableSorting(enableSorting);
 		Table table = processSupplierListUI.getTable();
 		table.setLayoutData(gridData);
-		//
+
 		table.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -182,14 +182,14 @@ public class ProcessorToolbarSelectionUI extends Composite {
 				}
 			}
 		});
-		//
+
 		return processSupplierListUI;
 	}
 
 	private void createToolbarSelect(Composite parent) {
 
 		ToolBar toolBar = new ToolBar(parent, SWT.VERTICAL | SWT.FLAT);
-		//
+
 		createToolItemAdd(toolBar);
 		createToolItemRemove(toolBar);
 	}
@@ -198,7 +198,7 @@ public class ProcessorToolbarSelectionUI extends Composite {
 
 		ToolItem toolItem = new ToolItem(toolBar, SWT.PUSH);
 		toolItem.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ARROW_FORWARD, IApplicationImageProvider.SIZE_16x16));
-		//
+
 		toolItem.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -217,7 +217,7 @@ public class ProcessorToolbarSelectionUI extends Composite {
 
 		ToolItem toolItem = new ToolItem(toolBar, SWT.PUSH);
 		toolItem.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ARROW_BACKWARD, IApplicationImageProvider.SIZE_16x16));
-		//
+
 		toolItem.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -253,7 +253,7 @@ public class ProcessorToolbarSelectionUI extends Composite {
 		gridData.horizontalSpan = 3;
 		gridData.horizontalAlignment = SWT.END;
 		toolBar.setLayoutData(gridData);
-		//
+
 		createToolItemImage(toolBar);
 		createToolItemMoveUp(toolBar);
 		createToolItemMoveDown(toolBar);
@@ -263,7 +263,7 @@ public class ProcessorToolbarSelectionUI extends Composite {
 
 		ToolItem toolItem = new ToolItem(toolBar, SWT.PUSH);
 		toolItem.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_BITMAP_DOCUMENT, IApplicationImageProvider.SIZE_16x16));
-		//
+
 		toolItem.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -291,7 +291,7 @@ public class ProcessorToolbarSelectionUI extends Composite {
 
 		ToolItem toolItem = new ToolItem(toolBar, SWT.PUSH);
 		toolItem.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ARROW_UP_2, IApplicationImageProvider.SIZE_16x16));
-		//
+
 		toolItem.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -310,7 +310,7 @@ public class ProcessorToolbarSelectionUI extends Composite {
 
 		ToolItem toolItem = new ToolItem(toolBar, SWT.PUSH);
 		toolItem.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ARROW_DOWN_2, IApplicationImageProvider.SIZE_16x16));
-		//
+
 		toolItem.addSelectionListener(new SelectionAdapter() {
 
 			@Override

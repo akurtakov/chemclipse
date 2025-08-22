@@ -50,11 +50,11 @@ public abstract class AbstractTabFolderPreferencePage extends PreferencePage imp
 		 */
 		createTabFolder(parent);
 		createTabItems(gridLayout, gridData);
-		//
+
 		createFieldEditors();
 		initialize();
 		checkState();
-		//
+
 		return tabFolder;
 	}
 

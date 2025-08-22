@@ -56,11 +56,11 @@ public class ChromatogramEditor3x extends EditorPart implements IChromatogramEdi
 	 * Currently, only the *.ocb format is supported.
 	 */
 	private static final String EDITOR_ID = "org.eclipse.chemclipse.ux.extension.xxd.ui.editors.chromatogramEditor3x";
-	//
+
 	private ChromatogramEditor chromatogramEditor;
 	private MPart part;
 	private IPartListener2 partListener = null;
-	//
+
 	private final MDirtyable dirtyable = new MDirtyable() {
 
 		private boolean value = false;
@@ -97,12 +97,12 @@ public class ChromatogramEditor3x extends EditorPart implements IChromatogramEdi
 
 		setSite(site);
 		setInput(input);
-		//
+
 		String fileName = input.getName();
 		fileName = fileName.substring(0, fileName.length() - 4);
 		setPartName(fileName);
 		File file = null;
-		//
+
 		if(input instanceof IFileEditorInput fileEditorInput) {
 			file = fileEditorInput.getFile().getLocation().toFile();
 		} else if(input instanceof IURIEditorInput uriEditorInput) {
@@ -122,7 +122,7 @@ public class ChromatogramEditor3x extends EditorPart implements IChromatogramEdi
 		map.put(EditorSupport.MAP_BATCH, false);
 		part.setObject(map);
 		part.setTooltip(ExtensionMessages.chromatogramFromProjectExplorer);
-		//
+
 		partListener = createPartListener();
 		getSite().getPage().addPartListener(partListener);
 	}

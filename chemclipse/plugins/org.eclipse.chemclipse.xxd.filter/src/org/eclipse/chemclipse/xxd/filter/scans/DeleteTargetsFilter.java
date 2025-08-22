@@ -49,7 +49,7 @@ public class DeleteTargetsFilter implements IScanFilter<DeleteTargetsFilterSetti
 		if(configuration == null) {
 			configuration = createNewConfiguration();
 		}
-		//
+
 		SubMonitor subMonitor = SubMonitor.convert(monitor, filterItems.size());
 		DefaultProcessingResult<Boolean> result = new DefaultProcessingResult<>();
 		int modified = 0;
@@ -57,7 +57,7 @@ public class DeleteTargetsFilter implements IScanFilter<DeleteTargetsFilterSetti
 			TargetsFilter.filter(scan, configuration);
 			subMonitor.worked(1);
 		}
-		//
+
 		result.setProcessingResult(Boolean.TRUE);
 		result.addMessage(new ProcessingMessage(MessageType.INFO, getName(), MessageFormat.format("{0} scans where processed", modified)));
 		return result;

@@ -40,7 +40,7 @@ public class TraceRangesValidator extends ValueParserSupport implements IValidat
 				message = "The settings class is not of type: " + TraceRanges.class.getName();
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

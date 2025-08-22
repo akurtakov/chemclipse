@@ -46,7 +46,7 @@ public class ExtendedWSDScanUI extends Composite implements IExtendedPartUI {
 
 	private ChartWSD chartWSD;
 	private ISpectrumWSD spectrumWSD;
-	//
+
 	private boolean showAbsorbance = true;
 
 	public ExtendedWSDScanUI(Composite parent, int style) {
@@ -65,7 +65,7 @@ public class ExtendedWSDScanUI extends Composite implements IExtendedPartUI {
 	private void updateScan() {
 
 		chartWSD.deleteSeries();
-		//
+
 		if(spectrumWSD != null) {
 			/*
 			 * Get the data.
@@ -73,13 +73,13 @@ public class ExtendedWSDScanUI extends Composite implements IExtendedPartUI {
 			List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
 			ILineSeriesData lineSeriesData;
 			ILineSeriesSettings lineSeriesSettings;
-			//
+
 			lineSeriesData = new LineSeriesData(getSeriesData(spectrumWSD, "Data"));
 			lineSeriesSettings = lineSeriesData.getSettings();
 			lineSeriesSettings.setLineColor(Colors.RED);
 			lineSeriesSettings.setEnableArea(false);
 			lineSeriesDataList.add(lineSeriesData);
-			//
+
 			chartWSD.addSeriesData(lineSeriesDataList);
 		}
 	}
@@ -88,7 +88,7 @@ public class ExtendedWSDScanUI extends Composite implements IExtendedPartUI {
 
 		double[] xSeries;
 		double[] ySeries;
-		//
+
 		if(spectrumWSD != null) {
 			int size = spectrumWSD.getSignals().size();
 			xSeries = new double[size];
@@ -105,14 +105,14 @@ public class ExtendedWSDScanUI extends Composite implements IExtendedPartUI {
 			xSeries = new double[0];
 			ySeries = new double[0];
 		}
-		//
+
 		return new SeriesData(xSeries, ySeries, id);
 	}
 
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createScanChart(this);
 	}
@@ -123,7 +123,7 @@ public class ExtendedWSDScanUI extends Composite implements IExtendedPartUI {
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(8, false));
-		//
+
 		createToggleChartSeriesLegendButton(composite);
 		createToggleLegendMarkerButton(composite);
 		createToggleRangeSelectorButton(composite);
@@ -226,7 +226,7 @@ public class ExtendedWSDScanUI extends Composite implements IExtendedPartUI {
 		chartSettings.setCreateMenu(true);
 		chartSettings.setEnableRangeSelector(true);
 		chartSettings.setShowRangeSelectorInitially(false);
-		//
+
 		chartWSD.applySettings(chartSettings);
 	}
 }

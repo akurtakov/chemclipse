@@ -42,7 +42,7 @@ public class FilterSupport {
 		if(chromatogramSelection == null || chromatogramSelection.getChromatogram() == null) {
 			return null;
 		}
-		//
+
 		excludedIons = validateExcludedIons(excludedIons);
 		/*
 		 * Use the scan range from the start and stop scan.
@@ -92,10 +92,10 @@ public class FilterSupport {
 		if(massSpectra.isEmpty()) {
 			return null;
 		}
-		//
+
 		excludedIons = validateExcludedIons(excludedIons);
 		CombinedMassSpectrumCalculator massSpectrumCalculator = new CombinedMassSpectrumCalculator();
-		//
+
 		for(IScanMSD massSpectrum : massSpectra) {
 			addIonsToCalculator(massSpectrum, excludedIons, massSpectrumCalculator, useNormalize, calculationType);
 		}
@@ -127,7 +127,7 @@ public class FilterSupport {
 		 */
 		excludedIons = validateExcludedIons(excludedIons);
 		CombinedMassSpectrumCalculator massSpectrumCalculator = new CombinedMassSpectrumCalculator();
-		//
+
 		if(massSpectrum1 == null) {
 			addIonsToCalculator(massSpectrum2, excludedIons, massSpectrumCalculator, useNormalize, calculationType);
 		} else if(massSpectrum2 == null) {
@@ -162,7 +162,7 @@ public class FilterSupport {
 			return null;
 		}
 		excludedIons = validateExcludedIons(excludedIons);
-		//
+
 		CombinedMassSpectrumCalculator massSpectrumCalculator = new CombinedMassSpectrumCalculator();
 		massSpectrumCalculator.addIons(massSpectrum.getIons(), excludedIons);
 		return getMassSpectrum(massSpectrumCalculator, useNormalize, calculationType);

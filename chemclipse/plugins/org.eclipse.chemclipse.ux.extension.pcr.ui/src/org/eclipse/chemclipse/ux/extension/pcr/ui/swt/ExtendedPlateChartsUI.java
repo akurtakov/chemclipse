@@ -57,13 +57,13 @@ import jakarta.inject.Inject;
 public class ExtendedPlateChartsUI extends Composite implements IExtendedPartUI {
 
 	private static final Logger logger = Logger.getLogger(ExtendedPlateChartsUI.class);
-	//
+
 	private Button buttonToolbarInfo;
 	private Button colorCompensationButton;
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private AtomicReference<ChartPCR> chartControl = new AtomicReference<>();
 	private IPlate plate = null;
-	//
+
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 	private boolean colorCompensation;
 
@@ -190,7 +190,7 @@ public class ExtendedPlateChartsUI extends Composite implements IExtendedPartUI 
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -204,7 +204,7 @@ public class ExtendedPlateChartsUI extends Composite implements IExtendedPartUI 
 		IChartSettings chartSettings = chart.getChartSettings();
 		chartSettings.setTitleVisible(false);
 		chart.applySettings(chartSettings);
-		//
+
 		chartControl.set(chart);
 	}
 
@@ -218,7 +218,7 @@ public class ExtendedPlateChartsUI extends Composite implements IExtendedPartUI 
 			ColorCodes colorCodes = new ColorCodes();
 			colorCodes.load(preferenceStore.getString(PreferenceSupplier.P_PCR_PLATE_COLOR_CODES));
 			List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
-			//
+
 			for(IWell well : plate.getWells()) {
 				if(!well.isActiveSubset()) {
 					continue;
@@ -235,7 +235,7 @@ public class ExtendedPlateChartsUI extends Composite implements IExtendedPartUI 
 					logger.warn(e);
 				}
 			}
-			//
+
 			addLine(lineSeriesDataList, IPlate.NOISEBAND);
 			addLine(lineSeriesDataList, IPlate.THRESHOLD);
 			chartControl.get().addSeriesData(lineSeriesDataList);
@@ -286,7 +286,7 @@ public class ExtendedPlateChartsUI extends Composite implements IExtendedPartUI 
 			for(int index = 0; index < pointList.size(); index++) {
 				points[index] = pointList.get(index);
 			}
-			//
+
 			String position = Integer.toString(well.getPosition().getId() + 1);
 			String seriesId = plate.getName() + " " + channel.getId() + " " + position;
 			ISeriesData seriesData = new SeriesData(points, seriesId);

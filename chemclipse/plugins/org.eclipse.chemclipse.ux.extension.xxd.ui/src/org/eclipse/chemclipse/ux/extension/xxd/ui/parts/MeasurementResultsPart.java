@@ -32,7 +32,7 @@ import jakarta.inject.Inject;
 public class MeasurementResultsPart extends AbstractPart<ExtendedMeasurementResultUI> {
 
 	private static final String TOPIC = IChemClipseEvents.TOPIC_CHROMATOGRAM_XXD_UPDATE_SELECTION;
-	//
+
 	@Inject
 	private MeasurementResultNotification measurementResultNotification;
 
@@ -55,10 +55,10 @@ public class MeasurementResultsPart extends AbstractPart<ExtendedMeasurementResu
 					measurementResult = measurementResultSelection;
 				}
 			}
-			//
+
 			measurementResultNotification.select(measurementResult);
 		});
-		//
+
 		return extendedMeasurementResultUI;
 	}
 
@@ -73,13 +73,13 @@ public class MeasurementResultsPart extends AbstractPart<ExtendedMeasurementResu
 					chromatogram = selection.getChromatogram();
 				}
 			}
-			//
+
 			measurementResultNotification.select(null);
 			getControl().setInput(chromatogram);
-			//
+
 			return true;
 		}
-		//
+
 		return false;
 	}
 

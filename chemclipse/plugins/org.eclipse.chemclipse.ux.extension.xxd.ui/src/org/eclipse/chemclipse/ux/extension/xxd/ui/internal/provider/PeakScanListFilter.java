@@ -41,7 +41,7 @@ public class PeakScanListFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof IPeak || element instanceof IScan) {
 			if(element instanceof IPeak peak) {
 				return matchPeak(peak);
@@ -50,7 +50,7 @@ public class PeakScanListFilter extends ViewerFilter {
 				return matchScan(scan);
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -82,35 +82,35 @@ public class PeakScanListFilter extends ViewerFilter {
 	private boolean isMatch(IPeak peak, String searchText, boolean caseSensitive) {
 
 		boolean isMatch = false;
-		//
+
 		Collection<String> classifiers = peak.getClassifier();
 		String detectorDescription = peak.getDetectorDescription();
 		String modelDescription = peak.getModelDescription();
 		String quantifierDescription = peak.getQuantifierDescription();
-		//
+
 		if(!caseSensitive) {
 			searchText = searchText.toLowerCase();
 			detectorDescription = detectorDescription.toLowerCase();
 			modelDescription = modelDescription.toLowerCase();
 			quantifierDescription = quantifierDescription.toLowerCase();
 		}
-		//
+
 		if(containsText(classifiers, searchText, caseSensitive)) {
 			isMatch = true;
 		}
-		//
+
 		if(!isMatch && detectorDescription.contains(searchText)) {
 			isMatch = true;
 		}
-		//
+
 		if(!isMatch && modelDescription.contains(searchText)) {
 			isMatch = true;
 		}
-		//
+
 		if(!isMatch && quantifierDescription.contains(searchText)) {
 			isMatch = true;
 		}
-		//
+
 		return isMatch;
 	}
 

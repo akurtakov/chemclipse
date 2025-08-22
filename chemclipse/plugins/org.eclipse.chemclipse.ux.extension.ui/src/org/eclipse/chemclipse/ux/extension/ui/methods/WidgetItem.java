@@ -55,7 +55,7 @@ import org.eclipse.swt.widgets.Text;
 public class WidgetItem {
 
 	private final InputValue inputValue;
-	//
+
 	private InputValidator inputValidator;
 	private ControlDecoration controlDecoration;
 	private Control control;
@@ -202,7 +202,7 @@ public class WidgetItem {
 				 * Text
 				 */
 				String textValue = text.getText().trim();
-				//
+
 				if(rawType == int.class || rawType == Integer.class) {
 					if(textValue.isEmpty()) {
 						return 0;
@@ -349,7 +349,7 @@ public class WidgetItem {
 				}
 			}
 		}
-		//
+
 		return null;
 	}
 
@@ -364,7 +364,7 @@ public class WidgetItem {
 		gridData.widthHint = 150;
 		combo.setLayoutData(gridData);
 		comboViewer.setInput(comboSupplier.items());
-		//
+
 		if(currentSelection instanceof String stringSelection) {
 			Object currentValue = comboSupplier.fromString(stringSelection);
 			if(currentValue != null) {
@@ -374,9 +374,9 @@ public class WidgetItem {
 			}
 			currentSelection = currentValue;
 		}
-		//
+
 		comboViewer.addSelectionChangedListener(event -> currentSelection = comboViewer.getStructuredSelection().getFirstElement());
-		//
+
 		return comboViewer;
 	}
 
@@ -522,7 +522,7 @@ public class WidgetItem {
 		button.setSelection(getValueAsBoolean());
 		button.setToolTipText(inputValue.getDescription());
 		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return button;
 	}
 
@@ -542,18 +542,18 @@ public class WidgetItem {
 				return element.toString();
 			}
 		});
-		//
+
 		combo.setToolTipText(inputValue.getDescription());
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
 		combo.setLayoutData(gridData);
-		//
+
 		comboViewer.setInput(input);
 		Enum<?> initialSelection = Enum.valueOf(input[0].getDeclaringClass(), getValueAsString());
 		comboViewer.setSelection(new StructuredSelection(initialSelection));
-		//
+
 		comboViewer.addSelectionChangedListener(event -> currentSelection = comboViewer.getStructuredSelection().getFirstElement());
-		//
+
 		return comboViewer;
 	}
 
@@ -562,11 +562,11 @@ public class WidgetItem {
 		if(currentSelection instanceof Boolean booleanSelection) {
 			return booleanSelection.booleanValue();
 		}
-		//
+
 		if(currentSelection instanceof String stringSelection) {
 			return Boolean.valueOf(stringSelection);
 		}
-		//
+
 		return false;
 	}
 
@@ -575,7 +575,7 @@ public class WidgetItem {
 		if(currentSelection == null) {
 			return "";
 		}
-		//
+
 		if(currentSelection instanceof String stringSelection) {
 			return stringSelection;
 		} else {

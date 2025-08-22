@@ -44,14 +44,14 @@ public class InputEntriesWizardPage extends WizardPage {
 
 			dataExplorerTreeRoot = dataExplorerTreeUI.getRoot();
 			selectedItems.clear();
-			//
+
 			for(File file : files) {
 				Map<ISupplierFileIdentifier, Collection<ISupplier>> identifier = getIdentifierSupplier().apply(file);
 				if(!identifier.isEmpty()) {
 					selectedItems.put(file, identifier);
 				}
 			}
-			//
+
 			validate();
 		}
 
@@ -84,10 +84,10 @@ public class InputEntriesWizardPage extends WizardPage {
 
 		super(InputEntriesWizardPage.class.getName());
 		this.inputWizardSettings = inputWizardSettings;
-		//
+
 		setTitle(inputWizardSettings.getTitle());
 		setDescription(inputWizardSettings.getDescription());
-		//
+
 		validate();
 	}
 
@@ -113,7 +113,7 @@ public class InputEntriesWizardPage extends WizardPage {
 		multiDataExplorerTreeUI = new WizardMultiDataExplorerTreeUI(parent, inputWizardSettings.getPreferenceStore());
 		multiDataExplorerTreeUI.setSupplierFileIdentifier(inputWizardSettings.getSupplierFileEditorSupportList());
 		multiDataExplorerTreeUI.expandLastDirectoryPath();
-		//
+
 		setControl(multiDataExplorerTreeUI.getControl());
 	}
 

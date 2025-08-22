@@ -21,7 +21,7 @@ public class InstrumentValidator implements IValidator<Object> {
 
 	private static final String ERROR = "Please enter a correct instrument.";
 	private static final String ERROR_CONTENT = "The following character must be not used: ";
-	//
+
 	private String identifier = "";
 	private String name = "";
 	private String description = "";
@@ -30,24 +30,24 @@ public class InstrumentValidator implements IValidator<Object> {
 	public IStatus validate(Object value) {
 
 		String message = null;
-		//
+
 		if(value == null) {
 			message = ERROR;
 		} else {
 			if(value instanceof String) {
 				String[] values = value.toString().trim().split("\\" + InstrumentListUtil.SEPARATOR_ENTRY);
-				//
+
 				identifier = values.length > 0 ? values[0].trim() : "";
 				message = checkAlphaNumeric(identifier);
 				if(message == null) {
 					message = checkContent(identifier);
 				}
-				//
+
 				if(message == null) {
 					name = values.length > 1 ? values[1].trim() : "";
 					message = checkContent(name);
 				}
-				//
+
 				if(message == null) {
 					description = values.length > 2 ? values[2].trim() : "";
 					message = checkContent(description);
@@ -56,7 +56,7 @@ public class InstrumentValidator implements IValidator<Object> {
 				message = ERROR;
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

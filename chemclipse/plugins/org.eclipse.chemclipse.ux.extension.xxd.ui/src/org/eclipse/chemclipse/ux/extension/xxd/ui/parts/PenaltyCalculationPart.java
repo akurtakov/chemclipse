@@ -55,7 +55,7 @@ public class PenaltyCalculationPart extends AbstractPart<ExtendedPenaltyCalculat
 				return false;
 			}
 		}
-		//
+
 		return false;
 	}
 

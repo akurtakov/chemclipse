@@ -24,7 +24,7 @@ public class UnknownTargetBuilder {
 
 	public static final String DELIMITER_TRACES = ",";
 	public static final String DELIMITER_INTENSITY = "|";
-	//
+
 	private static final float MIN_FACTOR = 0.0f;
 	private static final float MAX_FACTOR = 100.0f;
 
@@ -37,7 +37,7 @@ public class UnknownTargetBuilder {
 		 * Unknown [57,71,43,85,41 RT 4.34]
 		 */
 		ILibraryInformation libraryInformation = new LibraryInformation();
-		//
+
 		StringBuilder builder = new StringBuilder();
 		builder.append(targetUnknownSettings.getTargetName());
 		builder.append(" ");
@@ -72,7 +72,7 @@ public class UnknownTargetBuilder {
 		 */
 		builder.append(targetUnknownSettings.getMarkerStop());
 		libraryInformation.setName(builder.toString().trim());
-		//
+
 		return libraryInformation;
 	}
 
@@ -81,7 +81,7 @@ public class UnknownTargetBuilder {
 		if(matchQuality < MIN_FACTOR || matchQuality > MAX_FACTOR) {
 			matchQuality = MAX_FACTOR;
 		}
-		//
+
 		return new ComparisonResult(matchQuality, 0.0f, 0.0f, 0.0f);
 	}
 }

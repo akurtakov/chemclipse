@@ -76,7 +76,7 @@ public class FlavorMarkerEditingSupport extends EditingSupport {
 					flavorMarker.setManuallyVerified((boolean)value);
 					break;
 			}
-			//
+
 			tableViewer.refresh();
 			UpdateNotifierUI.update(tableViewer.getTable().getDisplay(), IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "The flavor marker has been edited.");
 		}

@@ -49,11 +49,11 @@ public class DeleteStandardsFilter extends AbstractPeakFilter<DeleteStandardsFil
 	public void filterPeaks(IChromatogramSelection chromatogramSelection, DeleteStandardsFilterSettings configuration, ProcessExecutionContext context) throws IllegalArgumentException {
 
 		Collection<IPeak> peaks = getReadOnlyPeaks(chromatogramSelection);
-		//
+
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
-		//
+
 		if(configuration.isDeleteStandards()) {
 			SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), peaks.size());
 			for(IPeak peak : peaks) {

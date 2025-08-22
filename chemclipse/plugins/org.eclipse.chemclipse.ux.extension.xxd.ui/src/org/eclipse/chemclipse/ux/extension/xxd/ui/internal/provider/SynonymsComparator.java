@@ -31,11 +31,11 @@ public class SynonymsComparator extends AbstractRecordTableComparator implements
 					sortOrder = 0;
 			}
 		}
-		//
+
 		if(getDirection() == ASCENDING) {
 			sortOrder = -sortOrder;
 		}
-		//
+
 		return sortOrder;
 	}
 }

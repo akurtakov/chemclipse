@@ -37,10 +37,10 @@ public class IntensityScaleUI extends Composite {
 
 	private Spinner spinner;
 	private Scale scale;
-	//
+
 	private String tooltip = "Value";
 	private int selection = 0;
-	//
+
 	private IScaleUpdateListener updateListener;
 	private ExecutorService executorService = new ThreadPoolExecutor(1, 1, 0, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(2));
 
@@ -90,10 +90,10 @@ public class IntensityScaleUI extends Composite {
 
 		this.selection = value;
 		String tooltip = getToolTipText();
-		//
+
 		spinner.setSelection(value);
 		spinner.setToolTipText(tooltip);
-		//
+
 		scale.setSelection(value);
 		scale.setToolTipText(tooltip);
 	}
@@ -106,16 +106,16 @@ public class IntensityScaleUI extends Composite {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(2, false);
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		spinner = createSpinner(composite);
 		scale = createScale(composite);
-		//
+
 		setSelection(1);
 	}
 
@@ -130,7 +130,7 @@ public class IntensityScaleUI extends Composite {
 		GridData gridData = new GridData();
 		gridData.widthHint = 80;
 		spinner.setLayoutData(gridData);
-		//
+
 		spinner.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -141,7 +141,7 @@ public class IntensityScaleUI extends Composite {
 				}
 			}
 		});
-		//
+
 		spinner.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -152,7 +152,7 @@ public class IntensityScaleUI extends Composite {
 				}
 			}
 		});
-		//
+
 		return spinner;
 	}
 
@@ -173,14 +173,14 @@ public class IntensityScaleUI extends Composite {
 				updateScale(e.display, scale.getSelection());
 			}
 		});
-		//
+
 		return scale;
 	}
 
 	private void setPageIncrement() {
 
 		int scaleValue = (scale.getMaximum() - scale.getMinimum() + 1) / 20;
-		//
+
 		spinner.setPageIncrement(1);
 		scale.setPageIncrement(scaleValue >= 1 ? scaleValue : 1);
 	}
@@ -188,7 +188,7 @@ public class IntensityScaleUI extends Composite {
 	private void updateScale(Display display, int selection) {
 
 		setSelection(selection);
-		//
+
 		if(updateListener != null) {
 			try {
 				executorService.execute(() -> display.asyncExec(() -> updateListener.update(selection)));

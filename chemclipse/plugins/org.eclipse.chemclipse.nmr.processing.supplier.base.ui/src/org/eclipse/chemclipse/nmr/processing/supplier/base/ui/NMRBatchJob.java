@@ -67,7 +67,7 @@ public class NMRBatchJob implements IRunnableWithProgress {
 		DefaultProcessingResult<Object> processingResult = new DefaultProcessingResult<>();
 		Collection<? extends IMeasurement> results = processTypeSupport.applyProcessor(measurements, batchJobUI.getMethod().getProcessMethod(), processingResult, monitor);
 		Display.getDefault().asyncExec(() -> ProcessingInfoPartSupport.getInstance().update(processingResult));
-		//
+
 		if(!processingResult.hasErrorMessages()) {
 			SupplierEditorSupport editorSupport = new SupplierEditorSupport(DataType.NMR, () -> Activator.getDefault().getEclipseContext());
 			for(IMeasurement measurement : results) {

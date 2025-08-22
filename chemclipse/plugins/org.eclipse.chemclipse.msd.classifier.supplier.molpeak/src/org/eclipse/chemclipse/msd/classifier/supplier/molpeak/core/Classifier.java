@@ -52,7 +52,7 @@ public class Classifier extends AbstractChromatogramClassifier {
 		} else {
 			classifierSettings = PreferenceSupplier.getChromatogramClassifierSettings();
 		}
-		//
+
 		IProcessingInfo<IChromatogramClassifierResult> processingInfo = validate(chromatogramSelection, classifierSettings);
 		if(!processingInfo.hasErrorMessages()) {
 			/*
@@ -79,7 +79,7 @@ public class Classifier extends AbstractChromatogramClassifier {
 			chromatogramSelection.getChromatogram().addMeasurementResult(measurementResult);
 			processingInfo.setProcessingResult(chromatogramClassifierResult);
 		}
-		//
+
 		return processingInfo;
 	}
 }

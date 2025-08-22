@@ -61,7 +61,7 @@ public class XmlWriter110 {
 
 	public static final CVType MS = createMS();
 	public static final CVType UO = createUO();
-	//
+
 	private static final Logger logger = Logger.getLogger(XmlWriter110.class);
 
 	public static CVListType createCvList() {
@@ -429,7 +429,7 @@ public class XmlWriter110 {
 		sourceFile.setLocation(file.getAbsolutePath());
 		sourceFile.setId(file.getName());
 		sourceFile.setName(file.getName());
-		//
+
 		CVParamType cvParamSHA1 = new CVParamType();
 		cvParamSHA1.setCvRef(MS);
 		cvParamSHA1.setAccession("MS:1000569");

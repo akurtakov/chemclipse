@@ -33,7 +33,7 @@ public class ChartGridSupport {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -84,11 +84,11 @@ public class ChartGridSupport {
 		for(IAxisSettings axisSettings : chartSettings.getSecondaryAxisSettingsListX()) {
 			axisSettingsList.add(axisSettings);
 		}
-		//
+
 		for(IAxisSettings axisSettings : chartSettings.getSecondaryAxisSettingsListY()) {
 			axisSettingsList.add(axisSettings);
 		}
-		//
+
 		return axisSettingsList;
 	}
 }

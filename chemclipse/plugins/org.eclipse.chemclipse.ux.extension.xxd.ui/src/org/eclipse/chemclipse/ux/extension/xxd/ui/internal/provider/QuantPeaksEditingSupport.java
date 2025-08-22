@@ -22,7 +22,7 @@ import org.eclipse.jface.viewers.TextCellEditor;
 public class QuantPeaksEditingSupport extends EditingSupport {
 
 	private static final Logger logger = Logger.getLogger(QuantPeaksEditingSupport.class);
-	//
+
 	private CellEditor cellEditor;
 	private ExtendedTableViewer tableViewer;
 	private String column;

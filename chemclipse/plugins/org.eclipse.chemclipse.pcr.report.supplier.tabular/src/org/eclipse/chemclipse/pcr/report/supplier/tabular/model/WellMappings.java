@@ -33,7 +33,7 @@ public class WellMappings extends ArrayList<WellMapping> {
 	public static final String WHITE_SPACE = " ";
 	public static final String SEPARATOR_TOKEN = ";";
 	public static final String SEPARATOR_ENTRY = "|";
-	//
+
 	private static final Logger logger = Logger.getLogger(WellMappings.class);
 	private static final long serialVersionUID = 8201753784134562324L;
 
@@ -157,7 +157,7 @@ public class WellMappings extends ArrayList<WellMapping> {
 
 		String lineDelimiterSpecific = OperatingSystemUtils.getLineDelimiter();
 		String lineDelimiterGeneric = "\n";
-		//
+
 		String[] decodedArray;
 		if(stringList.contains(SEPARATOR_TOKEN)) {
 			decodedArray = stringList.split(SEPARATOR_TOKEN);
@@ -175,14 +175,14 @@ public class WellMappings extends ArrayList<WellMapping> {
 	private void extractSetting(WellMapping mapping, StringBuilder builder) {
 
 		List<String> entries = new ArrayList<>();
-		//
+
 		entries.add(mapping.getSubset());
 		entries.add(mapping.getSample());
 		entries.add(mapping.getChannelString());
 		entries.add(String.valueOf(mapping.getCutoff()));
 		entries.add(mapping.getPositive());
 		entries.add(mapping.getNegative());
-		//
+
 		compile(builder, entries);
 	}
 

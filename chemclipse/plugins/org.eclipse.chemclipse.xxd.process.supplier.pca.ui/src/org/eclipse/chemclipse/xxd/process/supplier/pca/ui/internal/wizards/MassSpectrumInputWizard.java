@@ -69,7 +69,7 @@ public class MassSpectrumInputWizard extends Wizard implements IInputWizard {
 
 		List<IDataInputEntry> dataInputs = getDataInputEntries();
 		pcaExtractionData = new PcaExtractionMassSpectra(dataInputs);
-		//
+
 		return true;
 	}
 }

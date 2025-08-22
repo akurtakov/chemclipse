@@ -136,14 +136,14 @@ public class ChromatogramClassifier {
 		if(classifierId.isEmpty()) {
 			return null;
 		}
-		//
+
 		IConfigurationElement[] elements = getConfigurationElements();
 		for(IConfigurationElement element : elements) {
 			if(element.getAttribute(ID).equals(classifierId)) {
 				return element;
 			}
 		}
-		//
+
 		return null;
 	}
 
@@ -152,7 +152,7 @@ public class ChromatogramClassifier {
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 		IConfigurationElement[] elementsLegacy = registry.getConfigurationElementsFor(EXTENSION_POINT_LEGACY);
 		IConfigurationElement[] elementsGeneric = registry.getConfigurationElementsFor(EXTENSION_POINT_GENERIC);
-		//
+
 		return Stream.concat(Arrays.stream(elementsLegacy), Arrays.stream(elementsGeneric)).toArray(IConfigurationElement[]::new);
 	}
 
@@ -161,7 +161,7 @@ public class ChromatogramClassifier {
 		IProcessingInfo<IChromatogramClassifierResult> processingInfo = new ProcessingInfo<>();
 		IProcessingMessage processingMessage = new ProcessingMessage(MessageType.ERROR, ICategories.CHROMATOGRAM_CLASSIFIER, NO_CHROMATOGRAM_CLASSIFIER_AVAILABLE);
 		processingInfo.addMessage(processingMessage);
-		//
+
 		return processingInfo;
 	}
 }

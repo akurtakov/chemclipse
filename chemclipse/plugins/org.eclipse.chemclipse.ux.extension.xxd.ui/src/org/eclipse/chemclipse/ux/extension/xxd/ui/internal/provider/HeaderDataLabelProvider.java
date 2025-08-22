@@ -24,9 +24,9 @@ public class HeaderDataLabelProvider extends AbstractChemClipseLabelProvider {
 
 	public static final String NAME = ExtensionMessages.name;
 	public static final String VALUE = ExtensionMessages.value;
-	//
+
 	public static final int INDEX_COLUMN_NAME = 0;
-	//
+
 	public static final String[] TITLES = { //
 			NAME, //
 			VALUE//

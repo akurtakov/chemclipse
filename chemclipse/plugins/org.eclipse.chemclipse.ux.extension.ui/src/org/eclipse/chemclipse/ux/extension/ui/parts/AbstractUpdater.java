@@ -31,7 +31,7 @@ public abstract class AbstractUpdater<T extends Composite> {
 	private T control = null;
 	private boolean initialUpdate = true;
 	private String topic = "";
-	//
+
 	private DataUpdateSupport dataUpdateSupport;
 	private IDataUpdateListener updateListener = new IDataUpdateListener() {
 
@@ -163,7 +163,7 @@ public abstract class AbstractUpdater<T extends Composite> {
 				return updateData(objects, topic);
 			}
 		}
-		//
+
 		return false;
 	}
 }

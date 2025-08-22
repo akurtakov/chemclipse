@@ -115,7 +115,7 @@ public class FilterCleaner extends AbstractChromatogramFilter {
 		} finally {
 			SubMonitor.done(subMonitor);
 		}
-		//
+
 		chromatogram.recalculateScanNumbers();
 		chromatogramSelection.reset();
 	}

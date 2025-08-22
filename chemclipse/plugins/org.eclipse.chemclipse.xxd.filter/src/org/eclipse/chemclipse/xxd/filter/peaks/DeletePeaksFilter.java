@@ -54,7 +54,7 @@ public class DeletePeaksFilter extends AbstractPeakFilter<DeletePeaksFilterSetti
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
-		//
+
 		DeletePeakOption deletePeakOption = configuration.getDeletePeakOption();
 		if(!DeletePeakOption.NONE.equals(deletePeakOption)) {
 			/*
@@ -101,7 +101,7 @@ public class DeletePeaksFilter extends AbstractPeakFilter<DeletePeaksFilterSetti
 						break;
 				}
 			}
-			//
+
 			deletePeaks(peaksToDelete, chromatogramSelection);
 			resetPeakSelection(chromatogramSelection);
 		}

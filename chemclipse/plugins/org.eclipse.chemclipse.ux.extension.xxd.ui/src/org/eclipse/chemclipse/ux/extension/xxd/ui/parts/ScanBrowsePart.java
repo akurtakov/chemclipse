@@ -52,7 +52,7 @@ public class ScanBrowsePart extends AbstractPart<ExtendedScanBrowseUI> {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 

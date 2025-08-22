@@ -80,7 +80,7 @@ public class MassSpectrumExtendedWriter implements IMassSpectraWriter {
 				header.add("Formula");
 				header.add("Reference Identifier");
 				csvFilePrinter.printRecord(header.toArray());
-				//
+
 				for(IScanMSD massSpectrum : massSpectra.getList()) {
 					/*
 					 * Library Information
@@ -105,11 +105,11 @@ public class MassSpectrumExtendedWriter implements IMassSpectraWriter {
 						logger.warn(e);
 						massSpectrumExport = massSpectrum;
 					}
-					//
+
 					int retentionIndexNoPrecision = (int)massSpectrum.getRetentionIndex();
 					int basePeakNoPrecision = (int)massSpectrum.getBasePeak();
 					int basePeakAbundanceNoPrecision = (int)massSpectrum.getBasePeakAbundance();
-					//
+
 					String retentionTime = (massSpectrum.getRetentionTime() == 0) ? "0" : decimalFormat.format(massSpectrum.getRetentionTime() / AbstractChromatogram.MINUTE_CORRELATION_FACTOR);
 					String retentionIndex = (retentionIndexNoPrecision == massSpectrum.getRetentionIndex()) ? Integer.toString(retentionIndexNoPrecision) : decimalFormat.format(massSpectrum.getRetentionIndex());
 					String basePeak = (basePeakNoPrecision == massSpectrum.getBasePeak()) ? Integer.toString(basePeakNoPrecision) : decimalFormat.format(massSpectrum.getBasePeak());
@@ -120,7 +120,7 @@ public class MassSpectrumExtendedWriter implements IMassSpectraWriter {
 					String mw = getMolWeight(libraryInformation);
 					String formula = (libraryInformation != null) ? libraryInformation.getFormula() : "";
 					String referenceIdentifier = (libraryInformation != null) ? libraryInformation.getReferenceIdentifier() : "";
-					//
+
 					List<String> data = new ArrayList<>();
 					data.add(retentionTime);
 					data.add(retentionIndex);

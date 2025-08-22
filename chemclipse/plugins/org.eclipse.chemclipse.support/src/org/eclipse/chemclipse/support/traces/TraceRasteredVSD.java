@@ -36,7 +36,7 @@ public class TraceRasteredVSD extends AbstractTrace {
 		StringBuilder builder = new StringBuilder();
 		builder.append(getWavenumber());
 		builder.append(getScaleFactorAsString());
-		//
+
 		return builder.toString();
 	}
 }

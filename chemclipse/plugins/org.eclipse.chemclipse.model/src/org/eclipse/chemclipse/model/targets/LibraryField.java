@@ -77,7 +77,7 @@ public enum LibraryField implements ILabel {
 			if(libraryInformation == null) {
 				return null;
 			}
-			//
+
 			return extractor.apply(libraryInformation);
 		};
 	}
@@ -98,7 +98,7 @@ public enum LibraryField implements ILabel {
 			if(libraryInformation == null) {
 				return null;
 			}
-			//
+
 			return Double.toString(extractor.apply(libraryInformation));
 		};
 	}
@@ -119,7 +119,7 @@ public enum LibraryField implements ILabel {
 			if(libraryInformation == null) {
 				return null;
 			}
-			//
+
 			String result = extractor1.apply(libraryInformation) + " (" + extractor2.apply(libraryInformation) + ")";
 			return result.trim();
 		};

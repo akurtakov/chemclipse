@@ -28,7 +28,7 @@ public class ChannelSpecificationListUI extends ExtendedTableViewer {
 	private ChannelSpecificationLabelProvider labelProvider = new ChannelSpecificationLabelProvider();
 	private String[] titles = ChannelSpecificationLabelProvider.TITLES;
 	private int[] bounds = ChannelSpecificationLabelProvider.BOUNDS;
-	//
+
 	private IChannelSpecification channelSpecification = null;
 
 	public ChannelSpecificationListUI(Composite parent, int style) {
@@ -67,7 +67,7 @@ public class ChannelSpecificationListUI extends ExtendedTableViewer {
 
 		int column = 0;
 		int sortOrder = IRecordTableComparator.DESCENDING;
-		//
+
 		tableComparator.setColumn(column);
 		tableComparator.setDirection(sortOrder);
 		refresh();

@@ -26,12 +26,12 @@ public class TargetsComparator extends AbstractRecordTableComparator implements 
 
 		int sortOrder = 0;
 		if(e1 instanceof IIdentificationTarget entry1 && e2 instanceof IIdentificationTarget entry2) {
-			//
+
 			ILibraryInformation libraryInformation1 = entry1.getLibraryInformation();
 			IComparisonResult comparisonResult1 = entry1.getComparisonResult();
 			ILibraryInformation libraryInformation2 = entry2.getLibraryInformation();
 			IComparisonResult comparisonResult2 = entry2.getComparisonResult();
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = Boolean.compare(entry2.isVerified(), entry1.isVerified());

@@ -41,9 +41,9 @@ public class RetentionIndexListFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof IRetentionIndexEntry retentionIndexEntry) {
-			//
+
 			String name = (caseSensitive) ? retentionIndexEntry.getName() : retentionIndexEntry.getName().toLowerCase();
 			searchText = (caseSensitive) ? searchText : searchText.toLowerCase();
 			if(name.matches(searchText)) {

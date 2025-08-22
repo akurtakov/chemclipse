@@ -32,17 +32,17 @@ public class TimeRangeSelector {
 		if(timeRange != null) {
 			double x = baseChart.getSelectedPrimaryAxisValue(event.x, IExtendedChart.X_AXIS);
 			int selection = (int)x;
-			//
+
 			int deltaStart = Math.abs(selection - timeRange.getStart());
 			int deltaStop = Math.abs(selection - timeRange.getStop());
-			//
+
 			if(deltaStart < deltaStop) {
 				timeRange.updateStart(selection);
 			} else {
 				timeRange.updateStop(selection);
 			}
 		}
-		//
+
 		return timeRange;
 	}
 
@@ -74,12 +74,12 @@ public class TimeRangeSelector {
 				 */
 				String identifier = "";
 				int minDelta = Integer.MAX_VALUE;
-				//
+
 				for(TimeRange timeRangeX : timeRanges.values()) {
 					int deltaStart = Math.abs(x - timeRangeX.getStart());
 					int deltaStop = Math.abs(x - timeRangeX.getStop());
 					int delta = Math.min(deltaStart, deltaStop);
-					//
+
 					if(delta < minDelta) {
 						minDelta = delta;
 						identifier = timeRangeX.getIdentifier();
@@ -94,7 +94,7 @@ public class TimeRangeSelector {
 					if(xStart != -1 && xStop != -1) {
 						double positionStart = baseChart.getSelectedPrimaryAxisValue(xStart, IExtendedChart.X_AXIS);
 						double positionStop = baseChart.getSelectedPrimaryAxisValue(xStop, IExtendedChart.X_AXIS);
-						//
+
 						if(positionStart < timeRange.getStart() && positionStop < timeRange.getStart()) {
 							timeRange = null; // The selection is left of the time range area.
 						} else if(positionStart > timeRange.getStop() && positionStop > timeRange.getStop()) {
@@ -113,10 +113,10 @@ public class TimeRangeSelector {
 					timeRange = null;
 				}
 			}
-			//
+
 			return timeRange;
 		}
-		//
+
 		return null;
 	}
 }

@@ -38,7 +38,7 @@ import jakarta.inject.Named;
 public abstract class WizardTile implements TileDefinition {
 
 	private static final Logger logger = Logger.getLogger(WizardTile.class);
-	//
+
 	public static final int DEFAULT_WIDTH = 500;
 	public static final int DEFAULT_HEIGHT = 600;
 
@@ -50,7 +50,7 @@ public abstract class WizardTile implements TileDefinition {
 		wizardDialog.setMinimumPageSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		AtomicReference<ISamplesPCA<?, ?>> evaluation = new AtomicReference<>();
 		String title = null;
-		//
+
 		try {
 			if(wizardDialog.open() == Window.OK) {
 				/*
@@ -60,7 +60,7 @@ public abstract class WizardTile implements TileDefinition {
 				analysisSettings.setPreprocessingSettings(wizard.getPreprocessingSettings());
 				IExtractionData extractionData = wizard.getExtractionData();
 				title = analysisSettings.getTitle();
-				//
+
 				if(extractionData != null) {
 					ProgressMonitorDialog monitorDialog = new ProgressMonitorDialog(wizardDialog.getShell());
 					monitorDialog.setCancelable(true);

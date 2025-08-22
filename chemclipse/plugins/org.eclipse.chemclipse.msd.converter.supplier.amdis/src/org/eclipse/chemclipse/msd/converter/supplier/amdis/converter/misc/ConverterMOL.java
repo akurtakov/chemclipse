@@ -32,7 +32,7 @@ import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 public class ConverterMOL {
 
 	private static final Logger logger = Logger.getLogger(ConverterMOL.class);
-	//
+
 	private static final String MARKER_END = "M END";
 	private static final Pattern patternCAS = Pattern.compile("(CAS)(\\s+)(rn)(\\s+)(=)(\\s+)((\\d+)(-?)(\\d+)(-?)(\\d+))");
 
@@ -46,7 +46,7 @@ public class ConverterMOL {
 			String line = null;
 			String name = null;
 			StringBuilder builder = new StringBuilder();
-			//
+
 			while((line = bufferedReader.readLine()) != null) {
 				if(line.trim().isEmpty()) {
 					continue;
@@ -67,7 +67,7 @@ public class ConverterMOL {
 		} catch(IOException e) {
 			logger.warn(e);
 		}
-		//
+
 		return moleculeStructureMap;
 	}
 
@@ -89,7 +89,7 @@ public class ConverterMOL {
 		if(file.isFile()) {
 			String path = file.getParentFile().getAbsolutePath();
 			String fileBaseName = FilenameUtils.getBaseName(file.getName());
-			//
+
 			fileMOL = new File(path + File.separator + fileBaseName + ".MOL");
 			if(!fileMOL.exists()) {
 				fileMOL = new File(path + File.separator + fileBaseName + ".mol");
@@ -98,7 +98,7 @@ public class ConverterMOL {
 				}
 			}
 		}
-		//
+
 		return fileMOL;
 	}
 
@@ -111,7 +111,7 @@ public class ConverterMOL {
 				casNumberMap.put(CasSupport.format(casNumber), moleculeStructure);
 			}
 		}
-		//
+
 		for(IScanMSD massSpectrum : massSpectra.getList()) {
 			if(massSpectrum instanceof IRegularLibraryMassSpectrum libraryMassSpectrum) {
 				ILibraryInformation libraryInformation = libraryMassSpectrum.getLibraryInformation();
@@ -150,7 +150,7 @@ public class ConverterMOL {
 				return matcher.group(7);
 			}
 		}
-		//
+
 		return "";
 	}
 }

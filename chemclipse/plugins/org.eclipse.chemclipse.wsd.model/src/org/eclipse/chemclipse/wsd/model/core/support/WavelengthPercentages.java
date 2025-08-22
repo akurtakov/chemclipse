@@ -22,7 +22,7 @@ import org.eclipse.chemclipse.wsd.model.core.IScanWSD;
 public class WavelengthPercentages {
 
 	public static final int MAX_PERCENTAGE = 100;
-	//
+
 	private IScanWSD scanWSD;
 	private SortedMap<Integer, Float> wavelengthDistribution;
 

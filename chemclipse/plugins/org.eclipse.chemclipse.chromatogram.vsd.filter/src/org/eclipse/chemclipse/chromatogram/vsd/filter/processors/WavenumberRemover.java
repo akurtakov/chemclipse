@@ -72,7 +72,7 @@ public class WavenumberRemover implements IProcessTypeSupplier {
 					IChromatogramVSD chromatogramISD = chromatogramSelectionISD.getChromatogram();
 					int startScan = chromatogramISD.getScanNumber(chromatogramSelection.getStartRetentionTime());
 					int stopScan = chromatogramISD.getScanNumber(chromatogramSelection.getStopRetentionTime());
-					//
+
 					for(int scan = startScan; scan <= stopScan; scan++) {
 						IScan scanX = chromatogramISD.getScan(scan);
 						if(scanX instanceof IScanVSD scanISD) {
@@ -91,7 +91,7 @@ public class WavenumberRemover implements IProcessTypeSupplier {
 		private Set<Integer> getWavenumbers(String selection) {
 
 			Set<Integer> wavelengths = new HashSet<>();
-			//
+
 			String[] values = selection.split(" ");
 			for(String value : values) {
 				try {
@@ -100,7 +100,7 @@ public class WavenumberRemover implements IProcessTypeSupplier {
 				} catch(NumberFormatException e) {
 				}
 			}
-			//
+
 			return wavelengths;
 		}
 	}

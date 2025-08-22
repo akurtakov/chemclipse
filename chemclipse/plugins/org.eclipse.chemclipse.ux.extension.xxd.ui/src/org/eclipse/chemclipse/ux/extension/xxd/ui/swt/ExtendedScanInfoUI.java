@@ -71,15 +71,15 @@ public class ExtendedScanInfoUI extends Composite implements IExtendedPartUI {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout layout = new GridLayout(1, true);
 		composite.setLayout(layout);
-		//
+
 		createToolbarMain(composite);
 		Composite toolbarInfo = createToolbarInfo(composite);
 		scanListUI = createScanInfoList(composite);
-		//
+
 		PartSupport.setCompositeVisibility(toolbarInfo, true);
 	}
 
@@ -90,9 +90,9 @@ public class ExtendedScanInfoUI extends Composite implements IExtendedPartUI {
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(2, false));
-		//
+
 		createSettingsButton(composite);
-		//
+
 		return composite;
 	}
 
@@ -102,9 +102,9 @@ public class ExtendedScanInfoUI extends Composite implements IExtendedPartUI {
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		labelInfo = createLabel(composite);
-		//
+
 		return composite;
 	}
 

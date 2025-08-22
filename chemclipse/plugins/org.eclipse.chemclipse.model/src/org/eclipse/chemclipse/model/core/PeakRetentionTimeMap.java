@@ -31,7 +31,7 @@ import java.util.TreeMap;
 public final class PeakRetentionTimeMap<T extends IPeak> implements Serializable {
 
 	private static final long serialVersionUID = 6339698016420166069L;
-	//
+
 	private int peakcount;
 	private final TreeMap<Integer, Collection<T>> internalMap = new TreeMap<>();
 

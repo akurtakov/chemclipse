@@ -51,17 +51,17 @@ import jakarta.inject.Inject;
 public class SequenceEditor {
 
 	private static final Logger logger = Logger.getLogger(SequenceEditor.class);
-	//
+
 	public static final String ID = "org.eclipse.chemclipse.ux.extension.xxd.ui.part.sequenceEditor";
 	public static final String CONTRIBUTION_URI = "bundleclass://org.eclipse.chemclipse.ux.extension.xxd.ui/org.eclipse.chemclipse.ux.extension.xxd.ui.editors.SequenceEditor";
 	public static final String ICON_URI = ApplicationImageFactory.getInstance().getURI(IApplicationImage.IMAGE_SEQUENCE_LIST_DEFAULT, IApplicationImageProvider.SIZE_16x16);
 	public static final String TOOLTIP = ExtensionMessages.sequenceEditor;
-	//
+
 	private final MPart part;
 	private final MDirtyable dirtyable;
 	private final EModelService modelService;
 	private final MApplication application;
-	//
+
 	private File sequenceFile;
 	private ExtendedSequenceListUI extendedSequenceListUI;
 
@@ -72,7 +72,7 @@ public class SequenceEditor {
 		this.dirtyable = dirtyable;
 		this.modelService = modelService;
 		this.application = application;
-		//
+
 		initialize(parent);
 	}
 
@@ -131,7 +131,7 @@ public class SequenceEditor {
 		} catch(Exception e) {
 			logger.error(e);
 		}
-		//
+
 		return sequence;
 	}
 
@@ -154,7 +154,7 @@ public class SequenceEditor {
 			logger.warn(e);
 			Thread.currentThread().interrupt();
 		}
-		//
+
 		return sequence;
 	}
 

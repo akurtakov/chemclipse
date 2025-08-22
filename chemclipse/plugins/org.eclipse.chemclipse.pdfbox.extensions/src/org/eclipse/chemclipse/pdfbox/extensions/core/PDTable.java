@@ -22,15 +22,15 @@ import org.eclipse.chemclipse.pdfbox.extensions.settings.TextOption;
 public class PDTable {
 
 	private static final Logger logger = Logger.getLogger(PDTable.class);
-	//
+
 	private int startIndex = 0;
 	private int stopIndex = 0;
 	private int defaultBorder; // initialized in constructor
-	//
+
 	private int indexHeader = -1;
 	private List<List<CellElement>> headerRows = new ArrayList<>();
 	private List<List<String>> dataRows = new ArrayList<>();
-	//
+
 	private TextOption textOption = TextOption.NONE;
 
 	public PDTable() {
@@ -163,7 +163,7 @@ public class PDTable {
 				return false;
 			}
 		}
-		//
+
 		return true;
 	}
 }

@@ -39,7 +39,7 @@ public class ChromatogramFilterDialog extends Dialog {
 
 	private static final int WIDTH = 450;
 	private static final int HEIGHT = 150;
-	//
+
 	private IMassSpectrumIdentifierSupplier massSpectrumIdentifierSupplier = null;
 
 	public ChromatogramFilterDialog(Shell parentShell) {
@@ -79,10 +79,10 @@ public class ChromatogramFilterDialog extends Dialog {
 		layout.marginRight = 10;
 		layout.marginLeft = 10;
 		composite.setLayout(layout);
-		//
+
 		createLabel(composite);
 		createComboViewer(composite);
-		//
+
 		return composite;
 	}
 
@@ -109,7 +109,7 @@ public class ChromatogramFilterDialog extends Dialog {
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select a scan maxima identifier.");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
@@ -125,12 +125,12 @@ public class ChromatogramFilterDialog extends Dialog {
 				}
 			}
 		});
-		//
+
 		List<IMassSpectrumIdentifierSupplier> suppliers = new ArrayList<>();
 		suppliers.addAll(MassSpectrumIdentifier.getMassSpectrumIdentifierSupport().getSuppliers());
 		Collections.sort(suppliers, (s1, s2) -> s1.getIdentifierName().compareTo(s2.getIdentifierName()));
 		comboViewer.setInput(suppliers);
-		//
+
 		return comboViewer;
 	}
 }

@@ -32,9 +32,9 @@ public class FeatureStatLabelProvider extends AbstractChemClipseLabelProvider {
 	public static final String RELATIVESTDDEV = "RSD";
 	public static final String SKEWNESS = "Skewness";
 	public static final String KURTOSIS = "Excess Kurtosis";
-	//
+
 	private DecimalFormat decimalFormat = getDecimalFormat();
-	//
+
 	public static String[] TITLES = {//
 			VARIABLE, //
 			NAME, //
@@ -73,7 +73,7 @@ public class FeatureStatLabelProvider extends AbstractChemClipseLabelProvider {
 				stats.addValue(sampleData.get(i).getData());
 			}
 			double value = 0.0;
-			//
+
 			switch(columnIndex) {
 				case 0:
 					text = variable.getValue();

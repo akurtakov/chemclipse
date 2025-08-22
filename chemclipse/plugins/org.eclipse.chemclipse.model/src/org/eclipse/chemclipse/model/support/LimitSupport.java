@@ -31,14 +31,14 @@ public class LimitSupport {
 		if(identificationTargets == null) {
 			return false;
 		}
-		//
+
 		for(IIdentificationTarget identificationTarget : identificationTargets) {
 			IComparisonResult comparisonResult = identificationTarget.getComparisonResult();
 			if(comparisonResult.getMatchFactor() >= limitMatchFactor) {
 				return false;
 			}
 		}
-		//
+
 		return true;
 	}
 }

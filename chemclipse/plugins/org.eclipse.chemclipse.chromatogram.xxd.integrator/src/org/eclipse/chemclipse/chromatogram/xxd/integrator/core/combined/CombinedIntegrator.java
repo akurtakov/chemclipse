@@ -39,7 +39,7 @@ public class CombinedIntegrator {
 	private static final String INTEGRATOR_NAME = "integratorName";
 	private static final String INTEGRATOR = "integrator";
 	private static final String INTEGRATOR_SETTINGS = "integratorSettings";
-	//
+
 	private static final String NO_INTEGRATOR_AVAILABLE = "There is no combined integrator available.";
 
 	/**

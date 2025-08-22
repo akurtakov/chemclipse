@@ -30,7 +30,7 @@ public class CasValidator implements IValidator<String> {
 	public IStatus validate(String value) {
 
 		String message = null;
-		//
+
 		if(value != null) {
 			if(value.isBlank()) {
 				if(!allowEmpty) {
@@ -44,7 +44,7 @@ public class CasValidator implements IValidator<String> {
 		} else {
 			message = ERROR_MESSAGE;
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

@@ -29,7 +29,7 @@ public class NoiseSegmentListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = NoiseSegmentLabelProvider.TITLES;
 	private static final int[] BOUNDS = NoiseSegmentLabelProvider.BOUNDS;
-	//
+
 	private IBaseLabelProvider labelProvider = new NoiseSegmentLabelProvider();
 	private ViewerComparator tableComparator = new NoiseSegmentTableComparator();
 	private IUpdateListener updateListener = null;

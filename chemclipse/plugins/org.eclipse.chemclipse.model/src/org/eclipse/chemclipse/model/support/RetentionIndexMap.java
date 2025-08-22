@@ -25,7 +25,7 @@ import org.eclipse.chemclipse.model.core.IScan;
 public class RetentionIndexMap {
 
 	private static final int RETENTION_INDEX_MISSING = -1;
-	//
+
 	private ISeparationColumnIndices separationColumnIndices = new SeparationColumnIndices(); // Retention Time, Retention Index
 	private TreeMap<Integer, Integer> retentionIndexMap = new TreeMap<>(); // Retention Index, Retention Time
 
@@ -132,12 +132,12 @@ public class RetentionIndexMap {
 			 * Check C1 - C99
 			 */
 			for(int i = 1; i < 99; i++) {
-				//
+
 				int retentionIndex = i * 100;
 				String alkane = RetentionIndexMath.ALKANE_PREFIX + i;
 				Entry<Integer, Integer> floorEntry = treeMap.floorEntry(retentionIndex);
 				Entry<Integer, Integer> ceilingEntry = treeMap.ceilingEntry(retentionIndex + 100);
-				//
+
 				if(floorEntry != null) {
 					if(ceilingEntry != null) {
 						if(floorEntry.getKey() % 100 == 0) {

@@ -26,12 +26,12 @@ public class SequenceFilesLabelProvider extends AbstractChemClipseLabelProvider 
 
 	public static final String NAME = ExtensionMessages.name;
 	public static final String SIZE = ExtensionMessages.sizeKB;
-	//
+
 	public static String[] TITLES = {//
 			NAME, //
 			SIZE //
 	};
-	//
+
 	public static int[] BOUNDS = {//
 			300, //
 			60 //
@@ -52,7 +52,7 @@ public class SequenceFilesLabelProvider extends AbstractChemClipseLabelProvider 
 		DecimalFormat decimalFormat = getDecimalFormat();
 		String text = "";
 		if(element instanceof File file) {
-			//
+
 			switch(columnIndex) {
 				case 0:
 					text = file.getName();

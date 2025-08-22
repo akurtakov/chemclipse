@@ -57,15 +57,15 @@ import org.eclipse.swt.widgets.TableItem;
 public class PeakListUI {
 
 	private static final Logger logger = Logger.getLogger(PeakListUI.class);
-	//
+
 	private IChromatogramSelection chromatogramSelection;
-	//
+
 	private final DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish();
-	//
+
 	private ExtendedTableViewer tableViewer;
 	private Label labelSelectedPeak;
 	private Label labelPeaks;
-	//
+
 	private static final String PEAK_IS_ACTIVE_FOR_ANALYSIS = "Active for Analysis";
 	private final String[] titles = {PEAK_IS_ACTIVE_FOR_ANALYSIS, "RT (min)", "RI", "Area", "Start RT", "Stop RT", "Width", "Scan# at Peak Maximum", "S/N", "Leading", "Tailing", "Model Description", "Suggested Components", "Name"};
 	private final int[] bounds = {30, 100, 60, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100};
@@ -93,7 +93,7 @@ public class PeakListUI {
 			} else {
 				labelPeaks.setText(peaks.getPeaks().size() + " displayed peaks");
 			}
-			//
+
 			tableViewer.setInput(peaks);
 		} else {
 			clear();
@@ -193,13 +193,13 @@ public class PeakListUI {
 	private void initialize(Composite parent) {
 
 		parent.setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(parent, SWT.FILL);
 		GridLayout layout = new GridLayout();
 		layout.makeColumnsEqualWidth = true;
 		layout.numColumns = 1;
 		composite.setLayout(layout);
-		//
+
 		createButtons(composite);
 		createTable(composite);
 		createInfos(composite);
@@ -212,7 +212,7 @@ public class PeakListUI {
 		gridDataComposite.horizontalAlignment = SWT.END;
 		compositeButtons.setLayoutData(gridDataComposite);
 		compositeButtons.setLayout(new GridLayout(3, false));
-		//
+
 		createUncheckAllButton(compositeButtons);
 		createCheckAllButton(compositeButtons);
 		createSaveButton(compositeButtons);
@@ -289,7 +289,7 @@ public class PeakListUI {
 		labelSelectedPeak = new Label(composite, SWT.NONE);
 		labelSelectedPeak.setText("");
 		labelSelectedPeak.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		labelPeaks = new Label(composite, SWT.NONE);
 		labelPeaks.setText("");
 		labelPeaks.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));

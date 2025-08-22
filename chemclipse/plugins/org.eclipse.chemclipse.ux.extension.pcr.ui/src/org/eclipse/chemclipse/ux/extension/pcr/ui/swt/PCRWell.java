@@ -38,9 +38,9 @@ public class PCRWell extends Composite {
 
 	private Color colorInactive = Colors.GRAY;
 	private Color colorActive = Colors.RED;
-	//
+
 	private Label label;
-	//
+
 	private ISelectionHandler selectionHandler;
 	private IWell well;
 
@@ -100,7 +100,7 @@ public class PCRWell extends Composite {
 
 		this.colorInactive = colorInactive;
 		this.colorActive = colorActive;
-		//
+
 		setBackgroundColor(colorInactive);
 		setForegroundColor(colorText);
 	}
@@ -120,7 +120,7 @@ public class PCRWell extends Composite {
 		setLayout(new GridLayout(1, true));
 		setBackground(colorInactive);
 		addControlListener(this);
-		//
+
 		addLabel(this);
 	}
 

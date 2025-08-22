@@ -51,11 +51,11 @@ public class PeakTableTargetComparator extends AbstractRecordTableComparator imp
 					break;
 			}
 		}
-		//
+
 		if(getDirection() == ASCENDING) {
 			sortOrder = -sortOrder;
 		}
-		//
+
 		return sortOrder;
 	}
 }

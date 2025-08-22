@@ -156,7 +156,7 @@ public class NoiseCalculator extends AbstractNoiseCalculator {
 				}
 			}
 		}
-		//
+
 		return Float.NaN;
 	}
 
@@ -212,7 +212,7 @@ public class NoiseCalculator extends AbstractNoiseCalculator {
 				ITotalScanSignals signals = new TotalScanSignals(chromatogram);
 				List<INoiseSegment> noiseSegments = new ArrayList<>();
 				List<Integer> widths = new ArrayList<>();
-				//
+
 				for(IAnalysisSegment analysisSegment : segmentation.getResult()) {
 					/*
 					 * TIC (use only the total signal)
@@ -231,11 +231,11 @@ public class NoiseCalculator extends AbstractNoiseCalculator {
 				chromatogram.addMeasurementResult(chromatogramSegmentation);
 				NoiseSegmentMeasurementResult noiseSegmentMeasurementResult = new NoiseSegmentMeasurementResult(noiseSegments, chromatogramSegmentation, getId());
 				chromatogram.addMeasurementResult(noiseSegmentMeasurementResult);
-				//
+
 				return noiseSegments;
 			}
 		}
-		//
+
 		return Collections.emptyList();
 	}
 }

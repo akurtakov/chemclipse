@@ -54,11 +54,11 @@ import org.eclipse.swtchart.extensions.model.TextElement;
 public class TargetReferenceLabelMarker implements ICustomPaintListener {
 
 	private static final int NO_ALPHA = 255;
-	//
+
 	private TargetReferenceSettings targetReferenceSettings;
 	private List<TargetLabel> targetLabels = new ArrayList<>();
 	private ICustomSeries customSeries = null;
-	//
+
 	private boolean visible = true;
 	private int rotation = 0;
 	private int detectionDepth = 0;
@@ -66,14 +66,14 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 	public TargetReferenceLabelMarker(TargetReferenceSettings targetReferenceSettings) {
 
 		this.targetReferenceSettings = targetReferenceSettings;
-		//
+
 		BaseChart baseChart = targetReferenceSettings.getBaseChart();
 		if(baseChart != null) {
 			String label = targetReferenceSettings.getLabel();
 			String description = targetReferenceSettings.getDescription();
 			this.customSeries = baseChart.createCustomSeries(label, description);
 		}
-		//
+
 		setTargetReferences(targetReferenceSettings.getTargetReferences());
 	}
 
@@ -104,7 +104,7 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 						return;
 					}
 				}
-				//
+
 				ISeries<?> series = getReferenceSeries(chart);
 				if(series != null) {
 					IAxisSet axisSet = chart.getAxisSet();
@@ -138,7 +138,7 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 	private void paintLabels(GC gc, IAxis xAxis, IAxis yAxis) {
 
 		int offset = targetReferenceSettings.getOffset();
-		//
+
 		Transform transform = new Transform(gc.getDevice());
 		Transform oldTransform = new Transform(gc.getDevice());
 		gc.getTransform(oldTransform);
@@ -147,15 +147,15 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 		gc.setAlpha(NO_ALPHA);
 		float[] identityMatrix = new float[6];
 		oldTransform.getElements(identityMatrix);
-		//
+
 		try {
 			Color colorActive = TargetReferencesSupport.getActiveColor();
 			Color colorInactive = TargetReferencesSupport.getInactiveColor();
 			Color colorId = TargetReferencesSupport.getIdColor();
-			//
+
 			Rectangle clipping = gc.getClipping();
 			TargetLabel lastReference = null;
-			//
+
 			int collisions = 0;
 			for(TargetLabel reference : targetLabels) {
 				int x = xAxis.getPixelCoordinate(reference.getX());
@@ -175,7 +175,7 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 					textElement.setRotation(-rotation);
 					customSeries.getTextElements().add(textElement);
 				}
-				//
+
 				if(reference.getFontData() != null) {
 					Font font = fontMap.computeIfAbsent(reference.getFontData(), fd -> {
 						return Fonts.createDPIAwareFont(gc.getDevice(), fd);
@@ -184,7 +184,7 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 				} else {
 					gc.setFont(oldFont);
 				}
-				//
+
 				reference.setBounds(new LabelBounds(gc, reference));
 				String label = reference.getLabel();
 				setTransform(transform, x, y, reference, identityMatrix);
@@ -195,7 +195,7 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 					gc.setForeground(colorInactive);
 					gc.setBackground(colorInactive);
 				}
-				//
+
 				if(detectionDepth > 0) {
 					if(lastReference != null && lastReference.getBounds() != null) {
 						if(lastReference.getBounds().getCx() > reference.getBounds().getCx() || lastReference.getBounds().intersects(reference.getBounds())) {
@@ -228,7 +228,7 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 							collisions = 0;
 						}
 					}
-					//
+
 					if(collisions > detectionDepth) {
 						lastReference = null;
 						collisions = 0;
@@ -236,16 +236,16 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 						lastReference = reference;
 					}
 				}
-				//
+
 				gc.setTransform(transform);
 				gc.drawText(label, 0, 0, true);
-				//
+
 				if(reference.getId() != null && reference.isActive()) {
 					gc.setForeground(colorId);
 					gc.drawText(reference.getId(), reference.getBounds().getWidth() + offset / 2, 0, true);
 				}
 			}
-			//
+
 			for(TargetLabel reference : targetLabels) {
 				if(reference.getBounds() != null) {
 					reference.getBounds().dispose();
@@ -272,7 +272,7 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 		transform.rotate(-rotation);
 		transform.translate(0, -h / 2);
 		reference.getBounds().setTransform(transform);
-		//
+
 		return h;
 	}
 
@@ -311,10 +311,10 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 	private Predicate<ITargetReference> setTargetReferences(Collection<? extends TargetReference> targetReferences, Predicate<ITargetReference> activeFilter) {
 
 		targetLabels.clear();
-		//
+
 		ITargetDisplaySettings targetDisplaySettings = targetReferenceSettings.getTargetDisplaySettings();
 		Predicate<ITargetReference> visibilityFilter = TargetReference.createVisibilityFilter(targetDisplaySettings);
-		//
+
 		if(targetDisplaySettings != null) {
 			/*
 			 * Settings
@@ -325,7 +325,7 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 			LibraryField libraryField = targetDisplaySettings.getLibraryField();
 			FontData peakFontData = TargetReferencesSupport.getPeakFontData();
 			FontData scanFontData = TargetReferencesSupport.getScanFontData();
-			//
+
 			int number = 1;
 			for(ITargetReference targetReference : targetReferences) {
 				if(visibilityFilter.test(targetReference)) {
@@ -334,7 +334,7 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 					 */
 					String labelDisplay = null;
 					String labelStandard = targetReference.getTargetLabel(libraryField);
-					//
+
 					switch(displayOption) {
 						case NUMBERS:
 							labelDisplay = String.valueOf(number++);
@@ -370,11 +370,11 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 							}
 							break;
 					}
-					//
+
 					boolean isPeakLabel = TargetReferenceType.PEAK.equals(targetReference.getType());
 					boolean isScanLabel = TargetReferenceType.SCAN.equals(targetReference.getType());
 					boolean isActive = activeFilter == null || activeFilter.test(targetReference);
-					//
+
 					ISignal scan = targetReference.getSignal();
 					FontData fontData;
 					if(isPeakLabel) {
@@ -384,13 +384,13 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 					} else {
 						fontData = null;
 					}
-					//
+
 					TargetLabel targetLabel = new TargetLabel(labelDisplay, targetReferenceSettings.isShowReferenceId() ? targetReference.getRetentionTimeMinutes() : null, fontData, isActive, scan.getX(), scan.getY());
 					targetLabels.add(targetLabel);
 				}
 			}
 		}
-		//
+
 		Collections.sort(targetLabels, (o1, o2) -> Double.compare(o1.getX(), o2.getX()));
 		return visibilityFilter;
 	}
@@ -417,7 +417,7 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 				}
 			}
 		}
-		//
+
 		return "";
 	}
 }

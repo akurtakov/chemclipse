@@ -40,7 +40,7 @@ public abstract class AbstractExportConverter implements IExportConverter {
 		if(!file.canWrite()) {
 			return getProcessingInfo("The file is not writeable: " + file.getAbsolutePath());
 		}
-		//
+
 		return processingInfo;
 	}
 

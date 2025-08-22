@@ -31,7 +31,7 @@ public class IdentificationTargetSupport {
 		boolean addRetentionIndex = preferenceStore.getBoolean(PreferenceSupplier.P_UNKNOWN_TARGET_ADD_RETENTION_INDEX);
 		IIdentificationTarget identificationTarget = IIdentificationTarget.createDefaultTarget(getUnknownTargetName(scan, addRetentionIndex), CasSupport.CAS_DEFAULT, IDENTIFIER_UNKNOWN, matchFactor);
 		identificationTarget.setVerified(preferenceStore.getBoolean(PreferenceSupplier.P_VERIFY_UNKNOWN_TARGET));
-		//
+
 		return identificationTarget;
 	}
 
@@ -39,14 +39,14 @@ public class IdentificationTargetSupport {
 
 		StringBuilder builder = new StringBuilder();
 		String traces = TracesSupport.getTraces(scan);
-		//
+
 		builder.append("Unknown");
 		if(!traces.isEmpty()) {
 			builder.append(" [");
 			builder.append(traces);
 			builder.append("]");
 		}
-		//
+
 		if(addRetentionIndex) {
 			if(scan != null) {
 				int retentionIndex = Math.round(scan.getRetentionIndex());
@@ -56,7 +56,7 @@ public class IdentificationTargetSupport {
 				}
 			}
 		}
-		//
+
 		return builder.toString();
 	}
 }

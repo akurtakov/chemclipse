@@ -90,7 +90,7 @@ public class TargetsEditingSupport extends EditingSupport {
 				return identificationTarget.getLibraryInformation().getReferenceIdentifier();
 			}
 		}
-		//
+
 		return false;
 	}
 
@@ -129,7 +129,7 @@ public class TargetsEditingSupport extends EditingSupport {
 				identificationTarget.getLibraryInformation().setReferenceIdentifier((String)value);
 			}
 		}
-		//
+
 		tableViewer.refresh();
 		tableViewer.updateContent();
 		UpdateNotifierUI.update(tableViewer.getTable().getDisplay(), IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "The target has been edited.");

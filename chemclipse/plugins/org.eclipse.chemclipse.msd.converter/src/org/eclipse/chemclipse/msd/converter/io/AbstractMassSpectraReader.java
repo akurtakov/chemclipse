@@ -52,7 +52,7 @@ public abstract class AbstractMassSpectraReader extends AbstractFileHelper imple
 					massSpectrum.setRetentionIndex(SeparationColumnType.POLAR, parseFloat(values[1]));
 				}
 			}
-			//
+
 			if(setRetentionIndexTraditionally) {
 				massSpectrum.setRetentionIndex(parseFloat(value));
 			}

@@ -35,7 +35,7 @@ import org.osgi.service.component.annotations.Component;
 public class GaussianApodizationFunctionProcessor extends AbstractFIDSignalFilter<GaussianApodizationSettings> {
 
 	private static final long serialVersionUID = 4474164198521021220L;
-	//
+
 	private static final String FILTER_NAME = "Gaussian Apodization";
 	private static final BigDecimal PI = BigDecimal.valueOf(Math.PI);
 	private static final BigDecimal GAUS_CONSTANT = BigDecimal.valueOf(2).setScale(10).multiply(BigDecimal.valueOf(Math.sqrt(Math.log(2))));

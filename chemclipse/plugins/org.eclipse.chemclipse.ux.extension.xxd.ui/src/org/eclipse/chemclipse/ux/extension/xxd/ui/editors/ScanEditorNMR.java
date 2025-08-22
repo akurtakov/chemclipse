@@ -91,14 +91,14 @@ public class ScanEditorNMR implements IScanEditorNMR {
 	public static final String CONTRIBUTION_URI = "bundleclass://org.eclipse.chemclipse.ux.extension.xxd.ui/org.eclipse.chemclipse.ux.extension.xxd.ui.editors.ScanEditorNMR";
 	public static final String ICON_URI = ApplicationImageFactory.getInstance().getURI(IApplicationImage.IMAGE_SCAN_NMR, IApplicationImageProvider.SIZE_16x16);
 	public static final String TOOLTIP = ExtensionMessages.editorNMR;
-	//
+
 	private final ExecutorService executorService = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(2));
-	//
+
 	private final MPart part;
 	private final MDirtyable dirtyable;
-	//
+
 	private ExtendedNMRScanUI extendedNMRScanUI;
-	//
+
 	private final Shell shell;
 	private DataNMRSelection selection;
 	private NMRMeasurementsUI measurementsUI;
@@ -112,12 +112,12 @@ public class ScanEditorNMR implements IScanEditorNMR {
 		this.partSupport = partSupport;
 		this.processSupplierContext = context;
 		parent.addDisposeListener(e -> executorService.shutdownNow());
-		//
+
 		this.part = part;
 		this.dirtyable = dirtyable;
 		this.shell = shell;
 		this.filterFactory = filterFactory;
-		//
+
 		initialize(parent);
 	}
 
@@ -284,7 +284,7 @@ public class ScanEditorNMR implements IScanEditorNMR {
 			if(context == null) {
 				return;
 			}
-			//
+
 			Filter<ConfigType> filter = context.getFilter();
 			if(filter instanceof IMeasurementFilter<?>) {
 				IMeasurementFilter<ConfigType> measurementFilter = (IMeasurementFilter<ConfigType>)filter;

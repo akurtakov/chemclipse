@@ -68,17 +68,17 @@ public class InstrumentsSettingsEditor implements SettingsUIProvider.SettingsUIC
 	private static final String REALLY_DELETE_SELECTED_INSTRUMENT = ExtensionMessages.reallyDeleteSelectedInstrument;
 	private static final String REMOVE_ALL_INSTRUMENTS = ExtensionMessages.removeAllInstruments;
 	private static final String REALLY_REMOVE_ALL_INSTRUMENTS = ExtensionMessages.reallyDeleteAllInstrument;
-	//
+
 	private Composite control;
-	//
+
 	private Button buttonToolbarSearch;
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
-	//
+
 	private Instruments settings = new Instruments();
 	private InstrumentListUI listUI;
-	//
+
 	private List<Listener> listeners = new ArrayList<>();
-	//
+
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 	private IProcessorPreferences<Instruments> preferences = null;
 
@@ -91,7 +91,7 @@ public class InstrumentsSettingsEditor implements SettingsUIProvider.SettingsUIC
 		if(instruments != null) {
 			this.settings.load(instruments.save());
 		}
-		//
+
 		control = createControl(parent);
 	}
 
@@ -148,13 +148,13 @@ public class InstrumentsSettingsEditor implements SettingsUIProvider.SettingsUIC
 		gridLayout.marginWidth = 0;
 		gridLayout.marginHeight = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		createButtonSection(composite);
 		createToolbarSearch(composite);
 		createTableSection(composite);
-		//
+
 		initialize();
-		//
+
 		return composite;
 	}
 
@@ -170,7 +170,7 @@ public class InstrumentsSettingsEditor implements SettingsUIProvider.SettingsUIC
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(8, false));
-		//
+
 		buttonToolbarSearch = createButtonToggleToolbar(composite, toolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH);
 		createButtonAdd(composite);
 		createButtonEdit(composite);
@@ -193,7 +193,7 @@ public class InstrumentsSettingsEditor implements SettingsUIProvider.SettingsUIC
 				listUI.setSearchText(searchText, caseSensitive);
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -203,7 +203,7 @@ public class InstrumentsSettingsEditor implements SettingsUIProvider.SettingsUIC
 		composite.setLayout(new FillLayout());
 		GridData gridData = new GridData(GridData.FILL_BOTH);
 		composite.setLayoutData(gridData);
-		//
+
 		listUI = new InstrumentListUI(composite, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 		setTableViewerInput();
 	}
@@ -230,7 +230,7 @@ public class InstrumentsSettingsEditor implements SettingsUIProvider.SettingsUIC
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -264,7 +264,7 @@ public class InstrumentsSettingsEditor implements SettingsUIProvider.SettingsUIC
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -290,7 +290,7 @@ public class InstrumentsSettingsEditor implements SettingsUIProvider.SettingsUIC
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -311,7 +311,7 @@ public class InstrumentsSettingsEditor implements SettingsUIProvider.SettingsUIC
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -341,7 +341,7 @@ public class InstrumentsSettingsEditor implements SettingsUIProvider.SettingsUIC
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -376,7 +376,7 @@ public class InstrumentsSettingsEditor implements SettingsUIProvider.SettingsUIC
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -394,7 +394,7 @@ public class InstrumentsSettingsEditor implements SettingsUIProvider.SettingsUIC
 				settings.save();
 			}
 		});
-		//
+
 		return button;
 	}
 

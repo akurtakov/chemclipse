@@ -26,7 +26,7 @@ import org.eclipse.swt.dnd.TransferData;
 public class IdentificationTargetTransfer extends ByteArrayTransfer {
 
 	private static final Logger logger = Logger.getLogger(IdentificationTargetTransfer.class);
-	//
+
 	private static final String TYPE_NAME = "Identification Target";
 	private static final int TYPE_ID = registerType(TYPE_NAME);
 	private static final IdentificationTargetTransfer INSTANCE = new IdentificationTargetTransfer();
@@ -92,7 +92,7 @@ public class IdentificationTargetTransfer extends ByteArrayTransfer {
 				logger.warn(e);
 			}
 		}
-		//
+
 		return data;
 	}
 }

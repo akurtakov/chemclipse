@@ -54,9 +54,9 @@ import org.eclipse.swt.widgets.Text;
 public class ExtendedQuantSignalsListUI extends Composite implements IExtendedPartUI {
 
 	private static final String MENU_CATEGORY = "Signals";
-	//
+
 	private IQuantitationCompound quantitationCompound;
-	//
+
 	private Button buttonToolbarInfo;
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private Button buttonToolbarEdit;
@@ -67,7 +67,7 @@ public class ExtendedQuantSignalsListUI extends Composite implements IExtendedPa
 	private Button buttonDelete;
 	private AtomicReference<QuantSignalsListUI> tableViewer = new AtomicReference<>();
 	private Button buttonTableEdit;
-	//
+
 	private QuantitationSignalValidator validator = new QuantitationSignalValidator();
 	private ControlDecoration controlDecoration;
 
@@ -87,15 +87,15 @@ public class ExtendedQuantSignalsListUI extends Composite implements IExtendedPa
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(composite);
 		createToolbarInfo(composite);
 		createToolbarEdit(composite);
 		createTable(composite);
-		//
+
 		initialize();
 	}
 
@@ -114,7 +114,7 @@ public class ExtendedQuantSignalsListUI extends Composite implements IExtendedPa
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(4, false));
-		//
+
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 		buttonToolbarEdit = createButtonToggleToolbar(composite, toolbarEdit, IMAGE_EDIT, TOOLTIP_EDIT);
 		buttonTableEdit = createButtonToggleEditTable(composite, tableViewer, IMAGE_EDIT_ENTRY);
@@ -137,7 +137,7 @@ public class ExtendedQuantSignalsListUI extends Composite implements IExtendedPa
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 
@@ -148,13 +148,13 @@ public class ExtendedQuantSignalsListUI extends Composite implements IExtendedPa
 		composite.setLayoutData(gridData);
 		int columns = 3;
 		composite.setLayout(new GridLayout(columns, false));
-		//
+
 		labelInputErrors = createLabel(composite, columns);
-		//
+
 		textSignal = createTextSignal(composite);
 		buttonAdd = createButtonAdd(composite);
 		buttonDelete = createButtonDelete(composite);
-		//
+
 		toolbarEdit.set(composite);
 	}
 
@@ -165,7 +165,7 @@ public class ExtendedQuantSignalsListUI extends Composite implements IExtendedPa
 		gridData.horizontalSpan = horizontalSpan;
 		gridData.grabExcessHorizontalSpace = true;
 		label.setLayoutData(gridData);
-		//
+
 		return label;
 	}
 
@@ -175,7 +175,7 @@ public class ExtendedQuantSignalsListUI extends Composite implements IExtendedPa
 		text.setText("");
 		text.setToolTipText("Type in a new signal.");
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		controlDecoration = new ControlDecoration(text, SWT.LEFT | SWT.TOP);
 		text.addKeyListener(new KeyAdapter() {
 
@@ -188,7 +188,7 @@ public class ExtendedQuantSignalsListUI extends Composite implements IExtendedPa
 				}
 			}
 		});
-		//
+
 		return text;
 	}
 
@@ -206,7 +206,7 @@ public class ExtendedQuantSignalsListUI extends Composite implements IExtendedPa
 				addSignal(e.display.getActiveShell());
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -224,7 +224,7 @@ public class ExtendedQuantSignalsListUI extends Composite implements IExtendedPa
 				deleteSignals(e.display.getActiveShell());
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -240,7 +240,7 @@ public class ExtendedQuantSignalsListUI extends Composite implements IExtendedPa
 		addDeleteMenuEntry(shell, tableSettings);
 		addKeyEventProcessors(shell, tableSettings);
 		quantSignalsListUI.applySettings(tableSettings);
-		//
+
 		tableViewer.set(quantSignalsListUI);
 	}
 

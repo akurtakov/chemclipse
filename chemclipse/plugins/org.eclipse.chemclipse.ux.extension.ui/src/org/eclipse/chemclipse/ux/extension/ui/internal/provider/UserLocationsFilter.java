@@ -36,29 +36,29 @@ public class UserLocationsFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof UserLocation userLocation) {
 			/*
 			 * Values
 			 */
 			String name = userLocation.getName();
 			String path = userLocation.getPath();
-			//
+
 			if(!caseSensitive) {
 				searchText = searchText.toLowerCase();
 				name = name.toLowerCase();
 				path = path.toLowerCase();
 			}
-			//
+
 			if(name.contains(searchText)) {
 				return true;
 			}
-			//
+
 			if(path.contains(searchText)) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 }

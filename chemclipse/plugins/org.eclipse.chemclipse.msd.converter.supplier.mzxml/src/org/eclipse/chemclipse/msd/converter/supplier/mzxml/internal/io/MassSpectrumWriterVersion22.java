@@ -55,7 +55,7 @@ import jakarta.xml.bind.Marshaller;
 public class MassSpectrumWriterVersion22 implements IMassSpectraWriter {
 
 	public static final String VERSION = "mzXML_2.2";
-	//
+
 	private static final Logger logger = Logger.getLogger(MassSpectrumWriter.class);
 
 	@Override

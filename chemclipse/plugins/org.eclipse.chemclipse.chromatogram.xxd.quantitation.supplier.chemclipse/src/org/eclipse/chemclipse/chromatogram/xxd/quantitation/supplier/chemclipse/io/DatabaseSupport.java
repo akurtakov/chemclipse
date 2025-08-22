@@ -34,12 +34,12 @@ public class DatabaseSupport {
 
 		IQuantitationDatabase quantitationDatabase = null;
 		File file = new File(PreferenceSupplier.getSelectedQuantitationDatabase());
-		//
+
 		if(file.exists()) {
 			IProcessingInfo<IQuantitationDatabase> processingInfo = QuantDBConverter.convert(file, new NullProgressMonitor());
 			quantitationDatabase = processingInfo.getProcessingResult();
 		}
-		//
+
 		return quantitationDatabase;
 	}
 

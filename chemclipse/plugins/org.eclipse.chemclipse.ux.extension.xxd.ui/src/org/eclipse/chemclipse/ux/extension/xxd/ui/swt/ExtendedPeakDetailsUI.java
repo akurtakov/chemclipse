@@ -40,14 +40,14 @@ public class ExtendedPeakDetailsUI extends Composite implements IExtendedPartUI 
 
 	private Button buttonToolbarInfo;
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
-	//
+
 	private List list;
 	private Clipboard clipboard;
 	private DecimalFormat decimalFormat;
 	private StringBuilder stringBuilder;
-	//
+
 	private IPeak peak;
-	//
+
 	private PeakDataSupport peakDataSupport = new PeakDataSupport();
 
 	public ExtendedPeakDetailsUI(Composite parent, int style) {
@@ -83,11 +83,11 @@ public class ExtendedPeakDetailsUI extends Composite implements IExtendedPartUI 
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createPeakList(this);
-		//
+
 		initialize();
 	}
 
@@ -103,7 +103,7 @@ public class ExtendedPeakDetailsUI extends Composite implements IExtendedPartUI 
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
 	}
 
@@ -111,7 +111,7 @@ public class ExtendedPeakDetailsUI extends Composite implements IExtendedPartUI 
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		toolbarInfo.set(informationUI);
 	}
 

@@ -30,11 +30,11 @@ public class TimeRangeUI extends Composite implements IExtendedPartUI {
 
 	private static final String TOOLTIP_LOCK = "locking the time range.";
 	private static final String IMAGE_LOCK = IApplicationImage.IMAGE_LOCK_UPDATE;
-	//
+
 	private AtomicReference<Button> buttonLockControl = new AtomicReference<>();
 	private AtomicReference<TimeSpinner> timeSpinnerStartControl = new AtomicReference<>();
 	private AtomicReference<TimeSpinner> timeSpinnerStopControl = new AtomicReference<>();
-	//
+
 	private TimeRanges timeRanges = null;
 	private TimeRange timeRange = null;
 	private ITimeRangeUpdateListener updateListener = null;
@@ -74,11 +74,11 @@ public class TimeRangeUI extends Composite implements IExtendedPartUI {
 		gridLayout.marginLeft = 0;
 		gridLayout.marginRight = 0;
 		setLayout(gridLayout);
-		//
+
 		createButtonLock(this);
 		timeSpinnerStartControl.set(createSpinner(this, TimeRange.Marker.START));
 		timeSpinnerStopControl.set(createSpinner(this, TimeRange.Marker.STOP));
-		//
+
 		initialize();
 	}
 
@@ -103,7 +103,7 @@ public class TimeRangeUI extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		//
+
 		buttonLockControl.set(button);
 	}
 
@@ -124,7 +124,7 @@ public class TimeRangeUI extends Composite implements IExtendedPartUI {
 				updateInput(timeRange);
 			}
 		});
-		//
+
 		return timeSpinner;
 	}
 

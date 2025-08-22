@@ -51,7 +51,7 @@ import org.eclipse.swt.widgets.Composite;
 public class ExtendedMeasurementResultUI extends Composite implements IExtendedPartUI {
 
 	private static final String NO_SELECTION = "--";
-	//
+
 	private AtomicReference<Button> buttonToolbarInfo = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private AtomicReference<Button> buttonToolbarResults = new AtomicReference<>();
@@ -61,7 +61,7 @@ public class ExtendedMeasurementResultUI extends Composite implements IExtendedP
 	private AtomicReference<Button> buttonDeleteAll = new AtomicReference<>();
 	private AtomicReference<Button> buttonClipboard = new AtomicReference<>();
 	private AtomicReference<MeasurementResultUI> measurementResultsControl = new AtomicReference<>();
-	//
+
 	private IChromatogram chromatogram = null;
 
 	public ExtendedMeasurementResultUI(Composite parent, int style) {
@@ -84,12 +84,12 @@ public class ExtendedMeasurementResultUI extends Composite implements IExtendedP
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-		//
+
 		createToolbarMain(this);
 		createToolbarInfo(this);
 		createTable(this);
 		createToolbarResults(this);
-		//
+
 		initialize();
 	}
 
@@ -97,7 +97,7 @@ public class ExtendedMeasurementResultUI extends Composite implements IExtendedP
 
 		enableToolbar(toolbarInfo, buttonToolbarInfo.get(), IMAGE_INFO, TOOLTIP_INFO, true);
 		enableToolbar(toolbarResults, buttonToolbarResults.get(), IMAGE_RESULTS, TOOLTIP_RESULTS, false);
-		//
+
 		updateInput();
 	}
 
@@ -107,7 +107,7 @@ public class ExtendedMeasurementResultUI extends Composite implements IExtendedP
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(6, false));
-		//
+
 		createButtonToggleToolbarInfo(composite);
 		createResultComboViewer(composite);
 		createButtonDeleteSelected(composite);
@@ -135,7 +135,7 @@ public class ExtendedMeasurementResultUI extends Composite implements IExtendedP
 
 		MeasurementResultUI measurementResultsUI = new MeasurementResultUI(parent, SWT.VIRTUAL | SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		measurementResultsUI.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		measurementResultsControl.set(measurementResultsUI);
 	}
 
@@ -148,7 +148,7 @@ public class ExtendedMeasurementResultUI extends Composite implements IExtendedP
 
 		InformationUI informationUI = new InformationUI(parent, SWT.NONE);
 		informationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return informationUI;
 	}
 
@@ -167,11 +167,11 @@ public class ExtendedMeasurementResultUI extends Composite implements IExtendedP
 				} else if(element instanceof String text) {
 					return text;
 				}
-				//
+
 				return super.getText(element);
 			}
 		});
-		//
+
 		combo.setToolTipText("Show the available measurement results.");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.grabExcessHorizontalSpace = true;
@@ -185,7 +185,7 @@ public class ExtendedMeasurementResultUI extends Composite implements IExtendedP
 				update(null);
 			}
 		});
-		//
+
 		comboMeasurementResults.set(comboViewer);
 	}
 
@@ -212,7 +212,7 @@ public class ExtendedMeasurementResultUI extends Composite implements IExtendedP
 				}
 			}
 		});
-		//
+
 		buttonDeleteSelected.set(button);
 	}
 
@@ -236,7 +236,7 @@ public class ExtendedMeasurementResultUI extends Composite implements IExtendedP
 				}
 			}
 		});
-		//
+
 		buttonDeleteAll.set(button);
 	}
 
@@ -287,19 +287,19 @@ public class ExtendedMeasurementResultUI extends Composite implements IExtendedP
 				}
 			}
 		});
-		//
+
 		buttonClipboard.set(button);
 	}
 
 	private IMeasurementResult<?> getSelection() {
 
 		IMeasurementResult<?> measurementResult = null;
-		//
+
 		Object object = comboMeasurementResults.get().getStructuredSelection().getFirstElement();
 		if(object instanceof IMeasurementResult<?> result) {
 			measurementResult = result;
 		}
-		//
+
 		return measurementResult;
 	}
 
@@ -325,7 +325,7 @@ public class ExtendedMeasurementResultUI extends Composite implements IExtendedP
 		}
 		buttonDeleteAll.get().setEnabled(enabled);
 		buttonClipboard.get().setEnabled(enabled);
-		//
+
 		IMeasurementResult<?> measurementResult = getSelection();
 		buttonDeleteSelected.get().setEnabled(measurementResult != null);
 	}
@@ -336,7 +336,7 @@ public class ExtendedMeasurementResultUI extends Composite implements IExtendedP
 		List<Object> measurementResults = new ArrayList<>();
 		measurementResults.add(NO_SELECTION);
 		measurementResults.addAll(results);
-		//
+
 		IStructuredSelection structuredSelection = comboMeasurementResults.get().getStructuredSelection();
 		Object object = structuredSelection.getFirstElement();
 		comboMeasurementResults.get().setSelection(StructuredSelection.EMPTY);
@@ -370,12 +370,12 @@ public class ExtendedMeasurementResultUI extends Composite implements IExtendedP
 	private List<IMeasurementResult<?>> getMeasurementResults(IChromatogram chromatogram) {
 
 		List<IMeasurementResult<?>> measurementResults = new ArrayList<>();
-		//
+
 		if(chromatogram != null) {
 			measurementResults.addAll(chromatogram.getMeasurementResults().stream().filter(m -> m.isVisible()).collect(Collectors.toList()));
 			Collections.sort(measurementResults, (r1, r2) -> r1.getName().compareTo(r2.getName()));
 		}
-		//
+
 		return measurementResults;
 	}
 

@@ -105,17 +105,17 @@ public class MatlabParafacPeakWriter implements IPeakWriter {
 		StringBuilder builder = new StringBuilder();
 		builder.append(MatlabParafac.PEAK_IDENTIFIER);
 		builder.append(lineSeparator);
-		//
+
 		builder.append(MatlabParafac.COMMENT);
 		builder.append(lineSeparator);
-		//
+
 		builder.append(MatlabParafac.COMMENT);
 		builder.append(" ");
 		builder.append("Peak");
 		builder.append(" ");
 		builder.append(peakCounter++);
 		builder.append(lineSeparator);
-		//
+
 		builder.append(MatlabParafac.COMMENT);
 		builder.append(lineSeparator);
 		return builder.toString();
@@ -188,7 +188,7 @@ public class MatlabParafacPeakWriter implements IPeakWriter {
 		 * 258164 0.00113633
 		 * ...
 		 */
-		//
+
 		IPeakModelMSD peakModel = peak.getPeakModel();
 		StringBuilder builder = new StringBuilder();
 		/*

@@ -60,7 +60,7 @@ public interface IMeasurementResultSupport {
 				return type.cast(result);
 			}
 		}
-		//
+
 		return null;
 	}
 }

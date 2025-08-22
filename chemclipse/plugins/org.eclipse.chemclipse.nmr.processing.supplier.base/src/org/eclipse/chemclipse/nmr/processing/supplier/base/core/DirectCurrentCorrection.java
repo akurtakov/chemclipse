@@ -53,7 +53,7 @@ public class DirectCurrentCorrection extends AbstractComplexSignalFilter<DirectC
 		int numberOfPoints = fidData.signals.length;
 		int directCurrentPointsTerm = 5 * numberOfPoints / 20;
 		int directCurrentPoints = Math.round(directCurrentPointsTerm);
-		//
+
 		Complex[] complexSignalsDCcopy = new Complex[numberOfPoints - directCurrentPoints];
 		double[] complexSignalsReal = new double[numberOfPoints];
 		double[] complexSignalsImag = new double[numberOfPoints];

@@ -32,12 +32,12 @@ public class ClassificationAssigner {
 	public static void apply(IPeak peak, ClassifierAssignFilterSettings settings) {
 
 		peak.removeClassifier("");
-		//
+
 		boolean isCaseSensitive = settings.isCaseSensitive();
 		boolean useRegularExpression = settings.isUseRegularExpression();
 		boolean isMatchPartly = settings.isMatchPartly();
 		boolean useBestTarget = settings.isUseBestTarget();
-		//
+
 		Set<IIdentificationTarget> identificationTargets;
 		if(useBestTarget) {
 			/*
@@ -57,7 +57,7 @@ public class ClassificationAssigner {
 			 */
 			identificationTargets = peak.getTargets();
 		}
-		//
+
 		for(IIdentificationTarget identificationTarget : identificationTargets) {
 			for(ClassificationRule classificationRule : settings.getClassificationDictionary()) {
 				String searchExpression = classificationRule.getSearchExpression();
@@ -73,7 +73,7 @@ public class ClassificationAssigner {
 						} else {
 							isMatch = matchByString(value, getStringByCaseOption(searchExpression, isCaseSensitive), isMatchPartly);
 						}
-						//
+
 						if(isMatch) {
 							peak.addClassifier(classificationRule.getClassification());
 						}
@@ -96,7 +96,7 @@ public class ClassificationAssigner {
 
 		Pattern pattern = createPattern(searchExpression, isCaseSensitive);
 		Matcher matcher = pattern.matcher(value);
-		//
+
 		if(isMatchPartly) {
 			return matcher.find();
 		} else {
@@ -112,7 +112,7 @@ public class ClassificationAssigner {
 		} else {
 			pattern = Pattern.compile(searchExpression, Pattern.CASE_INSENSITIVE);
 		}
-		//
+
 		return pattern;
 	}
 
@@ -137,7 +137,7 @@ public class ClassificationAssigner {
 				}
 			}
 		}
-		//
+
 		return value;
 	}
 

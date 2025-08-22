@@ -118,7 +118,7 @@ public class ChromatogramReaderMSD extends AbstractChromatogramMSDReader impleme
 		boolean useScanProxies = preferences.getBoolean(PreferenceSupplier.P_USE_SCAN_PROXIES, PreferenceSupplier.DEF_USE_SCAN_PROXIES);
 		boolean loadScanProxiesInBackground = preferences.getBoolean(PreferenceSupplier.P_LOAD_SCAN_PROXIES_IN_BACKGROUND, PreferenceSupplier.DEF_LOAD_SCAN_PROXIES_IN_BACKGROUND);
 		int minBytesToLoadInBackground = preferences.getInt(PreferenceSupplier.P_MIN_BYTES_TO_LOAD_IN_BACKGROUND, PreferenceSupplier.DEF_MIN_BYTES_TO_LOAD_IN_BACKGROUND);
-		//
+
 		if(useScanProxies) {
 			if(loadScanProxiesInBackground && file.length() > minBytesToLoadInBackground) {
 				/*
@@ -132,7 +132,7 @@ public class ChromatogramReaderMSD extends AbstractChromatogramMSDReader impleme
 				t.start();
 			}
 		}
-		//
+
 		return chromatogramMSD;
 	}
 
@@ -153,10 +153,10 @@ public class ChromatogramReaderMSD extends AbstractChromatogramMSDReader impleme
 		IChromatogramMSDZipReader chromatogramReader = null;
 		IChromatogramMSD chromatogramMSD = null;
 		ReaderHelper readerHelper = new ReaderHelper();
-		//
+
 		String version = readerHelper.getVersion(object, directoryPrefix);
 		chromatogramReader = getChromatogramReader(version);
-		//
+
 		if(chromatogramReader != null) {
 			if(object instanceof ZipInputStream zipInputStream) {
 				chromatogramMSD = chromatogramReader.read(zipInputStream, directoryPrefix, monitor);
@@ -164,14 +164,14 @@ public class ChromatogramReaderMSD extends AbstractChromatogramMSDReader impleme
 				chromatogramMSD = chromatogramReader.read(zipFile, directoryPrefix, monitor);
 			}
 		}
-		//
+
 		return chromatogramMSD;
 	}
 
 	private IChromatogramMSDZipReader getChromatogramReader(String version) {
 
 		IChromatogramMSDZipReader chromatogramReader = null;
-		//
+
 		if(version.equals(Format.CHROMATOGRAM_VERSION_0701)) {
 			chromatogramReader = new ChromatogramReader_0701();
 		} else if(version.equals(Format.CHROMATOGRAM_VERSION_0801)) {
@@ -215,7 +215,7 @@ public class ChromatogramReaderMSD extends AbstractChromatogramMSDReader impleme
 		} else if(version.equals(Format.CHROMATOGRAM_VERSION_1502)) {
 			chromatogramReader = new ChromatogramReader_1502();
 		}
-		//
+
 		return chromatogramReader;
 	}
 
@@ -239,18 +239,18 @@ public class ChromatogramReaderMSD extends AbstractChromatogramMSDReader impleme
 						IVendorIon ion = new VendorIon(mz, scan.getTotalSignal());
 						massSpectrum.addIon(ion);
 					} catch(Exception e1) {
-						//
+
 					}
 					chromatogramMSD.addScan(massSpectrum);
 				}
-				//
+
 				chromatogramMSD.setConverterId(Format.CONVERTER_ID_CHROMATOGRAM);
 				File fileConverted = new File(file.getAbsolutePath().replace(".ocb", "-fromFID.ocb"));
 				chromatogramMSD.setFile(fileConverted);
 				ChromatogramSupport.calculateScanIntervalAndDelay(chromatogramMSD);
 			}
 		}
-		//
+
 		return chromatogramMSD;
 	}
 }

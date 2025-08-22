@@ -63,18 +63,18 @@ public class NamedTracesSettingsEditor implements SettingsUIProvider.SettingsUIC
 	private static final String MESSAGE_REMOVE = "Do you want to delete the selected named traces?";
 	private static final String CATEGORY = "Named Traces";
 	private static final String DELETE = "Delete";
-	//
+
 	private Composite control;
-	//
+
 	private Button buttonToolbarSearch;
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
-	//
+
 	private NamedTraces settings = new NamedTraces();
 	private NamedTracesListUI listUI;
-	//
+
 	private List<Listener> listeners = new ArrayList<>();
 	private List<Button> buttons = new ArrayList<>();
-	//
+
 	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 	private IProcessorPreferences<NamedTraces> preferences = null;
 
@@ -87,17 +87,17 @@ public class NamedTracesSettingsEditor implements SettingsUIProvider.SettingsUIC
 		if(namedTraces != null) {
 			this.settings.load(namedTraces.save());
 		}
-		//
+
 		Composite composite = new Composite(parent, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(1, true);
 		gridLayout.marginWidth = 0;
 		gridLayout.marginHeight = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		createToolbarMain(composite);
 		createToolbarSearch(composite);
 		listUI = createTableSection(composite);
-		//
+
 		setTableViewerInput();
 		initialize();
 		setControl(composite);
@@ -165,7 +165,7 @@ public class NamedTracesSettingsEditor implements SettingsUIProvider.SettingsUIC
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(8, false));
-		//
+
 		buttonToolbarSearch = createButtonToggleToolbar(composite, toolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH);
 		add(createButtonAdd(composite));
 		add(createButtonEdit(composite));
@@ -193,7 +193,7 @@ public class NamedTracesSettingsEditor implements SettingsUIProvider.SettingsUIC
 				listUI.setSearchText(searchText, caseSensitive);
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -203,13 +203,13 @@ public class NamedTracesSettingsEditor implements SettingsUIProvider.SettingsUIC
 		Table table = namedTracesListUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
 		namedTracesListUI.setEditEnabled(true);
-		//
+
 		Shell shell = table.getShell();
 		ITableSettings tableSettings = namedTracesListUI.getTableSettings();
 		addDeleteMenuEntry(shell, tableSettings);
 		addKeyEventProcessors(shell, tableSettings);
 		namedTracesListUI.applySettings(tableSettings);
-		//
+
 		return namedTracesListUI;
 	}
 
@@ -235,7 +235,7 @@ public class NamedTracesSettingsEditor implements SettingsUIProvider.SettingsUIC
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -269,7 +269,7 @@ public class NamedTracesSettingsEditor implements SettingsUIProvider.SettingsUIC
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -295,7 +295,7 @@ public class NamedTracesSettingsEditor implements SettingsUIProvider.SettingsUIC
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -316,7 +316,7 @@ public class NamedTracesSettingsEditor implements SettingsUIProvider.SettingsUIC
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -346,7 +346,7 @@ public class NamedTracesSettingsEditor implements SettingsUIProvider.SettingsUIC
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -381,7 +381,7 @@ public class NamedTracesSettingsEditor implements SettingsUIProvider.SettingsUIC
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -399,7 +399,7 @@ public class NamedTracesSettingsEditor implements SettingsUIProvider.SettingsUIC
 				setTableViewerInput();
 			}
 		});
-		//
+
 		return button;
 	}
 

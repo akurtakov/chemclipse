@@ -42,14 +42,14 @@ public class MassSpectrumSettingsWizardPage extends AbstractAnalysisWizardPage {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(1, false));
-		//
+
 		createLabel(composite, "Title:");
 		createTextTitle(composite, 1);
 		createLabel(composite, "Number of PCs:");
 		createSpinnerPrincipleComponents(composite);
 		createLabel(composite, "Algorithm:");
 		createComboViewerAlgorithm(composite);
-		//
+
 		setControl(composite);
 	}
 
@@ -76,7 +76,7 @@ public class MassSpectrumSettingsWizardPage extends AbstractAnalysisWizardPage {
 				analysisSettings.setNumberOfPrincipalComponents(spinner.getSelection());
 			}
 		});
-		//
+
 		return spinner;
 	}
 
@@ -96,7 +96,7 @@ public class MassSpectrumSettingsWizardPage extends AbstractAnalysisWizardPage {
 				return null;
 			}
 		});
-		//
+
 		Combo combo = comboViewer.getCombo();
 		combo.setToolTipText("PCA Algorithm");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -111,9 +111,9 @@ public class MassSpectrumSettingsWizardPage extends AbstractAnalysisWizardPage {
 				}
 			}
 		});
-		//
+
 		combo.select(getSelectedAlgorithmIndex(comboViewer));
-		//
+
 		return comboViewer;
 	}
 

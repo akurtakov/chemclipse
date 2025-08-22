@@ -49,7 +49,7 @@ public class NMRDataExplorerView {
 		MultiDataExplorerTreeUI dataExplorerUI = new MultiDataExplorerTreeUI(parent, SWT.NONE, new DataExplorerTreeSettings(Activator.getDefault().getPreferenceStore()));
 		dataExplorerUI.setSupplierFileIdentifier(NMR_SUPPLIER);
 		dataExplorerUI.expandLastDirectoryPath();
-		//
+
 		dataExplorerControl.set(dataExplorerUI);
 	}
 
@@ -61,7 +61,7 @@ public class NMRDataExplorerView {
 			NMRDataExplorerView explorer = (NMRDataExplorerView)part.getObject();
 			PreferenceManager preferenceManager = new PreferenceManager();
 			preferenceManager.addToRoot(new PreferenceNode("2", new PreferencePage()));
-			//
+
 			PreferenceDialog preferenceDialog = new PreferenceDialog(shell, preferenceManager);
 			preferenceDialog.create();
 			preferenceDialog.setMessage("Settings");

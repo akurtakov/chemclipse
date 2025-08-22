@@ -39,10 +39,10 @@ import org.eclipse.swt.widgets.Text;
 public class DatabaseCollectorPage extends WizardPage {
 
 	private static final int LIMIT_SOURCE_FILES = 25;
-	//
+
 	private AtomicReference<Text> textLibraryFileControl = new AtomicReference<>();
 	private AtomicReference<Text> textLibraryDirectoryControl = new AtomicReference<>();
-	//
+
 	private File librarySinkFile;
 	private List<File> librarySourceFiles = new ArrayList<>();
 
@@ -66,10 +66,10 @@ public class DatabaseCollectorPage extends WizardPage {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(3, false));
-		//
+
 		createFileSection(composite);
 		createDirectorySection(composite);
-		//
+
 		validate(getShell());
 		setControl(composite);
 	}
@@ -102,7 +102,7 @@ public class DatabaseCollectorPage extends WizardPage {
 				validate(e.display.getActiveShell());
 			}
 		});
-		//
+
 		textLibraryFileControl.set(text);
 	}
 
@@ -124,7 +124,7 @@ public class DatabaseCollectorPage extends WizardPage {
 				fileDialog.setFilterPath(PreferenceSupplier.getPathExport());
 				fileDialog.setFileName("CollectedLibrary" + MSL.FILE_EXTENSION);
 				String pathname = fileDialog.open();
-				//
+
 				if(pathname != null) {
 					/*
 					 * Settings
@@ -144,7 +144,7 @@ public class DatabaseCollectorPage extends WizardPage {
 		text.setText("");
 		text.setToolTipText("Path to the directory, that shall be parsed for *.msl files.");
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		textLibraryDirectoryControl.set(text);
 	}
 
@@ -191,7 +191,7 @@ public class DatabaseCollectorPage extends WizardPage {
 		} else {
 			message = "Please select a valid *.msl export file";
 		}
-		//
+
 		librarySourceFiles.clear();
 		File directory = new File(textLibraryDirectoryControl.get().getText().trim());
 		if(directory.isDirectory()) {
@@ -208,7 +208,7 @@ public class DatabaseCollectorPage extends WizardPage {
 		} else {
 			message = "Please select a valid export file";
 		}
-		//
+
 		setErrorMessage(message);
 		setPageComplete(message == null);
 	}

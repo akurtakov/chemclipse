@@ -23,31 +23,31 @@ public class FilterSettingsSelection extends AbstractChromatogramFilterSettings 
 	@JsonProperty(value = "Start RT (Minutes)", defaultValue = "1")
 	@JsonPropertyDescription(value = "Start Retention Time (Minutes), the special value '-Infinity' can be used to express the minimum possible range")
 	private double startRetentionTimeMinutes;
-	//
+
 	@JsonProperty(value = "Use relative Start RT", defaultValue = "false")
 	@JsonPropertyDescription(value = "If checked, the start retention time is relative to the current selection")
 	private boolean startRelative;
-	//
+
 	@JsonProperty(value = "Minimum Intensity", defaultValue = "0")
 	@JsonPropertyDescription(value = "The lower Y-axis range limit")
 	private float startAbundance;
-	//
+
 	@JsonProperty(value = "Use relative intensity minimum", defaultValue = "true")
 	@JsonPropertyDescription(value = "If checked, the start intensity is a percentage relative to max intensity.")
 	private boolean startAbundanceRelative;
-	//
+
 	@JsonProperty(value = "Stop RT (Minutes)", defaultValue = "10")
 	@JsonPropertyDescription(value = "Stop Retention Time (Minutes), the special value 'Infinity' can be used to express the maximum possible range")
 	private double stopRetentionTimeMinutes;
-	//
+
 	@JsonProperty(value = "Use relative Stop RT", defaultValue = "false")
 	@JsonPropertyDescription(value = "If checked, the stop retention time is relative to the current selection")
 	private boolean stopRelative;
-	//
+
 	@JsonProperty(value = "Maximum Intensity", defaultValue = "100")
 	@JsonPropertyDescription(value = "The upper Y-axis range limit")
 	private float stopAbundance;
-	//
+
 	@JsonProperty(value = "Use relative intensity maximum", defaultValue = "true")
 	@JsonPropertyDescription(value = "If checked, the intensity is a percentage relative to max intensity.")
 	private boolean stopAbundanceRelative;

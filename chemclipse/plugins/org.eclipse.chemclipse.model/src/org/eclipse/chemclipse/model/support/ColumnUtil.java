@@ -21,7 +21,7 @@ public class ColumnUtil {
 	public static String getColumnData(IChromatogram chromatogram, ColumnField columnField, String defaultData) {
 
 		String columnData = null;
-		//
+
 		if(chromatogram != null) {
 			if(columnField != null) {
 				if(ColumnField.COLUMN_DETAILS.equals(columnField)) {
@@ -54,12 +54,12 @@ public class ColumnUtil {
 							headerField = HeaderField.DEFAULT;
 							break;
 					}
-					//
+
 					columnData = HeaderUtil.getHeaderData(chromatogram, headerField, defaultData);
 				}
 			}
 		}
-		//
+
 		if(columnData == null || columnData.isEmpty()) {
 			return defaultData;
 		} else {

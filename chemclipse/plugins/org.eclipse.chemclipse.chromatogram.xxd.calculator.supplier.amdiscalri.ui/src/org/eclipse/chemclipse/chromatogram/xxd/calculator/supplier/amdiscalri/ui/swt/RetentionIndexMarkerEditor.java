@@ -232,7 +232,7 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 				tableViewer.get().setSearchText(searchText, caseSensitive);
 			}
 		});
-		//
+
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -240,7 +240,7 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 
 		RetentionTimeShifterUI retentionTimeShifterUI = new RetentionTimeShifterUI(parent, SWT.NONE);
 		retentionTimeShifterUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		retentionTimeShifterUI.setUpdateListener(new IUpdateListenerUI() {
 
 			@Override
@@ -249,7 +249,7 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 				tableViewer.get().refresh();
 			}
 		});
-		//
+
 		toolbarShift.set(retentionTimeShifterUI);
 	}
 
@@ -285,13 +285,13 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 				 */
 				List<IRetentionIndexEntry> settings = new ArrayList<>();
 				List<?> objects = retentionIndexListUI.getStructuredSelection().toList();
-				//
+
 				for(Object object : objects) {
 					if(object instanceof IRetentionIndexEntry retentionIndexEntry) {
 						settings.add(retentionIndexEntry);
 					}
 				}
-				//
+
 				toolbarShift.get().setInput(settings);
 			}
 		});
@@ -327,7 +327,7 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -381,7 +381,7 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -412,7 +412,7 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -430,7 +430,7 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 				deleteItems(e.display.getActiveShell());
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -451,7 +451,7 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -480,7 +480,7 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -514,7 +514,7 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 

@@ -22,7 +22,7 @@ public class OverlayChartSupport {
 	public static final String OVERLAY_START_MARKER = "_(";
 	public static final String OVERLAY_STOP_MARKER = ")";
 	public static final String DELIMITER_SIGNAL_DERIVATIVE = ",";
-	//
+
 	private String[] overlayTypes;
 
 	public OverlayChartSupport() {

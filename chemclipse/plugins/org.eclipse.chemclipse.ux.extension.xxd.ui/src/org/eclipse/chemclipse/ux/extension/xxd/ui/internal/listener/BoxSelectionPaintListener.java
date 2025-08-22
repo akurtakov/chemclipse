@@ -23,7 +23,7 @@ public class BoxSelectionPaintListener implements ICustomPaintListener {
 	public static final String HIGHLIGHT_BOX_LEFT = "HIGHLIGHT_BOX_LEFT";
 	public static final String HIGHLIGHT_BOX_RIGHT = "HIGHLIGHT_BOX_RIGHT";
 	public static final String HIGHLIGHT_BOX_NONE = "HIGHLIGHT_BOX_NONE";
-	//
+
 	private int x1;
 	private int x2;
 	private String highlightBox = HIGHLIGHT_BOX_NONE;
@@ -34,10 +34,10 @@ public class BoxSelectionPaintListener implements ICustomPaintListener {
 		Color foreground = e.gc.getForeground();
 		Color background = e.gc.getBackground();
 		Pattern pattern = e.gc.getBackgroundPattern();
-		//
+
 		int height = e.height;
 		e.gc.setForeground(Colors.BLACK);
-		//
+
 		Pattern patternSelected = new Pattern(e.display, 0, e.height, e.width, e.height, Colors.WHITE, 0x44, Colors.WHITE, 0x44);
 		Pattern patternNormal = new Pattern(e.display, 0, e.height, e.width, e.height, Colors.WHITE, 0xDD, Colors.WHITE, 0xDD);
 		/*
@@ -66,7 +66,7 @@ public class BoxSelectionPaintListener implements ICustomPaintListener {
 			e.gc.fillRectangle(x2, 0, width, height);
 			e.gc.drawLine(x2, 0, x2, height);
 		}
-		//
+
 		e.gc.setForeground(foreground);
 		e.gc.setBackground(background);
 		e.gc.setBackgroundPattern(pattern);

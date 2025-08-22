@@ -47,7 +47,7 @@ public class ListContentProvider implements IStructuredContentProvider {
 		} else if(inputElement == null) {
 			return Collections.EMPTY_LIST.toArray();
 		}
-		//
+
 		return new Object[0];
 	}
 }

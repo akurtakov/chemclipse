@@ -82,7 +82,7 @@ public class WidthFilter extends AbstractPeakFilter<WidthFilterSettings> {
 	public void filterPeaks(IChromatogramSelection chromatogramSelection, WidthFilterSettings configuration, ProcessExecutionContext context) throws IllegalArgumentException {
 
 		Collection<IPeak> peaks = getReadOnlyPeaks(chromatogramSelection);
-		//
+
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
@@ -94,7 +94,7 @@ public class WidthFilter extends AbstractPeakFilter<WidthFilterSettings> {
 			processPeak(treatmentOption, peak, predicate, peaksToDelete);
 			subMonitor.worked(1);
 		}
-		//
+
 		deletePeaks(peaksToDelete, chromatogramSelection);
 		resetPeakSelection(chromatogramSelection);
 	}

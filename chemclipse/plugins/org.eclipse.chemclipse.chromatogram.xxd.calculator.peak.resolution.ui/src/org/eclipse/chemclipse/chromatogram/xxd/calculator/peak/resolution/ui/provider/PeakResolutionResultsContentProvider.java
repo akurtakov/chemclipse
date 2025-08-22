@@ -32,7 +32,7 @@ public class PeakResolutionResultsContentProvider implements IStructuredContentP
 				return peakResolutions.toArray();
 			}
 		}
-		//
+
 		return new Object[0];
 	}
 }

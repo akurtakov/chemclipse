@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 public abstract class AbstractBasePeakSettings implements IBasePeakSettings, IProcessSettings {
 
 	private static final Logger logger = Logger.getLogger(AbstractBasePeakSettings.class);
-	//
+
 	@JsonProperty(value = "Limit Match Factor", defaultValue = "80.0")
 	@JsonPropertyDescription(value = "Run an identification if no target exists with a Match Factor >= the given limit.")
 	@FloatSettingsProperty(minValue = IIdentifierSettings.MIN_LIMIT_MATCH_FACTOR, maxValue = IIdentifierSettings.MAX_LIMIT_MATCH_FACTOR)

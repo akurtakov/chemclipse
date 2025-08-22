@@ -40,7 +40,7 @@ import org.eclipse.core.runtime.Platform;
 public class WaveSpectrumIdentifier {
 
 	private static final Logger logger = Logger.getLogger(WaveSpectrumIdentifier.class);
-	//
+
 	private static final String EXTENSION_POINT = "org.eclipse.chemclipse.chromatogram.wsd.identifier.waveSpectrumIdentifier";
 	private static final String NO_IDENTIFIER_AVAILABLE = "There is no suitable wave spectrum identifier available";
 
@@ -182,7 +182,7 @@ public class WaveSpectrumIdentifier {
 		if("".equals(filterId)) {
 			return null;
 		}
-		//
+
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 		IConfigurationElement[] elements = registry.getConfigurationElementsFor(EXTENSION_POINT);
 		for(IConfigurationElement element : elements) {
@@ -190,7 +190,7 @@ public class WaveSpectrumIdentifier {
 				return element;
 			}
 		}
-		//
+
 		return null;
 	}
 

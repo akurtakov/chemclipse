@@ -35,11 +35,11 @@ public class ClassificationDictionary extends ArrayList<ClassificationRule> {
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-	//
+
 	public static final String WHITE_SPACE = " ";
 	public static final String SEPARATOR_TOKEN = ";";
 	public static final String SEPARATOR_ENTRY = "|";
-	//
+
 	private static final long serialVersionUID = 7575344470693039105L;
 	private static final Logger logger = Logger.getLogger(ClassificationDictionary.class);
 
@@ -97,7 +97,7 @@ public class ClassificationDictionary extends ArrayList<ClassificationRule> {
 		} catch(FileNotFoundException e) {
 			logger.warn(e);
 		}
-		//
+
 		return success;
 	}
 
@@ -105,7 +105,7 @@ public class ClassificationDictionary extends ArrayList<ClassificationRule> {
 
 		StringBuilder builder = new StringBuilder();
 		Iterator<ClassificationRule> iterator = iterator();
-		//
+
 		while(iterator.hasNext()) {
 			ClassificationRule classificationRule = iterator.next();
 			builder.append(classificationRule.getSearchExpression());
@@ -117,7 +117,7 @@ public class ClassificationDictionary extends ArrayList<ClassificationRule> {
 				builder.append(SEPARATOR_TOKEN);
 			}
 		}
-		//
+
 		return builder.toString().trim();
 	}
 
@@ -125,14 +125,14 @@ public class ClassificationDictionary extends ArrayList<ClassificationRule> {
 
 		ClassificationRule classificationRule = null;
 		ClassificationRuleValidator validator = new ClassificationRuleValidator();
-		//
+
 		IStatus status = validator.validate(text);
 		if(status.isOK()) {
 			classificationRule = validator.getSetting();
 		} else {
 			logger.warn(status.getMessage());
 		}
-		//
+
 		return classificationRule;
 	}
 
@@ -145,7 +145,7 @@ public class ClassificationDictionary extends ArrayList<ClassificationRule> {
 			lines = new String[1];
 			lines[0] = input;
 		}
-		//
+
 		for(String line : lines) {
 			ClassificationRule rule = extractClassificationRule(line);
 			if(rule != null && !contains(rule)) {

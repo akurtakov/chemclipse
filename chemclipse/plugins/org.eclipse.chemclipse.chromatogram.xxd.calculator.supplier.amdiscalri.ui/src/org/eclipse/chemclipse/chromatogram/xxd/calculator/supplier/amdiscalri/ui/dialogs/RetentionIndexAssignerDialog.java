@@ -62,10 +62,10 @@ public class RetentionIndexAssignerDialog extends Dialog {
 
 		Composite composite = (Composite)super.createDialogArea(parent);
 		composite.setLayout(new FillLayout());
-		//
+
 		RetentionIndexAssignerEditor retentionIndexAssignerEditor = new RetentionIndexAssignerEditor(composite, SWT.NONE);
 		retentionIndexAssignerEditor.setRetentionIndexMarker(retentionIndexAssigner);
-		//
+
 		return composite;
 	}
 }

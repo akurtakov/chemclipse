@@ -31,7 +31,7 @@ public class IndexAssignerListUI extends ExtendedTableViewer {
 
 	private static final String[] TITLES = IndexAssignerLabelProvider.TITLES;
 	private static final int[] BOUNDS = IndexAssignerLabelProvider.BOUNDS;
-	//
+
 	private LabelProvider labelProvider = new IndexAssignerLabelProvider();
 	private IContentProvider contentProvider = new ListContentProvider();
 	private IndexAssignerListFilter listFilter = new IndexAssignerListFilter();

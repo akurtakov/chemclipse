@@ -37,7 +37,7 @@ public class PreferencePageProcessors extends PreferencePage {
 
 		SettingsPreferencesEditPage page = new SettingsPreferencesEditPage(() -> ProcessSettingsSupport.getPreferences(processSupplierContext));
 		page.createControl(parent);
-		//
+
 		return page.getControl();
 	}
 }

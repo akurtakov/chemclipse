@@ -26,14 +26,14 @@ public interface IFormatVersion {
 	static String[][] getOptions(IFormatVersion[] values) {
 
 		String[][] elements = new String[values.length][2];
-		//
+
 		int counter = 0;
 		for(IFormatVersion value : values) {
 			elements[counter][0] = value.getLabel();
 			elements[counter][1] = value.getVersion();
 			counter++;
 		}
-		//
+
 		return elements;
 	}
 }

@@ -38,7 +38,7 @@ public class ResumeMethodSupport {
 					ResumeMethodDialog resumeMethodDialog = new ResumeMethodDialog(shell);
 					resumeMethodDialog.setInput(processMethod);
 					resumeMethodDialog.create();
-					//
+
 					if(resumeMethodDialog.open() == Window.OK) {
 						methodParameters.setProfile(resumeMethodDialog.getProfile());
 						methodParameters.setResumeIndex(resumeMethodDialog.getResumeIndex());
@@ -48,7 +48,7 @@ public class ResumeMethodSupport {
 				}
 			}
 		}
-		//
+
 		return methodParameters;
 	}
 }

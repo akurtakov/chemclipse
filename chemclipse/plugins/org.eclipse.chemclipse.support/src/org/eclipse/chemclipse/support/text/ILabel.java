@@ -27,14 +27,14 @@ public interface ILabel {
 	static String[][] getOptions(Enum<?>[] values) {
 
 		String[][] elements = new String[values.length][2];
-		//
+
 		int counter = 0;
 		for(Enum<?> value : values) {
 			elements[counter][0] = value instanceof ILabel label ? label.label() : value.toString();
 			elements[counter][1] = value.name();
 			counter++;
 		}
-		//
+
 		return elements;
 	}
 }

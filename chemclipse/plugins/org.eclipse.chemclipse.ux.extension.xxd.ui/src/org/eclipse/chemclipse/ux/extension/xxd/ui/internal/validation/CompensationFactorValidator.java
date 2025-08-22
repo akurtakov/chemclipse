@@ -21,7 +21,7 @@ public class CompensationFactorValidator implements IValidator<Object> {
 
 	private static final String ERROR = ExtensionMessages.enterCorrectCompensationFactor;
 	private static final String ERROR_VALUE_RANGE = ExtensionMessages.compensationFactorMustNotBeNegative;
-	//
+
 	private double compensationFactor = 0.0d;
 
 	@Override
@@ -29,7 +29,7 @@ public class CompensationFactorValidator implements IValidator<Object> {
 
 		String message = null;
 		this.compensationFactor = 0.0d;
-		//
+
 		if(value == null) {
 			message = ERROR;
 		} else {
@@ -49,7 +49,7 @@ public class CompensationFactorValidator implements IValidator<Object> {
 				message = ERROR;
 			}
 		}
-		//
+
 		if(message != null) {
 			return ValidationStatus.error(message);
 		} else {

@@ -18,7 +18,7 @@ import org.eclipse.chemclipse.vsd.model.implementation.SpectrumVSD;
 public class VendorSpectrumVSD extends SpectrumVSD implements IVendorSpectrumVSD {
 
 	private static final long serialVersionUID = 703379410586981110L;
-	//
+
 	private String casNumber = "";
 	private String formula = "";
 

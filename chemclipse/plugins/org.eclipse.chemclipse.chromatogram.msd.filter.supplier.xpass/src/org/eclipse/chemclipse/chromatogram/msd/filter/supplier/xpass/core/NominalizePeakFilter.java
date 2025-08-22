@@ -47,11 +47,11 @@ public class NominalizePeakFilter extends AbstractPeakFilter<NominalizeFilterSet
 	public void filterPeaks(IChromatogramSelection chromatogramSelection, NominalizeFilterSettings configuration, ProcessExecutionContext context) throws IllegalArgumentException {
 
 		Collection<IPeak> peaks = getReadOnlyPeaks(chromatogramSelection);
-		//
+
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
-		//
+
 		SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), peaks.size());
 		for(IPeak peak : peaks) {
 			if(peak instanceof IPeakMSD peakMSD) {

@@ -315,7 +315,7 @@ public abstract class AbstractPeakModel extends AbstractPeakModelStrict implemen
 		int stopRetentionTime = peakIntensityValues.getStopRetentionTime();
 		IPoint p1 = new Point(startRetentionTime, startBackgroundAbundance);
 		IPoint p2 = new Point(stopRetentionTime, stopBackgroundAbundance);
-		//
+
 		return Equations.createLinearEquation(p1, p2);
 	}
 
@@ -378,7 +378,7 @@ public abstract class AbstractPeakModel extends AbstractPeakModelStrict implemen
 			IPoint leftB = null;
 			IPoint rightA = null;
 			IPoint rightB = null;
-			//
+
 			exitloop:
 			for(int i = 0; i < retentionTimes.size(); i++) {
 				int retentionTime = retentionTimes.get(i);
@@ -415,12 +415,12 @@ public abstract class AbstractPeakModel extends AbstractPeakModelStrict implemen
 			if(leftA != null && leftB != null && rightA != null && rightB != null) {
 				LinearEquation linearEquationPre = Equations.createLinearEquation(leftA, leftB);
 				LinearEquation linearEquationPost = Equations.createLinearEquation(rightA, rightB);
-				//
+
 				if(linearEquationPre != null && linearEquationPost != null) {
 					int retentionTimeStart = (int)Math.round(linearEquationPre.calculateX(halfHeight));
 					int retentionTimeCenter = maximum.getKey();
 					int retentionTimeStop = (int)Math.round(linearEquationPost.calculateX(halfHeight));
-					//
+
 					float rightWidth = retentionTimeCenter - retentionTimeStart;
 					float leftWidth = retentionTimeStop - retentionTimeCenter;
 					if(leftWidth > 0) {
@@ -429,7 +429,7 @@ public abstract class AbstractPeakModel extends AbstractPeakModelStrict implemen
 				}
 			}
 		}
-		//
+
 		return tailing;
 	}
 

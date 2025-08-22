@@ -66,7 +66,7 @@ public class ChromatogramIndexAssigner implements IProcessTypeSupplier {
 
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 			RetentionIndexAssigner retentionIndexAssigner = processSettings.getRetentionIndexAssigner();
-			//
+
 			Map<String, Integer> retentionIndexMap = new HashMap<>();
 			for(IndexNameMarker indexNameMarker : retentionIndexAssigner) {
 				retentionIndexMap.put(indexNameMarker.getName(), indexNameMarker.getRetentionIndex());
@@ -82,7 +82,7 @@ public class ChromatogramIndexAssigner implements IProcessTypeSupplier {
 					peakModel.getPeakMaximum().setRetentionIndex(retentionIndex);
 				}
 			}
-			//
+
 			return chromatogramSelection;
 		}
 	}

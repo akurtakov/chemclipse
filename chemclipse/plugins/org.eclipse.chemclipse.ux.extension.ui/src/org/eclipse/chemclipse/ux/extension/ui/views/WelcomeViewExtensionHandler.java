@@ -65,11 +65,11 @@ import jakarta.inject.Named;
 public class WelcomeViewExtensionHandler {
 
 	private static final Logger logger = Logger.getLogger(WelcomeViewExtensionHandler.class);
-	//
+
 	public static final String PREFERENCE_MIN_TILES = "WelcomeViewExtensionHandler.minTiles";
 	public static final String PREFERENCE_MAX_TILES = "WelcomeViewExtensionHandler.maxTiles";
 	public static final String PREFERENCE_ALWAYS_CHANGE_PERSPECTIVE = "WelcomeViewExtensionHandler.changePerspective";
-	//
+
 	private static final String PREFERENCE_ADDED = "WelcomeViewExtensionHandler.addedTiles";
 	private static final String PREFERENCE_REMOVED = "WelcomeViewExtensionHandler.removedTiles";
 	private static final String DATA_POPUP_MENU = "WelcomeViewExtensionHandler.POPUP";
@@ -79,7 +79,7 @@ public class WelcomeViewExtensionHandler {
 	private static final String ATTRIBUTE_PERSPECTIVE_ID = "PerspectiveId";
 	private static final String ATTRIBUTE_DEFAULTSHOW = "defaultShow";
 	private static final Comparator<TileDefinition> EXTENSION_COMPARATOR = (c1, c2) -> c1.getTitle().compareToIgnoreCase(c2.getTitle());
-	//
+
 	private final Set<String> removedTiles;
 	private final Set<String> addedTiles;
 	private final Set<TileDefinition> privateTileDefinitions = new HashSet<>();
@@ -88,7 +88,7 @@ public class WelcomeViewExtensionHandler {
 	private final int maxTiles;
 	private int tiles;
 	private String subcontext;
-	//
+
 	private final IPreferenceStore preferenceStore;
 	private final Predicate<TileDefinition> definitionAcceptor;
 
@@ -126,11 +126,11 @@ public class WelcomeViewExtensionHandler {
 				setTile(createTile(), tileDefinition, true);
 			}
 		}
-		//
+
 		while(tiles < minTiles) {
 			createTile();
 		}
-		//
+
 		updateTiles();
 	}
 
@@ -155,7 +155,7 @@ public class WelcomeViewExtensionHandler {
 						tileContainer.removeTaskTile(tile);
 						tiles--;
 					}
-					//
+
 					try {
 						updateTiles();
 					} catch(Exception ex) {
@@ -163,7 +163,7 @@ public class WelcomeViewExtensionHandler {
 					}
 				}
 			});
-			//
+
 			tile.setData(DATA_POPUP_MENU, popupMenu);
 			tiles++;
 			return tile;
@@ -265,7 +265,7 @@ public class WelcomeViewExtensionHandler {
 			}
 			hasShortcut = setTile(tile, extension, hasShortcut);
 		}
-		//
+
 		return hasShortcut;
 	}
 
@@ -274,7 +274,7 @@ public class WelcomeViewExtensionHandler {
 		if(tile == null) {
 			return false;
 		}
-		//
+
 		ExtensionTileDefinition extensionTileDefinition = (ExtensionTileDefinition)tile.getDefinition();
 		extensionTileDefinition.delegate = extension;
 		if(extension != null) {
@@ -289,7 +289,7 @@ public class WelcomeViewExtensionHandler {
 				extensionTileDefinition.addshortcut = false;
 			}
 		}
-		//
+
 		tile.updateFromDefinition();
 		return hasShortcut;
 	}
@@ -311,11 +311,11 @@ public class WelcomeViewExtensionHandler {
 				if(labelProvider != null) {
 					return labelProvider.getText(element);
 				}
-				//
+
 				if(element instanceof TileDefinition tileDefinition) {
 					return tileDefinition.getTitle();
 				}
-				//
+
 				return super.getText(element);
 			}
 
@@ -345,12 +345,12 @@ public class WelcomeViewExtensionHandler {
 					}
 					return image;
 				}
-				//
+
 				ILabelProvider labelProvider = Adapters.adapt(element, ILabelProvider.class);
 				if(labelProvider != null) {
 					return labelProvider.getImage(element);
 				}
-				//
+
 				return super.getImage(element);
 			}
 
@@ -363,7 +363,7 @@ public class WelcomeViewExtensionHandler {
 				super.dispose();
 			}
 		});
-		//
+
 		if(dialog.open() == Window.OK) {
 			TileDefinition element = dialog.getSelectedElement();
 			definition.delegate = element;
@@ -445,7 +445,7 @@ public class WelcomeViewExtensionHandler {
 		if(serializedSet != null && !serializedSet.trim().isEmpty()) {
 			result.addAll(Arrays.asList(serializedSet.split("\t")));
 		}
-		//
+
 		return result;
 	}
 

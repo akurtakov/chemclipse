@@ -31,7 +31,7 @@ public class ChromatogramWriter extends AbstractChromatogramCSDWriter {
 
 		DelimiterFormat delimiterFormat = PreferenceSupplier.getDelimiterFormat();
 		RetentionTimeFormat retentionTimeFormat = PreferenceSupplier.getRetentionTimeFormat();
-		//
+
 		try (PrintWriter printWriter = new PrintWriter(file)) {
 			/*
 			 * Write each scan to the file.
@@ -51,10 +51,10 @@ public class ChromatogramWriter extends AbstractChromatogramCSDWriter {
 						x = Integer.toString(retentionTime);
 						break;
 				}
-				//
+
 				printWriter.println(x + delimiter + scan.getTotalSignal());
 			}
-			//
+
 			printWriter.flush();
 		}
 	}

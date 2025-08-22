@@ -87,7 +87,7 @@ public class DeletePeaksByTraceFilter extends AbstractPeakFilter<DeletePeaksByTr
 			} catch(NumberFormatException e) {
 			}
 		}
-		//
+
 		return traces;
 	}
 
@@ -111,7 +111,7 @@ public class DeletePeaksByTraceFilter extends AbstractPeakFilter<DeletePeaksByTr
 			 */
 			return true;
 		}
-		//
+
 		return false;
 	}
 }

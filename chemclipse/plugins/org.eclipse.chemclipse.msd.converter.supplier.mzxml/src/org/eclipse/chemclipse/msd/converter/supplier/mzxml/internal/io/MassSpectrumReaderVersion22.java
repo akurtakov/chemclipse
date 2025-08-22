@@ -140,7 +140,7 @@ public class MassSpectrumReaderVersion22 extends AbstractMassSpectraReader imple
 						values[index] = floatBuffer.get(index);
 					}
 				}
-				//
+
 				for(int peakIndex = 0; peakIndex < values.length - 1; peakIndex += 2) {
 					/*
 					 * Get m/z and intensity (m/z-int)
@@ -156,7 +156,7 @@ public class MassSpectrumReaderVersion22 extends AbstractMassSpectraReader imple
 		} catch(ParserConfigurationException e) {
 			logger.warn(e);
 		}
-		//
+
 		IVendorMassSpectra massSpectra = new VendorMassSpectra();
 		massSpectra.setName(file.getName());
 		massSpectra.addMassSpectrum(massSpectrum);

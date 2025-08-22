@@ -100,7 +100,7 @@ public class ChromatogramReader_1_MSD_0802_ITest extends ChromatogramReaderMSDTe
 	public void testChromatogramReader_12() {
 
 		IScanMSD massSpectrum = chromatogram.getSupplierScan(1);
-		//
+
 		assertEquals(32, massSpectrum.getNumberOfIons());
 		assertEquals(15.1d, massSpectrum.getLowestIon().getIon(), 0);
 		assertEquals(141.0f, massSpectrum.getLowestIon().getAbundance(), 0);

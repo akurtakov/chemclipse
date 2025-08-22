@@ -26,7 +26,7 @@ public class ScanType implements EventHandler {
 
 	public static final String SCAN_TYPE = "org.eclipse.chemclipse.ux.extension.ui.definitions.scanType";
 	public static final String SCAN_SELECTION = "org.eclipse.chemclipse.ux.extension.ui.scanSelection";
-	//
+
 	public static final String SCAN_TYPE_MSD = "SCAN_TYPE_MSD";
 	public static final String SCAN_TYPE_CSD = "SCAN_TYPE_CSD";
 	public static final String SCAN_TYPE_WSD = "SCAN_TYPE_WSD";
@@ -43,7 +43,7 @@ public class ScanType implements EventHandler {
 		 */
 		IScan scanSelection = null;
 		String scanType = SCAN_TYPE_NONE;
-		//
+
 		if(topic.equals(IChemClipseEvents.TOPIC_SCAN_XXD_UPDATE_SELECTION)) {
 			if(property instanceof IScanMSD scanMSD) {
 				scanSelection = scanMSD;
@@ -83,12 +83,12 @@ public class ScanType implements EventHandler {
 
 		IEclipseContext eclipseContext = Activator.getDefault().getEclipseContext();
 		Object object = eclipseContext.get(SCAN_SELECTION);
-		//
+
 		IScan scan = null;
 		if(object != null && object instanceof IScan selectedScan) {
 			scan = selectedScan;
 		}
-		//
+
 		return scan;
 	}
 
@@ -101,12 +101,12 @@ public class ScanType implements EventHandler {
 
 		IEclipseContext eclipseContext = Activator.getDefault().getEclipseContext();
 		Object object = eclipseContext.get(SCAN_SELECTION);
-		//
+
 		IScanMSD scanMSD = null;
 		if(object != null && object instanceof IScanMSD selectedScanMSD) {
 			scanMSD = selectedScanMSD;
 		}
-		//
+
 		return scanMSD;
 	}
 
@@ -119,12 +119,12 @@ public class ScanType implements EventHandler {
 
 		IEclipseContext eclipseContext = Activator.getDefault().getEclipseContext();
 		Object object = eclipseContext.get(SCAN_SELECTION);
-		//
+
 		IScanCSD scanCSD = null;
 		if(object != null && object instanceof IScanCSD selectedScanCSD) {
 			scanCSD = selectedScanCSD;
 		}
-		//
+
 		return scanCSD;
 	}
 
@@ -137,12 +137,12 @@ public class ScanType implements EventHandler {
 
 		IEclipseContext eclipseContext = Activator.getDefault().getEclipseContext();
 		Object object = eclipseContext.get(SCAN_SELECTION);
-		//
+
 		IScanWSD scanWSD = null;
 		if(object != null && object instanceof IScanWSD selectedScanWSD) {
 			scanWSD = selectedScanWSD;
 		}
-		//
+
 		return scanWSD;
 	}
 }

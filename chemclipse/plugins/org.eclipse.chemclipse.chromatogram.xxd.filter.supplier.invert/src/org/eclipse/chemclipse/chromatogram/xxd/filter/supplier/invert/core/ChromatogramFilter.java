@@ -50,7 +50,7 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 		float maxSignal = chromatogram.getMaxSignal();
-		//
+
 		for(IScan scan : chromatogram.getScans()) {
 			float adjustedIntensity = maxSignal - scan.getTotalSignal();
 			scan.adjustTotalSignal(adjustedIntensity);

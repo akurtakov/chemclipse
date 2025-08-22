@@ -32,7 +32,7 @@ public abstract class XPassFilter {
 		for(IIon ion : massSpectrum.getIons()) {
 			calculator.add(ion.getIon(), ion.getAbundance());
 		}
-		//
+
 		massSpectrum.removeAllIons();
 		/*
 		 * Create a new spectrum.

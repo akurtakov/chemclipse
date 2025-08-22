@@ -20,7 +20,7 @@ import org.eclipse.chemclipse.model.support.INoiseSegment;
 public class NoiseSegmentMeasurementResult extends AnalysisSegmentMeasurementResult<INoiseSegment> {
 
 	private static final long serialVersionUID = -5989247294723381518L;
-	//
+
 	private final ChromatogramSegmentation chromatogramSegmentation;
 	private final String noiseCalculatorId;
 	private final List<INoiseSegment> noiseSegments;

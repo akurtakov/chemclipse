@@ -26,7 +26,7 @@ public class QuantitationDatabase extends HashSet<IQuantitationCompound> impleme
 	 */
 	private File file = null;
 	private String converterId = "";
-	//
+
 	private String operator = "";
 	private String description = "";
 

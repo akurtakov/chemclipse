@@ -46,7 +46,7 @@ public class ReportWriter {
 
 	private static final Logger logger = Logger.getLogger(ReportWriter.class);
 	private static final DecimalFormat decimalFormat = new DecimalFormat("0.0E0", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
-	//
+
 	private static final Unit PAGE_UNIT = Unit.PT;
 	private static final boolean LANDSCAPE = true;
 

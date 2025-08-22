@@ -27,7 +27,7 @@ public class ResultsPCA implements IResultsMVA {
 	private double[] cumulativeCrossValidations;
 	private List<IVariable> extractedVariables;
 	private List<IResultMVA> pcaResultList;
-	//
+
 	private IAnalysisSettings analysisSettings;
 
 	public ResultsPCA(IAnalysisSettings analysisSettings) {

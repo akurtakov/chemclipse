@@ -33,7 +33,6 @@ public class MethodWriter_1000 extends AbstractMethodWriter {
 	@Override
 	protected void serializeData(IProcessMethod processMethod, DataOutputStream dataOutputStream) throws IOException {
 
-		//
 		writeString(dataOutputStream, processMethod.getOperator());
 		writeString(dataOutputStream, processMethod.getDescription());
 		dataOutputStream.writeInt(processMethod.getNumberOfEntries());

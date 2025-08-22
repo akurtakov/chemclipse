@@ -36,7 +36,7 @@ public class RetentionIndexMath {
 		float retentionIndex = RETENTION_INDEX_MISSING;
 		Map.Entry<Integer, IRetentionIndexEntry> floorEntry = separationColumnIndices.floorEntry(retentionTime);
 		Map.Entry<Integer, IRetentionIndexEntry> ceilingEntry = separationColumnIndices.ceilingEntry(retentionTime);
-		//
+
 		if(floorEntry != null && ceilingEntry != null) {
 			/*
 			 * Get the values.
@@ -49,7 +49,7 @@ public class RetentionIndexMath {
 			int retentionTimeHigh = ceilingIndex.getRetentionTime();
 			retentionIndex = calculateRetentionIndex(retentionTime, retentionTimeLow, retentionTimeHigh, retentionIndexLow, retentionIndexHigh);
 		}
-		//
+
 		return retentionIndex;
 	}
 
@@ -65,7 +65,7 @@ public class RetentionIndexMath {
 		int retentionTime = RETENTION_TIME_MISSING;
 		Map.Entry<Integer, Integer> floorEntry = retentionIndexMap.floorEntry(retentionIndex);
 		Map.Entry<Integer, Integer> ceilingEntry = retentionIndexMap.ceilingEntry(retentionIndex);
-		//
+
 		if(floorEntry != null && ceilingEntry != null) {
 			/*
 			 * Get the values.
@@ -76,7 +76,7 @@ public class RetentionIndexMath {
 			int retentionTimeHigh = ceilingEntry.getValue();
 			retentionTime = calculateRetentionTime(retentionIndex, retentionIndexLow, retentionIndexHigh, retentionTimeLow, retentionTimeHigh);
 		}
-		//
+
 		return retentionTime;
 	}
 
@@ -113,7 +113,7 @@ public class RetentionIndexMath {
 	private static double calculateX(double y, double yLower, double yHigher, double xLower, double xHigher) {
 
 		double x = 0;
-		//
+
 		if(yLower == yHigher) {
 			return xLower;
 		}
@@ -123,11 +123,11 @@ public class RetentionIndexMath {
 		double factorX = xHigher - xLower;
 		double nominatorRT = y - yLower;
 		double denominatorRT = yHigher - yLower;
-		//
+
 		if(denominatorRT != 0) {
 			x = xLower + factorX * nominatorRT / denominatorRT;
 		}
-		//
+
 		return x;
 	}
 }

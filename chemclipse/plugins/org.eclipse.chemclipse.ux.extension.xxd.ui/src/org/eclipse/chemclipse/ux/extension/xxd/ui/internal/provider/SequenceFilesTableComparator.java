@@ -25,7 +25,7 @@ public class SequenceFilesTableComparator extends AbstractRecordTableComparator 
 
 		int sortOrder = 0;
 		if(e1 instanceof File file1 && e2 instanceof File file2) {
-			//
+
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = file2.getName().compareTo(file1.getName());

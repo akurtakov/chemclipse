@@ -33,13 +33,13 @@ import org.eclipse.chemclipse.support.util.NamedTraceListUtil;
 public class NamedTraces {
 
 	private static final Logger logger = Logger.getLogger(NamedTraces.class);
-	//
+
 	public static final String DESCRIPTION = "Named Traces";
 	public static final String FILE_EXTENSION = ".ntr";
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-	//
+
 	private NamedTraceListUtil namedTraceListUtil = new NamedTraceListUtil();
 	private final Map<String, NamedTrace> namedTraceMap = new HashMap<>();
 
@@ -123,14 +123,14 @@ public class NamedTraces {
 	public NamedTrace extractNamedTrace(String item) {
 
 		NamedTrace namedTrace = null;
-		//
+
 		if(!"".equals(item)) {
 			String[] values = item.split("\\" + NamedTraceListUtil.SEPARATOR_ENTRY);
 			String identifier = ((values.length > 0) ? values[0].trim() : "");
 			String traces = ((values.length > 1) ? values[1].trim() : "");
 			namedTrace = new NamedTrace(identifier, traces);
 		}
-		//
+
 		return namedTrace;
 	}
 
@@ -183,7 +183,7 @@ public class NamedTraces {
 			 */
 			List<NamedTrace> namedTraces = new ArrayList<>(values());
 			Collections.sort(namedTraces, (r1, r2) -> r1.getIdentifier().compareTo(r2.getIdentifier()));
-			//
+
 			Iterator<NamedTrace> iterator = namedTraces.iterator();
 			while(iterator.hasNext()) {
 				StringBuilder builder = new StringBuilder();

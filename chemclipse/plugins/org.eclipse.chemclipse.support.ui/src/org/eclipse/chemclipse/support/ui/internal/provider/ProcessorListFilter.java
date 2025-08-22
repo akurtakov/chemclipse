@@ -38,29 +38,29 @@ public class ProcessorListFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		//
+
 		if(element instanceof Processor processor) {
 			IProcessSupplier<?> processSupplier = processor.getProcessSupplier();
-			//
+
 			if(!caseSensitive) {
 				searchText = searchText.toLowerCase();
 			}
-			//
+
 			if(isMatch(processSupplier.getName())) {
 				return true;
 			}
-			//
+
 			for(DataCategory dataCategory : processSupplier.getSupportedDataTypes()) {
 				if(isMatch(dataCategory.name())) {
 					return true;
 				}
 			}
-			//
+
 			if(isMatch(processSupplier.getDescription())) {
 				return true;
 			}
 		}
-		//
+
 		return false;
 	}
 

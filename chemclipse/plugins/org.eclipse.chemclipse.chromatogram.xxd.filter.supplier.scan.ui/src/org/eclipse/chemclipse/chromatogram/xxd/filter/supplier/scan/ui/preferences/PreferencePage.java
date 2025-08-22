@@ -46,25 +46,25 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 
 		addField(new LabelFieldEditor("Scan Remover Pattern (" + PreferenceSupplier.PRESERVE_SIGN.toString() + "=preserve " + PreferenceSupplier.REMOVE_SIGN + "=remove)", getFieldEditorParent()));
 		addField(new StringRegexFieldEditor(PreferenceSupplier.P_REMOVER_PATTERN, "Pattern", PreferenceSupplier.CHECK_REMOVER_PATTERN, getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Scan Selector", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_SCAN_SELECTOR_OPTION, "Option", ScanSelectorOption.getOptions(), getFieldEditorParent()));
 		addField(new DoubleFieldEditor(PreferenceSupplier.P_SCAN_SELECTOR_VALUE, "Value", PreferenceSupplier.MIN_SCAN_SELECTOR_VALUE, PreferenceSupplier.MAX_SCAN_SELECTOR_VALUE, getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Scan Duplicator", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_MERGE_SCANS, "Merge Scans", getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Scan Clipper", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceSupplier.P_CLIP_SCAN_NUMBER_PATTERN, "Scan Number Pattern", getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Obfuscator", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_OBFUSCATE_SCANS, "Scans", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_OBFUSCATE_PEAKS, "Peaks", getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Scan Delay/Interval Recaculator", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_INTERVAL_RESET_RETENTION_TIMES, "Reset Retention Times", getFieldEditorParent()));

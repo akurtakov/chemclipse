@@ -33,7 +33,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader implements
 	public static IChromatogramMSDReader getReader(final File file) throws IOException {
 
 		IChromatogramMSDReader chromatogramReader = null;
-		//
+
 		try (final FileReader fileReader = new FileReader(file)) {
 			final char[] charBuffer = new char[500];
 			fileReader.read(charBuffer);

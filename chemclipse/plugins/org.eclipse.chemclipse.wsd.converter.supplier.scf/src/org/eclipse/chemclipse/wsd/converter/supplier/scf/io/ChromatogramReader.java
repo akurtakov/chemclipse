@@ -54,7 +54,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class ChromatogramReader extends AbstractChromatogramWSDReader {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramReader.class);
-	//
+
 	private int numberSamples;
 	private int offsetSamples;
 	private int sampleSize;
@@ -140,20 +140,20 @@ public class ChromatogramReader extends AbstractChromatogramWSDReader {
 			ISamplePointsShortArrayReader samplesShortArrayReader = new SamplePointsShortArrayReader(file);
 			samplesShortArrayReader.resetPosition();
 			samplesShortArrayReader.seek(offsetSamples);
-			//
+
 			addShortSignals(samplesShortArrayReader.readAdenine(numberSamples), chromatogram);
 			chromatogram.setDataName("Adenine");
-			//
+
 			IVendorChromatogram referencedChromatogram1 = new VendorChromatogram();
 			addShortSignals(samplesShortArrayReader.readCytosine(numberSamples), referencedChromatogram1);
 			referencedChromatogram1.setDataName("Cytosine");
 			chromatogram.addReferencedChromatogram(referencedChromatogram1);
-			//
+
 			IVendorChromatogram referencedChromatogram2 = new VendorChromatogram();
 			addShortSignals(samplesShortArrayReader.readGuanine(numberSamples), referencedChromatogram2);
 			referencedChromatogram2.setDataName("Guanine");
 			chromatogram.addReferencedChromatogram(referencedChromatogram2);
-			//
+
 			IVendorChromatogram referencedChromatogram3 = new VendorChromatogram();
 			addShortSignals(samplesShortArrayReader.readThymine(numberSamples), referencedChromatogram3);
 			referencedChromatogram3.setDataName("Thymine");

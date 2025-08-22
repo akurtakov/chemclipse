@@ -30,17 +30,17 @@ public class TargetReferenceLabelProvider extends AbstractChemClipseLabelProvide
 	public static final String ID = ExtensionMessages.id;
 	public static final String TYPE = ExtensionMessages.type;
 	public static final String LIBRARY_FIELD = ExtensionMessages.libraryField;
-	//
+
 	private ITargetDisplaySettings targetDisplaySettings = null;
 	private Predicate<ITargetReference> visibilityFilter = null;
-	//
+
 	public static final String[] TITLES = { //
 			VISIBLE, //
 			ID, //
 			TYPE, //
 			LIBRARY_FIELD //
 	};
-	//
+
 	public static final int[] BOUNDS = { //
 			30, //
 			80, //

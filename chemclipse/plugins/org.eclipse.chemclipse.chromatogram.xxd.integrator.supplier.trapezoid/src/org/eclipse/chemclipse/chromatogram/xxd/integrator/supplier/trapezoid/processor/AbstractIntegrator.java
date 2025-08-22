@@ -62,7 +62,7 @@ public abstract class AbstractIntegrator {
 		Point signalStart = new Point(startRetentionTime, signalAbundanceStart);
 		Point signalStop = new Point(stopRetentionTime, signalAbundanceStop);
 		Segment segment = new Segment(baselineStart, baselineStop, signalStart, signalStop);
-		//
+
 		return SegmentAreaCalculator.calculateSegmentArea(segment) / CORRECTION_FACTOR_TRAPEZOID;
 	}
 }

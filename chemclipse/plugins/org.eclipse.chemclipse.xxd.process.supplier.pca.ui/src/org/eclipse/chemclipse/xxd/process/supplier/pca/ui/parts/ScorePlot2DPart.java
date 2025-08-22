@@ -58,7 +58,7 @@ public class ScorePlot2DPart extends AbstractPartPCA<ExtendedScorePlot2D> {
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 }

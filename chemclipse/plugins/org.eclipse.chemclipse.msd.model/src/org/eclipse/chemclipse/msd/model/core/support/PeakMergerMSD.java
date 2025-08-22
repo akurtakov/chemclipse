@@ -56,7 +56,7 @@ public class PeakMergerMSD extends PeakMerger {
 				peakMSD.getTargets().addAll(identificationTargets);
 			}
 		}
-		//
+
 		return peakMSD;
 	}
 
@@ -64,7 +64,7 @@ public class PeakMergerMSD extends PeakMerger {
 
 		CombinedMassSpectrumCalculator massSpectrumCalculator = new CombinedMassSpectrumCalculator();
 		IMarkedIons excludedIons = new MarkedIons(MarkedTraceModus.INCLUDE);
-		//
+
 		for(IPeakMSD peak : peaks) {
 			/*
 			 * Merge the mass spectra
@@ -73,7 +73,7 @@ public class PeakMergerMSD extends PeakMerger {
 			IScanMSD scanMSD = peakModel.getPeakMassSpectrum();
 			massSpectrumCalculator.addIons(scanMSD.getIons(), excludedIons);
 		}
-		//
+
 		return massSpectrumCalculator.createMassSpectrum(calculationType);
 	}
 }

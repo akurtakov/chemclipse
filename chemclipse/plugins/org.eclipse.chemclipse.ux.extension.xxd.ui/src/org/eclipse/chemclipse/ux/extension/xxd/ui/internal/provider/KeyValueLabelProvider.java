@@ -23,7 +23,7 @@ public class KeyValueLabelProvider extends AbstractChemClipseLabelProvider {
 
 	public static final String NAME = "ID";
 	public static final String VALUE = "Content";
-	//
+
 	public static final String[] TITLES = { //
 			NAME, //
 			VALUE//

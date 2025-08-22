@@ -46,27 +46,27 @@ public class PreferencePageTargets extends FieldEditorPreferencePage implements 
 		addField(new DirectoryFieldEditor(PreferenceSupplier.P_TARGET_TEMPLATE_LIBRARY_IMPORT_FOLDER, "Library Path", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_TARGET_IDENTIFER, "Target Identifier:", TargetWebIdentifierUI.getTargetIdentifier(), getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_SCAN_IDENTIFER, "Scan Identifier:", ScanWebIdentifierUI.getScanIdentifier(), getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_ABSOLUTE_DEVIATION_RETENTION_TIME, "Retention Time: Use absolute deviation", getFieldEditorParent()));
 		addField(new FloatFieldEditor(PreferenceSupplier.P_RETENTION_TIME_DEVIATION_REL_OK, "Allowed Deviation [%]", PreferenceSupplier.MIN_DEVIATION_RELATIVE, PreferenceSupplier.MAX_DEVIATION_RELATIVE, getFieldEditorParent()));
 		addField(new FloatFieldEditor(PreferenceSupplier.P_RETENTION_TIME_DEVIATION_REL_WARN, "Warn Deviation [%]", PreferenceSupplier.MIN_DEVIATION_RELATIVE, PreferenceSupplier.MAX_DEVIATION_RELATIVE, getFieldEditorParent()));
 		addField(new ExtendedIntegerFieldEditor(PreferenceSupplier.P_RETENTION_TIME_DEVIATION_ABS_OK, "Allowed Deviation [ms]", PreferenceSupplier.MIN_DEVIATION_RETENTION_TIME, PreferenceSupplier.MAX_DEVIATION_RETENTION_TIME, getFieldEditorParent()));
 		addField(new ExtendedIntegerFieldEditor(PreferenceSupplier.P_RETENTION_TIME_DEVIATION_ABS_WARN, "Warn Deviation [ms]", PreferenceSupplier.MIN_DEVIATION_RETENTION_TIME, PreferenceSupplier.MAX_DEVIATION_RETENTION_TIME, getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_ABSOLUTE_DEVIATION_RETENTION_INDEX, "Retention Index: Use absolute deviation", getFieldEditorParent()));
 		addField(new FloatFieldEditor(PreferenceSupplier.P_RETENTION_INDEX_DEVIATION_REL_OK, "Allowed Deviation [%]", PreferenceSupplier.MIN_DEVIATION_RELATIVE, PreferenceSupplier.MAX_DEVIATION_RELATIVE, getFieldEditorParent()));
 		addField(new FloatFieldEditor(PreferenceSupplier.P_RETENTION_INDEX_DEVIATION_REL_WARN, "Warn Deviation [%]", PreferenceSupplier.MIN_DEVIATION_RELATIVE, PreferenceSupplier.MAX_DEVIATION_RELATIVE, getFieldEditorParent()));
 		addField(new FloatFieldEditor(PreferenceSupplier.P_RETENTION_INDEX_DEVIATION_ABS_OK, "Allowed Deviation [abs]", PreferenceSupplier.MIN_DEVIATION_RETENTION_INDEX, PreferenceSupplier.MAX_DEVIATION_RETENTION_INDEX, getFieldEditorParent()));
 		addField(new FloatFieldEditor(PreferenceSupplier.P_RETENTION_INDEX_DEVIATION_ABS_WARN, "Warn Deviation [abs]", PreferenceSupplier.MIN_DEVIATION_RETENTION_INDEX, PreferenceSupplier.MAX_DEVIATION_RETENTION_INDEX, getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_ADD_UNKNOWN_AFTER_DELETE_TARGETS_ALL, "Delete All (Unknown Target Add)", getFieldEditorParent()));
 		addField(new FloatFieldEditor(PreferenceSupplier.P_MATCH_QUALITY_UNKNOWN_TARGET, "Match Quality (Unknown Target)", PreferenceSupplier.MIN_MATCH_QUALITY, PreferenceSupplier.MAX_MATCH_QUALITY, getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_UNKNOWN_TARGET_ADD_RETENTION_INDEX, "Add Retention Index (Unknown Target)", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_VERIFY_UNKNOWN_TARGET, "Verify (Unknown Target)", getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_ACTIVATE_TARGET_DND_WINDOWS, "Activate Target Drag and Drop for Windows (experimental)", getFieldEditorParent()));
 	}

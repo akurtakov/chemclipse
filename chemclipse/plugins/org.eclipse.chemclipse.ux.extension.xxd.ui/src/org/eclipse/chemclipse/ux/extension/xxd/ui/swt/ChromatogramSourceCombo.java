@@ -30,7 +30,7 @@ public class ChromatogramSourceCombo extends Composite {
 
 	private static final String SOURCE_REFERENCES = "Internal (This Chromatogram)";
 	private static final String SOURCE_EDITORS = "External (Editor Chromatogram)";
-	//
+
 	private List<String> sources = new ArrayList<String>();
 	private ComboViewer comboViewer;
 
@@ -58,13 +58,13 @@ public class ChromatogramSourceCombo extends Composite {
 	private void initialize() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		GridLayout gridLayout = new GridLayout(1, false);
 		gridLayout.horizontalSpacing = 0;
 		gridLayout.marginWidth = 0;
 		composite.setLayout(gridLayout);
-		//
+
 		comboViewer = createComboViewer(composite);
 	}
 
@@ -84,7 +84,7 @@ public class ChromatogramSourceCombo extends Composite {
 				return null;
 			}
 		});
-		//
+
 		combo.setToolTipText("Select the chromatogram destination.");
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 200;
@@ -92,7 +92,7 @@ public class ChromatogramSourceCombo extends Composite {
 		sources.add(SOURCE_REFERENCES);
 		sources.add(SOURCE_EDITORS);
 		comboViewer.setInput(sources);
-		//
+
 		return comboViewer;
 	}
 }

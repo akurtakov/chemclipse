@@ -41,7 +41,7 @@ public class MethodFileSupport {
 
 		File currentFile = processMethod.getSourceFile();
 		String filename = currentFile != null ? currentFile.getName() : ExtensionMessages.processMethodFilename;
-		//
+
 		return saveProccessMethod(shell, processMethod, filename);
 	}
 
@@ -55,13 +55,13 @@ public class MethodFileSupport {
 		 */
 		File directory = MethodConverter.getUserMethodDirectory();
 		String filterPath = directory.exists() ? directory.getAbsolutePath() : Activator.getDefault().getSettingsPath();
-		//
+
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE);
 		dialog.setFilterPath(filterPath);
 		dialog.setFileName(fileName);
 		dialog.setText(ExtensionMessages.saveProcessMethodAs + "...");
 		dialog.setOverwrite(true);
-		//
+
 		MethodConverterSupport converterSupport = MethodConverter.getMethodConverterSupport();
 		dialog.setFilterExtensions(getFilterExtensions(converterSupport));
 		dialog.setFilterNames(converterSupport.getFilterNames());
@@ -70,19 +70,19 @@ public class MethodFileSupport {
 		if(index == -1) {
 			return false;
 		}
-		//
+
 		ISupplier selectedSupplier = converterSupport.getSupplier().get(index);
 		if(selectedSupplier == null) {
 			MessageDialog.openInformation(shell, ExtensionMessages.saveProcessMethodAs, ExtensionMessages.requestedConverterDoesNotExist);
 			return false;
 		}
-		//
+
 		File file = new File(filename);
 		ProcessMethod newMethod = (ProcessMethod)processMethod;
 		newMethod.setSourceFile(file);
 		newMethod.setName(newMethod.getName());
 		writeFile(shell, file, newMethod, selectedSupplier);
-		//
+
 		return true;
 	}
 
@@ -93,7 +93,7 @@ public class MethodFileSupport {
 			String extension = extensions[i];
 			extensions[i] = extension.startsWith(".") ? ("*" + extension) : extension;
 		}
-		//
+
 		return extensions;
 	}
 

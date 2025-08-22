@@ -31,17 +31,17 @@ import org.eclipse.core.runtime.IStatus;
 public class TraceRanges extends ArrayList<TraceRange> {
 
 	private static final long serialVersionUID = 8589998690167624026L;
-	//
+
 	public static final String DESCRIPTION = "Trace Range Definitions";
 	public static final String FILE_EXTENSION = ".trd";
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-	//
+
 	private static final String WHITE_SPACE = " ";
 	private static final String SEPARATOR_TOKEN = ";";
 	private static final String SEPARATOR_ENTRY = "|";
-	//
+
 	private static final Logger logger = Logger.getLogger(TraceRanges.class);
 
 	public void load(String items) {
@@ -92,7 +92,7 @@ public class TraceRanges extends ArrayList<TraceRange> {
 		} catch(FileNotFoundException e) {
 			logger.warn(e);
 		}
-		//
+
 		return success;
 	}
 
@@ -100,7 +100,7 @@ public class TraceRanges extends ArrayList<TraceRange> {
 
 		StringBuilder builder = new StringBuilder();
 		Iterator<TraceRange> iterator = iterator();
-		//
+
 		while(iterator.hasNext()) {
 			TraceRange traceRange = iterator.next();
 			builder.append(getTraceRangeAsString(traceRange));
@@ -108,14 +108,14 @@ public class TraceRanges extends ArrayList<TraceRange> {
 				builder.append(rangeSeparator);
 			}
 		}
-		//
+
 		return builder.toString().trim();
 	}
 
 	private String getTraceRangeAsString(TraceRange traceRange) {
 
 		StringBuilder builder = new StringBuilder();
-		//
+
 		if(traceRange != null) {
 			builder.append(TraceRangeSupport.DF_COLUMN_1_MINUTES.format(traceRange.getRetentionTimeColumn1Start() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
 			addSeparator(builder);
@@ -133,7 +133,7 @@ public class TraceRanges extends ArrayList<TraceRange> {
 			addSeparator(builder);
 			builder.append(traceRange.getSecondDimensionHint().name());
 		}
-		//
+
 		return builder.toString();
 	}
 
@@ -141,14 +141,14 @@ public class TraceRanges extends ArrayList<TraceRange> {
 
 		TraceRange traceRange = null;
 		TraceRangeValidator validator = new TraceRangeValidator();
-		//
+
 		IStatus status = validator.validate(text);
 		if(status.isOK()) {
 			traceRange = validator.getSetting();
 		} else {
 			logger.warn(status.getMessage());
 		}
-		//
+
 		return traceRange;
 	}
 
@@ -161,7 +161,7 @@ public class TraceRanges extends ArrayList<TraceRange> {
 			lines = new String[1];
 			lines[0] = input;
 		}
-		//
+
 		for(String line : lines) {
 			TraceRange traceRange = extract(line);
 			if(traceRange != null && !contains(traceRange)) {

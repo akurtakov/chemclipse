@@ -27,7 +27,7 @@ public class TimeRange {
 	}
 
 	public static final float MINUTE_FACTOR = 60000.0f;
-	//
+
 	private String identifier = "";
 	/*
 	 * Milliseconds
@@ -84,7 +84,7 @@ public class TimeRange {
 		if(start < 0 || maximum < 0 || stop < 0) {
 			throw new IllegalArgumentException("Start/Maximum/Stop must be >= 0.");
 		}
-		//
+
 		this.identifier = (identifier != null) ? identifier : "";
 		this.start = Math.min(start, stop);
 		this.stop = Math.max(start, stop);
@@ -206,7 +206,7 @@ public class TimeRange {
 
 		int min = Math.min(start, stop);
 		int max = Math.max(start, stop);
-		//
+
 		int center = 0;
 		int delta = max - min;
 		if(delta != 0) {
@@ -220,7 +220,7 @@ public class TimeRange {
 			 */
 			center = min;
 		}
-		//
+
 		return center;
 	}
 

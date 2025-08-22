@@ -36,7 +36,7 @@ public class MassSpectrumReader extends AbstractMassSpectraReader implements IMa
 	public static IMassSpectraReader getReader(final File file) throws IOException {
 
 		IMassSpectraReader massSpectraReader = null;
-		//
+
 		try (FileReader fileReader = new FileReader(file)) {
 			final char[] charBuffer = new char[500];
 			fileReader.read(charBuffer);
@@ -47,7 +47,7 @@ public class MassSpectrumReader extends AbstractMassSpectraReader implements IMa
 				throw new UnknownVersionException();
 			}
 		}
-		//
+
 		return massSpectraReader;
 	}
 }

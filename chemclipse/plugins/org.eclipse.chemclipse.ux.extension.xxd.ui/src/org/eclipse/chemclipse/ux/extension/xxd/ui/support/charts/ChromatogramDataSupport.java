@@ -58,7 +58,7 @@ public class ChromatogramDataSupport {
 		if(chromatogramSelection != null) {
 			label = getChromatogramEditorLabel(chromatogramSelection.getChromatogram(), appendColumnType);
 		}
-		//
+
 		return label;
 	}
 
@@ -90,10 +90,10 @@ public class ChromatogramDataSupport {
 					builder.append(columnType);
 				}
 			}
-			//
+
 			label = builder.toString();
 		}
-		//
+
 		return label;
 	}
 
@@ -103,7 +103,7 @@ public class ChromatogramDataSupport {
 		if(chromatogram != null) {
 			columnType = chromatogram.getSeparationColumnIndices().getSeparationColumn().getSeparationColumnType().label();
 		}
-		//
+
 		return columnType;
 	}
 
@@ -127,7 +127,7 @@ public class ChromatogramDataSupport {
 		} else if(chromatogram instanceof IChromatogramVSD) {
 			return "[VSD]";
 		}
-		//
+
 		return "";
 	}
 
@@ -142,7 +142,7 @@ public class ChromatogramDataSupport {
 		} else if(chromatogram instanceof IChromatogramWSD chromatogramWSD) {
 			peaks = chromatogramWSD.getPeaks(chromatogramSelection);
 		}
-		//
+
 		return peaks;
 	}
 
@@ -261,13 +261,13 @@ public class ChromatogramDataSupport {
 		int startRetentionTime = 0;
 		int stopRetentionTime = 0;
 		boolean useSelectedRange = false;
-		//
+
 		if(selectedRange != null) {
 			useSelectedRange = true;
 			startRetentionTime = selectedRange.getStartRetentionTime();
 			stopRetentionTime = selectedRange.getStopRetentionTime();
 		}
-		//
+
 		List<IScan> scans = new ArrayList<>();
 		if(chromatogram != null) {
 			for(IScan scan : chromatogram.getScans()) {
@@ -311,7 +311,7 @@ public class ChromatogramDataSupport {
 	public static List<? extends IScan> getIdentifiedScans(IChromatogramSelection chromatogramSelection, boolean showScansInSelectedRange) {
 
 		List<? extends IScan> scans = new ArrayList<>();
-		//
+
 		if(chromatogramSelection != null) {
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 			if(showScansInSelectedRange) {
@@ -320,7 +320,7 @@ public class ChromatogramDataSupport {
 				scans = getIdentifiedScans(chromatogram);
 			}
 		}
-		//
+
 		return scans;
 	}
 
@@ -332,7 +332,7 @@ public class ChromatogramDataSupport {
 			List<? extends IPeak> peaksSelection = new ArrayList<>(chromatogram.getPeaks(chromatogramSelection));
 			Collections.sort(peaks, peakRetentionTimeComparator);
 			Collections.sort(peaksSelection, peakRetentionTimeComparator);
-			//
+
 			if(peaks.get(0).equals(peak) || peaks.get(peaks.size() - 1).equals(peak)) {
 				/*
 				 * Don't move if it is the first or last peak of the chromatogram.
@@ -364,7 +364,7 @@ public class ChromatogramDataSupport {
 
 		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 		HeaderField referencesLabel = HeaderUtil.getHeaderField(preferenceStore.getString(PreferenceSupplier.P_CHROMATOGRAM_REFERENCE_LABEL));
-		//
+
 		return getReferenceLabel(chromatogram, referencesLabel, index, addTypeInfo);
 	}
 
@@ -385,7 +385,7 @@ public class ChromatogramDataSupport {
 		 */
 		String type = ChromatogramDataSupport.getChromatogramType(chromatogram);
 		String description = HeaderUtil.getHeaderData(chromatogram, headerField, "");
-		//
+
 		if(description.isEmpty()) {
 			if(index == -1) {
 				description = "Chromatogram";

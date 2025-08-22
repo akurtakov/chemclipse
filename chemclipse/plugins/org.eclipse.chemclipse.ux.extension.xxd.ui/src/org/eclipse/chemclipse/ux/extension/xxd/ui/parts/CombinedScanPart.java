@@ -55,7 +55,7 @@ public class CombinedScanPart extends AbstractPart<ExtendedCombinedScanUI> {
 				return false;
 			}
 		}
-		//
+
 		return false;
 	}
 

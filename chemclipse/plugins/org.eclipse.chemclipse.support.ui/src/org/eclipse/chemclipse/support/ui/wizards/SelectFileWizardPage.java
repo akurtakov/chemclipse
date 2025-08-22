@@ -76,7 +76,7 @@ public class SelectFileWizardPage extends AbstractExtendedWizardPage {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(1, true));
-		//
+
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.verticalIndent = 5;
 		/*
@@ -85,7 +85,7 @@ public class SelectFileWizardPage extends AbstractExtendedWizardPage {
 		Label labelProject = new Label(composite, SWT.NONE);
 		labelProject.setText(SupportMessages.labelFileCreationProjectPath);
 		labelProject.setLayoutData(gridData);
-		//
+
 		labelProjectName = new Label(composite, SWT.WRAP);
 		setSelectedProjectName();
 		labelProjectName.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_DARK_GRAY));
@@ -96,12 +96,12 @@ public class SelectFileWizardPage extends AbstractExtendedWizardPage {
 		Label labelReport = new Label(composite, SWT.NONE);
 		labelReport.setText(SupportMessages.labelSelectFileName);
 		labelReport.setLayoutData(gridData);
-		//
+
 		reportNameText = new Text(composite, SWT.BORDER);
 		reportNameText.setText(defaultReportName);
 		reportNameText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		reportNameText.addModifyListener(e -> validateReportName());
-		//
+
 		validateReportName();
 		setControl(composite);
 	}
@@ -124,7 +124,7 @@ public class SelectFileWizardPage extends AbstractExtendedWizardPage {
 	private void validateReportName() {
 
 		String message = null;
-		//
+
 		String fileName = reportNameText.getText().trim();
 		if(fileName == null || fileName.isEmpty()) {
 			message = SupportMessages.processingSelectFileName;

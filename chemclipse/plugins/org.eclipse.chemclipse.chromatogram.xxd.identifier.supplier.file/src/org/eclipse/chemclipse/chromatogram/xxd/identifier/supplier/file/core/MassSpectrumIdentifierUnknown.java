@@ -40,7 +40,7 @@ public class MassSpectrumIdentifierUnknown extends AbstractMassSpectrumIdentifie
 		} else {
 			unknownSettings = PreferenceSupplier.getMassSpectrumUnknownSettings();
 		}
-		//
+
 		IProcessingInfo<IMassSpectra> processingInfo = new ProcessingInfo<>();
 		TargetUnknownSettings targetUnknownSettings = UnknownSettingsSupport.getTargetUnknownSettings(unknownSettings);
 		float limitMatchFactor = unknownSettings.getLimitMatchFactor();

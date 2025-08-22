@@ -71,7 +71,7 @@ import org.eclipse.core.runtime.OperationCanceledException;
 public class Identifier {
 
 	private static final Logger logger = Logger.getLogger(Identifier.class);
-	//
+
 	private static final String MSL_CONVERTER_ID = "org.eclipse.chemclipse.msd.converter.supplier.amdis.massspectrum.msl"; // $NON-NLS-N$
 	private static final String MSP_CONVERTER_ID = "org.eclipse.chemclipse.msd.converter.supplier.amdis.massspectrum.msp"; // $NON-NLS-N$
 	private static final String DESCRIPTION = "NIST Peak Identifier";
@@ -100,7 +100,7 @@ public class Identifier {
 		 */
 		File nistFolder = searchSettings.getNistFolder();
 		IStatus status = PreferenceSupplier.validateLocation(nistFolder);
-		//
+
 		if(status.isOK()) {
 			boolean batchModus = searchSettings.isBatchModus();
 			int waitTime = getWaitTime(searchSettings);
@@ -118,7 +118,7 @@ public class Identifier {
 			backupControlFiles(runtimeSupport);
 			logger.info("Clean files.");
 			cleanFiles(runtimeSupport, monitor);
-			//
+
 			try {
 				/*
 				 * At least 1 mass spectrum is needed.
@@ -149,7 +149,7 @@ public class Identifier {
 			resetMassSpectrumIdentifier(massSpectrumList, identifierTable);
 			cleanFiles(runtimeSupport, monitor);
 			restoreControlFiles(runtimeSupport);
-			//
+
 		}
 		return massSpectra;
 	}
@@ -194,7 +194,7 @@ public class Identifier {
 			 */
 			backupControlFiles(runtimeSupport);
 			cleanFiles(runtimeSupport, monitor);
-			//
+
 			try {
 				/*
 				 * At least 1 mass spectrum is needed.
@@ -605,11 +605,11 @@ public class Identifier {
 		IPeakIdentificationResults identificationResults = new PeakIdentificationResults();
 		IPeakIdentificationResult identificationResult;
 		IIdentificationTarget identificationEntry;
-		//
+
 		float minMatchFactor = searchSettings.getMinMatchFactor();
 		float minReverseMatchFactor = searchSettings.getMinReverseMatchFactor();
 		int numberOfTargets = searchSettings.getNumberOfTargets();
-		//
+
 		for(Compound compound : compounds.getCompounds()) {
 			/*
 			 * Each compound has a specific identifier. If a peak couldn't be
@@ -700,7 +700,7 @@ public class Identifier {
 		 */
 		IPeakComparisonResult comparisonResult = new PeakComparisonResult(hit.getMatchFactor(), hit.getReverseMatchFactor(), 0.0f, 0.0f, hit.getProbability());
 		comparisonResult.setInLibFactor(Float.parseFloat(compound.getCompoundInLibraryFactor()));
-		//
+
 		return new IdentificationTarget(libraryInformation, comparisonResult);
 	}
 
@@ -767,7 +767,7 @@ public class Identifier {
 		int numberOfTargets = searchSettings.getNumberOfTargets();
 		List<IIdentificationTarget> massSpectrumTargets = new ArrayList<>();
 		IIdentificationResult identificationResult = new IdentificationResult();
-		//
+
 		for(int index = 1; index <= compound.size(); index++) {
 			/*
 			 * The targets shall not be stored in the peak in all cases.
@@ -786,7 +786,7 @@ public class Identifier {
 		for(int i = 0; i < size; i++) {
 			massSpectrum.getTargets().add(massSpectrumTargets.get(i));
 		}
-		//
+
 		return identificationResult;
 	}
 
@@ -812,7 +812,7 @@ public class Identifier {
 		 */
 		IComparisonResult comparisonResult = new ComparisonResult(hit.getMatchFactor(), hit.getReverseMatchFactor(), 0.0f, 0.0f, hit.getProbability());
 		comparisonResult.setInLibFactor(Float.parseFloat(compound.getCompoundInLibraryFactor()));
-		//
+
 		return new IdentificationTarget(libraryInformation, comparisonResult);
 	}
 }

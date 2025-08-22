@@ -50,7 +50,7 @@ import jakarta.xml.bind.Marshaller;
 public class ChromatogramWriterVersion32 extends AbstractChromatogramWriter implements IChromatogramMSDWriter {
 
 	public static final String VERSION = "mzXML_3.2";
-	//
+
 	private static final Logger logger = Logger.getLogger(ChromatogramWriterVersion32.class);
 
 	@Override

@@ -20,7 +20,7 @@ public class HelpContext {
 	}
 
 	public static final String PREFIX = "org.eclipse.chemclipse.ux.extension.xxd.ui."; //$NON-NLS-1$
-	//
+
 	public static final String CHROMATOGRAM_EDITOR = PREFIX + "chromatogram_editor"; //$NON-NLS-1$
 	public static final String CHROMATOGRAM_OVERLAY = PREFIX + "chromatogram_overlay"; //$NON-NLS-1$
 	public static final String PEAK_SCAN_LIST = PREFIX + "peak_scan_list"; //$NON-NLS-1$

@@ -40,14 +40,14 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_ADAPTER_FIXED_RANGE_MSD, "Use Fixed Range (Traces)", getFieldEditorParent()));
 		addField(new ExtendedIntegerFieldEditor(PreferenceSupplier.P_ADAPTER_MIN_TRACE_MSD, "Min Trace (m/z)", PreferenceSupplier.MIN_TRACE_MSD, PreferenceSupplier.MAX_TRACE_MSD, getFieldEditorParent()));
 		addField(new ExtendedIntegerFieldEditor(PreferenceSupplier.P_ADAPTER_MAX_TRACE_MSD, "Max Trace (m/z)", PreferenceSupplier.MIN_TRACE_MSD, PreferenceSupplier.MAX_TRACE_MSD, getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Adapter WSD (HPLC-DAD)", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_ADAPTER_WSD, "Use Adapter", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_ADAPTER_FIXED_RANGE_WSD, "Use Fixed Range (Traces)", getFieldEditorParent()));
 		addField(new ExtendedIntegerFieldEditor(PreferenceSupplier.P_ADAPTER_MIN_TRACE_WSD, "Min Trace (Wavelength)", PreferenceSupplier.MIN_TRACE_WSD, PreferenceSupplier.MAX_TRACE_WSD, getFieldEditorParent()));
 		addField(new ExtendedIntegerFieldEditor(PreferenceSupplier.P_ADAPTER_MAX_TRACE_WSD, "Max Trace (Wavelength)", PreferenceSupplier.MIN_TRACE_WSD, PreferenceSupplier.MAX_TRACE_WSD, getFieldEditorParent()));
-		//
+
 		addField(new LabelFieldEditor("Adapter ISD (HPLC-RAMAN, GC-FTIR)", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_ADAPTER_ISD, "Use Adapter", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_ADAPTER_FIXED_RANGE_ISD, "Use Fixed Range (Traces)", getFieldEditorParent()));

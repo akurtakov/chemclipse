@@ -55,18 +55,18 @@ import org.eclipse.swt.widgets.Label;
 public class MassSpectrumLibraryUI extends Composite {
 
 	private static final Logger logger = Logger.getLogger(MassSpectrumLibraryUI.class);
-	//
+
 	private MassSpectrumListUI massSpectrumListUI;
 	private IComparisonResult comparisonResult;
-	//
+
 	private Composite toolbarInfo;
 	private Composite toolbarSearch;
 	private Composite toolbarModify;
-	//
+
 	private Label labelInfo;
 	private SearchSupportUI searchSupportUI;
 	private LibraryModifySupportUI libraryModifySupportUI;
-	//
+
 	private File massSpectrumFile = null;
 
 	public MassSpectrumLibraryUI(Composite parent, int style) {
@@ -91,22 +91,22 @@ public class MassSpectrumLibraryUI extends Composite {
 	private void createControl() {
 
 		setLayout(new FillLayout());
-		//
+
 		Composite composite = new Composite(this, SWT.NONE);
 		composite.setBackground(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 		composite.setLayout(new GridLayout(1, true));
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
-		//
+
 		createToolbarMain(composite);
 		toolbarInfo = createToolbarInfo(composite);
 		toolbarSearch = createToolbarSearch(composite);
 		toolbarModify = createToolbarModify(composite);
 		massSpectrumListUI = createLibraryTable(composite);
-		//
+
 		PartSupport.setCompositeVisibility(toolbarInfo, true);
 		PartSupport.setCompositeVisibility(toolbarSearch, false);
 		PartSupport.setCompositeVisibility(toolbarModify, false);
-		//
+
 		massSpectrumListUI.setEditEnabled(false);
 	}
 
@@ -118,7 +118,7 @@ public class MassSpectrumLibraryUI extends Composite {
 		gridDataStatus.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridDataStatus);
 		composite.setLayout(new GridLayout(7, false));
-		//
+
 		createButtonToggleToolbarInfo(composite);
 		createButtonToggleToolbarSearch(composite);
 		createButtonToggleToolbarModify(composite);
@@ -143,7 +143,7 @@ public class MassSpectrumLibraryUI extends Composite {
 				button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_INFO, IApplicationImage.SIZE_16x16, visible));
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -162,7 +162,7 @@ public class MassSpectrumLibraryUI extends Composite {
 				button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SEARCH, IApplicationImage.SIZE_16x16, visible));
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -185,7 +185,7 @@ public class MassSpectrumLibraryUI extends Composite {
 				}
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -205,7 +205,7 @@ public class MassSpectrumLibraryUI extends Composite {
 				updateLabel();
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -224,7 +224,7 @@ public class MassSpectrumLibraryUI extends Composite {
 				MessageDialog.openConfirm(DisplayUtils.getShell(), "DB Search", "The library has been added to the list of searched databases.");
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -243,7 +243,7 @@ public class MassSpectrumLibraryUI extends Composite {
 				MessageDialog.openConfirm(DisplayUtils.getShell(), "DB Search", "The library has been removed from the list of searched databases.");
 			}
 		});
-		//
+
 		return button;
 	}
 
@@ -262,11 +262,11 @@ public class MassSpectrumLibraryUI extends Composite {
 				preferencePageSWT.setTitle("Settings (SWT)");
 				IPreferencePage preferencePageMSD = new PreferencePage();
 				preferencePageMSD.setTitle("Settings (MSD)");
-				//
+
 				PreferenceManager preferenceManager = new PreferenceManager();
 				preferenceManager.addToRoot(new PreferenceNode("1", preferencePageSWT));
 				preferenceManager.addToRoot(new PreferenceNode("2", preferencePageMSD));
-				//
+
 				PreferenceDialog preferenceDialog = new PreferenceDialog(DisplayUtils.getShell(), preferenceManager);
 				preferenceDialog.create();
 				preferenceDialog.setMessage("Settings");
@@ -288,12 +288,12 @@ public class MassSpectrumLibraryUI extends Composite {
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(1, true));
-		//
+
 		labelInfo = new Label(composite, SWT.NONE);
 		labelInfo.setBackground(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 		labelInfo.setText("");
 		labelInfo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return composite;
 	}
 
@@ -307,7 +307,7 @@ public class MassSpectrumLibraryUI extends Composite {
 			massSpectrumListUI.setSearchText(searchText, caseSensitive);
 			updateLabel();
 		});
-		//
+
 		return searchSupportUI;
 	}
 
@@ -316,7 +316,7 @@ public class MassSpectrumLibraryUI extends Composite {
 		libraryModifySupportUI = new LibraryModifySupportUI(parent, SWT.NONE);
 		libraryModifySupportUI.setBackground(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 		libraryModifySupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		//
+
 		return libraryModifySupportUI;
 	}
 
@@ -347,14 +347,14 @@ public class MassSpectrumLibraryUI extends Composite {
 		 * Set the table which adds the selection listener.
 		 */
 		libraryModifySupportUI.setReferencedComposites(massSpectrumListUI, searchSupportUI);
-		//
+
 		return massSpectrumListUI;
 	}
 
 	private IIdentificationTarget getIdentificationTarget(IScanMSD scanMSD) {
 
 		IIdentificationTarget identificationTarget = null;
-		//
+
 		ILibraryInformation libraryInformation = null;
 		if(scanMSD instanceof IRegularLibraryMassSpectrum libraryMassSpectrum) {
 			libraryInformation = libraryMassSpectrum.getLibraryInformation();
@@ -366,7 +366,7 @@ public class MassSpectrumLibraryUI extends Composite {
 				}
 			}
 		}
-		//
+
 		return identificationTarget;
 	}
 

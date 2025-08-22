@@ -26,7 +26,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 	public static final int MIN_TRACES = 1;
 	public static final int MAX_TRACES = Integer.MAX_VALUE;
-	//
+
 	public static final String P_SUBTRACT_MASS_SPECTRUM = "subtractMassSpectrum";
 	public static final String DEF_SUBTRACT_MASS_SPECTRUM = "18:200;28:1000;32:500";
 	public static final String P_USE_NOMINAL_MZ = "useNominalMZ";
@@ -41,7 +41,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final int DEF_COPY_TRACES_CLIPBOARD = 5;
 	public static final String P_DELETE_TARGETS_OPTIMIZE_SCAN = "deleteTargetsOptimizeScan";
 	public static final boolean DEF_DELETE_TARGETS_OPTIMIZE_SCAN = true;
-	//
+
 	private static final String DELIMITER_ION_ABUNDANCE = ":";
 	private static final String DELIMITER_IONS = ";";
 	/*

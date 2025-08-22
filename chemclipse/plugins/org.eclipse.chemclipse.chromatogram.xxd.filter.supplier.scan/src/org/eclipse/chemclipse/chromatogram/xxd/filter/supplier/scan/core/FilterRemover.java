@@ -88,7 +88,7 @@ public class FilterRemover extends AbstractChromatogramFilter {
 					scansToKeep.add(scan);
 				}
 			}
-			//
+
 			chromatogram.replaceAllScans(scansToKeep);
 			chromatogram.recalculateScanNumbers();
 			chromatogramSelection.reset();

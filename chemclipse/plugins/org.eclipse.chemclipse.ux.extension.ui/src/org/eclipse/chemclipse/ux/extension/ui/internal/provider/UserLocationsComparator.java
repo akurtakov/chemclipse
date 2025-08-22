@@ -33,11 +33,11 @@ public class UserLocationsComparator extends AbstractRecordTableComparator imple
 					break;
 			}
 		}
-		//
+
 		if(getDirection() == ASCENDING) {
 			sortOrder = -sortOrder;
 		}
-		//
+
 		return sortOrder;
 	}
 }

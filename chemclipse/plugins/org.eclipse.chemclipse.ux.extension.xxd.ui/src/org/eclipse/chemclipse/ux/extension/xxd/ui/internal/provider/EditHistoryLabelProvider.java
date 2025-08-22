@@ -28,7 +28,7 @@ public class EditHistoryLabelProvider extends LabelProvider implements ITableLab
 			SupportMessages.columnEditor, //
 			SupportMessages.columnDate, //
 	};
-	//
+
 	public static final int[] BOUNDS = {//
 			300, //
 			100, //

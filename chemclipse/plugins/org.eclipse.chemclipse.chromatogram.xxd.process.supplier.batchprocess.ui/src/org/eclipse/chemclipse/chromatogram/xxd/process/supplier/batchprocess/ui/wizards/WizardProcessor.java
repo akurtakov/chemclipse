@@ -34,7 +34,7 @@ public class WizardProcessor extends AbstractFileWizard {
 	public void addPages() {
 
 		super.addPages();
-		//
+
 		pageDataType = new PageDataType();
 		addPage(pageDataType);
 	}
@@ -43,7 +43,7 @@ public class WizardProcessor extends AbstractFileWizard {
 	public void doFinish(IProgressMonitor monitor) throws CoreException {
 
 		final IFile file = super.prepareProject(monitor);
-		//
+
 		try {
 			/*
 			 * Create the project.
@@ -64,7 +64,7 @@ public class WizardProcessor extends AbstractFileWizard {
 
 		BatchProcessJob batchProcessJob = new BatchProcessJob();
 		batchProcessJob.setDataType(pageDataType.getDataType());
-		//
+
 		return batchProcessJob;
 	}
 }

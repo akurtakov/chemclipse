@@ -50,15 +50,15 @@ public class HighPassPeaksFilter extends AbstractPeakFilter<HighPassPeaksFilterS
 	public void filterPeaks(IChromatogramSelection chromatogramSelection, HighPassPeaksFilterSettings configuration, ProcessExecutionContext context) throws IllegalArgumentException {
 
 		Collection<IPeak> peaks = getReadOnlyPeaks(chromatogramSelection);
-		//
+
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
-		//
+
 		int numberHighest = configuration.getNumberHighest();
 		PeakFilterOption peakFilterOption = configuration.getPeakFilterOption();
 		List<IPeak> peaksToDelete = XPassPeaksFilter.filterPeaks(peaks, context, peakFilterOption, numberHighest, true);
-		//
+
 		deletePeaks(peaksToDelete, chromatogramSelection);
 		resetPeakSelection(chromatogramSelection);
 	}

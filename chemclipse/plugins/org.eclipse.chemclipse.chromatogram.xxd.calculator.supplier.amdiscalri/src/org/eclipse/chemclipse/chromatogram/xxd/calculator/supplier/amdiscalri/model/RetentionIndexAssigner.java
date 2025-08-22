@@ -34,15 +34,15 @@ import org.eclipse.core.runtime.IStatus;
 public class RetentionIndexAssigner extends HashSet<IndexNameMarker> {
 
 	private static final Logger logger = Logger.getLogger(RetentionIndexAssigner.class);
-	//
+
 	public static final String DESCRIPTION = "Retention Index Assigner";
 	public static final String FILE_EXTENSION = ".ria";
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-	//
+
 	private static final long serialVersionUID = -6838825644374711900L;
-	//
+
 	private RetentionIndexAssignerValidator validator = new RetentionIndexAssignerValidator();
 
 	public Set<String> keySet() {
@@ -90,7 +90,7 @@ public class RetentionIndexAssigner extends HashSet<IndexNameMarker> {
 		StringBuilder builder = new StringBuilder();
 		List<IndexNameMarker> indices = new ArrayList<>(settings);
 		Collections.sort(indices, (i1, i2) -> Integer.compare(i1.getRetentionIndex(), i2.getRetentionIndex()));
-		//
+
 		Iterator<IndexNameMarker> iterator = indices.iterator();
 		while(iterator.hasNext()) {
 			IndexNameMarker setting = iterator.next();
@@ -128,10 +128,10 @@ public class RetentionIndexAssigner extends HashSet<IndexNameMarker> {
 
 		boolean success = false;
 		try (PrintWriter printWriter = new PrintWriter(file)) {
-			//
+
 			List<IndexNameMarker> settings = new ArrayList<>(this);
 			Collections.sort(settings, (r1, r2) -> Integer.compare(r1.getRetentionIndex(), r2.getRetentionIndex()));
-			//
+
 			for(IndexNameMarker setting : settings) {
 				StringBuilder builder = new StringBuilder();
 				extractSetting(setting, builder);
@@ -142,21 +142,21 @@ public class RetentionIndexAssigner extends HashSet<IndexNameMarker> {
 		} catch(FileNotFoundException e) {
 			logger.warn(e);
 		}
-		//
+
 		return success;
 	}
 
 	private IndexNameMarker extract(String text) {
 
 		IndexNameMarker setting = null;
-		//
+
 		IStatus status = validator.validate(text);
 		if(status.isOK()) {
 			setting = validator.getSetting();
 		} else {
 			logger.warn(status.getMessage());
 		}
-		//
+
 		return setting;
 	}
 
@@ -178,10 +178,10 @@ public class RetentionIndexAssigner extends HashSet<IndexNameMarker> {
 	private void extractSetting(IndexNameMarker setting, StringBuilder builder) {
 
 		List<String> entries = new ArrayList<>();
-		//
+
 		entries.add(Integer.toString(setting.getRetentionIndex()));
 		entries.add(getFormattedString(setting.getName()));
-		//
+
 		compile(builder, entries);
 	}
 
@@ -194,7 +194,7 @@ public class RetentionIndexAssigner extends HashSet<IndexNameMarker> {
 
 		String osDelimiterSpecific = OperatingSystemUtils.getLineDelimiter();
 		String osDelimiterGeneric = "\n";
-		//
+
 		String[] array;
 		if(list.contains(RetentionIndexAssignerValidator.SEPARATOR_TOKEN)) {
 			array = list.split(RetentionIndexAssignerValidator.SEPARATOR_TOKEN);
@@ -206,7 +206,7 @@ public class RetentionIndexAssigner extends HashSet<IndexNameMarker> {
 			array = new String[1];
 			array[0] = list;
 		}
-		//
+
 		return array;
 	}
 

@@ -38,7 +38,7 @@ public class PreferencePageQuantitationAxes extends FieldEditorPreferencePage im
 	public void createFieldEditors() {
 
 		addField(new ComboFieldEditor(PreferenceSupplier.P_COLOR_SCHEME_DISPLAY_CALIBRATION, "Display Color Scheme", Colors.getAvailableColorSchemes(), getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Concentration", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_SHOW_X_AXIS_CONCENTRATION_CALIBRATION, "Show X Axis (Concentration)", getFieldEditorParent()));
@@ -46,7 +46,7 @@ public class PreferencePageQuantitationAxes extends FieldEditorPreferencePage im
 		addField(new ColorFieldEditor(PreferenceSupplier.P_COLOR_X_AXIS_CONCENTRATION_CALIBRATION, "Color X Axis (Concentration):", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_GRIDLINE_STYLE_X_AXIS_CONCENTRATION_CALIBRATION, "GridLine Style X Axis (Concentration):", ChartOptions.LINE_STYLES, getFieldEditorParent()));
 		addField(new ColorFieldEditor(PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_CONCENTRATION_CALIBRATION, "GridLine Color X Axis (Concentration):", getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Response", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_SHOW_Y_AXIS_RESPONSE_CALIBRATION, "Show Y Axis (Response)", getFieldEditorParent()));
@@ -54,7 +54,7 @@ public class PreferencePageQuantitationAxes extends FieldEditorPreferencePage im
 		addField(new ColorFieldEditor(PreferenceSupplier.P_COLOR_Y_AXIS_RESPONSE_CALIBRATION, "Color Y Axis (Response):", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_GRIDLINE_STYLE_Y_AXIS_RESPONSE_CALIBRATION, "GridLine Style Y Axis (Response):", ChartOptions.LINE_STYLES, getFieldEditorParent()));
 		addField(new ColorFieldEditor(PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_RESPONSE_CALIBRATION, "GridLine Color Y Axis (Response):", getFieldEditorParent()));
-		//
+
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Response%", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_SHOW_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION, "Show Y Axis (Response %)", getFieldEditorParent()));

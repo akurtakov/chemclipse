@@ -51,7 +51,7 @@ public class CreateProcessMethodHandler {
 			fileDialog.setFilterNames(new String[]{MethodConverter.FILTER_NAME});
 			fileDialog.setFileName(MethodConverter.FILE_NAME);
 			fileDialog.setFilterPath(MethodConverter.getUserMethodDirectory().getAbsolutePath());
-			//
+
 			String pathname = fileDialog.open();
 			if(pathname != null) {
 				File file = new File(pathname);

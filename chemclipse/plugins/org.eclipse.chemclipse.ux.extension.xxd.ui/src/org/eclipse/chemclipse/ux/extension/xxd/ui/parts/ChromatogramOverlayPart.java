@@ -63,7 +63,7 @@ public class ChromatogramOverlayPart extends AbstractPart<ExtendedChromatogramOv
 				}
 			}
 		}
-		//
+
 		return false;
 	}
 

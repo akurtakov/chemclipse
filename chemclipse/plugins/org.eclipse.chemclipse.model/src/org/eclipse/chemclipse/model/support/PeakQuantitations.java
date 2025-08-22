@@ -35,7 +35,7 @@ public class PeakQuantitations {
 	public Map<String, Double> getSummedQuantitations() {
 
 		Map<String, Double> quantitationMap = new HashMap<>();
-		//
+
 		for(int i = PeakQuantitation.INDEX_QUANTITATIONS; i < titles.size(); i++) {
 			String name = titles.get(i);
 			double concentration = 0.0d;
@@ -47,7 +47,7 @@ public class PeakQuantitations {
 			}
 			quantitationMap.put(name, concentration);
 		}
-		//
+
 		return quantitationMap;
 	}
 }

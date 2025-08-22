@@ -30,9 +30,9 @@ import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 public class ConverterCID {
 
 	private static final Logger logger = Logger.getLogger(ConverterCID.class);
-	//
+
 	private static final String MARKER_ENTRY = "|";
-	//
+
 	private static final String MARKER_CAS = "C";
 	private static final String MARKER_FORMULA = "F";
 	private static final String MARKER_RETENTION_TIME = "RT";
@@ -55,7 +55,7 @@ public class ConverterCID {
 			String line = null;
 			CompoundInformation compoundInformation = null;
 			int row = 0;
-			//
+
 			while((line = bufferedReader.readLine()) != null) {
 				line = line.trim();
 				if(line.startsWith(MARKER_ENTRY)) {
@@ -82,7 +82,7 @@ public class ConverterCID {
 		} catch(IOException e) {
 			logger.warn(e);
 		}
-		//
+
 		return compoundList;
 	}
 
@@ -99,7 +99,7 @@ public class ConverterCID {
 					if(retentionTime != 0) {
 						libraryMassSpectrum.setRetentionTime(retentionTime);
 					}
-					//
+
 					float retentionIndex = getRetentionIndex(compoundInformation);
 					if(retentionIndex != 0.0f) {
 						libraryMassSpectrum.setRetentionIndex(retentionIndex);
@@ -134,7 +134,7 @@ public class ConverterCID {
 		if(file.isFile()) {
 			String path = file.getParentFile().getAbsolutePath();
 			String fileBaseName = FilenameUtils.getBaseName(file.getName());
-			//
+
 			fileCID = new File(path + File.separator + fileBaseName + ".CID");
 			if(!fileCID.exists()) {
 				fileCID = new File(path + File.separator + fileBaseName + ".cid");
@@ -143,7 +143,7 @@ public class ConverterCID {
 				}
 			}
 		}
-		//
+
 		return fileCID;
 	}
 
@@ -151,7 +151,7 @@ public class ConverterCID {
 
 		CompoundInformation compoundInformation = new CompoundInformation();
 		String[] values = line.split("\\" + MARKER_ENTRY); // Escape RegEx
-		//
+
 		for(String value : values) {
 			value = value.trim();
 			if(value.startsWith(MARKER_CAS)) {
@@ -191,7 +191,7 @@ public class ConverterCID {
 				}
 			}
 		}
-		//
+
 		return compoundInformation;
 	}
 
@@ -207,7 +207,7 @@ public class ConverterCID {
 				return compoundInformation;
 			}
 		}
-		//
+
 		return null;
 	}
 
@@ -221,7 +221,7 @@ public class ConverterCID {
 				logger.warn(e);
 			}
 		}
-		//
+
 		return 0;
 	}
 
@@ -235,7 +235,7 @@ public class ConverterCID {
 				logger.warn(e);
 			}
 		}
-		//
+
 		return 0.0f;
 	}
 }

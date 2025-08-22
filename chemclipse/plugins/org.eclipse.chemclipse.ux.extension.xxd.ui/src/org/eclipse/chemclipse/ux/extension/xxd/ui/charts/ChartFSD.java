@@ -62,7 +62,7 @@ public class ChartFSD extends LineChart {
 		chartSettings.getRangeRestriction().setZeroX(false);
 		chartSettings.getRangeRestriction().setZeroY(false);
 		chartSettings.getRangeRestriction().setForceZeroMinY(false);
-		//
+
 		String yLabel = ExtensionMessages.intensity;
 		setPrimaryAxisSetProcessed(chartSettings, yLabel);
 		addSecondaryAxisSetProcessed(chartSettings, yLabel);
@@ -80,7 +80,7 @@ public class ChartFSD extends LineChart {
 			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
 		}
 		primaryAxisSettingsX.setVisible(true);
-		//
+
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle(yLabel);
 		primaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.0#E0"), new DecimalFormatSymbols(Locale.ENGLISH)));

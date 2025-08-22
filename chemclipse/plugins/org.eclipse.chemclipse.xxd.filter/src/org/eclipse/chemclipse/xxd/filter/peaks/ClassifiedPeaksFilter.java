@@ -54,10 +54,10 @@ public class ClassifiedPeaksFilter extends AbstractPeakFilter<ClassifiedPeaksFil
 		if(configuration == null) {
 			configuration = createConfiguration(peaks);
 		}
-		//
+
 		Set<String> classifications = configuration.getClassificationSet();
 		boolean activeForAnalysis = configuration.isActiveForAnalysis();
-		//
+
 		SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), peaks.size());
 		for(IPeak peak : peaks) {
 			Collection<String> classifier = peak.getClassifier();

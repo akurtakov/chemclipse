@@ -23,7 +23,7 @@ public abstract class AbstractMassSpectrumComparator implements IMassSpectrumCom
 
 	private static final String DESCRIPTION = "MassSpectrum Comparator";
 	private static final Logger logger = Logger.getLogger(AbstractMassSpectrumComparator.class);
-	//
+
 	private IMassSpectrumComparisonSupplier massSpectrumComparisonSupplier;
 
 	@Override

@@ -27,7 +27,7 @@ public class AutoPhaseCorrectionSettings {
 	private int numberOfOptimizationCycles = DEFAULT_NUMBER_OF_OPTIMIZATION_CYCLES;
 	@JsonProperty("Omit edge portions of spectrum [%]")
 	private int omitPercentOfTheSpectrum = DEFAULT_OMIT_PERCENT_OF_SPECTRUM;
-	//
+
 	@JsonProperty("Apply only 0th order correction")
 	private boolean correctOnlyZerothPhase;
 	@JsonProperty("0th order correction [�]")

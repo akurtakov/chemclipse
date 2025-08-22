@@ -121,7 +121,7 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 	private IPeakMSD readPeak(DataInputStream dataInputStream, IProgressMonitor monitor) throws IOException, IllegalArgumentException, PeakException {
 
 		IIonTransitionSettings ionTransitionSettings = new IonTransitionSettings();
-		//
+
 		String detectorDescription = readString(dataInputStream); // Detector Description
 		String quantifierDescription = readString(dataInputStream);
 		boolean activeForAnalysis = dataInputStream.readBoolean();
@@ -129,12 +129,12 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 		String modelDescription = readString(dataInputStream); // Model Description
 		PeakType peakType = PeakType.valueOf(readString(dataInputStream)); // Peak Type
 		int suggestedNumberOfComponents = dataInputStream.readInt(); // Suggest Number Of Components
-		//
+
 		float startBackgroundAbundance = dataInputStream.readFloat(); // Start Background Abundance
 		float stopBackgroundAbundance = dataInputStream.readFloat(); // Stop Background Abundance
-		//
+
 		IPeakMassSpectrum peakMaximum = readPeakMassSpectrum(dataInputStream, ionTransitionSettings, monitor);
-		//
+
 		int numberOfRetentionTimes = dataInputStream.readInt(); // Number Retention Times
 		IPeakIntensityValues intensityValues = new PeakIntensityValues(Float.MAX_VALUE);
 		for(int i = 1; i <= numberOfRetentionTimes; i++) {
@@ -143,7 +143,7 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 			intensityValues.addIntensityValue(retentionTime, relativeIntensity);
 		}
 		intensityValues.normalize();
-		//
+
 		IPeakModelMSD peakModel = new PeakModelMSD(peakMaximum, intensityValues, startBackgroundAbundance, stopBackgroundAbundance);
 		peakModel.setStrictModel(true); // Legacy
 		IPeakMSD peak = new PeakMSD(peakModel);
@@ -154,7 +154,7 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 		peak.setModelDescription(modelDescription);
 		peak.setPeakType(peakType);
 		peak.setSuggestedNumberOfComponents(suggestedNumberOfComponents);
-		//
+
 		List<IIntegrationEntry> integrationEntries = readIntegrationEntries(dataInputStream);
 		peak.setIntegratedArea(integrationEntries, integratorDescription);
 		/*
@@ -174,10 +174,10 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 			readNormalMassSpectrum(optimizedMassSpectrum, dataInputStream, ionTransitionSettings, monitor);
 			peakMaximum.setOptimizedMassSpectrum(optimizedMassSpectrum);
 		}
-		//
+
 		List<IInternalStandard> internalStandards = readInternalStandards(dataInputStream);
 		peak.addInternalStandards(internalStandards);
-		//
+
 		return peak;
 	}
 
@@ -203,14 +203,14 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 		short massSpectrometer = dataInputStream.readShort(); // Mass Spectrometer
 		short massSpectrumType = dataInputStream.readShort(); // Mass Spectrum Type
 		double precursorIon = dataInputStream.readDouble(); // Precursor Ion (0 if MS1 or none has been selected)
-		//
+
 		IPeakMassSpectrum massSpectrum = new PeakMassSpectrum();
 		massSpectrum.setMassSpectrometer(massSpectrometer);
 		massSpectrum.setMassSpectrumType(getMassSpectrumType(massSpectrumType));
 		massSpectrum.setPrecursorIon(precursorIon);
-		//
+
 		readNormalMassSpectrum(massSpectrum, dataInputStream, ionTransitionSettings, monitor);
-		//
+
 		return massSpectrum;
 	}
 
@@ -236,7 +236,7 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 		massSpectrum.setRetentionIndex(retentionIndex);
 		massSpectrum.setTimeSegmentId(timeSegmentId);
 		massSpectrum.setCycleNumber(cycleNumber);
-		//
+
 		int numberOfIons = dataInputStream.readInt(); // Number of ions
 		for(int i = 1; i <= numberOfIons; i++) {
 			/*
@@ -255,10 +255,10 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 
 		int numberOfMassSpectrumTargets = dataInputStream.readInt(); // Number Mass Spectrum Targets
 		for(int i = 1; i <= numberOfMassSpectrumTargets; i++) {
-			//
+
 			String identifier = readString(dataInputStream); // Identifier
 			boolean manuallyVerified = dataInputStream.readBoolean();
-			//
+
 			String casNumber = readString(dataInputStream); // CAS-Number
 			String comments = readString(dataInputStream); // Comments
 			String referenceIdentifier = readString(dataInputStream);
@@ -281,7 +281,7 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 			float reverseMatchFactorDirect = dataInputStream.readFloat(); // Reverse Match Factor Direct
 			float probability = dataInputStream.readFloat(); // Probability
 			boolean isMatch = dataInputStream.readBoolean();
-			//
+
 			ILibraryInformation libraryInformation = new LibraryInformation();
 			libraryInformation.setCasNumber(casNumber);
 			libraryInformation.setComments(comments);
@@ -295,10 +295,10 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 			libraryInformation.setSmiles(smiles);
 			libraryInformation.setInChI(inChI);
 			libraryInformation.setMolWeight(molWeight);
-			//
+
 			IComparisonResult comparisonResult = new ComparisonResult(matchFactor, reverseMatchFactor, matchFactorDirect, reverseMatchFactorDirect, probability);
 			comparisonResult.setMatch(isMatch);
-			//
+
 			try {
 				IIdentificationTarget identificationEntry = new IdentificationTarget(libraryInformation, comparisonResult);
 				identificationEntry.setIdentifier(identifier);
@@ -313,7 +313,7 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 	private IVendorIon readIon(DataInputStream dataInputStream, IIonTransitionSettings ionTransitionSettings) throws IOException {
 
 		IVendorIon ion;
-		//
+
 		double mz = dataInputStream.readDouble(); // m/z
 		float abundance = dataInputStream.readFloat(); // Abundance
 		/*
@@ -336,7 +336,7 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 			double filter3Resolution = dataInputStream.readDouble(); // q3 resolution
 			int transitionGroup = dataInputStream.readInt(); // transition group
 			int dwell = dataInputStream.readInt(); // dwell
-			//
+
 			IIonTransition ionTransition = ionTransitionSettings.getIonTransition(compoundName, filter1FirstIon, filter1LastIon, filter3FirstIon, filter3LastIon, collisionEnergy, filter1Resolution, filter3Resolution, transitionGroup);
 			ionTransition.setDwell(dwell);
 			ion = new VendorIon(mz, abundance, ionTransition);
@@ -361,10 +361,10 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 
 		int numberOfPeakTargets = dataInputStream.readInt(); // Number Peak Targets
 		for(int i = 1; i <= numberOfPeakTargets; i++) {
-			//
+
 			String identifier = readString(dataInputStream); // Identifier
 			boolean manuallyVerified = dataInputStream.readBoolean();
-			//
+
 			String casNumber = readString(dataInputStream); // CAS-Number
 			String comments = readString(dataInputStream); // Comments
 			String referenceIdentifier = readString(dataInputStream);
@@ -387,7 +387,7 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 			float reverseMatchFactorDirect = dataInputStream.readFloat(); // Reverse Match Factor Direct
 			float probability = dataInputStream.readFloat(); // Probability
 			boolean isMatch = dataInputStream.readBoolean();
-			//
+
 			IPeakLibraryInformation libraryInformation = new PeakLibraryInformation();
 			libraryInformation.setCasNumber(casNumber);
 			libraryInformation.setComments(comments);
@@ -401,10 +401,10 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 			libraryInformation.setSmiles(smiles);
 			libraryInformation.setInChI(inChI);
 			libraryInformation.setMolWeight(molWeight);
-			//
+
 			IComparisonResult comparisonResult = new PeakComparisonResult(matchFactor, reverseMatchFactor, matchFactorDirect, reverseMatchFactorDirect, probability);
 			comparisonResult.setMatch(isMatch);
-			//
+
 			try {
 				IIdentificationTarget identificationEntry = new IdentificationTarget(libraryInformation, comparisonResult);
 				identificationEntry.setIdentifier(identifier);
@@ -420,7 +420,7 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 
 		int numberOfQuantitationEntries = dataInputStream.readInt(); // Number Quantitation Entries
 		for(int i = 1; i <= numberOfQuantitationEntries; i++) {
-			//
+
 			String name = readString(dataInputStream); // Name
 			String chemicalClass = readString(dataInputStream); // Chemical Class
 			double concentration = dataInputStream.readDouble(); // Concentration
@@ -437,14 +437,14 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 			if(isSignal) {
 				signal = dataInputStream.readDouble();
 			}
-			//
+
 			IQuantitationEntry quantitationEntry = new QuantitationEntry(name, concentration, concentrationUnit, area);
 			quantitationEntry.setSignal(signal);
 			quantitationEntry.setChemicalClass(chemicalClass);
 			quantitationEntry.setCalibrationMethod(calibrationMethod);
 			quantitationEntry.setUsedCrossZero(usedCrossZero);
 			quantitationEntry.setDescription(description);
-			//
+
 			peak.addQuantitationEntry(quantitationEntry);
 		}
 	}

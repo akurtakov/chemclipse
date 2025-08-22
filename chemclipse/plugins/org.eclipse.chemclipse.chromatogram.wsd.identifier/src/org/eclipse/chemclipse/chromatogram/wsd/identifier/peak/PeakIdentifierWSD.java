@@ -40,7 +40,7 @@ import org.eclipse.core.runtime.Platform;
 public class PeakIdentifierWSD {
 
 	private static final Logger logger = Logger.getLogger(PeakIdentifierWSD.class);
-	//
+
 	private static final String EXTENSION_POINT = "org.eclipse.chemclipse.chromatogram.wsd.identifier.peakIdentifier";
 	private static final String NO_IDENTIFIER_AVAILABLE = "There is no suitable peak identifier available";
 
