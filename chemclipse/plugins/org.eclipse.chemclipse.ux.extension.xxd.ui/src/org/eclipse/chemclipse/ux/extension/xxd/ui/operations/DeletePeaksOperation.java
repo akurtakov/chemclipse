@@ -65,6 +65,7 @@ public class DeletePeaksOperation extends AbstractOperation {
 
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 		chromatogram.getPeaks().removeAll(peaksToDelete);
+		chromatogram.setDirty(true);
 		update(ExtensionMessages.peaksDeleted);
 		return Status.OK_STATUS;
 	}
@@ -93,6 +94,7 @@ public class DeletePeaksOperation extends AbstractOperation {
 
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 		chromatogram.getPeaks().removeAll(peaksToDelete);
+		chromatogram.setDirty(true);
 		update(ExtensionMessages.peaksUndeleted);
 		return Status.OK_STATUS;
 	}
