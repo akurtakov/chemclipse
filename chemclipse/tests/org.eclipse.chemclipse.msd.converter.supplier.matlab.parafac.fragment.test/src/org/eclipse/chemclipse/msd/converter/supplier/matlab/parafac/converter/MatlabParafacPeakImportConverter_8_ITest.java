@@ -22,10 +22,8 @@ import org.eclipse.chemclipse.msd.model.core.IPeaksMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore("One peak is not validated")
 public class MatlabParafacPeakImportConverter_8_ITest {
 
 	private IPeaksMSD peaks;
