@@ -44,7 +44,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class ChromatogramTypeSupport {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramTypeSupport.class);
-	private static final String DESCRIPTION = "Chromatogram Type Support";
+	private static final String DESCRIPTION = "Chromatogram Type";
 
 	private final List<ISupplierFileIdentifier> supplierEditorSupportList = new ArrayList<>();
 
