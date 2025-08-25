@@ -33,6 +33,9 @@ import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.settin
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.settings.WebIdentifierSettings;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
+import org.eclipse.core.runtime.IProduct;
+import org.eclipse.core.runtime.Platform;
+import org.osgi.framework.Version;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -68,6 +71,7 @@ public class WebNucleotideBLAST extends AbstractNucleotideBLAST {
 	private static String submitSearch(CloseableHttpClient client, WebIdentifierSettings settings, String postData) throws InterruptedException, IOException {
 
 		HttpPost request = new HttpPost(settings.getEndpoint());
+		request.setHeader("User-Agent", getUserAgent());
 		request.setEntity(new StringEntity(postData, ContentType.APPLICATION_FORM_URLENCODED));
 		BasicHttpClientResponseHandler handler = new BasicHttpClientResponseHandler();
 		return parseQueuedBlastInfo(client.execute(request, handler));
@@ -135,7 +139,9 @@ public class WebNucleotideBLAST extends AbstractNucleotideBLAST {
 			String pollResponse = "";
 			BasicHttpClientResponseHandler handler = new BasicHttpClientResponseHandler();
 			String pollRequest = settings.getEndpoint() + "?CMD=Get&FORMAT_OBJECT=SearchInfo&RID=" + rid;
-			pollResponse = client.execute(new HttpGet(pollRequest), handler);
+			HttpGet httpGet = new HttpGet(pollRequest);
+			httpGet.setHeader("User-Agent", getUserAgent());
+			pollResponse = client.execute(httpGet, handler);
 
 			if(pollResponse.matches("(?s).*\\s+Status=WAITING.*")) {
 				continue;
@@ -162,6 +168,15 @@ public class WebNucleotideBLAST extends AbstractNucleotideBLAST {
 
 		BasicHttpClientResponseHandler handler = new BasicHttpClientResponseHandler();
 		String getRequest = settings.getEndpoint() + "?CMD=Get&FORMAT_TYPE=XML&RID=" + rid;
-		return client.execute(new HttpGet(getRequest), handler);
+		HttpGet httpGet = new HttpGet(getRequest);
+		httpGet.setHeader("User-Agent", getUserAgent());
+		return client.execute(httpGet, handler);
+	}
+
+	private static String getUserAgent() {
+
+		IProduct product = Platform.getProduct();
+		Version version = product.getDefiningBundle().getVersion();
+		return product.getName() + "/" + version.getMajor() + "." + version.getMinor() + "." + version.getMicro();
 	}
 }
