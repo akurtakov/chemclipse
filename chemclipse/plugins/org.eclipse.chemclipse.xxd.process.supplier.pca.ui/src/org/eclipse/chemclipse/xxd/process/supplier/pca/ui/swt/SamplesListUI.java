@@ -41,6 +41,7 @@ public class SamplesListUI extends ExtendedTableViewer {
 	private final SamplesListFilter listFilter = new SamplesListFilter();
 
 	private IUpdateListener updateListener;
+	private SamplesEditingSupport editingSupport;
 
 	public SamplesListUI(Composite parent, int style) {
 
@@ -89,7 +90,8 @@ public class SamplesListUI extends ExtendedTableViewer {
 			TableViewerColumn tableViewerColumn = tableViewerColumns.get(i);
 			String label = tableViewerColumn.getColumn().getText();
 			if(isEditable(label)) {
-				tableViewerColumn.setEditingSupport(new SamplesEditingSupport(this, label));
+				editingSupport = new SamplesEditingSupport(this, label);
+				tableViewerColumn.setEditingSupport(editingSupport);
 			}
 		}
 	}
@@ -121,5 +123,10 @@ public class SamplesListUI extends ExtendedTableViewer {
 				}
 			});
 		}
+	}
+
+	public void dispose() {
+
+		editingSupport.dispose();
 	}
 }

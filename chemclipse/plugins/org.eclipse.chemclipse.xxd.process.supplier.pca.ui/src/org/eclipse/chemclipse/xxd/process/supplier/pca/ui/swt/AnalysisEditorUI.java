@@ -659,7 +659,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 
 				IStructuredSelection selection = sampleListUI.getStructuredSelection();
 				@SuppressWarnings("unchecked")
-				List<Sample> samples = (List<Sample>)selection.toList();
+				List<Sample> samples = selection.toList();
 				for(Sample sample : samples) {
 					sample.setSelected(!sample.isSelected());
 				}
@@ -919,5 +919,11 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 			 */
 			oplsGroupTargets.addAll(samples.getSamples().stream().map(x -> x.getGroupName()).distinct().toList());
 		}
+	}
+
+	@Override
+	public void dispose() {
+
+		sampleListControl.get().dispose();
 	}
 }
