@@ -57,9 +57,9 @@ public class BatchProcess {
 			for(IChromatogramInputEntry chromatogramInput : batchProcessJob.getChromatogramInputEntries()) {
 				String file = chromatogramInput.getInputFile();
 				try {
-					IProcessingInfo<IChromatogramSelection> processingInfoX = chromatogramTypeSupport.getChromatogramSelection(file, monitor);
-					if(!processingInfoX.hasErrorMessages()) {
-						IChromatogramSelection chromatogramSelection = processingInfoX.getProcessingResult();
+					IProcessingInfo<IChromatogramSelection> inputProcessingInfo = chromatogramTypeSupport.getChromatogramSelection(file, monitor);
+					if(!inputProcessingInfo.hasErrorMessages()) {
+						IChromatogramSelection chromatogramSelection = inputProcessingInfo.getProcessingResult();
 						ProcessingInfo<?> processorResult = new ProcessingInfo<>();
 						ProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, processorResult, processSupplierContext), IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection));
 						if(processorResult.hasErrorMessages()) {
@@ -70,6 +70,7 @@ public class BatchProcess {
 						processingInfo.addMessages(processorResult);
 					} else {
 						processingInfo.addErrorMessage(DESCRIPTION, "Failure to process: " + file);
+						processingInfo.addMessages(inputProcessingInfo);
 					}
 				} catch(TypeCastException e) {
 					logger.warn(e);

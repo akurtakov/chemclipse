@@ -303,7 +303,7 @@ public class ChromatogramWriterVersion110 extends AbstractChromatogramWriter imp
 			cvParamFileFormat.setValue("");
 			sourceFile.getCvParam().add(cvParamFileFormat);
 			sourceFileListType.setCount(BigInteger.valueOf(2));
-		} else if(chromatogram.getConverterId().equals("org.eclipse.chemclipse.msd.converter.supplier.mzxml.chromatogram")) {
+		} else if(chromatogram.getConverterId().equals("org.eclipse.chemclipse.msd.converter.supplier.mzxml")) {
 			CVParamType cvParamFileFormat = new CVParamType();
 			cvParamFileFormat.setCvRef(XmlWriter110.MS);
 			cvParamFileFormat.setAccession("MS:1000566");
