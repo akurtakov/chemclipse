@@ -24,7 +24,7 @@ import org.eclipse.chemclipse.logging.core.Logger;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class QueryEntity {
+public class QueryEntity extends AbstractQuery {
 
 	private static final Logger logger = Logger.getLogger(QueryEntity.class);
 
@@ -64,7 +64,11 @@ public class QueryEntity {
 		String url;
 		try {
 			url = Wikidata.ENDPOINT + "?query=" + java.net.URLEncoder.encode(queryString, "UTF-8");
-			HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).header("Accept", "application/json").build();
+			HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)) //
+												.header("Accept", "application/json") //
+												.header("User-Agent", getUserAgent()) //
+												.build();
+
 			HttpClient client = HttpClient.newHttpClient();
 			HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
