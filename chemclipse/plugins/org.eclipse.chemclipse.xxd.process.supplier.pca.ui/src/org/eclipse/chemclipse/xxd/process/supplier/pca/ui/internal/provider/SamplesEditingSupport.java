@@ -35,15 +35,15 @@ public class SamplesEditingSupport extends EditingSupport {
 		super(tableViewer);
 		this.column = column;
 		if(SamplesLabelProvider.SAMPLE_NAME_LONG.equals(column)) {
-			this.cellEditor = new TextCellEditor(tableViewer.getTable());
+			cellEditor = new TextCellEditor(tableViewer.getTable());
 		} else if(SamplesLabelProvider.USE.equals(column)) {
-			this.cellEditor = new CheckboxCellEditor(tableViewer.getTable());
+			cellEditor = new CheckboxCellEditor(tableViewer.getTable());
 		} else if(SamplesLabelProvider.PREDICT.equals(column)) {
-			this.cellEditor = new CheckboxCellEditor(tableViewer.getTable());
+			cellEditor = new CheckboxCellEditor(tableViewer.getTable());
 		} else if(SamplesLabelProvider.COLOR.equals(column)) {
-			this.cellEditor = new ColorCellEditor(tableViewer.getTable());
+			cellEditor = new ColorCellEditor(tableViewer.getTable());
 		} else {
-			this.cellEditor = new TextCellEditor(tableViewer.getTable());
+			cellEditor = new TextCellEditor(tableViewer.getTable());
 		}
 		this.tableViewer = tableViewer;
 	}
@@ -118,5 +118,10 @@ public class SamplesEditingSupport extends EditingSupport {
 			tableViewer.refresh();
 			tableViewer.updateContent();
 		}
+	}
+
+	public void dispose() {
+
+		cellEditor.dispose();
 	}
 }
