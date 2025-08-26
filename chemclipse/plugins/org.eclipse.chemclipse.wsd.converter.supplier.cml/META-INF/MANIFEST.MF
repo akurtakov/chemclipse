@@ -5,7 +5,6 @@ Bundle-Name: CML UV/Vis
 Bundle-SymbolicName: org.eclipse.chemclipse.wsd.converter.supplier.cml;singleton:=true
 Bundle-Version: 0.9.0.qualifier
 Export-Package: org.eclipse.chemclipse.wsd.converter.supplier.cml.model
-Bundle-Activator: org.eclipse.chemclipse.wsd.converter.supplier.cml.Activator
 Bundle-Vendor: ChemClipse
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.chemclipse.converter;bundle-version="0.8.0",
