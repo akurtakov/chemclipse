@@ -170,7 +170,8 @@ public class ChromatogramReaderVersion21 extends AbstractChromatogramReaderVersi
 					double mz = values[peakIndex];
 					float intensity = (float)values[peakIndex + 1];
 					if(msLevel >= 2) {
-						IIonTransition ionTransition = new IonTransition(massSpectrum.getPrecursorIon(), mz, scan.getCollisionEnergy(), 1, 1, 0);
+						float collisionEnergy = scan.getCollisionEnergy() != null ? scan.getCollisionEnergy().floatValue() : 0f;
+						IIonTransition ionTransition = new IonTransition(massSpectrum.getPrecursorIon(), mz, collisionEnergy, 1, 1, 0);
 						massSpectrum.addIon(new VendorIon(mz, intensity, ionTransition), false);
 						chromatogram.getIonTransitionSettings().getIonTransitions().add(ionTransition);
 					} else {
