@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.multiplier.preferences;
 
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.multiplier.Activator;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.multiplier.settings.DivisorSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.multiplier.settings.MultiplierSettings;
 import org.eclipse.chemclipse.support.preferences.AbstractPreferenceSupplier;
 import org.eclipse.chemclipse.support.preferences.IPreferenceSupplier;
+import org.osgi.framework.FrameworkUtil;
 
 public class PreferenceSupplier extends AbstractPreferenceSupplier implements IPreferenceSupplier {
 
@@ -42,7 +42,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	@Override
 	public String getPreferenceNode() {
 
-		return Activator.getContext().getBundle().getSymbolicName();
+		return FrameworkUtil.getBundle(PreferenceSupplier.class).getSymbolicName();
 	}
 
 	@Override

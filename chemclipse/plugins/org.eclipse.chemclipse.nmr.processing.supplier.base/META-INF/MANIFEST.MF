@@ -3,7 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: NMR Processing Base
 Bundle-SymbolicName: org.eclipse.chemclipse.nmr.processing.supplier.base;singleton:=true
 Bundle-Version: 0.9.0.qualifier
-Bundle-Activator: org.eclipse.chemclipse.nmr.processing.supplier.base.Activator
 Bundle-Vendor: ChemClipse
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.chemclipse.support;bundle-version="0.8.0",
@@ -22,7 +21,6 @@ Export-Package: org.eclipse.chemclipse.nmr.processing.apodization,
  org.eclipse.chemclipse.nmr.processing.digitalfilter,
  org.eclipse.chemclipse.nmr.processing.ft,
  org.eclipse.chemclipse.nmr.processing.phasecorrection,
- org.eclipse.chemclipse.nmr.processing.supplier.base,
  org.eclipse.chemclipse.nmr.processing.supplier.base.core,
  org.eclipse.chemclipse.nmr.processing.supplier.base.settings,
  org.eclipse.chemclipse.nmr.processing.supplier.base.settings.support

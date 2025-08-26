@@ -14,13 +14,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.report.supplier.txt.preferences;
 
-import org.eclipse.chemclipse.chromatogram.xxd.report.supplier.txt.Activator;
 import org.eclipse.chemclipse.chromatogram.xxd.report.supplier.txt.settings.ReportSettings1;
 import org.eclipse.chemclipse.chromatogram.xxd.report.supplier.txt.settings.ReportSettings2;
 import org.eclipse.chemclipse.chromatogram.xxd.report.supplier.txt.settings.ReportSettings3;
 import org.eclipse.chemclipse.chromatogram.xxd.report.supplier.txt.settings.ReportSettings4;
 import org.eclipse.chemclipse.support.preferences.AbstractPreferenceSupplier;
 import org.eclipse.chemclipse.support.preferences.IPreferenceSupplier;
+import org.osgi.framework.FrameworkUtil;
 
 public class PreferenceSupplier extends AbstractPreferenceSupplier implements IPreferenceSupplier {
 
@@ -45,7 +45,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	@Override
 	public String getPreferenceNode() {
 
-		return Activator.getContext().getBundle().getSymbolicName();
+		return FrameworkUtil.getBundle(PreferenceSupplier.class).getSymbolicName();
 	}
 
 	@Override

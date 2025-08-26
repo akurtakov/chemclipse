@@ -4,7 +4,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Peak Resolution Calculator
 Bundle-SymbolicName: org.eclipse.chemclipse.chromatogram.xxd.calculator.peak.resolution;singleton:=true
 Bundle-Version: 0.9.0.qualifier
-Bundle-Activator: org.eclipse.chemclipse.chromatogram.xxd.calculator.peak.resolution.Activator
 Bundle-Vendor: ChemClipse
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.chemclipse.logging;bundle-version="0.8.0",
