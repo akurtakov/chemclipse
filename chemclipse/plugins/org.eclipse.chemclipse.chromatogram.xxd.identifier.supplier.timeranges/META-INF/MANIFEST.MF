@@ -4,7 +4,6 @@ Bundle-Name: TimeRanges Peak Identifier
 Bundle-SymbolicName: org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.timeranges
 Bundle-Version: 0.9.0.qualifier
 Export-Package: org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.timeranges.preferences
-Bundle-Activator: org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.timeranges.Activator
 Bundle-Vendor: ChemClipse
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.chemclipse.model;bundle-version="0.9.0",
