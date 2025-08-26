@@ -9,7 +9,6 @@ Export-Package: org.eclipse.chemclipse.xxd.converter.supplier.cml.converter,
  org.eclipse.chemclipse.xxd.converter.supplier.cml.model.v3
 Import-Package: jakarta.xml.bind;version="4.0.0",
  jakarta.xml.bind.annotation;version="4.0.0"
-Bundle-Activator: org.eclipse.chemclipse.xxd.converter.supplier.cml.Activator
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.chemclipse.converter
 Bundle-RequiredExecutionEnvironment: JavaSE-21

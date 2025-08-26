@@ -4,7 +4,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: CML *IR
 Bundle-SymbolicName: org.eclipse.chemclipse.vsd.converter.supplier.cml;singleton:=true
 Bundle-Version: 0.9.0.qualifier
-Bundle-Activator: org.eclipse.chemclipse.vsd.converter.supplier.cml.Activator
 Bundle-Vendor: ChemClipse
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.chemclipse.converter;bundle-version="0.8.0",

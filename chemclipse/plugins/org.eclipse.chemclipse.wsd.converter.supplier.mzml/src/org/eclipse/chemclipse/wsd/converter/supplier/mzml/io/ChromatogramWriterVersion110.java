@@ -27,7 +27,6 @@ import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.wsd.converter.io.IChromatogramWSDWriter;
-import org.eclipse.chemclipse.wsd.converter.supplier.mzml.Activator;
 import org.eclipse.chemclipse.wsd.converter.supplier.mzml.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
 import org.eclipse.chemclipse.wsd.model.core.IScanSignalWSD;
@@ -58,6 +57,7 @@ import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.SourceFileT
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.SpectrumListType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.SpectrumType;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.osgi.framework.FrameworkUtil;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -318,7 +318,7 @@ public class ChromatogramWriterVersion110 extends AbstractChromatogramWriter imp
 		DataProcessingListType dataProcessingList = new DataProcessingListType();
 		dataProcessingList.setCount(BigInteger.valueOf(1));
 		DataProcessingType dataProcessing = new DataProcessingType();
-		dataProcessing.setId(Activator.getContext().getBundle().getSymbolicName());
+		dataProcessing.setId(FrameworkUtil.getBundle(this.getClass()).getSymbolicName());
 		ProcessingMethodType processingMethod = new ProcessingMethodType();
 		processingMethod.setSoftwareRef(software);
 		processingMethod.setOrder(BigInteger.valueOf(1));
