@@ -22,11 +22,13 @@ import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.nmr.converter.core.AbstractScanImportConverter;
 import org.eclipse.chemclipse.nmr.converter.core.IScanImportConverter;
 import org.eclipse.chemclipse.nmr.converter.supplier.nmrml.io.ScanReaderVersion100;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumNMR;
+import org.eclipse.chemclipse.nmr.model.core.SpectrumNMR;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
 import org.eclipse.core.runtime.IProgressMonitor;
 
-public class ScanImportConverter extends AbstractScanImportConverter<Collection<IComplexSignalMeasurement<?>>> implements IScanImportConverter<Collection<IComplexSignalMeasurement<?>>> {
+public class ScanImportConverter extends AbstractScanImportConverter implements IScanImportConverter {
 
 	public ScanImportConverter() {
 
@@ -34,9 +36,9 @@ public class ScanImportConverter extends AbstractScanImportConverter<Collection<
 	}
 
 	@Override
-	public IProcessingInfo<Collection<IComplexSignalMeasurement<?>>> convert(File file, IProgressMonitor monitor) {
+	public IProcessingInfo<ISpectrumNMR> convert(File file, IProgressMonitor monitor) {
 
-		IProcessingInfo<Collection<IComplexSignalMeasurement<?>>> processingInfo = new ProcessingInfo<>();
+		IProcessingInfo<ISpectrumNMR> processingInfo = new ProcessingInfo<>();
 		try {
 			final FileReader fileReader = new FileReader(file);
 			final char[] charBuffer = new char[500];
@@ -46,8 +48,10 @@ public class ScanImportConverter extends AbstractScanImportConverter<Collection<
 			final String header = new String(charBuffer);
 			if(header.contains("nmrML")) {
 				ScanReaderVersion100 scanReader = new ScanReaderVersion100();
-				Collection<IComplexSignalMeasurement<?>> result = scanReader.read(file, monitor);
-				processingInfo.setProcessingResult(result);
+				Collection<IComplexSignalMeasurement<?>> complexSignalMeasurement = scanReader.read(file, monitor);
+				ISpectrumNMR spectrumNMR = new SpectrumNMR();
+				spectrumNMR.setComplexSignalMeasurements(complexSignalMeasurement);
+				processingInfo.setProcessingResult(spectrumNMR);
 			} else {
 				throw new UnknownVersionException();
 			}

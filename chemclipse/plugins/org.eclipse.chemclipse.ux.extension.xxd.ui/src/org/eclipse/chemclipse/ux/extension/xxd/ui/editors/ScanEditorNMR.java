@@ -39,6 +39,7 @@ import org.eclipse.chemclipse.nmr.model.core.FilteredFIDMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.FilteredSpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.IMeasurementFID;
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumNMR;
 import org.eclipse.chemclipse.nmr.model.selection.DataNMRSelection;
 import org.eclipse.chemclipse.nmr.model.selection.IDataNMRSelection;
 import org.eclipse.chemclipse.processing.ProcessorFactory;
@@ -176,8 +177,8 @@ public class ScanEditorNMR implements IScanEditorNMR {
 			try {
 				dialog.run(true, false, monitor -> {
 
-					IProcessingInfo<Collection<IComplexSignalMeasurement<?>>> convert = ScanConverterNMR.convert(file, monitor);
-					Collection<IComplexSignalMeasurement<?>> result = convert.getProcessingResult();
+					IProcessingInfo<ISpectrumNMR> convert = ScanConverterNMR.convert(file, monitor);
+					Collection<IComplexSignalMeasurement<?>> result = convert.getProcessingResult().getComplexSignalMeasurements();
 					if(result != null) {
 						selection = new DataNMRSelection();
 						for(IComplexSignalMeasurement<?> measurement : result) {

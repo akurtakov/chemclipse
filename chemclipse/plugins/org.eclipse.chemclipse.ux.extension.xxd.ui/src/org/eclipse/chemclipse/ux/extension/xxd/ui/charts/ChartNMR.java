@@ -113,7 +113,7 @@ public class ChartNMR extends LineChart {
 							try {
 								dialog.run(true, true, monitor -> {
 
-									IProcessingInfo<Void> export = ScanConverterNMR.export(file, measurementSupplier.get(), supplier.getId(), monitor);
+									IProcessingInfo<?> export = ScanConverterNMR.export(file, measurementSupplier.get(), supplier.getId(), monitor);
 									ProcessingInfoPartSupport.getInstance().update(export);
 								});
 							} catch(InvocationTargetException e) {

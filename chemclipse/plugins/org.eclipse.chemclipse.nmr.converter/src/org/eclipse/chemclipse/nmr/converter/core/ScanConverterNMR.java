@@ -15,8 +15,6 @@
 package org.eclipse.chemclipse.nmr.converter.core;
 
 import java.io.File;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.chemclipse.converter.core.Converter;
@@ -29,7 +27,7 @@ import org.eclipse.chemclipse.converter.scan.ScanConverterSupport;
 import org.eclipse.chemclipse.converter.scan.ScanSupplier;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
-import org.eclipse.chemclipse.model.core.IMeasurement;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumNMR;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
@@ -52,14 +50,14 @@ public class ScanConverterNMR {
 
 	}
 
-	public static IProcessingInfo<IMeasurement> convert(final File file, final String converterId, final IProgressMonitor monitor) {
+	public static IProcessingInfo<ISpectrumNMR> convert(final File file, final String converterId, final IProgressMonitor monitor) {
 
-		IProcessingInfo<IMeasurement> processingInfo;
+		IProcessingInfo<ISpectrumNMR> processingInfo;
 		/*
 		 * Do not use a safe runnable here, because an object must
 		 * be returned or null.
 		 */
-		IScanImportConverter<IMeasurement> importConverter = getScanImportConverter(converterId);
+		IScanImportConverter importConverter = getScanImportConverter(converterId);
 		if(importConverter != null) {
 			processingInfo = importConverter.convert(file, monitor);
 		} else {
@@ -68,44 +66,31 @@ public class ScanConverterNMR {
 		return processingInfo;
 	}
 
-	@SuppressWarnings("unchecked")
-	public static IProcessingInfo<Collection<IComplexSignalMeasurement<?>>> convert(final File file, final IProgressMonitor monitor) {
+	public static IProcessingInfo<ISpectrumNMR> convert(final File file, final IProgressMonitor monitor) {
 
-		IProcessingInfo<Collection<IComplexSignalMeasurement<?>>> error = getProcessingError(file);
 		IScanConverterSupport converterSupport = getScanConverterSupport();
 		try {
 			List<String> availableConverterIds = converterSupport.getAvailableConverterIds(file);
 			SubMonitor subMonitor = SubMonitor.convert(monitor, availableConverterIds.size());
 			for(String converterId : availableConverterIds) {
-				IScanImportConverter<?> importConverter = getScanImportConverter(converterId);
+				IScanImportConverter importConverter = getScanImportConverter(converterId);
 				if(importConverter != null) {
-					IProcessingInfo<?> processingInfo = importConverter.convert(file, subMonitor.split(1));
+					IProcessingInfo<ISpectrumNMR> processingInfo = importConverter.convert(file, subMonitor.split(1));
 					if(processingInfo != null) {
-						if(processingInfo.hasErrorMessages()) {
-							error.addMessages(processingInfo);
-						} else {
-							Object object = processingInfo.getProcessingResult();
-							if(object instanceof IComplexSignalMeasurement<?> measurement) {
-								ProcessingInfo<Collection<IComplexSignalMeasurement<?>>> info = new ProcessingInfo<>();
-								info.setProcessingResult(Collections.singleton(measurement));
-								info.addMessages(processingInfo);
-								return info;
-							} else if(object instanceof Collection<?> collection) {
-								ProcessingInfo<Collection<IComplexSignalMeasurement<?>>> info = new ProcessingInfo<>();
-								info.setProcessingResult((Collection<IComplexSignalMeasurement<?>>)collection);
-								info.addMessages(processingInfo);
-								return info;
-							}
+						if(!processingInfo.hasErrorMessages()) {
+							return processingInfo;
 						}
 					}
 				}
 			}
 		} catch(NoConverterAvailableException e) {
+			logger.info(e);
 		}
-		return error;
+
+		return getProcessingError(file);
 	}
 
-	public static IProcessingInfo<Void> export(final File file, final IComplexSignalMeasurement<?> measurement, final String converterId, final IProgressMonitor monitor) {
+	public static IProcessingInfo<?> export(final File file, final IComplexSignalMeasurement<?> measurement, final String converterId, final IProgressMonitor monitor) {
 
 		try {
 			IScanExportConverter exportConverter = getScanExportConverter(converterId);
@@ -122,15 +107,14 @@ public class ScanConverterNMR {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	private static <T> IScanImportConverter<T> getScanImportConverter(final String converterId) {
+	private static IScanImportConverter getScanImportConverter(final String converterId) {
 
 		IConfigurationElement element;
 		element = getConfigurationElement(converterId);
-		IScanImportConverter<T> instance = null;
+		IScanImportConverter instance = null;
 		if(element != null) {
 			try {
-				instance = (IScanImportConverter<T>)element.createExecutableExtension(Converter.IMPORT_CONVERTER);
+				instance = (IScanImportConverter)element.createExecutableExtension(Converter.IMPORT_CONVERTER);
 			} catch(CoreException e) {
 				logger.error(e);
 			}
@@ -220,9 +204,9 @@ public class ScanConverterNMR {
 		return fileContentMatcher;
 	}
 
-	private static <T> IProcessingInfo<T> getProcessingError(File file) {
+	private static IProcessingInfo<ISpectrumNMR> getProcessingError(File file) {
 
-		IProcessingInfo<T> processingInfo = new ProcessingInfo<>();
+		IProcessingInfo<ISpectrumNMR> processingInfo = new ProcessingInfo<>();
 		processingInfo.addErrorMessage("Scan Converter", "No suitable converter was found for: " + file);
 		return processingInfo;
 	}

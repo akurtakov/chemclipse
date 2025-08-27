@@ -19,6 +19,7 @@ import java.io.File;
 
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.nmr.converter.supplier.jcampdx.converter.ScanImportConverterNMR;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumNMR;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.Before;
@@ -33,8 +34,8 @@ public class BrukerAFFN_ITest {
 
 		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.REAL_SPECTRUM_ASCII_FREE_FORMAT_NUMERIC));
 		ScanImportConverterNMR importConverter = new ScanImportConverterNMR();
-		IProcessingInfo<IComplexSignalMeasurement<?>> processingInfo = importConverter.convert(file, new NullProgressMonitor());
-		complexSignalMeasurement = processingInfo.getProcessingResult();
+		IProcessingInfo<ISpectrumNMR> processingInfo = importConverter.convert(file, new NullProgressMonitor());
+		complexSignalMeasurement = processingInfo.getProcessingResult().getComplexSignalMeasurements().iterator().next();
 	}
 
 	@Test

@@ -25,6 +25,7 @@ import java.util.function.Consumer;
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.nmr.converter.core.ScanConverterNMR;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumNMR;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
@@ -142,8 +143,8 @@ public class NMRDataListUI extends DataListUI {
 
 				SubMonitor subMonitor = SubMonitor.convert(monitor, "Loading Files", newFiles.size() * 100);
 				for(File file : newFiles) {
-					IProcessingInfo<Collection<IComplexSignalMeasurement<?>>> convert = ScanConverterNMR.convert(file, subMonitor.split(100));
-					Collection<IComplexSignalMeasurement<?>> result = convert.getProcessingResult();
+					IProcessingInfo<ISpectrumNMR> convert = ScanConverterNMR.convert(file, subMonitor.split(100));
+					Collection<IComplexSignalMeasurement<?>> result = convert.getProcessingResult().getComplexSignalMeasurements();
 					filesMap.put(file, new MeasurementLoadResult(file, result));
 					if(subMonitor.isCanceled()) {
 						throw new InterruptedException("canceled");

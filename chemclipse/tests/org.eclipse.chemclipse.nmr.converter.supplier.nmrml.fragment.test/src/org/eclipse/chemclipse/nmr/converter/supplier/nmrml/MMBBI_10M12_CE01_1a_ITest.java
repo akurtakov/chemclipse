@@ -17,10 +17,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
-import java.util.Collection;
 
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.nmr.converter.supplier.nmrml.converter.ScanImportConverter;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumNMR;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.Before;
@@ -28,14 +28,14 @@ import org.junit.Test;
 
 public class MMBBI_10M12_CE01_1a_ITest {
 
-	private Collection<IComplexSignalMeasurement<?>> spectrumNMR;
+	private ISpectrumNMR spectrumNMR;
 
 	@Before
 	public void setUp() throws Exception {
 
 		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.MMBBI_10M12_CE01_1a));
 		ScanImportConverter importConverter = new ScanImportConverter();
-		IProcessingInfo<Collection<IComplexSignalMeasurement<?>>> processingInfo = importConverter.convert(file, new NullProgressMonitor());
+		IProcessingInfo<ISpectrumNMR> processingInfo = importConverter.convert(file, new NullProgressMonitor());
 		spectrumNMR = processingInfo.getProcessingResult();
 	}
 
@@ -43,13 +43,13 @@ public class MMBBI_10M12_CE01_1a_ITest {
 	public void testLoading() {
 
 		assertNotNull(spectrumNMR);
-		assertFalse(spectrumNMR.isEmpty());
+		assertFalse(spectrumNMR.getComplexSignalMeasurements().isEmpty());
 	}
 
 	@Test
 	public void testMeasuremnt() {
 
-		IComplexSignalMeasurement<?> measurement = spectrumNMR.iterator().next();
+		IComplexSignalMeasurement<?> measurement = spectrumNMR.getComplexSignalMeasurements().iterator().next();
 		assertEquals("mica", measurement.getOperator());
 		assertEquals(8459, measurement.getSignals().size());
 	}
