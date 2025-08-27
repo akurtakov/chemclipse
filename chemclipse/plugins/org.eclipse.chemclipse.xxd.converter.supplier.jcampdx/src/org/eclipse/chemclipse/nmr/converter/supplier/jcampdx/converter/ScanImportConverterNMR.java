@@ -14,16 +14,19 @@ package org.eclipse.chemclipse.nmr.converter.supplier.jcampdx.converter;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.nmr.converter.core.AbstractScanImportConverter;
 import org.eclipse.chemclipse.nmr.converter.core.IScanImportConverter;
 import org.eclipse.chemclipse.nmr.converter.supplier.jcampdx.io.ScanReaderNMR;
+import org.eclipse.chemclipse.nmr.model.core.ISpectrumNMR;
+import org.eclipse.chemclipse.nmr.model.core.SpectrumNMR;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.IProgressMonitor;
 
-public class ScanImportConverterNMR extends AbstractScanImportConverter<IComplexSignalMeasurement<?>> implements IScanImportConverter<IComplexSignalMeasurement<?>> {
+public class ScanImportConverterNMR extends AbstractScanImportConverter implements IScanImportConverter {
 
 	private static final Logger logger = Logger.getLogger(ScanImportConverterNMR.class);
 
@@ -33,14 +36,16 @@ public class ScanImportConverterNMR extends AbstractScanImportConverter<IComplex
 	}
 
 	@Override
-	public IProcessingInfo<IComplexSignalMeasurement<?>> convert(File file, IProgressMonitor monitor) {
+	public IProcessingInfo<ISpectrumNMR> convert(File file, IProgressMonitor monitor) {
 
-		IProcessingInfo<IComplexSignalMeasurement<?>> processingInfo = super.validate(file);
+		IProcessingInfo<ISpectrumNMR> processingInfo = super.validate(file);
 		if(!processingInfo.hasErrorMessages()) {
 			ScanReaderNMR scanReader = new ScanReaderNMR();
 			try {
-				IComplexSignalMeasurement<?> result = scanReader.read(file, monitor);
-				processingInfo.setProcessingResult(result);
+				IComplexSignalMeasurement<?> complexSignalMeasurement = scanReader.read(file, monitor);
+				ISpectrumNMR spectrumNMR = new SpectrumNMR();
+				spectrumNMR.setComplexSignalMeasurements(Collections.singleton(complexSignalMeasurement));
+				processingInfo.setProcessingResult(spectrumNMR);
 			} catch(IOException e) {
 				logger.warn(e);
 			}
