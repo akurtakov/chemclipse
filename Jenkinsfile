@@ -34,6 +34,7 @@ pipeline {
 								-Dmaven.test.failure.ignore=true \\
 								-Dmaven.repo.local=$WORKSPACE/.mvn \\
 								-f chemclipse/releng/org.eclipse.chemclipse.aggregator/pom.xml \\
+								-Pjavadoc \\
 								clean install
 						'''
 
