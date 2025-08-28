@@ -14,6 +14,7 @@ package org.eclipse.chemclipse.xxd.filter.chromatogram.settings;
 
 import org.eclipse.chemclipse.model.identifier.IIdentifierSettings;
 import org.eclipse.chemclipse.support.settings.FloatSettingsProperty;
+import org.eclipse.chemclipse.xxd.filter.model.CoordinateOption;
 import org.eclipse.chemclipse.xxd.filter.preferences.PreferenceSupplier;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -32,6 +33,12 @@ public class TargetTransferFilterSettings {
 	@JsonPropertyDescription(value = "Overrides the match quality.")
 	@FloatSettingsProperty(minValue = PreferenceSupplier.MIN_FACTOR, maxValue = PreferenceSupplier.MAX_FACTOR)
 	private float matchQuality = 0f;
+	@JsonProperty(value = "Coordinate Option", defaultValue = "RETENTION_TIME_MIN")
+	@JsonPropertyDescription(value = "Use the given coordinate selection.")
+	private CoordinateOption coordinateOption = CoordinateOption.RETENTION_TIME_MIN;
+	@JsonProperty(value = "Coordinate Offset", defaultValue = "")
+	@JsonPropertyDescription(value = "The given offset is used to adjust the transfer coordinates.")
+	private double coordinateOffset = 0;
 
 	public float getLimitMatchFactor() {
 
@@ -61,5 +68,25 @@ public class TargetTransferFilterSettings {
 	public void setMatchQuality(float matchQuality) {
 
 		this.matchQuality = matchQuality;
+	}
+
+	public CoordinateOption getCoordinateOption() {
+
+		return coordinateOption;
+	}
+
+	public void setCoordinateOption(CoordinateOption coordinateOption) {
+
+		this.coordinateOption = coordinateOption;
+	}
+
+	public double getCoordinateOffset() {
+
+		return coordinateOffset;
+	}
+
+	public void setCoordinateOffset(double coordinateOffset) {
+
+		this.coordinateOffset = coordinateOffset;
 	}
 }

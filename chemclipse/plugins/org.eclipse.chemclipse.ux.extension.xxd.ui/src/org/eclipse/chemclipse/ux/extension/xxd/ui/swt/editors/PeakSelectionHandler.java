@@ -76,7 +76,7 @@ public class PeakSelectionHandler extends AbstractHandledEventProcessor implemen
 				/*
 				 * Fire an update.
 				 */
-				IPeak peak = PeakSupport.selectNearestPeak(peaks, retentionTime);
+				IPeak peak = PeakSupport.selectNearestPeakByRetentionTime(peaks, retentionTime);
 				if(peak != null) {
 
 					chromatogramSelection.setSelectedPeak(peak);
