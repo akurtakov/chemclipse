@@ -1502,6 +1502,41 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		return INSTANCE().getBoolean(P_ACTIVATE_TARGET_DND_WINDOWS, DEF_ACTIVATE_TARGET_DND_WINDOWS);
 	}
 
+	public static boolean isAddUnknownAfterDeleteTargetsAll() {
+
+		return INSTANCE().getBoolean(P_ADD_UNKNOWN_AFTER_DELETE_TARGETS_ALL, DEF_ADD_UNKNOWN_AFTER_DELETE_TARGETS_ALL);
+	}
+
+	public static boolean isShowPeaksInList() {
+
+		return INSTANCE().getBoolean(P_SHOW_PEAKS_IN_LIST, DEF_SHOW_PEAKS_IN_LIST);
+	}
+
+	public static boolean isShowPeaksInSelectedRange() {
+
+		return INSTANCE().getBoolean(P_SHOW_PEAKS_IN_SELECTED_RANGE, DEF_SHOW_PEAKS_IN_SELECTED_RANGE);
+	}
+
+	public static boolean isShowScansInList() {
+
+		return INSTANCE().getBoolean(P_SHOW_SCANS_IN_LIST, DEF_SHOW_SCANS_IN_LIST);
+	}
+
+	public static boolean isShowScansInSelectedRange() {
+
+		return INSTANCE().getBoolean(P_SHOW_SCANS_IN_SELECTED_RANGE, DEF_SHOW_SCANS_IN_SELECTED_RANGE);
+	}
+
+	public static boolean isMoveRetentionTimeOnPeakSelection() {
+
+		return INSTANCE().getBoolean(P_MOVE_RETENTION_TIME_ON_PEAK_SELECTION, DEF_MOVE_RETENTION_TIME_ON_PEAK_SELECTION);
+	}
+
+	public static boolean isShowPeakProfilesSelectionAll() {
+
+		return INSTANCE().getBoolean(P_SHOW_PEAK_PROFILES_SELECTION_ALL, DEF_SHOW_PEAK_PROFILES_SELECTION_ALL);
+	}
+
 	public static String getFilterPathRetentionIndices() {
 
 		return INSTANCE().get(P_FILTER_PATH_RETENTION_INDICES);
@@ -1539,6 +1574,28 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static void setChromatogramEditorLabel(HeaderField headerField) {
 
 		INSTANCE().put(P_CHROMATOGRAM_EDITOR_LABEL, headerField.name());
+	}
+
+	public static CalculationType getCalculationTypeMerge() {
+
+		try {
+			return CalculationType.valueOf(INSTANCE().get(PreferenceSupplier.P_MERGE_PEAKS_CALCULATION_TYPE));
+		} catch(Exception e) {
+			/*
+			 * Default SUM on error
+			 */
+			return CalculationType.SUM;
+		}
+	}
+
+	public static boolean isMergeIdentificationTargets() {
+
+		return INSTANCE().getBoolean(P_MERGE_PEAKS_IDENTIFICATION_TARGETS, DEF_MERGE_PEAKS_IDENTIFICATION_TARGETS);
+	}
+
+	public static boolean isMergePeaksDeleteOrigins() {
+
+		return INSTANCE().getBoolean(P_MERGE_PEAKS_DELETE_ORIGINS, DEF_MERGE_PEAKS_DELETE_ORIGINS);
 	}
 
 	public static String getListPathImport() {

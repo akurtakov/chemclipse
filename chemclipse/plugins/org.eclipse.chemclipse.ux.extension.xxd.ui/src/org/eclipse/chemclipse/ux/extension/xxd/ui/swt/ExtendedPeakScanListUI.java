@@ -80,7 +80,6 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.PeakScanListUIConfig.Inter
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.IOperationHistory;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.window.Window;
@@ -135,8 +134,6 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 	private int currentModCount;
 	private InteractionMode interactionMode = InteractionMode.SOURCE;
 	private RetentionTimeRange lastRange;
-
-	private final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
 	public ExtendedPeakScanListUI(Composite parent, int style) {
 
@@ -621,12 +618,14 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 				Set<IIdentificationTarget> targetsToDelete = targetSupplier.getTargets();
 				DeleteTargetsOperation deleteTargetsOperation = new DeleteTargetsOperation(display, chromatogramSelection, targetSupplier, targetsToDelete);
 				deleteTargetsOperation.addContext(UndoContextFactory.getUndoContext());
+
 				try {
 					getOperationHistory().execute(deleteTargetsOperation, null, null);
 				} catch(ExecutionException e) {
 					logger.warn(e);
 				}
-				if(preferenceStore.getBoolean(PreferenceSupplier.P_ADD_UNKNOWN_AFTER_DELETE_TARGETS_ALL)) {
+
+				if(PreferenceSupplier.isAddUnknownAfterDeleteTargetsAll()) {
 					IScan scan = getScan(object);
 					if(scan != null) {
 						IIdentificationTarget identificationTarget = IdentificationTargetSupport.getTargetUnknown(scan);
@@ -817,8 +816,8 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 						/*
 						 * Merge Peaks
 						 */
-						CalculationType calculationType = getCalculationTypeMerge();
-						boolean mergeIdentificationTargets = preferenceStore.getBoolean(PreferenceSupplier.P_MERGE_PEAKS_IDENTIFICATION_TARGETS);
+						CalculationType calculationType = PreferenceSupplier.getCalculationTypeMerge();
+						boolean mergeIdentificationTargets = PreferenceSupplier.isMergeIdentificationTargets();
 						IPeakMSD peakMSD = PeakMergerMSD.mergePeaks(peaksToMerge, calculationType, mergeIdentificationTargets);
 						/*
 						 * Modify the chromatogram
@@ -828,7 +827,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 						/*
 						 * Delete Origins on demand
 						 */
-						if(preferenceStore.getBoolean(PreferenceSupplier.P_MERGE_PEAKS_DELETE_ORIGINS)) {
+						if(PreferenceSupplier.isMergePeaksDeleteOrigins()) {
 							chromatogramMSD.getPeaks().removeAll(peaksToMerge);
 						}
 						/*
@@ -838,7 +837,9 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 						chromatogramSelectionMSD.setSelectedPeak(chromatogramPeakMSD);
 						chromatogramMSD.setDirty(true);
 						updateChromatogramSelection();
-
+						/*
+						 * Update
+						 */
 						UpdateNotifierUI.update(e.display, chromatogramPeakMSD);
 					}
 				}
@@ -882,18 +883,6 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 		});
 
 		scanIdentifierControl.set(scanIdentifierUI);
-	}
-
-	private CalculationType getCalculationTypeMerge() {
-
-		try {
-			return CalculationType.valueOf(preferenceStore.getString(PreferenceSupplier.P_MERGE_PEAKS_CALCULATION_TYPE));
-		} catch(Exception e) {
-			/*
-			 * Default SUM on error
-			 */
-			return CalculationType.SUM;
-		}
 	}
 
 	private IScanMSD getScanMSD(Object object) {
@@ -1143,14 +1132,12 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 
 	private void updateFromPreferences() {
 
-		if(preferenceStore != null) {
-			showPeaks = preferenceStore.getBoolean(PreferenceSupplier.P_SHOW_PEAKS_IN_LIST);
-			showPeaksInRange = preferenceStore.getBoolean(PreferenceSupplier.P_SHOW_PEAKS_IN_SELECTED_RANGE);
-			showScans = preferenceStore.getBoolean(PreferenceSupplier.P_SHOW_SCANS_IN_LIST);
-			showScansInRange = preferenceStore.getBoolean(PreferenceSupplier.P_SHOW_SCANS_IN_SELECTED_RANGE);
-			moveRetentionTimeOnPeakSelection = preferenceStore.getBoolean(PreferenceSupplier.P_MOVE_RETENTION_TIME_ON_PEAK_SELECTION);
-			showPeakProfilesSelectionAll = preferenceStore.getBoolean(PreferenceSupplier.P_SHOW_PEAK_PROFILES_SELECTION_ALL);
-		}
+		showPeaks = PreferenceSupplier.isShowPeaksInList();
+		showPeaksInRange = PreferenceSupplier.isShowPeaksInSelectedRange();
+		showScans = PreferenceSupplier.isShowScansInList();
+		showScansInRange = PreferenceSupplier.isShowScansInSelectedRange();
+		moveRetentionTimeOnPeakSelection = PreferenceSupplier.isMoveRetentionTimeOnPeakSelection();
+		showPeakProfilesSelectionAll = PreferenceSupplier.isShowPeakProfilesSelectionAll();
 	}
 
 	@Override
