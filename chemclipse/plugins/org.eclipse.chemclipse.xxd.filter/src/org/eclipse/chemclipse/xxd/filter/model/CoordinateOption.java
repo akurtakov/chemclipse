@@ -16,7 +16,6 @@ import org.eclipse.chemclipse.support.text.ILabel;
 
 public enum CoordinateOption implements ILabel {
 
-	NONE("--"), //
 	RETENTION_TIME_MS("Retention Time [ms]"), //
 	RETENTION_TIME_MIN("Retention Time [min]"), //
 	RETENTION_INDEX("Retention Index"); //

@@ -24,14 +24,14 @@ public class CoordinateEvaluator_5_Test extends CoordinateEvaluatorTestCase {
 	@Test
 	public void test1() {
 
-		assertFalse(CoordinateEvaluator.isMatchScan(null, CoordinateOption.NONE, RangeOption.NONE, 0));
+		assertFalse(CoordinateEvaluator.isMatchScan(null, CoordinateOption.RETENTION_TIME_MIN, RangeOption.NONE, 0));
 	}
 
 	@Test
 	public void test2() {
 
 		IScan scan = createScan(0, 0);
-		assertFalse(CoordinateEvaluator.isMatchScan(scan, CoordinateOption.NONE, RangeOption.NONE, 0));
+		assertFalse(CoordinateEvaluator.isMatchScan(scan, CoordinateOption.RETENTION_TIME_MIN, RangeOption.NONE, 0));
 	}
 
 }

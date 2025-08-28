@@ -21,9 +21,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 public class DeleteScansByRangeFilterSettings {
 
-	@JsonProperty(value = "Coordinate Option", defaultValue = "NONE")
+	@JsonProperty(value = "Coordinate Option", defaultValue = "RETENTION_TIME_MIN")
 	@JsonPropertyDescription(value = "Use the given coordinate selection.")
-	private CoordinateOption coordinateOption = CoordinateOption.NONE;
+	private CoordinateOption coordinateOption = CoordinateOption.RETENTION_TIME_MIN;
 	@JsonProperty(value = "Range Option", defaultValue = "NONE")
 	@JsonPropertyDescription(value = "Scans matching the given range will be deleted.")
 	private RangeOption rangeOption = RangeOption.NONE;
