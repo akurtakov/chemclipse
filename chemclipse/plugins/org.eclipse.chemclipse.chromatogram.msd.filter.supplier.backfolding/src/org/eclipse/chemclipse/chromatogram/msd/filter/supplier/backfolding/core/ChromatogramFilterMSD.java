@@ -90,7 +90,7 @@ public class ChromatogramFilterMSD extends AbstractChromatogramFilterMSD {
 			supplierMassSpectrum = chromatogram.getSupplierScan(scan);
 			supplierMassSpectrum.removeAllIons();
 			for(IIon ion : massSpectrum.getIons()) {
-				supplierMassSpectrum.addIon(ion);
+				supplierMassSpectrum.addIon(ion, false);
 			}
 		}
 	}
