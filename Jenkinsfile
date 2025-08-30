@@ -14,7 +14,7 @@ pipeline {
 		jdk   'temurin-jdk21-latest'
 	}
 	environment {
-		MAVEN_OPTS = '-Xmx3072m'
+		MAVEN_OPTS = '-Xmx2048m'
 	}
 	options {
 		disableConcurrentBuilds()
