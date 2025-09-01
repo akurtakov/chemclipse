@@ -37,12 +37,49 @@ public class TraceFactory {
 	private static final Pattern PATTERN_GENERIC_DIGITS = Pattern.compile("(\\d+\\.?\\d+)(.*)");
 	private static final Pattern PATTERN_TANDEM_MSD = Pattern.compile("(\\d+)(\\s+>\\s+)(\\d+\\.?\\d?)(\\s+@)(\\d+)(.*)");
 
-	public static boolean isTraceDefinition(String content) {
+	public static boolean isTraceDefinition(String line) {
 
 		/*
 		 * TODO
 		 */
-		return content.contains(ITrace.INFIX_RANGE_STANDARD) || content.contains(ITrace.INFIX_RANGE_SIMPLE);
+		return line.contains(ITrace.INFIX_RANGE_STANDARD) || line.contains(ITrace.INFIX_RANGE_SIMPLE);
+	}
+
+	/**
+	 * Determine the trace type (TraceHighResMSD, TraceGenericDelta, TraceTandemMSD or TraceGeneric) by the given line.
+	 * May return null.
+	 * 
+	 * @param content
+	 * @return Class<? extends ITrace>
+	 */
+	public static Class<? extends ITrace> determineTraceType(String line) {
+
+		Class<? extends ITrace> clazz = null;
+		if(line != null) {
+			/*
+			 * Drill down from specific trace to generic definitions.
+			 */
+			String trace = line.trim();
+			if(!trace.isEmpty()) {
+				if(trace.contains(ITrace.INFIX_RANGE_STANDARD) || trace.contains(ITrace.INFIX_RANGE_SIMPLE)) {
+					if(trace.contains(ITrace.POSTFIX_UNIT_PPM)) {
+						clazz = TraceHighResMSD.class;
+					} else {
+						/*
+						 * We can't differentiate both types here:
+						 * TraceHighResMSD or TraceHighResWSD
+						 */
+						clazz = TraceGenericDelta.class;
+					}
+				} else if(trace.contains("@")) {
+					clazz = TraceTandemMSD.class;
+				} else {
+					clazz = TraceGeneric.class;
+				}
+			}
+		}
+
+		return clazz;
 	}
 
 	public static <T extends ITrace> List<T> parseTraces(String content, Class<T> clazz) {
