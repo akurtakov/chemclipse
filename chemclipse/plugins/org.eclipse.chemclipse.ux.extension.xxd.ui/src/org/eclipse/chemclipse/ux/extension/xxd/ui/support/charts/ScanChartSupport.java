@@ -48,16 +48,16 @@ public class ScanChartSupport {
 	private IonValueComparator ionValueComparator = new IonValueComparator(SortOrder.ASC);
 	private WavelengthValueComparator wavelengthValueComparator = new WavelengthValueComparator(SortOrder.ASC);
 
-	public IBarSeriesData getBarSeriesData(IScan scan, String postfix, boolean mirrored) {
+	public IBarSeriesData getBarSeriesData(IScan scan, String label, boolean mirrored) {
 
-		ISeriesData seriesData = getSeriesData(scan, postfix, mirrored);
+		ISeriesData seriesData = getSeriesData(scan, label, mirrored);
 		IBarSeriesData barSeriesData = new BarSeriesData(seriesData);
 		return barSeriesData;
 	}
 
-	public ILineSeriesData getLineSeriesData(IScan scan, String postfix, boolean mirrored) {
+	public ILineSeriesData getLineSeriesData(IScan scan, String label, boolean mirrored) {
 
-		ISeriesData seriesData = getSeriesData(scan, postfix, mirrored);
+		ISeriesData seriesData = getSeriesData(scan, label, mirrored);
 		ILineSeriesData lineSeriesData = new LineSeriesData(seriesData);
 		return lineSeriesData;
 	}
@@ -120,14 +120,15 @@ public class ScanChartSupport {
 		return lineSeriesData;
 	}
 
-	private ISeriesData getSeriesData(IScan scan, String postfix, boolean mirrored) {
+	private ISeriesData getSeriesData(IScan scan, String label, boolean mirrored) {
 
 		double[] xSeries;
 		double[] ySeries;
-		String scanNumber = (scan.getScanNumber() > 0 ? Integer.toString(scan.getScanNumber()) : "--");
-		String id = "Scan " + scanNumber;
-		if(!"".equals(postfix)) {
-			id += " " + postfix;
+
+		String id = label;
+		if(id == null || id.isEmpty()) {
+			String scanNumber = (scan.getScanNumber() > 0 ? Integer.toString(scan.getScanNumber()) : "--");
+			id = "Scan " + scanNumber;
 		}
 		/*
 		 * Sort the scan data, otherwise the line chart could be odd.
