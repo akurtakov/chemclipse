@@ -125,6 +125,9 @@ public class ScanDataSupport {
 				builder.append("CAS: ");
 				builder.append(libraryInformation.getCasNumber());
 				builder.append(" | ");
+				builder.append("MW: ");
+				builder.append(libraryInformation.getMolWeight());
+				builder.append(" | ");
 			}
 			builder.append("RT: ");
 			builder.append(decimalFormat.format(scanMSD.getRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
