@@ -70,6 +70,9 @@ import org.eclipse.swtchart.extensions.linecharts.ILineSeriesSettings;
 
 public class ScanChartUI extends ScrollableChart {
 
+	public static final String LABEL_SCAN1 = "Unknown";
+	public static final String LABEL_SCAN2 = "Reference";
+
 	private static final int LENGTH_HINT_DATA_POINTS = 5000;
 	private static final int COMPRESS_TO_LENGTH = Integer.MAX_VALUE;
 
@@ -195,6 +198,7 @@ public class ScanChartUI extends ScrollableChart {
 		addSeriesLabelMarker(labelPaintListenerY);
 	}
 
+	@Override
 	public void setChartType(ChartType chartType) {
 
 		super.setChartType(chartType);
@@ -255,8 +259,6 @@ public class ScanChartUI extends ScrollableChart {
 			modifyChart(mirrored);
 			modifyChart(scan1, scan2);
 
-			String labelScan1 = "scan1";
-			String labelScan2 = "scan2";
 			IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 			Color colorScan1 = Colors.getColor(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCAN_1));
 			Color colorScan2 = Colors.getColor(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCAN_2));
@@ -264,8 +266,8 @@ public class ScanChartUI extends ScrollableChart {
 			if(usedSignalType.equals(SignalType.PROFILE)) {
 				setChartType(ChartType.LINE);
 				List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
-				ILineSeriesData lineSeriesDataScan1 = scanChartSupport.getLineSeriesData(scan1, labelScan1, false);
-				ILineSeriesData lineSeriesDataScan2 = scanChartSupport.getLineSeriesData(scan2, labelScan2, mirrored);
+				ILineSeriesData lineSeriesDataScan1 = scanChartSupport.getLineSeriesData(scan1, LABEL_SCAN1, false);
+				ILineSeriesData lineSeriesDataScan2 = scanChartSupport.getLineSeriesData(scan2, LABEL_SCAN2, mirrored);
 				lineSeriesDataScan1.getSettings().setLineColor(colorScan1);
 				lineSeriesDataScan2.getSettings().setLineColor(colorScan2);
 				lineSeriesDataList.add(lineSeriesDataScan1);
@@ -274,8 +276,8 @@ public class ScanChartUI extends ScrollableChart {
 			} else {
 				setChartType(ChartType.BAR);
 				List<IBarSeriesData> barSeriesDataList = new ArrayList<>();
-				IBarSeriesData barSeriesDataScan1 = scanChartSupport.getBarSeriesData(scan1, labelScan1, false);
-				IBarSeriesData barSeriesDataScan2 = scanChartSupport.getBarSeriesData(scan2, labelScan2, mirrored);
+				IBarSeriesData barSeriesDataScan1 = scanChartSupport.getBarSeriesData(scan1, LABEL_SCAN1, false);
+				IBarSeriesData barSeriesDataScan2 = scanChartSupport.getBarSeriesData(scan2, LABEL_SCAN2, mirrored);
 				IBarSeriesSettings barSeriesSettings1 = barSeriesDataScan1.getSettings();
 				IBarSeriesSettings barSeriesSettings2 = barSeriesDataScan2.getSettings();
 				barSeriesSettings1.setBarColor(colorScan1);

@@ -359,8 +359,8 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 			int molWeightUnknown = getMolWeight(textWeightUnknownControl);
 			int molWeightReference = getMolWeight(textWeightReferenceControl);
 			BaseChart baseChart = scanChartUI.getBaseChart();
-			baseChart.shiftSeries("Scan -- scan1", IExtendedChart.X_AXIS, -molWeightUnknown);
-			baseChart.shiftSeries("Scan -- scan2", IExtendedChart.X_AXIS, -molWeightReference);
+			baseChart.shiftSeries(ScanChartUI.LABEL_SCAN1, IExtendedChart.X_AXIS, -molWeightUnknown);
+			baseChart.shiftSeries(ScanChartUI.LABEL_SCAN2, IExtendedChart.X_AXIS, -molWeightReference);
 			scanChartUI.adjustRange(true);
 		}
 	}
