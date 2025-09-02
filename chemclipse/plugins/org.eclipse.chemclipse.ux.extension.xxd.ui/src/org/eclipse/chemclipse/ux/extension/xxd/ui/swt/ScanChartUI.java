@@ -83,12 +83,15 @@ public class ScanChartUI extends ScrollableChart {
 	private Map<Double, String> customLabels = new HashMap<>();
 	private LabelPaintListener labelPaintListenerX = new LabelPaintListener(true);
 	private LabelPaintListener labelPaintListenerY = new LabelPaintListener(false);
+	private SymbolPaintListener symbolPaintListener = new SymbolPaintListener();
 	/*
 	 * Initialized on use.
 	 */
 	private LabelOption labelOption;
 	private DataType dataType;
 	private SignalType signalType;
+
+	private Double molecularIon;
 
 	private DecimalFormat decimalFormatNormalIntensity = ValueFormat.getDecimalFormatEnglish("0");
 	private DecimalFormat decimalFormatLowIntensity = ValueFormat.getDecimalFormatEnglish("0.0000");
@@ -174,6 +177,38 @@ public class ScanChartUI extends ScrollableChart {
 		}
 	}
 
+	private class SymbolPaintListener implements ICustomPaintListener {
+
+		@Override
+		public void paintControl(PaintEvent e) {
+
+			List<BarSeriesValue> barSeriesValues = getBarSeriesValuesList();
+			Collections.sort(barSeriesValues, barSeriesIntensityComparator);
+			printMolecularIon(barSeriesValues, e);
+		}
+
+		private void printMolecularIon(List<BarSeriesValue> barSeriesValues, PaintEvent e) {
+
+			if(molecularIon == null) {
+				return;
+			}
+			for(BarSeriesValue barSeriesValue : barSeriesValues) {
+				if(barSeriesValue.getX() == molecularIon) {
+					// only for the mirrored reference spectrum
+					if(barSeriesValue.getY() < 0) {
+						drawTriangle(barSeriesValue, 10, e);
+					}
+				}
+			}
+		}
+
+		@Override
+		public boolean drawBehindSeries() {
+
+			return false;
+		}
+	}
+
 	public ScanChartUI() {
 
 		super();
@@ -196,6 +231,20 @@ public class ScanChartUI extends ScrollableChart {
 	public void activateLabelMarkerY() {
 
 		addSeriesLabelMarker(labelPaintListenerY);
+	}
+
+	public void setMolecularIon(IIon molecularIon) {
+
+		this.molecularIon = molecularIon.getIon();
+	}
+
+	private void activateMolecularIonMarker() {
+
+		IPlotArea plotArea = getBaseChart().getPlotArea();
+		plotArea.removeCustomPaintListener(symbolPaintListener);
+		if(symbolPaintListener != null) {
+			plotArea.addCustomPaintListener(symbolPaintListener);
+		}
 	}
 
 	@Override
@@ -479,7 +528,7 @@ public class ScanChartUI extends ScrollableChart {
 
 		if(scan instanceof IScanMSD scanMSD) {
 			/*
-			 * MSD
+			 * MS/MS
 			 */
 			if(scanMSD.isTandemMS()) {
 				for(IIon ion : scanMSD.getIons()) {
@@ -537,6 +586,7 @@ public class ScanChartUI extends ScrollableChart {
 			case MSD_HIGHRES:
 				scanDataSupport.setDataTypeMSD(chartSettings);
 				primaryAxisSettingsX.setDecimalFormat(new DecimalFormat());
+				activateMolecularIonMarker();
 				break;
 			case CSD:
 				labelPaintListener = labelPaintListenerY;
@@ -679,6 +729,20 @@ public class ScanChartUI extends ScrollableChart {
 		e.gc.drawText(label, x, y, true);
 
 		e.gc.setFont(currentFont);
+	}
+
+	private void drawTriangle(BarSeriesValue barSeriesValue, int size, PaintEvent e) {
+
+		int x = barSeriesValue.getPoint().x;
+		int y = barSeriesValue.getPoint().y - size;
+
+		int[] triangle = {x, y, // top
+				x - size / 2, y + size, // bottom left
+				x + size / 2, y + size // bottom right
+		};
+
+		e.gc.setBackground(e.display.getSystemColor(SWT.COLOR_DARK_GRAY));
+		e.gc.fillPolygon(triangle);
 	}
 
 	private String getLabel(double value) {
