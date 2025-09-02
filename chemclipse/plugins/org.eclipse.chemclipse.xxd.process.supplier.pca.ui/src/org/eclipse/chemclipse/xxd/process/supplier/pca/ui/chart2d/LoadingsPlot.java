@@ -22,7 +22,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.SeriesConverte
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swtchart.extensions.scattercharts.IScatterSeriesData;
 
-public class LoadingsPlot extends AbtractPlotPCA {
+public class LoadingsPlot extends AbstractPlotPCA {
 
 	public static final int LABEL_RETENTION_TIME_MINUTES = 1;
 	public static final int LABEL_DESCRIPTION = 2;

@@ -25,7 +25,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.SeriesConverter;
 import org.eclipse.swt.widgets.Composite;
 
-public class ScorePlot extends AbtractPlotPCA {
+public class ScorePlot extends AbstractPlotPCA {
 
 	private final Map<ISample, IResultMVA> extractedResults = new HashMap<>();
 

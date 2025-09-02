@@ -42,7 +42,7 @@ import org.eclipse.swtchart.extensions.core.RangeRestriction;
 import org.eclipse.swtchart.extensions.core.SecondaryAxisSettings;
 import org.eclipse.swtchart.extensions.scattercharts.ScatterChart;
 
-public abstract class AbtractPlotPCA extends ScatterChart implements IRangeSupport {
+public abstract class AbstractPlotPCA extends ScatterChart implements IRangeSupport {
 
 	private DecimalFormat decimalFormat = new DecimalFormat(("0.00E0"), new DecimalFormatSymbols(Locale.ENGLISH));
 	private String title = "";
@@ -51,7 +51,7 @@ public abstract class AbtractPlotPCA extends ScatterChart implements IRangeSuppo
 	private Range selectedRangeX = null;
 	private Range selectedRangeY = null;
 
-	public AbtractPlotPCA(Composite parent, int style, String title) {
+	public AbstractPlotPCA(Composite parent, int style, String title) {
 
 		super(parent, style);
 		this.title = title;
