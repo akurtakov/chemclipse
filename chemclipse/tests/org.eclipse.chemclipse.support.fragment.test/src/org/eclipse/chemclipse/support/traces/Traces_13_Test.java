@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2025 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,26 +19,26 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class Traces_03_Test {
+public class Traces_13_Test {
 
-	private String content = "18 28 32 55 - 65 84 207";
+	private String content = "18 28 32 55 - 65 84 90-95 207";
 
 	@Test
 	public void test1() {
 
 		List<? extends ITrace> traces = TraceFactory.parseTraces(content, TraceType.GENERIC.clazz());
-		assertEquals(16, traces.size());
+		assertEquals(22, traces.size());
 		assertEquals(18.0d, traces.get(0).getValue(), 0);
-		assertEquals(207.0d, traces.get(15).getValue(), 0);
+		assertEquals(207.0d, traces.get(21).getValue(), 0);
 	}
 
 	@Test
 	public void test2() {
 
 		List<? extends ITrace> traces = TraceFactory.parseTraces(content, TraceType.MSD_NOMINAL.clazz());
-		assertEquals(16, traces.size());
+		assertEquals(22, traces.size());
 		assertEquals(18.0d, traces.get(0).getValue(), 0);
-		assertEquals(207.0d, traces.get(15).getValue(), 0);
+		assertEquals(207.0d, traces.get(21).getValue(), 0);
 	}
 
 	@Test
@@ -59,18 +59,18 @@ public class Traces_03_Test {
 	public void test5() {
 
 		List<? extends ITrace> traces = TraceFactory.parseTraces(content, TraceType.VSD_RASTERED.clazz());
-		assertEquals(16, traces.size());
+		assertEquals(22, traces.size());
 		assertEquals(18.0d, traces.get(0).getValue(), 0);
-		assertEquals(207.0d, traces.get(15).getValue(), 0);
+		assertEquals(207.0d, traces.get(21).getValue(), 0);
 	}
 
 	@Test
 	public void test6() {
 
 		List<? extends ITrace> traces = TraceFactory.parseTraces(content, TraceType.WSD_RASTERED.clazz());
-		assertEquals(16, traces.size());
+		assertEquals(22, traces.size());
 		assertEquals(18.0d, traces.get(0).getValue(), 0);
-		assertEquals(207.0d, traces.get(15).getValue(), 0);
+		assertEquals(207.0d, traces.get(21).getValue(), 0);
 	}
 
 	@Test

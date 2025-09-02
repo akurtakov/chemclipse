@@ -14,7 +14,10 @@ package org.eclipse.chemclipse.support.traces;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,18 +34,79 @@ public class TraceFactory {
 	private static final String LINE_DELIMITER_OS = OperatingSystemUtils.getLineDelimiter();
 	private static final String LINE_DELIMITER_GENERIC = "\n";
 
-	private static final String SEPARATOR_TRACE_ITEM = ",";
-	private static final String SEPARATOR_TRACE_RANGE = "-";
-
 	private static final Pattern PATTERN_GENERIC_DIGITS = Pattern.compile("(\\d+\\.?\\d+)(.*)");
 	private static final Pattern PATTERN_TANDEM_MSD = Pattern.compile("(\\d+)(\\s+>\\s+)(\\d+\\.?\\d?)(\\s+@)(\\d+)(.*)");
+	private static final Pattern PATTERN_DIGITS = Pattern.compile("([^x])([0-9]+)(\\.)([0-9]{2})");
+	private static final Pattern PATTERN_RANGE_INTEGER = Pattern.compile("([0-9]+\\s?-\\s?[0-9]+)");
 
-	public static boolean isTraceDefinition(String line) {
+	/**
+	 * Returns null if valid.
+	 * Otherwise, the invalid characters are returned, separated by a whitespace.
+	 * 
+	 * @param line
+	 * @return String
+	 */
+	public static String validate(String line) {
 
 		/*
-		 * TODO
+		 * Remove all valid items.
 		 */
-		return line.contains(ITrace.INFIX_RANGE_STANDARD) || line.contains(ITrace.INFIX_RANGE_SIMPLE);
+		if(line != null) {
+			/*
+			 * Tab, ...
+			 */
+			if(line.contains("\t")) {
+				return "Tab";
+			} else if(line.contains("\n")) {
+				return "New Line";
+			} else if(line.contains("\r")) {
+				return "Carriage Return";
+			} else {
+				String errors = line.replaceAll("\\s", "");
+				errors = errors.replaceAll("[0-9]", "");
+				List<String> replacements = new ArrayList<>();
+				replacements.add(ITrace.PREFIX_SCALE_FACTOR);
+				replacements.add(ITrace.POSTFIX_SCALE_FACTOR);
+				replacements.add(ITrace.INFIX_RANGE_STANDARD);
+				replacements.add(ITrace.INFIX_RANGE_SIMPLE);
+				replacements.add(ITrace.POSTFIX_UNIT_PPM);
+				replacements.add(ITrace.INFIX_TANDEM_MS_CE);
+				replacements.add(ITrace.INFIX_TANDEM_MS_PD);
+				replacements.add(ITrace.INFIX_DECIMALS);
+				replacements.add(ITrace.SEPARATOR_TRACE_ITEM);
+				replacements.add(ITrace.SEPARATOR_TRACE_RANGE);
+				for(String replacement : replacements) {
+					errors = errors.replace(replacement, "");
+				}
+
+				if(errors.isEmpty()) {
+					return null;
+				} else {
+					/*
+					 * Unique Characters
+					 */
+					Set<Character> characters = new HashSet<>();
+					char[] chars = errors.toCharArray();
+					for(Character character : chars) {
+						characters.add(character);
+					}
+					/*
+					 * Replace for better understanding
+					 */
+					List<String> invalidInput = new ArrayList<>();
+					for(Character character : characters) {
+						invalidInput.add(character.toString());
+					}
+					/*
+					 * Return sorted list as String
+					 */
+					Collections.sort(invalidInput);
+					return String.join(" ", invalidInput);
+				}
+			}
+		} else {
+			return "'null'";
+		}
 	}
 
 	/**
@@ -52,9 +116,9 @@ public class TraceFactory {
 	 * @param content
 	 * @return Class<? extends ITrace>
 	 */
-	public static Class<? extends ITrace> determineTraceType(String line) {
+	public static Class<? extends ITrace> getTraceType(String line, DetectorType detectorType) {
 
-		Class<? extends ITrace> clazz = null;
+		Class<? extends ITrace> clazz = TraceEmpty.class;
 		if(line != null) {
 			/*
 			 * Drill down from specific trace to generic definitions.
@@ -63,18 +127,129 @@ public class TraceFactory {
 			if(!trace.isEmpty()) {
 				if(trace.contains(ITrace.INFIX_RANGE_STANDARD) || trace.contains(ITrace.INFIX_RANGE_SIMPLE)) {
 					if(trace.contains(ITrace.POSTFIX_UNIT_PPM)) {
+						/*
+						 * 400.01627±10ppm
+						 * 400.01627±10ppm (x4.7)
+						 */
 						clazz = TraceHighResMSD.class;
 					} else {
-						/*
-						 * We can't differentiate both types here:
-						 * TraceHighResMSD or TraceHighResWSD
-						 */
-						clazz = TraceGenericDelta.class;
+						switch(detectorType) {
+							case MSD:
+								/*
+								 * 400.01627±0.02
+								 * 400.01627±0.02 (x2.9)
+								 * 400.01627+-0.02
+								 * 400.01627+-0.02 (x2.9)
+								 */
+								clazz = TraceHighResMSD.class;
+								break;
+							case WSD:
+								/*
+								 * 400.01627±0.02
+								 * 400.01627±0.02 (x2.9)
+								 * 400.01627+-0.02
+								 * 400.01627+-0.02 (x2.9)
+								 */
+								clazz = TraceHighResWSD.class;
+								break;
+							default:
+								clazz = TraceGenericDelta.class;
+								break;
+						}
 					}
-				} else if(trace.contains("@")) {
+				} else if(trace.contains(ITrace.INFIX_TANDEM_MS_CE)) {
+					/*
+					 * 139 > 111.0 @12
+					 * 139 > 111.0 @12 (x5.8)
+					 */
 					clazz = TraceTandemMSD.class;
+				} else if(trace.contains(ITrace.INFIX_DECIMALS)) {
+					Matcher matcher = PATTERN_DIGITS.matcher(trace);
+					if(matcher.find()) {
+						/*
+						 * 69.25
+						 * 69.276
+						 * 69.25 (x1.23)
+						 * 69.276 (x1.25)
+						 */
+						switch(detectorType) {
+							case MSD:
+								clazz = TraceHighResMSD.class;
+								break;
+							case WSD:
+								clazz = TraceHighResWSD.class;
+								break;
+							default:
+								clazz = TraceGenericDelta.class;
+								break;
+						}
+					} else {
+						/*
+						 * 69.1
+						 * 69.1 (x1.24)
+						 */
+						switch(detectorType) {
+							case MSD:
+								clazz = TraceNominalMSD.class;
+								break;
+							case VSD:
+								clazz = TraceRasteredVSD.class;
+								break;
+							case WSD:
+								clazz = TraceRasteredWSD.class;
+								break;
+							default:
+								clazz = TraceGeneric.class;
+								break;
+						}
+					}
+				} else if(trace.contains(ITrace.SEPARATOR_TRACE_RANGE)) {
+					/*
+					 * Range and Legacy Support
+					 * 0 - 0
+					 * 55 - 120
+					 * 18 28 32 55 - 65 84 207
+					 * 55 - 65 84 207
+					 * 18 28 32 55 - 65
+					 * 18 28 32 55 - 65 84 90 - 95 207
+					 * 55 - 65 84 90 - 95 207
+					 * 18 28 32 55 - 65
+					 * 18, 28, 32, 55 - 65, 84, 207
+					 */
+					switch(detectorType) {
+						case MSD:
+							clazz = TraceNominalMSD.class;
+							break;
+						case VSD:
+							clazz = TraceRasteredVSD.class;
+							break;
+						case WSD:
+							clazz = TraceRasteredWSD.class;
+							break;
+						default:
+							clazz = TraceGeneric.class;
+							break;
+					}
 				} else {
-					clazz = TraceGeneric.class;
+					/*
+					 * 69
+					 * 1800
+					 * 400
+					 */
+					switch(detectorType) {
+						case MSD:
+							clazz = TraceNominalMSD.class;
+							break;
+						case VSD:
+							clazz = TraceRasteredVSD.class;
+							break;
+						case WSD:
+							clazz = TraceRasteredWSD.class;
+							break;
+						default:
+							clazz = TraceGeneric.class;
+							break;
+					}
 				}
 			}
 		}
@@ -88,34 +263,52 @@ public class TraceFactory {
 
 		List<String> lines = splitLines(content);
 		for(String line : lines) {
-			if(!line.contains(SEPARATOR_TRACE_ITEM)) {
+			if(!line.contains(ITrace.SEPARATOR_TRACE_ITEM)) {
 				if(isSupportGeneric(clazz)) {
-					if(line.contains(SEPARATOR_TRACE_RANGE)) {
+					if(line.contains(ITrace.SEPARATOR_TRACE_RANGE)) {
 						/*
 						 * Special cases:
 						 * 0 - 0
 						 * 55 - 120
+						 * 18 28 32 55 - 65 84 207
+						 * 55 - 65 84 207
+						 * 18 28 32 55 - 65
+						 * 18 28 32 55 - 65 84 90 - 95 207
+						 * 55 - 65 84 90 - 95 207
+						 * 55 - 65 84 90 - 95
 						 */
-						addTraceRange(line, elements, clazz);
+						String traces = line;
+						Set<String> ranges = new HashSet<>();
+						Matcher matcher = PATTERN_RANGE_INTEGER.matcher(line);
+						while(matcher.find()) {
+							String range = matcher.group();
+							ranges.add(range);
+							traces = traces.replace(range, "");
+						}
+						/*
+						 * Parse traces and ranges
+						 */
+						parseSeparatedGenericTraces(traces, elements, clazz);
+						for(String range : ranges) {
+							addTraceRange(range, elements, clazz);
+						}
+						Collections.sort(elements, (e1, e2) -> Double.compare(e1.getValue(), e2.getValue()));
 					} else {
 						/*
 						 * Special case: 18 28 32 84 207
 						 */
-						String[] parts = line.split("\\s+");
-						for(String part : parts) {
-							addTraceGeneric(part, elements, clazz);
-						}
+						parseSeparatedGenericTraces(line, elements, clazz);
 					}
 				} else {
 					String trace = line.trim();
-					if(trace.contains(ITrace.INFIX_RANGE_SIMPLE) || (!trace.contains(SEPARATOR_TRACE_RANGE) && !trace.contains(" "))) {
+					if(trace.contains(ITrace.INFIX_RANGE_SIMPLE) || (!trace.contains(ITrace.SEPARATOR_TRACE_RANGE) && !trace.contains(" "))) {
 						addTraceSpecific(trace, content, elements, clazz);
 					}
 				}
 			} else {
-				String[] traces = line.split(SEPARATOR_TRACE_ITEM);
+				String[] traces = line.split(ITrace.SEPARATOR_TRACE_ITEM);
 				for(String trace : traces) {
-					if(trace.contains(SEPARATOR_TRACE_RANGE)) {
+					if(trace.contains(ITrace.SEPARATOR_TRACE_RANGE)) {
 						/*
 						 * Special case:
 						 * 0 - 0
@@ -176,6 +369,17 @@ public class TraceFactory {
 		}
 
 		return traceSpecific;
+	}
+
+	/*
+	 * 18 28 32 84 207
+	 */
+	private static <T extends ITrace> void parseSeparatedGenericTraces(String line, List<T> elements, Class<T> clazz) {
+
+		String[] parts = line.split("\\s+");
+		for(String part : parts) {
+			addTraceGeneric(part, elements, clazz);
+		}
 	}
 
 	private static boolean parseTraceNominalMSD(String content, TraceNominalMSD traceSpecific) {
@@ -496,7 +700,7 @@ public class TraceFactory {
 
 	private static <T extends ITrace> void addTraceRange(String trace, List<T> elements, Class<T> clazz) {
 
-		String[] parts = trace.trim().split(SEPARATOR_TRACE_RANGE);
+		String[] parts = trace.trim().split(ITrace.SEPARATOR_TRACE_RANGE);
 		if(parts.length == 2) {
 			String part1 = parts[0].trim();
 			String part2 = parts[1].trim();

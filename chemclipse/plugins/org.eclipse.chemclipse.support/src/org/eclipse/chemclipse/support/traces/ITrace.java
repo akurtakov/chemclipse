@@ -21,6 +21,13 @@ public interface ITrace {
 	String INFIX_RANGE_STANDARD = "±";
 	String INFIX_RANGE_SIMPLE = "+-";
 	String POSTFIX_UNIT_PPM = "ppm";
+	String INFIX_TANDEM_MS_CE = "@"; // Collision Energy
+	String INFIX_TANDEM_MS_PD = ">"; // Parent > Daughter
+	String INFIX_DECIMALS = ".";
+	String SEPARATOR_TRACE_ITEM = ",";
+	String SEPARATOR_TRACE_RANGE = "-";
+
+	int TRACE_TIC = 0;
 	int MILLION = 1000000;
 
 	double getValue();
