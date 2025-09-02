@@ -201,10 +201,6 @@
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.chemclipse.msd.identifier.supplier.triplequad.feature"
-         version="0.0.0"/>
-
-   <includes
          id="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.baselinesubtract.feature"
          version="0.0.0"/>
 
