@@ -687,7 +687,7 @@ public class TraceFactory {
 
 	private static <T extends ITrace> void addTraceGeneric(String part, List<T> elements, Class<T> clazz) {
 
-		int trace = parseInteger(part);
+		double trace = parseDouble(part);
 		if(trace > 0) {
 			try {
 				T genericTrace = clazz.getDeclaredConstructor().newInstance();

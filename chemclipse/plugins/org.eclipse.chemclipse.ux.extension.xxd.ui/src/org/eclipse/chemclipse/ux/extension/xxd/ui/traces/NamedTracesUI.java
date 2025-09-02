@@ -222,7 +222,7 @@ public class NamedTracesUI extends Composite {
 
 			if(namedTrace != null) {
 				if(validate(traceValidator, controlDecoration, text)) {
-					namedTrace.setTraces(traceValidator.getTracesAsString());
+					namedTrace.setTraces(traceValidator.getTraces());
 					fireUpdate();
 				}
 			}

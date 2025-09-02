@@ -66,7 +66,7 @@ public class NamedTracesEditingSupport extends EditingSupport {
 			if(column.equals(NamedTracesLabelProvider.TRACES)) {
 				IStatus status = traceValidator.validate(value);
 				if(status.isOK()) {
-					namedTrace.setTraces(traceValidator.getTracesAsString());
+					namedTrace.setTraces(traceValidator.getTraces());
 				}
 			}
 			tableViewer.refresh();

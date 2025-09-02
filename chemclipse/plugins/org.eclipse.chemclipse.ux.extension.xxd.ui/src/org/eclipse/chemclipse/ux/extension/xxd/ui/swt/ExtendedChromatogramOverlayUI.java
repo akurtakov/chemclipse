@@ -49,6 +49,7 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.traces.ITrace;
 import org.eclipse.chemclipse.support.traces.TraceFactory;
+import org.eclipse.chemclipse.support.traces.TraceGeneric;
 import org.eclipse.chemclipse.support.traces.TraceHighResMSD;
 import org.eclipse.chemclipse.support.traces.TraceType;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
@@ -1430,7 +1431,9 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 				if(isNominal) {
 					traceList.addAll(traceValidator.getTracesAsInteger());
 				} else {
-					traceList.addAll(traceValidator.getTracesAsDouble());
+					for(ITrace trace : TraceFactory.parseTraces(traceValidator.getTraces(), TraceGeneric.class)) {
+						traceList.add(trace.getValue());
+					}
 				}
 			}
 		}

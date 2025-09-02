@@ -12,33 +12,18 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.support.validators;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
-import org.eclipse.chemclipse.support.text.ValueFormat;
-import org.eclipse.chemclipse.support.traces.ITrace;
 import org.eclipse.chemclipse.support.traces.TraceFactory;
-import org.eclipse.chemclipse.support.traces.TraceGeneric;
-import org.eclipse.chemclipse.support.util.NamedTraceListUtil;
-import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 
-public class TraceValidator implements IValidator<Object> {
+public class TraceValidator extends AbstractTraceValidatorLegacy {
 
 	private static final String ERROR = "Please enter valid traces, e.g.: 320.1 400";
-
-	private String traces = "";
 
 	@Override
 	public IStatus validate(Object value) {
 
-		traces = "";
+		setTraces("");
 		String message = null;
 		if(value == null) {
 			message = ERROR;
@@ -52,7 +37,7 @@ public class TraceValidator implements IValidator<Object> {
 				if(invalidInput != null) {
 					message = "The following input is invalid: " + invalidInput;
 				} else {
-					traces = content;
+					setTraces(content);
 				}
 			} else {
 				message = ERROR;
@@ -64,62 +49,5 @@ public class TraceValidator implements IValidator<Object> {
 		} else {
 			return ValidationStatus.ok();
 		}
-	}
-
-	/**
-	 * Legacy support - better use TraceFactory.parseTraces(...)
-	 * 
-	 * @return {@link List}
-	 */
-	public List<Double> getTracesAsDouble() {
-
-		Set<Double> values = new HashSet<>();
-		for(ITrace trace : TraceFactory.parseTraces(traces, TraceGeneric.class)) {
-			values.add(trace.getValue());
-		}
-
-		List<Double> doubles = new ArrayList<>(values);
-		Collections.sort(doubles);
-
-		return doubles;
-	}
-
-	/**
-	 * Legacy support - better use TraceFactory.parseTraces(...)
-	 * 
-	 * @return {@link List}
-	 */
-	public List<Integer> getTracesAsInteger() {
-
-		Set<Integer> values = new HashSet<>();
-		for(double trace : getTracesAsDouble()) {
-			values.add(Math.round((float)trace));
-		}
-
-		return new ArrayList<>(values);
-	}
-
-	/**
-	 * Legacy support - better use TraceFactory.parseTraces(...)
-	 * 
-	 * @return {@link List}
-	 */
-	public String getTracesAsString() {
-
-		StringBuilder builder = new StringBuilder();
-		if(traces.isBlank()) {
-			DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.#");
-			Iterator<Double> iterator = getTracesAsDouble().iterator();
-			while(iterator.hasNext()) {
-				builder.append(decimalFormat.format(iterator.next()));
-				if(iterator.hasNext()) {
-					builder.append(NamedTraceListUtil.SEPARATOR_TRACE);
-				}
-			}
-		} else {
-			builder.append(traces);
-		}
-
-		return builder.toString();
 	}
 }
