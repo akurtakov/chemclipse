@@ -250,9 +250,11 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 	private void updateIdentificationTarget(IIdentificationTarget identificationTarget) {
 
 		updateMolecularWeightReference(identificationTarget);
+
 		LibraryServiceRunnable runnable = new LibraryServiceRunnable(identificationTarget, referenceMassSpectrum -> {
 
 			scanReference = copyScan(referenceMassSpectrum);
+			updateMolecularIon(identificationTarget, scanReference);
 			Display.getDefault().asyncExec(() -> {
 
 				updateChart();
@@ -278,6 +280,17 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 			Thread.currentThread().interrupt();
 		} catch(ExecutionException e) {
 			Activator.getDefault().getLog().log(Status.error("Updating the reference scan failed.", e));
+		}
+	}
+
+	private void updateMolecularIon(IIdentificationTarget identificationTarget, IScanMSD scanMSD) {
+
+		if(identificationTarget != null && scanMSD != null) {
+			ILibraryInformation libraryInformation = identificationTarget.getLibraryInformation();
+			IIon molecularIon = scanMSD.getIon(libraryInformation.getMolWeight());
+			if(molecularIon.getAbundance() > 0) {
+				scanChartControl.get().setMolecularIon(molecularIon);
+			}
 		}
 	}
 
