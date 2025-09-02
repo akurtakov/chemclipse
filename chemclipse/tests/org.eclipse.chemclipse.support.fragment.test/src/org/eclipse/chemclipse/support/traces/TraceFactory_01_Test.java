@@ -21,196 +21,246 @@ public class TraceFactory_01_Test {
 	@Test
 	public void test01() {
 
-		assertEquals(null, TraceFactory.determineTraceType(null));
+		assertEquals(TraceEmpty.class, TraceFactory.getTraceType(null, DetectorType.AUTO));
 	}
 
 	@Test
 	public void test02() {
 
-		assertEquals(null, TraceFactory.determineTraceType(""));
+		assertEquals(TraceEmpty.class, TraceFactory.getTraceType("", DetectorType.AUTO));
 	}
 
 	@Test
 	public void test03() {
 
-		assertEquals(null, TraceFactory.determineTraceType("  "));
+		assertEquals(TraceEmpty.class, TraceFactory.getTraceType("  ", DetectorType.AUTO));
 	}
 
 	@Test
 	public void test04() {
 
-		assertEquals(TraceTandemMSD.class, TraceFactory.determineTraceType("139 > 111.0 @12"));
+		assertEquals(TraceTandemMSD.class, TraceFactory.getTraceType("139 > 111.0 @12", DetectorType.MSD));
 	}
 
 	@Test
 	public void test05() {
 
-		assertEquals(TraceTandemMSD.class, TraceFactory.determineTraceType("139 > 111.0 @12 (x5.8)"));
+		assertEquals(TraceTandemMSD.class, TraceFactory.getTraceType("139 > 111.0 @12 (x5.8)", DetectorType.MSD));
 	}
 
 	@Test
 	public void test06() {
 
-		assertEquals(TraceHighResMSD.class, TraceFactory.determineTraceType("400.01627±10ppm"));
+		assertEquals(TraceHighResMSD.class, TraceFactory.getTraceType("400.01627±10ppm", DetectorType.MSD));
 	}
 
 	@Test
 	public void test07() {
 
-		assertEquals(TraceHighResMSD.class, TraceFactory.determineTraceType("400.01627±10ppm (x4.7)"));
+		assertEquals(TraceHighResMSD.class, TraceFactory.getTraceType("400.01627±10ppm (x4.7)", DetectorType.MSD));
 	}
 
 	@Test
 	public void test08() {
 
-		assertEquals(TraceGenericDelta.class, TraceFactory.determineTraceType("400.01627±0.02"));
+		assertEquals(TraceHighResMSD.class, TraceFactory.getTraceType("400.01627±0.02", DetectorType.MSD));
 	}
 
 	@Test
 	public void test09() {
 
-		assertEquals(TraceGenericDelta.class, TraceFactory.determineTraceType("400.01627±0.02 (x2.9)"));
+		assertEquals(TraceHighResMSD.class, TraceFactory.getTraceType("400.01627±0.02 (x2.9)", DetectorType.MSD));
 	}
 
 	@Test
 	public void test10() {
 
-		assertEquals(TraceGenericDelta.class, TraceFactory.determineTraceType("400.01627+-0.02"));
+		assertEquals(TraceHighResMSD.class, TraceFactory.getTraceType("400.01627+-0.02", DetectorType.MSD));
 	}
 
 	@Test
 	public void test11() {
 
-		assertEquals(TraceGenericDelta.class, TraceFactory.determineTraceType("400.01627+-0.02 (x2.9)"));
+		assertEquals(TraceHighResMSD.class, TraceFactory.getTraceType("400.01627+-0.02 (x2.9)", DetectorType.MSD));
 	}
 
 	@Test
 	public void test12() {
 
-		assertEquals(TraceHighResMSD.class, TraceFactory.determineTraceType("400.01627+-10ppm"));
+		assertEquals(TraceHighResMSD.class, TraceFactory.getTraceType("400.01627+-10ppm", DetectorType.MSD));
 	}
 
 	@Test
 	public void test13() {
 
-		assertEquals(TraceHighResMSD.class, TraceFactory.determineTraceType("400.01627+-10ppm (x4.7)"));
+		assertEquals(TraceHighResMSD.class, TraceFactory.getTraceType("400.01627+-10ppm (x4.7)", DetectorType.MSD));
 	}
 
 	@Test
 	public void test14() {
 
-		assertEquals(TraceGenericDelta.class, TraceFactory.determineTraceType("400.01627±0.02"));
+		assertEquals(TraceHighResWSD.class, TraceFactory.getTraceType("400.01627±0.02", DetectorType.WSD));
 	}
 
 	@Test
 	public void test15() {
 
-		assertEquals(TraceGenericDelta.class, TraceFactory.determineTraceType("400.01627±0.02 (x2.9)"));
+		assertEquals(TraceHighResWSD.class, TraceFactory.getTraceType("400.01627±0.02 (x2.9)", DetectorType.WSD));
 	}
 
 	@Test
 	public void test16() {
 
-		assertEquals(TraceGenericDelta.class, TraceFactory.determineTraceType("400.01627+-0.02"));
+		assertEquals(TraceHighResWSD.class, TraceFactory.getTraceType("400.01627+-0.02", DetectorType.WSD));
 	}
 
 	@Test
 	public void test17() {
 
-		assertEquals(TraceGenericDelta.class, TraceFactory.determineTraceType("400.01627+-0.02 (x2.9)"));
+		assertEquals(TraceHighResWSD.class, TraceFactory.getTraceType("400.01627+-0.02 (x2.9)", DetectorType.WSD));
 	}
 
 	@Test
 	public void test18() {
 
-		assertEquals(TraceGeneric.class, TraceFactory.determineTraceType("0 - 0"));
+		assertEquals(TraceNominalMSD.class, TraceFactory.getTraceType("0 - 0", DetectorType.MSD));
 	}
 
 	@Test
 	public void test19() {
 
-		assertEquals(TraceGeneric.class, TraceFactory.determineTraceType("55 - 120"));
+		assertEquals(TraceNominalMSD.class, TraceFactory.getTraceType("55 - 120", DetectorType.MSD));
 	}
 
 	@Test
 	public void test20() {
 
-		assertEquals(TraceGeneric.class, TraceFactory.determineTraceType("18 28 32 84 207"));
+		assertEquals(TraceNominalMSD.class, TraceFactory.getTraceType("18 28 32 84 207", DetectorType.MSD));
 	}
 
 	@Test
 	public void test21() {
 
-		/*
-		 * Invalid (mixed space and range)
-		 * But it can't be validated here. It will be validated when parsing traces
-		 */
-		assertEquals(TraceGeneric.class, TraceFactory.determineTraceType("18 28 32 55 - 65 84 207"));
+		assertEquals(TraceNominalMSD.class, TraceFactory.getTraceType("18 28 32 55 - 65 84 207", DetectorType.MSD));
+	}
+
+	@Test
+	public void test21a() {
+
+		assertEquals(TraceNominalMSD.class, TraceFactory.getTraceType("18, 28, 32, 55 - 65, 84, 207", DetectorType.MSD));
 	}
 
 	@Test
 	public void test22() {
 
-		assertEquals(TraceGeneric.class, TraceFactory.determineTraceType("69"));
+		assertEquals(TraceNominalMSD.class, TraceFactory.getTraceType("69", DetectorType.MSD));
 	}
 
 	@Test
 	public void test23() {
 
-		assertEquals(TraceGeneric.class, TraceFactory.determineTraceType("69.5"));
+		assertEquals(TraceNominalMSD.class, TraceFactory.getTraceType("69.5", DetectorType.MSD));
 	}
 
 	@Test
 	public void test24() {
 
-		assertEquals(TraceGeneric.class, TraceFactory.determineTraceType("79 (x10.5)"));
+		assertEquals(TraceNominalMSD.class, TraceFactory.getTraceType("79 (x10.5)", DetectorType.MSD));
 	}
 
 	@Test
 	public void test25() {
 
-		assertEquals(TraceGeneric.class, TraceFactory.determineTraceType("79 (x8)"));
+		assertEquals(TraceNominalMSD.class, TraceFactory.getTraceType("79 (x8)", DetectorType.MSD));
 	}
 
 	@Test
 	public void test26() {
 
-		assertEquals(TraceGeneric.class, TraceFactory.determineTraceType("79.4 (x8))"));
+		assertEquals(TraceNominalMSD.class, TraceFactory.getTraceType("79.4 (x8))", DetectorType.MSD));
 	}
 
 	@Test
 	public void test27() {
 
-		assertEquals(TraceGeneric.class, TraceFactory.determineTraceType("427.240"));
+		assertEquals(TraceHighResMSD.class, TraceFactory.getTraceType("427.240", DetectorType.MSD));
 	}
 
 	@Test
 	public void test28() {
 
-		assertEquals(TraceGeneric.class, TraceFactory.determineTraceType("279.092 (x5.3)"));
+		assertEquals(TraceHighResMSD.class, TraceFactory.getTraceType("279.092 (x5.3)", DetectorType.MSD));
 	}
 
 	@Test
 	public void test29() {
 
-		assertEquals(TraceGeneric.class, TraceFactory.determineTraceType("200"));
+		assertEquals(TraceRasteredWSD.class, TraceFactory.getTraceType("200", DetectorType.WSD));
 	}
 
 	@Test
 	public void test30() {
 
-		assertEquals(TraceGeneric.class, TraceFactory.determineTraceType("427.240"));
+		assertEquals(TraceHighResWSD.class, TraceFactory.getTraceType("427.240", DetectorType.WSD));
 	}
 
 	@Test
 	public void test31() {
 
-		assertEquals(TraceGeneric.class, TraceFactory.determineTraceType("279.092 (x5.3)"));
+		assertEquals(TraceHighResWSD.class, TraceFactory.getTraceType("279.092 (x5.3)", DetectorType.WSD));
 	}
 
 	@Test
 	public void test32() {
 
-		assertEquals(TraceGeneric.class, TraceFactory.determineTraceType("1801 (x1.6)"));
+		assertEquals(TraceRasteredVSD.class, TraceFactory.getTraceType("1800.4", DetectorType.VSD));
+	}
+
+	@Test
+	public void test33() {
+
+		assertEquals(TraceRasteredVSD.class, TraceFactory.getTraceType("1800.5", DetectorType.VSD));
+	}
+
+	@Test
+	public void test34() {
+
+		assertEquals(TraceRasteredVSD.class, TraceFactory.getTraceType("1801", DetectorType.VSD));
+	}
+
+	@Test
+	public void test35() {
+
+		assertEquals(TraceRasteredVSD.class, TraceFactory.getTraceType("1801 (x1.6)", DetectorType.VSD));
+	}
+
+	@Test
+	public void test36() {
+
+		assertEquals(TraceGenericDelta.class, TraceFactory.getTraceType("1801.203", DetectorType.VSD));
+	}
+
+	@Test
+	public void test37() {
+
+		assertEquals(TraceGenericDelta.class, TraceFactory.getTraceType("1801.2903 (x1.6)", DetectorType.VSD));
+	}
+
+	@Test
+	public void test38() {
+
+		assertEquals(TraceNominalMSD.class, TraceFactory.getTraceType("279.1 (x5.32)", DetectorType.MSD));
+	}
+
+	@Test
+	public void test39() {
+
+		assertEquals(TraceRasteredWSD.class, TraceFactory.getTraceType("400.1 (x5.32)", DetectorType.WSD));
+	}
+
+	@Test
+	public void test40() {
+
+		assertEquals(TraceRasteredVSD.class, TraceFactory.getTraceType("1800.1 (x5.32)", DetectorType.VSD));
 	}
 }
