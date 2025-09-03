@@ -13,6 +13,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.settings;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,12 +37,14 @@ public class BaselineDetectorSettings extends AbstractBaselineDetectorSettings {
 	@JsonPropertyDescription(value = "The number of iterations to apply the SNIP filter.")
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_ITERATIONS, maxValue = PreferenceSupplier.MAX_ITERATIONS)
 	private int iterations = 100;
-
 	@JsonProperty(value = "Window Size", defaultValue = "5")
 	@JsonPropertyDescription(value = "Window Size: 3, 5, 7, ..., 45")
 	@JsonDeserialize(using = WindowSizeDeserializer.class)
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_WINDOW_SIZE, maxValue = PreferenceSupplier.MAX_WINDOW_SIZE, validation = Validation.ODD_NUMBER_INCLUDING_ZERO)
 	private int windowSize = 5;
+	@JsonProperty(value = "Specific Traces", defaultValue = "")
+	@JsonPropertyDescription(value = "Instead of the total signal, use the following traces (ions or wavelenghts) to calculate the baseline.")
+	private String specificTraces = "";
 
 	public int getWindowSize() {
 
@@ -63,6 +66,16 @@ public class BaselineDetectorSettings extends AbstractBaselineDetectorSettings {
 		this.iterations = iterations;
 	}
 
+	public String getSpecificTraces() {
+
+		return specificTraces;
+	}
+
+	public void setSpecificTraces(String specificTraces) {
+
+		this.specificTraces = specificTraces;
+	}
+
 	@Override
 	public List<LiteratureReference> getLiteratureReferences() {
 
@@ -75,7 +88,7 @@ public class BaselineDetectorSettings extends AbstractBaselineDetectorSettings {
 
 		String content;
 		try {
-			content = new String(BaselineDetectorSettings.class.getResourceAsStream(file).readAllBytes());
+			content = new String(BaselineDetectorSettings.class.getResourceAsStream(file).readAllBytes(), StandardCharsets.US_ASCII);
 		} catch(Exception e) {
 			content = doi;
 			logger.warn(e);
