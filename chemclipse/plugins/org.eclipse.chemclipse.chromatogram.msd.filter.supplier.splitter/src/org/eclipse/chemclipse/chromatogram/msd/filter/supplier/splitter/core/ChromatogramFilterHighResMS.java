@@ -44,24 +44,31 @@ public class ChromatogramFilterHighResMS extends AbstractChromatogramFilterMSD {
 		processingInfo.addMessages(validation);
 
 		if(!processingInfo.hasErrorMessages()) {
-			HeaderField headerField = getHeaderField(chromatogramFilterSettings);
-			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
-			if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
-				/*
-				 * Split selected traces.
-				 */
-				Set<TraceHighResMSD> specificTraces = getSpecificTraces(chromatogramFilterSettings);
-				if(!specificTraces.isEmpty()) {
-					List<IChromatogramMSD> chromatograms = HighResolutionSupport.extractHighResolutionData(chromatogramMSD, headerField, specificTraces);
-					for(IChromatogramMSD chromatogramReferenceMSD : chromatograms) {
-						chromatogramMSD.addReferencedChromatogram(chromatogramReferenceMSD);
+			if(chromatogramFilterSettings instanceof FilterSettingsHighResMS filterSettings) {
+				HeaderField headerField = filterSettings.getHeaderField();
+				IChromatogram chromatogram = chromatogramSelection.getChromatogram();
+				if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
+					/*
+					 * Split selected traces.
+					 */
+					Set<TraceHighResMSD> specificTraces = getSpecificTraces(filterSettings);
+					if(!specificTraces.isEmpty()) {
+						boolean enforceFullTimeRange = filterSettings.isEnforceFullTimeRange();
+						boolean separateTraces = filterSettings.isSeparateTraces();
+						List<IChromatogramMSD> chromatograms = HighResolutionSupport.extractHighResolutionData(chromatogramMSD, headerField, enforceFullTimeRange, specificTraces, separateTraces);
+						for(IChromatogramMSD chromatogramReferenceMSD : chromatograms) {
+							chromatogramMSD.addReferencedChromatogram(chromatogramReferenceMSD);
+						}
 					}
 				}
-			}
 
-			chromatogramSelection.getChromatogram().setDirty(true);
-			processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "The chromatogram was splitted into MS/MS reference chromatograms."));
+				chromatogramSelection.getChromatogram().setDirty(true);
+				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "The chromatogram was splitted into MS/MS reference chromatograms."));
+			} else {
+				processingInfo.addWarnMessage("Splitter (High Resolution)", "The filter settings are not of type: " + FilterSettingsHighResMS.class);
+			}
 		}
+
 		return processingInfo;
 	}
 
@@ -72,44 +79,20 @@ public class ChromatogramFilterHighResMS extends AbstractChromatogramFilterMSD {
 		return applyFilter(chromatogramSelection, splitterSettings, monitor);
 	}
 
-	private int getBinning(IChromatogramFilterSettings chromatogramFilterSettings) {
+	private Set<TraceHighResMSD> getSpecificTraces(FilterSettingsHighResMS filterSettingsHighResMS) {
 
-		int binning = 0;
-		if(chromatogramFilterSettings instanceof FilterSettingsHighResMS filterSettingsHighResMS) {
-			binning = filterSettingsHighResMS.getBinning();
-		}
-
-		return binning;
-	}
-
-	private HeaderField getHeaderField(IChromatogramFilterSettings chromatogramFilterSettings) {
-
-		HeaderField headerField = HeaderField.DATA_NAME;
-		if(chromatogramFilterSettings instanceof FilterSettingsHighResMS filterSettingsHighResMS) {
-			headerField = filterSettingsHighResMS.getHeaderField();
-		}
-
-		return headerField;
-	}
-
-	/*
-	 */
-	private Set<TraceHighResMSD> getSpecificTraces(IChromatogramFilterSettings chromatogramFilterSettings) {
-
-		int ppm = getBinning(chromatogramFilterSettings);
+		int ppm = filterSettingsHighResMS.getBinning();
 		Set<TraceHighResMSD> specificTransitions = new HashSet<>();
-		if(chromatogramFilterSettings instanceof FilterSettingsHighResMS filterSettingsHighResMS) {
-			String content = filterSettingsHighResMS.getSpecificTraces();
-			for(TraceHighResMSD traceHighResMSD : TraceFactory.parseTraces(content, TraceHighResMSD.class)) {
-				/*
-				 * Auto-adjust binning if no value was set yet.
-				 */
-				if(traceHighResMSD.getPPM() == 0) {
-					traceHighResMSD.setPPM(ppm);
-				}
-
-				specificTransitions.add(traceHighResMSD);
+		String content = filterSettingsHighResMS.getSpecificTraces();
+		for(TraceHighResMSD traceHighResMSD : TraceFactory.parseTraces(content, TraceHighResMSD.class)) {
+			/*
+			 * Auto-adjust binning if no value was set yet.
+			 */
+			if(traceHighResMSD.getPPM() == 0) {
+				traceHighResMSD.setPPM(ppm);
 			}
+
+			specificTransitions.add(traceHighResMSD);
 		}
 
 		return specificTransitions;

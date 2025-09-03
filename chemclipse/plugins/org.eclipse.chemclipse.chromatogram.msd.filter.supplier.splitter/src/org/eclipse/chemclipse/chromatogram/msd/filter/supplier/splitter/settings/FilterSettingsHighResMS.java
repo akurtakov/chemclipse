@@ -33,6 +33,12 @@ public class FilterSettingsHighResMS extends AbstractChromatogramFilterSettings 
 	@JsonPropertyDescription(value = "Extract specific traces, e.g.: '400.01627' or '400.01627±5ppm'")
 	@StringSettingsProperty(allowEmpty = false, isMultiLine = true)
 	private String specificTraces = "";
+	@JsonProperty(value = "Enforce Full Time Range", defaultValue = "false")
+	@JsonPropertyDescription(value = "Create a reference chromatogram that could contain empty scans.")
+	boolean enforceFullTimeRange = false;
+	@JsonProperty(value = "Separate Traces", defaultValue = "true")
+	@JsonPropertyDescription(value = "Each trace is saved in a separate reference chromatogram.")
+	boolean separateTraces = true;
 
 	public HeaderField getHeaderField() {
 
@@ -62,5 +68,25 @@ public class FilterSettingsHighResMS extends AbstractChromatogramFilterSettings 
 	public void setSpecificTraces(String specificTraces) {
 
 		this.specificTraces = specificTraces;
+	}
+
+	public boolean isEnforceFullTimeRange() {
+
+		return enforceFullTimeRange;
+	}
+
+	public void setEnforceFullTimeRange(boolean enforceFullTimeRange) {
+
+		this.enforceFullTimeRange = enforceFullTimeRange;
+	}
+
+	public boolean isSeparateTraces() {
+
+		return separateTraces;
+	}
+
+	public void setSeparateTraces(boolean separateTraces) {
+
+		this.separateTraces = separateTraces;
 	}
 }
