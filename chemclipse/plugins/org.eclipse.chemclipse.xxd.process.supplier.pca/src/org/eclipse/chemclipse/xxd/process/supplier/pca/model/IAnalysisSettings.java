@@ -60,6 +60,14 @@ public interface IAnalysisSettings {
 
 	void setCrossValidation(boolean crossValidation);
 
+	String getComparisonGroup1();
+
+	void setComparisonGroup1(String comparisonGroup1);
+
+	String getComparisonGroup2();
+
+	void setComparisonGroup2(String comparisonGroup2);
+
 	TreeMap<Integer, Integer> getFilterDistribution();
 
 	void setFilterDistribution(TreeMap<Integer, Integer> distribution);

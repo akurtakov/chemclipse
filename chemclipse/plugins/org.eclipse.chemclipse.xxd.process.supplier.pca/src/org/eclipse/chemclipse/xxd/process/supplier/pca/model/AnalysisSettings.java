@@ -32,6 +32,8 @@ public class AnalysisSettings implements IAnalysisSettings {
 	private LabelOptionPCA labelOptionPCA = PreferenceSupplier.getLabelOptionPCA();
 	private String colorScheme = PreferenceSupplier.getColorScheme();
 	private String groupName = "--";
+	private String comparisonGroup1 = "";
+	private String comparisonGroup2 = "";
 
 	private IPreprocessingSettings preprocessingSettings = new PreprocessingSettings();
 
@@ -181,5 +183,31 @@ public class AnalysisSettings implements IAnalysisSettings {
 	public void setFilterDistribution(TreeMap<Integer, Integer> distribution) {
 
 		this.filterDistribution = distribution;
+	}
+
+	@Override
+	public String getComparisonGroup1() {
+
+		return comparisonGroup1;
+	}
+
+	@Override
+	public void setComparisonGroup1(String comparisonGroup1) {
+
+		this.comparisonGroup1 = comparisonGroup1;
+
+	}
+
+	@Override
+	public String getComparisonGroup2() {
+
+		return comparisonGroup2;
+	}
+
+	@Override
+	public void setComparisonGroup2(String comparisonGroup2) {
+
+		this.comparisonGroup2 = comparisonGroup2;
+
 	}
 }
