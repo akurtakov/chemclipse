@@ -36,6 +36,8 @@ import org.eclipse.swtchart.extensions.scattercharts.IScatterSeriesSettings;
 import org.eclipse.swtchart.extensions.scattercharts.ScatterSeriesData;
 
 public class SeriesConverter {
+	
+	
 
 	public static List<IScatterSeriesData> basisVectorsToSeries(IResultsMVA pcaResults, List<IVariable> highlighted, int pcX, int pcY) {
 
@@ -183,6 +185,13 @@ public class SeriesConverter {
 		}
 
 		return scatterSeriesDataList;
+	}
+	
+	public static List<IScatterSeriesData> foldChangeToSeries(IResultsMVA pcaResults, String group1, String group2){
+		
+		List<IScatterSeriesData> scatterSeriesDataList = new ArrayList<>();
+		return scatterSeriesDataList;
+		
 	}
 
 	private static PlotSymbolType createFromSettings(IPreferenceStore preferenceStore, String name) {
