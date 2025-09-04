@@ -37,6 +37,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.Preference
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePageLoadingPlot;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -48,15 +49,17 @@ import org.eclipse.swt.widgets.Display;
 
 public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI {
 
+	private static final String FOLD_CHANGE_GROUP_NONE = "--";
+
 	private AtomicReference<FoldChangePlot> plotControl = new AtomicReference<>();
-	private AtomicReference<PrincipalComponentUI> principalComponentControl = new AtomicReference<>();
 	private AtomicReference<ComboViewer> comboViewerGroup1 = new AtomicReference<>();
 	private AtomicReference<ComboViewer> comboViewerGroup2 = new AtomicReference<>();
 	private EvaluationPCA evaluationPCA = null;
 	private Composite control;
 	private ISamplesPCA<IVariable, ISample> samples = null;
+	private ArrayList<String> groups = new ArrayList<>();
 
-	ExtendedFoldChangePlot(Composite parent, int style) {
+	public ExtendedFoldChangePlot(Composite parent, int style) {
 
 		super(parent, style);
 		createControl();
@@ -92,6 +95,7 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 	public void setInput(EvaluationPCA evaluationPCA) {
 
 		this.evaluationPCA = evaluationPCA;
+		updateFoldChangeGroups();
 		updateInput();
 	}
 
@@ -107,7 +111,15 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 
 		createToolbarMain(this);
 		createPlot(this);
+		initialize();
 		control = this;
+	}
+
+	private void initialize() {
+
+		groups.add(FOLD_CHANGE_GROUP_NONE);
+		comboViewerGroup1.get().setInput(groups);
+		comboViewerGroup2.get().setSelection(new StructuredSelection(FOLD_CHANGE_GROUP_NONE));
 	}
 
 	private void createToolbarMain(Composite parent) {
@@ -121,7 +133,7 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 		createComboViewerGroup1(this);
 		createComboViewerGroup2(this);
 		createSettingsButton(composite);
-		createButtonHelp(composite, HelpContext.LOADINGS_PLOT);
+		createButtonHelp(composite, HelpContext.FOLD_CHANGE_PLOT);
 	}
 
 	private void createComboViewerGroup1(Composite parent) {
@@ -206,6 +218,7 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 
 		FoldChangePlot plot = new FoldChangePlot(parent, SWT.BORDER);
 		plot.setLayoutData(new GridData(GridData.FILL_BOTH));
+		plotControl.set(plot);
 	}
 
 	private void createSettingsButton(Composite parent) {
@@ -222,33 +235,42 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 
 	private void applySettings() {
 
-		PrincipalComponentUI principalComponentUI = principalComponentControl.get();
-		int pcX = principalComponentUI.getPCX();
-		int pcY = principalComponentUI.getPCY();
-		updatePlot(pcX, pcY);
+		updatePlot("group1", "group2");
 
 	}
 
 	private void updateWidgets() {
 
-		PrincipalComponentUI principalComponentUI = principalComponentControl.get();
-		if(evaluationPCA != null) {
-			IAnalysisSettings analysisSettings = evaluationPCA.getSamples().getAnalysisSettings();
-			principalComponentUI.setInput(analysisSettings);
-		} else {
-			principalComponentUI.setInput(null);
-		}
 	}
 
-	private void updatePlot(int pcX, int pcY) {
+	private void updatePlot(String group1, String group2) {
 
 		FoldChangePlot plot = plotControl.get();
 		plot.deleteSeries();
 
 		if(evaluationPCA != null) {
-			plot.setInput(evaluationPCA, pcX, pcY);
+			plot.setInput(evaluationPCA, group1, group2);
 		} else {
-			plot.setInput(null, pcX, pcY);
+			plot.setInput(null, group1, group2);
+		}
+	}
+
+	private void updateFoldChangeGroups() {
+
+		groups.clear();
+		groups.add(FOLD_CHANGE_GROUP_NONE);
+
+		if(samples != null) {
+			for(ISample sample : samples.getSamples()) {
+				if(sample.getGroupName() == null) {
+					logger.warn("Fix GroupName (must not be null): " + sample);
+					sample.setGroupName("");
+				}
+			}
+			/*
+			 * Map Group Names
+			 */
+			groups.addAll(samples.getSamples().stream().map(x -> x.getGroupName()).distinct().toList());
 		}
 	}
 

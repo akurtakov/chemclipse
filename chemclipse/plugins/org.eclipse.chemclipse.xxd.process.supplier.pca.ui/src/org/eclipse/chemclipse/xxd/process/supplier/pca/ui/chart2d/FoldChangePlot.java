@@ -27,13 +27,13 @@ public class FoldChangePlot extends AbstractPlotPCA {
 		super(parent, style, "Fold Change Plot");
 	}
 
-	public void setInput(EvaluationPCA evaluationPCA, int pcX, int pcY) {
+	public void setInput(EvaluationPCA evaluationPCA, String group1, String group2) {
 
 		deleteSeries();
 		if(evaluationPCA != null) {
 			IResultsMVA resultsPCA = evaluationPCA.getResults();
 			List<IScatterSeriesData> series;
-			series = SeriesConverter.foldChangeToSeries(resultsPCA, "group1", "group2");
+			series = SeriesConverter.foldChangeToSeries(resultsPCA, group1, group2);
 			addSeriesData(series);
 		}
 		redraw();
