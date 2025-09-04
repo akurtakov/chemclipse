@@ -23,4 +23,5 @@ public class HelpContext {
 
 	public static final String LOADINGS_PLOT = PREFIX + "loadings_plot"; //$NON-NLS-1$
 	public static final String SCORE_PLOT = PREFIX + "score_plot"; //$NON-NLS-1$
+	public static final String FOLD_CHANGE_PLOT = PREFIX + "fold_change_plot"; //$NON-NLS-1$
 }

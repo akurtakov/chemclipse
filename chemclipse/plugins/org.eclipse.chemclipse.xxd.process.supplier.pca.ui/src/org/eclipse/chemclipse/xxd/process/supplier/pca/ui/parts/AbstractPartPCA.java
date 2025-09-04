@@ -37,6 +37,7 @@ public abstract class AbstractPartPCA<T extends Composite> extends AbstractPart<
 		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_FEATURES, IChemClipseEvents.EVENT_BROKER_DATA);
 		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_LABELS, IChemClipseEvents.EVENT_BROKER_DATA);
 		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_RESULT, IChemClipseEvents.EVENT_BROKER_DATA);
+		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_GROUPS, IChemClipseEvents.EVENT_BROKER_DATA);
 		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_EDITOR_PCA_CLOSE, IChemClipseEvents.EVENT_BROKER_DATA);
 		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, IChemClipseEvents.EVENT_BROKER_DATA);
 		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE, IChemClipseEvents.EVENT_BROKER_DATA);
@@ -46,7 +47,7 @@ public abstract class AbstractPartPCA<T extends Composite> extends AbstractPart<
 	@Override
 	protected boolean isUpdateTopic(String topic) {
 
-		return isUpdateSelection(topic) || isUpdateColorSchemeEvent(topic) || isUpdateFeaturesEvent(topic) || isUpdateLabelsEvent(topic) || isUpdateResultEvent(topic) || isUnloadEvent(topic);
+		return isUpdateSelection(topic) || isUpdateColorSchemeEvent(topic) || isUpdateFeaturesEvent(topic) || isUpdateLabelsEvent(topic) || isUpdateResultEvent(topic) || isUpdateGroupsEvent(topic) || isUnloadEvent(topic);
 	}
 
 	protected boolean isUpdateSelection(String topic) {
@@ -72,6 +73,11 @@ public abstract class AbstractPartPCA<T extends Composite> extends AbstractPart<
 	protected boolean isUpdateResultEvent(String topic) {
 
 		return topic.equals(IChemClipseEvents.TOPIC_PCA_UPDATE_RESULT);
+	}
+
+	protected boolean isUpdateGroupsEvent(String topic) {
+
+		return topic.equals(IChemClipseEvents.TOPIC_PCA_UPDATE_GROUPS);
 	}
 
 	protected boolean isUnloadEvent(String topic) {
