@@ -17,15 +17,15 @@ import static org.junit.Assert.assertEquals;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.identifier.LibraryInformation;
 import org.eclipse.chemclipse.xxd.identifier.supplier.pubchem.rest.PowerUserGateway;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class Vioxx_Test {
 
-	private ILibraryInformation libraryInformation;
+	private static ILibraryInformation libraryInformation;
 
-	@Before
-	public void setUp() {
+	@BeforeClass
+	public static void setUp() {
 
 		libraryInformation = new LibraryInformation();
 		libraryInformation.setName("Vioxx");

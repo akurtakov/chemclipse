@@ -14,22 +14,31 @@ package org.eclipse.chemclipse.xxd.converter.supplier.ocx.io;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+
+import org.eclipse.chemclipse.processing.core.IProcessingInfo;
+import org.eclipse.chemclipse.wsd.converter.chromatogram.ChromatogramConverterWSD;
+import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
 import org.eclipse.chemclipse.wsd.model.core.IScanWSD;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.TestPathHelper;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.preferences.PreferenceSupplier;
+import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ChromatogramReader_4_DAD_1501_ITest extends ChromatogramReaderWSDTestCase {
+public class ChromatogramReader_4_DAD_1501_ITest {
 
-	@Override
-	@Before
-	public void setUp() throws Exception {
+	private static IChromatogramWSD chromatogram;
+
+	@BeforeClass
+	public static void setUp() {
 
 		PreferenceSupplier.setForceLoadAlternateDetector(true);
-		pathImport = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_4_DAD_1501);
-		super.setUp();
+		File fileImport = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_4_DAD_1501));
+		IProcessingInfo<IChromatogramWSD> processingInfo = ChromatogramConverterWSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
+		chromatogram = processingInfo.getProcessingResult();
 	}
 
 	@After

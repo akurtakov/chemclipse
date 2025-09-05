@@ -25,52 +25,48 @@ import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ChromatogramImportExport110_ITest {
 
-	protected IChromatogramMSD chromatogramImport;
-	protected IChromatogramMSD chromatogram;
-	protected String pathImport;
-	protected String pathExport;
-	protected File fileImport;
-	protected File fileExport;
-	protected String extensionPointImport;
-	protected String extensionPointExportReimport;
+	private static IChromatogramMSD chromatogramImport;
+	private static IChromatogramMSD chromatogram;
+	private static File fileImport;
+	private static File fileExport;
 
-	@Before
-	public void setUp() {
+	@BeforeClass
+	public static void setUp() {
 
 		/*
 		 * Import
 		 */
-		pathImport = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
-		extensionPointImport = VersionConstants.CONVERTER_ID_CHROMATOGRAM;
+		String pathImport = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
+		String extensionPointImport = VersionConstants.CONVERTER_ID_CHROMATOGRAM;
 		/*
 		 * Export/Reimport
 		 */
 		File directory = new File(TestPathHelper.DIRECTORY_EXPORT_TEST);
 		directory.mkdir();
-		pathExport = TestPathHelper.getAbsolutePath(TestPathHelper.DIRECTORY_EXPORT_TEST) + File.separator + "Test.mzML";
-		extensionPointExportReimport = "org.eclipse.chemclipse.msd.converter.supplier.mzml";
+		String pathExport = TestPathHelper.getAbsolutePath(TestPathHelper.DIRECTORY_EXPORT_TEST) + File.separator + "Test.mzML";
+		String extensionPointExportReimport = "org.eclipse.chemclipse.msd.converter.supplier.mzml";
 		/*
 		 * Import the chromatogram.
 		 */
-		fileImport = new File(this.pathImport);
-		IProcessingInfo<IChromatogramMSD> processingInfoImport = ChromatogramConverterMSD.getInstance().convert(fileImport, this.extensionPointImport, new NullProgressMonitor());
+		fileImport = new File(pathImport);
+		IProcessingInfo<IChromatogramMSD> processingInfoImport = ChromatogramConverterMSD.getInstance().convert(fileImport, extensionPointImport, new NullProgressMonitor());
 		chromatogramImport = processingInfoImport.getProcessingResult();
 		/*
 		 * Export the chromatogram.
 		 */
-		fileExport = new File(this.pathExport);
-		IProcessingInfo<File> processingInfoExport = ChromatogramConverterMSD.getInstance().convert(fileExport, chromatogramImport, this.extensionPointExportReimport, new NullProgressMonitor());
+		fileExport = new File(pathExport);
+		IProcessingInfo<File> processingInfoExport = ChromatogramConverterMSD.getInstance().convert(fileExport, chromatogramImport, extensionPointExportReimport, new NullProgressMonitor());
 		fileExport = processingInfoExport.getProcessingResult();
 		/*
 		 * Reimport the exported chromatogram.
 		 */
 		chromatogramImport = null;
-		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileExport, this.extensionPointExportReimport, new NullProgressMonitor());
+		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileExport, extensionPointExportReimport, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();
 	}
 

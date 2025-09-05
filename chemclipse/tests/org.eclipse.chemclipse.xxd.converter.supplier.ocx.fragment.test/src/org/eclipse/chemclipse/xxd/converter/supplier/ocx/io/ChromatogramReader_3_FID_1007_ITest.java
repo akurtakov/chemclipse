@@ -14,19 +14,28 @@ package org.eclipse.chemclipse.xxd.converter.supplier.ocx.io;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+
+import org.eclipse.chemclipse.csd.converter.chromatogram.ChromatogramConverterCSD;
+import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.model.core.IScan;
+import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.TestPathHelper;
-import org.junit.Before;
+import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ChromatogramReader_3_FID_1007_ITest extends ChromatogramReaderFIDTestCase {
+public class ChromatogramReader_3_FID_1007_ITest {
 
-	@Override
-	@Before
-	public void setUp() throws Exception {
+	private static IChromatogramCSD chromatogram;
 
-		pathImport = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_3_FID_1007);
-		super.setUp();
+	@BeforeClass
+	public static void setUp() {
+
+		File fileImport = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_3_FID_1007));
+		IProcessingInfo<IChromatogramCSD> processingInfo = ChromatogramConverterCSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
+		chromatogram = processingInfo.getProcessingResult();
 	}
 
 	@Test

@@ -31,4 +31,6 @@ public class VersionConstants {
 	public static final String FILTER_EXTENSION_METHOD = "*" + FILE_EXTENSION_METHOD;
 	public static final String FILTER_NAME_METHOD = DESCRIPTION_METHOD + " (*" + FILE_EXTENSION_METHOD + ")";
 	public static final String CONVERTER_ID_METHOD = "org.eclipse.chemclipse.xxd.converter.supplier.chemclipse.processMethodSupplier";
+
+	public static final String CONVERTER_ID_PEAKS = "org.eclipse.chemclipse.xxd.converter.supplier.chemclipse.peaks";
 }

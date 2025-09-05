@@ -14,24 +14,32 @@ package org.eclipse.chemclipse.xxd.converter.supplier.ocx.io;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
 import java.util.Set;
 
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
+import org.eclipse.chemclipse.msd.converter.peak.PeakConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IPeaksMSD;
+import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.TestPathHelper;
-import org.junit.Before;
+import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class PeakReader_1_MSD_1300_ITest extends PeakReaderMSDTestCase {
+public class PeakReader_1_MSD_1300_ITest {
 
-	@Override
-	@Before
-	public void setUp() throws Exception {
+	private static IPeaksMSD peaks;
 
-		pathImport = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_MSD_1300);
-		super.setUp();
+	@BeforeClass
+	public static void setUp() {
+
+		File fileImport = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_MSD_1300));
+		IProcessingInfo<IPeaksMSD> processingInfo = PeakConverterMSD.convert(fileImport, VersionConstants.CONVERTER_ID_PEAKS, new NullProgressMonitor());
+		peaks = processingInfo.getProcessingResult();
 	}
 
 	@Test
