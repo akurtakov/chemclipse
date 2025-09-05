@@ -33,7 +33,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          CHANGED_FILES=$(gh pr view ${{ github.event.pull_request.number }} --json files --jq '.files[].path')
+          CHANGED_FILES=$(gh pr view ${{ github.event.pull_request.number }} --json files --jq '.files[] | select(.additions > 0) | .path')
           JAVA_FILES=$(echo "$CHANGED_FILES" | grep '\.java$' || true)
           echo "java=$(echo "$JAVA_FILES" | tr '\n' ' ')" >> $GITHUB_OUTPUT
 
