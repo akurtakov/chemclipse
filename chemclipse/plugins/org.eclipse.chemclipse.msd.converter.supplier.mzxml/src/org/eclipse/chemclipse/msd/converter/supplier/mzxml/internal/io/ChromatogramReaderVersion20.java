@@ -135,6 +135,9 @@ public class ChromatogramReaderVersion20 extends AbstractChromatogramReaderVersi
 				 * Get the ions.
 				 */
 				Peaks peaks = scan.getPeaks();
+				if(peaks == null) {
+					continue;
+				}
 				ByteBuffer byteBuffer = ByteBuffer.wrap(peaks.getValue());
 				/*
 				 * Byte Order

@@ -17,6 +17,8 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.datatype.Duration;
+
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -25,7 +27,6 @@ import jakarta.xml.bind.annotation.XmlElements;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlSchemaType;
 import jakarta.xml.bind.annotation.XmlType;
-import javax.xml.datatype.Duration;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {"scanOrigin", "precursorMz", "maldi", "peaks", "nameValueAndComment", "scan"})
@@ -36,56 +37,81 @@ public class Scan implements Serializable {
 	private List<ScanOrigin> scanOrigin;
 	private List<PrecursorMz> precursorMz;
 	private Maldi maldi;
+
 	@XmlElement(required = true, nillable = true)
 	private List<Peaks> peaks;
+
 	@XmlElements({@XmlElement(name = "nameValue", type = NameValue.class), @XmlElement(name = "comment", type = String.class)})
 	private List<Serializable> nameValueAndComment;
+
 	private List<Scan> scan;
+
 	@XmlAttribute(name = "num", required = true)
 	@XmlSchemaType(name = "positiveInteger")
 	private BigInteger num;
+
 	@XmlAttribute(name = "msLevel", required = true)
 	@XmlSchemaType(name = "positiveInteger")
 	private BigInteger msLevel;
+
 	@XmlAttribute(name = "peaksCount", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	private BigInteger peaksCount;
+
 	@XmlAttribute(name = "polarity")
 	private String polarity;
+
 	@XmlAttribute(name = "scanType")
 	private String scanType;
+
 	@XmlAttribute(name = "filterLine")
 	private String filterLine;
+
 	@XmlAttribute(name = "centroided")
 	private Boolean centroided;
+
 	@XmlAttribute(name = "deisotoped")
 	private Boolean deisotoped;
+
 	@XmlAttribute(name = "chargeDeconvoluted")
 	private Boolean chargeDeconvoluted;
+
 	@XmlAttribute(name = "retentionTime")
 	private Duration retentionTime;
+
 	@XmlAttribute(name = "ionisationEnergy")
 	private Float ionisationEnergy;
+
 	@XmlAttribute(name = "collisionEnergy")
 	private Float collisionEnergy;
+
 	@XmlAttribute(name = "cidGasPressure")
 	private Float cidGasPressure;
+
 	@XmlAttribute(name = "startMz")
 	private Float startMz;
+
 	@XmlAttribute(name = "endMz")
 	private Float endMz;
+
 	@XmlAttribute(name = "lowMz")
 	private Float lowMz;
+
 	@XmlAttribute(name = "highMz")
 	private Float highMz;
+
 	@XmlAttribute(name = "basePeakMz")
 	private Float basePeakMz;
+
 	@XmlAttribute(name = "basePeakIntensity")
 	private Float basePeakIntensity;
+
 	@XmlAttribute(name = "totIonCurrent")
 	private Float totIonCurrent;
+
 	@XmlAttribute(name = "msInstrumentID")
 	private Integer msInstrumentID;
+
 	@XmlAttribute(name = "compensationVoltage")
 	private Float compensationVoltage;
 
