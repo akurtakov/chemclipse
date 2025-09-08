@@ -15,30 +15,48 @@ package org.eclipse.chemclipse.msd.converter.supplier.excel.io;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 
+import org.eclipse.chemclipse.converter.exceptions.FileIsNotWriteableException;
+import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.converter.supplier.excel.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.excel.TestPathHelper;
+import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
+import org.eclipse.chemclipse.processing.core.IProcessingInfo;
+import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ChromatogramExport_1_ITest extends ChromatogramReaderTestCase {
+public class ChromatogramExport_1_ITest {
 
-	private ChromatogramWriter chromatogramWriter;
+	private ChromatogramWriter chromatogramWriter = new ChromatogramWriter();
 
-	@Before
-	public void setUp() throws Exception {
-		pathImport = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
-		chromatogramWriter = new ChromatogramWriter();
-		super.setUp();
+	private static IChromatogramMSD chromatogram;
+	private static File file;
+
+	@BeforeClass
+	public static void setUp() {
+
+		File fileImport = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1));
+		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
+		chromatogram = processingInfo.getProcessingResult();
+		file = new File(PathResolver.getAbsolutePath(TestPathHelper.DIRECTORY_EXPORT_TEST) + File.separator + "Test.xlsx");
+	}
+
+	@AfterClass
+	public static void tearDown() {
+
+		file.delete();
 	}
 
 	@Test
-	public void testExport_1() throws Exception {
+	public void testExport() throws FileIsNotWriteableException, IOException {
+
 		new File(TestPathHelper.DIRECTORY_EXPORT_TEST).mkdirs();
-		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.DIRECTORY_EXPORT_TEST) + File.separator + "Test.xlsx");
+
 		chromatogramWriter.writeChromatogram(file, chromatogram, new NullProgressMonitor());
 		assertTrue(file.length() > 0);
-		file.delete();
 	}
 }

@@ -17,30 +17,43 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
+import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
+import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
+import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.xxd.converter.supplier.csv.TestPathHelper;
 import org.eclipse.chemclipse.xxd.converter.supplier.csv.io.core.ChromatogramWriter;
+import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ChromatogramWriter_1_ITest extends ChromatogramReaderTestCase {
+public class ChromatogramWriter_1_ITest {
 
-	private ChromatogramWriter chromatogramWriter;
+	private ChromatogramWriter chromatogramWriter = new ChromatogramWriter();
 
-	@Override
-	@Before
-	public void setUp() {
+	private static IChromatogramMSD chromatogram;
+	private static File file;
 
-		pathImport = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
-		chromatogramWriter = new ChromatogramWriter();
-		super.setUp();
+	@BeforeClass
+	public static void setUp() {
+
+		File fileImport = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1));
+		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
+		chromatogram = processingInfo.getProcessingResult();
+		file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.DIRECTORY_EXPORT_TEST) + File.separator + "Test.csv");
+	}
+
+	@AfterClass
+	public static void tearDown() {
+
+		file.delete();
 	}
 
 	@Test
-	public void testExport_1() throws IOException {
+	public void testExport() throws IOException {
 
-		File file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.DIRECTORY_EXPORT_TEST) + File.separator + "Test.csv");
 		chromatogramWriter.writeChromatogram(file, chromatogram, new NullProgressMonitor());
-		assertTrue(file.delete());
+		assertTrue(file.length() > 0);
 	}
 }

@@ -18,41 +18,70 @@ import static org.junit.Assert.assertNotNull;
 import java.io.File;
 
 import org.eclipse.chemclipse.model.settings.Delimiter;
+import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
+import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
+import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.xxd.converter.supplier.csv.TestPathHelper;
 import org.eclipse.chemclipse.xxd.converter.supplier.csv.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
-import org.junit.Before;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.junit.After;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ChromatogramReader_1_ITest extends ChromatogramWriterTestCase {
+public class ChromatogramReader_1_ITest {
 
-	@Override
-	@Before
-	public void setUp() {
+	private static File fileExport;
+	private static IChromatogramMSD chromatogram;
+
+	@BeforeClass
+	public static void setUp() {
 
 		PreferenceSupplier.setImportDelimiter(Delimiter.COMMA);
 		PreferenceSupplier.setImportZeroMarker("0.0");
 		/*
 		 * Import
 		 */
-		pathImport = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
-		extensionPointImport = VersionConstants.CONVERTER_ID_CHROMATOGRAM;
+		String pathImport = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
+		String extensionPointImport = VersionConstants.CONVERTER_ID_CHROMATOGRAM;
 		/*
 		 * Export/Reimport
 		 */
-		pathExport = TestPathHelper.getAbsolutePath(TestPathHelper.DIRECTORY_EXPORT_TEST) + File.separator + "Test.csv";
-		extensionPointExportReimport = "org.eclipse.chemclipse.msd.converter.supplier.csv";
-		super.setUp();
+		String pathExport = TestPathHelper.getAbsolutePath(TestPathHelper.DIRECTORY_EXPORT_TEST) + File.separator + "Test.csv";
+		String extensionPointExportReimport = "org.eclipse.chemclipse.msd.converter.supplier.csv";
+		/*
+		 * Import the chromatogram.
+		 */
+		File fileImport = new File(pathImport);
+		IProcessingInfo<IChromatogramMSD> processingInfoImport = ChromatogramConverterMSD.getInstance().convert(fileImport, extensionPointImport, new NullProgressMonitor());
+		IChromatogramMSD chromatogramImport = processingInfoImport.getProcessingResult();
+		/*
+		 * Export the chromatogram.
+		 */
+		fileExport = new File(pathExport);
+		IProcessingInfo<File> processingInfoExport = ChromatogramConverterMSD.getInstance().convert(fileExport, chromatogramImport, extensionPointExportReimport, new NullProgressMonitor());
+		fileExport = processingInfoExport.getProcessingResult();
+		/*
+		 * Reimport the exported chromatogram.
+		 */
+		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileExport, extensionPointExportReimport, new NullProgressMonitor());
+		chromatogram = processingInfo.getProcessingResult();
+	}
+
+	@After
+	public void tearDown() {
+
+		fileExport.delete();
 	}
 
 	@Test
-	public void testReimport_1() {
+	public void testReimport1() {
 
 		assertNotNull(chromatogram);
 	}
 
 	@Test
-	public void testReimport_2() {
+	public void testReimport2() {
 
 		assertEquals(5726, chromatogram.getNumberOfScans());
 	}
