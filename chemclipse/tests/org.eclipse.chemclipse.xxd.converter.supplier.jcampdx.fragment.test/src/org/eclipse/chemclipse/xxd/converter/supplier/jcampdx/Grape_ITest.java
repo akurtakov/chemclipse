@@ -21,15 +21,15 @@ import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.wsd.converter.supplier.jcampdx.converter.ScanImportConverter;
 import org.eclipse.chemclipse.wsd.model.core.ISpectrumWSD;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class Grape_ITest {
 
-	private ISpectrumWSD spectrumWSD;
+	private static ISpectrumWSD spectrumWSD;
 
-	@Before
-	public void setUp() {
+	@BeforeClass
+	public static void setUp() {
 
 		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.GRAPE));
 		ScanImportConverter importConverter = new ScanImportConverter();

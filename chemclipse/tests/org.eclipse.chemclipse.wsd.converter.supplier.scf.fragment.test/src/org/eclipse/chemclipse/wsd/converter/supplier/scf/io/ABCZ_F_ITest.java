@@ -15,22 +15,27 @@ package org.eclipse.chemclipse.wsd.converter.supplier.scf.io;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.io.File;
 import java.time.ZoneId;
 
-import org.eclipse.chemclipse.wsd.converter.supplier.scf.ChromatogramReaderTestCase;
+import org.eclipse.chemclipse.processing.core.IProcessingInfo;
+import org.eclipse.chemclipse.wsd.converter.chromatogram.ChromatogramConverterWSD;
 import org.eclipse.chemclipse.wsd.converter.supplier.scf.SCF;
-import org.junit.Before;
+import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ABCZ_F_ITest extends ChromatogramReaderTestCase {
+public class ABCZ_F_ITest {
 
-	@Override
-	@Before
-	public void setUp() {
+	private static IChromatogramWSD chromatogram;
 
-		extensionPointId = SCF.EXTENSION_POINT_ID;
-		pathImport = SCF.getAbsolutePath(SCF.TESTFILE_IMPORT_ABCZ_F);
-		super.setUp();
+	@BeforeClass
+	public static void setUp() {
+
+		File fileImport = new File(SCF.getAbsolutePath(SCF.TESTFILE_IMPORT_ABCZ_F));
+		IProcessingInfo<IChromatogramWSD> processingInfo = ChromatogramConverterWSD.getInstance().convert(fileImport, SCF.EXTENSION_POINT_ID, new NullProgressMonitor());
+		chromatogram = processingInfo.getProcessingResult();
 	}
 
 	@Test

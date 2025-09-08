@@ -29,15 +29,15 @@ import org.eclipse.chemclipse.pcr.model.core.IPlate;
 import org.eclipse.chemclipse.pcr.model.core.IWell;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class Test_Example_12_ITest {
 
-	private IPlate plate;
+	private static IPlate plate;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeClass
+	public static void setUp() throws Exception {
 
 		File importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.EXAMPLE_1_2));
 		IProcessingInfo<IPlate> importProcessingInfo = PCRImportConverter.getInstance().convert(importFile, new NullProgressMonitor());

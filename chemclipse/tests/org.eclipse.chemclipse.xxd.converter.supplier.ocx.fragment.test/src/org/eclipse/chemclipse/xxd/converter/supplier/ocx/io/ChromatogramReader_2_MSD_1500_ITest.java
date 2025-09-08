@@ -15,23 +15,31 @@ package org.eclipse.chemclipse.xxd.converter.supplier.ocx.io;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.io.File;
+
+import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
+import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIonTransition;
 import org.eclipse.chemclipse.msd.model.core.IIonTransitionGroup;
 import org.eclipse.chemclipse.msd.model.core.IIonTransitionSettings;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
+import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.TestPathHelper;
+import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ChromatogramReader_2_MSD_1500_ITest extends ChromatogramReaderMSDTestCase {
+public class ChromatogramReader_2_MSD_1500_ITest {
 
-	@Override
-	@Before
-	public void setUp() throws Exception {
+	private static IChromatogramMSD chromatogram;
 
-		pathImport = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_2_MSD_1500);
-		super.setUp();
+	@BeforeClass
+	public static void setUp() {
+
+		File fileImport = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_2_MSD_1500));
+		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
+		chromatogram = processingInfo.getProcessingResult();
 	}
 
 	@Test

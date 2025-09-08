@@ -24,15 +24,15 @@ import org.eclipse.chemclipse.wsd.converter.supplier.spectroml.converter.ScanImp
 import org.eclipse.chemclipse.wsd.converter.supplier.spectroml.model.IVendorSpectrumWSD;
 import org.eclipse.chemclipse.wsd.model.core.ISpectrumWSD;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class SpectroML_ITest {
 
-	private ISpectrumWSD spectrumWSD;
+	private static ISpectrumWSD spectrumWSD;
 
-	@Before
-	public void setUp() {
+	@BeforeClass
+	public static void setUp() {
 
 		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.SAMPLE));
 		ScanImportConverter importConverter = new ScanImportConverter();

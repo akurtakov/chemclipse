@@ -21,15 +21,15 @@ import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.vsd.converter.supplier.jcampdx.converter.ScanImportConverter;
 import org.eclipse.chemclipse.vsd.model.core.ISpectrumVSD;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FixedIncrease2_ITest {
 
-	private ISpectrumVSD spectrumVSD;
+	private static ISpectrumVSD spectrumVSD;
 
-	@Before
-	public void setUp() {
+	@BeforeClass
+	public static void setUp() {
 
 		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.FIXINC2));
 		ScanImportConverter importConverter = new ScanImportConverter();

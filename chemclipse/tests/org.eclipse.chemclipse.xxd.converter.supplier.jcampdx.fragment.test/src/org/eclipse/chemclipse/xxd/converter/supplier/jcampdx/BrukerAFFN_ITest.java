@@ -22,15 +22,15 @@ import org.eclipse.chemclipse.nmr.converter.supplier.jcampdx.converter.ScanImpor
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumNMR;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BrukerAFFN_ITest {
 
-	private IComplexSignalMeasurement<?> complexSignalMeasurement;
+	private static IComplexSignalMeasurement<?> complexSignalMeasurement;
 
-	@Before
-	public void setUp() {
+	@BeforeClass
+	public static void setUp() {
 
 		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.REAL_SPECTRUM_ASCII_FREE_FORMAT_NUMERIC));
 		ScanImportConverterNMR importConverter = new ScanImportConverterNMR();
