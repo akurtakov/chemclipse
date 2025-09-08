@@ -42,6 +42,7 @@ public class ChromatogramExport_1_ITest {
 		File fileImport = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1));
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();
+		new File(TestPathHelper.DIRECTORY_EXPORT_TEST).mkdirs();
 		file = new File(PathResolver.getAbsolutePath(TestPathHelper.DIRECTORY_EXPORT_TEST) + File.separator + "Test.xlsx");
 	}
 
@@ -53,8 +54,6 @@ public class ChromatogramExport_1_ITest {
 
 	@Test
 	public void testExport() throws FileIsNotWriteableException, IOException {
-
-		new File(TestPathHelper.DIRECTORY_EXPORT_TEST).mkdirs();
 
 		chromatogramWriter.writeChromatogram(file, chromatogram, new NullProgressMonitor());
 		assertTrue(file.length() > 0);
