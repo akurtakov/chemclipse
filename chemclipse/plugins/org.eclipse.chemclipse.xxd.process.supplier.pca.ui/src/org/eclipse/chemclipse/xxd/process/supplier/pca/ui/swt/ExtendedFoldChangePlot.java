@@ -50,7 +50,6 @@ import org.eclipse.swt.widgets.Display;
 public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI {
 
 	private static final String FOLD_CHANGE_GROUP_NONE = "--";
-
 	private AtomicReference<FoldChangePlot> plotControl = new AtomicReference<>();
 	private AtomicReference<ComboViewer> comboViewerGroup1 = new AtomicReference<>();
 	private AtomicReference<ComboViewer> comboViewerGroup2 = new AtomicReference<>();
@@ -108,7 +107,6 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
-
 		createToolbarMain(this);
 		createPlot(this);
 		initialize();
@@ -129,7 +127,6 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(4, false));
-
 		createComboViewerGroup1(this);
 		createComboViewerGroup2(this);
 		createSettingsButton(composite);
@@ -153,7 +150,6 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 				}
 			}
 		});
-
 		combo.setToolTipText("Group one for comparison");
 		GridData gridData = new GridData();
 		gridData.widthHint = 250;
@@ -171,7 +167,6 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 				}
 			}
 		});
-
 		comboViewerGroup1.set(comboViewer);
 	}
 
@@ -192,7 +187,6 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 				}
 			}
 		});
-
 		combo.setToolTipText("Group two for comparison");
 		GridData gridData = new GridData();
 		gridData.widthHint = 250;
@@ -210,7 +204,6 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 				}
 			}
 		});
-
 		comboViewerGroup2.set(comboViewer);
 	}
 
@@ -236,7 +229,6 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 	private void applySettings() {
 
 		updatePlot("group1", "group2");
-
 	}
 
 	private void updateWidgets() {
@@ -247,7 +239,6 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 
 		FoldChangePlot plot = plotControl.get();
 		plot.deleteSeries();
-
 		if(evaluationPCA != null) {
 			plot.setInput(evaluationPCA, group1, group2);
 		} else {
@@ -259,7 +250,6 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 
 		groups.clear();
 		groups.add(FOLD_CHANGE_GROUP_NONE);
-
 		if(samples != null) {
 			for(ISample sample : samples.getSamples()) {
 				if(sample.getGroupName() == null) {
@@ -273,5 +263,4 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 			groups.addAll(samples.getSamples().stream().map(x -> x.getGroupName()).distinct().toList());
 		}
 	}
-
 }
