@@ -43,7 +43,7 @@ public class FoldChangePlotPart extends AbstractPartPCA<ExtendedFoldChangePlot> 
 				getControl().setInput(null);
 				unloadData();
 				return false;
-			} else if(isUpdateFeaturesEvent(topic)) {
+			} else if(isUpdateGroupsEvent(topic)) {
 				getControl().updateInput();
 				return true;
 			} else {

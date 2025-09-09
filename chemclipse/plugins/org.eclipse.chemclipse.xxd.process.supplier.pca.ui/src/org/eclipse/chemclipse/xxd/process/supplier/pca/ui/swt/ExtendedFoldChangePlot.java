@@ -70,7 +70,7 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 
 				if(evaluationPCA != null) {
 					if(DataUpdateSupport.isVisible(control)) {
-						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE.equals(topic) || IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic)) {
+						if(IChemClipseEvents.TOPIC_PCA_UPDATE_FEATURES.equals(topic) || IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic)) {
 							if(objects.size() == 1) {
 								Object object = objects.get(0);
 								ArrayList<IVariable> selectedVariables = new ArrayList<>();
@@ -94,13 +94,19 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 	public void setInput(EvaluationPCA evaluationPCA) {
 
 		this.evaluationPCA = evaluationPCA;
+		if(this.evaluationPCA != null) {
+			this.samples = evaluationPCA.getSamples();
+		}
 		updateFoldChangeGroups();
 		updateInput();
 	}
 
 	public void updateInput() {
 
-		updateWidgets();
+		if(samples != null) {
+			IAnalysisSettings analysisSettings = samples.getAnalysisSettings();
+			updateWidgets(analysisSettings);
+		}
 		applySettings();
 	}
 
@@ -117,7 +123,7 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 
 		groups.add(FOLD_CHANGE_GROUP_NONE);
 		comboViewerGroup1.get().setInput(groups);
-		comboViewerGroup2.get().setSelection(new StructuredSelection(FOLD_CHANGE_GROUP_NONE));
+		comboViewerGroup2.get().setInput(groups);
 	}
 
 	private void createToolbarMain(Composite parent) {
@@ -231,8 +237,10 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 		updatePlot("group1", "group2");
 	}
 
-	private void updateWidgets() {
+	private void updateWidgets(IAnalysisSettings analysisSettings) {
 
+		updateFoldChangeGroups();
+		updateComboViewerGroups(analysisSettings);
 	}
 
 	private void updatePlot(String group1, String group2) {
@@ -244,6 +252,26 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 		} else {
 			plot.setInput(null, group1, group2);
 		}
+	}
+
+	private void updateComboViewerGroups(IAnalysisSettings analysisSettings) {
+
+		comboViewerGroup1.get().setInput(groups);
+		comboViewerGroup2.get().setInput(groups);
+		String selection1 = FOLD_CHANGE_GROUP_NONE;
+		String selection2 = FOLD_CHANGE_GROUP_NONE;
+		if(analysisSettings != null) {
+			String groupName1 = analysisSettings.getComparisonGroup1();
+			if(groups.contains(groupName1)) {
+				selection1 = groupName1;
+			}
+			String groupName2 = analysisSettings.getComparisonGroup2();
+			if(groups.contains(groupName2)) {
+				selection2 = groupName2;
+			}
+		}
+		comboViewerGroup1.get().setSelection(new StructuredSelection(selection1));
+		comboViewerGroup2.get().setSelection(new StructuredSelection(selection2));
 	}
 
 	private void updateFoldChangeGroups() {
