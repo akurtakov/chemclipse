@@ -12,16 +12,19 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.denoising.internal.core.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class IonNoise_1_Test {
 
 	private IonNoise ionNoise;
 
-	@Before
+	@BeforeAll
 	public void setUp() throws Exception {
 
 		ionNoise = new IonNoise(167, 5893.56f);
@@ -30,12 +33,12 @@ public class IonNoise_1_Test {
 	@Test
 	public void testGetIon_1() {
 
-		assertEquals("Ion", 167, ionNoise.getIon());
+		assertEquals(167, ionNoise.getIon(), "Ion");
 	}
 
 	@Test
 	public void testGetAbundance_1() {
 
-		assertEquals("Abundance", 5893.56f, ionNoise.getAbundance(), 0);
+		assertEquals(5893.56f, ionNoise.getAbundance(), 0, "Abundance");
 	}
 }

@@ -12,13 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.settings;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CodaFilterSettings_1_Test {
 
-	private FilterSettings settings = new FilterSettings();;
+	private FilterSettings settings = new FilterSettings();
 
 	@Test
 	public void testGetCodaSettings_1() {

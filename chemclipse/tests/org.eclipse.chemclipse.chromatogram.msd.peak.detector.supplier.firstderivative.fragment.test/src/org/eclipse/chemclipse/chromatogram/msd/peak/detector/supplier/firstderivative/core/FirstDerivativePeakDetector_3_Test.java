@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.peak.detector.supplier.firstderivative.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -21,7 +21,7 @@ import org.eclipse.chemclipse.chromatogram.msd.peak.detector.core.IPeakDetectorM
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.IRawPeak;
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.RawPeak;
 import org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderivative.core.BasePeakDetector;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * peakDetectorSettings.getThreshold() is MEDIUM > threshold = 0.05d;
@@ -29,8 +29,8 @@ import org.junit.Test;
  */
 public class FirstDerivativePeakDetector_3_Test {
 
-	private IPeakDetectorMSD firstDerivativePeakDetector = new PeakDetectorMSD();;
-	private Class<?> firstDerivativePeakDetectorClass = BasePeakDetector.class;;
+	private IPeakDetectorMSD firstDerivativePeakDetector = new PeakDetectorMSD();
+	private Class<?> firstDerivativePeakDetectorClass = BasePeakDetector.class;
 
 	@Test
 	public void testIsValidRawPeak_1() throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException {
@@ -40,7 +40,7 @@ public class FirstDerivativePeakDetector_3_Test {
 		Method method = firstDerivativePeakDetectorClass.getDeclaredMethod("isValidRawPeak", new Class[]{IRawPeak.class});
 		method.setAccessible(true);
 		result = (Boolean)method.invoke(firstDerivativePeakDetector, new Object[]{rawPeak});
-		assertEquals("detectPeakStart", Boolean.valueOf(true), result);
+		assertEquals(Boolean.valueOf(true), result, "detectPeakStart");
 	}
 
 	@Test
@@ -51,6 +51,6 @@ public class FirstDerivativePeakDetector_3_Test {
 		Method method = firstDerivativePeakDetectorClass.getDeclaredMethod("isValidRawPeak", new Class[]{IRawPeak.class});
 		method.setAccessible(true);
 		result = (Boolean)method.invoke(firstDerivativePeakDetector, new Object[]{rawPeak});
-		assertEquals("detectPeakStart", Boolean.valueOf(false), result);
+		assertEquals(Boolean.valueOf(false), result, "detectPeakStart");
 	}
 }

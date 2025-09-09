@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.denoising.result;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DenoisingFilterResult_1_Test {
 
@@ -31,6 +31,6 @@ public class DenoisingFilterResult_1_Test {
 	@Test
 	public void testGetNoiseMassSpectra_2() {
 
-		assertEquals("Size", 0, result.getNoiseMassSpectra().size());
+		assertEquals(0, result.getNoiseMassSpectra().size(), "Size");
 	}
 }

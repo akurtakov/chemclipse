@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.csd.filter.core.chromatogram;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ChromatogramFilterSupplier_2_Test {
 
@@ -23,18 +23,18 @@ public class ChromatogramFilterSupplier_2_Test {
 	@Test
 	public void testGetId_1() {
 
-		assertEquals("Id", "", supplier.getId());
+		assertEquals("", supplier.getId(), "Id");
 	}
 
 	@Test
 	public void testGetDescription_1() {
 
-		assertEquals("Description", "", supplier.getDescription());
+		assertEquals("", supplier.getDescription(), "Description");
 	}
 
 	@Test
 	public void testGetFilterName_1() {
 
-		assertEquals("Filter Name", "", supplier.getFilterName());
+		assertEquals("", supplier.getFilterName(), "Filter Name");
 	}
 }

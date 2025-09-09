@@ -12,88 +12,55 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.alignment.model.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.chromatogram.alignment.model.exceptions.NoRetentionIndexAvailableException;
 import org.eclipse.chemclipse.chromatogram.alignment.model.exceptions.RetentionIndexExistsException;
 import org.eclipse.chemclipse.chromatogram.alignment.model.exceptions.RetentionIndexValueException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class RetentionIndices_2_Test {
 
 	private RetentionIndices retentionIndices = new RetentionIndices();
 
 	@Test
-	public void testPreviousNextByTime_1() {
+	public void testPreviousNextByTime_1() throws RetentionIndexExistsException, RetentionIndexValueException, NoRetentionIndexAvailableException {
 
-		try {
-			retentionIndices.addRetentionIndex(new RetentionIndex(4500, 1000.0f));
-			retentionIndices.addRetentionIndex(new RetentionIndex(254500, 2000.0f));
-			retentionIndices.addRetentionIndex(new RetentionIndex(505500, 3000.0f));
-			assertEquals("getPreviousRetentionIndex", 4500, retentionIndices.getPreviousRetentionIndex(5500).getRetentionTime());
-			assertEquals("getNextRetentionIndex", 254500, retentionIndices.getNextRetentionIndex(5500).getRetentionTime());
-		} catch(RetentionIndexExistsException e) {
-			assertTrue("This state should never be entered. - RetentionIndexExistsException", false);
-		} catch(RetentionIndexValueException e) {
-			assertTrue("This state should never be entered. - RetentionIndexValueException", false);
-		} catch(NoRetentionIndexAvailableException e) {
-			assertTrue("This state should never be entered. - NoRetentionIndexAvailableException", false);
-		}
+		retentionIndices.addRetentionIndex(new RetentionIndex(4500, 1000.0f));
+		retentionIndices.addRetentionIndex(new RetentionIndex(254500, 2000.0f));
+		retentionIndices.addRetentionIndex(new RetentionIndex(505500, 3000.0f));
+		assertEquals(4500, retentionIndices.getPreviousRetentionIndex(5500).getRetentionTime());
+		assertEquals(254500, retentionIndices.getNextRetentionIndex(5500).getRetentionTime());
 	}
 
 	@Test
-	public void testPreviousNextByTime_2() {
+	public void testPreviousNextByTime_2() throws RetentionIndexExistsException, RetentionIndexValueException, NoRetentionIndexAvailableException {
 
-		try {
-			retentionIndices.addRetentionIndex(new RetentionIndex(4500, 1000.0f));
-			retentionIndices.addRetentionIndex(new RetentionIndex(254500, 2000.0f));
-			retentionIndices.addRetentionIndex(new RetentionIndex(505500, 3000.0f));
-			assertEquals("getPreviousRetentionIndex", 254500, retentionIndices.getPreviousRetentionIndex(255500).getRetentionTime());
-			assertEquals("getNextRetentionIndex", 505500, retentionIndices.getNextRetentionIndex(255500).getRetentionTime());
-		} catch(RetentionIndexExistsException e) {
-			assertTrue("This state should never be entered. - RetentionIndexExistsException", false);
-		} catch(RetentionIndexValueException e) {
-			assertTrue("This state should never be entered. - RetentionIndexValueException", false);
-		} catch(NoRetentionIndexAvailableException e) {
-			assertTrue("This state should never be entered. - NoRetentionIndexAvailableException", false);
-		}
+		retentionIndices.addRetentionIndex(new RetentionIndex(4500, 1000.0f));
+		retentionIndices.addRetentionIndex(new RetentionIndex(254500, 2000.0f));
+		retentionIndices.addRetentionIndex(new RetentionIndex(505500, 3000.0f));
+		assertEquals(254500, retentionIndices.getPreviousRetentionIndex(255500).getRetentionTime());
+		assertEquals(505500, retentionIndices.getNextRetentionIndex(255500).getRetentionTime());
 	}
 
 	@Test
-	public void testPreviousNextByIndex_1() {
+	public void testPreviousNextByIndex_1() throws RetentionIndexExistsException, RetentionIndexValueException, NoRetentionIndexAvailableException {
 
-		try {
-			retentionIndices.addRetentionIndex(new RetentionIndex(4500, 1000.0f));
-			retentionIndices.addRetentionIndex(new RetentionIndex(254500, 2000.0f));
-			retentionIndices.addRetentionIndex(new RetentionIndex(505500, 3000.0f));
-			assertEquals("getPreviousRetentionIndex", 4500, retentionIndices.getPreviousRetentionIndex(1100.0f).getRetentionTime());
-			assertEquals("getNextRetentionIndex", 254500, retentionIndices.getNextRetentionIndex(1100.0f).getRetentionTime());
-		} catch(RetentionIndexExistsException e) {
-			assertTrue("This state should never be entered. - RetentionIndexExistsException", false);
-		} catch(RetentionIndexValueException e) {
-			assertTrue("This state should never be entered. - RetentionIndexValueException", false);
-		} catch(NoRetentionIndexAvailableException e) {
-			assertTrue("This state should never be entered. - NoRetentionIndexAvailableException", false);
-		}
+		retentionIndices.addRetentionIndex(new RetentionIndex(4500, 1000.0f));
+		retentionIndices.addRetentionIndex(new RetentionIndex(254500, 2000.0f));
+		retentionIndices.addRetentionIndex(new RetentionIndex(505500, 3000.0f));
+		assertEquals(4500, retentionIndices.getPreviousRetentionIndex(1100.0f).getRetentionTime());
+		assertEquals(254500, retentionIndices.getNextRetentionIndex(1100.0f).getRetentionTime());
 	}
 
 	@Test
-	public void testPreviousNextByIndex_2() {
+	public void testPreviousNextByIndex_2() throws RetentionIndexExistsException, RetentionIndexValueException, NoRetentionIndexAvailableException {
 
-		try {
-			retentionIndices.addRetentionIndex(new RetentionIndex(4500, 1000.0f));
-			retentionIndices.addRetentionIndex(new RetentionIndex(254500, 2000.0f));
-			retentionIndices.addRetentionIndex(new RetentionIndex(505500, 3000.0f));
-			assertEquals("getPreviousRetentionIndex", 254500, retentionIndices.getPreviousRetentionIndex(2100.0f).getRetentionTime());
-			assertEquals("getNextRetentionIndex", 505500, retentionIndices.getNextRetentionIndex(2100.0f).getRetentionTime());
-			assertEquals("getFirstRetentionIndex", 4500, retentionIndices.getFirstRetentionIndex().getRetentionTime());
-		} catch(RetentionIndexExistsException e) {
-			assertTrue("This state should never be entered. - RetentionIndexExistsException", false);
-		} catch(RetentionIndexValueException e) {
-			assertTrue("This state should never be entered. - RetentionIndexValueException", false);
-		} catch(NoRetentionIndexAvailableException e) {
-			assertTrue("This state should never be entered. - NoRetentionIndexAvailableException", false);
-		}
+		retentionIndices.addRetentionIndex(new RetentionIndex(4500, 1000.0f));
+		retentionIndices.addRetentionIndex(new RetentionIndex(254500, 2000.0f));
+		retentionIndices.addRetentionIndex(new RetentionIndex(505500, 3000.0f));
+		assertEquals(254500, retentionIndices.getPreviousRetentionIndex(2100.0f).getRetentionTime());
+		assertEquals(505500, retentionIndices.getNextRetentionIndex(2100.0f).getRetentionTime());
+		assertEquals(4500, retentionIndices.getFirstRetentionIndex().getRetentionTime());
 	}
 }

@@ -23,10 +23,10 @@ import org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderiv
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
-import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 
-@Ignore
+@Disabled
 public class FirstDerivativeSlopesTestCase {
 
 	private IFirstDerivativeDetectorSlope slope;
@@ -36,10 +36,10 @@ public class FirstDerivativeSlopesTestCase {
 	private List<Float> abundances;
 	private ITotalScanSignals signals;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
-		abundances = new ArrayList<Float>();
+		abundances = new ArrayList<>();
 		abundances.add(21563.38028f);
 		abundances.add(21718.30986f);
 		abundances.add(21782.39437f);

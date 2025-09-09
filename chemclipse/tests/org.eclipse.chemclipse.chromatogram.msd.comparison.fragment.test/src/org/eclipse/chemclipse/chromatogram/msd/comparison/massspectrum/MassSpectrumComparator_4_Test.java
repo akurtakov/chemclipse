@@ -12,19 +12,22 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.comparison.massspectrum;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class MassSpectrumComparator_4_Test {
 
 	private IMassSpectrumComparator comparator;
 	private IMassSpectrumComparisonSupplier supplier;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		comparator = MassSpectrumComparator.getMassSpectrumComparator("org.eclipse.chemclipse.chromatogram.msd.comparison.supplier.distance.cosine");
 		supplier = comparator.getMassSpectrumComparisonSupplier();

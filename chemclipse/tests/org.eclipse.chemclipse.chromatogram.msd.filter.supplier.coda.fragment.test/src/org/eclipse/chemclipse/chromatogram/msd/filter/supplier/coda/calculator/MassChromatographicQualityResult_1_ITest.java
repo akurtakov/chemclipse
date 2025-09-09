@@ -13,9 +13,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.calculator;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 
@@ -28,9 +27,12 @@ import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD
 import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class MassChromatographicQualityResult_1_ITest {
 
 	private IMassChromatographicQualityResult result;
@@ -38,7 +40,7 @@ public class MassChromatographicQualityResult_1_ITest {
 	private IChromatogramSelectionMSD chromatogramSelection;
 	private File importFile;
 
-	@Before
+	@BeforeAll
 	public void setUp() throws Exception {
 
 		importFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1));
@@ -48,44 +50,32 @@ public class MassChromatographicQualityResult_1_ITest {
 	}
 
 	@Test
-	public void testConstructor_1() {
+	public void testConstructor_1() throws CodaCalculatorException {
 
-		try {
-			result = new MassChromatographicQualityResult(chromatogramSelection, 0.7f, 3);
-			float drv = result.getDataReductionValue();
-			assertEquals("Data reduction value", 0.87713313f, drv, 0);
-			IMarkedIons exludedIons = result.getExcludedIons();
-			assertNotNull(exludedIons);
-		} catch(CodaCalculatorException e) {
-			assertTrue("CodaCalculatorException", false);
-		}
+		result = new MassChromatographicQualityResult(chromatogramSelection, 0.7f, 3);
+		float drv = result.getDataReductionValue();
+		assertEquals(0.87713313f, drv, 0, "Data reduction value");
+		IMarkedIons exludedIons = result.getExcludedIons();
+		assertNotNull(exludedIons);
 	}
 
 	@Test
-	public void testConstructor_2() {
+	public void testConstructor_2() throws CodaCalculatorException {
 
-		try {
-			result = new MassChromatographicQualityResult(chromatogramSelection, 0.7f, 5);
-			float drv = result.getDataReductionValue();
-			assertEquals("Data reduction value", 0.79522187f, drv, 0);
-			IMarkedIons exludedIons = result.getExcludedIons();
-			assertNotNull(exludedIons);
-		} catch(CodaCalculatorException e) {
-			assertTrue("CodaCalculatorException", false);
-		}
+		result = new MassChromatographicQualityResult(chromatogramSelection, 0.7f, 5);
+		float drv = result.getDataReductionValue();
+		assertEquals(0.79522187f, drv, 0, "Data reduction value");
+		IMarkedIons exludedIons = result.getExcludedIons();
+		assertNotNull(exludedIons);
 	}
 
 	@Test
-	public void testConstructor_3() {
+	public void testConstructor_3() throws CodaCalculatorException {
 
-		try {
-			result = new MassChromatographicQualityResult(chromatogramSelection, 0.7f, 7);
-			float drv = result.getDataReductionValue();
-			assertEquals("Data reduction value", 0.7337884f, drv, 0);
-			IMarkedIons exludedIons = result.getExcludedIons();
-			assertNotNull(exludedIons);
-		} catch(CodaCalculatorException e) {
-			assertTrue("CodaCalculatorException", false);
-		}
+		result = new MassChromatographicQualityResult(chromatogramSelection, 0.7f, 7);
+		float drv = result.getDataReductionValue();
+		assertEquals(0.7337884f, drv, 0, "Data reduction value");
+		IMarkedIons exludedIons = result.getExcludedIons();
+		assertNotNull(exludedIons);
 	}
 }

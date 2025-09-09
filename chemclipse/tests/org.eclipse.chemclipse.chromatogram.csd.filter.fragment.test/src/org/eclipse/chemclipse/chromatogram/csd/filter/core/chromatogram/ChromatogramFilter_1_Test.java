@@ -12,16 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.csd.filter.core.chromatogram;
 
-import static org.junit.Assert.assertTrue;
-
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.csd.model.core.selection.ChromatogramSelectionCSD;
 import org.eclipse.chemclipse.csd.model.core.selection.IChromatogramSelectionCSD;
 import org.eclipse.chemclipse.csd.model.implementation.ChromatogramCSD;
-import org.eclipse.chemclipse.model.exceptions.ChromatogramIsNullException;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ChromatogramFilter_1_Test {
 
@@ -43,11 +40,7 @@ public class ChromatogramFilter_1_Test {
 	public void testConstructor_2() {
 
 		chromatogram = new ChromatogramCSD();
-		try {
-			chromatogramSelection = new ChromatogramSelectionCSD(chromatogram);
-		} catch(ChromatogramIsNullException e) {
-			assertTrue("ChromatogramIsNullException", false);
-		}
+		chromatogramSelection = new ChromatogramSelectionCSD(chromatogram);
 		chromatogramFilterSettings = null;
 		filter = new TestChromatogramFilter();
 		filter.applyFilter(chromatogramSelection, chromatogramFilterSettings, new NullProgressMonitor());

@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.csd.filter.result;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResult;
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class AbstractChromatogramFilterResult_1_Test {
 
@@ -27,7 +27,7 @@ public class AbstractChromatogramFilterResult_1_Test {
 
 		ResultStatus status = ResultStatus.EXCEPTION;
 		chromatogramFilterResult = new TestChromatogramFilterResult(status, "");
-		assertEquals("ResultStatus", ResultStatus.EXCEPTION, chromatogramFilterResult.getResultStatus());
+		assertEquals(ResultStatus.EXCEPTION, chromatogramFilterResult.getResultStatus(), "ResultStatus");
 	}
 
 	@Test
@@ -35,7 +35,7 @@ public class AbstractChromatogramFilterResult_1_Test {
 
 		ResultStatus status = ResultStatus.OK;
 		chromatogramFilterResult = new TestChromatogramFilterResult(status, "");
-		assertEquals("ResultStatus", ResultStatus.OK, chromatogramFilterResult.getResultStatus());
+		assertEquals(ResultStatus.OK, chromatogramFilterResult.getResultStatus(), "ResultStatus");
 	}
 
 	@Test
@@ -43,7 +43,7 @@ public class AbstractChromatogramFilterResult_1_Test {
 
 		ResultStatus status = ResultStatus.UNDEFINED;
 		chromatogramFilterResult = new TestChromatogramFilterResult(status, "");
-		assertEquals("ResultStatus", ResultStatus.UNDEFINED, chromatogramFilterResult.getResultStatus());
+		assertEquals(ResultStatus.UNDEFINED, chromatogramFilterResult.getResultStatus(), "ResultStatus");
 	}
 
 	@Test
@@ -51,7 +51,7 @@ public class AbstractChromatogramFilterResult_1_Test {
 
 		ResultStatus status = ResultStatus.UNDEFINED;
 		chromatogramFilterResult = new TestChromatogramFilterResult(status, "My test description.");
-		assertEquals("Description", "My test description.", chromatogramFilterResult.getDescription());
+		assertEquals("My test description.", chromatogramFilterResult.getDescription(), "Description");
 	}
 
 	@Test
@@ -59,6 +59,6 @@ public class AbstractChromatogramFilterResult_1_Test {
 
 		ResultStatus status = ResultStatus.UNDEFINED;
 		chromatogramFilterResult = new TestChromatogramFilterResult(status, "");
-		assertEquals("Description", "", chromatogramFilterResult.getDescription());
+		assertEquals("", chromatogramFilterResult.getDescription(), "Description");
 	}
 }

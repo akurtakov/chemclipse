@@ -12,22 +12,25 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.chromatogram.msd.filter.core.chromatogram.IChromatogramFilterMSD;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.settings.FilterSettings;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class CodaFilter_1_ITest extends ChromatogramImporterTestCase {
 
 	private IChromatogramFilterMSD chromatogramFilter = new ChromatogramFilterMSD();
 	private FilterSettings chromatogramFilterSettings = new FilterSettings();
 
 	@Override
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		super.setUp();
 	}
@@ -37,6 +40,6 @@ public class CodaFilter_1_ITest extends ChromatogramImporterTestCase {
 
 		int scan = 1;
 		chromatogramFilter.applyFilter(chromatogramSelection, chromatogramFilterSettings, new NullProgressMonitor());
-		assertEquals("total signal", 180262.0f, chromatogram.getScan(scan).getTotalSignal(), 0);
+		assertEquals(180262.0f, chromatogram.getScan(scan).getTotalSignal(), 0, "total signal");
 	}
 }

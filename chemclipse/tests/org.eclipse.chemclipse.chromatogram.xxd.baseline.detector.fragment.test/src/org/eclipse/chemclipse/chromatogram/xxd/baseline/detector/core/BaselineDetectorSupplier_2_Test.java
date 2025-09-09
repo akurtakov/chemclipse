@@ -12,11 +12,14 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class BaselineDetectorSupplier_2_Test {
 
 	private BaselineDetectorSupplier supplier;
@@ -24,8 +27,8 @@ public class BaselineDetectorSupplier_2_Test {
 	private String description = "description";
 	private String detectorName = "detectorName";
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		supplier = new BaselineDetectorSupplier();
 		supplier.setId(id);
@@ -36,27 +39,27 @@ public class BaselineDetectorSupplier_2_Test {
 	@Test
 	public void testGetId_1() {
 
-		assertEquals("id", id, supplier.getId());
+		assertEquals(id, supplier.getId());
 		id = "newId";
 		supplier.setId(id);
-		assertEquals("id", id, supplier.getId());
+		assertEquals(id, supplier.getId());
 	}
 
 	@Test
 	public void testGetDescription_1() {
 
-		assertEquals("description", description, supplier.getDescription());
+		assertEquals(description, supplier.getDescription());
 		description = "newDescription";
 		supplier.setDescription(description);
-		assertEquals("description", description, supplier.getDescription());
+		assertEquals(description, supplier.getDescription());
 	}
 
 	@Test
 	public void testGetDetectorName_1() {
 
-		assertEquals("detectorName", detectorName, supplier.getDetectorName());
+		assertEquals(detectorName, supplier.getDetectorName());
 		detectorName = "newDetectorName";
 		supplier.setDetectorName(detectorName);
-		assertEquals("detectorName", detectorName, supplier.getDetectorName());
+		assertEquals(detectorName, supplier.getDetectorName());
 	}
 }

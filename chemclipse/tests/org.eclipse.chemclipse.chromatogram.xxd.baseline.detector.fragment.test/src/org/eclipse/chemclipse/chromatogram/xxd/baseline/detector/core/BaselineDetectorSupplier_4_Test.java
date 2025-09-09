@@ -12,20 +12,23 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.core;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class BaselineDetectorSupplier_4_Test {
 
 	private BaselineDetectorSupplier supplier1;
 	private BaselineDetectorSupplier supplier2;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		supplier1 = new BaselineDetectorSupplier();
 		supplier1.setId("id1");
@@ -41,30 +44,30 @@ public class BaselineDetectorSupplier_4_Test {
 	@Test
 	public void testEquals_1() {
 
-		assertNotEquals("equals", supplier1, supplier2);
+		assertNotEquals(supplier1, supplier2);
 	}
 
 	@Test
 	public void testEquals_2() {
 
-		assertNotEquals("equals", supplier2, supplier1);
+		assertNotEquals(supplier2, supplier1);
 	}
 
 	@Test
 	public void testEquals_3() {
 
-		assertNotNull("equals", supplier1);
+		assertNotNull(supplier1);
 	}
 
 	@Test
 	public void testEquals_4() {
 
-		assertNotEquals("equals", supplier1, new Object());
+		assertNotEquals(supplier1, new Object());
 	}
 
 	@Test
 	public void testHashCode_1() {
 
-		assertFalse("hashCode", supplier1.hashCode() == supplier2.hashCode());
+		assertFalse(supplier1.hashCode() == supplier2.hashCode());
 	}
 }

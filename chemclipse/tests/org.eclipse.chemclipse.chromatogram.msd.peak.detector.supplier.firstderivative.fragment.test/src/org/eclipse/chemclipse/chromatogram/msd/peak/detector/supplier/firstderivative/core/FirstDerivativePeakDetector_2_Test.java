@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.peak.detector.supplier.firstderivative.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -20,13 +20,16 @@ import java.lang.reflect.Method;
 import org.eclipse.chemclipse.chromatogram.msd.peak.detector.core.IPeakDetectorMSD;
 import org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderivative.core.BasePeakDetector;
 import org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderivative.support.IFirstDerivativeDetectorSlopes;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * peakDetectorSettings.getThreshold() is MEDIUM > threshold = 0.05d;
  * WindowSize.SCANS_5
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class FirstDerivativePeakDetector_2_Test extends FirstDerivativeSlopesTestCase {
 
 	private IFirstDerivativeDetectorSlopes slopes;
@@ -35,8 +38,8 @@ public class FirstDerivativePeakDetector_2_Test extends FirstDerivativeSlopesTes
 	private Method method;
 
 	@Override
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		super.setUp();
 		firstDerivativePeakDetector = new PeakDetectorMSD();
@@ -48,7 +51,7 @@ public class FirstDerivativePeakDetector_2_Test extends FirstDerivativeSlopesTes
 	@Test
 	public void testSize_1() {
 
-		assertEquals("Size", 39, slopes.size());
+		assertEquals(39, slopes.size(), "Size");
 	}
 
 	@Test
@@ -62,7 +65,7 @@ public class FirstDerivativePeakDetector_2_Test extends FirstDerivativeSlopesTes
 		 * The peak starts at scan 4 and has a scan offset of 0 (means starts at
 		 * scan 1).
 		 */
-		assertEquals("detectPeakStart", Integer.valueOf(4), result);
+		assertEquals(Integer.valueOf(4), result, "detectPeakStart");
 	}
 
 	@Test
@@ -79,7 +82,7 @@ public class FirstDerivativePeakDetector_2_Test extends FirstDerivativeSlopesTes
 		/*
 		 * The peak maximum is at scan 12.
 		 */
-		assertEquals("detectPeakMaximum", Integer.valueOf(12), result);
+		assertEquals(Integer.valueOf(12), result, "detectPeakMaximum");
 	}
 
 	@Test
@@ -96,6 +99,6 @@ public class FirstDerivativePeakDetector_2_Test extends FirstDerivativeSlopesTes
 		/*
 		 * The peak stop is at scan 26.
 		 */
-		assertEquals("detectPeakStop", Integer.valueOf(26), result);
+		assertEquals( Integer.valueOf(26), result,"detectPeakStop");
 	}
 }

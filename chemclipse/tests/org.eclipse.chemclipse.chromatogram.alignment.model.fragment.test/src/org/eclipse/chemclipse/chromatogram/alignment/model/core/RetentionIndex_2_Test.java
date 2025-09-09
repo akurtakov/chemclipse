@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.alignment.model.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class RetentionIndex_2_Test {
 
@@ -22,35 +22,35 @@ public class RetentionIndex_2_Test {
 	public void testRetentionTime_1() {
 
 		RetentionIndex retentionIndex = new RetentionIndex();
-		assertEquals("RetentionTime", 0, retentionIndex.getRetentionTime());
-		assertEquals("Index", 0.0f, retentionIndex.getIndex(), 0);
-		assertEquals("Name", "", retentionIndex.getName());
+		assertEquals(0, retentionIndex.getRetentionTime(), "RetentionTime");
+		assertEquals(0.0f, retentionIndex.getIndex(), 0, "Index");
+		assertEquals("", retentionIndex.getName(), "Name");
 	}
 
 	@Test
 	public void testRetentionTime_2() {
 
 		RetentionIndex retentionIndex = new RetentionIndex(7500, 8000.2f);
-		assertEquals("RetentionTime", 7500, retentionIndex.getRetentionTime());
-		assertEquals("Index", 8000.2f, retentionIndex.getIndex(), 0);
-		assertEquals("Name", "", retentionIndex.getName());
+		assertEquals(7500, retentionIndex.getRetentionTime(), "RetentionTime");
+		assertEquals(8000.2f, retentionIndex.getIndex(), 0, "Index");
+		assertEquals("", retentionIndex.getName(), "Name");
 	}
 
 	@Test
 	public void testRetentionTime_3() {
 
 		RetentionIndex retentionIndex = new RetentionIndex(7500, 8000.2f, "C41");
-		assertEquals("RetentionTime", 7500, retentionIndex.getRetentionTime());
-		assertEquals("Index", 8000.2f, retentionIndex.getIndex(), 0);
-		assertEquals("Name", "C41", retentionIndex.getName());
+		assertEquals(7500, retentionIndex.getRetentionTime(), "RetentionTime");
+		assertEquals(8000.2f, retentionIndex.getIndex(), 0, "Index");
+		assertEquals("C41", retentionIndex.getName(), "Name");
 	}
 
 	@Test
 	public void testRetentionTime_4() {
 
 		RetentionIndex retentionIndex = new RetentionIndex(-7500, -8000.2f, "C41");
-		assertEquals("RetentionTime", 0, retentionIndex.getRetentionTime());
-		assertEquals("Index", 0.0f, retentionIndex.getIndex(), 0);
-		assertEquals("Name", "C41", retentionIndex.getName());
+		assertEquals(0, retentionIndex.getRetentionTime(), "RetentionTime");
+		assertEquals(0.0f, retentionIndex.getIndex(), 0, "Index");
+		assertEquals("C41", retentionIndex.getName(), "Name");
 	}
 }

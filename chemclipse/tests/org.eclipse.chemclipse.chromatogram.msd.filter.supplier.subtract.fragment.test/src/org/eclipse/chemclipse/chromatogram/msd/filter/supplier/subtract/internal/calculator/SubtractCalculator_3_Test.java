@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.subtract.internal.calculator;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Map;
 
@@ -20,9 +20,12 @@ import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.subtract.calculat
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.CombinedMassSpectrum;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class SubtractCalculator_3_Test {
 
 	private SubtractCalculator subtractCalculator = new SubtractCalculator();;
@@ -30,8 +33,8 @@ public class SubtractCalculator_3_Test {
 	private IScanMSD targetMassSpectrum;
 	private Map<Double, Float> subtractMassSpectrumMap;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		boolean useNominalMasses = true;
 		boolean useNormalize = false;

@@ -12,22 +12,17 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.comparison.math;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class GeometricDistanceCalculator_1_Test extends MassSpectrumSetTestCase {
 
 	private GeometricDistanceCalculator calculator = new GeometricDistanceCalculator();
-
-	@Override
-	@Before
-	public void setUp() throws Exception {
-
-		super.setUp();
-	}
 
 	@Test
 	public void test1() {

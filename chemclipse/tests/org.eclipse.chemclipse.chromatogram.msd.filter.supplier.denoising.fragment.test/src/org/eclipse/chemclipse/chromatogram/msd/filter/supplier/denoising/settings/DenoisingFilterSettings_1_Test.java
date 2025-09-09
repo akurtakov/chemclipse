@@ -12,15 +12,15 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.denoising.settings;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIons;
 import org.eclipse.chemclipse.support.util.TraceSettingUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DenoisingFilterSettings_1_Test {
 
@@ -36,7 +36,7 @@ public class DenoisingFilterSettings_1_Test {
 	public void testGetIonsToRemove_2() {
 
 		TraceSettingUtil settingIon = new TraceSettingUtil();
-		assertEquals("IonsToRemove Size", 4, new MarkedIons(settingIon.extractTraces(settingIon.deserialize(settings.getIonsToRemove())), MarkedTraceModus.INCLUDE).getIonsNominal().size());
+		assertEquals(4, new MarkedIons(settingIon.extractTraces(settingIon.deserialize(settings.getIonsToRemove())), MarkedTraceModus.INCLUDE).getIonsNominal().size(), "IonsToRemove Size");
 	}
 
 	@Test
@@ -49,7 +49,7 @@ public class DenoisingFilterSettings_1_Test {
 	public void testGetIonsToPreserve_2() {
 
 		TraceSettingUtil settingIon = new TraceSettingUtil();
-		assertEquals("IonsToPreserve Size", 2, new MarkedIons(settingIon.extractTraces(settingIon.deserialize(settings.getIonsToPreserve())), MarkedTraceModus.INCLUDE).getIonsNominal().size());
+		assertEquals(2, new MarkedIons(settingIon.extractTraces(settingIon.deserialize(settings.getIonsToPreserve())), MarkedTraceModus.INCLUDE).getIonsNominal().size(), "IonsToPreserve Size");
 	}
 
 	@Test
@@ -68,27 +68,27 @@ public class DenoisingFilterSettings_1_Test {
 	@Test
 	public void testGetNumberOfUsedIonsForCoefficient_1() {
 
-		assertEquals("NumberOfUsedIonsForCoefficient", 1, settings.getNumberOfUsedIonsForCoefficient());
+		assertEquals(1, settings.getNumberOfUsedIonsForCoefficient(), "NumberOfUsedIonsForCoefficient");
 	}
 
 	@Test
 	public void testGetNumberOfUsedIonsForCoefficient_2() {
 
 		settings.setNumberOfUsedIonsForCoefficient(5);
-		assertEquals("NumberOfUsedIonsForCoefficient", 5, settings.getNumberOfUsedIonsForCoefficient());
+		assertEquals(5, settings.getNumberOfUsedIonsForCoefficient(), "NumberOfUsedIonsForCoefficient");
 	}
 
 	@Test
 	public void testGetNumberOfUsedIonsForCoefficient_3() {
 
 		settings.setNumberOfUsedIonsForCoefficient(0);
-		assertEquals("NumberOfUsedIonsForCoefficient", 1, settings.getNumberOfUsedIonsForCoefficient());
+		assertEquals(1, settings.getNumberOfUsedIonsForCoefficient(), "NumberOfUsedIonsForCoefficient");
 	}
 
 	@Test
 	public void testGetNumberOfUsedIonsForCoefficient_4() {
 
 		settings.setNumberOfUsedIonsForCoefficient(-1);
-		assertEquals("NumberOfUsedIonsForCoefficient", 1, settings.getNumberOfUsedIonsForCoefficient());
+		assertEquals(1, settings.getNumberOfUsedIonsForCoefficient(), "NumberOfUsedIonsForCoefficient");
 	}
 }

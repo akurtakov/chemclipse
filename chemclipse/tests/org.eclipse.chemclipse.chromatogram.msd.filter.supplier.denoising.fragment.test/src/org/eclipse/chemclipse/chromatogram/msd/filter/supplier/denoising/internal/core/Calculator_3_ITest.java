@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.denoising.internal.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
@@ -21,26 +21,30 @@ import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIon;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIons;
+import org.eclipse.chemclipse.msd.model.exceptions.FilterException;
 import org.eclipse.chemclipse.msd.model.noise.Calculator;
 import org.eclipse.chemclipse.msd.model.noise.INoiseSegmentMSD;
 import org.eclipse.chemclipse.msd.model.xic.ExtractedIonSignalExtractor;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignalExtractor;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignals;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class Calculator_3_ITest extends ChromatogramImporterTestCase {
 
-	private Calculator calculator = new Calculator();;
+	private Calculator calculator = new Calculator();
 	private IExtractedIonSignals extractedIonSignals;
 	private IMarkedIons ionsToPreserve;
 	private List<INoiseSegmentMSD> noiseSegments;
 	private IExtractedIonSignalExtractor extractedIonSignalExtractor;
 
 	@Override
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() throws FilterException {
 
 		super.setUp();
 		ionsToPreserve = new MarkedIons(MarkedTraceModus.INCLUDE);
@@ -54,6 +58,6 @@ public class Calculator_3_ITest extends ChromatogramImporterTestCase {
 	@Test
 	public void testGetSize_1() {
 
-		assertEquals("Size", 9, noiseSegments.size());
+		assertEquals(9, noiseSegments.size(), "Size");
 	}
 }

@@ -26,8 +26,10 @@ import org.eclipse.chemclipse.chromatogram.msd.comparison.spectra.ProblemC2;
 import org.eclipse.chemclipse.chromatogram.msd.comparison.spectra.SinapylAlcohol;
 import org.eclipse.chemclipse.chromatogram.msd.comparison.spectra.SinapylAlcoholCis;
 import org.eclipse.chemclipse.chromatogram.msd.comparison.spectra.Syringylacetone;
-import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Comparison NIST-DB 12 (MF, RMF):
@@ -37,7 +39,8 @@ import org.junit.Ignore;
  * sinapylAclohol vs phenolBenzimidazolyl: 51.5, 57.6
  * 
  */
-@Ignore
+@Disabled
+@TestInstance(Lifecycle.PER_CLASS)
 public class MassSpectrumSetTestCase {
 
 	protected ITestMassSpectrum sinapylAclohol;
@@ -55,7 +58,7 @@ public class MassSpectrumSetTestCase {
 	protected ITestMassSpectrum problemC1;
 	protected ITestMassSpectrum problemC2;
 
-	@Before
+	@BeforeAll
 	public void setUp() throws Exception {
 
 		sinapylAclohol = new SinapylAlcohol();

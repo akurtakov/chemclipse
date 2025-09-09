@@ -12,8 +12,6 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.internal.core.support;
 
-import static org.junit.Assert.assertTrue;
-
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.exceptions.ClassifierException;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.settings.ClassifierSettings;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
@@ -22,14 +20,10 @@ public class Calculator_1_ITest extends ChromatogramTestCase {
 
 	private Calculator calculator = new Calculator();
 
-	public void testCalculator_1() {
+	public void testCalculator_1() throws ClassifierException {
 
-		try {
-			ClassifierSettings classifierSettings = new ClassifierSettings();
-			IChromatogramSelectionMSD chromatogramSelection = getChromatogramSelection();
-			calculator.calculateIonPercentages(chromatogramSelection, classifierSettings);
-		} catch(ClassifierException e) {
-			assertTrue("ClassifierException shouldn't be thrown here.", false);
-		}
+		ClassifierSettings classifierSettings = new ClassifierSettings();
+		IChromatogramSelectionMSD chromatogramSelection = getChromatogramSelection();
+		calculator.calculateIonPercentages(chromatogramSelection, classifierSettings);
 	}
 }
