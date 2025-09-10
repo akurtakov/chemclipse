@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.supplier.mzxml.converter;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
@@ -25,15 +25,18 @@ import org.eclipse.chemclipse.msd.model.core.IIonTransition;
 import org.eclipse.chemclipse.msd.model.core.Polarity;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramImportConverterTinyMzXML30_ITest {
 
-	private static IVendorChromatogram chromatogram;
+	private IVendorChromatogram chromatogram;
 
-	@BeforeClass
-	public static void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		File importFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_TINY_MZXML30));
 		ChromatogramImportConverter converter = new ChromatogramImportConverter();
@@ -61,15 +64,15 @@ public class ChromatogramImportConverterTinyMzXML30_ITest {
 	@Test
 	public void testNumberOfScans() {
 
-		assertEquals("NumberOfScans", 2, chromatogram.getNumberOfScans());
+		assertEquals(2, chromatogram.getNumberOfScans());
 	}
 
 	@Test
 	public void testFirstScan() {
 
 		IVendorScan massSpectrum = (IVendorScan)chromatogram.getScan(1);
-		assertEquals("Ions", 977, massSpectrum.getNumberOfIons());
-		assertEquals("Polarity", Polarity.POSITIVE, massSpectrum.getPolarity());
+		assertEquals(977, massSpectrum.getNumberOfIons(), "Ions");
+		assertEquals(Polarity.POSITIVE, massSpectrum.getPolarity(), "Polarity");
 		assertEquals(353430, massSpectrum.getRetentionTime());
 	}
 
@@ -78,8 +81,8 @@ public class ChromatogramImportConverterTinyMzXML30_ITest {
 
 		IVendorScan massSpectrum = (IVendorScan)chromatogram.getScan(2);
 		assertEquals((short)2, massSpectrum.getMassSpectrometer());
-		assertEquals("Ions", 43, massSpectrum.getNumberOfIons());
-		assertEquals("Polarity", Polarity.POSITIVE, massSpectrum.getPolarity());
+		assertEquals(43, massSpectrum.getNumberOfIons(), "Ions");
+		assertEquals(Polarity.POSITIVE, massSpectrum.getPolarity(), "Polarity");
 		assertEquals(356680, massSpectrum.getRetentionTime());
 
 		IIonTransition ionTransition = massSpectrum.getIons().iterator().next().getIonTransition();

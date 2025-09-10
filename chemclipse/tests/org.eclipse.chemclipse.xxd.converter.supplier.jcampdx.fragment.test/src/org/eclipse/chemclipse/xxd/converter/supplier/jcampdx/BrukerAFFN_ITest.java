@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.converter.supplier.jcampdx;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 
@@ -22,15 +22,18 @@ import org.eclipse.chemclipse.nmr.converter.supplier.jcampdx.converter.ScanImpor
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumNMR;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class BrukerAFFN_ITest {
 
-	private static IComplexSignalMeasurement<?> complexSignalMeasurement;
+	private IComplexSignalMeasurement<?> complexSignalMeasurement;
 
-	@BeforeClass
-	public static void setUp() {
+	@BeforeAll
+	public void setUp() {
 
 		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.REAL_SPECTRUM_ASCII_FREE_FORMAT_NUMERIC));
 		ScanImportConverterNMR importConverter = new ScanImportConverterNMR();

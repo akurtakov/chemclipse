@@ -12,17 +12,23 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.identifier.supplier.nist.runtime;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@Disabled
+@TestInstance(Lifecycle.PER_CLASS)
 public abstract class AbstractBackgroundTestCase {
 
 	List<String> parameterBackground = new ArrayList<>();
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() throws FileNotFoundException {
 
 		parameterBackground.add(INistSupport.INSTRUMENT);
 		parameterBackground.add(INistSupport.PAR2);

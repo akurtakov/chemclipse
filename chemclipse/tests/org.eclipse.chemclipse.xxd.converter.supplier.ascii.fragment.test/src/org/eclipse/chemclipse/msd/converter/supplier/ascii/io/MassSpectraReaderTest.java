@@ -12,59 +12,48 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.supplier.ascii.io;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class MassSpectraReaderTest {
 
-	private static final Logger logger = Logger.getLogger(MassSpectraReaderTest.class);
-
 	@Test
-	public void testRead_01() {
+	public void testRead_01() throws IOException {
 
 		File file = new File("testdata/files/ms01.ascii");
 		MassSpectraReader reader = new MassSpectraReader();
-		try {
-			IMassSpectra ms = reader.read(file, null);
-			assertEquals(1, ms.size());
-			IScanMSD spec = ms.getMassSpectrum(1);
-			assertEquals(1250, spec.getRetentionTime());
-			assertEquals(32, spec.getRetentionIndex(), 1e-6);
-			assertEquals(27, spec.getIons().size());
-			assertEquals(4.7814, spec.getIons().get(0).getIon(), 1e-6);
-			assertEquals(8.0, spec.getIons().get(0).getAbundance(), 1e-6);
-			assertEquals(4.8659, spec.getIons().get(26).getIon(), 1e-6);
-			assertEquals(3.0, spec.getIons().get(26).getAbundance(), 1e-6);
-		} catch(IOException e) {
-			logger.warn(e);
-		}
+		IMassSpectra ms = reader.read(file, null);
+		assertEquals(1, ms.size());
+		IScanMSD spec = ms.getMassSpectrum(1);
+		assertEquals(1250, spec.getRetentionTime());
+		assertEquals(32, spec.getRetentionIndex(), 1e-6);
+		assertEquals(27, spec.getIons().size());
+		assertEquals(4.7814, spec.getIons().get(0).getIon(), 1e-6);
+		assertEquals(8.0, spec.getIons().get(0).getAbundance(), 1e-6);
+		assertEquals(4.8659, spec.getIons().get(26).getIon(), 1e-6);
+		assertEquals(3.0, spec.getIons().get(26).getAbundance(), 1e-6);
 	}
 
 	@Test
-	public void testRead_02() {
+	public void testRead_02() throws IOException {
 
 		File file = new File("testdata/files/ms02.ascii");
 		MassSpectraReader reader = new MassSpectraReader();
-		try {
-			IMassSpectra ms = reader.read(file, null);
-			assertEquals(1, ms.size());
-			IScanMSD spec = ms.getMassSpectrum(1);
-			assertEquals(0, spec.getRetentionTime());
-			assertEquals(2.5, spec.getRetentionIndex(), 1e-6);
-			assertEquals(3, spec.getIons().size());
-			assertEquals(4.7814, spec.getIons().get(0).getIon(), 1e-6);
-			assertEquals(8.0, spec.getIons().get(0).getAbundance(), 1e-6);
-			assertEquals(4.7944, spec.getIons().get(2).getIon(), 1e-6);
-			assertEquals(0.0, spec.getIons().get(2).getAbundance(), 1e-6);
-		} catch(IOException e) {
-			logger.warn(e);
-		}
+		IMassSpectra ms = reader.read(file, null);
+		assertEquals(1, ms.size());
+		IScanMSD spec = ms.getMassSpectrum(1);
+		assertEquals(0, spec.getRetentionTime());
+		assertEquals(2.5, spec.getRetentionIndex(), 1e-6);
+		assertEquals(3, spec.getIons().size());
+		assertEquals(4.7814, spec.getIons().get(0).getIon(), 1e-6);
+		assertEquals(8.0, spec.getIons().get(0).getAbundance(), 1e-6);
+		assertEquals(4.7944, spec.getIons().get(2).getIon(), 1e-6);
+		assertEquals(0.0, spec.getIons().get(2).getAbundance(), 1e-6);
 	}
 }

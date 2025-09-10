@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.nmr.converter.supplier.nmrml;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 
@@ -23,15 +23,18 @@ import org.eclipse.chemclipse.nmr.converter.supplier.nmrml.converter.ScanImportC
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumNMR;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class MMBBI_10M12_CE01_1a_ITest {
 
-	private static ISpectrumNMR spectrumNMR;
+	private ISpectrumNMR spectrumNMR;
 
-	@BeforeClass
-	public static void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.MMBBI_10M12_CE01_1a));
 		ScanImportConverter importConverter = new ScanImportConverter();

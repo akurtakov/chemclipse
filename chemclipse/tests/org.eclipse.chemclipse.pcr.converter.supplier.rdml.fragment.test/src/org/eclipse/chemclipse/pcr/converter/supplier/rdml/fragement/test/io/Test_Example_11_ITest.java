@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.pcr.converter.supplier.rdml.fragement.test.io;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -29,15 +29,18 @@ import org.eclipse.chemclipse.pcr.model.core.IPlate;
 import org.eclipse.chemclipse.pcr.model.core.IWell;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class Test_Example_11_ITest {
 
-	private static IPlate plate;
+	private IPlate plate;
 
-	@BeforeClass
-	public static void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		File importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.EXAMPLE_1_1));
 		IProcessingInfo<IPlate> importProcessingInfo = PCRImportConverter.getInstance().convert(importFile, new NullProgressMonitor());

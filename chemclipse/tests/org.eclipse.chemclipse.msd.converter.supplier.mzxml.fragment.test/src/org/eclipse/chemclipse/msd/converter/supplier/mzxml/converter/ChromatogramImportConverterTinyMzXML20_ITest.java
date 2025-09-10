@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.supplier.mzxml.converter;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
@@ -25,15 +25,18 @@ import org.eclipse.chemclipse.msd.model.core.IIonTransition;
 import org.eclipse.chemclipse.msd.model.core.Polarity;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramImportConverterTinyMzXML20_ITest {
 
-	private static IVendorChromatogram chromatogram;
+	private IVendorChromatogram chromatogram;
 
-	@BeforeClass
-	public static void setUp() {
+	@BeforeAll
+	public void setUp() {
 
 		File importFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_TINY1_MZXML20));
 		ChromatogramImportConverter converter = new ChromatogramImportConverter();
@@ -61,43 +64,43 @@ public class ChromatogramImportConverterTinyMzXML20_ITest {
 	@Test
 	public void testNumberOfScans() {
 
-		assertEquals("NumberOfScans", 2, chromatogram.getNumberOfScans());
+		assertEquals(2, chromatogram.getNumberOfScans(), "NumberOfScans");
 	}
 
 	@Test
 	public void testTotalSignal() {
 
-		assertEquals("Total Signal", 1.7440164E7, chromatogram.getTotalSignal(), 0);
+		assertEquals(1.7440164E7, chromatogram.getTotalSignal(), 0, "Total Signal");
 	}
 
 	@Test
 	public void testMaxIonAbundance() {
 
-		assertEquals("Max Signal", 301045.0f, chromatogram.getMaxIonAbundance(), 0);
+		assertEquals(301045.0f, chromatogram.getMaxIonAbundance(), 0, "Max Signal");
 	}
 
 	@Test
 	public void testFirstScan() {
 
 		IVendorScan massSpectrum = (IVendorScan)chromatogram.getScan(1);
-		assertEquals("Ions", 1313, massSpectrum.getNumberOfIons());
-		assertEquals("Polarity", Polarity.POSITIVE, massSpectrum.getPolarity());
-		assertEquals("RT", 353430, massSpectrum.getRetentionTime());
+		assertEquals(1313, massSpectrum.getNumberOfIons(), "Ions");
+		assertEquals(Polarity.POSITIVE, massSpectrum.getPolarity(), "Polarity");
+		assertEquals(353430, massSpectrum.getRetentionTime(), "RT");
 	}
 
 	@Test
 	public void testSecondScan() {
 
 		IVendorScan massSpectrum = (IVendorScan)chromatogram.getScan(2);
-		assertEquals("Ions", 43, massSpectrum.getNumberOfIons());
-		assertEquals("RT", 356680, massSpectrum.getRetentionTime());
-		assertEquals("Polarity", Polarity.POSITIVE, massSpectrum.getPolarity());
-		assertEquals("MS", 2, massSpectrum.getMassSpectrometer());
-		assertEquals("Precursor", 445.3500061035156, massSpectrum.getPrecursorIon(), 0);
+		assertEquals(43, massSpectrum.getNumberOfIons(), "Ions");
+		assertEquals(356680, massSpectrum.getRetentionTime(), "RT");
+		assertEquals(Polarity.POSITIVE, massSpectrum.getPolarity(), "Polarity");
+		assertEquals(2, massSpectrum.getMassSpectrometer(), "MS");
+		assertEquals(445.3500061035156, massSpectrum.getPrecursorIon(), 0, "Precursor");
 
 		IIonTransition ionTransition = massSpectrum.getHighestIon().getIonTransition();
-		assertEquals("CE", 35, ionTransition.getCollisionEnergy(), 0);
-		assertEquals("Q1", 445, ionTransition.getQ1Ion(), 0);
-		assertEquals("Q2", 531.1, ionTransition.getQ3Ion(), 0);
+		assertEquals(35, ionTransition.getCollisionEnergy(), 0, "CE");
+		assertEquals(445, ionTransition.getQ1Ion(), 0, "Q1");
+		assertEquals(531.1, ionTransition.getQ3Ion(), 0, "Q2");
 	}
 }

@@ -12,23 +12,26 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.supplier.sirius.io;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
 import org.eclipse.chemclipse.msd.converter.supplier.sirius.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class SiriusReader_1_ITest {
 
 	private SiriusReader reader;
 	private File file;
 	private IMassSpectra massSpectra;
 
-	@Before
+	@BeforeAll
 	public void setUp() throws Exception {
 
 		reader = new SiriusReader();

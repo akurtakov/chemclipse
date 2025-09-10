@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.wsd.converter.supplier.mzml.converter;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
@@ -23,15 +23,18 @@ import org.eclipse.chemclipse.wsd.converter.supplier.mzml.model.VendorChromatogr
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
 import org.eclipse.chemclipse.wsd.model.core.IScanWSD;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramImportConverterHandCrafted110_ITest {
 
 	private IVendorChromatogram chromatogram;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		File importFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_PDA_HANDCRAFTED));
 		ChromatogramImportConverter converter = new ChromatogramImportConverter();
@@ -60,38 +63,38 @@ public class ChromatogramImportConverterHandCrafted110_ITest {
 	@Test
 	public void testNumberOfScans() {
 
-		assertEquals("NumberOfScans", 15, chromatogram.getNumberOfScans());
+		assertEquals(15, chromatogram.getNumberOfScans(), "NumberOfScans");
 	}
 
 	@Test
 	public void testStartRetentionTime() {
 
-		assertEquals("Start RT", 0, chromatogram.getStartRetentionTime());
+		assertEquals(0, chromatogram.getStartRetentionTime(), "Start RT");
 	}
 
 	@Test
 	public void testStopRetentionTime() {
 
-		assertEquals("Stop RT", 14000, chromatogram.getStopRetentionTime());
+		assertEquals(14000, chromatogram.getStopRetentionTime(), "Stop RT");
 	}
 
 	@Test
 	public void testTotalSignal() {
 
-		assertEquals("Total Signal", 225.0f, chromatogram.getTotalSignal(), 0);
+		assertEquals(225.0f, chromatogram.getTotalSignal(), 0, "Total Signal");
 	}
 
 	@Test
 	public void testMaxAbsorption() {
 
-		assertEquals("Max Signal", 120.0f, chromatogram.getMaxSignal(), 0);
+		assertEquals(120.0f, chromatogram.getMaxSignal(), 0, "Max Signal");
 	}
 
 	@Test
 	public void testScans() {
 
 		IScanWSD pdaSpectrum = (IScanWSD)chromatogram.getScan(1);
-		assertEquals("Scans", 15, pdaSpectrum.getNumberOfScanSignals());
+		assertEquals(15, pdaSpectrum.getNumberOfScanSignals(), "Scans");
 		assertEquals(15f, pdaSpectrum.getScanSignal(0).getAbsorbance(), 0);
 		assertEquals(0f, pdaSpectrum.getScanSignal(0).getWavelength(), 0);
 		assertEquals(14f, pdaSpectrum.getScanSignal(1).getAbsorbance(), 0);

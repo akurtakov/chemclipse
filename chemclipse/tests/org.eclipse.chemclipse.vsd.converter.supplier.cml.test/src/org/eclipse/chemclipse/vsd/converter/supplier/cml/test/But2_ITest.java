@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.vsd.converter.supplier.cml.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 
@@ -23,15 +23,18 @@ import org.eclipse.chemclipse.vsd.converter.supplier.cml.converter.ScanImportCon
 import org.eclipse.chemclipse.vsd.converter.supplier.cml.model.IVendorSpectrumVSD;
 import org.eclipse.chemclipse.vsd.model.core.ISpectrumVSD;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class But2_ITest {
 
 	private ISpectrumVSD spectrumVSD;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.BUT2));
 		ScanImportConverter importConverter = new ScanImportConverter();
