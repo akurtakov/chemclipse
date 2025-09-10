@@ -12,12 +12,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.backfolding.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.chromatogram.msd.filter.core.chromatogram.IChromatogramFilterMSD;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.backfolding.settings.ChromatogramFilterSettings;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class BackfoldingFilter_1_ITest extends ChromatogramImporterTestCase {
 
@@ -29,6 +29,6 @@ public class BackfoldingFilter_1_ITest extends ChromatogramImporterTestCase {
 
 		int scan = 1;
 		chromatogramFilter.applyFilter(chromatogramSelection, chromatogramFilterSettings, new NullProgressMonitor());
-		assertEquals("total signal", 1934.0f, chromatogram.getScan(scan).getTotalSignal(), 0);
+		assertEquals(1934.0f, chromatogram.getScan(scan).getTotalSignal(), 0, "total signal");
 	}
 }

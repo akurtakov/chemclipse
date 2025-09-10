@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class BaselineDetectorSupplier_1_Test {
 
@@ -23,18 +23,18 @@ public class BaselineDetectorSupplier_1_Test {
 	@Test
 	public void testGetId_1() {
 
-		assertEquals("id", "", supplier.getId());
+		assertEquals("", supplier.getId());
 	}
 
 	@Test
 	public void testGetDescription_1() {
 
-		assertEquals("description", "", supplier.getDescription());
+		assertEquals("", supplier.getDescription());
 	}
 
 	@Test
 	public void testGetDetectorName_1() {
 
-		assertEquals("detectorName", "", supplier.getDetectorName());
+		assertEquals("", supplier.getDetectorName());
 	}
 }

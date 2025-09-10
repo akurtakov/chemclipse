@@ -12,16 +12,15 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.exceptions.NoBaselineDetectorAvailableException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the IBaselineDetectorSupport.
@@ -46,7 +45,7 @@ public class BaselineDetector_1_Test {
 				}
 			}
 		}
-		assertEquals("Registered Detector Names", 0, count);
+		assertEquals(0, count, "Registered Detector Names");
 	}
 
 	@Test
@@ -63,46 +62,42 @@ public class BaselineDetector_1_Test {
 				}
 			}
 		}
-		assertEquals("Registered Detector Ids", 0, count);
+		assertEquals(0, count, "Registered Detector Ids");
 	}
 
 	@Test
 	public void testGetMassSpectrumComparatorSupport_3() throws NoBaselineDetectorAvailableException {
 
 		List<String> ids = support.getAvailableDetectorIds();
-		List<String> rcs = new ArrayList<String>();
+		List<String> rcs = new ArrayList<>();
 		for(String id : ids) {
 			rcs.add(id);
 		}
 		String id;
 		for(int i = 0; i < rcs.size(); i++) {
 			id = support.getDetectorId(i);
-			assertEquals("getDetectorId", id, rcs.get(i));
+			assertEquals(id, rcs.get(i), "getDetectorId");
 		}
 	}
 
 	@Test
 	public void testGetMassSpectrumComparisonSupplier_1() {
 
-		try {
+		assertThrows(NoBaselineDetectorAvailableException.class, () -> {
 			support.getBaselineDetectorSupplier("");
-		} catch(NoBaselineDetectorAvailableException e) {
-			assertTrue("NoBaselineDetectorAvailableException", true);
-		}
+		});
 	}
 
 	@Test
 	public void testGetMassSpectrumComparisonSupplier_2() {
 
-		try {
+		assertThrows(NoBaselineDetectorAvailableException.class, () -> {
 			support.getBaselineDetectorSupplier(null);
-		} catch(NoBaselineDetectorAvailableException e) {
-			assertTrue("NoBaselineDetectorAvailableException", true);
-		}
+		});
 	}
 
 	@Test
-	public void testGetMassSpectrumComparisonSupplier_3() throws NoBaselineDetectorAvailableException {
+	public void testGetMassSpectrumComparisonSupplier_3() {
 
 		assertThrows(NoBaselineDetectorAvailableException.class, () -> { // The detector was removed
 			String id = "org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.supplier.tic";

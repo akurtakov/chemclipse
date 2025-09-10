@@ -28,7 +28,8 @@ public class SinapylAlcoholCis implements ITestMassSpectrum {
 
 	private IScanMSD massSpectrum;
 
-	public SinapylAlcoholCis() throws Exception {
+	public SinapylAlcoholCis() {
+
 		massSpectrum = new ScanMSD();
 		massSpectrum.addIon(new Ion(27.0d, 71.0f));
 		massSpectrum.addIon(new Ion(39.0d, 94.0f));

@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.backfolding.settings;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.eclipse.chemclipse.chromatogram.peak.detector.model.Threshold;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class BackfoldingPeakDetectorSettings_1_Test {
 
@@ -33,7 +33,7 @@ public class BackfoldingPeakDetectorSettings_1_Test {
 	public void testGetThreshold_1() {
 
 		Threshold threshold = settings.getThreshold();
-		assertEquals("Threshold", Threshold.MEDIUM, threshold);
+		assertEquals(Threshold.MEDIUM, threshold, "Threshold");
 	}
 
 	@Test
@@ -41,6 +41,6 @@ public class BackfoldingPeakDetectorSettings_1_Test {
 
 		settings.setThreshold(Threshold.HIGH);
 		Threshold threshold = settings.getThreshold();
-		assertEquals("Threshold", Threshold.HIGH, threshold);
+		assertEquals(Threshold.HIGH, threshold, "Threshold");
 	}
 }

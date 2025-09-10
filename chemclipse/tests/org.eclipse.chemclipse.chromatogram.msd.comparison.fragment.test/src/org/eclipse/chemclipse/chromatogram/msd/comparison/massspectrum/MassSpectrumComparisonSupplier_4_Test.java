@@ -12,19 +12,22 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.comparison.massspectrum;
 
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class MassSpectrumComparisonSupplier_4_Test {
 
 	private MassSpectrumComparisonSupplier supplier1;
 	private MassSpectrumComparisonSupplier supplier2;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		supplier1 = new MassSpectrumComparisonSupplier();
 		supplier1.setId("id1");
@@ -40,30 +43,30 @@ public class MassSpectrumComparisonSupplier_4_Test {
 	@Test
 	public void testEquals_1() {
 
-		assertNotEquals("equals", supplier1, supplier2);
+		assertNotEquals(supplier1, supplier2);
 	}
 
 	@Test
 	public void testEquals_2() {
 
-		assertNotEquals("equals", supplier2, supplier1);
+		assertNotEquals(supplier2, supplier1);
 	}
 
 	@Test
 	public void testEquals_3() {
 
-		assertNotNull("equals", supplier1);
+		assertNotNull(supplier1);
 	}
 
 	@Test
 	public void testEquals_4() {
 
-		assertNotEquals("equals", supplier1, new Object());
+		assertNotEquals(supplier1, new Object());
 	}
 
 	@Test
 	public void testHashCode_1() {
 
-		assertNotEquals("hashCode", supplier1.hashCode(), supplier2.hashCode());
+		assertNotEquals(supplier1.hashCode(), supplier2.hashCode());
 	}
 }

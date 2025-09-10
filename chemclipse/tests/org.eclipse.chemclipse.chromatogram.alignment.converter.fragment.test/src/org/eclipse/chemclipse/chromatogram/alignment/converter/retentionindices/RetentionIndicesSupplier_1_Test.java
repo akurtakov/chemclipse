@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.alignment.converter.retentionindices;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class RetentionIndicesSupplier_1_Test {
 
@@ -23,6 +23,6 @@ public class RetentionIndicesSupplier_1_Test {
 	@Test
 	public void testSupplier_1() {
 
-		assertEquals("Description", "", supplier.getDescription());
+		assertEquals("", supplier.getDescription(), "Description");
 	}
 }

@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.core;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.exceptions.BaselineDetectorSettingsException;
 import org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.exceptions.NoBaselineDetectorAvailableException;
@@ -21,7 +21,7 @@ import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the BaselineDetector.
@@ -31,15 +31,11 @@ public class BaselineDetector_2_Test {
 	IBaselineDetectorSupport support = BaselineDetector.getBaselineDetectorSupport();
 
 	@Test
-	public void testBaselineDetector_1() throws BaselineDetectorSettingsException {
+	public void testBaselineDetector_1() throws BaselineDetectorSettingsException, NoBaselineDetectorAvailableException {
 
-		try {
-			String detectorId = BaselineDetector.getBaselineDetectorSupport().getDetectorId(0);
-			IProcessingInfo<?> processingInfo = BaselineDetector.setBaseline(null, null, detectorId, new NullProgressMonitor());
-			assertTrue(processingInfo.hasErrorMessages());
-		} catch(NoBaselineDetectorAvailableException e) {
-			assertTrue("NoBaselineDetectorAvailableException", false);
-		}
+		String detectorId = BaselineDetector.getBaselineDetectorSupport().getDetectorId(0);
+		IProcessingInfo<?> processingInfo = BaselineDetector.setBaseline(null, null, detectorId, new NullProgressMonitor());
+		assertTrue(processingInfo.hasErrorMessages());
 	}
 
 	@Test

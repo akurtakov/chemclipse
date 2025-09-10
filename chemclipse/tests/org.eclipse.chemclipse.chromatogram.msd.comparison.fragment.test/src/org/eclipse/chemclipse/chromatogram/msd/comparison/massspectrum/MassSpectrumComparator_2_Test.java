@@ -13,13 +13,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.comparison.massspectrum;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.model.identifier.IComparisonResult;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class MassSpectrumComparator_2_Test {
 
@@ -34,11 +34,7 @@ public class MassSpectrumComparator_2_Test {
 
 		IProcessingInfo<IComparisonResult> processingInfo = MassSpectrumComparator.compare(null, null, (String)null, usePreOptimization, thresholdPreOptimization);
 		assertTrue(processingInfo.hasErrorMessages());
-		try {
-			processingInfo.getProcessingResult();
-		} catch(Exception e) {
-			assertTrue("Exception", true);
-		}
+		processingInfo.getProcessingResult();
 	}
 
 	@Test
@@ -46,11 +42,7 @@ public class MassSpectrumComparator_2_Test {
 
 		IProcessingInfo<IComparisonResult> processingInfo = MassSpectrumComparator.compare(massSpectrum1, null, (String)null, usePreOptimization, thresholdPreOptimization);
 		assertTrue(processingInfo.hasErrorMessages());
-		try {
-			processingInfo.getProcessingResult();
-		} catch(Exception e) {
-			assertTrue("Exception", true);
-		}
+		processingInfo.getProcessingResult();
 	}
 
 	@Test
@@ -58,11 +50,7 @@ public class MassSpectrumComparator_2_Test {
 
 		IProcessingInfo<IComparisonResult> processingInfo = MassSpectrumComparator.compare(null, massSpectrum2, (String)null, usePreOptimization, thresholdPreOptimization);
 		assertTrue(processingInfo.hasErrorMessages());
-		try {
-			processingInfo.getProcessingResult();
-		} catch(Exception e) {
-			assertTrue("Exception", true);
-		}
+		processingInfo.getProcessingResult();
 	}
 
 	@Test
@@ -70,11 +58,7 @@ public class MassSpectrumComparator_2_Test {
 
 		IProcessingInfo<IComparisonResult> processingInfo = MassSpectrumComparator.compare(null, null, "?", usePreOptimization, thresholdPreOptimization);
 		assertTrue(processingInfo.hasErrorMessages());
-		try {
-			processingInfo.getProcessingResult();
-		} catch(Exception e) {
-			assertTrue("Exception", true);
-		}
+		processingInfo.getProcessingResult();
 	}
 
 	@Test
@@ -82,11 +66,7 @@ public class MassSpectrumComparator_2_Test {
 
 		IProcessingInfo<IComparisonResult> processingInfo = MassSpectrumComparator.compare(massSpectrum1, massSpectrum2, "?", usePreOptimization, thresholdPreOptimization);
 		assertTrue(processingInfo.hasErrorMessages());
-		try {
-			processingInfo.getProcessingResult();
-		} catch(Exception e) {
-			assertTrue("Exception", true);
-		}
+		processingInfo.getProcessingResult();
 	}
 
 	@Test
@@ -94,10 +74,6 @@ public class MassSpectrumComparator_2_Test {
 
 		IProcessingInfo<IComparisonResult> processingInfo = MassSpectrumComparator.compare(massSpectrum1, null, "?", usePreOptimization, thresholdPreOptimization);
 		assertTrue(processingInfo.hasErrorMessages());
-		try {
-			processingInfo.getProcessingResult();
-		} catch(Exception e) {
-			assertTrue("Exception", true);
-		}
+		processingInfo.getProcessingResult();
 	}
 }

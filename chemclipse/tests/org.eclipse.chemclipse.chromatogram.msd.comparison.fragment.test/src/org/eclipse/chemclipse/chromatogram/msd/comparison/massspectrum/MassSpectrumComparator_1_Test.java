@@ -12,14 +12,15 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.comparison.massspectrum;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.msd.comparison.exceptions.NoMassSpectrumComparatorAvailableException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class MassSpectrumComparator_1_Test {
 
@@ -65,35 +66,31 @@ public class MassSpectrumComparator_1_Test {
 	public void testGetMassSpectrumComparatorSupport_3() throws NoMassSpectrumComparatorAvailableException {
 
 		List<String> ids = support.getAvailableComparatorIds();
-		List<String> rcs = new ArrayList<String>();
+		List<String> rcs = new ArrayList<>();
 		for(String id : ids) {
 			rcs.add(id);
 		}
 		String id;
 		for(int i = 0; i < rcs.size(); i++) {
 			id = support.getComparatorId(i);
-			assertEquals("getComparatorId", id, rcs.get(i));
+			assertEquals(id, rcs.get(i), "getComparatorId");
 		}
 	}
 
 	@Test
 	public void testGetMassSpectrumComparisonSupplier_1() {
 
-		try {
+		assertThrows(NoMassSpectrumComparatorAvailableException.class, () -> {
 			support.getMassSpectrumComparisonSupplier("");
-		} catch(NoMassSpectrumComparatorAvailableException e) {
-			assertTrue("NoMassSpectrumComparatorAvailableException", true);
-		}
+		});
 	}
 
 	@Test
-	public void testGetMassSpectrumComparisonSupplier_2() {
+	public void testGetMassSpectrumComparisonSupplier_2() throws NoMassSpectrumComparatorAvailableException {
 
-		try {
+		assertThrows(NoMassSpectrumComparatorAvailableException.class, () -> {
 			support.getMassSpectrumComparisonSupplier(null);
-		} catch(NoMassSpectrumComparatorAvailableException e) {
-			assertTrue("NoMassSpectrumComparatorAvailableException", true);
-		}
+		});
 	}
 
 	@Test
@@ -103,8 +100,8 @@ public class MassSpectrumComparator_1_Test {
 		String description = "This comparator calculates the similarity between two mass spectra with the alfassi geomtric distance algorithm.";
 		String id = "org.eclipse.chemclipse.chromatogram.msd.comparison.supplier.alfassi.geometric";
 		IMassSpectrumComparisonSupplier supplier = support.getMassSpectrumComparisonSupplier(id);
-		assertEquals("ComparatorName", comparatorName, supplier.getComparatorName());
-		assertEquals("Description", description, supplier.getDescription());
-		assertEquals("Id", id, supplier.getId());
+		assertEquals(comparatorName, supplier.getComparatorName());
+		assertEquals(description, supplier.getDescription());
+		assertEquals(id, supplier.getId());
 	}
 }

@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.denoising.result;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,18 +21,21 @@ import java.util.List;
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.msd.model.core.ICombinedMassSpectrum;
 import org.eclipse.chemclipse.msd.model.implementation.CombinedMassSpectrum;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class DenoisingFilterResult_2_Test {
 
 	private IDenoisingFilterResult result;
 	private List<ICombinedMassSpectrum> noiseMassSpectra;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
-		noiseMassSpectra = new ArrayList<ICombinedMassSpectrum>();
+		noiseMassSpectra = new ArrayList<>();
 		noiseMassSpectra.add(new CombinedMassSpectrum());
 		result = new DenoisingFilterResult(ResultStatus.OK, "The result status is ok.", noiseMassSpectra);
 	}
@@ -46,6 +49,6 @@ public class DenoisingFilterResult_2_Test {
 	@Test
 	public void testGetNoiseMassSpectra_2() {
 
-		assertEquals("Size", 1, result.getNoiseMassSpectra().size());
+		assertEquals(1, result.getNoiseMassSpectra().size(), "Size");
 	}
 }

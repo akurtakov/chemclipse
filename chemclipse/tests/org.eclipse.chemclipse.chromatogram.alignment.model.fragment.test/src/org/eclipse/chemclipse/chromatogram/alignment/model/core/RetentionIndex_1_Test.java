@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.alignment.model.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class RetentionIndex_1_Test {
 
@@ -24,90 +24,90 @@ public class RetentionIndex_1_Test {
 	public void testRetentionTime_1() {
 
 		retentionIndex.setRetentionTime(7503);
-		assertEquals("RetentionTime", 7503, retentionIndex.getRetentionTime());
+		assertEquals(7503, retentionIndex.getRetentionTime(), "RetentionTime");
 	}
 
 	@Test
 	public void testRetentionTime_2() {
 
 		retentionIndex.setRetentionTime(0);
-		assertEquals("RetentionTime", 0, retentionIndex.getRetentionTime());
+		assertEquals(0, retentionIndex.getRetentionTime(), "RetentionTime");
 	}
 
 	@Test
 	public void testRetentionTime_3() {
 
 		retentionIndex.setRetentionTime(-1);
-		assertEquals("RetentionTime", 0, retentionIndex.getRetentionTime());
+		assertEquals(0, retentionIndex.getRetentionTime(), "RetentionTime");
 	}
 
 	@Test
 	public void testRetentionTime_4() {
 
 		retentionIndex.setRetentionTime(Integer.MAX_VALUE);
-		assertEquals("RetentionTime", Integer.MAX_VALUE, retentionIndex.getRetentionTime());
+		assertEquals(Integer.MAX_VALUE, retentionIndex.getRetentionTime(), "RetentionTime");
 	}
 
 	@Test
 	public void testRetentionTime_5() {
 
 		retentionIndex.setRetentionTime(Integer.MIN_VALUE);
-		assertEquals("RetentionTime", 0, retentionIndex.getRetentionTime());
+		assertEquals(0, retentionIndex.getRetentionTime(), "RetentionTime");
 	}
 
 	@Test
 	public void testIndex_1() {
 
 		retentionIndex.setIndex(5000.4f);
-		assertEquals("Index", 5000.4f, retentionIndex.getIndex(), 0);
+		assertEquals(5000.4f, retentionIndex.getIndex(), 0, "Index");
 	}
 
 	@Test
 	public void testIndex_2() {
 
 		retentionIndex.setIndex(0.0f);
-		assertEquals("Index", 0.0f, retentionIndex.getIndex(), 0);
+		assertEquals(0.0f, retentionIndex.getIndex(), 0, "Index");
 	}
 
 	@Test
 	public void testIndex_3() {
 
 		retentionIndex.setIndex(-1.0f);
-		assertEquals("Index", 0.0f, retentionIndex.getIndex(), 0);
+		assertEquals(0.0f, retentionIndex.getIndex(), 0, "Index");
 	}
 
 	@Test
 	public void testIndex_4() {
 
 		retentionIndex.setIndex(Float.MAX_VALUE);
-		assertEquals("Index", Float.MAX_VALUE, retentionIndex.getIndex(), 0);
+		assertEquals(Float.MAX_VALUE, retentionIndex.getIndex(), 0, "Index");
 	}
 
 	@Test
 	public void testIndex_5() {
 
 		retentionIndex.setIndex(Float.MIN_VALUE);
-		assertEquals("Index", Float.MIN_VALUE, retentionIndex.getIndex(), 0);
+		assertEquals(Float.MIN_VALUE, retentionIndex.getIndex(), 0, "Index");
 	}
 
 	@Test
 	public void testIndex_6() {
 
 		retentionIndex.setIndex(Float.NaN);
-		assertEquals("Index", 0.0f, retentionIndex.getIndex(), 0);
+		assertEquals(0.0f, retentionIndex.getIndex(), 0, "Index");
 	}
 
 	@Test
 	public void testName_1() {
 
 		retentionIndex.setName("C41");
-		assertEquals("Name", "C41", retentionIndex.getName());
+		assertEquals("C41", retentionIndex.getName(), "Name");
 	}
 
 	@Test
 	public void testName_2() {
 
 		retentionIndex.setName("");
-		assertEquals("Name", "", retentionIndex.getName());
+		assertEquals("", retentionIndex.getName(), "Name");
 	}
 }

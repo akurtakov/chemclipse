@@ -12,13 +12,16 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.denoising.internal.core.support;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.support.comparator.SortOrder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class IonNoise_2_Test {
 
 	private IonNoise ionNoise1;
@@ -27,8 +30,8 @@ public class IonNoise_2_Test {
 
 	private IonNoiseAbundanceComparator ionNoiseAbundanceComparator = new IonNoiseAbundanceComparator(SortOrder.DESC);
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		ionNoise1 = new IonNoise(120, 3889.56f);
 		ionNoise2 = new IonNoise(167, 5893.56f);

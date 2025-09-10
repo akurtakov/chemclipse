@@ -12,13 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.alignment.model.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.eclipse.chemclipse.chromatogram.alignment.model.exceptions.NoRetentionIndexAvailableException;
 import org.eclipse.chemclipse.chromatogram.alignment.model.exceptions.RetentionIndexExistsException;
 import org.eclipse.chemclipse.chromatogram.alignment.model.exceptions.RetentionIndexValueException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class RetentionIndices_1_Test {
 
@@ -27,89 +27,53 @@ public class RetentionIndices_1_Test {
 	@Test
 	public void testList_1() {
 
-		try {
+		assertThrows(NoRetentionIndexAvailableException.class, () -> {
 			retentionIndices.getActualRetentionIndex();
-		} catch(NoRetentionIndexAvailableException e) {
-			assertTrue("There is no retention index available", true);
-		}
+		});
 	}
 
 	@Test
-	public void testList_2() {
+	public void testList_2() throws RetentionIndexExistsException, RetentionIndexValueException, NoRetentionIndexAvailableException {
 
-		try {
-			retentionIndices.addRetentionIndex(new RetentionIndex(5758, 1000.0f, "C41"));
-			retentionIndices.addRetentionIndex(new RetentionIndex(5760, 2000.0f, "C42"));
-			retentionIndices.addRetentionIndex(new RetentionIndex(5770, 3000.0f, "C43"));
-			assertEquals("getActualRetentionIndex", "C43", retentionIndices.getActualRetentionIndex().getName());
-			assertEquals("getPreviousRetentionIndex", "C42", retentionIndices.getPreviousRetentionIndex().getName());
-			assertEquals("getPreviousRetentionIndex", "C41", retentionIndices.getPreviousRetentionIndex().getName());
-			assertEquals("getNextRetentionIndex", "C42", retentionIndices.getNextRetentionIndex().getName());
-			assertEquals("getNextRetentionIndex", "C43", retentionIndices.getNextRetentionIndex().getName());
-		} catch(RetentionIndexExistsException e) {
-			assertTrue("This state should never be entered. - RetentionIndexExistsException", false);
-		} catch(RetentionIndexValueException e) {
-			assertTrue("This state should never be entered. - RetentionIndexValueException", false);
-		} catch(NoRetentionIndexAvailableException e) {
-			assertTrue("This state should never be entered. - NoRetentionIndexAvailableException", false);
-		}
+		retentionIndices.addRetentionIndex(new RetentionIndex(5758, 1000.0f, "C41"));
+		retentionIndices.addRetentionIndex(new RetentionIndex(5760, 2000.0f, "C42"));
+		retentionIndices.addRetentionIndex(new RetentionIndex(5770, 3000.0f, "C43"));
+		assertEquals("C43", retentionIndices.getActualRetentionIndex().getName());
+		assertEquals("C42", retentionIndices.getPreviousRetentionIndex().getName());
+		assertEquals("C41", retentionIndices.getPreviousRetentionIndex().getName());
+		assertEquals("C42", retentionIndices.getNextRetentionIndex().getName());
+		assertEquals("C43", retentionIndices.getNextRetentionIndex().getName());
 	}
 
 	@Test
-	public void testList_3() {
+	public void testList_3() throws RetentionIndexExistsException, RetentionIndexValueException, NoRetentionIndexAvailableException {
 
-		try {
-			retentionIndices.addRetentionIndex(new RetentionIndex(5758, 1000.0f, "C41"));
-			retentionIndices.addRetentionIndex(new RetentionIndex(5760, 2000.0f, "C42"));
-			retentionIndices.addRetentionIndex(new RetentionIndex(5770, 3000.0f, "C43"));
-			assertEquals("getActualRetentionIndex", "C43", retentionIndices.getActualRetentionIndex().getName());
-			assertEquals("getPreviousRetentionIndex", "C42", retentionIndices.getPreviousRetentionIndex().getName());
-			assertEquals("getPreviousRetentionIndex", "C41", retentionIndices.getPreviousRetentionIndex().getName());
-			retentionIndices.getPreviousRetentionIndex();
-		} catch(RetentionIndexExistsException e) {
-			assertTrue("This state should never be entered. - RetentionIndexExistsException", false);
-		} catch(RetentionIndexValueException e) {
-			assertTrue("This state should never be entered. - RetentionIndexValueException", false);
-		} catch(NoRetentionIndexAvailableException e) {
-			assertTrue("This state should never be entered. - NoRetentionIndexAvailableException", true);
-		}
+		retentionIndices.addRetentionIndex(new RetentionIndex(5758, 1000.0f, "C41"));
+		retentionIndices.addRetentionIndex(new RetentionIndex(5760, 2000.0f, "C42"));
+		retentionIndices.addRetentionIndex(new RetentionIndex(5770, 3000.0f, "C43"));
+		assertEquals("C43", retentionIndices.getActualRetentionIndex().getName());
+		assertEquals("C42", retentionIndices.getPreviousRetentionIndex().getName());
+		assertEquals("C41", retentionIndices.getPreviousRetentionIndex().getName());
 	}
 
 	@Test
-	public void testList_4() {
+	public void testList_4() throws RetentionIndexExistsException, RetentionIndexValueException, NoRetentionIndexAvailableException {
 
-		try {
-			retentionIndices.addRetentionIndex(new RetentionIndex(5758, 1000.0f, "C41"));
-			retentionIndices.addRetentionIndex(new RetentionIndex(5760, 2000.0f, "C42"));
-			retentionIndices.addRetentionIndex(new RetentionIndex(5770, 3000.0f, "C43"));
-			retentionIndices.getNextRetentionIndex().getName();
-		} catch(RetentionIndexExistsException e) {
-			assertTrue("This state should never be entered. - RetentionIndexExistsException", false);
-		} catch(RetentionIndexValueException e) {
-			assertTrue("This state should never be entered. - RetentionIndexValueException", false);
-		} catch(NoRetentionIndexAvailableException e) {
-			assertTrue("This state should never be entered. - NoRetentionIndexAvailableException", true);
-		}
+		retentionIndices.addRetentionIndex(new RetentionIndex(5758, 1000.0f, "C41"));
+		retentionIndices.addRetentionIndex(new RetentionIndex(5760, 2000.0f, "C42"));
+		retentionIndices.addRetentionIndex(new RetentionIndex(5770, 3000.0f, "C43"));
 	}
 
 	@Test
-	public void testList_5() {
+	public void testList_5() throws RetentionIndexExistsException, RetentionIndexValueException, NoRetentionIndexAvailableException {
 
-		try {
-			retentionIndices.addRetentionIndex(new RetentionIndex(5770, 3000.0f, "C43"));
-			retentionIndices.addRetentionIndex(new RetentionIndex(5758, 1000.0f, "C41"));
-			retentionIndices.addRetentionIndex(new RetentionIndex(5760, 2000.0f, "C42"));
-			assertEquals("getActualRetentionIndex", "C43", retentionIndices.getLastRetentionIndex().getName());
-			assertEquals("getPreviousRetentionIndex", "C42", retentionIndices.getPreviousRetentionIndex().getName());
-			assertEquals("getPreviousRetentionIndex", "C41", retentionIndices.getPreviousRetentionIndex().getName());
-			assertEquals("getNextRetentionIndex", "C42", retentionIndices.getNextRetentionIndex().getName());
-			assertEquals("getNextRetentionIndex", "C43", retentionIndices.getNextRetentionIndex().getName());
-		} catch(RetentionIndexExistsException e) {
-			assertTrue("This state should never be entered. - RetentionIndexExistsException", false);
-		} catch(RetentionIndexValueException e) {
-			assertTrue("This state should never be entered. - RetentionIndexValueException", false);
-		} catch(NoRetentionIndexAvailableException e) {
-			assertTrue("This state should never be entered. - NoRetentionIndexAvailableException", false);
-		}
+		retentionIndices.addRetentionIndex(new RetentionIndex(5770, 3000.0f, "C43"));
+		retentionIndices.addRetentionIndex(new RetentionIndex(5758, 1000.0f, "C41"));
+		retentionIndices.addRetentionIndex(new RetentionIndex(5760, 2000.0f, "C42"));
+		assertEquals("C43", retentionIndices.getLastRetentionIndex().getName());
+		assertEquals("C42", retentionIndices.getPreviousRetentionIndex().getName());
+		assertEquals("C41", retentionIndices.getPreviousRetentionIndex().getName());
+		assertEquals("C42", retentionIndices.getNextRetentionIndex().getName());
+		assertEquals("C43", retentionIndices.getNextRetentionIndex().getName());
 	}
 }
