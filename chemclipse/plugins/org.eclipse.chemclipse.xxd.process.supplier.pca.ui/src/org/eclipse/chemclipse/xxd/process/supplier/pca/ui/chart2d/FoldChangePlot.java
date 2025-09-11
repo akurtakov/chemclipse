@@ -14,8 +14,10 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d;
 
 import java.util.List;
 
+import org.eclipse.chemclipse.model.statistics.ISample;
+import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.SeriesConverter;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swtchart.extensions.scattercharts.IScatterSeriesData;
@@ -31,9 +33,9 @@ public class FoldChangePlot extends AbstractPlotPCA {
 
 		deleteSeries();
 		if(evaluationPCA != null) {
-			IResultsMVA resultsPCA = evaluationPCA.getResults();
+			ISamplesPCA<IVariable, ISample> samples = evaluationPCA.getSamples();
 			List<IScatterSeriesData> series;
-			series = SeriesConverter.foldChangeToSeries(resultsPCA, group1, group2);
+			series = SeriesConverter.foldChangeToSeries(samples, group1, group2);
 			addSeriesData(series);
 		}
 		redraw();

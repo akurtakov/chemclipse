@@ -234,7 +234,7 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 
 	private void applySettings() {
 
-		updatePlot("group1", "group2");
+		updatePlot((String)comboViewerGroup1.get().getStructuredSelection().getFirstElement().toString(), (String)comboViewerGroup2.get().getStructuredSelection().getFirstElement());
 	}
 
 	private void updateWidgets(IAnalysisSettings analysisSettings) {

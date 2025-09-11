@@ -18,11 +18,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.apache.commons.math3.stat.inference.TTest;
+import org.apache.commons.math3.util.FastMath;
 import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultMVA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.LabelOptionPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.Activator;
@@ -36,8 +40,6 @@ import org.eclipse.swtchart.extensions.scattercharts.IScatterSeriesSettings;
 import org.eclipse.swtchart.extensions.scattercharts.ScatterSeriesData;
 
 public class SeriesConverter {
-	
-	
 
 	public static List<IScatterSeriesData> basisVectorsToSeries(IResultsMVA pcaResults, List<IVariable> highlighted, int pcX, int pcY) {
 
@@ -186,12 +188,63 @@ public class SeriesConverter {
 
 		return scatterSeriesDataList;
 	}
-	
-	public static List<IScatterSeriesData> foldChangeToSeries(IResultsMVA pcaResults, String group1, String group2){
-		
+
+	public static List<IScatterSeriesData> foldChangeToSeries(ISamplesPCA<IVariable, ISample> samples, String group1, String group2) {
+
+		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 		List<IScatterSeriesData> scatterSeriesDataList = new ArrayList<>();
+		/*
+		 * Find Samples per Group
+		 */
+		List<ISample> samples1 = new ArrayList<>();
+		List<ISample> samples2 = new ArrayList<>();
+		for(ISample sample : samples.getSamples()) {
+			if(sample.getGroupName().equals(group1)) {
+				samples1.add(sample);
+			} else if(sample.getGroupName().equals(group2)) {
+				samples2.add(sample);
+			}
+		}
+		/*
+		 * Cycle through all (active) variables
+		 */
+		for(int i = 0; i < samples.getVariables().size(); i++) {
+
+			if(samples.getVariables().get(i).isSelected()) {
+				DescriptiveStatistics stats1 = new DescriptiveStatistics();
+				DescriptiveStatistics stats2 = new DescriptiveStatistics();
+				for(int j = 0; j < samples1.size(); j++) {
+					stats1.addValue(samples1.get(j).getSampleData().get(i).getData());
+				}
+				for(int j = 0; j < samples2.size(); j++) {
+
+					stats2.addValue(samples2.get(j).getSampleData().get(i).getData());
+				}
+				if(stats1.getN() > 2 && stats2.getN() > 2) {
+					TTest test = new TTest();
+					double pValue = test.t(stats1.getValues(), stats2.getValues());
+					double mean1 = stats1.getMean();
+					double mean2 = stats2.getMean();
+					double foldChange = mean2 / mean1;
+					double minLog10pValue = -FastMath.log10(pValue);
+					double log2FoldChange = FastMath.log(foldChange) / FastMath.log(2);
+					ISeriesData seriesData = new SeriesData(new double[]{log2FoldChange}, new double[]{minLog10pValue}, Integer.toString(i));
+					IScatterSeriesData scatterSeriesData = new ScatterSeriesData(seriesData);
+					////
+					IScatterSeriesSettings scatterSeriesSettings = scatterSeriesData.getSettings();
+					// scatterSeriesSettings.setDescription(samples.getVariables().get(i).getDescription());
+					scatterSeriesSettings.setSymbolType(createFromSettings(preferenceStore, PreferenceSupplier.P_SCORE_PLOT_2D_SYMBOL_TYPE));
+					scatterSeriesSettings.setSymbolSize(preferenceStore.getInt(PreferenceSupplier.P_SCORE_PLOT_2D_SYMBOL_SIZE));
+					scatterSeriesSettings.setSymbolColor(Colors.RED);
+					////
+					scatterSeriesDataList.add(scatterSeriesData);
+				}
+
+			}
+		}
+
 		return scatterSeriesDataList;
-		
+
 	}
 
 	private static PlotSymbolType createFromSettings(IPreferenceStore preferenceStore, String name) {
