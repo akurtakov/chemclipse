@@ -22,6 +22,7 @@ import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
+import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.ux.extension.ui.model.IDataUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
@@ -34,7 +35,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.Activator;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d.FoldChangePlot;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.help.HelpContext;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePage;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePageLoadingPlot;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePageFoldChangePlot;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -46,6 +47,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
 
 public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI {
 
@@ -113,6 +115,7 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
+
 		createToolbarMain(this);
 		createPlot(this);
 		initialize();
@@ -132,17 +135,27 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
-		composite.setLayout(new GridLayout(4, false));
-		createComboViewerGroup1(this);
-		createComboViewerGroup2(this);
+		composite.setLayout(new GridLayout(6, false));
+
+		createLabel(composite, "Group 1:");
+		createComboViewerGroup1(composite);
+		createLabel(composite, "Group 2:");
+		createComboViewerGroup2(composite);
 		createSettingsButton(composite);
 		createButtonHelp(composite, HelpContext.FOLD_CHANGE_PLOT);
+	}
+
+	private Label createLabel(Composite parent, String text) {
+
+		Label label = new Label(parent, SWT.NONE);
+		label.setText(text);
+		return label;
 	}
 
 	private void createComboViewerGroup1(Composite parent) {
 
 		ComboViewer comboViewer = new EnhancedComboViewer(parent, SWT.BORDER | SWT.READ_ONLY);
-		Combo combo = comboViewer.getCombo();
+
 		comboViewer.setContentProvider(ArrayContentProvider.getInstance());
 		comboViewer.setLabelProvider(new AbstractLabelProvider() {
 
@@ -156,9 +169,10 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 				}
 			}
 		});
+		Combo combo = comboViewer.getCombo();
 		combo.setToolTipText("Group one for comparison");
 		GridData gridData = new GridData();
-		gridData.widthHint = 250;
+		gridData.widthHint = 150;
 		combo.setLayoutData(gridData);
 		combo.addSelectionListener(new SelectionAdapter() {
 
@@ -169,6 +183,7 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 					IAnalysisSettings analysisSettings = samples.getAnalysisSettings();
 					if(analysisSettings != null) {
 						analysisSettings.setComparisonGroup1(comboViewer.getStructuredSelection().getFirstElement().toString());
+						UpdateNotifierUI.update(e.display, IChemClipseEvents.TOPIC_PCA_UPDATE_GROUPS, comboViewer.getStructuredSelection().getFirstElement().toString());
 					}
 				}
 			}
@@ -195,7 +210,7 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 		});
 		combo.setToolTipText("Group two for comparison");
 		GridData gridData = new GridData();
-		gridData.widthHint = 250;
+		gridData.widthHint = 150;
 		combo.setLayoutData(gridData);
 		combo.addSelectionListener(new SelectionAdapter() {
 
@@ -206,6 +221,7 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 					IAnalysisSettings analysisSettings = samples.getAnalysisSettings();
 					if(analysisSettings != null) {
 						analysisSettings.setComparisonGroup2(comboViewer.getStructuredSelection().getFirstElement().toString());
+						UpdateNotifierUI.update(e.display, IChemClipseEvents.TOPIC_PCA_UPDATE_GROUPS, comboViewer.getStructuredSelection().getFirstElement().toString());
 					}
 				}
 			}
@@ -222,7 +238,7 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 
 	private void createSettingsButton(Composite parent) {
 
-		createSettingsButton(parent, Arrays.asList(PreferencePage.class, PreferencePageLoadingPlot.class), new ISettingsHandler() {
+		createSettingsButton(parent, Arrays.asList(PreferencePage.class, PreferencePageFoldChangePlot.class), new ISettingsHandler() {
 
 			@Override
 			public void apply(Display display) {

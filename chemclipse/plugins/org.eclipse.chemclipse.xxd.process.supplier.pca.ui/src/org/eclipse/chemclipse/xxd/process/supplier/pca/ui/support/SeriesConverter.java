@@ -233,8 +233,8 @@ public class SeriesConverter {
 					////
 					IScatterSeriesSettings scatterSeriesSettings = scatterSeriesData.getSettings();
 					// scatterSeriesSettings.setDescription(samples.getVariables().get(i).getDescription());
-					scatterSeriesSettings.setSymbolType(createFromSettings(preferenceStore, PreferenceSupplier.P_SCORE_PLOT_2D_SYMBOL_TYPE));
-					scatterSeriesSettings.setSymbolSize(preferenceStore.getInt(PreferenceSupplier.P_SCORE_PLOT_2D_SYMBOL_SIZE));
+					scatterSeriesSettings.setSymbolType(createFromSettings(preferenceStore, PreferenceSupplier.P_FOLD_CHANGE_PLOT_SYMBOL_TYPE));
+					scatterSeriesSettings.setSymbolSize(preferenceStore.getInt(PreferenceSupplier.P_FOLD_CHANGE_PLOT_SYMBOL_SIZE));
 					scatterSeriesSettings.setSymbolColor(Colors.RED);
 					////
 					scatterSeriesDataList.add(scatterSeriesData);
