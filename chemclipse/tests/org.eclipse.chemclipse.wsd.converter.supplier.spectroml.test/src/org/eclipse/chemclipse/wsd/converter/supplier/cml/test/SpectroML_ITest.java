@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.wsd.converter.supplier.cml.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 import java.time.ZoneId;
@@ -24,15 +24,18 @@ import org.eclipse.chemclipse.wsd.converter.supplier.spectroml.converter.ScanImp
 import org.eclipse.chemclipse.wsd.converter.supplier.spectroml.model.IVendorSpectrumWSD;
 import org.eclipse.chemclipse.wsd.model.core.ISpectrumWSD;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class SpectroML_ITest {
 
-	private static ISpectrumWSD spectrumWSD;
+	private ISpectrumWSD spectrumWSD;
 
-	@BeforeClass
-	public static void setUp() {
+	@BeforeAll
+	public void setUp() {
 
 		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.SAMPLE));
 		ScanImportConverter importConverter = new ScanImportConverter();

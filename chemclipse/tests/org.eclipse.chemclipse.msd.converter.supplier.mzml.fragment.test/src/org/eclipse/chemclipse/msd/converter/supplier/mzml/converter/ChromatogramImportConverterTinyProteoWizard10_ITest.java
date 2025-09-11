@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.supplier.mzml.converter;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
@@ -23,15 +23,18 @@ import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramImportConverterTinyProteoWizard10_ITest {
 
-	private static IVendorChromatogram chromatogram;
+	private IVendorChromatogram chromatogram;
 
-	@BeforeClass
-	public static void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		File importFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_TINY_PWIZ_1_0));
 		ChromatogramImportConverter converter = new ChromatogramImportConverter();
@@ -69,31 +72,31 @@ public class ChromatogramImportConverterTinyProteoWizard10_ITest {
 	@Test
 	public void testNumberOfScans() {
 
-		assertEquals("NumberOfScans", 3, chromatogram.getNumberOfScans());
+		assertEquals(3, chromatogram.getNumberOfScans());
 	}
 
 	@Test
 	public void testStartRetentionTime() {
 
-		assertEquals("Start RT", 353430, chromatogram.getStartRetentionTime());
+		assertEquals(353430, chromatogram.getStartRetentionTime());
 	}
 
 	@Test
 	public void testStopRetentionTime() {
 
-		assertEquals("Stop RT", 42050, chromatogram.getStopRetentionTime());
+		assertEquals(42050, chromatogram.getStopRetentionTime());
 	}
 
 	@Test
 	public void testTotalSignal() {
 
-		assertEquals("Total Signal", 350.0f, chromatogram.getTotalSignal(), 0);
+		assertEquals(350.0f, chromatogram.getTotalSignal(), 0);
 	}
 
 	@Test
 	public void testMaxIonAbundance() {
 
-		assertEquals("Max Signal", 20.0f, chromatogram.getMaxIonAbundance(), 0);
+		assertEquals(20.0f, chromatogram.getMaxIonAbundance(), 0);
 	}
 
 	@Test
@@ -101,7 +104,7 @@ public class ChromatogramImportConverterTinyProteoWizard10_ITest {
 
 		IRegularMassSpectrum massSpectrum = (IRegularMassSpectrum)chromatogram.getScan(1);
 		assertEquals("S19", massSpectrum.getIdentifier());
-		assertEquals("Ions", 15, massSpectrum.getNumberOfIons());
+		assertEquals(15, massSpectrum.getNumberOfIons(), "Ions");
 		assertEquals(15f, massSpectrum.getIon(0).getAbundance(), 0);
 		assertEquals(14f, massSpectrum.getIon(1).getAbundance(), 0);
 		assertEquals(13f, massSpectrum.getIon(2).getAbundance(), 0);

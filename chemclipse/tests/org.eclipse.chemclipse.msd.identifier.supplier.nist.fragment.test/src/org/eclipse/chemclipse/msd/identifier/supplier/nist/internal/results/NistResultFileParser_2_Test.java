@@ -12,14 +12,17 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.identifier.supplier.nist.internal.results;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
 import org.eclipse.chemclipse.msd.identifier.supplier.nist.TestPathHelper;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class NistResultFileParser_2_Test {
 
 	private NistResultFileParser nistResultFileParser;
@@ -28,8 +31,8 @@ public class NistResultFileParser_2_Test {
 	private Compound compound;
 	private Hit hit;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		nistResultFileParser = new NistResultFileParser();
 		results = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_NIST_SRCRESLT_2));
@@ -39,7 +42,7 @@ public class NistResultFileParser_2_Test {
 	@Test
 	public void testSize_1() {
 
-		assertEquals("Size", 4, compounds.size());
+		assertEquals(4, compounds.size());
 	}
 
 	@Test

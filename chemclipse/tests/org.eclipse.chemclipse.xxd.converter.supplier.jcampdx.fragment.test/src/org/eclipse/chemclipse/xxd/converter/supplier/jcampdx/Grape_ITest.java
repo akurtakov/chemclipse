@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.converter.supplier.jcampdx;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 
@@ -21,15 +21,18 @@ import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.wsd.converter.supplier.jcampdx.converter.ScanImportConverter;
 import org.eclipse.chemclipse.wsd.model.core.ISpectrumWSD;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class Grape_ITest {
 
-	private static ISpectrumWSD spectrumWSD;
+	private ISpectrumWSD spectrumWSD;
 
-	@BeforeClass
-	public static void setUp() {
+	@BeforeAll
+	public void setUp() {
 
 		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.GRAPE));
 		ScanImportConverter importConverter = new ScanImportConverter();

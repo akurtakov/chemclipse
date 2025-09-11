@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.supplier.mzdata.converter;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
@@ -25,15 +25,18 @@ import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.Polarity;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramImportConverterMyoDta105_ITest {
 
 	private IVendorChromatogram chromatogram;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		File importFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_MYO_DTA_105));
 		ChromatogramImportConverter converter = new ChromatogramImportConverter();
@@ -71,26 +74,26 @@ public class ChromatogramImportConverterMyoDta105_ITest {
 	@Test
 	public void testNumberOfScans() {
 
-		assertEquals("NumberOfScans", 6, chromatogram.getNumberOfScans());
+		assertEquals(6, chromatogram.getNumberOfScans());
 	}
 
 	@Test
 	public void testTotalSignal() {
 
-		assertEquals("Total Signal", 4.4378344E7f, chromatogram.getTotalSignal(), 0);
+		assertEquals(4.4378344E7f, chromatogram.getTotalSignal(), 0);
 	}
 
 	@Test
 	public void testMaxIonAbundance() {
 
-		assertEquals("Max Signal", 2383616.0f, chromatogram.getMaxIonAbundance(), 0);
+		assertEquals(2383616.0f, chromatogram.getMaxIonAbundance(), 0);
 	}
 
 	@Test
 	public void testFirstScan() {
 
 		IVendorScan massSpectrum = (VendorScan)chromatogram.getScan(1);
-		assertEquals("Ions", 331, massSpectrum.getNumberOfIons());
+		assertEquals(331, massSpectrum.getNumberOfIons(), "Ions");
 		assertEquals(Polarity.POSITIVE, massSpectrum.getPolarity());
 		assertEquals(661.65d, massSpectrum.getPrecursorIon(), 0);
 		assertEquals(28d, massSpectrum.getIons().get(0).getIonTransition().getCollisionEnergy(), 0);

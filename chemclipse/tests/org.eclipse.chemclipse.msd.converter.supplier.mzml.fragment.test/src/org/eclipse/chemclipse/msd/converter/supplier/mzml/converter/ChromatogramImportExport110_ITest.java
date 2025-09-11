@@ -13,8 +13,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.supplier.mzml.converter;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 
@@ -24,19 +24,20 @@ import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.After;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramImportExport110_ITest {
 
-	private static IChromatogramMSD chromatogramImport;
-	private static IChromatogramMSD chromatogram;
-	private static File fileImport;
-	private static File fileExport;
+	private IChromatogramMSD chromatogram;
+	private File fileExport;
 
-	@BeforeClass
-	public static void setUp() {
+	@BeforeAll
+	public void setUp() {
 
 		/*
 		 * Import
@@ -53,9 +54,9 @@ public class ChromatogramImportExport110_ITest {
 		/*
 		 * Import the chromatogram.
 		 */
-		fileImport = new File(pathImport);
+		File fileImport = new File(pathImport);
 		IProcessingInfo<IChromatogramMSD> processingInfoImport = ChromatogramConverterMSD.getInstance().convert(fileImport, extensionPointImport, new NullProgressMonitor());
-		chromatogramImport = processingInfoImport.getProcessingResult();
+		IChromatogramMSD chromatogramImport = processingInfoImport.getProcessingResult();
 		/*
 		 * Export the chromatogram.
 		 */
@@ -65,13 +66,12 @@ public class ChromatogramImportExport110_ITest {
 		/*
 		 * Reimport the exported chromatogram.
 		 */
-		chromatogramImport = null;
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileExport, extensionPointExportReimport, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();
 	}
 
-	@After
-	public void tearDown() throws Exception {
+	@AfterAll
+	public void tearDown() {
 
 		fileExport.delete();
 	}

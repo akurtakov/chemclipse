@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.converter.supplier.csv.io;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 
@@ -25,17 +25,20 @@ import org.eclipse.chemclipse.xxd.converter.supplier.csv.TestPathHelper;
 import org.eclipse.chemclipse.xxd.converter.supplier.csv.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.After;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramReader_1_ITest {
 
-	private static File fileExport;
-	private static IChromatogramMSD chromatogram;
+	private File fileExport;
+	private IChromatogramMSD chromatogram;
 
-	@BeforeClass
-	public static void setUp() {
+	@BeforeAll
+	public void setUp() {
 
 		PreferenceSupplier.setImportDelimiter(Delimiter.COMMA);
 		PreferenceSupplier.setImportZeroMarker("0.0");
@@ -68,7 +71,7 @@ public class ChromatogramReader_1_ITest {
 		chromatogram = processingInfo.getProcessingResult();
 	}
 
-	@After
+	@AfterAll
 	public void tearDown() {
 
 		fileExport.delete();

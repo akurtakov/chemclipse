@@ -12,20 +12,23 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.identifier.supplier.pubchem.fragment.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.identifier.LibraryInformation;
 import org.eclipse.chemclipse.xxd.identifier.supplier.pubchem.rest.PowerUserGateway;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class Vioxx_Test {
 
-	private static ILibraryInformation libraryInformation;
+	private ILibraryInformation libraryInformation;
 
-	@BeforeClass
-	public static void setUp() {
+	@BeforeAll
+	public void setUp() {
 
 		libraryInformation = new LibraryInformation();
 		libraryInformation.setName("Vioxx");

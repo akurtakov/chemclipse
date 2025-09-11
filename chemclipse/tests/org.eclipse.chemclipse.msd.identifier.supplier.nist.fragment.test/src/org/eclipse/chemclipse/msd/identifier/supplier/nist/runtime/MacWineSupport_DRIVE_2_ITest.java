@@ -12,24 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.identifier.supplier.nist.runtime;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 
 import org.eclipse.chemclipse.msd.identifier.supplier.nist.TestPathHelper;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class MacWineSupport_DRIVE_2_ITest extends AbstractBackgroundTestCase {
 
 	private IExtendedRuntimeSupport runtimeSupport;
 
 	@Override
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() throws FileNotFoundException {
 
 		super.setUp();
 	}
