@@ -880,7 +880,6 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 			List<String> groups = samples.getSamples().stream().map(x -> x.getGroupName()).distinct().toList();
 			oplsGroupTargets.addAll(groups);
 			UpdateNotifierUI.update(getDisplay(), IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, groups.toArray());
-			UpdateNotifierUI.update(getDisplay(), IChemClipseEvents.TOPIC_PCA_UPDATE_GROUPS, groups.toArray());
 		}
 	}
 

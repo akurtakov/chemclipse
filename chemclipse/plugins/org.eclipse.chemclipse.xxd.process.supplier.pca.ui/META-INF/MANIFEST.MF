@@ -48,7 +48,9 @@ Require-Bundle: org.eclipse.ui,
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Import-Package: jakarta.annotation;version="2.1.1",
  jakarta.inject;version="2.0.1",
- org.apache.commons.math3.stat.descriptive;version="[3.6.0,4.0.0)"
+ org.apache.commons.math3.stat.descriptive;version="[3.6.0,4.0.0)",
+ org.apache.commons.math3.stat.inference;version="[3.6.0,4.0.0)",
+ org.apache.commons.math3.util;version="[3.6.0,4.0.0)"
 Bundle-ActivationPolicy: lazy
 Service-Component: OSGI-INF/org.eclipse.chemclipse.xxd.process.supplier.pca.ui.quickstart.FileTileDefinition.xml,
  OSGI-INF/org.eclipse.chemclipse.xxd.process.supplier.pca.ui.quickstart.FilesLongFormatTileDefinition.xml,
