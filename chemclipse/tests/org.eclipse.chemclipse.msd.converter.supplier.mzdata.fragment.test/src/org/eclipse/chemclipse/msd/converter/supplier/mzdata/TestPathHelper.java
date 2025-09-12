@@ -20,4 +20,5 @@ public class TestPathHelper extends PathResolver {
 	public static final String TESTFILE_IMPORT_MALDI_AXIMA_CFR = "testData/files/import/maldi_axima-cfr.mzData";
 	public static final String TESTFILE_IMPORT_MYO_DTA_105 = "testData/files/import/myo_dta_1.05cv.mzData";
 	public static final String TESTFILE_IMPORT_MYO_DTA_104 = "testData/files/import/myo_dta_1.04.mzData";
+	public static final String TESTFILE_IMPORT_TINY_105 = "testData/files/import/tiny1_1.05.mzData";
 }
