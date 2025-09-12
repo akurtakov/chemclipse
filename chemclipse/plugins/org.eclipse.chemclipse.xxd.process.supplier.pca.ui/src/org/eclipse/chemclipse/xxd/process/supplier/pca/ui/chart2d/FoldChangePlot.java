@@ -12,32 +12,233 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.List;
+import java.util.Locale;
 
 import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.model.statistics.IVariable;
+import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
+import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.custom.IRangeSupport;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.SeriesConverter;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt.FoldChangeLimits;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swtchart.IAxis;
+import org.eclipse.swtchart.IAxis.Position;
+import org.eclipse.swtchart.IAxisSet;
+import org.eclipse.swtchart.IPlotArea;
+import org.eclipse.swtchart.Range;
+import org.eclipse.swtchart.extensions.axisconverter.PassThroughConverter;
+import org.eclipse.swtchart.extensions.core.BaseChart;
+import org.eclipse.swtchart.extensions.core.IChartSettings;
+import org.eclipse.swtchart.extensions.core.IExtendedChart;
+import org.eclipse.swtchart.extensions.core.IPrimaryAxisSettings;
+import org.eclipse.swtchart.extensions.core.ISecondaryAxisSettings;
+import org.eclipse.swtchart.extensions.core.RangeRestriction;
+import org.eclipse.swtchart.extensions.core.SecondaryAxisSettings;
 import org.eclipse.swtchart.extensions.scattercharts.IScatterSeriesData;
+import org.eclipse.swtchart.extensions.scattercharts.ScatterChart;
 
-public class FoldChangePlot extends AbstractPlotPCA {
+public class FoldChangePlot extends ScatterChart implements IRangeSupport {
+
+	private DecimalFormat decimalFormat = new DecimalFormat(("0.00E0"), new DecimalFormatSymbols(Locale.ENGLISH));
+	private String title = "";
+
+	private Range selectedRangeX = null;
+	private Range selectedRangeY = null;
+	private FoldChangeLimits foldChangeLimits;
 
 	public FoldChangePlot(Composite parent, int style) {
 
-		super(parent, style, "Fold Change Plot");
+		super(parent, style);
+		this.title = "Fold Change Plot";
+		initialize();
 	}
 
 	public void setInput(EvaluationPCA evaluationPCA, String group1, String group2) {
 
 		deleteSeries();
 		if(evaluationPCA != null) {
+			addLimits();
 			ISamplesPCA<IVariable, ISample> samples = evaluationPCA.getSamples();
 			List<IScatterSeriesData> series;
 			series = SeriesConverter.foldChangeToSeries(samples, group1, group2);
 			addSeriesData(series);
+
 		}
+		redraw();
+	}
+
+	private void initialize() {
+
+		IChartSettings chartSettings = getChartSettings();
+		chartSettings.setTitle(title);
+		chartSettings.setTitleVisible(true);
+		if(PreferencesSupport.isDarkTheme()) {
+			chartSettings.setTitleColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
+		} else {
+			chartSettings.setTitleColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
+		}
+		chartSettings.setBackground(null);
+		chartSettings.setBackgroundChart(null);
+		chartSettings.setBackgroundPlotArea(null);
+		chartSettings.setOrientation(SWT.HORIZONTAL);
+		chartSettings.setHorizontalSliderVisible(false);
+		chartSettings.setVerticalSliderVisible(false);
+
+		RangeRestriction rangeRestriction = chartSettings.getRangeRestriction();
+		rangeRestriction.setZeroX(false);
+		rangeRestriction.setZeroY(false);
+		rangeRestriction.setRestrictFrame(true);
+		rangeRestriction.setExtendTypeX(RangeRestriction.ExtendType.RELATIVE);
+		rangeRestriction.setExtendTypeY(RangeRestriction.ExtendType.RELATIVE);
+		rangeRestriction.setExtend(0.25d);
+
+		chartSettings.setShowAxisZeroMarker(true);
+		if(PreferencesSupport.isDarkTheme()) {
+			chartSettings.setColorAxisZeroMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
+		} else {
+			chartSettings.setColorAxisZeroMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
+		}
+		chartSettings.setShowSeriesLabelMarker(true);
+		if(PreferencesSupport.isDarkTheme()) {
+			chartSettings.setColorSeriesLabelMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
+		} else {
+			chartSettings.setColorSeriesLabelMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
+		}
+		chartSettings.setUseSeriesLabelDescription(true);
+		chartSettings.setCreateMenu(true);
+		chartSettings.setEnableCompress(false);
+
+		setPrimaryAxisSet(chartSettings);
+		addSecondaryAxisSet(chartSettings);
+
+		applySettings(chartSettings);
+
+	}
+
+	private void addLimits() {
+
+		BaseChart baseChart = getBaseChart();
+		IPlotArea plotArea = baseChart.getPlotArea();
+
+		if(foldChangeLimits != null) {
+			plotArea.removeCustomPaintListener(foldChangeLimits);
+		}
+		foldChangeLimits = new FoldChangeLimits(baseChart);
+		plotArea.addCustomPaintListener(foldChangeLimits);
+
+	}
+
+	private void setPrimaryAxisSet(IChartSettings chartSettings) {
+
+		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
+		primaryAxisSettingsX.setTitle("log2(fold change)");
+		primaryAxisSettingsX.setDecimalFormat(decimalFormat);
+		if(PreferencesSupport.isDarkTheme()) {
+			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
+		} else {
+			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
+		}
+
+		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
+		primaryAxisSettingsY.setTitle("-log10(pValue)");
+		primaryAxisSettingsY.setDecimalFormat(decimalFormat);
+		if(PreferencesSupport.isDarkTheme()) {
+			primaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
+		} else {
+			primaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
+		}
+	}
+
+	private void addSecondaryAxisSet(IChartSettings chartSettings) {
+
+		ISecondaryAxisSettings secondaryAxisSettingsX = new SecondaryAxisSettings("log2(fold change)", new PassThroughConverter());
+		secondaryAxisSettingsX.setTitle("");
+		secondaryAxisSettingsX.setPosition(Position.Secondary);
+		secondaryAxisSettingsX.setDecimalFormat(decimalFormat);
+		if(PreferencesSupport.isDarkTheme()) {
+			secondaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
+		} else {
+			secondaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
+		}
+		chartSettings.getSecondaryAxisSettingsListX().add(secondaryAxisSettingsX);
+
+		ISecondaryAxisSettings secondaryAxisSettingsY = new SecondaryAxisSettings("-log10(pValue)", new PassThroughConverter());
+		secondaryAxisSettingsY.setTitle("");
+		secondaryAxisSettingsY.setPosition(Position.Secondary);
+		secondaryAxisSettingsY.setDecimalFormat(decimalFormat);
+		if(PreferencesSupport.isDarkTheme()) {
+			secondaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
+		} else {
+			secondaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
+		}
+		chartSettings.getSecondaryAxisSettingsListY().add(secondaryAxisSettingsY);
+	}
+
+	@Override
+	public void clearSelectedRange() {
+
+		selectedRangeX = null;
+		selectedRangeY = null;
+	}
+
+	@Override
+	public void assignCurrentRangeSelection() {
+
+		BaseChart baseChart = getBaseChart();
+		selectedRangeX = baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS).getRange();
+		selectedRangeY = baseChart.getAxisSet().getYAxis(BaseChart.ID_PRIMARY_Y_AXIS).getRange();
+	}
+
+	@Override
+	public Range getCurrentRangeX() {
+
+		BaseChart baseChart = getBaseChart();
+		IAxisSet axisSet = baseChart.getAxisSet();
+		IAxis xAxis = axisSet.getXAxis(BaseChart.ID_PRIMARY_X_AXIS);
+		return new Range(xAxis.getRange().lower, xAxis.getRange().upper);
+	}
+
+	@Override
+	public void updateRangeX(Range selectedRangeX) {
+
+		updateRange(selectedRangeX, selectedRangeY);
+	}
+
+	@Override
+	public Range getCurrentRangeY() {
+
+		BaseChart baseChart = getBaseChart();
+		IAxisSet axisSet = baseChart.getAxisSet();
+		IAxis yAxis = axisSet.getYAxis(BaseChart.ID_PRIMARY_Y_AXIS);
+		return new Range(yAxis.getRange().lower, yAxis.getRange().upper);
+	}
+
+	@Override
+	public void updateRangeY(Range selectedRangeY) {
+
+		updateRange(selectedRangeX, selectedRangeY);
+	}
+
+	@Override
+	public void updateRange(Range selectedRangeX, Range selectedRangeY) {
+
+		this.selectedRangeX = selectedRangeX;
+		this.selectedRangeY = selectedRangeY;
+		adjustChartRange();
+	}
+
+	@Override
+	public void adjustChartRange() {
+
+		setRange(IExtendedChart.X_AXIS, selectedRangeX);
+		setRange(IExtendedChart.Y_AXIS, selectedRangeY);
 		redraw();
 	}
 
