@@ -199,9 +199,9 @@ public class ChromatogramReaderVersion105 extends AbstractChromatogramReader imp
 		for(Object object : spectrumInstrument.getCvParamOrUserParam()) {
 			if(object instanceof CvParamType cvParamType) {
 				if(cvParamType.getName().equals("Polarity") && cvParamType.getAccession().equals("PSI:1000037")) {
-					if(cvParamType.getValue().equals("Positive")) {
+					if(cvParamType.getValue().equalsIgnoreCase("Positive")) {
 						massSpectrum.setPolarity(Polarity.POSITIVE);
-					} else if(cvParamType.getValue().equals("Negative")) {
+					} else if(cvParamType.getValue().equalsIgnoreCase("Negative")) {
 						massSpectrum.setPolarity(Polarity.NEGATIVE);
 					}
 				}
