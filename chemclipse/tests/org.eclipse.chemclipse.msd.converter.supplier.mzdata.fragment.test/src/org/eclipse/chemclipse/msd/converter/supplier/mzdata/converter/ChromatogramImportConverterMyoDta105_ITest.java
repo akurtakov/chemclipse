@@ -22,6 +22,7 @@ import org.eclipse.chemclipse.msd.converter.supplier.mzdata.model.IVendorScan;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.model.VendorChromatogram;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.model.VendorScan;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
+import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.msd.model.core.Polarity;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -97,5 +98,6 @@ public class ChromatogramImportConverterMyoDta105_ITest {
 		assertEquals(Polarity.POSITIVE, massSpectrum.getPolarity());
 		assertEquals(661.65d, massSpectrum.getPrecursorIon(), 0);
 		assertEquals(28d, massSpectrum.getIons().get(0).getIonTransition().getCollisionEnergy(), 0);
+		assertEquals(MassSpectrumType.CENTROID, massSpectrum.getMassSpectrumType());
 	}
 }

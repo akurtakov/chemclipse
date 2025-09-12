@@ -44,6 +44,7 @@ import org.eclipse.chemclipse.msd.converter.supplier.mzdata.model.VendorIon;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.model.VendorScan;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIonTransition;
+import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.msd.model.core.Polarity;
 import org.eclipse.chemclipse.msd.model.implementation.IonTransition;
 import org.eclipse.chemclipse.support.history.EditInformation;
@@ -87,6 +88,7 @@ public class ChromatogramReaderVersion105 extends AbstractChromatogramReader imp
 				IVendorScan massSpectrum = new VendorScan();
 				SpectrumInstrument spectrumInstrument = spectrum.getSpectrumDesc().getSpectrumSettings().getSpectrumInstrument();
 				setPolarity(spectrumInstrument, massSpectrum);
+				setPeakProcessing(spectrumInstrument, massSpectrum);
 				massSpectrum.setRetentionTime(readRetentionTime(spectrumInstrument));
 				/*
 				 * MS/MS
@@ -203,6 +205,21 @@ public class ChromatogramReaderVersion105 extends AbstractChromatogramReader imp
 						massSpectrum.setPolarity(Polarity.POSITIVE);
 					} else if(cvParamType.getValue().equalsIgnoreCase("Negative")) {
 						massSpectrum.setPolarity(Polarity.NEGATIVE);
+					}
+				}
+			}
+		}
+	}
+
+	private void setPeakProcessing(SpectrumInstrument spectrumInstrument, IVendorScan massSpectrum) {
+
+		for(Object object : spectrumInstrument.getCvParamOrUserParam()) {
+			if(object instanceof CvParamType cvParamType) {
+				if(cvParamType.getName().equals("PeakProcessing") && cvParamType.getAccession().equals("PSI:1000035")) {
+					if(cvParamType.getValue().equalsIgnoreCase("CentroidMassSpectrum")) {
+						massSpectrum.setMassSpectrumType(MassSpectrumType.CENTROID);
+					} else if(cvParamType.getValue().equalsIgnoreCase("continuous")) {
+						massSpectrum.setMassSpectrumType(MassSpectrumType.PROFILE);
 					}
 				}
 			}
