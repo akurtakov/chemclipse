@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.converter.supplier.ocx;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,10 +32,10 @@ import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.methods.MethodExportConverter;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.methods.MethodImportConverter;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-@Ignore // TODO
+@Disabled // TODO
 public class MethodReaderTest {
 
 	private static final String FIRST_STREAM_SUPPORT_FORMAT = "Format_v0.0.3.ocm";
@@ -44,7 +44,7 @@ public class MethodReaderTest {
 	MethodExportConverter exportConverter = new MethodExportConverter();
 
 	@Test
-	public void testRead() throws IOException, URISyntaxException {
+	public void testRead() throws URISyntaxException {
 
 		boolean stream = false;
 		for(String filename : FORMAT_FILES) {
@@ -54,7 +54,7 @@ public class MethodReaderTest {
 			}
 			IProcessMethod result1 = checkRead(file, false);
 			if(stream) {
-				assertTrue("result read from file differs from stream!", result1.contentEquals(checkRead(file, true), true));
+				assertTrue(result1.contentEquals(checkRead(file, true), true), "result read from file differs from stream!");
 			}
 		}
 	}
@@ -79,9 +79,9 @@ public class MethodReaderTest {
 
 	private void checkResult(String filename, IProcessingInfo<IProcessMethod> convert, String context) {
 
-		assertNotNull("[" + context + "] IProcessingInfo was null for " + filename, convert);
-		assertFalse("[" + context + "] has errors (" + convert.getMessages() + ")", convert.hasErrorMessages());
-		assertNotNull("[" + context + "] IProcessingInfo#getProcessingResult() for " + filename + " was null", convert.getProcessingResult());
+		assertNotNull(convert, "[" + context + "] IProcessingInfo was null for " + filename);
+		assertFalse(convert.hasErrorMessages(), "[" + context + "] has errors (" + convert.getMessages() + ")");
+		assertNotNull(convert.getProcessingResult(), "[" + context + "] IProcessingInfo#getProcessingResult() for " + filename + " was null");
 	}
 
 	@Test
@@ -99,12 +99,12 @@ public class MethodReaderTest {
 		method.addProcessEntry(createEntry(method, "main1"));
 		exportConverter.convert(tempFile, method, messages, null);
 		ProcessMethod read = (ProcessMethod)checkRead(tempFile, false);
-		assertTrue("result read from file differs from stream!", read.contentEquals(checkRead(tempFile, true), true));
-		assertNotEquals("not different objects!", System.identityHashCode(method), System.identityHashCode(read));
+		assertTrue(read.contentEquals(checkRead(tempFile, true), true), "result read from file differs from stream!");
+		assertNotEquals(System.identityHashCode(method), System.identityHashCode(read), "not different objects!");
 		assertEquals(method.getUUID(), read.getUUID());
 		assertEquals(method.getName(), read.getName());
 		assertEquals(method.getOperator(), read.getOperator());
-		assertEquals("number of entries mismatched", method.getNumberOfEntries(), read.getNumberOfEntries());
+		assertEquals(method.getNumberOfEntries(), read.getNumberOfEntries(), "number of entries mismatched");
 		ProcessEntry subEntry = (ProcessEntry)read.getEntries().get(1);
 		assertEquals(subEntry.getEntries().size(), 2);
 	}
