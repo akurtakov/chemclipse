@@ -23,6 +23,9 @@ import org.eclipse.chemclipse.msd.converter.io.IMassSpectraReader;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.io.MassSpectrumReaderVersion20;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.io.MassSpectrumReaderVersion21;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.io.MassSpectrumReaderVersion22;
+import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.io.MassSpectrumReaderVersion30;
+import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.io.MassSpectrumReaderVersion31;
+import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.io.MassSpectrumReaderVersion32;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -49,6 +52,12 @@ public class MassSpectrumReader extends AbstractMassSpectraReader implements IMa
 			massSpectraReader = new MassSpectrumReaderVersion21();
 		} else if(header.contains(MassSpectrumReaderVersion22.VERSION)) {
 			massSpectraReader = new MassSpectrumReaderVersion22();
+		} else if(header.contains(MassSpectrumReaderVersion30.VERSION)) {
+			massSpectraReader = new MassSpectrumReaderVersion30();
+		} else if(header.contains(MassSpectrumReaderVersion31.VERSION)) {
+			massSpectraReader = new MassSpectrumReaderVersion31();
+		} else if(header.contains(MassSpectrumReaderVersion32.VERSION)) {
+			massSpectraReader = new MassSpectrumReaderVersion32();
 		} else {
 			throw new UnknownVersionException();
 		}
