@@ -29,7 +29,7 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class ChromatogramImportConverterMaldiAxima_ITest {
+public class MassSpectrumImportConverterMaldiAxima_ITest {
 
 	private IStandaloneMassSpectrum standaloneMassSpectrum;
 
