@@ -28,12 +28,16 @@ import jakarta.xml.bind.annotation.XmlType;
 public class MzData {
 
 	private List<CvLookupType> cvLookup;
+
 	@XmlElement(required = true)
 	private Description description;
+
 	@XmlElement(required = true)
 	private SpectrumList spectrumList;
+
 	@XmlAttribute(name = "version", required = true)
 	private String version;
+
 	@XmlAttribute(name = "accessionNumber", required = true)
 	private String accessionNumber;
 

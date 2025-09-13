@@ -30,6 +30,7 @@ import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v104.model.
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v104.model.DataProcessingType;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v104.model.DataProcessingType.Software;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v104.model.MzData;
+import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v104.model.MzData.Description;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v104.model.MzData.SpectrumList.Spectrum;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v104.model.ObjectFactory;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v104.model.ParamType;
@@ -217,7 +218,11 @@ public class ChromatogramReaderVersion104 extends AbstractChromatogramReader imp
 
 	private void readEditHistory(MzData mzData, IVendorChromatogram chromatogram) {
 
-		DataProcessingType dataProcessing = mzData.getDescription().getDataProcessing();
+		Description description = mzData.getDescription();
+		if(description == null) {
+			return;
+		}
+		DataProcessingType dataProcessing = description.getDataProcessing();
 		Software software = dataProcessing.getSoftware();
 		ParamType processingMethod = dataProcessing.getProcessingMethod();
 		if(processingMethod != null) {
