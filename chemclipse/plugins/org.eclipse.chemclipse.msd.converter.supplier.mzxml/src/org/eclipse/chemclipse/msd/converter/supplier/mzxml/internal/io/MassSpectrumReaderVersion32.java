@@ -15,11 +15,6 @@ package org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.io;
 
 import java.io.File;
 import java.io.IOException;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.DoubleBuffer;
-import java.nio.FloatBuffer;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -28,8 +23,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.eclipse.chemclipse.converter.l10n.ConverterMessages;
 import org.eclipse.chemclipse.logging.core.Logger;
-import org.eclipse.chemclipse.msd.converter.io.AbstractMassSpectraReader;
-import org.eclipse.chemclipse.msd.converter.io.IMassSpectraReader;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v32.model.Maldi;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v32.model.MsInstrument;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v32.model.MsRun;
@@ -52,7 +45,7 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 
-public class MassSpectrumReaderVersion32 extends AbstractMassSpectraReader implements IMassSpectraReader {
+public class MassSpectrumReaderVersion32 extends AbstractMassSpectrumReader {
 
 	public static final String VERSION = "mzXML_3.2";
 
@@ -124,35 +117,7 @@ public class MassSpectrumReaderVersion32 extends AbstractMassSpectraReader imple
 
 	private void readIons(Peaks peaks, IStandaloneMassSpectrum massSpectrum) {
 
-		ByteBuffer byteBuffer = ByteBuffer.wrap(peaks.getValue());
-		/*
-		 * Byte Order
-		 */
-		String byteOrder = peaks.getByteOrder();
-		if(byteOrder != null && byteOrder.equals("network")) {
-			byteBuffer.order(ByteOrder.BIG_ENDIAN);
-		} else {
-			byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
-		}
-		/*
-		 * Precision
-		 */
-		double[] values;
-		BigInteger precision = peaks.getPrecision();
-		if(precision != null && precision.intValue() == 64) {
-			DoubleBuffer doubleBuffer = byteBuffer.asDoubleBuffer();
-			values = new double[doubleBuffer.capacity()];
-			for(int index = 0; index < doubleBuffer.capacity(); index++) {
-				values[index] = doubleBuffer.get(index);
-			}
-		} else {
-			FloatBuffer floatBuffer = byteBuffer.asFloatBuffer();
-			values = new double[floatBuffer.capacity()];
-			for(int index = 0; index < floatBuffer.capacity(); index++) {
-				values[index] = floatBuffer.get(index);
-			}
-		}
-
+		double[] values = readPeaks(peaks.getValue(), peaks.getByteOrder(), peaks.getPrecision());
 		for(int peakIndex = 0; peakIndex < values.length - 1; peakIndex += 2) {
 			/*
 			 * Get m/z and intensity (m/z-int)
