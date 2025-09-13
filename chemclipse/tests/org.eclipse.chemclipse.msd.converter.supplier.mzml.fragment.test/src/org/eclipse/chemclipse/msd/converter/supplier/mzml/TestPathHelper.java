@@ -20,6 +20,10 @@ public class TestPathHelper extends PathResolver {
 	public static final String TESTFILE_IMPORT_TINY_PWIZ_1_0 = "testData/files/import/tiny.pwiz.1.0.mzML";
 	public static final String TESTFILE_IMPORT_TINY_PWIZ_1_1 = "testData/files/import/tiny.pwiz.1.1.mzML";
 	public static final String TESTFILE_IMPORT_CHROMATOGRAM_1 = "testData/files/import/Chromatogram1.ocb";
+
+	public static final String TESTFILE_IMPORT_TINY1_1_1 = "testData/files/import/tiny1.mzML1.1.mzML";
+	public static final String TESTFILE_IMPORT_TINY1_COMPRESSED_1_1 = "testData/files/import/tiny1-compressed.mzML1.1.mzML";
+	public static final String TESTFILE_IMPORT_TINY1_CENTROIDED_1_1 = "testData/files/import/tiny1-centroided.mzML1.1.mzML";
 	/*
 	 * EXPORT
 	 */

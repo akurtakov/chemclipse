@@ -27,7 +27,7 @@ import org.eclipse.chemclipse.msd.converter.supplier.mzml.converter.model.Vendor
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.StandaloneMassSpectrum;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.io.BinaryReader110;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.io.XmlReader110;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.BinaryDataArrayType;
@@ -49,35 +49,31 @@ public class MassSpectrumReaderVersion110 extends AbstractMassSpectraReader impl
 	@Override
 	public IMassSpectra read(File file, IProgressMonitor monitor) throws IOException {
 
-		IStandaloneMassSpectrum massSpectrum = null;
+		IVendorMassSpectra massSpectra = new VendorMassSpectra();
+		massSpectra.setName(file.getName());
 
 		try {
-
-			massSpectrum = new VendorMassSpectrum();
-			massSpectrum.setFile(file);
-			massSpectrum.setIdentifier(file.getName());
-
 			MzMLType mzML = XmlReader110.getMzML(file);
+			RunType run = mzML.getRun();
 
-			FileDescriptionType fileDescription = mzML.getFileDescription();
-			if(fileDescription != null) {
-				ParamGroupType fileContent = fileDescription.getFileContent();
-				for(CVParamType cvParam : fileContent.getCvParam()) {
-					if(cvParam.getAccession().equals("MS:1000579")) {
-						if(cvParam.getName().equals("MS1 spectrum")) {
-							massSpectrum.setMassSpectrometer((short)1);
+			for(SpectrumType spectrum : run.getSpectrumList().getSpectrum()) {
+
+				IStandaloneMassSpectrum massSpectrum = new StandaloneMassSpectrum();
+				massSpectrum.setFile(file);
+				massSpectrum.setIdentifier(file.getName());
+				massSpectrum.setPosition(spectrum.getSpotID());
+
+				FileDescriptionType fileDescription = mzML.getFileDescription();
+				if(fileDescription != null) {
+					ParamGroupType fileContent = fileDescription.getFileContent();
+					for(CVParamType cvParam : fileContent.getCvParam()) {
+						if(cvParam.getAccession().equals("MS:1000579")) {
+							if(cvParam.getName().equals("MS1 spectrum")) {
+								massSpectrum.setMassSpectrometer((short)1);
+							}
 						}
 					}
 				}
-			}
-
-			double[] mzs = null;
-			double[] intensities = null;
-
-			RunType run = mzML.getRun();
-			for(SpectrumType spectrum : run.getSpectrumList().getSpectrum()) {
-
-				massSpectrum.setPosition(spectrum.getSpotID());
 
 				for(CVParamType cvParam : spectrum.getCvParam()) {
 					if(cvParam.getAccession().equals("MS:1000127") && cvParam.getName().equals("centroid spectrum")) {
@@ -86,6 +82,10 @@ public class MassSpectrumReaderVersion110 extends AbstractMassSpectraReader impl
 						massSpectrum.setMassSpectrumType(MassSpectrumType.PROFILE);
 					}
 				}
+
+				double[] mzs = null;
+				double[] intensities = null;
+
 				for(BinaryDataArrayType binaryDataArrayType : spectrum.getBinaryDataArrayList().getBinaryDataArray()) {
 					Pair<String, double[]> binaryData = BinaryReader110.parseBinaryData(binaryDataArrayType);
 					if(binaryData.getKey().equals("m/z")) {
@@ -94,8 +94,11 @@ public class MassSpectrumReaderVersion110 extends AbstractMassSpectraReader impl
 						intensities = binaryData.getValue();
 					}
 				}
+				XmlMassSpectrumReader.addIons(intensities, mzs, massSpectrum);
+
+				massSpectra.addMassSpectrum(massSpectrum);
 			}
-			XmlMassSpectrumReader.addIons(intensities, mzs, massSpectrum);
+
 		} catch(SAXException e) {
 			logger.warn(e);
 		} catch(JAXBException e) {
@@ -106,9 +109,6 @@ public class MassSpectrumReaderVersion110 extends AbstractMassSpectraReader impl
 			logger.warn(e);
 		}
 
-		IVendorMassSpectra massSpectra = new VendorMassSpectra();
-		massSpectra.setName(file.getName());
-		massSpectra.addMassSpectrum(massSpectrum);
 		return massSpectra;
 	}
 }
