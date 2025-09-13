@@ -124,7 +124,12 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 	private LinkedHashMap<Double, RGB> getReversedGrayScaleMap() {
 
 		double[] values = new double[]{0, 1};
-		RGB[] colors = new RGB[]{new RGB(255, 255, 255), new RGB(0, 0, 0)};
+		RGB[] colors = new RGB[]{};
+		if(PreferencesSupport.isDarkTheme()) {
+			colors = new RGB[]{new RGB(0, 0, 0), new RGB(255, 255, 255)};
+		} else {
+			colors = new RGB[]{new RGB(255, 255, 255), new RGB(0, 0, 0)};
+		}
 		LinkedHashMap<Double, RGB> map = new LinkedHashMap<>();
 		for(int i = 0; i < values.length; i++) {
 			map.put(values[i], colors[i]);
