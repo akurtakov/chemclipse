@@ -16,6 +16,7 @@ package org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.io;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.zip.DataFormatException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -117,7 +118,15 @@ public class MassSpectrumReaderVersion30 extends AbstractMassSpectrumReader {
 
 	private void readIons(Peaks peaks, IStandaloneMassSpectrum massSpectrum) {
 
-		double[] values = readPeaks(peaks.getValue(), peaks.getByteOrder(), peaks.getPrecision());
+		double[] values = null;
+		try {
+			values = readPeaks(peaks.getValue(), peaks.getByteOrder(), peaks.getPrecision(), peaks.getCompressionType());
+		} catch(DataFormatException e) {
+			logger.error(e);
+		}
+		if(values == null) {
+			return;
+		}
 		for(int peakIndex = 0; peakIndex < values.length - 1; peakIndex += 2) {
 			/*
 			 * Get m/z and intensity (m/z-int)

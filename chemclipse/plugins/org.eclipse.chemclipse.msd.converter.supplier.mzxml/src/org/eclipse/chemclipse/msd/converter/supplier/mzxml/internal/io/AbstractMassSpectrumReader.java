@@ -18,13 +18,17 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
+import java.util.zip.DataFormatException;
+import java.util.zip.Inflater;
 
 import org.eclipse.chemclipse.msd.converter.io.AbstractMassSpectraReader;
 import org.eclipse.chemclipse.msd.converter.io.IMassSpectraReader;
 
 public abstract class AbstractMassSpectrumReader extends AbstractMassSpectraReader implements IMassSpectraReader {
 
-	public double[] readPeaks(byte[] bytes, String byteOrder, BigInteger precision) {
+	private Inflater inflater = new Inflater();
+
+	public double[] readPeaks(byte[] bytes, String byteOrder, BigInteger precision, String compressionType) throws DataFormatException {
 
 		ByteBuffer byteBuffer = ByteBuffer.wrap(bytes);
 		/*
@@ -34,6 +38,15 @@ public abstract class AbstractMassSpectrumReader extends AbstractMassSpectraRead
 			byteBuffer.order(ByteOrder.BIG_ENDIAN);
 		} else {
 			byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
+		}
+		/*
+		 * Compression
+		 */
+		if(compressionType != null && compressionType.equalsIgnoreCase("zlib")) {
+			inflater.reset();
+			inflater.setInput(byteBuffer.array());
+			byte[] byteArray = new byte[byteBuffer.capacity() * 10];
+			byteBuffer = ByteBuffer.wrap(byteArray, 0, inflater.inflate(byteArray));
 		}
 		/*
 		 * Precision
