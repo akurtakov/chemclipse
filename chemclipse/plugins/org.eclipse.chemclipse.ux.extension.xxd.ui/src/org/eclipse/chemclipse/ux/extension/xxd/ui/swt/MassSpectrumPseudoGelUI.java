@@ -20,7 +20,6 @@ import java.util.List;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
-import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.part.support.EditorUpdateSupport;
 import org.eclipse.draw2d.LightweightSystem;
@@ -124,7 +123,12 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 	private LinkedHashMap<Double, RGB> getReversedGrayScaleMap() {
 
 		double[] values = new double[]{0, 1};
-		RGB[] colors = new RGB[]{new RGB(255, 255, 255), new RGB(0, 0, 0)};
+		RGB[] colors = new RGB[]{};
+		if(PreferencesSupport.isDarkTheme()) {
+			colors = new RGB[]{new RGB(0, 0, 0), new RGB(255, 255, 255)};
+		} else {
+			colors = new RGB[]{new RGB(255, 255, 255), new RGB(0, 0, 0)};
+		}
 		LinkedHashMap<Double, RGB> map = new LinkedHashMap<>();
 		for(int i = 0; i < values.length; i++) {
 			map.put(values[i], colors[i]);
@@ -168,22 +172,14 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 	private LightweightSystem createLightweightSystem(Canvas canvas) {
 
 		LightweightSystem lightweightSystem = new LightweightSystem(canvas);
-		if(PreferencesSupport.isDarkTheme()) {
-			lightweightSystem.getRootFigure().setBackgroundColor(Colors.BLACK);
-		} else {
-			lightweightSystem.getRootFigure().setBackgroundColor(Colors.WHITE);
-		}
+		lightweightSystem.getRootFigure().setBackgroundColor(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 		return lightweightSystem;
 	}
 
 	private IntensityGraphFigure createIntensityGraphFigure(boolean zoom) {
 
 		IntensityGraphFigure intensityGraphFigure = new IntensityGraphFigure(zoom);
-		if(PreferencesSupport.isDarkTheme()) {
-			intensityGraphFigure.setForegroundColor(Colors.WHITE);
-		} else {
-			intensityGraphFigure.setForegroundColor(Colors.BLACK);
-		}
+		intensityGraphFigure.setForegroundColor(getDisplay().getSystemColor(SWT.COLOR_WIDGET_FOREGROUND));
 		intensityGraphFigure.getXAxis().setTitle("Retention Time [min]");
 		intensityGraphFigure.getYAxis().setTitle("Trace");
 

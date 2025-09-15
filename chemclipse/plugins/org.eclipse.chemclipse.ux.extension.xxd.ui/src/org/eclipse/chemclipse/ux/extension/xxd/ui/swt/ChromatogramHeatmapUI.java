@@ -26,9 +26,7 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
-import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
-import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
@@ -429,22 +427,15 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 	private LightweightSystem createLightweightSystem(Canvas canvas) {
 
 		LightweightSystem lightweightSystem = new LightweightSystem(canvas);
-		if(PreferencesSupport.isDarkTheme()) {
-			lightweightSystem.getRootFigure().setBackgroundColor(Colors.BLACK);
-		} else {
-			lightweightSystem.getRootFigure().setBackgroundColor(Colors.WHITE);
-		}
+		lightweightSystem.getRootFigure().setBackgroundColor(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
+
 		return lightweightSystem;
 	}
 
 	private IntensityGraphFigure createIntensityGraphFigure(boolean zoom) {
 
 		IntensityGraphFigure intensityGraphFigure = new IntensityGraphFigure(zoom);
-		if(PreferencesSupport.isDarkTheme()) {
-			intensityGraphFigure.setForegroundColor(Colors.WHITE);
-		} else {
-			intensityGraphFigure.setForegroundColor(Colors.BLACK);
-		}
+		intensityGraphFigure.setForegroundColor(getDisplay().getSystemColor(SWT.COLOR_WIDGET_FOREGROUND));
 		intensityGraphFigure.getXAxis().setTitle("Retention Time [min]");
 		intensityGraphFigure.getYAxis().setTitle("Trace");
 
