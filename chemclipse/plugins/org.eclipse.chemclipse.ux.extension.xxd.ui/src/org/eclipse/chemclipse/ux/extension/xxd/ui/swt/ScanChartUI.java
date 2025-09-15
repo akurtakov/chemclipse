@@ -30,7 +30,6 @@ import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.msd.model.support.ScanSupport;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
-import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.swt.ui.support.Fonts;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
@@ -573,11 +572,6 @@ public class ScanChartUI extends ScrollableChart {
 		chartSettings.setCreateMenu(true);
 		chartSettings.setEnableCompress(enableCompress);
 		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
-		if(PreferencesSupport.isDarkTheme()) {
-			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 
 		RangeRestriction rangeRestriction = chartSettings.getRangeRestriction();
 		rangeRestriction.setRestrictFrame(true);

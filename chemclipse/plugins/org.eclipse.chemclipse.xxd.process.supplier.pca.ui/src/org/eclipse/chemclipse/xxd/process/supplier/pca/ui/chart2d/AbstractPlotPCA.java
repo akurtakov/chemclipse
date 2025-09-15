@@ -21,8 +21,6 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.eclipse.chemclipse.support.text.ValueFormat;
-import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
-import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.custom.IRangeSupport;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
@@ -47,7 +45,6 @@ public abstract class AbstractPlotPCA extends ScatterChart implements IRangeSupp
 	private DecimalFormat decimalFormat = new DecimalFormat(("0.00E0"), new DecimalFormatSymbols(Locale.ENGLISH));
 	private String title = "";
 
-
 	private Range selectedRangeX = null;
 	private Range selectedRangeY = null;
 
@@ -64,22 +61,12 @@ public abstract class AbstractPlotPCA extends ScatterChart implements IRangeSupp
 		secondaryAxisSettingsX.setTitle("");
 		secondaryAxisSettingsX.setPosition(Position.Secondary);
 		secondaryAxisSettingsX.setDecimalFormat(decimalFormat);
-		if(PreferencesSupport.isDarkTheme()) {
-			secondaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			secondaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 		chartSettings.getSecondaryAxisSettingsListX().add(secondaryAxisSettingsX);
 
 		ISecondaryAxisSettings secondaryAxisSettingsY = new SecondaryAxisSettings("PC2", new PassThroughConverter());
 		secondaryAxisSettingsY.setTitle("");
 		secondaryAxisSettingsY.setPosition(Position.Secondary);
 		secondaryAxisSettingsY.setDecimalFormat(decimalFormat);
-		if(PreferencesSupport.isDarkTheme()) {
-			secondaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			secondaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 		chartSettings.getSecondaryAxisSettingsListY().add(secondaryAxisSettingsY);
 	}
 
@@ -116,11 +103,6 @@ public abstract class AbstractPlotPCA extends ScatterChart implements IRangeSupp
 		IChartSettings chartSettings = getChartSettings();
 		chartSettings.setTitle(title);
 		chartSettings.setTitleVisible(true);
-		if(PreferencesSupport.isDarkTheme()) {
-			chartSettings.setTitleColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			chartSettings.setTitleColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 		chartSettings.setBackground(null);
 		chartSettings.setBackgroundChart(null);
 		chartSettings.setBackgroundPlotArea(null);
@@ -137,17 +119,7 @@ public abstract class AbstractPlotPCA extends ScatterChart implements IRangeSupp
 		rangeRestriction.setExtend(0.25d);
 
 		chartSettings.setShowAxisZeroMarker(true);
-		if(PreferencesSupport.isDarkTheme()) {
-			chartSettings.setColorAxisZeroMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			chartSettings.setColorAxisZeroMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 		chartSettings.setShowSeriesLabelMarker(true);
-		if(PreferencesSupport.isDarkTheme()) {
-			chartSettings.setColorSeriesLabelMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			chartSettings.setColorSeriesLabelMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 		chartSettings.setUseSeriesLabelDescription(true);
 		chartSettings.setCreateMenu(true);
 		chartSettings.setEnableCompress(false);
@@ -168,20 +140,10 @@ public abstract class AbstractPlotPCA extends ScatterChart implements IRangeSupp
 		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
 		primaryAxisSettingsX.setTitle("PC1");
 		primaryAxisSettingsX.setDecimalFormat(decimalFormat);
-		if(PreferencesSupport.isDarkTheme()) {
-			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle("PC2");
 		primaryAxisSettingsY.setDecimalFormat(decimalFormat);
-		if(PreferencesSupport.isDarkTheme()) {
-			primaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			primaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 	}
 
 	protected void update(int pcX, int pcY, double[] explainedVariances) {

@@ -20,7 +20,6 @@ import java.util.Locale;
 import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
-import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.custom.IRangeSupport;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
@@ -79,11 +78,7 @@ public class FoldChangePlot extends ScatterChart implements IRangeSupport {
 		IChartSettings chartSettings = getChartSettings();
 		chartSettings.setTitle(title);
 		chartSettings.setTitleVisible(true);
-		if(PreferencesSupport.isDarkTheme()) {
-			chartSettings.setTitleColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			chartSettings.setTitleColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
+		chartSettings.setTitleColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WIDGET_FOREGROUND));
 		chartSettings.setBackground(null);
 		chartSettings.setBackgroundChart(null);
 		chartSettings.setBackgroundPlotArea(null);
@@ -100,17 +95,9 @@ public class FoldChangePlot extends ScatterChart implements IRangeSupport {
 		rangeRestriction.setExtend(0.25d);
 
 		chartSettings.setShowAxisZeroMarker(true);
-		if(PreferencesSupport.isDarkTheme()) {
-			chartSettings.setColorAxisZeroMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			chartSettings.setColorAxisZeroMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
+		chartSettings.setColorAxisZeroMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WIDGET_FOREGROUND));
 		chartSettings.setShowSeriesLabelMarker(true);
-		if(PreferencesSupport.isDarkTheme()) {
-			chartSettings.setColorSeriesLabelMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			chartSettings.setColorSeriesLabelMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
+		chartSettings.setColorSeriesLabelMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WIDGET_FOREGROUND));
 		chartSettings.setUseSeriesLabelDescription(true);
 		chartSettings.setCreateMenu(true);
 		chartSettings.setEnableCompress(false);
@@ -140,20 +127,12 @@ public class FoldChangePlot extends ScatterChart implements IRangeSupport {
 		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
 		primaryAxisSettingsX.setTitle("log2(fold change)");
 		primaryAxisSettingsX.setDecimalFormat(decimalFormat);
-		if(PreferencesSupport.isDarkTheme()) {
-			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
+		primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WIDGET_FOREGROUND));
 
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle("-log10(pValue)");
 		primaryAxisSettingsY.setDecimalFormat(decimalFormat);
-		if(PreferencesSupport.isDarkTheme()) {
-			primaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			primaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
+		primaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WIDGET_FOREGROUND));
 	}
 
 	private void addSecondaryAxisSet(IChartSettings chartSettings) {
@@ -162,22 +141,14 @@ public class FoldChangePlot extends ScatterChart implements IRangeSupport {
 		secondaryAxisSettingsX.setTitle("");
 		secondaryAxisSettingsX.setPosition(Position.Secondary);
 		secondaryAxisSettingsX.setDecimalFormat(decimalFormat);
-		if(PreferencesSupport.isDarkTheme()) {
-			secondaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			secondaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
+		secondaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WIDGET_FOREGROUND));
 		chartSettings.getSecondaryAxisSettingsListX().add(secondaryAxisSettingsX);
 
 		ISecondaryAxisSettings secondaryAxisSettingsY = new SecondaryAxisSettings("-log10(pValue)", new PassThroughConverter());
 		secondaryAxisSettingsY.setTitle("");
 		secondaryAxisSettingsY.setPosition(Position.Secondary);
 		secondaryAxisSettingsY.setDecimalFormat(decimalFormat);
-		if(PreferencesSupport.isDarkTheme()) {
-			secondaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			secondaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
+		secondaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WIDGET_FOREGROUND));
 		chartSettings.getSecondaryAxisSettingsListY().add(secondaryAxisSettingsY);
 	}
 

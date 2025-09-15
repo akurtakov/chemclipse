@@ -76,7 +76,6 @@ public class ExtendedFSDScanUI extends Composite implements IExtendedPartUI {
 
 		LineSeriesData lineSeriesData = new LineSeriesData(getSeriesData(spectrumFSD.getExcitation(), "Excitation"));
 		ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
-		lineSeriesSettings.setLineColor(Colors.BLACK);
 		lineSeriesSettings.setEnableArea(false);
 		return lineSeriesData;
 	}

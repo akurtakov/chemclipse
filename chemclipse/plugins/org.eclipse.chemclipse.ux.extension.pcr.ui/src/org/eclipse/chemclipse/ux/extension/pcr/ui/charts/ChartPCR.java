@@ -29,8 +29,6 @@ import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
-import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
-import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.ux.extension.pcr.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.xxd.process.ui.menu.IMenuIcon;
 import org.eclipse.core.runtime.CoreException;
@@ -101,22 +99,12 @@ public class ChartPCR extends LineChart {
 		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
 		primaryAxisSettingsX.setTitle(ExtensionMessages.cycle);
 		primaryAxisSettingsX.setDecimalFormat(new DecimalFormat(("0"), new DecimalFormatSymbols(Locale.ENGLISH))); //$NON-NLS-1$
-		if(PreferencesSupport.isDarkTheme()) {
-			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 		primaryAxisSettingsX.setPosition(Position.Primary);
 		primaryAxisSettingsX.setVisible(true);
 
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle(ExtensionMessages.fluorescence);
 		primaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.0#E0"), new DecimalFormatSymbols(Locale.ENGLISH))); //$NON-NLS-1$
-		if(PreferencesSupport.isDarkTheme()) {
-			primaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			primaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 	}
 
 	@SuppressWarnings("deprecation")

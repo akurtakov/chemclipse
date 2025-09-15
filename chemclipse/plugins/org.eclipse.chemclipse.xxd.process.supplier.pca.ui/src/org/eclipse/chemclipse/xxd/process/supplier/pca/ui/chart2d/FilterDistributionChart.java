@@ -18,8 +18,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.chemclipse.support.text.ValueFormat;
-import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
-import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
 import org.eclipse.swt.SWT;
@@ -73,11 +71,6 @@ public class FilterDistributionChart extends BarChart {
 		rangeRestriction.setRestrictFrame(true);
 
 		chartSettings.setShowAxisZeroMarker(true);
-		if(PreferencesSupport.isDarkTheme()) {
-			chartSettings.setColorAxisZeroMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			chartSettings.setColorAxisZeroMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 		chartSettings.setShowSeriesLabelMarker(false);
 		chartSettings.setCreateMenu(true);
 		chartSettings.setEnableCompress(false);
@@ -92,20 +85,10 @@ public class FilterDistributionChart extends BarChart {
 		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
 		primaryAxisSettingsX.setTitle("Number of Overlaps");
 		primaryAxisSettingsX.setDecimalFormat(ValueFormat.getDecimalFormatEnglish());
-		if(PreferencesSupport.isDarkTheme()) {
-			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle("Count");
 		primaryAxisSettingsY.setDecimalFormat(ValueFormat.getDecimalFormatEnglish());
-		if(PreferencesSupport.isDarkTheme()) {
-			primaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			primaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 	}
 
 	private void updateChart() {
@@ -146,7 +129,7 @@ public class FilterDistributionChart extends BarChart {
 		double[] ySeries = new double[settings.getFilterDistribution().values().size()];
 		int index = settings.getFilterDistribution().values().size() - 1;
 		for(Map.Entry<Integer, Integer> entry : settings.getFilterDistribution().entrySet()) {
-			ySeries[index--] = (double)entry.getValue();
+			ySeries[index--] = entry.getValue();
 		}
 		getChartSettings().getPrimaryAxisSettingsY().setTitle(label);
 		applySettings(getChartSettings());

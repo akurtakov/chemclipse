@@ -42,8 +42,6 @@ import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
 import org.eclipse.chemclipse.processing.system.ProcessSettingsSupport;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
-import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
-import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.ux.extension.msd.ui.handlers.DynamicHandler;
 import org.eclipse.chemclipse.ux.extension.msd.ui.internal.provider.UpdateMenuEntry;
 import org.eclipse.chemclipse.ux.extension.ui.editors.ProcessorSupplierMenuEntry;
@@ -260,20 +258,10 @@ public class MassSpectrumChartCentroid extends BarChart implements IMassSpectrum
 		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
 		primaryAxisSettingsX.setTitle("m/z");
 		primaryAxisSettingsX.setDecimalFormat(new DecimalFormat(("0.0##"), new DecimalFormatSymbols(Locale.ENGLISH)));
-		if(PreferencesSupport.isDarkTheme()) {
-			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle("Intensity");
 		primaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.0#E0"), new DecimalFormatSymbols(Locale.ENGLISH)));
-		if(PreferencesSupport.isDarkTheme()) {
-			primaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			primaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 	}
 
 	private void addSecondaryAxisSet(IChartSettings chartSettings) {
@@ -281,11 +269,6 @@ public class MassSpectrumChartCentroid extends BarChart implements IMassSpectrum
 		ISecondaryAxisSettings secondaryAxisSettingsY = new SecondaryAxisSettings("Relative Intensity [%]", new PercentageConverter(SWT.VERTICAL, true));
 		secondaryAxisSettingsY.setPosition(Position.Secondary);
 		secondaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.00"), new DecimalFormatSymbols(Locale.ENGLISH)));
-		if(PreferencesSupport.isDarkTheme()) {
-			secondaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			secondaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 		chartSettings.getSecondaryAxisSettingsListY().add(secondaryAxisSettingsY);
 	}
 

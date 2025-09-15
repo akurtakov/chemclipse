@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.chemclipse.support.text.ValueFormat;
-import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
-import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
@@ -84,11 +82,6 @@ public class VarianceChart extends BarChart {
 		rangeRestriction.setRestrictFrame(true);
 
 		chartSettings.setShowAxisZeroMarker(true);
-		if(PreferencesSupport.isDarkTheme()) {
-			chartSettings.setColorAxisZeroMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			chartSettings.setColorAxisZeroMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 		chartSettings.setShowSeriesLabelMarker(false);
 		chartSettings.setCreateMenu(true);
 		chartSettings.setEnableCompress(false);
@@ -103,20 +96,10 @@ public class VarianceChart extends BarChart {
 		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
 		primaryAxisSettingsX.setTitle("Principal Component");
 		primaryAxisSettingsX.setDecimalFormat(ValueFormat.getDecimalFormatEnglish());
-		if(PreferencesSupport.isDarkTheme()) {
-			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			primaryAxisSettingsX.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle("Variance");
 		primaryAxisSettingsY.setDecimalFormat(ValueFormat.getDecimalFormatEnglish());
-		if(PreferencesSupport.isDarkTheme()) {
-			primaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WHITE));
-		} else {
-			primaryAxisSettingsY.setColor(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_BLACK));
-		}
 	}
 
 	private void updateChart() {
