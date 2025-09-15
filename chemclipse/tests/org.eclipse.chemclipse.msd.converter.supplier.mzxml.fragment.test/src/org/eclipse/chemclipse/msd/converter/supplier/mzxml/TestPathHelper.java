@@ -18,5 +18,8 @@ public class TestPathHelper extends PathResolver {
 	 * IMPORT
 	 */
 	public static final String TESTFILE_IMPORT_TINY1_MZXML20 = "testData/files/import/tiny1.mzXML2.0.mzxml";
+	public static final String TESTFILE_IMPORT_TINY1_MZXML30 = "testData/files/import/tiny1.mzXML3.0.mzXML";
+	public static final String TESTFILE_IMPORT_TINY1_CENTROIDED_MZXML30 = "testData/files/import/tiny1-centroided.mzXML3.0.mzXML";
+	public static final String TESTFILE_IMPORT_TINY1_COMPRESSED_MZXML30 = "testData/files/import/tiny1-compressed.mzXML3.0.mzXML";
 	public static final String TESTFILE_IMPORT_TINY_MZXML30 = "testData/files/import/tiny3.0.mzXML";
 }

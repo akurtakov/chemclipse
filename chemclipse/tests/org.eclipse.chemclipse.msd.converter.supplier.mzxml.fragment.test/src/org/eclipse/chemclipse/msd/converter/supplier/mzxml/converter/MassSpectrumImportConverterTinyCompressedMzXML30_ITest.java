@@ -10,16 +10,18 @@
  * Contributors:
  * Matthias Mailänder - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.msd.converter.supplier.mzdata.converter;
+package org.eclipse.chemclipse.msd.converter.supplier.mzxml.converter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
-import org.eclipse.chemclipse.msd.converter.supplier.mzdata.TestPathHelper;
-import org.eclipse.chemclipse.msd.converter.supplier.mzdata.model.VendorMassSpectra;
+import org.eclipse.chemclipse.msd.converter.supplier.mzxml.TestPathHelper;
+import org.eclipse.chemclipse.msd.converter.supplier.mzxml.model.IVendorMassSpectra;
+import org.eclipse.chemclipse.msd.converter.supplier.mzxml.model.VendorMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.Polarity;
 import org.eclipse.chemclipse.msd.model.implementation.StandaloneMassSpectrum;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -29,35 +31,39 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class ChromatogramImportConverterMaldiAxima_ITest {
+public class MassSpectrumImportConverterTinyCompressedMzXML30_ITest {
 
 	private IStandaloneMassSpectrum standaloneMassSpectrum;
 
 	@BeforeAll
 	public void setUp() {
 
-		File importFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_MALDI_AXIMA_CFR));
+		File importFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_TINY1_COMPRESSED_MZXML30));
 		MassSpectrumImportConverter converter = new MassSpectrumImportConverter();
 		IProcessingInfo<IMassSpectra> processingInfo = converter.convert(importFile, new NullProgressMonitor());
-		VendorMassSpectra massSpectra = (VendorMassSpectra)processingInfo.getProcessingResult();
+		IVendorMassSpectra massSpectra = (VendorMassSpectra)processingInfo.getProcessingResult();
 		standaloneMassSpectrum = (StandaloneMassSpectrum)massSpectra.getMassSpectrum(1);
-	}
-
-	@Test
-	public void testOperator() {
-
-		assertEquals("Mike Ashton, Kratos Analytical Limited", standaloneMassSpectrum.getOperator());
 	}
 
 	@Test
 	public void testInstrument() {
 
-		assertEquals("AXIMA-CFR", standaloneMassSpectrum.getInstrument());
+		assertEquals("FooBar FooBar Model1", standaloneMassSpectrum.getInstrument());
 	}
 
 	@Test
-	public void testNumberOfIons() {
+	public void testMassSpectrum() {
 
-		assertEquals(134, standaloneMassSpectrum.getNumberOfIons());
+		assertEquals(Polarity.POSITIVE, standaloneMassSpectrum.getPolarity());
+	}
+
+	@Test
+	public void testIons() {
+
+		assertEquals(5, standaloneMassSpectrum.getNumberOfIons());
+		assertEquals(1, standaloneMassSpectrum.getLowestIon().getIon());
+		assertEquals(6, standaloneMassSpectrum.getLowestIon().getAbundance());
+		assertEquals(5, standaloneMassSpectrum.getHighestIon().getIon());
+		assertEquals(10, standaloneMassSpectrum.getHighestIon().getAbundance());
 	}
 }
