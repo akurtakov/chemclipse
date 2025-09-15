@@ -55,6 +55,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtchart.IAxis.Position;
@@ -76,7 +77,7 @@ import org.eclipse.ui.commands.ICommandService;
 
 public class MassSpectrumChartCentroid extends BarChart implements IMassSpectrumChart {
 
-	private static final Logger logger = Logger.getLogger(MassSpectrumChartProfile.class);
+	private static final Logger logger = Logger.getLogger(MassSpectrumChartCentroid.class);
 
 	private IScanMSD menuCache = null;
 	private final List<IChartMenuEntry> cachedMenuEntries = new ArrayList<>();
@@ -256,10 +257,12 @@ public class MassSpectrumChartCentroid extends BarChart implements IMassSpectrum
 	private void setPrimaryAxisSet(IChartSettings chartSettings) {
 
 		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
+		primaryAxisSettingsX.setGridColor(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
 		primaryAxisSettingsX.setTitle("m/z");
 		primaryAxisSettingsX.setDecimalFormat(new DecimalFormat(("0.0##"), new DecimalFormatSymbols(Locale.ENGLISH)));
 
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
+		primaryAxisSettingsY.setGridColor(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
 		primaryAxisSettingsY.setTitle("Intensity");
 		primaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.0#E0"), new DecimalFormatSymbols(Locale.ENGLISH)));
 	}
@@ -267,6 +270,7 @@ public class MassSpectrumChartCentroid extends BarChart implements IMassSpectrum
 	private void addSecondaryAxisSet(IChartSettings chartSettings) {
 
 		ISecondaryAxisSettings secondaryAxisSettingsY = new SecondaryAxisSettings("Relative Intensity [%]", new PercentageConverter(SWT.VERTICAL, true));
+		secondaryAxisSettingsY.setGridColor(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
 		secondaryAxisSettingsY.setPosition(Position.Secondary);
 		secondaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.00"), new DecimalFormatSymbols(Locale.ENGLISH)));
 		chartSettings.getSecondaryAxisSettingsListY().add(secondaryAxisSettingsY);
