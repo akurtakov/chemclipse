@@ -52,17 +52,17 @@ public class ChromatogramWriterVersion105 extends AbstractChromatogramWriter imp
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 			Marshaller marshaller = jaxbContext.createMarshaller();
-			marshaller.marshal(createMzData(file, chromatogram), file);
+			marshaller.marshal(createMzData(file, chromatogram, monitor), file);
 		} catch(JAXBException e) {
 			logger.warn(e);
 		}
 	}
 
-	private MzData createMzData(File file, IChromatogramMSD chromatogram) {
+	private MzData createMzData(File file, IChromatogramMSD chromatogram, IProgressMonitor monitor) {
 
 		MzData mzData = new MzData();
 		mzData.setVersion(WriterVersion105.VERSION);
-		mzData.setSpectrumList(createSpectrumList(chromatogram));
+		mzData.setSpectrumList(createSpectrumList(chromatogram, monitor));
 		mzData.setDescription(createDescription(file, chromatogram));
 		return mzData;
 	}
@@ -114,23 +114,23 @@ public class ChromatogramWriterVersion105 extends AbstractChromatogramWriter imp
 		return instrumentDescription;
 	}
 
-	private SpectrumList createSpectrumList(IChromatogramMSD chromatogram) {
+	private SpectrumList createSpectrumList(IChromatogramMSD chromatogram, IProgressMonitor monitor) {
 
 		SpectrumList spectrumList = new SpectrumList();
 		spectrumList.setCount(chromatogram.getNumberOfScans());
 		for(IScan scan : chromatogram.getScans()) {
-			spectrumList.getSpectrum().add(createSpectrum(scan));
+			spectrumList.getSpectrum().add(createSpectrum(scan, monitor));
 		}
 		return spectrumList;
 	}
 
-	private Spectrum createSpectrum(IScan scan) {
+	private Spectrum createSpectrum(IScan scan, IProgressMonitor monitor) {
 
 		Spectrum spectrum = new Spectrum();
 		spectrum.setSpectrumDesc(createSpectrumDesc(scan));
 		spectrum.setId(scan.getScanNumber());
 		IScanMSD scanMSD = (IScanMSD)scan;
-		WriterVersion105.setBinaryArrays(spectrum, scanMSD);
+		WriterVersion105.setBinaryArrays(spectrum, scanMSD, monitor);
 		return spectrum;
 	}
 
