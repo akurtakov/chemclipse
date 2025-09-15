@@ -39,7 +39,7 @@ public class PeakBuilder_14_Test extends PeakBuilderExtendedTestCase {
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		super.setUp();
 		/*

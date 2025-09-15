@@ -20,17 +20,13 @@ import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ExtractedIonSignals_11_Test {
 
-	private IRegularMassSpectrum supplierMassSpectrum;
-	private IIon defaultIon;
 	private IExtractedIonSignals extractedIonSignals;
-	private IChromatogramMSD chromatogram;
-	private IExtractedIonSignalExtractor extractedIonSignalExtractor;
 
 	@Before
 	public void setUp() {
@@ -39,16 +35,16 @@ public class ExtractedIonSignals_11_Test {
 		int ionStart = 25;
 		int ionStop = 30;
 
-		chromatogram = new ChromatogramMSD();
+		IChromatogramMSD chromatogram = new ChromatogramMSD();
 		for(int scan = 1; scan <= scans; scan++) {
-			supplierMassSpectrum = new VendorMassSpectrum();
+			IRegularMassSpectrum supplierMassSpectrum = new RegularMassSpectrum();
 			supplierMassSpectrum.setRetentionTime(scan);
 			supplierMassSpectrum.setRetentionIndex(scan / 60.0f);
 			if(scan % 6 == 0) {
 				// Scan without ions.
 			} else {
 				for(int ion = ionStart; ion <= ionStop; ion++) {
-					defaultIon = new Ion(ion, ion * scan);
+					IIon defaultIon = new Ion(ion, ion * scan);
 					supplierMassSpectrum.addIon(defaultIon);
 				}
 			}
@@ -57,7 +53,7 @@ public class ExtractedIonSignals_11_Test {
 
 		((IScanMSD)chromatogram.getScan(1)).removeAllIons();
 
-		extractedIonSignalExtractor = new ExtractedIonSignalExtractor(chromatogram);
+		IExtractedIonSignalExtractor extractedIonSignalExtractor = new ExtractedIonSignalExtractor(chromatogram);
 		extractedIonSignals = extractedIonSignalExtractor.getExtractedIonSignals();
 	}
 

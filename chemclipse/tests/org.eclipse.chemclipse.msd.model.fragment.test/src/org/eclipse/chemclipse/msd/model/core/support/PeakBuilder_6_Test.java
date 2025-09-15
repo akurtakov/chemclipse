@@ -39,20 +39,18 @@ import org.junit.Test;
 public class PeakBuilder_6_Test extends PeakBuilderTestCase {
 
 	private IChromatogramPeakMSD peak;
-	private IScanRange scanRange;
-	private IBackgroundAbundanceRange backgroundAbundanceRange;
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		super.setUp();
-		scanRange = new ScanRange(2, 16);
+		IScanRange scanRange = new ScanRange(2, 16);
 		/*
 		 * The abundance is 194.43748 at the start and the end of the peak. So
 		 * the background abundance will be adjusted to 194.43748.
 		 */
-		backgroundAbundanceRange = new BackgroundAbundanceRange(194.43748f, 0);
+		IBackgroundAbundanceRange backgroundAbundanceRange = new BackgroundAbundanceRange(194.43748f, 0);
 		peak = PeakBuilderMSD.createPeak(chromatogram, scanRange, backgroundAbundanceRange, true);
 	}
 

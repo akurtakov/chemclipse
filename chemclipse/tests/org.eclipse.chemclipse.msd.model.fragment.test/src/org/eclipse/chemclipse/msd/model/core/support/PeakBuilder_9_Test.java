@@ -38,21 +38,18 @@ import org.junit.Test;
 public class PeakBuilder_9_Test extends PeakBuilderTestCase {
 
 	private IChromatogramPeakMSD peak;
-	private IScanRange scanRange;
-	private IMarkedIons excludedExcludedIons;
-	private IBackgroundAbundanceRange backgroundAbundanceRange;
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		super.setUp();
-		scanRange = new ScanRange(2, 16);
-		excludedExcludedIons = new MarkedIons(MarkedTraceModus.INCLUDE);
+		IScanRange scanRange = new ScanRange(2, 16);
+		IMarkedIons excludedExcludedIons = new MarkedIons(MarkedTraceModus.INCLUDE);
 		excludedExcludedIons.add(new MarkedIon(43));
 		excludedExcludedIons.add(new MarkedIon(18));
 		excludedExcludedIons.add(new MarkedIon(28));
-		backgroundAbundanceRange = new BackgroundAbundanceRange(0, 145.48741f);
+		IBackgroundAbundanceRange backgroundAbundanceRange = new BackgroundAbundanceRange(0, 145.48741f);
 		peak = PeakBuilderMSD.createPeak(chromatogram, scanRange, backgroundAbundanceRange, excludedExcludedIons);
 	}
 

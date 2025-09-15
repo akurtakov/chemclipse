@@ -42,7 +42,7 @@ public class PeakBuilder_17_Test {
 	private IChromatogramMSD chromatogram;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		scanRange = new ScanRange(1, 20);
 		excludedIons = new MarkedIons(MarkedTraceModus.INCLUDE);

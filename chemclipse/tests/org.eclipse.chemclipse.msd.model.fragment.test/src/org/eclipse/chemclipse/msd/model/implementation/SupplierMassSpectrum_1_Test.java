@@ -19,7 +19,7 @@ import org.junit.Test;
 
 public class SupplierMassSpectrum_1_Test {
 
-	private IRegularMassSpectrum massSpectrum = new VendorMassSpectrum();
+	private IRegularMassSpectrum massSpectrum = new RegularMassSpectrum();
 
 	@Test
 	public void testRetentionTime_1() {

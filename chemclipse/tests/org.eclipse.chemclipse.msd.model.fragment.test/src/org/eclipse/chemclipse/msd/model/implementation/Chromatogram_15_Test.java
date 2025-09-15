@@ -17,6 +17,7 @@ import static org.junit.Assert.assertEquals;
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.msd.model.core.IIon;
+import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIon;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIons;
@@ -31,22 +32,20 @@ import org.junit.Test;
 public class Chromatogram_15_Test {
 
 	private ChromatogramMSD chromatogram;
-	private VendorMassSpectrum supplierMassSpectrum;
-	private IIon ion;
 	private ITotalScanSignals signals;
 	private IMarkedIons excludedIons;
 	private ITotalIonSignalExtractor totalIonSignalExtractor;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		chromatogram = new ChromatogramMSD();
 		// ------------------------------Scan 1-100
 		for(int i = 1; i <= 100; i++) {
-			supplierMassSpectrum = new VendorMassSpectrum();
+			IRegularMassSpectrum supplierMassSpectrum = new RegularMassSpectrum();
 			supplierMassSpectrum.setRetentionTime(i);
 			for(int j = 1; j <= 50; j++) {
-				ion = new Ion(j, j);
+				IIon ion = new Ion(j, j);
 				supplierMassSpectrum.addIon(ion);
 			}
 			chromatogram.addScan(supplierMassSpectrum);
