@@ -97,7 +97,6 @@ public class ExtendedVSDScanUI extends Composite implements IExtendedPartUI {
 
 				lineSeriesData = new LineSeriesData(getSeriesData(spectrumVSD, "Background Signals", false));
 				lineSeriesSettings = lineSeriesData.getSettings();
-				lineSeriesSettings.setLineColor(Colors.BLACK);
 				lineSeriesSettings.setEnableArea(false);
 				lineSeriesDataList.add(lineSeriesData);
 			} else {
