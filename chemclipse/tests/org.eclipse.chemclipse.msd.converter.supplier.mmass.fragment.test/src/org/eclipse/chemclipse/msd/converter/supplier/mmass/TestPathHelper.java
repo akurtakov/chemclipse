@@ -15,4 +15,5 @@ package org.eclipse.chemclipse.msd.converter.supplier.mmass;
 public class TestPathHelper extends PathResolver {
 
 	public static final String TESTFILE_PROTEIN_IDENTIFICATION = "testData/Protein Identification.msd";
+	public static final String TESTFILE_MMASS_TINY_22 = "testData/mMass 2.2 tiny.msd";
 }
