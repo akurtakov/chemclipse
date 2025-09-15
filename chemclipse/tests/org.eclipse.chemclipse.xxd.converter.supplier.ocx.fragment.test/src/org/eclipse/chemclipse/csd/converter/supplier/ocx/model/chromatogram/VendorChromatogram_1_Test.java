@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.csd.converter.supplier.ocx.model.chromatogram;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class VendorChromatogram_1_Test {
 
