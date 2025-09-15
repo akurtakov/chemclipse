@@ -17,12 +17,12 @@ import java.util.List;
 
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.ChromatogramSelectionMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 import org.junit.Before;
 import org.junit.Ignore;
 
@@ -32,7 +32,7 @@ public class ChromatogramSelectionsTestCase {
 	private IChromatogramMSD chromatogram;
 	private List<IChromatogramSelection> chromatogramSelections;
 	private IChromatogramSelectionMSD chromatogramSelection;
-	private IRegularMassSpectrum massSpectrum;
+	private IScanMSD massSpectrum;
 
 	@Before
 	public void setUp() {
@@ -44,26 +44,26 @@ public class ChromatogramSelectionsTestCase {
 		chromatogram.setScanInterval(1000);
 		// Scan RT - Abundance
 		// 5000 - 15000
-		massSpectrum = new VendorMassSpectrum();
+		massSpectrum = new ScanMSD();
 		massSpectrum.addIon(new Ion(45, 4000));
 		massSpectrum.addIon(new Ion(48, 5000));
 		massSpectrum.addIon(new Ion(53, 6000));
 		chromatogram.addScan(massSpectrum);
 		// 6000 - 66200
-		massSpectrum = new VendorMassSpectrum();
+		massSpectrum = new ScanMSD();
 		massSpectrum.addIon(new Ion(18, 5600));
 		massSpectrum.addIon(new Ion(78, 50700));
 		massSpectrum.addIon(new Ion(53, 6500));
 		massSpectrum.addIon(new Ion(90, 3400));
 		chromatogram.addScan(massSpectrum);
 		// 7000 - 709850
-		massSpectrum = new VendorMassSpectrum();
+		massSpectrum = new ScanMSD();
 		massSpectrum.addIon(new Ion(28, 54000));
 		massSpectrum.addIon(new Ion(53, 600450));
 		massSpectrum.addIon(new Ion(104, 55400));
 		chromatogram.addScan(massSpectrum);
 		// 8000 - 812450
-		massSpectrum = new VendorMassSpectrum();
+		massSpectrum = new ScanMSD();
 		massSpectrum.addIon(new Ion(104, 5000));
 		massSpectrum.addIon(new Ion(60, 23000));
 		massSpectrum.addIon(new Ion(53, 230450));
@@ -79,28 +79,28 @@ public class ChromatogramSelectionsTestCase {
 		chromatogram.setScanInterval(1500);
 		// Scan RT - Abundance
 		// 4000 - 28000
-		massSpectrum = new VendorMassSpectrum();
+		massSpectrum = new ScanMSD();
 		massSpectrum.addIon(new Ion(45, 4000));
 		massSpectrum.addIon(new Ion(48, 5000));
 		massSpectrum.addIon(new Ion(94, 12000));
 		massSpectrum.addIon(new Ion(70, 7000));
 		chromatogram.addScan(massSpectrum);
 		// 5500 - 16200
-		massSpectrum = new VendorMassSpectrum();
+		massSpectrum = new ScanMSD();
 		massSpectrum.addIon(new Ion(18, 5600));
 		massSpectrum.addIon(new Ion(21, 700));
 		massSpectrum.addIon(new Ion(53, 6500));
 		massSpectrum.addIon(new Ion(90, 3400));
 		chromatogram.addScan(massSpectrum);
 		// 7000 - 1272450
-		massSpectrum = new VendorMassSpectrum();
+		massSpectrum = new ScanMSD();
 		massSpectrum.addIon(new Ion(28, 54000));
 		massSpectrum.addIon(new Ion(48, 553000));
 		massSpectrum.addIon(new Ion(46, 607450));
 		massSpectrum.addIon(new Ion(99, 58000));
 		chromatogram.addScan(massSpectrum);
 		// 8500 - 630500
-		massSpectrum = new VendorMassSpectrum();
+		massSpectrum = new ScanMSD();
 		massSpectrum.addIon(new Ion(104, 5000));
 		massSpectrum.addIon(new Ion(60, 230));
 		massSpectrum.addIon(new Ion(53, 7850));

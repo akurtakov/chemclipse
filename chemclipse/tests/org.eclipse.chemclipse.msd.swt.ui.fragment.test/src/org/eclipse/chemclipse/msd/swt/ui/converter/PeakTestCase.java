@@ -20,17 +20,16 @@ import org.eclipse.chemclipse.model.implementation.PeakIntensityValues;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
-import org.eclipse.chemclipse.msd.model.core.IPeakIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramPeakMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
 import org.eclipse.chemclipse.msd.model.implementation.PeakIon;
 import org.eclipse.chemclipse.msd.model.implementation.PeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.implementation.PeakModelMSD;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 import org.junit.Before;
 import org.junit.Ignore;
 
@@ -38,27 +37,18 @@ import org.junit.Ignore;
 public class PeakTestCase {
 
 	private IPeakModelMSD peakModel;
-	private IPeakMassSpectrum peakMaximum;
-	private IPeakIon peakIon;
-	private TreeMap<Float, Float> fragmentValues;
-	private IPeakIntensityValues intensityValues;
-	private TreeMap<Integer, Float> scanValues;
-	private float startBackgroundAbundance = 0.0f;
-	private float stopBackgroundAbundance = 0.0f;
 	private IChromatogramMSD chromatogram;
-	private IIon ion;
-	private IRegularMassSpectrum supplierMassSpectrum;
 	private IChromatogramPeakMSD peak;
 
 	@Before
 	public void setUp() {
 
 		// ----------------------PeakMaximum
-		peakMaximum = new PeakMassSpectrum();
+		IPeakMassSpectrum peakMaximum = new PeakMassSpectrum();
 		/*
 		 * abundance 5231
 		 */
-		fragmentValues = new TreeMap<Float, Float>();
+		TreeMap<Float, Float> fragmentValues = new TreeMap<>();
 		fragmentValues.put(104.0f, 2300.0f);
 		fragmentValues.put(103.0f, 580.0f);
 		fragmentValues.put(51.0f, 260.0f);
@@ -68,7 +58,7 @@ public class PeakTestCase {
 		fragmentValues.put(74.0f, 380.0f);
 		fragmentValues.put(105.0f, 970.0f);
 		for(Entry<Float, Float> entry : fragmentValues.entrySet()) {
-			peakIon = new PeakIon(entry.getKey(), entry.getValue());
+			IIon peakIon = new PeakIon(entry.getKey(), entry.getValue());
 			peakMaximum.addIon(peakIon);
 		}
 		// ----------------------PeakMaximum
@@ -81,15 +71,15 @@ public class PeakTestCase {
 		fragmentValues.put(43.0f, 580.0f);
 		fragmentValues.put(18.0f, 420.0f);
 		fragmentValues.put(28.0f, 760.0f);
-		startBackgroundAbundance = 1760.0f;
-		stopBackgroundAbundance = 1760.0f;
+		float startBackgroundAbundance = 1760.0f;
+		float stopBackgroundAbundance = 1760.0f;
 		/*
 		 * Add Scan 1 (500) to 17 (16500)
 		 */
 		for(int i = 1; i <= 17; i++) {
-			supplierMassSpectrum = new VendorMassSpectrum();
+			IScanMSD supplierMassSpectrum = new ScanMSD();
 			for(Entry<Float, Float> entry : fragmentValues.entrySet()) {
-				ion = new Ion(entry.getKey(), entry.getValue());
+				IIon ion = new Ion(entry.getKey(), entry.getValue());
 				supplierMassSpectrum.addIon(ion);
 			}
 			chromatogram.addScan(supplierMassSpectrum);
@@ -99,11 +89,11 @@ public class PeakTestCase {
 		chromatogram.recalculateRetentionTimes();
 		// ----------------------Chromatogram
 		// ----------------------IntensityValues
-		intensityValues = new PeakIntensityValues();
+		IPeakIntensityValues intensityValues = new PeakIntensityValues();
 		/*
 		 * Add Peak 2 (1500) to 16 (15500)
 		 */
-		scanValues = new TreeMap<Integer, Float>();
+		TreeMap<Integer, Float> scanValues = new TreeMap<>();
 		scanValues.put(1500, 0.0f);
 		scanValues.put(2500, 5.0f);
 		scanValues.put(3500, 10.0f);

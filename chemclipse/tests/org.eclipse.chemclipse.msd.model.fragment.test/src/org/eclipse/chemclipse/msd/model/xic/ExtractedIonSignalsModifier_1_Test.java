@@ -17,17 +17,17 @@ import static org.junit.Assert.assertThrows;
 import org.eclipse.chemclipse.model.exceptions.AnalysisSupportException;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ExtractedIonSignalsModifier_1_Test {
 
 	private IChromatogramMSD chromatogram;
-	private IRegularMassSpectrum supplierMassSpectrum;
+	private IScanMSD supplierMassSpectrum;
 	private IIon supplierIon;
 
 	@Before
@@ -39,7 +39,7 @@ public class ExtractedIonSignalsModifier_1_Test {
 		 */
 		chromatogram = new ChromatogramMSD();
 		for(int scan = 1; scan <= 100; scan++) {
-			supplierMassSpectrum = new VendorMassSpectrum();
+			supplierMassSpectrum = new ScanMSD();
 			for(int ion = 32; ion <= 104; ion++) {
 				supplierIon = new Ion(ion, ion * 2);
 				supplierMassSpectrum.addIon(supplierIon);

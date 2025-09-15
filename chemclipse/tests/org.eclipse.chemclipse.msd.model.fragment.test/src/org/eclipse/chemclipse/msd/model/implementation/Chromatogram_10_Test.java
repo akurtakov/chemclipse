@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.msd.model.implementation;
 import static org.junit.Assert.assertEquals;
 
 import org.eclipse.chemclipse.msd.model.core.IIon;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,7 +26,7 @@ import org.junit.Test;
 public class Chromatogram_10_Test {
 
 	private ChromatogramMSD chromatogram;
-	private VendorMassSpectrum supplierMassSpectrum;
+	private IScanMSD supplierMassSpectrum;
 	private IIon ion;
 
 	@Before
@@ -33,7 +34,7 @@ public class Chromatogram_10_Test {
 
 		chromatogram = new ChromatogramMSD();
 		// Scan 1
-		supplierMassSpectrum = new VendorMassSpectrum();
+		supplierMassSpectrum = new ScanMSD();
 		ion = new Ion(45.3f, 45827.3f);
 		supplierMassSpectrum.addIon(ion);
 		ion = new Ion(55.8f, 457.1f);
@@ -42,7 +43,7 @@ public class Chromatogram_10_Test {
 		supplierMassSpectrum.addIon(ion);
 		chromatogram.addScan(supplierMassSpectrum);
 		// Scan 2
-		supplierMassSpectrum = new VendorMassSpectrum();
+		supplierMassSpectrum = new ScanMSD();
 		ion = new Ion(45.3f, 827.3f);
 		supplierMassSpectrum.addIon(ion);
 		ion = new Ion(55.8f, 45827.4f);
@@ -51,7 +52,7 @@ public class Chromatogram_10_Test {
 		supplierMassSpectrum.addIon(ion);
 		chromatogram.addScan(supplierMassSpectrum);
 		// Scan 3
-		supplierMassSpectrum = new VendorMassSpectrum();
+		supplierMassSpectrum = new ScanMSD();
 		ion = new Ion(45.3f, 927.3f);
 		supplierMassSpectrum.addIon(ion);
 		ion = new Ion(55.8f, 74627.2f);

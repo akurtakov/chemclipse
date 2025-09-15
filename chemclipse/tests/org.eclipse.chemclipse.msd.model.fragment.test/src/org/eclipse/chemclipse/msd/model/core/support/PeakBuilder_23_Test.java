@@ -23,10 +23,10 @@ import org.eclipse.chemclipse.model.support.IScanRange;
 import org.eclipse.chemclipse.model.support.ScanRange;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,23 +36,20 @@ import org.junit.Test;
 public class PeakBuilder_23_Test {
 
 	private ITotalScanSignals totalIonSignals;
-	private ITotalScanSignal totalIonSignal;
 	private IScanRange scanRange;
 	private IChromatogramMSD chromatogram;
-	private IRegularMassSpectrum massSpectrum;
-	private IIon defaultIon;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		scanRange = new ScanRange(1, 10);
 		chromatogram = new ChromatogramMSD();
 		chromatogram.setScanDelay(500);
 		chromatogram.setScanInterval(1000);
 		for(int scan = 1; scan <= 10; scan++) {
-			massSpectrum = new VendorMassSpectrum();
+			IScanMSD massSpectrum = new ScanMSD();
 			for(int ion = 32; ion <= 38; ion++) {
-				defaultIon = new Ion(ion, ion * 5);
+				IIon defaultIon = new Ion(ion, ion * 5);
 				massSpectrum.addIon(defaultIon);
 			}
 			chromatogram.addScan(massSpectrum);
@@ -65,7 +62,7 @@ public class PeakBuilder_23_Test {
 
 		totalIonSignals = PeakBuilderMSD.getTotalIonSignals(chromatogram, scanRange);
 		assertNotNull(totalIonSignals);
-		totalIonSignal = totalIonSignals.getTotalScanSignal(1);
+		ITotalScanSignal totalIonSignal = totalIonSignals.getTotalScanSignal(1);
 		assertEquals("Signal", 1225.0f, totalIonSignal.getTotalSignal(), 0);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(10);
 		assertEquals("Signal", 1225.0f, totalIonSignal.getTotalSignal(), 0);

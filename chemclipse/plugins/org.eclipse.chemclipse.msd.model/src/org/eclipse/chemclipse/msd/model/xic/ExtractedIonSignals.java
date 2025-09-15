@@ -27,13 +27,12 @@ import org.eclipse.chemclipse.model.support.IScanRange;
 import org.eclipse.chemclipse.model.support.ScanRange;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIons;
 import org.eclipse.chemclipse.msd.model.exceptions.NoExtractedIonSignalStoredException;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 
 /**
  * This class stores {@link ExtractedIonSignal} objects from each scan of a
@@ -217,7 +216,7 @@ public class ExtractedIonSignals implements IExtractedIonSignals {
 		/*
 		 * Create a new mass spectrum and add the ions.
 		 */
-		IRegularMassSpectrum massSpectrum = new RegularMassSpectrum();
+		IScanMSD massSpectrum = new ScanMSD();
 		int startIon = extractedIonSignal.getStartIon();
 		int stopIon = extractedIonSignal.getStopIon();
 		/*

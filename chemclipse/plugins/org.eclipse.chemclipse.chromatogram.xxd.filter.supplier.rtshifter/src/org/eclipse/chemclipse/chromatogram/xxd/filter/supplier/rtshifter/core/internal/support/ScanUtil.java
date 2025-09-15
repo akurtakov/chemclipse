@@ -16,7 +16,7 @@ import org.eclipse.chemclipse.csd.model.core.IScanCSD;
 import org.eclipse.chemclipse.csd.model.implementation.ScanCSD;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 import org.eclipse.chemclipse.vsd.model.core.IScanVSD;
 import org.eclipse.chemclipse.vsd.model.implementation.ScanVSD;
 import org.eclipse.chemclipse.wsd.model.core.IScanWSD;
@@ -39,7 +39,7 @@ public class ScanUtil {
 		if(scanReference instanceof IScanCSD) {
 			scan = new ScanCSD(0);
 		} else if(scanReference instanceof IScanMSD) {
-			scan = new VendorMassSpectrum();
+			scan = new ScanMSD();
 		} else if(scanReference instanceof IScanWSD) {
 			scan = new ScanWSD();
 		} else if(scanReference instanceof IScanVSD) {

@@ -29,7 +29,7 @@ import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -82,7 +82,7 @@ public class ChromatogramFilterTransform extends AbstractChromatogramFilter impl
 		 */
 		for(IScan scan : chromatogramCSD.getScans()) {
 			try {
-				IScanMSD scanMSD = new VendorMassSpectrum();
+				IScanMSD scanMSD = new ScanMSD();
 				scanMSD.setRetentionTime(scan.getRetentionTime());
 				scanMSD.setRetentionIndex(scan.getRetentionIndex());
 				scanMSD.addIon(new Ion(mz, scan.getTotalSignal()));

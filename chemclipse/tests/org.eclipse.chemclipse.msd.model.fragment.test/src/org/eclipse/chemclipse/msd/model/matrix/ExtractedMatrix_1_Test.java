@@ -16,17 +16,17 @@ import static org.junit.Assert.assertNotNull;
 
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.ChromatogramSelectionMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ExtractedMatrix_1_Test {
 
-	private IRegularMassSpectrum supplierMassSpectrum;
+	private IScanMSD supplierMassSpectrum;
 	private IIon defaultIon;
 	private IChromatogramMSD chromatogram;
 
@@ -41,7 +41,7 @@ public class ExtractedMatrix_1_Test {
 		 */
 		chromatogram = new ChromatogramMSD();
 		for(int scan = 1; scan <= scans; scan++) {
-			supplierMassSpectrum = new VendorMassSpectrum();
+			supplierMassSpectrum = new ScanMSD();
 			supplierMassSpectrum.setRetentionTime(scan);
 			supplierMassSpectrum.setRetentionIndex(scan / 60.0f);
 			for(int ion = ionStart; ion <= ionStop; ion++) {

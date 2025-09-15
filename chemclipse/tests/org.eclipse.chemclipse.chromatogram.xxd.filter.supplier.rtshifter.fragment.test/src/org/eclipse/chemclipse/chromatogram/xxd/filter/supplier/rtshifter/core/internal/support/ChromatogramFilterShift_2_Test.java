@@ -13,12 +13,11 @@
 package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.rtshifter.core.internal.support;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.rtshifter.exceptions.FilterException;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.rtshifter.settings.FilterSettingsShift;
+import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.selection.ChromatogramSelectionMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.junit.Before;
@@ -31,7 +30,7 @@ public class ChromatogramFilterShift_2_Test extends ChromatogramTestCase {
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		super.setUp();
 		chromatogram = getChromatogram();
@@ -41,87 +40,66 @@ public class ChromatogramFilterShift_2_Test extends ChromatogramTestCase {
 	@Test
 	public void testShiftForward_1() {
 
-		IRegularMassSpectrum scan;
 		/*
 		 * PRE TESTS
 		 */
 		assertEquals(10, chromatogram.getNumberOfScans());
 		assertEquals(1500, chromatogram.getScanDelay());
-		scan = chromatogram.getSupplierScan(1);
+		IScan scan = chromatogram.getScan(1);
 		assertEquals(1500, scan.getRetentionTime());
-		scan = chromatogram.getSupplierScan(10);
+		scan = chromatogram.getScan(10);
 		assertEquals(10500, scan.getRetentionTime());
 	}
 
 	@Test
-	public void testShiftForward_2() {
+	public void testShiftForward_2() throws FilterException {
 
-		IRegularMassSpectrum scan;
-		try {
-			FilterSettingsShift supplierFilterSettings = new FilterSettingsShift(0, true);
-			RetentionTimeShifter.shiftRetentionTimes(chromatogramSelection, supplierFilterSettings);
-			assertEquals(10, chromatogram.getNumberOfScans());
-			assertEquals(1500, chromatogram.getScanDelay());
-			scan = chromatogram.getSupplierScan(1);
-			assertEquals(1500, scan.getRetentionTime());
-			scan = chromatogram.getSupplierScan(10);
-			assertEquals(10500, scan.getRetentionTime());
-		} catch(FilterException e) {
-			assertTrue("FilterException", false);
-		}
+		FilterSettingsShift supplierFilterSettings = new FilterSettingsShift(0, true);
+		RetentionTimeShifter.shiftRetentionTimes(chromatogramSelection, supplierFilterSettings);
+		assertEquals(10, chromatogram.getNumberOfScans());
+		assertEquals(1500, chromatogram.getScanDelay());
+		IScan scan = chromatogram.getScan(1);
+		assertEquals(1500, scan.getRetentionTime());
+		scan = chromatogram.getScan(10);
+		assertEquals(10500, scan.getRetentionTime());
 	}
 
 	@Test
-	public void testShiftForward_3() {
+	public void testShiftForward_3() throws FilterException {
 
-		IRegularMassSpectrum scan;
-		try {
-			FilterSettingsShift supplierFilterSettings = new FilterSettingsShift(1000, true);
-			RetentionTimeShifter.shiftRetentionTimes(chromatogramSelection, supplierFilterSettings);
-			assertEquals(10, chromatogram.getNumberOfScans());
-			assertEquals(2500, chromatogram.getScanDelay());
-			scan = chromatogram.getSupplierScan(1);
-			assertEquals(2500, scan.getRetentionTime());
-			scan = chromatogram.getSupplierScan(10);
-			assertEquals(11500, scan.getRetentionTime());
-		} catch(FilterException e) {
-			assertTrue("FilterException", false);
-		}
+		FilterSettingsShift supplierFilterSettings = new FilterSettingsShift(1000, true);
+		RetentionTimeShifter.shiftRetentionTimes(chromatogramSelection, supplierFilterSettings);
+		assertEquals(10, chromatogram.getNumberOfScans());
+		assertEquals(2500, chromatogram.getScanDelay());
+		IScan scan = chromatogram.getScan(1);
+		assertEquals(2500, scan.getRetentionTime());
+		scan = chromatogram.getScan(10);
+		assertEquals(11500, scan.getRetentionTime());
 	}
 
 	@Test
-	public void testShiftForward_4() {
+	public void testShiftForward_4() throws FilterException {
 
-		IRegularMassSpectrum scan;
-		try {
-			FilterSettingsShift supplierFilterSettings = new FilterSettingsShift(1499, true);
-			RetentionTimeShifter.shiftRetentionTimes(chromatogramSelection, supplierFilterSettings);
-			assertEquals(10, chromatogram.getNumberOfScans());
-			assertEquals(2999, chromatogram.getScanDelay());
-			scan = chromatogram.getSupplierScan(1);
-			assertEquals(2999, scan.getRetentionTime());
-			scan = chromatogram.getSupplierScan(10);
-			assertEquals(11999, scan.getRetentionTime());
-		} catch(FilterException e) {
-			assertTrue("FilterException", false);
-		}
+		FilterSettingsShift supplierFilterSettings = new FilterSettingsShift(1499, true);
+		RetentionTimeShifter.shiftRetentionTimes(chromatogramSelection, supplierFilterSettings);
+		assertEquals(10, chromatogram.getNumberOfScans());
+		assertEquals(2999, chromatogram.getScanDelay());
+		IScan scan = chromatogram.getScan(1);
+		assertEquals(2999, scan.getRetentionTime());
+		scan = chromatogram.getScan(10);
+		assertEquals(11999, scan.getRetentionTime());
 	}
 
 	@Test
-	public void testShiftForward_5() {
+	public void testShiftForward_5() throws FilterException {
 
-		IRegularMassSpectrum scan;
-		try {
-			FilterSettingsShift supplierFilterSettings = new FilterSettingsShift(1500, true);
-			RetentionTimeShifter.shiftRetentionTimes(chromatogramSelection, supplierFilterSettings);
-			assertEquals(10, chromatogram.getNumberOfScans());
-			assertEquals(3000, chromatogram.getScanDelay());
-			scan = chromatogram.getSupplierScan(1);
-			assertEquals(3000, scan.getRetentionTime());
-			scan = chromatogram.getSupplierScan(10);
-			assertEquals(12000, scan.getRetentionTime());
-		} catch(FilterException e) {
-			assertTrue("FilterException", false);
-		}
+		FilterSettingsShift supplierFilterSettings = new FilterSettingsShift(1500, true);
+		RetentionTimeShifter.shiftRetentionTimes(chromatogramSelection, supplierFilterSettings);
+		assertEquals(10, chromatogram.getNumberOfScans());
+		assertEquals(3000, chromatogram.getScanDelay());
+		IScan scan = chromatogram.getScan(1);
+		assertEquals(3000, scan.getRetentionTime());
+		scan = chromatogram.getScan(10);
+		assertEquals(12000, scan.getRetentionTime());
 	}
 }

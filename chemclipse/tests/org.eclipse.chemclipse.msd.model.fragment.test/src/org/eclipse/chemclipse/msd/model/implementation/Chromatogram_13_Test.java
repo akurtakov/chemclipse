@@ -19,6 +19,7 @@ import org.eclipse.chemclipse.model.signals.ITotalScanSignalExtractor;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.model.signals.TotalScanSignalExtractor;
 import org.eclipse.chemclipse.msd.model.core.IIon;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,7 +29,7 @@ import org.junit.Test;
 public class Chromatogram_13_Test {
 
 	private ChromatogramMSD chromatogram;
-	private VendorMassSpectrum supplierMassSpectrum;
+	private IScanMSD supplierMassSpectrum;
 	private IIon ion;
 	private ITotalScanSignalExtractor totalIonSignalExtractor;
 
@@ -38,7 +39,7 @@ public class Chromatogram_13_Test {
 		chromatogram = new ChromatogramMSD();
 		// ------------------------------Scan 1
 		for(int i = 1; i <= 1; i++) {
-			supplierMassSpectrum = new VendorMassSpectrum();
+			supplierMassSpectrum = new ScanMSD();
 			supplierMassSpectrum.setRetentionTime(i);
 			ion = new Ion(IIon.TIC_ION, i);
 			supplierMassSpectrum.addIon(ion);

@@ -15,10 +15,10 @@ package org.eclipse.chemclipse.msd.swt.ui.converter;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 import org.junit.Before;
 import org.junit.Ignore;
 
@@ -26,7 +26,7 @@ import org.junit.Ignore;
 public class ChromatogramOverviewTestCase {
 
 	private IChromatogramMSD chromatogram;
-	private IRegularMassSpectrum massSpectrum;
+	private IScanMSD massSpectrum;
 
 	@Before
 	public void setUp() {
@@ -36,19 +36,19 @@ public class ChromatogramOverviewTestCase {
 		chromatogram.setScanInterval(1000);
 		// Scan RT - Abundance
 		// 5000 - 22000
-		massSpectrum = new VendorMassSpectrum();
+		massSpectrum = new ScanMSD();
 		massSpectrum.addIon(new Ion(IIon.TIC_ION, 22000));
 		chromatogram.addScan(massSpectrum);
 		// 6000 - 66200
-		massSpectrum = new VendorMassSpectrum();
+		massSpectrum = new ScanMSD();
 		massSpectrum.addIon(new Ion(IIon.TIC_ION, 66200));
 		chromatogram.addScan(massSpectrum);
 		// 7000 - 1712850
-		massSpectrum = new VendorMassSpectrum();
+		massSpectrum = new ScanMSD();
 		massSpectrum.addIon(new Ion(IIon.TIC_ION, 1712850));
 		chromatogram.addScan(massSpectrum);
 		// 8000 - 812450
-		massSpectrum = new VendorMassSpectrum();
+		massSpectrum = new ScanMSD();
 		massSpectrum.addIon(new Ion(IIon.TIC_ION, 812450));
 		chromatogram.addScan(massSpectrum);
 		chromatogram.recalculateRetentionTimes();

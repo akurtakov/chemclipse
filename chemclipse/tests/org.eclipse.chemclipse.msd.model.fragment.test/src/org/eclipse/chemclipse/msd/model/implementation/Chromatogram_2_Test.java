@@ -16,6 +16,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.eclipse.chemclipse.msd.model.core.IIon;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,7 +27,7 @@ public class Chromatogram_2_Test {
 
 	private ChromatogramMSD chromatogram1;
 	private ChromatogramMSD chromatogram2;
-	private VendorMassSpectrum supplierMassSpectrum;
+	private IScanMSD supplierMassSpectrum;
 	private IIon ion;
 
 	@Before
@@ -34,7 +35,7 @@ public class Chromatogram_2_Test {
 
 		chromatogram1 = new ChromatogramMSD();
 		chromatogram2 = new ChromatogramMSD();
-		supplierMassSpectrum = new VendorMassSpectrum();
+		supplierMassSpectrum = new ScanMSD();
 		ion = new Ion(25.5f, 45862.3f);
 		supplierMassSpectrum.addIon(ion);
 		chromatogram2.addScan(supplierMassSpectrum);

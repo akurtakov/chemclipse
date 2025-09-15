@@ -14,20 +14,20 @@ package org.eclipse.chemclipse.msd.model.splash;
 
 import static org.junit.Assert.assertEquals;
 
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 import org.junit.Before;
 import org.junit.Test;
 
 public class Splash_Test {
 
-	IRegularMassSpectrum massSpectrum;
+	IScanMSD massSpectrum;
 
 	@Before
 	public void setUp() {
 
-		massSpectrum = new VendorMassSpectrum();
+		massSpectrum = new ScanMSD();
 		massSpectrum.addIon(new Ion(100, 1));
 		massSpectrum.addIon(new Ion(101, 2));
 		massSpectrum.addIon(new Ion(102, 3));
