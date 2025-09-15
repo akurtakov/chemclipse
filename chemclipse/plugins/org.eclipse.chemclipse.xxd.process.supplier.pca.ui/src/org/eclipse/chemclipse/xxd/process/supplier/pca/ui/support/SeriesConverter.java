@@ -222,21 +222,33 @@ public class SeriesConverter {
 				}
 				if(stats1.getN() > 2 && stats2.getN() > 2) {
 					TTest test = new TTest();
-					double pValue = test.t(stats1.getValues(), stats2.getValues());
+					double pValue = test.tTest(stats1.getValues(), stats2.getValues());
 					double mean1 = stats1.getMean();
 					double mean2 = stats2.getMean();
-					double foldChange = mean2 / mean1;
+					double foldChange = mean1 / mean2;
 					double minLog10pValue = -FastMath.log10(pValue);
 					double log2FoldChange = FastMath.log(foldChange) / FastMath.log(2);
 					ISeriesData seriesData = new SeriesData(new double[]{log2FoldChange}, new double[]{minLog10pValue}, Integer.toString(i));
 					IScatterSeriesData scatterSeriesData = new ScatterSeriesData(seriesData);
-					////
 					IScatterSeriesSettings scatterSeriesSettings = scatterSeriesData.getSettings();
 					// scatterSeriesSettings.setDescription(samples.getVariables().get(i).getDescription());
 					scatterSeriesSettings.setSymbolType(createFromSettings(preferenceStore, PreferenceSupplier.P_FOLD_CHANGE_PLOT_SYMBOL_TYPE));
 					scatterSeriesSettings.setSymbolSize(preferenceStore.getInt(PreferenceSupplier.P_FOLD_CHANGE_PLOT_SYMBOL_SIZE));
-					scatterSeriesSettings.setSymbolColor(Colors.RED);
-					////
+					if(seriesData.getYSeries()[0] > -FastMath.log10(0.05)) {
+						if(seriesData.getXSeries()[0] > 1.0) {
+							scatterSeriesSettings.setSymbolColor(Colors.RED);
+						} else if(seriesData.getXSeries()[0] > 0.0) {
+							scatterSeriesSettings.setSymbolColor(Colors.LIGHT_RED);
+						} else if(seriesData.getXSeries()[0] < -1.0) {
+							scatterSeriesSettings.setSymbolColor(Colors.BLUE);
+						} else {
+							scatterSeriesSettings.setSymbolColor(Colors.CYAN);
+						}
+
+					} else {
+						scatterSeriesSettings.setSymbolColor(Colors.GRAY);
+					}
+
 					scatterSeriesDataList.add(scatterSeriesData);
 				}
 
