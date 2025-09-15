@@ -183,6 +183,7 @@ public class PcaExtractionFileLongText implements IExtractionData {
 					/*
 					 * Data
 					 */
+					List<String> filterFileNames = new ArrayList<>();
 					CSVParser parser = CSVParser.parse(reader, CSVFormat.TDF.builder().setHeader().get());
 					for(CSVRecord record : parser.getRecords()) {
 						int size = record.size();
@@ -202,10 +203,17 @@ public class PcaExtractionFileLongText implements IExtractionData {
 								if(sample == null) {
 									sample = new Sample(sampleName, sampleDetails, groupName, classification, description);
 									sampleMap.put(sampleName, sample);
+									if(classification.equals("1")) {
+										if(!filterFileNames.contains("sampleName")) {
+											filterFileNames.add(sampleName);
+										}
+									}
 								} else {
 									if(classification.equals("1")) {
-										sampleName = sampleName + "_F";
-										sampleDetails = "Filter File Name exists in DB!";
+										if(!filterFileNames.contains(sampleName)) {
+											sampleName = sampleName + "_F";
+											sampleDetails = "Filter File Name exists in DB!";
+										}
 										sample = new Sample(sampleName, sampleDetails, groupName, classification, description);
 										sampleMap.put(sampleName, sample);
 									}
@@ -256,7 +264,6 @@ public class PcaExtractionFileLongText implements IExtractionData {
 		 */
 		for(Map<String, Target> variableMap : samplesVariablesMap.values()) {
 			for(Target mappedVariable : variableMap.values()) {
-
 				String key = mappedVariable.getTarget();
 				Target target = targets.get(key);
 				if(target == null) {
