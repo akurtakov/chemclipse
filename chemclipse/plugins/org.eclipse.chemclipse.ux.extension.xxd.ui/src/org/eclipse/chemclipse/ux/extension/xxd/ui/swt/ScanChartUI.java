@@ -49,6 +49,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swtchart.IAxis;
 import org.eclipse.swtchart.IBarSeries;
 import org.eclipse.swtchart.IBarSeries.BarWidthStyle;
 import org.eclipse.swtchart.ICustomPaintListener;
@@ -67,6 +68,10 @@ import org.eclipse.swtchart.extensions.core.ScrollableChart;
 import org.eclipse.swtchart.extensions.exceptions.SeriesException;
 import org.eclipse.swtchart.extensions.linecharts.ILineSeriesData;
 import org.eclipse.swtchart.extensions.linecharts.ILineSeriesSettings;
+import org.eclipse.swtchart.extensions.model.ICustomSeries;
+import org.eclipse.swtchart.extensions.model.TextElement;
+import org.eclipse.swtchart.extensions.support.ElementSupport;
+import org.eclipse.swtchart.extensions.support.PointPrimary;
 
 public class ScanChartUI extends ScrollableChart {
 
@@ -90,6 +95,7 @@ public class ScanChartUI extends ScrollableChart {
 	private LabelOption labelOption;
 	private DataType dataType;
 	private SignalType signalType;
+	private ICustomSeries customSeries;
 
 	private Double molecularIon;
 
@@ -214,6 +220,7 @@ public class ScanChartUI extends ScrollableChart {
 		super();
 		setDefaultDataAndSignalType();
 		useBackgroundFromStyleSheet();
+		addCustomTextSeries();
 	}
 
 	public ScanChartUI(Composite parent, int style) {
@@ -221,6 +228,7 @@ public class ScanChartUI extends ScrollableChart {
 		super(parent, style);
 		setDefaultDataAndSignalType();
 		useBackgroundFromStyleSheet();
+		addCustomTextSeries();
 	}
 
 	public void activateLabelMarkerX() {
@@ -422,6 +430,11 @@ public class ScanChartUI extends ScrollableChart {
 		dataType = DataType.AUTO_DETECT;
 		signalType = SignalType.AUTO_DETECT;
 		modifyChart(DataType.MSD_NOMINAL, signalType);
+	}
+
+	private void addCustomTextSeries() {
+
+		customSeries = getBaseChart().createCustomSeries("Masses", "Highest m/z values");
 	}
 
 	private void useBackgroundFromStyleSheet() {
@@ -727,8 +740,24 @@ public class ScanChartUI extends ScrollableChart {
 			y = point.y - labelSize.y;
 		}
 		e.gc.drawText(label, x, y, true);
-
 		e.gc.setFont(currentFont);
+		/*
+		 * Print Export
+		 */
+		IAxis axisX = getBaseChart().getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS);
+		IAxis axisY = getBaseChart().getAxisSet().getYAxis(BaseChart.ID_PRIMARY_Y_AXIS);
+		ElementSupport elementSupport = new ElementSupport(axisX.getRange(), axisY.getRange(), e.width, e.height);
+		TextElement textElement = new TextElement();
+		textElement.setLabel(label);
+		textElement.setColor(Colors.BLACK);
+		PointPrimary pointLabel = elementSupport.convertPoint(point.x, point.y);
+		PointPrimary pointSize = elementSupport.convertPoint(labelSize.x, labelSize.y);
+		textElement.setX(pointLabel.getX() - pointSize.getX() / 32);
+		textElement.setY(pointLabel.getY());
+		textElement.setRotation(0);
+		if(customSeries.getTextElements().stream().noneMatch(t -> t.getLabel().equals(textElement.getLabel()))) {
+			customSeries.getTextElements().add(textElement);
+		}
 	}
 
 	private void drawTriangle(BarSeriesValue barSeriesValue, int size, PaintEvent e) {
