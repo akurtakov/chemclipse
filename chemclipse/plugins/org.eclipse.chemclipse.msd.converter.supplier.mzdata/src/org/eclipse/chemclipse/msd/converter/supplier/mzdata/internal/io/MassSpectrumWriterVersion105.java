@@ -96,8 +96,8 @@ public class MassSpectrumWriterVersion105 implements IMassSpectraWriter {
 
 		MzData mzData = new MzData();
 		mzData.setVersion(WriterVersion105.VERSION);
-		mzData.setSpectrumList(createSpectrumList(scanMSD));
 		if(scanMSD instanceof IStandaloneMassSpectrum standaloneMassSpectrum) {
+			mzData.setSpectrumList(createSpectrumList(standaloneMassSpectrum));
 			mzData.setDescription(createDescription(file, standaloneMassSpectrum));
 		}
 		return mzData;
@@ -107,36 +107,16 @@ public class MassSpectrumWriterVersion105 implements IMassSpectraWriter {
 
 		Description description = new Description();
 		description.setAdmin(createAdmin(file, standaloneMassSpectrum));
-		description.setDataProcessing(createDataProcessing(standaloneMassSpectrum));
+		description.setDataProcessing(createDataProcessing());
 		description.setInstrument(createInstrumentDescription(standaloneMassSpectrum));
 		return description;
 	}
 
-	private DataProcessingType createDataProcessing(IStandaloneMassSpectrum standaloneMassSpectrum) {
+	private DataProcessingType createDataProcessing() {
 
 		DataProcessingType dataProcessing = new DataProcessingType();
 		dataProcessing.setSoftware(createSoftware());
-		if(standaloneMassSpectrum.getMassSpectrumType() == MassSpectrumType.CENTROID) {
-			dataProcessing.setProcessingMethod(createProcessingMethod(standaloneMassSpectrum));
-		}
 		return dataProcessing;
-	}
-
-	private ParamType createProcessingMethod(IStandaloneMassSpectrum standaloneMassSpectrum) {
-
-		ParamType processingMethod = new ParamType();
-		processingMethod.getCvParamOrUserParam().add(createPeakProcessingCentroided(standaloneMassSpectrum));
-		return processingMethod;
-	}
-
-	private CvParamType createPeakProcessingCentroided(IStandaloneMassSpectrum standaloneMassSpectrum) {
-
-		CvParamType cvParamType = new CvParamType();
-		cvParamType.setCvLabel("psi");
-		cvParamType.setAccession("PSI:1000035");
-		cvParamType.setName("PeakProcessing");
-		cvParamType.setValue("CentroidMassSpectrum");
-		return cvParamType;
 	}
 
 	private Software createSoftware() {
@@ -160,8 +140,7 @@ public class MassSpectrumWriterVersion105 implements IMassSpectraWriter {
 
 		DatatypeFactory datatypeFactory = DatatypeFactory.newInstance();
 		GregorianCalendar gregorianCalendar = new GregorianCalendar();
-		XMLGregorianCalendar xmlGregorianCalendar = datatypeFactory.newXMLGregorianCalendar(gregorianCalendar);
-		return xmlGregorianCalendar;
+		return datatypeFactory.newXMLGregorianCalendar(gregorianCalendar);
 	}
 
 	private InstrumentDescriptionType createInstrumentDescription(IStandaloneMassSpectrum standaloneMassSpectrum) {
@@ -203,18 +182,52 @@ public class MassSpectrumWriterVersion105 implements IMassSpectraWriter {
 		return person;
 	}
 
-	private SpectrumList createSpectrumList(IScanMSD scanMSD) {
+	private SpectrumList createSpectrumList(IRegularMassSpectrum regularMassSpectrum, IProgressMonitor monitor) {
 
 		SpectrumList spectrumList = new SpectrumList();
 		spectrumList.setCount(1);
-		spectrumList.getSpectrum().add(createSpectrum(scanMSD));
+		spectrumList.getSpectrum().add(createSpectrum(regularMassSpectrum, monitor));
 		return spectrumList;
 	}
 
-	private Spectrum createSpectrum(IScanMSD scanMSD) {
+	private Spectrum createSpectrum(IRegularMassSpectrum regularMassSpectrum, IProgressMonitor monitor) {
 
 		Spectrum spectrum = new Spectrum();
-		WriterVersion105.setBinaryArrays(spectrum, scanMSD);
+		spectrum.setSpectrumDesc(createSpectrumDescription(regularMassSpectrum));
+		WriterVersion105.setBinaryArrays(spectrum, regularMassSpectrum, monitor);
 		return spectrum;
+	}
+
+	private SpectrumDescType createSpectrumDescription(IRegularMassSpectrum regularMassSpectrum) {
+
+		SpectrumDescType spectrumDescription = new SpectrumDescType();
+		spectrumDescription.setSpectrumSettings(createSpectrumSettings(regularMassSpectrum));
+		return spectrumDescription;
+	}
+
+	private SpectrumSettingsType createSpectrumSettings(IRegularMassSpectrum regularMassSpectrum) {
+
+		SpectrumSettingsType spectrumSettings = new SpectrumSettingsType();
+		spectrumSettings.setSpectrumInstrument(createSpectrumInstrument(regularMassSpectrum));
+		spectrumSettings.setAcqSpecification(createAcquisitionSpecification(regularMassSpectrum));
+		return spectrumSettings;
+	}
+
+	private SpectrumInstrument createSpectrumInstrument(IRegularMassSpectrum regularMassSpectrum) {
+
+		SpectrumInstrument spectrumInstrument = new SpectrumInstrument();
+		spectrumInstrument.setMsLevel(regularMassSpectrum.getMassSpectrometer());
+		return spectrumInstrument;
+	}
+
+	private AcqSpecification createAcquisitionSpecification(IRegularMassSpectrum regularMassSpectrum) {
+
+		AcqSpecification acquisitionSpecification = new AcqSpecification();
+		if(regularMassSpectrum.getMassSpectrumType() == MassSpectrumType.CENTROID) {
+			acquisitionSpecification.setSpectrumType("discrete");
+		} else if(regularMassSpectrum.getMassSpectrumType() == MassSpectrumType.PROFILE) {
+			acquisitionSpecification.setSpectrumType("continuous");
+		}
+		return acquisitionSpecification;
 	}
 }

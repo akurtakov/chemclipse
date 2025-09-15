@@ -22,6 +22,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.msd.converter.io.AbstractMassSpectraReader;
 import org.eclipse.chemclipse.msd.converter.io.IMassSpectraReader;
+import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.AcqSpecification;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.AdminType;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.CvParamType;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.Description;
@@ -30,6 +31,8 @@ import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.ParamType;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.PersonType;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.Spectrum;
+import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.SpectrumDescType;
+import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.SpectrumSettingsType;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.model.IVendorMassSpectra;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.model.VendorIon;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.model.VendorMassSpectra;
@@ -143,11 +146,33 @@ public class MassSpectrumReaderVersion105 extends AbstractMassSpectraReader impl
 	private void readIons(MzData mzData, IStandaloneMassSpectrum massSpectrum) {
 
 		Spectrum spectrum = mzData.getSpectrumList().getSpectrum().get(0);
+		readSpectrumDescription(spectrum, massSpectrum);
 		double[] mzs = ReaderVersion105.parseData(spectrum.getMzArrayBinary().getData());
 		double[] intensities = ReaderVersion105.parseData(spectrum.getIntenArrayBinary().getData());
 		int length = Math.min(mzs.length, intensities.length);
 		for(int i = 0; i < length; i++) {
 			massSpectrum.addIon(new VendorIon(mzs[i], (float)intensities[i]), false);
+		}
+	}
+
+	private void readSpectrumDescription(Spectrum spectrum, IStandaloneMassSpectrum massSpectrum) {
+
+		SpectrumDescType spectrumDescription = spectrum.getSpectrumDesc();
+		if(spectrumDescription == null) {
+			return;
+		}
+		SpectrumSettingsType settings = spectrumDescription.getSpectrumSettings();
+		if(settings == null) {
+			return;
+		}
+		AcqSpecification acquisitionSpecification = settings.getAcqSpecification();
+		if(acquisitionSpecification == null) {
+			return;
+		}
+		if("discrete".equals(acquisitionSpecification.getSpectrumType())) {
+			massSpectrum.setMassSpectrumType(MassSpectrumType.CENTROID);
+		} else if("continuous".equals(acquisitionSpecification.getSpectrumType())) {
+			massSpectrum.setMassSpectrumType(MassSpectrumType.PROFILE);
 		}
 	}
 }
