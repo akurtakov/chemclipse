@@ -17,25 +17,29 @@ import java.nio.ByteOrder;
 import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 
+import org.eclipse.chemclipse.converter.l10n.ConverterMessages;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.Data;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.PeakListBinaryType;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.Spectrum;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 public class WriterVersion105 {
 
 	public static final String VERSION = "1.05";
 
-	public static void setBinaryArrays(Spectrum spectrum, IScanMSD scanMSD) {
+	public static void setBinaryArrays(Spectrum spectrum, IScanMSD scanMSD, IProgressMonitor monitor) {
 
 		double[] ions = new double[scanMSD.getNumberOfIons()];
 		float[] abundances = new float[scanMSD.getNumberOfIons()];
 		int i = 0;
+		monitor.beginTask(ConverterMessages.writeScans, scanMSD.getNumberOfIons());
 		for(IIon ion : scanMSD.getIons()) {
 			ions[i] = ion.getIon();
 			abundances[i] = ion.getAbundance();
 			i++;
+			monitor.worked(1);
 		}
 		spectrum.setMzArrayBinary(WriterVersion105.createFromDoubles(ions));
 		spectrum.setIntenArrayBinary(WriterVersion105.createFromFloats(abundances));

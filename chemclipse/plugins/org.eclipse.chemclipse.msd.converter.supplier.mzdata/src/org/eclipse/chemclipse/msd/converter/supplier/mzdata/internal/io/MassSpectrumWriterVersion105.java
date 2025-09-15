@@ -23,21 +23,24 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import org.eclipse.chemclipse.converter.exceptions.FileIsNotWriteableException;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.msd.converter.io.IMassSpectraWriter;
+import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.AcqSpecification;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.AdminType;
-import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.CvParamType;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.DataProcessingType;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.Description;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.DescriptionType;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.InstrumentDescriptionType;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.MzData;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.ObjectFactory;
-import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.ParamType;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.PersonType;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.Software;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.SourceFileType;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.Spectrum;
+import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.SpectrumDescType;
+import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.SpectrumInstrument;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.SpectrumList;
+import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.SpectrumSettingsType;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
+import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
@@ -57,7 +60,7 @@ public class MassSpectrumWriterVersion105 implements IMassSpectraWriter {
 	@Override
 	public void write(File file, IScanMSD massSpectrum, boolean append, IProgressMonitor monitor) throws FileIsNotWriteableException, IOException {
 
-		writeMassSpectrum(file, massSpectrum);
+		writeMassSpectrum(file, massSpectrum, monitor);
 	}
 
 	@Override
@@ -66,38 +69,38 @@ public class MassSpectrumWriterVersion105 implements IMassSpectraWriter {
 		writeMassSpectra(file, massSpectra, monitor);
 	}
 
-	private void writeMassSpectra(File file, IMassSpectra massSpectra, IProgressMonitor monitor) throws IOException {
+	private void writeMassSpectra(File file, IMassSpectra massSpectra, IProgressMonitor monitor) {
 
 		for(int i = 1; i <= massSpectra.size(); i++) {
 			IScanMSD massSpectrum = massSpectra.getMassSpectrum(i);
 			if(massSpectrum != null && massSpectrum.getNumberOfIons() > 0) {
-				writeMassSpectrum(file, massSpectrum);
+				writeMassSpectrum(file, massSpectrum, monitor);
 			}
 		}
 	}
 
-	private void writeMassSpectrum(File file, IScanMSD scanMSD) {
+	private void writeMassSpectrum(File file, IScanMSD scanMSD, IProgressMonitor monitor) {
 
 		try {
-			writeMzData(file, scanMSD);
+			writeMzData(file, scanMSD, monitor);
 		} catch(JAXBException e) {
 			logger.warn(e);
 		}
 	}
 
-	private void writeMzData(File file, IScanMSD scanMSD) throws JAXBException {
+	private void writeMzData(File file, IScanMSD scanMSD, IProgressMonitor monitor) throws JAXBException {
 
 		JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 		Marshaller marshaller = jaxbContext.createMarshaller();
-		marshaller.marshal(createMzData(file, scanMSD), file);
+		marshaller.marshal(createMzData(file, scanMSD, monitor), file);
 	}
 
-	private MzData createMzData(File file, IScanMSD scanMSD) {
+	private MzData createMzData(File file, IScanMSD scanMSD, IProgressMonitor monitor) {
 
 		MzData mzData = new MzData();
 		mzData.setVersion(WriterVersion105.VERSION);
 		if(scanMSD instanceof IStandaloneMassSpectrum standaloneMassSpectrum) {
-			mzData.setSpectrumList(createSpectrumList(standaloneMassSpectrum));
+			mzData.setSpectrumList(createSpectrumList(standaloneMassSpectrum, monitor));
 			mzData.setDescription(createDescription(file, standaloneMassSpectrum));
 		}
 		return mzData;
