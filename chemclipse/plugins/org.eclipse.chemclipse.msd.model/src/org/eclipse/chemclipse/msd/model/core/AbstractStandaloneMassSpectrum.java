@@ -18,6 +18,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.chemclipse.model.core.IMassSpectrumPeak;
+import org.eclipse.chemclipse.support.history.EditHistory;
+import org.eclipse.chemclipse.support.history.IEditHistory;
 
 public abstract class AbstractStandaloneMassSpectrum extends AbstractRegularMassSpectrum implements IStandaloneMassSpectrum {
 
@@ -36,6 +38,8 @@ public abstract class AbstractStandaloneMassSpectrum extends AbstractRegularMass
 	private Date acquisitionDate;
 	private String instrument;
 	private List<IMassSpectrumPeak> peaks = new ArrayList<>();
+
+	private final IEditHistory editHistory = new EditHistory();
 
 	@Override
 	public File getFile() {
@@ -147,5 +151,11 @@ public abstract class AbstractStandaloneMassSpectrum extends AbstractRegularMass
 	public List<IMassSpectrumPeak> getPeaks() {
 
 		return peaks;
+	}
+
+	@Override
+	public IEditHistory getEditHistory() {
+
+		return editHistory;
 	}
 }

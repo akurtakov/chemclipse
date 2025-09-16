@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.parts;
 import java.util.List;
 
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
+import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.history.IEditHistory;
 import org.eclipse.chemclipse.ux.extension.ui.parts.AbstractPart;
@@ -57,6 +58,11 @@ public class EditHistoryPart extends AbstractPart<ExtendedEditHistoryUI> {
 					getControl().setInput(chromatogramSelection.getChromatogram().getEditHistory());
 					return true;
 				}
+			} else if(isMassSpectrumTopic(topic)) {
+				if(object instanceof IStandaloneMassSpectrum standaloneMassSpectrum) {
+					getControl().setInput(standaloneMassSpectrum.getEditHistory());
+					return true;
+				}
 			}
 		}
 
@@ -66,7 +72,7 @@ public class EditHistoryPart extends AbstractPart<ExtendedEditHistoryUI> {
 	@Override
 	protected boolean isUpdateTopic(String topic) {
 
-		return isEditHistoryTopic(topic) || isChromatogramTopic(topic);
+		return isEditHistoryTopic(topic) || isChromatogramTopic(topic) || isMassSpectrumTopic(topic);
 	}
 
 	private boolean isEditHistoryTopic(String topic) {
@@ -77,5 +83,10 @@ public class EditHistoryPart extends AbstractPart<ExtendedEditHistoryUI> {
 	private boolean isChromatogramTopic(String topic) {
 
 		return IChemClipseEvents.TOPIC_CHROMATOGRAM_XXD_UPDATE_SELECTION.equals(topic);
+	}
+
+	private boolean isMassSpectrumTopic(String topic) {
+
+		return IChemClipseEvents.TOPIC_SCAN_XXD_UPDATE_SELECTION.equals(topic);
 	}
 }

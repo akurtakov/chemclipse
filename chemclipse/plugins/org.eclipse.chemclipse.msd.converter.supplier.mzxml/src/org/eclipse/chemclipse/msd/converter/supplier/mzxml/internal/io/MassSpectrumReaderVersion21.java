@@ -15,9 +15,11 @@ package org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.io;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.zip.DataFormatException;
 
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -30,6 +32,7 @@ import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v21.model.Ms
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v21.model.ObjectFactory;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v21.model.Peaks;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v21.model.Scan;
+import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v21.model.Software;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.model.IVendorMassSpectra;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.model.VendorIon;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.model.VendorMassSpectra;
@@ -37,7 +40,8 @@ import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.msd.model.core.Polarity;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.StandaloneMassSpectrum;
+import org.eclipse.chemclipse.support.history.EditInformation;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -62,30 +66,25 @@ public class MassSpectrumReaderVersion21 extends AbstractMassSpectrumReader {
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(file);
-			NodeList nodeList = document.getElementsByTagName(AbstractChromatogramReaderVersion.NODE_MS_RUN);
+			NodeList nodeList = document.getElementsByTagName(NODE_MS_RUN);
 
 			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-			MsRun msrun = (MsRun)unmarshaller.unmarshal(nodeList.item(0));
+			MsRun msRun = (MsRun)unmarshaller.unmarshal(nodeList.item(0));
 
-			massSpectrum = new VendorMassSpectrum();
+			massSpectrum = new StandaloneMassSpectrum();
 			massSpectrum.setFile(file);
 			massSpectrum.setIdentifier(file.getName());
-			for(DataProcessing dataProcessing : msrun.getDataProcessing()) {
-				if(Boolean.TRUE.equals(dataProcessing.isCentroided())) {
-					massSpectrum.setMassSpectrumType(MassSpectrumType.CENTROID);
-				} else {
-					massSpectrum.setMassSpectrumType(MassSpectrumType.PROFILE);
-				}
-			}
-			List<Scan> scans = msrun.getScan();
+			readDataProcessing(msRun.getDataProcessing(), massSpectrum);
+
+			List<Scan> scans = msRun.getScan();
 			monitor.beginTask(ConverterMessages.readScans, scans.size());
 			for(Scan scan : scans) {
 				/*
 				 * Polarity
 				 */
 				String polarity = scan.getPolarity();
-				if(polarity != null) {
+				if(polarity != null && !polarity.isEmpty()) {
 					if(polarity.equals("+")) {
 						massSpectrum.setPolarity(Polarity.POSITIVE);
 					} else if(polarity.equals("-")) {
@@ -127,5 +126,26 @@ public class MassSpectrumReaderVersion21 extends AbstractMassSpectrumReader {
 		massSpectra.setName(file.getName());
 		massSpectra.addMassSpectrum(massSpectrum);
 		return massSpectra;
+	}
+
+	private void readDataProcessing(List<DataProcessing> dataProcessings, IStandaloneMassSpectrum massSpectrum) {
+
+		for(DataProcessing dataProcessing : dataProcessings) {
+			if(Boolean.TRUE.equals(dataProcessing.isCentroided())) {
+				massSpectrum.setMassSpectrumType(MassSpectrumType.CENTROID);
+			} else {
+				massSpectrum.setMassSpectrumType(MassSpectrumType.PROFILE);
+			}
+			Software software = dataProcessing.getSoftware();
+			if(software != null) {
+				String editor = software.getName() + " " + software.getVersion();
+				Date date = new Date();
+				XMLGregorianCalendar completionTime = software.getCompletionTime();
+				if(completionTime != null) {
+					date = completionTime.toGregorianCalendar().getTime();
+				}
+				massSpectrum.getEditHistory().add(new EditInformation(date, software.getType(), editor));
+			}
+		}
 	}
 }

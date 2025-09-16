@@ -17,13 +17,14 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.chemclipse.model.core.IMassSpectrumPeak;
+import org.eclipse.chemclipse.support.history.ISupplierEditHistory;
 
 /**
  * An interface for single MALDI-TOF MS spectra which contain additional metadata.
  * 
  * @author Matthias Mailänder
  */
-public interface IStandaloneMassSpectrum extends IRegularMassSpectrum {
+public interface IStandaloneMassSpectrum extends IRegularMassSpectrum, ISupplierEditHistory {
 
 	/**
 	 * Returns the file, see setFile().

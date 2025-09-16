@@ -15,9 +15,11 @@ package org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.io;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.zip.DataFormatException;
 
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -27,10 +29,10 @@ import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.DataProcessing;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.Maldi;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.MsRun;
-import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.MzXML;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.ObjectFactory;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.Peaks;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.Scan;
+import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.Software;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.model.IVendorMassSpectra;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.model.VendorIon;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.model.VendorMassSpectra;
@@ -38,7 +40,8 @@ import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.msd.model.core.Polarity;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.StandaloneMassSpectrum;
+import org.eclipse.chemclipse.support.history.EditInformation;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -61,36 +64,30 @@ public class MassSpectrumReaderVersion22 extends AbstractMassSpectrumReader {
 
 		try {
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-			documentBuilderFactory.setNamespaceAware(true);
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(file);
-			NodeList nodeList = document.getElementsByTagName(AbstractChromatogramReaderVersion.NODE_MZXML);
+			NodeList nodeList = document.getElementsByTagName(NODE_MS_RUN);
 
 			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-			MzXML mzXML = (MzXML)unmarshaller.unmarshal(nodeList.item(0));
+			MsRun msRun = (MsRun)unmarshaller.unmarshal(nodeList.item(0));
 
-			massSpectrum = new VendorMassSpectrum();
+			massSpectrum = new StandaloneMassSpectrum();
 			massSpectrum.setFile(file);
 			massSpectrum.setIdentifier(file.getName());
-			MsRun msRun = mzXML.getMsRun();
-			for(DataProcessing dataProcessing : msRun.getDataProcessing()) {
-				if(Boolean.TRUE.equals(dataProcessing.isCentroided())) {
-					massSpectrum.setMassSpectrumType(MassSpectrumType.CENTROID);
-				} else {
-					massSpectrum.setMassSpectrumType(MassSpectrumType.PROFILE);
-				}
-			}
+			readDataProcessing(msRun.getDataProcessing(), massSpectrum);
+
 			List<Scan> scans = msRun.getScan();
 			monitor.beginTask(ConverterMessages.readScans, scans.size());
 			for(Scan scan : scans) {
 				/*
 				 * Polarity
 				 */
-				if(scan.getPolarity() != null) {
-					if(scan.getPolarity().equals("+")) {
+				String polarity = scan.getPolarity();
+				if(polarity != null && !polarity.isEmpty()) {
+					if(polarity.equals("+")) {
 						massSpectrum.setPolarity(Polarity.POSITIVE);
-					} else if(scan.getPolarity().equals("-")) {
+					} else if(polarity.equals("-")) {
 						massSpectrum.setPolarity(Polarity.NEGATIVE);
 					}
 				}
@@ -107,7 +104,6 @@ public class MassSpectrumReaderVersion22 extends AbstractMassSpectrumReader {
 				 */
 				Peaks peaks = scan.getPeaks();
 				double[] values = readPeaks(peaks.getValue(), peaks.getByteOrder(), peaks.getPrecision(), null);
-
 				for(int peakIndex = 0; peakIndex < values.length - 1; peakIndex += 2) {
 					/*
 					 * Get m/z and intensity (m/z-int)
@@ -130,5 +126,26 @@ public class MassSpectrumReaderVersion22 extends AbstractMassSpectrumReader {
 		massSpectra.setName(file.getName());
 		massSpectra.addMassSpectrum(massSpectrum);
 		return massSpectra;
+	}
+
+	private void readDataProcessing(List<DataProcessing> dataProcessings, IStandaloneMassSpectrum massSpectrum) {
+
+		for(DataProcessing dataProcessing : dataProcessings) {
+			if(Boolean.TRUE.equals(dataProcessing.isCentroided())) {
+				massSpectrum.setMassSpectrumType(MassSpectrumType.CENTROID);
+			} else {
+				massSpectrum.setMassSpectrumType(MassSpectrumType.PROFILE);
+			}
+			Software software = dataProcessing.getSoftware();
+			if(software != null) {
+				String editor = software.getName() + " " + software.getVersion();
+				Date date = new Date();
+				XMLGregorianCalendar completionTime = software.getCompletionTime();
+				if(completionTime != null) {
+					date = completionTime.toGregorianCalendar().getTime();
+				}
+				massSpectrum.getEditHistory().add(new EditInformation(date, software.getType(), editor));
+			}
+		}
 	}
 }

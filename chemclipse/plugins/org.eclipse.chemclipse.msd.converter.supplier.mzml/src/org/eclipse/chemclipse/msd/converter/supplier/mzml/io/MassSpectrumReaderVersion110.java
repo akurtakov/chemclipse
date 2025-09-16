@@ -28,15 +28,21 @@ import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.msd.model.implementation.StandaloneMassSpectrum;
+import org.eclipse.chemclipse.support.history.EditInformation;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.io.BinaryReader110;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.io.XmlReader110;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.BinaryDataArrayType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.CVParamType;
+import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.DataProcessingListType;
+import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.DataProcessingType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.FileDescriptionType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.MzMLType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.ParamGroupType;
+import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.ProcessingMethodType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.RunType;
+import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.SoftwareType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.SpectrumType;
+import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.UserParamType;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.xml.sax.SAXException;
 
@@ -62,6 +68,7 @@ public class MassSpectrumReaderVersion110 extends AbstractMassSpectraReader impl
 				massSpectrum.setFile(file);
 				massSpectrum.setIdentifier(file.getName());
 				massSpectrum.setPosition(spectrum.getSpotID());
+				readEditHistory(mzML, massSpectrum);
 
 				FileDescriptionType fileDescription = mzML.getFileDescription();
 				if(fileDescription != null) {
@@ -110,5 +117,28 @@ public class MassSpectrumReaderVersion110 extends AbstractMassSpectraReader impl
 		}
 
 		return massSpectra;
+	}
+
+	private void readEditHistory(MzMLType mzML, IStandaloneMassSpectrum massSpectrum) {
+
+		DataProcessingListType dataProcessinglist = mzML.getDataProcessingList();
+		if(dataProcessinglist == null) {
+			return;
+		}
+		for(DataProcessingType dataProcessing : dataProcessinglist.getDataProcessing()) {
+			for(ProcessingMethodType processingMethod : dataProcessing.getProcessingMethod()) {
+				SoftwareType software = (SoftwareType)processingMethod.getSoftwareRef();
+				for(CVParamType cvParam : processingMethod.getCvParam()) {
+					String operation = cvParam.getName();
+					String editor = software.getId();
+					massSpectrum.getEditHistory().add(new EditInformation(operation, editor));
+				}
+				for(UserParamType userParam : processingMethod.getUserParam()) {
+					String operation = userParam.getName();
+					String editor = software.getId();
+					massSpectrum.getEditHistory().add(new EditInformation(operation, editor));
+				}
+			}
+		}
 	}
 }
