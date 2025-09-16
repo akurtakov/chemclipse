@@ -15,6 +15,8 @@ package org.eclipse.chemclipse.msd.converter.supplier.mzdata.converter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.time.ZoneId;
+import java.util.Date;
 
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.model.VendorMassSpectra;
@@ -53,6 +55,19 @@ public class MassSpectrumImportConverterMaldiAxima_ITest {
 	public void testInstrument() {
 
 		assertEquals("AXIMA-CFR", standaloneMassSpectrum.getInstrument());
+	}
+
+	@Test
+	public void testEditHistory() {
+
+		assertEquals("Kompact 2.7.0a1", standaloneMassSpectrum.getEditHistory().get(0).getEditor());
+		Date date = standaloneMassSpectrum.getEditHistory().get(0).getDate();
+		assertEquals(2003, date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime().getYear());
+
+		assertEquals("deisotoped: true", standaloneMassSpectrum.getEditHistory().get(0).getDescription());
+		assertEquals("chargeDeconvolved: false", standaloneMassSpectrum.getEditHistory().get(1).getDescription());
+		assertEquals("peakThreshold: 0", standaloneMassSpectrum.getEditHistory().get(2).getDescription());
+		assertEquals("peakProcessing: centroided", standaloneMassSpectrum.getEditHistory().get(3).getDescription());
 	}
 
 	@Test

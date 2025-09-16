@@ -14,7 +14,9 @@ package org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.io;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -25,11 +27,13 @@ import org.eclipse.chemclipse.msd.converter.io.IMassSpectraReader;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.AcqSpecification;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.AdminType;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.CvParamType;
+import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.DataProcessingType;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.Description;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.MzData;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.ObjectFactory;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.ParamType;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.PersonType;
+import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.Software;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.Spectrum;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.SpectrumDescType;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model.SpectrumSettingsType;
@@ -40,6 +44,7 @@ import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.msd.model.implementation.StandaloneMassSpectrum;
+import org.eclipse.chemclipse.support.history.EditInformation;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -102,18 +107,28 @@ public class MassSpectrumReaderVersion105 extends AbstractMassSpectraReader impl
 
 	private void readProcessingMethod(Description description, IStandaloneMassSpectrum massSpectrum) {
 
-		ParamType processingMethod = description.getDataProcessing().getProcessingMethod();
+		DataProcessingType dataProcessing = description.getDataProcessing();
+		if(dataProcessing == null) {
+			return;
+		}
+		ParamType processingMethod = dataProcessing.getProcessingMethod();
 		if(processingMethod == null) {
 			return;
 		}
 		for(Object object : processingMethod.getCvParamOrUserParam()) {
 			if(object instanceof CvParamType cvParamType) {
-				// also support poorly standardized files
-				if(cvParamType.getName().toLowerCase().contains("peakprocessing")) {
-					if(cvParamType.getValue().toLowerCase().contains("centroid")) {
-						massSpectrum.setMassSpectrumType(MassSpectrumType.CENTROID);
+				String action = cvParamType.getName() + ": " + cvParamType.getValue();
+				String editor = "";
+				Date date = new Date();
+				Software software = dataProcessing.getSoftware();
+				if(software != null) {
+					editor = software.getName() + " " + software.getVersion();
+					XMLGregorianCalendar completionTime = software.getCompletionTime();
+					if(completionTime != null) {
+						date = completionTime.toGregorianCalendar().getTime();
 					}
 				}
+				massSpectrum.getEditHistory().add(new EditInformation(date, action, editor));
 			}
 		}
 	}

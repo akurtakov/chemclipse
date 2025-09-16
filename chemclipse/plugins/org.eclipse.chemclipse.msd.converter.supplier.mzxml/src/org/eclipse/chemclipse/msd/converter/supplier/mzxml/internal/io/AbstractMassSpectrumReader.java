@@ -26,6 +26,8 @@ import org.eclipse.chemclipse.msd.converter.io.IMassSpectraReader;
 
 public abstract class AbstractMassSpectrumReader extends AbstractMassSpectraReader implements IMassSpectraReader {
 
+	public static final String NODE_MS_RUN = "msRun";
+
 	private Inflater inflater = new Inflater();
 
 	public double[] readPeaks(byte[] bytes, String byteOrder, BigInteger precision, String compressionType) throws DataFormatException {

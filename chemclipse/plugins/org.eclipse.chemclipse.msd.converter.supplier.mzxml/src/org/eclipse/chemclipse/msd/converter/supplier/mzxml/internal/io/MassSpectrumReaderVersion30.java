@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.io;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.zip.DataFormatException;
 
@@ -24,19 +25,23 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.eclipse.chemclipse.converter.l10n.ConverterMessages;
 import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v30.model.DataProcessing;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v30.model.Maldi;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v30.model.MsInstrument;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v30.model.MsRun;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v30.model.ObjectFactory;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v30.model.Peaks;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v30.model.Scan;
+import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v30.model.Software;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.model.IVendorMassSpectra;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.model.VendorIon;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.model.VendorMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.msd.model.core.Polarity;
 import org.eclipse.chemclipse.msd.model.implementation.StandaloneMassSpectrum;
+import org.eclipse.chemclipse.support.history.EditInformation;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -83,8 +88,10 @@ public class MassSpectrumReaderVersion30 extends AbstractMassSpectrumReader {
 
 		List<Scan> scans = msRun.getScan();
 		monitor.beginTask(ConverterMessages.readScans, scans.size());
+
 		for(Scan scan : scans) {
 			IStandaloneMassSpectrum massSpectrum = new StandaloneMassSpectrum();
+			readDataProcessing(msRun.getDataProcessing(), massSpectrum);
 			for(MsInstrument instrument : msRun.getMsInstrument()) {
 				massSpectrum.setInstrument(instrument.getMsManufacturer().getTheValue() + " " + instrument.getMsModel().getTheValue());
 			}
@@ -132,6 +139,23 @@ public class MassSpectrumReaderVersion30 extends AbstractMassSpectrumReader {
 			 * Get m/z and intensity (m/z-int)
 			 */
 			massSpectrum.addIon(new VendorIon(values[peakIndex], (float)values[peakIndex + 1]), false);
+		}
+	}
+
+	private void readDataProcessing(List<DataProcessing> dataProcessings, IStandaloneMassSpectrum massSpectrum) {
+
+		for(DataProcessing dataProcessing : dataProcessings) {
+			if(Boolean.TRUE.equals(dataProcessing.isCentroided())) {
+				massSpectrum.setMassSpectrumType(MassSpectrumType.CENTROID);
+			} else {
+				massSpectrum.setMassSpectrumType(MassSpectrumType.PROFILE);
+			}
+			Software software = dataProcessing.getSoftware();
+			if(software != null) {
+				String editor = software.getName() + " " + software.getVersion();
+				Date date = software.getCompletionTime().toGregorianCalendar().getTime();
+				massSpectrum.getEditHistory().add(new EditInformation(date, software.getType(), editor));
+			}
 		}
 	}
 }
