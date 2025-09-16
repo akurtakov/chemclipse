@@ -52,6 +52,7 @@ import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.SelectedIon
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.SoftwareType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.SpectrumListType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.SpectrumType;
+import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.UserParamType;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.xml.sax.SAXException;
 
@@ -171,6 +172,11 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 				SoftwareType software = (SoftwareType)processingMethod.getSoftwareRef();
 				for(CVParamType cvParam : processingMethod.getCvParam()) {
 					String operation = cvParam.getName();
+					String editor = software.getId();
+					chromatogram.getEditHistory().add(new EditInformation(operation, editor));
+				}
+				for(UserParamType userParam : processingMethod.getUserParam()) {
+					String operation = userParam.getName();
 					String editor = software.getId();
 					chromatogram.getEditHistory().add(new EditInformation(operation, editor));
 				}

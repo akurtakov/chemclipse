@@ -42,6 +42,7 @@ import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.ProcessingM
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.RunType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.SoftwareType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.SpectrumType;
+import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.UserParamType;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.xml.sax.SAXException;
 
@@ -129,6 +130,11 @@ public class MassSpectrumReaderVersion110 extends AbstractMassSpectraReader impl
 				SoftwareType software = (SoftwareType)processingMethod.getSoftwareRef();
 				for(CVParamType cvParam : processingMethod.getCvParam()) {
 					String operation = cvParam.getName();
+					String editor = software.getId();
+					massSpectrum.getEditHistory().add(new EditInformation(operation, editor));
+				}
+				for(UserParamType userParam : processingMethod.getUserParam()) {
+					String operation = userParam.getName();
 					String editor = software.getId();
 					massSpectrum.getEditHistory().add(new EditInformation(operation, editor));
 				}
