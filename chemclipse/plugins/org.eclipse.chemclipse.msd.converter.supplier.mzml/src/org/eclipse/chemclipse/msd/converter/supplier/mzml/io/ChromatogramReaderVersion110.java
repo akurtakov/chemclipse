@@ -32,7 +32,7 @@ import org.eclipse.chemclipse.msd.model.core.IIonTransition;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.msd.model.implementation.IonTransition;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
 import org.eclipse.chemclipse.support.history.EditInformation;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.io.BinaryReader110;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.io.MetadataReader110;
@@ -270,7 +270,7 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 
 	private IRegularMassSpectrum readMassSpectrum(SpectrumType spectrum) {
 
-		IRegularMassSpectrum massSpectrum = new VendorMassSpectrum();
+		IRegularMassSpectrum massSpectrum = new RegularMassSpectrum();
 		for(CVParamType cvParam : spectrum.getCvParam()) {
 			if(cvParam.getAccession().equals("MS:1000127") && cvParam.getName().equals("centroid spectrum")) {
 				massSpectrum.setMassSpectrumType(MassSpectrumType.CENTROID);

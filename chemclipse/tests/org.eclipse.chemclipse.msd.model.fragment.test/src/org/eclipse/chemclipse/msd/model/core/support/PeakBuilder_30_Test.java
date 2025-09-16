@@ -28,7 +28,7 @@ import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.xic.ExtractedIonSignalExtractor;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignalExtractor;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignals;
@@ -40,20 +40,16 @@ import org.junit.Test;
  */
 public class PeakBuilder_30_Test {
 
-	private IChromatogramMSD chromatogram;
-	private IRegularMassSpectrum massSpectrum;
-	private IIon defaultIon;
 	private IExtractedIonSignals extractedIonSignals;
 	private IScanRange scanRange;
-	private IExtractedIonSignalExtractor extractedIonSignalExtractor;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		/*
 		 * chromatogram
 		 */
-		List<Float> intensities = new ArrayList<Float>();
+		List<Float> intensities = new ArrayList<>();
 		intensities.add(1000.0f);
 		intensities.add(5578.14f);
 		intensities.add(7596.27f);
@@ -64,7 +60,7 @@ public class PeakBuilder_30_Test {
 		intensities.add(810.72f);
 		intensities.add(538.22f);
 		intensities.add(400.00f);
-		chromatogram = new ChromatogramMSD();
+		IChromatogramMSD chromatogram = new ChromatogramMSD();
 		chromatogram.setScanDelay(500);
 		chromatogram.setScanInterval(1000);
 		/*
@@ -72,9 +68,9 @@ public class PeakBuilder_30_Test {
 		 */
 		scanRange = new ScanRange(1, 10);
 		for(int scan = 1; scan <= 10; scan++) {
-			massSpectrum = new VendorMassSpectrum();
+			IRegularMassSpectrum massSpectrum = new RegularMassSpectrum();
 			for(int ion = 32; ion <= 38; ion++) {
-				defaultIon = new Ion(ion, ion * scan * intensities.get(scan - 1));
+				IIon defaultIon = new Ion(ion, ion * scan * intensities.get(scan - 1));
 				massSpectrum.addIon(defaultIon);
 			}
 			chromatogram.addScan(massSpectrum);
@@ -83,7 +79,7 @@ public class PeakBuilder_30_Test {
 		/*
 		 * Total ion signals.
 		 */
-		extractedIonSignalExtractor = new ExtractedIonSignalExtractor(chromatogram);
+		IExtractedIonSignalExtractor extractedIonSignalExtractor = new ExtractedIonSignalExtractor(chromatogram);
 		extractedIonSignals = extractedIonSignalExtractor.getExtractedIonSignals();
 	}
 

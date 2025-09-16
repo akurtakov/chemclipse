@@ -22,7 +22,7 @@ import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
 import org.junit.Before;
 import org.junit.Ignore;
 
@@ -30,19 +30,16 @@ import org.junit.Ignore;
 public class PeakBuilderTestCase {
 
 	protected IChromatogramMSD chromatogram;
-	private IIon ion;
-	private TreeMap<Float, Float> fragmentValues;
-	private IRegularMassSpectrum supplierMassSpectrum;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		chromatogram = new ChromatogramMSD();
 		/*
 		 * Add some more ion values, for example as a background.<br/>
 		 * 580 + 420 + 760 > 1760
 		 */
-		fragmentValues = new TreeMap<Float, Float>();
+		TreeMap<Float, Float> fragmentValues = new TreeMap<>();
 		fragmentValues.put(104.0f, 2300.0f);
 		fragmentValues.put(103.0f, 580.0f);
 		fragmentValues.put(51.0f, 260.0f);
@@ -57,7 +54,7 @@ public class PeakBuilderTestCase {
 		/*
 		 * The chromatogram should represent a real peak.
 		 */
-		List<Float> correctionFactor = new ArrayList<Float>();
+		List<Float> correctionFactor = new ArrayList<>();
 		correctionFactor.add(0.0278125434570991f);
 		correctionFactor.add(0.0278125434570991f);
 		correctionFactor.add(0.0764219162842442f);
@@ -80,9 +77,9 @@ public class PeakBuilderTestCase {
 		 */
 		for(int i = 1; i <= 17; i++) {
 			// Scan
-			supplierMassSpectrum = new VendorMassSpectrum();
+			IRegularMassSpectrum supplierMassSpectrum = new RegularMassSpectrum();
 			for(Entry<Float, Float> entry : fragmentValues.entrySet()) {
-				ion = new Ion(entry.getKey(), entry.getValue() * correctionFactor.get(i - 1));
+				IIon ion = new Ion(entry.getKey(), entry.getValue() * correctionFactor.get(i - 1));
 				supplierMassSpectrum.addIon(ion);
 			}
 			chromatogram.addScan(supplierMassSpectrum);

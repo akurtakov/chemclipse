@@ -30,7 +30,7 @@ import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.xic.ExtractedIonSignalExtractor;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignalExtractor;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignals;
@@ -48,21 +48,17 @@ public class PeakBuilder_29_Test {
 
 	private ITotalScanSignals totalIonSignals;
 	private IChromatogramMSD chromatogram;
-	private IRegularMassSpectrum massSpectrum;
-	private IIon defaultIon;
 	private LinearEquation backgroundEquation;
 	private IMarkedIons excludedIons;
 	private IExtractedIonSignals extractedIonSignals;
-	private ITotalScanSignalExtractor totalIonSignalExtractor;
-	private IExtractedIonSignalExtractor extractedIonSignalExtractor;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		/*
 		 * chromatogram
 		 */
-		List<Float> intensities = new ArrayList<Float>();
+		List<Float> intensities = new ArrayList<>();
 		intensities.add(1000.0f);
 		intensities.add(5578.14f);
 		intensities.add(7596.27f);
@@ -77,9 +73,9 @@ public class PeakBuilder_29_Test {
 		chromatogram.setScanDelay(500);
 		chromatogram.setScanInterval(1000);
 		for(int scan = 1; scan <= 10; scan++) {
-			massSpectrum = new VendorMassSpectrum();
+			IRegularMassSpectrum massSpectrum = new RegularMassSpectrum();
 			for(int ion = 32; ion <= 38; ion++) {
-				defaultIon = new Ion(ion, ion * scan * intensities.get(scan - 1));
+				IIon defaultIon = new Ion(ion, ion * scan * intensities.get(scan - 1));
 				massSpectrum.addIon(defaultIon);
 			}
 			chromatogram.addScan(massSpectrum);
@@ -88,9 +84,9 @@ public class PeakBuilder_29_Test {
 		/*
 		 * Total ion signals.
 		 */
-		totalIonSignalExtractor = new TotalScanSignalExtractor(chromatogram);
+		ITotalScanSignalExtractor totalIonSignalExtractor = new TotalScanSignalExtractor(chromatogram);
 		totalIonSignals = totalIonSignalExtractor.getTotalScanSignals();
-		extractedIonSignalExtractor = new ExtractedIonSignalExtractor(chromatogram);
+		IExtractedIonSignalExtractor extractedIonSignalExtractor = new ExtractedIonSignalExtractor(chromatogram);
 		extractedIonSignals = extractedIonSignalExtractor.getExtractedIonSignals();
 		/*
 		 * background equation
