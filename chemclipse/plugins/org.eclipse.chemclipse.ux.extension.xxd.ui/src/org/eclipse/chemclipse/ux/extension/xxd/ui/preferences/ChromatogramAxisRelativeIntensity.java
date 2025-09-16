@@ -51,7 +51,11 @@ public class ChromatogramAxisRelativeIntensity extends FieldEditorPreferencePage
 		addField(new SpinnerFieldEditor(PreferenceSupplier.P_FONT_SIZE_Y_AXIS_RELATIVE_INTENSITY, ExtensionMessages.fontSize + ":", PreferenceSupplier.MIN_FONT_SIZE, PreferenceSupplier.MAX_FONT_SIZE, getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_FONT_STYLE_Y_AXIS_RELATIVE_INTENSITY, ExtensionMessages.fontStyle + ":", ChartOptions.FONT_STYLES, getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_GRIDLINE_STYLE_Y_AXIS_RELATIVE_INTENSITY, ExtensionMessages.gridLineStyle + ":", ChartOptions.LINE_STYLES, getFieldEditorParent()));
-		addField(new ColorFieldEditor(PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY, ExtensionMessages.gridLineColor + ":", getFieldEditorParent()));
+		if(PreferencesSupport.isDarkTheme()) {
+			addField(new ColorFieldEditor(PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY_DARKTHEME, ExtensionMessages.gridLineColor + ":", getFieldEditorParent()));
+		} else {
+			addField(new ColorFieldEditor(PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY, ExtensionMessages.gridLineColor + ":", getFieldEditorParent()));
+		}
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_SHOW_Y_AXIS_TITLE_RELATIVE_INTENSITY, ExtensionMessages.showAxisTitle, getFieldEditorParent()));
 	}
 

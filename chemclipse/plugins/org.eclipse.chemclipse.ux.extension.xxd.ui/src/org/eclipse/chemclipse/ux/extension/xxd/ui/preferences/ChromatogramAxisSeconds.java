@@ -51,7 +51,11 @@ public class ChromatogramAxisSeconds extends FieldEditorPreferencePage implement
 		addField(new SpinnerFieldEditor(PreferenceSupplier.P_FONT_SIZE_X_AXIS_SECONDS, ExtensionMessages.fontSize + ":", PreferenceSupplier.MIN_FONT_SIZE, PreferenceSupplier.MAX_FONT_SIZE, getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_FONT_STYLE_X_AXIS_SECONDS, ExtensionMessages.fontStyle + ":", ChartOptions.FONT_STYLES, getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_GRIDLINE_STYLE_X_AXIS_SECONDS, ExtensionMessages.gridLineStyle + ":", ChartOptions.LINE_STYLES, getFieldEditorParent()));
-		addField(new ColorFieldEditor(PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_SECONDS, ExtensionMessages.gridLineColor + ":", getFieldEditorParent()));
+		if(PreferencesSupport.isDarkTheme()) {
+			addField(new ColorFieldEditor(PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_SECONDS_DARKTHEME, ExtensionMessages.gridLineColor + ":", getFieldEditorParent()));
+		} else {
+			addField(new ColorFieldEditor(PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_SECONDS, ExtensionMessages.gridLineColor + ":", getFieldEditorParent()));
+		}
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_SHOW_X_AXIS_TITLE_SECONDS, ExtensionMessages.showAxisTitle, getFieldEditorParent()));
 	}
 

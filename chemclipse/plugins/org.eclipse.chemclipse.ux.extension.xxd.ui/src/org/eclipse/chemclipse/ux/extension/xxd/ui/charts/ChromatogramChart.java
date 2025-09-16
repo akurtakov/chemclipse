@@ -198,7 +198,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		String patternNode = PreferenceSupplier.P_FORMAT_X_AXIS_MILLISECONDS;
 		String colorNode = PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_COLOR_X_AXIS_MILLISECONDS_DARKTHEME : PreferenceSupplier.P_COLOR_X_AXIS_MILLISECONDS;
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_X_AXIS_MILLISECONDS;
-		String gridColorNode = PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_MILLISECONDS;
+		String gridColorNode = PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_MILLISECONDS_DARKTHEME : PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_MILLISECONDS;
 
 		ChartSupport.setAxisSettingsExtended(primaryAxisSettingsX, positionNode, patternNode, colorNode, gridLineStyleNode, gridColorNode);
 		primaryAxisSettingsX.setVisible(ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_MILLISECONDS));
@@ -220,7 +220,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		String patternNode = PreferenceSupplier.P_FORMAT_Y_AXIS_INTENSITY;
 		String colorNode = PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_COLOR_Y_AXIS_INTENSITY_DARKTHEME : PreferenceSupplier.P_COLOR_Y_AXIS_INTENSITY;
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_Y_AXIS_INTENSITY;
-		String gridColorNode = PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_INTENSITY;
+		String gridColorNode = PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_INTENSITY_DARKTHEME : PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_INTENSITY;
 
 		ChartSupport.setAxisSettingsExtended(primaryAxisSettingsY, positionNode, patternNode, colorNode, gridLineStyleNode, gridColorNode);
 		primaryAxisSettingsY.setVisible(ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_INTENSITY));
@@ -241,7 +241,8 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		String patternNode = PreferenceSupplier.P_FORMAT_Y_AXIS_RELATIVE_INTENSITY;
 		String colorNode = PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_COLOR_Y_AXIS_RELATIVE_INTENSITY_DARKTHEME : PreferenceSupplier.P_COLOR_Y_AXIS_RELATIVE_INTENSITY;
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_Y_AXIS_RELATIVE_INTENSITY;
-		String gridColorNode = PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY;
+		String gridColorNode = PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY_DARKTHEME : PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY;
+
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_RELATIVE_INTENSITY);
 		boolean isShowAxisTitle = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_TITLE_RELATIVE_INTENSITY);
 
@@ -288,7 +289,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		String patternNode = PreferenceSupplier.P_FORMAT_X_AXIS_SECONDS;
 		String colorNode = PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_COLOR_X_AXIS_SECONDS_DARKTHEME : PreferenceSupplier.P_COLOR_X_AXIS_SECONDS;
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_X_AXIS_SECONDS;
-		String gridColorNode = PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_SECONDS;
+		String gridColorNode = PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_SECONDS_DARKTHEME : PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_SECONDS;
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_SECONDS);
 		boolean isShowAxisTitle = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_TITLE_SECONDS);
 
@@ -335,7 +336,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		String patternNode = PreferenceSupplier.P_FORMAT_X_AXIS_MINUTES;
 		String colorNode = PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_COLOR_X_AXIS_MINUTES_DARKTHEME : PreferenceSupplier.P_COLOR_X_AXIS_MINUTES;
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_X_AXIS_MINUTES;
-		String gridColorNode = PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_MINUTES;
+		String gridColorNode = PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_MINUTES_DARKTHEME : PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_MINUTES;
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_MINUTES);
 		boolean isShowAxisTitle = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_TITLE_MINUTES);
 
