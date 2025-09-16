@@ -43,6 +43,7 @@ import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
 import org.eclipse.chemclipse.processing.system.ProcessSettingsSupport;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
 import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
+import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.msd.ui.handlers.DynamicHandler;
 import org.eclipse.chemclipse.ux.extension.msd.ui.internal.provider.UpdateMenuEntry;
 import org.eclipse.chemclipse.ux.extension.ui.editors.ProcessorSupplierMenuEntry;
@@ -54,9 +55,9 @@ import org.eclipse.core.commands.Command;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtchart.IAxis.Position;
@@ -356,9 +357,9 @@ public class MassSpectrumChartCentroid extends BarChart implements IMassSpectrum
 	private void setGridColor(IAxisSettings axisSettings) {
 
 		if(PreferencesSupport.isDarkTheme()) {
-			axisSettings.setGridColor(Display.getDefault().getSystemColor(SWT.COLOR_DARK_GRAY));
+			axisSettings.setGridColor(Colors.getColor(new RGB(64, 64, 64)));
 		} else {
-			axisSettings.setGridColor(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
+			axisSettings.setGridColor(Colors.GRAY);
 		}
 	}
 }
