@@ -42,6 +42,7 @@ import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
 import org.eclipse.chemclipse.processing.system.ProcessSettingsSupport;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
+import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.ux.extension.msd.ui.handlers.DynamicHandler;
 import org.eclipse.chemclipse.ux.extension.msd.ui.internal.provider.UpdateMenuEntry;
 import org.eclipse.chemclipse.ux.extension.ui.editors.ProcessorSupplierMenuEntry;
@@ -63,6 +64,7 @@ import org.eclipse.swtchart.extensions.axisconverter.PercentageConverter;
 import org.eclipse.swtchart.extensions.barcharts.BarChart;
 import org.eclipse.swtchart.extensions.barcharts.BarSeriesData;
 import org.eclipse.swtchart.extensions.barcharts.IBarSeriesData;
+import org.eclipse.swtchart.extensions.core.IAxisSettings;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.IPrimaryAxisSettings;
 import org.eclipse.swtchart.extensions.core.ISecondaryAxisSettings;
@@ -257,12 +259,12 @@ public class MassSpectrumChartCentroid extends BarChart implements IMassSpectrum
 	private void setPrimaryAxisSet(IChartSettings chartSettings) {
 
 		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
-		primaryAxisSettingsX.setGridColor(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
+		setGridColor(primaryAxisSettingsX);
 		primaryAxisSettingsX.setTitle("m/z");
 		primaryAxisSettingsX.setDecimalFormat(new DecimalFormat(("0.0##"), new DecimalFormatSymbols(Locale.ENGLISH)));
 
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
-		primaryAxisSettingsY.setGridColor(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
+		setGridColor(primaryAxisSettingsY);
 		primaryAxisSettingsY.setTitle("Intensity");
 		primaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.0#E0"), new DecimalFormatSymbols(Locale.ENGLISH)));
 	}
@@ -270,7 +272,7 @@ public class MassSpectrumChartCentroid extends BarChart implements IMassSpectrum
 	private void addSecondaryAxisSet(IChartSettings chartSettings) {
 
 		ISecondaryAxisSettings secondaryAxisSettingsY = new SecondaryAxisSettings("Relative Intensity [%]", new PercentageConverter(SWT.VERTICAL, true));
-		secondaryAxisSettingsY.setGridColor(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
+		setGridColor(secondaryAxisSettingsY);
 		secondaryAxisSettingsY.setPosition(Position.Secondary);
 		secondaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.00"), new DecimalFormatSymbols(Locale.ENGLISH)));
 		chartSettings.getSecondaryAxisSettingsListY().add(secondaryAxisSettingsY);
@@ -348,6 +350,15 @@ public class MassSpectrumChartCentroid extends BarChart implements IMassSpectrum
 					}
 				}
 			});
+		}
+	}
+
+	private void setGridColor(IAxisSettings axisSettings) {
+
+		if(PreferencesSupport.isDarkTheme()) {
+			axisSettings.setGridColor(Display.getDefault().getSystemColor(SWT.COLOR_DARK_GRAY));
+		} else {
+			axisSettings.setGridColor(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
 		}
 	}
 }
