@@ -63,7 +63,8 @@ public class MassSpectrumReaderVersion105 extends AbstractMassSpectraReader impl
 	@Override
 	public IMassSpectra read(File file, IProgressMonitor monitor) throws IOException {
 
-		IStandaloneMassSpectrum massSpectrum = null;
+		IVendorMassSpectra massSpectra = new VendorMassSpectra();
+		massSpectra.setName(file.getName());
 
 		try {
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -75,12 +76,16 @@ public class MassSpectrumReaderVersion105 extends AbstractMassSpectraReader impl
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 			MzData mzData = (MzData)unmarshaller.unmarshal(nodeList.item(0));
 
-			massSpectrum = new StandaloneMassSpectrum();
-			massSpectrum.setFile(file);
-			massSpectrum.setIdentifier(file.getName());
-			massSpectrum.setMassSpectrumType(MassSpectrumType.PROFILE);
-			readDescription(mzData, massSpectrum);
-			readIons(mzData, massSpectrum);
+			for(Spectrum spectrum : mzData.getSpectrumList().getSpectrum()) {
+				IStandaloneMassSpectrum massSpectrum = new StandaloneMassSpectrum();
+				massSpectrum.setFile(file);
+				massSpectrum.setIdentifier(file.getName());
+				massSpectrum.setMassSpectrumType(MassSpectrumType.PROFILE);
+				readDescription(mzData, massSpectrum);
+				readIons(spectrum, massSpectrum);
+				massSpectra.addMassSpectrum(massSpectrum);
+			}
+
 		} catch(SAXException e) {
 			logger.warn(e);
 		} catch(JAXBException e) {
@@ -89,9 +94,6 @@ public class MassSpectrumReaderVersion105 extends AbstractMassSpectraReader impl
 			logger.warn(e);
 		}
 
-		IVendorMassSpectra massSpectra = new VendorMassSpectra();
-		massSpectra.setName(file.getName());
-		massSpectra.addMassSpectrum(massSpectrum);
 		return massSpectra;
 	}
 
@@ -158,9 +160,8 @@ public class MassSpectrumReaderVersion105 extends AbstractMassSpectraReader impl
 		}
 	}
 
-	private void readIons(MzData mzData, IStandaloneMassSpectrum massSpectrum) {
+	private void readIons(Spectrum spectrum, IStandaloneMassSpectrum massSpectrum) {
 
-		Spectrum spectrum = mzData.getSpectrumList().getSpectrum().get(0);
 		readSpectrumDescription(spectrum, massSpectrum);
 		double[] mzs = ReaderVersion105.parseData(spectrum.getMzArrayBinary().getData());
 		double[] intensities = ReaderVersion105.parseData(spectrum.getIntenArrayBinary().getData());
