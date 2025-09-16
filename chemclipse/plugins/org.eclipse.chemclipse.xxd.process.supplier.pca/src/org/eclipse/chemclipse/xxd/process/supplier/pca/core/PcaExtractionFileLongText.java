@@ -79,7 +79,6 @@ public class PcaExtractionFileLongText implements IExtractionData {
 		}
 		readFile(dataInputEntries, sampleMap, samplesVariablesMap, targetMap, filterOverlap, "0");
 		if(filter) {
-			readFile(filterDataInputEntries, sampleMap, samplesVariablesMap, targetMap, filterOverlap, "1");
 			List<Map.Entry<String, Integer>> filterOverlapList = new ArrayList<>(filterOverlap.entrySet());
 			Collections.sort(filterOverlapList, (s1, s2) -> s1.getValue().compareTo(s2.getValue()));
 			filterOverlapList = filterOverlapList.reversed();
@@ -96,6 +95,10 @@ public class PcaExtractionFileLongText implements IExtractionData {
 				filterOverlap.put(entry.getKey(), entry.getValue());
 			}
 		}
+		/*
+		 * Get Filter entries. These are additional to the user selected number of samples to extract
+		 */
+		readFile(filterDataInputEntries, sampleMap, samplesVariablesMap, targetMap, filterOverlap, "1");
 		/*
 		 * extract all variables
 		 */
