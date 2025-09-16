@@ -15,11 +15,12 @@ package org.eclipse.chemclipse.msd.model.implementation;
 import static org.junit.Assert.assertEquals;
 
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.Polarity;
 import org.junit.Test;
 
 public class SupplierMassSpectrum_1_Test {
 
-	private IRegularMassSpectrum massSpectrum = new VendorMassSpectrum();
+	private IRegularMassSpectrum massSpectrum = new RegularMassSpectrum();
 
 	@Test
 	public void testRetentionTime_1() {
@@ -65,5 +66,28 @@ public class SupplierMassSpectrum_1_Test {
 
 		massSpectrum.setScanNumber(78);
 		assertEquals("Scan Number", 78, massSpectrum.getScanNumber());
+	}
+
+	@Test
+	public void testPolarity() {
+
+		massSpectrum.setPolarity(Polarity.POSITIVE);
+		assertEquals(Polarity.POSITIVE, massSpectrum.getPolarity());
+	}
+
+	@Test
+	public void testMassSpectrumLevel() {
+
+		massSpectrum.setMassSpectrometer((short)2);
+		assertEquals((short)2, massSpectrum.getMassSpectrometer());
+	}
+
+	@Test
+	public void testPrecursor() {
+
+		massSpectrum.setPrecursorIon(42);
+		assertEquals(42, massSpectrum.getPrecursorIon(), 0);
+		massSpectrum.setPrecursorBasePeak(1800);
+		assertEquals(1800, massSpectrum.getPrecursorBasePeak(), 0);
 	}
 }

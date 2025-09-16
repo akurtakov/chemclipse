@@ -29,7 +29,7 @@ public class ChromatogramPeaks_2_Test extends ChromatogramPeaksTestCase {
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		super.setUp();
 		peaks = new PeaksMSD();

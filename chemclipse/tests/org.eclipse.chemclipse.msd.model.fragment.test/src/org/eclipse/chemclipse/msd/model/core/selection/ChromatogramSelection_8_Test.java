@@ -23,7 +23,7 @@ import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,11 +31,11 @@ public class ChromatogramSelection_8_Test {
 
 	private IChromatogramMSD chromatogram;
 	private IChromatogramSelectionMSD selection;
-	private IRegularMassSpectrum scan;
+	private IRegularMassSpectrum regularMassSpectrum;
 	private IChromatogramPeakMSD peak;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		/*
 		 * Use createNiceMock if you use void methods that are not important to
@@ -53,9 +53,9 @@ public class ChromatogramSelection_8_Test {
 		EasyMock.replay(peaks);
 		EasyMock.expect(chromatogram.getPeaks()).andStubReturn(peaks);
 
-		scan = new VendorMassSpectrum();
-		scan.setRetentionTime(4500);
-		scan.addIon(new Ion(45.0f, 2883.9f));
+		regularMassSpectrum = new RegularMassSpectrum();
+		regularMassSpectrum.setRetentionTime(4500);
+		regularMassSpectrum.addIon(new Ion(45.0f, 2883.9f));
 		peak = EasyMock.createNiceMock(IChromatogramPeakMSD.class);
 		EasyMock.expect(peak.getIntegratedArea()).andStubReturn(893002.3d);
 		EasyMock.replay(peak);
@@ -76,10 +76,10 @@ public class ChromatogramSelection_8_Test {
 	@Test
 	public void testSetSelectedScan_2() {
 
-		selection.setSelectedScan(scan);
-		scan = selection.getSelectedScan();
+		selection.setSelectedScan(regularMassSpectrum);
+		regularMassSpectrum = selection.getSelectedScan();
 		assertNotNull(selection.getSelectedScan());
-		assertEquals("RetentionTime", 4500, scan.getRetentionTime());
+		assertEquals("RetentionTime", 4500, regularMassSpectrum.getRetentionTime());
 	}
 
 	@Test

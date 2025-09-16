@@ -31,14 +31,13 @@ public class PeakBuilder_19_Test extends PeakBuilderTestCase {
 
 	private IMarkedIons excludedIons;
 	private ITotalScanSignals totalIonSignals;
-	private ITotalScanSignalExtractor totalIonSignalExtractor;
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		super.setUp();
-		totalIonSignalExtractor = new TotalScanSignalExtractor(chromatogram);
+		ITotalScanSignalExtractor totalIonSignalExtractor = new TotalScanSignalExtractor(chromatogram);
 		totalIonSignals = totalIonSignalExtractor.getTotalScanSignals(2, 16);
 		excludedIons = new MarkedIons(MarkedTraceModus.INCLUDE);
 	}

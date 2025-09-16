@@ -15,8 +15,8 @@ package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.rtshifter.core.i
 import static org.junit.Assert.assertEquals;
 
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.rtshifter.settings.FilterSettingsGapFiller;
+import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.selection.ChromatogramSelectionMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.junit.Before;
@@ -29,7 +29,7 @@ public class ChromatogramFilterGapFilller_1_Test extends ChromatogramTestCase {
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		super.setUp();
 		chromatogram = getChromatogram();
@@ -40,33 +40,31 @@ public class ChromatogramFilterGapFilller_1_Test extends ChromatogramTestCase {
 	@Test
 	public void test_1() {
 
-		IRegularMassSpectrum scan;
 		/*
 		 * PRE TESTS
 		 */
 		assertEquals(2, chromatogram.getNumberOfScans());
 		assertEquals(1500, chromatogram.getScanDelay());
-		scan = chromatogram.getSupplierScan(1);
+		IScan scan = chromatogram.getScan(1);
 		assertEquals(1500, scan.getRetentionTime());
-		scan = chromatogram.getSupplierScan(2);
+		scan = chromatogram.getScan(2);
 		assertEquals(10500, scan.getRetentionTime());
 	}
 
 	@Test
 	public void test_2() {
 
-		IRegularMassSpectrum scan;
 		FilterSettingsGapFiller settings = new FilterSettingsGapFiller();
 		settings.setLimitFactor(4);
 
 		GapFiller.autofillScans(chromatogramSelection, settings);
 		assertEquals(1003, chromatogram.getNumberOfScans());
 		assertEquals(1500, chromatogram.getScanDelay());
-		scan = chromatogram.getSupplierScan(1);
+		IScan scan = chromatogram.getScan(1);
 		assertEquals(1500, scan.getRetentionTime());
-		scan = chromatogram.getSupplierScan(10);
+		scan = chromatogram.getScan(10);
 		assertEquals(2556, scan.getRetentionTime());
-		scan = chromatogram.getSupplierScan(1003);
+		scan = chromatogram.getScan(1003);
 		assertEquals(10500, scan.getRetentionTime());
 	}
 }

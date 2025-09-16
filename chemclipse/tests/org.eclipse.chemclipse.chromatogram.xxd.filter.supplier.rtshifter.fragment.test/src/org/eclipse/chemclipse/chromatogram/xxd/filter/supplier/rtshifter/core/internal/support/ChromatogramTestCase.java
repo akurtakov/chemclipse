@@ -13,9 +13,9 @@
 package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.rtshifter.core.internal.support;
 
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 import org.junit.Before;
 import org.junit.Ignore;
 
@@ -39,7 +39,7 @@ public class ChromatogramTestCase {
 	private IChromatogramMSD chromatogram;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		chromatogram = createChromatogram();
 	}
@@ -52,9 +52,9 @@ public class ChromatogramTestCase {
 	private IChromatogramMSD createChromatogram() {
 
 		IChromatogramMSD chromatogram = new ChromatogramMSD();
-		IRegularMassSpectrum scan;
+		IScanMSD scan;
 		for(int i = 1; i <= 10; i++) {
-			scan = new VendorMassSpectrum();
+			scan = new ScanMSD();
 			chromatogram.addScan(scan);
 		}
 		chromatogram.setScanDelay(1500);

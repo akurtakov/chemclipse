@@ -32,21 +32,19 @@ import org.junit.Test;
 public class Chromatogram_17_Test {
 
 	private IChromatogramMSD chromatogram;
-	private IRegularMassSpectrum supplierMassSpectrum;
-	private IIon ion;
 	private IMarkedIons excludedIons;
 	private IScanMSD ms;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		chromatogram = new ChromatogramMSD();
 		// ------------------------------Scan 1-100
 		for(int i = 1; i <= 100; i++) {
-			supplierMassSpectrum = new VendorMassSpectrum();
+			IRegularMassSpectrum supplierMassSpectrum = new RegularMassSpectrum();
 			supplierMassSpectrum.setRetentionTime(i);
 			for(int j = 1; j <= 50; j++) {
-				ion = new Ion(j, j);
+				IIon ion = new Ion(j, j);
 				supplierMassSpectrum.addIon(ion);
 			}
 			chromatogram.addScan(supplierMassSpectrum);

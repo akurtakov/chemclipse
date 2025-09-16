@@ -25,7 +25,7 @@ import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
 import org.eclipse.chemclipse.numeric.equations.Equations;
@@ -142,7 +142,7 @@ public class ScanProcessor {
 				/*
 				 * MSD
 				 */
-				IScanMSD scanNew = new VendorMassSpectrum();
+				IScanMSD scanNew = new ScanMSD();
 				scanNew.setRetentionTime(retentionTimeNew);
 				List<IIon> traces = new ArrayList<>();
 				if(mergeScans) {

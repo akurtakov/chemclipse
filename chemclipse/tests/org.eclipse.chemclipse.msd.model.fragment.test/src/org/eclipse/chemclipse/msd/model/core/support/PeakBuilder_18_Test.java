@@ -33,27 +33,21 @@ import org.junit.Test;
  */
 public class PeakBuilder_18_Test extends PeakBuilderTestCase {
 
-	private IMarkedIons excludedIons;
-	private ITotalScanSignals totalIonSignals;
-	private ITotalScanSignal signal;
-	private IPoint p1, p2;
-	private LinearEquation backgroundEquation;
 	private IPeakMassSpectrum peakMassSpectrum;
-	private ITotalScanSignalExtractor totalIonSignalExtractor;
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		super.setUp();
-		totalIonSignalExtractor = new TotalScanSignalExtractor(chromatogram);
-		totalIonSignals = totalIonSignalExtractor.getTotalScanSignals(2, 16);
-		excludedIons = new MarkedIons(MarkedTraceModus.INCLUDE);
-		signal = totalIonSignals.getTotalScanSignal(2);
-		p1 = new Point(signal.getRetentionTime(), signal.getTotalSignal());
+		ITotalScanSignalExtractor totalIonSignalExtractor = new TotalScanSignalExtractor(chromatogram);
+		ITotalScanSignals totalIonSignals = totalIonSignalExtractor.getTotalScanSignals(2, 16);
+		IMarkedIons excludedIons = new MarkedIons(MarkedTraceModus.INCLUDE);
+		ITotalScanSignal signal = totalIonSignals.getTotalScanSignal(2);
+		IPoint p1 = new Point(signal.getRetentionTime(), signal.getTotalSignal());
 		signal = totalIonSignals.getTotalScanSignal(16);
-		p2 = new Point(signal.getRetentionTime(), signal.getTotalSignal());
-		backgroundEquation = Equations.createLinearEquation(p1, p2);
+		IPoint p2 = new Point(signal.getRetentionTime(), signal.getTotalSignal());
+		LinearEquation backgroundEquation = Equations.createLinearEquation(p1, p2);
 		peakMassSpectrum = PeakBuilderMSD.getPeakMassSpectrum(chromatogram, totalIonSignals, backgroundEquation, excludedIons);
 	}
 

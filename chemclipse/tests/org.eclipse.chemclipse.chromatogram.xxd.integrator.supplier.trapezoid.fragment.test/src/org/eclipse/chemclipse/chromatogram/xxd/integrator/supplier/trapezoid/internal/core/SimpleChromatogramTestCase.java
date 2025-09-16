@@ -14,12 +14,12 @@ package org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.in
 
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.ChromatogramSelectionMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 import org.junit.Before;
 import org.junit.Ignore;
 
@@ -27,7 +27,7 @@ import org.junit.Ignore;
 public class SimpleChromatogramTestCase {
 
 	protected IChromatogramMSD chromatogram;
-	protected IRegularMassSpectrum supplierMassSpectrum;
+	protected IScanMSD supplierMassSpectrum;
 	protected IIon ion;
 	protected IChromatogramSelectionMSD chromatogramSelection;
 
@@ -38,15 +38,15 @@ public class SimpleChromatogramTestCase {
 		chromatogram = new ChromatogramMSD();
 		chromatogram.setScanDelay(4500);
 		chromatogram.setScanInterval(1000);
-		supplierMassSpectrum = new VendorMassSpectrum();
+		supplierMassSpectrum = new ScanMSD();
 		ion = new Ion(43, 1000.0f);
 		supplierMassSpectrum.addIon(ion);
 		chromatogram.addScan(supplierMassSpectrum);
-		supplierMassSpectrum = new VendorMassSpectrum();
+		supplierMassSpectrum = new ScanMSD();
 		ion = new Ion(43, 2000.0f);
 		supplierMassSpectrum.addIon(ion);
 		chromatogram.addScan(supplierMassSpectrum);
-		supplierMassSpectrum = new VendorMassSpectrum();
+		supplierMassSpectrum = new ScanMSD();
 		ion = new Ion(43, 1000.0f);
 		supplierMassSpectrum.addIon(ion);
 		chromatogram.addScan(supplierMassSpectrum);

@@ -35,11 +35,10 @@ import org.junit.Test;
 public class PeakBuilder_16_Test extends PeakBuilderExtendedTestCase {
 
 	private IChromatogramPeakMSD peak;
-	private IBackgroundAbundanceRange backgroundAbundanceRange;
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		super.setUp();
 		/*
@@ -48,7 +47,7 @@ public class PeakBuilder_16_Test extends PeakBuilderExtendedTestCase {
 		 * of the peak mass spectrum, we need to subtract the background and set
 		 * the peak to the real height.
 		 */
-		backgroundAbundanceRange = new BackgroundAbundanceRange(-1, -1);
+		IBackgroundAbundanceRange backgroundAbundanceRange = new BackgroundAbundanceRange(-1, -1);
 		peakMassSpectrum.adjustTotalSignal(5147.86f); // 5231.0f - 83.14f
 														// (background at
 														// retention time x =

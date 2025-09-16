@@ -31,7 +31,7 @@ import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.MessageType;
 import org.eclipse.chemclipse.processing.core.ProcessingMessage;
@@ -112,7 +112,7 @@ public class FilterScanMerger extends AbstractChromatogramFilter {
 							 * MSD
 							 */
 							if(scanNext instanceof IScanMSD nextScan) {
-								IScanMSD scanMerged = new VendorMassSpectrum();
+								IScanMSD scanMerged = new ScanMSD();
 								scanMerged.setRetentionTime(retentionTimeCenter);
 								scanMerged.addIons(currentScan.getIons(), true);
 								scanMerged.addIons(nextScan.getIons(), true);

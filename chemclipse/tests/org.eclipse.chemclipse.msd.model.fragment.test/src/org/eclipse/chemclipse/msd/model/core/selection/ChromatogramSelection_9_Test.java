@@ -20,26 +20,23 @@ import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ChromatogramSelection_9_Test {
 
-	private IChromatogramMSD chromatogram;
 	private IChromatogramSelectionMSD selection;
-	private IRegularMassSpectrum massSpectrum;
-	private IIon ion;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
-		chromatogram = new ChromatogramMSD();
+		IChromatogramMSD chromatogram = new ChromatogramMSD();
 		chromatogram.setScanDelay(500);
 		chromatogram.setScanInterval(1000);
 		for(int scan = 1; scan <= 10; scan++) {
-			massSpectrum = new VendorMassSpectrum();
-			ion = new Ion(IIon.TIC_ION, 45528.3f);
+			IRegularMassSpectrum massSpectrum = new RegularMassSpectrum();
+			IIon ion = new Ion(IIon.TIC_ION, 45528.3f);
 			massSpectrum.addIon(ion);
 			chromatogram.addScan(massSpectrum);
 		}

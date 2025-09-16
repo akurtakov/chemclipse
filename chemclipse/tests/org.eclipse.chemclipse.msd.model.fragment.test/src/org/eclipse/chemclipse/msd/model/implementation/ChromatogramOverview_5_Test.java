@@ -16,6 +16,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.msd.model.core.IIon;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,7 +27,7 @@ public class ChromatogramOverview_5_Test {
 
 	private ChromatogramMSD chrom;
 	private IChromatogramOverview chromatogram;
-	private VendorMassSpectrum supplierMassSpectrum;
+	private IScanMSD supplierMassSpectrum;
 	private IIon ion;
 	private float RT_FACTOR = 1000.0f * 60.0f;
 
@@ -36,7 +37,7 @@ public class ChromatogramOverview_5_Test {
 		chrom = new ChromatogramMSD();
 		// ------------------------------Scan 1 - 200
 		for(int i = 1; i <= 200; i++) {
-			supplierMassSpectrum = new VendorMassSpectrum();
+			supplierMassSpectrum = new ScanMSD();
 			ion = new Ion(IIon.TIC_ION, 4500.0f);
 			supplierMassSpectrum.addIon(ion);
 			chrom.addScan(supplierMassSpectrum);

@@ -24,7 +24,7 @@ import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.junit.Before;
 import org.junit.Ignore;
 
@@ -41,13 +41,13 @@ abstract class ChromatogramPeaksTestCase {
 	private float stopBackgroundAbundance = 0.0f;
 	private IChromatogramMSD chromatogram;
 	private IIon ion;
-	private IRegularMassSpectrum supplierMassSpectrum;
+	private IScanMSD supplierMassSpectrum;
 	private IChromatogramPeakMSD peak1;
 	private IChromatogramPeakMSD peak2;
 	private IChromatogramPeakMSD peak3;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		createChromatogram();
 		createPeak1();
@@ -58,7 +58,7 @@ abstract class ChromatogramPeaksTestCase {
 	private void createChromatogram() {
 
 		chromatogram = new ChromatogramMSD();
-		fragmentValues = new TreeMap<Float, Float>();
+		fragmentValues = new TreeMap<>();
 		fragmentValues.put(104.0f, 2300.0f);
 		fragmentValues.put(103.0f, 580.0f);
 		fragmentValues.put(51.0f, 260.0f);
@@ -80,7 +80,7 @@ abstract class ChromatogramPeaksTestCase {
 		 * Add Scan 1 (500) to 17 (16500)
 		 */
 		for(int i = 1; i <= 17; i++) {
-			supplierMassSpectrum = new VendorMassSpectrum();
+			supplierMassSpectrum = new ScanMSD();
 			for(Entry<Float, Float> entry : fragmentValues.entrySet()) {
 				ion = new Ion(entry.getKey(), entry.getValue());
 				supplierMassSpectrum.addIon(ion);
@@ -108,7 +108,7 @@ abstract class ChromatogramPeaksTestCase {
 		/*
 		 * Add Peak (1500) to 16 (15500)
 		 */
-		scanValues = new TreeMap<Integer, Float>();
+		scanValues = new TreeMap<>();
 		scanValues.put(1500, 0.0f);
 		scanValues.put(2500, 5.0f);
 		scanValues.put(3500, 10.0f);
@@ -147,7 +147,7 @@ abstract class ChromatogramPeaksTestCase {
 		/*
 		 * Add Peak (1500) to 16 (15500)
 		 */
-		scanValues = new TreeMap<Integer, Float>();
+		scanValues = new TreeMap<>();
 		scanValues.put(5500, 4.0f);
 		scanValues.put(6500, 10.0f);
 		scanValues.put(7500, 30.0f);
@@ -182,7 +182,7 @@ abstract class ChromatogramPeaksTestCase {
 		/*
 		 * Add Peak (1500) to 16 (15500)
 		 */
-		scanValues = new TreeMap<Integer, Float>();
+		scanValues = new TreeMap<>();
 		scanValues.put(3500, 0.0f);
 		scanValues.put(4500, 20.0f);
 		scanValues.put(5500, 35.0f);

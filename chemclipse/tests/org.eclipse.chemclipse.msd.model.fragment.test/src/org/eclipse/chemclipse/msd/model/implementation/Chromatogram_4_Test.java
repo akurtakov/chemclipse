@@ -21,7 +21,9 @@ import java.util.Date;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignalExtractor;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.model.signals.TotalScanSignalExtractor;
+import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
+import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.xic.ExtractedIonSignalExtractor;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignalExtractor;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignals;
@@ -33,21 +35,19 @@ import org.junit.Test;
  */
 public class Chromatogram_4_Test {
 
-	private ChromatogramMSD chromatogram;
-	private VendorMassSpectrum supplierMassSpectrum;
-	private IIon ion;
+	private IChromatogramMSD chromatogram;
 	private Date date;
 	private ITotalScanSignalExtractor totalIonSignalExtractor;
 	private IExtractedIonSignalExtractor extractedIonSignalExtractor;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		chromatogram = new ChromatogramMSD();
 		// ------------------------------Scan 1
-		supplierMassSpectrum = new VendorMassSpectrum();
+		IRegularMassSpectrum supplierMassSpectrum = new RegularMassSpectrum();
 		supplierMassSpectrum.setRetentionTime(7896);
-		ion = new Ion(45.4f, 65883.3f);
+		IIon ion = new Ion(45.4f, 65883.3f);
 		supplierMassSpectrum.addIon(ion);
 		ion = new Ion(104.3f, 102453.3f);
 		supplierMassSpectrum.addIon(ion);

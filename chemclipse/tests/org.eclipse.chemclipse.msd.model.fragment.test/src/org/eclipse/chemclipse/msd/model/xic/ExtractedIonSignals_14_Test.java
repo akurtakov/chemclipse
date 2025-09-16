@@ -22,17 +22,13 @@ import org.eclipse.chemclipse.msd.model.core.selection.ChromatogramSelectionMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ExtractedIonSignals_14_Test {
 
-	private IRegularMassSpectrum supplierMassSpectrum;
-	private IIon defaultIon;
 	private IExtractedIonSignals extractedIonSignals;
-	private IChromatogramMSD chromatogram;
-	private IExtractedIonSignalExtractor extractedIonSignalExtractor;
 
 	@Before
 	public void setUp() {
@@ -43,13 +39,13 @@ public class ExtractedIonSignals_14_Test {
 		/*
 		 * No empty scans.
 		 */
-		chromatogram = new ChromatogramMSD();
+		IChromatogramMSD chromatogram = new ChromatogramMSD();
 		for(int scan = 1; scan <= scans; scan++) {
-			supplierMassSpectrum = new VendorMassSpectrum();
+			IRegularMassSpectrum supplierMassSpectrum = new RegularMassSpectrum();
 			supplierMassSpectrum.setRetentionTime(scan);
 			supplierMassSpectrum.setRetentionIndex(scan / 60.0f);
 			for(int ion = ionStart; ion <= ionStop; ion++) {
-				defaultIon = new Ion(ion, ion * scan);
+				IIon defaultIon = new Ion(ion, ion * scan);
 				supplierMassSpectrum.addIon(defaultIon);
 			}
 			chromatogram.addScan(supplierMassSpectrum);
@@ -63,7 +59,7 @@ public class ExtractedIonSignals_14_Test {
 		/*
 		 * Use a chromatogram selection.
 		 */
-		extractedIonSignalExtractor = new ExtractedIonSignalExtractor(chromatogram);
+		IExtractedIonSignalExtractor extractedIonSignalExtractor = new ExtractedIonSignalExtractor(chromatogram);
 		IChromatogramSelectionMSD chromatogramSelection = new ChromatogramSelectionMSD(chromatogram);
 		extractedIonSignals = extractedIonSignalExtractor.getExtractedIonSignals(chromatogramSelection);
 	}

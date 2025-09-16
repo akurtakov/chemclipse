@@ -48,7 +48,7 @@ abstract class ChromatogramPeakTestCase {
 
 		// ----------------------PeakMaximum
 		peakMaximum = new PeakMassSpectrum();
-		fragmentValues = new TreeMap<Float, Float>();
+		fragmentValues = new TreeMap<>();
 		fragmentValues.put(104.0f, 2300.0f);
 		fragmentValues.put(103.0f, 580.0f);
 		fragmentValues.put(51.0f, 260.0f);
@@ -77,7 +77,7 @@ abstract class ChromatogramPeakTestCase {
 		 * Add Scan 1 (500) to 17 (16500)
 		 */
 		for(int i = 1; i <= 17; i++) {
-			supplierMassSpectrum = new VendorMassSpectrum();
+			supplierMassSpectrum = new RegularMassSpectrum();
 			for(Entry<Float, Float> entry : fragmentValues.entrySet()) {
 				ion = new Ion(entry.getKey(), entry.getValue());
 				supplierMassSpectrum.addIon(ion);
@@ -93,7 +93,7 @@ abstract class ChromatogramPeakTestCase {
 		/*
 		 * Add Peak (1500) to 16 (15500)
 		 */
-		scanValues = new TreeMap<Integer, Float>();
+		scanValues = new TreeMap<>();
 		scanValues.put(1500, 0.0f);
 		scanValues.put(2500, 5.0f);
 		scanValues.put(3500, 10.0f);

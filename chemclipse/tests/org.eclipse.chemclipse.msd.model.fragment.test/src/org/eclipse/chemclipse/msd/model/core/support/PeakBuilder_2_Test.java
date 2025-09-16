@@ -37,16 +37,14 @@ import org.junit.Test;
 public class PeakBuilder_2_Test extends PeakBuilderTestCase {
 
 	private IChromatogramPeakMSD peak;
-	private IScanRange scanRange;
-	private IBackgroundAbundanceRange backgroundAbundanceRange;
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		super.setUp();
-		scanRange = new ScanRange(2, 16);
-		backgroundAbundanceRange = new BackgroundAbundanceRange(0, 0);
+		IScanRange scanRange = new ScanRange(2, 16);
+		IBackgroundAbundanceRange backgroundAbundanceRange = new BackgroundAbundanceRange(0, 0);
 		peak = PeakBuilderMSD.createPeak(chromatogram, scanRange, backgroundAbundanceRange, true);
 	}
 

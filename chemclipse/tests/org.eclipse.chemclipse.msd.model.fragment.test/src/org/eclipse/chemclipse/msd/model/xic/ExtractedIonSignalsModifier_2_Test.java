@@ -23,20 +23,16 @@ import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.exceptions.NoExtractedIonSignalStoredException;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ExtractedIonSignalsModifier_2_Test {
 
-	private IChromatogramMSD chromatogram;
-	private IRegularMassSpectrum supplierMassSpectrum;
-	private IIon supplierIon;
 	private IExtractedIonSignals extractedIonSignals;
 	private IExtractedIonSignal extractedIonSignal;
 	private List<Integer> scans;
 	private List<Integer> ions;
-	private IExtractedIonSignalExtractor extractedIonSignalExtractor;
 
 	@Before
 	public void setUp() throws NoExtractedIonSignalStoredException {
@@ -45,22 +41,22 @@ public class ExtractedIonSignalsModifier_2_Test {
 		 * Build a chromatogram and add scans with ions and no
 		 * abundance.
 		 */
-		chromatogram = new ChromatogramMSD();
+		IChromatogramMSD chromatogram = new ChromatogramMSD();
 		for(int scan = 1; scan <= 100; scan++) {
-			supplierMassSpectrum = new VendorMassSpectrum();
+			IRegularMassSpectrum supplierMassSpectrum = new RegularMassSpectrum();
 			for(int ion = 32; ion <= 104; ion++) {
-				supplierIon = new Ion(ion, ion * 2);
+				IIon supplierIon = new Ion(ion, ion * 2);
 				supplierMassSpectrum.addIon(supplierIon);
 			}
 			chromatogram.addScan(supplierMassSpectrum);
 		}
-		extractedIonSignalExtractor = new ExtractedIonSignalExtractor(chromatogram);
+		IExtractedIonSignalExtractor extractedIonSignalExtractor = new ExtractedIonSignalExtractor(chromatogram);
 		extractedIonSignals = extractedIonSignalExtractor.getExtractedIonSignals();
-		scans = new ArrayList<Integer>();
+		scans = new ArrayList<>();
 		scans.add(4);
 		scans.add(7);
 		scans.add(9);
-		ions = new ArrayList<Integer>();
+		ions = new ArrayList<>();
 		ions.add(45);
 		ions.add(76);
 		ions.add(102);

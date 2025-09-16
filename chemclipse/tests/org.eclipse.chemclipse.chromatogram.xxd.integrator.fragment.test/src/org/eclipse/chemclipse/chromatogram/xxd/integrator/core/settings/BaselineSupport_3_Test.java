@@ -17,9 +17,9 @@ import static org.junit.Assert.assertEquals;
 import org.eclipse.chemclipse.model.baseline.BaselineModel;
 import org.eclipse.chemclipse.model.baseline.IBaselineModel;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
-import org.eclipse.chemclipse.msd.model.implementation.VendorMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,18 +27,18 @@ public class BaselineSupport_3_Test {
 
 	private IBaselineSupport baselineSupport;
 	private IChromatogramMSD chromatogram;
-	private IRegularMassSpectrum ms;
+	private IScanMSD ms;
 	private IBaselineModel baselineModel;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		baselineSupport = new BaselineSupport();
 		chromatogram = new ChromatogramMSD();
 		chromatogram.setScanDelay(500);
 		chromatogram.setScanInterval(1000);
 		for(int scan = 1; scan <= 100; scan++) {
-			ms = new VendorMassSpectrum();
+			ms = new ScanMSD();
 			chromatogram.addScan(ms);
 		}
 		chromatogram.recalculateRetentionTimes();

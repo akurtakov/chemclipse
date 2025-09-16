@@ -30,12 +30,10 @@ public class PeakBuilderExtendedTestCase extends PeakBuilderTestCase {
 
 	protected ITotalScanSignals totalIonSignals;
 	protected IPeakMassSpectrum peakMassSpectrum;
-	private IPeakIon peakIon;
-	private TreeMap<Float, Float> peakMassSpectrumValues;
 
 	@Override
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		super.setUp();
 		totalIonSignals = new TotalScanSignals(2, 16);
@@ -54,7 +52,7 @@ public class PeakBuilderExtendedTestCase extends PeakBuilderTestCase {
 		totalIonSignals.add(new TotalScanSignal(13500, 0, 1671.14115751681f));
 		totalIonSignals.add(new TotalScanSignal(14500, 0, 908.314326834502f));
 		totalIonSignals.add(new TotalScanSignal(15500, 0, 145.487406362466f));
-		peakMassSpectrumValues = new TreeMap<Float, Float>();
+		TreeMap<Float, Float> peakMassSpectrumValues = new TreeMap<>();
 		peakMassSpectrumValues.put(104.0f, 2300.0f);
 		peakMassSpectrumValues.put(103.0f, 580.0f);
 		peakMassSpectrumValues.put(51.0f, 260.0f);
@@ -65,7 +63,7 @@ public class PeakBuilderExtendedTestCase extends PeakBuilderTestCase {
 		peakMassSpectrumValues.put(105.0f, 970.0f);
 		peakMassSpectrum = new PeakMassSpectrum();
 		for(Entry<Float, Float> entry : peakMassSpectrumValues.entrySet()) {
-			peakIon = new PeakIon(entry.getKey(), entry.getValue());
+			IPeakIon peakIon = new PeakIon(entry.getKey(), entry.getValue());
 			peakMassSpectrum.addIon(peakIon);
 		}
 	}
