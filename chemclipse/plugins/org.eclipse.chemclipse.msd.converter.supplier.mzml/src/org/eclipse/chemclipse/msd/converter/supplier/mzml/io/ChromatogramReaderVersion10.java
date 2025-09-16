@@ -39,6 +39,7 @@ import org.eclipse.chemclipse.xxd.converter.supplier.mzml.io.XmlReader10;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v10.BinaryDataArrayType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v10.CVParamType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v10.ChromatogramType;
+import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v10.DataProcessingListType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v10.DataProcessingType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v10.InstrumentConfigurationType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v10.MzMLType;
@@ -239,7 +240,11 @@ public class ChromatogramReaderVersion10 extends AbstractChromatogramReader impl
 
 	private void readEditHistory(MzMLType mzML, IVendorChromatogram chromatogram) {
 
-		for(DataProcessingType dataProcessing : mzML.getDataProcessingList().getDataProcessing()) {
+		DataProcessingListType dataProcessinglist = mzML.getDataProcessingList();
+		if(dataProcessinglist == null) {
+			return;
+		}
+		for(DataProcessingType dataProcessing : dataProcessinglist.getDataProcessing()) {
 			SoftwareType software = (SoftwareType)dataProcessing.getSoftwareRef();
 			for(ProcessingMethodType processingMethod : dataProcessing.getProcessingMethod()) {
 				for(CVParamType cvParam : processingMethod.getCvParam()) {
