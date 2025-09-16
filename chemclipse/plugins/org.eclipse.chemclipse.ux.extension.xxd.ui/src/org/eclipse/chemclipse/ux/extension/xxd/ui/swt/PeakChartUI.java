@@ -18,6 +18,7 @@ import java.util.List;
 import org.eclipse.chemclipse.csd.model.core.IPeakCSD;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
+import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChartSupport;
@@ -25,12 +26,16 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.PeakChartSupport;
 import org.eclipse.chemclipse.wsd.model.core.IPeakWSD;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swtchart.ILineSeries;
 import org.eclipse.swtchart.extensions.core.BaseChart;
 import org.eclipse.swtchart.extensions.core.ChartType;
+import org.eclipse.swtchart.extensions.core.IAxisSettings;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
+import org.eclipse.swtchart.extensions.core.ISecondaryAxisSettings;
 import org.eclipse.swtchart.extensions.core.ISeriesData;
 import org.eclipse.swtchart.extensions.core.RangeRestriction;
 import org.eclipse.swtchart.extensions.core.ScrollableChart;
@@ -119,6 +124,8 @@ public class PeakChartUI extends ScrollableChart {
 		ChartSupport.clearSecondaryAxes(chartSettings);
 		ChartSupport.addSecondaryAxisX(chartSettings, titleX1);
 		ChartSupport.addSecondaryAxisY(chartSettings, titleY1);
+
+		setGridColor(chartSettings);
 	}
 
 	private void initialize() {
@@ -234,6 +241,28 @@ public class PeakChartUI extends ScrollableChart {
 			baseChart.suspendUpdate(false);
 			adjustRange(true);
 			baseChart.redraw();
+		}
+	}
+
+	private void setGridColor(IChartSettings chartSettings) {
+
+		setGridColor(chartSettings.getPrimaryAxisSettingsX());
+		setGridColor(chartSettings.getPrimaryAxisSettingsY());
+
+		for(ISecondaryAxisSettings secondaryAxisSettingsX : chartSettings.getSecondaryAxisSettingsListX()) {
+			setGridColor(secondaryAxisSettingsX);
+		}
+		for(ISecondaryAxisSettings secondaryAxisSettingsY : chartSettings.getSecondaryAxisSettingsListY()) {
+			setGridColor(secondaryAxisSettingsY);
+		}
+	}
+
+	private void setGridColor(IAxisSettings axisSettings) {
+
+		if(PreferencesSupport.isDarkTheme()) {
+			axisSettings.setGridColor(Display.getDefault().getSystemColor(SWT.COLOR_DARK_GRAY));
+		} else {
+			axisSettings.setGridColor(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
 		}
 	}
 }
