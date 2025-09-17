@@ -13,7 +13,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.swt.ui.components.massspectrum;
 
+import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.msd.swt.ui.internal.provider.MassSpectrumPeakLabelProvider;
 import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
@@ -36,12 +38,18 @@ public class MassSpectrumPeakListUI extends ExtendedTableViewer {
 		createColumns();
 	}
 
-	public void update(IStandaloneMassSpectrum standaloneMassSpectrum) {
+	public void update(IRegularMassSpectrum regularMassSpectrum) {
 
-		if(standaloneMassSpectrum != null) {
+		if(regularMassSpectrum != null) {
 			setContentProviders();
-			super.setInput(standaloneMassSpectrum.getPeaks());
-			setItemCount(standaloneMassSpectrum.getPeaks().size());
+			if(regularMassSpectrum instanceof IStandaloneMassSpectrum standaloneMassSpectrum && !standaloneMassSpectrum.getPeaks().isEmpty()) {
+				super.setInput(standaloneMassSpectrum.getPeaks());
+				setItemCount(standaloneMassSpectrum.getPeaks().size());
+			} else if(regularMassSpectrum.getMassSpectrumType() == MassSpectrumType.CENTROID) {
+				super.setInput(regularMassSpectrum.getIons());
+				setItemCount(regularMassSpectrum.getIons().size());
+			}
+
 		} else {
 			super.setInput(null);
 		}
