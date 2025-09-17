@@ -92,6 +92,7 @@ import org.eclipse.chemclipse.ux.extension.ui.methods.MethodParameters;
 import org.eclipse.chemclipse.ux.extension.ui.methods.MethodSupportUI;
 import org.eclipse.chemclipse.ux.extension.ui.methods.ResumeMethodSupport;
 import org.eclipse.chemclipse.ux.extension.ui.methods.SettingsWizard;
+import org.eclipse.chemclipse.ux.extension.ui.support.AuditTrailSupport;
 import org.eclipse.chemclipse.ux.extension.ui.support.PartSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ChartGridSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
@@ -127,7 +128,6 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageProc
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.segments.AnalysisSegmentColorScheme;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.segments.AnalysisSegmentPaintListener;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.support.AuditTrailSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.DisplayType;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.NoiseFactorSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ChromatogramChartSupport;

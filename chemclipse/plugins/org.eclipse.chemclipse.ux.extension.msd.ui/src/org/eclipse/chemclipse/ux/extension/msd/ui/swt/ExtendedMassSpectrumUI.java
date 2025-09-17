@@ -23,6 +23,7 @@ import org.eclipse.chemclipse.model.supplier.IScanProcessSupplier;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
+import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.msd.swt.ui.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.processing.core.IMessageProvider;
@@ -39,6 +40,7 @@ import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.ux.extension.msd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.ui.methods.MethodSupportUI;
+import org.eclipse.chemclipse.ux.extension.ui.support.AuditTrailSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ChartGridSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
@@ -193,6 +195,9 @@ public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI
 			UpdateNotifier.update(scanMSD);
 			UpdateNotifierUI.update(getDisplay(), scanMSD);
 			updateResult(processingInfo);
+			if(scanMSD instanceof IStandaloneMassSpectrum standaloneMassSpectrum) {
+				AuditTrailSupport.updateAuditTrail(standaloneMassSpectrum, processingInfo, processMethod, processTypeSupport);
+			}
 
 			DisplayUtils.getDisplay().syncExec(() -> massSpectrumChart.update());
 		}));
@@ -305,7 +310,7 @@ public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI
 
 	private void createButtonSettings(Composite parent) {
 
-		createSettingsButton(parent, getPreferencePagesSupplier(), (ISettingsHandler) display -> massSpectrumChart.update(), false);
+		createSettingsButton(parent, getPreferencePagesSupplier(), (ISettingsHandler)display -> massSpectrumChart.update(), false);
 	}
 
 	private Supplier<List<Class<? extends IPreferencePage>>> getPreferencePagesSupplier() {

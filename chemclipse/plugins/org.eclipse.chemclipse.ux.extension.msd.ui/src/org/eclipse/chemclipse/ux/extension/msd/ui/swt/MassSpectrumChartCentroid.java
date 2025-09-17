@@ -29,6 +29,7 @@ import org.eclipse.chemclipse.msd.converter.massspectrum.MassSpectrumConverter;
 import org.eclipse.chemclipse.msd.converter.massspectrum.MassSpectrumConverterSupport;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
+import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
 import org.eclipse.chemclipse.processing.converter.ISupplier;
 import org.eclipse.chemclipse.processing.core.DefaultProcessingResult;
 import org.eclipse.chemclipse.processing.core.ICategories;
@@ -48,6 +49,7 @@ import org.eclipse.chemclipse.ux.extension.msd.ui.handlers.DynamicHandler;
 import org.eclipse.chemclipse.ux.extension.msd.ui.internal.provider.UpdateMenuEntry;
 import org.eclipse.chemclipse.ux.extension.ui.editors.ProcessorSupplierMenuEntry;
 import org.eclipse.chemclipse.ux.extension.ui.methods.SettingsWizard;
+import org.eclipse.chemclipse.ux.extension.ui.support.AuditTrailSupport;
 import org.eclipse.chemclipse.xxd.process.comparators.CategoryNameComparator;
 import org.eclipse.chemclipse.xxd.process.support.ProcessTypeSupport;
 import org.eclipse.core.commands.Category;
@@ -221,6 +223,9 @@ public class MassSpectrumChartCentroid extends BarChart implements IMassSpectrum
 				DefaultProcessingResult<Object> processingInfo = new DefaultProcessingResult<>();
 				IProcessSupplier.applyProcessor(settings, IScanProcessSupplier.createConsumer(scanMSD), new ProcessExecutionContext(monitor, processingInfo, processSupplierContext));
 				updateResult(processingInfo);
+				if(scanMSD instanceof IStandaloneMassSpectrum standaloneMassSpectrum) {
+					AuditTrailSupport.updateAuditTrail(standaloneMassSpectrum, processingInfo, processSupplier);
+				}
 			}), shell);
 		} catch(IOException e) {
 			DefaultProcessingResult<Object> processingInfo = new DefaultProcessingResult<>();
