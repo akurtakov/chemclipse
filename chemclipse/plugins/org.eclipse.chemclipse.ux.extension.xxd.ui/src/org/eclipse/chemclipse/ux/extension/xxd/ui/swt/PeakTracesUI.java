@@ -49,9 +49,8 @@ import org.eclipse.chemclipse.wsd.model.core.IPeakModelWSD;
 import org.eclipse.chemclipse.wsd.model.core.IScanSignalWSD;
 import org.eclipse.chemclipse.wsd.model.core.IScanWSD;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swtchart.ILineSeries;
 import org.eclipse.swtchart.IPlotArea;
 import org.eclipse.swtchart.extensions.core.BaseChart;
@@ -351,9 +350,9 @@ public class PeakTracesUI extends ScrollableChart {
 	private void setGridColor(IAxisSettings axisSettings) {
 
 		if(PreferencesSupport.isDarkTheme()) {
-			axisSettings.setGridColor(Display.getDefault().getSystemColor(SWT.COLOR_DARK_GRAY));
+			axisSettings.setGridColor(Colors.getColor(new RGB(64, 64, 64)));
 		} else {
-			axisSettings.setGridColor(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
+			axisSettings.setGridColor(Colors.GRAY);
 		}
 	}
 }

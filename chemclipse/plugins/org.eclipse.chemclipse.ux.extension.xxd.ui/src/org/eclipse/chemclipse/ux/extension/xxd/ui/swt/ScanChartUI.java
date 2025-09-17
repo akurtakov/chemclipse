@@ -48,8 +48,8 @@ import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swtchart.IAxis;
 import org.eclipse.swtchart.IBarSeries;
 import org.eclipse.swtchart.IBarSeries.BarWidthStyle;
@@ -833,9 +833,9 @@ public class ScanChartUI extends ScrollableChart {
 	private void setGridColor(IAxisSettings axisSettings) {
 
 		if(PreferencesSupport.isDarkTheme()) {
-			axisSettings.setGridColor(Display.getDefault().getSystemColor(SWT.COLOR_DARK_GRAY));
+			axisSettings.setGridColor(Colors.getColor(new RGB(64, 64, 64)));
 		} else {
-			axisSettings.setGridColor(Display.getDefault().getSystemColor(SWT.COLOR_GRAY));
+			axisSettings.setGridColor(Colors.GRAY);
 		}
 	}
 }
