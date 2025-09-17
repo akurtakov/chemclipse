@@ -42,6 +42,7 @@ public abstract class AbstractPartPCA<T extends Composite> extends AbstractPart<
 		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, IChemClipseEvents.EVENT_BROKER_DATA);
 		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE, IChemClipseEvents.EVENT_BROKER_DATA);
 		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE, IChemClipseEvents.EVENT_BROKER_DATA);
+		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE, IChemClipseEvents.EVENT_BROKER_DATA);
 	}
 
 	@Override
