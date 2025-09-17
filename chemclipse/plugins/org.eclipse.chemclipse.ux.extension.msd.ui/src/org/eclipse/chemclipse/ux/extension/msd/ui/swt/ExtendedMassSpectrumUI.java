@@ -191,15 +191,17 @@ public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI
 			IProcessingInfo<?> processingInfo = new ProcessingInfo<>();
 			ProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, processingInfo, processTypeSupport), IScanProcessSupplier.createConsumer(scanMSD));
 			scanMSD.setDirty(true);
-			update(scanMSD);
 			UpdateNotifier.update(scanMSD);
-			UpdateNotifierUI.update(getDisplay(), scanMSD);
-			updateResult(processingInfo);
 			if(scanMSD instanceof IStandaloneMassSpectrum standaloneMassSpectrum) {
 				AuditTrailSupport.updateAuditTrail(standaloneMassSpectrum, processingInfo, processMethod, processTypeSupport);
 			}
 
-			DisplayUtils.getDisplay().syncExec(() -> massSpectrumChart.update());
+			DisplayUtils.getDisplay().syncExec(() -> {
+				update(scanMSD);
+				massSpectrumChart.update();
+				UpdateNotifierUI.update(getDisplay(), scanMSD);
+				updateResult(processingInfo);
+			});
 		}));
 
 		toolbarMethodControl.set(methodSupportUI);
