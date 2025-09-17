@@ -29,6 +29,8 @@ import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
+import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
+import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.pcr.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.xxd.process.ui.menu.IMenuIcon;
 import org.eclipse.core.runtime.CoreException;
@@ -38,10 +40,12 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtchart.IAxis.Position;
+import org.eclipse.swtchart.extensions.core.IAxisSettings;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.IPrimaryAxisSettings;
 import org.eclipse.swtchart.extensions.core.ScrollableChart;
@@ -101,10 +105,12 @@ public class ChartPCR extends LineChart {
 		primaryAxisSettingsX.setDecimalFormat(new DecimalFormat(("0"), new DecimalFormatSymbols(Locale.ENGLISH))); //$NON-NLS-1$
 		primaryAxisSettingsX.setPosition(Position.Primary);
 		primaryAxisSettingsX.setVisible(true);
+		setGridColor(primaryAxisSettingsX);
 
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle(ExtensionMessages.fluorescence);
 		primaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.0#E0"), new DecimalFormatSymbols(Locale.ENGLISH))); //$NON-NLS-1$
+		setGridColor(primaryAxisSettingsY);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -186,6 +192,15 @@ public class ChartPCR extends LineChart {
 					}
 				}
 			});
+		}
+	}
+
+	private void setGridColor(IAxisSettings axisSettings) {
+
+		if(PreferencesSupport.isDarkTheme()) {
+			axisSettings.setGridColor(Colors.getColor(new RGB(64, 64, 64)));
+		} else {
+			axisSettings.setGridColor(Colors.GRAY);
 		}
 	}
 }

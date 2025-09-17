@@ -18,15 +18,18 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.chemclipse.support.text.ValueFormat;
+import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swtchart.IBarSeries.BarWidthStyle;
 import org.eclipse.swtchart.extensions.barcharts.BarChart;
 import org.eclipse.swtchart.extensions.barcharts.BarSeriesData;
 import org.eclipse.swtchart.extensions.barcharts.IBarSeriesData;
 import org.eclipse.swtchart.extensions.barcharts.IBarSeriesSettings;
+import org.eclipse.swtchart.extensions.core.IAxisSettings;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.IPrimaryAxisSettings;
 import org.eclipse.swtchart.extensions.core.ISeriesData;
@@ -85,10 +88,12 @@ public class FilterDistributionChart extends BarChart {
 		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
 		primaryAxisSettingsX.setTitle("Number of Overlaps");
 		primaryAxisSettingsX.setDecimalFormat(ValueFormat.getDecimalFormatEnglish());
+		setGridColor(primaryAxisSettingsX);
 
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle("Count");
 		primaryAxisSettingsY.setDecimalFormat(ValueFormat.getDecimalFormatEnglish());
+		setGridColor(primaryAxisSettingsY);
 	}
 
 	private void updateChart() {
@@ -106,9 +111,9 @@ public class FilterDistributionChart extends BarChart {
 			List<IBarSeriesData> barSeriesDataList = new ArrayList<>();
 			ISeriesData seriesData = getSeries(settings);
 			IBarSeriesData barSeriesData = new BarSeriesData(seriesData);
-			IBarSeriesSettings settings = barSeriesData.getSettings();
-			settings.setBarColor(Colors.RED);
-			settings.setBarWidthStyle(BarWidthStyle.STRETCHED);
+			IBarSeriesSettings barSeriesSettings = barSeriesData.getSettings();
+			barSeriesSettings.setBarColor(Colors.RED);
+			barSeriesSettings.setBarWidthStyle(BarWidthStyle.STRETCHED);
 			barSeriesDataList.add(barSeriesData);
 			addSeriesData(barSeriesDataList);
 		} else {
@@ -119,8 +124,7 @@ public class FilterDistributionChart extends BarChart {
 	private String[] getCategories(IAnalysisSettings settings) {
 
 		Set<Integer> keys = settings.getFilterDistribution().reversed().keySet();
-		String[] categories = keys.stream().map(x -> x.toString()).toArray(String[]::new);
-		return categories;
+		return keys.stream().map(Object::toString).toArray(String[]::new);
 	}
 
 	private ISeriesData getSeries(IAnalysisSettings settings) {
@@ -135,5 +139,14 @@ public class FilterDistributionChart extends BarChart {
 		applySettings(getChartSettings());
 		double[] xSeries = new double[ySeries.length];
 		return new SeriesData(xSeries, ySeries, label);
+	}
+
+	private void setGridColor(IAxisSettings axisSettings) {
+
+		if(PreferencesSupport.isDarkTheme()) {
+			axisSettings.setGridColor(Colors.getColor(new RGB(64, 64, 64)));
+		} else {
+			axisSettings.setGridColor(Colors.GRAY);
+		}
 	}
 }
