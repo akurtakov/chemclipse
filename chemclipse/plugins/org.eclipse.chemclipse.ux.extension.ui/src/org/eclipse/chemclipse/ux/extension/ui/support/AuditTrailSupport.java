@@ -13,9 +13,8 @@
  * Christoph Läubrich - propagate result of methods to the user, add label selection support
  * Matthias Mailänder - display selected wavelengths, audit trail
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.xxd.ui.support;
+package org.eclipse.chemclipse.ux.extension.ui.support;
 
-import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.processing.core.IMessageProvider;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
@@ -24,30 +23,31 @@ import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 import org.eclipse.chemclipse.processing.system.ProcessSettingsSupport;
 import org.eclipse.chemclipse.support.history.EditInformation;
 import org.eclipse.chemclipse.support.history.IEditHistory;
+import org.eclipse.chemclipse.support.history.ISupplierEditHistory;
 import org.eclipse.chemclipse.support.history.ProcessSupplierEntry;
 import org.eclipse.chemclipse.support.history.ProcessSupplierSupport;
 import org.eclipse.chemclipse.support.settings.UserManagement;
 
 public class AuditTrailSupport {
 
-	public static void updateAuditTrail(IChromatogram chromatogram, IMessageProvider processingInfo, IProcessMethod processMethod, IProcessSupplierContext processTypeSupport) {
+	public static void updateAuditTrail(ISupplierEditHistory editHistorySupplier, IMessageProvider processingInfo, IProcessMethod processMethod, IProcessSupplierContext processTypeSupport) {
 
 		if(!processingInfo.hasErrorMessages()) {
-			processMethod.forEach(p -> updateAuditTrail(chromatogram, p.getName(), processTypeSupport.getSupplier(p.getProcessorId())));
+			processMethod.forEach(p -> updateAuditTrail(editHistorySupplier, p.getName(), processTypeSupport.getSupplier(p.getProcessorId())));
 		}
 	}
 
-	public static void updateAuditTrail(IChromatogram chromatogram, IMessageProvider processingInfo, IProcessSupplier<?> processSupplier) {
+	public static void updateAuditTrail(ISupplierEditHistory editHistorySupplier, IMessageProvider processingInfo, IProcessSupplier<?> processSupplier) {
 
 		if(!processingInfo.hasErrorMessages()) {
-			updateAuditTrail(chromatogram, processSupplier.getCategory() + ": " + processSupplier.getName(), processSupplier);
+			updateAuditTrail(editHistorySupplier, processSupplier.getCategory() + ": " + processSupplier.getName(), processSupplier);
 		}
 	}
 
-	private static void updateAuditTrail(IChromatogram chromatogram, String description, IProcessSupplier<?> processSupplier) {
+	private static void updateAuditTrail(ISupplierEditHistory editHistorySupplier, String description, IProcessSupplier<?> processSupplier) {
 
-		if(chromatogram != null) {
-			IEditHistory editHistory = chromatogram.getEditHistory();
+		if(editHistorySupplier != null) {
+			IEditHistory editHistory = editHistorySupplier.getEditHistory();
 			/*
 			 * Normal description
 			 */
