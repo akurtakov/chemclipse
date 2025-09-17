@@ -16,6 +16,7 @@ package org.eclipse.chemclipse.msd.swt.ui.internal.provider;
 import java.text.DecimalFormat;
 
 import org.eclipse.chemclipse.model.core.IMassSpectrumPeak;
+import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
@@ -57,6 +58,17 @@ public class MassSpectrumPeakLabelProvider extends AbstractChemClipseLabelProvid
 					break;
 				case 2: // s/n
 					text = signalToNoiseDecimalFormat.format(peak.getSignalToNoise());
+					break;
+				default:
+					text = "n.v.";
+			}
+		} else if(element instanceof IIon ion) {
+			switch(columnIndex) {
+				case 0: // m/z
+					text = ionDecimalFormat.format(ion.getIon());
+					break;
+				case 1: // intensity
+					text = abundanceFormat.format(ion.getAbundance());
 					break;
 				default:
 					text = "n.v.";

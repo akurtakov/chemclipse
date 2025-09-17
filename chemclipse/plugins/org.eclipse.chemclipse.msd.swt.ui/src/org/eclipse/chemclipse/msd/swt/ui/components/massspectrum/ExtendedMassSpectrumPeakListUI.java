@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.swt.ui.components.massspectrum;
 
-import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -27,9 +27,9 @@ public class ExtendedMassSpectrumPeakListUI extends Composite {
 		createControl();
 	}
 
-	public void update(IStandaloneMassSpectrum standaloneMassSpectrum) {
+	public void update(IRegularMassSpectrum regularMassSpectrum) {
 
-		massSpectrumPeaksListUI.update(standaloneMassSpectrum);
+		massSpectrumPeaksListUI.update(regularMassSpectrum);
 	}
 
 	private void createControl() {
