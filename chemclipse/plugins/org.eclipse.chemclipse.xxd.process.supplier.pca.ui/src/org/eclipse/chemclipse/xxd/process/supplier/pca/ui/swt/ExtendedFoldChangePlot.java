@@ -14,11 +14,14 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.model.statistics.IVariable;
+import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
@@ -29,6 +32,7 @@ import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Feature;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.FeatureDelta;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.Activator;
@@ -42,12 +46,19 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swtchart.Range;
+import org.eclipse.swtchart.extensions.core.BaseChart;
+import org.eclipse.swtchart.extensions.core.IChartSettings;
+import org.eclipse.swtchart.extensions.core.IMouseSupport;
+import org.eclipse.swtchart.extensions.events.IHandledEventProcessor;
 
 public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI {
 
@@ -233,6 +244,89 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 
 		FoldChangePlot plot = new FoldChangePlot(parent, SWT.BORDER);
 		plot.setLayoutData(new GridData(GridData.FILL_BOTH));
+
+		IChartSettings chartSettings = plot.getChartSettings();
+		chartSettings.addHandledEventProcessor(new IHandledEventProcessor() {
+
+			@Override
+			public int getEvent() {
+
+				return IMouseSupport.EVENT_MOUSE_DOUBLE_CLICK;
+			}
+
+			@Override
+			public int getButton() {
+
+				return IMouseSupport.MOUSE_BUTTON_LEFT;
+			}
+
+			@Override
+			public int getStateMask() {
+
+				return SWT.NONE;
+			}
+
+			@Override
+			public void handleEvent(BaseChart baseChart, Event event) {
+
+				if(evaluationPCA != null) {
+					/*
+					 * Determine the x|y coordinates.
+					 */
+					Rectangle rectangle = baseChart.getPlotArea().getBounds();
+					double x = event.x;
+					double y = event.y;
+					double width = rectangle.width;
+					double height = rectangle.height;
+					/*
+					 * Calculate the selected point.
+					 */
+					Range rangeX = baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS).getRange();
+					Range rangeY = baseChart.getAxisSet().getYAxis(BaseChart.ID_PRIMARY_Y_AXIS).getRange();
+					/*
+					 * Map the result deltas.
+					 */
+					List<FeatureDelta> featureDeltas = new ArrayList<>();
+					List<Feature> selectedFeatures = evaluationPCA.getFeatureDataMatrix().getFeatures().stream().filter(f -> f.getVariable().isSelected()).toList();
+					/*
+					 * Prepare a result object with loading vectors per variable
+					 */
+					for(int i = 0; i < selectedFeatures.size(); i++) {
+						/*
+						 * get the coordinate of the current feature (calculate?)
+						 */
+						IPoint pointResult = calculateFoldChange(evaluationPCA.getSamples(), comboViewerGroup1.get().getStructuredSelection().getFirstElement().toString(), comboViewerGroup2.get().getStructuredSelection().getFirstElement().toString());
+
+						if(pointResult.getX() > rangeX.lower && pointResult.getX() < rangeX.upper && pointResult.getY() > rangeY.lower && pointResult.getY() < rangeY.upper) {
+							double deltaX = 0;
+							double deltaY = 0;
+							if(rangeX.upper < 0 || rangeX.lower > 0) {
+								deltaX = Math.abs(1.00 / Math.abs((Math.abs(rangeX.upper) - Math.abs(rangeX.lower))) * (pointResult.getX() - rangeX.lower) * width - x);
+							} else {
+								deltaX = Math.abs(1.00 / (rangeX.upper - rangeX.lower) * (pointResult.getX() - rangeX.lower) * width - x);
+							}
+							if(rangeY.upper < 0 || rangeY.lower > 0) {
+								deltaY = Math.abs(1.00 / Math.abs((Math.abs(rangeY.upper) - Math.abs(rangeY.lower))) * (pointResult.getY() - rangeY.lower) * height - (height - y));
+							} else {
+								deltaY = Math.abs(1.00 / (rangeY.upper - rangeY.lower) * (pointResult.getY() - rangeY.lower) * height - (height - y));
+							}
+							featureDeltas.add(new FeatureDelta(selectedFeatures.get(i), deltaX, deltaY));
+						}
+					}
+					/*
+					 * Get the closest result.
+					 */
+					if(!featureDeltas.isEmpty()) {
+						Collections.sort(featureDeltas, Comparator.comparing(FeatureDelta::getDistance));
+						FeatureDelta featureDelta = featureDeltas.get(0);
+						List<Feature> featureList = new ArrayList<>();
+						featureList.add(featureDelta.getFeature());
+						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE, featureList.toArray());
+					}
+				}
+			}
+		});
+		plot.applySettings(chartSettings);
 		plotControl.set(plot);
 	}
 
@@ -306,5 +400,10 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 			 */
 			groups.addAll(samples.getSamples().stream().map(x -> x.getGroupName()).distinct().toList());
 		}
+	}
+
+	private IPoint calculateFoldChange(ISamplesPCA<IVariable, ISample> samples, String group1, String group2) {
+
+		return null;
 	}
 }
