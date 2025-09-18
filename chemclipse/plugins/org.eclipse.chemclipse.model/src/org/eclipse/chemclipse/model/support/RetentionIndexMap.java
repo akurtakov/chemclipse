@@ -91,7 +91,7 @@ public class RetentionIndexMap {
 	 * @param retentionIndex
 	 * @return int
 	 */
-	public int getRetentionTime(int retentionIndex) {
+	public int getRetentionTime(float retentionIndex) {
 
 		return RetentionIndexMath.calculateRetentionTime(retentionIndex, retentionIndexMap);
 	}

@@ -60,11 +60,12 @@ public class RetentionIndexMath {
 	 * @param retentionIndexMap
 	 * @return int
 	 */
-	public static int calculateRetentionTime(int retentionIndex, TreeMap<Integer, Integer> retentionIndexMap) {
+	public static int calculateRetentionTime(float retentionIndex, TreeMap<Integer, Integer> retentionIndexMap) {
 
 		int retentionTime = RETENTION_TIME_MISSING;
-		Map.Entry<Integer, Integer> floorEntry = retentionIndexMap.floorEntry(retentionIndex);
-		Map.Entry<Integer, Integer> ceilingEntry = retentionIndexMap.ceilingEntry(retentionIndex);
+		int retentionIndexUnitResolution = Math.round(retentionIndex);
+		Map.Entry<Integer, Integer> floorEntry = retentionIndexMap.floorEntry(retentionIndexUnitResolution);
+		Map.Entry<Integer, Integer> ceilingEntry = retentionIndexMap.ceilingEntry(retentionIndexUnitResolution);
 
 		if(floorEntry != null && ceilingEntry != null) {
 			/*
@@ -85,7 +86,7 @@ public class RetentionIndexMath {
 		return (float)calculateX(retentionTime, retentionTimeLow, retentionTimeHigh, retentionIndexLow, retentionIndexHigh);
 	}
 
-	public static int calculateRetentionTime(int retentionIndex, float retentionIndexLow, float retentionIndexHigh, int retentionTimeLow, int retentionTimeHigh) {
+	public static int calculateRetentionTime(float retentionIndex, float retentionIndexLow, float retentionIndexHigh, int retentionTimeLow, int retentionTimeHigh) {
 
 		return (int)Math.round(calculateX(retentionIndex, retentionIndexLow, retentionIndexHigh, retentionTimeLow, retentionTimeHigh));
 	}
