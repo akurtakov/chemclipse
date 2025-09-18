@@ -83,7 +83,9 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 
 				if(evaluationPCA != null) {
 					if(DataUpdateSupport.isVisible(control)) {
-						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE.equals(topic) || IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic)) {
+						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE.equals(topic)) {
 							if(objects.size() == 1) {
 								Object object = objects.get(0);
 								ArrayList<IVariable> selectedVariables = new ArrayList<>();
@@ -92,6 +94,9 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 										if(values[i] instanceof Feature) {
 											Feature feature = (Feature)values[i];
 											selectedVariables.add(feature.getVariable());
+										} else if(values[i] instanceof IVariable) {
+											IVariable variable = (IVariable)values[i];
+											selectedVariables.add(variable);
 										}
 									}
 								}
