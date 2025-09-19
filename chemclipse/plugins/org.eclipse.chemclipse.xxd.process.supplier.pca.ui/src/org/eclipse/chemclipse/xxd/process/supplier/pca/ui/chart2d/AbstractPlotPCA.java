@@ -73,7 +73,7 @@ public abstract class AbstractPlotPCA extends ScatterChart implements IRangeSupp
 		secondaryAxisSettingsY.setPosition(Position.Secondary);
 		secondaryAxisSettingsY.setDecimalFormat(decimalFormat);
 		chartSettings.getSecondaryAxisSettingsListY().add(secondaryAxisSettingsY);
-		setGridColor(secondaryAxisSettingsX);
+		setGridColor(secondaryAxisSettingsY);
 	}
 
 	public void deselect(Set<String> set) {
@@ -151,7 +151,7 @@ public abstract class AbstractPlotPCA extends ScatterChart implements IRangeSupp
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle("PC2");
 		primaryAxisSettingsY.setDecimalFormat(decimalFormat);
-		setGridColor(primaryAxisSettingsX);
+		setGridColor(primaryAxisSettingsY);
 	}
 
 	protected void update(int pcX, int pcY, double[] explainedVariances) {
