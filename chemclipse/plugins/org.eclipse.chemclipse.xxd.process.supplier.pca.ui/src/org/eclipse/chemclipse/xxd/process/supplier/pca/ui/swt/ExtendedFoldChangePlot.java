@@ -19,9 +19,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.apache.commons.math3.stat.inference.TTest;
+import org.apache.commons.math3.util.FastMath;
 import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.numeric.core.IPoint;
+import org.eclipse.chemclipse.numeric.core.Point;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
@@ -32,9 +36,9 @@ import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Feature;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.FeatureDelta;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.VariableDelta;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.Activator;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d.FoldChangePlot;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.help.HelpContext;
@@ -83,7 +87,10 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 
 				if(evaluationPCA != null) {
 					if(DataUpdateSupport.isVisible(control)) {
-						if(IChemClipseEvents.TOPIC_PCA_UPDATE_FEATURES.equals(topic) || IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic)) {
+						if(IChemClipseEvents.TOPIC_PCA_UPDATE_FEATURES.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE.equals(topic)) {
 							if(objects.size() == 1) {
 								Object object = objects.get(0);
 								ArrayList<IVariable> selectedVariables = new ArrayList<>();
@@ -92,9 +99,14 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 										if(values[i] instanceof Feature) {
 											Feature feature = (Feature)values[i];
 											selectedVariables.add(feature.getVariable());
+										} else if(values[i] instanceof IVariable) {
+											IVariable variable = (IVariable)values[i];
+											selectedVariables.add(variable);
 										}
+
 									}
 								}
+								evaluationPCA.setHighlightedVariables(selectedVariables);
 								setInput(evaluationPCA);
 							}
 						}
@@ -284,18 +296,55 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 					Range rangeX = baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS).getRange();
 					Range rangeY = baseChart.getAxisSet().getYAxis(BaseChart.ID_PRIMARY_Y_AXIS).getRange();
 					/*
-					 * Map the result deltas.
+					 * Extract the selected Groups.
 					 */
-					List<FeatureDelta> featureDeltas = new ArrayList<>();
-					List<Feature> selectedFeatures = evaluationPCA.getFeatureDataMatrix().getFeatures().stream().filter(f -> f.getVariable().isSelected()).toList();
+					List<ISample> group1 = new ArrayList<>();
+					List<ISample> group2 = new ArrayList<>();
+
+					for(ISample sample : evaluationPCA.getSamples().getSamples()) {
+						if(sample.getGroupName().equals(comboViewerGroup1.get().getStructuredSelection().getFirstElement().toString())) {
+							group1.add(sample);
+						}
+						if(sample.getGroupName().equals(comboViewerGroup2.get().getStructuredSelection().getFirstElement().toString())) {
+							group2.add(sample);
+						}
+					}
+
+					/*
+					 * Extract selected variables and calculate pValue / fold Change
+					 */
+					List<VariableDelta> variableDeltas = new ArrayList<>();
+					List<IVariable> selectedVariableList = new ArrayList<>();
+					List<Double> pValueList = new ArrayList<>();
+					List<Double> foldChangeList = new ArrayList<>();
+					for(int i = 0; i < evaluationPCA.getSamples().getVariables().size(); i++) {
+						if(evaluationPCA.getSamples().getVariables().get(i).isSelected()) {
+							DescriptiveStatistics stats1 = new DescriptiveStatistics();
+							DescriptiveStatistics stats2 = new DescriptiveStatistics();
+							for(ISample sample : group1) {
+								stats1.addValue(sample.getSampleData().get(i).getData());
+							}
+							for(ISample sample : group2) {
+								stats2.addValue(sample.getSampleData().get(i).getData());
+							}
+							TTest test = new TTest();
+							double pValue = test.tTest(stats1.getValues(), stats2.getValues());
+							double mean1 = stats1.getMean();
+							double mean2 = stats2.getMean();
+							double foldChange = mean1 / mean2;
+							double minLog10pValue = -FastMath.log10(pValue);
+							double log2FoldChange = FastMath.log(foldChange) / FastMath.log(2);
+							selectedVariableList.add(evaluationPCA.getSamples().getVariables().get(i));
+							pValueList.add(minLog10pValue);
+							foldChangeList.add(log2FoldChange);
+						}
+					}
+
 					/*
 					 * Prepare a result object with loading vectors per variable
 					 */
-					for(int i = 0; i < selectedFeatures.size(); i++) {
-						/*
-						 * get the coordinate of the current feature (calculate?)
-						 */
-						IPoint pointResult = calculateFoldChange(evaluationPCA.getSamples(), comboViewerGroup1.get().getStructuredSelection().getFirstElement().toString(), comboViewerGroup2.get().getStructuredSelection().getFirstElement().toString());
+					for(int i = 0; i < selectedVariableList.size(); i++) {
+						IPoint pointResult = new Point(foldChangeList.get(i), pValueList.get(i));
 
 						if(pointResult.getX() > rangeX.lower && pointResult.getX() < rangeX.upper && pointResult.getY() > rangeY.lower && pointResult.getY() < rangeY.upper) {
 							double deltaX = 0;
@@ -310,18 +359,18 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 							} else {
 								deltaY = Math.abs(1.00 / (rangeY.upper - rangeY.lower) * (pointResult.getY() - rangeY.lower) * height - (height - y));
 							}
-							featureDeltas.add(new FeatureDelta(selectedFeatures.get(i), deltaX, deltaY));
+							variableDeltas.add(new VariableDelta(selectedVariableList.get(i), deltaX, deltaY));
 						}
 					}
 					/*
 					 * Get the closest result.
 					 */
-					if(!featureDeltas.isEmpty()) {
-						Collections.sort(featureDeltas, Comparator.comparing(FeatureDelta::getDistance));
-						FeatureDelta featureDelta = featureDeltas.get(0);
-						List<Feature> featureList = new ArrayList<>();
-						featureList.add(featureDelta.getFeature());
-						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE, featureList.toArray());
+					if(!variableDeltas.isEmpty()) {
+						Collections.sort(variableDeltas, Comparator.comparing(VariableDelta::getDistance));
+						VariableDelta variableDelta = variableDeltas.get(0);
+						List<IVariable> variableList = new ArrayList<>();
+						variableList.add(variableDelta.getVariable());
+						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE, variableList.toArray());
 					}
 				}
 			}
@@ -402,8 +451,4 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 		}
 	}
 
-	private IPoint calculateFoldChange(ISamplesPCA<IVariable, ISample> samples, String group1, String group2) {
-
-		return null;
-	}
 }

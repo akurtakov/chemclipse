@@ -98,7 +98,8 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 
 				if(evaluationPCA != null) {
 					if(DataUpdateSupport.isVisible(control)) {
-						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic)) {
+						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE.equals(topic)) {
 							if(objects.size() == 1) {
 								Object object = objects.get(0);
 								ArrayList<Feature> features = new ArrayList<>();
@@ -107,6 +108,13 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 									for(int i = 0; i < length; i++) {
 										if(values[i] instanceof Feature feature) {
 											features.add(feature);
+										} else if(values[i] instanceof IVariable) {
+											IVariable variable = (IVariable)values[i];
+											for(Feature feature : evaluationPCA.getFeatureDataMatrix().getFeatures()) {
+												if(feature.getVariable().equals(variable)) {
+													features.add(feature);
+												}
+											}
 										}
 									}
 									if(features.size() >= 0) {

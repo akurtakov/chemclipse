@@ -189,7 +189,7 @@ public class SeriesConverter {
 		return scatterSeriesDataList;
 	}
 
-	public static List<IScatterSeriesData> foldChangeToSeries(ISamplesPCA<IVariable, ISample> samples, String group1, String group2) {
+	public static List<IScatterSeriesData> foldChangeToSeries(ISamplesPCA<IVariable, ISample> samples, List<IVariable> highlighted, String group1, String group2) {
 
 		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 		List<IScatterSeriesData> scatterSeriesDataList = new ArrayList<>();
@@ -199,9 +199,9 @@ public class SeriesConverter {
 		List<ISample> samples1 = new ArrayList<>();
 		List<ISample> samples2 = new ArrayList<>();
 		for(ISample sample : samples.getSamples()) {
-			if(sample.getGroupName().equals(group1)) {
+			if(sample.getGroupName().equals(group1) && sample.isSelected()) {
 				samples1.add(sample);
-			} else if(sample.getGroupName().equals(group2)) {
+			} else if(sample.getGroupName().equals(group2) && sample.isSelected()) {
 				samples2.add(sample);
 			}
 		}
@@ -233,6 +233,9 @@ public class SeriesConverter {
 					IScatterSeriesSettings scatterSeriesSettings = scatterSeriesData.getSettings();
 					// scatterSeriesSettings.setDescription(samples.getVariables().get(i).getDescription());
 					scatterSeriesSettings.setSymbolType(createFromSettings(preferenceStore, PreferenceSupplier.P_FOLD_CHANGE_PLOT_SYMBOL_TYPE));
+					if(highlighted.contains(samples.getVariables().get(i))) {
+						scatterSeriesSettings.setSymbolType(createFromSettings(preferenceStore, PreferenceSupplier.P_FOLD_CHANGE_PLOT_HIGHLIGHT_SYMBOL_TYPE));
+					}
 					scatterSeriesSettings.setSymbolSize(preferenceStore.getInt(PreferenceSupplier.P_FOLD_CHANGE_PLOT_SYMBOL_SIZE));
 					if(seriesData.getYSeries()[0] > -FastMath.log10(0.05)) {
 						if(seriesData.getXSeries()[0] > 1.0) {

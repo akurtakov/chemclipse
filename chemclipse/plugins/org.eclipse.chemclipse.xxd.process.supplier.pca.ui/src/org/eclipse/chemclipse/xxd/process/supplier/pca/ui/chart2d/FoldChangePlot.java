@@ -70,7 +70,7 @@ public class FoldChangePlot extends ScatterChart implements IRangeSupport {
 			addLimits();
 			ISamplesPCA<IVariable, ISample> samples = evaluationPCA.getSamples();
 			List<IScatterSeriesData> series;
-			series = SeriesConverter.foldChangeToSeries(samples, group1, group2);
+			series = SeriesConverter.foldChangeToSeries(samples, evaluationPCA.getHighlightedVariables(), group1, group2);
 			addSeriesData(series);
 
 		}
