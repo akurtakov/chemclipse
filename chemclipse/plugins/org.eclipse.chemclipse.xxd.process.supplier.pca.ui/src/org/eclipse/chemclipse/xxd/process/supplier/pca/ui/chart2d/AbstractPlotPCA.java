@@ -21,12 +21,9 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.eclipse.chemclipse.support.text.ValueFormat;
-import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
-import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.custom.IRangeSupport;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swtchart.IAxis;
@@ -35,7 +32,6 @@ import org.eclipse.swtchart.IAxisSet;
 import org.eclipse.swtchart.Range;
 import org.eclipse.swtchart.extensions.axisconverter.PassThroughConverter;
 import org.eclipse.swtchart.extensions.core.BaseChart;
-import org.eclipse.swtchart.extensions.core.IAxisSettings;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.IExtendedChart;
 import org.eclipse.swtchart.extensions.core.IPrimaryAxisSettings;
@@ -66,14 +62,12 @@ public abstract class AbstractPlotPCA extends ScatterChart implements IRangeSupp
 		secondaryAxisSettingsX.setPosition(Position.Secondary);
 		secondaryAxisSettingsX.setDecimalFormat(decimalFormat);
 		chartSettings.getSecondaryAxisSettingsListX().add(secondaryAxisSettingsX);
-		setGridColor(secondaryAxisSettingsX);
 
 		ISecondaryAxisSettings secondaryAxisSettingsY = new SecondaryAxisSettings("PC2", new PassThroughConverter());
 		secondaryAxisSettingsY.setTitle("");
 		secondaryAxisSettingsY.setPosition(Position.Secondary);
 		secondaryAxisSettingsY.setDecimalFormat(decimalFormat);
 		chartSettings.getSecondaryAxisSettingsListY().add(secondaryAxisSettingsY);
-		setGridColor(secondaryAxisSettingsY);
 	}
 
 	public void deselect(Set<String> set) {
@@ -146,12 +140,10 @@ public abstract class AbstractPlotPCA extends ScatterChart implements IRangeSupp
 		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
 		primaryAxisSettingsX.setTitle("PC1");
 		primaryAxisSettingsX.setDecimalFormat(decimalFormat);
-		setGridColor(primaryAxisSettingsX);
 
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle("PC2");
 		primaryAxisSettingsY.setDecimalFormat(decimalFormat);
-		setGridColor(primaryAxisSettingsY);
 	}
 
 	protected void update(int pcX, int pcY, double[] explainedVariances) {
@@ -244,14 +236,5 @@ public abstract class AbstractPlotPCA extends ScatterChart implements IRangeSupp
 		setRange(IExtendedChart.X_AXIS, selectedRangeX);
 		setRange(IExtendedChart.Y_AXIS, selectedRangeY);
 		redraw();
-	}
-
-	private void setGridColor(IAxisSettings axisSettings) {
-
-		if(PreferencesSupport.isDarkTheme()) {
-			axisSettings.setGridColor(Colors.getColor(new RGB(64, 64, 64)));
-		} else {
-			axisSettings.setGridColor(Colors.GRAY);
-		}
 	}
 }

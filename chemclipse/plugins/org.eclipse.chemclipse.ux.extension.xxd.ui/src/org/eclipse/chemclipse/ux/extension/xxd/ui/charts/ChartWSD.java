@@ -17,16 +17,12 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
-import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
-import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swtchart.IAxis.Position;
 import org.eclipse.swtchart.LineStyle;
 import org.eclipse.swtchart.extensions.axisconverter.PercentageConverter;
-import org.eclipse.swtchart.extensions.core.IAxisSettings;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.IPrimaryAxisSettings;
 import org.eclipse.swtchart.extensions.core.ISecondaryAxisSettings;
@@ -82,7 +78,6 @@ public class ChartWSD extends LineChart {
 		primaryAxisSettingsX.setDecimalFormat(new DecimalFormat(("0.0##"), new DecimalFormatSymbols(Locale.ENGLISH)));
 		primaryAxisSettingsX.setVisible(true);
 		primaryAxisSettingsX.setReversed(true);
-		setGridColor(primaryAxisSettingsX);
 
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle(yLabel);
@@ -90,7 +85,6 @@ public class ChartWSD extends LineChart {
 		primaryAxisSettingsY.setGridLineStyle(LineStyle.NONE);
 		primaryAxisSettingsY.setVisible(true);
 		primaryAxisSettingsY.setReversed(false);
-		setGridColor(primaryAxisSettingsY);
 	}
 
 	private void addSecondaryAxisSetProcessed(IChartSettings chartSettings, String yLabel) {
@@ -102,7 +96,6 @@ public class ChartWSD extends LineChart {
 		ISecondaryAxisSettings secondaryAxisSettingsY = new SecondaryAxisSettings("Relative " + yLabel + " [%]", new PercentageConverter(SWT.VERTICAL, true));
 		secondaryAxisSettingsY.setPosition(Position.Secondary);
 		secondaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.00"), new DecimalFormatSymbols(Locale.ENGLISH)));
-		setGridColor(secondaryAxisSettingsY);
 		chartSettings.getSecondaryAxisSettingsListY().add(secondaryAxisSettingsY);
 	}
 
@@ -110,14 +103,5 @@ public class ChartWSD extends LineChart {
 
 		chartSettings.getSecondaryAxisSettingsListX().clear();
 		chartSettings.getSecondaryAxisSettingsListY().clear();
-	}
-
-	private void setGridColor(IAxisSettings axisSettings) {
-
-		if(PreferencesSupport.isDarkTheme()) {
-			axisSettings.setGridColor(Colors.getColor(new RGB(64, 64, 64)));
-		} else {
-			axisSettings.setGridColor(Colors.GRAY);
-		}
 	}
 }
