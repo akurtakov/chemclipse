@@ -17,8 +17,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -110,12 +112,21 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader implements
 
 	private Map<Integer, Float> getIonMap(CSVParser csvParser) {
 
+		Set<String> ignoreCells = new HashSet<>();
+		ignoreCells.add(ChromatogramWriter.RT_MILLISECONDS_COLUMN);
+		ignoreCells.add(ChromatogramWriter.RT_MINUTES_COLUMN);
+		ignoreCells.add(ChromatogramWriter.RI_COLUMN);
+		ignoreCells.add(ChromatogramWriter.TIC_COLUMN);
+
 		Map<Integer, Float> ions = new HashMap<>();
 		Map<String, Integer> headerMap = csvParser.getHeaderMap();
 		for(Map.Entry<String, Integer> entry : headerMap.entrySet()) {
 			try {
 				int index = entry.getValue();
-				ions.put(index, Float.valueOf(entry.getKey()));
+				String key = entry.getKey();
+				if(!ignoreCells.contains(key)) {
+					ions.put(index, Float.valueOf(key));
+				}
 			} catch(Exception e) {
 				logger.warn(e);
 			}
