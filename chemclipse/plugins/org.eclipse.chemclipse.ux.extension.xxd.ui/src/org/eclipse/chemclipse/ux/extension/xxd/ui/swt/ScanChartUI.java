@@ -30,7 +30,6 @@ import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.msd.model.support.ScanSupport;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
-import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.swt.ui.support.Fonts;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
@@ -48,7 +47,6 @@ import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swtchart.IAxis;
 import org.eclipse.swtchart.IBarSeries;
@@ -60,7 +58,6 @@ import org.eclipse.swtchart.extensions.barcharts.IBarSeriesData;
 import org.eclipse.swtchart.extensions.barcharts.IBarSeriesSettings;
 import org.eclipse.swtchart.extensions.core.BaseChart;
 import org.eclipse.swtchart.extensions.core.ChartType;
-import org.eclipse.swtchart.extensions.core.IAxisSettings;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.IPrimaryAxisSettings;
 import org.eclipse.swtchart.extensions.core.ISecondaryAxisSettings;
@@ -576,12 +573,6 @@ public class ScanChartUI extends ScrollableChart {
 		chartSettings.setCreateMenu(true);
 		chartSettings.setEnableCompress(enableCompress);
 
-		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
-		setGridColor(primaryAxisSettingsX);
-
-		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
-		setGridColor(primaryAxisSettingsY);
-
 		RangeRestriction rangeRestriction = chartSettings.getRangeRestriction();
 		rangeRestriction.setRestrictFrame(true);
 		rangeRestriction.setExtendTypeX(RangeRestriction.ExtendType.ABSOLUTE);
@@ -601,6 +592,7 @@ public class ScanChartUI extends ScrollableChart {
 			case MSD_TANDEM:
 			case MSD_HIGHRES:
 				scanDataSupport.setDataTypeMSD(chartSettings);
+				IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
 				primaryAxisSettingsX.setDecimalFormat(new DecimalFormat());
 				activateMolecularIonMarker();
 				break;
@@ -639,7 +631,6 @@ public class ScanChartUI extends ScrollableChart {
 
 		for(ISecondaryAxisSettings secondaryAxisSettingsY : chartSettings.getSecondaryAxisSettingsListY()) {
 			secondaryAxisSettingsY.setDecimalFormat(new DecimalFormat());
-			setGridColor(secondaryAxisSettingsY);
 		}
 
 		applySettings(chartSettings);
@@ -827,14 +818,5 @@ public class ScanChartUI extends ScrollableChart {
 			}
 		}
 		return barSeriesIons;
-	}
-
-	private void setGridColor(IAxisSettings axisSettings) {
-
-		if(PreferencesSupport.isDarkTheme()) {
-			axisSettings.setGridColor(Colors.getColor(new RGB(64, 64, 64)));
-		} else {
-			axisSettings.setGridColor(Colors.GRAY);
-		}
 	}
 }

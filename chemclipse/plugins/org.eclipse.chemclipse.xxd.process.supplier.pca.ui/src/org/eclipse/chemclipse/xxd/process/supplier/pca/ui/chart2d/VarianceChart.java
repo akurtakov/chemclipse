@@ -17,13 +17,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.chemclipse.support.text.ValueFormat;
-import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Variance;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swtchart.IAxis;
 import org.eclipse.swtchart.IBarSeries.BarWidthStyle;
@@ -33,7 +31,6 @@ import org.eclipse.swtchart.extensions.barcharts.BarSeriesData;
 import org.eclipse.swtchart.extensions.barcharts.IBarSeriesData;
 import org.eclipse.swtchart.extensions.barcharts.IBarSeriesSettings;
 import org.eclipse.swtchart.extensions.core.BaseChart;
-import org.eclipse.swtchart.extensions.core.IAxisSettings;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.IPrimaryAxisSettings;
 import org.eclipse.swtchart.extensions.core.ISeriesData;
@@ -99,12 +96,10 @@ public class VarianceChart extends BarChart {
 		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
 		primaryAxisSettingsX.setTitle("Principal Component");
 		primaryAxisSettingsX.setDecimalFormat(ValueFormat.getDecimalFormatEnglish());
-		setGridColor(primaryAxisSettingsX);
 
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
 		primaryAxisSettingsY.setTitle("Variance");
 		primaryAxisSettingsY.setDecimalFormat(ValueFormat.getDecimalFormatEnglish());
-		setGridColor(primaryAxisSettingsY);
 	}
 
 	private void updateChart() {
@@ -208,14 +203,5 @@ public class VarianceChart extends BarChart {
 		applySettings(getChartSettings());
 		double[] xSeries = new double[ySeries.length];
 		return new SeriesData(xSeries, ySeries, label);
-	}
-
-	private void setGridColor(IAxisSettings axisSettings) {
-
-		if(PreferencesSupport.isDarkTheme()) {
-			axisSettings.setGridColor(Colors.getColor(new RGB(64, 64, 64)));
-		} else {
-			axisSettings.setGridColor(Colors.GRAY);
-		}
 	}
 }

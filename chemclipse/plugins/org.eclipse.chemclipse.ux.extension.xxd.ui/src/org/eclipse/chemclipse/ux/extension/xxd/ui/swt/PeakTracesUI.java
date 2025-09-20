@@ -32,7 +32,6 @@ import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIons;
-import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.swt.ui.support.IColorScheme;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
@@ -49,15 +48,12 @@ import org.eclipse.chemclipse.wsd.model.core.IPeakModelWSD;
 import org.eclipse.chemclipse.wsd.model.core.IScanSignalWSD;
 import org.eclipse.chemclipse.wsd.model.core.IScanWSD;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swtchart.ILineSeries;
 import org.eclipse.swtchart.IPlotArea;
 import org.eclipse.swtchart.extensions.core.BaseChart;
 import org.eclipse.swtchart.extensions.core.ChartType;
-import org.eclipse.swtchart.extensions.core.IAxisSettings;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
-import org.eclipse.swtchart.extensions.core.ISecondaryAxisSettings;
 import org.eclipse.swtchart.extensions.core.ISeriesData;
 import org.eclipse.swtchart.extensions.core.RangeRestriction;
 import org.eclipse.swtchart.extensions.core.ScrollableChart;
@@ -296,8 +292,6 @@ public class PeakTracesUI extends ScrollableChart {
 		ChartSupport.addSecondaryAxisX(chartSettings, titleX1);
 		ChartSupport.addSecondaryAxisY(chartSettings, titleY1);
 
-		setGridColor(chartSettings);
-
 		BaseChart baseChart = getBaseChart();
 		IPlotArea plotArea = baseChart.getPlotArea();
 		plotArea.addCustomPaintListener(peakTracesOffsetListener);
@@ -331,28 +325,6 @@ public class PeakTracesUI extends ScrollableChart {
 			baseChart.suspendUpdate(false);
 			adjustRange(true);
 			baseChart.redraw();
-		}
-	}
-
-	private void setGridColor(IChartSettings chartSettings) {
-
-		setGridColor(chartSettings.getPrimaryAxisSettingsX());
-		setGridColor(chartSettings.getPrimaryAxisSettingsY());
-
-		for(ISecondaryAxisSettings secondaryAxisSettingsX : chartSettings.getSecondaryAxisSettingsListX()) {
-			setGridColor(secondaryAxisSettingsX);
-		}
-		for(ISecondaryAxisSettings secondaryAxisSettingsY : chartSettings.getSecondaryAxisSettingsListY()) {
-			setGridColor(secondaryAxisSettingsY);
-		}
-	}
-
-	private void setGridColor(IAxisSettings axisSettings) {
-
-		if(PreferencesSupport.isDarkTheme()) {
-			axisSettings.setGridColor(Colors.getColor(new RGB(64, 64, 64)));
-		} else {
-			axisSettings.setGridColor(Colors.GRAY);
 		}
 	}
 }
