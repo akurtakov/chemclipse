@@ -40,6 +40,22 @@ public class TraceFactory {
 	private static final Pattern PATTERN_RANGE_INTEGER = Pattern.compile("([0-9]+\\s?-\\s?[0-9]+)");
 
 	/**
+	 * Returns the list as string.
+	 * 
+	 * @param traces
+	 * @return String
+	 */
+	public static String getTracesAsString(List<ITrace> traces) {
+
+		List<String> values = new ArrayList<>();
+		for(ITrace trace : traces) {
+			values.add(trace.toString());
+		}
+
+		return String.join(ITrace.SEPARATOR_TRACE_ITEM, values);
+	}
+
+	/**
 	 * Returns null if valid.
 	 * Otherwise, the invalid characters are returned, separated by a whitespace.
 	 * 
