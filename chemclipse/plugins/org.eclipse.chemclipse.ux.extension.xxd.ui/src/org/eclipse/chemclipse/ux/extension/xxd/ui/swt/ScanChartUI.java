@@ -131,6 +131,7 @@ public class ScanChartUI extends ScrollableChart {
 			/*
 			 * Labels
 			 */
+			customSeries.getTextElements().clear();
 			printHighestLabelsNormal(barSeriesValues, e);
 			printHighestLabelsMirrored(barSeriesValues, e);
 		}
@@ -758,9 +759,7 @@ public class ScanChartUI extends ScrollableChart {
 		textElement.setX(pointLabel.getX() - pointSize.getX() / 32);
 		textElement.setY(pointLabel.getY());
 		textElement.setRotation(0);
-		if(customSeries.getTextElements().stream().noneMatch(t -> t.getLabel().equals(textElement.getLabel()))) {
-			customSeries.getTextElements().add(textElement);
-		}
+		customSeries.getTextElements().add(textElement);
 	}
 
 	private void drawTriangle(BarSeriesValue barSeriesValue, int size, PaintEvent e) {
