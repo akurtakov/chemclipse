@@ -23,6 +23,8 @@ import org.eclipse.chemclipse.model.statistics.IVariable;
 
 public class SmallValuesReplacer extends AbstractDataModificator implements IReplacer {
 
+	static final int SEED = 10;
+
 	@Override
 	public String getDescription() {
 
@@ -40,7 +42,7 @@ public class SmallValuesReplacer extends AbstractDataModificator implements IRep
 
 		List<V> variables = samples.getVariables();
 		List<S> sampleList = samples.getSamples();
-		final Random rand = new Random();
+		final Random rand = new Random(SEED);
 		for(int i = 0; i < variables.size(); i++) {
 			if(useVariable(samples, i)) {
 				for(S sample : sampleList) {
