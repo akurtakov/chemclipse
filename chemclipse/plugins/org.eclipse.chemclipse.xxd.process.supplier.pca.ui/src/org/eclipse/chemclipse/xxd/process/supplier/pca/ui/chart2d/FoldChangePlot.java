@@ -68,9 +68,8 @@ public class FoldChangePlot extends ScatterChart implements IRangeSupport {
 			List<IScatterSeriesData> series;
 			series = SeriesConverter.foldChangeToSeries(samples, evaluationPCA.getHighlightedVariables(), group1, group2);
 			addSeriesData(series);
-
 		}
-		redraw();
+		getBaseChart().redraw();
 	}
 
 	private void initialize() {
