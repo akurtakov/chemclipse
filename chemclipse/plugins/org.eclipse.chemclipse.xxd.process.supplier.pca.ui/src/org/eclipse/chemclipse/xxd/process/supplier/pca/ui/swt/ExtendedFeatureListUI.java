@@ -269,6 +269,31 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 				featureListUI.refresh();
 			}
 		});
+		tableSettings.addMenuEntry(new ITableMenuEntry() {
+
+			@Override
+			public String getCategory() {
+
+				return "Features";
+			}
+
+			@Override
+			public String getName() {
+
+				return "Use All Features";
+			}
+
+			@Override
+			public void execute(ExtendedTableViewer extendedTableViewer) {
+
+				@SuppressWarnings("unchecked")
+				List<Feature> features = (List<Feature>)listControl.get().getInput();
+				for(Feature feature : features) {
+					feature.getVariable().setSelected(true);
+				}
+				featureListUI.refresh();
+			}
+		});
 		featureListUI.applySettings(tableSettings);
 
 		table.addSelectionListener(new SelectionAdapter() {
