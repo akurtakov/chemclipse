@@ -59,7 +59,8 @@ public class LoadingsPlot extends AbstractPlotPCA {
 			}
 
 			addSeriesData(series);
+		} else {
+			getBaseChart().redraw();
 		}
-		redraw();
 	}
 }

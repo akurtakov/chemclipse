@@ -41,7 +41,8 @@ public class ScorePlot extends AbstractPlotPCA {
 			IResultsMVA resultsPCA = evaluationPCA.getResults();
 			List<ISample> highlightedSamples = evaluationPCA.getHighlightedSamples();
 			addSeriesData(SeriesConverter.sampleToSeries(resultsPCA, highlightedSamples, pcX, pcY, extractedResults));
+		} else {
+			getBaseChart().redraw();
 		}
-		redraw();
 	}
 }
