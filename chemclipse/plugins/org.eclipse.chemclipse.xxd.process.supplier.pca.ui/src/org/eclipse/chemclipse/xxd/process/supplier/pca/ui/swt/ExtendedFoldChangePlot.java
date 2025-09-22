@@ -90,7 +90,8 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 						if(IChemClipseEvents.TOPIC_PCA_UPDATE_FEATURES.equals(topic) || //
 								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE.equals(topic) || //
 								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE.equals(topic)) {
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic)) {
 							if(objects.size() == 1) {
 								Object object = objects.get(0);
 								ArrayList<IVariable> selectedVariables = new ArrayList<>();
@@ -393,7 +394,12 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 
 	private void applySettings() {
 
-		updatePlot((String)comboViewerGroup1.get().getStructuredSelection().getFirstElement().toString(), (String)comboViewerGroup2.get().getStructuredSelection().getFirstElement());
+		String group1 = comboViewerGroup1.get().getStructuredSelection().getFirstElement().toString();
+		String group2 = comboViewerGroup2.get().getStructuredSelection().getFirstElement().toString();
+		if(group1 != null && group1 != null) {
+			updatePlot(group1, group2);
+		}
+
 	}
 
 	private void updateWidgets(IAnalysisSettings analysisSettings) {
