@@ -361,4 +361,18 @@ public interface IScanMSD extends IScan, IMassSpectrumCloneable, IMassSpectrumNo
 	 * @return boolean
 	 */
 	boolean checkIntensityCollisions();
+
+	/**
+	 * Adjusts the scan to the given total signal.<br/>
+	 * It means that all ions will be shifted so that the total signal
+	 * will be the given total signal.<br/>
+	 * The value must be > 0. Why? If the total signal is 0 there would be no
+	 * ion stored in the mass spectrum.<br/>
+	 * Be aware of that some mass spectrum supplier support not the whole
+	 * available signal range.
+	 * 
+	 * @param totalSignal
+	 */
+	@Override
+	void adjustTotalSignal(float totalSignal);
 }
