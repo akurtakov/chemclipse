@@ -23,6 +23,6 @@ public class MenuIcon implements IMenuIcon {
 	@Override
 	public Image getImage() {
 
-		return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_FILTER_NORMALIZER, IApplicationImageProvider.SIZE_16x16);
+		return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_FILTER_SAVITZKY_GOLAY, IApplicationImageProvider.SIZE_16x16);
 	}
 }
