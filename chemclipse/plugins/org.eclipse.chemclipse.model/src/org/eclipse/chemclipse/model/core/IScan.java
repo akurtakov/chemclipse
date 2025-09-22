@@ -135,8 +135,6 @@ public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplie
 
 	/**
 	 * Sets the retention index. Only values >= 0 are allowed.<br/>
-	 * This method is protected, as the retentionIndices should only be
-	 * calculated by the class chromatogram.
 	 * 
 	 * @param retentionIndex
 	 */
