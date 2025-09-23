@@ -19,36 +19,29 @@ import org.eclipse.chemclipse.support.model.SeparationColumnType;
 import org.eclipse.core.runtime.IAdaptable;
 
 /**
- * A chromatogram consists of several scans. There are several detector methods like:
- * 
- * GC/MS
- * GC/FID
- * GC/GC/MS
- * GC/GC/FID
- * GC/MS/MS
+ * Scans are data points per interval from the detector.
  * 
  * Hence, a scan could represent various types.
- * It could be either a mass spectrum, a scan recorded by FID.
  * Or it could be a chromatogram containing subsequent scans too.
  * 
  */
 public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplier {
 
 	/**
-	 * Returns the chromatogram, where the mass spectrum is stored.<br/>
+	 * Returns the chromatogram, where the scan is stored.<br/>
 	 * If there is no parent chromatogram, it will return null.
 	 */
 	IChromatogram getParentChromatogram();
 
 	/**
-	 * Sets the chromatogram which stores the mass spectrum.
+	 * Sets the chromatogram which stores the scan.
 	 * 
 	 * @param parentChromatogram
 	 */
 	void setParentChromatogram(IChromatogram parentChromatogram);
 
 	/**
-	 * Returns the scan number of the actual mass spectrum.<br/>
+	 * Returns the scan number of the actual scan.<br/>
 	 * If it is not part if a chromatogram, the scan number is 0.
 	 * 
 	 * @return int
@@ -56,7 +49,7 @@ public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplie
 	int getScanNumber();
 
 	/**
-	 * Sets the scan Number of the actual mass spectrum.<br/>
+	 * Sets the scan Number of the actual scan.<br/>
 	 * Only values >= 0 are allowed.
 	 * 
 	 * @param scanNumber
@@ -64,7 +57,7 @@ public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplie
 	void setScanNumber(int scanNumber);
 
 	/**
-	 * Returns the retention time of the mass spectrum.<br/>
+	 * Returns the retention time of the scan.<br/>
 	 * Retention time is stored as milliseconds.
 	 * 
 	 * @return int - retention time
@@ -83,7 +76,7 @@ public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplie
 
 	/**
 	 * Get the retention time for column 1.
-	 * This is used for GCxGC or LCxLC applications.
+	 * This is used for multidimensional chromatography.
 	 * 
 	 * @return int
 	 */
@@ -91,7 +84,7 @@ public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplie
 
 	/**
 	 * Set the retention time for column 1.
-	 * This is used for GCxGC or LCxLC applications.
+	 * This is used for multidimensional chromatography.
 	 * 
 	 * @param retentionTimeColumn1
 	 */
@@ -99,7 +92,7 @@ public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplie
 
 	/**
 	 * Get the retention time for column 2.
-	 * This is used for GCxGC or LCxLC applications.
+	 * This is used for multidimensional chromatography.
 	 * 
 	 * @return int
 	 */
@@ -107,7 +100,7 @@ public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplie
 
 	/**
 	 * Set the retention time for column 2.
-	 * This is used for GCxGC or LCxLC applications.
+	 * This is used for multidimensional chromatography.
 	 * 
 	 * @param retentionTimeColumn2
 	 */
@@ -115,7 +108,7 @@ public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplie
 
 	/**
 	 * RRT
-	 * Returns the relative retention time of the mass spectrum.<br/>
+	 * Returns the relative retention time of the scan.<br/>
 	 * Relative retention time is stored as milliseconds.
 	 * 
 	 * @return int - relative retention time
@@ -142,8 +135,6 @@ public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplie
 
 	/**
 	 * Sets the retention index. Only values >= 0 are allowed.<br/>
-	 * This method is protected, as the retentionIndices should only be
-	 * calculated by the class Chromatogram.
 	 * 
 	 * @param retentionIndex
 	 */
@@ -228,11 +219,9 @@ public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplie
 
 	/**
 	 * Adjusts the scan to the given total signal.<br/>
-	 * It means that all (ions - if it's mass spectrum) will be shifted so that the total signal
-	 * will be the given total signal.<br/>
-	 * The value must be > 0. Why? If the total signal is 0 there would be no
-	 * ion stored in the scan (mass spectrum).<br/>
-	 * Be aware of that some (mass spectrum) supplier support not the whole
+	 * It means that all will be shifted so that the total signal
+	 * will be the given total signal.
+	 * Be aware of that some supplier support not the whole
 	 * available signal range.
 	 * 
 	 * @param totalSignal
