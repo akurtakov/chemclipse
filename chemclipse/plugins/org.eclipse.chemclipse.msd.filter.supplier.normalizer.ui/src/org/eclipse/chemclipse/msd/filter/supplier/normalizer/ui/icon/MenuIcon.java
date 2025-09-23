@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2025 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -10,7 +10,7 @@
  * Contributors:
  * Matthias Mailänder - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.ui.icon;
+package org.eclipse.chemclipse.msd.filter.supplier.normalizer.ui.icon;
 
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
@@ -23,6 +23,6 @@ public class MenuIcon implements IMenuIcon {
 	@Override
 	public Image getImage() {
 
-		return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_FILTER_SAVITZKY_GOLAY, IApplicationImageProvider.SIZE_16x16);
+		return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_FILTER_NORMALIZER, IApplicationImageProvider.SIZE_16x16);
 	}
 }
