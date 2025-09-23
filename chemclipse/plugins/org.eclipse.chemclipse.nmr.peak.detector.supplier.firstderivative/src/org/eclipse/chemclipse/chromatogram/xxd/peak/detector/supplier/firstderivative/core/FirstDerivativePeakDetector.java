@@ -19,6 +19,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.chemclipse.chromatogram.peak.detector.support.Drift;
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.IRawPeak;
 import org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderivative.Activator;
 import org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderivative.settings.FirstDerivativePeakDetectorSettings;
@@ -152,9 +153,9 @@ public class FirstDerivativePeakDetector implements IMeasurementPeakDetector<Fir
 		}
 
 		@Override
-		public String getDrift() {
+		public Drift getDrift() {
 
-			return "";
+			return Drift.ZERO;
 		}
 	}
 }

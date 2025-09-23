@@ -23,6 +23,7 @@ public class DetectorSlope extends Slope implements IDetectorSlope {
 	private int retentionTime;
 
 	public DetectorSlope(IPoint p1, IPoint p2, int retentionTime) {
+
 		super(p1, p2);
 		this.retentionTime = retentionTime;
 	}
@@ -34,18 +35,14 @@ public class DetectorSlope extends Slope implements IDetectorSlope {
 	}
 
 	@Override
-	public String getDrift() {
+	public Drift getDrift() {
 
-		String drift = "0";
-		/*
-		 * Strings are retrieved from the string pool. So there is no overhead.
-		 */
 		if(getSlope() > 0) {
-			drift = "+";
+			return Drift.PLUS;
 		} else if(getSlope() < 0) {
-			drift = "-";
+			return Drift.MINUS;
 		}
-		return drift;
+		return Drift.ZERO;
 	}
 
 	// --------------equals, hashCode, toString

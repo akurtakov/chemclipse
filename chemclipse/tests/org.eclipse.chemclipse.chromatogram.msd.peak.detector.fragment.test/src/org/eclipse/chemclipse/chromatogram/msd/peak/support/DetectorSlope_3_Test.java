@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.chromatogram.msd.peak.support;
 import static org.junit.Assert.assertEquals;
 
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.DetectorSlope;
+import org.eclipse.chemclipse.chromatogram.peak.detector.support.Drift;
 import org.eclipse.chemclipse.numeric.core.Point;
 import org.junit.Test;
 
@@ -33,7 +34,7 @@ public class DetectorSlope_3_Test {
 		Point p2 = new Point(7.0d, 3.0d);
 		DetectorSlope slope = new DetectorSlope(p1, p2, retentionTime);
 		assertEquals("Slope", -3.5d, slope.getSlope(), 0);
-		assertEquals("getDrift", "-", slope.getDrift());
+		assertEquals("getDrift", Drift.MINUS, slope.getDrift());
 	}
 
 	@Test
@@ -43,7 +44,7 @@ public class DetectorSlope_3_Test {
 		Point p2 = new Point(7.0d, 3.0d);
 		DetectorSlope slope = new DetectorSlope(p1, p2, retentionTime);
 		assertEquals("Slope", 0.0d, slope.getSlope(), 0);
-		assertEquals("getDrift", "0", slope.getDrift());
+		assertEquals("getDrift", Drift.ZERO, slope.getDrift());
 	}
 
 	@Test
@@ -53,6 +54,6 @@ public class DetectorSlope_3_Test {
 		Point p2 = new Point(7.0d, 10.0d);
 		DetectorSlope slope = new DetectorSlope(p1, p2, retentionTime);
 		assertEquals("Slope", 3.5d, slope.getSlope(), 0);
-		assertEquals("getDrift", "+", slope.getDrift());
+		assertEquals("getDrift", Drift.PLUS, slope.getDrift());
 	}
 }
