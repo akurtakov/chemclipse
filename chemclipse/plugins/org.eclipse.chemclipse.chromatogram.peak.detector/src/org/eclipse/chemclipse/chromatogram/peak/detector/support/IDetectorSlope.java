@@ -25,12 +25,4 @@ public interface IDetectorSlope extends ISlope {
 	 * @return retention time
 	 */
 	int getRetentionTime();
-
-	/**
-	 * Returns PLUS if the slope value is > 0. Returns MINUS if the slope value
-	 * is < 0. Returns a NONE if the slope value is 0.
-	 * 
-	 * @return Drift
-	 */
-	Drift getDrift();
 }

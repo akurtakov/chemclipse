@@ -34,17 +34,6 @@ public class DetectorSlope extends Slope implements IDetectorSlope {
 		return retentionTime;
 	}
 
-	@Override
-	public Drift getDrift() {
-
-		if(getSlope() > 0) {
-			return Drift.PLUS;
-		} else if(getSlope() < 0) {
-			return Drift.MINUS;
-		}
-		return Drift.ZERO;
-	}
-
 	// --------------equals, hashCode, toString
 	@Override
 	public boolean equals(Object other) {
