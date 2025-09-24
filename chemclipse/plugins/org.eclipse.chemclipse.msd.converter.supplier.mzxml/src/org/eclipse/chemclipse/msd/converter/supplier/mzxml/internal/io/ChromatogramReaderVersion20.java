@@ -50,7 +50,7 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 
-public class ChromatogramReaderVersion20 extends AbstractChromatogramReaderVersion implements IChromatogramMSDReader {
+public class ChromatogramReaderVersion20 extends AbstractChromatogramReader implements IChromatogramMSDReader {
 
 	public static final String VERSION = "mzXML_2.0";
 
@@ -65,7 +65,7 @@ public class ChromatogramReaderVersion20 extends AbstractChromatogramReaderVersi
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(file);
-			NodeList nodeList = document.getElementsByTagName(NODE_MS_RUN);
+			NodeList nodeList = document.getElementsByTagName(AbstractReader.NODE_MS_RUN);
 
 			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
@@ -147,7 +147,7 @@ public class ChromatogramReaderVersion20 extends AbstractChromatogramReaderVersi
 		/*
 		 * Get the ions.
 		 */
-		double[] values = ByteReader.readValues(peaks.getValue(), peaks.getByteOrder(), peaks.getPrecision());
+		double[] values = ByteReaderVersion2.readValues(peaks.getValue(), peaks.getByteOrder(), peaks.getPrecision());
 		readIons(values, scan, massSpectrum, chromatogram);
 
 		return massSpectrum;

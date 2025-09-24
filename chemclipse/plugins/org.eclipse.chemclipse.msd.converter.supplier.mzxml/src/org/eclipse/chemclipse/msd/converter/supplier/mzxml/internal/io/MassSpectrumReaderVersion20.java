@@ -17,7 +17,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import java.util.zip.DataFormatException;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.parsers.DocumentBuilder;
@@ -26,6 +25,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.eclipse.chemclipse.converter.l10n.ConverterMessages;
 import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.msd.converter.io.AbstractMassSpectraReader;
+import org.eclipse.chemclipse.msd.converter.io.IMassSpectraReader;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v20.model.DataProcessing;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v20.model.Maldi;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v20.model.MsRun;
@@ -51,7 +52,7 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 
-public class MassSpectrumReaderVersion20 extends AbstractMassSpectrumReader {
+public class MassSpectrumReaderVersion20 extends AbstractMassSpectraReader implements IMassSpectraReader {
 
 	public static final String VERSION = "mzXML_2.0";
 
@@ -66,7 +67,7 @@ public class MassSpectrumReaderVersion20 extends AbstractMassSpectrumReader {
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(file);
-			NodeList nodeList = document.getElementsByTagName(NODE_MS_RUN);
+			NodeList nodeList = document.getElementsByTagName(AbstractReader.NODE_MS_RUN);
 
 			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
@@ -103,7 +104,7 @@ public class MassSpectrumReaderVersion20 extends AbstractMassSpectrumReader {
 				 * Get the ions.
 				 */
 				Peaks peaks = scan.getPeaks();
-				double[] values = readPeaks(peaks.getValue(), peaks.getByteOrder(), peaks.getPrecision(), null);
+				double[] values = ByteReaderVersion2.readValues(peaks.getValue(), peaks.getByteOrder(), peaks.getPrecision());
 				for(int peakIndex = 0; peakIndex < values.length - 1; peakIndex += 2) {
 					/*
 					 * Get m/z and intensity (m/z-int)
@@ -117,8 +118,6 @@ public class MassSpectrumReaderVersion20 extends AbstractMassSpectrumReader {
 		} catch(JAXBException e) {
 			logger.warn(e);
 		} catch(ParserConfigurationException e) {
-			logger.warn(e);
-		} catch(DataFormatException e) {
 			logger.warn(e);
 		}
 

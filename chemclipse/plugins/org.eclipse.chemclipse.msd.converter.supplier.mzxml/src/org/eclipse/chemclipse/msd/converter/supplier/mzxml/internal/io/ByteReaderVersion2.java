@@ -18,7 +18,7 @@ import java.nio.ByteOrder;
 import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 
-public class ByteReader {
+public class ByteReaderVersion2 {
 
 	public static double[] readValues(byte[] bytes, String byteOrder, BigInteger precision) {
 

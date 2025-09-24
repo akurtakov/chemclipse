@@ -9,7 +9,6 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
- * Matthias Mailänder - adapted for MALDI
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.io;
 
@@ -21,16 +20,9 @@ import java.nio.FloatBuffer;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
 
-import org.eclipse.chemclipse.msd.converter.io.AbstractMassSpectraReader;
-import org.eclipse.chemclipse.msd.converter.io.IMassSpectraReader;
+public class ByteReaderVersion3 {
 
-public abstract class AbstractMassSpectrumReader extends AbstractMassSpectraReader implements IMassSpectraReader {
-
-	public static final String NODE_MS_RUN = "msRun";
-
-	private Inflater inflater = new Inflater();
-
-	public double[] readPeaks(byte[] bytes, String byteOrder, BigInteger precision, String compressionType) throws DataFormatException {
+	public static double[] readValues(byte[] bytes, String byteOrder, BigInteger precision, String compressionType) throws DataFormatException {
 
 		ByteBuffer byteBuffer = ByteBuffer.wrap(bytes);
 		/*
@@ -45,6 +37,7 @@ public abstract class AbstractMassSpectrumReader extends AbstractMassSpectraRead
 		 * Compression
 		 */
 		if(compressionType != null && compressionType.equalsIgnoreCase("zlib")) {
+			Inflater inflater = new Inflater();
 			inflater.reset();
 			inflater.setInput(byteBuffer.array());
 			byte[] byteArray = new byte[byteBuffer.capacity() * 10];

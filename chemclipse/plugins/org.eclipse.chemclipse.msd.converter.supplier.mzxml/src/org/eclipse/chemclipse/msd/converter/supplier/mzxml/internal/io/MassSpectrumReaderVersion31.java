@@ -25,6 +25,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.eclipse.chemclipse.converter.l10n.ConverterMessages;
 import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.msd.converter.io.AbstractMassSpectraReader;
+import org.eclipse.chemclipse.msd.converter.io.IMassSpectraReader;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v31.model.DataProcessing;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v31.model.Maldi;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v31.model.MsInstrument;
@@ -51,7 +53,7 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 
-public class MassSpectrumReaderVersion31 extends AbstractMassSpectrumReader {
+public class MassSpectrumReaderVersion31 extends AbstractMassSpectraReader implements IMassSpectraReader {
 
 	public static final String VERSION = "mzXML_3.1";
 
@@ -65,7 +67,7 @@ public class MassSpectrumReaderVersion31 extends AbstractMassSpectrumReader {
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(file);
-			NodeList nodeList = document.getElementsByTagName(AbstractChromatogramReaderVersion.NODE_MS_RUN);
+			NodeList nodeList = document.getElementsByTagName(AbstractReader.NODE_MS_RUN);
 
 			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
@@ -127,7 +129,7 @@ public class MassSpectrumReaderVersion31 extends AbstractMassSpectrumReader {
 
 		double[] values = null;
 		try {
-			values = readPeaks(peaks.getValue(), peaks.getByteOrder(), peaks.getPrecision(), peaks.getCompressionType());
+			values = ByteReaderVersion3.readValues(peaks.getValue(), peaks.getByteOrder(), peaks.getPrecision(), peaks.getCompressionType());
 		} catch(DataFormatException e) {
 			logger.error(e);
 		}
