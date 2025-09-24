@@ -150,11 +150,5 @@ public class FirstDerivativePeakDetector implements IMeasurementPeakDetector<Fir
 
 			return -1;
 		}
-
-		@Override
-		public String getDrift() {
-
-			return "";
-		}
 	}
 }
