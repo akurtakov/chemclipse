@@ -84,6 +84,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 				if(evaluationPCA != null) {
 					if(DataUpdateSupport.isVisible(control)) {
 						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE.equals(topic) || //
 								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic) || //
 								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE.equals(topic)) {
 							if(objects.size() == 1) {
