@@ -26,6 +26,7 @@ public class FeatureStatLabelProvider extends AbstractChemClipseLabelProvider {
 
 	public static final String VARIABLE = "Variable";
 	public static final String NAME = "Name";
+	public static final String COUNT = "Count";
 	public static final String MEAN = "Mean";
 	public static final String MIN = "Min";
 	public static final String MAX = "Max";
@@ -38,6 +39,7 @@ public class FeatureStatLabelProvider extends AbstractChemClipseLabelProvider {
 	public static String[] TITLES = {//
 			VARIABLE, //
 			NAME, //
+			COUNT, //
 			MEAN, //
 			MIN, //
 			MAX, //
@@ -48,6 +50,7 @@ public class FeatureStatLabelProvider extends AbstractChemClipseLabelProvider {
 	public static int[] BOUNDS = {//
 			50, //
 			280, //
+			50, //
 			140, //
 			140, //
 			140, //
@@ -70,7 +73,10 @@ public class FeatureStatLabelProvider extends AbstractChemClipseLabelProvider {
 			List<ISampleData<?>> sampleData = feature.getSampleData();
 			DescriptiveStatistics stats = new DescriptiveStatistics();
 			for(int i = 0; i < sampleData.size(); i++) {
-				stats.addValue(sampleData.get(i).getData());
+				if(!Double.isNaN(sampleData.get(i).getData())) {
+					stats.addValue(sampleData.get(i).getData());
+				}
+
 			}
 			double value = 0.0;
 
@@ -82,31 +88,36 @@ public class FeatureStatLabelProvider extends AbstractChemClipseLabelProvider {
 					text = variable.getDescription();
 					break;
 				case 2:
-					value = 0.0;
-					value = stats.getMean();
+					value = 0;
+					value = stats.getN();
 					text = Double.isNaN(value) ? "NaN" : decimalFormat.format(value);
 					break;
 				case 3:
 					value = 0.0;
-					value = stats.getMin();
+					value = stats.getMean();
 					text = Double.isNaN(value) ? "NaN" : decimalFormat.format(value);
 					break;
 				case 4:
 					value = 0.0;
-					value = stats.getMax();
+					value = stats.getMin();
 					text = Double.isNaN(value) ? "NaN" : decimalFormat.format(value);
 					break;
 				case 5:
 					value = 0.0;
-					value = 100.0 / stats.getSum() * stats.getStandardDeviation();
+					value = stats.getMax();
 					text = Double.isNaN(value) ? "NaN" : decimalFormat.format(value);
 					break;
 				case 6:
 					value = 0.0;
-					value = stats.getSkewness();
+					value = 100.0 / stats.getSum() * stats.getStandardDeviation();
 					text = Double.isNaN(value) ? "NaN" : decimalFormat.format(value);
 					break;
 				case 7:
+					value = 0.0;
+					value = stats.getSkewness();
+					text = Double.isNaN(value) ? "NaN" : decimalFormat.format(value);
+					break;
+				case 8:
 					value = 0.0;
 					value = stats.getKurtosis() - 3.0;
 					text = Double.isNaN(value) ? "NaN" : decimalFormat.format(value);
