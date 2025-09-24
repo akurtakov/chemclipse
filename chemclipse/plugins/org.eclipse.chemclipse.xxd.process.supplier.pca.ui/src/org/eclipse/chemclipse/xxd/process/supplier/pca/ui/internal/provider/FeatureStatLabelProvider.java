@@ -54,9 +54,9 @@ public class FeatureStatLabelProvider extends AbstractChemClipseLabelProvider {
 			140, //
 			140, //
 			140, //
-			140, //
-			140, //
-			140 //
+			100, //
+			100, //
+			100 //
 	};
 
 	public FeatureStatLabelProvider(String pattern) {

@@ -13,6 +13,7 @@
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -31,6 +32,8 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResult;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.Activator;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -59,7 +62,9 @@ public class ExtendedFeatureStatListUI extends Composite implements IExtendedPar
 
 				if(evaluation != null) {
 					if(DataUpdateSupport.isVisible(control)) {
-						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic)) {
+						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE.equals(topic)) {
 							if(objects.size() == 1) {
 								Object object = objects.get(0);
 								ArrayList<Feature> features = new ArrayList<>();
@@ -68,6 +73,13 @@ public class ExtendedFeatureStatListUI extends Composite implements IExtendedPar
 									for(int i = 0; i < length; i++) {
 										if(values[i] instanceof Feature feature) {
 											features.add(feature);
+										} else if(values[i] instanceof IVariable) {
+											IVariable variable = (IVariable)values[i];
+											for(Feature feature : evaluation.getFeatureDataMatrix().getFeatures()) {
+												if(feature.getVariable().equals(variable)) {
+													features.add(feature);
+												}
+											}
 										}
 									}
 									if(features.size() >= 0) {
@@ -98,18 +110,55 @@ public class ExtendedFeatureStatListUI extends Composite implements IExtendedPar
 		}
 	}
 
-	private void updateInput(boolean updateFeatures) {
+	public void updateSelection() {
 
-		if(updateFeatures) {
-			featureDataMatrix = evaluation != null ? evaluation.getFeatureDataMatrix() : null;
+		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
+		List<Object> objects = dataUpdateSupport.getUpdates(getLastTopic(dataUpdateSupport.getTopics()));
+		if(!objects.isEmpty()) {
+			Object object = objects.get(0);
+			ArrayList<Feature> features = new ArrayList<>();
+			if(object instanceof Object[] values) {
+				int length = values.length;
+				for(int i = 0; i < length; i++) {
+					if(values[i] instanceof Feature feature) {
+						features.add(feature);
+					} else if(values[i] instanceof IVariable) {
+						IVariable variable = (IVariable)values[i];
+						for(Feature feature : evaluation.getFeatureDataMatrix().getFeatures()) {
+							if(feature.getVariable().equals(variable)) {
+								features.add(feature);
+							}
+						}
+					}
+				}
+			}
+			UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE, features.toArray());
 		}
-		updateInput();
+	}
+
+	private String getLastTopic(List<String> topics) {
+
+		Collections.reverse(topics);
+		for(String topic : topics) {
+			if(topic.equals(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE) || //
+					topic.equals(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE) || //
+					topic.equals(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE)) {
+				return topic;
+			}
+		}
+		return "";
+	}
+
+	private boolean doUpdate(IEvaluation<IVariable, ISample, IResult> evaluation) {
+
+		return this.evaluation != evaluation;
 	}
 
 	private void createControl() {
 
 		setLayout(new GridLayout(1, true));
 		createList(this);
+		control = this;
 	}
 
 	private void createList(Composite parent) {
@@ -117,6 +166,20 @@ public class ExtendedFeatureStatListUI extends Composite implements IExtendedPar
 		FeatureStatListUI featureStatListUI = new FeatureStatListUI(parent, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION | SWT.VIRTUAL);
 		Table table = featureStatListUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
+
+		table.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				int[] selectedIndices = table.getSelectionIndices();
+				ArrayList<Object> selectedElements = new ArrayList<>();
+				for(int index : selectedIndices) {
+					selectedElements.add(featureStatListUI.getElementAt(index));
+				}
+				handleRowSelection(selectedElements);
+			}
+		});
 
 		featureStatListUI.setUpdateListener(new IUpdateListener() {
 
@@ -130,9 +193,35 @@ public class ExtendedFeatureStatListUI extends Composite implements IExtendedPar
 		listControl.set(featureStatListUI);
 	}
 
-	private boolean doUpdate(IEvaluation<IVariable, ISample, IResult> evaluation) {
+	private void handleRowSelection(List<Object> selectedElements) {
 
-		return this.evaluation != evaluation;
+		if(selectedElements.isEmpty()) {
+			UpdateNotifierUI.update(getDisplay(), IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE, selectedElements.toArray());
+		} else if(Feature.class.isInstance(selectedElements.get(0))) {
+			ArrayList<Feature> features = new ArrayList<>();
+			List<IVariable> test = evaluation.getSamples().getVariables();
+			test.forEach(x -> x.setVisualSelected(false));
+			for(Feature feature : features) {
+				feature.getVariable().setVisualSelected(true);
+			}
+			for(Object element : selectedElements) {
+				if(Feature.class.isInstance(element)) {
+					features.add((Feature)element);
+					if(!((Feature)element).getVariable().isVisualSelected()) {
+						((Feature)element).getVariable().setVisualSelected(true);
+					}
+				}
+			}
+			UpdateNotifierUI.update(getDisplay(), IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE, selectedElements.toArray());
+		}
+	}
+
+	private void updateInput(boolean updateFeatures) {
+
+		if(updateFeatures) {
+			featureDataMatrix = evaluation != null ? evaluation.getFeatureDataMatrix() : null;
+		}
+		updateInput();
 	}
 
 	private void updateInput() {
