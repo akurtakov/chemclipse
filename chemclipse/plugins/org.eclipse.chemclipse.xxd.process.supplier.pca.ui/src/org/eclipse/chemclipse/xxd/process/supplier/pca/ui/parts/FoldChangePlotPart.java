@@ -14,7 +14,7 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.parts;
 
 import java.util.List;
 
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IEvaluation;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt.ExtendedFoldChangePlot;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -35,6 +35,7 @@ public class FoldChangePlotPart extends AbstractPartPCA<ExtendedFoldChangePlot> 
 		return new ExtendedFoldChangePlot(parent, SWT.NONE);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected boolean updateData(List<Object> objects, String topic) {
 
@@ -48,8 +49,8 @@ public class FoldChangePlotPart extends AbstractPartPCA<ExtendedFoldChangePlot> 
 				return true;
 			} else {
 				Object object = objects.get(0);
-				if(object instanceof EvaluationPCA evaluationPCA) {
-					getControl().setInput(evaluationPCA);
+				if(object instanceof IEvaluation evaluation) {
+					getControl().setInput(evaluation);
 					return true;
 				}
 			}

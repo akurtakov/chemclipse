@@ -34,9 +34,10 @@ import org.eclipse.chemclipse.ux.extension.ui.model.IDataUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Feature;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IEvaluation;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResult;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.VariableDelta;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.Activator;
@@ -70,7 +71,7 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 	private AtomicReference<FoldChangePlot> plotControl = new AtomicReference<>();
 	private AtomicReference<ComboViewer> comboViewerGroup1 = new AtomicReference<>();
 	private AtomicReference<ComboViewer> comboViewerGroup2 = new AtomicReference<>();
-	private EvaluationPCA evaluationPCA = null;
+	private IEvaluation<IVariable, ISample, IResult> evaluation = null;
 	private Composite control;
 	private ISamplesPCA<IVariable, ISample> samples = null;
 	private ArrayList<String> groups = new ArrayList<>();
@@ -85,7 +86,7 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 			@Override
 			public void update(String topic, List<Object> objects) {
 
-				if(evaluationPCA != null) {
+				if(evaluation != null) {
 					if(DataUpdateSupport.isVisible(control)) {
 						if(IChemClipseEvents.TOPIC_PCA_UPDATE_FEATURES.equals(topic) || //
 								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE.equals(topic) || //
@@ -108,8 +109,8 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 
 									}
 								}
-								evaluationPCA.setHighlightedVariables(selectedVariables);
-								setInput(evaluationPCA);
+								evaluation.setHighlightedVariables(selectedVariables);
+								setInput(evaluation);
 							}
 						}
 					}
@@ -118,11 +119,11 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 		});
 	}
 
-	public void setInput(EvaluationPCA evaluationPCA) {
+	public void setInput(IEvaluation<IVariable, ISample, IResult> evaluation) {
 
-		this.evaluationPCA = evaluationPCA;
-		if(this.evaluationPCA != null) {
-			this.samples = evaluationPCA.getSamples();
+		this.evaluation = evaluation;
+		if(this.evaluation != null) {
+			this.samples = evaluation.getSamples();
 		}
 		updateFoldChangeGroups();
 		updateInput();
@@ -283,7 +284,7 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 			@Override
 			public void handleEvent(BaseChart baseChart, Event event) {
 
-				if(evaluationPCA != null) {
+				if(evaluation != null) {
 					/*
 					 * Determine the x|y coordinates.
 					 */
@@ -303,7 +304,7 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 					List<ISample> group1 = new ArrayList<>();
 					List<ISample> group2 = new ArrayList<>();
 
-					for(ISample sample : evaluationPCA.getSamples().getSamples()) {
+					for(ISample sample : evaluation.getSamples().getSamples()) {
 						if(sample.getGroupName().equals(comboViewerGroup1.get().getStructuredSelection().getFirstElement().toString())) {
 							group1.add(sample);
 						}
@@ -319,8 +320,8 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 					List<IVariable> selectedVariableList = new ArrayList<>();
 					List<Double> pValueList = new ArrayList<>();
 					List<Double> foldChangeList = new ArrayList<>();
-					for(int i = 0; i < evaluationPCA.getSamples().getVariables().size(); i++) {
-						if(evaluationPCA.getSamples().getVariables().get(i).isSelected()) {
+					for(int i = 0; i < evaluation.getSamples().getVariables().size(); i++) {
+						if(evaluation.getSamples().getVariables().get(i).isSelected()) {
 							DescriptiveStatistics stats1 = new DescriptiveStatistics();
 							DescriptiveStatistics stats2 = new DescriptiveStatistics();
 							for(ISample sample : group1) {
@@ -336,7 +337,7 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 							double foldChange = mean1 / mean2;
 							double minLog10pValue = -FastMath.log10(pValue);
 							double log2FoldChange = FastMath.log(foldChange) / FastMath.log(2);
-							selectedVariableList.add(evaluationPCA.getSamples().getVariables().get(i));
+							selectedVariableList.add(evaluation.getSamples().getVariables().get(i));
 							pValueList.add(minLog10pValue);
 							foldChangeList.add(log2FoldChange);
 						}
@@ -413,8 +414,8 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 
 		FoldChangePlot plot = plotControl.get();
 		plot.deleteSeries();
-		if(evaluationPCA != null) {
-			plot.setInput(evaluationPCA, group1, group2);
+		if(evaluation != null) {
+			plot.setInput(evaluation, group1, group2);
 		} else {
 			plot.setInput(null, group1, group2);
 		}
