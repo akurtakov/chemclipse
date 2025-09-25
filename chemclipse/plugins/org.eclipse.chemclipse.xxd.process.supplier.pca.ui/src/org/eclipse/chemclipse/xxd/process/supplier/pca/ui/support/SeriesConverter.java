@@ -35,6 +35,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swtchart.ILineSeries.PlotSymbolType;
 import org.eclipse.swtchart.extensions.core.ISeriesData;
 import org.eclipse.swtchart.extensions.core.SeriesData;
+import org.eclipse.swtchart.extensions.linecharts.ILineSeriesData;
 import org.eclipse.swtchart.extensions.scattercharts.IScatterSeriesData;
 import org.eclipse.swtchart.extensions.scattercharts.IScatterSeriesSettings;
 import org.eclipse.swtchart.extensions.scattercharts.ScatterSeriesData;
@@ -187,6 +188,14 @@ public class SeriesConverter {
 		}
 
 		return scatterSeriesDataList;
+	}
+
+	public static List<ILineSeriesData> variableLineToSeries(ISamplesPCA<IVariable, ISample> samples, String variable) {
+
+		List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
+
+		return lineSeriesDataList;
+
 	}
 
 	public static List<IScatterSeriesData> foldChangeToSeries(ISamplesPCA<IVariable, ISample> samples, List<IVariable> highlighted, String group1, String group2) {

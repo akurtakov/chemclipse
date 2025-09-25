@@ -68,6 +68,10 @@ public interface IAnalysisSettings {
 
 	void setComparisonGroup2(String comparisonGroup2);
 
+	String getVariableLinePlotVariable();
+
+	void setVariableLinePlotVariable(String variable);
+
 	TreeMap<Integer, Integer> getFilterDistribution();
 
 	void setFilterDistribution(TreeMap<Integer, Integer> distribution);

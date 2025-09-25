@@ -34,6 +34,7 @@ public class AnalysisSettings implements IAnalysisSettings {
 	private String groupName = "--";
 	private String comparisonGroup1 = "";
 	private String comparisonGroup2 = "";
+	private String variableLinePlotVariable = "";
 
 	private IPreprocessingSettings preprocessingSettings = new PreprocessingSettings();
 
@@ -209,5 +210,17 @@ public class AnalysisSettings implements IAnalysisSettings {
 
 		this.comparisonGroup2 = comparisonGroup2;
 
+	}
+
+	@Override
+	public String getVariableLinePlotVariable() {
+
+		return variableLinePlotVariable;
+	}
+
+	@Override
+	public void setVariableLinePlotVariable(String variable) {
+
+		this.variableLinePlotVariable = variable;
 	}
 }
