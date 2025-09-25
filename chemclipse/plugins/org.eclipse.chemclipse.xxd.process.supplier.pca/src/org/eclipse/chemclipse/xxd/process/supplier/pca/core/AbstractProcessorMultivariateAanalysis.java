@@ -50,9 +50,9 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 		return numberPredictedSamples;
 	}
 
-	protected void calculateFeatureDataMatrix(IEvaluation<IVariable, ISample, IResult> evaluationPCA) {
+	protected void calculateFeatureDataMatrix(IEvaluation<IVariable, ISample, IResult> evaluation) {
 
-		ISamplesPCA<IVariable, ISample> samplesPCA = evaluationPCA.getSamples();
+		ISamplesPCA<IVariable, ISample> samplesPCA = evaluation.getSamples();
 		/*
 		 * Feature Data Matrix
 		 */
@@ -85,7 +85,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 			}
 		}
 
-		evaluationPCA.setFeatureDataMatrix(new FeatureDataMatrix(sampleNames, groupNames, features));
+		evaluation.setFeatureDataMatrix(new FeatureDataMatrix(sampleNames, groupNames, features));
 	}
 
 	protected <V extends IVariable, S extends ISample> Map<S, double[]> extractData(ISamples<V, S> samples, Algorithm algorithm, IAnalysisSettings settings, boolean[] isSelectedVariable) {

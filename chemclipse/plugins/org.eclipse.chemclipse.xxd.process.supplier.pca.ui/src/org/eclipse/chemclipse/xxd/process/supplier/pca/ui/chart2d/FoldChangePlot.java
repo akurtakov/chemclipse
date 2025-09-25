@@ -21,7 +21,8 @@ import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.custom.IRangeSupport;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IEvaluation;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResult;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.SeriesConverter;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt.FoldChangeLimits;
@@ -59,14 +60,14 @@ public class FoldChangePlot extends ScatterChart implements IRangeSupport {
 		initialize();
 	}
 
-	public void setInput(EvaluationPCA evaluationPCA, String group1, String group2) {
+	public void setInput(IEvaluation<IVariable, ISample, IResult> evaluation, String group1, String group2) {
 
 		deleteSeries();
-		if(evaluationPCA != null) {
+		if(evaluation != null) {
 			addLimits();
-			ISamplesPCA<IVariable, ISample> samples = evaluationPCA.getSamples();
+			ISamplesPCA<IVariable, ISample> samples = evaluation.getSamples();
 			List<IScatterSeriesData> series;
-			series = SeriesConverter.foldChangeToSeries(samples, evaluationPCA.getHighlightedVariables(), group1, group2);
+			series = SeriesConverter.foldChangeToSeries(samples, evaluation.getHighlightedVariables(), group1, group2);
 			addSeriesData(series);
 		}
 		getBaseChart().redraw();
