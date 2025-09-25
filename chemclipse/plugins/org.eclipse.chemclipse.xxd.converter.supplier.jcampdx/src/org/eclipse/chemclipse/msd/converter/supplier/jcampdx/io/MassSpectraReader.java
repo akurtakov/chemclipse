@@ -27,13 +27,15 @@ import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.identifier.LibraryInformation;
 import org.eclipse.chemclipse.msd.converter.io.AbstractMassSpectraReader;
 import org.eclipse.chemclipse.msd.converter.io.IMassSpectraReader;
-import org.eclipse.chemclipse.msd.converter.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.msd.converter.supplier.jcampdx.model.IVendorIon;
 import org.eclipse.chemclipse.msd.converter.supplier.jcampdx.model.IVendorLibraryMassSpectrum;
 import org.eclipse.chemclipse.msd.converter.supplier.jcampdx.model.VendorIon;
 import org.eclipse.chemclipse.msd.converter.supplier.jcampdx.model.VendorLibraryMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.implementation.MassSpectra;
+import org.eclipse.chemclipse.support.model.SeparationColumnType;
+import org.eclipse.chemclipse.xxd.converter.supplier.jcampdx.internal.preferences.PreferenceSupplierMSD;
+import org.eclipse.chemclipse.xxd.converter.supplier.jcampdx.preferences.PreferenceSupplier;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public class MassSpectraReader extends AbstractMassSpectraReader implements IMassSpectraReader {
@@ -50,7 +52,7 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 	private static final String HEADER_PROGRAM_MASSFINDER_300 = "##PROGRAM=MassFinder3";
 	private static final String RETENTION_TIME_MARKER = "##RETENTION_TIME=";
 	private static final String RETENTION_INDEX_MARKER = "##$RETENTION INDEX=";
-	private static final String RETENTION_INDEX = "##RI=";
+	private static final String RETENTION_INDEX = "##RI";
 	private static final String RETENTIONINDEX = "##RETENTIONINDEX=";
 	private static final String CAS_REGISTRY_NO = "##CAS REGISTRY NO=";
 	private static final String CAS_NAME = "##CAS NAME=";
@@ -70,7 +72,8 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 	private static final String PEAK_TABLE_MARKER_TYPE1 = "##PEAK TABLE=(XY..XY)";
 	private static final String PEAK_TABLE_MARKER_TYPE2 = "##PEAK TABLE= (XY..XY)";
 
-	private static final Pattern ionPattern = Pattern.compile("(\\d+\\.?\\d{0,5})(.*?)(\\d+\\.?\\d{0,5})");
+	private static final Pattern ION_PATTERN = Pattern.compile("(\\d+\\.?\\d{0,5})(.*?)(\\d+\\.?\\d{0,5})");
+	private static final Pattern RETENTION_INDEX_PATTERN = Pattern.compile("(RI)([0-3]?)(=)(.*)");
 
 	@Override
 	public IMassSpectra read(File file, IProgressMonitor monitor) throws IOException {
@@ -84,8 +87,8 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 
 	private IMassSpectra extractMassSpectra(File file, boolean isNameMarkerAvailable, IProgressMonitor monitor) throws IOException {
 
-		String referenceIdentifierMarker = PreferenceSupplier.getReferenceIdentifierMarker();
-		String referenceIdentifierPrefix = PreferenceSupplier.getReferenceIdentifierPrefix();
+		String referenceIdentifierMarker = PreferenceSupplierMSD.getReferenceIdentifierMarker();
+		String referenceIdentifierPrefix = PreferenceSupplierMSD.getReferenceIdentifierPrefix();
 
 		IMassSpectra massSpectra = new MassSpectra();
 		IVendorLibraryMassSpectrum massSpectrum = null;
@@ -171,8 +174,43 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 							float retentionIndex = getRetentionIndex(line, RETENTION_INDEX_MARKER);
 							massSpectrum.setRetentionIndex(retentionIndex);
 						} else if(line.startsWith(RETENTION_INDEX)) {
-							float retentionIndex = getRetentionIndex(line, RETENTION_INDEX);
-							massSpectrum.setRetentionIndex(retentionIndex);
+							/*
+							 * Variations:
+							 * ##RI=
+							 * ##RI1=
+							 * ##RI2=
+							 * ...
+							 */
+							Matcher matcher = RETENTION_INDEX_PATTERN.matcher(line);
+							if(matcher.find()) {
+								String position = matcher.group(2);
+								String value = matcher.group(4);
+								int index = position.isEmpty() ? 0 : Integer.parseInt(position);
+								float retentionIndex = getRetentionIndex(value);
+								SeparationColumnType separationColumnType;
+								switch(index) {
+									case 1:
+										separationColumnType = PreferenceSupplier.getSeparationColumnTypeRetentionIndex1();
+										break;
+									case 2:
+										separationColumnType = PreferenceSupplier.getSeparationColumnTypeRetentionIndex2();
+										break;
+									case 3:
+										separationColumnType = PreferenceSupplier.getSeparationColumnTypeRetentionIndex3();
+										break;
+									default:
+										separationColumnType = SeparationColumnType.DEFAULT;
+										break;
+								}
+								/*
+								 * Set Retention Index
+								 */
+								if(SeparationColumnType.DEFAULT.equals(separationColumnType)) {
+									massSpectrum.setRetentionIndex(retentionIndex);
+								} else {
+									massSpectrum.setRetentionIndex(separationColumnType, retentionIndex);
+								}
+							}
 						} else if(line.startsWith(RETENTIONINDEX)) {
 							float retentionIndex = getRetentionIndex(line, RETENTIONINDEX);
 							massSpectrum.setRetentionIndex(retentionIndex);
@@ -207,7 +245,7 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 							 * Parse the ions.
 							 */
 							try {
-								Matcher ions = ionPattern.matcher(line.trim());
+								Matcher ions = ION_PATTERN.matcher(line.trim());
 								while(ions.find()) {
 									double mz = Double.parseDouble(ions.group(1));
 									float abundance = Float.parseFloat(ions.group(3));
@@ -231,12 +269,8 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 				if(massSpectrum != null && !massSpectrum.getIons().isEmpty()) {
 					massSpectra.addMassSpectrum(massSpectrum);
 				}
-
 				massSpectra.setName(file.getName());
 				massSpectra.setConverterId(CONVERTER_ID_MSD_LIBRARY);
-				/*
-				 * Close the streams
-				 */
 			}
 		}
 
@@ -281,6 +315,17 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 			logger.warn(e);
 		}
 		return retentionTime;
+	}
+
+	private float getRetentionIndex(String value) {
+
+		float retentionIndex = 0;
+		try {
+			retentionIndex = (float)(Double.parseDouble(value.trim()));
+		} catch(NumberFormatException e) {
+			logger.warn(e);
+		}
+		return retentionIndex;
 	}
 
 	private float getRetentionIndex(String line, String marker) {
