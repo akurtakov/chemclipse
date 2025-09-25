@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: JCAMP-DX UI
+Bundle-SymbolicName: org.eclipse.chemclipse.xxd.converter.supplier.jcampdx.ui;singleton:=true
+Bundle-Version: 0.9.0.qualifier
+Bundle-Activator: org.eclipse.chemclipse.xxd.converter.supplier.jcampdx.ui.Activator
+Bundle-Vendor: ChemClipse
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.chemclipse.support.ui;bundle-version="0.9.0",
+ org.eclipse.chemclipse.xxd.converter.supplier.jcampdx;bundle-version="0.9.0",
+ org.eclipse.chemclipse.support;bundle-version="0.9.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Automatic-Module-Name: org.eclipse.chemclipse.xxd.converter.supplier.jcampdx.ui
+Bundle-ActivationPolicy: lazy
