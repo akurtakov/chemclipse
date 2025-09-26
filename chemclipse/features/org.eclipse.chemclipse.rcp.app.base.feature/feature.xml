@@ -20,10 +20,6 @@
       %license
    </license>
 
-   <includes
-         id="org.eclipse.chemclipse.assets.feature"
-         version="0.0.0"/>
-
    <plugin
          id="org.eclipse.chemclipse.keystore"
          version="0.0.0"/>
