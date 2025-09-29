@@ -231,6 +231,7 @@ public class Well extends AbstractMeasurement implements IWell {
 			well.getChannels().put(set.getKey(), set.getValue().makeDeepCopy());
 		}
 		well.setSampleName(getSampleName());
+		well.setTargetType(getTargetType());
 		well.putHeaderData(TARGET_NAME, getTargetName());
 		well.putHeaderData(SAMPLE_SUBSET, getSampleSubset());
 		well.putHeaderData(SAMPLE_TYPE, getSampleType().toString());
