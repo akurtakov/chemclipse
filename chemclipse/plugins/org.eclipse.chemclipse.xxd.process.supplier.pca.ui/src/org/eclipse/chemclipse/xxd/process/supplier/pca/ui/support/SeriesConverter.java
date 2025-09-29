@@ -33,9 +33,12 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.Activator;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swtchart.ILineSeries.PlotSymbolType;
+import org.eclipse.swtchart.LineStyle;
 import org.eclipse.swtchart.extensions.core.ISeriesData;
 import org.eclipse.swtchart.extensions.core.SeriesData;
 import org.eclipse.swtchart.extensions.linecharts.ILineSeriesData;
+import org.eclipse.swtchart.extensions.linecharts.ILineSeriesSettings;
+import org.eclipse.swtchart.extensions.linecharts.LineSeriesData;
 import org.eclipse.swtchart.extensions.scattercharts.IScatterSeriesData;
 import org.eclipse.swtchart.extensions.scattercharts.IScatterSeriesSettings;
 import org.eclipse.swtchart.extensions.scattercharts.ScatterSeriesData;
@@ -190,10 +193,51 @@ public class SeriesConverter {
 		return scatterSeriesDataList;
 	}
 
-	public static List<ILineSeriesData> variableLineToSeries(ISamplesPCA<IVariable, ISample> samples, String variable) {
+	public static List<ILineSeriesData> variableLineToSeries(ISamplesPCA<IVariable, ISample> samples, String comboViwewerVariable) {
 
+		// IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 		List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
+		int selectedVariable = -1;
+		/*
+		 * Find the Variable to plot
+		 */
+		for(int i = 0; i < samples.getVariables().size(); i++) {
+			IVariable currentVariable = samples.getVariables().get(i);
+			if((currentVariable.getValue() + " " + currentVariable.getDescription()).equals(comboViwewerVariable)) {
+				selectedVariable = i;
+			}
+		}
+		/*
+		 * Cycle through all (active) samples
+		 */
+		if(selectedVariable != -1) {
+			ArrayList<Integer> sampleIndices = new ArrayList<>();
+			for(int i = 0; i < samples.getSamples().size(); i++) {
+				if(samples.getSamples().get(i).isSelected()) {
+					sampleIndices.add(i);
+				}
+			}
+			double[] xData = new double[sampleIndices.size()];
+			double[] yData = new double[sampleIndices.size()];
+			String[] labels = new String[sampleIndices.size()];
+			for(int i = 0; i < sampleIndices.size(); i++) {
+				xData[i] = i;
+				yData[i] = samples.getSamples().get(sampleIndices.get(i)).getSampleData().get(selectedVariable).getData();
+				labels[i] = samples.getSamples().get(sampleIndices.get(i)).getGroupName();
 
+			}
+			ISeriesData seriesData = new SeriesData(xData, yData, ".");
+			ILineSeriesData lineSeriesData = new LineSeriesData(seriesData);
+			ILineSeriesSettings settings = lineSeriesData.getSettings();
+			settings.setEnableArea(false);
+			settings.setLineWidth(3);
+			settings.setLineStyle(LineStyle.SOLID);
+			settings.setLineColor(Colors.RED);
+			settings.setSymbolType(PlotSymbolType.CROSS);
+			settings.setSymbolSize(5);
+			settings.setSymbolColor(Colors.RED);
+			lineSeriesDataList.add(lineSeriesData);
+		}
 		return lineSeriesDataList;
 
 	}
