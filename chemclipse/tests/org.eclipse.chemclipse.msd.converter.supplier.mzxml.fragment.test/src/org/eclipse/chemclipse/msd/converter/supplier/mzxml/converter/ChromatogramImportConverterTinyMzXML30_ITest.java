@@ -47,33 +47,38 @@ public class ChromatogramImportConverterTinyMzXML30_ITest {
 	@Test
 	public void testInstrument() {
 
-		assertEquals("ThermoFinnigan LCQ Deca", chromatogram.getInstrument());
+		assertEquals("Thermo Scientific TSQ Quantum", chromatogram.getInstrument());
 		assertEquals("ESI", chromatogram.getIonisation());
-		assertEquals("Ion Trap", chromatogram.getMassAnalyzer());
-		assertEquals("EMT", chromatogram.getMassDetector());
-		assertEquals("Xcalibur 1.3 alpha 8", chromatogram.getSoftware());
+		assertEquals("ITMS", chromatogram.getMassAnalyzer());
+		assertEquals("unknown", chromatogram.getMassDetector());
+		assertEquals("Xcalibur 1.5", chromatogram.getSoftware());
 	}
 
 	@Test
 	public void testEditHistory() {
 
 		assertEquals("conversion", chromatogram.getEditHistory().get(0).getDescription());
-		assertEquals("ReAdW.exe 1.2", chromatogram.getEditHistory().get(0).getEditor());
+		assertEquals("ReAdW 4.0.2(build Jul  1 2008 14:23:37)", chromatogram.getEditHistory().get(0).getEditor());
 	}
 
 	@Test
 	public void testNumberOfScans() {
 
-		assertEquals(2, chromatogram.getNumberOfScans());
+		assertEquals(4, chromatogram.getNumberOfScans());
 	}
 
 	@Test
 	public void testFirstScan() {
 
 		IVendorScan massSpectrum = (IVendorScan)chromatogram.getScan(1);
-		assertEquals(977, massSpectrum.getNumberOfIons(), "Ions");
-		assertEquals(Polarity.POSITIVE, massSpectrum.getPolarity(), "Polarity");
-		assertEquals(353430, massSpectrum.getRetentionTime());
+		assertEquals(10, massSpectrum.getNumberOfIons(), "Ions");
+		assertEquals(Polarity.NEGATIVE, massSpectrum.getPolarity(), "Polarity");
+		assertEquals(355, massSpectrum.getRetentionTime());
+
+		assertEquals(88.01000213623047, massSpectrum.getLowestIon().getIon());
+		assertEquals(2.827909469604492, massSpectrum.getLowestIon().getAbundance());
+		assertEquals(88.0999984741211, massSpectrum.getHighestIon().getIon());
+		assertEquals(3.1302645206451416, massSpectrum.getHighestIon().getAbundance());
 	}
 
 	@Test
@@ -81,13 +86,13 @@ public class ChromatogramImportConverterTinyMzXML30_ITest {
 
 		IVendorScan massSpectrum = (IVendorScan)chromatogram.getScan(2);
 		assertEquals((short)2, massSpectrum.getMassSpectrometer());
-		assertEquals(43, massSpectrum.getNumberOfIons(), "Ions");
-		assertEquals(Polarity.POSITIVE, massSpectrum.getPolarity(), "Polarity");
-		assertEquals(356680, massSpectrum.getRetentionTime());
+		assertEquals(10, massSpectrum.getNumberOfIons(), "Ions");
+		assertEquals(Polarity.NEGATIVE, massSpectrum.getPolarity(), "Polarity");
+		assertEquals(369, massSpectrum.getRetentionTime());
 
 		IIonTransition ionTransition = massSpectrum.getIons().iterator().next().getIonTransition();
-		assertEquals(35, ionTransition.getCollisionEnergy(), 0);
-		assertEquals(445, ionTransition.getQ1Ion());
-		assertEquals(-2.0, ionTransition.getQ3Ion(), 0);
+		assertEquals(0, ionTransition.getCollisionEnergy(), 0);
+		assertEquals(91, ionTransition.getQ1Ion());
+		assertEquals(91, ionTransition.getQ3Ion(), 0);
 	}
 }

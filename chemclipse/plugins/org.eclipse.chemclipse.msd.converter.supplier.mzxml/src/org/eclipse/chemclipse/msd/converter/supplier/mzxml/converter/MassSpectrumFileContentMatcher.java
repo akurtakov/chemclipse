@@ -20,7 +20,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.eclipse.chemclipse.converter.core.AbstractFileContentMatcher;
 import org.eclipse.chemclipse.converter.core.IFileContentMatcher;
-import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.io.AbstractChromatogramReaderVersion;
+import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.io.AbstractReader;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -37,11 +37,11 @@ public class MassSpectrumFileContentMatcher extends AbstractFileContentMatcher i
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(file);
-			NodeList root = document.getElementsByTagName(AbstractChromatogramReaderVersion.NODE_MZXML);
+			NodeList root = document.getElementsByTagName(AbstractReader.NODE_MZXML);
 			if(root.getLength() != 1) {
 				return isValidFormat;
 			}
-			NodeList scanList = document.getElementsByTagName(AbstractChromatogramReaderVersion.NODE_SCAN);
+			NodeList scanList = document.getElementsByTagName(AbstractReader.NODE_SCAN);
 			if(scanList.getLength() == 1) {
 				isValidFormat = true;
 			}

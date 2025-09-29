@@ -14,15 +14,9 @@ package org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.io;
 
 import java.io.File;
 import java.io.IOException;
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.DoubleBuffer;
-import java.nio.FloatBuffer;
 import java.util.Date;
 import java.util.List;
 import java.util.zip.DataFormatException;
-import java.util.zip.Inflater;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -59,13 +53,11 @@ import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 
-public class ChromatogramReaderVersion32 extends AbstractChromatogramReaderVersion implements IChromatogramMSDReader {
+public class ChromatogramReaderVersion32 extends AbstractChromatogramReader implements IChromatogramMSDReader {
 
 	public static final String VERSION = "mzXML_3.2";
 
 	private static final Logger logger = Logger.getLogger(ChromatogramReaderVersion32.class);
-
-	private Inflater inflater = new Inflater();
 
 	@Override
 	public IChromatogramMSD read(File file, IProgressMonitor monitor) throws IOException {
@@ -77,7 +69,7 @@ public class ChromatogramReaderVersion32 extends AbstractChromatogramReaderVersi
 			documentBuilderFactory.setNamespaceAware(true);
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(file);
-			NodeList nodeList = document.getElementsByTagName(NODE_MZXML);
+			NodeList nodeList = document.getElementsByTagName(AbstractReader.NODE_MZXML);
 
 			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
@@ -144,50 +136,19 @@ public class ChromatogramReaderVersion32 extends AbstractChromatogramReaderVersi
 					if(peaks == null) {
 						continue;
 					}
-					ByteBuffer byteBuffer = ByteBuffer.wrap(peaks.getValue());
-					/*
-					 * Compression
-					 */
-					String compressionType = peaks.getCompressionType();
-					if(compressionType != null && compressionType.equalsIgnoreCase("zlib")) {
-						inflater.reset();
-						inflater.setInput(byteBuffer.array());
-						byte[] byteArray = new byte[byteBuffer.capacity() * 10];
-						byteBuffer = ByteBuffer.wrap(byteArray, 0, inflater.inflate(byteArray));
-					}
-					/*
-					 * Byte Order
-					 */
-					String byteOrder = peaks.getByteOrder();
-					if(byteOrder != null && byteOrder.equals("network")) {
-						byteBuffer.order(ByteOrder.BIG_ENDIAN);
-					} else {
-						byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
-					}
-					/*
-					 * Precision
-					 */
-					double[] values;
-					BigInteger precision = peaks.getPrecision();
-					if(precision != null && precision.intValue() == 64) {
-						DoubleBuffer doubleBuffer = byteBuffer.asDoubleBuffer();
-						values = new double[doubleBuffer.capacity()];
-						for(int index = 0; index < doubleBuffer.capacity(); index++) {
-							values[index] = doubleBuffer.get(index);
-						}
-					} else {
-						FloatBuffer floatBuffer = byteBuffer.asFloatBuffer();
-						values = new double[floatBuffer.capacity()];
-						for(int index = 0; index < floatBuffer.capacity(); index++) {
-							values[index] = floatBuffer.get(index);
-						}
-					}
+					double[] values = ByteReaderVersion3.readValues(peaks.getValue(), peaks.getByteOrder(), peaks.getPrecision(), peaks.getCompressionType());
 					for(int peakIndex = 0; peakIndex < values.length - 1; peakIndex += 2) {
 						/*
 						 * Get m/z and intensity (m/z-int)
 						 */
 						double mz = values[peakIndex];
+						if(mz == 0) {
+							continue;
+						}
 						float intensity = (float)values[peakIndex + 1];
+						if(intensity == 0) {
+							continue;
+						}
 						if(msLevel >= 2) {
 							float collisionEnergy = scan.getCollisionEnergy() != null ? scan.getCollisionEnergy().floatValue() : 0f;
 							IIonTransition ionTransition = new IonTransition(massSpectrum.getPrecursorIon(), mz, collisionEnergy, 1, 1, 0);
