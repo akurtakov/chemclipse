@@ -352,8 +352,8 @@ public class MassSpectrumEditor implements IMassSpectrumEditor {
 	}
 
 	@Override
-	public IScanMSD getScanSelection() {
+	public IMassSpectra getScanSelection() {
 
-		return massSpectrum;
+		return massSpectra;
 	}
 }

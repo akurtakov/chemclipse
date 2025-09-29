@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.msd.ui.editors;
 
-import org.eclipse.chemclipse.msd.model.core.IScanMSD;
+import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.ux.extension.ui.editors.IChemClipseEditor;
 
 public interface IMassSpectrumEditor extends IChemClipseEditor {
 
-	IScanMSD getScanSelection();
+	IMassSpectra getScanSelection();
 }

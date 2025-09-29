@@ -21,6 +21,7 @@ import java.util.List;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.quantitation.IQuantitationDatabase;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
+import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.nmr.model.selection.IDataNMRSelection;
 import org.eclipse.chemclipse.ux.extension.msd.ui.editors.IMassSpectrumEditor;
@@ -107,13 +108,13 @@ public class EditorUpdateSupport {
 						/*
 						 * MALDI
 						 */
-						IScanMSD selection = null;
+						IMassSpectra selection = null;
 						if(object instanceof IMassSpectrumEditor editor) {
 							selection = editor.getScanSelection();
 						}
 
 						if(selection != null) {
-							dataSelections.add(selection);
+							dataSelections.addAll(selection.getList());
 						}
 					}
 				}
