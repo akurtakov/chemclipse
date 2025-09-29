@@ -129,8 +129,8 @@ public class Well extends AbstractMeasurement implements IWell {
 	@Override
 	public SampleType getSampleType() {
 
-		String sampleType = getHeaderDataOrDefault(SAMPLE_TYPE, "").trim();
-		if(sampleType.isEmpty() || sampleType.isBlank()) {
+		String sampleType = getHeaderDataOrDefault(SAMPLE_TYPE, "");
+		if(sampleType == null || sampleType.isEmpty() || sampleType.isBlank()) {
 			return SampleType.UNKNOWN;
 		}
 		return SampleType.valueOf(sampleType);
