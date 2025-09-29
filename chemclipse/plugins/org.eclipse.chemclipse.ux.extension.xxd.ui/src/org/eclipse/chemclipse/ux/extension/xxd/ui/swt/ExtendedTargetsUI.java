@@ -659,8 +659,11 @@ public class ExtendedTargetsUI extends Composite implements IExtendedPartUI {
 
 	private void updateRetentionInfo(AtomicReference<TargetsListUI> targetList) {
 
-		Object object = getObject();
+		if(targetList.get() == null) {
+			return;
+		}
 
+		Object object = getObject();
 		if(object instanceof ITargetSupplier) {
 			if(object instanceof IChromatogram) {
 				targetList.get().updateSourceRange(null, null);
