@@ -230,7 +230,7 @@ public class SeriesConverter {
 			ILineSeriesData lineSeriesData = new LineSeriesData(seriesData);
 			ILineSeriesSettings settings = lineSeriesData.getSettings();
 			settings.setEnableArea(false);
-			settings.setLineWidth(3);
+			settings.setLineWidth(1);
 			settings.setLineStyle(LineStyle.SOLID);
 			settings.setLineColor(Colors.RED);
 			settings.setSymbolType(PlotSymbolType.CROSS);

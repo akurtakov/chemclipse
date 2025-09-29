@@ -14,6 +14,7 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -26,10 +27,15 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResult;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.SeriesConverter;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swtchart.IAxis;
 import org.eclipse.swtchart.IAxisSet;
 import org.eclipse.swtchart.Range;
+import org.eclipse.swtchart.Resources;
 import org.eclipse.swtchart.extensions.core.BaseChart;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.IExtendedChart;
@@ -40,16 +46,28 @@ import org.eclipse.swtchart.extensions.linecharts.LineChart;
 
 public class VariableLinePlot extends LineChart implements IRangeSupport {
 
+	private static long FONT_SIZE = 8l;
 	private DecimalFormat decimalFormat = new DecimalFormat(("0.00E0"), new DecimalFormatSymbols(Locale.ENGLISH));
 	private String title = "";
 
 	private Range selectedRangeX = null;
 	private Range selectedRangeY = null;
+	private Font smallAxisFont = null;
 
 	public VariableLinePlot(Composite parent, int style) {
 
 		super(parent, style);
 		this.title = "Variable Line Plot";
+		this.addDisposeListener(new DisposeListener() {
+
+			@Override
+			public void widgetDisposed(DisposeEvent e) {
+
+				if(smallAxisFont != null && !smallAxisFont.isDisposed()) {
+					smallAxisFont.dispose();
+				}
+			}
+		});
 		initialize();
 	}
 
@@ -58,12 +76,42 @@ public class VariableLinePlot extends LineChart implements IRangeSupport {
 		deleteSeries();
 		if(evaluation != null) {
 			ISamplesPCA<IVariable, ISample> samples = evaluation.getSamples();
+			setCategories(samples.getSamples());
+			adjustXAxisFont(FONT_SIZE);
 			List<ILineSeriesData> series;
 			series = SeriesConverter.variableLineToSeries(samples, variable);
 			addSeriesData(series);
 
 		}
 		getBaseChart().redraw();
+	}
+
+	private void setCategories(List<ISample> samples) {
+
+		ArrayList<String> categoryList = new ArrayList<>();
+		for(ISample sample : samples) {
+			if(sample.isSelected()) {
+				categoryList.add(sample.getGroupName());
+			}
+		}
+		String[] categories = new String[categoryList.size()];
+		categoryList.toArray(categories);
+		IChartSettings chartSettings = getChartSettings();
+		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
+		primaryAxisSettingsX.setCategorySeries(categories);
+		primaryAxisSettingsX.setEnableCategory(true);
+
+		applySettings(chartSettings);
+
+	}
+
+	private void adjustXAxisFont(Long fontSize) {
+
+		this.getBaseChart().getAxisSet().getXAxis(0).getTick().setTickLabelAngle(90);
+		FontData fontData = this.getBaseChart().getAxisSet().getXAxis(0).getTick().getFont().getFontData()[0];
+		fontData.height = fontSize;
+		Font smallAxisFont = Resources.getFont(fontData);
+		this.getBaseChart().getAxisSet().getXAxis(0).getTick().setFont(smallAxisFont);
 	}
 
 	private void initialize() {
@@ -80,14 +128,16 @@ public class VariableLinePlot extends LineChart implements IRangeSupport {
 		chartSettings.setVerticalSliderVisible(false);
 		//
 		RangeRestriction rangeRestriction = chartSettings.getRangeRestriction();
-		rangeRestriction.setZeroX(false);
-		rangeRestriction.setZeroY(false);
+		rangeRestriction.setZeroX(true);
+		rangeRestriction.setZeroY(true);
 		rangeRestriction.setRestrictFrame(true);
 		rangeRestriction.setExtendTypeX(RangeRestriction.ExtendType.ABSOLUTE);
 		rangeRestriction.setExtendTypeY(RangeRestriction.ExtendType.RELATIVE);
 		rangeRestriction.setExtendMinX(-5.0d);
 		rangeRestriction.setExtendMaxX(5.0d);
-		rangeRestriction.setExtendMaxY(1);
+		rangeRestriction.setExtendMaxY(0.1);
+		rangeRestriction.setRestrictSelectX(true);
+		rangeRestriction.setReferenceZoomZeroX(true);
 		//
 		chartSettings.setShowSeriesLabelMarker(false);
 		chartSettings.setUseSeriesLabelDescription(true);
