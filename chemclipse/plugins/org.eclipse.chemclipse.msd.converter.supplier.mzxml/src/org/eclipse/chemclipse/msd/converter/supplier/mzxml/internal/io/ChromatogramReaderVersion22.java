@@ -160,7 +160,13 @@ public class ChromatogramReaderVersion22 extends AbstractChromatogramReader impl
 			 * Get m/z and intensity (m/z-int)
 			 */
 			double mz = values[peakIndex];
+			if(mz == 0) {
+				continue;
+			}
 			float intensity = (float)values[peakIndex + 1];
+			if(intensity == 0) {
+				continue;
+			}
 			if(massSpectrum.getMassSpectrometer() >= 2) {
 				float collisionEnergy = scan.getCollisionEnergy() != null ? scan.getCollisionEnergy().floatValue() : 0f;
 				IIonTransition ionTransition = new IonTransition(massSpectrum.getPrecursorIon(), mz, collisionEnergy, 1, 1, 0);
