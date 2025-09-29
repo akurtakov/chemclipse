@@ -31,5 +31,12 @@
             filterName="Min Ion Count"
             id="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.threshold">
       </MassSpectrumFilterSupplier>
+      <MassSpectrumFilterSupplier
+            config="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.settings.HighPassMassSpectrumPeaksFilterSettings"
+            description="This filter removes all but the highest peaks from a mass spectrum."
+            filter="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.core.HighPassMassSpectrumPeaksFilter"
+            filterName="High Pass Peaks"
+            id="org.eclipse.chemclipse.msd.filter.peaks.highpass">
+      </MassSpectrumFilterSupplier>
    </extension>
 </plugin>
