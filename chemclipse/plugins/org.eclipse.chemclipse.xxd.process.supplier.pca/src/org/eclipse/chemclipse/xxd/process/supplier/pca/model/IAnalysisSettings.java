@@ -72,6 +72,10 @@ public interface IAnalysisSettings {
 
 	void setVariableLinePlotVariable(String variable);
 
+	long getVariableLinePlotFontSize();
+
+	void setVariableLinePlotFontSize(long fontSize);
+
 	TreeMap<Integer, Integer> getFilterDistribution();
 
 	void setFilterDistribution(TreeMap<Integer, Integer> distribution);

@@ -82,6 +82,22 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String P_FOLD_CHANGE_PLOT_HIGHLIGHT_SYMBOL_TYPE = "foldChangePlotHightlightSymbolType";
 	public static final String DEF_FOLD_CHANGE_PLOT_HIGHLIGHT_SYMBOL_TYPE = "CROSS";
 
+	/*
+	 * Variable Line Plot general Settings
+	 */
+	public static final String P_VARIABLE_LINE_PLOT_SYMBOL_SIZE = "variableLinePlotSymbolSize";
+	public static final int DEF_VARIABLE_LINE_PLOT_SYMBOL_SIZE = 6;
+	public static final int MIN_VARIABLE_LINE_PLOT_SYMBOL_SIZE = 1;
+	public static final int MAX_VARIABLE_LINE_PLOT_SYMBOL_SIZE = 100;
+	public static final String P_VARIABLE_LINE_PLOT_SYMBOL_TYPE = "variableLinePlotSymbolType";
+	public static final String DEF_VARIABLE_LINE_PLOT_SYMBOL_TYPE = "CROSS";
+	public static final String P_VARIABLE_LINE_PLOT_HIGHLIGHT_SYMBOL_TYPE = "variableLinePlotHightlightSymbolType";
+	public static final String DEF_VARIABLE_LINE_PLOT_HIGHLIGHT_SYMBOL_TYPE = "CIRCLE";
+	public static final String P_VARIABLE_LINE_PLOT_XAXIS_FONT_SIZE = "variableLinePlotXAxisFontSize";
+	public static final int DEF_VARIABLE_LINE_PLOT_XAXIS_FONT_SIZE = 12;
+	public static final int MIN_VARIABLE_LINE_PLOT_XAXIS_FONT_SIZE = 2;
+	public static final int MAX_VARIABLE_LINE_PLOT_XAXIS_FONT_SIZE = 20;
+
 	public static final String P_COLOR_SCHEME = "colorScheme";
 	public static final String DEF_COLOR_SCHEME = "Print";
 

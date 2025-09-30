@@ -25,6 +25,7 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.custom.IRangeSupport;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IEvaluation;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResult;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.FeatureColumnLabels;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.SeriesConverter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
@@ -46,13 +47,14 @@ import org.eclipse.swtchart.extensions.linecharts.LineChart;
 
 public class VariableLinePlot extends LineChart implements IRangeSupport {
 
-	private static long FONT_SIZE = 8l;
 	private DecimalFormat decimalFormat = new DecimalFormat(("0.00E0"), new DecimalFormatSymbols(Locale.ENGLISH));
 	private String title = "";
 
 	private Range selectedRangeX = null;
 	private Range selectedRangeY = null;
 	private Font smallAxisFont = null;
+
+	private FeatureColumnLabels categoryLabelType = FeatureColumnLabels.SAMPLENAMES;
 
 	public VariableLinePlot(Composite parent, int style) {
 
@@ -77,9 +79,9 @@ public class VariableLinePlot extends LineChart implements IRangeSupport {
 		if(evaluation != null) {
 			ISamplesPCA<IVariable, ISample> samples = evaluation.getSamples();
 			setCategories(samples.getSamples());
-			adjustXAxisFont(FONT_SIZE);
+			adjustXAxisFont(evaluation.getSamples().getAnalysisSettings().getVariableLinePlotFontSize());
 			List<ILineSeriesData> series;
-			series = SeriesConverter.variableLineToSeries(samples, variable);
+			series = SeriesConverter.variableLineToSeries(samples, variable, categoryLabelType);
 			addSeriesData(series);
 
 		}
@@ -91,7 +93,12 @@ public class VariableLinePlot extends LineChart implements IRangeSupport {
 		ArrayList<String> categoryList = new ArrayList<>();
 		for(ISample sample : samples) {
 			if(sample.isSelected()) {
-				categoryList.add(sample.getGroupName());
+				if(categoryLabelType.equals(FeatureColumnLabels.GROUPNAMES)) {
+					categoryList.add(sample.getGroupName());
+				} else {
+					categoryList.add(sample.getSampleName());
+				}
+
 			}
 		}
 		String[] categories = new String[categoryList.size()];
@@ -112,6 +119,11 @@ public class VariableLinePlot extends LineChart implements IRangeSupport {
 		fontData.height = fontSize;
 		Font smallAxisFont = Resources.getFont(fontData);
 		this.getBaseChart().getAxisSet().getXAxis(0).getTick().setFont(smallAxisFont);
+	}
+
+	public void setCategoryLabelType(FeatureColumnLabels labels) {
+
+		this.categoryLabelType = labels;
 	}
 
 	private void initialize() {

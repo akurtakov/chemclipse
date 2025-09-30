@@ -35,6 +35,7 @@ public class AnalysisSettings implements IAnalysisSettings {
 	private String comparisonGroup1 = "";
 	private String comparisonGroup2 = "";
 	private String variableLinePlotVariable = "";
+	private long variableLinePlotFontSize = 12l;
 
 	private IPreprocessingSettings preprocessingSettings = new PreprocessingSettings();
 
@@ -223,4 +224,18 @@ public class AnalysisSettings implements IAnalysisSettings {
 
 		this.variableLinePlotVariable = variable;
 	}
+
+	@Override
+	public long getVariableLinePlotFontSize() {
+
+		return variableLinePlotFontSize;
+	}
+
+	@Override
+	public void setVariableLinePlotFontSize(long fontSize) {
+
+		this.variableLinePlotFontSize = fontSize;
+
+	}
+
 }

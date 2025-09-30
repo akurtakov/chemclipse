@@ -193,9 +193,9 @@ public class SeriesConverter {
 		return scatterSeriesDataList;
 	}
 
-	public static List<ILineSeriesData> variableLineToSeries(ISamplesPCA<IVariable, ISample> samples, String comboViwewerVariable) {
+	public static List<ILineSeriesData> variableLineToSeries(ISamplesPCA<IVariable, ISample> samples, String comboViwewerVariable, FeatureColumnLabels categoryType) {
 
-		// IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 		List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
 		int selectedVariable = -1;
 		/*
@@ -222,8 +222,18 @@ public class SeriesConverter {
 			String[] labels = new String[sampleIndices.size()];
 			for(int i = 0; i < sampleIndices.size(); i++) {
 				xData[i] = i;
-				yData[i] = samples.getSamples().get(sampleIndices.get(i)).getSampleData().get(selectedVariable).getData();
-				labels[i] = samples.getSamples().get(sampleIndices.get(i)).getGroupName();
+				double currentValue = samples.getSamples().get(sampleIndices.get(i)).getSampleData().get(selectedVariable).getData();
+				if(!Double.isNaN(currentValue)) {
+					yData[i] = currentValue;
+				} else {
+					yData[i] = 0;
+				}
+
+				if(categoryType.equals(FeatureColumnLabels.GROUPNAMES)) {
+					labels[i] = samples.getSamples().get(sampleIndices.get(i)).getGroupName();
+				} else {
+					labels[i] = samples.getSamples().get(sampleIndices.get(i)).getSampleName();
+				}
 
 			}
 			ISeriesData seriesData = new SeriesData(xData, yData, ".");
@@ -233,8 +243,8 @@ public class SeriesConverter {
 			settings.setLineWidth(1);
 			settings.setLineStyle(LineStyle.SOLID);
 			settings.setLineColor(Colors.RED);
-			settings.setSymbolType(PlotSymbolType.CROSS);
-			settings.setSymbolSize(5);
+			settings.setSymbolType(createFromSettings(preferenceStore, PreferenceSupplier.P_VARIABLE_LINE_PLOT_SYMBOL_TYPE));
+			settings.setSymbolSize(preferenceStore.getInt(PreferenceSupplier.P_VARIABLE_LINE_PLOT_SYMBOL_SIZE));
 			settings.setSymbolColor(Colors.RED);
 			lineSeriesDataList.add(lineSeriesData);
 		}
