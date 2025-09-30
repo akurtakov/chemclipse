@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.pcr.report.supplier.tabular.csv.core;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,7 +24,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
@@ -54,6 +54,7 @@ import org.eclipse.chemclipse.pcr.report.supplier.tabular.model.WellMapping;
 import org.eclipse.chemclipse.pcr.report.supplier.tabular.model.WellMappings;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
+import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public class PCRExportConverter extends AbstractPlateExportConverter implements IPlateExportConverter {
@@ -63,6 +64,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 	private static final String DESCRIPTION = "PCR CSV Export";
 
 	private DecimalFormat decimalFormat = new DecimalFormat("00" + PreferenceSupplier.getDecimalSeparator().getCharacter() + "00");
+	private DateFormat dateFormat = ValueFormat.getDateFormatEnglish(ValueFormat.FULL_DATE_PATTERN);
 
 	@Override
 	public IProcessingInfo<File> convert(File file, IPlate plate, IProgressMonitor monitor) {
@@ -79,11 +81,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 				}
 				csvPrinter.println();
 				csvPrinter.println();
-				for(Entry<String, String> entry : plate.getHeaderDataMap().entrySet()) {
-					if(entry.getKey().equals(IPlate.DATE)) {
-						csvPrinter.print(entry.getKey() + ": " + entry.getValue());
-					}
-				}
+				csvPrinter.print("Date: " + dateFormat.format(plate.getDate()));
 				processingInfo.setProcessingResult(file);
 			} catch(IOException e) {
 				logger.warn(e);

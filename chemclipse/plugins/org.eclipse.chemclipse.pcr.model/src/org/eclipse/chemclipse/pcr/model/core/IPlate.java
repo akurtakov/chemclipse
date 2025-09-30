@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.model.core.IMeasurementInfo;
 public interface IPlate extends IMeasurementInfo {
 
 	String NAME = "name"; //$NON-NLS-1$
-	String DATE = "Date"; //$NON-NLS-1$
 	String NOISEBAND = "Noiseband"; //$NON-NLS-1$
 	String THRESHOLD = "Threshold"; //$NON-NLS-1$
 

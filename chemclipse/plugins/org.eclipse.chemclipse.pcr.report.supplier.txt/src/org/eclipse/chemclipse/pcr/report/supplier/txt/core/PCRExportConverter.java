@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.pcr.report.supplier.txt.core;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,6 +47,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 	private static final String SAMPLE_SUBSET_ALL = "--";
 
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.000");
+	private DateFormat dateFormat = ValueFormat.getDateFormatEnglish(ValueFormat.FULL_DATE_PATTERN);
 
 	@Override
 	public IProcessingInfo<File> convert(File file, IPlate plate, IProgressMonitor monitor) {
@@ -59,7 +61,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 				printWriter.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 				printWriter.println(headerDataMap.getOrDefault(IPlate.NAME, ""));
 				printWriter.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-				printValue(printWriter, IPlate.DATE, headerDataMap);
+				printWriter.println(dateFormat.format(plate.getDate()));
 				printValue(printWriter, IPlate.NOISEBAND, headerDataMap);
 				printValue(printWriter, IPlate.THRESHOLD, headerDataMap);
 				printWriter.print("Detection Format: ");
@@ -129,7 +131,6 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 		}
 
 		printWriter.println("");
-
 
 		for(IWell well : plate.getWells()) {
 			if(!well.isEmptyMeasurement()) {
