@@ -18,6 +18,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,10 @@ import java.util.stream.Collectors;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
@@ -85,13 +89,12 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 
 			if(plate != null) {
 				try {
-					Map<String, String> headerDataMap = plate.getHeaderDataMap();
 					List<String> sampleSubsets = new ArrayList<>(getSampleSubsets(plate));
 					for(String sampleSubset : sampleSubsets) {
 						printResultTable(plate, sampleSubset, sheet, style, headerStyle);
 					}
 					sheet.createRow(sheet.getLastRowNum() + 1);
-					printValue(sheet, IPlate.DATE, headerDataMap);
+					printDate(workbook, sheet, plate.getDate());
 					for(String sampleSubset : sampleSubsets) {
 						removeEmptyColums(sheet, sampleSubset);
 					}
@@ -243,13 +246,20 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 		return isMatch;
 	}
 
-	private void printValue(XSSFSheet sheet, String key, Map<String, String> data) {
+	private void printDate(Workbook workbook, XSSFSheet sheet, Date date) {
 
 		XSSFRow row = sheet.createRow(sheet.getLastRowNum() + 1);
+
 		XSSFCell keyCell = row.createCell(0);
-		keyCell.setCellValue(key);
-		XSSFCell dataCell = row.createCell(0);
-		dataCell.setCellValue(data.getOrDefault(key, ""));
+		keyCell.setCellValue("Zeit");
+
+		XSSFCell dataCell = row.createCell(1);
+		CellStyle cellStyle = workbook.createCellStyle();
+		String pattern = "dd.MM.yyyy HH:mm:ss";
+		CreationHelper createHelper = workbook.getCreationHelper();
+		cellStyle.setDataFormat(createHelper.createDataFormat().getFormat(pattern));
+		dataCell.setCellStyle(cellStyle);
+		dataCell.setCellValue(date);
 	}
 
 	private void removeEmptyColums(XSSFSheet sheet, String targetSubset) {
