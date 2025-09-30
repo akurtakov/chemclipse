@@ -23,7 +23,7 @@ import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.junit.Before;
 import org.junit.Ignore;
 
@@ -40,7 +40,7 @@ abstract class ChromatogramPeakTestCase {
 	private float stopBackgroundAbundance = 0.0f;
 	private IChromatogramMSD chromatogram;
 	private IIon ion;
-	private IRegularMassSpectrum supplierMassSpectrum;
+	private IScanMSD supplierMassSpectrum;
 	private IChromatogramPeakMSD peak;
 
 	@Before
@@ -77,7 +77,7 @@ abstract class ChromatogramPeakTestCase {
 		 * Add Scan 1 (500) to 17 (16500)
 		 */
 		for(int i = 1; i <= 17; i++) {
-			supplierMassSpectrum = new RegularMassSpectrum();
+			supplierMassSpectrum = new ScanMSD();
 			for(Entry<Float, Float> entry : fragmentValues.entrySet()) {
 				ion = new Ion(entry.getKey(), entry.getValue());
 				supplierMassSpectrum.addIon(ion);

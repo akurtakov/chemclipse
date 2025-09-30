@@ -31,7 +31,7 @@ import org.eclipse.chemclipse.msd.converter.io.AbstractChromatogramMSDReader;
 import org.eclipse.chemclipse.msd.converter.io.IChromatogramMSDReader;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.xxd.converter.supplier.csv.model.VendorChromatogram;
 import org.eclipse.chemclipse.xxd.converter.supplier.csv.model.VendorIon;
 import org.eclipse.chemclipse.xxd.converter.supplier.csv.model.VendorScan;
@@ -99,8 +99,8 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader implements
 			 */
 			Map<Integer, Float> ionsMap = getIonMap(csvParser);
 			for(CSVRecord csvRecord : csvParser.getRecords()) {
-				IRegularMassSpectrum supplierMassSpectrum = getScan(csvRecord, ionsMap, zeroMarker, overview);
-				chromatogram.addScan(supplierMassSpectrum);
+				IScanMSD scanMSD = getScan(csvRecord, ionsMap, zeroMarker, overview);
+				chromatogram.addScan(scanMSD);
 			}
 
 			int scanDelay = chromatogram.getScan(1).getRetentionTime();
@@ -134,9 +134,9 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader implements
 		return ions;
 	}
 
-	private IRegularMassSpectrum getScan(CSVRecord csvRecord, Map<Integer, Float> ionsMap, String zeroMarker, boolean overview) {
+	private IScanMSD getScan(CSVRecord csvRecord, Map<Integer, Float> ionsMap, String zeroMarker, boolean overview) {
 
-		IRegularMassSpectrum massSpectrum = new VendorScan();
+		IScanMSD massSpectrum = new VendorScan();
 		String retentionTimeInMilliseconds = csvRecord.get(0);
 		int retentionTime = Integer.parseInt(retentionTimeInMilliseconds);
 		massSpectrum.setRetentionTime(retentionTime);

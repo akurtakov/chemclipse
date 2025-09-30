@@ -18,7 +18,6 @@ import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIon;
@@ -41,7 +40,7 @@ public class Chromatogram_17_Test {
 		chromatogram = new ChromatogramMSD();
 		// ------------------------------Scan 1-100
 		for(int i = 1; i <= 100; i++) {
-			IRegularMassSpectrum supplierMassSpectrum = new RegularMassSpectrum();
+			IScanMSD supplierMassSpectrum = new ScanMSD();
 			supplierMassSpectrum.setRetentionTime(i);
 			for(int j = 1; j <= 50; j++) {
 				IIon ion = new Ion(j, j);

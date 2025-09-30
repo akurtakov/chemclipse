@@ -27,7 +27,6 @@ import org.eclipse.chemclipse.msd.model.core.AbstractIon;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignal;
 
@@ -74,7 +73,7 @@ public class SubtractCalculator {
 
 		for(int scanNumber = startScan; scanNumber <= stopScan; scanNumber++) {
 			IScan scan = chromatogram.getScan(scanNumber);
-			if(scan instanceof IRegularMassSpectrum targetMassSpectrum) {
+			if(scan instanceof IScanMSD targetMassSpectrum) {
 				/*
 				 * Try to subtract the mass spectrum.
 				 */

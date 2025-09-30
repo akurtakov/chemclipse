@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.msd.model.core.IIon;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.ChromatogramSelectionMSD;
 import org.eclipse.chemclipse.msd.model.xic.ITotalIonSignalExtractor;
 import org.eclipse.chemclipse.msd.model.xic.TotalIonSignalExtractor;
@@ -38,7 +38,7 @@ public class Chromatogram_11_Test {
 		chromatogram = new ChromatogramMSD();
 		// ------------------------------Scan 1-100
 		for(int i = 1; i <= 100; i++) {
-			IRegularMassSpectrum supplierMassSpectrum = new RegularMassSpectrum();
+			IScanMSD supplierMassSpectrum = new ScanMSD();
 			supplierMassSpectrum.setRetentionTime(i);
 			IIon ion = new Ion(IIon.TIC_ION, i);
 			supplierMassSpectrum.addIon(ion);

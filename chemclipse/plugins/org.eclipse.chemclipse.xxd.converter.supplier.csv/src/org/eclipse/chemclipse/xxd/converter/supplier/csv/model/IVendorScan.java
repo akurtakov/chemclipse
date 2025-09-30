@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.converter.supplier.csv.model;
 
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 
-public interface IVendorScan extends IRegularMassSpectrum {
+public interface IVendorScan extends IScanMSD {
 }

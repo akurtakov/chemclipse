@@ -22,7 +22,7 @@ import org.eclipse.chemclipse.model.signals.ITotalScanSignalExtractor;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.model.signals.TotalScanSignalExtractor;
 import org.eclipse.chemclipse.msd.model.core.IIon;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.xic.ExtractedIonSignalExtractor;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignalExtractor;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignals;
@@ -44,7 +44,7 @@ public class Chromatogram_5_Test {
 
 		chromatogram = new ChromatogramMSD();
 		// ------------------------------Scan 1
-		IRegularMassSpectrum supplierMassSpectrum = new RegularMassSpectrum();
+		IScanMSD supplierMassSpectrum = new ScanMSD();
 		supplierMassSpectrum.setRetentionTime(7896);
 		IIon ion = new Ion(45.4f, 65883.3f);
 		supplierMassSpectrum.addIon(ion);

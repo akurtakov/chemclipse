@@ -12,16 +12,16 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.converter.supplier.csv.model;
 
-import org.eclipse.chemclipse.msd.model.core.AbstractRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.AbstractScanMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 
-public class VendorScan extends AbstractRegularMassSpectrum implements IVendorScan {
+public class VendorScan extends AbstractScanMSD implements IVendorScan {
 
 	/**
 	 * Renew the serialVersionUID any time you have changed some fields or
 	 * methods.
 	 */
-	private static final long serialVersionUID = -8416701834314906892L;
+	private static final long serialVersionUID = -8416701834314906893L;
 
 	@Override
 	public IVendorScan makeDeepCopy() throws CloneNotSupportedException {

@@ -22,7 +22,7 @@ import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.msd.converter.io.AbstractChromatogramMSDWriter;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ChromatogramWriter extends AbstractChromatogramMSDWriter {
@@ -68,17 +68,17 @@ public class ChromatogramWriter extends AbstractChromatogramMSDWriter {
 	private void writeScans(IChromatogramMSD chromatogram, PrintWriter printWriter, IProgressMonitor monitor) {
 
 		for(IScan scan : chromatogram.getScans()) {
+			/*
+			 * Export each scan.
+			 */
 			monitor.subTask("Export Scan " + scan.getScanNumber());
-			if(scan instanceof IRegularMassSpectrum scanMassSpectrum) {
-				/*
-				 * Export each scan.
-				 */
-				printWriter.println("##SCAN_NUMBER= " + scanMassSpectrum.getScanNumber());
-				printWriter.println("##RETENTION_TIME= " + scanMassSpectrum.getRetentionTime() / 1000.0d); // milliseconds -> seconds
-				printWriter.println("##TIC= " + (int)scanMassSpectrum.getTotalSignal());
-				printWriter.println("##NPOINTS= " + scanMassSpectrum.getNumberOfIons());
+			printWriter.println("##SCAN_NUMBER= " + scan.getScanNumber());
+			printWriter.println("##RETENTION_TIME= " + scan.getRetentionTime() / 1000.0d); // milliseconds -> seconds
+			printWriter.println("##TIC= " + (int)scan.getTotalSignal());
+			if(scan instanceof IScanMSD scanMSD) {
+				printWriter.println("##NPOINTS= " + scanMSD.getNumberOfIons());
 				printWriter.println("##XYDATA= (XY..XY)");
-				for(IIon ion : scanMassSpectrum.getIons()) {
+				for(IIon ion : scanMSD.getIons()) {
 					printWriter.println(" " + ion.getIon() + ", " + (int)ion.getAbundance());
 				}
 			}

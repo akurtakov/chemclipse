@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.supplier.jcampdx.model;
 
-import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 
-public interface IVendorScan extends IRegularMassSpectrum {
+public interface IVendorScan extends IScanMSD {
 }
