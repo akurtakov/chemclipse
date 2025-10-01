@@ -27,7 +27,6 @@ import org.eclipse.chemclipse.ux.extension.ui.model.IDataUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Feature;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IEvaluation;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResult;
@@ -81,28 +80,18 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 
 				if(evaluation != null) {
 					if(DataUpdateSupport.isVisible(control)) {
-						if(IChemClipseEvents.TOPIC_PCA_UPDATE_FEATURES.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic)) {
+						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic)) {
 							if(objects.size() == 1) {
 								Object object = objects.get(0);
-								ArrayList<IVariable> selectedVariables = new ArrayList<>();
+								ArrayList<ISample> samples = new ArrayList<>();
 								if(object instanceof Object[] values) {
 									for(int i = 0; i < values.length; i++) {
-										if(values[i] instanceof Feature) {
-											Feature feature = (Feature)values[i];
-											selectedVariables.add(feature.getVariable());
-										} else if(values[i] instanceof IVariable) {
-											IVariable variable = (IVariable)values[i];
-											selectedVariables.add(variable);
+										if(values[i] instanceof ISample) {
+											samples.add((ISample)values[i]);
 										}
-
 									}
 								}
-								evaluation.setHighlightedVariables(selectedVariables);
+								evaluation.setHighlightedSamples(samples);
 								setInput(evaluation);
 							}
 						}

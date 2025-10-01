@@ -27,6 +27,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResult;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.FeatureColumnLabels;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.SeriesConverter;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt.VariableLinePlotHighlights;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
@@ -35,6 +36,7 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swtchart.IAxis;
 import org.eclipse.swtchart.IAxisSet;
+import org.eclipse.swtchart.IPlotArea;
 import org.eclipse.swtchart.Range;
 import org.eclipse.swtchart.Resources;
 import org.eclipse.swtchart.extensions.core.BaseChart;
@@ -53,6 +55,7 @@ public class VariableLinePlot extends LineChart implements IRangeSupport {
 	private Range selectedRangeX = null;
 	private Range selectedRangeY = null;
 	private Font smallAxisFont = null;
+	private VariableLinePlotHighlights variableLinePlotHighlights;
 
 	private FeatureColumnLabels categoryLabelType = FeatureColumnLabels.SAMPLENAMES;
 
@@ -83,6 +86,7 @@ public class VariableLinePlot extends LineChart implements IRangeSupport {
 			List<ILineSeriesData> series;
 			series = SeriesConverter.variableLineToSeries(samples, variable, categoryLabelType);
 			addSeriesData(series);
+			addHighlights(evaluation);
 
 		}
 		getBaseChart().redraw();
@@ -145,8 +149,6 @@ public class VariableLinePlot extends LineChart implements IRangeSupport {
 		rangeRestriction.setRestrictFrame(true);
 		rangeRestriction.setExtendTypeX(RangeRestriction.ExtendType.ABSOLUTE);
 		rangeRestriction.setExtendTypeY(RangeRestriction.ExtendType.RELATIVE);
-		rangeRestriction.setExtendMinX(-5.0d);
-		rangeRestriction.setExtendMaxX(5.0d);
 		rangeRestriction.setExtendMaxY(0.1);
 		rangeRestriction.setRestrictSelectX(true);
 		rangeRestriction.setReferenceZoomZeroX(true);
@@ -238,6 +240,35 @@ public class VariableLinePlot extends LineChart implements IRangeSupport {
 		setRange(IExtendedChart.X_AXIS, selectedRangeX);
 		setRange(IExtendedChart.Y_AXIS, selectedRangeY);
 		redraw();
+
+	}
+
+	private void addHighlights(IEvaluation<IVariable, ISample, IResult> evaluation) {
+
+		BaseChart baseChart = getBaseChart();
+		IPlotArea plotArea = baseChart.getPlotArea();
+		ISamplesPCA<IVariable, ISample> samples = evaluation.getSamples();
+		List<ISample> highlightedSamples = evaluation.getHighlightedSamples();
+		ArrayList<Integer> sampleIndices = new ArrayList<>();
+		ArrayList<Integer> highlightedIndices = new ArrayList<>();
+		for(int i = 0; i < samples.getSamples().size(); i++) {
+			if(samples.getSamples().get(i).isSelected()) {
+				sampleIndices.add(i);
+			}
+		}
+		for(int i = 0; i < sampleIndices.size(); i++) {
+			int current = i;
+			if(highlightedSamples.stream().anyMatch(x -> x.equals(samples.getSamples().get(current)))) {
+				highlightedIndices.add(i);
+			}
+		}
+		int[] highlights = highlightedIndices.stream().mapToInt(Integer::intValue).toArray();
+
+		if(variableLinePlotHighlights != null) {
+			plotArea.removeCustomPaintListener(variableLinePlotHighlights);
+		}
+		variableLinePlotHighlights = new VariableLinePlotHighlights(baseChart, highlights);
+		plotArea.addCustomPaintListener(variableLinePlotHighlights);
 
 	}
 

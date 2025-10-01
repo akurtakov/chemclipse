@@ -236,7 +236,7 @@ public class SeriesConverter {
 				}
 
 			}
-			ISeriesData seriesData = new SeriesData(xData, yData, ".");
+			ISeriesData seriesData = new SeriesData(xData, yData, "main");
 			ILineSeriesData lineSeriesData = new LineSeriesData(seriesData);
 			ILineSeriesSettings settings = lineSeriesData.getSettings();
 			settings.setEnableArea(false);
@@ -294,7 +294,6 @@ public class SeriesConverter {
 					ISeriesData seriesData = new SeriesData(new double[]{log2FoldChange}, new double[]{minLog10pValue}, Integer.toString(i));
 					IScatterSeriesData scatterSeriesData = new ScatterSeriesData(seriesData);
 					IScatterSeriesSettings scatterSeriesSettings = scatterSeriesData.getSettings();
-					// scatterSeriesSettings.setDescription(samples.getVariables().get(i).getDescription());
 					scatterSeriesSettings.setSymbolType(createFromSettings(preferenceStore, PreferenceSupplier.P_FOLD_CHANGE_PLOT_SYMBOL_TYPE));
 					if(highlighted.contains(samples.getVariables().get(i))) {
 						scatterSeriesSettings.setSymbolType(createFromSettings(preferenceStore, PreferenceSupplier.P_FOLD_CHANGE_PLOT_HIGHLIGHT_SYMBOL_TYPE));
