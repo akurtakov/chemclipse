@@ -140,8 +140,7 @@ public class MoleculeUI extends Composite implements IExtendedPartUI {
 	private Canvas createCanvasMolecule(Composite parent) {
 
 		Canvas canvas = new Canvas(parent, SWT.FILL);
-		canvas.setBackground(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
-
+		canvas.setData("org.eclipse.e4.ui.css.CssClassName", "MoleculeCanvas");
 		canvas.addControlListener(new ControlAdapter() {
 
 			@Override
