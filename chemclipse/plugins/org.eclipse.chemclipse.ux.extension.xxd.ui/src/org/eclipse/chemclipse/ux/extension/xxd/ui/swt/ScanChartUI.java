@@ -219,7 +219,6 @@ public class ScanChartUI extends ScrollableChart {
 
 		super();
 		setDefaultDataAndSignalType();
-		useBackgroundFromStyleSheet();
 		addCustomTextSeries();
 	}
 
@@ -227,7 +226,6 @@ public class ScanChartUI extends ScrollableChart {
 
 		super(parent, style);
 		setDefaultDataAndSignalType();
-		useBackgroundFromStyleSheet();
 		addCustomTextSeries();
 	}
 
@@ -435,15 +433,6 @@ public class ScanChartUI extends ScrollableChart {
 	private void addCustomTextSeries() {
 
 		customSeries = getBaseChart().createCustomSeries("Masses", "Highest m/z values");
-	}
-
-	private void useBackgroundFromStyleSheet() {
-
-		IChartSettings chartSettings = getChartSettings();
-		chartSettings.setBackground(null);
-		chartSettings.setBackgroundChart(null);
-		chartSettings.setBackgroundPlotArea(null);
-		applySettings(chartSettings);
 	}
 
 	private DataType determineDataType(IScan scan) {
