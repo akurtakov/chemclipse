@@ -186,7 +186,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 							continue;
 						}
 						IChannel targetChannel = targetChannels.get(target);
-						if(virtualChannel.getSourceChannels().length > 1) {
+						if(virtualChannel.getLogicalOperator() != LogicalOperator.IDENTITY) {
 							float virtualCrossingPoint = 0;
 							targetChannel = new Channel();
 							for(int channel : virtualChannel.getSourceChannels()) {

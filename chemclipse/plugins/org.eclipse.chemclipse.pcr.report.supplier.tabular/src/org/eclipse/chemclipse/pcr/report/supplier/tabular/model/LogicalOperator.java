@@ -15,15 +15,17 @@ package org.eclipse.chemclipse.pcr.report.supplier.tabular.model;
 public enum LogicalOperator {
 
 	AND, //
-	OR;
+	OR, //
+	IDENTITY;
 
 	public static LogicalOperator parse(String input) {
 
 		if(input.contains("&")) {
 			return LogicalOperator.AND;
-		}
-		if(input.contains("/")) {
+		} else if(input.contains("/")) {
 			return LogicalOperator.OR;
+		} else if(input.contains("$")) {
+			return LogicalOperator.IDENTITY;
 		}
 		return null;
 	}

@@ -85,6 +85,12 @@ public class Utils {
 				for(int i = 0; i < strings.length; i++) {
 					channels[i] = Integer.parseInt(strings[i].trim());
 				}
+			} else if(input.contains("$")) {
+				String[] strings = StringUtils.split(input, '$');
+				channels = new int[strings.length];
+				for(int i = 0; i < strings.length; i++) {
+					channels[i] = Integer.parseInt(strings[i].trim());
+				}
 			} else {
 				channels[0] = Integer.parseInt(input.trim());
 			}
