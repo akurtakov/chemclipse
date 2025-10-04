@@ -44,16 +44,22 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swtchart.IAxis;
 import org.eclipse.swtchart.Range;
+import org.eclipse.swtchart.extensions.core.BaseChart;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
+import org.eclipse.swtchart.extensions.core.IMouseSupport;
+import org.eclipse.swtchart.extensions.core.UserSelection;
+import org.eclipse.swtchart.extensions.events.IHandledEventProcessor;
 
 public class ExtendedVariableLinePlot extends Composite implements IExtendedPartUI {
 
@@ -67,6 +73,7 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 	private ISamplesPCA<IVariable, ISample> samples = null;
 	private ArrayList<String> variables = new ArrayList<>();
 	private String lastVariableSelection = VARIABLE_LINE_PLOT_SELECT_NONE;
+	private UserSelection userSelection = new UserSelection();
 
 	public ExtendedVariableLinePlot(Composite parent, int style) {
 
@@ -273,6 +280,146 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 		plot.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		IChartSettings chartSettings = plot.getChartSettings();
+		chartSettings.addHandledEventProcessor(new IHandledEventProcessor() {
+
+			@Override
+			public int getEvent() {
+
+				return IMouseSupport.EVENT_MOUSE_DOWN;
+			}
+
+			@Override
+			public int getButton() {
+
+				return IMouseSupport.MOUSE_BUTTON_LEFT;
+			}
+
+			@Override
+			public int getStateMask() {
+
+				return SWT.MOD1;
+			}
+
+			@Override
+			public void handleEvent(BaseChart baseChart, Event event) {
+
+				if(evaluation != null) {
+					if(event.count == 1) {
+						userSelection.setSingleClick(true);
+						userSelection.setStartCoordinate(event.x, event.y);
+					}
+				}
+			}
+		});
+		chartSettings.addHandledEventProcessor(new IHandledEventProcessor() {
+
+			@Override
+			public int getEvent() {
+
+				return IMouseSupport.EVENT_MOUSE_MOVE;
+			}
+
+			@Override
+			public int getButton() {
+
+				return IMouseSupport.MOUSE_BUTTON_NONE;
+			}
+
+			@Override
+			public int getStateMask() {
+
+				return SWT.MOD1;
+			}
+
+			@Override
+			public void handleEvent(BaseChart baseChart, Event event) {
+
+				if(userSelection.getStartX() > 0 && userSelection.getStartY() > 0) {
+					userSelection.setStopCoordinate(event.x, event.y);
+				}
+			}
+		});
+		chartSettings.addHandledEventProcessor(new IHandledEventProcessor() {
+
+			@Override
+			public int getEvent() {
+
+				return IMouseSupport.EVENT_MOUSE_UP;
+			}
+
+			@Override
+			public int getButton() {
+
+				return IMouseSupport.MOUSE_BUTTON_LEFT;
+			}
+
+			@Override
+			public int getStateMask() {
+
+				return SWT.MOD1;
+			}
+
+			@Override
+			public void handleEvent(BaseChart baseChart, Event event) {
+
+				if(evaluation != null && isBoxSelection()) {
+					/*
+					 * Prepare Data viewport
+					 */
+					Rectangle rectangle = baseChart.getPlotArea().getBounds();
+					int width = rectangle.width;
+					Range rangeX = baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS).getRange();
+					/*
+					 * Determine x|y coordinates Start/Stop.
+					 */
+					int startX = userSelection.getStartX();
+					int stopX = userSelection.getStopX();
+					if(startX > stopX) {
+						int flip = startX;
+						startX = stopX;
+						stopX = flip;
+					}
+					/*
+					 * Calculate selected points.
+					 */
+					double pXStart = rangeX.lower + (rangeX.upper - rangeX.lower) * ((1.0d / width) * startX);
+					double pXStop = rangeX.lower + (rangeX.upper - rangeX.lower) * ((1.0d / width) * stopX);
+					/*
+					 * Map the result deltas.
+					 */
+					List<ISample> samplesHighlighted = evaluation.getHighlightedSamples();
+					/*
+					 * get samples within box selection
+					 */
+					for(int i = 0; i < evaluation.getSamples().getSamples().size(); i++) {
+						if(samples.getSamples().get(i).isSelected()) {
+
+						}
+						if(i > pXStart && i < pXStop) {
+							if(samplesHighlighted.contains(samples.getSamples().get(i))) {
+								samplesHighlighted.remove(samplesHighlighted.indexOf(samples.getSamples().get(i)));
+							} else {
+								samplesHighlighted.add(samples.getSamples().get(i));
+							}
+						}
+					}
+					/*
+					 * Send Update event.
+					 */
+					if(!samplesHighlighted.isEmpty()) {
+						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, samplesHighlighted.toArray());
+					}
+					/*
+					 * Finish User Selection Process
+					 */
+					userSelection.reset();
+					userSelection.setSingleClick(false);
+				}
+
+			}
+
+		});
+
 		plot.applySettings(chartSettings);
 		plotControl.set(plot);
 
@@ -355,6 +502,14 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 			xAxis.setRange(range);
 		}
 
+	}
+
+	private boolean isBoxSelection() {
+
+		if(userSelection.getStartX() != 0 && userSelection.getStartY() != 0 && userSelection.getStopX() != 0 && userSelection.getStopY() != 0) {
+			return true;
+		}
+		return false;
 	}
 
 }
