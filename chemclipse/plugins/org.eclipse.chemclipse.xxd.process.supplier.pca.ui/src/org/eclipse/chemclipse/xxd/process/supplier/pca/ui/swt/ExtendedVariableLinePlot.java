@@ -23,6 +23,7 @@ import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
+import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.ui.model.IDataUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
@@ -42,8 +43,10 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -54,6 +57,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swtchart.IAxis;
+import org.eclipse.swtchart.ICustomPaintListener;
 import org.eclipse.swtchart.Range;
 import org.eclipse.swtchart.extensions.core.BaseChart;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
@@ -392,9 +396,6 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 					 * get samples within box selection
 					 */
 					for(int i = 0; i < evaluation.getSamples().getSamples().size(); i++) {
-						if(samples.getSamples().get(i).isSelected()) {
-
-						}
 						if(i > pXStart && i < pXStop) {
 							if(samplesHighlighted.contains(samples.getSamples().get(i))) {
 								samplesHighlighted.remove(samplesHighlighted.indexOf(samples.getSamples().get(i)));
@@ -420,7 +421,150 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 
 		});
 
+		chartSettings.addHandledEventProcessor(new IHandledEventProcessor() {
+
+			@Override
+			public int getEvent() {
+
+				return IMouseSupport.EVENT_MOUSE_DOUBLE_CLICK;
+			}
+
+			@Override
+			public int getButton() {
+
+				return IMouseSupport.MOUSE_BUTTON_LEFT;
+			}
+
+			@Override
+			public int getStateMask() {
+
+				return SWT.NONE;
+			}
+
+			@Override
+			public void handleEvent(BaseChart baseChart, Event event) {
+
+				if(evaluation != null) {
+					/*
+					 * Determine the x coordinate.
+					 */
+					Rectangle rectangle = baseChart.getPlotArea().getBounds();
+					double x = event.x;
+					double width = rectangle.width;
+					/*
+					 * Calculate the sample index from screen coordinate.
+					 */
+					Range rangeX = baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS).getRange();
+
+					int index = (int)Math.round(rangeX.lower + (rangeX.upper - rangeX.lower) * ((1.0d / width) * x));
+					/*
+					 * Apply highlighting logic.
+					 */
+					if(index < evaluation.getSamples().getSamples().size() || index > -1) {
+						List<ISample> samplesHighlighted = evaluation.getHighlightedSamples();
+						List<ISample> highlightedSamples = new ArrayList<>();
+						if(samplesHighlighted.size() < 1) {
+							highlightedSamples.add(evaluation.getSamples().getSamples().get(index));
+							UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, highlightedSamples.toArray());
+						} else {
+							if(samplesHighlighted.contains(evaluation.getSamples().getSamples().get(index))) {
+								UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, highlightedSamples.toArray());
+							} else {
+								highlightedSamples.add(evaluation.getSamples().getSamples().get(index));
+								UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, highlightedSamples.toArray());
+							}
+
+						}
+					}
+				}
+			}
+		});
+		chartSettings.addHandledEventProcessor(new IHandledEventProcessor() {
+
+			@Override
+			public int getEvent() {
+
+				return IMouseSupport.EVENT_MOUSE_DOUBLE_CLICK;
+			}
+
+			@Override
+			public int getButton() {
+
+				return IMouseSupport.MOUSE_BUTTON_LEFT;
+			}
+
+			@Override
+			public int getStateMask() {
+
+				return SWT.MOD1;
+			}
+
+			@Override
+			public void handleEvent(BaseChart baseChart, Event event) {
+
+				if(evaluation != null) {
+					/*
+					 * Determine the x coordinate.
+					 */
+					Rectangle rectangle = baseChart.getPlotArea().getBounds();
+					double x = event.x;
+					double width = rectangle.width;
+					/*
+					 * Calculate the sample index from screen coordinates.
+					 */
+					Range rangeX = baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS).getRange();
+
+					int index = (int)Math.round(rangeX.lower + (rangeX.upper - rangeX.lower) * ((1.0d / width) * x));
+					/*
+					 * Apply highlighting logic.
+					 */
+					if(index < evaluation.getSamples().getSamples().size() || index > -1) {
+						List<ISample> samplesHighlighted = evaluation.getHighlightedSamples();
+						if(samplesHighlighted.size() < 1) {
+							samplesHighlighted.add(evaluation.getSamples().getSamples().get(index));
+							UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, samplesHighlighted.toArray());
+						} else {
+							if(samplesHighlighted.contains(evaluation.getSamples().getSamples().get(index))) {
+								samplesHighlighted.remove(evaluation.getSamples().getSamples().get(index));
+								UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, samplesHighlighted.toArray());
+							} else {
+								samplesHighlighted.add(evaluation.getSamples().getSamples().get(index));
+								UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, samplesHighlighted.toArray());
+							}
+
+						}
+					}
+				}
+				userSelection.reset();
+			}
+		});
 		plot.applySettings(chartSettings);
+
+		/*
+		 * Paint Listener
+		 */
+		plot.getBaseChart().getPlotArea().addCustomPaintListener(new ICustomPaintListener() {
+
+			@Override
+			public void paintControl(PaintEvent e) {
+
+				if(userSelection.isActive()) {
+					int x = Math.min(userSelection.getStartX(), userSelection.getStopX());
+					int y = Math.min(userSelection.getStartY(), userSelection.getStopY());
+					int width = Math.abs(userSelection.getStopX() - userSelection.getStartX());
+					int height = Math.abs(userSelection.getStopY() - userSelection.getStartY());
+
+					GC gc = e.gc;
+					gc.setBackground(Colors.RED);
+					gc.setForeground(Colors.DARK_RED);
+					gc.setAlpha(45);
+					gc.fillRectangle(x, y, width, height);
+					gc.setLineStyle(SWT.LINE_DASH);
+					gc.setLineWidth(2);
+					gc.drawRectangle(x, y, width, height);
+				}
+			}
+		});
 		plotControl.set(plot);
 
 	}

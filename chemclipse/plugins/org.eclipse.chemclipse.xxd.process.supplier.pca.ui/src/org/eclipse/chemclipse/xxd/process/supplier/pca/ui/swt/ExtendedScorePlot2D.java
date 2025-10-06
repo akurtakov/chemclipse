@@ -384,7 +384,6 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 				}
 			}
 		});
-		scorePlot.applySettings(chartSettings);
 		chartSettings.addHandledEventProcessor(new IHandledEventProcessor() {
 
 			@Override
