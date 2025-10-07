@@ -47,6 +47,7 @@ import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -55,9 +56,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Scrollable;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swtchart.IAxis;
 import org.eclipse.swtchart.ICustomPaintListener;
+import org.eclipse.swtchart.IPlotArea;
 import org.eclipse.swtchart.Range;
 import org.eclipse.swtchart.extensions.core.BaseChart;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
@@ -549,19 +552,22 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 			public void paintControl(PaintEvent e) {
 
 				if(userSelection.isActive()) {
-					int x = Math.min(userSelection.getStartX(), userSelection.getStopX());
+					int xMin = Math.min(userSelection.getStartX(), userSelection.getStopX());
+					int xMax = Math.max(userSelection.getStartX(), userSelection.getStopX());
 					int y = Math.min(userSelection.getStartY(), userSelection.getStopY());
-					int width = Math.abs(userSelection.getStopX() - userSelection.getStartX());
-					int height = Math.abs(userSelection.getStopY() - userSelection.getStartY());
+					BaseChart baseChart = plotControl.get().getBaseChart();
+					IPlotArea plotArea = baseChart.getPlotArea();
+					Point rectangle = plotArea instanceof Scrollable scrollable ? scrollable.getSize() : plotArea.getSize();
 
 					GC gc = e.gc;
 					gc.setBackground(Colors.RED);
 					gc.setForeground(Colors.DARK_RED);
 					gc.setAlpha(45);
-					gc.fillRectangle(x, y, width, height);
 					gc.setLineStyle(SWT.LINE_DASH);
 					gc.setLineWidth(2);
-					gc.drawRectangle(x, y, width, height);
+					gc.drawLine(xMin, 0, xMin, rectangle.y);
+					gc.drawLine(xMax, 0, xMax, rectangle.y);
+					gc.drawLine(xMin, y, xMax, y);
 				}
 			}
 		});
