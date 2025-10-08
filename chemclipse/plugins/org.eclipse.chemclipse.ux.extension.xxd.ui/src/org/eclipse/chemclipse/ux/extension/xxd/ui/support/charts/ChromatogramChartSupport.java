@@ -310,25 +310,27 @@ public class ChromatogramChartSupport {
 				 * Get the retention time and intensity.
 				 */
 				IScan scan = chromatogram.getScan(i);
-				int retentionTime = scan.getRetentionTime();
-				float retentionIndex = scan.getRetentionIndex();
-				if(useRetentionIndex) {
-					if(retentionIndex > 0) {
-						xSeries[index] = retentionIndex;
+				if(scan != null) {
+					int retentionTime = scan.getRetentionTime();
+					float retentionIndex = scan.getRetentionIndex();
+					if(useRetentionIndex) {
+						if(retentionIndex > 0) {
+							xSeries[index] = retentionIndex;
+							if(baseline) {
+								ySeries[index] = baselineModel.getBackground(retentionTime);
+							} else {
+								ySeries[index] = getIntensity(scan, displayType, signals);
+							}
+						} else {
+							ySeries[index] = Double.NaN;
+						}
+					} else {
+						xSeries[index] = retentionTime;
 						if(baseline) {
 							ySeries[index] = baselineModel.getBackground(retentionTime);
 						} else {
 							ySeries[index] = getIntensity(scan, displayType, signals);
 						}
-					} else {
-						ySeries[index] = Double.NaN;
-					}
-				} else {
-					xSeries[index] = retentionTime;
-					if(baseline) {
-						ySeries[index] = baselineModel.getBackground(retentionTime);
-					} else {
-						ySeries[index] = getIntensity(scan, displayType, signals);
 					}
 				}
 				index++;
