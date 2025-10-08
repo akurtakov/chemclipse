@@ -57,6 +57,7 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.Preferenc
 import org.eclipse.chemclipse.ux.extension.xxd.ui.model.ComparisonScanOption;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageScans;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageSubtract;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.runnables.LibraryServiceRunnable;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.ChromatogramUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ScanChartSupport;
@@ -68,6 +69,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.preference.IPreferencePage;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -132,11 +134,12 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 	private AtomicReference<Button> buttonDifferenceSpectrum = new AtomicReference<>();
 	private AtomicReference<Button> buttonShiftReferenceSpectrum = new AtomicReference<>();
 	private AtomicReference<Spinner> spinnerShiftReferenceSpectrum = new AtomicReference<>();
+	private AtomicReference<Button> buttonLegendControl = new AtomicReference<>();
 	private AtomicReference<Composite> toolbarHybridSearch = new AtomicReference<>();
 	private AtomicReference<Text> textWeightUnknownControl = new AtomicReference<>();
 	private AtomicReference<Text> textWeightReferenceControl = new AtomicReference<>();
-	private AtomicReference<ScanChartUI> scanChartStackTopControl = new AtomicReference<>();
-	private AtomicReference<ScanChartUI> scanChartStackBottomControl = new AtomicReference<>();
+	private AtomicReference<ScanChartUI> scanChartStackUnknownControl = new AtomicReference<>();
+	private AtomicReference<ScanChartUI> scanChartStackReferenceControl = new AtomicReference<>();
 
 	private boolean showDifferenceSpectrum = false;
 	private boolean useMirroredSpectrum = true;
@@ -316,8 +319,11 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 	private void updateStackCharts() {
 
-		updateStackChart(scanChartStackTopControl.get(), scanReference, Colors.BLACK, "Reference");
-		updateStackChart(scanChartStackBottomControl.get(), scanUnknown, Colors.RED, "Unknown");
+		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+		Color colorScan1 = Colors.getColor(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCAN_1));
+		Color colorScan2 = Colors.getColor(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCAN_2));
+		updateStackChart(scanChartStackUnknownControl.get(), scanUnknown, colorScan1, "Unknown");
+		updateStackChart(scanChartStackReferenceControl.get(), scanReference, colorScan2, "Reference");
 	}
 
 	private void updateStackChart(ScanChartUI scanChartUI, IScanMSD scanMSD, Color color, String label) {
@@ -334,8 +340,8 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 	private void clearStackCharts() {
 
-		scanChartStackTopControl.get().deleteSeries();
-		scanChartStackBottomControl.get().deleteSeries();
+		scanChartStackUnknownControl.get().deleteSeries();
+		scanChartStackReferenceControl.get().deleteSeries();
 	}
 
 	private void updateScanComparisonNormal() {
@@ -407,6 +413,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		enableToolbar(toolbarHybridSearch, buttonToolbarHybrid.get(), IMAGE_HYBRID, TOOLTIP_HYBRID, false);
 		comboViewerOptionControl.get().setInput(ComparisonScanOption.values());
 		comboViewerOptionControl.get().setSelection(new StructuredSelection(ComparisonScanOption.LIBRARY_SEARCH));
+		buttonLegendControl.get().setEnabled(true);
 	}
 
 	private void createToolbarMain(Composite parent) {
@@ -527,6 +534,16 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		createScanChartComparison(tabFolder);
 		createScanChartStacked(tabFolder);
 
+		tabFolder.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				boolean enabled = tabFolder.getSelectionIndex() == 0;
+				buttonLegendControl.get().setEnabled(enabled);
+			}
+		});
+
 		tabFolderControl.set(tabFolder);
 	}
 
@@ -550,12 +567,12 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		Composite composite = new Composite(tabFolder, SWT.BORDER);
 		composite.setLayout(new GridLayout(1, true));
 
-		ScanChartUI scanChartTop = createScanChartStacked(composite);
-		ScanChartUI scanChartBottom = createScanChartStacked(composite);
-		scanChartBottom.addLinkedScrollableChart(scanChartTop);
+		ScanChartUI scanChartUnknown = createScanChartStacked(composite);
+		ScanChartUI scanChartReference = createScanChartStacked(composite);
+		scanChartReference.addLinkedScrollableChart(scanChartUnknown);
 
-		scanChartStackTopControl.set(scanChartTop);
-		scanChartStackBottomControl.set(scanChartBottom);
+		scanChartStackUnknownControl.set(scanChartUnknown);
+		scanChartStackReferenceControl.set(scanChartReference);
 		tabItem.setControl(composite);
 	}
 
@@ -874,7 +891,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 	private void createToggleLegendButton(Composite parent) {
 
-		createButtonToggleChartLegend(parent, scanChartControl, IMAGE_LEGEND);
+		buttonLegendControl.set(createButtonToggleChartLegend(parent, scanChartControl, IMAGE_LEGEND));
 	}
 
 	private void createSettingsButton(Composite parent) {
