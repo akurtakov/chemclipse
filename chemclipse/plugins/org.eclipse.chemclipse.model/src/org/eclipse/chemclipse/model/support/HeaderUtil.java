@@ -47,6 +47,9 @@ public class HeaderUtil {
 					case TAGS:
 						headerData = validate(chromatogram.getTags());
 						break;
+					case INSTRUMENT:
+						headerData = validate(chromatogram.getInstrument());
+						break;
 					default:
 						/*
 						 * Do nothing, see check default.
@@ -116,6 +119,9 @@ public class HeaderUtil {
 							break;
 						case TAGS:
 							chromatogram.setTags(headerData);
+							break;
+						case INSTRUMENT:
+							chromatogram.setInstrument(headerData);
 							break;
 						default:
 							break;

@@ -50,6 +50,9 @@ public class ColumnUtil {
 						case TAGS:
 							headerField = HeaderField.TAGS;
 							break;
+						case INSTRUMENT:
+							headerField = HeaderField.INSTRUMENT;
+							break;
 						default:
 							headerField = HeaderField.DEFAULT;
 							break;

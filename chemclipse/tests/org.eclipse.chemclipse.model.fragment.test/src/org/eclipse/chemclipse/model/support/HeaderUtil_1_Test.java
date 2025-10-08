@@ -115,6 +115,15 @@ public class HeaderUtil_1_Test {
 	@Test
 	public void test12() {
 
+		HeaderField headerField = HeaderField.INSTRUMENT;
+		assertEquals("", HeaderUtil.getHeaderData(chromatogram, headerField, ""));
+		chromatogram.setInstrument("5977C");
+		assertEquals("5977C", HeaderUtil.getHeaderData(chromatogram, headerField, ""));
+	}
+
+	@Test
+	public void test13() {
+
 		HeaderField headerField = HeaderField.DEFAULT;
 		assertEquals("", HeaderUtil.getHeaderData(chromatogram, headerField, ""));
 	}

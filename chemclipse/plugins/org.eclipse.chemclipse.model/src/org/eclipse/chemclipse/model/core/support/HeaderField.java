@@ -26,7 +26,8 @@ public enum HeaderField implements ILabel {
 	SAMPLE_GROUP("Sample Group"), //
 	SHORT_INFO("Short Info"), //
 	MISC_INFO("Misc Info"), //
-	TAGS("Tags"); //
+	TAGS("Tags"), //
+	INSTRUMENT("Instrument"); //
 
 	private String label = "";
 

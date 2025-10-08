@@ -24,7 +24,8 @@ public enum ColumnField implements ILabel {
 	SHORT_INFO("Short Info"), //
 	MISC_INFO("Misc Info"), //
 	TAGS("Tags"), //
-	COLUMN_DETAILS("Column Details"); //
+	COLUMN_DETAILS("Column Details"), //
+	INSTRUMENT("Instrument"); //
 
 	private String label = "";
 
