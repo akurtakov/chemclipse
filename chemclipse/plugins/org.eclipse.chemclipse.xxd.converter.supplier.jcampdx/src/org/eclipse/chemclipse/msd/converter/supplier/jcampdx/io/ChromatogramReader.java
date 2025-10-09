@@ -23,6 +23,7 @@ import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.exceptions.ReferenceMustNotBeNullException;
 import org.eclipse.chemclipse.model.identifier.ComparisonResult;
 import org.eclipse.chemclipse.model.identifier.IComparisonResult;
+import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.identifier.LibraryInformation;
 import org.eclipse.chemclipse.model.implementation.IdentificationTarget;
@@ -44,6 +45,16 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramReader.class);
 
+	/*
+	 * ##NAME=Toluol
+	 * ##TIC=11143
+	 * ##SCAN=530
+	 * ##RI1=765
+	 * ##TIME=6.5635
+	 * ##KEY=3
+	 * ##LIB=279181791
+	 * ##MARKED=1
+	 */
 	private static final String HEADER_MASSFINDER_3 = "##PROGRAM=MassFinder3";
 	private static final String HEADER_MASSFINDER_4 = "##PROGRAM=MassFinder4";
 	private static final String HEADER_MARKER = "##";
@@ -52,7 +63,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 	private static final String RETENTION_TIME_MARKER = "##RETENTION_TIME=";
 	private static final String TIME_MARKER = "##TIME=";
 	private static final String TIC_MARKER = "##TIC=";
-	private static final String NAME_MARKER = "##NAME=";
+	private static final String NAME_MARKER = "##NAME=";;
 	private static final String SCAN_NUMBER_MARKER = "##SCAN_NUMBER=";
 	private static final String SCAN_MARKER = "##SCAN=";
 	private static final String XYDATA_MARKER_SPACE = "##XYDATA= (XY..XY)";
@@ -66,6 +77,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 		if(isValidFileFormat(file)) {
 			return readChromatogram(file, monitor);
 		}
+
 		return null;
 	}
 
@@ -75,218 +87,229 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 		if(isValidFileFormat(file)) {
 			return readChromatogramOverview(file, monitor);
 		}
+
 		return null;
 	}
 
 	private IChromatogramMSD readChromatogram(File file, IProgressMonitor monitor) throws IOException {
 
 		IVendorChromatogram chromatogram = new VendorChromatogram();
-		IVendorScan massSpectrum = null;
-		IVendorIon ion;
-
-		FileReader fileReader = new FileReader(file);
-		BufferedReader bufferedReader = new BufferedReader(fileReader);
-		String line;
-		int retentionTime = 0;
-		boolean readIons = false;
-		boolean readIonsSpace = false;
-		/*
-		 * Parse each line
-		 */
-		boolean adjustTotalSignal = false;
-		float totalSignalFromFile = 0.0f;
-
-		while((line = bufferedReader.readLine()) != null) {
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
 			/*
-			 * Each scan starts with the marker:
-			 * ##SCAN_NUMBER= 1
-			 * ##RETENTION_TIME= 1.78
-			 * ##NPOINTS= 3
-			 * ##XYDATA= (XY..XY)
-			 * 40.01681, 4352
-			 * 41.07158, 221
-			 * 44.05768, 36
-			 * ...
-			 * ##XYDATA=(X,Y)
-			 * 19 350
-			 * 26 1176
-			 * 27 3691
-			 * 28 1631
-			 * 29 3914
+			 * Scans
 			 */
-			if(line.startsWith(SCAN_NUMBER_MARKER) || line.startsWith(SCAN_MARKER)) {
+			RetentionIndexSupport retentionIndexSupport = new RetentionIndexSupport();
+			IVendorScan massSpectrum = null;
+			IIdentificationTarget identificationTarget = null;
+			int retentionTime = 0;
+			boolean readIons = false;
+			boolean readIonsSpace = false;
+			boolean adjustTotalSignal = false;
+			float totalSignalFromFile = 0.0f;
+
+			String line;
+			while((line = bufferedReader.readLine()) != null) {
 				/*
-				 * Store an existing scan.
+				 * Each scan starts with the marker:
+				 * ##SCAN_NUMBER= 1
+				 * ##RETENTION_TIME= 1.78
+				 * ##NPOINTS= 3
+				 * ##XYDATA= (XY..XY)
+				 * 40.01681, 4352
+				 * 41.07158, 221
+				 * 44.05768, 36
+				 * ...
+				 * ##XYDATA=(X,Y)
+				 * 19 350
+				 * 26 1176
+				 * 27 3691
+				 * 28 1631
+				 * 29 3914
+				 */
+				if(line.startsWith(SCAN_NUMBER_MARKER) || line.startsWith(SCAN_MARKER)) {
+					/*
+					 * Store an existing scan.
+					 */
+					if(massSpectrum != null) {
+						if(adjustTotalSignal && totalSignalFromFile != 0.0d) {
+							massSpectrum.adjustTotalSignal(totalSignalFromFile);
+						}
+						chromatogram.addScan(massSpectrum);
+					}
+					/*
+					 * Create a new scan.
+					 */
+					massSpectrum = new VendorScan();
+					identificationTarget = null;
+					totalSignalFromFile = 0.0f;
+					readIons = false;
+					/*
+					 * Read the next line.
+					 */
+					continue;
+				} else if(line.startsWith(HEADER_MASSFINDER_3)) {
+					adjustTotalSignal = true;
+				} else if(line.startsWith(HEADER_MASSFINDER_4)) {
+					adjustTotalSignal = false;
+				}
+				/*
+				 * Read the scan data.
+				 * The SCAN_MARKER section has been accessed.
 				 */
 				if(massSpectrum != null) {
-					if(adjustTotalSignal && totalSignalFromFile != 0.0d) {
-						massSpectrum.adjustTotalSignal(totalSignalFromFile);
+					/*
+					 * Parse the scan data
+					 */
+					if(line.startsWith(RETENTION_TIME_MARKER) || line.startsWith(TIME_MARKER)) {
+						retentionTime = getRetentionTime(line);
+						massSpectrum.setRetentionTime(retentionTime);
+					} else if(line.startsWith(TIC_MARKER)) {
+						String value = line.replace(TIC_MARKER, "").trim();
+						totalSignalFromFile = Float.parseFloat(value);
+					} else if(line.startsWith(NAME_MARKER)) {
+						try {
+							/*
+							 * Create Scan Target
+							 */
+							String name = line.replace(NAME_MARKER, "").trim();
+							if(identificationTarget == null) {
+								identificationTarget = createIdentificationTarget(name);
+							} else {
+								ILibraryInformation libraryInformation = identificationTarget.getLibraryInformation();
+								if(libraryInformation.getName().equals(RetentionIndexSupport.RETENTION_INDEX_MARKER)) {
+									libraryInformation.setName(name);
+								}
+							}
+							massSpectrum.getTargets().add(identificationTarget);
+							identificationTarget = null;
+						} catch(ReferenceMustNotBeNullException e) {
+							logger.warn(e);
+						}
+					} else if(line.startsWith(RetentionIndexSupport.RETENTION_INDEX_MARKER)) {
+						if(identificationTarget == null) {
+							identificationTarget = createIdentificationTarget(RetentionIndexSupport.RETENTION_INDEX_MARKER);
+							retentionIndexSupport.extract(identificationTarget, line);
+						}
+					} else if(line.startsWith(XYDATA_MARKER_SPACE) || line.startsWith(XYDATA_MARKER_SHORT)) {
+						/*
+						 * Mark to read ions.
+						 */
+						readIons = true;
+						readIonsSpace = false;
+						if(line.startsWith(XYDATA_MARKER_SPACE)) {
+							readIonsSpace = true;
+						}
+					} else if(!line.startsWith(HEADER_MARKER) && readIons) {
+						/*
+						 * Parse the ions.
+						 */
+						try {
+							line = line.trim();
+							if(readIonsSpace) {
+								String[] values = line.split(ION_DELIMITER_COMMA);
+								if(values.length == 2) {
+									double mz = Double.parseDouble(values[0].trim());
+									float abundance = Float.parseFloat(values[1].trim());
+									IVendorIon ion = new VendorIon(mz, abundance);
+									massSpectrum.addIon(ion);
+								}
+							} else {
+								String[] values = line.split(ION_DELIMITER_WHITESPACE);
+								if(values.length == 2) {
+									double mz = Double.parseDouble(values[0].trim());
+									float abundance = Float.parseFloat(values[1].trim());
+									IVendorIon ion = new VendorIon(mz, abundance);
+									massSpectrum.addIon(ion);
+								}
+							}
+						} catch(NumberFormatException e) {
+							logger.warn(e);
+						}
 					}
-					chromatogram.addScan(massSpectrum);
 				}
-				/*
-				 * Create a new scan.
-				 */
-				massSpectrum = new VendorScan();
-				totalSignalFromFile = 0.0f;
-				readIons = false;
-				/*
-				 * Read the next line.
-				 */
-				continue;
-			} else if(line.startsWith(HEADER_MASSFINDER_3)) {
-				adjustTotalSignal = true;
-			} else if(line.startsWith(HEADER_MASSFINDER_4)) {
-				adjustTotalSignal = false;
 			}
 			/*
-			 * Read the scan data.
-			 * The SCAN_MARKER section has been accessed.
+			 * Add the last scan.
 			 */
 			if(massSpectrum != null) {
-				/*
-				 * Parse the scan data
-				 */
-				if(line.startsWith(RETENTION_TIME_MARKER) || line.startsWith(TIME_MARKER)) {
-					retentionTime = getRetentionTime(line);
-					massSpectrum.setRetentionTime(retentionTime);
-				} else if(line.startsWith(TIC_MARKER)) {
-					String value = line.replace(TIC_MARKER, "").trim();
-					totalSignalFromFile = Float.parseFloat(value);
-				} else if(line.startsWith(NAME_MARKER)) {
-					/*
-					 * Try to get the identification.
-					 */
-					String name = line.replace(NAME_MARKER, "").trim();
-					ILibraryInformation libraryInformation = new LibraryInformation();
-					libraryInformation.setName(name);
-					libraryInformation.setComments("JCAMP-DX");
-					IComparisonResult comparisonResult = new ComparisonResult(IComparisonResult.MAX_MATCH_FACTOR, IComparisonResult.MAX_REVERSE_MATCH_FACTOR, 0.0f, 0.0f);
-					try {
-						massSpectrum.getTargets().add(new IdentificationTarget(libraryInformation, comparisonResult));
-					} catch(ReferenceMustNotBeNullException e) {
-						logger.warn(e);
-					}
-				} else if(line.startsWith(XYDATA_MARKER_SPACE) || line.startsWith(XYDATA_MARKER_SHORT)) {
-					/*
-					 * Mark to read ions.
-					 */
-					readIons = true;
-					readIonsSpace = false;
-					if(line.startsWith(XYDATA_MARKER_SPACE)) {
-						readIonsSpace = true;
-					}
-				} else if(!line.startsWith(HEADER_MARKER) && readIons) {
-					/*
-					 * Parse the ions.
-					 */
-					try {
-						line = line.trim();
-						if(readIonsSpace) {
-							String[] values = line.split(ION_DELIMITER_COMMA);
-							if(values.length == 2) {
-								double mz = Double.parseDouble(values[0].trim());
-								float abundance = Float.parseFloat(values[1].trim());
-								ion = new VendorIon(mz, abundance);
-								massSpectrum.addIon(ion);
-							}
-						} else {
-							String[] values = line.split(ION_DELIMITER_WHITESPACE);
-							if(values.length == 2) {
-								double mz = Double.parseDouble(values[0].trim());
-								float abundance = Float.parseFloat(values[1].trim());
-								ion = new VendorIon(mz, abundance);
-								massSpectrum.addIon(ion);
-							}
-						}
-					} catch(NumberFormatException e) {
-						logger.warn(e);
-					}
+				if(adjustTotalSignal && totalSignalFromFile != 0.0d) {
+					massSpectrum.adjustTotalSignal(totalSignalFromFile);
 				}
+				chromatogram.addScan(massSpectrum);
 			}
+			/*
+			 * Set the scan delay and interval
+			 * file and converter id.
+			 */
+			chromatogram.setFile(file);
+			ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
+			chromatogram.setConverterId(CONVERTER_ID_MSD);
 		}
-		/*
-		 * Add the last scan.
-		 */
-		if(massSpectrum != null) {
-			if(adjustTotalSignal && totalSignalFromFile != 0.0d) {
-				massSpectrum.adjustTotalSignal(totalSignalFromFile);
-			}
-			chromatogram.addScan(massSpectrum);
-		}
-		/*
-		 * Set the scan delay and interval
-		 * file and converter id.
-		 */
-		chromatogram.setFile(file);
-		ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
-		chromatogram.setConverterId(CONVERTER_ID_MSD);
-		/*
-		 * Close the streams
-		 */
-		bufferedReader.close();
-		fileReader.close();
 
 		return chromatogram;
+	}
+
+	private IIdentificationTarget createIdentificationTarget(String name) {
+
+		ILibraryInformation libraryInformation = new LibraryInformation();
+		libraryInformation.setName(name);
+		libraryInformation.setComments("JCAMP-DX");
+		IComparisonResult comparisonResult = new ComparisonResult(IComparisonResult.MAX_MATCH_FACTOR, IComparisonResult.MAX_REVERSE_MATCH_FACTOR, 0.0f, 0.0f);
+
+		return new IdentificationTarget(libraryInformation, comparisonResult);
 	}
 
 	private IChromatogramMSD readChromatogramOverview(File file, IProgressMonitor monitor) throws IOException {
 
 		IVendorChromatogram chromatogram = new VendorChromatogram();
-
-		FileReader fileReader = new FileReader(file);
-		BufferedReader bufferedReader = new BufferedReader(fileReader);
-		String line;
-		boolean retentionTimeIsAvailable = false;
-		int retentionTime = 0;
-		/*
-		 * Parse each line
-		 */
-		while((line = bufferedReader.readLine()) != null) {
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+			String line;
+			boolean retentionTimeIsAvailable = false;
+			int retentionTime = 0;
 			/*
-			 * Extract the TIC values
-			 * ##RETENTION_TIME= 2.90
-			 * ##TIC= 3875
+			 * Parse each line
 			 */
-			if(line.startsWith(RETENTION_TIME_MARKER) || line.startsWith(TIME_MARKER)) {
-				retentionTime = getRetentionTime(line);
-				retentionTimeIsAvailable = true;
-			} else {
+			while((line = bufferedReader.readLine()) != null) {
 				/*
-				 * Set a tic value only if a retention time is available.
+				 * Extract the TIC values
+				 * ##RETENTION_TIME= 2.90
+				 * ##TIC= 3875
 				 */
-				if(line.startsWith(TIC_MARKER) && retentionTimeIsAvailable) {
-					try {
-						String value = line.replace(TIC_MARKER, "").trim();
-						float abundance = Float.parseFloat(value);
-						IVendorIon ion = new VendorIon(AbstractIon.TIC_ION);
-						ion.setAbundance(abundance);
-						IVendorScan massSpectrum = new VendorScan();
-						/*
-						 * Set retentionTimeIsAvailable = false
-						 * to wait for the next retention
-						 * time event and to avoid setting
-						 * a wrong retention time for the
-						 * current scan.
-						 */
-						massSpectrum.setRetentionTime(retentionTime);
-						retentionTimeIsAvailable = false;
+				if(line.startsWith(RETENTION_TIME_MARKER) || line.startsWith(TIME_MARKER)) {
+					retentionTime = getRetentionTime(line);
+					retentionTimeIsAvailable = true;
+				} else {
+					/*
+					 * Set a TIC value only if a retention time is available.
+					 */
+					if(line.startsWith(TIC_MARKER) && retentionTimeIsAvailable) {
+						try {
+							String value = line.replace(TIC_MARKER, "").trim();
+							float abundance = Float.parseFloat(value);
+							IVendorIon ion = new VendorIon(AbstractIon.TIC_ION);
+							ion.setAbundance(abundance);
+							IVendorScan massSpectrum = new VendorScan();
+							/*
+							 * Set retentionTimeIsAvailable = false
+							 * to wait for the next retention
+							 * time event and to avoid setting
+							 * a wrong retention time for the
+							 * current scan.
+							 */
+							massSpectrum.setRetentionTime(retentionTime);
+							retentionTimeIsAvailable = false;
 
-						if(retentionTime >= 0) {
-							massSpectrum.addIon(ion);
-							chromatogram.addScan(massSpectrum);
+							if(retentionTime >= 0) {
+								massSpectrum.addIon(ion);
+								chromatogram.addScan(massSpectrum);
+							}
+						} catch(NumberFormatException e) {
+							logger.warn(e);
 						}
-					} catch(NumberFormatException e) {
-						logger.warn(e);
 					}
 				}
 			}
 		}
-		/*
-		 * Close the streams
-		 */
-		bufferedReader.close();
-		fileReader.close();
 
 		return chromatogram;
 	}
@@ -309,33 +332,31 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 		} catch(NumberFormatException e) {
 			logger.warn(e);
 		}
+
 		return retentionTime;
 	}
 
 	private boolean isValidFileFormat(File file) throws IOException {
 
 		boolean isValidFormat = false;
-		FileReader fileReader = new FileReader(file);
-		BufferedReader bufferedReader = new BufferedReader(fileReader);
-		String line = bufferedReader.readLine();
-		/*
-		 * Check the first column header.
-		 */
-		if(line.startsWith(HEADER_TITLE) || line.startsWith(HEADER_PROGRAM)) {
-			boolean readIons = false;
-			exitloop:
-			while((line = bufferedReader.readLine()) != null) {
-				if(line.startsWith(XYDATA_MARKER_SPACE) || line.startsWith(XYDATA_MARKER_SHORT)) {
-					readIons = true;
-				} else if(!line.startsWith(HEADER_MARKER) && readIons) {
-					isValidFormat = true;
-					break exitloop;
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+			/*
+			 * Check the first column header.
+			 */
+			String line = bufferedReader.readLine();
+			if(line.startsWith(HEADER_TITLE) || line.startsWith(HEADER_PROGRAM)) {
+				boolean readIons = false;
+				exitloop:
+				while((line = bufferedReader.readLine()) != null) {
+					if(line.startsWith(XYDATA_MARKER_SPACE) || line.startsWith(XYDATA_MARKER_SHORT)) {
+						readIons = true;
+					} else if(!line.startsWith(HEADER_MARKER) && readIons) {
+						isValidFormat = true;
+						break exitloop;
+					}
 				}
 			}
 		}
-
-		bufferedReader.close();
-		fileReader.close();
 
 		return isValidFormat;
 	}

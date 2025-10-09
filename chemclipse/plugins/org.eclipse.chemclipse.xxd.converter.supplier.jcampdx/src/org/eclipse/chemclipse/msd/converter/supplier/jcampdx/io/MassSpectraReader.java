@@ -22,10 +22,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.chemclipse.logging.core.Logger;
-import org.eclipse.chemclipse.model.columns.ISeparationColumn;
-import org.eclipse.chemclipse.model.columns.SeparationColumnFactory;
 import org.eclipse.chemclipse.model.core.AbstractChromatogram;
-import org.eclipse.chemclipse.model.identifier.ColumnIndexMarker;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.identifier.LibraryInformation;
 import org.eclipse.chemclipse.msd.converter.io.AbstractMassSpectraReader;
@@ -36,9 +33,7 @@ import org.eclipse.chemclipse.msd.converter.supplier.jcampdx.model.VendorIon;
 import org.eclipse.chemclipse.msd.converter.supplier.jcampdx.model.VendorLibraryMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.implementation.MassSpectra;
-import org.eclipse.chemclipse.support.model.SeparationColumnType;
 import org.eclipse.chemclipse.xxd.converter.supplier.jcampdx.internal.preferences.PreferenceSupplierMSD;
-import org.eclipse.chemclipse.xxd.converter.supplier.jcampdx.preferences.PreferenceSupplier;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public class MassSpectraReader extends AbstractMassSpectraReader implements IMassSpectraReader {
@@ -55,7 +50,6 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 	private static final String HEADER_PROGRAM_MASSFINDER_300 = "##PROGRAM=MassFinder3";
 	private static final String RETENTION_TIME_MARKER = "##RETENTION_TIME=";
 	private static final String RETENTION_INDEX_MARKER = "##$RETENTION INDEX=";
-	private static final String RETENTION_INDEX = "##RI";
 	private static final String RETENTIONINDEX = "##RETENTIONINDEX=";
 	private static final String CAS_REGISTRY_NO = "##CAS REGISTRY NO=";
 	private static final String CAS_NAME = "##CAS NAME=";
@@ -76,7 +70,6 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 	private static final String PEAK_TABLE_MARKER_TYPE2 = "##PEAK TABLE= (XY..XY)";
 
 	private static final Pattern ION_PATTERN = Pattern.compile("(\\d+\\.?\\d{0,5})(.*?)(\\d+\\.?\\d{0,5})");
-	private static final Pattern RETENTION_INDEX_PATTERN = Pattern.compile("(RI)([0-3]?)(=)(.*)");
 
 	@Override
 	public IMassSpectra read(File file, IProgressMonitor monitor) throws IOException {
@@ -85,6 +78,7 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 			boolean isNameMarkerAvailable = isNameMarkerAvailable(file);
 			return extractMassSpectra(file, isNameMarkerAvailable, monitor);
 		}
+
 		return null;
 	}
 
@@ -93,190 +87,150 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 		String referenceIdentifierMarker = PreferenceSupplierMSD.getReferenceIdentifierMarker();
 		String referenceIdentifierPrefix = PreferenceSupplierMSD.getReferenceIdentifierPrefix();
 
+		RetentionIndexSupport retentionIndexSupport = new RetentionIndexSupport();
 		IMassSpectra massSpectra = new MassSpectra();
-		IVendorLibraryMassSpectrum massSpectrum = null;
-		IVendorIon ion;
 
-		try (FileReader fileReader = new FileReader(file)) {
-			try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-				String line;
-				boolean readIons = false;
-				Set<String> synonyms = null;
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+			String line;
+			boolean readIons = false;
+			Set<String> synonyms = null;
+			IVendorLibraryMassSpectrum massSpectrum = null;
+			/*
+			 * Parse each line
+			 */
+			while((line = bufferedReader.readLine()) != null) {
+				if(monitor.isCanceled()) {
+					return massSpectra;
+				}
 				/*
-				 * Parse each line
+				 * Strip line comments
 				 */
-				while((line = bufferedReader.readLine()) != null) {
-					if(monitor.isCanceled()) {
-						return massSpectra;
-					}
+				if(line.contains(COMMENT_MARKER)) {
+					line = line.substring(0, line.indexOf(COMMENT_MARKER));
+				}
+				/*
+				 * Each scan starts with the marker:
+				 * ##SCAN_NUMBER= 1
+				 * ##RETENTION_TIME= 1.78
+				 * ##NPOINTS= 3
+				 * ##XYDATA= (XY..XY)
+				 * 40.01681, 4352
+				 * 41.07158, 221
+				 * 44.05768, 36
+				 * ...
+				 */
+				if(addNewMassSpectrum(line, isNameMarkerAvailable)) {
 					/*
-					 * Strip line comments
+					 * Try to get the identification.
 					 */
-					if(line.contains(COMMENT_MARKER)) {
-						line = line.substring(0, line.indexOf(COMMENT_MARKER));
-					}
-					/*
-					 * Each scan starts with the marker:
-					 * ##SCAN_NUMBER= 1
-					 * ##RETENTION_TIME= 1.78
-					 * ##NPOINTS= 3
-					 * ##XYDATA= (XY..XY)
-					 * 40.01681, 4352
-					 * 41.07158, 221
-					 * 44.05768, 36
-					 * ...
-					 */
-					if(addNewMassSpectrum(line, isNameMarkerAvailable)) {
-						/*
-						 * Try to get the identification.
-						 */
-						String name;
-						if(isNameMarkerAvailable) {
-							if(line.startsWith(NAME_MARKER)) {
-								name = line.replace(NAME_MARKER, "").trim();
-							} else {
-								name = line.replace(NAMES_MARKER, "").trim();
-								synonyms = new HashSet<>();
-							}
+					String name;
+					if(isNameMarkerAvailable) {
+						if(line.startsWith(NAME_MARKER)) {
+							name = line.replace(NAME_MARKER, "").trim();
 						} else {
-							name = line.replace(TITLE_MARKER, "").trim();
+							name = line.replace(NAMES_MARKER, "").trim();
+							synonyms = new HashSet<>();
 						}
-						/*
-						 * Store an existing scan.
-						 */
-						if(massSpectrum != null && !massSpectrum.getIons().isEmpty()) {
-							massSpectra.addMassSpectrum(massSpectrum);
-						}
-						/*
-						 * Create a new scan.
-						 */
-						massSpectrum = new VendorLibraryMassSpectrum();
-						ILibraryInformation libraryInformation = new LibraryInformation();
-						libraryInformation.setName(name);
-						libraryInformation.setComments("JCAMP-DX");
-						massSpectrum.setLibraryInformation(libraryInformation);
-
-						readIons = false;
-						/*
-						 * Read the next line.
-						 */
-						continue;
+					} else {
+						name = line.replace(TITLE_MARKER, "").trim();
 					}
 					/*
-					 * Read the scan data.
-					 * The SCAN_MARKER section has been accessed.
+					 * Store an existing scan.
 					 */
-					if(massSpectrum != null) {
-						/*
-						 * Parse the scan data
-						 */
-						if(line.startsWith(RETENTION_TIME_MARKER) || line.startsWith(TIME_MARKER)) {
-							int retentionTime = getRetentionTime(line);
-							massSpectrum.setRetentionTime(retentionTime);
-						} else if(line.startsWith(RETENTION_INDEX_MARKER)) {
-							float retentionIndex = getRetentionIndex(line, RETENTION_INDEX_MARKER);
-							massSpectrum.setRetentionIndex(retentionIndex);
-						} else if(line.startsWith(RETENTION_INDEX)) {
-							/*
-							 * Variations:
-							 * ##RI=
-							 * ##RI1=
-							 * ##RI2=
-							 * ...
-							 */
-							Matcher matcher = RETENTION_INDEX_PATTERN.matcher(line);
-							if(matcher.find()) {
-								String position = matcher.group(2);
-								String value = matcher.group(4);
-								int index = position.isEmpty() ? 0 : Integer.parseInt(position);
-								float retentionIndex = getRetentionIndex(value);
-								SeparationColumnType separationColumnType;
-								switch(index) {
-									case 1:
-										separationColumnType = PreferenceSupplier.getSeparationColumnTypeRetentionIndex1();
-										break;
-									case 2:
-										separationColumnType = PreferenceSupplier.getSeparationColumnTypeRetentionIndex2();
-										break;
-									case 3:
-										separationColumnType = PreferenceSupplier.getSeparationColumnTypeRetentionIndex3();
-										break;
-									default:
-										separationColumnType = SeparationColumnType.DEFAULT;
-										break;
-								}
-								/*
-								 * Set Retention Index
-								 */
-								if(SeparationColumnType.DEFAULT.equals(separationColumnType)) {
-									massSpectrum.setRetentionIndex(retentionIndex);
-								} else {
-									ISeparationColumn separationColumn = SeparationColumnFactory.getSeparationColumn(separationColumnType);
-									massSpectrum.getLibraryInformation().add(new ColumnIndexMarker(separationColumn, retentionIndex));
-									massSpectrum.setRetentionIndex(separationColumnType, retentionIndex);
-								}
-							}
-						} else if(line.startsWith(RETENTIONINDEX)) {
-							float retentionIndex = getRetentionIndex(line, RETENTIONINDEX);
-							massSpectrum.setRetentionIndex(retentionIndex);
-						} else if(line.startsWith(CAS_REGISTRY_NO)) {
-							String casNumber = line.replace(CAS_REGISTRY_NO, "").trim();
-							massSpectrum.getLibraryInformation().setCasNumber(casNumber);
-						} else if(line.startsWith(COMMENT)) {
-							String comment = line.replace(COMMENT, "").trim();
-							massSpectrum.getLibraryInformation().setComments(comment);
-						} else if(line.startsWith(FORMULA)) {
-							String formula = line.replace(FORMULA, "").trim();
-							massSpectrum.getLibraryInformation().setFormula(formula);
-						} else if(line.startsWith(CAS_NAME)) {
-							String name = line.replace(CAS_NAME, "").trim();
-							extractNameAndReferenceIdentifier(massSpectrum, name, referenceIdentifierMarker, referenceIdentifierPrefix);
-						} else if(line.startsWith(CAS)) {
-							String casNumber = line.replace(CAS, "").trim();
-							massSpectrum.getLibraryInformation().setCasNumber(casNumber);
-						} else if(line.startsWith(MOL_WEIGHT)) {
-							double molWeight = getMolWeight(line);
-							massSpectrum.getLibraryInformation().setMolWeight(molWeight);
-						} else if(line.startsWith(MOL_FORM)) {
-							String formula = line.replace(MOL_FORM, "").trim();
-							massSpectrum.getLibraryInformation().setFormula(formula);
-						} else if(isReadIons(line)) {
-							/*
-							 * Mark to read ions.
-							 */
-							readIons = true;
-						} else if(!line.startsWith(HEADER_MARKER) && readIons) {
-							/*
-							 * Parse the ions.
-							 */
-							try {
-								Matcher ions = ION_PATTERN.matcher(line.trim());
-								while(ions.find()) {
-									double mz = Double.parseDouble(ions.group(1));
-									float abundance = Float.parseFloat(ions.group(3));
-									ion = new VendorIon(mz, abundance);
-									massSpectrum.addIon(ion);
-								}
-							} catch(NumberFormatException e) {
-								logger.warn(e);
-							}
-						} else if(!line.startsWith(HEADER_MARKER) && synonyms != null) {
-							synonyms.add(line.trim());
-						}
+					if(massSpectrum != null && !massSpectrum.getIons().isEmpty()) {
+						massSpectra.addMassSpectrum(massSpectrum);
 					}
-				}
-				if(synonyms != null) {
-					massSpectrum.getLibraryInformation().setSynonyms(synonyms);
+					/*
+					 * Create a new scan.
+					 */
+					massSpectrum = new VendorLibraryMassSpectrum();
+					ILibraryInformation libraryInformation = new LibraryInformation();
+					libraryInformation.setName(name);
+					libraryInformation.setComments("JCAMP-DX");
+					massSpectrum.setLibraryInformation(libraryInformation);
+
+					readIons = false;
+					/*
+					 * Read the next line.
+					 */
+					continue;
 				}
 				/*
-				 * Add the last scan.
+				 * Read the scan data.
+				 * The SCAN_MARKER section has been accessed.
 				 */
-				if(massSpectrum != null && !massSpectrum.getIons().isEmpty()) {
-					massSpectra.addMassSpectrum(massSpectrum);
+				if(massSpectrum != null) {
+					/*
+					 * Parse the scan data
+					 */
+					if(line.startsWith(RETENTION_TIME_MARKER) || line.startsWith(TIME_MARKER)) {
+						int retentionTime = getRetentionTime(line);
+						massSpectrum.setRetentionTime(retentionTime);
+					} else if(line.startsWith(RETENTION_INDEX_MARKER)) {
+						float retentionIndex = getRetentionIndex(line, RETENTION_INDEX_MARKER);
+						massSpectrum.setRetentionIndex(retentionIndex);
+					} else if(line.startsWith(RetentionIndexSupport.RETENTION_INDEX_MARKER)) {
+						retentionIndexSupport.extract(massSpectrum, line);
+					} else if(line.startsWith(RETENTIONINDEX)) {
+						float retentionIndex = getRetentionIndex(line, RETENTIONINDEX);
+						massSpectrum.setRetentionIndex(retentionIndex);
+					} else if(line.startsWith(CAS_REGISTRY_NO)) {
+						String casNumber = line.replace(CAS_REGISTRY_NO, "").trim();
+						massSpectrum.getLibraryInformation().setCasNumber(casNumber);
+					} else if(line.startsWith(COMMENT)) {
+						String comment = line.replace(COMMENT, "").trim();
+						massSpectrum.getLibraryInformation().setComments(comment);
+					} else if(line.startsWith(FORMULA)) {
+						String formula = line.replace(FORMULA, "").trim();
+						massSpectrum.getLibraryInformation().setFormula(formula);
+					} else if(line.startsWith(CAS_NAME)) {
+						String name = line.replace(CAS_NAME, "").trim();
+						extractNameAndReferenceIdentifier(massSpectrum, name, referenceIdentifierMarker, referenceIdentifierPrefix);
+					} else if(line.startsWith(CAS)) {
+						String casNumber = line.replace(CAS, "").trim();
+						massSpectrum.getLibraryInformation().setCasNumber(casNumber);
+					} else if(line.startsWith(MOL_WEIGHT)) {
+						double molWeight = getMolWeight(line);
+						massSpectrum.getLibraryInformation().setMolWeight(molWeight);
+					} else if(line.startsWith(MOL_FORM)) {
+						String formula = line.replace(MOL_FORM, "").trim();
+						massSpectrum.getLibraryInformation().setFormula(formula);
+					} else if(isReadIons(line)) {
+						/*
+						 * Mark to read ions.
+						 */
+						readIons = true;
+					} else if(!line.startsWith(HEADER_MARKER) && readIons) {
+						/*
+						 * Parse the ions.
+						 */
+						try {
+							Matcher ions = ION_PATTERN.matcher(line.trim());
+							while(ions.find()) {
+								double mz = Double.parseDouble(ions.group(1));
+								float abundance = Float.parseFloat(ions.group(3));
+								IVendorIon ion = new VendorIon(mz, abundance);
+								massSpectrum.addIon(ion);
+							}
+						} catch(NumberFormatException e) {
+							logger.warn(e);
+						}
+					} else if(!line.startsWith(HEADER_MARKER) && synonyms != null) {
+						synonyms.add(line.trim());
+					}
 				}
-				massSpectra.setName(file.getName());
-				massSpectra.setConverterId(CONVERTER_ID_MSD_LIBRARY);
 			}
+			if(synonyms != null) {
+				massSpectrum.getLibraryInformation().setSynonyms(synonyms);
+			}
+			/*
+			 * Add the last scan.
+			 */
+			if(massSpectrum != null && !massSpectrum.getIons().isEmpty()) {
+				massSpectra.addMassSpectrum(massSpectrum);
+			}
+			massSpectra.setName(file.getName());
+			massSpectra.setConverterId(CONVERTER_ID_MSD_LIBRARY);
 		}
 
 		return massSpectra;
@@ -298,6 +252,7 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 				return true;
 			}
 		}
+
 		return false;
 	}
 
@@ -319,18 +274,8 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 		} catch(NumberFormatException e) {
 			logger.warn(e);
 		}
+
 		return retentionTime;
-	}
-
-	private float getRetentionIndex(String value) {
-
-		float retentionIndex = 0;
-		try {
-			retentionIndex = (float)(Double.parseDouble(value.trim()));
-		} catch(NumberFormatException e) {
-			logger.warn(e);
-		}
-		return retentionIndex;
 	}
 
 	private float getRetentionIndex(String line, String marker) {
@@ -344,6 +289,7 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 		} catch(NumberFormatException e) {
 			logger.warn(e);
 		}
+
 		return retentionIndex;
 	}
 
@@ -358,22 +304,21 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 		} catch(NumberFormatException e) {
 			logger.warn(e);
 		}
+
 		return molWeight;
 	}
 
 	private boolean isValidFileFormat(File file) throws IOException {
 
-		try (FileReader fileReader = new FileReader(file)) {
-			try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-				/*
-				 * Check the first column header.
-				 */
-				String line = bufferedReader.readLine();
-				if(line.startsWith(HEADER_TITLE) || line.startsWith(HEADER_VERSION) || line.startsWith(HEADER_PROGRAM_MASSFINDER_193) || line.startsWith(HEADER_PROGRAM_MASSFINDER_230) || line.startsWith(HEADER_PROGRAM_MASSFINDER_300)) {
-					return true;
-				} else {
-					return false;
-				}
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+			/*
+			 * Check the first column header.
+			 */
+			String line = bufferedReader.readLine();
+			if(line.startsWith(HEADER_TITLE) || line.startsWith(HEADER_VERSION) || line.startsWith(HEADER_PROGRAM_MASSFINDER_193) || line.startsWith(HEADER_PROGRAM_MASSFINDER_230) || line.startsWith(HEADER_PROGRAM_MASSFINDER_300)) {
+				return true;
+			} else {
+				return false;
 			}
 		}
 	}
@@ -381,22 +326,21 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 	private boolean isNameMarkerAvailable(File file) throws IOException {
 
 		boolean nameMarkerAvailable = false;
-		try (FileReader fileReader = new FileReader(file)) {
-			try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-				/*
-				 * Check the first column header.
-				 */
-				String line;
-				exitloop:
-				while((line = bufferedReader.readLine()) != null) {
-					if(line.startsWith(NAME_MARKER) || line.startsWith(NAMES_MARKER)) {
-						nameMarkerAvailable = true;
-						break exitloop;
-					}
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+			/*
+			 * Check the first column header.
+			 */
+			String line;
+			exitloop:
+			while((line = bufferedReader.readLine()) != null) {
+				if(line.startsWith(NAME_MARKER) || line.startsWith(NAMES_MARKER)) {
+					nameMarkerAvailable = true;
+					break exitloop;
 				}
-
 			}
+
 		}
+
 		return nameMarkerAvailable;
 	}
 }

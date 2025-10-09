@@ -56,7 +56,7 @@ public class Heptane_2_ITest {
 	public void test02() {
 
 		IScanMSD scanMSD = massSpectra.getMassSpectrum(1);
-		assertEquals(0.0f, scanMSD.getRetentionIndex());
+		assertEquals(700.0f, scanMSD.getRetentionIndex());
 		assertEquals(0.0f, scanMSD.getRetentionIndex(SeparationColumnType.NON_POLAR));
 		assertEquals(700.0f, scanMSD.getRetentionIndex(SeparationColumnType.POLAR));
 		assertEquals(0.0f, scanMSD.getRetentionIndex(SeparationColumnType.SEMI_POLAR));

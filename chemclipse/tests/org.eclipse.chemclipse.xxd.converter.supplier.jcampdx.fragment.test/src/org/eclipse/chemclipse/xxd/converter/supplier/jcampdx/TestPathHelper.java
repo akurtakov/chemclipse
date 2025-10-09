@@ -39,4 +39,8 @@ public class TestPathHelper extends PathResolver {
 	public static final String HEPTANE_2 = "testData/Heptane_2.JDX";
 	public static final String HEPTANE_3 = "testData/Heptane_3.JDX";
 	public static final String HEPTANE_X = "testData/Heptane_X.JDX";
+	/*
+	 * GC-MS
+	 */
+	public static final String CHROMATOGRAM_01 = "testData/Chromatogram_01.jdx";
 }
