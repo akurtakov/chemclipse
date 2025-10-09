@@ -17,7 +17,6 @@ import org.eclipse.chemclipse.support.ui.preferences.fieldeditors.SpacerFieldEdi
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.jface.preference.BooleanFieldEditor;
-import org.eclipse.jface.preference.ColorFieldEditor;
 import org.eclipse.jface.preference.ComboFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.swtchart.extensions.charts.ChartOptions;
@@ -43,25 +42,19 @@ public class PreferencePageQuantitationAxes extends FieldEditorPreferencePage im
 		addField(new LabelFieldEditor("Concentration", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_SHOW_X_AXIS_CONCENTRATION_CALIBRATION, "Show X Axis (Concentration)", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_POSITION_X_AXIS_CONCENTRATION_CALIBRATION, "Position X Axis (Concentration):", ChartOptions.POSITIONS, getFieldEditorParent()));
-		addField(new ColorFieldEditor(PreferenceSupplier.P_COLOR_X_AXIS_CONCENTRATION_CALIBRATION, "Color X Axis (Concentration):", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_GRIDLINE_STYLE_X_AXIS_CONCENTRATION_CALIBRATION, "GridLine Style X Axis (Concentration):", ChartOptions.LINE_STYLES, getFieldEditorParent()));
-		addField(new ColorFieldEditor(PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_CONCENTRATION_CALIBRATION, "GridLine Color X Axis (Concentration):", getFieldEditorParent()));
 
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Response", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_SHOW_Y_AXIS_RESPONSE_CALIBRATION, "Show Y Axis (Response)", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_POSITION_Y_AXIS_RESPONSE_CALIBRATION, "Position Y Axis (Response):", ChartOptions.POSITIONS, getFieldEditorParent()));
-		addField(new ColorFieldEditor(PreferenceSupplier.P_COLOR_Y_AXIS_RESPONSE_CALIBRATION, "Color Y Axis (Response):", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_GRIDLINE_STYLE_Y_AXIS_RESPONSE_CALIBRATION, "GridLine Style Y Axis (Response):", ChartOptions.LINE_STYLES, getFieldEditorParent()));
-		addField(new ColorFieldEditor(PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_RESPONSE_CALIBRATION, "GridLine Color Y Axis (Response):", getFieldEditorParent()));
 
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Response%", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_SHOW_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION, "Show Y Axis (Response %)", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_POSITION_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION, "Position Y Axis (Response %):", ChartOptions.POSITIONS, getFieldEditorParent()));
-		addField(new ColorFieldEditor(PreferenceSupplier.P_COLOR_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION, "Color Y Axis (Response %):", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_GRIDLINE_STYLE_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION, "GridLine Style Y Axis (Response %):", ChartOptions.LINE_STYLES, getFieldEditorParent()));
-		addField(new ColorFieldEditor(PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION, "GridLine Color Y Axis (Response %):", getFieldEditorParent()));
 	}
 
 	@Override

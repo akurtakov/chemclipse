@@ -18,11 +18,13 @@ import java.util.List;
 import java.util.Locale;
 
 import org.eclipse.chemclipse.support.text.ValueFormat;
-import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.resource.ColorRegistry;
+import org.eclipse.jface.resource.FontRegistry;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swtchart.IAxis;
 import org.eclipse.swtchart.IAxis.Position;
 import org.eclipse.swtchart.LineStyle;
@@ -34,6 +36,9 @@ import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.IPrimaryAxisSettings;
 import org.eclipse.swtchart.extensions.core.ISecondaryAxisSettings;
 import org.eclipse.swtchart.extensions.core.SecondaryAxisSettings;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.themes.ITheme;
+import org.eclipse.ui.themes.IThemeManager;
 
 public class ChartSupport {
 
@@ -80,28 +85,24 @@ public class ChartSupport {
 		chartSettings.getSecondaryAxisSettingsListY().add(secondaryAxisSettingsY);
 	}
 
-	public static void setAxisSettingsExtended(IAxisSettings axisSettings, String positionNode, String patternNode, String colorNode, String gridLineStyleNode, String gridColorNode) {
+	public static void setAxisSettingsExtended(IAxisSettings axisSettings, String positionNode, String patternNode, String gridLineStyleNode) {
 
 		String pattern = preferenceStore.getString(patternNode);
-		setAxisSettings(axisSettings, positionNode, pattern, colorNode, gridLineStyleNode, gridColorNode);
+		setAxisSettings(axisSettings, positionNode, pattern, gridLineStyleNode);
 	}
 
-	public static void setAxisSettings(IAxisSettings axisSettings, String positionNode, String pattern, String colorNode, String gridLineStyleNode, String gridColorNode) {
+	public static void setAxisSettings(IAxisSettings axisSettings, String positionNode, String pattern, String gridLineStyleNode) {
 
 		Position position = Position.valueOf(preferenceStore.getString(positionNode));
-		Color color = Colors.getColor(preferenceStore.getString(colorNode));
 		LineStyle gridLineStyle = LineStyle.valueOf(preferenceStore.getString(gridLineStyleNode));
-		Color gridColor = Colors.getColor(preferenceStore.getString(gridColorNode));
-		setAxisSettings(axisSettings, position, pattern, color, gridLineStyle, gridColor);
+		setAxisSettings(axisSettings, position, pattern, gridLineStyle);
 	}
 
-	public static void setAxisSettings(IAxisSettings axisSettings, Position position, String decimalPattern, Color color, LineStyle gridLineStyle, Color gridColor) {
+	public static void setAxisSettings(IAxisSettings axisSettings, Position position, String decimalPattern, LineStyle gridLineStyle) {
 
 		if(axisSettings != null) {
 			axisSettings.setPosition(position);
 			axisSettings.setDecimalFormat(ValueFormat.getDecimalFormatEnglish(decimalPattern));
-			axisSettings.setColor(color);
-			axisSettings.setGridColor(gridColor);
 			axisSettings.setGridLineStyle(gridLineStyle);
 		}
 	}
@@ -168,5 +169,22 @@ public class ChartSupport {
 		}
 
 		return null;
+	}
+
+	public static void themeAxis(IAxisSettings axisSettings, String part) {
+
+		IThemeManager themeManager = PlatformUI.getWorkbench().getThemeManager();
+		ITheme currentTheme = themeManager.getCurrentTheme();
+
+		ColorRegistry colorRegistry = currentTheme.getColorRegistry();
+		Color color = colorRegistry.get(ChromatogramChart.class.getName() + "." + part + ".LineColor");
+		axisSettings.setColor(color);
+
+		Color gridColor = colorRegistry.get(ChromatogramChart.class.getName() + "." + part + ".GridColor");
+		axisSettings.setGridColor(gridColor);
+
+		FontRegistry fontRegistry = currentTheme.getFontRegistry();
+		Font font = fontRegistry.get(ChromatogramChart.class.getName() + "." + part + ".Font");
+		axisSettings.setTitleFont(font);
 	}
 }

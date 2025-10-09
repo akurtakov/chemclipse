@@ -12,12 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.charts;
 
-import org.eclipse.chemclipse.swt.ui.support.Fonts;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swtchart.extensions.axisconverter.MillisecondsToMinuteConverter;
 import org.eclipse.swtchart.extensions.axisconverter.PercentageConverter;
@@ -92,13 +90,12 @@ public class PeaksChart extends LineChart {
 
 		String positionNode = PreferenceSupplier.P_POSITION_X_AXIS_MILLISECONDS_PEAKS;
 		String pattern = "0.0##";
-		String colorNode = PreferenceSupplier.P_COLOR_X_AXIS_MILLISECONDS_PEAKS;
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_X_AXIS_MILLISECONDS_PEAKS;
-		String gridColorNode = PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_MILLISECONDS_PEAKS;
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_MILLISECONDS_PEAKS);
 
-		ChartSupport.setAxisSettings(primaryAxisSettingsX, positionNode, pattern, colorNode, gridLineStyleNode, gridColorNode);
+		ChartSupport.setAxisSettings(primaryAxisSettingsX, positionNode, pattern, gridLineStyleNode);
 		primaryAxisSettingsX.setVisible(isShowAxis);
+		ChartSupport.themeAxis(primaryAxisSettingsX, "XAxisMilliseconds");
 	}
 
 	private void modifyYAxisResponse() {
@@ -109,13 +106,13 @@ public class PeaksChart extends LineChart {
 
 		String positionNode = PreferenceSupplier.P_POSITION_Y_AXIS_INTENSITY_PEAKS;
 		String pattern = "0.0#E0";
-		String colorNode = PreferenceSupplier.P_COLOR_Y_AXIS_INTENSITY_PEAKS;
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_Y_AXIS_INTENSITY_PEAKS;
-		String gridColorNode = PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_INTENSITY_PEAKS;
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_INTENSITY_PEAKS);
 
-		ChartSupport.setAxisSettings(primaryAxisSettingsY, positionNode, pattern, colorNode, gridLineStyleNode, gridColorNode);
+		ChartSupport.setAxisSettings(primaryAxisSettingsY, positionNode, pattern, gridLineStyleNode);
 		primaryAxisSettingsY.setVisible(isShowAxis);
+
+		ChartSupport.themeAxis(primaryAxisSettingsY, "YAxisResponse");
 	}
 
 	private void modifyXAxisMinutes() {
@@ -125,36 +122,29 @@ public class PeaksChart extends LineChart {
 
 		String positionNode = PreferenceSupplier.P_POSITION_X_AXIS_MINUTES_PEAKS;
 		String pattern = "0.00";
-		String colorNode = PreferenceSupplier.P_COLOR_X_AXIS_MINUTES_PEAKS;
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_X_AXIS_MINUTES_PEAKS;
-		String gridColorNode = PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_MINUTES_PEAKS;
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_MINUTES_PEAKS);
 		boolean isShowAxisTitle = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_TITLE_MINUTES);
 
 		String title = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_MINUTES);
-		String name = preferenceStore.getString(PreferenceSupplier.P_FONT_NAME_X_AXIS_MINUTES);
-		int height = preferenceStore.getInt(PreferenceSupplier.P_FONT_SIZE_X_AXIS_MINUTES);
-		int style = preferenceStore.getInt(PreferenceSupplier.P_FONT_STYLE_X_AXIS_MINUTES);
-		Font titleFont = Fonts.getCachedFont(getBaseChart().getDisplay(), name, height, style);
 
 		if(isShowAxis) {
 			if(axisSettings == null) {
 				ISecondaryAxisSettings secondaryAxisSettingsX = new SecondaryAxisSettings(title, new MillisecondsToMinuteConverter());
-				ChartSupport.setAxisSettings(secondaryAxisSettingsX, positionNode, pattern, colorNode, gridLineStyleNode, gridColorNode);
-				secondaryAxisSettingsX.setTitleFont(titleFont);
+				ChartSupport.setAxisSettings(secondaryAxisSettingsX, positionNode, pattern, gridLineStyleNode);
+				ChartSupport.themeAxis(axisSettings, "XAxisMinutes");
 				secondaryAxisSettingsX.setTitleVisible(isShowAxisTitle);
 				chartSettings.getSecondaryAxisSettingsListX().add(secondaryAxisSettingsX);
 			} else {
-				ChartSupport.setAxisSettings(axisSettings, positionNode, pattern, colorNode, gridLineStyleNode, gridColorNode);
+				ChartSupport.setAxisSettings(axisSettings, positionNode, pattern, gridLineStyleNode);
+				ChartSupport.themeAxis(axisSettings, "XAxisMinutes");
 				axisSettings.setTitle(title);
-				axisSettings.setTitleFont(titleFont);
 				axisSettings.setVisible(true);
 				axisSettings.setTitleVisible(isShowAxisTitle);
 			}
 		} else {
 			if(axisSettings != null) {
 				axisSettings.setTitle(title);
-				axisSettings.setTitleFont(titleFont);
 				axisSettings.setVisible(false);
 				axisSettings.setTitleVisible(isShowAxisTitle);
 			}
@@ -172,36 +162,30 @@ public class PeaksChart extends LineChart {
 
 		String positionNode = PreferenceSupplier.P_POSITION_Y_AXIS_RELATIVE_INTENSITY_PEAKS;
 		String pattern = "0.00";
-		String colorNode = PreferenceSupplier.P_COLOR_Y_AXIS_RELATIVE_INTENSITY_PEAKS;
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_Y_AXIS_RELATIVE_INTENSITY_PEAKS;
-		String gridColorNode = PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY_PEAKS;
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_RELATIVE_INTENSITY_PEAKS);
 		boolean isShowAxisTitle = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_TITLE_RELATIVE_INTENSITY);
 
 		String title = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
-		String name = preferenceStore.getString(PreferenceSupplier.P_FONT_NAME_Y_AXIS_RELATIVE_INTENSITY);
-		int height = preferenceStore.getInt(PreferenceSupplier.P_FONT_SIZE_Y_AXIS_RELATIVE_INTENSITY);
-		int style = preferenceStore.getInt(PreferenceSupplier.P_FONT_STYLE_Y_AXIS_RELATIVE_INTENSITY);
-		Font titleFont = Fonts.getCachedFont(getBaseChart().getDisplay(), name, height, style);
 
 		if(isShowAxis) {
 			if(axisSettings == null) {
 				ISecondaryAxisSettings secondaryAxisSettingsY = new SecondaryAxisSettings(title, new PercentageConverter(SWT.VERTICAL, true));
-				ChartSupport.setAxisSettings(secondaryAxisSettingsY, positionNode, pattern, colorNode, gridLineStyleNode, gridColorNode);
+				ChartSupport.setAxisSettings(secondaryAxisSettingsY, positionNode, pattern, gridLineStyleNode);
+				ChartSupport.themeAxis(secondaryAxisSettingsY, "YAxisRelativeResponse");
 				secondaryAxisSettingsY.setTitleVisible(isShowAxisTitle);
-				secondaryAxisSettingsY.setTitleFont(titleFont);
 				chartSettings.getSecondaryAxisSettingsListY().add(secondaryAxisSettingsY);
 			} else {
-				ChartSupport.setAxisSettings(axisSettings, positionNode, pattern, colorNode, gridLineStyleNode, gridColorNode);
+				ChartSupport.setAxisSettings(axisSettings, positionNode, pattern, gridLineStyleNode);
+				ChartSupport.themeAxis(axisSettings, "YAxisRelativeResponse");
 				axisSettings.setTitle(title);
-				axisSettings.setTitleFont(titleFont);
 				axisSettings.setVisible(true);
 				axisSettings.setTitleVisible(isShowAxisTitle);
 			}
 		} else {
 			if(axisSettings != null) {
 				axisSettings.setTitle(title);
-				axisSettings.setTitleFont(titleFont);
+				ChartSupport.themeAxis(axisSettings, "YAxisRelativeResponse");
 				axisSettings.setVisible(false);
 				axisSettings.setTitleVisible(isShowAxisTitle);
 			}

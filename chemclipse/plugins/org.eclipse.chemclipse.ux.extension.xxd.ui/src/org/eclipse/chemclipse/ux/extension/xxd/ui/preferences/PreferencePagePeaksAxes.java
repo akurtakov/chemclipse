@@ -60,17 +60,13 @@ public class PreferencePagePeaksAxes extends FieldEditorPreferencePage implement
 		addField(new LabelFieldEditor("Intensity", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_SHOW_Y_AXIS_INTENSITY_PEAKS, "Show Y Axis (Intensity)", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_POSITION_Y_AXIS_INTENSITY_PEAKS, "Position Y Axis (Intensity):", ChartOptions.POSITIONS, getFieldEditorParent()));
-		addField(new ColorFieldEditor(PreferenceSupplier.P_COLOR_Y_AXIS_INTENSITY_PEAKS, "Color Y Axis (Intensity):", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_GRIDLINE_STYLE_Y_AXIS_INTENSITY_PEAKS, "GridLine Style Y Axis (Intensity):", ChartOptions.LINE_STYLES, getFieldEditorParent()));
-		addField(new ColorFieldEditor(PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_INTENSITY_PEAKS, "GridLine Color Y Axis (Intensity):", getFieldEditorParent()));
 
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Intensity%", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_SHOW_Y_AXIS_RELATIVE_INTENSITY_PEAKS, "Show Y Axis (Intensity %)", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_POSITION_Y_AXIS_RELATIVE_INTENSITY_PEAKS, "Position Y Axis (Intensity %):", ChartOptions.POSITIONS, getFieldEditorParent()));
-		addField(new ColorFieldEditor(PreferenceSupplier.P_COLOR_Y_AXIS_RELATIVE_INTENSITY_PEAKS, "Color Y Axis (Intensity %):", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_GRIDLINE_STYLE_Y_AXIS_RELATIVE_INTENSITY_PEAKS, "GridLine Style Y Axis (Intensity %):", ChartOptions.LINE_STYLES, getFieldEditorParent()));
-		addField(new ColorFieldEditor(PreferenceSupplier.P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY_PEAKS, "GridLine Color Y Axis (Intensity %):", getFieldEditorParent()));
 	}
 
 	@Override

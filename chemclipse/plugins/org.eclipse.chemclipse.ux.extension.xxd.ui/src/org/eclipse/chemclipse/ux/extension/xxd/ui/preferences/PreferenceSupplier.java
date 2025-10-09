@@ -398,23 +398,15 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_SHOW_Y_AXIS_INTENSITY_PEAKS = true;
 	public static final String P_POSITION_Y_AXIS_INTENSITY_PEAKS = "positionYAxisIntensityPeaks";
 	public static final String DEF_POSITION_Y_AXIS_INTENSITY_PEAKS = Position.Primary.toString();
-	public static final String P_COLOR_Y_AXIS_INTENSITY_PEAKS = "colorYAxisIntensityPeaks";
-	public static final String DEF_COLOR_Y_AXIS_INTENSITY_PEAKS = "0,0,0";
 	public static final String P_GRIDLINE_STYLE_Y_AXIS_INTENSITY_PEAKS = "gridlineStyleYAxisIntensityPeaks";
 	public static final String DEF_GRIDLINE_STYLE_Y_AXIS_INTENSITY_PEAKS = LineStyle.NONE.toString();
-	public static final String P_GRIDLINE_COLOR_Y_AXIS_INTENSITY_PEAKS = "gridlineColorYAxisIntensityPeaks";
-	public static final String DEF_GRIDLINE_COLOR_Y_AXIS_INTENSITY_PEAKS = "192,192,192";
 
 	public static final String P_SHOW_Y_AXIS_RELATIVE_INTENSITY_PEAKS = "showYAxisRelativeIntensityPeaks";
 	public static final boolean DEF_SHOW_Y_AXIS_RELATIVE_INTENSITY_PEAKS = true;
 	public static final String P_POSITION_Y_AXIS_RELATIVE_INTENSITY_PEAKS = "positionYAxisRelativeIntensityPeaks";
 	public static final String DEF_POSITION_Y_AXIS_RELATIVE_INTENSITY_PEAKS = Position.Secondary.toString();
-	public static final String P_COLOR_Y_AXIS_RELATIVE_INTENSITY_PEAKS = "colorYAxisRelativeIntensityPeaks";
-	public static final String DEF_COLOR_Y_AXIS_RELATIVE_INTENSITY_PEAKS = "0,0,0";
 	public static final String P_GRIDLINE_STYLE_Y_AXIS_RELATIVE_INTENSITY_PEAKS = "gridlineStyleYAxisRelativeIntensityPeaks";
 	public static final String DEF_GRIDLINE_STYLE_Y_AXIS_RELATIVE_INTENSITY_PEAKS = LineStyle.DOT.toString();
-	public static final String P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY_PEAKS = "gridlineColorYAxisRelativeIntensityPeaks";
-	public static final String DEF_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY_PEAKS = "192,192,192";
 	/*
 	 * Targets
 	 */
@@ -639,21 +631,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_SHOW_X_AXIS_MILLISECONDS = false;
 	public static final String P_POSITION_X_AXIS_MILLISECONDS = "positionXAxisMilliseconds";
 	public static final String DEF_POSITION_X_AXIS_MILLISECONDS = Position.Secondary.toString();
-	public static final String P_COLOR_X_AXIS_MILLISECONDS = "colorXAxisMilliseconds";
-	public static final String DEF_COLOR_X_AXIS_MILLISECONDS = "0,0,0";
-	public static final String P_COLOR_X_AXIS_MILLISECONDS_DARKTHEME = "colorXAxisMillisecondsDarkTheme";
-	public static final String DEF_COLOR_X_AXIS_MILLISECONDS_DARKTHEME = "252,252,247";
-	public static final String P_FONT_NAME_X_AXIS_MILLISECONDS = "fontNameXAxisMilliseconds";
-	public static final String DEF_FONT_NAME_X_AXIS_MILLISECONDS = Resources.DEFAULT_FONT_NAME;
-	public static final String P_FONT_SIZE_X_AXIS_MILLISECONDS = "fontSizeXAxisMilliseconds";
-	public static final String P_FONT_STYLE_X_AXIS_MILLISECONDS = "fontStyleXAxisMilliseconds";
-	public static final int DEF_FONT_STYLE_X_AXIS_MILLISECONDS = SWT.BOLD;
 	public static final String P_GRIDLINE_STYLE_X_AXIS_MILLISECONDS = "gridlineStyleXAxisMilliseconds";
 	public static final String DEF_GRIDLINE_STYLE_X_AXIS_MILLISECONDS = LineStyle.NONE.toString();
-	public static final String P_GRIDLINE_COLOR_X_AXIS_MILLISECONDS = "gridlineColorXAxisMilliseconds";
-	public static final String DEF_GRIDLINE_COLOR_X_AXIS_MILLISECONDS = "192,192,192";
-	public static final String P_GRIDLINE_COLOR_X_AXIS_MILLISECONDS_DARKTHEME = "gridlineColorXAxisMillisecondsDarkTheme";
-	public static final String DEF_GRIDLINE_COLOR_X_AXIS_MILLISECONDS_DARKTHEME = "64, 64, 64";
 	public static final String P_SHOW_X_AXIS_TITLE_MILLISECONDS = "showXAxisTitleMilliseconds";
 	public static final boolean DEF_SHOW_X_AXIS_TITLE_MILLISECONDS = true;
 
@@ -665,19 +644,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_SHOW_X_AXIS_RETENTION_INDEX = false;
 	public static final String P_POSITION_X_AXIS_RETENTION_INDEX = "positionXAxisRetentionIndex";
 	public static final String DEF_POSITION_X_AXIS_RETENTION_INDEX = Position.Primary.toString();
-	public static final String P_COLOR_X_AXIS_RETENTION_INDEX = "colorXAxisRetentionIndex";
-	public static final String DEF_COLOR_X_AXIS_RETENTION_INDEX = "0,0,0";
-	public static final String P_COLOR_X_AXIS_RETENTION_INDEX_DARKTHEME = "colorXAxisRetentionIndexDarkTheme";
-	public static final String DEF_COLOR_X_AXIS_RETENTION_INDEX_DARKTHEME = "252,252,247";
-	public static final String P_FONT_NAME_X_AXIS_RETENTION_INDEX = "fontNameXAxisRetentionIndex";
-	public static final String DEF_FONT_NAME_X_AXIS_RETENTION_INDEX = Resources.DEFAULT_FONT_NAME;
-	public static final String P_FONT_SIZE_X_AXIS_RETENTION_INDEX = "fontSizeXAxisRetentionIndex";
-	public static final String P_FONT_STYLE_X_AXIS_RETENTION_INDEX = "fontStyleXAxisRetentionIndex";
-	public static final int DEF_FONT_STYLE_X_AXIS_RETENTION_INDEX = SWT.BOLD;
 	public static final String P_GRIDLINE_STYLE_X_AXIS_RETENTION_INDEX = "gridlineStyleXAxisRetentionIndex";
 	public static final String DEF_GRIDLINE_STYLE_X_AXIS_RETENTION_INDEX = LineStyle.DOT.toString();
-	public static final String P_GRIDLINE_COLOR_X_AXIS_RETENTION_INDEX = "gridlineColorXAxisRetentionIndex";
-	public static final String DEF_GRIDLINE_COLOR_X_AXIS_RETENTION_INDEX = "192,192,192";
 	public static final String P_SHOW_X_AXIS_TITLE_RETENTION_INDEX = "showXAxisTitleRetentionIndex";
 	public static final boolean DEF_SHOW_X_AXIS_TITLE_RETENTION_INDEX = true;
 
@@ -689,21 +657,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_SHOW_X_AXIS_SECONDS = false;
 	public static final String P_POSITION_X_AXIS_SECONDS = "positionXAxisSeconds";
 	public static final String DEF_POSITION_X_AXIS_SECONDS = Position.Primary.toString();
-	public static final String P_COLOR_X_AXIS_SECONDS = "colorXAxisSeconds";
-	public static final String DEF_COLOR_X_AXIS_SECONDS = "0,0,0";
-	public static final String P_COLOR_X_AXIS_SECONDS_DARKTHEME = "colorXAxisSecondsDarkTheme";
-	public static final String DEF_COLOR_X_AXIS_SECONDS_DARKTHEME = "252,252,247";
-	public static final String P_FONT_NAME_X_AXIS_SECONDS = "fontNameXAxisSeconds";
-	public static final String DEF_FONT_NAME_X_AXIS_SECONDS = Resources.DEFAULT_FONT_NAME;
-	public static final String P_FONT_SIZE_X_AXIS_SECONDS = "fontSizeXAxisSeconds";
-	public static final String P_FONT_STYLE_X_AXIS_SECONDS = "fontStyleXAxisSeconds";
-	public static final int DEF_FONT_STYLE_X_AXIS_SECONDS = SWT.BOLD;
 	public static final String P_GRIDLINE_STYLE_X_AXIS_SECONDS = "gridlineStyleXAxisSeconds";
 	public static final String DEF_GRIDLINE_STYLE_X_AXIS_SECONDS = LineStyle.NONE.toString();
-	public static final String P_GRIDLINE_COLOR_X_AXIS_SECONDS = "gridlineColorXAxisSeconds";
-	public static final String DEF_GRIDLINE_COLOR_X_AXIS_SECONDS = "192,192,192";
-	public static final String P_GRIDLINE_COLOR_X_AXIS_SECONDS_DARKTHEME = "gridlineColorXAxisSecondsDarkTheme";
-	public static final String DEF_GRIDLINE_COLOR_X_AXIS_SECONDS_DARKTHEME = "64, 64, 64";
 	public static final String P_SHOW_X_AXIS_TITLE_SECONDS = "showXAxisTitleSeconds";
 	public static final boolean DEF_SHOW_X_AXIS_TITLE_SECONDS = true;
 
@@ -715,21 +670,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_SHOW_X_AXIS_MINUTES = true;
 	public static final String P_POSITION_X_AXIS_MINUTES = "positionXAxisMinutes";
 	public static final String DEF_POSITION_X_AXIS_MINUTES = Position.Primary.toString();
-	public static final String P_COLOR_X_AXIS_MINUTES = "colorXAxisMinutes";
-	public static final String DEF_COLOR_X_AXIS_MINUTES = "0,0,0";
-	public static final String P_COLOR_X_AXIS_MINUTES_DARKTHEME = "colorXAxisMinutesDarkTheme";
-	public static final String DEF_COLOR_X_AXIS_MINUTES_DARKTHEME = "252,252,247";
-	public static final String P_FONT_NAME_X_AXIS_MINUTES = "fontNameXAxisMinutes";
-	public static final String DEF_FONT_NAME_X_AXIS_MINUTES = Resources.DEFAULT_FONT_NAME;
-	public static final String P_FONT_SIZE_X_AXIS_MINUTES = "fontSizeXAxisMinutes";
-	public static final String P_FONT_STYLE_X_AXIS_MINUTES = "fontStyleXAxisMinutes";
-	public static final int DEF_FONT_STYLE_X_AXIS_MINUTES = SWT.BOLD;
 	public static final String P_GRIDLINE_STYLE_X_AXIS_MINUTES = "gridlineStyleXAxisMinutes";
 	public static final String DEF_GRIDLINE_STYLE_X_AXIS_MINUTES = LineStyle.DOT.toString();
-	public static final String P_GRIDLINE_COLOR_X_AXIS_MINUTES = "gridlineColorXAxisMinutes";
-	public static final String DEF_GRIDLINE_COLOR_X_AXIS_MINUTES = "192,192,192";
-	public static final String P_GRIDLINE_COLOR_X_AXIS_MINUTES_DARKTHEME = "gridlineColorXAxisMinutesDarkTheme";
-	public static final String DEF_GRIDLINE_COLOR_X_AXIS_MINUTES_DARKTHEME = "64, 64, 64";
 	public static final String P_SHOW_X_AXIS_TITLE_MINUTES = "showXAxisTitleMinutes";
 	public static final boolean DEF_SHOW_X_AXIS_TITLE_MINUTES = true;
 	public static final String P_SHOW_X_AXIS_LINE_MINUTES = "showXAxisLineMinutes";
@@ -747,17 +689,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_POSITION_X_AXIS_SCANS = Position.Primary.toString();
 	public static final String P_COLOR_X_AXIS_SCANS = "colorXAxisScans";
 	public static final String DEF_COLOR_X_AXIS_SCANS = "0,0,0";
-	public static final String P_COLOR_X_AXIS_SCANS_DARKTHEME = "colorXAxisScansDarkTheme";
-	public static final String DEF_COLOR_X_AXIS_SCANS_DARKTHEME = "252,252,247";
-	public static final String P_FONT_NAME_X_AXIS_SCANS = "fontNameXAxisScans";
-	public static final String DEF_FONT_NAME_X_AXIS_SCANS = Resources.DEFAULT_FONT_NAME;
-	public static final String P_FONT_SIZE_X_AXIS_SCANS = "fontSizeXAxisScans";
-	public static final String P_FONT_STYLE_X_AXIS_SCANS = "fontStyleXAxisScans";
-	public static final int DEF_FONT_STYLE_X_AXIS_SCANS = SWT.BOLD;
 	public static final String P_GRIDLINE_STYLE_X_AXIS_SCANS = "gridlineStyleXAxisScans";
 	public static final String DEF_GRIDLINE_STYLE_X_AXIS_SCANS = LineStyle.NONE.toString();
-	public static final String P_GRIDLINE_COLOR_X_AXIS_SCANS = "gridlineColorXAxisScans";
-	public static final String DEF_GRIDLINE_COLOR_X_AXIS_SCANS = "192,192,192";
 	public static final String P_SHOW_X_AXIS_TITLE_SCANS = "showXAxisTitleScans";
 	public static final boolean DEF_SHOW_X_AXIS_TITLE_SCANS = true;
 
@@ -769,21 +702,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_SHOW_Y_AXIS_INTENSITY = true;
 	public static final String P_POSITION_Y_AXIS_INTENSITY = "positionYAxisIntensity";
 	public static final String DEF_POSITION_Y_AXIS_INTENSITY = Position.Primary.toString();
-	public static final String P_COLOR_Y_AXIS_INTENSITY = "colorYAxisIntensity";
-	public static final String DEF_COLOR_Y_AXIS_INTENSITY = "0,0,0";
-	public static final String P_COLOR_Y_AXIS_INTENSITY_DARKTHEME = "colorYAxisIntensityDarkTheme";
-	public static final String DEF_COLOR_Y_AXIS_INTENSITY_DARKTHEME = "252,252,247";
-	public static final String P_FONT_NAME_Y_AXIS_INTENSITY = "fontNameYAxisIntensity";
-	public static final String DEF_FONT_NAME_Y_AXIS_INTENSITY = Resources.DEFAULT_FONT_NAME;
-	public static final String P_FONT_SIZE_Y_AXIS_INTENSITY = "fontSizeYAxisIntensity";
-	public static final String P_FONT_STYLE_Y_AXIS_INTENSITY = "fontStyleYAxisIntensity";
-	public static final int DEF_FONT_STYLE_Y_AXIS_INTENSITY = SWT.BOLD;
 	public static final String P_GRIDLINE_STYLE_Y_AXIS_INTENSITY = "gridlineStyleYAxisIntensity";
 	public static final String DEF_GRIDLINE_STYLE_Y_AXIS_INTENSITY = LineStyle.NONE.toString();
-	public static final String P_GRIDLINE_COLOR_Y_AXIS_INTENSITY = "gridlineColorYAxisIntensity";
-	public static final String DEF_GRIDLINE_COLOR_Y_AXIS_INTENSITY = "192,192,192";
-	public static final String P_GRIDLINE_COLOR_Y_AXIS_INTENSITY_DARKTHEME = "gridlineColorYAxisIntensityDarkTheme";
-	public static final String DEF_GRIDLINE_COLOR_Y_AXIS_INTENSITY_DARKTHEME = "64, 64, 64";
 	public static final String P_SHOW_Y_AXIS_TITLE_INTENSITY = "showYAxisTitleIntensity";
 	public static final boolean DEF_SHOW_Y_AXIS_TITLE_INTENSITY = true;
 
@@ -795,21 +715,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_SHOW_Y_AXIS_RELATIVE_INTENSITY = true;
 	public static final String P_POSITION_Y_AXIS_RELATIVE_INTENSITY = "positionYAxisRelativeIntensity";
 	public static final String DEF_POSITION_Y_AXIS_RELATIVE_INTENSITY = Position.Secondary.toString();
-	public static final String P_COLOR_Y_AXIS_RELATIVE_INTENSITY = "colorYAxisRelativeIntensity";
-	public static final String DEF_COLOR_Y_AXIS_RELATIVE_INTENSITY = "0,0,0";
-	public static final String P_COLOR_Y_AXIS_RELATIVE_INTENSITY_DARKTHEME = "colorYAxisRelativeIntensityDarkTheme";
-	public static final String DEF_COLOR_Y_AXIS_RELATIVE_INTENSITY_DARKTHEME = "252,252,247";
-	public static final String P_FONT_NAME_Y_AXIS_RELATIVE_INTENSITY = "fontNameYAxisRelativeIntensity";
-	public static final String DEF_FONT_NAME_Y_AXIS_RELATIVE_INTENSITY = Resources.DEFAULT_FONT_NAME;
-	public static final String P_FONT_SIZE_Y_AXIS_RELATIVE_INTENSITY = "fontSizeYAxisRelativeIntensity";
-	public static final String P_FONT_STYLE_Y_AXIS_RELATIVE_INTENSITY = "fontStyleYAxisRelativeIntensity";
-	public static final int DEF_FONT_STYLE_Y_AXIS_RELATIVE_INTENSITY = SWT.BOLD;
 	public static final String P_GRIDLINE_STYLE_Y_AXIS_RELATIVE_INTENSITY = "gridlineStyleYAxisRelativeIntensity";
 	public static final String DEF_GRIDLINE_STYLE_Y_AXIS_RELATIVE_INTENSITY = LineStyle.DOT.toString();
-	public static final String P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY = "gridlineColorYAxisRelativeIntensity";
-	public static final String DEF_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY = "192,192,192";
-	public static final String P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY_DARKTHEME = "gridlineColorYAxisRelativeIntensityDarkTheme";
-	public static final String DEF_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY_DARKTHEME = "64, 64, 64";
 	public static final String P_SHOW_Y_AXIS_TITLE_RELATIVE_INTENSITY = "showYAxisTitleRelativeIntensity";
 	public static final boolean DEF_SHOW_Y_AXIS_TITLE_RELATIVE_INTENSITY = true;
 
@@ -837,34 +744,22 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_SHOW_X_AXIS_CONCENTRATION_CALIBRATION = true;
 	public static final String P_POSITION_X_AXIS_CONCENTRATION_CALIBRATION = "positionXAxisConcentrationCalibration";
 	public static final String DEF_POSITION_X_AXIS_CONCENTRATION_CALIBRATION = Position.Primary.toString();
-	public static final String P_COLOR_X_AXIS_CONCENTRATION_CALIBRATION = "colorXAxisConcentrationCalibration";
-	public static final String DEF_COLOR_X_AXIS_CONCENTRATION_CALIBRATION = "0,0,0";
 	public static final String P_GRIDLINE_STYLE_X_AXIS_CONCENTRATION_CALIBRATION = "gridlineStyleXAxisConcentrationCalibration";
 	public static final String DEF_GRIDLINE_STYLE_X_AXIS_CONCENTRATION_CALIBRATION = LineStyle.DOT.toString();
-	public static final String P_GRIDLINE_COLOR_X_AXIS_CONCENTRATION_CALIBRATION = "gridlineColorXAxisConcentrationCalibration";
-	public static final String DEF_GRIDLINE_COLOR_X_AXIS_CONCENTRATION_CALIBRATION = "192,192,192";
 
 	public static final String P_SHOW_Y_AXIS_RESPONSE_CALIBRATION = "showYAxisResponseCalibration";
 	public static final boolean DEF_SHOW_Y_AXIS_RESPONSE_CALIBRATION = true;
 	public static final String P_POSITION_Y_AXIS_RESPONSE_CALIBRATION = "positionYAxisResponseCalibration";
 	public static final String DEF_POSITION_Y_AXIS_RESPONSE_CALIBRATION = Position.Primary.toString();
-	public static final String P_COLOR_Y_AXIS_RESPONSE_CALIBRATION = "colorYAxisResponseCalibration";
-	public static final String DEF_COLOR_Y_AXIS_RESPONSE_CALIBRATION = "0,0,0";
 	public static final String P_GRIDLINE_STYLE_Y_AXIS_RESPONSE_CALIBRATION = "gridlineStyleYAxisResponseCalibration";
 	public static final String DEF_GRIDLINE_STYLE_Y_AXIS_RESPONSE_CALIBRATION = LineStyle.NONE.toString();
-	public static final String P_GRIDLINE_COLOR_Y_AXIS_RESPONSE_CALIBRATION = "gridlineColorYAxisResponseCalibration";
-	public static final String DEF_GRIDLINE_COLOR_Y_AXIS_RESPONSE_CALIBRATION = "192,192,192";
 
 	public static final String P_SHOW_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION = "showYAxisRelativeResponseCalibration";
 	public static final boolean DEF_SHOW_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION = true;
 	public static final String P_POSITION_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION = "positionYAxisRelativeResponseCalibration";
 	public static final String DEF_POSITION_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION = Position.Secondary.toString();
-	public static final String P_COLOR_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION = "colorYAxisRelativeResponseCalibration";
-	public static final String DEF_COLOR_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION = "0,0,0";
 	public static final String P_GRIDLINE_STYLE_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION = "gridlineStyleYAxisRelativeResponseCalibration";
 	public static final String DEF_GRIDLINE_STYLE_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION = LineStyle.DOT.toString();
-	public static final String P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION = "gridlineColorYAxisRelativeResponseCalibration";
-	public static final String DEF_GRIDLINE_COLOR_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION = "192,192,192";
 	/*
 	 * File Explorer
 	 */
@@ -1150,15 +1045,11 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		putDefault(P_SHOW_Y_AXIS_INTENSITY_PEAKS, DEF_SHOW_Y_AXIS_INTENSITY_PEAKS);
 		putDefault(P_POSITION_Y_AXIS_INTENSITY_PEAKS, DEF_POSITION_Y_AXIS_INTENSITY_PEAKS);
-		putDefault(P_COLOR_Y_AXIS_INTENSITY_PEAKS, DEF_COLOR_Y_AXIS_INTENSITY_PEAKS);
 		putDefault(P_GRIDLINE_STYLE_Y_AXIS_INTENSITY_PEAKS, DEF_GRIDLINE_STYLE_Y_AXIS_INTENSITY_PEAKS);
-		putDefault(P_GRIDLINE_COLOR_Y_AXIS_INTENSITY_PEAKS, DEF_GRIDLINE_COLOR_Y_AXIS_INTENSITY_PEAKS);
 
 		putDefault(P_SHOW_Y_AXIS_RELATIVE_INTENSITY_PEAKS, DEF_SHOW_Y_AXIS_RELATIVE_INTENSITY_PEAKS);
 		putDefault(P_POSITION_Y_AXIS_RELATIVE_INTENSITY_PEAKS, DEF_POSITION_Y_AXIS_RELATIVE_INTENSITY_PEAKS);
-		putDefault(P_COLOR_Y_AXIS_RELATIVE_INTENSITY_PEAKS, DEF_COLOR_Y_AXIS_RELATIVE_INTENSITY_PEAKS);
 		putDefault(P_GRIDLINE_STYLE_Y_AXIS_RELATIVE_INTENSITY_PEAKS, DEF_GRIDLINE_STYLE_Y_AXIS_RELATIVE_INTENSITY_PEAKS);
-		putDefault(P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY_PEAKS, DEF_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY_PEAKS);
 		/*
 		 * Targets
 		 */
@@ -1197,21 +1088,15 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		putDefault(P_SHOW_X_AXIS_CONCENTRATION_CALIBRATION, DEF_SHOW_X_AXIS_CONCENTRATION_CALIBRATION);
 		putDefault(P_POSITION_X_AXIS_CONCENTRATION_CALIBRATION, DEF_POSITION_X_AXIS_CONCENTRATION_CALIBRATION);
-		putDefault(P_COLOR_X_AXIS_CONCENTRATION_CALIBRATION, DEF_COLOR_X_AXIS_CONCENTRATION_CALIBRATION);
 		putDefault(P_GRIDLINE_STYLE_X_AXIS_CONCENTRATION_CALIBRATION, DEF_GRIDLINE_STYLE_X_AXIS_CONCENTRATION_CALIBRATION);
-		putDefault(P_GRIDLINE_COLOR_X_AXIS_CONCENTRATION_CALIBRATION, DEF_GRIDLINE_COLOR_X_AXIS_CONCENTRATION_CALIBRATION);
 
 		putDefault(P_SHOW_Y_AXIS_RESPONSE_CALIBRATION, DEF_SHOW_Y_AXIS_RESPONSE_CALIBRATION);
 		putDefault(P_POSITION_Y_AXIS_RESPONSE_CALIBRATION, DEF_POSITION_Y_AXIS_RESPONSE_CALIBRATION);
-		putDefault(P_COLOR_Y_AXIS_RESPONSE_CALIBRATION, DEF_COLOR_Y_AXIS_RESPONSE_CALIBRATION);
 		putDefault(P_GRIDLINE_STYLE_Y_AXIS_RESPONSE_CALIBRATION, DEF_GRIDLINE_STYLE_Y_AXIS_RESPONSE_CALIBRATION);
-		putDefault(P_GRIDLINE_COLOR_Y_AXIS_RESPONSE_CALIBRATION, DEF_GRIDLINE_COLOR_Y_AXIS_RESPONSE_CALIBRATION);
 
 		putDefault(P_SHOW_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION, DEF_SHOW_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION);
 		putDefault(P_POSITION_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION, DEF_POSITION_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION);
-		putDefault(P_COLOR_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION, DEF_COLOR_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION);
 		putDefault(P_GRIDLINE_STYLE_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION, DEF_GRIDLINE_STYLE_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION);
-		putDefault(P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION, DEF_GRIDLINE_COLOR_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION);
 		/*
 		 * File Explorer
 		 */
@@ -1359,55 +1244,28 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_FORMAT_X_AXIS_MILLISECONDS, DEF_FORMAT_X_AXIS_MILLISECONDS);
 		putDefault(P_SHOW_X_AXIS_MILLISECONDS, DEF_SHOW_X_AXIS_MILLISECONDS);
 		putDefault(P_POSITION_X_AXIS_MILLISECONDS, DEF_POSITION_X_AXIS_MILLISECONDS);
-		putDefault(P_COLOR_X_AXIS_MILLISECONDS, DEF_COLOR_X_AXIS_MILLISECONDS);
-		putDefault(P_COLOR_X_AXIS_MILLISECONDS_DARKTHEME, DEF_COLOR_X_AXIS_MILLISECONDS_DARKTHEME);
-		putDefault(P_FONT_NAME_X_AXIS_MILLISECONDS, DEF_FONT_NAME_X_AXIS_MILLISECONDS);
-		putDefault(P_FONT_SIZE_X_AXIS_MILLISECONDS, DEF_FONT_SIZE);
-		putDefault(P_FONT_STYLE_X_AXIS_MILLISECONDS, DEF_FONT_STYLE_X_AXIS_MILLISECONDS);
 		putDefault(P_GRIDLINE_STYLE_X_AXIS_MILLISECONDS, DEF_GRIDLINE_STYLE_X_AXIS_MILLISECONDS);
-		putDefault(P_GRIDLINE_COLOR_X_AXIS_MILLISECONDS, DEF_GRIDLINE_COLOR_X_AXIS_MILLISECONDS);
-		putDefault(P_GRIDLINE_COLOR_X_AXIS_MILLISECONDS_DARKTHEME, DEF_GRIDLINE_COLOR_X_AXIS_MILLISECONDS_DARKTHEME);
 		putDefault(P_SHOW_X_AXIS_TITLE_MILLISECONDS, DEF_SHOW_X_AXIS_TITLE_MILLISECONDS);
 
 		putDefault(P_TITLE_X_AXIS_RETENTION_INDEX, DEF_TITLE_X_AXIS_RETENTION_INDEX);
 		putDefault(P_FORMAT_X_AXIS_RETENTION_INDEX, DEF_FORMAT_X_AXIS_RETENTION_INDEX);
 		putDefault(P_SHOW_X_AXIS_RETENTION_INDEX, DEF_SHOW_X_AXIS_RETENTION_INDEX);
 		putDefault(P_POSITION_X_AXIS_RETENTION_INDEX, DEF_POSITION_X_AXIS_RETENTION_INDEX);
-		putDefault(P_COLOR_X_AXIS_RETENTION_INDEX, DEF_COLOR_X_AXIS_RETENTION_INDEX);
-		putDefault(P_COLOR_X_AXIS_RETENTION_INDEX_DARKTHEME, DEF_COLOR_X_AXIS_RETENTION_INDEX_DARKTHEME);
-		putDefault(P_FONT_NAME_X_AXIS_RETENTION_INDEX, DEF_FONT_NAME_X_AXIS_RETENTION_INDEX);
-		putDefault(P_FONT_SIZE_X_AXIS_RETENTION_INDEX, DEF_FONT_SIZE);
-		putDefault(P_FONT_STYLE_X_AXIS_RETENTION_INDEX, DEF_FONT_STYLE_X_AXIS_RETENTION_INDEX);
 		putDefault(P_GRIDLINE_STYLE_X_AXIS_RETENTION_INDEX, DEF_GRIDLINE_STYLE_X_AXIS_RETENTION_INDEX);
-		putDefault(P_GRIDLINE_COLOR_X_AXIS_RETENTION_INDEX, DEF_GRIDLINE_COLOR_X_AXIS_RETENTION_INDEX);
 		putDefault(P_SHOW_X_AXIS_TITLE_RETENTION_INDEX, DEF_SHOW_X_AXIS_TITLE_RETENTION_INDEX);
 
 		putDefault(P_TITLE_X_AXIS_SECONDS, DEF_TITLE_X_AXIS_SECONDS);
 		putDefault(P_FORMAT_X_AXIS_SECONDS, DEF_FORMAT_X_AXIS_SECONDS);
 		putDefault(P_SHOW_X_AXIS_SECONDS, DEF_SHOW_X_AXIS_SECONDS);
 		putDefault(P_POSITION_X_AXIS_SECONDS, DEF_POSITION_X_AXIS_SECONDS);
-		putDefault(P_COLOR_X_AXIS_SECONDS, DEF_COLOR_X_AXIS_SECONDS);
-		putDefault(P_COLOR_X_AXIS_SECONDS_DARKTHEME, DEF_COLOR_X_AXIS_SECONDS_DARKTHEME);
-		putDefault(P_FONT_NAME_X_AXIS_SECONDS, DEF_FONT_NAME_X_AXIS_SECONDS);
-		putDefault(P_FONT_SIZE_X_AXIS_SECONDS, DEF_FONT_SIZE);
-		putDefault(P_FONT_STYLE_X_AXIS_SECONDS, DEF_FONT_STYLE_X_AXIS_SECONDS);
 		putDefault(P_GRIDLINE_STYLE_X_AXIS_SECONDS, DEF_GRIDLINE_STYLE_X_AXIS_SECONDS);
-		putDefault(P_GRIDLINE_COLOR_X_AXIS_SECONDS, DEF_GRIDLINE_COLOR_X_AXIS_SECONDS);
-		putDefault(P_GRIDLINE_COLOR_X_AXIS_SECONDS_DARKTHEME, DEF_GRIDLINE_COLOR_X_AXIS_SECONDS_DARKTHEME);
 		putDefault(P_SHOW_X_AXIS_TITLE_SECONDS, DEF_SHOW_X_AXIS_TITLE_SECONDS);
 
 		putDefault(P_TITLE_X_AXIS_MINUTES, DEF_TITLE_X_AXIS_MINUTES);
 		putDefault(P_FORMAT_X_AXIS_MINUTES, DEF_FORMAT_X_AXIS_MINUTES);
 		putDefault(P_SHOW_X_AXIS_MINUTES, DEF_SHOW_X_AXIS_MINUTES);
 		putDefault(P_POSITION_X_AXIS_MINUTES, DEF_POSITION_X_AXIS_MINUTES);
-		putDefault(P_COLOR_X_AXIS_MINUTES, DEF_COLOR_X_AXIS_MINUTES);
-		putDefault(P_COLOR_X_AXIS_MINUTES_DARKTHEME, DEF_COLOR_X_AXIS_MINUTES_DARKTHEME);
-		putDefault(P_FONT_NAME_X_AXIS_MINUTES, DEF_FONT_NAME_X_AXIS_MINUTES);
-		putDefault(P_FONT_SIZE_X_AXIS_MINUTES, DEF_FONT_SIZE);
-		putDefault(P_FONT_STYLE_X_AXIS_MINUTES, DEF_FONT_STYLE_X_AXIS_MINUTES);
 		putDefault(P_GRIDLINE_STYLE_X_AXIS_MINUTES, DEF_GRIDLINE_STYLE_X_AXIS_MINUTES);
-		putDefault(P_GRIDLINE_COLOR_X_AXIS_MINUTES, DEF_GRIDLINE_COLOR_X_AXIS_MINUTES);
-		putDefault(P_GRIDLINE_COLOR_X_AXIS_MINUTES_DARKTHEME, DEF_GRIDLINE_COLOR_X_AXIS_MINUTES_DARKTHEME);
 		putDefault(P_SHOW_X_AXIS_TITLE_MINUTES, DEF_SHOW_X_AXIS_TITLE_MINUTES);
 		putDefault(P_SHOW_X_AXIS_LINE_MINUTES, DEF_SHOW_X_AXIS_LINE_MINUTES);
 		putDefault(P_SHOW_X_AXIS_POSITION_MARKER_MINUTES, DEF_SHOW_X_AXIS_POSITION_MARKER_MINUTES);
@@ -1417,40 +1275,21 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_SHOW_X_AXIS_SCANS, DEF_SHOW_X_AXIS_SCANS);
 		putDefault(P_POSITION_X_AXIS_SCANS, DEF_POSITION_X_AXIS_SCANS);
 		putDefault(P_COLOR_X_AXIS_SCANS, DEF_COLOR_X_AXIS_SCANS);
-		putDefault(P_COLOR_X_AXIS_SCANS_DARKTHEME, DEF_COLOR_X_AXIS_SCANS_DARKTHEME);
-		putDefault(P_FONT_NAME_X_AXIS_SCANS, DEF_FONT_NAME_X_AXIS_SCANS);
-		putDefault(P_FONT_SIZE_X_AXIS_SCANS, DEF_FONT_SIZE);
-		putDefault(P_FONT_STYLE_X_AXIS_SCANS, DEF_FONT_STYLE_X_AXIS_SCANS);
 		putDefault(P_GRIDLINE_STYLE_X_AXIS_SCANS, DEF_GRIDLINE_STYLE_X_AXIS_SCANS);
-		putDefault(P_GRIDLINE_COLOR_X_AXIS_SCANS, DEF_GRIDLINE_COLOR_X_AXIS_SCANS);
 		putDefault(P_SHOW_X_AXIS_TITLE_SCANS, DEF_SHOW_X_AXIS_TITLE_SCANS);
 
 		putDefault(P_TITLE_Y_AXIS_INTENSITY, DEF_TITLE_Y_AXIS_INTENSITY);
 		putDefault(P_FORMAT_Y_AXIS_INTENSITY, DEF_FORMAT_Y_AXIS_INTENSITY);
 		putDefault(P_SHOW_Y_AXIS_INTENSITY, DEF_SHOW_Y_AXIS_INTENSITY);
 		putDefault(P_POSITION_Y_AXIS_INTENSITY, DEF_POSITION_Y_AXIS_INTENSITY);
-		putDefault(P_COLOR_Y_AXIS_INTENSITY, DEF_COLOR_Y_AXIS_INTENSITY);
-		putDefault(P_COLOR_Y_AXIS_INTENSITY_DARKTHEME, DEF_COLOR_Y_AXIS_INTENSITY_DARKTHEME);
-		putDefault(P_FONT_NAME_Y_AXIS_INTENSITY, DEF_FONT_NAME_Y_AXIS_INTENSITY);
-		putDefault(P_FONT_SIZE_Y_AXIS_INTENSITY, DEF_FONT_SIZE);
-		putDefault(P_FONT_STYLE_Y_AXIS_INTENSITY, DEF_FONT_STYLE_Y_AXIS_INTENSITY);
 		putDefault(P_GRIDLINE_STYLE_Y_AXIS_INTENSITY, DEF_GRIDLINE_STYLE_Y_AXIS_INTENSITY);
-		putDefault(P_GRIDLINE_COLOR_Y_AXIS_INTENSITY, DEF_GRIDLINE_COLOR_Y_AXIS_INTENSITY);
-		putDefault(P_GRIDLINE_COLOR_Y_AXIS_INTENSITY_DARKTHEME, DEF_GRIDLINE_COLOR_Y_AXIS_INTENSITY_DARKTHEME);
 		putDefault(P_SHOW_Y_AXIS_TITLE_INTENSITY, DEF_SHOW_Y_AXIS_TITLE_INTENSITY);
 
 		putDefault(P_TITLE_Y_AXIS_RELATIVE_INTENSITY, DEF_TITLE_Y_AXIS_RELATIVE_INTENSITY);
 		putDefault(P_FORMAT_Y_AXIS_RELATIVE_INTENSITY, DEF_FORMAT_Y_AXIS_RELATIVE_INTENSITY);
 		putDefault(P_SHOW_Y_AXIS_RELATIVE_INTENSITY, DEF_SHOW_Y_AXIS_RELATIVE_INTENSITY);
 		putDefault(P_POSITION_Y_AXIS_RELATIVE_INTENSITY, DEF_POSITION_Y_AXIS_RELATIVE_INTENSITY);
-		putDefault(P_COLOR_Y_AXIS_RELATIVE_INTENSITY, DEF_COLOR_Y_AXIS_RELATIVE_INTENSITY);
-		putDefault(P_COLOR_Y_AXIS_RELATIVE_INTENSITY_DARKTHEME, DEF_COLOR_Y_AXIS_RELATIVE_INTENSITY_DARKTHEME);
-		putDefault(P_FONT_NAME_Y_AXIS_RELATIVE_INTENSITY, DEF_FONT_NAME_Y_AXIS_RELATIVE_INTENSITY);
-		putDefault(P_FONT_SIZE_Y_AXIS_RELATIVE_INTENSITY, DEF_FONT_SIZE);
-		putDefault(P_FONT_STYLE_Y_AXIS_RELATIVE_INTENSITY, DEF_FONT_STYLE_Y_AXIS_RELATIVE_INTENSITY);
 		putDefault(P_GRIDLINE_STYLE_Y_AXIS_RELATIVE_INTENSITY, DEF_GRIDLINE_STYLE_Y_AXIS_RELATIVE_INTENSITY);
-		putDefault(P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY, DEF_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY);
-		putDefault(P_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY_DARKTHEME, DEF_GRIDLINE_COLOR_Y_AXIS_RELATIVE_INTENSITY_DARKTHEME);
 		putDefault(P_SHOW_Y_AXIS_TITLE_RELATIVE_INTENSITY, DEF_SHOW_Y_AXIS_TITLE_RELATIVE_INTENSITY);
 
 		putDefault(P_CHROMATOGRAM_SELECTED_ACTION_ID, DEF_CHROMATOGRAM_SELECTED_ACTION_ID);
