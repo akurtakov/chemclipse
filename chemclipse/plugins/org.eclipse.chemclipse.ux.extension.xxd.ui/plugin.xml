@@ -308,7 +308,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisMilliseconds.GridColor"
         label="Chromatogram Chart Axis Milliseconds Grid Color"
-        value="0,0,0">
+        value="192,192,192">
         <description>
             The color of the chart grid.
         </description>
@@ -317,7 +317,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisMilliseconds.LineColor"
         label="Chromatogram Chart Axis Milliseconds Line Color"
-        value="192,192,192">
+        value="0,0,0">
         <description>
             The color of the chart line.
         </description>
@@ -336,7 +336,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisIntensity.GridColor"
         label="Chromatogram Chart Axis Intensity Grid Color"
-        value="0,0,0">
+        value="192,192,192">
         <description>
             The color of the chart grid.
         </description>
@@ -345,7 +345,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisIntensity.LineColor"
         label="Chromatogram Chart Axis Intensity Line Color"
-        value="192,192,192">
+        value="0,0,0">
         <description>
             The color of the chart line.
         </description>
@@ -364,7 +364,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisRelativeIntensity.GridColor"
         label="Chromatogram Chart Axis Relative Intensity Grid Color"
-        value="0,0,0">
+        value="192,192,192">
         <description>
             The color of the chart grid.
         </description>
@@ -373,7 +373,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisRelativeIntensity.LineColor"
         label="Chromatogram Chart Axis Relative Intensity Line Color"
-        value="192,192,192">
+        value="0,0,0">
         <description>
             The color of the chart line.
         </description>
@@ -392,7 +392,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisSeconds.GridColor"
         label="Chromatogram Chart Axis Seconds Grid Color"
-        value="0,0,0">
+        value="192,192,192">
         <description>
             The color of the chart grid.
         </description>
@@ -401,7 +401,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisSeconds.LineColor"
         label="Chromatogram Chart Axis Seconds Line Color"
-        value="192,192,192">
+        value="0,0,0">
         <description>
             The color of the chart line.
         </description>
@@ -448,7 +448,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.CalibrationChart.XAxisConcentration.GridColor"
         label="Calibration Chart X Axis Concentration Grid Color"
-        value="0,0,0">
+        value="192,192,192">
         <description>
             The color of the chart grid.
         </description>
@@ -457,7 +457,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.CalibrationChart.XAxisConcentration.LineColor"
         label="Calibration Chart X Axis Concentration Line Color"
-        value="192,192,192">
+        value="0,0,0">
         <description>
             The color of the chart line.
         </description>
@@ -476,7 +476,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.CalibrationChart.YAxisResponse.GridColor"
         label="Peaks Chart Y Axis Response Grid Color"
-        value="0,0,0">
+        value="192,192,192">
         <description>
             The color of the chart grid.
         </description>
@@ -485,7 +485,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.CalibrationChart.YAxisResponse.LineColor"
         label="Peaks Chart Y Axis Response Line Color"
-        value="192,192,192">
+        value="0,0,0">
         <description>
             The color of the chart line.
         </description>
@@ -532,7 +532,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.XAxisMilliseconds.GridColor"
         label="Peaks Chart X Axis Milliseconds Grid Color"
-        value="0,0,0">
+        value="192,192,192">
         <description>
             The color of the chromatogram chart grid.
         </description>
@@ -541,7 +541,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.XAxisMilliseconds.LineColor"
         label="Peaks Chart X Axis Milliseconds Line Color"
-        value="192,192,192">
+        value="0,0,0">
         <description>
             The color of the chromatogram chart line.
         </description>
@@ -560,7 +560,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.YAxisResponse.GridColor"
         label="Peaks Chart Y Axis Grid Color"
-        value="0,0,0">
+        value="192,192,192">
         <description>
             The color of the chromatogram chart grid.
         </description>
@@ -569,7 +569,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.YAxisResponse.LineColor"
         label="Peaks Chart Y Axis Line Color"
-        value="192,192,192">
+        value="0,0,0">
         <description>
             The color of the chromatogram chart line.
         </description>
@@ -588,7 +588,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.XAxisMinutes.GridColor"
         label="Peaks Chart X Axis Grid Color"
-        value="0,0,0">
+        value="192,192,192">
         <description>
             The color of the chromatogram chart grid.
         </description>
@@ -597,7 +597,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.XAxisMinutes.LineColor"
         label="Peaks Chart X Axis Line Color"
-        value="192,192,192">
+        value="0,0,0">
         <description>
             The color of the chromatogram chart line.
         </description>
@@ -644,7 +644,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.swt.editors.ExtendedChromatogramUI.ScanAxis.GridColor"
         label="Chromatogram Chart Scan Axis Grid Color"
-        value="0,0,0">
+        value="192,192,192">
         <description>
             The color of the chromatogram chart grid.
         </description>
@@ -653,7 +653,7 @@
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.swt.editors.ExtendedChromatogramUI.ScanAxis.LineColor"
         label="Chromatogram Chart Scan Axis Line Color"
-        value="192,192,192">
+        value="0,0,0">
         <description>
             The color of the chromatogram chart line.
         </description>
