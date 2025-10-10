@@ -49,3 +49,107 @@ Table {
 ToolItem {
 	color: #FFFFFF;
 }
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-ChromatogramChart-AxisMilliseconds-LineColor {
+  color: #fcfcf7;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-ChromatogramChart-AxisMilliseconds-GridColor {
+  color: #404040;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-ChromatogramChart-AxisIntensity-LineColor {
+  color: #fcfcf7;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-ChromatogramChart-AxisIntensity-GridColor {
+  color: #404040;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-ChromatogramChart-AxisRelativeIntensity-LineColor {
+  color: #fcfcf7;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-ChromatogramChart-AxisRelativeIntensity-GridColor {
+  color: #404040;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-ChromatogramChart-AxisSeconds-LineColor {
+  color: #fcfcf7;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-ChromatogramChart-AxisSeconds-GridColor {
+  color: #404040;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-ChromatogramChart-AxisMinutes-LineColor {
+  color: #fcfcf7;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-ChromatogramChart-AxisMinutes-GridColor {
+  color: #404040;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-swt-editors-ExtendedChromatogramUI-ScanAxis-LineColor {
+  color: #fcfcf7;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-swt-editors-ExtendedChromatogramUI-ScanAxis-GridColor {
+  color: #404040;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-PeaksChart-YAxisRelativeResponse-LineColor {
+  color: #fcfcf7;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-PeaksChart-YAxisRelativeResponse-GridColor {
+  color: #404040;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-PeaksChart-XAxisMinutes-LineColor {
+  color: #fcfcf7;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-PeaksChart-XAxisMinutes-GridColor {
+  color: #404040;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-PeaksChart-YAxisResponse-LineColor {
+  color: #fcfcf7;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-PeaksChart-YAxisResponse-GridColor {
+  color: #404040;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-PeaksChart-XAxisMilliseconds-LineColor {
+  color: #fcfcf7;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-PeaksChart-XAxisMilliseconds-GridColor {
+  color: #404040;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-CalibrationChart-YAxisRelativeResponse-LineColor {
+  color: #fcfcf7;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-CalibrationChart-YAxisRelativeResponse-GridColor {
+  color: #404040;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-CalibrationChart-YAxisResponse-LineColor {
+  color: #fcfcf7;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-CalibrationChart-YAxisResponse-GridColor {
+  color: #404040;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-CalibrationChart-XAxisConcentration-LineColor {
+  color: #fcfcf7;
+}
+
+ColorDefinition#org-eclipse-chemclipse-ux-extension-xxd-ui-charts-CalibrationChart-XAxisConcentration-GridColor {
+  color: #404040;
+}

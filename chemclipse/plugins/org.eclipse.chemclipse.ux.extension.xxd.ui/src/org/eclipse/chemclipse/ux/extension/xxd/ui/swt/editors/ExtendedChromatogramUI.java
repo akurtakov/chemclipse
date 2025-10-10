@@ -78,14 +78,12 @@ import org.eclipse.chemclipse.support.comparator.SortOrder;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
-import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.marker.PositionMarker;
 import org.eclipse.chemclipse.swt.ui.marker.RetentionIndexMarker;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.swt.ui.preferences.PreferencePageSystem;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
-import org.eclipse.chemclipse.swt.ui.support.Fonts;
 import org.eclipse.chemclipse.ux.extension.ui.editors.ProcessorSupplierMenuEntry;
 import org.eclipse.chemclipse.ux.extension.ui.methods.MethodCancelException;
 import org.eclipse.chemclipse.ux.extension.ui.methods.MethodParameters;
@@ -167,7 +165,6 @@ import org.eclipse.swt.events.MenuListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -1750,16 +1747,9 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 
 		String positionNode = PreferenceSupplier.P_POSITION_X_AXIS_SCANS;
 		String patternNode = PreferenceSupplier.P_FORMAT_X_AXIS_SCANS;
-		String colorNode = PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_COLOR_X_AXIS_SCANS_DARKTHEME : PreferenceSupplier.P_COLOR_X_AXIS_SCANS;
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_X_AXIS_SCANS;
-		String gridColorNode = PreferenceSupplier.P_GRIDLINE_COLOR_X_AXIS_SCANS;
-		ChartSupport.setAxisSettingsExtended(axisSettings, positionNode, patternNode, colorNode, gridLineStyleNode, gridColorNode);
-
-		String name = preferenceStore.getString(PreferenceSupplier.P_FONT_NAME_X_AXIS_SCANS);
-		int height = preferenceStore.getInt(PreferenceSupplier.P_FONT_SIZE_X_AXIS_SCANS);
-		int style = preferenceStore.getInt(PreferenceSupplier.P_FONT_STYLE_X_AXIS_SCANS);
-		Font titleFont = Fonts.getCachedFont(chromatogramChartControl.get().getDisplay(), name, height, style);
-		axisSettings.setTitleFont(titleFont);
+		ChartSupport.setAxisSettingsExtended(axisSettings, positionNode, patternNode, gridLineStyleNode);
+		ChartSupport.themeAxis(axisSettings, "ScanAxis");
 	}
 
 	@Override

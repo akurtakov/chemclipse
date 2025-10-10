@@ -294,4 +294,378 @@
          </adapter>
       </factory>
    </extension>
+
+   <extension point="org.eclipse.ui.themes">
+   	<themeElementCategory
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        label="Charts">
+        <description>
+            Theming of charts.
+        </description>
+    </themeElementCategory>
+
+   <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisMilliseconds.GridColor"
+        label="Chromatogram Chart Axis Milliseconds Grid Color"
+        value="0,0,0">
+        <description>
+            The color of the chart grid.
+        </description>
+    </colorDefinition>
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisMilliseconds.LineColor"
+        label="Chromatogram Chart Axis Milliseconds Line Color"
+        value="192,192,192">
+        <description>
+            The color of the chart line.
+        </description>
+    </colorDefinition>
+    <fontDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisMilliseconds.Font"
+        label="Chromatogram Chart Axis Milliseconds Intensity Font"
+        value="Verdana-bold-11">
+        <description>
+            The title font.
+        </description>
+    </fontDefinition>
+
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisIntensity.GridColor"
+        label="Chromatogram Chart Axis Intensity Grid Color"
+        value="0,0,0">
+        <description>
+            The color of the chart grid.
+        </description>
+    </colorDefinition>
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisIntensity.LineColor"
+        label="Chromatogram Chart Axis Intensity Line Color"
+        value="192,192,192">
+        <description>
+            The color of the chart line.
+        </description>
+    </colorDefinition>
+    <fontDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisIntensity.Font"
+        label="Chromatogram Chart Axis Intensity Font"
+        value="Verdana-bold-11">
+        <description>
+            The title font
+        </description>
+    </fontDefinition>
+
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisRelativeIntensity.GridColor"
+        label="Chromatogram Chart Axis Relative Intensity Grid Color"
+        value="0,0,0">
+        <description>
+            The color of the chart grid.
+        </description>
+    </colorDefinition>
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisRelativeIntensity.LineColor"
+        label="Chromatogram Chart Axis Relative Intensity Line Color"
+        value="192,192,192">
+        <description>
+            The color of the chart line.
+        </description>
+    </colorDefinition>
+    <fontDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisRelativeIntensity.Font"
+        label="Chromatogram Chart Axis Relative Intensity Font"
+        value="Verdana-bold-11">
+        <description>
+            The title font.
+        </description>
+    </fontDefinition>
+
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisSeconds.GridColor"
+        label="Chromatogram Chart Axis Seconds Grid Color"
+        value="0,0,0">
+        <description>
+            The color of the chart grid.
+        </description>
+    </colorDefinition>
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisSeconds.LineColor"
+        label="Chromatogram Chart Axis Seconds Line Color"
+        value="192,192,192">
+        <description>
+            The color of the chart line.
+        </description>
+    </colorDefinition>
+    <fontDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisSeconds.Font"
+        label="Chromatogram Chart Axis Seconds Font"
+        value="Verdana-bold-11">
+        <description>
+            The title font.
+        </description>
+    </fontDefinition>
+
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisMinutes.GridColor"
+        label="Chromatogram Chart Axis Minutes Grid Color"
+        value="192,192,192">
+        <description>
+            The color of the chart grid.
+        </description>
+    </colorDefinition>
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisMinutes.LineColor"
+        label="Chromatogram Chart Axis Minutes Line Color"
+        value="0,0,0">
+        <description>
+            The color of the chart line.
+        </description>
+    </colorDefinition>
+    <fontDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart.AxisMinutes.Font"
+        label="Chromatogram Chart Axis Minutes Font"
+        value="Verdana-bold-11">
+        <description>
+            The title font.
+        </description>
+    </fontDefinition>
+
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.CalibrationChart.XAxisConcentration.GridColor"
+        label="Calibration Chart X Axis Concentration Grid Color"
+        value="0,0,0">
+        <description>
+            The color of the chart grid.
+        </description>
+    </colorDefinition>
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.CalibrationChart.XAxisConcentration.LineColor"
+        label="Calibration Chart X Axis Concentration Line Color"
+        value="192,192,192">
+        <description>
+            The color of the chart line.
+        </description>
+    </colorDefinition>
+    <fontDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.CalibrationChart.XAxisConcentration.Font"
+        label="Calibration Chart X Axis Concentration Font"
+        value="Verdana-bold-11">
+        <description>
+            The title font.
+        </description>
+    </fontDefinition>
+
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.CalibrationChart.YAxisResponse.GridColor"
+        label="Peaks Chart Y Axis Response Grid Color"
+        value="0,0,0">
+        <description>
+            The color of the chart grid.
+        </description>
+    </colorDefinition>
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.CalibrationChart.YAxisResponse.LineColor"
+        label="Peaks Chart Y Axis Response Line Color"
+        value="192,192,192">
+        <description>
+            The color of the chart line.
+        </description>
+    </colorDefinition>
+    <fontDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.CalibrationChart.YAxisResponse.Font"
+        label="Peaks Chart Y Axis Response Font"
+        value="Verdana-bold-11">
+        <description>
+            The title font.
+        </description>
+    </fontDefinition>
+
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.CalibrationChart.YAxisRelativeResponse.GridColor"
+        label="Peaks Chart Y Axis Relative Response Color"
+        value="0,0,0">
+        <description>
+            The color of the chart grid.
+        </description>
+    </colorDefinition>
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.CalibrationChart.YAxisRelativeResponse.LineColor"
+        label="Peaks Chart Y Axis Relative Response Color"
+        value="192,192,192">
+        <description>
+            The color of the chart line.
+        </description>
+    </colorDefinition>
+    <fontDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.CalibrationChart.YAxisRelativeResponse.Font"
+        label="Peaks Chart Y Axis Relative Response Font"
+        value="Verdana-bold-11">
+        <description>
+            The title font.
+        </description>
+    </fontDefinition>
+    
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.XAxisMilliseconds.GridColor"
+        label="Peaks Chart X Axis Milliseconds Grid Color"
+        value="0,0,0">
+        <description>
+            The color of the chromatogram chart grid.
+        </description>
+    </colorDefinition>
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.XAxisMilliseconds.LineColor"
+        label="Peaks Chart X Axis Milliseconds Line Color"
+        value="192,192,192">
+        <description>
+            The color of the chromatogram chart line.
+        </description>
+    </colorDefinition>
+    <fontDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.XAxisMilliseconds.Font"
+        label="Peaks Chart X Axis Milliseconds Font"
+        value="Verdana-bold-11">
+        <description>
+            The title font.
+        </description>
+    </fontDefinition>
+    
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.YAxisResponse.GridColor"
+        label="Peaks Chart Y Axis Grid Color"
+        value="0,0,0">
+        <description>
+            The color of the chromatogram chart grid.
+        </description>
+    </colorDefinition>
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.YAxisResponse.LineColor"
+        label="Peaks Chart Y Axis Line Color"
+        value="192,192,192">
+        <description>
+            The color of the chromatogram chart line.
+        </description>
+    </colorDefinition>
+    <fontDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.YAxisResponse.Font"
+        label="Peaks Chart Y Axis Font"
+        value="Verdana-bold-11">
+        <description>
+            The title font.
+        </description>
+    </fontDefinition>
+
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.XAxisMinutes.GridColor"
+        label="Peaks Chart X Axis Grid Color"
+        value="0,0,0">
+        <description>
+            The color of the chromatogram chart grid.
+        </description>
+    </colorDefinition>
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.XAxisMinutes.LineColor"
+        label="Peaks Chart X Axis Line Color"
+        value="192,192,192">
+        <description>
+            The color of the chromatogram chart line.
+        </description>
+    </colorDefinition>
+    <fontDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.XAxisMinutes.Font"
+        label="Peaks Chart X Axis Font"
+        value="Verdana-bold-11">
+        <description>
+            The title font.
+        </description>
+    </fontDefinition>
+    
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.YAxisRelativeResponse.GridColor"
+        label="Peaks Chart Y Axis Relative Response Color"
+        value="0,0,0">
+        <description>
+            The color of the chromatogram chart grid.
+        </description>
+    </colorDefinition>
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.YAxisRelativeResponse.LineColor"
+        label="Peaks Chart Y Axis Relative Response Color"
+        value="192,192,192">
+        <description>
+            The color of the chromatogram chart line.
+        </description>
+    </colorDefinition>
+    <fontDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.YAxisRelativeResponse.Font"
+        label="Peaks Chart Y Axis Relative Response Font"
+        value="Verdana-bold-11">
+        <description>
+            The title font.
+        </description>
+    </fontDefinition>
+    
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.swt.editors.ExtendedChromatogramUI.ScanAxis.GridColor"
+        label="Chromatogram Chart Scan Axis Grid Color"
+        value="0,0,0">
+        <description>
+            The color of the chromatogram chart grid.
+        </description>
+    </colorDefinition>
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.swt.editors.ExtendedChromatogramUI.ScanAxis.LineColor"
+        label="Chromatogram Chart Scan Axis Line Color"
+        value="192,192,192">
+        <description>
+            The color of the chromatogram chart line.
+        </description>
+    </colorDefinition>
+    <fontDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.swt.editors.ExtendedChromatogramUI.ScanAxis.Font"
+        label="Chromatogram Chart Scan Axis Font"
+        value="Verdana-bold-11">
+        <description>
+            The title font.
+        </description>
+    </fontDefinition>
+</extension>
 </plugin>
