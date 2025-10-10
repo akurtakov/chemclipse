@@ -95,7 +95,7 @@ public class PeaksChart extends LineChart {
 
 		ChartSupport.setAxisSettings(primaryAxisSettingsX, positionNode, pattern, gridLineStyleNode);
 		primaryAxisSettingsX.setVisible(isShowAxis);
-		ChartSupport.themeAxis(primaryAxisSettingsX, "XAxisMilliseconds");
+		ChartSupport.themeAxis(primaryAxisSettingsX, PeaksChart.class.getName() + ".XAxisMilliseconds");
 	}
 
 	private void modifyYAxisResponse() {
@@ -112,7 +112,7 @@ public class PeaksChart extends LineChart {
 		ChartSupport.setAxisSettings(primaryAxisSettingsY, positionNode, pattern, gridLineStyleNode);
 		primaryAxisSettingsY.setVisible(isShowAxis);
 
-		ChartSupport.themeAxis(primaryAxisSettingsY, "YAxisResponse");
+		ChartSupport.themeAxis(primaryAxisSettingsY, PeaksChart.class.getName() + ".YAxisResponse");
 	}
 
 	private void modifyXAxisMinutes() {
@@ -132,7 +132,7 @@ public class PeaksChart extends LineChart {
 			if(axisSettings == null) {
 				ISecondaryAxisSettings secondaryAxisSettingsX = new SecondaryAxisSettings(title, new MillisecondsToMinuteConverter());
 				ChartSupport.setAxisSettings(secondaryAxisSettingsX, positionNode, pattern, gridLineStyleNode);
-				ChartSupport.themeAxis(axisSettings, "XAxisMinutes");
+				ChartSupport.themeAxis(axisSettings, PeaksChart.class.getName() + ".XAxisMinutes");
 				secondaryAxisSettingsX.setTitleVisible(isShowAxisTitle);
 				chartSettings.getSecondaryAxisSettingsListX().add(secondaryAxisSettingsX);
 			} else {
@@ -172,7 +172,7 @@ public class PeaksChart extends LineChart {
 			if(axisSettings == null) {
 				ISecondaryAxisSettings secondaryAxisSettingsY = new SecondaryAxisSettings(title, new PercentageConverter(SWT.VERTICAL, true));
 				ChartSupport.setAxisSettings(secondaryAxisSettingsY, positionNode, pattern, gridLineStyleNode);
-				ChartSupport.themeAxis(secondaryAxisSettingsY, "YAxisRelativeResponse");
+				ChartSupport.themeAxis(secondaryAxisSettingsY, PeaksChart.class.getName() + ".YAxisRelativeResponse");
 				secondaryAxisSettingsY.setTitleVisible(isShowAxisTitle);
 				chartSettings.getSecondaryAxisSettingsListY().add(secondaryAxisSettingsY);
 			} else {

@@ -196,7 +196,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_X_AXIS_MILLISECONDS;
 
 		ChartSupport.setAxisSettingsExtended(primaryAxisSettingsX, positionNode, patternNode, gridLineStyleNode);
-		ChartSupport.themeAxis(primaryAxisSettingsX, "AxisMilliseconds");
+		ChartSupport.themeAxis(primaryAxisSettingsX, ChromatogramChart.class.getName() + ".AxisMilliseconds");
 		primaryAxisSettingsX.setVisible(ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_MILLISECONDS));
 		primaryAxisSettingsX.setTitleVisible(ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_TITLE_MILLISECONDS));
 	}
@@ -212,7 +212,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_Y_AXIS_INTENSITY;
 
 		ChartSupport.setAxisSettingsExtended(primaryAxisSettingsY, positionNode, patternNode, gridLineStyleNode);
-		ChartSupport.themeAxis(primaryAxisSettingsY, "AxisIntensity");
+		ChartSupport.themeAxis(primaryAxisSettingsY, ChromatogramChart.class.getName() + ".AxisIntensity");
 		primaryAxisSettingsY.setVisible(ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_INTENSITY));
 		primaryAxisSettingsY.setTitleVisible(ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_TITLE_INTENSITY));
 	}
@@ -235,12 +235,12 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 			if(axisSettings == null) {
 				ISecondaryAxisSettings secondaryAxisSettingsY = new SecondaryAxisSettings(title, new PercentageConverter(SWT.VERTICAL, true));
 				ChartSupport.setAxisSettingsExtended(secondaryAxisSettingsY, positionNode, patternNode, gridLineStyleNode);
-				ChartSupport.themeAxis(secondaryAxisSettingsY, "AxisRelativeIntensity");
+				ChartSupport.themeAxis(secondaryAxisSettingsY, ChromatogramChart.class.getName() + ".AxisRelativeIntensity");
 				secondaryAxisSettingsY.setTitleVisible(isShowAxisTitle);
 				chartSettings.getSecondaryAxisSettingsListY().add(secondaryAxisSettingsY);
 			} else {
 				ChartSupport.setAxisSettingsExtended(axisSettings, positionNode, patternNode, gridLineStyleNode);
-				ChartSupport.themeAxis(axisSettings, "AxisRelativeIntensity");
+				ChartSupport.themeAxis(axisSettings, ChromatogramChart.class.getName() + ".AxisRelativeIntensity");
 				axisSettings.setTitle(title);
 				axisSettings.setVisible(true);
 				axisSettings.setTitleVisible(isShowAxisTitle);
@@ -275,12 +275,12 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 			if(axisSettings == null) {
 				ISecondaryAxisSettings secondaryAxisSettingsX = new SecondaryAxisSettings(title, new MillisecondsToSecondsConverter());
 				ChartSupport.setAxisSettingsExtended(secondaryAxisSettingsX, positionNode, patternNode, gridLineStyleNode);
-				ChartSupport.themeAxis(secondaryAxisSettingsX, "AxisSeconds");
+				ChartSupport.themeAxis(secondaryAxisSettingsX, ChromatogramChart.class.getName() + ".AxisSeconds");
 				secondaryAxisSettingsX.setTitleVisible(isShowAxisTitle);
 				chartSettings.getSecondaryAxisSettingsListX().add(secondaryAxisSettingsX);
 			} else {
 				ChartSupport.setAxisSettingsExtended(axisSettings, positionNode, patternNode, gridLineStyleNode);
-				ChartSupport.themeAxis(axisSettings, "AxisSeconds");
+				ChartSupport.themeAxis(axisSettings, ChromatogramChart.class.getName() + ".AxisSeconds");
 				axisSettings.setTitle(title);
 				axisSettings.setVisible(true);
 				axisSettings.setTitleVisible(isShowAxisTitle);
@@ -317,14 +317,14 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 			if(axisSettings == null) {
 				ISecondaryAxisSettings secondaryAxisSettingsX = new SecondaryAxisSettings(title, new MillisecondsToMinuteConverter());
 				ChartSupport.setAxisSettingsExtended(secondaryAxisSettingsX, positionNode, patternNode, gridLineStyleNode);
-				ChartSupport.themeAxis(secondaryAxisSettingsX, "AxisMinutes");
+				ChartSupport.themeAxis(secondaryAxisSettingsX, ChromatogramChart.class.getName() + ".AxisMinutes");
 				secondaryAxisSettingsX.setTitleVisible(isShowAxisTitle);
 				secondaryAxisSettingsX.setDrawAxisLine(drawAxisLine);
 				secondaryAxisSettingsX.setDrawPositionMarker(drawPositionMarker);
 				chartSettings.getSecondaryAxisSettingsListX().add(secondaryAxisSettingsX);
 			} else {
 				ChartSupport.setAxisSettingsExtended(axisSettings, positionNode, patternNode, gridLineStyleNode);
-				ChartSupport.themeAxis(axisSettings, "AxisMinutes");
+				ChartSupport.themeAxis(axisSettings, ChromatogramChart.class.getName() + ".AxisMinutes");
 				axisSettings.setTitle(title);
 				axisSettings.setVisible(true);
 				axisSettings.setTitleVisible(isShowAxisTitle);

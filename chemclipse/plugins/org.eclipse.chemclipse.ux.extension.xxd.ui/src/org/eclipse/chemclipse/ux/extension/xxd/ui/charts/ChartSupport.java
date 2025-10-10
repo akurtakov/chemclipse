@@ -177,14 +177,14 @@ public class ChartSupport {
 		ITheme currentTheme = themeManager.getCurrentTheme();
 
 		ColorRegistry colorRegistry = currentTheme.getColorRegistry();
-		Color color = colorRegistry.get(ChromatogramChart.class.getName() + "." + part + ".LineColor");
+		Color color = colorRegistry.get(part + ".LineColor");
 		axisSettings.setColor(color);
 
-		Color gridColor = colorRegistry.get(ChromatogramChart.class.getName() + "." + part + ".GridColor");
+		Color gridColor = colorRegistry.get(part + ".GridColor");
 		axisSettings.setGridColor(gridColor);
 
 		FontRegistry fontRegistry = currentTheme.getFontRegistry();
-		Font font = fontRegistry.get(ChromatogramChart.class.getName() + "." + part + ".Font");
+		Font font = fontRegistry.get(part + ".Font");
 		axisSettings.setTitleFont(font);
 	}
 }

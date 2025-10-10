@@ -93,7 +93,7 @@ public class CalibrationChart extends LineChart {
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_CONCENTRATION_CALIBRATION);
 		primaryAxisSettingsX.setVisible(isShowAxis);
 
-		ChartSupport.themeAxis(primaryAxisSettingsX, "XAxisConcentration");
+		ChartSupport.themeAxis(primaryAxisSettingsX, CalibrationChart.class.getName() + ".XAxisConcentration");
 	}
 
 	private void modifyYAxisResponse() {
@@ -110,7 +110,7 @@ public class CalibrationChart extends LineChart {
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_RESPONSE_CALIBRATION);
 		primaryAxisSettingsY.setVisible(isShowAxis);
 
-		ChartSupport.themeAxis(primaryAxisSettingsY, "YAxisResponse");
+		ChartSupport.themeAxis(primaryAxisSettingsY, CalibrationChart.class.getName() + ".YAxisResponse");
 	}
 
 	private void modifyYAxisRelativeResponse() {
@@ -123,7 +123,7 @@ public class CalibrationChart extends LineChart {
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION;
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION);
 
-		ChartSupport.themeAxis(axisSettings, "YAxisRelativeResponse");
+		ChartSupport.themeAxis(axisSettings, CalibrationChart.class.getName() + ".YAxisRelativeResponse");
 
 		if(isShowAxis) {
 			if(axisSettings == null) {

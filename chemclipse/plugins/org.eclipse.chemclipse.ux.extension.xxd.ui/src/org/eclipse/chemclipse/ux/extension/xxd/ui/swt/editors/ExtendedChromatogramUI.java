@@ -1749,7 +1749,7 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 		String patternNode = PreferenceSupplier.P_FORMAT_X_AXIS_SCANS;
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_X_AXIS_SCANS;
 		ChartSupport.setAxisSettingsExtended(axisSettings, positionNode, patternNode, gridLineStyleNode);
-		ChartSupport.themeAxis(axisSettings, "ScanAxis");
+		ChartSupport.themeAxis(axisSettings, ExtendedChromatogramUI.class.getName() + ".ScanAxis");
 	}
 
 	@Override
