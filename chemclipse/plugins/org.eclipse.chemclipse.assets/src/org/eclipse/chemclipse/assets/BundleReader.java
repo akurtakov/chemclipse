@@ -10,7 +10,7 @@
  * Contributors:
  * Christoph Läubrich - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.support.internal;
+package org.eclipse.chemclipse.assets;
 
 import java.io.File;
 import java.io.FileFilter;
