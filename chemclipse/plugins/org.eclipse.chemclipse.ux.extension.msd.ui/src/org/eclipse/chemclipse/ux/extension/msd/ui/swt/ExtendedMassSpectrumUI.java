@@ -137,20 +137,22 @@ public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI
 
 	private void createMassSpectrumChart(Composite composite) {
 
-		if(isProfile()) {
+		if(getMassSpectrumType() == MassSpectrumType.PROFILE) {
 			massSpectrumChart = new MassSpectrumChartProfile(composite, SWT.BORDER);
-		} else {
+		} else if(getMassSpectrumType() == MassSpectrumType.CENTROID) {
 			massSpectrumChart = new MassSpectrumChartCentroid(composite, SWT.BORDER);
+		} else {
+			logger.error("Unknown mass spectrum type.");
 		}
 		massSpectrumChart.update(massSpectrum);
 	}
 
-	private boolean isProfile() {
+	private MassSpectrumType getMassSpectrumType() {
 
 		if(massSpectrum instanceof IRegularMassSpectrum regularMassSpectrum) {
-			return regularMassSpectrum.getMassSpectrumType() == MassSpectrumType.PROFILE;
+			return regularMassSpectrum.getMassSpectrumType();
 		} else {
-			return PreferenceSupplier.useProfileMassSpectrumView();
+			return null;
 		}
 	}
 
