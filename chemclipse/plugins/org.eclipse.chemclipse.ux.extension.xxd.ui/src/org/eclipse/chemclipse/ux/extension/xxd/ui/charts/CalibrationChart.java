@@ -123,15 +123,15 @@ public class CalibrationChart extends LineChart {
 		String gridLineStyleNode = PreferenceSupplier.P_GRIDLINE_STYLE_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION;
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_RELATIVE_RESPONSE_CALIBRATION);
 
-		ChartSupport.themeAxis(axisSettings, CalibrationChart.class.getName() + ".YAxisRelativeResponse");
-
 		if(isShowAxis) {
 			if(axisSettings == null) {
 				ISecondaryAxisSettings secondaryAxisSettingsY = new SecondaryAxisSettings(TITLE_Y_AXIS_RELATIVE_RESPONSE, new PercentageConverter(SWT.VERTICAL, true));
 				ChartSupport.setAxisSettings(secondaryAxisSettingsY, positionNode, pattern, gridLineStyleNode);
+				ChartSupport.themeAxis(secondaryAxisSettingsY, CalibrationChart.class.getName() + ".YAxisRelativeResponse");
 				chartSettings.getSecondaryAxisSettingsListY().add(secondaryAxisSettingsY);
 			} else {
 				ChartSupport.setAxisSettings(axisSettings, positionNode, pattern, gridLineStyleNode);
+				ChartSupport.themeAxis(axisSettings, CalibrationChart.class.getName() + ".YAxisRelativeResponse");
 				axisSettings.setVisible(true);
 			}
 		} else {
