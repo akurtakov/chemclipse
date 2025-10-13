@@ -17,7 +17,6 @@ import org.eclipse.chemclipse.support.text.ILabel;
 import org.eclipse.chemclipse.support.ui.preferences.fieldeditors.DoubleFieldEditor;
 import org.eclipse.chemclipse.support.ui.preferences.fieldeditors.LabelFieldEditor;
 import org.eclipse.chemclipse.support.ui.preferences.fieldeditors.SpacerFieldEditor;
-import org.eclipse.chemclipse.support.ui.workbench.PreferencesSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
 import org.eclipse.jface.preference.BooleanFieldEditor;
@@ -99,11 +98,6 @@ public class PreferencePageChromatogram extends FieldEditorPreferencePage implem
 		addIntegerField(PreferenceSupplier.P_HEATMAP_SCALE_INTENSITY_MAX_WSD, "Scale Intensity Max (WSD)", PreferenceSupplier.MIN_HEATMAP_SCALE_INTENSITY, PreferenceSupplier.MAX_HEATMAP_SCALE_INTENSITY);
 		addIntegerField(PreferenceSupplier.P_HEATMAP_SCALE_INTENSITY_MIN_TSD, "Scale Intensity Min (TSD)", PreferenceSupplier.MIN_HEATMAP_SCALE_INTENSITY, PreferenceSupplier.MAX_HEATMAP_SCALE_INTENSITY);
 		addIntegerField(PreferenceSupplier.P_HEATMAP_SCALE_INTENSITY_MAX_TSD, "Scale Intensity Max (TSD)", PreferenceSupplier.MIN_HEATMAP_SCALE_INTENSITY, PreferenceSupplier.MAX_HEATMAP_SCALE_INTENSITY);
-
-		addField(new SpacerFieldEditor(getFieldEditorParent()));
-		addField(new ColorFieldEditor(PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_CHROMATOGRAM_ACTIVE_TARGET_LABEL_FONT_DARK_COLOR : PreferenceSupplier.P_CHROMATOGRAM_ACTIVE_TARGET_LABEL_FONT_COLOR, "Color Active Target Label:", getFieldEditorParent()));
-		addField(new ColorFieldEditor(PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_CHROMATOGRAM_INACTIVE_TARGET_LABEL_FONT_DARK_COLOR : PreferenceSupplier.P_CHROMATOGRAM_INACTIVE_TARGET_LABEL_FONT_COLOR, "Color Inactive Target Label:", getFieldEditorParent()));
-		addField(new ColorFieldEditor(PreferencesSupport.isDarkTheme() ? PreferenceSupplier.P_CHROMATOGRAM_ID_TARGET_LABEL_FONT_DARK_COLOR : PreferenceSupplier.P_CHROMATOGRAM_ID_TARGET_LABEL_FONT_COLOR, "Color ID Target Label:", getFieldEditorParent()));
 	}
 
 	private void addIntegerField(String name, String labelText, int min, int max) {

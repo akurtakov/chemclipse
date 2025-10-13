@@ -14,7 +14,7 @@
 package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.charts;
 
 import org.eclipse.chemclipse.logging.core.Logger;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
+import org.eclipse.jface.resource.FontRegistry;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
@@ -23,13 +23,19 @@ import org.eclipse.swt.graphics.Path;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Region;
 import org.eclipse.swt.graphics.Transform;
-import org.eclipse.swtchart.Resources;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.themes.ITheme;
+import org.eclipse.ui.themes.IThemeManager;
 
 public class LabelBounds {
 
 	public static final boolean DEBUG_FENCES = false;
 
 	private static final Logger logger = Logger.getLogger(LabelBounds.class);
+
+	private IThemeManager themeManager = PlatformUI.getWorkbench().getThemeManager();
+	private ITheme currentTheme = themeManager.getCurrentTheme();
+	private FontRegistry fontRegistry = currentTheme.getFontRegistry();
 
 	private final float[] pointArray = new float[10];
 	private final int[] transformedPoints = new int[10];
@@ -194,7 +200,7 @@ public class LabelBounds {
 		Color oldForeground = gc.getForeground();
 		Font oldFont = gc.getFont();
 		try {
-			Font font = Resources.getFont(PreferenceSupplier.DEF_CHROMATOGRAM_PEAK_LABEL_FONT_NAME, 8, PreferenceSupplier.DEF_CHROMATOGRAM_PEAK_LABEL_FONT_STYLE);
+			Font font = fontRegistry.get(LabelBounds.class.getName() + ".PeakLabelFont");
 			gc.setFont(font);
 			gc.setLineStyle(SWT.LINE_DASH);
 			gc.drawPolygon(transformedPoints);

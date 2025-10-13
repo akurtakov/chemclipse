@@ -21,8 +21,6 @@ import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.ColorFieldEditor;
 import org.eclipse.jface.preference.ComboFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
-import org.eclipse.jface.preference.StringFieldEditor;
-import org.eclipse.swtchart.extensions.charts.ChartOptions;
 import org.eclipse.swtchart.extensions.preferences.PreferenceSupport;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
@@ -52,9 +50,6 @@ public class PreferencePageChromatogramPeaks extends FieldEditorPreferencePage i
 
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor(FIELD_PEAK_LABELS, getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceSupplier.P_CHROMATOGRAM_PEAK_LABEL_FONT_NAME, "Font Name:", getFieldEditorParent()));
-		addField(new SpinnerFieldEditor(PreferenceSupplier.P_CHROMATOGRAM_PEAK_LABEL_FONT_SIZE, "Font Size:", PreferenceSupplier.MIN_FONT_SIZE, PreferenceSupplier.MAX_FONT_SIZE, getFieldEditorParent()));
-		addField(new ComboFieldEditor(PreferenceSupplier.P_CHROMATOGRAM_PEAK_LABEL_FONT_STYLE, "Font Style:", ChartOptions.FONT_STYLES, getFieldEditorParent()));
 
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor(FIELD_PEAKS, getFieldEditorParent()));

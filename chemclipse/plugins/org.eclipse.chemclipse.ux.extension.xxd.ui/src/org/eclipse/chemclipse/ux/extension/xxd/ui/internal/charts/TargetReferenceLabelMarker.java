@@ -13,6 +13,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.charts;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -30,7 +31,9 @@ import org.eclipse.chemclipse.model.targets.ITargetReference;
 import org.eclipse.chemclipse.model.targets.LibraryField;
 import org.eclipse.chemclipse.model.targets.TargetReference;
 import org.eclipse.chemclipse.model.targets.TargetReferenceType;
-import org.eclipse.chemclipse.swt.ui.support.Fonts;
+import org.eclipse.chemclipse.support.text.ValueFormat;
+import org.eclipse.jface.resource.ColorRegistry;
+import org.eclipse.jface.resource.FontRegistry;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.graphics.Color;
@@ -50,10 +53,21 @@ import org.eclipse.swtchart.ISeries;
 import org.eclipse.swtchart.extensions.core.BaseChart;
 import org.eclipse.swtchart.extensions.model.ICustomSeries;
 import org.eclipse.swtchart.extensions.model.TextElement;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.themes.ITheme;
+import org.eclipse.ui.themes.IThemeManager;
 
 public class TargetReferenceLabelMarker implements ICustomPaintListener {
 
 	private static final int NO_ALPHA = 255;
+
+	private static final DecimalFormat DECIMAL_FORMAT_RI = ValueFormat.getDecimalFormatEnglish("0.00");
+	private static final DecimalFormat DECIMAL_FORMAT_AREA_PERCENT = ValueFormat.getDecimalFormatEnglish("0.000");
+
+	private IThemeManager themeManager = PlatformUI.getWorkbench().getThemeManager();
+	private ITheme currentTheme = themeManager.getCurrentTheme();
+	private ColorRegistry colorRegistry = currentTheme.getColorRegistry();
+	private FontRegistry fontRegistry = currentTheme.getFontRegistry();
 
 	private TargetReferenceSettings targetReferenceSettings;
 	private List<TargetLabel> targetLabels = new ArrayList<>();
@@ -149,9 +163,9 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 		oldTransform.getElements(identityMatrix);
 
 		try {
-			Color colorActive = TargetReferencesSupport.getActiveColor();
-			Color colorInactive = TargetReferencesSupport.getInactiveColor();
-			Color colorId = TargetReferencesSupport.getIdColor();
+			Color colorActive = colorRegistry.get(TargetReferenceLabelMarker.class.getName() + ".ActiveColor");
+			Color colorInactive = colorRegistry.get(TargetReferenceLabelMarker.class.getName() + ".InactiveColor");
+			Color colorId = colorRegistry.get(TargetReferenceLabelMarker.class.getName() + ".IdColor");
 
 			Rectangle clipping = gc.getClipping();
 			TargetLabel lastReference = null;
@@ -176,11 +190,8 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 					customSeries.getTextElements().add(textElement);
 				}
 
-				if(reference.getFontData() != null) {
-					Font font = fontMap.computeIfAbsent(reference.getFontData(), fd -> {
-						return Fonts.createDPIAwareFont(gc.getDevice(), fd);
-					});
-					gc.setFont(font);
+				if(reference.getFont() != null) {
+					gc.setFont(reference.getFont());
 				} else {
 					gc.setFont(oldFont);
 				}
@@ -323,8 +334,9 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 			detectionDepth = targetDisplaySettings.getCollisionDetectionDepth();
 			DisplayOption displayOption = targetDisplaySettings.getDisplayOption();
 			LibraryField libraryField = targetDisplaySettings.getLibraryField();
-			FontData peakFontData = TargetReferencesSupport.getPeakFontData();
-			FontData scanFontData = TargetReferencesSupport.getScanFontData();
+
+			Font peakFont = fontRegistry.get(TargetReferenceLabelMarker.class.getName() + ".Peak.Font");
+			Font scanFont = fontRegistry.get(TargetReferenceLabelMarker.class.getName() + ".Scan.Font");
 
 			int number = 1;
 			for(ITargetReference targetReference : targetReferences) {
@@ -349,13 +361,13 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 							labelDisplay = getConcatenatedLabel(targetReference.getRetentionTimeMinutes(), labelStandard);
 							break;
 						case RETENTION_INDEX:
-							labelDisplay = TargetReferencesSupport.DECIMAL_FORMAT_RI.format(targetReference.getRetentionIndex());
+							labelDisplay = DECIMAL_FORMAT_RI.format(targetReference.getRetentionIndex());
 							break;
 						case RETENTION_INDEX_STANDARD:
-							labelDisplay = getConcatenatedLabel(TargetReferencesSupport.DECIMAL_FORMAT_RI.format(targetReference.getRetentionIndex()), labelStandard);
+							labelDisplay = getConcatenatedLabel(DECIMAL_FORMAT_RI.format(targetReference.getRetentionIndex()), labelStandard);
 							break;
 						case RETENTION_INDEX_AREA_PERCENT:
-							labelDisplay = TargetReferencesSupport.DECIMAL_FORMAT_RI.format(targetReference.getRetentionIndex()) + " (" + getAreaPercent(targetReference) + ")";
+							labelDisplay = DECIMAL_FORMAT_RI.format(targetReference.getRetentionIndex()) + " (" + getAreaPercent(targetReference) + ")";
 							break;
 						case AREA_PERCENT:
 							labelDisplay = getAreaPercent(targetReference);
@@ -376,16 +388,16 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 					boolean isActive = activeFilter == null || activeFilter.test(targetReference);
 
 					ISignal scan = targetReference.getSignal();
-					FontData fontData;
+					Font font;
 					if(isPeakLabel) {
-						fontData = peakFontData;
+						font = peakFont;
 					} else if(isScanLabel) {
-						fontData = scanFontData;
+						font = scanFont;
 					} else {
-						fontData = null;
+						font = null;
 					}
 
-					TargetLabel targetLabel = new TargetLabel(labelDisplay, targetReferenceSettings.isShowReferenceId() ? targetReference.getRetentionTimeMinutes() : null, fontData, isActive, scan.getX(), scan.getY());
+					TargetLabel targetLabel = new TargetLabel(labelDisplay, targetReferenceSettings.isShowReferenceId() ? targetReference.getRetentionTimeMinutes() : null, font, isActive, scan.getX(), scan.getY());
 					targetLabels.add(targetLabel);
 				}
 			}
@@ -413,7 +425,7 @@ public class TargetReferenceLabelMarker implements ICustomPaintListener {
 				double chromatogramPeakArea = chromatogram.getPeakIntegratedArea();
 				if(chromatogramPeakArea > 0) {
 					double peakAreaPercent = (100.0d / chromatogramPeakArea) * chromatogramPeak.getIntegratedArea();
-					return TargetReferencesSupport.DECIMAL_FORMAT_AREA_PERCENT.format(peakAreaPercent);
+					return DECIMAL_FORMAT_AREA_PERCENT.format(peakAreaPercent);
 				}
 			}
 		}

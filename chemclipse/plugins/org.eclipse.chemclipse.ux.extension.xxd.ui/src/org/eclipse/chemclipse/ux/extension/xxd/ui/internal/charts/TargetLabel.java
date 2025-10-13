@@ -13,7 +13,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.charts;
 
-import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.Font;
 
 public class TargetLabel {
 
@@ -23,17 +23,17 @@ public class TargetLabel {
 	private final boolean isActive;
 	private double x;
 	private double y;
-	private final FontData fontData;
+	private final Font font;
 	/*
 	 * Cached values used for calculation
 	 */
 	private LabelBounds bounds;
 
-	public TargetLabel(String label, String id, FontData fontData, boolean isActive, double x, double y) {
+	public TargetLabel(String label, String id, Font font, boolean isActive, double x, double y) {
 
 		this.label = label;
 		this.id = id;
-		this.fontData = fontData;
+		this.font = font;
 		this.isActive = isActive;
 		this.x = x;
 		this.y = y;
@@ -86,9 +86,9 @@ public class TargetLabel {
 		this.y = y;
 	}
 
-	public FontData getFontData() {
+	public Font getFont() {
 
-		return fontData;
+		return font;
 	}
 
 	public LabelBounds getBounds() {
