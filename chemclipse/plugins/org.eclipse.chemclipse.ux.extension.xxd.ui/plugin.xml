@@ -503,8 +503,8 @@
     <colorDefinition
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.CalibrationChart.YAxisRelativeResponse.GridColor"
-        label="Peaks Chart Y Axis Relative Response Color"
-        value="0,0,0">
+        label="Peaks Chart Y Axis Relative Response Grid Color"
+        value="192,192,192">
         <description>
             The color of the chart grid.
         </description>
@@ -512,8 +512,8 @@
     <colorDefinition
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.CalibrationChart.YAxisRelativeResponse.LineColor"
-        label="Peaks Chart Y Axis Relative Response Color"
-        value="192,192,192">
+        label="Peaks Chart Y Axis Relative Response Line Color"
+        value="0,0,0">
         <description>
             The color of the chart line.
         </description>
@@ -615,8 +615,8 @@
     <colorDefinition
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.YAxisRelativeResponse.GridColor"
-        label="Peaks Chart Y Axis Relative Response Color"
-        value="0,0,0">
+        label="Peaks Chart Y Axis Relative Response Grid Color"
+        value="192,192,192">
         <description>
             The color of the chromatogram chart grid.
         </description>
@@ -624,8 +624,8 @@
     <colorDefinition
         categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
         id="org.eclipse.chemclipse.ux.extension.xxd.ui.charts.PeaksChart.YAxisRelativeResponse.LineColor"
-        label="Peaks Chart Y Axis Relative Response Color"
-        value="192,192,192">
+        label="Peaks Chart Y Axis Relative Response Line Color"
+        value="0,0,0">
         <description>
             The color of the chromatogram chart line.
         </description>
