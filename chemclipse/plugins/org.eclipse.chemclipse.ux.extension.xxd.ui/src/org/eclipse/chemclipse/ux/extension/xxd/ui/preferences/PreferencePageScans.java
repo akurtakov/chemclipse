@@ -21,11 +21,9 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.model.TracesExportOption;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ScanIdentifierUI;
 import org.eclipse.jface.preference.BooleanFieldEditor;
-import org.eclipse.jface.preference.ColorFieldEditor;
 import org.eclipse.jface.preference.ComboFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.StringFieldEditor;
-import org.eclipse.swtchart.extensions.charts.ChartOptions;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
@@ -56,13 +54,6 @@ public class PreferencePageScans extends FieldEditorPreferencePage implements IW
 		addField(new StringFieldEditor(PreferenceSupplier.P_TITLE_X_AXIS_DAUGHTER_RESOLUTION, "Daughter Resolution:", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceSupplier.P_TITLE_X_AXIS_COLLISION_ENERGY, "Collision Energy [eV]:", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceSupplier.P_TITLE_X_AXIS_WAVELENGTH, "Wavelength [nm]:", getFieldEditorParent()));
-
-		addField(new SpacerFieldEditor(getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceSupplier.P_SCAN_LABEL_FONT_NAME, "Font Name:", getFieldEditorParent()));
-		addField(new SpinnerFieldEditor(PreferenceSupplier.P_SCAN_LABEL_FONT_SIZE, "Font Size:", PreferenceSupplier.MIN_FONT_SIZE, PreferenceSupplier.MAX_FONT_SIZE, getFieldEditorParent()));
-		addField(new ComboFieldEditor(PreferenceSupplier.P_SCAN_LABEL_FONT_STYLE, "Font Style:", ChartOptions.FONT_STYLES, getFieldEditorParent()));
-		addField(new ColorFieldEditor(PreferenceSupplier.P_COLOR_SCAN_1, "Color Scan 1:", getFieldEditorParent()));
-		addField(new ColorFieldEditor(PreferenceSupplier.P_COLOR_SCAN_2, "Color Scan 2:", getFieldEditorParent()));
 
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new SpinnerFieldEditor(PreferenceSupplier.P_SCAN_LABEL_HIGHEST_INTENSITIES, "Label Intensities:", PreferenceSupplier.MIN_SCAN_LABEL_HIGHEST_INTENSITIES, PreferenceSupplier.MAX_SCAN_LABEL_HIGHEST_INTENSITIES, getFieldEditorParent()));
