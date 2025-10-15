@@ -302,7 +302,7 @@ public class ProcessMethodToolbar extends ToolBar {
 
 		final ToolItem item = new ToolItem(toolBar, SWT.DROP_DOWN);
 		item.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ADD, IApplicationImageProvider.SIZE_16x16));
-		item.setToolTipText("Add a process method.");
+		item.setToolTipText("Add a processor.");
 		final Menu menu = new Menu(toolBar.getShell(), SWT.POP_UP);
 
 		toolBar.addDisposeListener(e -> menu.dispose());
@@ -336,7 +336,7 @@ public class ProcessMethodToolbar extends ToolBar {
 				}
 
 				MenuItem loadItem = new MenuItem(menu, SWT.NONE);
-				loadItem.setText("Load from file...");
+				loadItem.setText("Load process method from file...");
 				loadItem.addSelectionListener(new SelectionAdapter() {
 
 					@Override
@@ -406,7 +406,7 @@ public class ProcessMethodToolbar extends ToolBar {
 
 		final ToolItem item = new ToolItem(toolBar, SWT.PUSH);
 		item.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DELETE, IApplicationImageProvider.SIZE_16x16));
-		item.setToolTipText("Remove the selected process methods.");
+		item.setToolTipText("Remove the selected processors.");
 		item.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -423,7 +423,7 @@ public class ProcessMethodToolbar extends ToolBar {
 
 		final ToolItem item = new ToolItem(toolBar, SWT.PUSH);
 		item.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DELETE_ALL, IApplicationImageProvider.SIZE_16x16));
-		item.setToolTipText("Remove all process methods.");
+		item.setToolTipText("Remove all processors.");
 		item.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -439,7 +439,7 @@ public class ProcessMethodToolbar extends ToolBar {
 
 		final ToolItem item = new ToolItem(toolBar, SWT.PUSH);
 		item.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_COPY, IApplicationImageProvider.SIZE_16x16));
-		item.setToolTipText("Copy a process method.");
+		item.setToolTipText("Copy a processor.");
 		item.addSelectionListener(new SelectionAdapter() {
 
 			@Override
