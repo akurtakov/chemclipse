@@ -770,11 +770,6 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 		}
 	}
 
-	private void forceReset(boolean resetRange) {
-
-		getDisplay().asyncExec(() -> reset(resetRange));
-	}
-
 	public void updateResult(IMessageProvider processingInfo) {
 
 		getDisplay().asyncExec(() -> ProcessingInfoPartSupport.getInstance().update(processingInfo, true));
@@ -1211,7 +1206,6 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 			updateResult(processingInfo);
 			AuditTrailSupport.updateAuditTrail(chromatogram, processingInfo, processMethod, processTypeSupport);
 			NoiseFactorSupport.updateNoiseFactor(chromatogram, processMethod, processTypeSupport);
-			forceReset(true);
 			UpdateNotifierUI.update(getDisplay(), chromatogramSelection.getSelectedScan());
 		}));
 
