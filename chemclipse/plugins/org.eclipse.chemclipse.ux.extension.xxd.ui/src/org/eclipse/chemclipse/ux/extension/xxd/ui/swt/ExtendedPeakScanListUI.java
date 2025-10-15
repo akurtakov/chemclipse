@@ -648,16 +648,13 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 	 */
 	private IScan getScan(Object object) {
 
-		IScan scan = null;
-
 		if(object instanceof IPeak peak) {
 			IPeakModel peakModel = peak.getPeakModel();
-			scan = peakModel.getPeakMaximum();
-		} else if(object instanceof IScan scanx) {
-			scan = scanx;
+			return peakModel.getPeakMaximum();
+		} else if(object instanceof IScan scan) {
+			return scan;
 		}
-
-		return scan;
+		return null;
 	}
 
 	private void addTargetsUnknown(Display display) {
