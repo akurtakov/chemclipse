@@ -26,11 +26,9 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.editors.ChromatogramEditorTSD;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.model.TracesExportOption;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.swt.SWT;
 import org.eclipse.swtchart.IAxis.Position;
 import org.eclipse.swtchart.ILineSeries.PlotSymbolType;
 import org.eclipse.swtchart.LineStyle;
-import org.eclipse.swtchart.Resources;
 import org.eclipse.swtchart.extensions.linecharts.LineChart;
 
 public class PreferenceSupplier extends AbstractPreferenceSupplier implements IPreferenceSupplier {
@@ -240,15 +238,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	/*
 	 * Scans
 	 */
-	public static final String P_SCAN_LABEL_FONT_NAME = "scanLabelFontName";
-	public static final String DEF_SCAN_LABEL_FONT_NAME = Resources.DEFAULT_FONT_NAME;
-	public static final String P_SCAN_LABEL_FONT_SIZE = "scanLabelFontSize";
-	public static final String P_SCAN_LABEL_FONT_STYLE = "scanLabelFontStyle";
-	public static final int DEF_SCAN_LABEL_FONT_STYLE = SWT.NORMAL;
-	public static final String P_COLOR_SCAN_1 = "colorScan1";
-	public static final String DEF_COLOR_SCAN_1 = "255,0,0";
-	public static final String P_COLOR_SCAN_2 = "colorScan2";
-	public static final String DEF_COLOR_SCAN_2 = "0,0,0";
 	public static final String P_SCAN_LABEL_HIGHEST_INTENSITIES = "scanLabelHighestIntensities";
 	public static final int MIN_SCAN_LABEL_HIGHEST_INTENSITIES = 1;
 	public static final int MAX_SCAN_LABEL_HIGHEST_INTENSITIES = 32;
@@ -936,11 +925,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		/*
 		 * Scans
 		 */
-		putDefault(P_SCAN_LABEL_FONT_NAME, DEF_SCAN_LABEL_FONT_NAME);
-		putDefault(P_SCAN_LABEL_FONT_SIZE, DEF_FONT_SIZE);
-		putDefault(P_SCAN_LABEL_FONT_STYLE, DEF_SCAN_LABEL_FONT_STYLE);
-		putDefault(P_COLOR_SCAN_1, DEF_COLOR_SCAN_1);
-		putDefault(P_COLOR_SCAN_2, DEF_COLOR_SCAN_2);
 		putDefault(P_SCAN_LABEL_HIGHEST_INTENSITIES, DEF_SCAN_LABEL_HIGHEST_INTENSITIES);
 		putDefault(P_SCAN_LABEL_MODULO_INTENSITIES, DEF_SCAN_LABEL_MODULO_INTENSITIES);
 		putDefault(P_AUTOFOCUS_SUBTRACT_SCAN_PART, DEF_AUTOFOCUS_SUBTRACT_SCAN_PART);

@@ -723,5 +723,32 @@
             The target reference scan label font.
         </description>
     </fontDefinition>
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ScanChart.ColorScanOne"
+        label="Scan Chart Color Scan 1"
+        value="255,0,0">
+        <description>
+            The color of the selected scan.
+        </description>
+    </colorDefinition>
+    <colorDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ScanChart.ColorScanTwo"
+        label="Scan Chart Color Scan 2"
+        value="0,0,0">
+        <description>
+           The color of the comparison scan.
+        </description>
+    </colorDefinition>
+    <fontDefinition
+        categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.charts"
+        id="org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ScanChart.Font"
+        label="Scan Chart Font"
+        value="Verdana-regular-11">
+        <description>
+            The m/z label font.
+        </description>
+    </fontDefinition>
 </extension>
 </plugin>

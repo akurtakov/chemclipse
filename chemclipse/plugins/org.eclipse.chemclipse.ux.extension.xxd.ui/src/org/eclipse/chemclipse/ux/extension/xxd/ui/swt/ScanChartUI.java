@@ -31,7 +31,6 @@ import org.eclipse.chemclipse.msd.model.support.ScanSupport;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
-import org.eclipse.chemclipse.swt.ui.support.Fonts;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.charts.BarSeriesValue;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.charts.BarSeriesYComparator;
@@ -42,6 +41,8 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ScanDataSupport
 import org.eclipse.chemclipse.vsd.model.core.IScanVSD;
 import org.eclipse.chemclipse.wsd.model.core.IScanWSD;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.resource.ColorRegistry;
+import org.eclipse.jface.resource.FontRegistry;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.graphics.Color;
@@ -71,6 +72,9 @@ import org.eclipse.swtchart.extensions.model.ICustomSeries;
 import org.eclipse.swtchart.extensions.model.TextElement;
 import org.eclipse.swtchart.extensions.support.ElementSupport;
 import org.eclipse.swtchart.extensions.support.PointPrimary;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.themes.ITheme;
+import org.eclipse.ui.themes.IThemeManager;
 
 public class ScanChartUI extends ScrollableChart {
 
@@ -274,8 +278,10 @@ public class ScanChartUI extends ScrollableChart {
 			determineLabelOption(usedDataType);
 			modifyChart(scan, null);
 
-			IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-			Color colorScan1 = Colors.getColor(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCAN_1));
+			IThemeManager themeManager = PlatformUI.getWorkbench().getThemeManager();
+			ITheme currentTheme = themeManager.getCurrentTheme();
+			ColorRegistry colorRegistry = currentTheme.getColorRegistry();
+			Color colorScan1 = colorRegistry.get("org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ScanChart.ColorScanOne");
 
 			if(usedSignalType.equals(SignalType.PROFILE)) {
 				setChartType(ChartType.LINE);
@@ -314,9 +320,11 @@ public class ScanChartUI extends ScrollableChart {
 			modifyChart(mirrored);
 			modifyChart(scan1, scan2);
 
-			IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-			Color colorScan1 = Colors.getColor(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCAN_1));
-			Color colorScan2 = Colors.getColor(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCAN_2));
+			IThemeManager themeManager = PlatformUI.getWorkbench().getThemeManager();
+			ITheme currentTheme = themeManager.getCurrentTheme();
+			ColorRegistry colorRegistry = currentTheme.getColorRegistry();
+			Color colorScan1 = colorRegistry.get("org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ScanChart.ColorScanOne");
+			Color colorScan2 = colorRegistry.get("org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ScanChart.ColorScanTwo");
 
 			if(usedSignalType.equals(SignalType.PROFILE)) {
 				setChartType(ChartType.LINE);
@@ -543,14 +551,16 @@ public class ScanChartUI extends ScrollableChart {
 	private void modifyChart(DataType dataType, SignalType signalType) {
 
 		/*
+		 * Font
+		 */
+		IThemeManager themeManager = PlatformUI.getWorkbench().getThemeManager();
+		ITheme currentTheme = themeManager.getCurrentTheme();
+		FontRegistry fontRegistry = currentTheme.getFontRegistry();
+		systemFont = fontRegistry.get("org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ScanChart.Font");
+		/*
 		 * Preferences
 		 */
 		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-		String name = preferenceStore.getString(PreferenceSupplier.P_SCAN_LABEL_FONT_NAME);
-		int height = preferenceStore.getInt(PreferenceSupplier.P_SCAN_LABEL_FONT_SIZE);
-		int style = preferenceStore.getInt(PreferenceSupplier.P_SCAN_LABEL_FONT_STYLE);
-		systemFont = Fonts.getCachedFont(getBaseChart().getDisplay(), name, height, style);
-
 		labelHighestIntensities = preferenceStore.getInt(PreferenceSupplier.P_SCAN_LABEL_HIGHEST_INTENSITIES);
 		addModuloLabels = preferenceStore.getBoolean(PreferenceSupplier.P_SCAN_LABEL_MODULO_INTENSITIES);
 		boolean enableCompress = preferenceStore.getBoolean(PreferenceSupplier.P_SCAN_CHART_ENABLE_COMPRESS);

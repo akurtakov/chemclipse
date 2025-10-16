@@ -47,7 +47,6 @@ import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.swt.ui.services.IScanIdentifierService;
-import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
@@ -57,7 +56,6 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.Preferenc
 import org.eclipse.chemclipse.ux.extension.xxd.ui.model.ComparisonScanOption;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageScans;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageSubtract;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.runnables.LibraryServiceRunnable;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.ChromatogramUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ScanChartSupport;
@@ -69,7 +67,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.preference.IPreferencePage;
-import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.resource.ColorRegistry;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -101,6 +99,9 @@ import org.eclipse.swtchart.extensions.core.IExtendedChart;
 import org.eclipse.swtchart.extensions.core.ISecondaryAxisSettings;
 import org.eclipse.swtchart.extensions.core.RangeRestriction;
 import org.eclipse.ui.IWorkbenchPreferencePage;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.themes.ITheme;
+import org.eclipse.ui.themes.IThemeManager;
 
 import jakarta.inject.Inject;
 
@@ -319,9 +320,11 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 	private void updateStackCharts() {
 
-		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
-		Color colorScan1 = Colors.getColor(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCAN_1));
-		Color colorScan2 = Colors.getColor(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCAN_2));
+		IThemeManager themeManager = PlatformUI.getWorkbench().getThemeManager();
+		ITheme currentTheme = themeManager.getCurrentTheme();
+		ColorRegistry colorRegistry = currentTheme.getColorRegistry();
+		Color colorScan1 = colorRegistry.get("org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ScanChart.ColorScanOne");
+		Color colorScan2 = colorRegistry.get("org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ScanChart.ColorScanTwo");
 		updateStackChart(scanChartStackUnknownControl.get(), scanUnknown, colorScan1, "Unknown");
 		updateStackChart(scanChartStackReferenceControl.get(), scanReference, colorScan2, "Reference");
 	}
