@@ -40,7 +40,7 @@ public class FeatureListUI extends ExtendedTableViewer {
 	private static final String[] TITLES = FeatureLabelProvider.TITLES;
 	private static final int[] BOUNDS = FeatureLabelProvider.BOUNDS;
 
-	private final FeatureLabelProvider labelProviderOriginal = new FeatureLabelProvider("#,##0", FeatureMode.ORIGINAL);
+	private final FeatureLabelProvider labelProviderOriginal = new FeatureLabelProvider("#,##0.##", FeatureMode.ORIGINAL);
 	private final FeatureLabelProvider labelProviderPreprocessed = new FeatureLabelProvider("0.00##", FeatureMode.PREPROCESSED);
 	private final ViewerComparator comparator = new FeatureComparator();
 	private final FeatureListFilter listFilter = new FeatureListFilter();
