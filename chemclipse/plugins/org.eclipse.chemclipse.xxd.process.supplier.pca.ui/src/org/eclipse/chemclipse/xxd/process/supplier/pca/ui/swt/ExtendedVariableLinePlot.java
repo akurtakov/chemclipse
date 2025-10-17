@@ -14,6 +14,7 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -605,6 +606,7 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 
 	private void updateComboViewerVariables(IAnalysisSettings analysisSettings) {
 
+		variables.sort(new AlphanumericComparator());
 		comboViewerVariables.get().setInput(variables);
 		String selection = VARIABLE_LINE_PLOT_SELECT_NONE;
 		if(analysisSettings != null) {
@@ -660,6 +662,15 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 			return true;
 		}
 		return false;
+	}
+
+	private class AlphanumericComparator implements Comparator<String> {
+
+		@Override
+		public int compare(String o1, String o2) {
+
+			return o1.compareToIgnoreCase(o2);
+		}
 	}
 
 }
