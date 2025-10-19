@@ -29,7 +29,8 @@ public class ExtractedIonSignal implements IExtractedIonSignal {
 
 	private static final Logger logger = Logger.getLogger(ExtractedIonSignal.class);
 
-	private static final float NORMALIZATION_BASE = 1000.0f;
+	private static final float NORMALIZATION_BASE_INTENSITY = 1000.0f;
+	private static final float NORMALIZATION_BASE_VECTOR = 1.0f;
 
 	private float[] abundanceValues = null;
 	private int startIon = ION_NOT_SET;
@@ -280,18 +281,38 @@ public class ExtractedIonSignal implements IExtractedIonSignal {
 	}
 
 	@Override
-	public void normalize() {
+	public void normalizeIntensity() {
 
-		normalize(NORMALIZATION_BASE);
+		normalizeIntensity(NORMALIZATION_BASE_INTENSITY);
 	}
 
 	@Override
-	public void normalize(float normalizationBase) {
+	public void normalizeIntensity(float normalizationBase) {
 
 		if(normalizationBase > 0) {
 			float maxIntensity = Calculations.getMax(abundanceValues);
 			if(maxIntensity > 0) {
 				float factor = normalizationBase / maxIntensity;
+				for(int i = 0; i < abundanceValues.length; i++) {
+					abundanceValues[i] = factor * abundanceValues[i];
+				}
+			}
+		}
+	}
+
+	@Override
+	public void normalizeVector() {
+
+		normalizeVector(NORMALIZATION_BASE_VECTOR);
+	}
+
+	@Override
+	public void normalizeVector(float normalizationBase) {
+
+		if(normalizationBase > 0) {
+			float sumIntensity = Calculations.getSum(abundanceValues);
+			if(sumIntensity > 0) {
+				float factor = normalizationBase / sumIntensity;
 				for(int i = 0; i < abundanceValues.length; i++) {
 					abundanceValues[i] = factor * abundanceValues[i];
 				}

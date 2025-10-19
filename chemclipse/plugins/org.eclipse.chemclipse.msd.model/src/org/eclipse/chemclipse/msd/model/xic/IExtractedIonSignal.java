@@ -182,17 +182,11 @@ public interface IExtractedIonSignal {
 	 */
 	IIonRange getIonRange();
 
-	/**
-	 * Normalize all stored signals.
-	 *
-	 */
-	void normalize();
+	void normalizeIntensity();
 
-	/**
-	 * Normalize all intensity signals.
-	 * The base must be > 0.
-	 * 
-	 * @return float
-	 */
-	void normalize(float normalizationBase);
+	void normalizeIntensity(float normalizationBase);
+
+	void normalizeVector();
+
+	void normalizeVector(float normalizationBase);
 }

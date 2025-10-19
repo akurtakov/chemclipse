@@ -65,7 +65,7 @@ public class ExtractedIonSignals_9_Test {
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(1);
 		assertEquals(50.0f, extractedIonSignal.getMaxIntensity(), 0);
 		assertEquals(975.0f, extractedIonSignal.getTotalSignal(), 0);
-		extractedIonSignal.normalize(100.0f);
+		extractedIonSignal.normalizeIntensity(100.0f);
 		assertEquals(100.0f, extractedIonSignal.getMaxIntensity(), 0);
 		assertEquals(1950.0f, extractedIonSignal.getTotalSignal(), 0);
 	}
@@ -76,7 +76,7 @@ public class ExtractedIonSignals_9_Test {
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(1);
 		assertEquals(50.0f, extractedIonSignal.getMaxIntensity(), 0);
 		assertEquals(975.0f, extractedIonSignal.getTotalSignal(), 0);
-		extractedIonSignal.normalize(0.0f);
+		extractedIonSignal.normalizeIntensity(0.0f);
 		assertEquals(50.0f, extractedIonSignal.getMaxIntensity(), 0);
 		assertEquals(975.0f, extractedIonSignal.getTotalSignal(), 0);
 	}
@@ -87,7 +87,7 @@ public class ExtractedIonSignals_9_Test {
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(1);
 		assertEquals(50.0f, extractedIonSignal.getMaxIntensity(), 0);
 		assertEquals(975.0f, extractedIonSignal.getTotalSignal(), 0);
-		extractedIonSignal.normalize(1.0f);
+		extractedIonSignal.normalizeIntensity(1.0f);
 		assertEquals(1.0f, extractedIonSignal.getMaxIntensity(), 0);
 		assertEquals(19.5f, extractedIonSignal.getTotalSignal(), 0.1f);
 	}
@@ -98,7 +98,7 @@ public class ExtractedIonSignals_9_Test {
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(1);
 		assertEquals(50.0f, extractedIonSignal.getMaxIntensity(), 0);
 		assertEquals(975.0f, extractedIonSignal.getTotalSignal(), 0);
-		extractedIonSignal.normalize();
+		extractedIonSignal.normalizeIntensity();
 		assertEquals(1000.0f, extractedIonSignal.getMaxIntensity(), 0);
 		assertEquals(19500.0f, extractedIonSignal.getTotalSignal(), 0);
 	}

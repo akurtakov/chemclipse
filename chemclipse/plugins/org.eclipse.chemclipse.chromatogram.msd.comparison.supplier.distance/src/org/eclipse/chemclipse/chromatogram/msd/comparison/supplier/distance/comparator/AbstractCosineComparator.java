@@ -69,7 +69,8 @@ public abstract class AbstractCosineComparator extends AbstractMassSpectrumCompa
 		int size = unknownSignal.getNumberOfIonValues();
 		double unknown[] = new double[size];
 		double reference[] = new double[size];
-		for(int i = unknownSignal.getStartIon(), j = 0; i <= unknownSignal.getStopIon(); i++, j++) {
+		for(int i = unknownSignal.getStartIon(),
+				j = 0; i <= unknownSignal.getStopIon(); i++, j++) {
 			unknown[j] = getVectorValue(unknownSignal, i);
 			reference[j] = getVectorValue(referenceSignal, i);
 		}
