@@ -76,9 +76,13 @@ public class TraceRangeMatcher {
 				int index = entry.getKey();
 				double value = entry.getValue();
 				for(TraceRange traceRange : traceRanges) {
-					for(TraceGenericDelta trace : traceRange.getGenericTraces()) {
-						if(value >= trace.getStartValue() && value <= trace.getStopValue()) {
-							traceRange.getTraceIndices().add(index);
+					if(isParseFully()) {
+						traceRange.getTraceIndices().add(index);
+					} else {
+						for(TraceGenericDelta trace : traceRange.getGenericTraces()) {
+							if(value >= trace.getStartValue() && value <= trace.getStopValue()) {
+								traceRange.getTraceIndices().add(index);
+							}
 						}
 					}
 				}
@@ -167,7 +171,7 @@ public class TraceRangeMatcher {
 
 		if(retentionTimeColumn1Start >= 0 && retentionTimeColumn1Stop >= 0) {
 			List<? extends TraceGenericDelta> tracesGenericDelta = TraceFactory.parseTraces(traces, clazz);
-			if(!tracesGenericDelta.isEmpty()) {
+			if(!tracesGenericDelta.isEmpty() || isParseFully()) {
 				/*
 				 * TraceRange
 				 */
