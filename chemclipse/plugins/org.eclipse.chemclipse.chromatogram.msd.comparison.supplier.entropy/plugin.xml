@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <!--<extension
+         point="org.eclipse.chemclipse.chromatogram.msd.comparison.massSpectrumComparisonSupplier">
+      <ComparisonSupplier
+            comparatorName="Spectral Entropy"
+            description="Use the spectral entropy algorithm by Tobias Kind, Oliver Fiehn et. al."
+            id="org.eclipse.chemclipse.chromatogram.msd.comparison.supplier.entropy"
+            massSpectrumComparator="org.eclipse.chemclipse.chromatogram.msd.comparison.supplier.entropy.comparator.EntropyComparator"
+            nominalMS="true"
+            tandemMS="false"
+            highResolutionMS="false">
+      </ComparisonSupplier>
+   </extension>-->
+</plugin>

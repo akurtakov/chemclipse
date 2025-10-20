@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Entropy
+Bundle-SymbolicName: org.eclipse.chemclipse.chromatogram.msd.comparison.supplier.entropy;singleton:=true
+Bundle-Version: 0.9.0.qualifier
+Bundle-Vendor: ChemClipse
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.chemclipse.msd.identifier;bundle-version="0.8.0",
+ org.eclipse.chemclipse.msd.model;bundle-version="0.8.0",
+ org.eclipse.chemclipse.logging;bundle-version="0.8.0",
+ org.eclipse.chemclipse.processing;bundle-version="0.8.0",
+ org.eclipse.chemclipse.model;bundle-version="0.8.0",
+ org.apache.commons.math3;bundle-version="3.5.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Automatic-Module-Name: org.eclipse.chemclipse.chromatogram.msd.comparison.supplier.entropy
+Bundle-ActivationPolicy: lazy

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.chemclipse.chromatogram.msd.comparison.supplier.entropy.feature"
+      label="Spectral Entropy"
+      version="0.9.0.qualifier"
+      provider-name="ChemClipse"
+      plugin="org.eclipse.chemclipse.feature.branding"
+      license-feature="org.eclipse.license"
+      license-feature-version="2.0.2.qualifier">
+
+   <description url="http://www.chemclipse.net">
+      This is a mass spectrum comparison method based on spectral entropy by Li, Y., Kind, T., Folz, J. et al., https://doi.org/10.1038/s41592-021-01331-z.
+   </description>
+
+   <copyright url="http://www.chemclipse.net">
+      Copyright (c) 2025 Lablicate GmbH.
+   </copyright>
+   
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <plugin
+         id="org.eclipse.chemclipse.chromatogram.msd.comparison.supplier.entropy"
+         version="0.0.0"/>
+
+</feature>
