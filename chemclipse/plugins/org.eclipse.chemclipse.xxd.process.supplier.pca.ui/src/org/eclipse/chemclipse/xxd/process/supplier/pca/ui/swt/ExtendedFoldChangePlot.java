@@ -45,6 +45,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d.FoldChangePlot
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.help.HelpContext;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePage;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePageFoldChangePlot;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.AlphanumericStringComparator;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -423,7 +424,7 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 
 	private void updateComboViewerGroups(IAnalysisSettings analysisSettings) {
 
-		groups.sort(new AlphanumericComparator());
+		groups.sort(new AlphanumericStringComparator());
 		comboViewerGroup1.get().setInput(groups);
 		comboViewerGroup2.get().setInput(groups);
 		String selection1 = FOLD_CHANGE_GROUP_NONE;
@@ -457,15 +458,6 @@ public class ExtendedFoldChangePlot extends Composite implements IExtendedPartUI
 			 * Map Group Names
 			 */
 			groups.addAll(samples.getSamples().stream().map(x -> x.getGroupName()).distinct().toList());
-		}
-	}
-
-	private class AlphanumericComparator implements Comparator<String> {
-
-		@Override
-		public int compare(String o1, String o2) {
-
-			return o1.compareToIgnoreCase(o2);
 		}
 	}
 
