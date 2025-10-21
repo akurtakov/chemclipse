@@ -14,8 +14,10 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.IntStream;
 
 import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.model.statistics.IVariable;
@@ -82,6 +84,8 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 	private ArrayList<String> variables = new ArrayList<>();
 	private String lastVariableSelection = VARIABLE_LINE_PLOT_SELECT_NONE;
 	private UserSelection userSelection = new UserSelection();
+	private ArrayList<Integer> sortedActiveSampleIndices = new ArrayList<>();
+	private ArrayList<Integer> sortedSampleIndices = new ArrayList<>();
 
 	public ExtendedVariableLinePlot(Composite parent, int style) {
 
@@ -129,9 +133,39 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 
 		if(samples != null) {
 			IAnalysisSettings analysisSettings = samples.getAnalysisSettings();
+			updateSortedIndices();
 			updateWidgets(analysisSettings);
 		}
 		applySettings();
+	}
+
+	public void updateSortedIndices() {
+
+		sortedActiveSampleIndices.clear();
+		sortedSampleIndices.clear();
+		ArrayList<ISample> activeSamples = new ArrayList<>();
+		ArrayList<ISample> sortedSamples = new ArrayList<>();
+		ArrayList<ISample> sortedActiveSamples = new ArrayList<>();
+		for(int i = 0; i < samples.getSamples().size(); i++) {
+			sortedSamples.add(samples.getSamples().get(i));
+			if(samples.getSamples().get(i).isSelected()) {
+				activeSamples.add(samples.getSamples().get(i));
+				sortedActiveSamples.add(samples.getSamples().get(i));
+			}
+		}
+		if(comboViewerCategoryLabelType.get().getStructuredSelection().getFirstElement().toString().equals(FeatureColumnLabels.GROUPNAMES.toString())) {
+			sortedActiveSamples.sort(new GroupComparator());
+			sortedSamples.sort(new GroupComparator());
+		} else {
+			sortedActiveSamples.sort(new SampleNameComparator());
+			sortedSamples.sort(new SampleNameComparator());
+		}
+		for(ISample sample : sortedActiveSamples) {
+			sortedActiveSampleIndices.add(IntStream.range(0, activeSamples.size()).filter(x -> activeSamples.get(x).equals(sample)).findFirst().getAsInt());
+		}
+		for(ISample sample : sortedSamples) {
+			sortedSampleIndices.add(IntStream.range(0, samples.getSamples().size()).filter(x -> samples.getSamples().get(x).equals(sample)).findFirst().getAsInt());
+		}
 	}
 
 	private void createControl() {
@@ -401,10 +435,10 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 					 */
 					for(int i = 0; i < evaluation.getSamples().getSamples().size(); i++) {
 						if(i > pXStart && i < pXStop) {
-							if(samplesHighlighted.contains(samples.getSamples().get(i))) {
-								samplesHighlighted.remove(samplesHighlighted.indexOf(samples.getSamples().get(i)));
+							if(samplesHighlighted.contains(samples.getSamples().get(sortedSampleIndices.get(i)))) {
+								samplesHighlighted.remove(samplesHighlighted.indexOf(samples.getSamples().get(sortedSampleIndices.get(i))));
 							} else {
-								samplesHighlighted.add(samples.getSamples().get(i));
+								samplesHighlighted.add(samples.getSamples().get(sortedSampleIndices.get(i)));
 							}
 						}
 					}
@@ -468,13 +502,13 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 						List<ISample> samplesHighlighted = evaluation.getHighlightedSamples();
 						List<ISample> highlightedSamples = new ArrayList<>();
 						if(samplesHighlighted.size() < 1) {
-							highlightedSamples.add(evaluation.getSamples().getSamples().get(index));
+							highlightedSamples.add(evaluation.getSamples().getSamples().get(sortedSampleIndices.get(index)));
 							UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, highlightedSamples.toArray());
 						} else {
-							if(samplesHighlighted.contains(evaluation.getSamples().getSamples().get(index))) {
+							if(samplesHighlighted.contains(evaluation.getSamples().getSamples().get(sortedSampleIndices.get(index)))) {
 								UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, highlightedSamples.toArray());
 							} else {
-								highlightedSamples.add(evaluation.getSamples().getSamples().get(index));
+								highlightedSamples.add(evaluation.getSamples().getSamples().get(sortedSampleIndices.get(index)));
 								UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, highlightedSamples.toArray());
 							}
 
@@ -525,14 +559,14 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 					if(index < evaluation.getSamples().getSamples().size() || index > -1) {
 						List<ISample> samplesHighlighted = evaluation.getHighlightedSamples();
 						if(samplesHighlighted.size() < 1) {
-							samplesHighlighted.add(evaluation.getSamples().getSamples().get(index));
+							samplesHighlighted.add(evaluation.getSamples().getSamples().get(sortedSampleIndices.get(index)));
 							UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, samplesHighlighted.toArray());
 						} else {
-							if(samplesHighlighted.contains(evaluation.getSamples().getSamples().get(index))) {
-								samplesHighlighted.remove(evaluation.getSamples().getSamples().get(index));
+							if(samplesHighlighted.contains(evaluation.getSamples().getSamples().get(sortedSampleIndices.get(index)))) {
+								samplesHighlighted.remove(evaluation.getSamples().getSamples().get(sortedSampleIndices.get(index)));
 								UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, samplesHighlighted.toArray());
 							} else {
-								samplesHighlighted.add(evaluation.getSamples().getSamples().get(index));
+								samplesHighlighted.add(evaluation.getSamples().getSamples().get(sortedSampleIndices.get(index)));
 								UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, samplesHighlighted.toArray());
 							}
 
@@ -646,9 +680,9 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 		Range range = new Range(xAxis.getRange().lower, xAxis.getRange().upper);
 		plot.deleteSeries();
 		if(evaluation != null) {
-			plot.setInput(evaluation, variable);
+			plot.setInput(evaluation, variable, sortedActiveSampleIndices);
 		} else {
-			plot.setInput(null, variable);
+			plot.setInput(null, variable, sortedActiveSampleIndices);
 		}
 		if(keepRange) {
 			xAxis.setRange(range);
@@ -662,6 +696,34 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 			return true;
 		}
 		return false;
+	}
+
+	private class GroupComparator implements Comparator<ISample> {
+
+		@Override
+		public int compare(ISample o1, ISample o2) {
+
+			AlphanumericStringComparator stringComp = new AlphanumericStringComparator();
+			String str1 = o1.getGroupName();
+			String str2 = o2.getGroupName();
+
+			return stringComp.compare(str1, str2);
+		}
+
+	}
+
+	private class SampleNameComparator implements Comparator<ISample> {
+
+		@Override
+		public int compare(ISample o1, ISample o2) {
+
+			AlphanumericStringComparator stringComp = new AlphanumericStringComparator();
+			String str1 = o1.getSampleName();
+			String str2 = o2.getSampleName();
+
+			return stringComp.compare(str1, str2);
+		}
+
 	}
 
 }

@@ -76,26 +76,27 @@ public class VariableLinePlot extends LineChart implements IRangeSupport {
 		initialize();
 	}
 
-	public void setInput(IEvaluation<IVariable, ISample, IResult> evaluation, String variable) {
+	public void setInput(IEvaluation<IVariable, ISample, IResult> evaluation, String variable, ArrayList<Integer> sortedActiveSampleIndices) {
 
 		deleteSeries();
 		if(evaluation != null) {
 			ISamplesPCA<IVariable, ISample> samples = evaluation.getSamples();
-			setCategories(samples.getSamples());
+			setCategories(samples.getSamples(), sortedActiveSampleIndices);
 			adjustXAxisFont(evaluation.getSamples().getAnalysisSettings().getVariableLinePlotFontSize());
 			List<ILineSeriesData> series;
-			series = SeriesConverter.variableLineToSeries(samples, variable, categoryLabelType);
+			series = SeriesConverter.variableLineToSeries(samples, variable, categoryLabelType, sortedActiveSampleIndices);
 			addSeriesData(series);
-			addHighlights(evaluation);
+			addHighlights(evaluation, sortedActiveSampleIndices);
 
 		}
 		getBaseChart().redraw();
 	}
 
-	private void setCategories(List<ISample> samples) {
+	private void setCategories(List<ISample> samples, ArrayList<Integer> sortedActiveSampleIndices) {
 
 		ArrayList<String> categoryList = new ArrayList<>();
-		for(ISample sample : samples) {
+		for(Integer index : sortedActiveSampleIndices) {
+			ISample sample = samples.get(index);
 			if(sample.isSelected()) {
 				if(categoryLabelType.equals(FeatureColumnLabels.GROUPNAMES)) {
 					categoryList.add(sample.getGroupName());
@@ -243,7 +244,7 @@ public class VariableLinePlot extends LineChart implements IRangeSupport {
 
 	}
 
-	private void addHighlights(IEvaluation<IVariable, ISample, IResult> evaluation) {
+	private void addHighlights(IEvaluation<IVariable, ISample, IResult> evaluation, ArrayList<Integer> sortedActiveSampleIndices) {
 
 		BaseChart baseChart = getBaseChart();
 		IPlotArea plotArea = baseChart.getPlotArea();
@@ -256,8 +257,8 @@ public class VariableLinePlot extends LineChart implements IRangeSupport {
 				sampleIndices.add(i);
 			}
 		}
-		for(int i = 0; i < sampleIndices.size(); i++) {
-			int current = i;
+		for(int i = 0; i < sortedActiveSampleIndices.size(); i++) {
+			int current = sortedActiveSampleIndices.get(i);
 			if(highlightedSamples.stream().anyMatch(x -> x.equals(samples.getSamples().get(current)))) {
 				highlightedIndices.add(i);
 			}
