@@ -193,7 +193,7 @@ public class SeriesConverter {
 		return scatterSeriesDataList;
 	}
 
-	public static List<ILineSeriesData> variableLineToSeries(ISamplesPCA<IVariable, ISample> samples, String comboViwewerVariable, FeatureColumnLabels categoryType) {
+	public static List<ILineSeriesData> variableLineToSeries(ISamplesPCA<IVariable, ISample> samples, String comboViwewerVariable, FeatureColumnLabels categoryType, ArrayList<Integer> sortedActiveSampleIndices) {
 
 		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 		List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
@@ -211,18 +211,12 @@ public class SeriesConverter {
 		 * Cycle through all (active) samples
 		 */
 		if(selectedVariable != -1) {
-			ArrayList<Integer> sampleIndices = new ArrayList<>();
-			for(int i = 0; i < samples.getSamples().size(); i++) {
-				if(samples.getSamples().get(i).isSelected()) {
-					sampleIndices.add(i);
-				}
-			}
-			double[] xData = new double[sampleIndices.size()];
-			double[] yData = new double[sampleIndices.size()];
-			String[] labels = new String[sampleIndices.size()];
-			for(int i = 0; i < sampleIndices.size(); i++) {
+			double[] xData = new double[sortedActiveSampleIndices.size()];
+			double[] yData = new double[sortedActiveSampleIndices.size()];
+			String[] labels = new String[sortedActiveSampleIndices.size()];
+			for(int i = 0; i < sortedActiveSampleIndices.size(); i++) {
 				xData[i] = i;
-				double currentValue = samples.getSamples().get(sampleIndices.get(i)).getSampleData().get(selectedVariable).getData();
+				double currentValue = samples.getSamples().get(sortedActiveSampleIndices.get(i)).getSampleData().get(selectedVariable).getData();
 				if(!Double.isNaN(currentValue)) {
 					yData[i] = currentValue;
 				} else {
@@ -230,9 +224,9 @@ public class SeriesConverter {
 				}
 
 				if(categoryType.equals(FeatureColumnLabels.GROUPNAMES)) {
-					labels[i] = samples.getSamples().get(sampleIndices.get(i)).getGroupName();
+					labels[i] = samples.getSamples().get(sortedActiveSampleIndices.get(i)).getGroupName();
 				} else {
-					labels[i] = samples.getSamples().get(sampleIndices.get(i)).getSampleName();
+					labels[i] = samples.getSamples().get(sortedActiveSampleIndices.get(i)).getSampleName();
 				}
 
 			}
