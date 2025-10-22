@@ -15,6 +15,7 @@
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -193,7 +194,7 @@ public class SeriesConverter {
 		return scatterSeriesDataList;
 	}
 
-	public static List<ILineSeriesData> variableLineToSeries(ISamplesPCA<IVariable, ISample> samples, String comboViwewerVariable, FeatureColumnLabels categoryType, ArrayList<Integer> sortedActiveSampleIndices) {
+	public static List<ILineSeriesData> variableLineToSeries(ISamplesPCA<IVariable, ISample> samples, String comboViwewerVariable, FeatureColumnLabels categoryType, ArrayList<Integer> sortedSampleIndices) {
 
 		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 		List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
@@ -210,13 +211,20 @@ public class SeriesConverter {
 		/*
 		 * Cycle through all (active) samples
 		 */
+		int numberOfActiveSamples = (int)samples.getSamples().stream().filter(x -> x.isSelected()).count();
+		List<ISample> activeSortedSamples;
+		if(categoryType.label().equals(FeatureColumnLabels.GROUPNAMES.label())) {
+			activeSortedSamples = samples.getSamples().stream().filter(x -> x.isSelected()).sorted(new SampleGroupComparator()).toList();
+		} else {
+			activeSortedSamples = samples.getSamples().stream().filter(x -> x.isSelected()).sorted(new SampleNameComparator()).toList();
+		}
 		if(selectedVariable != -1) {
-			double[] xData = new double[sortedActiveSampleIndices.size()];
-			double[] yData = new double[sortedActiveSampleIndices.size()];
-			String[] labels = new String[sortedActiveSampleIndices.size()];
-			for(int i = 0; i < sortedActiveSampleIndices.size(); i++) {
+			double[] xData = new double[numberOfActiveSamples];
+			double[] yData = new double[numberOfActiveSamples];
+			String[] labels = new String[numberOfActiveSamples];
+			for(int i = 0; i < numberOfActiveSamples; i++) {
 				xData[i] = i;
-				double currentValue = samples.getSamples().get(sortedActiveSampleIndices.get(i)).getSampleData().get(selectedVariable).getData();
+				double currentValue = activeSortedSamples.get(i).getSampleData().get(selectedVariable).getData();
 				if(!Double.isNaN(currentValue)) {
 					yData[i] = currentValue;
 				} else {
@@ -224,9 +232,9 @@ public class SeriesConverter {
 				}
 
 				if(categoryType.equals(FeatureColumnLabels.GROUPNAMES)) {
-					labels[i] = samples.getSamples().get(sortedActiveSampleIndices.get(i)).getGroupName();
+					labels[i] = activeSortedSamples.get(i).getGroupName();
 				} else {
-					labels[i] = samples.getSamples().get(sortedActiveSampleIndices.get(i)).getSampleName();
+					labels[i] = activeSortedSamples.get(i).getSampleName();
 				}
 
 			}
@@ -325,5 +333,33 @@ public class SeriesConverter {
 		} catch(Exception e) {
 			return PlotSymbolType.CIRCLE;
 		}
+	}
+
+	private static class SampleGroupComparator implements Comparator<ISample> {
+
+		@Override
+		public int compare(ISample o1, ISample o2) {
+
+			AlphanumericStringComparator stringComp = new AlphanumericStringComparator();
+			String str1 = o1.getGroupName();
+			String str2 = o2.getGroupName();
+
+			return stringComp.compare(str1, str2);
+		}
+
+	}
+
+	private static class SampleNameComparator implements Comparator<ISample> {
+
+		@Override
+		public int compare(ISample o1, ISample o2) {
+
+			AlphanumericStringComparator stringComp = new AlphanumericStringComparator();
+			String str1 = o1.getSampleName();
+			String str2 = o2.getSampleName();
+
+			return stringComp.compare(str1, str2);
+		}
+
 	}
 }
