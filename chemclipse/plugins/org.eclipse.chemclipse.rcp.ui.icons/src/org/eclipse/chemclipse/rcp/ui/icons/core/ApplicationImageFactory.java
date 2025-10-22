@@ -13,7 +13,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.rcp.ui.icons.core;
 
-import org.eclipse.chemclipse.rcp.ui.icons.Activator;
+import org.osgi.framework.FrameworkUtil;
 
 public class ApplicationImageFactory {
 
@@ -31,7 +31,7 @@ public class ApplicationImageFactory {
 	public static IApplicationImage getInstance() {
 
 		if(applicationImage == null) {
-			applicationImage = new ApplicationImage(Activator.getDefault().getBundle());
+			applicationImage = new ApplicationImage(FrameworkUtil.getBundle(ApplicationImageFactory.class));
 		}
 
 		return applicationImage;
