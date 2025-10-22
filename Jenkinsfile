@@ -33,7 +33,7 @@ pipeline {
 								-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn \\
 								-Dmaven.test.failure.ignore=true \\
 								-Dmaven.repo.local=$WORKSPACE/.mvn \\
-								-f chemclipse/releng/org.eclipse.chemclipse.aggregator/pom.xml \\
+								-f chemclipse/pom.xml \\
 								-Pjavadoc \\
 								clean install
 						'''

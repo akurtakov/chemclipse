@@ -36,7 +36,7 @@ contributions are always welcome!
 ### Building the source
 + An OpenJDK is required. We recommend the [Eclipse Temurin](https://adoptium.net/temurin/) distribution.
 + Clone the repository: `git clone -b develop git@github.com:eclipse/chemclipse.git`
-+ Build: mvn `mvn -f chemclipse/chemclipse/releng/org.eclipse.chemclipse.aggregator/pom.xml install`
++ Build: mvn `mvn -f chemclipse/chemclipse/pom.xml install`
 + Find the compiled product in `chemclipse/chemclipse/products/org.eclipse.chemclipse.rcp.compilation.community.product/target/products`
 
 ## Eclipse Contributor Agreement
