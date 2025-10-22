@@ -33,6 +33,17 @@
 		<maven.compiler.showWarnings>true</maven.compiler.showWarnings>
 		<maven.compiler.failOnWarning>true</maven.compiler.failOnWarning>
 	</properties>
+	<developers>
+		<developer>
+			<id>eselmeister</id>
+			<name>Philip Wenig</name>
+			<email>philip.wenig [at] openchrom.net</email>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Developer</role>
+			</roles>
+		</developer>
+	</developers>
 	<build>
 		<!-- PLUGINS -->
 		<plugins>
@@ -333,5 +344,11 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-
+	<modules>
+		<module>plugins</module>
+		<module>tests</module>
+		<module>features</module>
+		<module>sites</module>
+		<module>products</module>
+	</modules>
 </project>
