@@ -111,7 +111,7 @@ public interface IApplicationImage extends IApplicationImageProvider {
 	String IMAGE_PEAKS = "peaks.gif";
 	String IMAGE_ERROR = "error.png";
 	String IMAGE_WARN = "warn.png";
-	String IMAGE_INFO = "info.png";
+	String IMAGE_INFO = "info.svg";
 	String IMAGE_VALID = "valid.gif";
 	String IMAGE_QUESTION = "question.png";
 	String IMAGE_MASS_SPECTRUM = "massSpectrum.gif";
