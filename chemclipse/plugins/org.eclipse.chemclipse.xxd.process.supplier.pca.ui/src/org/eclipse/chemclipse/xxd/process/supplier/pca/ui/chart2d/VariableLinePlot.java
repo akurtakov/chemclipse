@@ -76,26 +76,26 @@ public class VariableLinePlot extends LineChart implements IRangeSupport {
 		initialize();
 	}
 
-	public void setInput(IEvaluation<IVariable, ISample, IResult> evaluation, String variable, ArrayList<Integer> sortedActiveSampleIndices) {
+	public void setInput(IEvaluation<IVariable, ISample, IResult> evaluation, String variable, ArrayList<Integer> sortedSampleIndices) {
 
 		deleteSeries();
 		if(evaluation != null) {
 			ISamplesPCA<IVariable, ISample> samples = evaluation.getSamples();
-			setCategories(samples.getSamples(), sortedActiveSampleIndices);
+			setCategories(samples.getSamples(), sortedSampleIndices);
 			adjustXAxisFont(evaluation.getSamples().getAnalysisSettings().getVariableLinePlotFontSize());
 			List<ILineSeriesData> series;
-			series = SeriesConverter.variableLineToSeries(samples, variable, categoryLabelType, sortedActiveSampleIndices);
+			series = SeriesConverter.variableLineToSeries(samples, variable, categoryLabelType, sortedSampleIndices);
 			addSeriesData(series);
-			addHighlights(evaluation, sortedActiveSampleIndices);
+			addHighlights(evaluation, sortedSampleIndices);
 
 		}
 		getBaseChart().redraw();
 	}
 
-	private void setCategories(List<ISample> samples, ArrayList<Integer> sortedActiveSampleIndices) {
+	private void setCategories(List<ISample> samples, ArrayList<Integer> sortedSampleIndices) {
 
 		ArrayList<String> categoryList = new ArrayList<>();
-		for(Integer index : sortedActiveSampleIndices) {
+		for(Integer index : sortedSampleIndices) {
 			ISample sample = samples.get(index);
 			if(sample.isSelected()) {
 				if(categoryLabelType.equals(FeatureColumnLabels.GROUPNAMES)) {
@@ -244,31 +244,28 @@ public class VariableLinePlot extends LineChart implements IRangeSupport {
 
 	}
 
-	private void addHighlights(IEvaluation<IVariable, ISample, IResult> evaluation, ArrayList<Integer> sortedActiveSampleIndices) {
+	private void addHighlights(IEvaluation<IVariable, ISample, IResult> evaluation, ArrayList<Integer> sortedSampleIndices) {
 
 		BaseChart baseChart = getBaseChart();
 		IPlotArea plotArea = baseChart.getPlotArea();
 		ISamplesPCA<IVariable, ISample> samples = evaluation.getSamples();
 		List<ISample> highlightedSamples = evaluation.getHighlightedSamples();
-		ArrayList<Integer> sampleIndices = new ArrayList<>();
+		List<ISample> sortedActiveSamples = sortedSampleIndices.stream().map(x -> samples.getSamples().get(x)).filter(x -> x.isSelected()).toList();
+
 		ArrayList<Integer> highlightedIndices = new ArrayList<>();
-		for(int i = 0; i < samples.getSamples().size(); i++) {
-			if(samples.getSamples().get(i).isSelected()) {
-				sampleIndices.add(i);
+		for(int j = 0; j < sortedActiveSamples.size(); j++) {
+			int current = j;
+			if(highlightedSamples.stream().anyMatch(x -> x.equals(sortedActiveSamples.get(current)))) {
+				highlightedIndices.add(current);
 			}
 		}
-		for(int i = 0; i < sortedActiveSampleIndices.size(); i++) {
-			int current = sortedActiveSampleIndices.get(i);
-			if(highlightedSamples.stream().anyMatch(x -> x.equals(samples.getSamples().get(current)))) {
-				highlightedIndices.add(i);
-			}
-		}
-		int[] highlights = highlightedIndices.stream().mapToInt(Integer::intValue).toArray();
+
+		int[] highlightIndices = highlightedIndices.stream().mapToInt(Integer::intValue).toArray();
 
 		if(variableLinePlotHighlights != null) {
 			plotArea.removeCustomPaintListener(variableLinePlotHighlights);
 		}
-		variableLinePlotHighlights = new VariableLinePlotHighlights(baseChart, highlights);
+		variableLinePlotHighlights = new VariableLinePlotHighlights(baseChart, highlightIndices);
 		plotArea.addCustomPaintListener(variableLinePlotHighlights);
 
 	}
