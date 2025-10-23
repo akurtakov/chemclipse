@@ -14,6 +14,7 @@ package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.prefere
 
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.settings.FilterSettingsHighResMS;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.settings.FilterSettingsMSx;
+import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.settings.FilterSettingsNominalMS;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.settings.FilterSettingsSIM;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.settings.FilterSettingsTandemMS;
 import org.eclipse.chemclipse.support.preferences.AbstractPreferenceSupplier;
@@ -66,5 +67,10 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static FilterSettingsHighResMS getFilterSettingsHighResMS() {
 
 		return new FilterSettingsHighResMS();
+	}
+
+	public static FilterSettingsNominalMS getFilterSettingsNominalMS() {
+
+		return new FilterSettingsNominalMS();
 	}
 }

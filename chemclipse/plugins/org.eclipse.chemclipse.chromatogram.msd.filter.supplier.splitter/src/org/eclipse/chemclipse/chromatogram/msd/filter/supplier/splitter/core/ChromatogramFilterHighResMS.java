@@ -63,7 +63,7 @@ public class ChromatogramFilterHighResMS extends AbstractChromatogramFilterMSD {
 				}
 
 				chromatogramSelection.getChromatogram().setDirty(true);
-				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "The chromatogram was splitted into MS/MS reference chromatograms."));
+				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "The chromatogram was splitted into High Resolution reference chromatograms."));
 			} else {
 				processingInfo.addWarnMessage("Splitter (High Resolution)", "The filter settings are not of type: " + FilterSettingsHighResMS.class);
 			}
