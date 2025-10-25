@@ -15,11 +15,17 @@ package org.eclipse.chemclipse.model.support;
 import java.io.File;
 
 import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.support.HeaderField;
 
 public class HeaderUtil {
 
 	public static String getHeaderData(IChromatogram chromatogram, HeaderField headerField, String defaultData) {
+
+		return getHeaderDataOverview(chromatogram, headerField, defaultData);
+	}
+
+	public static String getHeaderDataOverview(IChromatogramOverview chromatogram, HeaderField headerField, String defaultData) {
 
 		String headerData = null;
 
