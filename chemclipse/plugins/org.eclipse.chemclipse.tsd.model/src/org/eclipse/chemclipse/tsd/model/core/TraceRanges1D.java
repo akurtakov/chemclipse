@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2025 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,15 +25,15 @@ import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.support.settings.OperatingSystemUtils;
 import org.eclipse.chemclipse.tsd.model.support.TraceRangeSupport;
-import org.eclipse.chemclipse.tsd.model.validators.TraceRangeValidator;
+import org.eclipse.chemclipse.tsd.model.validators.TraceRange1DValidator;
 import org.eclipse.core.runtime.IStatus;
 
-public class TraceRanges extends ArrayList<TraceRange> {
+public class TraceRanges1D extends ArrayList<TraceRange1D> {
 
-	private static final long serialVersionUID = 8589998690167624026L;
+	private static final long serialVersionUID = 6074811121227927908L;
 
-	public static final String DESCRIPTION = "Trace Range Definitions";
-	public static final String FILE_EXTENSION = ".trd";
+	public static final String DESCRIPTION = "Trace Range Definitions 1D";
+	public static final String FILE_EXTENSION = ".t1d";
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
@@ -42,7 +42,7 @@ public class TraceRanges extends ArrayList<TraceRange> {
 	private static final String SEPARATOR_TOKEN = ";";
 	private static final String SEPARATOR_ENTRY = "|";
 
-	private static final Logger logger = Logger.getLogger(TraceRanges.class);
+	private static final Logger logger = Logger.getLogger(TraceRanges1D.class);
 
 	public void load(String items) {
 
@@ -54,12 +54,12 @@ public class TraceRanges extends ArrayList<TraceRange> {
 		return extractRanges(SEPARATOR_TOKEN);
 	}
 
-	public TraceRange extractTraceRange(String item) {
+	public TraceRange1D extractTraceRange(String item) {
 
 		return extract(item);
 	}
 
-	public String extractTraceRange(TraceRange traceRange) {
+	public String extractTraceRange(TraceRange1D traceRange) {
 
 		return getTraceRangeAsString(traceRange);
 	}
@@ -69,7 +69,7 @@ public class TraceRanges extends ArrayList<TraceRange> {
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
 			String line;
 			while((line = bufferedReader.readLine()) != null) {
-				TraceRange traceRange = extract(line);
+				TraceRange1D traceRange = extract(line);
 				if(traceRange != null) {
 					add(traceRange);
 				}
@@ -99,10 +99,10 @@ public class TraceRanges extends ArrayList<TraceRange> {
 	private String extractRanges(String rangeSeparator) {
 
 		StringBuilder builder = new StringBuilder();
-		Iterator<TraceRange> iterator = iterator();
+		Iterator<TraceRange1D> iterator = iterator();
 
 		while(iterator.hasNext()) {
-			TraceRange traceRange = iterator.next();
+			TraceRange1D traceRange = iterator.next();
 			builder.append(getTraceRangeAsString(traceRange));
 			if(iterator.hasNext()) {
 				builder.append(rangeSeparator);
@@ -112,7 +112,7 @@ public class TraceRanges extends ArrayList<TraceRange> {
 		return builder.toString().trim();
 	}
 
-	private String getTraceRangeAsString(TraceRange traceRange) {
+	private String getTraceRangeAsString(TraceRange1D traceRange) {
 
 		StringBuilder builder = new StringBuilder();
 
@@ -121,26 +121,18 @@ public class TraceRanges extends ArrayList<TraceRange> {
 			addSeparator(builder);
 			builder.append(TraceRangeSupport.DF_COLUMN_1_MINUTES.format(traceRange.getRetentionTimeColumn1Stop() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
 			addSeparator(builder);
-			builder.append(TraceRangeSupport.DF_COLUMN_2_SECONDS.format(traceRange.getRetentionTimeColumn2Start() / IChromatogramOverview.SECOND_CORRELATION_FACTOR));
-			addSeparator(builder);
-			builder.append(TraceRangeSupport.DF_COLUMN_2_SECONDS.format(traceRange.getRetentionTimeColumn2Stop() / IChromatogramOverview.SECOND_CORRELATION_FACTOR));
-			addSeparator(builder);
-			builder.append(traceRange.getScanIndicesColumn2());
-			addSeparator(builder);
 			builder.append(traceRange.getName());
 			addSeparator(builder);
 			builder.append(traceRange.getTraces());
-			addSeparator(builder);
-			builder.append(traceRange.getSecondDimensionHint().name());
 		}
 
 		return builder.toString();
 	}
 
-	private TraceRange extract(String text) {
+	private TraceRange1D extract(String text) {
 
-		TraceRange traceRange = null;
-		TraceRangeValidator validator = new TraceRangeValidator();
+		TraceRange1D traceRange = null;
+		TraceRange1DValidator validator = new TraceRange1DValidator();
 
 		IStatus status = validator.validate(text);
 		if(status.isOK()) {
@@ -163,7 +155,7 @@ public class TraceRanges extends ArrayList<TraceRange> {
 		}
 
 		for(String line : lines) {
-			TraceRange traceRange = extract(line);
+			TraceRange1D traceRange = extract(line);
 			if(traceRange != null && !contains(traceRange)) {
 				add(traceRange);
 			}

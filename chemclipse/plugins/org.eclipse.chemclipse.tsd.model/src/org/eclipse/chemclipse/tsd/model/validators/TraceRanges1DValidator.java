@@ -13,13 +13,13 @@
 package org.eclipse.chemclipse.tsd.model.validators;
 
 import org.eclipse.chemclipse.support.util.ValueParserSupport;
-import org.eclipse.chemclipse.tsd.model.core.TraceRange;
-import org.eclipse.chemclipse.tsd.model.core.TraceRanges;
+import org.eclipse.chemclipse.tsd.model.core.TraceRange1D;
+import org.eclipse.chemclipse.tsd.model.core.TraceRanges1D;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 
-public class TraceRangesValidator extends ValueParserSupport implements IValidator<Object> {
+public class TraceRanges1DValidator extends ValueParserSupport implements IValidator<Object> {
 
 	@Override
 	public IStatus validate(Object value) {
@@ -28,8 +28,8 @@ public class TraceRangesValidator extends ValueParserSupport implements IValidat
 		if(value == null) {
 			message = "The trace ranges are empty.";
 		} else {
-			if(value instanceof TraceRanges traceRanges) {
-				for(TraceRange traceRange : traceRanges) {
+			if(value instanceof TraceRanges1D traceRanges) {
+				for(TraceRange1D traceRange : traceRanges) {
 					if(traceRange.getRetentionTimeColumn1Start() < 0) {
 						message = "The retention time start is < 0.";
 					} else if(traceRange.getRetentionTimeColumn1Stop() < 0) {
@@ -37,7 +37,7 @@ public class TraceRangesValidator extends ValueParserSupport implements IValidat
 					}
 				}
 			} else {
-				message = "The settings class is not of type: " + TraceRanges.class.getName();
+				message = "The settings class is not of type: " + TraceRanges1D.class.getName();
 			}
 		}
 

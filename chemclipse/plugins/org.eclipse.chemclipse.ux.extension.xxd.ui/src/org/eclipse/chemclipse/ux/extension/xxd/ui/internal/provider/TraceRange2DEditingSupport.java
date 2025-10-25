@@ -17,26 +17,26 @@ import java.util.stream.Collectors;
 
 import org.eclipse.chemclipse.support.text.ILabel;
 import org.eclipse.chemclipse.tsd.model.core.SecondDimensionHint;
-import org.eclipse.chemclipse.tsd.model.core.TraceRange;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.TraceRangesListUI;
+import org.eclipse.chemclipse.tsd.model.core.TraceRange2D;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.TraceRanges2DListUI;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ComboBoxCellEditor;
 import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.SWT;
 
-public class TraceRangeEditingSupport extends EditingSupport {
+public class TraceRange2DEditingSupport extends EditingSupport {
 
 	private String column;
 	private CellEditor cellEditor;
-	private TraceRangesListUI tableViewer;
+	private TraceRanges2DListUI tableViewer;
 	private SecondDimensionHint[] secondDimensionValues = SecondDimensionHint.values();
 
-	public TraceRangeEditingSupport(TraceRangesListUI tableViewer, String column) {
+	public TraceRange2DEditingSupport(TraceRanges2DListUI tableViewer, String column) {
 
 		super(tableViewer);
 		this.column = column;
-		if(TraceRangeLabelProvider.SECOND_DIMENSION_HINT.equals(column)) {
+		if(TraceRange2DLabelProvider.SECOND_DIMENSION_HINT.equals(column)) {
 			this.cellEditor = new ComboBoxCellEditor(tableViewer.getTable(), getEnumLabels(secondDimensionValues), SWT.READ_ONLY);
 		} else {
 			this.cellEditor = new TextCellEditor(tableViewer.getTable());
@@ -55,10 +55,10 @@ public class TraceRangeEditingSupport extends EditingSupport {
 
 		boolean canEdit = false;
 		if(tableViewer.isEditEnabled()) {
-			canEdit = column.equals(TraceRangeLabelProvider.SCAN_INDICES_COLUMN2) || //
-					column.equals(TraceRangeLabelProvider.NAME) || //
-					column.equals(TraceRangeLabelProvider.TRACES) || //
-					column.equals(TraceRangeLabelProvider.SECOND_DIMENSION_HINT); //
+			canEdit = column.equals(TraceRange2DLabelProvider.SCAN_INDICES_COLUMN2) || //
+					column.equals(TraceRange2DLabelProvider.NAME) || //
+					column.equals(TraceRange2DLabelProvider.TRACES) || //
+					column.equals(TraceRange2DLabelProvider.SECOND_DIMENSION_HINT); //
 		}
 
 		return canEdit;
@@ -67,15 +67,15 @@ public class TraceRangeEditingSupport extends EditingSupport {
 	@Override
 	protected Object getValue(Object element) {
 
-		if(element instanceof TraceRange traceRange) {
+		if(element instanceof TraceRange2D traceRange) {
 			switch(column) {
-				case TraceRangeLabelProvider.SCAN_INDICES_COLUMN2:
+				case TraceRange2DLabelProvider.SCAN_INDICES_COLUMN2:
 					return traceRange.getScanIndicesColumn2();
-				case TraceRangeLabelProvider.NAME:
+				case TraceRange2DLabelProvider.NAME:
 					return traceRange.getName();
-				case TraceRangeLabelProvider.TRACES:
+				case TraceRange2DLabelProvider.TRACES:
 					return traceRange.getTraces();
-				case TraceRangeLabelProvider.SECOND_DIMENSION_HINT:
+				case TraceRange2DLabelProvider.SECOND_DIMENSION_HINT:
 					return getComboIndexType(traceRange.getSecondDimensionHint(), secondDimensionValues);
 			}
 		}
@@ -85,18 +85,18 @@ public class TraceRangeEditingSupport extends EditingSupport {
 	@Override
 	protected void setValue(Object element, Object value) {
 
-		if(element instanceof TraceRange traceRange) {
+		if(element instanceof TraceRange2D traceRange) {
 			switch(column) {
-				case TraceRangeLabelProvider.SCAN_INDICES_COLUMN2:
+				case TraceRange2DLabelProvider.SCAN_INDICES_COLUMN2:
 					traceRange.setScanIndicesColumn2(value.toString());
 					break;
-				case TraceRangeLabelProvider.NAME:
+				case TraceRange2DLabelProvider.NAME:
 					traceRange.setName(value.toString());
 					break;
-				case TraceRangeLabelProvider.TRACES:
+				case TraceRange2DLabelProvider.TRACES:
 					traceRange.setTraces(value.toString());
 					break;
-				case TraceRangeLabelProvider.SECOND_DIMENSION_HINT:
+				case TraceRange2DLabelProvider.SECOND_DIMENSION_HINT:
 					traceRange.setSecondDimensionHint(secondDimensionValues[(int)value]);
 					break;
 			}

@@ -127,5 +127,6 @@ Service-Component: OSGI-INF/org.eclipse.chemclipse.ux.extension.xxd.ui.editors.E
  OSGI-INF/org.eclipse.chemclipse.ux.extension.xxd.ui.services.ColumnMappingAnnotationService.xml,
  OSGI-INF/org.eclipse.chemclipse.ux.extension.xxd.ui.services.EditorServiceTSD.xml,
  OSGI-INF/org.eclipse.chemclipse.ux.extension.xxd.ui.services.TimeRangesAnnotationService.xml,
- OSGI-INF/org.eclipse.chemclipse.ux.extension.xxd.ui.services.TraceRangesAnnotationService.xml,
+ OSGI-INF/org.eclipse.chemclipse.ux.extension.xxd.ui.services.TraceRanges1DAnnotationService.xml,
+ OSGI-INF/org.eclipse.chemclipse.ux.extension.xxd.ui.services.TraceRanges2DAnnotationService.xml,
  OSGI-INF/org.eclipse.chemclipse.ux.extension.xxd.ui.system.TargetsProcessSupplier.xml

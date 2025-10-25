@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.chemclipse.tsd.model.services.TraceRangesSerializationService;
 import org.eclipse.chemclipse.ux.extension.ui.methods.IAnnotationWidgetService;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.editors.TraceRangesEditor;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.editors.TraceRangesEditor1D;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -25,14 +25,14 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ConfigurationPolicy;
 
 @Component(service = {IAnnotationWidgetService.class}, configurationPolicy = ConfigurationPolicy.OPTIONAL)
-public class TraceRangesAnnotationService extends TraceRangesSerializationService implements IAnnotationWidgetService {
+public class TraceRanges1DAnnotationService extends TraceRangesSerializationService implements IAnnotationWidgetService {
 
-	private AtomicReference<TraceRangesEditor> traceRangesEditorControl = new AtomicReference<>();
+	private AtomicReference<TraceRangesEditor1D> traceRangesEditorControl = new AtomicReference<>();
 
 	@Override
 	public Control createWidget(Composite parent, String description, Object currentSelection) {
 
-		TraceRangesEditor traceRangesEditor = new TraceRangesEditor(parent, SWT.NONE);
+		TraceRangesEditor1D traceRangesEditor = new TraceRangesEditor1D(parent, SWT.NONE);
 		traceRangesEditor.setToolTipText(description);
 		GridData gridData = new GridData(GridData.FILL_BOTH);
 		gridData.heightHint = 200;

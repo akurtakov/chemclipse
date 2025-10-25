@@ -13,7 +13,7 @@
 package org.eclipse.chemclipse.tsd.model.services;
 
 import org.eclipse.chemclipse.support.settings.serialization.ISerializationService;
-import org.eclipse.chemclipse.tsd.model.core.TraceRanges;
+import org.eclipse.chemclipse.tsd.model.core.TraceRanges2D;
 import org.eclipse.chemclipse.tsd.model.serializer.TraceRangesDeserializer;
 import org.eclipse.chemclipse.tsd.model.serializer.TraceRangesSerializer;
 import org.osgi.service.component.annotations.Component;
@@ -28,17 +28,17 @@ public class TraceRangesSerializationService implements ISerializationService {
 	@Override
 	public Class<?> getSupportedClass() {
 
-		return TraceRanges.class;
+		return TraceRanges2D.class;
 	}
 
 	@Override
-	public JsonSerializer<TraceRanges> getSerializer() {
+	public JsonSerializer<TraceRanges2D> getSerializer() {
 
 		return new TraceRangesSerializer();
 	}
 
 	@Override
-	public JsonDeserializer<TraceRanges> getDeserializer() {
+	public JsonDeserializer<TraceRanges2D> getDeserializer() {
 
 		return new TraceRangesDeserializer();
 	}

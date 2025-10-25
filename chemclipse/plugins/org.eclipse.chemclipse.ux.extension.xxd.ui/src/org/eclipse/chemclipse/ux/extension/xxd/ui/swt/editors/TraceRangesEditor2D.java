@@ -22,13 +22,13 @@ import org.eclipse.chemclipse.support.ui.swt.ITableSettings;
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
 import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
-import org.eclipse.chemclipse.tsd.model.core.TraceRange;
-import org.eclipse.chemclipse.tsd.model.core.TraceRanges;
+import org.eclipse.chemclipse.tsd.model.core.TraceRange2D;
+import org.eclipse.chemclipse.tsd.model.core.TraceRanges2D;
 import org.eclipse.chemclipse.ux.extension.ui.methods.IChangeListener;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.TraceRangeInputValidator;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.TraceRange2DInputValidator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.TraceRangesListUI;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.TraceRanges2DListUI;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -44,7 +44,7 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 
-public class TraceRangesEditor extends Composite implements IChangeListener, IExtendedPartUI {
+public class TraceRangesEditor2D extends Composite implements IChangeListener, IExtendedPartUI {
 
 	public static final String ADD = "Add";
 	public static final String ADD_TOOLTIP = "Add a new stack range.";
@@ -69,7 +69,7 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 
 	public static final String EXAMPLE_ENTRY = "1.0 | 3.0 | 0 | 0 | 150 - 160";
 
-	private AtomicReference<TraceRangesListUI> listControl = new AtomicReference<>();
+	private AtomicReference<TraceRanges2DListUI> listControl = new AtomicReference<>();
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private AtomicReference<Button> buttonToolbarSearch = new AtomicReference<>();
 	private AtomicReference<Button> buttonAdd = new AtomicReference<>();
@@ -79,18 +79,18 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 	private AtomicReference<Button> buttonImport = new AtomicReference<>();
 	private AtomicReference<Button> buttonExport = new AtomicReference<>();
 
-	private TraceRanges traceRanges = new TraceRanges();
+	private TraceRanges2D traceRanges = new TraceRanges2D();
 	private Listener listener;
 
-	public TraceRangesEditor(Composite parent, int style) {
+	public TraceRangesEditor2D(Composite parent, int style) {
 
 		super(parent, style);
 		createControl();
 	}
 
-	public void setInput(TraceRanges traceRanges) {
+	public void setInput(TraceRanges2D traceRanges) {
 
-		this.traceRanges = (traceRanges == null) ? new TraceRanges() : traceRanges;
+		this.traceRanges = (traceRanges == null) ? new TraceRanges2D() : traceRanges;
 		setInput();
 	}
 
@@ -137,7 +137,7 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 		listControl.get().getControl().setEnabled(enabled);
 	}
 
-	public TraceRanges getTraceRanges() {
+	public TraceRanges2D getTraceRanges() {
 
 		return traceRanges;
 	}
@@ -175,7 +175,7 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 
 	private void createTableSection(Composite parent) {
 
-		TraceRangesListUI stackRangesListUI = new TraceRangesListUI(parent, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
+		TraceRanges2DListUI stackRangesListUI = new TraceRanges2DListUI(parent, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 		Table table = stackRangesListUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
 
@@ -244,10 +244,10 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				InputDialog dialog = new InputDialog(button.getShell(), DIALOG_TITLE, MESSAGE_ADD, EXAMPLE_ENTRY, new TraceRangeInputValidator(traceRanges));
+				InputDialog dialog = new InputDialog(button.getShell(), DIALOG_TITLE, MESSAGE_ADD, EXAMPLE_ENTRY, new TraceRange2DInputValidator(traceRanges));
 				if(IDialogConstants.OK_ID == dialog.open()) {
 					String item = dialog.getValue();
-					TraceRange setting = traceRanges.extractTraceRange(item);
+					TraceRange2D setting = traceRanges.extractTraceRange(item);
 					if(setting != null) {
 						traceRanges.add(setting);
 						setInput();
@@ -270,12 +270,12 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				TraceRange traceRange = getTraceRangeSelected();
+				TraceRange2D traceRange = getTraceRangeSelected();
 				if(traceRange != null) {
-					InputDialog dialog = new InputDialog(button.getShell(), DIALOG_TITLE, MESSAGE_ADD, traceRanges.extractTraceRange(traceRange), new TraceRangeInputValidator(traceRanges));
+					InputDialog dialog = new InputDialog(button.getShell(), DIALOG_TITLE, MESSAGE_ADD, traceRanges.extractTraceRange(traceRange), new TraceRange2DInputValidator(traceRanges));
 					if(IDialogConstants.OK_ID == dialog.open()) {
 						String item = dialog.getValue();
-						TraceRange setting = traceRanges.extractTraceRange(item);
+						TraceRange2D setting = traceRanges.extractTraceRange(item);
 						if(setting != null) {
 							traceRanges.remove(traceRange);
 							traceRanges.add(setting);
@@ -343,8 +343,8 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 
 				FileDialog fileDialog = new FileDialog(e.widget.getDisplay().getActiveShell(), SWT.READ_ONLY);
 				fileDialog.setText(IMPORT_TITLE);
-				fileDialog.setFilterExtensions(new String[]{TraceRanges.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{TraceRanges.FILTER_NAME});
+				fileDialog.setFilterExtensions(new String[]{TraceRanges2D.FILTER_EXTENSION});
+				fileDialog.setFilterNames(new String[]{TraceRanges2D.FILTER_NAME});
 				fileDialog.setFilterPath(PreferenceSupplier.getListPathImport());
 				String path = fileDialog.open();
 				if(path != null) {
@@ -373,9 +373,9 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 				FileDialog fileDialog = new FileDialog(e.widget.getDisplay().getActiveShell(), SWT.SAVE);
 				fileDialog.setOverwrite(true);
 				fileDialog.setText(EXPORT_TITLE);
-				fileDialog.setFilterExtensions(new String[]{TraceRanges.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{TraceRanges.FILTER_NAME});
-				fileDialog.setFileName(TraceRanges.FILE_NAME);
+				fileDialog.setFilterExtensions(new String[]{TraceRanges2D.FILTER_EXTENSION});
+				fileDialog.setFilterNames(new String[]{TraceRanges2D.FILTER_NAME});
+				fileDialog.setFileName(TraceRanges2D.FILE_NAME);
 				fileDialog.setFilterPath(PreferenceSupplier.getListPathExport());
 				String path = fileDialog.open();
 				if(path != null) {
@@ -393,9 +393,9 @@ public class TraceRangesEditor extends Composite implements IChangeListener, IEx
 		buttonExport.set(button);
 	}
 
-	private TraceRange getTraceRangeSelected() {
+	private TraceRange2D getTraceRangeSelected() {
 
-		if(listControl.get().getStructuredSelection().getFirstElement() instanceof TraceRange traceRange) {
+		if(listControl.get().getStructuredSelection().getFirstElement() instanceof TraceRange2D traceRange) {
 			return traceRange;
 		}
 

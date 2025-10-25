@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider;
 
-import org.eclipse.chemclipse.tsd.model.core.TraceRange;
+import org.eclipse.chemclipse.tsd.model.core.TraceRange2D;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 
-public class TraceRangeFilter extends ViewerFilter {
+public class TraceRange2DFilter extends ViewerFilter {
 
 	private String searchText;
 	private boolean caseSensitive;
@@ -34,7 +34,7 @@ public class TraceRangeFilter extends ViewerFilter {
 			return true;
 		}
 
-		if(element instanceof TraceRange traceRange) {
+		if(element instanceof TraceRange2D traceRange) {
 			String name = traceRange.getName();
 
 			if(!caseSensitive) {

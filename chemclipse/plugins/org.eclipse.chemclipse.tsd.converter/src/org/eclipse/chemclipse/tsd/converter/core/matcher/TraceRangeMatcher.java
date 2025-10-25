@@ -22,7 +22,7 @@ import org.eclipse.chemclipse.support.traces.TraceFactory;
 import org.eclipse.chemclipse.support.traces.TraceGenericDelta;
 import org.eclipse.chemclipse.support.traces.TraceHighResMSD;
 import org.eclipse.chemclipse.support.traces.TraceHighResWSD;
-import org.eclipse.chemclipse.tsd.model.core.TraceRange;
+import org.eclipse.chemclipse.tsd.model.core.TraceRange2D;
 
 /*
  * ------------
@@ -39,10 +39,41 @@ import org.eclipse.chemclipse.tsd.model.core.TraceRange;
  */
 public class TraceRangeMatcher {
 
-	private int retentionTimeMin = 0;
+	private int retentionTimeMin = Integer.MAX_VALUE;
 	private int retentionTimeMax = 0;
-	private List<TraceRange> traceRanges = new ArrayList<>();
+	private List<TraceRange2D> traceRanges = new ArrayList<>();
 	private boolean parseFully = false;
+
+	private Set<Integer> focusSet = new HashSet<>();
+
+	public void compileFocusMap(int retentionTimeStart, int scanInterval, int retentionTimeMax) {
+
+		int retentionTime = retentionTimeStart;
+		while(retentionTime <= retentionTimeMax) {
+			if(isMatch(retentionTime)) {
+				focusSet.add(retentionTime);
+			}
+			retentionTime += scanInterval;
+		}
+	}
+
+	public boolean isInFocus(int retentionTime) {
+
+		return focusSet.contains(retentionTime);
+	}
+
+	private boolean isMatch(int retentionTime) {
+
+		for(TraceRange2D traceRange : traceRanges) {
+			int start = traceRange.getRetentionTimeColumn1Start();
+			int stop = traceRange.getRetentionTimeColumn1Stop();
+			if(retentionTime >= start && retentionTime <= stop) {
+				return true;
+			}
+		}
+
+		return false;
+	}
 
 	public boolean isParseFully() {
 
@@ -52,6 +83,16 @@ public class TraceRangeMatcher {
 	public void setParseFully(boolean parseFully) {
 
 		this.parseFully = parseFully;
+	}
+
+	public int getRetentionTimeMin() {
+
+		return retentionTimeMin;
+	}
+
+	public int getRetentionTimeMax() {
+
+		return retentionTimeMax;
 	}
 
 	public void addHighResMSD(String traces, int retentionTimeStart, int retentionTimeStop) {
@@ -75,7 +116,7 @@ public class TraceRangeMatcher {
 			for(Map.Entry<Integer, Double> entry : valueMap.entrySet()) {
 				int index = entry.getKey();
 				double value = entry.getValue();
-				for(TraceRange traceRange : traceRanges) {
+				for(TraceRange2D traceRange : traceRanges) {
 					if(isParseFully()) {
 						traceRange.getTraceIndices().add(index);
 					} else {
@@ -96,11 +137,11 @@ public class TraceRangeMatcher {
 	 * @param retentionTime
 	 * @return List<TraceRange>
 	 */
-	public List<TraceRange> getTraceRanges(int retentionTime) {
+	public List<TraceRange2D> getTraceRanges(int retentionTime) {
 
-		List<TraceRange> selection = new ArrayList<>();
+		List<TraceRange2D> selection = new ArrayList<>();
 		if(isRetentionTimeInFocus(retentionTime)) {
-			for(TraceRange traceRange : traceRanges) {
+			for(TraceRange2D traceRange : traceRanges) {
 				if(isValidTraceRange(traceRange)) {
 					if(retentionTime >= traceRange.getRetentionTimeColumn1Start() && retentionTime <= traceRange.getRetentionTimeColumn1Stop()) {
 						selection.add(traceRange);
@@ -123,9 +164,9 @@ public class TraceRangeMatcher {
 	 */
 	public Set<Integer> getTraceIndices(int retentionTime, int start, int stop) {
 
-		List<TraceRange> traceRanges = getTraceRanges(retentionTime);
+		List<TraceRange2D> traceRanges = getTraceRanges(retentionTime);
 		Set<Integer> traceIndices = new HashSet<>();
-		for(TraceRange traceRange : traceRanges) {
+		for(TraceRange2D traceRange : traceRanges) {
 			if(useIndices(traceRange.getTraceIndices(), start, stop)) {
 				traceIndices.addAll(traceRange.getTraceIndices());
 			}
@@ -149,7 +190,7 @@ public class TraceRangeMatcher {
 		return false;
 	}
 
-	private boolean isValidTraceRange(TraceRange traceRange) {
+	private boolean isValidTraceRange(TraceRange2D traceRange) {
 
 		if(traceRange.getRetentionTimeColumn1Start() == 0 && traceRange.getRetentionTimeColumn1Stop() == 0) {
 			return false;
@@ -175,7 +216,7 @@ public class TraceRangeMatcher {
 				/*
 				 * TraceRange
 				 */
-				TraceRange traceRange = new TraceRange();
+				TraceRange2D traceRange = new TraceRange2D();
 				traceRange.setRetentionTimeColumn1Start(retentionTimeColumn1Start);
 				traceRange.setRetentionTimeColumn1Stop(retentionTimeColumn1Stop);
 				traceRange.getGenericTraces().addAll(tracesGenericDelta);

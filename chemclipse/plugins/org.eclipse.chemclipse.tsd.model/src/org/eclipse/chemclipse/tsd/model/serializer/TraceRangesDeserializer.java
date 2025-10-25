@@ -14,18 +14,18 @@ package org.eclipse.chemclipse.tsd.model.serializer;
 
 import java.io.IOException;
 
-import org.eclipse.chemclipse.tsd.model.core.TraceRanges;
+import org.eclipse.chemclipse.tsd.model.core.TraceRanges2D;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
-public class TraceRangesDeserializer extends JsonDeserializer<TraceRanges> {
+public class TraceRangesDeserializer extends JsonDeserializer<TraceRanges2D> {
 
 	@Override
-	public TraceRanges deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+	public TraceRanges2D deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
 
-		TraceRanges traceRanges = new TraceRanges();
+		TraceRanges2D traceRanges = new TraceRanges2D();
 		traceRanges.load(jsonParser.getText());
 
 		return traceRanges;

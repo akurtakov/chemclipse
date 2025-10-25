@@ -14,16 +14,16 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider;
 
 import org.eclipse.chemclipse.support.ui.swt.AbstractRecordTableComparator;
 import org.eclipse.chemclipse.support.ui.swt.IRecordTableComparator;
-import org.eclipse.chemclipse.tsd.model.core.TraceRange;
+import org.eclipse.chemclipse.tsd.model.core.TraceRange2D;
 import org.eclipse.jface.viewers.Viewer;
 
-public class TraceRangeTableComparator extends AbstractRecordTableComparator implements IRecordTableComparator {
+public class TraceRange2DTableComparator extends AbstractRecordTableComparator implements IRecordTableComparator {
 
 	@Override
 	public int compare(Viewer viewer, Object e1, Object e2) {
 
 		int sortOrder = 0;
-		if(e1 instanceof TraceRange traceRange1 && e2 instanceof TraceRange traceRange2) {
+		if(e1 instanceof TraceRange2D traceRange1 && e2 instanceof TraceRange2D traceRange2) {
 			switch(getPropertyIndex()) {
 				case 0:
 					sortOrder = Integer.compare(traceRange2.getRetentionTimeColumn1Start(), traceRange1.getRetentionTimeColumn1Start());

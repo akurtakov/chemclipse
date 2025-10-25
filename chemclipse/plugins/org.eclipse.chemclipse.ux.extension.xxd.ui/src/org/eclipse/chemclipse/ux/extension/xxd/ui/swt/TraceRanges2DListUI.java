@@ -17,25 +17,25 @@ import java.util.List;
 import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.TraceRangeEditingSupport;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.TraceRangeFilter;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.TraceRangeLabelProvider;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.TraceRangeTableComparator;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.TraceRange2DEditingSupport;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.TraceRange2DFilter;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.TraceRange2DLabelProvider;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.TraceRange2DTableComparator;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.widgets.Composite;
 
-public class TraceRangesListUI extends ExtendedTableViewer {
+public class TraceRanges2DListUI extends ExtendedTableViewer {
 
-	private static final String[] TITLES = TraceRangeLabelProvider.TITLES;
-	private static final int[] BOUNDS = TraceRangeLabelProvider.BOUNDS;
+	private static final String[] TITLES = TraceRange2DLabelProvider.TITLES;
+	private static final int[] BOUNDS = TraceRange2DLabelProvider.BOUNDS;
 
-	private TraceRangeLabelProvider labelProvider = new TraceRangeLabelProvider();
-	private TraceRangeTableComparator tableComparator = new TraceRangeTableComparator();
-	private TraceRangeFilter listFilter = new TraceRangeFilter();
+	private TraceRange2DLabelProvider labelProvider = new TraceRange2DLabelProvider();
+	private TraceRange2DTableComparator tableComparator = new TraceRange2DTableComparator();
+	private TraceRange2DFilter listFilter = new TraceRange2DFilter();
 
 	private IUpdateListener updateListener;
 
-	public TraceRangesListUI(Composite parent, int style) {
+	public TraceRanges2DListUI(Composite parent, int style) {
 
 		super(parent, style);
 		createColumns();
@@ -79,7 +79,7 @@ public class TraceRangesListUI extends ExtendedTableViewer {
 		for(int i = 0; i < tableViewerColumns.size(); i++) {
 			TableViewerColumn tableViewerColumn = tableViewerColumns.get(i);
 			String label = tableViewerColumn.getColumn().getText();
-			tableViewerColumn.setEditingSupport(new TraceRangeEditingSupport(this, label));
+			tableViewerColumn.setEditingSupport(new TraceRange2DEditingSupport(this, label));
 		}
 	}
 }

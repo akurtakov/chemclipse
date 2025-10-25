@@ -14,16 +14,16 @@ package org.eclipse.chemclipse.tsd.model.serializer;
 
 import java.io.IOException;
 
-import org.eclipse.chemclipse.tsd.model.core.TraceRanges;
+import org.eclipse.chemclipse.tsd.model.core.TraceRanges2D;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
-public class TraceRangesSerializer extends JsonSerializer<TraceRanges> {
+public class TraceRangesSerializer extends JsonSerializer<TraceRanges2D> {
 
 	@Override
-	public void serialize(TraceRanges traceRanges, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+	public void serialize(TraceRanges2D traceRanges, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
 
 		if(traceRanges != null) {
 			jsonGenerator.writeString(traceRanges.save());

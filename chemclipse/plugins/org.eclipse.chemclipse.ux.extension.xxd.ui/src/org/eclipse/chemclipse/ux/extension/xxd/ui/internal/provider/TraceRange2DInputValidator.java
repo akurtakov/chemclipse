@@ -12,18 +12,18 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider;
 
-import org.eclipse.chemclipse.tsd.model.core.TraceRange;
-import org.eclipse.chemclipse.tsd.model.core.TraceRanges;
-import org.eclipse.chemclipse.tsd.model.validators.TraceRangeValidator;
+import org.eclipse.chemclipse.tsd.model.core.TraceRange2D;
+import org.eclipse.chemclipse.tsd.model.core.TraceRanges2D;
+import org.eclipse.chemclipse.tsd.model.validators.TraceRange2DValidator;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.dialogs.IInputValidator;
 
-public class TraceRangeInputValidator implements IInputValidator {
+public class TraceRange2DInputValidator implements IInputValidator {
 
-	private TraceRangeValidator validator = new TraceRangeValidator();
-	private TraceRanges traceRanges = new TraceRanges();
+	private TraceRange2DValidator validator = new TraceRange2DValidator();
+	private TraceRanges2D traceRanges = new TraceRanges2D();
 
-	public TraceRangeInputValidator(TraceRanges traceRanges) {
+	public TraceRange2DInputValidator(TraceRanges2D traceRanges) {
 
 		if(traceRanges != null) {
 			this.traceRanges = traceRanges;
@@ -35,9 +35,9 @@ public class TraceRangeInputValidator implements IInputValidator {
 
 		IStatus status = validator.validate(target);
 		if(status.isOK()) {
-			TraceRange stackRange = validator.getSetting();
-			if(traceRanges.contains(stackRange)) {
-				return "The stack range exists already.";
+			TraceRange2D traceRange = validator.getSetting();
+			if(traceRanges.contains(traceRange)) {
+				return "The trace range exists already.";
 			}
 		} else {
 			return status.getMessage();
