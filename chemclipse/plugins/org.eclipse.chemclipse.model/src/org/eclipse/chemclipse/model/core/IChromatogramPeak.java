@@ -47,6 +47,8 @@ public interface IChromatogramPeak extends IPeak {
 
 	IChromatogram getChromatogram();
 
+	void setChromatogram(IChromatogram chromatogram);
+
 	default float getSignalToNoiseRatio(IChromatogram chromatogram) {
 
 		float totalSignal = getPeakModel().getPeakAbundance();

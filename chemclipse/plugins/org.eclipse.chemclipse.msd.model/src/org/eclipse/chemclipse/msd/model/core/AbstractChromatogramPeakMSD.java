@@ -13,6 +13,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core;
 
+import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.exceptions.PeakException;
 
 /**
@@ -74,6 +75,14 @@ public abstract class AbstractChromatogramPeakMSD extends AbstractPeakMSD implem
 	public IChromatogramMSD getChromatogram() {
 
 		return chromatogram;
+	}
+
+	@Override
+	public void setChromatogram(IChromatogram chromatogram) {
+
+		if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
+			this.chromatogram = chromatogramMSD;
+		}
 	}
 
 	@Override

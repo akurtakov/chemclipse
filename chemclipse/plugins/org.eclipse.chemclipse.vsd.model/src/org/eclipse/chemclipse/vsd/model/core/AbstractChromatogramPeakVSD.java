@@ -12,6 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.vsd.model.core;
 
+import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.exceptions.PeakException;
 
 public class AbstractChromatogramPeakVSD extends AbstractPeakVSD implements IChromatogramPeakVSD {
@@ -40,6 +41,14 @@ public class AbstractChromatogramPeakVSD extends AbstractPeakVSD implements IChr
 	public IChromatogramVSD getChromatogram() {
 
 		return chromatogram;
+	}
+
+	@Override
+	public void setChromatogram(IChromatogram chromatogram) {
+
+		if(chromatogram instanceof IChromatogramVSD chromatogramVSD) {
+			this.chromatogram = chromatogramVSD;
+		}
 	}
 
 	@Override

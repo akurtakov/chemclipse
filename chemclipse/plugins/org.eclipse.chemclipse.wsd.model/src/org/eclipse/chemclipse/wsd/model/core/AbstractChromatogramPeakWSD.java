@@ -12,6 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.wsd.model.core;
 
+import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.exceptions.PeakException;
 
@@ -96,6 +97,14 @@ public abstract class AbstractChromatogramPeakWSD extends AbstractPeakWSD implem
 	public IChromatogramWSD getChromatogram() {
 
 		return chromatogram;
+	}
+
+	@Override
+	public void setChromatogram(IChromatogram chromatogram) {
+
+		if(chromatogram instanceof IChromatogramWSD chromatogramWSD) {
+			this.chromatogram = chromatogramWSD;
+		}
 	}
 
 	@Override

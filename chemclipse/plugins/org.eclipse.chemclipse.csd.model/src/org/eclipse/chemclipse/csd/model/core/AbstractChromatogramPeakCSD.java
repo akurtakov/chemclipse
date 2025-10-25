@@ -12,6 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.csd.model.core;
 
+import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.exceptions.PeakException;
 
 public abstract class AbstractChromatogramPeakCSD extends AbstractPeakCSD implements IChromatogramPeakCSD {
@@ -76,6 +77,14 @@ public abstract class AbstractChromatogramPeakCSD extends AbstractPeakCSD implem
 	public IChromatogramCSD getChromatogram() {
 
 		return chromatogram;
+	}
+
+	@Override
+	public void setChromatogram(IChromatogram chromatogram) {
+
+		if(chromatogram instanceof IChromatogramCSD chromatogramCSD) {
+			this.chromatogram = chromatogramCSD;
+		}
 	}
 
 	@Override
