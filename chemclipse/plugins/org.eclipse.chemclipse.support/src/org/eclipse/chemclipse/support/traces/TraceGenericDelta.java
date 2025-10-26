@@ -54,4 +54,18 @@ public class TraceGenericDelta extends AbstractTrace {
 
 		return value >= getStartValue() && value <= getStopValue();
 	}
+
+	@Override
+	public String toString() {
+
+		StringBuilder builder = new StringBuilder();
+		builder.append(getValue());
+		if(getDelta() > 0 && getValue() > 0) {
+			builder.append(ITrace.INFIX_RANGE_STANDARD);
+			builder.append(getDelta());
+		}
+		builder.append(getScaleFactorAsString());
+
+		return builder.toString();
+	}
 }

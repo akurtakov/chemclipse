@@ -279,68 +279,76 @@ public class TraceFactory {
 
 		List<String> lines = splitLines(content);
 		for(String line : lines) {
-			if(!line.contains(ITrace.SEPARATOR_TRACE_ITEM)) {
-				if(isSupportGeneric(clazz)) {
-					if(line.contains(ITrace.SEPARATOR_TRACE_RANGE)) {
-						/*
-						 * Special cases:
-						 * 0 - 0
-						 * 55 - 120
-						 * 18 28 32 55 - 65 84 207
-						 * 55 - 65 84 207
-						 * 18 28 32 55 - 65
-						 * 18 28 32 55 - 65 84 90 - 95 207
-						 * 55 - 65 84 90 - 95 207
-						 * 55 - 65 84 90 - 95
-						 */
-						String traces = line;
-						Set<String> ranges = new HashSet<>();
-						Matcher matcher = PATTERN_RANGE_INTEGER.matcher(line);
-						while(matcher.find()) {
-							String range = matcher.group();
-							ranges.add(range);
-							traces = traces.replace(range, "");
-						}
-						/*
-						 * Parse traces and ranges
-						 */
-						parseSeparatedGenericTraces(traces, elements, clazz);
-						for(String range : ranges) {
-							addTraceRange(range, elements, clazz);
-						}
-						Collections.sort(elements, (e1, e2) -> Double.compare(e1.getValue(), e2.getValue()));
-					} else {
-						/*
-						 * Special case: 18 28 32 84 207
-						 */
-						parseSeparatedGenericTraces(line, elements, clazz);
-					}
-				} else {
-					String trace = line.trim();
-					if(trace.contains(ITrace.INFIX_RANGE_SIMPLE) || (!trace.contains(ITrace.SEPARATOR_TRACE_RANGE) && !trace.contains(" "))) {
-						addTraceSpecific(trace, content, elements, clazz);
-					}
-				}
-			} else {
+			if(clazz.equals(TraceGenericDelta.class)) {
 				String[] traces = line.split(ITrace.SEPARATOR_TRACE_ITEM);
 				for(String trace : traces) {
-					if(trace.contains(ITrace.SEPARATOR_TRACE_RANGE)) {
-						/*
-						 * Special case:
-						 * 0 - 0
-						 * 55 - 120
-						 */
-						if(isSupportGeneric(clazz)) {
-							addTraceRange(trace, elements, clazz);
+					String part = trace.trim();
+					addTraceSpecific(part, content, elements, clazz);
+				}
+			} else {
+				if(!line.contains(ITrace.SEPARATOR_TRACE_ITEM)) {
+					if(isSupportGeneric(clazz)) {
+						if(line.contains(ITrace.SEPARATOR_TRACE_RANGE)) {
+							/*
+							 * Special cases:
+							 * 0 - 0
+							 * 55 - 120
+							 * 18 28 32 55 - 65 84 207
+							 * 55 - 65 84 207
+							 * 18 28 32 55 - 65
+							 * 18 28 32 55 - 65 84 90 - 95 207
+							 * 55 - 65 84 90 - 95 207
+							 * 55 - 65 84 90 - 95
+							 */
+							String traces = line;
+							Set<String> ranges = new HashSet<>();
+							Matcher matcher = PATTERN_RANGE_INTEGER.matcher(line);
+							while(matcher.find()) {
+								String range = matcher.group();
+								ranges.add(range);
+								traces = traces.replace(range, "");
+							}
+							/*
+							 * Parse traces and ranges
+							 */
+							parseSeparatedGenericTraces(traces, elements, clazz);
+							for(String range : ranges) {
+								addTraceRange(range, elements, clazz);
+							}
+							Collections.sort(elements, (e1, e2) -> Double.compare(e1.getValue(), e2.getValue()));
+						} else {
+							/*
+							 * Special case: 18 28 32 84 207
+							 */
+							parseSeparatedGenericTraces(line, elements, clazz);
 						}
 					} else {
-						String part = trace.trim();
-						if(isTraceInteger(part)) {
+						String trace = line.trim();
+						if(trace.contains(ITrace.INFIX_RANGE_SIMPLE) || (!trace.contains(ITrace.SEPARATOR_TRACE_RANGE) && !trace.contains(" "))) {
+							addTraceSpecific(trace, content, elements, clazz);
+						}
+					}
+				} else {
+					String[] traces = line.split(ITrace.SEPARATOR_TRACE_ITEM);
+					for(String trace : traces) {
+						if(trace.contains(ITrace.SEPARATOR_TRACE_RANGE)) {
+							/*
+							 * Special case:
+							 * 0 - 0
+							 * 55 - 120
+							 */
 							if(isSupportGeneric(clazz)) {
-								addTraceGeneric(trace, elements, clazz);
+								addTraceRange(trace, elements, clazz);
 							}
 						} else {
-							addTraceSpecific(part, content, elements, clazz);
+							String part = trace.trim();
+							if(isTraceInteger(part)) {
+								if(isSupportGeneric(clazz)) {
+									addTraceGeneric(trace, elements, clazz);
+								}
+							} else {
+								addTraceSpecific(part, content, elements, clazz);
+							}
 						}
 					}
 				}
@@ -374,6 +382,8 @@ public class TraceFactory {
 				success = parseTraceRasteredVSD(content, traceRasteredVSD);
 			} else if(traceSpecific instanceof TraceGeneric traceGeneric) {
 				success = parseTraceGeneric(content, traceGeneric);
+			} else if(traceSpecific instanceof TraceGenericDelta traceGenericDelta) {
+				success = parseTraceGenericDelta(content, traceGenericDelta);
 			}
 			/*
 			 * In case that the content can't be parsed.
@@ -639,6 +649,48 @@ public class TraceFactory {
 		return false;
 	}
 
+	private static boolean parseTraceGenericDelta(String content, TraceGenericDelta traceSpecific) {
+
+		/*
+		 * 427.240
+		 * 279.092 (x5.3)
+		 * 400.01627±0.02
+		 * 400.01627±0.02 (x2.9)
+		 * 400.01627+-0.02
+		 * 400.01627+-0.02 (x2.9)
+		 */
+		Matcher matcher = PATTERN_GENERIC_DIGITS.matcher(content);
+		if(matcher.matches()) {
+			double value = parseDouble(matcher.group(1)); // 400.01627
+			if(value > 0) {
+				/*
+				 * Set value and match range.
+				 */
+				traceSpecific.setValue(value);
+				String part = matcher.group(2).trim();
+				if(containsRangeMarker(content)) {
+					String[] parts = part.split("\\s");
+					String range = parts[0].replace(ITrace.INFIX_RANGE_STANDARD, "").replace(ITrace.INFIX_RANGE_SIMPLE, "").trim();
+					double delta = parseDouble(range);
+					if(delta >= 0) {
+						traceSpecific.setDelta(delta);
+						if(parts.length > 1) {
+							assignScaleFactor(parts[1], traceSpecific); // 5.3
+						}
+						return true;
+					}
+				} else {
+					assignScaleFactor(part, traceSpecific); // 5.3
+					return true;
+				}
+			}
+		}
+		/*
+		 * Content couldn't be matched.
+		 */
+		return false;
+	}
+
 	private static boolean containsRangeMarker(String content) {
 
 		return content.contains(ITrace.INFIX_RANGE_STANDARD) || content.contains(ITrace.INFIX_RANGE_SIMPLE);
@@ -772,12 +824,14 @@ public class TraceFactory {
 	private static <T extends ITrace> boolean isSupportHighResMSD(Class<T> clazz) {
 
 		return clazz == TraceGeneric.class || //
+				clazz == TraceGenericDelta.class || //
 				clazz == TraceHighResMSD.class;
 	}
 
 	private static <T extends ITrace> boolean isSupportHighRes(Class<T> clazz) {
 
 		return clazz == TraceGeneric.class || //
+				clazz == TraceGenericDelta.class || //
 				clazz == TraceHighResMSD.class || //
 				clazz == TraceHighResWSD.class;
 	}
