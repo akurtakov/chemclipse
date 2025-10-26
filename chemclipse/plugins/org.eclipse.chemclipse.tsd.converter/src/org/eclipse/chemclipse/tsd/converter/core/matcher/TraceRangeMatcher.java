@@ -43,23 +43,32 @@ public class TraceRangeMatcher {
 	private int retentionTimeMax = 0;
 	private List<TraceRange2D> traceRanges = new ArrayList<>();
 	private boolean parseFully = false;
+	/*
+	 * Specific retention time range support.
+	 */
+	private Set<Integer> retentionTimeFocusSet = new HashSet<>();
 
-	private Set<Integer> focusSet = new HashSet<>();
+	public void compileRetentionTimeFocusMap(int retentionTimeStart, int scanInterval, int retentionTimeMax) {
 
-	public void compileFocusMap(int retentionTimeStart, int scanInterval, int retentionTimeMax) {
-
+		retentionTimeFocusSet.clear();
 		int retentionTime = retentionTimeStart;
 		while(retentionTime <= retentionTimeMax) {
 			if(isMatch(retentionTime)) {
-				focusSet.add(retentionTime);
+				retentionTimeFocusSet.add(retentionTime);
 			}
 			retentionTime += scanInterval;
 		}
 	}
 
-	public boolean isInFocus(int retentionTime) {
+	/**
+	 * Before using this method, run compileRetentionTimeFocusMap(...)
+	 * 
+	 * @param retentionTime
+	 * @return {@link Boolean}
+	 */
+	public boolean isRetentionTimeInFocus(int retentionTime) {
 
-		return focusSet.contains(retentionTime);
+		return retentionTimeFocusSet.contains(retentionTime);
 	}
 
 	private boolean isMatch(int retentionTime) {
@@ -140,7 +149,7 @@ public class TraceRangeMatcher {
 	public List<TraceRange2D> getTraceRanges(int retentionTime) {
 
 		List<TraceRange2D> selection = new ArrayList<>();
-		if(isRetentionTimeInFocus(retentionTime)) {
+		if(isRetentionTimeInRange(retentionTime)) {
 			for(TraceRange2D traceRange : traceRanges) {
 				if(isValidTraceRange(traceRange)) {
 					if(retentionTime >= traceRange.getRetentionTimeColumn1Start() && retentionTime <= traceRange.getRetentionTimeColumn1Stop()) {
@@ -199,7 +208,7 @@ public class TraceRangeMatcher {
 		}
 	}
 
-	private boolean isRetentionTimeInFocus(int retentionTime) {
+	private boolean isRetentionTimeInRange(int retentionTime) {
 
 		if(retentionTimeMin == 0 && retentionTimeMax == 0) {
 			return false;
