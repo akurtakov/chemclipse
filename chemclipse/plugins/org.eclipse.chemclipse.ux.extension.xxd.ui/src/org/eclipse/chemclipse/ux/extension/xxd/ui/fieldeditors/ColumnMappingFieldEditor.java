@@ -12,16 +12,19 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.fieldeditors;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 import org.eclipse.chemclipse.model.columns.SeparationColumnMapping;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.editors.ColumnMappingEditorUI;
 import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 
 public class ColumnMappingFieldEditor extends FieldEditor {
 
-	private ColumnMappingEditorUI editor;
+	private AtomicReference<ColumnMappingEditorUI> editorControl = new AtomicReference<>();
 	private SeparationColumnMapping separationColumnMapping = new SeparationColumnMapping();
 
 	public ColumnMappingFieldEditor(String name, String labelText, Composite parent) {
@@ -33,40 +36,34 @@ public class ColumnMappingFieldEditor extends FieldEditor {
 	@Override
 	public int getNumberOfControls() {
 
-		return 1;
+		return 2;
 	}
 
 	@Override
 	protected void doFillIntoGrid(Composite parent, int numColumns) {
 
 		getLabelControl(parent);
-		editor = new ColumnMappingEditorUI(parent, SWT.NONE);
-		editor.setLayoutData(new GridData(GridData.FILL_BOTH));
-	}
 
-	@Override
-	protected void adjustForNumColumns(int numColumns) {
+		ColumnMappingEditorUI editor = new ColumnMappingEditorUI(parent, SWT.NONE);
+		GridData gridData = new GridData(GridData.FILL_BOTH);
+		gridData.widthHint = 600;
+		gridData.heightHint = 400;
+		editor.setLayoutData(gridData);
 
-		if(numColumns >= 2) {
-			GridData gridData = (GridData)editor.getLayoutData();
-			gridData.horizontalSpan = numColumns - 1;
-			gridData.grabExcessHorizontalSpace = true;
-		}
+		editorControl.set(editor);
 	}
 
 	@Override
 	protected void doLoad() {
 
-		String entries = getPreferenceStore().getString(getPreferenceName());
-		separationColumnMapping.load(entries);
+		separationColumnMapping.load(getPreferenceStore().getString(getPreferenceName()));
 		setInput();
 	}
 
 	@Override
 	protected void doLoadDefault() {
 
-		String entries = getPreferenceStore().getDefaultString(getPreferenceName());
-		separationColumnMapping.loadDefault(entries);
+		separationColumnMapping.loadDefault(getPreferenceStore().getDefaultString(getPreferenceName()));
 		setInput();
 	}
 
@@ -76,8 +73,17 @@ public class ColumnMappingFieldEditor extends FieldEditor {
 		getPreferenceStore().setValue(getPreferenceName(), separationColumnMapping.save());
 	}
 
+	@Override
+	protected void adjustForNumColumns(int numColumns) {
+
+		Control control = editorControl.get();
+		GridData gridData = (GridData)control.getLayoutData();
+		gridData.grabExcessHorizontalSpace = true;
+		gridData.horizontalSpan = (numColumns >= 2) ? numColumns - 1 : 1;
+	}
+
 	private void setInput() {
 
-		editor.setInput(separationColumnMapping);
+		editorControl.get().setInput(separationColumnMapping);
 	}
 }

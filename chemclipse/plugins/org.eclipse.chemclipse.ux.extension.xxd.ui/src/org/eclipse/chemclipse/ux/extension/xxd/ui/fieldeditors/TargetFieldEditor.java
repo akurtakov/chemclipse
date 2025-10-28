@@ -12,15 +12,18 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.fieldeditors;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 import org.eclipse.chemclipse.ux.extension.xxd.ui.targets.TargetsSettingsEditor;
 import org.eclipse.jface.preference.FieldEditor;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
 public class TargetFieldEditor extends FieldEditor {
 
-	private TargetsSettingsEditor editor;
+	private AtomicReference<TargetsSettingsEditor> editorControl = new AtomicReference<>();
 
 	public TargetFieldEditor(String name, String labelText, Composite parent) {
 
@@ -31,41 +34,45 @@ public class TargetFieldEditor extends FieldEditor {
 	@Override
 	public int getNumberOfControls() {
 
-		return 1;
+		return 2;
 	}
 
 	@Override
 	protected void doFillIntoGrid(Composite parent, int numColumns) {
 
 		getLabelControl(parent);
-		editor = new TargetsSettingsEditor(parent, null, null);
-		editor.getControl().setLayoutData(new GridData(GridData.FILL_BOTH));
+
+		TargetsSettingsEditor editor = new TargetsSettingsEditor(parent, SWT.NONE);
+		GridData gridData = new GridData(GridData.FILL_BOTH);
+		gridData.widthHint = 600;
+		gridData.heightHint = 400;
+		editor.getControl().setLayoutData(gridData);
+
+		editorControl.set(editor);
 	}
 
 	@Override
 	protected void doLoad() {
 
-		String entries = getPreferenceStore().getString(getPreferenceName());
-		editor.load(entries);
+		editorControl.get().load(getPreferenceStore().getString(getPreferenceName()));
 	}
 
 	@Override
 	protected void doLoadDefault() {
 
-		String entries = getPreferenceStore().getDefaultString(getPreferenceName());
-		editor.load(entries);
+		editorControl.get().load(getPreferenceStore().getDefaultString(getPreferenceName()));
 	}
 
 	@Override
 	protected void doStore() {
 
-		getPreferenceStore().setValue(getPreferenceName(), editor.getValues());
+		getPreferenceStore().setValue(getPreferenceName(), editorControl.get().getValues());
 	}
 
 	@Override
 	protected void adjustForNumColumns(int numColumns) {
 
-		Control control = editor.getControl();
+		Control control = editorControl.get().getControl();
 		GridData gridData = (GridData)control.getLayoutData();
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.horizontalSpan = (numColumns >= 2) ? numColumns - 1 : 1;

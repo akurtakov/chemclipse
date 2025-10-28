@@ -12,6 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.fieldeditors;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 import org.eclipse.chemclipse.ux.extension.xxd.ui.instruments.InstrumentsSettingsEditor;
 import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.swt.layout.GridData;
@@ -20,7 +22,7 @@ import org.eclipse.swt.widgets.Control;
 
 public class InstrumentsFieldEditor extends FieldEditor {
 
-	private InstrumentsSettingsEditor editor;
+	private AtomicReference<InstrumentsSettingsEditor> editorControl = new AtomicReference<>();
 
 	public InstrumentsFieldEditor(String name, String labelText, Composite parent) {
 
@@ -38,34 +40,38 @@ public class InstrumentsFieldEditor extends FieldEditor {
 	protected void doFillIntoGrid(Composite parent, int numColumns) {
 
 		getLabelControl(parent);
-		editor = new InstrumentsSettingsEditor(parent, null, null);
-		editor.getControl().setLayoutData(new GridData(GridData.FILL_BOTH));
+
+		InstrumentsSettingsEditor editor = new InstrumentsSettingsEditor(parent, null, null);
+		GridData gridData = new GridData(GridData.FILL_BOTH);
+		gridData.widthHint = 600;
+		gridData.heightHint = 400;
+		editor.getControl().setLayoutData(gridData);
+
+		editorControl.set(editor);
 	}
 
 	@Override
 	protected void doLoad() {
 
-		String entries = getPreferenceStore().getString(getPreferenceName());
-		editor.load(entries);
+		editorControl.get().load(getPreferenceStore().getString(getPreferenceName()));
 	}
 
 	@Override
 	protected void doLoadDefault() {
 
-		String entries = getPreferenceStore().getDefaultString(getPreferenceName());
-		editor.load(entries);
+		editorControl.get().load(getPreferenceStore().getDefaultString(getPreferenceName()));
 	}
 
 	@Override
 	protected void doStore() {
 
-		getPreferenceStore().setValue(getPreferenceName(), editor.getValues());
+		getPreferenceStore().setValue(getPreferenceName(), editorControl.get().getValues());
 	}
 
 	@Override
 	protected void adjustForNumColumns(int numColumns) {
 
-		Control control = editor.getControl();
+		Control control = editorControl.get().getControl();
 		GridData gridData = (GridData)control.getLayoutData();
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.horizontalSpan = (numColumns >= 2) ? numColumns - 1 : 1;

@@ -63,7 +63,7 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 
-public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIControl, IExtendedPartUI {
+public class TargetsSettingsEditor extends Composite implements SettingsUIProvider.SettingsUIControl, IExtendedPartUI {
 
 	private static final int WARN_NUMBER_IMPORT_ENTRIES = 500;
 
@@ -72,8 +72,6 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
-
-	private Composite control;
 
 	private AtomicReference<Button> buttonSearchControl = new AtomicReference<>();
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
@@ -85,17 +83,19 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 
 	private TargetTemplates settings = new TargetTemplates();
 
-	public TargetsSettingsEditor(Composite parent, IProcessorPreferences<TargetTemplates> preferences, TargetTemplates targetTemplates) {
+	public TargetsSettingsEditor(Composite parent, int style) {
 
-		/*
-		 * Populate the settings on demand.
-		 */
+		super(parent, style);
+		createControl();
+	}
+
+	public void setInput(IProcessorPreferences<TargetTemplates> preferences, TargetTemplates targetTemplates) {
+
 		this.preferences = preferences;
 		if(targetTemplates != null) {
 			this.settings.load(targetTemplates.save());
 		}
-
-		control = createControl(parent);
+		setTableViewerInput();
 	}
 
 	@Override
@@ -118,6 +118,7 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 			settingz.load(settings.save());
 			return preferences.getSerialization().toString(settingz);
 		}
+
 		return "";
 	}
 
@@ -125,12 +126,6 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 	public void addChangeListener(Listener listener) {
 
 		listeners.add(listener);
-	}
-
-	@Override
-	public Control getControl() {
-
-		return control;
 	}
 
 	public void load(String entries) {
@@ -144,21 +139,30 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 		return settings.save();
 	}
 
-	private Composite createControl(Composite parent) {
+	@Override
+	public void restoreDefaults() {
 
-		Composite composite = new Composite(parent, SWT.NONE);
+		settings.clear();
+	}
+
+	@Override
+	public Control getControl() {
+
+		return this;
+	}
+
+	private void createControl() {
+
 		GridLayout gridLayout = new GridLayout(1, false);
 		gridLayout.marginWidth = 0;
 		gridLayout.marginHeight = 0;
-		composite.setLayout(gridLayout);
+		setLayout(gridLayout);
 
-		createButtonSection(composite);
-		createToolbarSearch(composite);
-		createTableSection(composite);
+		createButtonSection(this);
+		createToolbarSearch(this);
+		createTableSection(this);
 
 		initialize();
-
-		return composite;
 	}
 
 	private void initialize() {
@@ -212,12 +216,7 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 
 		TargetTemplateListUI targetTemplateListUI = new TargetTemplateListUI(parent, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 		Table table = targetTemplateListUI.getTable();
-		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
-		gridData.widthHint = 600;
-		gridData.heightHint = 400;
-		gridData.grabExcessHorizontalSpace = true;
-		gridData.grabExcessVerticalSpace = true;
-		table.setLayoutData(gridData);
+		table.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		targetTemplateListControl.set(targetTemplateListUI);
 	}
@@ -496,11 +495,5 @@ public class TargetsSettingsEditor implements SettingsUIProvider.SettingsUIContr
 	private void setTableViewerInput() {
 
 		targetTemplateListControl.get().setInput(settings.values());
-	}
-
-	@Override
-	public void restoreDefaults() {
-
-		settings.clear();
 	}
 }
