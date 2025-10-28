@@ -20,7 +20,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
-public class TraceRangesSerializer extends JsonSerializer<TraceRanges2D> {
+public class TraceRangesSerializer2D extends JsonSerializer<TraceRanges2D> {
 
 	@Override
 	public void serialize(TraceRanges2D traceRanges, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {

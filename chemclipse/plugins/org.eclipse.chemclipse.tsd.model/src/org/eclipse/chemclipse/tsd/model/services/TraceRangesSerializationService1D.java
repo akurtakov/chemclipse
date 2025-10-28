@@ -13,9 +13,9 @@
 package org.eclipse.chemclipse.tsd.model.services;
 
 import org.eclipse.chemclipse.support.settings.serialization.ISerializationService;
-import org.eclipse.chemclipse.tsd.model.core.TraceRanges2D;
-import org.eclipse.chemclipse.tsd.model.serializer.TraceRangesDeserializer;
-import org.eclipse.chemclipse.tsd.model.serializer.TraceRangesSerializer;
+import org.eclipse.chemclipse.tsd.model.core.TraceRanges1D;
+import org.eclipse.chemclipse.tsd.model.serializer.TraceRangesDeserializer1D;
+import org.eclipse.chemclipse.tsd.model.serializer.TraceRangesSerializer1D;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ConfigurationPolicy;
 
@@ -23,23 +23,23 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonSerializer;
 
 @Component(service = {ISerializationService.class}, configurationPolicy = ConfigurationPolicy.OPTIONAL)
-public class TraceRangesSerializationService implements ISerializationService {
+public class TraceRangesSerializationService1D implements ISerializationService {
 
 	@Override
 	public Class<?> getSupportedClass() {
 
-		return TraceRanges2D.class;
+		return TraceRanges1D.class;
 	}
 
 	@Override
-	public JsonSerializer<TraceRanges2D> getSerializer() {
+	public JsonSerializer<TraceRanges1D> getSerializer() {
 
-		return new TraceRangesSerializer();
+		return new TraceRangesSerializer1D();
 	}
 
 	@Override
-	public JsonDeserializer<TraceRanges2D> getDeserializer() {
+	public JsonDeserializer<TraceRanges1D> getDeserializer() {
 
-		return new TraceRangesDeserializer();
+		return new TraceRangesDeserializer1D();
 	}
 }

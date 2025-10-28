@@ -19,7 +19,7 @@ import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 
-public class TraceRanges1DValidator extends ValueParserSupport implements IValidator<Object> {
+public class TraceRangesValidator1D extends ValueParserSupport implements IValidator<Object> {
 
 	@Override
 	public IStatus validate(Object value) {

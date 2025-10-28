@@ -20,7 +20,7 @@ import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 
-public class TraceRange2DValidator extends ValueParserSupport implements IValidator<Object> {
+public class TraceRangeValidator2D extends ValueParserSupport implements IValidator<Object> {
 
 	private int retentionTimeColumn1Start = 0;
 	private int retentionTimeColumn1Stop = 0;

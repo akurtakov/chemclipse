@@ -14,13 +14,13 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider;
 
 import org.eclipse.chemclipse.tsd.model.core.TraceRange1D;
 import org.eclipse.chemclipse.tsd.model.core.TraceRanges1D;
-import org.eclipse.chemclipse.tsd.model.validators.TraceRange1DValidator;
+import org.eclipse.chemclipse.tsd.model.validators.TraceRangeValidator1D;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.dialogs.IInputValidator;
 
 public class TraceRange1DInputValidator implements IInputValidator {
 
-	private TraceRange1DValidator validator = new TraceRange1DValidator();
+	private TraceRangeValidator1D validator = new TraceRangeValidator1D();
 	private TraceRanges1D traceRanges = new TraceRanges1D();
 
 	public TraceRange1DInputValidator(TraceRanges1D traceRanges) {

@@ -14,12 +14,12 @@ package org.eclipse.chemclipse.tsd.model.validators;
 
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.support.util.ValueParserSupport;
-import org.eclipse.chemclipse.tsd.model.core.TraceRange2D;
+import org.eclipse.chemclipse.tsd.model.core.TraceRange1D;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 
-public class TraceRange1DValidator extends ValueParserSupport implements IValidator<Object> {
+public class TraceRangeValidator1D extends ValueParserSupport implements IValidator<Object> {
 
 	private int retentionTimeColumn1Start = 0;
 	private int retentionTimeColumn1Stop = 0;
@@ -79,9 +79,9 @@ public class TraceRange1DValidator extends ValueParserSupport implements IValida
 		}
 	}
 
-	public TraceRange2D getSetting() {
+	public TraceRange1D getSetting() {
 
-		TraceRange2D traceRange = new TraceRange2D();
+		TraceRange1D traceRange = new TraceRange1D();
 		traceRange.setRetentionTimeColumn1Start(retentionTimeColumn1Start);
 		traceRange.setRetentionTimeColumn1Stop(retentionTimeColumn1Stop);
 		traceRange.setName(name);

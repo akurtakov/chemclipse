@@ -19,7 +19,7 @@ import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 
-public class TraceRanges2DValidator extends ValueParserSupport implements IValidator<Object> {
+public class TraceRangesValidator2D extends ValueParserSupport implements IValidator<Object> {
 
 	@Override
 	public IStatus validate(Object value) {
@@ -33,7 +33,7 @@ public class TraceRanges2DValidator extends ValueParserSupport implements IValid
 					if(traceRange.getRetentionTimeColumn1Start() < 0) {
 						message = "The retention time start is < 0.";
 					} else if(traceRange.getRetentionTimeColumn1Stop() < 0) {
-						message = "The retention time start is < 0.";
+						message = "The retention time stop is < 0.";
 					}
 				}
 			} else {

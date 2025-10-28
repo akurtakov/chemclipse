@@ -14,7 +14,7 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.services;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.eclipse.chemclipse.tsd.model.services.TraceRangesSerializationService;
+import org.eclipse.chemclipse.tsd.model.services.TraceRangesSerializationService2D;
 import org.eclipse.chemclipse.ux.extension.ui.methods.IAnnotationWidgetService;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.editors.TraceRangesEditor2D;
 import org.eclipse.swt.SWT;
@@ -25,7 +25,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ConfigurationPolicy;
 
 @Component(service = {IAnnotationWidgetService.class}, configurationPolicy = ConfigurationPolicy.OPTIONAL)
-public class TraceRanges2DAnnotationService extends TraceRangesSerializationService implements IAnnotationWidgetService {
+public class TraceRanges2DAnnotationService extends TraceRangesSerializationService2D implements IAnnotationWidgetService {
 
 	private AtomicReference<TraceRangesEditor2D> traceRangesEditorControl = new AtomicReference<>();
 

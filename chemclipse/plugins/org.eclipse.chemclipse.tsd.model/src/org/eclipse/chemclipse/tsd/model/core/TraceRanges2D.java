@@ -25,7 +25,7 @@ import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.support.settings.OperatingSystemUtils;
 import org.eclipse.chemclipse.tsd.model.support.TraceRangeSupport;
-import org.eclipse.chemclipse.tsd.model.validators.TraceRange2DValidator;
+import org.eclipse.chemclipse.tsd.model.validators.TraceRangeValidator2D;
 import org.eclipse.core.runtime.IStatus;
 
 public class TraceRanges2D extends ArrayList<TraceRange2D> {
@@ -144,7 +144,7 @@ public class TraceRanges2D extends ArrayList<TraceRange2D> {
 	private TraceRange2D extract(String text) {
 
 		TraceRange2D traceRange = null;
-		TraceRange2DValidator validator = new TraceRange2DValidator();
+		TraceRangeValidator2D validator = new TraceRangeValidator2D();
 
 		IStatus status = validator.validate(text);
 		if(status.isOK()) {
