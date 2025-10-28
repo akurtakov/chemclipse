@@ -25,6 +25,7 @@ import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.jface.viewers.ViewerFilter;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
 public class LibraryInformationListUI extends ExtendedTableViewer {
@@ -33,14 +34,16 @@ public class LibraryInformationListUI extends ExtendedTableViewer {
 	private static final int[] BOUNDS = LibraryInformationLabelProvider.BOUNDS;
 
 	private LabelProvider labelProvider = new LibraryInformationLabelProvider();
-	private LibraryInformationContentProvider contentProviderLazy = new LibraryInformationContentProvider(this);
 	private IContentProvider contentProviderNormal = new ListContentProvider();
 	private ViewerComparator comparator = new LibraryInformationComparator();
 	private LibraryInformationFilter listFilter = new LibraryInformationFilter();
 
+	private boolean virtualFlagIsSet = false;
+
 	public LibraryInformationListUI(Composite parent, int style) {
 
 		super(parent, style);
+		virtualFlagIsSet = ((style & SWT.VIRTUAL) == SWT.VIRTUAL);
 		initialize();
 	}
 
@@ -52,33 +55,36 @@ public class LibraryInformationListUI extends ExtendedTableViewer {
 
 	public void setInput(List<ILibraryInformation> libraryInformations) {
 
-		int size = 0;
-		setItemCount(size);
-
 		if(libraryInformations != null) {
-			size = libraryInformations.size();
-			if(size > 1000) {
-				setContentProvider(contentProviderLazy);
-				setComparator(null);
-				super.setInput(null);
+			/*
+			 * Reset Content Provider
+			 */
+			setComparator(null);
+			setContentProvider(contentProviderNormal);
+			super.setInput(null);
+			setUseHashlookup(false);
+			/*
+			 * Normal or Virtual
+			 */
+			int size = libraryInformations.size();
+			if(size > 1000 && virtualFlagIsSet) {
 				setUseHashlookup(true);
+				setItemCount(size);
+				setContentProvider(new LibraryInformationContentProvider(this));
 			} else {
-				setContentProvider(contentProviderNormal);
 				setComparator(comparator);
-				super.setInput(null);
-				setUseHashlookup(false);
 			}
 		}
 
 		super.setInput(libraryInformations);
-		setItemCount(size);
 	}
 
 	private void initialize() {
 
 		createColumns(TITLES, BOUNDS);
 		setLabelProvider(labelProvider);
-		setContentProvider(contentProviderLazy);
+		setContentProvider(contentProviderNormal);
+		setComparator(comparator);
 		setUseHashlookup(true);
 		setFilters(new ViewerFilter[]{listFilter});
 	}

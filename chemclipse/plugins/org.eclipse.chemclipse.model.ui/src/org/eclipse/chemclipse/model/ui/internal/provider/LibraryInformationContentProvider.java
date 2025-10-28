@@ -34,8 +34,8 @@ public class LibraryInformationContentProvider implements ILazyContentProvider {
 	@Override
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 
-		if(newInput != null) {
-			this.input = (List<ILibraryInformation>)newInput;
+		if(newInput != null && newInput instanceof List list) {
+			this.input = list;
 		} else {
 			this.input = Collections.emptyList();
 		}
@@ -44,6 +44,8 @@ public class LibraryInformationContentProvider implements ILazyContentProvider {
 	@Override
 	public void updateElement(int index) {
 
-		tableViewer.replace(input.get(index), index);
+		if(input != null && index < input.size()) {
+			tableViewer.replace(input.get(index), index);
+		}
 	}
 }
