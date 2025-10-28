@@ -13,6 +13,8 @@
 package org.eclipse.chemclipse.ux.extension.xxd.ui.swt.editors;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
@@ -300,9 +302,17 @@ public class TraceRangesEditor2D extends Composite implements IChangeListener, I
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				int index = listControl.get().getTable().getSelectionIndex();
-				traceRanges.remove(index);
-				setInput();
+				List<TraceRange2D> traceRangesRemove = new ArrayList<>();
+				for(Object object : listControl.get().getStructuredSelection().toArray()) {
+					if(object instanceof TraceRange2D traceRange) {
+						traceRangesRemove.add(traceRange);
+					}
+				}
+
+				if(!traceRangesRemove.isEmpty()) {
+					traceRanges.removeAll(traceRangesRemove);
+					setInput();
+				}
 			}
 		});
 
