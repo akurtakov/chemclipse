@@ -50,7 +50,7 @@ public class TraceRangeMatcher {
 
 	public void compileRetentionTimeFocusMap(int retentionTimeStart, int scanInterval, int retentionTimeMax) {
 
-		retentionTimeFocusSet.clear();
+		clearTimeFocusMap();
 		int retentionTime = retentionTimeStart;
 		while(retentionTime <= retentionTimeMax) {
 			if(isMatch(retentionTime)) {
@@ -58,6 +58,11 @@ public class TraceRangeMatcher {
 			}
 			retentionTime += scanInterval;
 		}
+	}
+
+	public void clearTimeFocusMap() {
+
+		retentionTimeFocusSet.clear();
 	}
 
 	/**
@@ -68,7 +73,11 @@ public class TraceRangeMatcher {
 	 */
 	public boolean isRetentionTimeInFocus(int retentionTime) {
 
-		return retentionTimeFocusSet.contains(retentionTime);
+		if(retentionTimeFocusSet.isEmpty()) {
+			return true;
+		} else {
+			return retentionTimeFocusSet.contains(retentionTime);
+		}
 	}
 
 	private boolean isMatch(int retentionTime) {
