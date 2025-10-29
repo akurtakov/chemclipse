@@ -35,8 +35,10 @@ public abstract class AbstractApplicationImage implements IApplicationImage {
 	private static final String PATH_SEPARATOR = "/";
 	private static final String PLATFORM_PREFIX = "platform:/plugin/";
 	private static final String FOLDER_ICONS = "icons";
+	private static final String FOLDER_SCALABLE = "scalable";
 	private static final String EXTENSION_PNG = ".png";
 	private static final String EXTENSION_GIF = ".gif";
+	private static final String EXTENSION_SVG = ".svg";
 
 	private Bundle bundle;
 	private Map<String, ImageDescriptor> imageDescriptorCache = new HashMap<>();
@@ -92,7 +94,11 @@ public abstract class AbstractApplicationImage implements IApplicationImage {
 			builder.append(PATH_SEPARATOR);
 			builder.append(FOLDER_ICONS);
 			builder.append(PATH_SEPARATOR);
-			builder.append(size);
+			if (FOLDER_SCALABLE.equals(size)) {
+				builder.append(FOLDER_SCALABLE);
+			} else {
+				builder.append(size);
+			}
 			builder.append(PATH_SEPARATOR);
 
 			IPath path = new Path(builder.toString());
@@ -139,7 +145,11 @@ public abstract class AbstractApplicationImage implements IApplicationImage {
 
 		builder.append(FOLDER_ICONS);
 		builder.append(PATH_SEPARATOR);
-		builder.append(size);
+		if (fileName.endsWith(EXTENSION_SVG)) {
+			builder.append(FOLDER_SCALABLE);
+		} else {
+			builder.append(size);
+		}
 		builder.append(PATH_SEPARATOR);
 		builder.append(fileName);
 
