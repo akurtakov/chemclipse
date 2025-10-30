@@ -56,7 +56,7 @@ public class MethodImportConverter extends AbstractImportConverter implements IM
 			}
 		}
 		ProcessingInfo<IProcessMethod> info = new ProcessingInfo<>();
-		info.addErrorMessage("Method Converter (*.ocm)", "No avaiable format could read: " + file);
+		info.addErrorMessage("Method Converter (*.ocm)", "No available format could read: " + file);
 		return info;
 	}
 
@@ -73,7 +73,7 @@ public class MethodImportConverter extends AbstractImportConverter implements IM
 			}
 		}
 		ProcessingInfo<IProcessMethod> info = new ProcessingInfo<>();
-		info.addErrorMessage("Method Converter (*.ocm)", "No avaiable format could read: " + nameHint);
+		info.addErrorMessage("Method Converter (*.ocm)", "No available format could read: " + nameHint);
 		return info;
 	}
 }

@@ -81,7 +81,7 @@ public interface IProcessMethod extends ProcessEntryContainer {
 	}
 
 	/**
-	 * a method might be defined in the context of valid types e.g. for Chromatography (MSD, WSD, CSD) or NMR (FID, NMR)
+	 * a method might be defined in the context of valid types e.g. for Chromatography (MSD, WSD, CSD) or NMR
 	 * 
 	 * @return the {@link DataCategory}s that are valid for this methods context
 	 */
