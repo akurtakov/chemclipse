@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.swt.ui.preferences;
 import org.eclipse.chemclipse.model.math.IonRoundMethod;
 import org.eclipse.chemclipse.model.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.model.targets.LibraryField;
+import org.eclipse.chemclipse.support.ui.preferences.fieldeditors.ExtendedIntegerFieldEditor;
 import org.eclipse.chemclipse.support.ui.preferences.fieldeditors.SpacerFieldEditor;
 import org.eclipse.chemclipse.swt.ui.Activator;
 import org.eclipse.jface.preference.BooleanFieldEditor;
@@ -60,6 +61,7 @@ public class PreferencePageSystem extends FieldEditorPreferencePage implements I
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_RETENTION_INDEX_QC, "QC: Use Retention Index", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_BEST_TARGET_LIBRARY_FIELD, "Best Target", LibraryField.getOptions(), getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_ION_ROUND_METHOD, "Ion Round Method", IonRoundMethod.getOptions(), getFieldEditorParent()));
+		addField(new ExtendedIntegerFieldEditor(PreferenceSupplier.P_LIBRARY_INFORMATION_LIST_LIMIT_VIRTUAL, "Library Information List (Limit Virtual)", 100, Integer.MAX_VALUE, getFieldEditorParent()));
 
 		/*
 		 * Clear the Ion Round Method Cache on change.

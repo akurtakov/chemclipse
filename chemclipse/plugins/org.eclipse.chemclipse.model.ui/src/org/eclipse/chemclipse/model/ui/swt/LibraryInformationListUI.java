@@ -12,9 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.ui.swt;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
+import org.eclipse.chemclipse.model.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.model.ui.internal.provider.LibraryInformationComparator;
 import org.eclipse.chemclipse.model.ui.internal.provider.LibraryInformationContentProvider;
 import org.eclipse.chemclipse.model.ui.internal.provider.LibraryInformationFilter;
@@ -35,10 +37,13 @@ public class LibraryInformationListUI extends ExtendedTableViewer {
 
 	private LabelProvider labelProvider = new LibraryInformationLabelProvider();
 	private IContentProvider contentProviderNormal = new ListContentProvider();
+	private IContentProvider contentProviderVirtual = new LibraryInformationContentProvider(this);
 	private ViewerComparator comparator = new LibraryInformationComparator();
 	private LibraryInformationFilter listFilter = new LibraryInformationFilter();
 
 	private boolean virtualFlagIsSet = false;
+	private List<ILibraryInformation> libraryInformationsFull = null;
+	private List<ILibraryInformation> libraryInformationsUse = new ArrayList<>();
 
 	public LibraryInformationListUI(Composite parent, int style) {
 
@@ -49,34 +54,79 @@ public class LibraryInformationListUI extends ExtendedTableViewer {
 
 	public void setSearchText(String searchText, boolean caseSensitive) {
 
+		/*
+		 * Switch virtual or normal to search items.
+		 */
 		listFilter.setSearchText(searchText, caseSensitive);
-		refresh();
+		boolean reloadData = (searchText == null || searchText.isBlank());
+		if(getComparator() == null) {
+			/*
+			 * Virtual Search
+			 */
+			updateLibraryInformationUseList(reloadData);
+		} else {
+			if(reloadData) {
+				updateLibraryInformationUseList(reloadData);
+			} else {
+				refresh();
+			}
+		}
 	}
 
 	public void setInput(List<ILibraryInformation> libraryInformations) {
 
+		libraryInformationsFull = libraryInformations;
+		libraryInformationsUse.clear();
 		if(libraryInformations != null) {
-			/*
-			 * Reset Content Provider
-			 */
-			setComparator(null);
-			setContentProvider(contentProviderNormal);
-			super.setInput(null);
-			setUseHashlookup(false);
-			/*
-			 * Normal or Virtual
-			 */
-			int size = libraryInformations.size();
-			if(size > 1000 && virtualFlagIsSet) {
-				setUseHashlookup(true);
-				setItemCount(size);
-				setContentProvider(new LibraryInformationContentProvider(this));
+			libraryInformationsUse.addAll(libraryInformations);
+		}
+		setInput();
+	}
+
+	private void updateLibraryInformationUseList(boolean reloadData) {
+
+		libraryInformationsUse.clear();
+		if(libraryInformationsFull != null) {
+			if(reloadData) {
+				libraryInformationsUse.addAll(libraryInformationsFull);
 			} else {
-				setComparator(comparator);
+				for(ILibraryInformation libraryInformation : libraryInformationsFull) {
+					if(listFilter.isMatch(libraryInformation)) {
+						libraryInformationsUse.add(libraryInformation);
+					}
+				}
 			}
 		}
+		/*
+		 * Update the list.
+		 */
+		setInput();
+	}
 
-		super.setInput(libraryInformations);
+	private void setInput() {
+
+		/*
+		 * Reset Content Provider
+		 */
+		setComparator(null);
+		setContentProvider(contentProviderNormal);
+		super.setInput(null);
+		setUseHashlookup(false);
+		/*
+		 * Normal or Virtual
+		 */
+		int size = libraryInformationsUse.size();
+		if(virtualFlagIsSet && (size > PreferenceSupplier.getLibraryInformationListLimitVirtual())) {
+			setUseHashlookup(true);
+			setContentProvider(contentProviderVirtual);
+		} else {
+			setComparator(comparator);
+		}
+		/*
+		 * Input
+		 */
+		super.setInput(libraryInformationsUse);
+		setItemCount(size);
 	}
 
 	private void initialize() {

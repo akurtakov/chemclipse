@@ -34,29 +34,49 @@ public class LibraryInformationFilter extends ViewerFilter {
 			return true;
 		} else {
 			if(element instanceof ILibraryInformation libraryInformation) {
-				/*
-				 * Match Fields
-				 */
-				if(contains(libraryInformation.getName())) {
-					return true;
-				}
-
-				if(contains(libraryInformation.getCasNumber())) {
-					return true;
-				}
-
-				if(contains(libraryInformation.getSmiles())) {
-					return true;
-				}
-
-				if(contains(libraryInformation.getInChI())) {
-					return true;
-				}
-
-				if(contains(libraryInformation.getComments())) {
-					return true;
-				}
+				return isMatch(libraryInformation);
 			}
+		}
+
+		return false;
+	}
+
+	public boolean isMatch(ILibraryInformation libraryInformation) {
+
+		if(contains(libraryInformation.getName())) {
+			return true;
+		}
+
+		if(contains(libraryInformation.getCasNumber())) {
+			return true;
+		}
+
+		if(contains(libraryInformation.getSmiles())) {
+			return true;
+		}
+
+		if(contains(libraryInformation.getReferenceIdentifier())) {
+			return true;
+		}
+
+		if(contains(libraryInformation.getContributor())) {
+			return true;
+		}
+
+		if(contains(libraryInformation.getInChI())) {
+			return true;
+		}
+
+		if(contains(libraryInformation.getInChIKey())) {
+			return true;
+		}
+
+		if(contains(libraryInformation.getFormula())) {
+			return true;
+		}
+
+		if(contains(libraryInformation.getComments())) {
+			return true;
 		}
 
 		return false;
