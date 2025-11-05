@@ -40,6 +40,16 @@ public class TestPathHelper extends PathResolver {
 	public static final String HEPTANE_3 = "testData/Heptane_3.JDX";
 	public static final String HEPTANE_X = "testData/Heptane_X.JDX";
 	/*
+	 * GC-FID
+	 */
+	public static final String CINNAMON = "testData/cinnamon.jdx";
+	public static final String GINGER = "testData/ginger.jdx";
+	public static final String BANANA = "testData/banana.jdx";
+	public static final String GUAVA = "testData/guava.jdx";
+	public static final String LIME = "testData/lime.jdx";
+	public static final String PASSION_FRUIT = "testData/passnfrt.jdx";
+	public static final String PIMENT = "testData/piment1.jdx";
+	/*
 	 * GC-MS
 	 */
 	public static final String CHROMATOGRAM_01 = "testData/Chromatogram_01.jdx";
