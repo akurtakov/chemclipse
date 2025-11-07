@@ -18,13 +18,17 @@ import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.peak.detector.core.AbstractPeakDetector;
 import org.eclipse.chemclipse.chromatogram.peak.detector.model.Threshold;
+import org.eclipse.chemclipse.chromatogram.peak.detector.settings.IPeakDetectorSettings;
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.IDetectorSlope;
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.IRawPeak;
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.RawPeak;
 import org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderivative.support.IFirstDerivativeDetectorSlopes;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IPeakModel;
+import org.eclipse.chemclipse.model.selection.ChromatogramSelectionSupport;
+import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.numeric.miscellaneous.Evaluation;
+import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 
@@ -32,6 +36,17 @@ public class BasePeakDetector extends AbstractPeakDetector {
 
 	protected static final float NORMALIZATION_BASE = 100000.0f;
 	protected static final int CONSECUTIVE_SCAN_STEPS = 3;
+
+	@Override
+	public IProcessingInfo<?> validate(IChromatogramSelection chromatogramSelection, IPeakDetectorSettings peakDetectorSettings, IProgressMonitor monitor) {
+
+		IProcessingInfo<?> processingInfo = super.validate(chromatogramSelection, peakDetectorSettings, monitor);
+		if(ChromatogramSelectionSupport.containsEmptyScans(chromatogramSelection)) {
+			processingInfo.addErrorMessage("Peak Detector", "Selection must not contain empty scans.");
+		}
+
+		return processingInfo;
+	}
 
 	/**
 	 * Marks the peaks with start, stop and max.
