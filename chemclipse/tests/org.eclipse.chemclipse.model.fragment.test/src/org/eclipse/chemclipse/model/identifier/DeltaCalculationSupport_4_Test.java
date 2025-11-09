@@ -12,22 +12,25 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.identifier;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.implementation.Scan;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class DeltaCalculationSupport_4_Test {
 
 	private IScan unknown;
 	private IScan reference;
 	private IDeltaCalculationSettings identifierSettings;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		unknown = new Scan(1000.0f);
 		reference = new Scan(1000.0f);

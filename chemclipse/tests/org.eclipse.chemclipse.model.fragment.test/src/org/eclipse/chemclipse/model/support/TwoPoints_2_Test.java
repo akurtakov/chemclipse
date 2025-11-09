@@ -12,13 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.support;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
 import org.eclipse.chemclipse.numeric.exceptions.PointIsNullException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TwoPoints_2_Test {
 

@@ -12,22 +12,25 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.history;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Date;
 
 import org.eclipse.chemclipse.support.history.EditInformation;
 import org.eclipse.chemclipse.support.history.IEditInformation;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class EditInformation_4_Test {
 
 	private IEditInformation editInformation;
 	private Date date = new Date();
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		editInformation = new EditInformation(date, null);
 	}
@@ -37,12 +40,12 @@ public class EditInformation_4_Test {
 
 		long millisecondsEdit = editInformation.getDate().getTime();
 		long millisecondsCheck = date.getTime();
-		assertEquals("getDate", millisecondsCheck, millisecondsEdit, 5L); // Sometimes the time deviates in the check by 1 ms
+		assertEquals(millisecondsCheck, millisecondsEdit, 5); // Sometimes the time deviates in the check by 1 ms
 	}
 
 	@Test
 	public void testGetEditHistory_2() {
 
-		assertEquals("getDescription", EditInformation.NO_DESCRIPTION, editInformation.getDescription());
+		assertEquals(EditInformation.NO_DESCRIPTION, editInformation.getDescription());
 	}
 }

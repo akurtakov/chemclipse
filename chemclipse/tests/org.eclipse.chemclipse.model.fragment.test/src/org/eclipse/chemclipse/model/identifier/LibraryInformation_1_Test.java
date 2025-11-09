@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.identifier;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class LibraryInformation_1_Test {
 
@@ -23,60 +23,60 @@ public class LibraryInformation_1_Test {
 	@Test
 	public void testGetName_1() {
 
-		assertEquals("Name", "", libraryInformation.getName());
+		assertEquals("", libraryInformation.getName());
 	}
 
 	@Test
 	public void testGetName_2() {
 
 		libraryInformation.setName("Philip");
-		assertEquals("Name", "Philip", libraryInformation.getName());
+		assertEquals("Philip", libraryInformation.getName());
 	}
 
 	@Test
 	public void testGetName_3() {
 
 		libraryInformation.setName(null);
-		assertEquals("Name", "", libraryInformation.getName());
+		assertEquals("", libraryInformation.getName());
 	}
 
 	@Test
 	public void testGetComments_1() {
 
-		assertEquals("Comments", "", libraryInformation.getComments());
+		assertEquals("", libraryInformation.getComments());
 	}
 
 	@Test
 	public void testGetComments_2() {
 
 		libraryInformation.setComments("Here are the test comments");
-		assertEquals("Comments", "Here are the test comments", libraryInformation.getComments());
+		assertEquals("Here are the test comments", libraryInformation.getComments());
 	}
 
 	@Test
 	public void testGetComments_3() {
 
 		libraryInformation.setComments(null);
-		assertEquals("Comments", "", libraryInformation.getComments());
+		assertEquals("", libraryInformation.getComments());
 	}
 
 	@Test
 	public void testGetCasNumber_1() {
 
-		assertEquals("CAS Number", "", libraryInformation.getCasNumber());
+		assertEquals("", libraryInformation.getCasNumber());
 	}
 
 	@Test
 	public void testGetCasNumber_2() {
 
 		libraryInformation.setCasNumber("56-38-XX");
-		assertEquals("CAS Number", "56-38-XX", libraryInformation.getCasNumber());
+		assertEquals("56-38-XX", libraryInformation.getCasNumber());
 	}
 
 	@Test
 	public void testGetCasNumber_3() {
 
 		libraryInformation.setCasNumber(null);
-		assertEquals("CAS Number", "", libraryInformation.getCasNumber());
+		assertEquals("", libraryInformation.getCasNumber());
 	}
 }

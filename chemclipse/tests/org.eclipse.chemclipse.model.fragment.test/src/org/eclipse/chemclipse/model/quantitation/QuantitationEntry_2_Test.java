@@ -12,21 +12,21 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.quantitation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.chemclipse.model.implementation.QuantitationEntry;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class QuantitationEntry_2_Test {
 
 	private Set<IQuantitationEntry> quantitationEntries = new HashSet<>();
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeEach
+	public void setUp() {
 
 		quantitationEntries.add(new QuantitationEntry("Benzo(a)-pyren", "PAK", 0.25d, "mg/g", 2000.0d));
 		quantitationEntries.add(new QuantitationEntry("Phenanthren", "PAK", 0.13d, "mg/g", 1000.0d));

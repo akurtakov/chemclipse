@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.eclipse.chemclipse.model.core.IChromatogram;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class Chromatogram_6_Test {
 

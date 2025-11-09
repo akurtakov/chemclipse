@@ -12,19 +12,22 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class AnalysisSegment_3_Test {
 
 	private IAnalysisSegment segment;
 	private final int startScan = -5;
 	private final int segmentWidth = -5;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		segment = new AnalysisSegment(startScan, segmentWidth) {
 
@@ -45,18 +48,18 @@ public class AnalysisSegment_3_Test {
 	@Test
 	public void testGetStartScan_1() {
 
-		assertEquals("StartScan", 0, segment.getStartScan());
+		assertEquals(0, segment.getStartScan());
 	}
 
 	@Test
 	public void testGetStopScan_1() {
 
-		assertEquals("StopScan", 0, segment.getStopScan());
+		assertEquals(0, segment.getStopScan());
 	}
 
 	@Test
 	public void testGetSegmentWidth_1() {
 
-		assertEquals("SegmentWidth", 0, segment.getWidth());
+		assertEquals(0, segment.getWidth());
 	}
 }

@@ -12,19 +12,19 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.support;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.quantitation.IInternalStandard;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PeakQuantifierSupport_1_Test extends PeakQuantifierSupportTestCase {
 
 	@Override
-	@Before
-	public void setUp() throws Exception {
+	@BeforeEach
+	public void setUp() {
 
 		super.setUp();
 	}

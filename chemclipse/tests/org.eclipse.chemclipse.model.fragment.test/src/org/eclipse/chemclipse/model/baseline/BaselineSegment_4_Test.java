@@ -12,13 +12,16 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.baseline;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class BaselineSegment_4_Test {
 
 	private IBaselineSegment segmentI;
@@ -28,8 +31,8 @@ public class BaselineSegment_4_Test {
 	private float startBackgroundAbundance;
 	private float stopBackgroundAbundance;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		startRetentionTime = 4500;
 		stopRetentionTime = 10500;
@@ -46,48 +49,48 @@ public class BaselineSegment_4_Test {
 	@Test
 	public void testEquals_1() {
 
-		assertEquals("Equals", segmentI, segmentII);
+		assertEquals(segmentI, segmentII);
 	}
 
 	@Test
 	public void testEquals_2() {
 
-		assertEquals("Equals", segmentII, segmentI);
+		assertEquals(segmentII, segmentI);
 	}
 
 	@Test
-	public void testEquals_3() {
+	public void testNotNull_1() {
 
-		assertNotNull("Equals", segmentI);
+		assertNotNull(segmentI);
 	}
 
 	@Test
-	public void testEquals_4() {
+	public void testAssertNotNull_2() {
 
-		assertNotNull("Equals", segmentII);
+		assertNotNull(segmentII);
 	}
 
 	@Test
 	public void testEquals_5() {
 
-		assertNotEquals("Equals", segmentI, new Object());
+		assertNotEquals(segmentI, new Object());
 	}
 
 	@Test
 	public void testEquals_6() {
 
-		assertNotEquals("Equals", segmentII, new Object());
+		assertNotEquals(segmentII, new Object());
 	}
 
 	@Test
 	public void testHashCode_1() {
 
-		assertEquals("hashCode", segmentI.hashCode(), segmentII.hashCode());
+		assertEquals(segmentI.hashCode(), segmentII.hashCode());
 	}
 
 	@Test
 	public void testHashCode_2() {
 
-		assertEquals("hashCode", segmentII.hashCode(), segmentI.hashCode());
+		assertEquals(segmentII.hashCode(), segmentI.hashCode());
 	}
 }

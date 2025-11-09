@@ -12,21 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.support;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Tests the class IonRange concerning equals, hashCode and toString.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class ScanRange_3_Test {
 
 	private IScanRange scanRange1;
 	private IScanRange scanRange2;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		scanRange1 = new ScanRange(3, 5);
 		scanRange2 = new ScanRange(1, 5);

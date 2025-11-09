@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.implementation.Peak;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class PeakClassifierSupport_1_Test {
 

@@ -12,17 +12,20 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class Chromatogram_9_Test {
 
 	private Chromatogram chromatogram;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		chromatogram = new Chromatogram();
 		chromatogram.setConverterId("hello.world.converter");

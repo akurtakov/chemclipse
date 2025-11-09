@@ -12,21 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.quantitation;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.model.implementation.QuantitationEntry;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class QuantitationEntry_1_Test {
 
 	private IQuantitationEntry quantitationEntry1;
 	private IQuantitationEntry quantitationEntry2;
 	private IQuantitationEntry quantitationEntry3;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		quantitationEntry1 = new QuantitationEntry("Toluene", "PAK", 0.25d, "mg/g", 2000.0d);
 		quantitationEntry2 = new QuantitationEntry("Toluene", "", 0.25d, "mg/g", 2000.0d);

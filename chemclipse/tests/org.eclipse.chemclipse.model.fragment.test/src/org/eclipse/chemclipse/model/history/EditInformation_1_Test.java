@@ -12,24 +12,26 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.history;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Date;
 
 import org.eclipse.chemclipse.support.history.EditInformation;
 import org.eclipse.chemclipse.support.history.IEditInformation;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class EditInformation_1_Test {
 
 	private IEditInformation editInformation;
 	private Date date = new Date();
 	private final String entry = "I have modified the chromatogram.";
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		editInformation = new EditInformation(date, entry);
 	}
@@ -37,15 +39,14 @@ public class EditInformation_1_Test {
 	@Test
 	public void testGetEditHistory_1() {
 
-		long millisecondsEdit = editInformation.getDate().getTime();
-		long millisecondsCheck = date.getTime();
-		long delta = millisecondsCheck - millisecondsEdit;
-		assertTrue("getDate", delta > -5 && delta < 5); // Sometimes the time deviates in the check by 1 ms
+		double millisecondsEdit = editInformation.getDate().getTime();
+		double millisecondsCheck = date.getTime();
+		assertEquals(millisecondsEdit, millisecondsCheck, 5); // Sometimes the time deviates in the check by 1 ms
 	}
 
 	@Test
 	public void testGetEditHistory_2() {
 
-		assertEquals("getDescription", entry, editInformation.getDescription());
+		assertEquals(entry, editInformation.getDescription());
 	}
 }

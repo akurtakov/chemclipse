@@ -12,23 +12,23 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
-/**
- * @author eselmeister
- */
+@TestInstance(Lifecycle.PER_CLASS)
 public class AnalysisSupport_4_Test {
 
 	private IAnalysisSupport support;
 	private IScanRange scanRange;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		scanRange = new ScanRange(1, 100);
 		support = new AnalysisSupport(scanRange, 10);
@@ -37,7 +37,7 @@ public class AnalysisSupport_4_Test {
 	@Test
 	public void testGetNumberOfAnalysisSegments_1() {
 
-		assertEquals("NumberOfAnalysisSegments", 10, support.getNumberOfAnalysisSegments());
+		assertEquals(10, support.getNumberOfAnalysisSegments());
 	}
 
 	@Test
@@ -45,9 +45,9 @@ public class AnalysisSupport_4_Test {
 
 		List<IAnalysisSegment> segments = support.getAnalysisSegments();
 		IAnalysisSegment segment = segments.get(0);
-		assertEquals("StartScan", 1, segment.getStartScan());
-		assertEquals("StopScan", 10, segment.getStopScan());
-		assertEquals("SegmentWidth", 10, segment.getWidth());
+		assertEquals(1, segment.getStartScan());
+		assertEquals(10, segment.getStopScan());
+		assertEquals(10, segment.getWidth());
 	}
 
 	@Test
@@ -55,8 +55,8 @@ public class AnalysisSupport_4_Test {
 
 		List<IAnalysisSegment> segments = support.getAnalysisSegments();
 		IAnalysisSegment segment = segments.get(9);
-		assertEquals("StartScan", 91, segment.getStartScan());
-		assertEquals("StopScan", 100, segment.getStopScan());
-		assertEquals("SegmentWidth", 10, segment.getWidth());
+		assertEquals(91, segment.getStartScan());
+		assertEquals(100, segment.getStopScan());
+		assertEquals(10, segment.getWidth());
 	}
 }
