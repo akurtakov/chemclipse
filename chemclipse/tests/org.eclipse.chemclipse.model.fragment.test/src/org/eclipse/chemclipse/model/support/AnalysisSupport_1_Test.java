@@ -12,19 +12,22 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class AnalysisSupport_1_Test {
 
 	private IAnalysisSupport support;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		support = new AnalysisSupport(5726, 13);
 	}
@@ -32,7 +35,7 @@ public class AnalysisSupport_1_Test {
 	@Test
 	public void testGetNumberOfAnalysisSegments_1() {
 
-		assertEquals("NumberOfAnalysisSegments", 441, support.getNumberOfAnalysisSegments());
+		assertEquals(441, support.getNumberOfAnalysisSegments());
 	}
 
 	@Test
@@ -40,9 +43,9 @@ public class AnalysisSupport_1_Test {
 
 		List<IAnalysisSegment> segments = support.getAnalysisSegments();
 		IAnalysisSegment segment = segments.get(439);
-		assertEquals("StartScan", 5708, segment.getStartScan());
-		assertEquals("StopScan", 5720, segment.getStopScan());
-		assertEquals("SegmentWidth", 13, segment.getWidth());
+		assertEquals(5708, segment.getStartScan());
+		assertEquals(5720, segment.getStopScan());
+		assertEquals(13, segment.getWidth());
 	}
 
 	@Test
@@ -50,8 +53,8 @@ public class AnalysisSupport_1_Test {
 
 		List<IAnalysisSegment> segments = support.getAnalysisSegments();
 		IAnalysisSegment segment = segments.get(440);
-		assertEquals("StartScan", 5721, segment.getStartScan());
-		assertEquals("StopScan", 5726, segment.getStopScan());
-		assertEquals("SegmentWidth", 6, segment.getWidth());
+		assertEquals(5721, segment.getStartScan());
+		assertEquals(5726, segment.getStopScan());
+		assertEquals(6, segment.getWidth());
 	}
 }

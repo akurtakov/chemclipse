@@ -19,9 +19,7 @@ import org.eclipse.chemclipse.model.implementation.Peak;
 import org.eclipse.chemclipse.model.implementation.PeakIntensityValues;
 import org.eclipse.chemclipse.model.implementation.PeakModel;
 import org.eclipse.chemclipse.model.implementation.Scan;
-import org.junit.Ignore;
 
-@Ignore
 public class AbstractPeakTestCase {
 
 	protected IPeak createPeak(float totalSignal, TreeMap<Integer, Float> retentionTimeIntensityMap, float startBackgroundAbundance, float stopBackgroundAbundance, boolean strictModel) {

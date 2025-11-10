@@ -12,11 +12,14 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.baseline;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class BaselineSegment_2_Test {
 
 	private IBaselineSegment segment;
@@ -25,8 +28,8 @@ public class BaselineSegment_2_Test {
 	private float startBackgroundAbundance;
 	private float stopBackgroundAbundance;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		startRetentionTime = 4500;
 		stopRetentionTime = 10500;
@@ -40,24 +43,24 @@ public class BaselineSegment_2_Test {
 	@Test
 	public void testGetStartRetentionTime_1() {
 
-		assertEquals("StartRetentionTime", startRetentionTime, segment.getStartRetentionTime());
+		assertEquals(startRetentionTime, segment.getStartRetentionTime());
 	}
 
 	@Test
 	public void testGetStopRetentionTime_1() {
 
-		assertEquals("StopRetentionTime", stopRetentionTime, segment.getStopRetentionTime());
+		assertEquals(stopRetentionTime, segment.getStopRetentionTime());
 	}
 
 	@Test
 	public void testGetStartBackgroundAbundance_1() {
 
-		assertEquals("StartBackgroundAbundance", -1.0f, segment.getStartBackgroundAbundance(), 0);
+		assertEquals(-1.0f, segment.getStartBackgroundAbundance(), 0);
 	}
 
 	@Test
 	public void testGetStopBackgroundAbundance_1() {
 
-		assertEquals("StopBackgroundAbundance", -1.0f, segment.getStopBackgroundAbundance(), 0);
+		assertEquals(-1.0f, segment.getStopBackgroundAbundance(), 0);
 	}
 }

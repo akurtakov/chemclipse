@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +22,12 @@ import org.eclipse.chemclipse.model.columns.SeparationColumn;
 import org.eclipse.chemclipse.model.identifier.ColumnIndexMarker;
 import org.eclipse.chemclipse.model.identifier.IColumnIndexMarker;
 import org.eclipse.chemclipse.support.model.SeparationColumnType;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ColumnIndexSupport_3_Test {
 
 	private static final ISeparationColumn DB1_NON_POLAR = new SeparationColumn("DB1", SeparationColumnType.NON_POLAR);
@@ -36,8 +39,8 @@ public class ColumnIndexSupport_3_Test {
 
 	private List<IColumnIndexMarker> columnIndexMarkers = new ArrayList<>();
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		columnIndexMarkers.add(new ColumnIndexMarker(DB1_NON_POLAR, 1720));
 		columnIndexMarkers.add(new ColumnIndexMarker(DB5_NON_POLAR, 1725));

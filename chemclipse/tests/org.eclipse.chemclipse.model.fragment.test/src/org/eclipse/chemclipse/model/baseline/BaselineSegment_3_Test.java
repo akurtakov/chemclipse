@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.baseline;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class BaselineSegment_3_Test {
 
@@ -25,8 +25,8 @@ public class BaselineSegment_3_Test {
 	private float startBackgroundAbundance;
 	private float stopBackgroundAbundance;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeEach
+	public void setUp() {
 
 		startRetentionTime = 4500;
 		stopRetentionTime = 10500;
@@ -40,28 +40,28 @@ public class BaselineSegment_3_Test {
 	@Test
 	public void testGetStartRetentionTime_1() {
 
-		assertEquals("StartRetentionTime", startRetentionTime, segment.getStartRetentionTime());
+		assertEquals(startRetentionTime, segment.getStartRetentionTime());
 		segment.setStartRetentionTime(stopRetentionTime);
-		assertEquals("StartRetentionTime", stopRetentionTime, segment.getStartRetentionTime());
+		assertEquals(stopRetentionTime, segment.getStartRetentionTime());
 	}
 
 	@Test
 	public void testGetStopRetentionTime_1() {
 
-		assertEquals("StopRetentionTime", stopRetentionTime, segment.getStopRetentionTime());
+		assertEquals(stopRetentionTime, segment.getStopRetentionTime());
 		segment.setStopRetentionTime(startRetentionTime);
-		assertEquals("StopRetentionTime", startRetentionTime, segment.getStopRetentionTime());
+		assertEquals(startRetentionTime, segment.getStopRetentionTime());
 	}
 
 	@Test
 	public void testGetStartBackgroundAbundance_1() {
 
-		assertEquals("StartBackgroundAbundance", startBackgroundAbundance, segment.getStartBackgroundAbundance(), 0);
+		assertEquals(startBackgroundAbundance, segment.getStartBackgroundAbundance(), 0);
 	}
 
 	@Test
 	public void testGetStopBackgroundAbundance_1() {
 
-		assertEquals("StopBackgroundAbundance", stopBackgroundAbundance, segment.getStopBackgroundAbundance(), 0);
+		assertEquals(stopBackgroundAbundance, segment.getStopBackgroundAbundance(), 0);
 	}
 }

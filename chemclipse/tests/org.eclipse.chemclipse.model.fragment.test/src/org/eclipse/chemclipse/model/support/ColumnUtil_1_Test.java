@@ -12,14 +12,14 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.support.ColumnField;
 import org.eclipse.chemclipse.model.implementation.Chromatogram;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ColumnUtil_1_Test {
 

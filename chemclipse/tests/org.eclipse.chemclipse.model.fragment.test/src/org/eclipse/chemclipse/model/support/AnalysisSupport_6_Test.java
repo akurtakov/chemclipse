@@ -12,20 +12,23 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class AnalysisSupport_6_Test {
 
 	private IAnalysisSupport support;
 	private IScanRange scanRange;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		scanRange = new ScanRange(178, 250);
 		support = new AnalysisSupport(scanRange, 10);
@@ -34,7 +37,7 @@ public class AnalysisSupport_6_Test {
 	@Test
 	public void testGetNumberOfAnalysisSegments_1() {
 
-		assertEquals("NumberOfAnalysisSegments", 8, support.getNumberOfAnalysisSegments());
+		assertEquals(8, support.getNumberOfAnalysisSegments());
 	}
 
 	@Test
@@ -42,9 +45,9 @@ public class AnalysisSupport_6_Test {
 
 		List<IAnalysisSegment> segments = support.getAnalysisSegments();
 		IAnalysisSegment segment = segments.get(0);
-		assertEquals("StartScan", 178, segment.getStartScan());
-		assertEquals("StopScan", 187, segment.getStopScan());
-		assertEquals("SegmentWidth", 10, segment.getWidth());
+		assertEquals(178, segment.getStartScan());
+		assertEquals(187, segment.getStopScan());
+		assertEquals(10, segment.getWidth());
 	}
 
 	@Test
@@ -52,8 +55,8 @@ public class AnalysisSupport_6_Test {
 
 		List<IAnalysisSegment> segments = support.getAnalysisSegments();
 		IAnalysisSegment segment = segments.get(7);
-		assertEquals("StartScan", 248, segment.getStartScan());
-		assertEquals("StopScan", 250, segment.getStopScan());
-		assertEquals("SegmentWidth", 3, segment.getWidth());
+		assertEquals(248, segment.getStartScan());
+		assertEquals(250, segment.getStopScan());
+		assertEquals(3, segment.getWidth());
 	}
 }

@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.comparator;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,17 +26,17 @@ import org.eclipse.chemclipse.model.identifier.LibraryInformation;
 import org.eclipse.chemclipse.model.implementation.IdentificationTarget;
 import org.eclipse.chemclipse.model.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.support.comparator.SortOrder;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class IdentificationTargetComparator_1_Test {
 
 	private List<IIdentificationTarget> identificationTargets;
 	private boolean useRetentionIndexQC;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeEach
+	public void setUp() {
 
 		useRetentionIndexQC = PreferenceSupplier.isUseRetentionIndexQC();
 
@@ -58,7 +58,7 @@ public class IdentificationTargetComparator_1_Test {
 		identificationTargets.add(createIdentificationTarget("O", 1337, 99.83f, 99.83f, 99.83f, 99.831f, 13.52f));
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		PreferenceSupplier.setUseRetentionIndexQC(useRetentionIndexQC);

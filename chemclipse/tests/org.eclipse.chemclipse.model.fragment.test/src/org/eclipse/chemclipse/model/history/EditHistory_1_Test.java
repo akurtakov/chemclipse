@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.history;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,9 +24,12 @@ import org.eclipse.chemclipse.support.history.EditInformation;
 import org.eclipse.chemclipse.support.history.EditInformationComparator;
 import org.eclipse.chemclipse.support.history.IEditHistory;
 import org.eclipse.chemclipse.support.history.IEditInformation;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class EditHistory_1_Test {
 
 	private IEditHistory editHistory;
@@ -36,8 +39,8 @@ public class EditHistory_1_Test {
 	private final String entry3 = "What are we doing now?";
 	private int sleepTime = 100;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() throws InterruptedException {
 
 		editHistory = new EditHistory();
 		/*
@@ -61,9 +64,9 @@ public class EditHistory_1_Test {
 	public void testGetEditHistory_1() {
 
 		List<IEditInformation> history = new ArrayList<>(editHistory);
-		assertEquals("1st entry", entry1, history.get(0).getDescription());
-		assertEquals("2nd entry", entry2, history.get(1).getDescription());
-		assertEquals("3rd entry", entry3, history.get(2).getDescription());
+		assertEquals(entry1, history.get(0).getDescription());
+		assertEquals(entry2, history.get(1).getDescription());
+		assertEquals(entry3, history.get(2).getDescription());
 	}
 
 	@Test
@@ -71,9 +74,9 @@ public class EditHistory_1_Test {
 
 		List<IEditInformation> history = new ArrayList<>(editHistory);
 		Collections.sort(history, new EditInformationComparator(EditHistorySortOrder.DATE_ASC));
-		assertEquals("1st entry", entry1, history.get(0).getDescription());
-		assertEquals("2nd entry", entry2, history.get(1).getDescription());
-		assertEquals("3rd entry", entry3, history.get(2).getDescription());
+		assertEquals(entry1, history.get(0).getDescription());
+		assertEquals(entry2, history.get(1).getDescription());
+		assertEquals(entry3, history.get(2).getDescription());
 	}
 
 	@Test
@@ -81,8 +84,8 @@ public class EditHistory_1_Test {
 
 		List<IEditInformation> history = new ArrayList<>(editHistory);
 		Collections.sort(history, new EditInformationComparator(EditHistorySortOrder.DATE_DESC));
-		assertEquals("1st entry", entry3, history.get(0).getDescription());
-		assertEquals("2nd entry", entry2, history.get(1).getDescription());
-		assertEquals("3rd entry", entry1, history.get(2).getDescription());
+		assertEquals(entry3, history.get(0).getDescription());
+		assertEquals(entry2, history.get(1).getDescription());
+		assertEquals(entry1, history.get(2).getDescription());
 	}
 }

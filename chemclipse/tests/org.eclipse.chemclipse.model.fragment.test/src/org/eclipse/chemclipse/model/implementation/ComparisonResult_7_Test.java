@@ -12,20 +12,20 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.eclipse.chemclipse.model.identifier.ComparisonResult;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ComparisonResult_7_Test {
 
 	private static final float DEFAULT_VALUE = 100.0f;
 	private ComparisonResult comparisonResult;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeEach
+	public void setUp() {
 
 		comparisonResult = new ComparisonResult(DEFAULT_VALUE, DEFAULT_VALUE, DEFAULT_VALUE, DEFAULT_VALUE, DEFAULT_VALUE);
 		// comparisonResult.setPenalty(-22.0f);

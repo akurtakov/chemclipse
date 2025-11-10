@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.identifier.LibraryInformation;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class LibraryInformation_1_Test {
 

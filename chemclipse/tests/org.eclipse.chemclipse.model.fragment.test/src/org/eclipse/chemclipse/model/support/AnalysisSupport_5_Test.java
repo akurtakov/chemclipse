@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.support;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.eclipse.chemclipse.model.exceptions.AnalysisSupportException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class AnalysisSupport_5_Test {
 

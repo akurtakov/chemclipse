@@ -12,17 +12,20 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.instruments;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class Instrument_4_Test {
 
 	private Instrument instrument;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		instrument = new Instrument("%$Instr|um;ent1[", "G|;;C-MS", "Research and ||Development;;");
 	}

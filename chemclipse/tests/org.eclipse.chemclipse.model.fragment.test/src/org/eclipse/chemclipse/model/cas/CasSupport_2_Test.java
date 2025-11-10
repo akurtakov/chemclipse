@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.cas;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /*
  * https://en.wikipedia.org/wiki/CAS_Registry_Number

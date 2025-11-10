@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.math;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class IonRoundMethod_Performance_Test {
 

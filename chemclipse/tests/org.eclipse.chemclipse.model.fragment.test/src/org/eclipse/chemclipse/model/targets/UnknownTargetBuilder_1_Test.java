@@ -12,12 +12,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.targets;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.implementation.Scan;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class UnknownTargetBuilder_1_Test {
 
