@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.classification.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.core.IPeakIntensityValues;
@@ -32,8 +32,8 @@ import org.eclipse.chemclipse.model.implementation.Scan;
 import org.eclipse.chemclipse.xxd.classification.model.ClassificationRule;
 import org.eclipse.chemclipse.xxd.classification.model.Reference;
 import org.eclipse.chemclipse.xxd.classification.settings.ClassifierAssignFilterSettings;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ClassificationAssigner_2_Test {
 
@@ -45,7 +45,7 @@ public class ClassificationAssigner_2_Test {
 	private IPeak peak;
 	private IIdentificationTarget identificationTarget;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		IScan peakMaximum = new Scan(1000);

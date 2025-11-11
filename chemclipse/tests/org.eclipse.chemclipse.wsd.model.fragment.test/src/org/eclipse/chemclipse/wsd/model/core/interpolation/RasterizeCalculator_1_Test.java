@@ -12,20 +12,20 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.wsd.model.core.interpolation;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.Map;
 import java.util.TreeMap;
 
 import org.eclipse.chemclipse.model.interpolation.RasterizeCalculator;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class RasterizeCalculator_1_Test {
 
 	private TreeMap<Float, Float> dataOriginal = new TreeMap<>();
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		dataOriginal.put(200.0f, 500.0f);
