@@ -12,17 +12,20 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.support.traces;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class Trace_HighResMSD_01_Test {
 
 	private TraceHighResMSD trace;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		trace = TraceFactory.parseTrace("427.240", TraceHighResMSD.class);

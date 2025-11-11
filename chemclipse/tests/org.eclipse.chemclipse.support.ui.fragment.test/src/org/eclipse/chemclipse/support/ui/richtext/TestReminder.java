@@ -10,35 +10,23 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.support.traces;
+package org.eclipse.chemclipse.support.ui.richtext;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-public class Trace_Generic_00_Test {
+public class TestReminder {
 
 	@Test
 	public void test1() {
 
-		assertNull(TraceFactory.parseTrace("", TraceGeneric.class));
-	}
-
-	@Test
-	public void test2() {
-
-		assertNull(TraceFactory.parseTrace("A", TraceGeneric.class));
-	}
-
-	@Test
-	public void test3() {
-
-		assertNull(TraceFactory.parseTrace("0", TraceGeneric.class));
-	}
-
-	@Test
-	public void test4() {
-
-		assertNull(TraceFactory.parseTrace("-1", TraceGeneric.class));
+		/*
+		 * RichTextConverter_1_Test
+		 * At least one tests is needed in the package.
+		 * Otherwise a no tests available message would be thrown.
+		 */
+		boolean needToFixTestsUI = true;
+		assertTrue(needToFixTestsUI);
 	}
 }

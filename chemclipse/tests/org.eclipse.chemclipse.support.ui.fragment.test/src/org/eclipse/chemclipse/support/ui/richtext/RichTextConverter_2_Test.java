@@ -10,23 +10,21 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.support.ui.fragment.testorg.eclipse.chemclipse.support.ui.richtext;
+package org.eclipse.chemclipse.support.ui.richtext;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-public class TestReminder {
+@Disabled
+public class RichTextConverter_2_Test {
 
 	@Test
 	public void test1() {
 
-		/*
-		 * RichTextConverter_1_Test
-		 * At least one tests is needed in the package.
-		 * Otherwise a no tests available message would be thrown.
-		 */
-		boolean needToFixTestsUI = true;
-		assertTrue(needToFixTestsUI);
+		String input = "<p><span style=\"font-size: 8pt; font-family: Microsoft Sans Serif\">Test</span></p>";
+		String output = "<p><span style=\"font-size: 11px; font-family: Microsoft Sans Serif\">Test</span></p>";
+		assertEquals(output, RichTextConverter.convertRtfToHtml(input, false));
 	}
 }

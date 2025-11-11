@@ -12,17 +12,20 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.support.traces;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class Trace_RasteredVSD_04_Test {
 
 	private TraceRasteredVSD trace;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		trace = TraceFactory.parseTrace("1801 (x1.6)", TraceRasteredVSD.class);

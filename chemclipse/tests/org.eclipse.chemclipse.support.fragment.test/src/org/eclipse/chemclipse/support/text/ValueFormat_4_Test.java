@@ -12,19 +12,22 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.support.text;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ValueFormat_4_Test {
 
 	private NumberFormat numberFormat;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		numberFormat = ValueFormat.getNumberFormatEnglish();
