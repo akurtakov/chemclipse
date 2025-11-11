@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.filter.fragment.test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.core.IPeakIntensityValues;
@@ -31,8 +31,8 @@ import org.eclipse.chemclipse.model.implementation.Scan;
 import org.eclipse.chemclipse.xxd.filter.peaks.DeletePeaksByTargetFilter;
 import org.eclipse.chemclipse.xxd.filter.peaks.settings.DeletePeaksByTargetFilterSettings;
 import org.eclipse.chemclipse.xxd.filter.support.PeaksDeleteOption;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DeletePeaksByTarget_2_Test {
 
@@ -41,7 +41,7 @@ public class DeletePeaksByTarget_2_Test {
 	private String value = "1115-07-7";
 	private String regex = "(.*)(-07-)(.*)";
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		/*

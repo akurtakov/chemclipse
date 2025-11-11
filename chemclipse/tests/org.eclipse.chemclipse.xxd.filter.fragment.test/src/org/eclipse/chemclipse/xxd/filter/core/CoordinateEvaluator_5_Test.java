@@ -12,12 +12,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.filter.core;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.xxd.filter.model.CoordinateOption;
 import org.eclipse.chemclipse.xxd.filter.model.RangeOption;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CoordinateEvaluator_5_Test extends CoordinateEvaluatorTestCase {
 

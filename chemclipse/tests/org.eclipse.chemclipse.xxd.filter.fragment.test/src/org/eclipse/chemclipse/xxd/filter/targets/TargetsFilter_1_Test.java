@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.filter.targets;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,15 +27,15 @@ import org.eclipse.chemclipse.model.identifier.LibraryInformation;
 import org.eclipse.chemclipse.model.implementation.IdentificationTarget;
 import org.eclipse.chemclipse.xxd.filter.peaks.settings.DeleteTargetsFilterSettings;
 import org.eclipse.chemclipse.xxd.filter.support.TargetsDeleteOption;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TargetsFilter_1_Test {
 
 	private DeleteTargetsFilterSettings settings = new DeleteTargetsFilterSettings();
 	private ITargetSupplier targetSupplier = getTargetSupplier();
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		settings.setTargetDeleteOption(TargetsDeleteOption.PROPERTY_LEVEL);
