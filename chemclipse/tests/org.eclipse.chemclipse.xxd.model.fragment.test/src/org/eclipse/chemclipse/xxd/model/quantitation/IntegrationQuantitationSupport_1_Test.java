@@ -12,23 +12,23 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.model.quantitation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.chemclipse.model.quantitation.QuantitationSupport;
 import org.eclipse.chemclipse.msd.model.core.AbstractIon;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class IntegrationQuantitationSupport_1_Test extends QuantitationCalculator_TIC_TestCase {
 
 	private QuantitationSupport support;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		super.setUp();

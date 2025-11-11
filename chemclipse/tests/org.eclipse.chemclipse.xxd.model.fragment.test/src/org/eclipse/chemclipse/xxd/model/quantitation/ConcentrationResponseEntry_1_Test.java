@@ -12,18 +12,21 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.model.quantitation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.quantitation.IResponseSignal;
 import org.eclipse.chemclipse.model.quantitation.ResponseSignal;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ConcentrationResponseEntry_1_Test {
 
 	private IResponseSignal concentrationResponseEntry;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		concentrationResponseEntry = new ResponseSignal(76.2d, 0.7d, 47875);

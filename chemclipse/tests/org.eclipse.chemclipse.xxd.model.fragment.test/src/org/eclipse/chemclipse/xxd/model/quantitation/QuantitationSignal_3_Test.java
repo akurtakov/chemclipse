@@ -12,20 +12,23 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.model.quantitation;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.model.quantitation.IQuantitationSignal;
 import org.eclipse.chemclipse.model.quantitation.QuantitationSignal;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class QuantitationSignal_3_Test {
 
 	private IQuantitationSignal quantitationSignal1;
 	private IQuantitationSignal quantitationSignal2;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		quantitationSignal1 = new QuantitationSignal(56.2d, 78.5f);
