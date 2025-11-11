@@ -31,10 +31,10 @@ import org.eclipse.chemclipse.msd.model.implementation.PeakIon;
 import org.eclipse.chemclipse.msd.model.implementation.PeakMSD;
 import org.eclipse.chemclipse.msd.model.implementation.PeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.implementation.PeakModelMSD;
-import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 
-@Ignore
+@Disabled
 public class ReferencePeakMSDTestCase {
 
 	private IPeakMSD referencePeakMSD_TIC_1; // 1x Concentration
@@ -58,7 +58,7 @@ public class ReferencePeakMSDTestCase {
 
 	private double baseArea = 750220.0d;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		referencePeakMSD_TIC_1 = createPeak(1, false);

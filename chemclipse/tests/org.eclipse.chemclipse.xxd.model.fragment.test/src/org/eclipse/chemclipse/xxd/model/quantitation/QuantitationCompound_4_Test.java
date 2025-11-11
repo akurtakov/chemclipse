@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.model.quantitation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +27,12 @@ import org.eclipse.chemclipse.model.quantitation.IResponseSignal;
 import org.eclipse.chemclipse.model.quantitation.IResponseSignals;
 import org.eclipse.chemclipse.msd.model.core.AbstractIon;
 import org.eclipse.chemclipse.msd.model.implementation.QuantitationPeakMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class QuantitationCompound_4_Test extends ReferencePeakMSDTestCase {
 
 	private IQuantitationCompound quantitationCompound;
@@ -37,7 +40,7 @@ public class QuantitationCompound_4_Test extends ReferencePeakMSDTestCase {
 	private IResponseSignals concentrationResponseEntries;
 
 	@Override
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		super.setUp();

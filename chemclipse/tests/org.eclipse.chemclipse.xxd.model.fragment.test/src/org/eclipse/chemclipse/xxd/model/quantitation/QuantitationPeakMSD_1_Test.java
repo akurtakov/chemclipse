@@ -12,20 +12,23 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.model.quantitation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.eclipse.chemclipse.model.quantitation.IQuantitationPeak;
 import org.eclipse.chemclipse.msd.model.implementation.QuantitationPeakMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class QuantitationPeakMSD_1_Test extends ReferencePeakMSDTestCase {
 
 	private IQuantitationPeak quantitationPeakMSD;
 
 	@Override
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		super.setUp();

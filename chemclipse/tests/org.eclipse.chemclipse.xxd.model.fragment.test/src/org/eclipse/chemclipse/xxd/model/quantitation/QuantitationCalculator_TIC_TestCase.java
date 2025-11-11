@@ -18,7 +18,7 @@ import java.util.List;
 import org.eclipse.chemclipse.model.quantitation.IQuantitationCompound;
 import org.eclipse.chemclipse.model.quantitation.IQuantitationPeak;
 import org.eclipse.chemclipse.msd.model.implementation.QuantitationPeakMSD;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 public class QuantitationCalculator_TIC_TestCase extends ReferencePeakMSDTestCase {
 
@@ -26,7 +26,7 @@ public class QuantitationCalculator_TIC_TestCase extends ReferencePeakMSDTestCas
 	private List<IQuantitationPeak> quantitationPeaks;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		super.setUp();

@@ -18,15 +18,18 @@ import java.util.List;
 import org.eclipse.chemclipse.model.quantitation.IQuantitationCompound;
 import org.eclipse.chemclipse.model.quantitation.IQuantitationPeak;
 import org.eclipse.chemclipse.msd.model.implementation.QuantitationPeakMSD;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class QuantitationCalculator_XIC_TestCase extends ReferencePeakMSDTestCase {
 
 	private IQuantitationCompound quantitationCompound;
 	private List<IQuantitationPeak> quantitationPeaks;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		super.setUp();
