@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.filter.peaks.settings;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.xxd.filter.support.DeletePeakOption;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DeletePeaksFilterSettings_v2_Test {
 
