@@ -12,16 +12,19 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.ranges;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class TimeRangeLabels_2_Test {
 
 	private TimeRangeLabels timeRangeLabels;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		timeRangeLabels = new TimeRangeLabels("Alkane", "C20");

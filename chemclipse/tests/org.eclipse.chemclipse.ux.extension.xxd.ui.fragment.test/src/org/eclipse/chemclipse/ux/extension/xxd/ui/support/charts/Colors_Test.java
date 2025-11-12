@@ -14,10 +14,10 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts;
 
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.swt.graphics.Color;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-@Ignore("SWT is not available in headless builds.")
+@Disabled("SWT is not available in headless builds.")
 public class Colors_Test {
 
 	@Test

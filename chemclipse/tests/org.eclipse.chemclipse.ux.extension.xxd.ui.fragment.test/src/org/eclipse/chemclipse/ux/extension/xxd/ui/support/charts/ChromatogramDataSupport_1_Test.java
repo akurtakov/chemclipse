@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
@@ -20,14 +20,14 @@ import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.csd.model.implementation.ChromatogramCSD;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.support.HeaderField;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ChromatogramDataSupport_1_Test {
 
 	private IChromatogramCSD chromatogram = new ChromatogramCSD();
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		setData(chromatogram);
