@@ -12,13 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.swt.ui.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.swt.graphics.Color;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
-@Ignore
+@Disabled
 public class Colors_1_UITest {
 
 	private Color color = Colors.RED;

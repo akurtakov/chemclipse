@@ -12,17 +12,17 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.support.util;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ValueParserSupport_5_Test {
 
 	private ValueParserSupport support = new ValueParserSupport();
 	private String[] values;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		values = new String[]{Float.toString(28.3f)};

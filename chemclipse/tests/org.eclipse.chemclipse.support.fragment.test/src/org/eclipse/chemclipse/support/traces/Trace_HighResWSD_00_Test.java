@@ -12,10 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.support.traces;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class Trace_HighResWSD_00_Test {
 
 	@Test

@@ -12,14 +12,17 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.support.validators;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class TraceValidator_04_Test {
 
 	private TraceValidator traceValidator = new TraceValidator();
@@ -27,7 +30,7 @@ public class TraceValidator_04_Test {
 
 	private IStatus status;
 
-	@Before
+	@BeforeAll
 	public void setup() {
 
 		status = traceValidator.validate(content);

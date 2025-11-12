@@ -12,14 +12,17 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.support.literature;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /*
  * Test the line endings.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class LiteratureSupport_4_Test {
 
 	private static final String URL = "https://doi.org/10.1002/rcm.9294";
@@ -28,7 +31,7 @@ public class LiteratureSupport_4_Test {
 	private String contentB;
 	private String contentC;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		contentA = getRIS_v1();
