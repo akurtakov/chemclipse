@@ -287,8 +287,7 @@ public class Colors {
 		 */
 		Color color = alphaColors.get(rgb);
 		if(color == null) {
-			Display display = DisplayUtils.getDisplay();
-			color = new Color(display, rgb, alpha);
+			color = new Color(rgb, alpha);
 			alphaColors.put(rgb, color);
 		}
 

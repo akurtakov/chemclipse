@@ -33,7 +33,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.ui.provider.AbstractChemClipseLabelProvider;
-import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModel;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramPeakWSD;
@@ -140,7 +139,7 @@ public class PeakScanListLabelProvider extends AbstractChemClipseLabelProvider {
 				IComparisonResult comparisonResult = peakTarget.getComparisonResult();
 				if(comparisonResult instanceof IPeakComparisonResult peakComparisonResult) {
 					if(peakComparisonResult.isMarkerPeak()) {
-						return new Color(DisplayUtils.getDisplay(), 255, 140, 0);
+						return new Color(255, 140, 0);
 					}
 				}
 			}
