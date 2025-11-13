@@ -32,7 +32,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.provider.AbstractChemClipseLabelProvider;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Display;
 
 public class PeakListLabelProvider extends AbstractChemClipseLabelProvider {
 
@@ -45,7 +44,7 @@ public class PeakListLabelProvider extends AbstractChemClipseLabelProvider {
 				IComparisonResult cp = target.getComparisonResult();
 				if(cp instanceof IPeakComparisonResult pcp) {
 					if(pcp.isMarkerPeak()) {
-						return new Color(Display.getDefault(), 255, 140, 0);
+						return new Color(255, 140, 0);
 					}
 				}
 			}
