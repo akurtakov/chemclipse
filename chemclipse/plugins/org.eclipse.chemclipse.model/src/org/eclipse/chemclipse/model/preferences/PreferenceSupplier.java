@@ -39,7 +39,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String P_SORT_CASE_SENSITIVE = "sortCaseSensitive";
 	public static final boolean DEF_SORT_CASE_SENSITIVE = true;
 	public static final String P_SEARCH_CASE_SENSITIVE = "searchCaseSensitive";
-	public static final boolean DEF_SEARCH_CASE_SENSITIVE = true;
+	public static final boolean DEF_SEARCH_CASE_SENSITIVE = false;
 	public static final String P_BEST_TARGET_LIBRARY_FIELD = "bestTargetLibraryField";
 	public static final String DEF_BEST_TARGET_LIBRARY_FIELD = LibraryField.NAME.name();
 	public static final String P_ION_ROUND_METHOD = "ionRoundMethod"; // When changing this value, call clearCacheActiveIonRoundMethod.
