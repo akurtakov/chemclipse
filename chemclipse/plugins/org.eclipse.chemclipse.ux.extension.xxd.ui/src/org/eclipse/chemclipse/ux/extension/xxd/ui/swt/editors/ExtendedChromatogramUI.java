@@ -52,6 +52,7 @@ import org.eclipse.chemclipse.model.support.RetentionIndexMath;
 import org.eclipse.chemclipse.model.targets.ITargetDisplaySettings;
 import org.eclipse.chemclipse.model.targets.TargetReference;
 import org.eclipse.chemclipse.model.targets.TargetReferenceType;
+import org.eclipse.chemclipse.model.wavelengths.IMarkedWavelengths;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.eclipse.chemclipse.processing.DataCategory;
@@ -384,16 +385,13 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 
 	private void updateWavelengths() {
 
-		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
-		if(!(chromatogram instanceof IChromatogramWSD)) {
-			return;
-		}
-
-		IChromatogramSelectionWSD chromatogramSelectionWSD = (IChromatogramSelectionWSD)chromatogramSelection;
-		if(chromatogramSelectionWSD.getSelectedWavelengths().getWavelengths().size() == 1) {
-			displayType = DisplayType.SWC;
-		} else {
-			displayType = DisplayType.TIC;
+		if(chromatogramSelection instanceof IChromatogramSelectionWSD chromatogramSelectionWSD) {
+			IMarkedWavelengths selectedWavelengths = chromatogramSelectionWSD.getSelectedWavelengths();
+			if(selectedWavelengths != null && selectedWavelengths.getWavelengths().size() == 1) {
+				displayType = DisplayType.SWC;
+			} else {
+				displayType = DisplayType.TIC;
+			}
 		}
 	}
 
