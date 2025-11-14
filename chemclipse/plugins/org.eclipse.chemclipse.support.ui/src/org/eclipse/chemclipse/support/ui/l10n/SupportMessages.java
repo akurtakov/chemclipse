@@ -33,6 +33,7 @@ public class SupportMessages extends NLS {
 	public static String deselectAll;
 	public static String enterIon;
 	public static String errorMessageEven;
+	public static String errorMessageRange;
 	public static String errorMessageOdd;
 	public static String errorMessageOddIncludingZero;
 	public static String exportTableSelection;

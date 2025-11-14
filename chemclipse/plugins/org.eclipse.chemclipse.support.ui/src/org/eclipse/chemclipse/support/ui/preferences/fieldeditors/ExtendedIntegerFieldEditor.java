@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.support.ui.preferences.fieldeditors;
 
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty.Validation;
 import org.eclipse.chemclipse.support.ui.l10n.SupportMessages;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
@@ -87,13 +88,14 @@ public class ExtendedIntegerFieldEditor extends org.eclipse.jface.preference.Int
 					}
 				}
 			}
-			if(number >= min && number <= max) {
-				return true;
+			if(number < min || number > max) {
+				showErrorMessage(NLS.bind(SupportMessages.errorMessageRange, min, max));
+				return false;
 			}
 		} catch(NumberFormatException e) {
 			showErrorMessage();
+			return false;
 		}
-		showErrorMessage();
-		return false;
+		return true;
 	}
 }
