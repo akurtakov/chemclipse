@@ -179,6 +179,7 @@ public class SearchSupportUI extends Composite {
 		Button button = new Button(parent, SWT.TOGGLE);
 		button.setText("");
 		button.setToolTipText("");
+		button.setSelection(caseSensitive);
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CASE_SENSITIVE, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
