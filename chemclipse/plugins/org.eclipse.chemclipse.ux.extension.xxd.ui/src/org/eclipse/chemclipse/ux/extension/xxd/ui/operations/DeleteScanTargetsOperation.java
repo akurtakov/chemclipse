@@ -13,11 +13,15 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.operations;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
-import org.apache.commons.lang3.SerializationUtils;
 import org.eclipse.chemclipse.model.core.IScan;
+import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
@@ -30,13 +34,12 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.swt.widgets.Display;
 
-
 public class DeleteScanTargetsOperation extends AbstractOperation {
 
 	private IChromatogramSelection chromatogramSelection;
 	private Display display;
 	private List<IScan> scansToClear;
-	private List<IScan> backupScans;
+	private Map<Integer, Set<IIdentificationTarget>> backupTargets;
 
 	public DeleteScanTargetsOperation(Display display, IChromatogramSelection chromatogramSelection, List<IScan> scansToClear) {
 
@@ -44,7 +47,7 @@ public class DeleteScanTargetsOperation extends AbstractOperation {
 		this.display = display;
 		this.chromatogramSelection = chromatogramSelection;
 		this.scansToClear = scansToClear;
-		backupScans = new ArrayList<>();
+		backupTargets = new LinkedHashMap<>();
 	}
 
 	@Override
@@ -69,8 +72,8 @@ public class DeleteScanTargetsOperation extends AbstractOperation {
 	public IStatus execute(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 
 		for(IScan scan : scansToClear) {
-			IScan deepCopy = SerializationUtils.clone(scan);
-			backupScans.add(deepCopy);
+			Set<IIdentificationTarget> deepCopy = new HashSet<>(scan.getTargets());
+			backupTargets.put(scan.getScanNumber(), deepCopy);
 			scan.getTargets().clear();
 		}
 		chromatogramSelection.setSelectedIdentifiedScan(null);
@@ -104,8 +107,8 @@ public class DeleteScanTargetsOperation extends AbstractOperation {
 	@Override
 	public IStatus undo(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 
-		for(IScan scan : backupScans) {
-			chromatogramSelection.getChromatogram().getScan(scan.getScanNumber()).getTargets().addAll(scan.getTargets());
+		for(Entry<Integer, Set<IIdentificationTarget>> backup : backupTargets.entrySet()) {
+			chromatogramSelection.getChromatogram().getScan(backup.getKey()).getTargets().addAll(backup.getValue());
 		}
 		update();
 		return Status.OK_STATUS;
