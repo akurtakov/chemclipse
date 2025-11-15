@@ -249,7 +249,7 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 
 	private Button createButtonToggleToolbarInfo(Composite parent) {
 
-		Button button = new Button(parent, SWT.PUSH);
+		Button button = new Button(parent, SWT.TOGGLE);
 		button.setToolTipText("Toggle info toolbar.");
 		button.setText("");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_INFO, IApplicationImageProvider.SIZE_16x16));
@@ -259,7 +259,7 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 			public void widgetSelected(SelectionEvent e) {
 
 				boolean visible = PartSupport.toggleCompositeVisibility(toolbarInfo);
-				button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_INFO, IApplicationImageProvider.SIZE_16x16, visible));
+				button.setSelection(visible);
 			}
 		});
 
@@ -387,7 +387,7 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 
 	private void createToggleLegendMarkerButton(Composite parent) {
 
-		Button button = new Button(parent, SWT.PUSH);
+		Button button = new Button(parent, SWT.TOGGLE);
 		button.setToolTipText("Toggle the chart legend marker.");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CHART_LEGEND_MARKER, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
@@ -398,6 +398,7 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 				IChartSettings chartSettings = peakChart.getChartSettings();
 				boolean isShowLegendMarker = chartSettings.isShowLegendMarker();
 				chartSettings.setShowLegendMarker(!isShowLegendMarker);
+				button.setSelection(isShowLegendMarker);
 				peakChart.applySettings(chartSettings);
 			}
 		});

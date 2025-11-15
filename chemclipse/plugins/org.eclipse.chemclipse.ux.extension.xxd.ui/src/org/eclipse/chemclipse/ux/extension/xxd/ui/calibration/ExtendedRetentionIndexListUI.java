@@ -166,7 +166,7 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 
 	private Button createButtonToggleToolbarInfo(Composite parent) {
 
-		Button button = new Button(parent, SWT.PUSH);
+		Button button = new Button(parent, SWT.TOGGLE);
 		button.setToolTipText(ExtensionMessages.toggleInfoToolbar);
 		button.setText("");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_INFO, IApplicationImageProvider.SIZE_16x16));
@@ -177,7 +177,7 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 
 				PartSupport.toggleCompositeVisibility(toolbarInfoTop);
 				boolean visible = PartSupport.toggleCompositeVisibility(toolbarInfoBottom);
-				button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_INFO, IApplicationImageProvider.SIZE_16x16, visible));
+				button.setSelection(visible);
 			}
 		});
 
@@ -221,7 +221,7 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 
 	private Button createButtonToggleToolbarSearch(Composite parent) {
 
-		Button button = new Button(parent, SWT.PUSH);
+		Button button = new Button(parent, SWT.TOGGLE);
 		button.setToolTipText(ExtensionMessages.toggleSearchToolbar);
 		button.setText("");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SEARCH, IApplicationImageProvider.SIZE_16x16));
@@ -231,7 +231,7 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 			public void widgetSelected(SelectionEvent e) {
 
 				boolean visible = retentionIndexUI.toggleSearchVisibility();
-				button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SEARCH, IApplicationImageProvider.SIZE_16x16, visible));
+				button.setSelection(visible);
 			}
 		});
 
@@ -240,7 +240,7 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 
 	private Button createButtonToggleToolbarModify(Composite parent) {
 
-		Button button = new Button(parent, SWT.PUSH);
+		Button button = new Button(parent, SWT.TOGGLE);
 		button.setToolTipText(ExtensionMessages.toggleModifyToolbar);
 		button.setText("");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EDIT_DEFAULT, IApplicationImageProvider.SIZE_16x16));
@@ -263,7 +263,7 @@ public class ExtendedRetentionIndexListUI extends Composite implements IExtended
 
 	private Button createButtonToggleToolbarEdit(Composite parent) {
 
-		Button button = new Button(parent, SWT.PUSH);
+		Button button = new Button(parent, SWT.TOGGLE);
 		button.setToolTipText(ExtensionMessages.toggleEditToolbar);
 		button.setText("");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EDIT_ENTRY_DEFAULT, IApplicationImageProvider.SIZE_16x16));

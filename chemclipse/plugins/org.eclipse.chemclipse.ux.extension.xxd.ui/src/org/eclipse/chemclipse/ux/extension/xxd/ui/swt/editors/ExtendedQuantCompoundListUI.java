@@ -150,7 +150,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 
 	private Button createButtonToggleToolbarInfo(Composite parent) {
 
-		Button button = new Button(parent, SWT.PUSH);
+		Button button = new Button(parent, SWT.TOGGLE);
 		button.setToolTipText("Toggle the info toolbar.");
 		button.setText("");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_INFO, IApplicationImageProvider.SIZE_16x16));
@@ -160,7 +160,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 			public void widgetSelected(SelectionEvent e) {
 
 				boolean visible = PartSupport.toggleCompositeVisibility(toolbarInfo);
-				button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_INFO, IApplicationImageProvider.SIZE_16x16, visible));
+				button.setSelection(visible);
 			}
 		});
 
@@ -169,7 +169,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 
 	private Button createButtonToggleToolbarHeader(Composite parent) {
 
-		Button button = new Button(parent, SWT.PUSH);
+		Button button = new Button(parent, SWT.TOGGLE);
 		button.setToolTipText("Toggle the header toolbar.");
 		button.setText("");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_HEADER_DATA, IApplicationImageProvider.SIZE_16x16));
@@ -179,11 +179,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 			public void widgetSelected(SelectionEvent e) {
 
 				boolean visible = PartSupport.toggleCompositeVisibility(toolbarHeader);
-				if(visible) {
-					button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_HEADER_DATA, IApplicationImageProvider.SIZE_16x16));
-				} else {
-					button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_HEADER_DATA, IApplicationImageProvider.SIZE_16x16));
-				}
+				button.setSelection(visible);
 			}
 		});
 
@@ -192,7 +188,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 
 	private Button createButtonToggleToolbarModify(Composite parent) {
 
-		Button button = new Button(parent, SWT.PUSH);
+		Button button = new Button(parent, SWT.TOGGLE);
 		button.setToolTipText("Toggle modify toolbar.");
 		button.setText("");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EDIT_DEFAULT, IApplicationImageProvider.SIZE_16x16));
@@ -445,7 +441,7 @@ public class ExtendedQuantCompoundListUI extends Composite implements IExtendedP
 			public void widgetSelected(SelectionEvent e) {
 
 				boolean visible = PartSupport.toggleCompositeVisibility(toolbarSearch);
-				button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SEARCH, IApplicationImageProvider.SIZE_16x16, visible));
+				button.setSelection(visible);
 			}
 		});
 

@@ -109,7 +109,7 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 
 	private Button createButtonToggleToolbarSearch(Composite parent) {
 
-		Button button = new Button(parent, SWT.PUSH);
+		Button button = new Button(parent, SWT.TOGGLE);
 		button.setToolTipText("Toggle search toolbar.");
 		button.setText("");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SEARCH, IApplicationImageProvider.SIZE_16x16));
@@ -119,7 +119,7 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 			public void widgetSelected(SelectionEvent e) {
 
 				boolean visible = PartSupport.toggleCompositeVisibility(toolbarSearch);
-				button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SEARCH, IApplicationImageProvider.SIZE_16x16, visible));
+				button.setSelection(visible);
 			}
 		});
 
@@ -137,6 +137,7 @@ public class ExtendedSequenceExplorerUI extends Composite implements IExtendedPa
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
+				// TODO
 			}
 		});
 	}

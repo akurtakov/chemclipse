@@ -425,8 +425,6 @@ public interface IExtendedPartUI {
 			if(button.getImage() == null) {
 				button.setImage(ApplicationImageFactory.getInstance().getImage(image, IApplicationImageProvider.SIZE_16x16));
 			}
-		} else {
-			button.setImage(ApplicationImageFactory.getInstance().getImage(image, IApplicationImageProvider.SIZE_16x16, enabled));
 		}
 		/*
 		 * Tooltip
