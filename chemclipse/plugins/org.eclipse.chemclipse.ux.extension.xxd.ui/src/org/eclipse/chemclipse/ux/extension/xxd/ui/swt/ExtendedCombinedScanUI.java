@@ -302,7 +302,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 
 	private Button createButtonLocked(Composite parent) {
 
-		Button button = new Button(parent, SWT.PUSH);
+		Button button = new Button(parent, SWT.TOGGLE);
 		button.setToolTipText("Lock the combined scan.");
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EDIT, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
@@ -320,7 +320,8 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 	private void updateStatus() {
 
 		buttonLocked.setToolTipText(locked ? "Edit modus: on" : "Edit modus: off");
-		buttonLocked.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EDIT, IApplicationImageProvider.SIZE_16x16, locked));
+		buttonLocked.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EDIT, IApplicationImageProvider.SIZE_16x16));
+		buttonLocked.setSelection(locked);
 		updateLabel(labelEdit, locked ? "Edit On" : "");
 		updateButtons();
 	}

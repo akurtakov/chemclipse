@@ -48,16 +48,6 @@ public interface IApplicationImageProvider {
 	Image getImage(String fileName, String size);
 
 	/**
-	 * Returns an image with the given icons size.
-	 * 
-	 * @param fileName
-	 * @param size
-	 * @param active
-	 * @return Image
-	 */
-	Image getImage(String fileName, String size, boolean active);
-
-	/**
 	 * Returns an image descriptor with the given icons size.
 	 * 
 	 * @param fileName
