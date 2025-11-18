@@ -30,8 +30,6 @@ public class PreferenceSupplierDataExplorer extends AbstractPreferenceSupplier i
 
 	public static final String P_USER_LOCATION_PATH = "userLocation";
 	public static final String DEF_USER_LOCATION_PATH = UserManagement.getUserHome();
-	public static final String P_SHOW_NETWORK_SHARES = "showWindowsNetworkDrive";
-	public static final boolean DEF_SHOW_NETWORK_SHARES = true;
 
 	public static final String P_OPEN_FIRST_DATA_MATCH_ONLY = "openFirstDataMatchOnly";
 	public static final boolean DEF_OPEN_FIRST_DATA_MATCH_ONLY = true;
@@ -62,7 +60,6 @@ public class PreferenceSupplierDataExplorer extends AbstractPreferenceSupplier i
 		putDefault(P_SELECTED_WORKSPACE_PATH, DEF_SELECTED_WORKSPACE_PATH);
 		putDefault(P_SELECTED_USER_LOCATION_PATH, DEF_SELECTED_USER_LOCATION_PATH);
 		putDefault(P_USER_LOCATION_PATH, DEF_USER_LOCATION_PATH);
-		putDefault(P_SHOW_NETWORK_SHARES, DEF_SHOW_NETWORK_SHARES);
 		putDefault(P_OPEN_FIRST_DATA_MATCH_ONLY, DEF_OPEN_FIRST_DATA_MATCH_ONLY);
 		putDefault(P_OPEN_EDITOR_MULTIPLE_TIMES, DEF_OPEN_EDITOR_MULTIPLE_TIMES);
 		putDefault(P_USER_LOCATIONS, DEF_USER_LOCATIONS);
@@ -138,11 +135,6 @@ public class PreferenceSupplierDataExplorer extends AbstractPreferenceSupplier i
 	public static void setUserLocations(String userLocations) {
 
 		INSTANCE().set(P_USER_LOCATIONS, userLocations);
-	}
-
-	public static boolean showNetworkShares() {
-
-		return INSTANCE().getBoolean(P_SHOW_NETWORK_SHARES);
 	}
 
 	public static String getUserLocationsTemplateFolder() {
