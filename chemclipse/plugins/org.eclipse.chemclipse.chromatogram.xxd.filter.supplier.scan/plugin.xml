@@ -32,6 +32,13 @@
             id="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.removescanidentifications">
       </ChromatogramFilterSupplier>
       <ChromatogramFilterSupplier
+            description="Use buffer operations for scan identifications."
+            filter="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.core.FilterBufferIdentifier"
+            filterName="Scan Targets (Buffer)"
+            filterSettings="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.settings.FilterSettingsBufferIdentifier"
+            id="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.bufferscanidentifications">
+      </ChromatogramFilterSupplier>
+      <ChromatogramFilterSupplier
             description="This filter duplicates series of scans."
             filter="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.core.FilterDuplicator"
             filterName="Scan Duplicator"
