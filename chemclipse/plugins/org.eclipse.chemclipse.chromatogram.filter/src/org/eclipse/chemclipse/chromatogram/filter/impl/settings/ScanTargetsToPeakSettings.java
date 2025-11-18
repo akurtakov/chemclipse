@@ -19,12 +19,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 public class ScanTargetsToPeakSettings extends AbstractChromatogramFilterSettings {
 
-	@JsonProperty(value = "Transfer Closest Scan", defaultValue = "false")
-	@JsonPropertyDescription(value = "If this value is true, only the closest scan to the peak maximum will be used to transfer targets.")
-	private boolean transferClosestScan = false;
-	@JsonProperty(value = "Transfer Best Target Only", defaultValue = "false")
-	@JsonPropertyDescription(value = "If this value is true, only the best target will be transfered.")
-	private boolean useBestTargetOnly = false;
+	@JsonProperty(value = "Transfer Closest Scan", defaultValue = "true")
+	@JsonPropertyDescription(value = "Transfer the targets of the closest scan relative to the peak.")
+	private boolean transferClosestScan = true;
+	@JsonProperty(value = "Transfer Best Target Only", defaultValue = "true")
+	@JsonPropertyDescription(value = "Transfer only the best target.")
+	private boolean useBestTargetOnly = true;
+	@JsonProperty(value = "Delete Assigned Scan Identifications", defaultValue = "true")
+	@JsonPropertyDescription(value = "If scan targets were assigned to a peak, delete the scan identification.")
+	private boolean deleteAssignedScanIdentifications = true;
 
 	public boolean isTransferClosestScan() {
 
@@ -44,5 +47,15 @@ public class ScanTargetsToPeakSettings extends AbstractChromatogramFilterSetting
 	public void setUseBestTargetOnly(boolean useBestTargetOnly) {
 
 		this.useBestTargetOnly = useBestTargetOnly;
+	}
+
+	public boolean isDeleteAssignedScanIdentifications() {
+
+		return deleteAssignedScanIdentifications;
+	}
+
+	public void setDeleteAssignedScanIdentifications(boolean deleteAssignedScanIdentifications) {
+
+		this.deleteAssignedScanIdentifications = deleteAssignedScanIdentifications;
 	}
 }
