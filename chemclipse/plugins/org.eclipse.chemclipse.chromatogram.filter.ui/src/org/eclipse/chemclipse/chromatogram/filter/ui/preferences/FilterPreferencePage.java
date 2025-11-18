@@ -38,22 +38,12 @@ public class FilterPreferencePage extends FieldEditorPreferencePage implements I
 		setDescription(""); //$NON-NLS-1$
 	}
 
-	/**
-	 * Creates the field editors. Field editors are abstractions of the common
-	 * GUI blocks needed to manipulate various types of preferences. Each field
-	 * editor knows how to save and restore itself.
-	 */
 	public void createFieldEditors() {
 
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor(Messages.chromotogramSelectionFilter, getFieldEditorParent()));
 		addField(new DoubleFieldEditor(PreferenceSupplier.P_START_RETENTION_TIME_MINUTES, Messages.startRetentionTimeMinutes, PreferenceSupplier.MIN_RETENTION_TIME_MINUTES, PreferenceSupplier.MAX_RETENTION_TIME_MINUTES, getFieldEditorParent()));
 		addField(new DoubleFieldEditor(PreferenceSupplier.P_STOP_RETENTION_TIME_MINUTES, Messages.stopRetentionTimeMinutes, PreferenceSupplier.MIN_RETENTION_TIME_MINUTES, PreferenceSupplier.MAX_RETENTION_TIME_MINUTES, getFieldEditorParent()));
-
-		addField(new SpacerFieldEditor(getFieldEditorParent()));
-		addField(new LabelFieldEditor(Messages.scanTargetsToPeakTransfer, getFieldEditorParent()));
-		addField(new BooleanFieldEditor(PreferenceSupplier.P_STTP_TRANSFER_CLOSEST_SCAN, Messages.transferClosestScan, getFieldEditorParent()));
-		addField(new BooleanFieldEditor(PreferenceSupplier.P_STTP_USE_BEST_TARGET_ONLY, Messages.useBestTargetOnly, getFieldEditorParent()));
 
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor(Messages.peakTargetsReferenceChromatogram, getFieldEditorParent()));
@@ -79,11 +69,6 @@ public class FilterPreferencePage extends FieldEditorPreferencePage implements I
 		addField(new ExtendedIntegerFieldEditor(PreferenceSupplier.P_TRANSFORM_MZ, Messages.transformMZ, PreferenceSupplier.MIN_MZ, PreferenceSupplier.MAX_MZ, getFieldEditorParent()));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
-	 */
 	public void init(IWorkbench workbench) {
 
 	}

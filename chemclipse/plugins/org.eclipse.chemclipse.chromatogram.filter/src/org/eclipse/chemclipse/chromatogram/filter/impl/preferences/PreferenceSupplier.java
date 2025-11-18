@@ -19,7 +19,6 @@ import org.eclipse.chemclipse.chromatogram.filter.impl.settings.FilterSettingsRe
 import org.eclipse.chemclipse.chromatogram.filter.impl.settings.FilterSettingsSelection;
 import org.eclipse.chemclipse.chromatogram.filter.impl.settings.FilterSettingsTransform;
 import org.eclipse.chemclipse.chromatogram.filter.impl.settings.PeakTargetsToReferencesSettings;
-import org.eclipse.chemclipse.chromatogram.filter.impl.settings.ScanTargetsToPeakSettings;
 import org.eclipse.chemclipse.chromatogram.filter.impl.settings.ScanTargetsToReferencesSettings;
 import org.eclipse.chemclipse.chromatogram.filter.settings.MaxDetectorFilterSettings;
 import org.eclipse.chemclipse.chromatogram.filter.system.SettingsIonRounding;
@@ -44,11 +43,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final double DEF_START_RETENTION_TIME_MINUTES = 1;
 	public static final String P_STOP_RETENTION_TIME_MINUTES = "stopRetentionTimeMinutes";
 	public static final double DEF_STOP_RETENTION_TIME_MINUTES = 10;
-
-	public static final String P_STTP_TRANSFER_CLOSEST_SCAN = "scanTargetsToPeakTransferClosestScan";
-	public static final boolean DEF_STTP_TRANSFER_CLOSEST_SCAN = false;
-	public static final String P_STTP_USE_BEST_TARGET_ONLY = "scanTargetsToPeakUseBestTargetOnly";
-	public static final boolean DEF_STTP_USE_BEST_TARGET_ONLY = false;
 
 	public static final String P_PTTR_USE_BEST_TARGET_ONLY = "peakTargetsToReferencesUseBestTargetOnly";
 	public static final boolean DEF_PTTR_USE_BEST_TARGET_ONLY = false;
@@ -95,9 +89,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		putDefault(P_START_RETENTION_TIME_MINUTES, Double.toString(DEF_START_RETENTION_TIME_MINUTES));
 		putDefault(P_STOP_RETENTION_TIME_MINUTES, Double.toString(DEF_STOP_RETENTION_TIME_MINUTES));
-
-		putDefault(P_STTP_TRANSFER_CLOSEST_SCAN, Boolean.toString(DEF_STTP_TRANSFER_CLOSEST_SCAN));
-		putDefault(P_STTP_USE_BEST_TARGET_ONLY, Boolean.toString(DEF_STTP_USE_BEST_TARGET_ONLY));
 
 		putDefault(P_PTTR_USE_BEST_TARGET_ONLY, Boolean.toString(DEF_PTTR_USE_BEST_TARGET_ONLY));
 		putDefault(P_DELTA_RETENTION_TIME_MINUTES, Double.toString(DEF_DELTA_RETENTION_TIME_MINUTES));
@@ -167,14 +158,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		SettingsRetentionIndexQC settings = new SettingsRetentionIndexQC();
 		settings.setUseRetentionIndexQC(INSTANCE().getBoolean(P_USE_RETENTION_INDEX_QC, DEF_USE_RETENTION_INDEX_QC));
-		return settings;
-	}
-
-	public static ScanTargetsToPeakSettings getScanToPeakTargetTransferSettings() {
-
-		ScanTargetsToPeakSettings settings = new ScanTargetsToPeakSettings();
-		settings.setTransferClosestScan(INSTANCE().getBoolean(P_STTP_TRANSFER_CLOSEST_SCAN, DEF_STTP_TRANSFER_CLOSEST_SCAN));
-		settings.setUseBestTargetOnly(INSTANCE().getBoolean(P_STTP_USE_BEST_TARGET_ONLY, DEF_STTP_USE_BEST_TARGET_ONLY));
 		return settings;
 	}
 
