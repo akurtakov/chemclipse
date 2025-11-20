@@ -37,6 +37,7 @@ import org.eclipse.chemclipse.msd.converter.supplier.mzxml.model.VendorChromatog
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.model.VendorIon;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.model.VendorScan;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
+import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IIonTransition;
 import org.eclipse.chemclipse.msd.model.core.Polarity;
 import org.eclipse.chemclipse.msd.model.implementation.IonTransition;
@@ -142,6 +143,9 @@ public class ChromatogramReaderVersion20 extends AbstractChromatogramReader impl
 
 		Peaks peaks = scan.getPeaks();
 		if(peaks == null) {
+			if(scan.getTotIonCurrent() != 0) {
+				massSpectrum.addIon(new VendorIon(IIon.TIC_ION, scan.getTotIonCurrent()), false);
+			}
 			return massSpectrum;
 		}
 		/*
@@ -176,7 +180,6 @@ public class ChromatogramReaderVersion20 extends AbstractChromatogramReader impl
 				massSpectrum.addIon(new VendorIon(mz, intensity), false);
 			}
 		}
-
 	}
 
 	private void setRetentionTime(Scan scan, IVendorScan massSpectrum) {
