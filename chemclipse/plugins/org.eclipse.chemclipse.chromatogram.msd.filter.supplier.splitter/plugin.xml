@@ -37,6 +37,13 @@
             filterName="Splitter (Nominal MS)"
             filterSettings="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.settings.FilterSettingsNominalMS"
             id="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.nominalms">
-      </ChromatogramFilterSupplier>                    
+      </ChromatogramFilterSupplier>
+      <ChromatogramFilterSupplier
+            description="This filter splits a chromatogram per polarity."
+            filter="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.core.ChromatogramFilterPolarity"
+            filterName="Splitter (Polarity)"
+            filterSettings="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.settings.FilterSettingsPolarity"
+            id="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.polarity">
+      </ChromatogramFilterSupplier>
    </extension>
 </plugin>
