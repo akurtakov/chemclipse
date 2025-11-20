@@ -37,12 +37,6 @@ public class IdentificationTargetTransfer extends ByteArrayTransfer {
 	}
 
 	@Override
-	public TransferData[] getSupportedTypes() {
-
-		return new TransferData[]{new IdentificationTargetTransferData()};
-	}
-
-	@Override
 	public boolean isSupportedType(TransferData transferData) {
 
 		return (TYPE_ID == transferData.type);
