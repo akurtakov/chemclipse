@@ -188,7 +188,7 @@ public class ChromatogramReader_1500 extends AbstractChromatogramReader implemen
 
 			readMethod(getDataInputStream(object, directoryPrefix + Format.FILE_SYSTEM_SETTINGS_MSD), closeStream, chromatogram);
 			if(useScanProxies) {
-				readScanProxies((ZipFile)object, directoryPrefix, file, chromatogram);
+				readScanProxies((ZipFile)object, directoryPrefix, file, chromatogram, monitor);
 			} else {
 				readScans(getDataInputStream(object, directoryPrefix + Format.FILE_SCANS_MSD), closeStream, chromatogram);
 			}
@@ -279,7 +279,7 @@ public class ChromatogramReader_1500 extends AbstractChromatogramReader implemen
 		ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
 	}
 
-	private void readScanProxies(ZipFile zipFile, String directoryPrefix, File file, IChromatogramMSD chromatogram) throws IOException {
+	private void readScanProxies(ZipFile zipFile, String directoryPrefix, File file, IChromatogramMSD chromatogram, IProgressMonitor monitor) throws IOException {
 
 		IIonTransitionSettings ionTransitionSettings = chromatogram.getIonTransitionSettings();
 
@@ -296,7 +296,7 @@ public class ChromatogramReader_1500 extends AbstractChromatogramReader implemen
 			int timeSegmentId = dataInputStream.readInt(); // Time Segment Id
 			int cycleNumber = dataInputStream.readInt(); // Cycle Number
 
-			IVendorScanProxy massSpectrum = new VendorScanProxy(file, offset, Format.CHROMATOGRAM_VERSION_1500, ionTransitionSettings);
+			IVendorScanProxy massSpectrum = new VendorScanProxy(file, offset, Format.CHROMATOGRAM_VERSION_1500, ionTransitionSettings, monitor);
 			massSpectrum.setRetentionTime(retentionTime);
 			massSpectrum.setNumberOfIons(numberOfIons);
 			massSpectrum.setTotalSignal(totalSignal);

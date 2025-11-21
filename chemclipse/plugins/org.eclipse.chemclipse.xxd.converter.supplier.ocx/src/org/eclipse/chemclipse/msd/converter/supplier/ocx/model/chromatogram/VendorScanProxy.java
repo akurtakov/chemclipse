@@ -20,7 +20,7 @@ import org.eclipse.chemclipse.msd.converter.supplier.ocx.io.ProxyReaderMSD;
 import org.eclipse.chemclipse.msd.model.core.AbstractRegularMassSpectrumProxy;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IIonTransitionSettings;
-import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 public class VendorScanProxy extends AbstractRegularMassSpectrumProxy implements IVendorScanProxy {
 
@@ -36,8 +36,9 @@ public class VendorScanProxy extends AbstractRegularMassSpectrumProxy implements
 	private String version;
 	private IIonTransitionSettings ionTransitionSettings;
 
-	public VendorScanProxy(File file, int offset, String version, IIonTransitionSettings ionTransitionSettings) {
+	public VendorScanProxy(File file, int offset, String version, IIonTransitionSettings ionTransitionSettings, IProgressMonitor monitor) {
 
+		super(monitor);
 		this.file = file;
 		this.offset = offset;
 		this.version = version;
@@ -45,11 +46,11 @@ public class VendorScanProxy extends AbstractRegularMassSpectrumProxy implements
 	}
 
 	@Override
-	public void importIons() {
+	public void importIons(IProgressMonitor monitor) {
 
 		try {
 			ProxyReaderMSD scanProxyReaderMSD = new ProxyReaderMSD();
-			scanProxyReaderMSD.readMassSpectrum(file, offset, version, this, ionTransitionSettings, new NullProgressMonitor());
+			scanProxyReaderMSD.readMassSpectrum(file, offset, version, this, ionTransitionSettings, monitor);
 		} catch(IOException e) {
 			logger.warn(e);
 		}
