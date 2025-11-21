@@ -51,7 +51,7 @@ public class PageUtil_1_ITest {
 	private DecimalFormat decimalFormat = new DecimalFormat("0.0000");
 
 	@Test
-	public void test1() {
+	public void test1() throws IOException {
 
 		try (PDDocument document = new PDDocument()) {
 			String path = "PageUtil_1_ITest.pdf";
@@ -59,8 +59,6 @@ public class PageUtil_1_ITest {
 			document.save(path);
 			File file = new File(path);
 			assertTrue(file.exists());
-		} catch(IOException e) {
-			System.out.println(e);
 		}
 	}
 
