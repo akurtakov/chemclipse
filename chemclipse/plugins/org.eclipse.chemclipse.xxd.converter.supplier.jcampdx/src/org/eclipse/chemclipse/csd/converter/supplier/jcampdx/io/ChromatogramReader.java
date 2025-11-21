@@ -264,7 +264,6 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 							float rawY = scanner.nextFloat();
 							float x = firstX + index * deltaX * xFactor;
 							float y = rawY * yFactor;
-							System.out.println("@" + index + ":" + x + ", " + y);
 							VendorScan scan = new VendorScan(y);
 							scan.setRetentionTime(Math.round(x * (float)IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
 							chromatogram.addScan(scan);
