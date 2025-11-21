@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 import org.eclipse.chemclipse.model.support.AnalysisSegment;
 import org.eclipse.chemclipse.model.support.CalculationType;
 import org.eclipse.chemclipse.msd.model.core.ICombinedMassSpectrum;
-import org.eclipse.chemclipse.msd.model.support.CombinedMassSpectrumCalculator;
+import org.eclipse.chemclipse.msd.model.support.CombinedNominalMassSpectrumCalculator;
 import org.eclipse.chemclipse.msd.model.xic.ExtractedIonSignal;
 import org.eclipse.chemclipse.msd.model.xic.ExtractedIonSignals;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignal;
@@ -31,7 +31,7 @@ public class CalculatorSupport_2_Test {
 	private AnalysisSegment analysisSegment;
 	private IExtractedIonSignals extractedIonSignals;
 	private IExtractedIonSignal extractedIonSignal;
-	private CombinedMassSpectrumCalculator combinedMassSpectrumCalculator;
+	private CombinedNominalMassSpectrumCalculator combinedMassSpectrumCalculator;
 
 	@Before
 	public void setUp() {

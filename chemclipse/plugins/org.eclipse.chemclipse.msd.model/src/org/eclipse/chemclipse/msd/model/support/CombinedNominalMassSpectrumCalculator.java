@@ -1,0 +1,109 @@
+/*******************************************************************************
+ * Copyright (c) 2008, 2025 Lablicate GmbH.
+ *
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ * 
+ * Contributors:
+ * Philip Wenig - initial API and implementation
+ *******************************************************************************/
+package org.eclipse.chemclipse.msd.model.support;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.eclipse.chemclipse.model.support.CalculationType;
+import org.eclipse.chemclipse.msd.model.core.AbstractIon;
+import org.eclipse.chemclipse.msd.model.core.ICombinedMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.IIon;
+import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
+import org.eclipse.chemclipse.msd.model.implementation.CombinedMassSpectrum;
+import org.eclipse.chemclipse.msd.model.implementation.Ion;
+
+public class CombinedNominalMassSpectrumCalculator extends CombinedMassSpectrumCalculator {
+
+	private Map<Integer, List<Double>> combinedMassSpectrum = new HashMap<>();
+
+	public int size() {
+
+		return combinedMassSpectrum.size();
+	}
+
+	public void addIon(double ion, double abundance) {
+
+		/*
+		 * If the abundance is zero, do nothing and return.
+		 */
+		if(abundance == 0.0d) {
+			return;
+		}
+		int key = AbstractIon.getIon(ion);
+		/*
+		 * Add the abundance if still a ion exists, otherwise still add the ion.
+		 */
+		List<Double> intensities = combinedMassSpectrum.get(key);
+		if(intensities == null) {
+			intensities = new ArrayList<Double>();
+			combinedMassSpectrum.put(key, intensities);
+		}
+		intensities.add(abundance);
+	}
+
+	public void addIons(List<IIon> ions, IMarkedIons excludedIons) {
+
+		if(ions == null || excludedIons == null) {
+			return;
+		}
+
+		Set<Integer> excludedIonsNominal = excludedIons.getIonsNominal();
+		for(IIon ion : ions) {
+			int mz = (int)ion.getIon();
+			if(!excludedIonsNominal.contains(mz)) {
+				addIon(ion.getIon(), ion.getAbundance());
+			}
+		}
+	}
+
+	public void removeIon(double ion) {
+
+		int key = AbstractIon.getIon(ion);
+		combinedMassSpectrum.remove(key);
+	}
+
+	public void removeIons(IMarkedIons excludedIons) {
+
+		for(Integer ion : excludedIons.getIonsNominal()) {
+			combinedMassSpectrum.remove(ion);
+		}
+	}
+
+	public ICombinedMassSpectrum createMassSpectrum(CalculationType calculationType) {
+
+		ICombinedMassSpectrum massSpectrum = new CombinedMassSpectrum();
+		for(Integer ion : combinedMassSpectrum.keySet()) {
+			float intensity = (float)getAbundance(ion, calculationType);
+			if(intensity > IIon.ZERO_INTENSITY) {
+				massSpectrum.addIon(new Ion(ion, intensity));
+			}
+		}
+		return massSpectrum;
+	}
+
+	public Map<Integer, List<Double>> getValues() {
+
+		return Collections.unmodifiableMap(combinedMassSpectrum);
+	}
+
+	private double getAbundance(double ion, CalculationType calculationType) {
+
+		int key = AbstractIon.getIon(ion);
+		return calculateSumIntensity(combinedMassSpectrum.get(key), calculationType);
+	}
+}

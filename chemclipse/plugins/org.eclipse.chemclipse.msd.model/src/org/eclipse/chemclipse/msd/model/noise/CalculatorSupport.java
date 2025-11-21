@@ -23,7 +23,7 @@ import org.eclipse.chemclipse.msd.model.core.ICombinedMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
 import org.eclipse.chemclipse.msd.model.exceptions.FilterException;
 import org.eclipse.chemclipse.msd.model.exceptions.NoExtractedIonSignalStoredException;
-import org.eclipse.chemclipse.msd.model.support.CombinedMassSpectrumCalculator;
+import org.eclipse.chemclipse.msd.model.support.CombinedNominalMassSpectrumCalculator;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignal;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignals;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -56,10 +56,10 @@ public class CalculatorSupport {
 	 * 
 	 * @return
 	 */
-	public CombinedMassSpectrumCalculator getCombinedMassSpectrumCalculator(IAnalysisSegment analysisSegment, IExtractedIonSignals extractedIonSignals) {
+	public CombinedNominalMassSpectrumCalculator getCombinedMassSpectrumCalculator(IAnalysisSegment analysisSegment, IExtractedIonSignals extractedIonSignals) {
 
 		IExtractedIonSignal extractedIonSignal;
-		CombinedMassSpectrumCalculator combinedMassSpectrumCalculator = new CombinedMassSpectrumCalculator();
+		CombinedNominalMassSpectrumCalculator combinedMassSpectrumCalculator = new CombinedNominalMassSpectrumCalculator();
 		for(int scan = analysisSegment.getStartScan(); scan <= analysisSegment.getStopScan(); scan++) {
 			try {
 				extractedIonSignal = extractedIonSignals.getExtractedIonSignal(scan);
@@ -78,7 +78,7 @@ public class CalculatorSupport {
 
 	public static ICombinedMassSpectrum getCombinedMassSpectrum(IExtractedIonSignals extractedIonSignals, IScanRange range) {
 
-		CombinedMassSpectrumCalculator combinedMassSpectrumCalculator = new CombinedMassSpectrumCalculator();
+		CombinedNominalMassSpectrumCalculator combinedMassSpectrumCalculator = new CombinedNominalMassSpectrumCalculator();
 		for(int scan = range.getStartScan(); scan <= range.getStopScan(); scan++) {
 			try {
 				IExtractedIonSignal extractedIonSignal = extractedIonSignals.getExtractedIonSignal(scan);
@@ -101,7 +101,7 @@ public class CalculatorSupport {
 	/*
 	 * Returns a combined mass spectrum.
 	 */
-	public ICombinedMassSpectrum getNoiseMassSpectrum(CombinedMassSpectrumCalculator combinedMassSpectrumCalculator, IMarkedIons ionsToPreserve, IProgressMonitor monitor) {
+	public ICombinedMassSpectrum getNoiseMassSpectrum(CombinedNominalMassSpectrumCalculator combinedMassSpectrumCalculator, IMarkedIons ionsToPreserve, IProgressMonitor monitor) {
 
 		combinedMassSpectrumCalculator.removeIons(ionsToPreserve);
 		ICombinedMassSpectrum noiseMassSpectrum = combinedMassSpectrumCalculator.createMassSpectrum(CalculationType.SUM);

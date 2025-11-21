@@ -52,7 +52,12 @@ public class FilterSupport {
 		int stopRetentionTime = chromatogramSelection.getStopRetentionTime();
 		int startScan = chromatogram.getScanNumber(startRetentionTime);
 		int stopScan = chromatogram.getScanNumber(stopRetentionTime);
-		CombinedMassSpectrumCalculator massSpectrumCalculator = new CombinedMassSpectrumCalculator();
+
+		ICombinedMassSpectrumCalculator massSpectrumCalculator = new CombinedNominalMassSpectrumCalculator();
+		if(!chromatogramSelection.getChromatogram().getScans().isEmpty() && chromatogram.getScan(1).isHighResolutionMS()) {
+			massSpectrumCalculator = new CombinedHighResolutionMassSpectrumCalculator();
+		}
+
 		/*
 		 * Merge all selected scans/peaks.<br/> All scan intensities will be added.
 		 * Afterwards, they will be normalized.<br/> It would be also possible
@@ -94,7 +99,7 @@ public class FilterSupport {
 		}
 
 		excludedIons = validateExcludedIons(excludedIons);
-		CombinedMassSpectrumCalculator massSpectrumCalculator = new CombinedMassSpectrumCalculator();
+		CombinedNominalMassSpectrumCalculator massSpectrumCalculator = new CombinedNominalMassSpectrumCalculator();
 
 		for(IScanMSD massSpectrum : massSpectra) {
 			addIonsToCalculator(massSpectrum, excludedIons, massSpectrumCalculator, useNormalize, calculationType);
@@ -126,7 +131,7 @@ public class FilterSupport {
 		 * If one of the mass spectra is null, take only the valid one to calculate the normalized mass spectrum.
 		 */
 		excludedIons = validateExcludedIons(excludedIons);
-		CombinedMassSpectrumCalculator massSpectrumCalculator = new CombinedMassSpectrumCalculator();
+		CombinedNominalMassSpectrumCalculator massSpectrumCalculator = new CombinedNominalMassSpectrumCalculator();
 
 		if(massSpectrum1 == null) {
 			addIonsToCalculator(massSpectrum2, excludedIons, massSpectrumCalculator, useNormalize, calculationType);
@@ -142,7 +147,7 @@ public class FilterSupport {
 		return getMassSpectrum(massSpectrumCalculator, useNormalize, calculationType);
 	}
 
-	private static void addIonsToCalculator(IScanMSD massSpectrum, IMarkedIons excludedIons, CombinedMassSpectrumCalculator massSpectrumCalculator, boolean useNormalize, CalculationType calculationType) {
+	private static void addIonsToCalculator(IScanMSD massSpectrum, IMarkedIons excludedIons, CombinedNominalMassSpectrumCalculator massSpectrumCalculator, boolean useNormalize, CalculationType calculationType) {
 
 		IScanMSD massSpectrumCalculated = getCalculatedMassSpectrum(massSpectrum, excludedIons, useNormalize, calculationType);
 		massSpectrumCalculator.addIons(massSpectrumCalculated.getIons(), excludedIons);
@@ -163,7 +168,7 @@ public class FilterSupport {
 		}
 		excludedIons = validateExcludedIons(excludedIons);
 
-		CombinedMassSpectrumCalculator massSpectrumCalculator = new CombinedMassSpectrumCalculator();
+		CombinedNominalMassSpectrumCalculator massSpectrumCalculator = new CombinedNominalMassSpectrumCalculator();
 		massSpectrumCalculator.addIons(massSpectrum.getIons(), excludedIons);
 		return getMassSpectrum(massSpectrumCalculator, useNormalize, calculationType);
 	}
@@ -191,7 +196,7 @@ public class FilterSupport {
 	 * @param massSpectrumCalculator
 	 * @return IMassSpectrum
 	 */
-	private static IScanMSD getMassSpectrum(CombinedMassSpectrumCalculator combinedMassSpectrumCalculator, boolean useNormalize, CalculationType calculationType) {
+	private static IScanMSD getMassSpectrum(ICombinedMassSpectrumCalculator combinedMassSpectrumCalculator, boolean useNormalize, CalculationType calculationType) {
 
 		ICombinedMassSpectrum noiseMassSpectrum = combinedMassSpectrumCalculator.createMassSpectrum(calculationType);
 		if(useNormalize) {
