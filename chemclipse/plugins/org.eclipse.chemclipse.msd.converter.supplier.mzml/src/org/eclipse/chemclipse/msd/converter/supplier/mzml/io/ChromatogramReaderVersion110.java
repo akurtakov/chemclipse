@@ -31,6 +31,7 @@ import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIonTransition;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
+import org.eclipse.chemclipse.msd.model.core.Polarity;
 import org.eclipse.chemclipse.msd.model.implementation.IonTransition;
 import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
 import org.eclipse.chemclipse.support.history.EditInformation;
@@ -276,6 +277,11 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 				massSpectrum.setMassSpectrumType(MassSpectrumType.CENTROID);
 			} else if(cvParam.getAccession().equals("MS:1000128") && cvParam.getName().equals("profile spectrum")) {
 				massSpectrum.setMassSpectrumType(MassSpectrumType.PROFILE);
+			}
+			if(cvParam.getAccession().equals("MS:1000129") && cvParam.getName().equals("negative scan")) {
+				massSpectrum.setPolarity(Polarity.NEGATIVE);
+			} else if(cvParam.getAccession().equals("MS:1000130") && cvParam.getName().equals("positive scan")) {
+				massSpectrum.setPolarity(Polarity.POSITIVE);
 			}
 			if(cvParam.getAccession().equals("MS:1000511") && cvParam.getName().equals("ms level")) {
 				short msLevel = Short.parseShort(cvParam.getValue());
