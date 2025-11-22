@@ -21,6 +21,7 @@ import org.eclipse.chemclipse.msd.converter.supplier.mzml.converter.model.IVendo
 import org.eclipse.chemclipse.msd.converter.supplier.mzml.converter.model.VendorChromatogram;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.Polarity;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.jupiter.api.BeforeAll;
@@ -103,6 +104,7 @@ public class ChromatogramImportConverterTinyProteoWizard110_ITest {
 	public void testFirstScan() {
 
 		IRegularMassSpectrum massSpectrum = (IRegularMassSpectrum)chromatogram.getScan(1);
+		assertEquals(Polarity.POSITIVE, massSpectrum.getPolarity());
 		assertEquals("scan=19", massSpectrum.getIdentifier());
 		assertEquals(15, massSpectrum.getNumberOfIons(), "Ions");
 		assertEquals(15f, massSpectrum.getIon(0).getAbundance(), 0);
