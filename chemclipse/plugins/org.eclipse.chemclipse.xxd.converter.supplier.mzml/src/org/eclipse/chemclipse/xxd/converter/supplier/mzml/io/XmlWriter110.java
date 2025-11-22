@@ -38,6 +38,7 @@ import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
+import org.eclipse.chemclipse.msd.model.core.Polarity;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.BinaryDataArrayListType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.BinaryDataArrayType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.CVListType;
@@ -131,6 +132,24 @@ public class XmlWriter110 {
 		instrumentConfiguration.setSoftwareRef(softwareRef);
 		instrumentConfigurationList.getInstrumentConfiguration().add(instrumentConfiguration);
 		return instrumentConfigurationList;
+	}
+
+	public static CVParamType createPolarity(IRegularMassSpectrum massSpectrum) {
+
+		if(massSpectrum.getPolarity() == Polarity.NONE) {
+			return null;
+		}
+		CVParamType cvParamPolarity = new CVParamType();
+		cvParamPolarity.setCvRef(MS);
+		if(massSpectrum.getPolarity() == Polarity.NEGATIVE) {
+			cvParamPolarity.setAccession("MS:1000129");
+			cvParamPolarity.setName("negative scan");
+		} else if(massSpectrum.getPolarity() == Polarity.POSITIVE) {
+			cvParamPolarity.setAccession("MS:1000130");
+			cvParamPolarity.setName("positive scan");
+		}
+
+		return cvParamPolarity;
 	}
 
 	public static CVParamType createSpectrumLevel(IRegularMassSpectrum massSpectrum) {

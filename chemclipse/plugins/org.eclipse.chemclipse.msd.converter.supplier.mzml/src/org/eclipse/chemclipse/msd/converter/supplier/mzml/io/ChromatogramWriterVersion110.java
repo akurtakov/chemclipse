@@ -194,6 +194,10 @@ public class ChromatogramWriterVersion110 extends AbstractChromatogramWriter imp
 				spectrum.setBinaryDataArrayList(XmlWriter110.createFullSpectrumBinaryDataArrayList(scanMSD, compression));
 				if(scanMSD instanceof IRegularMassSpectrum massSpectrum) {
 					spectrum.getCvParam().add(XmlWriter110.createSpectrumDimension(massSpectrum));
+					CVParamType polarityParam = XmlWriter110.createPolarity(massSpectrum);
+					if(polarityParam != null) {
+						spectrum.getCvParam().add(polarityParam);
+					}
 					spectrum.getCvParam().add(XmlWriter110.createSpectrumLevel(massSpectrum));
 					spectrum.getCvParam().add(XmlWriter110.createSpectrumType(massSpectrum));
 				}
