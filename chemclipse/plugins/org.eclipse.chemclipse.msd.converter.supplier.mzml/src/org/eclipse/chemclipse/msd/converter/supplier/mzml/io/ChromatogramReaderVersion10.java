@@ -252,7 +252,7 @@ public class ChromatogramReaderVersion10 extends AbstractChromatogramReader impl
 			return;
 		}
 		for(DataProcessingType dataProcessing : dataProcessinglist.getDataProcessing()) {
-			SoftwareType software = (SoftwareType)dataProcessing.getSoftwareRef();
+			SoftwareType software = dataProcessing.getSoftwareRef();
 			for(ProcessingMethodType processingMethod : dataProcessing.getProcessingMethod()) {
 				for(CVParamType cvParam : processingMethod.getCvParam()) {
 					String operation = cvParam.getName();
