@@ -21,6 +21,7 @@ import org.eclipse.chemclipse.msd.converter.supplier.mzml.converter.model.IVendo
 import org.eclipse.chemclipse.msd.converter.supplier.mzml.converter.model.VendorMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
+import org.eclipse.chemclipse.msd.model.core.Polarity;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.jupiter.api.BeforeAll;
@@ -52,6 +53,7 @@ public class MassSpectrumImportConverter110_ITest {
 	public void testFirstSpectrum() {
 
 		IStandaloneMassSpectrum standaloneMassSpectrum = (IStandaloneMassSpectrum)massSpectra.getMassSpectrum(1);
+		assertEquals(Polarity.POSITIVE, standaloneMassSpectrum.getPolarity());
 		assertEquals(5, standaloneMassSpectrum.getNumberOfIons());
 		assertEquals(5, standaloneMassSpectrum.getNumberOfIons());
 		assertEquals(1, standaloneMassSpectrum.getLowestIon().getIon());
@@ -64,6 +66,7 @@ public class MassSpectrumImportConverter110_ITest {
 	public void testSecondSpectrum() {
 
 		IStandaloneMassSpectrum standaloneMassSpectrum = (IStandaloneMassSpectrum)massSpectra.getMassSpectrum(2);
+		assertEquals(Polarity.POSITIVE, standaloneMassSpectrum.getPolarity());
 		assertEquals(5, standaloneMassSpectrum.getNumberOfIons());
 		assertEquals(5, standaloneMassSpectrum.getNumberOfIons());
 		assertEquals(1, standaloneMassSpectrum.getLowestIon().getIon());
