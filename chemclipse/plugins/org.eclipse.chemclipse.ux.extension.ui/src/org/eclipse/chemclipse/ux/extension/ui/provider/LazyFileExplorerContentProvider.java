@@ -22,6 +22,8 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.eclipse.chemclipse.container.definition.IFileContentProvider;
 import org.eclipse.chemclipse.container.support.FileContainerSupport;
@@ -29,8 +31,6 @@ import org.eclipse.jface.viewers.ILazyTreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.BusyIndicator;
-import org.eclipse.swt.widgets.Display;
 
 /**
  * This implements a lazy {@link File}based TreeContent. Care must be taken when using this provider:
@@ -49,6 +49,8 @@ public class LazyFileExplorerContentProvider implements ILazyTreeContentProvider
 
 	public static final int MAX_CACHE_SIZE = Integer.parseInt(System.getProperty("fileexplorer.max_cache_size", "1000"));
 
+	private final ExecutorService exececutorServiceFileOperations = Executors.newSingleThreadExecutor(r -> new Thread(r, "io"));
+
 	private static final File[] NO_CHILD = new File[0];
 	private TreeViewer viewer;
 	private File[] roots;
@@ -60,28 +62,36 @@ public class LazyFileExplorerContentProvider implements ILazyTreeContentProvider
 		if(viewer == null) {
 			return;
 		}
-		Object child = null;
-		if(parent instanceof Object[] objects) {
-			if(index < objects.length) {
-				child = objects[index];
+		exececutorServiceFileOperations.submit(() -> {
+			Object child = null;
+			if(parent instanceof Object[] objects) {
+				if(index < objects.length) {
+					child = objects[index];
+				}
 			}
-		}
-		if(parent instanceof File file) {
-			File[] childs = getChilds(file);
-			if(index < childs.length) {
-				child = childs[index];
+			if(parent instanceof File file) {
+				File[] childs = getChilds(file);
+				if(index < childs.length) {
+					child = childs[index];
+				}
 			}
-		}
-		if(child instanceof File file) {
-			viewer.replace(parent, index, child);
-			if(file.isDirectory()) {
-				viewer.setHasChildren(file, true);
-				// remove the file from the cache to allow updates to the underlying file system
-				cache.remove(file);
-			} else if(hasContainerContents(file)) {
-				viewer.setHasChildren(file, true);
+			if(child instanceof File file) {
+				viewer.getControl().getDisplay().asyncExec(() -> {
+					viewer.replace(parent, index, file);
+				});
+				if(file.isDirectory()) {
+					viewer.getControl().getDisplay().asyncExec(() -> {
+						viewer.setHasChildren(file, true);
+					});
+					// remove the file from the cache to allow updates to the underlying file system
+					cache.remove(file);
+				} else if(hasContainerContents(file)) {
+					viewer.getControl().getDisplay().asyncExec(() -> {
+						viewer.setHasChildren(file, true);
+					});
+				}
 			}
-		}
+		});
 	}
 
 	@Override
@@ -118,6 +128,7 @@ public class LazyFileExplorerContentProvider implements ILazyTreeContentProvider
 	public void dispose() {
 
 		cache.clear();
+		exececutorServiceFileOperations.shutdown();
 		ILazyTreeContentProvider.super.dispose();
 	}
 
@@ -127,19 +138,23 @@ public class LazyFileExplorerContentProvider implements ILazyTreeContentProvider
 		if(viewer == null) {
 			return;
 		}
-		if(element instanceof File file) {
-			int childs = getChilds(file).length;
-			if(currentChildCount != childs) {
-				viewer.setChildCount(element, childs);
+		exececutorServiceFileOperations.submit(() -> {
+			if(element instanceof File file) {
+				int childs = getChilds(file).length;
+				if(currentChildCount != childs) {
+					viewer.getControl().getDisplay().asyncExec(() -> {
+						viewer.setChildCount(element, childs);
+					});
+				}
+			} else if(element instanceof Object[] objects) {
+				int childs = objects.length;
+				if(currentChildCount != childs) {
+					viewer.getControl().getDisplay().asyncExec(() -> {
+						viewer.setChildCount(element, childs);
+					});
+				}
 			}
-			return;
-		}
-		if(element instanceof Object[] objects) {
-			int childs = objects.length;
-			if(currentChildCount != childs) {
-				viewer.setChildCount(element, childs);
-			}
-		}
+		});
 	}
 
 	private File[] getChilds(File file) {
@@ -149,25 +164,21 @@ public class LazyFileExplorerContentProvider implements ILazyTreeContentProvider
 			return cached;
 		}
 		if(file.isDirectory()) {
-			Display display = viewer.getControl().getDisplay();
-			BusyIndicator.showWhile(display, () -> {
+			File[] childs = file.listFiles(LazyFileExplorerContentProvider.this);
+			// null check is required here, e.g. if the directory can't be read/accessed list returns null
+			if(childs != null) {
+				Arrays.sort(childs);
+				cache.put(file, childs);
+			} else {
+				cache.put(file, NO_CHILD);
+			}
 
-				File[] childs = file.listFiles(LazyFileExplorerContentProvider.this);
-				// null check is required here, e.g. if the directory can't be read/accessed list returns null
-				if(childs != null) {
-					Arrays.sort(childs);
-					cache.put(file, childs);
-				} else {
-					cache.put(file, NO_CHILD);
-				}
-			});
-			return cache.get(file);
 		} else {
 			File[] childs = getContainerContents(file);
 			Arrays.sort(childs);
 			cache.put(file, unfoldDirectories(childs));
-			return cache.get(file);
 		}
+		return cache.get(file);
 	}
 
 	// To avoid duplicates
