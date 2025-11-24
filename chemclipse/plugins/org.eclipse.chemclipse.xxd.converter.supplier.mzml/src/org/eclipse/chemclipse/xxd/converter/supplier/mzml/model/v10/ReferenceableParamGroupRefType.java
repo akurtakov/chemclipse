@@ -29,14 +29,14 @@ public class ReferenceableParamGroupRefType {
 	@XmlAttribute(name = "ref", required = true)
 	@XmlIDREF
 	@XmlSchemaType(name = "IDREF")
-	protected Object ref;
+	protected ReferenceableParamGroupType ref;
 
-	public Object getRef() {
+	public ReferenceableParamGroupType getRef() {
 
 		return ref;
 	}
 
-	public void setRef(Object value) {
+	public void setRef(ReferenceableParamGroupType value) {
 
 		this.ref = value;
 	}

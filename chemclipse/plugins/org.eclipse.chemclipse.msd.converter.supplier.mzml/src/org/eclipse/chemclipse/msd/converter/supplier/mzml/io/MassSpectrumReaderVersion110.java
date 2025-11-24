@@ -27,6 +27,7 @@ import org.eclipse.chemclipse.msd.converter.supplier.mzml.converter.model.Vendor
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
+import org.eclipse.chemclipse.msd.model.core.Polarity;
 import org.eclipse.chemclipse.msd.model.implementation.StandaloneMassSpectrum;
 import org.eclipse.chemclipse.support.history.EditInformation;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.io.BinaryReader110;
@@ -87,6 +88,12 @@ public class MassSpectrumReaderVersion110 extends AbstractMassSpectraReader impl
 						massSpectrum.setMassSpectrumType(MassSpectrumType.CENTROID);
 					} else if(cvParam.getAccession().equals("MS:1000128") && cvParam.getName().equals("profile spectrum")) {
 						massSpectrum.setMassSpectrumType(MassSpectrumType.PROFILE);
+					}
+
+					if(cvParam.getAccession().equals("MS:1000129") && cvParam.getName().equals("negative scan")) {
+						massSpectrum.setPolarity(Polarity.NEGATIVE);
+					} else if(cvParam.getAccession().equals("MS:1000130") && cvParam.getName().equals("positive scan")) {
+						massSpectrum.setPolarity(Polarity.POSITIVE);
 					}
 				}
 

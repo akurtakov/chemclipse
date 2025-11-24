@@ -136,10 +136,10 @@ public class XmlWriter110 {
 
 	public static CVParamType createPolarity(IRegularMassSpectrum massSpectrum) {
 
-		if(massSpectrum.getPolarity() == Polarity.NONE) {
-			return null;
-		}
 		CVParamType cvParamPolarity = new CVParamType();
+		if(massSpectrum.getPolarity() == Polarity.NONE) {
+			return cvParamPolarity;
+		}
 		cvParamPolarity.setCvRef(MS);
 		if(massSpectrum.getPolarity() == Polarity.NEGATIVE) {
 			cvParamPolarity.setAccession("MS:1000129");

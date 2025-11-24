@@ -14,6 +14,7 @@ package org.eclipse.chemclipse.msd.converter.supplier.mzml.io;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.zip.DataFormatException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -47,6 +48,7 @@ import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v10.MzMLType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v10.ParamGroupType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v10.PrecursorType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v10.ProcessingMethodType;
+import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v10.ReferenceableParamGroupRefType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v10.RunType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v10.SampleListType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v10.SampleType;
@@ -145,6 +147,7 @@ public class ChromatogramReaderVersion10 extends AbstractChromatogramReader impl
 			}
 			massSpectrum.setIdentifier(spectrum.getId());
 			setRetentionTime(scanType, massSpectrum);
+			massSpectrum.setPolarity(getPolarity(scanType));
 			readIons(spectrum, massSpectrum, chromatogram);
 			chromatogram.addScan(massSpectrum);
 			monitor.worked(1);
@@ -234,6 +237,24 @@ public class ChromatogramReaderVersion10 extends AbstractChromatogramReader impl
 		}
 	}
 
+	private Polarity getPolarity(ScanType scanType) {
+
+		if(scanType.getReferenceableParamGroupRef() == null) {
+			return Polarity.NONE;
+		}
+		List<ReferenceableParamGroupRefType> groupTypes = scanType.getReferenceableParamGroupRef();
+		for(ReferenceableParamGroupRefType groupType : groupTypes) {
+			for(CVParamType cvParam : groupType.getRef().getCvParam()) {
+				if(cvParam.getAccession().equals("MS:1000129") && cvParam.getName().equals("negative scan")) {
+					return Polarity.NEGATIVE;
+				} else if(cvParam.getAccession().equals("MS:1000130") && cvParam.getName().equals("positive scan")) {
+					return Polarity.POSITIVE;
+				}
+			}
+		}
+		return Polarity.NONE;
+	}
+
 	private void setRetentionTime(ScanType scanType, IRegularMassSpectrum massSpectrum) {
 
 		for(CVParamType cvParam : scanType.getCvParam()) {
@@ -252,7 +273,7 @@ public class ChromatogramReaderVersion10 extends AbstractChromatogramReader impl
 			return;
 		}
 		for(DataProcessingType dataProcessing : dataProcessinglist.getDataProcessing()) {
-			SoftwareType software = (SoftwareType)dataProcessing.getSoftwareRef();
+			SoftwareType software = dataProcessing.getSoftwareRef();
 			for(ProcessingMethodType processingMethod : dataProcessing.getProcessingMethod()) {
 				for(CVParamType cvParam : processingMethod.getCvParam()) {
 					String operation = cvParam.getName();

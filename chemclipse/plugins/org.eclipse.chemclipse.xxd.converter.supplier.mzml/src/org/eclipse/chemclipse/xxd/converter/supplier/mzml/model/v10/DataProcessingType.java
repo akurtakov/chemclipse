@@ -43,7 +43,7 @@ public class DataProcessingType {
 	@XmlAttribute(name = "softwareRef", required = true)
 	@XmlIDREF
 	@XmlSchemaType(name = "IDREF")
-	protected Object softwareRef;
+	protected SoftwareType softwareRef;
 
 	public List<ProcessingMethodType> getProcessingMethod() {
 
@@ -63,12 +63,12 @@ public class DataProcessingType {
 		this.id = value;
 	}
 
-	public Object getSoftwareRef() {
+	public SoftwareType getSoftwareRef() {
 
 		return softwareRef;
 	}
 
-	public void setSoftwareRef(Object value) {
+	public void setSoftwareRef(SoftwareType value) {
 
 		this.softwareRef = value;
 	}

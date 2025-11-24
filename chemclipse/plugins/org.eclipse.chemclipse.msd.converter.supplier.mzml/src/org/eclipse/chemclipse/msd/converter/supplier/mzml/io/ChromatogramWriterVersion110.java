@@ -30,6 +30,7 @@ import org.eclipse.chemclipse.msd.converter.supplier.mzml.preferences.Preference
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
+import org.eclipse.chemclipse.msd.model.core.Polarity;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.io.XmlReader110;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.io.XmlWriter110;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.BinaryDataArrayListType;
@@ -194,9 +195,8 @@ public class ChromatogramWriterVersion110 extends AbstractChromatogramWriter imp
 				spectrum.setBinaryDataArrayList(XmlWriter110.createFullSpectrumBinaryDataArrayList(scanMSD, compression));
 				if(scanMSD instanceof IRegularMassSpectrum massSpectrum) {
 					spectrum.getCvParam().add(XmlWriter110.createSpectrumDimension(massSpectrum));
-					CVParamType polarityParam = XmlWriter110.createPolarity(massSpectrum);
-					if(polarityParam != null) {
-						spectrum.getCvParam().add(polarityParam);
+					if(massSpectrum.getPolarity() != Polarity.NONE) {
+						spectrum.getCvParam().add(XmlWriter110.createPolarity(massSpectrum));
 					}
 					spectrum.getCvParam().add(XmlWriter110.createSpectrumLevel(massSpectrum));
 					spectrum.getCvParam().add(XmlWriter110.createSpectrumType(massSpectrum));
