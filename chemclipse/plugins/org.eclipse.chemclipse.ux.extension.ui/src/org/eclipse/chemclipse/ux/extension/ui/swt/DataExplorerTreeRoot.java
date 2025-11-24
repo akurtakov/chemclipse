@@ -14,14 +14,8 @@
 package org.eclipse.chemclipse.ux.extension.ui.swt;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.support.settings.ApplicationSettings;
-import org.eclipse.chemclipse.support.settings.OperatingSystemUtils;
 import org.eclipse.chemclipse.support.settings.UserManagement;
 import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierDataExplorer;
@@ -37,8 +31,6 @@ public enum DataExplorerTreeRoot {
 	HOME(ExtensionMessages.home), //
 	WORKSPACE(ExtensionMessages.workspace), //
 	USER_LOCATION(ExtensionMessages.userLocation);
-
-	private static final Logger logger = Logger.getLogger(DataExplorerTreeRoot.class);
 
 	private String label;
 
@@ -75,7 +67,7 @@ public enum DataExplorerTreeRoot {
 		File[] roots;
 		switch(this) {
 			case DRIVES:
-				roots = filterRoots(File.listRoots());
+				roots = File.listRoots();
 				break;
 			case HOME:
 				roots = new File[]{new File(UserManagement.getUserHome())};
@@ -116,42 +108,5 @@ public enum DataExplorerTreeRoot {
 			userLocation = new File(UserManagement.getUserHome());
 		}
 		return userLocation;
-	}
-
-	private static File[] filterRoots(File[] roots) {
-
-		List<File> rootFiles = new ArrayList<>();
-		for(File root : roots) {
-			if((!PreferenceSupplierDataExplorer.showNetworkShares()) && isWindowsNetworkDriveRoot(root)) {
-				continue;
-			}
-			rootFiles.add(root);
-		}
-		return rootFiles.toArray(new File[rootFiles.size()]);
-	}
-
-	private static boolean isWindowsNetworkDriveRoot(File file) {
-
-		if(!OperatingSystemUtils.isWindows()) {
-			return false;
-		}
-		String path = file.getPath();
-		if(path.length() > 3) {
-			return false;
-		}
-		String driveLetter = path.substring(0, 2);
-		List<String> cmd = Arrays.asList("cmd", "/c", "net", "use", driveLetter); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		try {
-			Process process = new ProcessBuilder(cmd).redirectErrorStream(true).start();
-			process.getOutputStream().close();
-			int exitCode = process.waitFor();
-			return exitCode == 0;
-		} catch(IOException e) {
-			logger.error("Failed to detect network drive status for " + driveLetter, e); //$NON-NLS-1$
-		} catch(InterruptedException e) {
-			logger.error(e);
-			Thread.currentThread().interrupt();
-		}
-		return false;
 	}
 }
