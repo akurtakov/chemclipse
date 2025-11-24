@@ -134,8 +134,8 @@ public class ChromatogramReaderVersion10 extends AbstractChromatogramReader impl
 		monitor.beginTask(ConverterMessages.readScans, mzML.getRun().getSpectrumList().getCount().intValue());
 		int cycleNumber = isMultiStageMassSpectrum(mzML) ? 1 : 0;
 		for(SpectrumType spectrum : mzML.getRun().getSpectrumList().getSpectrum()) {
-			ScanType scanType = spectrum.getSpectrumDescription().getScan();
-			if(scanType == null) {
+			ScanType scan = spectrum.getSpectrumDescription().getScan();
+			if(scan == null) {
 				continue;
 			}
 			IRegularMassSpectrum massSpectrum = readMassSpectrum(spectrum);
@@ -146,8 +146,8 @@ public class ChromatogramReaderVersion10 extends AbstractChromatogramReader impl
 				massSpectrum.setCycleNumber(cycleNumber);
 			}
 			massSpectrum.setIdentifier(spectrum.getId());
-			setRetentionTime(scanType, massSpectrum);
-			massSpectrum.setPolarity(getPolarity(scanType));
+			setRetentionTime(scan, massSpectrum);
+			setReferencedPolarity(scan, massSpectrum);
 			readIons(spectrum, massSpectrum, chromatogram);
 			chromatogram.addScan(massSpectrum);
 			monitor.worked(1);
@@ -237,22 +237,18 @@ public class ChromatogramReaderVersion10 extends AbstractChromatogramReader impl
 		}
 	}
 
-	private Polarity getPolarity(ScanType scanType) {
+	private void setReferencedPolarity(ScanType scan, IRegularMassSpectrum massSpectrum) {
 
-		if(scanType.getReferenceableParamGroupRef() == null) {
-			return Polarity.NONE;
-		}
-		List<ReferenceableParamGroupRefType> groupTypes = scanType.getReferenceableParamGroupRef();
+		List<ReferenceableParamGroupRefType> groupTypes = scan.getReferenceableParamGroupRef();
 		for(ReferenceableParamGroupRefType groupType : groupTypes) {
 			for(CVParamType cvParam : groupType.getRef().getCvParam()) {
 				if(cvParam.getAccession().equals("MS:1000129") && cvParam.getName().equals("negative scan")) {
-					return Polarity.NEGATIVE;
+					massSpectrum.setPolarity(Polarity.NEGATIVE);
 				} else if(cvParam.getAccession().equals("MS:1000130") && cvParam.getName().equals("positive scan")) {
-					return Polarity.POSITIVE;
+					massSpectrum.setPolarity(Polarity.POSITIVE);
 				}
 			}
 		}
-		return Polarity.NONE;
 	}
 
 	private void setRetentionTime(ScanType scanType, IRegularMassSpectrum massSpectrum) {

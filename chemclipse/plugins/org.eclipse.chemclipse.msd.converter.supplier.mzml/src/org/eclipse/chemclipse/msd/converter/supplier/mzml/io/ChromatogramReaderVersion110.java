@@ -145,7 +145,7 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 			}
 			setRetentionTime(spectrum, massSpectrum);
 			massSpectrum.setIdentifier(spectrum.getId());
-			massSpectrum.setPolarity(getPolarity(spectrum));
+			setReferencedPolarity(spectrum, massSpectrum);
 			readIons(spectrum, massSpectrum, chromatogram);
 			chromatogram.addScan(massSpectrum);
 			monitor.worked(1);
@@ -272,22 +272,21 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 		}
 	}
 
-	private Polarity getPolarity(SpectrumType spectrum) {
+	private void setReferencedPolarity(SpectrumType spectrum, IRegularMassSpectrum massSpectrum) {
 
 		if(spectrum.getReferenceableParamGroupRef() == null) {
-			return Polarity.NONE;
+			return;
 		}
 		List<ReferenceableParamGroupRefType> groupTypes = spectrum.getReferenceableParamGroupRef();
 		for(ReferenceableParamGroupRefType groupType : groupTypes) {
 			for(CVParamType cvParam : groupType.getRef().getCvParam()) {
 				if(cvParam.getAccession().equals("MS:1000129") && cvParam.getName().equals("negative scan")) {
-					return Polarity.NEGATIVE;
+					massSpectrum.setPolarity(Polarity.NEGATIVE);
 				} else if(cvParam.getAccession().equals("MS:1000130") && cvParam.getName().equals("positive scan")) {
-					return Polarity.POSITIVE;
+					massSpectrum.setPolarity(Polarity.POSITIVE);
 				}
 			}
 		}
-		return Polarity.NONE;
 	}
 
 	private IRegularMassSpectrum readMassSpectrum(SpectrumType spectrum) {
