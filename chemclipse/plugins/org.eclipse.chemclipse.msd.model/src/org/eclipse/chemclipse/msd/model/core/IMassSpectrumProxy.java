@@ -12,11 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+
 public interface IMassSpectrumProxy extends IRegularMassSpectrum {
 
 	void setNumberOfIons(int numberOfIons);
 
 	void setTotalSignal(float totalSignal);
 
-	void importIons();
+	void importIons(IProgressMonitor monitor);
 }

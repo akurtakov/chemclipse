@@ -233,7 +233,7 @@ public class ChromatogramReader_1003 extends AbstractChromatogramReader implemen
 			float totalSignal = dataInputStream.readFloat(); // Total Signal
 			float retentionIndex = dataInputStream.readFloat(); // Retention Index
 
-			IVendorScanProxy massSpectrum = new VendorScanProxy(file, offset, Format.CHROMATOGRAM_VERSION_1003, ionTransitionSettings);
+			IVendorScanProxy massSpectrum = new VendorScanProxy(file, offset, Format.CHROMATOGRAM_VERSION_1003, ionTransitionSettings, monitor);
 			massSpectrum.setRetentionTime(retentionTime);
 			massSpectrum.setNumberOfIons(numberOfIons);
 			massSpectrum.setTotalSignal(totalSignal);
@@ -257,7 +257,6 @@ public class ChromatogramReader_1003 extends AbstractChromatogramReader implemen
 			readerProxy.readMassSpectrum(massSpectrum, dataInputStream, ionTransitionSettings);
 			chromatogram.addScan(massSpectrum);
 		}
-
 
 		if(closeStream) {
 			dataInputStream.close();
@@ -299,7 +298,6 @@ public class ChromatogramReader_1003 extends AbstractChromatogramReader implemen
 			 */
 			baselineModel.addBaseline(startRetentionTime, stopRetentionTime, startBackgroundAbundance, stopBackgroundAbundance, false);
 		}
-
 
 		if(closeStream) {
 			dataInputStream.close();
@@ -557,7 +555,6 @@ public class ChromatogramReader_1003 extends AbstractChromatogramReader implemen
 			}
 		}
 
-
 		if(closeStream) {
 			dataInputStream.close();
 		}
@@ -576,7 +573,6 @@ public class ChromatogramReader_1003 extends AbstractChromatogramReader implemen
 			editHistory.add(editInformation);
 		}
 
-
 		if(closeStream) {
 			dataInputStream.close();
 		}
@@ -592,7 +588,6 @@ public class ChromatogramReader_1003 extends AbstractChromatogramReader implemen
 		chromatogram.setDate(date);
 		chromatogram.setMiscInfo(miscInfo);
 		chromatogram.setOperator(operator);
-
 
 		if(closeStream) {
 			dataInputStream.close();

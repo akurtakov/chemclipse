@@ -268,7 +268,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 				int timeSegmentId = dataInputStream.readInt(); // Time Segment Id
 				int cycleNumber = dataInputStream.readInt(); // Cycle Number
 
-				IVendorScanProxy massSpectrum = new VendorScanProxy(file, offset, Format.CHROMATOGRAM_VERSION_1100, ionTransitionSettings);
+				IVendorScanProxy massSpectrum = new VendorScanProxy(file, offset, Format.CHROMATOGRAM_VERSION_1100, ionTransitionSettings, monitor);
 				massSpectrum.setRetentionTime(retentionTime);
 				massSpectrum.setNumberOfIons(numberOfIons);
 				massSpectrum.setTotalSignal(totalSignal);

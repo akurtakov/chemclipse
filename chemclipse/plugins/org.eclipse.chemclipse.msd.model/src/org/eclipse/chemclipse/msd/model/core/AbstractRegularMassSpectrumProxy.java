@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 /**
  * This is a proxy.
@@ -41,6 +42,13 @@ public abstract class AbstractRegularMassSpectrumProxy extends AbstractRegularMa
 	 */
 	private int numberOfIons;
 	private float totalSignal;
+
+	private IProgressMonitor monitor;
+
+	public AbstractRegularMassSpectrumProxy(IProgressMonitor monitor) {
+
+		this.monitor = monitor;
+	}
 
 	@Override
 	public void setNumberOfIons(int numberOfIons) {
@@ -266,7 +274,7 @@ public abstract class AbstractRegularMassSpectrumProxy extends AbstractRegularMa
 
 		if(isProxy) {
 			isProxy = false;
-			importIons();
+			importIons(monitor);
 		}
 	}
 }

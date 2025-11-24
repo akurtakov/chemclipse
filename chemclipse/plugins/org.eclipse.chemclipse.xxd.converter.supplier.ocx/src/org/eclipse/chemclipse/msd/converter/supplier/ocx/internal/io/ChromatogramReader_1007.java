@@ -195,7 +195,6 @@ public class ChromatogramReader_1007 extends AbstractChromatogramReader implemen
 		method.setStopTime(dataInputStream.readInt());
 		method.setTimeFilterPeakWidth(dataInputStream.readInt());
 
-
 		if(closeStream) {
 			dataInputStream.close();
 		}
@@ -258,7 +257,7 @@ public class ChromatogramReader_1007 extends AbstractChromatogramReader implemen
 			int timeSegmentId = dataInputStream.readInt(); // Time Segment Id
 			int cycleNumber = dataInputStream.readInt(); // Cycle Number
 
-			IVendorScanProxy massSpectrum = new VendorScanProxy(file, offset, Format.CHROMATOGRAM_VERSION_1007, ionTransitionSettings);
+			IVendorScanProxy massSpectrum = new VendorScanProxy(file, offset, Format.CHROMATOGRAM_VERSION_1007, ionTransitionSettings, monitor);
 			massSpectrum.setRetentionTime(retentionTime);
 			massSpectrum.setNumberOfIons(numberOfIons);
 			massSpectrum.setTotalSignal(totalSignal);
@@ -284,7 +283,6 @@ public class ChromatogramReader_1007 extends AbstractChromatogramReader implemen
 			readerProxy.readMassSpectrum(massSpectrum, dataInputStream, ionTransitionSettings);
 			chromatogram.addScan(massSpectrum);
 		}
-
 
 		if(closeStream) {
 			dataInputStream.close();
@@ -647,7 +645,6 @@ public class ChromatogramReader_1007 extends AbstractChromatogramReader implemen
 			}
 		}
 
-
 		if(closeStream) {
 			dataInputStream.close();
 		}
@@ -665,7 +662,6 @@ public class ChromatogramReader_1007 extends AbstractChromatogramReader implemen
 			IEditInformation editInformation = new EditInformation(date, description);
 			editHistory.add(editInformation);
 		}
-
 
 		if(closeStream) {
 			dataInputStream.close();
@@ -686,7 +682,6 @@ public class ChromatogramReader_1007 extends AbstractChromatogramReader implemen
 		chromatogram.setMiscInfoSeparated(miscInfoSeparated);
 		chromatogram.setDataName(dataName);
 		chromatogram.setOperator(operator);
-
 
 		if(closeStream) {
 			dataInputStream.close();
