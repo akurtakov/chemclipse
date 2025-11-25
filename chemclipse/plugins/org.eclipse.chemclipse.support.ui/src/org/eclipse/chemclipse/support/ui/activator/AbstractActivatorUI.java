@@ -116,6 +116,9 @@ public abstract class AbstractActivatorUI extends AbstractUIPlugin {
 		return getEclipseContext().get(PerspectiveSupport.class);
 	}
 
+	/**
+	 * If you get null pointer exceptions you may have called this too early in an Activator.
+	 */
 	public IEclipseContext getEclipseContext() {
 
 		if(eclipseContext == null) {
@@ -138,26 +141,35 @@ public abstract class AbstractActivatorUI extends AbstractUIPlugin {
 			 * Part and Perspective Support
 			 */
 			PartSupport partSupport = ContextInjectionFactory.make(PartSupport.class, eclipseContext);
+			if(partSupport == null) {
+				throw new NullPointerException("partSupport");
+			}
+
 			eclipseContext.set(PartSupport.class, partSupport);
 			PerspectiveSupport perspectiveSupport = ContextInjectionFactory.make(PerspectiveSupport.class, eclipseContext);
+			if(perspectiveSupport == null) {
+				throw new NullPointerException("perspectiveSupport");
+			}
 			eclipseContext.set(PerspectiveSupport.class, perspectiveSupport);
 			/*
 			 * Checks
 			 */
 			MApplication application = eclipseContext.get(MApplication.class);
-			EModelService modelService = eclipseContext.get(EModelService.class);
-			EPartService partService = eclipseContext.get(EPartService.class);
-
-			if(application == null || modelService == null || partService == null || partSupport == null || perspectiveSupport == null) {
-				logger.warn(application == null ? "MApplication is null!" : "MApplication is set.");
-				logger.warn(modelService == null ? "EModelService is null!" : "EModelService is set.");
-				logger.warn(partService == null ? "EPartService is null!" : "EPartService is set.");
-				logger.warn(partSupport == null ? "PartSupport is null!" : "PartSupport is set.");
-				logger.warn(perspectiveSupport == null ? "PerspectiveSupport is null!" : "PerspectiveSupport is set.");
-				logger.info("Probably, getting the Eclipse context has been called too early in the Activator. Better use an Add-on.");
-			} else {
-				logger.info("The context has been initialized successfully.");
+			if(application == null) {
+				throw new NullPointerException("application");
 			}
+
+			EModelService modelService = eclipseContext.get(EModelService.class);
+			if(modelService == null) {
+				throw new NullPointerException("modelService");
+			}
+
+			EPartService partService = eclipseContext.get(EPartService.class);
+			if(partService == null) {
+				throw new NullPointerException("partService");
+			}
+
+			logger.info("The context has been initialized successfully.");
 		}
 
 		return eclipseContext;
