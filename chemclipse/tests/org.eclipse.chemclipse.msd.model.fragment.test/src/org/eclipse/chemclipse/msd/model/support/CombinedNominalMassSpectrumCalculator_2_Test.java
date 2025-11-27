@@ -25,16 +25,16 @@ import org.eclipse.chemclipse.msd.model.implementation.Ion;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CombinedMassSpectrumCalculator_2_Test {
+public class CombinedNominalMassSpectrumCalculator_2_Test {
 
-	private CombinedMassSpectrumCalculator combinedMassSpectrumCalculator;
+	private CombinedNominalMassSpectrumCalculator combinedMassSpectrumCalculator;
 	private IMarkedIons excludedIons;
 	private List<IIon> ions;
 
 	@Before
 	public void setUp() {
 
-		combinedMassSpectrumCalculator = new CombinedMassSpectrumCalculator();
+		combinedMassSpectrumCalculator = new CombinedNominalMassSpectrumCalculator();
 		ions = new ArrayList<IIon>();
 		excludedIons = new MarkedIons(MarkedTraceModus.INCLUDE);
 	}

@@ -16,16 +16,16 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class CombinedMassSpectrumCalculator_5_Test {
+public class CombinedNominalMassSpectrumCalculator_5_Test {
 
-	private CombinedMassSpectrumCalculator combinedMassSpectrumCalculator = new CombinedMassSpectrumCalculator();
+	private CombinedNominalMassSpectrumCalculator combinedNominalMassSpectrumCalculator = new CombinedNominalMassSpectrumCalculator();
 
 	@Test
 	public void testValues_1() {
 
-		combinedMassSpectrumCalculator.addIon(56.0f, 5200.0f);
-		combinedMassSpectrumCalculator.addIon(56.0f, 6800.0f);
-		assertEquals(5200.0, combinedMassSpectrumCalculator.getValues().get(56).get(0), 0);
-		assertEquals(6800.0, combinedMassSpectrumCalculator.getValues().get(56).get(1), 0);
+		combinedNominalMassSpectrumCalculator.addIon(56.0f, 5200.0f);
+		combinedNominalMassSpectrumCalculator.addIon(56.0f, 6800.0f);
+		assertEquals(5200.0, combinedNominalMassSpectrumCalculator.getValues().get(56).get(0), 0);
+		assertEquals(6800.0, combinedNominalMassSpectrumCalculator.getValues().get(56).get(1), 0);
 	}
 }

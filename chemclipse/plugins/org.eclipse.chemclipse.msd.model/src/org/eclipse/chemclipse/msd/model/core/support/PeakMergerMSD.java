@@ -27,7 +27,7 @@ import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.PeakMSD;
 import org.eclipse.chemclipse.msd.model.implementation.PeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.implementation.PeakModelMSD;
-import org.eclipse.chemclipse.msd.model.support.CombinedMassSpectrumCalculator;
+import org.eclipse.chemclipse.msd.model.support.CombinedNominalMassSpectrumCalculator;
 
 public class PeakMergerMSD extends PeakMerger {
 
@@ -62,7 +62,7 @@ public class PeakMergerMSD extends PeakMerger {
 
 	private static IScanMSD mergeMassSpectra(List<? extends IPeakMSD> peaks, CalculationType calculationType) {
 
-		CombinedMassSpectrumCalculator massSpectrumCalculator = new CombinedMassSpectrumCalculator();
+		CombinedNominalMassSpectrumCalculator massSpectrumCalculator = new CombinedNominalMassSpectrumCalculator();
 		IMarkedIons excludedIons = new MarkedIons(MarkedTraceModus.INCLUDE);
 
 		for(IPeakMSD peak : peaks) {

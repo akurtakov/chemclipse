@@ -19,7 +19,7 @@ import org.eclipse.chemclipse.msd.model.core.ICombinedMassSpectrum;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CombinedMassSpectrumCalculator_7_Test {
+public class CombinedNominalMassSpectrumCalculator_7_Test {
 
 	private static final float NORMALIZATION_FACTOR = 1000.0f;
 	private ICombinedMassSpectrum noiseMassSpectrum;
@@ -27,7 +27,7 @@ public class CombinedMassSpectrumCalculator_7_Test {
 	@Before
 	public void setUp() {
 
-		CombinedMassSpectrumCalculator combinedMassSpectrumCalculator = new CombinedMassSpectrumCalculator();
+		CombinedNominalMassSpectrumCalculator combinedMassSpectrumCalculator = new CombinedNominalMassSpectrumCalculator();
 		combinedMassSpectrumCalculator.addIon(18.0f, 200.0f);
 		combinedMassSpectrumCalculator.addIon(28.0f, 320.0f);
 		combinedMassSpectrumCalculator.addIon(43.0f, 400.0f);
