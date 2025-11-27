@@ -21,10 +21,10 @@ import org.eclipse.chemclipse.converter.core.IFileContentMatcher;
 import org.eclipse.chemclipse.converter.core.IMagicNumberMatcher;
 import org.eclipse.chemclipse.converter.core.NoFileContentMatcher;
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
-import org.eclipse.chemclipse.converter.scan.IScanConverterSupport;
-import org.eclipse.chemclipse.converter.scan.ScanConverterSupport;
-import org.eclipse.chemclipse.converter.scan.ScanSupplier;
 import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.pcr.converter.support.IPlateConverterSupport;
+import org.eclipse.chemclipse.pcr.converter.support.PlateConverterSupport;
+import org.eclipse.chemclipse.pcr.converter.support.PlateSupplier;
 import org.eclipse.chemclipse.pcr.model.core.IPlate;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -78,7 +78,7 @@ public class PlateConverterPCR {
 	private static IProcessingInfo<IPlate> getPlate(final File file, IProgressMonitor monitor) {
 
 		IProcessingInfo<IPlate> processingInfo;
-		IScanConverterSupport converterSupport = getScanConverterSupport();
+		IPlateConverterSupport converterSupport = getPlateConverterSupport();
 		try {
 			List<String> availableConverterIds = converterSupport.getAvailableConverterIds(file);
 			for(String converterId : availableConverterIds) {
@@ -165,10 +165,9 @@ public class PlateConverterPCR {
 		return null;
 	}
 
-	public static IScanConverterSupport getScanConverterSupport() {
+	public static IPlateConverterSupport getPlateConverterSupport() {
 
-		ScanSupplier supplier;
-		ScanConverterSupport converterSupport = new ScanConverterSupport(DataCategory.PCR);
+		PlateConverterSupport converterSupport = new PlateConverterSupport(DataCategory.PCR);
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 		IConfigurationElement[] extensions = registry.getConfigurationElementsFor(EXTENSION_POINT);
 		for(IConfigurationElement element : extensions) {
@@ -179,7 +178,7 @@ public class PlateConverterPCR {
 			 * and stored in a ChromatogramSupplier instance it will be at least
 			 * "".
 			 */
-			supplier = new ScanSupplier();
+			PlateSupplier supplier = new PlateSupplier();
 			supplier.setFileExtension(element.getAttribute(Converter.FILE_EXTENSION));
 			supplier.setFileName(element.getAttribute(Converter.FILE_NAME));
 			supplier.setDirectoryExtension(element.getAttribute(Converter.DIRECTORY_EXTENSION));

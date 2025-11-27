@@ -20,9 +20,9 @@ import java.text.DecimalFormatSymbols;
 import java.util.List;
 import java.util.Locale;
 
-import org.eclipse.chemclipse.converter.scan.IScanConverterSupport;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.pcr.converter.core.PlateConverterPCR;
+import org.eclipse.chemclipse.pcr.converter.support.IPlateConverterSupport;
 import org.eclipse.chemclipse.pcr.model.core.IPlate;
 import org.eclipse.chemclipse.processing.converter.ISupplier;
 import org.eclipse.chemclipse.processing.core.ICategories;
@@ -110,7 +110,7 @@ public class ChartPCR extends LineChart {
 	@SuppressWarnings("deprecation")
 	private void setExportMenu(IChartSettings settings) {
 
-		IScanConverterSupport converterSupport = PlateConverterPCR.getScanConverterSupport();
+		IPlateConverterSupport converterSupport = PlateConverterPCR.getPlateConverterSupport();
 		List<ISupplier> exportSupplier = converterSupport.getExportSupplier();
 		for(ISupplier supplier : exportSupplier) {
 			settings.addMenuEntry(new IChartMenuEntry() {

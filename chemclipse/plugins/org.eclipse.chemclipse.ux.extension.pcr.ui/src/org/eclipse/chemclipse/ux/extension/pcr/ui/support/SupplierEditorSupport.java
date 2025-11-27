@@ -50,7 +50,7 @@ public class SupplierEditorSupport extends AbstractSupplierFileEditorSupport imp
 
 	public SupplierEditorSupport(Supplier<IEclipseContext> contextSupplier) {
 
-		super(PlateConverterPCR.getScanConverterSupport().getSupplier());
+		super(PlateConverterPCR.getPlateConverterSupport().getSupplier());
 		this.contextSupplier = contextSupplier;
 		refreshEditorReferences();
 	}

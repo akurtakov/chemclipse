@@ -74,7 +74,7 @@ public class SupplierFileIdentifier extends AbstractSupplierFileIdentifier imple
 				supplier = ScanConverterNMR.getScanConverterSupport().getSupplier();
 				break;
 			case PCR:
-				supplier = PlateConverterPCR.getScanConverterSupport().getSupplier();
+				supplier = PlateConverterPCR.getPlateConverterSupport().getSupplier();
 				break;
 			case SEQ:
 				supplier = SequenceConverter.getSequenceConverterSupport().getSupplier();

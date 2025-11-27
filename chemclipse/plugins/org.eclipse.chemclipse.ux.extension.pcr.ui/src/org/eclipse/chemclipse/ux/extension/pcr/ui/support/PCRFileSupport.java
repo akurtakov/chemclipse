@@ -20,9 +20,9 @@ import java.util.Optional;
 
 import org.apache.commons.io.FilenameUtils;
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
-import org.eclipse.chemclipse.converter.scan.IScanConverterSupport;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.pcr.converter.core.PlateConverterPCR;
+import org.eclipse.chemclipse.pcr.converter.support.IPlateConverterSupport;
 import org.eclipse.chemclipse.pcr.model.core.IPlate;
 import org.eclipse.chemclipse.processing.converter.ISupplier;
 import org.eclipse.chemclipse.ux.extension.pcr.ui.runnables.PCRExportRunnable;
@@ -56,7 +56,7 @@ public class PCRFileSupport {
 		dialog.setText("Save Plate As...");
 		dialog.setOverwrite(true);
 
-		IScanConverterSupport converterSupport = PlateConverterPCR.getScanConverterSupport();
+		IPlateConverterSupport converterSupport = PlateConverterPCR.getPlateConverterSupport();
 		if(converterSupport != null) {
 			String[] filterExtensions = converterSupport.getExportableFilterExtensions();
 			dialog.setFilterExtensions(filterExtensions);
