@@ -12,16 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.pcr.converter.support;
 
-import org.eclipse.chemclipse.converter.core.AbstractSupplier;
+import org.eclipse.chemclipse.processing.converter.ISupplier;
 
-public class PlateSupplier extends AbstractSupplier implements IPlateSupplier {
-
-	@Override
-	public void setFileExtension(final String fileExtension) {
-
-		if(fileExtension != null && !fileExtension.isEmpty()) {
-			String cleanedExtension = fileExtension.startsWith(".") ? fileExtension.substring(1) : fileExtension;
-			super.setFileExtension(cleanedExtension);
-		}
-	}
+public interface IPlateSupplier extends ISupplier {
 }
