@@ -14,8 +14,8 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.services;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.eclipse.chemclipse.support.ui.services.IAnnotationWidgetService;
 import org.eclipse.chemclipse.tsd.model.services.TraceRangesSerializationService1D;
-import org.eclipse.chemclipse.ux.extension.ui.methods.IAnnotationWidgetService;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.editors.TraceRangesEditor1D;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;

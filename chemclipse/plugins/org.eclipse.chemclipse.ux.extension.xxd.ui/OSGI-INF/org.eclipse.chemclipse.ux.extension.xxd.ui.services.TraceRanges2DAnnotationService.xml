@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" configuration-policy="optional" name="org.eclipse.chemclipse.ux.extension.xxd.ui.services.TraceRanges2DAnnotationService">
    <service>
-      <provide interface="org.eclipse.chemclipse.ux.extension.ui.methods.IAnnotationWidgetService"/>
+      <provide interface="org.eclipse.chemclipse.support.ui.services.IAnnotationWidgetService"/>
    </service>
    <implementation class="org.eclipse.chemclipse.ux.extension.xxd.ui.services.TraceRanges2DAnnotationService"/>
 </scr:component>

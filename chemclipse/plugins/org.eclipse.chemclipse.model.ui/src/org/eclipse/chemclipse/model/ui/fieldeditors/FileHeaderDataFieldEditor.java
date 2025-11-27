@@ -12,15 +12,18 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.ui.fieldeditors;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 import org.eclipse.chemclipse.model.ui.swt.FileHeaderDataEditor;
 import org.eclipse.jface.preference.FieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 
 public class FileHeaderDataFieldEditor extends FieldEditor {
 
-	private FileHeaderDataEditor fileHeaderDataEditor;
+	private AtomicReference<FileHeaderDataEditor> editorControl = new AtomicReference<>();
 
 	public FileHeaderDataFieldEditor(String name, String labelText, Composite parent) {
 
@@ -31,55 +34,54 @@ public class FileHeaderDataFieldEditor extends FieldEditor {
 	@Override
 	public int getNumberOfControls() {
 
-		return 1;
-	}
-
-	@Override
-	protected void adjustForNumColumns(int numColumns) {
-
-		if(numColumns >= 2) {
-			GridData gridData = (GridData)fileHeaderDataEditor.getLayoutData();
-			gridData.horizontalSpan = numColumns - 1;
-			gridData.grabExcessHorizontalSpace = true;
-		}
+		return 2;
 	}
 
 	@Override
 	protected void doFillIntoGrid(Composite parent, int numColumns) {
 
 		getLabelControl(parent);
-		fileHeaderDataEditor = new FileHeaderDataEditor(parent, SWT.NONE);
-		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
-		fileHeaderDataEditor.setLayoutData(gridData);
 
-		fileHeaderDataEditor.addChangeListener(event -> {
+		FileHeaderDataEditor editor = new FileHeaderDataEditor(parent, SWT.NONE);
+		editor.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-			String message = fileHeaderDataEditor.getMessage();
+		editor.addChangeListener(event -> {
+
+			String message = editor.getMessage();
 			if(message != null) {
 				showErrorMessage(message);
 			} else {
 				clearErrorMessage();
 			}
 		});
+
+		editorControl.set(editor);
 	}
 
 	@Override
 	protected void doLoad() {
 
-		String entries = getPreferenceStore().getString(getPreferenceName());
-		fileHeaderDataEditor.load(entries);
+		editorControl.get().load(getPreferenceStore().getString(getPreferenceName()));
 	}
 
 	@Override
 	protected void doLoadDefault() {
 
-		String entries = getPreferenceStore().getDefaultString(getPreferenceName());
-		fileHeaderDataEditor.load(entries);
+		editorControl.get().load(getPreferenceStore().getDefaultString(getPreferenceName()));
 	}
 
 	@Override
 	protected void doStore() {
 
-		getPreferenceStore().setValue(getPreferenceName(), fileHeaderDataEditor.save());
+		getPreferenceStore().setValue(getPreferenceName(), editorControl.get().save());
+	}
+
+	@Override
+	protected void adjustForNumColumns(int numColumns) {
+
+		Control control = editorControl.get();
+		GridData gridData = (GridData)control.getLayoutData();
+		gridData.grabExcessHorizontalSpace = true;
+		gridData.horizontalSpan = (numColumns >= 2) ? numColumns - 1 : 1;
 	}
 }

@@ -21,6 +21,7 @@ public class FileHeaderDataSupport {
 	 * A line break is not supported by this regular expression header field option.
 	 */
 	public static final String VALUE_DELIMITER = "=====";
+	public static final String SETTING_DEFAULT = "SHORT_INFO=====(.*)=====0";
 
 	public static void load(FileHeaderData fileHeaderData, String value) {
 
@@ -62,7 +63,7 @@ public class FileHeaderDataSupport {
 		try {
 			return Integer.valueOf(value.trim());
 		} catch(NumberFormatException e) {
-			return 1;
+			return 0;
 		}
 	}
 }

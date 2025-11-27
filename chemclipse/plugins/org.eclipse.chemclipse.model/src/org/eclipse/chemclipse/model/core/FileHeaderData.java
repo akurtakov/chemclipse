@@ -14,6 +14,7 @@ package org.eclipse.chemclipse.model.core;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import org.eclipse.chemclipse.model.core.support.HeaderField;
 
@@ -29,7 +30,10 @@ public class FileHeaderData {
 
 	public FileHeaderData() {
 
-		this(HeaderField.DEFAULT, "", 1);
+		/*
+		 * Extract all data from the given field.
+		 */
+		this(HeaderField.DEFAULT, "(.*)", 0);
 	}
 
 	public FileHeaderData(HeaderField headerField, String regularExpression, int groupIndex) {
@@ -70,13 +74,35 @@ public class FileHeaderData {
 		this.groupIndex = groupIndex;
 	}
 
-	public Pattern getPattern() {
+	/**
+	 * If the regular expression is blank, then
+	 * it indicates that the file header data shall
+	 * not be used to extract data. It could be happen
+	 * in a dynamic context to extract header data
+	 * on demand.
+	 * 
+	 * @return
+	 */
+	public boolean isUse() {
 
-		if(pattern == null) {
-			pattern = Pattern.compile(regularExpression);
+		return !regularExpression.isBlank();
+	}
+
+	/**
+	 * Might return null. Check isUse() first.
+	 * 
+	 * @return Pattern
+	 */
+	public Pattern getPattern() throws PatternSyntaxException {
+
+		if(isUse()) {
+			if(pattern == null) {
+				pattern = Pattern.compile(regularExpression);
+			}
+			return pattern;
 		}
 
-		return pattern;
+		return null;
 	}
 
 	@Override
