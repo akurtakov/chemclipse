@@ -13,10 +13,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.selection;
 
-import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogram;
-import org.eclipse.chemclipse.model.core.IPeak;
-import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.exceptions.ChromatogramIsNullException;
 
 /**
@@ -29,8 +26,6 @@ import org.eclipse.chemclipse.model.exceptions.ChromatogramIsNullException;
  *
  */
 public class ChromatogramSelection extends AbstractChromatogramSelection implements IChromatogramSelection {
-
-	private static final Logger logger = Logger.getLogger(ChromatogramSelection.class);
 
 	public ChromatogramSelection(IChromatogram chromatogram, boolean fireUpdate) throws ChromatogramIsNullException {
 
@@ -51,56 +46,5 @@ public class ChromatogramSelection extends AbstractChromatogramSelection impleme
 	public void reset() {
 
 		super.reset(false);
-	}
-
-	@Override
-	public void fireUpdateChange(boolean forceReload) {
-
-		logger.warn("Bad boy - fireUpdateChange(boolean forceReload): don't use the ChromatogramSelection implementation");
-	}
-
-	@Override
-	public IScan getSelectedScan() {
-
-		logger.warn("Bad boy - getSelectedScan(): don't use the ChromatogramSelection implementation");
-		return null;
-	}
-
-	@Override
-	public void setSelectedScan(IScan selectedScan) {
-
-		logger.warn("Bad boy - setSelectedScan(IScan selectedScan): don't use the ChromatogramSelection implementation");
-	}
-
-	@Override
-	public void setSelectedScan(IScan selectedScan, boolean update) {
-
-		logger.warn("Bad boy - setSelectedScan(IScan selectedScan, boolean update): don't use the ChromatogramSelection implementation");
-	}
-
-	@Override
-	public IPeak getSelectedPeak() {
-
-		logger.warn("Bad boy - getSelectedPeak(): don't use the ChromatogramSelection implementation");
-		return null;
-	}
-
-	@Override
-	public void setSelectedPeak(IPeak selectedPeak) {
-
-		logger.warn("Bad boy - setSelectedPeak(IPeak selectedPeak): don't use the ChromatogramSelection implementation");
-	}
-
-	@Override
-	public IScan getSelectedIdentifiedScan() {
-
-		logger.warn("Bad boy - getSelectedIdentifiedScan(): don't use the ChromatogramSelection implementation");
-		return null;
-	}
-
-	@Override
-	public void setSelectedIdentifiedScan(IScan identifiedScan) {
-
-		logger.warn("Bad boy - setSelectedIdentifiedScan: don't use the ChromatogramSelection implementation");
 	}
 }

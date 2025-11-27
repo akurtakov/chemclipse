@@ -26,8 +26,6 @@ import org.eclipse.chemclipse.model.selection.AbstractChromatogramSelection;
 
 public class ChromatogramSelectionCSD extends AbstractChromatogramSelection implements IChromatogramSelectionCSD {
 
-	private IScanCSD selectedScan;
-
 	public ChromatogramSelectionCSD(IChromatogramCSD chromatogram) throws ChromatogramIsNullException {
 
 		this(chromatogram, true);
@@ -44,13 +42,6 @@ public class ChromatogramSelectionCSD extends AbstractChromatogramSelection impl
 	}
 
 	@Override
-	public void dispose() {
-
-		super.dispose();
-		selectedScan = null;
-	}
-
-	@Override
 	public IChromatogramCSD getChromatogram() {
 
 		IChromatogram chromatogram = super.getChromatogram();
@@ -63,7 +54,11 @@ public class ChromatogramSelectionCSD extends AbstractChromatogramSelection impl
 	@Override
 	public IScanCSD getSelectedScan() {
 
-		return selectedScan;
+		if(super.getSelectedScan() instanceof IScanCSD scanCSD) {
+			return scanCSD;
+		}
+
+		return null;
 	}
 
 	@Override
@@ -85,10 +80,10 @@ public class ChromatogramSelectionCSD extends AbstractChromatogramSelection impl
 			 * Chromatogram CSD
 			 */
 			if(chromatogram instanceof IChromatogramCSD chromatogramCSD) {
-				selectedScan = chromatogramCSD.getScan(1);
+				setSelectedScan(chromatogramCSD.getScan(1));
 			}
 		} else {
-			selectedScan = null;
+			setSelectedScan(null);
 		}
 		/*
 		 * Peak
@@ -138,7 +133,7 @@ public class ChromatogramSelectionCSD extends AbstractChromatogramSelection impl
 	public void setSelectedScan(IScanCSD selectedScan, boolean update) {
 
 		if(selectedScan != null) {
-			this.selectedScan = selectedScan;
+			setSelectedScan(selectedScan);
 			/*
 			 * Fire update change if necessary.
 			 */
@@ -158,8 +153,6 @@ public class ChromatogramSelectionCSD extends AbstractChromatogramSelection impl
 	public void update(boolean forceReload) {
 
 		super.update(forceReload);
-
-		setSelectedScan(selectedScan, false);
 
 		fireUpdateChange(forceReload);
 	}

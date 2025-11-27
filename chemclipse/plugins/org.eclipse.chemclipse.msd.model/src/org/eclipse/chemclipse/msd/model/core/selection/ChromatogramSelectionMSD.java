@@ -44,7 +44,6 @@ import org.eclipse.chemclipse.msd.model.core.support.MarkedIons;
  */
 public class ChromatogramSelectionMSD extends AbstractChromatogramSelection implements IChromatogramSelectionMSD {
 
-	private IScanMSD selectedScan;
 	private IMarkedIons selectedIons;
 	private IMarkedIons excludedIons;
 	private IMarkedIonTransitions markedIonTransitions;
@@ -88,7 +87,6 @@ public class ChromatogramSelectionMSD extends AbstractChromatogramSelection impl
 	public void dispose() {
 
 		super.dispose();
-		selectedScan = null;
 		selectedIons = null;
 		excludedIons = null;
 	}
@@ -106,7 +104,11 @@ public class ChromatogramSelectionMSD extends AbstractChromatogramSelection impl
 	@Override
 	public IScanMSD getSelectedScan() {
 
-		return selectedScan;
+		if(super.getSelectedScan() instanceof IScanMSD scanMSD) {
+			return scanMSD;
+		}
+
+		return null;
 	}
 
 	@Override
@@ -146,10 +148,10 @@ public class ChromatogramSelectionMSD extends AbstractChromatogramSelection impl
 			 * Chromatogram MSD
 			 */
 			if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
-				selectedScan = chromatogramMSD.getScan(1);
+				setSelectedScan(chromatogramMSD.getScan(1));
 			}
 		} else {
-			selectedScan = null;
+			setSelectedScan(null);
 		}
 		/*
 		 * Selected Identified Scan
@@ -183,14 +185,6 @@ public class ChromatogramSelectionMSD extends AbstractChromatogramSelection impl
 	}
 
 	@Override
-	public void setSelectedScan(IScan selectedScan, boolean update) {
-
-		if(selectedScan instanceof IRegularMassSpectrum vendorMassSpectrum) {
-			setSelectedScan(vendorMassSpectrum, update);
-		}
-	}
-
-	@Override
 	public void setSelectedScan(IScanMSD selectedScan) {
 
 		/*
@@ -203,7 +197,7 @@ public class ChromatogramSelectionMSD extends AbstractChromatogramSelection impl
 	public void setSelectedScan(IRegularMassSpectrum selectedScan, boolean update) {
 
 		if(selectedScan != null) {
-			this.selectedScan = selectedScan;
+			setSelectedScan(selectedScan);
 			/*
 			 * Fire update change if neccessary.
 			 */
@@ -227,8 +221,6 @@ public class ChromatogramSelectionMSD extends AbstractChromatogramSelection impl
 	public void update(boolean forceReload) {
 
 		super.update(forceReload);
-
-		setSelectedScan(selectedScan, false);
 
 		fireUpdateChange(forceReload);
 	}
