@@ -16,12 +16,14 @@ package org.eclipse.chemclipse.msd.model.core.selection;
 
 import java.util.List;
 
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.model.exceptions.ChromatogramIsNullException;
 import org.eclipse.chemclipse.model.notifier.UpdateNotifier;
 import org.eclipse.chemclipse.model.selection.AbstractChromatogramSelection;
+import org.eclipse.chemclipse.model.selection.ChromatogramSelection;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IIonTransitionSettings;
@@ -46,6 +48,8 @@ public class ChromatogramSelectionMSD extends AbstractChromatogramSelection impl
 	private IMarkedIons selectedIons;
 	private IMarkedIons excludedIons;
 	private IMarkedIonTransitions markedIonTransitions;
+
+	private static final Logger logger = Logger.getLogger(ChromatogramSelection.class);
 
 	public ChromatogramSelectionMSD(IChromatogramMSD chromatogram) throws ChromatogramIsNullException {
 
@@ -215,7 +219,7 @@ public class ChromatogramSelectionMSD extends AbstractChromatogramSelection impl
 		try {
 			UpdateNotifier.update(this);
 		} catch(Exception e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 
