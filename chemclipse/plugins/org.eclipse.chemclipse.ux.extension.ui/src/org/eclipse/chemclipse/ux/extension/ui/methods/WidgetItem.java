@@ -25,6 +25,7 @@ import org.eclipse.chemclipse.support.settings.validation.InputValidator;
 import org.eclipse.chemclipse.support.text.ILabel;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.provider.AdapterLabelProvider;
+import org.eclipse.chemclipse.support.ui.services.IAnnotationWidgetService;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.ux.extension.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;

@@ -13,7 +13,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.classification.ui.services;
 
-import org.eclipse.chemclipse.ux.extension.ui.methods.IAnnotationWidgetService;
+import org.eclipse.chemclipse.support.ui.services.IAnnotationWidgetService;
 import org.eclipse.chemclipse.xxd.classification.service.ClassificationDictionarySerializationService;
 import org.eclipse.chemclipse.xxd.classification.ui.swt.ClassificationDictionaryEditor;
 import org.eclipse.swt.SWT;

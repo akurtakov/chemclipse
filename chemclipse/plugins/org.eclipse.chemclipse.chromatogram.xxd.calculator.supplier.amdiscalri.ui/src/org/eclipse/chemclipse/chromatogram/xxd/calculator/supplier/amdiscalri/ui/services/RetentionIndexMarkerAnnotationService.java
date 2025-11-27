@@ -14,7 +14,7 @@ package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.u
 
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.service.RetentionIndexMarkerSerializationService;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.swt.RetentionIndexMarkerEditor;
-import org.eclipse.chemclipse.ux.extension.ui.methods.IAnnotationWidgetService;
+import org.eclipse.chemclipse.support.ui.services.IAnnotationWidgetService;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;

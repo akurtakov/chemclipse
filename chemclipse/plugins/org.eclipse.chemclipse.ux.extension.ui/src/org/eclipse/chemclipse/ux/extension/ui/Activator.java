@@ -18,8 +18,8 @@ import java.util.MissingResourceException;
 
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.support.ui.activator.AbstractActivatorUI;
+import org.eclipse.chemclipse.support.ui.services.IAnnotationWidgetService;
 import org.eclipse.chemclipse.ux.extension.ui.definitions.TileDefinition;
-import org.eclipse.chemclipse.ux.extension.ui.methods.IAnnotationWidgetService;
 import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierDataExplorer;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;

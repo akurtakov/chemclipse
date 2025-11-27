@@ -58,6 +58,11 @@ public class FileHeaderDataEditor extends Composite {
 		createControl();
 	}
 
+	public FileHeaderData getFileHeaderData() {
+
+		return fileHeaderData;
+	}
+
 	public void load(String items) {
 
 		FileHeaderDataSupport.load(fileHeaderData, items);
@@ -122,7 +127,7 @@ public class FileHeaderDataEditor extends Composite {
 		 * Select the item.
 		 */
 		combo.setToolTipText("Header Field");
-		GridData gridData = new GridData();
+		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;
 		combo.setLayoutData(gridData);
 		combo.addSelectionListener(new SelectionAdapter() {
@@ -153,7 +158,9 @@ public class FileHeaderDataEditor extends Composite {
 
 			String message = null;
 			if(value.isBlank()) {
-				message = "The regular expression must not be empty.";
+				/*
+				 * OK, means don't use the current file header data.
+				 */
 			} else {
 				String delimiter = FileHeaderDataSupport.VALUE_DELIMITER;
 				if(value.contains(delimiter)) {
@@ -167,6 +174,7 @@ public class FileHeaderDataEditor extends Composite {
 				return ValidationStatus.ok();
 			}
 		};
+
 		ControlDecoration controlDecoration = new ControlDecoration(text, SWT.LEFT | SWT.TOP);
 		text.addModifyListener(e -> {
 
@@ -181,12 +189,12 @@ public class FileHeaderDataEditor extends Composite {
 	private void createSpinnerGroupIndex(Composite parent) {
 
 		Spinner spinner = new Spinner(parent, SWT.BORDER);
-		spinner.setMinimum(1);
+		spinner.setMinimum(0);
 		spinner.setMaximum(Integer.MAX_VALUE);
 		spinner.setPageIncrement(1);
 		spinner.setSelection(1);
 		spinner.setToolTipText("Select the group index of the value to be extracted.");
-		GridData gridData = new GridData();
+		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 80;
 		spinner.setLayoutData(gridData);
 

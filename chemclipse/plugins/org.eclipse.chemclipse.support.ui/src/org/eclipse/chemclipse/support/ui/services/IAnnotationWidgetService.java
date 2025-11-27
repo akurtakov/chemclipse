@@ -10,7 +10,7 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.ux.extension.ui.methods;
+package org.eclipse.chemclipse.support.ui.services;
 
 import org.eclipse.chemclipse.support.settings.serialization.ISerializationService;
 import org.eclipse.swt.widgets.Composite;
