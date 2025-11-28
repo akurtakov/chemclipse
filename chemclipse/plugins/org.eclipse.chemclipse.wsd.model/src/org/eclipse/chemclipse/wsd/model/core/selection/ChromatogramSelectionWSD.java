@@ -29,7 +29,6 @@ import org.eclipse.chemclipse.wsd.model.core.IScanWSD;
 
 public class ChromatogramSelectionWSD extends AbstractChromatogramSelection implements IChromatogramSelectionWSD {
 
-	private IScanWSD selectedScan;
 	private IMarkedWavelengths selectedWavelengths;
 
 	public ChromatogramSelectionWSD(IChromatogramWSD chromatogram) throws ChromatogramIsNullException {
@@ -62,13 +61,6 @@ public class ChromatogramSelectionWSD extends AbstractChromatogramSelection impl
 	}
 
 	@Override
-	public void dispose() {
-
-		selectedScan = null;
-		super.dispose();
-	}
-
-	@Override
 	public IChromatogramWSD getChromatogram() {
 
 		IChromatogram chromatogram = super.getChromatogram();
@@ -81,7 +73,11 @@ public class ChromatogramSelectionWSD extends AbstractChromatogramSelection impl
 	@Override
 	public IScanWSD getSelectedScan() {
 
-		return selectedScan;
+		if(super.getSelectedScan() instanceof IScanWSD scanWSD) {
+			return scanWSD;
+		}
+
+		return null;
 	}
 
 	@Override
@@ -103,10 +99,10 @@ public class ChromatogramSelectionWSD extends AbstractChromatogramSelection impl
 			 * Chromatogram WSD
 			 */
 			if(chromatogram instanceof IChromatogramWSD chromatogramWSD) {
-				selectedScan = chromatogramWSD.getScan(1);
+				setSelectedScan(chromatogramWSD.getScan(1));
 			}
 		} else {
-			selectedScan = null;
+			setSelectedScan(null);
 		}
 		/*
 		 * Fire an update.
@@ -145,7 +141,7 @@ public class ChromatogramSelectionWSD extends AbstractChromatogramSelection impl
 	public void setSelectedScan(IScanWSD selectedScan, boolean update) {
 
 		if(selectedScan != null) {
-			this.selectedScan = selectedScan;
+			setSelectedScan(selectedScan);
 			/*
 			 * Fire update change if necessary.
 			 */
@@ -165,8 +161,6 @@ public class ChromatogramSelectionWSD extends AbstractChromatogramSelection impl
 	public void update(boolean forceReload) {
 
 		super.update(forceReload);
-
-		setSelectedScan(selectedScan, false);
 
 		fireUpdateChange(forceReload);
 	}

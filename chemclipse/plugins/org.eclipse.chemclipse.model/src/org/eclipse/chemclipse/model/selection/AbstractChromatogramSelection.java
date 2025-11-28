@@ -17,13 +17,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.exceptions.ChromatogramIsNullException;
+import org.eclipse.chemclipse.model.notifier.UpdateNotifier;
 import org.eclipse.chemclipse.numeric.core.Point;
 
 public abstract class AbstractChromatogramSelection implements IChromatogramSelection {
+
+	private static final Logger logger = Logger.getLogger(ChromatogramSelection.class);
 
 	private IChromatogram chromatogram;
 	private int startRetentionTime;
@@ -33,6 +37,9 @@ public abstract class AbstractChromatogramSelection implements IChromatogramSele
 
 	private List<IPeak> selectedPeaks = new ArrayList<>();
 	private List<IScan> selectedIdentifiedScans = new ArrayList<>();
+
+	private IScan selectedScan;
+
 	/*
 	 * UI fields
 	 */
@@ -238,6 +245,43 @@ public abstract class AbstractChromatogramSelection implements IChromatogramSele
 		setStartAbundance(startAbundance, false);
 		setStartAbundance(startAbundance, false);
 		setStopAbundance(stopAbundance, false);
+		setSelectedScan(selectedScan, false);
+	}
+
+	@Override
+	public void fireUpdateChange(boolean forceReload) {
+
+		try {
+			UpdateNotifier.update(this);
+		} catch(Exception e) {
+			logger.error(e);
+		}
+	}
+
+	@Override
+	public IScan getSelectedScan() {
+
+		return selectedScan;
+	}
+
+	@Override
+	public void setSelectedScan(IScan selectedScan) {
+
+		setSelectedScan(selectedScan, true);
+	}
+
+	@Override
+	public void setSelectedScan(IScan selectedScan, boolean update) {
+
+		if(selectedScan != null) {
+			this.selectedScan = selectedScan;
+			/*
+			 * Fire update change if neccessary.
+			 */
+			if(update) {
+				fireUpdateChange(false);
+			}
+		}
 	}
 
 	@Override
