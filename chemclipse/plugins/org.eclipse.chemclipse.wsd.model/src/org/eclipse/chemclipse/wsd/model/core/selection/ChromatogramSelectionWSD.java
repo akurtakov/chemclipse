@@ -113,28 +113,12 @@ public class ChromatogramSelectionWSD extends AbstractChromatogramSelection impl
 	}
 
 	@Override
-	public void setSelectedScan(IScan selectedScan) {
-
-		if(selectedScan instanceof IScanWSD scanWSD) {
-			setSelectedScan(scanWSD);
-		}
-	}
-
-	@Override
-	public void setSelectedScan(IScan selectedScan, boolean update) {
-
-		if(selectedScan instanceof IScanWSD scanWSD) {
-			setSelectedScan(scanWSD, update);
-		}
-	}
-
-	@Override
 	public void setSelectedScan(IScanWSD selectedScan) {
 
 		/*
 		 * FireUpdateChange will be called in the validate method.
 		 */
-		setSelectedScan(selectedScan, true);
+		super.setSelectedScan(selectedScan, true);
 	}
 
 	@Override

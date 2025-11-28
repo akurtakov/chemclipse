@@ -27,7 +27,6 @@ import org.eclipse.chemclipse.model.wavelengths.MarkedWavelengths;
 
 public class ChromatogramSelectionFSD extends AbstractChromatogramSelection implements IChromatogramSelectionFSD {
 
-	private IScanFSD selectedScan;
 	private IMarkedWavelengths selectedWavelengths;
 
 	public ChromatogramSelectionFSD(IChromatogramFSD chromatogram) throws ChromatogramIsNullException {
@@ -60,13 +59,6 @@ public class ChromatogramSelectionFSD extends AbstractChromatogramSelection impl
 	}
 
 	@Override
-	public void dispose() {
-
-		selectedScan = null;
-		super.dispose();
-	}
-
-	@Override
 	public IChromatogramFSD getChromatogram() {
 
 		IChromatogram chromatogram = super.getChromatogram();
@@ -79,7 +71,11 @@ public class ChromatogramSelectionFSD extends AbstractChromatogramSelection impl
 	@Override
 	public IScanFSD getSelectedScan() {
 
-		return selectedScan;
+		if(super.getSelectedScan() instanceof IScanFSD scanFSD) {
+			return scanFSD;
+		}
+
+		return null;
 	}
 
 	@Override
@@ -101,32 +97,16 @@ public class ChromatogramSelectionFSD extends AbstractChromatogramSelection impl
 			 * Chromatogram FSD
 			 */
 			if(chromatogram instanceof IChromatogramFSD chromatogramFSD) {
-				selectedScan = chromatogramFSD.getScan(1);
+				setSelectedScan(chromatogramFSD.getScan(1));
 			}
 		} else {
-			selectedScan = null;
+			setSelectedScan(null);
 		}
 		/*
 		 * Fire an update.
 		 */
 		if(fireUpdate) {
 			UpdateNotifier.update(this);
-		}
-	}
-
-	@Override
-	public void setSelectedScan(IScan selectedScan) {
-
-		if(selectedScan instanceof IScanFSD scanFSD) {
-			setSelectedScan(scanFSD);
-		}
-	}
-
-	@Override
-	public void setSelectedScan(IScan selectedScan, boolean update) {
-
-		if(selectedScan instanceof IScanFSD scanFSD) {
-			setSelectedScan(scanFSD, update);
 		}
 	}
 
@@ -143,7 +123,7 @@ public class ChromatogramSelectionFSD extends AbstractChromatogramSelection impl
 	public void setSelectedScan(IScanFSD selectedScan, boolean update) {
 
 		if(selectedScan != null) {
-			this.selectedScan = selectedScan;
+			setSelectedScan(selectedScan);
 			/*
 			 * Fire update change if necessary.
 			 */
@@ -163,7 +143,6 @@ public class ChromatogramSelectionFSD extends AbstractChromatogramSelection impl
 	public void update(boolean forceReload) {
 
 		super.update(forceReload);
-		setSelectedScan(selectedScan, false);
 		fireUpdateChange(forceReload);
 	}
 }

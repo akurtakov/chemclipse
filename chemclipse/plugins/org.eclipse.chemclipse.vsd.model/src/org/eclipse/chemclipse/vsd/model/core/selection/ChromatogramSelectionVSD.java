@@ -13,7 +13,6 @@
 package org.eclipse.chemclipse.vsd.model.core.selection;
 
 import org.eclipse.chemclipse.model.core.IChromatogram;
-import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.exceptions.ChromatogramIsNullException;
 import org.eclipse.chemclipse.model.notifier.UpdateNotifier;
 import org.eclipse.chemclipse.model.selection.AbstractChromatogramSelection;
@@ -21,8 +20,6 @@ import org.eclipse.chemclipse.vsd.model.core.IChromatogramVSD;
 import org.eclipse.chemclipse.vsd.model.core.IScanVSD;
 
 public class ChromatogramSelectionVSD extends AbstractChromatogramSelection implements IChromatogramSelectionVSD {
-
-	private IScanVSD selectedScan;
 
 	public ChromatogramSelectionVSD(IChromatogramVSD chromatogram) throws ChromatogramIsNullException {
 
@@ -36,16 +33,13 @@ public class ChromatogramSelectionVSD extends AbstractChromatogramSelection impl
 	}
 
 	@Override
-	public void dispose() {
-
-		selectedScan = null;
-		super.dispose();
-	}
-
-	@Override
 	public IScanVSD getSelectedScan() {
 
-		return selectedScan;
+		if(super.getSelectedScan() instanceof IScanVSD scanVSD) {
+			return scanVSD;
+		}
+
+		return null;
 	}
 
 	@Override
@@ -64,38 +58,16 @@ public class ChromatogramSelectionVSD extends AbstractChromatogramSelection impl
 		 */
 		if(chromatogram.getNumberOfScans() >= 1) {
 			if(chromatogram instanceof IChromatogramVSD chromatogramISD) {
-				selectedScan = (IScanVSD)chromatogramISD.getScan(1);
+				setSelectedScan(chromatogramISD.getScan(1));
 			}
 		} else {
-			selectedScan = null;
+			setSelectedScan(null);
 		}
 		/*
 		 * Fire an update.
 		 */
 		if(fireUpdate) {
 			UpdateNotifier.update(this);
-		}
-	}
-
-	@Override
-	public void setSelectedScan(IScan selectedScan) {
-
-		if(selectedScan instanceof IScanVSD scanISD) {
-			setSelectedScan(scanISD, true);
-		}
-	}
-
-	@Override
-	public void setSelectedScan(IScan selectedScan, boolean update) {
-
-		if(selectedScan instanceof IScanVSD scanISD) {
-			/*
-			 * Fire update change if neccessary.
-			 */
-			this.selectedScan = scanISD;
-			if(update) {
-				fireUpdateChange(false);
-			}
 		}
 	}
 
@@ -109,7 +81,6 @@ public class ChromatogramSelectionVSD extends AbstractChromatogramSelection impl
 	public void update(boolean forceReload) {
 
 		super.update(forceReload);
-		setSelectedScan(selectedScan, false);
 		fireUpdateChange(forceReload);
 	}
 

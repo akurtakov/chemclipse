@@ -18,7 +18,6 @@ import java.util.List;
 
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogram;
-import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.model.exceptions.ChromatogramIsNullException;
 import org.eclipse.chemclipse.model.notifier.UpdateNotifier;
@@ -177,20 +176,12 @@ public class ChromatogramSelectionMSD extends AbstractChromatogramSelection impl
 	}
 
 	@Override
-	public void setSelectedScan(IScan selectedScan) {
-
-		if(selectedScan instanceof IRegularMassSpectrum vendorMassSpectrum) {
-			setSelectedScan(vendorMassSpectrum);
-		}
-	}
-
-	@Override
 	public void setSelectedScan(IScanMSD selectedScan) {
 
 		/*
 		 * FireUpdateChange will be called in the validate method.
 		 */
-		setSelectedScan(selectedScan, true);
+		super.setSelectedScan(selectedScan, true);
 	}
 
 	@Override

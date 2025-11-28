@@ -19,7 +19,6 @@ import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramPeakCSD;
 import org.eclipse.chemclipse.csd.model.core.IScanCSD;
 import org.eclipse.chemclipse.model.core.IChromatogram;
-import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.exceptions.ChromatogramIsNullException;
 import org.eclipse.chemclipse.model.notifier.UpdateNotifier;
 import org.eclipse.chemclipse.model.selection.AbstractChromatogramSelection;
@@ -105,35 +104,19 @@ public class ChromatogramSelectionCSD extends AbstractChromatogramSelection impl
 	}
 
 	@Override
-	public void setSelectedScan(IScan selectedScan) {
-
-		if(selectedScan instanceof IScanCSD scanCSD) {
-			setSelectedScan(scanCSD);
-		}
-	}
-
-	@Override
-	public void setSelectedScan(IScan selectedScan, boolean update) {
-
-		if(selectedScan instanceof IScanCSD scanCSD) {
-			setSelectedScan(scanCSD, update);
-		}
-	}
-
-	@Override
 	public void setSelectedScan(IScanCSD selectedScan) {
 
 		/*
 		 * FireUpdateChange will be called in the validate method.
 		 */
-		setSelectedScan(selectedScan, true);
+		super.setSelectedScan(selectedScan, true);
 	}
 
 	@Override
 	public void setSelectedScan(IScanCSD selectedScan, boolean update) {
 
 		if(selectedScan != null) {
-			setSelectedScan(selectedScan);
+			super.setSelectedScan(selectedScan);
 			/*
 			 * Fire update change if necessary.
 			 */
