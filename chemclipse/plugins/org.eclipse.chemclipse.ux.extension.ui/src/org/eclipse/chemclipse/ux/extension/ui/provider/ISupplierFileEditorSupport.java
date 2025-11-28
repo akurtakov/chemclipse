@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.core.support.HeaderField;
@@ -138,10 +139,6 @@ public interface ISupplierFileEditorSupport extends ISupplierFileIdentifier {
 				MWindow window = application.getChildren().get(0);
 				application.getContext().set("activeChildContext", window.getContext()); // EclipseContext.ACTIVE_CHILD
 				/*
-				 * Get the editor part stack.
-				 */
-				MPartStack partStack = (MPartStack)modelService.find(IPerspectiveAndViewIds.EDITOR_PART_STACK_ID, application);
-				/*
 				 * Create the input part and prepare it.
 				 */
 				MPart part = MBasicFactory.INSTANCE.createPart();
@@ -193,9 +190,15 @@ public interface ISupplierFileEditorSupport extends ISupplierFileIdentifier {
 				part.setTooltip(tooltip);
 				part.setCloseable(true);
 				/*
-				 * Add it to the stack and show it.
+				 * Add it to the editor part stack and show it.
 				 */
-				partStack.getChildren().add(part);
+				MPartStack partStack = (MPartStack)modelService.find(IPerspectiveAndViewIds.EDITOR_PART_STACK_ID, application);
+				if(partStack != null) {
+					partStack.getChildren().add(part);
+				} else {
+					Logger logger = Logger.getLogger(ISupplierFileEditorSupport.class);
+					logger.warn("Failed to add part to the stack.");
+				}
 				partService.showPart(part, PartState.ACTIVATE);
 				((Shell)window.getWidget()).forceFocus();
 			}
