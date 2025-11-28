@@ -17,6 +17,7 @@ import static org.eclipse.chemclipse.support.ui.swt.ControlBuilder.autoComplete;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.targets.TargetListUtil;
@@ -35,6 +36,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
@@ -49,6 +51,8 @@ public class ComboTarget extends Composite {
 	private ControlDecoration controlDecoration;
 
 	private ITargetUpdateListener targetUpdateListener = null;
+
+	private String[] items;
 
 	public ComboTarget(Composite parent, int style) {
 
@@ -85,7 +89,6 @@ public class ComboTarget extends Composite {
 		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 		boolean useTargetList = preferenceStore.getBoolean(PreferenceSupplier.P_USE_TARGET_LIST);
 
-		String[] items;
 		if(useTargetList) {
 			items = targetListUtil.parseString(preferenceStore.getString(PreferenceSupplier.P_TARGET_LIST));
 			Arrays.sort(items);
@@ -93,7 +96,13 @@ public class ComboTarget extends Composite {
 			items = new String[]{};
 		}
 
-		combo.setItems(items);
+		// Reduce initially displayed list for performance.
+		if(items.length > 10) {
+			String[] filteredItems = Arrays.copyOf(items, Math.min(items.length, 10));
+			combo.setItems(filteredItems);
+		} else {
+			combo.setItems(items);
+		}
 	}
 
 	private void createControl() {
@@ -142,7 +151,21 @@ public class ComboTarget extends Composite {
 
 				List<ContentProposal> list = new ArrayList<>();
 				if(contents != null) {
-					String[] items = combo.getItems();
+					// Trim search results for performance.
+					String[] filtered = Arrays.stream(items) //
+							.filter(Objects::nonNull) //
+							.filter(s -> s.toLowerCase().contains(contents)) //
+							.limit(100) //
+							.toArray(String[]::new); //
+
+					// Dynamically add back the entries so they can be selected.
+					String text = combo.getText();
+					Point selection = combo.getSelection();
+					combo.removeAll();
+					combo.setItems(filtered);
+					combo.setText(text);
+					combo.setSelection(selection);
+
 					for(String item : items) {
 						if(item.toLowerCase().contains(contents.toLowerCase())) {
 							list.add(new ContentProposal(item));
@@ -152,6 +175,7 @@ public class ComboTarget extends Composite {
 				return list.toArray(new IContentProposal[0]);
 			}
 		};
+
 		autoComplete(combo, proposalProvider);
 	}
 
