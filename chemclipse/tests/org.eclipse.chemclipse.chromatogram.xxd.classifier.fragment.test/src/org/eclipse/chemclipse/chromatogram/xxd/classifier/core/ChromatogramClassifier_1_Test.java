@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.classifier.core;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.result.IChromatogramClassifierResult;
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.settings.IChromatogramClassifierSettings;
-import org.eclipse.chemclipse.model.exceptions.ChromatogramIsNullException;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.ChromatogramSelectionMSD;
@@ -24,7 +24,7 @@ import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ChromatogramClassifier_1_Test {
 
@@ -47,11 +47,9 @@ public class ChromatogramClassifier_1_Test {
 	public void testConstructor_2() {
 
 		chromatogram = new ChromatogramMSD();
-		try {
+		assertDoesNotThrow(() -> {
 			chromatogramSelection = new ChromatogramSelectionMSD(chromatogram);
-		} catch(ChromatogramIsNullException e) {
-			assertTrue("ChromatogramIsNullException", false);
-		}
+		});
 		chromatogramClassifierSettings = null;
 		classifier = new TestChromatogramClassifier(DataType.MSD);
 		IProcessingInfo<IChromatogramClassifierResult> processingInfo = classifier.applyClassifier(chromatogramSelection, chromatogramClassifierSettings, new NullProgressMonitor());

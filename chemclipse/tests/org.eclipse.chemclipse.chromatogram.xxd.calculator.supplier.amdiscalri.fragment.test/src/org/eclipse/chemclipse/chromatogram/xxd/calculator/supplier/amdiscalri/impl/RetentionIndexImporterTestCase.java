@@ -22,10 +22,9 @@ import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.INoiseCalculator;
 import org.eclipse.chemclipse.model.implementation.Chromatogram;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 
-@Ignore
-
+@Disabled
 public class RetentionIndexImporterTestCase {
 
 	public static final String CHROMATOGRAM_1 = "data/retentionindex/importer/01/chromatogram1.cdf";

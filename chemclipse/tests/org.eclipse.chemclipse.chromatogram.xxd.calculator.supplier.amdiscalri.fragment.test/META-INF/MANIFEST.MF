@@ -5,6 +5,6 @@ Bundle-SymbolicName: org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier
 Bundle-Version: 0.9.0.qualifier
 Bundle-Vendor: ChemClipse
 Fragment-Host: org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri;bundle-version="0.9.0"
-Require-Bundle: org.junit;bundle-version="4.13.2"
+Import-Package: org.junit.jupiter.api;version="5.13.4"
 Automatic-Module-Name: org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.fragment.test
 Bundle-RequiredExecutionEnvironment: JavaSE-21

@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.peak.support;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +26,12 @@ import org.eclipse.chemclipse.chromatogram.peak.detector.support.IDetectorSlopes
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class DetectorSlopes_1_Test {
 
 	private IDetectorSlope slope;
@@ -38,7 +41,7 @@ public class DetectorSlopes_1_Test {
 	private List<Float> abundances;
 	private ITotalScanSignals signals;
 
-	@Before
+	@BeforeAll
 	public void setUp() throws Exception {
 
 		abundances = new ArrayList<Float>();
@@ -86,36 +89,36 @@ public class DetectorSlopes_1_Test {
 	@Test
 	public void testSize_1() {
 
-		assertEquals("Size", 26, slopes.size());
+		assertEquals(26, slopes.size());
 	}
 
 	@Test
 	public void testGetFirstDerivativeSlope_1() {
 
 		slope = slopes.getDetectorSlope(1);
-		assertEquals("scan 1 slope", 0.1549296875, slope.getSlope(), 0);
-		assertEquals("scan 1 retention time", 1000, slope.getRetentionTime());
+		assertEquals(0.1549296875, slope.getSlope(), 0);
+		assertEquals(1000, slope.getRetentionTime());
 	}
 
 	@Test
 	public void testGetFirstDerivativeSlope_2() {
 
 		slope = slopes.getDetectorSlope(26);
-		assertEquals("scan 26 slope", -0.459859375, slope.getSlope(), 0);
-		assertEquals("scan 26 retention time", 26000, slope.getRetentionTime());
+		assertEquals(-0.459859375, slope.getSlope(), 0);
+		assertEquals(26000, slope.getRetentionTime());
 	}
 
 	@Test
 	public void testGetFirstDerivativeSlope_3() {
 
 		slope = slopes.getDetectorSlope(0);
-		assertNull("Slope must be null.", slope);
+		assertNull(slope);
 	}
 
 	@Test
 	public void testGetFirstDerivativeSlope_4() {
 
 		slope = slopes.getDetectorSlope(27);
-		assertNull("Slope must be null.", slope);
+		assertNull(slope);
 	}
 }

@@ -12,26 +12,29 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.peak.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.DetectorSlope;
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.IDetectorSlope;
 import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * ISlope has already been tested in org.eclipse.chemclipse.numeric. Only the
  * IFirstDerivativeSlope additions needs to be tested.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class DetectorSlope_1_Test {
 
 	private IDetectorSlope slope;
 	private IPoint p1, p2;
 	private int retentionTime;
 
-	@Before
+	@BeforeAll
 	public void setUp() throws Exception {
 
 		p1 = new Point(5.0d, 10.0d);
@@ -43,12 +46,12 @@ public class DetectorSlope_1_Test {
 	@Test
 	public void testGetSlope_1() {
 
-		assertEquals("Slope", -3.5d, slope.getSlope(), 0);
+		assertEquals(-3.5d, slope.getSlope(), 0);
 	}
 
 	@Test
 	public void testGetRetentionTime_1() {
 
-		assertEquals("RetentionTime", 57000, slope.getRetentionTime());
+		assertEquals(57000, slope.getRetentionTime());
 	}
 }

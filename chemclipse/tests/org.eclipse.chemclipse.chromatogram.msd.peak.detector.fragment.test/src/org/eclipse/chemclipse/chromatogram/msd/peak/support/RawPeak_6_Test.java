@@ -12,18 +12,21 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.peak.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.IRawPeak;
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.RawPeak;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Tests the raw peak.
  * 
  * @author Philip Wenig
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class RawPeak_6_Test {
 
 	IRawPeak rawPeak;
@@ -31,7 +34,7 @@ public class RawPeak_6_Test {
 	int maximumScan;
 	int stopScan;
 
-	@Before
+	@BeforeAll
 	public void setUp() throws Exception {
 
 		startScan = 16;
@@ -43,18 +46,18 @@ public class RawPeak_6_Test {
 	@Test
 	public void testGetStartScan_1() {
 
-		assertEquals("StartScan", 0, rawPeak.getStartScan());
+		assertEquals(0, rawPeak.getStartScan());
 	}
 
 	@Test
 	public void testGetMaximumScan_1() {
 
-		assertEquals("MaximumScan", 0, rawPeak.getMaximumScan());
+		assertEquals(0, rawPeak.getMaximumScan());
 	}
 
 	@Test
 	public void testGetStopScan_1() {
 
-		assertEquals("StopScan", 0, rawPeak.getStopScan());
+		assertEquals(0, rawPeak.getStopScan());
 	}
 }
