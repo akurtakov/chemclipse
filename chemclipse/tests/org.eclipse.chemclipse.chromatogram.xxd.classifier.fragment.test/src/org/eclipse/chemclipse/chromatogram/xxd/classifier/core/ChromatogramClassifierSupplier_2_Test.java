@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.classifier.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ChromatogramClassifierSupplier_2_Test {
 
@@ -23,18 +23,18 @@ public class ChromatogramClassifierSupplier_2_Test {
 	@Test
 	public void testGetId_1() {
 
-		assertEquals("Id", "", supplier.getId());
+		assertEquals("", supplier.getId());
 	}
 
 	@Test
 	public void testGetDescription_1() {
 
-		assertEquals("Description", "", supplier.getDescription());
+		assertEquals("", supplier.getDescription());
 	}
 
 	@Test
 	public void testGetClassifierName_1() {
 
-		assertEquals("Classifier Name", "", supplier.getClassifierName());
+		assertEquals("", supplier.getClassifierName());
 	}
 }

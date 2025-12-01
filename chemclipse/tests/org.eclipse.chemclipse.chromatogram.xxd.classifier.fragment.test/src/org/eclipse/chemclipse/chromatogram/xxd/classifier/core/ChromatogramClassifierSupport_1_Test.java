@@ -12,22 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.classifier.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
-import org.eclipse.chemclipse.chromatogram.xxd.classifier.exceptions.NoChromatogramClassifierSupplierAvailableException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramClassifierSupport_1_Test {
 
 	private ChromatogramClassifierSupport support;
 	private ChromatogramClassifierSupplier supplier;
 
-	@Before
+	@BeforeAll
 	public void setUp() throws Exception {
 
 		support = new ChromatogramClassifierSupport();
@@ -41,47 +43,38 @@ public class ChromatogramClassifierSupport_1_Test {
 	@Test
 	public void testGetAvailableClassifierIds_1() {
 
-		try {
+		assertDoesNotThrow(() -> {
 			List<String> ids = support.getAvailableClassifierIds();
-			assertEquals("getId", "net.first.supplier", ids.get(0));
-		} catch(NoChromatogramClassifierSupplierAvailableException e) {
-			assertTrue("NoChromatogramClassifierSupplierAvailableException", false);
-		}
+			assertEquals("net.first.supplier", ids.get(0));
+		});
 	}
 
 	@Test
 	public void testGetIntegratorId_1() {
 
-		try {
+		assertDoesNotThrow(() -> {
 			String name = support.getClassifierId(0);
-			assertEquals("Name", "net.first.supplier", name);
-		} catch(NoChromatogramClassifierSupplierAvailableException e) {
-			assertTrue("NoChromatogramClassifierSupplierAvailableException", false);
-		}
+			assertEquals("net.first.supplier", name);
+		});
 	}
 
 	@Test
 	public void testGetIntegratorSupplier_1() {
 
-		IChromatogramClassifierSupplier supplier;
-		try {
-			supplier = support.getClassifierSupplier("net.first.supplier");
+		assertDoesNotThrow(() -> {
+			IChromatogramClassifierSupplier supplier = support.getClassifierSupplier("net.first.supplier");
 			assertNotNull(supplier);
-			assertEquals("Name", "Test Classifier Name", supplier.getClassifierName());
-		} catch(NoChromatogramClassifierSupplierAvailableException e) {
-			assertTrue("NoChromatogramClassifierSupplierAvailableException", false);
-		}
+			assertEquals("Test Classifier Name", supplier.getClassifierName());
+		});
 	}
 
 	@Test
 	public void testGetIntegratorNames_1() {
 
-		try {
+		assertDoesNotThrow(() -> {
 			String[] names = support.getClassifierNames();
-			assertEquals("length", 1, names.length);
-			assertEquals("name", "Test Classifier Name", names[0]);
-		} catch(NoChromatogramClassifierSupplierAvailableException e) {
-			assertTrue("NoChromatogramClassifierSupplierAvailableException", false);
-		}
+			assertEquals(1, names.length);
+			assertEquals("Test Classifier Name", names[0]);
+		});
 	}
 }

@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.peak.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +25,8 @@ import org.eclipse.chemclipse.chromatogram.peak.detector.support.IDetectorSlopes
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Testing calculateMovingAverage
@@ -42,7 +42,7 @@ public class DetectorSlopes_2_Test {
 	private List<Float> abundances;
 	private ITotalScanSignals signals;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		abundances = new ArrayList<Float>();
@@ -90,7 +90,7 @@ public class DetectorSlopes_2_Test {
 	@Test
 	public void testSize_1() {
 
-		assertEquals("Size", 26, slopes.size());
+		assertEquals(26, slopes.size());
 	}
 
 	// -----------------------------------------------WindowSize.SCANS_3
@@ -99,8 +99,8 @@ public class DetectorSlopes_2_Test {
 
 		slopes.calculateMovingAverage(3);
 		slope = slopes.getDetectorSlope(1);
-		assertEquals("scan 1 slope", 0.1549296875, slope.getSlope(), 0);
-		assertEquals("scan 1 retention time", 1000, slope.getRetentionTime());
+		assertEquals(0.1549296875, slope.getSlope(), 0);
+		assertEquals(1000, slope.getRetentionTime());
 	}
 
 	@Test
@@ -108,8 +108,8 @@ public class DetectorSlopes_2_Test {
 
 		slopes.calculateMovingAverage(3);
 		slope = slopes.getDetectorSlope(2);
-		assertEquals("scan 2 slope", 0.020187499999999997, slope.getSlope(), 0);
-		assertEquals("scan 2 retention time", 2000, slope.getRetentionTime());
+		assertEquals(0.020187499999999997, slope.getSlope(), 0);
+		assertEquals(2000, slope.getRetentionTime());
 	}
 
 	@Test
@@ -117,8 +117,8 @@ public class DetectorSlopes_2_Test {
 
 		slopes.calculateMovingAverage(3);
 		slope = slopes.getDetectorSlope(25);
-		assertEquals("scan 25 slope", -1.5866998856461185, slope.getSlope(), 0);
-		assertEquals("scan 25 retention time", 25000, slope.getRetentionTime());
+		assertEquals(-1.5866998856461185, slope.getSlope(), 0);
+		assertEquals(25000, slope.getRetentionTime());
 	}
 
 	@Test
@@ -126,8 +126,8 @@ public class DetectorSlopes_2_Test {
 
 		slopes.calculateMovingAverage(3);
 		slope = slopes.getDetectorSlope(26);
-		assertEquals("scan 26 slope", -0.459859375, slope.getSlope(), 0);
-		assertEquals("scan 26 retention time", 26000, slope.getRetentionTime());
+		assertEquals(-0.459859375, slope.getSlope(), 0);
+		assertEquals(26000, slope.getRetentionTime());
 	}
 
 	// -----------------------------------------------WindowSize.SCANS_3
@@ -137,8 +137,8 @@ public class DetectorSlopes_2_Test {
 
 		slopes.calculateMovingAverage(5);
 		slope = slopes.getDetectorSlope(2);
-		assertEquals("scan 2 slope", 0.064083984375, slope.getSlope(), 0);
-		assertEquals("scan 2 retention time", 2000, slope.getRetentionTime());
+		assertEquals(0.064083984375, slope.getSlope(), 0);
+		assertEquals(2000, slope.getRetentionTime());
 	}
 
 	@Test
@@ -146,8 +146,8 @@ public class DetectorSlopes_2_Test {
 
 		slopes.calculateMovingAverage(5);
 		slope = slopes.getDetectorSlope(3);
-		assertEquals("scan 3 slope", -0.04295781249999999, slope.getSlope(), 0);
-		assertEquals("scan 3 retention time", 3000, slope.getRetentionTime());
+		assertEquals(-0.04295781249999999, slope.getSlope(), 0);
+		assertEquals(3000, slope.getRetentionTime());
 	}
 
 	@Test
@@ -155,8 +155,8 @@ public class DetectorSlopes_2_Test {
 
 		slopes.calculateMovingAverage(5);
 		slope = slopes.getDetectorSlope(24);
-		assertEquals("scan 24 slope", -1.9802620761875385, slope.getSlope(), 0);
-		assertEquals("scan 24 retention time", 24000, slope.getRetentionTime());
+		assertEquals(-1.9802620761875385, slope.getSlope(), 0);
+		assertEquals(24000, slope.getRetentionTime());
 	}
 
 	@Test
@@ -164,8 +164,8 @@ public class DetectorSlopes_2_Test {
 
 		slopes.calculateMovingAverage(5);
 		slope = slopes.getDetectorSlope(25);
-		assertEquals("scan 25 slope", -2.4647890625, slope.getSlope(), 0);
-		assertEquals("scan 25 retention time", 25000, slope.getRetentionTime());
+		assertEquals(-2.4647890625, slope.getSlope(), 0);
+		assertEquals(25000, slope.getRetentionTime());
 	}
 
 	// -----------------------------------------------WindowSize.SCANS_5
@@ -175,8 +175,8 @@ public class DetectorSlopes_2_Test {
 
 		slopes.calculateMovingAverage(7);
 		slope = slopes.getDetectorSlope(3);
-		assertEquals("scan 3 slope", -0.158451171875, slope.getSlope(), 0);
-		assertEquals("scan 3 retention time", 3000, slope.getRetentionTime());
+		assertEquals(-0.158451171875, slope.getSlope(), 0);
+		assertEquals(3000, slope.getRetentionTime());
 	}
 
 	@Test
@@ -184,8 +184,8 @@ public class DetectorSlopes_2_Test {
 
 		slopes.calculateMovingAverage(7);
 		slope = slopes.getDetectorSlope(4);
-		assertEquals("scan 4 slope", 0.8220320870535714, slope.getSlope(), 0);
-		assertEquals("scan 4 retention time", 4000, slope.getRetentionTime());
+		assertEquals(0.8220320870535714, slope.getSlope(), 0);
+		assertEquals(4000, slope.getRetentionTime());
 	}
 
 	@Test
@@ -193,8 +193,8 @@ public class DetectorSlopes_2_Test {
 
 		slopes.calculateMovingAverage(7);
 		slope = slopes.getDetectorSlope(23);
-		assertEquals("scan 23 slope", -2.879118316072511, slope.getSlope(), 0);
-		assertEquals("scan 23 retention time", 23000, slope.getRetentionTime());
+		assertEquals(-2.879118316072511, slope.getSlope(), 0);
+		assertEquals(23000, slope.getRetentionTime());
 	}
 
 	@Test
@@ -202,8 +202,8 @@ public class DetectorSlopes_2_Test {
 
 		slopes.calculateMovingAverage(7);
 		slope = slopes.getDetectorSlope(24);
-		assertEquals("scan 24 slope", -1.058451171875, slope.getSlope(), 0);
-		assertEquals("scan 24 retention time", 24000, slope.getRetentionTime());
+		assertEquals(-1.058451171875, slope.getSlope(), 0);
+		assertEquals(24000, slope.getRetentionTime());
 	}
 	// -----------------------------------------------WindowSize.SCANS_7
 }

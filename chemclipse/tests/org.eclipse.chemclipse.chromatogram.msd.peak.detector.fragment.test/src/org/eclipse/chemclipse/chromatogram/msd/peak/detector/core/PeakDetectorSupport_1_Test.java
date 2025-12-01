@@ -12,22 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.peak.detector.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.peak.detector.core.IPeakDetectorSupplier;
-import org.eclipse.chemclipse.chromatogram.peak.detector.exceptions.NoPeakDetectorAvailableException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakDetectorSupport_1_Test {
 
 	private PeakDetectorMSDSupport support = new PeakDetectorMSDSupport();
 
-	@Before
+	@BeforeAll
 	public void setUp() throws Exception {
 
 		PeakDetectorMSDSupplier supplier = new PeakDetectorMSDSupplier("net.first.supplier", "Integrator Description", "Peak Detector Name");
@@ -37,48 +39,38 @@ public class PeakDetectorSupport_1_Test {
 	@Test
 	public void testGetAvailableIntegratorIds_1() {
 
-		List<String> ids;
-		try {
-			ids = support.getAvailablePeakDetectorIds();
-			assertEquals("getId", "net.first.supplier", ids.get(0));
-		} catch(NoPeakDetectorAvailableException e) {
-			assertTrue("NoPeakDetectorAvailableException", false);
-		}
+		assertDoesNotThrow(() -> {
+			List<String> ids = support.getAvailablePeakDetectorIds();
+			assertEquals("net.first.supplier", ids.get(0));
+		});
 	}
 
 	@Test
 	public void testGetIntegratorId_1() {
 
-		try {
+		assertDoesNotThrow(() -> {
 			String name = support.getPeakDetectorId(0);
-			assertEquals("Name", "net.first.supplier", name);
-		} catch(NoPeakDetectorAvailableException e) {
-			assertTrue("NoPeakDetectorAvailableException", false);
-		}
+			assertEquals("net.first.supplier", name);
+		});
 	}
 
 	@Test
 	public void testGetIntegratorSupplier_1() {
 
-		IPeakDetectorSupplier supplier;
-		try {
-			supplier = support.getPeakDetectorSupplier("net.first.supplier");
+		assertDoesNotThrow(() -> {
+			IPeakDetectorSupplier supplier = support.getPeakDetectorSupplier("net.first.supplier");
 			assertNotNull(supplier);
-			assertEquals("Name", "Peak Detector Name", supplier.getPeakDetectorName());
-		} catch(NoPeakDetectorAvailableException e) {
-			assertTrue("NoPeakDetectorAvailableException", false);
-		}
+			assertEquals("Peak Detector Name", supplier.getPeakDetectorName());
+		});
 	}
 
 	@Test
 	public void testGetIntegratorNames_1() {
 
-		try {
+		assertDoesNotThrow(() -> {
 			String[] names = support.getPeakDetectorNames();
-			assertEquals("length", 1, names.length);
-			assertEquals("name", "Peak Detector Name", names[0]);
-		} catch(NoPeakDetectorAvailableException e) {
-			assertTrue("NoPeakDetectorAvailableException", false);
-		}
+			assertEquals(1, names.length);
+			assertEquals("Peak Detector Name", names[0]);
+		});
 	}
 }

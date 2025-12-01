@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.calculator;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.core.DensityOperation;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DensityCalculator_1_Test {
 

@@ -12,16 +12,19 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.core.chromatogram;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramFilterSupplier_1_Test {
 
 	private ChromatogramFilterSupplierMSD supplier;
 
-	@Before
+	@BeforeAll
 	public void setUp() throws Exception {
 
 		supplier = new ChromatogramFilterSupplierMSD();
@@ -33,18 +36,18 @@ public class ChromatogramFilterSupplier_1_Test {
 	@Test
 	public void testGetId_1() {
 
-		assertEquals("Id", "org.eclipse.chemclipse.test", supplier.getId());
+		assertEquals("org.eclipse.chemclipse.test", supplier.getId());
 	}
 
 	@Test
 	public void testGetDescription_1() {
 
-		assertEquals("Description", "This is a description.", supplier.getDescription());
+		assertEquals("This is a description.", supplier.getDescription());
 	}
 
 	@Test
 	public void testGetFilterName_1() {
 
-		assertEquals("Filter Name", "Filter Name", supplier.getFilterName());
+		assertEquals("Filter Name", supplier.getFilterName());
 	}
 }

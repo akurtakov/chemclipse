@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.impl;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,17 +22,20 @@ import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.mo
 import org.eclipse.chemclipse.model.columns.IRetentionIndexEntry;
 import org.eclipse.chemclipse.model.columns.RetentionIndexEntry;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class RetentionIndexExtrapolator_1_Test {
 
 	private RetentionIndexExtrapolator extrapolator = new RetentionIndexExtrapolator();
 	private RetentionIndexMarker retentionIndexMarker = new RetentionIndexMarker();
 	private List<IRetentionIndexEntry> retentionIndexEntries = new ArrayList<>();
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		/*
 		 * 7.333 1000.0 100 999 C10 (Decane)

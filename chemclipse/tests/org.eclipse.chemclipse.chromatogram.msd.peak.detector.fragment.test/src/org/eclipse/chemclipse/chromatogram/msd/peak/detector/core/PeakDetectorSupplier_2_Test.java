@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.peak.detector.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class PeakDetectorSupplier_2_Test {
 
@@ -23,18 +23,18 @@ public class PeakDetectorSupplier_2_Test {
 	@Test
 	public void testGetId_1() {
 
-		assertEquals("Id", "", supplier.getId());
+		assertEquals("", supplier.getId());
 	}
 
 	@Test
 	public void testGetDescription_1() {
 
-		assertEquals("Description", "", supplier.getDescription());
+		assertEquals("", supplier.getDescription());
 	}
 
 	@Test
 	public void testGetFilterName_1() {
 
-		assertEquals("Name", "", supplier.getPeakDetectorName());
+		assertEquals("", supplier.getPeakDetectorName());
 	}
 }

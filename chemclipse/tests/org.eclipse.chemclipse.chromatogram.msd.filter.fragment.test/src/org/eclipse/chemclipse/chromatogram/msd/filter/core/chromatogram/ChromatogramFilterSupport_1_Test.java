@@ -12,22 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.core.chromatogram;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
-import org.eclipse.chemclipse.chromatogram.filter.exceptions.NoChromatogramFilterSupplierAvailableException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramFilterSupport_1_Test {
 
 	private ChromatogramFilterSupportMSD support;
 	private ChromatogramFilterSupplierMSD supplier;
 
-	@Before
+	@BeforeAll
 	public void setUp() throws Exception {
 
 		support = new ChromatogramFilterSupportMSD();
@@ -41,47 +43,38 @@ public class ChromatogramFilterSupport_1_Test {
 	@Test
 	public void testGetAvailableFilterIds_1() {
 
-		try {
+		assertDoesNotThrow(() -> {
 			List<String> ids = support.getAvailableFilterIds();
-			assertEquals("getId", "net.first.supplier", ids.get(0));
-		} catch(NoChromatogramFilterSupplierAvailableException e) {
-			assertTrue("NoChromatogramFilterSupplierAvailableException", false);
-		}
+			assertEquals("net.first.supplier", ids.get(0));
+		});
 	}
 
 	@Test
 	public void testGetIntegratorId_1() {
 
-		try {
+		assertDoesNotThrow(() -> {
 			String name = support.getFilterId(0);
-			assertEquals("Name", "net.first.supplier", name);
-		} catch(NoChromatogramFilterSupplierAvailableException e) {
-			assertTrue("NoChromatogramFilterSupplierAvailableException", false);
-		}
+			assertEquals("net.first.supplier", name);
+		});
 	}
 
 	@Test
 	public void testGetIntegratorSupplier_1() {
 
-		IChromatogramFilterSupplierMSD supplier;
-		try {
-			supplier = support.getFilterSupplier("net.first.supplier");
+		assertDoesNotThrow(() -> {
+			IChromatogramFilterSupplierMSD supplier = support.getFilterSupplier("net.first.supplier");
 			assertNotNull(supplier);
-			assertEquals("Name", "Test Filter Name", supplier.getFilterName());
-		} catch(NoChromatogramFilterSupplierAvailableException e) {
-			assertTrue("NoChromatogramFilterSupplierAvailableException", false);
-		}
+			assertEquals("Test Filter Name", supplier.getFilterName());
+		});
 	}
 
 	@Test
 	public void testGetIntegratorNames_1() {
 
-		try {
+		assertDoesNotThrow(() -> {
 			String[] names = support.getFilterNames();
-			assertEquals("length", 1, names.length);
-			assertEquals("name", "Test Filter Name", names[0]);
-		} catch(NoChromatogramFilterSupplierAvailableException e) {
-			assertTrue("NoChromatogramFilterSupplierAvailableException", false);
-		}
+			assertEquals(1, names.length);
+			assertEquals("Test Filter Name", names[0]);
+		});
 	}
 }
