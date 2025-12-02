@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.numeric.core.Point;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SegmentAreaCalculator_1_Test {
 
@@ -30,7 +30,7 @@ public class SegmentAreaCalculator_1_Test {
 		Point chromatogramBaselinePoint1 = new Point(1, 0);
 		Point chromatogramBaselinePoint2 = new Point(4, 0);
 		Segment segment = new Segment(chromatogramBaselinePoint1, chromatogramBaselinePoint2, peakBaselinePoint1, peakBaselinePoint2);
-		assertEquals("Area", 7.5d, SegmentAreaCalculator.calculateSegmentArea(segment), 0);
+		assertEquals(7.5d, SegmentAreaCalculator.calculateSegmentArea(segment), 0);
 	}
 
 	@Test
@@ -44,7 +44,7 @@ public class SegmentAreaCalculator_1_Test {
 		Point chromatogramBaselinePoint1 = new Point(1, 1);
 		Point chromatogramBaselinePoint2 = new Point(4, 0);
 		Segment segment = new Segment(chromatogramBaselinePoint1, chromatogramBaselinePoint2, peakBaselinePoint1, peakBaselinePoint2);
-		assertEquals("Area", 6.0d, SegmentAreaCalculator.calculateSegmentArea(segment), 0);
+		assertEquals(6.0d, SegmentAreaCalculator.calculateSegmentArea(segment), 0);
 	}
 
 	@Test
@@ -59,7 +59,7 @@ public class SegmentAreaCalculator_1_Test {
 		Point chromatogramBaselinePoint1 = new Point(1, 4);
 		Point chromatogramBaselinePoint2 = new Point(4, 4);
 		Segment segment = new Segment(chromatogramBaselinePoint1, chromatogramBaselinePoint2, peakBaselinePoint1, peakBaselinePoint2);
-		assertEquals("Area", -4.5d, SegmentAreaCalculator.calculateSegmentArea(segment), 0);
+		assertEquals(-4.5d, SegmentAreaCalculator.calculateSegmentArea(segment), 0);
 	}
 
 	@Test
@@ -74,7 +74,7 @@ public class SegmentAreaCalculator_1_Test {
 		Point chromatogramBaselinePoint1 = new Point(1, 5);
 		Point chromatogramBaselinePoint2 = new Point(4, 4);
 		Segment segment = new Segment(chromatogramBaselinePoint1, chromatogramBaselinePoint2, peakBaselinePoint1, peakBaselinePoint2);
-		assertEquals("Area", -6.0d, SegmentAreaCalculator.calculateSegmentArea(segment), 0);
+		assertEquals(-6.0d, SegmentAreaCalculator.calculateSegmentArea(segment), 0);
 	}
 
 	@Test
@@ -89,7 +89,7 @@ public class SegmentAreaCalculator_1_Test {
 		Point chromatogramBaselinePoint1 = new Point(1, 3);
 		Point chromatogramBaselinePoint2 = new Point(5, 3);
 		Segment segment = new Segment(chromatogramBaselinePoint1, chromatogramBaselinePoint2, peakBaselinePoint1, peakBaselinePoint2);
-		assertEquals("Area", 0.0d, SegmentAreaCalculator.calculateSegmentArea(segment), 0);
+		assertEquals(0.0d, SegmentAreaCalculator.calculateSegmentArea(segment), 0);
 	}
 
 	@Test
@@ -104,7 +104,7 @@ public class SegmentAreaCalculator_1_Test {
 		Point chromatogramBaselinePoint1 = new Point(1, 1);
 		Point chromatogramBaselinePoint2 = new Point(5, 5);
 		Segment segment = new Segment(chromatogramBaselinePoint1, chromatogramBaselinePoint2, peakBaselinePoint1, peakBaselinePoint2);
-		assertEquals("Area", 0.0d, SegmentAreaCalculator.calculateSegmentArea(segment), 0);
+		assertEquals(0.0d, SegmentAreaCalculator.calculateSegmentArea(segment), 0);
 	}
 
 	@Test
@@ -119,7 +119,7 @@ public class SegmentAreaCalculator_1_Test {
 		Point chromatogramBaselinePoint1 = new Point(1, 1);
 		Point chromatogramBaselinePoint2 = new Point(5, 5);
 		Segment segment = new Segment(chromatogramBaselinePoint1, chromatogramBaselinePoint2, peakBaselinePoint1, peakBaselinePoint2);
-		assertEquals("Area", 0.0d, SegmentAreaCalculator.calculateSegmentArea(segment), 0);
+		assertEquals(0.0d, SegmentAreaCalculator.calculateSegmentArea(segment), 0);
 	}
 
 	@Test
@@ -134,7 +134,7 @@ public class SegmentAreaCalculator_1_Test {
 		Point chromatogramBaselinePoint1 = new Point(1, 1);
 		Point chromatogramBaselinePoint2 = new Point(6, 6);
 		Segment segment = new Segment(chromatogramBaselinePoint1, chromatogramBaselinePoint2, peakBaselinePoint1, peakBaselinePoint2);
-		assertEquals("Area", -5.0d, SegmentAreaCalculator.calculateSegmentArea(segment), 0);
+		assertEquals(-5.0d, SegmentAreaCalculator.calculateSegmentArea(segment), 0);
 	}
 
 	@Test
@@ -149,6 +149,6 @@ public class SegmentAreaCalculator_1_Test {
 		Point chromatogramBaselinePoint1 = new Point(0, 0);
 		Point chromatogramBaselinePoint2 = new Point(5, 5);
 		Segment segment = new Segment(chromatogramBaselinePoint1, chromatogramBaselinePoint2, peakBaselinePoint1, peakBaselinePoint2);
-		assertEquals("Area", 5.0d, SegmentAreaCalculator.calculateSegmentArea(segment), 0);
+		assertEquals(5.0d, SegmentAreaCalculator.calculateSegmentArea(segment), 0);
 	}
 }

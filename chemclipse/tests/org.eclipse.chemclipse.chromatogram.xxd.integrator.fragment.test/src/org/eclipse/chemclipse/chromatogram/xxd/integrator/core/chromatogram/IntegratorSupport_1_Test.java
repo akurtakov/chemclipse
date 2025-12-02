@@ -12,23 +12,25 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.core.chromatogram;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
-import org.eclipse.chemclipse.chromatogram.xxd.integrator.exceptions.NoIntegratorAvailableException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class IntegratorSupport_1_Test {
 
 	private ChromatogramIntegratorSupport support;
 	private ChromatogramIntegratorSupplier supplier;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		support = new ChromatogramIntegratorSupport();
 		supplier = new ChromatogramIntegratorSupplier();
@@ -41,48 +43,38 @@ public class IntegratorSupport_1_Test {
 	@Test
 	public void testGetAvailableIntegratorIds_1() {
 
-		List<String> ids;
-		try {
-			ids = support.getAvailableIntegratorIds();
-			assertEquals("getId", "net.first.supplier", ids.get(0));
-		} catch(NoIntegratorAvailableException e) {
-			assertTrue("NoIntegratorAvailableException", false);
-		}
+		assertDoesNotThrow(() -> {
+			List<String> ids = support.getAvailableIntegratorIds();
+			assertEquals("net.first.supplier", ids.get(0));
+		});
 	}
 
 	@Test
 	public void testGetIntegratorId_1() {
 
-		try {
+		assertDoesNotThrow(() -> {
 			String name = support.getIntegratorId(0);
-			assertEquals("Name", "net.first.supplier", name);
-		} catch(NoIntegratorAvailableException e) {
-			assertTrue("NoIntegratorAvailableException", false);
-		}
+			assertEquals("net.first.supplier", name);
+		});
 	}
 
 	@Test
 	public void testGetIntegratorSupplier_1() {
 
-		IChromatogramIntegratorSupplier supplier;
-		try {
-			supplier = support.getIntegratorSupplier("net.first.supplier");
+		assertDoesNotThrow(() -> {
+			IChromatogramIntegratorSupplier supplier = support.getIntegratorSupplier("net.first.supplier");
 			assertNotNull(supplier);
-			assertEquals("Name", "Test Integrator Name", supplier.getIntegratorName());
-		} catch(NoIntegratorAvailableException e) {
-			assertTrue("NoIntegratorAvailableException", false);
-		}
+			assertEquals("Test Integrator Name", supplier.getIntegratorName());
+		});
 	}
 
 	@Test
 	public void testGetIntegratorNames_1() {
 
-		try {
+		assertDoesNotThrow(() -> {
 			String[] names = support.getIntegratorNames();
-			assertEquals("length", 1, names.length);
-			assertEquals("name", "Test Integrator Name", names[0]);
-		} catch(NoIntegratorAvailableException e) {
-			assertTrue("NoIntegratorAvailableException", false);
-		}
+			assertEquals(1, names.length);
+			assertEquals("Test Integrator Name", names[0]);
+		});
 	}
 }

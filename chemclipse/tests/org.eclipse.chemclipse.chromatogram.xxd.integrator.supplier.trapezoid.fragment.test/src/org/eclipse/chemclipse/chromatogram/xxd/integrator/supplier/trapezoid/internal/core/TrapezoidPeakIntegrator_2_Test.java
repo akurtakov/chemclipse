@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.internal.core;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,16 +21,19 @@ import org.eclipse.chemclipse.chromatogram.xxd.integrator.exceptions.ValueMustNo
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.processor.PeakIntegrator;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class TrapezoidPeakIntegrator_2_Test extends DefaultPeakTestCase {
 
 	private PeakIntegrator integrator;
 
 	@Override
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		super.setUp();
 		integrator = new PeakIntegrator();
@@ -39,11 +42,9 @@ public class TrapezoidPeakIntegrator_2_Test extends DefaultPeakTestCase {
 	@Test
 	public void testIntegrate_1() {
 
-		try {
+		assertThrows(ValueMustNotBeNullException.class, () -> {
 			integrator.integrate(super.getPeak(), null);
-		} catch(ValueMustNotBeNullException e) {
-			assertTrue("ValueMustNotBeNullException", true);
-		}
+		});
 	}
 
 	@Test
@@ -51,10 +52,8 @@ public class TrapezoidPeakIntegrator_2_Test extends DefaultPeakTestCase {
 
 		List<IPeakMSD> peaks = new ArrayList<>();
 		peaks.add(super.getPeak());
-		try {
+		assertThrows(ValueMustNotBeNullException.class, () -> {
 			integrator.integrate(peaks, null, new NullProgressMonitor());
-		} catch(ValueMustNotBeNullException e) {
-			assertTrue("ValueMustNotBeNullException", true);
-		}
+		});
 	}
 }

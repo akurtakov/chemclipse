@@ -12,19 +12,22 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.internal.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.processor.ChromatogramIntegrator;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class TrapezoidChromatogramIntegrator_1_Test extends SimpleChromatogramTestCase {
 
 	private ChromatogramIntegrator integrator;
 
 	@Override
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		super.setUp();
 		integrator = new ChromatogramIntegrator();
@@ -34,6 +37,6 @@ public class TrapezoidChromatogramIntegrator_1_Test extends SimpleChromatogramTe
 	public void testIntegrate_1() {
 
 		double area = integrator.integrate(chromatogramSelection);
-		assertEquals("", 30000.0d, area, 0);
+		assertEquals(30000.0d, area, 0);
 	}
 }

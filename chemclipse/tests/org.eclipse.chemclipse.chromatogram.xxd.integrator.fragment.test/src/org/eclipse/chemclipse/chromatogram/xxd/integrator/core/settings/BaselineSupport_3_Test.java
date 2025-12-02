@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.core.settings;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.baseline.BaselineModel;
 import org.eclipse.chemclipse.model.baseline.IBaselineModel;
@@ -20,9 +20,12 @@ import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class BaselineSupport_3_Test {
 
 	private IBaselineSupport baselineSupport;
@@ -30,7 +33,7 @@ public class BaselineSupport_3_Test {
 	private IScanMSD ms;
 	private IBaselineModel baselineModel;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		baselineSupport = new BaselineSupport();
@@ -50,35 +53,35 @@ public class BaselineSupport_3_Test {
 	@Test
 	public void testSetBaselineModel_1() {
 
-		assertEquals("BM", 0.0f, baselineModel.getBackgroundAbundance(400), 0);
-		assertEquals("BS", 0.0f, baselineSupport.getBackgroundAbundance(400), 0);
+		assertEquals(0.0f, baselineModel.getBackgroundAbundance(400), 0);
+		assertEquals(0.0f, baselineSupport.getBackgroundAbundance(400), 0);
 	}
 
 	@Test
 	public void testSetBaselineModel_2() {
 
-		assertEquals("BM", 4000.0f, baselineModel.getBackgroundAbundance(500), 0);
-		assertEquals("BS", 4000.0f, baselineSupport.getBackgroundAbundance(500), 0);
+		assertEquals(4000.0f, baselineModel.getBackgroundAbundance(500), 0);
+		assertEquals(4000.0f, baselineSupport.getBackgroundAbundance(500), 0);
 	}
 
 	@Test
 	public void testSetBaselineModel_3() {
 
-		assertEquals("BM", 4000.0f, baselineModel.getBackgroundAbundance(18500), 0);
-		assertEquals("BS", 4000.0f, baselineSupport.getBackgroundAbundance(18500), 0);
+		assertEquals(4000.0f, baselineModel.getBackgroundAbundance(18500), 0);
+		assertEquals(4000.0f, baselineSupport.getBackgroundAbundance(18500), 0);
 	}
 
 	@Test
 	public void testSetBaselineModel_4() {
 
-		assertEquals("BM", 4000.0f, baselineModel.getBackgroundAbundance(99500), 0);
-		assertEquals("BS", 4000.0f, baselineSupport.getBackgroundAbundance(99500), 0);
+		assertEquals(4000.0f, baselineModel.getBackgroundAbundance(99500), 0);
+		assertEquals(4000.0f, baselineSupport.getBackgroundAbundance(99500), 0);
 	}
 
 	@Test
 	public void testSetBaselineModel_5() {
 
-		assertEquals("BM", 0.0f, baselineModel.getBackgroundAbundance(100000), 0);
-		assertEquals("BS", 0.0f, baselineSupport.getBackgroundAbundance(100000), 0);
+		assertEquals(0.0f, baselineModel.getBackgroundAbundance(100000), 0);
+		assertEquals(0.0f, baselineSupport.getBackgroundAbundance(100000), 0);
 	}
 }

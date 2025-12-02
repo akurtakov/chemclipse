@@ -12,12 +12,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.result;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class PeakIntegrationResults_1_Test {
 
@@ -33,19 +33,19 @@ public class PeakIntegrationResults_1_Test {
 	public void testGetPeakIntegrationResultList_1() {
 
 		List<IPeakIntegrationResult> presults = results.getPeakIntegrationResultList(55);
-		assertEquals("size", 0, presults.size());
+		assertEquals(0, presults.size());
 	}
 
 	@Test
 	public void testGetPeakIntegrationResultThatContains_1() {
 
 		List<IPeakIntegrationResult> presults = results.getPeakIntegrationResultThatContains(55);
-		assertEquals("size", 0, presults.size());
+		assertEquals(0, presults.size());
 	}
 
 	@Test
 	public void testGetSize_1() {
 
-		assertEquals("size", 0, results.size());
+		assertEquals(0, results.size());
 	}
 }

@@ -12,8 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.core.settings.combined.ICombinedIntegrationSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.result.IChromatogramIntegrationResult;
@@ -26,11 +25,13 @@ import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.set
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.settings.PeakIntegrationSettings;
 import org.eclipse.chemclipse.msd.model.core.AbstractIon;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class TrapezoidIntegrator_1_ITest extends ChromatogramImportTestCase {
 
 	private CombinedIntegrator integrator;
@@ -39,8 +40,8 @@ public class TrapezoidIntegrator_1_ITest extends ChromatogramImportTestCase {
 	private PeakIntegrationSettings peakIntegrationSettings;
 
 	@Override
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		chromatogramRelativePath = TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1;
 		super.setUp();
@@ -59,15 +60,11 @@ public class TrapezoidIntegrator_1_ITest extends ChromatogramImportTestCase {
 		IChromatogramIntegrationResult integrationResult;
 
 		processingInfo = integrator.integrate(chromatogramSelection, combinedIntegrationSettings, new NullProgressMonitor());
-		try {
-			result = processingInfo.getProcessingResult();
-			results = result.getChromatogramIntegrationResults();
-			integrationResult = results.getChromatogramIntegrationResult(0);
-			assertEquals("Ion", AbstractIon.TIC_ION, integrationResult.getIon(), 0);
-			assertEquals("BackgroundArea", 0.0d, integrationResult.getBackgroundArea(), 0);
-			assertEquals("ChromatogramArea", 7.893094987865009E9, integrationResult.getChromatogramArea(), 0);
-		} catch(TypeCastException e) {
-			assertTrue("TypeCastException", false);
-		}
+		result = processingInfo.getProcessingResult();
+		results = result.getChromatogramIntegrationResults();
+		integrationResult = results.getChromatogramIntegrationResult(0);
+		assertEquals(AbstractIon.TIC_ION, integrationResult.getIon(), 0);
+		assertEquals(0.0d, integrationResult.getBackgroundArea(), 0);
+		assertEquals(7.893094987865009E9, integrationResult.getChromatogramArea(), 0);
 	}
 }

@@ -20,10 +20,10 @@ import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
 import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
-import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 
-@Ignore
+@Disabled
 public class SimpleChromatogramTestCase {
 
 	protected IChromatogramMSD chromatogram;
@@ -31,8 +31,8 @@ public class SimpleChromatogramTestCase {
 	protected IIon ion;
 	protected IChromatogramSelectionMSD chromatogramSelection;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		// ------------------------------Chromatogram
 		chromatogram = new ChromatogramMSD();

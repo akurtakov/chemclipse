@@ -27,14 +27,15 @@ import org.eclipse.chemclipse.msd.model.core.IPeakIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
+import org.eclipse.chemclipse.msd.model.exceptions.EvaluationException;
 import org.eclipse.chemclipse.msd.model.implementation.PeakIon;
 import org.eclipse.chemclipse.msd.model.implementation.PeakMSD;
 import org.eclipse.chemclipse.msd.model.implementation.PeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.implementation.PeakModelMSD;
-import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 
-@Ignore
+@Disabled
 public class ReferencePeakMSDTestCase {
 
 	private IPeakMSD referencePeakMSD_TIC_1; // 1x Concentration
@@ -58,8 +59,8 @@ public class ReferencePeakMSDTestCase {
 
 	private double baseArea = 750220.0d;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() throws EvaluationException {
 
 		referencePeakMSD_TIC_1 = createPeak(1, false);
 		referencePeakMSD_TIC_2 = createPeak(5, false);
@@ -72,7 +73,7 @@ public class ReferencePeakMSDTestCase {
 		referencePeakMSD_XIC_X = createPeak(2, true);
 	}
 
-	private IPeakMSD createPeak(int scale, boolean xic) throws Exception {
+	private IPeakMSD createPeak(int scale, boolean xic) {
 
 		// ----------------------PeakMaximum
 		peakMaximum = new PeakMassSpectrum();

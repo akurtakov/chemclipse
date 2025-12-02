@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.quantitation.supplier.chemclipse.calculator;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
@@ -23,9 +23,13 @@ import org.eclipse.chemclipse.model.quantitation.CalibrationMethod;
 import org.eclipse.chemclipse.model.quantitation.IQuantitationCompound;
 import org.eclipse.chemclipse.model.quantitation.IQuantitationEntry;
 import org.eclipse.chemclipse.model.quantitation.IQuantitationSignals;
-import org.junit.Before;
-import org.junit.Test;
+import org.eclipse.chemclipse.msd.model.exceptions.EvaluationException;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class QuantitationCalculatorMSD_XIC_4_Test extends QuantitationCalculator_XIC_TestCase {
 
 	/*
@@ -38,8 +42,8 @@ public class QuantitationCalculatorMSD_XIC_4_Test extends QuantitationCalculator
 	private IQuantitationEntry quantitationEntry2;
 
 	@Override
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() throws EvaluationException {
 
 		super.setUp();
 

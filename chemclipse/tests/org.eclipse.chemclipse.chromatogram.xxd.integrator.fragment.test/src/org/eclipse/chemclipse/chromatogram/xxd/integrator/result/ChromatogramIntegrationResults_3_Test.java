@@ -12,10 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.result;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramIntegrationResults_3_Test {
 
 	private IChromatogramIntegrationResults results = new ChromatogramIntegrationResults();
@@ -23,12 +26,12 @@ public class ChromatogramIntegrationResults_3_Test {
 	@Test
 	public void testGetBackgroundArea_1() {
 
-		assertEquals("BackgroundArea", 0.0d, results.getTotalBackgroundArea(), 0);
+		assertEquals(0.0d, results.getTotalBackgroundArea(), 0);
 	}
 
 	@Test
 	public void testGetChromatogramArea_1() {
 
-		assertEquals("ChromatogramArea", 0.0d, results.getTotalChromatogramArea(), 0);
+		assertEquals(0.0d, results.getTotalChromatogramArea(), 0);
 	}
 }
