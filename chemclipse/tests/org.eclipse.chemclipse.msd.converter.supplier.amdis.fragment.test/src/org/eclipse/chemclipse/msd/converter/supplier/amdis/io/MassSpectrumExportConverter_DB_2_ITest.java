@@ -13,7 +13,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.supplier.amdis.io;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
@@ -27,14 +27,17 @@ import org.eclipse.chemclipse.msd.model.implementation.MassSpectra;
 import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class MassSpectrumExportConverter_DB_2_ITest extends MassSpectrumExportConverterTestCase {
 
 	@Override
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		exportFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTDIR_EXPORT) + File.separator + TestPathHelper.TESTFILE_EXPORT_DB_1_MSL);
@@ -43,7 +46,7 @@ public class MassSpectrumExportConverter_DB_2_ITest extends MassSpectrumExportCo
 	}
 
 	@Override
-	@After
+	@AfterAll
 	public void tearDown() {
 
 		super.tearDown();
@@ -63,10 +66,10 @@ public class MassSpectrumExportConverter_DB_2_ITest extends MassSpectrumExportCo
 			}
 			massSpectra.addMassSpectrum(ms);
 		}
-		assertEquals("Size before", 3, massSpectra.size());
+		assertEquals(3, massSpectra.size(), "Size before");
 		exportConverter.convert(exportFile, massSpectra, false, new NullProgressMonitor());
 		IProcessingInfo<?> processingInfo = importConverter.convert(importFile, new NullProgressMonitor());
 		massSpectra = (IMassSpectra)processingInfo.getProcessingResult();
-		assertEquals("Size after", 3, massSpectra.size());
+		assertEquals(3, massSpectra.size(), "Size after");
 	}
 }

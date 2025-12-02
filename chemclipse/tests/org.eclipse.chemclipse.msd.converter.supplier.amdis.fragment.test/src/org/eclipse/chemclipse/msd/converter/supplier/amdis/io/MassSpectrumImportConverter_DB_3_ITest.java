@@ -12,22 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.supplier.amdis.io;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.model.IVendorLibraryMassSpectrum;
-import org.eclipse.chemclipse.msd.model.core.IScanMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class MassSpectrumImportConverter_DB_3_ITest extends ImportConverterMslTestCase {
 
 	@Override
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		importFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_DB_3));
 		super.setUp();
@@ -36,50 +38,42 @@ public class MassSpectrumImportConverter_DB_3_ITest extends ImportConverterMslTe
 	@Test
 	public void testImport_1() {
 
-		assertEquals("MassSpectra", 2, massSpectra.size());
+		assertEquals(2, massSpectra.size());
 	}
 
 	@Test
 	public void testImport_2() {
 
-		IScanMSD massSpectrum = massSpectra.getMassSpectrum(1);
-		IVendorLibraryMassSpectrum ms = null;
-		if(massSpectrum instanceof IVendorLibraryMassSpectrum vendorLibraryMassSpectrum) {
-			ms = vendorLibraryMassSpectrum;
-		}
+		IVendorLibraryMassSpectrum ms = (IVendorLibraryMassSpectrum)massSpectra.getMassSpectrum(1);
 		assertNotNull(ms);
-		assertEquals("Name", "1,3,5-Trimethylbenzol", ms.getLibraryInformation().getName());
-		assertEquals("CAS Number", "0", ms.getLibraryInformation().getCasNumber());
-		assertEquals("Comments", "Converted", ms.getLibraryInformation().getComments());
-		assertEquals("Retention Time", 630000, ms.getRetentionTime());
-		assertEquals("Relative Retention Time", 1212000, ms.getRelativeRetentionTime());
-		assertEquals("Retention Index", 400.7f, ms.getRetentionIndex(), 0);
-		assertEquals("Ion", 2, ms.getNumberOfIons());
-		assertEquals("Highest Ion", 101.0d, ms.getHighestIon().getIon(), 0);
-		assertEquals("Highest Ion Abundance", 608.0f, ms.getHighestIon().getAbundance(), 0);
-		assertEquals("Highest Abundance Ion", 100.0d, ms.getHighestAbundance().getIon(), 0);
-		assertEquals("Highest Abundance", 1000.0f, ms.getHighestAbundance().getAbundance(), 0);
+		assertEquals("1,3,5-Trimethylbenzol", ms.getLibraryInformation().getName());
+		assertEquals("0", ms.getLibraryInformation().getCasNumber());
+		assertEquals("Converted", ms.getLibraryInformation().getComments());
+		assertEquals(630000, ms.getRetentionTime());
+		assertEquals(1212000, ms.getRelativeRetentionTime());
+		assertEquals(400.7f, ms.getRetentionIndex(), 0);
+		assertEquals(2, ms.getNumberOfIons());
+		assertEquals(101.0d, ms.getHighestIon().getIon(), 0);
+		assertEquals(608.0f, ms.getHighestIon().getAbundance(), 0);
+		assertEquals(100.0d, ms.getHighestAbundance().getIon(), 0);
+		assertEquals(1000.0f, ms.getHighestAbundance().getAbundance(), 0);
 	}
 
 	@Test
 	public void testImport_3() {
 
-		IScanMSD massSpectrum = massSpectra.getMassSpectrum(2);
-		IVendorLibraryMassSpectrum ms = null;
-		if(massSpectrum instanceof IVendorLibraryMassSpectrum vendorLibraryMassSpectrum) {
-			ms = vendorLibraryMassSpectrum;
-		}
+		IVendorLibraryMassSpectrum ms = (IVendorLibraryMassSpectrum)massSpectra.getMassSpectrum(2);
 		assertNotNull(ms);
-		assertEquals("Name", "(+)-Longifolen", ms.getLibraryInformation().getName());
-		assertEquals("CAS Number", "0", ms.getLibraryInformation().getCasNumber());
-		assertEquals("Comments", "Converted", ms.getLibraryInformation().getComments());
-		assertEquals("Retention Time", 672000, ms.getRetentionTime());
-		assertEquals("Relative Retention Time", 1218000, ms.getRelativeRetentionTime());
-		assertEquals("Retention Index", 500.5f, ms.getRetentionIndex(), 0);
-		assertEquals("Ion", 2, ms.getNumberOfIons());
-		assertEquals("Highest Ion", 101.0d, ms.getHighestIon().getIon(), 0);
-		assertEquals("Highest Ion Abundance", 608.0f, ms.getHighestIon().getAbundance(), 0);
-		assertEquals("Highest Abundance Ion", 100.0d, ms.getHighestAbundance().getIon(), 0);
-		assertEquals("Highest Abundance", 1000.0f, ms.getHighestAbundance().getAbundance(), 0);
+		assertEquals("(+)-Longifolen", ms.getLibraryInformation().getName());
+		assertEquals("0", ms.getLibraryInformation().getCasNumber());
+		assertEquals("Converted", ms.getLibraryInformation().getComments());
+		assertEquals(672000, ms.getRetentionTime());
+		assertEquals(1218000, ms.getRelativeRetentionTime());
+		assertEquals(500.5f, ms.getRetentionIndex(), 0);
+		assertEquals(2, ms.getNumberOfIons());
+		assertEquals(101.0d, ms.getHighestIon().getIon(), 0);
+		assertEquals(608.0f, ms.getHighestIon().getAbundance(), 0);
+		assertEquals(100.0d, ms.getHighestAbundance().getIon(), 0);
+		assertEquals(1000.0f, ms.getHighestAbundance().getAbundance(), 0);
 	}
 }

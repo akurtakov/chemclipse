@@ -20,18 +20,18 @@ import org.eclipse.chemclipse.msd.converter.supplier.amdis.converter.msl.MSLData
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 
-@Ignore
+@Disabled
 public class ImportConverterMslTestCase {
 
 	protected File importFile;
 	protected IMassSpectra massSpectra;
 	protected IDatabaseImportConverter importConverter;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		importConverter = new MSLDatabaseImportConverter();
 		IProcessingInfo<?> processingInfo = importConverter.convert(importFile, new NullProgressMonitor());

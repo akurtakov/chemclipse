@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.supplier.amdis.model;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class AmdisMassSpectrum_1_Test {
 
@@ -23,20 +23,20 @@ public class AmdisMassSpectrum_1_Test {
 	@Test
 	public void testGetSource_1() {
 
-		assertEquals("Source", "", massSpectrum.getSource());
+		assertEquals("", massSpectrum.getSource());
 	}
 
 	@Test
 	public void testGetSource_2() {
 
 		massSpectrum.setSource("file something");
-		assertEquals("Source", "file something", massSpectrum.getSource());
+		assertEquals("file something", massSpectrum.getSource());
 	}
 
 	@Test
 	public void testGetSource_3() {
 
 		massSpectrum.setSource(null);
-		assertEquals("Source", "", massSpectrum.getSource());
+		assertEquals("", massSpectrum.getSource());
 	}
 }
