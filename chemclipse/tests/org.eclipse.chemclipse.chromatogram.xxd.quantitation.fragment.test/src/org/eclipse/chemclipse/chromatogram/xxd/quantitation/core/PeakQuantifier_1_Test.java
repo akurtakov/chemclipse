@@ -12,14 +12,14 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.quantitation.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.xxd.quantitation.exceptions.NoPeakQuantifierAvailableException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class PeakQuantifier_1_Test {
 
@@ -36,27 +36,23 @@ public class PeakQuantifier_1_Test {
 		String id;
 		for(int i = 0; i < rcs.size(); i++) {
 			id = support.getPeakQuantifierId(i);
-			assertEquals("getDetectorId", id, rcs.get(i));
+			assertEquals(id, rcs.get(i));
 		}
 	}
 
 	@Test
 	public void testGetMassSpectrumComparisonSupplier_1() {
 
-		try {
+		assertThrows(NoPeakQuantifierAvailableException.class, () -> {
 			support.getPeakQuantifierSupplier("");
-		} catch(NoPeakQuantifierAvailableException e) {
-			assertTrue("NoPeakQuantifierAvailableException", true);
-		}
+		});
 	}
 
 	@Test
 	public void testGetMassSpectrumComparisonSupplier_2() {
 
-		try {
+		assertThrows(NoPeakQuantifierAvailableException.class, () -> {
 			support.getPeakQuantifierSupplier(null);
-		} catch(NoPeakQuantifierAvailableException e) {
-			assertTrue("NoPeakQuantifierAvailableException", true);
-		}
+		});
 	}
 }

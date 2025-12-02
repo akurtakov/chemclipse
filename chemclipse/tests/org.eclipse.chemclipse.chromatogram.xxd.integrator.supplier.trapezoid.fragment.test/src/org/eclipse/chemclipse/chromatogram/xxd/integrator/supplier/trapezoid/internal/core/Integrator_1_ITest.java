@@ -12,13 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.internal.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.chemclipse.chromatogram.xxd.integrator.exceptions.ValueMustNotBeNullException;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.result.IPeakIntegrationResults;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.TestPathHelper;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.processor.BackgroundIntegrator;
@@ -28,9 +26,12 @@ import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.set
 import org.eclipse.chemclipse.msd.model.core.IChromatogramPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class Integrator_1_ITest extends ChromatogramImportOCBTestCase {
 
 	private ChromatogramIntegrator chromatogramIntegrator;
@@ -39,8 +40,8 @@ public class Integrator_1_ITest extends ChromatogramImportOCBTestCase {
 	private PeakIntegrationSettings peakIntegrationSettings;
 
 	@Override
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		chromatogramRelativePath = TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_2;
 		super.setUp();
@@ -54,14 +55,14 @@ public class Integrator_1_ITest extends ChromatogramImportOCBTestCase {
 	public void testChromatogramIntegrate_1() {
 
 		double area = chromatogramIntegrator.integrate(chromatogramSelection);
-		assertEquals("", 2.5891749759277344E8, area, 0);
+		assertEquals(2.5891749759277344E8, area, 0);
 	}
 
 	@Test
 	public void testBackgroundIntegrate_1() {
 
 		double area = backgroundIntegrator.integrate(chromatogramSelection);
-		assertEquals("", 2.391494172607422E8, area, 0);
+		assertEquals(2.391494172607422E8, area, 0);
 	}
 
 	@Test
@@ -73,11 +74,7 @@ public class Integrator_1_ITest extends ChromatogramImportOCBTestCase {
 			peaks.add(peak);
 		}
 		IPeakIntegrationResults results;
-		try {
-			results = peakIntegrator.integrate(peaks, peakIntegrationSettings, new NullProgressMonitor());
-			assertEquals("", 1.6943660149129305E7, results.getTotalPeakArea(), 0);
-		} catch(ValueMustNotBeNullException e) {
-			assertTrue(false);
-		}
+		results = peakIntegrator.integrate(peaks, peakIntegrationSettings, new NullProgressMonitor());
+		assertEquals(1.6943660149129305E7, results.getTotalPeakArea(), 0);
 	}
 }

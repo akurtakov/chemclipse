@@ -12,20 +12,23 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.result;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakIntegrationResult_2_Test {
 
 	private IPeakIntegrationResult result1;
 	private IPeakIntegrationResult result2;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		result1 = new PeakIntegrationResult();
 		result1.setStartRetentionTime(1500);
@@ -39,30 +42,30 @@ public class PeakIntegrationResult_2_Test {
 	@Test
 	public void testEquals_1() {
 
-		assertNotEquals("equals", result1, result2);
+		assertNotEquals(result1, result2);
 	}
 
 	@Test
 	public void testEquals_2() {
 
-		assertNotEquals("equals", result2, result1);
+		assertNotEquals(result2, result1);
 	}
 
 	@Test
 	public void testEquals_3() {
 
-		assertEquals("equals", result1, result1);
+		assertEquals(result1, result1);
 	}
 
 	@Test
 	public void testEquals_4() {
 
-		assertNotNull("equals", result1);
+		assertNotNull(result1);
 	}
 
 	@Test
 	public void testEquals_5() {
 
-		assertNotEquals("equals", result2, new Object());
+		assertNotEquals(result2, new Object());
 	}
 }

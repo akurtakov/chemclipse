@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.result;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class PeakIntegrationResult_1_Test {
 
@@ -26,30 +26,30 @@ public class PeakIntegrationResult_1_Test {
 	@Test
 	public void testEquals_1() {
 
-		assertEquals("equals", result1, result2);
+		assertEquals(result1, result2);
 	}
 
 	@Test
 	public void testEquals_2() {
 
-		assertEquals("equals", result2, result1);
+		assertEquals(result2, result1);
 	}
 
 	@Test
 	public void testEquals_3() {
 
-		assertEquals("equals", result1, result1);
+		assertEquals(result1, result1);
 	}
 
 	@Test
 	public void testEquals_4() {
 
-		assertNotNull("equals", result1);
+		assertNotNull(result1);
 	}
 
 	@Test
 	public void testEquals_5() {
 
-		assertNotEquals("equals", result2, new Object());
+		assertNotEquals(result2, new Object());
 	}
 }

@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.support;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class Segment_1_Test {
 
@@ -23,24 +23,24 @@ public class Segment_1_Test {
 	@Test
 	public void testPoint_1() {
 
-		assertNotNull("ChromatogramBaselinePoint1", segment.getChromatogramBaselinePoint1());
+		assertNotNull(segment.getChromatogramBaselinePoint1());
 	}
 
 	@Test
 	public void testPoint_2() {
 
-		assertNotNull("ChromatogramBaselinePoint2", segment.getChromatogramBaselinePoint2());
+		assertNotNull(segment.getChromatogramBaselinePoint2());
 	}
 
 	@Test
 	public void testPoint_3() {
 
-		assertNotNull("PeakBaselinePoint1", segment.getPeakBaselinePoint1());
+		assertNotNull(segment.getPeakBaselinePoint1());
 	}
 
 	@Test
 	public void testPoint_4() {
 
-		assertNotNull("PeakBaselinePoint2", segment.getPeakBaselinePoint2());
+		assertNotNull(segment.getPeakBaselinePoint2());
 	}
 }

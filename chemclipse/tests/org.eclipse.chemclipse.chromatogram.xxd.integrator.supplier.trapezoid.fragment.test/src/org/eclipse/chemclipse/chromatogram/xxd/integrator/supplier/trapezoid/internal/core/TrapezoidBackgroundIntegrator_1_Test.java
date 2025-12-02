@@ -12,20 +12,23 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.internal.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.processor.BackgroundIntegrator;
 import org.eclipse.chemclipse.model.baseline.IBaselineModel;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class TrapezoidBackgroundIntegrator_1_Test extends SimpleChromatogramTestCase {
 
 	private BackgroundIntegrator integrator;
 
 	@Override
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		super.setUp();
 		integrator = new BackgroundIntegrator();
@@ -37,7 +40,7 @@ public class TrapezoidBackgroundIntegrator_1_Test extends SimpleChromatogramTest
 		IBaselineModel baselineModel = chromatogram.getBaselineModel();
 		baselineModel.addBaseline(4500, 6500, 200, 200, true);
 		double area = integrator.integrate(chromatogramSelection);
-		assertEquals("Background", 4000.0d, area, 0);
+		assertEquals(4000.0d, area, 0, "Background");
 	}
 
 	@Test
@@ -46,7 +49,7 @@ public class TrapezoidBackgroundIntegrator_1_Test extends SimpleChromatogramTest
 		IBaselineModel baselineModel = chromatogram.getBaselineModel();
 		baselineModel.addBaseline(4500, 6500, 400, 400, true);
 		double area = integrator.integrate(chromatogramSelection);
-		assertEquals("Background", 8000.0d, area, 0);
+		assertEquals(8000.0d, area, 0, "Background");
 	}
 
 	@Test
@@ -55,6 +58,6 @@ public class TrapezoidBackgroundIntegrator_1_Test extends SimpleChromatogramTest
 		IBaselineModel baselineModel = chromatogram.getBaselineModel();
 		baselineModel.addBaseline(4500, 6500, 200, 400, true);
 		double area = integrator.integrate(chromatogramSelection);
-		assertEquals("Background", 6000.0d, area, 0);
+		assertEquals(6000.0d, area, 0, "Background");
 	}
 }

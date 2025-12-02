@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.core.settings;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.core.settings.peaks.ISettingStatus;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SettingStatus_1_Test {
 
@@ -26,31 +26,31 @@ public class SettingStatus_1_Test {
 	public void testStatus_1() {
 
 		settingStatus = new SettingStatus(true, true);
-		assertTrue("Report", settingStatus.report());
-		assertTrue("SumOn", settingStatus.sumOn());
+		assertTrue(settingStatus.report());
+		assertTrue(settingStatus.sumOn());
 	}
 
 	@Test
 	public void testStatus_2() {
 
 		settingStatus = new SettingStatus(true, false);
-		assertTrue("Report", settingStatus.report());
-		assertFalse("SumOn", settingStatus.sumOn());
+		assertTrue(settingStatus.report());
+		assertFalse(settingStatus.sumOn());
 	}
 
 	@Test
 	public void testStatus_3() {
 
 		settingStatus = new SettingStatus(false, true);
-		assertFalse("Report", settingStatus.report());
-		assertTrue("SumOn", settingStatus.sumOn());
+		assertFalse(settingStatus.report());
+		assertTrue(settingStatus.sumOn());
 	}
 
 	@Test
 	public void testStatus_4() {
 
 		settingStatus = new SettingStatus(false, false);
-		assertFalse("Report", settingStatus.report());
-		assertFalse("SumOn", settingStatus.sumOn());
+		assertFalse(settingStatus.report());
+		assertFalse(settingStatus.sumOn());
 	}
 }

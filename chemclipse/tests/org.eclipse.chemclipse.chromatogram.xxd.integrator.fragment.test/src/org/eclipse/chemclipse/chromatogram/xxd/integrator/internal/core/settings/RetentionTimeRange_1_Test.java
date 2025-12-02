@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.internal.core.settings;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.support.RetentionTimeRange;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class RetentionTimeRange_1_Test {
 
@@ -23,39 +23,39 @@ public class RetentionTimeRange_1_Test {
 	public void testGetRetentionTime_1() {
 
 		RetentionTimeRange retentionTimeRange = new RetentionTimeRange(0, 0);
-		assertEquals("Start", 0, retentionTimeRange.getStartRetentionTime());
-		assertEquals("Stop", 0, retentionTimeRange.getStopRetentionTime());
+		assertEquals(0, retentionTimeRange.getStartRetentionTime());
+		assertEquals(0, retentionTimeRange.getStopRetentionTime());
 	}
 
 	@Test
 	public void testGetRetentionTime_2() {
 
 		RetentionTimeRange retentionTimeRange = new RetentionTimeRange(1500, 2500);
-		assertEquals("Start", 1500, retentionTimeRange.getStartRetentionTime());
-		assertEquals("Stop", 2500, retentionTimeRange.getStopRetentionTime());
+		assertEquals(1500, retentionTimeRange.getStartRetentionTime());
+		assertEquals(2500, retentionTimeRange.getStopRetentionTime());
 	}
 
 	@Test
 	public void testGetRetentionTime_3() {
 
 		RetentionTimeRange retentionTimeRange = new RetentionTimeRange(-1, 2500);
-		assertEquals("Start", 0, retentionTimeRange.getStartRetentionTime());
-		assertEquals("Stop", 2500, retentionTimeRange.getStopRetentionTime());
+		assertEquals(0, retentionTimeRange.getStartRetentionTime());
+		assertEquals(2500, retentionTimeRange.getStopRetentionTime());
 	}
 
 	@Test
 	public void testGetRetentionTime_4() {
 
 		RetentionTimeRange retentionTimeRange = new RetentionTimeRange(1500, -1);
-		assertEquals("Start", 0, retentionTimeRange.getStartRetentionTime());
-		assertEquals("Stop", 1500, retentionTimeRange.getStopRetentionTime());
+		assertEquals(0, retentionTimeRange.getStartRetentionTime());
+		assertEquals(1500, retentionTimeRange.getStopRetentionTime());
 	}
 
 	@Test
 	public void testGetRetentionTime_5() {
 
 		RetentionTimeRange retentionTimeRange = new RetentionTimeRange(2500, 1500);
-		assertEquals("Start", 1500, retentionTimeRange.getStartRetentionTime());
-		assertEquals("Stop", 2500, retentionTimeRange.getStopRetentionTime());
+		assertEquals(1500, retentionTimeRange.getStartRetentionTime());
+		assertEquals(2500, retentionTimeRange.getStopRetentionTime());
 	}
 }

@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.result;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class PeakIntegrationResult_3_Test {
 
@@ -24,7 +24,7 @@ public class PeakIntegrationResult_3_Test {
 
 		PeakIntegrationResult result1 = new PeakIntegrationResult();
 		PeakIntegrationResult result2 = new PeakIntegrationResult();
-		assertEquals("equals", result1.hashCode(), result2.hashCode());
+		assertEquals(result1.hashCode(), result2.hashCode());
 	}
 
 	@Test
@@ -33,6 +33,6 @@ public class PeakIntegrationResult_3_Test {
 		PeakIntegrationResult result1 = new PeakIntegrationResult();
 		result1.setStartRetentionTime(1500);
 		PeakIntegrationResult result2 = new PeakIntegrationResult();
-		assertFalse("equals", result1.hashCode() == result2.hashCode());
+		assertFalse(result1.hashCode() == result2.hashCode());
 	}
 }

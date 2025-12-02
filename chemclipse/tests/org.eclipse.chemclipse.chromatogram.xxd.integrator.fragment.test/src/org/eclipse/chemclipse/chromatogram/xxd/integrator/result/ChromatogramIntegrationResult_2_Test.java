@@ -12,11 +12,14 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.result;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramIntegrationResult_2_Test {
 
 	private IChromatogramIntegrationResult result;
@@ -24,8 +27,8 @@ public class ChromatogramIntegrationResult_2_Test {
 	private double backgroundArea;
 	private double chromatogramArea;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		ion = 5.6f;
 		backgroundArea = 0.0d;
@@ -36,18 +39,18 @@ public class ChromatogramIntegrationResult_2_Test {
 	@Test
 	public void testGetBackgroundArea_1() {
 
-		assertEquals("BackgroundArea", backgroundArea, result.getBackgroundArea(), 0);
+		assertEquals(backgroundArea, result.getBackgroundArea(), 0);
 	}
 
 	@Test
 	public void testGetChromatogramArea_1() {
 
-		assertEquals("ChromatogramArea", chromatogramArea, result.getChromatogramArea(), 0);
+		assertEquals(chromatogramArea, result.getChromatogramArea(), 0);
 	}
 
 	@Test
 	public void testGetIon_1() {
 
-		assertEquals("Ion", 5.599999904632568d, result.getIon(), 0);
+		assertEquals(5.599999904632568d, result.getIon(), 0);
 	}
 }

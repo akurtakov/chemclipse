@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.quantitation.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PeakQuantifierSupplier_2_Test {
 
@@ -24,8 +24,8 @@ public class PeakQuantifierSupplier_2_Test {
 	private String description = "description";
 	private String detectorName = "detectorName";
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeEach
+	public void setUp() {
 
 		supplier = new PeakQuantifierSupplier();
 		supplier.setId(id);
@@ -39,24 +39,24 @@ public class PeakQuantifierSupplier_2_Test {
 		assertEquals("id", id, supplier.getId());
 		id = "newId";
 		supplier.setId(id);
-		assertEquals("id", id, supplier.getId());
+		assertEquals(id, supplier.getId());
 	}
 
 	@Test
 	public void testGetDescription_1() {
 
-		assertEquals("description", description, supplier.getDescription());
+		assertEquals(description, supplier.getDescription());
 		description = "newDescription";
 		supplier.setDescription(description);
-		assertEquals("description", description, supplier.getDescription());
+		assertEquals(description, supplier.getDescription());
 	}
 
 	@Test
 	public void testGetDetectorName_1() {
 
-		assertEquals("PeakQuantifierName", detectorName, supplier.getPeakQuantifierName());
+		assertEquals(detectorName, supplier.getPeakQuantifierName());
 		detectorName = "newDetectorName";
 		supplier.setPeakQuantifierName(detectorName);
-		assertEquals("detectorName", detectorName, supplier.getPeakQuantifierName());
+		assertEquals(detectorName, supplier.getPeakQuantifierName());
 	}
 }

@@ -16,8 +16,8 @@ import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
-import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 
 /*
  * Chromatogram
@@ -33,12 +33,12 @@ import org.junit.Ignore;
  * Scan 9 9500
  * Scan 10 10500
  */
-@Ignore
-public class ChromatogramTestCase {
+@Disabled
+abstract class ChromatogramTestCase {
 
 	private IChromatogramMSD chromatogram;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		chromatogram = createChromatogram();
