@@ -13,11 +13,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.chromatogram;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.eclipse.chemclipse.converter.chromatogram.ChromatogramConverterSupport;
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * This TestCase analyzes if the class ChromatogramConverterSupport methods work

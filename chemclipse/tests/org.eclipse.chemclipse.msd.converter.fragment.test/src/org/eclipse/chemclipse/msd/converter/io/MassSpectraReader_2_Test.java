@@ -12,13 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.io;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.msd.model.core.IRegularLibraryMassSpectrum;
 import org.eclipse.chemclipse.support.model.SeparationColumnType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class MassSpectraReader_2_Test {
 

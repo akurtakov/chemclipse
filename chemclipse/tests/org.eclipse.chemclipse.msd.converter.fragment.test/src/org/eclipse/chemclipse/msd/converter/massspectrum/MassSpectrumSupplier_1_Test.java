@@ -12,9 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.massspectrum;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Testing all methods of MassSpectrumSupplier and its specification.
@@ -26,96 +28,96 @@ public class MassSpectrumSupplier_1_Test {
 	@Test
 	public void testId_1() {
 
-		assertEquals("id", "", supplier.getId());
+		assertEquals("", supplier.getId());
 		supplier.setId(null);
-		assertEquals("id", "", supplier.getId());
+		assertEquals("", supplier.getId());
 		supplier.setId("org.eclipse.chemclipse.msd.converter.supplier.agilent");
-		assertEquals("id", "org.eclipse.chemclipse.msd.converter.supplier.agilent", supplier.getId());
+		assertEquals("org.eclipse.chemclipse.msd.converter.supplier.agilent", supplier.getId());
 		supplier.setId("");
-		assertEquals("id", "", supplier.getId());
+		assertEquals("", supplier.getId());
 	}
 
 	@Test
 	public void testDescription_1() {
 
-		assertEquals("desciption", "", supplier.getDescription());
+		assertEquals("", supplier.getDescription());
 		supplier.setDescription(null);
-		assertEquals("desciption", "", supplier.getDescription());
+		assertEquals("", supplier.getDescription());
 		supplier.setDescription("This is the agilent data format.");
-		assertEquals("desciption", "This is the agilent data format.", supplier.getDescription());
+		assertEquals("This is the agilent data format.", supplier.getDescription());
 		supplier.setDescription("");
-		assertEquals("desciption", "", supplier.getDescription());
+		assertEquals("", supplier.getDescription());
 	}
 
 	@Test
 	public void testFilterName_1() {
 
-		assertEquals("desciption", "", supplier.getDescription());
+		assertEquals("", supplier.getDescription());
 		supplier.setDescription(null);
-		assertEquals("desciption", "", supplier.getDescription());
+		assertEquals("", supplier.getDescription());
 		supplier.setDescription("This is the agilent data format.");
-		assertEquals("desciption", "This is the agilent data format.", supplier.getDescription());
+		assertEquals("This is the agilent data format.", supplier.getDescription());
 		supplier.setDescription("");
-		assertEquals("desciption", "", supplier.getDescription());
+		assertEquals("", supplier.getDescription());
 	}
 
 	@Test
 	public void testFileExtension_1() {
 
-		assertEquals("fileExtension", "", supplier.getFileExtension());
+		assertEquals("", supplier.getFileExtension());
 		supplier.setFileExtension(null);
-		assertEquals("fileExtension", "", supplier.getFileExtension());
+		assertEquals("", supplier.getFileExtension());
 		supplier.setFileExtension("MS");
-		assertEquals("fileExtension", "MS", supplier.getFileExtension());
+		assertEquals("MS", supplier.getFileExtension());
 		supplier.setFileExtension(".MS");
-		assertEquals("fileExtension", ".MS", supplier.getFileExtension());
+		assertEquals(".MS", supplier.getFileExtension());
 		supplier.setFileExtension("");
-		assertEquals("fileExtension", "", supplier.getFileExtension());
+		assertEquals("", supplier.getFileExtension());
 	}
 
 	@Test
 	public void testFileName_1() {
 
-		assertEquals("fileName", "", supplier.getFileName());
+		assertEquals("", supplier.getFileName());
 		supplier.setFileName(null);
-		assertEquals("fileName", "", supplier.getFileName());
+		assertEquals("", supplier.getFileName());
 		supplier.setFileName("DATA");
-		assertEquals("fileName", "DATA", supplier.getFileName());
+		assertEquals("DATA", supplier.getFileName());
 		supplier.setFileName("");
-		assertEquals("fileName", "", supplier.getFileName());
+		assertEquals("", supplier.getFileName());
 	}
 
 	@Test
 	public void testDirectoryExtension_1() {
 
-		assertEquals("directoryExtension", "", supplier.getDirectoryExtension());
+		assertEquals("", supplier.getDirectoryExtension());
 		supplier.setDirectoryExtension(null);
-		assertEquals("directoryExtension", "", supplier.getDirectoryExtension());
+		assertEquals("", supplier.getDirectoryExtension());
 		supplier.setDirectoryExtension("D");
-		assertEquals("directoryExtension", ".D", supplier.getDirectoryExtension());
+		assertEquals(".D", supplier.getDirectoryExtension());
 		supplier.setDirectoryExtension(".D");
-		assertEquals("directoryExtension", ".D", supplier.getDirectoryExtension());
+		assertEquals(".D", supplier.getDirectoryExtension());
 		supplier.setDirectoryExtension("");
-		assertEquals("directoryExtension", "", supplier.getDirectoryExtension());
+		assertEquals("", supplier.getDirectoryExtension());
 	}
 
 	@Test
 	public void testIsImportable_1() {
 
-		assertEquals("isImportable", false, supplier.isImportable());
+		assertFalse(supplier.isImportable());
 		supplier.setImportable(false);
-		assertEquals("isImportable", false, supplier.isImportable());
+		assertFalse(supplier.isImportable());
 		supplier.setImportable(true);
-		assertEquals("isImportable", true, supplier.isImportable());
+		assertTrue(supplier.isImportable());
 	}
 
 	@Test
 	public void testIsExportable_1() {
 
-		assertEquals("isExportable", false, supplier.isExportable());
+		assertFalse(supplier.isExportable());
 		supplier.setExportable(false);
-		assertEquals("isExportable", false, supplier.isExportable());
+		assertFalse(supplier.isExportable());
 		supplier.setExportable(true);
-		assertEquals("isExportable", true, supplier.isExportable());
+		assertTrue(supplier.isExportable());
 	}
 }

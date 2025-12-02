@@ -12,11 +12,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.supplier.amdis.io;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Set;
 
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
@@ -24,17 +25,20 @@ import org.eclipse.chemclipse.msd.model.core.ILibraryMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class MSPReader_1_ITest {
 
 	private MSPReader reader;
 	private File file;
 	private IMassSpectra massSpectra;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() throws IOException {
 
 		reader = new MSPReader();
 		String pathname = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_SYNONYMS);
@@ -71,16 +75,14 @@ public class MSPReader_1_ITest {
 	@Test
 	public void testRead_5() {
 
-		IScanMSD massSpectrum = massSpectra.getMassSpectrum(1);
-		if(massSpectrum instanceof ILibraryMassSpectrum libraryMassSpectrum) {
-			Set<String> synonyms = libraryMassSpectrum.getLibraryInformation().getSynonyms();
-			assertEquals(6, synonyms.size());
-			assertTrue(synonyms.contains("test1"));
-			assertTrue(synonyms.contains("test2"));
-			assertTrue(synonyms.contains("test4"));
-			assertTrue(synonyms.contains("test6"));
-			assertTrue(synonyms.contains("UN 500"));
-			assertTrue(synonyms.contains("UN 600"));
-		}
+		ILibraryMassSpectrum libraryMassSpectrum = (ILibraryMassSpectrum)massSpectra.getMassSpectrum(1);
+		Set<String> synonyms = libraryMassSpectrum.getLibraryInformation().getSynonyms();
+		assertEquals(6, synonyms.size());
+		assertTrue(synonyms.contains("test1"));
+		assertTrue(synonyms.contains("test2"));
+		assertTrue(synonyms.contains("test4"));
+		assertTrue(synonyms.contains("test6"));
+		assertTrue(synonyms.contains("UN 500"));
+		assertTrue(synonyms.contains("UN 600"));
 	}
 }

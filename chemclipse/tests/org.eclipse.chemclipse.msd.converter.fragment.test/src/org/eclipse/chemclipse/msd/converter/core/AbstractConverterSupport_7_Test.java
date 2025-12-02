@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +21,12 @@ import org.eclipse.chemclipse.converter.core.IConverterSupport;
 import org.eclipse.chemclipse.converter.core.IConverterSupportSetter;
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.processing.converter.ISupplier;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class AbstractConverterSupport_7_Test extends AbstractConverterTestCase {
 
 	private IConverterSupportSetter converterSupport;
@@ -31,8 +34,8 @@ public class AbstractConverterSupport_7_Test extends AbstractConverterTestCase {
 	private ISupplier actSupplier;
 
 	@Override
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		super.setUp();
 		converterSupport = getConverterSupport();

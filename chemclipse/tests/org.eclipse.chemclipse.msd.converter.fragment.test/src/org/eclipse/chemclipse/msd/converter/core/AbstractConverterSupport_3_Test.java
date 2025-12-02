@@ -12,21 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.converter.core.IConverterSupport;
 import org.eclipse.chemclipse.converter.core.IConverterSupportSetter;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class AbstractConverterSupport_3_Test extends AbstractConverterTestCase {
 
 	private IConverterSupportSetter converterSupport;
 	private String[] filterExtensions;
 
 	@Override
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		super.setUp();
 		converterSupport = getConverterSupport();

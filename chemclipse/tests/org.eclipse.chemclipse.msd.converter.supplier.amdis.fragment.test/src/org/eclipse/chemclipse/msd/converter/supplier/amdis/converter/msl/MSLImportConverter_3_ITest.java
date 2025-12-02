@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.supplier.amdis.converter.msl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.util.List;
@@ -28,17 +28,20 @@ import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.io.ImportConverterMslTestCase;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.model.IVendorLibraryMassSpectrum;
 import org.eclipse.chemclipse.support.model.SeparationColumnType;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class MSLImportConverter_3_ITest extends ImportConverterMslTestCase {
 
 	private IVendorLibraryMassSpectrum massSpectrum;
 	private ILibraryInformation libraryInformation;
 
 	@Override
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		importFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_DB_4));
 		super.setUp();
@@ -49,7 +52,7 @@ public class MSLImportConverter_3_ITest extends ImportConverterMslTestCase {
 	@Test
 	public void testImport_1() {
 
-		assertEquals("MassSpectra", 1, massSpectra.size());
+		assertEquals(1, massSpectra.size());
 	}
 
 	@Test

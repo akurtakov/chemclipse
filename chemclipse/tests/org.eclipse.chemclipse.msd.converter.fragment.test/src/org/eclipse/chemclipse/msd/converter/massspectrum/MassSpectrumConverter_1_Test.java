@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.massspectrum;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.converter.core.Converter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Testing MassSpectrumConverters isValid(String input) method. This method
@@ -28,7 +28,7 @@ public class MassSpectrumConverter_1_Test {
 
 		String input = "abcdefg";
 		boolean actual = Converter.isValid(input);
-		assertEquals("Allowed characters", true, actual);
+		assertEquals(true, actual, "Allowed characters");
 	}
 
 	@Test
@@ -36,7 +36,7 @@ public class MassSpectrumConverter_1_Test {
 
 		String input = "\\/:*?\"<>|";
 		boolean actual = Converter.isValid(input);
-		assertEquals("Denied characters", false, actual);
+		assertEquals(false, actual, "Denied characters");
 	}
 
 	@Test
@@ -44,7 +44,7 @@ public class MassSpectrumConverter_1_Test {
 
 		String input = "a\\";
 		boolean actual = Converter.isValid(input);
-		assertEquals("Denied characters", false, actual);
+		assertEquals(false, actual, "Denied characters");
 	}
 
 	@Test
@@ -52,7 +52,7 @@ public class MassSpectrumConverter_1_Test {
 
 		String input = "a/";
 		boolean actual = Converter.isValid(input);
-		assertEquals("Denied characters", false, actual);
+		assertEquals(false, actual, "Denied characters");
 	}
 
 	@Test
@@ -60,7 +60,7 @@ public class MassSpectrumConverter_1_Test {
 
 		String input = "a:";
 		boolean actual = Converter.isValid(input);
-		assertEquals("Denied characters", false, actual);
+		assertEquals(false, actual, "Denied characters");
 	}
 
 	@Test
@@ -68,7 +68,7 @@ public class MassSpectrumConverter_1_Test {
 
 		String input = "a*";
 		boolean actual = Converter.isValid(input);
-		assertEquals("Denied characters", false, actual);
+		assertEquals(false, actual, "Denied characters");
 	}
 
 	@Test
@@ -76,7 +76,7 @@ public class MassSpectrumConverter_1_Test {
 
 		String input = "a?";
 		boolean actual = Converter.isValid(input);
-		assertEquals("Denied characters", false, actual);
+		assertEquals(false, actual, "Denied characters");
 	}
 
 	@Test
@@ -84,7 +84,7 @@ public class MassSpectrumConverter_1_Test {
 
 		String input = "a\"";
 		boolean actual = Converter.isValid(input);
-		assertEquals("Denied characters", false, actual);
+		assertEquals(false, actual, "Denied characters");
 	}
 
 	@Test
@@ -92,7 +92,7 @@ public class MassSpectrumConverter_1_Test {
 
 		String input = "a<";
 		boolean actual = Converter.isValid(input);
-		assertEquals("Denied characters", false, actual);
+		assertEquals(false, actual, "Denied characters");
 	}
 
 	@Test
@@ -100,7 +100,7 @@ public class MassSpectrumConverter_1_Test {
 
 		String input = "a>";
 		boolean actual = Converter.isValid(input);
-		assertEquals("Denied characters", false, actual);
+		assertEquals(false, actual, "Denied characters");
 	}
 
 	@Test
@@ -108,7 +108,7 @@ public class MassSpectrumConverter_1_Test {
 
 		String input = "a|";
 		boolean actual = Converter.isValid(input);
-		assertEquals("Denied characters", false, actual);
+		assertEquals(false, actual, "Denied characters");
 	}
 
 	@Test
@@ -116,7 +116,7 @@ public class MassSpectrumConverter_1_Test {
 
 		String input = "";
 		boolean actual = Converter.isValid(input);
-		assertEquals("Allowed characters", true, actual);
+		assertEquals(true, actual, "Allowed characters");
 	}
 
 	@Test
@@ -124,6 +124,6 @@ public class MassSpectrumConverter_1_Test {
 
 		String input = null;
 		boolean actual = Converter.isValid(input);
-		assertEquals("When input == null it should be false.", false, actual);
+		assertEquals(false, actual, "When input == null it should be false.");
 	}
 }

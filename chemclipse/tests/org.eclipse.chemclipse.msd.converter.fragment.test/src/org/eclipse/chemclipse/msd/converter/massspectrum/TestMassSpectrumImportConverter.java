@@ -16,10 +16,7 @@ import java.io.File;
 
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.processing.core.IProcessingMessage;
-import org.eclipse.chemclipse.processing.core.MessageType;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
-import org.eclipse.chemclipse.processing.core.ProcessingMessage;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 /**
@@ -32,12 +29,7 @@ public class TestMassSpectrumImportConverter extends AbstractMassSpectrumImportC
 	public IProcessingInfo<IMassSpectra> convert(File file, IProgressMonitor monitor) {
 
 		IProcessingInfo<IMassSpectra> processingInfo = new ProcessingInfo<>();
-		try {
-			processingInfo.addMessages(super.validate(file));
-		} catch(Exception e) {
-			IProcessingMessage processingMessage = new ProcessingMessage(MessageType.ERROR, "MassSpectrum Import", "The file couldn't be validated.");
-			processingInfo.addMessage(processingMessage);
-		}
+		processingInfo.addMessages(super.validate(file));
 		return processingInfo;
 	}
 }

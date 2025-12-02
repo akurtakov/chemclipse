@@ -12,12 +12,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.chromatogram;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.converter.chromatogram.IChromatogramConverterSupport;
 import org.eclipse.chemclipse.converter.core.IConverterSupport;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Testing the method getChromatogramConverterSupport() in
@@ -39,7 +39,7 @@ public class ChromatogramConverter_2_Test {
 		 * There could be more converter. But these 3 should be there in
 		 * every case.
 		 */
-		assertTrue("Amount Filter Names", 3 <= filterNames.length);
-		assertEquals("FilterName", true, result.contains("Open Chromatography Binary (*.ocb)"));
+		assertTrue(3 <= filterNames.length, "Amount Filter Names");
+		assertEquals(true, result.contains("Open Chromatography Binary (*.ocb)"), "FilterName");
 	}
 }

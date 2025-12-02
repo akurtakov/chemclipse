@@ -12,21 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.supplier.amdis.internal.converter;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class SpecificationValidatorMSP_1_Test {
 
 	private File file;
 	private String spec;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		spec = TestPathHelper.getAbsolutePath(TestPathHelper.VALIDATOR_TEST_SPEC_MSP);
 	}
@@ -36,7 +39,7 @@ public class SpecificationValidatorMSP_1_Test {
 
 		file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.VALIDATOR_TEST_MSP_1));
 		file = SpecificationValidatorMSP.validateSpecification(file);
-		assertEquals("File", spec, file.getAbsolutePath());
+		assertEquals(spec, file.getAbsolutePath());
 	}
 
 	@Test
@@ -44,7 +47,7 @@ public class SpecificationValidatorMSP_1_Test {
 
 		file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.VALIDATOR_TEST_MSP_2));
 		file = SpecificationValidatorMSP.validateSpecification(file);
-		assertEquals("File", spec, file.getAbsolutePath());
+		assertEquals(spec, file.getAbsolutePath());
 	}
 
 	@Test
@@ -52,6 +55,6 @@ public class SpecificationValidatorMSP_1_Test {
 
 		file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.VALIDATOR_TEST_MSP_3));
 		file = SpecificationValidatorMSP.validateSpecification(file);
-		assertEquals("File", spec, file.getAbsolutePath());
+		assertEquals(spec, file.getAbsolutePath());
 	}
 }

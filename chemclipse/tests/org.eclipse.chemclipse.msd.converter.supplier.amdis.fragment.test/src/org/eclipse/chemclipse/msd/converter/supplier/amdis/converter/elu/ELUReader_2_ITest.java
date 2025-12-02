@@ -13,28 +13,30 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.supplier.amdis.converter.elu;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.io.ELUReader;
 import org.eclipse.chemclipse.msd.model.core.IPeaksMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ELUReader_2_ITest {
 
 	private ELUReader reader;
 	private IProcessingInfo<IPeaksMSD> processingInfo;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() throws IOException {
 
 		reader = new ELUReader();
 		String pathname = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_PEAKS_1_ELU);
@@ -45,12 +47,8 @@ public class ELUReader_2_ITest {
 	@Test
 	public void testRead_1() {
 
-		try {
-			IPeaksMSD peaks = processingInfo.getProcessingResult();
-			assertEquals(1154, peaks.getPeaks().size());
-			assertEquals(1132, peaks.getPeaks().stream().filter(p -> p.getPeakModel().isStrictModel()).toList().size());
-		} catch(TypeCastException e) {
-			assertTrue(false);
-		}
+		IPeaksMSD peaks = processingInfo.getProcessingResult();
+		assertEquals(1154, peaks.getPeaks().size());
+		assertEquals(1132, peaks.getPeaks().stream().filter(p -> p.getPeakModel().isStrictModel()).toList().size());
 	}
 }
