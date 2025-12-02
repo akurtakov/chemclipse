@@ -14,17 +14,17 @@ package org.eclipse.chemclipse.msd.converter.core;
 
 import org.eclipse.chemclipse.converter.core.IConverterSupportSetter;
 import org.eclipse.chemclipse.converter.core.ISupplierSetter;
-import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 
-@Ignore
+@Disabled
 public class AbstractConverterTestCase {
 
 	private IConverterSupportSetter converterSupport = new DefaultConverterSupport();
 	private ISupplierSetter supplier = new DefaultSupplier();
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		// Supplier I
 		supplier.setId("org.eclipse.chemclipse.msd.converter.supplier.agilent");

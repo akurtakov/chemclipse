@@ -20,10 +20,10 @@ import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
 import org.eclipse.chemclipse.processing.methods.ProcessEntry;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 
-@Ignore
-public class MethodProcessSupportTestCase {
+@Disabled
+abstract class MethodProcessSupportTestCase {
 
 	protected IProcessMethod getProcessMethod(DataCategory[] methodCategories, List<DataCategory[]> processCategories) {
 

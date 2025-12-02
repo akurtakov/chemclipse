@@ -12,14 +12,18 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.converter.io.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.eclipse.chemclipse.converter.TestPathHelper;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ArrayReader_4_ITest {
 
 	/*
@@ -27,8 +31,8 @@ public class ArrayReader_4_ITest {
 	 */
 	private IArrayReader arrayReader;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() throws IOException {
 
 		/*
 		 * IMPORT_BIN_TEST:

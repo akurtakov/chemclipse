@@ -12,12 +12,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.massspectrum;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.msd.converter.database.DatabaseConverter;
 import org.eclipse.chemclipse.msd.converter.database.DatabaseConverterSupport;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Testing the method getMassSpectrumConverterSupport() in
@@ -35,8 +35,8 @@ public class MassSpectrumConverter_2_Test {
 		for(String name : filterNames) {
 			result += name + ";";
 		}
-		assertEquals("FilterName", true, result.contains("AMDIS Mass Spectra (*.msl)"));
-		assertEquals("FilterName", true, result.contains("NIST Text (*.msp)"));
+		assertTrue(result.contains("AMDIS Mass Spectra (*.msl)"));
+		assertTrue(result.contains("NIST Text (*.msp)"));
 		// and others
 	}
 }

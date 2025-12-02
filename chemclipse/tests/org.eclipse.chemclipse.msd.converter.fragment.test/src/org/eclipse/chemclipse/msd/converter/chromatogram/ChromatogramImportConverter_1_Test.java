@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.chromatogram;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +21,7 @@ import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.msd.converter.TestPathHelper;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * This class validates the exceptions thrown by
@@ -29,8 +29,6 @@ import org.junit.Test;
  * AbstractChromatogramImportConverter is an abstract class,
  * TestChromatogramImportConverter is instantiated which extends
  * AbstractChromatogramImportConverter.
- * 
- * @author eselmeister
  */
 public class ChromatogramImportConverter_1_Test {
 
@@ -45,33 +43,24 @@ public class ChromatogramImportConverter_1_Test {
 	}
 
 	@Test
-	public void testFileIsNotReadableException_1() {
+	public void testFileIsNotReadableException_1() throws IOException {
 
 		File file = null;
-		try {
-			file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_NOT_READABLE));
-			file.setReadable(false);
-			IProcessingInfo<IChromatogram> processingInfo = ic.convert(file, new NullProgressMonitor());
-			assertTrue(processingInfo.hasErrorMessages());
-		} catch(IOException e) {
-			assertTrue("IOException", false);
-		} finally {
-			if(file != null) {
-				file.setReadable(true);
-			}
+		file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_NOT_READABLE));
+		file.setReadable(false);
+		IProcessingInfo<IChromatogram> processingInfo = ic.convert(file, new NullProgressMonitor());
+		assertTrue(processingInfo.hasErrorMessages());
+		if(file != null) {
+			file.setReadable(true);
 		}
 	}
 
 	@Test
-	public void testFileIsEmptyException_1() {
+	public void testFileIsEmptyException_1() throws IOException {
 
 		File file = null;
-		try {
-			file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_EMPTY));
-			IProcessingInfo<IChromatogram> processingInfo = ic.convert(file, new NullProgressMonitor());
-			assertTrue(processingInfo.hasErrorMessages());
-		} catch(IOException e) {
-			assertTrue("IOException", false);
-		}
+		file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_EMPTY));
+		IProcessingInfo<IChromatogram> processingInfo = ic.convert(file, new NullProgressMonitor());
+		assertTrue(processingInfo.hasErrorMessages());
 	}
 }

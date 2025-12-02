@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.io;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.msd.model.core.IRegularLibraryMassSpectrum;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class MassSpectraReader_1_Test {
 

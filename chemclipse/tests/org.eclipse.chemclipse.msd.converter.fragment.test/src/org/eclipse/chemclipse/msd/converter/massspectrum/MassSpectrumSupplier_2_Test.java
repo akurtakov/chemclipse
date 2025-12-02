@@ -12,13 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.massspectrum;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.converter.chromatogram.ChromatogramSupplier;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Testing toString(), hashCode() and equals() of ChromatogramSupplier.
@@ -31,14 +31,14 @@ public class MassSpectrumSupplier_2_Test {
 	public void testToString_1() {
 
 		String test = "org.eclipse.chemclipse.msd.converter.massspectrum.MassSpectrumSupplier[id=,description=,filterName=,fileExtension=,fileName=,directoryExtension=,isExportable=false,isImportable=false]";
-		assertEquals("toString", test, supplier.toString());
+		assertEquals(test, supplier.toString());
 	}
 
 	@Test
 	public void testEquals_1() {
 
 		MassSpectrumSupplier anotherSupplier = new MassSpectrumSupplier();
-		assertEquals("equals", supplier, anotherSupplier);
+		assertEquals(supplier, anotherSupplier);
 	}
 
 	@Test
@@ -46,29 +46,29 @@ public class MassSpectrumSupplier_2_Test {
 
 		MassSpectrumSupplier anotherSupplier = new MassSpectrumSupplier();
 		anotherSupplier.setId("chemclipse");
-		assertNotEquals("equals", supplier, anotherSupplier);
+		assertNotEquals(supplier, anotherSupplier);
 		anotherSupplier.setId("");
-		assertEquals("equals", supplier, anotherSupplier);
+		assertEquals(supplier, anotherSupplier);
 		anotherSupplier.setDescription("chemclipse");
-		assertNotEquals("equals", supplier, anotherSupplier);
+		assertNotEquals(supplier, anotherSupplier);
 		anotherSupplier.setDescription("");
-		assertEquals("equals", supplier, anotherSupplier);
+		assertEquals(supplier, anotherSupplier);
 		anotherSupplier.setFilterName("chemclipse");
-		assertNotEquals("equals", supplier, anotherSupplier);
+		assertNotEquals(supplier, anotherSupplier);
 		anotherSupplier.setFilterName("");
-		assertEquals("equals", supplier, anotherSupplier);
+		assertEquals(supplier, anotherSupplier);
 		anotherSupplier.setFileExtension("chemclipse");
-		assertNotEquals("equals", supplier, anotherSupplier);
+		assertNotEquals(supplier, anotherSupplier);
 		anotherSupplier.setFileExtension("");
-		assertEquals("equals", supplier, anotherSupplier);
+		assertEquals(supplier, anotherSupplier);
 		anotherSupplier.setFileName("chemclipse");
-		assertNotEquals("equals", supplier, anotherSupplier);
+		assertNotEquals(supplier, anotherSupplier);
 		anotherSupplier.setFileName("");
-		assertEquals("equals", supplier, anotherSupplier);
+		assertEquals(supplier, anotherSupplier);
 		anotherSupplier.setDirectoryExtension("chemclipse");
-		assertNotEquals("equals", supplier, anotherSupplier);
+		assertNotEquals(supplier, anotherSupplier);
 		anotherSupplier.setDirectoryExtension("");
-		assertEquals("equals", supplier, anotherSupplier);
+		assertEquals(supplier, anotherSupplier);
 	}
 
 	@Test
@@ -76,63 +76,63 @@ public class MassSpectrumSupplier_2_Test {
 
 		MassSpectrumSupplier anotherSupplier = new MassSpectrumSupplier();
 		anotherSupplier.setId("chemclipse");
-		assertNotEquals("equals", anotherSupplier, supplier);
+		assertNotEquals(anotherSupplier, supplier);
 		anotherSupplier.setId("");
-		assertEquals("equals", anotherSupplier, supplier);
+		assertEquals(anotherSupplier, supplier);
 		anotherSupplier.setDescription("chemclipse");
-		assertNotEquals("equals", anotherSupplier, supplier);
+		assertNotEquals(anotherSupplier, supplier);
 		anotherSupplier.setDescription("");
-		assertEquals("equals", anotherSupplier, supplier);
+		assertEquals(anotherSupplier, supplier);
 		anotherSupplier.setFilterName("chemclipse");
-		assertNotEquals("equals", anotherSupplier, supplier);
+		assertNotEquals(anotherSupplier, supplier);
 		anotherSupplier.setFilterName("");
-		assertEquals("equals", anotherSupplier, supplier);
+		assertEquals(anotherSupplier, supplier);
 		anotherSupplier.setFileExtension("chemclipse");
-		assertNotEquals("equals", anotherSupplier, supplier);
+		assertNotEquals(anotherSupplier, supplier);
 		anotherSupplier.setFileExtension("");
-		assertEquals("equals", anotherSupplier, supplier);
+		assertEquals(anotherSupplier, supplier);
 		anotherSupplier.setFileName("chemclipse");
-		assertNotEquals("equals", anotherSupplier, supplier);
+		assertNotEquals(anotherSupplier, supplier);
 		anotherSupplier.setFileName("");
-		assertEquals("equals", anotherSupplier, supplier);
+		assertEquals(anotherSupplier, supplier);
 		anotherSupplier.setDirectoryExtension("chemclipse");
-		assertNotEquals("equals", anotherSupplier, supplier);
+		assertNotEquals(anotherSupplier, supplier);
 		anotherSupplier.setDirectoryExtension("");
-		assertEquals("equals", anotherSupplier, supplier);
+		assertEquals(anotherSupplier, supplier);
 	}
 
 	@Test
 	public void testEquals_4() {
 
 		MassSpectrumSupplier anotherSupplier = supplier;
-		assertEquals("equals", anotherSupplier, supplier);
+		assertEquals(anotherSupplier, supplier);
 	}
 
 	@Test
 	public void testEquals_5() {
 
-		assertEquals("equals", supplier, supplier);
+		assertEquals(supplier, supplier);
 	}
 
 	@Test
 	public void testEquals_6() {
 
 		ChromatogramSupplier anotherSupplier = null;
-		assertNotEquals("equals", supplier, anotherSupplier);
+		assertNotEquals(supplier, anotherSupplier);
 	}
 
 	@Test
 	public void testEquals_7() {
 
 		Object anotherSupplier = new Object();
-		assertNotEquals("equals", supplier, anotherSupplier);
+		assertNotEquals(supplier, anotherSupplier);
 	}
 
 	@Test
 	public void testHashCode_1() {
 
 		ChromatogramSupplier anotherSupplier = new ChromatogramSupplier();
-		assertEquals("hashCode", anotherSupplier.hashCode(), supplier.hashCode());
+		assertEquals(anotherSupplier.hashCode(), supplier.hashCode());
 	}
 
 	@Test
@@ -140,36 +140,36 @@ public class MassSpectrumSupplier_2_Test {
 
 		ChromatogramSupplier anotherSupplier = new ChromatogramSupplier();
 		anotherSupplier.setId("chemclipse");
-		assertFalse("hashCode", anotherSupplier.hashCode() == supplier.hashCode());
+		assertFalse(anotherSupplier.hashCode() == supplier.hashCode());
 		anotherSupplier.setId("");
-		assertTrue("hashCode", anotherSupplier.hashCode() == supplier.hashCode());
+		assertTrue(anotherSupplier.hashCode() == supplier.hashCode());
 		anotherSupplier.setDescription("chemclipse");
-		assertFalse("hashCode", anotherSupplier.hashCode() == supplier.hashCode());
+		assertFalse(anotherSupplier.hashCode() == supplier.hashCode());
 		anotherSupplier.setDescription("");
-		assertTrue("hashCode", anotherSupplier.hashCode() == supplier.hashCode());
+		assertTrue(anotherSupplier.hashCode() == supplier.hashCode());
 		anotherSupplier.setFilterName("chemclipse");
-		assertFalse("hashCode", anotherSupplier.hashCode() == supplier.hashCode());
+		assertFalse(anotherSupplier.hashCode() == supplier.hashCode());
 		anotherSupplier.setFilterName("");
-		assertTrue("hashCode", anotherSupplier.hashCode() == supplier.hashCode());
+		assertTrue(anotherSupplier.hashCode() == supplier.hashCode());
 		anotherSupplier.setFileExtension("chemclipse");
-		assertFalse("hashCode", anotherSupplier.hashCode() == supplier.hashCode());
+		assertFalse(anotherSupplier.hashCode() == supplier.hashCode());
 		anotherSupplier.setFileExtension("");
-		assertTrue("hashCode", anotherSupplier.hashCode() == supplier.hashCode());
+		assertTrue(anotherSupplier.hashCode() == supplier.hashCode());
 		anotherSupplier.setFileName("chemclipse");
-		assertFalse("hashCode", anotherSupplier.hashCode() == supplier.hashCode());
+		assertFalse(anotherSupplier.hashCode() == supplier.hashCode());
 		anotherSupplier.setFileName("");
-		assertTrue("hashCode", anotherSupplier.hashCode() == supplier.hashCode());
+		assertTrue(anotherSupplier.hashCode() == supplier.hashCode());
 		anotherSupplier.setDirectoryExtension("chemclipse");
-		assertFalse("hashCode", anotherSupplier.hashCode() == supplier.hashCode());
+		assertFalse(anotherSupplier.hashCode() == supplier.hashCode());
 		anotherSupplier.setDirectoryExtension("");
-		assertTrue("hashCode", anotherSupplier.hashCode() == supplier.hashCode());
+		assertTrue(anotherSupplier.hashCode() == supplier.hashCode());
 		anotherSupplier.setImportable(true);
-		assertFalse("hashCode", anotherSupplier.hashCode() == supplier.hashCode());
+		assertFalse(anotherSupplier.hashCode() == supplier.hashCode());
 		anotherSupplier.setImportable(false);
-		assertTrue("hashCode", anotherSupplier.hashCode() == supplier.hashCode());
+		assertTrue(anotherSupplier.hashCode() == supplier.hashCode());
 		anotherSupplier.setExportable(true);
-		assertFalse("hashCode", anotherSupplier.hashCode() == supplier.hashCode());
+		assertFalse(anotherSupplier.hashCode() == supplier.hashCode());
 		anotherSupplier.setExportable(false);
-		assertTrue("hashCode", anotherSupplier.hashCode() == supplier.hashCode());
+		assertTrue(anotherSupplier.hashCode() == supplier.hashCode());
 	}
 }

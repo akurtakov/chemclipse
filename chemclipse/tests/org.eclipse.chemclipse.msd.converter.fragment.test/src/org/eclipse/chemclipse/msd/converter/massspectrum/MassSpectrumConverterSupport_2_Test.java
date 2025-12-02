@@ -12,22 +12,25 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.massspectrum;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * This TestCase analyses if the class MassSpectrumConverterSupport methods work
  * in a correct way.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class MassSpectrumConverterSupport_2_Test {
 
 	private MassSpectrumConverterSupport support = new MassSpectrumConverterSupport();
 
-	@Before
+	@BeforeAll
 	public void setUp() throws Exception {
 
 		MassSpectrumSupplier supplier = new MassSpectrumSupplier();
@@ -73,11 +76,11 @@ public class MassSpectrumConverterSupport_2_Test {
 
 		String id;
 		id = support.getConverterId(0);
-		assertEquals("id#0", "org.eclipse.chemclipse.msd.converter.supplier.ascii", id);
+		assertEquals("org.eclipse.chemclipse.msd.converter.supplier.ascii", id);
 		id = support.getConverterId(1);
-		assertEquals("id#1", "org.eclipse.chemclipse.msd.converter.supplier.amdis", id);
+		assertEquals("org.eclipse.chemclipse.msd.converter.supplier.amdis", id);
 		id = support.getConverterId(2);
-		assertEquals("id#2", "org.eclipse.chemclipse.msd.converter.supplier.jcamp", id);
+		assertEquals("org.eclipse.chemclipse.msd.converter.supplier.jcamp", id);
 	}
 
 	@Test
@@ -85,9 +88,9 @@ public class MassSpectrumConverterSupport_2_Test {
 
 		String[] ids;
 		ids = support.getFilterExtensions();
-		assertEquals("FilterExtension #0", "*.", ids[0]); // Important ... otherwise 'Save As...' fails
-		assertEquals("FilterExtension #1", "*.msl;*.MSL", ids[1]);
-		assertEquals("FilterExtension #2", "*.jdx;*.JDX", ids[2]);
+		assertEquals("*.", ids[0]); // Important ... otherwise 'Save As...' fails
+		assertEquals("*.msl;*.MSL", ids[1]);
+		assertEquals("*.jdx;*.JDX", ids[2]);
 	}
 
 	@Test
@@ -95,8 +98,8 @@ public class MassSpectrumConverterSupport_2_Test {
 
 		String[] names;
 		names = support.getFilterNames();
-		assertEquals("FilterName #0", "ASCII Text (.TXT)", names[0]);
-		assertEquals("FilterName #1", "AMDIS Mass Spectra (*.msl)", names[1]);
-		assertEquals("FilterName #2", "JCAMP-DX (*.jdx)", names[2]);
+		assertEquals("ASCII Text (.TXT)", names[0]);
+		assertEquals("AMDIS Mass Spectra (*.msl)", names[1]);
+		assertEquals("JCAMP-DX (*.jdx)", names[2]);
 	}
 }

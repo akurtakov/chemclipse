@@ -12,13 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.converter.core;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.chemclipse.converter.TestPathHelper;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class MagicNumberMatcher_4_ITest {
 

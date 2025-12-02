@@ -17,10 +17,7 @@ import java.io.File;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.processing.core.IProcessingMessage;
-import org.eclipse.chemclipse.processing.core.MessageType;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
-import org.eclipse.chemclipse.processing.core.ProcessingMessage;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 /**
@@ -33,13 +30,8 @@ public class TestMassSpectrumExportConverter extends AbstractMassSpectrumExportC
 	public IProcessingInfo<File> convert(File file, IScanMSD massSpectrum, boolean append, IProgressMonitor monitor) {
 
 		IProcessingInfo<File> processingInfo = new ProcessingInfo<>();
-		try {
-			processingInfo.addMessages(super.validate(file));
-			processingInfo.addMessages(super.validate(massSpectrum));
-		} catch(Exception e) {
-			IProcessingMessage processingMessage = new ProcessingMessage(MessageType.ERROR, "MassSpectrum Export", "The file couldn't be validated.");
-			processingInfo.addMessage(processingMessage);
-		}
+		processingInfo.addMessages(super.validate(file));
+		processingInfo.addMessages(super.validate(massSpectrum));
 		return processingInfo;
 	}
 
@@ -47,13 +39,8 @@ public class TestMassSpectrumExportConverter extends AbstractMassSpectrumExportC
 	public IProcessingInfo<File> convert(File file, IMassSpectra massSpectra, boolean append, IProgressMonitor monitor) {
 
 		IProcessingInfo<File> processingInfo = new ProcessingInfo<>();
-		try {
-			processingInfo.addMessages(super.validate(file));
-			processingInfo.addMessages(super.validate(massSpectra));
-		} catch(Exception e) {
-			IProcessingMessage processingMessage = new ProcessingMessage(MessageType.ERROR, "MassSpectrum Export", "The file couldn't be validated.");
-			processingInfo.addMessage(processingMessage);
-		}
+		processingInfo.addMessages(super.validate(file));
+		processingInfo.addMessages(super.validate(massSpectra));
 		return processingInfo;
 	}
 }
