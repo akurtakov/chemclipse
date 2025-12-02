@@ -669,6 +669,12 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 			}
 		}
 
+		/*
+		 * Send update.
+		 */
+		tableViewer.get().refresh();
+		UpdateNotifierUI.update(display, chromatogramSelection);
+
 		chromatogramSelection.getChromatogram().setDirty(true);
 		UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "Peaks/Scans unknown targets have been set.");
 	}
