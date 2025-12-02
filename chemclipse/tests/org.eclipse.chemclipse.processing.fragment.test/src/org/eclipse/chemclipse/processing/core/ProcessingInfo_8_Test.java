@@ -13,14 +13,17 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.processing.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ProcessingInfo_8_Test {
 
 	private interface MyInterface {
@@ -46,7 +49,7 @@ public class ProcessingInfo_8_Test {
 
 	private IProcessingInfo<Object> processingInfo;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		processingInfo = new ProcessingInfo<>();

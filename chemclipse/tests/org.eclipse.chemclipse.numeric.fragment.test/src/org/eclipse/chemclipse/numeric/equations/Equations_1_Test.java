@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.equations;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Check the compilation of a linear equation.
@@ -29,7 +29,7 @@ public class Equations_1_Test {
 		IPoint p1 = new Point(5.0d, 10.0d);
 		IPoint p2 = new Point(7.0d, 3.0d);
 		LinearEquation eq = Equations.createLinearEquation(p1, p2);
-		assertEquals("X=0", 27.5d, eq.calculateY(0), 0);
+		assertEquals(27.5d, eq.calculateY(0), 0, "X=0");
 	}
 
 	@Test
@@ -38,7 +38,7 @@ public class Equations_1_Test {
 		IPoint p1 = new Point(5.0d, 10.0d);
 		IPoint p2 = new Point(7.0d, 3.0d);
 		LinearEquation eq = Equations.createLinearEquation(p1, p2);
-		assertEquals("toString()", "org.eclipse.chemclipse.numeric.equations.LinearEquation[f(x)=-3.5x + 27.5]", eq.toString());
+		assertEquals("org.eclipse.chemclipse.numeric.equations.LinearEquation[f(x)=-3.5x + 27.5]", eq.toString());
 	}
 
 	@Test
@@ -46,7 +46,7 @@ public class Equations_1_Test {
 
 		IPoint p1 = new Point(5.0d, 10.0d);
 		IPoint p2 = new Point(7.0d, 3.0d);
-		assertEquals("Slope", -3.5d, Equations.calculateSlope(p1, p2), 0);
+		assertEquals(-3.5d, Equations.calculateSlope(p1, p2), 0);
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class Equations_1_Test {
 
 		IPoint p1 = null;
 		IPoint p2 = new Point(7.0d, 3.0d);
-		assertEquals("Slope", 0.0d, Equations.calculateSlope(p1, p2), 0);
+		assertEquals(0.0d, Equations.calculateSlope(p1, p2), 0);
 	}
 
 	@Test
@@ -62,6 +62,6 @@ public class Equations_1_Test {
 
 		IPoint p1 = new Point(5.0d, 10.0d);
 		IPoint p2 = null;
-		assertEquals("Slope", 0.0d, Equations.calculateSlope(p1, p2), 0);
+		assertEquals(0.0d, Equations.calculateSlope(p1, p2), 0);
 	}
 }

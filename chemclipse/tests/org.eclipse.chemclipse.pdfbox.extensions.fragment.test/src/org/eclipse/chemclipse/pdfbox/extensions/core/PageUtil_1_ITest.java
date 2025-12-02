@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.pdfbox.extensions.core;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,7 +38,7 @@ import org.eclipse.chemclipse.pdfbox.extensions.settings.ReferenceX;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.ReferenceY;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.TextOption;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.Unit;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class PageUtil_1_ITest {
 

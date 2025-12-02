@@ -12,13 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.equations;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
 import org.eclipse.chemclipse.numeric.exceptions.SolverException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Checks calculation of intersection between two linear equations.
@@ -35,8 +35,8 @@ public class Equations_4_Test {
 		IPoint p22 = new Point(1, 8);
 		LinearEquation eq2 = Equations.createLinearEquation(p21, p22);
 		IPoint intersection = Equations.calculateIntersection(eq1, eq2);
-		assertEquals("X", 2.6470588235294117d, intersection.getX(), 0);
-		assertEquals("Y", 6.352941176470588d, intersection.getY(), 0);
+		assertEquals(2.6470588235294117d, intersection.getX(), 0);
+		assertEquals(6.352941176470588d, intersection.getY(), 0);
 	}
 
 	@Test

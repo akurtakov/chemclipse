@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.equations;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Checks calculation of width between two points.
@@ -29,7 +29,7 @@ public class Equations_5_Test {
 		IPoint p1 = new Point(1, 4);
 		IPoint p2 = new Point(8, 14);
 		double width = Equations.calculateWidth(p1, p2);
-		assertEquals("Width", 12.206555615733702d, width, 0);
+		assertEquals(12.206555615733702d, width, 0);
 	}
 
 	@Test
@@ -38,6 +38,6 @@ public class Equations_5_Test {
 		IPoint p1 = new Point(0, 0);
 		IPoint p2 = new Point(0, 0);
 		double width = Equations.calculateWidth(p1, p2);
-		assertEquals("Width", 0.0d, width, 0);
+		assertEquals(0.0d, width, 0);
 	}
 }

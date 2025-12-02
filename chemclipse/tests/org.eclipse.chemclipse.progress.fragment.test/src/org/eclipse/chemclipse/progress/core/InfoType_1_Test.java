@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.progress.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class InfoType_1_Test {
 
@@ -22,13 +22,13 @@ public class InfoType_1_Test {
 	public void testInfoType_1() {
 
 		InfoType infoType = InfoType.MESSAGE;
-		assertEquals("MESSAGE", InfoType.MESSAGE, infoType);
+		assertEquals(InfoType.MESSAGE, infoType);
 	}
 
 	@Test
 	public void testInfoType_2() {
 
 		InfoType infoType = InfoType.ERROR_MESSAGE;
-		assertEquals("ERROR_MESSAGE", InfoType.ERROR_MESSAGE, infoType);
+		assertEquals(InfoType.ERROR_MESSAGE, infoType);
 	}
 }

@@ -12,35 +12,28 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.statistics;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Testing median.
  */
 public class Calculations_21_Test {
 
-	private float[] values;
-
-	@Before
-	public void setUp() {
-
-		values = new float[0];
-	}
+	private float[] values = new float[0];
 
 	@Test
 	public void testGetMean_1() {
 
 		float min = Calculations.getMin(values);
-		assertEquals("min", 0.0f, min, 0);
+		assertEquals(0.0f, min, 0);
 	}
 
 	@Test
 	public void testGetMean_2() {
 
 		float max = Calculations.getMax(values);
-		assertEquals("max", 0.0f, max, 0);
+		assertEquals(0.0f, max, 0);
 	}
 }

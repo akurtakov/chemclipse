@@ -12,22 +12,25 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.equations;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Check the compilation of a linear equation by multiple x,y value pairs using
  * GaussJordan fitting.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class Equations_2_Test {
 
 	private IPoint[] points;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		points = new IPoint[4];
@@ -41,13 +44,13 @@ public class Equations_2_Test {
 	public void testCreateLinearEquation_1() {
 
 		LinearEquation eq = Equations.createLinearEquation(points);
-		assertEquals("X=0", 6.711864406779662d, eq.calculateY(0), 0);
+		assertEquals(6.711864406779662d, eq.calculateY(0), 0, "X=0");
 	}
 
 	@Test
 	public void testCreateLinearEquation_2() {
 
 		LinearEquation eq = Equations.createLinearEquation(points);
-		assertEquals("toString()", "org.eclipse.chemclipse.numeric.equations.LinearEquation[f(x)=-0.7288135593220342x + 6.711864406779662]", eq.toString());
+		assertEquals("org.eclipse.chemclipse.numeric.equations.LinearEquation[f(x)=-0.7288135593220342x + 6.711864406779662]", eq.toString());
 	}
 }

@@ -12,19 +12,19 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.pdfbox.extensions.elements;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.eclipse.chemclipse.pdfbox.extensions.settings.ReferenceX;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.ReferenceY;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ImageElement_1_Test {
 
 	private ImageElement element;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		element = new ImageElement(10.0f, 20.0f);

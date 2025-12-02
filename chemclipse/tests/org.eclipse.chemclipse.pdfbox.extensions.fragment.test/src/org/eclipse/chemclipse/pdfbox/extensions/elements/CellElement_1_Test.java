@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.pdfbox.extensions.elements;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Color;
 
@@ -22,14 +22,17 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.ReferenceX;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.ReferenceY;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.TextOption;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class CellElement_1_Test {
 
 	private CellElement element;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		element = new CellElement("Hello", 10.0f, CellElement.BORDER_ALL);

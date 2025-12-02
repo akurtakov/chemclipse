@@ -12,21 +12,22 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.statistics;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Testing median.
- * 
- * @author eselmeister
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class Calculations_18_Test {
 
 	private double[] values;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		values = new double[13];
@@ -49,18 +50,18 @@ public class Calculations_18_Test {
 	public void testCalculateSquareRootSum_1() {
 
 		double sum = Calculations.calculateSumPow2(values);
-		assertEquals("square root sum", 2801699.0d, sum, 0);
+		assertEquals(2801699.0d, sum, 0, "square root sum");
 	}
 
 	@Test
 	public void testScaleToNormalizedUnity_1() {
 
 		Calculations.scaleToNormalizedUnity(values);
-		assertEquals("NormalizedUnity", 0.19282049927561812d, values[0], 0);
-		assertEquals("NormalizedUnity", 0.05710820470007663d, values[4], 0);
-		assertEquals("NormalizedUnity", 0.07004642540115837d, values[7], 0);
-		assertEquals("NormalizedUnity", 0.0518117756404239d, values[12], 0);
+		assertEquals(0.19282049927561812d, values[0], 0);
+		assertEquals(0.05710820470007663d, values[4], 0);
+		assertEquals(0.07004642540115837d, values[7], 0);
+		assertEquals(0.0518117756404239d, values[12], 0);
 		double sum = Calculations.getSum(values);
-		assertEquals("sum", 1.0d, sum, 0);
+		assertEquals(1.0d, sum, 0);
 	}
 }

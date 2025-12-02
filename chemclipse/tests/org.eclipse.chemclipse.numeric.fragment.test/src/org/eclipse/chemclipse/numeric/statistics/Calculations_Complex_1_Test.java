@@ -12,21 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.statistics;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.commons.math3.stat.descriptive.moment.Mean;
 import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
 import org.apache.commons.math3.stat.descriptive.moment.Variance;
 import org.apache.commons.math3.stat.descriptive.rank.Percentile;
 import org.eclipse.chemclipse.numeric.statistics.model.UnivariateStatistics;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class Calculations_Complex_1_Test {
 
 	private double[] values;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		values = new double[13];
@@ -60,10 +63,10 @@ public class Calculations_Complex_1_Test {
 		 * Set up the statistics object;
 		 */
 		UnivariateStatistics statistics = new UnivariateStatistics(values.length, values, mean, variance, standardDeviation, percentile);
-		assertEquals("getMean", 451.1538d, statistics.getMean(), 1E-4d);
-		assertEquals("getVariance", 12973.47d, statistics.getVariance(), 1E-2d);
-		assertEquals("getStandardDeviation", 113.9012d, statistics.getStandardDeviation(), 1E-3d);
-		assertEquals("getMedian", 430d, statistics.getMedian(), 0);
-		assertEquals("getRelativeStandardDeviation", 0.2524663d, statistics.getRelativeStandardDeviation(), 1E-7d);
+		assertEquals(451.1538d, statistics.getMean(), 1E-4d);
+		assertEquals(12973.47d, statistics.getVariance(), 1E-2d);
+		assertEquals(113.9012d, statistics.getStandardDeviation(), 1E-3d);
+		assertEquals(430d, statistics.getMedian(), 0);
+		assertEquals(0.2524663d, statistics.getRelativeStandardDeviation(), 1E-7d);
 	}
 }

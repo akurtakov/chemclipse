@@ -12,16 +12,19 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.geometry;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class RectangularTrapezium_1_Test {
 
 	private RectangularTrapezium rectangularTrapezium;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		rectangularTrapezium = new RectangularTrapezium(10.0d, 15.0d, 10.0d);
@@ -30,6 +33,6 @@ public class RectangularTrapezium_1_Test {
 	@Test
 	public void testGetArea() {
 
-		assertEquals("Area", 125.0d, rectangularTrapezium.getArea(), 0);
+		assertEquals(125.0d, rectangularTrapezium.getArea(), 0);
 	}
 }

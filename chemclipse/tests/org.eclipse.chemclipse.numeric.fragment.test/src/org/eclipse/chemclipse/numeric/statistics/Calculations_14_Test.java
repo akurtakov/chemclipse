@@ -12,19 +12,22 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.statistics;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Testing median.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class Calculations_14_Test {
 
 	private double[] values;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		values = new double[13];
@@ -47,48 +50,48 @@ public class Calculations_14_Test {
 	public void testGetWindowReducedLength_1() {
 
 		int result = Calculations.getWindowReducedLength(values, 3);
-		assertEquals("getWindowReducedLength", 11, result);
+		assertEquals(11, result);
 	}
 
 	@Test
 	public void testGetWindowReducedLength_2() {
 
 		int result = Calculations.getWindowReducedLength(null, 3);
-		assertEquals("getWindowReducedLength", 0, result);
+		assertEquals(0, result);
 	}
 
 	@Test
 	public void testGetWindowReducedLength_3() {
 
 		int result = Calculations.getWindowReducedLength(values, 1);
-		assertEquals("getWindowReducedLength", 13, result);
+		assertEquals(13, result);
 	}
 
 	@Test
 	public void testGetWindowReducedLength_4() {
 
 		int result = Calculations.getWindowReducedLength(values, 0);
-		assertEquals("getWindowReducedLength", 13, result);
+		assertEquals(13, result);
 	}
 
 	@Test
 	public void testGetWindowReducedLength_5() {
 
 		int result = Calculations.getWindowReducedLength(values, 13);
-		assertEquals("getWindowReducedLength", 1, result);
+		assertEquals(1, result);
 	}
 
 	@Test
 	public void testGetWindowReducedLength_6() {
 
 		int result = Calculations.getWindowReducedLength(values, 12);
-		assertEquals("getWindowReducedLength", 2, result);
+		assertEquals(2, result);
 	}
 
 	@Test
 	public void testGetWindowReducedLength_7() {
 
 		int result = Calculations.getWindowReducedLength(values, 14);
-		assertEquals("getWindowReducedLength", 13, result);
+		assertEquals(13, result);
 	}
 }

@@ -12,20 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.statistics;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class Calculations_22_Test {
 
-	private int[] values;
-
-	@Before
-	public void setUp() {
-
-		values = new int[0];
-	}
+	private int[] values = new int[0];
 
 	@Test
 	public void testGetMean_1() {

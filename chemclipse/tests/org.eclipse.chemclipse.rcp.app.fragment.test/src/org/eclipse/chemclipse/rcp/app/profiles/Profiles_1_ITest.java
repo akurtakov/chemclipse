@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.rcp.app.profiles;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,7 +21,7 @@ import java.io.FileNotFoundException;
 import org.eclipse.chemclipse.rcp.app.TestPathHelper;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class Profiles_1_ITest {
 

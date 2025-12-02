@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class Point_1_Test {
 
@@ -23,8 +23,8 @@ public class Point_1_Test {
 	private double x = 25.3;
 	private double y = 457.7;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeEach
+	public void setUp() {
 
 		point = new Point(x, y);
 	}
@@ -32,30 +32,30 @@ public class Point_1_Test {
 	@Test
 	public void testPointX_1() {
 
-		assertEquals("X", x, point.getX(), 0);
+		assertEquals(x, point.getX(), 0);
 	}
 
 	@Test
 	public void testPointX_2() {
 
-		assertEquals("X", x, point.getX(), 0);
+		assertEquals(x, point.getX(), 0);
 		x = 3682.234;
 		point.setX(x);
-		assertEquals("X", x, point.getX(), 0);
+		assertEquals(x, point.getX(), 0);
 	}
 
 	@Test
 	public void testPointY_1() {
 
-		assertEquals("Y", y, point.getY(), 0);
+		assertEquals(y, point.getY(), 0);
 	}
 
 	@Test
 	public void testPointY_2() {
 
-		assertEquals("Y", y, point.getY(), 0);
+		assertEquals(y, point.getY(), 0);
 		y = 8273.3;
 		point.setY(y);
-		assertEquals("Y", y, point.getY(), 0);
+		assertEquals(y, point.getY(), 0);
 	}
 }

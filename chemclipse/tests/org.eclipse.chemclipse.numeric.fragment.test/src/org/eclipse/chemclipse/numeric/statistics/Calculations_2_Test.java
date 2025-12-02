@@ -12,16 +12,19 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.statistics;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class Calculations_2_Test {
 
 	private double[] values;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		values = new double[13];
@@ -44,20 +47,20 @@ public class Calculations_2_Test {
 	public void testGetMean_1() {
 
 		double result = Calculations.getMean(values);
-		assertEquals("getMean", 451.15384615384613d, result, 0);
+		assertEquals(451.15384615384613d, result, 0);
 	}
 
 	@Test
 	public void testGetVariance_1() {
 
 		double result = Calculations.getVariance(values);
-		assertEquals("getVariance", 12973.474358974356d, result, 0);
+		assertEquals(12973.474358974356d, result, 0);
 	}
 
 	@Test
 	public void testGetStandardDeviation_1() {
 
 		double result = Calculations.getStandardDeviation(values);
-		assertEquals("getStandardDeviation", 113.90116048124513d, result, 0);
+		assertEquals(113.90116048124513d, result, 0);
 	}
 }

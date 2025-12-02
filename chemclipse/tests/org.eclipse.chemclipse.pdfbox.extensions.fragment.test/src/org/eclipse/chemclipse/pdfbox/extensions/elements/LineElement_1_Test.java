@@ -12,18 +12,18 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.pdfbox.extensions.elements;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.awt.Color;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class LineElement_1_Test {
 
 	private LineElement element;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		element = new LineElement(10.0f, 20.0f, 30.0f, 40.0f);

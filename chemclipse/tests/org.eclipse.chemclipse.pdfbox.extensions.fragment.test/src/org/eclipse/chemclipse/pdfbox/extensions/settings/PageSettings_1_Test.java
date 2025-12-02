@@ -12,19 +12,22 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.pdfbox.extensions.settings;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class PageSettings_1_Test {
 
 	private PageSettings settings;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		settings = new PageSettings(PDRectangle.A4, PageBase.BOTTOM_LEFT, Unit.MM, true);

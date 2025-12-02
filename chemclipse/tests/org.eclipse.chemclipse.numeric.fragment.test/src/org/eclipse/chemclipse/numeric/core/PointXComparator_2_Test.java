@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PointXComparator_2_Test {
 
@@ -27,7 +27,7 @@ public class PointXComparator_2_Test {
 	private double y2 = 457.7;
 	private PointXComparator pointXComparator;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		point1 = new Point(x1, y1);
@@ -38,12 +38,12 @@ public class PointXComparator_2_Test {
 	@Test
 	public void testComparator_1() {
 
-		assertEquals("Compare", -1, pointXComparator.compare(point1, point2));
+		assertEquals(-1, pointXComparator.compare(point1, point2));
 	}
 
 	@Test
 	public void testComparator_2() {
 
-		assertEquals("Compare", 1, pointXComparator.compare(point2, point1));
+		assertEquals(1, pointXComparator.compare(point2, point1));
 	}
 }
