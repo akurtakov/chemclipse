@@ -21,6 +21,7 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.eclipse.chemclipse.support.text.ValueFormat;
+import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.custom.IRangeSupport;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
@@ -120,6 +121,7 @@ public abstract class AbstractPlotPCA extends ScatterChart implements IRangeSupp
 
 		chartSettings.setShowAxisZeroMarker(true);
 		chartSettings.setShowSeriesLabelMarker(true);
+		chartSettings.setColorSeriesLabelMarker(DisplayUtils.getDisplay().getSystemColor(SWT.COLOR_WIDGET_FOREGROUND));
 		chartSettings.setUseSeriesLabelDescription(true);
 		chartSettings.setCreateMenu(true);
 		chartSettings.setEnableCompress(false);
