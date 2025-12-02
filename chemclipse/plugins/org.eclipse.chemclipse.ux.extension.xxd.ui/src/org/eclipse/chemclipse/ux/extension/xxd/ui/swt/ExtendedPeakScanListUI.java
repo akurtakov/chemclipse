@@ -473,6 +473,8 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 						addTargetsUnknown(e.display); // CTRL + u
 					} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_Q) {
 						scanIdentifierControl.get().runIdentification(e.display); // CTRL + q
+						tableViewer.get().refresh();
+						UpdateNotifierUI.update(display, chromatogramSelection);
 					} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_A) {
 						if(showPeakProfilesSelectionAll) {
 							propagateSelection(display);
