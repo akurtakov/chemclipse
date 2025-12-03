@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.selection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.List;
 
@@ -24,9 +24,12 @@ import org.eclipse.chemclipse.msd.model.core.IChromatogramPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
 import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramSelection_8_Test {
 
 	private IChromatogramMSD chromatogram;
@@ -34,7 +37,7 @@ public class ChromatogramSelection_8_Test {
 	private IScanMSD scanMSD;
 	private IChromatogramPeakMSD peak;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		/*
@@ -79,7 +82,7 @@ public class ChromatogramSelection_8_Test {
 		selection.setSelectedScan(scanMSD);
 		scanMSD = selection.getSelectedScan();
 		assertNotNull(selection.getSelectedScan());
-		assertEquals("RetentionTime", 4500, scanMSD.getRetentionTime());
+		assertEquals(4500, scanMSD.getRetentionTime());
 	}
 
 	@Test
@@ -95,6 +98,6 @@ public class ChromatogramSelection_8_Test {
 		selection.setSelectedPeak(peak);
 		peak = (IChromatogramPeakMSD)selection.getSelectedPeak();
 		assertNotNull(peak);
-		assertEquals("IntegratedArea", 893002.3d, peak.getIntegratedArea(), 0);
+		assertEquals(893002.3d, peak.getIntegratedArea(), 0);
 	}
 }

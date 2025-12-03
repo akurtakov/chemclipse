@@ -12,16 +12,17 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CombinedNominalMassSpectrumCalculator_3_Test {
 
 	private CombinedNominalMassSpectrumCalculator combinedNominalMassSpectrumCalculator;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		combinedNominalMassSpectrumCalculator = new CombinedNominalMassSpectrumCalculator();
@@ -38,7 +39,7 @@ public class CombinedNominalMassSpectrumCalculator_3_Test {
 		int ion = 103;
 		assertEquals(5500.0, combinedNominalMassSpectrumCalculator.getValues().get(ion).get(0), 0);
 		combinedNominalMassSpectrumCalculator.removeIon(ion);
-		assertEquals(null, combinedNominalMassSpectrumCalculator.getValues().get(ion));
+		assertNull(combinedNominalMassSpectrumCalculator.getValues().get(ion));
 	}
 
 	@Test
@@ -47,7 +48,7 @@ public class CombinedNominalMassSpectrumCalculator_3_Test {
 		int ion = 104;
 		assertEquals(5300.0, combinedNominalMassSpectrumCalculator.getValues().get(ion).get(0), 0);
 		combinedNominalMassSpectrumCalculator.removeIon(ion);
-		assertEquals(null, combinedNominalMassSpectrumCalculator.getValues().get(ion));
+		assertNull(combinedNominalMassSpectrumCalculator.getValues().get(ion));
 	}
 
 	@Test
@@ -57,7 +58,7 @@ public class CombinedNominalMassSpectrumCalculator_3_Test {
 		assertEquals(5500.0, combinedNominalMassSpectrumCalculator.getValues().get(103).get(0), 0);
 		combinedNominalMassSpectrumCalculator.removeIon(56);
 		combinedNominalMassSpectrumCalculator.removeIon(103);
-		assertEquals(null, combinedNominalMassSpectrumCalculator.getValues().get(56));
-		assertEquals(null, combinedNominalMassSpectrumCalculator.getValues().get(103));
+		assertNull(combinedNominalMassSpectrumCalculator.getValues().get(56));
+		assertNull(combinedNominalMassSpectrumCalculator.getValues().get(103));
 	}
 }

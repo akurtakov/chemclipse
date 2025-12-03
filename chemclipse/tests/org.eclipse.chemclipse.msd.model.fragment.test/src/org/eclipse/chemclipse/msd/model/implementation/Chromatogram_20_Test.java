@@ -12,22 +12,25 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class Chromatogram_20_Test {
 
 	private IChromatogramMSD chromatogram;
 	private IScanMSD supplierMassSpectrum;
 	private IIon ion;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		chromatogram = new ChromatogramMSD();
 		// ------------------------------Scan 1
@@ -69,13 +72,13 @@ public class Chromatogram_20_Test {
 	public void testGetStartIon_1() {
 
 		double startIon = chromatogram.getStartIon();
-		assertEquals("startIon", 18.100000381469727d, startIon, 0);
+		assertEquals(18.100000381469727d, startIon, 0);
 	}
 
 	@Test
 	public void testGetStopIon_1() {
 
 		double stopIon = chromatogram.getStopIon();
-		assertEquals("stopIon", 190.1999969482422d, stopIon, 0);
+		assertEquals(190.1999969482422d, stopIon, 0);
 	}
 }

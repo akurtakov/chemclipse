@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class IonUniquenessValues_2_Test {
 
@@ -25,9 +25,9 @@ public class IonUniquenessValues_2_Test {
 
 		uniquenessValues.add(43, -0.1f);
 		float uv = uniquenessValues.getUniquenessValue(43);
-		assertEquals("Uniqueness Value", 1.0f, uv, 0);
+		assertEquals(1.0f, uv, 0);
 		float pv = uniquenessValues.getPropabilityValue(43);
-		assertEquals("Probability Value", 0.0f, pv, 0);
+		assertEquals(0.0f, pv, 0);
 	}
 
 	@Test
@@ -35,9 +35,9 @@ public class IonUniquenessValues_2_Test {
 
 		uniquenessValues.add(43, 1.1f);
 		float uv = uniquenessValues.getUniquenessValue(43);
-		assertEquals("Uniqueness Value", 1.0f, uv, 0);
+		assertEquals(1.0f, uv, 0);
 		float pv = uniquenessValues.getPropabilityValue(43);
-		assertEquals("Probability Value", 0.0f, pv, 0);
+		assertEquals(0.0f, pv, 0);
 	}
 
 	@Test
@@ -45,9 +45,9 @@ public class IonUniquenessValues_2_Test {
 
 		uniquenessValues.add(150, 0.1f);
 		float uv = uniquenessValues.getUniquenessValue(150);
-		assertEquals("Uniqueness Value", 0.9f, uv, 0);
+		assertEquals(0.9f, uv, 0);
 		float pv = uniquenessValues.getPropabilityValue(150);
-		assertEquals("Probability Value", 0.1f, pv, 0);
+		assertEquals(0.1f, pv, 0);
 	}
 
 	@Test

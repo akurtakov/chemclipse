@@ -12,22 +12,25 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakMassSpectrum_5_Test {
 
 	private IIon ion;
 	private IScanMSD massSpectrum;
 	private IPeakMassSpectrum peakMassSpectrum;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		/*
@@ -51,7 +54,7 @@ public class PeakMassSpectrum_5_Test {
 		 * 70% actual: 6514141.6f -> 100% : 9305916.571f
 		 */
 		peakMassSpectrum = new PeakMassSpectrum(massSpectrum, 70.0f);
-		assertEquals("TotalSignal", 9305916.571f, peakMassSpectrum.getTotalSignal(), 0);
+		assertEquals(9305916.571f, peakMassSpectrum.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -61,7 +64,7 @@ public class PeakMassSpectrum_5_Test {
 		 * 120% actual: 6514141.6f -> 100% : 5428451.333f
 		 */
 		peakMassSpectrum = new PeakMassSpectrum(massSpectrum, 120.0f);
-		assertEquals("TotalSignal", 5428451.0f, peakMassSpectrum.getTotalSignal(), 0);
+		assertEquals(5428451.0f, peakMassSpectrum.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -71,7 +74,7 @@ public class PeakMassSpectrum_5_Test {
 		 * 100% actual: 6514141.6f -> 100% : 6514141.6f
 		 */
 		peakMassSpectrum = new PeakMassSpectrum(massSpectrum, 100.0f);
-		assertEquals("TotalSignal", 6514142.0f, peakMassSpectrum.getTotalSignal(), 0);
+		assertEquals(6514142.0f, peakMassSpectrum.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -97,6 +100,6 @@ public class PeakMassSpectrum_5_Test {
 		 * 97.2% actual: 6514141.6f -> 100% : 6701791.77f
 		 */
 		peakMassSpectrum = new PeakMassSpectrum(massSpectrum, 97.2f);
-		assertEquals("TotalSignal", 6701792.5f, peakMassSpectrum.getTotalSignal(), 0);
+		assertEquals(6701792.5f, peakMassSpectrum.getTotalSignal(), 0);
 	}
 }

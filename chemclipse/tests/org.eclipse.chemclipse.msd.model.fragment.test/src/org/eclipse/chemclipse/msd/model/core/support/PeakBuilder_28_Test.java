@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.support;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,12 +35,15 @@ import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
 import org.eclipse.chemclipse.numeric.equations.Equations;
 import org.eclipse.chemclipse.numeric.equations.LinearEquation;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Test the peak exceptions.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakBuilder_28_Test {
 
 	private ITotalScanSignals totalIonSignals;
@@ -48,7 +51,7 @@ public class PeakBuilder_28_Test {
 	private LinearEquation backgroundEquation;
 	private IMarkedIons excludedIons;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		/*
@@ -100,7 +103,7 @@ public class PeakBuilder_28_Test {
 		IPeakMassSpectrum peakMassSpectrum;
 		peakMassSpectrum = PeakBuilderMSD.getPeakMassSpectrum(chromatogram, totalIonSignals, backgroundEquation, excludedIons);
 		assertNotNull(peakMassSpectrum);
-		assertEquals("Total Signal", 9198643.0f, peakMassSpectrum.getTotalSignal(), 0);
+		assertEquals(9198643.0f, peakMassSpectrum.getTotalSignal(), 0);
 	}
 
 	@Test

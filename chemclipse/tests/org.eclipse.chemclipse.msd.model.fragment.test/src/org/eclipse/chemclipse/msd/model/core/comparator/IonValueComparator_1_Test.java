@@ -12,12 +12,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.comparator;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class IonValueComparator_1_Test {
 
@@ -27,7 +27,7 @@ public class IonValueComparator_1_Test {
 		IIon ion1 = new Ion(25.5f, 5000.5f);
 		IIon ion2 = new Ion(25.5f, 5000.5f);
 		IonValueComparator comparator = new IonValueComparator();
-		assertEquals("Comparator", 0, comparator.compare(ion1, ion2));
+		assertEquals(0, comparator.compare(ion1, ion2));
 	}
 
 	@Test
@@ -37,7 +37,7 @@ public class IonValueComparator_1_Test {
 			IIon ion1 = null;
 			IIon ion2 = new Ion(25.5f, 5000.5f);
 			IonValueComparator comparator = new IonValueComparator();
-			assertEquals("Comparator", 0, comparator.compare(ion1, ion2));
+			assertEquals(0, comparator.compare(ion1, ion2));
 		});
 	}
 
@@ -48,7 +48,7 @@ public class IonValueComparator_1_Test {
 			IIon ion1 = new Ion(25.5f, 5000.5f);
 			IIon ion2 = null;
 			IonValueComparator comparator = new IonValueComparator();
-			assertEquals("Comparator", 0, comparator.compare(ion1, ion2));
+			assertEquals(0, comparator.compare(ion1, ion2));
 		});
 	}
 
@@ -58,7 +58,7 @@ public class IonValueComparator_1_Test {
 		IIon ion1 = new Ion(24.5f, 5000.5f);
 		IIon ion2 = new Ion(25.5f, 5000.5f);
 		IonValueComparator comparator = new IonValueComparator();
-		assertEquals("Comparator", -1, comparator.compare(ion1, ion2));
+		assertEquals(-1, comparator.compare(ion1, ion2));
 	}
 
 	@Test
@@ -67,6 +67,6 @@ public class IonValueComparator_1_Test {
 		IIon ion1 = new Ion(25.5f, 5000.5f);
 		IIon ion2 = new Ion(24.5f, 4000.5f);
 		IonValueComparator comparator = new IonValueComparator();
-		assertEquals("Comparator", 1, comparator.compare(ion1, ion2));
+		assertEquals(1, comparator.compare(ion1, ion2));
 	}
 }

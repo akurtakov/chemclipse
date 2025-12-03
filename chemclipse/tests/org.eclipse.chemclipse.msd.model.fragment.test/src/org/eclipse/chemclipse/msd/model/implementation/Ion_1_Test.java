@@ -12,20 +12,23 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Abundance and ion test.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class Ion_1_Test {
 
 	private Ion ion;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		ion = new Ion(0.0f, 0.0f);
 	}
@@ -33,12 +36,12 @@ public class Ion_1_Test {
 	@Test
 	public void testGetAbundance() {
 
-		assertEquals("getAbundance", 0.0f, ion.getAbundance(), 0);
+		assertEquals(0.0f, ion.getAbundance(), 0);
 	}
 
 	@Test
 	public void testGetIon() {
 
-		assertEquals("getIon", 0.0d, ion.getIon(), 0);
+		assertEquals(0.0d, ion.getIon(), 0);
 	}
 }

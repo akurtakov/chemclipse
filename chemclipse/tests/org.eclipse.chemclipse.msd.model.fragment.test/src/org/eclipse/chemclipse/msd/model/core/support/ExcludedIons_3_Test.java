@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.support;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.msd.model.core.IIon;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ExcludedIons_3_Test {
 
@@ -26,13 +26,13 @@ public class ExcludedIons_3_Test {
 	public void testContains_1() {
 
 		excludedIons.add(new MarkedIon((int)IIon.TIC_ION));
-		assertTrue("contains", excludedIons.getIonsNominal().contains(0));
+		assertTrue(excludedIons.getIonsNominal().contains(0));
 	}
 
 	@Test
 	public void testContains_2() {
 
 		excludedIons.add(new MarkedIon((int)IIon.TIC_ION));
-		assertTrue("contains", excludedIons.getIonsNominal().contains(0));
+		assertTrue(excludedIons.getIonsNominal().contains(0));
 	}
 }

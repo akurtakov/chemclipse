@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.support;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,20 +26,23 @@ import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.model.signals.TotalScanSignal;
 import org.eclipse.chemclipse.model.signals.TotalScanSignals;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Test the peak exceptions.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakBuilder_27_Test {
 
 	private ITotalScanSignals totalIonSignals;
 	private ITotalScanSignal totalIonSignal;
 	private IPeakIntensityValues peakIntensityValues;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		List<Float> intensities = new ArrayList<Float>();
 		intensities.add(0.0f);
@@ -68,11 +71,11 @@ public class PeakBuilder_27_Test {
 		peakIntensityValues = PeakBuilderMSD.getPeakIntensityValues(totalIonSignals);
 		assertNotNull(peakIntensityValues);
 		value = peakIntensityValues.getIntensityValue(10);
-		assertEquals("Intensity", 0.0f, value.getValue(), 0);
+		assertEquals(0.0f, value.getValue(), 0);
 		value = peakIntensityValues.getIntensityValue(40);
-		assertEquals("Intensity", IPeakIntensityValues.MAX_INTENSITY, value.getValue(), 0);
+		assertEquals(IPeakIntensityValues.MAX_INTENSITY, value.getValue(), 0);
 		value = peakIntensityValues.getIntensityValue(100);
-		assertEquals("Intensity", 0.0f, value.getValue(), 0);
+		assertEquals(0.0f, value.getValue(), 0);
 	}
 
 	@Test

@@ -12,17 +12,20 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Tests the methods equals and hashCode.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class Chromatogram_2_Test {
 
 	private ChromatogramMSD chromatogram1;
@@ -30,8 +33,8 @@ public class Chromatogram_2_Test {
 	private IScanMSD supplierMassSpectrum;
 	private IIon ion;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		chromatogram1 = new ChromatogramMSD();
 		chromatogram2 = new ChromatogramMSD();

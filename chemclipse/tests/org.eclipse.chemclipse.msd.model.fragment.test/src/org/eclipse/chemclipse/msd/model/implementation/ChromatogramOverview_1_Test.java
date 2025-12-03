@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 
@@ -21,12 +21,15 @@ import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignalExtractor;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.model.signals.TotalScanSignalExtractor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Test the interface IChromatogramOverview.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramOverview_1_Test {
 
 	private ChromatogramMSD chrom;
@@ -34,7 +37,7 @@ public class ChromatogramOverview_1_Test {
 	private Date date;
 	private ITotalScanSignalExtractor totalIonSignalExtractor;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		chrom = new ChromatogramMSD();
@@ -47,92 +50,92 @@ public class ChromatogramOverview_1_Test {
 	@Test
 	public void testGetMinSignal_1() {
 
-		assertEquals("minSignal", 0, chromatogram.getMinSignal(), 0);
+		assertEquals(0, chromatogram.getMinSignal(), 0);
 	}
 
 	@Test
 	public void testGetMaxSignal_1() {
 
-		assertEquals("maxSignal", 0, chromatogram.getMaxSignal(), 0);
+		assertEquals(0, chromatogram.getMaxSignal(), 0);
 	}
 
 	@Test
 	public void testGetStartRetentionTime_1() {
 
-		assertEquals("startRetentionTime", 0, chromatogram.getStartRetentionTime());
+		assertEquals(0, chromatogram.getStartRetentionTime());
 	}
 
 	@Test
 	public void testGetStopRetentionTime_1() {
 
-		assertEquals("stopRetentionTime", 0, chromatogram.getStopRetentionTime());
+		assertEquals(0, chromatogram.getStopRetentionTime());
 	}
 
 	@Test
 	public void testGetScanDelay_1() {
 
-		assertEquals("scanDelay", 4500, chromatogram.getScanDelay());
+		assertEquals(4500, chromatogram.getScanDelay());
 	}
 
 	@Test
 	public void testGetScanInterval_1() {
 
-		assertEquals("scanInterval", 1000, chromatogram.getScanInterval());
+		assertEquals(1000, chromatogram.getScanInterval());
 	}
 
 	@Test
 	public void testGetNumberOfScans_1() {
 
-		assertEquals("numberOfScans", 0, chromatogram.getNumberOfScans());
+		assertEquals(0, chromatogram.getNumberOfScans());
 	}
 
 	@Test
 	public void testGetName_1() {
 
-		assertEquals("name", "Chromatogram", chromatogram.getName());
+		assertEquals("Chromatogram", chromatogram.getName());
 	}
 
 	@Test
 	public void testGetFile_1() {
 
-		assertEquals("file", null, chromatogram.getFile());
+		assertEquals(null, chromatogram.getFile());
 	}
 
 	@Test
 	public void testGetOperator_1() {
 
-		assertEquals("operator", "", chromatogram.getOperator());
+		assertEquals("", chromatogram.getOperator());
 	}
 
 	@Test
 	public void testGetDate_1() {
 
-		assertTrue("date", chromatogram.getDate() != null);
+		assertTrue(chromatogram.getDate() != null);
 	}
 
 	@Test
 	public void testGetDate_2() {
 
 		chromatogram.setDate(date);
-		assertEquals("date", date.toString(), chromatogram.getDate().toString());
+		assertEquals(date.toString(), chromatogram.getDate().toString());
 	}
 
 	@Test
 	public void testGetMiscInfo_1() {
 
-		assertEquals("miscInfo", "", chromatogram.getMiscInfo());
+		assertEquals("", chromatogram.getMiscInfo());
 	}
 
 	@Test
 	public void testGetTotalIonSignals_1() {
 
 		ITotalScanSignals signals = totalIonSignalExtractor.getTotalScanSignals();
-		assertEquals("List<ITotalIonSignal> size", 0, signals.size());
+		assertEquals(0, signals.size());
 	}
 
 	@Test
 	public void testGetTotalIonSignal_1() {
 
-		assertEquals("totalIonSignal", 0, chromatogram.getTotalSignal(), 0);
+		assertEquals(0, chromatogram.getTotalSignal(), 0);
 	}
 }

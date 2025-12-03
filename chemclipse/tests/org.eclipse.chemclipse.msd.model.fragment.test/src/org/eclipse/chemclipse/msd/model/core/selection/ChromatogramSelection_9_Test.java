@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.selection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
@@ -22,14 +22,17 @@ import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
 import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramSelection_9_Test {
 
 	private IChromatogramSelectionMSD selection;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		IChromatogramMSD chromatogram = new ChromatogramMSD();
@@ -53,6 +56,6 @@ public class ChromatogramSelection_9_Test {
 
 		IScanMSD selectedScan = selection.getSelectedScan();
 		assertNotNull(selectedScan);
-		assertEquals("RetentionTime", 500, selectedScan.getRetentionTime());
+		assertEquals(500, selectedScan.getRetentionTime());
 	}
 }

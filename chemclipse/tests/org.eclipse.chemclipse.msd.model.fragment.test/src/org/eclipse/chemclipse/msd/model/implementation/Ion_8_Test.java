@@ -12,20 +12,23 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * HashCode test.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class Ion_8_Test {
 
 	private Ion ion1;
 	private Ion ion2;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		ion1 = new Ion(5.2f, 4756.3f);
@@ -35,12 +38,12 @@ public class Ion_8_Test {
 	@Test
 	public void testHashCode_1() {
 
-		assertEquals("hashCode", ion1.hashCode(), ion2.hashCode());
+		assertEquals(ion1.hashCode(), ion2.hashCode());
 	}
 
 	@Test
 	public void testHashCode_2() {
 
-		assertEquals("hashCode", ion2.hashCode(), ion1.hashCode());
+		assertEquals(ion2.hashCode(), ion1.hashCode());
 	}
 }

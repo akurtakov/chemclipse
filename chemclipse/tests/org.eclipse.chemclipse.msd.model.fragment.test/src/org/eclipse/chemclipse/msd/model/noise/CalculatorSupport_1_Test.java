@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.noise;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CalculatorSupport_1_Test {
 
@@ -39,7 +39,7 @@ public class CalculatorSupport_1_Test {
 		values[11] = 20;
 		values[12] = 10;
 		double mean = 13.8461538461538;
-		assertTrue("9 crossings", calculatorSupport.acceptSegment(values, mean));
+		assertTrue(calculatorSupport.acceptSegment(values, mean), "9 crossings");
 	}
 
 	@Test
@@ -60,7 +60,7 @@ public class CalculatorSupport_1_Test {
 		values[11] = 10;
 		values[12] = 10;
 		double mean = 13.0769230769231;
-		assertTrue("7 crossings", calculatorSupport.acceptSegment(values, mean));
+		assertTrue(calculatorSupport.acceptSegment(values, mean), "7 crossings");
 	}
 
 	@Test
@@ -81,7 +81,7 @@ public class CalculatorSupport_1_Test {
 		values[11] = 10;
 		values[12] = 10;
 		double mean = 12.3076923076923;
-		assertFalse("6 crossings", calculatorSupport.acceptSegment(values, mean));
+		assertFalse(calculatorSupport.acceptSegment(values, mean), "6 crossings");
 	}
 
 	@Test
@@ -102,6 +102,6 @@ public class CalculatorSupport_1_Test {
 		values[11] = 10;
 		values[12] = 10;
 		double mean = 11.5384615384615;
-		assertFalse("4 crossings", calculatorSupport.acceptSegment(values, mean));
+		assertFalse(calculatorSupport.acceptSegment(values, mean), "4 crossings");
 	}
 }

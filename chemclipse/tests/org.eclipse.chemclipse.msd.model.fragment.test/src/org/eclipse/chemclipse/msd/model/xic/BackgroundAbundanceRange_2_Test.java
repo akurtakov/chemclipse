@@ -12,24 +12,27 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.xic;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.model.support.BackgroundAbundanceRange;
 import org.eclipse.chemclipse.model.support.IBackgroundAbundanceRange;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Tests the class BackgroundAbundanceRange concerning equals, hashCode and
  * toString.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class BackgroundAbundanceRange_2_Test {
 
 	private IBackgroundAbundanceRange backgroundAbundanceRange1;
 	private IBackgroundAbundanceRange backgroundAbundanceRange2;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		backgroundAbundanceRange1 = new BackgroundAbundanceRange(0, 5);
 		backgroundAbundanceRange2 = new BackgroundAbundanceRange(0, 5);

@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.xic;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +24,8 @@ import org.eclipse.chemclipse.msd.model.exceptions.NoExtractedIonSignalStoredExc
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
 import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ExtractedIonSignalsModifier_3_Test {
 
@@ -34,7 +34,7 @@ public class ExtractedIonSignalsModifier_3_Test {
 	private List<Integer> scans;
 	private List<Integer> ions;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws NoExtractedIonSignalStoredException {
 
 		/*
@@ -81,7 +81,7 @@ public class ExtractedIonSignalsModifier_3_Test {
 		for(int scan : scans) {
 			extractedIonSignal = extractedIonSignals.getExtractedIonSignal(scan);
 			for(int ion : ions) {
-				assertEquals("TotalIonSignal before", 0.0f, extractedIonSignal.getAbundance(ion), 0);
+				assertEquals(0.0f, extractedIonSignal.getAbundance(ion), 0, "TotalIonSignal before");
 			}
 		}
 	}
@@ -94,9 +94,9 @@ public class ExtractedIonSignalsModifier_3_Test {
 		 * Test the adjusted value.
 		 */
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(92);
-		assertEquals("TotalIonSignal after", 40.477154f, extractedIonSignal.getAbundance(45), 0);
-		assertEquals("TotalIonSignal after", 40.477154f, extractedIonSignal.getAbundance(76), 0);
-		assertEquals("TotalIonSignal after", 40.477154f, extractedIonSignal.getAbundance(102), 0);
+		assertEquals(40.477154f, extractedIonSignal.getAbundance(45), 0, "TotalIonSignal after");
+		assertEquals(40.477154f, extractedIonSignal.getAbundance(76), 0, "TotalIonSignal after");
+		assertEquals(40.477154f, extractedIonSignal.getAbundance(102), 0, "TotalIonSignal after");
 	}
 
 	@Test
@@ -107,9 +107,9 @@ public class ExtractedIonSignalsModifier_3_Test {
 		 * Test the adjusted value.
 		 */
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(94);
-		assertEquals("TotalIonSignal after", 40.477154f, extractedIonSignal.getAbundance(45), 0);
-		assertEquals("TotalIonSignal after", 40.477154f, extractedIonSignal.getAbundance(76), 0);
-		assertEquals("TotalIonSignal after", 40.477154f, extractedIonSignal.getAbundance(102), 0);
+		assertEquals(40.477154f, extractedIonSignal.getAbundance(45), 0);
+		assertEquals(40.477154f, extractedIonSignal.getAbundance(76), 0);
+		assertEquals(40.477154f, extractedIonSignal.getAbundance(102), 0);
 	}
 
 	@Test
@@ -120,9 +120,9 @@ public class ExtractedIonSignalsModifier_3_Test {
 		 * Test the adjusted value.
 		 */
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(96);
-		assertEquals("TotalIonSignal after", 40.477154f, extractedIonSignal.getAbundance(45), 0);
-		assertEquals("TotalIonSignal after", 40.477154f, extractedIonSignal.getAbundance(76), 0);
-		assertEquals("TotalIonSignal after", 40.477154f, extractedIonSignal.getAbundance(102), 0);
+		assertEquals(40.477154f, extractedIonSignal.getAbundance(45), 0);
+		assertEquals(40.477154f, extractedIonSignal.getAbundance(76), 0);
+		assertEquals(40.477154f, extractedIonSignal.getAbundance(102), 0);
 	}
 
 	@Test
@@ -133,9 +133,9 @@ public class ExtractedIonSignalsModifier_3_Test {
 		 * Test the adjusted value.
 		 */
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(98);
-		assertEquals("TotalIonSignal after", 40.477154f, extractedIonSignal.getAbundance(45), 0);
-		assertEquals("TotalIonSignal after", 40.477154f, extractedIonSignal.getAbundance(76), 0);
-		assertEquals("TotalIonSignal after", 40.477154f, extractedIonSignal.getAbundance(102), 0);
+		assertEquals(40.477154f, extractedIonSignal.getAbundance(45), 0);
+		assertEquals(40.477154f, extractedIonSignal.getAbundance(76), 0);
+		assertEquals(40.477154f, extractedIonSignal.getAbundance(102), 0);
 	}
 
 	@Test
@@ -146,9 +146,9 @@ public class ExtractedIonSignalsModifier_3_Test {
 		 * Test the adjusted value.
 		 */
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(93);
-		assertEquals("TotalIonSignal after", 90.0f, extractedIonSignal.getAbundance(45), 0);
-		assertEquals("TotalIonSignal after", 152.0f, extractedIonSignal.getAbundance(76), 0);
-		assertEquals("TotalIonSignal after", 204.0f, extractedIonSignal.getAbundance(102), 0);
+		assertEquals(90.0f, extractedIonSignal.getAbundance(45), 0);
+		assertEquals(152.0f, extractedIonSignal.getAbundance(76), 0);
+		assertEquals(204.0f, extractedIonSignal.getAbundance(102), 0);
 	}
 
 	@Test
@@ -159,9 +159,9 @@ public class ExtractedIonSignalsModifier_3_Test {
 		 * Test the adjusted value.
 		 */
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(99);
-		assertEquals("TotalIonSignal after", 90.0f, extractedIonSignal.getAbundance(45), 0);
-		assertEquals("TotalIonSignal after", 152.0f, extractedIonSignal.getAbundance(76), 0);
-		assertEquals("TotalIonSignal after", 204.0f, extractedIonSignal.getAbundance(102), 0);
+		assertEquals(90.0f, extractedIonSignal.getAbundance(45), 0);
+		assertEquals(152.0f, extractedIonSignal.getAbundance(76), 0);
+		assertEquals(204.0f, extractedIonSignal.getAbundance(102), 0);
 	}
 
 	@Test
@@ -172,8 +172,8 @@ public class ExtractedIonSignalsModifier_3_Test {
 		 * Test the adjusted value.
 		 */
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(100);
-		assertEquals("TotalIonSignal after", 90.0f, extractedIonSignal.getAbundance(45), 0);
-		assertEquals("TotalIonSignal after", 152.0f, extractedIonSignal.getAbundance(76), 0);
-		assertEquals("TotalIonSignal after", 204.0f, extractedIonSignal.getAbundance(102), 0);
+		assertEquals(90.0f, extractedIonSignal.getAbundance(45), 0);
+		assertEquals(152.0f, extractedIonSignal.getAbundance(76), 0);
+		assertEquals(204.0f, extractedIonSignal.getAbundance(102), 0);
 	}
 }

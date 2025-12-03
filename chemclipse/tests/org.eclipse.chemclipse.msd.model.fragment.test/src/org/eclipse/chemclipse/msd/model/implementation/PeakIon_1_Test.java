@@ -12,17 +12,20 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.msd.model.core.PeakIonType;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakIon_1_Test {
 
 	private PeakIon peakIon;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		peakIon = new PeakIon(45.5f, 2500.4f);
@@ -31,12 +34,12 @@ public class PeakIon_1_Test {
 	@Test
 	public void testGetUncertaintyFactor_1() {
 
-		assertEquals("GetUncertaintyFactor", 1.0f, peakIon.getUncertaintyFactor(), 0);
+		assertEquals(1.0f, peakIon.getUncertaintyFactor(), 0);
 	}
 
 	@Test
 	public void testGetPeakIonType_1() {
 
-		assertEquals("GetPeakIonType", PeakIonType.NO_TYPE, peakIon.getPeakIonType());
+		assertEquals(PeakIonType.NO_TYPE, peakIon.getPeakIonType());
 	}
 }

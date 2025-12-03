@@ -24,10 +24,13 @@ import org.eclipse.chemclipse.msd.model.core.IPeakIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
-import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
-@Ignore
+@Disabled
+@TestInstance(Lifecycle.PER_CLASS)
 abstract class ChromatogramPeakTestCase {
 
 	private IPeakModelMSD peakModel;
@@ -43,8 +46,8 @@ abstract class ChromatogramPeakTestCase {
 	private IScanMSD supplierMassSpectrum;
 	private IChromatogramPeakMSD peak;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		// ----------------------PeakMaximum
 		peakMaximum = new PeakMassSpectrum();

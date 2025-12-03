@@ -12,21 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.selection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.easymock.EasyMock;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramSelection_6_Test {
 
 	private IChromatogramMSD chromatogram;
 	private IChromatogramSelectionMSD selection;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		/*
 		 * Use createNiceMock if you use void methods that are not important to
@@ -46,9 +49,9 @@ public class ChromatogramSelection_6_Test {
 	@Test
 	public void testChromatogram_1() {
 
-		assertEquals("StartRetentionTime", 1, chromatogram.getStartRetentionTime());
-		assertEquals("StopRetentionTime", 100, chromatogram.getStopRetentionTime());
-		assertEquals("MaxSignal", 127500.0f, chromatogram.getMaxSignal(), 0);
+		assertEquals(1, chromatogram.getStartRetentionTime());
+		assertEquals(100, chromatogram.getStopRetentionTime());
+		assertEquals(127500.0f, chromatogram.getMaxSignal(), 0);
 	}
 
 	@Test
@@ -61,13 +64,13 @@ public class ChromatogramSelection_6_Test {
 	public void testGetStartRetentionTime_1() {
 
 		selection.setStartRetentionTime(0);
-		assertEquals("StartRetentionTime", 1, selection.getStartRetentionTime());
+		assertEquals(1, selection.getStartRetentionTime());
 	}
 
 	@Test
 	public void testGetStopRetentionTime_1() {
 
 		selection.setStopRetentionTime(180);
-		assertEquals("StopRetentionTime", 100, selection.getStopRetentionTime());
+		assertEquals(100, selection.getStopRetentionTime());
 	}
 }

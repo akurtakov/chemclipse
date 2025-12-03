@@ -12,14 +12,14 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIon;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIons;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests getTotalIonSignal(IExcludedIons excludedIons)
@@ -30,7 +30,7 @@ public class MassSpectrum_20_Test {
 	private Ion ion;
 	private IMarkedIons excludedIons;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		massSpectrum = new ScanMSD();
@@ -50,14 +50,14 @@ public class MassSpectrum_20_Test {
 	@Test
 	public void testGetTotalSignal_1() {
 
-		assertEquals("getTotalSignal", 1242021.9f, massSpectrum.getTotalSignal(), 0);
+		assertEquals(1242021.9f, massSpectrum.getTotalSignal(), 0);
 	}
 
 	@Test
 	public void testGetTotalIonSignal_2() {
 
 		excludedIons.add(new MarkedIon(104));
-		assertEquals("getTotalSignal", 1122021.5f, massSpectrum.getTotalSignal(excludedIons), 0);
+		assertEquals(1122021.5f, massSpectrum.getTotalSignal(excludedIons), 0);
 	}
 
 	@Test
@@ -65,19 +65,19 @@ public class MassSpectrum_20_Test {
 
 		excludedIons.add(new MarkedIon(104));
 		excludedIons.add(new MarkedIon(86));
-		assertEquals("getTotalSignal", 1122021.5f, massSpectrum.getTotalSignal(excludedIons), 0);
+		assertEquals(1122021.5f, massSpectrum.getTotalSignal(excludedIons), 0);
 	}
 
 	@Test
 	public void testGetTotalIonSignal_4() {
 
-		assertEquals("getTotalSignal", 1242021.9f, massSpectrum.getTotalSignal(excludedIons), 0);
+		assertEquals(1242021.9f, massSpectrum.getTotalSignal(excludedIons), 0);
 	}
 
 	@Test
 	public void testGetTotalIonSignal_5() {
 
-		assertEquals("getTotalSignal", 1242021.9f, massSpectrum.getTotalSignal(null), 0);
+		assertEquals(1242021.9f, massSpectrum.getTotalSignal(null), 0);
 	}
 
 	@Test
@@ -93,6 +93,6 @@ public class MassSpectrum_20_Test {
 		 * will be rounded Math.round() and so only 104.1 and 28.2 will be
 		 * kicked.
 		 */
-		assertEquals("getTotalSignal", 1089021.0f, massSpectrum.getTotalSignal(excludedIons), 0);
+		assertEquals(1089021.0f, massSpectrum.getTotalSignal(excludedIons), 0);
 	}
 }

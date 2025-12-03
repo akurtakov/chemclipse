@@ -12,23 +12,25 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.xic;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
-import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
 import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ExtractedIonSignals_15a_Test {
 
 	private IExtractedIonSignals extractedIonSignals;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		int scans = 120;
@@ -49,13 +51,13 @@ public class ExtractedIonSignals_15a_Test {
 			chromatogram.addScan(supplierMassSpectrum);
 		}
 
-		((IScanMSD)chromatogram.getScan(1)).removeAllIons();
-		((IScanMSD)chromatogram.getScan(2)).removeAllIons();
-		((IScanMSD)chromatogram.getScan(3)).removeAllIons();
-		((IScanMSD)chromatogram.getScan(4)).removeAllIons();
-		((IScanMSD)chromatogram.getScan(69)).removeAllIons();
-		((IScanMSD)chromatogram.getScan(78)).removeAllIons();
-		((IScanMSD)chromatogram.getScan(92)).removeAllIons();
+		chromatogram.getScan(1).removeAllIons();
+		chromatogram.getScan(2).removeAllIons();
+		chromatogram.getScan(3).removeAllIons();
+		chromatogram.getScan(4).removeAllIons();
+		chromatogram.getScan(69).removeAllIons();
+		chromatogram.getScan(78).removeAllIons();
+		chromatogram.getScan(92).removeAllIons();
 		/*
 		 * Use a chromatogram selection.
 		 */
@@ -66,7 +68,7 @@ public class ExtractedIonSignals_15a_Test {
 	@Test
 	public void testSize_1() {
 
-		assertEquals("Size", 64, extractedIonSignals.size());
+		assertEquals(64, extractedIonSignals.size());
 	}
 
 	@Test

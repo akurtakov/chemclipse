@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Set;
 
@@ -24,8 +24,10 @@ import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.identifier.LibraryInformation;
 import org.eclipse.chemclipse.model.implementation.IdentificationTarget;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramPeakMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * The chromatogram and peak will be initialized in DefaultPeakTestCase.<br/>
@@ -34,6 +36,7 @@ import org.junit.Test;
  * The chromatogram has 17 scans, starting at a retention time of 500 ms and
  * ends at a retention time of 16500 ms. It has a background of 1750 units.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramPeak_5_Test extends ChromatogramPeakTestCase {
 
 	private IChromatogramPeakMSD peak;
@@ -43,8 +46,8 @@ public class ChromatogramPeak_5_Test extends ChromatogramPeakTestCase {
 	private IComparisonResult comparisonResult;
 
 	@Override
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		super.setUp();
 		peak = new ChromatogramPeakMSD(getPeakModel(), getChromatogram());
@@ -60,14 +63,14 @@ public class ChromatogramPeak_5_Test extends ChromatogramPeakTestCase {
 	public void testGetTargets_1() {
 
 		Set<IIdentificationTarget> targets = peak.getTargets();
-		assertNotNull("Targets", targets);
+		assertNotNull(targets);
 	}
 
 	@Test
 	public void testGetTargets_2() {
 
 		Set<IIdentificationTarget> targets = peak.getTargets();
-		assertEquals("Size", 0, targets.size());
+		assertEquals(0, targets.size());
 	}
 
 	@Test
@@ -76,7 +79,7 @@ public class ChromatogramPeak_5_Test extends ChromatogramPeakTestCase {
 		peak.getTargets().add(entry1);
 		peak.getTargets().add(entry2);
 		Set<IIdentificationTarget> targets = peak.getTargets();
-		assertEquals("Size", 2, targets.size());
+		assertEquals(2, targets.size());
 	}
 
 	@Test
@@ -86,7 +89,7 @@ public class ChromatogramPeak_5_Test extends ChromatogramPeakTestCase {
 		peak.getTargets().add(entry2);
 		peak.getTargets().add(entry1);
 		Set<IIdentificationTarget> targets = peak.getTargets();
-		assertEquals("Size", 2, targets.size());
+		assertEquals(2, targets.size());
 	}
 
 	@Test
@@ -97,7 +100,7 @@ public class ChromatogramPeak_5_Test extends ChromatogramPeakTestCase {
 		peak.getTargets().add(entry1);
 		peak.getTargets().remove(entry1);
 		Set<IIdentificationTarget> targets = peak.getTargets();
-		assertEquals("Size", 1, targets.size());
+		assertEquals(1, targets.size());
 	}
 
 	@Test
@@ -107,6 +110,6 @@ public class ChromatogramPeak_5_Test extends ChromatogramPeakTestCase {
 		peak.getTargets().add(entry2);
 		peak.getTargets().clear();
 		Set<IIdentificationTarget> targets = peak.getTargets();
-		assertEquals("Size", 0, targets.size());
+		assertEquals(0, targets.size());
 	}
 }

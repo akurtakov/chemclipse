@@ -12,24 +12,29 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IIonBounds;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Test the method clone() of mass spectrum.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class MassSpectrum_12_Test {
 
 	private ScanMSD massSpectrum;
 	private Ion ion;
 	private ScanMSD templateMassSpectrum;
 
-	@Before
+	@BeforeAll
 	public void setUp() throws CloneNotSupportedException {
 
 		templateMassSpectrum = new ScanMSD();
@@ -54,167 +59,166 @@ public class MassSpectrum_12_Test {
 	@Test
 	public void testGetIons_1() {
 
-		assertEquals("getIons", 5, massSpectrum.getIons().size());
+		assertEquals(5, massSpectrum.getIons().size());
 	}
 
 	@Test
 	public void testGetTotalSignal_1() {
 
-		assertEquals("getTotalSignal", 1242021.9f, massSpectrum.getTotalSignal(), 0);
+		assertEquals(1242021.9f, massSpectrum.getTotalSignal(), 0);
 	}
 
 	@Test
 	public void testGetExtractedIonSignal_1() {
 
-		assertEquals("getExtractedIonSignal", 0.0f, massSpectrum.getExtractedIonSignal().getAbundance(0), 0);
+		assertEquals(0.0f, massSpectrum.getExtractedIonSignal().getAbundance(0), 0);
 	}
 
 	@Test
 	public void testGetExtractedIonSignal_2() {
 
-		assertEquals("getExtractedIonSignal", 120000.4f, massSpectrum.getExtractedIonSignal(25, 120).getAbundance(104), 0);
+		assertEquals(120000.4f, massSpectrum.getExtractedIonSignal(25, 120).getAbundance(104), 0);
 	}
 
 	@Test
 	public void testGetExtractedIonSignal_3() {
 
-		assertEquals("getExtractedIonSignal", 890520.4f, massSpectrum.getExtractedIonSignal(25, 120).getAbundance(33), 0);
+		assertEquals(890520.4f, massSpectrum.getExtractedIonSignal(25, 120).getAbundance(33), 0);
 	}
 
 	@Test
 	public void testGetExtractedIonSignal_4() {
 
-		assertEquals("getExtractedIonSignal", 120000.4f, massSpectrum.getExtractedIonSignal(25, 120).getAbundance(106), 0);
+		assertEquals(120000.4f, massSpectrum.getExtractedIonSignal(25, 120).getAbundance(106), 0);
 	}
 
 	@Test
 	public void testGetBasePeak_1() {
 
-		assertEquals("getBasePeak", 32.599998474121094d, massSpectrum.getBasePeak(), 0);
+		assertEquals(32.599998474121094d, massSpectrum.getBasePeak(), 0);
 	}
 
 	@Test
 	public void testGetBasePeakAbundance_1() {
 
-		assertEquals("getBasePeakAbundance", 890520.4f, massSpectrum.getBasePeakAbundance(), 0);
+		assertEquals(890520.4f, massSpectrum.getBasePeakAbundance(), 0);
 	}
 
 	@Test
 	public void testGetHighestAbundance_1() {
 
-		assertEquals("getHighestAbundance", 890520.4f, massSpectrum.getHighestAbundance().getAbundance(), 0);
+		assertEquals(890520.4f, massSpectrum.getHighestAbundance().getAbundance(), 0);
 	}
 
 	@Test
 	public void testGetHighestAbundance_2() {
 
-		assertEquals("getHighestAbundance", 32.599998474121094d, massSpectrum.getHighestAbundance().getIon(), 0);
+		assertEquals(32.599998474121094d, massSpectrum.getHighestAbundance().getIon(), 0);
 	}
 
 	@Test
 	public void testGetHighestIon_1() {
 
-		assertEquals("getHighestIon", 120000.4f, massSpectrum.getHighestIon().getAbundance(), 0);
+		assertEquals(120000.4f, massSpectrum.getHighestIon().getAbundance(), 0);
 	}
 
 	@Test
 	public void testGetHighestIon_2() {
 
-		assertEquals("getHighestIon", 105.69999694824219d, massSpectrum.getHighestIon().getIon(), 0);
+		assertEquals(105.69999694824219d, massSpectrum.getHighestIon().getIon(), 0);
 	}
 
 	@Test
 	public void testGetLowestAbundance_1() {
 
-		assertEquals("getLowestAbundance", 33000.5f, massSpectrum.getLowestAbundance().getAbundance(), 0);
+		assertEquals(33000.5f, massSpectrum.getLowestAbundance().getAbundance(), 0);
 	}
 
 	@Test
 	public void testGetLowestAbundance_2() {
 
-		assertEquals("getLowestAbundance", 28.200000762939453d, massSpectrum.getLowestAbundance().getIon(), 0);
+		assertEquals(28.200000762939453d, massSpectrum.getLowestAbundance().getIon(), 0);
 	}
 
 	@Test
 	public void testGetLowestIon_1() {
 
-		assertEquals("getLowestIon", 33000.5f, massSpectrum.getLowestIon().getAbundance(), 0);
+		assertEquals(33000.5f, massSpectrum.getLowestIon().getAbundance(), 0);
 	}
 
 	@Test
 	public void testGetLowestIon_2() {
 
-		assertEquals("getLowestIon", 28.200000762939453d, massSpectrum.getLowestIon().getIon(), 0);
+		assertEquals(28.200000762939453d, massSpectrum.getLowestIon().getIon(), 0);
 	}
 
 	@Test
 	public void testGetIonBounds_1() {
 
 		IIonBounds bounds = massSpectrum.getIonBounds();
-		assertEquals("getLowestIon().getAbundance()", 33000.5f, bounds.getLowestIon().getAbundance(), 0);
-		assertEquals("getLowestIon().getIon()", 28.200000762939453d, bounds.getLowestIon().getIon(), 0);
-		assertEquals("getHighestIon().getAbundance()", 120000.4f, bounds.getHighestIon().getAbundance(), 0);
-		assertEquals("getHighestIon().getIon()", 105.69999694824219d, bounds.getHighestIon().getIon(), 0);
+		assertEquals(33000.5f, bounds.getLowestIon().getAbundance(), 0);
+		assertEquals(28.200000762939453d, bounds.getLowestIon().getIon(), 0);
+		assertEquals(120000.4f, bounds.getHighestIon().getAbundance(), 0);
+		assertEquals(105.69999694824219d, bounds.getHighestIon().getIon(), 0);
 	}
 
 	@Test
 	public void testGetNumberOfIons_1() {
 
-		assertEquals("getNumberOfIons", 5, massSpectrum.getNumberOfIons());
+		assertEquals(5, massSpectrum.getNumberOfIons());
 	}
 
 	@Test
 	public void testGetIon_1() {
 
-		IIon ion;
-		ion = massSpectrum.getIon(5);
-		assertEquals("getIon", null, ion);
+		IIon ion = massSpectrum.getIon(5);
+		assertNull(ion);
 		ion = massSpectrum.getIon(46);
-		assertTrue("getIon", ion != null);
-		assertEquals("getIon(46) abundance", 78500.2f, ion.getAbundance(), 0);
-		assertEquals("getIon(46) ion", 46.0d, ion.getIon(), 0);
+		assertNotNull(ion);
+		assertEquals(78500.2f, ion.getAbundance(), 0);
+		assertEquals(46.0d, ion.getIon(), 0);
 	}
 
 	@Test
 	public void testIsDirty_1() {
 
-		assertEquals("isDirty", true, massSpectrum.isDirty());
+		assertTrue(massSpectrum.isDirty());
 	}
 
 	@Test
 	public void testEquals_1() {
 
-		assertEquals("equals", true, massSpectrum.equals(templateMassSpectrum));
+		assertTrue(massSpectrum.equals(templateMassSpectrum));
 	}
 
 	@Test
 	public void testEquals_2() {
 
-		assertEquals("equals", true, templateMassSpectrum.equals(massSpectrum));
+		assertTrue(templateMassSpectrum.equals(massSpectrum));
 	}
 
 	@Test
 	public void testReferenceEquality_1() {
 
-		assertTrue("reference equality", massSpectrum != templateMassSpectrum);
+		assertTrue(massSpectrum != templateMassSpectrum);
 	}
 
 	@Test
 	public void testReferenceEquality_2() {
 
-		assertTrue("reference equality getLowestIon()", massSpectrum.getLowestIon() != templateMassSpectrum.getLowestIon());
-		assertTrue("reference equality getHighestIon()", massSpectrum.getHighestIon() != templateMassSpectrum.getHighestIon());
+		assertTrue(massSpectrum.getLowestIon() != templateMassSpectrum.getLowestIon());
+		assertTrue(massSpectrum.getHighestIon() != templateMassSpectrum.getHighestIon());
 	}
 
 	@Test
 	public void testReferenceEquality_3() {
 
-		assertTrue("reference equality parentChromatogram", massSpectrum.getParentChromatogram() == templateMassSpectrum.getParentChromatogram());
+		assertTrue(massSpectrum.getParentChromatogram() == templateMassSpectrum.getParentChromatogram());
 	}
 
 	@Test
 	public void testReferenceEquality_4() {
 
-		assertTrue("reference equality isDirty", massSpectrum.isDirty() == templateMassSpectrum.isDirty());
+		assertTrue(massSpectrum.isDirty() == templateMassSpectrum.isDirty());
 	}
 }

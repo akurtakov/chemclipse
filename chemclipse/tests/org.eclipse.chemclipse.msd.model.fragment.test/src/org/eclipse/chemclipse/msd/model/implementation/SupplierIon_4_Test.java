@@ -12,24 +12,27 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.eclipse.chemclipse.msd.model.core.IIon;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Equals and hashCode test.
  * 
  * @author Philip Wenig
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class SupplierIon_4_Test {
 
 	private IIon ion1;
 	private IIon ion2;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		ion1 = new Ion(1.0f, 5726.4f);
 		ion2 = new Ion(1.0f, 5716.4f);
@@ -38,24 +41,24 @@ public class SupplierIon_4_Test {
 	@Test
 	public void testEquals_1() {
 
-		assertNotEquals("equals", ion1, ion2);
+		assertNotEquals(ion1, ion2);
 	}
 
 	@Test
 	public void testEquals_2() {
 
-		assertNotEquals("equals", ion2, ion1);
+		assertNotEquals(ion2, ion1);
 	}
 
 	@Test
 	public void testHashCode_1() {
 
-		assertNotEquals("hashCode", ion1.hashCode(), ion2.hashCode());
+		assertNotEquals(ion1.hashCode(), ion2.hashCode());
 	}
 
 	@Test
 	public void testHashCode_2() {
 
-		assertNotEquals("hashCode", ion2.hashCode(), ion1.hashCode());
+		assertNotEquals(ion2.hashCode(), ion1.hashCode());
 	}
 }

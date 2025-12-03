@@ -12,13 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.comparator;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class IonAbundanceComparator_1_Test {
 
@@ -28,7 +28,7 @@ public class IonAbundanceComparator_1_Test {
 		IIon ion1 = new Ion(25.5f, 5000.5f);
 		IIon ion2 = new Ion(25.5f, 5000.5f);
 		IonAbundanceComparator comparator = new IonAbundanceComparator();
-		assertEquals("Comparator", 0, comparator.compare(ion1, ion2));
+		assertEquals(0, comparator.compare(ion1, ion2));
 	}
 
 	@Test
@@ -38,7 +38,7 @@ public class IonAbundanceComparator_1_Test {
 			IIon ion1 = null;
 			IIon ion2 = new Ion(25.5f, 5000.5f);
 			IonAbundanceComparator comparator = new IonAbundanceComparator();
-			assertEquals("Comparator", 0, comparator.compare(ion1, ion2));
+			assertEquals(0, comparator.compare(ion1, ion2));
 		});
 	}
 
@@ -49,7 +49,7 @@ public class IonAbundanceComparator_1_Test {
 			IIon ion1 = new Ion(25.5f, 5000.5f);
 			IIon ion2 = null;
 			IonAbundanceComparator comparator = new IonAbundanceComparator();
-			assertEquals("Comparator", 0, comparator.compare(ion1, ion2));
+			assertEquals(0, comparator.compare(ion1, ion2));
 		});
 	}
 

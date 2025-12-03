@@ -12,23 +12,26 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.noise;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.eclipse.chemclipse.model.support.AnalysisSegment;
 import org.eclipse.chemclipse.model.support.IAnalysisSegment;
 import org.eclipse.chemclipse.msd.model.core.ICombinedMassSpectrum;
 import org.eclipse.chemclipse.msd.model.implementation.CombinedMassSpectrum;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class NoiseSegment_1_Test {
 
 	private INoiseSegmentMSD noiseSegment;
 	private IAnalysisSegment analysisSegment;
 	private ICombinedMassSpectrum noiseMassSpectrum;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		analysisSegment = new AnalysisSegment(20, 200) {
@@ -58,7 +61,7 @@ public class NoiseSegment_1_Test {
 	@Test
 	public void testGetAnalysisSegment_2() {
 
-		assertEquals("Segment Width", 200, noiseSegment.getAnalysisSegment().getWidth());
+		assertEquals(200, noiseSegment.getAnalysisSegment().getWidth());
 	}
 
 	@Test

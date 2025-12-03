@@ -12,26 +12,29 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.xic;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
 import org.eclipse.chemclipse.model.signals.TotalScanSignal;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * HashCode and equals test.
  * 
  * @author Philip Wenig
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class TotalIonSignal_4_Test {
 
 	private ITotalScanSignal totalIonSignal1;
 	private ITotalScanSignal totalIonSignal2;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		totalIonSignal1 = new TotalScanSignal(5720, 1245.5f, 25476.45f);
@@ -41,60 +44,60 @@ public class TotalIonSignal_4_Test {
 	@Test
 	public void testHashCode_1() {
 
-		assertEquals("hashCode", totalIonSignal1.hashCode(), totalIonSignal2.hashCode());
+		assertEquals(totalIonSignal1.hashCode(), totalIonSignal2.hashCode());
 	}
 
 	@Test
 	public void testHashCode_2() {
 
-		assertEquals("hashCode", totalIonSignal2.hashCode(), totalIonSignal1.hashCode());
+		assertEquals(totalIonSignal2.hashCode(), totalIonSignal1.hashCode());
 	}
 
 	@Test
 	public void testEquals_1() {
 
-		assertEquals("equals", totalIonSignal1, totalIonSignal2);
+		assertEquals(totalIonSignal1, totalIonSignal2);
 	}
 
 	@Test
 	public void testEquals_2() {
 
-		assertEquals("equals", totalIonSignal2, totalIonSignal1);
+		assertEquals(totalIonSignal2, totalIonSignal1);
 	}
 
 	@Test
 	public void testEquals_3() {
 
-		assertNotNull("equals", totalIonSignal1);
+		assertNotNull(totalIonSignal1);
 	}
 
 	@Test
 	public void testEquals_4() {
 
-		assertNotNull("equals", totalIonSignal2);
+		assertNotNull(totalIonSignal2);
 	}
 
 	@Test
 	public void testEquals_5() {
 
-		assertEquals("equals", totalIonSignal1, totalIonSignal1);
+		assertEquals(totalIonSignal1, totalIonSignal1);
 	}
 
 	@Test
 	public void testEquals_6() {
 
-		assertEquals("equals", totalIonSignal2, totalIonSignal2);
+		assertEquals(totalIonSignal2, totalIonSignal2);
 	}
 
 	@Test
 	public void testEquals_7() {
 
-		assertNotEquals("equals", totalIonSignal1, new Object());
+		assertNotEquals(totalIonSignal1, new Object());
 	}
 
 	@Test
 	public void testEquals_8() {
 
-		assertNotEquals("equals", totalIonSignal2, new Object());
+		assertNotEquals(totalIonSignal2, new Object());
 	}
 }

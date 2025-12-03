@@ -12,25 +12,28 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.math.IonRoundMethod;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class AbstractIon_3_Test {
 
 	private IonRoundMethod defaultMethod;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		defaultMethod = IonRoundMethod.getActive();
 	}
 
-	@After
-	public void tearDown() throws Exception {
+	@AfterAll
+	public void tearDown() {
 
 		IonRoundMethod.setActive(defaultMethod);
 	}

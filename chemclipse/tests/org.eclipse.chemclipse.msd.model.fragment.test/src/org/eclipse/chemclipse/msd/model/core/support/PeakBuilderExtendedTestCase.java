@@ -22,17 +22,20 @@ import org.eclipse.chemclipse.msd.model.core.IPeakIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.implementation.PeakIon;
 import org.eclipse.chemclipse.msd.model.implementation.PeakMassSpectrum;
-import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
-@Ignore
+@Disabled
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakBuilderExtendedTestCase extends PeakBuilderTestCase {
 
 	protected ITotalScanSignals totalIonSignals;
 	protected IPeakMassSpectrum peakMassSpectrum;
 
 	@Override
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		super.setUp();

@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -23,9 +23,12 @@ import org.eclipse.chemclipse.model.implementation.PeakIntensityValues;
 import org.eclipse.chemclipse.msd.model.core.IPeakIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakModel_1_Test {
 
 	private IPeakModelMSD peakModel;
@@ -37,7 +40,7 @@ public class PeakModel_1_Test {
 	private float startBackgroundAbundance = 0.0f;
 	private float stopBackgroundAbundance = 0.0f;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		// ----------------------PeakMaximum
@@ -88,145 +91,145 @@ public class PeakModel_1_Test {
 	@Test
 	public void testGetBackgroundAbundance_1() {
 
-		assertEquals("BackgroundAbundance", 394.57144f, peakModel.getBackgroundAbundance(), 0);
+		assertEquals(394.57144f, peakModel.getBackgroundAbundance(), 0);
 	}
 
 	@Test
 	public void testGetBackgroundAbundance_2() {
 
-		assertEquals("BackgroundAbundance", 374.05762f, peakModel.getBackgroundAbundance(4753), 0);
+		assertEquals(374.05762f, peakModel.getBackgroundAbundance(4753), 0);
 	}
 
 	@Test
 	public void testGetBackgroundAbundance_3() {
 
-		assertEquals("BackgroundAbundance", 407.89438f, peakModel.getBackgroundAbundance(12583), 0);
+		assertEquals(407.89438f, peakModel.getBackgroundAbundance(12583), 0);
 	}
 
 	@Test
 	public void testGetBackgroundAbundance_4() {
 
-		assertEquals("BackgroundAbundance", 420.28394f, peakModel.getBackgroundAbundance(15450), 0);
+		assertEquals(420.28394f, peakModel.getBackgroundAbundance(15450), 0);
 	}
 
 	@Test
 	public void testGetBackgroundAbundance_5() {
 
-		assertEquals("BackgroundAbundance", 360.0f, peakModel.getBackgroundAbundance(1500), 0);
+		assertEquals(360.0f, peakModel.getBackgroundAbundance(1500), 0);
 	}
 
 	@Test
 	public void testGetBackgroundAbundance_6() {
 
-		assertEquals("BackgroundAbundance", 420.5f, peakModel.getBackgroundAbundance(15500), 0);
+		assertEquals(420.5f, peakModel.getBackgroundAbundance(15500), 0);
 	}
 
 	@Test
 	public void testGetBackgroundAbundance_7() {
 
-		assertEquals("BackgroundAbundance", 365.61786f, peakModel.getBackgroundAbundance(2800), 0);
+		assertEquals(365.61786f, peakModel.getBackgroundAbundance(2800), 0);
 	}
 
 	@Test
 	public void testGetPeakAbundance_1() {
 
-		assertEquals("PeakAbundance", 5231.0f, peakModel.getPeakAbundance(), 0);
+		assertEquals(5231.0f, peakModel.getPeakAbundance(), 0);
 	}
 
 	@Test
 	public void testGetPeakAbundance_2() {
 
-		assertEquals("PeakAbundance", 5231.0f, peakModel.getPeakAbundance(9500), 0);
+		assertEquals(5231.0f, peakModel.getPeakAbundance(9500), 0);
 	}
 
 	@Test
 	public void testGetPeakAbundance_3() {
 
-		assertEquals("PeakAbundance", 3347.84f, peakModel.getPeakAbundance(11500), 0);
+		assertEquals(3347.84f, peakModel.getPeakAbundance(11500), 0);
 	}
 
 	@Test
 	public void testGetPeakAbundance_4() {
 
-		assertEquals("PeakAbundance", 209.24f, peakModel.getPeakAbundance(15500), 0);
+		assertEquals(209.24f, peakModel.getPeakAbundance(15500), 0);
 	}
 
 	@Test
 	public void testGetPeakAbundance_5() {
 
-		assertEquals("PeakAbundance", 0.0f, peakModel.getPeakAbundance(1500), 0);
+		assertEquals(0.0f, peakModel.getPeakAbundance(1500), 0);
 	}
 
 	@Test
 	public void testGetPeakAbundance_6() {
 
-		assertEquals("PeakAbundance", 2249.33f, peakModel.getPeakAbundance(12500), 0);
+		assertEquals(2249.33f, peakModel.getPeakAbundance(12500), 0);
 	}
 
 	@Test
 	public void testGetPeakAbundance_7() {
 
-		assertEquals("PeakAbundance", 5231.0f, peakModel.getPeakAbundance(10000), 0);
+		assertEquals(5231.0f, peakModel.getPeakAbundance(10000), 0);
 	}
 
 	@Test
 	public void testGetPeakAbundance_8() {
 
-		assertEquals("PeakAbundance", 261.55f, peakModel.getPeakAbundance(3000), 0);
+		assertEquals(261.55f, peakModel.getPeakAbundance(3000), 0);
 	}
 
 	@Test
 	public void testGetPeakAbundance_9() {
 
-		assertEquals("PeakAbundance", 1569.3f, peakModel.getPeakAbundance(14000), 0);
+		assertEquals(1569.3f, peakModel.getPeakAbundance(14000), 0);
 	}
 
 	@Test
 	public void testGetPeakAbundance_10() {
 
-		assertEquals("PeakAbundance", 0.0f, peakModel.getPeakAbundance(15501), 0);
+		assertEquals(0.0f, peakModel.getPeakAbundance(15501), 0);
 	}
 
 	@Test
 	public void testGetPeakAbundance_11() {
 
-		assertEquals("PeakAbundance", 0.0f, peakModel.getPeakAbundance(1499), 0);
+		assertEquals(0.0f, peakModel.getPeakAbundance(1499), 0);
 	}
 
 	@Test
 	public void testGetPeakMassSpectrum_1() {
 
-		assertNotNull("PeakMassSpectrum must not be null", peakModel.getPeakMassSpectrum());
+		assertNotNull(peakModel.getPeakMassSpectrum());
 	}
 
 	@Test
 	public void testGetStartRetentionTime_1() {
 
-		assertEquals("StartRetentionTime", 1500, peakModel.getStartRetentionTime());
+		assertEquals(1500, peakModel.getStartRetentionTime());
 	}
 
 	@Test
 	public void testGetStopRetentionTime_1() {
 
-		assertEquals("StopRetentionTime", 15500, peakModel.getStopRetentionTime());
+		assertEquals(15500, peakModel.getStopRetentionTime());
 	}
 
 	@Test
 	public void testGetWidthBaselineTotal_1() {
 
-		assertEquals("WidthInMilliseconds", 14001, peakModel.getWidthBaselineTotal());
+		assertEquals(14001, peakModel.getWidthBaselineTotal());
 	}
 
 	@Test
 	public void testGetRetentionTimeAtPeakMaximum_1() {
 
-		assertEquals("RetentionTimeAtPeakMaximum", 9500, peakModel.getRetentionTimeAtPeakMaximum());
+		assertEquals(9500, peakModel.getRetentionTimeAtPeakMaximum());
 	}
 
 	@Test
 	public void testGetPeakMassSpectrum_2() {
 
 		IPeakMassSpectrum massSpectrum = peakModel.getPeakMassSpectrum();
-		assertEquals("RetentionTimeAtPeakMaximum", 9500, massSpectrum.getRetentionTime());
+		assertEquals(9500, massSpectrum.getRetentionTime());
 	}
 }

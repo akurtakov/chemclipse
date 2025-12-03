@@ -12,18 +12,21 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class IonBounds_2_Test {
 
 	private IIonBounds ionBounds;
 	private Ion ion;
 
-	@Before
+	@BeforeAll
 	public void setUp() throws Exception {
 
 		ion = new Ion(25.5f, 3452.4f);
@@ -33,24 +36,24 @@ public class IonBounds_2_Test {
 	@Test
 	public void testGetLowestIon_1() {
 
-		assertEquals("GetLowestIon Ion", 25.5d, ionBounds.getLowestIon().getIon(), 0);
+		assertEquals(25.5d, ionBounds.getLowestIon().getIon(), 0);
 	}
 
 	@Test
 	public void testGetLowestIon_2() {
 
-		assertEquals("GetLowestIon Abundance", 3452.4f, ionBounds.getLowestIon().getAbundance(), 0);
+		assertEquals(3452.4f, ionBounds.getLowestIon().getAbundance(), 0);
 	}
 
 	@Test
 	public void testGetHighestIon_1() {
 
-		assertEquals("GetHighestIon Ion", 25.5d, ionBounds.getHighestIon().getIon(), 0);
+		assertEquals(25.5d, ionBounds.getHighestIon().getIon(), 0);
 	}
 
 	@Test
 	public void testGetHighestIon_2() {
 
-		assertEquals("GetHighestIon Abundance", 3452.4f, ionBounds.getHighestIon().getAbundance(), 0);
+		assertEquals(3452.4f, ionBounds.getHighestIon().getAbundance(), 0);
 	}
 }

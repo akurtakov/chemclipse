@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ import org.eclipse.chemclipse.msd.model.implementation.Ion;
 import org.eclipse.chemclipse.msd.model.implementation.PeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.implementation.PeakModelMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class AbstractChromatogram_4_Test {
 
@@ -52,24 +52,24 @@ public class AbstractChromatogram_4_Test {
 		IPeakModelMSD model2 = createPeakModel(1000, 600);
 		IPeakModelMSD model3 = createPeakModel(1500, 600);
 
-		assertFalse("Peakmodels are equal", model1.equals(model2));
+		assertFalse(model1.equals(model2), "Peakmodels are equal");
 		chromatogram.getPeaks().add(createPeakForModel(chromatogram, model1));
-		assertEquals("Peak was not added", 1, chromatogram.getPeaks().size());
+		assertEquals(1, chromatogram.getPeaks().size(), "Peak was not added");
 		// now add a new peak with the same peakmodel
 		chromatogram.getPeaks().add(createPeakForModel(chromatogram, model1));
-		assertEquals("Peak with same peak model was added again!", 2, chromatogram.getPeaks().size()); // before 1
+		assertEquals(2, chromatogram.getPeaks().size(), "Peak with same peak model was added again!"); // before 1
 		// add it with another model
 		chromatogram.getPeaks().add(createPeakForModel(chromatogram, model2));
-		assertEquals("Peak with same rtmax but different model was not added!", 3, chromatogram.getPeaks().size()); // before 2
+		assertEquals(3, chromatogram.getPeaks().size(), "Peak with same rtmax but different model was not added!"); // before 2
 		// add peak with same model but different RT
 		chromatogram.getPeaks().add(createPeakForModel(chromatogram, model3));
-		assertEquals("Peak with different rtmax but same model was not added!", 4, chromatogram.getPeaks().size()); // before 3
+		assertEquals(4, chromatogram.getPeaks().size(), "Peak with different rtmax but same model was not added!"); // before 3
 		// now remove one of the peaks
 		chromatogram.getPeaks().remove(createPeakForModel(chromatogram, model1));
-		assertEquals("Peak was not removed", 4, chromatogram.getPeaks().size()); // before 2
+		assertEquals(4, chromatogram.getPeaks().size(), "Peak was not removed"); // before 2
 		// remove it again should not matter...
 		chromatogram.getPeaks().remove(createPeakForModel(chromatogram, model1));
-		assertEquals("Peak was not removed", 4, chromatogram.getPeaks().size()); // befor 2
+		assertEquals(4, chromatogram.getPeaks().size(), "Peak was not removed"); // befor 2
 	}
 
 	@Test
@@ -86,13 +86,13 @@ public class AbstractChromatogram_4_Test {
 			chromatogram.getPeaks().add(createPeakForModel(chromatogram, createPeakModel(peakStart + i, 500)));
 			chromatogram.getPeaks().add(createPeakForModel(chromatogram, createPeakModel(peakStart + i, 600)));
 		}
-		assertEquals("Peak count differs", numberOfPeaks, chromatogram.getPeaks().size());
-		assertTrue("Peaks are returned even if no peak rt-max should be in this range", chromatogram.getPeaks(Integer.MIN_VALUE, peakStart - 1).isEmpty());
-		assertEquals("Peak list differs in expected size", 2, chromatogram.getPeaks(Integer.MIN_VALUE, peakStart).size());
-		assertEquals("Peak list differs in expected size", 4, chromatogram.getPeaks(Integer.MIN_VALUE, peakStart + 1).size());
-		assertEquals("Peak list differs in expected size", 4, chromatogram.getPeaks(peakStart, peakStart + 1).size());
-		assertEquals("Peak list differs in expected size", 2, chromatogram.getPeaks(peakStart, peakStart).size());
-		assertTrue("Peaks are returned even if no peak rt-max should be in this range", chromatogram.getPeaks(peakStart + numberOfPeaks / 2, Integer.MAX_VALUE).isEmpty());
+		assertEquals(numberOfPeaks, chromatogram.getPeaks().size(), "Peak count differs");
+		assertTrue(chromatogram.getPeaks(Integer.MIN_VALUE, peakStart - 1).isEmpty(), "Peaks are returned even if no peak rt-max should be in this range");
+		assertEquals(2, chromatogram.getPeaks(Integer.MIN_VALUE, peakStart).size(), "Peak list differs in expected size");
+		assertEquals(4, chromatogram.getPeaks(Integer.MIN_VALUE, peakStart + 1).size(), "Peak list differs in expected size");
+		assertEquals(4, chromatogram.getPeaks(peakStart, peakStart + 1).size(), "Peak list differs in expected size");
+		assertEquals(2, chromatogram.getPeaks(peakStart, peakStart).size(), "Peak list differs in expected size");
+		assertTrue(chromatogram.getPeaks(peakStart + numberOfPeaks / 2, Integer.MAX_VALUE).isEmpty(), "Peaks are returned even if no peak rt-max should be in this range");
 	}
 
 	private static IScanMSD createScanAt(int retentionTime) {

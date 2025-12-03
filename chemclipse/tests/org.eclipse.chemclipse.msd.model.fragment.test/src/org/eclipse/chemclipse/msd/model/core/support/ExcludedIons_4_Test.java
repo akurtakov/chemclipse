@@ -12,13 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.support;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.msd.model.core.AbstractIon;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ExcludedIons_4_Test {
 
@@ -27,14 +27,14 @@ public class ExcludedIons_4_Test {
 	@Test
 	public void testContains_1() {
 
-		assertFalse("contains", excludedIons.getIonsNominal().contains(AbstractIon.getIon(5.0f)));
+		assertFalse(excludedIons.getIonsNominal().contains(AbstractIon.getIon(5.0f)));
 	}
 
 	@Test
 	public void testContains_2() {
 
 		excludedIons.add(new MarkedIon(5.2f));
-		assertTrue("contains", excludedIons.getIonsNominal().contains(AbstractIon.getIon(5.0f)));
+		assertTrue(excludedIons.getIonsNominal().contains(AbstractIon.getIon(5.0f)));
 	}
 
 	@Test
@@ -42,7 +42,7 @@ public class ExcludedIons_4_Test {
 
 		excludedIons.add(new MarkedIon(5.3f));
 		excludedIons.remove(new MarkedIon(5.2f));
-		assertTrue("contains", excludedIons.getIonsNominal().contains(AbstractIon.getIon(5.0f)));
+		assertTrue(excludedIons.getIonsNominal().contains(AbstractIon.getIon(5.0f)));
 	}
 
 	@Test
@@ -51,7 +51,7 @@ public class ExcludedIons_4_Test {
 		excludedIons.add(new MarkedIon(10.4f));
 		excludedIons.add(new MarkedIon(5.3f));
 		excludedIons.add(new MarkedIon(20.2f));
-		assertTrue("contains", excludedIons.getIonsNominal().contains(AbstractIon.getIon(20.3f)));
+		assertTrue(excludedIons.getIonsNominal().contains(AbstractIon.getIon(20.3f)));
 	}
 
 	@Test
@@ -60,12 +60,12 @@ public class ExcludedIons_4_Test {
 		excludedIons.add(new MarkedIon(58.4f));
 		excludedIons.add(new MarkedIon(48.3f));
 		excludedIons.add(new MarkedIon(372.2f));
-		assertEquals("size", 3, excludedIons.getIonsNominal().size());
+		assertEquals(3, excludedIons.getIonsNominal().size());
 	}
 
 	@Test
 	public void testSize_10() {
 
-		assertEquals("size", 0, excludedIons.getIonsNominal().size());
+		assertEquals(0, excludedIons.getIonsNominal().size());
 	}
 }

@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CombinedNominalMassSpectrumCalculator_1_Test {
 
@@ -23,14 +23,14 @@ public class CombinedNominalMassSpectrumCalculator_1_Test {
 	@Test
 	public void testSize_1() {
 
-		assertEquals("Size", 0, combinedNominalMassSpectrumCalculator.size());
+		assertEquals(0, combinedNominalMassSpectrumCalculator.size());
 	}
 
 	@Test
 	public void testSize_2() {
 
 		combinedNominalMassSpectrumCalculator.addIon(56.5f, 500.0f);
-		assertEquals("Size", 1, combinedNominalMassSpectrumCalculator.size());
+		assertEquals(1, combinedNominalMassSpectrumCalculator.size());
 	}
 
 	@Test
@@ -38,7 +38,7 @@ public class CombinedNominalMassSpectrumCalculator_1_Test {
 
 		combinedNominalMassSpectrumCalculator.addIon(56.5f, 500.0f);
 		combinedNominalMassSpectrumCalculator.addIon(80.2f, 700.0f);
-		assertEquals("Size", 2, combinedNominalMassSpectrumCalculator.size());
+		assertEquals(2, combinedNominalMassSpectrumCalculator.size());
 	}
 
 	@Test
@@ -47,7 +47,7 @@ public class CombinedNominalMassSpectrumCalculator_1_Test {
 		combinedNominalMassSpectrumCalculator.addIon(56.5f, 500.0f);
 		combinedNominalMassSpectrumCalculator.addIon(80.2f, 700.0f);
 		combinedNominalMassSpectrumCalculator.addIon(90.3f, 800.0f);
-		assertEquals("Size", 3, combinedNominalMassSpectrumCalculator.size());
+		assertEquals(3, combinedNominalMassSpectrumCalculator.size());
 	}
 
 	@Test
@@ -60,6 +60,6 @@ public class CombinedNominalMassSpectrumCalculator_1_Test {
 		combinedNominalMassSpectrumCalculator.addIon(56.4f, 500.0f);
 		combinedNominalMassSpectrumCalculator.addIon(56.2f, 700.0f);
 		combinedNominalMassSpectrumCalculator.addIon(55.9f, 800.0f);
-		assertEquals("Size", 1, combinedNominalMassSpectrumCalculator.size());
+		assertEquals(1, combinedNominalMassSpectrumCalculator.size());
 	}
 }

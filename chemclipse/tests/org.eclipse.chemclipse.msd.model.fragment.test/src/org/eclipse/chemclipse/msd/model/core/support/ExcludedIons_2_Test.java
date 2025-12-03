@@ -12,15 +12,15 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.support;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
 
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.msd.model.core.AbstractIon;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ExcludedIons_2_Test {
 
@@ -29,14 +29,14 @@ public class ExcludedIons_2_Test {
 	@Test
 	public void testContains_1() {
 
-		assertFalse("contains", excludedIons.getIonsNominal().contains(AbstractIon.getIon(4.9f)));
+		assertFalse(excludedIons.getIonsNominal().contains(AbstractIon.getIon(4.9f)));
 	}
 
 	@Test
 	public void testContains_2() {
 
 		excludedIons.add(new MarkedIon(5));
-		assertTrue("contains", excludedIons.getIonsNominal().contains(AbstractIon.getIon(4.9f)));
+		assertTrue(excludedIons.getIonsNominal().contains(AbstractIon.getIon(4.9f)));
 	}
 
 	@Test
@@ -44,7 +44,7 @@ public class ExcludedIons_2_Test {
 
 		excludedIons.add(new MarkedIon(5));
 		excludedIons.remove(new MarkedIon(5));
-		assertFalse("contains", excludedIons.getIonsNominal().contains(AbstractIon.getIon(5.4f)));
+		assertFalse(excludedIons.getIonsNominal().contains(AbstractIon.getIon(5.4f)));
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class ExcludedIons_2_Test {
 		excludedIons.add(new MarkedIon(5));
 		excludedIons.add(new MarkedIon(20));
 		Set<Integer> excludedIonsNominal = excludedIons.getIonsNominal();
-		assertTrue("contains", excludedIonsNominal.contains(AbstractIon.getIon(20.2f)));
+		assertTrue(excludedIonsNominal.contains(AbstractIon.getIon(20.2f)));
 	}
 
 	@Test
@@ -62,9 +62,9 @@ public class ExcludedIons_2_Test {
 
 		excludedIons.add(50, 60);
 		Set<Integer> list = excludedIons.getIonsNominal();
-		assertEquals("size", 11, list.size());
+		assertEquals(11, list.size());
 		for(int i = 50; i <= 60; i++) {
-			assertTrue("ion " + i, list.contains(i));
+			assertTrue(list.contains(i), "ion " + i);
 		}
 	}
 }

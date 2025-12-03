@@ -12,21 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.selection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.easymock.EasyMock;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramSelection_5_Test {
 
 	private IChromatogramMSD chromatogram;
 	private IChromatogramSelectionMSD selection;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		/*
 		 * Use createNiceMock if you use void methods that are not important to
@@ -46,9 +49,9 @@ public class ChromatogramSelection_5_Test {
 	@Test
 	public void testChromatogram_1() {
 
-		assertEquals("StartRetentionTime", 4500, chromatogram.getStartRetentionTime());
-		assertEquals("StopRetentionTime", 25000, chromatogram.getStopRetentionTime());
-		assertEquals("MaxSignal", 560000.0f, chromatogram.getMaxSignal(), 0);
+		assertEquals(4500, chromatogram.getStartRetentionTime());
+		assertEquals(25000, chromatogram.getStopRetentionTime());
+		assertEquals(560000.0f, chromatogram.getMaxSignal(), 0);
 	}
 
 	@Test
@@ -62,7 +65,7 @@ public class ChromatogramSelection_5_Test {
 
 		selection.setStartRetentionTime(25001);
 		selection.reset();
-		assertEquals("StartRetentionTime", 4500, selection.getStartRetentionTime());
+		assertEquals(4500, selection.getStartRetentionTime());
 	}
 
 	@Test
@@ -70,7 +73,7 @@ public class ChromatogramSelection_5_Test {
 
 		selection.setStopRetentionTime(4499);
 		selection.reset();
-		assertEquals("StopRetentionTime", 25000, selection.getStopRetentionTime());
+		assertEquals(25000, selection.getStopRetentionTime());
 	}
 
 	@Test
@@ -78,7 +81,7 @@ public class ChromatogramSelection_5_Test {
 
 		selection.setStartAbundance(560000.1f);
 		selection.reset();
-		assertEquals("StartAbundance", 0.0f, selection.getStartAbundance(), 0);
+		assertEquals(0.0f, selection.getStartAbundance(), 0);
 	}
 
 	@Test
@@ -86,6 +89,6 @@ public class ChromatogramSelection_5_Test {
 
 		selection.setStopAbundance(-0.1f);
 		selection.reset();
-		assertEquals("StopAbundance", 560000.0f, selection.getStopAbundance(), 0);
+		assertEquals(560000.0f, selection.getStopAbundance(), 0);
 	}
 }

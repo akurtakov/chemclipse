@@ -12,25 +12,28 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Tests the methods getMinIonAbundance() and
  * getMaxIonAbundance().
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class Chromatogram_10_Test {
 
 	private ChromatogramMSD chromatogram;
 	private IScanMSD supplierMassSpectrum;
 	private IIon ion;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		chromatogram = new ChromatogramMSD();
 		// Scan 1
@@ -65,12 +68,12 @@ public class Chromatogram_10_Test {
 	@Test
 	public void testMinIonAbundance_1() {
 
-		assertEquals("minIonAbundance", 427.4f, chromatogram.getMinIonAbundance(), 0);
+		assertEquals(427.4f, chromatogram.getMinIonAbundance(), 0);
 	}
 
 	@Test
 	public void testMaxIonAbundance_1() {
 
-		assertEquals("maxIonAbundance", 74627.2f, chromatogram.getMaxIonAbundance(), 0);
+		assertEquals(74627.2f, chromatogram.getMaxIonAbundance(), 0);
 	}
 }

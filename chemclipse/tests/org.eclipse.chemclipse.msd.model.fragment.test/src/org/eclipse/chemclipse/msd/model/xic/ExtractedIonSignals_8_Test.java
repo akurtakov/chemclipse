@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.xic;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
@@ -22,15 +22,15 @@ import org.eclipse.chemclipse.msd.model.exceptions.NoExtractedIonSignalStoredExc
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
 import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ExtractedIonSignals_8_Test {
 
 	private IExtractedIonSignals extractedIonSignals;
 	private IExtractedIonSignal extractedIonSignal;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		int scans = 100;
@@ -57,45 +57,43 @@ public class ExtractedIonSignals_8_Test {
 	@Test
 	public void testSize_1() {
 
-		assertEquals("Size", 100, extractedIonSignals.size());
+		assertEquals(100, extractedIonSignals.size());
 	}
 
 	@Test
 	public void testSize_2() throws NoExtractedIonSignalStoredException {
 
-		assertEquals("Size", 100, extractedIonSignals.size());
+		assertEquals(100, extractedIonSignals.size());
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(1);
-		assertEquals("Abundance", 25.0f, extractedIonSignal.getAbundance(25), 0);
+		assertEquals(25.0f, extractedIonSignal.getAbundance(25), 0);
 		extractedIonSignals.add(25, 250.0f, 1, true);
-		assertEquals("Size", 100, extractedIonSignals.size());
+		assertEquals(100, extractedIonSignals.size());
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(1);
-		assertEquals("Abundance", 250.0f, extractedIonSignal.getAbundance(25), 0);
+		assertEquals(250.0f, extractedIonSignal.getAbundance(25), 0);
 	}
 
 	@Test
 	public void testSize_3() throws NoExtractedIonSignalStoredException {
 
-		assertEquals("Size", 100, extractedIonSignals.size());
+		assertEquals(100, extractedIonSignals.size());
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(1);
-		assertEquals("Abundance", 25.0f, extractedIonSignal.getAbundance(25), 0);
+		assertEquals(25.0f, extractedIonSignal.getAbundance(25), 0);
 		extractedIonSignals.add(25, 250, 1, false);
-		assertEquals("Size", 100, extractedIonSignals.size());
+		assertEquals(100, extractedIonSignals.size());
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(1);
-		assertEquals("Abundance", 275.0f, extractedIonSignal.getAbundance(25), 0);
+		assertEquals(275.0f, extractedIonSignal.getAbundance(25), 0);
 	}
 
 	@Test
 	public void testSize_4() throws NoExtractedIonSignalStoredException {
 
-		assertEquals("Size", 100, extractedIonSignals.size());
+		assertEquals(100, extractedIonSignals.size());
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(1);
-		assertEquals("Abundance", 25.0f, extractedIonSignal.getAbundance(25), 0);
+		assertEquals(25.0f, extractedIonSignal.getAbundance(25), 0);
 		extractedIonSignals.add(31, 600.0f, 101, false);
-		assertEquals("Size", 100, extractedIonSignals.size());
-		try {
+		assertEquals(100, extractedIonSignals.size());
+		assertThrows(NoExtractedIonSignalStoredException.class, () -> {
 			extractedIonSignal = extractedIonSignals.getExtractedIonSignal(101);
-		} catch(NoExtractedIonSignalStoredException e) {
-			assertTrue("NoExtractedIonSignalStoredException", true);
-		}
+		});
 	}
 }

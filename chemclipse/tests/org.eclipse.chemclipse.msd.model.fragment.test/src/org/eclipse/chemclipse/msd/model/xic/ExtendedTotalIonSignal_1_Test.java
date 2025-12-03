@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.xic;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.signals.ExtendedTotalScanSignal;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test methods of ExtendedTotalIonSignal.
@@ -27,7 +27,7 @@ public class ExtendedTotalIonSignal_1_Test {
 	public void testConstructor_1() {
 
 		ITotalScanSignal totalIonSignal = new ExtendedTotalScanSignal(1000, 0.0f, -5949.3f);
-		assertEquals("Total Signal", -5949.3f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(-5949.3f, totalIonSignal.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -35,6 +35,6 @@ public class ExtendedTotalIonSignal_1_Test {
 
 		ITotalScanSignal totalIonSignal = new ExtendedTotalScanSignal(1000, 0.0f, 0.0f);
 		totalIonSignal.setTotalSignal(-5949.3f);
-		assertEquals("Total Signal", -5949.3f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(-5949.3f, totalIonSignal.getTotalSignal(), 0);
 	}
 }

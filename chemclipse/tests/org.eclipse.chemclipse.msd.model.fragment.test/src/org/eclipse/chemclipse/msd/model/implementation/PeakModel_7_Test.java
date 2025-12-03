@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -22,8 +22,8 @@ import org.eclipse.chemclipse.model.implementation.PeakIntensityValues;
 import org.eclipse.chemclipse.msd.model.core.IPeakIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class PeakModel_7_Test {
 
@@ -36,7 +36,7 @@ public class PeakModel_7_Test {
 	private float startBackgroundAbundance = 100.0f;
 	private float stopBackgroundAbundance = 100.0f;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		// ----------------------PeakMaximum
@@ -76,144 +76,144 @@ public class PeakModel_7_Test {
 	@Test
 	public void testGetBackgroundAbundance_1() {
 
-		assertEquals("GetBackgroundAbundance", 100.0f, peakModel.getBackgroundAbundance(8500), 0);
+		assertEquals(100.0f, peakModel.getBackgroundAbundance(8500), 0);
 	}
 
 	@Test
 	public void testGetBackgroundAbundance_2() {
 
-		assertEquals("GetBackgroundAbundance", 100.0f, peakModel.getBackgroundAbundance(9500), 0);
+		assertEquals(100.0f, peakModel.getBackgroundAbundance(9500), 0);
 	}
 
 	@Test
 	public void testGetBackgroundAbundance_3() {
 
-		assertEquals("GetBackgroundAbundance", 100.0f, peakModel.getBackgroundAbundance(10500), 0);
+		assertEquals(100.0f, peakModel.getBackgroundAbundance(10500), 0);
 	}
 
 	@Test
 	public void testGetBackgroundAbundance_4() {
 
-		assertEquals("GetBackgroundAbundance", 100.0f, peakModel.getBackgroundAbundance(), 0);
+		assertEquals(100.0f, peakModel.getBackgroundAbundance(), 0);
 	}
 
 	@Test
 	public void testGetPeakAbundance_1() {
 
-		assertEquals("GetPeakAbundance", 523100.00f, peakModel.getPeakAbundance(), 0);
+		assertEquals(523100.00f, peakModel.getPeakAbundance(), 0);
 	}
 
 	@Test
 	public void testGetPeakAbundanceByInflectionPoints_1() {
 
-		assertEquals("GetPeakAbundanceByInflectionPoints", 523100.0f, peakModel.getPeakAbundanceByInflectionPoints(), 0);
+		assertEquals(523100.0f, peakModel.getPeakAbundanceByInflectionPoints(), 0);
 	}
 
 	@Test
 	public void testGetWidthBaselineTotal_1() {
 
-		assertEquals("GetWidthBaselineTotal", 2001, peakModel.getWidthBaselineTotal());
+		assertEquals(2001, peakModel.getWidthBaselineTotal());
 	}
 
 	@Test
 	public void testGetWidthBaselineByInflectionPoints_1() {
 
-		assertEquals("GetWidthBaselineByInflectionPoints", 2001, peakModel.getWidthBaselineByInflectionPoints());
+		assertEquals(2001, peakModel.getWidthBaselineByInflectionPoints());
 	}
 
 	@Test
 	public void testGetWidthByInflectionPoints_1() {
 
-		assertEquals("GetWidthByInflectionPoints", 1001, peakModel.getWidthByInflectionPoints());
+		assertEquals(1001, peakModel.getWidthByInflectionPoints());
 	}
 
 	@Test
 	public void testGetWidthByInflectionPoints_2() {
 
-		assertEquals("GetWidthByInflectionPoints 50%", 1001, peakModel.getWidthByInflectionPoints(0.5f));
+		assertEquals(1001, peakModel.getWidthByInflectionPoints(0.5f), "50%");
 	}
 
 	@Test
 	public void testGetWidthByInflectionPoints_3() {
 
-		assertEquals("GetWidthByInflectionPoints 80%", 401, peakModel.getWidthByInflectionPoints(0.8f));
+		assertEquals(401, peakModel.getWidthByInflectionPoints(0.8f), "80%");
 	}
 
 	@Test
 	public void testGetWidthByInflectionPoints_4() {
 
-		assertEquals("GetWidthByInflectionPoints -10%", 0, peakModel.getWidthByInflectionPoints(-0.1f));
+		assertEquals(0, peakModel.getWidthByInflectionPoints(-0.1f), "-10%");
 	}
 
 	@Test
 	public void testGetWidthByInflectionPoints_5() {
 
-		assertEquals("GetWidthByInflectionPoints 110%", 0, peakModel.getWidthByInflectionPoints(1.1f));
+		assertEquals(0, peakModel.getWidthByInflectionPoints(1.1f), "110%");
 	}
 
 	@Test
 	public void testGetStartRetentionTime_1() {
 
-		assertEquals("GetStartRetentionTime", 8500, peakModel.getStartRetentionTime());
+		assertEquals(8500, peakModel.getStartRetentionTime());
 	}
 
 	@Test
 	public void testGetStopRetentionTime_1() {
 
-		assertEquals("GetStopRetentionTime", 10500, peakModel.getStopRetentionTime());
+		assertEquals(10500, peakModel.getStopRetentionTime());
 	}
 
 	@Test
 	public void testGetRetentionTimeAtPeakMaximum_1() {
 
-		assertEquals("GetRetentionTimeAtPeakMaximum", 9500, peakModel.getRetentionTimeAtPeakMaximum());
+		assertEquals(9500, peakModel.getRetentionTimeAtPeakMaximum());
 	}
 
 	@Test
 	public void testGetRetentionTimeAtPeakMaximumByInflectionPoints_1() {
 
-		assertEquals("GetRetentionTimeAtPeakMaximumByInflectionPoints", 9500, peakModel.getRetentionTimeAtPeakMaximumByInflectionPoints());
+		assertEquals(9500, peakModel.getRetentionTimeAtPeakMaximumByInflectionPoints());
 	}
 
 	@Test
 	public void testGradientAngle_1() {
 
-		assertEquals("GradientAngle", 0.0d, peakModel.getGradientAngle(), 0);
+		assertEquals(0.0d, peakModel.getGradientAngle(), 0);
 	}
 
 	@Test
 	public void testGetIncreasingInflectionPointAbundance_1() {
 
-		assertEquals("GetIncreasingInflectionPointAbundance", 0.0f, peakModel.getIncreasingInflectionPointAbundance(8500), 0);
+		assertEquals(0.0f, peakModel.getIncreasingInflectionPointAbundance(8500), 0);
 	}
 
 	@Test
 	public void testGetIncreasingInflectionPointAbundance_2() {
 
-		assertEquals("GetIncreasingInflectionPointAbundance", 523100.0f, peakModel.getIncreasingInflectionPointAbundance(9500), 0);
+		assertEquals(523100.0f, peakModel.getIncreasingInflectionPointAbundance(9500), 0);
 	}
 
 	@Test
 	public void testGetIncreasingInflectionPointAbundance_3() {
 
-		assertEquals("GetIncreasingInflectionPointAbundance", 1046200.0f, peakModel.getIncreasingInflectionPointAbundance(10500), 0);
+		assertEquals(1046200.0f, peakModel.getIncreasingInflectionPointAbundance(10500), 0);
 	}
 
 	@Test
 	public void testGetDecreasingInflectionPointAbundance_1() {
 
-		assertEquals("GetDecreasingInflectionPointAbundance", 1046200.0f, peakModel.getDecreasingInflectionPointAbundance(8500), 0);
+		assertEquals(1046200.0f, peakModel.getDecreasingInflectionPointAbundance(8500), 0);
 	}
 
 	@Test
 	public void testGetDecreasingInflectionPointAbundance_2() {
 
-		assertEquals("GetDecreasingInflectionPointAbundance", 523100.0f, peakModel.getDecreasingInflectionPointAbundance(9500), 0);
+		assertEquals(523100.0f, peakModel.getDecreasingInflectionPointAbundance(9500), 0);
 	}
 
 	@Test
 	public void testGetDecreasingInflectionPointAbundance_3() {
 
-		assertEquals("GetDecreasingInflectionPointAbundance", 0.0f, peakModel.getDecreasingInflectionPointAbundance(10500), 0);
+		assertEquals(0.0f, peakModel.getDecreasingInflectionPointAbundance(10500), 0);
 	}
 }

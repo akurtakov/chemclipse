@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Set;
 
@@ -24,9 +24,12 @@ import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.identifier.LibraryInformation;
 import org.eclipse.chemclipse.model.implementation.IdentificationTarget;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class Chromatogram_19_Test {
 
 	private IChromatogramMSD chromatogram;
@@ -35,8 +38,8 @@ public class Chromatogram_19_Test {
 	private ILibraryInformation libraryInformation;
 	private IComparisonResult comparisonResult;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		chromatogram = new ChromatogramMSD();
 		libraryInformation = new LibraryInformation();
@@ -51,14 +54,14 @@ public class Chromatogram_19_Test {
 	public void testGetTargets_1() {
 
 		Set<IIdentificationTarget> targets = chromatogram.getTargets();
-		assertNotNull("Targets", targets);
+		assertNotNull(targets);
 	}
 
 	@Test
 	public void testGetTargets_2() {
 
 		Set<IIdentificationTarget> targets = chromatogram.getTargets();
-		assertEquals("Size", 0, targets.size());
+		assertEquals(0, targets.size());
 	}
 
 	@Test
@@ -67,7 +70,7 @@ public class Chromatogram_19_Test {
 		chromatogram.getTargets().add(entry1);
 		chromatogram.getTargets().add(entry2);
 		Set<IIdentificationTarget> targets = chromatogram.getTargets();
-		assertEquals("Size", 2, targets.size());
+		assertEquals(2, targets.size());
 	}
 
 	@Test
@@ -77,7 +80,7 @@ public class Chromatogram_19_Test {
 		chromatogram.getTargets().add(entry2);
 		chromatogram.getTargets().add(entry1);
 		Set<IIdentificationTarget> targets = chromatogram.getTargets();
-		assertEquals("Size", 2, targets.size());
+		assertEquals(2, targets.size());
 	}
 
 	@Test
@@ -88,7 +91,7 @@ public class Chromatogram_19_Test {
 		chromatogram.getTargets().add(entry1);
 		chromatogram.getTargets().remove(entry1);
 		Set<IIdentificationTarget> targets = chromatogram.getTargets();
-		assertEquals("Size", 1, targets.size());
+		assertEquals(1, targets.size());
 	}
 
 	@Test
@@ -98,6 +101,6 @@ public class Chromatogram_19_Test {
 		chromatogram.getTargets().add(entry2);
 		chromatogram.getTargets().clear();
 		Set<IIdentificationTarget> targets = chromatogram.getTargets();
-		assertEquals("Size", 0, targets.size());
+		assertEquals(0, targets.size());
 	}
 }

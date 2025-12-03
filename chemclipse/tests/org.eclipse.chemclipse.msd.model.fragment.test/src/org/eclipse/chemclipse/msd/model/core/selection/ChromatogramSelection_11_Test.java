@@ -12,8 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.selection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
 
@@ -21,16 +22,19 @@ import org.easymock.EasyMock;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIon;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramSelection_11_Test {
 
 	private IChromatogramMSD chromatogram;
 	private IChromatogramSelectionMSD chromatogramSelection;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		/*
 		 * Use createNiceMock if you use void methods that are not important to
@@ -64,10 +68,10 @@ public class ChromatogramSelection_11_Test {
 		selectedIons = chromatogramSelection.getSelectedIons();
 		assertNotNull(selectedIons);
 		Set<Integer> selectedIonsNominal = selectedIons.getIonsNominal();
-		assertEquals("Contains", true, selectedIonsNominal.contains(43));
-		assertEquals("Contains", true, selectedIonsNominal.contains(104));
-		assertEquals("Contains", false, selectedIonsNominal.contains(42));
-		assertEquals("Contains", false, selectedIonsNominal.contains(105));
+		assertTrue(selectedIonsNominal.contains(43));
+		assertTrue(selectedIonsNominal.contains(104));
+		assertFalse(selectedIonsNominal.contains(42));
+		assertFalse(selectedIonsNominal.contains(105));
 	}
 
 	@Test
@@ -87,9 +91,9 @@ public class ChromatogramSelection_11_Test {
 		excludedIons = chromatogramSelection.getExcludedIons();
 		assertNotNull(excludedIons);
 		Set<Integer> excludedIonsNominal = excludedIons.getIonsNominal();
-		assertEquals("Contains", false, excludedIonsNominal.contains(43));
-		assertEquals("Contains", false, excludedIonsNominal.contains(104));
-		assertEquals("Contains", true, excludedIonsNominal.contains(18));
-		assertEquals("Contains", true, excludedIonsNominal.contains(28));
+		assertFalse(excludedIonsNominal.contains(43));
+		assertFalse(excludedIonsNominal.contains(104));
+		assertTrue(excludedIonsNominal.contains(18));
+		assertTrue(excludedIonsNominal.contains(28));
 	}
 }

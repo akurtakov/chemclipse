@@ -12,16 +12,19 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Tests adjustTotalSignal(float totalSignal).
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class MassSpectrum_24_Test {
 
 	private ScanMSD massSpectrum1;
@@ -29,8 +32,8 @@ public class MassSpectrum_24_Test {
 	private IScanMSD mergedMassSpectrum;
 	private IIon ion;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() throws CloneNotSupportedException {
 
 		massSpectrum1 = new ScanMSD();
 		ion = new Ion(45.5f, 78500.2f);
@@ -61,34 +64,34 @@ public class MassSpectrum_24_Test {
 	@Test
 	public void testGetTotalSignal_1() {
 
-		assertEquals("getTotalSignal", 1242021.9f, massSpectrum1.getTotalSignal(), 0);
-		assertEquals("getTotalSignal", 1242021.9f, massSpectrum2.getTotalSignal(), 0);
+		assertEquals(1242021.9f, massSpectrum1.getTotalSignal(), 0);
+		assertEquals(1242021.9f, massSpectrum2.getTotalSignal(), 0);
 	}
 
 	@Test
 	public void testGetTotalSignal_2() {
 
-		assertEquals("getTotalSignal", 2484043.8f, mergedMassSpectrum.getTotalSignal(), 0);
+		assertEquals(2484043.8f, mergedMassSpectrum.getTotalSignal(), 0);
 	}
 
 	@Test
 	public void testGetTotalSignal_3() {
 
 		ion = mergedMassSpectrum.getIon(46);
-		assertEquals("getTotalSignal ion 46", 157000.4f, ion.getAbundance(), 0);
+		assertEquals(157000.4f, ion.getAbundance(), 0);
 	}
 
 	@Test
 	public void testGetTotalSignal_4() {
 
 		ion = mergedMassSpectrum.getIon(110);
-		assertEquals("getTotalSignal ion 110", 120000.4f, ion.getAbundance(), 0);
+		assertEquals(120000.4f, ion.getAbundance(), 0);
 	}
 
 	@Test
 	public void testGetTotalSignal_5() {
 
 		ion = mergedMassSpectrum.getIon(33);
-		assertEquals("getTotalSignal ion 33", 890520.4f, ion.getAbundance(), 0);
+		assertEquals(890520.4f, ion.getAbundance(), 0);
 	}
 }

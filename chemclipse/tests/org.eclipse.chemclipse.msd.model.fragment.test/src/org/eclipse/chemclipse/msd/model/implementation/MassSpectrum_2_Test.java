@@ -12,22 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Equals, hashCode
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class MassSpectrum_2_Test {
 
 	private ScanMSD massSpectrum1;
 	private ScanMSD massSpectrum2;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		massSpectrum1 = new ScanMSD();
 		massSpectrum1.addIon(new Ion(45.4f, 7830.4f));
@@ -37,24 +39,12 @@ public class MassSpectrum_2_Test {
 	@Test
 	public void testEquals_1() {
 
-		assertEquals("equals", false, massSpectrum1.equals(massSpectrum2));
-	}
-
-	@Test
-	public void testEquals_2() {
-
-		assertEquals("equals", false, massSpectrum2.equals(massSpectrum1));
+		assertNotEquals(massSpectrum2, massSpectrum1);
 	}
 
 	@Test
 	public void testHashCode_1() {
 
-		assertTrue("hashCode", massSpectrum1.hashCode() != massSpectrum2.hashCode());
-	}
-
-	@Test
-	public void testHashCode_2() {
-
-		assertTrue("hashCode", massSpectrum2.hashCode() != massSpectrum1.hashCode());
+		assertNotEquals(massSpectrum1.hashCode(), massSpectrum2.hashCode());
 	}
 }

@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.support;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.eclipse.chemclipse.model.exceptions.PeakException;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
@@ -27,19 +27,22 @@ import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
 import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Test the peak exceptions.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakBuilder_23_Test {
 
 	private ITotalScanSignals totalIonSignals;
 	private IScanRange scanRange;
 	private IChromatogramMSD chromatogram;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		scanRange = new ScanRange(1, 10);
@@ -63,9 +66,9 @@ public class PeakBuilder_23_Test {
 		totalIonSignals = PeakBuilderMSD.getTotalIonSignals(chromatogram, scanRange);
 		assertNotNull(totalIonSignals);
 		ITotalScanSignal totalIonSignal = totalIonSignals.getTotalScanSignal(1);
-		assertEquals("Signal", 1225.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(1225.0f, totalIonSignal.getTotalSignal(), 0);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(10);
-		assertEquals("Signal", 1225.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(1225.0f, totalIonSignal.getTotalSignal(), 0);
 	}
 
 	public void testGetTotalIonSignals_2() {

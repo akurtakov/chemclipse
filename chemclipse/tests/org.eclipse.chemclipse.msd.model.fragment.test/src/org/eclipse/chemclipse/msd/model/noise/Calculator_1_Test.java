@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.noise;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +26,12 @@ import org.eclipse.chemclipse.msd.model.implementation.CombinedMassSpectrum;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignal;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class Calculator_1_Test {
 
 	private Calculator calculator;
@@ -37,7 +40,7 @@ public class Calculator_1_Test {
 	private IMarkedIons ionsToPreserve;
 	private IExtractedIonSignal extractedIonSignal;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		calculator = new Calculator();
@@ -89,102 +92,102 @@ public class Calculator_1_Test {
 	@Test
 	public void testGetNoiseMassSpectrum_2() {
 
-		assertEquals("Size", 12, noiseMassSpectrum.getNumberOfIons());
+		assertEquals(12, noiseMassSpectrum.getNumberOfIons());
 	}
 
 	@Test
 	public void testGetNoiseMassSpectrum_3() {
 
-		assertEquals("Start Ion", 18, extractedIonSignal.getStartIon());
+		assertEquals(18, extractedIonSignal.getStartIon());
 	}
 
 	@Test
 	public void testGetNoiseMassSpectrum_4() {
 
-		assertEquals("Stop Ion", 201, extractedIonSignal.getStopIon());
+		assertEquals(201, extractedIonSignal.getStopIon());
 	}
 
 	@Test
 	public void testGetNoiseMassSpectrumAbundance_1() {
 
 		int ion = 18;
-		assertEquals("Ion " + ion, 23.333334f, extractedIonSignal.getAbundance(ion), 0);
+		assertEquals(23.333334f, extractedIonSignal.getAbundance(ion), 0, "Ion " + ion);
 	}
 
 	@Test
 	public void testGetNoiseMassSpectrumAbundance_2() {
 
 		int ion = 28;
-		assertEquals("Ion " + ion, 16.666666f, extractedIonSignal.getAbundance(ion), 0);
+		assertEquals(16.666666f, extractedIonSignal.getAbundance(ion), 0, "Ion " + ion);
 	}
 
 	@Test
 	public void testGetNoiseMassSpectrumAbundance_3() {
 
 		int ion = 43;
-		assertEquals("Ion " + ion, 26.666666f, extractedIonSignal.getAbundance(ion), 0);
+		assertEquals(26.666666f, extractedIonSignal.getAbundance(ion), 0, "Ion " + ion);
 	}
 
 	@Test
 	public void testGetNoiseMassSpectrumAbundance_4() {
 
 		int ion = 48;
-		assertEquals("Ion " + ion, 50.333332f, extractedIonSignal.getAbundance(ion), 0);
+		assertEquals(50.333332f, extractedIonSignal.getAbundance(ion), 0, "Ion " + ion);
 	}
 
 	@Test
 	public void testGetNoiseMassSpectrumAbundance_5() {
 
 		int ion = 52;
-		assertEquals("Ion " + ion, 41.666668f, extractedIonSignal.getAbundance(ion), 0);
+		assertEquals(41.666668f, extractedIonSignal.getAbundance(ion), 0, "Ion " + ion);
 	}
 
 	@Test
 	public void testGetNoiseMassSpectrumAbundance_6() {
 
 		int ion = 55;
-		assertEquals("Ion " + ion, 16.666666f, extractedIonSignal.getAbundance(ion), 0);
+		assertEquals(16.666666f, extractedIonSignal.getAbundance(ion), 0, "Ion " + ion);
 	}
 
 	@Test
 	public void testGetNoiseMassSpectrumAbundance_7() {
 
 		int ion = 89;
-		assertEquals("Ion " + ion, 8.333333f, extractedIonSignal.getAbundance(ion), 0);
+		assertEquals(8.333333f, extractedIonSignal.getAbundance(ion), 0, "Ion " + ion);
 	}
 
 	@Test
 	public void testGetNoiseMassSpectrumAbundance_8() {
 
 		int ion = 103;
-		assertEquals("Ion " + ion, 33.333332f, extractedIonSignal.getAbundance(ion), 0);
+		assertEquals(33.333332f, extractedIonSignal.getAbundance(ion), 0, "Ion " + ion);
 	}
 
 	@Test
 	public void testGetNoiseMassSpectrumAbundance_9() {
 
 		int ion = 104;
-		assertEquals("Ion " + ion, 1000.0f, extractedIonSignal.getAbundance(ion), 0);
+		assertEquals(1000.0f, extractedIonSignal.getAbundance(ion), 0, "Ion " + ion);
 	}
 
 	@Test
 	public void testGetNoiseMassSpectrumAbundance_10() {
 
 		int ion = 155;
-		assertEquals("Ion " + ion, 666.6667f, extractedIonSignal.getAbundance(ion), 0);
+		assertEquals(666.6667f, extractedIonSignal.getAbundance(ion), 0, "Ion " + ion);
 	}
 
 	@Test
 	public void testGetNoiseMassSpectrumAbundance_11() {
 
 		int ion = 178;
-		assertEquals("Ion " + ion, 6.6666665f, extractedIonSignal.getAbundance(ion), 0);
+		assertEquals(6.6666665f, extractedIonSignal.getAbundance(ion), 0, "Ion " + ion);
 	}
 
 	@Test
 	public void testGetNoiseMassSpectrumAbundance_12() {
 
 		int ion = 201;
-		assertEquals("Ion " + ion, 296.66666f, extractedIonSignal.getAbundance(ion), 0);
+		assertEquals(296.66666f, extractedIonSignal.getAbundance(ion), 0, "Ion " + ion);
 	}
 }

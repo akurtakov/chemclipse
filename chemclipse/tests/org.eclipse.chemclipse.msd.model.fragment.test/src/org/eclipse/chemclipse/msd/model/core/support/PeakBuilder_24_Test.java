@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.support;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.model.exceptions.PeakException;
@@ -28,12 +28,15 @@ import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
 import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Test the peak exceptions.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakBuilder_24_Test {
 
 	private ITotalScanSignals totalIonSignals;
@@ -41,7 +44,7 @@ public class PeakBuilder_24_Test {
 	private IChromatogramMSD chromatogram;
 	private IMarkedIons excludedIons;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		scanRange = new ScanRange(1, 10);
@@ -68,9 +71,9 @@ public class PeakBuilder_24_Test {
 		totalIonSignals = PeakBuilderMSD.getTotalIonSignals(chromatogram, scanRange, excludedIons);
 		assertNotNull(totalIonSignals);
 		ITotalScanSignal totalIonSignal = totalIonSignals.getTotalScanSignal(1);
-		assertEquals("Signal", 875.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(875.0f, totalIonSignal.getTotalSignal(), 0);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(10);
-		assertEquals("Signal", 875.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(875.0f, totalIonSignal.getTotalSignal(), 0);
 	}
 
 	@Test

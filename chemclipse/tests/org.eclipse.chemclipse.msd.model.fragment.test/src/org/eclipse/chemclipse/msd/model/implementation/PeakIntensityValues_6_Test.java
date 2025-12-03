@@ -12,28 +12,31 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.eclipse.chemclipse.model.implementation.PeakIntensityValues;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Test the peak intensity values.<br/>
  * Make sure that the limit IPeakIntensityValues.MAX_INTENSITY is implemented
  * correctly.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakIntensityValues_6_Test {
 
 	private PeakIntensityValues intensityValues;
 	private TreeMap<Integer, Float> scanValues;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		intensityValues = new PeakIntensityValues();
 		scanValues = new TreeMap<Integer, Float>();
@@ -63,14 +66,14 @@ public class PeakIntensityValues_6_Test {
 		int rt;
 		List<Integer> retentionTimes = intensityValues.getRetentionTimes();
 		rt = retentionTimes.get(0);
-		assertEquals("retentionTime", 1500, rt);
+		assertEquals(1500, rt);
 		rt = retentionTimes.get(4);
-		assertEquals("retentionTime", 5500, rt);
+		assertEquals(5500, rt);
 		rt = retentionTimes.get(7);
-		assertEquals("retentionTime", 8500, rt);
+		assertEquals(8500, rt);
 		rt = retentionTimes.get(10);
-		assertEquals("retentionTime", 11500, rt);
+		assertEquals(11500, rt);
 		rt = retentionTimes.get(14);
-		assertEquals("retentionTime", 15500, rt);
+		assertEquals(15500, rt);
 	}
 }

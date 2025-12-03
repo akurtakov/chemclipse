@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -24,9 +24,12 @@ import org.eclipse.chemclipse.model.implementation.PeakIntensityValues;
 import org.eclipse.chemclipse.msd.model.core.IPeakIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakModel_3_Test {
 
 	private IPeakModelMSD peakModel;
@@ -38,7 +41,7 @@ public class PeakModel_3_Test {
 	private float startBackgroundAbundance = 0.0f;
 	private float stopBackgroundAbundance = 0.0f;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		// ----------------------PeakMaximum
@@ -77,7 +80,7 @@ public class PeakModel_3_Test {
 		}
 		// ----------------------IntensityValues
 		peakModel = new PeakModelMSD(peakMaximum, intensityValues, startBackgroundAbundance, stopBackgroundAbundance);
-		assertNotNull("The construction was fine.", peakModel);
+		assertNotNull(peakModel, "The construction was fine.");
 	}
 
 	@Test

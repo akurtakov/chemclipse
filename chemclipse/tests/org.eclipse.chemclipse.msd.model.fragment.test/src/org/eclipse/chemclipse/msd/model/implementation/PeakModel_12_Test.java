@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 import java.util.Map.Entry;
@@ -23,9 +23,12 @@ import org.eclipse.chemclipse.model.implementation.PeakIntensityValues;
 import org.eclipse.chemclipse.msd.model.core.IPeakIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakModel_12_Test {
 
 	private IPeakModelMSD peakModel;
@@ -37,7 +40,7 @@ public class PeakModel_12_Test {
 	private float startBackgroundAbundance = 100.0f;
 	private float stopBackgroundAbundance = 100.0f;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		// ----------------------PeakMaximum
@@ -80,12 +83,12 @@ public class PeakModel_12_Test {
 		int rt;
 		List<Integer> retentionTimes = peakModel.getRetentionTimes();
 		rt = retentionTimes.get(0);
-		assertEquals("retentionTime", 4500, rt);
+		assertEquals(4500, rt);
 		rt = retentionTimes.get(2);
-		assertEquals("retentionTime", 6500, rt);
+		assertEquals(6500, rt);
 		rt = retentionTimes.get(5);
-		assertEquals("retentionTime", 9500, rt);
+		assertEquals(9500, rt);
 		rt = retentionTimes.get(7);
-		assertEquals("retentionTime", 11500, rt);
+		assertEquals(11500, rt);
 	}
 }

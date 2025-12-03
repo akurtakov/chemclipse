@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.history;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,9 +23,12 @@ import org.eclipse.chemclipse.support.history.EditHistorySortOrder;
 import org.eclipse.chemclipse.support.history.EditInformation;
 import org.eclipse.chemclipse.support.history.EditInformationComparator;
 import org.eclipse.chemclipse.support.history.IEditInformation;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class DefaultChromatogram_1_Test {
 
 	private ChromatogramMSD chromatogram;
@@ -34,8 +37,8 @@ public class DefaultChromatogram_1_Test {
 	private final String entry2 = "Me too.";
 	private final String entry3 = "What are we doing now?";
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() throws InterruptedException {
 
 		chromatogram = new ChromatogramMSD();
 		/*
@@ -58,9 +61,9 @@ public class DefaultChromatogram_1_Test {
 	public void testGetEditHistory_1() {
 
 		List<IEditInformation> history = new ArrayList<>(chromatogram.getEditHistory());
-		assertEquals("1st entry", entry1, history.get(0).getDescription());
-		assertEquals("2nd entry", entry2, history.get(1).getDescription());
-		assertEquals("3rd entry", entry3, history.get(2).getDescription());
+		assertEquals(entry1, history.get(0).getDescription());
+		assertEquals(entry2, history.get(1).getDescription());
+		assertEquals(entry3, history.get(2).getDescription());
 	}
 
 	@Test
@@ -68,9 +71,9 @@ public class DefaultChromatogram_1_Test {
 
 		List<IEditInformation> history = new ArrayList<>(chromatogram.getEditHistory());
 		Collections.sort(history, new EditInformationComparator(EditHistorySortOrder.DATE_ASC));
-		assertEquals("1st entry", entry1, history.get(0).getDescription());
-		assertEquals("2nd entry", entry2, history.get(1).getDescription());
-		assertEquals("3rd entry", entry3, history.get(2).getDescription());
+		assertEquals(entry1, history.get(0).getDescription());
+		assertEquals(entry2, history.get(1).getDescription());
+		assertEquals(entry3, history.get(2).getDescription());
 	}
 
 	@Test
@@ -78,8 +81,8 @@ public class DefaultChromatogram_1_Test {
 
 		List<IEditInformation> history = new ArrayList<>(chromatogram.getEditHistory());
 		Collections.sort(history, new EditInformationComparator(EditHistorySortOrder.DATE_DESC));
-		assertEquals("1st entry", entry3, history.get(0).getDescription());
-		assertEquals("2nd entry", entry2, history.get(1).getDescription());
-		assertEquals("3rd entry", entry1, history.get(2).getDescription());
+		assertEquals(entry3, history.get(0).getDescription());
+		assertEquals(entry2, history.get(1).getDescription());
+		assertEquals(entry1, history.get(2).getDescription());
 	}
 }
