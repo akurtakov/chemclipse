@@ -12,18 +12,21 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.pdfbox.extensions.settings;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class PageBaseConverter_1_Test {
 
 	private IPageBaseConverter converter;
 	private PDRectangle pdRectangle;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		converter = ConverterFactory.getInstance(PageBase.BOTTOM_LEFT);

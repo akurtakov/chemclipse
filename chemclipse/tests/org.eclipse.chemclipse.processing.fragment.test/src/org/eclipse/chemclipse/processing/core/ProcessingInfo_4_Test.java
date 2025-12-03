@@ -12,19 +12,22 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.processing.core;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ProcessingInfo_4_Test {
 
 	private IProcessingInfo<String> processingInfo;
 	private IProcessingMessage processingMessage;
 	private String processingResult;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		processingInfo = new ProcessingInfo<>();

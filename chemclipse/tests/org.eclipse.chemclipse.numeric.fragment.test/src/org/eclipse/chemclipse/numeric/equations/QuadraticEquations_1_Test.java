@@ -12,16 +12,19 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.equations;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class QuadraticEquations_1_Test {
 
 	private QuadraticEquation equation;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		equation = new QuadraticEquation(0.0d, 310206.81754652766d, 206670.62686893356d);

@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.pdfbox.extensions.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 
@@ -23,10 +23,13 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.PageBase;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.PageSettings;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.Unit;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class PageUtil_3_Test {
 
 	private static final String TEXT = "Hallo Welt!";
@@ -37,7 +40,7 @@ public class PageUtil_3_Test {
 	private PageUtil pageUtilPT;
 	private PageUtil pageUtilMM;
 
-	@Before
+	@BeforeAll
 	public void setUp() throws IOException {
 
 		document = new PDDocument();
@@ -45,7 +48,7 @@ public class PageUtil_3_Test {
 		pageUtilMM = new PageUtil(document, new PageSettings(PDRectangle.A4, PageBase.TOP_LEFT, Unit.MM, false));
 	}
 
-	@After
+	@AfterAll
 	public void tearDown() throws IOException {
 
 		document.close();

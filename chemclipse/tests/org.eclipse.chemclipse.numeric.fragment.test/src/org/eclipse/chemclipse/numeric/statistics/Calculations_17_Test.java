@@ -12,20 +12,23 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.statistics;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Testing median.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class Calculations_17_Test {
 
 	private double[] values;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		values = new double[13];
@@ -49,7 +52,7 @@ public class Calculations_17_Test {
 
 		Calculations.scaleToStandardizedLength(values);
 		double sum = Calculations.getSum(values);
-		assertEquals("Sum", 2.3314683517128287E-15d, sum, 0);
+		assertEquals(2.3314683517128287E-15d, sum, 0);
 		double[] standardizedLength;
 		standardizedLength = new double[13];
 		standardizedLength[0] = 2.492039173673667d;
@@ -65,6 +68,6 @@ public class Calculations_17_Test {
 		standardizedLength[10] = -0.9319821299917778d;
 		standardizedLength[11] = -1.291943343966863d;
 		standardizedLength[12] = -0.6159186250380443d;
-		assertArrayEquals("StandardizedLengthValues", standardizedLength, values, 0);
+		assertArrayEquals(standardizedLength, values, 0);
 	}
 }

@@ -12,19 +12,22 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.statistics;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Testing median.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class Calculations_19_Test {
 
 	private int[] values;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		values = new int[13];
@@ -47,29 +50,29 @@ public class Calculations_19_Test {
 	public void testGetMean_1() {
 
 		int mean = Calculations.getMean(values);
-		assertEquals("mean", 451, mean);
+		assertEquals(451, mean);
 	}
 
 	@Test
 	public void testGetMean_2() {
 
-		values = null;
-		int mean = Calculations.getMean(values);
-		assertEquals("mean", 0, mean);
+		int[] nullValues = null;
+		int mean = Calculations.getMean(nullValues);
+		assertEquals(0, mean);
 	}
 
 	@Test
 	public void testGetMedian_1() {
 
 		int median = Calculations.getMedian(values);
-		assertEquals("median", 430, median);
+		assertEquals(430, median);
 	}
 
 	@Test
 	public void testGetMedian_2() {
 
-		values = null;
-		int median = Calculations.getMedian(values);
-		assertEquals("median", 0, median);
+		int[] nullValues = null;
+		int median = Calculations.getMedian(nullValues);
+		assertEquals(0, median);
 	}
 }

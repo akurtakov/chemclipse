@@ -19,16 +19,16 @@ import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
 import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
-import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 
-@Ignore
+@Disabled
 public class ChromatogramOverviewTestCase {
 
 	private IChromatogramMSD chromatogram;
 	private IScanMSD massSpectrum;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		chromatogram = new ChromatogramMSD();

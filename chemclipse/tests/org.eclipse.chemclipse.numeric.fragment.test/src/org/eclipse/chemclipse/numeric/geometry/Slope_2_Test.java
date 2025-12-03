@@ -12,21 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.geometry;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class Slope_2_Test {
 
 	private ISlope slope1, slope2;
 	private IPoint p1, p2;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		p1 = new Point(5.0d, 10.0d);
@@ -38,30 +41,30 @@ public class Slope_2_Test {
 	@Test
 	public void testEquals_1() {
 
-		assertEquals("equals", slope1, slope2);
+		assertEquals(slope1, slope2);
 	}
 
 	@Test
 	public void testEquals_2() {
 
-		assertEquals("equals", slope2, slope1);
+		assertEquals(slope2, slope1);
 	}
 
 	@Test
 	public void testEquals_3() {
 
-		assertNotNull("equals", slope1);
+		assertNotNull(slope1);
 	}
 
 	@Test
 	public void testEquals_4() {
 
-		assertNotEquals("equals", slope1, new Object());
+		assertNotEquals(slope1, new Object());
 	}
 
 	@Test
 	public void hashCode_1() {
 
-		assertEquals("hashCode", slope1.hashCode(), slope2.hashCode());
+		assertEquals(slope1.hashCode(), slope2.hashCode());
 	}
 }

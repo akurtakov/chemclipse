@@ -12,20 +12,20 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.pdfbox.extensions.elements;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.awt.Color;
 
 import org.eclipse.chemclipse.pdfbox.extensions.core.PDTable;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TableElement_1_Test {
 
 	private TableElement element;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		element = new TableElement(10.0f, 20.0f, 30.0f);

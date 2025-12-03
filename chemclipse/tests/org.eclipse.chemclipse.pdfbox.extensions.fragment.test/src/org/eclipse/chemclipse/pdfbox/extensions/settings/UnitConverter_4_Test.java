@@ -12,16 +12,19 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.pdfbox.extensions.settings;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class UnitConverter_4_Test {
 
 	private IUnitConverter converter;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		converter = ConverterFactory.getInstance(Unit.PT);

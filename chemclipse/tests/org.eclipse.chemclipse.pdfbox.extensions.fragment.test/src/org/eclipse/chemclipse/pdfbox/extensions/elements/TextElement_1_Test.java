@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.pdfbox.extensions.elements;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.awt.Color;
 
@@ -20,14 +20,14 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.ReferenceX;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.ReferenceY;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.TextOption;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TextElement_1_Test {
 
 	private TextElement element;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		element = new TextElement(10.0f, 20.0f, 30.0f);

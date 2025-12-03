@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.pdfbox.extensions.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 
@@ -21,10 +21,13 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.PageBase;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.PageSettings;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.Unit;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class PageUtil_1_Test {
 
 	private PDDocument document;
@@ -33,7 +36,7 @@ public class PageUtil_1_Test {
 	private PageUtil pageUtilPT;
 	private PageUtil pageUtilMM;
 
-	@Before
+	@BeforeAll
 	public void setUp() throws IOException {
 
 		document = new PDDocument();
@@ -41,7 +44,7 @@ public class PageUtil_1_Test {
 		pageUtilMM = new PageUtil(document, new PageSettings(paperSize, PageBase.TOP_LEFT, Unit.MM, landscape));
 	}
 
-	@After
+	@AfterAll
 	public void tearDown() throws IOException {
 
 		document.close();

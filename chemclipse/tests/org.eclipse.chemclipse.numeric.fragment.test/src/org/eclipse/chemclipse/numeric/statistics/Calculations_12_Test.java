@@ -12,19 +12,22 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.statistics;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Testing median.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class Calculations_12_Test {
 
 	private double[] values;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		values = new double[13];
@@ -47,13 +50,13 @@ public class Calculations_12_Test {
 	public void testGetSum_1() {
 
 		double result = Calculations.getSum(values);
-		assertEquals("getSum", 5865.0d, result, 0);
+		assertEquals(5865.0d, result, 0);
 	}
 
 	@Test
 	public void testGetSumPowSquareRoot_1() {
 
 		double result = Calculations.getEuclidianLength(values);
-		assertEquals("getEuclidianLength", 1673.8276494310876d, result, 0);
+		assertEquals(1673.8276494310876d, result, 0);
 	}
 }

@@ -12,19 +12,22 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.statistics;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Testing median.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class Calculations_6_Test {
 
 	private double[] values;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		values = new double[13];
@@ -47,13 +50,13 @@ public class Calculations_6_Test {
 	public void testGetMin_1() {
 
 		double result = Calculations.getMin(values);
-		assertEquals("getMin", 304.0d, result, 0);
+		assertEquals(304.0d, result, 0);
 	}
 
 	@Test
 	public void testGetMax_1() {
 
 		double result = Calculations.getMax(values);
-		assertEquals("getMax", 735.0d, result, 0);
+		assertEquals(735.0d, result, 0);
 	}
 }

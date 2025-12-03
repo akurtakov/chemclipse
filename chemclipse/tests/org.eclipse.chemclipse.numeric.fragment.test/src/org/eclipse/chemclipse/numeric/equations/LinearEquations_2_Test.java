@@ -12,21 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.equations;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class LinearEquations_2_Test {
 
 	private LinearEquation eq1;
 	private LinearEquation eq2;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		IPoint p11 = new Point(1, 4);
@@ -38,30 +41,30 @@ public class LinearEquations_2_Test {
 	@Test
 	public void testEquals_1() {
 
-		assertEquals("equals", eq1, eq2);
+		assertEquals(eq1, eq2);
 	}
 
 	@Test
 	public void testEquals_2() {
 
-		assertEquals("equals", eq2, eq1);
+		assertEquals(eq2, eq1);
 	}
 
 	@Test
 	public void testEquals_3() {
 
-		assertNotNull("equals", eq1);
+		assertNotNull(eq1);
 	}
 
 	@Test
 	public void testEquals_4() {
 
-		assertNotEquals("equals", eq1, new Object());
+		assertNotEquals(eq1, new Object());
 	}
 
 	@Test
 	public void testHashCode_1() {
 
-		assertEquals("hashCode", eq1.hashCode(), eq2.hashCode());
+		assertEquals(eq1.hashCode(), eq2.hashCode());
 	}
 }

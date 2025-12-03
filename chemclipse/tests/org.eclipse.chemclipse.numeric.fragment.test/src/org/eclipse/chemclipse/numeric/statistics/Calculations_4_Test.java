@@ -12,24 +12,25 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.statistics;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Testing median.
- * 
- * @author eselmeister
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class Calculations_4_Test {
 
 	private double[] values;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		values = new double[12];
@@ -51,7 +52,7 @@ public class Calculations_4_Test {
 	public void testGetMedian_1() {
 
 		double result = Calculations.getMedian(values);
-		assertEquals("getMedian", 436.5d, result, 0);
+		assertEquals(436.5d, result, 0);
 	}
 
 	@Test
@@ -62,7 +63,7 @@ public class Calculations_4_Test {
 			val.add(value);
 		}
 		double result = Calculations.getMedian(val);
-		assertEquals("getMedian", 436.5d, result, 0);
+		assertEquals(436.5d, result, 0);
 	}
 
 	@Test
@@ -80,6 +81,6 @@ public class Calculations_4_Test {
 		}
 		val.add(780.0d);
 		double result = Calculations.getMedian(val);
-		assertEquals("getMedian", 436.5d, result, 0);
+		assertEquals(436.5d, result, 0);
 	}
 }

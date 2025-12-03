@@ -12,16 +12,19 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.processing.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ProcessingMessage_1_Test {
 
 	private IProcessingMessage processingMessage;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		processingMessage = new ProcessingMessage(MessageType.ERROR, "Load Peak", "The peak X35P couldn't be loaded, cause it seems to have no values.");

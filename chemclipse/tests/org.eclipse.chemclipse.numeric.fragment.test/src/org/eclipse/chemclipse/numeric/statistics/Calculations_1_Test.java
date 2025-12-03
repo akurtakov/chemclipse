@@ -12,16 +12,19 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.statistics;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class Calculations_1_Test {
 
 	private double[] values;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		values = new double[]{45.8, 48.4, 78.7, 86.7, 64.6};
@@ -31,6 +34,6 @@ public class Calculations_1_Test {
 	public void testGetMean_1() {
 
 		double result = Calculations.getMean(values);
-		assertEquals("getMean", 64.83999999999999, result, 0);
+		assertEquals(64.83999999999999, result, 0);
 	}
 }

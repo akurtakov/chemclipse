@@ -12,19 +12,22 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.statistics;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Testing median.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class Calculations_7_Test {
 
 	private int[] values;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		values = new int[13];
@@ -47,6 +50,6 @@ public class Calculations_7_Test {
 	public void testGetSum_1() {
 
 		int result = Calculations.getSum(values);
-		assertEquals("getSum", 5865, result);
+		assertEquals(5865, result);
 	}
 }

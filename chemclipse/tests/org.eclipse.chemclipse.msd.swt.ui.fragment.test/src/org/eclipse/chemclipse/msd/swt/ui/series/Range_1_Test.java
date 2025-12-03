@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.swt.ui.series;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.swtchart.Range;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class Range_1_Test {
 
@@ -23,13 +23,13 @@ public class Range_1_Test {
 	public void testRange_1() {
 
 		Range range = new Range(0, 0);
-		assertEquals("lower", 0.0d, range.lower, 0);
+		assertEquals(0.0d, range.lower, 0);
 	}
 
 	@Test
 	public void testRange_2() {
 
 		Range range = new Range(0, 0);
-		assertEquals("upper", 0.0d, range.upper, 0);
+		assertEquals(0.0d, range.upper, 0);
 	}
 }

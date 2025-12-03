@@ -12,22 +12,25 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.numeric.equations;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Check the compilation of a quadratic equation by multiple x,y value pairs
  * using GaussJordan fitting.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class Equations_3_Test {
 
 	private IPoint[] points;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		points = new IPoint[4];
@@ -41,27 +44,27 @@ public class Equations_3_Test {
 	public void testCreateLinearEquation_1() {
 
 		IQuadraticEquation eq = Equations.createQuadraticEquation(points);
-		assertEquals("X=0", 4.371859296482454d, eq.calculateY(0), 0);
+		assertEquals(4.371859296482454d, eq.calculateY(0), 0, "X=0");
 	}
 
 	@Test
 	public void testCreateLinearEquation_2() {
 
 		IQuadraticEquation eq = Equations.createQuadraticEquation(points);
-		assertEquals("toString()", "org.eclipse.chemclipse.numeric.equations.QuadraticEquation[f(x)=-0.1432160804020076x^2 + 0.5552763819095254x + 4.371859296482454]", eq.toString());
+		assertEquals("org.eclipse.chemclipse.numeric.equations.QuadraticEquation[f(x)=-0.1432160804020076x^2 + 0.5552763819095254x + 4.371859296482454]", eq.toString());
 	}
 
 	@Test
 	public void testCreateLinearEquation_3() {
 
 		IQuadraticEquation equation = Equations.createQuadraticEquation(points);
-		assertEquals("getApexValueForX Apex.NEGATIVE", 7.793890860025901d, equation.getApexValueForX(Apex.POSITIVE), 0);
+		assertEquals(7.793890860025901d, equation.getApexValueForX(Apex.POSITIVE), 0);
 	}
 
 	@Test
 	public void testCreateLinearEquation_4() {
 
 		IQuadraticEquation eq = Equations.createQuadraticEquation(points);
-		assertEquals("getApexValueForX Apex.NEGATIVE", -3.9166978775698498d, eq.getApexValueForX(Apex.NEGATIVE), 0);
+		assertEquals(-3.9166978775698498d, eq.getApexValueForX(Apex.NEGATIVE), 0);
 	}
 }
