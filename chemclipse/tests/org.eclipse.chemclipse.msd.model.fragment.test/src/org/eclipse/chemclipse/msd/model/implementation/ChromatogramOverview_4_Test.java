@@ -12,21 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Test the interface IChromatogramOverview with 1 scan.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramOverview_4_Test {
 
 	private ChromatogramMSD chrom;
 	private IChromatogramOverview chromatogram;
 
-	@Before
+	@BeforeAll
 	public void setUp() throws Exception {
 
 		chrom = new ChromatogramMSD();
@@ -40,36 +43,36 @@ public class ChromatogramOverview_4_Test {
 	@Test
 	public void testGetScanNumber_1() {
 
-		assertEquals("ScanNumber", 0, chromatogram.getScanNumber(12736));
+		assertEquals(0, chromatogram.getScanNumber(12736));
 	}
 
 	@Test
 	public void testGetScanNumber_2() {
 
-		assertEquals("ScanNumber", 0, chromatogram.getScanNumber(5501));
+		assertEquals(0, chromatogram.getScanNumber(5501));
 	}
 
 	@Test
 	public void testGetScanNumber_3() {
 
-		assertEquals("ScanNumber", 0, chromatogram.getScanNumber(5500));
+		assertEquals(0, chromatogram.getScanNumber(5500));
 	}
 
 	@Test
 	public void testGetScanNumber_4() {
 
-		assertEquals("ScanNumber", 0, chromatogram.getScanNumber(5499));
+		assertEquals(0, chromatogram.getScanNumber(5499));
 	}
 
 	@Test
 	public void testGetScanNumber_5() {
 
-		assertEquals("ScanNumber", 0, chromatogram.getScanNumber(0));
+		assertEquals(0, chromatogram.getScanNumber(0));
 	}
 
 	@Test
 	public void testGetScanNumber_6() {
 
-		assertEquals("ScanNumber", 0, chromatogram.getScanNumber(-1));
+		assertEquals(0, chromatogram.getScanNumber(-1));
 	}
 }

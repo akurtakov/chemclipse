@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.xic;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +24,8 @@ import org.eclipse.chemclipse.msd.model.exceptions.NoExtractedIonSignalStoredExc
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
 import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ExtractedIonSignalsModifier_2_Test {
 
@@ -34,7 +34,7 @@ public class ExtractedIonSignalsModifier_2_Test {
 	private List<Integer> scans;
 	private List<Integer> ions;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws NoExtractedIonSignalStoredException {
 
 		/*
@@ -80,7 +80,7 @@ public class ExtractedIonSignalsModifier_2_Test {
 		for(int scan : scans) {
 			extractedIonSignal = extractedIonSignals.getExtractedIonSignal(scan);
 			for(int ion : ions) {
-				assertEquals("TotalIonSignal before", 0.0f, extractedIonSignal.getAbundance(ion), 0);
+				assertEquals(0.0f, extractedIonSignal.getAbundance(ion), 0, "TotalIonSignal before");
 			}
 		}
 	}
@@ -93,9 +93,9 @@ public class ExtractedIonSignalsModifier_2_Test {
 		 * Test the adjusted value.
 		 */
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(4);
-		assertEquals("TotalIonSignal after", 35.054245f, extractedIonSignal.getAbundance(45), 0);
-		assertEquals("TotalIonSignal after", 35.054245f, extractedIonSignal.getAbundance(76), 0);
-		assertEquals("TotalIonSignal after", 35.054245f, extractedIonSignal.getAbundance(102), 0);
+		assertEquals(35.054245f, extractedIonSignal.getAbundance(45), 0, "TotalIonSignal after");
+		assertEquals(35.054245f, extractedIonSignal.getAbundance(76), 0, "TotalIonSignal after");
+		assertEquals(35.054245f, extractedIonSignal.getAbundance(102), 0, "TotalIonSignal after");
 	}
 
 	@Test
@@ -106,9 +106,9 @@ public class ExtractedIonSignalsModifier_2_Test {
 		 * Test the adjusted value.
 		 */
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(7);
-		assertEquals("TotalIonSignal after", 35.054245f, extractedIonSignal.getAbundance(45), 0);
-		assertEquals("TotalIonSignal after", 35.054245f, extractedIonSignal.getAbundance(76), 0);
-		assertEquals("TotalIonSignal after", 35.054245f, extractedIonSignal.getAbundance(102), 0);
+		assertEquals(35.054245f, extractedIonSignal.getAbundance(45), 0, "TotalIonSignal after");
+		assertEquals(35.054245f, extractedIonSignal.getAbundance(76), 0, "TotalIonSignal after");
+		assertEquals(35.054245f, extractedIonSignal.getAbundance(102), 0, "TotalIonSignal after");
 	}
 
 	@Test
@@ -119,9 +119,9 @@ public class ExtractedIonSignalsModifier_2_Test {
 		 * Test the adjusted value.
 		 */
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(9);
-		assertEquals("TotalIonSignal after", 35.054245f, extractedIonSignal.getAbundance(45), 0);
-		assertEquals("TotalIonSignal after", 35.054245f, extractedIonSignal.getAbundance(76), 0);
-		assertEquals("TotalIonSignal after", 35.054245f, extractedIonSignal.getAbundance(102), 0);
+		assertEquals(35.054245f, extractedIonSignal.getAbundance(45), 0, "TotalIonSignal after");
+		assertEquals(35.054245f, extractedIonSignal.getAbundance(76), 0, "TotalIonSignal after");
+		assertEquals(35.054245f, extractedIonSignal.getAbundance(102), 0, "TotalIonSignal after");
 	}
 
 	@Test
@@ -132,8 +132,8 @@ public class ExtractedIonSignalsModifier_2_Test {
 		 * Test the adjusted value.
 		 */
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(5);
-		assertEquals("TotalIonSignal after", 90.0f, extractedIonSignal.getAbundance(45), 0);
-		assertEquals("TotalIonSignal after", 152.0f, extractedIonSignal.getAbundance(76), 0);
-		assertEquals("TotalIonSignal after", 204.0f, extractedIonSignal.getAbundance(102), 0);
+		assertEquals(90.0f, extractedIonSignal.getAbundance(45), 0, "TotalIonSignal after");
+		assertEquals(152.0f, extractedIonSignal.getAbundance(76), 0, "TotalIonSignal after");
+		assertEquals(204.0f, extractedIonSignal.getAbundance(102), 0, "TotalIonSignal after");
 	}
 }

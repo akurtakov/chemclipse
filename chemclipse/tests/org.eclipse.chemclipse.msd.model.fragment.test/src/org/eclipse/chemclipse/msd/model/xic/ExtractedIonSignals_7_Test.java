@@ -12,22 +12,25 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.xic;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.exceptions.NoExtractedIonSignalStoredException;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ExtractedIonSignals_7_Test {
 
 	private IExtractedIonSignals extractedIonSignals;
 	private IExtractedIonSignal extractedIonSignal;
 	private IChromatogramMSD chromatogram;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		int scans = 100;
@@ -53,7 +56,7 @@ public class ExtractedIonSignals_7_Test {
 	public void testMakeDeepCopyWithoutSignals_1() {
 
 		IExtractedIonSignals signals = extractedIonSignals.makeDeepCopyWithoutSignals();
-		assertEquals("Size", 100, signals.size());
+		assertEquals(100, signals.size());
 	}
 
 	@Test
@@ -72,7 +75,7 @@ public class ExtractedIonSignals_7_Test {
 			signal = extractedIonSignals.getExtractedIonSignal(scan);
 			sum += signal.getTotalSignal();
 		}
-		assertEquals("TotalSignals", 833250.0f, sum, 0);
+		assertEquals(833250.0f, sum, 0);
 		// Make a deep copy.
 		IExtractedIonSignals signals = extractedIonSignals.makeDeepCopyWithoutSignals();
 		sum = 0.0f;
@@ -80,6 +83,6 @@ public class ExtractedIonSignals_7_Test {
 			signal = signals.getExtractedIonSignal(scan);
 			sum += signal.getTotalSignal();
 		}
-		assertEquals("TotalSignals", 0.0f, sum, 0);
+		assertEquals(0.0f, sum, 0);
 	}
 }

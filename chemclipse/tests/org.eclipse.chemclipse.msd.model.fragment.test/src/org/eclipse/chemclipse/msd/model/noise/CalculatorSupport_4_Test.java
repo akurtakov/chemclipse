@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.noise;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.model.support.AnalysisSegment;
@@ -26,9 +26,12 @@ import org.eclipse.chemclipse.msd.model.xic.ExtractedIonSignals;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignal;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignals;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class CalculatorSupport_4_Test {
 
 	private CalculatorSupport calculatorSupport;
@@ -39,7 +42,7 @@ public class CalculatorSupport_4_Test {
 	private IMarkedIons ionsToPreserve;
 	private ICombinedMassSpectrum noiseMassSpectrum;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		calculatorSupport = new CalculatorSupport();
@@ -95,6 +98,6 @@ public class CalculatorSupport_4_Test {
 	@Test
 	public void testGetNoiseMassSpectrum_1() {
 
-		assertEquals("Size", 4, noiseMassSpectrum.getNumberOfIons());
+		assertEquals(4, noiseMassSpectrum.getNumberOfIons());
 	}
 }

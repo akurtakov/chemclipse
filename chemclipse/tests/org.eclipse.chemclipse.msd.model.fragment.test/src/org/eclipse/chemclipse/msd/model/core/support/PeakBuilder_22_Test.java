@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.support;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.eclipse.chemclipse.model.exceptions.PeakException;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
@@ -24,12 +24,15 @@ import org.eclipse.chemclipse.model.support.BackgroundAbundanceRange;
 import org.eclipse.chemclipse.model.support.IBackgroundAbundanceRange;
 import org.eclipse.chemclipse.model.support.IScanRange;
 import org.eclipse.chemclipse.model.support.ScanRange;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Test the peak exceptions.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakBuilder_22_Test {
 
 	private ITotalScanSignals totalIonSignals;
@@ -38,8 +41,8 @@ public class PeakBuilder_22_Test {
 	private IBackgroundAbundanceRange backgroundAbundanceRange;
 	private IBackgroundAbundanceRange correctedBackground;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		totalIonSignals = new TotalScanSignals(20, 30);
 		scanRange = new ScanRange(20, 30);
@@ -54,8 +57,8 @@ public class PeakBuilder_22_Test {
 
 		backgroundAbundanceRange = new BackgroundAbundanceRange(1500.0f, 1500.0f);
 		correctedBackground = PeakBuilderMSD.checkBackgroundAbundanceRange(totalIonSignals, scanRange, backgroundAbundanceRange);
-		assertEquals("Start", 1000.0f, correctedBackground.getStartBackgroundAbundance(), 0);
-		assertEquals("Stop", 1000.0f, correctedBackground.getStopBackgroundAbundance(), 0);
+		assertEquals(1000.0f, correctedBackground.getStartBackgroundAbundance(), 0);
+		assertEquals(1000.0f, correctedBackground.getStopBackgroundAbundance(), 0);
 	}
 
 	@Test
@@ -63,8 +66,8 @@ public class PeakBuilder_22_Test {
 
 		backgroundAbundanceRange = new BackgroundAbundanceRange(800.0f, 1500.0f);
 		correctedBackground = PeakBuilderMSD.checkBackgroundAbundanceRange(totalIonSignals, scanRange, backgroundAbundanceRange);
-		assertEquals("Start", 800.0f, correctedBackground.getStartBackgroundAbundance(), 0);
-		assertEquals("Stop", 1000.0f, correctedBackground.getStopBackgroundAbundance(), 0);
+		assertEquals(800.0f, correctedBackground.getStartBackgroundAbundance(), 0);
+		assertEquals(1000.0f, correctedBackground.getStopBackgroundAbundance(), 0);
 	}
 
 	@Test
@@ -72,8 +75,8 @@ public class PeakBuilder_22_Test {
 
 		backgroundAbundanceRange = new BackgroundAbundanceRange(1500.0f, 750.0f);
 		correctedBackground = PeakBuilderMSD.checkBackgroundAbundanceRange(totalIonSignals, scanRange, backgroundAbundanceRange);
-		assertEquals("Start", 1000.0f, correctedBackground.getStartBackgroundAbundance(), 0);
-		assertEquals("Stop", 750.0f, correctedBackground.getStopBackgroundAbundance(), 0);
+		assertEquals(1000.0f, correctedBackground.getStartBackgroundAbundance(), 0);
+		assertEquals(750.0f, correctedBackground.getStopBackgroundAbundance(), 0);
 	}
 
 	@Test

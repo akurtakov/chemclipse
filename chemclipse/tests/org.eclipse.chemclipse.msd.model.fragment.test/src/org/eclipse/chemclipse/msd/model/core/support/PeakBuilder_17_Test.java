@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.support;
 
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.model.exceptions.PeakException;
@@ -26,12 +26,15 @@ import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.PeakMassSpectrum;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Test the peak exceptions.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakBuilder_17_Test {
 
 	private IScanRange scanRange;
@@ -41,7 +44,7 @@ public class PeakBuilder_17_Test {
 	private ITotalScanSignals totalIonSignals;
 	private IChromatogramMSD chromatogram;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		scanRange = new ScanRange(1, 20);

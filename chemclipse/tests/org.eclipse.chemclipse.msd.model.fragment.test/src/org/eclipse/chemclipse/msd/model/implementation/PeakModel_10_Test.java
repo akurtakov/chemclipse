@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Map.Entry;
 import java.util.TreeMap;
@@ -22,9 +22,12 @@ import org.eclipse.chemclipse.model.implementation.PeakIntensityValues;
 import org.eclipse.chemclipse.msd.model.core.IPeakIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakModel_10_Test {
 
 	private IPeakModelMSD peakModel;
@@ -36,7 +39,7 @@ public class PeakModel_10_Test {
 	private float startBackgroundAbundance = 100.0f;
 	private float stopBackgroundAbundance = 100.0f;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		// ----------------------PeakMaximum
@@ -77,6 +80,6 @@ public class PeakModel_10_Test {
 	@Test
 	public void testTailing_1() {
 
-		assertEquals("GetTailing", 0.25f, peakModel.getTailing(), 0);
+		assertEquals(0.25f, peakModel.getTailing(), 0);
 	}
 }

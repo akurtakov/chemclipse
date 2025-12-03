@@ -12,28 +12,31 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.eclipse.chemclipse.model.core.IPeakIntensityValues;
 import org.eclipse.chemclipse.model.implementation.PeakIntensityValues;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Test the peak intensity values.<br/>
  * Make sure that the limit IPeakIntensityValues.MAX_INTENSITY is implemented
  * correctly.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakIntensityValues_7_Test {
 
 	private PeakIntensityValues intensityValues;
 	private TreeMap<Integer, Float> scanValues;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		intensityValues = new PeakIntensityValues();
 		scanValues = new TreeMap<Integer, Float>();

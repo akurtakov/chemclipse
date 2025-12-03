@@ -12,22 +12,25 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.xic;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.model.signals.TotalScanSignal;
 import org.eclipse.chemclipse.model.signals.TotalScanSignals;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class TotalIonSignals_1_Test {
 
 	private ITotalScanSignals signals;
 	private ITotalScanSignal signal;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		signals = new TotalScanSignals(10);
@@ -40,54 +43,54 @@ public class TotalIonSignals_1_Test {
 	@Test
 	public void testSize_1() {
 
-		assertEquals("size", 10, signals.size());
+		assertEquals(10, signals.size());
 	}
 
 	@Test
 	public void testGetTotalIonSignal_1() {
 
 		signal = signals.getTotalScanSignal(1);
-		assertEquals("retention time", 1 * 100, signal.getRetentionTime());
-		assertEquals("retention index", 0.0f, signal.getRetentionIndex(), 0);
-		assertEquals("total signal", 1 * 100.0f, signal.getTotalSignal(), 0);
+		assertEquals(1 * 100, signal.getRetentionTime());
+		assertEquals(0.0f, signal.getRetentionIndex(), 0);
+		assertEquals(1 * 100.0f, signal.getTotalSignal(), 0);
 	}
 
 	@Test
 	public void testGetTotalIonSignal_2() {
 
 		signal = signals.getTotalScanSignal(5);
-		assertEquals("retention time", 5 * 100, signal.getRetentionTime());
-		assertEquals("retention index", 0.0f, signal.getRetentionIndex(), 0);
-		assertEquals("total signal", 5 * 100.0f, signal.getTotalSignal(), 0);
+		assertEquals(5 * 100, signal.getRetentionTime());
+		assertEquals(0.0f, signal.getRetentionIndex(), 0);
+		assertEquals(5 * 100.0f, signal.getTotalSignal(), 0);
 	}
 
 	@Test
 	public void testGetTotalIonSignal_3() {
 
 		signal = signals.getTotalScanSignal(10);
-		assertEquals("retention time", 10 * 100, signal.getRetentionTime());
-		assertEquals("retention index", 0.0f, signal.getRetentionIndex(), 0);
-		assertEquals("total signal", 10 * 100.0f, signal.getTotalSignal(), 0);
+		assertEquals(10 * 100, signal.getRetentionTime());
+		assertEquals(0.0f, signal.getRetentionIndex(), 0);
+		assertEquals(10 * 100.0f, signal.getTotalSignal(), 0);
 	}
 
 	@Test
 	public void testGetTotalIonSignal_4() {
 
 		signal = signals.getTotalScanSignal(0);
-		assertNull("ITotalIonSignal", signal);
+		assertNull(signal);
 	}
 
 	@Test
 	public void testGetTotalIonSignal_5() {
 
 		signal = signals.getTotalScanSignal(11);
-		assertNull("ITotalIonSignal", signal);
+		assertNull(signal);
 	}
 
 	@Test
 	public void testGetTotalIonSignal_6() {
 
 		signal = signals.getTotalScanSignal(-1);
-		assertNull("ITotalIonSignal", signal);
+		assertNull(signal);
 	}
 }

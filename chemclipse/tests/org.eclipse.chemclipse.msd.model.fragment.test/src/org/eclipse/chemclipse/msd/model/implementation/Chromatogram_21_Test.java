@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class Chromatogram_21_Test {
 
@@ -25,13 +25,13 @@ public class Chromatogram_21_Test {
 	public void testGetStartIon_1() {
 
 		double startIon = chromatogram.getStartIon();
-		assertEquals("startIon", 0.0d, startIon, 0);
+		assertEquals(0.0d, startIon, 0);
 	}
 
 	@Test
 	public void testGetStopIon_1() {
 
 		double stopIon = chromatogram.getStopIon();
-		assertEquals("stopIon", 0.0d, stopIon, 0);
+		assertEquals(0.0d, stopIon, 0);
 	}
 }

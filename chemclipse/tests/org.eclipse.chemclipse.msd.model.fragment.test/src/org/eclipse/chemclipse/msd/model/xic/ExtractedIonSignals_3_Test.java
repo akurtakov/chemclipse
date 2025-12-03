@@ -12,13 +12,16 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.xic;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ExtractedIonSignals_3_Test {
 
 	private IChromatogramMSD chromatogram = new ChromatogramMSD();
@@ -27,27 +30,27 @@ public class ExtractedIonSignals_3_Test {
 	public void testConstructor_1() {
 
 		IExtractedIonSignals extractedIonSignals = new ExtractedIonSignals(10, chromatogram);
-		assertNotNull("getChromatogram", extractedIonSignals.getChromatogram());
+		assertNotNull(extractedIonSignals.getChromatogram());
 	}
 
 	@Test
 	public void testConstructor_2() {
 
 		IExtractedIonSignals extractedIonSignals = new ExtractedIonSignals(10, null);
-		assertNull("getChromatogram", extractedIonSignals.getChromatogram());
+		assertNull(extractedIonSignals.getChromatogram());
 	}
 
 	@Test
 	public void testConstructor_3() {
 
 		IExtractedIonSignals extractedIonSignals = new ExtractedIonSignals(20, 40, chromatogram);
-		assertNotNull("getChromatogram", extractedIonSignals.getChromatogram());
+		assertNotNull(extractedIonSignals.getChromatogram());
 	}
 
 	@Test
 	public void testConstructor_4() {
 
 		IExtractedIonSignals extractedIonSignals = new ExtractedIonSignals(20, 40, null);
-		assertNull("getChromatogram", extractedIonSignals.getChromatogram());
+		assertNull(extractedIonSignals.getChromatogram());
 	}
 }

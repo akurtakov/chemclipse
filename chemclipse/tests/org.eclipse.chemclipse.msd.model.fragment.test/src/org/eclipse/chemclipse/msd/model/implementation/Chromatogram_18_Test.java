@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
@@ -24,12 +24,15 @@ import org.eclipse.chemclipse.msd.model.xic.ExtractedIonSignalExtractor;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignal;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignalExtractor;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignals;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Add 100 scans and get an {@link ITotalScanSignals} object.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class Chromatogram_18_Test {
 
 	private IChromatogramMSD chromatogram;
@@ -38,7 +41,7 @@ public class Chromatogram_18_Test {
 	private ChromatogramSelectionMSD chromatogramSelection;
 	private IExtractedIonSignalExtractor extractedIonSignalExtractor;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		chromatogram = new ChromatogramMSD();
@@ -60,34 +63,34 @@ public class Chromatogram_18_Test {
 	@Test
 	public void testGetNumberOfScans_1() {
 
-		assertEquals("numberOfScans", 100, chromatogram.getNumberOfScans());
+		assertEquals(100, chromatogram.getNumberOfScans());
 	}
 
 	@Test
 	public void testGetStartRetentionTime_1() {
 
-		assertEquals("startRetentionTime", 1, chromatogram.getStartRetentionTime());
+		assertEquals(1, chromatogram.getStartRetentionTime());
 	}
 
 	@Test
 	public void testGetStopRetentionTime_1() {
 
-		assertEquals("stopRetentionTime", 100, chromatogram.getStopRetentionTime());
+		assertEquals(100, chromatogram.getStopRetentionTime());
 	}
 
 	@Test
 	public void testGetExtractedIonSignals_1() throws NoExtractedIonSignalStoredException {
 
 		extractedIonSignals = extractedIonSignalExtractor.getExtractedIonSignals(20, 50);
-		assertEquals("StartScan", 20, extractedIonSignals.getStartScan());
-		assertEquals("StopScan", 50, extractedIonSignals.getStopScan());
+		assertEquals(20, extractedIonSignals.getStartScan());
+		assertEquals(50, extractedIonSignals.getStopScan());
 		int scan;
 		scan = extractedIonSignals.getStartScan();
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(scan);
-		assertEquals("TotalSignal", 25500.0f, extractedIonSignal.getTotalSignal(), 0);
+		assertEquals(25500.0f, extractedIonSignal.getTotalSignal(), 0);
 		scan = extractedIonSignals.getStopScan();
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(scan);
-		assertEquals("TotalSignal", 63750.0f, extractedIonSignal.getTotalSignal(), 0);
+		assertEquals(63750.0f, extractedIonSignal.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -100,30 +103,30 @@ public class Chromatogram_18_Test {
 		chromatogramSelection.setStartRetentionTime(20);
 		chromatogramSelection.setStopRetentionTime(50);
 		extractedIonSignals = extractedIonSignalExtractor.getExtractedIonSignals(chromatogramSelection);
-		assertEquals("StartScan", 20, extractedIonSignals.getStartScan());
-		assertEquals("StopScan", 50, extractedIonSignals.getStopScan());
+		assertEquals(20, extractedIonSignals.getStartScan());
+		assertEquals(50, extractedIonSignals.getStopScan());
 		int scan;
 		scan = extractedIonSignals.getStartScan();
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(scan);
-		assertEquals("TotalSignal", 25500.0f, extractedIonSignal.getTotalSignal(), 0);
+		assertEquals(25500.0f, extractedIonSignal.getTotalSignal(), 0);
 		scan = extractedIonSignals.getStopScan();
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(scan);
-		assertEquals("TotalSignal", 63750.0f, extractedIonSignal.getTotalSignal(), 0);
+		assertEquals(63750.0f, extractedIonSignal.getTotalSignal(), 0);
 	}
 
 	@Test
 	public void testGetExtractedIonSignals_3() throws NoExtractedIonSignalStoredException {
 
 		extractedIonSignals = extractedIonSignalExtractor.getExtractedIonSignals(50, 20);
-		assertEquals("StartScan", 20, extractedIonSignals.getStartScan());
-		assertEquals("StopScan", 50, extractedIonSignals.getStopScan());
+		assertEquals(20, extractedIonSignals.getStartScan());
+		assertEquals(50, extractedIonSignals.getStopScan());
 		int scan;
 		scan = extractedIonSignals.getStartScan();
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(scan);
-		assertEquals("TotalSignal", 25500.0f, extractedIonSignal.getTotalSignal(), 0);
+		assertEquals(25500.0f, extractedIonSignal.getTotalSignal(), 0);
 		scan = extractedIonSignals.getStopScan();
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(scan);
-		assertEquals("TotalSignal", 63750.0f, extractedIonSignal.getTotalSignal(), 0);
+		assertEquals(63750.0f, extractedIonSignal.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -136,23 +139,23 @@ public class Chromatogram_18_Test {
 		chromatogramSelection.setStartRetentionTime(50);
 		chromatogramSelection.setStopRetentionTime(20);
 		extractedIonSignals = extractedIonSignalExtractor.getExtractedIonSignals(chromatogramSelection);
-		assertEquals("StartScan", 50, extractedIonSignals.getStartScan());
-		assertEquals("StopScan", 100, extractedIonSignals.getStopScan());
+		assertEquals(50, extractedIonSignals.getStartScan());
+		assertEquals(100, extractedIonSignals.getStopScan());
 		int scan;
 		scan = extractedIonSignals.getStartScan();
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(scan);
-		assertEquals("TotalSignal", 63750.0f, extractedIonSignal.getTotalSignal(), 0);
+		assertEquals(63750.0f, extractedIonSignal.getTotalSignal(), 0);
 		scan = extractedIonSignals.getStopScan();
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(scan);
-		assertEquals("TotalSignal", 127500.0f, extractedIonSignal.getTotalSignal(), 0);
+		assertEquals(127500.0f, extractedIonSignal.getTotalSignal(), 0);
 	}
 
 	@Test
 	public void testGetExtractedIonSignals_5() throws NoExtractedIonSignalStoredException {
 
 		extractedIonSignals = extractedIonSignalExtractor.getExtractedIonSignals(0, 180);
-		assertEquals("StartScan", 1, extractedIonSignals.getStartScan());
-		assertEquals("StopScan", 100, extractedIonSignals.getStopScan());
+		assertEquals(1, extractedIonSignals.getStartScan());
+		assertEquals(100, extractedIonSignals.getStopScan());
 		int startScan = extractedIonSignals.getStartScan();
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(startScan);
 		int stopScan = extractedIonSignals.getStopScan();
@@ -168,17 +171,17 @@ public class Chromatogram_18_Test {
 		chromatogramSelection = new ChromatogramSelectionMSD(chromatogram);
 		chromatogramSelection.setStartRetentionTime(0);
 		chromatogramSelection.setStopRetentionTime(180);
-		assertEquals("StartRetentionTime", 1, chromatogramSelection.getStartRetentionTime());
-		assertEquals("StopRetentionTime", 100, chromatogramSelection.getStopRetentionTime());
+		assertEquals(1, chromatogramSelection.getStartRetentionTime());
+		assertEquals(100, chromatogramSelection.getStopRetentionTime());
 		extractedIonSignals = extractedIonSignalExtractor.getExtractedIonSignals(chromatogramSelection);
-		assertEquals("StartScan", 1, extractedIonSignals.getStartScan());
-		assertEquals("StopScan", 100, extractedIonSignals.getStopScan());
+		assertEquals(1, extractedIonSignals.getStartScan());
+		assertEquals(100, extractedIonSignals.getStopScan());
 		int scan;
 		scan = extractedIonSignals.getStartScan();
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(scan);
-		assertEquals("TotalSignal", 1275.0f, extractedIonSignal.getTotalSignal(), 0);
+		assertEquals(1275.0f, extractedIonSignal.getTotalSignal(), 0);
 		scan = extractedIonSignals.getStopScan();
 		extractedIonSignal = extractedIonSignals.getExtractedIonSignal(scan);
-		assertEquals("TotalSignal", 127500.0f, extractedIonSignal.getTotalSignal(), 0);
+		assertEquals(127500.0f, extractedIonSignal.getTotalSignal(), 0);
 	}
 }

@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.util.Date;
@@ -24,12 +24,15 @@ import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.model.signals.TotalScanSignalExtractor;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Test the interface IChromatogramOverview with 1 scan.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramOverview_2_Test {
 
 	private ChromatogramMSD chrom;
@@ -39,8 +42,8 @@ public class ChromatogramOverview_2_Test {
 	private Date date;
 	private ITotalScanSignalExtractor totalIonSignalExtractor;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		chrom = new ChromatogramMSD();
 		// ------------------------------Scan 1
@@ -65,91 +68,91 @@ public class ChromatogramOverview_2_Test {
 	@Test
 	public void testGetMinSignal_1() {
 
-		assertEquals("minSignal", 470746, (int)chromatogram.getMinSignal(), 0);
+		assertEquals(470746, (int)chromatogram.getMinSignal(), 0);
 	}
 
 	@Test
 	public void testGetMaxSignal_1() {
 
-		assertEquals("maxSignal", 470746, (int)chromatogram.getMaxSignal(), 0);
+		assertEquals(470746, (int)chromatogram.getMaxSignal(), 0);
 	}
 
 	@Test
 	public void testGetStartRetentionTime_1() {
 
-		assertEquals("startRetentionTime", 7896, chromatogram.getStartRetentionTime());
+		assertEquals(7896, chromatogram.getStartRetentionTime());
 	}
 
 	@Test
 	public void testGetStopRetentionTime_1() {
 
-		assertEquals("stopRetentionTime", 7896, chromatogram.getStopRetentionTime());
+		assertEquals(7896, chromatogram.getStopRetentionTime());
 	}
 
 	@Test
 	public void testGetScanDelay_1() {
 
-		assertEquals("scanDelay", 5500, chromatogram.getScanDelay());
+		assertEquals(5500, chromatogram.getScanDelay());
 	}
 
 	@Test
 	public void testGetScanInterval_1() {
 
-		assertEquals("scanInterval", 1500, chromatogram.getScanInterval());
+		assertEquals(1500, chromatogram.getScanInterval());
 	}
 
 	@Test
 	public void testGetNumberOfScans_1() {
 
-		assertEquals("numberOfScans", 1, chromatogram.getNumberOfScans());
+		assertEquals(1, chromatogram.getNumberOfScans());
 	}
 
 	@Test
 	public void testGetName_1() {
 
-		assertEquals("name", "", chromatogram.getName());
+		assertEquals("", chromatogram.getName());
 	}
 
 	@Test
 	public void testGetFile_1() {
 
-		assertEquals("file", new File(""), chromatogram.getFile());
+		assertEquals(new File(""), chromatogram.getFile());
 	}
 
 	@Test
 	public void testGetOperator_1() {
 
-		assertEquals("operator", "eselmeister", chromatogram.getOperator());
+		assertEquals("eselmeister", chromatogram.getOperator());
 	}
 
 	@Test
 	public void testGetDate_1() {
 
-		assertTrue("date", chromatogram.getDate() != null);
+		assertTrue(chromatogram.getDate() != null);
 	}
 
 	@Test
 	public void testGetDate_2() {
 
-		assertEquals("date", date.toString(), chromatogram.getDate().toString());
+		assertEquals(date.toString(), chromatogram.getDate().toString());
 	}
 
 	@Test
 	public void testGetMiscInfo_1() {
 
-		assertEquals("miscInfo", "This is a test chromatogram.", chromatogram.getMiscInfo());
+		assertEquals("This is a test chromatogram.", chromatogram.getMiscInfo());
 	}
 
 	@Test
 	public void testGetTotalIonSignals_1() {
 
 		ITotalScanSignals signals = totalIonSignalExtractor.getTotalScanSignals();
-		assertEquals("List<ITotalIonSignal> size", 1, signals.size());
+		assertEquals(1, signals.size());
 	}
 
 	@Test
 	public void testGetTotalIonSignal_1() {
 
-		assertEquals("totalIonSignal", 470746.9f, chromatogram.getTotalSignal(), 0);
+		assertEquals(470746.9f, chromatogram.getTotalSignal(), 0);
 	}
 }

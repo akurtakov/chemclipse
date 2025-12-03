@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.support;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +30,15 @@ import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
 import org.eclipse.chemclipse.numeric.equations.Equations;
 import org.eclipse.chemclipse.numeric.equations.LinearEquation;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Test the peak exceptions.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakBuilder_26_Test {
 
 	private ITotalScanSignals totalIonSignals;
@@ -43,8 +46,8 @@ public class PeakBuilder_26_Test {
 	private ITotalScanSignal totalIonSignal;
 	private LinearEquation backgroundEquation;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		List<Float> intensities = new ArrayList<Float>();
 		intensities.add(1000.0f);
@@ -72,18 +75,16 @@ public class PeakBuilder_26_Test {
 	@Test
 	public void testAdjustTotalIonSignals_1() {
 
-		try {
+		assertDoesNotThrow(() -> {
 			totalIonSignalsModified = PeakBuilderMSD.adjustTotalIonSignals(totalIonSignals, backgroundEquation);
 			assertNotSame(totalIonSignalsModified, totalIonSignals);
 			totalIonSignal = totalIonSignalsModified.getTotalScanSignal(1);
-			assertEquals("TotalSignal", 0.0f, totalIonSignal.getTotalSignal(), 0);
+			assertEquals(0.0f, totalIonSignal.getTotalSignal(), 0);
 			totalIonSignal = totalIonSignalsModified.getTotalScanSignal(4);
-			assertEquals("TotalSignal", IPeakIntensityValues.MAX_INTENSITY, totalIonSignal.getTotalSignal(), 0);
+			assertEquals(IPeakIntensityValues.MAX_INTENSITY, totalIonSignal.getTotalSignal(), 0);
 			totalIonSignal = totalIonSignalsModified.getTotalScanSignal(10);
-			assertEquals("TotalSignal", 0.0f, totalIonSignal.getTotalSignal(), 0);
-		} catch(PeakException e) {
-			assertTrue("PeakException", false);
-		}
+			assertEquals(0.0f, totalIonSignal.getTotalSignal(), 0);
+		});
 	}
 
 	@Test

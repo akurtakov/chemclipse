@@ -12,14 +12,16 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.model.exceptions.PeakException;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramPeakMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * The chromatogram and peak will be initialized in DefaultPeakTestCase.<br/>
@@ -28,13 +30,14 @@ import org.junit.Test;
  * The chromatogram has 17 scans, starting at a retention time of 500 ms and
  * ends at a retention time of 16500 ms. It has a background of 1750 units.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramPeak_2_Test extends ChromatogramPeakTestCase {
 
 	private IChromatogramPeakMSD peak;
 
 	@Override
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		super.setUp();
 	}

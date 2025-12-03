@@ -12,17 +12,20 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.xic;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ExtractedIonSignals_4_Test {
 
 	private IExtractedIonSignals extractedIonSignals;
@@ -31,7 +34,7 @@ public class ExtractedIonSignals_4_Test {
 	private ITotalScanSignals totalIonSignals;
 	private ITotalScanSignal totalIonSignal;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		int scans = 100;
@@ -59,16 +62,16 @@ public class ExtractedIonSignals_4_Test {
 		totalIonSignals = extractedIonSignals.getTotalIonSignals((int)IIon.TIC_ION);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(1);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 165.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(165.0f, totalIonSignal.getTotalSignal(), 0);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(100);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 16500.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(16500.0f, totalIonSignal.getTotalSignal(), 0);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(26);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 4290.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(4290.0f, totalIonSignal.getTotalSignal(), 0);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(87);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 14355.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(14355.0f, totalIonSignal.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -77,16 +80,16 @@ public class ExtractedIonSignals_4_Test {
 		totalIonSignals = extractedIonSignals.getTotalIonSignals(25);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(1);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 25.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(25.0f, totalIonSignal.getTotalSignal(), 0);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(100);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 2500.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(2500.0f, totalIonSignal.getTotalSignal(), 0);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(26);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 650.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(650.0f, totalIonSignal.getTotalSignal(), 0);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(87);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 2175.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(2175.0f, totalIonSignal.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -95,16 +98,16 @@ public class ExtractedIonSignals_4_Test {
 		totalIonSignals = extractedIonSignals.getTotalIonSignals(30);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(1);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 30.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(30.0f, totalIonSignal.getTotalSignal(), 0);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(100);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 3000.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(3000.0f, totalIonSignal.getTotalSignal(), 0);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(26);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 780.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(780.0f, totalIonSignal.getTotalSignal(), 0);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(87);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 2610.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(2610.0f, totalIonSignal.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -113,16 +116,16 @@ public class ExtractedIonSignals_4_Test {
 		totalIonSignals = extractedIonSignals.getTotalIonSignals(24);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(1);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 0.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(0.0f, totalIonSignal.getTotalSignal(), 0);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(100);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 0.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(0.0f, totalIonSignal.getTotalSignal(), 0);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(26);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 0.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(0.0f, totalIonSignal.getTotalSignal(), 0);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(87);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 0.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(0.0f, totalIonSignal.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -131,15 +134,15 @@ public class ExtractedIonSignals_4_Test {
 		totalIonSignals = extractedIonSignals.getTotalIonSignals(31);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(1);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 0.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(0.0f, totalIonSignal.getTotalSignal(), 0);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(100);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 0.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(0.0f, totalIonSignal.getTotalSignal(), 0);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(26);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 0.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(0.0f, totalIonSignal.getTotalSignal(), 0);
 		totalIonSignal = totalIonSignals.getTotalScanSignal(87);
 		assertNotNull(totalIonSignal);
-		assertEquals("TotalSignal", 0.0f, totalIonSignal.getTotalSignal(), 0);
+		assertEquals(0.0f, totalIonSignal.getTotalSignal(), 0);
 	}
 }

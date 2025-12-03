@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.xic;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
@@ -21,15 +21,15 @@ import org.eclipse.chemclipse.msd.model.exceptions.NoExtractedIonSignalStoredExc
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
 import org.eclipse.chemclipse.msd.model.implementation.RegularMassSpectrum;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ExtractedIonSignals_9_Test {
 
 	private IExtractedIonSignals extractedIonSignals;
 	private IExtractedIonSignal extractedIonSignal;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		int scans = 1;
@@ -56,7 +56,7 @@ public class ExtractedIonSignals_9_Test {
 	@Test
 	public void test_1() {
 
-		assertEquals("Size", 1, extractedIonSignals.size());
+		assertEquals(1, extractedIonSignals.size());
 	}
 
 	@Test

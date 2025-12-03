@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.xic;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ExtractedIonSignals_1_Test {
 
@@ -22,71 +22,71 @@ public class ExtractedIonSignals_1_Test {
 	public void testConstructor_1() {
 
 		IExtractedIonSignals extractedIonSignals = new ExtractedIonSignals(200);
-		assertEquals("StartScan", 1, extractedIonSignals.getStartScan());
-		assertEquals("StopScan", 200, extractedIonSignals.getStopScan());
+		assertEquals(1, extractedIonSignals.getStartScan());
+		assertEquals(200, extractedIonSignals.getStopScan());
 	}
 
 	@Test
 	public void testConstructor_2() {
 
 		IExtractedIonSignals extractedIonSignals = new ExtractedIonSignals(0);
-		assertEquals("StartScan", 0, extractedIonSignals.getStartScan());
-		assertEquals("StopScan", 0, extractedIonSignals.getStopScan());
+		assertEquals(0, extractedIonSignals.getStartScan());
+		assertEquals(0, extractedIonSignals.getStopScan());
 	}
 
 	@Test
 	public void testConstructor_3() {
 
 		IExtractedIonSignals extractedIonSignals = new ExtractedIonSignals(-1);
-		assertEquals("StartScan", 0, extractedIonSignals.getStartScan());
-		assertEquals("StopScan", 0, extractedIonSignals.getStopScan());
+		assertEquals(0, extractedIonSignals.getStartScan());
+		assertEquals(0, extractedIonSignals.getStopScan());
 	}
 
 	@Test
 	public void testConstructor_4() {
 
 		IExtractedIonSignals extractedIonSignals = new ExtractedIonSignals(20);
-		assertEquals("StartScan", 1, extractedIonSignals.getStartScan());
-		assertEquals("StopScan", 20, extractedIonSignals.getStopScan());
+		assertEquals(1, extractedIonSignals.getStartScan());
+		assertEquals(20, extractedIonSignals.getStopScan());
 	}
 
 	@Test
 	public void testConstructor_5() {
 
 		IExtractedIonSignals extractedIonSignals = new ExtractedIonSignals(20, 50);
-		assertEquals("StartScan", 20, extractedIonSignals.getStartScan());
-		assertEquals("StopScan", 50, extractedIonSignals.getStopScan());
+		assertEquals(20, extractedIonSignals.getStartScan());
+		assertEquals(50, extractedIonSignals.getStopScan());
 	}
 
 	@Test
 	public void testConstructor_6() {
 
 		IExtractedIonSignals extractedIonSignals = new ExtractedIonSignals(50, 20);
-		assertEquals("StartScan", 20, extractedIonSignals.getStartScan());
-		assertEquals("StopScan", 50, extractedIonSignals.getStopScan());
+		assertEquals(20, extractedIonSignals.getStartScan());
+		assertEquals(50, extractedIonSignals.getStopScan());
 	}
 
 	@Test
 	public void testConstructor_7() {
 
 		IExtractedIonSignals extractedIonSignals = new ExtractedIonSignals(-1, 20);
-		assertEquals("StartScan", 0, extractedIonSignals.getStartScan());
-		assertEquals("StopScan", 0, extractedIonSignals.getStopScan());
+		assertEquals(0, extractedIonSignals.getStartScan());
+		assertEquals(0, extractedIonSignals.getStopScan());
 	}
 
 	@Test
 	public void testConstructor_8() {
 
 		IExtractedIonSignals extractedIonSignals = new ExtractedIonSignals(20, -1);
-		assertEquals("StartScan", 0, extractedIonSignals.getStartScan());
-		assertEquals("StopScan", 0, extractedIonSignals.getStopScan());
+		assertEquals(0, extractedIonSignals.getStartScan());
+		assertEquals(0, extractedIonSignals.getStopScan());
 	}
 
 	@Test
 	public void testConstructor_9() {
 
 		IExtractedIonSignals extractedIonSignals = new ExtractedIonSignals(-1, -1);
-		assertEquals("StartScan", 0, extractedIonSignals.getStartScan());
-		assertEquals("StopScan", 0, extractedIonSignals.getStopScan());
+		assertEquals(0, extractedIonSignals.getStartScan());
+		assertEquals(0, extractedIonSignals.getStopScan());
 	}
 }

@@ -12,26 +12,29 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Equals test.
  * 
  * @author Philip Wenig
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class Ion_5_Test {
 
 	private Ion ion1;
 	private Ion ion2;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		ion1 = new Ion(5.2f, 4756.3f);
 		ion2 = new Ion(2.2f, 4527.3f);
@@ -40,31 +43,31 @@ public class Ion_5_Test {
 	@Test
 	public void testEquals_1() {
 
-		assertNotEquals("equals", ion1, ion2);
+		assertNotEquals(ion1, ion2);
 	}
 
 	@Test
 	public void testEquals_2() {
 
-		assertNotEquals("equals", ion2, ion1);
+		assertNotEquals(ion2, ion1);
 	}
 
 	@Test
 	public void testEquals_3() {
 
-		assertEquals("equals", ion1, ion1);
+		assertEquals(ion1, ion1);
 	}
 
 	@Test
 	public void testEquals_4() {
 
-		assertNotNull("equals", ion1);
+		assertNotNull(ion1);
 	}
 
 	@Test
 	public void testEquals_5() {
 
-		assertNotEquals("equals", ion2, new Object());
+		assertNotEquals(ion2, new Object());
 	}
 
 	@Test

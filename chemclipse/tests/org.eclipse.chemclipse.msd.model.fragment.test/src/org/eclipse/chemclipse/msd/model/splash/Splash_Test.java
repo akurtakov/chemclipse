@@ -12,19 +12,22 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.splash;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
 import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class Splash_Test {
 
 	IScanMSD massSpectrum;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		massSpectrum = new ScanMSD();

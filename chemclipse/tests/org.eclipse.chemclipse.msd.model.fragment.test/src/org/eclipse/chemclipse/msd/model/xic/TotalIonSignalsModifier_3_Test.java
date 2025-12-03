@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.xic;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.exceptions.CalculationException;
 import org.eclipse.chemclipse.model.exceptions.NoTotalSignalStoredException;
@@ -21,15 +21,18 @@ import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.model.signals.TotalScanSignal;
 import org.eclipse.chemclipse.model.signals.TotalScanSignals;
 import org.eclipse.chemclipse.model.signals.TotalScanSignalsModifier;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class TotalIonSignalsModifier_3_Test {
 
 	private ITotalScanSignals signals;
 	private ITotalScanSignal signal;
 
-	@Before
+	@BeforeAll
 	public void setUp() throws NoTotalSignalStoredException, CalculationException {
 
 		signals = new TotalScanSignals(12);
@@ -56,7 +59,7 @@ public class TotalIonSignalsModifier_3_Test {
 	@Test
 	public void testSize_1() {
 
-		assertEquals("size", 12, signals.size());
+		assertEquals(12, signals.size());
 	}
 
 	@Test
@@ -64,7 +67,7 @@ public class TotalIonSignalsModifier_3_Test {
 
 		int scan = 1;
 		ITotalScanSignal s1 = signals.getTotalScanSignal(scan);
-		assertEquals("total signal", 0.014567601f, s1.getTotalSignal(), 0);
+		assertEquals(0.014567601f, s1.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -72,7 +75,7 @@ public class TotalIonSignalsModifier_3_Test {
 
 		int scan = 4;
 		ITotalScanSignal s1 = signals.getTotalScanSignal(scan);
-		assertEquals("total signal", 0.075397170f, s1.getTotalSignal(), 0);
+		assertEquals(0.075397170f, s1.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -80,6 +83,6 @@ public class TotalIonSignalsModifier_3_Test {
 
 		int scan = 12;
 		ITotalScanSignal s1 = signals.getTotalScanSignal(scan);
-		assertEquals("total signal", 0.00001904768f, s1.getTotalSignal(), 0);
+		assertEquals(0.00001904768f, s1.getTotalSignal(), 0);
 	}
 }

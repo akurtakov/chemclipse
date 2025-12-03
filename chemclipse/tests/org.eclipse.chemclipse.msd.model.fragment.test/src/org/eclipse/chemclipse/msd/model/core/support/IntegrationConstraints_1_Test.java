@@ -12,22 +12,25 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.support;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.model.support.IIntegrationConstraints;
 import org.eclipse.chemclipse.model.support.IntegrationConstraint;
 import org.eclipse.chemclipse.model.support.IntegrationConstraints;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class IntegrationConstraints_1_Test {
 
 	private IIntegrationConstraints integrationConstraints;
 	private IntegrationConstraint constraint;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		integrationConstraints = new IntegrationConstraints();
 		constraint = IntegrationConstraint.LEAVE_PEAK_AS_IT_IS;
@@ -36,14 +39,14 @@ public class IntegrationConstraints_1_Test {
 	@Test
 	public void testHasIntegrationConstraint_1() {
 
-		assertFalse("hasIntegrationConstraint", integrationConstraints.hasIntegrationConstraint(constraint));
+		assertFalse(integrationConstraints.hasIntegrationConstraint(constraint));
 	}
 
 	@Test
 	public void testHasIntegrationConstraint_2() {
 
 		integrationConstraints.add(constraint);
-		assertTrue("hasIntegrationConstraint", integrationConstraints.hasIntegrationConstraint(constraint));
+		assertTrue(integrationConstraints.hasIntegrationConstraint(constraint));
 	}
 
 	@Test
@@ -51,7 +54,7 @@ public class IntegrationConstraints_1_Test {
 
 		integrationConstraints.add(constraint);
 		integrationConstraints.add(constraint);
-		assertTrue("hasIntegrationConstraint", integrationConstraints.hasIntegrationConstraint(constraint));
+		assertTrue(integrationConstraints.hasIntegrationConstraint(constraint));
 	}
 
 	@Test
@@ -59,7 +62,7 @@ public class IntegrationConstraints_1_Test {
 
 		integrationConstraints.add(constraint);
 		integrationConstraints.remove(constraint);
-		assertFalse("hasIntegrationConstraint", integrationConstraints.hasIntegrationConstraint(constraint));
+		assertFalse(integrationConstraints.hasIntegrationConstraint(constraint));
 	}
 
 	@Test
@@ -68,7 +71,7 @@ public class IntegrationConstraints_1_Test {
 		integrationConstraints.add(constraint);
 		integrationConstraints.add(constraint);
 		integrationConstraints.remove(constraint);
-		assertFalse("hasIntegrationConstraint", integrationConstraints.hasIntegrationConstraint(constraint));
+		assertFalse(integrationConstraints.hasIntegrationConstraint(constraint));
 	}
 
 	@Test
@@ -77,6 +80,6 @@ public class IntegrationConstraints_1_Test {
 		integrationConstraints.add(constraint);
 		integrationConstraints.add(constraint);
 		integrationConstraints.removeAll();
-		assertFalse("hasIntegrationConstraint", integrationConstraints.hasIntegrationConstraint(constraint));
+		assertFalse(integrationConstraints.hasIntegrationConstraint(constraint));
 	}
 }

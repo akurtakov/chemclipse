@@ -12,21 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.selection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.easymock.EasyMock;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramSelection_2_Test {
 
 	private IChromatogramMSD chromatogram;
 	private IChromatogramSelectionMSD selection;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		/*
 		 * Use createNiceMock if you use void methods that are not important to
@@ -46,9 +49,9 @@ public class ChromatogramSelection_2_Test {
 	@Test
 	public void testChromatogram_1() {
 
-		assertEquals("StartRetentionTime", 4500, chromatogram.getStartRetentionTime());
-		assertEquals("StopRetentionTime", 25000, chromatogram.getStopRetentionTime());
-		assertEquals("MaxSignal", 560000.0f, chromatogram.getMaxSignal(), 0);
+		assertEquals(4500, chromatogram.getStartRetentionTime());
+		assertEquals(25000, chromatogram.getStopRetentionTime());
+		assertEquals(560000.0f, chromatogram.getMaxSignal(), 0);
 	}
 
 	@Test
@@ -61,27 +64,27 @@ public class ChromatogramSelection_2_Test {
 	public void testGetStartRetentionTime_1() {
 
 		selection.setStartRetentionTime(6500);
-		assertEquals("StartRetentionTime", 6500, selection.getStartRetentionTime());
+		assertEquals(6500, selection.getStartRetentionTime());
 	}
 
 	@Test
 	public void testGetStopRetentionTime_1() {
 
 		selection.setStopRetentionTime(24000);
-		assertEquals("StopRetentionTime", 24000, selection.getStopRetentionTime());
+		assertEquals(24000, selection.getStopRetentionTime());
 	}
 
 	@Test
 	public void testGetStartAbundance_1() {
 
 		selection.setStartAbundance(0.5f);
-		assertEquals("StartAbundance", 0.5f, selection.getStartAbundance(), 0);
+		assertEquals(0.5f, selection.getStartAbundance(), 0);
 	}
 
 	@Test
 	public void testGetStopAbundance_1() {
 
 		selection.setStopAbundance(250000.0f);
-		assertEquals("StopAbundance", 250000.0f, selection.getStopAbundance(), 0);
+		assertEquals(250000.0f, selection.getStopAbundance(), 0);
 	}
 }

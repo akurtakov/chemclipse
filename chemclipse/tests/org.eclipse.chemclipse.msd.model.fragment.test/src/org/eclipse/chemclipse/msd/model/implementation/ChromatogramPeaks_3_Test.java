@@ -12,14 +12,14 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IPeaksMSD;
 import org.eclipse.chemclipse.msd.model.core.PeaksMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ChromatogramPeaks_3_Test extends ChromatogramPeaksTestCase {
 
@@ -27,7 +27,7 @@ public class ChromatogramPeaks_3_Test extends ChromatogramPeaksTestCase {
 	private IPeakMSD peak;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		super.setUp();

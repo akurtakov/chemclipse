@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.support;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
@@ -25,18 +25,21 @@ import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
 import org.eclipse.chemclipse.numeric.equations.Equations;
 import org.eclipse.chemclipse.numeric.equations.LinearEquation;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Test the peak exceptions.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakBuilder_18_Test extends PeakBuilderTestCase {
 
 	private IPeakMassSpectrum peakMassSpectrum;
 
 	@Override
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		super.setUp();
@@ -60,6 +63,6 @@ public class PeakBuilder_18_Test extends PeakBuilderTestCase {
 	@Test
 	public void testGetPeakMassSpectrum_2() {
 
-		assertEquals("Ions", 11, peakMassSpectrum.getIons().size());
+		assertEquals(11, peakMassSpectrum.getIons().size());
 	}
 }

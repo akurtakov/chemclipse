@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.support;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +28,17 @@ import org.eclipse.chemclipse.model.support.IBackgroundAbundanceRange;
 import org.eclipse.chemclipse.model.support.IScanRange;
 import org.eclipse.chemclipse.model.support.ScanRange;
 import org.eclipse.chemclipse.numeric.equations.LinearEquation;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Test the peak exceptions.
  * 
  * @author Philip Wenig
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakBuilder_25_Test {
 
 	private ITotalScanSignals totalIonSignals;
@@ -44,8 +47,8 @@ public class PeakBuilder_25_Test {
 	private IBackgroundAbundanceRange backgroundAbundanceRange;
 	private LinearEquation linearEquation;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		List<Float> intensities = new ArrayList<Float>();
 		intensities.add(1000.00f);
@@ -73,8 +76,8 @@ public class PeakBuilder_25_Test {
 	public void testGetBackgroundEquation_1() {
 
 		linearEquation = PeakBuilderMSD.getBackgroundEquation(totalIonSignals, scanRange, backgroundAbundanceRange);
-		assertEquals("A", -6.666666666666667, linearEquation.getA(), 0);
-		assertEquals("B", 1066.6666666666667, linearEquation.getB(), 0);
+		assertEquals(-6.666666666666667, linearEquation.getA(), 0);
+		assertEquals(1066.6666666666667, linearEquation.getB(), 0);
 	}
 
 	@Test

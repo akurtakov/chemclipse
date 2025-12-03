@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
@@ -23,8 +23,8 @@ import org.eclipse.chemclipse.msd.model.core.support.MarkedIon;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIons;
 import org.eclipse.chemclipse.msd.model.xic.ITotalIonSignalExtractor;
 import org.eclipse.chemclipse.msd.model.xic.TotalIonSignalExtractor;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Add 100 scans and get an {@link ITotalScanSignals} object.
@@ -36,7 +36,7 @@ public class Chromatogram_15_Test {
 	private IMarkedIons excludedIons;
 	private ITotalIonSignalExtractor totalIonSignalExtractor;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		chromatogram = new ChromatogramMSD();
@@ -59,28 +59,28 @@ public class Chromatogram_15_Test {
 	@Test
 	public void testGetNumberOfScans_1() {
 
-		assertEquals("numberOfScans", 100, chromatogram.getNumberOfScans());
+		assertEquals(100, chromatogram.getNumberOfScans());
 	}
 
 	@Test
 	public void testGetStartRetentionTime_1() {
 
-		assertEquals("startRetentionTime", 1, chromatogram.getStartRetentionTime());
+		assertEquals(1, chromatogram.getStartRetentionTime());
 	}
 
 	@Test
 	public void testGetStopRetentionTime_1() {
 
-		assertEquals("stopRetentionTime", 100, chromatogram.getStopRetentionTime());
+		assertEquals(100, chromatogram.getStopRetentionTime());
 	}
 
 	@Test
 	public void testGetRange_1() {
 
 		signals = totalIonSignalExtractor.getTotalScanSignals(20, 50);
-		assertEquals("Size", 31, signals.size());
-		assertEquals("startScan", 20, signals.getStartScan());
-		assertEquals("startScan", 50, signals.getStopScan());
+		assertEquals(31, signals.size());
+		assertEquals(20, signals.getStartScan());
+		assertEquals(50, signals.getStopScan());
 	}
 
 	@Test
@@ -88,7 +88,7 @@ public class Chromatogram_15_Test {
 
 		excludedIons.add(1, 50);
 		signals = totalIonSignalExtractor.getTotalIonSignals(20, 50, excludedIons);
-		assertEquals("TotalSignal", 0.0f, signals.getTotalScanSignal(20).getTotalSignal(), 0);
+		assertEquals(0.0f, signals.getTotalScanSignal(20).getTotalSignal(), 0);
 	}
 
 	@Test
@@ -96,14 +96,14 @@ public class Chromatogram_15_Test {
 
 		excludedIons.add(26, 50);
 		signals = totalIonSignalExtractor.getTotalIonSignals(20, 50, excludedIons);
-		assertEquals("TotalSignal", 325.0f, signals.getTotalScanSignal(20).getTotalSignal(), 0);
+		assertEquals(325.0f, signals.getTotalScanSignal(20).getTotalSignal(), 0);
 	}
 
 	@Test
 	public void testGetTotalIonSignals_3() {
 
 		signals = totalIonSignalExtractor.getTotalIonSignals(20, 50, null);
-		assertEquals("TotalSignal", 1275.0f, signals.getTotalScanSignal(20).getTotalSignal(), 0);
+		assertEquals(1275.0f, signals.getTotalScanSignal(20).getTotalSignal(), 0);
 	}
 
 	@Test
@@ -111,6 +111,6 @@ public class Chromatogram_15_Test {
 
 		excludedIons.add(new MarkedIon(26));
 		signals = totalIonSignalExtractor.getTotalIonSignals(20, 50, excludedIons);
-		assertEquals("TotalSignal", 1249.0f, signals.getTotalScanSignal(20).getTotalSignal(), 0);
+		assertEquals(1249.0f, signals.getTotalScanSignal(20).getTotalSignal(), 0);
 	}
 }

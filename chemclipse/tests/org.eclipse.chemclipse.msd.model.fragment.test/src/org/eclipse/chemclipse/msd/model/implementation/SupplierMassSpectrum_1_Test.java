@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.Polarity;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SupplierMassSpectrum_1_Test {
 
@@ -25,47 +25,47 @@ public class SupplierMassSpectrum_1_Test {
 	@Test
 	public void testRetentionTime_1() {
 
-		assertEquals("Retention Time", 0, massSpectrum.getRetentionTime());
+		assertEquals(0, massSpectrum.getRetentionTime());
 	}
 
 	@Test
 	public void testRetentionTime_2() {
 
 		massSpectrum.setRetentionTime(5000);
-		assertEquals("Retention Time", 5000, massSpectrum.getRetentionTime());
+		assertEquals(5000, massSpectrum.getRetentionTime());
 	}
 
 	@Test
 	public void testRetentionIndex_1() {
 
-		assertEquals("Retention Index", 0.0f, massSpectrum.getRetentionIndex(), 0);
+		assertEquals(0.0f, massSpectrum.getRetentionIndex(), 0);
 	}
 
 	@Test
 	public void testRetentionIndex_2() {
 
 		massSpectrum.setRetentionIndex(56.3f);
-		assertEquals("Retention Index", 56.3f, massSpectrum.getRetentionIndex(), 0);
+		assertEquals(56.3f, massSpectrum.getRetentionIndex(), 0);
 	}
 
 	@Test
 	public void testRetentionIndex_3() {
 
 		massSpectrum.setRetentionIndex(-1.0f);
-		assertEquals("Retention Index", 0.0f, massSpectrum.getRetentionIndex(), 0);
+		assertEquals(0.0f, massSpectrum.getRetentionIndex(), 0);
 	}
 
 	@Test
 	public void testScanNumber_1() {
 
-		assertEquals("Scan Number", 0, massSpectrum.getScanNumber());
+		assertEquals(0, massSpectrum.getScanNumber());
 	}
 
 	@Test
 	public void testScanNumber_2() {
 
 		massSpectrum.setScanNumber(78);
-		assertEquals("Scan Number", 78, massSpectrum.getScanNumber());
+		assertEquals(78, massSpectrum.getScanNumber());
 	}
 
 	@Test

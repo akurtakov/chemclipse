@@ -12,17 +12,17 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class MassSpectrum_19_Test {
 
 	private ScanMSD massSpectrum;
 	private Ion ion;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		massSpectrum = new ScanMSD();
@@ -42,21 +42,21 @@ public class MassSpectrum_19_Test {
 	public void testGetTotalSignal_1() {
 
 		massSpectrum.adjustIons(-1.1f);
-		assertEquals("getTotalSignal", 1242021.9f, massSpectrum.getTotalSignal(), 0);
+		assertEquals(1242021.9f, massSpectrum.getTotalSignal(), 0);
 	}
 
 	@Test
 	public void testGetTotalSignal_2() {
 
 		massSpectrum.adjustIons(1.1f);
-		assertEquals("getTotalSignal", 1242021.9f, massSpectrum.getTotalSignal(), 0);
+		assertEquals(1242021.9f, massSpectrum.getTotalSignal(), 0);
 	}
 
 	@Test
 	public void testGetTotalSignal_3() {
 
 		massSpectrum.adjustIons(0.0f);
-		assertEquals("getTotalSignal", 1242021.9f, massSpectrum.getTotalSignal(), 0);
+		assertEquals(1242021.9f, massSpectrum.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -64,7 +64,7 @@ public class MassSpectrum_19_Test {
 
 		// adjust +20%
 		massSpectrum.adjustIons(0.2f);
-		assertEquals("getTotalSignal", 1490426.4f, massSpectrum.getTotalSignal(), 0);
+		assertEquals(1490426.4f, massSpectrum.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -72,7 +72,7 @@ public class MassSpectrum_19_Test {
 
 		// adjust -20%
 		massSpectrum.adjustIons(-0.2f);
-		assertEquals("getTotalSignal", 993617.5f, massSpectrum.getTotalSignal(), 0);
+		assertEquals(993617.5f, massSpectrum.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -80,7 +80,7 @@ public class MassSpectrum_19_Test {
 
 		// adjust -100%
 		massSpectrum.adjustIons(-1.0f);
-		assertEquals("getTotalSignal", 0.0f, massSpectrum.getTotalSignal(), 0);
+		assertEquals(0.0f, massSpectrum.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -88,6 +88,6 @@ public class MassSpectrum_19_Test {
 
 		// adjust +100%
 		massSpectrum.adjustIons(1.0f);
-		assertEquals("getTotalSignal", 2484043.8f, massSpectrum.getTotalSignal(), 0);
+		assertEquals(2484043.8f, massSpectrum.getTotalSignal(), 0);
 	}
 }

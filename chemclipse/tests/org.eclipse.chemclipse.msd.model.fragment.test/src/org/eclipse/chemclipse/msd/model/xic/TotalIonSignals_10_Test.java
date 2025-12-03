@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.xic;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,15 +21,15 @@ import org.eclipse.chemclipse.model.signals.ExtendedTotalScanSignal;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.model.signals.TotalScanSignals;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TotalIonSignals_10_Test {
 
 	private ITotalScanSignals signals;
 	private ITotalScanSignal signal;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		/*
@@ -61,8 +61,8 @@ public class TotalIonSignals_10_Test {
 		signals.setNegativeTotalSignalsToZero();
 		float min = signals.getMinSignal();
 		float max = signals.getMaxSignal();
-		assertEquals("Min", 0.0f, min, 0);
-		assertEquals("Max", 5500.0f, max, 0);
+		assertEquals(0.0f, min, 0);
+		assertEquals(5500.0f, max, 0);
 	}
 
 	@Test
@@ -71,8 +71,8 @@ public class TotalIonSignals_10_Test {
 		signals.setPositiveTotalSignalsToZero();
 		float min = signals.getMinSignal();
 		float max = signals.getMaxSignal();
-		assertEquals("Min", -24500.0f, min, 0);
-		assertEquals("Max", 0.0f, max, 0);
+		assertEquals(-24500.0f, min, 0);
+		assertEquals(0.0f, max, 0);
 	}
 
 	@Test
@@ -81,7 +81,7 @@ public class TotalIonSignals_10_Test {
 		signals.setTotalSignalsAsAbsoluteValues();
 		float min = signals.getMinSignal();
 		float max = signals.getMaxSignal();
-		assertEquals("Min", 20.0f, min, 0);
-		assertEquals("Max", 24500.0f, max, 0);
+		assertEquals(20.0f, min, 0);
+		assertEquals(24500.0f, max, 0);
 	}
 }

@@ -12,20 +12,23 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.xic;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * HashCode and equals test.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class ExtractedIonSignal_2_Test {
 
 	private IExtractedIonSignal extractedIonSignal1;
 	private IExtractedIonSignal extractedIonSignal2;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		extractedIonSignal1 = new ExtractedIonSignal(1, 20);
@@ -35,24 +38,24 @@ public class ExtractedIonSignal_2_Test {
 	@Test
 	public void testEquals_1() {
 
-		assertTrue("equals", extractedIonSignal1.equals(extractedIonSignal2));
+		assertTrue(extractedIonSignal1.equals(extractedIonSignal2));
 	}
 
 	@Test
 	public void testEquals_2() {
 
-		assertTrue("equals", extractedIonSignal2.equals(extractedIonSignal1));
+		assertTrue(extractedIonSignal2.equals(extractedIonSignal1));
 	}
 
 	@Test
 	public void testHashCode_1() {
 
-		assertTrue("hashCode", extractedIonSignal1.hashCode() == extractedIonSignal2.hashCode());
+		assertTrue(extractedIonSignal1.hashCode() == extractedIonSignal2.hashCode());
 	}
 
 	@Test
 	public void testHashCode_2() {
 
-		assertTrue("hashCode", extractedIonSignal2.hashCode() == extractedIonSignal1.hashCode());
+		assertTrue(extractedIonSignal2.hashCode() == extractedIonSignal1.hashCode());
 	}
 }

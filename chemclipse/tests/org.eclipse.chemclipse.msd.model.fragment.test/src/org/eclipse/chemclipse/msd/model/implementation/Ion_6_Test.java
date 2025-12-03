@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.eclipse.chemclipse.msd.model.core.IIon;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Exception test.

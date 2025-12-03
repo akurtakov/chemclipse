@@ -13,7 +13,7 @@
 package org.eclipse.chemclipse.msd.model.implementation;
 
 import org.eclipse.chemclipse.msd.model.core.IIon;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Constructor test. TODO: add actual checks/verifications

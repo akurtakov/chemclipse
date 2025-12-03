@@ -12,14 +12,17 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IIonTransition;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
 import org.eclipse.chemclipse.msd.model.implementation.IonTransition;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class ScanSupport_1_Test {
 
 	@Test
@@ -71,15 +74,11 @@ public class ScanSupport_1_Test {
 
 	private IIon getIon(double mz, IIonTransition ionTransition) {
 
-		try {
-			if(ionTransition == null) {
-				return new Ion(mz);
-			} else {
-				IIon ion = getIon(mz, null);
-				return new Ion(ion, ionTransition);
-			}
-		} catch(IllegalArgumentException e) {
-			return null;
+		if(ionTransition == null) {
+			return new Ion(mz);
+		} else {
+			IIon ion = getIon(mz, null);
+			return new Ion(ion, ionTransition);
 		}
 	}
 }

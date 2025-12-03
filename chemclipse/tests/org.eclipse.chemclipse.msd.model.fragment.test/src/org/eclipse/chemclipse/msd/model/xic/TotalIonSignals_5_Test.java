@@ -12,11 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.xic;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.model.signals.TotalScanSignals;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TotalIonSignals_5_Test {
 
@@ -25,13 +25,13 @@ public class TotalIonSignals_5_Test {
 	@Test
 	public void testSize_1() {
 
-		assertEquals("size", 0, signals.size());
+		assertEquals(0, signals.size());
 	}
 
 	@Test
 	public void testGetMinMax_1() {
 
-		assertEquals("max signal", 0.0f, signals.getMaxSignal(), 0);
-		assertEquals("min signal", 0.0f, signals.getMinSignal(), 0);
+		assertEquals(0.0f, signals.getMaxSignal(), 0);
+		assertEquals(0.0f, signals.getMinSignal(), 0);
 	}
 }

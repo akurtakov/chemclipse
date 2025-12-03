@@ -12,19 +12,22 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIon;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIons;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * Tests getTotalIonSignal(IExcludedIons excludedIons)
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class MassSpectrum_21_Test {
 
 	private ScanMSD massSpectrum;
@@ -32,7 +35,7 @@ public class MassSpectrum_21_Test {
 	private IMarkedIons excludedIons;
 	private IScanMSD ms;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		massSpectrum = new ScanMSD();
@@ -52,7 +55,7 @@ public class MassSpectrum_21_Test {
 	@Test
 	public void testGetTotalSignal_1() {
 
-		assertEquals("getTotalSignal", 1242021.9f, massSpectrum.getTotalSignal(), 0);
+		assertEquals(1242021.9f, massSpectrum.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -61,10 +64,10 @@ public class MassSpectrum_21_Test {
 		excludedIons.add(new MarkedIon(104));
 		excludedIons.add(new MarkedIon(28));
 		ms = massSpectrum.getMassSpectrum(excludedIons);
-		assertEquals("getTotalSignal", 1089021.0f, ms.getTotalSignal(), 0);
-		assertEquals("NumberOfIons", 3, ms.getNumberOfIons());
-		assertEquals("TotalSignal", 78500.2f, ms.getIon(46).getAbundance(), 0);
-		assertEquals("TotalSignal", 890520.4f, ms.getIon(33).getAbundance(), 0);
-		assertEquals("TotalSignal", 120000.4f, ms.getIon(106).getAbundance(), 0);
+		assertEquals(1089021.0f, ms.getTotalSignal(), 0);
+		assertEquals(3, ms.getNumberOfIons());
+		assertEquals(78500.2f, ms.getIon(46).getAbundance(), 0);
+		assertEquals(890520.4f, ms.getIon(33).getAbundance(), 0);
+		assertEquals(120000.4f, ms.getIon(106).getAbundance(), 0);
 	}
 }

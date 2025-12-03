@@ -25,10 +25,10 @@ import org.eclipse.chemclipse.msd.model.core.IPeakIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
-import org.junit.Before;
-import org.junit.Ignore;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 
-@Ignore
+@Disabled
 abstract class ChromatogramPeaksTestCase {
 
 	private IPeakModelMSD peakModel;
@@ -46,7 +46,7 @@ abstract class ChromatogramPeaksTestCase {
 	private IChromatogramPeakMSD peak2;
 	private IChromatogramPeakMSD peak3;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		createChromatogram();

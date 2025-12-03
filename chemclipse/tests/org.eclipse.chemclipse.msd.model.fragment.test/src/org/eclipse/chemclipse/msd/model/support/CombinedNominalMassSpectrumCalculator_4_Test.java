@@ -12,21 +12,22 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIon;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIons;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CombinedNominalMassSpectrumCalculator_4_Test {
 
 	private CombinedNominalMassSpectrumCalculator combinedNominalMassSpectrumCalculator;
 	private IMarkedIons excludedIons;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		combinedNominalMassSpectrumCalculator = new CombinedNominalMassSpectrumCalculator();
@@ -45,7 +46,7 @@ public class CombinedNominalMassSpectrumCalculator_4_Test {
 		assertEquals(5500.0, combinedNominalMassSpectrumCalculator.getValues().get(ion).get(0), 0);
 		excludedIons.add(new MarkedIon(ion));
 		combinedNominalMassSpectrumCalculator.removeIons(excludedIons);
-		assertEquals(null, combinedNominalMassSpectrumCalculator.getValues().get(ion));
+		assertNull(combinedNominalMassSpectrumCalculator.getValues().get(ion));
 	}
 
 	@Test
@@ -55,7 +56,7 @@ public class CombinedNominalMassSpectrumCalculator_4_Test {
 		assertEquals(5300.0, combinedNominalMassSpectrumCalculator.getValues().get(ion).get(0), 0);
 		excludedIons.add(new MarkedIon(ion));
 		combinedNominalMassSpectrumCalculator.removeIons(excludedIons);
-		assertEquals(null, combinedNominalMassSpectrumCalculator.getValues().get(ion));
+		assertNull(combinedNominalMassSpectrumCalculator.getValues().get(ion));
 	}
 
 	@Test
@@ -66,7 +67,7 @@ public class CombinedNominalMassSpectrumCalculator_4_Test {
 		excludedIons.add(new MarkedIon(56));
 		excludedIons.add(new MarkedIon(103));
 		combinedNominalMassSpectrumCalculator.removeIons(excludedIons);
-		assertEquals(null, combinedNominalMassSpectrumCalculator.getValues().get(56));
-		assertEquals(null, combinedNominalMassSpectrumCalculator.getValues().get(103));
+		assertNull(combinedNominalMassSpectrumCalculator.getValues().get(56));
+		assertNull(combinedNominalMassSpectrumCalculator.getValues().get(103));
 	}
 }

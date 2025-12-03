@@ -20,10 +20,10 @@ import org.eclipse.chemclipse.model.implementation.PeakIntensityValues;
 import org.eclipse.chemclipse.msd.model.core.IPeakIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 
-@Ignore
-public class PeakModelTestCase {
+@Disabled
+abstract class PeakModelTestCase {
 
 	protected IPeakModelMSD peakModel;
 	protected IPeakMassSpectrum peakMaximum;

@@ -12,10 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests adjustTotalSignal(float totalSignal).
@@ -27,21 +27,21 @@ public class MassSpectrum_26_Test {
 	@Test
 	public void testIdentifier_1() {
 
-		assertEquals("Identifier", "", massSpectrum.getIdentifier());
+		assertEquals("", massSpectrum.getIdentifier());
 	}
 
 	@Test
 	public void testIdentifier_2() {
 
 		massSpectrum.setIdentifier(null);
-		assertEquals("Identifier", "", massSpectrum.getIdentifier());
+		assertEquals("", massSpectrum.getIdentifier());
 	}
 
 	@Test
 	public void testIdentifier_3() {
 
 		massSpectrum.setIdentifier("MS-I");
-		assertEquals("Identifier", "MS-I", massSpectrum.getIdentifier());
+		assertEquals("MS-I", massSpectrum.getIdentifier());
 	}
 
 	@Test
@@ -49,6 +49,6 @@ public class MassSpectrum_26_Test {
 
 		massSpectrum.setIdentifier("MS-I");
 		massSpectrum.setIdentifier(null);
-		assertEquals("Identifier", "MS-I", massSpectrum.getIdentifier());
+		assertEquals("MS-I", massSpectrum.getIdentifier());
 	}
 }

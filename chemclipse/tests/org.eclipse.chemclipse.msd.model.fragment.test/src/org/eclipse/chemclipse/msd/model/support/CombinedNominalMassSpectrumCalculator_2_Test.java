@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.support;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +22,8 @@ import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIons;
 import org.eclipse.chemclipse.msd.model.implementation.Ion;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CombinedNominalMassSpectrumCalculator_2_Test {
 
@@ -31,7 +31,7 @@ public class CombinedNominalMassSpectrumCalculator_2_Test {
 	private IMarkedIons excludedIons;
 	private List<IIon> ions;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		combinedMassSpectrumCalculator = new CombinedNominalMassSpectrumCalculator();
@@ -43,7 +43,7 @@ public class CombinedNominalMassSpectrumCalculator_2_Test {
 	public void testSize_1() {
 
 		combinedMassSpectrumCalculator.addIons(null, null);
-		assertEquals("Size", 0, combinedMassSpectrumCalculator.size());
+		assertEquals(0, combinedMassSpectrumCalculator.size());
 	}
 
 	@Test
@@ -51,7 +51,7 @@ public class CombinedNominalMassSpectrumCalculator_2_Test {
 
 		ions.add(new Ion(56.5f, 500.0f));
 		combinedMassSpectrumCalculator.addIons(ions, excludedIons);
-		assertEquals("Size", 1, combinedMassSpectrumCalculator.size());
+		assertEquals(1, combinedMassSpectrumCalculator.size());
 	}
 
 	@Test
@@ -60,7 +60,7 @@ public class CombinedNominalMassSpectrumCalculator_2_Test {
 		ions.add(new Ion(56.5f, 500.0f));
 		ions.add(new Ion(80.2f, 700.0f));
 		combinedMassSpectrumCalculator.addIons(ions, excludedIons);
-		assertEquals("Size", 2, combinedMassSpectrumCalculator.size());
+		assertEquals(2, combinedMassSpectrumCalculator.size());
 	}
 
 	@Test
@@ -70,7 +70,7 @@ public class CombinedNominalMassSpectrumCalculator_2_Test {
 		ions.add(new Ion(80.2f, 700.0f));
 		ions.add(new Ion(90.3f, 800.0f));
 		combinedMassSpectrumCalculator.addIons(ions, excludedIons);
-		assertEquals("Size", 3, combinedMassSpectrumCalculator.size());
+		assertEquals(3, combinedMassSpectrumCalculator.size());
 	}
 
 	@Test
@@ -84,6 +84,6 @@ public class CombinedNominalMassSpectrumCalculator_2_Test {
 		ions.add(new Ion(56.2f, 700.0f));
 		ions.add(new Ion(55.9f, 800.0f));
 		combinedMassSpectrumCalculator.addIons(ions, excludedIons);
-		assertEquals("Size", 1, combinedMassSpectrumCalculator.size());
+		assertEquals(1, combinedMassSpectrumCalculator.size());
 	}
 }

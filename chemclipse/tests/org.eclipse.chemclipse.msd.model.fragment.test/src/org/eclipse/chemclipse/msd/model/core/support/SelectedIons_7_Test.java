@@ -12,18 +12,21 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core.support;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class SelectedIons_7_Test {
 
 	private IMarkedIons selectedIons;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeAll
+	public void setUp() {
 
 		selectedIons = new MarkedIons(MarkedTraceModus.INCLUDE);
 		selectedIons.add(new MarkedIon(28.82849943f));
@@ -33,6 +36,6 @@ public class SelectedIons_7_Test {
 	@Test
 	public void testContains_1() {
 
-		assertFalse("contains", selectedIons.contains(new MarkedIon(28.8d)));
+		assertFalse(selectedIons.contains(new MarkedIon(28.8d)));
 	}
 }

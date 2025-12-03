@@ -12,17 +12,20 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakMassSpectrum_4_Test {
 
 	private IPeakMassSpectrum peakMassSpectrum;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		peakMassSpectrum = new PeakMassSpectrum();

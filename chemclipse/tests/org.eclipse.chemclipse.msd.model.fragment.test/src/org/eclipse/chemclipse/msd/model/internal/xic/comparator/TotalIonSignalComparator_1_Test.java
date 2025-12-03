@@ -12,12 +12,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.internal.xic.comparator;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
 import org.eclipse.chemclipse.model.signals.TotalScanSignal;
 import org.eclipse.chemclipse.model.signals.TotalScanSignalComparator;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TotalIonSignalComparator_1_Test {
 
@@ -26,7 +26,7 @@ public class TotalIonSignalComparator_1_Test {
 	private TotalScanSignalComparator comparator = new TotalScanSignalComparator();
 
 	@Test
-	public void testComaparator_1() {
+	public void testComparator_1() {
 
 		totalIonSignal1 = new TotalScanSignal(0, 0.0f, 0.0f);
 		totalIonSignal2 = new TotalScanSignal(0, 0.0f, 0.0f);
@@ -34,7 +34,7 @@ public class TotalIonSignalComparator_1_Test {
 	}
 
 	@Test
-	public void testComaparator_2() {
+	public void testComparator_2() {
 
 		totalIonSignal1 = null;
 		totalIonSignal2 = new TotalScanSignal(0, 0.0f, 0.0f);
@@ -42,7 +42,7 @@ public class TotalIonSignalComparator_1_Test {
 	}
 
 	@Test
-	public void testComaparator_3() {
+	public void testComparator_3() {
 
 		totalIonSignal1 = new TotalScanSignal(0, 0.0f, 0.0f);
 		totalIonSignal2 = null;
@@ -50,7 +50,7 @@ public class TotalIonSignalComparator_1_Test {
 	}
 
 	@Test
-	public void testComaparator_4() {
+	public void testComparator_4() {
 
 		totalIonSignal1 = new TotalScanSignal(0, 0.0f, 0.0f);
 		totalIonSignal2 = new TotalScanSignal(0, 0.0f, 1.0f);
@@ -58,7 +58,7 @@ public class TotalIonSignalComparator_1_Test {
 	}
 
 	@Test
-	public void testComaparator_5() {
+	public void testComparator_5() {
 
 		totalIonSignal1 = new TotalScanSignal(0, 0.0f, 1.0f);
 		totalIonSignal2 = new TotalScanSignal(0, 0.0f, 0.0f);

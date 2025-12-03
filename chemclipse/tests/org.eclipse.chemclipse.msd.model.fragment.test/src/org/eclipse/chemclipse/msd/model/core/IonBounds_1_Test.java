@@ -12,9 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class IonBounds_1_Test {
 
@@ -23,12 +23,12 @@ public class IonBounds_1_Test {
 	@Test
 	public void testGetLowestIon_1() {
 
-		assertEquals("GetLowestIon", null, ionBounds.getLowestIon());
+		assertEquals(null, ionBounds.getLowestIon());
 	}
 
 	@Test
 	public void testGetHighestIon_1() {
 
-		assertEquals("GetHighestIon", null, ionBounds.getHighestIon());
+		assertEquals(null, ionBounds.getHighestIon());
 	}
 }

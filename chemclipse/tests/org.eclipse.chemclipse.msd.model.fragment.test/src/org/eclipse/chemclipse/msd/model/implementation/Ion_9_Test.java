@@ -12,20 +12,23 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 /**
  * HashCode test.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class Ion_9_Test {
 
 	private Ion ion1;
 	private Ion ion2;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		ion1 = new Ion(5.2f, 4746.3f);
@@ -35,12 +38,12 @@ public class Ion_9_Test {
 	@Test
 	public void testHashCode_1() {
 
-		assertTrue("hashCode", ion1.hashCode() != ion2.hashCode());
+		assertTrue(ion1.hashCode() != ion2.hashCode());
 	}
 
 	@Test
 	public void testHashCode_2() {
 
-		assertTrue("hashCode", ion2.hashCode() != ion1.hashCode());
+		assertTrue(ion2.hashCode() != ion1.hashCode());
 	}
 }

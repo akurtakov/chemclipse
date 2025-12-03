@@ -12,21 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakMassSpectrum_1_Test {
 
 	private IScanMSD massSpectrum;
 	private IIon ion;
 	private IPeakMassSpectrum peakMassSpectrum;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		massSpectrum = new ScanMSD();
@@ -44,18 +47,18 @@ public class PeakMassSpectrum_1_Test {
 	@Test
 	public void testGetNumberOfIons_1() {
 
-		assertEquals("NumberOfIons", massSpectrum.getNumberOfIons(), peakMassSpectrum.getNumberOfIons());
+		assertEquals(massSpectrum.getNumberOfIons(), peakMassSpectrum.getNumberOfIons());
 	}
 
 	@Test
 	public void testGetTotalSignal_1() {
 
-		assertEquals("TotalSignal", massSpectrum.getTotalSignal(), peakMassSpectrum.getTotalSignal(), 0);
+		assertEquals(massSpectrum.getTotalSignal(), peakMassSpectrum.getTotalSignal(), 0);
 	}
 
 	@Test
 	public void testGetBasePeak_1() {
 
-		assertEquals("BasePeak", massSpectrum.getBasePeak(), peakMassSpectrum.getBasePeak(), 0);
+		assertEquals(massSpectrum.getBasePeak(), peakMassSpectrum.getBasePeak(), 0);
 	}
 }

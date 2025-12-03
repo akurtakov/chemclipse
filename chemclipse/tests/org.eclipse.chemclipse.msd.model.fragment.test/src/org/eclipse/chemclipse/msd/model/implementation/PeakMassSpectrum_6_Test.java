@@ -12,21 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class PeakMassSpectrum_6_Test {
 
 	private IIon ion;
 	private IPeakMassSpectrum peakMassSpectrum;
 	private IPeakMassSpectrum peakMassSpectrumShifted;
 
-	@Before
+	@BeforeAll
 	public void setUp() {
 
 		/*
@@ -50,7 +53,7 @@ public class PeakMassSpectrum_6_Test {
 		 * 50% of 6514141.6f = 3257071.0f
 		 */
 		peakMassSpectrumShifted = new PeakMassSpectrum(peakMassSpectrum, 50);
-		assertEquals("TotalSignal", 3257071.0f, peakMassSpectrumShifted.getTotalSignal(), 0);
+		assertEquals(3257071.0f, peakMassSpectrumShifted.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -60,7 +63,7 @@ public class PeakMassSpectrum_6_Test {
 		 * 100% of 6514141.6f = 6514141.6f
 		 */
 		peakMassSpectrumShifted = new PeakMassSpectrum(peakMassSpectrum, 100);
-		assertEquals("TotalSignal", 6514142.0f, peakMassSpectrumShifted.getTotalSignal(), 0);
+		assertEquals(6514142.0f, peakMassSpectrumShifted.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -79,7 +82,7 @@ public class PeakMassSpectrum_6_Test {
 		 * 0% of 6514141.6f = 3257071.0f
 		 */
 		peakMassSpectrumShifted = new PeakMassSpectrum(peakMassSpectrum, 0);
-		assertEquals("TotalSignal", 0.0f, peakMassSpectrumShifted.getTotalSignal(), 0);
+		assertEquals(0.0f, peakMassSpectrumShifted.getTotalSignal(), 0);
 	}
 
 	@Test
@@ -89,6 +92,6 @@ public class PeakMassSpectrum_6_Test {
 		 * 30% of 6514141.6f = 1954242.48f
 		 */
 		peakMassSpectrumShifted = new PeakMassSpectrum(peakMassSpectrum, 30);
-		assertEquals("TotalSignal", 1954242.48f, peakMassSpectrumShifted.getTotalSignal(), 0);
+		assertEquals(1954242.48f, peakMassSpectrumShifted.getTotalSignal(), 0);
 	}
 }

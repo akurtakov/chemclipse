@@ -12,13 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.xic;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.model.signals.TotalScanSignals;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TotalIonSignals_2_Test {
 
@@ -26,29 +26,29 @@ public class TotalIonSignals_2_Test {
 	public void testConstructor_1() {
 
 		ITotalScanSignals signals = new TotalScanSignals(0);
-		assertEquals("StartScan", 0, signals.getStartScan());
-		assertEquals("StopScan", 0, signals.getStopScan());
+		assertEquals(0, signals.getStartScan());
+		assertEquals(0, signals.getStopScan());
 		int scan;
 		scan = signals.getStartScan();
 		ITotalScanSignal signal = signals.getTotalScanSignal(scan);
-		assertNull("Null", signal);
+		assertNull(signal);
 		scan = signals.getStopScan();
 		signal = signals.getTotalScanSignal(scan);
-		assertNull("Null", signal);
+		assertNull(signal);
 	}
 
 	@Test
 	public void testConstructor_2() {
 
 		ITotalScanSignals signals = new TotalScanSignals(-1, -1);
-		assertEquals("StartScan", 0, signals.getStartScan());
-		assertEquals("StopScan", 0, signals.getStopScan());
+		assertEquals(0, signals.getStartScan());
+		assertEquals(0, signals.getStopScan());
 		int scan;
 		scan = signals.getStartScan();
 		ITotalScanSignal signal = signals.getTotalScanSignal(scan);
-		assertNull("Null", signal);
+		assertNull(signal);
 		scan = signals.getStopScan();
 		signal = signals.getTotalScanSignal(scan);
-		assertNull("Null", signal);
+		assertNull(signal);
 	}
 }

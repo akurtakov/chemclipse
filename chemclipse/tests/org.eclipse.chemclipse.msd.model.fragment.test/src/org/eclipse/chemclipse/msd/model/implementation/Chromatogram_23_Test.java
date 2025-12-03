@@ -12,12 +12,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.implementation;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class Chromatogram_23_Test {
 
