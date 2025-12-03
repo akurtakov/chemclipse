@@ -37,7 +37,7 @@ public class PeakListEditor {
 	@PostConstruct
 	public void construct(Composite parent, ISupplier supplier, File file) {
 
-		PeakScanListUI scanListUI = new PeakScanListUI(parent, SWT.NONE);
+		PeakScanListUI peakScanListUI = new PeakScanListUI(parent, SWT.NONE);
 		ProgressMonitorDialog dialog = new ProgressMonitorDialog(parent.getShell());
 		try {
 			dialog.run(true, true, monitor -> {
@@ -49,7 +49,7 @@ public class PeakListEditor {
 					if(convert.hasErrorMessages() || result == null) {
 						ProcessingInfoPartSupport.getInstance().update(convert);
 					} else {
-						scanListUI.setInput(result);
+						peakScanListUI.setInput(result);
 					}
 				});
 			});
