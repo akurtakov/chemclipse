@@ -381,6 +381,11 @@ public class PeakScanListLabelProvider extends AbstractChemClipseLabelProvider {
 	@Override
 	public Image getImage(Object element) {
 
-		return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_PEAK, IApplicationImageProvider.SIZE_16x16);
+		if(element instanceof IPeak) {
+			return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SELECTED_PEAKS_DEFAULT, IApplicationImageProvider.SIZE_16x16);
+		} else if(element instanceof IScan) {
+			return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SELECTED_SCANS_DEFAULT, IApplicationImageProvider.SIZE_16x16);
+		}
+		return null;
 	}
 }
