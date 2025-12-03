@@ -12,9 +12,6 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.support;
 
-/**
- * @author eselmeister
- */
 public class ScanRange implements IScanRange {
 
 	private int startScan;
@@ -30,6 +27,7 @@ public class ScanRange implements IScanRange {
 	 * @param stopScan
 	 */
 	public ScanRange(int startScan, int stopScan) {
+
 		if(startScan > stopScan) {
 			int tmp = startScan;
 			startScan = stopScan;
@@ -63,7 +61,6 @@ public class ScanRange implements IScanRange {
 		return stopScan - startScan + 1;
 	}
 
-	// -----------------------------equals, hashCode, toString
 	@Override
 	public boolean equals(Object other) {
 
@@ -98,5 +95,4 @@ public class ScanRange implements IScanRange {
 		builder.append("]");
 		return builder.toString();
 	}
-	// -----------------------------equals, hashCode, toString
 }
