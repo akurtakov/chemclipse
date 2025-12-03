@@ -190,8 +190,6 @@ public class ExtensionMessages extends NLS {
 	public static String chromatogramLengthModified;
 	public static String scanIdentification;
 	public static String importProcessMethod;
-	public static String exportPlate;
-	public static String importPlate;
 	public static String importQuantitationDatabase;
 	public static String importScan;
 	public static String importSequences;
@@ -214,7 +212,6 @@ public class ExtensionMessages extends NLS {
 	public static String targetTemplateAlreadyExists;
 	public static String reportExport;
 	public static String chromatogramExport;
-	public static String resetPlate;
 	public static String text;
 	public static String namedTrace;
 	public static String unknown;
@@ -264,11 +261,6 @@ public class ExtensionMessages extends NLS {
 	public static String openDataTypeFiles;
 	public static String processorQuickAccess;
 	public static String selectProcessorToolbarItems;
-	public static String cycle;
-	public static String exportFailed;
-	public static String fluorescence;
-	public static String pcrExport;
-	public static String plateChart;
 	public static String transmittance;
 	public static String absorbance;
 	public static String wavenumber;
