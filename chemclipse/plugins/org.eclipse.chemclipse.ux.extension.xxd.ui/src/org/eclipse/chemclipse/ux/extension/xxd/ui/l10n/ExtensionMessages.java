@@ -267,6 +267,8 @@ public class ExtensionMessages extends NLS {
 	public static String wavelength;
 	public static String intensity;
 	public static String process;
+	public static String peak;
+	public static String scan;
 
 	static {
 		NLS.initializeMessages("org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.messages", ExtensionMessages.class); //$NON-NLS-1$

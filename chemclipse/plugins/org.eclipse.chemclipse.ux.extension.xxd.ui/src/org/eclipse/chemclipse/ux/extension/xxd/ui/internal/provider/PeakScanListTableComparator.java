@@ -195,12 +195,12 @@ public class PeakScanListTableComparator extends AbstractRecordTableComparator i
 		return false;
 	}
 
-	private String getType(Object object) {
+	private PeakScanListLabelProvider.Type getType(Object object) {
 
 		if(object instanceof IPeak) {
-			return PeakScanListLabelProvider.PEAK;
+			return PeakScanListLabelProvider.Type.PEAK;
 		}
-		return PeakScanListLabelProvider.SCAN;
+		return PeakScanListLabelProvider.Type.SCAN;
 	}
 
 	private int getRetentionTime(Object object) {
