@@ -44,6 +44,9 @@ public class PreferencesProcessSupport {
 			@Override
 			public boolean test(IProcessSupplier<?> processSupplier) {
 
+				if(processSupplier.getSupportedDataTypes().contains(DataCategory.AUTO_DETECT)) {
+					return true;
+				}
 				return processSupplier.getSupportedDataTypes().contains(getDataCategory());
 			}
 		};
