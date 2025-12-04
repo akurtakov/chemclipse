@@ -64,8 +64,9 @@ public class PeakScanListLabelProvider extends AbstractChemClipseLabelProvider {
 	public static final String CLASSIFIER = ExtensionMessages.classifier;
 	public static final String PEAK_MODEL = ExtensionMessages.peakModel;
 
-	public static final String PEAK = "PEAK";
-	public static final String SCAN = "SCAN";
+	public enum Type {
+		PEAK, SCAN
+	}
 
 	private static final String BLANK = "";
 	private static final String NO_VALUE = "--";
@@ -194,7 +195,7 @@ public class PeakScanListLabelProvider extends AbstractChemClipseLabelProvider {
 				text = BLANK;
 				break;
 			case 1:
-				text = PEAK;
+				text = ExtensionMessages.peak;
 				break;
 			case 2:
 				text = decimalFormat.format(peakModel.getRetentionTimeAtPeakMaximum() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
@@ -323,7 +324,7 @@ public class PeakScanListLabelProvider extends AbstractChemClipseLabelProvider {
 				text = BLANK;
 				break;
 			case 1:
-				text = SCAN;
+				text = ExtensionMessages.scan;
 				break;
 			case 2:
 				text = decimalFormat.format(scan.getRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
@@ -380,6 +381,11 @@ public class PeakScanListLabelProvider extends AbstractChemClipseLabelProvider {
 	@Override
 	public Image getImage(Object element) {
 
-		return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_PEAK, IApplicationImageProvider.SIZE_16x16);
+		if(element instanceof IPeak) {
+			return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SELECTED_PEAKS_DEFAULT, IApplicationImageProvider.SIZE_16x16);
+		} else if(element instanceof IScan) {
+			return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SELECTED_SCANS_DEFAULT, IApplicationImageProvider.SIZE_16x16);
+		}
+		return null;
 	}
 }
