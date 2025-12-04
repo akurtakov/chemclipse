@@ -57,6 +57,7 @@ public class LoadingsPlot extends AbstractPlotPCA {
 			} else {
 				series = SeriesConverter.basisVectorsToSeriesDescription(resultsPCA, pcX, pcY);
 			}
+			update(pcX, pcY, evaluationPCA.getResults().getExplainedVariances());
 
 			addSeriesData(series);
 		} else {
