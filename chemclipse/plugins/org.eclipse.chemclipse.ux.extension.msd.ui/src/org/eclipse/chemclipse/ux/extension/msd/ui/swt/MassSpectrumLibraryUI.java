@@ -35,7 +35,9 @@ import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.swt.ui.preferences.PreferencePageSystem;
+import org.eclipse.chemclipse.ux.extension.msd.ui.help.HelpContext;
 import org.eclipse.chemclipse.ux.extension.ui.support.PartSupport;
+import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferencePage;
 import org.eclipse.jface.preference.PreferenceDialog;
@@ -51,8 +53,9 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.ui.PlatformUI;
 
-public class MassSpectrumLibraryUI extends Composite {
+public class MassSpectrumLibraryUI extends Composite implements IExtendedPartUI {
 
 	private static final Logger logger = Logger.getLogger(MassSpectrumLibraryUI.class);
 
@@ -117,10 +120,11 @@ public class MassSpectrumLibraryUI extends Composite {
 		GridData gridDataStatus = new GridData(GridData.FILL_HORIZONTAL);
 		gridDataStatus.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridDataStatus);
-		composite.setLayout(new GridLayout(7, false));
+		composite.setLayout(new GridLayout(8, false));
 
 		createButtonToggleToolbarInfo(composite);
 		createButtonToggleToolbarSearch(composite);
+		createButtonHelp(composite, HelpContext.MASS_SPECTRUM_SEARCH);
 		createButtonToggleToolbarModify(composite);
 		createButtonToggleToolbarEdit(composite);
 		createButtonAddLibraryToSearch(composite);
@@ -307,6 +311,8 @@ public class MassSpectrumLibraryUI extends Composite {
 			massSpectrumListUI.setSearchText(searchText, caseSensitive);
 			updateLabel();
 		});
+
+		PlatformUI.getWorkbench().getHelpSystem().setHelp(searchSupportUI, HelpContext.MASS_SPECTRUM_SEARCH);
 
 		return searchSupportUI;
 	}

@@ -21,12 +21,6 @@ public class TargetListFilter extends ViewerFilter {
 
 	private String searchText;
 	private boolean caseSensitive;
-	private LibraryInformationSupport libraryInformationSupport;
-
-	public TargetListFilter() {
-
-		libraryInformationSupport = new LibraryInformationSupport();
-	}
 
 	public void setSearchText(String searchText, boolean caseSensitive) {
 
@@ -45,7 +39,7 @@ public class TargetListFilter extends ViewerFilter {
 		}
 
 		if(element instanceof IIdentificationTarget target) {
-			return libraryInformationSupport.containsSearchText(target.getLibraryInformation(), searchText, caseSensitive);
+			return LibraryInformationSupport.containsSearchText(target.getLibraryInformation(), searchText, caseSensitive);
 		}
 
 		return false;

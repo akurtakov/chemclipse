@@ -13,6 +13,7 @@
 package org.eclipse.chemclipse.model.support;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
@@ -35,131 +36,127 @@ public class LibraryInformationSupport {
 		}
 	}
 
-	public boolean containsSearchText(ILibraryInformation libraryInformation, String searchText, boolean caseSensitive) {
+	/**
+	 * 
+	 * @param searchText
+	 *            supports "prefix:query" syntax
+	 */
+	public static boolean containsSearchText(ILibraryInformation libraryInformation, String searchText, boolean caseSensitive) {
 
 		if(libraryInformation == null || searchText == null) {
 			return false;
-		} else {
-			/*
-			 * Searh Text
-			 */
-			searchText = caseSensitive ? searchText : searchText.toLowerCase();
-			/*
-			 * Name
-			 */
-			String name = libraryInformation.getName();
-			name = caseSensitive ? name : name.toLowerCase();
-			if(name.contains(searchText)) {
-				return true;
-			}
-			/*
-			 * Reference Identifier
-			 */
-			String referenceIdentifier = libraryInformation.getReferenceIdentifier();
-			referenceIdentifier = caseSensitive ? referenceIdentifier : referenceIdentifier.toLowerCase();
-			if(referenceIdentifier.contains(searchText)) {
-				return true;
-			}
-			/*
-			 * Formula
-			 */
-			String formula = libraryInformation.getFormula();
-			formula = caseSensitive ? formula : formula.toLowerCase();
-			if(formula.contains(searchText)) {
-				return true;
-			}
-			/*
-			 * SMILES
-			 */
-			String smiles = libraryInformation.getSmiles();
-			smiles = caseSensitive ? smiles : smiles.toLowerCase();
-			if(smiles.contains(searchText)) {
-				return true;
-			}
-			/*
-			 * InChI
-			 */
-			String inchi = libraryInformation.getInChI();
-			inchi = caseSensitive ? inchi : inchi.toLowerCase();
-			if(inchi.contains(searchText)) {
-				return true;
-			}
-			/*
-			 * InChI Key
-			 */
-			String inchiKey = libraryInformation.getInChIKey();
-			inchiKey = caseSensitive ? inchiKey : inchiKey.toLowerCase();
-			if(inchiKey.contains(searchText)) {
-				return true;
-			}
-			/*
-			 * CAS Numbers
-			 */
-			List<String> casNumbers = libraryInformation.getCasNumbers();
-			for(String casNumber : casNumbers) {
-				casNumber = caseSensitive ? casNumber : casNumber.toLowerCase();
-				if(casNumber.contains(searchText)) {
-					return true;
-				}
-			}
-			/*
-			 * Comments
-			 */
-			String comments = libraryInformation.getComments();
-			comments = caseSensitive ? comments : comments.toLowerCase();
-			if(comments.contains(searchText)) {
-				return true;
-			}
-			/*
-			 * Synonyms
-			 */
-			Set<String> synonyms = libraryInformation.getSynonyms();
-			for(String synonym : synonyms) {
-				synonym = caseSensitive ? synonym : synonym.toLowerCase();
-				if(synonym.contains(searchText)) {
-					return true;
-				}
-			}
-			/*
-			 * Database
-			 */
-			String database = libraryInformation.getDatabase();
-			database = caseSensitive ? database : database.toLowerCase();
-			if(database.contains(searchText)) {
-				return true;
-			}
-			/*
-			 * Flavor Marker
-			 */
-			for(IFlavorMarker flavorMarker : libraryInformation.getFlavorMarkers()) {
-				/*
-				 * Odor
-				 */
-				String odor = flavorMarker.getOdor();
-				odor = caseSensitive ? odor : odor.toLowerCase();
-				if(odor.contains(searchText)) {
-					return true;
-				}
-				/*
-				 * Matrix
-				 */
-				String matrix = flavorMarker.getMatrix();
-				matrix = caseSensitive ? matrix : matrix.toLowerCase();
-				if(matrix.contains(searchText)) {
-					return true;
-				}
-				/*
-				 * Solvent
-				 */
-				String solvent = flavorMarker.getOdor();
-				solvent = caseSensitive ? solvent : solvent.toLowerCase();
-				if(solvent.contains(searchText)) {
-					return true;
-				}
-			}
+		}
 
+		int colon = searchText.indexOf(':');
+		if(colon > 0) {
+			String possiblePrefix = searchText.substring(0, colon).trim().toLowerCase();
+			String remainder = searchText.substring(colon + 1);
+			SearchField mapped = mapPrefixToField(possiblePrefix);
+			if(mapped != null) {
+				return containsSearchText(libraryInformation, remainder, caseSensitive, EnumSet.of(mapped));
+			}
+		}
+
+		return containsSearchText(libraryInformation, searchText, caseSensitive, EnumSet.of(SearchField.ALL));
+	}
+
+	public static boolean containsSearchText(ILibraryInformation libraryInformation, String searchText, boolean caseSensitive, Set<SearchField> fieldsToSearch) {
+
+		if(libraryInformation == null || searchText == null || fieldsToSearch == null) {
 			return false;
 		}
+
+		String query = caseSensitive ? searchText : searchText.toLowerCase();
+		boolean searchAll = fieldsToSearch.contains(SearchField.ALL);
+
+		if(searchAll || fieldsToSearch.contains(SearchField.NAME)) {
+			if(matches(libraryInformation.getName(), query, caseSensitive)) {
+				return true;
+			}
+		}
+
+		if(searchAll || fieldsToSearch.contains(SearchField.REFERENCE_IDENTIFIER)) {
+			if(matches(libraryInformation.getReferenceIdentifier(), query, caseSensitive)) {
+				return true;
+			}
+		}
+
+		if(searchAll || fieldsToSearch.contains(SearchField.FORMULA)) {
+			if(matches(libraryInformation.getFormula(), query, caseSensitive)) {
+				return true;
+			}
+		}
+
+		if(searchAll || fieldsToSearch.contains(SearchField.SMILES)) {
+			if(matches(libraryInformation.getSmiles(), query, caseSensitive)) {
+				return true;
+			}
+		}
+
+		if(searchAll || fieldsToSearch.contains(SearchField.INCHI)) {
+			if(matches(libraryInformation.getInChI(), query, caseSensitive)) {
+				return true;
+			}
+		}
+
+		if(searchAll || fieldsToSearch.contains(SearchField.INCHI_KEY)) {
+			if(matches(libraryInformation.getInChIKey(), query, caseSensitive)) {
+				return true;
+			}
+		}
+
+		if(searchAll || fieldsToSearch.contains(SearchField.CAS)) {
+			List<String> casNumbers = libraryInformation.getCasNumbers();
+			if(casNumbers != null) {
+				for(String cas : casNumbers) {
+					if(matches(cas, query, caseSensitive)) {
+						return true;
+					}
+				}
+			}
+		}
+
+		if(searchAll || fieldsToSearch.contains(SearchField.COMMENTS)) {
+			if(matches(libraryInformation.getComments(), query, caseSensitive)) {
+				return true;
+			}
+		}
+
+		if(searchAll || fieldsToSearch.contains(SearchField.SYNONYMS)) {
+			Set<String> synonyms = libraryInformation.getSynonyms();
+			if(synonyms != null) {
+				for(String synonym : synonyms) {
+					if(matches(synonym, query, caseSensitive)) {
+						return true;
+					}
+				}
+			}
+		}
+
+		if(searchAll || fieldsToSearch.contains(SearchField.DATABASE)) {
+			if(matches(libraryInformation.getDatabase(), query, caseSensitive)) {
+				return true;
+			}
+		}
+
+		if(searchAll || fieldsToSearch.contains(SearchField.FLAVOR_ODOR) || fieldsToSearch.contains(SearchField.FLAVOR_MATRIX) || fieldsToSearch.contains(SearchField.FLAVOR_SOLVENT)) {
+			for(IFlavorMarker flavorMarker : libraryInformation.getFlavorMarkers()) {
+				if(flavorMarker == null) {
+					continue;
+				}
+				if((searchAll || fieldsToSearch.contains(SearchField.FLAVOR_ODOR)) && matches(flavorMarker.getOdor(), query, caseSensitive)) {
+					return true;
+				}
+				if((searchAll || fieldsToSearch.contains(SearchField.FLAVOR_MATRIX)) && matches(flavorMarker.getMatrix(), query, caseSensitive)) {
+					return true;
+				}
+				if((searchAll || fieldsToSearch.contains(SearchField.FLAVOR_SOLVENT)) && matches(flavorMarker.getSolvent(), query, caseSensitive)) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	public void extractNameAndReferenceIdentifier(String name, ILibraryInformation libraryInformation, String referenceIdentifierMarker, String referenceIdentifierPrefix) {
@@ -196,5 +193,33 @@ public class LibraryInformationSupport {
 				libraryInformation.setName(name);
 			}
 		}
+	}
+
+	private static SearchField mapPrefixToField(String prefix) {
+
+		if(prefix == null || prefix.isEmpty()) {
+			return SearchField.ALL;
+		}
+
+		for(SearchField field : SearchField.values()) {
+			for(String keyword : field.keywords()) {
+				if(keyword.equalsIgnoreCase(prefix)) {
+					return field;
+				}
+			}
+		}
+
+		return SearchField.ALL;
+	}
+
+	private static boolean matches(String candidate, String query, boolean caseSensitive) {
+
+		if(candidate == null || query == null) {
+			return false;
+		}
+		if(!caseSensitive) {
+			candidate = candidate.toLowerCase();
+		}
+		return candidate.contains(query);
 	}
 }

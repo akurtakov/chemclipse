@@ -24,12 +24,6 @@ public class MassSpectrumListFilter extends ViewerFilter {
 
 	private String searchText;
 	private boolean caseSensitive;
-	private LibraryInformationSupport libraryInformationSupport;
-
-	public MassSpectrumListFilter() {
-
-		libraryInformationSupport = new LibraryInformationSupport();
-	}
 
 	public void setSearchText(String searchText, boolean caseSensitive) {
 
@@ -51,21 +45,17 @@ public class MassSpectrumListFilter extends ViewerFilter {
 		if(searchText == null || searchText.equals("")) {
 			return true;
 		}
-		/*
-		 * ILibraryMassSpectrum
-		 */
-		if(element instanceof ILibraryMassSpectrum libraryMassSpectrum) {
 
+		if(element instanceof ILibraryMassSpectrum libraryMassSpectrum) {
 			ILibraryInformation libraryInformation = libraryMassSpectrum.getLibraryInformation();
-			if(libraryInformationSupport.containsSearchText(libraryInformation, searchText, caseSensitive)) {
+			if(LibraryInformationSupport.containsSearchText(libraryInformation, searchText, caseSensitive)) {
 				return true;
 			}
 		} else if(element instanceof IScanMSD massSpectrum) {
-
 			for(IIdentificationTarget massSpectrumTarget : massSpectrum.getTargets()) {
-				IIdentificationTarget identificationEntry = (IIdentificationTarget)massSpectrumTarget;
+				IIdentificationTarget identificationEntry = massSpectrumTarget;
 				ILibraryInformation libraryInformation = identificationEntry.getLibraryInformation();
-				if(libraryInformationSupport.containsSearchText(libraryInformation, searchText, caseSensitive)) {
+				if(LibraryInformationSupport.containsSearchText(libraryInformation, searchText, caseSensitive)) {
 					return true;
 				}
 			}

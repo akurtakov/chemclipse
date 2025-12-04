@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?NLS TYPE="org.eclipse.help.contexts"?>
+<contexts>
+   <context id="mass_spectrum_search" title="Mass Spectrum Search">
+      <description>Search through a mass spectrum database.</description>
+      <topic label="Prefixes" href="html/ms_search_prefixes.html"/>
+   </context>
+</contexts>
