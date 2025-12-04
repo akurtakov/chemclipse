@@ -157,6 +157,9 @@ public class ProcessorToolbarUI extends Composite {
 	private boolean isActiveDataCategory(Processor processor) {
 
 		if(dataCategory != null) {
+			if(processor.getProcessSupplier().getSupportedDataTypes().contains(DataCategory.AUTO_DETECT)) {
+				return true;
+			}
 			return processor.getProcessSupplier().getSupportedDataTypes().contains(dataCategory);
 		}
 
