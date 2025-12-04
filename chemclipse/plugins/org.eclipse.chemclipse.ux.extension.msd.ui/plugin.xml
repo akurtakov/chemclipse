@@ -8,4 +8,11 @@
             uri="fragment.e4xmi">
       </fragment>
    </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml"
+            plugin="org.eclipse.chemclipse.ux.extension.msd.ui">
+      </contexts>
+   </extension>   
 </plugin>

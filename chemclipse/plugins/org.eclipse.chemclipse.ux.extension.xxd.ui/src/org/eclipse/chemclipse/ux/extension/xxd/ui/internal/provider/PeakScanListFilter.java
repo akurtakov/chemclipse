@@ -27,7 +27,6 @@ public class PeakScanListFilter extends ViewerFilter {
 
 	private String searchText;
 	private boolean caseSensitive;
-	private final LibraryInformationSupport libraryInformationSupport = new LibraryInformationSupport();
 
 	public void setSearchText(String searchText, boolean caseSensitive) {
 
@@ -61,7 +60,7 @@ public class PeakScanListFilter extends ViewerFilter {
 		}
 		for(ITarget target : peak.getTargets()) {
 			if(target instanceof IIdentificationTarget identificationTarget) {
-				if(libraryInformationSupport.containsSearchText(identificationTarget.getLibraryInformation(), searchText, caseSensitive)) {
+				if(LibraryInformationSupport.containsSearchText(identificationTarget.getLibraryInformation(), searchText, caseSensitive)) {
 					return true;
 				}
 			}
@@ -72,7 +71,7 @@ public class PeakScanListFilter extends ViewerFilter {
 	private boolean matchScan(IScan scan) {
 
 		for(IIdentificationTarget target : scan.getTargets()) {
-			if(libraryInformationSupport.containsSearchText(target.getLibraryInformation(), searchText, caseSensitive)) {
+			if(LibraryInformationSupport.containsSearchText(target.getLibraryInformation(), searchText, caseSensitive)) {
 				return true;
 			}
 		}
