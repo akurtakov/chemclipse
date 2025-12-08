@@ -74,7 +74,7 @@ public class VirtualChannelTable extends Composite implements IChangeListener, I
 	private static final String CATEGORY = "PCR Report";
 	private static final String DELETE = "Delete";
 
-	public static final String EXAMPLE = "Sample | 1&2 | Channel 1 and 2 | 5";
+	public static final String EXAMPLE = "Subset | Sample | 1&2 | 5";
 
 	private AtomicReference<VirtualChannelListUI> tableViewer = new AtomicReference<>();
 
