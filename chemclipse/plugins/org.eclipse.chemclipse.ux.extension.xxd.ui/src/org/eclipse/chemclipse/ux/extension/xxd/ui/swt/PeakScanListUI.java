@@ -138,13 +138,13 @@ public class PeakScanListUI extends ExtendedTableViewer {
 						if(element instanceof IPeak peak) {
 							cell.setText(TargetSupport.getBestTargetLibraryField(peak));
 							if(hasDuplicateTarget(peak)) {
-								cell.setBackground(Colors.LIGHT_RED);
+								cell.setBackground(Colors.LIGHT_YELLOW);
 								cell.setForeground(Colors.BLACK);
 							}
 						} else if(element instanceof IScan scan) {
 							cell.setText(TargetSupport.getBestTargetLibraryField(scan));
 							if(hasDuplicateTarget(scan)) {
-								cell.setBackground(Colors.LIGHT_RED);
+								cell.setBackground(Colors.LIGHT_YELLOW);
 								cell.setForeground(Colors.BLACK);
 							}
 						}
