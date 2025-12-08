@@ -65,12 +65,11 @@ public class VirtualChannel {
 
 	public String getSourceChannelString() {
 
-		if(logicalOperator == LogicalOperator.AND) {
-			return StringUtils.join(ArrayUtils.toObject(sourceChannels), "&");
-		} else if(logicalOperator == LogicalOperator.OR) {
-			return StringUtils.join(ArrayUtils.toObject(sourceChannels), "/");
+		String concatenation = getConcatenation();
+		if(logicalOperator == LogicalOperator.IDENTITY) {
+			return concatenation + "$";
 		} else {
-			return StringUtils.join(ArrayUtils.toObject(sourceChannels), "+");
+			return concatenation;
 		}
 	}
 
@@ -102,6 +101,17 @@ public class VirtualChannel {
 			setSourceChannels(channel.getSourceChannels());
 			setLogicalOperator(channel.getLogicalOperator());
 			setTargetChannel(channel.getTargetChannel());
+		}
+	}
+
+	private String getConcatenation() {
+
+		if(logicalOperator == LogicalOperator.AND) {
+			return StringUtils.join(ArrayUtils.toObject(sourceChannels), "&");
+		} else if(logicalOperator == LogicalOperator.OR) {
+			return StringUtils.join(ArrayUtils.toObject(sourceChannels), "/");
+		} else {
+			return StringUtils.join(ArrayUtils.toObject(sourceChannels), "+");
 		}
 	}
 }
