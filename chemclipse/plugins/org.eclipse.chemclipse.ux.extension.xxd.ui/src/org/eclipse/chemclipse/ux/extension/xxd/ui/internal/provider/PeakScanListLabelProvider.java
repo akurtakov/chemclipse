@@ -162,7 +162,7 @@ public class PeakScanListLabelProvider extends AbstractChemClipseLabelProvider {
 				return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DESELECTED_INACTIVE, IApplicationImageProvider.SIZE_16x16);
 			}
 		} else if(columnIndex == 1) {
-			return getImage(element);
+			return getPeakScanImage(element);
 		}
 		return null;
 	}
@@ -378,8 +378,7 @@ public class PeakScanListLabelProvider extends AbstractChemClipseLabelProvider {
 		return text;
 	}
 
-	@Override
-	public Image getImage(Object element) {
+	public Image getPeakScanImage(Object element) {
 
 		if(element instanceof IPeak) {
 			return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SELECTED_PEAKS_DEFAULT, IApplicationImageProvider.SIZE_16x16);

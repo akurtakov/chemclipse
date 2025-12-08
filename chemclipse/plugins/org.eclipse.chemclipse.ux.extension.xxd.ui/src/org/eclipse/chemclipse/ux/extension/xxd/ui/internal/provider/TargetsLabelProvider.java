@@ -18,7 +18,6 @@ import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.identifier.IComparisonResult;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
-import org.eclipse.chemclipse.model.identifier.IRatingSupplier;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
@@ -191,34 +190,7 @@ public class TargetsLabelProvider extends AbstractChemClipseLabelProvider {
 			 * Rating
 			 */
 			if(element instanceof IIdentificationTarget identificationTarget) {
-				IComparisonResult comparisonResult = identificationTarget.getComparisonResult();
-				IRatingSupplier ratingSupplier = comparisonResult.getRatingSupplier();
-
-				String fileName;
-				switch(ratingSupplier.getStatus()) {
-					case VERY_GOOD:
-						fileName = IApplicationImage.IMAGE_RATING_VERY_GOOD;
-						break;
-					case GOOD:
-						fileName = IApplicationImage.IMAGE_RATING_GOOD;
-						break;
-					case AVERAGE:
-						fileName = IApplicationImage.IMAGE_RATING_AVERAGE;
-						break;
-					case BAD:
-						fileName = IApplicationImage.IMAGE_RATING_BAD;
-						break;
-					case VERY_BAD:
-						fileName = IApplicationImage.IMAGE_RATING_VERY_BAD;
-						break;
-					default:
-						fileName = "";
-						break;
-				}
-
-				if(!fileName.isEmpty()) {
-					return ApplicationImageFactory.getInstance().getImage(fileName, IApplicationImage.SIZE_16x16);
-				}
+				return IdentificationTargetSupport.getRatingSymbol(identificationTarget);
 			}
 		} else if(columnIndex == INDEX_NAME) {
 			/*
