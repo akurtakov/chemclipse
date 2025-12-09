@@ -33,7 +33,6 @@ import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.comparator.IonAbundanceComparator;
 import org.eclipse.chemclipse.msd.model.implementation.MassSpectra;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
 import org.eclipse.chemclipse.support.comparator.SortOrder;
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -89,31 +88,27 @@ public class DatabasesCache {
 
 		List<String> databaseNames = new ArrayList<>();
 		for(String database : databaseList) {
-			try {
-				File file = new File(database);
-				String databaseName = file.getName();
-				databaseNames.add(databaseName);
-				if(file.exists()) {
+			File file = new File(database);
+			String databaseName = file.getName();
+			databaseNames.add(databaseName);
+			if(file.exists()) {
+				/*
+				 * Make further checks.
+				 */
+				if(massSpectraDatabases.get(databaseName) == null) {
+					loadMassSpectraFromFile(file, monitor);
+					if(monitor.isCanceled()) {
+						resetCache();
+						return massSpectraDatabases;
+					}
+				} else {
 					/*
-					 * Make further checks.
+					 * Has the content been edited?
 					 */
-					if(massSpectraDatabases.get(databaseName) == null) {
+					if(file.length() != fileSizes.get(databaseName) || file.lastModified() != fileModifications.get(databaseName) || !fileNames.contains(databaseName)) {
 						loadMassSpectraFromFile(file, monitor);
-						if(monitor.isCanceled()) {
-							resetCache();
-							return massSpectraDatabases;
-						}
-					} else {
-						/*
-						 * Has the content been edited?
-						 */
-						if(file.length() != fileSizes.get(databaseName) || file.lastModified() != fileModifications.get(databaseName) || !fileNames.contains(databaseName)) {
-							loadMassSpectraFromFile(file, monitor);
-						}
 					}
 				}
-			} catch(TypeCastException e) {
-				logger.warn(e);
 			}
 		}
 		/*
@@ -213,7 +208,7 @@ public class DatabasesCache {
 		return allDatabaseCasNumbers;
 	}
 
-	private void loadMassSpectraFromFile(File file, IProgressMonitor monitor) throws TypeCastException {
+	private void loadMassSpectraFromFile(File file, IProgressMonitor monitor) {
 
 		IProcessingInfo<IMassSpectra> processingInfo = DatabaseConverter.convert(file, monitor);
 		IMassSpectra massSpectraDatabase = processingInfo.getProcessingResult();

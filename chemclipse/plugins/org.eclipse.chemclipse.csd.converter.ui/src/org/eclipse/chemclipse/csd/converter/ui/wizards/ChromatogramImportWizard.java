@@ -24,7 +24,6 @@ import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.wizards.RawFileSelectionWizardPage;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -97,28 +96,24 @@ public class ChromatogramImportWizard extends Wizard implements IImportWizard {
 			 * Process the chromatograms
 			 */
 			for(File inputFile : inputFiles) {
+
+				/*
+				 * Import
+				 */
+				IProcessingInfo<IChromatogramCSD> processingInfo = ChromatogramConverterCSD.getInstance().convert(inputFile, monitor);
+				IChromatogramCSD chromatogram = processingInfo.getProcessingResult();
 				/*
 				 * Convert each chromatogram
 				 */
-				try {
-					/*
-					 * Import
-					 */
-					IProcessingInfo<IChromatogramCSD> processingInfo = ChromatogramConverterCSD.getInstance().convert(inputFile, monitor);
-					IChromatogramCSD chromatogram = processingInfo.getProcessingResult();
-
-					String directory = importDirectory;
-					if(!importDirectory.endsWith(File.separator)) {
-						directory += File.separator;
-					}
-					/*
-					 * Export
-					 */
-					File outputFile = new File(directory + chromatogram.getName());
-					ChromatogramConverterCSD.getInstance().convert(outputFile, chromatogram, converterId, monitor);
-				} catch(TypeCastException e) {
-					logger.warn(e);
+				String directory = importDirectory;
+				if(!importDirectory.endsWith(File.separator)) {
+					directory += File.separator;
 				}
+				/*
+				 * Export
+				 */
+				File outputFile = new File(directory + chromatogram.getName());
+				ChromatogramConverterCSD.getInstance().convert(outputFile, chromatogram, converterId, monitor);
 			}
 		};
 		try {

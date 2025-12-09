@@ -15,9 +15,7 @@ package org.eclipse.chemclipse.processing.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -43,12 +41,5 @@ public class ProcessingInfo_6_Test {
 		String result = processingInfo.getProcessingResult();
 		assertNotNull(result);
 		assertEquals("Hello World!", result);
-	}
-
-	@SuppressWarnings("deprecation")
-	@Test
-	public void testProcessingInfo_2() {
-
-		assertThrows(TypeCastException.class, () -> processingInfo.getProcessingResult(Integer.class));
 	}
 }

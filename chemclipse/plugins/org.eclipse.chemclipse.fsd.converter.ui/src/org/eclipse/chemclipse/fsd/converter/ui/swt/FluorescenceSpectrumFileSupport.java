@@ -26,7 +26,6 @@ import org.eclipse.chemclipse.fsd.model.core.ISpectrumFSD;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.processing.converter.ISupplier;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -142,16 +141,11 @@ public class FluorescenceSpectrumFileSupport {
 		ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
 		IRunnableWithProgress runnable = monitor -> {
 
-			try {
-				monitor.beginTask(FluorescenceSpectroscopy.saveFluorescence, IProgressMonitor.UNKNOWN);
-				IProcessingInfo<File> processingInfo = ScanConverterFSD.convert(file, spectrum, supplier.getId(), monitor);
-				ProcessingInfoPartSupport.getInstance().update(processingInfo);
-				processingInfo.getProcessingResult();
-			} catch(TypeCastException e) {
-				logger.warn(e);
-			} finally {
-				monitor.done();
-			}
+			monitor.beginTask(FluorescenceSpectroscopy.saveFluorescence, IProgressMonitor.UNKNOWN);
+			IProcessingInfo<File> processingInfo = ScanConverterFSD.convert(file, spectrum, supplier.getId(), monitor);
+			ProcessingInfoPartSupport.getInstance().update(processingInfo);
+			processingInfo.getProcessingResult();
+			monitor.done();
 		};
 		try {
 			dialog.run(true, false, runnable);

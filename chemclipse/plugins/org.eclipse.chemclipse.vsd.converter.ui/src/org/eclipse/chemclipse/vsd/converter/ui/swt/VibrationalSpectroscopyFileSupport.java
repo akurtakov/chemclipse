@@ -23,7 +23,6 @@ import org.eclipse.chemclipse.converter.ui.l10n.ConverterMessagesUI;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.processing.converter.ISupplier;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
 import org.eclipse.chemclipse.vsd.converter.core.ScanConverterVSD;
 import org.eclipse.chemclipse.vsd.converter.ui.l10n.VibrationalSpectroscopyMessages;
@@ -143,20 +142,15 @@ public class VibrationalSpectroscopyFileSupport {
 		ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
 		IRunnableWithProgress runnable = monitor -> {
 
-			try {
-				if(spectrum.getScanVSD().getSignalType() == SignalType.FTIR) {
-					monitor.beginTask(VibrationalSpectroscopyMessages.saveIR, IProgressMonitor.UNKNOWN);
-				} else if(spectrum.getScanVSD().getSignalType() == SignalType.RAMAN) {
-					monitor.beginTask(VibrationalSpectroscopyMessages.saveRaman, IProgressMonitor.UNKNOWN);
-				}
-				IProcessingInfo<File> processingInfo = ScanConverterVSD.convert(file, spectrum, supplier.getId(), monitor);
-				ProcessingInfoPartSupport.getInstance().update(processingInfo);
-				processingInfo.getProcessingResult();
-			} catch(TypeCastException e) {
-				logger.warn(e);
-			} finally {
-				monitor.done();
+			if(spectrum.getScanVSD().getSignalType() == SignalType.FTIR) {
+				monitor.beginTask(VibrationalSpectroscopyMessages.saveIR, IProgressMonitor.UNKNOWN);
+			} else if(spectrum.getScanVSD().getSignalType() == SignalType.RAMAN) {
+				monitor.beginTask(VibrationalSpectroscopyMessages.saveRaman, IProgressMonitor.UNKNOWN);
 			}
+			IProcessingInfo<File> processingInfo = ScanConverterVSD.convert(file, spectrum, supplier.getId(), monitor);
+			ProcessingInfoPartSupport.getInstance().update(processingInfo);
+			processingInfo.getProcessingResult();
+			monitor.done();
 		};
 		try {
 			dialog.run(true, false, runnable);

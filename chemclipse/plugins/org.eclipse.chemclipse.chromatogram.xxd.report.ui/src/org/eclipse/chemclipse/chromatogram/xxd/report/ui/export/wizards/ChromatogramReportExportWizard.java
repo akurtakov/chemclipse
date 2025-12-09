@@ -26,7 +26,6 @@ import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
 import org.eclipse.chemclipse.ux.extension.msd.ui.wizards.ChromatogramSelectionWizardPage;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -87,35 +86,31 @@ public class ChromatogramReportExportWizard extends Wizard implements IExportWiz
 						 */
 						File chromatogramFile = new File(inputFile);
 						IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(chromatogramFile, VersionConstants.CONVERTER_ID_CHROMATOGRAM, monitor);
-						try {
-							IChromatogramMSD chromatogram = processingInfo.getProcessingResult();
-							if(chromatogram != null) {
-								/*
-								 * Report: Append the reports or use distinct files?
-								 */
-								boolean appendReport;
-								String reportFolderOrFile = reportSupplier.get(reportSupplierId);
-								File chromatogramReportFile = new File(reportFolderOrFile);
-								/*
-								 * If it's a directory, then prepare the file name. Otherwise, the stored selection is the file name.
-								 */
-								if(chromatogramReportFile.isDirectory()) {
-									appendReport = false;
+						IChromatogramMSD chromatogram = processingInfo.getProcessingResult();
+						if(chromatogram != null) {
+							/*
+							 * Report: Append the reports or use distinct files?
+							 */
+							boolean appendReport;
+							String reportFolderOrFile = reportSupplier.get(reportSupplierId);
+							File chromatogramReportFile = new File(reportFolderOrFile);
+							/*
+							 * If it's a directory, then prepare the file name. Otherwise, the stored selection is the file name.
+							 */
+							if(chromatogramReportFile.isDirectory()) {
+								appendReport = false;
 
-									if(!reportFolderOrFile.endsWith(File.separator)) {
-										reportFolderOrFile += File.separator;
-									}
-									chromatogramReportFile = new File(reportFolderOrFile + chromatogram.getName());
-								} else {
-									appendReport = true;
+								if(!reportFolderOrFile.endsWith(File.separator)) {
+									reportFolderOrFile += File.separator;
 								}
-								/*
-								 * Report the chromatogram.
-								 */
-								ChromatogramReports.generate(chromatogramReportFile, appendReport, chromatogram, reportSupplierId, monitor);
+								chromatogramReportFile = new File(reportFolderOrFile + chromatogram.getName());
+							} else {
+								appendReport = true;
 							}
-						} catch(TypeCastException e) {
-							logger.warn(e);
+							/*
+							 * Report the chromatogram.
+							 */
+							ChromatogramReports.generate(chromatogramReportFile, appendReport, chromatogram, reportSupplierId, monitor);
 						}
 					}
 				}

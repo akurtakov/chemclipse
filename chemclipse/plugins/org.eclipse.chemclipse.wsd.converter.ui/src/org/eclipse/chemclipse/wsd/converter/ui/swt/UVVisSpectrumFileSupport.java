@@ -23,7 +23,6 @@ import org.eclipse.chemclipse.converter.ui.l10n.ConverterMessagesUI;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.processing.converter.ISupplier;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
 import org.eclipse.chemclipse.wsd.converter.core.ScanConverterWSD;
 import org.eclipse.chemclipse.wsd.converter.ui.l10n.UltravioletVisibleSpectroscopy;
@@ -142,16 +141,11 @@ public class UVVisSpectrumFileSupport {
 		ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
 		IRunnableWithProgress runnable = monitor -> {
 
-			try {
-				monitor.beginTask(UltravioletVisibleSpectroscopy.saveUVVis, IProgressMonitor.UNKNOWN);
-				IProcessingInfo<File> processingInfo = ScanConverterWSD.convert(file, spectrum, supplier.getId(), monitor);
-				ProcessingInfoPartSupport.getInstance().update(processingInfo);
-				processingInfo.getProcessingResult();
-			} catch(TypeCastException e) {
-				logger.warn(e);
-			} finally {
-				monitor.done();
-			}
+			monitor.beginTask(UltravioletVisibleSpectroscopy.saveUVVis, IProgressMonitor.UNKNOWN);
+			IProcessingInfo<File> processingInfo = ScanConverterWSD.convert(file, spectrum, supplier.getId(), monitor);
+			ProcessingInfoPartSupport.getInstance().update(processingInfo);
+			processingInfo.getProcessingResult();
+			monitor.done();
 		};
 		try {
 			dialog.run(true, false, runnable);

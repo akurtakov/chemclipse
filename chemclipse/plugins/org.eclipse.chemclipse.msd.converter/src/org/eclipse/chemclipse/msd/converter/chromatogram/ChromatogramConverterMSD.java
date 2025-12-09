@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.chromatogram.xxd.calculator.io.AMDISConverter;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.io.MassLibConverter;
 import org.eclipse.chemclipse.converter.chromatogram.AbstractChromatogramConverter;
 import org.eclipse.chemclipse.converter.chromatogram.IChromatogramConverter;
-import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.columns.ISeparationColumnIndices;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.identifier.ComparisonResult;
@@ -38,12 +37,10 @@ import org.eclipse.chemclipse.msd.model.core.IChromatogramPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public final class ChromatogramConverterMSD extends AbstractChromatogramConverter<IChromatogramPeakMSD, IChromatogramMSD> implements IChromatogramConverter<IChromatogramPeakMSD, IChromatogramMSD> {
 
-	private static final Logger logger = Logger.getLogger(ChromatogramConverterMSD.class);
 	private static IChromatogramConverter<IChromatogramPeakMSD, IChromatogramMSD> instance = null;
 
 	public ChromatogramConverterMSD() {
@@ -120,13 +117,9 @@ public final class ChromatogramConverterMSD extends AbstractChromatogramConverte
 
 			if(file != null) {
 				MassLibConverter massLibConverter = new MassLibConverter();
-				try {
-					IProcessingInfo<ISeparationColumnIndices> processingInfo = massLibConverter.parseRetentionIndices(file);
-					ISeparationColumnIndices separationColumnIndices = processingInfo.getProcessingResult();
-					chromatogramMSD.getSeparationColumnIndices().putAll(separationColumnIndices);
-				} catch(TypeCastException e) {
-					logger.warn(e);
-				}
+				IProcessingInfo<ISeparationColumnIndices> processingInfo = massLibConverter.parseRetentionIndices(file);
+				ISeparationColumnIndices separationColumnIndices = processingInfo.getProcessingResult();
+				chromatogramMSD.getSeparationColumnIndices().putAll(separationColumnIndices);
 			}
 		}
 	}
@@ -143,21 +136,17 @@ public final class ChromatogramConverterMSD extends AbstractChromatogramConverte
 				String referenceIdentifierMarker = PreferenceSupplier.getReferenceIdentifierMarker();
 				String referenceIdentifierPrefix = PreferenceSupplier.getReferenceIdentifierPrefix();
 
-				try {
-					IProcessingInfo<Map<Integer, String>> processingInfo = massLibConverter.parseTargets(file);
-					Map<Integer, String> targets = processingInfo.getProcessingResult();
-					for(Map.Entry<Integer, String> target : targets.entrySet()) {
-						IScan scan = chromatogramMSD.getScan(target.getKey());
-						if(scan != null && scan instanceof IScanMSD scanMSD) {
-							ILibraryInformation libraryInformation = new LibraryInformation();
-							libraryInformationSupport.extractNameAndReferenceIdentifier(target.getValue(), libraryInformation, referenceIdentifierMarker, referenceIdentifierPrefix);
-							IComparisonResult comparisonResult = ComparisonResult.COMPARISON_RESULT_BEST_MATCH;
-							IIdentificationTarget scanTargetMSD = new IdentificationTarget(libraryInformation, comparisonResult);
-							scanMSD.getTargets().add(scanTargetMSD);
-						}
+				IProcessingInfo<Map<Integer, String>> processingInfo = massLibConverter.parseTargets(file);
+				Map<Integer, String> targets = processingInfo.getProcessingResult();
+				for(Map.Entry<Integer, String> target : targets.entrySet()) {
+					IScan scan = chromatogramMSD.getScan(target.getKey());
+					if(scan != null && scan instanceof IScanMSD scanMSD) {
+						ILibraryInformation libraryInformation = new LibraryInformation();
+						libraryInformationSupport.extractNameAndReferenceIdentifier(target.getValue(), libraryInformation, referenceIdentifierMarker, referenceIdentifierPrefix);
+						IComparisonResult comparisonResult = ComparisonResult.COMPARISON_RESULT_BEST_MATCH;
+						IIdentificationTarget scanTargetMSD = new IdentificationTarget(libraryInformation, comparisonResult);
+						scanMSD.getTargets().add(scanTargetMSD);
 					}
-				} catch(TypeCastException e) {
-					logger.warn(e);
 				}
 			}
 		}
@@ -170,14 +159,10 @@ public final class ChromatogramConverterMSD extends AbstractChromatogramConverte
 			File file = getFile(directory, fileName, ".cal");
 
 			if(file != null) {
-				try {
-					AMDISConverter amdisConverter = new AMDISConverter();
-					IProcessingInfo<ISeparationColumnIndices> processingInfo = amdisConverter.parseRetentionIndices(file);
-					ISeparationColumnIndices separationColumnIndices = processingInfo.getProcessingResult();
-					chromatogramMSD.getSeparationColumnIndices().putAll(separationColumnIndices);
-				} catch(TypeCastException e) {
-					logger.warn(e);
-				}
+				AMDISConverter amdisConverter = new AMDISConverter();
+				IProcessingInfo<ISeparationColumnIndices> processingInfo = amdisConverter.parseRetentionIndices(file);
+				ISeparationColumnIndices separationColumnIndices = processingInfo.getProcessingResult();
+				chromatogramMSD.getSeparationColumnIndices().putAll(separationColumnIndices);
 			}
 		}
 	}

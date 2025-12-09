@@ -16,8 +16,6 @@ package org.eclipse.chemclipse.processing.core;
 
 import java.util.List;
 
-import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
-
 public interface IProcessingInfo<T> extends IMessageConsumer, IMessageProvider {
 
 	/**
@@ -95,22 +93,6 @@ public interface IProcessingInfo<T> extends IMessageConsumer, IMessageProvider {
 	 * @return Object
 	 */
 	T getProcessingResult();
-
-	/**
-	 * The expected return type an be defined.
-	 *
-	 * @deprecated
-	 */
-	@Deprecated
-	<V> V getProcessingResult(Class<V> type) throws TypeCastException;
-
-	/**
-	 * Creates a new TypeCastException and adds a IProcessingMessage.
-	 *
-	 * @deprecated
-	 */
-	@Deprecated
-	TypeCastException createTypeCastException(String description, Class<?> actual, Class<?> expected);
 
 	boolean isEmpty();
 

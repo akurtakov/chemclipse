@@ -25,7 +25,6 @@ import org.eclipse.chemclipse.processing.core.IProcessingMessage;
 import org.eclipse.chemclipse.processing.core.MessageType;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingMessage;
-import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
@@ -130,12 +129,8 @@ public class PeakConverterMSD {
 					 */
 					processingInfo = importConverter.convert(file, monitor);
 					if(!processingInfo.hasErrorMessages()) {
-						try {
-							processingInfo.getProcessingResult();
-							return processingInfo;
-						} catch(TypeCastException e) {
-							logger.warn(e);
-						}
+						processingInfo.getProcessingResult();
+						return processingInfo;
 					}
 				}
 			}

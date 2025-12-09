@@ -12,9 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.processing.core;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
-import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -32,17 +31,9 @@ public class ProcessingInfo_7_Test {
 		processingInfo.setProcessingResult(null);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Test
 	public void testProcessingInfo_1() {
 
-		assertThrows(TypeCastException.class, () -> processingInfo.getProcessingResult(String.class));
-	}
-
-	@SuppressWarnings("deprecation")
-	@Test
-	public void testProcessingInfo_2() {
-
-		assertThrows(TypeCastException.class, () -> processingInfo.getProcessingResult(Integer.class));
+		assertNull(processingInfo.getProcessingResult());
 	}
 }

@@ -28,7 +28,6 @@ import org.eclipse.chemclipse.converter.exceptions.FileIsEmptyException;
 import org.eclipse.chemclipse.converter.exceptions.FileIsNotReadableException;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -67,16 +66,12 @@ public class BatchRunnable implements IRunnableWithProgress {
 
 	private void process(IProcessingInfo<IPeakIdentificationBatchProcessReport> processingInfo) {
 
-		try {
-			final IPeakIdentificationBatchProcessReport report = processingInfo.getProcessingResult();
-			ProcessingInfoPartSupport.getInstance().update(processingInfo, false);
-			/*
-			 * Update the peak results page
-			 */
-			SelectionUpdateListener selectionUpdateListener = new ResultsPage.SelectionUpdateListener();
-			selectionUpdateListener.update(report.getPeaks());
-		} catch(TypeCastException e) {
-			logger.warn(e);
-		}
+		final IPeakIdentificationBatchProcessReport report = processingInfo.getProcessingResult();
+		ProcessingInfoPartSupport.getInstance().update(processingInfo, false);
+		/*
+		 * Update the peak results page
+		 */
+		SelectionUpdateListener selectionUpdateListener = new ResultsPage.SelectionUpdateListener();
+		selectionUpdateListener.update(report.getPeaks());
 	}
 }
