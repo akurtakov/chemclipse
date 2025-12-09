@@ -23,6 +23,10 @@ public class IdentificationTargetSupport {
 
 	public static Image getRatingSymbol(IIdentificationTarget identificationTarget) {
 
+		if(identificationTarget == null) {
+			return null;
+		}
+
 		IComparisonResult comparisonResult = identificationTarget.getComparisonResult();
 		IRatingSupplier ratingSupplier = comparisonResult.getRatingSupplier();
 
