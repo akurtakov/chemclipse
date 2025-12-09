@@ -9,7 +9,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: org.eclipse.chemclipse.processing;version="1.0.0",
  org.eclipse.chemclipse.processing.converter;version="1.0.0",
  org.eclipse.chemclipse.processing.core,
- org.eclipse.chemclipse.processing.core.exceptions,
  org.eclipse.chemclipse.processing.detector;version="1.0.0",
  org.eclipse.chemclipse.processing.filter;version="1.0.0",
  org.eclipse.chemclipse.processing.methods;version="1.0.0",

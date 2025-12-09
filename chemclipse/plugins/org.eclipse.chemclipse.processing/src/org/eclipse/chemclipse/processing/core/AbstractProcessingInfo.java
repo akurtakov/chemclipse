@@ -16,8 +16,6 @@ package org.eclipse.chemclipse.processing.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
-
 public abstract class AbstractProcessingInfo<T> implements IProcessingInfo<T> {
 
 	private List<IProcessingMessage> processingMessages = new ArrayList<>();
@@ -104,17 +102,6 @@ public abstract class AbstractProcessingInfo<T> implements IProcessingInfo<T> {
 	}
 
 	@Override
-	public <V> V getProcessingResult(Class<V> type) throws TypeCastException {
-
-		if(type.isInstance(processingResult)) {
-			return type.cast(processingResult);
-		} else {
-			Class<?> actualClass = processingResult == null ? Exception.class : processingResult.getClass();
-			throw createTypeCastException("Processing Info", actualClass, type);
-		}
-	}
-
-	@Override
 	public boolean hasErrorMessages() {
 
 		for(IProcessingMessage processingMessage : processingMessages) {
@@ -134,16 +121,6 @@ public abstract class AbstractProcessingInfo<T> implements IProcessingInfo<T> {
 			}
 		}
 		return false;
-	}
-
-	@Deprecated
-	@Override
-	public TypeCastException createTypeCastException(String description, Class<?> actual, Class<?> expected) {
-
-		String message = "Failed to cast from " + actual + " to " + expected;
-		IProcessingMessage processingMessage = new ProcessingMessage(MessageType.ERROR, description, message);
-		addMessage(processingMessage);
-		return new TypeCastException(message);
 	}
 
 	@Override

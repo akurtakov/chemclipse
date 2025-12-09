@@ -22,7 +22,6 @@ import org.eclipse.chemclipse.model.supplier.IChromatogramSelectionProcessSuppli
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
-import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
 import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
@@ -72,9 +71,6 @@ public class BatchProcess {
 						processingInfo.addErrorMessage(DESCRIPTION, "Failure to process: " + file);
 						processingInfo.addMessages(inputProcessingInfo);
 					}
-				} catch(TypeCastException e) {
-					logger.warn(e);
-					processingInfo.addErrorMessage(DESCRIPTION, "Failure to process: " + file);
 				} catch(ChromatogramIsNullException e) {
 					logger.error(e);
 					processingInfo.addErrorMessage(DESCRIPTION, "Chromatogram is empty: " + file);

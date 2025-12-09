@@ -33,7 +33,6 @@ import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
 import org.eclipse.chemclipse.msd.swt.ui.support.DatabaseFileSupport;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
@@ -192,16 +191,12 @@ public class MassSpectrumEditor implements IMassSpectrumEditor {
 				 */
 				monitor.subTask("Save Mass Spectrum");
 				IProcessingInfo<File> processingInfo = DatabaseConverter.convert(massSpectrumFile, massSpectra, false, converterId, monitor);
-				try {
-					/*
-					 * If no failures have occurred, set the dirty status to
-					 * false.
-					 */
-					processingInfo.getProcessingResult();
-					dirtyable.setDirty(false);
-				} catch(TypeCastException e) {
-					logger.warn(e);
-				}
+				/*
+				 * If no failures have occurred, set the dirty status to
+				 * false.
+				 */
+				processingInfo.getProcessingResult();
+				dirtyable.setDirty(false);
 			} else {
 				throw new NoMassSpectrumConverterAvailableException();
 			}

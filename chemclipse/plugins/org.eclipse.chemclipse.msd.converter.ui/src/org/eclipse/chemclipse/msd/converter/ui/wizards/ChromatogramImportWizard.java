@@ -24,7 +24,6 @@ import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.processing.core.exceptions.TypeCastException;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.wizards.RawFileSelectionWizardPage;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -82,7 +81,7 @@ public class ChromatogramImportWizard extends Wizard implements IImportWizard {
 			return false;
 		}
 		/*
-		 * Import the chromatograms.
+		 * Convert each chromatogram
 		 */
 		IRunnableWithProgress runnableWithProgress = monitor -> {
 
@@ -91,27 +90,20 @@ public class ChromatogramImportWizard extends Wizard implements IImportWizard {
 			 */
 			for(File inputFile : inputFiles) {
 				/*
-				 * Convert each chromatogram
+				 * Import
 				 */
-				try {
-					/*
-					 * Import
-					 */
-					IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(inputFile, monitor);
-					IChromatogramMSD chromatogram = processingInfo.getProcessingResult();
+				IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(inputFile, monitor);
+				IChromatogramMSD chromatogram = processingInfo.getProcessingResult();
 
-					String directory = importDirectory;
-					if(!importDirectory.endsWith(File.separator)) {
-						directory += File.separator;
-					}
-					/*
-					 * Export
-					 */
-					File outputFile = new File(directory + chromatogram.getName());
-					ChromatogramConverterMSD.getInstance().convert(outputFile, chromatogram, VersionConstants.CONVERTER_ID_CHROMATOGRAM, monitor);
-				} catch(TypeCastException e) {
-					logger.warn(e);
+				String directory = importDirectory;
+				if(!importDirectory.endsWith(File.separator)) {
+					directory += File.separator;
 				}
+				/*
+				 * Export
+				 */
+				File outputFile = new File(directory + chromatogram.getName());
+				ChromatogramConverterMSD.getInstance().convert(outputFile, chromatogram, VersionConstants.CONVERTER_ID_CHROMATOGRAM, monitor);
 			}
 		};
 		try {
