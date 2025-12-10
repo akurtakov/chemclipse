@@ -26,12 +26,6 @@ public class FilterSettingsRemover extends AbstractChromatogramFilterSettings {
 	@StringSettingsProperty(regExp = PreferenceSupplier.CHECK_REMOVER_PATTERN, allowEmpty = false)
 	private String scanRemoverPattern = PreferenceSupplier.DEF_REMOVER_PATTERN;
 
-	@Override
-	public void setSystemSettings() {
-
-		scanRemoverPattern = PreferenceSupplier.getScanRemoverPattern();
-	}
-
 	public String getScanRemoverPattern() {
 
 		return scanRemoverPattern;

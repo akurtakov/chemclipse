@@ -23,12 +23,6 @@ public abstract class AbstractProcessSettings implements IProcessSettings {
 
 	private final List<LiteratureReference> literatureReference = new ArrayList<>();
 
-	@Override
-	@Deprecated
-	public void setSystemSettings() {
-
-	}
-
 	/**
 	 * Replaces the pattern and extension.
 	 * For example {chromatogram_name}{extension} is validated to TestChromatogram.csv
