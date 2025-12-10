@@ -31,16 +31,5 @@ public interface IProcessSettings {
 	 */
 	public static final String VARIABLE_CURRENT_DIRECTORY = "{current_directory}";
 
-	/**
-	 * Use this method to set specific system settings.
-	 * 
-	 * @deprecated this method will be removed soon
-	 */
-	@Deprecated
-	default void setSystemSettings() {
-
-		throw new UnsupportedOperationException();
-	}
-
 	List<LiteratureReference> getLiteratureReferences();
 }

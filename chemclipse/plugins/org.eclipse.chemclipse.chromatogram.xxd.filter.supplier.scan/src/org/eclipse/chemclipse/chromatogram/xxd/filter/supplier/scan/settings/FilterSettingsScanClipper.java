@@ -26,12 +26,6 @@ public class FilterSettingsScanClipper extends AbstractChromatogramFilterSetting
 	@StringSettingsProperty(allowEmpty = false)
 	private String scanNumberPattern = PreferenceSupplier.DEF_CLIP_SCAN_NUMBER_PATTERN;
 
-	@Override
-	public void setSystemSettings() {
-
-		scanNumberPattern = PreferenceSupplier.getScanNumberPattern();
-	}
-
 	public String getScanNumberPattern() {
 
 		return scanNumberPattern;
