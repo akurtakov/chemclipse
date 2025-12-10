@@ -21,18 +21,6 @@ import java.util.List;
 public interface IAnalysisSegment extends IScanRange, IRetentionTimeRange {
 
 	/**
-	 * Returns the width of the analysis segment in scan units.
-	 * 
-	 * @deprecated use {@link #getWidth()} instead
-	 * @return int
-	 */
-	@Deprecated
-	default int getSegmentWidth() {
-
-		return getWidth();
-	}
-
-	/**
 	 * An {@link IAnalysisSegment} might be further be separated, this method allows access to its child segments
 	 * 
 	 * @return the child segments for this segment
