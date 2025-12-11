@@ -135,20 +135,6 @@ public abstract class AbstractMarkedWavelengths implements IMarkedWavelengths {
 		return wavelengths;
 	}
 
-	@Deprecated
-	@Override
-	public void add(int ionStart, int ionStop) {
-
-		if(ionStart > ionStop) {
-			int tmp = ionStart;
-			ionStart = ionStop;
-			ionStop = tmp;
-		}
-		for(int i = ionStart; i <= ionStop; i++) {
-			markedWavelengths.add(new MarkedWavelength(i));
-		}
-	}
-
 	@Override
 	public void add(float... wavelenghts) {
 

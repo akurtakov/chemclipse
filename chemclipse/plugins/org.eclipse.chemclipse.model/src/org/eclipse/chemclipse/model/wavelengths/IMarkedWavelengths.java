@@ -34,14 +34,4 @@ public interface IMarkedWavelengths extends IMarkedTraces<IMarkedWavelength> {
 	void add(float... wavelength);
 
 	void add(Collection<? extends Number> wavelengths);
-
-	/**
-	 * Adds the wavelength range with magnification factor = 1.
-	 * Deprecated because wavelength could be double values
-	 * 
-	 * @param wavelengthStart
-	 * @param wavelengthStop
-	 */
-	@Deprecated
-	void add(int wavelengthStart, int wavelengthStop);
 }
