@@ -78,7 +78,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.comparator.SortOrder;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.text.ValueFormat;
-import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.marker.PositionMarker;
 import org.eclipse.chemclipse.swt.ui.marker.RetentionIndexMarker;
@@ -520,17 +519,6 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 			chromatogramSelection.update(true);
 			adjustChromatogramSelectionRange();
 		}
-	}
-
-	/**
-	 * @deprecated use {@link #processChromatogram(IRunnableWithProgress, Shell)}
-	 * 
-	 * @param runnable
-	 */
-	@Deprecated
-	protected void processChromatogram(IRunnableWithProgress runnable) {
-
-		processChromatogram(runnable, DisplayUtils.getShell());
 	}
 
 	protected void processChromatogram(IRunnableWithProgress runnable, Shell shell) {
