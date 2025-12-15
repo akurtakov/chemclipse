@@ -65,13 +65,13 @@ public class ProcessMethodProfiles extends Composite {
 	public void setInput(ProcessMethod processMethod) {
 
 		this.processMethod = processMethod;
-		updateProfilesColum();
+		updateProfilesColumn();
 	}
 
 	public void setEnabledEdit(boolean enabledEdit) {
 
 		this.enabledEdit = enabledEdit;
-		updateProfilesColum();
+		updateProfilesColumn();
 	}
 
 	public void setUpdateListener(IUpdateListener updateListener) {
@@ -92,7 +92,7 @@ public class ProcessMethodProfiles extends Composite {
 		createButtonAdd(this);
 		createButtonDelete(this);
 
-		updateProfilesColum();
+		updateProfilesColumn();
 	}
 
 	private void createComboViewerProfiles(Composite composite) {
@@ -127,7 +127,7 @@ public class ProcessMethodProfiles extends Composite {
 					 */
 					String activeProfile = getActiveProfile();
 					processMethod.setActiveProfile(activeProfile);
-					updateProfilesColum();
+					updateProfilesColumn();
 					fireUpdate();
 				}
 			}
@@ -222,7 +222,7 @@ public class ProcessMethodProfiles extends Composite {
 						for(IProcessEntry processEntry : processMethod.getEntries()) {
 							processEntry.copySettings(previousProfile);
 						}
-						updateProfilesColum();
+						updateProfilesColumn();
 						fireUpdate();
 					}
 				}
@@ -254,7 +254,7 @@ public class ProcessMethodProfiles extends Composite {
 						if(SWT.YES == decision) {
 							processMethod.getProfileColumnsMap().remove(activeProfile);
 							processMethod.deleteProfile(activeProfile);
-							updateProfilesColum();
+							updateProfilesColumn();
 							fireUpdate();
 						}
 					}
@@ -296,7 +296,7 @@ public class ProcessMethodProfiles extends Composite {
 		return separationColumnType;
 	}
 
-	private void updateProfilesColum() {
+	private void updateProfilesColumn() {
 
 		updateProfiles();
 		updateColumns();
