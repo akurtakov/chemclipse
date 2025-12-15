@@ -106,6 +106,11 @@ public class ProcessMethodToolbar extends ToolBar {
 		this.processMethod = processMethod;
 	}
 
+	public ProcessMethod getProcessMethod() {
+
+		return processMethod;
+	}
+
 	public void setStructuredViewer(StructuredViewer structuredViewer) {
 
 		this.structuredViewer = structuredViewer;

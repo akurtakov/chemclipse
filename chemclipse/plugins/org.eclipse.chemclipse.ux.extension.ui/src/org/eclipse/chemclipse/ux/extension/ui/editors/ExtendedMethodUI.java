@@ -308,6 +308,7 @@ public class ExtendedMethodUI extends Composite implements IExtendedPartUI {
 			@Override
 			public void update() {
 
+				toolbarProfile.get().setInput(processMethodToolbar.getProcessMethod());
 				updateProcessMethod();
 				setMethodDirty(true);
 			}
