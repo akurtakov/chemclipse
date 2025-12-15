@@ -23,7 +23,7 @@ import org.eclipse.chemclipse.processing.DataCategory;
 
 public final class ProcessEntry extends ListProcessEntryContainer implements IProcessEntry {
 
-	private final ProcessEntryContainer parent;
+	private final IProcessEntryContainer parent;
 	private final EnumSet<DataCategory> categories = EnumSet.noneOf(DataCategory.class);
 	private final Map<String, String> jsonSettingsMap = new HashMap<>();
 
@@ -31,12 +31,12 @@ public final class ProcessEntry extends ListProcessEntryContainer implements IPr
 	private String activeProfile = DEFAULT_PROFILE;
 	private boolean skipValidation = false;
 
-	public ProcessEntry(ProcessEntryContainer parent) {
+	public ProcessEntry(IProcessEntryContainer parent) {
 
 		this(null, parent);
 	}
 
-	public ProcessEntry(IProcessEntry other, ProcessEntryContainer newParent) {
+	public ProcessEntry(IProcessEntry other, IProcessEntryContainer newParent) {
 
 		super(other);
 		parent = newParent;
@@ -140,7 +140,7 @@ public final class ProcessEntry extends ListProcessEntryContainer implements IPr
 	}
 
 	@Override
-	public ProcessEntryContainer getParent() {
+	public IProcessEntryContainer getParent() {
 
 		return parent;
 	}

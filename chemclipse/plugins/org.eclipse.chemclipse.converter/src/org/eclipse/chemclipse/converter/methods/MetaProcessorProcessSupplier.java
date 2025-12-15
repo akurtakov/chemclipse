@@ -14,7 +14,7 @@
 package org.eclipse.chemclipse.converter.methods;
 
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.supplier.AbstractProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessExecutionConsumer;
 import org.eclipse.chemclipse.processing.supplier.IProcessExecutor;
@@ -49,7 +49,7 @@ public final class MetaProcessorProcessSupplier extends AbstractProcessSupplier<
 		if(settings instanceof MetaProcessorSettings processorSettings) {
 			IProcessExecutionConsumer<?> callerDelegate = context.getContextObject(IProcessExecutionConsumer.class);
 			if(callerDelegate != null) {
-				ProcessEntryContainer.applyProcessEntries(processMethod, context, (processEntry, processSupplier) -> processorSettings.getProcessorPreferences(processEntry, processEntry.getPreferences(processSupplier)), callerDelegate);
+				IProcessEntryContainer.applyProcessEntries(processMethod, context, (processEntry, processSupplier) -> processorSettings.getProcessorPreferences(processEntry, processEntry.getPreferences(processSupplier)), callerDelegate);
 			}
 		}
 	}

@@ -29,7 +29,7 @@ import org.eclipse.chemclipse.msd.swt.ui.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.processing.core.IMessageProvider;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
@@ -191,7 +191,7 @@ public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI
 		methodSupportUI.setMethodListener((processMethod, monitor) -> executeMethod(massSpectrum, scanMSD -> {
 
 			IProcessingInfo<?> processingInfo = new ProcessingInfo<>();
-			ProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, processingInfo, processTypeSupport), IScanProcessSupplier.createConsumer(scanMSD));
+			IProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, processingInfo, processTypeSupport), IScanProcessSupplier.createConsumer(scanMSD));
 			scanMSD.setDirty(true);
 			UpdateNotifier.update(scanMSD);
 			if(scanMSD instanceof IStandaloneMassSpectrum standaloneMassSpectrum) {

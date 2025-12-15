@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.chemclipse.processing.methods.IProcessEntry;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
@@ -47,16 +47,16 @@ public class ResumeMethodDialog extends TitleAreaDialog {
 	private AtomicReference<ComboViewer> comboViewerResumeControl = new AtomicReference<>();
 	private AtomicReference<Label> labelResumeControl = new AtomicReference<>();
 
-	private String profile = ProcessEntryContainer.DEFAULT_PROFILE;
+	private String profile = IProcessEntryContainer.DEFAULT_PROFILE;
 	private int resumeIndex = 0;
-	private ProcessEntryContainer container;
+	private IProcessEntryContainer container;
 
 	public ResumeMethodDialog(Shell shell) {
 
 		super(shell);
 	}
 
-	public void setInput(ProcessEntryContainer container) {
+	public void setInput(IProcessEntryContainer container) {
 
 		this.container = container;
 	}
@@ -122,9 +122,9 @@ public class ResumeMethodDialog extends TitleAreaDialog {
 			profile = container.getActiveProfile();
 			ComboViewer comboViewer = comboViewerProfileControl.get();
 			List<String> profiles = new ArrayList<>(container.getProfiles());
-			profiles.remove(ProcessEntryContainer.DEFAULT_PROFILE);
+			profiles.remove(IProcessEntryContainer.DEFAULT_PROFILE);
 			Collections.sort(profiles);
-			profiles.add(0, ProcessEntryContainer.DEFAULT_PROFILE);
+			profiles.add(0, IProcessEntryContainer.DEFAULT_PROFILE);
 			comboViewer.setInput(profiles);
 			comboViewer.setSelection(new StructuredSelection(profile));
 		}
@@ -231,7 +231,7 @@ public class ResumeMethodDialog extends TitleAreaDialog {
 					resumeIndex = combo.getSelectionIndex() - 1;
 					labelResumeControl.get().setText(processEntry.getDescription());
 				} else {
-					resumeIndex = ProcessEntryContainer.DEFAULT_RESUME_INDEX;
+					resumeIndex = IProcessEntryContainer.DEFAULT_RESUME_INDEX;
 					labelResumeControl.get().setText("");
 				}
 			}

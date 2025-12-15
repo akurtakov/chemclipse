@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.processing.methods;
 
-public abstract class AbstractProcessEntryContainer implements ProcessEntryContainer {
+public abstract class AbstractProcessEntryContainer implements IProcessEntryContainer {
 
 	/*
 	 * The flag supportResume shall be persisted. By default, it is false, due to the following reasons:
@@ -23,7 +23,7 @@ public abstract class AbstractProcessEntryContainer implements ProcessEntryConta
 	 * to select the entry point if needed.
 	 */
 	private boolean supportResume = false;
-	private int resumeIndex = ProcessEntryContainer.DEFAULT_RESUME_INDEX; // transient
+	private int resumeIndex = IProcessEntryContainer.DEFAULT_RESUME_INDEX; // transient
 
 	@Override
 	public boolean isSupportResume() {

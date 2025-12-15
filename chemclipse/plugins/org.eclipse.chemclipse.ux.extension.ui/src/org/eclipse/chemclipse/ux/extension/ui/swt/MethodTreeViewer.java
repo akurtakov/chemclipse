@@ -21,8 +21,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiFunction;
 
 import org.eclipse.chemclipse.processing.methods.IProcessEntry;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.ProcessEntry;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
@@ -106,12 +106,12 @@ public class MethodTreeViewer extends TreeViewer {
 
 				if(element instanceof IProcessEntry entry) {
 					IProcessSupplier<?> supplier = processingSupport.getSupplier(entry.getProcessorId());
-					if(supplier instanceof ProcessEntryContainer processEntryContainer) {
+					if(supplier instanceof IProcessEntryContainer processEntryContainer) {
 						return processEntryContainer.getNumberOfEntries() > 0;
 					}
 				}
 
-				if(element instanceof ProcessEntryContainer processEntryContainer) {
+				if(element instanceof IProcessEntryContainer processEntryContainer) {
 					return processEntryContainer.getNumberOfEntries() > 0;
 				}
 
@@ -130,7 +130,7 @@ public class MethodTreeViewer extends TreeViewer {
 			@Override
 			public Object[] getElements(Object inputElement) {
 
-				if(inputElement instanceof ProcessEntryContainer container) {
+				if(inputElement instanceof IProcessEntryContainer container) {
 					return entryList(container, false);
 				}
 
@@ -157,12 +157,12 @@ public class MethodTreeViewer extends TreeViewer {
 
 				if(parentElement instanceof IProcessEntry entry) {
 					IProcessSupplier<?> supplier = processingSupport.getSupplier(entry.getProcessorId());
-					if(supplier instanceof ProcessEntryContainer processEntryContainer) {
+					if(supplier instanceof IProcessEntryContainer processEntryContainer) {
 						return entryList(processEntryContainer, true);
 					}
 				}
 
-				if(parentElement instanceof ProcessEntryContainer processEntryContainer) {
+				if(parentElement instanceof IProcessEntryContainer processEntryContainer) {
 					return entryList(processEntryContainer, false);
 				}
 

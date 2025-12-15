@@ -20,14 +20,14 @@ import java.util.Set;
 
 import org.eclipse.chemclipse.processing.methods.IProcessEntry;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.supplier.AbstractProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessExecutionConsumer;
 import org.eclipse.chemclipse.processing.supplier.IProcessExecutor;
 import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
 
-public final class UserMethodProcessSupplier extends AbstractProcessSupplier<Void> implements ProcessEntryContainer, IProcessExecutor {
+public final class UserMethodProcessSupplier extends AbstractProcessSupplier<Void> implements IProcessEntryContainer, IProcessExecutor {
 
 	private static final String SKIP_MESSAGE = "SKIP CHECK: Is this method used?";
 
@@ -55,7 +55,7 @@ public final class UserMethodProcessSupplier extends AbstractProcessSupplier<Voi
 	public <X> void execute(IProcessorPreferences<X> preferences, ProcessExecutionContext context) throws Exception {
 
 		IProcessExecutionConsumer<?> consumer = context.getContextObject(IProcessExecutionConsumer.class);
-		ProcessEntryContainer.applyProcessEntries(processMethod, context, consumer);
+		IProcessEntryContainer.applyProcessEntries(processMethod, context, consumer);
 	}
 
 	@Override

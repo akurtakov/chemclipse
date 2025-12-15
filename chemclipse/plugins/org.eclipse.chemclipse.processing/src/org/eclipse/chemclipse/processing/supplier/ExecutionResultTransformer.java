@@ -14,11 +14,11 @@ package org.eclipse.chemclipse.processing.supplier;
 
 import java.io.IOException;
 
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 
 /**
  * 
- * A {@link ExecutionResultTransformer} can transform the consumer of a {@link ProcessEntryContainer} child invocation
+ * A {@link ExecutionResultTransformer} can transform the consumer of a {@link IProcessEntryContainer} child invocation
  */
 public interface ExecutionResultTransformer<SettingType> extends IProcessSupplier<SettingType> {
 

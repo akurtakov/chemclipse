@@ -17,15 +17,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiFunction;
 
 import org.eclipse.chemclipse.model.handler.IModificationHandler;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.methods.IProcessEntry;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
@@ -40,7 +39,6 @@ import org.eclipse.chemclipse.ux.extension.ui.swt.ProcessMethodProfiles;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ProcessMethodToolbar;
 import org.eclipse.chemclipse.xxd.process.ui.preferences.PreferencePageChromatogramExport;
 import org.eclipse.chemclipse.xxd.process.ui.preferences.PreferencePageReportExport;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
@@ -75,7 +73,7 @@ public class ExtendedMethodUI extends Composite implements IExtendedPartUI {
 
 	private ProcessMethod processMethod;
 	private IModificationHandler modificationHandler;
-	private Collection<ProcessEntryContainer> postActions;
+	private Collection<IProcessEntryContainer> postActions;
 
 	private boolean readOnly = false;
 
@@ -101,7 +99,7 @@ public class ExtendedMethodUI extends Composite implements IExtendedPartUI {
 		setInputs(processMethod, Collections.emptyList());
 	}
 
-	public void setInputs(IProcessMethod processMethod, Collection<ProcessEntryContainer> postActions) {
+	public void setInputs(IProcessMethod processMethod, Collection<IProcessEntryContainer> postActions) {
 
 		this.postActions = postActions;
 		this.processMethod = new ProcessMethod(processMethod);
@@ -310,36 +308,13 @@ public class ExtendedMethodUI extends Composite implements IExtendedPartUI {
 			@Override
 			public void update() {
 
+				toolbarProfile.get().setInput(processMethodToolbar.getProcessMethod());
 				updateProcessMethod();
 				setMethodDirty(true);
 			}
 		});
 
 		toolbarButtons.set(processMethodToolbar);
-	}
-
-	public void loadMethodFile(IProcessMethod method) {
-
-		if(method != null) {
-			List<IProcessEntry> copied = new ArrayList<>();
-			method.forEach(entry -> {
-				copied.add(processMethod.addProcessEntry(entry));
-			});
-			updateProcessMethod();
-			select(copied);
-		}
-	}
-
-	private void select(Iterable<? extends IProcessEntry> entries) {
-
-		ArrayList<IProcessEntry> list = new ArrayList<>();
-		entries.forEach(list::add);
-		StructuredSelection structuredSelection = new StructuredSelection(list);
-		treeViewer.get().setSelection(structuredSelection);
-		Object firstElement = structuredSelection.getFirstElement();
-		if(firstElement != null) {
-			treeViewer.get().reveal(firstElement);
-		}
 	}
 
 	private void updateProcessMethod() {

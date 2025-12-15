@@ -22,7 +22,7 @@ import java.util.Set;
 
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.methods.ProcessEntry;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,14 +36,14 @@ public class ProcessEntry_1_Test {
 
 		Set<DataCategory> dataCategories = new HashSet<>();
 		dataCategories.add(DataCategory.MSD);
-		ProcessEntryContainer processEntryContainer = new ProcessMethod(dataCategories);
+		IProcessEntryContainer processEntryContainer = new ProcessMethod(dataCategories);
 		processEntry = new ProcessEntry(processEntryContainer);
 	}
 
 	@Test
 	public void test1() {
 
-		assertEquals(ProcessEntryContainer.DEFAULT_PROFILE, processEntry.getActiveProfile());
+		assertEquals(IProcessEntryContainer.DEFAULT_PROFILE, processEntry.getActiveProfile());
 		Map<String, String> settingsMap = processEntry.getSettingsMap();
 		assertEquals(0, settingsMap.size()); // Settings are created on-the-fly
 	}
@@ -67,13 +67,13 @@ public class ProcessEntry_1_Test {
 		assertEquals(1, settingsMap1.size());
 		assertTrue(settingsMap1.containsKey("Test"));
 
-		processEntry.setActiveProfile(ProcessEntryContainer.DEFAULT_PROFILE);
+		processEntry.setActiveProfile(IProcessEntryContainer.DEFAULT_PROFILE);
 		processEntry.setSettings("");
 		assertEquals("", processEntry.getSettings());
 		Map<String, String> settingsMap2 = processEntry.getSettingsMap();
 		assertEquals(2, settingsMap2.size());
 		assertTrue(settingsMap2.containsKey("Test"));
-		assertTrue(settingsMap2.containsKey(ProcessEntryContainer.DEFAULT_PROFILE));
+		assertTrue(settingsMap2.containsKey(IProcessEntryContainer.DEFAULT_PROFILE));
 	}
 
 	@Test
@@ -86,14 +86,14 @@ public class ProcessEntry_1_Test {
 		assertEquals(1, settingsMap1.size());
 		assertTrue(settingsMap1.containsKey("Test"));
 		processEntry.deleteProfile("Test");
-		assertEquals(ProcessEntryContainer.DEFAULT_PROFILE, processEntry.getActiveProfile());
+		assertEquals(IProcessEntryContainer.DEFAULT_PROFILE, processEntry.getActiveProfile());
 
-		processEntry.setActiveProfile(ProcessEntryContainer.DEFAULT_PROFILE);
+		processEntry.setActiveProfile(IProcessEntryContainer.DEFAULT_PROFILE);
 		processEntry.setSettings("");
 		assertEquals("", processEntry.getSettings());
 		Map<String, String> settingsMap2 = processEntry.getSettingsMap();
 		assertEquals(1, settingsMap2.size());
 		assertFalse(settingsMap2.containsKey("Test"));
-		assertTrue(settingsMap2.containsKey(ProcessEntryContainer.DEFAULT_PROFILE));
+		assertTrue(settingsMap2.containsKey(IProcessEntryContainer.DEFAULT_PROFILE));
 	}
 }

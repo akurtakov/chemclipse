@@ -19,7 +19,7 @@ import java.util.Set;
 
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.methods.ProcessEntry;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,7 @@ public class ProcessEntry_3_Test {
 
 		Set<DataCategory> dataCategories = new HashSet<>();
 		dataCategories.add(DataCategory.MSD);
-		ProcessEntryContainer processEntryContainer = new ProcessMethod(dataCategories);
+		IProcessEntryContainer processEntryContainer = new ProcessMethod(dataCategories);
 		processEntry = new ProcessEntry(processEntryContainer);
 	}
 
@@ -45,7 +45,7 @@ public class ProcessEntry_3_Test {
 		processEntry.setActiveProfile("My");
 		processEntry.setActiveProfile("Entry");
 
-		processEntry.setActiveProfile(ProcessEntryContainer.DEFAULT_PROFILE);
+		processEntry.setActiveProfile(IProcessEntryContainer.DEFAULT_PROFILE);
 		assertEquals("", processEntry.getSettings());
 		assertEquals("Hello World", processEntry.getSettings("Test"));
 		assertEquals("", processEntry.getSettings("My"));
@@ -64,7 +64,7 @@ public class ProcessEntry_3_Test {
 		processEntry.setActiveProfile("Extended");
 		processEntry.copySettings("Testx");
 
-		processEntry.setActiveProfile(ProcessEntryContainer.DEFAULT_PROFILE);
+		processEntry.setActiveProfile(IProcessEntryContainer.DEFAULT_PROFILE);
 		assertEquals("", processEntry.getSettings());
 		assertEquals("Hello World", processEntry.getSettings("Test"));
 		assertEquals("", processEntry.getSettings("My"));
@@ -82,7 +82,7 @@ public class ProcessEntry_3_Test {
 		processEntry.setActiveProfile("Entry");
 		processEntry.copySettings("Test");
 
-		processEntry.setActiveProfile(ProcessEntryContainer.DEFAULT_PROFILE);
+		processEntry.setActiveProfile(IProcessEntryContainer.DEFAULT_PROFILE);
 		assertEquals("", processEntry.getSettings());
 		assertEquals("Hello World", processEntry.getSettings("Test"));
 		assertEquals("Hello World", processEntry.getSettings("My"));

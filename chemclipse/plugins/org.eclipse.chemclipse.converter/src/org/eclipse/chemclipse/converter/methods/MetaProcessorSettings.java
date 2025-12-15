@@ -19,7 +19,7 @@ import java.util.Map;
 import org.eclipse.chemclipse.processing.methods.IProcessEntry;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
 import org.eclipse.chemclipse.processing.methods.ListProcessEntryContainer;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 
@@ -127,7 +127,7 @@ public class MetaProcessorSettings {
 	 */
 	private static String getProcessEntryIdentifier(IProcessEntry processEntry) {
 
-		ProcessEntryContainer parent = processEntry.getParent();
+		IProcessEntryContainer parent = processEntry.getParent();
 		String activeProfile = parent.getActiveProfile().replace(" ", "").replaceAll("\\P{InBasic_Latin}", "");
 
 		if(parent instanceof ListProcessEntryContainer listProcessEntryContainer) {

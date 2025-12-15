@@ -19,7 +19,7 @@ import org.eclipse.chemclipse.processing.core.ProcessingInfo;
 import org.eclipse.chemclipse.processing.methods.IProcessEntry;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
 import org.eclipse.chemclipse.processing.methods.ListProcessEntryContainer;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
 import org.eclipse.chemclipse.progress.core.InfoType;
 import org.eclipse.chemclipse.progress.core.StatusLineLogger;
@@ -38,7 +38,7 @@ public class MethodSupport {
 	public static final ListProcessEntryContainer getContainer(Object object) {
 
 		if(object instanceof IProcessEntry processEntry) {
-			ProcessEntryContainer parent = processEntry.getParent();
+			IProcessEntryContainer parent = processEntry.getParent();
 			if(parent instanceof ListProcessEntryContainer container) {
 				if(!container.isReadOnly()) {
 					return container;
