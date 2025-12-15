@@ -583,9 +583,12 @@ public class ProcessMethodToolbar extends ToolBar {
 		if(method != null) {
 			List<IProcessEntry> copied = new ArrayList<>();
 			method.forEach(entry -> copied.add(processMethod.addProcessEntry(entry)));
+			select(copied);
+
+			method.getProfiles().forEach(profile -> processMethod.addProfile(profile));
+			processMethod.setActiveProfile(method.getActiveProfile());
 
 			fireUpdate();
-			select(copied);
 		}
 	}
 
