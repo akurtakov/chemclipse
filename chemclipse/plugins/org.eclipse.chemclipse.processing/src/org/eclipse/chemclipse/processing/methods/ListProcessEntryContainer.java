@@ -44,7 +44,7 @@ public class ListProcessEntryContainer extends AbstractProcessEntryContainer {
 		addDefaultProfile();
 	}
 
-	public ListProcessEntryContainer(ProcessEntryContainer other) {
+	public ListProcessEntryContainer(IProcessEntryContainer other) {
 
 		if(other != null) {
 			profiles.addAll(other.getProfiles());

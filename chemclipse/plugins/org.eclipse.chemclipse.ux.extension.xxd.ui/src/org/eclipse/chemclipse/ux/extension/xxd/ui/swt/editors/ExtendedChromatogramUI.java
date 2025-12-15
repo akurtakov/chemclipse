@@ -63,7 +63,7 @@ import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
 import org.eclipse.chemclipse.processing.methods.ProcessEntry;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier.SupplierType;
@@ -1187,7 +1187,7 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 		methodSupportUI.setMethodListener((processMethod, monitor) -> executeMethod(chromatogramSelection, chromatogramSelection -> {
 
 			IProcessingInfo<?> processingInfo = new ProcessingInfo<>();
-			ProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, processingInfo, processTypeSupport), IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection));
+			IProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, processingInfo, processTypeSupport), IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection));
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 			updateResult(processingInfo);
 			AuditTrailSupport.updateAuditTrail(chromatogram, processingInfo, processMethod, processTypeSupport);

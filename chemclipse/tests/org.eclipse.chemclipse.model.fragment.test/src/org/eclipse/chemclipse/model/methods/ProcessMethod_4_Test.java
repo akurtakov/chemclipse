@@ -20,7 +20,7 @@ import java.util.Set;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.methods.IProcessEntry;
 import org.eclipse.chemclipse.processing.methods.ProcessEntry;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,11 +40,11 @@ public class ProcessMethod_4_Test {
 		processMethod.setActiveProfile("Test");
 
 		processEntry = new ProcessEntry(processMethod);
-		processEntry.setActiveProfile(ProcessEntryContainer.DEFAULT_PROFILE);
+		processEntry.setActiveProfile(IProcessEntryContainer.DEFAULT_PROFILE);
 		processEntry.setSettings("Hello World");
 		processEntry.setActiveProfile("Test");
 		processEntry.setSettings("This is another setting");
-		processEntry.setActiveProfile(ProcessEntryContainer.DEFAULT_PROFILE);
+		processEntry.setActiveProfile(IProcessEntryContainer.DEFAULT_PROFILE);
 		processMethod.getEntries().add(processEntry);
 
 		processMethod.setActiveProfile("Test");

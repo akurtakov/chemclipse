@@ -20,7 +20,7 @@ import java.util.Set;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.methods.IProcessEntry;
 import org.eclipse.chemclipse.processing.methods.ProcessEntry;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -60,8 +60,8 @@ public class ProcessMethod_2_Test {
 		assertEquals(2, processMethod.getProfiles().size());
 
 		processMethod.deleteProfile(profile);
-		assertEquals(ProcessEntryContainer.DEFAULT_PROFILE, processMethod.getActiveProfile());
-		assertEquals(ProcessEntryContainer.DEFAULT_PROFILE, processEntry.getActiveProfile());
+		assertEquals(IProcessEntryContainer.DEFAULT_PROFILE, processMethod.getActiveProfile());
+		assertEquals(IProcessEntryContainer.DEFAULT_PROFILE, processEntry.getActiveProfile());
 		assertEquals(1, processMethod.getProfiles().size());
 	}
 }

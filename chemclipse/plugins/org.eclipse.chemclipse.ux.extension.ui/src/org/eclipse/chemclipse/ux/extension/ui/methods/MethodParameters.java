@@ -12,12 +12,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.ui.methods;
 
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 
 public class MethodParameters {
 
-	private String profile = ProcessEntryContainer.DEFAULT_PROFILE;
-	private int resumeIndex = ProcessEntryContainer.DEFAULT_RESUME_INDEX;
+	private String profile = IProcessEntryContainer.DEFAULT_PROFILE;
+	private int resumeIndex = IProcessEntryContainer.DEFAULT_RESUME_INDEX;
 
 	public String getProfile() {
 
@@ -27,7 +27,7 @@ public class MethodParameters {
 	public void setProfile(String profile) {
 
 		if(profile == null || profile.isEmpty()) {
-			this.profile = ProcessEntryContainer.DEFAULT_PROFILE;
+			this.profile = IProcessEntryContainer.DEFAULT_PROFILE;
 		} else {
 			this.profile = profile;
 		}

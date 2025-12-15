@@ -27,7 +27,7 @@ import java.util.TreeMap;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.methods.IProcessEntry;
 import org.eclipse.chemclipse.processing.methods.ProcessEntry;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
@@ -334,7 +334,7 @@ public class ProcessingWizardPage extends WizardPage {
 		Object object = comboViewerProcessor.getStructuredSelection().getFirstElement();
 		if(object instanceof IProcessSupplier) {
 			IProcessSupplier<?> processorSupplier = (IProcessSupplier<?>)object;
-			processEntry = new ProcessEntry((ProcessEntryContainer)null);
+			processEntry = new ProcessEntry((IProcessEntryContainer)null);
 			processEntry.setProcessorId(processorSupplier.getId());
 			processEntry.setName(processorSupplier.getName());
 			processEntry.setDescription(processorSupplier.getDescription());

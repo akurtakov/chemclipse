@@ -20,7 +20,7 @@ import java.util.Set;
 
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,21 +40,21 @@ public class ProcessMethod_1_Test {
 	@Test
 	public void test1() {
 
-		assertEquals(ProcessEntryContainer.DEFAULT_PROFILE, processMethod.getActiveProfile());
+		assertEquals(IProcessEntryContainer.DEFAULT_PROFILE, processMethod.getActiveProfile());
 		Set<String> profiles = processMethod.getProfiles();
 		assertEquals(1, profiles.size());
-		assertTrue(profiles.contains(ProcessEntryContainer.DEFAULT_PROFILE));
+		assertTrue(profiles.contains(IProcessEntryContainer.DEFAULT_PROFILE));
 	}
 
 	@Test
 	public void test2() {
 
-		assertEquals(ProcessEntryContainer.DEFAULT_PROFILE, processMethod.getActiveProfile());
+		assertEquals(IProcessEntryContainer.DEFAULT_PROFILE, processMethod.getActiveProfile());
 		processMethod.addProfile("Test");
-		assertEquals(ProcessEntryContainer.DEFAULT_PROFILE, processMethod.getActiveProfile());
+		assertEquals(IProcessEntryContainer.DEFAULT_PROFILE, processMethod.getActiveProfile());
 		Set<String> profiles = processMethod.getProfiles();
 		assertEquals(2, profiles.size());
-		assertTrue(profiles.contains(ProcessEntryContainer.DEFAULT_PROFILE));
+		assertTrue(profiles.contains(IProcessEntryContainer.DEFAULT_PROFILE));
 		assertTrue(profiles.contains("Test"));
 	}
 
@@ -65,7 +65,7 @@ public class ProcessMethod_1_Test {
 		assertEquals("Test", processMethod.getActiveProfile());
 		Set<String> profiles = processMethod.getProfiles();
 		assertEquals(2, profiles.size());
-		assertTrue(profiles.contains(ProcessEntryContainer.DEFAULT_PROFILE));
+		assertTrue(profiles.contains(IProcessEntryContainer.DEFAULT_PROFILE));
 		assertTrue(profiles.contains("Test"));
 	}
 
@@ -73,10 +73,10 @@ public class ProcessMethod_1_Test {
 	public void test4() {
 
 		processMethod.setActiveProfile(null);
-		assertEquals(ProcessEntryContainer.DEFAULT_PROFILE, processMethod.getActiveProfile());
+		assertEquals(IProcessEntryContainer.DEFAULT_PROFILE, processMethod.getActiveProfile());
 		Set<String> profiles = processMethod.getProfiles();
 		assertEquals(1, profiles.size());
-		assertTrue(profiles.contains(ProcessEntryContainer.DEFAULT_PROFILE));
+		assertTrue(profiles.contains(IProcessEntryContainer.DEFAULT_PROFILE));
 	}
 
 	@Test
@@ -86,10 +86,10 @@ public class ProcessMethod_1_Test {
 		assertEquals("Test", processMethod.getActiveProfile());
 		Set<String> profiles = processMethod.getProfiles();
 		assertEquals(2, profiles.size());
-		assertTrue(profiles.contains(ProcessEntryContainer.DEFAULT_PROFILE));
+		assertTrue(profiles.contains(IProcessEntryContainer.DEFAULT_PROFILE));
 		assertTrue(profiles.contains("Test"));
 		processMethod.deleteProfile("Test");
 		assertEquals(1, processMethod.getProfiles().size());
-		assertEquals(ProcessEntryContainer.DEFAULT_PROFILE, processMethod.getActiveProfile());
+		assertEquals(IProcessEntryContainer.DEFAULT_PROFILE, processMethod.getActiveProfile());
 	}
 }

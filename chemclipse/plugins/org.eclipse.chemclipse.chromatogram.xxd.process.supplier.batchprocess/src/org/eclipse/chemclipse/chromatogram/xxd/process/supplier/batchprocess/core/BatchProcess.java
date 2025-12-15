@@ -23,7 +23,7 @@ import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
 import org.eclipse.chemclipse.xxd.process.support.ChromatogramTypeSupport;
@@ -60,7 +60,7 @@ public class BatchProcess {
 					if(!inputProcessingInfo.hasErrorMessages()) {
 						IChromatogramSelection chromatogramSelection = inputProcessingInfo.getProcessingResult();
 						ProcessingInfo<?> processorResult = new ProcessingInfo<>();
-						ProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, processorResult, processSupplierContext), IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection));
+						IProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, processorResult, processSupplierContext), IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection));
 						if(processorResult.hasErrorMessages()) {
 							processingInfo.addErrorMessage(DESCRIPTION, "Processing: " + file + " failed");
 						} else {

@@ -21,7 +21,7 @@ import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 
-public interface IProcessEntry extends ProcessEntryContainer {
+public interface IProcessEntry extends IProcessEntryContainer {
 
 	/**
 	 * 
@@ -121,7 +121,7 @@ public interface IProcessEntry extends ProcessEntryContainer {
 
 	boolean isReadOnly();
 
-	ProcessEntryContainer getParent();
+	IProcessEntryContainer getParent();
 
 	default <T> IProcessorPreferences<T> getPreferences(IProcessSupplierContext context) {
 
@@ -194,7 +194,7 @@ public interface IProcessEntry extends ProcessEntryContainer {
 
 	public static IProcessSupplierContext getContext(IProcessEntry processEntry, IProcessSupplierContext defaultContext) {
 
-		ProcessEntryContainer processEntryContainer = processEntry.getParent();
+		IProcessEntryContainer processEntryContainer = processEntry.getParent();
 
 		if(processEntryContainer instanceof IProcessEntry processEntryParent) {
 			IProcessSupplier<?> processSupplier = getContext(processEntryParent, defaultContext).getSupplier(processEntryParent.getProcessorId());

@@ -23,9 +23,9 @@ import java.util.Set;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
 import org.eclipse.chemclipse.processing.methods.IProcessEntry;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
 import org.eclipse.chemclipse.processing.methods.ProcessEntry;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.eclipse.chemclipse.support.model.SeparationColumnType;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.settings.Format;
@@ -86,8 +86,8 @@ public class MethodReaderWriter_1402 extends ObjectStreamMethodFormat {
 		writeProcessSettings(entry, stream);
 		writeIterable(entry.getDataCategories(), stream, ObjectStreamMethodFormat::writeEnum);
 		// write child entries if there are any...
-		ProcessEntryContainer container;
-		if(entry instanceof ProcessEntryContainer) {
+		IProcessEntryContainer container;
+		if(entry instanceof IProcessEntryContainer) {
 			container = entry;
 		} else {
 			container = null;
@@ -96,7 +96,7 @@ public class MethodReaderWriter_1402 extends ObjectStreamMethodFormat {
 		stream.writeBoolean(entry.isReadOnly());
 	}
 
-	private ObjectInputStreamDeserializer<IProcessEntry> processEntryDeserialization(ProcessEntryContainer parent) {
+	private ObjectInputStreamDeserializer<IProcessEntry> processEntryDeserialization(IProcessEntryContainer parent) {
 
 		return stream -> {
 			ProcessEntry processEntry = new ProcessEntry(parent);

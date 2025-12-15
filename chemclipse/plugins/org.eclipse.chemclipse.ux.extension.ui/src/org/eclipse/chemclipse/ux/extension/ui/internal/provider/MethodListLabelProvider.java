@@ -19,7 +19,7 @@ import java.util.function.BiFunction;
 
 import org.eclipse.chemclipse.processing.methods.IProcessEntry;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
@@ -85,7 +85,7 @@ public class MethodListLabelProvider extends AbstractChemClipseLabelProvider {
 				}
 			} else if(element instanceof IProcessMethod) {
 				return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_METHOD, IApplicationImageProvider.SIZE_16x16);
-			} else if(element instanceof ProcessEntryContainer) {
+			} else if(element instanceof IProcessEntryContainer) {
 				return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_FOLDER_OPENED, IApplicationImageProvider.SIZE_16x16);
 			}
 		}
@@ -150,7 +150,7 @@ public class MethodListLabelProvider extends AbstractChemClipseLabelProvider {
 				default:
 					break;
 			}
-		} else if(element instanceof ProcessEntryContainer method) {
+		} else if(element instanceof IProcessEntryContainer method) {
 			switch(columnIndex) {
 				case 1:
 					return method.getName();

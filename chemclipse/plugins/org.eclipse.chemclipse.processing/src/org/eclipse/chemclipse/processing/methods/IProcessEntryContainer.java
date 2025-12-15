@@ -24,10 +24,10 @@ import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
 
 /**
- * A {@link ProcessEntryContainer} holds some {@link IProcessEntry}s
+ * A {@link IProcessEntryContainer} holds some {@link IProcessEntry}s
  *
  */
-public interface ProcessEntryContainer extends Iterable<IProcessEntry> {
+public interface IProcessEntryContainer extends Iterable<IProcessEntry> {
 
 	/**
 	 * Empty string "" is used for backward compatibility.
@@ -107,7 +107,7 @@ public interface ProcessEntryContainer extends Iterable<IProcessEntry> {
 	 * @param other
 	 * @return
 	 */
-	default boolean entriesEquals(ProcessEntryContainer other) {
+	default boolean entriesEquals(IProcessEntryContainer other) {
 
 		Iterator<IProcessEntry> thisEntries = iterator();
 		if(other == null) {
@@ -128,12 +128,12 @@ public interface ProcessEntryContainer extends Iterable<IProcessEntry> {
 		return true;
 	}
 
-	static <X, T> T applyProcessEntries(ProcessEntryContainer container, ProcessExecutionContext context, IProcessExecutionConsumer<T> consumer) {
+	static <X, T> T applyProcessEntries(IProcessEntryContainer container, ProcessExecutionContext context, IProcessExecutionConsumer<T> consumer) {
 
 		return applyProcessEntries(container, context, (processEntry, processSupplier) -> processEntry.getPreferences(processSupplier), consumer);
 	}
 
-	static <X, T> T applyProcessEntries(ProcessEntryContainer container, ProcessExecutionContext context, BiFunction<IProcessEntry, IProcessSupplier<X>, IProcessorPreferences<X>> preferenceSupplier, IProcessExecutionConsumer<T> consumer) {
+	static <X, T> T applyProcessEntries(IProcessEntryContainer container, ProcessExecutionContext context, BiFunction<IProcessEntry, IProcessSupplier<X>, IProcessorPreferences<X>> preferenceSupplier, IProcessExecutionConsumer<T> consumer) {
 
 		int resumeIndex = container.isSupportResume() ? container.getResumeIndex() : DEFAULT_RESUME_INDEX;
 

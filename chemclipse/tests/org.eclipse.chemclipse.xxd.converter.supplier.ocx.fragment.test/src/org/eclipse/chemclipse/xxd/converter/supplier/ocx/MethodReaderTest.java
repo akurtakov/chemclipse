@@ -28,7 +28,7 @@ import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
 import org.eclipse.chemclipse.processing.methods.ProcessEntry;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.methods.MethodExportConverter;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.methods.MethodImportConverter;
@@ -116,7 +116,7 @@ public class MethodReaderTest {
 		checkResult("ChromIdentMethod.ocm", convert, "nested");
 		IProcessMethod result = convert.getProcessingResult();
 		assertEquals(3, result.getNumberOfEntries());
-		ProcessEntryContainer next = result.iterator().next();
+		IProcessEntryContainer next = result.iterator().next();
 		assertEquals(1, next.getNumberOfEntries());
 	}
 
@@ -128,7 +128,7 @@ public class MethodReaderTest {
 		return createEntry;
 	}
 
-	private ProcessEntry createEntry(ProcessEntryContainer method, String id) {
+	private ProcessEntry createEntry(IProcessEntryContainer method, String id) {
 
 		ProcessEntry entry = new ProcessEntry(method);
 		entry.setProcessorId(id);

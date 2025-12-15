@@ -25,7 +25,7 @@ import org.eclipse.chemclipse.model.handler.IModificationHandler;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.methods.IProcessEntry;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
@@ -75,7 +75,7 @@ public class ExtendedMethodUI extends Composite implements IExtendedPartUI {
 
 	private ProcessMethod processMethod;
 	private IModificationHandler modificationHandler;
-	private Collection<ProcessEntryContainer> postActions;
+	private Collection<IProcessEntryContainer> postActions;
 
 	private boolean readOnly = false;
 
@@ -101,7 +101,7 @@ public class ExtendedMethodUI extends Composite implements IExtendedPartUI {
 		setInputs(processMethod, Collections.emptyList());
 	}
 
-	public void setInputs(IProcessMethod processMethod, Collection<ProcessEntryContainer> postActions) {
+	public void setInputs(IProcessMethod processMethod, Collection<IProcessEntryContainer> postActions) {
 
 		this.postActions = postActions;
 		this.processMethod = new ProcessMethod(processMethod);

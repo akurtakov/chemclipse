@@ -20,7 +20,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.chemclipse.processing.methods.IProcessEntry;
-import org.eclipse.chemclipse.processing.methods.ProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
@@ -201,7 +201,7 @@ public class ProcessMethodProfiles extends Composite {
 								input = input.trim();
 								if(input.isEmpty()) {
 									return "The profile name must be not empty.";
-								} else if(ProcessEntryContainer.DEFAULT_PROFILE.equals(input)) {
+								} else if(IProcessEntryContainer.DEFAULT_PROFILE.equals(input)) {
 									return "The default profile can't be used.";
 								} else if(processMethod.getProfiles().contains(input)) {
 									return "The profile exists already.";
@@ -246,7 +246,7 @@ public class ProcessMethodProfiles extends Composite {
 
 				if(processMethod != null) {
 					String activeProfile = getActiveProfile();
-					if(!ProcessEntryContainer.DEFAULT_PROFILE.equals(activeProfile)) {
+					if(!IProcessEntryContainer.DEFAULT_PROFILE.equals(activeProfile)) {
 						MessageBox messageBox = new MessageBox(e.display.getActiveShell(), SWT.ICON_QUESTION | SWT.YES | SWT.NO);
 						messageBox.setText("Delete Profile");
 						messageBox.setMessage("Do you really want to delete the selected profile?");
@@ -272,7 +272,7 @@ public class ProcessMethodProfiles extends Composite {
 			return text;
 		}
 
-		return ProcessEntryContainer.DEFAULT_PROFILE;
+		return IProcessEntryContainer.DEFAULT_PROFILE;
 	}
 
 	private SeparationColumnType getSeparationColumnType() {
@@ -308,7 +308,7 @@ public class ProcessMethodProfiles extends Composite {
 			/*
 			 * Ensure that the default profile is available.
 			 */
-			String defaultProfile = ProcessEntryContainer.DEFAULT_PROFILE;
+			String defaultProfile = IProcessEntryContainer.DEFAULT_PROFILE;
 			if(!processMethod.getProfiles().contains(defaultProfile)) {
 				processMethod.addProfile(defaultProfile);
 			}
@@ -339,7 +339,7 @@ public class ProcessMethodProfiles extends Composite {
 			 */
 			comboViewerProfiles.get().getCombo().select(index);
 		} else {
-			comboViewerProfiles.get().setInput(new String[]{ProcessEntryContainer.DEFAULT_PROFILE});
+			comboViewerProfiles.get().setInput(new String[]{IProcessEntryContainer.DEFAULT_PROFILE});
 			comboViewerProfiles.get().getCombo().select(0);
 		}
 		/*
@@ -347,7 +347,7 @@ public class ProcessMethodProfiles extends Composite {
 		 */
 		boolean isEditable = enabledEdit && isMethodEditable(processMethod);
 		buttonAdd.get().setEnabled(isEditable);
-		buttonDelete.get().setEnabled(isEditable && !ProcessEntryContainer.DEFAULT_PROFILE.equals(getActiveProfile()));
+		buttonDelete.get().setEnabled(isEditable && !IProcessEntryContainer.DEFAULT_PROFILE.equals(getActiveProfile()));
 	}
 
 	private void updateColumns() {

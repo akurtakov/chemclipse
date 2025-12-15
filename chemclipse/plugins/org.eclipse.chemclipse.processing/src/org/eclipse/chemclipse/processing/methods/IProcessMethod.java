@@ -20,7 +20,7 @@ import java.util.Set;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.support.model.SeparationColumnType;
 
-public interface IProcessMethod extends ProcessEntryContainer {
+public interface IProcessMethod extends IProcessEntryContainer {
 
 	/**
 	 * 
