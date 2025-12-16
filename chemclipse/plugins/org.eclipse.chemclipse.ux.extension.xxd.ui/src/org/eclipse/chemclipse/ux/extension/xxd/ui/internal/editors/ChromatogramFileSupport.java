@@ -111,7 +111,7 @@ public class ChromatogramFileSupport {
 		 * Get the names and extensions.
 		 */
 		String[] names = chromatogramConverterSupport.getFilterNames(IConverterSupport.EXPORT_SUPPLIER);
-		String[] extensions = chromatogramConverterSupport.getExportableFilterExtensions();
+		String[] extensions = chromatogramConverterSupport.getFilterExtensions(IConverterSupport.EXPORT_SUPPLIER);
 		List<ISupplier> suppliers = chromatogramConverterSupport.getExportSupplier();
 		if(extensions.length != names.length) {
 			throw new NoConverterAvailableException("The size of extensions and names is unequal.");

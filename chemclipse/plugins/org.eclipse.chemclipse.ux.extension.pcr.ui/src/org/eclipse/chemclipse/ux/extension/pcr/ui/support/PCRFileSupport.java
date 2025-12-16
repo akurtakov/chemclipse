@@ -59,7 +59,7 @@ public class PCRFileSupport {
 
 		IPlateConverterSupport converterSupport = PlateConverterPCR.getPlateConverterSupport();
 		if(converterSupport != null) {
-			String[] filterExtensions = converterSupport.getExportableFilterExtensions();
+			String[] filterExtensions = converterSupport.getFilterExtensions(IConverterSupport.EXPORT_SUPPLIER);
 			dialog.setFilterExtensions(filterExtensions);
 			String[] filterNames = converterSupport.getFilterNames(IConverterSupport.EXPORT_SUPPLIER);
 			dialog.setFilterNames(filterNames);

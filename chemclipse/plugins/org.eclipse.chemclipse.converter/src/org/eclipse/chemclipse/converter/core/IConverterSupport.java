@@ -58,16 +58,6 @@ public interface IConverterSupport {
 		return extensions.toArray(new String[extensions.size()]);
 	}
 
-	@Deprecated
-	default String[] getExportableFilterExtensions() throws NoConverterAvailableException {
-
-		String[] extensions = getFilterExtensions(EXPORT_SUPPLIER);
-		if(extensions.length == 0) {
-			throw new NoConverterAvailableException();
-		}
-		return extensions;
-	}
-
 	/**
 	 * Returns the filter names which are actually registered at the
 	 * chromatogram converter extension point.<br/>

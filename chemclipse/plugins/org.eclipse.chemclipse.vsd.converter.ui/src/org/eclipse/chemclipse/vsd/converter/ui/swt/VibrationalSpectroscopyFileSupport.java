@@ -80,7 +80,7 @@ public class VibrationalSpectroscopyFileSupport {
 		/*
 		 * Set the filters that allow an export of chromatographic data.
 		 */
-		String[] filterExtensions = converterSupport.getExportableFilterExtensions();
+		String[] filterExtensions = converterSupport.getFilterExtensions(IConverterSupport.EXPORT_SUPPLIER);
 		dialog.setFilterExtensions(filterExtensions);
 		String[] filterNames = converterSupport.getFilterNames(IConverterSupport.EXPORT_SUPPLIER);
 		dialog.setFilterNames(filterNames);
