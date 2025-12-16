@@ -111,7 +111,7 @@ public class ChartPCR extends LineChart {
 	private void setExportMenu(IChartSettings settings) {
 
 		IPlateConverterSupport converterSupport = PlateConverterPCR.getPlateConverterSupport();
-		Collection<? extends ISupplier> exportSupplier = converterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
+		Collection<ISupplier> exportSupplier = converterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
 		for(ISupplier supplier : exportSupplier) {
 			settings.addMenuEntry(new IChartMenuEntry() {
 

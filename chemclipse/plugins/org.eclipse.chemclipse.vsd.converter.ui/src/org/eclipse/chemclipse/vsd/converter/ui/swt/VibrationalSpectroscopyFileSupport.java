@@ -87,7 +87,7 @@ public class VibrationalSpectroscopyFileSupport {
 		dialog.setFilterNames(filterNames);
 		String filename = dialog.open();
 		if(filename != null) {
-			Collection<? extends ISupplier> suppliers = converterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
+			Collection<ISupplier> suppliers = converterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
 			validateFile(dialog, new ArrayList<>(suppliers), shell, spectrum);
 		}
 	}

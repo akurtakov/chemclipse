@@ -71,7 +71,7 @@ public class PCRFileSupport {
 			 */
 			String filename = dialog.open();
 			if(filename != null) {
-				Collection<? extends ISupplier> exportSupplier = converterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
+				Collection<ISupplier> exportSupplier = converterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
 				return validateFile(dialog, new ArrayList<>(exportSupplier), shell, plate, filename);
 			} else {
 				return null;

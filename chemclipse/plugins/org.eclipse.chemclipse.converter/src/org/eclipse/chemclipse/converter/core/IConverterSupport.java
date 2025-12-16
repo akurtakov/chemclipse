@@ -88,7 +88,7 @@ public interface IConverterSupport {
 	 */
 	default String getConverterId(String name, boolean exportConverterOnly) throws NoConverterAvailableException {
 
-		Collection<? extends ISupplier> supplier = getSupplier(new Predicate<ISupplier>() {
+		Collection<ISupplier> supplier = getSupplier(new Predicate<ISupplier>() {
 
 			@Override
 			public boolean test(ISupplier supplier) {
@@ -133,9 +133,9 @@ public interface IConverterSupport {
 	/**
 	 * Returns the list of all available suppliers
 	 * 
-	 * @return List<ISupplier>
+	 * @return Collection<ISupplier>
 	 */
-	default Collection<? extends ISupplier> getSupplier(Predicate<? super ISupplier> filter) {
+	default Collection<ISupplier> getSupplier(Predicate<? super ISupplier> filter) {
 
 		List<ISupplier> list = new ArrayList<>();
 		for(ISupplier supplier : getSupplier()) {
@@ -158,7 +158,7 @@ public interface IConverterSupport {
 	 */
 	default ISupplier getSupplier(String id) throws NoConverterAvailableException {
 
-		Collection<? extends ISupplier> collection = getSupplier(supplier -> supplier.getId().equals(id));
+		Collection<ISupplier> collection = getSupplier(supplier -> supplier.getId().equals(id));
 		if(collection.isEmpty()) {
 			throw new NoConverterAvailableException();
 		} else {

@@ -112,7 +112,7 @@ public class ChromatogramFileSupport {
 		 */
 		String[] names = chromatogramConverterSupport.getFilterNames(IConverterSupport.EXPORT_SUPPLIER);
 		String[] extensions = chromatogramConverterSupport.getFilterExtensions(IConverterSupport.EXPORT_SUPPLIER);
-		Collection<? extends ISupplier> suppliers = chromatogramConverterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
+		Collection<ISupplier> suppliers = chromatogramConverterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
 		if(extensions.length != names.length) {
 			throw new NoConverterAvailableException("The size of extensions and names is unequal.");
 		}
@@ -172,7 +172,7 @@ public class ChromatogramFileSupport {
 		return exportSupplierMap;
 	}
 
-	private static ISupplier getSupplier(String filterName, Collection<? extends ISupplier> suppliers) {
+	private static ISupplier getSupplier(String filterName, Collection<ISupplier> suppliers) {
 
 		for(ISupplier supplier : suppliers) {
 			if(supplier.isExportable() && supplier.getFilterName().equals(filterName)) {

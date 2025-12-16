@@ -75,7 +75,7 @@ public class ChartNMR extends LineChart {
 		if(measurementSupplier != null) {
 			IChartSettings settings = getChartSettings();
 			IScanConverterSupport converterSupport = ScanConverterNMR.getScanConverterSupport();
-			Collection<? extends ISupplier> exportSupplier = converterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
+			Collection<ISupplier> exportSupplier = converterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
 			for(ISupplier supplier : exportSupplier) {
 				settings.addMenuEntry(new IChartMenuEntry() {
 
