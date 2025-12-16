@@ -101,7 +101,6 @@ public class ChromatogramReader extends AbstractChromatogramWSDReader {
 		return chromatogram;
 	}
 
-	@SuppressWarnings("deprecation")
 	private void readHeader(File file, IVendorChromatogram chromatogram) throws IOException {
 
 		IHeaderArrayReader headerArrayReader = new HeaderArrayReader(file);
@@ -113,8 +112,8 @@ public class ChromatogramReader extends AbstractChromatogramWSDReader {
 		numberSamples = headerArrayReader.readSampleNumber();
 		offsetSamples = headerArrayReader.readSampleOffset();
 		numberBases = headerArrayReader.readBaseNumber();
-		headerArrayReader.readBasesLeftClip();
-		headerArrayReader.readBasesRightClip();
+		headerArrayReader.readBasesLeftClip(); // deprecated
+		headerArrayReader.readBasesRightClip(); // deprecated
 		offsetBases = headerArrayReader.readBasesOffset();
 		sizeComments = headerArrayReader.readCommentsSize();
 		offsetComments = headerArrayReader.readCommentsOffset();

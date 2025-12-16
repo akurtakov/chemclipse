@@ -28,11 +28,9 @@ public interface IHeaderArrayReader extends IArrayReader {
 	int readBaseNumber();
 
 	/** @return No. bases in left clip (vector) */
-	@Deprecated
 	int readBasesLeftClip();
 
 	/** @return No. bases in right clip (qual) */
-	@Deprecated
 	int readBasesRightClip();
 
 	/** @return Byte offset from start of file */
