@@ -22,6 +22,7 @@ public class Activator extends AbstractActivatorUI {
 
 	private static Activator plugin;
 
+	@Override
 	public void start(BundleContext context) throws Exception {
 
 		super.start(context);
@@ -29,6 +30,7 @@ public class Activator extends AbstractActivatorUI {
 		initializePreferenceStore(PreferenceSupplier.INSTANCE());
 	}
 
+	@Override
 	public void stop(BundleContext context) throws Exception {
 
 		plugin = null;
@@ -48,6 +50,6 @@ public class Activator extends AbstractActivatorUI {
 	public String getSettingsPath() {
 
 		Location location = Platform.getUserLocation();
-		return location.getURL().getPath().toString();
+		return location.getURL().getPath();
 	}
 }

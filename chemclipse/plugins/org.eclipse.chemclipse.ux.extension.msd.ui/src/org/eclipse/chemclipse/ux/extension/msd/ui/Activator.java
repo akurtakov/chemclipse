@@ -55,7 +55,7 @@ public class Activator extends AbstractActivatorUI {
 	public String getSettingsPath() {
 
 		Location location = Platform.getUserLocation();
-		return location.getURL().getPath().toString();
+		return location.getURL().getPath();
 	}
 
 	@Override

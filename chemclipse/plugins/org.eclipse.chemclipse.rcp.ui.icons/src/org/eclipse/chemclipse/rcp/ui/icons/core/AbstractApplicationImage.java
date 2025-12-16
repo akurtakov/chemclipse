@@ -94,7 +94,7 @@ public abstract class AbstractApplicationImage implements IApplicationImage {
 			builder.append(PATH_SEPARATOR);
 			builder.append(FOLDER_ICONS);
 			builder.append(PATH_SEPARATOR);
-			if (FOLDER_SCALABLE.equals(size)) {
+			if(FOLDER_SCALABLE.equals(size)) {
 				builder.append(FOLDER_SCALABLE);
 			} else {
 				builder.append(size);
@@ -103,7 +103,7 @@ public abstract class AbstractApplicationImage implements IApplicationImage {
 
 			IPath path = new Path(builder.toString());
 			URL url = FileLocator.find(bundle, path, null);
-			File directory = new File(FileLocator.resolve(url).getPath().toString());
+			File directory = new File(FileLocator.resolve(url).getPath());
 			if(directory.isDirectory()) {
 				for(File file : directory.listFiles()) {
 					String name = file.getName().toLowerCase();
@@ -145,7 +145,7 @@ public abstract class AbstractApplicationImage implements IApplicationImage {
 
 		builder.append(FOLDER_ICONS);
 		builder.append(PATH_SEPARATOR);
-		if (fileName.endsWith(EXTENSION_SVG)) {
+		if(fileName.endsWith(EXTENSION_SVG)) {
 			builder.append(FOLDER_SCALABLE);
 		} else {
 			builder.append(size);

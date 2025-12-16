@@ -187,7 +187,7 @@ public class MethodProcessTypeSupplier implements IProcessTypeSupplier, BundleTr
 						/*
 						 * Try to resolve the file.
 						 */
-						String urlPath = url.getPath().toString();
+						String urlPath = url.getPath();
 						String absolutePath = PathResolver.getAbsolutePath(bundle, urlPath);
 						File sourceFile = new File(absolutePath);
 
