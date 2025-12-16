@@ -35,7 +35,6 @@ public abstract class AbstractConverterSupport implements IConverterSupportSette
 		suppliers.add(supplier);
 	}
 
-	@Override
 	public String getConverterId(final int index) throws NoConverterAvailableException {
 
 		/*

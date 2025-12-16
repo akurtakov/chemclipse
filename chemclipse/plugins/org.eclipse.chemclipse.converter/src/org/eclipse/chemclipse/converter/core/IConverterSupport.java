@@ -77,26 +77,6 @@ public interface IConverterSupport {
 	}
 
 	/**
-	 * Returns the id of the selected filter name.<br/>
-	 * The id of the selected filter is used to determine which converter should
-	 * be used to import or export the chromatogram.<br/>
-	 * Be aware of that the first index is 0. It is a 0-based index.
-	 * 
-	 * @param index
-	 * @return String
-	 * @throws NoConverterAvailableException
-	 */
-	@Deprecated
-	default String getConverterId(int index) throws NoConverterAvailableException {
-
-		try {
-			return getSupplier().get(index).getId();
-		} catch(IndexOutOfBoundsException e) {
-			throw new NoConverterAvailableException();
-		}
-	}
-
-	/**
 	 * Returns the converter id "org.eclipse.chemclipse.msd.converter.supplier.agilent" available in the list defined by its name, e.g. "Agilent Chromatogram (*.D/DATA.MS)".
 	 * If more converter with the given name "Agilent Chromatogram (*.D/DATA.MS)" are stored, the first match will be returned. If exportConverterOnly is true, only a converter
 	 * that is able to export the file will be returned.
