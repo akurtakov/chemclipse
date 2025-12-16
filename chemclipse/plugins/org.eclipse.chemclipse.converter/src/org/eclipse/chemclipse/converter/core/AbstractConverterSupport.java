@@ -166,7 +166,6 @@ public abstract class AbstractConverterSupport implements IConverterSupportSette
 		return extensions.toArray(new String[extensions.size()]);
 	}
 
-	@Override
 	public String[] getFilterNames() throws NoConverterAvailableException {
 
 		/*

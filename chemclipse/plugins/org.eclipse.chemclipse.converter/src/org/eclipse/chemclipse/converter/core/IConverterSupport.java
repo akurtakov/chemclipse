@@ -96,12 +96,6 @@ public interface IConverterSupport {
 		return filterNames.toArray(new String[filterNames.size()]);
 	}
 
-	@Deprecated
-	default String[] getFilterNames() throws NoConverterAvailableException {
-
-		return getFilterNames(ALL_SUPPLIER);
-	}
-
 	/**
 	 * Returns the same as getFilterNames() but with filter names (converter)
 	 * that are exportable.
