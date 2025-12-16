@@ -183,7 +183,6 @@ public abstract class AbstractConverterSupport implements IConverterSupportSette
 		return filterNames.toArray(new String[filterNames.size()]);
 	}
 
-	@Override
 	public String[] getExportableFilterNames() throws NoConverterAvailableException {
 
 		/*

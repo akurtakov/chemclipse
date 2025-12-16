@@ -97,23 +97,6 @@ public interface IConverterSupport {
 	}
 
 	/**
-	 * Returns the same as getFilterNames() but with filter names (converter)
-	 * that are exportable.
-	 * 
-	 * @return String[]
-	 * @throws NoConverterAvailableException
-	 */
-	@Deprecated
-	default String[] getExportableFilterNames() throws NoConverterAvailableException {
-
-		String[] names = getFilterNames(EXPORT_SUPPLIER);
-		if(names.length == 0) {
-			throw new NoConverterAvailableException();
-		}
-		return names;
-	}
-
-	/**
 	 * Returns the id of the selected filter name.<br/>
 	 * The id of the selected filter is used to determine which converter should
 	 * be used to import or export the chromatogram.<br/>

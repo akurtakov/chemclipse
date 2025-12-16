@@ -23,6 +23,7 @@ import java.util.Optional;
 
 import org.apache.commons.io.FilenameUtils;
 import org.eclipse.chemclipse.converter.chromatogram.IChromatogramConverterSupport;
+import org.eclipse.chemclipse.converter.core.IConverterSupport;
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.csd.converter.chromatogram.ChromatogramConverterCSD;
 import org.eclipse.chemclipse.fsd.converter.chromatogram.ChromatogramConverterFSD;
@@ -109,7 +110,7 @@ public class ChromatogramFileSupport {
 		/*
 		 * Get the names and extensions.
 		 */
-		String[] names = chromatogramConverterSupport.getExportableFilterNames();
+		String[] names = chromatogramConverterSupport.getFilterNames(IConverterSupport.EXPORT_SUPPLIER);
 		String[] extensions = chromatogramConverterSupport.getExportableFilterExtensions();
 		List<ISupplier> suppliers = chromatogramConverterSupport.getExportSupplier();
 		if(extensions.length != names.length) {

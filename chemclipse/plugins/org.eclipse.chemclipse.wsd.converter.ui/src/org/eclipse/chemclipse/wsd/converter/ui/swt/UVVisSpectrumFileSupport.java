@@ -17,6 +17,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
+import org.eclipse.chemclipse.converter.core.IConverterSupport;
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.converter.scan.IScanConverterSupport;
 import org.eclipse.chemclipse.converter.ui.l10n.ConverterMessagesUI;
@@ -80,7 +81,7 @@ public class UVVisSpectrumFileSupport {
 		 */
 		String[] filterExtensions = converterSupport.getExportableFilterExtensions();
 		dialog.setFilterExtensions(filterExtensions);
-		String[] filterNames = converterSupport.getExportableFilterNames();
+		String[] filterNames = converterSupport.getFilterNames(IConverterSupport.EXPORT_SUPPLIER);
 		dialog.setFilterNames(filterNames);
 		String filename = dialog.open();
 		if(filename != null) {

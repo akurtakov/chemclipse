@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.io.FilenameUtils;
+import org.eclipse.chemclipse.converter.core.IConverterSupport;
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.pcr.converter.core.PlateConverterPCR;
@@ -60,7 +61,7 @@ public class PCRFileSupport {
 		if(converterSupport != null) {
 			String[] filterExtensions = converterSupport.getExportableFilterExtensions();
 			dialog.setFilterExtensions(filterExtensions);
-			String[] filterNames = converterSupport.getExportableFilterNames();
+			String[] filterNames = converterSupport.getFilterNames(IConverterSupport.EXPORT_SUPPLIER);
 			dialog.setFilterNames(filterNames);
 			/*
 			 * Opens the dialog.<br/> Use converterSupport.getExportSupplier()
