@@ -418,13 +418,12 @@ public class MSLReader extends AbstractMassSpectraReader implements IMassSpectra
 		double content = 0;
 		try {
 			Matcher matcher = pattern.matcher(massSpectrumData);
-			if(matcher.find()) {
+			if(matcher.find() && !matcher.group(group).isBlank()) {
 				content = Double.parseDouble(matcher.group(group).trim());
 			}
-		} catch(Exception e) {
+		} catch(NumberFormatException e) {
 			logger.warn(e);
 		}
-
 		return content;
 	}
 }

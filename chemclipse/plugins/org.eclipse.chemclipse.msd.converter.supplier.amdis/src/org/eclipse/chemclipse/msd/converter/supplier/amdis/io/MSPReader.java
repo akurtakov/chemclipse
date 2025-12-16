@@ -422,7 +422,7 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 			if(matcher.find()) {
 				content = (int)(Double.parseDouble(matcher.group(group).trim()) * IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 			}
-		} catch(Exception e) {
+		} catch(NumberFormatException e) {
 			logger.warn(e);
 		}
 		return content;
@@ -436,7 +436,7 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 			if(matcher.find() && matcher.groupCount() > 1 && !matcher.group(2).isBlank()) {
 				content = Double.parseDouble(matcher.group(2));
 			}
-		} catch(Exception e) {
+		} catch(NumberFormatException e) {
 			logger.warn(e);
 		}
 		return content;
