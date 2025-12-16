@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.editors;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -103,7 +104,6 @@ public class ChromatogramFileSupport {
 		return false;
 	}
 
-	@SuppressWarnings("deprecation")
 	private static Map<Integer, ISupplier> setExportConverter(IChromatogramConverterSupport chromatogramConverterSupport, FileDialog fileDialog) throws NoConverterAvailableException {
 
 		Map<Integer, ISupplier> exportSupplierMap = new HashMap<>();
@@ -112,7 +112,7 @@ public class ChromatogramFileSupport {
 		 */
 		String[] names = chromatogramConverterSupport.getFilterNames(IConverterSupport.EXPORT_SUPPLIER);
 		String[] extensions = chromatogramConverterSupport.getFilterExtensions(IConverterSupport.EXPORT_SUPPLIER);
-		List<ISupplier> suppliers = chromatogramConverterSupport.getExportSupplier();
+		Collection<? extends ISupplier> suppliers = chromatogramConverterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
 		if(extensions.length != names.length) {
 			throw new NoConverterAvailableException("The size of extensions and names is unequal.");
 		}
@@ -172,7 +172,7 @@ public class ChromatogramFileSupport {
 		return exportSupplierMap;
 	}
 
-	private static ISupplier getSupplier(String filterName, List<ISupplier> suppliers) {
+	private static ISupplier getSupplier(String filterName, Collection<? extends ISupplier> suppliers) {
 
 		for(ISupplier supplier : suppliers) {
 			if(supplier.isExportable() && supplier.getFilterName().equals(filterName)) {

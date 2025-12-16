@@ -14,6 +14,8 @@ package org.eclipse.chemclipse.fsd.converter.ui.swt;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
@@ -62,7 +64,6 @@ public class FluorescenceSpectrumFileSupport {
 	 * @param spectrum
 	 * @throws NoConverterAvailableException
 	 */
-	@SuppressWarnings("deprecation")
 	public static void saveSpectrum(Shell shell, ISpectrumFSD spectrum, String fileName) throws NoConverterAvailableException {
 
 		if(spectrum == null) {
@@ -77,7 +78,7 @@ public class FluorescenceSpectrumFileSupport {
 		dialog.setOverwrite(true);
 		IScanConverterSupport converterSupport = ScanConverterFSD.getScanConverterSupport();
 		/*
-		 * Set the filters that allow an export of chromatographic data.
+		 * Set the filters that allow an export of fluorescence data.
 		 */
 		String[] filterExtensions = converterSupport.getFilterExtensions(IConverterSupport.EXPORT_SUPPLIER);
 		dialog.setFilterExtensions(filterExtensions);
@@ -85,7 +86,8 @@ public class FluorescenceSpectrumFileSupport {
 		dialog.setFilterNames(filterNames);
 		String filename = dialog.open();
 		if(filename != null) {
-			validateFile(dialog, converterSupport.getExportSupplier(), shell, spectrum);
+			Collection<? extends ISupplier> suppliers = converterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
+			validateFile(dialog, new ArrayList<>(suppliers), shell, spectrum);
 		}
 	}
 

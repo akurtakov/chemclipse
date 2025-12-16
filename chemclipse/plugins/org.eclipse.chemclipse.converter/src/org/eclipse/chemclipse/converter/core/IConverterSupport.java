@@ -166,17 +166,6 @@ public interface IConverterSupport {
 		}
 	}
 
-	/**
-	 * Returns the list of all available export suppliers.
-	 * 
-	 * @return List<ISupplier>
-	 */
-	@Deprecated
-	default List<ISupplier> getExportSupplier() {
-
-		return new ArrayList<>(getSupplier(EXPORT_SUPPLIER));
-	}
-
 	DataCategory getDataCategory();
 
 	/**

@@ -225,7 +225,6 @@ public abstract class AbstractConverterSupport implements IConverterSupportSette
 		return instance;
 	}
 
-	@Override
 	public List<ISupplier> getExportSupplier() {
 
 		List<ISupplier> exportSupplier = new ArrayList<>();

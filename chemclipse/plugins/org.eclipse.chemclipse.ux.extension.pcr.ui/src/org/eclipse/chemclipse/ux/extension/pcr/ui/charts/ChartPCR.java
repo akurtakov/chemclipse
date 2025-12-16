@@ -17,9 +17,10 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.List;
+import java.util.Collection;
 import java.util.Locale;
 
+import org.eclipse.chemclipse.converter.core.IConverterSupport;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.pcr.converter.core.PlateConverterPCR;
 import org.eclipse.chemclipse.pcr.converter.support.IPlateConverterSupport;
@@ -107,11 +108,10 @@ public class ChartPCR extends LineChart {
 		primaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.0#E0"), new DecimalFormatSymbols(Locale.ENGLISH))); //$NON-NLS-1$
 	}
 
-	@SuppressWarnings("deprecation")
 	private void setExportMenu(IChartSettings settings) {
 
 		IPlateConverterSupport converterSupport = PlateConverterPCR.getPlateConverterSupport();
-		List<ISupplier> exportSupplier = converterSupport.getExportSupplier();
+		Collection<? extends ISupplier> exportSupplier = converterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
 		for(ISupplier supplier : exportSupplier) {
 			settings.addMenuEntry(new IChartMenuEntry() {
 

@@ -15,6 +15,8 @@ package org.eclipse.chemclipse.ux.extension.pcr.ui.support;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +43,6 @@ public class PCRFileSupport {
 
 	}
 
-	@SuppressWarnings("deprecation")
 	public static File savePlate(Shell shell, IPlate plate, String filterPath) throws NoConverterAvailableException {
 
 		if(plate == null || shell == null) {
@@ -70,8 +71,8 @@ public class PCRFileSupport {
 			 */
 			String filename = dialog.open();
 			if(filename != null) {
-				List<ISupplier> exportSupplier = converterSupport.getExportSupplier();
-				return validateFile(dialog, exportSupplier, shell, plate, filename);
+				Collection<? extends ISupplier> exportSupplier = converterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
+				return validateFile(dialog, new ArrayList<>(exportSupplier), shell, plate, filename);
 			} else {
 				return null;
 			}
