@@ -15,28 +15,13 @@
 package org.eclipse.chemclipse.xxd.process.support;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.function.Consumer;
 
-import org.eclipse.chemclipse.model.core.IMeasurement;
-import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.supplier.IChromatogramSelectionProcessSupplier;
-import org.eclipse.chemclipse.model.supplier.IMeasurementProcessSupplier;
-import org.eclipse.chemclipse.processing.DataCategory;
-import org.eclipse.chemclipse.processing.core.IMessageConsumer;
-import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.processing.core.ProcessingInfo;
-import org.eclipse.chemclipse.processing.methods.IProcessMethod;
-import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.processing.supplier.IProcessTypeSupplier;
-import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
 import org.eclipse.chemclipse.xxd.process.Activator;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 /**
  * You could also use the {@link IProcessSupplierContext} OSGI-Service or the E4ProcessSupplierContext if context injection is desired
@@ -69,23 +54,6 @@ public class ProcessTypeSupport implements IProcessSupplierContext {
 		return null;
 	}
 
-	/**
-	 * Get all suppliers matching a given set of datacategories
-	 * 
-	 * @deprecated use {@link #visitSupplier(Consumer)} instead
-	 * @param dataTypes
-	 * @return the matching {@link IProcessSupplier}
-	 */
-	@Deprecated
-	public Set<IProcessSupplier<?>> getSupplier(Iterable<DataCategory> dataTypes) {
-
-		Set<IProcessSupplier<?>> supplier = new TreeSet<>((o1, o2) -> o1.getId().compareTo(o2.getId()));
-		addMatchingSupplier(dataTypes, supplier, localProcessSupplier.toArray(new IProcessTypeSupplier[0]));
-		addMatchingSupplier(dataTypes, supplier, Activator.getProcessTypeSuppliers());
-
-		return supplier;
-	}
-
 	@Override
 	public void visitSupplier(Consumer<? super IProcessSupplier<?>> consumer) {
 
@@ -98,29 +66,6 @@ public class ProcessTypeSupport implements IProcessSupplierContext {
 		}
 	}
 
-	private void addMatchingSupplier(Iterable<DataCategory> dataTypes, Set<IProcessSupplier<?>> supplier, IProcessTypeSupplier[] processTypeSuppliers) {
-
-		if(dataTypes == null) {
-			for(IProcessTypeSupplier processTypeSupplier : processTypeSuppliers) {
-				for(IProcessSupplier<?> processSupplier : processTypeSupplier.getProcessorSuppliers()) {
-					supplier.add(processSupplier);
-				}
-			}
-			return;
-		}
-
-		for(IProcessTypeSupplier processTypeSupplier : processTypeSuppliers) {
-			for(IProcessSupplier<?> processSupplier : processTypeSupplier.getProcessorSuppliers()) {
-				for(DataCategory category : dataTypes) {
-					if(processSupplier.getSupportedDataTypes().contains(category)) {
-						supplier.add(processSupplier);
-						break;
-					}
-				}
-			}
-		}
-	}
-
 	/**
 	 * Adds the given {@link IProcessTypeSupplier} to this
 	 * 
@@ -129,31 +74,5 @@ public class ProcessTypeSupport implements IProcessSupplierContext {
 	public void addProcessSupplier(IProcessTypeSupplier processTypeSupplier) {
 
 		localProcessSupplier.add(processTypeSupplier);
-	}
-
-	@Deprecated
-	public <T> IProcessingInfo<T> applyProcessor(IChromatogramSelection chromatogramSelection, IProcessMethod processMethod, IProgressMonitor monitor) {
-
-		ProcessingInfo<T> processingInfo = new ProcessingInfo<>();
-		IProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, processingInfo, this), IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection));
-		return processingInfo;
-	}
-
-	@Deprecated
-	public <T, X> IProcessingInfo<T> applyProcessor(List<? extends IChromatogramSelection> chromatogramSelections, IProcessMethod processMethod, IProgressMonitor monitor) {
-
-		ProcessingInfo<T> processingInfo = new ProcessingInfo<>();
-		ProcessExecutionContext executionContext = new ProcessExecutionContext(monitor, processingInfo, this);
-		for(IChromatogramSelection selection : chromatogramSelections) {
-			IProcessEntryContainer.applyProcessEntries(processMethod, executionContext.split(), IChromatogramSelectionProcessSupplier.createConsumer(selection));
-		}
-
-		return processingInfo;
-	}
-
-	@Deprecated
-	public <X> Collection<? extends IMeasurement> applyProcessor(Collection<? extends IMeasurement> measurements, IProcessMethod processMethod, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
-
-		return IProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, messageConsumer, this), IMeasurementProcessSupplier.createConsumer(measurements));
 	}
 }

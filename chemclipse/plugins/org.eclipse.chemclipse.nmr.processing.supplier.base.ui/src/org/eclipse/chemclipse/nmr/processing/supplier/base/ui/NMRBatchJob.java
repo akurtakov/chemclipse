@@ -21,10 +21,16 @@ import java.util.List;
 
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.model.core.IMeasurement;
+import org.eclipse.chemclipse.model.supplier.IMeasurementProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.core.DefaultProcessingResult;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessMethod;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
+import org.eclipse.chemclipse.processing.supplier.IProcessExecutionConsumer;
+import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
+import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.part.support.SupplierEditorSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.BatchJobUI;
@@ -41,7 +47,7 @@ import jakarta.annotation.PostConstruct;
 public class NMRBatchJob implements IRunnableWithProgress {
 
 	private BatchJobUI batchJobUI;
-	private ProcessTypeSupport processTypeSupport;
+	private IProcessSupplierContext processTypeSupport;
 
 	@PostConstruct
 	public void postConstruct(Composite parent) {
@@ -58,14 +64,16 @@ public class NMRBatchJob implements IRunnableWithProgress {
 		batchJobUI.doLoad(Collections.emptyList(), new ProcessMethod(EnumSet.of(DataCategory.NMR)));
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 
 		NMRDataListUI dataList = (NMRDataListUI)batchJobUI.getDataList();
 		List<IComplexSignalMeasurement<?>> measurements = dataList.getMeasurements();
 		DefaultProcessingResult<Object> processingResult = new DefaultProcessingResult<>();
-		Collection<? extends IMeasurement> results = processTypeSupport.applyProcessor(measurements, batchJobUI.getMethod().getProcessMethod(), processingResult, monitor);
+		IProcessMethod processMethod = batchJobUI.getMethod().getProcessMethod();
+		ProcessExecutionContext processExecutionContext = new ProcessExecutionContext(monitor, processingResult, processTypeSupport);
+		IProcessExecutionConsumer<Collection<? extends IMeasurement>> consumer = IMeasurementProcessSupplier.createConsumer(measurements);
+		Collection<? extends IMeasurement> results = IProcessEntryContainer.applyProcessEntries(processMethod, processExecutionContext, consumer);
 		Display.getDefault().asyncExec(() -> ProcessingInfoPartSupport.getInstance().update(processingResult));
 
 		if(!processingResult.hasErrorMessages()) {
