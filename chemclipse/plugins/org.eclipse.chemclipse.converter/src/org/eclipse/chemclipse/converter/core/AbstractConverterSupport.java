@@ -86,7 +86,6 @@ public abstract class AbstractConverterSupport implements IConverterSupportSette
 		return id;
 	}
 
-	@Override
 	public String[] getFilterExtensions() throws NoConverterAvailableException {
 
 		/*

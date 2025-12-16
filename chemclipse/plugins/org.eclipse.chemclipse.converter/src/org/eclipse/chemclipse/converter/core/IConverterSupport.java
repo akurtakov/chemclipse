@@ -59,16 +59,6 @@ public interface IConverterSupport {
 	}
 
 	@Deprecated
-	default String[] getFilterExtensions() throws NoConverterAvailableException {
-
-		String[] extensions = getFilterExtensions(ALL_SUPPLIER);
-		if(extensions.length == 0) {
-			throw new NoConverterAvailableException();
-		}
-		return extensions;
-	}
-
-	@Deprecated
 	default String[] getExportableFilterExtensions() throws NoConverterAvailableException {
 
 		String[] extensions = getFilterExtensions(EXPORT_SUPPLIER);
