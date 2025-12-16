@@ -23,6 +23,7 @@ import java.util.Locale;
 import java.util.function.Supplier;
 import java.util.stream.StreamSupport;
 
+import org.eclipse.chemclipse.converter.core.IConverterSupport;
 import org.eclipse.chemclipse.converter.scan.IScanConverterSupport;
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.model.core.ISignal;
@@ -67,7 +68,6 @@ public class ChartNMR extends LineChart {
 		this(parent, style, null);
 	}
 
-	@SuppressWarnings("deprecation")
 	public ChartNMR(Composite parent, int style, Supplier<IComplexSignalMeasurement<?>> measurementSupplier) {
 
 		super(parent, style);
@@ -75,7 +75,7 @@ public class ChartNMR extends LineChart {
 		if(measurementSupplier != null) {
 			IChartSettings settings = getChartSettings();
 			IScanConverterSupport converterSupport = ScanConverterNMR.getScanConverterSupport();
-			List<ISupplier> exportSupplier = converterSupport.getExportSupplier();
+			Collection<ISupplier> exportSupplier = converterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
 			for(ISupplier supplier : exportSupplier) {
 				settings.addMenuEntry(new IChartMenuEntry() {
 

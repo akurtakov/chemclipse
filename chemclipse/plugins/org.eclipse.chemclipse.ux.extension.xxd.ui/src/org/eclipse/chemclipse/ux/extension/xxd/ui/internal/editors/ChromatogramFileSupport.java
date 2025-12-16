@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.editors;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.Optional;
 
 import org.apache.commons.io.FilenameUtils;
 import org.eclipse.chemclipse.converter.chromatogram.IChromatogramConverterSupport;
+import org.eclipse.chemclipse.converter.core.IConverterSupport;
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.csd.converter.chromatogram.ChromatogramConverterCSD;
 import org.eclipse.chemclipse.fsd.converter.chromatogram.ChromatogramConverterFSD;
@@ -102,16 +104,15 @@ public class ChromatogramFileSupport {
 		return false;
 	}
 
-	@SuppressWarnings("deprecation")
 	private static Map<Integer, ISupplier> setExportConverter(IChromatogramConverterSupport chromatogramConverterSupport, FileDialog fileDialog) throws NoConverterAvailableException {
 
 		Map<Integer, ISupplier> exportSupplierMap = new HashMap<>();
 		/*
 		 * Get the names and extensions.
 		 */
-		String[] names = chromatogramConverterSupport.getExportableFilterNames();
-		String[] extensions = chromatogramConverterSupport.getExportableFilterExtensions();
-		List<ISupplier> suppliers = chromatogramConverterSupport.getExportSupplier();
+		String[] names = chromatogramConverterSupport.getFilterNames(IConverterSupport.EXPORT_SUPPLIER);
+		String[] extensions = chromatogramConverterSupport.getFilterExtensions(IConverterSupport.EXPORT_SUPPLIER);
+		Collection<ISupplier> suppliers = chromatogramConverterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
 		if(extensions.length != names.length) {
 			throw new NoConverterAvailableException("The size of extensions and names is unequal.");
 		}
@@ -171,7 +172,7 @@ public class ChromatogramFileSupport {
 		return exportSupplierMap;
 	}
 
-	private static ISupplier getSupplier(String filterName, List<ISupplier> suppliers) {
+	private static ISupplier getSupplier(String filterName, Collection<ISupplier> suppliers) {
 
 		for(ISupplier supplier : suppliers) {
 			if(supplier.isExportable() && supplier.getFilterName().equals(filterName)) {

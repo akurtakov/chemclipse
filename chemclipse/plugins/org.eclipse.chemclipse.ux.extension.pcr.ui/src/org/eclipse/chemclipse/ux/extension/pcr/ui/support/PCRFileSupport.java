@@ -15,10 +15,13 @@ package org.eclipse.chemclipse.ux.extension.pcr.ui.support;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.io.FilenameUtils;
+import org.eclipse.chemclipse.converter.core.IConverterSupport;
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.pcr.converter.core.PlateConverterPCR;
@@ -40,7 +43,6 @@ public class PCRFileSupport {
 
 	}
 
-	@SuppressWarnings("deprecation")
 	public static File savePlate(Shell shell, IPlate plate, String filterPath) throws NoConverterAvailableException {
 
 		if(plate == null || shell == null) {
@@ -58,9 +60,9 @@ public class PCRFileSupport {
 
 		IPlateConverterSupport converterSupport = PlateConverterPCR.getPlateConverterSupport();
 		if(converterSupport != null) {
-			String[] filterExtensions = converterSupport.getExportableFilterExtensions();
+			String[] filterExtensions = converterSupport.getFilterExtensions(IConverterSupport.EXPORT_SUPPLIER);
 			dialog.setFilterExtensions(filterExtensions);
-			String[] filterNames = converterSupport.getExportableFilterNames();
+			String[] filterNames = converterSupport.getFilterNames(IConverterSupport.EXPORT_SUPPLIER);
 			dialog.setFilterNames(filterNames);
 			/*
 			 * Opens the dialog.<br/> Use converterSupport.getExportSupplier()
@@ -69,8 +71,8 @@ public class PCRFileSupport {
 			 */
 			String filename = dialog.open();
 			if(filename != null) {
-				List<ISupplier> exportSupplier = converterSupport.getExportSupplier();
-				return validateFile(dialog, exportSupplier, shell, plate, filename);
+				Collection<ISupplier> exportSupplier = converterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
+				return validateFile(dialog, new ArrayList<>(exportSupplier), shell, plate, filename);
 			} else {
 				return null;
 			}

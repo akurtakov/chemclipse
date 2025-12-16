@@ -58,26 +58,6 @@ public interface IConverterSupport {
 		return extensions.toArray(new String[extensions.size()]);
 	}
 
-	@Deprecated
-	default String[] getFilterExtensions() throws NoConverterAvailableException {
-
-		String[] extensions = getFilterExtensions(ALL_SUPPLIER);
-		if(extensions.length == 0) {
-			throw new NoConverterAvailableException();
-		}
-		return extensions;
-	}
-
-	@Deprecated
-	default String[] getExportableFilterExtensions() throws NoConverterAvailableException {
-
-		String[] extensions = getFilterExtensions(EXPORT_SUPPLIER);
-		if(extensions.length == 0) {
-			throw new NoConverterAvailableException();
-		}
-		return extensions;
-	}
-
 	/**
 	 * Returns the filter names which are actually registered at the
 	 * chromatogram converter extension point.<br/>
@@ -96,49 +76,6 @@ public interface IConverterSupport {
 		return filterNames.toArray(new String[filterNames.size()]);
 	}
 
-	@Deprecated
-	default String[] getFilterNames() throws NoConverterAvailableException {
-
-		return getFilterNames(ALL_SUPPLIER);
-	}
-
-	/**
-	 * Returns the same as getFilterNames() but with filter names (converter)
-	 * that are exportable.
-	 * 
-	 * @return String[]
-	 * @throws NoConverterAvailableException
-	 */
-	@Deprecated
-	default String[] getExportableFilterNames() throws NoConverterAvailableException {
-
-		String[] names = getFilterNames(EXPORT_SUPPLIER);
-		if(names.length == 0) {
-			throw new NoConverterAvailableException();
-		}
-		return names;
-	}
-
-	/**
-	 * Returns the id of the selected filter name.<br/>
-	 * The id of the selected filter is used to determine which converter should
-	 * be used to import or export the chromatogram.<br/>
-	 * Be aware of that the first index is 0. It is a 0-based index.
-	 * 
-	 * @param index
-	 * @return String
-	 * @throws NoConverterAvailableException
-	 */
-	@Deprecated
-	default String getConverterId(int index) throws NoConverterAvailableException {
-
-		try {
-			return getSupplier().get(index).getId();
-		} catch(IndexOutOfBoundsException e) {
-			throw new NoConverterAvailableException();
-		}
-	}
-
 	/**
 	 * Returns the converter id "org.eclipse.chemclipse.msd.converter.supplier.agilent" available in the list defined by its name, e.g. "Agilent Chromatogram (*.D/DATA.MS)".
 	 * If more converter with the given name "Agilent Chromatogram (*.D/DATA.MS)" are stored, the first match will be returned. If exportConverterOnly is true, only a converter
@@ -151,7 +88,7 @@ public interface IConverterSupport {
 	 */
 	default String getConverterId(String name, boolean exportConverterOnly) throws NoConverterAvailableException {
 
-		Collection<? extends ISupplier> supplier = getSupplier(new Predicate<ISupplier>() {
+		Collection<ISupplier> supplier = getSupplier(new Predicate<ISupplier>() {
 
 			@Override
 			public boolean test(ISupplier supplier) {
@@ -196,9 +133,9 @@ public interface IConverterSupport {
 	/**
 	 * Returns the list of all available suppliers
 	 * 
-	 * @return List<ISupplier>
+	 * @return Collection<ISupplier>
 	 */
-	default Collection<? extends ISupplier> getSupplier(Predicate<? super ISupplier> filter) {
+	default Collection<ISupplier> getSupplier(Predicate<? super ISupplier> filter) {
 
 		List<ISupplier> list = new ArrayList<>();
 		for(ISupplier supplier : getSupplier()) {
@@ -221,23 +158,12 @@ public interface IConverterSupport {
 	 */
 	default ISupplier getSupplier(String id) throws NoConverterAvailableException {
 
-		Collection<? extends ISupplier> collection = getSupplier(supplier -> supplier.getId().equals(id));
+		Collection<ISupplier> collection = getSupplier(supplier -> supplier.getId().equals(id));
 		if(collection.isEmpty()) {
 			throw new NoConverterAvailableException();
 		} else {
 			return collection.iterator().next();
 		}
-	}
-
-	/**
-	 * Returns the list of all available export suppliers.
-	 * 
-	 * @return List<ISupplier>
-	 */
-	@Deprecated
-	default List<ISupplier> getExportSupplier() {
-
-		return new ArrayList<>(getSupplier(EXPORT_SUPPLIER));
 	}
 
 	DataCategory getDataCategory();

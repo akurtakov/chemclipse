@@ -14,9 +14,12 @@ package org.eclipse.chemclipse.vsd.converter.ui.swt;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
+import org.eclipse.chemclipse.converter.core.IConverterSupport;
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.converter.scan.IScanConverterSupport;
 import org.eclipse.chemclipse.converter.ui.l10n.ConverterMessagesUI;
@@ -62,7 +65,6 @@ public class VibrationalSpectroscopyFileSupport {
 	 * @param spectrum
 	 * @throws NoConverterAvailableException
 	 */
-	@SuppressWarnings("deprecation")
 	public static void saveSpectrum(Shell shell, ISpectrumVSD spectrum, String fileName) throws NoConverterAvailableException {
 
 		if(spectrum == null) {
@@ -77,15 +79,16 @@ public class VibrationalSpectroscopyFileSupport {
 		dialog.setOverwrite(true);
 		IScanConverterSupport converterSupport = ScanConverterVSD.getScanConverterSupport();
 		/*
-		 * Set the filters that allow an export of chromatographic data.
+		 * Set the filters that allow an export of IR data.
 		 */
-		String[] filterExtensions = converterSupport.getExportableFilterExtensions();
+		String[] filterExtensions = converterSupport.getFilterExtensions(IConverterSupport.EXPORT_SUPPLIER);
 		dialog.setFilterExtensions(filterExtensions);
-		String[] filterNames = converterSupport.getExportableFilterNames();
+		String[] filterNames = converterSupport.getFilterNames(IConverterSupport.EXPORT_SUPPLIER);
 		dialog.setFilterNames(filterNames);
 		String filename = dialog.open();
 		if(filename != null) {
-			validateFile(dialog, converterSupport.getExportSupplier(), shell, spectrum);
+			Collection<ISupplier> suppliers = converterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
+			validateFile(dialog, new ArrayList<>(suppliers), shell, spectrum);
 		}
 	}
 
