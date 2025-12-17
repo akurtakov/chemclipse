@@ -67,7 +67,7 @@ public interface ISupplierFileIdentifier extends SupplierContext {
 	 */
 	default boolean isSupplierFile(File file) {
 
-		return !getSupplier(file).isEmpty();
+		return !getSuppliers(file).isEmpty();
 	}
 
 	/**
@@ -76,7 +76,7 @@ public interface ISupplierFileIdentifier extends SupplierContext {
 	 * @param file
 	 * @return
 	 */
-	Collection<ISupplier> getSupplier(File file);
+	Collection<ISupplier> getSuppliers(File file);
 
 	/**
 	 * Try to match the magic number of the file format.

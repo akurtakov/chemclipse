@@ -31,13 +31,13 @@ public abstract class AbstractSupplierFileIdentifier implements ISupplierFileIde
 	public boolean isSupplierFile(File file) {
 
 		if(file.isFile()) {
-			for(ISupplier supplier : getSupplier()) {
+			for(ISupplier supplier : getSuppliers()) {
 				if(isValidFileSupplier(file, supplier)) {
 					return true;
 				}
 			}
 		} else if(file.isDirectory()) {
-			for(ISupplier supplier : getSupplier()) {
+			for(ISupplier supplier : getSuppliers()) {
 				if(isValidDirectorySupplier(file, supplier)) {
 					return true;
 				}
@@ -47,17 +47,17 @@ public abstract class AbstractSupplierFileIdentifier implements ISupplierFileIde
 	}
 
 	@Override
-	public Collection<ISupplier> getSupplier(File file) {
+	public Collection<ISupplier> getSuppliers(File file) {
 
 		List<ISupplier> list = new ArrayList<>();
 		if(file.isFile()) {
-			for(ISupplier supplier : getSupplier()) {
+			for(ISupplier supplier : getSuppliers()) {
 				if(isValidFileSupplier(file, supplier) && isMatchMagicNumber(file)) {
 					list.add(supplier);
 				}
 			}
 		} else if(file.isDirectory()) {
-			for(ISupplier supplier : getSupplier()) {
+			for(ISupplier supplier : getSuppliers()) {
 				if(isValidDirectorySupplier(file, supplier) && isMatchMagicNumber(file)) {
 					list.add(supplier);
 				}
@@ -121,7 +121,7 @@ public abstract class AbstractSupplierFileIdentifier implements ISupplierFileIde
 	}
 
 	@Override
-	public Collection<ISupplier> getSupplier() {
+	public Collection<ISupplier> getSuppliers() {
 
 		return suppliers;
 	}
@@ -153,7 +153,7 @@ public abstract class AbstractSupplierFileIdentifier implements ISupplierFileIde
 	@Override
 	public boolean isMatchMagicNumber(File file) {
 
-		for(ISupplier supplier : getSupplier()) {
+		for(ISupplier supplier : getSuppliers()) {
 			if(supplier.isMatchMagicNumber(file)) {
 				return true;
 			}
@@ -164,7 +164,7 @@ public abstract class AbstractSupplierFileIdentifier implements ISupplierFileIde
 	@Override
 	public boolean isMatchContent(File file) {
 
-		for(ISupplier supplier : getSupplier()) {
+		for(ISupplier supplier : getSuppliers()) {
 			if(supplier.isMatchMagicNumber(file) && supplier.isMatchContent(file)) {
 				return true;
 			}

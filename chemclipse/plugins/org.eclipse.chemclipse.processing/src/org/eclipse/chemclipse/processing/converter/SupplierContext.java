@@ -17,5 +17,5 @@ import java.util.Collection;
 
 public interface SupplierContext {
 
-	Collection<ISupplier> getSupplier();
+	Collection<ISupplier> getSuppliers();
 }
