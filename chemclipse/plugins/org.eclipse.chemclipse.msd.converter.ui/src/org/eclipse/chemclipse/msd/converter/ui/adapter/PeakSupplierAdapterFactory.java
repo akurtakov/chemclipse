@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.msd.converter.ui.adapter;
 import org.eclipse.chemclipse.msd.converter.peak.IPeakSupplier;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.ux.extension.ui.editors.EditorDescriptor;
 import org.eclipse.chemclipse.ux.extension.ui.editors.SnippetEditorDescriptor;
 import org.eclipse.core.runtime.IAdapterFactory;
@@ -44,7 +45,7 @@ public class PeakSupplierAdapterFactory implements IAdapterFactory, SnippetEdito
 	@Override
 	public ImageDescriptor getImageDescriptor() {
 
-		return ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_PEAKS, IApplicationImage.SIZE_16x16);
+		return ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_PEAKS, IApplicationImageProvider.SIZE_16x16);
 	}
 
 	@Override

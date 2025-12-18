@@ -39,7 +39,7 @@ public class EclipseSupplierFileIdentifier implements SupplierContext {
 	private Collection<ISupplier> list;
 
 	@Override
-	public Collection<ISupplier> getSupplier() {
+	public Collection<ISupplier> getSuppliers() {
 
 		if(list == null) {
 			ArrayList<ISupplier> items = new ArrayList<>();

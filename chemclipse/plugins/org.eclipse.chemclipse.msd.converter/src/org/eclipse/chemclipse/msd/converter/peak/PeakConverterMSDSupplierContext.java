@@ -22,7 +22,7 @@ import org.osgi.service.component.annotations.Component;
 public class PeakConverterMSDSupplierContext implements SupplierContext {
 
 	@Override
-	public Collection<ISupplier> getSupplier() {
+	public Collection<ISupplier> getSuppliers() {
 
 		return PeakConverterMSD.getPeakConverterSupport().getSupplier();
 	}

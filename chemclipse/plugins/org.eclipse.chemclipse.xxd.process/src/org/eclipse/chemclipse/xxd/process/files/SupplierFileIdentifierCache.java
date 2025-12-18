@@ -56,9 +56,10 @@ public class SupplierFileIdentifierCache implements Function<File, Map<ISupplier
 		if(list == null) {
 			list = new LinkedHashMap<>();
 			for(ISupplierFileIdentifier supplierFileIdentifier : fileIdentifiers) {
-				Collection<ISupplier> supplier = supplierFileIdentifier.getSupplier(file);
-				if(!supplier.isEmpty()) {
-					list.put(supplierFileIdentifier, Collections.unmodifiableCollection(supplier));
+				Collection<ISupplier> suppliers = supplierFileIdentifier.getSuppliers(file);
+				suppliers.removeIf(s -> !s.isMatchMagicNumber(file) || !s.isMatchContent(file));
+				if(!suppliers.isEmpty()) {
+					list.put(supplierFileIdentifier, Collections.unmodifiableCollection(suppliers));
 				}
 			}
 			list = Collections.unmodifiableMap(list);

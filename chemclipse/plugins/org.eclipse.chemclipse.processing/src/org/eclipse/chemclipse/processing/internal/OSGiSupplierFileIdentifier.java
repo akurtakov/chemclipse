@@ -55,11 +55,11 @@ public class OSGiSupplierFileIdentifier extends AbstractSupplierFileIdentifier i
 	}
 
 	@Override
-	public Collection<ISupplier> getSupplier() {
+	public Collection<ISupplier> getSuppliers() {
 
 		List<ISupplier> list = new ArrayList<>();
 		for(SupplierContext context : supplierContexts) {
-			list.addAll(context.getSupplier());
+			list.addAll(context.getSuppliers());
 		}
 		return list;
 	}

@@ -57,15 +57,15 @@ public class GenericSupplierEditorSupport implements ISupplierFileEditorSupport 
 	}
 
 	@Override
-	public Collection<ISupplier> getSupplier(File file) {
+	public Collection<ISupplier> getSuppliers(File file) {
 
-		return fileIdentifier.getSupplier(file);
+		return fileIdentifier.getSuppliers(file);
 	}
 
 	@Override
-	public Collection<ISupplier> getSupplier() {
+	public Collection<ISupplier> getSuppliers() {
 
-		return fileIdentifier.getSupplier();
+		return fileIdentifier.getSuppliers();
 	}
 
 	@Override
