@@ -662,6 +662,7 @@ public class BatchProcessEditorPage implements IMultiEditorPage {
 						logger.warn(ex.getCause());
 					} catch(InterruptedException ex) {
 						logger.warn(ex);
+						Thread.currentThread().interrupt();
 					}
 				}
 			}

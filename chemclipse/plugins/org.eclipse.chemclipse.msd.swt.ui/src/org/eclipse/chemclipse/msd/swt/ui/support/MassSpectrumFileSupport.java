@@ -276,6 +276,7 @@ public class MassSpectrumFileSupport {
 			logger.warn(e);
 		} catch(InterruptedException e) {
 			logger.warn(e);
+			Thread.currentThread().interrupt();
 		}
 
 		File data = runnable.getData();

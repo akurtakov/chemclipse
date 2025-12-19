@@ -127,6 +127,7 @@ public class QueryStructuralFormula extends AbstractQuery {
 			logger.error(e);
 		} catch(InterruptedException e) {
 			logger.error(e);
+			Thread.currentThread().interrupt();
 		}
 		return null;
 	}

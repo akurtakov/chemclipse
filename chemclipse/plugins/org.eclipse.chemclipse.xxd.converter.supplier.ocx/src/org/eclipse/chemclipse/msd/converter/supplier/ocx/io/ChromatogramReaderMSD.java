@@ -23,6 +23,7 @@ import org.eclipse.chemclipse.converter.exceptions.FileIsEmptyException;
 import org.eclipse.chemclipse.converter.exceptions.FileIsNotReadableException;
 import org.eclipse.chemclipse.csd.converter.supplier.ocx.io.ChromatogramReaderCSD;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.support.ChromatogramSupport;
@@ -64,6 +65,8 @@ import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 
 public class ChromatogramReaderMSD extends AbstractChromatogramMSDReader implements IChromatogramMSDZipReader {
 
+	private static final Logger logger = Logger.getLogger(ChromatogramReaderMSD.class);
+
 	@Override
 	public IChromatogramOverview readOverview(File file, IProgressMonitor monitor) throws IOException {
 
@@ -102,9 +105,13 @@ public class ChromatogramReaderMSD extends AbstractChromatogramMSDReader impleme
 		if(chromatogramReader != null) {
 			try {
 				chromatogramMSD = chromatogramReader.read(file, monitor);
-			} catch(Exception e) {
-				System.out.println(e);
+			} catch(IOException e) {
+				logger.error(e);
 				chromatogramMSD = createChromatogramMSDFromFID(18.0d, file, monitor);
+			} catch(InterruptedException e) {
+				logger.error(e);
+				chromatogramMSD = createChromatogramMSDFromFID(18.0d, file, monitor);
+				Thread.currentThread().interrupt();
 			}
 		} else {
 			chromatogramMSD = createChromatogramMSDFromFID(18.0d, file, monitor);

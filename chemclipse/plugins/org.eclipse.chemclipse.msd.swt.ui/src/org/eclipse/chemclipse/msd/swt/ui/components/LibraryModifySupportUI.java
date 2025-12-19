@@ -228,11 +228,12 @@ public class LibraryModifySupportUI extends Composite {
 						 * should be shown in action.
 						 */
 						monitor.run(true, true, runnable);
-					} catch(InvocationTargetException e1) {
-						logger.warn(e1);
-						logger.warn(e1.getCause());
-					} catch(InterruptedException e1) {
-						logger.warn(e1);
+					} catch(InvocationTargetException ex) {
+						logger.warn(ex);
+						logger.warn(ex.getCause());
+					} catch(InterruptedException ex) {
+						logger.warn(ex);
+						Thread.currentThread().interrupt();
 					}
 
 					IMassSpectra massSpectraImport = runnable.getMassSpectra();

@@ -13,6 +13,7 @@
 package org.eclipse.chemclipse.msd.converter.supplier.amdis.ui.wizards;
 
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.eclipse.chemclipse.logging.core.Logger;
@@ -96,9 +97,13 @@ public class DatabaseCollectorWizard extends Wizard implements IImportWizard {
 		try {
 			getContainer().run(true, false, runnableWithProgress);
 			MessageDialog.openInformation(getShell(), DESCRIPTION, "The databases have been collected and saved.");
-		} catch(Exception e) {
+		} catch(InterruptedException e) {
 			MessageDialog.openError(getShell(), DESCRIPTION, e.getMessage());
+			Thread.currentThread().interrupt();
 			return false;
+		} catch(InvocationTargetException e) {
+			MessageDialog.openError(getShell(), DESCRIPTION, e.getCause().getMessage());
+			logger.error(e);
 		}
 
 		return true;

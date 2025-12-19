@@ -80,6 +80,7 @@ public class RetentionIndexLibraryDialog {
 					logger.warn(e);
 				} catch(InterruptedException e) {
 					logger.warn(e);
+					Thread.currentThread().interrupt();
 				}
 				/*
 				 * Let the user review and select the results.

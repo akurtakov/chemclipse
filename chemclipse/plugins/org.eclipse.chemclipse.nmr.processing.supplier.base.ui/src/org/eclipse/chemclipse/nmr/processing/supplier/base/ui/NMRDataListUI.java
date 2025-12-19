@@ -157,7 +157,7 @@ public class NMRDataListUI extends DataListUI {
 			processingInfo.addErrorMessage("NMR Batch Job", "loading files failed", e.getCause());
 			ProcessingInfoPartSupport.getInstance().update(processingInfo);
 		} catch(InterruptedException e) {
-			return;
+			Thread.currentThread().interrupt();
 		}
 	}
 
