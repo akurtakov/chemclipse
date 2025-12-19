@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
+import org.eclipse.chemclipse.msd.converter.supplier.matlab.parafac.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.matlab.parafac.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IPeaksMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -35,7 +36,7 @@ public class MatlabParafacPeakImportConverter_6_ITest {
 	public void setUp() {
 
 		MatlabParafacPeakImportConverter converter = new MatlabParafacPeakImportConverter();
-		File file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_PARAFAC_TEST_2));
+		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_PARAFAC_TEST_2));
 		IProcessingInfo<IPeaksMSD> processingInfo = converter.convert(file, new NullProgressMonitor());
 		peaks = processingInfo.getProcessingResult();
 	}

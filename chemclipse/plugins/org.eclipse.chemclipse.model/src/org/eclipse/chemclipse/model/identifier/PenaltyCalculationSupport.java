@@ -14,6 +14,7 @@
 package org.eclipse.chemclipse.model.identifier;
 
 import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.IScan;
 
 public class PenaltyCalculationSupport {
@@ -55,7 +56,7 @@ public class PenaltyCalculationSupport {
 				penalty = (float)calculatePenalty(retentionTimeUnknown, retentionTimeReference, penaltyCalculationSettings.getPenaltyWindow(), penaltyCalculationSettings.getPenaltyLevelFactor(), penaltyCalculationSettings.getMaxPenalty());
 				break;
 			case RETENTION_TIME_MIN:
-				penalty = (float)calculatePenalty(retentionTimeUnknown / IChromatogram.MINUTE_CORRELATION_FACTOR, retentionTimeReference / IChromatogram.MINUTE_CORRELATION_FACTOR, penaltyCalculationSettings.getPenaltyWindow(), penaltyCalculationSettings.getPenaltyLevelFactor(), penaltyCalculationSettings.getMaxPenalty());
+				penalty = (float)calculatePenalty(retentionTimeUnknown / IChromatogramOverview.MINUTE_CORRELATION_FACTOR, retentionTimeReference / IChromatogram.MINUTE_CORRELATION_FACTOR, penaltyCalculationSettings.getPenaltyWindow(), penaltyCalculationSettings.getPenaltyLevelFactor(), penaltyCalculationSettings.getMaxPenalty());
 				break;
 			case RETENTION_INDEX:
 				penalty = (float)calculatePenalty(retentionIndexUnknown, retentionIndexReference, penaltyCalculationSettings.getPenaltyWindow(), penaltyCalculationSettings.getPenaltyLevelFactor(), penaltyCalculationSettings.getMaxPenalty());

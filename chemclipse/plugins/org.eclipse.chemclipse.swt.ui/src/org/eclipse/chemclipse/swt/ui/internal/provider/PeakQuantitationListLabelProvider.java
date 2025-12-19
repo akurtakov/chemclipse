@@ -14,7 +14,7 @@ package org.eclipse.chemclipse.swt.ui.internal.provider;
 
 import java.text.DecimalFormat;
 
-import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.support.PeakQuantitation;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
@@ -48,7 +48,7 @@ public class PeakQuantitationListLabelProvider extends AbstractChemClipseLabelPr
 		if(element instanceof PeakQuantitation peakQuantitationEntry) {
 			switch(columnIndex) {
 				case 0:
-					text = decimalFormat.format(peakQuantitationEntry.getRetentionTime() / IChromatogram.MINUTE_CORRELATION_FACTOR);
+					text = decimalFormat.format(peakQuantitationEntry.getRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 					break;
 				case 1:
 					text = peakQuantitationEntry.getName();

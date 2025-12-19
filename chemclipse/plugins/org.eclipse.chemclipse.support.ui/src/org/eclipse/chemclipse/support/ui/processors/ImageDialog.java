@@ -101,7 +101,7 @@ public class ImageDialog extends Dialog {
 
 	private void initialize() {
 
-		images.addAll(ApplicationImageFactory.getInstance().listImages(IApplicationImage.SIZE_16x16));
+		images.addAll(ApplicationImageFactory.getInstance().listImages(IApplicationImageProvider.SIZE_16x16));
 		Collections.sort(images);
 	}
 

@@ -24,10 +24,10 @@ import org.eclipse.chemclipse.chromatogram.msd.peak.detector.settings.IPeakDetec
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.IDetectorSlope;
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.IRawPeak;
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.RawPeak;
+import org.eclipse.chemclipse.model.core.IPeakModel;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.model.signals.TotalScanSignalsModifier;
-import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
 import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
 import org.eclipse.chemclipse.numeric.miscellaneous.Evaluation;
@@ -203,7 +203,7 @@ public class PeakDetectorSupport {
 
 		boolean isValid = false;
 		int width = rawPeak.getStopScan() - rawPeak.getStartScan() + 1;
-		if(width >= IPeakModelMSD.MINIMUM_SCANS) {
+		if(width >= IPeakModel.MINIMUM_SCANS) {
 			isValid = true;
 		}
 		return isValid;

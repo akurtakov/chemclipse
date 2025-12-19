@@ -17,6 +17,7 @@ import java.text.DecimalFormat;
 import org.eclipse.chemclipse.model.ranges.TimeRange;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.TimeRangesLabelProvider;
 import org.eclipse.core.databinding.validation.IValidator;
@@ -130,7 +131,7 @@ public class TimeSpinner extends Composite {
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
 		button.setToolTipText((increase ? "Increase" : "Decrease") + " the current time [min].");
-		button.setImage(ApplicationImageFactory.getInstance().getImage(increase ? IApplicationImage.IMAGE_VALUE_INCREASE : IApplicationImage.IMAGE_VALUE_DECREASE, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(increase ? IApplicationImage.IMAGE_VALUE_INCREASE : IApplicationImage.IMAGE_VALUE_DECREASE, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override

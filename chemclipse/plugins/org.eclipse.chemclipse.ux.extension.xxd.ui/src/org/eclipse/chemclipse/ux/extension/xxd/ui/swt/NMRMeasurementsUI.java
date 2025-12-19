@@ -41,6 +41,7 @@ import org.eclipse.chemclipse.processing.filter.Filtered;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.actions.MeasurementFilterAction;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
@@ -69,8 +70,8 @@ import org.eclipse.swt.widgets.Menu;
 
 public class NMRMeasurementsUI implements PropertyChangeListener {
 
-	private static final Image IMAGE_FREQUENCY = ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SCAN_NMR, IApplicationImage.SIZE_16x16);
-	private static final Image IMAGE_FID = ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SCAN_FID, IApplicationImage.SIZE_16x16);
+	private static final Image IMAGE_FREQUENCY = ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SCAN_NMR, IApplicationImageProvider.SIZE_16x16);
+	private static final Image IMAGE_FID = ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SCAN_FID, IApplicationImageProvider.SIZE_16x16);
 	private static final TreeNode[] EMPTY = new TreeNode[0];
 
 	private TreeViewer treeViewer;

@@ -22,7 +22,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.chemclipse.logging.core.Logger;
-import org.eclipse.chemclipse.model.core.AbstractChromatogram;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.identifier.LibraryInformation;
 import org.eclipse.chemclipse.msd.converter.io.AbstractMassSpectraReader;
@@ -269,7 +269,7 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 				retentionTime = (int)(Double.parseDouble(value) * 1000.0d);
 			} else if(line.startsWith(TIME_MARKER)) {
 				String value = line.replace(TIME_MARKER, "").trim();
-				retentionTime = (int)(Double.parseDouble(value) * AbstractChromatogram.MINUTE_CORRELATION_FACTOR);
+				retentionTime = (int)(Double.parseDouble(value) * IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 			}
 		} catch(NumberFormatException e) {
 			logger.warn(e);

@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
+import org.eclipse.chemclipse.msd.converter.supplier.mmass.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.mmass.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
@@ -35,7 +36,7 @@ public class Tiny22_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File importFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_MMASS_TINY_22));
+		File importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_MMASS_TINY_22));
 		MassSpectrumImportConverter converter = new MassSpectrumImportConverter();
 		IProcessingInfo<IMassSpectra> processingInfo = converter.convert(importFile, new NullProgressMonitor());
 		massSpectrum = (IStandaloneMassSpectrum)processingInfo.getProcessingResult().getMassSpectrum(1);

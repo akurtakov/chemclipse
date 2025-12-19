@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 
 import org.eclipse.chemclipse.msd.converter.database.IDatabaseImportConverter;
+import org.eclipse.chemclipse.msd.converter.supplier.amdis.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -41,7 +42,7 @@ public class MSLImportConverter_1_ITest {
 	@Test
 	public void testExceptions_2() {
 
-		importFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_EMPTY));
+		importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_EMPTY));
 		IProcessingInfo<?> processingInfo = importConverter.convert(importFile, new NullProgressMonitor());
 		assertTrue(processingInfo.hasErrorMessages());
 	}
@@ -57,7 +58,7 @@ public class MSLImportConverter_1_ITest {
 	@Test
 	public void testExceptions_4() {
 
-		importFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_NOT_READABLE));
+		importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_NOT_READABLE));
 		importFile.setReadable(false);
 		try {
 			IProcessingInfo<?> processingInfo = importConverter.convert(importFile, new NullProgressMonitor());

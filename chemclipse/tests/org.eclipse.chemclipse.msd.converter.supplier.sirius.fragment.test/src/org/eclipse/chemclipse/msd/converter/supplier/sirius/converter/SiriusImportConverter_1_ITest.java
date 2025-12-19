@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
+import org.eclipse.chemclipse.msd.converter.supplier.sirius.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.sirius.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -35,7 +36,7 @@ public class SiriusImportConverter_1_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_BICUCULLINE));
+		file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_BICUCULLINE));
 		converter = new SiriusImportConverter();
 		IProcessingInfo<IMassSpectra> processingInfo = converter.convert(file, new NullProgressMonitor());
 		massSpectra = processingInfo.getProcessingResult();

@@ -31,7 +31,6 @@ import org.eclipse.chemclipse.csd.converter.supplier.xy.model.VendorScan;
 import org.eclipse.chemclipse.csd.converter.supplier.xy.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.logging.core.Logger;
-import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.support.ChromatogramSupport;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -115,7 +114,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 									 * Minutes
 									 */
 									double retentionTimeInMinutes = Double.parseDouble(value);
-									retentionTime = (int)(retentionTimeInMinutes * IChromatogram.MINUTE_CORRELATION_FACTOR);
+									retentionTime = (int)(retentionTimeInMinutes * IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 								} else {
 									/*
 									 * Milliseconds
@@ -126,11 +125,11 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 								switch(retentionTimeFormat) {
 									case MINUTES:
 										double retentionTimeInMinutes = Double.parseDouble(value);
-										retentionTime = (int)(retentionTimeInMinutes * IChromatogram.MINUTE_CORRELATION_FACTOR);
+										retentionTime = (int)(retentionTimeInMinutes * IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 										break;
 									case SECONDS:
 										double retentionTimeInSeconds = Double.parseDouble(value);
-										retentionTime = (int)(retentionTimeInSeconds * IChromatogram.SECOND_CORRELATION_FACTOR);
+										retentionTime = (int)(retentionTimeInSeconds * IChromatogramOverview.SECOND_CORRELATION_FACTOR);
 										break;
 									default:
 										retentionTime = Integer.parseInt(value);

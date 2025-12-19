@@ -25,7 +25,7 @@ import org.eclipse.chemclipse.model.columns.ISeparationColumnIndices;
 import org.eclipse.chemclipse.model.columns.RetentionIndexEntry;
 import org.eclipse.chemclipse.model.columns.SeparationColumnFactory;
 import org.eclipse.chemclipse.model.columns.SeparationColumnIndices;
-import org.eclipse.chemclipse.model.core.AbstractChromatogram;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
 import org.eclipse.chemclipse.support.model.SeparationColumnType;
@@ -89,7 +89,7 @@ public class AMDISConverter {
 					try {
 						String[] values = line.split(IColumnFormat.RI_VALUE_DELIMITER);
 						if(values.length >= 5) {
-							int retentionTime = (int)(Double.parseDouble(values[0]) * AbstractChromatogram.MINUTE_CORRELATION_FACTOR); // Retention Time: 1.908
+							int retentionTime = (int)(Double.parseDouble(values[0]) * IChromatogramOverview.MINUTE_CORRELATION_FACTOR); // Retention Time: 1.908
 							float retentionIndex = Float.parseFloat(values[1]); // Retention Index: 600.0
 							/*
 							 * The following values are used by AMDIS but are not needed here.

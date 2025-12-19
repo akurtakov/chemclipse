@@ -20,6 +20,7 @@ import java.io.IOException;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
+import org.eclipse.chemclipse.xxd.converter.supplier.csv.PathResolver;
 import org.eclipse.chemclipse.xxd.converter.supplier.csv.TestPathHelper;
 import org.eclipse.chemclipse.xxd.converter.supplier.csv.io.core.ChromatogramWriter;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
@@ -41,10 +42,10 @@ public class ChromatogramWriter_1_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File fileImport = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1));
+		File fileImport = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1));
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();
-		file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.DIRECTORY_EXPORT_TEST) + File.separator + "Test.csv");
+		file = new File(PathResolver.getAbsolutePath(TestPathHelper.DIRECTORY_EXPORT_TEST) + File.separator + "Test.csv");
 	}
 
 	@AfterAll

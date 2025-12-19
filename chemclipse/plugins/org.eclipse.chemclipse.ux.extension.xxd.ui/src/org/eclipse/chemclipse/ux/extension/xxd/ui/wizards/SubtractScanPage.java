@@ -14,6 +14,7 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.wizards;
 
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModelMSD;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
@@ -104,8 +105,8 @@ public class SubtractScanPage extends WizardPage {
 
 	private Button createButtonMultiSubtract(Composite parent) {
 
-		Image imageSubtractOne = ApplicationImageFactory.getInstance().getImage(IApplicationImage.PICTOGRAM_SUBTRACT_SCAN_ONE, IApplicationImage.SIZE_128x68);
-		Image imageSubtractMany = ApplicationImageFactory.getInstance().getImage(IApplicationImage.PICTOGRAM_SUBTRACT_SCAN_MANY, IApplicationImage.SIZE_128x68);
+		Image imageSubtractOne = ApplicationImageFactory.getInstance().getImage(IApplicationImage.PICTOGRAM_SUBTRACT_SCAN_ONE, IApplicationImageProvider.SIZE_128x68);
+		Image imageSubtractMany = ApplicationImageFactory.getInstance().getImage(IApplicationImage.PICTOGRAM_SUBTRACT_SCAN_MANY, IApplicationImageProvider.SIZE_128x68);
 		boolean isSubtractMany = preferenceStore.getBoolean(PreferenceSupplier.P_ENABLE_MULTI_SUBTRACT);
 		String textSubtractOne = "Modus: One Scan Subtract";
 		String textSubtractMany = "Modus: Multi Scan Subtract";

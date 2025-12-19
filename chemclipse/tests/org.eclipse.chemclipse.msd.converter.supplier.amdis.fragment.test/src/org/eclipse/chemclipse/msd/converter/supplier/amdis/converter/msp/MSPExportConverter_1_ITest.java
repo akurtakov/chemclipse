@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 
 import org.eclipse.chemclipse.msd.converter.database.IDatabaseExportConverter;
+import org.eclipse.chemclipse.msd.converter.supplier.amdis.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
@@ -42,7 +43,7 @@ public class MSPExportConverter_1_ITest {
 	public void setUp() {
 
 		exportConverter = new MSPDatabaseExportConverter();
-		exportFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTDIR_EXPORT) + File.separator + TestPathHelper.TESTFILE_EXPORT_DB_MSP);
+		exportFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTDIR_EXPORT) + File.separator + TestPathHelper.TESTFILE_EXPORT_DB_MSP);
 		massSpectrum = new ScanMSD();
 		massSpectrum.addIon(new Ion(56.3f, 7382.3f));
 		massSpectrum.addIon(new Ion(26.3f, 73382.3f));

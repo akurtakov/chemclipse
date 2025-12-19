@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.PathResolver;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.TestPathHelper;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.settings.ChromatogramFilterSettings;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
@@ -44,7 +45,7 @@ public class SavitzkyGolayProcessor_1_ITest {
 		 * Signals
 		 */
 		totalScanSignals = new TotalScanSignals(5726);
-		BufferedReader reader = new BufferedReader(new FileReader(new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1))));
+		BufferedReader reader = new BufferedReader(new FileReader(new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1))));
 		String line;
 		while((line = reader.readLine()) != null) {
 			String[] values = line.split(", ");

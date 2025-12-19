@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.noise.dyson.
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.noise.dyson.PathResolver;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.noise.dyson.TestPathHelper;
 import org.eclipse.chemclipse.model.results.ChromatogramSegmentation;
 import org.junit.jupiter.api.BeforeAll;
@@ -31,7 +32,7 @@ public class NoiseCalculator_2_ITest extends ChromatogramReaderTestCase {
 	@BeforeAll
 	public void setUp() {
 
-		pathImport = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_2);
+		pathImport = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_2);
 		super.setUp();
 	}
 

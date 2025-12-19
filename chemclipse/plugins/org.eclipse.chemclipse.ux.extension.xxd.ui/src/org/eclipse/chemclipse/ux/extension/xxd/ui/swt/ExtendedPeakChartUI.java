@@ -291,7 +291,7 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 		button.setToolTipText("Use Perpendicular Drop.");
 		button.setText("");
 		button.setEnabled(false);
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DETECTION_TYPE_PERPENDICULAR, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DETECTION_TYPE_PERPENDICULAR, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override

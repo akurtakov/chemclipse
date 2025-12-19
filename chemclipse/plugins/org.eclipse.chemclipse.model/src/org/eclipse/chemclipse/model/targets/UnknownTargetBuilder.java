@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.targets;
 
-import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.identifier.ComparisonResult;
 import org.eclipse.chemclipse.model.identifier.IComparisonResult;
@@ -53,7 +53,7 @@ public class UnknownTargetBuilder {
 			builder.append(" ");
 			builder.append("RT");
 			builder.append(" ");
-			double retentionTimeInMinutes = unknown.getRetentionTime() / IChromatogram.MINUTE_CORRELATION_FACTOR;
+			double retentionTimeInMinutes = unknown.getRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR;
 			builder.append(ValueFormat.getDecimalFormatEnglish("0.000").format(retentionTimeInMinutes));
 		}
 		/*

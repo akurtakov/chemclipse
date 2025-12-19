@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Set;
 
+import org.eclipse.chemclipse.msd.converter.supplier.amdis.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.ILibraryMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
@@ -41,7 +42,7 @@ public class MSPReader_1_ITest {
 	public void setUp() throws IOException {
 
 		reader = new MSPReader();
-		String pathname = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_SYNONYMS);
+		String pathname = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_SYNONYMS);
 		file = new File(pathname);
 		massSpectra = reader.read(file, new NullProgressMonitor());
 	}

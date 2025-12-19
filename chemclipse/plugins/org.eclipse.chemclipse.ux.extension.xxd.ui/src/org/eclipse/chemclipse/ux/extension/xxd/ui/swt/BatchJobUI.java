@@ -27,6 +27,7 @@ import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.ux.extension.ui.editors.ExtendedMethodUI;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -172,7 +173,7 @@ public class BatchJobUI {
 		final ToolItem toolItem = new ToolItem(toolBar, SWT.NONE);
 		toolItem.setText(getDataCategoryLabel());
 		toolItem.setToolTipText("The following data types are active.");
-		toolItem.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_INFO, IApplicationImage.SIZE_16x16));
+		toolItem.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_INFO, IApplicationImageProvider.SIZE_16x16));
 		toolItem.setEnabled(false);
 
 		return toolItem;
@@ -192,7 +193,7 @@ public class BatchJobUI {
 		final ToolItem toolItem = new ToolItem(toolBar, SWT.PUSH);
 		toolItem.setText("Execute");
 		toolItem.setToolTipText("Execute the batch job.");
-		toolItem.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXECUTE, IApplicationImage.SIZE_16x16));
+		toolItem.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXECUTE, IApplicationImageProvider.SIZE_16x16));
 
 		toolItem.addSelectionListener(new SelectionAdapter() {
 

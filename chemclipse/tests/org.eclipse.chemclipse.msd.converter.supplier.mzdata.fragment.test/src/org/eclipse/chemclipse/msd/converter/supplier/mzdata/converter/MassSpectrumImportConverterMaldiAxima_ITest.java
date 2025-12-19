@@ -18,6 +18,7 @@ import java.io.File;
 import java.time.ZoneId;
 import java.util.Date;
 
+import org.eclipse.chemclipse.msd.converter.supplier.mzdata.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.mzdata.model.VendorMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
@@ -38,7 +39,7 @@ public class MassSpectrumImportConverterMaldiAxima_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File importFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_MALDI_AXIMA_CFR));
+		File importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_MALDI_AXIMA_CFR));
 		MassSpectrumImportConverter converter = new MassSpectrumImportConverter();
 		IProcessingInfo<IMassSpectra> processingInfo = converter.convert(importFile, new NullProgressMonitor());
 		VendorMassSpectra massSpectra = (VendorMassSpectra)processingInfo.getProcessingResult();

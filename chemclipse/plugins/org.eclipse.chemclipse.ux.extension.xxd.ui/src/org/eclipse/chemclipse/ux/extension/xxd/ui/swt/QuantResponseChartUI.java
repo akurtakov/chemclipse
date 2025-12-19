@@ -26,6 +26,7 @@ import org.eclipse.chemclipse.numeric.core.Point;
 import org.eclipse.chemclipse.numeric.equations.IEquation;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.swt.ui.support.IColorScheme;
@@ -47,8 +48,8 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swtchart.extensions.linecharts.ICompressionSupport;
 import org.eclipse.swtchart.extensions.linecharts.ILineSeriesData;
-import org.eclipse.swtchart.extensions.linecharts.LineChart;
 
 public class QuantResponseChartUI extends Composite implements IExtendedPartUI {
 
@@ -119,7 +120,7 @@ public class QuantResponseChartUI extends Composite implements IExtendedPartUI {
 		Button button = new Button(parent, SWT.PUSH);
 		button.setToolTipText("Reset the chart");
 		button.setText("");
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_RESET, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_RESET, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -211,7 +212,7 @@ public class QuantResponseChartUI extends Composite implements IExtendedPartUI {
 				colors.incrementColor();
 			}
 
-			calibrationChart.addSeriesData(lineSeriesDataList, LineChart.NO_COMPRESSION);
+			calibrationChart.addSeriesData(lineSeriesDataList, ICompressionSupport.NO_COMPRESSION);
 		} else {
 			toolbarInfo.get().setText("");
 		}

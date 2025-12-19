@@ -364,7 +364,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 
 		Button button = new Button(parent, SWT.PUSH);
 		button.setToolTipText("Add combined scan to the subtract spectrum.");
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SUBTRACT_ADD_COMBINED_SCAN, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SUBTRACT_ADD_COMBINED_SCAN, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -407,7 +407,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 
 		Button button = new Button(parent, SWT.PUSH);
 		button.setToolTipText("Save the combined scan.");
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SAVE_AS, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SAVE_AS, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override

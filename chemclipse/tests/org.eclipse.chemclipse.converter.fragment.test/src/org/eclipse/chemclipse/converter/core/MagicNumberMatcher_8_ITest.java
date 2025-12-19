@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.converter.TestPathHelper;
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +41,7 @@ public class MagicNumberMatcher_8_ITest {
 	@Test
 	public void test1() throws IOException {
 
-		File file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_BIN_TEST));
+		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_BIN_TEST));
 		assertFalse(magicNumberMatcher.checkFileFormat(file));
 	}
 }

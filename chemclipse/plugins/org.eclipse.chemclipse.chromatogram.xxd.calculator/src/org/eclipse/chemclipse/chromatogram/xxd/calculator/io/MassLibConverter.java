@@ -28,7 +28,7 @@ import org.eclipse.chemclipse.model.columns.ISeparationColumnIndices;
 import org.eclipse.chemclipse.model.columns.RetentionIndexEntry;
 import org.eclipse.chemclipse.model.columns.SeparationColumnFactory;
 import org.eclipse.chemclipse.model.columns.SeparationColumnIndices;
-import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
 
@@ -54,12 +54,12 @@ public class MassLibConverter {
 		int retentionTime = 0;
 
 		if(values.length == 2) {
-			retentionTime += getInteger(values[0]) * IChromatogram.MINUTE_CORRELATION_FACTOR; // Minutes
-			retentionTime += getInteger(values[1]) * IChromatogram.SECOND_CORRELATION_FACTOR; // Seconds
+			retentionTime += getInteger(values[0]) * IChromatogramOverview.MINUTE_CORRELATION_FACTOR; // Minutes
+			retentionTime += getInteger(values[1]) * IChromatogramOverview.SECOND_CORRELATION_FACTOR; // Seconds
 		} else if(values.length == 3) {
-			retentionTime += getInteger(values[0]) * IChromatogram.HOUR_CORRELATION_FACTOR; // Hours
-			retentionTime += getInteger(values[1]) * IChromatogram.MINUTE_CORRELATION_FACTOR; // Minutes
-			retentionTime += getInteger(values[2]) * IChromatogram.SECOND_CORRELATION_FACTOR; // Seconds
+			retentionTime += getInteger(values[0]) * IChromatogramOverview.HOUR_CORRELATION_FACTOR; // Hours
+			retentionTime += getInteger(values[1]) * IChromatogramOverview.MINUTE_CORRELATION_FACTOR; // Minutes
+			retentionTime += getInteger(values[2]) * IChromatogramOverview.SECOND_CORRELATION_FACTOR; // Seconds
 		}
 
 		return retentionTime;

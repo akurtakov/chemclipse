@@ -24,6 +24,7 @@ import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.validators.RetentionIndexAssignerValidator;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.events.IKeyEventProcessor;
 import org.eclipse.chemclipse.support.ui.menu.ITableMenuEntry;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
@@ -248,7 +249,7 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
 		button.setToolTipText(ADD_TOOLTIP);
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ADD, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ADD, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -274,7 +275,7 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
 		button.setToolTipText(EDIT_TOOLTIP);
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EDIT, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EDIT, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -305,7 +306,7 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
 		button.setToolTipText(REMOVE_TOOLTIP);
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DELETE, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DELETE, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -323,7 +324,7 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
 		button.setToolTipText(REMOVE_ALL_TOOLTIP);
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DELETE_ALL, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DELETE_ALL, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -344,7 +345,7 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
 		button.setToolTipText(IMPORT_TITLE);
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_IMPORT, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_IMPORT, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -373,7 +374,7 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
 		button.setToolTipText(EXPORT_TITLE);
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXPORT, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXPORT, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override

@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.eclipse.chemclipse.msd.identifier.supplier.nist.PathResolver;
 import org.eclipse.chemclipse.msd.identifier.supplier.nist.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -35,7 +36,7 @@ public class WindowsSupport_1_ITest extends AbstractBackgroundTestCase {
 	public void setUp() throws FileNotFoundException {
 
 		super.setUp();
-		nistApplication = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_WINDOWS_NIST_APPLICATION);
+		nistApplication = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_WINDOWS_NIST_APPLICATION);
 		testfileNistApplication = new File(nistApplication);
 		nistApplicationPath = testfileNistApplication.getParent();
 		runtimeSupport = new WindowsSupport(testfileNistApplication.getParentFile(), parameterBackground);

@@ -303,7 +303,7 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
 		button.setToolTipText(IMPORT_TITLE);
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_IMPORT, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_IMPORT, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -332,7 +332,7 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
 		button.setToolTipText(EXPORT_TITLE);
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXPORT, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXPORT, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override

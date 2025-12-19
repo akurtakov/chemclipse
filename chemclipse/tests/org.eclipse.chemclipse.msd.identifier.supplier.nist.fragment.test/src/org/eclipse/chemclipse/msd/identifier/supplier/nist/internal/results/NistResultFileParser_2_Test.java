@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
+import org.eclipse.chemclipse.msd.identifier.supplier.nist.PathResolver;
 import org.eclipse.chemclipse.msd.identifier.supplier.nist.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -35,7 +36,7 @@ public class NistResultFileParser_2_Test {
 	public void setUp() {
 
 		nistResultFileParser = new NistResultFileParser();
-		results = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_NIST_SRCRESLT_2));
+		results = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_NIST_SRCRESLT_2));
 		compounds = nistResultFileParser.getCompounds(results);
 	}
 

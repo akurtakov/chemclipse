@@ -26,7 +26,6 @@ import org.eclipse.chemclipse.csd.converter.supplier.arw.model.VendorChromatogra
 import org.eclipse.chemclipse.csd.converter.supplier.arw.model.VendorScan;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.logging.core.Logger;
-import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.support.ChromatogramSupport;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -61,7 +60,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 			String retentionTimeInMinutes = matcher.group(1).replace(",", ".");
 			String abundance = matcher.group(3).replace(",", ".");
 			try {
-				int retentionTime = (int)(Double.valueOf(retentionTimeInMinutes) * IChromatogram.MINUTE_CORRELATION_FACTOR);
+				int retentionTime = (int)(Double.valueOf(retentionTimeInMinutes) * IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 				float totalSignal = Float.valueOf(abundance);
 				IVendorScan scan = new VendorScan();
 				scan.setRetentionTime(retentionTime);

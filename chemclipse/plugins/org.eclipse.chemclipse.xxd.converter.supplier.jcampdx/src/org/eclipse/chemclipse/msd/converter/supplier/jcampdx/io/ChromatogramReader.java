@@ -18,7 +18,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import org.eclipse.chemclipse.logging.core.Logger;
-import org.eclipse.chemclipse.model.core.AbstractChromatogram;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.exceptions.ReferenceMustNotBeNullException;
 import org.eclipse.chemclipse.model.identifier.ComparisonResult;
@@ -327,7 +326,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 				retentionTime = (int)(Double.parseDouble(value) * 1000.0d);
 			} else if(line.startsWith(TIME_MARKER)) {
 				String value = line.replace(TIME_MARKER, "").trim();
-				retentionTime = (int)(Double.parseDouble(value) * AbstractChromatogram.MINUTE_CORRELATION_FACTOR);
+				retentionTime = (int)(Double.parseDouble(value) * IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 			}
 		} catch(NumberFormatException e) {
 			logger.warn(e);

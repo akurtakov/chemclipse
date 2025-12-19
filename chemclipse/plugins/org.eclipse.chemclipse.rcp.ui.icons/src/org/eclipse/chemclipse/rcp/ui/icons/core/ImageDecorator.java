@@ -73,7 +73,7 @@ public class ImageDecorator extends CompositeImageDescriptor {
 
 	private void drawDecorator(int width, int height) {
 
-		Image decorator = ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DECORATOR_ACTIVE, IApplicationImage.SIZE_7x7);
+		Image decorator = ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DECORATOR_ACTIVE, IApplicationImageProvider.SIZE_7x7);
 		ImageDataProvider imageDataProvider = new ImageDataProvider() {
 
 			@Override

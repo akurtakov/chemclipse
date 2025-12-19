@@ -20,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.ZipInputStream;
 
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.PathResolver;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.TestPathHelper;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.exceptions.ClassifierException;
 import org.eclipse.chemclipse.model.settings.Delimiter;
@@ -48,9 +49,9 @@ public class ChromatogramTestCase {
 	public void setUp() throws IOException, ClassifierException {
 
 		PreferenceSupplier.setImportDelimiter(Delimiter.SEMICOLON);
-		ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_ZIP))));
+		ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_ZIP))));
 		zipInputStream.getNextEntry();
-		String inputChromatogramFile = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_FOLDER);
+		String inputChromatogramFile = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_FOLDER);
 		inputChromatogramFile += File.separator + TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_NAME;
 		chromatogramFile = new File(inputChromatogramFile);
 		if(chromatogramFile.exists()) {

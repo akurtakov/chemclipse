@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
+import org.eclipse.chemclipse.msd.converter.supplier.mzxml.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.model.IVendorMassSpectra;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.model.VendorMassSpectra;
@@ -39,7 +40,7 @@ public class MassSpectrumImportConverterTinyCentroidedMzXML30_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File importFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_TINY1_CENTROIDED_MZXML30));
+		File importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_TINY1_CENTROIDED_MZXML30));
 		MassSpectrumImportConverter converter = new MassSpectrumImportConverter();
 		IProcessingInfo<IMassSpectra> processingInfo = converter.convert(importFile, new NullProgressMonitor());
 		IVendorMassSpectra massSpectra = (VendorMassSpectra)processingInfo.getProcessingResult();

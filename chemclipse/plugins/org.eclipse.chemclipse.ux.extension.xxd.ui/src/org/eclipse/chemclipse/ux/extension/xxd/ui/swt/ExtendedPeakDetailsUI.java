@@ -15,9 +15,9 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.swt;
 import java.text.DecimalFormat;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.core.IPeakModel;
-import org.eclipse.chemclipse.msd.model.core.AbstractChromatogramMSD;
 import org.eclipse.chemclipse.numeric.equations.LinearEquation;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
@@ -58,6 +58,7 @@ public class ExtendedPeakDetailsUI extends Composite implements IExtendedPartUI 
 		createControl();
 	}
 
+	@Override
 	public boolean setFocus() {
 
 		updatePeak();
@@ -185,7 +186,7 @@ public class ExtendedPeakDetailsUI extends Composite implements IExtendedPartUI 
 		float background;
 		list.add("milliseconds  -  abundance  -  background  -  minutes");
 		for(int retentionTime : peakModel.getRetentionTimes()) {
-			minutes = retentionTime / AbstractChromatogramMSD.MINUTE_CORRELATION_FACTOR;
+			minutes = retentionTime / IChromatogramOverview.MINUTE_CORRELATION_FACTOR;
 			abundance = peakModel.getPeakAbundance(retentionTime);
 			background = peakModel.getBackgroundAbundance(retentionTime);
 			clearStringBuilder();

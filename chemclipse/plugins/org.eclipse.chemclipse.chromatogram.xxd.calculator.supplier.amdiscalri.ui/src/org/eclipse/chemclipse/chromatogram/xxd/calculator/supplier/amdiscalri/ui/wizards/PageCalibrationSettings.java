@@ -20,6 +20,7 @@ import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.wizards.AbstractExtendedWizardPage;
 import org.eclipse.chemclipse.support.ui.wizards.ChromatogramWizardElements;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.wizards.InputEntriesWizard;
@@ -132,7 +133,7 @@ public class PageCalibrationSettings extends AbstractExtendedWizardPage {
 		buttonSelectCalibrationFile = new Button(composite, SWT.PUSH);
 		buttonSelectCalibrationFile.setText("");
 		buttonSelectCalibrationFile.setToolTipText("Select *.cal");
-		buttonSelectCalibrationFile.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_FILE_ADD, IApplicationImage.SIZE_16x16));
+		buttonSelectCalibrationFile.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_FILE_ADD, IApplicationImageProvider.SIZE_16x16));
 		buttonSelectCalibrationFile.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -164,7 +165,7 @@ public class PageCalibrationSettings extends AbstractExtendedWizardPage {
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
 		button.setToolTipText("Select the chromatogram.");
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_FILE_ADD, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_FILE_ADD, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override

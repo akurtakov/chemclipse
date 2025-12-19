@@ -24,6 +24,7 @@ import org.eclipse.chemclipse.model.columns.ISeparationColumn;
 import org.eclipse.chemclipse.model.columns.SeparationColumnPackaging;
 import org.eclipse.chemclipse.model.identifier.IColumnIndexMarker;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
+import org.eclipse.chemclipse.msd.converter.supplier.amdis.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.io.ImportConverterMslTestCase;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.model.IVendorLibraryMassSpectrum;
@@ -43,7 +44,7 @@ public class MSLImportConverter_3_ITest extends ImportConverterMslTestCase {
 	@BeforeAll
 	public void setUp() {
 
-		importFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_DB_4));
+		importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_DB_4));
 		super.setUp();
 		massSpectrum = (IVendorLibraryMassSpectrum)massSpectra.getMassSpectrum(1);
 		libraryInformation = massSpectrum.getLibraryInformation();

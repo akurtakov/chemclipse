@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.support.ChromatogramSupport;
 import org.eclipse.chemclipse.wsd.converter.io.AbstractChromatogramWSDReader;
@@ -98,7 +97,7 @@ public class ChromatogramReader extends AbstractChromatogramWSDReader {
 						if(values.length >= 1) {
 							try {
 								IScanWSD scan = new VendorScan();
-								int retentionTime = (int)(Double.parseDouble(values[0]) * IChromatogram.MINUTE_CORRELATION_FACTOR);
+								int retentionTime = (int)(Double.parseDouble(values[0]) * IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 								scan.setRetentionTime(retentionTime);
 								/*
 								 * Wavelengths

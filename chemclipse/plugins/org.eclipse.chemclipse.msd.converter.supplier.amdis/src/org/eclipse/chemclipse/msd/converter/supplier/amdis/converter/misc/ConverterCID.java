@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 import org.eclipse.chemclipse.logging.core.Logger;
-import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IRegularLibraryMassSpectrum;
@@ -216,7 +216,7 @@ public class ConverterCID {
 		String retentionTime = compoundInformation.getRetentionTime();
 		if(retentionTime != null && !retentionTime.isEmpty()) {
 			try {
-				return (int)(Double.parseDouble(compoundInformation.getRetentionTime()) * IChromatogram.MINUTE_CORRELATION_FACTOR);
+				return (int)(Double.parseDouble(compoundInformation.getRetentionTime()) * IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 			} catch(NumberFormatException e) {
 				logger.warn(e);
 			}

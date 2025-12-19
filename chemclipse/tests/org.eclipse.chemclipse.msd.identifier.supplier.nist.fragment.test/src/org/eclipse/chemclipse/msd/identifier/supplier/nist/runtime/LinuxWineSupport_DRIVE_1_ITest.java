@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import org.eclipse.chemclipse.msd.identifier.supplier.nist.PathResolver;
 import org.eclipse.chemclipse.msd.identifier.supplier.nist.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,7 @@ public class LinuxWineSupport_DRIVE_1_ITest extends AbstractBackgroundTestCase {
 	public void setUp() throws FileNotFoundException {
 
 		super.setUp();
-		nistApplication = TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_WINE_DRIVE_NIST_APPLICATION);
+		nistApplication = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_WINE_DRIVE_NIST_APPLICATION);
 		testfileNistApplication = new File(nistApplication);
 		nistApplicationPath = testfileNistApplication.getParent();
 		runtimeSupport = new LinuxWineSupport(testfileNistApplication.getParentFile(), parameterBackground);

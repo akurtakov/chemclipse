@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.mediannormalizer
 
 import java.io.File;
 
+import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.mediannormalizer.PathResolver;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.mediannormalizer.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
@@ -38,7 +39,7 @@ public class ChromatogramImporterTestCase {
 		/*
 		 * Import
 		 */
-		File fileImport = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1));
+		File fileImport = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1));
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();
 		chromatogramSelection = new ChromatogramSelectionMSD(chromatogram);

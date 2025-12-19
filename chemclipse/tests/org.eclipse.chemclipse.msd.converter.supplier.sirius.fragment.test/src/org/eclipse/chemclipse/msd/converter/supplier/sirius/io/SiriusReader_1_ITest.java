@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
+import org.eclipse.chemclipse.msd.converter.supplier.sirius.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.sirius.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -35,7 +36,7 @@ public class SiriusReader_1_ITest {
 	public void setUp() throws Exception {
 
 		reader = new SiriusReader();
-		file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_KAEMPFEROL));
+		file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_KAEMPFEROL));
 		massSpectra = reader.read(file, new NullProgressMonitor());
 	}
 

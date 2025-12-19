@@ -31,6 +31,7 @@ import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.model.selection.IDataNMRSelection;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.swt.ui.support.IColorScheme;
 import org.eclipse.chemclipse.ux.extension.ui.editors.IScanEditorNMR;
@@ -143,7 +144,7 @@ public class ExtendedNMROverlayUI extends Composite implements PropertyChangeLis
 		{
 			Button button = new Button(parent, SWT.PUSH);
 			button.setToolTipText("Stacked Mode");
-			button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CHROMATOGRAM_OVERLAY_MIRRORED, IApplicationImage.SIZE_16x16));
+			button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CHROMATOGRAM_OVERLAY_MIRRORED, IApplicationImageProvider.SIZE_16x16));
 			button.addSelectionListener(new SelectionAdapter() {
 
 				@Override
@@ -159,7 +160,7 @@ public class ExtendedNMROverlayUI extends Composite implements PropertyChangeLis
 		{
 			Button button = new Button(parent, SWT.PUSH);
 			button.setToolTipText("Overlay Mode");
-			button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CHROMATOGRAM_OVERLAY, IApplicationImage.SIZE_16x16));
+			button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CHROMATOGRAM_OVERLAY, IApplicationImageProvider.SIZE_16x16));
 			button.addSelectionListener(new SelectionAdapter() {
 
 				@Override
@@ -178,7 +179,7 @@ public class ExtendedNMROverlayUI extends Composite implements PropertyChangeLis
 
 		Button button = new Button(parent, SWT.PUSH);
 		button.setToolTipText("Toggle the chart legend");
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_TAG, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_TAG, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -194,7 +195,7 @@ public class ExtendedNMROverlayUI extends Composite implements PropertyChangeLis
 		Button button = new Button(parent, SWT.PUSH);
 		button.setToolTipText("Reset the Overlay");
 		button.setText("");
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_RESET, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_RESET, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override

@@ -164,7 +164,7 @@ public interface IIdentificationTarget extends ITarget {
 
 	static IIdentificationTarget createDefaultTarget(String name, String casNumber, String identifier) {
 
-		return createDefaultTarget(name, casNumber, identifier, ComparisonResult.FACTOR_BEST_MATCH);
+		return createDefaultTarget(name, casNumber, identifier, IComparisonResult.FACTOR_BEST_MATCH);
 	}
 
 	static IIdentificationTarget createDefaultTarget(String name, String casNumber, String identifier, float matchFactor) {

@@ -24,7 +24,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.eclipse.chemclipse.converter.exceptions.FileIsNotWriteableException;
 import org.eclipse.chemclipse.logging.core.Logger;
-import org.eclipse.chemclipse.model.core.AbstractChromatogram;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.msd.converter.io.IMassSpectraWriter;
@@ -110,7 +110,7 @@ public class MassSpectrumExtendedWriter implements IMassSpectraWriter {
 					int basePeakNoPrecision = (int)massSpectrum.getBasePeak();
 					int basePeakAbundanceNoPrecision = (int)massSpectrum.getBasePeakAbundance();
 
-					String retentionTime = (massSpectrum.getRetentionTime() == 0) ? "0" : decimalFormat.format(massSpectrum.getRetentionTime() / AbstractChromatogram.MINUTE_CORRELATION_FACTOR);
+					String retentionTime = (massSpectrum.getRetentionTime() == 0) ? "0" : decimalFormat.format(massSpectrum.getRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 					String retentionIndex = (retentionIndexNoPrecision == massSpectrum.getRetentionIndex()) ? Integer.toString(retentionIndexNoPrecision) : decimalFormat.format(massSpectrum.getRetentionIndex());
 					String basePeak = (basePeakNoPrecision == massSpectrum.getBasePeak()) ? Integer.toString(basePeakNoPrecision) : decimalFormat.format(massSpectrum.getBasePeak());
 					String basePeakAbundance = (basePeakAbundanceNoPrecision == massSpectrum.getBasePeakAbundance()) ? Integer.toString(basePeakAbundanceNoPrecision) : decimalFormat.format(massSpectrum.getBasePeakAbundance());

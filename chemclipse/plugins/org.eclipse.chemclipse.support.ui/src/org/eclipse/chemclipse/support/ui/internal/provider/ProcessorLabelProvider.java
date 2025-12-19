@@ -21,7 +21,7 @@ import java.util.Set;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
-import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.l10n.SupportMessages;
 import org.eclipse.chemclipse.support.ui.processors.Processor;
 import org.eclipse.chemclipse.support.ui.provider.AbstractChemClipseLabelProvider;
@@ -70,7 +70,7 @@ public class ProcessorLabelProvider extends AbstractChemClipseLabelProvider {
 
 		if(columnIndex == 0) {
 			if(element instanceof Processor processor) {
-				return ApplicationImageFactory.getInstance().getImage(processor.getImageFileName(), IApplicationImage.SIZE_16x16);
+				return ApplicationImageFactory.getInstance().getImage(processor.getImageFileName(), IApplicationImageProvider.SIZE_16x16);
 			}
 		}
 

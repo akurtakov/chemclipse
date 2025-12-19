@@ -18,7 +18,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.BiPredicate;
 
-import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.filter.IPeakFilter;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
@@ -103,9 +103,9 @@ public class WidthFilter extends AbstractPeakFilter<WidthFilterSettings> {
 
 		switch(configuration.getWidthCriterion()) {
 			case WIDTH_SMALLER_THAN_LIMIT:
-				return new WidthPredicate<>(WIDTH_SMALLER_THAN_LIMIT_COMPARATOR, (int)(configuration.getWidth() * IChromatogram.MINUTE_CORRELATION_FACTOR));
+				return new WidthPredicate<>(WIDTH_SMALLER_THAN_LIMIT_COMPARATOR, (int)(configuration.getWidth() * IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
 			case WIDTH_GREATER_THAN_LIMIT:
-				return new WidthPredicate<>(WIDTH_GREATER_THAN_LIMIT_COMPARATOR, (int)(configuration.getWidth() * IChromatogram.MINUTE_CORRELATION_FACTOR));
+				return new WidthPredicate<>(WIDTH_GREATER_THAN_LIMIT_COMPARATOR, (int)(configuration.getWidth() * IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
 			default:
 				throw new IllegalArgumentException("Unsupported Peak Filter Selection Criterion!");
 		}

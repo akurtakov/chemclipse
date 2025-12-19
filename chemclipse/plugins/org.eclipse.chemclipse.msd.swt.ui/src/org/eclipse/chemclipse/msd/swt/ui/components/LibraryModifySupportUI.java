@@ -32,6 +32,7 @@ import org.eclipse.chemclipse.msd.swt.ui.internal.runnables.LibraryImportRunnabl
 import org.eclipse.chemclipse.msd.swt.ui.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
@@ -152,7 +153,7 @@ public class LibraryModifySupportUI extends Composite {
 		buttonSelectLibrary = new Button(parent, SWT.PUSH);
 		buttonSelectLibrary.setToolTipText("Select a library");
 		buttonSelectLibrary.setText("");
-		buttonSelectLibrary.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_FILE, IApplicationImage.SIZE_16x16));
+		buttonSelectLibrary.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_FILE, IApplicationImageProvider.SIZE_16x16));
 		buttonSelectLibrary.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -199,7 +200,7 @@ public class LibraryModifySupportUI extends Composite {
 		buttonMergeLibrary = new Button(parent, SWT.PUSH);
 		buttonMergeLibrary.setText("");
 		buttonMergeLibrary.setToolTipText("Merge the selected library");
-		buttonMergeLibrary.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXECUTE, IApplicationImage.SIZE_16x16));
+		buttonMergeLibrary.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXECUTE, IApplicationImageProvider.SIZE_16x16));
 		buttonMergeLibrary.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -252,7 +253,7 @@ public class LibraryModifySupportUI extends Composite {
 
 		buttonCancel = new Button(parent, SWT.PUSH);
 		buttonCancel.setToolTipText("Cancel operation");
-		buttonCancel.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CANCEL, IApplicationImage.SIZE_16x16));
+		buttonCancel.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CANCEL, IApplicationImageProvider.SIZE_16x16));
 		buttonCancel.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -269,7 +270,7 @@ public class LibraryModifySupportUI extends Composite {
 		buttonDelete.setEnabled(false);
 		buttonDelete.setText("");
 		buttonDelete.setToolTipText("Delete the library entry.");
-		buttonDelete.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DELETE, IApplicationImage.SIZE_16x16));
+		buttonDelete.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DELETE, IApplicationImageProvider.SIZE_16x16));
 		buttonDelete.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -307,7 +308,7 @@ public class LibraryModifySupportUI extends Composite {
 		buttonAdd = new Button(parent, SWT.PUSH);
 		buttonAdd.setToolTipText("Add a library entry.");
 		buttonAdd.setText("");
-		buttonAdd.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ADD, IApplicationImage.SIZE_16x16));
+		buttonAdd.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ADD, IApplicationImageProvider.SIZE_16x16));
 		buttonAdd.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -358,7 +359,7 @@ public class LibraryModifySupportUI extends Composite {
 		buttonImport = new Button(parent, SWT.PUSH);
 		buttonImport.setToolTipText("Import a library.");
 		buttonImport.setText("");
-		buttonImport.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_IMPORT, IApplicationImage.SIZE_16x16));
+		buttonImport.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_IMPORT, IApplicationImageProvider.SIZE_16x16));
 		buttonImport.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -374,7 +375,7 @@ public class LibraryModifySupportUI extends Composite {
 		Button button = new Button(parent, SWT.PUSH);
 		button.setToolTipText("Reset the search settings.");
 		button.setText("");
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_RESET, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_RESET, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override

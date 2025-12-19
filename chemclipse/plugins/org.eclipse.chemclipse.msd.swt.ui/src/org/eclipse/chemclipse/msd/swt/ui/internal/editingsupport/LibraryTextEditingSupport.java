@@ -14,7 +14,7 @@ package org.eclipse.chemclipse.msd.swt.ui.internal.editingsupport;
 
 import java.text.DecimalFormat;
 
-import org.eclipse.chemclipse.model.core.AbstractChromatogram;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.msd.model.core.IRegularLibraryMassSpectrum;
 import org.eclipse.chemclipse.msd.model.splash.SplashFactory;
@@ -68,10 +68,10 @@ public class LibraryTextEditingSupport extends EditingSupport {
 					object = libraryInformation.getName();
 					break;
 				case MassSpectrumListUI.RETENTION_TIME:
-					object = decimalFormat.format(libraryMassSpectrum.getRetentionTime() / AbstractChromatogram.MINUTE_CORRELATION_FACTOR);
+					object = decimalFormat.format(libraryMassSpectrum.getRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 					break;
 				case MassSpectrumListUI.RELATIVE_RETENTION_TIME:
-					object = decimalFormat.format(libraryMassSpectrum.getRelativeRetentionTime() / AbstractChromatogram.MINUTE_CORRELATION_FACTOR);
+					object = decimalFormat.format(libraryMassSpectrum.getRelativeRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 					break;
 				case MassSpectrumListUI.RETENTION_INDEX:
 					object = decimalFormat.format(libraryMassSpectrum.getRetentionIndex());
@@ -113,10 +113,10 @@ public class LibraryTextEditingSupport extends EditingSupport {
 					libraryInformation.setName(value.toString());
 					break;
 				case MassSpectrumListUI.RETENTION_TIME:
-					libraryMassSpectrum.setRetentionTime((int)(Double.parseDouble(value.toString()) * AbstractChromatogram.MINUTE_CORRELATION_FACTOR));
+					libraryMassSpectrum.setRetentionTime((int)(Double.parseDouble(value.toString()) * IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
 					break;
 				case MassSpectrumListUI.RELATIVE_RETENTION_TIME:
-					libraryMassSpectrum.setRelativeRetentionTime((int)(Double.parseDouble(value.toString()) * AbstractChromatogram.MINUTE_CORRELATION_FACTOR));
+					libraryMassSpectrum.setRelativeRetentionTime((int)(Double.parseDouble(value.toString()) * IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
 					break;
 				case MassSpectrumListUI.RETENTION_INDEX:
 					libraryMassSpectrum.setRetentionIndex(Float.parseFloat(value.toString()));

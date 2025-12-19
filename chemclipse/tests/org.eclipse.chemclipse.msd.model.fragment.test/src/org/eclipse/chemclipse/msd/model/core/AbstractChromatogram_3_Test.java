@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
+import org.eclipse.chemclipse.msd.model.PathResolver;
 import org.eclipse.chemclipse.msd.model.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.junit.jupiter.api.Test;
@@ -28,21 +29,21 @@ public class AbstractChromatogram_3_Test {
 	@Test
 	public void testExtractNameFromDirectory_1() {
 
-		chromatogram.setFile(new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_DIR_20120319)));
+		chromatogram.setFile(new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_DIR_20120319)));
 		assertEquals("PW2012.03.19", chromatogram.extractNameFromFile(nameDefault));
 	}
 
 	@Test
 	public void testExtractNameFromDirectory_2() {
 
-		chromatogram.setFile(new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_DIR_20120320)));
+		chromatogram.setFile(new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_DIR_20120320)));
 		assertEquals(nameDefault, chromatogram.extractNameFromFile(nameDefault));
 	}
 
 	@Test
 	public void testExtractNameFromDirectory_3() {
 
-		chromatogram.setFile(new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_DIR_20120321_1)));
+		chromatogram.setFile(new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_DIR_20120321_1)));
 		assertEquals("PW20120321-1", chromatogram.extractNameFromFile(nameDefault));
 	}
 }

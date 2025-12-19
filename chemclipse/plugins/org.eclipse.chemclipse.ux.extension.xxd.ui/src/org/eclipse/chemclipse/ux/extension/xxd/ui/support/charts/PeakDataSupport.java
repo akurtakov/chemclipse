@@ -15,7 +15,7 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts;
 import java.text.DecimalFormat;
 
 import org.eclipse.chemclipse.csd.model.core.IPeakCSD;
-import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.core.IPeakModel;
 import org.eclipse.chemclipse.model.core.IScan;
@@ -39,7 +39,7 @@ public class PeakDataSupport {
 			builder.append("Peak");
 			builder.append(" | ");
 			builder.append("Center RT: ");
-			builder.append(decimalFormat.format(scan.getRetentionTime() / IChromatogram.MINUTE_CORRELATION_FACTOR));
+			builder.append(decimalFormat.format(scan.getRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
 			builder.append(" | ");
 			builder.append("Center RI: ");
 			if(PreferenceSupplierModel.showRetentionIndexWithoutDecimals()) {

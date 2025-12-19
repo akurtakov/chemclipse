@@ -17,6 +17,7 @@ import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.IRatingSupplier;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.swt.graphics.Image;
 
 public class IdentificationTargetSupport {
@@ -53,7 +54,7 @@ public class IdentificationTargetSupport {
 		}
 
 		if(!fileName.isEmpty()) {
-			return ApplicationImageFactory.getInstance().getImage(fileName, IApplicationImage.SIZE_16x16);
+			return ApplicationImageFactory.getInstance().getImage(fileName, IApplicationImageProvider.SIZE_16x16);
 		}
 
 		return null;

@@ -20,7 +20,7 @@ import org.eclipse.chemclipse.converter.exceptions.FileIsNotWriteableException;
 import org.eclipse.chemclipse.csd.converter.io.AbstractChromatogramCSDWriter;
 import org.eclipse.chemclipse.csd.converter.supplier.xy.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
-import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -42,10 +42,10 @@ public class ChromatogramWriter extends AbstractChromatogramCSDWriter {
 				String x;
 				switch(retentionTimeFormat) {
 					case MINUTES:
-						x = Double.toString(retentionTime / IChromatogram.MINUTE_CORRELATION_FACTOR);
+						x = Double.toString(retentionTime / IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 						break;
 					case SECONDS:
-						x = Double.toString(retentionTime / IChromatogram.SECOND_CORRELATION_FACTOR);
+						x = Double.toString(retentionTime / IChromatogramOverview.SECOND_CORRELATION_FACTOR);
 						break;
 					default:
 						x = Integer.toString(retentionTime);

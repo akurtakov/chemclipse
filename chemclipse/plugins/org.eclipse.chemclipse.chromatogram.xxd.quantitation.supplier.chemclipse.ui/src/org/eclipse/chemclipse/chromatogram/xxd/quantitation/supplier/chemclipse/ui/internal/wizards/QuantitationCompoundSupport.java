@@ -13,7 +13,7 @@
 package org.eclipse.chemclipse.chromatogram.xxd.quantitation.supplier.chemclipse.ui.internal.wizards;
 
 import org.eclipse.chemclipse.chromatogram.xxd.quantitation.supplier.chemclipse.preferences.PreferenceSupplier;
-import org.eclipse.chemclipse.model.core.AbstractChromatogram;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.core.IPeakModel;
 import org.eclipse.chemclipse.model.core.IScan;
@@ -40,8 +40,8 @@ public class QuantitationCompoundSupport {
 
 		IRetentionTimeWindow retentionTimeWindow = quantitationCompound.getRetentionTimeWindow();
 		if(retentionTime > 0) {
-			retentionTimeWindow.setAllowedNegativeDeviation((int)(PreferenceSupplier.getRetentionTimeNegativeDeviation() * AbstractChromatogram.MINUTE_CORRELATION_FACTOR));
-			retentionTimeWindow.setAllowedPositiveDeviation((int)(PreferenceSupplier.getRetentionTimePositiveDeviation() * AbstractChromatogram.MINUTE_CORRELATION_FACTOR));
+			retentionTimeWindow.setAllowedNegativeDeviation((int)(PreferenceSupplier.getRetentionTimeNegativeDeviation() * IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
+			retentionTimeWindow.setAllowedPositiveDeviation((int)(PreferenceSupplier.getRetentionTimePositiveDeviation() * IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
 		}
 
 		IRetentionIndexWindow retentionIndexWindow = quantitationCompound.getRetentionIndexWindow();

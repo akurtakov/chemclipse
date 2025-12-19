@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
+import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.PathResolver;
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.TestPathHelper;
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.model.IPeakIdentificationBatchJob;
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.model.IPeakIdentificationEntry;
@@ -39,7 +40,7 @@ public class PeakIdentificationBatchJobReader_1_ITest {
 	@BeforeAll
 	public void setUp() throws Exception {
 
-		File file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_BATCH_PROCESS_JOB));
+		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_BATCH_PROCESS_JOB));
 		batchProcessJob = reader.read(file, new NullProgressMonitor());
 	}
 

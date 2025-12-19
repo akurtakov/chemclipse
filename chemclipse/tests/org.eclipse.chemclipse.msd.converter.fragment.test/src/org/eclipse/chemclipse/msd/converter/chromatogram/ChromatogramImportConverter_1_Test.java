@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.msd.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.TestPathHelper;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -46,7 +47,7 @@ public class ChromatogramImportConverter_1_Test {
 	public void testFileIsNotReadableException_1() throws IOException {
 
 		File file = null;
-		file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_NOT_READABLE));
+		file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_NOT_READABLE));
 		file.setReadable(false);
 		IProcessingInfo<IChromatogram> processingInfo = ic.convert(file, new NullProgressMonitor());
 		assertTrue(processingInfo.hasErrorMessages());
@@ -59,7 +60,7 @@ public class ChromatogramImportConverter_1_Test {
 	public void testFileIsEmptyException_1() throws IOException {
 
 		File file = null;
-		file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_EMPTY));
+		file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_EMPTY));
 		IProcessingInfo<IChromatogram> processingInfo = ic.convert(file, new NullProgressMonitor());
 		assertTrue(processingInfo.hasErrorMessages());
 	}

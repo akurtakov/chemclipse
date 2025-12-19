@@ -214,7 +214,7 @@ public class SettingsPreferencesPage<T> extends WizardPage {
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
 		button.setToolTipText(ExtensionMessages.openInExternalBrowser);
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXTERNAL_BROWSER, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXTERNAL_BROWSER, IApplicationImageProvider.SIZE_16x16));
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override

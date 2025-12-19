@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
+import org.eclipse.chemclipse.msd.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -46,7 +47,7 @@ public class AbstractMassSpectrumImportConverter_1_Test {
 	public void testFileIsNotReadableException_1() throws IOException {
 
 		File file = null;
-		file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_MASSSPECTRUM_NOT_READABLE));
+		file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_MASSSPECTRUM_NOT_READABLE));
 		file.setReadable(false);
 		IProcessingInfo<IMassSpectra> prcoessingInfo = importConverter.convert(file, new NullProgressMonitor());
 		assertTrue(prcoessingInfo.hasErrorMessages());
@@ -59,7 +60,7 @@ public class AbstractMassSpectrumImportConverter_1_Test {
 	public void testFileIsEmptyException_1() throws IOException {
 
 		File file = null;
-		file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_MASSSPECTRUM_EMPTY));
+		file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_MASSSPECTRUM_EMPTY));
 		IProcessingInfo<IMassSpectra> prcoessingInfo = importConverter.convert(file, new NullProgressMonitor());
 		assertTrue(prcoessingInfo.hasErrorMessages());
 	}

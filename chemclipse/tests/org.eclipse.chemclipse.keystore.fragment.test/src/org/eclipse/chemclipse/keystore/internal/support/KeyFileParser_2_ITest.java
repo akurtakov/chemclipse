@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.util.Map;
 
+import org.eclipse.chemclipse.keystore.PathResolver;
 import org.eclipse.chemclipse.keystore.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -32,9 +33,9 @@ public class KeyFileParser_2_ITest {
 	private Map<String, String> keyStore;
 
 	@BeforeAll
-	public void setUp() throws Exception {
+	public void setUp() {
 
-		File file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_KEYSTORE_II_TEST));
+		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_KEYSTORE_II_TEST));
 		keyStore = KeyFileParser.readKeysFromFile(file);
 	}
 

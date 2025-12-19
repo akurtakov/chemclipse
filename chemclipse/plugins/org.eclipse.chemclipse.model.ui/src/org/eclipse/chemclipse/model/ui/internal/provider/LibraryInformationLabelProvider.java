@@ -12,10 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.ui.internal.provider;
 
-import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -85,7 +86,7 @@ public class LibraryInformationLabelProvider extends LabelProvider implements IT
 					text = Integer.toString(libraryInformation.getSynonyms().size());
 					break;
 				case 2:
-					text = ValueFormat.getDecimalFormatEnglish("0.000").format(libraryInformation.getRetentionTime() / IChromatogram.MINUTE_CORRELATION_FACTOR);
+					text = ValueFormat.getDecimalFormatEnglish("0.000").format(libraryInformation.getRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 					break;
 				case 3:
 					text = libraryInformation.getContributor();
@@ -118,8 +119,9 @@ public class LibraryInformationLabelProvider extends LabelProvider implements IT
 		return text;
 	}
 
+	@Override
 	public Image getImage(Object element) {
 
-		return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SAMPLE, IApplicationImage.SIZE_16x16);
+		return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SAMPLE, IApplicationImageProvider.SIZE_16x16);
 	}
 }

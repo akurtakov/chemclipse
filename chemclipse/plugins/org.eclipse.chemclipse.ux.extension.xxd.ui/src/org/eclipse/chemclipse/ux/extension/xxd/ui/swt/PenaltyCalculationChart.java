@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.IChromatogramPeak;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.core.IPeakModel;
@@ -160,18 +161,18 @@ public class PenaltyCalculationChart extends ChromatogramChart {
 		String labelReference = "Reference: ";
 		if(useMinutes) {
 			retentionTimeMinutesReference = penaltyCalculationModel.getReferenceValue();
-			retentionTimeReference = (int)(retentionTimeMinutesReference * IChromatogram.MINUTE_CORRELATION_FACTOR);
+			retentionTimeReference = (int)(retentionTimeMinutesReference * IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 			labelReference += decimalFormat.format(retentionTimeMinutesReference) + " [min]";
 		} else {
 			retentionTimeReference = (int)penaltyCalculationModel.getReferenceValue();
-			retentionTimeMinutesReference = retentionTimeReference / IChromatogram.MINUTE_CORRELATION_FACTOR;
+			retentionTimeMinutesReference = retentionTimeReference / IChromatogramOverview.MINUTE_CORRELATION_FACTOR;
 			labelReference += Integer.toString(retentionTimeReference) + " [ms]";
 		}
 		/*
 		 * Unknown
 		 */
 		int retentionTimeUnknown = peak.getPeakModel().getRetentionTimeAtPeakMaximum();
-		double retentionTimeMinutesUnknown = retentionTimeUnknown / IChromatogram.MINUTE_CORRELATION_FACTOR;
+		double retentionTimeMinutesUnknown = retentionTimeUnknown / IChromatogramOverview.MINUTE_CORRELATION_FACTOR;
 		String labelUnknown = "Unknown: ";
 		if(useMinutes) {
 			labelUnknown += decimalFormat.format(retentionTimeMinutesUnknown) + " [min]";

@@ -20,6 +20,7 @@ import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.identifier.IRatingSupplier;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -68,7 +69,7 @@ public class PeakTargetsLabelProvider extends LabelProvider implements ITableLab
 				}
 
 				if(!fileName.isEmpty()) {
-					return ApplicationImageFactory.getInstance().getImage(fileName, IApplicationImage.SIZE_16x16);
+					return ApplicationImageFactory.getInstance().getImage(fileName, IApplicationImageProvider.SIZE_16x16);
 				}
 			}
 		}

@@ -21,6 +21,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
@@ -109,7 +110,7 @@ public abstract class AbstractExtendedEditorPage implements IExtendedEditorPage 
 
 	protected Section createSection(Composite parent, int colspan) {
 
-		Section section = toolkit.createSection(parent, Section.EXPANDED);
+		Section section = toolkit.createSection(parent, ExpandableComposite.EXPANDED);
 
 		section.clientVerticalSpacing = 2;
 		section.setLayout(createSectionTableWrapLayout(true, 1));

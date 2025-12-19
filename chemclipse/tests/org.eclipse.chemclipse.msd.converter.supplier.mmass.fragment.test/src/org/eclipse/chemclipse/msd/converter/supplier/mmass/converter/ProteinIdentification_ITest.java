@@ -20,6 +20,7 @@ import java.util.List;
 import org.eclipse.chemclipse.model.core.IMassSpectrumPeak;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
+import org.eclipse.chemclipse.msd.converter.supplier.mmass.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.mmass.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
@@ -39,7 +40,7 @@ public class ProteinIdentification_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File importFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_PROTEIN_IDENTIFICATION));
+		File importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_PROTEIN_IDENTIFICATION));
 		MassSpectrumImportConverter converter = new MassSpectrumImportConverter();
 		IProcessingInfo<IMassSpectra> processingInfo = converter.convert(importFile, new NullProgressMonitor());
 		massSpectrum = (IStandaloneMassSpectrum)processingInfo.getProcessingResult().getMassSpectrum(1);

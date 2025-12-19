@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.msd.converter.ui.adapter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
@@ -52,6 +53,7 @@ public abstract class ChromatogramPropertySource implements IPropertySource {
 	private final IChromatogramMSD chromatogram;
 
 	public ChromatogramPropertySource(IChromatogramMSD chromatogram) {
+
 		this.chromatogram = chromatogram;
 	}
 
@@ -126,26 +128,27 @@ public abstract class ChromatogramPropertySource implements IPropertySource {
 		// return chromatogram.getMinSignal();
 		// else if(MAX_SIGNAL.equals(id))
 		// return chromatogram.getMaxSignal();
-		if(START_RETENTION_TIME.equals(id))
-			return getFormattedValue((double)chromatogram.getStartRetentionTime(), IChromatogramMSD.MINUTE_CORRELATION_FACTOR, "0.00");
-		else if(STOP_RETENTION_TIME.equals(id))
-			return getFormattedValue((double)chromatogram.getStopRetentionTime(), IChromatogramMSD.MINUTE_CORRELATION_FACTOR, "0.00");
-		else if(NUMBER_OF_SCANS.equals(id))
+		if(START_RETENTION_TIME.equals(id)) {
+			return getFormattedValue((double)chromatogram.getStartRetentionTime(), IChromatogramOverview.MINUTE_CORRELATION_FACTOR, "0.00");
+		} else if(STOP_RETENTION_TIME.equals(id)) {
+			return getFormattedValue((double)chromatogram.getStopRetentionTime(), IChromatogramOverview.MINUTE_CORRELATION_FACTOR, "0.00");
+		} else if(NUMBER_OF_SCANS.equals(id)) {
 			return Integer.valueOf(chromatogram.getNumberOfScans()).toString();
-		else if(SCAN_DELAY.equals(id))
+		} else if(SCAN_DELAY.equals(id)) {
 			return Integer.valueOf(chromatogram.getScanDelay()).toString();
-		else if(SCAN_INTERVAL.equals(id))
+		} else if(SCAN_INTERVAL.equals(id)) {
 			return Integer.valueOf(chromatogram.getScanInterval()).toString();
-		else if(DATE.equals(id))
+		} else if(DATE.equals(id)) {
 			return chromatogram.getDate().toString();
-		else if(OPERATOR.equals(id))
+		} else if(OPERATOR.equals(id)) {
 			return chromatogram.getOperator();
-		else if(FILE.equals(id))
+		} else if(FILE.equals(id)) {
 			return chromatogram.getFile().toString();
-		else if(SIZE.equals(id))
-			return getFormattedValue((double)chromatogram.getFile().length(), (double)(1000 * 1000), "0.00");
-		else if(NAME.equals(id))
+		} else if(SIZE.equals(id)) {
+			return getFormattedValue(chromatogram.getFile().length(), 1000 * 1000, "0.00");
+		} else if(NAME.equals(id)) {
 			return chromatogram.getName();
+		}
 		return null;
 	}
 

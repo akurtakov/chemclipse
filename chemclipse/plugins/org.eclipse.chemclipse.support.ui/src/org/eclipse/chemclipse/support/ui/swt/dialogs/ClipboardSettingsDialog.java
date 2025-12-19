@@ -20,6 +20,7 @@ import java.util.function.Consumer;
 
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.support.settings.ValueDelimiter;
 import org.eclipse.chemclipse.support.ui.l10n.SupportMessages;
@@ -250,7 +251,7 @@ public class ClipboardSettingsDialog extends Dialog {
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
 		button.setToolTipText(SupportMessages.selectAll);
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CHECK_ALL, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CHECK_ALL, IApplicationImageProvider.SIZE_16x16));
 		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		button.addSelectionListener(new SelectionAdapter() {
@@ -274,7 +275,7 @@ public class ClipboardSettingsDialog extends Dialog {
 		Button button = new Button(parent, SWT.PUSH);
 		button.setText("");
 		button.setToolTipText(SupportMessages.deselectAll);
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_UNCHECK_ALL, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_UNCHECK_ALL, IApplicationImageProvider.SIZE_16x16));
 		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		button.addSelectionListener(new SelectionAdapter() {

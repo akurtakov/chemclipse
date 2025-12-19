@@ -25,7 +25,7 @@ import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.columns.IRetentionIndexEntry;
 import org.eclipse.chemclipse.model.columns.ISeparationColumn;
 import org.eclipse.chemclipse.model.columns.ISeparationColumnIndices;
-import org.eclipse.chemclipse.model.core.AbstractChromatogram;
+import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 
 public class CalibrationFileWriter {
@@ -60,7 +60,7 @@ public class CalibrationFileWriter {
 				 * e.g.
 				 * 11.336 1700.0 100 937 Heptadecane
 				 */
-				printWriter.print(decimalFormat.format(retentionIndexEntry.getRetentionTime() / AbstractChromatogram.MINUTE_CORRELATION_FACTOR));
+				printWriter.print(decimalFormat.format(retentionIndexEntry.getRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
 				printWriter.print(IColumnFormat.RI_VALUE_DELIMITER);
 				printWriter.print(retentionIndexEntry.getRetentionIndex());
 				printWriter.print(IColumnFormat.RI_VALUE_DELIMITER);

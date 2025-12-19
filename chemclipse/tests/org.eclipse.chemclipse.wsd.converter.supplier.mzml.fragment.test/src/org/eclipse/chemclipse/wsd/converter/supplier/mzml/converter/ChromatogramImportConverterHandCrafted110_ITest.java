@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
+import org.eclipse.chemclipse.wsd.converter.supplier.mzml.PathResolver;
 import org.eclipse.chemclipse.wsd.converter.supplier.mzml.TestPathHelper;
 import org.eclipse.chemclipse.wsd.converter.supplier.mzml.model.IVendorChromatogram;
 import org.eclipse.chemclipse.wsd.converter.supplier.mzml.model.VendorChromatogram;
@@ -36,7 +37,7 @@ public class ChromatogramImportConverterHandCrafted110_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File importFile = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_PDA_HANDCRAFTED));
+		File importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_PDA_HANDCRAFTED));
 		ChromatogramImportConverter converter = new ChromatogramImportConverter();
 		IProcessingInfo<IChromatogramWSD> processingInfo = converter.convert(importFile, new NullProgressMonitor());
 		chromatogram = (VendorChromatogram)processingInfo.getProcessingResult();

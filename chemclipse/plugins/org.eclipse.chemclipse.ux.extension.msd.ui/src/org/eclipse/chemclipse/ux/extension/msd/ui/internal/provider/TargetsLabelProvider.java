@@ -130,7 +130,7 @@ public class TargetsLabelProvider extends AbstractChemClipseLabelProvider {
 				}
 
 				if(!fileName.isEmpty()) {
-					return ApplicationImageFactory.getInstance().getImage(fileName, IApplicationImage.SIZE_16x16);
+					return ApplicationImageFactory.getInstance().getImage(fileName, IApplicationImageProvider.SIZE_16x16);
 				}
 			}
 		} else if(columnIndex == INDEX_NAME) {

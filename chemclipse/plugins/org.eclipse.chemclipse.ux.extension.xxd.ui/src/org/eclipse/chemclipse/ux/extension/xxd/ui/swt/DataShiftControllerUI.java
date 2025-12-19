@@ -370,7 +370,7 @@ public class DataShiftControllerUI extends Composite implements IExtendedPartUI 
 		Button button = new Button(parent, SWT.TOGGLE);
 		button.setToolTipText("");
 		button.setText("");
-		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SHIFT_AUTO_MIRROR, IApplicationImage.SIZE_16x16));
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SHIFT_AUTO_MIRROR, IApplicationImageProvider.SIZE_16x16));
 		button.setData(KEY_MIRROR_MODUS, DisplayModus.NORMAL);
 		button.addSelectionListener(new SelectionAdapter() {
 

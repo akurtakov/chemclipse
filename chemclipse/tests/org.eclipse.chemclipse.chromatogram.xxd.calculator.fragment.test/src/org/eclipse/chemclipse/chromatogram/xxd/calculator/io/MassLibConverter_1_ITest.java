@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 
+import org.eclipse.chemclipse.chromatogram.xxd.calculator.PathResolver;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.TestPathHelper;
 import org.eclipse.chemclipse.model.columns.IRetentionIndexEntry;
 import org.eclipse.chemclipse.model.columns.ISeparationColumnIndices;
@@ -33,9 +34,9 @@ public class MassLibConverter_1_ITest {
 	private ISeparationColumnIndices separationColumnIndices;
 
 	@BeforeAll
-	public void setUp() throws Exception {
+	public void setUp() {
 
-		File file = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CALIBRATION_INF_1));
+		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CALIBRATION_INF_1));
 		MassLibConverter converter = new MassLibConverter();
 		IProcessingInfo<ISeparationColumnIndices> processingInfo = converter.parseRetentionIndices(file);
 		separationColumnIndices = processingInfo.getProcessingResult();

@@ -24,6 +24,7 @@ import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IPeaksMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
+import org.eclipse.chemclipse.xxd.converter.supplier.ocx.PathResolver;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.TestPathHelper;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -40,7 +41,7 @@ public class PeakReader_1_MSD_1400_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File fileImport = new File(TestPathHelper.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_MSD_1400));
+		File fileImport = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_MSD_1400));
 		IProcessingInfo<IPeaksMSD> processingInfo = PeakConverterMSD.convert(fileImport, VersionConstants.CONVERTER_ID_PEAKS, new NullProgressMonitor());
 		peaks = processingInfo.getProcessingResult();
 	}

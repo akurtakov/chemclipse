@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.msd.swt.ui.components.identification;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -88,7 +89,7 @@ public class SynonymsEditUI extends Composite {
 
 		buttonSynonymAdd = new Button(composite, SWT.PUSH);
 		buttonSynonymAdd.setText("Add");
-		buttonSynonymAdd.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXECUTE, IApplicationImage.SIZE_16x16));
+		buttonSynonymAdd.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXECUTE, IApplicationImageProvider.SIZE_16x16));
 		buttonSynonymAdd.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -126,7 +127,7 @@ public class SynonymsEditUI extends Composite {
 		compositeButtons.setLayoutData(gridDataComposite);
 
 		buttonCancel = new Button(compositeButtons, SWT.PUSH);
-		buttonCancel.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CANCEL, IApplicationImage.SIZE_16x16));
+		buttonCancel.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CANCEL, IApplicationImageProvider.SIZE_16x16));
 		buttonCancel.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -138,7 +139,7 @@ public class SynonymsEditUI extends Composite {
 
 		buttonDelete = new Button(compositeButtons, SWT.PUSH);
 		buttonDelete.setEnabled(false);
-		buttonDelete.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DELETE, IApplicationImage.SIZE_16x16));
+		buttonDelete.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DELETE, IApplicationImageProvider.SIZE_16x16));
 		buttonDelete.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -167,7 +168,7 @@ public class SynonymsEditUI extends Composite {
 		});
 
 		buttonAdd = new Button(compositeButtons, SWT.PUSH);
-		buttonAdd.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ADD, IApplicationImage.SIZE_16x16));
+		buttonAdd.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ADD, IApplicationImageProvider.SIZE_16x16));
 		buttonAdd.addSelectionListener(new SelectionAdapter() {
 
 			@Override
