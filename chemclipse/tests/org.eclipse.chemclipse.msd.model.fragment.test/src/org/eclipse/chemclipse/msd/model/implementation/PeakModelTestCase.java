@@ -39,7 +39,7 @@ abstract class PeakModelTestCase {
 		this.peakMaximum = peakMaximum;
 		// ----------------------IntensityValues
 		intensityValues = new PeakIntensityValues();
-		scanValues = new TreeMap<Integer, Float>();
+		scanValues = new TreeMap<>();
 		scanValues.put(1500, 0.0f);
 		scanValues.put(2500, 5.0f);
 		scanValues.put(3500, 10.0f);
