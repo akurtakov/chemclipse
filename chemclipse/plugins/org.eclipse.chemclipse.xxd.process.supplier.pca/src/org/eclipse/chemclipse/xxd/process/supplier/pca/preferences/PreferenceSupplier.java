@@ -105,6 +105,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String DEF_PATH_IMPORT_FILE = "";
 	public static final String P_PATH_EXPORT_FILE = "pathExportFile";
 	public static final String DEF_PATH_EXPORT_FILE = "";
+	public static final String P_MAIN_DATA_FILE = "mainDataFile";
+	public static final String DEF_MAIN_DATA_FILE = "";
 
 	public static IPreferenceSupplier INSTANCE() {
 
@@ -138,6 +140,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_COLOR_SCHEME, DEF_COLOR_SCHEME);
 		putDefault(P_PATH_IMPORT_FILE, DEF_PATH_IMPORT_FILE);
 		putDefault(P_PATH_EXPORT_FILE, DEF_PATH_EXPORT_FILE);
+		putDefault(P_MAIN_DATA_FILE, DEF_MAIN_DATA_FILE);
 	}
 
 	public static IAnalysisSettings getPcaSettings() {
@@ -186,6 +189,16 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static void setPathExportFile(String filterPath) {
 
 		INSTANCE().put(P_PATH_EXPORT_FILE, filterPath);
+	}
+
+	public static String getMainDataFile() {
+
+		return INSTANCE().get(P_MAIN_DATA_FILE, DEF_MAIN_DATA_FILE);
+	}
+
+	public static void setMainDataFile(String mainFile) {
+
+		INSTANCE().put(P_MAIN_DATA_FILE, mainFile);
 	}
 
 	public static boolean isRemoveUselessVariables() {
