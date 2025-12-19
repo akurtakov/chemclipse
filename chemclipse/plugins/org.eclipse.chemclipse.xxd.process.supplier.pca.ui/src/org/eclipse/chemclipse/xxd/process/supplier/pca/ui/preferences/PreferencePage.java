@@ -13,6 +13,7 @@
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences;
 
 import org.eclipse.chemclipse.support.ui.preferences.fieldeditors.ExtendedIntegerFieldEditor;
+import org.eclipse.chemclipse.support.ui.preferences.fieldeditors.SpacerFieldEditor;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Algorithm;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.LabelOptionPCA;
@@ -21,6 +22,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.Activator;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.ComboFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
@@ -48,5 +50,13 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_CROSS_VALIDATION, "Run Cross-validation", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_LABEL_OPTION_PCA, "Label Option", LabelOptionPCA.getOptions(), getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_COLOR_SCHEME, "Color Scheme", Colors.getAvailableColorSchemes(), getFieldEditorParent()));
+
+		addField(new SpacerFieldEditor(getFieldEditorParent()));
+		addField(new FileFieldEditor(PreferenceSupplier.P_MAIN_DATA_FILE, "Main Data File for Long Data import", getFieldEditorParent()) {
+
+			{
+				setFileExtensions(new String[]{"*.pdl"});
+			}
+		});
 	}
 }

@@ -20,6 +20,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.core.IPreprocessingSettin
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.PcaExtractionFileLongText;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IDataInputEntry;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.preferences.PreferenceSupplier;
 import org.eclipse.jface.wizard.Wizard;
 
 public class FilesLongFormatInputWizard extends Wizard implements IInputWizard {
@@ -31,7 +32,7 @@ public class FilesLongFormatInputWizard extends Wizard implements IInputWizard {
 
 	public FilesLongFormatInputWizard() {
 
-		this(null);
+		this(new File(PreferenceSupplier.getMainDataFile()));
 	}
 
 	public FilesLongFormatInputWizard(File file) {

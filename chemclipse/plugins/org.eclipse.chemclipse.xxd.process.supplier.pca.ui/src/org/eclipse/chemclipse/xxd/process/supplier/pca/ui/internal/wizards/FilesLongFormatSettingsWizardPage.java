@@ -45,7 +45,8 @@ import org.eclipse.swt.widgets.Text;
 
 public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPage {
 
-	private File file;
+	private File mainFile;
+	private File filterFile;
 	private Text dataTextFile;
 	private Text filterTextFile;
 	private Algorithm[] algorithms = Algorithm.values();
@@ -61,7 +62,8 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 
 	public void setFile(File file) {
 
-		this.file = file;
+		this.mainFile = file;
+		this.filterFile = null;
 	}
 
 	@Override
@@ -216,8 +218,8 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 		text.setToolTipText("Path to long format data  file.");
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		if(file != null) {
-			text.setText(file.getAbsolutePath());
+		if(mainFile != null) {
+			text.setText(mainFile.getAbsolutePath());
 		} else {
 			text.setText("");
 		}
@@ -232,8 +234,8 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 		text.setToolTipText("Path to long format filter file.");
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		if(file != null) {
-			text.setText(file.getAbsolutePath());
+		if(filterFile != null) {
+			text.setText(filterFile.getAbsolutePath());
 		} else {
 			text.setText("");
 		}
