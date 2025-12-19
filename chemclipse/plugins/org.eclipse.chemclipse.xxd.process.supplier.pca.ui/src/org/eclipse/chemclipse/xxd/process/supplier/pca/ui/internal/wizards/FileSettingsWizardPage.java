@@ -52,8 +52,6 @@ public class FileSettingsWizardPage extends AbstractAnalysisWizardPage {
 	private File file;
 	private Text textFile;
 
-	private Algorithm[] algorithms = Algorithm.values();
-
 	public FileSettingsWizardPage() {
 
 		super("Main Properties");

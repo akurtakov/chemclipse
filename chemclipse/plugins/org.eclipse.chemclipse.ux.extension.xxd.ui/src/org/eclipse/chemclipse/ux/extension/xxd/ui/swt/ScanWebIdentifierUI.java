@@ -44,7 +44,7 @@ public class ScanWebIdentifierUI extends Composite {
 	private IScan scan;
 
 	private Button button;
-	private Menu menu;
+	private Menu identifierMenu;
 
 	private final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
@@ -93,8 +93,8 @@ public class ScanWebIdentifierUI extends Composite {
 		composite.setLayout(gridLayout);
 
 		button = createButton(composite);
-		menu = createMenuIdentifier(button, identifierSuppliers);
-		button.setMenu(menu);
+		identifierMenu = createMenuIdentifier(button, identifierSuppliers);
+		button.setMenu(identifierMenu);
 
 		initialize();
 	}

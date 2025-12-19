@@ -32,7 +32,7 @@ public class LiteratureUI extends StyledText {
 
 	private static final String LINE_DELIMITER = OperatingSystemUtils.getLineDelimiter();
 
-	private String content = "";
+	private String text = "";
 
 	public LiteratureUI(Composite parent, int style) {
 
@@ -40,15 +40,15 @@ public class LiteratureUI extends StyledText {
 	}
 
 	@Override
-	public void setText(String content) {
+	public void setText(String text) {
 
-		this.content = content;
+		this.text = text;
 		updateInput();
 	}
 
 	public void updateSearchResult(String searchText, boolean caseSensitive) {
 
-		if(!content.isEmpty()) {
+		if(!text.isEmpty()) {
 			if(searchText.isEmpty()) {
 				updateInput();
 			} else {
@@ -56,10 +56,10 @@ public class LiteratureUI extends StyledText {
 				 * Format
 				 */
 				String literatureContent;
-				if(LiteratureSupport.isFormatRIS(content)) {
-					literatureContent = LiteratureSupport.getFormattedRIS(content, true);
+				if(LiteratureSupport.isFormatRIS(text)) {
+					literatureContent = LiteratureSupport.getFormattedRIS(text, true);
 				} else {
-					literatureContent = content;
+					literatureContent = text;
 				}
 				/*
 				 * Display Search Result
@@ -75,10 +75,10 @@ public class LiteratureUI extends StyledText {
 
 	private void updateInput() {
 
-		if(LiteratureSupport.isFormatRIS(content)) {
-			formatRIS(content);
+		if(LiteratureSupport.isFormatRIS(text)) {
+			formatRIS(text);
 		} else {
-			super.setText(content);
+			super.setText(text);
 		}
 	}
 
