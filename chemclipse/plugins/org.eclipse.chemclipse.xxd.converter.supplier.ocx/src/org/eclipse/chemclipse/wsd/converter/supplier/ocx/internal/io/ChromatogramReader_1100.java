@@ -55,13 +55,11 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 	public IChromatogramWSD read(File file, IProgressMonitor monitor) throws IOException {
 
 		IChromatogramWSD chromatogram = null;
-		ZipFile zipFile = new ZipFile(file);
-		try {
+
+		try (ZipFile zipFile = new ZipFile(file)) {
 			if(isValidFileFormat(zipFile)) {
 				chromatogram = readFromZipFile(zipFile, "", file, monitor);
 			}
-		} finally {
-			zipFile.close();
 		}
 
 		return chromatogram;

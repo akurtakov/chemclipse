@@ -49,14 +49,11 @@ public class ReaderProxy_1003 extends AbstractZipReader implements IReaderProxy 
 	@Override
 	public void readMassSpectrum(File file, int offset, IVendorScanProxy massSpectrum, IIonTransitionSettings ionTransitionSettings) throws IOException {
 
-		ZipFile zipFile = new ZipFile(file);
-		try {
+		try (ZipFile zipFile = new ZipFile(file)) {
 			DataInputStream dataInputStream = getDataInputStream(zipFile, Format.FILE_SCANS_MSD);
 			dataInputStream.skipBytes(offset);
 			readMassSpectrum(massSpectrum, dataInputStream, ionTransitionSettings);
 			dataInputStream.close();
-		} finally {
-			zipFile.close();
 		}
 	}
 
