@@ -50,14 +50,12 @@ public class MatlabParafacPeakReader implements IPeakReader {
 
 	private void validateContent(File file, IProcessingInfo<?> processingInfo) throws IOException {
 
-		FileReader fileReader = new FileReader(file);
-		BufferedReader bufferedReader = new BufferedReader(fileReader);
-		String firstLine = bufferedReader.readLine();
-		bufferedReader.close();
-		fileReader.close();
-		if(!firstLine.equals(MatlabParafac.PEAK_IDENTIFIER)) {
-			IProcessingMessage processingMessage = new ProcessingMessage(MessageType.ERROR, "Import Peak", "The given file contains no valid *.mpl peak list: " + file);
-			processingInfo.addMessage(processingMessage);
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+			String firstLine = bufferedReader.readLine();
+			if(!firstLine.equals(MatlabParafac.PEAK_IDENTIFIER)) {
+				IProcessingMessage processingMessage = new ProcessingMessage(MessageType.ERROR, "Import Peak", "The given file contains no valid *.mpl peak list: " + file);
+				processingInfo.addMessage(processingMessage);
+			}
 		}
 	}
 

@@ -49,25 +49,24 @@ public class ChromatogramTestCase {
 	public void setUp() throws IOException, ClassifierException {
 
 		PreferenceSupplier.setImportDelimiter(Delimiter.SEMICOLON);
-		ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_ZIP))));
-		zipInputStream.getNextEntry();
-		String inputChromatogramFile = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_FOLDER);
-		inputChromatogramFile += File.separator + TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_NAME;
-		chromatogramFile = new File(inputChromatogramFile);
-		if(chromatogramFile.exists()) {
-			chromatogramFile.delete();
+		try (ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_ZIP))))) {
+			zipInputStream.getNextEntry();
+			String inputChromatogramFile = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_FOLDER);
+			inputChromatogramFile += File.separator + TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_NAME;
+			chromatogramFile = new File(inputChromatogramFile);
+			if(chromatogramFile.exists()) {
+				chromatogramFile.delete();
+			}
+			try (BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(chromatogramFile), 2048)) {
+				int count;
+				int buffer = 2048;
+				byte data[] = new byte[buffer];
+				while((count = zipInputStream.read(data, 0, buffer)) != -1) {
+					bufferedOutputStream.write(data, 0, count);
+				}
+				bufferedOutputStream.flush();
+			}
 		}
-		FileOutputStream fileOutputStream = new FileOutputStream(chromatogramFile);
-		BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream, 2048);
-		int count;
-		int buffer = 2048;
-		byte data[] = new byte[buffer];
-		while((count = zipInputStream.read(data, 0, buffer)) != -1) {
-			bufferedOutputStream.write(data, 0, count);
-		}
-		bufferedOutputStream.flush();
-		bufferedOutputStream.close();
-		zipInputStream.close();
 		/*
 		 * Read the chromatogram
 		 */
@@ -77,7 +76,7 @@ public class ChromatogramTestCase {
 	}
 
 	@AfterAll
-	public void tearDown() throws Exception {
+	public void tearDown() {
 
 		PreferenceSupplier.setImportDelimiter(Delimiter.COMMA);
 

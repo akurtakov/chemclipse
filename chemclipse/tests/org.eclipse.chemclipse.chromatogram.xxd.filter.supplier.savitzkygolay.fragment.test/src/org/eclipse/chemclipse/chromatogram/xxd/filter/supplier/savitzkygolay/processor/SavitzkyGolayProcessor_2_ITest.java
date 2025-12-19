@@ -45,14 +45,14 @@ public class SavitzkyGolayProcessor_2_ITest {
 		 * Signals
 		 */
 		totalScanSignals = new TotalScanSignals(5726);
-		BufferedReader reader = new BufferedReader(new FileReader(new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1))));
-		String line;
-		while((line = reader.readLine()) != null) {
-			String[] values = line.split(", ");
-			ITotalScanSignal totalScanSignal = new TotalScanSignal(Integer.valueOf(values[0]), Float.valueOf(values[1]), Float.valueOf(values[2]));
-			totalScanSignals.add(totalScanSignal);
+		try (BufferedReader reader = new BufferedReader(new FileReader(new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1))))) {
+			String line;
+			while((line = reader.readLine()) != null) {
+				String[] values = line.split(", ");
+				ITotalScanSignal totalScanSignal = new TotalScanSignal(Integer.valueOf(values[0]), Float.valueOf(values[1]), Float.valueOf(values[2]));
+				totalScanSignals.add(totalScanSignal);
+			}
 		}
-		reader.close();
 		/*
 		 * Processor and settings
 		 */

@@ -68,13 +68,12 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader implements
 		/*
 		 * Check the first column header.
 		 */
-		FileReader reader = new FileReader(file);
-		char[] chars = new char[ChromatogramWriter.RT_MILLISECONDS_COLUMN.length()];
-		reader.read(chars);
-		reader.close();
-
-		String firstColumn = new String(chars);
-		return firstColumn.equals(ChromatogramWriter.RT_MILLISECONDS_COLUMN);
+		try (FileReader reader = new FileReader(file)) {
+			char[] chars = new char[ChromatogramWriter.RT_MILLISECONDS_COLUMN.length()];
+			reader.read(chars);
+			String firstColumn = new String(chars);
+			return firstColumn.equals(ChromatogramWriter.RT_MILLISECONDS_COLUMN);
+		}
 	}
 
 	private IChromatogramMSD readChromatogram(File file, boolean overview) throws IOException {

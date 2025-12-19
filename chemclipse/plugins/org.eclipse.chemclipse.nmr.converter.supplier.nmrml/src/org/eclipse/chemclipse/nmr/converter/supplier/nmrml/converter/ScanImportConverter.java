@@ -39,11 +39,9 @@ public class ScanImportConverter extends AbstractScanImportConverter implements 
 	public IProcessingInfo<ISpectrumNMR> convert(File file, IProgressMonitor monitor) {
 
 		IProcessingInfo<ISpectrumNMR> processingInfo = new ProcessingInfo<>();
-		try {
-			final FileReader fileReader = new FileReader(file);
+		try (final FileReader fileReader = new FileReader(file)) {
 			final char[] charBuffer = new char[500];
 			fileReader.read(charBuffer);
-			fileReader.close();
 
 			final String header = new String(charBuffer);
 			if(header.contains("nmrML")) {

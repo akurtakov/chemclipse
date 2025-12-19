@@ -92,8 +92,7 @@ public class TargetTemplates extends HashMap<String, TargetTemplate> {
 
 	public void importItems(File file) {
 
-		try {
-			BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
 			String line;
 			while((line = bufferedReader.readLine()) != null) {
 				TargetTemplate template = extractTargetTemplate(line);
@@ -101,7 +100,6 @@ public class TargetTemplates extends HashMap<String, TargetTemplate> {
 					add(template);
 				}
 			}
-			bufferedReader.close();
 		} catch(FileNotFoundException e) {
 			logger.warn(e);
 		} catch(IOException e) {

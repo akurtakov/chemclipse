@@ -34,21 +34,21 @@ public class ScanReader {
 		 * ...
 		 */
 		IVendorSpectrumVSD vendorScan = new VendorSpectrumVSD();
-		BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-		String line;
-		while((line = bufferedReader.readLine()) != null) {
-			String[] values = line.split(",");
-			if(values.length == 2) {
-				try {
-					double wavelength = Double.parseDouble(values[0].trim());
-					double absorbance = Double.parseDouble(values[1].trim());
-					vendorScan.getScanVSD().getProcessedSignals().add(new SignalInfrared(wavelength, absorbance, 0));
-				} catch(NumberFormatException e) {
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+			String line;
+			while((line = bufferedReader.readLine()) != null) {
+				String[] values = line.split(",");
+				if(values.length == 2) {
+					try {
+						double wavelength = Double.parseDouble(values[0].trim());
+						double absorbance = Double.parseDouble(values[1].trim());
+						vendorScan.getScanVSD().getProcessedSignals().add(new SignalInfrared(wavelength, absorbance, 0));
+					} catch(NumberFormatException e) {
 
+					}
 				}
 			}
 		}
-		bufferedReader.close();
 		return vendorScan;
 	}
 }

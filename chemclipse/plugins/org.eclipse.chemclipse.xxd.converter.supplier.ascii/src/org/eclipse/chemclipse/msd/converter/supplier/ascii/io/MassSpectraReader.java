@@ -39,35 +39,35 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 		/*
 		 * Import the mass spectrum.
 		 */
-		BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-		String line = null;
-		while((line = bufferedReader.readLine()) != null) {
-			line = line.trim();
-			// skip blank lines or comment lines(begin with '#' or ';')
-			if((line.length() == 0) || line.startsWith(";")) {
-				continue;
-			}
-			if(line.toUpperCase().matches("^#.*TIME.*=.*")) {
-				// The retention time is stored in seconds scale, must be changed to milliseconds.
-				int retentionTime = (int)(getNumberValue(line) * 1000d);
-				massSpectrum.setRetentionTime(retentionTime);
-				continue;
-			}
-			if(line.toUpperCase().matches("^#.*INDEX.*=.*")) {
-				float retentionIndex = getNumberValue(line);
-				massSpectrum.setRetentionIndex(retentionIndex);
-				continue;
-			}
-			// another lines begins with '#' will be treated as comment line
-			if(line.startsWith("#")) {
-				continue;
-			}
-			String[] temp = line.split("\\s+");
-			if(temp.length >= 2) {
-				addIon(massSpectrum, temp);
+		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+			String line = null;
+			while((line = bufferedReader.readLine()) != null) {
+				line = line.trim();
+				// skip blank lines or comment lines(begin with '#' or ';')
+				if((line.length() == 0) || line.startsWith(";")) {
+					continue;
+				}
+				if(line.toUpperCase().matches("^#.*TIME.*=.*")) {
+					// The retention time is stored in seconds scale, must be changed to milliseconds.
+					int retentionTime = (int)(getNumberValue(line) * 1000d);
+					massSpectrum.setRetentionTime(retentionTime);
+					continue;
+				}
+				if(line.toUpperCase().matches("^#.*INDEX.*=.*")) {
+					float retentionIndex = getNumberValue(line);
+					massSpectrum.setRetentionIndex(retentionIndex);
+					continue;
+				}
+				// another lines begins with '#' will be treated as comment line
+				if(line.startsWith("#")) {
+					continue;
+				}
+				String[] temp = line.split("\\s+");
+				if(temp.length >= 2) {
+					addIon(massSpectrum, temp);
+				}
 			}
 		}
-		bufferedReader.close();
 
 		massSpectra.addMassSpectrum(massSpectrum);
 		return massSpectra;
