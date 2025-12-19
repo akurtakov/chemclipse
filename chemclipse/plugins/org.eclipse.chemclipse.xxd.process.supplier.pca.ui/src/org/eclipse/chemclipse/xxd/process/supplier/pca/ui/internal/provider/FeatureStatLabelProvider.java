@@ -121,6 +121,7 @@ public class FeatureStatLabelProvider extends AbstractChemClipseLabelProvider {
 					value = 0.0;
 					value = stats.getKurtosis() - 3.0;
 					text = Double.isNaN(value) ? "NaN" : decimalFormat.format(value);
+					break;
 				default:
 					break;
 			}
