@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -255,6 +255,10 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 			} catch(DataFormatException e) {
 				logger.error(e);
 			}
+		}
+		if(mzs == null || intensities == null) {
+			logger.warn("Ignoring spectrum " + spectrum.getIndex() + " " + spectrum.getId());
+			return;
 		}
 		double selectedIon = getSelectedIon(spectrum);
 		massSpectrum.setPrecursorIon(selectedIon);
