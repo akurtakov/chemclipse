@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,11 +27,9 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.swt.ui.support.IColorScheme;
 import org.eclipse.chemclipse.ux.extension.msd.ui.views.MassSpectrumRulerChart;
-import org.eclipse.chemclipse.ux.extension.ui.model.IRulerUpdateNotifier;
 import org.eclipse.chemclipse.ux.extension.ui.support.PartSupport;
 import org.eclipse.chemclipse.ux.extension.ui.support.RulerEvent;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.ui.swt.RulerDetailsUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.part.support.EditorUpdateSupport;
@@ -188,14 +186,7 @@ public class ExtendedMassSpectrumOverlayUI extends Composite implements IExtende
 
 	private void createSettingsButton(Composite parent) {
 
-		createSettingsButton(parent, Arrays.asList(PreferencePageOverlay.class), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings();
-			}
-		});
+		createSettingsButton(parent, Arrays.asList(PreferencePageOverlay.class), (Display display) -> applySettings());
 	}
 
 	private void createOverlayChart(Composite parent) {
@@ -224,13 +215,8 @@ public class ExtendedMassSpectrumOverlayUI extends Composite implements IExtende
 			}
 		});
 
-		chart.setRulerUpdateNotifier(new IRulerUpdateNotifier() {
-
-			@Override
-			public void update(RulerEvent rulerEvent) {
-
-				toolbarRulerDetails.get().setInput(rulerEvent);
-			}
+		chart.setRulerUpdateNotifier((RulerEvent rulerEvent) -> {
+			toolbarRulerDetails.get().setInput(rulerEvent);
 		});
 
 		chartControl.set(chart);

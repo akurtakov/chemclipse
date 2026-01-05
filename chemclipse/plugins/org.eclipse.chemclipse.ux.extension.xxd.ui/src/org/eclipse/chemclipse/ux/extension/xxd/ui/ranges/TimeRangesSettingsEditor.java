@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,8 +26,6 @@ import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
-import org.eclipse.chemclipse.support.updates.IUpdateListener;
-import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.ux.extension.ui.methods.SettingsUIProvider;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
@@ -198,13 +196,8 @@ public class TimeRangesSettingsEditor implements SettingsUIProvider.SettingsUICo
 
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		searchSupportUI.setSearchListener(new ISearchListener() {
-
-			@Override
-			public void performSearch(String searchText, boolean caseSensitive) {
-
-				timeRangesControl.get().setSearchText(searchText, caseSensitive);
-			}
+		searchSupportUI.setSearchListener((String searchText, boolean caseSensitive) -> {
+			timeRangesControl.get().setSearchText(searchText, caseSensitive);
 		});
 
 		toolbarSearch.set(searchSupportUI);
@@ -215,16 +208,10 @@ public class TimeRangesSettingsEditor implements SettingsUIProvider.SettingsUICo
 		TimeRangeShifterUI timeRangeShifterUI = new TimeRangeShifterUI(parent, SWT.NONE);
 		timeRangeShifterUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		timeRangeShifterUI.setUpdateListener(new IUpdateListener() {
-
-			@Override
-			public void update() {
-
-				timeRangesControl.get().refresh();
-			}
-		});
+		timeRangeShifterUI.setUpdateListener(() -> timeRangesControl.get().refresh());
 
 		toolbarShiftControl.set(timeRangeShifterUI);
+
 	}
 
 	private void createTableSection(Composite parent) {

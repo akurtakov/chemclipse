@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,12 +24,9 @@ import org.eclipse.chemclipse.chromatogram.vsd.filter.ui.internal.provider.Waven
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
-import org.eclipse.chemclipse.support.ui.events.IKeyEventProcessor;
 import org.eclipse.chemclipse.support.ui.menu.ITableMenuEntry;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.chemclipse.support.ui.swt.ITableSettings;
-import org.eclipse.chemclipse.support.updates.IUpdateListener;
-import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.ux.extension.ui.methods.IChangeListener;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
@@ -182,13 +179,8 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		searchSupportUI.setSearchListener(new ISearchListener() {
-
-			@Override
-			public void performSearch(String searchText, boolean caseSensitive) {
-
-				tableViewer.get().setSearchText(searchText, caseSensitive);
-			}
+		searchSupportUI.setSearchListener((String searchText, boolean caseSensitive) -> {
+			tableViewer.get().setSearchText(searchText, caseSensitive);
 		});
 
 		toolbarSearch.set(searchSupportUI);
@@ -198,15 +190,7 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 
 		WavenumberSignalsUI wavenumberSignalsUI = new WavenumberSignalsUI(parent, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 		wavenumberSignalsUI.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
-
-		wavenumberSignalsUI.setUpdateListener(new IUpdateListener() {
-
-			@Override
-			public void update() {
-
-				setViewerInput();
-			}
-		});
+		wavenumberSignalsUI.setUpdateListener(this::setViewerInput);
 
 		Shell shell = wavenumberSignalsUI.getTable().getShell();
 		ITableSettings tableSettings = wavenumberSignalsUI.getTableSettings();
@@ -409,14 +393,9 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 
 	private void addKeyEventProcessors(Shell shell, ITableSettings tableSettings) {
 
-		tableSettings.addKeyEventProcessor(new IKeyEventProcessor() {
-
-			@Override
-			public void handleEvent(ExtendedTableViewer extendedTableViewer, KeyEvent e) {
-
-				if(e.keyCode == SWT.DEL) {
-					deleteItems(shell);
-				}
+		tableSettings.addKeyEventProcessor((ExtendedTableViewer extendedTableViewer, KeyEvent e) -> {
+			if(e.keyCode == SWT.DEL) {
+				deleteItems(shell);
 			}
 		});
 	}

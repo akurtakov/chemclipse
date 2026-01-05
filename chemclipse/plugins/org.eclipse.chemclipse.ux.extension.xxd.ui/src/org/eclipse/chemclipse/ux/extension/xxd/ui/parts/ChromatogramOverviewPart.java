@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,7 +23,6 @@ import org.eclipse.chemclipse.model.signals.TotalScanSignalExtractor;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.ux.extension.ui.parts.AbstractPart;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.part.support.IOverviewListener;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.part.support.OverviewSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.OverviewChartUI;
 import org.eclipse.swt.SWT;
@@ -45,14 +44,7 @@ public class ChromatogramOverviewPart extends AbstractPart<OverviewChartUI> {
 	public ChromatogramOverviewPart(Composite parent) {
 
 		super(parent, TOPIC, Activator.getDefault().getDataUpdateSupport());
-		overviewSupport.setOverviewListener(new IOverviewListener() {
-
-			@Override
-			public void update(Object object) {
-
-				updateChart(object);
-			}
-		});
+		overviewSupport.setOverviewListener(this::updateChart);
 	}
 
 	@Override

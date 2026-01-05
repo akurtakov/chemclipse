@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -243,13 +243,8 @@ public class TimeRangesUI extends Composite implements IExtendedPartUI {
 
 		TimeRangeUI timeRangeUI = new TimeRangeUI(parent, SWT.NONE);
 		timeRangeUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		timeRangeUI.setUpdateListener(new ITimeRangeUpdateListener() {
-
-			@Override
-			public void update(TimeRange timeRange) {
-
-				updateTimeRange(timeRange, true);
-			}
+		timeRangeUI.setUpdateListener((TimeRange timeRange) -> {
+			updateTimeRange(timeRange, true);
 		});
 
 		timeRangeControl.set(timeRangeUI);

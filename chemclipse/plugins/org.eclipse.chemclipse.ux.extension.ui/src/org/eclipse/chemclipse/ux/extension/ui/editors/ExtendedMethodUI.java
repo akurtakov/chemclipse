@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -29,7 +29,6 @@ import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
-import org.eclipse.chemclipse.support.updates.IUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.support.PartSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
@@ -215,23 +214,9 @@ public class ExtendedMethodUI extends Composite implements IExtendedPartUI {
 		processMethodHeader.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		processMethodHeader.setProcessingSupport(processingSupport);
 
-		processMethodHeader.setUpdateListener(new IUpdateListener() {
+		processMethodHeader.setUpdateListener(this::updateProcessMethod);
 
-			@Override
-			public void update() {
-
-				updateProcessMethod();
-			}
-		});
-
-		processMethodHeader.setModificationHandler(new IModificationHandler() {
-
-			@Override
-			public void setDirty(boolean dirty) {
-
-				setMethodDirty(dirty);
-			}
-		});
+		processMethodHeader.setModificationHandler(this::setMethodDirty);
 
 		toolbarHeader.set(processMethodHeader);
 	}
@@ -241,14 +226,9 @@ public class ExtendedMethodUI extends Composite implements IExtendedPartUI {
 		ProcessMethodProfiles processMethodProfiles = new ProcessMethodProfiles(parent, SWT.NONE);
 		processMethodProfiles.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		processMethodProfiles.setUpdateListener(new IUpdateListener() {
-
-			@Override
-			public void update() {
-
-				updateProcessMethod();
-				setMethodDirty(true);
-			}
+		processMethodProfiles.setUpdateListener(() -> {
+			updateProcessMethod();
+			setMethodDirty(true);
 		});
 
 		toolbarProfile.set(processMethodProfiles);
@@ -258,14 +238,9 @@ public class ExtendedMethodUI extends Composite implements IExtendedPartUI {
 
 		MethodTreeViewer methodTreeViewer = new MethodTreeViewer(parent, SWT.BORDER | SWT.MULTI | SWT.FULL_SELECTION);
 		methodTreeViewer.createControl(processingSupport, preferencesSupplier, toolbarButtons, false);
-		methodTreeViewer.setUpdateListener(new IUpdateListener() {
-
-			@Override
-			public void update() {
-
-				updateProcessMethod();
-				setMethodDirty(true);
-			}
+		methodTreeViewer.setUpdateListener(() -> {
+			updateProcessMethod();
+			setMethodDirty(true);
 		});
 
 		methodTreeViewer.getTree().addKeyListener(new KeyAdapter() {
@@ -303,15 +278,10 @@ public class ExtendedMethodUI extends Composite implements IExtendedPartUI {
 		processMethodToolbar.setPreferencesSupplier(preferencesSupplier);
 		processMethodToolbar.setDataCategories(dataCategories);
 		processMethodToolbar.setReadOnly(readOnly);
-		processMethodToolbar.setUpdateListener(new IUpdateListener() {
-
-			@Override
-			public void update() {
-
-				toolbarProfile.get().setInput(processMethodToolbar.getProcessMethod());
-				updateProcessMethod();
-				setMethodDirty(true);
-			}
+		processMethodToolbar.setUpdateListener(() -> {
+			toolbarProfile.get().setInput(processMethodToolbar.getProcessMethod());
+			updateProcessMethod();
+			setMethodDirty(true);
 		});
 
 		toolbarButtons.set(processMethodToolbar);

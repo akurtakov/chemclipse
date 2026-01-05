@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,9 +16,7 @@ import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
-import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -92,13 +90,8 @@ public class ExtendedCasNumbersUI extends LibraryInformationComposite {
 
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		searchSupportUI.setSearchListener(new ISearchListener() {
-
-			@Override
-			public void performSearch(String searchText, boolean caseSensitive) {
-
-				listControl.get().setSearchText(searchText, caseSensitive);
-			}
+		searchSupportUI.setSearchListener((String searchText, boolean caseSensitive) -> {
+			listControl.get().setSearchText(searchText, caseSensitive);
 		});
 
 		toolbarSearch.set(searchSupportUI);
@@ -115,13 +108,8 @@ public class ExtendedCasNumbersUI extends LibraryInformationComposite {
 
 	private void createButtonSettings(Composite parent) {
 
-		createSettingsButton(parent, Arrays.asList(PreferencePage.class), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings();
-			}
+		createSettingsButton(parent, Arrays.asList(PreferencePage.class), (Display display) -> {
+			applySettings();
 		});
 	}
 

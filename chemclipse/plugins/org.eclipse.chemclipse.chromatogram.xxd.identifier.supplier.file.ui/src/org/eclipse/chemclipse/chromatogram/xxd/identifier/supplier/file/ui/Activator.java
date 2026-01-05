@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -87,38 +87,34 @@ public class Activator extends AbstractActivatorUI {
 
 	private EventHandler registerEventHandler(IEventBroker eventBroker, String property, String topic) {
 
-		EventHandler eventHandler = new EventHandler() {
+		EventHandler eventHandler = (Event event) -> {
 
-			@Override
-			public void handleEvent(Event event) {
-
-				try {
-					Object object = event.getProperty(property);
-					if(object instanceof File file) {
-						if(file.exists()) {
-							String library = file.getAbsolutePath();
-							List<String> libraries = PreferenceSupplier.getMassSpectraFiles();
-							if(IChemClipseEvents.TOPIC_LIBRARY_MSD_ADD_TO_DB_SEARCH.equals(topic)) {
-								/*
-								 * Add the library.
-								 */
-								if(!libraries.contains(library)) {
-									libraries.add(library);
-								}
-							} else if(IChemClipseEvents.TOPIC_LIBRARY_MSD_REMOVE_FROM_DB_SEARCH.equals(topic)) {
-								/*
-								 * Remove the library
-								 */
-								if(libraries.contains(library)) {
-									libraries.remove(library);
-								}
+			try {
+				Object object = event.getProperty(property);
+				if(object instanceof File file) {
+					if(file.exists()) {
+						String library = file.getAbsolutePath();
+						List<String> libraries = PreferenceSupplier.getMassSpectraFiles();
+						if(IChemClipseEvents.TOPIC_LIBRARY_MSD_ADD_TO_DB_SEARCH.equals(topic)) {
+							/*
+							 * Add the library.
+							 */
+							if(!libraries.contains(library)) {
+								libraries.add(library);
 							}
-							PreferenceSupplier.setMassSpectraFiles(libraries);
+						} else if(IChemClipseEvents.TOPIC_LIBRARY_MSD_REMOVE_FROM_DB_SEARCH.equals(topic)) {
+							/*
+							 * Remove the library
+							 */
+							if(libraries.contains(library)) {
+								libraries.remove(library);
+							}
 						}
+						PreferenceSupplier.setMassSpectraFiles(libraries);
 					}
-				} catch(Exception e) {
-					logger.warn(e);
 				}
+			} catch(Exception e) {
+				logger.warn(e);
 			}
 		};
 		eventBroker.subscribe(topic, eventHandler);

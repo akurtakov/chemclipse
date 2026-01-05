@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -144,36 +144,31 @@ public class ComboTarget extends Composite {
 
 	private void enableAutoComplete(Combo combo) {
 
-		IContentProposalProvider proposalProvider = new IContentProposalProvider() {
+		IContentProposalProvider proposalProvider = (String contents, int position) -> {
+			List<ContentProposal> list = new ArrayList<>();
+			if(contents != null) {
+				// Trim search results for performance.
+				String[] filtered = Arrays.stream(items) //
+											.filter(Objects::nonNull) //
+											.filter(s -> s.toLowerCase().contains(contents)) //
+											.limit(100) //
+											.toArray(String[]::new); //
 
-			@Override
-			public IContentProposal[] getProposals(String contents, int position) {
+				// Dynamically add back the entries so they can be selected.
+				String text = combo.getText();
+				Point selection = combo.getSelection();
+				combo.removeAll();
+				combo.setItems(filtered);
+				combo.setText(text);
+				combo.setSelection(selection);
 
-				List<ContentProposal> list = new ArrayList<>();
-				if(contents != null) {
-					// Trim search results for performance.
-					String[] filtered = Arrays.stream(items) //
-							.filter(Objects::nonNull) //
-							.filter(s -> s.toLowerCase().contains(contents)) //
-							.limit(100) //
-							.toArray(String[]::new); //
-
-					// Dynamically add back the entries so they can be selected.
-					String text = combo.getText();
-					Point selection = combo.getSelection();
-					combo.removeAll();
-					combo.setItems(filtered);
-					combo.setText(text);
-					combo.setSelection(selection);
-
-					for(String item : items) {
-						if(item.toLowerCase().contains(contents.toLowerCase())) {
-							list.add(new ContentProposal(item));
-						}
+				for(String item : items) {
+					if(item.toLowerCase().contains(contents.toLowerCase())) {
+						list.add(new ContentProposal(item));
 					}
 				}
-				return list.toArray(new IContentProposal[0]);
 			}
+			return list.toArray(new IContentProposal[0]);
 		};
 
 		autoComplete(combo, proposalProvider);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,7 +25,6 @@ import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
-import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ComboViewer;
@@ -130,22 +129,18 @@ public class ChromatogramBaselinesUI extends Composite {
 			public void widgetSelected(SelectionEvent e) {
 
 				if(chromatogram != null) {
-					InputDialog inputDialog = new InputDialog(e.display.getActiveShell(), "New Baseline", "Add a new baseline identifier.", "", new IInputValidator() {
+					InputDialog inputDialog = new InputDialog(e.display.getActiveShell(), "New Baseline", "Add a new baseline identifier.", "", (String newText) -> {
 
-						@Override
-						public String isValid(String newText) {
-
-							if(newText == null || newText.isBlank()) {
-								return "Please select a valid baseline id.";
-							}
-
-							for(String baselineId : chromatogram.getBaselineIds()) {
-								if(newText.equals(baselineId)) {
-									return "The baseline id exists already.";
-								}
-							}
-							return null;
+						if(newText == null || newText.isBlank()) {
+							return "Please select a valid baseline id.";
 						}
+
+						for(String baselineId : chromatogram.getBaselineIds()) {
+							if(newText.equals(baselineId)) {
+								return "The baseline id exists already.";
+							}
+						}
+						return null;
 					});
 
 					if(inputDialog.open() == Window.OK) {

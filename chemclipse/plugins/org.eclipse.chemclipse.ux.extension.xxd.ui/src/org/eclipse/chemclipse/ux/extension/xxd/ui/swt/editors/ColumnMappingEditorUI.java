@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,17 +24,14 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.model.SeparationColumnType;
-import org.eclipse.chemclipse.support.ui.events.IKeyEventProcessor;
 import org.eclipse.chemclipse.support.ui.menu.ITableMenuEntry;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.chemclipse.support.ui.swt.ITableSettings;
-import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.ux.extension.ui.methods.IChangeListener;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ColumnMappingListUI;
 import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -186,13 +183,8 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		searchSupportUI.setSearchListener(new ISearchListener() {
-
-			@Override
-			public void performSearch(String searchText, boolean caseSensitive) {
-
-				listControl.get().setSearchText(searchText, caseSensitive);
-			}
+		searchSupportUI.setSearchListener((String searchText, boolean caseSensitive) -> {
+			listControl.get().setSearchText(searchText, caseSensitive);
 		});
 
 		toolbarSearch.set(searchSupportUI);
@@ -226,24 +218,20 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				InputDialog dialog = new InputDialog(button.getShell(), SeparationColumnMapping.DESCRIPTION, MESSAGE_ADD, "DB5", new IInputValidator() {
+				InputDialog dialog = new InputDialog(button.getShell(), SeparationColumnMapping.DESCRIPTION, MESSAGE_ADD, "DB5", (String newText) -> {
 
-					@Override
-					public String isValid(String newText) {
-
-						if("".equals(newText)) {
-							return "Please type in a keyword.";
-						} else if(newText.contains(SeparationColumnMapping.SEPARATOR_ENTRY)) {
-							return "The keyword must not contain the following character: '" + SeparationColumnMapping.SEPARATOR_ENTRY + "'";
-						} else if(newText.contains(SeparationColumnMapping.SEPARATOR_TOKEN)) {
-							return "The keyword must not contain the following character: '" + SeparationColumnMapping.SEPARATOR_TOKEN + "'";
-						} else {
-							if(separationColumnMapping.containsKey(newText)) {
-								return "The keyword already exists.";
-							}
+					if("".equals(newText)) {
+						return "Please type in a keyword.";
+					} else if(newText.contains(SeparationColumnMapping.SEPARATOR_ENTRY)) {
+						return "The keyword must not contain the following character: '" + SeparationColumnMapping.SEPARATOR_ENTRY + "'";
+					} else if(newText.contains(SeparationColumnMapping.SEPARATOR_TOKEN)) {
+						return "The keyword must not contain the following character: '" + SeparationColumnMapping.SEPARATOR_TOKEN + "'";
+					} else {
+						if(separationColumnMapping.containsKey(newText)) {
+							return "The keyword already exists.";
 						}
-						return null;
 					}
+					return null;
 				});
 
 				if(IDialogConstants.OK_ID == dialog.open()) {
@@ -394,14 +382,9 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 
 	private void addKeyEventProcessors(Shell shell, ITableSettings tableSettings) {
 
-		tableSettings.addKeyEventProcessor(new IKeyEventProcessor() {
-
-			@Override
-			public void handleEvent(ExtendedTableViewer extendedTableViewer, KeyEvent e) {
-
-				if(e.keyCode == SWT.DEL) {
-					deleteItems(shell);
-				}
+		tableSettings.addKeyEventProcessor((ExtendedTableViewer extendedTableViewer, KeyEvent e) -> {
+			if(e.keyCode == SWT.DEL) {
+				deleteItems(shell);
 			}
 		});
 	}

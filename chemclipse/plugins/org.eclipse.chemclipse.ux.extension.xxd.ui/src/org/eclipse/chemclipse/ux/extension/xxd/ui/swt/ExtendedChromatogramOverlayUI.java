@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -55,15 +55,12 @@ import org.eclipse.chemclipse.support.traces.TraceType;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedCombo;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
-import org.eclipse.chemclipse.support.updates.IUpdateListener;
 import org.eclipse.chemclipse.support.validators.TraceValidator;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
-import org.eclipse.chemclipse.ux.extension.ui.model.IRulerUpdateNotifier;
 import org.eclipse.chemclipse.ux.extension.ui.support.PartSupport;
 import org.eclipse.chemclipse.ux.extension.ui.support.RulerEvent;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ChartGridSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.ui.swt.RulerDetailsUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart;
@@ -114,7 +111,6 @@ import org.eclipse.swtchart.extensions.core.BaseChart;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.IExtendedChart;
 import org.eclipse.swtchart.extensions.core.ISeriesData;
-import org.eclipse.swtchart.extensions.core.ISeriesModificationListener;
 import org.eclipse.swtchart.extensions.core.RangeRestriction;
 import org.eclipse.swtchart.extensions.core.RangeRestriction.ExtendType;
 import org.eclipse.swtchart.extensions.core.SeriesData;
@@ -285,16 +281,11 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 		NamedTracesUI namedTracesUI = new NamedTracesUI(parent, SWT.NONE);
 		namedTracesUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		namedTracesUI.setInput(new NamedTraces(preferenceStore.getString(PreferenceSupplier.P_CHROMATOGRAM_OVERLAY_NAMED_TRACES)));
-		namedTracesUI.setUpdateListener(new IUpdateListener() {
-
-			@Override
-			public void update() {
-
-				NamedTraces namedTraces = namedTracesUI.getNamedTraces();
-				if(namedTraces != null) {
-					preferenceStore.setValue(PreferenceSupplier.P_CHROMATOGRAM_OVERLAY_NAMED_TRACES, namedTraces.save());
-					refreshUpdateOverlayChart(true);
-				}
+		namedTracesUI.setUpdateListener(() -> {
+			NamedTraces namedTraces = namedTracesUI.getNamedTraces();
+			if(namedTraces != null) {
+				preferenceStore.setValue(PreferenceSupplier.P_CHROMATOGRAM_OVERLAY_NAMED_TRACES, namedTraces.save());
+				refreshUpdateOverlayChart(true);
 			}
 		});
 
@@ -495,13 +486,8 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 				PreferencePageNamedTraces.class, //
 				PreferencePageChromatogram.class, //
 				PreferencePage.class //
-		), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings();
-			}
+		), (Display display) -> {
+			applySettings();
 		});
 	}
 
@@ -594,22 +580,10 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 		chromatogramRulerChart.applySettings(chartSettings);
 
 		BaseChart baseChart = chromatogramRulerChart.getBaseChart();
-		baseChart.addSeriesModificationListener(new ISeriesModificationListener() {
+		baseChart.addSeriesModificationListener(this::modifyDataStatusLabel);
 
-			@Override
-			public void handleSeriesModificationEvent() {
-
-				modifyDataStatusLabel();
-			}
-		});
-
-		chromatogramRulerChart.setRulerUpdateNotifier(new IRulerUpdateNotifier() {
-
-			@Override
-			public void update(RulerEvent rulerEvent) {
-
-				toolbarRulerDetails.get().setInput(rulerEvent);
-			}
+		chromatogramRulerChart.setRulerUpdateNotifier((RulerEvent rulerEvent) -> {
+			toolbarRulerDetails.get().setInput(rulerEvent);
 		});
 
 		chartControl.set(chromatogramRulerChart);

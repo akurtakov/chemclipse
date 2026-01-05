@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -85,21 +85,17 @@ public class Activator extends AbstractActivatorUI {
 
 	private EventHandler registerEventHandler(IEventBroker eventBroker, String property, String topic) {
 
-		EventHandler eventHandler = new EventHandler() {
+		EventHandler eventHandler = (Event event) -> {
 
-			@Override
-			public void handleEvent(Event event) {
-
-				try {
-					Object object = event.getProperty(property);
-					if(object instanceof File file) {
-						if(PCRExportConverter.TOPIC_PROCESSING_FILE_CREATED.equals(topic)) {
-							SystemEditor.open(file);
-						}
+			try {
+				Object object = event.getProperty(property);
+				if(object instanceof File file) {
+					if(PCRExportConverter.TOPIC_PROCESSING_FILE_CREATED.equals(topic)) {
+						SystemEditor.open(file);
 					}
-				} catch(Exception e) {
-					logger.warn(e);
 				}
+			} catch(Exception e) {
+				logger.warn(e);
 			}
 		};
 		eventBroker.subscribe(topic, eventHandler);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -90,37 +90,33 @@ public class Activator extends AbstractActivatorUI {
 
 	private EventHandler registerEventHandler(IEventBroker eventBroker, String property, String topic) {
 
-		EventHandler eventHandler = new EventHandler() {
+		EventHandler eventHandler = (Event event) -> {
 
-			@Override
-			public void handleEvent(Event event) {
-
-				try {
-					Object object = event.getProperty(property);
-					if(object instanceof File file) {
-						if(file.exists()) {
-							/*
-							 * Add/Remove the RI calibration file.
-							 */
-							String library = file.getAbsolutePath();
-							List<String> libraries = PreferenceSupplier.getRetentionIndexFiles();
-							if(IChemClipseEvents.TOPIC_RI_LIBRARY_ADD_ADD_TO_PROCESS.equals(topic)) {
-								if(!libraries.contains(library)) {
-									libraries.add(library); // ADD
-								}
-							} else if(IChemClipseEvents.TOPIC_RI_LIBRARY_REMOVE_FROM_PROCESS.equals(topic)) {
-								if(libraries.contains(library)) {
-									libraries.remove(library); // REMOVE
-								}
-							} else if(CalibrationFileWriter.TOPIC_PROCESSING_FILE_CREATED.equals(topic)) {
-								SystemEditor.open(file);
+			try {
+				Object object = event.getProperty(property);
+				if(object instanceof File file) {
+					if(file.exists()) {
+						/*
+						 * Add/Remove the RI calibration file.
+						 */
+						String library = file.getAbsolutePath();
+						List<String> libraries = PreferenceSupplier.getRetentionIndexFiles();
+						if(IChemClipseEvents.TOPIC_RI_LIBRARY_ADD_ADD_TO_PROCESS.equals(topic)) {
+							if(!libraries.contains(library)) {
+								libraries.add(library); // ADD
 							}
-							PreferenceSupplier.setRetentionIndexFiles(libraries);
+						} else if(IChemClipseEvents.TOPIC_RI_LIBRARY_REMOVE_FROM_PROCESS.equals(topic)) {
+							if(libraries.contains(library)) {
+								libraries.remove(library); // REMOVE
+							}
+						} else if(CalibrationFileWriter.TOPIC_PROCESSING_FILE_CREATED.equals(topic)) {
+							SystemEditor.open(file);
 						}
+						PreferenceSupplier.setRetentionIndexFiles(libraries);
 					}
-				} catch(Exception e) {
-					logger.warn(e);
 				}
+			} catch(Exception e) {
+				logger.warn(e);
 			}
 		};
 		eventBroker.subscribe(topic, eventHandler);

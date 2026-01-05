@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -170,21 +170,16 @@ public class EditorCalibration extends MultiPageEditorPart {
 
 	private EventHandler registerEventHandler(IEventBroker eventBroker, String topic, String[] properties) {
 
-		EventHandler eventHandler = new EventHandler() {
-
-			@Override
-			public void handleEvent(Event event) {
-
-				try {
-					objects.clear();
-					for(String property : properties) {
-						Object object = event.getProperty(property);
-						objects.add(object);
-					}
-					update(topic);
-				} catch(Exception e) {
-					logger.warn(e + "\t" + event);
+		EventHandler eventHandler = (Event event) -> {
+			try {
+				objects.clear();
+				for(String property : properties) {
+					Object object = event.getProperty(property);
+					objects.add(object);
 				}
+				update(topic);
+			} catch(Exception e) {
+				logger.warn(e + "\t" + event);
 			}
 		};
 		eventBroker.subscribe(topic, eventHandler);

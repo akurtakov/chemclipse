@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -36,11 +36,9 @@ import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
-import org.eclipse.chemclipse.support.updates.IUpdateListener;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ChromatogramDataSupport;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -148,18 +146,13 @@ public class ChromatogramSignalNoiseUI extends Composite implements IExtendedPar
 		NoiseSegmentListUI noiseSegmentListUI = new NoiseSegmentListUI(parent, SWT.BORDER | SWT.MULTI | SWT.FULL_SELECTION | SWT.V_SCROLL | SWT.H_SCROLL);
 		noiseSegmentListUI.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
 
-		noiseSegmentListUI.setUpdateListener(new IUpdateListener() {
-
-			@Override
-			public void update() {
-
-				if(chromatogramSelection != null) {
-					IChromatogram chromatogram = chromatogramSelection.getChromatogram();
-					if(chromatogram != null) {
-						chromatogram.resetNoiseFactor();
-						chromatogram.setDirty(true);
-						updateInput();
-					}
+		noiseSegmentListUI.setUpdateListener(() -> {
+			if(chromatogramSelection != null) {
+				IChromatogram chromatogram = chromatogramSelection.getChromatogram();
+				if(chromatogram != null) {
+					chromatogram.resetNoiseFactor();
+					chromatogram.setDirty(true);
+					updateInput();
 				}
 			}
 		});
@@ -305,14 +298,7 @@ public class ChromatogramSignalNoiseUI extends Composite implements IExtendedPar
 
 	private void createSettingsButton(Composite parent) {
 
-		createSettingsButton(parent, Arrays.asList(PreferencePage.class), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings();
-			}
-		});
+		createSettingsButton(parent, Arrays.asList(PreferencePage.class), (Display display) -> applySettings());
 	}
 
 	private void applySettings() {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,10 +17,8 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
-import org.eclipse.chemclipse.support.updates.IUpdateListener;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.model.PenaltyCalculationModel;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePagePeakTraces;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.PeakDataSupport;
@@ -53,6 +51,7 @@ public class ExtendedPenaltyCalculationUI extends Composite implements IExtended
 		createControl();
 	}
 
+	@Override
 	@Focus
 	public boolean setFocus() {
 
@@ -115,16 +114,11 @@ public class ExtendedPenaltyCalculationUI extends Composite implements IExtended
 
 		PenaltyCalculationUI penaltyCalculationUI = new PenaltyCalculationUI(parent, SWT.NONE);
 		penaltyCalculationUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		penaltyCalculationUI.setUpdateListener(new IUpdateListener() {
-
-			@Override
-			public void update() {
-
-				if(peak != null) {
-					PenaltyCalculationModel penaltyCalculationModel = penaltyCalculationUI.getPenaltyCalculationModel();
-					if(penaltyCalculationModel != null) {
-						chartControl.get().setInput(penaltyCalculationModel);
-					}
+		penaltyCalculationUI.setUpdateListener(() -> {
+			if(peak != null) {
+				PenaltyCalculationModel penaltyCalculationModel = penaltyCalculationUI.getPenaltyCalculationModel();
+				if(penaltyCalculationModel != null) {
+					chartControl.get().setInput(penaltyCalculationModel);
 				}
 			}
 		});
@@ -145,14 +139,7 @@ public class ExtendedPenaltyCalculationUI extends Composite implements IExtended
 		createSettingsButton(parent, Arrays.asList( //
 				PreferencePagePeakTraces.class, //
 				PreferencePage.class //
-		), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings();
-			}
-		});
+		), (Display display) -> applySettings());
 	}
 
 	private void applySettings() {

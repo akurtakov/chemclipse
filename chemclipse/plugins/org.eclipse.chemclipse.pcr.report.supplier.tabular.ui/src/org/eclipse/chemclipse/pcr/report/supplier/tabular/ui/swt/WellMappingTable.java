@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -39,11 +39,9 @@ import org.eclipse.chemclipse.pcr.report.supplier.tabular.ui.internal.provider.W
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
-import org.eclipse.chemclipse.support.ui.events.IKeyEventProcessor;
 import org.eclipse.chemclipse.support.ui.menu.ITableMenuEntry;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.chemclipse.support.ui.swt.ITableSettings;
-import org.eclipse.chemclipse.support.updates.IUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.methods.IChangeListener;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -179,17 +177,11 @@ public class WellMappingTable extends Composite implements IChangeListener, IExt
 		WellMappingListUI wellMappingListUI = new WellMappingListUI(parent, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 		wellMappingListUI.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
 
-		wellMappingListUI.setUpdateListener(new IUpdateListener() {
-
-			@Override
-			public void update() {
-
-				setViewerInput();
-			}
-		});
+		wellMappingListUI.setUpdateListener(this::setViewerInput);
 
 		Shell shell = wellMappingListUI.getTable().getShell();
 		ITableSettings tableSettings = wellMappingListUI.getTableSettings();
+
 		addDeleteMenuEntry(shell, tableSettings);
 		addKeyEventProcessors(shell, tableSettings);
 		wellMappingListUI.applySettings(tableSettings);
@@ -390,14 +382,9 @@ public class WellMappingTable extends Composite implements IChangeListener, IExt
 
 	private void addKeyEventProcessors(Shell shell, ITableSettings tableSettings) {
 
-		tableSettings.addKeyEventProcessor(new IKeyEventProcessor() {
-
-			@Override
-			public void handleEvent(ExtendedTableViewer extendedTableViewer, KeyEvent e) {
-
-				if(e.keyCode == SWT.DEL) {
-					deleteItems(shell);
-				}
+		tableSettings.addKeyEventProcessor((ExtendedTableViewer extendedTableViewer, KeyEvent e) -> {
+			if(e.keyCode == SWT.DEL) {
+				deleteItems(shell);
 			}
 		});
 	}

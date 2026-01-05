@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -33,14 +33,7 @@ public abstract class AbstractUpdater<T extends Composite> {
 	private String topic = "";
 
 	private DataUpdateSupport dataUpdateSupport;
-	private IDataUpdateListener updateListener = new IDataUpdateListener() {
-
-		@Override
-		public void update(String topic, List<Object> objects) {
-
-			updateSelection(objects, topic);
-		}
-	};
+	private IDataUpdateListener updateListener = (topic, objects) -> updateSelection(objects, topic);
 
 	/**
 	 * Create the part with the given main topic.

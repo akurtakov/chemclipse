@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,8 +20,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.swt.ITableSettings;
-import org.eclipse.chemclipse.support.updates.IUpdateListener;
-import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.ux.extension.ui.methods.IChangeListener;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
@@ -163,14 +161,7 @@ public class ClassificationDictionaryEditor extends Composite implements IChange
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		classificationDictionaryListUI.setEditEnabled(true);
-		classificationDictionaryListUI.setUpdateListener(new IUpdateListener() {
-
-			@Override
-			public void update() {
-
-				setInput();
-			}
-		});
+		classificationDictionaryListUI.setUpdateListener(this::setInput);
 
 		ITableSettings tableSettings = classificationDictionaryListUI.getTableSettings();
 		classificationDictionaryListUI.applySettings(tableSettings);
@@ -198,13 +189,8 @@ public class ClassificationDictionaryEditor extends Composite implements IChange
 
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		searchSupportUI.setSearchListener(new ISearchListener() {
-
-			@Override
-			public void performSearch(String searchText, boolean caseSensitive) {
-
-				listControl.get().setSearchText(searchText, caseSensitive);
-			}
+		searchSupportUI.setSearchListener((String searchText, boolean caseSensitive) -> {
+			listControl.get().setSearchText(searchText, caseSensitive);
 		});
 
 		toolbarSearch.set(searchSupportUI);

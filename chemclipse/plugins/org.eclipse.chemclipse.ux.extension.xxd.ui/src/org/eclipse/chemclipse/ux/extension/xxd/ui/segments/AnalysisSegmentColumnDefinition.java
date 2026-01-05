@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,7 +14,6 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.segments;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 import org.eclipse.chemclipse.model.support.AnalysisSegment;
@@ -39,45 +38,32 @@ public class AnalysisSegmentColumnDefinition implements ColumnDefinitionProvider
 	public List<ColumnDefinition<?, ?>> getColumnDefinitions() {
 
 		List<ColumnDefinition<?, ?>> list = new ArrayList<>();
-		list.add(new SimpleColumnDefinition<>("Start Scan", 100, new AnalysisSegmentColumnLabelProvider<IAnalysisSegment>(IAnalysisSegment.class, IAnalysisSegment::getStartScan)).withEditingSupport(viewer -> new IntegerColumnEditingSupport<IAnalysisSegment>(viewer, getProperty(IAnalysisSegment::getStartScan), new BiConsumer<IAnalysisSegment, Integer>() {
-
-			@Override
-			public void accept(IAnalysisSegment segment, Integer value) {
-
-				if(segment instanceof AnalysisSegment analysisSegment) {
-					analysisSegment.setStartScan(value);
-					updateListener.run();
-				}
-			}
-		})));
-		list.add(new SimpleColumnDefinition<>("Stop Scan", 100, new AnalysisSegmentColumnLabelProvider<IAnalysisSegment>(IAnalysisSegment.class, IAnalysisSegment::getStopScan)).withEditingSupport(viewer -> new IntegerColumnEditingSupport<IAnalysisSegment>(viewer, getProperty(IAnalysisSegment::getStopScan), new BiConsumer<IAnalysisSegment, Integer>() {
-
-			@Override
-			public void accept(IAnalysisSegment segment, Integer value) {
-
-				if(segment instanceof AnalysisSegment analysisSegment) {
-					analysisSegment.setStopScan(value);
-					updateListener.run();
-				}
-			}
-		})));
+		list.add(new SimpleColumnDefinition<>("Start Scan", 100, new AnalysisSegmentColumnLabelProvider<IAnalysisSegment>(IAnalysisSegment.class, IAnalysisSegment::getStartScan)).withEditingSupport(viewer -> new IntegerColumnEditingSupport<IAnalysisSegment>(viewer, getProperty(IAnalysisSegment::getStartScan), //
+				(IAnalysisSegment segment, Integer value) -> {
+					if(segment instanceof AnalysisSegment analysisSegment) {
+						analysisSegment.setStartScan(value);
+						updateListener.run();
+					}
+				})));
+		list.add(new SimpleColumnDefinition<>("Stop Scan", 100, new AnalysisSegmentColumnLabelProvider<IAnalysisSegment>(IAnalysisSegment.class, IAnalysisSegment::getStopScan)).withEditingSupport(viewer -> new IntegerColumnEditingSupport<IAnalysisSegment>(viewer, getProperty(IAnalysisSegment::getStopScan), //
+				(IAnalysisSegment segment, Integer value) -> {
+					if(segment instanceof AnalysisSegment analysisSegment) {
+						analysisSegment.setStopScan(value);
+						updateListener.run();
+					}
+				})));
 		list.add(new SimpleColumnDefinition<>("Width", 100, new AnalysisSegmentColumnLabelProvider<IAnalysisSegment>(IAnalysisSegment.class, IAnalysisSegment::getWidth)));
 		return list;
 	}
 
 	private Function<IAnalysisSegment, Integer> getProperty(Function<IAnalysisSegment, Integer> propertyFunction) {
 
-		return propertyFunction.compose(new Function<IAnalysisSegment, IAnalysisSegment>() {
-
-			@Override
-			public IAnalysisSegment apply(IAnalysisSegment segment) {
-
-				if(segment instanceof AnalysisSegment) {
-					// can only edit AnalysisSegment instances atm
-					return segment;
-				}
-				return null;
+		return propertyFunction.compose((IAnalysisSegment segment) -> {
+			if(segment instanceof AnalysisSegment) {
+				// can only edit AnalysisSegment instances atm
+				return segment;
 			}
+			return null;
 		});
 	}
 

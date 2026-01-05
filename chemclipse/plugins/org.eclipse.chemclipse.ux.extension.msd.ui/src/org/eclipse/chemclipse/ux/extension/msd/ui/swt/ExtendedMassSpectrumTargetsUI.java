@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,12 +27,10 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
-import org.eclipse.chemclipse.support.ui.events.IKeyEventProcessor;
 import org.eclipse.chemclipse.support.ui.menu.ITableMenuEntry;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.chemclipse.support.ui.swt.ITableSettings;
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
-import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.ux.extension.msd.ui.Activator;
@@ -168,13 +166,8 @@ public class ExtendedMassSpectrumTargetsUI extends Composite implements IExtende
 
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		searchSupportUI.setSearchListener(new ISearchListener() {
-
-			@Override
-			public void performSearch(String searchText, boolean caseSensitive) {
-
-				targetList.get().setSearchText(searchText, caseSensitive);
-			}
+		searchSupportUI.setSearchListener((String searchText, boolean caseSensitive) -> {
+			targetList.get().setSearchText(searchText, caseSensitive);
 		});
 
 		toolbarSearch.set(searchSupportUI);
@@ -212,14 +205,7 @@ public class ExtendedMassSpectrumTargetsUI extends Composite implements IExtende
 			}
 		});
 
-		targetListUI.setUpdateListener(new IUpdateListener() {
-
-			@Override
-			public void update() {
-
-				fireUpdate();
-			}
-		});
+		targetListUI.setUpdateListener(this::fireUpdate);
 		/*
 		 * Sort the table
 		 */
@@ -312,29 +298,24 @@ public class ExtendedMassSpectrumTargetsUI extends Composite implements IExtende
 
 	private void addKeyEventProcessors(Display display, ITableSettings tableSettings) {
 
-		tableSettings.addKeyEventProcessor(new IKeyEventProcessor() {
-
-			@Override
-			public void handleEvent(ExtendedTableViewer extendedTableViewer, KeyEvent e) {
-
-				if(e.keyCode == SWT.DEL) {
-					deleteTargetsSelected(display);
-				} else if((e.stateMask & SWT.MOD1) == SWT.MOD1) {
-					/*
-					 * CTRL
-					 */
-					if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_I) {
-						if((e.stateMask & SWT.MOD3) == SWT.MOD3) {
-							verifyTargets(false, display); // CTRL + ALT + i
-						} else {
-							verifyTargets(true, display); // CTRL + i
-						}
-					} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_D) {
-						deleteTargetsAll(e.display); // CTRL + d
+		tableSettings.addKeyEventProcessor((ExtendedTableViewer extendedTableViewer, KeyEvent e) -> {
+			if(e.keyCode == SWT.DEL) {
+				deleteTargetsSelected(display);
+			} else if((e.stateMask & SWT.MOD1) == SWT.MOD1) {
+				/*
+				 * CTRL
+				 */
+				if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_I) {
+					if((e.stateMask & SWT.MOD3) == SWT.MOD3) {
+						verifyTargets(false, display); // CTRL + ALT + i
+					} else {
+						verifyTargets(true, display); // CTRL + i
 					}
-				} else {
-					propagateTarget(display);
+				} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_D) {
+					deleteTargetsAll(e.display); // CTRL + d
 				}
+			} else {
+				propagateTarget(display);
 			}
 		});
 	}
