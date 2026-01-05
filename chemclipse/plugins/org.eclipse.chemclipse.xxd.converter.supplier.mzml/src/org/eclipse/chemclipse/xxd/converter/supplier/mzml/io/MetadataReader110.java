@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -40,8 +40,10 @@ public class MetadataReader110 {
 		SampleListType sampleList = mzML.getSampleList();
 		if(sampleList != null) {
 			for(SampleType sample : sampleList.getSample()) {
-				if(sample.getName() != null) {
+				if(sample.getName() != null && !sample.getName().isBlank()) {
 					chromatogram.setSampleName(sample.getName());
+				} else if(sample.getId() != null && !sample.getId().isBlank()) {
+					chromatogram.setSampleName(sample.getId());
 				}
 			}
 		}
