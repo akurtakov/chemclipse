@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -94,7 +94,7 @@ public class ChromatogramImportConverterHandCrafted110_ITest {
 	@Test
 	public void testScans() {
 
-		IScanWSD pdaSpectrum = (IScanWSD)chromatogram.getScan(1);
+		IScanWSD pdaSpectrum = chromatogram.getScan(1);
 		assertEquals(15, pdaSpectrum.getNumberOfScanSignals(), "Scans");
 		assertEquals(15f, pdaSpectrum.getScanSignal(0).getAbsorbance(), 0);
 		assertEquals(0f, pdaSpectrum.getScanSignal(0).getWavelength(), 0);
