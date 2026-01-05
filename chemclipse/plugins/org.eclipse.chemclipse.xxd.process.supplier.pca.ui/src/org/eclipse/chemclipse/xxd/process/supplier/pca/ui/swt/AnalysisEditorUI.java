@@ -281,7 +281,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 	private void createCheckboxCrossValidation(Composite parent) {
 
 		Button button = new Button(parent, SWT.CHECK);
-		button.setToolTipText("Run Crossvalidation if available for selected Algorithm.");
+		button.setToolTipText("Run cross-validation if available for selected algorithm.");
 		button.setText("Cross Validate");
 		button.setSelection(PreferenceSupplier.isCrossValidation());
 		button.addSelectionListener(new SelectionAdapter() {
