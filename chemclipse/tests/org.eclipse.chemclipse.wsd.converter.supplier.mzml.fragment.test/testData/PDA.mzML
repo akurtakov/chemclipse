@@ -61,7 +61,6 @@
  			<cvParam cvRef="MS" accession="MS:1000052" name="suspension"/>
       <userParam name="name" value="sample"/>
     </sample>
-    <sample id="sample2"/>
   </sampleList>
   
   <softwareList count="1">
