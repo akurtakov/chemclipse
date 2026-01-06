@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -41,8 +41,8 @@ import org.eclipse.swt.widgets.Composite;
 
 public class PeakScanListUI extends ExtendedTableViewer {
 
-	private final String[] titles = PeakScanListLabelProvider.TITLES;
-	private final int[] bounds = PeakScanListLabelProvider.BOUNDS;
+	private static final String[] titles = PeakScanListLabelProvider.TITLES;
+	private static final int[] bounds = PeakScanListLabelProvider.BOUNDS;
 
 	private final PeakScanListLabelProvider labelProvider = new PeakScanListLabelProvider();
 	private final PeakScanListTableComparator tableComparator = new PeakScanListTableComparator();

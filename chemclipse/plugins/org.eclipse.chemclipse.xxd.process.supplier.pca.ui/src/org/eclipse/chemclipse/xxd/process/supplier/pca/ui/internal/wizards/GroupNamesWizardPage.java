@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -37,10 +37,10 @@ import org.eclipse.swt.widgets.Text;
 
 public class GroupNamesWizardPage extends WizardPage {
 
-	private final int CONTAINS_STRING = 0;
-	private final int STARTS_WITH_STRING = 1;
-	private final int ENDS_WITH_STRING = 2;
-	private final int REGEXP = 3;
+	private static final int CONTAINS_STRING = 0;
+	private static final int STARTS_WITH_STRING = 1;
+	private static final int ENDS_WITH_STRING = 2;
+	private static final int REGEXP = 3;
 
 	private int selectNames = CONTAINS_STRING;
 
