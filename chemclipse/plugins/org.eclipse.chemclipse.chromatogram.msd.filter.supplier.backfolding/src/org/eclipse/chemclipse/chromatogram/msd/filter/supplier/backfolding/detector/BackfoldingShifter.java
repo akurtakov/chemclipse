@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -346,7 +346,7 @@ public class BackfoldingShifter implements IBackfoldingShifter {
 	 */
 	private NavigableMap<Integer, Integer> getTreeMap(List<IRawPeak> rawPeaks) {
 
-		NavigableMap<Integer, Integer> treeMap = new TreeMap<Integer, Integer>();
+		NavigableMap<Integer, Integer> treeMap = new TreeMap<>();
 		for(IRawPeak rawPeak : rawPeaks) {
 			treeMap.put(rawPeak.getMaximumScan(), rawPeak.getRetentionTimeAtMaximum());
 		}

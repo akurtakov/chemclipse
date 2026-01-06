@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -43,7 +43,7 @@ public class TrapezoidPeakIntegrator_4_Test extends DefaultPeakTestCase {
 		super.setUp();
 		integrator = new PeakIntegrator();
 		peakIntegrationSettings = new PeakIntegrationSettings();
-		peaks = new ArrayList<IPeakMSD>();
+		peaks = new ArrayList<>();
 		for(int i = 1; i <= 100; i++) {
 			peaks.add(super.getPeak());
 		}

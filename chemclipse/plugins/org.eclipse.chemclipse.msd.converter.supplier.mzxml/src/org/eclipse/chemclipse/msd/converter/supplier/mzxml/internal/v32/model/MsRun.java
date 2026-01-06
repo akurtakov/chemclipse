@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,6 +16,8 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.datatype.Duration;
+
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -23,7 +25,6 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlSchemaType;
 import jakarta.xml.bind.annotation.XmlType;
-import javax.xml.datatype.Duration;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {"parentFile", "msInstrument", "dataProcessing", "separation", "spotting", "scan", "sha1"})
@@ -51,7 +52,7 @@ public class MsRun {
 	public List<ParentFile> getParentFile() {
 
 		if(parentFile == null) {
-			parentFile = new ArrayList<ParentFile>();
+			parentFile = new ArrayList<>();
 		}
 		return this.parentFile;
 	}
@@ -59,7 +60,7 @@ public class MsRun {
 	public List<MsInstrument> getMsInstrument() {
 
 		if(msInstrument == null) {
-			msInstrument = new ArrayList<MsInstrument>();
+			msInstrument = new ArrayList<>();
 		}
 		return this.msInstrument;
 	}
@@ -67,7 +68,7 @@ public class MsRun {
 	public List<DataProcessing> getDataProcessing() {
 
 		if(dataProcessing == null) {
-			dataProcessing = new ArrayList<DataProcessing>();
+			dataProcessing = new ArrayList<>();
 		}
 		return this.dataProcessing;
 	}
@@ -95,7 +96,7 @@ public class MsRun {
 	public List<Scan> getScan() {
 
 		if(scan == null) {
-			scan = new ArrayList<Scan>();
+			scan = new ArrayList<>();
 		}
 		return this.scan;
 	}

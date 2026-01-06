@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -105,9 +105,9 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		/*
 		 * E.g. "18;28;84;207" to 18 28 84 207
 		 */
-		Set<Integer> ions = new HashSet<Integer>();
+		Set<Integer> ions = new HashSet<>();
 		String preferenceEntry = INSTANCE().get(preference, def);
-		if(preferenceEntry != "") {
+		if(!"".equals(preferenceEntry)) {
 			String[] items = parseString(preferenceEntry);
 			if(items.length > 0) {
 				Integer ion;

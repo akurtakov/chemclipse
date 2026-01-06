@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -44,7 +44,7 @@ public class PeakBuilder_27_Test {
 	@BeforeAll
 	public void setUp() {
 
-		List<Float> intensities = new ArrayList<Float>();
+		List<Float> intensities = new ArrayList<>();
 		intensities.add(0.0f);
 		intensities.add(54.1f);
 		intensities.add(78.38f);
@@ -56,9 +56,8 @@ public class PeakBuilder_27_Test {
 		intensities.add(0.84f);
 		intensities.add(0.0f);
 		totalIonSignals = new TotalScanSignals(1, 10);
-		float abundance = 0.0f;
 		for(int scan = 1; scan <= 10; scan++) {
-			abundance = intensities.get(scan - 1);
+			float abundance = intensities.get(scan - 1);
 			totalIonSignal = new TotalScanSignal(scan * 10, 0.0f, abundance);
 			totalIonSignals.add(totalIonSignal);
 		}

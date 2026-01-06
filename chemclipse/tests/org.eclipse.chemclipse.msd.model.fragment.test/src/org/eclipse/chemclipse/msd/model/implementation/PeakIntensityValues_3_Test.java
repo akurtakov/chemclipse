@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -41,7 +41,7 @@ public class PeakIntensityValues_3_Test {
 	public void setUp() {
 
 		intensityValues = new PeakIntensityValues();
-		scanValues = new TreeMap<Integer, Float>();
+		scanValues = new TreeMap<>();
 		scanValues.put(1500, -6.0f);
 		scanValues.put(2500, 5.0f);
 		scanValues.put(3500, 10.0f);

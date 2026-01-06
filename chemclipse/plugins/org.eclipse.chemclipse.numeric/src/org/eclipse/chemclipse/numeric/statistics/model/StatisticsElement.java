@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -22,20 +22,23 @@ public class StatisticsElement<T> implements IStatisticsElement<T> {
 	private Object content; // this is either an IStatistics object or a List<StatisticsElement>
 
 	public StatisticsElement(Object identifier, List<T> rawSourceElements) {
-		sourceElements = new ArrayList<IStatisticsSourceObject<T>>();
+
+		sourceElements = new ArrayList<>();
 		for(T elem : rawSourceElements) {
-			this.sourceElements.add(new StatisticsSourceObject<T>(elem));
+			this.sourceElements.add(new StatisticsSourceObject<>(elem));
 		}
 		this.identifier = identifier;
 	}
 
 	public StatisticsElement(Object identifier, List<IStatisticsSourceObject<T>> sourceElements, IStatistics statistics) {
+
 		this.identifier = identifier;
 		this.sourceElements = sourceElements;
 		this.content = statistics;
 	}
 
 	public StatisticsElement(Object identifier, List<IStatisticsSourceObject<T>> sourceElements, List<StatisticsElement<T>> elements) {
+
 		this.identifier = identifier;
 		this.sourceElements = sourceElements;
 		this.content = elements;
@@ -62,7 +65,7 @@ public class StatisticsElement<T> implements IStatisticsElement<T> {
 	@Override
 	public List<T> getIncludedSourceElements() {
 
-		List<T> includedSourceElements = new ArrayList<T>();
+		List<T> includedSourceElements = new ArrayList<>();
 		for(IStatisticsSourceObject<T> t : sourceElements) {
 			if(t.isIncluded()) {
 				includedSourceElements.add(t.getSourceObject());

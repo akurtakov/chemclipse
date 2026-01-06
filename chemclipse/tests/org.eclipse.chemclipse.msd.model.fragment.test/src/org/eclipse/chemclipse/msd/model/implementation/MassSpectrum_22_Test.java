@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -83,7 +83,7 @@ public class MassSpectrum_22_Test {
 	@Test
 	public void testGetTotalIonSignal_4() {
 
-		Set<Integer> ions = new HashSet<Integer>();
+		Set<Integer> ions = new HashSet<>();
 		ions.add(104);
 		ions.add(28);
 		massSpectrum.removeIons(ions);

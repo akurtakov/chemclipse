@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -46,7 +46,7 @@ public class PeakQuantitationsExtractor {
 			peaks = new ArrayList<>(peaks);
 			Collections.sort(peaks, peakRetentionTimeComparator);
 
-			Set<String> quantitationColumns = new HashSet<String>();
+			Set<String> quantitationColumns = new HashSet<>();
 			for(IPeak peak : peaks) {
 				for(IQuantitationEntry quantitationEntry : peak.getQuantitationEntries()) {
 					quantitationColumns.add(getIdentifier(quantitationEntry.getName(), quantitationEntry.getConcentrationUnit()));

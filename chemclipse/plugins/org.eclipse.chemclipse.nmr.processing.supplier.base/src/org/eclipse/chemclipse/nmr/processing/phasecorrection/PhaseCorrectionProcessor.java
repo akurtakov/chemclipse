@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -60,7 +60,7 @@ public class PhaseCorrectionProcessor extends AbstractSpectrumSignalFilter<Phase
 		for(int i = 0; i < phaseCorrection.length; i++) {
 			spectrumData.signals[i] = spectrumData.signals[i].multiply(phaseCorrection[i]);
 		}
-		FilteredSpectrumMeasurement<PhaseCorrectionSettings> filtered = new FilteredSpectrumMeasurement<PhaseCorrectionSettings>(context);
+		FilteredSpectrumMeasurement<PhaseCorrectionSettings> filtered = new FilteredSpectrumMeasurement<>(context);
 		filtered.setSignals(spectrumData.toSignal());
 		return filtered;
 	}

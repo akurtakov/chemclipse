@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -77,7 +77,7 @@ public class ReferencePeakMSDTestCase {
 
 		// ----------------------PeakMaximum
 		peakMaximum = new PeakMassSpectrum();
-		fragmentValues = new TreeMap<Double, Float>();
+		fragmentValues = new TreeMap<>();
 		fragmentValues.put(104.0d, 2300.0f);
 		fragmentValues.put(103.0d, 580.0f);
 		fragmentValues.put(51.0d, 260.0f);

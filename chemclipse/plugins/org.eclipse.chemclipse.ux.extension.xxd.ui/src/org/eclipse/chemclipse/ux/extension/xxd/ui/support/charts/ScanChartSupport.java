@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -133,59 +133,65 @@ public class ScanChartSupport {
 		/*
 		 * Sort the scan data, otherwise the line chart could be odd.
 		 */
-		if(scan instanceof IScanMSD scanMSD) {
-			/*
-			 * MSD
-			 */
-			List<IIon> ions = new ArrayList<IIon>(scanMSD.getIons());
-			Collections.sort(ions, ionValueComparator);
-			int size = ions.size();
-			xSeries = new double[size];
-			ySeries = new double[size];
-			int index = 0;
-			for(IIon ion : ions) {
-				xSeries[index] = ion.getIon();
-				ySeries[index] = (mirrored) ? ion.getAbundance() * -1 : ion.getAbundance();
-				index++;
+		switch(scan) {
+			case IScanMSD scanMSD -> {
+				/*
+				 * MSD
+				 */
+				List<IIon> ions = new ArrayList<>(scanMSD.getIons());
+				Collections.sort(ions, ionValueComparator);
+				int size = ions.size();
+				xSeries = new double[size];
+				ySeries = new double[size];
+				int index = 0;
+				for(IIon ion : ions) {
+					xSeries[index] = ion.getIon();
+					ySeries[index] = (mirrored) ? ion.getAbundance() * -1 : ion.getAbundance();
+					index++;
+				}
 			}
-		} else if(scan instanceof IScanCSD scanCSD) {
-			/*
-			 * CSD
-			 */
-			xSeries = new double[]{scanCSD.getRetentionTime()};
-			ySeries = new double[]{(mirrored) ? scanCSD.getTotalSignal() * -1 : scanCSD.getTotalSignal()};
-		} else if(scan instanceof IScanWSD scanWSD) {
-			/*
-			 * WSD
-			 */
-			List<IScanSignalWSD> scanSignalsWSD = new ArrayList<IScanSignalWSD>(scanWSD.getScanSignals());
-			Collections.sort(scanSignalsWSD, wavelengthValueComparator);
-			int size = scanSignalsWSD.size();
-			xSeries = new double[size];
-			ySeries = new double[size];
-			int index = 0;
-			for(IScanSignalWSD scanSignalWSD : scanSignalsWSD) {
-				xSeries[index] = scanSignalWSD.getWavelength();
-				ySeries[index] = (mirrored) ? scanSignalWSD.getAbsorbance() * -1 : scanSignalWSD.getAbsorbance();
-				index++;
+			case IScanCSD scanCSD -> {
+				/*
+				 * CSD
+				 */
+				xSeries = new double[]{scanCSD.getRetentionTime()};
+				ySeries = new double[]{(mirrored) ? scanCSD.getTotalSignal() * -1 : scanCSD.getTotalSignal()};
 			}
-		} else if(scan instanceof IScanVSD scanVSD) {
-			/*
-			 * VSD
-			 */
-			TreeSet<ISignalVSD> scanSignalsVSD = scanVSD.getProcessedSignals();
-			int size = scanSignalsVSD.size();
-			xSeries = new double[size];
-			ySeries = new double[size];
-			int index = 0;
-			for(ISignalVSD scanSignalVSD : scanSignalsVSD) {
-				xSeries[index] = scanSignalVSD.getWavenumber();
-				ySeries[index] = (mirrored) ? scanSignalVSD.getIntensity() * -1 : scanSignalVSD.getIntensity();
-				index++;
+			case IScanWSD scanWSD -> {
+				/*
+				 * WSD
+				 */
+				List<IScanSignalWSD> scanSignalsWSD = new ArrayList<IScanSignalWSD>(scanWSD.getScanSignals());
+				Collections.sort(scanSignalsWSD, wavelengthValueComparator);
+				int size = scanSignalsWSD.size();
+				xSeries = new double[size];
+				ySeries = new double[size];
+				int index = 0;
+				for(IScanSignalWSD scanSignalWSD : scanSignalsWSD) {
+					xSeries[index] = scanSignalWSD.getWavelength();
+					ySeries[index] = (mirrored) ? scanSignalWSD.getAbsorbance() * -1 : scanSignalWSD.getAbsorbance();
+					index++;
+				}
 			}
-		} else {
-			xSeries = new double[0];
-			ySeries = new double[0];
+			case IScanVSD scanVSD -> {
+				/*
+				 * VSD
+				 */
+				TreeSet<ISignalVSD> scanSignalsVSD = scanVSD.getProcessedSignals();
+				int size = scanSignalsVSD.size();
+				xSeries = new double[size];
+				ySeries = new double[size];
+				int index = 0;
+				for(ISignalVSD scanSignalVSD : scanSignalsVSD) {
+					xSeries[index] = scanSignalVSD.getWavenumber();
+					ySeries[index] = (mirrored) ? scanSignalVSD.getIntensity() * -1 : scanSignalVSD.getIntensity();
+					index++;
+				}
+			}
+			case null, default -> {
+				xSeries = new double[0];
+				ySeries = new double[0];
+			}
 		}
 
 		return new SeriesData(xSeries, ySeries, id);

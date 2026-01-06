@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -45,6 +45,7 @@ public class Activator extends AbstractActivatorUI {
 	 * (non-Javadoc)
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
 	 */
+	@Override
 	public void start(BundleContext context) throws Exception {
 
 		super.start(context);
@@ -56,6 +57,7 @@ public class Activator extends AbstractActivatorUI {
 	 * (non-Javadoc)
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
 	 */
+	@Override
 	public void stop(BundleContext context) throws Exception {
 
 		plugin = null;
@@ -87,7 +89,7 @@ public class Activator extends AbstractActivatorUI {
 
 	private Map<String, String> getImageHashMap() {
 
-		Map<String, String> imageHashMap = new HashMap<String, String>();
+		Map<String, String> imageHashMap = new HashMap<>();
 
 		imageHashMap.put(ICON_INFO, "icons/16x16/info.gif");
 		imageHashMap.put(ICON_VALID, "icons/16x16/valid.gif");

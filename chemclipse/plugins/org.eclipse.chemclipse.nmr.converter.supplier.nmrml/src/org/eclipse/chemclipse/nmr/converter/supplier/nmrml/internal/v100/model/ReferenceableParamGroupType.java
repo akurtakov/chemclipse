@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -39,7 +39,7 @@ public class ReferenceableParamGroupType {
 	public List<CVParamType> getCvParam() {
 
 		if(cvParam == null) {
-			cvParam = new ArrayList<CVParamType>();
+			cvParam = new ArrayList<>();
 		}
 		return this.cvParam;
 	}
@@ -47,7 +47,7 @@ public class ReferenceableParamGroupType {
 	public List<UserParamType> getUserParam() {
 
 		if(userParam == null) {
-			userParam = new ArrayList<UserParamType>();
+			userParam = new ArrayList<>();
 		}
 		return this.userParam;
 	}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,7 +23,7 @@ public class ScanVSD extends AbstractScanVSD {
 
 	private static final long serialVersionUID = 4840397215574246595L;
 
-	private TreeSet<ISignalVSD> processedSignals = new TreeSet<ISignalVSD>();
+	private TreeSet<ISignalVSD> processedSignals = new TreeSet<>();
 
 	@Override
 	public SignalType getSignalType() {

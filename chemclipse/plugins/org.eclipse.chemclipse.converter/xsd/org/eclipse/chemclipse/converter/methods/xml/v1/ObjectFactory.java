@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,10 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.converter.methods.xml.v1;
 
+import javax.xml.namespace.QName;
+
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.annotation.XmlElementDecl;
 import jakarta.xml.bind.annotation.XmlRegistry;
-import javax.xml.namespace.QName;
 
 /**
  * This object contains factory methods for each
@@ -42,6 +43,7 @@ public class ObjectFactory {
 	 * 
 	 */
 	public ObjectFactory() {
+
 	}
 
 	/**
@@ -78,6 +80,6 @@ public class ObjectFactory {
 	@XmlElementDecl(namespace = "https://github.com/eclipse/chemclipse/processmethods/v1", name = "ProcessMethod")
 	public JAXBElement<Method> createProcessMethod(Method value) {
 
-		return new JAXBElement<Method>(_ProcessMethod_QNAME, Method.class, null, value);
+		return new JAXBElement<>(_ProcessMethod_QNAME, Method.class, null, value);
 	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -31,11 +31,13 @@ public class CombinedNominalMassSpectrumCalculator extends CombinedMassSpectrumC
 
 	private Map<Integer, List<Double>> combinedMassSpectrum = new HashMap<>();
 
+	@Override
 	public int size() {
 
 		return combinedMassSpectrum.size();
 	}
 
+	@Override
 	public void addIon(double ion, double abundance) {
 
 		/*
@@ -50,12 +52,13 @@ public class CombinedNominalMassSpectrumCalculator extends CombinedMassSpectrumC
 		 */
 		List<Double> intensities = combinedMassSpectrum.get(key);
 		if(intensities == null) {
-			intensities = new ArrayList<Double>();
+			intensities = new ArrayList<>();
 			combinedMassSpectrum.put(key, intensities);
 		}
 		intensities.add(abundance);
 	}
 
+	@Override
 	public void addIons(List<IIon> ions, IMarkedIons excludedIons) {
 
 		if(ions == null || excludedIons == null) {
@@ -71,12 +74,14 @@ public class CombinedNominalMassSpectrumCalculator extends CombinedMassSpectrumC
 		}
 	}
 
+	@Override
 	public void removeIon(double ion) {
 
 		int key = AbstractIon.getIon(ion);
 		combinedMassSpectrum.remove(key);
 	}
 
+	@Override
 	public void removeIons(IMarkedIons excludedIons) {
 
 		for(Integer ion : excludedIons.getIonsNominal()) {
@@ -84,6 +89,7 @@ public class CombinedNominalMassSpectrumCalculator extends CombinedMassSpectrumC
 		}
 	}
 
+	@Override
 	public ICombinedMassSpectrum createMassSpectrum(CalculationType calculationType) {
 
 		ICombinedMassSpectrum massSpectrum = new CombinedMassSpectrum();

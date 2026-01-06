@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,7 +21,7 @@ public abstract class AbstractIdentificationResults implements IIdentificationRe
 
 	public AbstractIdentificationResults() {
 
-		results = new ArrayList<IIdentificationResult>();
+		results = new ArrayList<>();
 	}
 
 	@Override

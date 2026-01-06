@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -31,11 +31,11 @@ public class PreferencesHandler {
 		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.window.preferences", null);
 		if(handlerService.canExecute(command)) {
 
-			List<String> preservePreferencePrefixes = new ArrayList<String>();
+			List<String> preservePreferencePrefixes = new ArrayList<>();
 			preservePreferencePrefixes.add("org.eclipse.chemclipse");
 			preservePreferencePrefixes.add("org.eclipse.swtchart");
 
-			List<String> preservePreferenceNodes = new ArrayList<String>();
+			List<String> preservePreferenceNodes = new ArrayList<>();
 			preservePreferenceNodes.add("org.eclipse.equinox.internal.p2.ui.sdk.ProvisioningPreferencePage"); // Install/Update
 			preservePreferenceNodes.add("org.eclipse.equinox.internal.p2.ui.sdk.SitesPreferencePage"); // Available Software Sites
 			preservePreferenceNodes.add("org.eclipse.equinox.internal.p2.ui.sdk.scheduler.AutomaticUpdatesPreferencePage"); // Automatic Updates

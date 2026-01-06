@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,7 +20,8 @@ public class Compounds {
 	private List<Compound> compounds;
 
 	public Compounds() {
-		compounds = new ArrayList<Compound>();
+
+		compounds = new ArrayList<>();
 	}
 
 	public void add(Compound compound) {

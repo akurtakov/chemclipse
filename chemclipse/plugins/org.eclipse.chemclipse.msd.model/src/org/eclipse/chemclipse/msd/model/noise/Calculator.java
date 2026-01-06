@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -113,7 +113,7 @@ public class Calculator {
 		@SuppressWarnings("unused")
 		int accepted = 0;
 
-		List<INoiseSegmentMSD> noiseSegments = new ArrayList<INoiseSegmentMSD>();
+		List<INoiseSegmentMSD> noiseSegments = new ArrayList<>();
 		for(IAnalysisSegment analysisSegment : analysisSegments) {
 			/*
 			 * TIC

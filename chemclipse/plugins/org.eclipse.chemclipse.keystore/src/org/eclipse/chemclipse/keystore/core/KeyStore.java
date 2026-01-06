@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,13 +27,14 @@ public class KeyStore implements IKeyStore {
 	private Map<String, String> keyMap;
 
 	public KeyStore() {
+
 		initializeKeyMap();
 	}
 
 	@Override
 	public TreeSet<String> getRegisteredIds() {
 
-		return new TreeSet<String>(keyMap.keySet());
+		return new TreeSet<>(keyMap.keySet());
 	}
 
 	@Override
@@ -72,7 +73,7 @@ public class KeyStore implements IKeyStore {
 		if(file.exists()) {
 			keyMap = KeyFileParser.readKeysFromFile(file);
 		} else {
-			keyMap = new HashMap<String, String>();
+			keyMap = new HashMap<>();
 		}
 	}
 }

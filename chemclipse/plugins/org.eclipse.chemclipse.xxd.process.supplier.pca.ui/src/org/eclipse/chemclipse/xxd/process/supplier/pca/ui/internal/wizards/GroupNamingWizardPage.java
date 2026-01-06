@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -40,7 +40,7 @@ import org.eclipse.swt.widgets.Text;
 public class GroupNamingWizardPage extends AbstractAnalysisWizardPage {
 
 	private AtomicReference<SampleGroupAssignerListUI> sampleGroupAssignerListControl = new AtomicReference<>();
-	private AtomicReference<Text> textGroupNameControl = new AtomicReference<Text>();
+	private AtomicReference<Text> textGroupNameControl = new AtomicReference<>();
 
 	private List<ISample> samples;
 
@@ -209,7 +209,7 @@ public class GroupNamingWizardPage extends AbstractAnalysisWizardPage {
 
 	private List<ISample> extractSamples(List<ISample> samples) {
 
-		List<ISample> samplesCopy = new ArrayList<ISample>();
+		List<ISample> samplesCopy = new ArrayList<>();
 
 		for(ISample sample : samples) {
 			ISample sampleCopy = new Sample(sample.getSampleName(), sample.getGroupName(), sample.getDescription());

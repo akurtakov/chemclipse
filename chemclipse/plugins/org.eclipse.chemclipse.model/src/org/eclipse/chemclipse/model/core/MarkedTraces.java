@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -41,7 +41,7 @@ public class MarkedTraces extends ArrayList<IMarkedTrace> implements IMarkedTrac
 	@Override
 	public Set<Integer> getTraces() {
 
-		Set<Integer> traces = new HashSet<Integer>();
+		Set<Integer> traces = new HashSet<>();
 
 		for(IMarkedTrace markedTrace : this) {
 			traces.add(markedTrace.castTrace());

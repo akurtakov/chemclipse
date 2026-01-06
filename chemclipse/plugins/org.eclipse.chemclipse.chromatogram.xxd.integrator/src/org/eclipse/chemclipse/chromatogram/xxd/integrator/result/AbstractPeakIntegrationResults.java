@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.result;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -24,7 +24,8 @@ public abstract class AbstractPeakIntegrationResults implements IPeakIntegration
 	private List<IPeakIntegrationResult> peakIntegrationResults;
 
 	public AbstractPeakIntegrationResults() {
-		peakIntegrationResults = new ArrayList<IPeakIntegrationResult>();
+
+		peakIntegrationResults = new ArrayList<>();
 	}
 
 	@Override
@@ -66,7 +67,7 @@ public abstract class AbstractPeakIntegrationResults implements IPeakIntegration
 	public List<IPeakIntegrationResult> getPeakIntegrationResultList(int ion) {
 
 		Set<Integer> ions;
-		List<IPeakIntegrationResult> results = new ArrayList<IPeakIntegrationResult>();
+		List<IPeakIntegrationResult> results = new ArrayList<>();
 		for(IPeakIntegrationResult result : peakIntegrationResults) {
 			ions = result.getIntegratedTraces();
 			if(ions.size() == 1 && ions.contains(ion)) {
@@ -80,7 +81,7 @@ public abstract class AbstractPeakIntegrationResults implements IPeakIntegration
 	public List<IPeakIntegrationResult> getPeakIntegrationResultThatContains(int ion) {
 
 		Set<Integer> ions;
-		List<IPeakIntegrationResult> results = new ArrayList<IPeakIntegrationResult>();
+		List<IPeakIntegrationResult> results = new ArrayList<>();
 		for(IPeakIntegrationResult result : peakIntegrationResults) {
 			ions = result.getIntegratedTraces();
 			if(ions.contains(ion)) {

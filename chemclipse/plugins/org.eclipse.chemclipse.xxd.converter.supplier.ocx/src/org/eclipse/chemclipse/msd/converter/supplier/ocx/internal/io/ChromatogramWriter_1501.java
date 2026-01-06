@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -221,7 +221,7 @@ public class ChromatogramWriter_1501 extends AbstractChromatogramWriter implemen
 
 		ZipEntry zipEntry;
 		DataOutputStream dataOutputStream;
-		List<IScanProxy> scanProxies = new ArrayList<IScanProxy>();
+		List<IScanProxy> scanProxies = new ArrayList<>();
 		/*
 		 * Scans
 		 */

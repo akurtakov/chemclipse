@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -29,7 +29,7 @@ public class PeakQuantifier_1_Test {
 	public void testGetMassSpectrumComparatorSupport_3() throws NoPeakQuantifierAvailableException {
 
 		List<String> ids = support.getAvailablePeakQuantifierIds();
-		List<String> rcs = new ArrayList<String>();
+		List<String> rcs = new ArrayList<>();
 		for(String id : ids) {
 			rcs.add(id);
 		}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,6 +28,7 @@ public class ConverterMSD {
 	 * Use only the static methods.
 	 */
 	private ConverterMSD() {
+
 	}
 
 	/**
@@ -48,7 +49,7 @@ public class ConverterMSD {
 
 		if(filterMassSpectrum && numberOfIons > filterLimitIons) {
 
-			ions = new ArrayList<IIon>();
+			ions = new ArrayList<>();
 
 			float[] intensities = new float[massSpectrum.getIons().size()];
 			int i = 0;

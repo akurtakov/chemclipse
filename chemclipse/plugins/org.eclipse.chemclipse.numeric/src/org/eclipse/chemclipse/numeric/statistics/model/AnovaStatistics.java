@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,7 +27,7 @@ public class AnovaStatistics implements IAnovaStatistics {
 	public <T> AnovaStatistics(IStatisticsElement<IStatisticsElement<T>> groupedStatisticsElement, Method getdata) {
 
 		List<IStatisticsElement<T>> groupedStatisticsElements = groupedStatisticsElement.getIncludedSourceElements();
-		this.anovaInput = new ArrayList<double[]>(groupedStatisticsElements.size());
+		this.anovaInput = new ArrayList<>(groupedStatisticsElements.size());
 		if(groupedStatisticsElements.size() > 1) {
 			for(IStatisticsElement<T> gse : groupedStatisticsElements) {
 				List<T> statisticsElements = gse.getIncludedSourceElements();

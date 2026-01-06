@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -46,7 +46,7 @@ public interface IMeasurementProcessSupplier<ConfigType> extends IProcessSupplie
 
 		return new IProcessExecutionConsumer<Collection<? extends IMeasurement>>() {
 
-			AtomicReference<Collection<? extends IMeasurement>> result = new AtomicReference<Collection<? extends IMeasurement>>(measurements);
+			AtomicReference<Collection<? extends IMeasurement>> result = new AtomicReference<>(measurements);
 
 			@Override
 			public <X> void execute(IProcessorPreferences<X> preferences, ProcessExecutionContext context) throws Exception {

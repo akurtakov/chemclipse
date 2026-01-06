@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -74,7 +74,7 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 	private static final String CATEGORY = "Retention Index Marker";
 	private static final String DELETE = "Delete";
 
-	private AtomicReference<Button> buttonSearchControl = new AtomicReference<Button>();
+	private AtomicReference<Button> buttonSearchControl = new AtomicReference<>();
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private AtomicReference<IndexAssignerListUI> tableViewer = new AtomicReference<>();
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -151,7 +151,7 @@ public class QuantPeaksChartUI extends Composite implements IExtendedPartUI {
 		PeaksChart peaksChart = chartControl.get();
 		peaksChart.deleteSeries();
 		if(quantitationCompound != null) {
-			List<ILineSeriesData> lineSeriesDataList = new ArrayList<ILineSeriesData>();
+			List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
 
 			int counter = 1;
 			IColorScheme colors = Colors.getColorScheme(preferenceStore.getString(PreferenceSupplier.P_COLOR_SCHEME_DISPLAY_PEAKS));

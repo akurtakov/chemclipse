@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -22,10 +22,12 @@ public class MarkedIonTransitions implements IMarkedIonTransitions {
 	private Set<IMarkedIonTransition> markedIonTransitions;
 
 	public MarkedIonTransitions() {
-		markedIonTransitions = new HashSet<IMarkedIonTransition>();
+
+		markedIonTransitions = new HashSet<>();
 	}
 
 	public MarkedIonTransitions(Set<IIonTransition> ionTransitions) {
+
 		this();
 		for(IIonTransition ionTransition : ionTransitions) {
 			IMarkedIonTransition markedIonTransition = new MarkedIonTransition(ionTransition);
@@ -36,7 +38,7 @@ public class MarkedIonTransitions implements IMarkedIonTransitions {
 	@Override
 	public Set<IIonTransition> getSelectedIonTransitions() {
 
-		Set<IIonTransition> ionTransitions = new HashSet<IIonTransition>();
+		Set<IIonTransition> ionTransitions = new HashSet<>();
 		for(IMarkedIonTransition markedIonTransition : markedIonTransitions) {
 			if(markedIonTransition.isSelected()) {
 				ionTransitions.add(markedIonTransition.getIonTransition());

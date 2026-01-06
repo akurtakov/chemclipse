@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -171,7 +171,7 @@ public class QuantResponseChartUI extends Composite implements IExtendedPartUI {
 
 			toolbarInfo.get().setText("Quantitation Compound: " + quantitationCompound.getName());
 
-			List<ILineSeriesData> lineSeriesDataList = new ArrayList<ILineSeriesData>();
+			List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
 			ILineSeriesData lineSeriesDataPoints;
 			ILineSeriesData lineSeriesDataEquation;
 

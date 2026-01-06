@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -98,6 +98,7 @@ public class Activator extends AbstractActivatorUI {
 		super.stop(context);
 	}
 
+	@Override
 	public IEventBroker getEventBroker() {
 
 		BundleContext bundleContext = getBundle().getBundleContext();
@@ -117,7 +118,7 @@ public class Activator extends AbstractActivatorUI {
 
 	private Map<String, String> getImageHashMap() {
 
-		Map<String, String> imageHashMap = new HashMap<String, String>();
+		Map<String, String> imageHashMap = new HashMap<>();
 
 		imageHashMap.put(ICON_NORM_1NORM, "icons/1norm.jpg"); // $NON-NLS-1$
 		imageHashMap.put(ICON_NORM_2NORM, "icons/2norm.jpg"); // $NON-NLS-1$

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -158,7 +158,7 @@ public class PeakDetectorSupport {
 		 */
 		int scanOffset = slopes.getStartScan() - 1;
 		IRawPeak rawPeak;
-		List<IRawPeak> rawPeaks = new ArrayList<IRawPeak>();
+		List<IRawPeak> rawPeaks = new ArrayList<>();
 		for(int i = 1; i <= size - CONSECUTIVE_SCAN_STEPS; i++) {
 			/*
 			 * Get the scan numbers without offset.<br/> Why? To not get out of

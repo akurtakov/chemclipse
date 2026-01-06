@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -326,10 +326,10 @@ public class Denoising {
 			 * Calculate the start and stop scans for each segment and the noise
 			 * mass spectra. And extract the relevant noise mass spectra.
 			 */
-			segmentNoiseMassSpectra = new ArrayList<ICombinedMassSpectrum>();
+			segmentNoiseMassSpectra = new ArrayList<>();
 			currentNoiseSegment = noiseSegments.get(segment);
 			segmentNoiseMassSpectra.add(currentNoiseSegment.getNoiseMassSpectrum());
-			if(segment == 0 && firstRun == true) {
+			if(segment == 0 && firstRun) {
 				/*
 				 * The first segment starts with the beginning of the scan of
 				 * the chromatogram selection. It ends with the last scan of the

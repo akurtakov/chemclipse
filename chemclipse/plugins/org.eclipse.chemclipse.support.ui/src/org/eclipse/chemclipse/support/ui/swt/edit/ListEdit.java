@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -38,7 +38,7 @@ public class ListEdit<V> extends EditValue<List<V>> {
 
 	private final TableViewer tableViewer;
 	private final List<V> initialValues = new ArrayList<>();
-	private final List<V> currentValues = new CopyOnWriteArrayList<V>();
+	private final List<V> currentValues = new CopyOnWriteArrayList<>();
 	private final Action addAction;
 	private final Action deleteAction;
 	private final Action editAction;

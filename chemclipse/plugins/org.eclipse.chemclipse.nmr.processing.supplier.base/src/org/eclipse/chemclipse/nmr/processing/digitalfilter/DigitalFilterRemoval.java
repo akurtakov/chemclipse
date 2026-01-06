@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -67,7 +67,7 @@ public class DigitalFilterRemoval extends AbstractFIDSignalFilter<DigitalFilterR
 			messageConsumer.addInfoMessage(FILTER_NAME, "No Left Rotation value and no DC offset specified, skipp processing");
 			return null;
 		}
-		FilteredFIDMeasurement<DigitalFilterRemovalSettings> filteredFIDMeasurement = new FilteredFIDMeasurement<DigitalFilterRemovalSettings>(context);
+		FilteredFIDMeasurement<DigitalFilterRemovalSettings> filteredFIDMeasurement = new FilteredFIDMeasurement<>(context);
 		ComplexFIDData fidData = UtilityFunctions.toComplexFIDData(context.getFilteredObject().getSignals());
 		if(Double.isNaN(multiplicationFactor)) {
 			messageConsumer.addInfoMessage(FILTER_NAME, "No DC Offset to remove");

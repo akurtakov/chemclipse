@@ -165,7 +165,7 @@ public class ExtendedBaselineUI extends Composite implements IExtendedPartUI {
 		ChromatogramChart chromatogramChart = chartControl.get();
 		chromatogramChart.deleteSeries();
 		if(chromatogram != null) {
-			List<ILineSeriesData> lineSeriesDataList = new ArrayList<ILineSeriesData>();
+			List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
 			colorScheme.reset();
 
 			ILineSeriesData lineSeriesDataChromatogram = getLineSeriesData(chromatogram, "Chromatogram", false);

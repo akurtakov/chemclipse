@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -47,9 +47,9 @@ public class AsymmetryFilter extends AbstractPeakFilter<AsymmetryFilterSettings>
 			this.factorSetting = factorSetting;
 		}
 
-		public FactorPredicate<?> negate() {
+		public FactorPredicate<T> negate() {
 
-			return new FactorPredicate<T>(predicate.negate(), factorSetting);
+			return new FactorPredicate<>(predicate.negate(), factorSetting);
 		}
 
 		public boolean test(double factor) {

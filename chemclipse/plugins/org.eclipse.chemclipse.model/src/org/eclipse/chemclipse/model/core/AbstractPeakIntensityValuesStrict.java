@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -58,13 +58,13 @@ public abstract class AbstractPeakIntensityValuesStrict implements IPeakIntensit
 	 */
 	private LinearEquation calculateInflectionPointEquation(NavigableMap<Integer, Float> values, float totalSignal, float maxIntensity) throws PeakException {
 
-		NavigableMap<Double, ITwoPoints> slopes = new TreeMap<Double, ITwoPoints>();
+		NavigableMap<Double, ITwoPoints> slopes = new TreeMap<>();
 		IPoint p1 = null;
 		Map.Entry<Integer, Float> e1 = null;
 		IPoint p2 = null;
 		Map.Entry<Integer, Float> e2 = null;
 		ITwoPoints points = null;
-		List<Integer> keys = new ArrayList<Integer>(values.keySet());
+		List<Integer> keys = new ArrayList<>(values.keySet());
 		for(int i = 0; i < keys.size() - 1; i++) {
 			/*
 			 * Use the existing entry and point to avoid unnecessary object

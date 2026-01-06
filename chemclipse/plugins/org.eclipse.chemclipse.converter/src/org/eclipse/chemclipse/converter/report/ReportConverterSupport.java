@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,7 +25,7 @@ public class ReportConverterSupport implements IReportConverterSupport {
 
 	public ReportConverterSupport() {
 
-		suppliers = new ArrayList<IReportSupplier>();
+		suppliers = new ArrayList<>();
 	}
 
 	@Override
@@ -85,7 +85,7 @@ public class ReportConverterSupport implements IReportConverterSupport {
 		 * Test if the suppliers ArrayList is empty.
 		 */
 		areConvertersStored();
-		ArrayList<String> extensions = new ArrayList<String>();
+		ArrayList<String> extensions = new ArrayList<>();
 		for(IReportSupplier supplier : suppliers) {
 			extensions.add(supplier.getFileExtension());
 		}
@@ -103,7 +103,7 @@ public class ReportConverterSupport implements IReportConverterSupport {
 		 * If the ArrayList is not empty, return the registered chromatogram
 		 * converter filter names.<br/>
 		 */
-		ArrayList<String> filterNames = new ArrayList<String>();
+		ArrayList<String> filterNames = new ArrayList<>();
 		for(IReportSupplier supplier : suppliers) {
 			filterNames.add(supplier.getFilterName());
 		}
@@ -117,7 +117,7 @@ public class ReportConverterSupport implements IReportConverterSupport {
 		 * Test if the suppliers ArrayList is empty.
 		 */
 		areConvertersStored();
-		List<String> availableConverters = new ArrayList<String>();
+		List<String> availableConverters = new ArrayList<>();
 		String fileName = file.getName();
 		for(IReportSupplier supplier : suppliers) {
 			/*

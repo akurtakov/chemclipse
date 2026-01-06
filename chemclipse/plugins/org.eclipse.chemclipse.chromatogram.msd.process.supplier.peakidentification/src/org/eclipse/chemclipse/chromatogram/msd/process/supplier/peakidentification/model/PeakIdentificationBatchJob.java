@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,11 +26,12 @@ public class PeakIdentificationBatchJob implements IPeakIdentificationBatchJob {
 	private String name;
 
 	public PeakIdentificationBatchJob(String name) {
+
 		if(name != null) {
 			this.name = name;
 		}
-		peakInputEntries = new ArrayList<IPeakInputEntry>();
-		peakOutputEntries = new ArrayList<IPeakOutputEntry>();
+		peakInputEntries = new ArrayList<>();
+		peakOutputEntries = new ArrayList<>();
 		peakIntegrationEntry = new PeakIntegrationEntry("");
 		peakIdentificationEntry = new PeakIdentificationEntry("");
 	}
@@ -39,7 +40,7 @@ public class PeakIdentificationBatchJob implements IPeakIdentificationBatchJob {
 	public String getName() {
 
 		String fileName = "PeakIdentification";
-		if(name != "" && name != null) {
+		if(!"".equals(name) && name != null) {
 			if(name.endsWith(".opi")) {
 				fileName = name.substring(0, name.length() - 4);
 			} else {

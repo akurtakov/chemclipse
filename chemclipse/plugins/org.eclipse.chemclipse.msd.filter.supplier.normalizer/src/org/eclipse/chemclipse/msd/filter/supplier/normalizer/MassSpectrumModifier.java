@@ -73,7 +73,7 @@ public class MassSpectrumModifier {
 
 	private static List<IIon> getSorted(List<IIon> unmodifiableList) {
 
-		List<IIon> ions = new ArrayList<IIon>(unmodifiableList);
+		List<IIon> ions = new ArrayList<>(unmodifiableList);
 		ions.sort(Comparator.comparingDouble(IIon::getAbundance));
 		return ions;
 	}

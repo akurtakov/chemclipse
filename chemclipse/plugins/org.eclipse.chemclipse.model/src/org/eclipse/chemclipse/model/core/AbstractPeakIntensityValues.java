@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -124,7 +124,7 @@ public abstract class AbstractPeakIntensityValues extends AbstractPeakIntensityV
 			 * Create a new map.
 			 */
 			int i = 0;
-			NavigableMap<Integer, Float> intensityValuesNew = new TreeMap<Integer, Float>();
+			NavigableMap<Integer, Float> intensityValuesNew = new TreeMap<>();
 			for(Map.Entry<Integer, Float> intensityValue : intensityValues.entrySet()) {
 				intensityValuesNew.put(retentionTimes.get(i++), intensityValue.getValue());
 			}

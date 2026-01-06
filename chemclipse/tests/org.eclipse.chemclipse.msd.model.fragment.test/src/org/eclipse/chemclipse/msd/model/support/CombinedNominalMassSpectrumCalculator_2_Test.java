@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -35,7 +35,7 @@ public class CombinedNominalMassSpectrumCalculator_2_Test {
 	public void setUp() {
 
 		combinedMassSpectrumCalculator = new CombinedNominalMassSpectrumCalculator();
-		ions = new ArrayList<IIon>();
+		ions = new ArrayList<>();
 		excludedIons = new MarkedIons(MarkedTraceModus.INCLUDE);
 	}
 

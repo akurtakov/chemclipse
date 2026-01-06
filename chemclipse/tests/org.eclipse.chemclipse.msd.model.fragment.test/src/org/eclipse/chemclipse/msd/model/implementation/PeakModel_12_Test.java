@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -45,7 +45,7 @@ public class PeakModel_12_Test {
 
 		// ----------------------PeakMaximum
 		peakMaximum = new PeakMassSpectrum();
-		fragmentValues = new TreeMap<Float, Float>();
+		fragmentValues = new TreeMap<>();
 		fragmentValues.put(104.0f, 230000.0f);
 		fragmentValues.put(103.0f, 58000.0f);
 		fragmentValues.put(51.0f, 26000.0f);
@@ -61,7 +61,7 @@ public class PeakModel_12_Test {
 		// ----------------------PeakMaximum
 		// ----------------------IntensityValues
 		intensityValues = new PeakIntensityValues();
-		scanValues = new TreeMap<Integer, Float>();
+		scanValues = new TreeMap<>();
 		scanValues.put(4500, 0.0f);
 		scanValues.put(5500, 20.0f);
 		scanValues.put(6500, 100.0f);

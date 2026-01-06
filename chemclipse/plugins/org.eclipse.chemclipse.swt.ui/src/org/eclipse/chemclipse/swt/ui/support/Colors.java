@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -49,7 +49,7 @@ public class Colors {
 	/*
 	 * Map specific colors
 	 */
-	private static final Map<Integer, Map<RGB, Color>> COLOR_MAP_RGB = new HashMap<Integer, Map<RGB, Color>>(); // Alpha and Colors
+	private static final Map<Integer, Map<RGB, Color>> COLOR_MAP_RGB = new HashMap<>(); // Alpha and Colors
 
 	public static final Color LIGHT_RED = Colors.getColor(new RGB(249, 154, 152));
 	public static final Color LIGHT_GREEN = Colors.getColor(new RGB(166, 255, 139));
@@ -279,7 +279,7 @@ public class Colors {
 		 */
 		Map<RGB, Color> alphaColors = COLOR_MAP_RGB.get(alpha);
 		if(alphaColors == null) {
-			alphaColors = new HashMap<RGB, Color>();
+			alphaColors = new HashMap<>();
 			COLOR_MAP_RGB.put(alpha, alphaColors);
 		}
 		/*
@@ -379,7 +379,7 @@ public class Colors {
 	private static List<Color> initialize(int[] colorIds) {
 
 		Display display = DisplayUtils.getDisplay();
-		List<Color> colors = new ArrayList<Color>();
+		List<Color> colors = new ArrayList<>();
 		for(int colorId : colorIds) {
 			Color color = display.getSystemColor(colorId);
 			colors.add(color);
@@ -390,7 +390,7 @@ public class Colors {
 
 	private static List<Color> initialize(RGB[] rgbs) {
 
-		List<Color> colors = new ArrayList<Color>();
+		List<Color> colors = new ArrayList<>();
 		for(RGB rgb : rgbs) {
 			Color color = getColor(rgb);
 			colors.add(color);

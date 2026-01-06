@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -64,7 +64,7 @@ public class SupDataType {
 	public List<Float> getFloat() {
 
 		if(_float == null) {
-			_float = new ArrayList<Float>();
+			_float = new ArrayList<>();
 		}
 		return this._float;
 	}
@@ -72,7 +72,7 @@ public class SupDataType {
 	public List<Double> getDouble() {
 
 		if(_double == null) {
-			_double = new ArrayList<Double>();
+			_double = new ArrayList<>();
 		}
 		return this._double;
 	}
@@ -80,7 +80,7 @@ public class SupDataType {
 	public List<Integer> getInt() {
 
 		if(_int == null) {
-			_int = new ArrayList<Integer>();
+			_int = new ArrayList<>();
 		}
 		return this._int;
 	}
@@ -88,7 +88,7 @@ public class SupDataType {
 	public List<Boolean> getBoolean() {
 
 		if(_boolean == null) {
-			_boolean = new ArrayList<Boolean>();
+			_boolean = new ArrayList<>();
 		}
 		return this._boolean;
 	}
@@ -96,7 +96,7 @@ public class SupDataType {
 	public List<String> getString() {
 
 		if(string == null) {
-			string = new ArrayList<String>();
+			string = new ArrayList<>();
 		}
 		return this.string;
 	}
@@ -104,7 +104,7 @@ public class SupDataType {
 	public List<Float> getTime() {
 
 		if(time == null) {
-			time = new ArrayList<Float>();
+			time = new ArrayList<>();
 		}
 		return this.time;
 	}
@@ -112,7 +112,7 @@ public class SupDataType {
 	public List<String> getURI() {
 
 		if(uri == null) {
-			uri = new ArrayList<String>();
+			uri = new ArrayList<>();
 		}
 		return this.uri;
 	}

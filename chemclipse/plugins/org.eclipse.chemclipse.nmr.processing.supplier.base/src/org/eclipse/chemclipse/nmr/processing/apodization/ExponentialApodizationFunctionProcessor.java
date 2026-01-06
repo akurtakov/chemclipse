@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -54,7 +54,7 @@ public class ExponentialApodizationFunctionProcessor extends AbstractFIDSignalFi
 		double broadeningFactor = context.getFilterConfig().getExponentialLineBroadeningFactor();
 		if(broadeningFactor > 0 || broadeningFactor < 0) {
 			BigDecimal factor = BigDecimal.valueOf(broadeningFactor);
-			FilteredFIDMeasurement<ExponentialApodizationSettings> fidMeasurement = new FilteredFIDMeasurement<ExponentialApodizationSettings>(context);
+			FilteredFIDMeasurement<ExponentialApodizationSettings> fidMeasurement = new FilteredFIDMeasurement<>(context);
 			ComplexFIDData data = UtilityFunctions.toComplexFIDData(context.getFilteredObject().getSignals());
 			for(int i = 0; i < data.times.length; i++) {
 				BigDecimal time = data.times[i];

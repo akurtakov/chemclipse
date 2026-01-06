@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -58,7 +58,7 @@ public class PeakIntegrationResult_7_Test {
 	@Test
 	public void testGetIntegratedIons_3() {
 
-		Set<Integer> ions = new HashSet<Integer>();
+		Set<Integer> ions = new HashSet<>();
 		ions.add(55);
 		ions.add(73);
 		ions.add(34);

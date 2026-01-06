@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -44,7 +44,7 @@ public class DetectorSlopes_4_Test {
 	@BeforeAll
 	public void setUp() throws Exception {
 
-		abundances = new ArrayList<Float>();
+		abundances = new ArrayList<>();
 		abundances.add(21563.38028f);
 		abundances.add(21718.30986f);
 		abundances.add(21782.39437f);

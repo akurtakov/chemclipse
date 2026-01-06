@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -89,7 +89,7 @@ public abstract class AbstractCosineComparator extends AbstractMassSpectrumCompa
 
 	public double calculateCosinePhiDirect(IExtractedIonSignal unknownSignal, IExtractedIonSignal referenceSignal) {
 
-		List<Integer> ionList = new ArrayList<Integer>();
+		List<Integer> ionList = new ArrayList<>();
 		int startIon = unknownSignal.getStartIon();
 		int stopIon = unknownSignal.getStopIon();
 		for(int ion = startIon; ion <= stopIon; ion++) {
