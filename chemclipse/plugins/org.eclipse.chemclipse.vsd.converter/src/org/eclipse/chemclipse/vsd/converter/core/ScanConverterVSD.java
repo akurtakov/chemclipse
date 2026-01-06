@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -51,7 +51,6 @@ public class ScanConverterVSD {
 	public static IProcessingInfo<ISpectrumVSD> convert(final File file, final String converterId, final IProgressMonitor monitor) {
 
 		IProcessingInfo<ISpectrumVSD> processingInfo = new ProcessingInfo<>();
-		;
 		/*
 		 * Do not use a safe runnable here, because an object must
 		 * be returned or null.

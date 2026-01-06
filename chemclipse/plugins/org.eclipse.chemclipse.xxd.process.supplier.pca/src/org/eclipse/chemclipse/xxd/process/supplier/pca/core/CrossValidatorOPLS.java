@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -35,6 +35,7 @@ import org.ejml.dense.row.CommonOps_DDRM;
 
 public class CrossValidatorOPLS extends AbstractProcessorMultivariateAanalysis implements ICrossValidationProcessor {
 
+	@Override
 	public double[] crossValidate(ISamplesPCA<IVariable, ISample> samples, IEvaluation<IVariable, ISample, IResult> masterEvaluation, IProgressMonitor monitor) throws MathIllegalArgumentException {
 
 		/*
@@ -43,7 +44,6 @@ public class CrossValidatorOPLS extends AbstractProcessorMultivariateAanalysis i
 		IAnalysisSettings analysisSettings = samples.getAnalysisSettings();
 		ResultsPCA results = new ResultsPCA(analysisSettings);
 		DMatrixRMaj q2 = new DMatrixRMaj(1, analysisSettings.getNumberOfPrincipalComponents());
-		;
 		if(samples != null) {
 			SubMonitor subMonitor = SubMonitor.convert(monitor, "Crossvalidate OPLS", samples.getSamples().size() * 20 + 5);
 			try {

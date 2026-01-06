@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -179,7 +179,7 @@ public class NMRMeasurementsUI implements PropertyChangeListener {
 						public String getText() {
 
 							return peakDetector.getName();
-						};
+						}
 
 						@Override
 						public void run() {
@@ -189,7 +189,7 @@ public class NMRMeasurementsUI implements PropertyChangeListener {
 								entries.getKey().addMeasurementResult(entries.getValue());
 							}
 							propertyChange(new PropertyChangeEvent(this, "PeakDetection", detectors, ChangeType.SELECTION_CHANGED));
-						};
+						}
 					});
 				}
 			}

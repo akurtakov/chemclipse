@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 public class PeakDetectorSupplier_1_Test {
 
-	private PeakDetectorMSDSupplier supplier = new PeakDetectorMSDSupplier("org.eclipse.chemclipse.test", "This is a description.", "Peak Detector Name");;
+	private PeakDetectorMSDSupplier supplier = new PeakDetectorMSDSupplier("org.eclipse.chemclipse.test", "This is a description.", "Peak Detector Name");
 
 	@Test
 	public void testGetId_1() {
