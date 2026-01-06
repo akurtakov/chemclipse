@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -57,7 +57,7 @@ public class RetentionIndices_1_Test {
 	}
 
 	@Test
-	public void testList_4() throws RetentionIndexExistsException, RetentionIndexValueException, NoRetentionIndexAvailableException {
+	public void testList_4() throws RetentionIndexExistsException, RetentionIndexValueException {
 
 		retentionIndices.addRetentionIndex(new RetentionIndex(5758, 1000.0f, "C41"));
 		retentionIndices.addRetentionIndex(new RetentionIndex(5760, 2000.0f, "C42"));

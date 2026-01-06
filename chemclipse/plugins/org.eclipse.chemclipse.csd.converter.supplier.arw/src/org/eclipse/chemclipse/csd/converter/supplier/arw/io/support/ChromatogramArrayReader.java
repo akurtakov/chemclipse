@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,14 +13,14 @@
 package org.eclipse.chemclipse.csd.converter.supplier.arw.io.support;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.eclipse.chemclipse.converter.io.support.AbstractArrayReader;
 
 public class ChromatogramArrayReader extends AbstractArrayReader implements IChromatogramArrayReader {
 
-	public ChromatogramArrayReader(File file) throws FileNotFoundException, IOException {
+	public ChromatogramArrayReader(File file) throws IOException {
+
 		super(file);
 	}
 

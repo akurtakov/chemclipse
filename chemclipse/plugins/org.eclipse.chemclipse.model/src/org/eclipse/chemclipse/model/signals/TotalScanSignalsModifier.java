@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -169,7 +169,7 @@ public class TotalScanSignalsModifier {
 		}
 	}
 
-	public static void multiply(ITotalScanSignals totalIonSignals, float multiplier) throws NoTotalSignalStoredException, CalculationException {
+	public static void multiply(ITotalScanSignals totalIonSignals, float multiplier) throws NoTotalSignalStoredException {
 
 		if(totalIonSignals == null || totalIonSignals.size() == 0) {
 			throw new NoTotalSignalStoredException("There are no total ion signals stored.");
@@ -195,7 +195,7 @@ public class TotalScanSignalsModifier {
 		}
 	}
 
-	public static void divide(ITotalScanSignals totalIonSignals, float divisor) throws NoTotalSignalStoredException, CalculationException {
+	public static void divide(ITotalScanSignals totalIonSignals, float divisor) throws NoTotalSignalStoredException {
 
 		if(totalIonSignals == null || totalIonSignals.size() == 0) {
 			throw new NoTotalSignalStoredException("There are no total ion signals stored.");

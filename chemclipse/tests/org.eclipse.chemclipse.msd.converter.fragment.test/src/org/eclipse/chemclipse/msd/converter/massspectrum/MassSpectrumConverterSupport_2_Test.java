@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -31,7 +31,7 @@ public class MassSpectrumConverterSupport_2_Test {
 	private MassSpectrumConverterSupport support = new MassSpectrumConverterSupport();
 
 	@BeforeAll
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		MassSpectrumSupplier supplier = new MassSpectrumSupplier();
 		supplier.setId("org.eclipse.chemclipse.msd.converter.supplier.ascii");

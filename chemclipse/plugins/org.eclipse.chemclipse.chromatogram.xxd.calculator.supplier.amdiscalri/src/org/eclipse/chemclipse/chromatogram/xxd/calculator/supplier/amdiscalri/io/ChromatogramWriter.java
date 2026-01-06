@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,12 +13,10 @@
 package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.io;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.impl.RetentionIndexExtractor;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.settings.IndexExportSettings;
-import org.eclipse.chemclipse.converter.exceptions.FileIsNotWriteableException;
 import org.eclipse.chemclipse.model.columns.ISeparationColumnIndices;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.notifier.UpdateNotifier;
@@ -26,7 +24,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ChromatogramWriter {
 
-	public void writeChromatogram(File file, IChromatogram chromatogram, IndexExportSettings indexExportSettings, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotWriteableException, IOException {
+	public void writeChromatogram(File file, IChromatogram chromatogram, IndexExportSettings indexExportSettings, IProgressMonitor monitor) throws IOException {
 
 		if(chromatogram == null || file == null) {
 			throw new IOException("The chromatogram and the file must be not null.");

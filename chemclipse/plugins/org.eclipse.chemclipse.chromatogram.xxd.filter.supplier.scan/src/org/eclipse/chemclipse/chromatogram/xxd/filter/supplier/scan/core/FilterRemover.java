@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -39,16 +39,12 @@ public class FilterRemover extends AbstractChromatogramFilter {
 
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = validate(chromatogramSelection, chromatogramFilterSettings);
 		if(!processingInfo.hasErrorMessages()) {
-			try {
-				if(chromatogramFilterSettings instanceof FilterSettingsRemover settings) {
-					ScanRemoverPattern scanRemoverPattern = new ScanRemoverPattern(settings.getScanRemoverPattern());
-					applyScanRemoverFilter(chromatogramSelection, scanRemoverPattern, monitor);
-					processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, "Scan Remover", "Scans have been removed successfully."));
-					processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "Scans have been removed successfully."));
-					chromatogramSelection.getChromatogram().setDirty(true);
-				}
-			} catch(FilterException e) {
-				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.EXCEPTION, e.getMessage()));
+			if(chromatogramFilterSettings instanceof FilterSettingsRemover settings) {
+				ScanRemoverPattern scanRemoverPattern = new ScanRemoverPattern(settings.getScanRemoverPattern());
+				applyScanRemoverFilter(chromatogramSelection, scanRemoverPattern, monitor);
+				processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, "Scan Remover", "Scans have been removed successfully."));
+				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "Scans have been removed successfully."));
+				chromatogramSelection.getChromatogram().setDirty(true);
 			}
 		}
 		return processingInfo;
@@ -68,7 +64,7 @@ public class FilterRemover extends AbstractChromatogramFilter {
 	 * @param chromatogramSelection
 	 * @throws FilterException
 	 */
-	private void applyScanRemoverFilter(IChromatogramSelection chromatogramSelection, ScanRemoverPattern scanRemoverPattern, IProgressMonitor monitor) throws FilterException {
+	private void applyScanRemoverFilter(IChromatogramSelection chromatogramSelection, ScanRemoverPattern scanRemoverPattern, IProgressMonitor monitor) {
 
 		if(chromatogramSelection != null && scanRemoverPattern != null) {
 			/*

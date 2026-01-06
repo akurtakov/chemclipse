@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,14 +15,11 @@ package org.eclipse.chemclipse.csd.converter.supplier.xy.io;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-import org.eclipse.chemclipse.converter.exceptions.FileIsEmptyException;
-import org.eclipse.chemclipse.converter.exceptions.FileIsNotReadableException;
 import org.eclipse.chemclipse.csd.converter.io.AbstractChromatogramCSDReader;
 import org.eclipse.chemclipse.csd.converter.supplier.xy.model.IVendorChromatogram;
 import org.eclipse.chemclipse.csd.converter.supplier.xy.model.IVendorScan;
@@ -56,7 +53,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 		return readChromatogram(file, monitor);
 	}
 
-	private IChromatogramCSD readChromatogram(File file, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotReadableException, FileIsEmptyException, IOException {
+	private IChromatogramCSD readChromatogram(File file, IProgressMonitor monitor) {
 
 		IVendorChromatogram chromatogram = new VendorChromatogram();
 		chromatogram.setFile(file);

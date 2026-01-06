@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Michael Chang.
+ * Copyright (c) 2015, 2026 Michael Chang.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,13 +15,10 @@
 package org.eclipse.chemclipse.wsd.converter.supplier.ocx.io;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
-import org.eclipse.chemclipse.converter.exceptions.FileIsEmptyException;
-import org.eclipse.chemclipse.converter.exceptions.FileIsNotReadableException;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.wsd.converter.io.AbstractChromatogramWSDReader;
 import org.eclipse.chemclipse.wsd.converter.io.IChromatogramWSDReader;
@@ -65,7 +62,7 @@ public class ChromatogramReaderWSD extends AbstractChromatogramWSDReader impleme
 	}
 
 	@Override
-	public IChromatogramWSD read(File file, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotReadableException, FileIsEmptyException, IOException {
+	public IChromatogramWSD read(File file, IProgressMonitor monitor) throws IOException {
 
 		IChromatogramWSD chromatogramWSD = null;
 		ReaderHelper readerHelper = new ReaderHelper();

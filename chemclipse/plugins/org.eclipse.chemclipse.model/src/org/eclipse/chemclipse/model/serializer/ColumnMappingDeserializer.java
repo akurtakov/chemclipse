@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,7 +16,6 @@ import java.io.IOException;
 
 import org.eclipse.chemclipse.model.columns.SeparationColumnMapping;
 
-import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
@@ -24,7 +23,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 public class ColumnMappingDeserializer extends JsonDeserializer<SeparationColumnMapping> {
 
 	@Override
-	public SeparationColumnMapping deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
+	public SeparationColumnMapping deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
 
 		SeparationColumnMapping separationColumnMapping = new SeparationColumnMapping();
 		separationColumnMapping.load(jsonParser.getText());

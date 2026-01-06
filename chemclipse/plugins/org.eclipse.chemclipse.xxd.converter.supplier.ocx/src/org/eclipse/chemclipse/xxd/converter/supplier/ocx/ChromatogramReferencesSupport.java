@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,7 +13,6 @@
 package org.eclipse.chemclipse.xxd.converter.supplier.ocx;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
@@ -35,7 +34,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ChromatogramReferencesSupport {
 
-	public static void exportReferences(File file, IChromatogram chromatogram, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotWriteableException, IOException {
+	public static void exportReferences(File file, IChromatogram chromatogram, IProgressMonitor monitor) throws FileIsNotWriteableException, IOException {
 
 		ChromatogramWriterMSD chromatogramWriterMSD = new ChromatogramWriterMSD();
 		ChromatogramWriterCSD chromatogramWriterCSD = new ChromatogramWriterCSD();

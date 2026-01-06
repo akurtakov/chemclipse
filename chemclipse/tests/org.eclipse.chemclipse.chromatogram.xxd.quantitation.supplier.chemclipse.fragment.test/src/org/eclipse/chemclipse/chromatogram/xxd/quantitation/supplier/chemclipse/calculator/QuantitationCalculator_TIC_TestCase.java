@@ -37,7 +37,7 @@ public class QuantitationCalculator_TIC_TestCase extends ReferencePeakMSDTestCas
 		quantitationCompound = new QuantitationCompound("Styrene", "mg/ml", 5500);
 		quantitationCompound.setChemicalClass("Styrene-Butadiene");
 
-		quantitationPeaks = new ArrayList<IQuantitationPeak>();
+		quantitationPeaks = new ArrayList<>();
 		IQuantitationPeak quantitationPeak1 = new QuantitationPeakMSD(getReferencePeakMSD_TIC_1(), 0.01d, "mg/ml");
 		quantitationPeaks.add(quantitationPeak1);
 		IQuantitationPeak quantitationPeak2 = new QuantitationPeakMSD(getReferencePeakMSD_TIC_2(), 0.05d, "mg/ml");

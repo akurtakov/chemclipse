@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -22,7 +22,6 @@ import java.util.Optional;
 
 import org.apache.commons.io.FilenameUtils;
 import org.eclipse.chemclipse.converter.core.IConverterSupport;
-import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.pcr.converter.core.PlateConverterPCR;
 import org.eclipse.chemclipse.pcr.converter.support.IPlateConverterSupport;
@@ -43,7 +42,7 @@ public class PCRFileSupport {
 
 	}
 
-	public static File savePlate(Shell shell, IPlate plate, String filterPath) throws NoConverterAvailableException {
+	public static File savePlate(Shell shell, IPlate plate, String filterPath) {
 
 		if(plate == null || shell == null) {
 			return null;

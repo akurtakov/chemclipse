@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,7 +14,6 @@
 package org.eclipse.chemclipse.ux.extension.ui.swt;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -233,11 +232,7 @@ public class ProcessMethodToolbar extends ToolBar {
 			return true;
 		}
 
-		try {
-			return SettingsWizard.openEditPreferencesWizard(shell, preferences, false);
-		} catch(IOException e) {
-			return false;
-		}
+		return SettingsWizard.openEditPreferencesWizard(shell, preferences, false);
 	}
 
 	/**
