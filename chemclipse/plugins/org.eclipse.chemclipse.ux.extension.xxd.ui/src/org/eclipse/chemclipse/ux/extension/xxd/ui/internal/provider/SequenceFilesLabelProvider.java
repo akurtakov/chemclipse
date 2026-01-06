@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,12 +27,12 @@ public class SequenceFilesLabelProvider extends AbstractChemClipseLabelProvider 
 	public static final String NAME = ExtensionMessages.name;
 	public static final String SIZE = ExtensionMessages.sizeKB;
 
-	public static String[] TITLES = {//
+	public static final String[] TITLES = {//
 			NAME, //
 			SIZE //
 	};
 
-	public static int[] BOUNDS = {//
+	public static final int[] BOUNDS = {//
 			300, //
 			60 //
 	};

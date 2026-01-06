@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,20 +21,22 @@ import org.eclipse.chemclipse.pdfbox.extensions.settings.TextOption;
 
 public class CellElement extends TextElement {
 
-	public static int BORDER_NONE = 0;
-	public static int BORDER_LEFT = 1 << 0;
-	public static int BORDER_RIGHT = 1 << 1;
-	public static int BORDER_TOP = 1 << 2;
-	public static int BORDER_BOTTOM = 1 << 3;
-	public static int BORDER_ALL = BORDER_LEFT | BORDER_RIGHT | BORDER_TOP | BORDER_BOTTOM;
+	public static final int BORDER_NONE = 0;
+	public static final int BORDER_LEFT = 1 << 0;
+	public static final int BORDER_RIGHT = 1 << 1;
+	public static final int BORDER_TOP = 1 << 2;
+	public static final int BORDER_BOTTOM = 1 << 3;
+	public static final int BORDER_ALL = BORDER_LEFT | BORDER_RIGHT | BORDER_TOP | BORDER_BOTTOM;
 
 	private int border = BORDER_NONE;
 
 	public CellElement(String text, float maxWidth) {
+
 		this(text, maxWidth, BORDER_NONE);
 	}
 
 	public CellElement(String text, float maxWidth, int border) {
+
 		super(-1, -1, maxWidth);
 		setText(text);
 		this.border = border;

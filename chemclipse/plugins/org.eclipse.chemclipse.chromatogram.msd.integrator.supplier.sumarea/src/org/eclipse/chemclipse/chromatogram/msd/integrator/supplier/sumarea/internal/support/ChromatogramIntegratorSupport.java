@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -42,7 +42,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class ChromatogramIntegratorSupport {
 
 	private static final Logger logger = Logger.getLogger(ChromatogramIntegratorSupport.class);
-	public static String INTEGRATOR_DESCRIPTION = "SumArea Integrator";
+	public static final String INTEGRATOR_DESCRIPTION = "SumArea Integrator";
 
 	public IChromatogramIntegrationResults calculateChromatogramIntegrationResults(IChromatogramSelectionMSD chromatogramSelection, ChromatogramIntegrationSettings chromatogramIntegrationSettings, IProgressMonitor monitor) {
 

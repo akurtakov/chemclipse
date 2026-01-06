@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,12 +24,12 @@ public class ChromatogramListLabelProvider extends AbstractChemClipseLabelProvid
 	public static final String NAME = "Name";
 	public static final String PATH = "Path";
 
-	public static String[] TITLES = {//
+	public static final String[] TITLES = {//
 			NAME, //
 			PATH //
 	};
 
-	public static int[] BOUNDS = {//
+	public static final int[] BOUNDS = {//
 			250, //
 			300 //
 	};
