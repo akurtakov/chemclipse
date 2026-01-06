@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.ColumMapping
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.ColumMappingFilter;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.ColumMappingLabelProvider;
 import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.widgets.Composite;
 
 public class ColumnMappingListUI extends ExtendedTableViewer {
@@ -51,7 +50,7 @@ public class ColumnMappingListUI extends ExtendedTableViewer {
 		setLabelProvider(labelProvider);
 		setContentProvider(new ListContentProvider());
 		setComparator(tableComparator);
-		setFilters(new ViewerFilter[]{listFilter});
+		setFilters(listFilter);
 		setEditingSupport();
 	}
 

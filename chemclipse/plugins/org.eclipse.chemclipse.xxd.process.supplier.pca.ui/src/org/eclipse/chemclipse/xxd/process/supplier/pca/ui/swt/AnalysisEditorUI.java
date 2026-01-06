@@ -501,8 +501,8 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				if(samples != null) {
 					FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 					fileDialog.setText("Import");
-					fileDialog.setFilterExtensions(new String[]{SampleTemplateIO.FILTER_EXTENSION});
-					fileDialog.setFilterNames(new String[]{SampleTemplateIO.FILTER_NAME});
+					fileDialog.setFilterExtensions(SampleTemplateIO.FILTER_EXTENSION);
+					fileDialog.setFilterNames(SampleTemplateIO.FILTER_NAME);
 					fileDialog.setFilterPath(PreferenceSupplier.getPathImportFile());
 					String path = fileDialog.open();
 					if(path != null) {
@@ -536,8 +536,8 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 					FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 					fileDialog.setOverwrite(true);
 					fileDialog.setText("Export");
-					fileDialog.setFilterExtensions(new String[]{SampleTemplateIO.FILTER_EXTENSION});
-					fileDialog.setFilterNames(new String[]{SampleTemplateIO.FILTER_NAME});
+					fileDialog.setFilterExtensions(SampleTemplateIO.FILTER_EXTENSION);
+					fileDialog.setFilterNames(SampleTemplateIO.FILTER_NAME);
 					fileDialog.setFileName(SampleTemplateIO.FILE_NAME);
 					fileDialog.setFilterPath(PreferenceSupplier.getPathExportFile());
 					String path = fileDialog.open();

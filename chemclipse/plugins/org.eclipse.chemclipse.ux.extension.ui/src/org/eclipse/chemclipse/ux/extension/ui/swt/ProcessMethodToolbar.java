@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -350,8 +350,8 @@ public class ProcessMethodToolbar extends ToolBar {
 						FileDialog fileDialog = new FileDialog(toolBar.getShell(), SWT.OPEN);
 						fileDialog.setText("Select Process Method File");
 						fileDialog.setFileName(MethodConverter.FILE_NAME);
-						fileDialog.setFilterExtensions(new String[]{MethodConverter.FILTER_EXTENSION});
-						fileDialog.setFilterNames(new String[]{MethodConverter.FILTER_NAME});
+						fileDialog.setFilterExtensions(MethodConverter.FILTER_EXTENSION);
+						fileDialog.setFilterNames(MethodConverter.FILTER_NAME);
 
 						String filePath = fileDialog.open();
 						if(filePath != null) {

@@ -304,8 +304,8 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 				fileDialog.setText(IMPORT_TITLE);
-				fileDialog.setFilterExtensions(new String[]{SeparationColumnMapping.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{SeparationColumnMapping.FILTER_NAME});
+				fileDialog.setFilterExtensions(SeparationColumnMapping.FILTER_EXTENSION);
+				fileDialog.setFilterNames(SeparationColumnMapping.FILTER_NAME);
 				fileDialog.setFilterPath(PreferenceSupplier.getListPathImport());
 				String path = fileDialog.open();
 				if(path != null) {
@@ -335,8 +335,8 @@ public class ColumnMappingEditorUI extends Composite implements IChangeListener,
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 				fileDialog.setOverwrite(true);
 				fileDialog.setText(EXPORT_TITLE);
-				fileDialog.setFilterExtensions(new String[]{SeparationColumnMapping.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{SeparationColumnMapping.FILTER_NAME});
+				fileDialog.setFilterExtensions(SeparationColumnMapping.FILTER_EXTENSION);
+				fileDialog.setFilterNames(SeparationColumnMapping.FILTER_NAME);
 				fileDialog.setFileName(SeparationColumnMapping.FILE_NAME);
 				fileDialog.setFilterPath(PreferenceSupplier.getListPathExport());
 				String path = fileDialog.open();

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,7 +18,6 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.SequenceFile
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.SequenceFilesLabelProvider;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.SequenceFilesTableComparator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.TargetsComparator;
-import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.widgets.Composite;
 
 public class SequenceFilesUI extends ExtendedTableViewer {
@@ -27,6 +26,7 @@ public class SequenceFilesUI extends ExtendedTableViewer {
 	private SequenceFilesFilter sequenceListFilter;
 
 	public SequenceFilesUI(Composite parent, int style) {
+
 		super(parent, style);
 		sequenceListTableComparator = new SequenceFilesTableComparator();
 		createColumns();
@@ -62,6 +62,6 @@ public class SequenceFilesUI extends ExtendedTableViewer {
 		setContentProvider(new ListContentProvider());
 		setComparator(sequenceListTableComparator);
 		sequenceListFilter = new SequenceFilesFilter();
-		setFilters(new ViewerFilter[]{sequenceListFilter});
+		setFilters(sequenceListFilter);
 	}
 }

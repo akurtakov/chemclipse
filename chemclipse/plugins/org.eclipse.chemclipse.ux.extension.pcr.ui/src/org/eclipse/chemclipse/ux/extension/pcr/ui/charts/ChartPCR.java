@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -164,8 +164,8 @@ public class ChartPCR extends LineChart {
 					FileDialog fileDialog = new FileDialog(shell, SWT.SAVE);
 					fileDialog.setText(ExtensionMessages.pcrExport);
 					fileDialog.setFileName(plate.getName() + "." + supplier.getFileExtension()); //$NON-NLS-1$
-					fileDialog.setFilterExtensions(new String[]{"*" + supplier.getFileExtension()}); //$NON-NLS-1$
-					fileDialog.setFilterNames(new String[]{supplier.getFilterName()});
+					fileDialog.setFilterExtensions("*" + supplier.getFileExtension()); //$NON-NLS-1$
+					fileDialog.setFilterNames(supplier.getFilterName());
 					String pathname = fileDialog.open();
 					if(pathname != null) {
 						File file = new File(pathname);

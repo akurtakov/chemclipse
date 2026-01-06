@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -37,9 +37,9 @@ public class FirstDerivativePeakDetector_3_Test {
 
 		RawPeak rawPeak = new RawPeak(25, 26, 27);
 		Boolean result;
-		Method method = firstDerivativePeakDetectorClass.getDeclaredMethod("isValidRawPeak", new Class[]{IRawPeak.class});
+		Method method = firstDerivativePeakDetectorClass.getDeclaredMethod("isValidRawPeak", IRawPeak.class);
 		method.setAccessible(true);
-		result = (Boolean)method.invoke(firstDerivativePeakDetector, new Object[]{rawPeak});
+		result = (Boolean)method.invoke(firstDerivativePeakDetector, rawPeak);
 		assertEquals(Boolean.valueOf(true), result, "detectPeakStart");
 	}
 
@@ -48,9 +48,9 @@ public class FirstDerivativePeakDetector_3_Test {
 
 		RawPeak rawPeak = new RawPeak(25, 25, 26);
 		Boolean result;
-		Method method = firstDerivativePeakDetectorClass.getDeclaredMethod("isValidRawPeak", new Class[]{IRawPeak.class});
+		Method method = firstDerivativePeakDetectorClass.getDeclaredMethod("isValidRawPeak", IRawPeak.class);
 		method.setAccessible(true);
-		result = (Boolean)method.invoke(firstDerivativePeakDetector, new Object[]{rawPeak});
+		result = (Boolean)method.invoke(firstDerivativePeakDetector, rawPeak);
 		assertEquals(Boolean.valueOf(false), result, "detectPeakStart");
 	}
 }

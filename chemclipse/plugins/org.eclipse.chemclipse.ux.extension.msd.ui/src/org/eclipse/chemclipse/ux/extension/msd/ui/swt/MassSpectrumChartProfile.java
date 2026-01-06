@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -428,8 +428,8 @@ public class MassSpectrumChartProfile extends LineChart implements IMassSpectrum
 						fileName = standaloneMassSpectrum.getName();
 					}
 					fileDialog.setFileName(fileName + "." + supplier.getFileExtension());
-					fileDialog.setFilterExtensions(new String[]{"*" + supplier.getFileExtension()});
-					fileDialog.setFilterNames(new String[]{supplier.getFilterName()});
+					fileDialog.setFilterExtensions("*" + supplier.getFileExtension());
+					fileDialog.setFilterNames(supplier.getFilterName());
 					String pathname = fileDialog.open();
 					if(pathname != null) {
 						File file = new File(pathname);

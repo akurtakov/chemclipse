@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -287,8 +287,8 @@ public class TargetTemplatesUI extends Composite {
 				if(targetTemplates != null) {
 					FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 					fileDialog.setText(IMPORT_TITLE);
-					fileDialog.setFilterExtensions(new String[]{TargetTemplates.FILTER_EXTENSION});
-					fileDialog.setFilterNames(new String[]{TargetTemplates.FILTER_NAME});
+					fileDialog.setFilterExtensions(TargetTemplates.FILTER_EXTENSION);
+					fileDialog.setFilterNames(TargetTemplates.FILTER_NAME);
 					fileDialog.setFilterPath(preferenceStore.getString(PreferenceSupplier.P_TARGET_TEMPLATES_FOLDER));
 					String path = fileDialog.open();
 					if(path != null) {
@@ -320,8 +320,8 @@ public class TargetTemplatesUI extends Composite {
 					FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 					fileDialog.setOverwrite(true);
 					fileDialog.setText(EXPORT_TITLE);
-					fileDialog.setFilterExtensions(new String[]{TargetTemplates.FILTER_EXTENSION});
-					fileDialog.setFilterNames(new String[]{TargetTemplates.FILTER_NAME});
+					fileDialog.setFilterExtensions(TargetTemplates.FILTER_EXTENSION);
+					fileDialog.setFilterNames(TargetTemplates.FILTER_NAME);
 					fileDialog.setFileName(TargetTemplates.FILE_NAME);
 					fileDialog.setFilterPath(preferenceStore.getString(PreferenceSupplier.P_TARGET_TEMPLATES_FOLDER));
 					String path = fileDialog.open();

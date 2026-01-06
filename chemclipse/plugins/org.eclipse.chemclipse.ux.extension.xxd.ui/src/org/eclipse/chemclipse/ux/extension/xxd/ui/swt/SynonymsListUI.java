@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,7 +17,6 @@ import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.SynonymsComparator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.SynonymsLabelProvider;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.SynonymsListFilter;
-import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.widgets.Composite;
 
 public class SynonymsListUI extends ExtendedTableViewer {
@@ -52,6 +51,6 @@ public class SynonymsListUI extends ExtendedTableViewer {
 		setLabelProvider(labelProvider);
 		setContentProvider(new ListContentProvider());
 		setComparator(comparator);
-		setFilters(new ViewerFilter[]{listFilter});
+		setFilters(listFilter);
 	}
 }

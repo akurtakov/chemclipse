@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -367,8 +367,8 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 					FileDialog fileDialog = new FileDialog(e.display.getActiveShell(), SWT.SAVE);
 					fileDialog.setOverwrite(true);
 					fileDialog.setText("Save Molecule");
-					fileDialog.setFilterExtensions(new String[]{"*.png"});
-					fileDialog.setFilterNames(new String[]{"Portable Network Graphics  (*.png)"});
+					fileDialog.setFilterExtensions("*.png");
+					fileDialog.setFilterNames("Portable Network Graphics  (*.png)");
 					fileDialog.setFileName(getExportName());
 					fileDialog.setFilterPath(preferenceStore.getString(PreferenceSupplier.P_MOLECULE_PATH_EXPORT));
 

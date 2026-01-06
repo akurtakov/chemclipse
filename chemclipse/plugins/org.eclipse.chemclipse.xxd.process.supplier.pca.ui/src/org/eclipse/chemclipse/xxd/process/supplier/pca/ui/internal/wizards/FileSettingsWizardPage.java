@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -198,8 +198,8 @@ public class FileSettingsWizardPage extends AbstractAnalysisWizardPage {
 
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 				fileDialog.setText("Import");
-				fileDialog.setFilterExtensions(new String[]{PcaExtractionFileText.FILTER_EXTENSION + ";" + PcaExtractionFileBinary.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{PcaExtractionFileText.FILTER_NAME + ";" + PcaExtractionFileBinary.FILTER_NAME});
+				fileDialog.setFilterExtensions(PcaExtractionFileText.FILTER_EXTENSION + ";" + PcaExtractionFileBinary.FILTER_EXTENSION);
+				fileDialog.setFilterNames(PcaExtractionFileText.FILTER_NAME + ";" + PcaExtractionFileBinary.FILTER_NAME);
 				fileDialog.setFilterPath(PreferenceSupplier.getPathImportFile());
 				String path = fileDialog.open();
 				if(path != null) {
@@ -229,8 +229,8 @@ public class FileSettingsWizardPage extends AbstractAnalysisWizardPage {
 
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 				fileDialog.setText(PcaExtractionFileText.DESCRIPTION);
-				fileDialog.setFilterExtensions(new String[]{PcaExtractionFileText.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{PcaExtractionFileText.FILTER_NAME});
+				fileDialog.setFilterExtensions(PcaExtractionFileText.FILTER_EXTENSION);
+				fileDialog.setFilterNames(PcaExtractionFileText.FILTER_NAME);
 				fileDialog.setOverwrite(true);
 				fileDialog.setFilterPath(PreferenceSupplier.getPathExportFile());
 				String path = fileDialog.open();

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -58,9 +58,9 @@ public class FirstDerivativePeakDetector_2_Test extends FirstDerivativeSlopesTes
 	public void testDetectPeakStart_1() throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 
 		Integer result;
-		method = firstDerivativePeakDetectorClass.getDeclaredMethod("detectPeakStart", new Class[]{IFirstDerivativeDetectorSlopes.class, Integer.TYPE, Integer.TYPE, Double.TYPE});
+		method = firstDerivativePeakDetectorClass.getDeclaredMethod("detectPeakStart", IFirstDerivativeDetectorSlopes.class, Integer.TYPE, Integer.TYPE, Double.TYPE);
 		method.setAccessible(true);
-		result = (Integer)method.invoke(firstDerivativePeakDetector, new Object[]{slopes, 1, 0, 0.05d});
+		result = (Integer)method.invoke(firstDerivativePeakDetector, slopes, 1, 0, 0.05d);
 		/*
 		 * The peak starts at scan 4 and has a scan offset of 0 (means starts at
 		 * scan 1).
@@ -72,13 +72,13 @@ public class FirstDerivativePeakDetector_2_Test extends FirstDerivativeSlopesTes
 	public void testDetectPeakMaximum_1() throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 
 		Integer result;
-		method = firstDerivativePeakDetectorClass.getDeclaredMethod("detectPeakMaximum", new Class[]{IFirstDerivativeDetectorSlopes.class, Integer.TYPE, Integer.TYPE});
+		method = firstDerivativePeakDetectorClass.getDeclaredMethod("detectPeakMaximum", IFirstDerivativeDetectorSlopes.class, Integer.TYPE, Integer.TYPE);
 		method.setAccessible(true);
 		/*
 		 * Start the search at the peak beginning at scan 4 and has a scan
 		 * offset of 0 (means starts at scan 1).
 		 */
-		result = (Integer)method.invoke(firstDerivativePeakDetector, new Object[]{slopes, 4, 0});
+		result = (Integer)method.invoke(firstDerivativePeakDetector, slopes, 4, 0);
 		/*
 		 * The peak maximum is at scan 12.
 		 */
@@ -89,16 +89,16 @@ public class FirstDerivativePeakDetector_2_Test extends FirstDerivativeSlopesTes
 	public void testDetectPeakStop_1() throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException {
 
 		Integer result;
-		method = firstDerivativePeakDetectorClass.getDeclaredMethod("detectPeakStop", new Class[]{IFirstDerivativeDetectorSlopes.class, Integer.TYPE, Integer.TYPE});
+		method = firstDerivativePeakDetectorClass.getDeclaredMethod("detectPeakStop", IFirstDerivativeDetectorSlopes.class, Integer.TYPE, Integer.TYPE);
 		method.setAccessible(true);
 		/*
 		 * Start the search at the peak maximum at scan 12 and has a scan offset
 		 * of 0 (means starts at scan 1).
 		 */
-		result = (Integer)method.invoke(firstDerivativePeakDetector, new Object[]{slopes, 12, 0});
+		result = (Integer)method.invoke(firstDerivativePeakDetector, slopes, 12, 0);
 		/*
 		 * The peak stop is at scan 26.
 		 */
-		assertEquals( Integer.valueOf(26), result,"detectPeakStop");
+		assertEquals(Integer.valueOf(26), result, "detectPeakStop");
 	}
 }

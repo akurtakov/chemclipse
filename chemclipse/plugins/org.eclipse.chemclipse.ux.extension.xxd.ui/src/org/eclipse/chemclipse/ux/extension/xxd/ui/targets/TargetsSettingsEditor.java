@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -398,8 +398,8 @@ public class TargetsSettingsEditor extends Composite implements SettingsUIProvid
 
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 				fileDialog.setText("Target List");
-				fileDialog.setFilterExtensions(new String[]{FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{FILTER_NAME});
+				fileDialog.setFilterExtensions(FILTER_EXTENSION);
+				fileDialog.setFilterNames(FILTER_NAME);
 				fileDialog.setFilterPath(preferenceStore.getString(PreferenceSupplier.P_TARGET_TEMPLATE_LIBRARY_IMPORT_FOLDER));
 				String pathname = fileDialog.open();
 				if(pathname != null) {
@@ -429,8 +429,8 @@ public class TargetsSettingsEditor extends Composite implements SettingsUIProvid
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 				fileDialog.setOverwrite(true);
 				fileDialog.setText("Target List");
-				fileDialog.setFilterExtensions(new String[]{FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{FILTER_NAME});
+				fileDialog.setFilterExtensions(FILTER_EXTENSION);
+				fileDialog.setFilterNames(FILTER_NAME);
 				fileDialog.setFileName(FILE_NAME);
 				fileDialog.setFilterPath(preferenceStore.getString(PreferenceSupplier.P_TARGET_TEMPLATE_LIBRARY_IMPORT_FOLDER));
 				String pathname = fileDialog.open();

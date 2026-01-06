@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -278,8 +278,8 @@ public class ChromatogramSelectionWizardPage extends WizardPage {
 		List<String> selectedFiles = new ArrayList<>();
 		FileDialog fileDialog = new FileDialog(DisplayUtils.getShell(), SWT.OPEN | SWT.MULTI);
 		fileDialog.setText("Please select the chromatograms used for reporting.");
-		fileDialog.setFilterExtensions(new String[]{"*.ocb"});
-		fileDialog.setFilterNames(new String[]{"Open Chromatography Binary (*.ocb)"});
+		fileDialog.setFilterExtensions("*.ocb");
+		fileDialog.setFilterNames("Open Chromatography Binary (*.ocb)");
 		String value = fileDialog.open();
 		if(value != null) {
 			String directory = fileDialog.getFilterPath();

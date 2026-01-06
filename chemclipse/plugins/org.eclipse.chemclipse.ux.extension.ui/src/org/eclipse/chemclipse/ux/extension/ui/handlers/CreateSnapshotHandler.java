@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -52,9 +52,9 @@ public class CreateSnapshotHandler {
 				FileDialog fileDialog = new FileDialog(DisplayUtils.getShell(), SWT.SAVE);
 				fileDialog.setText("Save Clipboard To File");
 				fileDialog.setFileName("Clipboard.png");
-				fileDialog.setFilterExtensions(new String[]{"*.png"});
+				fileDialog.setFilterExtensions("*.png");
 				fileDialog.setOverwrite(true);
-				fileDialog.setFilterNames(new String[]{" PNG (*.png)"});
+				fileDialog.setFilterNames(" PNG (*.png)");
 				String file = fileDialog.open();
 				if(file != null && !file.equals("")) {
 					ImageLoader imageLoader = new ImageLoader();

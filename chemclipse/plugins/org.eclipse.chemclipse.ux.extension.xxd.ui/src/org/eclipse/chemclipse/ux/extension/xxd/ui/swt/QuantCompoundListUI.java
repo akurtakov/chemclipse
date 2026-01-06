@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,7 +24,6 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.QuantCompoun
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.ViewerComparator;
-import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.widgets.Composite;
 
 public class QuantCompoundListUI extends ExtendedTableViewer {
@@ -38,6 +37,7 @@ public class QuantCompoundListUI extends ExtendedTableViewer {
 	private IQuantitationDatabase quantitationDatabase;
 
 	public QuantCompoundListUI(Composite parent, int style) {
+
 		super(parent, style);
 		createColumns();
 	}
@@ -72,7 +72,7 @@ public class QuantCompoundListUI extends ExtendedTableViewer {
 		setLabelProvider(labelProvider);
 		setContentProvider(new ListContentProvider());
 		setComparator(tableComparator);
-		setFilters(new ViewerFilter[]{viewerFilter});
+		setFilters(viewerFilter);
 		setEditingSupport();
 	}
 

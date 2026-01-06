@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -443,8 +443,8 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 					FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 					fileDialog.setOverwrite(true);
 					fileDialog.setText("Export");
-					fileDialog.setFilterExtensions(new String[]{FeatureDataMatrixIO.FILTER_EXTENSION});
-					fileDialog.setFilterNames(new String[]{FeatureDataMatrixIO.FILTER_NAME});
+					fileDialog.setFilterExtensions(FeatureDataMatrixIO.FILTER_EXTENSION);
+					fileDialog.setFilterNames(FeatureDataMatrixIO.FILTER_NAME);
 					fileDialog.setFileName(FeatureDataMatrixIO.FILE_NAME);
 					fileDialog.setFilterPath(PreferenceSupplier.getPathExportFile());
 					String path = fileDialog.open();

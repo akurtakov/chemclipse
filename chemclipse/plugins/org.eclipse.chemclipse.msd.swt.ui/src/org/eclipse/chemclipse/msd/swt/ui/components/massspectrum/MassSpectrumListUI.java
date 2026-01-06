@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -37,7 +37,6 @@ import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.ViewerComparator;
-import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -222,7 +221,7 @@ public class MassSpectrumListUI extends ExtendedTableViewer {
 
 		setLabelAndContentProviders(isVirtualTable());
 		massSpectrumListFilter = new MassSpectrumListFilter();
-		setFilters(new ViewerFilter[]{massSpectrumListFilter});
+		setFilters(massSpectrumListFilter);
 		setEditingSupport();
 	}
 

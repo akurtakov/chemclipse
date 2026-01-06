@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -269,8 +269,8 @@ public class UserLocationsUI extends Composite {
 				if(userLocations != null) {
 					FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 					fileDialog.setText(IMPORT_TITLE);
-					fileDialog.setFilterExtensions(new String[]{UserLocations.FILTER_EXTENSION});
-					fileDialog.setFilterNames(new String[]{UserLocations.FILTER_NAME});
+					fileDialog.setFilterExtensions(UserLocations.FILTER_EXTENSION);
+					fileDialog.setFilterNames(UserLocations.FILTER_NAME);
 					fileDialog.setFilterPath(PreferenceSupplierDataExplorer.getUserLocationsTemplateFolder());
 					String path = fileDialog.open();
 					if(path != null) {
@@ -302,8 +302,8 @@ public class UserLocationsUI extends Composite {
 					FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 					fileDialog.setOverwrite(true);
 					fileDialog.setText(EXPORT_TITLE);
-					fileDialog.setFilterExtensions(new String[]{UserLocations.FILTER_EXTENSION});
-					fileDialog.setFilterNames(new String[]{UserLocations.FILTER_NAME});
+					fileDialog.setFilterExtensions(UserLocations.FILTER_EXTENSION);
+					fileDialog.setFilterNames(UserLocations.FILTER_NAME);
 					fileDialog.setFileName(UserLocations.FILE_NAME);
 					fileDialog.setFilterPath(PreferenceSupplierDataExplorer.getUserLocationsTemplateFolder());
 					String path = fileDialog.open();

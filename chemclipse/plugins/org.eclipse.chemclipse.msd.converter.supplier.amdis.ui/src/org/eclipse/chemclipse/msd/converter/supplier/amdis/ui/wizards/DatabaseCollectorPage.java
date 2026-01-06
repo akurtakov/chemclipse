@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -119,8 +119,8 @@ public class DatabaseCollectorPage extends WizardPage {
 				FileDialog fileDialog = new FileDialog(e.display.getActiveShell(), SWT.SAVE);
 				fileDialog.setOverwrite(true);
 				fileDialog.setText(MSL.DESCRIPTION);
-				fileDialog.setFilterExtensions(new String[]{MSL.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{MSL.FILTER_NAME});
+				fileDialog.setFilterExtensions(MSL.FILTER_EXTENSION);
+				fileDialog.setFilterNames(MSL.FILTER_NAME);
 				fileDialog.setFilterPath(PreferenceSupplier.getPathExport());
 				fileDialog.setFileName("CollectedLibrary" + MSL.FILE_EXTENSION);
 				String pathname = fileDialog.open();
