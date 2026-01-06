@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -154,7 +154,7 @@ public class PcaExtractionFileLongText implements IExtractionData {
 							String sampleName = record.get(0).trim();
 							String variableName = record.get(2).trim();
 							String variableNameLong = record.get(3).trim();
-							Double value = Double.parseDouble(record.get(4).trim().replaceAll(",", "."));
+							Double value = Double.parseDouble(record.get(4).trim().replace(",", "."));
 							if(!sampleName.isEmpty()) {
 								if(!targetMap.containsKey(variableName)) {
 									String targetName = variableName;
@@ -198,7 +198,7 @@ public class PcaExtractionFileLongText implements IExtractionData {
 							String sampleDetails = record.get(1).trim();
 							String variableName = record.get(2).trim();
 							String variableNameLong = record.get(3).trim();
-							Double value = Double.parseDouble(record.get(4).trim().replaceAll(",", "."));
+							Double value = Double.parseDouble(record.get(4).trim().replace(",", "."));
 							String groupName = record.get(5).trim();
 							String description = record.get(6).trim();
 							if(!sampleName.isEmpty()) {
