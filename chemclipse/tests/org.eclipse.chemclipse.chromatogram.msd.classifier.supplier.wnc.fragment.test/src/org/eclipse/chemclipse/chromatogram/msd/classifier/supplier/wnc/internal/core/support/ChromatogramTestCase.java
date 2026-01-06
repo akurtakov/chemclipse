@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -60,7 +60,7 @@ public class ChromatogramTestCase {
 			try (BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(chromatogramFile), 2048)) {
 				int count;
 				int buffer = 2048;
-				byte data[] = new byte[buffer];
+				byte[] data = new byte[buffer];
 				while((count = zipInputStream.read(data, 0, buffer)) != -1) {
 					bufferedOutputStream.write(data, 0, count);
 				}

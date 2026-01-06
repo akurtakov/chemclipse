@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -42,7 +42,7 @@ public class WavelengthInputValidator implements IInputValidator {
 		 * otherwise throw a failure description.
 		 */
 		try {
-			String wavelengthList[] = newText.trim().split("-"); //$NON-NLS-1$
+			String[] wavelengthList = newText.trim().split("-"); //$NON-NLS-1$
 			if(wavelengthList.length == 1) {
 				String wavelength = String.valueOf(Integer.parseInt(wavelengthList[0].trim()));
 				/*

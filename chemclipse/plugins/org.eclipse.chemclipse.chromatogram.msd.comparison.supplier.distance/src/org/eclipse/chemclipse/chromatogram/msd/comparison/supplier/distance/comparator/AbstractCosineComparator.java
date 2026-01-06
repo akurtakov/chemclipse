@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -67,8 +67,8 @@ public abstract class AbstractCosineComparator extends AbstractMassSpectrumCompa
 	public double calculateCosinePhi(IExtractedIonSignal unknownSignal, IExtractedIonSignal referenceSignal) {
 
 		int size = unknownSignal.getNumberOfIonValues();
-		double unknown[] = new double[size];
-		double reference[] = new double[size];
+		double[] unknown = new double[size];
+		double[] reference = new double[size];
 		for(int i = unknownSignal.getStartIon(),
 				j = 0; i <= unknownSignal.getStopIon(); i++, j++) {
 			unknown[j] = getVectorValue(unknownSignal, i);
@@ -98,8 +98,8 @@ public abstract class AbstractCosineComparator extends AbstractMassSpectrumCompa
 			}
 		}
 
-		double unknown[] = new double[ionList.size()];
-		double reference[] = new double[ionList.size()];
+		double[] unknown = new double[ionList.size()];
+		double[] reference = new double[ionList.size()];
 		int j = 0;
 		for(int ion : ionList) {
 			unknown[j] = unknownSignal.getAbundance(ion);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,14 +21,16 @@ import org.eclipse.swt.widgets.Composite;
 public class PeakTargetsViewerUI extends ExtendedTableViewer {
 
 	private String[] titles = {"Name", "Match Factor", "Reverse Factor", "Match Factor Direct", "Reverse Factor Direct"};
-	private int bounds[] = {150, 100, 100, 100, 100};
+	private int[] bounds = {150, 100, 100, 100, 100};
 
 	public PeakTargetsViewerUI(Composite parent) {
+
 		super(parent);
 		createColumns();
 	}
 
 	public PeakTargetsViewerUI(Composite parent, int style) {
+
 		super(parent, style);
 		createColumns();
 	}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,14 +26,16 @@ import org.eclipse.swt.widgets.Composite;
 public class SynonymsListUI extends ExtendedTableViewer {
 
 	private String[] titles = {"Synonym"};
-	private int bounds[] = {300};
+	private int[] bounds = {300};
 
 	public SynonymsListUI(Composite parent) {
+
 		super(parent);
 		createColumns();
 	}
 
 	public SynonymsListUI(Composite parent, int style) {
+
 		super(parent, style);
 		createColumns();
 	}
