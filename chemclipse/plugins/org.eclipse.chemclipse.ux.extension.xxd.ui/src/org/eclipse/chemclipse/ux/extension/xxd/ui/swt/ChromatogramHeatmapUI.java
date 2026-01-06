@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,14 +28,12 @@ import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.support.ChromatogramHeatmapData;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.support.ChromatogramHeatmapSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageChromatogram;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ChromatogramDataSupport;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.IntensityScaleUI.IScaleUpdateListener;
 import org.eclipse.chemclipse.wsd.model.core.selection.IChromatogramSelectionWSD;
 import org.eclipse.draw2d.LightweightSystem;
 import org.eclipse.draw2d.MouseEvent;
@@ -317,14 +315,9 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 
 	private void createButtonSettings(Composite parent) {
 
-		createSettingsButton(parent, Arrays.asList(PreferencePageChromatogram.class), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				setScaleValues();
-				updateHeatmap();
-			}
+		createSettingsButton(parent, Arrays.asList(PreferencePageChromatogram.class), (Display display) -> {
+			setScaleValues();
+			updateHeatmap();
 		});
 	}
 
@@ -355,14 +348,7 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 		intensityScaleUI.setMaximum(PreferenceSupplier.MAX_HEATMAP_SCALE_INTENSITY);
 		intensityScaleUI.setToolTipText(tooltip);
 		intensityScaleUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		intensityScaleUI.setUpdateListener(new IScaleUpdateListener() {
-
-			@Override
-			public void update(int selection) {
-
-				updateHeatmap();
-			}
-		});
+		intensityScaleUI.setUpdateListener((int selection) -> updateHeatmap());
 
 		return intensityScaleUI;
 	}

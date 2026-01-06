@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,8 +21,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.swt.ITableSettings;
-import org.eclipse.chemclipse.support.updates.IUpdateListener;
-import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.tsd.model.core.TraceRange2D;
 import org.eclipse.chemclipse.tsd.model.core.TraceRanges2D;
@@ -182,14 +180,7 @@ public class TraceRangesEditor2D extends Composite implements IChangeListener, I
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		stackRangesListUI.setEditEnabled(true);
-		stackRangesListUI.setUpdateListener(new IUpdateListener() {
-
-			@Override
-			public void update() {
-
-				setInput();
-			}
-		});
+		stackRangesListUI.setUpdateListener(this::setInput);
 
 		ITableSettings tableSettings = stackRangesListUI.getTableSettings();
 		stackRangesListUI.applySettings(tableSettings);
@@ -223,13 +214,8 @@ public class TraceRangesEditor2D extends Composite implements IChangeListener, I
 
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		searchSupportUI.setSearchListener(new ISearchListener() {
-
-			@Override
-			public void performSearch(String searchText, boolean caseSensitive) {
-
-				listControl.get().setSearchText(searchText, caseSensitive);
-			}
+		searchSupportUI.setSearchListener((String searchText, boolean caseSensitive) -> {
+			listControl.get().setSearchText(searchText, caseSensitive);
 		});
 
 		toolbarSearch.set(searchSupportUI);

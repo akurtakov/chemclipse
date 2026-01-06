@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,14 +25,12 @@ import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.preferences.PreferencePageSystem;
 import org.eclipse.chemclipse.tsd.model.core.IChromatogramTSD;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.support.ChromatogramHeatmapData;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.support.ChromatogramHeatmapSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageChromatogram;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.IntensityScaleUI;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.IntensityScaleUI.IScaleUpdateListener;
 import org.eclipse.draw2d.LightweightSystem;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -153,14 +151,7 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 		intensityScaleUI.setMaximum(PreferenceSupplier.MAX_HEATMAP_SCALE_INTENSITY);
 		intensityScaleUI.setToolTipText(tooltip);
 		intensityScaleUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		intensityScaleUI.setUpdateListener(new IScaleUpdateListener() {
-
-			@Override
-			public void update(int selection) {
-
-				updateHeatmap();
-			}
-		});
+		intensityScaleUI.setUpdateListener((int selection) -> updateHeatmap());
 
 		return intensityScaleUI;
 	}
@@ -261,14 +252,7 @@ public class ChromatogramHeatmapUI extends Composite implements IExtendedPartUI 
 		createSettingsButton(parent, Arrays.asList( //
 				PreferencePageChromatogram.class, //
 				PreferencePageSystem.class //
-		), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings();
-			}
-		});
+		), (Display display) -> applySettings());
 	}
 
 	private void applySettings() {

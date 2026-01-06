@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -36,15 +36,11 @@ import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.chemclipse.support.ui.swt.ITableSettings;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
-import org.eclipse.chemclipse.support.updates.IUpdateListener;
-import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
-import org.eclipse.chemclipse.ux.extension.ui.model.IDataUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.io.SampleTemplateIO;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Algorithm;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
@@ -115,26 +111,22 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 		super(parent, style);
 		createControl();
 		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
-		dataUpdateSupport.add(new IDataUpdateListener() {
+		dataUpdateSupport.add((String topic, List<Object> objects) -> {
 
-			@Override
-			public void update(String topic, List<Object> objects) {
-
-				if(evaluation != null) {
-					if(DataUpdateSupport.isVisible(control)) {
-						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic)) {
-							if(objects.size() == 1) {
-								Object object = objects.get(0);
-								ArrayList<ISample> samples = new ArrayList<>();
-								if(object instanceof Object[] values) {
-									for(int i = 0; i < values.length; i++) {
-										if(values[i] instanceof ISample sample) {
-											samples.add(sample);
-										}
+			if(evaluation != null) {
+				if(DataUpdateSupport.isVisible(control)) {
+					if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic)) {
+						if(objects.size() == 1) {
+							Object object = objects.get(0);
+							ArrayList<ISample> samples = new ArrayList<>();
+							if(object instanceof Object[] values) {
+								for(int i = 0; i < values.length; i++) {
+									if(values[i] instanceof ISample sample) {
+										samples.add(sample);
 									}
-									if(!samples.isEmpty()) {
-										sampleListControl.get().setSelection(new StructuredSelection(samples));
-									}
+								}
+								if(!samples.isEmpty()) {
+									sampleListControl.get().setSelection(new StructuredSelection(samples));
 								}
 							}
 						}
@@ -289,7 +281,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 	private void createCheckboxCrossValidation(Composite parent) {
 
 		Button button = new Button(parent, SWT.CHECK);
-		button.setToolTipText("Run Crossvalidation if available for selected Algorithm.");
+		button.setToolTipText("Run cross-validation if available for selected algorithm.");
 		button.setText("Cross Validate");
 		button.setSelection(PreferenceSupplier.isCrossValidation());
 		button.addSelectionListener(new SelectionAdapter() {
@@ -310,28 +302,14 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 
 	private void createSettingsButton(Composite parent) {
 
-		createSettingsButton(parent, Arrays.asList(PreferencePage.class, PreferencePageScorePlot.class, PreferencePageLoadingPlot.class), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings(display);
-			}
-		});
+		createSettingsButton(parent, Arrays.asList(PreferencePage.class, PreferencePageScorePlot.class, PreferencePageLoadingPlot.class), this::applySettings);
 	}
 
 	private void createToolbarSearch(Composite parent) {
 
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		searchSupportUI.setSearchListener(new ISearchListener() {
-
-			@Override
-			public void performSearch(String searchText, boolean caseSensitive) {
-
-				sampleListControl.get().setSearchText(searchText, caseSensitive);
-			}
-		});
+		searchSupportUI.setSearchListener((String searchText, boolean caseSensitive) -> sampleListControl.get().setSearchText(searchText, caseSensitive));
 		toolbarSearch.set(searchSupportUI);
 	}
 
@@ -597,14 +575,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				handleRowSelection(selectedElements);
 			}
 		});
-		sampleListUI.setUpdateListener(new IUpdateListener() {
-
-			@Override
-			public void update() {
-
-				updateSampleList();
-			}
-		});
+		sampleListUI.setUpdateListener(this::updateSampleList);
 		sampleListControl.set(sampleListUI);
 		ITableSettings tableSettings = sampleListUI.getTableSettings();
 		tableSettings.addMenuEntry(new ITableMenuEntry() {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -60,23 +60,16 @@ public class ColumnBuilder<DataType, ColumnType> {
 
 	public static <DataType, ColumnType> ColumnBuilder<DataType, ColumnType> column(String title, int width, Function<DataType, ColumnType> mapper) {
 
-		return new ColumnBuilder<DataType, ColumnType>(title, width, mapper);
+		return new ColumnBuilder<>(title, width, mapper);
 	}
 
 	public static <DataType, ColumnType extends Comparable<ColumnType>> ColumnBuilder<DataType, ColumnType> defaultSortableColumn(String title, int width, Function<DataType, ColumnType> mapper) {
 
-		return new ColumnBuilder<DataType, ColumnType>(title, width, mapper).sort(new Comparator<ColumnType>() {
-
-			@Override
-			public int compare(ColumnType o1, ColumnType o2) {
-
-				return o1.compareTo(o2);
-			}
-		});
+		return new ColumnBuilder<DataType, ColumnType>(title, width, mapper).sort(Comparable::compareTo);
 	}
 
 	public ColumnDefinition<DataType, ColumnType> create() {
 
-		return new SimpleColumnDefinition<DataType, ColumnType>(title, width, labelProvider, comparator, mapper);
+		return new SimpleColumnDefinition<>(title, width, labelProvider, comparator, mapper);
 	}
 }
