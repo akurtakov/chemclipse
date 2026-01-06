@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,7 +13,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.core;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -208,7 +208,7 @@ public abstract class AbstractScan extends AbstractSignal implements IScan {
 	public void setRetentionIndex(SeparationColumnType separationColumnType, float retentionIndex) {
 
 		if(additionalRetentionIndices == null) {
-			additionalRetentionIndices = new HashMap<>();
+			additionalRetentionIndices = new EnumMap<>(SeparationColumnType.class);
 		}
 		/*
 		 * Add the index.
@@ -226,9 +226,9 @@ public abstract class AbstractScan extends AbstractSignal implements IScan {
 	public Map<SeparationColumnType, Float> getRetentionIndicesTyped() {
 
 		if(additionalRetentionIndices == null) {
-			return new HashMap<>();
+			return new EnumMap<>(SeparationColumnType.class);
 		} else {
-			return new HashMap<>(additionalRetentionIndices);
+			return new EnumMap<>(additionalRetentionIndices);
 		}
 	}
 
