@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -62,7 +62,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 	private static final String RETENTION_TIME_MARKER = "##RETENTION_TIME=";
 	private static final String TIME_MARKER = "##TIME=";
 	private static final String TIC_MARKER = "##TIC=";
-	private static final String NAME_MARKER = "##NAME=";;
+	private static final String NAME_MARKER = "##NAME=";
 	private static final String SCAN_NUMBER_MARKER = "##SCAN_NUMBER=";
 	private static final String SCAN_MARKER = "##SCAN=";
 	private static final String XYDATA_MARKER_SPACE = "##XYDATA= (XY..XY)";

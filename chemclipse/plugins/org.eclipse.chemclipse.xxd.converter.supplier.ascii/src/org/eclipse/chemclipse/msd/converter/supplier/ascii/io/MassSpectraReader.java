@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -44,7 +44,7 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 			while((line = bufferedReader.readLine()) != null) {
 				line = line.trim();
 				// skip blank lines or comment lines(begin with '#' or ';')
-				if((line.length() == 0) || line.startsWith(";")) {
+				if((line.isEmpty()) || line.startsWith(";")) {
 					continue;
 				}
 				if(line.toUpperCase().matches("^#.*TIME.*=.*")) {

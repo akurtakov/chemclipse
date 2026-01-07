@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -429,7 +429,7 @@ public class ChromatogramWriter_1300 extends AbstractChromatogramWriter implemen
 		StringBuilder sb = new StringBuilder();
 		if(classifier != null) {
 			for(String c : classifier) {
-				if(sb.length() > 0) {
+				if(!sb.isEmpty()) {
 					sb.append(CLASSIFIER_DELIMITER);
 				}
 				sb.append(c);

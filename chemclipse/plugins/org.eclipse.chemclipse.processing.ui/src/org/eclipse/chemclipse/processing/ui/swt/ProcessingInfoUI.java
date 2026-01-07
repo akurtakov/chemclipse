@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -175,7 +175,7 @@ public class ProcessingInfoUI {
 		/*
 		 * If the builder is empty, give a note that items needs to be selected.
 		 */
-		if(builder.length() == 0) {
+		if(builder.isEmpty()) {
 			builder.append("Please select one or more entries in the list.");
 			builder.append(OperatingSystemUtils.getLineDelimiter());
 		}

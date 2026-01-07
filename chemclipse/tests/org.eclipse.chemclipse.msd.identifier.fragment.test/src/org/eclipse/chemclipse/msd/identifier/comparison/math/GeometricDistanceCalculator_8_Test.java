@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 
 public class GeometricDistanceCalculator_8_Test extends MassSpectrumSetTestCase {
 
-	private GeometricDistanceCalculator calculator = new GeometricDistanceCalculator();;
+	private GeometricDistanceCalculator calculator = new GeometricDistanceCalculator();
 
 	@Test
 	public void test1() {

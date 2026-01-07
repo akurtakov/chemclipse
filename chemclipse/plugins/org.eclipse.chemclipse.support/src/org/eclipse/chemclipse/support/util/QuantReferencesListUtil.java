@@ -18,7 +18,7 @@ import java.util.List;
 
 public class QuantReferencesListUtil {
 
-	public static final String SEPARATOR_TOKEN = ";";;
+	public static final String SEPARATOR_TOKEN = ";";
 
 	public String createList(String[] items) {
 

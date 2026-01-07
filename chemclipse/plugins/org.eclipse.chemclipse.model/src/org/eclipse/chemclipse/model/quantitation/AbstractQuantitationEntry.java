@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -162,7 +162,7 @@ public abstract class AbstractQuantitationEntry implements IQuantitationEntry {
 
 		if(description != null) {
 			if(!this.description.contains(description)) {
-				if(this.description.length() == 0) {
+				if(this.description.isEmpty()) {
 					this.description = description;
 				} else {
 					this.description += DESCRIPTION_DELIMITER + description;
@@ -192,12 +192,15 @@ public abstract class AbstractQuantitationEntry implements IQuantitationEntry {
 	@Override
 	public boolean equals(Object obj) {
 
-		if(this == obj)
+		if(this == obj) {
 			return true;
-		if(obj == null)
+		}
+		if(obj == null) {
 			return false;
-		if(getClass() != obj.getClass())
+		}
+		if(getClass() != obj.getClass()) {
 			return false;
+		}
 		AbstractQuantitationEntry other = (AbstractQuantitationEntry)obj;
 		return Double.doubleToLongBits(area) == Double.doubleToLongBits(other.area) && Objects.equals(calibrationMethod, other.calibrationMethod) && Objects.equals(chemicalClass, other.chemicalClass) && Double.doubleToLongBits(concentration) == Double.doubleToLongBits(other.concentration) && Objects.equals(concentrationUnit, other.concentrationUnit) && Objects.equals(group, other.group) && Objects.equals(name, other.name) && Objects.equals(signals, other.signals) && usedCrossZero == other.usedCrossZero;
 	}

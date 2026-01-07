@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -112,7 +112,7 @@ public class CSVPeakConverter implements IPeakExportConverter, IPeakImportConver
 		if(peakModel != null) {
 			List<Integer> retentionTimes = peakModel.getRetentionTimes();
 			for(Integer rt : retentionTimes) {
-				if(stringBuilder.length() > 0) {
+				if(!stringBuilder.isEmpty()) {
 					stringBuilder.append(SEPERATOR_RECORD);
 				}
 				stringBuilder.append(rt);
@@ -128,7 +128,7 @@ public class CSVPeakConverter implements IPeakExportConverter, IPeakImportConver
 		StringBuilder sb = new StringBuilder();
 		if(provider != null) {
 			for(final IIon ion : provider.getIons()) {
-				if(sb.length() > 0) {
+				if(!sb.isEmpty()) {
 					sb.append(SEPERATOR_RECORD);
 				}
 				sb.append(ion.getIon());

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -44,7 +44,7 @@ public interface IApplicationImage extends IApplicationImageProvider {
 	String IMAGE_REFRESH = "refresh.png";
 	String IMAGE_CANCEL = "cancel.gif";
 	String IMAGE_DELETE = "delete.gif";
-	String IMAGE_DELETE_ALL = "delete_all.png";;
+	String IMAGE_DELETE_ALL = "delete_all.png";
 	String IMAGE_EXECUTE_ADD = "execute_add.gif";
 	String IMAGE_EDIT = "edit.gif";
 	String IMAGE_EDIT_DEFAULT = "editDefault.gif";

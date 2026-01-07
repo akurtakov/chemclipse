@@ -187,7 +187,7 @@ public class SequenceConverterSupport implements ISequenceConverterSupport {
 	 */
 	private void areConvertersStored() throws NoConverterAvailableException {
 
-		if(suppliers.size() < 1) {
+		if(suppliers.isEmpty()) {
 			throw new NoConverterAvailableException();
 		}
 	}

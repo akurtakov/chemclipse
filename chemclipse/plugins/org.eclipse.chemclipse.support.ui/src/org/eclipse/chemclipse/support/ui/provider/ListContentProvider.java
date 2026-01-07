@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -45,7 +45,7 @@ public class ListContentProvider implements IStructuredContentProvider {
 			iterable.forEach(list::add);
 			return list.toArray();
 		} else if(inputElement == null) {
-			return Collections.EMPTY_LIST.toArray();
+			return Collections.emptyList().toArray();
 		}
 
 		return new Object[0];

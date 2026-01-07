@@ -25,6 +25,7 @@ public class ChromatogramFilterSupportMSD implements IChromatogramFilterSupportM
 	 * Creates a new suppliers list.
 	 */
 	public ChromatogramFilterSupportMSD() {
+
 		suppliers = new ArrayList<>();
 	}
 
@@ -115,7 +116,7 @@ public class ChromatogramFilterSupportMSD implements IChromatogramFilterSupportM
 	// -------------------------------------private methods
 	private void areChromatogramFiltersStored() throws NoChromatogramFilterSupplierAvailableException {
 
-		if(suppliers.size() < 1) {
+		if(suppliers.isEmpty()) {
 			throw new NoChromatogramFilterSupplierAvailableException();
 		}
 	}
