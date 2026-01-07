@@ -28,15 +28,13 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class SiriusReader_1_ITest {
 
-	private SiriusReader reader;
-	private File file;
 	private IMassSpectra massSpectra;
 
 	@BeforeAll
 	public void setUp() throws Exception {
 
-		reader = new SiriusReader();
-		file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_KAEMPFEROL));
+		SiriusReader reader = new SiriusReader();
+		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_KAEMPFEROL));
 		massSpectra = reader.read(file, new NullProgressMonitor());
 	}
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -38,18 +38,16 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class MassChromatographicQualityCalculator_1_ITest {
 
 	private IMassChromatographicQualityResult result;
-	private IChromatogramMSD chromatogram;
 	private IChromatogramSelectionMSD chromatogramSelection;
 	private float codaThreshold;
 	private int windowSize = 3;
-	private File importFile;
 
 	@BeforeAll
 	public void setUp() {
 
-		importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1));
+		File importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1));
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(importFile, new NullProgressMonitor());
-		chromatogram = processingInfo.getProcessingResult();
+		IChromatogramMSD chromatogram = processingInfo.getProcessingResult();
 		codaThreshold = 0.7f;
 		chromatogramSelection = new ChromatogramSelectionMSD(chromatogram);
 	}

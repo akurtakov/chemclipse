@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,7 +28,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class TotalIonSignalsModifier_5_Test {
 
 	private ITotalScanSignals signals;
-	private ITotalScanSignal signal;
 
 	@BeforeAll
 	public void setUp() {
@@ -48,7 +47,7 @@ public class TotalIonSignalsModifier_5_Test {
 		abundance[10] = 52.2f;
 		abundance[11] = 5.9f;
 		for(int i = 1; i <= 12; i++) {
-			signal = new TotalScanSignal(i * 100, 0.0f, abundance[i - 1]);
+			ITotalScanSignal signal = new TotalScanSignal(i * 100, 0.0f, abundance[i - 1]);
 			signals.add(signal);
 		}
 		TotalScanSignalsModifier.calculateMovingAverage(signals, 5);

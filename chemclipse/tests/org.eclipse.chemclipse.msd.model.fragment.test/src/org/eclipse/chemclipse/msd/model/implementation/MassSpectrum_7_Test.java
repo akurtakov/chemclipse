@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -29,13 +29,12 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class MassSpectrum_7_Test {
 
 	private IScanMSD massSpectrum;
-	private IIon ion;
 
 	@BeforeAll
 	public void setUp() {
 
 		massSpectrum = new ScanMSD();
-		ion = new Ion(45.5f, 78500.2f);
+		IIon ion = new Ion(45.5f, 78500.2f);
 		massSpectrum.addIon(ion, false);
 		ion = new Ion(85.4f, 3000.5f);
 		massSpectrum.addIon(ion, false);

@@ -18,6 +18,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
+import org.eclipse.chemclipse.msd.model.core.IIon;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIon;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIons;
@@ -29,15 +31,14 @@ import org.junit.jupiter.api.Test;
  */
 public class MassSpectrum_22_Test {
 
-	private ScanMSD massSpectrum;
-	private Ion ion;
+	private IScanMSD massSpectrum;
 	private IMarkedIons excludedIons;
 
 	@BeforeEach
 	public void setUp() {
 
 		massSpectrum = new ScanMSD();
-		ion = new Ion(45.5f, 78500.2f);
+		IIon ion = new Ion(45.5f, 78500.2f);
 		massSpectrum.addIon(ion);
 		ion = new Ion(104.1f, 120000.4f);
 		massSpectrum.addIon(ion);

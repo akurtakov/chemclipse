@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,13 +24,12 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class PeakIon_3_Test {
 
-	private IIon ion;
 	private PeakIon peakIon;
 
 	@BeforeAll
 	public void setUp() {
 
-		ion = new Ion(45.5f, 2500.4f);
+		IIon ion = new Ion(45.5f, 2500.4f);
 		peakIon = new PeakIon(ion);
 	}
 

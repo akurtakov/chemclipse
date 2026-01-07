@@ -29,7 +29,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class SubtractCalculator_2_Test {
 
 	private SubtractCalculator subtractCalculator = new SubtractCalculator();
-	private IScanMSD subtractMassSpectrum;
 	private IScanMSD targetMassSpectrum;
 	private Map<Double, Float> subtractMassSpectrumMap;
 
@@ -39,7 +38,7 @@ public class SubtractCalculator_2_Test {
 		boolean useNominalMasses = true;
 		boolean useNormalize = true;
 
-		subtractMassSpectrum = new CombinedMassSpectrum();
+		IScanMSD subtractMassSpectrum = new CombinedMassSpectrum();
 		subtractMassSpectrum.addIon(new Ion(18.2, 200));
 		subtractMassSpectrum.addIon(new Ion(28.1, 1000));
 		subtractMassSpectrum.addIon(new Ion(32.3, 500));

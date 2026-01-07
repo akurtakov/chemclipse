@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -37,16 +37,14 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class MassChromatographicQualityResult_1_ITest {
 
 	private IMassChromatographicQualityResult result;
-	private IChromatogramMSD chromatogram;
 	private IChromatogramSelectionMSD chromatogramSelection;
-	private File importFile;
 
 	@BeforeAll
-	public void setUp() throws Exception {
+	public void setUp() {
 
-		importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1));
+		File importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1));
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(importFile, new NullProgressMonitor());
-		chromatogram = processingInfo.getProcessingResult();
+		IChromatogramMSD chromatogram = processingInfo.getProcessingResult();
 		chromatogramSelection = new ChromatogramSelectionMSD(chromatogram);
 	}
 

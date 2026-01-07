@@ -34,17 +34,14 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class Calculator_1_Test {
 
-	private Calculator calculator;
-	private List<ICombinedMassSpectrum> noiseMassSpectra;
 	private ICombinedMassSpectrum noiseMassSpectrum;
-	private IMarkedIons ionsToPreserve;
 	private IExtractedIonSignal extractedIonSignal;
 
 	@BeforeAll
 	public void setUp() {
 
-		calculator = new Calculator();
-		noiseMassSpectra = new ArrayList<>();
+		Calculator calculator = new Calculator();
+		List<ICombinedMassSpectrum> noiseMassSpectra = new ArrayList<>();
 		/*
 		 * Noise mass spectrum #1
 		 */
@@ -75,7 +72,7 @@ public class Calculator_1_Test {
 		noiseMassSpectrum.addIon(new Ion(104.0f, 15000.0f));
 		noiseMassSpectrum.addIon(new Ion(201.0f, 8900.0f));
 		noiseMassSpectra.add(noiseMassSpectrum);
-		ionsToPreserve = new MarkedIons(MarkedTraceModus.INCLUDE);
+		IMarkedIons ionsToPreserve = new MarkedIons(MarkedTraceModus.INCLUDE);
 		// ionsToPreserve.add(103);
 		// ionsToPreserve.add(104);
 		// ionsToPreserve.add(201);

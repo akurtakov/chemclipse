@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -29,10 +29,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class ExtractedIonSignalsModifier_1_Test {
 
-	private IChromatogramMSD chromatogram;
-	private IScanMSD supplierMassSpectrum;
-	private IIon supplierIon;
-
 	@BeforeAll
 	public void setUp() {
 
@@ -40,11 +36,11 @@ public class ExtractedIonSignalsModifier_1_Test {
 		 * Build a chromatogram and add scans with ions and no
 		 * abundance.
 		 */
-		chromatogram = new ChromatogramMSD();
+		IChromatogramMSD chromatogram = new ChromatogramMSD();
 		for(int scan = 1; scan <= 100; scan++) {
-			supplierMassSpectrum = new ScanMSD();
+			IScanMSD supplierMassSpectrum = new ScanMSD();
 			for(int ion = 32; ion <= 104; ion++) {
-				supplierIon = new Ion(ion, ion * 2);
+				IIon supplierIon = new Ion(ion, ion * 2);
 				supplierMassSpectrum.addIon(supplierIon);
 			}
 			chromatogram.addScan(supplierMassSpectrum);

@@ -34,13 +34,12 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class PeakIntensityValues_1_Test {
 
 	private PeakIntensityValues intensityValues;
-	private TreeMap<Integer, Float> scanValues;
 
 	@BeforeAll
 	public void setUp() {
 
 		intensityValues = new PeakIntensityValues();
-		scanValues = new TreeMap<>();
+		TreeMap<Integer, Float> scanValues = new TreeMap<>();
 		scanValues.put(1500, 0.0f);
 		scanValues.put(2500, 5.0f);
 		scanValues.put(3500, 10.0f);

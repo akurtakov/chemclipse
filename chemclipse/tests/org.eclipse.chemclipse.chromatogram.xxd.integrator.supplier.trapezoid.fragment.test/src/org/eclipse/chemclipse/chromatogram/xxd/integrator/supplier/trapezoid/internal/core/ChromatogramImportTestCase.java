@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,7 +27,6 @@ import org.junit.jupiter.api.Disabled;
 @Disabled
 public class ChromatogramImportTestCase {
 
-	private IChromatogramMSD chromatogram;
 	protected IChromatogramSelectionMSD chromatogramSelection;
 	protected String chromatogramRelativePath;
 
@@ -36,7 +35,7 @@ public class ChromatogramImportTestCase {
 
 		File fileImport = new File(PathResolver.getAbsolutePath(chromatogramRelativePath));
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileImport, new NullProgressMonitor());
-		chromatogram = processingInfo.getProcessingResult();
+		IChromatogramMSD chromatogram = processingInfo.getProcessingResult();
 		chromatogramSelection = new ChromatogramSelectionMSD(chromatogram);
 	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.msd.model.implementation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
+import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
 import org.eclipse.chemclipse.msd.model.core.support.MarkedIon;
@@ -31,15 +32,13 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class MassSpectrum_21_Test {
 
 	private ScanMSD massSpectrum;
-	private Ion ion;
 	private IMarkedIons excludedIons;
-	private IScanMSD ms;
 
 	@BeforeAll
 	public void setUp() {
 
 		massSpectrum = new ScanMSD();
-		ion = new Ion(45.5f, 78500.2f);
+		IIon ion = new Ion(45.5f, 78500.2f);
 		massSpectrum.addIon(ion);
 		ion = new Ion(104.1f, 120000.4f);
 		massSpectrum.addIon(ion);
@@ -63,7 +62,7 @@ public class MassSpectrum_21_Test {
 
 		excludedIons.add(new MarkedIon(104));
 		excludedIons.add(new MarkedIon(28));
-		ms = massSpectrum.getMassSpectrum(excludedIons);
+		IScanMSD ms = massSpectrum.getMassSpectrum(excludedIons);
 		assertEquals(1089021.0f, ms.getTotalSignal(), 0);
 		assertEquals(3, ms.getNumberOfIons());
 		assertEquals(78500.2f, ms.getIon(46).getAbundance(), 0);

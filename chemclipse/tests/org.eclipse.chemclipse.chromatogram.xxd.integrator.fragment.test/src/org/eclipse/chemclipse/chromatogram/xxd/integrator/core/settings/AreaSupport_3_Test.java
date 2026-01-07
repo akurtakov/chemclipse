@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -30,8 +30,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class AreaSupport_3_Test {
 
 	private IAreaSupport areaSupport;
-	private IChromatogramPeakMSD peak;
-	private IPeakModelMSD peakModel;
 
 	@BeforeAll
 	public void setUp() {
@@ -67,10 +65,10 @@ public class AreaSupport_3_Test {
 		/*
 		 * Peak model and peak mocks.
 		 */
-		peakModel = EasyMock.createMock(IPeakModelMSD.class);
+		IPeakModelMSD peakModel = EasyMock.createMock(IPeakModelMSD.class);
 		EasyMock.expect(peakModel.getStartRetentionTime()).andStubReturn(4500);
 		EasyMock.replay(peakModel);
-		peak = EasyMock.createMock(IChromatogramPeakMSD.class);
+		IChromatogramPeakMSD peak = EasyMock.createMock(IChromatogramPeakMSD.class);
 		EasyMock.expect(peak.getPeakModel()).andStubReturn(peakModel);
 		EasyMock.expect(peak.getIntegratedArea()).andStubReturn(4500.0d);
 		EasyMock.replay(peak);

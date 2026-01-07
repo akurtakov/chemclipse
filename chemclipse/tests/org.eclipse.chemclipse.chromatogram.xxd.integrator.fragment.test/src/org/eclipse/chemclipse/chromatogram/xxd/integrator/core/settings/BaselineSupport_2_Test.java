@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,17 +28,15 @@ public class BaselineSupport_2_Test {
 
 	private IBaselineSupport baselineSupport;
 	private IBaselineModel baselineModel;
-	private IChromatogramMSD chromatogram;
-	private IScanMSD supplierMassSpectrum;
 
 	@BeforeEach
 	public void setUp() {
 
-		chromatogram = new ChromatogramMSD();
+		IChromatogramMSD chromatogram = new ChromatogramMSD();
 		chromatogram.setScanDelay(4500);
 		chromatogram.setScanInterval(1000);
 		for(int i = 1; i <= 100; i++) {
-			supplierMassSpectrum = new ScanMSD();
+			IScanMSD supplierMassSpectrum = new ScanMSD();
 			chromatogram.addScan(supplierMassSpectrum);
 		}
 		chromatogram.recalculateRetentionTimes();

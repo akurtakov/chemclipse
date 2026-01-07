@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,7 +25,6 @@ import org.junit.jupiter.api.Test;
 
 public class EuclideanMassSpectrumComparator_5_Test extends MassSpectrumSetTestCase {
 
-	private EuclideanComparator comparator;
 	private IProcessingInfo<IComparisonResult> processingInfo;
 	private IComparisonResult result;
 
@@ -38,7 +37,7 @@ public class EuclideanMassSpectrumComparator_5_Test extends MassSpectrumSetTestC
 		IScanMSD unknown = noMatchA1.getMassSpectrum();
 		IScanMSD reference = noMatchA2.getMassSpectrum();
 
-		comparator = new EuclideanComparator();
+		EuclideanComparator comparator = new EuclideanComparator();
 		processingInfo = comparator.compare(unknown, reference, new MatchConstraints());
 		result = processingInfo.getProcessingResult();
 	}

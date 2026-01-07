@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -22,6 +22,7 @@ import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignalExtractor;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.model.signals.TotalScanSignalExtractor;
+import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.junit.jupiter.api.BeforeAll;
@@ -35,112 +36,109 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramOverview_2_Test {
 
-	private ChromatogramMSD chrom;
-	private IChromatogramOverview chromatogram;
-	private IScanMSD supplierMassSpectrum;
-	private IIon ion;
+	private IChromatogramOverview chromatogramOverview;
 	private Date date;
 	private ITotalScanSignalExtractor totalIonSignalExtractor;
 
 	@BeforeAll
 	public void setUp() {
 
-		chrom = new ChromatogramMSD();
+		IChromatogramMSD chromatogram = new ChromatogramMSD();
 		// ------------------------------Scan 1
-		supplierMassSpectrum = new ScanMSD();
+		IScanMSD supplierMassSpectrum = new ScanMSD();
 		supplierMassSpectrum.setRetentionTime(7896);
-		ion = new Ion(IIon.TIC_ION, 470746.9f);
+		IIon ion = new Ion(IIon.TIC_ION, 470746.9f);
 		supplierMassSpectrum.addIon(ion);
-		chrom.addScan(supplierMassSpectrum);
+		chromatogram.addScan(supplierMassSpectrum);
 		// ------------------------------Scan 1
-		chromatogram = chrom;
+		chromatogramOverview = chromatogram;
 		date = new Date();
-		chromatogram.setDate(date);
-		chromatogram.setFile(new File(""));
-		chromatogram.setMiscInfo("This is a test chromatogram.");
-		chromatogram.setOperator("eselmeister");
-		chromatogram.setScanDelay(5500);
-		chromatogram.setScanInterval(1500);
+		chromatogramOverview.setDate(date);
+		chromatogramOverview.setFile(new File(""));
+		chromatogramOverview.setMiscInfo("This is a test chromatogram.");
+		chromatogramOverview.setOperator("eselmeister");
+		chromatogramOverview.setScanDelay(5500);
+		chromatogramOverview.setScanInterval(1500);
 
-		totalIonSignalExtractor = new TotalScanSignalExtractor(chrom);
+		totalIonSignalExtractor = new TotalScanSignalExtractor(chromatogram);
 	}
 
 	@Test
 	public void testGetMinSignal_1() {
 
-		assertEquals(470746, (int)chromatogram.getMinSignal(), 0);
+		assertEquals(470746, (int)chromatogramOverview.getMinSignal(), 0);
 	}
 
 	@Test
 	public void testGetMaxSignal_1() {
 
-		assertEquals(470746, (int)chromatogram.getMaxSignal(), 0);
+		assertEquals(470746, (int)chromatogramOverview.getMaxSignal(), 0);
 	}
 
 	@Test
 	public void testGetStartRetentionTime_1() {
 
-		assertEquals(7896, chromatogram.getStartRetentionTime());
+		assertEquals(7896, chromatogramOverview.getStartRetentionTime());
 	}
 
 	@Test
 	public void testGetStopRetentionTime_1() {
 
-		assertEquals(7896, chromatogram.getStopRetentionTime());
+		assertEquals(7896, chromatogramOverview.getStopRetentionTime());
 	}
 
 	@Test
 	public void testGetScanDelay_1() {
 
-		assertEquals(5500, chromatogram.getScanDelay());
+		assertEquals(5500, chromatogramOverview.getScanDelay());
 	}
 
 	@Test
 	public void testGetScanInterval_1() {
 
-		assertEquals(1500, chromatogram.getScanInterval());
+		assertEquals(1500, chromatogramOverview.getScanInterval());
 	}
 
 	@Test
 	public void testGetNumberOfScans_1() {
 
-		assertEquals(1, chromatogram.getNumberOfScans());
+		assertEquals(1, chromatogramOverview.getNumberOfScans());
 	}
 
 	@Test
 	public void testGetName_1() {
 
-		assertEquals("", chromatogram.getName());
+		assertEquals("", chromatogramOverview.getName());
 	}
 
 	@Test
 	public void testGetFile_1() {
 
-		assertEquals(new File(""), chromatogram.getFile());
+		assertEquals(new File(""), chromatogramOverview.getFile());
 	}
 
 	@Test
 	public void testGetOperator_1() {
 
-		assertEquals("eselmeister", chromatogram.getOperator());
+		assertEquals("eselmeister", chromatogramOverview.getOperator());
 	}
 
 	@Test
 	public void testGetDate_1() {
 
-		assertTrue(chromatogram.getDate() != null);
+		assertTrue(chromatogramOverview.getDate() != null);
 	}
 
 	@Test
 	public void testGetDate_2() {
 
-		assertEquals(date.toString(), chromatogram.getDate().toString());
+		assertEquals(date.toString(), chromatogramOverview.getDate().toString());
 	}
 
 	@Test
 	public void testGetMiscInfo_1() {
 
-		assertEquals("This is a test chromatogram.", chromatogram.getMiscInfo());
+		assertEquals("This is a test chromatogram.", chromatogramOverview.getMiscInfo());
 	}
 
 	@Test
@@ -153,6 +151,6 @@ public class ChromatogramOverview_2_Test {
 	@Test
 	public void testGetTotalIonSignal_1() {
 
-		assertEquals(470746.9f, chromatogram.getTotalSignal(), 0);
+		assertEquals(470746.9f, chromatogramOverview.getTotalSignal(), 0);
 	}
 }

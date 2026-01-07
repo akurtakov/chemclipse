@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,17 +26,15 @@ import org.junit.jupiter.api.Test;
 public class MacWineSupport_DOSDEVICES_1_ITest extends AbstractBackgroundTestCase {
 
 	private IExtendedRuntimeSupport runtimeSupport;
-	private String nistApplication;
 	private String nistApplicationPath;
-	private File testfileNistApplication;
 
 	@Override
 	@BeforeAll
 	public void setUp() throws FileNotFoundException {
 
 		super.setUp();
-		nistApplication = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_WINE_DOSDEVICES_NIST_APPLICATION);
-		testfileNistApplication = new File(nistApplication);
+		String nistApplication = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_WINE_DOSDEVICES_NIST_APPLICATION);
+		File testfileNistApplication = new File(nistApplication);
 		nistApplicationPath = testfileNistApplication.getParent();
 		runtimeSupport = new MacWineSupport(testfileNistApplication.getParentFile(), parameterBackground);
 	}

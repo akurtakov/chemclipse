@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,13 +27,12 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class ChromatogramFilterSupport_1_Test {
 
 	private ChromatogramFilterSupportCSD support;
-	private ChromatogramFilterSupplierCSD supplier;
 
 	@BeforeAll
 	public void setUp() {
 
 		support = new ChromatogramFilterSupportCSD();
-		supplier = new ChromatogramFilterSupplierCSD();
+		ChromatogramFilterSupplierCSD supplier = new ChromatogramFilterSupplierCSD();
 		supplier.setId("net.first.supplier");
 		supplier.setDescription("Filter Description");
 		supplier.setFilterName("Test Filter Name");

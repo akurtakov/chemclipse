@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,16 +27,14 @@ public class MacWineSupport_DRIVE_1_ITest extends AbstractBackgroundTestCase {
 
 	private IExtendedRuntimeSupport runtimeSupport;
 	private String nistApplicationPath;
-	private String nistApplication;
-	private File testfileNistApplication;
 
 	@Override
 	@BeforeAll
 	public void setUp() throws FileNotFoundException {
 
 		super.setUp();
-		nistApplication = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_WINE_DRIVE_NIST_APPLICATION);
-		testfileNistApplication = new File(nistApplication);
+		String nistApplication = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_WINE_DRIVE_NIST_APPLICATION);
+		File testfileNistApplication = new File(nistApplication);
 		nistApplicationPath = testfileNistApplication.getParent();
 		runtimeSupport = new MacWineSupport(testfileNistApplication.getParentFile(), parameterBackground);
 	}

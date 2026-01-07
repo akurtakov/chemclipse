@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -38,7 +38,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class PeakBuilder_15_Test extends PeakBuilderExtendedTestCase {
 
 	private IChromatogramPeakMSD peak;
-	private IBackgroundAbundanceRange backgroundAbundanceRange;
 
 	@Override
 	@BeforeAll
@@ -51,7 +50,7 @@ public class PeakBuilder_15_Test extends PeakBuilderExtendedTestCase {
 		 * of the peak mass spectrum, we need to subtract the background and set
 		 * the peak to the real height.
 		 */
-		backgroundAbundanceRange = new BackgroundAbundanceRange(145.48741f, 0);
+		IBackgroundAbundanceRange backgroundAbundanceRange = new BackgroundAbundanceRange(145.48741f, 0);
 		peakMassSpectrum.adjustTotalSignal(5168.65f); // 5231.0f - 62.35f
 														// (background at
 														// retention time x =

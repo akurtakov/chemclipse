@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -50,7 +50,6 @@ import org.eclipse.swt.widgets.Label;
 
 public class ExtendedScanBrowseUI extends Composite implements IExtendedPartUI {
 
-	private Composite toolbarInfo;
 	private Label labelInfo;
 
 	private Button buttonPreviousScan;
@@ -112,7 +111,7 @@ public class ExtendedScanBrowseUI extends Composite implements IExtendedPartUI {
 		composite.setLayout(layout);
 
 		createToolbarMain(composite);
-		toolbarInfo = createToolbarInfo(composite);
+		Composite toolbarInfo = createToolbarInfo(composite);
 		scanChartUI = createScanChart(composite);
 
 		PartSupport.setCompositeVisibility(toolbarInfo, true);

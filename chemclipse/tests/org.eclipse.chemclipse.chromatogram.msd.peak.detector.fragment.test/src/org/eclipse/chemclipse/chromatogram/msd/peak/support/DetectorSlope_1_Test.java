@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.DetectorSlope;
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.IDetectorSlope;
-import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -31,15 +30,13 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class DetectorSlope_1_Test {
 
 	private IDetectorSlope slope;
-	private IPoint p1, p2;
-	private int retentionTime;
 
 	@BeforeAll
 	public void setUp() {
 
-		p1 = new Point(5.0d, 10.0d);
-		p2 = new Point(7.0d, 3.0d);
-		retentionTime = 57000;
+		Point p1 = new Point(5.0d, 10.0d);
+		Point p2 = new Point(7.0d, 3.0d);
+		int retentionTime = 57000;
 		slope = new DetectorSlope(p1, p2, retentionTime);
 	}
 

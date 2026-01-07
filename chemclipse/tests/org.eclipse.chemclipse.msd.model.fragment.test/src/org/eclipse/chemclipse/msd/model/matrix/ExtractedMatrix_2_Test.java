@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -29,10 +29,7 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class ExtractedMatrix_2_Test {
 
-	private IScanMSD supplierMassSpectrum;
-	private IIon defaultIon;
 	private IChromatogramMSD chromatogram;
-	private float[][] signalMatrix;
 
 	@BeforeAll
 	public void setUp() {
@@ -45,18 +42,18 @@ public class ExtractedMatrix_2_Test {
 		 */
 		chromatogram = new ChromatogramMSD();
 		for(int scan = 1; scan <= scans; scan++) {
-			supplierMassSpectrum = new ScanMSD();
+			IScanMSD supplierMassSpectrum = new ScanMSD();
 			supplierMassSpectrum.setRetentionTime(scan);
 			supplierMassSpectrum.setRetentionIndex(scan / 60.0f);
 			for(int ion = ionStart; ion <= ionStop; ion++) {
-				defaultIon = new Ion(ion, ion * scan);
+				IIon defaultIon = new Ion(ion, ion * scan);
 				if(ion != 28) {
 					supplierMassSpectrum.addIon(defaultIon);
 				}
 			}
 			chromatogram.addScan(supplierMassSpectrum);
 		}
-		signalMatrix = new float[10][6];
+		float[][] signalMatrix = new float[10][6];
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 6; j++) {
 				signalMatrix[i][j] = 10.1f;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,13 +28,11 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class NoiseSegment_1_Test {
 
 	private INoiseSegmentMSD noiseSegment;
-	private IAnalysisSegment analysisSegment;
-	private ICombinedMassSpectrum noiseMassSpectrum;
 
 	@BeforeAll
 	public void setUp() {
 
-		analysisSegment = new AnalysisSegment(20, 200) {
+		IAnalysisSegment analysisSegment = new AnalysisSegment(20, 200) {
 
 			@Override
 			public int getStartRetentionTime() {
@@ -48,7 +46,7 @@ public class NoiseSegment_1_Test {
 				return 0;
 			}
 		};
-		noiseMassSpectrum = new CombinedMassSpectrum();
+		ICombinedMassSpectrum noiseMassSpectrum = new CombinedMassSpectrum();
 		noiseSegment = new NoiseSegmentMSD(analysisSegment, noiseMassSpectrum);
 	}
 

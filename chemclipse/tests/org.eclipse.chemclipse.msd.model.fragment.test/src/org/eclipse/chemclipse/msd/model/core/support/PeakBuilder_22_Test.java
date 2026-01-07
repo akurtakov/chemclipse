@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -36,7 +36,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class PeakBuilder_22_Test {
 
 	private ITotalScanSignals totalIonSignals;
-	private ITotalScanSignal totalIonSignal;
 	private IScanRange scanRange;
 	private IBackgroundAbundanceRange backgroundAbundanceRange;
 	private IBackgroundAbundanceRange correctedBackground;
@@ -47,7 +46,7 @@ public class PeakBuilder_22_Test {
 		totalIonSignals = new TotalScanSignals(20, 30);
 		scanRange = new ScanRange(20, 30);
 		for(int scan = 20; scan <= 30; scan++) {
-			totalIonSignal = new TotalScanSignal(scan * 10, 0.0f, 1000.0f);
+			ITotalScanSignal totalIonSignal = new TotalScanSignal(scan * 10, 0.0f, 1000.0f);
 			totalIonSignals.add(totalIonSignal);
 		}
 	}

@@ -33,7 +33,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class EditHistory_1_Test {
 
 	private IEditHistory editHistory;
-	private IEditInformation editInformation;
 	private static final String entry1 = "I have modified the chromatogram.";
 	private static final String entry2 = "Me too.";
 	private static final String entry3 = "What are we doing now?";
@@ -49,7 +48,7 @@ public class EditHistory_1_Test {
 		 * the three cases. If the date is the same, the objects can't be sorted
 		 * by date.
 		 */
-		editInformation = new EditInformation(entry1);
+		IEditInformation editInformation = new EditInformation(entry1);
 		editHistory.add(editInformation);
 		Thread.sleep(sleepTime);
 		editInformation = new EditInformation(entry2);

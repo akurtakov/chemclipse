@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,7 +26,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class AbstractConverterSupport_5_Test extends AbstractConverterTestCase {
 
-	private IConverterSupportSetter converterSupport;
 	private List<ISupplier> supplier;
 
 	@Override
@@ -34,7 +33,7 @@ public class AbstractConverterSupport_5_Test extends AbstractConverterTestCase {
 	public void setUp() {
 
 		super.setUp();
-		converterSupport = getConverterSupport();
+		IConverterSupportSetter converterSupport = getConverterSupport();
 		supplier = converterSupport.getSupplier();
 	}
 

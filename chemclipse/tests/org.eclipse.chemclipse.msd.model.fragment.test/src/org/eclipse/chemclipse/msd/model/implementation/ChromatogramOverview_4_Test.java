@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.msd.model.implementation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
+import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -26,53 +27,52 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramOverview_4_Test {
 
-	private ChromatogramMSD chrom;
-	private IChromatogramOverview chromatogram;
+	private IChromatogramOverview chromatogramOverview;
 
 	@BeforeAll
 	public void setUp() {
 
-		chrom = new ChromatogramMSD();
-		chromatogram = chrom;
+		IChromatogramMSD chromatogram = new ChromatogramMSD();
+		chromatogramOverview = chromatogram;
 		// There is no mass spectrum added to the chromatogram.
-		chromatogram.setScanDelay(5500);
-		chromatogram.setScanInterval(1500);
-		chromatogram.recalculateRetentionTimes();
+		chromatogramOverview.setScanDelay(5500);
+		chromatogramOverview.setScanInterval(1500);
+		chromatogramOverview.recalculateRetentionTimes();
 	}
 
 	@Test
 	public void testGetScanNumber_1() {
 
-		assertEquals(0, chromatogram.getScanNumber(12736));
+		assertEquals(0, chromatogramOverview.getScanNumber(12736));
 	}
 
 	@Test
 	public void testGetScanNumber_2() {
 
-		assertEquals(0, chromatogram.getScanNumber(5501));
+		assertEquals(0, chromatogramOverview.getScanNumber(5501));
 	}
 
 	@Test
 	public void testGetScanNumber_3() {
 
-		assertEquals(0, chromatogram.getScanNumber(5500));
+		assertEquals(0, chromatogramOverview.getScanNumber(5500));
 	}
 
 	@Test
 	public void testGetScanNumber_4() {
 
-		assertEquals(0, chromatogram.getScanNumber(5499));
+		assertEquals(0, chromatogramOverview.getScanNumber(5499));
 	}
 
 	@Test
 	public void testGetScanNumber_5() {
 
-		assertEquals(0, chromatogram.getScanNumber(0));
+		assertEquals(0, chromatogramOverview.getScanNumber(0));
 	}
 
 	@Test
 	public void testGetScanNumber_6() {
 
-		assertEquals(0, chromatogram.getScanNumber(-1));
+		assertEquals(0, chromatogramOverview.getScanNumber(-1));
 	}
 }

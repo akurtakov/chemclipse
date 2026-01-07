@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,17 +24,14 @@ public class ChromatogramIntegrationResults_2_Test {
 
 	private IChromatogramIntegrationResults results;
 	private IChromatogramIntegrationResult result;
-	private float ion;
-	private double backgroundArea;
-	private double chromatogramArea;
 
 	@BeforeAll
 	public void setUp() {
 
 		results = new ChromatogramIntegrationResults();
-		ion = 18.1f;
-		backgroundArea = 7823090.9d;
-		chromatogramArea = 23938.54d;
+		float ion = 18.1f;
+		double backgroundArea = 7823090.9d;
+		double chromatogramArea = 23938.54d;
 		result = new ChromatogramIntegrationResult(ion, chromatogramArea, backgroundArea);
 		results.add(result);
 	}

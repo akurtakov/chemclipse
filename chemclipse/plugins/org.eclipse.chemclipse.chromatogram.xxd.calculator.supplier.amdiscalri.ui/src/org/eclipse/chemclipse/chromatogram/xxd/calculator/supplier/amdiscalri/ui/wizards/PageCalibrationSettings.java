@@ -46,9 +46,6 @@ public class PageCalibrationSettings extends AbstractExtendedWizardPage {
 	private Text textPathRetentionIndexFile;
 	private Button buttonSelectCalibrationFile;
 
-	private Button buttonMSD;
-	private Button buttonCSD;
-
 	private Button checkBoxUseExistingPeaks;
 
 	public PageCalibrationSettings(RetentionIndexWizardElements wizardElements) {
@@ -197,7 +194,7 @@ public class PageCalibrationSettings extends AbstractExtendedWizardPage {
 
 	private void createButtonMSDField(Composite composite) {
 
-		buttonMSD = new Button(composite, SWT.RADIO);
+		Button buttonMSD = new Button(composite, SWT.RADIO);
 		buttonMSD.setText("MSD (Quadrupole, IonTrap, ...) data");
 		buttonMSD.setSelection(wizardElements.isUseMassSpectrometryData());
 		buttonMSD.setLayoutData(getGridData());
@@ -213,7 +210,7 @@ public class PageCalibrationSettings extends AbstractExtendedWizardPage {
 
 	private void createButtonCSDField(Composite composite) {
 
-		buttonCSD = new Button(composite, SWT.RADIO);
+		Button buttonCSD = new Button(composite, SWT.RADIO);
 		buttonCSD.setText("CSD (FID, ECD, ...) data");
 		buttonCSD.setSelection(!wizardElements.isUseMassSpectrometryData());
 		buttonCSD.setLayoutData(getGridData());

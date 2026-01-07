@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,7 +25,6 @@ import org.junit.jupiter.api.Test;
 
 public class CosineMassSpectrumComparator_7_Test extends MassSpectrumSetTestCase {
 
-	private CosineComparator comparator;
 	private IProcessingInfo<IComparisonResult> processingInfo;
 	private IComparisonResult result;
 
@@ -38,7 +37,7 @@ public class CosineMassSpectrumComparator_7_Test extends MassSpectrumSetTestCase
 		IScanMSD unknown = problemB1.getMassSpectrum();
 		IScanMSD reference = problemB2.getMassSpectrum();
 
-		comparator = new CosineComparator();
+		CosineComparator comparator = new CosineComparator();
 		processingInfo = comparator.compare(unknown, reference, new MatchConstraints());
 		result = processingInfo.getProcessingResult();
 	}

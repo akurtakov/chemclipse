@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,8 +26,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class NistResultFileParser_2_Test {
 
-	private NistResultFileParser nistResultFileParser;
-	private File results;
 	private Compounds compounds;
 	private Compound compound;
 	private Hit hit;
@@ -35,8 +33,8 @@ public class NistResultFileParser_2_Test {
 	@BeforeAll
 	public void setUp() {
 
-		nistResultFileParser = new NistResultFileParser();
-		results = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_NIST_SRCRESLT_2));
+		NistResultFileParser nistResultFileParser = new NistResultFileParser();
+		File results = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_NIST_SRCRESLT_2));
 		compounds = nistResultFileParser.getCompounds(results);
 	}
 

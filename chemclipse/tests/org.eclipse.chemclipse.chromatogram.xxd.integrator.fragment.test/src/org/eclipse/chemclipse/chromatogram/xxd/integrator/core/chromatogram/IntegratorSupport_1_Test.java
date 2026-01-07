@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,13 +27,12 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class IntegratorSupport_1_Test {
 
 	private ChromatogramIntegratorSupport support;
-	private ChromatogramIntegratorSupplier supplier;
 
 	@BeforeAll
 	public void setUp() {
 
 		support = new ChromatogramIntegratorSupport();
-		supplier = new ChromatogramIntegratorSupplier();
+		ChromatogramIntegratorSupplier supplier = new ChromatogramIntegratorSupplier();
 		supplier.setId("net.first.supplier");
 		supplier.setDescription("Integrator Description");
 		supplier.setIntegratorName("Test Integrator Name");

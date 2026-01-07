@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,18 +25,14 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class Segment_3_Test {
 
 	private ISegment segment;
-	private IPoint p1;
-	private IPoint p2;
-	private IPoint p3;
-	private IPoint p4;
 
 	@BeforeAll
 	public void setUp() {
 
-		p1 = new Point(1, 2);
-		p2 = new Point(10, 20);
-		p3 = new Point(100, 200);
-		p4 = new Point(1000, 2000);
+		IPoint p1 = new Point(1, 2);
+		IPoint p2 = new Point(10, 20);
+		IPoint p3 = new Point(100, 200);
+		IPoint p4 = new Point(1000, 2000);
 		segment = new Segment(p1, p2, p3, p4);
 	}
 

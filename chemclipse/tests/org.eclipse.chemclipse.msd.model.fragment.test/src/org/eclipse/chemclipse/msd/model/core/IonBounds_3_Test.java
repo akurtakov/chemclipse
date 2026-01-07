@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,14 +24,12 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class IonBounds_3_Test {
 
 	private IIonBounds ionBounds;
-	private Ion ion1;
-	private Ion ion2;
 
 	@BeforeAll
 	public void setUp() {
 
-		ion1 = new Ion(25.5f, 3452.4f);
-		ion2 = new Ion(27.2f, 4785.6f);
+		IIon ion1 = new Ion(25.5f, 3452.4f);
+		IIon ion2 = new Ion(27.2f, 4785.6f);
 		ionBounds = new IonBounds(ion1, ion2);
 	}
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -36,8 +36,6 @@ public class TrapezoidIntegrator_1_ITest extends ChromatogramImportTestCase {
 
 	private CombinedIntegrator integrator;
 	private ICombinedIntegrationSettings combinedIntegrationSettings;
-	private ChromatogramIntegrationSettings chromatogramIntegrationSettings;
-	private PeakIntegrationSettings peakIntegrationSettings;
 
 	@Override
 	@BeforeAll
@@ -46,8 +44,8 @@ public class TrapezoidIntegrator_1_ITest extends ChromatogramImportTestCase {
 		chromatogramRelativePath = TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1;
 		super.setUp();
 		integrator = new CombinedIntegrator();
-		chromatogramIntegrationSettings = new ChromatogramIntegrationSettings();
-		peakIntegrationSettings = new PeakIntegrationSettings();
+		ChromatogramIntegrationSettings chromatogramIntegrationSettings = new ChromatogramIntegrationSettings();
+		PeakIntegrationSettings peakIntegrationSettings = new PeakIntegrationSettings();
 		combinedIntegrationSettings = new CombinedIntegrationSettings(chromatogramIntegrationSettings, peakIntegrationSettings);
 	}
 

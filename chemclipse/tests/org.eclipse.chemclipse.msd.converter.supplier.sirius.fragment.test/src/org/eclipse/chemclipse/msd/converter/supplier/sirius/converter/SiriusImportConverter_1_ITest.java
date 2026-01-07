@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -29,15 +29,13 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class SiriusImportConverter_1_ITest {
 
-	private SiriusImportConverter converter;
-	private File file;
 	private IMassSpectra massSpectra;
 
 	@BeforeAll
 	public void setUp() {
 
-		file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_BICUCULLINE));
-		converter = new SiriusImportConverter();
+		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_BICUCULLINE));
+		SiriusImportConverter converter = new SiriusImportConverter();
 		IProcessingInfo<IMassSpectra> processingInfo = converter.convert(file, new NullProgressMonitor());
 		massSpectra = processingInfo.getProcessingResult();
 	}

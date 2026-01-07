@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,14 +28,13 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class BaselineModel_6_Test {
 
-	private IChromatogramMSD chromatogram;
 	private IBaselineModel baselineModel;
 	private IBaselineModel baselineModelCopy;
 
 	@BeforeAll
 	public void setUp() {
 
-		chromatogram = EasyMock.createMock(IChromatogramMSD.class);
+		IChromatogramMSD chromatogram = EasyMock.createMock(IChromatogramMSD.class);
 		EasyMock.expect(chromatogram.getStartRetentionTime()).andStubReturn(1000);
 		EasyMock.expect(chromatogram.getStopRetentionTime()).andStubReturn(100000);
 		EasyMock.replay(chromatogram);

@@ -55,7 +55,6 @@ public class BatchProcessEditor extends MultiPageEditorPart {
 	/*
 	 * Pages.
 	 */
-	private BatchProcessEditorPage batchProcessEditorPage;
 	private List<IMultiEditorPage> pages = new ArrayList<>();
 	/*
 	 * Indices of the pages.
@@ -232,7 +231,7 @@ public class BatchProcessEditor extends MultiPageEditorPart {
 	 */
 	private void createPeakIdentificationBatchProcessEditorPage() {
 
-		batchProcessEditorPage = new BatchProcessEditorPage(this, getContainer());
+		BatchProcessEditorPage batchProcessEditorPage = new BatchProcessEditorPage(this, getContainer());
 		pages.add(batchProcessEditorPage);
 		pagesMap.put(BATCHPROCESS_EDITOR_PAGE, batchProcessEditorPage.getPageIndex());
 		setPageText(pagesMap.get(BATCHPROCESS_EDITOR_PAGE), "Peak Identification Batch Editor");

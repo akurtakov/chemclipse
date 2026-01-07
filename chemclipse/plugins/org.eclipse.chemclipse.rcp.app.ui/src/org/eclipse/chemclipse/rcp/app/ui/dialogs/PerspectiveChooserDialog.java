@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -33,7 +33,6 @@ public class PerspectiveChooserDialog extends Dialog {
 
 	private String title = "";
 	private String message = "";
-	private Label messageLabel;
 	private Button changePerspectiveAutomatically;
 	private IPreferenceStore preferenceStore;
 	private String preferenceKey;
@@ -109,7 +108,7 @@ public class PerspectiveChooserDialog extends Dialog {
 			GridData layoutData = new GridData(GridData.GRAB_HORIZONTAL | GridData.GRAB_VERTICAL | GridData.HORIZONTAL_ALIGN_FILL | GridData.VERTICAL_ALIGN_CENTER);
 			layoutData.widthHint = convertHorizontalDLUsToPixels(IDialogConstants.MINIMUM_MESSAGE_AREA_WIDTH);
 			layoutData.minimumHeight = 100;
-			messageLabel = new Label(parent, SWT.WRAP);
+			Label messageLabel = new Label(parent, SWT.WRAP);
 			messageLabel.setLayoutData(layoutData);
 			messageLabel.setText(message);
 			messageLabel.setFont(parent.getFont());

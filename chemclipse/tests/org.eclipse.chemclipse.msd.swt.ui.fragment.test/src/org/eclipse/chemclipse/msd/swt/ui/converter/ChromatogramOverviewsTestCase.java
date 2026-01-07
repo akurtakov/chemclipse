@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,7 +28,6 @@ public class ChromatogramOverviewsTestCase {
 
 	private IChromatogramMSD chromatogram1;
 	private IChromatogramMSD chromatogram2;
-	private IScanMSD massSpectrum;
 
 	@BeforeAll
 	public void setUp() {
@@ -39,7 +38,7 @@ public class ChromatogramOverviewsTestCase {
 		chromatogram1.setScanInterval(1000);
 		// Scan RT - Abundance
 		// 5000 - 22000
-		massSpectrum = new ScanMSD();
+		IScanMSD massSpectrum = new ScanMSD();
 		massSpectrum.addIon(new Ion(IIon.TIC_ION, 22000));
 		chromatogram1.addScan(massSpectrum);
 		// 6000 - 66200

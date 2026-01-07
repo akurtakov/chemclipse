@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,7 +25,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class PeakMassSpectrum_6_Test {
 
-	private IIon ion;
 	private IPeakMassSpectrum peakMassSpectrum;
 	private IPeakMassSpectrum peakMassSpectrumShifted;
 
@@ -36,7 +35,7 @@ public class PeakMassSpectrum_6_Test {
 		 * The total signal of the mass spectrum is 6514141.6f.
 		 */
 		peakMassSpectrum = new PeakMassSpectrum();
-		ion = new Ion(45.5f, 64830.4f);
+		IIon ion = new Ion(45.5f, 64830.4f);
 		peakMassSpectrum.addIon(ion);
 		ion = new Ion(78.5f, 4440.4f);
 		peakMassSpectrum.addIon(ion);

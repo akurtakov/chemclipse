@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -32,8 +32,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class Chromatogram_13_Test {
 
 	private ChromatogramMSD chromatogram;
-	private IScanMSD supplierMassSpectrum;
-	private IIon ion;
 	private ITotalScanSignalExtractor totalIonSignalExtractor;
 
 	@BeforeAll
@@ -42,9 +40,9 @@ public class Chromatogram_13_Test {
 		chromatogram = new ChromatogramMSD();
 		// ------------------------------Scan 1
 		for(int i = 1; i <= 1; i++) {
-			supplierMassSpectrum = new ScanMSD();
+			IScanMSD supplierMassSpectrum = new ScanMSD();
 			supplierMassSpectrum.setRetentionTime(i);
-			ion = new Ion(IIon.TIC_ION, i);
+			IIon ion = new Ion(IIon.TIC_ION, i);
 			supplierMassSpectrum.addIon(ion);
 			chromatogram.addScan(supplierMassSpectrum);
 		}

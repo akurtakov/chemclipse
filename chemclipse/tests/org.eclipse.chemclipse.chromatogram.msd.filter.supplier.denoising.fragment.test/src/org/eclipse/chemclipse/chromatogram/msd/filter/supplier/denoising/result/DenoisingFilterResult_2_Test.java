@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -30,12 +30,11 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class DenoisingFilterResult_2_Test {
 
 	private IDenoisingFilterResult result;
-	private List<ICombinedMassSpectrum> noiseMassSpectra;
 
 	@BeforeAll
 	public void setUp() {
 
-		noiseMassSpectra = new ArrayList<>();
+		List<ICombinedMassSpectrum> noiseMassSpectra = new ArrayList<>();
 		noiseMassSpectra.add(new CombinedMassSpectrum());
 		result = new DenoisingFilterResult(ResultStatus.OK, "The result status is ok.", noiseMassSpectra);
 	}

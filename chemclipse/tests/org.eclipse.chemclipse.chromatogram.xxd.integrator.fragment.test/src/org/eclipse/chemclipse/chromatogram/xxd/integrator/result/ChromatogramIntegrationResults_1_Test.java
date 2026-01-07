@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,20 +23,16 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class ChromatogramIntegrationResults_1_Test {
 
 	private IChromatogramIntegrationResults results;
-	private IChromatogramIntegrationResult result;
-	private float ion;
-	private double backgroundArea;
-	private double chromatogramArea;
 
 	@BeforeAll
 	public void setUp() {
 
 		results = new ChromatogramIntegrationResults();
 
-		ion = 28.2f;
-		backgroundArea = 10020993.34d;
-		chromatogramArea = 289839830.483d;
-		result = new ChromatogramIntegrationResult(ion, chromatogramArea, backgroundArea);
+		float ion = 28.2f;
+		double backgroundArea = 10020993.34d;
+		double chromatogramArea = 289839830.483d;
+		IChromatogramIntegrationResult result = new ChromatogramIntegrationResult(ion, chromatogramArea, backgroundArea);
 		results.add(result);
 
 		ion = 42.5f;
