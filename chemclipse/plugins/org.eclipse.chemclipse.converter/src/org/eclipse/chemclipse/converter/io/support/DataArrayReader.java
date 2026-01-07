@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,12 +13,11 @@
 package org.eclipse.chemclipse.converter.io.support;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class DataArrayReader extends AbstractArrayReader implements IDataArrayReader {
 
-	public DataArrayReader(File file) throws FileNotFoundException, IOException {
+	public DataArrayReader(File file) throws IOException {
 
 		super(file);
 	}

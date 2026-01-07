@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -54,7 +54,7 @@ public class SettingsWizard extends Wizard {
 	 * @return <code>true</code> if user has confirmed, <code>false</code> otherwise
 	 * @throws IOException
 	 */
-	public static <T> boolean openEditPreferencesWizard(Shell shell, IProcessorPreferences<T> preferences, boolean showProfileToolbar) throws IOException {
+	public static <T> boolean openEditPreferencesWizard(Shell shell, IProcessorPreferences<T> preferences, boolean showProfileToolbar) {
 
 		IProcessSupplier<T> processorSupplier = preferences.getSupplier();
 		SettingsWizard settingsWizard = new SettingsWizard(ExtensionMessages.editProcessorOptions);

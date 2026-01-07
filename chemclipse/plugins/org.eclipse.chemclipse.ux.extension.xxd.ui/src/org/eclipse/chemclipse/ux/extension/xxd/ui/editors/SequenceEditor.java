@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,13 +13,9 @@
 package org.eclipse.chemclipse.ux.extension.xxd.ui.editors;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
-import org.eclipse.chemclipse.converter.exceptions.FileIsEmptyException;
-import org.eclipse.chemclipse.converter.exceptions.FileIsNotReadableException;
-import org.eclipse.chemclipse.converter.exceptions.NoChromatogramConverterAvailableException;
 import org.eclipse.chemclipse.converter.model.reports.ISequence;
 import org.eclipse.chemclipse.converter.model.reports.ISequenceRecord;
 import org.eclipse.chemclipse.logging.core.Logger;
@@ -135,7 +131,7 @@ public class SequenceEditor {
 		return sequence;
 	}
 
-	private synchronized ISequence<? extends ISequenceRecord> loadSequence(File file, boolean batch) throws FileNotFoundException, NoChromatogramConverterAvailableException, FileIsNotReadableException, FileIsEmptyException, ChromatogramIsNullException {
+	private synchronized ISequence<? extends ISequenceRecord> loadSequence(File file, boolean batch) throws ChromatogramIsNullException {
 
 		ISequence<? extends ISequenceRecord> sequence = null;
 		ProgressMonitorDialog dialog = new ProgressMonitorDialog(DisplayUtils.getShell());

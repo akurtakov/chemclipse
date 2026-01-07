@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,7 +15,6 @@ package org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentificat
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -40,14 +39,12 @@ import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentificati
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.model.PeakInputEntry;
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.model.PeakIntegrationEntry;
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.model.PeakOutputEntry;
-import org.eclipse.chemclipse.converter.exceptions.FileIsEmptyException;
-import org.eclipse.chemclipse.converter.exceptions.FileIsNotReadableException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public class PeakIdentificationBatchJobReader implements IPeakIdentificationBatchJobReader {
 
 	@Override
-	public IPeakIdentificationBatchJob read(File file, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotReadableException, FileIsEmptyException, IOException {
+	public IPeakIdentificationBatchJob read(File file, IProgressMonitor monitor) throws IOException {
 
 		IPeakIdentificationBatchJob batchJob = new PeakIdentificationBatchJob(file.getName());
 		try {

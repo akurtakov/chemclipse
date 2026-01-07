@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -64,7 +64,7 @@ public class FluorescenceSpectrumFileSupport {
 	 * @param spectrum
 	 * @throws NoConverterAvailableException
 	 */
-	public static void saveSpectrum(Shell shell, ISpectrumFSD spectrum, String fileName) throws NoConverterAvailableException {
+	public static void saveSpectrum(Shell shell, ISpectrumFSD spectrum, String fileName) {
 
 		if(spectrum == null) {
 			return;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,10 +12,6 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.io;
 
-import java.io.IOException;
-
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.model.xml.v1.BlastOutput;
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.model.xml.v1.Hit;
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.model.xml.v1.Hsp;
@@ -25,13 +21,10 @@ import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.identifier.LibraryInformation;
 import org.eclipse.chemclipse.model.implementation.IdentificationTarget;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
-import org.xml.sax.SAXException;
-
-import jakarta.xml.bind.JAXBException;
 
 public abstract class AbstractNucleotideBLAST {
 
-	public static void transferTargets(IChromatogramWSD chromatogram, BlastOutput blastOutput) throws SAXException, IOException, JAXBException, ParserConfigurationException {
+	public static void transferTargets(IChromatogramWSD chromatogram, BlastOutput blastOutput) {
 
 		for(Iteration iteration : blastOutput.getIterations().getIteration()) {
 			for(Hit hit : iteration.getHits().getHit()) {

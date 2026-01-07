@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -30,7 +30,7 @@ public class ChromatogramOverview_4_Test {
 	private IChromatogramOverview chromatogram;
 
 	@BeforeAll
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		chrom = new ChromatogramMSD();
 		chromatogram = chrom;

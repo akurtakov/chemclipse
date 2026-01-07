@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,7 +20,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.ChromatogramFilterResul
 import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResult;
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.exceptions.FilterException;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.settings.FilterSettingsRemover;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.settings.FilterSettingsScanClipper;
@@ -40,22 +39,18 @@ public class FilterScanClipper extends AbstractChromatogramFilter {
 
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = validate(chromatogramSelection, chromatogramFilterSettings);
 		if(!processingInfo.hasErrorMessages()) {
-			try {
-				if(chromatogramFilterSettings instanceof FilterSettingsScanClipper settings) {
-					/*
-					 * Run
-					 */
-					applyScanClipperFilter(chromatogramSelection, settings.getScanNumberPattern(), monitor);
-					/*
-					 * Result
-					 */
-					String message = "Scans have been clipped successfully.";
-					processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, DESCRIPTION, message));
-					processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, message));
-					chromatogramSelection.getChromatogram().setDirty(true);
-				}
-			} catch(FilterException e) {
-				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.EXCEPTION, e.getMessage()));
+			if(chromatogramFilterSettings instanceof FilterSettingsScanClipper settings) {
+				/*
+				 * Run
+				 */
+				applyScanClipperFilter(chromatogramSelection, settings.getScanNumberPattern(), monitor);
+				/*
+				 * Result
+				 */
+				String message = "Scans have been clipped successfully.";
+				processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, DESCRIPTION, message));
+				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, message));
+				chromatogramSelection.getChromatogram().setDirty(true);
 			}
 		}
 
@@ -69,7 +64,7 @@ public class FilterScanClipper extends AbstractChromatogramFilter {
 		return applyFilter(chromatogramSelection, filterSettings, monitor);
 	}
 
-	private void applyScanClipperFilter(IChromatogramSelection chromatogramSelection, String scanNumberPattern, IProgressMonitor monitor) throws FilterException {
+	private void applyScanClipperFilter(IChromatogramSelection chromatogramSelection, String scanNumberPattern, IProgressMonitor monitor) {
 
 		if(chromatogramSelection != null && scanNumberPattern != null) {
 			/*

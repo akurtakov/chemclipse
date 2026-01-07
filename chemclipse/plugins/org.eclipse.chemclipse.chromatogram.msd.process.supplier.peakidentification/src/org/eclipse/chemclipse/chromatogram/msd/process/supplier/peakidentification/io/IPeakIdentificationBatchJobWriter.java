@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,10 +18,9 @@ import java.io.IOException;
 
 import javax.xml.stream.XMLStreamException;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-
-import org.eclipse.chemclipse.converter.exceptions.FileIsNotWriteableException;
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.model.IPeakIdentificationBatchJob;
+import org.eclipse.chemclipse.converter.exceptions.FileIsNotWriteableException;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 public interface IPeakIdentificationBatchJobWriter {
 
@@ -36,5 +35,5 @@ public interface IPeakIdentificationBatchJobWriter {
 	 * @throws IOException
 	 * @throws XMLStreamException
 	 */
-	void writeBatchProcessJob(File file, IPeakIdentificationBatchJob peakIdentificationBatchJob, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotWriteableException, IOException, XMLStreamException;
+	void writeBatchProcessJob(File file, IPeakIdentificationBatchJob peakIdentificationBatchJob, IProgressMonitor monitor) throws FileIsNotWriteableException, IOException, XMLStreamException;
 }

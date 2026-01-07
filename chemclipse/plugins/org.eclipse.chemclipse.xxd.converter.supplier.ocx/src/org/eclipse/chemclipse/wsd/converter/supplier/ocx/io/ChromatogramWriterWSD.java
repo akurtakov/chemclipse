@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Michael Chang.
+ * Copyright (c) 2015, 2026 Michael Chang.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,7 +15,6 @@
 package org.eclipse.chemclipse.wsd.converter.supplier.ocx.io;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.zip.ZipOutputStream;
 
@@ -41,12 +40,12 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class ChromatogramWriterWSD extends AbstractChromatogramWriter implements IChromatogramWSDZipWriter {
 
 	@Override
-	public void writeChromatogram(File file, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotWriteableException, IOException {
+	public void writeChromatogram(File file, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws FileIsNotWriteableException, IOException {
 
 		writeChromatogram(file, Format.CHROMATOGRAM_VERSION_LATEST, chromatogram, monitor);
 	}
 
-	public void writeChromatogram(File file, String version, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotWriteableException, IOException {
+	public void writeChromatogram(File file, String version, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws FileIsNotWriteableException, IOException {
 
 		IChromatogramWSDZipWriter chromatogramWriter = getChromatogramWriter(chromatogram, version, monitor);
 		chromatogramWriter.writeChromatogram(file, chromatogram, monitor);

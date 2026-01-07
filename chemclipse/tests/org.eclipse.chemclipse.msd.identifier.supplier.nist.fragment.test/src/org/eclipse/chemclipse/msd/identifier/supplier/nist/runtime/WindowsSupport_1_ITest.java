@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.msd.identifier.supplier.nist.PathResolver;
 import org.eclipse.chemclipse.msd.identifier.supplier.nist.TestPathHelper;
@@ -92,7 +91,7 @@ public class WindowsSupport_1_ITest extends AbstractBackgroundTestCase {
 	}
 
 	@Test
-	public void testGetNistApplication_1() throws IOException {
+	public void testGetNistApplication_1() {
 
 		String result = nistApplicationPath + File.separator + "nistms.exe";
 		assertEquals(result, runtimeSupport.getApplication());

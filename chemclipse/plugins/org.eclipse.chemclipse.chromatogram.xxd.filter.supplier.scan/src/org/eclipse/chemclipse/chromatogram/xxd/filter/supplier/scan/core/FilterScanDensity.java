@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,7 +20,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResu
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.calculator.ScanProcessor;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.exceptions.FilterException;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.settings.FilterSettingsScanDensity;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IScan;
@@ -39,24 +38,20 @@ public class FilterScanDensity extends AbstractChromatogramFilter {
 
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = validate(chromatogramSelection, chromatogramFilterSettings);
 		if(!processingInfo.hasErrorMessages()) {
-			try {
-				if(chromatogramFilterSettings instanceof FilterSettingsScanDensity settings) {
-					if(chromatogramSelection != null) {
-						applyScanDensityFilter(chromatogramSelection, settings, monitor);
-						if(settings.isProcessReferencedChromatograms()) {
-							IChromatogram chromatogram = chromatogramSelection.getChromatogram();
-							for(IChromatogram chromatogramReference : chromatogram.getReferencedChromatograms()) {
-								ChromatogramSelection chromatogramSelectionReference = new ChromatogramSelection(chromatogramReference);
-								applyScanDensityFilter(chromatogramSelectionReference, settings, monitor);
-							}
+			if(chromatogramFilterSettings instanceof FilterSettingsScanDensity settings) {
+				if(chromatogramSelection != null) {
+					applyScanDensityFilter(chromatogramSelection, settings, monitor);
+					if(settings.isProcessReferencedChromatograms()) {
+						IChromatogram chromatogram = chromatogramSelection.getChromatogram();
+						for(IChromatogram chromatogramReference : chromatogram.getReferencedChromatograms()) {
+							ChromatogramSelection chromatogramSelectionReference = new ChromatogramSelection(chromatogramReference);
+							applyScanDensityFilter(chromatogramSelectionReference, settings, monitor);
 						}
-						processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, "Scan Density", "The chromatogram has been modified to reach the target scan density."));
-						processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "Scan density calculated successfully."));
-						chromatogramSelection.getChromatogram().setDirty(true);
 					}
+					processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, "Scan Density", "The chromatogram has been modified to reach the target scan density."));
+					processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "Scan density calculated successfully."));
+					chromatogramSelection.getChromatogram().setDirty(true);
 				}
-			} catch(FilterException e) {
-				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.EXCEPTION, e.getMessage()));
 			}
 		}
 		return processingInfo;
@@ -69,7 +64,7 @@ public class FilterScanDensity extends AbstractChromatogramFilter {
 		return applyFilter(chromatogramSelection, filterSettings, monitor);
 	}
 
-	private void applyScanDensityFilter(IChromatogramSelection chromatogramSelection, FilterSettingsScanDensity settings, IProgressMonitor monitor) throws FilterException {
+	private void applyScanDensityFilter(IChromatogramSelection chromatogramSelection, FilterSettingsScanDensity settings, IProgressMonitor monitor) {
 
 		int scanIntervalTarget = Math.round(1000.0f / settings.getScansPerSecond());
 		if(scanIntervalTarget > 0) {

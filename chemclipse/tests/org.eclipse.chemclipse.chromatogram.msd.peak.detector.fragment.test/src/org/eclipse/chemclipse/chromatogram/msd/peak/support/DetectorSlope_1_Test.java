@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -35,7 +35,7 @@ public class DetectorSlope_1_Test {
 	private int retentionTime;
 
 	@BeforeAll
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		p1 = new Point(5.0d, 10.0d);
 		p2 = new Point(7.0d, 3.0d);

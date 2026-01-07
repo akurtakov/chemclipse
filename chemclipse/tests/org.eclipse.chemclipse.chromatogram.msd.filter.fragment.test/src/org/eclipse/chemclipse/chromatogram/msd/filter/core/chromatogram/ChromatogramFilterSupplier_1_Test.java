@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,7 +25,7 @@ public class ChromatogramFilterSupplier_1_Test {
 	private ChromatogramFilterSupplierMSD supplier;
 
 	@BeforeAll
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		supplier = new ChromatogramFilterSupplierMSD();
 		supplier.setId("org.eclipse.chemclipse.test");

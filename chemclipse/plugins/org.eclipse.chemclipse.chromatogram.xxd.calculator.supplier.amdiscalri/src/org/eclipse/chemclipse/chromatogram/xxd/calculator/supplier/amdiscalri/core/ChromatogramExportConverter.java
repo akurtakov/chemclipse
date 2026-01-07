@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.pr
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.settings.IndexExportSettings;
 import org.eclipse.chemclipse.converter.chromatogram.AbstractChromatogramExportConverter;
 import org.eclipse.chemclipse.converter.chromatogram.IChromatogramExportConverter;
-import org.eclipse.chemclipse.converter.exceptions.FileIsNotWriteableException;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -47,9 +46,6 @@ public class ChromatogramExportConverter extends AbstractChromatogramExportConve
 			} catch(IOException e) {
 				logger.warn(e);
 				processingInfo.addErrorMessage(CalibrationFile.DESCRIPTION, "Failed to write file: " + file);
-			} catch(FileIsNotWriteableException e) {
-				logger.warn(e);
-				processingInfo.addErrorMessage(CalibrationFile.DESCRIPTION, "File is not writeable: " + file);
 			}
 		}
 		return processingInfo;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,7 +26,7 @@ public class Chromatogram_25_Test {
 	private IChromatogramMSD chromatogram;
 
 	@BeforeAll
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		chromatogram = new ChromatogramMSD();
 		chromatogram.setIntegratedArea(null, null, "SomeTest");

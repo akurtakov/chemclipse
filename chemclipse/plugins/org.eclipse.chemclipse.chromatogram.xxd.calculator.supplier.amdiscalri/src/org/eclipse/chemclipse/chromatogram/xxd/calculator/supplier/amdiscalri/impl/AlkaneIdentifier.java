@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,7 +14,6 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.impl;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.PathResolver;
@@ -56,7 +55,7 @@ public class AlkaneIdentifier {
 		return PathResolver.getAbsolutePath(PathResolver.ALKANES);
 	}
 
-	public IProcessingInfo<IPeakIdentificationResults> runPeakIdentification(List<? extends IPeakMSD> peaks, PeakIdentifierAlkaneSettings alkaneSettings, IProgressMonitor monitor) throws FileNotFoundException {
+	public IProcessingInfo<IPeakIdentificationResults> runPeakIdentification(List<? extends IPeakMSD> peaks, PeakIdentifierAlkaneSettings alkaneSettings, IProgressMonitor monitor) {
 
 		/*
 		 * Create the file identifier settings.
@@ -71,7 +70,7 @@ public class AlkaneIdentifier {
 		return peakIdentifier.identify(peaks, fileIdentifierSettings, monitor);
 	}
 
-	public IProcessingInfo<IMassSpectra> runIdentification(List<IScanMSD> massSpectraList, MassSpectrumIdentifierAlkaneSettings alkaneSettings, IProgressMonitor monitor) throws FileNotFoundException {
+	public IProcessingInfo<IMassSpectra> runIdentification(List<IScanMSD> massSpectraList, MassSpectrumIdentifierAlkaneSettings alkaneSettings, IProgressMonitor monitor) {
 
 		/*
 		 * Create the file identifier settings.

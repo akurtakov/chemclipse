@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,13 +14,10 @@
 package org.eclipse.chemclipse.msd.converter.supplier.ocx.io;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
-import org.eclipse.chemclipse.converter.exceptions.FileIsEmptyException;
-import org.eclipse.chemclipse.converter.exceptions.FileIsNotReadableException;
 import org.eclipse.chemclipse.csd.converter.supplier.ocx.io.ChromatogramReaderCSD;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.logging.core.Logger;
@@ -226,7 +223,7 @@ public class ChromatogramReaderMSD extends AbstractChromatogramMSDReader impleme
 		return chromatogramReader;
 	}
 
-	private IChromatogramMSD createChromatogramMSDFromFID(double mz, File file, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotReadableException, FileIsEmptyException, IOException {
+	private IChromatogramMSD createChromatogramMSDFromFID(double mz, File file, IProgressMonitor monitor) throws IOException {
 
 		IChromatogramMSD chromatogramMSD = null;
 		/*

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,14 +17,13 @@ import java.io.IOException;
 import org.eclipse.chemclipse.chromatogram.vsd.filter.model.WavenumberSignals;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
 public class WavenumberSignalsDeserializer extends JsonDeserializer<WavenumberSignals> {
 
 	@Override
-	public WavenumberSignals deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+	public WavenumberSignals deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
 
 		WavenumberSignals settings = new WavenumberSignals();
 		settings.load(jsonParser.getText());

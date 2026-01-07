@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,7 +17,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.ChromatogramFilterResul
 import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResult;
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.exceptions.FilterException;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.settings.FilterSettingsDeleteIdentifier;
 import org.eclipse.chemclipse.model.core.IChromatogram;
@@ -36,17 +35,13 @@ public class FilterDeleteIdentifier extends AbstractChromatogramFilter {
 
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = validate(chromatogramSelection, chromatogramFilterSettings);
 		if(!processingInfo.hasErrorMessages()) {
-			try {
-				if(chromatogramFilterSettings instanceof FilterSettingsDeleteIdentifier settings) {
-					if(settings.isDeleteScanIdentifications()) {
-						removeScanIdentifications(chromatogramSelection, monitor);
-						processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, "Delete Scan Targets", "Scan Targets have been removed successfully."));
-						processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "Scan identifications have been removed successfully."));
-						chromatogramSelection.getChromatogram().setDirty(true);
-					}
+			if(chromatogramFilterSettings instanceof FilterSettingsDeleteIdentifier settings) {
+				if(settings.isDeleteScanIdentifications()) {
+					removeScanIdentifications(chromatogramSelection, monitor);
+					processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, "Delete Scan Targets", "Scan Targets have been removed successfully."));
+					processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "Scan identifications have been removed successfully."));
+					chromatogramSelection.getChromatogram().setDirty(true);
 				}
-			} catch(FilterException e) {
-				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.EXCEPTION, e.getMessage()));
 			}
 		}
 		return processingInfo;
@@ -59,7 +54,7 @@ public class FilterDeleteIdentifier extends AbstractChromatogramFilter {
 		return applyFilter(chromatogramSelection, filterSettings, monitor);
 	}
 
-	private void removeScanIdentifications(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) throws FilterException {
+	private void removeScanIdentifications(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
 
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 		int startScan = chromatogram.getScanNumber(chromatogramSelection.getStartRetentionTime());

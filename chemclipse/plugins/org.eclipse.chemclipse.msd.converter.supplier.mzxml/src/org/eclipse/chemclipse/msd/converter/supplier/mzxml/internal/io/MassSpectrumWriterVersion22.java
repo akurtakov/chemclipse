@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -70,7 +70,7 @@ public class MassSpectrumWriterVersion22 implements IMassSpectraWriter {
 		writeMassSpectra(file, massSpectra, monitor);
 	}
 
-	private void writeMassSpectra(File file, IMassSpectra massSpectra, IProgressMonitor monitor) throws IOException {
+	private void writeMassSpectra(File file, IMassSpectra massSpectra, IProgressMonitor monitor) {
 
 		for(int i = 1; i <= massSpectra.size(); i++) {
 			IScanMSD massSpectrum = massSpectra.getMassSpectrum(i);

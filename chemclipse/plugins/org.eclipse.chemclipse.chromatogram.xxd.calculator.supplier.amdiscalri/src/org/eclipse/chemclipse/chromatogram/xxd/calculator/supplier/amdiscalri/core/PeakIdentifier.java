@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,7 +14,6 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.core;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.msd.identifier.peak.AbstractPeakIdentifierMSD;
@@ -34,22 +33,17 @@ public class PeakIdentifier extends AbstractPeakIdentifierMSD {
 	public IProcessingInfo<IPeakIdentificationResults> identify(List<? extends IPeakMSD> peaks, IPeakIdentifierSettingsMSD peakIdentifierSettings, IProgressMonitor monitor) {
 
 		ProcessingInfo<IPeakIdentificationResults> processingInfo = new ProcessingInfo<>();
-		try {
-			AlkaneIdentifier alkaneIdentifier = new AlkaneIdentifier();
-			PeakIdentifierAlkaneSettings alkaneSettings;
-			if(peakIdentifierSettings instanceof PeakIdentifierAlkaneSettings settings) {
-				alkaneSettings = settings;
-			} else {
-				alkaneSettings = PreferenceSupplier.getPeakIdentifierAlkaneSettings();
-			}
-			/*
-			 * Run the identifier.
-			 */
-			processingInfo.addMessages(alkaneIdentifier.runPeakIdentification(peaks, alkaneSettings, monitor));
-
-		} catch(FileNotFoundException e) {
-			processingInfo.addErrorMessage("Alkane Identifier", "Some has gone wrong.", e);
+		AlkaneIdentifier alkaneIdentifier = new AlkaneIdentifier();
+		PeakIdentifierAlkaneSettings alkaneSettings;
+		if(peakIdentifierSettings instanceof PeakIdentifierAlkaneSettings settings) {
+			alkaneSettings = settings;
+		} else {
+			alkaneSettings = PreferenceSupplier.getPeakIdentifierAlkaneSettings();
 		}
+		/*
+		 * Run the identifier.
+		 */
+		processingInfo.addMessages(alkaneIdentifier.runPeakIdentification(peaks, alkaneSettings, monitor));
 
 		return processingInfo;
 	}

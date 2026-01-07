@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,14 +17,13 @@ import java.io.IOException;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.model.RetentionIndexAssigner;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
 public class RetentionIndexAssignerDeserializer extends JsonDeserializer<RetentionIndexAssigner> {
 
 	@Override
-	public RetentionIndexAssigner deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+	public RetentionIndexAssigner deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
 
 		RetentionIndexAssigner retentionIndexAssigner = new RetentionIndexAssigner();
 		retentionIndexAssigner.load(jsonParser.getText());

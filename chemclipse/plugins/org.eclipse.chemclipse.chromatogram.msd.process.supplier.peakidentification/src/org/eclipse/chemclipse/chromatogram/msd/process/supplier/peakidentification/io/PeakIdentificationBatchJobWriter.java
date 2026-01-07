@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,7 +14,6 @@ package org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentificat
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -29,19 +28,18 @@ import javax.xml.stream.events.Comment;
 import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-
-import org.eclipse.chemclipse.converter.exceptions.FileIsNotWriteableException;
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.internal.support.IPeakIdentificationBatchJobTags;
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.model.IPeakIdentificationBatchJob;
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.model.IPeakInputEntry;
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.model.IPeakOutputEntry;
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.model.IPeakProcessEntry;
+import org.eclipse.chemclipse.converter.exceptions.FileIsNotWriteableException;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 public class PeakIdentificationBatchJobWriter implements IPeakIdentificationBatchJobWriter {
 
 	@Override
-	public void writeBatchProcessJob(File file, IPeakIdentificationBatchJob peakIdentificationBatchJob, IProgressMonitor monitor) throws FileNotFoundException, FileIsNotWriteableException, IOException, XMLStreamException {
+	public void writeBatchProcessJob(File file, IPeakIdentificationBatchJob peakIdentificationBatchJob, IProgressMonitor monitor) throws FileIsNotWriteableException, IOException, XMLStreamException {
 
 		XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
 		BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(file));

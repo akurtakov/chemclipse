@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026  Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.ChromatogramFilterResul
 import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResult;
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.exceptions.FilterException;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.model.BufferOption;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.model.BufferedScanTargets;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.settings.FilterSettingsBufferIdentifier;
@@ -47,15 +46,11 @@ public class FilterBufferIdentifier extends AbstractChromatogramFilter {
 
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = validate(chromatogramSelection, chromatogramFilterSettings);
 		if(!processingInfo.hasErrorMessages()) {
-			try {
-				if(chromatogramFilterSettings instanceof FilterSettingsBufferIdentifier settings) {
-					applyProcessor(chromatogramSelection, settings.getBufferOption(), monitor);
-					processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, DESCRIPTION, MESSAGE_SUCCESS));
-					processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, MESSAGE_SUCCESS));
-					chromatogramSelection.getChromatogram().setDirty(true);
-				}
-			} catch(FilterException e) {
-				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.EXCEPTION, e.getMessage()));
+			if(chromatogramFilterSettings instanceof FilterSettingsBufferIdentifier settings) {
+				applyProcessor(chromatogramSelection, settings.getBufferOption(), monitor);
+				processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, DESCRIPTION, MESSAGE_SUCCESS));
+				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, MESSAGE_SUCCESS));
+				chromatogramSelection.getChromatogram().setDirty(true);
 			}
 		}
 		return processingInfo;
@@ -68,7 +63,7 @@ public class FilterBufferIdentifier extends AbstractChromatogramFilter {
 		return applyFilter(chromatogramSelection, settings, monitor);
 	}
 
-	private void applyProcessor(IChromatogramSelection chromatogramSelection, BufferOption bufferOption, IProgressMonitor monitor) throws FilterException {
+	private void applyProcessor(IChromatogramSelection chromatogramSelection, BufferOption bufferOption, IProgressMonitor monitor) {
 
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 		int retentionTimeStart = chromatogramSelection.getStartRetentionTime();
