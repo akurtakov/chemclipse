@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -488,7 +488,7 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 					if(index < evaluation.getSamples().getSamples().size() || index > -1) {
 						List<ISample> samplesHighlighted = evaluation.getHighlightedSamples();
 						List<ISample> highlightedSamples = new ArrayList<>();
-						if(samplesHighlighted.size() < 1) {
+						if(samplesHighlighted.isEmpty()) {
 							highlightedSamples.add(getSampleForPlotIndex(index));
 							UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, highlightedSamples.toArray());
 						} else {
@@ -545,7 +545,7 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 					 */
 					if(index < evaluation.getSamples().getSamples().size() || index > -1) {
 						List<ISample> samplesHighlighted = evaluation.getHighlightedSamples();
-						if(samplesHighlighted.size() < 1) {
+						if(samplesHighlighted.isEmpty()) {
 							samplesHighlighted.add(getSampleForPlotIndex(index));
 							UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, samplesHighlighted.toArray());
 						} else {

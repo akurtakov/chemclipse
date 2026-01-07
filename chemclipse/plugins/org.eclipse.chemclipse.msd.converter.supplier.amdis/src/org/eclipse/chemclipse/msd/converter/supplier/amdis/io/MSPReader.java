@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -174,7 +174,7 @@ public class MSPReader extends AbstractMassSpectraReader implements IMassSpectra
 	private void addMassSpectrumData(int entryNumber, StringBuilder builder, ConcurrentHashMap<Integer, String> massSpectraData) {
 
 		String massSpectrumData;
-		if(builder.length() > 0) {
+		if(!builder.isEmpty()) {
 			massSpectrumData = builder.toString();
 			massSpectraData.put(entryNumber, massSpectrumData);
 		}

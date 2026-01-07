@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -34,7 +34,7 @@ public class CalibrationNameValidator implements IValidator<Object> {
 		} else {
 			if(value instanceof String text) {
 				text = text.trim();
-				if(text.length() < 1) {
+				if(text.isEmpty()) {
 					message = ERROR;
 				} else {
 					this.name = text;

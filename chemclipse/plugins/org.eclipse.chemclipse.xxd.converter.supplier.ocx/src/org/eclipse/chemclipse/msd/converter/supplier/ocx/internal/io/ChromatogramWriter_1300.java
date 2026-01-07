@@ -761,7 +761,7 @@ public class ChromatogramWriter_1300 extends AbstractChromatogramWriter implemen
 		StringBuilder sb = new StringBuilder();
 		if(classifier != null) {
 			for(String c : classifier) {
-				if(sb.length() > 0) {
+				if(!sb.isEmpty()) {
 					sb.append(CLASSIFIER_DELIMITER);
 				}
 				sb.append(c);

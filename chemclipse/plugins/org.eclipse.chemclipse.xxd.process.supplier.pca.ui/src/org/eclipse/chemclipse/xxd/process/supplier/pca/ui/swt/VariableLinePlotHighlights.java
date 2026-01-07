@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -47,7 +47,7 @@ public class VariableLinePlotHighlights extends AbstractBaseChartPaintListener i
 	private void plotHighlights(GC gc) {
 
 		BaseChart baseChart = getBaseChart();
-		if(baseChart.getSeriesIds().size() > 0) {
+		if(!baseChart.getSeriesIds().isEmpty()) {
 			double[] xSeries = baseChart.getSeriesSet().getSeries("main").getXSeries();
 			double[] ySeries = baseChart.getSeriesSet().getSeries("main").getYSeries();
 

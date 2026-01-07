@@ -126,7 +126,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 											feature.getVariable().setVisualSelected(true);
 										}
 										listControl.get().setSelection(new StructuredSelection(features));
-										if(features.size() > 0) {
+										if(!features.isEmpty()) {
 											listControl.get().reveal(features.get(0));
 										}
 									}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -80,7 +80,7 @@ public class MassSpectrumFilter extends AbstractMassSpectrumFilter {
 	private IProcessingInfo<?> validateIons(List<IIon> ions) {
 
 		IProcessingInfo<IMassSpectrumFilterResult> processingInfo = new ProcessingInfo<>();
-		if(ions == null || ions.size() == 0) {
+		if(ions == null || ions.isEmpty()) {
 			processingInfo.addErrorMessage("Normalizer", "There are no signals stored.");
 		}
 		return processingInfo;

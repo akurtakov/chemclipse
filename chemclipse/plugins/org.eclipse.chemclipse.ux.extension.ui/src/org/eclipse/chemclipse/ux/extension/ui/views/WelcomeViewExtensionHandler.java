@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -431,7 +431,7 @@ public class WelcomeViewExtensionHandler {
 
 		StringBuilder sb = new StringBuilder();
 		for(String key : set) {
-			if(sb.length() > 0) {
+			if(!sb.isEmpty()) {
 				sb.append('\t');
 			}
 			sb.append(key);

@@ -167,7 +167,7 @@ public class PageUtil {
 
 		float height = 0.0f;
 		String text = textElement.getText();
-		if(text.length() > 0) {
+		if(!text.isEmpty()) {
 			float textHeight = 0.0f;
 
 			switch(textElement.getTextOption()) {
