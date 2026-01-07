@@ -334,8 +334,8 @@ public class UserLocationsSettingsEditor implements SettingsUIProvider.SettingsU
 
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 				fileDialog.setText("User Locations");
-				fileDialog.setFilterExtensions(new String[]{UserLocations.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{UserLocations.FILTER_NAME});
+				fileDialog.setFilterExtensions(UserLocations.FILTER_EXTENSION);
+				fileDialog.setFilterNames(UserLocations.FILTER_NAME);
 				fileDialog.setFilterPath(PreferenceSupplierDataExplorer.getUserLocationsTemplateFolder());
 				String pathname = fileDialog.open();
 				if(pathname != null) {
@@ -364,8 +364,8 @@ public class UserLocationsSettingsEditor implements SettingsUIProvider.SettingsU
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 				fileDialog.setOverwrite(true);
 				fileDialog.setText("User Locations");
-				fileDialog.setFilterExtensions(new String[]{UserLocations.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{UserLocations.FILTER_NAME});
+				fileDialog.setFilterExtensions(UserLocations.FILTER_EXTENSION);
+				fileDialog.setFilterNames(UserLocations.FILTER_NAME);
 				fileDialog.setFileName(UserLocations.FILE_NAME);
 				fileDialog.setFilterPath(PreferenceSupplierDataExplorer.getUserLocationsTemplateFolder());
 				String pathname = fileDialog.open();

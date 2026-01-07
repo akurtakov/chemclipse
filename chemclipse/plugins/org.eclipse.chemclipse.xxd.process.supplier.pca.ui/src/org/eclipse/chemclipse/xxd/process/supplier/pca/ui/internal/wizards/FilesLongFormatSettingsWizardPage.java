@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -255,8 +255,8 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 				fileDialog.setText("Import");
-				fileDialog.setFilterExtensions(new String[]{PcaExtractionFileLongText.FILTER_EXTENSION + ";"});
-				fileDialog.setFilterNames(new String[]{PcaExtractionFileLongText.FILTER_NAME + ";"});
+				fileDialog.setFilterExtensions(PcaExtractionFileLongText.FILTER_EXTENSION + ";");
+				fileDialog.setFilterNames(PcaExtractionFileLongText.FILTER_NAME + ";");
 				fileDialog.setFilterPath(PreferenceSupplier.getPathImportFile());
 				String path = fileDialog.open();
 				if(path != null) {
@@ -283,8 +283,8 @@ public class FilesLongFormatSettingsWizardPage extends AbstractAnalysisWizardPag
 
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 				fileDialog.setText("Import");
-				fileDialog.setFilterExtensions(new String[]{PcaExtractionFileLongText.FILTER_EXTENSION + ";"});
-				fileDialog.setFilterNames(new String[]{PcaExtractionFileLongText.FILTER_NAME + ";"});
+				fileDialog.setFilterExtensions(PcaExtractionFileLongText.FILTER_EXTENSION + ";");
+				fileDialog.setFilterNames(PcaExtractionFileLongText.FILTER_NAME + ";");
 				fileDialog.setFilterPath(PreferenceSupplier.getPathImportFile());
 				String path = fileDialog.open();
 				if(path != null) {

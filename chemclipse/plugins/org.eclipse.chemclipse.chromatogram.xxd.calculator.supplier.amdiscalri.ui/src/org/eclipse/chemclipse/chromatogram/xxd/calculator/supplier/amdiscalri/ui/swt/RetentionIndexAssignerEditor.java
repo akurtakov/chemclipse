@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -353,8 +353,8 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 				fileDialog.setText(IMPORT_TITLE);
-				fileDialog.setFilterExtensions(new String[]{RetentionIndexAssigner.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{RetentionIndexAssigner.FILTER_NAME});
+				fileDialog.setFilterExtensions(RetentionIndexAssigner.FILTER_EXTENSION);
+				fileDialog.setFilterNames(RetentionIndexAssigner.FILTER_NAME);
 				fileDialog.setFilterPath(PreferenceSupplier.getListPathImportTemplate());
 				String path = fileDialog.open();
 				if(path != null) {
@@ -383,8 +383,8 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 				fileDialog.setOverwrite(true);
 				fileDialog.setText(EXPORT_TITLE);
-				fileDialog.setFilterExtensions(new String[]{RetentionIndexAssigner.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{RetentionIndexAssigner.FILTER_NAME});
+				fileDialog.setFilterExtensions(RetentionIndexAssigner.FILTER_EXTENSION);
+				fileDialog.setFilterNames(RetentionIndexAssigner.FILTER_NAME);
 				fileDialog.setFileName(RetentionIndexAssigner.FILE_NAME);
 				fileDialog.setFilterPath(PreferenceSupplier.getListPathExportTemplate());
 				String path = fileDialog.open();

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -176,7 +176,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static void setRetentionIndexFiles(List<String> retentionIndexFiles) {
 
 		FileListUtil fileListUtil = new FileListUtil();
-		String items[] = retentionIndexFiles.toArray(new String[retentionIndexFiles.size()]);
+		String[] items = retentionIndexFiles.toArray(new String[retentionIndexFiles.size()]);
 		INSTANCE().put(P_RETENTION_INDEX_FILES, fileListUtil.createList(items));
 	}
 

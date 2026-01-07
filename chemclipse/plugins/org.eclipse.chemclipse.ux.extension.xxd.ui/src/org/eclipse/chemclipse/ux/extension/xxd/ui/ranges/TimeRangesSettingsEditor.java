@@ -370,8 +370,8 @@ public class TimeRangesSettingsEditor implements SettingsUIProvider.SettingsUICo
 
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 				fileDialog.setText(timeRangeLabels.getTitle());
-				fileDialog.setFilterExtensions(new String[]{TimeRanges.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{TimeRanges.FILTER_NAME});
+				fileDialog.setFilterExtensions(TimeRanges.FILTER_EXTENSION);
+				fileDialog.setFilterNames(TimeRanges.FILTER_NAME);
 				fileDialog.setFilterPath(preferenceStore.getString(PreferenceSupplier.P_TIME_RANGE_TEMPLATE_FOLDER));
 				String pathname = fileDialog.open();
 				if(pathname != null) {
@@ -401,8 +401,8 @@ public class TimeRangesSettingsEditor implements SettingsUIProvider.SettingsUICo
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 				fileDialog.setOverwrite(true);
 				fileDialog.setText(timeRangeLabels.getTitle());
-				fileDialog.setFilterExtensions(new String[]{TimeRanges.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{TimeRanges.FILTER_NAME});
+				fileDialog.setFilterExtensions(TimeRanges.FILTER_EXTENSION);
+				fileDialog.setFilterNames(TimeRanges.FILTER_NAME);
 				fileDialog.setFileName(TimeRanges.FILE_NAME);
 				fileDialog.setFilterPath(preferenceStore.getString(PreferenceSupplier.P_TIME_RANGE_TEMPLATE_FOLDER));
 				String pathname = fileDialog.open();

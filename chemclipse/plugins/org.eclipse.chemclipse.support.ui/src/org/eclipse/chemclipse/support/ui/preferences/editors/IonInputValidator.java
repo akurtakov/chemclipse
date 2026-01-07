@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -42,7 +42,7 @@ public class IonInputValidator implements IInputValidator {
 		 * otherwise throw a failure description.
 		 */
 		try {
-			String ionList[] = newText.trim().split("-"); //$NON-NLS-1$
+			String[] ionList = newText.trim().split("-"); //$NON-NLS-1$
 			if(ionList.length == 1) {
 				String ion = String.valueOf(Integer.parseInt(ionList[0].trim()));
 				/*

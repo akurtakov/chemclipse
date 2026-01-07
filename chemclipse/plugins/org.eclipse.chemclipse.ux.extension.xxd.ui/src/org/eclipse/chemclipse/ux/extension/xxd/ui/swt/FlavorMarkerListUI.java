@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.FlavorMarker
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.FlavorMarkerLabelProvider;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.FlavorMarkerListFilter;
 import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.widgets.Composite;
 
 public class FlavorMarkerListUI extends ExtendedTableViewer {
@@ -56,7 +55,7 @@ public class FlavorMarkerListUI extends ExtendedTableViewer {
 		setLabelProvider(labelProvider);
 		setContentProvider(new ListContentProvider());
 		setComparator(comparator);
-		setFilters(new ViewerFilter[]{listFilter});
+		setFilters(listFilter);
 		setEditingSupport();
 	}
 

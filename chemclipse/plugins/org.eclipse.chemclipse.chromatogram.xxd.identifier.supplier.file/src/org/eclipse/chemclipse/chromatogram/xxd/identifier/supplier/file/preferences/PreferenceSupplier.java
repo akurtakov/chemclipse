@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -286,7 +286,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static void setMassSpectraFiles(List<String> massSpectraFiles) {
 
 		FileListUtil fileListUtil = new FileListUtil();
-		String items[] = massSpectraFiles.toArray(new String[massSpectraFiles.size()]);
+		String[] items = massSpectraFiles.toArray(new String[massSpectraFiles.size()]);
 		INSTANCE().put(P_MASS_SPECTRA_FILES, fileListUtil.createList(items));
 	}
 

@@ -66,8 +66,8 @@ public class EditorCalibration extends MultiPageEditorPart {
 
 		FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 		fileDialog.setText("Save the *.cal file.");
-		fileDialog.setFilterExtensions(new String[]{"*.cal"});
-		fileDialog.setFilterNames(new String[]{"AMDIS Calibration *.cal"});
+		fileDialog.setFilterExtensions("*.cal");
+		fileDialog.setFilterNames("AMDIS Calibration *.cal");
 		String pathRetentionIndexFile = fileDialog.open();
 		if(pathRetentionIndexFile != null) {
 			File file = new File(pathRetentionIndexFile);

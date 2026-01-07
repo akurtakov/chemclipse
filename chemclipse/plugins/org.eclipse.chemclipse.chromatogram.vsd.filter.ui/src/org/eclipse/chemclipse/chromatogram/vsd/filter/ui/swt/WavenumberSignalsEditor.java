@@ -309,8 +309,8 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 				fileDialog.setText(IMPORT_TITLE);
-				fileDialog.setFilterExtensions(new String[]{WavenumberSignals.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{WavenumberSignals.FILTER_NAME});
+				fileDialog.setFilterExtensions(WavenumberSignals.FILTER_EXTENSION);
+				fileDialog.setFilterNames(WavenumberSignals.FILTER_NAME);
 				fileDialog.setFilterPath(PreferenceSupplier.getListPathImport());
 				String path = fileDialog.open();
 				if(path != null) {
@@ -339,8 +339,8 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 				fileDialog.setOverwrite(true);
 				fileDialog.setText(EXPORT_TITLE);
-				fileDialog.setFilterExtensions(new String[]{WavenumberSignals.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{WavenumberSignals.FILTER_NAME});
+				fileDialog.setFilterExtensions(WavenumberSignals.FILTER_EXTENSION);
+				fileDialog.setFilterNames(WavenumberSignals.FILTER_NAME);
 				fileDialog.setFileName(WavenumberSignals.FILE_NAME);
 				fileDialog.setFilterPath(PreferenceSupplier.getListPathExport());
 				String path = fileDialog.open();

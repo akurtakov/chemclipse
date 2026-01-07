@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -90,8 +90,8 @@ public class CalibrationFileExportProcessSupplier implements IProcessTypeSupplie
 							FileDialog fileDialog = new FileDialog(display.getActiveShell(), SWT.SAVE);
 							fileDialog.setOverwrite(true);
 							fileDialog.setText(CalibrationFile.DESCRIPTION);
-							fileDialog.setFilterExtensions(new String[]{CalibrationFile.FILTER_EXTENSION});
-							fileDialog.setFilterNames(new String[]{CalibrationFile.FILTER_NAME});
+							fileDialog.setFilterExtensions(CalibrationFile.FILTER_EXTENSION);
+							fileDialog.setFilterNames(CalibrationFile.FILTER_NAME);
 							fileDialog.setFileName(fileName);
 							fileDialog.setFilterPath(PreferenceSupplier.getListPathExport());
 							String path = fileDialog.open();

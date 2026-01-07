@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -302,8 +302,8 @@ public class NamedTracesUI extends Composite {
 					IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 					FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 					fileDialog.setText(IMPORT_TITLE);
-					fileDialog.setFilterExtensions(new String[]{NamedTraces.FILTER_EXTENSION});
-					fileDialog.setFilterNames(new String[]{NamedTraces.FILTER_NAME});
+					fileDialog.setFilterExtensions(NamedTraces.FILTER_EXTENSION);
+					fileDialog.setFilterNames(NamedTraces.FILTER_NAME);
 					fileDialog.setFilterPath(preferenceStore.getString(PreferenceSupplier.P_NAMED_TRACES_TEMPLATE_FOLDER));
 					String path = fileDialog.open();
 					if(path != null) {
@@ -337,8 +337,8 @@ public class NamedTracesUI extends Composite {
 					FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 					fileDialog.setOverwrite(true);
 					fileDialog.setText(EXPORT_TITLE);
-					fileDialog.setFilterExtensions(new String[]{NamedTraces.FILTER_EXTENSION});
-					fileDialog.setFilterNames(new String[]{NamedTraces.FILTER_NAME});
+					fileDialog.setFilterExtensions(NamedTraces.FILTER_EXTENSION);
+					fileDialog.setFilterNames(NamedTraces.FILTER_NAME);
 					fileDialog.setFileName(NamedTraces.FILE_NAME);
 					fileDialog.setFilterPath(preferenceStore.getString(PreferenceSupplier.P_NAMED_TRACES_TEMPLATE_FOLDER));
 					String path = fileDialog.open();
@@ -360,7 +360,7 @@ public class NamedTracesUI extends Composite {
 
 	private void updateInput(String identifier) {
 
-		List<Object> input = new ArrayList<Object>();
+		List<Object> input = new ArrayList<>();
 		if(allowNoSelection) {
 			input.add(NO_SELECTION);
 		}

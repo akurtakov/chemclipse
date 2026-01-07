@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -190,7 +190,7 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 		SashForm sashForm = new SashForm(composite, SWT.VERTICAL);
 		createTargetList(sashForm);
 		createDetailsSection(sashForm);
-		sashForm.setWeights(new int[]{1, 1});
+		sashForm.setWeights(1, 1);
 	}
 
 	private void createToolbarInfoTop(Composite parent) {
@@ -326,7 +326,7 @@ public class PageLibrarySearch extends AbstractExtendedWizardPage implements IEx
 		createColumnSection(sashForm);
 		createMoleculeSection(sashForm);
 		createLiteratureSection(sashForm);
-		sashForm.setWeights(new int[]{1, 1, 1, 1});
+		sashForm.setWeights(1, 1, 1, 1);
 	}
 
 	private void createFlavorMarkerSection(Composite parent) {

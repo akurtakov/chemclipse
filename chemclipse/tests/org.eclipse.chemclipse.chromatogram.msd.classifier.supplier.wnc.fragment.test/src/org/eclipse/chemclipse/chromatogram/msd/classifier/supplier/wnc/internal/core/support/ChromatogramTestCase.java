@@ -60,7 +60,7 @@ public class ChromatogramTestCase {
 			try (BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(chromatogramFile), 2048)) {
 				int count;
 				int buffer = 2048;
-				byte data[] = new byte[buffer];
+				byte[] data = new byte[buffer];
 				while((count = zipInputStream.read(data, 0, buffer)) != -1) {
 					bufferedOutputStream.write(data, 0, count);
 				}

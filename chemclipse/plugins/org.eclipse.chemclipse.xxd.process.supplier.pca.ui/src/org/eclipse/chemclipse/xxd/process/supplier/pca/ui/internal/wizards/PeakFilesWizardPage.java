@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -38,7 +38,7 @@ public class PeakFilesWizardPage extends DataInputPageWizard {
 	@Override
 	protected void addFiles() {
 
-		InputWizardSettings inputWizardSettings = InputWizardSettings.create(Activator.getDefault().getPreferenceStore(), PreferenceSupplier.N_INPUT_FILE, new DataType[]{DataType.MSD, DataType.CSD});
+		InputWizardSettings inputWizardSettings = InputWizardSettings.create(Activator.getDefault().getPreferenceStore(), PreferenceSupplier.N_INPUT_FILE, DataType.MSD, DataType.CSD);
 		inputWizardSettings.setTitle("Peak Input Files");
 		inputWizardSettings.setDescription("This wizard lets you select several peak input files.");
 

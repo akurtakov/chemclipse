@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -481,8 +481,8 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 		fileDialog.setOverwrite(true);
 		fileDialog.setText(ExtensionMessages.processMethod);
 		fileDialog.setFileName(MethodConverter.FILE_NAME);
-		fileDialog.setFilterExtensions(new String[]{MethodConverter.FILTER_EXTENSION});
-		fileDialog.setFilterNames(new String[]{MethodConverter.FILTER_NAME});
+		fileDialog.setFilterExtensions(MethodConverter.FILTER_EXTENSION);
+		fileDialog.setFilterNames(MethodConverter.FILTER_NAME);
 		fileDialog.setFilterPath(MethodConverter.getUserMethodDirectory().getAbsolutePath());
 
 		File file = null;

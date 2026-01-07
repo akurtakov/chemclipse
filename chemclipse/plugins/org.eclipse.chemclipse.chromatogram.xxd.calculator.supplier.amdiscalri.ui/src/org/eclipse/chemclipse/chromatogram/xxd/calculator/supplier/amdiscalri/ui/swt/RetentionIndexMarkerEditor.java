@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -345,8 +345,8 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 				fileDialog.setText(IMPORT_TITLE_FILE);
-				fileDialog.setFilterExtensions(new String[]{CalibrationFile.FILTER_EXTENSION + ";" + CalibrationFile.FILTER_EXTENSION.toUpperCase()});
-				fileDialog.setFilterNames(new String[]{CalibrationFile.FILTER_NAME});
+				fileDialog.setFilterExtensions(CalibrationFile.FILTER_EXTENSION + ";" + CalibrationFile.FILTER_EXTENSION.toUpperCase());
+				fileDialog.setFilterNames(CalibrationFile.FILTER_NAME);
 				/*
 				 * Import *.cal files from a specified directory.
 				 */
@@ -469,8 +469,8 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 				fileDialog.setText(IMPORT_TITLE);
-				fileDialog.setFilterExtensions(new String[]{RetentionIndexMarker.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{RetentionIndexMarker.FILTER_NAME});
+				fileDialog.setFilterExtensions(RetentionIndexMarker.FILTER_EXTENSION);
+				fileDialog.setFilterNames(RetentionIndexMarker.FILTER_NAME);
 				fileDialog.setFilterPath(PreferenceSupplier.getListPathImportTemplate());
 				String path = fileDialog.open();
 				if(path != null) {
@@ -499,8 +499,8 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 				fileDialog.setOverwrite(true);
 				fileDialog.setText(EXPORT_TITLE);
-				fileDialog.setFilterExtensions(new String[]{RetentionIndexMarker.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{RetentionIndexMarker.FILTER_NAME});
+				fileDialog.setFilterExtensions(RetentionIndexMarker.FILTER_EXTENSION);
+				fileDialog.setFilterNames(RetentionIndexMarker.FILTER_NAME);
 				fileDialog.setFileName(RetentionIndexMarker.FILE_NAME);
 				fileDialog.setFilterPath(PreferenceSupplier.getListPathExportTemplate());
 				String path = fileDialog.open();

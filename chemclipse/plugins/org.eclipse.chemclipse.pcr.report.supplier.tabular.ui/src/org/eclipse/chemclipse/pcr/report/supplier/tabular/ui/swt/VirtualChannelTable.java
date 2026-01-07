@@ -321,8 +321,8 @@ public class VirtualChannelTable extends Composite implements IChangeListener, I
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 				fileDialog.setOverwrite(true);
 				fileDialog.setText(EXPORT_TITLE);
-				fileDialog.setFilterExtensions(new String[]{FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{FILTER_NAME});
+				fileDialog.setFilterExtensions(FILTER_EXTENSION);
+				fileDialog.setFilterNames(FILTER_NAME);
 				fileDialog.setFileName(FILE_NAME);
 				fileDialog.setFilterPath(PreferenceSupplier.getListPathExport());
 				String path = fileDialog.open();

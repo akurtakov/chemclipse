@@ -148,8 +148,8 @@ public class ExtendedChromatogramIndicesUI extends Composite implements IExtende
 					FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 					fileDialog.setOverwrite(true);
 					fileDialog.setText("Save Calibation Data");
-					fileDialog.setFilterExtensions(new String[]{CalibrationFile.FILTER_EXTENSION});
-					fileDialog.setFilterNames(new String[]{CalibrationFile.FILTER_NAME});
+					fileDialog.setFilterExtensions(CalibrationFile.FILTER_EXTENSION);
+					fileDialog.setFilterNames(CalibrationFile.FILTER_NAME);
 					fileDialog.setFileName(CalibrationFile.FILE_NAME);
 					fileDialog.setFilterPath(PreferenceSupplier.getFilterPathRetentionIndices());
 					String path = fileDialog.open();

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -96,8 +96,8 @@ public class ChromatogramFileExportProcessSupplier implements IProcessTypeSuppli
 							FileDialog fileDialog = new FileDialog(display.getActiveShell(), SWT.SAVE);
 							fileDialog.setOverwrite(true);
 							fileDialog.setText(VersionConstants.DESCRIPTION_CHROMATOGRAM);
-							fileDialog.setFilterExtensions(new String[]{VersionConstants.FILTER_EXTENSION_CHROMATOGRAM});
-							fileDialog.setFilterNames(new String[]{VersionConstants.FILTER_NAME_CHROMATOGRAM});
+							fileDialog.setFilterExtensions(VersionConstants.FILTER_EXTENSION_CHROMATOGRAM);
+							fileDialog.setFilterNames(VersionConstants.FILTER_NAME_CHROMATOGRAM);
 							fileDialog.setFileName(fileName);
 							fileDialog.setFilterPath(PreferenceSupplier.getListPathExport());
 							String path = fileDialog.open();

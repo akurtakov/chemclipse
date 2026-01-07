@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -129,8 +129,8 @@ public class TimeRangesEditor extends Composite {
 				if(timeRanges != null) {
 					FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 					fileDialog.setText(TimeRanges.DESCRIPTION);
-					fileDialog.setFilterExtensions(new String[]{TimeRanges.FILTER_EXTENSION});
-					fileDialog.setFilterNames(new String[]{TimeRanges.FILTER_NAME});
+					fileDialog.setFilterExtensions(TimeRanges.FILTER_EXTENSION);
+					fileDialog.setFilterNames(TimeRanges.FILTER_NAME);
 					fileDialog.setFilterPath(preferenceStore.getString(PreferenceSupplier.P_TIME_RANGE_TEMPLATE_FOLDER));
 					String pathname = fileDialog.open();
 					if(pathname != null) {
@@ -160,7 +160,7 @@ public class TimeRangesEditor extends Composite {
 				if(timeRanges != null) {
 					FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 					fileDialog.setText("Chromatogram (*.ocb)");
-					fileDialog.setFilterExtensions(new String[]{"*.ocb"});
+					fileDialog.setFilterExtensions("*.ocb");
 					fileDialog.setFilterPath(preferenceStore.getString(PreferenceSupplier.P_TIME_RANGE_TEMPLATE_FOLDER));
 
 					String pathname = fileDialog.open();
@@ -194,8 +194,8 @@ public class TimeRangesEditor extends Composite {
 					FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 					fileDialog.setOverwrite(true);
 					fileDialog.setText(TimeRanges.DESCRIPTION);
-					fileDialog.setFilterExtensions(new String[]{TimeRanges.FILTER_EXTENSION});
-					fileDialog.setFilterNames(new String[]{TimeRanges.FILTER_NAME});
+					fileDialog.setFilterExtensions(TimeRanges.FILTER_EXTENSION);
+					fileDialog.setFilterNames(TimeRanges.FILTER_NAME);
 					fileDialog.setFileName(TimeRanges.FILE_NAME);
 					fileDialog.setFilterPath(preferenceStore.getString(PreferenceSupplier.P_TIME_RANGE_TEMPLATE_FOLDER));
 					String pathname = fileDialog.open();

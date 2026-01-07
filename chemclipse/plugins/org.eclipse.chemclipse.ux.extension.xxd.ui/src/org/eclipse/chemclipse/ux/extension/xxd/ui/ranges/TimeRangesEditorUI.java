@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -311,8 +311,8 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 
 				FileDialog fileDialog = new FileDialog(e.widget.getDisplay().getActiveShell(), SWT.READ_ONLY);
 				fileDialog.setText(IMPORT_TITLE);
-				fileDialog.setFilterExtensions(new String[]{TimeRanges.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{TimeRanges.FILTER_NAME});
+				fileDialog.setFilterExtensions(TimeRanges.FILTER_EXTENSION);
+				fileDialog.setFilterNames(TimeRanges.FILTER_NAME);
 				fileDialog.setFilterPath(PreferenceSupplier.getListPathImport());
 				String path = fileDialog.open();
 				if(path != null) {
@@ -341,8 +341,8 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 				FileDialog fileDialog = new FileDialog(e.widget.getDisplay().getActiveShell(), SWT.SAVE);
 				fileDialog.setOverwrite(true);
 				fileDialog.setText(EXPORT_TITLE);
-				fileDialog.setFilterExtensions(new String[]{TimeRanges.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{TimeRanges.FILTER_NAME});
+				fileDialog.setFilterExtensions(TimeRanges.FILTER_EXTENSION);
+				fileDialog.setFilterNames(TimeRanges.FILTER_NAME);
 				fileDialog.setFileName(TimeRanges.FILE_NAME);
 				fileDialog.setFilterPath(PreferenceSupplier.getListPathExport());
 				String path = fileDialog.open();

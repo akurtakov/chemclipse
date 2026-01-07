@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,7 +18,6 @@ import org.eclipse.chemclipse.chromatogram.vsd.filter.ui.internal.provider.Waven
 import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
-import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.widgets.Composite;
 
 public class WavenumberSignalsUI extends ExtendedTableViewer {
@@ -67,6 +66,6 @@ public class WavenumberSignalsUI extends ExtendedTableViewer {
 		setLabelProvider(labelProvider);
 		setContentProvider(new ListContentProvider());
 		setComparator(tableComparator);
-		setFilters(new ViewerFilter[]{listFilter});
+		setFilters(listFilter);
 	}
 }

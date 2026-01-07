@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,7 +20,6 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.SequenceList
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.SequenceListTableComparator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.widgets.Composite;
 
 public class SequenceListUI extends ExtendedTableViewer {
@@ -66,6 +65,6 @@ public class SequenceListUI extends ExtendedTableViewer {
 		setLabelProvider(labelProvider);
 		setContentProvider(contentProvider);
 		setComparator();
-		setFilters(new ViewerFilter[]{listFilter});
+		setFilters(listFilter);
 	}
 }

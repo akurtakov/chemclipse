@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -141,8 +141,8 @@ public class PageCalibrationSettings extends AbstractExtendedWizardPage {
 
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 				fileDialog.setText("Select an existing *.cal template file.");
-				fileDialog.setFilterExtensions(new String[]{"*.cal;*.CAL"});
-				fileDialog.setFilterNames(new String[]{"AMDIS Calibration (*.cal)"});
+				fileDialog.setFilterExtensions("*.cal;*.CAL");
+				fileDialog.setFilterNames("AMDIS Calibration (*.cal)");
 				fileDialog.setFilterPath(wizardElements.getFilterPathCalibrationFile());
 				String pathRetentionIndexFile = fileDialog.open();
 				if(pathRetentionIndexFile != null) {

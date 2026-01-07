@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Christoph Läubrich.
+ * Copyright (c) 2020, 2026 Christoph Läubrich.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -217,8 +217,8 @@ public class AssetInstallPage extends WizardPage {
 				/*
 				 * Display available options.
 				 */
-				fileDialog.setFilterNames(new String[]{"Zipped Assets (*.zip)"});
-				fileDialog.setFilterExtensions(new String[]{"*.zip"});
+				fileDialog.setFilterNames("Zipped Assets (*.zip)");
+				fileDialog.setFilterExtensions("*.zip");
 
 				String open = fileDialog.open();
 				if(open != null) {

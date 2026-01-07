@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -47,8 +47,8 @@ public class CreateProcessMethodHandler {
 			FileDialog fileDialog = new FileDialog(shell, SWT.SAVE);
 			fileDialog.setOverwrite(true);
 			fileDialog.setText(ExtensionMessages.processMethod);
-			fileDialog.setFilterExtensions(new String[]{MethodConverter.FILTER_EXTENSION});
-			fileDialog.setFilterNames(new String[]{MethodConverter.FILTER_NAME});
+			fileDialog.setFilterExtensions(MethodConverter.FILTER_EXTENSION);
+			fileDialog.setFilterNames(MethodConverter.FILTER_NAME);
 			fileDialog.setFileName(MethodConverter.FILE_NAME);
 			fileDialog.setFilterPath(MethodConverter.getUserMethodDirectory().getAbsolutePath());
 

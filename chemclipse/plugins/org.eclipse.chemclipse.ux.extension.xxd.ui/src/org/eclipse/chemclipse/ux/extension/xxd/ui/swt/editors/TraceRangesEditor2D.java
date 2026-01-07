@@ -339,8 +339,8 @@ public class TraceRangesEditor2D extends Composite implements IChangeListener, I
 
 				FileDialog fileDialog = new FileDialog(e.widget.getDisplay().getActiveShell(), SWT.READ_ONLY);
 				fileDialog.setText(IMPORT_TITLE);
-				fileDialog.setFilterExtensions(new String[]{TraceRanges2D.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{TraceRanges2D.FILTER_NAME});
+				fileDialog.setFilterExtensions(TraceRanges2D.FILTER_EXTENSION);
+				fileDialog.setFilterNames(TraceRanges2D.FILTER_NAME);
 				fileDialog.setFilterPath(PreferenceSupplier.getListPathImport());
 				String path = fileDialog.open();
 				if(path != null) {
@@ -369,8 +369,8 @@ public class TraceRangesEditor2D extends Composite implements IChangeListener, I
 				FileDialog fileDialog = new FileDialog(e.widget.getDisplay().getActiveShell(), SWT.SAVE);
 				fileDialog.setOverwrite(true);
 				fileDialog.setText(EXPORT_TITLE);
-				fileDialog.setFilterExtensions(new String[]{TraceRanges2D.FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{TraceRanges2D.FILTER_NAME});
+				fileDialog.setFilterExtensions(TraceRanges2D.FILTER_EXTENSION);
+				fileDialog.setFilterNames(TraceRanges2D.FILTER_NAME);
 				fileDialog.setFileName(TraceRanges2D.FILE_NAME);
 				fileDialog.setFilterPath(PreferenceSupplier.getListPathExport());
 				String path = fileDialog.open();

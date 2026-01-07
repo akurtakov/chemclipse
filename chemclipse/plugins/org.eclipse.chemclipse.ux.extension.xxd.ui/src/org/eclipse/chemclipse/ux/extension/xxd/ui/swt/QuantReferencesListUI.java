@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.QuantReferen
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.QuantReferencesFilter;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.QuantReferencesLabelProvider;
 import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.widgets.Composite;
 
 public class QuantReferencesListUI extends ExtendedTableViewer {
@@ -52,7 +51,7 @@ public class QuantReferencesListUI extends ExtendedTableViewer {
 		setLabelProvider(new QuantReferencesLabelProvider());
 		setContentProvider(new ListContentProvider());
 		setComparator(comparator);
-		setFilters(new ViewerFilter[]{filter});
+		setFilters(filter);
 		setEditingSupport();
 	}
 

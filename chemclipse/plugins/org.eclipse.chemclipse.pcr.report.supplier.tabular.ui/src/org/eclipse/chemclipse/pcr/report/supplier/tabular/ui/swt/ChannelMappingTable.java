@@ -296,8 +296,8 @@ public class ChannelMappingTable extends Composite implements IChangeListener, I
 
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
 				fileDialog.setText(IMPORT_TITLE);
-				fileDialog.setFilterExtensions(new String[]{FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{FILTER_NAME});
+				fileDialog.setFilterExtensions(FILTER_EXTENSION);
+				fileDialog.setFilterNames(FILTER_NAME);
 				fileDialog.setFilterPath(PreferenceSupplier.getListPathImport());
 				String path = fileDialog.open();
 				if(path != null) {
@@ -326,8 +326,8 @@ public class ChannelMappingTable extends Composite implements IChangeListener, I
 				FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
 				fileDialog.setOverwrite(true);
 				fileDialog.setText(EXPORT_TITLE);
-				fileDialog.setFilterExtensions(new String[]{FILTER_EXTENSION});
-				fileDialog.setFilterNames(new String[]{FILTER_NAME});
+				fileDialog.setFilterExtensions(FILTER_EXTENSION);
+				fileDialog.setFilterNames(FILTER_NAME);
 				fileDialog.setFileName(FILE_NAME);
 				fileDialog.setFilterPath(PreferenceSupplier.getListPathExport());
 				String path = fileDialog.open();
