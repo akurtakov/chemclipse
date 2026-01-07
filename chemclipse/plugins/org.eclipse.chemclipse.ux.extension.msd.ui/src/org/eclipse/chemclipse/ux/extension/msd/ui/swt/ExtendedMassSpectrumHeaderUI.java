@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -54,7 +54,7 @@ public class ExtendedMassSpectrumHeaderUI extends Composite {
 				offset = addHeaderLine(builder, styleRanges, "Plate", standaloneMassSpectrum.getPlate(), offset);
 				offset = addHeaderLine(builder, styleRanges, "Position", standaloneMassSpectrum.getPosition(), offset);
 				if(standaloneMassSpectrum.getDate() != null) {
-					offset = addHeaderLine(builder, styleRanges, "Date", ValueFormat.getDateFormatEnglish().format(standaloneMassSpectrum.getDate()), offset);
+					addHeaderLine(builder, styleRanges, "Date", ValueFormat.getDateFormatEnglish().format(standaloneMassSpectrum.getDate()), offset);
 				}
 			}
 		}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -216,7 +216,6 @@ public class ExtractedIonSignalsModifier {
 		int startScan = analysisSegment.getStartScan();
 		int stopScan = analysisSegment.getStopScan();
 		IExtractedIonSignal extractedIonSignal;
-		float actualSignal = 0.0f;
 		/*
 		 * Take a look at those abundance values which are zero and correct them
 		 * to adjustedNonZeroAbundanceValue.
@@ -224,7 +223,7 @@ public class ExtractedIonSignalsModifier {
 		for(int scan = startScan; scan <= stopScan; scan++) {
 			try {
 				extractedIonSignal = extractedIonSignals.getExtractedIonSignal(scan);
-				actualSignal = extractedIonSignal.getAbundance(ion);
+				float actualSignal = extractedIonSignal.getAbundance(ion);
 				if(actualSignal == 0.0f) {
 					extractedIonSignal.setAbundance(ion, adjustedNonZeroAbundanceValue, true);
 				}

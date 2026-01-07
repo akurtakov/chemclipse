@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,6 +21,7 @@ public class MarkedIonTransitionComparator implements Comparator<IMarkedIonTrans
 	private SortOrder sortOrder = SortOrder.ASC;
 
 	public MarkedIonTransitionComparator(SortOrder sortOrder) {
+
 		if(sortOrder != null) {
 			this.sortOrder = sortOrder;
 		}
@@ -34,7 +35,7 @@ public class MarkedIonTransitionComparator implements Comparator<IMarkedIonTrans
 			return 0;
 		}
 		if(transition1.getIonTransition() == transition2.getIonTransition()) {
-			result = 0;
+			return 0;
 		}
 		switch(sortOrder) {
 			case ASC:

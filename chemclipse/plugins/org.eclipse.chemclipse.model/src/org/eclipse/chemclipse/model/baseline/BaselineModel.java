@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -232,8 +232,7 @@ public class BaselineModel implements IBaselineModel {
 	 */
 	private void cutSegmentBeginningPart(int startRetentionTime, int stopRetentionTime, float stopBackgroundAbundance) {
 
-		Map.Entry<Integer, IBaselineSegment> cuttingSegmentEntry = baselineSegments.floorEntry(startRetentionTime);
-		cuttingSegmentEntry = baselineSegments.floorEntry(stopRetentionTime);
+		Entry<Integer, IBaselineSegment> cuttingSegmentEntry = baselineSegments.floorEntry(stopRetentionTime);
 		if(cuttingSegmentEntry != null) {
 			IBaselineSegment cuttingSegment = cuttingSegmentEntry.getValue();
 			int x0 = cuttingSegment.getStartRetentionTime();
@@ -263,8 +262,7 @@ public class BaselineModel implements IBaselineModel {
 	 */
 	private void cutSegmentEndingPart(int startRetentionTime, int stopRetentionTime, float startBackgroundAbundance) {
 
-		Map.Entry<Integer, IBaselineSegment> cuttingSegmentEntry = baselineSegments.floorEntry(startRetentionTime);
-		cuttingSegmentEntry = baselineSegments.floorEntry(startRetentionTime);
+		Entry<Integer, IBaselineSegment> cuttingSegmentEntry = baselineSegments.floorEntry(startRetentionTime);
 		if(cuttingSegmentEntry != null) {
 			IBaselineSegment cuttingSegment = cuttingSegmentEntry.getValue();
 			int x0 = cuttingSegment.getStartRetentionTime();

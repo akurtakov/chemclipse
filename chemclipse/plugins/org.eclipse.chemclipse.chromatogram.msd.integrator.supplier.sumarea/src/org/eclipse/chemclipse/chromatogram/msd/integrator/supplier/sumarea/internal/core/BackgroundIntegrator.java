@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -52,8 +52,6 @@ public class BackgroundIntegrator extends AbstractSumareaIntegrator implements I
 			IExtractedIonSignal stopSignal;
 			int start;
 			int stop;
-			double ionPercentage = 0.0d;
-			double segmentArea = 0.0d;
 			/*
 			 * Calculates the area for each background element.
 			 */
@@ -63,13 +61,13 @@ public class BackgroundIntegrator extends AbstractSumareaIntegrator implements I
 					stopSignal = extractedIonSignals.getExtractedIonSignal(scan + 1);
 					IScanMSD supplierMassSpectrumStart = chromatogram.getScan(scan);
 					IScanMSD supplierMassSpectrumStop = chromatogram.getScan(scan + 1);
-					ionPercentage = calculateIonPercentageOfScans(supplierMassSpectrumStart, supplierMassSpectrumStop, ion);
+					double ionPercentage = calculateIonPercentageOfScans(supplierMassSpectrumStart, supplierMassSpectrumStop, ion);
 					if(startSignal != null && stopSignal != null) {
 						start = startSignal.getRetentionTime();
 						stop = stopSignal.getRetentionTime();
 						float startAbundance = baselineModel.getBackgroundAbundance(start);
 						float stopAbundance = baselineModel.getBackgroundAbundance(stop);
-						segmentArea = calculateArea(start, stop, startAbundance, stopAbundance);
+						double segmentArea = calculateArea(start, stop, startAbundance, stopAbundance);
 						backgroundArea += segmentArea * ionPercentage;
 					}
 				} catch(Exception e) {

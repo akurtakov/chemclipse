@@ -78,7 +78,7 @@ public class FeatureStatLabelProvider extends AbstractChemClipseLabelProvider {
 				}
 
 			}
-			double value = 0.0;
+			double value;
 
 			switch(columnIndex) {
 				case 0:
@@ -88,37 +88,30 @@ public class FeatureStatLabelProvider extends AbstractChemClipseLabelProvider {
 					text = variable.getDescription();
 					break;
 				case 2:
-					value = 0;
 					value = stats.getN();
 					text = Double.isNaN(value) ? "NaN" : decimalFormat.format(value);
 					break;
 				case 3:
-					value = 0.0;
 					value = stats.getMean();
 					text = Double.isNaN(value) ? "NaN" : decimalFormat.format(value);
 					break;
 				case 4:
-					value = 0.0;
 					value = stats.getMin();
 					text = Double.isNaN(value) ? "NaN" : decimalFormat.format(value);
 					break;
 				case 5:
-					value = 0.0;
 					value = stats.getMax();
 					text = Double.isNaN(value) ? "NaN" : decimalFormat.format(value);
 					break;
 				case 6:
-					value = 0.0;
 					value = 100.0 / stats.getSum() * stats.getStandardDeviation();
 					text = Double.isNaN(value) ? "NaN" : decimalFormat.format(value);
 					break;
 				case 7:
-					value = 0.0;
 					value = stats.getSkewness();
 					text = Double.isNaN(value) ? "NaN" : decimalFormat.format(value);
 					break;
 				case 8:
-					value = 0.0;
 					value = stats.getKurtosis() - 3.0;
 					text = Double.isNaN(value) ? "NaN" : decimalFormat.format(value);
 					break;

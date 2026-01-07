@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -54,7 +54,7 @@ public class MatlabParafacPeakExportConverter_1_ITest {
 		MatlabParafacPeakExportConverter exportConverter = new MatlabParafacPeakExportConverter();
 		File exportFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_EXPORT_FOLDER) + File.separator + TestPathHelper.TESTFILE_EXPORT_MATLAB_PEAKS);
 		IProcessingInfo<File> exportProcessingInfo = exportConverter.convert(exportFile, peaks, false, new NullProgressMonitor());
-		exportFile = exportProcessingInfo.getProcessingResult();
+		exportProcessingInfo.getProcessingResult();
 		/*
 		 * Re-Import
 		 */

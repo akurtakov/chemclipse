@@ -168,7 +168,7 @@ public class PageUtil {
 		float height = 0.0f;
 		String text = textElement.getText();
 		if(!text.isEmpty()) {
-			float textHeight = 0.0f;
+			float textHeight;
 
 			switch(textElement.getTextOption()) {
 				case NONE:
@@ -557,7 +557,7 @@ public class PageUtil {
 		float x = unitConverter.convertToPt(textElement.getX());
 		float y = calculateY(textElement, textHeight);
 
-		String shortenedText = text; // default
+		String shortenedText;
 		ReferenceX referenceX = textElement.getReferenceX();
 		switch(referenceX) {
 			case LEFT:

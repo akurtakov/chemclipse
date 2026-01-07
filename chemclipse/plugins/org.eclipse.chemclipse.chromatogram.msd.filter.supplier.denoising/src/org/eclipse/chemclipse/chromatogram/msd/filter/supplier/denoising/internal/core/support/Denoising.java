@@ -246,7 +246,6 @@ public class Denoising {
 		int stopIon = noiseSignal.getStopIon();
 		float abundanceNoise;
 		float abundanceScan;
-		float coefficient = 0.0f;
 		/*
 		 * Get the noise ions. The compareTo method allows to sort by
 		 * abundance descending.
@@ -281,7 +280,7 @@ public class Denoising {
 				 */
 				abundanceScan = extractedIonSignal.getAbundance(entry.getIon());
 				if(abundanceScan > 0.0f) {
-					coefficient = abundanceScan / abundanceNoise;
+					float coefficient = abundanceScan / abundanceNoise;
 					coefficients.add(coefficient);
 					counter++;
 					/*

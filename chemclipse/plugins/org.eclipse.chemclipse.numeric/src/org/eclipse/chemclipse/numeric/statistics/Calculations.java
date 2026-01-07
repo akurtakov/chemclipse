@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -307,7 +307,7 @@ public class Calculations {
 	 */
 	public static double getMedian(double[] values) {
 
-		double mean = 0.0d;
+		double mean;
 		/*
 		 * Check if the size is lower than 2.
 		 */
@@ -342,7 +342,7 @@ public class Calculations {
 	 */
 	public static float getMedian(float[] values) {
 
-		float mean = 0.0f;
+		float mean;
 		/*
 		 * Check if the size is lower than 2.
 		 */

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -123,7 +123,7 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 	private LinkedHashMap<Double, RGB> getReversedGrayScaleMap() {
 
 		double[] values = new double[]{0, 1};
-		RGB[] colors = new RGB[]{};
+		RGB[] colors;
 		if(PreferencesSupport.isDarkTheme()) {
 			colors = new RGB[]{new RGB(0, 0, 0), new RGB(255, 255, 255)};
 		} else {

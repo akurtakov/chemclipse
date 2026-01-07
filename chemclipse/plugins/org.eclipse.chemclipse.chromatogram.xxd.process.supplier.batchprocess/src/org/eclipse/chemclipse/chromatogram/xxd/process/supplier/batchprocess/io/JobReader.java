@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -126,7 +126,7 @@ public class JobReader {
 		 * Read all entries.
 		 */
 		while(filteredEventReader.hasNext()) {
-			event = filteredEventReader.nextEvent();
+			filteredEventReader.nextEvent();
 			event = eventReader.nextEvent();
 			try {
 				dataType = DataType.valueOf(event.asCharacters().getData(), DataType.AUTO_DETECT);
@@ -173,7 +173,7 @@ public class JobReader {
 		 * Read all entries.
 		 */
 		while(filteredEventReader.hasNext()) {
-			event = filteredEventReader.nextEvent();
+			filteredEventReader.nextEvent();
 			event = eventReader.nextEvent();
 			inputEntry = new ChromatogramInputEntry(event.asCharacters().getData());
 			batchProcessJob.getChromatogramInputEntries().add(inputEntry);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -54,10 +54,9 @@ public class DirectCurrentCorrection extends AbstractComplexSignalFilter<DirectC
 		int directCurrentPointsTerm = 5 * numberOfPoints / 20;
 		int directCurrentPoints = Math.round(directCurrentPointsTerm);
 
-		Complex[] complexSignalsDCcopy = new Complex[numberOfPoints - directCurrentPoints];
 		double[] complexSignalsReal = new double[numberOfPoints];
 		double[] complexSignalsImag = new double[numberOfPoints];
-		complexSignalsDCcopy = Arrays.copyOfRange(fidData.signals, directCurrentPoints, numberOfPoints);
+		Complex[] complexSignalsDCcopy = Arrays.copyOfRange(fidData.signals, directCurrentPoints, numberOfPoints);
 		for(int i = 0; i < complexSignalsDCcopy.length; i++) {
 			complexSignalsReal[i] = (complexSignalsDCcopy[i].getReal());
 			complexSignalsImag[i] = (complexSignalsDCcopy[i].getImaginary());
@@ -95,8 +94,7 @@ public class DirectCurrentCorrection extends AbstractComplexSignalFilter<DirectC
 			directCurrentPointsSpecBack[z] = spectrumData.signals[i];
 			z++;
 		}
-		Complex[] combinedDirectCurrentPointsSpec = new Complex[directCurrentPointsRange * 2];
-		combinedDirectCurrentPointsSpec = ArrayUtils.addAll(directCurrentPointsSpecFront, directCurrentPointsSpecBack);
+		Complex[] combinedDirectCurrentPointsSpec = ArrayUtils.addAll(directCurrentPointsSpecFront, directCurrentPointsSpecBack);
 		double[] tempCombinedArrayReal = new double[combinedDirectCurrentPointsSpec.length];
 		double[] tempCombinedArrayImag = new double[combinedDirectCurrentPointsSpec.length];
 		for(int i = 0; i < combinedDirectCurrentPointsSpec.length; i++) {

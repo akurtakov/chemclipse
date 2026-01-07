@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -245,7 +245,7 @@ public class PenaltyCalculationChart extends ChromatogramChart {
 		for(double value : series) {
 			seriesAdjusted[index++] = value;
 		}
-		seriesAdjusted[index++] = stop;
+		seriesAdjusted[index + 1] = stop;
 
 		return seriesAdjusted;
 	}

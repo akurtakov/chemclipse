@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -85,8 +85,7 @@ public class FoldChangeLimits extends AbstractBaseChartPaintListener implements 
 
 	private int printHorizontalLine(GC gc, Point rectangle, Range rangeY, double position, Color color, int lineWidth) {
 
-		int y = INVISIBLE;
-		y = calculatePositionY(rangeY, rectangle, position);
+		int y = calculatePositionY(rangeY, rectangle, position);
 		gc.setAlpha(255);
 		gc.setForeground(color);
 		gc.setLineWidth(lineWidth);

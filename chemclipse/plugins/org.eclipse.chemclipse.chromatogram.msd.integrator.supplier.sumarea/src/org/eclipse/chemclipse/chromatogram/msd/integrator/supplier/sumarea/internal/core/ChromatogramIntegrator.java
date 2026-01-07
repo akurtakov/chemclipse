@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -47,7 +47,6 @@ public class ChromatogramIntegrator extends AbstractSumareaIntegrator implements
 			int stopScan = chromatogram.getScanNumber(chromatogramSelection.getStopRetentionTime());
 			IExtractedIonSignal startSignal;
 			IExtractedIonSignal stopSignal;
-			double segmentArea = 0.0d;
 			/*
 			 * Calculates the area for each segment.
 			 */
@@ -58,7 +57,7 @@ public class ChromatogramIntegrator extends AbstractSumareaIntegrator implements
 					if(startSignal != null && stopSignal != null) {
 						float startAbundance = startSignal.getAbundance(ion);
 						float stopAbundance = stopSignal.getAbundance(ion);
-						segmentArea = calculateArea(startSignal.getRetentionTime(), stopSignal.getRetentionTime(), startAbundance, stopAbundance);
+						double segmentArea = calculateArea(startSignal.getRetentionTime(), stopSignal.getRetentionTime(), startAbundance, stopAbundance);
 						chromatogramArea += segmentArea;
 					}
 				} catch(Exception e) {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -52,9 +52,6 @@ public class ClearPenaltyFilter extends AbstractPeakFilter<PenaltyClearFilterSet
 	public void filterPeaks(IChromatogramSelection chromatogramSelection, PenaltyClearFilterSettings configuration, ProcessExecutionContext context) throws IllegalArgumentException {
 
 		Collection<IPeak> peaks = getReadOnlyPeaks(chromatogramSelection);
-		if(configuration == null) {
-			configuration = createConfiguration(peaks);
-		}
 
 		SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), peaks.size());
 		for(IPeak peak : peaks) {
