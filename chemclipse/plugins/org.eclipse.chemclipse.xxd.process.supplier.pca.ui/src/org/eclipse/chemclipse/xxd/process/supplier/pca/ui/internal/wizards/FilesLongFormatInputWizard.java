@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,15 +18,19 @@ import java.util.List;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.IExtractionData;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.IPreprocessingSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.PcaExtractionFileLongText;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ExtractionDataFilter;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IDataInputEntry;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Samples;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.preferences.PreferenceSupplier;
+import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
 
 public class FilesLongFormatInputWizard extends Wizard implements IInputWizard {
 
-	private FilesLongFormatSettingsWizardPage filesLongFormatSettingsWizardPage = new FilesLongFormatSettingsWizardPage();
-	private PreprocessingWizardPage preprocessingWizardPage = new PreprocessingWizardPage();
+	private FilesLongFormatSettingsWizardPage mainPage = new FilesLongFormatSettingsWizardPage();
+	private FilesLongFormatFilterWizardPage filterPage = new FilesLongFormatFilterWizardPage();
+	private PreprocessingWizardPage preprocessingPage = new PreprocessingWizardPage();
 	private IExtractionData extractionData;
 	private File file;
 
@@ -43,9 +47,10 @@ public class FilesLongFormatInputWizard extends Wizard implements IInputWizard {
 	@Override
 	public void addPages() {
 
-		filesLongFormatSettingsWizardPage.setFile(file);
-		addPage(filesLongFormatSettingsWizardPage);
-		addPage(preprocessingWizardPage);
+		mainPage.setFile(file);
+		addPage(mainPage);
+		addPage(filterPage);
+		addPage(preprocessingPage);
 	}
 
 	@Override
@@ -57,24 +62,24 @@ public class FilesLongFormatInputWizard extends Wizard implements IInputWizard {
 	@Override
 	public List<IDataInputEntry> getDataInputEntries() {
 
-		return filesLongFormatSettingsWizardPage.getMainDataInputEntries();
+		return mainPage.getMainDataInputEntries();
 	}
 
 	public List<IDataInputEntry> getFilterDataInputEntries() {
 
-		return filesLongFormatSettingsWizardPage.getFilterDataInputEntries();
+		return mainPage.getFilterDataInputEntries();
 	}
 
 	@Override
 	public IAnalysisSettings getAnalysisSettings() {
 
-		return filesLongFormatSettingsWizardPage.getAnalysisSettings();
+		return mainPage.getAnalysisSettings();
 	}
 
 	@Override
 	public IPreprocessingSettings getPreprocessingSettings() {
 
-		return preprocessingWizardPage.getPreprocessingSettings();
+		return preprocessingPage.getPreprocessingSettings();
 	}
 
 	@Override
@@ -82,7 +87,12 @@ public class FilesLongFormatInputWizard extends Wizard implements IInputWizard {
 
 		List<IDataInputEntry> dataInputEntries = getDataInputEntries();
 		List<IDataInputEntry> filterDataInputEntries = getFilterDataInputEntries();
-		File file = getFile(dataInputEntries);
+		file = getFile(dataInputEntries);
+		Samples samples = filterPage.getFilteredSamples();
+		if(samples != null) {
+			extractionData = new ExtractionDataFilter(samples);
+			return true;
+		}
 		if(file != null && file.getName().endsWith(PcaExtractionFileLongText.FILE_EXTENSION)) {
 			extractionData = new PcaExtractionFileLongText(dataInputEntries, filterDataInputEntries, getAnalysisSettings().getNumberOfSamplesToFilter());
 			return true;
@@ -94,12 +104,26 @@ public class FilesLongFormatInputWizard extends Wizard implements IInputWizard {
 
 		for(IDataInputEntry dataInputEntry : dataInputEntries) {
 			String inputFile = dataInputEntry.getInputFile();
-			File file = new File(inputFile);
+			file = new File(inputFile);
 			if(file.exists()) {
 				return file;
 			}
 		}
 
 		return null;
+
 	}
+
+	@Override
+	public IWizardPage getNextPage(IWizardPage page) {
+
+		if(page == mainPage) {
+			filterPage.setMainFile(mainPage.getMainDataInputEntries());
+			filterPage.setFilterFile(mainPage.getFilterDataInputEntries());
+		}
+
+		return super.getNextPage(page);
+
+	}
+
 }
