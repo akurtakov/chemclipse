@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -103,7 +103,7 @@ public class TextElement extends AbstractReferenceElement<TextElement> {
 		 * java.lang.IllegalArgumentException: U+0009 ('controlHT') is not available in this font Helvetica encoding: WinAnsiEncoding
 		 */
 		if(text != null) {
-			this.text = text.replaceAll("\t", " ");
+			this.text = text.replace("\t", " ");
 		} else {
 			this.text = "";
 		}
