@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.chromatogram.xxd.integrator.result;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.eclipse.chemclipse.msd.model.core.AbstractIon;
+import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -24,14 +25,13 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class ChromatogramIntegrationResult_1_Test {
 
 	private IChromatogramIntegrationResult result;
-	private double ion;
 	private double backgroundArea;
 	private double chromatogramArea;
 
 	@BeforeAll
 	public void setUp() {
 
-		ion = AbstractIon.TIC_ION;
+		double ion = IIon.TIC_ION;
 		backgroundArea = 10020993.34d;
 		chromatogramArea = 289839830.483d;
 		result = new ChromatogramIntegrationResult(ion, chromatogramArea, backgroundArea);

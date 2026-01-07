@@ -32,7 +32,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class IonPercentages_1_Test {
 
 	private IScanMSD massSpectrum;
-	private IIon defaultIon;
 	private IIonPercentages ionPercentages;
 	private Map<Integer, Float> ions;
 
@@ -47,7 +46,7 @@ public class IonPercentages_1_Test {
 		ions.put(85, 8800.0f);
 		massSpectrum = new ScanMSD();
 		for(Integer ion : ions.keySet()) {
-			defaultIon = new Ion(ion, ions.get(ion));
+			IIon defaultIon = new Ion(ion, ions.get(ion));
 			massSpectrum.addIon(defaultIon);
 		}
 		ionPercentages = new IonPercentages(massSpectrum);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,17 +24,16 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramSelection_7_Test {
 
-	private IChromatogramMSD chromatogram;
 	private IChromatogramSelectionMSD selection;
 
 	@BeforeAll
-	public void setUp() throws Exception {
+	public void setUp() {
 
 		/*
 		 * Use createNiceMock if you use void methods that are not important to
 		 * test.
 		 */
-		chromatogram = EasyMock.createNiceMock(IChromatogramMSD.class);
+		IChromatogramMSD chromatogram = EasyMock.createNiceMock(IChromatogramMSD.class);
 		EasyMock.expect(chromatogram.getStartRetentionTime()).andStubReturn(1);
 		EasyMock.expect(chromatogram.getStopRetentionTime()).andStubReturn(100);
 		EasyMock.expect(chromatogram.getMaxSignal()).andStubReturn(127500.0f);

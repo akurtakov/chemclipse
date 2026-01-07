@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -30,7 +30,6 @@ public class ArrayReader_5_ITest {
 	/*
 	 * Little Endian
 	 */
-	private IArrayReader arrayReader;
 	private byte[] prefix = new byte[]{31, -117, 8, 0, 0, 0, 0, 0, 4, 0};
 	private byte[] tmp;
 
@@ -43,7 +42,7 @@ public class ArrayReader_5_ITest {
 		 * 11110000 10100111 11000001 00001011 00000100 10011111 00000001 00111011
 		 */
 		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_BIN_TEST));
-		arrayReader = new ArrayReaderTestImplementation(file);
+		IArrayReader arrayReader = new ArrayReaderTestImplementation(file);
 		tmp = arrayReader.readBytes(prefix, 4);
 	}
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -31,14 +31,13 @@ public class MassSpectrum_4_Test {
 
 	private IChromatogramMSD chromatogram;
 	private IScanMSD massSpectrum;
-	private IIon ion;
 
 	@BeforeAll
 	public void setUp() {
 
 		chromatogram = new ChromatogramMSD();
 		massSpectrum = new ScanMSD();
-		ion = new Ion(45.5f, 3000.5f);
+		IIon ion = new Ion(45.5f, 3000.5f);
 		massSpectrum.addIon(ion);
 		chromatogram.addScan(massSpectrum);
 	}

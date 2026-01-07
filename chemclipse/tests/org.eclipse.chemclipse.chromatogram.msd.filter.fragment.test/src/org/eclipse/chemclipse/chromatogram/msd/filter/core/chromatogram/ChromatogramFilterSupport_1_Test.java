@@ -27,13 +27,12 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class ChromatogramFilterSupport_1_Test {
 
 	private ChromatogramFilterSupportMSD support;
-	private ChromatogramFilterSupplierMSD supplier;
 
 	@BeforeAll
 	public void setUp() {
 
 		support = new ChromatogramFilterSupportMSD();
-		supplier = new ChromatogramFilterSupplierMSD();
+		ChromatogramFilterSupplierMSD supplier = new ChromatogramFilterSupplierMSD();
 		supplier.setId("net.first.supplier");
 		supplier.setDescription("Filter Description");
 		supplier.setFilterName("Test Filter Name");

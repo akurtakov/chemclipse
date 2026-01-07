@@ -30,17 +30,13 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class CalculatorSupport_2_Test {
 
-	private CalculatorSupport calculatorSupport;
-	private AnalysisSegment analysisSegment;
-	private IExtractedIonSignals extractedIonSignals;
-	private IExtractedIonSignal extractedIonSignal;
 	private CombinedNominalMassSpectrumCalculator combinedMassSpectrumCalculator;
 
 	@BeforeAll
 	public void setUp() {
 
-		calculatorSupport = new CalculatorSupport();
-		analysisSegment = new AnalysisSegment(1, 3) {
+		CalculatorSupport calculatorSupport = new CalculatorSupport();
+		AnalysisSegment analysisSegment = new AnalysisSegment(1, 3) {
 
 			@Override
 			public int getStartRetentionTime() {
@@ -54,11 +50,11 @@ public class CalculatorSupport_2_Test {
 				return 0;
 			}
 		};
-		extractedIonSignals = new ExtractedIonSignals(1, 3);
+		IExtractedIonSignals extractedIonSignals = new ExtractedIonSignals(1, 3);
 		/*
 		 * Scan #1
 		 */
-		extractedIonSignal = new ExtractedIonSignal(43, 104);
+		IExtractedIonSignal extractedIonSignal = new ExtractedIonSignal(43, 104);
 		extractedIonSignal.setAbundance(104, 500.0f);
 		extractedIonSignal.setAbundance(103, 2500.0f);
 		extractedIonSignal.setAbundance(43, 120.0f);

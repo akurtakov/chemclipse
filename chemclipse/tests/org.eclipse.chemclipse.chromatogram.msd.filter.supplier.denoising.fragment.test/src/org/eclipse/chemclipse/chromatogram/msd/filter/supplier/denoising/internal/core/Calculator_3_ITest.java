@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -37,21 +37,18 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class Calculator_3_ITest extends ChromatogramImporterTestCase {
 
 	private Calculator calculator = new Calculator();
-	private IExtractedIonSignals extractedIonSignals;
-	private IMarkedIons ionsToPreserve;
 	private List<INoiseSegmentMSD> noiseSegments;
-	private IExtractedIonSignalExtractor extractedIonSignalExtractor;
 
 	@Override
 	@BeforeAll
 	public void setUp() throws FilterException {
 
 		super.setUp();
-		ionsToPreserve = new MarkedIons(MarkedTraceModus.INCLUDE);
+		IMarkedIons ionsToPreserve = new MarkedIons(MarkedTraceModus.INCLUDE);
 		ionsToPreserve.add(new MarkedIon(103));
 		ionsToPreserve.add(new MarkedIon(104));
-		extractedIonSignalExtractor = new ExtractedIonSignalExtractor(chromatogram);
-		extractedIonSignals = extractedIonSignalExtractor.getExtractedIonSignals(chromatogramSelection);
+		IExtractedIonSignalExtractor extractedIonSignalExtractor = new ExtractedIonSignalExtractor(chromatogram);
+		IExtractedIonSignals extractedIonSignals = extractedIonSignalExtractor.getExtractedIonSignals(chromatogramSelection);
 		noiseSegments = calculator.getNoiseSegments(extractedIonSignals, ionsToPreserve, 13, new NullProgressMonitor());
 	}
 

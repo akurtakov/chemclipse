@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,13 +26,12 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class RegularLibraryMassSpectrum_3_Test {
 
 	private IRegularLibraryMassSpectrum massSpectrum;
-	private ILibraryInformation libraryInformation;
 
 	@BeforeAll
 	public void setUp() {
 
 		massSpectrum = new RegularLibraryMassSpectrum();
-		libraryInformation = new LibraryInformation();
+		ILibraryInformation libraryInformation = new LibraryInformation();
 		libraryInformation.setCasNumber("01-33-XX");
 		libraryInformation.setComments("test substance comment");
 		libraryInformation.setName("Test Substance");

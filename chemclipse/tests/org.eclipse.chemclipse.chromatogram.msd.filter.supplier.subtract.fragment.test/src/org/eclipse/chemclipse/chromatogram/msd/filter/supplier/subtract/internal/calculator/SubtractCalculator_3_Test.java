@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -29,7 +29,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class SubtractCalculator_3_Test {
 
 	private SubtractCalculator subtractCalculator = new SubtractCalculator();;
-	private IScanMSD subtractMassSpectrum;
 	private IScanMSD targetMassSpectrum;
 	private Map<Double, Float> subtractMassSpectrumMap;
 
@@ -39,7 +38,7 @@ public class SubtractCalculator_3_Test {
 		boolean useNominalMasses = true;
 		boolean useNormalize = false;
 
-		subtractMassSpectrum = new CombinedMassSpectrum();
+		IScanMSD subtractMassSpectrum = new CombinedMassSpectrum();
 		subtractMassSpectrum.addIon(new Ion(18.2, 200));
 		subtractMassSpectrum.addIon(new Ion(28.1, 1000));
 		subtractMassSpectrum.addIon(new Ion(32.3, 500));

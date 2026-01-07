@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentificat
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.PathResolver;
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.TestPathHelper;
@@ -33,12 +34,9 @@ public class PeakIdentificationBatchJobReader_1_ITest {
 
 	private IPeakIdentificationBatchJobReader reader = new PeakIdentificationBatchJobReader();
 	private IPeakIdentificationBatchJob batchProcessJob;
-	private IPeakInputEntry inputEntry;
-	private IPeakIntegrationEntry integrationEntry;
-	private IPeakIdentificationEntry identificationEntry;
 
 	@BeforeAll
-	public void setUp() throws Exception {
+	public void setUp() throws IOException {
 
 		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_BATCH_PROCESS_JOB));
 		batchProcessJob = reader.read(file, new NullProgressMonitor());
@@ -78,7 +76,7 @@ public class PeakIdentificationBatchJobReader_1_ITest {
 	@Test
 	public void testGetInputEntries_3() {
 
-		inputEntry = batchProcessJob.getPeakInputEntries().get(0);
+		IPeakInputEntry inputEntry = batchProcessJob.getPeakInputEntries().get(0);
 		assertEquals("/org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.fragment.test/testData/files/import/snip40_P1.mpl", inputEntry.getInputFile());
 	}
 
@@ -88,14 +86,14 @@ public class PeakIdentificationBatchJobReader_1_ITest {
 	@Test
 	public void testGetIntegrationEntry_1() {
 
-		integrationEntry = batchProcessJob.getPeakIntegrationEntry();
+		IPeakIntegrationEntry integrationEntry = batchProcessJob.getPeakIntegrationEntry();
 		assertEquals("org.eclipse.chemclipse.chromatogram.msd.integrator.supplier.chemstation.peakIntegrator", integrationEntry.getProcessorId());
 	}
 
 	@Test
 	public void testGetIdentificationEntry_1() {
 
-		identificationEntry = batchProcessJob.getPeakIdentificationEntry();
+		IPeakIdentificationEntry identificationEntry = batchProcessJob.getPeakIdentificationEntry();
 		assertEquals("org.eclipse.chemclipse.chromatogram.msd.identifier.supplier.nist.peak", identificationEntry.getProcessorId());
 	}
 

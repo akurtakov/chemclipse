@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,18 +28,15 @@ public class ProcessingInfo_2_Test {
 
 	private IProcessingInfo<String> processingInfo;
 	private IProcessingInfo<String> processingInfo2;
-	private IProcessingMessage processingMessage;
-	private String processingResult;
-	private String processingResult2;
 
 	@BeforeAll
 	public void setUp() {
 
 		processingInfo = new ProcessingInfo<>();
-		processingResult = "Hello World!";
+		String processingResult = "Hello World!";
 		processingInfo.setProcessingResult(processingResult);
 
-		processingMessage = new ProcessingMessage(MessageType.ERROR, "Load Peak", "The peak X35P couldn't be loaded, cause it seems to have no values.");
+		ProcessingMessage processingMessage = new ProcessingMessage(MessageType.ERROR, "Load Peak", "The peak X35P couldn't be loaded, cause it seems to have no values.");
 		processingInfo.addMessage(processingMessage);
 
 		processingMessage = new ProcessingMessage(MessageType.WARN, "Load Peak", "The peak X35P couldn't be loaded completely.");
@@ -51,7 +48,7 @@ public class ProcessingInfo_2_Test {
 		 * ProcessingInfo2
 		 */
 		processingInfo2 = new ProcessingInfo<>();
-		processingResult2 = "Hello World 2!";
+		String processingResult2 = "Hello World 2!";
 		processingInfo2.setProcessingResult(processingResult2);
 		processingInfo2.addMessages(processingInfo);
 	}
@@ -67,7 +64,7 @@ public class ProcessingInfo_2_Test {
 
 		Object result = processingInfo2.getProcessingResult();
 		assertTrue(result instanceof String);
-		assertEquals("Hello World 2!", (String)result);
+		assertEquals("Hello World 2!", result);
 	}
 
 	@Test

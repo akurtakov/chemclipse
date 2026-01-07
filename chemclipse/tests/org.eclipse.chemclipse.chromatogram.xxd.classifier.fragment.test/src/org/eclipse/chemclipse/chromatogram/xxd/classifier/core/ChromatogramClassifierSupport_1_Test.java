@@ -27,13 +27,12 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class ChromatogramClassifierSupport_1_Test {
 
 	private ChromatogramClassifierSupport support;
-	private ChromatogramClassifierSupplier supplier;
 
 	@BeforeAll
 	public void setUp() {
 
 		support = new ChromatogramClassifierSupport();
-		supplier = new ChromatogramClassifierSupplier();
+		ChromatogramClassifierSupplier supplier = new ChromatogramClassifierSupplier();
 		supplier.setId("net.first.supplier");
 		supplier.setDescription("Classifier Description");
 		supplier.setClassifierName("Test Classifier Name");

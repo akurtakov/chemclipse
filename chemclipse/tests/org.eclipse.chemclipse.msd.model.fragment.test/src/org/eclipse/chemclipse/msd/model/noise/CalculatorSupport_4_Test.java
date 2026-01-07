@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -34,19 +34,13 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class CalculatorSupport_4_Test {
 
-	private CalculatorSupport calculatorSupport;
-	private AnalysisSegment analysisSegment;
-	private IExtractedIonSignals extractedIonSignals;
-	private IExtractedIonSignal extractedIonSignal;
-	private CombinedNominalMassSpectrumCalculator combinedMassSpectrumCalculator;
-	private IMarkedIons ionsToPreserve;
 	private ICombinedMassSpectrum noiseMassSpectrum;
 
 	@BeforeAll
 	public void setUp() {
 
-		calculatorSupport = new CalculatorSupport();
-		analysisSegment = new AnalysisSegment(1, 3) {
+		CalculatorSupport calculatorSupport = new CalculatorSupport();
+		AnalysisSegment analysisSegment = new AnalysisSegment(1, 3) {
 
 			@Override
 			public int getStartRetentionTime() {
@@ -60,11 +54,11 @@ public class CalculatorSupport_4_Test {
 				return 0;
 			}
 		};
-		extractedIonSignals = new ExtractedIonSignals(1, 3);
+		IExtractedIonSignals extractedIonSignals = new ExtractedIonSignals(1, 3);
 		/*
 		 * Scan #1
 		 */
-		extractedIonSignal = new ExtractedIonSignal(43, 104);
+		IExtractedIonSignal extractedIonSignal = new ExtractedIonSignal(43, 104);
 		extractedIonSignal.setAbundance(104, 500.0f);
 		extractedIonSignal.setAbundance(103, 2500.0f);
 		extractedIonSignal.setAbundance(43, 120.0f);
@@ -85,11 +79,11 @@ public class CalculatorSupport_4_Test {
 		extractedIonSignal.setAbundance(43, 280.0f);
 		extractedIonSignal.setAbundance(104, 20000.0f);
 		extractedIonSignals.add(extractedIonSignal);
-		combinedMassSpectrumCalculator = calculatorSupport.getCombinedMassSpectrumCalculator(analysisSegment, extractedIonSignals);
+		CombinedNominalMassSpectrumCalculator combinedMassSpectrumCalculator = calculatorSupport.getCombinedMassSpectrumCalculator(analysisSegment, extractedIonSignals);
 		// ---------------------------
 		// Mass fragments to preserve will be removed from the noise mass
 		// spectrum.
-		ionsToPreserve = new MarkedIons(MarkedTraceModus.INCLUDE);
+		IMarkedIons ionsToPreserve = new MarkedIons(MarkedTraceModus.INCLUDE);
 		ionsToPreserve.add(new MarkedIon(104));
 		ionsToPreserve.add(new MarkedIon(103));
 		noiseMassSpectrum = calculatorSupport.getNoiseMassSpectrum(combinedMassSpectrumCalculator, ionsToPreserve, new NullProgressMonitor());

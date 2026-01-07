@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -56,7 +56,8 @@ public class CodaCalculator {
 		/*
 		 * Get the abundance from each scan of the given ion.
 		 */
-		for(int scan = startScan, counter = 0; scan <= stopScan; scan++, counter++) {
+		for(int scan = startScan,
+				counter = 0; scan <= stopScan; scan++, counter++) {
 			try {
 				extractedIonSignal = extractedIonSignals.getExtractedIonSignal(scan);
 				signal = extractedIonSignal.getAbundance(ion);
@@ -94,7 +95,6 @@ public class CodaCalculator {
 	 */
 	private static float calculateMCQValue(double[] euclidianLengthValues, double[] standardizedSmoothedValues, int windowSize) {
 
-		float mcq = 0.0f;
 		int lastScan = Calculations.getWindowReducedLength(euclidianLengthValues, windowSize);
 		int scans = euclidianLengthValues.length;
 		double sumSignals = 0.0f;
@@ -107,7 +107,7 @@ public class CodaCalculator {
 		for(int i = 0; i < lastScan; i++) {
 			sumSignals += euclidianLengthValues[i] * standardizedSmoothedValues[i];
 		}
-		mcq = (float)((1.0d / Math.sqrt((scans - windowSize))) * sumSignals);
+		float mcq = (float)((1.0d / Math.sqrt((scans - windowSize))) * sumSignals);
 		/*
 		 * Give a warning if something tries to run out of order.
 		 */

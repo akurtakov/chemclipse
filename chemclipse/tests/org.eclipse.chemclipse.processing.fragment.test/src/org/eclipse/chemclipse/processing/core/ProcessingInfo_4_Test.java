@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,13 +25,12 @@ public class ProcessingInfo_4_Test {
 
 	private IProcessingInfo<String> processingInfo;
 	private IProcessingMessage processingMessage;
-	private String processingResult;
 
 	@BeforeAll
 	public void setUp() {
 
 		processingInfo = new ProcessingInfo<>();
-		processingResult = "Hello World!";
+		String processingResult = "Hello World!";
 		processingInfo.setProcessingResult(processingResult);
 
 		processingMessage = new ProcessingMessage(MessageType.WARN, "Load Peak", "The peak X35P couldn't be loaded completely.");

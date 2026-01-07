@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -228,9 +228,8 @@ public class ManualSelectionChart extends TimeRangesChromatogramUI {
 			IAxisSet axisSet = baseChart.getAxisSet();
 			Point rectangle = baseChart.getPlotArea().getSize();
 			int width = rectangle.x;
-			double factorWidth = 0.0d;
 			if(width != 0) {
-				factorWidth = 100.0d / width;
+				double factorWidth = 100.0d / width;
 				double percentageStartWidth = (factorWidth * xStart) / 100.0d;
 				double percentageStopWidth = (factorWidth * xStop) / 100.0d;
 				/*

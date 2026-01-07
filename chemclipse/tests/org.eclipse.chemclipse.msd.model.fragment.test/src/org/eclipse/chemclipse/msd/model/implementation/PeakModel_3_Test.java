@@ -34,8 +34,6 @@ public class PeakModel_3_Test {
 
 	private IPeakModelMSD peakModel;
 	private IPeakMassSpectrum peakMaximum;
-	private IPeakIon ion;
-	private TreeMap<Float, Float> fragmentValues;
 	private IPeakIntensityValues intensityValues;
 	private TreeMap<Integer, Float> scanValues;
 	private float startBackgroundAbundance = 0.0f;
@@ -46,7 +44,7 @@ public class PeakModel_3_Test {
 
 		// ----------------------PeakMaximum
 		peakMaximum = new PeakMassSpectrum();
-		fragmentValues = new TreeMap<>();
+		TreeMap<Float, Float> fragmentValues = new TreeMap<>();
 		fragmentValues.put(104.0f, 2300.0f);
 		fragmentValues.put(103.0f, 580.0f);
 		fragmentValues.put(51.0f, 260.0f);
@@ -56,7 +54,7 @@ public class PeakModel_3_Test {
 		fragmentValues.put(74.0f, 380.0f);
 		fragmentValues.put(105.0f, 970.0f);
 		for(Entry<Float, Float> entry : fragmentValues.entrySet()) {
-			ion = new PeakIon(entry.getKey(), entry.getValue());
+			IPeakIon ion = new PeakIon(entry.getKey(), entry.getValue());
 			peakMaximum.addIon(ion);
 		}
 		// ----------------------PeakMaximum

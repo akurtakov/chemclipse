@@ -29,10 +29,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class Chromatogram_26_Test {
 
 	private IChromatogramMSD chromatogram;
-	private List<IIntegrationEntry> chromatogramIntegrationEntries;
-	private IIntegrationEntry chromatogramIntegrationEntry;
-	private List<IIntegrationEntry> backgroundIntegrationEntries;
-	private IIntegrationEntry backgroundIntegrationEntry;
 
 	@BeforeAll
 	public void setUp() {
@@ -41,8 +37,8 @@ public class Chromatogram_26_Test {
 		/*
 		 * Chromatogram Integration Entries
 		 */
-		chromatogramIntegrationEntries = new ArrayList<>();
-		chromatogramIntegrationEntry = new IntegrationEntry(25.3f, 26778.7d);
+		List<IIntegrationEntry> chromatogramIntegrationEntries = new ArrayList<>();
+		IIntegrationEntry chromatogramIntegrationEntry = new IntegrationEntry(25.3f, 26778.7d);
 		chromatogramIntegrationEntries.add(chromatogramIntegrationEntry);
 		chromatogramIntegrationEntry = new IntegrationEntry(28.1f, 3446.2d);
 		chromatogramIntegrationEntries.add(chromatogramIntegrationEntry);
@@ -53,8 +49,8 @@ public class Chromatogram_26_Test {
 		/*
 		 * Background Integration Entries
 		 */
-		backgroundIntegrationEntries = new ArrayList<>();
-		backgroundIntegrationEntry = new IntegrationEntry(28.2f, 378374.78d);
+		List<IIntegrationEntry> backgroundIntegrationEntries = new ArrayList<>();
+		IIntegrationEntry backgroundIntegrationEntry = new IntegrationEntry(28.2f, 378374.78d);
 		backgroundIntegrationEntries.add(backgroundIntegrationEntry);
 		backgroundIntegrationEntry = new IntegrationEntry(56.1f, 92043074.78d);
 		backgroundIntegrationEntries.add(backgroundIntegrationEntry);

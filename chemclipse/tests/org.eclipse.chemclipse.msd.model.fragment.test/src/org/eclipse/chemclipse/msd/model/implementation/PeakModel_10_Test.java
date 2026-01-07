@@ -31,11 +31,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class PeakModel_10_Test {
 
 	private IPeakModelMSD peakModel;
-	private IPeakMassSpectrum peakMaximum;
-	private IPeakIon ion;
-	private TreeMap<Float, Float> fragmentValues;
-	private IPeakIntensityValues intensityValues;
-	private TreeMap<Integer, Float> scanValues;
 	private float startBackgroundAbundance = 100.0f;
 	private float stopBackgroundAbundance = 100.0f;
 
@@ -43,8 +38,8 @@ public class PeakModel_10_Test {
 	public void setUp() {
 
 		// ----------------------PeakMaximum
-		peakMaximum = new PeakMassSpectrum();
-		fragmentValues = new TreeMap<>();
+		IPeakMassSpectrum peakMaximum = new PeakMassSpectrum();
+		TreeMap<Float, Float> fragmentValues = new TreeMap<>();
 		fragmentValues.put(104.0f, 230000.0f);
 		fragmentValues.put(103.0f, 58000.0f);
 		fragmentValues.put(51.0f, 26000.0f);
@@ -54,13 +49,13 @@ public class PeakModel_10_Test {
 		fragmentValues.put(74.0f, 38000.0f);
 		fragmentValues.put(105.0f, 97000.0f);
 		for(Entry<Float, Float> entry : fragmentValues.entrySet()) {
-			ion = new PeakIon(entry.getKey(), entry.getValue());
+			IPeakIon ion = new PeakIon(entry.getKey(), entry.getValue());
 			peakMaximum.addIon(ion);
 		}
 		// ----------------------PeakMaximum
 		// ----------------------IntensityValues
-		intensityValues = new PeakIntensityValues();
-		scanValues = new TreeMap<>();
+		IPeakIntensityValues intensityValues = new PeakIntensityValues();
+		TreeMap<Integer, Float> scanValues = new TreeMap<>();
 		scanValues.put(4500, 0.0f);
 		scanValues.put(5500, 20.0f);
 		scanValues.put(6500, 40.0f);

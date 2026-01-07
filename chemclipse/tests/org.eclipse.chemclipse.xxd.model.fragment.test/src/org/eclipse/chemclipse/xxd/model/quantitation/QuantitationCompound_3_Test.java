@@ -35,7 +35,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class QuantitationCompound_3_Test extends ReferencePeakMSDTestCase {
 
-	private IQuantitationCompound quantitationCompound;
 	private IQuantitationSignals quantitationSignals;
 	private IResponseSignals concentrationResponseEntries;
 
@@ -44,7 +43,7 @@ public class QuantitationCompound_3_Test extends ReferencePeakMSDTestCase {
 	public void setUp() {
 
 		super.setUp();
-		quantitationCompound = new QuantitationCompound("Styrene", "mg/ml", 5500);
+		IQuantitationCompound quantitationCompound = new QuantitationCompound("Styrene", "mg/ml", 5500);
 
 		List<IQuantitationPeak> quantitationPeaks = new ArrayList<>();
 		IQuantitationPeak quantitationPeak = new QuantitationPeakMSD(getReferencePeakMSD_TIC_1(), 0.1d, "mg/ml");

@@ -26,17 +26,15 @@ import org.junit.jupiter.api.Test;
 public class WindowsSupport_1_ITest extends AbstractBackgroundTestCase {
 
 	private IExtendedRuntimeSupport runtimeSupport;
-	private String nistApplication;
 	private String nistApplicationPath;
-	private File testfileNistApplication;
 
 	@Override
 	@BeforeAll
 	public void setUp() throws FileNotFoundException {
 
 		super.setUp();
-		nistApplication = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_WINDOWS_NIST_APPLICATION);
-		testfileNistApplication = new File(nistApplication);
+		String nistApplication = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_WINDOWS_NIST_APPLICATION);
+		File testfileNistApplication = new File(nistApplication);
 		nistApplicationPath = testfileNistApplication.getParent();
 		runtimeSupport = new WindowsSupport(testfileNistApplication.getParentFile(), parameterBackground);
 	}

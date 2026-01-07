@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -35,15 +35,13 @@ public class Chromatogram_19_Test {
 	private IChromatogramMSD chromatogram;
 	private IIdentificationTarget entry1;
 	private IIdentificationTarget entry2;
-	private ILibraryInformation libraryInformation;
-	private IComparisonResult comparisonResult;
 
 	@BeforeAll
 	public void setUp() {
 
 		chromatogram = new ChromatogramMSD();
-		libraryInformation = new LibraryInformation();
-		comparisonResult = new ComparisonResult(0.8f, 0.95f, 0.0f, 0.0f);
+		ILibraryInformation libraryInformation = new LibraryInformation();
+		IComparisonResult comparisonResult = new ComparisonResult(0.8f, 0.95f, 0.0f, 0.0f);
 		entry1 = new IdentificationTarget(libraryInformation, comparisonResult);
 		entry1.setIdentifier("Test-Tools");
 		entry2 = new IdentificationTarget(libraryInformation, comparisonResult);

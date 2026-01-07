@@ -47,12 +47,6 @@ public class ReferencePeakMSDTestCase {
 	private IPeakMSD referencePeakMSD_XIC_3; // 6x Concentration
 	private IPeakMSD referencePeakMSD_XIC_X; // 2x Concentration
 
-	private IPeakModelMSD peakModel;
-	private IPeakMassSpectrum peakMaximum;
-	private IPeakIon peakIon;
-	private TreeMap<Double, Float> fragmentValues;
-	private IPeakIntensityValues intensityValues;
-	private TreeMap<Integer, Float> scanValues;
 	private float startBackgroundAbundance = 0.0f;
 	private float stopBackgroundAbundance = 0.0f;
 
@@ -75,8 +69,8 @@ public class ReferencePeakMSDTestCase {
 	private IPeakMSD createPeak(int scale, boolean xic) {
 
 		// ----------------------PeakMaximum
-		peakMaximum = new PeakMassSpectrum();
-		fragmentValues = new TreeMap<>();
+		IPeakMassSpectrum peakMaximum = new PeakMassSpectrum();
+		TreeMap<Double, Float> fragmentValues = new TreeMap<>();
 		fragmentValues.put(104.0d, 2300.0f);
 		fragmentValues.put(103.0d, 580.0f);
 		fragmentValues.put(51.0d, 260.0f);
@@ -86,16 +80,16 @@ public class ReferencePeakMSDTestCase {
 		fragmentValues.put(74.0d, 380.0f);
 		fragmentValues.put(105.0d, 970.0f);
 		for(Entry<Double, Float> entry : fragmentValues.entrySet()) {
-			peakIon = new PeakIon(entry.getKey(), entry.getValue() * scale);
+			IPeakIon peakIon = new PeakIon(entry.getKey(), entry.getValue() * scale);
 			peakMaximum.addIon(peakIon);
 		}
 		// ----------------------PeakMaximum
 		// ----------------------IntensityValues
-		intensityValues = new PeakIntensityValues();
+		IPeakIntensityValues intensityValues = new PeakIntensityValues();
 		/*
 		 * Add Peak (1500) to 16 (15500)
 		 */
-		scanValues = new TreeMap<>();
+		TreeMap<Integer, Float> scanValues = new TreeMap<>();
 		scanValues.put(1500, 0.0f);
 		scanValues.put(2500, 5.0f);
 		scanValues.put(3500, 10.0f);
@@ -115,7 +109,7 @@ public class ReferencePeakMSDTestCase {
 			intensityValues.addIntensityValue(entry.getKey(), entry.getValue());
 		}
 		// ----------------------IntensityValues
-		peakModel = new PeakModelMSD(peakMaximum, intensityValues, startBackgroundAbundance, stopBackgroundAbundance);
+		IPeakModelMSD peakModel = new PeakModelMSD(peakMaximum, intensityValues, startBackgroundAbundance, stopBackgroundAbundance);
 		IPeakMSD referencePeakMSD;
 		if(xic) {
 			/*

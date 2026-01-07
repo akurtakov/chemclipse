@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -234,8 +234,8 @@ public class NistResultFileParser {
 			hit.setLib(matcher.group(4));
 			String value = matcher.group(6); // NIST17 -> "4178; RI: 0"
 
-			String id = DEFAULT_ID;
-			String ri = DEFAULT_RI;
+			String id;
+			String ri;
 
 			if(value.contains(RI_MARKER)) {
 				String[] values = value.split(RI_MARKER);
@@ -243,6 +243,7 @@ public class NistResultFileParser {
 				ri = (values.length > 1) ? values[1].trim() : DEFAULT_RI;
 			} else {
 				id = value;
+				ri = DEFAULT_RI;
 			}
 			/*
 			 * ID

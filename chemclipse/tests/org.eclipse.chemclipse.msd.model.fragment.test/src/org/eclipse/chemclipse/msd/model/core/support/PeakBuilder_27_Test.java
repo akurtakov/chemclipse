@@ -38,7 +38,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class PeakBuilder_27_Test {
 
 	private ITotalScanSignals totalIonSignals;
-	private ITotalScanSignal totalIonSignal;
 	private IPeakIntensityValues peakIntensityValues;
 
 	@BeforeAll
@@ -58,7 +57,7 @@ public class PeakBuilder_27_Test {
 		totalIonSignals = new TotalScanSignals(1, 10);
 		for(int scan = 1; scan <= 10; scan++) {
 			float abundance = intensities.get(scan - 1);
-			totalIonSignal = new TotalScanSignal(scan * 10, 0.0f, abundance);
+			ITotalScanSignal totalIonSignal = new TotalScanSignal(scan * 10, 0.0f, abundance);
 			totalIonSignals.add(totalIonSignal);
 		}
 	}

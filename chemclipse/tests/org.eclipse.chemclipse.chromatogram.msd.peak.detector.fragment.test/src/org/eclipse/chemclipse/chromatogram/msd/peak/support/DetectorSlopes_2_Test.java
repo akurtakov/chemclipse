@@ -23,7 +23,6 @@ import org.eclipse.chemclipse.chromatogram.peak.detector.support.DetectorSlopes;
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.IDetectorSlope;
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.IDetectorSlopes;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
-import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,15 +36,11 @@ public class DetectorSlopes_2_Test {
 
 	private IDetectorSlope slope;
 	private IDetectorSlopes slopes;
-	private IPoint p1, p2;
-	private int retentionTime;
-	private List<Float> abundances;
-	private ITotalScanSignals signals;
 
 	@BeforeEach
 	public void setUp() {
 
-		abundances = new ArrayList<>();
+		List<Float> abundances = new ArrayList<>();
 		abundances.add(21563.38028f);
 		abundances.add(21718.30986f);
 		abundances.add(21782.39437f);
@@ -73,15 +68,15 @@ public class DetectorSlopes_2_Test {
 		abundances.add(26906.33803f);
 		abundances.add(24441.5493f);
 		abundances.add(23981.69014f);
-		signals = EasyMock.createMock(ITotalScanSignals.class);
+		ITotalScanSignals signals = EasyMock.createMock(ITotalScanSignals.class);
 		EasyMock.expect(signals.getStartScan()).andStubReturn(1);
 		EasyMock.expect(signals.getStopScan()).andStubReturn(abundances.size());
 		EasyMock.replay(signals);
 		slopes = new DetectorSlopes(signals);
 		for(int i = 1; i < abundances.size(); i++) {
-			retentionTime = i * 1000;
-			p1 = new Point(retentionTime, abundances.get(i - 1));
-			p2 = new Point((i + 1) * 1000, abundances.get(i));
+			int retentionTime = i * 1000;
+			Point p1 = new Point(retentionTime, abundances.get(i - 1));
+			Point p2 = new Point((i + 1) * 1000, abundances.get(i));
 			slope = new DetectorSlope(p1, p2, retentionTime);
 			slopes.add(slope);
 		}

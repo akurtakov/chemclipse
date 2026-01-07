@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderiv
 import org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderivative.support.IFirstDerivativeDetectorSlope;
 import org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderivative.support.IFirstDerivativeDetectorSlopes;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
-import org.eclipse.chemclipse.numeric.core.IPoint;
 import org.eclipse.chemclipse.numeric.core.Point;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
@@ -29,17 +28,12 @@ import org.junit.jupiter.api.Disabled;
 @Disabled
 public class FirstDerivativeSlopesTestCase {
 
-	private IFirstDerivativeDetectorSlope slope;
 	private IFirstDerivativeDetectorSlopes slopes;
-	private IPoint p1, p2;
-	private int retentionTime;
-	private List<Float> abundances;
-	private ITotalScanSignals signals;
 
 	@BeforeAll
 	public void setUp() {
 
-		abundances = new ArrayList<>();
+		List<Float> abundances = new ArrayList<>();
 		abundances.add(21563.38028f);
 		abundances.add(21718.30986f);
 		abundances.add(21782.39437f);
@@ -80,16 +74,16 @@ public class FirstDerivativeSlopesTestCase {
 		abundances.add(44944.366197183f);
 		abundances.add(38869.014084507f);
 		abundances.add(34469.014084507f);
-		signals = EasyMock.createMock(ITotalScanSignals.class);
+		ITotalScanSignals signals = EasyMock.createMock(ITotalScanSignals.class);
 		EasyMock.expect(signals.getStartScan()).andStubReturn(1);
 		EasyMock.expect(signals.getStopScan()).andStubReturn(abundances.size());
 		EasyMock.replay(signals);
 		slopes = new FirstDerivativeDetectorSlopes(signals);
 		for(int i = 1; i < abundances.size(); i++) {
-			retentionTime = i * 1000;
-			p1 = new Point(retentionTime, abundances.get(i - 1));
-			p2 = new Point((i + 1) * 1000, abundances.get(i));
-			slope = new FirstDerivativeDetectorSlope(p1, p2, retentionTime);
+			int retentionTime = i * 1000;
+			Point p1 = new Point(retentionTime, abundances.get(i - 1));
+			Point p2 = new Point((i + 1) * 1000, abundances.get(i));
+			IFirstDerivativeDetectorSlope slope = new FirstDerivativeDetectorSlope(p1, p2, retentionTime);
 			slopes.add(slope);
 		}
 	}

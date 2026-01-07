@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,6 +21,7 @@ public class ExtractedSingleWavelengthSignalComparator implements Comparator<IEx
 	private SortOrder sortOrder = SortOrder.ASC;
 
 	public ExtractedSingleWavelengthSignalComparator(SortOrder sortOrder) {
+
 		if(sortOrder != null) {
 			this.sortOrder = sortOrder;
 		}
@@ -34,7 +35,7 @@ public class ExtractedSingleWavelengthSignalComparator implements Comparator<IEx
 			return 0;
 		}
 		if(signal1.getRetentionTime() == signal2.getRetentionTime()) {
-			result = 0;
+			return 0;
 		}
 		switch(sortOrder) {
 			case ASC:

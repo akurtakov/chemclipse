@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -44,7 +44,6 @@ public class ScanWebIdentifierUI extends Composite {
 	private IScan scan;
 
 	private Button button;
-	private Menu identifierMenu;
 
 	private final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
@@ -93,7 +92,7 @@ public class ScanWebIdentifierUI extends Composite {
 		composite.setLayout(gridLayout);
 
 		button = createButton(composite);
-		identifierMenu = createMenuIdentifier(button, identifierSuppliers);
+		Menu identifierMenu = createMenuIdentifier(button, identifierSuppliers);
 		button.setMenu(identifierMenu);
 
 		initialize();

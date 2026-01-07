@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -32,13 +32,12 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class ELUReader_2_ITest {
 
-	private ELUReader reader;
 	private IProcessingInfo<IPeaksMSD> processingInfo;
 
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		reader = new ELUReader();
+		ELUReader reader = new ELUReader();
 		String pathname = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_PEAKS_1_ELU);
 		File file = new File(pathname);
 		processingInfo = reader.read(file, new NullProgressMonitor());

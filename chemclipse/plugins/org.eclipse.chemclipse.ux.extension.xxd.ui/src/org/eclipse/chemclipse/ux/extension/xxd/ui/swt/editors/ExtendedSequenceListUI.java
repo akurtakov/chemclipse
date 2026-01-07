@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -76,7 +76,6 @@ public class ExtendedSequenceListUI extends Composite implements IExtendedPartUI
 	private Composite toolbarDataPath;
 	private Composite toolbarMethod;
 	private SearchSupportUI searchSupportUI;
-	private MethodSupportUI methodSupportUI;
 	private SequenceListUI sequenceListUI;
 
 	private String initialDataPath = "";
@@ -156,7 +155,7 @@ public class ExtendedSequenceListUI extends Composite implements IExtendedPartUI
 
 	private Composite createToolbarMethod(Composite parent) {
 
-		methodSupportUI = new MethodSupportUI(parent, SWT.NONE);
+		MethodSupportUI methodSupportUI = new MethodSupportUI(parent, SWT.NONE);
 		methodSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		methodSupportUI.setMethodListener((processMethod, monitor) -> {
 

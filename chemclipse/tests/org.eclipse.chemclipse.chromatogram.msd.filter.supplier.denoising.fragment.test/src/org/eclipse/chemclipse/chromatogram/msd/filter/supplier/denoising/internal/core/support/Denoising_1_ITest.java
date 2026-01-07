@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -31,8 +31,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class Denoising_1_ITest extends ChromatogramImporterTestCase {
 
-	private IMarkedIons ionsToRemove;
-	private IMarkedIons ionsToPreserve;
 	private List<ICombinedMassSpectrum> noiseMassSpectra;
 
 	@Override
@@ -40,13 +38,13 @@ public class Denoising_1_ITest extends ChromatogramImporterTestCase {
 	public void setUp() throws FilterException {
 
 		super.setUp();
-		ionsToRemove = new MarkedIons(MarkedTraceModus.INCLUDE);
+		IMarkedIons ionsToRemove = new MarkedIons(MarkedTraceModus.INCLUDE);
 		ionsToRemove.add(new MarkedIon(18));
 		ionsToRemove.add(new MarkedIon(28));
 		ionsToRemove.add(new MarkedIon(32));
 		ionsToRemove.add(new MarkedIon(84));
 		ionsToRemove.add(new MarkedIon(207));
-		ionsToPreserve = new MarkedIons(MarkedTraceModus.INCLUDE);
+		IMarkedIons ionsToPreserve = new MarkedIons(MarkedTraceModus.INCLUDE);
 		ionsToPreserve.add(new MarkedIon(103));
 		ionsToPreserve.add(new MarkedIon(103));
 		noiseMassSpectra = Denoising.applyDenoisingFilter(chromatogramSelection, ionsToRemove, ionsToPreserve, true, 1, 13, new NullProgressMonitor());

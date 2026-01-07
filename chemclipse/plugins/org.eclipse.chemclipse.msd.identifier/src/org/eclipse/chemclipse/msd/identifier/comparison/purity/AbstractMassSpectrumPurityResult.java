@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,6 +23,7 @@ public abstract class AbstractMassSpectrumPurityResult implements IMassSpectrumP
 	private float reverseFitValue = 0;
 
 	public AbstractMassSpectrumPurityResult(IScanMSD unknown, IScanMSD reference) throws ComparisonException {
+
 		if(unknown == null) {
 			throw new ComparisonException("The unknown must not be null.");
 		}
@@ -92,11 +93,10 @@ public abstract class AbstractMassSpectrumPurityResult implements IMassSpectrumP
 
 		int startIon = massSpectrum1.getStartIon();
 		int stopIon = massSpectrum1.getStopIon();
-		float abundance = 0.0f;
 		int count = 0;
 		int match = 0;
 		for(int ion = startIon; ion <= stopIon; ion++) {
-			abundance = massSpectrum1.getAbundance(ion);
+			float abundance = massSpectrum1.getAbundance(ion);
 			if(abundance > 0) {
 				count++;
 				if(massSpectrum2.getAbundance(ion) > 0) {

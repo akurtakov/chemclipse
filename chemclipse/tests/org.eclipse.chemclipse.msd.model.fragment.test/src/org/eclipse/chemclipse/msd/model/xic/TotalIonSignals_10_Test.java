@@ -27,7 +27,6 @@ import org.junit.jupiter.api.Test;
 public class TotalIonSignals_10_Test {
 
 	private ITotalScanSignals signals;
-	private ITotalScanSignal signal;
 
 	@BeforeEach
 	public void setUp() {
@@ -50,7 +49,7 @@ public class TotalIonSignals_10_Test {
 		int rt = 0;
 		for(int scan = 0; scan < 10; scan++) {
 			rt += 1000;
-			signal = new ExtendedTotalScanSignal(rt, 0.0f, totalSignals.get(scan));
+			ITotalScanSignal signal = new ExtendedTotalScanSignal(rt, 0.0f, totalSignals.get(scan));
 			signals.add(signal);
 		}
 	}

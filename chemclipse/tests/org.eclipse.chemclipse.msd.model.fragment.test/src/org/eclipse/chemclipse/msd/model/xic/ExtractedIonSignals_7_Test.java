@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,8 +27,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class ExtractedIonSignals_7_Test {
 
 	private IExtractedIonSignals extractedIonSignals;
-	private IExtractedIonSignal extractedIonSignal;
-	private IChromatogramMSD chromatogram;
 
 	@BeforeAll
 	public void setUp() {
@@ -36,13 +34,13 @@ public class ExtractedIonSignals_7_Test {
 		int scans = 100;
 		int ionStart = 25;
 		int ionStop = 30;
-		chromatogram = new ChromatogramMSD();
+		IChromatogramMSD chromatogram = new ChromatogramMSD();
 		extractedIonSignals = new ExtractedIonSignals(scans, chromatogram);
 		/*
 		 * Add 100 scans with scans of 6 ions.
 		 */
 		for(int scan = 1; scan <= scans; scan++) {
-			extractedIonSignal = new ExtractedIonSignal(ionStart, ionStop);
+			IExtractedIonSignal extractedIonSignal = new ExtractedIonSignal(ionStart, ionStop);
 			extractedIonSignal.setRetentionTime(scan);
 			extractedIonSignal.setRetentionIndex(scan / 60.0f);
 			for(int ion = ionStart; ion <= ionStop; ion++) {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -84,11 +84,17 @@ public class WebNucleotideBLAST extends AbstractNucleotideBLAST {
 		if(qBlastInfo != null) {
 			String rtoeStr = regexExtract(qBlastInfo, "RTOE = ([^\n\r]*)", 0);
 			if(rtoeStr != null && !rtoeStr.trim().isEmpty()) {
-				rtoe = Integer.parseInt(rtoeStr.trim());
+				try {
+					rtoe = Integer.parseInt(rtoeStr.trim());
+				} catch(NumberFormatException e) {
+					logger.warn(e);
+				}
 				Thread.sleep(rtoe * 1000L);
 			}
 			String rid = regexExtract(qBlastInfo, "RID = ([^\n\r]*)", 0);
-			return rid.trim();
+			if(rid != null) {
+				return rid.trim();
+			}
 		} else {
 			logger.error("QBlastInfo not found");
 		}

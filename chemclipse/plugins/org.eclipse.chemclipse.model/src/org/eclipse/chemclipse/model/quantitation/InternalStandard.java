@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -43,7 +43,7 @@ public class InternalStandard implements IInternalStandard {
 	public void setName(String name) {
 
 		if(name == null) {
-			name = "";
+			this.name = "";
 		} else {
 			this.name = name;
 		}
@@ -105,25 +105,33 @@ public class InternalStandard implements IInternalStandard {
 	@Override
 	public boolean equals(Object obj) {
 
-		if(this == obj)
+		if(this == obj) {
 			return true;
-		if(obj == null)
+		}
+		if(obj == null) {
 			return false;
-		if(getClass() != obj.getClass())
+		}
+		if(getClass() != obj.getClass()) {
 			return false;
+		}
 		InternalStandard other = (InternalStandard)obj;
-		if(Double.doubleToLongBits(concentration) != Double.doubleToLongBits(other.concentration))
+		if(Double.doubleToLongBits(concentration) != Double.doubleToLongBits(other.concentration)) {
 			return false;
+		}
 		if(concentrationUnit == null) {
-			if(other.concentrationUnit != null)
+			if(other.concentrationUnit != null) {
 				return false;
-		} else if(!concentrationUnit.equals(other.concentrationUnit))
+			}
+		} else if(!concentrationUnit.equals(other.concentrationUnit)) {
 			return false;
+		}
 		if(name == null) {
-			if(other.name != null)
+			if(other.name != null) {
 				return false;
-		} else if(!name.equals(other.name))
+			}
+		} else if(!name.equals(other.name)) {
 			return false;
+		}
 		return true;
 	}
 

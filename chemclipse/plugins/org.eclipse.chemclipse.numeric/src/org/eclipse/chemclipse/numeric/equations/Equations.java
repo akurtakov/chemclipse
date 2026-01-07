@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -105,8 +105,8 @@ public class Equations {
 
 		double[][] valuesA = new double[points.length][2];
 		double[][] valuesB = new double[points.length][2];
-		double x = 0.0;
-		double y = 0.0;
+		double x;
+		double y;
 		IPoint p;
 		for(int i = 0; i < points.length; i++) {
 			p = points[i];
@@ -196,8 +196,8 @@ public class Equations {
 
 		double[][] valuesA = new double[points.length][3];
 		double[][] valuesB = new double[points.length][3];
-		double x = 0.0;
-		double y = 0.0;
+		double x;
+		double y;
 		IPoint point;
 		for(int i = 0; i < points.length; i++) {
 			point = points[i];

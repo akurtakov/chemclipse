@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -40,8 +40,6 @@ abstract class ChromatogramPeaksTestCase {
 	private float startBackgroundAbundance = 0.0f;
 	private float stopBackgroundAbundance = 0.0f;
 	private IChromatogramMSD chromatogram;
-	private IIon ion;
-	private IScanMSD supplierMassSpectrum;
 	private IChromatogramPeakMSD peak1;
 	private IChromatogramPeakMSD peak2;
 	private IChromatogramPeakMSD peak3;
@@ -80,9 +78,9 @@ abstract class ChromatogramPeaksTestCase {
 		 * Add Scan 1 (500) to 17 (16500)
 		 */
 		for(int i = 1; i <= 17; i++) {
-			supplierMassSpectrum = new ScanMSD();
+			IScanMSD supplierMassSpectrum = new ScanMSD();
 			for(Entry<Float, Float> entry : fragmentValues.entrySet()) {
-				ion = new Ion(entry.getKey(), entry.getValue());
+				IIon ion = new Ion(entry.getKey(), entry.getValue());
 				supplierMassSpectrum.addIon(ion);
 			}
 			chromatogram.addScan(supplierMassSpectrum);

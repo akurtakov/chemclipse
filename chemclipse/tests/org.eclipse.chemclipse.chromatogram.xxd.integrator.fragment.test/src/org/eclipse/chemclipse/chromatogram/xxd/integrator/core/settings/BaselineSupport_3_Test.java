@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -29,19 +29,17 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class BaselineSupport_3_Test {
 
 	private IBaselineSupport baselineSupport;
-	private IChromatogramMSD chromatogram;
-	private IScanMSD ms;
 	private IBaselineModel baselineModel;
 
 	@BeforeAll
 	public void setUp() {
 
 		baselineSupport = new BaselineSupport();
-		chromatogram = new ChromatogramMSD();
+		IChromatogramMSD chromatogram = new ChromatogramMSD();
 		chromatogram.setScanDelay(500);
 		chromatogram.setScanInterval(1000);
 		for(int scan = 1; scan <= 100; scan++) {
-			ms = new ScanMSD();
+			IScanMSD ms = new ScanMSD();
 			chromatogram.addScan(ms);
 		}
 		chromatogram.recalculateRetentionTimes();

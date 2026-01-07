@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -45,11 +45,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class MSLExportConverter_2_ITest extends ImportConverterMslTestCase {
 
-	private IDatabaseExportConverter exportConverter;
-	private File exportFile;
-	private IVendorLibraryMassSpectrum scanMSD;
-	private IMassSpectra scansMSD;
-
 	private IVendorLibraryMassSpectrum massSpectrum;
 	private ILibraryInformation libraryInformation;
 
@@ -60,9 +55,9 @@ public class MSLExportConverter_2_ITest extends ImportConverterMslTestCase {
 		/*
 		 * Export
 		 */
-		exportConverter = new MSLDatabaseExportConverter();
-		exportFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTDIR_EXPORT) + File.separator + TestPathHelper.TESTFILE_EXPORT_DB_2_MSL);
-		scanMSD = new VendorLibraryMassSpectrum();
+		IDatabaseExportConverter exportConverter = new MSLDatabaseExportConverter();
+		File exportFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTDIR_EXPORT) + File.separator + TestPathHelper.TESTFILE_EXPORT_DB_2_MSL);
+		IVendorLibraryMassSpectrum scanMSD = new VendorLibraryMassSpectrum();
 		ILibraryInformation libraryInformationMS = scanMSD.getLibraryInformation();
 		libraryInformationMS.setName("Benzoic acid, 2-hydroxy-, ethyl ester");
 		libraryInformationMS.addCasNumber("118-61-6");
@@ -99,7 +94,7 @@ public class MSLExportConverter_2_ITest extends ImportConverterMslTestCase {
 		scanMSD.addIon(new Ion(64.0f, 85.0f));
 		scanMSD.addIon(new Ion(27.0f, 71.0f));
 		scanMSD.addIon(new Ion(63.0f, 67.0f));
-		scansMSD = new MassSpectra();
+		IMassSpectra scansMSD = new MassSpectra();
 		scansMSD.addMassSpectrum(scanMSD);
 		exportConverter.convert(exportFile, scansMSD, false, new NullProgressMonitor());
 

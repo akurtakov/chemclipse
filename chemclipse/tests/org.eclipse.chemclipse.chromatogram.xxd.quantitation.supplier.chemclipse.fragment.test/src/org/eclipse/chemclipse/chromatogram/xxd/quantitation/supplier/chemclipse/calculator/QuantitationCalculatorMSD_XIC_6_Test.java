@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -38,7 +38,6 @@ public class QuantitationCalculatorMSD_XIC_6_Test extends QuantitationCalculator
 	 * CalibrationMethod: LINEAR
 	 * isZeroCrossing: false
 	 */
-	private IQuantitationCompound quantitationCompound;
 	private IQuantitationSignals quantitationSignals;
 	private IResponseSignals concentrationResponseEntries;
 
@@ -48,7 +47,7 @@ public class QuantitationCalculatorMSD_XIC_6_Test extends QuantitationCalculator
 
 		super.setUp();
 
-		quantitationCompound = getQuantitationCompound();
+		IQuantitationCompound quantitationCompound = getQuantitationCompound();
 		List<IQuantitationPeak> quantitationPeaks = getQuantitationPeaks();
 		for(IQuantitationPeak peak : quantitationPeaks) {
 			IPeakModel peakModel = peak.getReferencePeak().getPeakModel();

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,13 +25,12 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class ProcessingInfo_6_Test {
 
 	private IProcessingInfo<String> processingInfo;
-	private String processingResult;
 
 	@BeforeAll
 	public void setUp() {
 
 		processingInfo = new ProcessingInfo<>();
-		processingResult = "Hello World!";
+		String processingResult = "Hello World!";
 		processingInfo.setProcessingResult(processingResult);
 	}
 

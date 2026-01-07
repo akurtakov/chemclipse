@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -34,16 +34,14 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class MSPReader_1_ITest {
 
-	private MSPReader reader;
-	private File file;
 	private IMassSpectra massSpectra;
 
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		reader = new MSPReader();
+		MSPReader reader = new MSPReader();
 		String pathname = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_SYNONYMS);
-		file = new File(pathname);
+		File file = new File(pathname);
 		massSpectra = reader.read(file, new NullProgressMonitor());
 	}
 

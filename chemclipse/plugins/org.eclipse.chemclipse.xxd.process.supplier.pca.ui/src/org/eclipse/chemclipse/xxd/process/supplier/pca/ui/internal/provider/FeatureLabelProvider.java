@@ -99,7 +99,7 @@ public class FeatureLabelProvider extends AbstractChemClipseLabelProvider {
 					int index = columnIndex - 4;
 					List<ISampleData<?>> sampleData = feature.getSampleData();
 					if(sampleData.size() > index) {
-						double value = 0.0;
+						double value;
 						if(featureMode.equals(FeatureMode.ORIGINAL)) {
 							value = sampleData.get(index).getData();
 						} else {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,14 +24,12 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class ProcessingInfo_5_Test {
 
 	private IProcessingInfo<String> processingInfo;
-	private IProcessingMessage processingMessage;
-	private String processingResult;
 
 	@BeforeAll
 	public void setUp() {
 
 		processingInfo = new ProcessingInfo<>();
-		processingResult = "Hello World!";
+		String processingResult = "Hello World!";
 		processingInfo.setProcessingResult(processingResult);
 	}
 
@@ -44,7 +42,7 @@ public class ProcessingInfo_5_Test {
 	@Test
 	public void testProcessingInfo_2() {
 
-		processingMessage = new ProcessingMessage(MessageType.WARN, "Load Peak", "The peak X35P couldn't be loaded completely.");
+		ProcessingMessage processingMessage = new ProcessingMessage(MessageType.WARN, "Load Peak", "The peak X35P couldn't be loaded completely.");
 		processingInfo.addMessage(processingMessage);
 		assertTrue(processingInfo.hasWarnMessages());
 	}

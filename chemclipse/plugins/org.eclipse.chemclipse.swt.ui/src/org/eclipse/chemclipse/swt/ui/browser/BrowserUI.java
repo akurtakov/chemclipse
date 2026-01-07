@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,11 +24,11 @@ import org.eclipse.swt.widgets.Composite;
 
 public class BrowserUI extends Composite {
 
-	private Composite headerComposite;
 	private Browser browser;
 	private String url;
 
 	public BrowserUI(Composite parent, int style, String url) {
+
 		super(parent, style);
 		this.url = url;
 		initialize(parent);
@@ -44,7 +44,7 @@ public class BrowserUI extends Composite {
 		 * Header
 		 */
 		layoutData = new GridData(GridData.FILL_HORIZONTAL);
-		headerComposite = new Composite(composite, SWT.NONE);
+		Composite headerComposite = new Composite(composite, SWT.NONE);
 		headerComposite.setLayout(new GridLayout(1, true));
 		headerComposite.setLayoutData(layoutData);
 		Composite buttonComposite = new Composite(headerComposite, SWT.NONE);

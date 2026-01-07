@@ -168,7 +168,7 @@ public class PeakIdentificationBatchJobReader implements IPeakIdentificationBatc
 		 * Read all entries.
 		 */
 		while(filteredEventReader.hasNext()) {
-			event = filteredEventReader.nextEvent();
+			filteredEventReader.nextEvent();
 			event = eventReader.nextEvent();
 			inputEntry = new PeakInputEntry(event.asCharacters().getData());
 			batchJob.getPeakInputEntries().add(inputEntry);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -38,24 +38,15 @@ import org.junit.jupiter.api.Disabled;
 public class DefaultPeakTestCase {
 
 	private IPeakModelMSD peakModel;
-	private IPeakMassSpectrum peakMaximum;
-	private IPeakIon peakIon;
-	private TreeMap<Float, Float> fragmentValues;
-	private IPeakIntensityValues intensityValues;
-	private TreeMap<Integer, Float> scanValues;
-	private float startBackgroundAbundance = 0.0f;
-	private float stopBackgroundAbundance = 0.0f;
 	private IChromatogramMSD chromatogram;
-	private IIon ion;
-	private IScanMSD supplierMassSpectrum;
 	private IChromatogramPeakMSD peak;
 
 	@BeforeAll
 	public void setUp() {
 
 		// ----------------------PeakMaximum
-		peakMaximum = new PeakMassSpectrum();
-		fragmentValues = new TreeMap<>();
+		IPeakMassSpectrum peakMaximum = new PeakMassSpectrum();
+		TreeMap<Float, Float> fragmentValues = new TreeMap<>();
 		fragmentValues.put(104.0f, 2300.0f);
 		fragmentValues.put(103.0f, 580.0f);
 		fragmentValues.put(51.0f, 260.0f);
@@ -65,7 +56,7 @@ public class DefaultPeakTestCase {
 		fragmentValues.put(74.0f, 380.0f);
 		fragmentValues.put(105.0f, 970.0f);
 		for(Entry<Float, Float> entry : fragmentValues.entrySet()) {
-			peakIon = new PeakIon(entry.getKey(), entry.getValue());
+			IPeakIon peakIon = new PeakIon(entry.getKey(), entry.getValue());
 			peakMaximum.addIon(peakIon);
 		}
 		// ----------------------PeakMaximum
@@ -78,15 +69,15 @@ public class DefaultPeakTestCase {
 		fragmentValues.put(43.0f, 580.0f);
 		fragmentValues.put(18.0f, 420.0f);
 		fragmentValues.put(28.0f, 760.0f);
-		startBackgroundAbundance = 1760.0f;
-		stopBackgroundAbundance = 1760.0f;
+		float startBackgroundAbundance = 1760.0f;
+		float stopBackgroundAbundance = 1760.0f;
 		/*
 		 * Add Scan 1 (500) to 17 (16500)
 		 */
 		for(int i = 1; i <= 17; i++) {
-			supplierMassSpectrum = new ScanMSD();
+			IScanMSD supplierMassSpectrum = new ScanMSD();
 			for(Entry<Float, Float> entry : fragmentValues.entrySet()) {
-				ion = new Ion(entry.getKey(), entry.getValue());
+				IIon ion = new Ion(entry.getKey(), entry.getValue());
 				supplierMassSpectrum.addIon(ion);
 			}
 			chromatogram.addScan(supplierMassSpectrum);
@@ -96,11 +87,11 @@ public class DefaultPeakTestCase {
 		chromatogram.recalculateRetentionTimes();
 		// ----------------------Chromatogram
 		// ----------------------IntensityValues
-		intensityValues = new PeakIntensityValues();
+		IPeakIntensityValues intensityValues = new PeakIntensityValues();
 		/*
 		 * Add Peak 2 (1500) to 16 (15500)
 		 */
-		scanValues = new TreeMap<>();
+		TreeMap<Integer, Float> scanValues = new TreeMap<>();
 		scanValues.put(1500, 0.0f);
 		scanValues.put(2500, 5.0f);
 		scanValues.put(3500, 10.0f);

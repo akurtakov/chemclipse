@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -29,7 +29,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 @TestInstance(Lifecycle.PER_CLASS)
 public class Calculator_2_ITest extends ChromatogramTestCase {
 
-	private Calculator calculator;
 	private TargetTraces targetTraces;
 	private TargetTrace targetTrace;
 
@@ -38,7 +37,7 @@ public class Calculator_2_ITest extends ChromatogramTestCase {
 	public void setUp() throws IOException, ClassifierException {
 
 		super.setUp();
-		calculator = new Calculator();
+		Calculator calculator = new Calculator();
 		ClassifierSettings classifierSettings = new ClassifierSettings();
 		targetTraces = classifierSettings.getTargetTraces();
 		IChromatogramSelectionMSD chromatogramSelection = getChromatogramSelection();

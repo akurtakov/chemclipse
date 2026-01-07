@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -71,7 +71,7 @@ public class Processor {
 		if(imageFileName != null && !imageFileName.isEmpty()) {
 			this.imageFileName = imageFileName;
 		} else {
-			imageFileName = ProcessorSupport.PROCESSOR_IMAGE_DEFAULT;
+			this.imageFileName = ProcessorSupport.PROCESSOR_IMAGE_DEFAULT;
 		}
 	}
 }

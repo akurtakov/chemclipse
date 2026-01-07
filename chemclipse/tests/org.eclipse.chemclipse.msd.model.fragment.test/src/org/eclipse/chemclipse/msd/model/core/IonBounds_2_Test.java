@@ -24,12 +24,11 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class IonBounds_2_Test {
 
 	private IIonBounds ionBounds;
-	private Ion ion;
 
 	@BeforeAll
 	public void setUp() {
 
-		ion = new Ion(25.5f, 3452.4f);
+		IIon ion = new Ion(25.5f, 3452.4f);
 		ionBounds = new IonBounds(ion, ion);
 	}
 

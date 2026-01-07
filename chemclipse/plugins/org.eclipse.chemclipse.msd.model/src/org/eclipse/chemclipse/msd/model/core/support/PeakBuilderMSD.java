@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -788,8 +788,6 @@ public class PeakBuilderMSD {
 	protected static IBackgroundAbundanceRange checkBackgroundAbundanceRange(ITotalScanSignals totalIonSignals, IScanRange scanRange, IBackgroundAbundanceRange backgroundAbundanceRange) throws PeakException {
 
 		ITotalScanSignal totalIonSignal;
-		float background = 0.0f;
-		float signal = 0.0f;
 		float startBackgroundAbundance = 0.0f;
 		float stopBackgroundAbundance = 0.0f;
 		boolean adjustBackgroundAbundance = false;
@@ -801,8 +799,8 @@ public class PeakBuilderMSD {
 		 */
 		totalIonSignal = totalIonSignals.getTotalScanSignal(scanRange.getStartScan());
 		if(totalIonSignal != null) {
-			background = backgroundAbundanceRange.getStartBackgroundAbundance();
-			signal = totalIonSignal.getTotalSignal();
+			float background = backgroundAbundanceRange.getStartBackgroundAbundance();
+			float signal = totalIonSignal.getTotalSignal();
 			if(background <= signal) {
 				startBackgroundAbundance = background;
 			} else {
@@ -817,8 +815,8 @@ public class PeakBuilderMSD {
 		 */
 		totalIonSignal = totalIonSignals.getTotalScanSignal(scanRange.getStopScan());
 		if(totalIonSignal != null) {
-			background = backgroundAbundanceRange.getStopBackgroundAbundance();
-			signal = totalIonSignal.getTotalSignal();
+			float background = backgroundAbundanceRange.getStopBackgroundAbundance();
+			float signal = totalIonSignal.getTotalSignal();
 			if(background <= signal) {
 				stopBackgroundAbundance = background;
 			} else {
