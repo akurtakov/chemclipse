@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class LigninRatios implements ILigninRatios {
 
-	private Map<String, Double> results = new HashMap<String, Double>();
+	private Map<String, Double> results = new HashMap<>();
 
 	@Override
 	public Map<String, Double> getResults() {

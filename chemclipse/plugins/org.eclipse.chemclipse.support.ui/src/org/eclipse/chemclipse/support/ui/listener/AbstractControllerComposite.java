@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,10 +28,10 @@ public abstract class AbstractControllerComposite extends Composite implements I
 	public AbstractControllerComposite(Composite parent, int style) {
 
 		super(parent, style);
-		nextListeners = new ArrayList<INextListener>();
-		nextSectionListeners = new ArrayList<INextListener>();
-		previousListeners = new ArrayList<IPreviousListener>();
-		processListeners = new ArrayList<IProcessListener>();
+		nextListeners = new ArrayList<>();
+		nextSectionListeners = new ArrayList<>();
+		previousListeners = new ArrayList<>();
+		processListeners = new ArrayList<>();
 		saveListener = null;
 	}
 

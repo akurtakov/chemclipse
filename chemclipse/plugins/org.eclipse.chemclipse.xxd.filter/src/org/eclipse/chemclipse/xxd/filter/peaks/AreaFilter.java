@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -50,9 +50,9 @@ public class AreaFilter extends AbstractPeakFilter<AreaFilterSettings> {
 			this.areaSetting = areaSetting;
 		}
 
-		public AreaPredicate<?> negate() {
+		public AreaPredicate<T> negate() {
 
-			return new AreaPredicate<T>(predicate.negate(), areaSetting);
+			return new AreaPredicate<>(predicate.negate(), areaSetting);
 		}
 
 		public boolean test(double integratedArea) {

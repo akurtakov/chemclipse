@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -48,7 +48,7 @@ public class ComponentListType {
 	public List<AnalyzerComponentType> getAnalyzer() {
 
 		if(analyzer == null) {
-			analyzer = new ArrayList<AnalyzerComponentType>();
+			analyzer = new ArrayList<>();
 		}
 		return this.analyzer;
 	}
@@ -56,7 +56,7 @@ public class ComponentListType {
 	public List<DetectorComponentType> getDetector() {
 
 		if(detector == null) {
-			detector = new ArrayList<DetectorComponentType>();
+			detector = new ArrayList<>();
 		}
 		return this.detector;
 	}

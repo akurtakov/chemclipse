@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -179,7 +179,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 		/*
 		 * Print the basis vectors.
 		 */
-		List<double[]> loadingVectors = new ArrayList<double[]>();
+		List<double[]> loadingVectors = new ArrayList<>();
 		for(int principalComponent = 1; principalComponent <= numberOfPrincipalComponents; principalComponent++) {
 			double[] loadingVector = principalComponentAnalysis.getLoadingVector(principalComponent);
 			loadingVectors.add(loadingVector);

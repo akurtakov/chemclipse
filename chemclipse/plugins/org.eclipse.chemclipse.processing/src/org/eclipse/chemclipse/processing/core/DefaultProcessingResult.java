@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -22,10 +22,12 @@ public class DefaultProcessingResult<T> implements IProcessingResult<T> {
 	private T processingResult;
 
 	public DefaultProcessingResult() {
-		processingMessages = new ArrayList<IProcessingMessage>();
+
+		processingMessages = new ArrayList<>();
 	}
 
 	public DefaultProcessingResult(final IProcessingResult<T> processingInfo) {
+
 		this();
 		addMessages(processingInfo);
 	}
@@ -63,7 +65,7 @@ public class DefaultProcessingResult<T> implements IProcessingResult<T> {
 	@Override
 	public IProcessingInfo<T> toInfo() {
 
-		final ProcessingInfo<T> result = new ProcessingInfo<T>();
+		final ProcessingInfo<T> result = new ProcessingInfo<>();
 		for(final IProcessingMessage message : getMessages()) {
 			result.addMessage(message);
 		}

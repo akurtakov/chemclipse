@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -140,7 +140,7 @@ public class AutoPhaseCorrectionProcessor extends AbstractSpectrumSignalFilter<A
 
 		SpectrumData spectrumData = UtilityFunctions.toComplexSpectrumData(context.getFilteredObject());
 		perform(spectrumData, context.getFilterConfig());
-		FilteredSpectrumMeasurement<AutoPhaseCorrectionSettings> spectrumMeasurement = new FilteredSpectrumMeasurement<AutoPhaseCorrectionSettings>(context);
+		FilteredSpectrumMeasurement<AutoPhaseCorrectionSettings> spectrumMeasurement = new FilteredSpectrumMeasurement<>(context);
 		spectrumMeasurement.setSignals(spectrumData.toSignal());
 		return spectrumMeasurement;
 	}
@@ -159,10 +159,10 @@ public class AutoPhaseCorrectionProcessor extends AbstractSpectrumSignalFilter<A
 		PhaseCorrectionValue<Double> initialGuessValues;
 		if(settings.isCorrectOnlyZerothPhase()) {
 			// optimize only PHC0 value
-			initialGuessValues = aPCP.new PhaseCorrectionValue<Double>(0.0);
+			initialGuessValues = aPCP.new PhaseCorrectionValue<>(0.0);
 		} else {
 			// optimize PHC0 and PHC1 values
-			initialGuessValues = aPCP.new PhaseCorrectionValue<Double>(0.0, 0.0);
+			initialGuessValues = aPCP.new PhaseCorrectionValue<>(0.0, 0.0);
 		}
 		NelderMeadSimplex nelderMeadSimplex = new NelderMeadSimplex(initialGuessValues.getLengthOfValues());
 		// Steps along the canonical axes representing box edges

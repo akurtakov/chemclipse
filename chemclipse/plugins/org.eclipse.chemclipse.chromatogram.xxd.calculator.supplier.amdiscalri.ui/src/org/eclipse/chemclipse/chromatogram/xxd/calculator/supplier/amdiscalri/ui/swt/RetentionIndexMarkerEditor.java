@@ -80,7 +80,7 @@ public class RetentionIndexMarkerEditor extends Composite implements IChangeList
 	private static final String CATEGORY = "Retention Indices";
 	private static final String DELETE = "Delete";
 
-	private AtomicReference<Button> buttonSearchControl = new AtomicReference<Button>();
+	private AtomicReference<Button> buttonSearchControl = new AtomicReference<>();
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private AtomicReference<Button> buttonShiftControl = new AtomicReference<>();
 	private AtomicReference<RetentionTimeShifterUI> toolbarShift = new AtomicReference<>();

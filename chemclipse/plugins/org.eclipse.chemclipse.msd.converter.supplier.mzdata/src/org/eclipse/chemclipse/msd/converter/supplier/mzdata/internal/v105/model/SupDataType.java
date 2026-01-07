@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,6 +14,7 @@ package org.eclipse.chemclipse.msd.converter.supplier.mzdata.internal.v105.model
 
 import java.util.ArrayList;
 import java.util.List;
+
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -87,7 +88,7 @@ public class SupDataType {
 	public List<Boolean> getBoolean() {
 
 		if(_boolean == null) {
-			_boolean = new ArrayList<Boolean>();
+			_boolean = new ArrayList<>();
 		}
 		return this._boolean;
 	}
@@ -95,7 +96,7 @@ public class SupDataType {
 	public List<String> getString() {
 
 		if(string == null) {
-			string = new ArrayList<String>();
+			string = new ArrayList<>();
 		}
 		return this.string;
 	}
@@ -103,7 +104,7 @@ public class SupDataType {
 	public List<Float> getTime() {
 
 		if(time == null) {
-			time = new ArrayList<Float>();
+			time = new ArrayList<>();
 		}
 		return this.time;
 	}
@@ -111,7 +112,7 @@ public class SupDataType {
 	public List<String> getURI() {
 
 		if(uri == null) {
-			uri = new ArrayList<String>();
+			uri = new ArrayList<>();
 		}
 		return this.uri;
 	}

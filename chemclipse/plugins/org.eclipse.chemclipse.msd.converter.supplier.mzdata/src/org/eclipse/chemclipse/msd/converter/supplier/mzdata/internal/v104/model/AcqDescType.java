@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -53,7 +53,7 @@ public class AcqDescType {
 	public List<String> getComments() {
 
 		if(comments == null) {
-			comments = new ArrayList<String>();
+			comments = new ArrayList<>();
 		}
 		return this.comments;
 	}
@@ -70,7 +70,7 @@ public class AcqDescType {
 		public List<PrecursorType> getPrecursor() {
 
 			if(precursor == null) {
-				precursor = new ArrayList<PrecursorType>();
+				precursor = new ArrayList<>();
 			}
 			return this.precursor;
 		}

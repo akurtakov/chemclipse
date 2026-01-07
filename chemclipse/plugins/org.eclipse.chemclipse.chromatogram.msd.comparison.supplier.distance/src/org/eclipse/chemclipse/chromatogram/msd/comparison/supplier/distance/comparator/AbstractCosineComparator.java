@@ -89,7 +89,7 @@ public abstract class AbstractCosineComparator extends AbstractMassSpectrumCompa
 
 	public double calculateCosinePhiDirect(IExtractedIonSignal unknownSignal, IExtractedIonSignal referenceSignal) {
 
-		List<Integer> ionList = new ArrayList<Integer>();
+		List<Integer> ionList = new ArrayList<>();
 		int startIon = unknownSignal.getStartIon();
 		int stopIon = unknownSignal.getStopIon();
 		for(int ion = startIon; ion <= stopIon; ion++) {

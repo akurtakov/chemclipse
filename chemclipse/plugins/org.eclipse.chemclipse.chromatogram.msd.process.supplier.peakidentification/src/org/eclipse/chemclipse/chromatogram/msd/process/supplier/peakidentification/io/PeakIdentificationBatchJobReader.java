@@ -160,7 +160,7 @@ public class PeakIdentificationBatchJobReader implements IPeakIdentificationBatc
 		/*
 		 * Use event filters.
 		 */
-		List<String> acceptedElements = new ArrayList<String>();
+		List<String> acceptedElements = new ArrayList<>();
 		acceptedElements.add(IPeakIdentificationBatchJobTags.PEAK_INPUT_ENTRY);
 		EventFilter eventFilter = new PeakIdentificationBatchJobEventFilter(acceptedElements);
 		XMLEventReader filteredEventReader = inputFactory.createFilteredReader(eventReader, eventFilter);
@@ -197,7 +197,7 @@ public class PeakIdentificationBatchJobReader implements IPeakIdentificationBatc
 		/*
 		 * Use event filters.
 		 */
-		List<String> acceptedElements = new ArrayList<String>();
+		List<String> acceptedElements = new ArrayList<>();
 		acceptedElements.add(IPeakIdentificationBatchJobTags.PEAK_INTEGRATION_ENTRY);
 		EventFilter eventFilter = new PeakIdentificationBatchJobEventFilter(acceptedElements);
 		XMLEventReader filteredEventReader = inputFactory.createFilteredReader(eventReader, eventFilter);
@@ -244,7 +244,7 @@ public class PeakIdentificationBatchJobReader implements IPeakIdentificationBatc
 		/*
 		 * Use event filters.
 		 */
-		List<String> acceptedElements = new ArrayList<String>();
+		List<String> acceptedElements = new ArrayList<>();
 		acceptedElements.add(IPeakIdentificationBatchJobTags.PEAK_IDENTIFICATION_ENTRY);
 		EventFilter eventFilter = new PeakIdentificationBatchJobEventFilter(acceptedElements);
 		XMLEventReader filteredEventReader = inputFactory.createFilteredReader(eventReader, eventFilter);
@@ -301,7 +301,7 @@ public class PeakIdentificationBatchJobReader implements IPeakIdentificationBatc
 		/*
 		 * Use event filters.
 		 */
-		List<String> acceptedElements = new ArrayList<String>();
+		List<String> acceptedElements = new ArrayList<>();
 		acceptedElements.add(IPeakIdentificationBatchJobTags.PEAK_OUTPUT_ENTRY);
 		EventFilter eventFilter = new PeakIdentificationBatchJobEventFilter(acceptedElements);
 		XMLEventReader filteredEventReader = inputFactory.createFilteredReader(eventReader, eventFilter);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -35,7 +35,7 @@ public class TotalIonSignals_10_Test {
 		/*
 		 * Ok, we add some negative value here, but
 		 */
-		List<Float> totalSignals = new ArrayList<Float>();
+		List<Float> totalSignals = new ArrayList<>();
 		totalSignals.add(500.0f);
 		totalSignals.add(750.0f);
 		totalSignals.add(200.0f);

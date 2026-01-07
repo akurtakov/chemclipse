@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -119,7 +119,7 @@ public class DataTypeTypeSelectionWizard {
 
 					boolean selection = button.getSelection();
 					if(selection) {
-						List<DataCategory> selectedCategories = new ArrayList<DataCategory>();
+						List<DataCategory> selectedCategories = new ArrayList<>();
 						for(Button checkBox : checkBoxes) {
 							DataCategory data = (DataCategory)checkBox.getData();
 							if(checkBox.getSelection()) {

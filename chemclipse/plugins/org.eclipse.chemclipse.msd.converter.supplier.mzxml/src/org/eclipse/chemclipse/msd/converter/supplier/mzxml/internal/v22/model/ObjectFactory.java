@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -150,6 +150,6 @@ public class ObjectFactory {
 	@XmlElementDecl(namespace = "http://sashimi.sourceforge.net/schema_revision/mzXML_2.2", name = "separationTechnique")
 	public JAXBElement<SeparationTechnique> createSeparationTechnique(SeparationTechnique value) {
 
-		return new JAXBElement<SeparationTechnique>(_SeparationTechnique_QNAME, SeparationTechnique.class, null, value);
+		return new JAXBElement<>(_SeparationTechnique_QNAME, SeparationTechnique.class, null, value);
 	}
 }

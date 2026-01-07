@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,34 +26,40 @@ public abstract class AbstractEvaluation<V extends IVariable, S extends ISample,
 	 * The feature data matrix can be calculated after samples and results are set.
 	 */
 	protected FeatureDataMatrix featureDataMatrix = null;
-	protected List<ISample> highlightedSamples = new ArrayList<ISample>();
-	protected List<IVariable> highlightedVariables = new ArrayList<IVariable>();
+	protected List<ISample> highlightedSamples = new ArrayList<>();
+	protected List<IVariable> highlightedVariables = new ArrayList<>();
 
+	@Override
 	public ISamplesPCA<IVariable, ISample> getSamples() {
 
 		return samples;
 	}
 
+	@Override
 	public FeatureDataMatrix getFeatureDataMatrix() {
 
 		return featureDataMatrix;
 	}
 
+	@Override
 	public void setFeatureDataMatrix(FeatureDataMatrix featureDataMatrix) {
 
 		this.featureDataMatrix = featureDataMatrix;
 	}
 
+	@Override
 	public void setHighlightedSamples(List<ISample> samples) {
 
 		this.highlightedSamples = samples;
 	}
 
+	@Override
 	public List<ISample> getHighlightedSamples() {
 
 		return this.highlightedSamples;
 	}
 
+	@Override
 	public void setHighlightedVariables(List<IVariable> variables) {
 
 		for(IVariable variable : variables) {
@@ -65,6 +71,7 @@ public abstract class AbstractEvaluation<V extends IVariable, S extends ISample,
 		this.highlightedVariables = variables;
 	}
 
+	@Override
 	public List<IVariable> getHighlightedVariables() {
 
 		return this.highlightedVariables;

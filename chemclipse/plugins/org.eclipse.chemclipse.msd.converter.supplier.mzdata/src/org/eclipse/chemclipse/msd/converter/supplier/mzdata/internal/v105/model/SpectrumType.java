@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -53,7 +53,7 @@ public class SpectrumType {
 	public List<SupDescType> getSupDesc() {
 
 		if(supDesc == null) {
-			supDesc = new ArrayList<SupDescType>();
+			supDesc = new ArrayList<>();
 		}
 		return this.supDesc;
 	}
@@ -81,7 +81,7 @@ public class SpectrumType {
 	public List<Object> getSupDataArrayBinaryOrSupDataArray() {
 
 		if(supDataArrayBinaryOrSupDataArray == null) {
-			supDataArrayBinaryOrSupDataArray = new ArrayList<Object>();
+			supDataArrayBinaryOrSupDataArray = new ArrayList<>();
 		}
 		return this.supDataArrayBinaryOrSupDataArray;
 	}

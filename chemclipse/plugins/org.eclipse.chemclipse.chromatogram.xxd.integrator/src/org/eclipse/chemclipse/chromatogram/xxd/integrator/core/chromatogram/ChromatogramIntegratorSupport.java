@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -106,7 +106,7 @@ public class ChromatogramIntegratorSupport implements IChromatogramIntegratorSup
 		 * If the ArrayList is not empty, return the registered chromatogram
 		 * converter filter names.<br/>
 		 */
-		ArrayList<String> integratorNames = new ArrayList<String>();
+		ArrayList<String> integratorNames = new ArrayList<>();
 		for(IChromatogramIntegratorSupplier supplier : suppliers) {
 			integratorNames.add(supplier.getIntegratorName());
 		}

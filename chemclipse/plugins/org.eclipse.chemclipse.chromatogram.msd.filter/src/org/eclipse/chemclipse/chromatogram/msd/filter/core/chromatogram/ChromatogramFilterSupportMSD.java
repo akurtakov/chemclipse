@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,7 +25,7 @@ public class ChromatogramFilterSupportMSD implements IChromatogramFilterSupportM
 	 * Creates a new suppliers list.
 	 */
 	public ChromatogramFilterSupportMSD() {
-		suppliers = new ArrayList<IChromatogramFilterSupplierMSD>();
+		suppliers = new ArrayList<>();
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class ChromatogramFilterSupportMSD implements IChromatogramFilterSupportM
 		 * Test if the suppliers ArrayList is empty.
 		 */
 		areChromatogramFiltersStored();
-		List<String> availableFilters = new ArrayList<String>();
+		List<String> availableFilters = new ArrayList<>();
 		for(IChromatogramFilterSupplierMSD supplier : suppliers) {
 			availableFilters.add(supplier.getId());
 		}
@@ -80,7 +80,7 @@ public class ChromatogramFilterSupportMSD implements IChromatogramFilterSupportM
 		 * If the ArrayList is not empty, return the registered chromatogram
 		 * converter filter names.<br/>
 		 */
-		ArrayList<String> filterNames = new ArrayList<String>();
+		ArrayList<String> filterNames = new ArrayList<>();
 		for(IChromatogramFilterSupplierMSD supplier : suppliers) {
 			filterNames.add(supplier.getFilterName());
 		}

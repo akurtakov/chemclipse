@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -51,7 +51,7 @@ public class IntegrationQuantitationSupport_2_Test extends QuantitationCalculato
 	@Test
 	public void testValidateXIC_1() {
 
-		List<Double> selectedQuantitationIons = new ArrayList<Double>();
+		List<Double> selectedQuantitationIons = new ArrayList<>();
 		selectedQuantitationIons.add(AbstractIon.TIC_ION);
 		assertFalse(support.validateXIC(selectedQuantitationIons));
 	}
@@ -59,7 +59,7 @@ public class IntegrationQuantitationSupport_2_Test extends QuantitationCalculato
 	@Test
 	public void testValidateXIC_2() {
 
-		List<Double> selectedQuantitationIons = new ArrayList<Double>();
+		List<Double> selectedQuantitationIons = new ArrayList<>();
 		selectedQuantitationIons.add(104.0d);
 		selectedQuantitationIons.add(103.0d);
 		assertTrue(support.validateXIC(selectedQuantitationIons));
@@ -68,7 +68,7 @@ public class IntegrationQuantitationSupport_2_Test extends QuantitationCalculato
 	@Test
 	public void testValidateXIC_3() {
 
-		List<Double> selectedQuantitationIons = new ArrayList<Double>();
+		List<Double> selectedQuantitationIons = new ArrayList<>();
 		selectedQuantitationIons.add(104.0d);
 		selectedQuantitationIons.add(103.0d);
 		selectedQuantitationIons.add(51.0d);
@@ -83,7 +83,7 @@ public class IntegrationQuantitationSupport_2_Test extends QuantitationCalculato
 	@Test
 	public void testValidateXIC_4() {
 
-		List<Double> selectedQuantitationIons = new ArrayList<Double>();
+		List<Double> selectedQuantitationIons = new ArrayList<>();
 		selectedQuantitationIons.add(180.0d); // does not exist
 		assertFalse(support.validateXIC(selectedQuantitationIons));
 	}
@@ -91,7 +91,7 @@ public class IntegrationQuantitationSupport_2_Test extends QuantitationCalculato
 	@Test
 	public void testValidateXIC_5() {
 
-		List<Double> selectedQuantitationIons = new ArrayList<Double>();
+		List<Double> selectedQuantitationIons = new ArrayList<>();
 		selectedQuantitationIons.add(104.0d);
 		selectedQuantitationIons.add(103.0d);
 		selectedQuantitationIons.add(51.0d);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,12 +15,12 @@ package org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.manual.ui
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.inject.Named;
-
 import org.eclipse.chemclipse.rcp.app.ui.handlers.PerspectiveSwitchHandler;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
+
+import jakarta.inject.Named;
 
 public class DetectorHandlerMSD {
 
@@ -31,7 +31,7 @@ public class DetectorHandlerMSD {
 		 * Try to select and show the perspective and view.
 		 */
 		String perspectiveId = "org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.manual.ui.perspective";
-		List<String> viewIds = new ArrayList<String>();
+		List<String> viewIds = new ArrayList<>();
 		viewIds.add("org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.manual.ui.views.manualDetectedPeakMSD");
 		viewIds.add("org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.manual.ui.views.chromatogramSelectionView");
 		PerspectiveSwitchHandler.focusPerspectiveAndView(perspectiveId, viewIds);

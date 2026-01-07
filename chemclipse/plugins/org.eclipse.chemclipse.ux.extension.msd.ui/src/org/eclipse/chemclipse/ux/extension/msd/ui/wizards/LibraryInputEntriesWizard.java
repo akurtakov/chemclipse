@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,6 +28,7 @@ public class LibraryInputEntriesWizard extends Wizard {
 	private String description;
 
 	public LibraryInputEntriesWizard(String pageName, String title, String description) {
+
 		super();
 		setNeedsProgressMonitor(true);
 		this.pageName = pageName;
@@ -40,7 +41,7 @@ public class LibraryInputEntriesWizard extends Wizard {
 
 		ISelection selection = inputEntriesPage.getSelection();
 		IStructuredSelection structuredSelection = (IStructuredSelection)selection;
-		selectedLibraries = new ArrayList<String>();
+		selectedLibraries = new ArrayList<>();
 		for(Object element : structuredSelection.toList()) {
 			selectedLibraries.add(element.toString());
 		}

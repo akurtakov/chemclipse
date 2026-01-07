@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -118,7 +118,7 @@ public class Entry {
 	public List<Entry> getEntry() {
 
 		if(entry == null) {
-			entry = new ArrayList<Entry>();
+			entry = new ArrayList<>();
 		}
 		return this.entry;
 	}
@@ -174,7 +174,7 @@ public class Entry {
 	public List<String> getDatacategories() {
 
 		if(datacategories == null) {
-			datacategories = new ArrayList<String>();
+			datacategories = new ArrayList<>();
 		}
 		return this.datacategories;
 	}

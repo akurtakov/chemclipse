@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -44,6 +44,7 @@ public class ExtractedWavelengthSignals implements IExtractedWavelengthSignals {
 	private IChromatogramWSD chromatogram = null;
 
 	public ExtractedWavelengthSignals(int numberOfScans) {
+
 		if(numberOfScans <= 0) {
 			numberOfScans = 0;
 			startScan = 0;
@@ -52,10 +53,11 @@ public class ExtractedWavelengthSignals implements IExtractedWavelengthSignals {
 			startScan = 1;
 			stopScan = numberOfScans;
 		}
-		signals = new ArrayList<IExtractedWavelengthSignal>(numberOfScans);
+		signals = new ArrayList<>(numberOfScans);
 	}
 
 	public ExtractedWavelengthSignals(int numberOfScans, IChromatogramWSD chromatogram) {
+
 		this(numberOfScans);
 		this.chromatogram = chromatogram;
 	}
@@ -69,6 +71,7 @@ public class ExtractedWavelengthSignals implements IExtractedWavelengthSignals {
 	 * @param stopScan
 	 */
 	public ExtractedWavelengthSignals(int startScan, int stopScan) {
+
 		startScan = (startScan <= 0) ? 0 : startScan;
 		stopScan = (stopScan <= 0) ? 0 : stopScan;
 		int start = Math.min(startScan, stopScan);
@@ -81,12 +84,13 @@ public class ExtractedWavelengthSignals implements IExtractedWavelengthSignals {
 		} else {
 			numberOfScans = stop - start + 1;
 		}
-		signals = new ArrayList<IExtractedWavelengthSignal>(numberOfScans);
+		signals = new ArrayList<>(numberOfScans);
 		this.startScan = start;
 		this.stopScan = stop;
 	}
 
 	public ExtractedWavelengthSignals(int startScan, int stopScan, IChromatogramWSD chromatogram) {
+
 		this(startScan, stopScan);
 		this.chromatogram = chromatogram;
 	}
@@ -297,7 +301,7 @@ public class ExtractedWavelengthSignals implements IExtractedWavelengthSignals {
 	@Override
 	public Set<Integer> getUsedWavelenghts() {
 
-		Set<Integer> usedWavelenghts = new TreeSet<Integer>();
+		Set<Integer> usedWavelenghts = new TreeSet<>();
 		for(IExtractedWavelengthSignal signal : signals) {
 			for(int wavelength = signal.getStartWavelength(); wavelength <= signal.getStopWavelength(); wavelength++) {
 				if(signal.getAbundance(wavelength) != 0) {

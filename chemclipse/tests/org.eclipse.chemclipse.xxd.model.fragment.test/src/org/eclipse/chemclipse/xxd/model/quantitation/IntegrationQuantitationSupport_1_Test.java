@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -50,7 +50,7 @@ public class IntegrationQuantitationSupport_1_Test extends QuantitationCalculato
 	@Test
 	public void testValidateXIC_1() {
 
-		List<Double> selectedQuantitationIons = new ArrayList<Double>();
+		List<Double> selectedQuantitationIons = new ArrayList<>();
 		selectedQuantitationIons.add(AbstractIon.TIC_ION);
 		assertTrue(support.validateXIC(selectedQuantitationIons));
 	}

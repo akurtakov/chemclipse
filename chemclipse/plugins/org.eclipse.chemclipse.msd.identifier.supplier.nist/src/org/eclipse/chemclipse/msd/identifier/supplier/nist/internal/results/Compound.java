@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -22,7 +22,8 @@ public class Compound {
 	private String compoundInLibraryFactor = "";
 
 	public Compound() {
-		hits = new ArrayList<Hit>();
+
+		hits = new ArrayList<>();
 		identifier = "";
 	}
 

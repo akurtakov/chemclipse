@@ -74,7 +74,7 @@ public class RetentionIndexAssignerEditor extends Composite implements IChangeLi
 	private static final String CATEGORY = "Retention Index Marker";
 	private static final String DELETE = "Delete";
 
-	private AtomicReference<Button> buttonSearchControl = new AtomicReference<Button>();
+	private AtomicReference<Button> buttonSearchControl = new AtomicReference<>();
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
 	private AtomicReference<IndexAssignerListUI> tableViewer = new AtomicReference<>();
 

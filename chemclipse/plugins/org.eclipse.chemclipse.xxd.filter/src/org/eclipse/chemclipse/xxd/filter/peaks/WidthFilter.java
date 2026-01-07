@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -48,9 +48,9 @@ public class WidthFilter extends AbstractPeakFilter<WidthFilterSettings> {
 			this.widthSetting = widthSetting;
 		}
 
-		public WidthPredicate<?> negate() {
+		public WidthPredicate<T> negate() {
 
-			return new WidthPredicate<T>(predicate.negate(), widthSetting);
+			return new WidthPredicate<>(predicate.negate(), widthSetting);
 		}
 
 		public boolean test(int width) {

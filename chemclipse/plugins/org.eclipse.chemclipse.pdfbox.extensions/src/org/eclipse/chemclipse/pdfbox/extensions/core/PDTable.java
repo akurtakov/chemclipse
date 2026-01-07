@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -34,10 +34,12 @@ public class PDTable {
 	private TextOption textOption = TextOption.NONE;
 
 	public PDTable() {
+
 		this(CellElement.BORDER_ALL);
 	}
 
 	public PDTable(int defaultBorder) {
+
 		/*
 		 * Important to add at least one header row.
 		 */
@@ -134,7 +136,7 @@ public class PDTable {
 
 	public List<CellElement> getDataRow(int i) {
 
-		List<CellElement> rowCells = new ArrayList<CellElement>();
+		List<CellElement> rowCells = new ArrayList<>();
 		if(i >= 0 && i < dataRows.size()) {
 			List<String> row = dataRows.get(i);
 			for(int j = 0; j < row.size(); j++) {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -44,8 +44,8 @@ public class TimeRangeListUtil {
 
 	public List<String> getList(String preferenceEntry) {
 
-		List<String> values = new ArrayList<String>();
-		if(preferenceEntry != "") {
+		List<String> values = new ArrayList<>();
+		if(!"".equals(preferenceEntry)) {
 			String[] items = parseString(preferenceEntry);
 			if(items.length > 0) {
 				for(String item : items) {
@@ -59,7 +59,7 @@ public class TimeRangeListUtil {
 
 	private List<String> getValues(String[] items) {
 
-		List<String> values = new ArrayList<String>();
+		List<String> values = new ArrayList<>();
 		if(items != null) {
 			int size = items.length;
 			for(int i = 0; i < size; i++) {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -65,7 +65,7 @@ public class ExtractedIonSignals implements IExtractedIonSignals {
 			startScan = 1;
 			stopScan = numberOfScans;
 		}
-		signals = new ArrayList<IExtractedIonSignal>(numberOfScans);
+		signals = new ArrayList<>(numberOfScans);
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class ExtractedIonSignals implements IExtractedIonSignals {
 		} else {
 			numberOfScans = stop - start + 1;
 		}
-		signals = new ArrayList<IExtractedIonSignal>(numberOfScans);
+		signals = new ArrayList<>(numberOfScans);
 		this.startScan = start;
 		this.stopScan = stop;
 	}

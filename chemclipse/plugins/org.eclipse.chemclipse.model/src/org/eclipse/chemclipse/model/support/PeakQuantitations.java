@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,8 +19,8 @@ import java.util.Map;
 
 public class PeakQuantitations {
 
-	private List<String> titles = new ArrayList<String>();
-	private List<PeakQuantitation> quantitationEntries = new ArrayList<PeakQuantitation>();
+	private List<String> titles = new ArrayList<>();
+	private List<PeakQuantitation> quantitationEntries = new ArrayList<>();
 
 	public List<String> getTitles() {
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -48,7 +48,7 @@ public class MethodImportConverter extends AbstractImportConverter implements IM
 
 		SubMonitor subMonitor = SubMonitor.convert(monitor, READER.length * 100);
 		for(IMethodReader reader : READER) {
-			ProcessingInfo<IProcessMethod> info = new ProcessingInfo<IProcessMethod>();
+			ProcessingInfo<IProcessMethod> info = new ProcessingInfo<>();
 			IProcessMethod processMethod = reader.convert(file, info, subMonitor.split(100));
 			if(processMethod != null) {
 				info.setProcessingResult(processMethod);
@@ -65,7 +65,7 @@ public class MethodImportConverter extends AbstractImportConverter implements IM
 
 		SubMonitor subMonitor = SubMonitor.convert(monitor, READER.length * 100);
 		for(IMethodReader reader : READER) {
-			ProcessingInfo<IProcessMethod> info = new ProcessingInfo<IProcessMethod>();
+			ProcessingInfo<IProcessMethod> info = new ProcessingInfo<>();
 			IProcessMethod processMethod = reader.convert(stream, nameHint, info, subMonitor.split(100));
 			if(processMethod != null) {
 				info.setProcessingResult(processMethod);

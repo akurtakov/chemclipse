@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -29,6 +29,7 @@ public class QuantitationSupport {
 	private Map<Double, Double> integratedSignals;
 
 	public QuantitationSupport(IPeak peak) {
+
 		this.peak = peak;
 		integratedSignals = calculateIntegratedSignals();
 	}
@@ -112,7 +113,7 @@ public class QuantitationSupport {
 	 */
 	private Map<Double, Double> calculateIntegratedSignals() {
 
-		Map<Double, Double> integratedIons = new HashMap<Double, Double>();
+		Map<Double, Double> integratedIons = new HashMap<>();
 		if(peak != null) {
 			for(IIntegrationEntry integrationEntry : peak.getIntegrationEntries()) {
 				/*

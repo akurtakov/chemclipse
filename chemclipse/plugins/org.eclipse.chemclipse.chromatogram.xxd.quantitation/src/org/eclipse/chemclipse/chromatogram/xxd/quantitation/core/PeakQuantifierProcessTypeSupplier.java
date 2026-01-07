@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -46,7 +46,7 @@ public class PeakQuantifierProcessTypeSupplier implements IProcessTypeSupplier {
 
 		try {
 			IPeakQuantifierSupport support = PeakQuantifier.getPeakQuantifierSupport();
-			List<IProcessSupplier<?>> list = new ArrayList<IProcessSupplier<?>>();
+			List<IProcessSupplier<?>> list = new ArrayList<>();
 			for(String processorId : support.getAvailablePeakQuantifierIds()) {
 				IPeakQuantifierSupplier supplier = support.getPeakQuantifierSupplier(processorId);
 				list.add(new PeakQuantifierProcessorSupplier(supplier, this));

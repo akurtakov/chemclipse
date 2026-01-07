@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,7 +26,7 @@ public abstract class AbstractPreferenceSupplier implements IPreferenceSupplier 
 	private static final Logger logger = Logger.getLogger(AbstractPreferenceSupplier.class);
 	private static final Map<String, IPreferenceSupplier> INSTANCES = new HashMap<>();
 
-	private Map<String, String> defaultValues = new HashMap<String, String>();
+	private Map<String, String> defaultValues = new HashMap<>();
 
 	public AbstractPreferenceSupplier() {
 

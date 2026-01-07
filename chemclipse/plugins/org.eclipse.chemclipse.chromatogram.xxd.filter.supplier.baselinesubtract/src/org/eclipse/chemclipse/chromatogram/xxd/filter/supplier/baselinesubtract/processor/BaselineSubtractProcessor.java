@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -38,7 +38,7 @@ public class BaselineSubtractProcessor {
 		 * Get the total ion signals.
 		 */
 		IBaselineModel baselineModel = chromatogram.getBaselineModel();
-		List<Integer> scansToRemove = new ArrayList<Integer>();
+		List<Integer> scansToRemove = new ArrayList<>();
 		for(int i = startScan; i <= stopScan; i++) {
 			IScan scan = chromatogram.getScan(i);
 			int retentionTime = scan.getRetentionTime();

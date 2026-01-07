@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -41,7 +41,7 @@ public class Chromatogram_26_Test {
 		/*
 		 * Chromatogram Integration Entries
 		 */
-		chromatogramIntegrationEntries = new ArrayList<IIntegrationEntry>();
+		chromatogramIntegrationEntries = new ArrayList<>();
 		chromatogramIntegrationEntry = new IntegrationEntry(25.3f, 26778.7d);
 		chromatogramIntegrationEntries.add(chromatogramIntegrationEntry);
 		chromatogramIntegrationEntry = new IntegrationEntry(28.1f, 3446.2d);
@@ -53,7 +53,7 @@ public class Chromatogram_26_Test {
 		/*
 		 * Background Integration Entries
 		 */
-		backgroundIntegrationEntries = new ArrayList<IIntegrationEntry>();
+		backgroundIntegrationEntries = new ArrayList<>();
 		backgroundIntegrationEntry = new IntegrationEntry(28.2f, 378374.78d);
 		backgroundIntegrationEntries.add(backgroundIntegrationEntry);
 		backgroundIntegrationEntry = new IntegrationEntry(56.1f, 92043074.78d);

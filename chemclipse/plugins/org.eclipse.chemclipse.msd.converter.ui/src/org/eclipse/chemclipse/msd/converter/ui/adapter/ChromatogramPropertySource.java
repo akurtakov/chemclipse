@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -67,7 +67,7 @@ public abstract class ChromatogramPropertySource implements IPropertySource {
 	public IPropertyDescriptor[] getPropertyDescriptors() {
 
 		TextPropertyDescriptor textPropertyDescriptor;
-		ArrayList<IPropertyDescriptor> list = new ArrayList<IPropertyDescriptor>();
+		ArrayList<IPropertyDescriptor> list = new ArrayList<>();
 
 		// textPropertyDescriptor = new TextPropertyDescriptor(MIN_SIGNAL, "Min Signal");
 		// textPropertyDescriptor.setCategory(RECORDS);
@@ -129,9 +129,9 @@ public abstract class ChromatogramPropertySource implements IPropertySource {
 		// else if(MAX_SIGNAL.equals(id))
 		// return chromatogram.getMaxSignal();
 		if(START_RETENTION_TIME.equals(id)) {
-			return getFormattedValue((double)chromatogram.getStartRetentionTime(), IChromatogramOverview.MINUTE_CORRELATION_FACTOR, "0.00");
+			return getFormattedValue(chromatogram.getStartRetentionTime(), IChromatogramOverview.MINUTE_CORRELATION_FACTOR, "0.00");
 		} else if(STOP_RETENTION_TIME.equals(id)) {
-			return getFormattedValue((double)chromatogram.getStopRetentionTime(), IChromatogramOverview.MINUTE_CORRELATION_FACTOR, "0.00");
+			return getFormattedValue(chromatogram.getStopRetentionTime(), IChromatogramOverview.MINUTE_CORRELATION_FACTOR, "0.00");
 		} else if(NUMBER_OF_SCANS.equals(id)) {
 			return Integer.valueOf(chromatogram.getNumberOfScans()).toString();
 		} else if(SCAN_DELAY.equals(id)) {

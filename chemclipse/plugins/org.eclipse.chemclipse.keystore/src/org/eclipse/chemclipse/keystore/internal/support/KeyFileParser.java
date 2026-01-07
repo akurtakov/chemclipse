@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -30,11 +30,12 @@ public class KeyFileParser {
 	 * Use only static methods.
 	 */
 	private KeyFileParser() {
+
 	}
 
 	public static Map<String, String> readKeysFromFile(File file) {
 
-		Map<String, String> keyMap = new HashMap<String, String>();
+		Map<String, String> keyMap = new HashMap<>();
 		/*
 		 * The file must be not null.
 		 */

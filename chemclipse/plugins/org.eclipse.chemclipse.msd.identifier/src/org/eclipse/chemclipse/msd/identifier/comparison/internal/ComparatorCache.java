@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -114,7 +114,7 @@ public class ComparatorCache {
 		 */
 		List<IIon> ions = new ArrayList<>(massSpectrum.getIons());
 		Collections.sort(ions, ionAbundanceComparator);
-		Set<Integer> topIons = new HashSet<Integer>();
+		Set<Integer> topIons = new HashSet<>();
 		int size = (ions.size() < NUMBER_TOP_IONS) ? ions.size() : NUMBER_TOP_IONS;
 		for(int i = 0; i < size; i++) {
 			topIons.add(AbstractIon.getIon(ions.get(i).getIon()));
@@ -126,10 +126,10 @@ public class ComparatorCache {
 	private void initializeDatabaseMaps() {
 
 		if(unknownTopIons == null) {
-			unknownTopIons = new HashMap<Integer, Set<Integer>>();
+			unknownTopIons = new HashMap<>();
 		}
 		if(referenceTopIons == null) {
-			referenceTopIons = new HashMap<Integer, Set<Integer>>();
+			referenceTopIons = new HashMap<>();
 		}
 	}
 }

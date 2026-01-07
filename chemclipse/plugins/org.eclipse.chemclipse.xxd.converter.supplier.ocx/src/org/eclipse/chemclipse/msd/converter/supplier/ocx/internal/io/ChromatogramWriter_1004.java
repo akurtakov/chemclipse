@@ -158,7 +158,7 @@ public class ChromatogramWriter_1004 extends AbstractChromatogramWriter implemen
 
 		ZipEntry zipEntry;
 		DataOutputStream dataOutputStream;
-		List<IScanProxy> scanProxies = new ArrayList<IScanProxy>();
+		List<IScanProxy> scanProxies = new ArrayList<>();
 		/*
 		 * Scans
 		 */

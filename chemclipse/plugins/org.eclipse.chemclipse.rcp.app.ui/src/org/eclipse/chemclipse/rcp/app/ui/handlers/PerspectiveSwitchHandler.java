@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,8 +15,6 @@ package org.eclipse.chemclipse.rcp.app.ui.handlers;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.inject.Inject;
-
 import org.eclipse.chemclipse.rcp.app.ui.Activator;
 import org.eclipse.chemclipse.rcp.app.ui.dialogs.PerspectiveChooserDialog;
 import org.eclipse.chemclipse.rcp.app.ui.dialogs.PerspectiveSwitcherDialog;
@@ -30,6 +28,8 @@ import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+
+import jakarta.inject.Inject;
 
 public class PerspectiveSwitchHandler {
 
@@ -46,7 +46,7 @@ public class PerspectiveSwitchHandler {
 
 	public static void focusPerspectiveAndView(String perspectiveId, String viewId) {
 
-		List<String> viewIds = new ArrayList<String>();
+		List<String> viewIds = new ArrayList<>();
 		viewIds.add(viewId);
 		focusPerspectiveAndView(perspectiveId, viewIds);
 	}

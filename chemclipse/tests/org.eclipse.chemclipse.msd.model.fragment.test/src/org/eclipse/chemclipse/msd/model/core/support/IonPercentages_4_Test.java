@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -36,7 +36,7 @@ public class IonPercentages_4_Test {
 	@BeforeAll
 	public void setUp() {
 
-		ions = new HashMap<Integer, Float>();
+		ions = new HashMap<>();
 		massSpectrum = null;
 		ionPercentages = new IonPercentages(massSpectrum);
 	}
@@ -56,7 +56,7 @@ public class IonPercentages_4_Test {
 	@Test
 	public void testIonPercentages_2() {
 
-		List<Integer> ionList = new ArrayList<Integer>(ions.keySet());
+		List<Integer> ionList = new ArrayList<>(ions.keySet());
 		assertEquals(0.0f, ionPercentages.getPercentage(ionList), 0);
 	}
 }

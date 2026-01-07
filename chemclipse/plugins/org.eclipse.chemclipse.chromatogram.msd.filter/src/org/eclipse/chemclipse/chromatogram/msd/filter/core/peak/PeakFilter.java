@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -100,7 +100,7 @@ public class PeakFilter {
 			return peakFilter.applyFilter(peaks, peakFilterSettings, monitor);
 		} else {
 			IProcessingInfo<IPeakFilterResult> processingInfo;
-			processingInfo = new ProcessingInfo<IPeakFilterResult>();
+			processingInfo = new ProcessingInfo<>();
 			processingInfo.addErrorMessage(PROCESSING_DESCRIPTION, NO_PEAK_FILTER_AVAILABLE);
 			return processingInfo;
 		}

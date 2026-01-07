@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,6 +16,9 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.datatype.Duration;
+
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -24,7 +27,6 @@ import jakarta.xml.bind.annotation.XmlElements;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlSchemaType;
 import jakarta.xml.bind.annotation.XmlType;
-import javax.xml.datatype.Duration;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {"scanOrigin", "precursorMz", "maldi", "peaks", "nameValueAndComment", "scan"})
@@ -87,7 +89,7 @@ public class Scan implements Serializable {
 	public List<ScanOrigin> getScanOrigin() {
 
 		if(scanOrigin == null) {
-			scanOrigin = new ArrayList<ScanOrigin>();
+			scanOrigin = new ArrayList<>();
 		}
 		return this.scanOrigin;
 	}
@@ -95,7 +97,7 @@ public class Scan implements Serializable {
 	public List<PrecursorMz> getPrecursorMz() {
 
 		if(precursorMz == null) {
-			precursorMz = new ArrayList<PrecursorMz>();
+			precursorMz = new ArrayList<>();
 		}
 		return this.precursorMz;
 	}
@@ -113,7 +115,7 @@ public class Scan implements Serializable {
 	public List<Peaks> getPeaks() {
 
 		if(peaks == null) {
-			peaks = new ArrayList<Peaks>();
+			peaks = new ArrayList<>();
 		}
 		return this.peaks;
 	}
@@ -121,7 +123,7 @@ public class Scan implements Serializable {
 	public List<Serializable> getNameValueAndComment() {
 
 		if(nameValueAndComment == null) {
-			nameValueAndComment = new ArrayList<Serializable>();
+			nameValueAndComment = new ArrayList<>();
 		}
 		return this.nameValueAndComment;
 	}
@@ -129,7 +131,7 @@ public class Scan implements Serializable {
 	public List<Scan> getScan() {
 
 		if(scan == null) {
-			scan = new ArrayList<Scan>();
+			scan = new ArrayList<>();
 		}
 		return this.scan;
 	}

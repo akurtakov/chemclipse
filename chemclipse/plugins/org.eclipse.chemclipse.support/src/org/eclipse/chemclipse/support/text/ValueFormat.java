@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -38,12 +38,12 @@ public class ValueFormat {
 	private static final String DEFAULT_NUMBER_FORMAT = "DNF"; // $NON-NLS-1$
 	private static Map<String, NumberFormat> numberFormatsEnglish = null;
 	static {
-		decimalFormatsEnglish = new HashMap<String, DecimalFormat>();
-		decimalFormatsGerman = new HashMap<String, DecimalFormat>();
-		simpleDateFormatsEnglish = new HashMap<String, SimpleDateFormat>();
-		simpleDateFormatsGerman = new HashMap<String, SimpleDateFormat>();
+		decimalFormatsEnglish = new HashMap<>();
+		decimalFormatsGerman = new HashMap<>();
+		simpleDateFormatsEnglish = new HashMap<>();
+		simpleDateFormatsGerman = new HashMap<>();
 
-		numberFormatsEnglish = new HashMap<String, NumberFormat>();
+		numberFormatsEnglish = new HashMap<>();
 	}
 
 	/**

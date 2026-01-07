@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -88,7 +88,7 @@ public class SplashFactory {
 		double basePeakIntensity = massSpectrum.getBasePeakAbundance();
 		List<IIon> ions = massSpectrum.getIons();
 		if(basePeakPercentage >= 0) {
-			List<IIon> filteredIons = new ArrayList<IIon>();
+			List<IIon> filteredIons = new ArrayList<>();
 			for(IIon ion : ions) {
 				if(ion.getAbundance() + EPS_CORRECTION >= basePeakPercentage * basePeakIntensity) {
 					filteredIons.add(new Ion(ion.getIon(), ion.getAbundance()));
@@ -141,7 +141,7 @@ public class SplashFactory {
 
 	protected String encodeSpectrum(IScanMSD spectrum) {
 
-		List<IIon> ions = new ArrayList<IIon>(spectrum.getIons());
+		List<IIon> ions = new ArrayList<>(spectrum.getIons());
 		StringBuilder buffer = new StringBuilder();
 		Collections.sort(ions, new MassThenIntensityComparator());
 		for(int i = 0; i < ions.size(); i++) {

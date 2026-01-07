@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -58,7 +58,7 @@ public class GaussianApodizationFunctionProcessor extends AbstractFIDSignalFilte
 		if(gaussianLineBroadeningFactor > 0) {
 			// gf=2*sqrt(log(2))/(pi*NmrData.gw);
 			BigDecimal gaussFactor = GAUS_CONSTANT.divide(PI.multiply(BigDecimal.valueOf(gaussianLineBroadeningFactor)), RoundingMode.HALF_UP);
-			FilteredFIDMeasurement<GaussianApodizationSettings> fidMeasurement = new FilteredFIDMeasurement<GaussianApodizationSettings>(context);
+			FilteredFIDMeasurement<GaussianApodizationSettings> fidMeasurement = new FilteredFIDMeasurement<>(context);
 			ComplexFIDData data = UtilityFunctions.toComplexFIDData(context.getFilteredObject().getSignals());
 			for(int i = 0; i < data.times.length; i++) {
 				BigDecimal time = data.times[i];

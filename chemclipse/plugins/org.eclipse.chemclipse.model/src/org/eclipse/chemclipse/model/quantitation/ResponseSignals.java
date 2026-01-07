@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -77,6 +77,7 @@ public class ResponseSignals extends ArrayList<IResponseSignal> implements IResp
 		return x / y;
 	}
 
+	@Override
 	public double getMinResponseValue(double signal) {
 
 		double minResponse = Double.MAX_VALUE;
@@ -92,6 +93,7 @@ public class ResponseSignals extends ArrayList<IResponseSignal> implements IResp
 		return (minResponse == Double.MAX_VALUE) ? 0.0d : minResponse;
 	}
 
+	@Override
 	public double getMaxResponseValue(double signal) {
 
 		double maxResponse = 0;
@@ -146,7 +148,7 @@ public class ResponseSignals extends ArrayList<IResponseSignal> implements IResp
 	@Override
 	public List<IResponseSignal> getList(double signal) {
 
-		List<IResponseSignal> entries = new ArrayList<IResponseSignal>();
+		List<IResponseSignal> entries = new ArrayList<>();
 		for(IResponseSignal entry : this) {
 			if(entry.getSignal() == signal) {
 				entries.add(entry);
@@ -162,7 +164,7 @@ public class ResponseSignals extends ArrayList<IResponseSignal> implements IResp
 		 * x -> Concentration
 		 * y -> Response
 		 */
-		List<IPoint> points = new ArrayList<IPoint>();
+		List<IPoint> points = new ArrayList<>();
 		if(isCrossZero) {
 			points.add(new Point(0.0d, 0.0d));
 		}

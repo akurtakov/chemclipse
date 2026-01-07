@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -66,9 +66,9 @@ public class ShapeFilter extends AbstractPeakFilter<ShapeFilterSettings> {
 			this.shapeSetting = shapeSetting;
 		}
 
-		public ShapePredicate<?> negate() {
+		public ShapePredicate<T> negate() {
 
-			return new ShapePredicate<T>(predicate.negate(), shapeSetting);
+			return new ShapePredicate<>(predicate.negate(), shapeSetting);
 		}
 
 		public boolean test(RangeContainer values) {

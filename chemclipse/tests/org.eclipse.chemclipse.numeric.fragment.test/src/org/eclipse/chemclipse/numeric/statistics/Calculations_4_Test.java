@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -58,7 +58,7 @@ public class Calculations_4_Test {
 	@Test
 	public void testGetMedian_2() {
 
-		List<Double> val = new ArrayList<Double>();
+		List<Double> val = new ArrayList<>();
 		for(double value : values) {
 			val.add(value);
 		}
@@ -69,7 +69,7 @@ public class Calculations_4_Test {
 	@Test
 	public void testGetMedian_3() {
 
-		List<Double> val = new ArrayList<Double>();
+		List<Double> val = new ArrayList<>();
 		/*
 		 * Add null to test null values.<br/> To preserve the median, a higher
 		 * value than the existing max value needs to be added too.<br/> Add in

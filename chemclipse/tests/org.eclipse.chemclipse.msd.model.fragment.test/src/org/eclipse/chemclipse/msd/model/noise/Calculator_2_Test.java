@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -45,7 +45,7 @@ public class Calculator_2_Test {
 	public void setUp() {
 
 		calculator = new Calculator();
-		noiseMassSpectra = new ArrayList<ICombinedMassSpectrum>();
+		noiseMassSpectra = new ArrayList<>();
 		/*
 		 * Noise mass spectrum #1
 		 */

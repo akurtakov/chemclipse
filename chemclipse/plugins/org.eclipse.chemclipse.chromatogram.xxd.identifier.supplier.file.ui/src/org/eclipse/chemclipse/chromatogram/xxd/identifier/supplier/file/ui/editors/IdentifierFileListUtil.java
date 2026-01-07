@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -44,8 +44,8 @@ public class IdentifierFileListUtil {
 
 	public List<String> getFiles(String preferenceEntry) {
 
-		List<String> files = new ArrayList<String>();
-		if(preferenceEntry != "") {
+		List<String> files = new ArrayList<>();
+		if(!"".equals(preferenceEntry)) {
 			String[] items = parseString(preferenceEntry);
 			if(items.length > 0) {
 				for(String item : items) {
@@ -59,7 +59,7 @@ public class IdentifierFileListUtil {
 
 	private List<String> getFileList(String[] items) {
 
-		List<String> files = new ArrayList<String>();
+		List<String> files = new ArrayList<>();
 		if(items != null) {
 			int size = items.length;
 			for(int i = 0; i < size; i++) {

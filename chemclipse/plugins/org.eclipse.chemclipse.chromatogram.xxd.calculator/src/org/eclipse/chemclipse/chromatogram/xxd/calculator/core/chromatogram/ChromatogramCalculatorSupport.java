@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,7 +26,7 @@ public class ChromatogramCalculatorSupport implements IChromatogramCalculatorSup
 	 */
 	public ChromatogramCalculatorSupport() {
 
-		suppliers = new ArrayList<IChromatogramCalculatorSupplier>();
+		suppliers = new ArrayList<>();
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class ChromatogramCalculatorSupport implements IChromatogramCalculatorSup
 		 * Test if the suppliers ArrayList is empty.
 		 */
 		areChromatogramCalculatorsStored();
-		List<String> availableFilters = new ArrayList<String>();
+		List<String> availableFilters = new ArrayList<>();
 		for(IChromatogramCalculatorSupplier supplier : suppliers) {
 			availableFilters.add(supplier.getId());
 		}
@@ -81,7 +81,7 @@ public class ChromatogramCalculatorSupport implements IChromatogramCalculatorSup
 		 * If the ArrayList is not empty, return the registered chromatogram
 		 * converter filter names.<br/>
 		 */
-		ArrayList<String> filterNames = new ArrayList<String>();
+		ArrayList<String> filterNames = new ArrayList<>();
 		for(IChromatogramCalculatorSupplier supplier : suppliers) {
 			filterNames.add(supplier.getCalculatorName());
 		}

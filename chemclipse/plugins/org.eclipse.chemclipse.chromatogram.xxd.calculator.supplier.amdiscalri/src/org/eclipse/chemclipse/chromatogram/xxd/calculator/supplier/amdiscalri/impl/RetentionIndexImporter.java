@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -137,7 +137,7 @@ public class RetentionIndexImporter {
 
 	private List<File> getCalibrationFiles(File directory, boolean caseSensitive, String extension) {
 
-		List<File> files = new ArrayList<File>();
+		List<File> files = new ArrayList<>();
 		for(File file : directory.listFiles()) {
 			String name = caseSensitive ? file.getName() : file.getName().toLowerCase();
 			if(name.endsWith(extension)) {

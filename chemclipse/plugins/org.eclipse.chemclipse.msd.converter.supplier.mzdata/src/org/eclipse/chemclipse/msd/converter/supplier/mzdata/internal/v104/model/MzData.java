@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -40,7 +40,7 @@ public class MzData {
 	public List<CvLookupType> getCvLookup() {
 
 		if(cvLookup == null) {
-			cvLookup = new ArrayList<CvLookupType>();
+			cvLookup = new ArrayList<>();
 		}
 		return this.cvLookup;
 	}
@@ -143,7 +143,7 @@ public class MzData {
 		public List<MzData.SpectrumList.Spectrum> getSpectrum() {
 
 			if(spectrum == null) {
-				spectrum = new ArrayList<MzData.SpectrumList.Spectrum>();
+				spectrum = new ArrayList<>();
 			}
 			return this.spectrum;
 		}

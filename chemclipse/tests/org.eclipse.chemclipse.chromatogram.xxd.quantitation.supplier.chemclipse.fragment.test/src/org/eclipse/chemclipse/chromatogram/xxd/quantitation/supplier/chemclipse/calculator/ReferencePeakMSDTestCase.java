@@ -77,7 +77,7 @@ public class ReferencePeakMSDTestCase {
 
 		// ----------------------PeakMaximum
 		peakMaximum = new PeakMassSpectrum();
-		fragmentValues = new TreeMap<Double, Float>();
+		fragmentValues = new TreeMap<>();
 		fragmentValues.put(104.0d, 2300.0f);
 		fragmentValues.put(103.0d, 580.0f);
 		fragmentValues.put(51.0d, 260.0f);

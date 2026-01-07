@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -46,7 +46,7 @@ public class QuantitationCompound_3_Test extends ReferencePeakMSDTestCase {
 		super.setUp();
 		quantitationCompound = new QuantitationCompound("Styrene", "mg/ml", 5500);
 
-		List<IQuantitationPeak> quantitationPeaks = new ArrayList<IQuantitationPeak>();
+		List<IQuantitationPeak> quantitationPeaks = new ArrayList<>();
 		IQuantitationPeak quantitationPeak = new QuantitationPeakMSD(getReferencePeakMSD_TIC_1(), 0.1d, "mg/ml");
 		quantitationPeaks.add(quantitationPeak);
 		quantitationCompound.getQuantitationPeaks().addAll(quantitationPeaks);

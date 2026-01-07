@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -29,7 +29,7 @@ public class CompoundIdentifierListType {
 	public List<CVTermType> getIdentifier() {
 
 		if(identifier == null) {
-			identifier = new ArrayList<CVTermType>();
+			identifier = new ArrayList<>();
 		}
 		return this.identifier;
 	}
@@ -37,7 +37,7 @@ public class CompoundIdentifierListType {
 	public List<CompoundDatabaseIdentifierType> getDatabaseIdentifier() {
 
 		if(databaseIdentifier == null) {
-			databaseIdentifier = new ArrayList<CompoundDatabaseIdentifierType>();
+			databaseIdentifier = new ArrayList<>();
 		}
 		return this.databaseIdentifier;
 	}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,10 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.nmr.converter.supplier.nmrml.internal.v100.model;
 
+import javax.xml.namespace.QName;
+
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.annotation.XmlElementDecl;
 import jakarta.xml.bind.annotation.XmlRegistry;
-import javax.xml.namespace.QName;
 
 @XmlRegistry
 public class ObjectFactory {
@@ -454,6 +455,6 @@ public class ObjectFactory {
 	@XmlElementDecl(namespace = "http://nmrml.org/schema", name = "nmrML")
 	public JAXBElement<NmrMLType> createNmrML(NmrMLType value) {
 
-		return new JAXBElement<NmrMLType>(_NmrML_QNAME, NmrMLType.class, null, value);
+		return new JAXBElement<>(_NmrML_QNAME, NmrMLType.class, null, value);
 	}
 }

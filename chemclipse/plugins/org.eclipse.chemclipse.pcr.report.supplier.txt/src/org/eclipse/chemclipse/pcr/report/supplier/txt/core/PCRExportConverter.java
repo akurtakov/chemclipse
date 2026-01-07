@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -94,7 +94,7 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 
 	private Set<String> getSampleSubsets(IPlate plate) {
 
-		Set<String> sampleSubsets = new HashSet<String>();
+		Set<String> sampleSubsets = new HashSet<>();
 		sampleSubsets.add(SAMPLE_SUBSET_ALL);
 
 		for(IWell well : plate.getWells()) {

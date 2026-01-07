@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,7 +23,8 @@ public class ReportRowModel implements IReportRowModel {
 	private List<List<String>> rows;
 
 	public ReportRowModel() {
-		rows = new ArrayList<List<String>>();
+
+		rows = new ArrayList<>();
 	}
 
 	@Override

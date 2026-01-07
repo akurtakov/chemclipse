@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -31,7 +31,7 @@ public class ChromatogramSourceCombo extends Composite {
 	private static final String SOURCE_REFERENCES = "Internal (This Chromatogram)";
 	private static final String SOURCE_EDITORS = "External (Editor Chromatogram)";
 
-	private List<String> sources = new ArrayList<String>();
+	private List<String> sources = new ArrayList<>();
 	private ComboViewer comboViewer;
 
 	public ChromatogramSourceCombo(Composite parent, int style) {
