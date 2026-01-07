@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,13 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.pdfbox.extensions.settings;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class ConverterFactory {
 
-	private static final Map<Unit, IUnitConverter> UNIT_CONVERTER_MAP = new HashMap<>();
-	private static final Map<PageBase, IPageBaseConverter> PAGE_BASE_CONVERTER_MAP = new HashMap<>();
+	private static final Map<Unit, IUnitConverter> UNIT_CONVERTER_MAP = new EnumMap<>(Unit.class);
+	private static final Map<PageBase, IPageBaseConverter> PAGE_BASE_CONVERTER_MAP = new EnumMap<>(PageBase.class);
 
 	public static IUnitConverter getInstance(Unit unit) {
 

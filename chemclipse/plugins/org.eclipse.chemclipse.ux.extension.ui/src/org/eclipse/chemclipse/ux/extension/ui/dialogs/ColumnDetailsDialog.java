@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.ui.dialogs;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +32,7 @@ import org.eclipse.swt.widgets.Text;
 
 public class ColumnDetailsDialog extends TitleAreaDialog {
 
-	private Map<SeparationColumnType, String> nameMap = new HashMap<>();
+	private Map<SeparationColumnType, String> nameMap = new EnumMap<>(SeparationColumnType.class);
 
 	public ColumnDetailsDialog(Shell parentShell) {
 
