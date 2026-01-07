@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -33,7 +33,7 @@ public class SamplesLabelProvider extends AbstractChemClipseLabelProvider {
 
 	public static final int INDEX_COLOR = 4;
 
-	public static String[] TITLES = {//
+	public static final String[] TITLES = {//
 			SAMPLE_NAME, //
 			SAMPLE_NAME_LONG, //
 			USE, //
@@ -44,7 +44,7 @@ public class SamplesLabelProvider extends AbstractChemClipseLabelProvider {
 			DESCRIPTION //
 	};
 
-	public static int[] BOUNDS = {//
+	public static final int[] BOUNDS = {//
 			150, //
 			250, //
 			30, //

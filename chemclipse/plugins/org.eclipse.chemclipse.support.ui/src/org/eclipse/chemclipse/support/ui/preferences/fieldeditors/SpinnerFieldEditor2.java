@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2025 IBM Corporation and others.
+ * Copyright (c) 2000, 2026 IBM Corporation and others.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -52,7 +52,7 @@ public class SpinnerFieldEditor2 extends FieldEditor {
 	 * Text limit constant (value <code>-1</code>) indicating unlimited
 	 * text limit and width.
 	 */
-	public static int UNLIMITED = -1;
+	public static final int UNLIMITED = -1;
 	/**
 	 * Cached valid state.
 	 */
@@ -101,6 +101,7 @@ public class SpinnerFieldEditor2 extends FieldEditor {
 	 * @since 2.0
 	 */
 	public SpinnerFieldEditor2(String name, String labelText, int strategy, Composite parent) {
+
 		init(name, labelText);
 		setValidateStrategy(strategy);
 		isValid = false;
@@ -120,6 +121,7 @@ public class SpinnerFieldEditor2 extends FieldEditor {
 	 *            the parent of the field editor's control
 	 */
 	public SpinnerFieldEditor2(String name, String labelText, Composite parent) {
+
 		this(name, labelText, VALIDATE_ON_VALUE_MODIFICATION, parent);
 	}
 

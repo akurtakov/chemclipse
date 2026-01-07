@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,14 +26,14 @@ public class SampleGroupAssignerLabelProvider extends AbstractChemClipseLabelPro
 	public static final String SELECT = "Select";
 	public static final String GROUP_NAME = "Group Name";
 
-	public static String[] TITLES = {//
+	public static final String[] TITLES = {//
 			SAMPLE_NAME, //
 			DESCRIPTION, //
 			SELECT, //
 			GROUP_NAME //
 	};
 
-	public static int[] BOUNDS = {//
+	public static final int[] BOUNDS = {//
 			100, //
 			200, //
 			30, //

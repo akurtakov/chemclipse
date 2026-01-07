@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,8 +23,8 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class AnalysisSegment_3_Test {
 
 	private IAnalysisSegment segment;
-	private final int startScan = -5;
-	private final int segmentWidth = -5;
+	private static final int startScan = -5;
+	private static final int segmentWidth = -5;
 
 	@BeforeAll
 	public void setUp() {

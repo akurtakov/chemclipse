@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -33,9 +33,9 @@ public class DefaultChromatogram_1_Test {
 
 	private ChromatogramMSD chromatogram;
 	private IEditInformation editInformation;
-	private final String entry1 = "I have modified the chromatogram.";
-	private final String entry2 = "Me too.";
-	private final String entry3 = "What are we doing now?";
+	private static final String entry1 = "I have modified the chromatogram.";
+	private static final String entry2 = "Me too.";
+	private static final String entry3 = "What are we doing now?";
 
 	@BeforeAll
 	public void setUp() throws InterruptedException {

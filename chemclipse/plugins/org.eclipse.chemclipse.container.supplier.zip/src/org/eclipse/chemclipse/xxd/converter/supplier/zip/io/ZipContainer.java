@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -30,7 +30,7 @@ import org.eclipse.chemclipse.logging.core.Logger;
 
 public class ZipContainer implements IFileContentProvider {
 
-	private final int BUFFER = 2048;
+	private static final int BUFFER = 2048;
 	private static final Logger logger = Logger.getLogger(ZipContainer.class);
 
 	@Override
