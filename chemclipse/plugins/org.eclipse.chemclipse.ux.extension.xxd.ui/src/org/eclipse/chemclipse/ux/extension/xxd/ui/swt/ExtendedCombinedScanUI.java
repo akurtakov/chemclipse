@@ -12,6 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.swt;
 
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.getCalculationType;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.getSessionSubtractMassSpectrum;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUseNormalizedScan;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUsePeaksInsteadOfScans;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.setSessionSubtractMassSpectrum;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.storeSessionSubtractMassSpectrum;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -119,11 +126,11 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 			chromatogramSelection = null;
 			combinedScan = null;
 
-			CalculationType calculationType = org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.getCalculationType();
+			CalculationType calculationType = getCalculationType();
 			if(object instanceof IChromatogramSelectionMSD chromatogramSelectionMSD) {
 				this.chromatogramSelection = chromatogramSelectionMSD;
-				boolean useNormalize = org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUseNormalizedScan();
-				boolean usePeaksInsteadOfScans = org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUsePeaksInsteadOfScans();
+				boolean useNormalize = isUseNormalizedScan();
+				boolean usePeaksInsteadOfScans = isUsePeaksInsteadOfScans();
 				combinedScan = FilterSupport.getCombinedMassSpectrum(chromatogramSelectionMSD, null, useNormalize, calculationType, usePeaksInsteadOfScans);
 			} else if(object instanceof IChromatogramSelectionVSD chromatogramSelectionVSD) {
 				this.chromatogramSelection = chromatogramSelectionVSD;
@@ -370,9 +377,9 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 			public void widgetSelected(SelectionEvent e) {
 
 				if(combinedScan instanceof ICombinedMassSpectrum combinedMassSpectrum) {
-					boolean useNormalize = org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUseNormalizedScan();
-					CalculationType calculationType = org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.getCalculationType();
-					IScanMSD massSpectrum1 = org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.getSessionSubtractMassSpectrum();
+					boolean useNormalize = isUseNormalizedScan();
+					CalculationType calculationType = getCalculationType();
+					IScanMSD massSpectrum1 = getSessionSubtractMassSpectrum();
 					IScanMSD massSpectrum2 = combinedMassSpectrum;
 					IScanMSD subtractMassSpectrum = FilterSupport.getCombinedMassSpectrum(massSpectrum1, massSpectrum2, null, useNormalize, calculationType);
 					saveSessionMassSpectrum(e.display, subtractMassSpectrum);
@@ -389,8 +396,8 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 	 */
 	private void saveSessionMassSpectrum(Display display, IScanMSD scanMSD) {
 
-		org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.setSessionSubtractMassSpectrum(scanMSD);
-		org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.storeSessionSubtractMassSpectrum();
+		setSessionSubtractMassSpectrum(scanMSD);
+		storeSessionSubtractMassSpectrum();
 
 		if(display != null) {
 			fireUpdateEvent(display);
@@ -512,7 +519,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 			builder.append("–");
 			builder.append(decimalFormat.format(stopRetentionTime / IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
 			builder.append(" | Calculation Type: ");
-			builder.append(org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.getCalculationType().toString());
+			builder.append(getCalculationType().toString());
 		} else {
 			builder.append("No chromatogram selected.");
 		}

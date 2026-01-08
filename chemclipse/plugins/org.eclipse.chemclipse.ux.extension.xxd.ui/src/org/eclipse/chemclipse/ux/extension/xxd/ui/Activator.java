@@ -56,7 +56,8 @@ public class Activator extends AbstractActivatorUI {
 		Activator.context = context;
 		plugin = this;
 		initializePreferenceStore(PreferenceSupplier.INSTANCE());
-		initializePreferenceStoreSubtract(org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.INSTANCE());
+		IPreferenceSupplier preferenceSupplierModelMSD = org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.INSTANCE();
+		initializePreferenceStoreSubtract(preferenceSupplierModelMSD);
 		startServices(context);
 		/*
 		 * Don't call here:

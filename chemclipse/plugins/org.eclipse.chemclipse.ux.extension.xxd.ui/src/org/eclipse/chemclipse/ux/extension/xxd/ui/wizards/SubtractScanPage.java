@@ -12,6 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.wizards;
 
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUseNominalMZ;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUseNormalizedScan;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.setUseNominalMZ;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.setUseNormalizedScan;
+
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
@@ -68,14 +73,14 @@ public class SubtractScanPage extends WizardPage {
 		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		button.setText("Nominal m/z");
 		button.setToolTipText("Select to use nomimal m/z.");
-		button.setSelection(org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUseNominalMZ());
+		button.setSelection(isUseNominalMZ());
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
 				boolean useNominalMZ = button.getSelection();
-				org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.setUseNominalMZ(useNominalMZ);
+				setUseNominalMZ(useNominalMZ);
 			}
 		});
 
@@ -88,14 +93,14 @@ public class SubtractScanPage extends WizardPage {
 		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		button.setText("Normalize Intensities");
 		button.setToolTipText("Select to use normalize the intensities.");
-		button.setSelection(org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUseNormalizedScan());
+		button.setSelection(isUseNormalizedScan());
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
 				boolean useNormalizedScan = button.getSelection();
-				org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.setUseNormalizedScan(useNormalizedScan);
+				setUseNormalizedScan(useNormalizedScan);
 			}
 		});
 
