@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -45,7 +45,6 @@ import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModelMSD;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageScans;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageSubtract;
 import org.eclipse.chemclipse.vsd.model.core.selection.IChromatogramSelectionVSD;
@@ -120,11 +119,11 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 			chromatogramSelection = null;
 			combinedScan = null;
 
-			CalculationType calculationType = PreferenceSupplierModelMSD.getCalculationType();
+			CalculationType calculationType = org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.getCalculationType();
 			if(object instanceof IChromatogramSelectionMSD chromatogramSelectionMSD) {
 				this.chromatogramSelection = chromatogramSelectionMSD;
-				boolean useNormalize = PreferenceSupplierModelMSD.isUseNormalizedScan();
-				boolean usePeaksInsteadOfScans = PreferenceSupplierModelMSD.isUsePeaksInsteadOfScans();
+				boolean useNormalize = org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUseNormalizedScan();
+				boolean usePeaksInsteadOfScans = org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUsePeaksInsteadOfScans();
 				combinedScan = FilterSupport.getCombinedMassSpectrum(chromatogramSelectionMSD, null, useNormalize, calculationType, usePeaksInsteadOfScans);
 			} else if(object instanceof IChromatogramSelectionVSD chromatogramSelectionVSD) {
 				this.chromatogramSelection = chromatogramSelectionVSD;
@@ -371,9 +370,9 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 			public void widgetSelected(SelectionEvent e) {
 
 				if(combinedScan instanceof ICombinedMassSpectrum combinedMassSpectrum) {
-					boolean useNormalize = PreferenceSupplierModelMSD.isUseNormalizedScan();
-					CalculationType calculationType = PreferenceSupplierModelMSD.getCalculationType();
-					IScanMSD massSpectrum1 = PreferenceSupplierModelMSD.getSessionSubtractMassSpectrum();
+					boolean useNormalize = org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUseNormalizedScan();
+					CalculationType calculationType = org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.getCalculationType();
+					IScanMSD massSpectrum1 = org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.getSessionSubtractMassSpectrum();
 					IScanMSD massSpectrum2 = combinedMassSpectrum;
 					IScanMSD subtractMassSpectrum = FilterSupport.getCombinedMassSpectrum(massSpectrum1, massSpectrum2, null, useNormalize, calculationType);
 					saveSessionMassSpectrum(e.display, subtractMassSpectrum);
@@ -390,8 +389,8 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 	 */
 	private void saveSessionMassSpectrum(Display display, IScanMSD scanMSD) {
 
-		PreferenceSupplierModelMSD.setSessionSubtractMassSpectrum(scanMSD);
-		PreferenceSupplierModelMSD.storeSessionSubtractMassSpectrum();
+		org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.setSessionSubtractMassSpectrum(scanMSD);
+		org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.storeSessionSubtractMassSpectrum();
 
 		if(display != null) {
 			fireUpdateEvent(display);
@@ -513,7 +512,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 			builder.append("–");
 			builder.append(decimalFormat.format(stopRetentionTime / IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
 			builder.append(" | Calculation Type: ");
-			builder.append(PreferenceSupplierModelMSD.getCalculationType().toString());
+			builder.append(org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.getCalculationType().toString());
 		} else {
 			builder.append("No chromatogram selected.");
 		}

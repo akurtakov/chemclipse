@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,7 +28,6 @@ import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChartSupport;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModel;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
@@ -76,7 +75,7 @@ public class ScanDataSupport {
 			builder.append(decimalFormat.format(scan.getRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
 			builder.append(" | ");
 			builder.append("RI: ");
-			if(PreferenceSupplierModel.showRetentionIndexWithoutDecimals()) {
+			if(org.eclipse.chemclipse.model.preferences.PreferenceSupplier.showRetentionIndexWithoutDecimals()) {
 				builder.append(Integer.toString((int)scan.getRetentionIndex()));
 			} else {
 				builder.append(decimalFormat.format(scan.getRetentionIndex()));
@@ -133,7 +132,7 @@ public class ScanDataSupport {
 			builder.append(decimalFormat.format(scanMSD.getRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
 			builder.append(" | ");
 			builder.append("RI: ");
-			if(PreferenceSupplierModel.showRetentionIndexWithoutDecimals()) {
+			if(org.eclipse.chemclipse.model.preferences.PreferenceSupplier.showRetentionIndexWithoutDecimals()) {
 				builder.append(Integer.toString((int)scanMSD.getRetentionIndex()));
 			} else {
 				builder.append(decimalFormat.format(scanMSD.getRetentionIndex()));

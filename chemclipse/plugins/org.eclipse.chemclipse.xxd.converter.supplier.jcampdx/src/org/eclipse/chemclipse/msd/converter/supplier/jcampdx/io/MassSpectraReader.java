@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,13 +27,13 @@ import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.identifier.LibraryInformation;
 import org.eclipse.chemclipse.msd.converter.io.AbstractMassSpectraReader;
 import org.eclipse.chemclipse.msd.converter.io.IMassSpectraReader;
+import org.eclipse.chemclipse.msd.converter.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.msd.converter.supplier.jcampdx.model.IVendorIon;
 import org.eclipse.chemclipse.msd.converter.supplier.jcampdx.model.IVendorLibraryMassSpectrum;
 import org.eclipse.chemclipse.msd.converter.supplier.jcampdx.model.VendorIon;
 import org.eclipse.chemclipse.msd.converter.supplier.jcampdx.model.VendorLibraryMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.implementation.MassSpectra;
-import org.eclipse.chemclipse.xxd.converter.supplier.jcampdx.internal.preferences.PreferenceSupplierMSD;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public class MassSpectraReader extends AbstractMassSpectraReader implements IMassSpectraReader {
@@ -84,8 +84,8 @@ public class MassSpectraReader extends AbstractMassSpectraReader implements IMas
 
 	private IMassSpectra extractMassSpectra(File file, boolean isNameMarkerAvailable, IProgressMonitor monitor) throws IOException {
 
-		String referenceIdentifierMarker = PreferenceSupplierMSD.getReferenceIdentifierMarker();
-		String referenceIdentifierPrefix = PreferenceSupplierMSD.getReferenceIdentifierPrefix();
+		String referenceIdentifierMarker = PreferenceSupplier.getReferenceIdentifierMarker();
+		String referenceIdentifierPrefix = PreferenceSupplier.getReferenceIdentifierPrefix();
 
 		RetentionIndexSupport retentionIndexSupport = new RetentionIndexSupport();
 		IMassSpectra massSpectra = new MassSpectra();

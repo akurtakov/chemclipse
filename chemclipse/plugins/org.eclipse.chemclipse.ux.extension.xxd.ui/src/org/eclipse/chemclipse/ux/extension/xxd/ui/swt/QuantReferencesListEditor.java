@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,10 +17,10 @@ import java.util.Arrays;
 import org.eclipse.chemclipse.model.targets.TargetListUtil;
 import org.eclipse.chemclipse.support.util.QuantReferencesListUtil;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.validation.QuantitationReferenceInputValidator;
-import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.preference.ListEditor;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -53,7 +53,7 @@ public class QuantReferencesListEditor extends ListEditor {
 		List list = getList();
 		InputDialog dialog = new InputDialog(getShell(), "Quantitation Reference", "You can create a new quantitation reference here.", "Styrene", new QuantitationReferenceInputValidator(list.getItems()));
 		dialog.create();
-		if(dialog.open() == Dialog.OK) {
+		if(dialog.open() == Window.OK) {
 			String target = dialog.getValue();
 			return addItem(target, list);
 		}

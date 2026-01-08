@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,9 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.report.ui.export.wizards;
 
+import org.eclipse.chemclipse.chromatogram.xxd.report.model.IChromatogramReportSupplierEntry;
+import org.eclipse.chemclipse.chromatogram.xxd.report.support.ReportSupplierTypeSupport;
+import org.eclipse.chemclipse.chromatogram.xxd.report.ui.internal.wizards.ChromatogramReportEntriesWizard;
+import org.eclipse.chemclipse.chromatogram.xxd.report.ui.internal.wizards.ProcessWizardDialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -30,17 +34,13 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
-import org.eclipse.chemclipse.chromatogram.xxd.report.model.IChromatogramReportSupplierEntry;
-import org.eclipse.chemclipse.chromatogram.xxd.report.support.ReportSupplierTypeSupport;
-import org.eclipse.chemclipse.chromatogram.xxd.report.ui.internal.wizards.ChromatogramReportEntriesWizard;
-import org.eclipse.chemclipse.chromatogram.xxd.report.ui.internal.wizards.ProcessWizardDialog;
-
 public class ReportSupplierSelectionWizardPage extends WizardPage {
 
 	private Table reportSupplierTable;
 	boolean appendReports = false;
 
 	public ReportSupplierSelectionWizardPage(String pageName, String title, ImageDescriptor titleImage) {
+
 		super(pageName, title, titleImage);
 	}
 
@@ -154,7 +154,7 @@ public class ReportSupplierSelectionWizardPage extends WizardPage {
 				/*
 				 * If OK
 				 */
-				if(returnCode == WizardDialog.OK) {
+				if(returnCode == Window.OK) {
 					IChromatogramReportSupplierEntry reportEntry = reportEntriesWizard.getChromatogramReportEntry();
 					if(reportEntry != null) {
 						ReportSupplierTypeSupport reportSupplierTypeSupport = new ReportSupplierTypeSupport();

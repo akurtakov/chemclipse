@@ -25,7 +25,7 @@ import org.eclipse.chemclipse.model.quantitation.IQuantitationSignal;
 import org.eclipse.chemclipse.model.quantitation.IQuantitationSignals;
 import org.eclipse.chemclipse.model.quantitation.IResponseSignal;
 import org.eclipse.chemclipse.model.quantitation.IResponseSignals;
-import org.eclipse.chemclipse.msd.model.core.AbstractIon;
+import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.implementation.QuantitationPeakMSD;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -77,7 +77,7 @@ public class QuantitationCompound_4_Test extends ReferencePeakMSDTestCase {
 	public void testGetQuantitationSignals_3() {
 
 		IQuantitationSignal quantitationSignal = quantitationSignals.first();
-		assertEquals(AbstractIon.TIC_ION, quantitationSignal.getSignal(), 0);
+		assertEquals(IIon.TIC_ION, quantitationSignal.getSignal(), 0);
 		assertEquals(IQuantitationSignal.ABSOLUTE_RELATIVE_RESPONSE, quantitationSignal.getRelativeResponse(), 0);
 		assertEquals(0.0d, quantitationSignal.getUncertainty(), 0);
 		assertTrue(quantitationSignal.isUse());
@@ -99,7 +99,7 @@ public class QuantitationCompound_4_Test extends ReferencePeakMSDTestCase {
 	public void testGetConcentrationResponseEntries_3() {
 
 		IResponseSignal concentrationResponseEntry = concentrationResponseEntries.get(0);
-		assertEquals(AbstractIon.TIC_ION, concentrationResponseEntry.getSignal(), 0);
+		assertEquals(IIon.TIC_ION, concentrationResponseEntry.getSignal(), 0);
 		assertEquals(0.01d, concentrationResponseEntry.getConcentration(), 0);
 		assertEquals(750220.0d, concentrationResponseEntry.getResponse(), 0);
 	}
@@ -108,7 +108,7 @@ public class QuantitationCompound_4_Test extends ReferencePeakMSDTestCase {
 	public void testGetConcentrationResponseEntries_4() {
 
 		IResponseSignal concentrationResponseEntry = concentrationResponseEntries.get(1);
-		assertEquals(AbstractIon.TIC_ION, concentrationResponseEntry.getSignal(), 0);
+		assertEquals(IIon.TIC_ION, concentrationResponseEntry.getSignal(), 0);
 		assertEquals(0.05d, concentrationResponseEntry.getConcentration(), 0);
 		assertEquals(3751100.0d, concentrationResponseEntry.getResponse(), 0);
 	}
@@ -117,7 +117,7 @@ public class QuantitationCompound_4_Test extends ReferencePeakMSDTestCase {
 	public void testGetConcentrationResponseEntries_5() {
 
 		IResponseSignal concentrationResponseEntry = concentrationResponseEntries.get(2);
-		assertEquals(AbstractIon.TIC_ION, concentrationResponseEntry.getSignal(), 0);
+		assertEquals(IIon.TIC_ION, concentrationResponseEntry.getSignal(), 0);
 		assertEquals(0.1d, concentrationResponseEntry.getConcentration(), 0);
 		assertEquals(7502200.0d, concentrationResponseEntry.getResponse(), 0);
 	}

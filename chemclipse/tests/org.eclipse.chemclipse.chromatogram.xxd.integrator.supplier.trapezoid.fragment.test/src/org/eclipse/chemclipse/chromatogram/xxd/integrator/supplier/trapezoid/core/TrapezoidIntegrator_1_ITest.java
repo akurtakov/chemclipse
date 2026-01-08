@@ -23,7 +23,7 @@ import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.int
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.settings.ChromatogramIntegrationSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.settings.CombinedIntegrationSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.settings.PeakIntegrationSettings;
-import org.eclipse.chemclipse.msd.model.core.AbstractIon;
+import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.jupiter.api.BeforeAll;
@@ -61,7 +61,7 @@ public class TrapezoidIntegrator_1_ITest extends ChromatogramImportTestCase {
 		result = processingInfo.getProcessingResult();
 		results = result.getChromatogramIntegrationResults();
 		integrationResult = results.getChromatogramIntegrationResult(0);
-		assertEquals(AbstractIon.TIC_ION, integrationResult.getIon(), 0);
+		assertEquals(IIon.TIC_ION, integrationResult.getIon(), 0);
 		assertEquals(0.0d, integrationResult.getBackgroundArea(), 0);
 		assertEquals(7.893094987865009E9, integrationResult.getChromatogramArea(), 0);
 	}

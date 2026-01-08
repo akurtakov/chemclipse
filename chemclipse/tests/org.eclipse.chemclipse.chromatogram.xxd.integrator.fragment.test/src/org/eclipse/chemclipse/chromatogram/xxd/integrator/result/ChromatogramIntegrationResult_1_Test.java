@@ -14,7 +14,6 @@ package org.eclipse.chemclipse.chromatogram.xxd.integrator.result;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.eclipse.chemclipse.msd.model.core.AbstractIon;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -52,6 +51,6 @@ public class ChromatogramIntegrationResult_1_Test {
 	@Test
 	public void testGetIon_1() {
 
-		assertEquals(AbstractIon.TIC_ION, result.getIon(), 0);
+		assertEquals(IIon.TIC_ION, result.getIon(), 0);
 	}
 }

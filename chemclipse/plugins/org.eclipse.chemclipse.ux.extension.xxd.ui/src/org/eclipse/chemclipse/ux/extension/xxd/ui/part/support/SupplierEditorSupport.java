@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -46,6 +46,7 @@ import org.eclipse.chemclipse.ux.extension.ui.editors.ProcessMethodEditor;
 import org.eclipse.chemclipse.ux.extension.ui.provider.AbstractSupplierFileEditorSupport;
 import org.eclipse.chemclipse.ux.extension.ui.provider.ISupplierEditorSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.editors.AbstractChromatogramEditor;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.editors.ChromatogramEditorCSD;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.editors.ChromatogramEditorFSD;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.editors.ChromatogramEditorMSD;
@@ -255,7 +256,7 @@ public class SupplierEditorSupport extends AbstractSupplierFileEditorSupport imp
 				elementId = ChromatogramEditorMSD.ID;
 				contributionURI = ChromatogramEditorMSD.CONTRIBUTION_URI;
 				iconURI = ChromatogramEditorMSD.ICON_URI;
-				tooltip = ChromatogramEditorMSD.TOOLTIP;
+				tooltip = AbstractChromatogramEditor.TOOLTIP;
 				topicUpdateRawfile = IChemClipseEvents.TOPIC_CHROMATOGRAM_MSD_UPDATE_RAWFILE;
 				topicUpdateOverview = IChemClipseEvents.TOPIC_CHROMATOGRAM_MSD_UPDATE_OVERVIEW;
 				break;
@@ -264,7 +265,7 @@ public class SupplierEditorSupport extends AbstractSupplierFileEditorSupport imp
 				elementId = ChromatogramEditorCSD.ID;
 				contributionURI = ChromatogramEditorCSD.CONTRIBUTION_URI;
 				iconURI = ChromatogramEditorCSD.ICON_URI;
-				tooltip = ChromatogramEditorCSD.TOOLTIP;
+				tooltip = AbstractChromatogramEditor.TOOLTIP;
 				topicUpdateRawfile = IChemClipseEvents.TOPIC_CHROMATOGRAM_CSD_UPDATE_RAWFILE;
 				topicUpdateOverview = IChemClipseEvents.TOPIC_CHROMATOGRAM_CSD_UPDATE_OVERVIEW;
 				break;
@@ -273,7 +274,7 @@ public class SupplierEditorSupport extends AbstractSupplierFileEditorSupport imp
 				elementId = ChromatogramEditorWSD.ID;
 				contributionURI = ChromatogramEditorWSD.CONTRIBUTION_URI;
 				iconURI = ChromatogramEditorWSD.ICON_URI;
-				tooltip = ChromatogramEditorWSD.TOOLTIP;
+				tooltip = AbstractChromatogramEditor.TOOLTIP;
 				topicUpdateRawfile = IChemClipseEvents.TOPIC_CHROMATOGRAM_WSD_UPDATE_RAWFILE;
 				topicUpdateOverview = IChemClipseEvents.TOPIC_CHROMATOGRAM_WSD_UPDATE_OVERVIEW;
 				break;
@@ -281,8 +282,8 @@ public class SupplierEditorSupport extends AbstractSupplierFileEditorSupport imp
 				type = TYPE_VSD;
 				elementId = ChromatogramEditorVSD.ID;
 				contributionURI = ChromatogramEditorVSD.CONTRIBUTION_URI;
-				iconURI = ChromatogramEditorVSD.ICON_URI;
-				tooltip = ChromatogramEditorVSD.TOOLTIP;
+				iconURI = AbstractChromatogramEditor.ICON_URI;
+				tooltip = AbstractChromatogramEditor.TOOLTIP;
 				topicUpdateRawfile = IChemClipseEvents.TOPIC_CHROMATOGRAM_VSD_UPDATE_RAWFILE;
 				topicUpdateOverview = IChemClipseEvents.TOPIC_CHROMATOGRAM_VSD_UPDATE_OVERVIEW;
 				break;
@@ -301,7 +302,7 @@ public class SupplierEditorSupport extends AbstractSupplierFileEditorSupport imp
 				elementId = ChromatogramEditorFSD.ID;
 				contributionURI = ChromatogramEditorFSD.CONTRIBUTION_URI;
 				iconURI = ChromatogramEditorFSD.ICON_URI;
-				tooltip = ChromatogramEditorFSD.TOOLTIP;
+				tooltip = AbstractChromatogramEditor.TOOLTIP;
 				topicUpdateRawfile = IChemClipseEvents.TOPIC_CHROMATOGRAM_FSD_UPDATE_RAWFILE;
 				topicUpdateOverview = IChemClipseEvents.TOPIC_CHROMATOGRAM_FSD_UPDATE_OVERVIEW;
 				break;
