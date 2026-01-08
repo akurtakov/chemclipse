@@ -17,6 +17,7 @@ import java.util.List;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
+import org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.ux.extension.ui.parts.AbstractPart;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
@@ -53,7 +54,7 @@ public class SubtractScanPart extends AbstractPart<ExtendedSubtractScanUI> {
 			} else {
 				Object object = objects.get(0);
 				if(IChemClipseEvents.TOPIC_UPDATE_SESSION_SUBTRACT_MASS_SPECTRUM.equals(topic)) {
-					IScanMSD scanMSD = org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.getSessionSubtractMassSpectrum();
+					IScanMSD scanMSD = PreferenceSupplier.getSessionSubtractMassSpectrum();
 					getControl().update(scanMSD);
 					/*
 					 * Additionally try to get the latest chromatogram selection.
