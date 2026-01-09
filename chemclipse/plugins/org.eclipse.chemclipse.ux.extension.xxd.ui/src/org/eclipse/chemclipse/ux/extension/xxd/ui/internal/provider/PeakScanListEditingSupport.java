@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.model.core.IPeakModel;
 import org.eclipse.chemclipse.model.targets.TargetSupport;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModel;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.CheckboxCellEditor;
 import org.eclipse.jface.viewers.EditingSupport;
@@ -78,13 +77,13 @@ public class PeakScanListEditingSupport extends EditingSupport {
 				return decimalFormat.format(peakModel.getPeakMaximum().getRelativeRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 			}
 			if(column.equals(PeakScanListLabelProvider.RETENTION_INDEX)) {
-				if(PreferenceSupplierModel.showRetentionIndexWithoutDecimals()) {
+				if(org.eclipse.chemclipse.model.preferences.PreferenceSupplier.showRetentionIndexWithoutDecimals()) {
 					return integerFormat.format(peakModel.getPeakMaximum().getRetentionIndex());
 				}
 				return decimalFormat.format(peakModel.getPeakMaximum().getRetentionIndex());
 			}
 			if(column.equals(PeakScanListLabelProvider.AREA_TOTAL)) {
-				if(PreferenceSupplierModel.showAreaWithoutDecimals()) {
+				if(org.eclipse.chemclipse.model.preferences.PreferenceSupplier.showAreaWithoutDecimals()) {
 					return integerFormat.format(peak.getIntegratedArea());
 				}
 				return decimalFormat.format(peak.getIntegratedArea());

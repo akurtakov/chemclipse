@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -11,6 +11,15 @@
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.swt;
+
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.getCalculationType;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.getCopyTracesClipboard;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.getSessionSubtractMassSpectrum;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUseNormalizedScan;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUsePeaksInsteadOfScans;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.loadSessionSubtractMassSpectrum;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.setSessionSubtractMassSpectrum;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.storeSessionSubtractMassSpectrum;
 
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
@@ -34,7 +43,6 @@ import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModelMSD;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageScans;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageSubtract;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.runnables.LibraryServiceRunnable;
@@ -206,10 +214,10 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 					/*
 					 * Add the selected scan to the session MS.
 					 */
-					IScanMSD massSpectrum1 = PreferenceSupplierModelMSD.getSessionSubtractMassSpectrum();
-					CalculationType calculationType = PreferenceSupplierModelMSD.getCalculationType();
+					IScanMSD massSpectrum1 = getSessionSubtractMassSpectrum();
+					CalculationType calculationType = getCalculationType();
 					IScanMSD massSpectrum2 = chromatogramSelectionMSD.getSelectedScan();
-					boolean useNormalize = PreferenceSupplierModelMSD.isUseNormalizedScan();
+					boolean useNormalize = isUseNormalizedScan();
 					IScanMSD subtractMassSpectrum = FilterSupport.getCombinedMassSpectrum(massSpectrum1, massSpectrum2, null, useNormalize, calculationType);
 					saveSessionMassSpectrum(e.display, subtractMassSpectrum);
 				}
@@ -230,10 +238,10 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 			public void widgetSelected(SelectionEvent e) {
 
 				if(chromatogramSelectionMSD != null) {
-					boolean useNormalize = PreferenceSupplierModelMSD.isUseNormalizedScan();
-					CalculationType calculationType = PreferenceSupplierModelMSD.getCalculationType();
-					boolean usePeaksInsteadOfScans = PreferenceSupplierModelMSD.isUsePeaksInsteadOfScans();
-					IScanMSD massSpectrum1 = PreferenceSupplierModelMSD.getSessionSubtractMassSpectrum();
+					boolean useNormalize = isUseNormalizedScan();
+					CalculationType calculationType = getCalculationType();
+					boolean usePeaksInsteadOfScans = isUsePeaksInsteadOfScans();
+					IScanMSD massSpectrum1 = getSessionSubtractMassSpectrum();
 					IScanMSD massSpectrum2 = FilterSupport.getCombinedMassSpectrum(chromatogramSelectionMSD, null, useNormalize, calculationType, usePeaksInsteadOfScans);
 					IScanMSD subtractMassSpectrum = FilterSupport.getCombinedMassSpectrum(massSpectrum1, massSpectrum2, null, useNormalize, calculationType);
 					saveSessionMassSpectrum(e.display, subtractMassSpectrum);
@@ -318,7 +326,7 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				int maxCopyTraces = PreferenceSupplierModelMSD.getCopyTracesClipboard();
+				int maxCopyTraces = getCopyTracesClipboard();
 				String traces = ScanSupport.extractTracesText(scanMSD, maxCopyTraces);
 				TextTransfer textTransfer = TextTransfer.getInstance();
 				Object[] data = new Object[]{traces};
@@ -389,7 +397,7 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 
 	private void loadSessionMassSpectrum(Display display) {
 
-		PreferenceSupplierModelMSD.loadSessionSubtractMassSpectrum();
+		loadSessionSubtractMassSpectrum();
 		fireUpdateEvent(display);
 	}
 
@@ -401,8 +409,8 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 	 */
 	private void saveSessionMassSpectrum(Display display, IScanMSD scanMSD) {
 
-		PreferenceSupplierModelMSD.setSessionSubtractMassSpectrum(scanMSD);
-		PreferenceSupplierModelMSD.storeSessionSubtractMassSpectrum();
+		setSessionSubtractMassSpectrum(scanMSD);
+		storeSessionSubtractMassSpectrum();
 
 		if(display != null) {
 			fireUpdateEvent(display);

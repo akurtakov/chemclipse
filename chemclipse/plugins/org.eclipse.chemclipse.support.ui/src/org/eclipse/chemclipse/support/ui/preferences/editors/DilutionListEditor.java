@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,10 +17,10 @@ import java.util.Arrays;
 
 import org.eclipse.chemclipse.support.l10n.SupportMessages;
 import org.eclipse.chemclipse.support.util.DilutionListUtil;
-import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.preference.ListEditor;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -53,7 +53,7 @@ public class DilutionListEditor extends ListEditor {
 		List list = getList();
 		InputDialog dialog = new InputDialog(getShell(), SupportMessages.labelDilution, MessageFormat.format(SupportMessages.labelAddDilution, "1:10"), "", new DilutionInputValidator(list));
 		dialog.create();
-		if(dialog.open() == Dialog.OK) {
+		if(dialog.open() == Window.OK) {
 			String dilution = dialog.getValue();
 			return addDilution(dilution, list);
 		}

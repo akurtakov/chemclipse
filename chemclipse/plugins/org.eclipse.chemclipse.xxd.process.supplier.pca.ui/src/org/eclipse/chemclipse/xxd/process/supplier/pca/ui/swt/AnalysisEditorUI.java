@@ -624,7 +624,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 				Shell shell = DisplayUtils.getShell();
 				Display display = DisplayUtils.getDisplay();
 				InputDialog inputDialog = new InputDialog(shell, "Apply Selected Samples to Classification columm", "Enter Character to apply:", "", null);
-				if(inputDialog.open() == InputDialog.OK) {
+				if(inputDialog.open() == Window.OK) {
 					String userInput = inputDialog.getValue();
 					if(userInput.length() == 1) {
 						for(ISample sample : evaluation.getHighlightedSamples()) {

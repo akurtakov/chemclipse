@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,7 +15,7 @@ package org.eclipse.chemclipse.support.ui.menu;
 import org.eclipse.chemclipse.support.ui.l10n.SupportMessages;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.chemclipse.support.ui.swt.dialogs.ClipboardSettingsDialog;
-import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
 
 public class ClipboardSettingsHandler extends AbstractTableMenuEntry implements ITableMenuEntry {
@@ -37,7 +37,7 @@ public class ClipboardSettingsHandler extends AbstractTableMenuEntry implements 
 
 		ClipboardSettingsDialog clipboardSettingsDialog = new ClipboardSettingsDialog(Display.getDefault().getActiveShell());
 		clipboardSettingsDialog.setExtendedTableViewer(extendedTableViewer);
-		if(clipboardSettingsDialog.open() == Dialog.OK) {
+		if(clipboardSettingsDialog.open() == Window.OK) {
 			extendedTableViewer.setCopyHeaderToClipboard(clipboardSettingsDialog.isCopyHeader());
 			extendedTableViewer.setCopyValueDelimiterClipboard(clipboardSettingsDialog.getValueDelimiter());
 			extendedTableViewer.setCopyColumnsToClipboard(clipboardSettingsDialog.getColumnsSelection());

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,6 +18,7 @@ import java.util.List;
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.AbstractMassSpectrumFilterSettings;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
+import org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
@@ -43,7 +44,7 @@ public class MassSpectrumFilterSettings extends AbstractMassSpectrumFilterSettin
 
 	public IScanMSD getSubtractMassSpectrum() {
 
-		return org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.getMassSpectrum(subtractMassSpectrum);
+		return PreferenceSupplier.getMassSpectrum(subtractMassSpectrum);
 	}
 
 	public boolean isUseNominalMasses() {

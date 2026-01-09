@@ -27,6 +27,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.converter.methods.MethodConverter;
+import org.eclipse.chemclipse.converter.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -47,7 +48,6 @@ import org.eclipse.chemclipse.swt.ui.components.IMethodListener;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.ux.extension.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
-import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierConverter;
 import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierMethods;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -194,7 +194,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 
 				Object object = comboViewer.getStructuredSelection().getFirstElement();
 				if(object instanceof IProcessMethod processMethod) {
-					PreferenceSupplierConverter.setSelectedMethodName(processMethod.getName());
+					PreferenceSupplier.setSelectedMethodName(processMethod.getName());
 				}
 				enableWidgets();
 			}
@@ -405,7 +405,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 					if(file != null && file.exists()) {
 						if(MessageDialog.openQuestion(e.display.getActiveShell(), ExtensionMessages.deleteMethod, MessageFormat.format(ExtensionMessages.shallDeleteMethod, file.getName()))) {
 							file.delete();
-							PreferenceSupplierConverter.setSelectedMethodName("");
+							PreferenceSupplier.setSelectedMethodName("");
 							updateInput();
 						}
 						return;
@@ -498,7 +498,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 
 			IProcessingInfo<?> processingInfo = MethodConverter.convert(file, processMethod, MethodConverter.DEFAULT_METHOD_CONVERTER_ID, new NullProgressMonitor());
 			if(!processingInfo.hasErrorMessages()) {
-				PreferenceSupplierConverter.setSelectedMethodName(file.getName());
+				PreferenceSupplier.setSelectedMethodName(file.getName());
 				if(openEditor) {
 					updateInput();
 					MessageConsoleAppender.printLine("New Method: " + file.getAbsolutePath());
@@ -533,7 +533,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 
 	private void updateProcessMethodSelection() {
 
-		String selectedMethodName = PreferenceSupplierConverter.getSelectedMethodName();
+		String selectedMethodName = PreferenceSupplier.getSelectedMethodName();
 		Combo combo = methodsControl.get().getCombo();
 
 		exitloop:
@@ -546,7 +546,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 
 		if(combo.getSelectionIndex() == -1) {
 			combo.select(0);
-			PreferenceSupplierConverter.setSelectedMethodName(combo.getItem(0));
+			PreferenceSupplier.setSelectedMethodName(combo.getItem(0));
 		}
 	}
 

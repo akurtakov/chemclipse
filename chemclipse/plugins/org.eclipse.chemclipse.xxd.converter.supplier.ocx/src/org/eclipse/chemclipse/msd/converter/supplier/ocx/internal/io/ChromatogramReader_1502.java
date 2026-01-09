@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -767,7 +767,7 @@ public class ChromatogramReader_1502 extends AbstractChromatogramReader implemen
 
 		dataInputStream = getDataInputStream(zipFile, Format.FILE_VERSION);
 		String version = readString(dataInputStream);
-		if(version.equals(ReaderIO_1502.VERSION)) {
+		if(version.equals(AbstractIO_1502.VERSION)) {
 			isValid = true;
 		}
 

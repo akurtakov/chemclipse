@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,7 +23,6 @@ import org.eclipse.chemclipse.model.targets.TargetSupport;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramPeakMSD;
 import org.eclipse.chemclipse.support.ui.swt.AbstractRecordTableComparator;
 import org.eclipse.chemclipse.support.ui.swt.IRecordTableComparator;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModel;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramPeakWSD;
 import org.eclipse.jface.viewers.Viewer;
 
@@ -89,7 +88,7 @@ public class PeakScanListTableComparator extends AbstractRecordTableComparator i
 				if(object1 instanceof ITargetSupplier targetSupplier1 && object2 instanceof ITargetSupplier targetSupplier2) {
 					String name1 = TargetSupport.getBestTargetLibraryField(targetSupplier1);
 					String name2 = TargetSupport.getBestTargetLibraryField(targetSupplier2);
-					sortOrder = PreferenceSupplierModel.isSortCaseSensitive() ? name2.compareTo(name1) : name2.compareToIgnoreCase(name1);
+					sortOrder = org.eclipse.chemclipse.model.preferences.PreferenceSupplier.isSortCaseSensitive() ? name2.compareTo(name1) : name2.compareToIgnoreCase(name1);
 				}
 				break;
 			case 5:
@@ -174,7 +173,7 @@ public class PeakScanListTableComparator extends AbstractRecordTableComparator i
 			case 20:
 				String classifier1 = PeakClassifierSupport.getClassifier(object1);
 				String classifier2 = PeakClassifierSupport.getClassifier(object2);
-				sortOrder = PreferenceSupplierModel.isSortCaseSensitive() ? classifier2.compareTo(classifier1) : classifier2.compareToIgnoreCase(classifier1);
+				sortOrder = org.eclipse.chemclipse.model.preferences.PreferenceSupplier.isSortCaseSensitive() ? classifier2.compareTo(classifier1) : classifier2.compareToIgnoreCase(classifier1);
 				break;
 			case 21:
 				if(object1 instanceof IPeak peak1 && object2 instanceof IPeak peak2) {

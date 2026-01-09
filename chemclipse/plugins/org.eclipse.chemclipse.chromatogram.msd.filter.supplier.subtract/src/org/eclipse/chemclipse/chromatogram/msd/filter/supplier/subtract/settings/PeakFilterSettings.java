@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,6 +14,7 @@ package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.subtract.setting
 
 import org.eclipse.chemclipse.chromatogram.filter.settings.AbstractPeakFilterSettings;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
+import org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
@@ -37,7 +38,7 @@ public class PeakFilterSettings extends AbstractPeakFilterSettings {
 
 	public IScanMSD getSubtractMassSpectrum() {
 
-		return org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.getMassSpectrum(subtractMassSpectrum);
+		return PreferenceSupplier.getMassSpectrum(subtractMassSpectrum);
 	}
 
 	public boolean isUseNominalMasses() {

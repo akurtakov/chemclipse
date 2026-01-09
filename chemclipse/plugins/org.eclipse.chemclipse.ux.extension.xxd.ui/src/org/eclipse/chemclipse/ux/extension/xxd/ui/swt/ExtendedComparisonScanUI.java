@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,6 +12,10 @@
  * Christoph Läubrich - make this configurable, null check for scan
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.swt;
+
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.getMassSpectrum;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUseNominalMZ;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUseNormalizedScan;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,7 +56,6 @@ import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.charts.LabelOption;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModelMSD;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.model.ComparisonScanOption;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageScans;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageSubtract;
@@ -712,9 +715,9 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		 * Settings
 		 */
 		MassSpectrumFilterSettings settings = new MassSpectrumFilterSettings();
-		settings.setUseNominalMasses(PreferenceSupplierModelMSD.isUseNominalMZ());
-		settings.setUseNormalize(PreferenceSupplierModelMSD.isUseNormalizedScan());
-		settings.setSubtractMassSpectrum(PreferenceSupplierModelMSD.getMassSpectrum(scanReference));
+		settings.setUseNominalMasses(isUseNominalMZ());
+		settings.setUseNormalize(isUseNormalizedScan());
+		settings.setSubtractMassSpectrum(getMassSpectrum(scanReference));
 		/*
 		 * Subtract
 		 */

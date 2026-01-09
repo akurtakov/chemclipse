@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.model.core.IIntegrationEntry;
 import org.eclipse.chemclipse.model.core.IPeakIntensityValues;
 import org.eclipse.chemclipse.model.implementation.IntegrationEntry;
 import org.eclipse.chemclipse.model.implementation.PeakIntensityValues;
-import org.eclipse.chemclipse.msd.model.core.AbstractIon;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
@@ -131,7 +130,7 @@ public class ReferencePeakMSDTestCase {
 			 */
 			referencePeakMSD = new PeakMSD(peakModel, "TIC");
 			List<IIntegrationEntry> integrationEntries = new ArrayList<>();
-			IIntegrationEntry integrationEntry = new IntegrationEntry(AbstractIon.TIC_ION, baseArea * scale);
+			IIntegrationEntry integrationEntry = new IntegrationEntry(IIon.TIC_ION, baseArea * scale);
 			integrationEntries.add(integrationEntry);
 			referencePeakMSD.setIntegratedArea(integrationEntries, "Test Integrator TIC");
 		}

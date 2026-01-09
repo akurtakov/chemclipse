@@ -24,6 +24,7 @@ import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.DataCategoryGroup;
 import org.eclipse.chemclipse.support.ui.wizards.SinglePageWizard;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -56,7 +57,7 @@ public class DataTypeTypeSelectionWizard {
 		WizardDialog wizardDialog = new WizardDialog(shell, new SinglePageWizard("Select Data Categories", selectionPage));
 		wizardDialog.setPageSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		wizardDialog.create();
-		if(wizardDialog.open() == WizardDialog.OK) {
+		if(wizardDialog.open() == Window.OK) {
 			return selectionPage.group;
 		}
 		return null;

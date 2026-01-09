@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,10 +13,10 @@
 package org.eclipse.chemclipse.ux.extension.xxd.ui.preferences;
 
 import org.eclipse.chemclipse.model.support.CalculationType;
+import org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.support.ui.preferences.fieldeditors.SpinnerFieldEditor;
 import org.eclipse.chemclipse.support.ui.preferences.fieldeditors.TextFieldEditor;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModelMSD;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.ComboFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
@@ -33,17 +33,19 @@ public class PreferencePageSubtract extends FieldEditorPreferencePage implements
 		setDescription("");
 	}
 
+	@Override
 	public void createFieldEditors() {
 
-		addField(new BooleanFieldEditor(PreferenceSupplierModelMSD.P_USE_NOMINAL_MZ, "Use nominal m/z", getFieldEditorParent()));
-		addField(new BooleanFieldEditor(PreferenceSupplierModelMSD.P_USE_NORMALIZED_SCAN, "Use normalized scan", getFieldEditorParent()));
-		addField(new ComboFieldEditor(PreferenceSupplierModelMSD.P_CALCULATION_TYPE, "Calculation Type", CalculationType.getOptions(), getFieldEditorParent()));
-		addField(new BooleanFieldEditor(PreferenceSupplierModelMSD.P_USE_PEAKS_INSTEAD_OF_SCANS, "Use peaks instead of scans", getFieldEditorParent()));
-		addField(new BooleanFieldEditor(PreferenceSupplierModelMSD.P_DELETE_TARGETS_OPTIMIZE_SCAN, "Delete Targets (Optimize Scan)", getFieldEditorParent()));
-		addField(new TextFieldEditor(PreferenceSupplierModelMSD.P_SUBTRACT_MASS_SPECTRUM, "Subtract mass spectrum", getFieldEditorParent()));
-		addField(new SpinnerFieldEditor(PreferenceSupplierModelMSD.P_COPY_TRACES_CLIPBOARD, "Copy Traces", PreferenceSupplierModelMSD.MIN_TRACES, PreferenceSupplierModelMSD.MAX_TRACES, getFieldEditorParent()));
+		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_NOMINAL_MZ, "Use nominal m/z", getFieldEditorParent()));
+		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_NORMALIZED_SCAN, "Use normalized scan", getFieldEditorParent()));
+		addField(new ComboFieldEditor(PreferenceSupplier.P_CALCULATION_TYPE, "Calculation Type", CalculationType.getOptions(), getFieldEditorParent()));
+		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_PEAKS_INSTEAD_OF_SCANS, "Use peaks instead of scans", getFieldEditorParent()));
+		addField(new BooleanFieldEditor(PreferenceSupplier.P_DELETE_TARGETS_OPTIMIZE_SCAN, "Delete Targets (Optimize Scan)", getFieldEditorParent()));
+		addField(new TextFieldEditor(PreferenceSupplier.P_SUBTRACT_MASS_SPECTRUM, "Subtract mass spectrum", getFieldEditorParent()));
+		addField(new SpinnerFieldEditor(PreferenceSupplier.P_COPY_TRACES_CLIPBOARD, "Copy Traces", PreferenceSupplier.MIN_TRACES, PreferenceSupplier.MAX_TRACES, getFieldEditorParent()));
 	}
 
+	@Override
 	public void init(IWorkbench workbench) {
 
 	}

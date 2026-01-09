@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -33,7 +33,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.ui.provider.AbstractChemClipseLabelProvider;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModel;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramPeakWSD;
 import org.eclipse.swt.graphics.Color;
@@ -216,7 +215,7 @@ public class PeakScanListLabelProvider extends AbstractChemClipseLabelProvider {
 				text = decimalFormat.format(peakModel.getPeakMaximum().getRelativeRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 				break;
 			case 6:
-				if(PreferenceSupplierModel.showRetentionIndexWithoutDecimals()) {
+				if(org.eclipse.chemclipse.model.preferences.PreferenceSupplier.showRetentionIndexWithoutDecimals()) {
 					DecimalFormat integerFormat = getIntegerDecimalFormatInstance();
 					text = integerFormat.format(peakModel.getPeakMaximum().getRetentionIndex());
 				} else {
@@ -224,7 +223,7 @@ public class PeakScanListLabelProvider extends AbstractChemClipseLabelProvider {
 				}
 				break;
 			case 7:
-				if(PreferenceSupplierModel.showAreaWithoutDecimals()) {
+				if(org.eclipse.chemclipse.model.preferences.PreferenceSupplier.showAreaWithoutDecimals()) {
 					DecimalFormat integerFormat = getIntegerDecimalFormatInstance();
 					text = integerFormat.format(peak.getIntegratedArea());
 				} else {
@@ -339,7 +338,7 @@ public class PeakScanListLabelProvider extends AbstractChemClipseLabelProvider {
 				text = decimalFormat.format(scan.getRelativeRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 				break;
 			case 6:
-				if(PreferenceSupplierModel.showRetentionIndexWithoutDecimals()) {
+				if(org.eclipse.chemclipse.model.preferences.PreferenceSupplier.showRetentionIndexWithoutDecimals()) {
 					DecimalFormat integerFormat = getIntegerDecimalFormatInstance();
 					text = integerFormat.format(scan.getRetentionIndex());
 				} else {

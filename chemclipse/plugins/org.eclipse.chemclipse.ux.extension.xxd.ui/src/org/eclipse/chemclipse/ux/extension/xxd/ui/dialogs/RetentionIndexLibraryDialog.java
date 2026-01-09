@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -101,7 +101,7 @@ public class RetentionIndexLibraryDialog {
 					WizardDialog wizardDialog = new WizardDialog(display.getActiveShell(), wizard);
 					wizardDialog.setMinimumPageSize(WizardLibrarySearch.DEFAULT_WIDTH, WizardLibrarySearch.DEFAULT_HEIGHT);
 					wizardDialog.create();
-					if(wizardDialog.open() == WizardDialog.OK) {
+					if(wizardDialog.open() == Window.OK) {
 						success = true;
 					} else {
 						identificationTargets.clear();

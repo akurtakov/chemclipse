@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -61,9 +61,9 @@ import org.eclipse.chemclipse.msd.converter.supplier.ocx.model.chromatogram.Vend
 import org.eclipse.chemclipse.msd.converter.supplier.ocx.model.chromatogram.VendorIon;
 import org.eclipse.chemclipse.msd.converter.supplier.ocx.model.chromatogram.VendorScan;
 import org.eclipse.chemclipse.msd.converter.supplier.ocx.model.chromatogram.VendorScanProxy;
-import org.eclipse.chemclipse.msd.model.core.AbstractIon;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramPeakMSD;
+import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IIonTransition;
 import org.eclipse.chemclipse.msd.model.core.IIonTransitionSettings;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
@@ -224,7 +224,7 @@ public class ChromatogramReader_1007 extends AbstractChromatogramReader implemen
 			massSpectrum = new VendorScan();
 			int retentionTime = dataInputStream.readInt();
 			float abundance = dataInputStream.readFloat(); // Total Signal
-			ion = new VendorIon(AbstractIon.TIC_ION, abundance);
+			ion = new VendorIon(IIon.TIC_ION, abundance);
 			massSpectrum.setRetentionTime(retentionTime);
 			massSpectrum.addIon(ion);
 			chromatogram.addScan(massSpectrum);

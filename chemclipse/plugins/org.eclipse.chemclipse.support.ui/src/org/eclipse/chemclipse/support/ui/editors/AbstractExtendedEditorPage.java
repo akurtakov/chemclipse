@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -181,7 +181,7 @@ public abstract class AbstractExtendedEditorPage implements IExtendedEditorPage 
 
 	protected Section createSection(Composite parent, int colspan, String text, String description) {
 
-		Section section = toolkit.createSection(parent, Section.EXPANDED | Section.TWISTIE | Section.DESCRIPTION | Section.TITLE_BAR);
+		Section section = toolkit.createSection(parent, ExpandableComposite.EXPANDED | ExpandableComposite.TWISTIE | Section.DESCRIPTION | ExpandableComposite.TITLE_BAR);
 
 		section.clientVerticalSpacing = 2;
 		section.setText(text);

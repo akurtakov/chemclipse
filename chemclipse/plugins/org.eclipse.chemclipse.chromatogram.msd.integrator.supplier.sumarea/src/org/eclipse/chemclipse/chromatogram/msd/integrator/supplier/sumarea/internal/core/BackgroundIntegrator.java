@@ -15,8 +15,8 @@ package org.eclipse.chemclipse.chromatogram.msd.integrator.supplier.sumarea.inte
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.baseline.IBaselineModel;
 import org.eclipse.chemclipse.model.exceptions.ChromatogramIsNullException;
-import org.eclipse.chemclipse.msd.model.core.AbstractIon;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
+import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.eclipse.chemclipse.msd.model.xic.ExtractedIonSignalExtractor;
@@ -31,7 +31,7 @@ public class BackgroundIntegrator extends AbstractSumareaIntegrator implements I
 	@Override
 	public double integrate(IChromatogramSelectionMSD chromatogramSelection) {
 
-		return integrate(chromatogramSelection, (int)AbstractIon.TIC_ION);
+		return integrate(chromatogramSelection, (int)IIon.TIC_ION);
 	}
 
 	@Override

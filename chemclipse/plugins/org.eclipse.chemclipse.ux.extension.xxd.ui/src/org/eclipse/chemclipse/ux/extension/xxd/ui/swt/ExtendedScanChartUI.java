@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,6 +12,10 @@
  * Christoph Läubrich - add support for configuration, improve user feedback for unsaved changes
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.swt;
+
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.getMassSpectrum;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUseNominalMZ;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUseNormalizedScan;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,7 +50,6 @@ import org.eclipse.chemclipse.ux.extension.ui.swt.ChartGridSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModelMSD;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageScans;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageSubtract;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
@@ -522,9 +525,9 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 		 * Settings
 		 */
 		MassSpectrumFilterSettings settings = new MassSpectrumFilterSettings();
-		settings.setUseNominalMasses(PreferenceSupplierModelMSD.isUseNominalMZ());
-		settings.setUseNormalize(PreferenceSupplierModelMSD.isUseNormalizedScan());
-		settings.setSubtractMassSpectrum(PreferenceSupplierModelMSD.getMassSpectrum(scanSubtract));
+		settings.setUseNominalMasses(isUseNominalMZ());
+		settings.setUseNormalize(isUseNormalizedScan());
+		settings.setSubtractMassSpectrum(getMassSpectrum(scanSubtract));
 		/*
 		 * Subtract
 		 */

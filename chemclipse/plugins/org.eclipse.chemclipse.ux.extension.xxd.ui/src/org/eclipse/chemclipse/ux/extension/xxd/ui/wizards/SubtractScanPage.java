@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,11 +12,15 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.wizards;
 
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUseNominalMZ;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.isUseNormalizedScan;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.setUseNominalMZ;
+import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.setUseNormalizedScan;
+
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModelMSD;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.wizard.WizardPage;
@@ -69,14 +73,14 @@ public class SubtractScanPage extends WizardPage {
 		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		button.setText("Nominal m/z");
 		button.setToolTipText("Select to use nomimal m/z.");
-		button.setSelection(PreferenceSupplierModelMSD.isUseNominalMZ());
+		button.setSelection(isUseNominalMZ());
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
 				boolean useNominalMZ = button.getSelection();
-				PreferenceSupplierModelMSD.setUseNominalMZ(useNominalMZ);
+				setUseNominalMZ(useNominalMZ);
 			}
 		});
 
@@ -89,14 +93,14 @@ public class SubtractScanPage extends WizardPage {
 		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		button.setText("Normalize Intensities");
 		button.setToolTipText("Select to use normalize the intensities.");
-		button.setSelection(PreferenceSupplierModelMSD.isUseNormalizedScan());
+		button.setSelection(isUseNormalizedScan());
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
 				boolean useNormalizedScan = button.getSelection();
-				PreferenceSupplierModelMSD.setUseNormalizedScan(useNormalizedScan);
+				setUseNormalizedScan(useNormalizedScan);
 			}
 		});
 

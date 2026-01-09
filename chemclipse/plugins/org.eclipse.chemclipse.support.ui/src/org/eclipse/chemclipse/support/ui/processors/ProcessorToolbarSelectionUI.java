@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,7 +21,7 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.l10n.SupportMessages;
-import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
@@ -272,7 +272,7 @@ public class ProcessorToolbarSelectionUI extends Composite {
 				Object object = processorListActive.getStructuredSelection().getFirstElement();
 				if(object instanceof Processor processor) {
 					ImageDialog imageDialog = new ImageDialog(e.display.getActiveShell());
-					if(imageDialog.open() == Dialog.OK) {
+					if(imageDialog.open() == Window.OK) {
 						String imageFileName = imageDialog.getImageFileName();
 						if(imageFileName != null) {
 							/*

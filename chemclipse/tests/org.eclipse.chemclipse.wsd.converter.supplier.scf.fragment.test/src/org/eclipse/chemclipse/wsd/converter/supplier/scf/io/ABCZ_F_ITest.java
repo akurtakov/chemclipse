@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,6 +20,7 @@ import java.time.ZoneId;
 
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.wsd.converter.chromatogram.ChromatogramConverterWSD;
+import org.eclipse.chemclipse.wsd.converter.supplier.scf.PathResolver;
 import org.eclipse.chemclipse.wsd.converter.supplier.scf.SCF;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -36,7 +37,7 @@ public class ABCZ_F_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File fileImport = new File(SCF.getAbsolutePath(SCF.TESTFILE_IMPORT_ABCZ_F));
+		File fileImport = new File(PathResolver.getAbsolutePath(SCF.TESTFILE_IMPORT_ABCZ_F));
 		IProcessingInfo<IChromatogramWSD> processingInfo = ChromatogramConverterWSD.getInstance().convert(fileImport, SCF.EXTENSION_POINT_ID, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();
 	}

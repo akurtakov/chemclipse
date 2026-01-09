@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -22,7 +22,6 @@ import org.eclipse.chemclipse.support.ui.activator.AbstractActivatorUI;
 import org.eclipse.chemclipse.swt.ui.services.IMoleculeImageService;
 import org.eclipse.chemclipse.swt.ui.services.IScanIdentifierService;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModelMSD;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.services.IEditorService;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
@@ -57,7 +56,8 @@ public class Activator extends AbstractActivatorUI {
 		Activator.context = context;
 		plugin = this;
 		initializePreferenceStore(PreferenceSupplier.INSTANCE());
-		initializePreferenceStoreSubtract(PreferenceSupplierModelMSD.INSTANCE());
+		IPreferenceSupplier preferenceSupplierModelMSD = org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.INSTANCE();
+		initializePreferenceStoreSubtract(preferenceSupplierModelMSD);
 		startServices(context);
 		/*
 		 * Don't call here:

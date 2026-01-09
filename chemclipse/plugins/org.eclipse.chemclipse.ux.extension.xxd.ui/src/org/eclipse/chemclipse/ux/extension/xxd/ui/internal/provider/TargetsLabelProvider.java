@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,7 +24,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.ui.provider.AbstractChemClipseLabelProvider;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.preferences.PreferenceSupplierModel;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -145,7 +144,7 @@ public class TargetsLabelProvider extends AbstractChemClipseLabelProvider {
 
 		DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.000");
 		DecimalFormat decimalFormatInteger = ValueFormat.getDecimalFormatEnglish("0");
-		boolean showRetentionIndexWithoutDecimals = PreferenceSupplierModel.showRetentionIndexWithoutDecimals();
+		boolean showRetentionIndexWithoutDecimals = org.eclipse.chemclipse.model.preferences.PreferenceSupplier.showRetentionIndexWithoutDecimals();
 
 		String deltaRetentionIndex = "";
 		if(retentionIndex != null) {

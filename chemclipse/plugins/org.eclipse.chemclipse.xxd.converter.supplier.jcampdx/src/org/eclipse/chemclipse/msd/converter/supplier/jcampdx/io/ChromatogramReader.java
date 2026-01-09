@@ -34,8 +34,8 @@ import org.eclipse.chemclipse.msd.converter.supplier.jcampdx.model.IVendorScan;
 import org.eclipse.chemclipse.msd.converter.supplier.jcampdx.model.VendorChromatogram;
 import org.eclipse.chemclipse.msd.converter.supplier.jcampdx.model.VendorIon;
 import org.eclipse.chemclipse.msd.converter.supplier.jcampdx.model.VendorScan;
-import org.eclipse.chemclipse.msd.model.core.AbstractIon;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
+import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ChromatogramReader extends AbstractChromatogramMSDReader {
@@ -285,7 +285,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 						try {
 							String value = line.replace(TIC_MARKER, "").trim();
 							float abundance = Float.parseFloat(value);
-							IVendorIon ion = new VendorIon(AbstractIon.TIC_ION);
+							IVendorIon ion = new VendorIon(IIon.TIC_ION);
 							ion.setAbundance(abundance);
 							IVendorScan massSpectrum = new VendorScan();
 							/*

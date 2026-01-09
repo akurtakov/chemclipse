@@ -51,8 +51,8 @@ import org.eclipse.chemclipse.msd.converter.supplier.ocx.model.chromatogram.IVen
 import org.eclipse.chemclipse.msd.converter.supplier.ocx.model.chromatogram.VendorChromatogram;
 import org.eclipse.chemclipse.msd.converter.supplier.ocx.model.chromatogram.VendorIon;
 import org.eclipse.chemclipse.msd.converter.supplier.ocx.model.chromatogram.VendorScan;
-import org.eclipse.chemclipse.msd.model.core.AbstractIon;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
+import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.internal.support.ReaderHelper;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.settings.Format;
@@ -80,10 +80,10 @@ public class ChromatogramReaderMSD extends AbstractChromatogramMSDReader impleme
 			try {
 				chromatogramOverview = chromatogramReader.readOverview(file, monitor);
 			} catch(Exception e) {
-				chromatogramOverview = createChromatogramMSDFromFID(AbstractIon.TIC_ION, file, monitor);
+				chromatogramOverview = createChromatogramMSDFromFID(IIon.TIC_ION, file, monitor);
 			}
 		} else {
-			chromatogramOverview = createChromatogramMSDFromFID(AbstractIon.TIC_ION, file, monitor);
+			chromatogramOverview = createChromatogramMSDFromFID(IIon.TIC_ION, file, monitor);
 		}
 		return chromatogramOverview;
 	}
