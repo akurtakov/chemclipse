@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -142,7 +142,7 @@ public class TargetBuilderMSD {
 			libraryInformation.setReferenceIdentifier(libraryInformationReference.getReferenceIdentifier());
 			libraryInformation.setSmiles(libraryInformationReference.getSmiles());
 			libraryInformation.setSynonyms(libraryInformationReference.getSynonyms());
-			libraryInformationReference.getClassifier().forEach(libraryInformation::addClassifier);
+			libraryInformationReference.getClassifiers().forEach(libraryInformation::addClassifier);
 		} else {
 			/*
 			 * Unknown

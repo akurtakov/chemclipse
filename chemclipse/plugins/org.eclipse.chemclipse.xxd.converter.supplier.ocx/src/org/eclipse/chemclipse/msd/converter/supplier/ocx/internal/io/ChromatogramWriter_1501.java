@@ -596,7 +596,7 @@ public class ChromatogramWriter_1501 extends AbstractChromatogramWriter implemen
 		writeString(dataOutputStream, peak.getPeakType().toString()); // Peak Type
 		dataOutputStream.writeInt(peak.getSuggestedNumberOfComponents()); // Suggest Number Of Components
 		writeString(dataOutputStream, null); // Keep this for backward compatibility 2020/09/11
-		writeStringCollection(dataOutputStream, peak.getClassifier());
+		writeStringCollection(dataOutputStream, peak.getClassifiers());
 
 		dataOutputStream.writeFloat(peakModel.getBackgroundAbundance(peakModel.getStartRetentionTime())); // Start Background Abundance
 		dataOutputStream.writeFloat(peakModel.getBackgroundAbundance(peakModel.getStopRetentionTime())); // Stop Background Abundance

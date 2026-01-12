@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -60,7 +60,7 @@ public class ClassifiedPeaksFilter extends AbstractPeakFilter<ClassifiedPeaksFil
 
 		SubMonitor subMonitor = SubMonitor.convert(context.getProgressMonitor(), peaks.size());
 		for(IPeak peak : peaks) {
-			Collection<String> classifier = peak.getClassifier();
+			Collection<String> classifier = peak.getClassifiers();
 			for(String classification : classifications) {
 				if(classifier.contains(classification)) {
 					peak.setActiveForAnalysis(activeForAnalysis);

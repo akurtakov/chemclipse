@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -43,7 +43,7 @@ public abstract class AbstractPeak implements IPeak {
 	private final Set<IQuantitationEntry> quantitationEntries = new HashSet<>();
 	private final List<IInternalStandard> internalStandards = new ArrayList<>();
 	private final Set<String> quantitationReferences = new HashSet<>(); // Used to quantify against certain ISTDs or ESTDs
-	private final Set<String> classifier = new LinkedHashSet<>();
+	private final Set<String> classifiers = new LinkedHashSet<>();
 	/*
 	 * Transient
 	 */
@@ -340,35 +340,35 @@ public abstract class AbstractPeak implements IPeak {
 	}
 
 	@Override
-	public Collection<String> getClassifier() {
+	public Collection<String> getClassifiers() {
 
-		return Collections.unmodifiableCollection(classifier);
+		return Collections.unmodifiableCollection(classifiers);
 	}
 
 	@Override
-	public void clearClassifier() {
+	public void clearClassifiers() {
 
-		classifier.clear();
+		classifiers.clear();
 	}
 
 	@Override
 	public void addClassifier(String classifier) {
 
 		if(classifier != null && !classifier.trim().isEmpty()) {
-			this.classifier.add(classifier.trim());
+			this.classifiers.add(classifier.trim());
 		}
 	}
 
 	@Override
 	public void removeClassifier() {
 
-		classifier.clear();
+		classifiers.clear();
 	}
 
 	@Override
 	public void removeClassifier(String classifier) {
 
-		this.classifier.remove(classifier);
+		this.classifiers.remove(classifier);
 	}
 
 	@Override

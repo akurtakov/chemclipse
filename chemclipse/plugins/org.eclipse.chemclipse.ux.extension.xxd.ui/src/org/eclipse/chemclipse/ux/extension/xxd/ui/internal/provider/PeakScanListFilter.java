@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -82,7 +82,7 @@ public class PeakScanListFilter extends ViewerFilter {
 
 		boolean isMatch = false;
 
-		Collection<String> classifiers = peak.getClassifier();
+		Collection<String> classifiers = peak.getClassifiers();
 		String detectorDescription = peak.getDetectorDescription();
 		String modelDescription = peak.getModelDescription();
 		String quantifierDescription = peak.getQuantifierDescription();
