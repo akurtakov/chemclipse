@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,23 +17,23 @@ import java.util.Collection;
 
 public interface IClassifier {
 
-	Collection<String> getClassifier();
+	Collection<String> getClassifiers();
 
-	void clearClassifier();
+	void clearClassifiers();
 
 	void addClassifier(String classifier);
 
 	void removeClassifier(String classifier);
 
-	static String asString(IClassifier classifiable) {
+	static String asString(IClassifier classifier) {
 
-		return asString(classifiable.getClassifier());
+		return asString(classifier.getClassifiers());
 	}
 
-	static String asString(Iterable<? extends CharSequence> classifier) {
+	static String asString(Iterable<? extends CharSequence> classifiers) {
 
-		if(classifier != null) {
-			return String.join(", ", classifier);
+		if(classifiers != null) {
+			return String.join(", ", classifiers);
 		}
 		return "";
 	}

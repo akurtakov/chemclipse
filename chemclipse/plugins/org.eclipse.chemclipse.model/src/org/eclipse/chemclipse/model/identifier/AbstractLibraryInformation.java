@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -89,7 +89,7 @@ public abstract class AbstractLibraryInformation implements ILibraryInformation 
 			databaseIndex = libraryInformation.getDatabaseIndex();
 			contributor = libraryInformation.getContributor();
 			hit = libraryInformation.getHit();
-			classification.addAll(libraryInformation.getClassifier());
+			classification.addAll(libraryInformation.getClassifiers());
 			retentionTime = libraryInformation.getRetentionTime();
 			columnIndexMarkers.addAll(libraryInformation.getColumnIndexMarkers());
 			columnIndexMarker.setRetentionIndex(libraryInformation.getRetentionIndex());
@@ -351,13 +351,13 @@ public abstract class AbstractLibraryInformation implements ILibraryInformation 
 	}
 
 	@Override
-	public Collection<String> getClassifier() {
+	public Collection<String> getClassifiers() {
 
 		return Collections.unmodifiableCollection(classification);
 	}
 
 	@Override
-	public void clearClassifier() {
+	public void clearClassifiers() {
 
 		classification.clear();
 	}

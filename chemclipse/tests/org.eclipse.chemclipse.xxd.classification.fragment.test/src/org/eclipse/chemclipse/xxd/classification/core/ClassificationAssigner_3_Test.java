@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -62,7 +62,7 @@ public class ClassificationAssigner_3_Test {
 		identificationTarget = createIdentificationTarget();
 		peak.getTargets().add(identificationTarget);
 
-		assertTrue(peak.getClassifier().isEmpty());
+		assertTrue(peak.getClassifiers().isEmpty());
 	}
 
 	@Test
@@ -72,7 +72,7 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(false, false, false, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertTrue(peak.getClassifier().isEmpty());
+		assertTrue(peak.getClassifiers().isEmpty());
 	}
 
 	@Test
@@ -82,7 +82,7 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(false, false, false, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertTrue(peak.getClassifier().isEmpty());
+		assertTrue(peak.getClassifiers().isEmpty());
 	}
 
 	@Test
@@ -92,7 +92,7 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(false, false, false, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertTrue(peak.getClassifier().isEmpty());
+		assertTrue(peak.getClassifiers().isEmpty());
 	}
 
 	@Test
@@ -102,8 +102,8 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(false, false, false, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertEquals(peak.getClassifier().size(), 1);
-		assertTrue(peak.getClassifier().contains(CLASSIFICATION));
+		assertEquals(peak.getClassifiers().size(), 1);
+		assertTrue(peak.getClassifiers().contains(CLASSIFICATION));
 	}
 
 	@Test
@@ -113,8 +113,8 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(false, false, false, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertEquals(peak.getClassifier().size(), 1);
-		assertTrue(peak.getClassifier().contains(CLASSIFICATION));
+		assertEquals(peak.getClassifiers().size(), 1);
+		assertTrue(peak.getClassifiers().contains(CLASSIFICATION));
 	}
 
 	@Test
@@ -124,8 +124,8 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(true, false, false, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertEquals(peak.getClassifier().size(), 1);
-		assertTrue(peak.getClassifier().contains(CLASSIFICATION));
+		assertEquals(peak.getClassifiers().size(), 1);
+		assertTrue(peak.getClassifiers().contains(CLASSIFICATION));
 	}
 
 	@Test
@@ -135,8 +135,8 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(true, true, false, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertEquals(peak.getClassifier().size(), 1);
-		assertTrue(peak.getClassifier().contains(CLASSIFICATION));
+		assertEquals(peak.getClassifiers().size(), 1);
+		assertTrue(peak.getClassifiers().contains(CLASSIFICATION));
 	}
 
 	@Test
@@ -146,8 +146,8 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(true, true, true, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertEquals(peak.getClassifier().size(), 1);
-		assertTrue(peak.getClassifier().contains(CLASSIFICATION));
+		assertEquals(peak.getClassifiers().size(), 1);
+		assertTrue(peak.getClassifiers().contains(CLASSIFICATION));
 	}
 
 	@Test
@@ -157,7 +157,7 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(false, false, false, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertTrue(peak.getClassifier().isEmpty());
+		assertTrue(peak.getClassifiers().isEmpty());
 	}
 
 	@Test
@@ -167,7 +167,7 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(true, false, false, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertTrue(peak.getClassifier().isEmpty());
+		assertTrue(peak.getClassifiers().isEmpty());
 	}
 
 	@Test
@@ -177,8 +177,8 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(false, true, false, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertEquals(peak.getClassifier().size(), 1);
-		assertTrue(peak.getClassifier().contains(CLASSIFICATION));
+		assertEquals(peak.getClassifiers().size(), 1);
+		assertTrue(peak.getClassifiers().contains(CLASSIFICATION));
 	}
 
 	@Test
@@ -188,8 +188,8 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(false, true, false, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertEquals(peak.getClassifier().size(), 1);
-		assertTrue(peak.getClassifier().contains(CLASSIFICATION));
+		assertEquals(peak.getClassifiers().size(), 1);
+		assertTrue(peak.getClassifiers().contains(CLASSIFICATION));
 	}
 
 	@Test
@@ -199,8 +199,8 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(true, true, false, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertEquals(peak.getClassifier().size(), 1);
-		assertTrue(peak.getClassifier().contains(CLASSIFICATION));
+		assertEquals(peak.getClassifiers().size(), 1);
+		assertTrue(peak.getClassifiers().contains(CLASSIFICATION));
 	}
 
 	@Test
@@ -210,8 +210,8 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(true, false, true, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertEquals(peak.getClassifier().size(), 1);
-		assertTrue(peak.getClassifier().contains(CLASSIFICATION));
+		assertEquals(peak.getClassifiers().size(), 1);
+		assertTrue(peak.getClassifiers().contains(CLASSIFICATION));
 	}
 
 	@Test
@@ -221,7 +221,7 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(true, false, true, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertTrue(peak.getClassifier().isEmpty());
+		assertTrue(peak.getClassifiers().isEmpty());
 	}
 
 	@Test
@@ -231,8 +231,8 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(true, true, true, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertEquals(peak.getClassifier().size(), 1);
-		assertTrue(peak.getClassifier().contains(CLASSIFICATION));
+		assertEquals(peak.getClassifiers().size(), 1);
+		assertTrue(peak.getClassifiers().contains(CLASSIFICATION));
 	}
 
 	@Test
@@ -242,8 +242,8 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(false, false, true, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertEquals(peak.getClassifier().size(), 1);
-		assertTrue(peak.getClassifier().contains(CLASSIFICATION));
+		assertEquals(peak.getClassifiers().size(), 1);
+		assertTrue(peak.getClassifiers().contains(CLASSIFICATION));
 	}
 
 	@Test
@@ -253,7 +253,7 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(false, false, true, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertTrue(peak.getClassifier().isEmpty());
+		assertTrue(peak.getClassifiers().isEmpty());
 	}
 
 	@Test
@@ -263,8 +263,8 @@ public class ClassificationAssigner_3_Test {
 		ClassifierAssignFilterSettings settings = createSettings(false, true, true, rule);
 		ClassificationAssigner.apply(peak, settings);
 
-		assertEquals(peak.getClassifier().size(), 1);
-		assertTrue(peak.getClassifier().contains(CLASSIFICATION));
+		assertEquals(peak.getClassifiers().size(), 1);
+		assertTrue(peak.getClassifiers().contains(CLASSIFICATION));
 	}
 
 	private IIdentificationTarget createIdentificationTarget() {

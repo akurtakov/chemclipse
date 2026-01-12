@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -33,7 +33,7 @@ public class PeakClassifierSupport {
 	public static String getClassifier(Object object) {
 
 		if(object instanceof IPeak peak) {
-			List<String> classifier = new ArrayList<>(peak.getClassifier());
+			List<String> classifier = new ArrayList<>(peak.getClassifiers());
 			Collections.sort(classifier);
 			return StringUtils.join(classifier, " " + SEPARATOR + " ");
 		}
@@ -45,7 +45,7 @@ public class PeakClassifierSupport {
 
 		if(object instanceof IPeak peak) {
 			if(content != null) {
-				peak.clearClassifier();
+				peak.clearClassifiers();
 				for(String part : content.split("\\" + SEPARATOR)) { // Escape is required here.
 					String classification = part.trim();
 					if(!classification.isEmpty()) {

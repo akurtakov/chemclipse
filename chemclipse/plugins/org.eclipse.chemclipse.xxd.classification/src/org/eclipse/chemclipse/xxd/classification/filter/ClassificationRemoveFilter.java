@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -66,7 +66,7 @@ public class ClassificationRemoveFilter extends AbstractPeakFilter<ClassifierRem
 			if(removeCompletely) {
 				peak.removeClassifier();
 			} else {
-				List<String> classifiers = new ArrayList<>(peak.getClassifier());
+				List<String> classifiers = new ArrayList<>(peak.getClassifiers());
 				for(String classifier : classifiers) {
 					if(getStringByCaseOption(classifier, configuration).equals(classification)) {
 						peak.removeClassifier(classifier);

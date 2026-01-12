@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,7 +25,7 @@ public class MassSpectrumPeak implements IMassSpectrumPeak {
 	private double mz;
 	private double intensity;
 	private double sn;
-	private final Set<String> classifier = new LinkedHashSet<>();
+	private final Set<String> classifiers = new LinkedHashSet<>();
 	private Set<IIdentificationTarget> identificationTargets = new HashSet<>();
 
 	@Override
@@ -71,28 +71,28 @@ public class MassSpectrumPeak implements IMassSpectrumPeak {
 	}
 
 	@Override
-	public Collection<String> getClassifier() {
+	public Collection<String> getClassifiers() {
 
-		return Collections.unmodifiableCollection(classifier);
+		return Collections.unmodifiableCollection(classifiers);
 	}
 
 	@Override
-	public void clearClassifier() {
+	public void clearClassifiers() {
 
-		classifier.clear();
+		classifiers.clear();
 	}
 
 	@Override
 	public void addClassifier(String classifier) {
 
 		if(classifier != null && !classifier.trim().isEmpty()) {
-			this.classifier.add(classifier.trim());
+			this.classifiers.add(classifier.trim());
 		}
 	}
 
 	@Override
 	public void removeClassifier(String classifier) {
 
-		this.classifier.remove(classifier);
+		this.classifiers.remove(classifier);
 	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -125,7 +125,7 @@ public class TargetReference implements ITargetReference {
 		List<TargetReference> targetReferences = new ArrayList<>();
 		for(IPeak peak : peaks) {
 			Set<IIdentificationTarget> targets = peak.getTargets();
-			if(!targets.isEmpty() || !peak.getClassifier().isEmpty()) {
+			if(!targets.isEmpty() || !peak.getClassifiers().isEmpty()) {
 				IPeakModel peakModel = peak.getPeakModel();
 				String retentionTimeMinutes = FORMAT.format(peakModel.getRetentionTimeAtPeakMaximum() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR);
 				float retentionIndex = peakModel.getPeakMaximum().getRetentionIndex();

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -35,8 +35,8 @@ public class ClassifierCellEditor extends DialogCellEditor {
 	protected Object openDialogBox(Control cellEditorWindow) {
 
 		Object value = getValue();
-		if(value instanceof IClassifier classifiable) {
-			ClassifierDialog dialog = new ClassifierDialog(cellEditorWindow.getShell(), classifiable);
+		if(value instanceof IClassifier classifier) {
+			ClassifierDialog dialog = new ClassifierDialog(cellEditorWindow.getShell(), classifier);
 			if(dialog.open() == Window.OK) {
 				return new LinkedHashSet<>(dialog.getValue());
 			}
@@ -50,7 +50,7 @@ public class ClassifierCellEditor extends DialogCellEditor {
 		if(value instanceof IClassifier classifier) {
 			Label label = getDefaultLabel();
 			if(label != null && !label.isDisposed()) {
-				Collection<String> classifiers = classifier.getClassifier();
+				Collection<String> classifiers = classifier.getClassifiers();
 				if(classifiers.isEmpty()) {
 					label.setText("");
 				} else if(classifiers.size() == 1) {

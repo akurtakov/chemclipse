@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -38,7 +38,7 @@ public abstract class AbstractClassifierDescriptionExtractor {
 		for(int i = 0; i < samples.getVariables().size(); i++) {
 			final int j = i;
 			final Set<String> descriptions = new HashSet<>();
-			final Set<String> classifier = new HashSet<>();
+			final Set<String> classifiers = new HashSet<>();
 			/*
 			 * Fetch classifications and descriptions.
 			 */
@@ -47,7 +47,7 @@ public abstract class AbstractClassifierDescriptionExtractor {
 					/*
 					 * Classifier
 					 */
-					classifier.addAll(peak.get().getClassifier());
+					classifiers.addAll(peak.get().getClassifiers());
 					/*
 					 * Descriptions
 					 */
@@ -96,9 +96,9 @@ public abstract class AbstractClassifierDescriptionExtractor {
 			/*
 			 * Classifier
 			 */
-			if(!classifier.isEmpty()) {
+			if(!classifiers.isEmpty()) {
 				StringBuilder stringBuilder = new StringBuilder();
-				List<String> list = new ArrayList<>(classifier);
+				List<String> list = new ArrayList<>(classifiers);
 				Collections.sort(list);
 				Iterator<String> iterator = list.iterator();
 				while(iterator.hasNext()) {
