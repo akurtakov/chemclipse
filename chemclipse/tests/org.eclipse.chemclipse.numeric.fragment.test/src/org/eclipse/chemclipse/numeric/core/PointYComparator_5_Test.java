@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,7 +14,6 @@ package org.eclipse.chemclipse.numeric.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.eclipse.chemclipse.numeric.miscellaneous.SortOrder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,18 +32,18 @@ public class PointYComparator_5_Test {
 
 		point1 = new Point(x1, y1);
 		point2 = new Point(x2, y2);
-		pointYComparator = new PointYComparator(SortOrder.DESCENDING);
+		pointYComparator = new PointYComparator();
 	}
 
 	@Test
 	public void testComparator_1() {
 
-		assertEquals(1, pointYComparator.compare(point1, point2));
+		assertEquals(1, pointYComparator.reversed().compare(point1, point2));
 	}
 
 	@Test
 	public void testComparator_2() {
 
-		assertEquals(-1, pointYComparator.compare(point2, point1));
+		assertEquals(-1, pointYComparator.reversed().compare(point2, point1));
 	}
 }
