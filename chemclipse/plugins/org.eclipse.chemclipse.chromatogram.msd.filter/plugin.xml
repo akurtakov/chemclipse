@@ -24,4 +24,14 @@
             id="org.eclipse.chemclipse.chromatogram.msd.filter.removeZeroValues">
       </ChromatogramFilterSupplier>
    </extension>
+   <extension
+         point="org.eclipse.chemclipse.chromatogram.msd.filter.massSpectrumFilterSupplier">   
+      <MassSpectrumFilterSupplier
+            config="org.eclipse.chemclipse.chromatogram.msd.filter.impl.settings.PrecursorAssignerFilterSettings"
+            description="Assign the precursor ion."
+            filter="org.eclipse.chemclipse.chromatogram.msd.filter.impl.PrecursorAssignerFilter"
+            filterName="Precursor Assigner"
+            id="org.eclipse.chemclipse.chromatogram.msd.filter.impl.precursorassigner">
+      </MassSpectrumFilterSupplier>     
+   </extension>          
 </plugin>
