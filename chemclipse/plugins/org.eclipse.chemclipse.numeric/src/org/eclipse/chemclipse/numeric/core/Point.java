@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,25 +18,30 @@ public class Point implements IPoint {
 	private double y;
 
 	public Point(double x, double y) {
+
 		this.x = x;
 		this.y = y;
 	}
 
+	@Override
 	public double getX() {
 
 		return x;
 	}
 
+	@Override
 	public void setX(double x) {
 
 		this.x = x;
 	}
 
+	@Override
 	public double getY() {
 
 		return y;
 	}
 
+	@Override
 	public void setY(double y) {
 
 		this.y = y;
