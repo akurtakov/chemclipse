@@ -21,6 +21,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 	public static final double MIN_PRECURSOR = 0.0d;
 	public static final double MAX_PRECURSOR = 100000.0d; // 100.000 Da is pretty much
+	public static final short MIN_MASS_SPECTROMETER = 1;
+	public static final short MAX_MASS_SPECTROMETER = 100; // MS1 - MS100
 
 	private static IPreferenceSupplier preferenceSupplier = null;
 

@@ -32,6 +32,13 @@
             filter="org.eclipse.chemclipse.chromatogram.msd.filter.impl.PrecursorAssignerFilter"
             filterName="Precursor Assigner"
             id="org.eclipse.chemclipse.chromatogram.msd.filter.impl.precursorassigner">
-      </MassSpectrumFilterSupplier>     
+      </MassSpectrumFilterSupplier>
+      <MassSpectrumFilterSupplier
+            config="org.eclipse.chemclipse.chromatogram.msd.filter.impl.settings.ScanTypeAssignerFilterSettings"
+            description="Assign the scan type."
+            filter="org.eclipse.chemclipse.chromatogram.msd.filter.impl.ScanTypeAssignerFilter"
+            filterName="Scan Type Assigner"
+            id="org.eclipse.chemclipse.chromatogram.msd.filter.impl.scantypeassigner">
+      </MassSpectrumFilterSupplier>          
    </extension>          
 </plugin>
