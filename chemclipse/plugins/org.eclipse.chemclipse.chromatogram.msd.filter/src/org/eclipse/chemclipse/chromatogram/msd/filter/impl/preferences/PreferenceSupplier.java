@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,6 +18,9 @@ import org.eclipse.chemclipse.support.preferences.IPreferenceSupplier;
 import org.osgi.framework.FrameworkUtil;
 
 public class PreferenceSupplier extends AbstractPreferenceSupplier implements IPreferenceSupplier {
+
+	public static final double MIN_PRECURSOR = 0.0d;
+	public static final double MAX_PRECURSOR = 100000.0d; // 100.000 Da is pretty much
 
 	private static IPreferenceSupplier preferenceSupplier = null;
 
