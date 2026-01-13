@@ -645,8 +645,7 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 		variables.add(VARIABLE_LINE_PLOT_SELECT_NONE);
 		if(samples != null) {
 			for(IVariable variable : samples.getVariables()) {
-				if(variable.getClassification() == null) {
-					logger.warn("Fix VariableLinePlotVariable (must not be null); " + variable);
+				if(variable.getDescription() == null) {
 					variable.setDescription("");
 				}
 			}

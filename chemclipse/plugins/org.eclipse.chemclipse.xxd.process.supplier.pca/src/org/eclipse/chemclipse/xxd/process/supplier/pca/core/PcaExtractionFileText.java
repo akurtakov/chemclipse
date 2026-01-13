@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Lorenz Gerber - set Description and Classification
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.core;
 
@@ -159,6 +160,8 @@ public class PcaExtractionFileText implements IExtractionData {
 											double value = Double.parseDouble(record.get(i).trim());
 											Target target = new Target(targetName);
 											target.setValue(Double.toString(value));
+											target.setClassification("");
+											target.setDescription("");
 											variablesMap.put(targetName, target);
 										}
 									} catch(NumberFormatException e) {

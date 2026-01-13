@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Lorenz Gerber - set Description and Classification
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.extraction;
 
@@ -110,7 +111,8 @@ public abstract class AbstractClassifierDescriptionExtractor {
 				}
 
 				samples.getVariables().get(i).setClassification(stringBuilder.toString());
-			}
+			} else
+				samples.getVariables().get(i).setClassification("");
 			/*
 			 * Description -> Best Target
 			 */
@@ -128,7 +130,8 @@ public abstract class AbstractClassifierDescriptionExtractor {
 				}
 
 				samples.getVariables().get(i).setDescription(stringBuilder.toString());
-			}
+			} else
+				samples.getVariables().get(i).setDescription("");
 		}
 	}
 }
