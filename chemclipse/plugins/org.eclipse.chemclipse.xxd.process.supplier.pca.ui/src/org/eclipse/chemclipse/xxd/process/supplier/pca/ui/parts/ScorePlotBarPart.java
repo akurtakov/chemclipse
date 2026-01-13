@@ -43,6 +43,9 @@ public class ScorePlotBarPart extends AbstractPartPCA<ExtendedScorePlotBarChart>
 				getControl().setInput(null);
 				unloadData();
 				return false;
+			} else if(isUpdateColorSchemeEvent(topic) || isUpdateLabelsEvent(topic) || isUpdateGroupsEvent(topic)) {
+				getControl().updatePlot();
+				return false;
 			} else {
 				Object object = objects.get(0);
 				if(object instanceof EvaluationPCA) {

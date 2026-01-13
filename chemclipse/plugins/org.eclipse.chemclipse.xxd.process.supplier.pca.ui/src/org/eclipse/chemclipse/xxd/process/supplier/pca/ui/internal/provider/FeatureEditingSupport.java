@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Lorenz Gerber - set Classification and Description
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.provider;
 
@@ -87,7 +88,7 @@ public class FeatureEditingSupport extends EditingSupport {
 				case FeatureLabelProvider.CLASSIFICATION:
 					String classification = (String)value;
 					if("".equals(classification)) {
-						variable.setClassification(null);
+						variable.setClassification("");
 					} else {
 						variable.setClassification(classification);
 					}
@@ -95,7 +96,7 @@ public class FeatureEditingSupport extends EditingSupport {
 				case FeatureLabelProvider.DESCRIPTION:
 					String description = (String)value;
 					if("".equals(description)) {
-						variable.setDescription(null);
+						variable.setDescription("");
 					} else {
 						variable.setDescription(description);
 					}

@@ -333,6 +333,7 @@ public class LongFileExtractor {
 				if(target == null) {
 					target = new Target(key);
 					target.setDescription(mappedVariable.getDescription());
+					target.setClassification("");
 					targets.put(key, target);
 				}
 			}
