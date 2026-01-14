@@ -17,9 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
+import java.io.IOException;
 
-import org.eclipse.chemclipse.chromatogram.xxd.calculator.PathResolver;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.TestPathHelper;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.model.columns.IRetentionIndexEntry;
 import org.eclipse.chemclipse.model.columns.ISeparationColumnIndices;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -27,6 +28,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class AMDISConverter_1_ITest {
@@ -34,9 +36,9 @@ public class AMDISConverter_1_ITest {
 	private ISeparationColumnIndices separationColumnIndices;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
-		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CALIBRATION_CAL_1));
+		File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_CALIBRATION_CAL_1);
 		AMDISConverter converter = new AMDISConverter();
 		IProcessingInfo<ISeparationColumnIndices> processingInfo = converter.parseRetentionIndices(file);
 		separationColumnIndices = processingInfo.getProcessingResult();

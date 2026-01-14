@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,6 +16,7 @@
 package org.eclipse.chemclipse.msd.classifier.supplier.molpeak.identifier;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -25,12 +26,13 @@ import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.core.Pea
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings.IFileIdentifierSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings.MassSpectrumLibraryIdentifierSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings.PeakIdentifierSettings;
+import org.eclipse.chemclipse.converter.PathResolver;
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.identifier.ComparisonResult;
 import org.eclipse.chemclipse.model.identifier.IComparisonResult;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.support.LimitSupport;
-import org.eclipse.chemclipse.msd.classifier.supplier.molpeak.PathResolver;
 import org.eclipse.chemclipse.msd.classifier.supplier.molpeak.settings.IBasePeakSettings;
 import org.eclipse.chemclipse.msd.converter.database.DatabaseConverter;
 import org.eclipse.chemclipse.msd.identifier.settings.IMassSpectrumComparatorSettings;
@@ -45,6 +47,8 @@ import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 /**
  * Journal of Analytical and Applied Pyrolysis
@@ -54,6 +58,11 @@ import org.eclipse.core.runtime.NullProgressMonitor;
  * dx.doi.org/10.1016/j.jaap.2012.01.011
  */
 public class BasePeakIdentifier {
+
+	private static final Logger logger = Logger.getLogger(BasePeakIdentifier.class);
+
+	public static final String REFERENCES = "standards/references.msl";
+	public static final String GERBER_ET_AL_2012 = "standards/gerberetal2012.msl";
 
 	public static final String IDENTIFIER = "SGH + C Identifier";
 	public static final String NOT_FOUND = "Not Found (" + IDENTIFIER + ")";
@@ -69,10 +78,10 @@ public class BasePeakIdentifier {
 
 	private final TargetBuilderMSD targetBuilder;
 	// These one's are run when initializing the class
-	private static final IMassSpectra references = getStandardsMassSpectra();
+	private final IMassSpectra references = getStandardsMassSpectra();
 	private static final IScanMSD syringyl = getSyringyl();
 
-	private final String massSpectraFiles;
+	private String massSpectraFiles;
 	static {
 		Integer[] syringyl = {149, 154, 167, 181, 182, 192, 194, 208, 210};
 		Integer[] guaiacyl = {109, 123, 136, 137, 138, 140, 150, 151, 152, 162, 164, 168, 178};
@@ -99,7 +108,12 @@ public class BasePeakIdentifier {
 	public BasePeakIdentifier() {
 
 		targetBuilder = new TargetBuilderMSD();
-		massSpectraFiles = PathResolver.getAbsolutePath(PathResolver.GERBER_ET_AL_2012);
+		Bundle bundle = FrameworkUtil.getBundle(getClass());
+		try {
+			massSpectraFiles = PathResolver.getFile(bundle, GERBER_ET_AL_2012).getAbsolutePath();
+		} catch(IOException e) {
+			logger.warn(e);
+		}
 	}
 
 	public void identifyPeaks(List<? extends IPeakMSD> peaks, IBasePeakSettings settings, IProgressMonitor monitor) {
@@ -283,11 +297,16 @@ public class BasePeakIdentifier {
 		return massSpectrum;
 	}
 
-	private static IMassSpectra getStandardsMassSpectra() {
+	private IMassSpectra getStandardsMassSpectra() {
 
-		File file = new File(PathResolver.getAbsolutePath(PathResolver.REFERENCES));
-		IProcessingInfo<IMassSpectra> processingInfo = DatabaseConverter.convert(file, new NullProgressMonitor());
-		return processingInfo.getProcessingResult();
+		try {
+			File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), REFERENCES);
+			IProcessingInfo<IMassSpectra> processingInfo = DatabaseConverter.convert(file, new NullProgressMonitor());
+			return processingInfo.getProcessingResult();
+		} catch(IOException e) {
+			logger.warn(e);
+		}
+		return new MassSpectra();
 	}
 
 	private void setLibraryInformationFields(ILibraryInformation libraryInformation, String name) {

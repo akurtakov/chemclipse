@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,13 +15,15 @@ package org.eclipse.chemclipse.msd.converter.supplier.amdis.internal.converter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.converter.supplier.amdis.PathResolver;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class SpecificationValidatorMSP_1_Test {
@@ -30,31 +32,31 @@ public class SpecificationValidatorMSP_1_Test {
 	private String spec;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
-		spec = PathResolver.getAbsolutePath(TestPathHelper.VALIDATOR_TEST_SPEC_MSP);
+		spec = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.VALIDATOR_TEST_SPEC_MSP).getAbsolutePath();
 	}
 
 	@Test
-	public void testValidateAgilentSpecification_1() {
+	public void testValidateSpecification_1() throws IOException {
 
-		file = new File(PathResolver.getAbsolutePath(TestPathHelper.VALIDATOR_TEST_MSP_1));
+		file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.VALIDATOR_TEST_MSP_1);
 		file = SpecificationValidatorMSP.validateSpecification(file);
 		assertEquals(spec, file.getAbsolutePath());
 	}
 
 	@Test
-	public void testValidateAgilentSpecification_3() {
+	public void testValidateSpecification_3() throws IOException {
 
-		file = new File(PathResolver.getAbsolutePath(TestPathHelper.VALIDATOR_TEST_MSP_2));
+		file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.VALIDATOR_TEST_MSP_2);
 		file = SpecificationValidatorMSP.validateSpecification(file);
 		assertEquals(spec, file.getAbsolutePath());
 	}
 
 	@Test
-	public void testValidateAgilentSpecification_4() {
+	public void testValidateSpecification_4() throws IOException {
 
-		file = new File(PathResolver.getAbsolutePath(TestPathHelper.VALIDATOR_TEST_MSP_3));
+		file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.VALIDATOR_TEST_MSP_3);
 		file = SpecificationValidatorMSP.validateSpecification(file);
 		assertEquals(spec, file.getAbsolutePath());
 	}

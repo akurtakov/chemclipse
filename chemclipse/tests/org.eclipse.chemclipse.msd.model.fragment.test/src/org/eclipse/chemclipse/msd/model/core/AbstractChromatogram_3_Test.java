@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,12 +14,13 @@ package org.eclipse.chemclipse.msd.model.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.File;
+import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.model.PathResolver;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.model.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.junit.jupiter.api.Test;
+import org.osgi.framework.FrameworkUtil;
 
 public class AbstractChromatogram_3_Test {
 
@@ -27,23 +28,23 @@ public class AbstractChromatogram_3_Test {
 	private String nameDefault = "default";
 
 	@Test
-	public void testExtractNameFromDirectory_1() {
+	public void testExtractNameFromDirectory_1() throws IOException {
 
-		chromatogram.setFile(new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_DIR_20120319)));
+		chromatogram.setFile(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_DIR_20120319));
 		assertEquals("PW2012.03.19", chromatogram.extractNameFromFile(nameDefault));
 	}
 
 	@Test
-	public void testExtractNameFromDirectory_2() {
+	public void testExtractNameFromDirectory_2() throws IOException {
 
-		chromatogram.setFile(new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_DIR_20120320)));
+		chromatogram.setFile(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_DIR_20120320));
 		assertEquals(nameDefault, chromatogram.extractNameFromFile(nameDefault));
 	}
 
 	@Test
-	public void testExtractNameFromDirectory_3() {
+	public void testExtractNameFromDirectory_3() throws IOException {
 
-		chromatogram.setFile(new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_DIR_20120321_1)));
+		chromatogram.setFile(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_DIR_20120321_1));
 		assertEquals("PW20120321-1", chromatogram.extractNameFromFile(nameDefault));
 	}
 }

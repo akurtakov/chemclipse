@@ -14,9 +14,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.impl;
 
+import java.io.IOException;
 import java.util.List;
 
-import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.PathResolver;
+import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.io.StandardsReader;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.settings.MassSpectrumIdentifierAlkaneSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.settings.PeakIdentifierAlkaneSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.core.MassSpectrumIdentifierFile;
@@ -24,6 +25,8 @@ import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.core.Pea
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings.IFileIdentifierSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings.MassSpectrumLibraryIdentifierSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings.PeakIdentifierSettings;
+import org.eclipse.chemclipse.converter.PathResolver;
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.IPeakIdentificationResults;
 import org.eclipse.chemclipse.msd.identifier.settings.IMassSpectrumComparatorSettings;
@@ -35,24 +38,28 @@ import org.eclipse.chemclipse.msd.model.implementation.MassSpectra;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.support.util.FileListUtil;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 public class AlkaneIdentifier {
 
 	public static final String IDENTIFIER = "Alkanes Identifier"; // $NON-NLS-N$
 
-	private final String massSpectraFiles; // Initialized in constructor.
-	private final DatabasesCache databasesCache; // Initialized in constructor.
+	private static final Logger logger = Logger.getLogger(AlkaneIdentifier.class);
+
+	private String massSpectraFiles; // Initialized in constructor.
+	private DatabasesCache databasesCache; // Initialized in constructor.
 
 	public AlkaneIdentifier() {
 
 		FileListUtil fileListUtil = new FileListUtil();
-		massSpectraFiles = getDatabase();
-		databasesCache = new DatabasesCache(fileListUtil.getFiles(massSpectraFiles));
-	}
-
-	public static String getDatabase() {
-
-		return PathResolver.getAbsolutePath(PathResolver.ALKANES);
+		Bundle bundle = FrameworkUtil.getBundle(getClass());
+		try {
+			massSpectraFiles = PathResolver.getFile(bundle, StandardsReader.ALKANES).getAbsolutePath();
+			databasesCache = new DatabasesCache(fileListUtil.getFiles(massSpectraFiles));
+		} catch(IOException e) {
+			logger.warn(e);
+		}
 	}
 
 	public IProcessingInfo<IPeakIdentificationResults> runPeakIdentification(List<? extends IPeakMSD> peaks, PeakIdentifierAlkaneSettings alkaneSettings, IProgressMonitor monitor) {

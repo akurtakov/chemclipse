@@ -16,12 +16,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.identifier.supplier.nist.PathResolver;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.identifier.supplier.nist.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.osgi.framework.FrameworkUtil;
 
 public class WindowsSupport_1_ITest extends AbstractBackgroundTestCase {
 
@@ -30,13 +31,12 @@ public class WindowsSupport_1_ITest extends AbstractBackgroundTestCase {
 
 	@Override
 	@BeforeAll
-	public void setUp() throws FileNotFoundException {
+	public void setUp() throws IOException {
 
 		super.setUp();
-		String nistApplication = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_WINDOWS_NIST_APPLICATION);
-		File testfileNistApplication = new File(nistApplication);
-		nistApplicationPath = testfileNistApplication.getParent();
-		runtimeSupport = new WindowsSupport(testfileNistApplication.getParentFile(), parameterBackground);
+		File nistApplication = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_WINDOWS_NIST_APPLICATION);
+		nistApplicationPath = nistApplication.getParent();
+		runtimeSupport = new WindowsSupport(nistApplication.getParentFile(), parameterBackground);
 	}
 
 	@Test

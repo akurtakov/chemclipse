@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,7 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
+import java.io.IOException;
 
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.nmr.converter.supplier.nmrml.converter.ScanImportConverter;
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumNMR;
@@ -27,6 +29,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class MMBBI_10M12_CE01_1a_ITest {
@@ -34,9 +37,9 @@ public class MMBBI_10M12_CE01_1a_ITest {
 	private ISpectrumNMR spectrumNMR;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
-		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.MMBBI_10M12_CE01_1a));
+		File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.MMBBI_10M12_CE01_1a);
 		ScanImportConverter importConverter = new ScanImportConverter();
 		IProcessingInfo<ISpectrumNMR> processingInfo = importConverter.convert(file, new NullProgressMonitor());
 		spectrumNMR = processingInfo.getProcessingResult();

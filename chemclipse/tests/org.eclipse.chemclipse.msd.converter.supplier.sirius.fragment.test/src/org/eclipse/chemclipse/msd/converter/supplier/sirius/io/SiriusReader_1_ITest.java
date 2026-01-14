@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,8 +15,9 @@ package org.eclipse.chemclipse.msd.converter.supplier.sirius.io;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.converter.supplier.sirius.PathResolver;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.sirius.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -24,6 +25,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class SiriusReader_1_ITest {
@@ -31,10 +33,10 @@ public class SiriusReader_1_ITest {
 	private IMassSpectra massSpectra;
 
 	@BeforeAll
-	public void setUp() throws Exception {
+	public void setUp() throws IOException {
 
 		SiriusReader reader = new SiriusReader();
-		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_KAEMPFEROL));
+		File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_KAEMPFEROL);
 		massSpectra = reader.read(file, new NullProgressMonitor());
 	}
 

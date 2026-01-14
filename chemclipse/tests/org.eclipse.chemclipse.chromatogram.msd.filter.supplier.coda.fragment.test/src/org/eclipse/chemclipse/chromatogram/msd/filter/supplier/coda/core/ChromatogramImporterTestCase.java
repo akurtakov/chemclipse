@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,9 +14,10 @@
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.core;
 
 import java.io.File;
+import java.io.IOException;
 
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.PathResolver;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.TestPathHelper;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.ChromatogramSelectionMSD;
@@ -26,6 +27,7 @@ import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstan
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
+import org.osgi.framework.FrameworkUtil;
 
 @Disabled
 public class ChromatogramImporterTestCase {
@@ -34,12 +36,12 @@ public class ChromatogramImporterTestCase {
 	protected IChromatogramSelectionMSD chromatogramSelection;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
 		/*
 		 * Import
 		 */
-		File fileImport = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_2));
+		File fileImport = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_2);
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();
 		chromatogramSelection = new ChromatogramSelectionMSD(chromatogram);

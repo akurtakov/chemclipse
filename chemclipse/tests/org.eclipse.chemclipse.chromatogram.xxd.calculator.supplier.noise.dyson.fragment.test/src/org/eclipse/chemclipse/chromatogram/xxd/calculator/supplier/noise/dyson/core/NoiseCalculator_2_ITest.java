@@ -15,13 +15,16 @@ package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.noise.dyson.
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.noise.dyson.PathResolver;
+import java.io.IOException;
+
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.noise.dyson.TestPathHelper;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.model.results.ChromatogramSegmentation;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class NoiseCalculator_2_ITest extends ChromatogramReaderTestCase {
@@ -30,9 +33,9 @@ public class NoiseCalculator_2_ITest extends ChromatogramReaderTestCase {
 
 	@Override
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
-		pathImport = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_2);
+		fileImport = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_2);
 		super.setUp();
 	}
 

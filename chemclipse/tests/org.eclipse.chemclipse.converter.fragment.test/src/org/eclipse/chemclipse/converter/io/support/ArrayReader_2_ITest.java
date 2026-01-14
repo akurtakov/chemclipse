@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,6 +21,7 @@ import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.converter.TestPathHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.osgi.framework.FrameworkUtil;
 
 public class ArrayReader_2_ITest {
 
@@ -37,7 +38,7 @@ public class ArrayReader_2_ITest {
 		 * F0 A7 C1 0B 04 9F 01 3B
 		 * 11110000 10100111 11000001 00001011 00000100 10011111 00000001 00111011
 		 */
-		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_BIN_TEST));
+		File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_BIN_TEST);
 		arrayReader = new ArrayReaderTestImplementation(file);
 	}
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,8 +15,10 @@ package org.eclipse.chemclipse.xxd.converter.supplier.ocx.io;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Set;
 
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.msd.converter.peak.PeakConverterMSD;
@@ -24,7 +26,6 @@ import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IPeaksMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.xxd.converter.supplier.ocx.PathResolver;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.TestPathHelper;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -32,6 +33,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class PeakReader_1_MSD_0902_ITest {
@@ -39,9 +41,9 @@ public class PeakReader_1_MSD_0902_ITest {
 	private IPeaksMSD peaks;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
-		File fileImport = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_MSD_0902));
+		File fileImport = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_MSD_0902);
 		IProcessingInfo<IPeaksMSD> processingInfo = PeakConverterMSD.convert(fileImport, VersionConstants.CONVERTER_ID_PEAKS, new NullProgressMonitor());
 		peaks = processingInfo.getProcessingResult();
 	}

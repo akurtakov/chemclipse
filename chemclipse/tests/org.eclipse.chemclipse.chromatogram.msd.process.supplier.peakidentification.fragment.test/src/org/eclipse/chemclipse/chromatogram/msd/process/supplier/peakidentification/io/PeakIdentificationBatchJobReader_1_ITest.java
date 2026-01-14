@@ -17,17 +17,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.PathResolver;
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.TestPathHelper;
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.model.IPeakIdentificationBatchJob;
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.model.IPeakIdentificationEntry;
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.model.IPeakInputEntry;
 import org.eclipse.chemclipse.chromatogram.msd.process.supplier.peakidentification.model.IPeakIntegrationEntry;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class PeakIdentificationBatchJobReader_1_ITest {
@@ -38,7 +39,7 @@ public class PeakIdentificationBatchJobReader_1_ITest {
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_BATCH_PROCESS_JOB));
+		File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_BATCH_PROCESS_JOB);
 		batchProcessJob = reader.read(file, new NullProgressMonitor());
 	}
 

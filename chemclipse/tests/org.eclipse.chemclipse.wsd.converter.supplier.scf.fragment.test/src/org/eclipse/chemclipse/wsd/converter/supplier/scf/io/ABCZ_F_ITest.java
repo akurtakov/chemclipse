@@ -16,11 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.ZoneId;
 
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.wsd.converter.chromatogram.ChromatogramConverterWSD;
-import org.eclipse.chemclipse.wsd.converter.supplier.scf.PathResolver;
 import org.eclipse.chemclipse.wsd.converter.supplier.scf.SCF;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -28,6 +29,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class ABCZ_F_ITest {
@@ -35,9 +37,9 @@ public class ABCZ_F_ITest {
 	private IChromatogramWSD chromatogram;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
-		File fileImport = new File(PathResolver.getAbsolutePath(SCF.TESTFILE_IMPORT_ABCZ_F));
+		File fileImport = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), SCF.TESTFILE_IMPORT_ABCZ_F);
 		IProcessingInfo<IChromatogramWSD> processingInfo = ChromatogramConverterWSD.getInstance().convert(fileImport, SCF.EXTENSION_POINT_ID, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();
 	}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,11 +15,12 @@ package org.eclipse.chemclipse.xxd.converter.supplier.ocx.io;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.csd.converter.chromatogram.ChromatogramConverterCSD;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.xxd.converter.supplier.ocx.PathResolver;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.TestPathHelper;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
@@ -29,6 +30,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramReader_1_FID_1004_ITest {
@@ -36,11 +38,10 @@ public class ChromatogramReader_1_FID_1004_ITest {
 	private IChromatogramCSD chromatogram;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
 		PreferenceSupplier.setForceLoadAlternateDetector(true);
-		String pathImport = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_MSD_1004);
-		File fileImport = new File(pathImport);
+		File fileImport = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_MSD_1004);
 		IProcessingInfo<IChromatogramCSD> processingInfo = ChromatogramConverterCSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();
 	}

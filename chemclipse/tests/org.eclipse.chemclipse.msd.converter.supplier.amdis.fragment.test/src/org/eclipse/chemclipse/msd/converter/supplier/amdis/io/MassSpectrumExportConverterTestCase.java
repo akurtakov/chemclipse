@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,6 +14,7 @@
 package org.eclipse.chemclipse.msd.converter.supplier.amdis.io;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.eclipse.chemclipse.msd.converter.database.IDatabaseExportConverter;
 import org.eclipse.chemclipse.msd.converter.database.IDatabaseImportConverter;
@@ -37,7 +38,7 @@ public class MassSpectrumExportConverterTestCase {
 	protected IDatabaseImportConverter importConverter;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
 		exportConverter = new MSLDatabaseExportConverter();
 		importConverter = new MSLDatabaseImportConverter();

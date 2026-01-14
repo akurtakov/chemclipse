@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,40 +12,33 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.converter;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
 
 public class PathResolver {
 
 	/**
-	 * Returns a absolute path of the specified Folder. For example
-	 * TESTDATA_IMPORT_EMPTY as an absolute Path:
-	 * $PluginPath$/testData/files/EMPTY.D/DATA.MS
+	 * Returns a file within a bundle.
 	 * 
-	 * @param string
+	 * @param bundle
+	 *            where to search
+	 * @param path
+	 *            relative path within the bundle
 	 * @throws IOException
-	 * @return String absolutePath
+	 * @return File
 	 */
-	public static String getAbsolutePath(final String string) throws IOException {
+	public static File getFile(final Bundle bundle, final String path) throws IOException {
 
-		Bundle bundle = FrameworkUtil.getBundle(PathResolver.class);
-		return getAbsolutePath(bundle, string);
-	}
-
-	public static String getAbsolutePath(final Bundle bundle, final String string) throws IOException {
-
-		if("".equals(string) && string == null) {
+		if(path == null || "".equals(path)) {
 			throw new IOException();
 		}
 
-		IPath path = new Path(string);
-		URL url = FileLocator.find(bundle, path, null);
-		return FileLocator.resolve(url).getPath();
+		URL url = FileLocator.find(bundle, new Path(path), null);
+		return new File(FileLocator.resolve(url).getPath());
 	}
 }

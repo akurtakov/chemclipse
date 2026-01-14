@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,6 +13,8 @@
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.IOException;
 
 import org.eclipse.chemclipse.chromatogram.msd.filter.core.chromatogram.IChromatogramFilterMSD;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.settings.FilterSettings;
@@ -30,7 +32,7 @@ public class CodaFilter_1_ITest extends ChromatogramImporterTestCase {
 
 	@Override
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
 		super.setUp();
 	}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,15 +15,17 @@ package org.eclipse.chemclipse.msd.converter.supplier.amdis.converter.msl;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.database.IDatabaseImportConverter;
-import org.eclipse.chemclipse.msd.converter.supplier.amdis.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class MSLImportConverter_1_ITest {
@@ -40,9 +42,9 @@ public class MSLImportConverter_1_ITest {
 	}
 
 	@Test
-	public void testExceptions_2() {
+	public void testExceptions_2() throws IOException {
 
-		importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_EMPTY));
+		importFile = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_EMPTY);
 		IProcessingInfo<?> processingInfo = importConverter.convert(importFile, new NullProgressMonitor());
 		assertTrue(processingInfo.hasErrorMessages());
 	}
@@ -56,9 +58,9 @@ public class MSLImportConverter_1_ITest {
 	}
 
 	@Test
-	public void testExceptions_4() {
+	public void testExceptions_4() throws IOException {
 
-		importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_NOT_READABLE));
+		importFile = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_NOT_READABLE);
 		importFile.setReadable(false);
 		try {
 			IProcessingInfo<?> processingInfo = importConverter.convert(importFile, new NullProgressMonitor());

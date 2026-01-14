@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,24 +15,25 @@ package org.eclipse.chemclipse.msd.converter.supplier.amdis.io;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.io.File;
+import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.converter.supplier.amdis.PathResolver;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.model.IVendorLibraryMassSpectrum;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class MassSpectrumImportConverter_DB_2_ITest extends ImportConverterMslTestCase {
 
 	@Override
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
-		importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_DB_2));
+		importFile = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_DB_2);
 		super.setUp();
 	}
 

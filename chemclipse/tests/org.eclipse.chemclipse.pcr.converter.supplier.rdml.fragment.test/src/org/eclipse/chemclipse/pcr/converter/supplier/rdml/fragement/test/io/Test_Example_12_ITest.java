@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,13 +15,14 @@ package org.eclipse.chemclipse.pcr.converter.supplier.rdml.fragement.test.io;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
-import org.eclipse.chemclipse.pcr.converter.supplier.rdml.PathResolver;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.pcr.converter.supplier.rdml.core.PCRImportConverter;
 import org.eclipse.chemclipse.pcr.converter.supplier.rdml.fragment.test.TestPathHelper;
 import org.eclipse.chemclipse.pcr.model.core.IChannel;
@@ -33,6 +34,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class Test_Example_12_ITest {
@@ -40,9 +42,9 @@ public class Test_Example_12_ITest {
 	private IPlate plate;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
-		File importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.EXAMPLE_1_2));
+		File importFile = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.EXAMPLE_1_2);
 		IProcessingInfo<IPlate> importProcessingInfo = PCRImportConverter.getInstance().convert(importFile, new NullProgressMonitor());
 		plate = importProcessingInfo.getProcessingResult();
 	}

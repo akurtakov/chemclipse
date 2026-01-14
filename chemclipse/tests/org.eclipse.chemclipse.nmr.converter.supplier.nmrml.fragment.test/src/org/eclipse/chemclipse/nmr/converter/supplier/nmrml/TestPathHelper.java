@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.nmr.converter.supplier.nmrml;
 
-public class TestPathHelper extends PathResolver {
+public class TestPathHelper {
 
 	public static final String MMBBI_10M12_CE01_1a = "testData/MMBBI_10M12-CE01-1a.nmrML";
 }

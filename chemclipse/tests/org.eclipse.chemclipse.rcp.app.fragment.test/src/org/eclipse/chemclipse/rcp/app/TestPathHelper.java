@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,7 +16,7 @@ package org.eclipse.chemclipse.rcp.app;
  * THIS CLASS IS NOT SUITED FOR PRODUCTIVE USE!<br/>
  * IT IS A TESTCLASS!
  */
-public class TestPathHelper extends PathResolver {
+public class TestPathHelper {
 
 	public static final String TESTFILE_EXPORT_DIR = "testData/files/export/";
 	public static final String TESTFILE_EXPORT_NAME = "preferences.epf";

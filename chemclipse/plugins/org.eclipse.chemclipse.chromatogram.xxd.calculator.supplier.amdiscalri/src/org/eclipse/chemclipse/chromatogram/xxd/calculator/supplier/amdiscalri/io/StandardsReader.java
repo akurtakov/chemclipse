@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,10 +14,11 @@
 package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.io;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.PathResolver;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.model.columns.IRetentionIndexEntry;
 import org.eclipse.chemclipse.model.columns.RetentionIndexEntry;
 import org.eclipse.chemclipse.msd.converter.database.DatabaseConverter;
@@ -26,12 +27,18 @@ import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 public class StandardsReader {
 
-	public IMassSpectra getStandardsMassSpectra() {
+	public static final String ALKANES = "standards/alkanes.msl";
 
-		File file = new File(PathResolver.getAbsolutePath(PathResolver.ALKANES));
+	public IMassSpectra getStandardsMassSpectra() throws IOException {
+
+		Bundle bundle = FrameworkUtil.getBundle(getClass());
+
+		File file = PathResolver.getFile(bundle, ALKANES);
 		IProcessingInfo<IMassSpectra> processingInfo = DatabaseConverter.convert(file, new NullProgressMonitor());
 		return processingInfo.getProcessingResult();
 	}
@@ -40,15 +47,21 @@ public class StandardsReader {
 
 		List<IRetentionIndexEntry> retentionIndexEntries = new ArrayList<>();
 
-		IMassSpectra massSpectra = getStandardsMassSpectra();
-		for(IScanMSD massSpectrum : massSpectra.getList()) {
-			if(massSpectrum instanceof ILibraryMassSpectrum libraryMassSpectrum) {
-				String name = libraryMassSpectrum.getLibraryInformation().getName();
-				int retentionTime = massSpectrum.getRetentionTime();
-				float retentionIndex = massSpectrum.getRetentionIndex();
-				IRetentionIndexEntry retentionIndexEntry = new RetentionIndexEntry(retentionTime, retentionIndex, name);
-				retentionIndexEntries.add(retentionIndexEntry);
+		try {
+			IMassSpectra massSpectra = getStandardsMassSpectra();
+
+			for(IScanMSD massSpectrum : massSpectra.getList()) {
+				if(massSpectrum instanceof ILibraryMassSpectrum libraryMassSpectrum) {
+					String name = libraryMassSpectrum.getLibraryInformation().getName();
+					int retentionTime = massSpectrum.getRetentionTime();
+					float retentionIndex = massSpectrum.getRetentionIndex();
+					IRetentionIndexEntry retentionIndexEntry = new RetentionIndexEntry(retentionTime, retentionIndex, name);
+					retentionIndexEntries.add(retentionIndexEntry);
+				}
 			}
+		} catch(IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 		return retentionIndexEntries;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.supplier.mmass;
 
-public class TestPathHelper extends PathResolver {
+public class TestPathHelper {
 
 	public static final String TESTFILE_PROTEIN_IDENTIFICATION = "testData/Protein Identification.msd";
 	public static final String TESTFILE_MMASS_TINY_22 = "testData/mMass 2.2 tiny.msd";

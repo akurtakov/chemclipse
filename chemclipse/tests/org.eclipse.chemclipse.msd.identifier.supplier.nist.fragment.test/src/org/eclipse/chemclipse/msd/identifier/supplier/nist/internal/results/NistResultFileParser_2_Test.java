@@ -15,13 +15,15 @@ package org.eclipse.chemclipse.msd.identifier.supplier.nist.internal.results;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.identifier.supplier.nist.PathResolver;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.identifier.supplier.nist.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class NistResultFileParser_2_Test {
@@ -31,10 +33,10 @@ public class NistResultFileParser_2_Test {
 	private Hit hit;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
 		NistResultFileParser nistResultFileParser = new NistResultFileParser();
-		File results = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_NIST_SRCRESLT_2));
+		File results = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_NIST_SRCRESLT_2);
 		compounds = nistResultFileParser.getCompounds(results);
 	}
 

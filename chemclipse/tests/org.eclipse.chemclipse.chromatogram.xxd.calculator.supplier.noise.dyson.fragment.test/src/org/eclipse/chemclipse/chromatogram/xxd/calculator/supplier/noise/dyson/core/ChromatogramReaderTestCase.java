@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,6 +14,7 @@
 package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.noise.dyson.core;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
@@ -27,13 +28,11 @@ import org.junit.jupiter.api.Disabled;
 public class ChromatogramReaderTestCase {
 
 	protected IChromatogramMSD chromatogram;
-	protected String pathImport;
 	protected File fileImport;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
-		fileImport = new File(this.pathImport);
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();
 	}

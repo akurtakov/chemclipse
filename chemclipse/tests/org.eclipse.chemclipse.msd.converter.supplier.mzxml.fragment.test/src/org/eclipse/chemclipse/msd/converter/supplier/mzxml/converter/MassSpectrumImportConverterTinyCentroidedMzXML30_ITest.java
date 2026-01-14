@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,8 +15,9 @@ package org.eclipse.chemclipse.msd.converter.supplier.mzxml.converter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.converter.supplier.mzxml.PathResolver;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.model.IVendorMassSpectra;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.model.VendorMassSpectra;
@@ -31,6 +32,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class MassSpectrumImportConverterTinyCentroidedMzXML30_ITest {
@@ -38,9 +40,9 @@ public class MassSpectrumImportConverterTinyCentroidedMzXML30_ITest {
 	private IStandaloneMassSpectrum standaloneMassSpectrum;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
-		File importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_TINY1_CENTROIDED_MZXML30));
+		File importFile = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_TINY1_CENTROIDED_MZXML30);
 		MassSpectrumImportConverter converter = new MassSpectrumImportConverter();
 		IProcessingInfo<IMassSpectra> processingInfo = converter.convert(importFile, new NullProgressMonitor());
 		IVendorMassSpectra massSpectra = (VendorMassSpectra)processingInfo.getProcessingResult();

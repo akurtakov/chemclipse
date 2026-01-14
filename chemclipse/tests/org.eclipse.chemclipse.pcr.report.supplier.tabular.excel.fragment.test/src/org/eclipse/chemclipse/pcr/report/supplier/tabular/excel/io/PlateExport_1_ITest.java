@@ -15,11 +15,12 @@ package org.eclipse.chemclipse.pcr.report.supplier.tabular.excel.io;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.pcr.converter.core.IPlateExportConverter;
 import org.eclipse.chemclipse.pcr.model.core.IPlate;
 import org.eclipse.chemclipse.pcr.model.core.Plate;
-import org.eclipse.chemclipse.pcr.report.supplier.tabular.excel.PathResolver;
 import org.eclipse.chemclipse.pcr.report.supplier.tabular.excel.core.PCRExportConverter;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -28,6 +29,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class PlateExport_1_ITest {
@@ -39,11 +41,11 @@ public class PlateExport_1_ITest {
 	private File file;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
 		new File(DIRECTORY_EXPORT_TEST).mkdirs();
-		String path = PathResolver.getAbsolutePath(DIRECTORY_EXPORT_TEST);
-		file = new File(path + File.separator + "ExcelReport.xlsx");
+		File path = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), DIRECTORY_EXPORT_TEST);
+		file = new File(path, File.separator + "ExcelReport.xlsx");
 	}
 
 	@AfterAll

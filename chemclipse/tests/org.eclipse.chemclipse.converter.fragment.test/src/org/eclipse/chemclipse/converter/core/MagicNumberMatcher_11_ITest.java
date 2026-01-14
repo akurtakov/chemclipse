@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -22,6 +22,7 @@ import java.util.Map;
 import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.converter.TestPathHelper;
 import org.junit.jupiter.api.Test;
+import org.osgi.framework.FrameworkUtil;
 
 public class MagicNumberMatcher_11_ITest {
 
@@ -46,7 +47,7 @@ public class MagicNumberMatcher_11_ITest {
 	@Test
 	public void test1() throws IOException {
 
-		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_BIN_TEST));
+		File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_BIN_TEST);
 		assertFalse(magicNumberMatcher.checkFileFormat(file));
 	}
 }

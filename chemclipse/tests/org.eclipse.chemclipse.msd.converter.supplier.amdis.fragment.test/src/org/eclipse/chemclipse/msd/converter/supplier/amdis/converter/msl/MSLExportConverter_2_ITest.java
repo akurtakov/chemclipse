@@ -17,9 +17,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.model.columns.ISeparationColumn;
 import org.eclipse.chemclipse.model.columns.SeparationColumnFactory;
 import org.eclipse.chemclipse.model.columns.SeparationColumnPackaging;
@@ -27,7 +29,6 @@ import org.eclipse.chemclipse.model.identifier.ColumnIndexMarker;
 import org.eclipse.chemclipse.model.identifier.IColumnIndexMarker;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.msd.converter.database.IDatabaseExportConverter;
-import org.eclipse.chemclipse.msd.converter.supplier.amdis.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.io.ImportConverterMslTestCase;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.model.IVendorLibraryMassSpectrum;
@@ -41,6 +42,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class MSLExportConverter_2_ITest extends ImportConverterMslTestCase {
@@ -50,13 +52,14 @@ public class MSLExportConverter_2_ITest extends ImportConverterMslTestCase {
 
 	@Override
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
 		/*
 		 * Export
 		 */
 		IDatabaseExportConverter exportConverter = new MSLDatabaseExportConverter();
-		File exportFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTDIR_EXPORT) + File.separator + TestPathHelper.TESTFILE_EXPORT_DB_2_MSL);
+		File exportFolder = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTDIR_EXPORT);
+		File exportFile = new File(exportFolder, File.separator + TestPathHelper.TESTFILE_EXPORT_DB_2_MSL);
 		IVendorLibraryMassSpectrum scanMSD = new VendorLibraryMassSpectrum();
 		ILibraryInformation libraryInformationMS = scanMSD.getLibraryInformation();
 		libraryInformationMS.setName("Benzoic acid, 2-hydroxy-, ethyl ester");

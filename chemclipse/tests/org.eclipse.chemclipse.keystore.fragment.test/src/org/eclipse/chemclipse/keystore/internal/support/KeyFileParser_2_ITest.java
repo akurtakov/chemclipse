@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,14 +18,16 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
-import org.eclipse.chemclipse.keystore.PathResolver;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.keystore.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class KeyFileParser_2_ITest {
@@ -33,9 +35,9 @@ public class KeyFileParser_2_ITest {
 	private Map<String, String> keyStore;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
-		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_KEYSTORE_II_TEST));
+		File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_KEYSTORE_II_TEST);
 		keyStore = KeyFileParser.readKeysFromFile(file);
 	}
 

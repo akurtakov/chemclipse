@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,12 +15,13 @@ package org.eclipse.chemclipse.xxd.converter.supplier.ocx.io;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.xxd.converter.supplier.ocx.PathResolver;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.TestPathHelper;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
@@ -30,6 +31,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramReader_3_MSD_1500_ITest {
@@ -37,10 +39,10 @@ public class ChromatogramReader_3_MSD_1500_ITest {
 	private static IChromatogramMSD chromatogram;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
 		PreferenceSupplier.setForceLoadAlternateDetector(true);
-		File fileImport = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_3_FID_1500));
+		File fileImport = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_3_FID_1500);
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();
 	}

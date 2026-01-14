@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,6 +14,8 @@ package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.i
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.IOException;
+
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.settings.RetentionIndexImporterSettings;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.junit.jupiter.api.Test;
@@ -21,7 +23,7 @@ import org.junit.jupiter.api.Test;
 public class RetentionIndexImporter_1_ITest extends RetentionIndexImporterTestCase {
 
 	@Test
-	public void test1a() {
+	public void test1a() throws IOException {
 
 		RetentionIndexImporterSettings settings = getRetentionIndexImporterSettings();
 
@@ -33,7 +35,7 @@ public class RetentionIndexImporter_1_ITest extends RetentionIndexImporterTestCa
 	}
 
 	@Test
-	public void test1b() {
+	public void test1b() throws IOException {
 
 		RetentionIndexImporterSettings settings = getRetentionIndexImporterSettings();
 		settings.setCaseSensitive(false);
@@ -46,7 +48,7 @@ public class RetentionIndexImporter_1_ITest extends RetentionIndexImporterTestCa
 	}
 
 	@Test
-	public void test1c() {
+	public void test1c() throws IOException {
 
 		RetentionIndexImporterSettings settings = getRetentionIndexImporterSettings();
 		settings.setFileNamePattern("");
@@ -59,7 +61,7 @@ public class RetentionIndexImporter_1_ITest extends RetentionIndexImporterTestCa
 	}
 
 	@Test
-	public void test1d() {
+	public void test1d() throws IOException {
 
 		RetentionIndexImporterSettings settings = getRetentionIndexImporterSettings();
 		settings.setFileNamePattern("{chromatogram}");
@@ -72,7 +74,7 @@ public class RetentionIndexImporter_1_ITest extends RetentionIndexImporterTestCa
 	}
 
 	@Test
-	public void test1e() {
+	public void test1e() throws IOException {
 
 		RetentionIndexImporterSettings settings = getRetentionIndexImporterSettings();
 		settings.setFileNamePattern("heptane C7 - tridecane C13");
@@ -85,7 +87,7 @@ public class RetentionIndexImporter_1_ITest extends RetentionIndexImporterTestCa
 	}
 
 	@Test
-	public void test1f() {
+	public void test1f() throws IOException {
 
 		RetentionIndexImporterSettings settings = getRetentionIndexImporterSettings();
 		settings.setFileNamePattern("(.*)(C7)(.*)(C13)");
@@ -98,7 +100,7 @@ public class RetentionIndexImporter_1_ITest extends RetentionIndexImporterTestCa
 	}
 
 	@Test
-	public void test2a() {
+	public void test2a() throws IOException {
 
 		RetentionIndexImporterSettings settings = getRetentionIndexImporterSettings();
 		settings.setProcessReferenceChromatograms(false);
@@ -111,7 +113,7 @@ public class RetentionIndexImporter_1_ITest extends RetentionIndexImporterTestCa
 	}
 
 	@Test
-	public void test2d() {
+	public void test2d() throws IOException {
 
 		RetentionIndexImporterSettings settings = getRetentionIndexImporterSettings();
 		settings.setProcessReferenceChromatograms(false);
