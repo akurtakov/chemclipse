@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 
 import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.LongFileExtractor;
@@ -41,17 +42,26 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.swtchart.Chart;
 import org.eclipse.swtchart.IAxis;
+import org.eclipse.swtchart.IBarSeries;
+import org.eclipse.swtchart.IBarSeries.BarWidthStyle;
 import org.eclipse.swtchart.ISeries;
-import org.eclipse.swtchart.ISeries.SeriesType;
 import org.eclipse.swtchart.Range;
+import org.eclipse.swtchart.extensions.barcharts.BarChart;
+import org.eclipse.swtchart.extensions.barcharts.BarSeriesData;
+import org.eclipse.swtchart.extensions.barcharts.IBarSeriesData;
+import org.eclipse.swtchart.extensions.barcharts.IBarSeriesSettings;
+import org.eclipse.swtchart.extensions.core.BaseChart;
+import org.eclipse.swtchart.extensions.core.IChartSettings;
+import org.eclipse.swtchart.extensions.core.IPrimaryAxisSettings;
+import org.eclipse.swtchart.extensions.core.ISeriesData;
+import org.eclipse.swtchart.extensions.core.RangeRestriction;
+import org.eclipse.swtchart.extensions.core.SeriesData;
 
 public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage {
 
 	private boolean dataAlreadyLoaded = false;
-	private Chart chart;
-	private ISeries<?> series;
+	private BarChart chart;
 	private Samples samples;
 	private Spinner sampleSpinner;
 	private Group sampleSpinnerGroup;
@@ -76,38 +86,94 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 	public void createControl(Composite parent) {
 
 		Composite container = new Composite(parent, SWT.NONE);
-		container.setLayout(new GridLayout(1, false));
+		container.setLayout(new GridLayout(2, false));
 
-		/*
-		 * Initial Chart
-		 */
-		chart = new Chart(container, SWT.NONE);
+		createChartArea(container);
+		createControlArea(container);
 
-		GridData gd = new GridData(SWT.FILL, SWT.FILL, true, false);
-		gd.heightHint = 250;
+		setControl(container);
+	}
+
+	private void createChartArea(Composite parent) {
+
+		chart = new BarChart(parent, SWT.NONE);
+		GridData gd = new GridData(SWT.FILL, SWT.FILL, false, true);
+		gd.widthHint = 500;
+		gd.heightHint = 200;
 		chart.setLayoutData(gd);
 
-		chart.getTitle().setText("...Loading Data...");
+		IChartSettings chartSettings = chart.getChartSettings();
+		chartSettings.clearHandledEventProcessors();
+		chartSettings.setHorizontalSliderVisible(false);
+		chartSettings.setVerticalSliderVisible(false);
+		chartSettings.setOrientation(SWT.HORIZONTAL);
+		chartSettings.setCreateMenu(false);
+		chartSettings.setTitle("... Loading Data...");
+		chartSettings.setTitleVisible(true);
 
-		chart.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		chart.getLegend().setVisible(false);
+		IPrimaryAxisSettings xAxisSettings = chartSettings.getPrimaryAxisSettingsX();
+		xAxisSettings.setTitle("# of Analyte overlaps");
 
-		chart.getAxisSet().getXAxis(0).getTitle().setText("# of Analyte overlaps");
-		chart.getAxisSet().getYAxis(0).getTitle().setText("Sample count");
+		IPrimaryAxisSettings yAxisSettings = chartSettings.getPrimaryAxisSettingsY();
+		yAxisSettings.setTitle("Sample count");
+
+		RangeRestriction rangeRestriction = chartSettings.getRangeRestriction();
+		rangeRestriction.setZeroY(true);
+		rangeRestriction.setForceZeroMinY(true);
+
+		chart.applySettings(chartSettings);
+
+		double[] xValues = new double[]{0, 1, 2, 3};
 		double[] yValues = new double[]{0.0, 0.0, 0.0, 0.0};
+		String[] xLabels = DoubleStream.of(xValues).mapToObj(d -> Integer.toString((int)d)).toArray(String[]::new);
+		ISeriesData seriesData = new SeriesData(xValues, yValues, "Distribution");
+		IBarSeriesData barSeriesData = new BarSeriesData(seriesData);
 
-		series = chart.getSeriesSet().createSeries(SeriesType.BAR, "Distribution");
-		series.setYSeries(yValues);
+		IBarSeriesSettings barSeriesSettings = barSeriesData.getSettings();
+		barSeriesSettings.setBarWidthStyle(BarWidthStyle.STRETCHED);
 
-		chart.getAxisSet().getXAxis(0).getTick().setVisible(false);
-		chart.getAxisSet().getYAxis(0).getTick().setVisible(false);
+		IAxis xAxis = chart.getBaseChart().getAxisSet().getXAxis(0);
+		xAxis.enableCategory(true);
+		xAxis.setRange(new Range(0, yValues.length));
+		xAxis.setCategorySeries(xLabels);
 
-		chart.getAxisSet().adjustRange();
+		ArrayList<IBarSeriesData> barSeriesDataList = new ArrayList<>();
+		barSeriesDataList.add(barSeriesData);
+
+		chart.addSeriesData(barSeriesDataList);
+
+	}
+
+	private void createControlArea(Composite parent) {
+
+		Composite container = new Composite(parent, SWT.NONE);
+		GridLayout controlsLayout = new GridLayout(1, false);
+		container.setLayout(controlsLayout);
+
+		GridData controlsData = new GridData(SWT.FILL, SWT.FILL, true, true);
+		container.setLayoutData(controlsData);
+
+		createSampleSpinner(container);
+		createInExClusionSelection(container);
+		createGroupSelection(container);
+		createMatchCount(container);
+
+		/*
+		 * Match Label
+		 */
+
+		/*
+		 * Event Handler
+		 */
+
+	}
+
+	private void createSampleSpinner(Composite parent) {
 
 		/*
 		 * Grouping Sample number Spinner
 		 */
-		sampleSpinnerGroup = new Group(container, SWT.NONE);
+		sampleSpinnerGroup = new Group(parent, SWT.NONE);
 		sampleSpinnerGroup.setText("# of Samples to use");
 		sampleSpinnerGroup.setLayout(new GridLayout(1, false));
 		sampleSpinnerGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
@@ -127,10 +193,23 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		gridData.horizontalSpan = 2;
 		sampleSpinner.setLayoutData(gridData);
 
+		sampleSpinner.addListener(SWT.Selection, e -> {
+
+			if(extractor != null && filterFile.size() != 0) {
+				samples = extractor.filter(sampleSpinner.getSelection());
+			}
+			updateMatchCount();
+
+		});
+
+	}
+
+	private void createInExClusionSelection(Composite parent) {
+
 		/*
 		 * Two Columns for in/exclusion selection
 		 */
-		Composite nameSelection = new Composite(container, SWT.NONE);
+		Composite nameSelection = new Composite(parent, SWT.NONE);
 		nameSelection.setLayout(new GridLayout(2, false));
 		nameSelection.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 
@@ -189,35 +268,6 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		Button excludeRemoveBtn = new Button(excludeGroup, SWT.PUSH);
 		excludeRemoveBtn.setText("Remove selected");
 
-		/*
-		 * Group Selection
-		 */
-		Label groupLabel = new Label(container, SWT.NONE);
-		groupLabel.setText("Groups to include:");
-
-		groupViewer = CheckboxTableViewer.newCheckList(container, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
-
-		GridData groupGD = new GridData(SWT.FILL, SWT.FILL, true, false);
-		groupGD.heightHint = 60;
-		groupViewer.getTable().setLayoutData(groupGD);
-
-		groupViewer.setContentProvider(ArrayContentProvider.getInstance());
-
-		String[] groups = new String[]{};
-		groupViewer.setInput(groups);
-
-		groupViewer.setAllChecked(true);
-
-		/*
-		 * Match Label
-		 */
-
-		matchCountLabel = new Label(container, SWT.NONE);
-		matchCountLabel.setText("Matches: 0 of 0 samples");
-
-		/*
-		 * Event Handler
-		 */
 		includeAddBtn.addListener(SWT.Selection, e -> {
 			String text = includeText.getText().trim();
 			if(!text.isEmpty()) {
@@ -264,6 +314,29 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 			}
 		});
 
+	}
+
+	private void createGroupSelection(Composite parent) {
+
+		/*
+		 * Group Selection
+		 */
+		Label groupLabel = new Label(parent, SWT.NONE);
+		groupLabel.setText("Groups to include:");
+
+		groupViewer = CheckboxTableViewer.newCheckList(parent, SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
+
+		GridData groupGD = new GridData(SWT.FILL, SWT.FILL, true, false);
+		groupGD.heightHint = 60;
+		groupViewer.getTable().setLayoutData(groupGD);
+
+		groupViewer.setContentProvider(ArrayContentProvider.getInstance());
+
+		String[] groups = new String[]{};
+		groupViewer.setInput(groups);
+
+		groupViewer.setAllChecked(true);
+
 		groupViewer.addCheckStateListener(e -> {
 			if(extractor != null && filterFile.size() != 0) {
 				samples = extractor.filter(sampleSpinner.getSelection());
@@ -271,16 +344,12 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 			updateMatchCount();
 		});
 
-		sampleSpinner.addListener(SWT.Selection, e -> {
+	}
 
-			if(extractor != null && filterFile.size() != 0) {
-				samples = extractor.filter(sampleSpinner.getSelection());
-			}
-			updateMatchCount();
+	private void createMatchCount(Composite parent) {
 
-		});
-
-		setControl(container);
+		matchCountLabel = new Label(parent, SWT.NONE);
+		matchCountLabel.setText("Matches: 0 of 0 samples");
 	}
 
 	public void setMainFile(java.util.List<IDataInputEntry> mainFile) {
@@ -429,32 +498,43 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 
 	private void updateChart(ISamplesPCA<?, ?> samples) {
 
+		double fixedUpperChartRange = 2000.0;
+
+		IChartSettings chartSettings = chart.getChartSettings();
+		chartSettings.setTitle("");
+		chart.applySettings(chartSettings);
+
 		double[] yValues = new double[samples.getAnalysisSettings().getFilterDistribution().values().size()];
 		int index = samples.getAnalysisSettings().getFilterDistribution().values().size() - 1;
 		for(Map.Entry<Integer, Integer> entry : samples.getAnalysisSettings().getFilterDistribution().entrySet()) {
-			yValues[index--] = entry.getValue();
+			yValues[index--] = (entry.getValue() > fixedUpperChartRange) ? fixedUpperChartRange : entry.getValue();
 		}
-
-		series.setYSeries(yValues);
 
 		Set<Integer> keys = samples.getAnalysisSettings().getFilterDistribution().reversed().keySet();
 		String[] xLabels = keys.stream().map(Object::toString).toArray(String[]::new);
 
-		chart.getTitle().setText("Analyte overlap distribution");
+		double[] xValues = keys.stream().mapToDouble(Integer::doubleValue).toArray();
 
-		IAxis xAxis = chart.getAxisSet().getXAxis(0);
-		xAxis.setRange(new Range(0, yValues.length));
-		xAxis.enableCategory(true);
-		xAxis.setCategorySeries(xLabels);
+		BaseChart baseChart = chart.getBaseChart();
+		ISeries<?> series = baseChart.getSeriesSet().getSeries("Distribution");
+		if(series instanceof IBarSeries) {
 
-		chart.getAxisSet().adjustRange();
+			IBarSeries<?> barSeries = (IBarSeries<?>)series;
 
-		IAxis yAxis = chart.getAxisSet().getYAxis(0);
-		yAxis.setRange(new Range(0, 2000));
+			barSeries.setXSeries(xValues);
+			barSeries.setYSeries(yValues);
 
-		chart.getAxisSet().getXAxis(0).getTick().setVisible(true);
-		chart.getAxisSet().getYAxis(0).getTick().setVisible(true);
-		chart.redraw();
+			IAxis xAxis = baseChart.getAxisSet().getXAxis(0);
+			xAxis.enableCategory(true);
+			xAxis.setRange(new Range(0, yValues.length));
+			xAxis.setCategorySeries(xLabels);
+
+			IAxis yAxis = baseChart.getAxisSet().getYAxis(0);
+			yAxis.setRange(new Range(0, fixedUpperChartRange));
+
+			baseChart.redraw();
+
+		}
 
 	}
 
