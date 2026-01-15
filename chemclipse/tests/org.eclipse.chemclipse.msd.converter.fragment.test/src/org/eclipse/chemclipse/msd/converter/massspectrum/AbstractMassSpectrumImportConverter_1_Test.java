@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,12 +17,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.converter.PathResolver;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.jupiter.api.Test;
+import org.osgi.framework.FrameworkUtil;
 
 /**
  * This class validates the exceptions thrown by
@@ -47,7 +48,7 @@ public class AbstractMassSpectrumImportConverter_1_Test {
 	public void testFileIsNotReadableException_1() throws IOException {
 
 		File file = null;
-		file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_MASSSPECTRUM_NOT_READABLE));
+		file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_MASSSPECTRUM_NOT_READABLE);
 		file.setReadable(false);
 		IProcessingInfo<IMassSpectra> prcoessingInfo = importConverter.convert(file, new NullProgressMonitor());
 		assertTrue(prcoessingInfo.hasErrorMessages());
@@ -60,7 +61,7 @@ public class AbstractMassSpectrumImportConverter_1_Test {
 	public void testFileIsEmptyException_1() throws IOException {
 
 		File file = null;
-		file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_MASSSPECTRUM_EMPTY));
+		file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_MASSSPECTRUM_EMPTY);
 		IProcessingInfo<IMassSpectra> prcoessingInfo = importConverter.convert(file, new NullProgressMonitor());
 		assertTrue(prcoessingInfo.hasErrorMessages());
 	}

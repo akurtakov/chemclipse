@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,9 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
+import java.io.IOException;
 
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.vsd.converter.supplier.cml.PathResolver;
 import org.eclipse.chemclipse.vsd.converter.supplier.cml.converter.ScanImportConverter;
 import org.eclipse.chemclipse.vsd.converter.supplier.cml.model.IVendorSpectrumVSD;
 import org.eclipse.chemclipse.vsd.model.core.ISpectrumVSD;
@@ -28,6 +29,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class PCLANIL_ITest {
@@ -35,9 +37,9 @@ public class PCLANIL_ITest {
 	private ISpectrumVSD spectrumVSD;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
-		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.PCLANIL));
+		File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.PCLANIL);
 		ScanImportConverter importConverter = new ScanImportConverter();
 		IProcessingInfo<ISpectrumVSD> processingInfo = importConverter.convert(file, new NullProgressMonitor());
 		spectrumVSD = processingInfo.getProcessingResult();

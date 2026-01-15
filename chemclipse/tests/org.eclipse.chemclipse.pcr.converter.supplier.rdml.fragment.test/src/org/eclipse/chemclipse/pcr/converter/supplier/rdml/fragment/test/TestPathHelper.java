@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,9 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.pcr.converter.supplier.rdml.fragment.test;
 
-import org.eclipse.chemclipse.pcr.converter.supplier.rdml.PathResolver;
-
-public class TestPathHelper extends PathResolver {
+public class TestPathHelper {
 
 	public static final String TESTFILE_RAW_5 = "testdata/test_5_raw_data.rdml";
 

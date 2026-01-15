@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,9 +15,10 @@ package org.eclipse.chemclipse.msd.converter.supplier.amdis.converter.msp;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.database.IDatabaseExportConverter;
-import org.eclipse.chemclipse.msd.converter.supplier.amdis.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
@@ -30,6 +31,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class MSPExportConverter_1_ITest {
@@ -40,10 +42,11 @@ public class MSPExportConverter_1_ITest {
 	private IMassSpectra massSpectra;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
 		exportConverter = new MSPDatabaseExportConverter();
-		exportFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTDIR_EXPORT) + File.separator + TestPathHelper.TESTFILE_EXPORT_DB_MSP);
+		File exportFolder = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTDIR_EXPORT);
+		exportFile = new File(exportFolder, File.separator + TestPathHelper.TESTFILE_EXPORT_DB_MSP);
 		massSpectrum = new ScanMSD();
 		massSpectrum.addIon(new Ion(56.3f, 7382.3f));
 		massSpectrum.addIon(new Ion(26.3f, 73382.3f));

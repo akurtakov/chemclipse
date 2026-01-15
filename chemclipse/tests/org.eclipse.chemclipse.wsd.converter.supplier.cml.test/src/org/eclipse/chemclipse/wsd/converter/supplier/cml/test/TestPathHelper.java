@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,9 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.wsd.converter.supplier.cml.test;
 
-import org.eclipse.chemclipse.wsd.converter.supplier.cml.PathResolver;
-
-public class TestPathHelper extends PathResolver {
+public class TestPathHelper {
 
 	public static final String SPECTRUM4 = "testData/spectrum4.cml";
 }

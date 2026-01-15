@@ -16,7 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
+import java.io.IOException;
 
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.nmr.converter.supplier.jcampdx.converter.ScanImportConverterNMR;
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumNMR;
@@ -26,6 +28,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class BrukerAFFN_ITest {
@@ -33,9 +36,9 @@ public class BrukerAFFN_ITest {
 	private IComplexSignalMeasurement<?> complexSignalMeasurement;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
-		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.REAL_SPECTRUM_ASCII_FREE_FORMAT_NUMERIC));
+		File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.REAL_SPECTRUM_ASCII_FREE_FORMAT_NUMERIC);
 		ScanImportConverterNMR importConverter = new ScanImportConverterNMR();
 		IProcessingInfo<ISpectrumNMR> processingInfo = importConverter.convert(file, new NullProgressMonitor());
 		complexSignalMeasurement = processingInfo.getProcessingResult().getComplexSignalMeasurements().iterator().next();

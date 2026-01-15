@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,7 +16,7 @@ import java.io.File;
 
 import org.eclipse.chemclipse.logging.support.Settings;
 
-public class TestPathHelper extends PathResolver {
+public class TestPathHelper {
 
 	/*
 	 * NIST Result file

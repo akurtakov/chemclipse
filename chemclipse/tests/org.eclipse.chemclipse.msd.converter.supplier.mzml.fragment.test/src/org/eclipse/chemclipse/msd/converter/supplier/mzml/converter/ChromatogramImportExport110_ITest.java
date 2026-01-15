@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,9 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
+import java.io.IOException;
 
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
-import org.eclipse.chemclipse.msd.converter.supplier.mzml.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.mzml.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -30,6 +31,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramImportExport110_ITest {
@@ -38,30 +41,29 @@ public class ChromatogramImportExport110_ITest {
 	private File fileExport;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
 		/*
 		 * Import
 		 */
-		String pathImport = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
 		String extensionPointImport = VersionConstants.CONVERTER_ID_CHROMATOGRAM;
+		Bundle bundle = FrameworkUtil.getBundle(getClass());
 		/*
 		 * Export/Reimport
 		 */
 		File directory = new File(TestPathHelper.DIRECTORY_EXPORT_TEST);
 		directory.mkdir();
-		String pathExport = PathResolver.getAbsolutePath(TestPathHelper.DIRECTORY_EXPORT_TEST) + File.separator + "Test.mzML";
 		String extensionPointExportReimport = "org.eclipse.chemclipse.msd.converter.supplier.mzml";
 		/*
 		 * Import the chromatogram.
 		 */
-		File fileImport = new File(pathImport);
+		File fileImport = PathResolver.getFile(bundle, TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
 		IProcessingInfo<IChromatogramMSD> processingInfoImport = ChromatogramConverterMSD.getInstance().convert(fileImport, extensionPointImport, new NullProgressMonitor());
 		IChromatogramMSD chromatogramImport = processingInfoImport.getProcessingResult();
 		/*
 		 * Export the chromatogram.
 		 */
-		fileExport = new File(pathExport);
+		fileExport = new File(PathResolver.getFile(bundle, TestPathHelper.DIRECTORY_EXPORT_TEST), File.separator + "Test.mzML");
 		IProcessingInfo<File> processingInfoExport = ChromatogramConverterMSD.getInstance().convert(fileExport, chromatogramImport, extensionPointExportReimport, new NullProgressMonitor());
 		fileExport = processingInfoExport.getProcessingResult();
 		/*

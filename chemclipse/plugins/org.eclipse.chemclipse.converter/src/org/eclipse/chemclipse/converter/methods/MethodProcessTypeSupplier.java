@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -188,8 +188,7 @@ public class MethodProcessTypeSupplier implements IProcessTypeSupplier, BundleTr
 						 * Try to resolve the file.
 						 */
 						String urlPath = url.getPath();
-						String absolutePath = PathResolver.getAbsolutePath(bundle, urlPath);
-						File sourceFile = new File(absolutePath);
+						File sourceFile = PathResolver.getFile(bundle, urlPath);
 
 						String path = url.getPath().replace(PROCESSORS_ENTRY_PATH, "").replace(MethodConverter.FILE_EXTENSION, "");
 						String externalForm = url.toExternalForm();

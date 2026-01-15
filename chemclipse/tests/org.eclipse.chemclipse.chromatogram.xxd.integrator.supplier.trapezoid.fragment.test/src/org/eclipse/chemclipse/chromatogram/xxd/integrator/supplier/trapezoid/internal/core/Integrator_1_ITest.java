@@ -14,6 +14,7 @@ package org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.in
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class Integrator_1_ITest extends ChromatogramImportOCBTestCase {
 
 	@Override
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
 		chromatogramRelativePath = TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_2;
 		super.setUp();

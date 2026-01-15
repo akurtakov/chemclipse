@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,8 +15,9 @@ package org.eclipse.chemclipse.msd.converter.supplier.mzml.converter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.converter.supplier.mzml.PathResolver;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.mzml.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.mzml.converter.model.IVendorChromatogram;
 import org.eclipse.chemclipse.msd.converter.supplier.mzml.converter.model.VendorChromatogram;
@@ -29,6 +30,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramImportConverterTinyProteoWizard10_ITest {
@@ -36,9 +38,9 @@ public class ChromatogramImportConverterTinyProteoWizard10_ITest {
 	private IVendorChromatogram chromatogram;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
-		File importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_TINY_PWIZ_1_0));
+		File importFile = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_TINY_PWIZ_1_0);
 		ChromatogramImportConverter converter = new ChromatogramImportConverter();
 		IProcessingInfo<IChromatogramMSD> processingInfo = converter.convert(importFile, new NullProgressMonitor());
 		chromatogram = (VendorChromatogram)processingInfo.getProcessingResult();

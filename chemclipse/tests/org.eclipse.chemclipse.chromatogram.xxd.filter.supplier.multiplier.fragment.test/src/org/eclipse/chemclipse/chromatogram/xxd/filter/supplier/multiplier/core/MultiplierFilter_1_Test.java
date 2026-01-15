@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,6 +13,8 @@
 package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.multiplier.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.IOException;
 
 import org.eclipse.chemclipse.chromatogram.filter.core.chromatogram.IChromatogramFilter;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.multiplier.settings.MultiplierSettings;
@@ -30,7 +32,7 @@ public class MultiplierFilter_1_Test extends ChromatogramImporterTestCase {
 
 	@Override
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
 		super.setUp();
 		chromatogramFilter = new MultiplierChromatogramFilter();

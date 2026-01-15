@@ -15,8 +15,9 @@ package org.eclipse.chemclipse.msd.converter.supplier.sirius.converter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.converter.supplier.sirius.PathResolver;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.sirius.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -25,6 +26,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class SiriusImportConverter_1_ITest {
@@ -32,9 +34,9 @@ public class SiriusImportConverter_1_ITest {
 	private IMassSpectra massSpectra;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
-		File file = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_BICUCULLINE));
+		File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_BICUCULLINE);
 		SiriusImportConverter converter = new SiriusImportConverter();
 		IProcessingInfo<IMassSpectra> processingInfo = converter.convert(file, new NullProgressMonitor());
 		massSpectra = processingInfo.getProcessingResult();

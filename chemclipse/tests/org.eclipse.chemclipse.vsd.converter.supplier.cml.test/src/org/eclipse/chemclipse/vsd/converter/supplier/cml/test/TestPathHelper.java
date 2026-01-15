@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,9 +13,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.vsd.converter.supplier.cml.test;
 
-import org.eclipse.chemclipse.vsd.converter.supplier.cml.PathResolver;
-
-public class TestPathHelper extends PathResolver {
+public class TestPathHelper {
 
 	public static final String BUT2 = "testData/but2.cml";
 	public static final String PCLANIL = "testData/pclanilIR.cml";

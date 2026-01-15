@@ -15,8 +15,9 @@ package org.eclipse.chemclipse.msd.converter.supplier.matlab.parafac.converter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.converter.supplier.matlab.parafac.PathResolver;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.matlab.parafac.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
@@ -29,6 +30,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class MatlabParafacPeakExportConverter_1_ITest {
@@ -39,27 +41,27 @@ public class MatlabParafacPeakExportConverter_1_ITest {
 	private IPeakModelMSD peakModel;
 
 	@BeforeAll
-	public void setUp() {
+	public void setUp() throws IOException {
 
 		/*
 		 * Import
 		 */
 		MatlabParafacPeakImportConverter importConverter = new MatlabParafacPeakImportConverter();
-		File importFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_IMPORT_MATLAB_PEAKS));
+		File importFile = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_MATLAB_PEAKS);
 		IProcessingInfo<IPeaksMSD> importProcessingInfo = importConverter.convert(importFile, new NullProgressMonitor());
 		peaks = importProcessingInfo.getProcessingResult();
 		/*
 		 * Export
 		 */
 		MatlabParafacPeakExportConverter exportConverter = new MatlabParafacPeakExportConverter();
-		File exportFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_EXPORT_FOLDER) + File.separator + TestPathHelper.TESTFILE_EXPORT_MATLAB_PEAKS);
+		File exportFile = new File(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_EXPORT_FOLDER), File.separator + TestPathHelper.TESTFILE_EXPORT_MATLAB_PEAKS);
 		IProcessingInfo<File> exportProcessingInfo = exportConverter.convert(exportFile, peaks, false, new NullProgressMonitor());
 		exportProcessingInfo.getProcessingResult();
 		/*
 		 * Re-Import
 		 */
 		importConverter = new MatlabParafacPeakImportConverter();
-		File reimportFile = new File(PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_EXPORT_FOLDER) + File.separator + TestPathHelper.TESTFILE_EXPORT_MATLAB_PEAKS);
+		File reimportFile = new File(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_EXPORT_FOLDER), File.separator + TestPathHelper.TESTFILE_EXPORT_MATLAB_PEAKS);
 		importProcessingInfo = importConverter.convert(reimportFile, new NullProgressMonitor());
 		peaks = importProcessingInfo.getProcessingResult();
 		peak = peaks.getPeaks().get(1);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,11 +15,14 @@ package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.u
 import static org.eclipse.chemclipse.support.ui.swt.ControlBuilder.autoComplete;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.impl.AlkaneIdentifier;
+import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.io.StandardsReader;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.comparator.PeakRetentionTimeComparator;
 import org.eclipse.chemclipse.model.core.IChromatogram;
@@ -58,6 +61,8 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 public class PagePeakAssignment extends AbstractExtendedWizardPage {
 
@@ -86,8 +91,13 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 		this.wizardElements = wizardElements;
 		availableStandards = wizardElements.getAvailableStandards();
 
-		File file = new File(AlkaneIdentifier.getDatabase());
-		databaseName = file.getName();
+		try {
+			Bundle bundle = FrameworkUtil.getBundle(getClass());
+			File file = PathResolver.getFile(bundle, StandardsReader.ALKANES);
+			databaseName = file.getName();
+		} catch(IOException e) {
+			logger.warn(e);
+		}
 	}
 
 	@Override

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,27 +12,28 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.impl;
 
-import java.io.File;
+import java.io.IOException;
 
-import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.PathResolver;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.model.RetentionIndexFileOption;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.settings.RetentionIndexImporterSettings;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.model.core.AbstractChromatogram;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.INoiseCalculator;
 import org.eclipse.chemclipse.model.implementation.Chromatogram;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.junit.jupiter.api.Disabled;
+import org.osgi.framework.FrameworkUtil;
 
 @Disabled
 public class RetentionIndexImporterTestCase {
 
 	public static final String CHROMATOGRAM_1 = "data/retentionindex/importer/01/chromatogram1.cdf";
 
-	public IChromatogram getChromatogram(String relativePath) {
+	public IChromatogram getChromatogram(String relativePath) throws IOException {
 
 		IChromatogram chromatogram = new MyChromatogram();
-		chromatogram.setFile(new File(PathResolver.getAbsolutePath(relativePath)));
+		chromatogram.setFile(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), (relativePath)));
 		Chromatogram chromatogramReference = new Chromatogram();
 		chromatogram.addReferencedChromatogram(chromatogramReference);
 

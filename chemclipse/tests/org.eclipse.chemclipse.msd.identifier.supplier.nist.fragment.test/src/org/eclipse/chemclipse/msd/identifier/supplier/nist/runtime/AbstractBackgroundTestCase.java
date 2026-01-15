@@ -13,6 +13,7 @@
 package org.eclipse.chemclipse.msd.identifier.supplier.nist.runtime;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public abstract class AbstractBackgroundTestCase {
 	List<String> parameterBackground = new ArrayList<>();
 
 	@BeforeAll
-	public void setUp() throws FileNotFoundException {
+	public void setUp() throws FileNotFoundException, IOException {
 
 		parameterBackground.add(INistSupport.INSTRUMENT);
 		parameterBackground.add(INistSupport.PAR2);

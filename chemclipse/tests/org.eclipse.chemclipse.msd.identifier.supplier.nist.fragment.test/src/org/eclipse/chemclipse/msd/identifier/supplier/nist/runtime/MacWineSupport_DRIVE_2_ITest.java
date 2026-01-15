@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,12 +17,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.identifier.supplier.nist.PathResolver;
+import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.identifier.supplier.nist.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.osgi.framework.FrameworkUtil;
 
 public class MacWineSupport_DRIVE_2_ITest extends AbstractBackgroundTestCase {
 
@@ -30,16 +31,16 @@ public class MacWineSupport_DRIVE_2_ITest extends AbstractBackgroundTestCase {
 
 	@Override
 	@BeforeAll
-	public void setUp() throws FileNotFoundException {
+	public void setUp() throws IOException {
 
 		super.setUp();
 	}
 
 	@Test
-	public void testConstruct_1() throws FileNotFoundException {
+	public void testConstruct_1() throws IOException {
 
-		String nistApp = PathResolver.getAbsolutePath(TestPathHelper.TESTFILE_WINE_DRIVE_NIST_APPLICATION);
-		runtimeSupport = new MacWineSupport(new File(nistApp).getParentFile(), parameterBackground);
+		File nistApp = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_WINE_DRIVE_NIST_APPLICATION);
+		runtimeSupport = new MacWineSupport(nistApp.getParentFile(), parameterBackground);
 		assertNotNull(runtimeSupport);
 	}
 
