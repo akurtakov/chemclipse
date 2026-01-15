@@ -112,6 +112,11 @@ public class Activator extends AbstractActivatorUI {
 		return dataUpdateSupport;
 	}
 
+	public IMoleculeImageService getMoleculeImageService() {
+
+		return moleculeImageServiceTracker.getService();
+	}
+
 	public Object[] getMoleculeImageServices() {
 
 		return moleculeImageServiceTracker.getServices();

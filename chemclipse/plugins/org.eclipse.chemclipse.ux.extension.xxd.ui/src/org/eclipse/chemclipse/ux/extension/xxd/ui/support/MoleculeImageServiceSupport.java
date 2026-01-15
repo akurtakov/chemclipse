@@ -37,7 +37,7 @@ public class MoleculeImageServiceSupport {
 
 	public static IMoleculeImageService getMoleculeImageServiceSelection() {
 
-		return getMoleculeImageServiceSelection(getMoleculeImageServices());
+		return Activator.getDefault().getMoleculeImageService();
 	}
 
 	public static IMoleculeImageService getMoleculeImageServiceSelection(Object[] moleculeImageServices) {
@@ -99,7 +99,7 @@ public class MoleculeImageServiceSupport {
 
 		if(moleculeImageServices != null) {
 			comboViewer.setInput(moleculeImageServices);
-			moleculeImageService = MoleculeImageServiceSupport.getMoleculeImageServiceSelection(moleculeImageServices);
+			moleculeImageService = MoleculeImageServiceSupport.getMoleculeImageServiceSelection();
 			if(moleculeImageService != null) {
 				comboViewer.setSelection(new StructuredSelection(moleculeImageService));
 			}
