@@ -78,7 +78,6 @@ public class BasePeakIdentifier {
 
 	private final TargetBuilderMSD targetBuilder;
 	// These one's are run when initializing the class
-	private final IMassSpectra references = getStandardsMassSpectra();
 	private static final IScanMSD syringyl = getSyringyl();
 
 	private String massSpectraFiles;
@@ -235,8 +234,9 @@ public class BasePeakIdentifier {
 	 * @param identificationTarget
 	 * @param monitor
 	 * @return {@link IMassSpectra}
+	 * @throws IOException
 	 */
-	public IMassSpectra getMassSpectra(IIdentificationTarget identificationTarget) {
+	public IMassSpectra getMassSpectra(IIdentificationTarget identificationTarget) throws IOException {
 
 		IMassSpectra massSpectra = new MassSpectra();
 		if(identificationTarget != null) {
@@ -255,6 +255,7 @@ public class BasePeakIdentifier {
 					 * List mass spectra
 					 */
 					List<IScanMSD> identifiedMassSpectra = new ArrayList<>();
+					IMassSpectra references = getStandardsMassSpectra();
 					if(references != null) {
 						for(IScanMSD reference : references.getList()) {
 							/*
@@ -297,16 +298,12 @@ public class BasePeakIdentifier {
 		return massSpectrum;
 	}
 
-	private IMassSpectra getStandardsMassSpectra() {
+	private IMassSpectra getStandardsMassSpectra() throws IOException {
 
-		try {
-			File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), REFERENCES);
-			IProcessingInfo<IMassSpectra> processingInfo = DatabaseConverter.convert(file, new NullProgressMonitor());
-			return processingInfo.getProcessingResult();
-		} catch(IOException e) {
-			logger.warn(e);
-		}
-		return new MassSpectra();
+		Bundle bundle = FrameworkUtil.getBundle(getClass());
+		File file = PathResolver.getFile(bundle, REFERENCES);
+		IProcessingInfo<IMassSpectra> processingInfo = DatabaseConverter.convert(file, new NullProgressMonitor());
+		return processingInfo.getProcessingResult();
 	}
 
 	private void setLibraryInformationFields(ILibraryInformation libraryInformation, String name) {

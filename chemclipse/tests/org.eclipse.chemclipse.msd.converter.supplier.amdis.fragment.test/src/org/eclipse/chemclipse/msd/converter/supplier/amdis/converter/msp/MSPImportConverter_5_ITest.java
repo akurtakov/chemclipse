@@ -15,9 +15,9 @@ package org.eclipse.chemclipse.msd.converter.supplier.amdis.converter.msp;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.io.ImportConverterMspTestCase;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.model.IVendorLibraryMassSpectrum;
@@ -25,7 +25,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class MSPImportConverter_5_ITest extends ImportConverterMspTestCase {
@@ -34,7 +33,7 @@ public class MSPImportConverter_5_ITest extends ImportConverterMspTestCase {
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		importFile = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_GOLMDB_TEST_MSP);
+		importFile = new File(TestPathHelper.TESTFILE_IMPORT_GOLMDB_TEST_MSP);
 		super.setUp();
 	}
 

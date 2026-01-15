@@ -22,7 +22,6 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.pcr.converter.supplier.rdml.core.PCRImportConverter;
 import org.eclipse.chemclipse.pcr.converter.supplier.rdml.fragment.test.TestPathHelper;
 import org.eclipse.chemclipse.pcr.model.core.IChannel;
@@ -34,7 +33,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class Test_5_Raw_ITest {
@@ -44,7 +42,7 @@ public class Test_5_Raw_ITest {
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		File importFile = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_RAW_5);
+		File importFile = new File(TestPathHelper.TESTFILE_RAW_5);
 		IProcessingInfo<IPlate> importProcessingInfo = PCRImportConverter.getInstance().convert(importFile, new NullProgressMonitor());
 		plate = importProcessingInfo.getProcessingResult();
 	}

@@ -18,19 +18,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.rcp.app.TestPathHelper;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.junit.jupiter.api.Test;
-import org.osgi.framework.FrameworkUtil;
 
 public class Profiles_1_ITest {
 
 	@Test
 	public void test1() throws CoreException, IOException {
 
-		File file = new File(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_EXPORT_DIR), TestPathHelper.TESTFILE_EXPORT_NAME);
+		File file = new File(new File(TestPathHelper.TESTFILE_EXPORT_DIR), TestPathHelper.TESTFILE_EXPORT_NAME);
 		try {
 			Profiles.exportProfile(file);
 			assertTrue(file.delete());
@@ -47,7 +45,7 @@ public class Profiles_1_ITest {
 	@Test
 	public void test2() throws CoreException, IOException {
 
-		File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_PREFS_1);
+		File file = new File(TestPathHelper.TESTFILE_IMPORT_PREFS_1);
 		IStatus status = Profiles.importProfile(file);
 		assertEquals(IStatus.OK, status.getCode());
 	}

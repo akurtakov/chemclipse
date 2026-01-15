@@ -14,13 +14,12 @@ package org.eclipse.chemclipse.msd.model.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.model.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.junit.jupiter.api.Test;
-import org.osgi.framework.FrameworkUtil;
 
 public class AbstractChromatogram_3_Test {
 
@@ -30,21 +29,21 @@ public class AbstractChromatogram_3_Test {
 	@Test
 	public void testExtractNameFromDirectory_1() throws IOException {
 
-		chromatogram.setFile(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_DIR_20120319));
+		chromatogram.setFile(new File(TestPathHelper.TESTFILE_IMPORT_DIR_20120319));
 		assertEquals("PW2012.03.19", chromatogram.extractNameFromFile(nameDefault));
 	}
 
 	@Test
 	public void testExtractNameFromDirectory_2() throws IOException {
 
-		chromatogram.setFile(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_DIR_20120320));
+		chromatogram.setFile(new File(TestPathHelper.TESTFILE_IMPORT_DIR_20120320));
 		assertEquals(nameDefault, chromatogram.extractNameFromFile(nameDefault));
 	}
 
 	@Test
 	public void testExtractNameFromDirectory_3() throws IOException {
 
-		chromatogram.setFile(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_DIR_20120321_1));
+		chromatogram.setFile(new File(TestPathHelper.TESTFILE_IMPORT_DIR_20120321_1));
 		assertEquals("PW20120321-1", chromatogram.extractNameFromFile(nameDefault));
 	}
 }

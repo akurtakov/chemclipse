@@ -18,7 +18,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Set;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.msd.converter.peak.PeakConverterMSD;
@@ -33,7 +32,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class PeakReader_1_MSD_1300_ITest {
@@ -43,7 +41,7 @@ public class PeakReader_1_MSD_1300_ITest {
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		File fileImport = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_MSD_1300);
+		File fileImport = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_MSD_1300);
 		IProcessingInfo<IPeaksMSD> processingInfo = PeakConverterMSD.convert(fileImport, VersionConstants.CONVERTER_ID_PEAKS, new NullProgressMonitor());
 		peaks = processingInfo.getProcessingResult();
 	}

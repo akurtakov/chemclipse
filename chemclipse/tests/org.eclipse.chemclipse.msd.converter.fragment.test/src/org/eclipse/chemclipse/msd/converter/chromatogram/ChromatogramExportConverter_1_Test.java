@@ -17,12 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.TestPathHelper;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.jupiter.api.Test;
-import org.osgi.framework.FrameworkUtil;
 
 /**
  * This class validates the exceptions thrown by
@@ -47,7 +45,7 @@ public class ChromatogramExportConverter_1_Test {
 	public void testFileNotWritableException_1() throws IOException {
 
 		File file = null;
-		file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_EXPORT_CHROMATOGRAM_NOT_WRITEABLE);
+		file = new File(TestPathHelper.TESTFILE_EXPORT_CHROMATOGRAM_NOT_WRITEABLE);
 		file.setWritable(false);
 		IProcessingInfo<File> processingInfo = ec.convert(file, null, new NullProgressMonitor());
 		assertTrue(processingInfo.hasErrorMessages());

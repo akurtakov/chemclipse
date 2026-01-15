@@ -18,7 +18,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.model.core.IMassSpectrumPeak;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
@@ -32,7 +31,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class ProteinIdentification_ITest {
@@ -42,7 +40,7 @@ public class ProteinIdentification_ITest {
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		File importFile = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_PROTEIN_IDENTIFICATION);
+		File importFile = new File(TestPathHelper.TESTFILE_PROTEIN_IDENTIFICATION);
 		MassSpectrumImportConverter converter = new MassSpectrumImportConverter();
 		IProcessingInfo<IMassSpectra> processingInfo = converter.convert(importFile, new NullProgressMonitor());
 		massSpectrum = (IStandaloneMassSpectrum)processingInfo.getProcessingResult().getMassSpectrum(1);

@@ -17,10 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.converter.TestPathHelper;
 import org.junit.jupiter.api.Test;
-import org.osgi.framework.FrameworkUtil;
 
 public class MagicNumberMatcher_6_ITest {
 
@@ -40,7 +38,7 @@ public class MagicNumberMatcher_6_ITest {
 	@Test
 	public void test1() throws IOException {
 
-		File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_BIN_TEST);
+		File file = new File(TestPathHelper.TESTFILE_IMPORT_BIN_TEST);
 		assertTrue(magicNumberMatcher.checkFileFormat(file));
 	}
 }

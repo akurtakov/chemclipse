@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.csd.converter.supplier.jcampdx.converter.ChromatogramImportConverter;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -26,7 +25,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class Guava_ITest {
@@ -36,7 +34,7 @@ public class Guava_ITest {
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.GUAVA);
+		File file = new File(TestPathHelper.GUAVA);
 		ChromatogramImportConverter chromatogramImportConverter = new ChromatogramImportConverter();
 		IProcessingInfo<IChromatogramCSD> processingInfo = chromatogramImportConverter.convert(file, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();

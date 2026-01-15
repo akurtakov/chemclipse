@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,6 +13,8 @@
  * Christoph Läubrich - adjust to new API / generics
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.classifier.supplier.molpeak.core;
+
+import java.io.IOException;
 
 import org.eclipse.chemclipse.model.exceptions.ValueMustNotBeNullException;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
@@ -44,6 +46,8 @@ public class LibraryService extends AbstractLibraryService implements ILibrarySe
 			processingInfo.setProcessingResult(massSpectra);
 		} catch(ValueMustNotBeNullException e) {
 			processingInfo.addErrorMessage("Base Peak Identifier", "The identification target is not available.");
+		} catch(IOException e) {
+			processingInfo.addErrorMessage("Base Peak Identifier", "Database not found.", e);
 		}
 
 		return processingInfo;

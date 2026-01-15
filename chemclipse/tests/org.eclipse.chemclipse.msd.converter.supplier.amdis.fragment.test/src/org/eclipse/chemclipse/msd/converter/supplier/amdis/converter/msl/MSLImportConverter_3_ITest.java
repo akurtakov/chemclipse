@@ -16,11 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.model.columns.ISeparationColumn;
 import org.eclipse.chemclipse.model.columns.SeparationColumnPackaging;
 import org.eclipse.chemclipse.model.identifier.IColumnIndexMarker;
@@ -33,7 +33,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class MSLImportConverter_3_ITest extends ImportConverterMslTestCase {
@@ -45,7 +44,7 @@ public class MSLImportConverter_3_ITest extends ImportConverterMslTestCase {
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		importFile = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_DB_4);
+		importFile = new File(TestPathHelper.TESTFILE_IMPORT_DB_4);
 		super.setUp();
 		massSpectrum = (IVendorLibraryMassSpectrum)massSpectra.getMassSpectrum(1);
 		libraryInformation = massSpectrum.getLibraryInformation();

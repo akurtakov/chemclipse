@@ -19,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.converter.supplier.mzml.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
@@ -31,8 +30,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class ChromatogramImportExport110_ITest {
@@ -47,7 +44,6 @@ public class ChromatogramImportExport110_ITest {
 		 * Import
 		 */
 		String extensionPointImport = VersionConstants.CONVERTER_ID_CHROMATOGRAM;
-		Bundle bundle = FrameworkUtil.getBundle(getClass());
 		/*
 		 * Export/Reimport
 		 */
@@ -57,13 +53,13 @@ public class ChromatogramImportExport110_ITest {
 		/*
 		 * Import the chromatogram.
 		 */
-		File fileImport = PathResolver.getFile(bundle, TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
+		File fileImport = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
 		IProcessingInfo<IChromatogramMSD> processingInfoImport = ChromatogramConverterMSD.getInstance().convert(fileImport, extensionPointImport, new NullProgressMonitor());
 		IChromatogramMSD chromatogramImport = processingInfoImport.getProcessingResult();
 		/*
 		 * Export the chromatogram.
 		 */
-		fileExport = new File(PathResolver.getFile(bundle, TestPathHelper.DIRECTORY_EXPORT_TEST), File.separator + "Test.mzML");
+		fileExport = new File(TestPathHelper.DIRECTORY_EXPORT_TEST + File.separator + "Test.mzML");
 		IProcessingInfo<File> processingInfoExport = ChromatogramConverterMSD.getInstance().convert(fileExport, chromatogramImport, extensionPointExportReimport, new NullProgressMonitor());
 		fileExport = processingInfoExport.getProcessingResult();
 		/*

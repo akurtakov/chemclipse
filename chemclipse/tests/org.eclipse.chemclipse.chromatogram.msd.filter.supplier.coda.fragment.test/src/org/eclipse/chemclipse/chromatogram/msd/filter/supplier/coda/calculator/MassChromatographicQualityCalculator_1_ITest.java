@@ -22,7 +22,6 @@ import java.io.IOException;
 
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.TestPathHelper;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.exceptions.CodaCalculatorException;
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.ChromatogramSelectionMSD;
@@ -34,7 +33,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class MassChromatographicQualityCalculator_1_ITest {
@@ -47,7 +45,7 @@ public class MassChromatographicQualityCalculator_1_ITest {
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		File importFile = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
+		File importFile = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(importFile, new NullProgressMonitor());
 		IChromatogramMSD chromatogram = processingInfo.getProcessingResult();
 		codaThreshold = 0.7f;

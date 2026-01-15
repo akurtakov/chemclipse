@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.msd.converter.supplier.jcampdx.converter.ChromatogramImportConverter;
@@ -30,7 +29,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class Chromatogram_01_ITest {
@@ -40,7 +38,7 @@ public class Chromatogram_01_ITest {
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.CHROMATOGRAM_01);
+		File file = new File(TestPathHelper.CHROMATOGRAM_01);
 		ChromatogramImportConverter chromatogramImportConverter = new ChromatogramImportConverter();
 		IProcessingInfo<IChromatogramMSD> processingInfo = chromatogramImportConverter.convert(file, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();

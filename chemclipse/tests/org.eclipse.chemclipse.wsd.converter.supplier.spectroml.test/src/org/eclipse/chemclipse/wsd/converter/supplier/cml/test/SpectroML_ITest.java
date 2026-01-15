@@ -19,7 +19,6 @@ import java.io.File;
 import java.io.IOException;
 import java.time.ZoneId;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.wsd.converter.supplier.spectroml.converter.ScanImportConverter;
 import org.eclipse.chemclipse.wsd.converter.supplier.spectroml.model.IVendorSpectrumWSD;
@@ -29,7 +28,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class SpectroML_ITest {
@@ -39,7 +37,7 @@ public class SpectroML_ITest {
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.SAMPLE);
+		File file = new File(TestPathHelper.SAMPLE);
 		ScanImportConverter importConverter = new ScanImportConverter();
 		IProcessingInfo<ISpectrumWSD> processingInfo = importConverter.convert(file, new NullProgressMonitor());
 		spectrumWSD = processingInfo.getProcessingResult();

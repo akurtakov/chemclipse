@@ -18,11 +18,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.identifier.supplier.nist.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.osgi.framework.FrameworkUtil;
 
 public class LinuxWineSupport_DOSDEVICES_1_ITest extends AbstractBackgroundTestCase {
 
@@ -34,8 +32,8 @@ public class LinuxWineSupport_DOSDEVICES_1_ITest extends AbstractBackgroundTestC
 	public void setUp() throws IOException {
 
 		super.setUp();
-		File testfileNistApplication = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_WINE_DOSDEVICES_NIST_APPLICATION);
-		nistApplicationPath = testfileNistApplication.getParent();
+		File testfileNistApplication = new File(TestPathHelper.TESTFILE_WINE_DOSDEVICES_NIST_APPLICATION);
+		nistApplicationPath = testfileNistApplication.getParentFile().getAbsolutePath();
 		runtimeSupport = new LinuxWineSupport(testfileNistApplication.getParentFile(), parameterBackground);
 	}
 

@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.matlab.parafac.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IPeaksMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -26,7 +25,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class MatlabParafacPeakImportConverter_4_ITest {
@@ -37,7 +35,7 @@ public class MatlabParafacPeakImportConverter_4_ITest {
 	public void testImport_1() {
 
 		assertThrows(NullPointerException.class, () -> {
-			File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_EMPTY);
+			File file = new File(TestPathHelper.TESTFILE_IMPORT_EMPTY);
 			converter.convert(file, new NullProgressMonitor());
 		});
 	}
@@ -45,7 +43,7 @@ public class MatlabParafacPeakImportConverter_4_ITest {
 	@Test
 	public void testImport_2() throws IOException {
 
-		File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_NOT_READABLE);
+		File file = new File(TestPathHelper.TESTFILE_IMPORT_NOT_READABLE);
 		file.setReadable(false);
 		IProcessingInfo<IPeaksMSD> processingInfo = converter.convert(file, new NullProgressMonitor());
 		assertNull(processingInfo.getProcessingResult());
@@ -56,7 +54,7 @@ public class MatlabParafacPeakImportConverter_4_ITest {
 	public void testImport_3() {
 
 		assertThrows(NullPointerException.class, () -> {
-			File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_PEAKS);
+			File file = new File(TestPathHelper.TESTFILE_IMPORT_PEAKS);
 			converter.convert(file, new NullProgressMonitor());
 		});
 	}
@@ -65,7 +63,7 @@ public class MatlabParafacPeakImportConverter_4_ITest {
 	public void testImport_4() {
 
 		assertThrows(NullPointerException.class, () -> {
-			File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_PEAKS_EXTENSION);
+			File file = new File(TestPathHelper.TESTFILE_IMPORT_PEAKS_EXTENSION);
 			converter.convert(file, new NullProgressMonitor());
 		});
 	}

@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.pcr.converter.core.IPlateExportConverter;
 import org.eclipse.chemclipse.pcr.model.core.IPlate;
 import org.eclipse.chemclipse.pcr.model.core.Plate;
@@ -29,7 +28,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class PlateExport_1_ITest {
@@ -44,7 +42,7 @@ public class PlateExport_1_ITest {
 	public void setUp() throws IOException {
 
 		new File(DIRECTORY_EXPORT_TEST).mkdirs();
-		File path = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), DIRECTORY_EXPORT_TEST);
+		File path = new File(DIRECTORY_EXPORT_TEST);
 		file = new File(path, File.separator + "ExcelReport.xlsx");
 	}
 

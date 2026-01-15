@@ -34,10 +34,6 @@ public class PathResolver {
 	 */
 	public static File getFile(final Bundle bundle, final String path) throws IOException {
 
-		if(path == null || "".equals(path)) {
-			throw new IOException();
-		}
-
 		URL url = FileLocator.find(bundle, new Path(path), null);
 		return new File(FileLocator.resolve(url).getPath());
 	}

@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.vsd.converter.supplier.jcampdx.converter.ScanImportConverter;
 import org.eclipse.chemclipse.vsd.model.core.ISpectrumVSD;
@@ -27,7 +26,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class PacDecreasing_ITest {
@@ -37,7 +35,7 @@ public class PacDecreasing_ITest {
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.PACDEC1);
+		File file = new File(TestPathHelper.PACDEC1);
 		ScanImportConverter importConverter = new ScanImportConverter();
 		IProcessingInfo<ISpectrumVSD> processingInfo = importConverter.convert(file, new NullProgressMonitor());
 		spectrumVSD = processingInfo.getProcessingResult();

@@ -19,11 +19,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.identifier.supplier.nist.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.osgi.framework.FrameworkUtil;
 
 public class MacWineSupport_DRIVE_2_ITest extends AbstractBackgroundTestCase {
 
@@ -39,7 +37,7 @@ public class MacWineSupport_DRIVE_2_ITest extends AbstractBackgroundTestCase {
 	@Test
 	public void testConstruct_1() throws IOException {
 
-		File nistApp = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_WINE_DRIVE_NIST_APPLICATION);
+		File nistApp = new File(TestPathHelper.TESTFILE_WINE_DRIVE_NIST_APPLICATION);
 		runtimeSupport = new MacWineSupport(nistApp.getParentFile(), parameterBackground);
 		assertNotNull(runtimeSupport);
 	}
