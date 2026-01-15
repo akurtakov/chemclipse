@@ -20,13 +20,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.keystore.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class KeyFileParser_3_ITest {
@@ -36,7 +34,7 @@ public class KeyFileParser_3_ITest {
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		File file = new File(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_KEYSTORE_I_TEST), "-non-existant");
+		File file = new File(new File(TestPathHelper.TESTFILE_KEYSTORE_I_TEST), "-non-existant");
 		keyStore = KeyFileParser.readKeysFromFile(file);
 	}
 

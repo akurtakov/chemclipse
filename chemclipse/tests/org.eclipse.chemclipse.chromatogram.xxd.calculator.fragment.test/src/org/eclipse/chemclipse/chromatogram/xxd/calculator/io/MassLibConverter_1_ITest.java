@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.TestPathHelper;
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.model.columns.IRetentionIndexEntry;
 import org.eclipse.chemclipse.model.columns.ISeparationColumnIndices;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -28,7 +27,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class MassLibConverter_1_ITest {
@@ -38,7 +36,7 @@ public class MassLibConverter_1_ITest {
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		File file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_CALIBRATION_INF_1);
+		File file = new File(TestPathHelper.TESTFILE_IMPORT_CALIBRATION_INF_1);
 		MassLibConverter converter = new MassLibConverter();
 		IProcessingInfo<ISeparationColumnIndices> processingInfo = converter.parseRetentionIndices(file);
 		separationColumnIndices = processingInfo.getProcessingResult();

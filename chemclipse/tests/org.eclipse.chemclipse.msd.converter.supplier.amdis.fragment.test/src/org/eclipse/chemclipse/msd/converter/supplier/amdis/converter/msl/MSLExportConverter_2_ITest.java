@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.model.columns.ISeparationColumn;
 import org.eclipse.chemclipse.model.columns.SeparationColumnFactory;
 import org.eclipse.chemclipse.model.columns.SeparationColumnPackaging;
@@ -42,7 +41,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class MSLExportConverter_2_ITest extends ImportConverterMslTestCase {
@@ -58,7 +56,7 @@ public class MSLExportConverter_2_ITest extends ImportConverterMslTestCase {
 		 * Export
 		 */
 		IDatabaseExportConverter exportConverter = new MSLDatabaseExportConverter();
-		File exportFolder = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTDIR_EXPORT);
+		File exportFolder = new File(TestPathHelper.TESTDIR_EXPORT);
 		File exportFile = new File(exportFolder, File.separator + TestPathHelper.TESTFILE_EXPORT_DB_2_MSL);
 		IVendorLibraryMassSpectrum scanMSD = new VendorLibraryMassSpectrum();
 		ILibraryInformation libraryInformationMS = scanMSD.getLibraryInformation();

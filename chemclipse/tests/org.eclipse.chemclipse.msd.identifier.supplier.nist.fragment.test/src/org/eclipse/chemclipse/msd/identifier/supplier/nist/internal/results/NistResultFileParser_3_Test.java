@@ -17,13 +17,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.identifier.supplier.nist.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class NistResultFileParser_3_Test {
@@ -35,7 +33,7 @@ public class NistResultFileParser_3_Test {
 	public void setUp() throws IOException {
 
 		NistResultFileParser nistResultFileParser = new NistResultFileParser();
-		File results = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_NIST_SRCRESLT_2);
+		File results = new File(TestPathHelper.TESTFILE_NIST_SRCRESLT_2);
 		Compounds compounds = nistResultFileParser.getCompounds(results);
 		compound = compounds.getCompound(3);
 		hit = compound.getHit(3);

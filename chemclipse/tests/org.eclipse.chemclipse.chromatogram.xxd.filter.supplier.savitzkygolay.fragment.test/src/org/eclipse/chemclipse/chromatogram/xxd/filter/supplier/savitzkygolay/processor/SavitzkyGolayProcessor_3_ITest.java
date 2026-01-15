@@ -15,12 +15,12 @@ package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.pr
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.TestPathHelper;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.settings.ChromatogramFilterSettings;
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.model.signals.TotalScanSignal;
@@ -30,7 +30,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class SavitzkyGolayProcessor_3_ITest {
@@ -45,7 +44,7 @@ public class SavitzkyGolayProcessor_3_ITest {
 		 * Signals
 		 */
 		totalScanSignals = new TotalScanSignals(5726);
-		try (BufferedReader reader = new BufferedReader(new FileReader(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1)))) {
+		try (BufferedReader reader = new BufferedReader(new FileReader(new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1)))) {
 			String line;
 			while((line = reader.readLine()) != null) {
 				String[] values = line.split(", ");

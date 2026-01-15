@@ -15,7 +15,6 @@ package org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.in
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.ChromatogramSelectionMSD;
@@ -25,7 +24,6 @@ import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstan
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
-import org.osgi.framework.FrameworkUtil;
 
 @Disabled
 public class ChromatogramImportOCBTestCase {
@@ -36,7 +34,7 @@ public class ChromatogramImportOCBTestCase {
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		File fileImport = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), chromatogramRelativePath);
+		File fileImport = new File(chromatogramRelativePath);
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
 		IChromatogramMSD chromatogram = processingInfo.getProcessingResult();
 		chromatogramSelection = new ChromatogramSelectionMSD(chromatogram);

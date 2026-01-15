@@ -12,18 +12,17 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.impl;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.model.RetentionIndexFileOption;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.settings.RetentionIndexImporterSettings;
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.model.core.AbstractChromatogram;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.INoiseCalculator;
 import org.eclipse.chemclipse.model.implementation.Chromatogram;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.junit.jupiter.api.Disabled;
-import org.osgi.framework.FrameworkUtil;
 
 @Disabled
 public class RetentionIndexImporterTestCase {
@@ -33,7 +32,7 @@ public class RetentionIndexImporterTestCase {
 	public IChromatogram getChromatogram(String relativePath) throws IOException {
 
 		IChromatogram chromatogram = new MyChromatogram();
-		chromatogram.setFile(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), (relativePath)));
+		chromatogram.setFile(new File((relativePath)));
 		Chromatogram chromatogramReference = new Chromatogram();
 		chromatogram.addReferencedChromatogram(chromatogramReference);
 

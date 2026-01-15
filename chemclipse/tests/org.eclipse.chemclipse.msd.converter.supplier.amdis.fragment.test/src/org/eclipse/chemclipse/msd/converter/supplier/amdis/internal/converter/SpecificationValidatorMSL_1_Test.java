@@ -17,13 +17,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.FrameworkUtil;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class SpecificationValidatorMSL_1_Test {
@@ -34,13 +32,13 @@ public class SpecificationValidatorMSL_1_Test {
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		spec = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.VALIDATOR_TEST_SPEC_MSL).getAbsolutePath();
+		spec = new File(TestPathHelper.VALIDATOR_TEST_SPEC_MSL).getAbsolutePath();
 	}
 
 	@Test
 	public void testValidateAgilentSpecification_1() throws IOException {
 
-		file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.VALIDATOR_TEST_MSL_1);
+		file = new File(TestPathHelper.VALIDATOR_TEST_MSL_1);
 		file = SpecificationValidatorMSL.validateSpecification(file);
 		assertEquals(spec, file.getAbsolutePath());
 	}
@@ -48,7 +46,7 @@ public class SpecificationValidatorMSL_1_Test {
 	@Test
 	public void testValidateAgilentSpecification_3() throws IOException {
 
-		file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.VALIDATOR_TEST_MSL_2);
+		file = new File(TestPathHelper.VALIDATOR_TEST_MSL_2);
 		file = SpecificationValidatorMSL.validateSpecification(file);
 		assertEquals(spec, file.getAbsolutePath());
 	}
@@ -56,7 +54,7 @@ public class SpecificationValidatorMSL_1_Test {
 	@Test
 	public void testValidateAgilentSpecification_4() throws IOException {
 
-		file = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.VALIDATOR_TEST_MSL_3);
+		file = new File(TestPathHelper.VALIDATOR_TEST_MSL_3);
 		file = SpecificationValidatorMSL.validateSpecification(file);
 		assertEquals(spec, file.getAbsolutePath());
 	}

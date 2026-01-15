@@ -14,13 +14,12 @@ package org.eclipse.chemclipse.msd.model.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.model.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.junit.jupiter.api.Test;
-import org.osgi.framework.FrameworkUtil;
 
 public class AbstractChromatogram_2_Test {
 
@@ -30,42 +29,42 @@ public class AbstractChromatogram_2_Test {
 	@Test
 	public void testExtractNameFromFile_1() throws IOException {
 
-		chromatogram.setFile(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_FILE_10102040_CDF));
+		chromatogram.setFile(new File(TestPathHelper.TESTFILE_IMPORT_FILE_10102040_CDF));
 		assertEquals("10.102040", chromatogram.extractNameFromFile(nameDefault));
 	}
 
 	@Test
 	public void testExtractNameFromFile_2() throws IOException {
 
-		chromatogram.setFile(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_FILE_102040_MZXML));
+		chromatogram.setFile(new File(TestPathHelper.TESTFILE_IMPORT_FILE_102040_MZXML));
 		assertEquals("102040", chromatogram.extractNameFromFile(nameDefault));
 	}
 
 	@Test
 	public void testExtractNameFromFile_3() throws IOException {
 
-		chromatogram.setFile(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_FILE_2012102040_SMS));
+		chromatogram.setFile(new File(TestPathHelper.TESTFILE_IMPORT_FILE_2012102040_SMS));
 		assertEquals("2012.102040", chromatogram.extractNameFromFile(nameDefault));
 	}
 
 	@Test
 	public void testExtractNameFromFile_4() throws IOException {
 
-		chromatogram.setFile(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_FILE_201220102078_SMS));
+		chromatogram.setFile(new File(TestPathHelper.TESTFILE_IMPORT_FILE_201220102078_SMS));
 		assertEquals("2012.20.102078", chromatogram.extractNameFromFile(nameDefault));
 	}
 
 	@Test
 	public void testExtractNameFromFile_5() throws IOException {
 
-		chromatogram.setFile(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_FILE_POLYETHYLENE_CDF));
+		chromatogram.setFile(new File(TestPathHelper.TESTFILE_IMPORT_FILE_POLYETHYLENE_CDF));
 		assertEquals("polyethylene", chromatogram.extractNameFromFile(nameDefault));
 	}
 
 	@Test
 	public void testExtractNameFromFile_6() throws IOException {
 
-		chromatogram.setFile(PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_IMPORT_FILE_POLYETHYLENE_TEST));
+		chromatogram.setFile(new File(TestPathHelper.TESTFILE_IMPORT_FILE_POLYETHYLENE_TEST));
 		assertEquals(nameDefault, chromatogram.extractNameFromFile(nameDefault));
 	}
 }

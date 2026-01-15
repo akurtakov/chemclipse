@@ -20,11 +20,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.msd.identifier.supplier.nist.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.osgi.framework.FrameworkUtil;
 
 public class WindowsSupport_2_ITest extends AbstractBackgroundTestCase {
 
@@ -40,7 +38,7 @@ public class WindowsSupport_2_ITest extends AbstractBackgroundTestCase {
 	@Test
 	public void testConstruct_1() throws IOException {
 
-		File nistApp = PathResolver.getFile(FrameworkUtil.getBundle(getClass()), TestPathHelper.TESTFILE_WINDOWS_NIST_APPLICATION);
+		File nistApp = new File(TestPathHelper.TESTFILE_WINDOWS_NIST_APPLICATION);
 		runtimeSupport = new WindowsSupport(nistApp.getParentFile(), parameterBackground);
 		assertNotNull(runtimeSupport);
 	}

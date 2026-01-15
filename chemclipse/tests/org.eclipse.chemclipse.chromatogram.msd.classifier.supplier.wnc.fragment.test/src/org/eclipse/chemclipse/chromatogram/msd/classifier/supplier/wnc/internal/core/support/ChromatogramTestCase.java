@@ -22,7 +22,6 @@ import java.util.zip.ZipInputStream;
 
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.TestPathHelper;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.exceptions.ClassifierException;
-import org.eclipse.chemclipse.converter.PathResolver;
 import org.eclipse.chemclipse.model.settings.Delimiter;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
@@ -36,8 +35,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
 
 @Disabled
 @TestInstance(Lifecycle.PER_CLASS)
@@ -51,11 +48,10 @@ public class ChromatogramTestCase {
 	public void setUp() throws IOException, ClassifierException {
 
 		PreferenceSupplier.setImportDelimiter(Delimiter.SEMICOLON);
-		Bundle bundle = FrameworkUtil.getBundle(getClass());
-		File file = PathResolver.getFile(bundle, TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_ZIP);
+		File file = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_ZIP);
 		try (ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(file))) {
 			zipInputStream.getNextEntry();
-			File folder = PathResolver.getFile(bundle, TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_FOLDER);
+			File folder = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_FOLDER);
 			chromatogramFile = new File(folder, File.separator + TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_NAME);
 			if(chromatogramFile.exists()) {
 				chromatogramFile.delete();
