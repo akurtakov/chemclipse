@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.chemclipse.model.statistics.ISample;
+import org.eclipse.chemclipse.model.statistics.IVariable;
+import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.ux.extension.ui.model.IDataUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
@@ -25,6 +27,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultMVA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.Activator;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d.ScorePlotBarChart;
 import org.eclipse.swt.SWT;
@@ -48,6 +51,8 @@ public class ExtendedScorePlotBarChart extends Composite implements IExtendedPar
 	private EvaluationPCA evaluationPCA = null;
 	private int currentPC = 0;
 	private Composite control;
+	@SuppressWarnings("unused")
+	private ISamplesPCA<IVariable, ISample> samples = null;
 
 	public ExtendedScorePlotBarChart(Composite parent, int style) {
 
@@ -61,8 +66,23 @@ public class ExtendedScorePlotBarChart extends Composite implements IExtendedPar
 
 				if(evaluationPCA != null) {
 					if(DataUpdateSupport.isVisible(control)) {
-						updatePlot();
+						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic)) {
+							if(objects.size() == 1) {
+								Object object = objects.get(0);
+								ArrayList<ISample> samples = new ArrayList<>();
+								if(object instanceof Object[] values) {
+									for(int i = 0; i < values.length; i++) {
+										if(values[i] instanceof ISample) {
+											samples.add((ISample)values[i]);
+										}
+									}
+								}
+								evaluationPCA.setHighlightedSamples(samples);
+								setInput(evaluationPCA);
+							}
+						}
 					}
+
 				}
 			}
 		});
@@ -71,6 +91,9 @@ public class ExtendedScorePlotBarChart extends Composite implements IExtendedPar
 	public void setInput(EvaluationPCA evaluationPCA) {
 
 		this.evaluationPCA = evaluationPCA;
+		if(this.evaluationPCA != null) {
+			samples = evaluationPCA.getSamples();
+		}
 		updatePlot();
 	}
 

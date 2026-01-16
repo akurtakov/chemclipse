@@ -18,15 +18,25 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.eclipse.chemclipse.model.statistics.ISample;
+import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultMVA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swtchart.IAxis;
+import org.eclipse.swtchart.IBarSeries;
+import org.eclipse.swtchart.IBarSeries.BarWidthStyle;
+import org.eclipse.swtchart.ICustomPaintListener;
+import org.eclipse.swtchart.ISeries;
 import org.eclipse.swtchart.Range;
 import org.eclipse.swtchart.extensions.barcharts.BarChart;
 import org.eclipse.swtchart.extensions.barcharts.BarSeriesData;
@@ -43,6 +53,7 @@ public class ScorePlotBarChart extends BarChart {
 	private String title = "Score Plot - Bar Chart";
 	private int currentPC = 0;
 	private double explainedVariance = 0.0;
+	private ICustomPaintListener currentPaintListener = null;
 
 	public ScorePlotBarChart(Composite parent, int style) {
 
@@ -65,10 +76,12 @@ public class ScorePlotBarChart extends BarChart {
 		RangeRestriction rangeRestriction = chartSettings.getRangeRestriction();
 		rangeRestriction.setZeroX(false);
 		rangeRestriction.setZeroY(false);
-		rangeRestriction.setRestrictFrame(false);
+		rangeRestriction.setRestrictFrame(true);
 		rangeRestriction.setExtendTypeX(RangeRestriction.ExtendType.RELATIVE);
 		rangeRestriction.setExtendTypeY(RangeRestriction.ExtendType.RELATIVE);
 		rangeRestriction.setExtend(0.1d);
+		rangeRestriction.setRestrictSelectX(true);
+		rangeRestriction.setReferenceZoomZeroX(true);
 
 		chartSettings.setShowAxisZeroMarker(true);
 		chartSettings.setCreateMenu(true);
@@ -107,11 +120,9 @@ public class ScorePlotBarChart extends BarChart {
 			this.explainedVariance = explainedVariances[this.currentPC];
 		}
 
-		// Update title with PC info
 		String chartTitle = String.format("Score Plot - PC%d (%.1f%%)", this.currentPC + 1, explainedVariance * 100);
 		getChartSettings().setTitle(chartTitle);
 
-		// Create list of sample-score pairs
 		List<SampleScore> sampleScores = new ArrayList<>();
 		for(IResultMVA result : resultList) {
 			ISample sample = result.getSample();
@@ -124,39 +135,67 @@ public class ScorePlotBarChart extends BarChart {
 			}
 		}
 
-		// Sort by score value (descending: positive to negative)
 		sampleScores.sort(Comparator.comparingDouble(SampleScore::getScore).reversed());
 
-		// Prepare data arrays
-		int n = sampleScores.size();
-		double[] xValues = new double[n];
-		double[] yValues = new double[n];
-		String[] labels = new String[n];
+		int numberOfBars = sampleScores.size();
+		double[] xValues = new double[numberOfBars];
+		double[] yValues = new double[numberOfBars];
+		String[] labels = new String[numberOfBars];
 
-		for(int i = 0; i < n; i++) {
+		// Store colors for each bar
+		final Color[] barColors = new Color[numberOfBars];
+		final Set<String> highlightedNames = evaluationPCA.getHighlightedSamples().stream().map(ISample::getSampleName).collect(Collectors.toSet());
+
+		for(int i = 0; i < numberOfBars; i++) {
 			xValues[i] = i;
 			yValues[i] = sampleScores.get(i).getScore();
 			labels[i] = sampleScores.get(i).getSampleName();
+
+			String sampleName = sampleScores.get(i).getSampleName();
+			barColors[i] = highlightedNames.contains(sampleName) ? Colors.BLUE : Colors.RED;
 		}
 
-		// Create series data
-		SeriesData seriesData = new SeriesData(xValues, yValues, "PC" + (this.currentPC + 1));
-
-		// Create bar series data
-		IBarSeriesData barSeriesData = new BarSeriesData(seriesData);
-
-		// Get and configure the settings
-		IBarSeriesSettings barSeriesSettings = barSeriesData.getSettings();
-		Color barColor = getDisplay().getSystemColor(SWT.COLOR_BLUE);
-		barSeriesSettings.setBarColor(barColor);
-		barSeriesSettings.setBarPadding(5);
-		barSeriesSettings.setBarWidth(3);
-
-		// Add series
+		// Create a SINGLE series
 		List<IBarSeriesData> barSeriesDataList = new ArrayList<>();
-		barSeriesDataList.add(barSeriesData);
+		IBarSeriesData barData = new BarSeriesData(new SeriesData(xValues, yValues, "Scores"));
+		IBarSeriesSettings settings = barData.getSettings();
+		settings.setBarColor(Colors.RED);
+		settings.setBarWidthStyle(BarWidthStyle.STRETCHED);
+		settings.setBarPadding(15);
+		barSeriesDataList.add(barData);
 
 		addSeriesData(barSeriesDataList);
+
+		if(currentPaintListener != null) {
+			getBaseChart().getPlotArea().removeCustomPaintListener(currentPaintListener);
+		}
+
+		getBaseChart().getPlotArea().addCustomPaintListener(new ICustomPaintListener() {
+
+			@Override
+			public void paintControl(PaintEvent e) {
+
+				ISeries<?> series = getBaseChart().getSeriesSet().getSeries("Scores");
+				if(series instanceof IBarSeries) {
+					IBarSeries<?> barSeries = (IBarSeries<?>)series;
+					Rectangle[] bounds = barSeries.getBounds();
+
+					GC gc = e.gc;
+					for(int i = 0; i < bounds.length && i < barColors.length; i++) {
+						if(bounds[i] != null) {
+							gc.setBackground(barColors[i]);
+							gc.fillRectangle(bounds[i]);
+						}
+					}
+				}
+			}
+
+			@Override
+			public boolean drawBehindSeries() {
+
+				return false;
+			}
+		});
 
 		// Set custom category labels for X-axis
 		IAxis xAxis = getBaseChart().getAxisSet().getXAxis(0);
