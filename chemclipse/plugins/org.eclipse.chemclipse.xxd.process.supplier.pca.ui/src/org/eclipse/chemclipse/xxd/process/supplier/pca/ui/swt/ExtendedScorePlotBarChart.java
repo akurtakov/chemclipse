@@ -126,6 +126,7 @@ public class ExtendedScorePlotBarChart extends Composite implements IExtendedPar
 		Composite composite = new Composite(parent, SWT.NONE);
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalAlignment = SWT.END;
+		gridData.widthHint = 300;
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(2, false));
 
@@ -303,6 +304,7 @@ public class ExtendedScorePlotBarChart extends Composite implements IExtendedPar
 					IResultsMVA results = evaluationPCA.getResults();
 					List<IResultMVA> resultList = results.getPcaResultList();
 					List<SampleScore> sampleScores = new ArrayList<>();
+
 					for(IResultMVA result : resultList) {
 						ISample sample = result.getSample();
 						double[] scoreMatrix = result.getScoreVector();
@@ -314,16 +316,20 @@ public class ExtendedScorePlotBarChart extends Composite implements IExtendedPar
 						}
 					}
 					sampleScores.sort(Comparator.comparingDouble(SampleScore::getScore).reversed());
+					if(pXStart < 0) {
+						pXStart = 0;
+					} else if(pXStop < 0) {
+						pXStop = 0;
+					} else if(pXStop > sampleScores.size() - 1) {
+						pXStop = sampleScores.size() - 1;
+					}
 					List<ISample> samplesHighlighted = evaluationPCA.getHighlightedSamples();
 					for(int i = pXStart; i <= pXStop; i++) {
 						String currentSampleName = sampleScores.get(i).getSampleName();
 						int index = IntStream.range(0, samplesHighlighted.size()).filter(x -> samplesHighlighted.get(x).getSampleName().equals(currentSampleName)).findFirst().orElse(-1);
 						if(index == -1) {
 							samplesHighlighted.add(samples.getSamples().stream().filter(x -> x.getSampleName().equals(currentSampleName)).findFirst().get());
-						} else {
-							samplesHighlighted.remove(index);
 						}
-
 					}
 
 					if(!samplesHighlighted.isEmpty()) {
