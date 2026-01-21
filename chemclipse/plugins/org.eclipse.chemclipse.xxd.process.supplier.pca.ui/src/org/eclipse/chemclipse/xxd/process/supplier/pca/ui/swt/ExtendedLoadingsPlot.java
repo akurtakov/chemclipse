@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -292,10 +292,7 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 						double[] variableLoading = getVariableLoading(resultsPCA, i);
 						IPoint pointResult = getPoint(variableLoading, pcX, pcY, i);
 						if(pointResult.getX() > pXStart && pointResult.getX() < pXStop && pointResult.getY() < pYStart && pointResult.getY() > pYStop) {
-							if(highlighted.contains(featuresSelected.get(i))) {
-								int index = highlighted.indexOf(featuresSelected.get(i));
-								highlighted.remove(index);
-							} else {
+							if(!highlighted.contains(featuresSelected.get(i))) {
 								highlighted.add(featuresSelected.get(i));
 							}
 						}
