@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -284,9 +284,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 						IResultMVA pcaResult = resultList.get(i);
 						IPoint pointResult = getPoint(pcaResult, pcX, pcY, i);
 						if(pointResult.getX() > pXStart && pointResult.getX() < pXStop && pointResult.getY() < pYStart && pointResult.getY() > pYStop) {
-							if(samplesHighlighted.contains(resultList.get(i).getSample())) {
-								samplesHighlighted.remove(samplesHighlighted.indexOf(resultList.get(i).getSample()));
-							} else {
+							if(!samplesHighlighted.contains(resultList.get(i).getSample())) {
 								samplesHighlighted.add(resultList.get(i).getSample());
 							}
 						}

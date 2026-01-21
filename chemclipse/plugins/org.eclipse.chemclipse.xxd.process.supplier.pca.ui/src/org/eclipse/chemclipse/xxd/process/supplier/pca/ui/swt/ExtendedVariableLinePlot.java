@@ -422,9 +422,7 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 					 */
 					for(int i = 0; i < evaluation.getSamples().getSamples().size(); i++) {
 						if(i > pXStart && i < pXStop) {
-							if(samplesHighlighted.contains(getSampleForPlotIndex(i))) {
-								samplesHighlighted.remove(samplesHighlighted.indexOf(getSampleForPlotIndex(i)));
-							} else {
+							if(!samplesHighlighted.contains(getSampleForPlotIndex(i))) {
 								samplesHighlighted.add(getSampleForPlotIndex(i));
 							}
 						}
