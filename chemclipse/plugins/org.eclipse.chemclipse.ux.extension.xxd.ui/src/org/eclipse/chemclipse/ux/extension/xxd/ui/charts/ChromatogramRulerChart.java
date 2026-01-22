@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,6 +25,7 @@ import org.eclipse.swtchart.IAxisSet;
 import org.eclipse.swtchart.IPlotArea;
 import org.eclipse.swtchart.Range;
 import org.eclipse.swtchart.extensions.core.BaseChart;
+import org.eclipse.swtchart.extensions.core.IChartSettings;
 
 public class ChromatogramRulerChart extends ChromatogramChart {
 
@@ -58,6 +59,12 @@ public class ChromatogramRulerChart extends ChromatogramChart {
 		baselineSelectionPaintListener = new BaselineSelectionPaintListener();
 		plotArea.addCustomPaintListener(baselineSelectionPaintListener);
 		setData("org.eclipse.e4.ui.css.CssClassName", "ChromatogramRulerChart");
+		/*
+		 * Disable "Prevent Accidental Zoom"
+		 */
+		IChartSettings chartSettings = getChartSettings();
+		chartSettings.setPreventAccidentalZoom(false);
+		applySettings(chartSettings);
 	}
 
 	@Override
