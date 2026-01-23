@@ -12,6 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.converter.supplier.mzml.io;
 
+import java.util.List;
+
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.support.history.EditInformation;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.CVParamType;
@@ -20,6 +22,7 @@ import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.InstrumentC
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.MzMLType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.ParamGroupType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.ProcessingMethodType;
+import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.ReferenceableParamGroupRefType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.SampleListType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.SampleType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.SoftwareType;
@@ -37,6 +40,7 @@ public class MetadataReader110 {
 				}
 			}
 		}
+
 		SampleListType sampleList = mzML.getSampleList();
 		if(sampleList != null) {
 			for(SampleType sample : sampleList.getSample()) {
@@ -47,13 +51,19 @@ public class MetadataReader110 {
 				}
 			}
 		}
+
 		for(InstrumentConfigurationType instrument : mzML.getInstrumentConfigurationList().getInstrumentConfiguration()) {
-			for(CVParamType cvParam : instrument.getCvParam()) {
-				if(cvParam.getAccession().equals("MS:1000554")) {
-					chromatogram.setInstrument(cvParam.getName());
+
+			List<ReferenceableParamGroupRefType> referenceableParamGroupRef = instrument.getReferenceableParamGroupRef();
+			if(referenceableParamGroupRef != null) {
+				for(ReferenceableParamGroupRefType referenceableParamGroupRefType : referenceableParamGroupRef) {
+					readInstrument(referenceableParamGroupRefType.getRef().getCvParam(), chromatogram);
 				}
 			}
+
+			readInstrument(instrument.getCvParam(), chromatogram);
 		}
+
 		for(DataProcessingType dataProcessing : mzML.getDataProcessingList().getDataProcessing()) {
 			for(ProcessingMethodType processingMethod : dataProcessing.getProcessingMethod()) {
 				SoftwareType software = (SoftwareType)processingMethod.getSoftwareRef();
@@ -64,6 +74,18 @@ public class MetadataReader110 {
 				}
 			}
 		}
+
 		return chromatogram;
+	}
+
+	private static void readInstrument(List<CVParamType> cvParams, IChromatogram chromatogram) {
+
+		for(CVParamType cvParam : cvParams) {
+			if(cvParam.getAccession().equals("MS:1000529") && cvParam.getName().equals("instrument serial number")) {
+				continue;
+			} else {
+				chromatogram.setInstrument(cvParam.getName());
+			}
+		}
 	}
 }

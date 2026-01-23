@@ -15,7 +15,6 @@ package org.eclipse.chemclipse.msd.converter.supplier.mzml.converter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.msd.converter.supplier.mzml.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.mzml.converter.model.IVendorMassSpectra;
@@ -36,7 +35,7 @@ public class MassSpectrumImportConverter110_ITest {
 	private IVendorMassSpectra massSpectra;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		File importFile = new File(TestPathHelper.TESTFILE_IMPORT_TINY1_1_1);
 		MassSpectrumImportConverter converter = new MassSpectrumImportConverter();
