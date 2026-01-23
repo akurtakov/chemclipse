@@ -24,8 +24,7 @@ Bundle-ActivationPolicy: lazy
 Import-Package: jakarta.xml.bind,
  jakarta.xml.bind.annotation,
  jakarta.xml.bind.annotation.adapters
-Export-Package: org.eclipse.chemclipse.msd.converter.supplier.mzml,
- org.eclipse.chemclipse.msd.converter.supplier.mzml.converter,
+Export-Package: org.eclipse.chemclipse.msd.converter.supplier.mzml.converter,
  org.eclipse.chemclipse.msd.converter.supplier.mzml.converter.io,
  org.eclipse.chemclipse.msd.converter.supplier.mzml.converter.model,
  org.eclipse.chemclipse.msd.converter.supplier.mzml.io,
