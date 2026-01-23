@@ -25,6 +25,7 @@ import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IRegularLibraryMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
+import org.eclipse.chemclipse.msd.model.core.Polarity;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChartSupport;
@@ -88,6 +89,11 @@ public class ScanDataSupport {
 				builder.append(" | ");
 				builder.append("Type: ");
 				builder.append(massSpectrum.getMassSpectrumType().label());
+				builder.append(" | ");
+				if(massSpectrum.getPolarity() != Polarity.NONE) {
+					builder.append("Polarity: ");
+					builder.append(massSpectrum.getPolarity().label());
+				}
 			}
 
 			builder.append(" | ");
