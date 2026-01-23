@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Lorenz Gerber - add DataUpdate topics
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui;
 
@@ -149,6 +150,11 @@ public class Activator extends AbstractActivatorUI {
 	private void initialize(DataUpdateSupport dataUpdateSupport) {
 
 		dataUpdateSupport.subscribe(IChemClipseEvents.TOPIC_PCA_UPDATE_RESULT, IChemClipseEvents.EVENT_BROKER_DATA);
+		dataUpdateSupport.subscribe(IChemClipseEvents.TOPIC_PCA_UPDATE_FEATURES, IChemClipseEvents.EVENT_BROKER_DATA);
+		dataUpdateSupport.subscribe(IChemClipseEvents.TOPIC_PCA_UPDATE_SELECTION, IChemClipseEvents.EVENT_BROKER_DATA);
+		dataUpdateSupport.subscribe(IChemClipseEvents.TOPIC_PCA_UPDATE_COLORSCHEME, IChemClipseEvents.EVENT_BROKER_DATA);
+		dataUpdateSupport.subscribe(IChemClipseEvents.TOPIC_PCA_UPDATE_LABELS, IChemClipseEvents.EVENT_BROKER_DATA);
+		dataUpdateSupport.subscribe(IChemClipseEvents.TOPIC_PCA_UPDATE_GROUPS, IChemClipseEvents.EVENT_BROKER_DATA);
 		dataUpdateSupport.subscribe(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE, IChemClipseEvents.EVENT_BROKER_DATA);
 		dataUpdateSupport.subscribe(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE, IChemClipseEvents.EVENT_BROKER_DATA);
 		dataUpdateSupport.subscribe(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE, IChemClipseEvents.EVENT_BROKER_DATA);

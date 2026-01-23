@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,6 +28,15 @@ public class VariancePart extends AbstractPartPCA<ExtendedVarianceUI> {
 	public VariancePart(Composite parent) {
 
 		super(parent);
+	}
+
+	@Override
+	public void setFocus() {
+
+		ExtendedVarianceUI control = getControl();
+		if(control != null) {
+			control.setFocus();
+		}
 	}
 
 	@Override

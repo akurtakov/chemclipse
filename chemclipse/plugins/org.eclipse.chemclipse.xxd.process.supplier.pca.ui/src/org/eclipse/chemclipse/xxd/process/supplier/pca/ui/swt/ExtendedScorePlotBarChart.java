@@ -13,6 +13,7 @@
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
@@ -96,6 +97,13 @@ public class ExtendedScorePlotBarChart extends Composite implements IExtendedPar
 				}
 			}
 		});
+	}
+
+	@Override
+	public boolean setFocus() {
+
+		updateOnFocus();
+		return true;
 	}
 
 	public void setInput(EvaluationPCA evaluationPCA) {
@@ -564,5 +572,34 @@ public class ExtendedScorePlotBarChart extends Composite implements IExtendedPar
 
 		sampleScores.sort(Comparator.comparingDouble(SampleScore::getScore).reversed());
 		return sampleScores;
+	}
+
+	private void updateOnFocus() {
+
+		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
+		List<Object> objects = dataUpdateSupport.getUpdates(getLastTopic(dataUpdateSupport.getTopics()));
+
+		if(!objects.isEmpty()) {
+			Object object = objects.get(0);
+			if(object instanceof EvaluationPCA evaluation) {
+				setInput(evaluation);
+				updatePlot();
+			}
+		}
+	}
+
+	private String getLastTopic(List<String> topics) {
+
+		Collections.reverse(topics);
+		for(String topic : topics) {
+			if(topic.equals(IChemClipseEvents.TOPIC_PCA_UPDATE_RESULT)) {
+				return topic;
+			}
+			if(topic.equals(IChemClipseEvents.TOPIC_PCA_UPDATE_SELECTION)) {
+				return topic;
+			}
+		}
+
+		return "";
 	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,6 +27,15 @@ public class LoadingsPlotPart extends AbstractPartPCA<ExtendedLoadingsPlot> {
 	public LoadingsPlotPart(Composite parent) {
 
 		super(parent);
+	}
+
+	@Override
+	public void setFocus() {
+
+		ExtendedLoadingsPlot control = getControl();
+		if(control != null) {
+			control.setFocus();
+		}
 	}
 
 	@Override

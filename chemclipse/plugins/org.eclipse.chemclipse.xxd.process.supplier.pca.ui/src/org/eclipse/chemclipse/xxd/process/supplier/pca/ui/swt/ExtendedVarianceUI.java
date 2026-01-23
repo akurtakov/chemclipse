@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,13 +14,18 @@
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
+import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
+import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Variance;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.Activator;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d.VarianceChart;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePage;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePageScorePlot;
@@ -45,6 +50,13 @@ public class ExtendedVarianceUI extends Composite implements IExtendedPartUI {
 
 		super(parent, style);
 		createControl();
+	}
+
+	@Override
+	public boolean setFocus() {
+
+		updateOnFocus();
+		return true;
 	}
 
 	public void setInput(EvaluationPCA evaluationPCA) {
@@ -137,5 +149,34 @@ public class ExtendedVarianceUI extends Composite implements IExtendedPartUI {
 	private void applySettings() {
 
 		updatePlot();
+	}
+
+	private void updateOnFocus() {
+
+		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
+		List<Object> objects = dataUpdateSupport.getUpdates(getLastTopic(dataUpdateSupport.getTopics()));
+
+		if(!objects.isEmpty()) {
+			Object object = objects.get(0);
+			if(object instanceof EvaluationPCA evaluation) {
+				setInput(evaluation);
+				updatePlot();
+			}
+		}
+	}
+
+	private String getLastTopic(List<String> topics) {
+
+		Collections.reverse(topics);
+		for(String topic : topics) {
+			if(topic.equals(IChemClipseEvents.TOPIC_PCA_UPDATE_RESULT)) {
+				return topic;
+			}
+			if(topic.equals(IChemClipseEvents.TOPIC_PCA_UPDATE_SELECTION)) {
+				return topic;
+			}
+		}
+
+		return "";
 	}
 }

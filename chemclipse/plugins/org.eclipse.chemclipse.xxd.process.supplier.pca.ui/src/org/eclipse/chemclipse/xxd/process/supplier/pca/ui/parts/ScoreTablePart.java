@@ -30,6 +30,15 @@ public class ScoreTablePart extends AbstractPartPCA<ExtendedScoreTable> {
 	}
 
 	@Override
+	public void setFocus() {
+
+		ExtendedScoreTable control = getControl();
+		if(control != null) {
+			control.setFocus();
+		}
+	}
+
+	@Override
 	protected ExtendedScoreTable createControl(Composite parent) {
 
 		return new ExtendedScoreTable(parent, SWT.NONE);

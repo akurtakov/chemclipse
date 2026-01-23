@@ -30,6 +30,15 @@ public class ScorePlotBarPart extends AbstractPartPCA<ExtendedScorePlotBarChart>
 	}
 
 	@Override
+	public void setFocus() {
+
+		ExtendedScorePlotBarChart control = getControl();
+		if(control != null) {
+			control.setFocus();
+		}
+	}
+
+	@Override
 	protected ExtendedScorePlotBarChart createControl(Composite parent) {
 
 		return new ExtendedScorePlotBarChart(parent, SWT.NONE);
