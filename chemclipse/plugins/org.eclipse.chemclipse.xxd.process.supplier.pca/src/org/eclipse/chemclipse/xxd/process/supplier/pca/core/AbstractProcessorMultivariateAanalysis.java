@@ -115,7 +115,7 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 			}
 		}
 
-		final Set<String> classifications = samples.getSamples().stream().map(s -> s.getClassification()).distinct().collect(Collectors.toList()).stream().limit(2).collect(Collectors.toSet());
+		final Set<String> classifications = samples.getSamples().stream().map(ISample::getClassification).distinct().limit(2).collect(Collectors.toSet());
 		for(S sample : samples.getSamples()) {
 			double[] selectedSampleData = null;
 			if(sample.isSelected()) {
