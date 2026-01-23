@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -10,6 +10,7 @@
  * Contributors:
  * Jan Holy - initial API and implementation
  * Philip Wenig - get rid of JavaFX
+ * Lorenz Gerber - fix data update
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.editors;
 
@@ -76,6 +77,5 @@ public class PCAEditor {
 	public void setFocus() {
 
 		analysisEditorUI.setFocus();
-		analysisEditorUI.reloadData();
 	}
 }

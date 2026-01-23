@@ -112,6 +112,13 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 		});
 	}
 
+	@Override
+	public boolean setFocus() {
+
+		updateOnFocus();
+		return true;
+	}
+
 	public void setInput(EvaluationPCA evaluationPCA) {
 
 		this.evaluationPCA = evaluationPCA;
@@ -613,5 +620,34 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 			return true;
 		}
 		return false;
+	}
+
+	private void updateOnFocus() {
+
+		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
+		List<Object> objects = dataUpdateSupport.getUpdates(getLastTopic(dataUpdateSupport.getTopics()));
+
+		if(!objects.isEmpty()) {
+			Object object = objects.get(0);
+			if(object instanceof EvaluationPCA evaluation) {
+				setInput(evaluation);
+				updateInput();
+			}
+		}
+	}
+
+	private String getLastTopic(List<String> topics) {
+
+		Collections.reverse(topics);
+		for(String topic : topics) {
+			if(topic.equals(IChemClipseEvents.TOPIC_PCA_UPDATE_RESULT)) {
+				return topic;
+			}
+			if(topic.equals(IChemClipseEvents.TOPIC_PCA_UPDATE_SELECTION)) {
+				return topic;
+			}
+		}
+
+		return "";
 	}
 }

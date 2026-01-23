@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Lorenz Gerber - data update on focus
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.parts;
 
@@ -27,6 +28,15 @@ public class ScorePlot2DPart extends AbstractPartPCA<ExtendedScorePlot2D> {
 	public ScorePlot2DPart(Composite parent) {
 
 		super(parent);
+	}
+
+	@Override
+	public void setFocus() {
+
+		ExtendedScorePlot2D control = getControl();
+		if(control != null) {
+			control.setFocus();
+		}
 	}
 
 	@Override
