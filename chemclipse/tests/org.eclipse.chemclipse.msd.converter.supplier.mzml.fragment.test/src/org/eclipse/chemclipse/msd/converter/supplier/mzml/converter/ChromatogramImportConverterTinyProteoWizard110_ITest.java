@@ -15,7 +15,6 @@ package org.eclipse.chemclipse.msd.converter.supplier.mzml.converter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.msd.converter.supplier.mzml.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.mzml.converter.model.IVendorChromatogram;
@@ -36,7 +35,7 @@ public class ChromatogramImportConverterTinyProteoWizard110_ITest {
 	private IVendorChromatogram chromatogram;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		File importFile = new File(TestPathHelper.TESTFILE_IMPORT_TINY_PWIZ_1_1);
 		ChromatogramImportConverter converter = new ChromatogramImportConverter();
