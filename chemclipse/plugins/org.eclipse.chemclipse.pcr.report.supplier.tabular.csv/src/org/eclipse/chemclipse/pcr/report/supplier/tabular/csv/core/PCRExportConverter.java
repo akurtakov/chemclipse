@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,7 +28,6 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
@@ -120,8 +119,8 @@ public class PCRExportConverter extends AbstractPlateExportConverter implements 
 
 		csvPrinter.print(HeaderMessages.sample);
 		ChannelMappings channelMappings = PreferenceSupplier.getChannelMappings();
-		List<ChannelMapping> targetMappings = channelMappings.stream().filter(m -> Strings.CI.equals(targetSubset, m.getSubset())).collect(Collectors.toList());
-		List<ChannelMapping> sortedMappings = targetMappings.stream().sorted(Comparator.comparing(ChannelMapping::getChannel)).collect(Collectors.toList());
+		List<ChannelMapping> targetMappings = channelMappings.stream().filter(m -> Strings.CI.equals(targetSubset, m.getSubset())).toList();
+		List<ChannelMapping> sortedMappings = targetMappings.stream().sorted(Comparator.comparing(ChannelMapping::getChannel)).toList();
 		for(ChannelMapping sortedMapping : sortedMappings) {
 			csvPrinter.print(sortedMapping.getLabel());
 		}

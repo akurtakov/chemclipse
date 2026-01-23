@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,7 +13,6 @@
 package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import org.eclipse.chemclipse.support.text.ILabel;
 import org.eclipse.chemclipse.tsd.model.core.SecondDimensionHint;
@@ -108,7 +107,7 @@ public class TraceRange2DEditingSupport extends EditingSupport {
 
 	private static String[] getEnumLabels(ILabel[] collection) {
 
-		return Arrays.stream(collection).map(ILabel::label).collect(Collectors.toList()).toArray(new String[collection.length]);
+		return Arrays.stream(collection).map(ILabel::label).toArray(String[]::new);
 	}
 
 	private int getComboIndexType(Enum<?> item, Enum<?>[] collection) {
