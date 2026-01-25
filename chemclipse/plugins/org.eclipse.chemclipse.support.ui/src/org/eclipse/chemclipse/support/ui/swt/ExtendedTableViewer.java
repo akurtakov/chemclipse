@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -318,14 +318,13 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 	}
 
 	/**
-	 * Checks if the cell of the given column was selected.
-	 * ColumnIndex is 0 based.
+	 * Returns the column index of the selected cell or -1 if
+	 * none was selected. ColumnIndex is 0 based.
 	 * 
 	 * @param event
-	 * @param columnIndex
-	 * @return boolean
+	 * @return int
 	 */
-	public boolean isColumnSelected(Event event, int columnIndex) {
+	public int getColumnIndex(Event event) {
 
 		Table table = getTable();
 		Rectangle clientArea = table.getClientArea();
@@ -338,9 +337,7 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 			for(int i = 0; i < table.getColumnCount(); i++) {
 				Rectangle rectangle = item.getBounds(i);
 				if(rectangle.contains(point)) {
-					if(i == columnIndex) {
-						return true;
-					}
+					return i;
 				}
 
 				if(!visible && rectangle.intersects(clientArea)) {
@@ -349,9 +346,27 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 			}
 
 			if(!visible) {
-				return false;
+				return -1;
 			}
 			index++;
+		}
+
+		return -1;
+	}
+
+	/**
+	 * Checks if the cell of the given column was selected.
+	 * ColumnIndex is 0 based.
+	 * 
+	 * @param event
+	 * @param columnIndex
+	 * @return boolean
+	 */
+	public boolean isColumnSelected(Event event, int columnIndex) {
+
+		int index = getColumnIndex(event);
+		if(index >= 0 && index == columnIndex) {
+			return true;
 		}
 
 		return false;
