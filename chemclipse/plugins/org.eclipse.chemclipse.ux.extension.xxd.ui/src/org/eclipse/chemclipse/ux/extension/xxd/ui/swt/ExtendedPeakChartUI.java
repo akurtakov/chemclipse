@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -661,7 +661,7 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 					peakSplitted = manualPeakDetector.calculatePeak(chromatogram, startRetentionTime, stopRetentionTime, startAbundance, stopAbundance);
 				}
 			} catch(PeakException e) {
-				logger.warn(e);
+				logger.warn(e.getMessage());
 			}
 		} else if(peak instanceof IChromatogramPeakCSD chromatogramPeakCSD) {
 			/*
@@ -674,7 +674,7 @@ public class ExtendedPeakChartUI extends Composite implements IExtendedPartUI {
 					peakSplitted = manualPeakDetector.calculatePeak(chromatogram, startRetentionTime, stopRetentionTime, startAbundance, stopAbundance);
 				}
 			} catch(PeakException e) {
-				logger.warn(e);
+				logger.warn(e.getMessage());
 			}
 		}
 

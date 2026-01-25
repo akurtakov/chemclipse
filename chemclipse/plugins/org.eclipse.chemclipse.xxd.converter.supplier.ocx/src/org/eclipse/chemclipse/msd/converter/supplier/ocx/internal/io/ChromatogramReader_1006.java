@@ -340,7 +340,7 @@ public class ChromatogramReader_1006 extends AbstractChromatogramReader implemen
 			} catch(IllegalArgumentException e) {
 				logger.warn(e);
 			} catch(PeakException e) {
-				logger.warn(e);
+				logger.warn(e.getMessage());
 			}
 		}
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -285,7 +285,7 @@ public abstract class AbstractPeakModel extends AbstractPeakModelStrict implemen
 		 */
 		Map.Entry<Integer, Float> entry = peakIntensityValues.getHighestIntensityValue();
 		if(entry == null) {
-			throw new PeakException("There must be at least one intensity value stored with a relative intensity of IPeakIntensityValues.MAX_INTENSITY.");
+			throw new PeakException("Failed ot create the peak: there must be at least one intensity value stored with a relative intensity of IPeakIntensityValues.MAX_INTENSITY.");
 		}
 		/*
 		 * Sets the peak maximum retention time.
