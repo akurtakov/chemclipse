@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -32,6 +32,7 @@ import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD
 import org.eclipse.chemclipse.numeric.statistics.Calculations;
 import org.eclipse.chemclipse.support.comparator.SortOrder;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
+import org.eclipse.chemclipse.swt.ui.support.IColorScheme;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.charts.TargetReferenceLabelMarker;
@@ -114,10 +115,19 @@ public class ChromatogramPeakChart extends ChromatogramChart implements ITraceSu
 		updateChromatogram(chromatogramSelection, peakChartSettingsDefault);
 	}
 
+	/**
+	 * Use this method if n chromatograms shall be overlayed for verification purposes.
+	 * 
+	 * @param chromatogramSelections
+	 */
+	public void updateChromatogramOverlay(List<IChromatogramSelection> chromatogramSelections) {
+
+		updateChromatogramOverlay(chromatogramSelections, peakChartSettingsDefault);
+	}
+
 	public void updateChromatogram(IChromatogramSelection chromatogramSelection, PeakChartSettings peakChartSettings) {
 
 		this.chromatogramSelection = chromatogramSelection;
-
 		clearSeries();
 		clearSelectedPeakSeries();
 		clearPeakLabelMarker();
@@ -243,6 +253,40 @@ public class ChromatogramPeakChart extends ChromatogramChart implements ITraceSu
 		String compressionType = preferenceStore.getString(PreferenceSupplier.P_CHROMATOGRAM_CHART_COMPRESSION_TYPE);
 		int compressionToLength = chromatogramChartSupport.getCompressionLength(compressionType, lineSeriesDataList.size());
 		addSeriesData(lineSeriesDataList, compressionToLength);
+	}
+
+	private void updateChromatogramOverlay(List<IChromatogramSelection> chromatogramSelections, PeakChartSettings peakChartSettings) {
+
+		this.chromatogramSelection = null;
+		targetDisplaySettings = null;
+		getBaseChart().deleteSeries();
+		redraw();
+
+		if(!chromatogramSelections.isEmpty()) {
+			this.chromatogramSelection = chromatogramSelections.get(0);
+			List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
+			addChromatogramDataOverview(lineSeriesDataList, chromatogramSelections, peakChartSettings);
+			addLineSeriesData(lineSeriesDataList);
+		}
+	}
+
+	private void addChromatogramDataOverview(List<ILineSeriesData> lineSeriesDataList, List<IChromatogramSelection> chromatogramSelections, PeakChartSettings peakChartSettings) {
+
+		Color color = Colors.RED;
+		IColorScheme colorScheme = Colors.getColorScheme(Colors.COLOR_SCHEME_PRINT);
+		colorScheme.getPreviousColor();
+		int index = 1;
+
+		for(IChromatogramSelection chromatogramSelection : chromatogramSelections) {
+			String id = Integer.toString(index) + "_" + chromatogramSelection.getChromatogram().getName();
+			ILineSeriesData lineSeriesDataTIC = chromatogramChartSupport.getLineSeriesData(chromatogramSelection, id, DisplayType.TIC, color, false);
+			ILineSeriesSettings settingsTIC = lineSeriesDataTIC.getSettings();
+			settingsTIC.setEnableArea(false);
+			settingsTIC.setVisible(peakChartSettings.isShowChromatogramTIC());
+			lineSeriesDataList.add(lineSeriesDataTIC);
+			color = colorScheme.getNextColor();
+			index++;
+		}
 	}
 
 	private void addChromatogramData(List<ILineSeriesData> lineSeriesDataList, PeakChartSettings peakChartSettings) {
