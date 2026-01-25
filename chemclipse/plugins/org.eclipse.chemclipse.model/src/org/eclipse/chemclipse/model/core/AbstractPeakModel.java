@@ -285,7 +285,7 @@ public abstract class AbstractPeakModel extends AbstractPeakModelStrict implemen
 		 */
 		Map.Entry<Integer, Float> entry = peakIntensityValues.getHighestIntensityValue();
 		if(entry == null) {
-			throw new PeakException("Failed ot create the peak: there must be at least one intensity value stored with a relative intensity of IPeakIntensityValues.MAX_INTENSITY.");
+			throw new PeakException("Failed to create the peak: there must be at least one intensity value stored with a relative intensity of IPeakIntensityValues.MAX_INTENSITY.");
 		}
 		/*
 		 * Sets the peak maximum retention time.
