@@ -83,11 +83,6 @@ public class ExtendedFeatureStatListUI extends Composite implements IExtendedPar
 										}
 									}
 									if(features.size() >= 0) {
-										List<IVariable> test = evaluation.getSamples().getVariables();
-										test.forEach(x -> x.setVisualSelected(false));
-										for(Feature feature : features) {
-											feature.getVariable().setVisualSelected(true);
-										}
 										listControl.get().setSelection(new StructuredSelection(features));
 										if(!features.isEmpty()) {
 											listControl.get().reveal(features.get(0));
@@ -163,7 +158,7 @@ public class ExtendedFeatureStatListUI extends Composite implements IExtendedPar
 
 	private void createList(Composite parent) {
 
-		FeatureStatListUI featureStatListUI = new FeatureStatListUI(parent, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION | SWT.VIRTUAL);
+		FeatureStatListUI featureStatListUI = new FeatureStatListUI(parent, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL | SWT.FULL_SELECTION);
 		Table table = featureStatListUI.getTable();
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
 
@@ -199,17 +194,9 @@ public class ExtendedFeatureStatListUI extends Composite implements IExtendedPar
 			UpdateNotifierUI.update(getDisplay(), IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE, selectedElements.toArray());
 		} else if(Feature.class.isInstance(selectedElements.get(0))) {
 			ArrayList<Feature> features = new ArrayList<>();
-			List<IVariable> test = evaluation.getSamples().getVariables();
-			test.forEach(x -> x.setVisualSelected(false));
-			for(Feature feature : features) {
-				feature.getVariable().setVisualSelected(true);
-			}
 			for(Object element : selectedElements) {
 				if(Feature.class.isInstance(element)) {
 					features.add((Feature)element);
-					if(!((Feature)element).getVariable().isVisualSelected()) {
-						((Feature)element).getVariable().setVisualSelected(true);
-					}
 				}
 			}
 			UpdateNotifierUI.update(getDisplay(), IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE, selectedElements.toArray());
