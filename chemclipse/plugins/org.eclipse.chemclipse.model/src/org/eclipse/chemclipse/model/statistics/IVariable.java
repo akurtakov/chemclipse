@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Jan Holy - initial API and implementation
+ * Lorenz Gerber - remove futile method
  *******************************************************************************/
 package org.eclipse.chemclipse.model.statistics;
 
@@ -27,8 +28,6 @@ public interface IVariable extends Comparable<IVariable> {
 	void setDescription(String description);
 
 	void setSelected(boolean selected);
-
-	void setVisualSelected(boolean visualSelected);
 
 	void setType(String type);
 

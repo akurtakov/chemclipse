@@ -62,12 +62,6 @@ public abstract class AbstractEvaluation<V extends IVariable, S extends ISample,
 	@Override
 	public void setHighlightedVariables(List<IVariable> variables) {
 
-		for(IVariable variable : variables) {
-			int index = samples.getVariables().indexOf(variable);
-			if(index > -1) {
-				samples.getVariables().get(index).setVisualSelected(true);
-			}
-		}
 		this.highlightedVariables = variables;
 	}
 

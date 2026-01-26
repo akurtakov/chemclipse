@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Jan Holy - initial API and implementation
+ * Lorenz Gerber - remove futile method
  *******************************************************************************/
 package org.eclipse.chemclipse.model.statistics;
 
@@ -65,12 +66,6 @@ public abstract class AbstractVariable implements IVariable {
 	public void setSelected(boolean selected) {
 
 		this.selected = selected;
-	}
-
-	@Override
-	public void setVisualSelected(boolean visualSelected) {
-
-		this.visualSelected = visualSelected;
 	}
 
 	@Override
