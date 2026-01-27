@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResu
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
 import org.eclipse.chemclipse.chromatogram.msd.filter.core.chromatogram.AbstractChromatogramFilterMSD;
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.settings.FilterSettingsHighResMS;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.support.HeaderField;
@@ -45,7 +44,6 @@ public class ChromatogramFilterHighResMS extends AbstractChromatogramFilterMSD {
 
 		if(!processingInfo.hasErrorMessages()) {
 			if(chromatogramFilterSettings instanceof FilterSettingsHighResMS filterSettings) {
-				HeaderField headerField = filterSettings.getHeaderField();
 				IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 				if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
 					/*
@@ -53,6 +51,7 @@ public class ChromatogramFilterHighResMS extends AbstractChromatogramFilterMSD {
 					 */
 					Set<TraceHighResMSD> specificTraces = getSpecificTraces(filterSettings);
 					if(!specificTraces.isEmpty()) {
+						HeaderField headerField = filterSettings.getHeaderField();
 						boolean enforceFullTimeRange = filterSettings.isEnforceFullTimeRange();
 						boolean separateTraces = filterSettings.isSeparateTraces();
 						List<IChromatogramMSD> chromatograms = HighResolutionSupport.extractHighResolutionData(chromatogramMSD, headerField, enforceFullTimeRange, specificTraces, separateTraces);
@@ -60,10 +59,12 @@ public class ChromatogramFilterHighResMS extends AbstractChromatogramFilterMSD {
 							chromatogramMSD.addReferencedChromatogram(chromatogramReferenceMSD);
 						}
 					}
+					/*
+					 * Result
+					 */
+					chromatogramSelection.getChromatogram().setDirty(true);
+					processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "The chromatogram was splitted into High Resolution reference chromatograms."));
 				}
-
-				chromatogramSelection.getChromatogram().setDirty(true);
-				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "The chromatogram was splitted into High Resolution reference chromatograms."));
 			} else {
 				processingInfo.addWarnMessage("Splitter (High Resolution)", "The filter settings are not of type: " + FilterSettingsHighResMS.class);
 			}
@@ -75,7 +76,7 @@ public class ChromatogramFilterHighResMS extends AbstractChromatogramFilterMSD {
 	@Override
 	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelectionMSD chromatogramSelection, IProgressMonitor monitor) {
 
-		FilterSettingsHighResMS splitterSettings = PreferenceSupplier.getFilterSettingsHighResMS();
+		FilterSettingsHighResMS splitterSettings = new FilterSettingsHighResMS();
 		return applyFilter(chromatogramSelection, splitterSettings, monitor);
 	}
 

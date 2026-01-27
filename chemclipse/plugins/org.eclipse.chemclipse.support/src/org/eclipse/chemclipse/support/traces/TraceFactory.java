@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -284,6 +284,11 @@ public class TraceFactory {
 				for(String trace : traces) {
 					String part = trace.trim();
 					addTraceSpecific(part, content, elements, clazz);
+				}
+			} else if(clazz.equals(TraceTandemMSD.class)) {
+				T trace = parseTrace(line, clazz);
+				if(trace != null) {
+					elements.add(trace);
 				}
 			} else {
 				if(!line.contains(ITrace.SEPARATOR_TRACE_ITEM)) {
