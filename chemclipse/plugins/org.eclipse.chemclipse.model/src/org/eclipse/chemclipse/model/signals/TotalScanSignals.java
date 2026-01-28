@@ -117,10 +117,12 @@ public class TotalScanSignals implements ITotalScanSignals {
 			 * Extract the signals.
 			 */
 			IScan supplierScan = chromatogram.getScan(scan);
-			int retentionTime = supplierScan.getRetentionTime();
-			float retentionIndex = supplierScan.getRetentionIndex();
-			float totalSignal = supplierScan.getTotalSignal();
-			signals.add(new TotalScanSignal(retentionTime, retentionIndex, totalSignal));
+			if(supplierScan != null) {
+				int retentionTime = supplierScan.getRetentionTime();
+				float retentionIndex = supplierScan.getRetentionIndex();
+				float totalSignal = supplierScan.getTotalSignal();
+				signals.add(new TotalScanSignal(retentionTime, retentionIndex, totalSignal));
+			}
 		}
 	}
 
