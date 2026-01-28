@@ -39,4 +39,14 @@
             id="org.eclipse.chemclipse.msd.filter.peaks.highpass">
       </MassSpectrumFilterSupplier>
    </extension>
+   <extension
+         point="org.eclipse.chemclipse.chromatogram.msd.filter.chromatogramFilterSupplier">
+      <ChromatogramFilterSupplier
+            description="This nominalizes the m/z values of the current and on demand its referenced chromatograms."
+            filter="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.core.ChromatogramFilterNominalize"
+            filterName="Nominalize (Unit Mass)"
+            filterSettings="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.settings.ChromatogramFilterNominalizeSettings"
+            id="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.chromatogram.nominalize">
+      </ChromatogramFilterSupplier>
+   </extension>   
 </plugin>
