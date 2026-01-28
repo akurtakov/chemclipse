@@ -743,7 +743,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 
 			Collection<ISupplierFileIdentifier> identifiers = getIdentifierSupplier().apply(file).keySet();
 			for(ISupplierFileIdentifier identifier : identifiers) {
-				if(!identifier.isMatchMagicNumber(file) || !identifier.isMatchContent(file)) {
+				if(!identifier.isMatch(file)) {
 					continue;
 				}
 				if(identifier instanceof ISupplierFileEditorSupport fileEditorSupport) {

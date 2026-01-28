@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -79,26 +79,13 @@ public interface ISupplierFileIdentifier extends SupplierContext {
 	Collection<ISupplier> getSuppliers(File file);
 
 	/**
-	 * Try to match the magic number of the file format.
-	 * If true, it's pretty likely that the format can be imported.
-	 * 
+	 * Checks if a file can be handled by the supplier.
+	 *
 	 * @param file
 	 * @return boolean
 	 */
-	default boolean isMatchMagicNumber(File file) {
+	default boolean isMatch(File file) {
 
 		return false;
-	}
-
-	/**
-	 * We go a bit deeper to confirm and find the data type if necessary.
-	 * If not required, simply leave this out.
-	 * 
-	 * @param file
-	 * @return boolean
-	 */
-	default boolean isMatchContent(File file) {
-
-		return true;
 	}
 }

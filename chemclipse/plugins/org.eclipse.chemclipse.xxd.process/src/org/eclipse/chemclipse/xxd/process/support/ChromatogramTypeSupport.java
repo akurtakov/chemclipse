@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -139,9 +139,7 @@ public class ChromatogramTypeSupport {
 
 	public boolean isSupplierFile(ISupplierFileIdentifier supplierFileIdentifier, File file) {
 
-		if(supplierFileIdentifier.isSupplierFile(file) //
-				&& supplierFileIdentifier.isMatchMagicNumber(file) //
-				&& supplierFileIdentifier.isMatchContent(file)) {
+		if(supplierFileIdentifier.isSupplierFile(file) && supplierFileIdentifier.isMatch(file)) {
 			return true;
 		}
 		return false;
