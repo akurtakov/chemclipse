@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -52,13 +52,13 @@ public abstract class AbstractSupplierFileIdentifier implements ISupplierFileIde
 		List<ISupplier> list = new ArrayList<>();
 		if(file.isFile()) {
 			for(ISupplier supplier : getSuppliers()) {
-				if(isValidFileSupplier(file, supplier) && isMatchMagicNumber(file)) {
+				if(isValidFileSupplier(file, supplier) && isMatch(file)) {
 					list.add(supplier);
 				}
 			}
 		} else if(file.isDirectory()) {
 			for(ISupplier supplier : getSuppliers()) {
-				if(isValidDirectorySupplier(file, supplier) && isMatchMagicNumber(file)) {
+				if(isValidDirectorySupplier(file, supplier) && isMatch(file)) {
 					list.add(supplier);
 				}
 			}
@@ -151,22 +151,13 @@ public abstract class AbstractSupplierFileIdentifier implements ISupplierFileIde
 	}
 
 	@Override
-	public boolean isMatchMagicNumber(File file) {
+	public boolean isMatch(File file) {
 
 		for(ISupplier supplier : getSuppliers()) {
 			if(supplier.isMatchMagicNumber(file)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public boolean isMatchContent(File file) {
-
-		for(ISupplier supplier : getSuppliers()) {
-			if(supplier.isMatchMagicNumber(file) && supplier.isMatchContent(file)) {
-				return true;
+				if(supplier.isMatchContent(file)) {
+					return true;
+				}
 			}
 		}
 		return false;

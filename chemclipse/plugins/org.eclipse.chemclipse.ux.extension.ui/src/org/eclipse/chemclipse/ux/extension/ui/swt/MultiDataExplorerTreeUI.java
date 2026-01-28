@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -294,7 +294,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 
 	private void createSettingsButton(Composite parent) {
 
-		createSettingsButton(parent, getPreferencePages(), (ISettingsHandler) display -> {
+		createSettingsButton(parent, getPreferencePages(), (ISettingsHandler)display -> {
 
 			updateUserLocations();
 			setSupplierFileEditorSupport();
@@ -622,12 +622,10 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 					continue;
 				}
 				for(ISupplierFileIdentifier supplierFileIdentifier : map.keySet()) {
-					if(supplierFileIdentifier.isMatchContent(file)) {
-						Collection<ISupplier> suppliers = map.get(supplierFileIdentifier);
-						for(ISupplier supplier : suppliers) {
-							if(supplier.isMatchMagicNumber(file) && supplier.isMatchContent(file)) {
-								supplierSet.add(supplier);
-							}
+					Collection<ISupplier> suppliers = map.get(supplierFileIdentifier);
+					for(ISupplier supplier : suppliers) {
+						if(supplier.isMatchMagicNumber(file) && supplier.isMatchContent(file)) {
+							supplierSet.add(supplier);
 						}
 					}
 				}
@@ -745,7 +743,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 
 			Collection<ISupplierFileIdentifier> identifiers = getIdentifierSupplier().apply(file).keySet();
 			for(ISupplierFileIdentifier identifier : identifiers) {
-				if(!identifier.isMatchMagicNumber(file) || !identifier.isMatchContent(file)) {
+				if(!identifier.isMatch(file)) {
 					continue;
 				}
 				if(identifier instanceof ISupplierFileEditorSupport fileEditorSupport) {
