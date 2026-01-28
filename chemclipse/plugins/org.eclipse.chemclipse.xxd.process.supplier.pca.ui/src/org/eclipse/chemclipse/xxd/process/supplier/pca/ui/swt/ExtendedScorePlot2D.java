@@ -89,7 +89,11 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 
 				if(evaluationPCA != null) {
 					if(DataUpdateSupport.isVisible(control)) {
-						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic)) {
+						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCORELIST_SAMPLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREPLOT_SAMPLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREBAR_SAMPLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE.equals(topic)) {
 							if(objects.size() == 1) {
 								Object object = objects.get(0);
 								ArrayList<ISample> samples = new ArrayList<>();
@@ -300,7 +304,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 					 * Send Update event.
 					 */
 					if(!samplesHighlighted.isEmpty()) {
-						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, samplesHighlighted.toArray());
+						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREPLOT_SAMPLE, samplesHighlighted.toArray());
 					}
 					/*
 					 * Finish User Selection Process
@@ -385,7 +389,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 						ResultDelta resultDelta = resultDeltas.get(0);
 						List<ISample> highlightedSamples = new ArrayList<>();
 						highlightedSamples.add(resultDelta.getResultPCA().getSample());
-						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, highlightedSamples.toArray());
+						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREPLOT_SAMPLE, highlightedSamples.toArray());
 					}
 				}
 			}
@@ -473,7 +477,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 						} else {
 							highlightedSamples.add(resultDelta.getResultPCA().getSample());
 						}
-						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, highlightedSamples.toArray());
+						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREPLOT_SAMPLE, highlightedSamples.toArray());
 					}
 				}
 				userSelection.reset();

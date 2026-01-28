@@ -20,6 +20,7 @@ import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultMVA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.support.ScoreRow;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
@@ -397,51 +398,5 @@ public class ScoreTable extends Composite {
 			table.setSortDirection(SWT.UP);
 		}
 		tableViewer.refresh();
-	}
-
-	/**
-	 * Internal data class to hold score data per sample
-	 */
-	private static class ScoreRow {
-
-		private final String sampleName;
-		private final String groupName;
-		private final String classification;
-		private final String description;
-		private final double[] scores;
-
-		public ScoreRow(String sampleName, String groupName, String classification, String description, double[] scores) {
-
-			this.sampleName = sampleName;
-			this.groupName = groupName;
-			this.classification = classification;
-			this.description = description;
-			this.scores = scores;
-		}
-
-		public String getSampleName() {
-
-			return sampleName;
-		}
-
-		public String getGroupName() {
-
-			return groupName;
-		}
-
-		public String getClassification() {
-
-			return classification;
-		}
-
-		public String getDescription() {
-
-			return description;
-		}
-
-		public double[] getScores() {
-
-			return scores;
-		}
 	}
 }
