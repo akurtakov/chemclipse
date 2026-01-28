@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -84,6 +84,10 @@ public interface IChemClipseEvents {
 	String TOPIC_PCA_UPDATE_RESULT = "pca/update/result";
 	String TOPIC_PCA_UPDATE_GROUPS = "pca/update/groups";
 	String TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE = "pca/update/highlight/sample";
+	String TOPIC_PCA_UPDATE_HIGHLIGHT_SCORELIST_SAMPLE = "pca/update/highlight/scorelist/sample";
+	String TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREPLOT_SAMPLE = "pca/update/highlight/scoreplot/sample";
+	String TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREBAR_SAMPLE = "pca/update/highlight/scorebar/sample";
+	String TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE = "pca/update/highlight/variableline/sample";
 	String TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE = "pca/update/highlight/list/variable";
 	String TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE = "pca/update/highlght/statlist/variable";
 	String TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE = "pca/update/highlight/plot/variable";

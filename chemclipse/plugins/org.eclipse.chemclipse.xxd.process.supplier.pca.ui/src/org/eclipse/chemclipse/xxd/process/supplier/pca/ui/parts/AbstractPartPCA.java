@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Lorenz Gerber - additional topics
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.parts;
 
@@ -40,6 +41,10 @@ public abstract class AbstractPartPCA<T extends Composite> extends AbstractPart<
 		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_GROUPS, IChemClipseEvents.EVENT_BROKER_DATA);
 		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_EDITOR_PCA_CLOSE, IChemClipseEvents.EVENT_BROKER_DATA);
 		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, IChemClipseEvents.EVENT_BROKER_DATA);
+		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCORELIST_SAMPLE, IChemClipseEvents.EVENT_BROKER_DATA);
+		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREPLOT_SAMPLE, IChemClipseEvents.EVENT_BROKER_DATA);
+		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREBAR_SAMPLE, IChemClipseEvents.EVENT_BROKER_DATA);
+		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE, IChemClipseEvents.EVENT_BROKER_DATA);
 		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE, IChemClipseEvents.EVENT_BROKER_DATA);
 		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE, IChemClipseEvents.EVENT_BROKER_DATA);
 		subscribeAdditionalTopic(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE, IChemClipseEvents.EVENT_BROKER_DATA);

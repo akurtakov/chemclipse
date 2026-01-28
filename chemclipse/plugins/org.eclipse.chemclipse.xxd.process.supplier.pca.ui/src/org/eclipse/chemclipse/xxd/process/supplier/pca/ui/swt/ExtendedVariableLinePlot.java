@@ -14,6 +14,7 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
@@ -30,6 +31,7 @@ import org.eclipse.chemclipse.ux.extension.ui.model.IDataUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IEvaluation;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResult;
@@ -98,7 +100,11 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 
 				if(evaluation != null) {
 					if(DataUpdateSupport.isVisible(control)) {
-						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic)) {
+						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREPLOT_SAMPLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREBAR_SAMPLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE.equals(topic)) {
 							if(objects.size() == 1) {
 								Object object = objects.get(0);
 								ArrayList<ISample> samples = new ArrayList<>();
@@ -117,6 +123,13 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 				}
 			}
 		});
+	}
+
+	@Override
+	public boolean setFocus() {
+
+		updateOnFocus();
+		return true;
 	}
 
 	public void setInput(IEvaluation<IVariable, ISample, IResult> evaluation) {
@@ -431,7 +444,7 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 					 * Send Update event.
 					 */
 					if(!samplesHighlighted.isEmpty()) {
-						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, samplesHighlighted.toArray());
+						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE, samplesHighlighted.toArray());
 					}
 					/*
 					 * Finish User Selection Process
@@ -488,13 +501,13 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 						List<ISample> highlightedSamples = new ArrayList<>();
 						if(samplesHighlighted.isEmpty()) {
 							highlightedSamples.add(getSampleForPlotIndex(index));
-							UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, highlightedSamples.toArray());
+							UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE, highlightedSamples.toArray());
 						} else {
 							if(samplesHighlighted.contains(getSampleForPlotIndex(index))) {
-								UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, highlightedSamples.toArray());
+								UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE, highlightedSamples.toArray());
 							} else {
 								highlightedSamples.add(getSampleForPlotIndex(index));
-								UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, highlightedSamples.toArray());
+								UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE, highlightedSamples.toArray());
 							}
 
 						}
@@ -545,14 +558,14 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 						List<ISample> samplesHighlighted = evaluation.getHighlightedSamples();
 						if(samplesHighlighted.isEmpty()) {
 							samplesHighlighted.add(getSampleForPlotIndex(index));
-							UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, samplesHighlighted.toArray());
+							UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE, samplesHighlighted.toArray());
 						} else {
 							if(samplesHighlighted.contains(getSampleForPlotIndex(index))) {
 								samplesHighlighted.remove(getSampleForPlotIndex(index));
-								UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, samplesHighlighted.toArray());
+								UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE, samplesHighlighted.toArray());
 							} else {
 								samplesHighlighted.add(getSampleForPlotIndex(index));
-								UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, samplesHighlighted.toArray());
+								UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE, samplesHighlighted.toArray());
 							}
 
 						}
@@ -725,6 +738,35 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 			return stringComp.compare(str1, str2);
 		}
 
+	}
+
+	private void updateOnFocus() {
+
+		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
+		List<Object> objects = dataUpdateSupport.getUpdates(getLastTopic(dataUpdateSupport.getTopics()));
+
+		if(!objects.isEmpty()) {
+			Object object = objects.get(0);
+			if(object instanceof EvaluationPCA evaluation) {
+				setInput(evaluation);
+				updatePlot(lastVariableSelection);
+			}
+		}
+	}
+
+	private String getLastTopic(List<String> topics) {
+
+		Collections.reverse(topics);
+		for(String topic : topics) {
+			if(topic.equals(IChemClipseEvents.TOPIC_PCA_UPDATE_RESULT)) {
+				return topic;
+			}
+			if(topic.equals(IChemClipseEvents.TOPIC_PCA_UPDATE_SELECTION)) {
+				return topic;
+			}
+		}
+
+		return "";
 	}
 
 }

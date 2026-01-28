@@ -77,7 +77,11 @@ public class ExtendedScorePlotBarChart extends Composite implements IExtendedPar
 
 				if(evaluationPCA != null) {
 					if(DataUpdateSupport.isVisible(control)) {
-						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic)) {
+						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREBAR_SAMPLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREPLOT_SAMPLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCORELIST_SAMPLE.equals(topic) || //
+								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE.equals(topic)) {
 							if(objects.size() == 1) {
 								Object object = objects.get(0);
 								ArrayList<ISample> samples = new ArrayList<>();
@@ -341,7 +345,7 @@ public class ExtendedScorePlotBarChart extends Composite implements IExtendedPar
 					}
 
 					if(!samplesHighlighted.isEmpty()) {
-						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, samplesHighlighted.toArray());
+						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREBAR_SAMPLE, samplesHighlighted.toArray());
 					}
 
 					userSelection.reset();
@@ -386,9 +390,9 @@ public class ExtendedScorePlotBarChart extends Composite implements IExtendedPar
 					int sampleIndex = IntStream.range(0, samplesHighlighted.size()).filter(x -> samplesHighlighted.get(x).getSampleName().equals(currentSampleName)).findFirst().orElse(-1);
 					if(sampleIndex == -1) {
 						highlightedSamples.add(samples.getSamples().stream().filter(x -> x.getSampleName().equals(currentSampleName)).findFirst().get());
-						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, highlightedSamples.toArray());
+						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREBAR_SAMPLE, highlightedSamples.toArray());
 					} else {
-						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, highlightedSamples.toArray());
+						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREBAR_SAMPLE, highlightedSamples.toArray());
 					}
 				}
 			}
@@ -426,10 +430,10 @@ public class ExtendedScorePlotBarChart extends Composite implements IExtendedPar
 					int sampleIndex = IntStream.range(0, samplesHighlighted.size()).filter(x -> samplesHighlighted.get(x).getSampleName().equals(currentSampleName)).findFirst().orElse(-1);
 					if(sampleIndex == -1) {
 						samplesHighlighted.add(samples.getSamples().stream().filter(x -> x.getSampleName().equals(currentSampleName)).findFirst().get());
-						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, samplesHighlighted.toArray());
+						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREBAR_SAMPLE, samplesHighlighted.toArray());
 					} else {
 						samplesHighlighted.remove(sampleIndex);
-						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE, samplesHighlighted.toArray());
+						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREBAR_SAMPLE, samplesHighlighted.toArray());
 					}
 				}
 				userSelection.reset();
