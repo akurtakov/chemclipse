@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,6 +14,7 @@
 package org.eclipse.chemclipse.model.support;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.BiFunction;
 
@@ -103,27 +104,32 @@ public class AnalysisSupport implements IAnalysisSupport {
 		 * number of segments with a scan width of the given segment width. Do
 		 * scans exists in the last segment?
 		 */
-		int lastSegmentWidth = numberOfScans % segmentWidth;
-		if(lastSegmentWidth > 0) {
-			addLastSegment = true;
+		if(segmentWidth > 0) {
+			int lastSegmentWidth = numberOfScans % segmentWidth;
+			if(lastSegmentWidth > 0) {
+				addLastSegment = true;
+			}
+			/*
+			 * Retrieve the number of segment parts.
+			 */
+			numberOfScans -= lastSegmentWidth;
+			int segmentParts = numberOfScans / segmentWidth;
+			List<X> analysisSegments = new ArrayList<>();
+			for(int i = 1; i <= segmentParts; i++) {
+				analysisSegments.add(constructor.apply(startScan, segmentWidth));
+				startScan += segmentWidth;
+			}
+			/*
+			 * Add the last segment to the segment list if there exists one.
+			 */
+			if(addLastSegment) {
+				analysisSegments.add(constructor.apply(startScan, lastSegmentWidth));
+			}
+
+			return analysisSegments;
 		}
-		/*
-		 * Retrieve the number of segment parts.
-		 */
-		numberOfScans -= lastSegmentWidth;
-		int segmentParts = numberOfScans / segmentWidth;
-		List<X> analysisSegments = new ArrayList<>();
-		for(int i = 1; i <= segmentParts; i++) {
-			analysisSegments.add(constructor.apply(startScan, segmentWidth));
-			startScan += segmentWidth;
-		}
-		/*
-		 * Add the last segment to the segment list if there exists one.
-		 */
-		if(addLastSegment) {
-			analysisSegments.add(constructor.apply(startScan, lastSegmentWidth));
-		}
-		return analysisSegments;
+
+		return Collections.emptyList();
 	}
 
 	public static List<ChromatogramSegment> getChromatogramSegments(IChromatogram chromatogram, int segmentWidth) {
