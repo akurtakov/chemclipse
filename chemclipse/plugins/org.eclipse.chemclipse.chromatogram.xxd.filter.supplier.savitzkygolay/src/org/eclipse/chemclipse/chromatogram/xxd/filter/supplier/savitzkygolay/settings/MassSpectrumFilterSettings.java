@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -31,13 +31,13 @@ public class MassSpectrumFilterSettings extends AbstractMassSpectrumFilterSettin
 
 	private static final Logger logger = Logger.getLogger(MassSpectrumFilterSettings.class);
 
-	@JsonProperty(value = "Order", defaultValue = "2")
+	@JsonProperty(value = "Order", defaultValue = "3")
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_ORDER, maxValue = PreferenceSupplier.MAX_ORDER)
-	private int order = 2;
+	private int order = 3;
 
-	@JsonProperty(value = "Width", defaultValue = "5")
+	@JsonProperty(value = "Width", defaultValue = "21")
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_WIDTH, maxValue = PreferenceSupplier.MAX_WIDTH)
-	private int width = 5;
+	private int width = 21;
 
 	public int getDerivative() {
 
