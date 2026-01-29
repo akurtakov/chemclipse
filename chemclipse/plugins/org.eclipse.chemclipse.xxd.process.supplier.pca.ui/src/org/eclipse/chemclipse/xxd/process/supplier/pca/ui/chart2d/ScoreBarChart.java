@@ -47,15 +47,15 @@ import org.eclipse.swtchart.extensions.core.IPrimaryAxisSettings;
 import org.eclipse.swtchart.extensions.core.RangeRestriction;
 import org.eclipse.swtchart.extensions.core.SeriesData;
 
-public class ScorePlotBarChart extends BarChart {
+public class ScoreBarChart extends BarChart {
 
 	private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00E0", new DecimalFormatSymbols(Locale.ENGLISH));
-	private String title = "Score Plot - Bar Chart";
+	private String title = "Score Bar Chart";
 	private int currentPC = 0;
 	private double explainedVariance = 0.0;
 	private ICustomPaintListener currentPaintListener = null;
 
-	public ScorePlotBarChart(Composite parent, int style) {
+	public ScoreBarChart(Composite parent, int style) {
 
 		super(parent, style);
 		initialize();

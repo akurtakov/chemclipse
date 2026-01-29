@@ -15,16 +15,16 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.parts;
 import java.util.List;
 
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt.ExtendedScorePlotBarChart;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt.ExtendedScoreBarChart;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
 import jakarta.inject.Inject;
 
-public class ScorePlotBarPart extends AbstractPartPCA<ExtendedScorePlotBarChart> {
+public class ScoreBarChartPart extends AbstractPartPCA<ExtendedScoreBarChart> {
 
 	@Inject
-	public ScorePlotBarPart(Composite parent) {
+	public ScoreBarChartPart(Composite parent) {
 
 		super(parent);
 	}
@@ -32,16 +32,16 @@ public class ScorePlotBarPart extends AbstractPartPCA<ExtendedScorePlotBarChart>
 	@Override
 	public void setFocus() {
 
-		ExtendedScorePlotBarChart control = getControl();
+		ExtendedScoreBarChart control = getControl();
 		if(control != null) {
 			control.setFocus();
 		}
 	}
 
 	@Override
-	protected ExtendedScorePlotBarChart createControl(Composite parent) {
+	protected ExtendedScoreBarChart createControl(Composite parent) {
 
-		return new ExtendedScorePlotBarChart(parent, SWT.NONE);
+		return new ExtendedScoreBarChart(parent, SWT.NONE);
 	}
 
 	@Override

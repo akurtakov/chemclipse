@@ -33,7 +33,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultMVA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.Activator;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d.ScorePlotBarChart;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d.ScoreBarChart;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -55,9 +55,9 @@ import org.eclipse.swtchart.extensions.core.IMouseSupport;
 import org.eclipse.swtchart.extensions.core.UserSelection;
 import org.eclipse.swtchart.extensions.events.IHandledEventProcessor;
 
-public class ExtendedScorePlotBarChart extends Composite implements IExtendedPartUI {
+public class ExtendedScoreBarChart extends Composite implements IExtendedPartUI {
 
-	private AtomicReference<ScorePlotBarChart> chartControl = new AtomicReference<>();
+	private AtomicReference<ScoreBarChart> chartControl = new AtomicReference<>();
 	private Combo comboPrincipalComponent;
 	private EvaluationPCA evaluationPCA = null;
 	private int currentPC = 0;
@@ -65,7 +65,7 @@ public class ExtendedScorePlotBarChart extends Composite implements IExtendedPar
 	private UserSelection userSelection = new UserSelection();
 	private ISamplesPCA<IVariable, ISample> samples = null;
 
-	public ExtendedScorePlotBarChart(Composite parent, int style) {
+	public ExtendedScoreBarChart(Composite parent, int style) {
 
 		super(parent, style);
 		createControl();
@@ -165,7 +165,7 @@ public class ExtendedScorePlotBarChart extends Composite implements IExtendedPar
 
 	private void createChart(Composite parent) {
 
-		ScorePlotBarChart chart = new ScorePlotBarChart(parent, SWT.BORDER);
+		ScoreBarChart chart = new ScoreBarChart(parent, SWT.BORDER);
 		chart.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		IChartSettings chartSettings = chart.getChartSettings();
@@ -507,7 +507,7 @@ public class ExtendedScorePlotBarChart extends Composite implements IExtendedPar
 
 	private void updateChart() {
 
-		ScorePlotBarChart chart = chartControl.get();
+		ScoreBarChart chart = chartControl.get();
 		if(chart != null) {
 			if(evaluationPCA != null) {
 				chart.setInput(evaluationPCA, comboPrincipalComponent.getSelectionIndex());
