@@ -78,7 +78,7 @@ public class ExtendedMethodUI extends Composite implements IExtendedPartUI {
 
 	public ExtendedMethodUI(Composite parent, int style, IProcessSupplierContext processingSupport, DataCategory[] dataCategories) {
 
-		this(parent, style, processingSupport, (entry, context) -> entry.getPreferences(context), dataCategories);
+		this(parent, style, processingSupport, IProcessEntry::getPreferences, dataCategories);
 	}
 
 	public ExtendedMethodUI(Composite parent, int style, IProcessSupplierContext processingSupport, BiFunction<IProcessEntry, IProcessSupplierContext, IProcessorPreferences<?>> preferencesSupplier, DataCategory[] dataCategories) {
