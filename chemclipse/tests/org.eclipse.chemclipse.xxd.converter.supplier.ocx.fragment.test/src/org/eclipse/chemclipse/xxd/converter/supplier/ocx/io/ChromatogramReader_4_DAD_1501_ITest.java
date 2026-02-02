@@ -15,7 +15,6 @@ package org.eclipse.chemclipse.xxd.converter.supplier.ocx.io;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.wsd.converter.chromatogram.ChromatogramConverterWSD;
@@ -37,7 +36,7 @@ public class ChromatogramReader_4_DAD_1501_ITest {
 	private static IChromatogramWSD chromatogram;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		PreferenceSupplier.setForceLoadAlternateDetector(true);
 		File fileImport = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_4_DAD_1501);
