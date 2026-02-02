@@ -21,10 +21,9 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.eclipse.chemclipse.model.statistics.ISample;
+import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultMVA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.PaintEvent;
@@ -47,15 +46,14 @@ import org.eclipse.swtchart.extensions.core.IPrimaryAxisSettings;
 import org.eclipse.swtchart.extensions.core.RangeRestriction;
 import org.eclipse.swtchart.extensions.core.SeriesData;
 
-public class ScoreBarChart extends BarChart {
+public class LoadingBarChart extends BarChart {
 
 	private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00E0", new DecimalFormatSymbols(Locale.ENGLISH));
-	private String title = "Score Bar Chart";
+	private String title = "Loading Bar Chart";
 	private int currentPC = 0;
-	private double explainedVariance = 0.0;
 	private ICustomPaintListener currentPaintListener = null;
 
-	public ScoreBarChart(Composite parent, int style) {
+	public LoadingBarChart(Composite parent, int style) {
 
 		super(parent, style);
 		initialize();
@@ -89,13 +87,13 @@ public class ScoreBarChart extends BarChart {
 
 		// X-axis settings (sample names)
 		IPrimaryAxisSettings xAxisSettings = chartSettings.getPrimaryAxisSettingsX();
-		xAxisSettings.setTitle("Samples (sorted by score)");
+		xAxisSettings.setTitle("Variables (sorted by loadings)");
 		xAxisSettings.setVisible(true);
 		xAxisSettings.setDecimalFormat(DECIMAL_FORMAT);
 
 		// Y-axis settings (scores)
 		IPrimaryAxisSettings yAxisSettings = chartSettings.getPrimaryAxisSettingsY();
-		yAxisSettings.setTitle("Score");
+		yAxisSettings.setTitle("Loading");
 		yAxisSettings.setVisible(true);
 		yAxisSettings.setDecimalFormat(DECIMAL_FORMAT);
 
@@ -113,51 +111,42 @@ public class ScoreBarChart extends BarChart {
 		}
 
 		IResultsMVA results = evaluationPCA.getResults();
-		List<IResultMVA> resultList = results.getPcaResultList();
-		double[] explainedVariances = results.getExplainedVariances();
 
-		if(this.currentPC >= 0 && this.currentPC < explainedVariances.length) {
-			this.explainedVariance = explainedVariances[this.currentPC];
-		}
-
-		String chartTitle = String.format("Score Plot - PC%d (%.1f%%)", this.currentPC + 1, explainedVariance * 100);
+		String chartTitle = String.format("Loading Plot - PC%d", this.currentPC + 1);
 		getChartSettings().setTitle(chartTitle);
 
-		List<SampleScore> sampleScores = new ArrayList<>();
-		for(IResultMVA result : resultList) {
-			ISample sample = result.getSample();
-			double[] scoreMatrix = result.getScoreVector();
-
-			if(this.currentPC < scoreMatrix.length) {
-				double score = scoreMatrix[this.currentPC];
-				String sampleName = sample.getSampleName();
-				sampleScores.add(new SampleScore(sampleName, score));
+		List<VariableLoading> variableLoadings = new ArrayList<>();
+		for(int i = 0; i < results.getExtractedVariables().size(); i++) {
+			if(this.currentPC <= results.getLoadingVectors().size()) {
+				double loading = results.getLoadingVectors().get(this.currentPC)[i];
+				String variableName = results.getExtractedVariables().get(i).getValue();
+				variableLoadings.add(new VariableLoading(variableName, loading));
 			}
 		}
 
-		sampleScores.sort(Comparator.comparingDouble(SampleScore::getScore).reversed());
+		variableLoadings.sort(Comparator.comparingDouble(VariableLoading::getLoading).reversed());
 
-		int numberOfBars = sampleScores.size();
+		int numberOfBars = variableLoadings.size();
 		double[] xValues = new double[numberOfBars];
 		double[] yValues = new double[numberOfBars];
 		String[] labels = new String[numberOfBars];
 
 		// Store colors for each bar
 		final Color[] barColors = new Color[numberOfBars];
-		final Set<String> highlightedNames = evaluationPCA.getHighlightedSamples().stream().map(ISample::getSampleName).collect(Collectors.toSet());
+		final Set<String> highlightedNames = evaluationPCA.getHighlightedVariables().stream().map(IVariable::getValue).collect(Collectors.toSet());
 
 		for(int i = 0; i < numberOfBars; i++) {
 			xValues[i] = i;
-			yValues[i] = sampleScores.get(i).getScore();
+			yValues[i] = variableLoadings.get(i).getLoading();
 			labels[i] = "";
 
-			String sampleName = sampleScores.get(i).getSampleName();
-			barColors[i] = highlightedNames.contains(sampleName) ? Colors.BLUE : Colors.RED;
+			String variableName = variableLoadings.get(i).getVariableName();
+			barColors[i] = highlightedNames.contains(variableName) ? Colors.BLUE : Colors.RED;
 		}
 
 		// Create a SINGLE series
 		List<IBarSeriesData> barSeriesDataList = new ArrayList<>();
-		IBarSeriesData barData = new BarSeriesData(new SeriesData(xValues, yValues, "Scores"));
+		IBarSeriesData barData = new BarSeriesData(new SeriesData(xValues, yValues, "Loadings"));
 		IBarSeriesSettings settings = barData.getSettings();
 		settings.setBarColor(Colors.RED);
 		settings.setBarWidthStyle(BarWidthStyle.STRETCHED);
@@ -175,7 +164,7 @@ public class ScoreBarChart extends BarChart {
 			@Override
 			public void paintControl(PaintEvent e) {
 
-				ISeries<?> series = getBaseChart().getSeriesSet().getSeries("Scores");
+				ISeries<?> series = getBaseChart().getSeriesSet().getSeries("Loadings");
 				if(series instanceof IBarSeries) {
 					IBarSeries<?> barSeries = (IBarSeries<?>)series;
 					Rectangle[] bounds = barSeries.getBounds();
@@ -210,6 +199,7 @@ public class ScoreBarChart extends BarChart {
 		}
 
 		getBaseChart().redraw();
+
 	}
 
 	private double getMaxValue(double[] values) {
@@ -234,25 +224,26 @@ public class ScoreBarChart extends BarChart {
 		return min;
 	}
 
-	private static class SampleScore {
+	private static class VariableLoading {
 
-		private final String sampleName;
-		private final double score;
+		private final String variableName;
+		private final double loading;
 
-		public SampleScore(String sampleName, double score) {
+		public VariableLoading(String variableName, double loading) {
 
-			this.sampleName = sampleName;
-			this.score = score;
+			this.variableName = variableName;
+			this.loading = loading;
 		}
 
-		public String getSampleName() {
+		public String getVariableName() {
 
-			return sampleName;
+			return variableName;
 		}
 
-		public double getScore() {
+		public double getLoading() {
 
-			return score;
+			return loading;
 		}
 	}
+
 }
