@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -67,6 +68,7 @@ import org.eclipse.chemclipse.support.model.SeparationColumnType;
 import org.eclipse.chemclipse.wsd.converter.supplier.ocx.io.ChromatogramWriterWSD;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.internal.support.IScanProxy;
+import org.eclipse.chemclipse.xxd.converter.supplier.ocx.internal.support.ProcessSupplierSupport;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.internal.support.RetentionIndexTypeSupport;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.internal.support.ScanProxy;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.preferences.PreferenceSupplier;
@@ -477,17 +479,26 @@ public class ChromatogramWriter_1500 extends AbstractChromatogramWriter implemen
 		ZipEntry zipEntry;
 		DataOutputStream dataOutputStream;
 		/*
-		 * Edit-History
+		 * Edit History
 		 */
 		zipEntry = new ZipEntry(directoryPrefix + Format.FILE_HISTORY_MSD);
 		zipOutputStream.putNextEntry(zipEntry);
 		dataOutputStream = new DataOutputStream(zipOutputStream);
 		IEditHistory editHistory = chromatogram.getEditHistory();
-		dataOutputStream.writeInt(editHistory.size()); // Number of entries
+
+		long processingEntries = editHistory.stream().map(IEditInformation::getProcessSupplierEntry).filter(Objects::nonNull).count();
+		dataOutputStream.writeInt(editHistory.size() + (int)processingEntries); // Number of entries
 		// Date, Description
 		for(IEditInformation editInformation : editHistory) {
 			dataOutputStream.writeLong(editInformation.getDate().getTime()); // Date
 			writeString(dataOutputStream, editInformation.getDescription()); // Description
+
+			// Process Settings, Macro Recorder
+			if(editInformation.getProcessSupplierEntry() != null) {
+				IEditInformation processEditInformation = ProcessSupplierSupport.createEditInformation(editInformation.getProcessSupplierEntry());
+				dataOutputStream.writeLong(processEditInformation.getDate().getTime());
+				writeString(dataOutputStream, processEditInformation.getDescription());
+			}
 		}
 
 		dataOutputStream.flush();

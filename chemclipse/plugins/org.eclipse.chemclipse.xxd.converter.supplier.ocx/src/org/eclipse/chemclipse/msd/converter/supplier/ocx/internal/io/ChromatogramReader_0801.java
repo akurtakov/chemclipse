@@ -62,8 +62,9 @@ import org.eclipse.chemclipse.msd.model.implementation.ChromatogramPeakMSD;
 import org.eclipse.chemclipse.msd.model.implementation.PeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.implementation.PeakModelMSD;
 import org.eclipse.chemclipse.support.history.EditInformation;
-import org.eclipse.chemclipse.support.history.IEditHistory;
 import org.eclipse.chemclipse.support.history.IEditInformation;
+import org.eclipse.chemclipse.support.history.ProcessSupplierEntry;
+import org.eclipse.chemclipse.xxd.converter.supplier.ocx.internal.support.ProcessSupplierSupport;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.settings.Format;
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -396,15 +397,25 @@ public class ChromatogramReader_0801 extends AbstractChromatogramReader implemen
 
 	private void readHistory(DataInputStream dataInputStream, boolean closeStream, IChromatogramMSD chromatogram, IProgressMonitor monitor) throws IOException {
 
-		IEditHistory editHistory = chromatogram.getEditHistory();
+		List<IEditInformation> parsedEditInformation = new ArrayList<>();
 		int numberOfEntries = dataInputStream.readInt(); // Number of entries
 		for(int i = 1; i <= numberOfEntries; i++) {
 			long time = dataInputStream.readLong(); // Date
 			String description = readString(dataInputStream); // Description
+			parsedEditInformation.add(new EditInformation(new Date(time), description));
+		}
 
-			Date date = new Date(time);
-			IEditInformation editInformation = new EditInformation(date, description);
-			editHistory.add(editInformation);
+		IEditInformation previous = null;
+		for(IEditInformation current : parsedEditInformation) {
+			if(ProcessSupplierSupport.isProcessSupplierEntry(current)) {
+				ProcessSupplierEntry processSupplierEntry = ProcessSupplierSupport.extractProcessSupplierEntry(current);
+				if(previous != null) {
+					previous.setProcessSupplierEntry(processSupplierEntry);
+				}
+			} else {
+				chromatogram.getEditHistory().add(current);
+			}
+			previous = current;
 		}
 
 		if(closeStream) {

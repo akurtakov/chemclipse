@@ -29,22 +29,17 @@ import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
-import org.eclipse.chemclipse.support.history.EditHistory;
 import org.eclipse.chemclipse.support.history.IEditHistory;
 import org.eclipse.chemclipse.support.history.IEditInformation;
 import org.eclipse.chemclipse.support.history.ProcessSupplierEntry;
-import org.eclipse.chemclipse.support.history.ProcessSupplierSupport;
 import org.eclipse.chemclipse.support.settings.UserManagement;
 import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.part.support.SupplierEditorSupport;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageEditHistory;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
@@ -54,7 +49,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 
 public class ExtendedEditHistoryUI extends Composite implements IExtendedPartUI {
@@ -103,12 +97,11 @@ public class ExtendedEditHistoryUI extends Composite implements IExtendedPartUI 
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
-		composite.setLayout(new GridLayout(4, false));
+		composite.setLayout(new GridLayout(3, false));
 
 		createButtonToggleToolbarInfo(composite);
 		createButtonToggleToolbarSearch(composite);
 		createButtonMethod(composite);
-		createButtonSettings(composite);
 	}
 
 	private void createButtonToggleToolbarInfo(Composite parent) {
@@ -188,28 +181,14 @@ public class ExtendedEditHistoryUI extends Composite implements IExtendedPartUI 
 
 		if(editHistory != null) {
 			for(IEditInformation editInformation : editHistory) {
-				if(ProcessSupplierSupport.isProcessSupplierEntry(editInformation)) {
-					ProcessSupplierEntry processSupplierEntry = ProcessSupplierSupport.extractProcessSupplierEntry(editInformation);
-					if(processSupplierEntry != null) {
-						processSupplierEntries.add(processSupplierEntry);
-					}
+				ProcessSupplierEntry processSupplierEntry = editInformation.getProcessSupplierEntry();
+				if(processSupplierEntry != null) {
+					processSupplierEntries.add(processSupplierEntry);
 				}
 			}
 		}
 
 		return processSupplierEntries;
-	}
-
-	private void createButtonSettings(Composite parent) {
-
-		createSettingsButton(parent, Arrays.asList(PreferencePageEditHistory.class), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings(display);
-			}
-		});
 	}
 
 	private void createToolbarInfo(Composite parent) {
@@ -243,32 +222,9 @@ public class ExtendedEditHistoryUI extends Composite implements IExtendedPartUI 
 		tableViewer.set(editHistoryListUI);
 	}
 
-	private void applySettings(Display display) {
-
-		updateInput();
-	}
-
 	private void updateInput() {
 
-		IEditHistory editHistoryFiltered = getEditHistoryFiltered();
-		tableViewer.get().setInput(editHistoryFiltered);
-		toolbarInfo.get().setText("Edit History Events: " + ((editHistoryFiltered != null) ? editHistoryFiltered.size() : "--"));
-	}
-
-	private IEditHistory getEditHistoryFiltered() {
-
-		IEditHistory editHistoryFiltered = editHistory;
-		if(editHistory != null) {
-			if(PreferenceSupplier.isHideProcessMethodEntries()) {
-				editHistoryFiltered = new EditHistory();
-				for(IEditInformation editInformation : editHistory) {
-					if(!ProcessSupplierSupport.isProcessSupplierEntry(editInformation)) {
-						editHistoryFiltered.add(editInformation);
-					}
-				}
-			}
-		}
-
-		return editHistoryFiltered;
+		tableViewer.get().setInput(editHistory);
+		toolbarInfo.get().setText("Edit History Events: " + ((editHistory != null) ? editHistory.size() : "--"));
 	}
 }

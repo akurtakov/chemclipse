@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -10,10 +10,11 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.support.history;
+package org.eclipse.chemclipse.xxd.converter.supplier.ocx.internal.support;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.eclipse.chemclipse.support.history.ProcessSupplierEntry;
 import org.junit.jupiter.api.Test;
 
 public class ProcessSupplierSupport_1_Test {

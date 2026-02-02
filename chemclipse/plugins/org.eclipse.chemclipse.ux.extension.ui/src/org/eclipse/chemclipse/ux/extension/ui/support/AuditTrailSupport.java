@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,9 +23,9 @@ import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 import org.eclipse.chemclipse.processing.system.ProcessSettingsSupport;
 import org.eclipse.chemclipse.support.history.EditInformation;
 import org.eclipse.chemclipse.support.history.IEditHistory;
+import org.eclipse.chemclipse.support.history.IEditInformation;
 import org.eclipse.chemclipse.support.history.ISupplierEditHistory;
 import org.eclipse.chemclipse.support.history.ProcessSupplierEntry;
-import org.eclipse.chemclipse.support.history.ProcessSupplierSupport;
 import org.eclipse.chemclipse.support.settings.UserManagement;
 
 public class AuditTrailSupport {
@@ -47,11 +47,11 @@ public class AuditTrailSupport {
 	private static void updateAuditTrail(ISupplierEditHistory editHistorySupplier, String description, IProcessSupplier<?> processSupplier) {
 
 		if(editHistorySupplier != null) {
-			IEditHistory editHistory = editHistorySupplier.getEditHistory();
 			/*
 			 * Normal description
 			 */
-			editHistory.add(new EditInformation(description, UserManagement.getCurrentUser()));
+			IEditInformation editInformation = new EditInformation(description, UserManagement.getCurrentUser());
+
 			/*
 			 * Detailed step to recover process method
 			 */
@@ -62,8 +62,11 @@ public class AuditTrailSupport {
 				processSupplierEntry.setName(processSupplier.getName());
 				processSupplierEntry.setDescription(processSupplier.getDescription());
 				processSupplierEntry.setUserSettings(processorPreferences.getUserSettingsAsString());
-				editHistory.add(ProcessSupplierSupport.createEditInformation(processSupplierEntry));
+				editInformation.setProcessSupplierEntry(processSupplierEntry);
 			}
+
+			IEditHistory editHistory = editHistorySupplier.getEditHistory();
+			editHistory.add(editInformation);
 		}
 	}
 }
