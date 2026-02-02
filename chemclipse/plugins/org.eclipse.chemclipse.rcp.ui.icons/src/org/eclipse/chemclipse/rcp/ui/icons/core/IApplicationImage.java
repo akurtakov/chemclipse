@@ -440,7 +440,7 @@ public interface IApplicationImage extends IApplicationImageProvider {
 	String IMAGE_MERGE = "merge.gif";
 	String IMAGE_LABELS = "labels.png";
 	String IMAGE_PEAK_TRACES = "peakTraces.gif";
-	String IMAGE_COPY_CLIPBOARD = "copy-clipboard.png";
+	String IMAGE_COPY_CLIPBOARD = "copy-clipboard.svg";
 	String IMAGE_ZOOM_LOCKED = "zoomLocked.png";
 	String IMAGE_ZOOM_IN = "zoomIn.png";
 	String IMAGE_ZOOM_OUT = "zoomOut.png";
