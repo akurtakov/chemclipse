@@ -34,7 +34,7 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 public class ChromatogramReader_1_MSD_1500_ITest {
 
-	private static IChromatogramMSD chromatogram;
+	private IChromatogramMSD chromatogram;
 
 	@BeforeAll
 	public void setUp() {
