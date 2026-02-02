@@ -110,7 +110,7 @@ public interface IApplicationImage extends IApplicationImageProvider {
 	String IMAGE_PEAK_REPLACE = "peakReplace.gif";
 	String IMAGE_PEAKS = "peaks.gif";
 	String IMAGE_ERROR = "error.png";
-	String IMAGE_WARN = "warn.png";
+	String IMAGE_WARN = "warn.svg";
 	String IMAGE_INFO = "info.svg";
 	String IMAGE_VALID = "valid.gif";
 	String IMAGE_QUESTION = "question.svg";
