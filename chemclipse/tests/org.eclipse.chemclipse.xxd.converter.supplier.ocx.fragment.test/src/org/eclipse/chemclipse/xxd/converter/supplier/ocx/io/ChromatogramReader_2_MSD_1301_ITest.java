@@ -16,6 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
@@ -43,6 +46,17 @@ public class ChromatogramReader_2_MSD_1301_ITest {
 		File fileImport = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_2_MSD_1301);
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();
+	}
+
+	@Test
+	public void testEditHistory() {
+
+		assertEquals("RTShifter Filter", chromatogram.getEditHistory().get(0).getDescription());
+
+		GregorianCalendar calendar = new GregorianCalendar(2015, Calendar.JULY, 23, 11, 56, 30);
+		calendar.set(Calendar.MILLISECOND, 75);
+		calendar.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
+		assertEquals(calendar.getTime(), chromatogram.getEditHistory().get(0).getDate());
 	}
 
 	@Test

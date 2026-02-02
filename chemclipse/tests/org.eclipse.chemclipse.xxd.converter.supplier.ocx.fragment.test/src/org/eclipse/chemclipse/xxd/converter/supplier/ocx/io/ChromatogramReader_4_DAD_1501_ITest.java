@@ -15,6 +15,9 @@ package org.eclipse.chemclipse.xxd.converter.supplier.ocx.io;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.wsd.converter.chromatogram.ChromatogramConverterWSD;
@@ -42,6 +45,25 @@ public class ChromatogramReader_4_DAD_1501_ITest {
 		File fileImport = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_4_DAD_1501);
 		IProcessingInfo<IChromatogramWSD> processingInfo = ChromatogramConverterWSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();
+	}
+
+	@Test
+	public void testEditHistory() {
+
+		assertEquals(7, chromatogram.getEditHistory().size());
+
+		assertEquals("Chromatogram Filter: Scan Remover", chromatogram.getEditHistory().get(0).getDescription());
+		assertEquals("Peak Detector: Peak Detector UI [Direct]", chromatogram.getEditHistory().get(1).getDescription());
+		assertEquals("Peak Integrator: Peak Integrator Trapezoid", chromatogram.getEditHistory().get(2).getDescription());
+		assertEquals("Peak Integrator: Peak Integrator Trapezoid", chromatogram.getEditHistory().get(3).getDescription());
+		assertEquals("Chromatogram Filter: Scan Remover", chromatogram.getEditHistory().get(4).getDescription());
+		assertEquals("Chromatogram Filter: Scan Remover", chromatogram.getEditHistory().get(5).getDescription());
+		assertEquals("Combined Chromatogram and Peak Integrator: Combined Integrator Trapezoid", chromatogram.getEditHistory().get(6).getDescription());
+
+		GregorianCalendar calendar = new GregorianCalendar(2023, Calendar.NOVEMBER, 1, 14, 9, 25);
+		calendar.set(Calendar.MILLISECOND, 131);
+		calendar.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
+		assertEquals(calendar.getTime(), chromatogram.getEditHistory().get(0).getDate());
 	}
 
 	@AfterAll
