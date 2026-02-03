@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,6 +21,7 @@ public class EditInformation implements IEditInformation {
 	private Date date;
 	private String description = "";
 	private String editor = "";
+	private ProcessSupplierEntry processSupplierEntry;
 
 	public static final String NO_DESCRIPTION = SupportMessages.labelNoDescription;
 	public static final String NO_EDITOR = SupportMessages.labelNotAvailable;
@@ -112,6 +113,17 @@ public class EditInformation implements IEditInformation {
 			editor = NO_EDITOR;
 		}
 		this.editor = editor;
+	}
+
+	@Override
+	public ProcessSupplierEntry getProcessSupplierEntry() {
+
+		return processSupplierEntry;
+	}
+
+	public void setProcessSupplierEntry(ProcessSupplierEntry processSupplierEntry) {
+
+		this.processSupplierEntry = processSupplierEntry;
 	}
 
 	@Override

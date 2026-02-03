@@ -16,7 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
@@ -35,14 +37,25 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 public class ChromatogramReader_1_MSD_1500_ITest {
 
-	private static IChromatogramMSD chromatogram;
+	private IChromatogramMSD chromatogram;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		File fileImport = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_MSD_1500);
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();
+	}
+
+	@Test
+	public void testEditHistory() {
+
+		assertEquals("Scan Remover Filter", chromatogram.getEditHistory().get(0).getDescription());
+
+		GregorianCalendar calendar = new GregorianCalendar(2015, Calendar.JULY, 23, 11, 55, 31);
+		calendar.set(Calendar.MILLISECOND, 195);
+		calendar.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
+		assertEquals(calendar.getTime(), chromatogram.getEditHistory().get(0).getDate());
 	}
 
 	@Test

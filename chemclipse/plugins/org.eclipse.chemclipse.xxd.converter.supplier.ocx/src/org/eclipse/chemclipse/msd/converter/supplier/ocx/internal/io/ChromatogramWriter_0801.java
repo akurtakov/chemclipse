@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -42,6 +43,7 @@ import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.support.history.IEditHistory;
 import org.eclipse.chemclipse.support.history.IEditInformation;
+import org.eclipse.chemclipse.xxd.converter.supplier.ocx.internal.support.ProcessSupplierSupport;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.settings.Format;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -143,7 +145,7 @@ public class ChromatogramWriter_0801 extends AbstractChromatogramWriter implemen
 		writeChromatogramPeaks(zipOutputStream, directoryPrefix, chromatogram, monitor);
 		writeChromatogramArea(zipOutputStream, directoryPrefix, chromatogram, monitor);
 		writeChromatogramIdentification(zipOutputStream, directoryPrefix, chromatogram, monitor);
-		writeChromatogramHistory(zipOutputStream, directoryPrefix, chromatogram, monitor);
+		writeChromatogramHistory(zipOutputStream, directoryPrefix, chromatogram);
 		writeChromatogramMiscellaneous(zipOutputStream, directoryPrefix, chromatogram, monitor);
 	}
 
@@ -237,22 +239,31 @@ public class ChromatogramWriter_0801 extends AbstractChromatogramWriter implemen
 		zipOutputStream.closeEntry();
 	}
 
-	private void writeChromatogramHistory(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramMSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void writeChromatogramHistory(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramMSD chromatogram) throws IOException {
 
 		ZipEntry zipEntry;
 		DataOutputStream dataOutputStream;
 		/*
-		 * Edit-History
+		 * Edit History
 		 */
-		zipEntry = new ZipEntry(directoryPrefix + Format.FILE_HISTORY);
+		zipEntry = new ZipEntry(directoryPrefix + Format.FILE_HISTORY_MSD);
 		zipOutputStream.putNextEntry(zipEntry);
 		dataOutputStream = new DataOutputStream(zipOutputStream);
 		IEditHistory editHistory = chromatogram.getEditHistory();
-		dataOutputStream.writeInt(editHistory.size()); // Number of entries
+
+		long processingEntries = editHistory.stream().map(IEditInformation::getProcessSupplierEntry).filter(Objects::nonNull).count();
+		dataOutputStream.writeInt(editHistory.size() + (int)processingEntries); // Number of entries
 		// Date, Description
 		for(IEditInformation editInformation : editHistory) {
 			dataOutputStream.writeLong(editInformation.getDate().getTime()); // Date
 			writeString(dataOutputStream, editInformation.getDescription()); // Description
+
+			// Process Supplier Entry
+			if(editInformation.getProcessSupplierEntry() != null) {
+				IEditInformation processEditInformation = ProcessSupplierSupport.createEditInformation(editInformation.getProcessSupplierEntry());
+				dataOutputStream.writeLong(processEditInformation.getDate().getTime());
+				writeString(dataOutputStream, processEditInformation.getDescription());
+			}
 		}
 
 		dataOutputStream.flush();

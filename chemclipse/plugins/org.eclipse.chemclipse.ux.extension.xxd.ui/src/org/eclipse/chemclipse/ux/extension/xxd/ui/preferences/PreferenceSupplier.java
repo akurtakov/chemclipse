@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -442,11 +442,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_UNKNOWN_TARGET_ADD_RETENTION_INDEX = true;
 	public static final String P_VERIFY_UNKNOWN_TARGET = "verifyUnknownTarget";
 	public static final boolean DEF_VERIFY_UNKNOWN_TARGET = false;
-	/*
-	 * Edit History
-	 */
-	public static final String P_EDIT_HISTORY_HIDE_PROCESS_METHOD_ENTRIES = "editHistoryHideProcessMethodEntries";
-	public static final boolean DEF_EDIT_HISTORY_HIDE_PROCESS_METHOD_ENTRIES = true;
 	/*
 	 * Time Ranges
 	 */
@@ -1032,10 +1027,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_MATCH_QUALITY_UNKNOWN_TARGET, DEF_MATCH_QUALITY_UNKNOWN_TARGET);
 		putDefault(P_UNKNOWN_TARGET_ADD_RETENTION_INDEX, DEF_UNKNOWN_TARGET_ADD_RETENTION_INDEX);
 		putDefault(P_VERIFY_UNKNOWN_TARGET, DEF_VERIFY_UNKNOWN_TARGET);
-		/*
-		 * Edit History
-		 */
-		putDefault(P_EDIT_HISTORY_HIDE_PROCESS_METHOD_ENTRIES, DEF_EDIT_HISTORY_HIDE_PROCESS_METHOD_ENTRIES);
 
 		initializeChromatogramDefaults();
 		/*
@@ -1347,11 +1338,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static void setMoleculeImageServiceId(String selection) {
 
 		INSTANCE().put(P_MOLECULE_IMAGE_SERVICE_ID, selection);
-	}
-
-	public static boolean isHideProcessMethodEntries() {
-
-		return INSTANCE().getBoolean(P_EDIT_HISTORY_HIDE_PROCESS_METHOD_ENTRIES, DEF_EDIT_HISTORY_HIDE_PROCESS_METHOD_ENTRIES);
 	}
 
 	public static HeaderField getChromatogramEditorLabel() {

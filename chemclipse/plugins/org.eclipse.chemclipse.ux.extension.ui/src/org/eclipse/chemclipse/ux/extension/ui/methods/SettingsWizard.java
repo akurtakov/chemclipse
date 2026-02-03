@@ -119,7 +119,7 @@ public class SettingsWizard extends Wizard {
 	 * 
 	 * @param shell
 	 * @param processorSupplier
-	 * @return the preferences to use or <code>null</code> if user canceled the wizzard
+	 * @return the preferences to use or <code>null</code> if user canceled the wizard
 	 * @throws IOException
 	 *             if reading the settings failed
 	 */
