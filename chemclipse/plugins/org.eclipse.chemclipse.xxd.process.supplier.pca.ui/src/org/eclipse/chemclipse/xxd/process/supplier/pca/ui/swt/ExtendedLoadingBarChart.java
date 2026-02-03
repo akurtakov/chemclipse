@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 
 import org.eclipse.chemclipse.model.statistics.ISample;
@@ -49,6 +50,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Scrollable;
 import org.eclipse.swtchart.ICustomPaintListener;
 import org.eclipse.swtchart.IPlotArea;
+import org.eclipse.swtchart.Range;
 import org.eclipse.swtchart.extensions.core.BaseChart;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.IMouseSupport;
@@ -64,6 +66,7 @@ public class ExtendedLoadingBarChart extends Composite implements IExtendedPartU
 	private Composite control;
 	private UserSelection userSelection = new UserSelection();
 	private ISamplesPCA<IVariable, ISample> samples = null;
+	private boolean initialDraw = true;
 
 	public ExtendedLoadingBarChart(Composite parent, int style) {
 
@@ -200,21 +203,7 @@ public class ExtendedLoadingBarChart extends Composite implements IExtendedPartU
 				if(evaluationPCA != null) {
 
 					double xValue = baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS).getDataCoordinate(event.x);
-					IResultsMVA results = evaluationPCA.getResults();
-					List<IVariable> variables = results.getExtractedVariables();
-					List<double[]> loadings = results.getLoadingVectors();
-					List<VariableLoading> variableLoadings = new ArrayList<>();
-					for(int i = 0; i < variables.size(); i++) {
-						IVariable variable = variables.get(i);
-						if(currentPC < loadings.size()) {
-							double loading = loadings.get(currentPC)[i];
-							String variableName = variable.getValue();
-							variableLoadings.add(new VariableLoading(variableName, loading));
-						}
-
-					}
-
-					variableLoadings.sort(Comparator.comparingDouble(VariableLoading::getLoading).reversed());
+					List<VariableLoading> variableLoadings = getVariableLoadingList();
 					int barIndex = (int)Math.round(xValue);
 					if(barIndex >= 0 && barIndex < variableLoadings.size()) {
 						String variableName = variableLoadings.get(barIndex).getVariableName();
@@ -318,21 +307,7 @@ public class ExtendedLoadingBarChart extends Composite implements IExtendedPartU
 						pXStart = pXStop;
 						pXStop = flip;
 					}
-					IResultsMVA results = evaluationPCA.getResults();
-					List<IVariable> variables = results.getExtractedVariables();
-					List<double[]> loadings = results.getLoadingVectors();
-					List<VariableLoading> variableLoadings = new ArrayList<>();
-					for(int i = 0; i < variables.size(); i++) {
-						IVariable variable = variables.get(i);
-						if(currentPC < loadings.size()) {
-							double loading = loadings.get(currentPC)[i];
-							String variableName = variable.getValue();
-							variableLoadings.add(new VariableLoading(variableName, loading));
-						}
-
-					}
-
-					variableLoadings.sort(Comparator.comparingDouble(VariableLoading::getLoading).reversed());
+					List<VariableLoading> variableLoadings = getVariableLoadingList();
 					if(pXStart < 0) {
 						pXStart = 0;
 					} else if(pXStop < 0) {
@@ -359,6 +334,94 @@ public class ExtendedLoadingBarChart extends Composite implements IExtendedPartU
 
 			}
 
+		});
+		chartSettings.addHandledEventProcessor(new IHandledEventProcessor() {
+
+			@Override
+			public int getEvent() {
+
+				return IMouseSupport.EVENT_MOUSE_DOUBLE_CLICK;
+			}
+
+			@Override
+			public int getButton() {
+
+				return IMouseSupport.MOUSE_BUTTON_LEFT;
+			}
+
+			@Override
+			public int getStateMask() {
+
+				return SWT.NONE;
+			}
+
+			@Override
+			public void handleEvent(BaseChart baseChart, Event event) {
+
+				if(evaluationPCA != null) {
+					int clickIndex = (int)baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS).getDataCoordinate(event.x);
+
+					List<VariableLoading> variableLoadings = getVariableLoadingList();
+					List<IVariable> highlightedVariables = new ArrayList<>();
+					List<IVariable> variablesHighlighted = evaluationPCA.getHighlightedVariables();
+
+					String currentVariableName = variableLoadings.get(clickIndex).getVariableName();
+					int variableIndex = IntStream.range(0, variablesHighlighted.size()).filter(x -> variablesHighlighted.get(x).getValue().equals(currentVariableName)).findFirst().orElse(-1);
+					if(variableIndex == -1) {
+						highlightedVariables.add(samples.getVariables().stream().filter(x -> x.getValue().equals(currentVariableName)).findFirst().get());
+						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGBAR_VARIABLE, highlightedVariables.toArray());
+					} else {
+						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGBAR_VARIABLE, highlightedVariables.toArray());
+					}
+				}
+				userSelection.reset();
+				userSelection.setSingleClick(false);
+			}
+		});
+
+		chartSettings.addHandledEventProcessor(new IHandledEventProcessor() {
+
+			@Override
+			public int getEvent() {
+
+				return IMouseSupport.EVENT_MOUSE_DOUBLE_CLICK;
+			}
+
+			@Override
+			public int getButton() {
+
+				return IMouseSupport.MOUSE_BUTTON_LEFT;
+			}
+
+			@Override
+			public int getStateMask() {
+
+				return SWT.MOD1;
+			}
+
+			@Override
+			public void handleEvent(BaseChart baseChart, Event event) {
+
+				if(evaluationPCA != null) {
+					int clickIndex = (int)baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS).getDataCoordinate(event.x);
+
+					List<VariableLoading> variableLoadings = getVariableLoadingList();
+					List<IVariable> variablesHighlighted = evaluationPCA.getHighlightedVariables();
+
+					String currentVariableName = variableLoadings.get(clickIndex).getVariableName();
+					int variableIndex = IntStream.range(0, variablesHighlighted.size()).filter(x -> variablesHighlighted.get(x).getValue().equals(currentVariableName)).findFirst().orElse(-1);
+					if(variableIndex == -1) {
+						variablesHighlighted.add(samples.getVariables().stream().filter(x -> x.getValue().equals(currentVariableName)).findFirst().get());
+						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGBAR_VARIABLE, variablesHighlighted.toArray());
+					} else {
+						variablesHighlighted.remove(variableIndex);
+						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGBAR_VARIABLE, variablesHighlighted.toArray());
+					}
+				}
+				userSelection.reset();
+				userSelection.setSingleClick(false);
+
+			}
 		});
 
 		chart.applySettings(chartSettings);
@@ -431,7 +494,25 @@ public class ExtendedLoadingBarChart extends Composite implements IExtendedPartU
 		LoadingBarChart chart = chartControl.get();
 		if(chart != null) {
 			if(evaluationPCA != null) {
+
+				BaseChart baseChart = chart.getBaseChart();
+				double xRangeStart = baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS).getRange().lower;
+				double xRangeEnd = baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS).getRange().upper;
+				double yRangeStart = baseChart.getAxisSet().getYAxis(BaseChart.ID_PRIMARY_Y_AXIS).getRange().lower;
+				double yRangeEnd = baseChart.getAxisSet().getYAxis(BaseChart.ID_PRIMARY_Y_AXIS).getRange().upper;
+
+				if(initialDraw) {
+					xRangeEnd = evaluationPCA.getResults().getExtractedVariables().size();
+					yRangeStart = DoubleStream.of(evaluationPCA.getResults().getLoadingVectors().get(currentPC)).max().getAsDouble();
+					yRangeEnd = DoubleStream.of(evaluationPCA.getResults().getLoadingVectors().get(currentPC)).min().getAsDouble();
+					initialDraw = false;
+				}
 				chart.setInput(evaluationPCA, comboPrincipalComponent.getSelectionIndex());
+
+				baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS).setRange(new Range(xRangeStart, xRangeEnd));
+				baseChart.getAxisSet().getYAxis(BaseChart.ID_PRIMARY_Y_AXIS).setRange(new Range(yRangeStart, yRangeEnd));
+				baseChart.redraw();
+
 			} else {
 				chart.setInput(null, 0);
 			}
@@ -477,6 +558,26 @@ public class ExtendedLoadingBarChart extends Composite implements IExtendedPartU
 			return true;
 		}
 		return false;
+	}
+
+	private List<VariableLoading> getVariableLoadingList() {
+
+		IResultsMVA results = evaluationPCA.getResults();
+		List<IVariable> variables = results.getExtractedVariables();
+		List<double[]> loadings = results.getLoadingVectors();
+		List<VariableLoading> variableLoadings = new ArrayList<>();
+		for(int i = 0; i < variables.size(); i++) {
+			IVariable variable = variables.get(i);
+			if(currentPC < loadings.size()) {
+				double loading = loadings.get(currentPC)[i];
+				String variableName = variable.getValue();
+				variableLoadings.add(new VariableLoading(variableName, loading));
+			}
+
+		}
+
+		variableLoadings.sort(Comparator.comparingDouble(VariableLoading::getLoading).reversed());
+		return variableLoadings;
 	}
 
 	private void updateOnFocus() {
