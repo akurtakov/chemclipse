@@ -80,6 +80,10 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.PeakScanListUIConfig.Inter
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.IOperationHistory;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
+import org.eclipse.jface.bindings.TriggerSequence;
+import org.eclipse.jface.bindings.keys.KeySequence;
+import org.eclipse.jface.bindings.keys.KeyStroke;
+import org.eclipse.jface.bindings.keys.SWTKeySupport;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.window.Window;
@@ -99,6 +103,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swtchart.extensions.core.IKeyboardSupport;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.contexts.IContextService;
+import org.eclipse.ui.keys.IBindingService;
 
 public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI, ConfigurableUI<PeakScanListUIConfig> {
 
@@ -107,6 +113,11 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 	private static final String MENU_CATEGORY = "Peaks/Scans";
 	private static final String DESCRIPTION_PEAKS = "Number Peaks:";
 	private static final String DESCRIPTION_SCANS = "Scans:";
+
+	private static final String KEY_CLASS_PREFIX = "org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList.";
+
+	private IContextService contextService = (IContextService)PlatformUI.getWorkbench().getService(IContextService.class);
+	private IBindingService bindingService = PlatformUI.getWorkbench().getService(IBindingService.class);
 
 	private AtomicReference<Composite> toolbarMain = new AtomicReference<>();
 	private AtomicReference<Button> buttonToolbarInfo = new AtomicReference<>();
@@ -138,6 +149,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 	public ExtendedPeakScanListUI(Composite parent, int style) {
 
 		super(parent, style);
+		contextService.activateContext("org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList");
 		createControl();
 	}
 
@@ -454,30 +466,28 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 			@Override
 			public void handleEvent(ExtendedTableViewer extendedTableViewer, KeyEvent e) {
 
-				if(e.keyCode == SWT.DEL) {
+				if(matchesKeyPress("InternalStandard", e)) {
+					modifyInternalStandards(display);
+				} else if(matchesKeyPress("Classifier", e)) {
+					modifyClassifier(display);
+				} else if(matchesKeyPress("DeleteTargets", e)) {
+					deleteTargetsAll(e.display);
+				} else if(matchesKeyPress("Unknown", e)) {
+					addTargetsUnknown(e.display);
+				} else if(matchesKeyPress("Query", e)) {
+					scanIdentifierControl.get().runIdentification(e.display);
+					tableViewer.get().refresh();
+					UpdateNotifierUI.update(display, chromatogramSelection);
+				} else if(matchesKeyPress("ActiveAnalysis", e)) {
+					setPeaksActiveForAnalysis(true);
+				} else if(matchesKeyPress("InactiveAnalysis", e)) {
+					setPeaksActiveForAnalysis(false);
+				} else if(e.keyCode == SWT.DEL) {
 					deletePeaksOrIdentifications(display);
 				} else if((e.stateMask & SWT.MOD1) == SWT.MOD1) {
-					if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_I) {
-						if((e.stateMask & SWT.MOD3) == SWT.MOD3) {
-							setPeaksActiveForAnalysis(false); // CTRL + ALT + i
-						} else {
-							setPeaksActiveForAnalysis(true); // CTRL + i
-						}
-					} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_S) {
-						modifyInternalStandards(display); // CTRL + s
-					} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_G) {
-						modifyClassifier(display); // CTRL + g
-					} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_D) {
-						deleteTargetsAll(e.display); // CTRL + d
-					} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_U) {
-						addTargetsUnknown(e.display); // CTRL + u
-					} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_Q) {
-						scanIdentifierControl.get().runIdentification(e.display); // CTRL + q
-						tableViewer.get().refresh();
-						UpdateNotifierUI.update(display, chromatogramSelection);
-					} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_A) {
+					if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_A) {
 						if(showPeakProfilesSelectionAll) {
-							propagateSelection(display);
+							propagateSelection(display); // CTRL + A
 						}
 					}
 				} else {
@@ -485,6 +495,18 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 				}
 			}
 		});
+	}
+
+	private boolean matchesKeyPress(String commandSuffix, KeyEvent e) {
+
+		TriggerSequence triggerSequence = bindingService.getBestActiveBindingFor(KEY_CLASS_PREFIX + commandSuffix);
+		if(triggerSequence instanceof KeySequence keySequence) {
+			KeyStroke[] bindingStrokes = keySequence.getKeyStrokes();
+			int accelerator = SWTKeySupport.convertEventToUnmodifiedAccelerator(e);
+			KeyStroke eventStroke = SWTKeySupport.convertAcceleratorToKeyStroke(accelerator);
+			return bindingStrokes.length > 0 && bindingStrokes[0].equals(eventStroke);
+		}
+		return false;
 	}
 
 	private IOperationHistory getOperationHistory() {
