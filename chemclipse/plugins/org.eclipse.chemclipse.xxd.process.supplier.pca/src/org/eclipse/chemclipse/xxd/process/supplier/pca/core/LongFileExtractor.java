@@ -276,7 +276,6 @@ public class LongFileExtractor {
 									if(classification.equals("1")) {
 										if(!filterFileNames.contains(sampleName)) {
 											sampleName = sampleName + "_F";
-											sampleDetails = "Filter File Name exists in DB!";
 										}
 										sample = new Sample(sampleName, sampleDetails, groupName, classification, description);
 										sampleMap.put(sampleName, sample);
