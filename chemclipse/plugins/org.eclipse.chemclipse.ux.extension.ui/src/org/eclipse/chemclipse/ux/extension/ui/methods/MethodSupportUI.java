@@ -35,7 +35,6 @@ import org.eclipse.chemclipse.processing.methods.IProcessEntry;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
 import org.eclipse.chemclipse.processing.methods.ListProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
-import org.eclipse.chemclipse.rcp.app.ui.console.MessageConsoleAppender;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
@@ -242,7 +241,6 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 
 				File file = getFile(getProcessMethod());
 				if(file != null) {
-					MessageConsoleAppender.printLine(ExtensionMessages.editMethod + ": " + file.getAbsolutePath());
 					openProcessMethodEditor(file);
 				}
 			}
@@ -308,7 +306,6 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 												 * Open the editor
 												 */
 												updateInput();
-												MessageConsoleAppender.printLine("Copied Method: " + fileSink.getAbsolutePath());
 												openProcessMethodEditor(fileSink);
 											}
 										}
@@ -501,7 +498,6 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 				PreferenceSupplier.setSelectedMethodName(file.getName());
 				if(openEditor) {
 					updateInput();
-					MessageConsoleAppender.printLine("New Method: " + file.getAbsolutePath());
 					openProcessMethodEditor(file);
 				}
 			} else {

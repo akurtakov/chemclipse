@@ -53,10 +53,6 @@
    </requires>
 
    <plugin
-         id="com.ibm.icu"
-         version="0.0.0"/>
-
-   <plugin
          id="org.apache.lucene.core"
          version="0.0.0"/>
 
@@ -210,10 +206,6 @@
 
    <plugin
          id="org.eclipse.ui.intro.quicklinks"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.jdt.core.compiler.batch"
          version="0.0.0"/>
 
    <plugin

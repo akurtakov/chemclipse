@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,12 +13,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.handlers;
 
-import jakarta.inject.Named;
-
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.progress.core.InfoType;
 import org.eclipse.chemclipse.progress.core.StatusLineLogger;
-import org.eclipse.chemclipse.rcp.app.ui.console.MessageConsoleAppender;
 import org.eclipse.chemclipse.rcp.app.undo.UndoContextFactory;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
@@ -34,6 +31,8 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.widgets.Shell;
+
+import jakarta.inject.Named;
 
 public class RedoOperationHandler {
 
@@ -66,7 +65,6 @@ public class RedoOperationHandler {
 			} finally {
 				shell.setCursor(cursor);
 				StatusLineLogger.setInfo(InfoType.MESSAGE, ExtensionMessages.redoOperationFinished);
-				MessageConsoleAppender.printDone(ExtensionMessages.redoOperationFinished);
 			}
 		});
 	}

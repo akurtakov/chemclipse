@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -31,7 +31,6 @@ import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
 import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
-import org.eclipse.chemclipse.rcp.app.ui.console.MessageConsoleAppender;
 import org.eclipse.chemclipse.ux.extension.ui.editors.ExtendedMethodUI;
 import org.eclipse.chemclipse.ux.extension.ui.methods.SettingsUIProvider;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
@@ -65,10 +64,7 @@ public class MetaProcessorSettingsAdapterFactory implements IAdapterFactory, Set
 			this.preferences = preferences;
 
 			processorSettings = preferences.getSettings();
-			extendedMethodUI = new ExtendedMethodUI(parent, SWT.READ_ONLY, Activator.getProcessSupplierContext(),
-					(processEntry, supplierContext) -> processorSettings.getProcessorPreferences(processEntry,
-							processEntry.getPreferences(supplierContext)),
-					processorSettings.getProcessMethod().getDataCategories().toArray(new DataCategory[0]));
+			extendedMethodUI = new ExtendedMethodUI(parent, SWT.READ_ONLY, Activator.getProcessSupplierContext(), (processEntry, supplierContext) -> processorSettings.getProcessorPreferences(processEntry, processEntry.getPreferences(supplierContext)), processorSettings.getProcessMethod().getDataCategories().toArray(new DataCategory[0]));
 			/*
 			 * Process Method and Settings
 			 */
@@ -233,7 +229,6 @@ public class MetaProcessorSettingsAdapterFactory implements IAdapterFactory, Set
 							MethodConverter.store(byteArrayOutputStream, "", processMethod, new ProcessingInfo<>(), new NullProgressMonitor());
 							fileOutputStream.write(byteArrayOutputStream.toByteArray());
 							fileOutputStream.flush();
-							MessageConsoleAppender.printDone("Method saved (UUID): " + processMethod.getUUID() + " => " + file.getAbsolutePath());
 						}
 					} catch(FileNotFoundException e) {
 						logger.warn(e);
