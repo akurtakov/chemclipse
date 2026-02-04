@@ -400,8 +400,8 @@ public interface IApplicationImage extends IApplicationImageProvider {
 	String IMAGE_START_PROCESSING = "startProcessing.gif";
 	String IMAGE_END_PROCESSING = "endProcessing.gif";
 
-	String IMAGE_RESULTS = "measurementResults.gif";
-	String IMAGE_MEASUREMENT_RESULTS_DEFAULT = "measurementResultsDefault.gif";
+	String IMAGE_RESULTS = "measurementResults.svg";
+	String IMAGE_MEASUREMENT_RESULTS_DEFAULT = "measurementResults.svg";
 	String IMAGE_MEASUREMENT_RESULTS_ACTIVE = "measurementResultsActive.gif";
 
 	String IMAGE_PLATE_PCR = "plate-pcr.png";
