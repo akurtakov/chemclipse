@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.wizards;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
@@ -60,7 +61,6 @@ import org.eclipse.swtchart.extensions.core.SeriesData;
 
 public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage {
 
-	private boolean dataAlreadyLoaded = false;
 	private BarChart chart;
 	private Samples samples;
 	private Spinner sampleSpinner;
@@ -74,6 +74,9 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 	private java.util.List<IDataInputEntry> mainFile;
 	private java.util.List<IDataInputEntry> filterFile;
 	private java.util.List<ISample> samplesToRemove;
+
+	private String previousMainFilePath = null;
+	private String previousFilterFilePath = null;
 
 	protected FilesLongFormatFilterWizardPage() {
 
@@ -157,14 +160,6 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		createInExClusionSelection(container);
 		createGroupSelection(container);
 		createMatchCount(container);
-
-		/*
-		 * Match Label
-		 */
-
-		/*
-		 * Event Handler
-		 */
 
 	}
 
@@ -382,6 +377,10 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 			boolean includeOK = includeList.getItemCount() == 0;
 
 			for(String rule : includeList.getItems()) {
+				if(matches(sample.getSampleName(), rule)) {
+					includeOK = true;
+					break;
+				}
 				if(matches(sample.getSampleDetails(), rule)) {
 					includeOK = true;
 					break;
@@ -390,6 +389,10 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 
 			boolean excludeHit = false;
 			for(String rule : excludeList.getItems()) {
+				if(matches(sample.getSampleName(), rule)) {
+					excludeHit = true;
+					break;
+				}
 				if(matches(sample.getSampleDetails(), rule)) {
 					excludeHit = true;
 					break;
@@ -403,7 +406,10 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 			if(includeOK && !excludeHit && groupIncluded) {
 				matched++;
 			} else {
-				samplesToRemove.add(sample);
+				if(sample.getClassification() == "0") {
+					samplesToRemove.add(sample);
+				}
+
 			}
 		}
 		int total = samples.getSamples().size();
@@ -417,11 +423,36 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		return sample.toLowerCase().contains(rule.toLowerCase());
 	}
 
+	private boolean filesHaveChanged() {
+
+		String currentMainPath = getFilePath(mainFile);
+		String currentFilterPath = getFilePath(filterFile);
+
+		boolean changed = !Objects.equals(previousMainFilePath, currentMainPath) || !Objects.equals(previousFilterFilePath, currentFilterPath);
+
+		if(changed) {
+			previousMainFilePath = currentMainPath;
+			previousFilterFilePath = currentFilterPath;
+		}
+
+		return changed;
+	}
+
+	private String getFilePath(java.util.List<IDataInputEntry> fileList) {
+
+		if(fileList == null || fileList.isEmpty()) {
+			return null;
+		}
+		return fileList.get(0).getInputFile();
+	}
+
 	@Override
 	public void setVisible(boolean visible) {
 
 		super.setVisible(visible);
 		if(visible) {
+			boolean needsReload = filesHaveChanged(); // || !dataAlreadyLoaded;
+
 			if(filterFile.size() != 0) {
 				chart.setVisible(true);
 				GridData gd = (GridData)chart.getLayoutData();
@@ -430,14 +461,21 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 				GridData gdGroup = (GridData)sampleSpinnerGroup.getLayoutData();
 				gdGroup.exclude = false;
 
-				extractor = new LongFileExtractor(mainFile, filterFile, 100);
-				extractInitial = sampleSpinner.getSelection();
+				if(needsReload) {
+					extractor = new LongFileExtractor(mainFile, filterFile, 100);
+					extractInitial = sampleSpinner.getSelection();
+				}
 				chart.getParent().layout(true, true);
-				startLoadingData();
+
+				if(needsReload) {
+					startLoadingData();
+				}
 			} else {
 				chart.setVisible(false);
 
-				extractor = new LongFileExtractor(mainFile, filterFile, 100);
+				if(needsReload) {
+					extractor = new LongFileExtractor(mainFile, filterFile, 100);
+				}
 				GridData gd = (GridData)chart.getLayoutData();
 				gd.exclude = true;
 
@@ -446,20 +484,14 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 				gdGroup.exclude = true;
 				chart.getParent().layout(true, true);
 
-				startLoadingData();
+				if(needsReload) {
+					startLoadingData();
+				}
 			}
-
-		} else {
-			samples = null;
-			dataAlreadyLoaded = false;
 		}
 	}
 
 	private void startLoadingData() {
-
-		if(dataAlreadyLoaded) {
-			return;
-		}
 
 		Job loadJob = new Job("Loading data") {
 
@@ -483,11 +515,11 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 					java.util.List<String> groups = samples.getSamples().stream().map(x -> x.getDescription()).distinct().toList();
 					groupViewer.setInput(groups);
 					groupViewer.setAllChecked(true);
+
 					updateMatchCount();
 
 				});
 
-				dataAlreadyLoaded = true;
 				return Status.OK_STATUS;
 			}
 
