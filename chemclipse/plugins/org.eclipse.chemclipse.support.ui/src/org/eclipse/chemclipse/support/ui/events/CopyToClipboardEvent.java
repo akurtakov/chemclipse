@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,14 +21,12 @@ import org.eclipse.swt.widgets.Display;
 
 public class CopyToClipboardEvent implements IKeyEventProcessor {
 
-	public static final int KEY_CODE_C = 99;
-
 	private CopyToClipboardProvider copyToClipboardProvider = new CopyToClipboardProvider();
 
 	@Override
 	public void handleEvent(ExtendedTableViewer extendedTableViewer, KeyEvent e) {
 
-		if(e.stateMask == SWT.MOD1 && e.keyCode == KEY_CODE_C) {
+		if(e.stateMask == SWT.MOD1 && e.keyCode == 'c') {
 			Clipboard clipboard = new Clipboard(Display.getDefault());
 			copyToClipboardProvider.copyToClipboard(clipboard, extendedTableViewer);
 			clipboard.dispose();

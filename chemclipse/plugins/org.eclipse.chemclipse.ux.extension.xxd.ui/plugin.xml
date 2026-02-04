@@ -751,4 +751,108 @@
         </description>
     </fontDefinition>
 </extension>
+<extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="Peaks/Scans"
+            description="Related to peaks and scans in chromatography"
+            id="org.eclipse.chemclipse.ux.extension.xxd.ui.PeaksScans">
+      </category>
+      <command
+            name="Query Database"
+            description="Query against a reference database"
+            categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeaksScans"
+            id="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList.Query">
+      </command>
+      <command
+            name="Mark Unknown"
+            description="Set as unknown and annotate with highest masses"
+            categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeaksScans"
+            id="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList.Unknown">
+      </command>
+      <command
+            name="Delete Targets"
+            description="Clear all database query matches."
+            categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeaksScans"
+            id="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList.DeleteTargets">
+      </command>
+      <command
+            name="Classifier"
+            description="Edit the list of classifiers."
+            categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeaksScans"
+            id="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList.Classifier">
+      </command>
+      <command
+            name="Internal Standard"
+            description="Set internal standards."
+            categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeaksScans"
+            id="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList.InternalStandard">
+      </command>
+      <command
+            name="Active Analysis"
+            description="Set as active for analysis."
+            categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeaksScans"
+            id="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList.ActiveAnalysis">
+      </command>
+      <command
+            name="Inactivate Analysis"
+            description="Set as inactive for analysis."
+            categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeaksScans"
+            id="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList.InactiveAnalysis">
+      </command>
+   </extension>
+<extension
+	point="org.eclipse.ui.contexts">
+	<context
+		name="Peak/Scan List"
+		description="A list of peaks and scans"
+		id="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList"
+		parentId="org.eclipse.ui.contexts.window">
+	</context>
+</extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList.Query"
+            contextId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+Q">
+      </key>
+      <key
+            commandId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList.Unknown"
+            contextId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+U">
+      </key>
+      <key
+            commandId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList.DeleteTargets"
+            contextId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+D">
+      </key>
+      <key
+            commandId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList.Classifier"
+            contextId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+G">
+      </key>
+      <key
+            commandId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList.InternalStandard"
+            contextId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+S">
+      </key>
+      <key
+            commandId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList.ActiveAnalysis"
+            contextId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+I">
+      </key>
+      <key
+            commandId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList.InactiveAnalysis"
+            contextId="org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+M3+I">
+      </key>
+   </extension>
 </plugin>

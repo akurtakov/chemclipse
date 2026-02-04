@@ -50,7 +50,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swtchart.extensions.clipboard.ImageArrayTransfer;
-import org.eclipse.swtchart.extensions.core.IKeyboardSupport;
 
 public class MoleculeUI extends Composite implements IExtendedPartUI {
 
@@ -178,7 +177,7 @@ public class MoleculeUI extends Composite implements IExtendedPartUI {
 			@Override
 			public void keyReleased(KeyEvent e) {
 
-				if(e.stateMask == SWT.MOD1 && e.keyCode == IKeyboardSupport.KEY_CODE_LC_C) {
+				if(e.stateMask == SWT.MOD1 && e.keyCode == 'c') {
 					ImageData imageData = imageMolecule.getImageData();
 					if(imageData != null) {
 						Clipboard clipboard = new Clipboard(e.display);
