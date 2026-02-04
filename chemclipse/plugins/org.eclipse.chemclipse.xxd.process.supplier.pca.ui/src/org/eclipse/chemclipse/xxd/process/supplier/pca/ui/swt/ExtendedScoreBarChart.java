@@ -49,6 +49,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Scrollable;
 import org.eclipse.swtchart.ICustomPaintListener;
 import org.eclipse.swtchart.IPlotArea;
+import org.eclipse.swtchart.Range;
 import org.eclipse.swtchart.extensions.core.BaseChart;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.IMouseSupport;
@@ -64,6 +65,7 @@ public class ExtendedScoreBarChart extends Composite implements IExtendedPartUI 
 	private Composite control;
 	private UserSelection userSelection = new UserSelection();
 	private ISamplesPCA<IVariable, ISample> samples = null;
+	private boolean initialDraw = true;
 
 	public ExtendedScoreBarChart(Composite parent, int style) {
 
@@ -195,21 +197,7 @@ public class ExtendedScoreBarChart extends Composite implements IExtendedPartUI 
 				if(evaluationPCA != null) {
 
 					double xValue = baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS).getDataCoordinate(event.x);
-					IResultsMVA results = evaluationPCA.getResults();
-					List<IResultMVA> resultList = results.getPcaResultList();
-					List<SampleScore> sampleScores = new ArrayList<>();
-					for(IResultMVA result : resultList) {
-						ISample sample = result.getSample();
-						double[] scoreMatrix = result.getScoreVector();
-
-						if(currentPC < scoreMatrix.length) {
-							double score = scoreMatrix[currentPC];
-							String sampleName = sample.getSampleName();
-							sampleScores.add(new SampleScore(sampleName, score));
-						}
-					}
-
-					sampleScores.sort(Comparator.comparingDouble(SampleScore::getScore).reversed());
+					List<SampleScore> sampleScores = getSampleScoreList();
 					int barIndex = (int)Math.round(xValue);
 					if(barIndex >= 0 && barIndex < sampleScores.size()) {
 						String sampleName = sampleScores.get(barIndex).getSampleName();
@@ -313,21 +301,7 @@ public class ExtendedScoreBarChart extends Composite implements IExtendedPartUI 
 						pXStart = pXStop;
 						pXStop = flip;
 					}
-					IResultsMVA results = evaluationPCA.getResults();
-					List<IResultMVA> resultList = results.getPcaResultList();
-					List<SampleScore> sampleScores = new ArrayList<>();
-
-					for(IResultMVA result : resultList) {
-						ISample sample = result.getSample();
-						double[] scoreMatrix = result.getScoreVector();
-
-						if(currentPC < scoreMatrix.length) {
-							double score = scoreMatrix[currentPC];
-							String sampleName = sample.getSampleName();
-							sampleScores.add(new SampleScore(sampleName, score));
-						}
-					}
-					sampleScores.sort(Comparator.comparingDouble(SampleScore::getScore).reversed());
+					List<SampleScore> sampleScores = getSampleScoreList();
 					if(pXStart < 0) {
 						pXStart = 0;
 					} else if(pXStop < 0) {
@@ -395,6 +369,8 @@ public class ExtendedScoreBarChart extends Composite implements IExtendedPartUI 
 						UpdateNotifierUI.update(event.display, IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREBAR_SAMPLE, highlightedSamples.toArray());
 					}
 				}
+				userSelection.reset();
+				userSelection.setSingleClick(false);
 			}
 		});
 		chartSettings.addHandledEventProcessor(new IHandledEventProcessor() {
@@ -437,6 +413,7 @@ public class ExtendedScoreBarChart extends Composite implements IExtendedPartUI 
 					}
 				}
 				userSelection.reset();
+				userSelection.setSingleClick(false);
 			}
 		});
 
@@ -510,7 +487,25 @@ public class ExtendedScoreBarChart extends Composite implements IExtendedPartUI 
 		ScoreBarChart chart = chartControl.get();
 		if(chart != null) {
 			if(evaluationPCA != null) {
+
+				BaseChart baseChart = chart.getBaseChart();
+				double xRangeStart = baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS).getRange().lower;
+				double xRangeEnd = baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS).getRange().upper;
+				double yRangeStart = baseChart.getAxisSet().getYAxis(BaseChart.ID_PRIMARY_Y_AXIS).getRange().lower;
+				double yRangeEnd = baseChart.getAxisSet().getYAxis(BaseChart.ID_PRIMARY_Y_AXIS).getRange().upper;
+
+				if(initialDraw) {
+					xRangeEnd = evaluationPCA.getResults().getPcaResultList().size();
+					yRangeStart = getSampleScoreList().stream().mapToDouble(x -> x.getScore()).max().getAsDouble();
+					yRangeEnd = getSampleScoreList().stream().mapToDouble(x -> x.getScore()).min().getAsDouble();
+					initialDraw = false;
+				}
+
 				chart.setInput(evaluationPCA, comboPrincipalComponent.getSelectionIndex());
+
+				baseChart.getAxisSet().getXAxis(BaseChart.ID_PRIMARY_X_AXIS).setRange(new Range(xRangeStart, xRangeEnd));
+				baseChart.getAxisSet().getYAxis(BaseChart.ID_PRIMARY_Y_AXIS).setRange(new Range(yRangeStart, yRangeEnd));
+				baseChart.redraw();
 			} else {
 				chart.setInput(null, 0);
 			}
