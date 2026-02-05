@@ -30,6 +30,7 @@ import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.support.CalculationType;
 import org.eclipse.chemclipse.model.targets.TargetSupport;
+import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
@@ -54,6 +55,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.Clipboard;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FillLayout;
@@ -72,10 +75,9 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 
 	private static final Logger logger = Logger.getLogger(ExtendedSubtractScanUI.class);
 
-	private TabFolder tabFolder;
-	private ScanChartUI scanChartUI;
-	private ExtendedScanTableUI extendedScanTableUI;
-
+	private AtomicReference<TabFolder> tabFolderControl = new AtomicReference<>();
+	private AtomicReference<ScanChartUI> scanChartControl = new AtomicReference<>();
+	private AtomicReference<ExtendedScanTableUI> extendedScanTableControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonSelectedScanControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonCombinedScanControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonComparisonScanControl = new AtomicReference<>();
@@ -155,7 +157,7 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		composite.setLayout(new GridLayout(1, true));
 
-		tabFolder = new TabFolder(composite, SWT.BOTTOM);
+		TabFolder tabFolder = new TabFolder(composite, SWT.BOTTOM);
 		tabFolder.setBackground(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
 		tabFolder.addSelectionListener(new SelectionAdapter() {
@@ -167,6 +169,7 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 			}
 		});
 
+		tabFolderControl.set(tabFolder);
 		createScanChart(tabFolder);
 		createScanTable(tabFolder);
 	}
@@ -179,8 +182,9 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 		composite.setLayout(new GridLayout(1, true));
 		tabItem.setControl(composite);
 
-		scanChartUI = new ScanChartUI(composite, SWT.BORDER);
+		ScanChartUI scanChartUI = new ScanChartUI(composite, SWT.BORDER);
 		scanChartUI.setLayoutData(new GridData(GridData.FILL_BOTH));
+		scanChartControl.set(scanChartUI);
 	}
 
 	private void createScanTable(TabFolder tabFolder) {
@@ -192,12 +196,30 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 		composite.setLayout(new GridLayout(1, true));
 		tabItem.setControl(composite);
 
-		extendedScanTableUI = new ExtendedScanTableUI(composite, SWT.NONE);
+		ExtendedScanTableUI extendedScanTableUI = new ExtendedScanTableUI(composite, SWT.NONE);
 		extendedScanTableUI.setLayoutData(new GridData(GridData.FILL_BOTH));
-		extendedScanTableUI.forceEnableEditModus(true);
-		extendedScanTableUI.setFireUpdate(false);
+		ScanTableUI scanTableUI = extendedScanTableUI.getScanTableUI();
+		scanTableUI.getTable().addKeyListener(new KeyAdapter() {
 
-		extendedScanTableUI.addEditListener(() -> saveSessionMassSpectrum(null, scanMSD));
+			@Override
+			public void keyReleased(KeyEvent e) {
+
+				if(e.keyCode == SWT.DEL) {
+					if(scanMSD != null) {
+						for(Object object : scanTableUI.getStructuredSelection().toArray()) {
+							if(object instanceof IIon ion) {
+								scanMSD.removeIon(ion);
+							}
+						}
+						saveSessionMassSpectrum(null, scanMSD);
+						updateScanData(scanMSD);
+					}
+				}
+			}
+
+		});
+
+		extendedScanTableControl.set(extendedScanTableUI);
 	}
 
 	private void createAddSelectedScanButton(Composite parent) {
@@ -374,22 +396,22 @@ public class ExtendedSubtractScanUI extends Composite implements IExtendedPartUI
 
 	private void updateScanData(IScanMSD scanMSD) {
 
-		if(tabFolder != null && scanChartUI != null) {
-			/*
-			 * Chart
-			 */
-			if(scanMSD == null) {
-				scanChartUI.deleteSeries();
-				scanChartUI.getBaseChart().redraw();
-			} else {
-				scanChartUI.setInput(scanMSD);
-			}
-			/*
-			 * Table
-			 */
-			if(extendedScanTableUI.isVisible()) {
-				extendedScanTableUI.setInput(scanMSD);
-			}
+		/*
+		 * Chart
+		 */
+		ScanChartUI scanChartUI = scanChartControl.get();
+		if(scanMSD == null) {
+			scanChartUI.deleteSeries();
+			scanChartUI.getBaseChart().redraw();
+		} else {
+			scanChartUI.setInput(scanMSD);
+		}
+		/*
+		 * Table
+		 */
+		ExtendedScanTableUI extendedScanTableUI = extendedScanTableControl.get();
+		if(extendedScanTableUI.isVisible()) {
+			extendedScanTableUI.setInput(scanMSD);
 		}
 
 		updateWidgets();
