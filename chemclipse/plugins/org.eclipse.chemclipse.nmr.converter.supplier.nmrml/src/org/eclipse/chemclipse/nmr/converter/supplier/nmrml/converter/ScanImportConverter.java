@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.Collection;
 
 import org.eclipse.chemclipse.converter.exceptions.UnknownVersionException;
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.nmr.converter.core.AbstractScanImportConverter;
 import org.eclipse.chemclipse.nmr.converter.core.IScanImportConverter;
@@ -29,6 +30,8 @@ import org.eclipse.chemclipse.processing.core.ProcessingInfo;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ScanImportConverter extends AbstractScanImportConverter implements IScanImportConverter {
+
+	private static final Logger logger = Logger.getLogger(ScanImportConverter.class);
 
 	public ScanImportConverter() {
 
@@ -54,7 +57,8 @@ public class ScanImportConverter extends AbstractScanImportConverter implements 
 				throw new UnknownVersionException();
 			}
 		} catch(IOException e) {
-			processingInfo.addErrorMessage("nmrML", "There was a problem during file import.", e);
+			processingInfo.addErrorMessage("nmrML", "There was a problem during file import.");
+			logger.error(e);
 		}
 		return processingInfo;
 	}

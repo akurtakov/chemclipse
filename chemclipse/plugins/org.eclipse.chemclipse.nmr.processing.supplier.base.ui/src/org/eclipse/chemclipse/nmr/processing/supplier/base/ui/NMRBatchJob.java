@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,7 +25,7 @@ import org.eclipse.chemclipse.model.supplier.IMeasurementProcessSupplier;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.core.DefaultProcessingResult;
-import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.AbstractProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.eclipse.chemclipse.processing.supplier.IProcessExecutionConsumer;
@@ -73,7 +73,7 @@ public class NMRBatchJob implements IRunnableWithProgress {
 		IProcessMethod processMethod = batchJobUI.getMethod().getProcessMethod();
 		ProcessExecutionContext processExecutionContext = new ProcessExecutionContext(monitor, processingResult, processTypeSupport);
 		IProcessExecutionConsumer<Collection<? extends IMeasurement>> consumer = IMeasurementProcessSupplier.createConsumer(measurements);
-		Collection<? extends IMeasurement> results = IProcessEntryContainer.applyProcessEntries(processMethod, processExecutionContext, consumer);
+		Collection<? extends IMeasurement> results = AbstractProcessEntryContainer.applyProcessEntries(processMethod, processExecutionContext, consumer);
 		Display.getDefault().asyncExec(() -> ProcessingInfoPartSupport.getInstance().update(processingResult));
 
 		if(!processingResult.hasErrorMessages()) {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.peak.AbstractPeakIdentifierWSD;
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.settings.IPeakIdentifierSettingsWSD;
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.identifier.IPeakIdentificationResults;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
@@ -26,6 +27,8 @@ import org.eclipse.chemclipse.wsd.model.core.IPeakWSD;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public class PeakIdentifierRemoveUnidentified extends AbstractPeakIdentifierWSD {
+
+	private static final Logger logger = Logger.getLogger(PeakIdentifierRemoveUnidentified.class);
 
 	@Override
 	public IProcessingInfo<IPeakIdentificationResults> identify(List<? extends IPeakWSD> peaks, IPeakIdentifierSettingsWSD peakIdentifierSettings, IProgressMonitor monitor) {
@@ -47,7 +50,8 @@ public class PeakIdentifierRemoveUnidentified extends AbstractPeakIdentifierWSD 
 			}
 			processingInfo.addInfoMessage("Identifier", "Unidentified peaks have been removed.");
 		} catch(Exception e) {
-			processingInfo.addErrorMessage("Identifier", "Failed to remove unidentified peaks.", e);
+			processingInfo.addErrorMessage("Identifier", "Failed to remove unidentified peaks.");
+			logger.error(e);
 		}
 		return processingInfo;
 	}

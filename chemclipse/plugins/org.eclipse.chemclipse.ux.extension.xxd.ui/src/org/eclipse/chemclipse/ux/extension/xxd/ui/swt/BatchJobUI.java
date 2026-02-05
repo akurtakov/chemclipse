@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,6 +17,7 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.handler.IModificationHandler;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.DataCategory;
@@ -42,6 +43,8 @@ import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 
 public class BatchJobUI {
+
+	private static final Logger logger = Logger.getLogger(BatchJobUI.class);
 
 	private Composite composite;
 	private DataListUI dataListUI;
@@ -205,7 +208,8 @@ public class BatchJobUI {
 					monitor.run(true, true, executionRunnable);
 				} catch(InvocationTargetException e) {
 					IProcessingInfo<?> processingInfo = new ProcessingInfo<>();
-					processingInfo.addErrorMessage("BatchJob", "Execution of the job failed", e.getCause());
+					processingInfo.addErrorMessage("BatchJob", "Execution of the job failed");
+					logger.error(e.getCause());
 					ProcessingInfoPartSupport.getInstance().update(processingInfo);
 				} catch(InterruptedException e) {
 					Thread.currentThread().interrupt();

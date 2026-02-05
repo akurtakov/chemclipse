@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -61,10 +61,11 @@ import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IMessageProvider;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
+import org.eclipse.chemclipse.processing.methods.AbstractProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
 import org.eclipse.chemclipse.processing.methods.ProcessEntry;
-import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
+import org.eclipse.chemclipse.processing.supplier.AbstractProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier.SupplierType;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
@@ -739,7 +740,7 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 			processChromatogram(monitor -> executeMethod(getChromatogramSelection(), chromatogramSelection -> {
 
 				DefaultProcessingResult<Object> processingInfo = new DefaultProcessingResult<>();
-				IProcessSupplier.applyProcessor(settings, IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection), new ProcessExecutionContext(monitor, processingInfo, processSupplierContext));
+				AbstractProcessSupplier.applyProcessor(settings, IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection), new ProcessExecutionContext(monitor, processingInfo, processSupplierContext));
 				IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 				updateResult(processingInfo);
 				AuditTrailSupport.updateAuditTrail(chromatogram, processingInfo, processSupplier);
@@ -747,7 +748,8 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 			}), shell);
 		} catch(IOException e) {
 			DefaultProcessingResult<Object> processingInfo = new DefaultProcessingResult<>();
-			processingInfo.addErrorMessage(processSupplier.getName(), "The process method can't be applied.", e);
+			processingInfo.addErrorMessage(processSupplier.getName(), "The process method can't be applied.");
+			logger.error(e);
 			updateResult(processingInfo);
 		} catch(MethodCancelException e) {
 			DefaultProcessingResult<Object> processingInfo = new DefaultProcessingResult<>();
@@ -1187,7 +1189,7 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 		methodSupportUI.setMethodListener((processMethod, monitor) -> executeMethod(chromatogramSelection, chromatogramSelection -> {
 
 			IProcessingInfo<?> processingInfo = new ProcessingInfo<>();
-			IProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, processingInfo, processTypeSupport), IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection));
+			AbstractProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, processingInfo, processTypeSupport), IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection));
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 			updateResult(processingInfo);
 			AuditTrailSupport.updateAuditTrail(chromatogram, processingInfo, processMethod, processTypeSupport);

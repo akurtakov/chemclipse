@@ -38,6 +38,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.csv.QuoteMode;
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.IChromatogramPeak;
 import org.eclipse.chemclipse.model.core.IPeak;
@@ -71,6 +72,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 public class CSVPeakConverter implements IPeakExportConverter, IPeakImportConverter {
 
+	private static final Logger logger = Logger.getLogger(CSVPeakConverter.class);
+
 	public static final Charset CHARSET = StandardCharsets.UTF_8;
 
 	private static final String HEADER_NAME = "Name";
@@ -100,7 +103,8 @@ public class CSVPeakConverter implements IPeakExportConverter, IPeakImportConver
 			}
 		} catch(IOException e) {
 			ProcessingInfo<File> error = new ProcessingInfo<>();
-			error.addErrorMessage(NAME, "Export to CSV failed", e);
+			error.addErrorMessage(NAME, "Export to CSV failed");
+			logger.error(e);
 			return error;
 		}
 		return new ProcessingInfo<>(file);
@@ -158,7 +162,8 @@ public class CSVPeakConverter implements IPeakExportConverter, IPeakImportConver
 			}
 		} catch(ParseException | IOException e) {
 			ProcessingInfo<IPeaksMSD> error = new ProcessingInfo<>();
-			error.addErrorMessage(NAME, "Import failed", e);
+			error.addErrorMessage(NAME, "Import failed.");
+			logger.error(e);
 			return error;
 		}
 	}

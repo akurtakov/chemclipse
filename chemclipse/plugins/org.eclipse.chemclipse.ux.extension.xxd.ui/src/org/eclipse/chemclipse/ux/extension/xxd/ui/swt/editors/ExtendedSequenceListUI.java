@@ -28,7 +28,7 @@ import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.core.IMessageProvider;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
-import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.AbstractProcessEntryContainer;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
@@ -174,7 +174,7 @@ public class ExtendedSequenceListUI extends Composite implements IExtendedPartUI
 						IChromatogramSelection chromatogramSelection = processingInfoChromatogram.getProcessingResult();
 						addSequenceRecordInformation(sequenceRecord, chromatogramSelection.getChromatogram());
 						ProcessingInfo<?> processorInfo = new ProcessingInfo<>();
-						IProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, processorInfo, processSupplierContext), IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection));
+						AbstractProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, processorInfo, processSupplierContext), IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection));
 						chromatogramSelection.getChromatogram().setDirty(true); // TODO: check each entry
 						if(processorInfo.hasErrorMessages()) {
 							processingInfo.addMessages(processorInfo);

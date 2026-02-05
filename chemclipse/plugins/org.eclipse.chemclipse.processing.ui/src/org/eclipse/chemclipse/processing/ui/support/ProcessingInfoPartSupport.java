@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,8 +15,6 @@ package org.eclipse.chemclipse.processing.ui.support;
 
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.processing.core.IMessageProvider;
-import org.eclipse.chemclipse.processing.core.IProcessingMessage;
-import org.eclipse.chemclipse.processing.core.MessageType;
 import org.eclipse.chemclipse.processing.ui.Activator;
 import org.eclipse.chemclipse.support.events.IPerspectiveAndViewIds;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
@@ -68,16 +66,6 @@ public class ProcessingInfoPartSupport {
 
 		if(messageProvider == null) {
 			return;
-		}
-		/*
-		 * Log the errors.
-		 */
-		if(messageProvider.hasErrorMessages()) {
-			for(IProcessingMessage message : messageProvider.getMessages()) {
-				if(message.getMessageType() == MessageType.ERROR) {
-					logger.error(message.getDescription() + ": " + message.getMessage(), message.getException());
-				}
-			}
 		}
 		/*
 		 * Update the message.

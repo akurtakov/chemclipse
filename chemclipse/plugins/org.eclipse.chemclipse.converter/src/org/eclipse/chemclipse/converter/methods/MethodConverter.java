@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -93,7 +93,8 @@ public class MethodConverter {
 				processingInfo = importConverter.convert(file, monitor);
 			} catch(IOException e) {
 				ProcessingInfo<IProcessMethod> info = new ProcessingInfo<>();
-				info.addErrorMessage(NAME_IMPORT, "can't read file " + file, e);
+				info.addErrorMessage(NAME_IMPORT, "can't read file " + file);
+				logger.error(e);
 				return info;
 			}
 		} else {
@@ -158,7 +159,8 @@ public class MethodConverter {
 					IMethodExportConverter exportConverter = getMethodExportConverter(converterId);
 					exportConverter.convert(file, processMethod, processingInfo, monitor);
 				} catch(IOException e) {
-					processingInfo.addErrorMessage(NAME_EXPORT, "An error occurred writing the method file: " + file, e);
+					processingInfo.addErrorMessage(NAME_EXPORT, "An error occurred writing the method file: " + file);
+					logger.error(e);
 				}
 
 				return processingInfo;

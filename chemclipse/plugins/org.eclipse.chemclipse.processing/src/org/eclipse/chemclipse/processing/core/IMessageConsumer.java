@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,56 +23,36 @@ public interface IMessageConsumer {
 
 	default void addErrorMessage(final String description, final String message) {
 
-		addErrorMessage(description, message, null);
-	}
-
-	default void addErrorMessage(final String description, final String message, Throwable t) {
-
-		addMessage(description, message, t, MessageType.ERROR);
-	}
-
-	default void addInfoMessage(final String description, final String message, Throwable t) {
-
-		addMessage(description, message, t, MessageType.INFO);
+		addMessage(description, message, MessageType.ERROR);
 	}
 
 	default void addInfoMessage(final String description, final String message) {
 
-		addInfoMessage(description, message, null);
+		addMessage(description, message, MessageType.INFO);
 	}
 
 	default void addWarnMessage(final String description, final String message) {
 
-		addWarnMessage(description, message, null);
-	}
-
-	default void addWarnMessage(final String description, final String message, Throwable t) {
-
-		addMessage(description, message, t, MessageType.WARN);
+		addMessage(description, message, MessageType.WARN);
 	}
 
 	default void addMessage(final String description, final String message, final MessageType type) {
 
-		addMessage(description, message, null, null, null, type);
-	}
-
-	default void addMessage(final String description, final String message, Throwable t, final MessageType type) {
-
-		addMessage(description, message, null, null, t, type);
+		addMessage(description, message, null, type);
 	}
 
 	default void addMessage(final String description, final String message, final String proposedSolution, final MessageType type) {
 
-		addMessage(description, message, null, proposedSolution, null, type);
+		addMessage(description, message, null, proposedSolution, type);
 	}
 
-	void addMessage(final String description, final String message, final String details, final String proposedSolution, Throwable t, final MessageType type);
+	void addMessage(final String description, final String message, final String details, final String proposedSolution, final MessageType type);
 
 	default void addMessages(IMessageProvider messageProvider) {
 
 		if(messageProvider != null) {
 			for(IProcessingMessage message : messageProvider.getMessages()) {
-				addMessage(message.getDescription(), message.getMessage(), message.getDetails(), message.getProposedSolution(), message.getException(), message.getMessageType());
+				addMessage(message.getDescription(), message.getMessage(), message.getDetails(), message.getProposedSolution(), message.getMessageType());
 			}
 		}
 	}

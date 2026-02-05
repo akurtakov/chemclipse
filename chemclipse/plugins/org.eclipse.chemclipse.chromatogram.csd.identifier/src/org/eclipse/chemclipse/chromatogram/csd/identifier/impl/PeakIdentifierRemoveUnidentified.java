@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,12 +21,15 @@ import org.eclipse.chemclipse.chromatogram.csd.identifier.settings.IPeakIdentifi
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramPeakCSD;
 import org.eclipse.chemclipse.csd.model.core.IPeakCSD;
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.identifier.IPeakIdentificationResults;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public class PeakIdentifierRemoveUnidentified extends AbstractPeakIdentifierCSD {
+
+	private static final Logger logger = Logger.getLogger(PeakIdentifierRemoveUnidentified.class);
 
 	@Override
 	public IProcessingInfo<IPeakIdentificationResults> identify(List<? extends IPeakCSD> peaks, IPeakIdentifierSettingsCSD peakIdentifierSettings, IProgressMonitor monitor) {
@@ -48,7 +51,8 @@ public class PeakIdentifierRemoveUnidentified extends AbstractPeakIdentifierCSD 
 			}
 			processingInfo.addInfoMessage(Messages.identifier, Messages.removedUnidentifiedPeaks);
 		} catch(Exception e) {
-			processingInfo.addErrorMessage(Messages.identifier, Messages.identifierError, e);
+			processingInfo.addErrorMessage(Messages.identifier, Messages.identifierError);
+			logger.error(e);
 		}
 		return processingInfo;
 	}

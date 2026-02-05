@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,6 +19,7 @@ import org.eclipse.chemclipse.chromatogram.wsd.identifier.chromatogram.IChromato
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.io.LocalNucleotideBLAST;
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.settings.LocalIdentifierSettings;
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.identifier.IChromatogramIdentificationResult;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.wsd.model.core.selection.IChromatogramSelectionWSD;
@@ -27,6 +28,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class ChromatogramIdentifierLocal extends AbstractChromatogramIdentifier {
 
 	private static final String DESCRIPTION = "Nucleotide BLAST";
+	private static final Logger logger = Logger.getLogger(ChromatogramIdentifierLocal.class);
 
 	@Override
 	public IProcessingInfo<IChromatogramIdentificationResult> identify(IChromatogramSelectionWSD chromatogramSelection, IChromatogramIdentifierSettings chromatogramIdentifierSettings, IProgressMonitor monitor) {
@@ -38,9 +40,10 @@ public class ChromatogramIdentifierLocal extends AbstractChromatogramIdentifier 
 					LocalNucleotideBLAST.run(chromatogramSelection.getChromatogram(), settings);
 					processingInfo.addInfoMessage(DESCRIPTION, "The chromatogram has been identified.");
 				} catch(IOException e) {
-					processingInfo.addErrorMessage(DESCRIPTION, "Failed to identify chromatogram.", e);
+					processingInfo.addErrorMessage(DESCRIPTION, "Failed to identify chromatogram.");
+					logger.error(e);
 				} catch(InterruptedException e) {
-					processingInfo.addErrorMessage(DESCRIPTION, "Process interrupted.", e);
+					processingInfo.addInfoMessage(DESCRIPTION, "Process aborted.");
 					Thread.currentThread().interrupt();
 				}
 			}

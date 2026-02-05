@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -44,7 +44,7 @@ public class Report2 extends AbstractReport {
 					processingInfo.setProcessingResult(file);
 				} catch(IOException e) {
 					logger.warn(e);
-					processingInfo.addErrorMessage("Chromatogram Report", "The report couldn't be created. An error occured.", e);
+					processingInfo.addErrorMessage("Chromatogram Report", "The report couldn't be created. An error occured.");
 				}
 			} else {
 				logger.warn("The settings are not of type: " + ReportSettings2.class);
