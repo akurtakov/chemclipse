@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.actions;
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.Consumer;
 
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.processing.core.DefaultProcessingResult;
 import org.eclipse.chemclipse.processing.core.IMessageConsumer;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -34,6 +35,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Widget;
 
 public abstract class AbstractFilterAction<FilterType extends Filter<?>, ResultType> extends Action {
+
+	private static final Logger logger = Logger.getLogger(AbstractFilterAction.class);
 
 	protected FilterType filter;
 	private Consumer<ResultType> resultConsumer;
@@ -79,7 +82,8 @@ public abstract class AbstractFilterAction<FilterType extends Filter<?>, ResultT
 			ProcessingInfoPartSupport.getInstance().update(consumer);
 		} catch(InvocationTargetException e) {
 			IProcessingInfo<?> processingInfo = new ProcessingInfo<>();
-			processingInfo.addErrorMessage(filter.getName(), ExtensionMessages.processingFailed, e.getTargetException());
+			processingInfo.addErrorMessage(filter.getName(), ExtensionMessages.processingFailed);
+			logger.error(e.getTargetException());
 			ProcessingInfoPartSupport.getInstance().update(processingInfo);
 		} catch(InterruptedException e) {
 			// user canceled

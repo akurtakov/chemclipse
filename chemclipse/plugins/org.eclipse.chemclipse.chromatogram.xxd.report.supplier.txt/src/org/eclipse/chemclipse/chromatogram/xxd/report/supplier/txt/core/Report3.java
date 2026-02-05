@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -44,7 +44,7 @@ public class Report3 extends AbstractReport {
 					processingInfo.setProcessingResult(file);
 				} catch(IOException e) {
 					logger.warn(e);
-					processingInfo.addErrorMessage("Quantitation Report", "The report couldn't be created. An error occured.", e);
+					processingInfo.addErrorMessage("Quantitation Report", "The report couldn't be created.");
 				}
 			} else {
 				logger.warn("The settings are not of type: " + ReportSettings3.class);

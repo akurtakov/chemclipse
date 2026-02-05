@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,12 +14,13 @@ package org.eclipse.chemclipse.ux.extension.ui.methods;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
 import org.eclipse.chemclipse.processing.methods.IProcessEntry;
+import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
 import org.eclipse.chemclipse.processing.methods.ListProcessEntryContainer;
-import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
 import org.eclipse.chemclipse.progress.core.InfoType;
 import org.eclipse.chemclipse.progress.core.StatusLineLogger;
@@ -29,6 +30,8 @@ import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.swt.widgets.Shell;
 
 public class MethodSupport {
+
+	private static final Logger logger = Logger.getLogger(MethodSupport.class);
 
 	/**
 	 * 
@@ -63,7 +66,8 @@ public class MethodSupport {
 				dialog.run(true, false, monitor -> methodListener.execute(processMethod, monitor));
 			} catch(InvocationTargetException e) {
 				IProcessingInfo<?> processingInfo = new ProcessingInfo<>();
-				processingInfo.addErrorMessage(processMethod.getName(), "Execution failed", e.getCause());
+				processingInfo.addErrorMessage(processMethod.getName(), "Execution failed");
+				logger.error(e);
 				StatusLineLogger.setInfo(InfoType.ERROR_MESSAGE, ExtensionMessages.processMethodFailedSeeFeedback);
 				ProcessingInfoPartSupport.getInstance().update(processingInfo);
 			} catch(InterruptedException e) {

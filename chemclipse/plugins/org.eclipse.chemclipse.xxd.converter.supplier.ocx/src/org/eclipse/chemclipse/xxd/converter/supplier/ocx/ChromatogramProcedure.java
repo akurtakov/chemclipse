@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,6 +20,7 @@ import org.eclipse.chemclipse.converter.chromatogram.IChromatogramExportConverte
 import org.eclipse.chemclipse.converter.chromatogram.IChromatogramImportConverter;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.csd.model.core.selection.ChromatogramSelectionCSD;
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.model.settings.IProcessSettings;
@@ -39,6 +40,8 @@ import org.osgi.service.component.annotations.Component;
 public class ChromatogramProcedure implements Procedure<ChromatogramProcedureSettings> {
 
 	private static final String NAME = "Copy Chromatogram Selection";
+
+	private static final Logger logger = Logger.getLogger(ChromatogramProcedure.class);
 
 	private final IChromatogramImportConverter<IChromatogramMSD> MSD_IMPORT = new org.eclipse.chemclipse.msd.converter.supplier.ocx.converter.ChromatogramImportConverter();
 	private final IChromatogramImportConverter<IChromatogramCSD> CSD_IMPORT = new org.eclipse.chemclipse.csd.converter.supplier.ocx.converter.ChromatogramImportConverter();
@@ -135,7 +138,8 @@ public class ChromatogramProcedure implements Procedure<ChromatogramProcedureSet
 			}
 			return info.getProcessingResult();
 		} catch(IOException e) {
-			context.addErrorMessage(NAME, "Cloning has failed", e);
+			context.addErrorMessage(NAME, "Cloning has failed");
+			logger.error(e);
 		}
 		return null;
 	}

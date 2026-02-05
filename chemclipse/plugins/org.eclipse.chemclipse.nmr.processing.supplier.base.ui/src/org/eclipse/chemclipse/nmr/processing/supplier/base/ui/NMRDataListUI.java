@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.nmr.converter.core.ScanConverterNMR;
@@ -43,6 +44,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
 public class NMRDataListUI extends DataListUI {
+
+	private static final Logger logger = Logger.getLogger(NMRDataListUI.class);
 
 	Map<File, MeasurementLoadResult> filesMap = new HashMap<>();
 
@@ -154,7 +157,8 @@ public class NMRDataListUI extends DataListUI {
 			super.addFiles(newFiles);
 		} catch(InvocationTargetException e) {
 			IProcessingInfo<?> processingInfo = new ProcessingInfo<>();
-			processingInfo.addErrorMessage("NMR Batch Job", "loading files failed", e.getCause());
+			processingInfo.addErrorMessage("NMR Batch Job", "loading files failed");
+			logger.error(e.getCause());
 			ProcessingInfoPartSupport.getInstance().update(processingInfo);
 		} catch(InterruptedException e) {
 			Thread.currentThread().interrupt();

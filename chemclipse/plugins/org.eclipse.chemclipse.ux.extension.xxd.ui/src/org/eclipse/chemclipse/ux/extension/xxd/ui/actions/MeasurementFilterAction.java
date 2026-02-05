@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,6 +19,7 @@ import java.util.concurrent.CancellationException;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
 import org.eclipse.chemclipse.model.supplier.IMeasurementFilterProcessTypeSupplier;
@@ -42,6 +43,8 @@ import org.eclipse.swt.widgets.Shell;
  *
  */
 public class MeasurementFilterAction extends AbstractFilterAction<IMeasurementFilter<?>, Collection<? extends IMeasurement>> {
+
+	private static final Logger logger = Logger.getLogger(MeasurementFilterAction.class);
 
 	private Collection<? extends IMeasurement> measurements;
 	private IProcessSupplierContext processTypeSupport;
@@ -72,7 +75,8 @@ public class MeasurementFilterAction extends AbstractFilterAction<IMeasurementFi
 					}
 				} catch(IOException e) {
 					IProcessingInfo<?> processingInfo = new ProcessingInfo<>();
-					processingInfo.addErrorMessage(filter.getName(), ExtensionMessages.cantProcessSettings, e);
+					processingInfo.addErrorMessage(filter.getName(), ExtensionMessages.cantProcessSettings);
+					logger.error(e);
 					ProcessingInfoPartSupport.getInstance().update(processingInfo);
 				} catch(CancellationException e) {
 					return;

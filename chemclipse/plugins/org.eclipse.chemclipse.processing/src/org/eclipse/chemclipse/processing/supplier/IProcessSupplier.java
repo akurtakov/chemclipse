@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,14 +15,11 @@ package org.eclipse.chemclipse.processing.supplier;
 
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
 
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.support.literature.LiteratureReference;
 import org.eclipse.chemclipse.support.settings.parser.SettingsParser;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 
 public interface IProcessSupplier<SettingType> {
@@ -118,60 +115,6 @@ public interface IProcessSupplier<SettingType> {
 		} else {
 			return getTypeSupplier();
 		}
-	}
-
-	public static <X, T> T applyProcessor(IProcessorPreferences<X> processorPreferences, IProcessExecutionConsumer<T> consumer, ProcessExecutionContext context) {
-
-		IProcessSupplier<X> supplier = processorPreferences.getSupplier();
-		try {
-			int numberOfCalls = 0;
-			boolean canDirectExecute = consumer.canExecute(processorPreferences);
-			IProcessExecutor supplierExecutionConsumer = null;
-			ExecutionResultTransformer<X> transformer = null;
-			if(canDirectExecute) {
-				numberOfCalls++;
-			}
-			if(supplier instanceof IProcessExecutor processExecutor) {
-				supplierExecutionConsumer = processExecutor;
-				numberOfCalls++;
-			}
-			if(supplier instanceof ExecutionResultTransformer<?>) {
-				transformer = (ExecutionResultTransformer<X>)supplier;
-				numberOfCalls++;
-			}
-			boolean mustSplit = numberOfCalls > 1;
-			context.setContextObject(IProcessSupplier.class, supplier);
-			context.setContextObject(IProcessorPreferences.class, processorPreferences);
-			if(transformer != null) {
-				consumer = transformer.transform(consumer, processorPreferences, mustSplit ? context.split() : context);
-			}
-
-			context.setContextObject(IProcessExecutionConsumer.class, consumer);
-			if(canDirectExecute) {
-				consumer.execute(processorPreferences, mustSplit ? context.split() : context);
-			}
-			if(supplierExecutionConsumer != null) {
-				// execution consumers might behave different, they get full control of further execution flow
-				supplierExecutionConsumer.execute(processorPreferences, mustSplit ? context.split() : context);
-			}
-		} catch(InterruptedException e) {
-			Thread.currentThread().interrupt();
-			throw new OperationCanceledException("interrupted");
-		} catch(Exception e) {
-			Throwable cause = e;
-			if(e instanceof ExecutionException) {
-				cause = e.getCause();
-			}
-			if(e instanceof OperationCanceledException || e instanceof CancellationException) {
-				throw new OperationCanceledException(e.getMessage());
-			}
-			context.addErrorMessage(supplier.getName(), "execution throws an error, processor is skipped", cause);
-		} finally {
-			context.setContextObject(IProcessSupplier.class, null);
-			context.setContextObject(IProcessorPreferences.class, null);
-			context.setContextObject(IProcessExecutionConsumer.class, null);
-		}
-		return consumer.getResult();
 	}
 
 	default SupplierType getType() {

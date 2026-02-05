@@ -25,6 +25,7 @@ import java.util.stream.StreamSupport;
 
 import org.eclipse.chemclipse.converter.core.IConverterSupport;
 import org.eclipse.chemclipse.converter.scan.IScanConverterSupport;
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.model.core.ISignal;
 import org.eclipse.chemclipse.model.core.PeakPosition;
@@ -59,6 +60,8 @@ import org.eclipse.swtchart.extensions.linecharts.LineChart;
 import org.eclipse.swtchart.extensions.menu.IChartMenuEntry;
 
 public class ChartNMR extends LineChart {
+
+	private static final Logger logger = Logger.getLogger(ChartNMR.class);
 
 	private static final boolean PROCESSED_AXIS_REVERSED = true;
 	private IAxisScaleConverter ppmconverter;
@@ -116,7 +119,8 @@ public class ChartNMR extends LineChart {
 								});
 							} catch(InvocationTargetException e) {
 								IProcessingInfo<?> processingInfo = new ProcessingInfo<>();
-								processingInfo.addErrorMessage("NMR Export", "Export failed", e.getCause());
+								processingInfo.addErrorMessage("NMR Export", "Export failed");
+								logger.error(e.getCause());
 								ProcessingInfoPartSupport.getInstance().update(processingInfo);
 							} catch(InterruptedException e) {
 								Thread.currentThread().interrupt();

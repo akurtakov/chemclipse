@@ -16,6 +16,7 @@ package org.eclipse.chemclipse.msd.classifier.supplier.molpeak.core;
 
 import java.io.IOException;
 
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.exceptions.ValueMustNotBeNullException;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.msd.classifier.supplier.molpeak.identifier.BasePeakIdentifier;
@@ -29,6 +30,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public class LibraryService extends AbstractLibraryService implements ILibraryService {
 
 	private final BasePeakIdentifier basePeakIdentifier;
+
+	private static final Logger logger = Logger.getLogger(LibraryService.class);
 
 	public LibraryService() {
 
@@ -46,8 +49,10 @@ public class LibraryService extends AbstractLibraryService implements ILibrarySe
 			processingInfo.setProcessingResult(massSpectra);
 		} catch(ValueMustNotBeNullException e) {
 			processingInfo.addErrorMessage("Base Peak Identifier", "The identification target is not available.");
+			logger.error(e);
 		} catch(IOException e) {
-			processingInfo.addErrorMessage("Base Peak Identifier", "Database not found.", e);
+			processingInfo.addErrorMessage("Base Peak Identifier", "Database not found.");
+			logger.error(e);
 		}
 
 		return processingInfo;

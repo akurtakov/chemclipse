@@ -41,6 +41,7 @@ import org.eclipse.chemclipse.processing.core.ICategories;
 import org.eclipse.chemclipse.processing.core.IMessageProvider;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
+import org.eclipse.chemclipse.processing.supplier.AbstractProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier.SupplierType;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
@@ -245,12 +246,13 @@ public class MassSpectrumChartProfile extends LineChart implements IMassSpectrum
 			processMassSpectrum(monitor -> executeMethod(massSpectrum, scanMSD -> {
 
 				DefaultProcessingResult<Object> processingInfo = new DefaultProcessingResult<>();
-				IProcessSupplier.applyProcessor(settings, IScanProcessSupplier.createConsumer(scanMSD), new ProcessExecutionContext(monitor, processingInfo, processSupplierContext));
+				AbstractProcessSupplier.applyProcessor(settings, IScanProcessSupplier.createConsumer(scanMSD), new ProcessExecutionContext(monitor, processingInfo, processSupplierContext));
 				updateResult(processingInfo);
 			}), shell);
 		} catch(IOException e) {
 			DefaultProcessingResult<Object> processingInfo = new DefaultProcessingResult<>();
-			processingInfo.addErrorMessage(processSupplier.getName(), "The process method can't be applied.", e);
+			processingInfo.addErrorMessage(processSupplier.getName(), "The process method can't be applied.");
+			logger.error(e);
 			updateResult(processingInfo);
 		}
 	}
@@ -442,7 +444,8 @@ public class MassSpectrumChartProfile extends LineChart implements IMassSpectrum
 							});
 						} catch(InvocationTargetException e) {
 							IProcessingInfo<?> processingInfo = new ProcessingInfo<>();
-							processingInfo.addErrorMessage("MS Export", "Export failed", e.getCause());
+							processingInfo.addErrorMessage("MS Export", "Export failed");
+							logger.error(e.getCause());
 							ProcessingInfoPartSupport.getInstance().update(processingInfo);
 						} catch(InterruptedException e) {
 							Thread.currentThread().interrupt();

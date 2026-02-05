@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,13 +27,12 @@ public interface IProcessingResult<T> extends IMessageConsumer, IMessageProvider
 	}
 
 	@Override
-	default void addMessage(String description, String message, String detail, String solution, Throwable t, MessageType type) {
+	default void addMessage(String description, String message, String detail, String solution, MessageType type) {
 
 		ProcessingMessage msg = new ProcessingMessage(type, description, message, solution);
 		if(detail != null) {
 			msg.setDetails(detail);
 		}
-		msg.setException(t);
 		addMessage(msg);
 	}
 

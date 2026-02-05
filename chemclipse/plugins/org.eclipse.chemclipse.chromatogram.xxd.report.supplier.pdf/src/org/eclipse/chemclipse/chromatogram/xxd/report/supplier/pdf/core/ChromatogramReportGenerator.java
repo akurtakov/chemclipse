@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -40,7 +40,7 @@ public class ChromatogramReportGenerator extends AbstractChromatogramReportGener
 			}
 		} catch(IOException e) {
 			logger.warn(e);
-			processingInfo.addErrorMessage("PDF Report", "Failed to generate report.", e);
+			processingInfo.addErrorMessage("PDF Report", "Failed to generate report.");
 		}
 		return null;
 	}

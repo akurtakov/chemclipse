@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -46,14 +46,14 @@ public class PCRImportConverter extends AbstractPlateImportConverter implements 
 				processingInfo.setProcessingResult(plate);
 			} catch(IOException e) {
 				logger.warn(e);
-				processingInfo.addErrorMessage(DESCRIPTION, "Failed to read file: " + file.getAbsolutePath(), e);
+				processingInfo.addErrorMessage(DESCRIPTION, "Failed to read file: " + file.getAbsolutePath());
 			} catch(SAXException | JAXBException
 					| ParserConfigurationException e) {
 				logger.warn(e);
-				processingInfo.addErrorMessage(DESCRIPTION, "Failed to read file contents: " + file.getAbsolutePath(), e);
+				processingInfo.addErrorMessage(DESCRIPTION, "Failed to read file contents: " + file.getAbsolutePath());
 			} catch(InvalidParameterException e) {
 				logger.warn(e);
-				processingInfo.addErrorMessage(DESCRIPTION, "Unsupported data in file: " + file.getAbsolutePath(), e);
+				processingInfo.addErrorMessage(DESCRIPTION, "Unsupported data in file: " + file.getAbsolutePath());
 			}
 		}
 		return processingInfo;

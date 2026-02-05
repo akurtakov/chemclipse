@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,10 +24,12 @@ public abstract class AbstractProcessingMessage implements IProcessingMessage {
 	private String details;
 
 	public AbstractProcessingMessage(MessageType messageType, String description, String message) {
+
 		this(messageType, description, message, "");
 	}
 
 	public AbstractProcessingMessage(MessageType messageType, String description, String message, String proposedSolution) {
+
 		/*
 		 * New Date.
 		 */
@@ -92,12 +94,6 @@ public abstract class AbstractProcessingMessage implements IProcessingMessage {
 	public String getProposedSolution() {
 
 		return proposedSolution;
-	}
-
-	@Override
-	public Throwable getException() {
-
-		return null;
 	}
 
 	@Override

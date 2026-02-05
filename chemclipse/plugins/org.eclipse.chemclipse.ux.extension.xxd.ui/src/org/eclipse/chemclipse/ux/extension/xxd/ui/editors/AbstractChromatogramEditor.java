@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -45,8 +45,8 @@ import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.ChromatogramSelectionMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
+import org.eclipse.chemclipse.processing.methods.AbstractProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
-import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
@@ -333,7 +333,7 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 
 					IProcessMethod processMethod = Adapters.adapt(file, IProcessMethod.class);
 					if(processMethod != null) {
-						IProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, new ProcessingInfo<>(), processSupplierContext), IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection));
+						AbstractProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, new ProcessingInfo<>(), processSupplierContext), IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection));
 					}
 				});
 			} catch(InvocationTargetException e) {

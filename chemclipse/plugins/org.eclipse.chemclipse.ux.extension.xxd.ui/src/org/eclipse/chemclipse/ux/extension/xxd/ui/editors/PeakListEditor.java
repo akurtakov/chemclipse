@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,6 +16,7 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.editors;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 
+import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.msd.converter.peak.PeakConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IPeaksMSD;
 import org.eclipse.chemclipse.processing.converter.ISupplier;
@@ -33,6 +34,8 @@ import org.eclipse.swt.widgets.Display;
 import jakarta.annotation.PostConstruct;
 
 public class PeakListEditor {
+
+	private static final Logger logger = Logger.getLogger(PeakListEditor.class);
 
 	@PostConstruct
 	public void construct(Composite parent, ISupplier supplier, File file) {
@@ -55,8 +58,9 @@ public class PeakListEditor {
 			});
 		} catch(InvocationTargetException e) {
 			IProcessingInfo<?> processingInfo = new ProcessingInfo<>();
-			processingInfo.addErrorMessage("PeakListEditor", "Open file " + file.getAbsolutePath() + " failed", e);
-			StatusLineLogger.setInfo(InfoType.ERROR_MESSAGE, "Failed to open " + file.getName() + ". See Feedback for details.");
+			processingInfo.addErrorMessage("PeakListEditor", "Open file " + file.getAbsolutePath() + " failed");
+			logger.error(e);
+			StatusLineLogger.setInfo(InfoType.ERROR_MESSAGE, "Failed to open " + file.getName());
 			ProcessingInfoPartSupport.getInstance().update(processingInfo);
 		} catch(InterruptedException e) {
 			Thread.currentThread().interrupt();

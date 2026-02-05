@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,8 +13,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.converter.methods;
 
+import org.eclipse.chemclipse.processing.methods.AbstractProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
-import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
 import org.eclipse.chemclipse.processing.supplier.AbstractProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessExecutionConsumer;
 import org.eclipse.chemclipse.processing.supplier.IProcessExecutor;
@@ -49,7 +49,7 @@ public final class MetaProcessorProcessSupplier extends AbstractProcessSupplier<
 		if(settings instanceof MetaProcessorSettings processorSettings) {
 			IProcessExecutionConsumer<?> callerDelegate = context.getContextObject(IProcessExecutionConsumer.class);
 			if(callerDelegate != null) {
-				IProcessEntryContainer.applyProcessEntries(processMethod, context, (processEntry, processSupplier) -> processorSettings.getProcessorPreferences(processEntry, processEntry.getPreferences(processSupplier)), callerDelegate);
+				AbstractProcessEntryContainer.applyProcessEntries(processMethod, context, (processEntry, processSupplier) -> processorSettings.getProcessorPreferences(processEntry, processEntry.getPreferences(processSupplier)), callerDelegate);
 			}
 		}
 	}

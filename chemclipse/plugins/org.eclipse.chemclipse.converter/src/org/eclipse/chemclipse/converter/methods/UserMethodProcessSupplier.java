@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,9 +18,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.eclipse.chemclipse.processing.methods.AbstractProcessEntryContainer;
 import org.eclipse.chemclipse.processing.methods.IProcessEntry;
-import org.eclipse.chemclipse.processing.methods.IProcessMethod;
 import org.eclipse.chemclipse.processing.methods.IProcessEntryContainer;
+import org.eclipse.chemclipse.processing.methods.IProcessMethod;
 import org.eclipse.chemclipse.processing.supplier.AbstractProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessExecutionConsumer;
 import org.eclipse.chemclipse.processing.supplier.IProcessExecutor;
@@ -55,7 +56,7 @@ public final class UserMethodProcessSupplier extends AbstractProcessSupplier<Voi
 	public <X> void execute(IProcessorPreferences<X> preferences, ProcessExecutionContext context) throws Exception {
 
 		IProcessExecutionConsumer<?> consumer = context.getContextObject(IProcessExecutionConsumer.class);
-		IProcessEntryContainer.applyProcessEntries(processMethod, context, consumer);
+		AbstractProcessEntryContainer.applyProcessEntries(processMethod, context, consumer);
 	}
 
 	@Override

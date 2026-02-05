@@ -178,7 +178,8 @@ public class ChartPCR extends LineChart {
 							});
 						} catch(InvocationTargetException e) {
 							IProcessingInfo<?> processingInfo = new ProcessingInfo<>();
-							processingInfo.addErrorMessage(ExtensionMessages.pcrExport, ExtensionMessages.exportFailed, e.getCause());
+							processingInfo.addErrorMessage(ExtensionMessages.pcrExport, ExtensionMessages.exportFailed);
+							logger.error(e.getCause());
 							ProcessingInfoPartSupport.getInstance().update(processingInfo);
 						} catch(InterruptedException e) {
 							Thread.currentThread().interrupt();
