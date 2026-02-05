@@ -42,7 +42,7 @@ public class BasePeakDetector extends AbstractPeakDetector {
 
 		IProcessingInfo<?> processingInfo = super.validate(chromatogramSelection, peakDetectorSettings, monitor);
 		if(ChromatogramSelectionSupport.containsEmptyScans(chromatogramSelection)) {
-			processingInfo.addErrorMessage("Peak Detector", "Selection must not contain empty scans.");
+			processingInfo.addErrorMessage("Peak Detector", "Selection must not contain empty scans.", "Apply Chromatogram Filter - Remove Empty Scans.");
 		}
 
 		return processingInfo;
