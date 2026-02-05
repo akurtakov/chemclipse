@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,13 +16,13 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.parts;
 import java.util.List;
 
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d.ErrorResidueChart;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt.ExtendedErrorResidueUI;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
 import jakarta.inject.Inject;
 
-public class ErrorResiduePart extends AbstractPartPCA<ErrorResidueChart> {
+public class ErrorResiduePart extends AbstractPartPCA<ExtendedErrorResidueUI> {
 
 	@Inject
 	public ErrorResiduePart(Composite parent) {
@@ -31,9 +31,18 @@ public class ErrorResiduePart extends AbstractPartPCA<ErrorResidueChart> {
 	}
 
 	@Override
-	protected ErrorResidueChart createControl(Composite parent) {
+	public void setFocus() {
 
-		return new ErrorResidueChart(parent, SWT.NONE);
+		ExtendedErrorResidueUI control = getControl();
+		if(control != null) {
+			control.setFocus();
+		}
+	}
+
+	@Override
+	protected ExtendedErrorResidueUI createControl(Composite parent) {
+
+		return new ExtendedErrorResidueUI(parent, SWT.NONE);
 	}
 
 	@Override
