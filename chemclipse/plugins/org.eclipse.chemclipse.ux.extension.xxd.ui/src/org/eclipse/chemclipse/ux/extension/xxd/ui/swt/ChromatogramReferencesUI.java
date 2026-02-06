@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -119,13 +119,15 @@ public class ChromatogramReferencesUI extends Composite {
 		selectionChangeListener = comboChromatograms;
 		comboViewerReferences.addSelectionChangedListener(selectionChangeListener);
 
-		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
-		List<IChromatogramSelection> chromatogramSelections = new ArrayList<>();
-		chromatogramSelections.add(chromatogramSelection);
-		for(IChromatogram chromatogramReference : chromatogram.getReferencedChromatograms()) {
-			chromatogramSelections.add(createChromatogramSelection(chromatogramReference));
+		if(chromatogramSelection != null) {
+			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
+			List<IChromatogramSelection> chromatogramSelections = new ArrayList<>();
+			chromatogramSelections.add(chromatogramSelection);
+			for(IChromatogram chromatogramReference : chromatogram.getReferencedChromatograms()) {
+				chromatogramSelections.add(createChromatogramSelection(chromatogramReference));
+			}
+			comboChromatograms.data = chromatogramSelections;
 		}
-		comboChromatograms.data = chromatogramSelections;
 
 		comboViewerReferences.setInput(comboChromatograms.data);
 	}
