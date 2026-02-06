@@ -122,7 +122,7 @@ public interface IApplicationImage extends IApplicationImageProvider {
 	String IMAGE_TARGET_ACTIVE = "pinTarget.png";
 	String IMAGE_CREATE_SNAPSHOT = "camera.png";
 	String IMAGE_PERSPECTIVES = "perspectives.gif";
-	String IMAGE_QUIT = "quit.gif";
+	String IMAGE_QUIT = "delete.svg";
 	String IMAGE_SAVE = "save.gif";
 	String IMAGE_SAVE_DISABLED = "save_disabled.gif";
 	String IMAGE_SAVE_AS = "saveas.gif";
