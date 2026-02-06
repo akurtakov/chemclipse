@@ -326,7 +326,7 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 	private void processChromatogram(IChromatogramSelection chromatogramSelection) {
 
 		File file = new File(preferenceStore.getString(PreferenceSupplier.P_CHROMATOGRAM_LOAD_PROCESS_METHOD));
-		if(chromatogramSelection != null) {
+		if(file.exists() && chromatogramSelection != null) {
 			try {
 				ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
 				dialog.run(false, false, monitor -> {
