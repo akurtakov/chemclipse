@@ -510,8 +510,12 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 
 	private void updateMethods() {
 
+		if(methodsControl.get().getCombo().isDisposed()) {
+			return;
+		}
+
 		List<IProcessMethod> methods = new ArrayList<>(MethodConverter.getUserMethods());
-		if(!methods.isEmpty() && !methodsControl.get().getCombo().isDisposed()) {
+		if(!methods.isEmpty()) {
 			/*
 			 * Sort methods
 			 */
