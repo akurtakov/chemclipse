@@ -471,7 +471,7 @@ public interface IApplicationImage extends IApplicationImageProvider {
 	String IMAGE_FOCUS_BOTH_VERTICAL = "focus_both_vertical.gif";
 
 	String IMAGE_PEAK_RANGE = "peak-range.gif";
-	String IMAGE_PRINT = "print.png";
+	String IMAGE_PRINT = "print.svg";
 	String IMAGE_CLEAR = "clear.png";
 	String IMAGE_RULER = "ruler.gif";
 	String IMAGE_SKIP_QUANTIFIED_PEAK = "skipQuantifiedPeak.gif";
