@@ -43,7 +43,7 @@ public interface IApplicationImage extends IApplicationImageProvider {
 	String IMAGE_COPY = "copy.png";
 	String IMAGE_REFRESH = "refresh.png";
 	String IMAGE_CANCEL = "cancel.svg";
-	String IMAGE_DELETE = "delete.gif";
+	String IMAGE_DELETE = "delete.svg";
 	String IMAGE_DELETE_ALL = "delete_all.png";
 	String IMAGE_EXECUTE_ADD = "execute_add.gif";
 	String IMAGE_EDIT = "edit.gif";
@@ -313,7 +313,7 @@ public interface IApplicationImage extends IApplicationImageProvider {
 	String IMAGE_CALCULATE = "calculate.gif";
 	String IMAGE_CHECK = "check.gif";
 	String IMAGE_SELECT_ROWS = "select-rows.gif";
-	String IMAGE_REMOVE = "remove.gif";
+	String IMAGE_REMOVE = "delete.svg";
 	String IMAGE_STATUS_EMPTY = "status-empty.gif";
 	String IMAGE_STATUS_OK = "status-ok.gif";
 	String IMAGE_STATUS_WARN = "status-warn.gif";
