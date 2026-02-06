@@ -42,7 +42,7 @@ public interface IApplicationImage extends IApplicationImageProvider {
 	String IMAGE_ADD = "add.gif";
 	String IMAGE_COPY = "copy.png";
 	String IMAGE_REFRESH = "refresh.png";
-	String IMAGE_CANCEL = "cancel.gif";
+	String IMAGE_CANCEL = "cancel.svg";
 	String IMAGE_DELETE = "delete.gif";
 	String IMAGE_DELETE_ALL = "delete_all.png";
 	String IMAGE_EXECUTE_ADD = "execute_add.gif";
