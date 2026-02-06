@@ -331,8 +331,8 @@ public interface IApplicationImage extends IApplicationImageProvider {
 	String IMAGE_DETECTION_TYPE_TANGENT = "detectionTypeTangent.gif";
 	String IMAGE_DETECTION_TYPE_PERPENDICULAR = "detectionTypePerpendicular.gif";
 
-	String IMAGE_EXPAND_ALL = "expand_all.gif";
-	String IMAGE_COLLAPSE_ALL = "collapse_all.gif";
+	String IMAGE_EXPAND_ALL = "expand_all.svg";
+	String IMAGE_COLLAPSE_ALL = "collapse_all.svg";
 	String IMAGE_SEARCH = "search.svg";
 	String IMAGE_DATABASE_SEARCH = "databaseSearch.gif";
 	String IMAGE_CASE_SENSITIVE = "caseSensitive.gif";
