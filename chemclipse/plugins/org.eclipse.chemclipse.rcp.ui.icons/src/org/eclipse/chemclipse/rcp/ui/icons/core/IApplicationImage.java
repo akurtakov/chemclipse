@@ -482,7 +482,7 @@ public interface IApplicationImage extends IApplicationImageProvider {
 	String IMAGE_LOWER_MIN_AREA = "lowerMinArea.gif";
 	String IMAGE_HIGHER_MAX_AREA = "higherMaxArea.gif";
 	String IMAGE_GRID = "grid.png";
-	String IMAGE_FILTER = "filter.png";
+	String IMAGE_FILTER = "filter.svg";
 	String IMAGE_LOCK_UPDATE = "lockUpdate.gif";
 	String IMAGE_SORT_ALPHA_ASC = "sort_alpha_asc.png";
 	String IMAGE_SORT_ALPHA_DESC = "sort_alpha_desc.png";
