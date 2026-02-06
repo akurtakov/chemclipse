@@ -181,10 +181,10 @@ public interface IApplicationImage extends IApplicationImageProvider {
 	String IMAGE_MASS_SPECTRUM_LIBRARY = "massSpectrumLibrary.gif";
 	String IMAGE_MIRRORED_MASS_SPECTRUM = "mirroredMassSpectrum.gif";
 	String IMAGE_SHIFTED_MASS_SPECTRUM = "shiftedMassSpectrum.gif";
-	String IMAGE_IMPORT = "import.png";
+	String IMAGE_IMPORT = "import.svg";
 	String IMAGE_PREPROCESSING = "preprocessing.png";
 	String IMAGE_IMPORT_CHROMATOGRAM = "importChromatogram.png";
-	String IMAGE_EXPORT = "export.png";
+	String IMAGE_EXPORT = "export.svg";
 	String IMAGE_GROOVY_EXECUTE = "groovy_execute.gif";
 	String IMAGE_GROOVY_CREATE = "groovy_create.gif";
 	String IMAGE_JYTHON_EXECUTE = "jython_execute.gif";
