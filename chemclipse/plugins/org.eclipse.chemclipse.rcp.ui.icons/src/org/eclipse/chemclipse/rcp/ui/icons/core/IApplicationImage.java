@@ -352,7 +352,7 @@ public interface IApplicationImage extends IApplicationImageProvider {
 	String IMAGE_SHIFT_AUTO_MIRROR = "shiftAutoMirror.gif";
 	String IMAGE_SHIFT_MIRROR = "shiftMirror.gif";
 	String IMAGE_SCAN_RETENTION_TIME = "scanRetentionTime.gif";
-	String IMAGE_CHART_LEGEND_MARKER = "chartLegendMarker.gif";
+	String IMAGE_CHART_LEGEND_MARKER = "chartLegendMarker.svg";
 	String IMAGE_CHART_RANGE_SELECTOR = "chartRangeSelector.gif";
 	String IMAGE_SEQUENCE_LIST = "sequenceListDefault.gif";
 	String IMAGE_SEQUENCE_ADD = "sequenceAdd.gif";
