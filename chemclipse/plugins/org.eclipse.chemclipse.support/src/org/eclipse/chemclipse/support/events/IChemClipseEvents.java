@@ -88,6 +88,7 @@ public interface IChemClipseEvents {
 	String TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREPLOT_SAMPLE = "pca/update/highlight/scoreplot/sample";
 	String TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREBAR_SAMPLE = "pca/update/highlight/scorebar/sample";
 	String TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE = "pca/update/highlight/variableline/sample";
+	String TOPIC_PCA_UPDATE_HIGHLIGHT_ERRORRESIDUALS_SAMPLE = "pca/update/hightlight/errorresiduals/sample";
 	String TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE = "pca/update/highlight/list/variable";
 	String TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE = "pca/update/highlght/statlist/variable";
 	String TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE = "pca/update/highlight/plot/variable";
