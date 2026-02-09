@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,53 +15,48 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultMVA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultsMVA;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.PaintEvent;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swtchart.IAxis;
+import org.eclipse.swtchart.IBarSeries;
 import org.eclipse.swtchart.IBarSeries.BarWidthStyle;
+import org.eclipse.swtchart.ICustomPaintListener;
+import org.eclipse.swtchart.ISeries;
 import org.eclipse.swtchart.extensions.barcharts.BarChart;
 import org.eclipse.swtchart.extensions.barcharts.BarSeriesData;
 import org.eclipse.swtchart.extensions.barcharts.IBarSeriesData;
 import org.eclipse.swtchart.extensions.barcharts.IBarSeriesSettings;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.IPrimaryAxisSettings;
-import org.eclipse.swtchart.extensions.core.ISeriesData;
 import org.eclipse.swtchart.extensions.core.RangeRestriction;
 import org.eclipse.swtchart.extensions.core.SeriesData;
 
 public class ErrorResidueChart extends BarChart {
 
-	public ErrorResidueChart() {
-
-		super();
-		createControl();
-	}
+	private ICustomPaintListener currentPaintListener = null;
 
 	public ErrorResidueChart(Composite parent, int style) {
 
 		super(parent, style);
-		createControl();
+		initialize();
 	}
 
-	public void setInput(EvaluationPCA evaluationPCA) {
-
-		if(evaluationPCA != null) {
-			IResultsMVA resultsPCA = evaluationPCA.getResults();
-			updateChart(resultsPCA);
-		} else {
-			updateChart(null);
-		}
-	}
-
-	private void createControl() {
+	private void initialize() {
 
 		IChartSettings chartSettings = getChartSettings();
-
 		chartSettings.setTitle("Error Residues");
 		chartSettings.setTitleVisible(true);
 		chartSettings.setOrientation(SWT.HORIZONTAL);
@@ -84,6 +79,87 @@ public class ErrorResidueChart extends BarChart {
 		applySettings(chartSettings);
 	}
 
+	public void setInput(EvaluationPCA evaluationPCA) {
+
+		deleteSeries();
+
+		if(evaluationPCA == null) {
+			getBaseChart().redraw();
+			return;
+		}
+
+		IResultsMVA results = evaluationPCA.getResults();
+		List<IResultMVA> resultList = results.getPcaResultList();
+
+		int numberOfBars = resultList.size();
+		double[] xValues = new double[numberOfBars];
+		double[] yValues = new double[numberOfBars];
+		String[] labels = new String[numberOfBars];
+
+		// Store colors for each bar
+		final Color[] barColors = new Color[numberOfBars];
+		final Set<String> highlightedNames = evaluationPCA.getHighlightedSamples().stream().map(ISample::getSampleName).collect(Collectors.toSet());
+
+		for(int i = 0; i < numberOfBars; i++) {
+			xValues[i] = i;
+			yValues[i] = resultList.get(i).getErrorMetric();
+			labels[i] = "";
+
+			String sampleName = resultList.get(i).getSample().getSampleName();
+			barColors[i] = highlightedNames.contains(sampleName) ? Colors.BLUE : Colors.RED;
+		}
+
+		// Create a SINGLE series
+		List<IBarSeriesData> barSeriesDataList = new ArrayList<>();
+		IBarSeriesData barData = new BarSeriesData(new SeriesData(xValues, yValues, "Scores"));
+		IBarSeriesSettings settings = barData.getSettings();
+		settings.setBarColor(Colors.RED);
+		settings.setBarWidthStyle(BarWidthStyle.STRETCHED);
+		settings.setBarPadding(15);
+		barSeriesDataList.add(barData);
+
+		addSeriesData(barSeriesDataList);
+
+		if(currentPaintListener != null) {
+			getBaseChart().getPlotArea().removeCustomPaintListener(currentPaintListener);
+		}
+
+		getBaseChart().getPlotArea().addCustomPaintListener(new ICustomPaintListener() {
+
+			@Override
+			public void paintControl(PaintEvent e) {
+
+				ISeries<?> series = getBaseChart().getSeriesSet().getSeries("Scores");
+				if(series instanceof IBarSeries) {
+					IBarSeries<?> barSeries = (IBarSeries<?>)series;
+					Rectangle[] bounds = barSeries.getBounds();
+
+					GC gc = e.gc;
+					for(int i = 0; i < bounds.length && i < barColors.length; i++) {
+						if(bounds[i] != null) {
+							gc.setBackground(barColors[i]);
+							gc.fillRectangle(bounds[i]);
+						}
+					}
+				}
+			}
+
+			@Override
+			public boolean drawBehindSeries() {
+
+				return false;
+			}
+		});
+
+		// Set custom category labels for X-axis
+		IAxis xAxis = getBaseChart().getAxisSet().getXAxis(0);
+		xAxis.setCategorySeries(labels);
+		xAxis.enableCategory(true);
+
+		getBaseChart().redraw();
+
+	}
+
 	private void setPrimaryAxisSet(IChartSettings chartSettings) {
 
 		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
@@ -95,57 +171,4 @@ public class ErrorResidueChart extends BarChart {
 		primaryAxisSettingsY.setDecimalFormat(ValueFormat.getDecimalFormatEnglish());
 	}
 
-	private void updateChart(IResultsMVA pcaResults) {
-
-		deleteSeries();
-		if(pcaResults != null) {
-
-			IChartSettings chartSettings = getChartSettings();
-			IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
-			primaryAxisSettingsX.setEnableCategory(true);
-			primaryAxisSettingsX.setCategorySeries(getCategories(pcaResults));
-			applySettings(chartSettings);
-
-			List<IBarSeriesData> barSeriesDataList = new ArrayList<>();
-			ISeriesData seriesData = getSeries(pcaResults);
-			IBarSeriesData barSeriesData = new BarSeriesData(seriesData);
-			IBarSeriesSettings settings = barSeriesData.getSettings();
-			settings.setBarColor(Colors.RED);
-			settings.setBarWidthStyle(BarWidthStyle.STRETCHED);
-			barSeriesDataList.add(barSeriesData);
-			addSeriesData(barSeriesDataList);
-		} else {
-			getBaseChart().redraw();
-		}
-	}
-
-	private String[] getCategories(IResultsMVA pcaResults) {
-
-		List<IResultMVA> pcaResultList = pcaResults.getPcaResultList();
-		int size = pcaResultList.size();
-		String[] categories = new String[size];
-
-		for(int i = 0; i < size; i++) {
-			IResultMVA pcaResult = pcaResultList.get(i);
-			categories[i] = pcaResult.getSample().getSampleName();
-		}
-
-		return categories;
-	}
-
-	private ISeriesData getSeries(IResultsMVA pcaResults) {
-
-		List<IResultMVA> pcaResultList = pcaResults.getPcaResultList();
-		int size = pcaResultList.size();
-		double[] xSeries = new double[size];
-		double[] ySeries = new double[size];
-
-		for(int i = 0; i < size; i++) {
-			IResultMVA pcaResult = pcaResultList.get(i);
-			xSeries[i] = i;
-			ySeries[i] = pcaResult.getErrorMetric();
-		}
-
-		return new SeriesData(xSeries, ySeries, "Error Residues");
-	}
 }
