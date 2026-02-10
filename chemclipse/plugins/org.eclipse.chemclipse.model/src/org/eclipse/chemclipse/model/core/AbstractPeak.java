@@ -238,23 +238,23 @@ public abstract class AbstractPeak implements IPeak {
 	/**
 	 * If the peak model is null, forget about creating a peak and skip its
 	 * instantiation.<br/>
-	 * Throw a IllegalArgumentException instead.<br/>
+	 * Throw a PeakException instead.<br/>
 	 * Do not allow that parentChromatogram could be null.
 	 */
-	protected void validatePeakModel(IPeakModel peakModel) throws IllegalArgumentException {
+	protected void validatePeakModel(IPeakModel peakModel) throws PeakException {
 
 		if(peakModel == null) {
-			throw new IllegalArgumentException("The peak model must not be null");
+			throw new PeakException("The peak model must not be null");
 		}
 	}
 
-	protected void validateChromatogram(IChromatogram chromatogram) throws IllegalArgumentException {
+	protected void validateChromatogram(IChromatogram chromatogram) throws PeakException {
 
 		/*
 		 * Do not allow that the parentChromatogram is null.
 		 */
 		if(chromatogram == null) {
-			throw new IllegalArgumentException("The parent chromatogram must not be null");
+			throw new PeakException("The parent chromatogram must not be null");
 		}
 	}
 

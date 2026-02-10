@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -33,10 +33,9 @@ public abstract class AbstractChromatogramPeakMSD extends AbstractPeakMSD implem
 	 * 
 	 * @param peakModel
 	 * @param chromatogram
-	 * @throws IllegalArgumentException
 	 * @throws PeakException
 	 */
-	protected AbstractChromatogramPeakMSD(IPeakModelMSD peakModel, IChromatogramMSD chromatogram) throws IllegalArgumentException, PeakException {
+	protected AbstractChromatogramPeakMSD(IPeakModelMSD peakModel, IChromatogramMSD chromatogram) throws PeakException {
 
 		super(peakModel);
 		validateChromatogram(chromatogram);
@@ -48,7 +47,7 @@ public abstract class AbstractChromatogramPeakMSD extends AbstractPeakMSD implem
 		this.chromatogram = chromatogram;
 	}
 
-	protected AbstractChromatogramPeakMSD(IPeakModelMSD peakModel, IChromatogramMSD chromatogram, String modelDescription) throws IllegalArgumentException, PeakException {
+	protected AbstractChromatogramPeakMSD(IPeakModelMSD peakModel, IChromatogramMSD chromatogram, String modelDescription) throws PeakException {
 
 		this(peakModel, chromatogram);
 		setModelDescription(modelDescription);

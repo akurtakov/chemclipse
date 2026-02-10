@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,18 +14,19 @@
 package org.eclipse.chemclipse.msd.model.core;
 
 import org.eclipse.chemclipse.model.core.AbstractPeak;
+import org.eclipse.chemclipse.model.exceptions.PeakException;
 
 public abstract class AbstractPeakMSD extends AbstractPeak implements IPeakMSD {
 
 	private final IPeakModelMSD peakModel;
 
-	protected AbstractPeakMSD(IPeakModelMSD peakModel) throws IllegalArgumentException {
+	protected AbstractPeakMSD(IPeakModelMSD peakModel) throws PeakException {
 
 		validatePeakModel(peakModel);
 		this.peakModel = peakModel;
 	}
 
-	protected AbstractPeakMSD(IPeakModelMSD peakModel, String modelDescription) throws IllegalArgumentException {
+	protected AbstractPeakMSD(IPeakModelMSD peakModel, String modelDescription) throws PeakException {
 
 		this(peakModel);
 		setModelDescription(modelDescription);
