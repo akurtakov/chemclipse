@@ -223,13 +223,6 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 
 	/**
 	 * Initializes the PCA analysis.
-	 *
-	 * @param pcaPeakMap
-	 * @param numSamples
-	 * @param sampleSize
-	 * @param numberOfPrincipalComponents
-	 * @return PrincipalComponentAnalysis
-	 * @throws Exception
 	 */
 	protected IMultivariateCalculator setupPCA(Map<ISample, double[]> pcaPeakMap, int numberPredictionSamples, int sampleSize, int numberOfPrincipalComponents, Algorithm algorithm, String oplsTargetGroup) throws MathIllegalArgumentException {
 

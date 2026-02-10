@@ -246,10 +246,6 @@ public class PeakDetectorCSD extends BasePeakDetector implements IPeakDetectorCS
 
 	/**
 	 * Initializes the slope values.
-	 * 
-	 * @param chromatogramSelection
-	 * @param window
-	 * @return {@link IFirstDerivativeDetectorSlopes}
 	 */
 	public static IFirstDerivativeDetectorSlopes getFirstDerivativeSlopes(IChromatogramSelectionCSD chromatogramSelection, int windowSize) {
 

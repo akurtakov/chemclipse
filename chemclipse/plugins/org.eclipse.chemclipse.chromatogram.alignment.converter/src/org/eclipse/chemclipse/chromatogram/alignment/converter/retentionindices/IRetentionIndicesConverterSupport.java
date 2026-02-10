@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -60,7 +60,7 @@ public interface IRetentionIndicesConverterSupport {
 	 * If the file ends with "*.cal" all converter ids which can convert files
 	 * ending with "*.cal" will be returned.<br/>
 	 * 
-	 * @param chromatogram
+	 * @param retentionIndices
 	 * @return List<String>
 	 * @throws NoRetentionIndicesConverterAvailableException
 	 */

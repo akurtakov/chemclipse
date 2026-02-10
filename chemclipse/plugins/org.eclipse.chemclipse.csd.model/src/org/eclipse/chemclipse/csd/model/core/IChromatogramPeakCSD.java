@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,8 +19,6 @@ public interface IChromatogramPeakCSD extends IPeakCSD, IChromatogramPeak {
 
 	/**
 	 * Returns the chromatogram to which this peak belongs to.
-	 *
-	 * @return {@link IChromatogramCSD}
 	 */
 	IChromatogramCSD getChromatogram();
 
@@ -30,8 +28,6 @@ public interface IChromatogramPeakCSD extends IPeakCSD, IChromatogramPeak {
 	 * The width is not measured at the points of inflection.<br/>
 	 * If the peak is out of limits or something has gone wrong, 0 will be
 	 * returned.
-	 *
-	 * @return int
 	 */
 	int getWidthBaselineTotalInScans();
 }

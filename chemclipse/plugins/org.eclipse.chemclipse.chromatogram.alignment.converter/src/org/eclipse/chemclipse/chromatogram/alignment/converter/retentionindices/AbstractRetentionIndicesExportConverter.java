@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,7 +24,7 @@ public abstract class AbstractRetentionIndicesExportConverter implements IRetent
 	 * This method validates whether the retention indices file is writable.<br/>
 	 * If the file is not writable a FileIsNotWritableException will be thrown.
 	 * 
-	 * @param chromatogram
+	 * @param file
 	 * @throws FileNotFoundException
 	 * @throws FileIsNotWriteableException
 	 * @throws IOException

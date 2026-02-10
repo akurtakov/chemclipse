@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -44,8 +44,7 @@ public interface IRetentionIndicesImportConverter {
 	 * This method validates the file which contains the retention indices to be
 	 * imported.
 	 * 
-	 * @param retention
-	 *            indices
+	 * @param retentionIndices
 	 * @throws FileNotFoundException
 	 * @throws FileIsNotReadableException
 	 * @throws FileIsEmptyException

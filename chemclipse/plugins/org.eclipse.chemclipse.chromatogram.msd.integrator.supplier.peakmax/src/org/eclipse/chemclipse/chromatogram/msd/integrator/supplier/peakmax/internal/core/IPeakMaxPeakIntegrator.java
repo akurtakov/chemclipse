@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -30,19 +30,11 @@ public interface IPeakMaxPeakIntegrator {
 	/**
 	 * Returns a integration result object.<br/>
 	 * May also return null.
-	 * 
-	 * @param peak
-	 * @param integrationSettings
-	 * @return {@link PeakMaxPeakIntegrationResult}
 	 */
 	IPeakIntegrationResult integrate(IPeak peak, IPeakIntegrationSettings peakIntegrationSettings, IProgressMonitor monitor) throws ValueMustNotBeNullException;
 
 	/**
 	 * Integrates a list of peaks and returns a results object.
-	 * 
-	 * @param peaks
-	 * @param integrationSettings
-	 * @return {@link PeakMaxPeakIntegrationResults}
 	 */
 	IPeakIntegrationResults integrate(List<? extends IPeak> peaks, IPeakIntegrationSettings peakIntegrationSettings, IProgressMonitor monitor) throws ValueMustNotBeNullException;
 }

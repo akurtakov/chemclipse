@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -101,8 +101,7 @@ public class PeakFilter {
 	 * The filter can be supported as a plugin through the extension point
 	 * mechanism.
 	 * 
-	 * @param List
-	 *            <IPeakMSD> peaks
+	 * @param peaks
 	 * @param peakFilterSettings
 	 * @param filterId
 	 * @return {@link IProcessingInfo}
@@ -124,8 +123,7 @@ public class PeakFilter {
 	 * Applies the specified filter, but retrieves the IPeakFilterSettings dynamically.<br/>
 	 * See also method: applyFilter(List<IPeakMSD> peaks, IPeakFilterSettings peakFilterSettings, String filterId, IProgressMonitor monitor)
 	 * 
-	 * @param List
-	 *            <IPeakMSD> peaks
+	 * @param peaks
 	 * @param filterId
 	 * @param monitor
 	 * @return {@link IProcessingInfo}

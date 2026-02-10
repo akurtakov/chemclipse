@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -113,11 +113,6 @@ public class PartSupport {
 	 * Use this method e.g. to get a 3.x editor part.
 	 * The 3.x editorId is the id that is used in the plugin.xml
 	 * to declare the editor.
-	 * 
-	 * @param partService
-	 * 
-	 * @param partId
-	 * @return MPart
 	 */
 	public static MPart get3xEditorPart(String editorId, EPartService partService, EModelService service, MApplication application) {
 
@@ -228,10 +223,6 @@ public class PartSupport {
 
 	/***
 	 * Returns true if the part is visible after running the method.
-	 * 
-	 * @param part
-	 * @param partStackId
-	 * @return boolean
 	 */
 	public static boolean togglePartVisibility(MPart part, EPartService partService) {
 
@@ -391,9 +382,6 @@ public class PartSupport {
 
 	/**
 	 * Prefer to use this method if you'd like to toggle the part visibility.
-	 * 
-	 * @param partId
-	 * @param partStackId
 	 */
 	public static boolean togglePartVisibility(String partId, String partStackId, EPartService partService, EModelService modelService, MApplication application) {
 
@@ -449,9 +437,6 @@ public class PartSupport {
 
 	/**
 	 * Prefer to use this method if you'd like to toggle the part stack visibility.
-	 * 
-	 * @param partId
-	 * @param partStackId
 	 */
 	public static void setPartStackVisibility(String partStackId, boolean visible, EModelService modelService, MApplication application) {
 

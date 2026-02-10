@@ -79,9 +79,6 @@ public class SettingsWizard extends Wizard {
 
 	/**
 	 * Opens a wizard to edit the preferences for the given collection of processor preferences
-	 * 
-	 * @param shell
-	 * @param processTypeSupport
 	 */
 	public static void openManagePreferencesWizard(Shell shell, Supplier<Collection<IProcessorPreferences<?>>> preferenceSupplier) {
 
@@ -117,8 +114,6 @@ public class SettingsWizard extends Wizard {
 	/**
 	 * Obtain the settings from the preferences, maybe asking the user for input
 	 * 
-	 * @param shell
-	 * @param processorSupplier
 	 * @return the preferences to use or <code>null</code> if user canceled the wizard
 	 * @throws IOException
 	 *             if reading the settings failed

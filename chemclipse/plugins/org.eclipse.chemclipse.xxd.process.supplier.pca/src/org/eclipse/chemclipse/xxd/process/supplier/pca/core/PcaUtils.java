@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -52,7 +52,6 @@ public class PcaUtils {
 	 * 
 	 * This method extract data from sample, it extracts only selected samples {@link ISample#isSelected()}
 	 * 
-	 * @param samples
 	 * @return map where is key name of sample and value are sample data
 	 */
 	public static <V extends IVariable, S extends ISample> Map<String, double[]> extractData(ISamples<V, S> samples) {
@@ -80,9 +79,6 @@ public class PcaUtils {
 
 	/**
 	 * This method create covariance matrix from sample, it is created only from selected samples {@link ISample#isSelected()}
-	 * 
-	 * @param samples
-	 * @return covariance matrix
 	 */
 	public static <V extends IVariable, S extends ISample> RealMatrix getCovarianceMatrix(ISamples<V, S> samples) {
 
@@ -100,8 +96,6 @@ public class PcaUtils {
 	}
 
 	/**
-	 * 
-	 * @param samples
 	 * @return real part of covariance matrix return by {@link #getCovarianceMatrix(ISamples)}
 	 */
 	public static <V extends IVariable, S extends ISample> double[] getEigenValuesCovarianceMatrix(ISamples<V, S> samples) {
@@ -117,8 +111,6 @@ public class PcaUtils {
 	}
 
 	/**
-	 * 
-	 * @param pcaResults
 	 * @return all groupName {@link IResultMVA#getOplsTargetGroupName()}
 	 */
 	public static Set<String> getGroupNames(List<IResultMVA> pcaResults) {
@@ -132,9 +124,6 @@ public class PcaUtils {
 	}
 
 	/**
-	 *
-	 * @param sample
-	 * @param onlySelected
 	 * @return all group which list of samples contains, if some group name is null Set contains also null value
 	 */
 	public static <S extends ISample> Set<String> getGroupNames(List<S> samples, boolean onlySelected) {
@@ -149,11 +138,6 @@ public class PcaUtils {
 		return groupNames;
 	}
 
-	/**
-	 * 
-	 * @param inputEntries
-	 * @return
-	 */
 	public static Set<String> getGroupNamesFromEntry(List<IDataInputEntry> inputEntries) {
 
 		Set<String> groupNames = new HashSet<>();
@@ -165,8 +149,6 @@ public class PcaUtils {
 	}
 
 	/**
-	 *
-	 * @param samples
 	 * @return return sorted map, key is first occurrence group name in List, Value contains group name, Value can be null
 	 */
 	public static <S extends ISample> SortedMap<Integer, String> getIndexsFirstOccurrence(List<S> samples) {
@@ -182,10 +164,6 @@ public class PcaUtils {
 	}
 
 	/**
-	 * 
-	 * @param peaks
-	 * @param leftRetentionTimeBound
-	 * @param rightRetentionTimeBound
 	 * @return all peaks which has peak maximum {@link IPeakModel#getPeakMaximum()} between {@code leftRetentionTimeBound} and {@code rightRetentionTimeBound}
 	 */
 	public static List<IPeak> getPeaks(IPeaksMSD peaks, int leftRetentionTimeBound, int rightRetentionTimeBound) {
@@ -200,12 +178,6 @@ public class PcaUtils {
 		return peakInInterval;
 	}
 
-	/**
-	 * 
-	 * @param samples
-	 * @param onlySelected
-	 * @return
-	 */
 	public static List<TreeSet<String>> getPeaksNames(List<Sample> samples, boolean onlySelected) {
 
 		List<TreeSet<String>> map = new ArrayList<>();
@@ -231,13 +203,6 @@ public class PcaUtils {
 		return map;
 	}
 
-	/**
-	 * 
-	 * @param samples
-	 * @param containsNullGroupName
-	 * @param onlySelected
-	 * @return
-	 */
 	public static <S extends ISample> Map<String, Set<S>> getSamplesByGroupName(List<S> samples, boolean containsNullGroupName, boolean onlySelected) {
 
 		Map<String, Set<S>> samplesByGroupName = new HashMap<>();
@@ -253,10 +218,6 @@ public class PcaUtils {
 		return samplesByGroupName;
 	}
 
-	/**
-	 * 
-	 * @param pcaResults
-	 */
 	public static void sortPcaResultsByGroup(List<IResultMVA> pcaResults) {
 
 		Comparator<IResultMVA> comparator = (arg0, arg1) -> {
@@ -276,10 +237,6 @@ public class PcaUtils {
 		Collections.sort(pcaResults, comparator);
 	}
 
-	/**
-	 * 
-	 * @param samples
-	 */
 	public static void sortPcaResultsByName(List<IResultMVA> samples) {
 
 		Comparator<IResultMVA> comparator = (arg0, arg1) -> {
@@ -288,11 +245,6 @@ public class PcaUtils {
 		Collections.sort(samples, comparator);
 	}
 
-	/**
-	 * 
-	 * @param pcaResults
-	 * @param inverse
-	 */
 	public static void sortPcaResultsListByErrorMetric(List<IResultMVA> pcaResults, boolean inverse) {
 
 		int i = 1;
@@ -308,8 +260,6 @@ public class PcaUtils {
 
 	/**
 	 * sort list by group name
-	 *
-	 * @param samples
 	 */
 	public static <S extends ISample> void sortSampleListByGroup(List<S> samples) {
 
@@ -332,8 +282,6 @@ public class PcaUtils {
 
 	/**
 	 * sort list by name {@link ISample#getName()}
-	 * 
-	 * @param samples
 	 */
 	public static <S extends ISample> void sortSampleListByName(List<S> samples) {
 

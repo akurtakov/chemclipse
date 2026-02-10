@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -31,11 +31,6 @@ public interface IBackfoldingShifter {
 	 * See: "Backfolding applied to differential gas chromatography mass
 	 * spectrometry as a mathematical enhancement of chromatographic
 	 * resolution", Pool, W. G. and deLeeuw, J. W. and vandeGraaf, B., 1996
-	 * 
-	 * @param chromatogramSelection
-	 * @param backfoldingSettings
-	 * @param monitor
-	 * @return {@link IExtractedIonSignals}
 	 */
 	IExtractedIonSignals shiftIons(IChromatogramSelectionMSD chromatogramSelection, ChromatogramFilterSettings filterSettings, IProgressMonitor monitor);
 }
