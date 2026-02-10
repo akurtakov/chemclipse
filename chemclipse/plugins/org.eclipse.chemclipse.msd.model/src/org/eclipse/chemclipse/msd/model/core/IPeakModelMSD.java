@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -62,4 +62,10 @@ public interface IPeakModelMSD extends IPeakModel {
 	 * @return IMassSpectrum
 	 */
 	IPeakMassSpectrum getPeakMassSpectrum(int retentionTime);
+
+	@Override
+	IScanMSD getPeakMaximum();
+
+	@Override
+	IScanMSD getPeakScan(int retentionTime);
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,4 +15,10 @@ package org.eclipse.chemclipse.csd.model.core;
 import org.eclipse.chemclipse.model.core.IPeakModel;
 
 public interface IPeakModelCSD extends IPeakModel {
+
+	@Override
+	IScanCSD getPeakMaximum();
+
+	@Override
+	IScanCSD getPeakScan(int retentionTime);
 }

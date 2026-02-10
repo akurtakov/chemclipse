@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,4 +15,10 @@ package org.eclipse.chemclipse.fsd.model.core;
 import org.eclipse.chemclipse.model.core.IPeakModel;
 
 public interface IPeakModelFSD extends IPeakModel {
+
+	@Override
+	IScanFSD getPeakMaximum();
+
+	@Override
+	IScanFSD getPeakScan(int retentionTime);
 }

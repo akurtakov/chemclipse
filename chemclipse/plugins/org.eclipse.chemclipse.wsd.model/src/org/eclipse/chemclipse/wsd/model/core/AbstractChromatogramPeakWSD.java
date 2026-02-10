@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,7 +13,6 @@
 package org.eclipse.chemclipse.wsd.model.core;
 
 import org.eclipse.chemclipse.model.core.IChromatogram;
-import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.exceptions.PeakException;
 
 public abstract class AbstractChromatogramPeakWSD extends AbstractPeakWSD implements IChromatogramPeakWSD {
@@ -80,14 +79,12 @@ public abstract class AbstractChromatogramPeakWSD extends AbstractPeakWSD implem
 		/*
 		 * Extracted is the unknown and genuine the reference scan.
 		 */
-		IScan peakScan = getPeakModel().getPeakMaximum();
-		if(peakScan instanceof IScanWSD peakScanWSD) {
-			IScanWSD genuineScanWSD = chromatogram.getScan(getScanMax());
-			if(genuineScanWSD != null) {
-				int numberOfSignals = genuineScanWSD.getNumberOfScanSignals();
-				if(numberOfSignals != 0) {
-					purity = peakScanWSD.getNumberOfScanSignals() / (float)numberOfSignals;
-				}
+		IScanWSD peakScan = getPeakModel().getPeakMaximum();
+		IScanWSD genuineScanWSD = chromatogram.getScan(getScanMax());
+		if(genuineScanWSD != null) {
+			int numberOfSignals = genuineScanWSD.getNumberOfScanSignals();
+			if(numberOfSignals != 0) {
+				purity = peakScan.getNumberOfScanSignals() / (float)numberOfSignals;
 			}
 		}
 		return purity;
