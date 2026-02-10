@@ -63,7 +63,6 @@ public class ChromatogramTypeSupport {
 		if(dataType != null) {
 			IChromatogramSelection chromatogramSelection = null;
 			boolean fireUpdate = false;
-			// TODO chemclipse/#97
 			switch(dataType) {
 				case MSD_NOMINAL:
 				case MSD_TANDEM:

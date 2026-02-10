@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -99,10 +99,10 @@ public class ChromatogramSelectionWSD extends AbstractChromatogramSelection impl
 			 * Chromatogram WSD
 			 */
 			if(chromatogram instanceof IChromatogramWSD chromatogramWSD) {
-				setSelectedScan(chromatogramWSD.getScan(1));
+				setSelectedScan(chromatogramWSD.getScan(1), fireUpdate);
 			}
 		} else {
-			setSelectedScan(null);
+			setSelectedScan(null, fireUpdate);
 		}
 		/*
 		 * Fire an update.

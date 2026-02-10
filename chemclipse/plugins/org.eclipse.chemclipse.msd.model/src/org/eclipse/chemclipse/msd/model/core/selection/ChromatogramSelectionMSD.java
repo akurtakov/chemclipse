@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -22,7 +22,6 @@ import org.eclipse.chemclipse.model.core.MarkedTraceModus;
 import org.eclipse.chemclipse.model.exceptions.ChromatogramIsNullException;
 import org.eclipse.chemclipse.model.notifier.UpdateNotifier;
 import org.eclipse.chemclipse.model.selection.AbstractChromatogramSelection;
-import org.eclipse.chemclipse.model.selection.ChromatogramSelection;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IIonTransitionSettings;
@@ -47,7 +46,7 @@ public class ChromatogramSelectionMSD extends AbstractChromatogramSelection impl
 	private IMarkedIons excludedIons;
 	private IMarkedIonTransitions markedIonTransitions;
 
-	private static final Logger logger = Logger.getLogger(ChromatogramSelection.class);
+	private static final Logger logger = Logger.getLogger(ChromatogramSelectionMSD.class);
 
 	public ChromatogramSelectionMSD(IChromatogramMSD chromatogram) throws ChromatogramIsNullException {
 
@@ -147,10 +146,10 @@ public class ChromatogramSelectionMSD extends AbstractChromatogramSelection impl
 			 * Chromatogram MSD
 			 */
 			if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
-				setSelectedScan(chromatogramMSD.getScan(1));
+				setSelectedScan(chromatogramMSD.getScan(1), fireUpdate);
 			}
 		} else {
-			setSelectedScan(null);
+			setSelectedScan(null, fireUpdate);
 		}
 		/*
 		 * Selected Identified Scan
