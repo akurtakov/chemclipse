@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,24 +25,11 @@ public interface IReaderProxy {
 	/**
 	 * Reads a single mass spectrum from the given offset by using
 	 * a random access file approach.
-	 * 
-	 * @param file
-	 * @param offset
-	 * @param massSpectrum
-	 * @param ionTransitionSettings
-	 * @param monitor
-	 * @throws IOException
 	 */
 	void readMassSpectrum(File file, int offset, IVendorScanProxy massSpectrum, IIonTransitionSettings ionTransitionSettings) throws IOException;
 
 	/**
 	 * Reads the mass spectrum by using the given data input stream.
-	 * 
-	 * @param massSpectrum
-	 * @param dataInputStream
-	 * @param ionTransitionSettings
-	 * @param monitor
-	 * @throws IOException
 	 */
 	void readMassSpectrum(IVendorScan massSpectrum, DataInputStream dataInputStream, IIonTransitionSettings ionTransitionSettings) throws IOException;
 }

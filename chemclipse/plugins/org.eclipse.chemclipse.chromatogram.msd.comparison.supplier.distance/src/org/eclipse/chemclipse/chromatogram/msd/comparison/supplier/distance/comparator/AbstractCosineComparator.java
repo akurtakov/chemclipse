@@ -58,11 +58,6 @@ public abstract class AbstractCosineComparator extends AbstractMassSpectrumCompa
 	 * Calculates the distance of both mass spectra.
 	 * 1 : best match
 	 * 0 : no match
-	 * 
-	 * @param unknownSignal
-	 * @param referenceSignal
-	 * @param distanceMeasure
-	 * @return float
 	 */
 	public double calculateCosinePhi(IExtractedIonSignal unknownSignal, IExtractedIonSignal referenceSignal) {
 

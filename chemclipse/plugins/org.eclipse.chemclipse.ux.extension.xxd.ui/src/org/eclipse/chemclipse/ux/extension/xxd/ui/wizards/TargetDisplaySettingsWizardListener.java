@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,7 +24,6 @@ public interface TargetDisplaySettingsWizardListener {
 	 * 
 	 * @param targetDisplaySettings
 	 *            the settings to use for preview or <code>null</code> if no preview is desired
-	 * @param viewerFilters
 	 */
 	void setPreviewSettings(ITargetDisplaySettings targetDisplaySettings);
 
