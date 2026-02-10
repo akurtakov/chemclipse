@@ -14,7 +14,6 @@
 package org.eclipse.chemclipse.msd.converter.supplier.amdis.io;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.msd.converter.database.IDatabaseExportConverter;
 import org.eclipse.chemclipse.msd.converter.database.IDatabaseImportConverter;
@@ -38,7 +37,7 @@ public class MassSpectrumExportConverterTestCase {
 	protected IDatabaseImportConverter importConverter;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		exportConverter = new MSLDatabaseExportConverter();
 		importConverter = new MSLDatabaseImportConverter();

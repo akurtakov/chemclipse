@@ -14,7 +14,6 @@
 package org.eclipse.chemclipse.msd.converter.supplier.amdis.io;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.msd.converter.database.IDatabaseImportConverter;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.converter.msp.MSPDatabaseImportConverter;
@@ -32,7 +31,7 @@ public class ImportConverterMspTestCase {
 	protected IDatabaseImportConverter importConverter;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		importConverter = new MSPDatabaseImportConverter();
 		IProcessingInfo<IMassSpectra> processingInfo = importConverter.convert(importFile, new NullProgressMonitor());

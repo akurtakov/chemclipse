@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -50,7 +49,7 @@ public class MSLExportConverter_2_ITest extends ImportConverterMslTestCase {
 
 	@Override
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		/*
 		 * Export

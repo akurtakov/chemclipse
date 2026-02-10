@@ -16,7 +16,6 @@ package org.eclipse.chemclipse.msd.converter.supplier.amdis.converter.msp;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.msd.converter.database.IDatabaseImportConverter;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
@@ -36,7 +35,7 @@ public class MSPImportConverter_1_ITest {
 	private IMassSpectra massSpectra;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		File importFile = new File(TestPathHelper.TESTFILE_IMPORT_LIB_1_MSP);
 		IDatabaseImportConverter importConverter = new MSPDatabaseImportConverter();

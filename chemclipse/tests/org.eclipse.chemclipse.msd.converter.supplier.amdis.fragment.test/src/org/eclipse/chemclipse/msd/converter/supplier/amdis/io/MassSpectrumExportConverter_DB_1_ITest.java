@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.model.IVendorLibraryMassSpectrum;
@@ -39,7 +38,7 @@ public class MassSpectrumExportConverter_DB_1_ITest extends MassSpectrumExportCo
 
 	@Override
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		File exportFolder = new File(TestPathHelper.TESTDIR_EXPORT);
 		exportFile = new File(exportFolder, File.separator + TestPathHelper.TESTFILE_EXPORT_DB_1_MSL);
