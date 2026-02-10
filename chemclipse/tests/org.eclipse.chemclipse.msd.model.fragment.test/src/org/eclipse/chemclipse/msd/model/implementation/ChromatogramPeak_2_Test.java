@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -52,7 +52,7 @@ public class ChromatogramPeak_2_Test extends ChromatogramPeakTestCase {
 	@Test
 	public void testConstructor_2() {
 
-		assertThrows(IllegalArgumentException.class, () -> {
+		assertThrows(PeakException.class, () -> {
 			peak = new ChromatogramPeakMSD(null, getChromatogram());
 		});
 	}
@@ -60,7 +60,7 @@ public class ChromatogramPeak_2_Test extends ChromatogramPeakTestCase {
 	@Test
 	public void testConstructor_3() {
 
-		assertThrows(IllegalArgumentException.class, () -> {
+		assertThrows(PeakException.class, () -> {
 			peak = new ChromatogramPeakMSD(getPeakModel(), null);
 		});
 	}
@@ -69,6 +69,6 @@ public class ChromatogramPeak_2_Test extends ChromatogramPeakTestCase {
 	public void testConstructor_4() {
 
 		Exception e = assertThrows(Exception.class, () -> new ChromatogramPeakMSD(null, null));
-		assertTrue(e instanceof IllegalArgumentException || e instanceof PeakException);
+		assertTrue(e instanceof PeakException);
 	}
 }

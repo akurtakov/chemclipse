@@ -360,8 +360,6 @@ public class ChromatogramReader_1500 extends AbstractChromatogramReader implemen
 			try {
 				IChromatogramPeakWSD peak = readPeak(dataInputStream, chromatogram);
 				chromatogram.getPeaks().add(peak);
-			} catch(IllegalArgumentException e) {
-				logger.warn(e);
 			} catch(PeakException e) {
 				logger.warn(e.getMessage());
 			}

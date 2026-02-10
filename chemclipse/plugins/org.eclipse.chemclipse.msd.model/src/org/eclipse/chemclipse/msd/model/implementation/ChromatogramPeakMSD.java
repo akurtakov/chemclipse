@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,11 +20,13 @@ import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
 
 public class ChromatogramPeakMSD extends AbstractChromatogramPeakMSD implements IChromatogramPeakMSD {
 
-	public ChromatogramPeakMSD(IPeakModelMSD peakModel, IChromatogramMSD chromatogram) throws IllegalArgumentException, PeakException {
+	public ChromatogramPeakMSD(IPeakModelMSD peakModel, IChromatogramMSD chromatogram) throws PeakException {
+
 		super(peakModel, chromatogram);
 	}
 
-	public ChromatogramPeakMSD(IPeakModelMSD peakModel, IChromatogramMSD chromatogram, String modelDescription) throws IllegalArgumentException, PeakException {
+	public ChromatogramPeakMSD(IPeakModelMSD peakModel, IChromatogramMSD chromatogram, String modelDescription) throws PeakException {
+
 		super(peakModel, chromatogram, modelDescription);
 	}
 }

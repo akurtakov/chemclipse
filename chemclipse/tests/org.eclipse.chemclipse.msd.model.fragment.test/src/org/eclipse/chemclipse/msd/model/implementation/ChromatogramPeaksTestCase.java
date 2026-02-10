@@ -90,7 +90,7 @@ abstract class ChromatogramPeaksTestCase {
 		chromatogram.recalculateRetentionTimes();
 	}
 
-	private void createPeak1() throws IllegalArgumentException, PeakException {
+	private void createPeak1() throws PeakException {
 
 		peakMaximum = new PeakMassSpectrum();
 		// remove some ions.
@@ -130,7 +130,7 @@ abstract class ChromatogramPeaksTestCase {
 		peak1 = new ChromatogramPeakMSD(peakModel, chromatogram);
 	}
 
-	private void createPeak2() throws IllegalArgumentException, PeakException {
+	private void createPeak2() throws PeakException {
 
 		peakMaximum = new PeakMassSpectrum();
 		// remove some ions.
@@ -165,7 +165,7 @@ abstract class ChromatogramPeaksTestCase {
 		peak2 = new ChromatogramPeakMSD(peakModel, chromatogram);
 	}
 
-	private void createPeak3() throws IllegalArgumentException, PeakException {
+	private void createPeak3() throws PeakException {
 
 		peakMaximum = new PeakMassSpectrum();
 		// remove some ions.

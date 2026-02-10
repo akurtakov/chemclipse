@@ -104,8 +104,6 @@ public class PeakReader_1301 extends AbstractZipReader implements IPeakReader {
 					IPeakMSD peak = readPeak(dataInputStream);
 					peaks.addPeak(peak);
 					subMonitor.worked(1);
-				} catch(IllegalArgumentException e) {
-					logger.warn(e);
 				} catch(PeakException e) {
 					logger.warn(e.getMessage());
 				}

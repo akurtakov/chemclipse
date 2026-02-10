@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,7 +27,7 @@ public class PeakModelCSD extends AbstractPeakModelCSD implements IPeakModelCSD 
 		this(peakMaximum, peakIntensityValues, 0.0f, 0.0f);
 	}
 
-	public PeakModelCSD(IScan peakMaximum, IPeakIntensityValues peakIntensityValues, float startBackgroundAbundance, float stopBackgroundAbundance) throws IllegalArgumentException, PeakException {
+	public PeakModelCSD(IScan peakMaximum, IPeakIntensityValues peakIntensityValues, float startBackgroundAbundance, float stopBackgroundAbundance) throws PeakException {
 
 		super(peakMaximum, peakIntensityValues, startBackgroundAbundance, stopBackgroundAbundance);
 	}

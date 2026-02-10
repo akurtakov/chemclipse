@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,10 +27,12 @@ public class PeakModelMSD extends AbstractPeakModelMSD implements IPeakModelMSD 
 	private static final long serialVersionUID = -1550042043393366604L;
 
 	public PeakModelMSD(IPeakMassSpectrum peakMaximum, IPeakIntensityValues peakIntensityValues) throws IllegalArgumentException, PeakException {
+
 		this(peakMaximum, peakIntensityValues, 0, 0);
 	}
 
-	public PeakModelMSD(IPeakMassSpectrum peakMaximum, IPeakIntensityValues peakIntensityValues, float startBackgroundAbundance, float stopBackgroundAbundance) throws IllegalArgumentException, PeakException {
+	public PeakModelMSD(IPeakMassSpectrum peakMaximum, IPeakIntensityValues peakIntensityValues, float startBackgroundAbundance, float stopBackgroundAbundance) throws PeakException {
+
 		super(peakMaximum, peakIntensityValues, startBackgroundAbundance, stopBackgroundAbundance);
 	}
 }

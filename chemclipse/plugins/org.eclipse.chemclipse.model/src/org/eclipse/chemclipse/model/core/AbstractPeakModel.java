@@ -75,7 +75,7 @@ public abstract class AbstractPeakModel extends AbstractPeakModelStrict implemen
 	 * @param startBackgroundAbundance
 	 * @param stopBackgroundAbundance
 	 */
-	protected AbstractPeakModel(IScan peakMaximum, IPeakIntensityValues peakIntensityValues, float startBackgroundAbundance, float stopBackgroundAbundance, boolean strictModel) throws IllegalArgumentException, PeakException {
+	protected AbstractPeakModel(IScan peakMaximum, IPeakIntensityValues peakIntensityValues, float startBackgroundAbundance, float stopBackgroundAbundance, boolean strictModel) throws PeakException {
 
 		super(peakMaximum, peakIntensityValues);
 		/*
@@ -164,7 +164,7 @@ public abstract class AbstractPeakModel extends AbstractPeakModelStrict implemen
 	}
 
 	@Override
-	public void replaceRetentionTimes(List<Integer> retentionTimes) throws IllegalArgumentException, PeakException {
+	public void replaceRetentionTimes(List<Integer> retentionTimes) throws PeakException {
 
 		peakIntensityValues.replaceRetentionTimes(retentionTimes);
 		calculatePeakModel();
@@ -268,16 +268,16 @@ public abstract class AbstractPeakModel extends AbstractPeakModelStrict implemen
 		temporarilyInfo.put(key, value);
 	}
 
-	private void checkModelConditions(IScan peakMaximum, IPeakIntensityValues peakIntensityValues) throws IllegalArgumentException, PeakException {
+	private void checkModelConditions(IScan peakMaximum, IPeakIntensityValues peakIntensityValues) throws PeakException {
 
 		if(peakMaximum == null) {
-			throw new IllegalArgumentException("The peak maximum must not be null.");
+			throw new PeakException("The peak maximum must not be null.");
 		}
 		/*
 		 * Test if there are intensity values stored.
 		 */
 		if(peakIntensityValues == null || peakIntensityValues.size() < IPeakModel.MINIMUM_SCANS) {
-			throw new IllegalArgumentException("The intensity values must not be null or must contain at least 3 key value pairs.");
+			throw new PeakException("The intensity values must not be null or must contain at least 3 key value pairs.");
 		}
 		/*
 		 * Check that the highest intensity is 100.0f. If it is more or less,
@@ -350,7 +350,7 @@ public abstract class AbstractPeakModel extends AbstractPeakModelStrict implemen
 		return Math.toDegrees(Math.atan(a / b));
 	}
 
-	private void calculatePeakModel() throws IllegalArgumentException, PeakException {
+	private void calculatePeakModel() throws PeakException {
 
 		checkModelConditions(peakMaximum, peakIntensityValues);
 		backgroundEquation = calculateBackgroundEquation(startBackgroundAbundance, stopBackgroundAbundance);

@@ -246,8 +246,6 @@ public class PeakDetectorWSD extends BasePeakDetector implements IPeakDetectorWS
 					peak.setDetectorDescription(translationService.translate("%FirstDerivative", Activator.getContributorURI()));
 					peaks.add(peak);
 				}
-			} catch(IllegalArgumentException e) {
-				logger.warn(e);
 			} catch(PeakException e) {
 				logger.warn(e.getMessage());
 			}
