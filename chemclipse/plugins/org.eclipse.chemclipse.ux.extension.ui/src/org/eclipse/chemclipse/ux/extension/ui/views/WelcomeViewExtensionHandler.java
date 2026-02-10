@@ -302,8 +302,9 @@ public class WelcomeViewExtensionHandler {
 		/*
 		 * Show selection dialog to the user...
 		 */
-		List<ITileDefinition> allExtensions = getUnusedExtensions();
-		TileSelectionDialog dialog = new TileSelectionDialog(shell, allExtensions.toArray(new ITileDefinition[0]), new ColumnLabelProvider() {
+		List<ITileDefinition> tileDefinitions = getUnusedExtensions();
+		Collections.sort(tileDefinitions, (d1, d2) -> d1.getTitle().compareTo(d2.getTitle()));
+		TileSelectionDialog dialog = new TileSelectionDialog(shell, tileDefinitions.toArray(new ITileDefinition[0]), new ColumnLabelProvider() {
 
 			Map<IConfigurationElement, Image> images = new IdentityHashMap<>();
 
