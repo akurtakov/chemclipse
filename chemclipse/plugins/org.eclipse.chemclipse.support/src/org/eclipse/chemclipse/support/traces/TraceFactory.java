@@ -41,9 +41,6 @@ public class TraceFactory {
 
 	/**
 	 * Returns the list as string.
-	 * 
-	 * @param traces
-	 * @return String
 	 */
 	public static String getTracesAsString(List<ITrace> traces) {
 
@@ -58,9 +55,6 @@ public class TraceFactory {
 	/**
 	 * Returns null if valid.
 	 * Otherwise, the invalid characters are returned, separated by a whitespace.
-	 * 
-	 * @param line
-	 * @return String
 	 */
 	public static String validate(String line) {
 
@@ -128,9 +122,6 @@ public class TraceFactory {
 	/**
 	 * Determine the trace type (TraceHighResMSD, TraceGenericDelta, TraceTandemMSD or TraceGeneric) by the given line.
 	 * May return null.
-	 * 
-	 * @param content
-	 * @return Class<? extends ITrace>
 	 */
 	public static Class<? extends ITrace> getTraceType(String line, DetectorType detectorType) {
 

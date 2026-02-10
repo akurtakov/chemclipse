@@ -30,14 +30,8 @@ public interface IMeasurementProcessSupplier<ConfigType> extends IProcessSupplie
 	 * 
 	 * @param measurements
 	 *            the measurements to process
-	 * @param processorId
-	 *            the id of the processor to apply
 	 * @param processSettings
 	 *            the settings to use or <code>null</code> if default settings are in effect
-	 * @param messageConsumer
-	 *            the consumer to listen for feedback messages
-	 * @param monitor
-	 *            the monitor to use to report progress
 	 * @return the collection of processed measurements
 	 */
 	Collection<? extends IMeasurement> applyProcessor(Collection<? extends IMeasurement> measurements, ConfigType processSettings, ProcessExecutionContext context);

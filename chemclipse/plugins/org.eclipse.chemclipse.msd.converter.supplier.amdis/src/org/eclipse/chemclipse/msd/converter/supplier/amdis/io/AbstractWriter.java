@@ -82,9 +82,6 @@ public abstract class AbstractWriter {
 
 	/**
 	 * Makes a deep copy of the mass spectrum, normalizes it and removes too low abundances.
-	 * 
-	 * @param massSpectrum
-	 * @return {@link IScanMSD}
 	 */
 	protected IScanMSD getOptimizedMassSpectrum(IScanMSD massSpectrum) {
 
@@ -97,9 +94,6 @@ public abstract class AbstractWriter {
 
 	/**
 	 * Removes the ions below the given minimum abundance.
-	 * 
-	 * @param normalizedMassSpectrum
-	 * @param minimumAbundance
 	 */
 	protected void removeIonsWithAnTooLowAbundance(IScanMSD normalizedMassSpectrum, float minimumAbundance) {
 
@@ -139,9 +133,6 @@ public abstract class AbstractWriter {
 
 	/**
 	 * Returns the name information from the mass spectrum.
-	 * 
-	 * @param massSpectrum
-	 * @return String
 	 */
 	protected String getNameField(IScanMSD massSpectrum, IIdentificationTarget identificationTarget) {
 
@@ -171,9 +162,6 @@ public abstract class AbstractWriter {
 
 	/**
 	 * This method returns the identification target or null if there is none.
-	 * 
-	 * @param massSpectrum
-	 * @return
 	 */
 	protected IIdentificationTarget getIdentificationTarget(IScanMSD massSpectrum) {
 
@@ -209,9 +197,6 @@ public abstract class AbstractWriter {
 
 	/**
 	 * Returns the CAS number information from the mass spectrum.
-	 * 
-	 * @param massSpectrum
-	 * @return String
 	 */
 	protected String getCasNumberField(IIdentificationTarget identificationTarget) {
 
@@ -342,9 +327,6 @@ public abstract class AbstractWriter {
 
 	/**
 	 * Returns the comments information from the mass spectrum.
-	 * 
-	 * @param massSpectrum
-	 * @return String
 	 */
 	protected String getCommentsField(IScanMSD massSpectrum) {
 
@@ -358,9 +340,6 @@ public abstract class AbstractWriter {
 
 	/**
 	 * Returns the source information from the mass spectrum.
-	 * 
-	 * @param massSpectrum
-	 * @return String
 	 */
 	protected String getSourceField(IScanMSD massSpectrum, IIdentificationTarget identificationTarget) {
 
@@ -378,9 +357,6 @@ public abstract class AbstractWriter {
 
 	/**
 	 * Returns the retention time information from the mass spectrum.
-	 * 
-	 * @param massSpectrum
-	 * @return String
 	 */
 	protected String getRetentionTimeField(IScanMSD massSpectrum) {
 
@@ -396,9 +372,6 @@ public abstract class AbstractWriter {
 
 	/**
 	 * Returns the retention time information from the mass spectrum.
-	 * 
-	 * @param massSpectrum
-	 * @return String
 	 */
 	protected String getRelativeRetentionTimeField(IScanMSD massSpectrum) {
 
@@ -414,9 +387,6 @@ public abstract class AbstractWriter {
 
 	/**
 	 * Returns the retention index information from the mass spectrum.
-	 * 
-	 * @param massSpectrum
-	 * @return String
 	 */
 	protected String getRetentionIndexField(IScanMSD massSpectrum) {
 
@@ -432,9 +402,6 @@ public abstract class AbstractWriter {
 
 	/**
 	 * Returns the name information from the mass spectrum.
-	 * 
-	 * @param massSpectrum
-	 * @return String
 	 */
 	protected String getNumberOfPeaks(IScanMSD massSpectrum) {
 
@@ -446,9 +413,6 @@ public abstract class AbstractWriter {
 
 	/**
 	 * Returns the formula information from the mass spectrum.
-	 * 
-	 * @param massSpectrum
-	 * @return String
 	 */
 	protected String getFormulaField(IScanMSD massSpectrum) {
 
@@ -462,9 +426,6 @@ public abstract class AbstractWriter {
 
 	/**
 	 * Returns the MW information from the mass spectrum.
-	 * 
-	 * @param massSpectrum
-	 * @return String
 	 */
 	protected String getMWField(IScanMSD massSpectrum) {
 
@@ -576,9 +537,6 @@ public abstract class AbstractWriter {
 
 	/**
 	 * Returns the mass spectra in the convenient AMDIS format.
-	 * 
-	 * @param massSpectrum
-	 * @return String
 	 */
 	protected String getIonsFormatMSL(IScanMSD massSpectrum) {
 
@@ -626,9 +584,6 @@ public abstract class AbstractWriter {
 
 	/**
 	 * Returns the mass spectra in the convenient AMDIS format.
-	 * 
-	 * @param massSpectrum
-	 * @return String
 	 */
 	protected String getIonsFormatMSP(IScanMSD massSpectrum) {
 

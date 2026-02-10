@@ -98,8 +98,6 @@ public class WelcomeViewExtensionHandler {
 	/**
 	 * Constructs a {@link WelcomeViewExtensionHandler} with the given parameters
 	 * 
-	 * @param parent
-	 *            the parent for new Tile objects
 	 * @param tileContainer
 	 *            the label provider to use for the selection dialog
 	 */

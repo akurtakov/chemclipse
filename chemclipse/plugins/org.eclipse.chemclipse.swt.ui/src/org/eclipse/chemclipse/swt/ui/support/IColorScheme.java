@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,30 +18,21 @@ public interface IColorScheme {
 
 	/**
 	 * Returns the size.
-	 * 
-	 * @return int
 	 */
 	int size();
 
 	/**
 	 * Returns the next color.
-	 * 
-	 * @return Color
 	 */
 	Color getNextColor();
 
 	/**
 	 * Returns the previous color.
-	 * 
-	 * @return Color
 	 */
 	Color getPreviousColor();
 
 	/**
 	 * Return the color, given by number.
-	 * 
-	 * @param i
-	 * @return Color
 	 */
 	Color getColor(int i);
 
@@ -52,9 +43,6 @@ public interface IColorScheme {
 
 	/**
 	 * Return the current color.
-	 * 
-	 * @param i
-	 * @return Color
 	 */
 	Color getColor();
 

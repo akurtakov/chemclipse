@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -54,11 +54,6 @@ public class PeakFilter {
 	 * Applies the specified filter (filterID) with the given {@link IPeakFilterSettings} on the {@link IPeak} .<br/>
 	 * The filter can be supported as a plugin through the extension point
 	 * mechanism.
-	 * 
-	 * @param peak
-	 * @param peakFilterSettings
-	 * @param filterId
-	 * @return {@link IProcessingInfo}
 	 */
 	public static IProcessingInfo<IPeakFilterResult> applyFilter(IPeakWSD peak, IPeakFilterSettings peakFilterSettings, String filterId, IProgressMonitor monitor) {
 
@@ -76,11 +71,6 @@ public class PeakFilter {
 	/**
 	 * Applies the specified filter, but retrieves the IPeakFilterSettings dynamically.<br/>
 	 * See also method: applyFilter(IPeakMSD peak, IPeakFilterSettings peakFilterSettings, String filterId, IProgressMonitor monitor)
-	 * 
-	 * @param peak
-	 * @param filterId
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
 	 */
 	public static IProcessingInfo<IPeakFilterResult> applyFilter(IPeakWSD peak, String filterId, IProgressMonitor monitor) {
 
@@ -99,12 +89,6 @@ public class PeakFilter {
 	 * Applies the specified filter (filterID) with the given {@link IPeakFilterSettings} on the peak list .<br/>
 	 * The filter can be supported as a plugin through the extension point
 	 * mechanism.
-	 * 
-	 * @param List
-	 *            <IPeakMSD> peaks
-	 * @param peakFilterSettings
-	 * @param filterId
-	 * @return {@link IProcessingInfo}
 	 */
 	public static IProcessingInfo<IPeakFilterResult> applyFilter(List<IPeakWSD> peaks, IPeakFilterSettings peakFilterSettings, String filterId, IProgressMonitor monitor) {
 
@@ -122,12 +106,6 @@ public class PeakFilter {
 	/**
 	 * Applies the specified filter, but retrieves the IPeakFilterSettings dynamically.<br/>
 	 * See also method: applyFilter(List<IPeakMSD> peaks, IPeakFilterSettings peakFilterSettings, String filterId, IProgressMonitor monitor)
-	 * 
-	 * @param List
-	 *            <IPeakMSD> peaks
-	 * @param filterId
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
 	 */
 	public static IProcessingInfo<IPeakFilterResult> applyFilter(List<IPeakWSD> peaks, String filterId, IProgressMonitor monitor) {
 
@@ -146,11 +124,6 @@ public class PeakFilter {
 	 * Applies the specified filter (filterID) with the given {@link IPeakFilterSettings} on the peaks stored in the chromatogram selection.<br/>
 	 * The filter can be supported as a plugin through the extension point
 	 * mechanism.
-	 * 
-	 * @param chromatogramSelection
-	 * @param peakFilterSettings
-	 * @param filterId
-	 * @return {@link IProcessingInfo}
 	 */
 	public static IProcessingInfo<IPeakFilterResult> applyFilter(IChromatogramSelectionWSD chromatogramSelection, IPeakFilterSettings peakFilterSettings, String filterId, IProgressMonitor monitor) {
 
@@ -168,11 +141,6 @@ public class PeakFilter {
 	/**
 	 * Applies the specified filter, but retrieves the IPeakFilterSettings dynamically.<br/>
 	 * See also method: applyFilter(IChromatogramSelectionMSD chromatogramSelection, IPeakFilterSettings peakFilterSettings, String filterId, IProgressMonitor monitor)
-	 * 
-	 * @param chromatogramSelection
-	 * @param filterId
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
 	 */
 	public static IProcessingInfo<IPeakFilterResult> applyFilter(IChromatogramSelectionWSD chromatogramSelection, String filterId, IProgressMonitor monitor) {
 
@@ -189,8 +157,6 @@ public class PeakFilter {
 
 	/**
 	 * Returns the peak filter support instance.
-	 * 
-	 * @return {@link IPeakFilterSupport}
 	 */
 	public static IPeakFilterSupport getPeakFilterSupport() {
 
@@ -235,9 +201,6 @@ public class PeakFilter {
 	/**
 	 * Returns an {@link IPeakFilter} instance or null if none is
 	 * available.
-	 * 
-	 * @param filterId
-	 * @return IConfigurationElement
 	 */
 	private static IConfigurationElement getConfigurationElement(final String filterId) {
 

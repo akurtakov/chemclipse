@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -71,38 +71,28 @@ public interface IChromatogram extends SegmentedMeasurement, IMeasurement, IChro
 	 * by clicking on save. Simply, the converter id
 	 * is set to "", so that the software asks how to save
 	 * the chromatogram.
-	 * 
-	 * @param finalized
 	 */
 	void setFinalized(boolean finalized);
 
 	/**
 	 * The converter sets its id if the chromatogram is writable by the
 	 * converter.
-	 * 
-	 * @param id
 	 */
 	void setConverterId(String id);
 
 	/**
 	 * Returns the converter id. If the chromatogram is not writable, null or ""
 	 * will be returned.
-	 * 
-	 * @return String
 	 */
 	String getConverterId();
 
 	/**
 	 * Adds a scan to the chromatogram.
-	 * 
-	 * @param scan
 	 */
 	void addScan(IScan scan);
 
 	/**
 	 * Adds the scans to the chromatogram.
-	 * 
-	 * @param scans
 	 */
 	void addScans(List<IScan> scans);
 
@@ -111,9 +101,6 @@ public interface IChromatogram extends SegmentedMeasurement, IMeasurement, IChro
 	 * retention times should be recalculated, call
 	 * chromatogram.recalculateRetentionTimes().<br/>
 	 * If no scan was available, null will be returned.
-	 * 
-	 * @param scan
-	 * @return IScan
 	 */
 	IScan getScan(int scan);
 
@@ -121,9 +108,6 @@ public interface IChromatogram extends SegmentedMeasurement, IMeasurement, IChro
 	 * Returns the list of stored scans.
 	 * Please use it only to iterate the stored scans.
 	 * Modifications on the list may cause problems.
-	 * 
-	 * @param scan
-	 * @return List<IScan>
 	 */
 	List<IScan> getScans();
 
@@ -133,8 +117,6 @@ public interface IChromatogram extends SegmentedMeasurement, IMeasurement, IChro
 	 * chromatogram.recalculateRetentionTimes().<br/>
 	 * You can also add several scans, and call
 	 * chromatogram.recalculateRetentionTimes() afterwards.
-	 * 
-	 * @param scan
 	 */
 	void removeScan(int scan);
 
@@ -149,9 +131,6 @@ public interface IChromatogram extends SegmentedMeasurement, IMeasurement, IChro
 	 * chromatogram.recalculateRetentionTimes().<br/>
 	 * You can also remove several scans, and call
 	 * chromatogram.recalculateRetentionTimes() afterwards.
-	 * 
-	 * @param from
-	 * @param to
 	 */
 	void removeScans(int from, int to);
 
@@ -163,15 +142,11 @@ public interface IChromatogram extends SegmentedMeasurement, IMeasurement, IChro
 
 	/**
 	 * Returns the currently used noise calculator.
-	 * 
-	 * @return {@link INoiseCalculator}
 	 */
 	INoiseCalculator getNoiseCalculator();
 
 	/**
 	 * Sets the currently used noise calculator.
-	 * 
-	 * @param noiseCalculator
 	 */
 	void setNoiseCalculator(INoiseCalculator noiseCalculator);
 
@@ -182,37 +157,24 @@ public interface IChromatogram extends SegmentedMeasurement, IMeasurement, IChro
 
 	/**
 	 * Calculates the signal to noise (S/N) ratio of the given abundance.
-	 * 
-	 * @param abundance
-	 * @return float
 	 */
 	float getSignalToNoiseRatio(float abundance);
 
 	/**
 	 * Returns the chromatogram name from a directory.
 	 * E.g., if the filename is /.../chrom.D/DATA.MS, chrom will be returned.
-	 * 
-	 * @param file
-	 * @param nameDefault
-	 * @return String
 	 */
 	String extractNameFromDirectory(String nameDefault, String directoryExtension);
 
 	/**
 	 * Returns the chromatogram name from a file.
 	 * E.g., if the filename is /.../chrom.csv, chrom will be returned.
-	 * 
-	 * @param file
-	 * @param nameDefault
-	 * @return String
 	 */
 	String extractNameFromFile(String nameDefault);
 
 	/**
 	 * Returns the master chromatogram if it is set.
 	 * This method may return null.
-	 * 
-	 * @return {@link IChromatogram}
 	 */
 	IChromatogram getMasterChromatogram();
 
@@ -220,22 +182,16 @@ public interface IChromatogram extends SegmentedMeasurement, IMeasurement, IChro
 	 * Stores a list of referenced chromatograms.
 	 * Some vendors store more than one chromatogram in one file.
 	 * This should be part of further improvements how to handle this issue.
-	 * 
-	 * @return {@link IChromatogram}
 	 */
 	List<IChromatogram> getReferencedChromatograms();
 
 	/**
 	 * Add a referenced chromatogram.
-	 * 
-	 * @param chromatogram
 	 */
 	void addReferencedChromatogram(IChromatogram chromatogram);
 
 	/**
 	 * Removes a referenced chromatogram.
-	 * 
-	 * @param chromatogram
 	 */
 	void removeReferencedChromatogram(IChromatogram chromatogram);
 
@@ -248,8 +204,6 @@ public interface IChromatogram extends SegmentedMeasurement, IMeasurement, IChro
 
 	/**
 	 * Marks that this chromatogram has been set to unload modus.
-	 * 
-	 * @return
 	 */
 	boolean isUnloaded();
 
@@ -257,23 +211,16 @@ public interface IChromatogram extends SegmentedMeasurement, IMeasurement, IChro
 	 * This methods checks whether different scan cycles are contained.
 	 * All scans of one cycle shall be displayed in TIC mode with the
 	 * summed signal.
-	 * 
-	 * @return boolean
 	 */
 	boolean containsScanCycles();
 
 	/**
 	 * Returns the scans identified by the scan cycle id.
-	 * 
-	 * @param cycleNumber
-	 * @return List<IScan>
 	 */
 	List<IScan> getScanCycleScans(int cycleNumber);
 
 	/**
 	 * Returns the chromatogram method.
-	 * 
-	 * @return IMethod
 	 */
 	IMethod getMethod();
 

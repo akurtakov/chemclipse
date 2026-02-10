@@ -88,10 +88,6 @@ public class SpinnerFieldEditor2 extends FieldEditor {
 	 *            the name of the preference this field editor works on
 	 * @param labelText
 	 *            the label text of the field editor
-	 * @param min
-	 *            Minimal value
-	 * @param max
-	 *            Maximal value
 	 * @param strategy
 	 *            either <code>VALIDATE_ON_KEY_STROKE</code> to perform
 	 *            on the fly checking (the default), or <code>VALIDATE_ON_FOCUS_LOST</code> to
