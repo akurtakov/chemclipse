@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,19 +28,21 @@ public class TargetBuilderCSD {
 
 	private static final Logger logger = Logger.getLogger(TargetBuilderCSD.class);
 
-	public void setPeakTargetUnknown(IPeakCSD peakCSD, String identifier, TargetUnknownSettings targetUnknownSettings) {
+	public IIdentificationTarget setPeakTargetUnknown(IPeakCSD peakCSD, String identifier, TargetUnknownSettings targetUnknownSettings) {
 
+		IIdentificationTarget identificationTarget = null;
 		try {
 			IScan scan = peakCSD.getPeakModel().getPeakMaximum();
 			if(scan instanceof IScanCSD unknown) {
 				ILibraryInformation libraryInformation = UnknownTargetBuilder.getLibraryInformationUnknown(unknown, targetUnknownSettings, "");
 				IComparisonResult comparisonResult = UnknownTargetBuilder.getComparisonResultUnknown(targetUnknownSettings.getMatchQuality());
-				IIdentificationTarget peakTarget = new IdentificationTarget(libraryInformation, comparisonResult);
-				peakTarget.setIdentifier(identifier);
-				peakCSD.getTargets().add(peakTarget);
+				identificationTarget = new IdentificationTarget(libraryInformation, comparisonResult);
+				identificationTarget.setIdentifier(identifier);
+				peakCSD.getTargets().add(identificationTarget);
 			}
 		} catch(ReferenceMustNotBeNullException e) {
 			logger.warn(e);
 		}
+		return identificationTarget;
 	}
 }

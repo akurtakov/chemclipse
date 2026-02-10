@@ -72,19 +72,21 @@ public class TargetBuilderMSD {
 		return peakTarget;
 	}
 
-	public void setPeakTargetUnknown(IPeakMSD peakMSD, String identifier, TargetUnknownSettings targetUnknownSettings) {
+	public IIdentificationTarget setPeakTargetUnknown(IPeakMSD peakMSD, String identifier, TargetUnknownSettings targetUnknownSettings) {
 
+		IIdentificationTarget identificationTarget = null;
 		try {
 			IScanMSD unknown = peakMSD.getExtractedMassSpectrum();
 			String traces = extractTraces(unknown, targetUnknownSettings);
 			ILibraryInformation libraryInformation = UnknownTargetBuilder.getLibraryInformationUnknown(unknown, targetUnknownSettings, traces);
 			IComparisonResult comparisonResult = UnknownTargetBuilder.getComparisonResultUnknown(targetUnknownSettings.getMatchQuality());
-			IIdentificationTarget peakTarget = new IdentificationTarget(libraryInformation, comparisonResult);
-			peakTarget.setIdentifier(identifier);
-			peakMSD.getTargets().add(peakTarget);
+			identificationTarget = new IdentificationTarget(libraryInformation, comparisonResult);
+			identificationTarget.setIdentifier(identifier);
+			peakMSD.getTargets().add(identificationTarget);
 		} catch(ReferenceMustNotBeNullException e) {
 			logger.warn(e);
 		}
+		return identificationTarget;
 	}
 
 	public IIdentificationTarget getMassSpectrumTarget(IScanMSD reference, IComparisonResult comparisonResult, String identifier) {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,7 +28,6 @@ import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings
 import org.eclipse.chemclipse.csd.model.core.IPeakCSD;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.identifier.IPeakIdentificationResults;
-import org.eclipse.chemclipse.model.identifier.PeakIdentificationResults;
 import org.eclipse.chemclipse.model.targets.TargetUnknownSettings;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -80,8 +79,7 @@ public class PeakIdentifierUnknown implements IPeakIdentifierMSD, IPeakIdentifie
 			TargetUnknownSettings targetUnknownSettings = UnknownSettingsSupport.getTargetUnknownSettings(unknownSettings);
 			float limitMatchFactor = unknownSettings.getLimitMatchFactor();
 			UnknownIdentifier unknownIdentifier = new UnknownIdentifier();
-			unknownIdentifier.runIdentificationPeak(peaks, limitMatchFactor, targetUnknownSettings);
-			IPeakIdentificationResults peakIdentificationResults = new PeakIdentificationResults();
+			IPeakIdentificationResults peakIdentificationResults = unknownIdentifier.runIdentificationPeak(peaks, limitMatchFactor, targetUnknownSettings);
 			processingInfo.setProcessingResult(peakIdentificationResults);
 			int results = peakIdentificationResults.getIdentificationResults().size();
 			processingInfo.addInfoMessage(UnknownIdentifier.IDENTIFIER, MessageFormat.format("{0} peaks have been marked as unknown.", results));

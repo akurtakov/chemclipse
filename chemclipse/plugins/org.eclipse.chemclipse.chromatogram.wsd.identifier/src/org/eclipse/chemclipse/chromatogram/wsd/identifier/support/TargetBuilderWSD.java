@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -35,21 +35,23 @@ public class TargetBuilderWSD {
 
 	private static final Logger logger = Logger.getLogger(TargetBuilderWSD.class);
 
-	public void setPeakTargetUnknown(IPeakWSD peakWSD, String identifier, TargetUnknownSettings targetUnknownSettings) {
+	public IIdentificationTarget setPeakTargetUnknown(IPeakWSD peakWSD, String identifier, TargetUnknownSettings targetUnknownSettings) {
 
+		IIdentificationTarget identificationTarget = null;
 		try {
 			IScan scan = peakWSD.getPeakModel().getPeakMaximum();
 			if(scan instanceof IScanWSD unknown) {
 				String traces = extractTraces(unknown, targetUnknownSettings);
 				ILibraryInformation libraryInformation = UnknownTargetBuilder.getLibraryInformationUnknown(unknown, targetUnknownSettings, traces);
 				IComparisonResult comparisonResult = UnknownTargetBuilder.getComparisonResultUnknown(targetUnknownSettings.getMatchQuality());
-				IIdentificationTarget peakTarget = new IdentificationTarget(libraryInformation, comparisonResult);
-				peakTarget.setIdentifier(identifier);
-				peakWSD.getTargets().add(peakTarget);
+				identificationTarget = new IdentificationTarget(libraryInformation, comparisonResult);
+				identificationTarget.setIdentifier(identifier);
+				peakWSD.getTargets().add(identificationTarget);
 			}
 		} catch(ReferenceMustNotBeNullException e) {
 			logger.warn(e);
 		}
+		return identificationTarget;
 	}
 
 	public void setWaveSpectrumTargetUnknown(IScanWSD unknown, String identifier, TargetUnknownSettings targetUnknownSettings) {

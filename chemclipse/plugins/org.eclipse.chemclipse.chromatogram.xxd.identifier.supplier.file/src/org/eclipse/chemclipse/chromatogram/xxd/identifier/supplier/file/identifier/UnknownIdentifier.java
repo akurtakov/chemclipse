@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,6 +19,11 @@ import org.eclipse.chemclipse.chromatogram.wsd.identifier.support.TargetBuilderW
 import org.eclipse.chemclipse.csd.model.core.IPeakCSD;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.core.IScan;
+import org.eclipse.chemclipse.model.identifier.IIdentificationResult;
+import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
+import org.eclipse.chemclipse.model.identifier.IPeakIdentificationResults;
+import org.eclipse.chemclipse.model.identifier.PeakIdentificationResults;
+import org.eclipse.chemclipse.model.implementation.IdentificationResult;
 import org.eclipse.chemclipse.model.support.LimitSupport;
 import org.eclipse.chemclipse.model.targets.TargetUnknownSettings;
 import org.eclipse.chemclipse.msd.identifier.support.TargetBuilderMSD;
@@ -35,19 +40,29 @@ public class UnknownIdentifier {
 	private static final TargetBuilderCSD TARGETBUILDER_CSD = new TargetBuilderCSD();
 	private static final TargetBuilderWSD TARGETBUILDER_WSD = new TargetBuilderWSD();
 
-	public void runIdentificationPeak(List<? extends IPeak> peaks, float limitMatchFactor, TargetUnknownSettings targetUnknownSettings) {
+	public IPeakIdentificationResults runIdentificationPeak(List<? extends IPeak> peaks, float limitMatchFactor, TargetUnknownSettings targetUnknownSettings) {
+
+		IPeakIdentificationResults peakIdentificationResults = new PeakIdentificationResults();
 
 		for(IPeak peak : peaks) {
+			IIdentificationResult identificationResult = new IdentificationResult();
 			if(LimitSupport.doIdentify(peak.getTargets(), limitMatchFactor)) {
+				IIdentificationTarget identificationTarget = null;
 				if(peak instanceof IPeakMSD peakMSD) {
-					TARGETBUILDER_MSD.setPeakTargetUnknown(peakMSD, IDENTIFIER, targetUnknownSettings);
+					identificationTarget = TARGETBUILDER_MSD.setPeakTargetUnknown(peakMSD, IDENTIFIER, targetUnknownSettings);
 				} else if(peak instanceof IPeakCSD peakCSD) {
-					TARGETBUILDER_CSD.setPeakTargetUnknown(peakCSD, IDENTIFIER, targetUnknownSettings);
+					identificationTarget = TARGETBUILDER_CSD.setPeakTargetUnknown(peakCSD, IDENTIFIER, targetUnknownSettings);
 				} else if(peak instanceof IPeakWSD peakWSD) {
-					TARGETBUILDER_WSD.setPeakTargetUnknown(peakWSD, IDENTIFIER, targetUnknownSettings);
+					identificationTarget = TARGETBUILDER_WSD.setPeakTargetUnknown(peakWSD, IDENTIFIER, targetUnknownSettings);
+				}
+				if(identificationTarget != null) {
+					identificationResult.add(identificationTarget);
 				}
 			}
+			peakIdentificationResults.add(identificationResult);
 		}
+
+		return peakIdentificationResults;
 	}
 
 	public void runIdentificationScan(List<? extends IScan> spectraList, float limitMatchFactor, TargetUnknownSettings targetUnknownSettings) {
