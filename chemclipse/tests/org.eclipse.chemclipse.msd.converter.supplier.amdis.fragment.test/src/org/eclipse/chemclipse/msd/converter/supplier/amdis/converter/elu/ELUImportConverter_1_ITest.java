@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.eclipse.chemclipse.model.core.PeakType;
 import org.eclipse.chemclipse.msd.converter.io.IPeakReader;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.io.ELUReader;
@@ -42,7 +43,7 @@ public class ELUImportConverter_1_ITest {
 	private File file;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		reader = new ELUReader();
 		file = new File(TestPathHelper.TESTFILE_IMPORT_PEAKS_1_ELU);
@@ -57,6 +58,7 @@ public class ELUImportConverter_1_ITest {
 		IProcessingInfo<IPeaksMSD> processingInfo = reader.read(file, new NullProgressMonitor());
 		List<IPeakMSD> peaks = processingInfo.getProcessingResult().getPeaks();
 		IPeakMSD peak1 = peaks.get(0);
+		assertEquals(peak1.getPeakType(), PeakType.DD);
 
 		assertEquals(14, peak1.getPeakModel().getTemporarilyInfo(IPeakReader.TEMP_INFO_START_SCAN));
 		assertEquals(23, peak1.getPeakModel().getTemporarilyInfo(IPeakReader.TEMP_INFO_STOP_SCAN));
