@@ -27,7 +27,7 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.support.ui.workbench.EditorSupport;
 import org.eclipse.chemclipse.support.ui.workbench.PerspectiveSupport;
-import org.eclipse.chemclipse.ux.extension.ui.definitions.TileDefinition;
+import org.eclipse.chemclipse.ux.extension.ui.definitions.IWelcomeTileDefinition;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MBasicFactory;
@@ -38,7 +38,7 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.swt.graphics.Image;
 
-public class DemoWelcomeTile implements TileDefinition {
+public class DemoWelcomeTile implements IWelcomeTileDefinition {
 
 	private File chromatogramFile;
 

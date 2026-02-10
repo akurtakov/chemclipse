@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,7 +18,7 @@ import java.util.function.Function;
 
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.swt.ui.support.Fonts;
-import org.eclipse.chemclipse.ux.extension.ui.definitions.TileDefinition;
+import org.eclipse.chemclipse.ux.extension.ui.definitions.ITileDefinition;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
@@ -49,12 +49,12 @@ public class TaskTile extends Composite {
 	private Label textSection;
 	private Label textDesciption;
 
-	private final TileDefinition definition;
-	private final Consumer<TileDefinition> definitionConsumer;
+	private final ITileDefinition definition;
+	private final Consumer<ITileDefinition> definitionConsumer;
 	private final Color[] colors;
-	private final Function<TileDefinition, Integer> styleFunction;
+	private final Function<ITileDefinition, Integer> styleFunction;
 
-	public TaskTile(Composite parent, TileDefinition definition, Consumer<TileDefinition> definitionConsumer, Function<TileDefinition, Integer> styleFunction, Color[] colors) {
+	public TaskTile(Composite parent, ITileDefinition definition, Consumer<ITileDefinition> definitionConsumer, Function<ITileDefinition, Integer> styleFunction, Color[] colors) {
 
 		super(parent, SWT.NONE);
 
@@ -79,7 +79,7 @@ public class TaskTile extends Composite {
 		updateFromDefinition();
 	}
 
-	public TileDefinition getDefinition() {
+	public ITileDefinition getDefinition() {
 
 		return definition;
 	}
