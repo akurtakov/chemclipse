@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -97,10 +97,10 @@ public class ChromatogramSelectionFSD extends AbstractChromatogramSelection impl
 			 * Chromatogram FSD
 			 */
 			if(chromatogram instanceof IChromatogramFSD chromatogramFSD) {
-				setSelectedScan(chromatogramFSD.getScan(1));
+				setSelectedScan(chromatogramFSD.getScan(1), fireUpdate);
 			}
 		} else {
-			setSelectedScan(null);
+			setSelectedScan(null, fireUpdate);
 		}
 		/*
 		 * Fire an update.
