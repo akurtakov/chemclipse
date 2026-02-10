@@ -24,8 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import org.eclipse.chemclipse.converter.exceptions.FileIsNotWriteableException;
-import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.converter.l10n.ConverterMessages;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
@@ -84,12 +82,6 @@ public class Identifier {
 
 	/**
 	 * Performs a mass spectrum identification.
-	 *
-	 * @param massSpectrumList
-	 * @param searchSettings
-	 * @param monitor
-	 * @return IMassSpectrumIdentificationResults
-	 * @throws FileNotFoundException
 	 */
 	public IMassSpectra runMassSpectrumIdentification(List<IScanMSD> massSpectrumList, ISearchSettings searchSettings, IProgressMonitor monitor) throws FileNotFoundException {
 
@@ -162,12 +154,6 @@ public class Identifier {
 
 	/**
 	 * Performs a peak identification.
-	 *
-	 * @param peaks
-	 * @param searchSettings
-	 * @param monitor
-	 * @return IPeakIdentificationResults
-	 * @throws FileNotFoundException
 	 */
 	public IPeakIdentificationResults runPeakIdentification(List<? extends IPeakMSD> peaks, ISearchSettings searchSettings, IProcessingInfo<?> processingInfo, IProgressMonitor monitor) throws FileNotFoundException {
 
@@ -448,14 +434,6 @@ public class Identifier {
 
 	/**
 	 * Prepares the files.
-	 *
-	 * @param runtimeSupport
-	 * @param monitor
-	 * @param peaks
-	 * @throws NoConverterAvailableException
-	 * @throws IOException
-	 * @throws FileIsNotWriteableException
-	 * @throws FileNotFoundException
 	 */
 	private void prepareFiles(IExtendedRuntimeSupport runtimeSupport, IMassSpectra massSpectra, IProgressMonitor monitor) throws IOException {
 
@@ -498,13 +476,6 @@ public class Identifier {
 
 	/**
 	 * Runs the NIST application.
-	 * 
-	 * @param runtimeSupport
-	 * @param maxProcessTime
-	 * @param waitTime
-	 * @param monitor
-	 * @return Compounds
-	 * @throws IOException
 	 */
 	private Compounds runNistApplication(final IExtendedRuntimeSupport runtimeSupport, final long maxProcessTime, int waitTime, final IProgressMonitor monitor) throws IOException {
 
@@ -594,11 +565,6 @@ public class Identifier {
 
 	/**
 	 * Get the result.
-	 *
-	 * @param peak
-	 * @param compound
-	 * @param peakIdentifierSettings
-	 * @return {@link INistPeakIdentificationResults}
 	 */
 	public IPeakIdentificationResults getPeakIdentificationResults(Compounds compounds, List<? extends IPeakMSD> peaks, ISearchSettings searchSettings, IProcessingInfo<?> processingInfo) {
 
@@ -678,10 +644,6 @@ public class Identifier {
 
 	/**
 	 * Returns the identification entry or null if something has gone wrong.
-	 *
-	 * @param compound
-	 * @param index
-	 * @return {@link INistPeakIdentificationEntry}
 	 */
 	public IIdentificationTarget getPeakIdentificationEntry(Compound compound, int index) {
 
@@ -713,13 +675,6 @@ public class Identifier {
 
 	/**
 	 * Assigns the mass spectrum compounds.
-	 *
-	 * @param compounds
-	 * @param massSpectra
-	 * @param identificationResults
-	 * @param searchSettings
-	 * @param monitor
-	 * @return INistMassSpectrumIdentificationResults
 	 */
 	private IIdentificationResults assignMassSpectrumCompounds(List<Compound> compounds, List<IScanMSD> massSpectra, IIdentificationResults identificationResults, ISearchSettings searchSettings, IProgressMonitor monitor) {
 
@@ -756,11 +711,6 @@ public class Identifier {
 
 	/**
 	 * Returns the mass spectrum identification result.
-	 *
-	 * @param massSpectrum
-	 * @param compound
-	 * @param searchSettings
-	 * @return INistMassSpectrumIdentificationResult
 	 */
 	public IIdentificationResult getMassSpectrumIdentificationResult(IScanMSD massSpectrum, Compound compound, ISearchSettings searchSettings) {
 
@@ -792,9 +742,6 @@ public class Identifier {
 
 	/**
 	 * Returns the mass spectrum identification entry.
-	 *
-	 * @param hit
-	 * @return INistMassSpectrumIdentificationEntry
 	 */
 	public IIdentificationTarget getMassSpectrumIdentificationEntry(Hit hit, Compound compound) {
 

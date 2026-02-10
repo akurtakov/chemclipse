@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,8 +23,6 @@ public interface ILibraryInformation extends IClassifier, Serializable {
 
 	/**
 	 * Returns the name of the library mass spectrum.
-	 * 
-	 * @return String
 	 */
 	String getName();
 
@@ -35,23 +33,17 @@ public interface ILibraryInformation extends IClassifier, Serializable {
 
 	/**
 	 * Returns the list of synonyms or an empty list.
-	 * 
-	 * @return {@link Set}
 	 */
 	Set<String> getSynonyms();
 
 	/**
 	 * Sets the synonyms.
 	 * The set must be not null.
-	 * 
-	 * @param synonyms
 	 */
 	void setSynonyms(Set<String> synonyms);
 
 	/**
 	 * Returns CAS number of the library mass spectrum.
-	 * 
-	 * @return String
 	 */
 	String getCasNumber();
 
@@ -62,8 +54,6 @@ public interface ILibraryInformation extends IClassifier, Serializable {
 
 	/**
 	 * Add an additional CAS numbers.
-	 * 
-	 * @param casNumber
 	 */
 	void addCasNumber(String casNumber);
 
@@ -71,8 +61,6 @@ public interface ILibraryInformation extends IClassifier, Serializable {
 
 	/**
 	 * Returns an unmodifiable list of the CAS numbers.
-	 * 
-	 * @return List<String>
 	 */
 	List<String> getCasNumbers();
 
@@ -83,8 +71,6 @@ public interface ILibraryInformation extends IClassifier, Serializable {
 
 	/**
 	 * Returns the formula of the library mass spectrum.
-	 * 
-	 * @return String
 	 */
 	String getFormula();
 
@@ -95,8 +81,6 @@ public interface ILibraryInformation extends IClassifier, Serializable {
 
 	/**
 	 * Returns the SMILES of the library mass spectrum.
-	 * 
-	 * @return String
 	 */
 	String getSmiles();
 
@@ -107,8 +91,6 @@ public interface ILibraryInformation extends IClassifier, Serializable {
 
 	/**
 	 * Returns the InChI of the library mass spectrum.
-	 * 
-	 * @return String
 	 */
 	String getInChI();
 
@@ -123,8 +105,6 @@ public interface ILibraryInformation extends IClassifier, Serializable {
 
 	/**
 	 * Returns the mol weight of the library mass spectrum.
-	 * 
-	 * @return String
 	 */
 	double getMolWeight();
 
@@ -147,8 +127,6 @@ public interface ILibraryInformation extends IClassifier, Serializable {
 
 	/**
 	 * Returns comments of the library mass spectrum.
-	 * 
-	 * @return String
 	 */
 	String getComments();
 
@@ -160,8 +138,6 @@ public interface ILibraryInformation extends IClassifier, Serializable {
 	/**
 	 * Returns the reference id.
 	 * This field is used to track internal references.
-	 * 
-	 * @return String
 	 */
 	String getReferenceIdentifier();
 
@@ -173,15 +149,11 @@ public interface ILibraryInformation extends IClassifier, Serializable {
 
 	/**
 	 * Returns miscellaneous information ...
-	 * 
-	 * @return String
 	 */
 	String getMiscellaneous();
 
 	/**
 	 * Sets miscellaneous information ...
-	 * 
-	 * @return String
 	 */
 	void setMiscellaneous(String miscellaneous);
 
@@ -195,15 +167,11 @@ public interface ILibraryInformation extends IClassifier, Serializable {
 
 	/**
 	 * Returns the contributor information.
-	 * 
-	 * @return String
 	 */
 	String getContributor();
 
 	/**
 	 * Sets the contributor information.
-	 * 
-	 * @return String
 	 */
 	void setContributor(String contributor);
 
@@ -220,8 +188,6 @@ public interface ILibraryInformation extends IClassifier, Serializable {
 	/**
 	 * Returns an unmodifiable list of the available column
 	 * index markers in the correct sort order.
-	 * 
-	 * @return {@link List}
 	 */
 	List<IColumnIndexMarker> getColumnIndexMarkers();
 
@@ -234,8 +200,6 @@ public interface ILibraryInformation extends IClassifier, Serializable {
 	/**
 	 * Returns an unmodifiable list of the available
 	 * flavor markers.
-	 * 
-	 * @return {@link List}
 	 */
 	List<IFlavorMarker> getFlavorMarkers();
 

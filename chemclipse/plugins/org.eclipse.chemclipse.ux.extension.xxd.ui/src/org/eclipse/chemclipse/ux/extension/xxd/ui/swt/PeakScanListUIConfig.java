@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -40,7 +40,6 @@ public interface PeakScanListUIConfig extends IToolbarConfig, TableConfig {
 	/**
 	 * Sets whether this list displays scans
 	 * 
-	 * @param show
 	 * @param inRange
 	 *            if true only select in given range, ignored when show is false
 	 */
@@ -49,7 +48,6 @@ public interface PeakScanListUIConfig extends IToolbarConfig, TableConfig {
 	/**
 	 * Sets whether this list displays peaks
 	 * 
-	 * @param showScans
 	 * @param inRange
 	 *            if true only select in given range, ignored when show is false
 	 */
@@ -59,8 +57,6 @@ public interface PeakScanListUIConfig extends IToolbarConfig, TableConfig {
 
 	/**
 	 * The interaction mode to use
-	 * 
-	 * @param interactionMode
 	 */
 	void setInteractionMode(InteractionMode interactionMode);
 }

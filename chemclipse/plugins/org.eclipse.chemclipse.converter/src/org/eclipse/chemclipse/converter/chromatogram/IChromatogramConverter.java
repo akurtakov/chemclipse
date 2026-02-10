@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -29,8 +29,6 @@ public interface IChromatogramConverter<P extends IPeak, C extends IChromatogram
 	 * about all valid and registered chromatogram converters.<br/>
 	 * It can be used to get more information about the registered converters
 	 * such like filter names, file extensions.
-	 *
-	 * @return ChromatogramConverterSupport
 	 */
 	IChromatogramConverterSupport getChromatogramConverterSupport();
 
@@ -41,11 +39,6 @@ public interface IChromatogramConverter<P extends IPeak, C extends IChromatogram
 	 * available.<br/>
 	 * If no converter was available, a
 	 * NoChromatogramConverterAvailableException will be thrown.
-	 *
-	 * @param chromatogram
-	 * @param converterId
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
 	 */
 	IProcessingInfo<IChromatogramOverview> convertOverview(File file, String converterId, IProgressMonitor monitor);
 
@@ -58,28 +51,16 @@ public interface IChromatogramConverter<P extends IPeak, C extends IChromatogram
 	 * For example that the file is not readable or the file is not existent.<br/>
 	 * If no converter was able to read the file, a
 	 * NoChromatogramConverterAvailableException will be thrown.
-	 *
-	 * @param chromatogram
-	 * @param converterId
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
 	 */
 	IProcessingInfo<C> convert(File file, String converterId, IProgressMonitor monitor);
 
 	/**
 	 * If no suitable parser was found, null will be returned.
-	 *
-	 * @param file
-	 * @param overview
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
 	 */
 	IProcessingInfo<C> getChromatogram(File file, boolean overview, IProgressMonitor monitor);
 
 	/**
 	 * Maybe override to add your own methods.
-	 *
-	 * @param processingInfo
 	 */
 	void postProcessChromatogram(IProcessingInfo<C> processingInfo, IProgressMonitor monitor);
 

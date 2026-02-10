@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,11 +24,6 @@ public class FileParserSupport {
 	/**
 	 * The first matched/sorted file is returned that matches the prefix and extension pattern.
 	 * Null if none could be matched.
-	 * 
-	 * @param directory
-	 * @param filePrefix
-	 * @param fileExtension
-	 * @return {@link File}
 	 */
 	public static File matchFile(File directory, String filePrefix, String fileExtension) {
 
@@ -41,11 +36,6 @@ public class FileParserSupport {
 	/**
 	 * The first matched/sorted file is returned that matches the prefix and extension pattern.
 	 * Null if none could be matched.
-	 * 
-	 * @param directory
-	 * @param filePrefix
-	 * @param fileExtension
-	 * @return {@link File}
 	 */
 	public static File matchFile(File directory, Set<String> filePrefixes, String fileExtension) {
 
@@ -55,11 +45,6 @@ public class FileParserSupport {
 
 	/**
 	 * A list of files is returned that matches the prefix and extension pattern.
-	 * 
-	 * @param directory
-	 * @param filePrefix
-	 * @param fileExtension
-	 * @return {@link List}
 	 */
 	public static List<File> match(File directory, Set<String> filePrefixes, String fileExtension) {
 
@@ -90,10 +75,6 @@ public class FileParserSupport {
 	/**
 	 * Try to get the file given by the directory and name.
 	 * Additional tries to lower and upper case of the name are performed to get the file.
-	 * 
-	 * @param baseFileDirectory
-	 * @param name
-	 * @return {@link File}
 	 */
 	public static File find(String directory, String name) {
 

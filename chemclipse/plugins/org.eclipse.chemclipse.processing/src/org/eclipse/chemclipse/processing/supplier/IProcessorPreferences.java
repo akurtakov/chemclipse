@@ -73,7 +73,6 @@ public interface IProcessorPreferences<SettingType> {
 	/**
 	 * constructs a new settings instance from the current user settings
 	 * 
-	 * @param settingsClass
 	 * @return the currently stored user settings for this processor
 	 */
 	default SettingType getUserSettings() {

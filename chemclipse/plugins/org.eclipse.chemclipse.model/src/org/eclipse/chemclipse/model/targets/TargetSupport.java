@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,9 +23,6 @@ public class TargetSupport {
 
 	/**
 	 * Returns the best target string representation or "" if none is available.
-	 * 
-	 * @param object
-	 * @return {@link String}
 	 */
 	public static String getBestTargetLibraryField(ITargetSupplier targetSupplier) {
 
@@ -43,9 +40,6 @@ public class TargetSupport {
 
 	/**
 	 * Return the best identification target. May return null.
-	 * 
-	 * @param object
-	 * @return {@link IIdentificationTarget}
 	 */
 	public static IIdentificationTarget getBestIdentificationTarget(ITargetSupplier targetSupplier) {
 

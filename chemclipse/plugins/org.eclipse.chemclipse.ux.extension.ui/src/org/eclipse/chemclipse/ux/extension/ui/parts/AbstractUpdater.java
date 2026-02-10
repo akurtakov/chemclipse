@@ -37,9 +37,6 @@ public abstract class AbstractUpdater<T extends Composite> {
 
 	/**
 	 * Create the part with the given main topic.
-	 * 
-	 * @param parent
-	 * @param topic
 	 */
 	protected AbstractUpdater(String topic, DataUpdateSupport dataUpdateSupport) {
 
@@ -48,9 +45,6 @@ public abstract class AbstractUpdater<T extends Composite> {
 
 	/**
 	 * Create the part with the given main topic and the main control.
-	 * 
-	 * @param topic
-	 * @param control
 	 */
 	protected AbstractUpdater(String topic, T control, DataUpdateSupport dataUpdateSupport) {
 
@@ -91,8 +85,6 @@ public abstract class AbstractUpdater<T extends Composite> {
 	/**
 	 * Return the control of this part.
 	 * This could be null if it has been not set yet.
-	 * 
-	 * @return T
 	 */
 	protected T getControl() {
 
@@ -119,10 +111,6 @@ public abstract class AbstractUpdater<T extends Composite> {
 	/**
 	 * Implement to update the object of the given topic.
 	 * If consuming the topic was successful, return true.
-	 * 
-	 * @param objects
-	 * @param topic
-	 * @return boolean
 	 */
 	protected abstract boolean updateData(List<Object> objects, String topic);
 
@@ -137,9 +125,6 @@ public abstract class AbstractUpdater<T extends Composite> {
 
 	/**
 	 * Returns whether this topic shall be consumed or not.
-	 * 
-	 * @param topic
-	 * @return boolean
 	 */
 	protected boolean isUpdateTopic(String topic) {
 

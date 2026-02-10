@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -67,9 +67,6 @@ public class TraceRangeMatcher {
 
 	/**
 	 * Before using this method, run compileRetentionTimeFocusMap(...)
-	 * 
-	 * @param retentionTime
-	 * @return {@link Boolean}
 	 */
 	public boolean isRetentionTimeInFocus(int retentionTime) {
 
@@ -125,8 +122,6 @@ public class TraceRangeMatcher {
 
 	/**
 	 * The value map is either a index, mz or index, wavelength map.
-	 * 
-	 * @param valueMap
 	 */
 	public void applyTraceIndices(Map<Integer, Double> valueMap) {
 
@@ -151,9 +146,6 @@ public class TraceRangeMatcher {
 
 	/**
 	 * Return the trace ranges for a given retention time.
-	 * 
-	 * @param retentionTime
-	 * @return List<TraceRange>
 	 */
 	public List<TraceRange2D> getTraceRanges(int retentionTime) {
 
@@ -173,12 +165,6 @@ public class TraceRangeMatcher {
 
 	/**
 	 * Returns the indices for a given range.
-	 * 
-	 * @param retentionTime
-	 * @param traceRanges
-	 * @param start
-	 * @param stop
-	 * @return Set<Integer>
 	 */
 	public Set<Integer> getTraceIndices(int retentionTime, int start, int stop) {
 

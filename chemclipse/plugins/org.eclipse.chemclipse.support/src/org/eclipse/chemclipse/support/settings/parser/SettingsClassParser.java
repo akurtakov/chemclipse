@@ -73,9 +73,6 @@ public class SettingsClassParser<SettingType> implements SettingsParser<SettingT
 
 	/**
 	 * parses a given class for annotations and generate {@link InputValue}s from it
-	 * 
-	 * @param clazz
-	 * @return
 	 */
 	@Override
 	public List<InputValue> getInputValues() {

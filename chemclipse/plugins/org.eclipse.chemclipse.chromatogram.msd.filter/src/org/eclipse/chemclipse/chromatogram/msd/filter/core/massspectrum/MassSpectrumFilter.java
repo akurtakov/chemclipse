@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -54,11 +54,6 @@ public class MassSpectrumFilter {
 	 * Applies the specified filter (filterID) with the given {@link IMassSpectrumFilterSettings} on the {@link IScanMSD} .<br/>
 	 * The filter can be supported as a plugin through the extension point
 	 * mechanism.
-	 * 
-	 * @param massSpectrum
-	 * @param massSpectrumFilterSettings
-	 * @param filterId
-	 * @return {@link IProcessingInfo}
 	 */
 	public static IProcessingInfo<IMassSpectrumFilterResult> applyFilter(IScanMSD massSpectrum, IMassSpectrumFilterSettings massSpectrumFilterSettings, String filterId, IProgressMonitor monitor) {
 
@@ -68,11 +63,6 @@ public class MassSpectrumFilter {
 	/**
 	 * Applies the specified filter, but retrieves the IMassSpectrumFilterSettings dynamically.<br/>
 	 * See also method: applyFilter(IMassSpectrum massSpectrum, IMassSpectrumFilterSettings massSpectrumFilterSettings, String filterId, IProgressMonitor monitor)
-	 * 
-	 * @param massSpectrum
-	 * @param filterId
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
 	 */
 	public static IProcessingInfo<IMassSpectrumFilterResult> applyFilter(IScanMSD massSpectrum, String filterId, IProgressMonitor monitor) {
 
@@ -83,12 +73,6 @@ public class MassSpectrumFilter {
 	 * Applies the specified filter (filterID) with the given {@link IMassSpectrumFilterSettings} on the mass spectra list .<br/>
 	 * The filter can be supported as a plugin through the extension point
 	 * mechanism.
-	 * 
-	 * @param List
-	 *            <IMassSpectrum> massSpectra
-	 * @param massSpectraFilterSettings
-	 * @param filterId
-	 * @return {@link IProcessingInfo}
 	 */
 	public static IProcessingInfo<IMassSpectrumFilterResult> applyFilter(List<IScanMSD> massSpectra, IMassSpectrumFilterSettings massSpectraFilterSettings, String filterId, IProgressMonitor monitor) {
 
@@ -106,12 +90,6 @@ public class MassSpectrumFilter {
 	/**
 	 * Applies the specified filter, but retrieves the IMassSpectrumFilterSettings dynamically.<br/>
 	 * See also method: applyFilter(List<IMassSpectrum> massSpectra, IMassSpectrumFilterSettings massSpectrumFilterSettings, String filterId, IProgressMonitor monitor)
-	 * 
-	 * @param List
-	 *            <IMassSpectrum> massSpectra
-	 * @param filterId
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
 	 */
 	public static IProcessingInfo<IMassSpectrumFilterResult> applyFilter(List<IScanMSD> massSpectra, String filterId, IProgressMonitor monitor) {
 
@@ -120,8 +98,6 @@ public class MassSpectrumFilter {
 
 	/**
 	 * Returns the mass spectrum filter support instance.
-	 * 
-	 * @return {@link IMassSpectrumFilterSupport}
 	 */
 	public static IMassSpectrumFilterSupport getMassSpectrumFilterSupport() {
 
@@ -175,9 +151,6 @@ public class MassSpectrumFilter {
 	/**
 	 * Returns an {@link IMassSpectrumFilter} instance or null if none is
 	 * available.
-	 * 
-	 * @param filterId
-	 * @return IConfigurationElement
 	 */
 	private static IConfigurationElement getConfigurationElement(final String filterId) {
 

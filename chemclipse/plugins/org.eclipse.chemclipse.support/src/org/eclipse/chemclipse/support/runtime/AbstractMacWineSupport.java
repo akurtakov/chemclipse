@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,8 +24,6 @@ public abstract class AbstractMacWineSupport extends AbstractWineRuntimeSupport 
 	 * /Users/chemclipse/.wine/drive_c/Programme/NIST/MSSEARCH/nistms$.exe
 	 * /Users/chemclipse/.wine/dosdevices/c:/Programme/NIST/MSSEARCH/nistms$.exe
 	 * 
-	 * @param application
-	 * @param parameter
 	 * @param macWineBinary
 	 *            (e.g. "/Applications/Wine.app")
 	 */

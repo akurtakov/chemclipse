@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -32,8 +32,6 @@ public class ChemicalShiftCalibrationSettings {
 	 * getLocationOfCauchyDistribution returns the location parameter of the used
 	 * Cauchy Distribution. The location refers to the peak maximum of the internal
 	 * standard and corresponds to the chemical shift value in ppm.
-	 *
-	 * @param getLocationOfCauchyDistribution
 	 */
 	public double getLocationOfCauchyDistribution() {
 
@@ -45,8 +43,6 @@ public class ChemicalShiftCalibrationSettings {
 	 * Cauchy Distribution.
 	 * <p>
 	 * By default, the value is set to 0.
-	 *
-	 * @param setLocationOfCauchyDistribution
 	 */
 	public void setLocationOfCauchyDistribution(double locationOfCauchyDistribution) {
 
@@ -57,8 +53,6 @@ public class ChemicalShiftCalibrationSettings {
 	 * getScaleOfCauchyDistribution returns the scale parameter of the used Cauchy
 	 * Distribution. The parameter scales the intensity of the distribution to suit
 	 * the intensity of observed peak of the internal standard.
-	 *
-	 * @param getScaleOfCauchyDistribution
 	 */
 	public double getScaleOfCauchyDistribution() {
 
@@ -71,8 +65,6 @@ public class ChemicalShiftCalibrationSettings {
 	 * Only values greater than zero are allowed.
 	 * <p>
 	 * By default, the value is set to 0.01.
-	 *
-	 * @param setScaleOfCauchyDistribution
 	 */
 	public void setScaleOfCauchyDistribution(double scaleOfCauchyDistribution) {
 
@@ -84,8 +76,6 @@ public class ChemicalShiftCalibrationSettings {
 	 * Distribution. This parameter describes the width of the considered section
 	 * around the observed peak of the internal standard and is used to define the
 	 * peak width.
-	 *
-	 * @param getRangeOfCauchyDistribution
 	 */
 	public double getRangeOfCauchyDistribution() {
 
@@ -97,8 +87,6 @@ public class ChemicalShiftCalibrationSettings {
 	 * Distribution.
 	 * <p>
 	 * By default, the value is set to 2.
-	 *
-	 * @param setRangeOfCauchyDistribution
 	 */
 	public void setRangeOfCauchyDistribution(double rangeOfCauchyDistribution) {
 
@@ -109,8 +97,6 @@ public class ChemicalShiftCalibrationSettings {
 	 * getRangeAroundCalibrationSignal returns the range parameter used for the
 	 * selection of the calibration signal. This parameter describes the width of
 	 * the considered section around the observed peak of the internal standard.
-	 *
-	 * @param getRangeAroundCalibrationSignal
 	 */
 	public double getRangeAroundCalibrationSignal() {
 
@@ -126,8 +112,6 @@ public class ChemicalShiftCalibrationSettings {
 	 * It can be assumed that deviations (if any) are covered by this range from
 	 * 0.05 to -0.05 ppm. A larger range means that impurities or other peaks could
 	 * be misused for calibration.
-	 *
-	 * @param setRangeAroundCalibrationSignal
 	 */
 	public void setRangeAroundCalibrationSignal(double rangeAroundCalibrationSignal) {
 

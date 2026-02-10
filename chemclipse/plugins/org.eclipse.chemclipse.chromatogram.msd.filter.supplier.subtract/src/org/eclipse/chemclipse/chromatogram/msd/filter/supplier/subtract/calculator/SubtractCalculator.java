@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -37,9 +37,6 @@ public class SubtractCalculator {
 
 	/**
 	 * Subtracts the mass spectrum stored in the filter settings from each scan of the chromatogram selection.
-	 * 
-	 * @param chromatogramSelection
-	 * @param filterSettings
 	 */
 	public void subtractPeakMassSpectraFromChromatogramSelection(IChromatogramSelectionMSD chromatogramSelection, ChromatogramFilterSettings filterSettings) {
 
@@ -89,9 +86,6 @@ public class SubtractCalculator {
 
 	/**
 	 * Subtracts the mass spectrum stored in the filter settings from each peak.
-	 * 
-	 * @param chromatogramSelection
-	 * @param peakFilterSettings
 	 */
 	public void subtractPeakMassSpectra(List<IPeakMSD> peaks, PeakFilterSettings peakFilterSettings) {
 
@@ -157,10 +151,6 @@ public class SubtractCalculator {
 
 	/**
 	 * Returns a map of the normalized mass spectrum.
-	 * 
-	 * @param massSpectrum
-	 * @param useNominalMasses
-	 * @return Map
 	 */
 	public Map<Double, Float> getMassSpectrumMap(IScanMSD massSpectrum, boolean useNominalMasses, boolean normalize) {
 
@@ -206,10 +196,6 @@ public class SubtractCalculator {
 	/**
 	 * Uses the mass spectrum map to calculate the intensity that shall be subtracted
 	 * from the given mass spectrum.
-	 * 
-	 * @param targetMassSpectrum
-	 * @param subtractMassSpectrumMap
-	 * @param useNominalMasses
 	 */
 	public void adjustIntensityValues(IScanMSD targetMassSpectrum, Map<Double, Float> subtractMassSpectrumMap, boolean useNominalMasses, boolean useNormalize) {
 
