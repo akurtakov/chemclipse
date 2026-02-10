@@ -93,7 +93,7 @@ public class PeakModel_3_Test {
 			intensityValues.addIntensityValue(entry.getKey(), entry.getValue());
 		}
 		// ----------------------IntensityValues
-		assertThrows(IllegalArgumentException.class, () -> {
+		assertThrows(PeakException.class, () -> {
 			peakModel = new PeakModelMSD(peakMaximum, intensityValues, startBackgroundAbundance, stopBackgroundAbundance);
 		});
 	}
@@ -109,7 +109,7 @@ public class PeakModel_3_Test {
 			intensityValues.addIntensityValue(entry.getKey(), entry.getValue());
 		}
 		// ----------------------IntensityValues
-		assertThrows(IllegalArgumentException.class, () -> {
+		assertThrows(PeakException.class, () -> {
 			peakModel = new PeakModelMSD(peakMaximum, intensityValues, startBackgroundAbundance, stopBackgroundAbundance);
 		});
 	}
@@ -120,7 +120,7 @@ public class PeakModel_3_Test {
 		// ----------------------IntensityValues
 		intensityValues = new PeakIntensityValues();
 		// ----------------------IntensityValues
-		assertThrows(IllegalArgumentException.class, () -> {
+		assertThrows(PeakException.class, () -> {
 			peakModel = new PeakModelMSD(peakMaximum, intensityValues, startBackgroundAbundance, stopBackgroundAbundance);
 		});
 	}

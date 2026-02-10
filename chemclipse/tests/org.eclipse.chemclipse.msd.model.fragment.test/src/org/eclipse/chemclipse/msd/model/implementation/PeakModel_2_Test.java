@@ -19,6 +19,7 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.eclipse.chemclipse.model.core.IPeakIntensityValues;
+import org.eclipse.chemclipse.model.exceptions.PeakException;
 import org.eclipse.chemclipse.model.implementation.PeakIntensityValues;
 import org.eclipse.chemclipse.msd.model.core.IPeakIon;
 import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
@@ -94,7 +95,7 @@ public class PeakModel_2_Test {
 	@Test
 	public void testConstruct_2() {
 
-		assertThrows(IllegalArgumentException.class, () -> {
+		assertThrows(PeakException.class, () -> {
 			peakModel = new PeakModelMSD(null, intensityValues, startBackgroundAbundance, stopBackgroundAbundance);
 		});
 	}
@@ -102,7 +103,7 @@ public class PeakModel_2_Test {
 	@Test
 	public void testConstruct_3() {
 
-		assertThrows(IllegalArgumentException.class, () -> {
+		assertThrows(PeakException.class, () -> {
 			peakModel = new PeakModelMSD(peakMaximum, null, startBackgroundAbundance, stopBackgroundAbundance);
 		});
 	}
@@ -110,7 +111,7 @@ public class PeakModel_2_Test {
 	@Test
 	public void testConstruct_4() {
 
-		assertThrows(IllegalArgumentException.class, () -> {
+		assertThrows(PeakException.class, () -> {
 			peakModel = new PeakModelMSD(null, null, startBackgroundAbundance, stopBackgroundAbundance);
 		});
 	}
