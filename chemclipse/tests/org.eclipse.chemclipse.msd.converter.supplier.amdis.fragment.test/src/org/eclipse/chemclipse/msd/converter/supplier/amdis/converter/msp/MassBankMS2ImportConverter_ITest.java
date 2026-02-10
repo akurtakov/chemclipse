@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
@@ -33,7 +32,7 @@ public class MassBankMS2ImportConverter_ITest extends ImportConverterMspTestCase
 
 	@Override
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		importFile = new File(TestPathHelper.TESTFILE_IMPORT_MASSBANK_TEST_MSP);
 		super.setUp();

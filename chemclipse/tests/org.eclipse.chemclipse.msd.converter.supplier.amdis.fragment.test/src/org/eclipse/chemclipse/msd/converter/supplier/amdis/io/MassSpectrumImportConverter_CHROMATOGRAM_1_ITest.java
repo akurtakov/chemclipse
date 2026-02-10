@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class MassSpectrumImportConverter_CHROMATOGRAM_1_ITest extends ImportConv
 
 	@Override
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		importFile = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM);
 		super.setUp();

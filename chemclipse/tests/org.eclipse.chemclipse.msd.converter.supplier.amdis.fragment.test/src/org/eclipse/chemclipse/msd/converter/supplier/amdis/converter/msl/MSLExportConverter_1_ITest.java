@@ -15,7 +15,6 @@ package org.eclipse.chemclipse.msd.converter.supplier.amdis.converter.msl;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.msd.converter.database.IDatabaseExportConverter;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
@@ -40,7 +39,7 @@ public class MSLExportConverter_1_ITest {
 	private IMassSpectra massSpectra;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		exportConverter = new MSLDatabaseExportConverter();
 		File exportFolder = new File(TestPathHelper.TESTDIR_EXPORT);

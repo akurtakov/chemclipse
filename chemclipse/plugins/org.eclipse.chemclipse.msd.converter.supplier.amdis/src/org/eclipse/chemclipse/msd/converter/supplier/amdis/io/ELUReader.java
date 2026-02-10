@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,6 +28,7 @@ import org.apache.commons.io.FileUtils;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.IPeakIntensityValues;
+import org.eclipse.chemclipse.model.core.PeakType;
 import org.eclipse.chemclipse.model.implementation.PeakIntensityValues;
 import org.eclipse.chemclipse.msd.converter.io.IPeakReader;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.preferences.PreferenceSupplier;
@@ -268,6 +269,7 @@ public class ELUReader implements IPeakReader {
 				IPeakModelMSD peakModel = new PeakModelMSD(peakMassSpectrum, peakIntensityValues, 0.0f, 0.0f);
 				extractScanRange(peakModel, peakData);
 				peak = new PeakMSD(peakModel, "AMDIS (ELU)");
+				peak.setPeakType(PeakType.DD);
 				peak.setTemporaryData(header);
 			} catch(Exception e) {
 				logger.warn("PeakModel fails for AMDIS (ELU) component: " + header);

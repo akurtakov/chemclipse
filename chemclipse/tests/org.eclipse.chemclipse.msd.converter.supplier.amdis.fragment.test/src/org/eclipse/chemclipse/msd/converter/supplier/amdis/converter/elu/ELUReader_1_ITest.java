@@ -34,7 +34,7 @@ public class ELUReader_1_ITest {
 	private File file;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		reader = new ELUReader();
 		file = new File(TestPathHelper.TESTFILE_IMPORT_PEAKS_1_ELU);
