@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import org.eclipse.chemclipse.swt.ui.support.Colors;
-import org.eclipse.chemclipse.ux.extension.ui.definitions.TileDefinition;
+import org.eclipse.chemclipse.ux.extension.ui.definitions.ITileDefinition;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.CanExecute;
@@ -84,7 +84,7 @@ public class TaskTileContainer {
 		parent.addMouseTrackListener(mouseTrackAdapter);
 	}
 
-	public TaskTile addTaskTile(TileDefinition definition) {
+	public TaskTile addTaskTile(ITileDefinition definition) {
 
 		TaskTile taskTile = new TaskTile(container, definition, this::executeHandler, this::computeStyle, colors);
 		taskTile.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -95,12 +95,12 @@ public class TaskTileContainer {
 		return taskTile;
 	}
 
-	private void executeHandler(TileDefinition tileDefinition) {
+	private void executeHandler(ITileDefinition tileDefinition) {
 
 		ContextInjectionFactory.invoke(tileDefinition, Execute.class, contextSupplier.get(), null);
 	}
 
-	protected int computeStyle(TileDefinition tileDefinition) {
+	protected int computeStyle(ITileDefinition tileDefinition) {
 
 		boolean largeText = tileDefinition.getIcon() == null && tileDefinition.getTitle().length() == 1;
 		int style = SWT.NONE;
@@ -116,7 +116,7 @@ public class TaskTileContainer {
 		return style;
 	}
 
-	private boolean canExecute(TileDefinition tileDefinition) {
+	private boolean canExecute(ITileDefinition tileDefinition) {
 
 		Object invoke = ContextInjectionFactory.invoke(tileDefinition, CanExecute.class, contextSupplier.get(), Boolean.TRUE);
 		if(invoke instanceof Boolean invoked) {

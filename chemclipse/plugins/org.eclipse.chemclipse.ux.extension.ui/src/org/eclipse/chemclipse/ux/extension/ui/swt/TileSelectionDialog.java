@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,10 +9,11 @@
  * 
  * Contributors:
  * Christoph Läubrich - initial API and implementation
+ * Philip Wenig - adjust tile definition
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.ui.swt;
 
-import org.eclipse.chemclipse.ux.extension.ui.definitions.TileDefinition;
+import org.eclipse.chemclipse.ux.extension.ui.definitions.ITileDefinition;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CellLabelProvider;
@@ -29,11 +30,11 @@ import org.eclipse.swt.widgets.Shell;
 
 public class TileSelectionDialog extends Dialog {
 
-	private TileDefinition[] elements;
+	private ITileDefinition[] elements;
 	private CellLabelProvider labelProvider;
-	private TileDefinition selectedElement;
+	private ITileDefinition selectedElement;
 
-	public TileSelectionDialog(Shell parentShell, TileDefinition[] elements, CellLabelProvider labelProvider) {
+	public TileSelectionDialog(Shell parentShell, ITileDefinition[] elements, CellLabelProvider labelProvider) {
 
 		super(parentShell);
 		this.elements = elements;
@@ -58,7 +59,7 @@ public class TileSelectionDialog extends Dialog {
 			ISelection selection = event.getSelection();
 			if(selection instanceof IStructuredSelection structuredSelection) {
 				Object selected = structuredSelection.getFirstElement();
-				if(selected instanceof TileDefinition tileDefinition) {
+				if(selected instanceof ITileDefinition tileDefinition) {
 					selectedElement = tileDefinition;
 				} else {
 					selectedElement = null;
@@ -68,7 +69,7 @@ public class TileSelectionDialog extends Dialog {
 		return composite;
 	}
 
-	public TileDefinition getSelectedElement() {
+	public ITileDefinition getSelectedElement() {
 
 		return selectedElement;
 	}

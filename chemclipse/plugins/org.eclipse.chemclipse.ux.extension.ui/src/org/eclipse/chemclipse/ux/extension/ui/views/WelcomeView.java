@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,14 +13,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.ui.views;
 
-
-import jakarta.annotation.PostConstruct;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.workbench.PerspectiveSupport;
 import org.eclipse.chemclipse.ux.extension.ui.Activator;
-import org.eclipse.chemclipse.ux.extension.ui.definitions.TileDefinition;
+import org.eclipse.chemclipse.ux.extension.ui.definitions.IWelcomeTileDefinition;
 import org.eclipse.chemclipse.ux.extension.ui.swt.TaskTile;
 import org.eclipse.chemclipse.ux.extension.ui.swt.TaskTileContainer;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -30,6 +28,8 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
+
+import jakarta.annotation.PostConstruct;
 
 public class WelcomeView {
 
@@ -41,7 +41,7 @@ public class WelcomeView {
 	private static final String PERSPECTIVE_PCA = "org.eclipse.chemclipse.xxd.process.supplier.pca.perspective";
 	private static final int DEFAULT_NUMBER_OF_COLUMNS = Integer.getInteger("chemclipse.welcome.columns", 4);
 
-	private class Component implements TileDefinition {
+	private class Component implements IWelcomeTileDefinition {
 
 		private String perspectiveId = "";
 		private Image image;

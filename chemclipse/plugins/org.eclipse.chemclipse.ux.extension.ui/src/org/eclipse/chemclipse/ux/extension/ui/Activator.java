@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,7 +19,7 @@ import java.util.MissingResourceException;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.support.ui.activator.AbstractActivatorUI;
 import org.eclipse.chemclipse.support.ui.services.IAnnotationWidgetService;
-import org.eclipse.chemclipse.ux.extension.ui.definitions.TileDefinition;
+import org.eclipse.chemclipse.ux.extension.ui.definitions.ITileDefinition;
 import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierDataExplorer;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
@@ -40,7 +40,7 @@ public class Activator extends AbstractActivatorUI {
 	private static Activator plugin;
 	private static final Logger logger = Logger.getLogger(Activator.class);
 
-	private ServiceTracker<TileDefinition, TileDefinition> tileServiceTracker;
+	private ServiceTracker<ITileDefinition, ITileDefinition> tileServiceTracker;
 	private ServiceTracker<IAnnotationWidgetService, IAnnotationWidgetService> annotationWidgetServiceTracker = null;
 
 	public Activator() {
@@ -54,7 +54,7 @@ public class Activator extends AbstractActivatorUI {
 		plugin = this;
 		initializePreferenceStore(PreferenceSupplierDataExplorer.INSTANCE());
 		initializeImageRegistry();
-		tileServiceTracker = new ServiceTracker<>(context, TileDefinition.class, null);
+		tileServiceTracker = new ServiceTracker<>(context, ITileDefinition.class, null);
 		tileServiceTracker.open();
 		annotationWidgetServiceTracker = new ServiceTracker<>(context, IAnnotationWidgetService.class, null);
 		annotationWidgetServiceTracker.open();
@@ -80,9 +80,9 @@ public class Activator extends AbstractActivatorUI {
 		return location.getURL().getPath();
 	}
 
-	public TileDefinition[] getTileDefinitions() {
+	public ITileDefinition[] getTileDefinitions() {
 
-		TileDefinition[] array = new TileDefinition[0];
+		ITileDefinition[] array = new ITileDefinition[0];
 		if(tileServiceTracker == null) {
 			return array;
 		}

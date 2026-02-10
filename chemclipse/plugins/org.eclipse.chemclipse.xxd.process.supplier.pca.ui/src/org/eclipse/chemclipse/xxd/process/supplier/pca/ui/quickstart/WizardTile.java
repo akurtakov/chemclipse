@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,7 +19,7 @@ import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.chemclipse.logging.core.Logger;
-import org.eclipse.chemclipse.ux.extension.ui.definitions.TileDefinition;
+import org.eclipse.chemclipse.ux.extension.ui.definitions.IProcessTileDefinition;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.IExtractionData;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
@@ -35,7 +35,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import jakarta.inject.Named;
 
-public abstract class WizardTile implements TileDefinition {
+public abstract class WizardTile implements IProcessTileDefinition {
 
 	private static final Logger logger = Logger.getLogger(WizardTile.class);
 
