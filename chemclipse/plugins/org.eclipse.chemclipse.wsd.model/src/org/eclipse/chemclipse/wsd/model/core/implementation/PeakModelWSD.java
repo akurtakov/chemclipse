@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,7 +27,7 @@ public class PeakModelWSD extends AbstractPeakModelWSD implements IPeakModelWSD 
 		this(peakMaximum, peakIntensityValues, 0.0f, 0.0f);
 	}
 
-	public PeakModelWSD(IScan peakMaximum, IPeakIntensityValues peakIntensityValues, float startBackgroundAbundance, float stopBackgroundAbundance) throws IllegalArgumentException, PeakException {
+	public PeakModelWSD(IScan peakMaximum, IPeakIntensityValues peakIntensityValues, float startBackgroundAbundance, float stopBackgroundAbundance) throws PeakException {
 
 		super(peakMaximum, peakIntensityValues, startBackgroundAbundance, stopBackgroundAbundance);
 	}
