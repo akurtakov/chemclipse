@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -69,9 +69,6 @@ public class DatabaseFileSupport {
 
 	/**
 	 * Opens a file dialog and tries to save the mass spectrum
-	 * 
-	 * @param chromatogram
-	 * @throws NoConverterAvailableException
 	 */
 	public static void saveMassSpectrum(Shell shell, IScanMSD massSpectrum, String fileName) throws NoConverterAvailableException {
 
@@ -124,11 +121,6 @@ public class DatabaseFileSupport {
 
 	/**
 	 * Opens a file dialog and tries to save the mass spectra
-	 * 
-	 * @param shell
-	 * @param peaks
-	 * @param fileName
-	 * @throws NoConverterAvailableException
 	 */
 	public static void saveMassSpectra(Shell shell, List<IPeakMSD> peaks, String fileName) throws NoConverterAvailableException {
 
@@ -181,11 +173,6 @@ public class DatabaseFileSupport {
 
 	/**
 	 * Opens a file dialog and tries to save the mass spectra
-	 * 
-	 * @param shell
-	 * @param massSpectra
-	 * @param fileName
-	 * @throws NoConverterAvailableException
 	 */
 	public static void saveMassSpectra(Shell shell, IMassSpectra massSpectra, String fileName) throws NoConverterAvailableException {
 
@@ -225,10 +212,6 @@ public class DatabaseFileSupport {
 	/**
 	 * Write the mass spectrum.<br/>
 	 * The supplier is the converter to export the given mass spectrum.
-	 * 
-	 * @param file
-	 * @param massSpectra
-	 * @param supplier
 	 */
 	public static void writeFile(Shell shell, final File file, final IMassSpectra massSpectra, final ISupplier supplier) {
 
@@ -259,12 +242,6 @@ public class DatabaseFileSupport {
 	 * Validates the selected file to save the mass spectrum. This method checks
 	 * if the mass spectrum is stored in a directory or not and prepares the file
 	 * system in a convenient way.
-	 * 
-	 * @param dialog
-	 * @param supplier
-	 * @param shell
-	 * @param converterSupport
-	 * @param massSpectra
 	 */
 	private static void validateFile(FileDialog dialog, List<ISupplier> supplier, Shell shell, DatabaseConverterSupport converterSupport, IMassSpectra massSpectra) {
 
@@ -384,10 +361,6 @@ public class DatabaseFileSupport {
 	 * Removes an existing directory extension if exists. For example if a new
 	 * chromatogram should be written and the filename is "TEST.D.MS" than
 	 * "TEST.D" will be returned if the extension is ".MS".
-	 * 
-	 * @param filePath
-	 * @param supplier
-	 * @return String
 	 */
 	private static String removeFileExtensions(String filePath, ISupplier supplier) {
 

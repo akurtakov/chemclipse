@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,8 +17,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
-
-import jakarta.inject.Named;
 
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.support.events.IPerspectiveAndViewIds;
@@ -44,6 +42,8 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.swt.widgets.Display;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
+
+import jakarta.inject.Named;
 
 /**
  * This Handler allows to open a E4 Snippet as an editor, the command must be called with a the {@link OpenSnippetHandler#SNIPPT_PARAMETER} to identify the snippet.
@@ -232,7 +232,7 @@ public class OpenSnippetHandler {
 	 *            the snippet id to use
 	 * @param modelService
 	 *            the modelservice to query, take care that this is a recent, injected and not static cached one or you will get "Application has no active Window" in certain circumstances!
-	 * @param application
+	 * @param snippetContainer
 	 *            the {@link MSnippetContainer} to clone the snippet from, you would most likely use the {@link MApplication} here
 	 * @return the created object
 	 */

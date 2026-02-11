@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -113,24 +113,18 @@ public interface IScanMSD extends IScan, IMassSpectrumCloneable, IMassSpectrumNo
 	/**
 	 * Returns the lowest abundance ion of the mass spectrum.<br/>
 	 * If no ions are stored, the ImmutableZeroIon will be returned.
-	 * 
-	 * @return IIon
 	 */
 	IIon getLowestAbundance();
 
 	/**
 	 * Returns the highest ion ion of the mass spectrum.<br/>
 	 * If no ions are stored, the ImmutableZeroIon will be returned.
-	 * 
-	 * @return IIon
 	 */
 	IIon getHighestIon();
 
 	/**
 	 * Returns the highest abundance ion of the mass spectrum.<br/>
 	 * If no ions are stored, the ImmutableZeroIon will be returned.
-	 * 
-	 * @return IIon
 	 */
 	IIon getHighestAbundance();
 
@@ -148,10 +142,6 @@ public interface IScanMSD extends IScan, IMassSpectrumCloneable, IMassSpectrumNo
 	 * still a ion with the same ion value.<br/>
 	 * If addIntensities is false, the higher intensity will be taken if there
 	 * is still a ion with the same ion value.
-	 * 
-	 * @param ions
-	 * @param addIntensities
-	 * @return {@code this}
 	 */
 	IScanMSD addIons(List<IIon> ions, boolean addIntensities);
 
@@ -164,19 +154,12 @@ public interface IScanMSD extends IScan, IMassSpectrumCloneable, IMassSpectrumNo
 	 * If there is a check, a ion with same ion can be added to the
 	 * database, but if the abundance of the new ion is higher than the old one,
 	 * the new abundance will be added.
-	 * 
-	 * @param ion
-	 * @param checked
-	 * @return {@code this}
 	 */
 	IScanMSD addIon(IIon ion, boolean checked);
 
 	/**
 	 * Adds a ion to the mass spectrum.<br/>
 	 * Use this method in all standard cases.
-	 * 
-	 * @param ion
-	 * @return {@code this}
 	 */
 	IScanMSD addIon(IIon ion);
 
@@ -186,25 +169,16 @@ public interface IScanMSD extends IScan, IMassSpectrumCloneable, IMassSpectrumNo
 	 * If the ion not exists, the ion will be added normally. If
 	 * addIntensity is false, the higher of both abundance values (ion
 	 * and still existent ion) will be stored. The
-	 * 
-	 * @param addIntensity
-	 * @param ion
-	 * @return {@code this}
 	 */
 	IScanMSD addIon(boolean addIntensity, IIon ion);
 
 	/**
 	 * Removes a ion from the mass spectrum.
-	 * 
-	 * @param ion
-	 * @return {@code this}
 	 */
 	IScanMSD removeIon(IIon ion);
 
 	/**
 	 * Removes all ions from the actual mass spectrum.
-	 * 
-	 * @return {@code this}
 	 */
 	IScanMSD removeAllIons();
 
@@ -214,9 +188,6 @@ public interface IScanMSD extends IScan, IMassSpectrumCloneable, IMassSpectrumNo
 	 * 42.7, 43.3, 43.4.<br/>
 	 * When removeIon(43) is called, they will be removed depending on
 	 * the rounding algorithm in AbstractIon.getIon(float ion).
-	 * 
-	 * @param excludedIons
-	 * @return {@code this}
 	 */
 	IScanMSD removeIons(IMarkedIons markedIons);
 
@@ -226,9 +197,6 @@ public interface IScanMSD extends IScan, IMassSpectrumCloneable, IMassSpectrumNo
 	 * Think of stored mass over charge ratios (ion): 42.7, 43.3, 43.4.<br/>
 	 * When removeIon(43) is called, they will be removed depending on
 	 * the rounding algorithm in AbstractIon.getIon(float ion).
-	 * 
-	 * @param ion
-	 * @return {@code this}
 	 */
 	IScanMSD removeIon(int ion);
 
@@ -237,9 +205,6 @@ public interface IScanMSD extends IScan, IMassSpectrumCloneable, IMassSpectrumNo
 	 * Think of stored mass over charge ratios (ion): 42.7, 43.3, 43.4.<br/>
 	 * When removeIon(43) is called, they will be removed depending on
 	 * the rounding algorithm in AbstractIon.getIon(float ion).
-	 * 
-	 * @param ions
-	 * @return {@code this}
 	 */
 	IScanMSD removeIons(Set<Integer> ions);
 
@@ -259,17 +224,11 @@ public interface IScanMSD extends IScan, IMassSpectrumCloneable, IMassSpectrumNo
 	 * 45.33 ion, 493.3 abundance<br/>
 	 * 45.487 ion, 89.5 abundance<br/>
 	 * => 45,73476.1 will be returned<br/>
-	 * 
-	 * @param ion
-	 * @return IIon
 	 */
 	IIon getIon(int ion);
 
 	/**
 	 * Returns the ion with the given exact ion value.
-	 * 
-	 * @param ion
-	 * @return IIon
 	 */
 	IIon getIon(double ion);
 
@@ -277,10 +236,6 @@ public interface IScanMSD extends IScan, IMassSpectrumCloneable, IMassSpectrumNo
 	 * Returns the ion with the given accurate ion value.
 	 * Precision see AbstractIon.getIon(float ion, int precision);
 	 * {@link AbstractIon}
-	 * 
-	 * @param ion
-	 * @param precision
-	 * @return IIon
 	 */
 	IIon getIon(double ion, int precision);
 
@@ -289,8 +244,6 @@ public interface IScanMSD extends IScan, IMassSpectrumCloneable, IMassSpectrumNo
 	 * height.<br/>
 	 * The adjustment is given as a percentage value.<br/>
 	 * All values must be between -1.0f(-100%) and 0.0f(0%) and 1.0f(100%).<br/>
-	 * 
-	 * @param percentage
 	 */
 	void adjustIons(float percentage);
 
@@ -299,16 +252,11 @@ public interface IScanMSD extends IScan, IMassSpectrumCloneable, IMassSpectrumNo
 	 * {@link IMarkedIons}.<br/>
 	 * The copy does not consists of ions stored in the excluded mass
 	 * fragment list.
-	 * 
-	 * @param excludedIons
-	 * @return IMassSpectrum
 	 */
 	IScanMSD getMassSpectrum(IMarkedIons excludedIons);
 
 	/**
 	 * Returns false, if no ions are stored in this mass spectrum.
-	 * 
-	 * @return boolean
 	 */
 	boolean hasIons();
 
@@ -320,45 +268,33 @@ public interface IScanMSD extends IScan, IMassSpectrumCloneable, IMassSpectrumNo
 
 	/**
 	 * Sets the optimized mass spectrum for this scan.
-	 * 
-	 * @param optimizedMassSpectrum
 	 */
 	void setOptimizedMassSpectrum(IScanMSD optimizedMassSpectrum);
 
 	/**
 	 * Returns the optimized mass spectrum.
 	 * It could be null if no optimized MS has been set.
-	 * 
-	 * @return
 	 */
 	IScanMSD getOptimizedMassSpectrum();
 
 	/**
 	 * Returns whether this is a SIM (<= 10 m/z values) or SCAN measurement.
-	 * 
-	 * @return boolean
 	 */
 	boolean isMeasurementSIM();
 
 	/**
 	 * Returns true if the mass spectrum contains ion transitions.
-	 * 
-	 * @return boolean
 	 */
 	boolean isTandemMS();
 
 	/**
 	 * Returns true if the mass spectrum contains high resolution data.
-	 * 
-	 * @return boolean
 	 */
 	boolean isHighResolutionMS();
 
 	/**
 	 * Check each ion for possible collisions with other ions before adding it.
 	 * This comes at a huge performance toll and may not be required for MALDI.
-	 * 
-	 * @return boolean
 	 */
 	boolean checkIntensityCollisions();
 
@@ -370,8 +306,6 @@ public interface IScanMSD extends IScan, IMassSpectrumCloneable, IMassSpectrumNo
 	 * ion stored in the mass spectrum.<br/>
 	 * Be aware of that some mass spectrum supplier support not the whole
 	 * available signal range.
-	 * 
-	 * @param totalSignal
 	 */
 	@Override
 	void adjustTotalSignal(float totalSignal);

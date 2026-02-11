@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -34,15 +34,12 @@ public interface IPeaksMSD {
 
 	/**
 	 * Adds the peak to the end of the list.
-	 * 
-	 * @param peak
 	 */
 	void addPeak(IPeakMSD peak) throws UnsupportedOperationException;
 
 	/**
 	 * Removes the peak from the list.
 	 * 
-	 * @param peak
 	 * @return <code>true</code> if peak was removed, <code>false</code> otherwise
 	 */
 	void removePeak(IPeakMSD peak) throws UnsupportedOperationException;
@@ -51,9 +48,6 @@ public interface IPeaksMSD {
 	 * Returns the peak with the given number.<br/>
 	 * Be aware, the index is 1 based and not 0 based like in a normal list.<br/>
 	 * If no peak is available, null will be returned.
-	 * 
-	 * @param i
-	 * @return IPeak
 	 */
 	default IPeakMSD getPeak(int i) {
 
@@ -66,15 +60,11 @@ public interface IPeaksMSD {
 
 	/**
 	 * Returns the list of peaks.
-	 * 
-	 * @return List<IPeak>
 	 */
 	List<IPeakMSD> getPeaks();
 
 	/**
 	 * Returns the number of stored peaks.
-	 * 
-	 * @return int
 	 */
 	default int size() {
 

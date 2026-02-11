@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -51,9 +51,6 @@ public class MassSpectrumFileSupport {
 
 	/**
 	 * Opens a file dialog and tries to save the mass spectra
-	 * 
-	 * @param chromatogram
-	 * @throws NoConverterAvailableException
 	 */
 	public static void saveMassSpectra(Shell shell, IMassSpectra massSpectra, String fileName) throws NoConverterAvailableException {
 
@@ -94,12 +91,6 @@ public class MassSpectrumFileSupport {
 	 * Validates the selected file to save the chromatogram. This method checks
 	 * if the chromatogram is stored in a directory or not and prepares the file
 	 * system in a convenient way.
-	 * 
-	 * @param dialog
-	 * @param supplier
-	 * @param shell
-	 * @param converterSupport
-	 * @param chromatogram
 	 */
 	private static void validateFile(FileDialog dialog, List<ISupplier> supplier, Shell shell, DatabaseConverterSupport converterSupport, IMassSpectra massSpectra) {
 
@@ -219,10 +210,6 @@ public class MassSpectrumFileSupport {
 	 * Removes an existing directory extension if exists. For example if a new
 	 * chromatogram should be written and the filename is "TEST.D.MS" than
 	 * "TEST.D" will be returned if the extension is ".MS".
-	 * 
-	 * @param filePath
-	 * @param supplier
-	 * @return String
 	 */
 	private static String removeFileExtensions(String filePath, ISupplier supplier) {
 

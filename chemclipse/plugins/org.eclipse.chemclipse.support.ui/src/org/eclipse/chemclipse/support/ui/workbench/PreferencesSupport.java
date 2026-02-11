@@ -61,10 +61,6 @@ public class PreferencesSupport {
 	 * preservePreferenceNodes.add("org.eclipse.equinox.internal.p2.ui.sdk.ProvisioningPreferencePage"); // Install/Update
 	 * preservePreferenceNodes.add("org.eclipse.equinox.internal.p2.ui.sdk.SitesPreferencePage"); // Available Software Sites
 	 * preservePreferenceNodes.add("org.eclipse.equinox.internal.p2.ui.sdk.scheduler.AutomaticUpdatesPreferencePage"); // Automatic Updates
-	 * 
-	 * 
-	 * @param preservePreferencePrefix
-	 * @param preservePreferenceNodes
 	 */
 	public static void cleanPreferences(List<String> preservePreferencePrefixes, List<String> preservePreferenceNodes) {
 

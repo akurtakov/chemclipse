@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -131,11 +131,6 @@ public class MassSpectrumComparator {
 
 	/**
 	 * Calculates the purity of the extracted mass spectrum in comparison to the genuine.
-	 *
-	 * @param extractedMassSpectrum
-	 * @param genuineMassSpectrum
-	 * @param ionRange
-	 * @return {@link IProcessingInfo}
 	 */
 	public static IProcessingInfo<IMassSpectrumPurityResult> getPurityResult(IScanMSD extractedMassSpectrum, IScanMSD genuineMassSpectrum) {
 
@@ -153,8 +148,6 @@ public class MassSpectrumComparator {
 	/**
 	 * Returns an array of all available comparator names and ids.
 	 * The array may be empty.
-	 *
-	 * @return String[][]
 	 */
 	public static String[][] getAvailableComparatorIds() {
 
@@ -245,9 +238,6 @@ public class MassSpectrumComparator {
 
 	/**
 	 * Returns an IMassSpectrumComparator instance or null if none is available.
-	 *
-	 * @param converterId
-	 * @return IConfigurationElement
 	 */
 	private static IConfigurationElement getConfigurationElement(final String converterId) {
 

@@ -72,8 +72,6 @@ public class Calculator {
 
 	/**
 	 * Calculates the noise segments. May return null.
-	 * 
-	 * @param IChromatogram
 	 */
 	public List<INoiseSegmentMSD> getNoiseSegments(IExtractedIonSignals extractedIonSignals, IMarkedIons ionsToPreserve, int segmentWidth, IProgressMonitor monitor) throws FilterException {
 
@@ -102,9 +100,6 @@ public class Calculator {
 	 * See S.E. Stein:
 	 * "An Integrated Method for Spectrum Extraction and Compound Identification from Gas Chromatography/Mass Spectrometry Data"
 	 * .
-	 * 
-	 * @param segments
-	 * @return float
 	 */
 	private List<INoiseSegmentMSD> calculateNoiseSegments(List<IAnalysisSegment> analysisSegments, IExtractedIonSignals extractedIonSignals, IMarkedIons ionsToPreserve, IProgressMonitor monitor) {
 

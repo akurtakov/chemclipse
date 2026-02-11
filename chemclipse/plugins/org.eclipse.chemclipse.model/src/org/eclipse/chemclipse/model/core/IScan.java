@@ -106,9 +106,6 @@ public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplie
 	 * Sets a new relative retention time.<br/>
 	 * Relative retention time in milliseconds.<br/>
 	 * Only values >= 0 are allowed.
-	 * 
-	 * @param relative
-	 *            retention time
 	 */
 	void setRelativeRetentionTime(int relativeRetentionTime);
 
