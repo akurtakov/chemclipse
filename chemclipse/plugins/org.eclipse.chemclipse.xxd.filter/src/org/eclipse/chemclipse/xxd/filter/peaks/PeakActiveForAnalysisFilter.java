@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,7 +12,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.filter.peaks;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.filter.IPeakFilter;
@@ -59,5 +61,13 @@ public class PeakActiveForAnalysisFilter extends AbstractPeakFilter<PeakActiveFo
 			subMonitor.worked(1);
 		}
 		subMonitor.done();
+	}
+
+	@Override
+	public List<String> getLegacyIDs() {
+
+		List<String> legacyIDs = new ArrayList<>();
+		legacyIDs.add("PeakFilter:filter:processor:class:org.eclipse.chemclipse.xxd.model.filter.peaks.PeakActiveForAnalysisFilter");
+		return legacyIDs;
 	}
 }

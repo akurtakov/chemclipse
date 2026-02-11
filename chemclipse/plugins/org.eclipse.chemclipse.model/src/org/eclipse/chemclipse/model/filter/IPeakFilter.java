@@ -14,6 +14,7 @@
 package org.eclipse.chemclipse.model.filter;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
@@ -62,4 +63,6 @@ public interface IPeakFilter<ConfigType> extends Filter<ConfigType> {
 
 		return new DataCategory[]{DataCategory.CSD, DataCategory.MSD, DataCategory.WSD, DataCategory.VSD};
 	}
+
+	List<String> getLegacyIDs();
 }

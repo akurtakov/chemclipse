@@ -139,4 +139,12 @@ public class AsymmetryFilter extends AbstractPeakFilter<AsymmetryFilterSettings>
 				throw new IllegalArgumentException("Unsupported Peak Filter Treatment Option!");
 		}
 	}
+
+	@Override
+	public List<String> getLegacyIDs() {
+
+		List<String> legacyIDs = new ArrayList<>();
+		legacyIDs.add("PeakFilter:filter:processor:class:org.eclipse.chemclipse.xxd.model.filter.peaks.AsymmetryFilter");
+		return legacyIDs;
+	}
 }
