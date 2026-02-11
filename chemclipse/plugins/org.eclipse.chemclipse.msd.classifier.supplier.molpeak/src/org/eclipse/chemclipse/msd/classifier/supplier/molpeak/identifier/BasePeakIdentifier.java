@@ -230,11 +230,6 @@ public class BasePeakIdentifier {
 
 	/**
 	 * Returns identified mass spectra from the database.
-	 *
-	 * @param identificationTarget
-	 * @param monitor
-	 * @return {@link IMassSpectra}
-	 * @throws IOException
 	 */
 	public IMassSpectra getMassSpectra(IIdentificationTarget identificationTarget) throws IOException {
 

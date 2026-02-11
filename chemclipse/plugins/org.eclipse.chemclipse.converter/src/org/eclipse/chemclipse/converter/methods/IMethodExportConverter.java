@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -36,9 +36,6 @@ public interface IMethodExportConverter extends IExportConverter {
 	/**
 	 * writes the given method to the {@link OutputStream}
 	 *
-	 * @param stream
-	 * @param nameHint
-	 * @param monitor
 	 * @throws IOException
 	 *             in case of an IOError while reading streams
 	 */

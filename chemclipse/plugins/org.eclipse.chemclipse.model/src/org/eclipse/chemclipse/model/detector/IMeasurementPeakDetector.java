@@ -32,7 +32,7 @@ public interface IMeasurementPeakDetector<ConfigType> extends Detector<ConfigTyp
 	/**
 	 * Checks if the given {@link IMeasurement} is compatible with this filter, that means that this filter can be applied without throwing an {@link IllegalArgumentException}
 	 * 
-	 * @param item
+	 * @param items
 	 *            the {@link IMeasurement} to check
 	 * @return <code>true</code> if this {@link IMeasurement} can be applied, <code>false</code> otherwise
 	 */

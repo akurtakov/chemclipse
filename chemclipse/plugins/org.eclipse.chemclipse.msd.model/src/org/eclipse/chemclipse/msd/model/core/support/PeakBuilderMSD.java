@@ -69,13 +69,6 @@ public class PeakBuilderMSD {
 
 	/**
 	 * EXPERIMENTAL!
-	 * 
-	 * @param chromatogram
-	 * @param scanRange
-	 * @param includedBackground
-	 * @param includedIons
-	 * @return IChromatogramPeakMSD
-	 * @throws PeakException
 	 */
 	public static IChromatogramPeakMSD createPeak(IChromatogramMSD chromatogram, IScanRange scanRange, PeakType peakType, IBackgroundAbundanceRange backgroundAbundanceRange, Set<Integer> includedIons, MarkedTraceModus filterMode) throws PeakException {
 
@@ -205,12 +198,6 @@ public class PeakBuilderMSD {
 	 * This affects the calculation of the peaks width.<br/>
 	 * It has a higher effect if the peak is cutted e.g. by perpendicular or is
 	 * detected by peak skimming.
-	 * 
-	 * @param chromatogram
-	 * @param scanRange
-	 * @param calculatePeakIncludedBackground
-	 * @return IPeak
-	 * @throws PeakException
 	 */
 	public static IChromatogramPeakMSD createPeak(IChromatogramMSD chromatogram, IScanRange scanRange, boolean calculatePeakIncludedBackground) throws PeakException {
 
@@ -306,13 +293,6 @@ public class PeakBuilderMSD {
 	 * You can choose also checkBackgroundAbundanceRange == false. In this case
 	 * the background abundance could be higher than the total signals, in some
 	 * case.
-	 * 
-	 * @param chromatogram
-	 * @param scanRange
-	 * @param backgroundAbundanceRange
-	 * @param checkBackgroundAbundanceRange
-	 * @return IPeak
-	 * @throws PeakException
 	 */
 	public static IChromatogramPeakMSD createPeak(IChromatogramMSD chromatogram, IScanRange scanRange, IBackgroundAbundanceRange backgroundAbundanceRange, boolean checkBackgroundAbundanceRange) throws PeakException {
 
@@ -346,12 +326,6 @@ public class PeakBuilderMSD {
 	 * method with background abundance parameters.<br/>
 	 * Only total ion signals without the given ions will be
 	 * considered.
-	 * 
-	 * @param chromatogram
-	 * @param scanRange
-	 * @param excludedIons
-	 * @return IPeak
-	 * @throws PeakException
 	 */
 	public static IChromatogramPeakMSD createPeak(IChromatogramMSD chromatogram, IScanRange scanRange, IMarkedIons excludedIons) throws PeakException {
 
@@ -393,13 +367,6 @@ public class PeakBuilderMSD {
 	 * other method without background abundance parameters.<br/>
 	 * Only total ion signals without the given ions will be
 	 * considered.
-	 * 
-	 * @param chromatogram
-	 * @param scanRange
-	 * @param backgroundAbundanceRange
-	 * @param excludedIons
-	 * @return IPeak
-	 * @throws PeakException
 	 */
 	public static IChromatogramPeakMSD createPeak(IChromatogramMSD chromatogram, IScanRange scanRange, IBackgroundAbundanceRange backgroundAbundanceRange, IMarkedIons excludedIons) throws PeakException {
 
@@ -429,12 +396,6 @@ public class PeakBuilderMSD {
 	/**
 	 * Creates a peak from the given parameters.<br/>
 	 * The background will be detected automatically.
-	 * 
-	 * @param chromatogram
-	 * @param totalIonSignals
-	 * @param peakMassSpectrum
-	 * @return IPeak
-	 * @throws PeakException
 	 */
 	public static IChromatogramPeakMSD createPeak(IChromatogramMSD chromatogram, ITotalScanSignals totalIonSignals, IPeakMassSpectrum peakMassSpectrum) throws PeakException {
 
@@ -468,13 +429,6 @@ public class PeakBuilderMSD {
 	 * Creates a peak from the given parameters.<br/>
 	 * The background can be determined through start and stop background
 	 * abundance.
-	 * 
-	 * @param chromatogram
-	 * @param totalIonSignals
-	 * @param peakMassSpectrum
-	 * @param backgroundAbundanceRange
-	 * @return IPeak
-	 * @throws PeakException
 	 */
 	public static IChromatogramPeakMSD createPeak(IChromatogramMSD chromatogram, ITotalScanSignals totalIonSignals, IPeakMassSpectrum peakMassSpectrum, IBackgroundAbundanceRange backgroundAbundanceRange) throws PeakException {
 
@@ -505,11 +459,6 @@ public class PeakBuilderMSD {
 	 * abundance of the first and the last signal of the given scan range.<br/>
 	 * If you like to set the background abundance manually, choose the other
 	 * method with background abundance parameters.
-	 * 
-	 * @param extractedIonSignals
-	 * @param scanRange
-	 * @return IPeak
-	 * @throws PeakException
 	 */
 	public static IChromatogramPeakMSD createPeak(IExtractedIonSignals extractedIonSignals, IScanRange scanRange) throws PeakException {
 
@@ -587,13 +536,6 @@ public class PeakBuilderMSD {
 
 	/**
 	 * Returns the peak mass spectrum from the given values.
-	 * 
-	 * @param chromatogram
-	 * @param totalIonSignals
-	 * @param backgroundEquation
-	 * @param excludedIons
-	 * @return {@link IPeakMassSpectrum}
-	 * @throws PeakException
 	 */
 	protected static IPeakMassSpectrum getPeakMassSpectrum(IChromatogramMSD chromatogram, ITotalScanSignals totalIonSignals, LinearEquation backgroundEquation, IMarkedIons excludedIons) throws PeakException {
 
@@ -630,10 +572,6 @@ public class PeakBuilderMSD {
 
 	/**
 	 * Creates a {@link IPeakIntensityValues} instance from the given {@link ITotalScanSignals}.
-	 * 
-	 * @param peakIntensityTotalIonSignals
-	 * @return {@link IPeakIntensityValues}
-	 * @throws PeakException
 	 */
 	protected static IPeakIntensityValues getPeakIntensityValues(ITotalScanSignals peakIntensityTotalIonSignals) throws PeakException {
 
@@ -659,11 +597,6 @@ public class PeakBuilderMSD {
 	 * total signal.<br/>
 	 * Afterwards, the signals will be normalized to
 	 * IPeakIntensityValues.MAX_INTENSITY.
-	 * 
-	 * @param totalIonSignals
-	 * @param backgroundEquation
-	 * @return {@link ITotalScanSignals}
-	 * @throws PeakException
 	 */
 	protected static ITotalScanSignals adjustTotalIonSignals(ITotalScanSignals totalIonSignals, LinearEquation backgroundEquation) throws PeakException {
 
@@ -695,12 +628,6 @@ public class PeakBuilderMSD {
 
 	/**
 	 * The background abundance range needs to be checked.
-	 * 
-	 * @param totalIonSignals
-	 * @param scanRange
-	 * @param backgroundAbundanceRange
-	 * @throws PeakException
-	 * @return {@link LinearEquation}
 	 */
 	protected static LinearEquation getBackgroundEquation(ITotalScanSignals totalIonSignals, IScanRange scanRange, IBackgroundAbundanceRange backgroundAbundanceRange) throws PeakException {
 
@@ -724,12 +651,6 @@ public class PeakBuilderMSD {
 	/**
 	 * Returns a {@link ITotalScanSignals} object from the given chromatogram and
 	 * scan range.
-	 * 
-	 * @param chromatogram
-	 * @param scanRange
-	 * @param excludedIons
-	 * @throws PeakException
-	 * @return {@link ITotalScanSignals}
 	 */
 	protected static ITotalScanSignals getTotalIonSignals(IChromatogramMSD chromatogram, IScanRange scanRange, IMarkedIons excludedIons) throws PeakException {
 
@@ -750,11 +671,6 @@ public class PeakBuilderMSD {
 	/**
 	 * Returns a {@link ITotalScanSignals} object from the given chromatogram and
 	 * scan range.
-	 * 
-	 * @param chromatogram
-	 * @param scanRange
-	 * @throws PeakException
-	 * @return {@link ITotalScanSignals}
 	 */
 	protected static ITotalScanSignals getTotalIonSignals(IChromatogramMSD chromatogram, IScanRange scanRange) throws PeakException {
 
@@ -778,12 +694,6 @@ public class PeakBuilderMSD {
 	 * abundance will be lowered to the abundance of the total ion signal.<br/>
 	 * The method returns in all cases a valid BackgroundAbundanceRange.<br/>
 	 * If one of the given values is null, a peak exception will be thrown.
-	 * 
-	 * @param totalIonSignals
-	 * @param scanRange
-	 * @param backgroundAbundanceRange
-	 * @throws PeakException
-	 * @return {@link IBackgroundAbundanceRange}
 	 */
 	protected static IBackgroundAbundanceRange checkBackgroundAbundanceRange(ITotalScanSignals totalIonSignals, IScanRange scanRange, IBackgroundAbundanceRange backgroundAbundanceRange) throws PeakException {
 
@@ -839,10 +749,6 @@ public class PeakBuilderMSD {
 	 * Checks that the scan range is in between the bounds of the given
 	 * chromatogram.<br/>
 	 * The method assumed that chromatogram and scan range are not null.
-	 * 
-	 * @param chromatogram
-	 * @param scanRange
-	 * @throws PeakException
 	 */
 	protected static void checkScanRange(IChromatogramMSD chromatogram, IScanRange scanRange) throws PeakException {
 
@@ -864,10 +770,6 @@ public class PeakBuilderMSD {
 	 * extracted ion signals.<br/>
 	 * The method assumed that extracted ion signals and scan range are not
 	 * null.
-	 * 
-	 * @param extractedIonSignals
-	 * @param scanRange
-	 * @throws PeakException
 	 */
 	protected static void checkScanRange(IExtractedIonSignals extractedIonSignals, IScanRange scanRange) throws PeakException {
 
@@ -886,9 +788,6 @@ public class PeakBuilderMSD {
 
 	/**
 	 * Checks the scan range and throws an exception is something is wrong.
-	 * 
-	 * @param scanRange
-	 * @throws PeakException
 	 */
 	protected static void validateScanRange(IScanRange scanRange) throws PeakException {
 
@@ -900,9 +799,6 @@ public class PeakBuilderMSD {
 	/**
 	 * Checks the background abundance range and throws an exception is
 	 * something is wrong.
-	 * 
-	 * @param backgroundAbundanceRange
-	 * @throws PeakException
 	 */
 	protected static void validateBackgroundAbundanceRange(IBackgroundAbundanceRange backgroundAbundanceRange) throws PeakException {
 
@@ -914,9 +810,6 @@ public class PeakBuilderMSD {
 	/**
 	 * Checks the peak mass spectrum and throws an exception is something is
 	 * wrong.
-	 * 
-	 * @param peakMassSpectrum
-	 * @throws PeakException
 	 */
 	protected static void validatePeakMassSpectrum(IPeakMassSpectrum peakMassSpectrum) throws PeakException {
 
@@ -928,9 +821,6 @@ public class PeakBuilderMSD {
 	/**
 	 * Checks the total ion signals and throws an exception is something is
 	 * wrong.
-	 * 
-	 * @param totalIonSignals
-	 * @throws PeakException
 	 */
 	protected static void validateTotalIonSignals(ITotalScanSignals totalIonSignals) throws PeakException {
 
@@ -942,9 +832,6 @@ public class PeakBuilderMSD {
 	/**
 	 * Checks the excluded ions and throws an exception is something
 	 * is wrong.
-	 * 
-	 * @param excludedIons
-	 * @throws PeakException
 	 */
 	protected static void validateExcludedIons(IMarkedIons excludedIons) throws PeakException {
 
@@ -955,9 +842,6 @@ public class PeakBuilderMSD {
 
 	/**
 	 * Checks the chromatogram and throws an exception is something is wrong.
-	 * 
-	 * @param chromatogram
-	 * @throws PeakException
 	 */
 	protected static void validateChromatogram(IChromatogramMSD chromatogram) throws PeakException {
 
@@ -969,9 +853,6 @@ public class PeakBuilderMSD {
 	/**
 	 * Checks the extractedIonSignals and throws an exception is something is
 	 * wrong.
-	 * 
-	 * @param extractedIonSignals
-	 * @throws PeakException
 	 */
 	protected static void validateExtractedIonSignals(IExtractedIonSignals extractedIonSignals) throws PeakException {
 

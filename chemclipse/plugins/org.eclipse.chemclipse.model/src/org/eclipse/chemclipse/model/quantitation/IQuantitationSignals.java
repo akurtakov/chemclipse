@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,8 +20,6 @@ public interface IQuantitationSignals extends NavigableSet<IQuantitationSignal>,
 
 	/**
 	 * Returns the list of selected signals.
-	 * 
-	 * @return List<Double>
 	 */
 	List<Double> getSelectedSignals();
 
@@ -37,8 +35,6 @@ public interface IQuantitationSignals extends NavigableSet<IQuantitationSignal>,
 
 	/**
 	 * Set isUse = true to the given signal.
-	 * 
-	 * @param ion
 	 */
 	void selectSignal(double signal);
 }

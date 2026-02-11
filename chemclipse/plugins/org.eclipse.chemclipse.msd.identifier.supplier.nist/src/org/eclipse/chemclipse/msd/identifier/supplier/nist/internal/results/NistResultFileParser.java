@@ -60,9 +60,6 @@ public class NistResultFileParser {
 	/**
 	 * Extracts the compounds of the result file (SRCRESLT.TXT) or
 	 * (NISTLOG.TXT).
-	 * 
-	 * @param resultFile
-	 * @return {@link Compounds}
 	 */
 	public Compounds getCompounds(File results) {
 
@@ -96,9 +93,6 @@ public class NistResultFileParser {
 
 	/**
 	 * Extracts the compounds.
-	 * 
-	 * @param input
-	 * @return {@link Compounds}
 	 */
 	private Compounds extractCompounds(String input) {
 
@@ -142,9 +136,6 @@ public class NistResultFileParser {
 
 	/**
 	 * Extracts and adds the hits to the given compound.
-	 * 
-	 * @param input
-	 * @param compound
 	 */
 	private void extractAndAddHits(String input, Compound compound) {
 
@@ -161,9 +152,6 @@ public class NistResultFileParser {
 
 	/**
 	 * Extracts and adds the hit to the given compound.
-	 * 
-	 * @param content
-	 * @param compound
 	 */
 	private Hit extractHit(String input) {
 
@@ -177,9 +165,6 @@ public class NistResultFileParser {
 
 	/**
 	 * Adds the name and formula.
-	 * 
-	 * @param input
-	 * @param hit
 	 */
 	private void addNameAndFormula(String input, Hit hit) {
 
@@ -192,9 +177,6 @@ public class NistResultFileParser {
 
 	/**
 	 * Adds the match, reverse match factor and the probability.
-	 * 
-	 * @param input
-	 * @param hit
 	 */
 	private void addMatchFactor(String input, Hit hit) {
 
@@ -208,9 +190,6 @@ public class NistResultFileParser {
 
 	/**
 	 * Adds the cas number.
-	 * 
-	 * @param input
-	 * @param hit
 	 */
 	private void addCAS(String input, Hit hit) {
 
@@ -222,9 +201,6 @@ public class NistResultFileParser {
 
 	/**
 	 * Set the mw, lib, id and ri.
-	 * 
-	 * @param input
-	 * @param hit
 	 */
 	private void addLib(String input, Hit hit) {
 

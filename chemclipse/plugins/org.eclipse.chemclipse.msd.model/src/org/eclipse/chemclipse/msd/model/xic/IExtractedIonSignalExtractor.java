@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,10 +28,6 @@ public interface IExtractedIonSignalExtractor {
 	 * 28-600. You can now modify each ion in it's abundance.<br/>
 	 * This method is much faster as "getExtractedIonSignals()" because the
 	 * min-max ion values are not calculated by each mass spectrum.
-	 * 
-	 * @param startIon
-	 * @param stopIon
-	 * @return IExtractedIonSignals
 	 */
 	IExtractedIonSignals getExtractedIonSignals(float startIon, float stopIon);
 
@@ -48,17 +44,12 @@ public interface IExtractedIonSignalExtractor {
 	 * You can only edit the abundance values for the stored scan range.<br/>
 	 * If you need a predefined scan range, use getExtractedIonSignals(float
 	 * startIon, float stopIon).
-	 * 
-	 * @return IExtractedIonSignals
 	 */
 	IExtractedIonSignals getExtractedIonSignals();
 
 	/**
 	 * Returns an {@link IExtractedIonSignals} object in the range of the given
 	 * IRetentionTimeRange
-	 * 
-	 * @param chromatogramSelection
-	 * @return {@link IExtractedIonSignals}
 	 */
 	IExtractedIonSignals getExtractedIonSignals(IRetentionTimeRange range);
 
@@ -66,10 +57,6 @@ public interface IExtractedIonSignalExtractor {
 	 * Calculates the extracted ion signals object in the range of the given
 	 * start and stop scan.<br/>
 	 * If the start and stop scan are not valid, an empty {@link IExtractedIonSignals} object will be returned.
-	 * 
-	 * @param startScan
-	 * @param stopScan
-	 * @return {@link IExtractedIonSignals}
 	 */
 	IExtractedIonSignals getExtractedIonSignals(int startScan, int stopScan);
 }

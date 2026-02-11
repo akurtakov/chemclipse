@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,9 +20,6 @@ public abstract class AbstractWindowsSupport extends AbstractRuntimeSupport impl
 
 	/**
 	 * Set e.g.: C:\Programs\NIST\MSSEARCH\NISTMS$.EXE
-	 * 
-	 * @param application
-	 * @param parameter
 	 */
 	protected AbstractWindowsSupport(String application, List<String> parameters) throws FileNotFoundException {
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,41 +25,23 @@ public interface IDatabaseExportConverter extends IExportConverter {
 
 	/**
 	 * Exports the mass spectrum to the given file.
-	 *
-	 * @param file
-	 * @param massSpectrum
-	 * @param append
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
 	 */
 	IProcessingInfo<File> convert(File file, IScanMSD massSpectrum, boolean append, IProgressMonitor monitor);
 
 	/**
 	 * Exports the mass spectra to the given file.
-	 *
-	 * @param file
-	 * @param massSpectra
-	 * @param append
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
 	 */
 	IProcessingInfo<File> convert(File file, IMassSpectra massSpectra, boolean append, IProgressMonitor monitor);
 
 	/**
 	 * Checks the mass spectrum instance and throws an exception if the mass
 	 * spectrum is null.
-	 *
-	 * @param massSpectrum
-	 * @return {@link IProcessingInfo}
 	 */
 	IProcessingInfo<File> validate(IScanMSD massSpectrum);
 
 	/**
 	 * Checks the mass spectra instance and throws an exception if the mass
 	 * spectrum is null.
-	 *
-	 * @param massSpectrum
-	 * @return {@link IProcessingInfo}
 	 */
 	IProcessingInfo<File> validate(IMassSpectra massSpectra);
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -32,8 +32,6 @@ public interface IChromatogramSelectionProcessSupplier<SettingType> extends IPro
 	 *            the {@link IChromatogramSelection} to process
 	 * @param processSettings
 	 *            settings to use
-	 * @param monitor
-	 *            the monitor to use for reporting progress or <code>null</code> if no progress is desired
 	 * @return the processed {@link IChromatogramSelection}
 	 */
 	IChromatogramSelection apply(IChromatogramSelection chromatogramSelection, SettingType processSettings, ProcessExecutionContext context) throws InterruptedException;
