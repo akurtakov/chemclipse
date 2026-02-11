@@ -97,7 +97,7 @@ public class ProcessorLabelProvider extends AbstractChemClipseLabelProvider {
 					text = processSupplier.getId();
 					break;
 				default:
-					text = ProcessMessages.labellabelNA;
+					text = ProcessMessages.labelNA;
 			}
 		}
 		return text;

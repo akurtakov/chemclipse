@@ -20,7 +20,7 @@ public class ProcessMessages extends NLS {
 	public static String labelDataType;
 	public static String labelDescription;
 	public static String labelID;
-	public static String labellabelNA;
+	public static String labelNA;
 	public static String labelName;
 	public static String processorImage;
 	public static String remove;
