@@ -43,8 +43,6 @@ jobs:
         version: 3.9.12
 
     - name: Verify Javadoc with Maven
-      env:
-        MAVEN_ARGS: "--batch-mode --no-transfer-progress -Dstyle.color=always"
       run: |
         source $HOME/.sdkman/bin/sdkman-init.sh
-        mvn -f chemclipse/pom.xml clean install -Pjavadoc -DskipTests
+        mvn -f chemclipse/pom.xml --batch-mode --no-transfer-progress clean install -Pjavadoc -DskipTests
