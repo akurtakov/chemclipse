@@ -17,7 +17,7 @@ pipeline {
 		MAVEN_OPTS = '-Xmx2048m'
 	}
 	options {
-		disableConcurrentBuilds()
+		disableConcurrentBuilds(abortPrevious: true)
 		buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '1'))
 	}
 	stages {
