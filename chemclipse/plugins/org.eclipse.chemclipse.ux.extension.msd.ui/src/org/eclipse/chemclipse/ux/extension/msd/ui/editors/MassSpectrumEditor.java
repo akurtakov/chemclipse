@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -275,15 +275,22 @@ public class MassSpectrumEditor implements IMassSpectrumEditor {
 
 	private void setPartLabel() {
 
+		if(massSpectra == null) {
+			return;
+		}
+
 		String name = ("".equals(massSpectra.getName())) ? "NoName" : massSpectra.getName();
-		massSpectrum = massSpectra.getMassSpectrum(1);
-		massSpectrum.setDirty(false);
-		if(massSpectrum instanceof IStandaloneMassSpectrum standaloneMassSpectrum) {
-			name = standaloneMassSpectrum.getName();
-		} else if(massSpectrum instanceof IRegularLibraryMassSpectrum regularLibraryMassSpectrum) {
-			ILibraryInformation libraryInformation = regularLibraryMassSpectrum.getLibraryInformation();
-			if(libraryInformation != null) {
-				name = libraryInformation.getName();
+
+		if(!massSpectra.isEmpty()) {
+			massSpectrum = massSpectra.getMassSpectrum(1);
+			massSpectrum.setDirty(false);
+			if(massSpectrum instanceof IStandaloneMassSpectrum standaloneMassSpectrum) {
+				name = standaloneMassSpectrum.getName();
+			} else if(massSpectrum instanceof IRegularLibraryMassSpectrum regularLibraryMassSpectrum) {
+				ILibraryInformation libraryInformation = regularLibraryMassSpectrum.getLibraryInformation();
+				if(libraryInformation != null) {
+					name = libraryInformation.getName();
+				}
 			}
 		}
 		part.setLabel(name);
