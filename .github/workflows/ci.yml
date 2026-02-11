@@ -48,7 +48,7 @@ jobs:
 
     - name: Publish Javadoc artifacts
       uses: actions/upload-artifact@v4
-      if: always()
+      if: success() || failure()
       with:
         name: javadoc
         path: chemclipse/**/target/*-javadoc.jar
