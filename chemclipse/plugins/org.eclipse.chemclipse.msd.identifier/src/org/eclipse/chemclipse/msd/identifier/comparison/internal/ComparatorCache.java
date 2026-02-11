@@ -46,10 +46,6 @@ public class ComparatorCache {
 
 	/**
 	 * If sorted is false, the ion list will be sorted descending - m/z values with highest abundance first.
-	 * 
-	 * @param ions
-	 * @param referenceIons
-	 * @return boolean
 	 */
 	public boolean useReferenceForComparison(IScanMSD unknown, IScanMSD reference, double thresholdPreOptimization) {
 
@@ -80,10 +76,6 @@ public class ComparatorCache {
 
 	/**
 	 * The ion list must be sorted descending - m/z values with highest abundance first.
-	 * 
-	 * @param ions
-	 * @param referenceIons
-	 * @return
 	 */
 	private boolean useReferenceForComparison(Set<Integer> unknownIons, Set<Integer> referenceIons, double thresholdPreOptimization) {
 

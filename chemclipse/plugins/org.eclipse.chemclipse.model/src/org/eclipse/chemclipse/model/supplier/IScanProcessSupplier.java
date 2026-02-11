@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -31,8 +31,6 @@ public interface IScanProcessSupplier<SettingType> extends IProcessSupplier<Sett
 	 *            the {@link IScan} to process
 	 * @param processSettings
 	 *            settings to use
-	 * @param monitor
-	 *            the monitor to use for reporting progress or <code>null</code> if no progress is desired
 	 * @return the processed {@link IScan}
 	 */
 	IScan apply(IScan scan, SettingType processSettings, ProcessExecutionContext context) throws InterruptedException;

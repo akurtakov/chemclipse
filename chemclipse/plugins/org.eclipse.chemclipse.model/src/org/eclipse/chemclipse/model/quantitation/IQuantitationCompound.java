@@ -31,15 +31,11 @@ public interface IQuantitationCompound extends Serializable, Comparable<IQuantit
 
 	/**
 	 * Allowed +/- retention time.
-	 * 
-	 * @return {@link IRetentionTimeWindow}
 	 */
 	IRetentionTimeWindow getRetentionTimeWindow();
 
 	/**
 	 * Allowed +/- retention index.
-	 * 
-	 * @return {@link IRetentionIndexWindow}
 	 */
 	IRetentionIndexWindow getRetentionIndexWindow();
 
@@ -49,43 +45,31 @@ public interface IQuantitationCompound extends Serializable, Comparable<IQuantit
 
 	/**
 	 * Returns the quantitation signals.
-	 * 
-	 * @return IQuantitationSignals
 	 */
 	IQuantitationSignals getQuantitationSignals();
 
 	/**
 	 * Returns the concentration / response entries.
-	 * 
-	 * @return {@link IResponseSignals}
 	 */
 	IResponseSignals getResponseSignals();
 
 	/**
 	 * Linear, ...
-	 * 
-	 * @return {@link CalibrationMethod}
 	 */
 	CalibrationMethod getCalibrationMethod();
 
 	/**
 	 * Sets the calibration method.
-	 * 
-	 * @param calibrationMethod
 	 */
 	void setCalibrationMethod(CalibrationMethod calibrationMethod);
 
 	/**
 	 * Cross zero when calculate the equation.
-	 * 
-	 * @return boolean
 	 */
 	boolean isCrossZero();
 
 	/**
 	 * Set use zero crossing.
-	 * 
-	 * @param boolean
 	 */
 	void setUseCrossZero(boolean useCrossZero);
 

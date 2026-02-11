@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -44,9 +44,6 @@ public class MassLibConverter {
 	 * 1:01
 	 * 1:55
 	 * 0:2:29
-	 * 
-	 * @param value
-	 * @return int
 	 */
 	public int parseRetentionTime(String time) {
 
@@ -68,9 +65,6 @@ public class MassLibConverter {
 	/**
 	 * 600
 	 * 700
-	 * 
-	 * @param index
-	 * @return float
 	 */
 	public float parseRetentionIndex(String index) {
 

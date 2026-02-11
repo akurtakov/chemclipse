@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -43,8 +43,6 @@ public class Instrument {
 	/**
 	 * Only alphanumeric values are allowed.
 	 * Non-allowed characters will be removed.
-	 * 
-	 * @param identifier
 	 */
 	public void setIdentifier(String identifier) {
 
@@ -60,8 +58,6 @@ public class Instrument {
 
 	/**
 	 * Non-allowed characters will be removed.
-	 * 
-	 * @param description
 	 */
 	public void setName(String name) {
 
@@ -75,8 +71,6 @@ public class Instrument {
 
 	/**
 	 * Non-allowed characters will be removed.
-	 * 
-	 * @param description
 	 */
 	public void setDescription(String description) {
 
