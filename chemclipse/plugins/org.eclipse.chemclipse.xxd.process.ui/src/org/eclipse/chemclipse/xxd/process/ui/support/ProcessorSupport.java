@@ -157,7 +157,7 @@ public class ProcessorSupport {
 		try {
 			for(IConfigurationElement element : config) {
 				final String id = element.getAttribute("id");
-				if(!processSupplier.getId().equals(id)) {
+				if(!processSupplier.getId().contains(id)) {
 					continue;
 				}
 				final Object object = element.createExecutableExtension("class");
