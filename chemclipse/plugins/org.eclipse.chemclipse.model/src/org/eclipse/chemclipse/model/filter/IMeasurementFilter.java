@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -35,7 +35,6 @@ public interface IMeasurementFilter<ConfigType> extends Filter<ConfigType> {
 	 * Filters the given Collection of {@link IMeasurement}s with this filter and returns the result.
 	 * The resulting Collection could either be the same or a new collection, might have more or less items
 	 * 
-	 * @param filterItems
 	 * @param configuration
 	 *            the configuration to apply or <code>null</code> if no special configuration is desired
 	 * @param resultTransformer
@@ -53,7 +52,7 @@ public interface IMeasurementFilter<ConfigType> extends Filter<ConfigType> {
 	/**
 	 * Checks if the given {@link IMeasurement} is compatible with this filter, that means that this filter can be applied without throwing an {@link IllegalArgumentException}
 	 * 
-	 * @param item
+	 * @param items
 	 *            the {@link IMeasurement} to check
 	 * @return <code>true</code> if this {@link IMeasurement} can be applied, <code>false</code> otherwise
 	 */
@@ -62,7 +61,6 @@ public interface IMeasurementFilter<ConfigType> extends Filter<ConfigType> {
 	/**
 	 * Creates a new configuration that is specially suited for the given {@link IMeasurement} types
 	 * 
-	 * @param item
 	 * @return a new configuration for this items or the default config if items is empty or no suitable configuration can be created
 	 * @throws IllegalArgumentException
 	 *             if the given {@link IMeasurement}s are incompatible with this filter ({@link #acceptsIMeasurements(IMeasurement)} returns <code>false</code>)

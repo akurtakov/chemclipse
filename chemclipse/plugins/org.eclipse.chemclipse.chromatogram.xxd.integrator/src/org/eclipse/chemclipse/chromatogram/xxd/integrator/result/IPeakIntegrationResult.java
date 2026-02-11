@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -60,30 +60,21 @@ public interface IPeakIntegrationResult {
 	 * Returns the ions which has been integrated as a set.<br/>
 	 * If it was TIC (total ion chromatogram), the IIon.TIC_Ion will be
 	 * returned.
-	 * 
-	 * @return int
 	 */
 	Set<Integer> getIntegratedTraces();
 
 	/**
 	 * Sets the ion which has been integrated.
-	 * 
-	 * @param ion
 	 */
 	void addIntegratedTrace(int ion);
 
 	/**
 	 * Removes the ion from the actual integrated ion list.
-	 * 
-	 * @param ion
 	 */
 	void removeIntegratedTrace(int ion);
 
 	/**
 	 * Sets the ions which has been integrated.
-	 * 
-	 * @param List
-	 *            <Integer>
 	 */
 	void addIntegratedTraces(Set<Integer> ions);
 }

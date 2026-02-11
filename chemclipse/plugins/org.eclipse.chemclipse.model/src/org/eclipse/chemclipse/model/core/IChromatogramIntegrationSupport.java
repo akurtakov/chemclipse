@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,58 +18,41 @@ public interface IChromatogramIntegrationSupport {
 
 	/**
 	 * Returns the integrator description.
-	 * 
-	 * @return String
 	 */
 	String getIntegratorDescription();
 
 	/**
 	 * Sets the integrator description.
-	 * 
-	 * @param integratorDescription
 	 */
 	void setIntegratorDescription(String integratorDescription);
 
 	/**
 	 * Returns the integrated area of the chromatogram.
-	 * 
-	 * @return double
 	 */
 	double getChromatogramIntegratedArea();
 
 	/**
 	 * Returns the integrated area of the background.
-	 * 
-	 * @return double
 	 */
 	double getBackgroundIntegratedArea();
 
 	/**
 	 * Returns the integrated area of the peaks.
-	 * 
-	 * @return double
 	 */
 	double getPeakIntegratedArea();
 
 	/**
 	 * Sets the integration results.
-	 * 
-	 * @param integratorDescription
-	 * @param integrationEntries
 	 */
 	void setIntegratedArea(List<IIntegrationEntry> chromatogramIntegrationEntries, List<IIntegrationEntry> backgroundIntegrationEntries, String integratorDescription);
 
 	/**
 	 * Returns the list of integration entries for the chromatographic area.
-	 * 
-	 * @return List<IIntegrationEntry>
 	 */
 	List<IIntegrationEntry> getChromatogramIntegrationEntries();
 
 	/**
 	 * Returns the list of integration entries for the background area.
-	 * 
-	 * @return List<IIntegrationEntry>
 	 */
 	List<IIntegrationEntry> getBackgroundIntegrationEntries();
 

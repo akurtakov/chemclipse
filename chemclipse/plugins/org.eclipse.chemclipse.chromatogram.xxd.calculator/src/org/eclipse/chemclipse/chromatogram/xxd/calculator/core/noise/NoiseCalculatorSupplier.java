@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,8 +27,6 @@ public class NoiseCalculatorSupplier implements INoiseCalculatorSupplier {
 	/**
 	 * Sets the supplier id like
 	 * "org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.dyson".
-	 * 
-	 * @param id
 	 */
 	protected void setId(String id) {
 
@@ -45,8 +43,6 @@ public class NoiseCalculatorSupplier implements INoiseCalculatorSupplier {
 
 	/**
 	 * Sets the description of the noise calculator supplier.
-	 * 
-	 * @param description
 	 */
 	protected void setDescription(String description) {
 
@@ -63,8 +59,6 @@ public class NoiseCalculatorSupplier implements INoiseCalculatorSupplier {
 
 	/**
 	 * Sets the detector name of the noise calculator supplier.
-	 * 
-	 * @param comparatorName
 	 */
 	protected void setDetectorName(String detectorName) {
 

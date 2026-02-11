@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -61,8 +61,6 @@ public abstract class AbstractChromatogramConverter<P extends IPeak, T extends I
 	 * about all valid and registered chromatogram converters.<br/>
 	 * It can be used to get more information about the registered converters
 	 * such like filter names, file extensions.
-	 *
-	 * @return ChromatogramConverterSupport
 	 */
 	@Override
 	public IChromatogramConverterSupport getChromatogramConverterSupport() {
@@ -112,11 +110,6 @@ public abstract class AbstractChromatogramConverter<P extends IPeak, T extends I
 	 * available.<br/>
 	 * If no converter was available, a
 	 * NoChromatogramConverterAvailableException will be thrown.
-	 *
-	 * @param chromatogram
-	 * @param converterId
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
 	 */
 	@Override
 	public IProcessingInfo<IChromatogramOverview> convertOverview(File file, String converterId, IProgressMonitor monitor) {
@@ -145,11 +138,6 @@ public abstract class AbstractChromatogramConverter<P extends IPeak, T extends I
 	 * For example that the file is not readable or the file is not existent.<br/>
 	 * If no converter was able to read the file, a
 	 * NoChromatogramConverterAvailableException will be thrown.
-	 *
-	 * @param chromatogram
-	 * @param converterId
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
 	 */
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	@Override
@@ -167,11 +155,6 @@ public abstract class AbstractChromatogramConverter<P extends IPeak, T extends I
 
 	/**
 	 * If no suitable parser was found, null will be returned.
-	 *
-	 * @param file
-	 * @param overview
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
 	 */
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
@@ -361,9 +344,6 @@ public abstract class AbstractChromatogramConverter<P extends IPeak, T extends I
 	/**
 	 * Returns an IChromatogramExportConverter instance or null if none is
 	 * available.
-	 *
-	 * @param converterId
-	 * @return IConfigurationElement
 	 */
 	private IConfigurationElement getConfigurationElement(String converterId) {
 
@@ -382,9 +362,6 @@ public abstract class AbstractChromatogramConverter<P extends IPeak, T extends I
 
 	/**
 	 * This method may return null.
-	 *
-	 * @param element
-	 * @return {@link IMagicNumberMatcher}
 	 */
 	private IMagicNumberMatcher getMagicNumberMatcher(IConfigurationElement element) {
 

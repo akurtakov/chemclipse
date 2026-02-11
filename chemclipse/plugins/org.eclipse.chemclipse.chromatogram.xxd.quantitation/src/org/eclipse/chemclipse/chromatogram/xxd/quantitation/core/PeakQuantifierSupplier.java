@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -41,8 +41,6 @@ public class PeakQuantifierSupplier implements IPeakQuantifierSupplier {
 	/**
 	 * Sets the supplier id like
 	 * "org.eclipse.chemclipse.chromatogram.msd.quantifier.supplier.chemclipse".
-	 * 
-	 * @param id
 	 */
 	protected void setId(String id) {
 
@@ -59,8 +57,6 @@ public class PeakQuantifierSupplier implements IPeakQuantifierSupplier {
 
 	/**
 	 * Sets the description of the quantifier supplier.
-	 * 
-	 * @param description
 	 */
 	protected void setDescription(String description) {
 
@@ -77,8 +73,6 @@ public class PeakQuantifierSupplier implements IPeakQuantifierSupplier {
 
 	/**
 	 * Sets the detector name of the baseline detection supplier.
-	 * 
-	 * @param comparatorName
 	 */
 	protected void setPeakQuantifierName(String peakQuantifierName) {
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -35,8 +35,6 @@ public class BaselineDetectorSupplier implements IBaselineDetectorSupplier {
 	/**
 	 * Sets the supplier id like
 	 * "org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.supplier.chemstation".
-	 * 
-	 * @param id
 	 */
 	protected void setId(String id) {
 
@@ -53,8 +51,6 @@ public class BaselineDetectorSupplier implements IBaselineDetectorSupplier {
 
 	/**
 	 * Sets the description of the baseline detector supplier.
-	 * 
-	 * @param description
 	 */
 	protected void setDescription(String description) {
 
@@ -71,8 +67,6 @@ public class BaselineDetectorSupplier implements IBaselineDetectorSupplier {
 
 	/**
 	 * Sets the detector name of the baseline detection supplier.
-	 * 
-	 * @param comparatorName
 	 */
 	protected void setDetectorName(String detectorName) {
 

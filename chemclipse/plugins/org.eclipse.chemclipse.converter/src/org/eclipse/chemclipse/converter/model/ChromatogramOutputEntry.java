@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,9 +23,6 @@ public class ChromatogramOutputEntry implements IChromatogramOutputEntry {
 
 	/**
 	 * Set the output file path and the converter id.
-	 * 
-	 * @param outputFile
-	 * @param converterId
 	 */
 	public ChromatogramOutputEntry(String outputFolder, String converterId) {
 		if(outputFolder != null && converterId != null) {

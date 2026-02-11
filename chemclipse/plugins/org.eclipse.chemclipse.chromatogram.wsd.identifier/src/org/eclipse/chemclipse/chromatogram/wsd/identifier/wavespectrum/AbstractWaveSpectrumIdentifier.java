@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,9 +21,6 @@ public abstract class AbstractWaveSpectrumIdentifier implements IWaveSpectrumIde
 	/**
 	 * Validates that the peak is not null.<br/>
 	 * If yes, an exception will be thrown.
-	 * 
-	 * @param peak
-	 * @throws ValueMustNotBeNullException
 	 */
 	public void validateWaveSpectrum(IScanWSD waveSpectrum) throws ValueMustNotBeNullException {
 
@@ -34,9 +31,6 @@ public abstract class AbstractWaveSpectrumIdentifier implements IWaveSpectrumIde
 
 	/**
 	 * Throws an exception if the settings are null.
-	 * 
-	 * @param identifierSettings
-	 * @throws ValueMustNotBeNullException
 	 */
 	public void validateSettings(IIdentifierSettingsWSD identifierSettings) throws ValueMustNotBeNullException {
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -29,9 +29,6 @@ public interface IPeakCSDSelectionUpdateNotifier {
 	 * reloaded.<br/>
 	 * But if the chromatogram itself has been modified (background remove), the
 	 * GUI model needs to be reloaded to show correct values.
-	 * 
-	 * @param IPeakMSD
-	 * @param forceReload
 	 */
 	void update(IPeakCSD peakFID, boolean forceReload);
 }

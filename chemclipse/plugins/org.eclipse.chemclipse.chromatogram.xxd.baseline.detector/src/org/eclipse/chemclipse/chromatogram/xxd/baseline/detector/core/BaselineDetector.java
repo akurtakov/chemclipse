@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -63,12 +63,6 @@ public class BaselineDetector {
 	/**
 	 * Use this method to call an extension point which sets a baseline to the
 	 * given chromatogram.
-	 * 
-	 * @param chromatogram
-	 * @param baselineDetectorSettings
-	 * @param detectorId
-	 * @param monitor
-	 * @return IProcessingInfo
 	 */
 	public static IProcessingInfo<?> setBaseline(IChromatogramSelection chromatogramSelection, IBaselineDetectorSettings baselineDetectorSettings, final String detectorId, IProgressMonitor monitor) {
 
@@ -131,9 +125,6 @@ public class BaselineDetector {
 
 	/**
 	 * Returns an IBaselineDetector instance or null if none is available.
-	 * 
-	 * @param detectorId
-	 * @return IConfigurationElement
 	 */
 	private static IConfigurationElement getConfigurationElement(final String detectorId) {
 

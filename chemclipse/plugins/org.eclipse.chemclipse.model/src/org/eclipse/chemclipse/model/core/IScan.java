@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -35,24 +35,18 @@ public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplie
 
 	/**
 	 * Sets the chromatogram which stores the scan.
-	 * 
-	 * @param parentChromatogram
 	 */
 	void setParentChromatogram(IChromatogram parentChromatogram);
 
 	/**
 	 * Returns the scan number of the actual scan.<br/>
 	 * If it is not part if a chromatogram, the scan number is 0.
-	 * 
-	 * @return int
 	 */
 	int getScanNumber();
 
 	/**
 	 * Sets the scan Number of the actual scan.<br/>
 	 * Only values >= 0 are allowed.
-	 * 
-	 * @param scanNumber
 	 */
 	void setScanNumber(int scanNumber);
 
@@ -77,32 +71,24 @@ public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplie
 	/**
 	 * Get the retention time for column 1.
 	 * This is used for multidimensional chromatography.
-	 * 
-	 * @return int
 	 */
 	int getRetentionTimeColumn1();
 
 	/**
 	 * Set the retention time for column 1.
 	 * This is used for multidimensional chromatography.
-	 * 
-	 * @param retentionTimeColumn1
 	 */
 	void setRetentionTimeColumn1(int retentionTimeColumn1);
 
 	/**
 	 * Get the retention time for column 2.
 	 * This is used for multidimensional chromatography.
-	 * 
-	 * @return int
 	 */
 	int getRetentionTimeColumn2();
 
 	/**
 	 * Set the retention time for column 2.
 	 * This is used for multidimensional chromatography.
-	 * 
-	 * @param retentionTimeColumn2
 	 */
 	void setRetentionTimeColumn2(int retentionTimeColumn2);
 
@@ -135,24 +121,17 @@ public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplie
 
 	/**
 	 * Sets the retention index. Only values >= 0 are allowed.<br/>
-	 * 
-	 * @param retentionIndex
 	 */
 	void setRetentionIndex(float retentionIndex);
 
 	/**
 	 * Returns whether this scan stores additional RI data.
-	 * 
-	 * @return boolean
 	 */
 	boolean hasAdditionalRetentionIndices();
 
 	/**
 	 * Returns the retention index given by the RetentionIndexType.
 	 * If none is available, 0 will be returned.
-	 * 
-	 * @param separationColumnType
-	 * @return float
 	 */
 	float getRetentionIndex(SeparationColumnType separationColumnType);
 
@@ -161,9 +140,6 @@ public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplie
 	/**
 	 * Sets the retention index. Only values >= 0 are allowed.<br/>
 	 * Set a retention index for a certain column type.
-	 * 
-	 * @param separationColumnType
-	 * @param retentionIndex
 	 */
 	void setRetentionIndex(SeparationColumnType separationColumnType, float retentionIndex);
 
@@ -183,8 +159,6 @@ public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplie
 	 * The default cycle number is 1.
 	 * Cycle numbers are used to display several scans of
 	 * one cycle number as one summed TIC.
-	 * 
-	 * @return int
 	 */
 	int getCycleNumber();
 
@@ -205,15 +179,11 @@ public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplie
 	/**
 	 * Returns the identifier of the scan.
 	 * It is used, e.g. to select and find a specifically marked scan in the list of scans.
-	 * 
-	 * @return String
 	 */
 	String getIdentifier();
 
 	/**
 	 * Sets an identifier.
-	 * 
-	 * @param identifier
 	 */
 	void setIdentifier(String identifier);
 
@@ -223,8 +193,6 @@ public interface IScan extends ISignal, IAdaptable, Serializable, ITargetSupplie
 	 * will be the given total signal.
 	 * Be aware of that some supplier support not the whole
 	 * available signal range.
-	 * 
-	 * @param totalSignal
 	 */
 	void adjustTotalSignal(float totalSignal);
 }
