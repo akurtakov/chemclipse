@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -42,8 +42,7 @@ public class MassSpectrumFilter extends AbstractMassSpectrumFilter {
 		}
 		IProcessingInfo<IMassSpectrumFilterResult> processingInfo = validate(massSpectra, filterSettings);
 		if(!processingInfo.hasErrorMessages()) {
-			if(filterSettings instanceof MassSpectrumFilterSettings) {
-				MassSpectrumFilterSettings savitzkyGolayMassSpectrumFilterSettings = (MassSpectrumFilterSettings)filterSettings;
+			if(filterSettings instanceof MassSpectrumFilterSettings savitzkyGolayMassSpectrumFilterSettings) {
 				FilterSupplier filterSupplier = new FilterSupplier();
 				int derivative = savitzkyGolayMassSpectrumFilterSettings.getDerivative();
 				int order = savitzkyGolayMassSpectrumFilterSettings.getOrder();
