@@ -11,7 +11,7 @@
  * Philip Wenig - initial API and implementation
  * Matthias Mailänder - add default icons
  *******************************************************************************/
-package org.eclipse.chemclipse.support.ui.processors;
+package org.eclipse.chemclipse.xxd.process;
 
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImage;

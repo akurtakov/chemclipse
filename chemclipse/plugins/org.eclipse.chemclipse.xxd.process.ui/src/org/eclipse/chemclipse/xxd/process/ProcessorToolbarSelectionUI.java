@@ -11,7 +11,7 @@
  * Christoph Läubrich - initial API and implementation
  * Philip Wenig - support for sorting / icons
  *******************************************************************************/
-package org.eclipse.chemclipse.support.ui.processors;
+package org.eclipse.chemclipse.xxd.process;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,7 +20,7 @@ import java.util.List;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
-import org.eclipse.chemclipse.support.ui.l10n.SupportMessages;
+import org.eclipse.chemclipse.xxd.process.l10n.ProcessMessages;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
@@ -94,7 +94,7 @@ public class ProcessorToolbarSelectionUI extends Composite {
 
 		Text text = new Text(parent, SWT.BORDER | SWT.SEARCH | SWT.ICON_CANCEL | SWT.ICON_SEARCH);
 		text.setText(""); //$NON-NLS-1$
-		text.setToolTipText(SupportMessages.searchAvailableProcessorItems);
+		text.setToolTipText(ProcessMessages.searchAvailableProcessorItems);
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		/*
 		 * Listen to search key event.

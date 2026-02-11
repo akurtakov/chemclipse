@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -10,7 +10,7 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.support.ui.internal.provider;
+package org.eclipse.chemclipse.xxd.process;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,19 +22,18 @@ import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
-import org.eclipse.chemclipse.support.ui.l10n.SupportMessages;
-import org.eclipse.chemclipse.support.ui.processors.Processor;
 import org.eclipse.chemclipse.support.ui.provider.AbstractChemClipseLabelProvider;
+import org.eclipse.chemclipse.xxd.process.l10n.ProcessMessages;
 import org.eclipse.swt.graphics.Image;
 
 public class ProcessorLabelProvider extends AbstractChemClipseLabelProvider {
 
 	public static final String[] TITLES = { //
-			SupportMessages.labelName, //
-			SupportMessages.labelDataType, //
-			SupportMessages.labelCategory, //
-			SupportMessages.labelDescription, //
-			SupportMessages.labelID //
+			ProcessMessages.labelName, //
+			ProcessMessages.labelDataType, //
+			ProcessMessages.labelCategory, //
+			ProcessMessages.labelDescription, //
+			ProcessMessages.labelID //
 	};
 
 	public static final int[] BOUNDS = { //
@@ -100,7 +99,7 @@ public class ProcessorLabelProvider extends AbstractChemClipseLabelProvider {
 					text = processSupplier.getId();
 					break;
 				default:
-					text = SupportMessages.labellabelNA;
+					text = ProcessMessages.labellabelNA;
 			}
 		}
 		return text;

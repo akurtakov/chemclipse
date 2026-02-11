@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -10,7 +10,7 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.support.ui.processors;
+package org.eclipse.chemclipse.xxd.process;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +19,7 @@ import java.util.List;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
-import org.eclipse.chemclipse.support.ui.l10n.SupportMessages;
+import org.eclipse.chemclipse.xxd.process.l10n.ProcessMessages;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
@@ -69,7 +69,7 @@ public class ImageDialog extends Dialog {
 	protected void configureShell(Shell shell) {
 
 		super.configureShell(shell);
-		shell.setText(SupportMessages.processorImage);
+		shell.setText(ProcessMessages.processorImage);
 	}
 
 	@Override
@@ -121,7 +121,7 @@ public class ImageDialog extends Dialog {
 
 		Text text = new Text(parent, SWT.BORDER | SWT.SEARCH | SWT.ICON_CANCEL | SWT.ICON_SEARCH);
 		text.setText(""); //$NON-NLS-1$
-		text.setToolTipText(SupportMessages.searchAvailableProcessorItems);
+		text.setToolTipText(ProcessMessages.searchAvailableProcessorItems);
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		/*
 		 * Listen to search key event.
