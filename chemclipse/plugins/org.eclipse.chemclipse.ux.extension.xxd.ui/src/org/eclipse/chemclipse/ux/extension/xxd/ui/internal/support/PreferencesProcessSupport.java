@@ -22,9 +22,9 @@ import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
-import org.eclipse.chemclipse.xxd.process.Processor;
-import org.eclipse.chemclipse.xxd.process.ProcessorSupport;
 import org.eclipse.chemclipse.xxd.process.support.ProcessTypeSupport;
+import org.eclipse.chemclipse.xxd.process.ui.support.ProcessorSupport;
+import org.eclipse.chemclipse.xxd.process.ui.toolbar.Processor;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 public class PreferencesProcessSupport {

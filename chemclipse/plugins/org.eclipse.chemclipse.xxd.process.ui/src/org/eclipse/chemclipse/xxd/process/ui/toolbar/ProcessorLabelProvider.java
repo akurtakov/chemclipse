@@ -10,7 +10,7 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.xxd.process;
+package org.eclipse.chemclipse.xxd.process.ui.toolbar;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,10 +20,8 @@ import java.util.Set;
 
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
-import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
-import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.provider.AbstractChemClipseLabelProvider;
-import org.eclipse.chemclipse.xxd.process.l10n.ProcessMessages;
+import org.eclipse.chemclipse.xxd.process.ui.l10n.ProcessMessages;
 import org.eclipse.swt.graphics.Image;
 
 public class ProcessorLabelProvider extends AbstractChemClipseLabelProvider {
@@ -69,7 +67,7 @@ public class ProcessorLabelProvider extends AbstractChemClipseLabelProvider {
 
 		if(columnIndex == 0) {
 			if(element instanceof Processor processor) {
-				return ApplicationImageFactory.getInstance().getImage(processor.getImageFileName(), IApplicationImageProvider.SIZE_16x16);
+				return processor.getMenuIcon();
 			}
 		}
 

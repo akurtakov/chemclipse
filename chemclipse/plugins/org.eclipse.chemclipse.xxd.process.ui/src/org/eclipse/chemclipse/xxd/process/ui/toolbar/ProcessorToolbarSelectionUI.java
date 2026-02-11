@@ -11,7 +11,7 @@
  * Christoph Läubrich - initial API and implementation
  * Philip Wenig - support for sorting / icons
  *******************************************************************************/
-package org.eclipse.chemclipse.xxd.process;
+package org.eclipse.chemclipse.xxd.process.ui.toolbar;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,7 +20,8 @@ import java.util.List;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
-import org.eclipse.chemclipse.xxd.process.l10n.ProcessMessages;
+import org.eclipse.chemclipse.xxd.process.ui.l10n.ProcessMessages;
+import org.eclipse.chemclipse.xxd.process.ui.support.ProcessorSupport;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;
