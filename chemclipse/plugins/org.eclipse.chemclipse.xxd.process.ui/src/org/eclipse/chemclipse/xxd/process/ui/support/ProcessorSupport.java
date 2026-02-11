@@ -21,6 +21,7 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.processing.l10n.ProcessingMessages;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
@@ -177,40 +178,39 @@ public class ProcessorSupport {
 
 		String imageFileName = PROCESSOR_IMAGE_DEFAULT;
 
-		// TODO: This fails for localized category names.
-		if(processSupplier.getCategory().equals("Baseline Detector")) {
+		if(processSupplier.getCategory().equals(ProcessingMessages.baselineDetector)) {
 			imageFileName = IApplicationImage.IMAGE_BASELINE;
-		} else if(processSupplier.getCategory().equals("Chromatogram Calculator")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.chromatogramCalculator)) {
 			imageFileName = IApplicationImage.IMAGE_CALCULATE;
-		} else if(processSupplier.getCategory().equals("Chromatogram Classifier")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.chromatogramClassifier)) {
 			imageFileName = IApplicationImage.IMAGE_CLASSIFIER;
-		} else if(processSupplier.getCategory().equals("Chromatogram Export")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.chromatogramExport)) {
 			imageFileName = IApplicationImage.IMAGE_SAVE;
-		} else if(processSupplier.getCategory().equals("Chromatogram Filter")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.chromatogramFilter)) {
 			imageFileName = IApplicationImage.IMAGE_CHROMATOGRAM;
-		} else if(processSupplier.getCategory().equals("Chromatogram Integrator")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.chromatogramIntegrator)) {
 			imageFileName = IApplicationImage.IMAGE_CHROMATOGRAM_INTEGRATOR;
-		} else if(processSupplier.getCategory().equals("Chromatogram Reports")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.chromatogramReports)) {
 			imageFileName = IApplicationImage.IMAGE_CHROMATOGRAM_REPORT;
-		} else if(processSupplier.getCategory().equals("Combined Chromatogram and Peak Integrator")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.combinedChromatogramPeakIntegrator)) {
 			imageFileName = IApplicationImage.IMAGE_COMBINED_INTEGRATOR;
-		} else if(processSupplier.getCategory().equals("Peak Detector")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.peakDetector)) {
 			imageFileName = IApplicationImage.IMAGE_PEAK_DETECTOR;
-		} else if(processSupplier.getCategory().equals("Peak Export")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.peakExport)) {
 			imageFileName = IApplicationImage.IMAGE_EXPORT;
-		} else if(processSupplier.getCategory().equals("Peak Filter")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.peakFilter)) {
 			imageFileName = IApplicationImage.IMAGE_PEAKS;
-		} else if(processSupplier.getCategory().equals("Peak Identifier")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.peakIdentifier)) {
 			imageFileName = IApplicationImage.IMAGE_IDENTIFY_PEAKS;
-		} else if(processSupplier.getCategory().equals("Peak Integrator")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.peakIntegrator)) {
 			imageFileName = IApplicationImage.IMAGE_PEAK_INTEGRATOR;
-		} else if(processSupplier.getCategory().equals("Peak Quantifier")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.peakQuantifier)) {
 			imageFileName = IApplicationImage.IMAGE_QUANTIFY_ALL_PEAKS;
-		} else if(processSupplier.getCategory().equals("Peak Mass Spectrum Filter") || processSupplier.getCategory().equals("Scan Mass Spectrum Filter")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.peakMassSpectrumFilter) || processSupplier.getCategory().equals(ProcessingMessages.scanMassSpectrumFilter)) {
 			imageFileName = IApplicationImage.IMAGE_MASS_SPECTRUM;
-		} else if(processSupplier.getCategory().equals("Scan Identifier")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.scanIdentifier)) {
 			imageFileName = IApplicationImage.IMAGE_IDENTIFY_MASS_SPECTRUM;
-		} else if(processSupplier.getCategory().equals("System")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.system)) {
 			imageFileName = IApplicationImage.IMAGE_PREFERENCES;
 		}
 

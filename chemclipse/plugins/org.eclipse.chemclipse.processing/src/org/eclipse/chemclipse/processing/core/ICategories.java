@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,38 +12,38 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.processing.core;
 
-import org.eclipse.chemclipse.processing.l10n.Messages;
+import org.eclipse.chemclipse.processing.l10n.ProcessingMessages;
 
 public interface ICategories {
 
-	String BASELINE_DETECTOR = Messages.baselineDetector;
-	String CHROMATOGRAM_CALCULATOR = Messages.chromatogramCalculator;
-	String CHROMATOGRAM_CLASSIFIER = Messages.chromatogramClassifier;
-	String CHROMATOGRAM_EXPORT = Messages.chromatogramExport;
-	String CHROMATOGRAM_FILTER = Messages.chromatogramFilter;
-	String CHROMATOGRAM_IDENTIFIER = Messages.chromatogramIdentifier;
-	String CHROMATOGRAM_INTEGRATOR = Messages.chromatogramIntegrator;
-	String CHROMATOGRAM_REPORTS = Messages.chromatogramReports;
-	String COMBINED_CHROMATOGRAM_PEAK_INTEGRATOR = Messages.combinedChromatogramPeakIntegrator;
-	String PEAK_DETECTOR = Messages.peakDetector;
-	String PEAK_EXPORT = Messages.peakExport;
-	String PEAK_FILTER = Messages.peakFilter;
-	String PEAK_IDENTIFIER = Messages.peakIdentifier;
-	String PEAK_INTEGRATOR = Messages.peakIntegrator;
-	String PEAK_QUANTIFIER = Messages.peakQuantifier;
-	String PROCESS = Messages.process;
-	String SCAN_FILTER = Messages.scanFilter;
-	String SCAN_IDENTIFIER = Messages.scanIdentifier;
-	String PEAK_MASS_SPECTRUM_FILTER = Messages.peakMassSpectrumFilter;
-	String SCAN_MASS_SPECTRUM_FILTER = Messages.scanMassSpectrumFilter;
-	String SYSTEM = Messages.system;
-	String USER_METHODS = Messages.userMethods;
-	String USER_INTERFACE = Messages.userInterface;
-	String FILTER = Messages.filter;
-	String MASS_SPECTRUM = Messages.massSpectrum;
-	String MASS_SPECTRUM_FILTER = Messages.massSpectrumFilter;
-	String MASS_SPECTRUM_IDENTIFIER = Messages.massSpectrumIdentifier;
-	String PROCEDURES = Messages.procedures;
-	String IDENTIFIER = Messages.identifier;
-	String EXPORT = Messages.export;
+	String BASELINE_DETECTOR = ProcessingMessages.baselineDetector;
+	String CHROMATOGRAM_CALCULATOR = ProcessingMessages.chromatogramCalculator;
+	String CHROMATOGRAM_CLASSIFIER = ProcessingMessages.chromatogramClassifier;
+	String CHROMATOGRAM_EXPORT = ProcessingMessages.chromatogramExport;
+	String CHROMATOGRAM_FILTER = ProcessingMessages.chromatogramFilter;
+	String CHROMATOGRAM_IDENTIFIER = ProcessingMessages.chromatogramIdentifier;
+	String CHROMATOGRAM_INTEGRATOR = ProcessingMessages.chromatogramIntegrator;
+	String CHROMATOGRAM_REPORTS = ProcessingMessages.chromatogramReports;
+	String COMBINED_CHROMATOGRAM_PEAK_INTEGRATOR = ProcessingMessages.combinedChromatogramPeakIntegrator;
+	String PEAK_DETECTOR = ProcessingMessages.peakDetector;
+	String PEAK_EXPORT = ProcessingMessages.peakExport;
+	String PEAK_FILTER = ProcessingMessages.peakFilter;
+	String PEAK_IDENTIFIER = ProcessingMessages.peakIdentifier;
+	String PEAK_INTEGRATOR = ProcessingMessages.peakIntegrator;
+	String PEAK_QUANTIFIER = ProcessingMessages.peakQuantifier;
+	String PROCESS = ProcessingMessages.process;
+	String SCAN_FILTER = ProcessingMessages.scanFilter;
+	String SCAN_IDENTIFIER = ProcessingMessages.scanIdentifier;
+	String PEAK_MASS_SPECTRUM_FILTER = ProcessingMessages.peakMassSpectrumFilter;
+	String SCAN_MASS_SPECTRUM_FILTER = ProcessingMessages.scanMassSpectrumFilter;
+	String SYSTEM = ProcessingMessages.system;
+	String USER_METHODS = ProcessingMessages.userMethods;
+	String USER_INTERFACE = ProcessingMessages.userInterface;
+	String FILTER = ProcessingMessages.filter;
+	String MASS_SPECTRUM = ProcessingMessages.massSpectrum;
+	String MASS_SPECTRUM_FILTER = ProcessingMessages.massSpectrumFilter;
+	String MASS_SPECTRUM_IDENTIFIER = ProcessingMessages.massSpectrumIdentifier;
+	String PROCEDURES = ProcessingMessages.procedures;
+	String IDENTIFIER = ProcessingMessages.identifier;
+	String EXPORT = ProcessingMessages.export;
 }
