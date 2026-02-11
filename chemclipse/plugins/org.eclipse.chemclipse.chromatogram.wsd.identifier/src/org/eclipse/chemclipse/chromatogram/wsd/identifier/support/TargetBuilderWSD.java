@@ -18,7 +18,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.chemclipse.logging.core.Logger;
-import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.exceptions.ReferenceMustNotBeNullException;
 import org.eclipse.chemclipse.model.identifier.IComparisonResult;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
@@ -39,15 +38,13 @@ public class TargetBuilderWSD {
 
 		IIdentificationTarget identificationTarget = null;
 		try {
-			IScan scan = peakWSD.getPeakModel().getPeakMaximum();
-			if(scan instanceof IScanWSD unknown) {
-				String traces = extractTraces(unknown, targetUnknownSettings);
-				ILibraryInformation libraryInformation = UnknownTargetBuilder.getLibraryInformationUnknown(unknown, targetUnknownSettings, traces);
-				IComparisonResult comparisonResult = UnknownTargetBuilder.getComparisonResultUnknown(targetUnknownSettings.getMatchQuality());
-				identificationTarget = new IdentificationTarget(libraryInformation, comparisonResult);
-				identificationTarget.setIdentifier(identifier);
-				peakWSD.getTargets().add(identificationTarget);
-			}
+			IScanWSD scan = peakWSD.getPeakModel().getPeakMaximum();
+			String traces = extractTraces(scan, targetUnknownSettings);
+			ILibraryInformation libraryInformation = UnknownTargetBuilder.getLibraryInformationUnknown(scan, targetUnknownSettings, traces);
+			IComparisonResult comparisonResult = UnknownTargetBuilder.getComparisonResultUnknown(targetUnknownSettings.getMatchQuality());
+			identificationTarget = new IdentificationTarget(libraryInformation, comparisonResult);
+			identificationTarget.setIdentifier(identifier);
+			peakWSD.getTargets().add(identificationTarget);
 		} catch(ReferenceMustNotBeNullException e) {
 			logger.warn(e);
 		}

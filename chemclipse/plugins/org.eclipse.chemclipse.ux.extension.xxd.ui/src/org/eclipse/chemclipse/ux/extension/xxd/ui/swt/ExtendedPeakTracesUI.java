@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,7 +23,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogramPeak;
 import org.eclipse.chemclipse.model.core.IPeak;
-import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
@@ -450,16 +449,14 @@ public class ExtendedPeakTracesUI extends Composite implements IExtendedPartUI {
 			}
 		} else if(peak instanceof IPeakWSD peakWSD) {
 			IPeakModelWSD peakModelWSD = peakWSD.getPeakModel();
-			IScan scan = peakModelWSD.getPeakMaximum();
-			if(scan instanceof IScanWSD scanWSD) {
-				int maxDeleteTraces = scanWSD.getNumberOfScanSignals() - 1;
-				if(traces.size() >= maxDeleteTraces) {
-					MessageDialog.openInformation(display.getActiveShell(), CATEGORY, "It's not possible to delete all wavelengths.");
-				} else {
-					scanWSD.removeScanSignals(traces);
-					updatePeak();
-					UpdateNotifierUI.update(display, peak);
-				}
+			IScanWSD scanWSD = peakModelWSD.getPeakMaximum();
+			int maxDeleteTraces = scanWSD.getNumberOfScanSignals() - 1;
+			if(traces.size() >= maxDeleteTraces) {
+				MessageDialog.openInformation(display.getActiveShell(), CATEGORY, "It's not possible to delete all wavelengths.");
+			} else {
+				scanWSD.removeScanSignals(traces);
+				updatePeak();
+				UpdateNotifierUI.update(display, peak);
 			}
 		}
 		if(peak instanceof IChromatogramPeak chromatogramPeak) {

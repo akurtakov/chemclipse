@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -53,5 +53,17 @@ public abstract class AbstractPeakModelMSD extends PeakModel implements IPeakMod
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public IScanMSD getPeakMaximum() {
+
+		return (IScanMSD)super.getPeakMaximum();
+	}
+
+	@Override
+	public IScanMSD getPeakScan(int retentionTime) {
+
+		return (IScanMSD)super.getPeakScan(retentionTime);
 	}
 }

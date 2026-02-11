@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -36,7 +36,6 @@ import org.eclipse.chemclipse.model.core.IMarkedTrace;
 import org.eclipse.chemclipse.model.core.IMarkedTraces;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.core.IPeakModel;
-import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.core.ISignal;
 import org.eclipse.chemclipse.model.implementation.IntegrationEntry;
 import org.eclipse.chemclipse.model.support.IntegrationConstraint;
@@ -272,25 +271,23 @@ public class PeakIntegrator extends AbstractIntegrator {
 			IPeakModelWSD peakModel = peakWSD.getPeakModel();
 			double integratedAreaTIC = calculateTICPeakArea(peak, baselineSupport, includeBackground, useAreaConstraint);
 
-			IScan scan = peakModel.getPeakMaximum();
+			IScanWSD scan = peakModel.getPeakMaximum();
 			IIntegrationEntry integrationEntry;
-			if(scan instanceof IScanWSD scanWSD) {
-				if(!markedTraces.isEmpty() && !markedTraces.getTraces().contains(IMarkedTrace.TOTAL_SIGNAL_AS_INT)) {
-					Set<Integer> wavelengths = markedTraces.getTraces();
-					WavelengthPercentages wavelengthPercentages = new WavelengthPercentages(scanWSD);
-					/*
-					 * Calculate the percentage integrated area for each selected ion.
-					 */
-					for(Integer wavelength : wavelengths) {
-						float correctionFactor = wavelengthPercentages.getPercentage(wavelength) / WavelengthPercentages.MAX_PERCENTAGE;
-						double integratedArea = integratedAreaTIC * correctionFactor;
-						integrationEntry = new IntegrationEntry(wavelength, integratedArea * scaleFactor);
-						integrationEntries.add(integrationEntry);
-					}
-				} else {
-					integrationEntry = new IntegrationEntry(ISignal.TOTAL_INTENSITY, integratedAreaTIC * scaleFactor);
+			if(!markedTraces.isEmpty() && !markedTraces.getTraces().contains(IMarkedTrace.TOTAL_SIGNAL_AS_INT)) {
+				Set<Integer> wavelengths = markedTraces.getTraces();
+				WavelengthPercentages wavelengthPercentages = new WavelengthPercentages(scan);
+				/*
+				 * Calculate the percentage integrated area for each selected ion.
+				 */
+				for(Integer wavelength : wavelengths) {
+					float correctionFactor = wavelengthPercentages.getPercentage(wavelength) / WavelengthPercentages.MAX_PERCENTAGE;
+					double integratedArea = integratedAreaTIC * correctionFactor;
+					integrationEntry = new IntegrationEntry(wavelength, integratedArea * scaleFactor);
 					integrationEntries.add(integrationEntry);
 				}
+			} else {
+				integrationEntry = new IntegrationEntry(ISignal.TOTAL_INTENSITY, integratedAreaTIC * scaleFactor);
+				integrationEntries.add(integrationEntry);
 			}
 		}
 
