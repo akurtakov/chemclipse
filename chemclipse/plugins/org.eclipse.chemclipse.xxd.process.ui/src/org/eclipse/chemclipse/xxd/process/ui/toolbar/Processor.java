@@ -11,10 +11,14 @@
  * Philip Wenig - initial API and implementation
  * Matthias Mailänder - add default icons
  *******************************************************************************/
-package org.eclipse.chemclipse.support.ui.processors;
+package org.eclipse.chemclipse.xxd.process.ui.toolbar;
 
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
+import org.eclipse.chemclipse.xxd.process.ui.support.ProcessorSupport;
+import org.eclipse.swt.graphics.Image;
 
 public class Processor {
 
@@ -33,7 +37,6 @@ public class Processor {
 	public Processor(IProcessSupplier<?> processSupplier) {
 
 		this.processSupplier = processSupplier;
-		setImageFileName(ProcessorSupport.getDefaultIcon(processSupplier));
 	}
 
 	public IProcessSupplier<?> getProcessSupplier() {
@@ -63,15 +66,28 @@ public class Processor {
 
 	public String getImageFileName() {
 
+		if(imageFileName == null) {
+			return null;
+		}
 		return ApplicationImage.adjustLegacyPath(imageFileName);
 	}
 
 	public void setImageFileName(String imageFileName) {
 
-		if(imageFileName != null && !imageFileName.isEmpty()) {
-			this.imageFileName = imageFileName;
-		} else {
-			this.imageFileName = ProcessorSupport.PROCESSOR_IMAGE_DEFAULT;
+		this.imageFileName = imageFileName;
+	}
+
+	public Image getMenuIcon() {
+
+		// user override from common image pool for custom symbol
+		if(imageFileName != null && !imageFileName.isBlank()) {
+			return ApplicationImageFactory.getInstance().getImage(imageFileName, IApplicationImageProvider.SIZE_16x16);
 		}
+
+		Image menuIcon = ProcessorSupport.getMenuIcon(processSupplier);
+		if(menuIcon == null) {
+			menuIcon = ProcessorSupport.getDefaultIcon(processSupplier);
+		}
+		return menuIcon;
 	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -10,7 +10,7 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.support.ui.processors;
+package org.eclipse.chemclipse.xxd.process.ui.support;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,9 +21,19 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.processing.l10n.ProcessingMessages;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
+import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.util.ValueParserSupport;
+import org.eclipse.chemclipse.xxd.process.ui.menu.IMenuIcon;
+import org.eclipse.chemclipse.xxd.process.ui.toolbar.Processor;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.swt.graphics.Image;
 
 public class ProcessorSupport {
 
@@ -60,6 +70,12 @@ public class ProcessorSupport {
 					String imageFileName = getString(values, 1, "");
 					boolean active = getBoolean(values, 2, true);
 					int index = getInteger(values, 3, Processor.INDEX_NONE);
+					/*
+					 * Cleanup. This needs to be literally null for overrides to work.
+					 */
+					if(imageFileName.equals("null")) {
+						imageFileName = null;
+					}
 					/*
 					 * Transfer
 					 */
@@ -131,153 +147,74 @@ public class ProcessorSupport {
 		return processorsFiltered;
 	}
 
-	public static String getDefaultIcon(IProcessSupplier<?> processSupplier) {
+	/**
+	 * Use the icon from the right-click menu that can be contributed by other plug-ins.
+	 */
+	public static Image getMenuIcon(IProcessSupplier<?> processSupplier) {
+
+		IExtensionRegistry registry = Platform.getExtensionRegistry();
+		IConfigurationElement[] config = registry.getConfigurationElementsFor(IMenuIcon.EXTENSION_POINT_ID);
+		try {
+			for(IConfigurationElement element : config) {
+				final String id = element.getAttribute("id");
+				if(!processSupplier.getId().equals(id)) {
+					continue;
+				}
+				final Object object = element.createExecutableExtension("class");
+				if(object instanceof IMenuIcon menuIcon) {
+					return menuIcon.getImage();
+				}
+			}
+		} catch(CoreException e) {
+			logger.warn(e);
+		}
+		return null;
+	}
+
+	/**
+	 * Provide fallback icons for the quick access toolbar.
+	 */
+	public static Image getDefaultIcon(IProcessSupplier<?> processSupplier) {
 
 		String imageFileName = PROCESSOR_IMAGE_DEFAULT;
-		/*
-		 * Quick-Access Toolbar default icons.
-		 * -------------
-		 * This is a quick solution to assign specific process type icons.
-		 * In a further version, the process supplier itself may define their specific symbol.
-		 * To implement this feature, the platform needs to be reviewed thoroughly, hence
-		 * assigning the specific icons here is a compromise.
-		 */
-		if(processSupplier.getCategory().equals("Baseline Detector")) {
+
+		if(processSupplier.getCategory().equals(ProcessingMessages.baselineDetector)) {
 			imageFileName = IApplicationImage.IMAGE_BASELINE;
-			if(processSupplier.getName().contains("SNIP")) {
-				imageFileName = IApplicationImage.IMAGE_BASELINE_SNIP;
-			} else if(processSupplier.getName().contains("Delete")) {
-				imageFileName = IApplicationImage.IMAGE_BASELINE_DELETE;
-			}
-		} else if(processSupplier.getCategory().equals("Chromatogram Calculator")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.chromatogramCalculator)) {
 			imageFileName = IApplicationImage.IMAGE_CALCULATE;
-			if(processSupplier.getName().contains("Retention Index Calculator")) {
-				imageFileName = IApplicationImage.IMAGE_RETENION_INDEX;
-			} else if(processSupplier.getName().contains("Reset")) {
-				imageFileName = IApplicationImage.IMAGE_RESET;
-			}
-		} else if(processSupplier.getCategory().equals("Chromatogram Classifier")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.chromatogramClassifier)) {
 			imageFileName = IApplicationImage.IMAGE_CLASSIFIER;
-			if(processSupplier.getName().contains("WNC")) {
-				imageFileName = IApplicationImage.IMAGE_CLASSIFIER_WNC;
-			} else if(processSupplier.getName().contains("Durbin-Watson")) {
-				imageFileName = IApplicationImage.IMAGE_CLASSIFIER_DW;
-			}
-		} else if(processSupplier.getCategory().equals("Chromatogram Export")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.chromatogramExport)) {
 			imageFileName = IApplicationImage.IMAGE_SAVE;
-			if(processSupplier.getName().contains("*.CAL")) {
-				imageFileName = IApplicationImage.IMAGE_SAMPLE_CALIBRATION;
-			} else if(processSupplier.getName().contains("CSV")) {
-				imageFileName = IApplicationImage.IMAGE_CSV;
-			} else if(processSupplier.getName().contains("Excel")) {
-				imageFileName = IApplicationImage.IMAGE_EXCEL_DOCUMENT;
-			} else if(processSupplier.getName().contains("ZIP")) {
-				imageFileName = IApplicationImage.IMAGE_ZIP_FILE;
-			} else if(processSupplier.getName().contains("mzML") || processSupplier.getName().contains("mzXML") || processSupplier.getName().contains("mzData") || processSupplier.getName().contains("AnIML") || processSupplier.getName().contains("GAML")) {
-				imageFileName = IApplicationImage.IMAGE_XML_FILE;
-			}
-		} else if(processSupplier.getCategory().equals("Chromatogram Filter")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.chromatogramFilter)) {
 			imageFileName = IApplicationImage.IMAGE_CHROMATOGRAM;
-			if(processSupplier.getName().contains("(1:1)")) {
-				imageFileName = IApplicationImage.IMAGE_RESET_EQUAL;
-			} else if(processSupplier.getName().contains("CODA")) {
-				imageFileName = IApplicationImage.IMAGE_FILTER_CODA;
-			} else if(processSupplier.getName().contains("Backfolding")) {
-				imageFileName = IApplicationImage.IMAGE_FILTER_BACKFOLDING;
-			} else if(processSupplier.getName().contains("Denoising")) {
-				imageFileName = IApplicationImage.IMAGE_FILTER_DENOISING;
-			} else if(processSupplier.getName().contains("Mean Normalizer")) {
-				imageFileName = IApplicationImage.IMAGE_FILTER_MEAN_NORMALIZER;
-			} else if(processSupplier.getName().contains("Median Normalizer")) {
-				imageFileName = IApplicationImage.IMAGE_FILTER_MEDIAN_NORMALIZER;
-			} else if(processSupplier.getName().equals("Normalizer")) {
-				imageFileName = IApplicationImage.IMAGE_FILTER_NORMALIZER;
-			} else if(processSupplier.getName().contains("Savitzky-Golay")) {
-				imageFileName = IApplicationImage.IMAGE_FILTER_SAVITZKY_GOLAY;
-			} else if(processSupplier.getName().contains("Scan Remover")) {
-				imageFileName = IApplicationImage.IMAGE_FILTER_SCANREMOVER;
-			} else if(processSupplier.getName().contains("Subtract")) {
-				imageFileName = IApplicationImage.IMAGE_SUBTRACT_SCAN_DEFAULT;
-			}
-		} else if(processSupplier.getCategory().equals("Chromatogram Integrator")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.chromatogramIntegrator)) {
 			imageFileName = IApplicationImage.IMAGE_CHROMATOGRAM_INTEGRATOR;
-			if(processSupplier.getName().contains("Sumarea")) {
-				imageFileName = IApplicationImage.IMAGE_INTEGRATOR_SUMAREA;
-			}
-		} else if(processSupplier.getCategory().equals("Chromatogram Reports")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.chromatogramReports)) {
 			imageFileName = IApplicationImage.IMAGE_CHROMATOGRAM_REPORT;
-		} else if(processSupplier.getCategory().equals("Combined Chromatogram and Peak Integrator")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.combinedChromatogramPeakIntegrator)) {
 			imageFileName = IApplicationImage.IMAGE_COMBINED_INTEGRATOR;
-		} else if(processSupplier.getCategory().equals("Peak Detector")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.peakDetector)) {
 			imageFileName = IApplicationImage.IMAGE_PEAK_DETECTOR;
-			if(processSupplier.getName().contains("AMDIS") || processSupplier.getName().contains("MCR-AR")) {
-				imageFileName = IApplicationImage.IMAGE_DECONVOLUTION;
-			}
-		} else if(processSupplier.getCategory().equals("Peak Export")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.peakExport)) {
 			imageFileName = IApplicationImage.IMAGE_EXPORT;
-		} else if(processSupplier.getCategory().equals("Peak Filter")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.peakFilter)) {
 			imageFileName = IApplicationImage.IMAGE_PEAKS;
-			if(processSupplier.getName().contains("Add")) {
-				imageFileName = IApplicationImage.IMAGE_ADD;
-			} else if(processSupplier.getName().contains("Remove")) {
-				imageFileName = IApplicationImage.IMAGE_REMOVE;
-			} else if(processSupplier.getName().contains("Delete")) {
-				imageFileName = IApplicationImage.IMAGE_DELETE;
-			}
-			if(processSupplier.getName().contains("Delete Peak")) {
-				imageFileName = IApplicationImage.IMAGE_DELETE_PEAKS;
-			} else if(processSupplier.getName().contains("Delete Integration")) {
-				imageFileName = IApplicationImage.IMAGE_DELETE_PEAK_INTEGRATIONS;
-			} else if(processSupplier.getName().contains("Delete Target")) {
-				imageFileName = IApplicationImage.IMAGE_DELETE_PEAK_IDENTIFICATIONS;
-			} else if(processSupplier.getName().contains("SNIP")) {
-				imageFileName = IApplicationImage.IMAGE_FILTER_SNIP_ALL_PEAKS;
-			}
-		} else if(processSupplier.getCategory().equals("Peak Identifier")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.peakIdentifier)) {
 			imageFileName = IApplicationImage.IMAGE_IDENTIFY_PEAKS;
-			if(processSupplier.getName().equals("Library File (MS)")) {
-				imageFileName = IApplicationImage.IMAGE_MASS_SPECTRUM_LIBRARY;
-			} else if(processSupplier.getName().equals("Unknown Marker")) {
-				imageFileName = IApplicationImage.IMAGE_UNKNOWN;
-			} else if(processSupplier.getName().contains("NIST")) {
-				imageFileName = IApplicationImage.IMAGE_NIST_PEAKS;
-			}
-		} else if(processSupplier.getCategory().equals("Peak Integrator")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.peakIntegrator)) {
 			imageFileName = IApplicationImage.IMAGE_PEAK_INTEGRATOR;
-			if(processSupplier.getName().contains("Peak Max")) {
-				imageFileName = IApplicationImage.IMAGE_PEAK_INTEGRATOR_MAX;
-			}
-		} else if(processSupplier.getCategory().equals("Peak Quantifier")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.peakQuantifier)) {
 			imageFileName = IApplicationImage.IMAGE_QUANTIFY_ALL_PEAKS;
-			if(processSupplier.getName().contains("ISTD")) {
-				imageFileName = IApplicationImage.IMAGE_INTERNAL_STANDARDS_DEFAULT;
-			}
-			if(processSupplier.getName().contains("Add Peaks to DB")) {
-				imageFileName = IApplicationImage.IMAGE_ADD_PEAKS_TO_QUANTITATION_TABLE;
-			}
-		} else if(processSupplier.getCategory().equals("Peak Mass Spectrum Filter") || processSupplier.getCategory().equals("Scan Mass Spectrum Filter")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.peakMassSpectrumFilter) || processSupplier.getCategory().equals(ProcessingMessages.scanMassSpectrumFilter)) {
 			imageFileName = IApplicationImage.IMAGE_MASS_SPECTRUM;
-			if(processSupplier.getName().contains("Savitzky-Golay")) {
-				imageFileName = IApplicationImage.IMAGE_FILTER_SAVITZKY_GOLAY;
-			} else if(processSupplier.getName().contains("SNIP")) {
-				imageFileName = IApplicationImage.IMAGE_FILTER_SNIP_ALL_PEAKS;
-			} else if(processSupplier.getName().contains("Subtract")) {
-				imageFileName = IApplicationImage.IMAGE_SUBTRACT_SCAN_DEFAULT;
-			}
-		} else if(processSupplier.getCategory().equals("Scan Identifier")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.scanIdentifier)) {
 			imageFileName = IApplicationImage.IMAGE_IDENTIFY_MASS_SPECTRUM;
-			if(processSupplier.getName().equals("Library File (MS)")) {
-				imageFileName = IApplicationImage.IMAGE_MASS_SPECTRUM_LIBRARY;
-			} else if(processSupplier.getName().equals("Unknown Marker")) {
-				imageFileName = IApplicationImage.IMAGE_UNKNOWN;
-			} else if(processSupplier.getName().contains("NIST")) {
-				imageFileName = IApplicationImage.IMAGE_NIST_MASS_SPECTRUM;
-			}
-		} else if(processSupplier.getCategory().equals("System")) {
+		} else if(processSupplier.getCategory().equals(ProcessingMessages.system)) {
 			imageFileName = IApplicationImage.IMAGE_PREFERENCES;
 		}
 
-		return imageFileName;
+		return ApplicationImageFactory.getInstance().getImage(imageFileName, IApplicationImageProvider.SIZE_16x16);
 	}
 
 	public static void switchProcessor(List<Processor> processors, Processor processorActive, boolean moveUp) {
@@ -346,11 +283,6 @@ public class ProcessorSupport {
 		IProcessSupplier<?> processSupplier = processor.getProcessSupplier();
 		String id = processSupplier.getId();
 		if(id.contains(VALUE_DELIMITER) || id.contains(PROCESSOR_DELIMITER)) {
-			return false;
-		}
-
-		String imageFileName = processor.getImageFileName();
-		if(imageFileName.contains(VALUE_DELIMITER) || imageFileName.contains(PROCESSOR_DELIMITER)) {
 			return false;
 		}
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,11 +18,11 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.xxd.process.ui.menu.IMenuIcon;
 import org.eclipse.swt.graphics.Image;
 
-public class MenuIcon implements IMenuIcon {
+public class MenuIconUnknown implements IMenuIcon {
 
 	@Override
 	public Image getImage() {
 
-		return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_MASS_SPECTRUM_FILE, IApplicationImageProvider.SIZE_16x16);
+		return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_UNKNOWN, IApplicationImageProvider.SIZE_16x16);
 	}
 }

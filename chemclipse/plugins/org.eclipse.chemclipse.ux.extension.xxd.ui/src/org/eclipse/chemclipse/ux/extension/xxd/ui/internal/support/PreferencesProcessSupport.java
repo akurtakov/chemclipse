@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,11 +20,11 @@ import java.util.function.Predicate;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
-import org.eclipse.chemclipse.support.ui.processors.Processor;
-import org.eclipse.chemclipse.support.ui.processors.ProcessorSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.xxd.process.support.ProcessTypeSupport;
+import org.eclipse.chemclipse.xxd.process.ui.support.ProcessorSupport;
+import org.eclipse.chemclipse.xxd.process.ui.toolbar.Processor;
 import org.eclipse.jface.preference.IPreferenceStore;
 
 public class PreferencesProcessSupport {

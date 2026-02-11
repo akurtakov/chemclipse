@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,7 +15,7 @@ package org.eclipse.chemclipse.processing.l10n;
 
 import org.eclipse.osgi.util.NLS;
 
-public class Messages extends NLS {
+public class ProcessingMessages extends NLS {
 
 	private static final String BUNDLE_NAME = "org.eclipse.chemclipse.processing.l10n.messages"; //$NON-NLS-1$
 
@@ -51,10 +51,10 @@ public class Messages extends NLS {
 	public static String export;
 
 	static {
-		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
+		NLS.initializeMessages(BUNDLE_NAME, ProcessingMessages.class);
 	}
 
-	private Messages() {
+	private ProcessingMessages() {
 
 	}
 }

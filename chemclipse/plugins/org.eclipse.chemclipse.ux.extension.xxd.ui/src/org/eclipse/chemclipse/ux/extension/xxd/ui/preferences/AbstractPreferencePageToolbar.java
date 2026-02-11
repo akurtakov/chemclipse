@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,11 +16,11 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.preferences;
 import java.util.List;
 
 import org.eclipse.chemclipse.processing.DataCategory;
-import org.eclipse.chemclipse.support.ui.processors.Processor;
-import org.eclipse.chemclipse.support.ui.processors.ProcessorSupport;
-import org.eclipse.chemclipse.support.ui.processors.ProcessorToolbarSelectionUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.support.PreferencesProcessSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
+import org.eclipse.chemclipse.xxd.process.ui.support.ProcessorSupport;
+import org.eclipse.chemclipse.xxd.process.ui.toolbar.Processor;
+import org.eclipse.chemclipse.xxd.process.ui.toolbar.ProcessorToolbarSelectionUI;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.swt.SWT;

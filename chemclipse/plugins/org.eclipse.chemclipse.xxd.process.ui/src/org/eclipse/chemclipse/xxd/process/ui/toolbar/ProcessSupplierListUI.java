@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -10,11 +10,8 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.support.ui.processors;
+package org.eclipse.chemclipse.xxd.process.ui.toolbar;
 
-import org.eclipse.chemclipse.support.ui.internal.provider.ProcessorLabelProvider;
-import org.eclipse.chemclipse.support.ui.internal.provider.ProcessorListFilter;
-import org.eclipse.chemclipse.support.ui.internal.provider.ProcessorTableComparator;
 import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.jface.viewers.IBaseLabelProvider;

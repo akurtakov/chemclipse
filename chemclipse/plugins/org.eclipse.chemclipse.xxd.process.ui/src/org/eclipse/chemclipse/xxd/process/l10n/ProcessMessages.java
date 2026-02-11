@@ -12,11 +12,11 @@
  * Matthias Mailänder - new API and re-implementation
  * Lorenz Gerber - added wavelength entries
  *******************************************************************************/
-package org.eclipse.chemclipse.support.ui.l10n;
+package org.eclipse.chemclipse.xxd.process.l10n;
 
 import org.eclipse.osgi.util.NLS;
 
-public class SupportMessages extends NLS {
+public class ProcessMessages extends NLS {
 
 	public static String add;
 	public static String allowedRange;
@@ -44,11 +44,19 @@ public class SupportMessages extends NLS {
 	public static String inputMustBeValidRange;
 	public static String ions;
 	public static String ionValueAlreadyExists;
+	public static String labelCategory;
+	public static String labelDataType;
+	public static String labelDescription;
+	public static String labelID;
+	public static String labellabelNA;
+	public static String labelName;
 	public static String maximumAllowedUndoSteps;
+	public static String processorImage;
 	public static String remove;
 	public static String removeAllFilesFromList;
 	public static String removeTICbeforeAddingIonValues;
 	public static String removeTICbeforeAddingWavelengthValues;
+	public static String searchAvailableProcessorItems;
 	public static String selectAll;
 	public static String selectEntriesinList;
 	public static String selectFile;
@@ -69,10 +77,10 @@ public class SupportMessages extends NLS {
 	public static String enterWavelength;
 
 	static {
-		NLS.initializeMessages("org.eclipse.chemclipse.support.ui.l10n.messages", SupportMessages.class); //$NON-NLS-1$
+		NLS.initializeMessages("org.eclipse.chemclipse.support.ui.l10n.messages", ProcessMessages.class); //$NON-NLS-1$
 	}
 
-	private SupportMessages() {
+	private ProcessMessages() {
 
 	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -10,7 +10,7 @@
  * Contributors:
  * Matthias Mailänder - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.chromatogram.xxd.quantitation.supplier.chemclipse.ui.icon;
+package org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.ui.icon;
 
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
@@ -18,11 +18,11 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.xxd.process.ui.menu.IMenuIcon;
 import org.eclipse.swt.graphics.Image;
 
-public class AddToDatabaseMenuIcon implements IMenuIcon {
+public class MenuIconFile implements IMenuIcon {
 
 	@Override
 	public Image getImage() {
 
-		return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ADD_PEAKS_TO_QUANTITATION_TABLE, IApplicationImageProvider.SIZE_16x16);
+		return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_MASS_SPECTRUM_FILE, IApplicationImageProvider.SIZE_16x16);
 	}
 }
