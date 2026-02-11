@@ -44,4 +44,12 @@ jobs:
         MAVEN_ARGS: "--batch-mode --no-transfer-progress -Dstyle.color=always"
       run: |
         source $HOME/.sdkman/bin/sdkman-init.sh
-        mvn -f chemclipse/pom.xml -T 1C verify -Pci
+        mvn -f chemclipse/pom.xml -T 1C verify -Pci -Pjavadoc
+
+    - name: Publish Javadoc artifacts
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: javadoc
+        path: chemclipse/**/target/*-javadoc.jar
+        retention-days: 30
