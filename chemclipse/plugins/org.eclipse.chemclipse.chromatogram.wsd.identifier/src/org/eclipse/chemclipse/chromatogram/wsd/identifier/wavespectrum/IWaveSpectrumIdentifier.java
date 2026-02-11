@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,13 +26,11 @@ public interface IWaveSpectrumIdentifier {
 	/**
 	 * Identifies a list of wave spectra.
 	 *
-	 * @param WaveSpectra
+	 * @param waveSpectra
 	 *            the wave spectra to be identified
-	 * @param waveSpectrumIdentifierSettings
 	 * @param monitor
 	 *            a {@link IProgressMonitor monitor} to monitor progress and
 	 *            provide cancellation functionality
-	 * @return {@link IProcessingInfo}
 	 */
 	IProcessingInfo<WaveSpectra> identify(List<IScanWSD> waveSpectra, IWaveSpectrumIdentifierSettings waveSpectrumIdentifierSettings, IProgressMonitor monitor);
 }

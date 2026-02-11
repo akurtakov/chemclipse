@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,13 +26,6 @@ public interface IMeasurementPeakDetector<ConfigType> extends Detector<ConfigTyp
 
 	/**
 	 * Detects the peaks in the given measurements and returns a mapping between the measurement and the detected peaks
-	 * 
-	 * @param detectorInputItems
-	 * @param configuration
-	 * @param messageConsumer
-	 * @param monitor
-	 * @return
-	 * @throws IllegalArgumentException
 	 */
 	<T extends IMeasurement> Map<T, PeakList> detectIMeasurementPeaks(Collection<T> detectorInputItems, ConfigType configuration, IMessageConsumer messageConsumer, IProgressMonitor monitor) throws IllegalArgumentException;
 
@@ -48,7 +41,6 @@ public interface IMeasurementPeakDetector<ConfigType> extends Detector<ConfigTyp
 	/**
 	 * Creates a new configuration that is specially suited for the given {@link IMeasurement} types
 	 * 
-	 * @param item
 	 * @return a new configuration for this items or the default config if items is empty or no suitable configuration can be created
 	 * @throws IllegalArgumentException
 	 *             if the given {@link IMeasurement}s are incompatible with this filter ({@link #acceptsIMeasurements(IMeasurement)} returns <code>false</code>)

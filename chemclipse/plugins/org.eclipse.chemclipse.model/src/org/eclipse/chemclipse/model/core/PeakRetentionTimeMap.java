@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,8 +25,6 @@ import java.util.TreeMap;
  * A specialized map like datastructure that retains peaks indexed by their maximum signal retention time,
  * 
  * @author Christoph Läubrich
- *
- * @param <T>
  */
 public final class PeakRetentionTimeMap<T extends IPeak> implements Serializable {
 
@@ -82,7 +80,6 @@ public final class PeakRetentionTimeMap<T extends IPeak> implements Serializable
 	/**
 	 * returns all peaks that are inside the given retention time, that means the retention time is within the start/stop retention time of the peak
 	 * 
-	 * @param retentionTime
 	 * @return a list of peaks at the given retention time, ordered by the start retention time of the peak
 	 */
 	public List<T> getPeaks(int startRetentionTime, int stopRetentionTime) {

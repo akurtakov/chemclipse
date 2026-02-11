@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,9 +21,6 @@ public abstract class AbstractPeakComparisonResult extends AbstractComparisonRes
 
 	/**
 	 * Constructs the result.
-	 * 
-	 * @param matchQuality
-	 * @param reverseMatchQuality
 	 */
 	public AbstractPeakComparisonResult(float matchFactor, float reverseMatchFactor, float matchFactorDirect, float reverseMatchFactorDirect) {
 		super(matchFactor, reverseMatchFactor, matchFactorDirect, reverseMatchFactorDirect);

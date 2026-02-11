@@ -37,9 +37,6 @@ public class CasSupport {
 	 * 71-43-2: 71-43- => 2
 	 * ---
 	 * If the casPrefix doesn't end with "-", then "" is returned.
-	 * 
-	 * @param cas
-	 * @return String
 	 */
 	public static String calculateChecksum(String casPrefix) {
 
@@ -57,9 +54,6 @@ public class CasSupport {
 
 	/**
 	 * Returns if the given CAS# is valid.
-	 * 
-	 * @param cas
-	 * @return {@link Boolean}
 	 */
 	public static boolean isValid(String cas) {
 
@@ -134,9 +128,6 @@ public class CasSupport {
 	 * - consists only of digits
 	 * - has a length of >= 4
 	 * There is one special case. If cas == "0", then "0-00-0" is returned.
-	 * 
-	 * @param cas
-	 * @return String
 	 */
 	public static String format(String cas) {
 

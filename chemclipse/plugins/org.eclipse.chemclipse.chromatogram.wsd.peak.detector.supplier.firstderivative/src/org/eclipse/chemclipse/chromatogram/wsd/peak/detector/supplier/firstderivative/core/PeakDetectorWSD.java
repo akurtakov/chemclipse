@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.eclipse.chemclipse.chromatogram.peak.detector.exceptions.ValueMustNotBeNullException;
 import org.eclipse.chemclipse.chromatogram.peak.detector.model.Threshold;
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.IRawPeak;
 import org.eclipse.chemclipse.chromatogram.wsd.peak.detector.core.IPeakDetectorWSD;
@@ -118,9 +117,6 @@ public class PeakDetectorWSD extends BasePeakDetector implements IPeakDetectorWS
 	 * Detect the peaks in the selection.
 	 * This method does not add the peaks to the chromatogram.
 	 * It needs to be handled separately.
-	 * 
-	 * @param chromatogramSelection
-	 * @throws ValueMustNotBeNullException
 	 */
 	public List<IChromatogramPeakWSD> detectPeaks(IChromatogramSelectionWSD chromatogramSelection, PeakDetectorSettingsWSD peakDetectorSettings, List<INoiseSegment> noiseSegments, IProgressMonitor monitor) {
 
@@ -199,10 +195,6 @@ public class PeakDetectorWSD extends BasePeakDetector implements IPeakDetectorWS
 	/**
 	 * Builds from each raw peak a valid {@link IChromatogramPeakMSD} and adds it to the
 	 * chromatogram.
-	 * 
-	 * @param rawPeaks
-	 * @param chromatogram
-	 * @return List<IChromatogramPeakCSD>
 	 */
 	private List<IChromatogramPeakWSD> extractPeaks(List<IRawPeak> rawPeaks, IChromatogramWSD chromatogram, PeakDetectorSettingsWSD peakDetectorSettings, IMarkedWavelengths wavelengths) {
 
@@ -256,10 +248,6 @@ public class PeakDetectorWSD extends BasePeakDetector implements IPeakDetectorWS
 
 	/**
 	 * Initializes the slope values.
-	 * 
-	 * @param chromatogramSelection
-	 * @param window
-	 * @return {@link IFirstDerivativeDetectorSlopes}
 	 */
 	public static IFirstDerivativeDetectorSlopes getFirstDerivativeSlopes(IChromatogramSelectionWSD chromatogramSelection, int windowSize, IMarkedWavelengths filterWavelengths) {
 
@@ -305,9 +293,6 @@ public class PeakDetectorWSD extends BasePeakDetector implements IPeakDetectorWS
 	/**
 	 * Checks that the peak is not null and that it matches
 	 * the min S/N requirements.
-	 * 
-	 * @param peak
-	 * @return boolean
 	 */
 	private boolean isValidPeak(IChromatogramPeakWSD peak) {
 

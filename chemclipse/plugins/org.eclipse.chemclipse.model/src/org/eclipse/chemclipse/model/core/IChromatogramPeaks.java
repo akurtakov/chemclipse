@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -22,7 +22,6 @@ public interface IChromatogramPeaks {
 	/**
 	 * returns all peaks that are inside the given retention time, that means the retention time is within the start/stop retention time of the peak
 	 * 
-	 * @param retentionTime
 	 * @return a list of peaks at the given retention time, ordered by the start retention time of the peak
 	 */
 	List<? extends IChromatogramPeak> getPeaks(int startRetentionTime, int stopRetentionTime);
@@ -30,16 +29,12 @@ public interface IChromatogramPeaks {
 	/**
 	 * Returns a list.
 	 * Modification does not change the chromatogram peak list.
-	 * 
-	 * @return List<? extends IChromatogramPeak>
 	 */
 	List<? extends IChromatogramPeak> getPeaks();
 
 	/**
 	 * Returns a list.
 	 * Modification does not change the chromatogram peak list.
-	 * 
-	 * @return List<? extends IChromatogramPeak>
 	 */
 	default List<? extends IChromatogramPeak> getPeaks(IRetentionTimeRange range) {
 

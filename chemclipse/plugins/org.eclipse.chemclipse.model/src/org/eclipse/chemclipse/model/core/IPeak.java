@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -43,16 +43,12 @@ public interface IPeak extends ITargetSupplier, PeakPosition, IClassifier, ISign
 	 * E.g.:<br/>
 	 * "TIC"<br/>
 	 * "+199-70"<br/>
-	 * 
-	 * @return String
 	 */
 	String getModelDescription();
 
 	/**
 	 * Sets a description of the peak model.<br/>
 	 * See also getModel();
-	 * 
-	 * @param modelDescription
 	 */
 	void setModelDescription(String modelDescription);
 
@@ -62,59 +58,43 @@ public interface IPeak extends ITargetSupplier, PeakPosition, IClassifier, ISign
 	 * BB - baseline baseline<br/>
 	 * BV - baseline valley<br/>
 	 * ... <br/>
-	 * 
-	 * @return PeakType
 	 */
 	@Override
 	PeakType getPeakType();
 
 	/**
 	 * Sets the peak type.<br/>
-	 * 
-	 * @param peakType
 	 */
 	void setPeakType(PeakType peakType);
 
 	/**
 	 * Returns the number of assumed hidden peaks.
 	 * If there's no hint, 0 will be returned.
-	 * 
-	 * @return int
 	 */
 	int getSuggestedNumberOfComponents();
 
 	/**
 	 * Sets the number of suggested hidden peaks.
-	 * 
-	 * @param suggestedNumberOfComponents
 	 */
 	void setSuggestedNumberOfComponents(int suggestedNumberOfComponents);
 
 	/**
 	 * Returns the integrator description.
-	 * 
-	 * @return String
 	 */
 	String getIntegratorDescription();
 
 	/**
 	 * Sets the integrator description.
-	 * 
-	 * @param integratorDescription
 	 */
 	void setIntegratorDescription(String integratorDescription);
 
 	/**
 	 * Returns the peak detector description.
-	 * 
-	 * @return String
 	 */
 	String getDetectorDescription();
 
 	/**
 	 * Sets the peak detector description.
-	 * 
-	 * @param detectorDescription
 	 */
 	void setDetectorDescription(String detectorDescription);
 
@@ -127,30 +107,21 @@ public interface IPeak extends ITargetSupplier, PeakPosition, IClassifier, ISign
 	 * correction. If the peak is marked with the IntegrationConstraint
 	 * "LEAVE_PEAK_AS_IT_IS" it will be integrated as it is, if the integrator
 	 * has implemented it.
-	 * 
-	 * @return {@link IIntegrationConstraints}
 	 */
 	IIntegrationConstraints getIntegrationConstraints();
 
 	/**
 	 * Returns the integrated area of the actual peak.
-	 * 
-	 * @return double
 	 */
 	double getIntegratedArea();
 
 	/**
 	 * Sets the integration results.
-	 * 
-	 * @param integratorDescription
-	 * @param integrationEntries
 	 */
 	void setIntegratedArea(List<? extends IIntegrationEntry> integrationEntries, String integratorDescription);
 
 	/**
 	 * Returns the list of integration entries.
-	 * 
-	 * @return List<IIntegrationEntry>
 	 */
 	List<IIntegrationEntry> getIntegrationEntries();
 
@@ -160,22 +131,16 @@ public interface IPeak extends ITargetSupplier, PeakPosition, IClassifier, ISign
 
 	/**
 	 * Returns the peak quantifier description.
-	 * 
-	 * @return String
 	 */
 	String getQuantifierDescription();
 
 	/**
 	 * Sets the peak quantifier description.
-	 * 
-	 * @param quantifierDescription
 	 */
 	void setQuantifierDescription(String quantifierDescription);
 
 	/**
 	 * Adds a quantitation entry to the list.
-	 * 
-	 * @param quantitationEntry
 	 */
 	void addQuantitationEntry(IQuantitationEntry quantitationEntry);
 
@@ -185,23 +150,16 @@ public interface IPeak extends ITargetSupplier, PeakPosition, IClassifier, ISign
 
 	/**
 	 * Removes the quantitation entry from the list.
-	 * 
-	 * @param quantitationEntry
 	 */
 	void removeQuantitationEntry(IQuantitationEntry quantitationEntry);
 
 	/**
 	 * Removes the quantitation entries from the list.
-	 * 
-	 * @param List
-	 *            <IQuantitationEntry>
 	 */
 	void removeQuantitationEntries(List<IQuantitationEntry> quantitationEntriesToRemove);
 
 	/**
 	 * Get the quantitation entries.
-	 * 
-	 * @return List<IQuantitationEntry>
 	 */
 	List<IQuantitationEntry> getQuantitationEntries();
 
@@ -217,15 +175,11 @@ public interface IPeak extends ITargetSupplier, PeakPosition, IClassifier, ISign
 
 	/**
 	 * Returns if the peak is active for analysis.
-	 * 
-	 * @return boolean
 	 */
 	boolean isActiveForAnalysis();
 
 	/**
 	 * Sets the peak active/inactive.
-	 * 
-	 * @param active
 	 */
 	void setActiveForAnalysis(boolean activeForAnalysis);
 
@@ -256,8 +210,6 @@ public interface IPeak extends ITargetSupplier, PeakPosition, IClassifier, ISign
 	/**
 	 * The temporary data is not saved!
 	 * It can be used to place volatile process information.
-	 * 
-	 * @param temporaryData
 	 */
 	void setTemporaryData(String temporaryData);
 
@@ -266,8 +218,6 @@ public interface IPeak extends ITargetSupplier, PeakPosition, IClassifier, ISign
 	/**
 	 * Mark this peak as deleted. The DELETED PeakType was used before,
 	 * but that doesn't make sense.
-	 *
-	 * @param markedAsDeleted
 	 */
 	void setMarkedAsDeleted(boolean markedAsDeleted);
 

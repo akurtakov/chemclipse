@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -33,10 +33,6 @@ public interface IChromatogramImportConverter<R extends IChromatogram> extends I
 	 * IChromatogramImportConverter. When extending from
 	 * AbstractChromatogramImportConverter => super.validate(chromatogram) can
 	 * be used.
-	 *
-	 * @param chromatogram
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
 	 */
 	default IProcessingInfo<IChromatogramOverview> convertOverview(File file, IProgressMonitor monitor) {
 
@@ -55,10 +51,6 @@ public interface IChromatogramImportConverter<R extends IChromatogram> extends I
 	 * IChromatogramImportConverter. When extending from
 	 * AbstractChromatogramImportConverter => super.validate(chromatogram) can
 	 * be used.
-	 *
-	 * @param chromatogram
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
 	 */
 	IProcessingInfo<R> convert(File file, IProgressMonitor monitor);
 }

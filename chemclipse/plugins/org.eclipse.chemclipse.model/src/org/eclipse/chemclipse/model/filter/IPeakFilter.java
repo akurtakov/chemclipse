@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,15 +20,12 @@ import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.filter.Filter;
 import org.eclipse.chemclipse.processing.supplier.ProcessExecutionContext;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 /**
  * A {@link Filter} Extension interface for filters that can work on {@link IPeak}s.
  * This is part of the ChemClipse FilterFramework, to make the Filter available simply register it with the OSGi Service factory under the {@link Filter} interface, implementors are encouraged to also register each filter under all sub(filter) interface.
  * 
  * @author Christoph Läubrich
- *
- * @param <ConfigType>
  */
 public interface IPeakFilter<ConfigType> extends Filter<ConfigType> {
 
@@ -41,8 +38,6 @@ public interface IPeakFilter<ConfigType> extends Filter<ConfigType> {
 	 * 
 	 * @param context
 	 *            to be used for access to progress monitor and messaging
-	 * @param monitor
-	 *            a {@link IProgressMonitor} to report progress of the filtering or <code>null</code> if no progress is desired
 	 * @throws IllegalArgumentException
 	 *             if the given {@link IPeak}s are incompatible with this filter ({@link #acceptsPeaks(IPeak)} returns <code>false</code>)
 	 */
@@ -51,7 +46,6 @@ public interface IPeakFilter<ConfigType> extends Filter<ConfigType> {
 	/**
 	 * Creates a new configuration that is specially suited for the given {@link IPeak} types
 	 * 
-	 * @param items
 	 * @return a new configuration for this items or the default configuration if items is empty or no suitable configuration can be created
 	 * 
 	 */

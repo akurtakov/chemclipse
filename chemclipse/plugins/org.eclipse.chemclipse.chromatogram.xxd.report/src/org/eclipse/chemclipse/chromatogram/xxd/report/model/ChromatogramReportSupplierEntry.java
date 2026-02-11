@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,9 +23,6 @@ public class ChromatogramReportSupplierEntry implements IChromatogramReportSuppl
 
 	/**
 	 * Set the output file path and the converter id.
-	 * 
-	 * @param outputFile
-	 * @param converterId
 	 */
 	public ChromatogramReportSupplierEntry(String reportFolderOrFile, String converterId) {
 		if(reportFolderOrFile != null && converterId != null) {

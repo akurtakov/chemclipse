@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -50,8 +50,6 @@ public class BasePeakDetector extends AbstractPeakDetector {
 
 	/**
 	 * Marks the peaks with start, stop and max.
-	 * 
-	 * @param slopeList
 	 */
 	public static List<IRawPeak> getRawPeaks(IFirstDerivativeDetectorSlopes slopes, Threshold thresholdSetting, IProgressMonitor monitor) {
 
@@ -126,9 +124,6 @@ public class BasePeakDetector extends AbstractPeakDetector {
 	/**
 	 * Checks if the peak is a valid raw peak.<br/>
 	 * For example if it contains not less than the needed amount of scans.
-	 * 
-	 * @param rawPeak
-	 * @return boolean
 	 */
 	private static boolean isValidRawPeak(IRawPeak rawPeak) {
 
@@ -142,11 +137,6 @@ public class BasePeakDetector extends AbstractPeakDetector {
 
 	/**
 	 * Detects the peak start.
-	 * 
-	 * @param slope
-	 * @param startScan
-	 * @param scanOffset
-	 * @return int
 	 */
 	private static int detectPeakStart(IFirstDerivativeDetectorSlopes slopes, int startScan, int scanOffset, double threshold) {
 
@@ -176,11 +166,6 @@ public class BasePeakDetector extends AbstractPeakDetector {
 	/**
 	 * Detects the peak maxima.<br/>
 	 * The peak start and stops needs to be detected previously.
-	 * 
-	 * @param slope
-	 * @param startScan
-	 * @param scanOffset
-	 * @return int
 	 */
 	private static int detectPeakMaximum(IFirstDerivativeDetectorSlopes slopes, int startScan, int scanOffset) {
 
@@ -200,11 +185,6 @@ public class BasePeakDetector extends AbstractPeakDetector {
 
 	/**
 	 * Detects the peak stops.
-	 * 
-	 * @param slope
-	 * @param startScan
-	 * @param scanOffset
-	 * @return int
 	 */
 	private static int detectPeakStop(IFirstDerivativeDetectorSlopes slopes, int startScan, int scanOffset) {
 

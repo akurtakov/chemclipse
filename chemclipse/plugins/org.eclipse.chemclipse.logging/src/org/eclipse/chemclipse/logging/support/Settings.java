@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -51,8 +51,6 @@ public class Settings {
 
 	/**
 	 * Returns the settings folder, e.g.: "/home/user/.myapp/0.9.0"
-	 * 
-	 * @return File
 	 */
 	public static final File getSystemDirectory() {
 
@@ -109,8 +107,6 @@ public class Settings {
 
 	/**
 	 * Returns e.g.: 0.9.0
-	 * 
-	 * @return String
 	 */
 	public static final String getVersionIdentifier() {
 
@@ -146,9 +142,6 @@ public class Settings {
 	 * 
 	 * user.home/MyApp/0.9.x
 	 * user.home/.myapp/0.9.x
-	 * 
-	 * @param folder
-	 * @return String
 	 */
 	public static final String getDirectory(String folder) {
 
@@ -166,9 +159,6 @@ public class Settings {
 
 	/**
 	 * If the application is not valid, null will be returned.
-	 * 
-	 * @param applicationName
-	 * @return String
 	 */
 	public static final String getApplicationName() {
 
@@ -199,8 +189,6 @@ public class Settings {
 
 	/**
 	 * Tests if the values have been initialized.
-	 * 
-	 * @return boolean
 	 */
 	private static boolean isRunInitialization() {
 
@@ -247,10 +235,6 @@ public class Settings {
 
 	/**
 	 * Set default values?
-	 * 
-	 * @param workspaceFolder
-	 * @param settingsFolder
-	 * @return boolean
 	 */
 	private static boolean isSetDefaults(Object workspaceFolder, Object settingsFolder) {
 
