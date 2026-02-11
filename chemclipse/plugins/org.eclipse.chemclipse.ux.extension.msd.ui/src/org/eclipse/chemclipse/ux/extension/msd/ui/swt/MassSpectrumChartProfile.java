@@ -131,6 +131,9 @@ public class MassSpectrumChartProfile extends LineChart implements IMassSpectrum
 	@Override
 	public void update() {
 
+		if(isDisposed()) {
+			return;
+		}
 		deleteSeries();
 		if(massSpectrum != null) {
 			List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
@@ -275,7 +278,9 @@ public class MassSpectrumChartProfile extends LineChart implements IMassSpectrum
 
 	public void updateResult(IMessageProvider processingInfo) {
 
-		getDisplay().asyncExec(() -> ProcessingInfoPartSupport.getInstance().update(processingInfo, true));
+		if(!isDisposed()) {
+			getDisplay().asyncExec(() -> ProcessingInfoPartSupport.getInstance().update(processingInfo, true));
+		}
 	}
 
 	private void executeMethod(IScanMSD scanMSD, Consumer<IScanMSD> consumer) {
