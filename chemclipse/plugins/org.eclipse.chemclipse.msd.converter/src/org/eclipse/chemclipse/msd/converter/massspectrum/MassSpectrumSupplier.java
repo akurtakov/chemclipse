@@ -15,13 +15,4 @@ package org.eclipse.chemclipse.msd.converter.massspectrum;
 import org.eclipse.chemclipse.converter.core.AbstractSupplier;
 
 public class MassSpectrumSupplier extends AbstractSupplier implements IMassSpectrumSupplier {
-
-	@Override
-	public void setFileExtension(final String fileExtension) {
-
-		if(fileExtension != null && !fileExtension.isEmpty()) {
-			String cleanedExtension = fileExtension.startsWith(".") ? fileExtension.substring(1) : fileExtension;
-			super.setFileExtension(cleanedExtension);
-		}
-	}
 }
