@@ -89,10 +89,19 @@ public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI
 
 		this.massSpectra = massSpectra;
 		createControl();
-		toolbarSelectionControl.get().update(massSpectra);
-		toolbarMethodControl.get().updateInput();
-		massSpectrum = massSpectra.getMassSpectrum(1);
-		massSpectrumChart.update(massSpectrum);
+
+		MassSpectraSelectionUI nassSpectraSelectionUI = toolbarSelectionControl.get();
+		if(nassSpectraSelectionUI != null) {
+			nassSpectraSelectionUI.update(massSpectra);
+		}
+		MethodSupportUI methodSupportUI = toolbarMethodControl.get();
+		if(methodSupportUI != null) {
+			methodSupportUI.updateInput();
+		}
+		if(massSpectra != null && !massSpectra.isEmpty()) {
+			massSpectrum = massSpectra.getMassSpectrum(1);
+			massSpectrumChart.update(massSpectrum);
+		}
 	}
 
 	public void update(IScanMSD massSpectrum) {

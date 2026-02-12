@@ -56,8 +56,11 @@ public class MassSpectraSelectionUI extends Composite {
 		this.massSpectra = massSpectra;
 
 		ComboViewer comboViewer = comboViewerControl.get();
-		comboViewer.setInput(massSpectra.getList());
-		comboViewer.getCombo().select(0);
+		if(comboViewer != null) {
+			comboViewer.setInput(massSpectra.getList());
+			comboViewer.getCombo().select(0);
+		}
+
 		updateButtons();
 	}
 
