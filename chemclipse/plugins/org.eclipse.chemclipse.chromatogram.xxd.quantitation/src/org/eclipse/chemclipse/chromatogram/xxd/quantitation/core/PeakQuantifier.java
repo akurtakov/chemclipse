@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -153,7 +153,7 @@ public class PeakQuantifier {
 	public static IPeakQuantifierSupport getPeakQuantifierSupport() {
 
 		PeakQuantifierSupplier supplier;
-		PeakQuantifierSupport baselineDetectorSupport = new PeakQuantifierSupport();
+		PeakQuantifierSupport peakQuantifierSupport = new PeakQuantifierSupport();
 		/*
 		 * Search in the extension registry and fill the comparison support
 		 * object with supplier information.
@@ -175,13 +175,12 @@ public class PeakQuantifier {
 					supplier.setSettingsClass(null);
 				}
 			}
-			baselineDetectorSupport.add(supplier);
+			peakQuantifierSupport.add(supplier);
 		}
-		return baselineDetectorSupport;
+		return peakQuantifierSupport;
 	}
 
-	// --------------------------------------------private methods
-	private static IPeakQuantifier getPeakQuantifier(final String peakQuantifierId) {
+	public static IPeakQuantifier getPeakQuantifier(final String peakQuantifierId) {
 
 		IConfigurationElement element;
 		element = getConfigurationElement(peakQuantifierId);

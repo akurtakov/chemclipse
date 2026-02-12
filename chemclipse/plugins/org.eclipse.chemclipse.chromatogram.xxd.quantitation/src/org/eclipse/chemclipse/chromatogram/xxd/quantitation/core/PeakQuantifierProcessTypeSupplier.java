@@ -59,10 +59,13 @@ public class PeakQuantifierProcessTypeSupplier implements IProcessTypeSupplier {
 
 	private static final class PeakQuantifierProcessorSupplier extends ChromatogramSelectionProcessSupplier<IPeakQuantifierSettings> {
 
+		private final IPeakQuantifierSupplier supplier;
+
 		@SuppressWarnings("unchecked")
 		public PeakQuantifierProcessorSupplier(IPeakQuantifierSupplier supplier, IProcessTypeSupplier parent) {
 
 			super(supplier.getId(), supplier.getPeakQuantifierName(), supplier.getDescription(), (Class<IPeakQuantifierSettings>)supplier.getSettingsClass(), parent, DataType.CSD, DataType.MSD, DataType.WSD);
+			this.supplier = supplier;
 		}
 
 		@Override
@@ -77,6 +80,13 @@ public class PeakQuantifierProcessTypeSupplier implements IProcessTypeSupplier {
 			}
 
 			return chromatogramSelection;
+		}
+
+		@Override
+		public boolean matchesId(String id) {
+
+			IPeakQuantifier peakQuantifier = PeakQuantifier.getPeakQuantifier(supplier.getId());
+			return super.matchesId(id) || peakQuantifier.getLegacyIDs().contains(id);
 		}
 	}
 }
