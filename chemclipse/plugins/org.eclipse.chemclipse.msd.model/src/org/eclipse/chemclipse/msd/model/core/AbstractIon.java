@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Alexander Kerner - implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.model.core;
 
@@ -21,8 +22,6 @@ import org.eclipse.core.runtime.Platform;
  * The serialization of ions is controlled by the corresponding mass
  * spectrum.
  *
- * @author eselmeister
- * @author <a href="mailto:alexander.kerner@openchrom.net">Alexander Kerner</a>
  * @see AbstractScanMSD
  */
 public abstract class AbstractIon implements IIon {

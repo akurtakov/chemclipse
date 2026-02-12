@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,9 +14,6 @@ package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.denoising.ui.pre
 
 import org.eclipse.jface.dialogs.IInputValidator;
 
-/**
- * @author eselmeister
- */
 public class IonInputValidator implements IInputValidator {
 
 	@Override

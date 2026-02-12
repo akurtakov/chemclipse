@@ -17,9 +17,6 @@ import java.util.List;
 
 /**
  * This class stores a list of peaks.
- * 
- * @author eselmeister
- * 
  */
 public interface IPeaksMSD {
 

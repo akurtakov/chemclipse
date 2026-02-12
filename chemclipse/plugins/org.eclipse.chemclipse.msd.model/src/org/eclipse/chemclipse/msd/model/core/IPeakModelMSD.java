@@ -19,8 +19,6 @@ import org.eclipse.chemclipse.model.core.IPeakModel;
  * These are for example start retention time, stop retention time, background
  * abundance, peak maximum.<br/>
  * This model checks if all values are stored correctly.
- * 
- * @author eselmeister
  */
 public interface IPeakModelMSD extends IPeakModel {
 

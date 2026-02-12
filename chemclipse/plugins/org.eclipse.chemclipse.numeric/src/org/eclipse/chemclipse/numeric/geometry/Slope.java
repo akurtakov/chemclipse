@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,14 +17,13 @@ import org.eclipse.chemclipse.numeric.equations.Equations;
 
 /**
  * Calculates the slope between two points.
- * 
- * @author eselmeister
  */
 public class Slope implements ISlope {
 
 	private double slope;
 
 	public Slope(IPoint p1, IPoint p2) {
+
 		slope = Equations.calculateSlope(p1, p2);
 	}
 

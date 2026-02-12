@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,8 +15,6 @@ package org.eclipse.chemclipse.msd.model.xic;
 /**
  * This class can be used to represent a valid ion range.<br/>
  * It evaluates the constructor parameters and corrects them to a valid state.
- * 
- * @author eselmeister
  */
 public class IonRange implements IIonRange {
 
@@ -33,6 +31,7 @@ public class IonRange implements IIonRange {
 	 * @param stopIon
 	 */
 	public IonRange(int startIon, int stopIon) {
+
 		if(startIon > stopIon) {
 			int tmp = startIon;
 			startIon = stopIon;

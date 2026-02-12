@@ -21,8 +21,6 @@ import org.eclipse.chemclipse.numeric.statistics.Calculations;
 // TODO JUnit
 /**
  * This class implements the basic coda algorithm.
- * 
- * @author eselmeister
  */
 public class CodaCalculator {
 

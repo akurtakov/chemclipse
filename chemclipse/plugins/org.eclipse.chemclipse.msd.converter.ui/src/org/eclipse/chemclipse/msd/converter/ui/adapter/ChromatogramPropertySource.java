@@ -25,8 +25,6 @@ import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 /**
  * This class is responsible for representing chromatogram values in the
  * properties view.
- * 
- * @author eselmeister
  */
 public abstract class ChromatogramPropertySource implements IPropertySource {
 

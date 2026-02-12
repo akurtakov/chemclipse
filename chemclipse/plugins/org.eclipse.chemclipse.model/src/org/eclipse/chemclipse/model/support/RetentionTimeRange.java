@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,15 +13,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.support;
 
-/**
- * @author eselmeister
- */
 public class RetentionTimeRange implements IRetentionTimeRange {
 
 	private int startRetentionTime;
 	private int stopRetentionTime;
 
 	public RetentionTimeRange(IRetentionTimeRange range) {
+
 		this(range.getStartRetentionTime(), range.getStopRetentionTime());
 	}
 
@@ -32,6 +30,7 @@ public class RetentionTimeRange implements IRetentionTimeRange {
 	 * @param stopRetentionTime
 	 */
 	public RetentionTimeRange(int startRetentionTime, int stopRetentionTime) {
+
 		if(startRetentionTime < 0) {
 			startRetentionTime = 0;
 		}

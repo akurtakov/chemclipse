@@ -50,8 +50,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
  * , Pool, W. G. and deLeeuw, J. W. and van de Graaf, B., 1997<br/>
  * "Automated processing of GC/MS data: Quantification of the signals of individual components"
  * , Pool, W. G. and deLeeuw, J. W. and van de Graaf, B., 1997<br/>
- * 
- * @author eselmeister
  */
 public class BackfoldingShifter implements IBackfoldingShifter {
 

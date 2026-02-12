@@ -15,9 +15,6 @@ package org.eclipse.chemclipse.model.support;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * @author eselmeister
- */
 public class IntegrationConstraints implements IIntegrationConstraints {
 
 	/**

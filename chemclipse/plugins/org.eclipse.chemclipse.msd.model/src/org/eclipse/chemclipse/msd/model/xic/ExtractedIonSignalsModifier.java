@@ -27,8 +27,6 @@ import org.eclipse.chemclipse.msd.model.exceptions.NoExtractedIonSignalStoredExc
 
 /**
  * This class offers several static methods to modify an {@link IExtractedIonSignals} instance.
- * 
- * @author eselmeister
  */
 public class ExtractedIonSignalsModifier {
 

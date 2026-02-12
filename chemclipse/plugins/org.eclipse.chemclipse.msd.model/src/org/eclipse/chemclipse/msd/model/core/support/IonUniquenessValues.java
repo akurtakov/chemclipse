@@ -15,9 +15,6 @@ package org.eclipse.chemclipse.msd.model.core.support;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @author eselmeister
- */
 public class IonUniquenessValues implements IIonUniquenessValues {
 
 	private static Map<Integer, Float> probabilityValues;

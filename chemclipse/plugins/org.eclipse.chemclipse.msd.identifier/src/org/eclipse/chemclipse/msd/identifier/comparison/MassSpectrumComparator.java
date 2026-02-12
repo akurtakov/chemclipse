@@ -49,8 +49,6 @@ import org.eclipse.core.runtime.Platform;
  * Database search will still use this feature but should be implemented in
  * another class to separate the two different concerns of comparison and
  * identification.
- *
- * @author eselmeister
  */
 public class MassSpectrumComparator {
 

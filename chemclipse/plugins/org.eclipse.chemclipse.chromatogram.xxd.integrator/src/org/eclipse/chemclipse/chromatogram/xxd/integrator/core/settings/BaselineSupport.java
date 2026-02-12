@@ -14,15 +14,13 @@ package org.eclipse.chemclipse.chromatogram.xxd.integrator.core.settings;
 
 import org.eclipse.chemclipse.model.baseline.IBaselineModel;
 
-/**
- * @author eselmeister
- */
 public class BaselineSupport implements IBaselineSupport {
 
 	private IBaselineModel baselineModel;
 	private IBaselineModel baselineModelModified;
 
 	public BaselineSupport() {
+
 		baselineModel = null;
 		baselineModelModified = null;
 	}
@@ -31,6 +29,7 @@ public class BaselineSupport implements IBaselineSupport {
 	 * BaselineSupport gets a deep copy from
 	 */
 	public BaselineSupport(IBaselineModel baselineModel) {
+
 		if(baselineModel != null) {
 			this.baselineModel = baselineModel;
 			this.baselineModelModified = baselineModel.makeDeepCopy();

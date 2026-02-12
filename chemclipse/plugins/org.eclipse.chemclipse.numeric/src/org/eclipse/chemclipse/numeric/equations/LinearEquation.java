@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,8 +15,6 @@ package org.eclipse.chemclipse.numeric.equations;
 /**
  * This class represents a linear equation.<br/>
  * f(x) = ax + b
- * 
- * @author eselmeister
  */
 public class LinearEquation implements IEquation {
 
@@ -36,6 +34,7 @@ public class LinearEquation implements IEquation {
 	 * @param b
 	 */
 	public LinearEquation(double a, double b) {
+
 		this.a = a;
 		this.b = b;
 	}

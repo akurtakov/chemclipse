@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,8 +14,6 @@ package org.eclipse.chemclipse.model.signals;
 
 /**
  * If you need signals with a negative total signal range, use {@link ExtendedTotalScanSignal}.
- * 
- * @author eselmeister
  */
 public class TotalScanSignal extends AbstractTotalScanSignal implements ITotalScanSignal {
 
@@ -27,6 +25,7 @@ public class TotalScanSignal extends AbstractTotalScanSignal implements ITotalSc
 	 * @param totalSignal
 	 */
 	public TotalScanSignal(int retentionTime, float retentionIndex, float totalSignal) {
+
 		this(retentionTime, retentionIndex, totalSignal, true);
 	}
 
@@ -40,6 +39,7 @@ public class TotalScanSignal extends AbstractTotalScanSignal implements ITotalSc
 	 * @param validatePositive
 	 */
 	public TotalScanSignal(int retentionTime, float retentionIndex, float totalSignal, boolean validatePositive) {
+
 		if(retentionTime >= 0) {
 			setRetentionTime(retentionTime);
 		}

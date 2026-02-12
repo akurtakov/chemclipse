@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,8 +19,6 @@ package org.eclipse.chemclipse.msd.model.core;
  * IMassSpectrum.<br/>
  * Clone and this interface methods perform a "deep copy" instead of a
  * "shallow copy" operation.
- * 
- * @author eselmeister
  */
 public interface IMassSpectrumCloneable extends Cloneable {
 

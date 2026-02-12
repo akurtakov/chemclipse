@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,8 +20,6 @@ import org.eclipse.chemclipse.converter.core.AbstractConverterSupport;
  * It offers some convenient methods for getting information about the
  * registered converters.<br/>
  * SWT FileDialog may use it to set the correct dialog information.
- * 
- * @author eselmeister
  */
 public class MassSpectrumConverterSupport extends AbstractConverterSupport implements IMassSpectrumConverterSupport {
 }
