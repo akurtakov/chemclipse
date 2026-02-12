@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,8 +18,6 @@ package org.eclipse.chemclipse.msd.model.core;
  * It has no distinct retention time, retention index and scan number like
  * (@link: AbstractRegularMassSpectrum).<br/>
  * Instead of the range is marked, e.g. startScan, stopScan.
- * 
- * @author eselmeister
  */
 public abstract class AbstractCombinedMassSpectrum extends AbstractScanMSD implements ICombinedMassSpectrum {
 

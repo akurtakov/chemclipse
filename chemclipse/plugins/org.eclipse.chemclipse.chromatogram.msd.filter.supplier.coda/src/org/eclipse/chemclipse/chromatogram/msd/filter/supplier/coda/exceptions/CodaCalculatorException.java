@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,9 +12,6 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.exceptions;
 
-/**
- * @author eselmeister
- */
 public class CodaCalculatorException extends Exception {
 
 	/**
@@ -24,10 +21,12 @@ public class CodaCalculatorException extends Exception {
 	private static final long serialVersionUID = 3534005973969512859L;
 
 	public CodaCalculatorException() {
+
 		super();
 	}
 
 	public CodaCalculatorException(String message) {
+
 		super(message);
 	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -22,15 +22,15 @@ package org.eclipse.chemclipse.msd.model.core;
  * (41,1 N0.2)<br/>
  * <br/>
  * There maybe some more types to be added here.
- * 
- * @author eselmeister
  */
 public enum PeakIonType {
+
 	NO_TYPE("no type stored"), B("B"), L("L"), N("N");
 
 	private String description;
 
 	private PeakIonType(String description) {
+
 		this.description = description;
 	}
 

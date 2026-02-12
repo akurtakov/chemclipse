@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,8 +21,6 @@ import org.eclipse.chemclipse.support.comparator.SortOrder;
 /**
  * This is the comparator to sort an list of ion values by its
  * abundance.
- * 
- * @author eselmeister
  */
 public class IonAbundanceComparator implements Comparator<IIon>, Serializable {
 
@@ -37,6 +35,7 @@ public class IonAbundanceComparator implements Comparator<IIon>, Serializable {
 	 * The sort order is per default value ascending.
 	 */
 	public IonAbundanceComparator() {
+
 		sortOrder = SortOrder.ASC;
 	}
 
@@ -47,6 +46,7 @@ public class IonAbundanceComparator implements Comparator<IIon>, Serializable {
 	 * @param sortOrder
 	 */
 	public IonAbundanceComparator(SortOrder sortOrder) {
+
 		this.sortOrder = sortOrder;
 	}
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,8 +15,6 @@ package org.eclipse.chemclipse.model.support;
 /**
  * This class can be used to represent a valid background abundance range.<br/>
  * It evaluates the constructor parameters and corrects them to a valid state.
- * 
- * @author eselmeister
  */
 public class BackgroundAbundanceRange implements IBackgroundAbundanceRange {
 
@@ -35,6 +33,7 @@ public class BackgroundAbundanceRange implements IBackgroundAbundanceRange {
 	 * @param stopBackgroundAbundance
 	 */
 	public BackgroundAbundanceRange(float startBackgroundAbundance, float stopBackgroundAbundance) {
+
 		if(startBackgroundAbundance < MIN_BACKGROUND_ABUNDANCE || startBackgroundAbundance > MAX_BACKGROUND_ABUNDANCE) {
 			startBackgroundAbundance = MIN_BACKGROUND_ABUNDANCE;
 		}

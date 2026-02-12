@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,8 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.core.settings.peaks;
 
-import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.core.settings.IIntegrationSettings;
+import org.eclipse.chemclipse.model.core.IPeak;
 
 /**
  * All implementing classes have to decide if a peak should be reported or not.<br/>
@@ -24,8 +24,6 @@ import org.eclipse.chemclipse.chromatogram.xxd.integrator.core.settings.IIntegra
  * 1000.<br/>
  * To take effect in the {@link ISettingStatus}, the class has to register
  * itself at a class, which implements {@link IIntegrationSettings}.
- * 
- * @author eselmeister
  */
 public interface IReportDecider {
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,9 +20,6 @@ import org.eclipse.chemclipse.chromatogram.alignment.model.exceptions.NoRetentio
 import org.eclipse.chemclipse.chromatogram.alignment.model.exceptions.RetentionIndexExistsException;
 import org.eclipse.chemclipse.chromatogram.alignment.model.exceptions.RetentionIndexValueException;
 
-/**
- * @author eselmeister
- */
 public class RetentionIndices implements IRetentionIndices {
 
 	private List<IRetentionIndex> retentionIndices;

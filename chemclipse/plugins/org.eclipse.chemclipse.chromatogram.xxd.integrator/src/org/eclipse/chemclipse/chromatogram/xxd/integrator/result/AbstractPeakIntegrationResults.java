@@ -16,9 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @author eselmeister
- */
 public abstract class AbstractPeakIntegrationResults implements IPeakIntegrationResults {
 
 	private List<IPeakIntegrationResult> peakIntegrationResults;

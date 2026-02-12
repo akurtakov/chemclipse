@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -22,8 +22,6 @@ import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD
  * chromatogram selection object from its static inner class.<br/>
  * See org.eclipse.chemclipse.chromatogram.msd.filter.supplier.normalizer.ui ->
  * FilterHandler
- * 
- * @author eselmeister
  */
 public interface IUpdater {
 

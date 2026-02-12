@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -80,7 +80,7 @@ public class LinuxWineSupport extends AbstractLinuxWineSupport implements IExten
 	private ProcessBuilder getOpenCommand() {
 
 		/*
-		 * "env WINEPREFIX=/home/eselmeister/.wine wine start C:\\programme\\nist\\MSSEARCH\\nistms.exe"
+		 * "env WINEPREFIX=$HOME/.wine wine start C:\\programme\\nist\\MSSEARCH\\nistms.exe"
 		 */
 		String nistms = getWineApplication().replace("$.exe", ".exe"); // run the GUI version
 		ProcessBuilder processBuilder = new ProcessBuilder("wine", "start", nistms);

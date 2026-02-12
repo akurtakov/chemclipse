@@ -22,8 +22,6 @@ import org.eclipse.chemclipse.numeric.internal.gaussjordan.GaussJordan;
 
 /**
  * This class serves some static methods to create equations in many ways.<br/>
- * 
- * @author eselmeister
  */
 public class Equations {
 

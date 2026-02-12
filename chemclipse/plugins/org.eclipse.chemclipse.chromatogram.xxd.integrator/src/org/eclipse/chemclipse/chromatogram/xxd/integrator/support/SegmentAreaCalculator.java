@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,8 +27,6 @@ import org.eclipse.chemclipse.numeric.exceptions.SolverException;
  * There is also a special case, where the peak baseline crosses the background
  * baseline. In this case the areas of two triangles with different area signs
  * will be integrated.
- * 
- * @author eselmeister
  */
 public class SegmentAreaCalculator {
 
@@ -36,6 +34,7 @@ public class SegmentAreaCalculator {
 	 * This class should have only static methods.
 	 */
 	private SegmentAreaCalculator() {
+
 	}
 
 	public static double calculateSegmentArea(ISegment segment) {

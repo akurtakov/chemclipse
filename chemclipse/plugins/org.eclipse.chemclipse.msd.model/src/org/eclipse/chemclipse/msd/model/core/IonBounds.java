@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,8 +16,6 @@ package org.eclipse.chemclipse.msd.model.core;
  * This class stores two ions.<br/>
  * The lowest ion is the one with the lowest ion of a mass spectrum,
  * the highest with the highest ion of a mass spectrum.
- * 
- * @author eselmeister
  */
 public class IonBounds implements IIonBounds {
 
@@ -34,6 +32,7 @@ public class IonBounds implements IIonBounds {
 	 * @param highestIon
 	 */
 	public IonBounds(IIon lowestIon, IIon highestIon) {
+
 		if(lowestIon != null && highestIon != null) {
 			/*
 			 * Change the order if necessary.

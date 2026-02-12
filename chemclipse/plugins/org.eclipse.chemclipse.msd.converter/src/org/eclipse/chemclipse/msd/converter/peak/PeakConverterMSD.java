@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -41,8 +41,6 @@ import org.eclipse.core.runtime.Platform;
  * Be aware that some extensions could be directories and some could be files.
  * The following example gives some impressions:<br/>
  * Matlab Parafac Peaklist *.mpl<br/>
- * 
- * @author eselmeister
  */
 public class PeakConverterMSD {
 

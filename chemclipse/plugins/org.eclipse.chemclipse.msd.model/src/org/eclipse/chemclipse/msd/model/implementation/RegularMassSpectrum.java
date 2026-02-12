@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,8 +19,6 @@ import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 
 /**
  * If a new mass spectrum type should be implemented, extend the abstract class {@link AbstractScanMSD} and not this class.
- * 
- * @author eselmeister
  */
 public class RegularMassSpectrum extends AbstractRegularMassSpectrum implements IRegularMassSpectrum {
 

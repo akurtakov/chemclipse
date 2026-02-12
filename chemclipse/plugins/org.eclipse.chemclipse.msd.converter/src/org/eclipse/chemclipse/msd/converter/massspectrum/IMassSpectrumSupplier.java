@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,8 +14,5 @@ package org.eclipse.chemclipse.msd.converter.massspectrum;
 
 import org.eclipse.chemclipse.processing.converter.ISupplier;
 
-/**
- * @author eselmeister
- */
 public interface IMassSpectrumSupplier extends ISupplier {
 }

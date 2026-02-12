@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,7 +20,6 @@ package org.eclipse.chemclipse.model.updates;
  * Each time some values has been changed, e.g. abundance of mass spectrum x,
  * the controller will be informed, that the model has been edited.
  * 
- * @author eselmeister
  * @see IChromatogramUpdateListener
  */
 public interface IUpdater {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,10 +19,6 @@ import java.util.List;
 
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
 
-/**
- * @author eselmeister
- * @author <a href="mailto:alexanderkerner24@gmail.com">Alexander Kerner</a>
- */
 public abstract class AbstractMassSpectra implements IMassSpectra {
 
 	private final List<IScanMSD> massSpectra;
