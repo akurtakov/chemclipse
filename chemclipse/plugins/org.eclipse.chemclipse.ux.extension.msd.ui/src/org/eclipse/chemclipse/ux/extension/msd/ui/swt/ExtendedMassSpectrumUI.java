@@ -57,6 +57,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.ScrollableChart;
@@ -114,11 +115,23 @@ public class ExtendedMassSpectrumUI extends Composite implements IExtendedPartUI
 
 	private void createPages(Composite parent) {
 
+		/*
+		 * Switch from profile to centroid.
+		 */
+		boolean cleanup = parent.getChildren().length > 0;
+		for(Control control : parent.getChildren()) {
+			control.dispose();
+		}
+
 		if(massSpectra != null && massSpectra.getMassSpectrum(1) != null) {
 			massSpectrum = massSpectra.getMassSpectrum(1);
 			createMassSpectrumPage(parent);
 		} else {
 			createErrorMessagePage(parent);
+		}
+
+		if(cleanup) {
+			parent.layout(true, true);
 		}
 	}
 

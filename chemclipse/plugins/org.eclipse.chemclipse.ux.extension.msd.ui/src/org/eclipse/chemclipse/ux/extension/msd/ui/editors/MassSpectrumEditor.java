@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -275,15 +275,22 @@ public class MassSpectrumEditor implements IMassSpectrumEditor {
 
 	private void setPartLabel() {
 
+		if(massSpectra == null) {
+			return;
+		}
+
 		String name = ("".equals(massSpectra.getName())) ? "NoName" : massSpectra.getName();
-		massSpectrum = massSpectra.getMassSpectrum(1);
-		massSpectrum.setDirty(false);
-		if(massSpectrum instanceof IStandaloneMassSpectrum standaloneMassSpectrum) {
-			name = standaloneMassSpectrum.getName();
-		} else if(massSpectrum instanceof IRegularLibraryMassSpectrum regularLibraryMassSpectrum) {
-			ILibraryInformation libraryInformation = regularLibraryMassSpectrum.getLibraryInformation();
-			if(libraryInformation != null) {
-				name = libraryInformation.getName();
+
+		if(!massSpectra.isEmpty()) {
+			massSpectrum = massSpectra.getMassSpectrum(1);
+			massSpectrum.setDirty(false);
+			if(massSpectrum instanceof IStandaloneMassSpectrum standaloneMassSpectrum) {
+				name = standaloneMassSpectrum.getName();
+			} else if(massSpectrum instanceof IRegularLibraryMassSpectrum regularLibraryMassSpectrum) {
+				ILibraryInformation libraryInformation = regularLibraryMassSpectrum.getLibraryInformation();
+				if(libraryInformation != null) {
+					name = libraryInformation.getName();
+				}
 			}
 		}
 		part.setLabel(name);
@@ -330,18 +337,37 @@ public class MassSpectrumEditor implements IMassSpectrumEditor {
 	public void registerEvents() {
 
 		registerEvent(IChemClipseEvents.TOPIC_SCAN_XXD_UPDATE_SELECTION, IChemClipseEvents.EVENT_BROKER_DATA);
+		registerEvent(IChemClipseEvents.TOPIC_MASS_SPECTRUM_UPDATE_SELECTION, IChemClipseEvents.EVENT_BROKER_DATA);
 	}
 
 	public void updateObjects(List<Object> objects, String topic) {
 
-		if(objects.size() == 1) {
-			Object object = objects.get(0);
-			if(object instanceof IScanMSD scanMSD) {
-				if(object != massSpectrum) {
-					extendedMassSpectrumUI.update(scanMSD);
-				} else {
-					dirtyable.setDirty(massSpectrum.isDirty());
+		switch(topic) {
+			case IChemClipseEvents.TOPIC_SCAN_XXD_UPDATE_SELECTION: {
+				if(objects.size() == 1) {
+					Object object = objects.get(0);
+					if(object instanceof IScanMSD scanMSD) {
+						if(object != massSpectrum) {
+							extendedMassSpectrumUI.update(scanMSD);
+						} else {
+							dirtyable.setDirty(massSpectrum.isDirty());
+						}
+					}
 				}
+				break;
+			}
+			case IChemClipseEvents.TOPIC_MASS_SPECTRUM_UPDATE_SELECTION: {
+				if(objects.size() == 1) {
+					Object object = objects.get(0);
+					if(object instanceof IMassSpectra updatedMassSpectra) {
+						if(object != massSpectra) {
+							extendedMassSpectrumUI.update(updatedMassSpectra);
+						} else {
+							dirtyable.setDirty(massSpectra.isDirty());
+						}
+					}
+				}
+				break;
 			}
 		}
 	}
