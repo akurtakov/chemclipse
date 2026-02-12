@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,6 +28,9 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.svg.JSVGRasterizer;
+import org.eclipse.swt.widgets.Display;
 import org.osgi.framework.Bundle;
 
 public abstract class AbstractApplicationImage implements IApplicationImage {
@@ -53,15 +56,30 @@ public abstract class AbstractApplicationImage implements IApplicationImage {
 	public Image getImage(String fileName, String size) {
 
 		String path = getPath(fileName, size);
-		Image image = imageCache.get(path);
+		String key = fileName + "/" + size;
+		Image image = imageCache.get(key);
 		if(image == null) {
-			ImageDescriptor imageDescriptor = getImageDescriptor(path);
-			if(imageDescriptor != null) {
-				image = imageDescriptor.createImage();
-				if(image != null) {
-					imageCache.put(path, image);
+			if(fileName.endsWith(EXTENSION_SVG)) {
+				JSVGRasterizer rasterizer = new JSVGRasterizer();
+				String[] sizes = size.split("x");
+				int width = Integer.valueOf(sizes[0]);
+				int height = Integer.valueOf(sizes[1]);
+				URL fileLocation = FileLocator.find(bundle, new Path(path), null);
+				try {
+					ImageData data = rasterizer.rasterizeSVG(fileLocation.openStream(), width, height);
+					image = new Image(Display.getCurrent(), data);
+				} catch(IOException e) {
+					// ignore , ImageDescriptor.createImage() will return null so same semantic
+				}
+			} else {
+				ImageDescriptor imageDescriptor = getImageDescriptor(path);
+				if(imageDescriptor != null) {
+					image = imageDescriptor.createImage();
 				}
 			}
+		}
+		if(image != null) {
+			imageCache.put(key, image);
 		}
 
 		return image;
