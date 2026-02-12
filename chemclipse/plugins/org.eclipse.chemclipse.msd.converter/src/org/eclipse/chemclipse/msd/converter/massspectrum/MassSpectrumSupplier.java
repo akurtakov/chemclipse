@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,8 +14,14 @@ package org.eclipse.chemclipse.msd.converter.massspectrum;
 
 import org.eclipse.chemclipse.converter.core.AbstractSupplier;
 
-/**
- * @author eselmeister
- */
 public class MassSpectrumSupplier extends AbstractSupplier implements IMassSpectrumSupplier {
+
+	@Override
+	public void setFileExtension(final String fileExtension) {
+
+		if(fileExtension != null && !fileExtension.isEmpty()) {
+			String cleanedExtension = fileExtension.startsWith(".") ? fileExtension.substring(1) : fileExtension;
+			super.setFileExtension(cleanedExtension);
+		}
+	}
 }
