@@ -23,14 +23,17 @@ public class RetentionIndex implements IRetentionIndex, Comparable<IRetentionInd
 	private String name = "";
 
 	public RetentionIndex() {
+
 	}
 
 	public RetentionIndex(final int retentionTime, final float index) {
-		setCkeckedRetentionTime(retentionTime);
+
+		setCheckedRetentionTime(retentionTime);
 		setCheckedIndex(index);
 	}
 
 	public RetentionIndex(final int retentionTime, final float index, final String name) {
+
 		this(retentionTime, index);
 		this.name = name;
 	}
@@ -47,7 +50,7 @@ public class RetentionIndex implements IRetentionIndex, Comparable<IRetentionInd
 	@Override
 	public void setRetentionTime(final int retentionTime) {
 
-		setCkeckedRetentionTime(retentionTime);
+		setCheckedRetentionTime(retentionTime);
 	}
 
 	/**
@@ -56,7 +59,7 @@ public class RetentionIndex implements IRetentionIndex, Comparable<IRetentionInd
 	 * @param retentionTime
 	 */
 	// @edu.umd.cs.findbugs.annotations.SuppressWarnings("INT_VACUOUS_COMPARISON")
-	private void setCkeckedRetentionTime(final int retentionTime) {
+	private void setCheckedRetentionTime(final int retentionTime) {
 
 		/*
 		 * Findbugs finds a "INT_VACUOUS_COMPARISON" bug here, but it's ok.<br/>
