@@ -65,6 +65,7 @@ public class MassSpectrumReaderVersion22 extends AbstractMassSpectraReader imple
 
 		try {
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+			documentBuilderFactory.setNamespaceAware(true);
 			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 			Document document = documentBuilder.parse(file);
 			NodeList nodeList = document.getElementsByTagName(AbstractReader.NODE_MS_RUN);
