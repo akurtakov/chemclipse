@@ -13,7 +13,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.filter.peaks;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.chemclipse.model.core.IPeak;
@@ -70,5 +72,13 @@ public class ClassifiedPeaksFilter extends AbstractPeakFilter<ClassifiedPeaksFil
 			subMonitor.worked(1);
 		}
 		subMonitor.done();
+	}
+
+	@Override
+	public List<String> getLegacyIDs() {
+
+		List<String> legacyIDs = new ArrayList<>();
+		legacyIDs.add("PeakFilter:filter:processor:class:org.eclipse.chemclipse.xxd.model.filter.peaks.ClassifiedPeaksFilter");
+		return legacyIDs;
 	}
 }

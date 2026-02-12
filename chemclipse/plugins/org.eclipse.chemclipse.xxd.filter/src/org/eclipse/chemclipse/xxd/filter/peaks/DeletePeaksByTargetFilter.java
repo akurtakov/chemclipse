@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -146,5 +146,13 @@ public class DeletePeaksByTargetFilter extends AbstractPeakFilter<DeletePeaksByT
 		}
 
 		return false;
+	}
+
+	@Override
+	public List<String> getLegacyIDs() {
+
+		List<String> legacyIDs = new ArrayList<>();
+		legacyIDs.add("PeakFilter:filter:processor:class:org.eclipse.chemclipse.xxd.model.filter.peaks.DeletePeaksByTargetFilter");
+		return legacyIDs;
 	}
 }

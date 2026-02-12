@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,6 +13,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.filter.peaks;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -54,5 +55,11 @@ public abstract class AbstractPeakFilter<ConfigType> implements IPeakFilter<Conf
 
 		chromatogramSelection.setSelectedPeak(null);
 		chromatogramSelection.getChromatogram().setDirty(true);
+	}
+
+	@Override
+	public List<String> getLegacyIDs() {
+
+		return new ArrayList<>();
 	}
 }

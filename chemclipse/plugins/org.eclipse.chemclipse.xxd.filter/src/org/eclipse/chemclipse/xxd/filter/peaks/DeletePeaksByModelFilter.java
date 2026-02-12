@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -81,5 +81,13 @@ public class DeletePeaksByModelFilter extends AbstractPeakFilter<DeletePeaksByMo
 			deletePeaks(peaksToDelete, chromatogramSelection);
 			resetPeakSelection(chromatogramSelection);
 		}
+	}
+
+	@Override
+	public List<String> getLegacyIDs() {
+
+		List<String> legacyIDs = new ArrayList<>();
+		legacyIDs.add("PeakFilter:filter:processor:class:org.eclipse.chemclipse.xxd.model.filter.peaks.DeletePeaksByModelFilter");
+		return legacyIDs;
 	}
 }
