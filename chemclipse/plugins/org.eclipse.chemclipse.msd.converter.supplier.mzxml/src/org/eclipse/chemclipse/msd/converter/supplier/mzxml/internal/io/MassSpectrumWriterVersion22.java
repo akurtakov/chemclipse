@@ -36,7 +36,6 @@ import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.Pa
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.Peaks;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.Scan;
 import org.eclipse.chemclipse.msd.converter.supplier.mzxml.internal.v22.model.Software;
-import org.eclipse.chemclipse.msd.converter.supplier.mzxml.io.MassSpectrumWriter;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
@@ -56,7 +55,7 @@ public class MassSpectrumWriterVersion22 implements IMassSpectraWriter {
 
 	public static final String VERSION = "mzXML_2.2";
 
-	private static final Logger logger = Logger.getLogger(MassSpectrumWriter.class);
+	private static final Logger logger = Logger.getLogger(MassSpectrumWriterVersion22.class);
 
 	@Override
 	public void write(File file, IScanMSD massSpectrum, boolean append, IProgressMonitor monitor) throws FileIsNotWriteableException, IOException {
@@ -171,11 +170,9 @@ public class MassSpectrumWriterVersion22 implements IMassSpectraWriter {
 	private Maldi createMaldi(IStandaloneMassSpectrum standaloneMassSpectrum) {
 
 		Maldi maldi = new Maldi();
-		if(maldi != null) {
-			maldi.setPlateID(standaloneMassSpectrum.getPlate());
-			maldi.setSpotID(standaloneMassSpectrum.getPosition());
-		}
-		return null;
+		maldi.setPlateID(standaloneMassSpectrum.getPlate());
+		maldi.setSpotID(standaloneMassSpectrum.getPosition());
+		return maldi;
 	}
 
 	private Peaks createPeaks(IScanMSD scanMSD) {
