@@ -240,7 +240,7 @@ public class DataUpdateSupport {
 
 	private void fireUpdate(String topic, List<Object> objects) {
 
-		for(IDataUpdateListener updateListener : updateListeners) {
+		for(IDataUpdateListener updateListener : List.copyOf(updateListeners)) {
 			updateListener.update(topic, objects);
 		}
 	}
