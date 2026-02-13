@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -635,8 +635,11 @@ public class ExtendedTargetsUI extends Composite implements IExtendedPartUI {
 	private void updateInput(float retentionIndex) {
 
 		AtomicReference<TargetsListUI> targetList = getActiveTargetList();
-		Object object = getObject();
+		if(targetList.get() == null) {
+			return;
+		}
 
+		Object object = getObject();
 		if(object instanceof ITargetSupplier targetSupplier) {
 			List<IIdentificationTarget> identificationTargets = IIdentificationTarget.getTargetsSorted(targetSupplier.getTargets(), retentionIndex);
 			targetList.get().setInput(identificationTargets);
