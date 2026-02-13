@@ -14,7 +14,6 @@
 package org.eclipse.chemclipse.xxd.process.ui.toolbar;
 
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
-import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.xxd.process.ui.support.ProcessorSupport;
@@ -69,7 +68,7 @@ public class Processor {
 		if(imageFileName == null) {
 			return null;
 		}
-		return ApplicationImage.adjustLegacyPath(imageFileName);
+		return imageFileName;
 	}
 
 	public void setImageFileName(String imageFileName) {
