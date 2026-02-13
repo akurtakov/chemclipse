@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -45,8 +45,12 @@ public class TargetDisplaySettingsPage extends WizardPage {
 		 * Remove the focus from the "Finish" button. It prevents that the user
 		 * accidentally press "Enter" and thus closes the dialog.
 		 */
-		Shell shell = getShell();
-		shell.getDisplay().asyncExec(() -> shell.setDefaultButton(null));
+		getControl().getDisplay().asyncExec(() -> {
+			Shell shell = getShell();
+			if(shell != null && !shell.isDisposed()) {
+				shell.setDefaultButton(null);
+			}
+		});
 	}
 
 	protected TargetDisplaySettingsPage(Collection<? extends ITargetReference> targetReferenes, ITargetDisplaySettings targetDisplaySettings, TargetDisplaySettingsWizardListener settingsWizardListener) {
