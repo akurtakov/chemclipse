@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -77,17 +77,23 @@ public class LazyFileExplorerContentProvider implements ILazyTreeContentProvider
 			}
 			if(child instanceof File file) {
 				viewer.getControl().getDisplay().asyncExec(() -> {
-					viewer.replace(parent, index, file);
+					if(!viewer.getTree().isDisposed()) {
+						viewer.replace(parent, index, file);
+					}
 				});
 				if(file.isDirectory()) {
 					viewer.getControl().getDisplay().asyncExec(() -> {
-						viewer.setHasChildren(file, true);
+						if(!viewer.getTree().isDisposed()) {
+							viewer.setHasChildren(file, true);
+						}
 					});
 					// remove the file from the cache to allow updates to the underlying file system
 					cache.remove(file);
 				} else if(hasContainerContents(file)) {
 					viewer.getControl().getDisplay().asyncExec(() -> {
-						viewer.setHasChildren(file, true);
+						if(!viewer.getTree().isDisposed()) {
+							viewer.setHasChildren(file, true);
+						}
 					});
 				}
 			}
