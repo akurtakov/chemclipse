@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -78,9 +78,16 @@ public class PartSupport {
 
 	public void closePart(MPart part) {
 
-		MPartStack partStack = (MPartStack)eModelService.find(IPerspectiveAndViewIds.EDITOR_PART_STACK_ID, mApplication);
+		if(part == null) {
+			return;
+		}
+
 		part.setToBeRendered(false);
 		part.setVisible(false);
-		DisplayUtils.getDisplay().asyncExec(() -> partStack.getChildren().remove(part));
+
+		DisplayUtils.getDisplay().asyncExec(() -> {
+			MPartStack partStack = (MPartStack)eModelService.find(IPerspectiveAndViewIds.EDITOR_PART_STACK_ID, mApplication);
+			partStack.getChildren().remove(part);
+		});
 	}
 }
