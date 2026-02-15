@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,7 +14,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.core;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.core.AbstractBaselineDetector;
@@ -37,8 +39,12 @@ import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignal;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
+import org.eclipse.chemclipse.support.traces.ITrace;
+import org.eclipse.chemclipse.support.traces.TraceEmpty;
 import org.eclipse.chemclipse.support.traces.TraceFactory;
 import org.eclipse.chemclipse.support.traces.TraceGeneric;
+import org.eclipse.chemclipse.support.traces.TraceNominalMSD;
+import org.eclipse.chemclipse.support.traces.TraceRasteredWSD;
 import org.eclipse.chemclipse.support.validators.TraceValidator;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
 import org.eclipse.chemclipse.wsd.model.core.IScanWSD;
@@ -85,75 +91,105 @@ public class BaselineDetector extends AbstractBaselineDetector {
 		 * Calculate the Baseline
 		 */
 		try {
-			ITotalScanSignals totalScanSignals = null;
 			String specificTraces = detectorSettings.getSpecificTraces();
 			if(!specificTraces.isBlank()) {
 				if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
 					Set<Integer> ions = getUnitResolutionTraces(specificTraces);
 					if(!ions.isEmpty()) {
-						totalScanSignals = getExtractedIonSignals(chromatogramMSD, startScan, stopScan, ions);
+						Map<Integer, ITotalScanSignals> totalScanSignalsMap = getExtractedIonSignals(chromatogramMSD, startScan, stopScan, ions);
+						for(int ion : ions) {
+							TraceNominalMSD traceNominalMSD = new TraceNominalMSD();
+							traceNominalMSD.setMZ(ion);
+							ITotalScanSignals totalScanSignals = totalScanSignalsMap.get(ion);
+							applyBaseline(totalScanSignals, chromatogram, startScan, stopScan, iterations, traceNominalMSD, monitor);
+						}
+					} else {
+						applyBaselineTIC(chromatogramMSD, startScan, stopScan, iterations, monitor);
 					}
 				} else if(chromatogram instanceof IChromatogramWSD chromatogramWSD) {
-					Set<Integer> wavelenghts = getUnitResolutionTraces(specificTraces);
-					if(!wavelenghts.isEmpty()) {
-						totalScanSignals = getExtractedWavelengthSignals(chromatogramWSD, startScan, stopScan, wavelenghts);
+					Set<Integer> wavelengths = getUnitResolutionTraces(specificTraces);
+					if(!wavelengths.isEmpty()) {
+						Map<Integer, ITotalScanSignals> totalScanSignalsMap = getExtractedWavelengthSignals(chromatogramWSD, startScan, stopScan, wavelengths);
+						for(int wavelength : wavelengths) {
+							TraceRasteredWSD traceRasteredWSD = new TraceRasteredWSD();
+							traceRasteredWSD.setWavelength(wavelength);
+							ITotalScanSignals totalScanSignals = totalScanSignalsMap.get(wavelength);
+							applyBaseline(totalScanSignals, chromatogram, startScan, stopScan, iterations, traceRasteredWSD, monitor);
+						}
+					} else {
+						applyBaselineTIC(chromatogramWSD, startScan, stopScan, iterations, monitor);
 					}
 				}
+			} else {
+				applyBaselineTIC(chromatogram, startScan, stopScan, iterations, monitor);
 			}
-			/*
-			 * Fallback TIC
-			 */
-			if(totalScanSignals == null) {
-				ITotalScanSignalExtractor totalScanSignalExtractor = new TotalScanSignalExtractor(chromatogram);
-				totalScanSignals = totalScanSignalExtractor.getTotalScanSignals(startScan, stopScan);
-			}
-			/*
-			 * Calculate the baseline.
-			 */
-			calculate(totalScanSignals, iterations, monitor);
-			IBaselineModel baselineModel = chromatogram.getBaselineModel();
-			apply(baselineModel, totalScanSignals, startScan, stopScan, monitor);
 		} catch(ChromatogramIsNullException e) {
 			return;
 		}
 	}
 
-	private static ITotalScanSignals getExtractedIonSignals(IChromatogramMSD chromatogramMSD, int startScan, int stopScan, Set<Integer> ions) {
+	private static void applyBaselineTIC(IChromatogram chromatogram, int startScan, int stopScan, int iterations, IProgressMonitor monitor) {
 
-		TotalScanSignals totalScanSignals = new TotalScanSignals(startScan, stopScan);
+		ITotalScanSignalExtractor totalScanSignalExtractor = new TotalScanSignalExtractor(chromatogram);
+		ITotalScanSignals totalScanSignals = totalScanSignalExtractor.getTotalScanSignals(startScan, stopScan);
+		applyBaseline(totalScanSignals, chromatogram, startScan, stopScan, iterations, new TraceEmpty(), monitor);
+	}
+
+	private static void applyBaseline(ITotalScanSignals totalScanSignals, IChromatogram chromatogram, int startScan, int stopScan, int iterations, ITrace trace, IProgressMonitor monitor) {
+
+		calculate(totalScanSignals, iterations, monitor);
+		IBaselineModel baselineModel = chromatogram.getBaselineModel();
+		apply(baselineModel, totalScanSignals, startScan, stopScan, trace, monitor);
+	}
+
+	private static Map<Integer, ITotalScanSignals> getExtractedIonSignals(IChromatogramMSD chromatogramMSD, int startScan, int stopScan, Set<Integer> ions) {
+
+		Map<Integer, ITotalScanSignals> totalScanSignalsMap = new HashMap<>();
+		for(int ion : ions) {
+			totalScanSignalsMap.put(ion, new TotalScanSignals(startScan, stopScan));
+		}
+		/*
+		 * Collect
+		 */
 		for(int i = startScan; i <= stopScan; i++) {
 			if(chromatogramMSD.getScan(i) instanceof IScanMSD scanMSD) {
 				IExtractedIonSignal extractedIonSignal = scanMSD.getExtractedIonSignal();
 				int retentionTime = scanMSD.getRetentionTime();
 				float retentionIndex = scanMSD.getRetentionIndex();
-				double totalSignal = 0;
 				for(int ion : ions) {
-					totalSignal += extractedIonSignal.getAbundance(ion);
+					ITotalScanSignals totalScanSignals = totalScanSignalsMap.get(ion);
+					double totalSignal = extractedIonSignal.getAbundance(ion);
+					totalScanSignals.add(new TotalScanSignal(retentionTime, retentionIndex, (float)totalSignal, true));
 				}
-				totalScanSignals.add(new TotalScanSignal(retentionTime, retentionIndex, (float)totalSignal, true));
 			}
 		}
 
-		return totalScanSignals;
+		return totalScanSignalsMap;
 	}
 
-	private static ITotalScanSignals getExtractedWavelengthSignals(IChromatogramWSD chromatogramWSD, int startScan, int stopScan, Set<Integer> wavelengths) {
+	private static Map<Integer, ITotalScanSignals> getExtractedWavelengthSignals(IChromatogramWSD chromatogramWSD, int startScan, int stopScan, Set<Integer> wavelengths) {
 
-		TotalScanSignals totalScanSignals = new TotalScanSignals(startScan, stopScan);
+		Map<Integer, ITotalScanSignals> totalScanSignalsMap = new HashMap<>();
+		for(int wavelength : wavelengths) {
+			totalScanSignalsMap.put(wavelength, new TotalScanSignals(startScan, stopScan));
+		}
+		/*
+		 * Collect
+		 */
 		for(int i = startScan; i <= stopScan; i++) {
 			if(chromatogramWSD.getScan(i) instanceof IScanWSD scanWSD) {
 				IExtractedWavelengthSignal extractedWavelengthSignal = scanWSD.getExtractedWavelengthSignal();
 				int retentionTime = scanWSD.getRetentionTime();
 				float retentionIndex = scanWSD.getRetentionIndex();
-				double totalSignal = 0;
 				for(int wavelength : wavelengths) {
-					totalSignal += extractedWavelengthSignal.getAbundance(wavelength);
+					ITotalScanSignals totalScanSignals = totalScanSignalsMap.get(wavelength);
+					double totalSignal = extractedWavelengthSignal.getAbundance(wavelength);
+					totalScanSignals.add(new TotalScanSignal(retentionTime, retentionIndex, (float)totalSignal, true));
 				}
-				totalScanSignals.add(new TotalScanSignal(retentionTime, retentionIndex, (float)totalSignal, true));
 			}
 		}
 
-		return totalScanSignals;
+		return totalScanSignalsMap;
 	}
 
 	private static Set<Integer> getUnitResolutionTraces(String traces) {
@@ -191,7 +227,7 @@ public class BaselineDetector extends AbstractBaselineDetector {
 		}
 	}
 
-	private static void apply(IBaselineModel baselineModel, ITotalScanSignals totalIonSignals, int startScan, int stopScan, IProgressMonitor monitor) {
+	private static void apply(IBaselineModel baselineModel, ITotalScanSignals totalIonSignals, int startScan, int stopScan, ITrace trace, IProgressMonitor monitor) {
 
 		ITotalScanSignal actualTotalIonSignal;
 		ITotalScanSignal nextTotalIonSignal;
@@ -218,7 +254,7 @@ public class BaselineDetector extends AbstractBaselineDetector {
 				 * Set the baseline.
 				 * It is validate == false, cause we know that the segments are calculated without overlap.
 				 */
-				baselineModel.addBaseline(startRetentionTime, stopRetentionTime, startBackgroundAbundance, stopBackgroundAbundance, false);
+				baselineModel.addBaseline(startRetentionTime, stopRetentionTime, startBackgroundAbundance, stopBackgroundAbundance, trace, false);
 				subMonitor.worked(1);
 			}
 		} finally {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,6 +14,7 @@ package org.eclipse.chemclipse.model.baseline;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.eclipse.chemclipse.support.traces.TraceEmpty;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +33,7 @@ public class BaselineSegment_3_Test {
 		stopRetentionTime = 10500;
 		startBackgroundAbundance = 500.0f;
 		stopBackgroundAbundance = 4000.0f;
-		segment = new BaselineSegment(startRetentionTime, stopRetentionTime);
+		segment = new BaselineSegment(startRetentionTime, stopRetentionTime, new TraceEmpty());
 		segment.setStartBackgroundAbundance(startBackgroundAbundance);
 		segment.setStopBackgroundAbundance(stopBackgroundAbundance);
 	}

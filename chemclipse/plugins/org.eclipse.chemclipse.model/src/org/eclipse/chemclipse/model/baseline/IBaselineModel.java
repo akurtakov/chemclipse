@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,8 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.baseline;
 
+import java.util.Set;
+
 import org.eclipse.chemclipse.model.exceptions.BaselineIsNotDefinedException;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
+import org.eclipse.chemclipse.support.traces.ITrace;
 
 public interface IBaselineModel {
 
@@ -42,6 +45,8 @@ public interface IBaselineModel {
 	 * @param validate
 	 */
 	void addBaseline(int startRetentionTime, int stopRetentionTime, float startBackgroundAbundance, float stopBackgroundAbundance, boolean validate);
+
+	void addBaseline(int startRetentionTime, int stopRetentionTime, float startBackgroundAbundance, float stopBackgroundAbundance, ITrace trace, boolean validate);
 
 	/**
 	 * 
@@ -87,6 +92,8 @@ public interface IBaselineModel {
 	 */
 	float getBackground(int retentionTime);
 
+	float getBackground(int retentionTime, Set<ITrace> traces);
+
 	/**
 	 * Get the background abundance at a given retention time.<br/>
 	 * The retention time is given in milliseconds.<br/>
@@ -97,6 +104,8 @@ public interface IBaselineModel {
 	 * @throws BaselineIsNotDefinedException
 	 */
 	float getBackgroundNotNaN(int retentionTime) throws BaselineIsNotDefinedException;
+
+	float getBackgroundNotNaN(int retentionTime, Set<ITrace> traces) throws BaselineIsNotDefinedException;
 
 	/**
 	 * Returns a deep copy of the actual baseline model.

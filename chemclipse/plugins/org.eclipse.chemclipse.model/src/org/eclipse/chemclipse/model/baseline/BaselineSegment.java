@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,9 +12,13 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.model.baseline;
 
+import java.util.Objects;
+
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.numeric.core.Point;
 import org.eclipse.chemclipse.numeric.equations.Equations;
+import org.eclipse.chemclipse.support.traces.ITrace;
+import org.eclipse.chemclipse.support.traces.TraceEmpty;
 
 /**
  * This class implements a baseline segment used in {@link IChromatogramMSD} and {@link BaselineModel}.
@@ -26,6 +30,7 @@ public class BaselineSegment implements IBaselineSegment {
 	private float startBackgroundAbundance = 0.0f;
 	private int stopRetentionTime = 0;
 	private float stopBackgroundAbundance = 0.0f;
+	private ITrace trace = new TraceEmpty();
 
 	/**
 	 * The start retention time must be <= than the stop retention time.
@@ -33,7 +38,7 @@ public class BaselineSegment implements IBaselineSegment {
 	 * @param startRetentionTime
 	 * @param stopRetentionTime
 	 */
-	public BaselineSegment(int startRetentionTime, int stopRetentionTime) {
+	public BaselineSegment(int startRetentionTime, int stopRetentionTime, ITrace trace) {
 
 		if(startRetentionTime > stopRetentionTime) {
 			int tmp = startRetentionTime;
@@ -42,6 +47,9 @@ public class BaselineSegment implements IBaselineSegment {
 		}
 		setStopRetentionTime(stopRetentionTime);
 		setStartRetentionTime(startRetentionTime);
+		if(trace != null) {
+			this.trace = trace;
+		}
 	}
 
 	@Override
@@ -100,43 +108,9 @@ public class BaselineSegment implements IBaselineSegment {
 		}
 	}
 
-	@Override
-	public boolean equals(Object other) {
+	public ITrace getTrace() {
 
-		if(other == null) {
-			return false;
-		}
-		if(this == other) {
-			return true;
-		}
-		if(this.getClass() != other.getClass()) {
-			return false;
-		}
-		BaselineSegment otherSegment = (BaselineSegment)other;
-		return this.getStartBackgroundAbundance() == otherSegment.getStartBackgroundAbundance() && this.getStartRetentionTime() == otherSegment.getStartRetentionTime() && this.getStopBackgroundAbundance() == otherSegment.getStopBackgroundAbundance() && this.getStopRetentionTime() == otherSegment.getStopRetentionTime();
-	}
-
-	@Override
-	public int hashCode() {
-
-		return 7 * Integer.valueOf(startRetentionTime).hashCode() + 11 * Float.valueOf(startBackgroundAbundance).hashCode() + 13 * Integer.valueOf(stopRetentionTime).hashCode() + 11 * Float.valueOf(stopBackgroundAbundance).hashCode();
-	}
-
-	@Override
-	public String toString() {
-
-		StringBuilder builder = new StringBuilder();
-		builder.append(getClass().getName());
-		builder.append("[");
-		builder.append("startRetentionTime = " + startRetentionTime);
-		builder.append(",");
-		builder.append("startBackgroundAbundance = " + startBackgroundAbundance);
-		builder.append(",");
-		builder.append("stopRetentionTime = " + stopRetentionTime);
-		builder.append(",");
-		builder.append("stopBackgroundAbundance = " + stopBackgroundAbundance);
-		builder.append("]");
-		return builder.toString();
+		return trace;
 	}
 
 	@Override
@@ -145,5 +119,30 @@ public class BaselineSegment implements IBaselineSegment {
 		Point p1 = new Point(startRetentionTime, startBackgroundAbundance);
 		Point p2 = new Point(stopRetentionTime, stopBackgroundAbundance);
 		return (float)Equations.createLinearEquation(p1, p2).calculateY(retentionTime);
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(startBackgroundAbundance, startRetentionTime, stopBackgroundAbundance, stopRetentionTime, trace);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+
+		if(this == obj)
+			return true;
+		if(obj == null)
+			return false;
+		if(getClass() != obj.getClass())
+			return false;
+		BaselineSegment other = (BaselineSegment)obj;
+		return Float.floatToIntBits(startBackgroundAbundance) == Float.floatToIntBits(other.startBackgroundAbundance) && startRetentionTime == other.startRetentionTime && Float.floatToIntBits(stopBackgroundAbundance) == Float.floatToIntBits(other.stopBackgroundAbundance) && stopRetentionTime == other.stopRetentionTime && Objects.equals(trace, other.trace);
+	}
+
+	@Override
+	public String toString() {
+
+		return "BaselineSegment [startRetentionTime=" + startRetentionTime + ", startBackgroundAbundance=" + startBackgroundAbundance + ", stopRetentionTime=" + stopRetentionTime + ", stopBackgroundAbundance=" + stopBackgroundAbundance + ", trace=" + trace + "]";
 	}
 }
