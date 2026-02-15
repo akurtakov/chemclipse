@@ -14,6 +14,7 @@ package org.eclipse.chemclipse.model.baseline;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.eclipse.chemclipse.support.traces.TraceEmpty;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -33,7 +34,7 @@ public class BaselineSegment_2_Test {
 		stopRetentionTime = 10500;
 		float startBackgroundAbundance = -1.0f;
 		float stopBackgroundAbundance = -1.0f;
-		segment = new BaselineSegment(stopRetentionTime, startRetentionTime);
+		segment = new BaselineSegment(stopRetentionTime, startRetentionTime, new TraceEmpty());
 		segment.setStartBackgroundAbundance(startBackgroundAbundance);
 		segment.setStopBackgroundAbundance(stopBackgroundAbundance);
 	}

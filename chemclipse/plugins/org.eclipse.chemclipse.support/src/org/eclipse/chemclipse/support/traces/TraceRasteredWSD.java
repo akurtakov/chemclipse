@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -11,6 +11,8 @@
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.support.traces;
+
+import java.util.Objects;
 
 /**
  * HPLC-DAD
@@ -27,6 +29,25 @@ public class TraceRasteredWSD extends AbstractTrace {
 	public void setWavelength(double wavelength) {
 
 		setValue(wavelength);
+	}
+
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(getValue());
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+
+		if(this == obj)
+			return true;
+		if(obj == null)
+			return false;
+		if(getClass() != obj.getClass())
+			return false;
+		TraceRasteredWSD other = (TraceRasteredWSD)obj;
+		return Double.doubleToLongBits(getValue()) == Double.doubleToLongBits(other.getValue());
 	}
 
 	@Override
