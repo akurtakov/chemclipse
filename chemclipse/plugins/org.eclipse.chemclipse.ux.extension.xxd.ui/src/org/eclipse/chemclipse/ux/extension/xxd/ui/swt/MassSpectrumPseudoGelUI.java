@@ -58,10 +58,9 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 		if(scanSelections != null) {
 			intensityGraphFigure = createIntensityGraphFigure(false);
 			lightweightSystem.setContents(intensityGraphFigure);
-			clear();
 			setPseudoGel(scanSelections);
 		} else {
-			clear();
+			intensityGraphFigure.erase();
 		}
 	}
 
@@ -132,18 +131,6 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 			map.put(values[i], colors[i]);
 		}
 		return map;
-	}
-
-	public void clear() {
-
-		float[] heatmapData = new float[0];
-		intensityGraphFigure.setMin(0);
-		intensityGraphFigure.setMax(0);
-		intensityGraphFigure.setDataWidth(0);
-		intensityGraphFigure.setDataHeight(0);
-		intensityGraphFigure.setDataArray(heatmapData);
-		lightweightSystem.setContents(intensityGraphFigure);
-		intensityGraphFigure.repaint();
 	}
 
 	private void createControl() {
