@@ -186,4 +186,10 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 
 		return intensityGraphFigure;
 	}
+
+	@Override
+	public void dispose() {
+
+		intensityGraphFigure.dispose();
+	}
 }
