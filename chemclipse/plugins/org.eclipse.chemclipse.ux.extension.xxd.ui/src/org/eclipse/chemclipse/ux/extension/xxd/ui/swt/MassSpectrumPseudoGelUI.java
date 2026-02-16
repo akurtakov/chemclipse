@@ -13,7 +13,6 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.swt;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -40,7 +39,6 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 	private IntensityGraphFigure intensityGraphFigure;
 
 	private EditorUpdateSupport editorUpdateSupport = new EditorUpdateSupport();
-	private List<IScanMSD> scanSelections = new ArrayList<>();
 
 	public MassSpectrumPseudoGelUI(Composite parent, int style) {
 
@@ -51,11 +49,11 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 	@Override
 	public void update() {
 
-		scanSelections = editorUpdateSupport.getMassSpectrumSelections();
-		updatePseudoGel();
+		List<IScanMSD> scanSelections = editorUpdateSupport.getMassSpectrumSelections();
+		updatePseudoGel(scanSelections);
 	}
 
-	private void updatePseudoGel() {
+	private void updatePseudoGel(List<IScanMSD> scanSelections) {
 
 		if(scanSelections != null) {
 			intensityGraphFigure = createIntensityGraphFigure(false);
