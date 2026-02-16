@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -41,6 +41,15 @@ public class PreferenceSupplierDataExplorer extends AbstractPreferenceSupplier i
 	public static final String P_USER_LOCATIONS_TEMPLATE_FOLDER = "userLocationsTemplateFolder";
 	public static final String DEF_USER_LOCATIONS_TEMPLATE_FOLDER = "";
 
+	/*
+	 * Performance related workarounds. Set to false for less pretty but faster.
+	 */
+	public static final String P_FILTER_FILES = "filterFiles";
+	public static final boolean DEF_FILTER_FILES = true;
+
+	public static final String P_SHOW_ICONS = "showIcons";
+	public static final boolean DEF_SHOW_ICONS = true;
+
 	public static IPreferenceSupplier INSTANCE() {
 
 		return INSTANCE(PreferenceSupplierDataExplorer.class);
@@ -65,6 +74,9 @@ public class PreferenceSupplierDataExplorer extends AbstractPreferenceSupplier i
 		putDefault(P_USER_LOCATIONS, DEF_USER_LOCATIONS);
 
 		putDefault(P_USER_LOCATIONS_TEMPLATE_FOLDER, DEF_USER_LOCATIONS_TEMPLATE_FOLDER);
+
+		putDefault(P_FILTER_FILES, DEF_FILTER_FILES);
+		putDefault(P_SHOW_ICONS, DEF_SHOW_ICONS);
 	}
 
 	public static String getSelectedDrivePath() {
@@ -145,5 +157,15 @@ public class PreferenceSupplierDataExplorer extends AbstractPreferenceSupplier i
 	public static void setUserLocationsTemplateFolder(String filterPath) {
 
 		INSTANCE().set(P_USER_LOCATIONS_TEMPLATE_FOLDER, filterPath);
+	}
+
+	public static boolean filterFiles() {
+
+		return INSTANCE().getBoolean(P_FILTER_FILES);
+	}
+
+	public static boolean showIcons() {
+
+		return INSTANCE().getBoolean(P_SHOW_ICONS);
 	}
 }
