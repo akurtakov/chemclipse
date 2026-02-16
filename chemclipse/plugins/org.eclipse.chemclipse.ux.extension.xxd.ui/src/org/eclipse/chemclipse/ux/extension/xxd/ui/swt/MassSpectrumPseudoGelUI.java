@@ -57,6 +57,7 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 
 		if(scanSelections != null) {
 			intensityGraphFigure = createIntensityGraphFigure(false);
+			lightweightSystem.setContents(intensityGraphFigure);
 			clear();
 			setPseudoGel(scanSelections);
 		} else {
@@ -116,7 +117,6 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 		ColorMap reversedGrayScale = new ColorMap();
 		reversedGrayScale.setColorMap(getReversedGrayScaleMap());
 		intensityGraphFigure.setColorMap(reversedGrayScale);
-		lightweightSystem.setContents(intensityGraphFigure);
 		intensityGraphFigure.setDataArray(data);
 		intensityGraphFigure.repaint();
 	}
