@@ -109,8 +109,8 @@ public class PeakBuilderMSD {
 					break;
 				case CB:
 					IBaselineModel baselineModel = chromatogram.getBaselineModel();
-					startBackgroundAbundance = baselineModel.getBackgroundAbundance(totalIonSignalStart.getRetentionTime());
-					stopBackgroundAbundance = baselineModel.getBackgroundAbundance(totalIonSignalStop.getRetentionTime());
+					startBackgroundAbundance = baselineModel.getBackground(totalIonSignalStart.getRetentionTime());
+					stopBackgroundAbundance = baselineModel.getBackground(totalIonSignalStop.getRetentionTime());
 					backgroundAbundanceRange = new BackgroundAbundanceRange(startBackgroundAbundance, stopBackgroundAbundance);
 					break;
 				default:

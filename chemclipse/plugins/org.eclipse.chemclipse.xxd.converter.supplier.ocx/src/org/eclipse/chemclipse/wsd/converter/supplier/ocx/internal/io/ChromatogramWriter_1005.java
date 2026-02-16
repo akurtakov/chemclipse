@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Michael Chang - initial API and implementation
+ * Philip Wenig - refactor baseline
  *******************************************************************************/
 package org.eclipse.chemclipse.wsd.converter.supplier.ocx.internal.io;
 
@@ -221,7 +222,7 @@ public class ChromatogramWriter_1005 extends AbstractChromatogramWriter implemen
 		// Scans
 		for(int scan = 1; scan <= scans; scan++) {
 			int retentionTime = chromatogram.getScan(scan).getRetentionTime();
-			float backgroundAbundance = baselineModel.getBackgroundAbundance(retentionTime);
+			float backgroundAbundance = baselineModel.getBackground(retentionTime);
 			dataOutputStream.writeInt(retentionTime); // Retention Time
 			dataOutputStream.writeFloat(backgroundAbundance); // Background Abundance
 		}

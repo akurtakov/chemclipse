@@ -70,7 +70,7 @@ public class BaselineModel_6_Test {
 	public void testMakeDeepCopy_2() {
 
 		baselineModelCopy.removeBaseline();
-		assertEquals(0.0f, baselineModelCopy.getBackgroundAbundance(20000), 0);
-		assertFalse(baselineModelCopy.getBackgroundAbundance(20000) == baselineModel.getBackgroundAbundance(20000));
+		assertEquals(0.0f, baselineModelCopy.getBackground(20000), 0);
+		assertFalse(baselineModelCopy.getBackground(20000) == baselineModel.getBackground(20000));
 	}
 }

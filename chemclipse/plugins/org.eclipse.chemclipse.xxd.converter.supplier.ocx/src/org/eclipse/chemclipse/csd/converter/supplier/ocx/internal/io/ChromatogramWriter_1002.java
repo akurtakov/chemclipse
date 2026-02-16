@@ -144,7 +144,7 @@ public class ChromatogramWriter_1002 extends AbstractChromatogramWriter implemen
 		IBaselineModel baselineModel = chromatogram.getBaselineModel();
 		for(int scan = 1; scan <= scans; scan++) {
 			int retentionTime = chromatogram.getScan(scan).getRetentionTime();
-			float backgroundAbundance = baselineModel.getBackgroundAbundance(retentionTime);
+			float backgroundAbundance = baselineModel.getBackground(retentionTime);
 			dataOutputStream.writeInt(retentionTime); // Retention Time
 			dataOutputStream.writeFloat(backgroundAbundance); // Background Abundance
 		}

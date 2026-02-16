@@ -51,35 +51,35 @@ public class BaselineSupport_3_Test {
 	@Test
 	public void testSetBaselineModel_1() {
 
-		assertEquals(0.0f, baselineModel.getBackgroundAbundance(400), 0);
+		assertEquals(0.0f, baselineModel.getBackground(400), 0);
 		assertEquals(0.0f, baselineSupport.getBackgroundAbundance(400), 0);
 	}
 
 	@Test
 	public void testSetBaselineModel_2() {
 
-		assertEquals(4000.0f, baselineModel.getBackgroundAbundance(500), 0);
+		assertEquals(4000.0f, baselineModel.getBackground(500), 0);
 		assertEquals(4000.0f, baselineSupport.getBackgroundAbundance(500), 0);
 	}
 
 	@Test
 	public void testSetBaselineModel_3() {
 
-		assertEquals(4000.0f, baselineModel.getBackgroundAbundance(18500), 0);
+		assertEquals(4000.0f, baselineModel.getBackground(18500), 0);
 		assertEquals(4000.0f, baselineSupport.getBackgroundAbundance(18500), 0);
 	}
 
 	@Test
 	public void testSetBaselineModel_4() {
 
-		assertEquals(4000.0f, baselineModel.getBackgroundAbundance(99500), 0);
+		assertEquals(4000.0f, baselineModel.getBackground(99500), 0);
 		assertEquals(4000.0f, baselineSupport.getBackgroundAbundance(99500), 0);
 	}
 
 	@Test
 	public void testSetBaselineModel_5() {
 
-		assertEquals(0.0f, baselineModel.getBackgroundAbundance(100000), 0);
+		assertEquals(0.0f, baselineModel.getBackground(100000), 0);
 		assertEquals(0.0f, baselineSupport.getBackgroundAbundance(100000), 0);
 	}
 }

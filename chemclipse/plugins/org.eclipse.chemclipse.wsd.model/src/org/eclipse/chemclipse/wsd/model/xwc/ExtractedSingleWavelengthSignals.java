@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Jan Holy - initial API and implementation
+ * Philip Wenig - refactor baseline
  *******************************************************************************/
 package org.eclipse.chemclipse.wsd.model.xwc;
 
@@ -97,6 +98,12 @@ public class ExtractedSingleWavelengthSignals implements IExtractedSingleWavelen
 		int correction = startScan - 1;
 		scan -= correction;
 		return signals.get(--scan);
+	}
+
+	@Override
+	public boolean isEmpty() {
+
+		return signals.isEmpty();
 	}
 
 	@Override

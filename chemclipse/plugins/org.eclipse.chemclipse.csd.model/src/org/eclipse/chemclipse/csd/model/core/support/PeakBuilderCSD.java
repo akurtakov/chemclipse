@@ -104,8 +104,8 @@ public class PeakBuilderCSD {
 				break;
 			case CB:
 				IBaselineModel baselineModel = chromatogram.getBaselineModel();
-				startBackgroundAbundance = baselineModel.getBackgroundAbundance(totalScanSignalStart.getRetentionTime());
-				stopBackgroundAbundance = baselineModel.getBackgroundAbundance(totalScanSignalStop.getRetentionTime());
+				startBackgroundAbundance = baselineModel.getBackground(totalScanSignalStart.getRetentionTime());
+				stopBackgroundAbundance = baselineModel.getBackground(totalScanSignalStop.getRetentionTime());
 				backgroundAbundanceRange = new BackgroundAbundanceRange(startBackgroundAbundance, stopBackgroundAbundance);
 				break;
 			default:
