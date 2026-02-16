@@ -72,20 +72,8 @@ public interface IBaselineModel {
 	/**
 	 * Get the background abundance at a given retention time.<br/>
 	 * The retention time is given in milliseconds.<br/>
-	 * If the given retention time is out of chromatogram borders, 0 will be
-	 * returned.
-	 * 
-	 * @param retentionTime
-	 * @return float
-	 */
-	float getBackgroundAbundance(int retentionTime);
-
-	/**
-	 * Get the background abundance at a given retention time.<br/>
-	 * The retention time is given in milliseconds.<br/>
-	 * If the given retention time is out of defined baseline default value will be return value will be return
-	 * (Can be NaN)
-	 * returned.
+	 * If the given retention time is outside of a defined baseline value
+	 * the given default value will be returned. It could be NaN.
 	 * 
 	 * @param retentionTime
 	 * @return float

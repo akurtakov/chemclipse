@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -46,7 +46,7 @@ public class BackgroundIntegrator extends AbstractIntegrator {
 				if(startSignal != null && stopSignal != null) {
 					int start = startSignal.getRetentionTime();
 					int stop = stopSignal.getRetentionTime();
-					double segmentArea = calculateArea(start, stop, baselineModel.getBackgroundAbundance(start), baselineModel.getBackgroundAbundance(stop));
+					double segmentArea = calculateArea(start, stop, baselineModel.getBackground(start), baselineModel.getBackground(stop));
 					backgroundArea += segmentArea;
 				}
 			}

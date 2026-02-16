@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -49,30 +49,30 @@ public class BaselineModel_1_Test {
 	@Test
 	public void testGetBackgroundAbundance_1() {
 
-		assertEquals(0.0f, baselineModel.getBackgroundAbundance(-1), 0);
+		assertEquals(0.0f, baselineModel.getBackground(-1), 0);
 	}
 
 	@Test
 	public void testGetBackgroundAbundance_2() {
 
-		assertEquals(0.0f, baselineModel.getBackgroundAbundance(0), 0);
+		assertEquals(0.0f, baselineModel.getBackground(0), 0);
 	}
 
 	@Test
 	public void testGetBackgroundAbundance_3() {
 
-		assertEquals(0.0f, baselineModel.getBackgroundAbundance(5500), 0);
+		assertEquals(0.0f, baselineModel.getBackground(5500), 0);
 	}
 
 	@Test
 	public void testGetBackgroundAbundance_4() {
 
-		assertEquals(0.0f, baselineModel.getBackgroundAbundance(500000), 0);
+		assertEquals(0.0f, baselineModel.getBackground(500000), 0);
 	}
 
 	@Test
 	public void testGetBackgroundAbundance_5() {
 
-		assertEquals(0.0f, baselineModel.getBackgroundAbundance(500001), 0);
+		assertEquals(0.0f, baselineModel.getBackground(500001), 0);
 	}
 }

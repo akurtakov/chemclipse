@@ -63,7 +63,7 @@ public class BaselineSupport implements IBaselineSupport {
 	public void setBaselineBack(int retentionTime) {
 
 		if(modelIsNotNull()) {
-			float abundance = baselineModelModified.getBackgroundAbundance(retentionTime);
+			float abundance = baselineModelModified.getBackground(retentionTime);
 			baselineModelModified.addBaseline(IBaselineModel.MIN_RETENTION_TIME, retentionTime, abundance, abundance, true);
 		}
 	}
@@ -72,7 +72,7 @@ public class BaselineSupport implements IBaselineSupport {
 	public void setBaselineHoldOn(int startRetentionTime, int stopRetentionTime) {
 
 		if(modelIsNotNull()) {
-			float abundance = baselineModelModified.getBackgroundAbundance(startRetentionTime);
+			float abundance = baselineModelModified.getBackground(startRetentionTime);
 			baselineModelModified.addBaseline(startRetentionTime, stopRetentionTime, abundance, abundance, true);
 		}
 	}
@@ -81,7 +81,7 @@ public class BaselineSupport implements IBaselineSupport {
 	public void setBaselineNow(int retentionTime) {
 
 		if(modelIsNotNull()) {
-			float abundance = baselineModelModified.getBackgroundAbundance(retentionTime);
+			float abundance = baselineModelModified.getBackground(retentionTime);
 			baselineModelModified.addBaseline(retentionTime, IBaselineModel.MAX_RETENTION_TIME, abundance, abundance, true);
 		}
 	}
@@ -91,7 +91,7 @@ public class BaselineSupport implements IBaselineSupport {
 
 		float result = 0.0f;
 		if(modelIsNotNull()) {
-			result = baselineModelModified.getBackgroundAbundance(retentionTime);
+			result = baselineModelModified.getBackground(retentionTime);
 		}
 		return result;
 	}

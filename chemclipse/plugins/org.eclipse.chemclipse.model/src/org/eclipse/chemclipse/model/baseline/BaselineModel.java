@@ -36,31 +36,28 @@ import org.eclipse.chemclipse.support.traces.TraceEmpty;
  */
 public class BaselineModel implements IBaselineModel {
 
-	private IChromatogram chromatogram;
-	private ITrace traceTIC = new TraceEmpty();
 	/*
 	 * The start retention time is the key.
 	 */
 	private NavigableMap<Integer, Map<ITrace, IBaselineSegment>> baselineSegments = new TreeMap<>();
-	private float defaultBackgroundAbundance;
-	private boolean interpolate;
+	/*
+	 * Reference values.
+	 */
+	private IChromatogram chromatogram;
+	private float defaultBackgroundAbundance = 0.0f;
+	private boolean interpolate = false;
+	private ITrace traceTIC = new TraceEmpty();
 
 	public BaselineModel(IChromatogram chromatogram) {
 
 		this.chromatogram = chromatogram;
-		this.defaultBackgroundAbundance = 0f;
-		this.interpolate = false;
 	}
 
 	public BaselineModel(IChromatogram chromatogram, float defaultBackgroundAbundance) {
 
 		this.chromatogram = chromatogram;
 		this.defaultBackgroundAbundance = defaultBackgroundAbundance;
-		if(Double.isNaN(defaultBackgroundAbundance)) {
-			this.interpolate = true;
-		} else {
-			this.interpolate = false;
-		}
+		this.interpolate = Double.isNaN(defaultBackgroundAbundance) ? true : false;
 	}
 
 	/**
@@ -80,7 +77,7 @@ public class BaselineModel implements IBaselineModel {
 	public boolean isBaselineSet() {
 
 		if(baselineSegments != null) {
-			return baselineSegments.size() > 0;
+			return !baselineSegments.isEmpty();
 		}
 		return false;
 	}
@@ -111,34 +108,33 @@ public class BaselineModel implements IBaselineModel {
 
 	public void addBaseline(ITotalScanSignals totalIonSignals, ITrace trace) {
 
-		if(totalIonSignals.size() == 0) {
-			return;
-		}
-		/*
-		 * remove old baseline
-		 */
-		ITotalScanSignal firstTotalSignal = totalIonSignals.getFirstTotalScanSignal();
-		ITotalScanSignal lastTotalSignal = totalIonSignals.getLastTotalScanSignal();
-		removeBaselineSegments(firstTotalSignal.getRetentionTime(), lastTotalSignal.getRetentionTime(), firstTotalSignal.getTotalSignal(), lastTotalSignal.getTotalSignal(), trace);
-		/*
-		 * Why scan < numberOfScans instead of scan <= numberOfScans? Because of
-		 * .getNextTotalIonSignal();
-		 */
-		for(int scan = totalIonSignals.getStartScan(); scan < totalIonSignals.getStopScan(); scan++) {
-			ITotalScanSignal actualTotalIonSignal = totalIonSignals.getTotalScanSignal(scan);
-			ITotalScanSignal nextTotalIonSignal = totalIonSignals.getNextTotalScanSignal(scan);
+		if(!totalIonSignals.isEmpty()) {
 			/*
-			 * Retention times and background abundances.
+			 * remove old baseline
 			 */
-			int startRetentionTime = actualTotalIonSignal.getRetentionTime();
-			float startBackgroundAbundance = actualTotalIonSignal.getTotalSignal();
-			int stopRetentionTime = nextTotalIonSignal.getRetentionTime();
-			float stopBackgroundAbundance = nextTotalIonSignal.getTotalSignal();
+			ITotalScanSignal firstTotalSignal = totalIonSignals.getFirstTotalScanSignal();
+			ITotalScanSignal lastTotalSignal = totalIonSignals.getLastTotalScanSignal();
+			removeBaselineSegments(firstTotalSignal.getRetentionTime(), lastTotalSignal.getRetentionTime(), firstTotalSignal.getTotalSignal(), lastTotalSignal.getTotalSignal(), trace);
 			/*
-			 * Set the baseline.
-			 * It is validate == false, cause we know that the segments are calculated without overlap.
+			 * Why scan < numberOfScans instead of scan <= numberOfScans? Because of
+			 * .getNextTotalIonSignal();
 			 */
-			addBaseline(startRetentionTime, stopRetentionTime, startBackgroundAbundance, stopBackgroundAbundance, false);
+			for(int scan = totalIonSignals.getStartScan(); scan < totalIonSignals.getStopScan(); scan++) {
+				ITotalScanSignal actualTotalIonSignal = totalIonSignals.getTotalScanSignal(scan);
+				ITotalScanSignal nextTotalIonSignal = totalIonSignals.getNextTotalScanSignal(scan);
+				/*
+				 * Retention times and background abundances.
+				 */
+				int startRetentionTime = actualTotalIonSignal.getRetentionTime();
+				float startBackgroundAbundance = actualTotalIonSignal.getTotalSignal();
+				int stopRetentionTime = nextTotalIonSignal.getRetentionTime();
+				float stopBackgroundAbundance = nextTotalIonSignal.getTotalSignal();
+				/*
+				 * Set the baseline.
+				 * It is validate == false, cause we know that the segments are calculated without overlap.
+				 */
+				addBaseline(startRetentionTime, stopRetentionTime, startBackgroundAbundance, stopBackgroundAbundance, false);
+			}
 		}
 	}
 
@@ -149,20 +145,13 @@ public class BaselineModel implements IBaselineModel {
 	}
 
 	@Override
-	@Deprecated
-	public float getBackgroundAbundance(int retentionTime) {
-
-		float defaultBackgroundAbundance = 0f;
-		if(retentionTime < chromatogram.getStartRetentionTime() || retentionTime > chromatogram.getStopRetentionTime()) {
-			return defaultBackgroundAbundance;
-		}
-		return getBackground(retentionTime);
-	}
-
-	@Override
 	public float getBackground(int retentionTime) {
 
-		return getBackground(retentionTime, Collections.emptySet());
+		if(retentionTime < chromatogram.getStartRetentionTime() || retentionTime > chromatogram.getStopRetentionTime()) {
+			return defaultBackgroundAbundance;
+		} else {
+			return getBackground(retentionTime, Collections.emptySet());
+		}
 	}
 
 	@Override
@@ -242,14 +231,14 @@ public class BaselineModel implements IBaselineModel {
 	private void removeMiddleSegments(int startRetentionTime, int stopRetentionTime, ITrace trace) {
 
 		SortedMap<Integer, Map<ITrace, IBaselineSegment>> sortedMap = baselineSegments.subMap(startRetentionTime, stopRetentionTime);
-		Set<Integer> checkKeys = new HashSet<>();
+		Set<Integer> checkedKeys = new HashSet<>();
 
 		for(Entry<Integer, Map<ITrace, IBaselineSegment>> entry : sortedMap.entrySet()) {
 			IBaselineSegment baselineSegment = entry.getValue().get(trace);
 			if(baselineSegment != null) {
 				int stopRetentionTimeRemoveSegment = baselineSegment.getStopRetentionTime();
 				if(stopRetentionTimeRemoveSegment <= stopRetentionTime) {
-					checkKeys.add(entry.getKey());
+					checkedKeys.add(entry.getKey());
 				}
 			}
 		}
@@ -257,7 +246,7 @@ public class BaselineModel implements IBaselineModel {
 		 * Remove keys.
 		 */
 		Set<Integer> keysToRemove = new HashSet<>();
-		for(int key : checkKeys) {
+		for(int key : checkedKeys) {
 			Map<ITrace, IBaselineSegment> baselineSegmentMap = baselineSegments.get(key);
 			if(baselineSegmentMap != null) {
 				baselineSegmentMap.remove(trace);
@@ -292,7 +281,7 @@ public class BaselineModel implements IBaselineModel {
 					float partSegmentStartAbundance = cuttingSegment.getBackgroundAbundance(partSegmentStartRetentionTime);
 					float partSegmentStopAbundance = cuttingSegment.getStopBackgroundAbundance();
 					/*
-					 * 
+					 * Cut
 					 */
 					if(partSegmentStartRetentionTime != partSegmentStopRetentionTime) {
 						addBaselineUnchecked(partSegmentStartRetentionTime, partSegmentStopRetentionTime, partSegmentStartAbundance, partSegmentStopAbundance, trace);
@@ -423,7 +412,7 @@ public class BaselineModel implements IBaselineModel {
 
 	private float getAbundance(Map<ITrace, IBaselineSegment> floorSegmentMap, int retentionTime, Set<ITrace> traces) {
 
-		float abundance = 0;
+		float abundance = 0.0f;
 		for(ITrace trace : traces) {
 			abundance += getAbundance(floorSegmentMap.get(trace), retentionTime, trace, 0);
 		}

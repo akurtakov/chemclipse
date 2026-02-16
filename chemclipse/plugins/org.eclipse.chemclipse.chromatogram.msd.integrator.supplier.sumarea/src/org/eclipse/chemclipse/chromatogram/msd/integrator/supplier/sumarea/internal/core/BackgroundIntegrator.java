@@ -65,8 +65,8 @@ public class BackgroundIntegrator extends AbstractSumareaIntegrator implements I
 					if(startSignal != null && stopSignal != null) {
 						start = startSignal.getRetentionTime();
 						stop = stopSignal.getRetentionTime();
-						float startAbundance = baselineModel.getBackgroundAbundance(start);
-						float stopAbundance = baselineModel.getBackgroundAbundance(stop);
+						float startAbundance = baselineModel.getBackground(start);
+						float stopAbundance = baselineModel.getBackground(stop);
 						double segmentArea = calculateArea(start, stop, startAbundance, stopAbundance);
 						backgroundArea += segmentArea * ionPercentage;
 					}

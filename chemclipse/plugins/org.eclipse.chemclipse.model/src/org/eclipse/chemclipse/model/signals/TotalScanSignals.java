@@ -153,6 +153,12 @@ public class TotalScanSignals implements ITotalScanSignals {
 	}
 
 	@Override
+	public boolean isEmpty() {
+
+		return signals.isEmpty();
+	}
+
+	@Override
 	public int size() {
 
 		return signals.size();
