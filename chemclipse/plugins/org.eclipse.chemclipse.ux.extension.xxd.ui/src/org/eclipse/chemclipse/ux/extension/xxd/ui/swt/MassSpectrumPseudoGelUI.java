@@ -57,6 +57,7 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 
 		if(scanSelections != null) {
 			intensityGraphFigure = createIntensityGraphFigure(false);
+			clear();
 			setPseudoGel(scanSelections);
 		} else {
 			clear();
@@ -65,7 +66,6 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 
 	private void setPseudoGel(List<IScanMSD> scanList) {
 
-		clear();
 
 		int dataWidth = 0;
 		int dataHeight = scanList.size();
