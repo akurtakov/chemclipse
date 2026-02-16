@@ -66,6 +66,9 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 
 	private void setPseudoGel(List<IScanMSD> scanList) {
 
+		if(scanList.isEmpty()) {
+			return;
+		}
 
 		int dataWidth = 0;
 		int dataHeight = scanList.size();
