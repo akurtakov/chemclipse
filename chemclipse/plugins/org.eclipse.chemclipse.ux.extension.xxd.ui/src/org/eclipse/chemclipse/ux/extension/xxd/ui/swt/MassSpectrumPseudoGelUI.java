@@ -111,9 +111,6 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 		intensityGraphFigure.setDataWidth(dataWidth);
 		intensityGraphFigure.setDataHeight(dataHeight);
 
-		intensityGraphFigure.getXAxis().setTitle("m/z");
-		intensityGraphFigure.getYAxis().setTitle("");
-
 		ColorMap reversedGrayScale = new ColorMap();
 		reversedGrayScale.setColorMap(getReversedGrayScaleMap());
 		intensityGraphFigure.setColorMap(reversedGrayScale);
@@ -181,8 +178,8 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 
 		IntensityGraphFigure intensityGraphFigure = new IntensityGraphFigure(zoom);
 		intensityGraphFigure.setForegroundColor(getDisplay().getSystemColor(SWT.COLOR_WIDGET_FOREGROUND));
-		intensityGraphFigure.getXAxis().setTitle("Retention Time [min]");
-		intensityGraphFigure.getYAxis().setTitle("Trace");
+		intensityGraphFigure.getXAxis().setTitle("m/z");
+		intensityGraphFigure.getYAxis().setTitle("");
 
 		return intensityGraphFigure;
 	}
