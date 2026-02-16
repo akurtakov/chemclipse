@@ -27,6 +27,7 @@ import java.util.concurrent.Executors;
 
 import org.eclipse.chemclipse.container.definition.IFileContentProvider;
 import org.eclipse.chemclipse.container.support.FileContainerSupport;
+import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierDataExplorer;
 import org.eclipse.jface.viewers.ILazyTreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
@@ -170,7 +171,12 @@ public class LazyFileExplorerContentProvider implements ILazyTreeContentProvider
 			return cached;
 		}
 		if(file.isDirectory()) {
-			File[] childs = file.listFiles(LazyFileExplorerContentProvider.this);
+			File[] childs;
+			if(PreferenceSupplierDataExplorer.filterFiles()) {
+				childs = file.listFiles(LazyFileExplorerContentProvider.this);
+			} else {
+				childs = file.listFiles();
+			}
 			// null check is required here, e.g. if the directory can't be read/accessed list returns null
 			if(childs != null) {
 				Arrays.sort(childs);

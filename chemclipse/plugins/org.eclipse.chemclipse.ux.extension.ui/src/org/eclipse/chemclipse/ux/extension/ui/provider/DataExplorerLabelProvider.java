@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,6 +25,7 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.ux.extension.ui.editors.EditorDescriptor;
+import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierDataExplorer;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IdentifierCacheSupport;
 import org.eclipse.core.runtime.Adapters;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -99,28 +100,30 @@ public class DataExplorerLabelProvider extends ColumnLabelProvider implements IL
 			if(file.getName().equals("") || file.getParent() == null) {
 				descriptor = ApplicationImageFactory.getInstance().getImageDescriptor(IApplicationImage.IMAGE_DRIVE, IApplicationImageProvider.SIZE_16x16);
 			} else {
-				Map<ISupplierFileIdentifier, Collection<ISupplier>> map = supplierFunction.apply(file);
-				for(Collection<ISupplier> suppliers : map.values()) {
-					for(ISupplier supplier : suppliers) {
-						EditorDescriptor editorDescriptor = Adapters.adapt(supplier, EditorDescriptor.class);
-						if(editorDescriptor != null) {
-							ImageDescriptor imageDescriptor = editorDescriptor.getImageDescriptor();
-							if(imageDescriptor != null) {
-								descriptor = imageDescriptor;
-								break;
+				if(PreferenceSupplierDataExplorer.showIcons()) {
+					Map<ISupplierFileIdentifier, Collection<ISupplier>> map = supplierFunction.apply(file);
+					for(Collection<ISupplier> suppliers : map.values()) {
+						for(ISupplier supplier : suppliers) {
+							EditorDescriptor editorDescriptor = Adapters.adapt(supplier, EditorDescriptor.class);
+							if(editorDescriptor != null) {
+								ImageDescriptor imageDescriptor = editorDescriptor.getImageDescriptor();
+								if(imageDescriptor != null) {
+									descriptor = imageDescriptor;
+									break;
+								}
 							}
 						}
 					}
-				}
-				/*
-				 * Try to get the data type image.
-				 */
-				if(descriptor == null) {
-					Collection<ISupplierFileIdentifier> identifier = map.keySet();
-					for(ISupplierFileIdentifier fileIdentifier : identifier) {
-						descriptor = getImageDescriptor(fileIdentifier, file);
-						if(descriptor != null) {
-							break;
+					/*
+					 * Try to get the data type image.
+					 */
+					if(descriptor == null) {
+						Collection<ISupplierFileIdentifier> identifier = map.keySet();
+						for(ISupplierFileIdentifier fileIdentifier : identifier) {
+							descriptor = getImageDescriptor(fileIdentifier, file);
+							if(descriptor != null) {
+								break;
+							}
 						}
 					}
 				}
