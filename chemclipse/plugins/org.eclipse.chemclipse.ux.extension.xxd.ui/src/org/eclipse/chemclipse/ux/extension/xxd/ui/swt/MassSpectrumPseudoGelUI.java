@@ -70,14 +70,10 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 			return;
 		}
 
-		int dataWidth = 0;
 		int dataHeight = scanList.size();
 		double lowestIon = Double.MAX_VALUE;
 		double highestIon = 0;
 		for(IScanMSD scan : scanList) {
-			if(dataWidth < scan.getNumberOfIons()) {
-				dataWidth = scan.getNumberOfIons();
-			}
 			if(lowestIon > scan.getLowestIon().getIon()) {
 				lowestIon = scan.getLowestIon().getIon();
 			}
@@ -85,20 +81,23 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 				highestIon = scan.getHighestIon().getIon();
 			}
 		}
+
+		int dataWidth = (int)Math.ceil(highestIon - lowestIon) + 1;
 		float[] data = new float[dataWidth * dataHeight];
 		double highestAbundance = 0;
+
 		int i = 0;
-		int j = 0;
 		for(IScanMSD scan : scanList) {
-			i++;
 			if(highestAbundance < scan.getBasePeak()) {
 				highestAbundance = scan.getBasePeak();
 			}
 			for(IIon ion : scan.getIons()) {
-				data[j] = ion.getAbundance();
-				j++;
+				int x = (int)Math.round(ion.getIon() - lowestIon);
+				if(x >= 0 && x < dataWidth) {
+					data[i * dataWidth + x] = ion.getAbundance();
+				}
 			}
-			j = i * dataWidth; // align
+			i++;
 		}
 
 		intensityGraphFigure.getXAxis().setRange(new Range(lowestIon, highestIon));
