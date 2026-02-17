@@ -601,7 +601,7 @@ public class ExtendedTargetsUI extends Composite implements IExtendedPartUI {
 					} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_U) {
 						addTargetUnknown(e.display); // CTRL + u
 					} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_Q) {
-						scanIdentifierControl.get().runIdentification(e.display); // CTRL + q
+						scanIdentifierControl.get().runIdentification(); // CTRL + q
 					}
 				} else {
 					propagateTarget(display);
