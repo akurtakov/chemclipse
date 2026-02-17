@@ -8,6 +8,7 @@
             baselineDetector="org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.impl.BaselineDetector"
             description="Find the lowest intensity and set it as the baseline."
             detectorName="Lowest Intensity"
+            detectorSettings="org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.impl.DetectorSettings"
             id="org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.impl.lowest">
       </BaselineDetectorSupplier>
    </extension>
