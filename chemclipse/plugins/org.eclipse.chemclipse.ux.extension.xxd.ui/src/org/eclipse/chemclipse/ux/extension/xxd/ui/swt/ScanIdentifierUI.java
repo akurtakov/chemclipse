@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -130,7 +130,7 @@ public class ScanIdentifierUI extends Composite {
 		updateMenu();
 	}
 
-	public void runIdentification(Display display) {
+	public void runIdentification() {
 
 		Menu menu = buttonExecute.get().getMenu();
 		if(menu != null) {
@@ -149,7 +149,7 @@ public class ScanIdentifierUI extends Composite {
 				}
 			}
 
-			runIdentification(display, scansMSD, scansWSD, true);
+			runIdentification(getDisplay(), scansMSD, scansWSD, true);
 		}
 	}
 
@@ -197,7 +197,7 @@ public class ScanIdentifierUI extends Composite {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				runIdentification(e.display);
+				runIdentification();
 			}
 		});
 
@@ -316,7 +316,7 @@ public class ScanIdentifierUI extends Composite {
 					button.setToolTipText(identifierSupplier.getIdentifierName());
 					preferenceStore.setValue(PreferenceSupplier.P_SCAN_IDENTIFER_MSD, identifierSupplier.getId());
 					massSpectrumIdentifierSupplier = identifierSupplier;
-					runIdentification(e.display);
+					runIdentification();
 				}
 			});
 		}
@@ -343,7 +343,7 @@ public class ScanIdentifierUI extends Composite {
 					button.setToolTipText(identifierSupplier.getIdentifierName());
 					preferenceStore.setValue(PreferenceSupplier.P_SCAN_IDENTIFER_WSD, identifierSupplier.getId());
 					waveSpectrumIdentifierSupplier = identifierSupplier;
-					runIdentification(e.display);
+					runIdentification();
 				}
 			});
 		}

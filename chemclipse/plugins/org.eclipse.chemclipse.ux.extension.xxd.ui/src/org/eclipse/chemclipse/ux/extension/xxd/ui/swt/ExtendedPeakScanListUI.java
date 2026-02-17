@@ -475,7 +475,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 				} else if(matchesKeyPress("Unknown", e)) {
 					addTargetsUnknown(e.display);
 				} else if(matchesKeyPress("Query", e)) {
-					scanIdentifierControl.get().runIdentification(e.display);
+					scanIdentifierControl.get().runIdentification();
 					tableViewer.get().refresh();
 					UpdateNotifierUI.update(display, chromatogramSelection);
 				} else if(matchesKeyPress("ActiveAnalysis", e)) {
