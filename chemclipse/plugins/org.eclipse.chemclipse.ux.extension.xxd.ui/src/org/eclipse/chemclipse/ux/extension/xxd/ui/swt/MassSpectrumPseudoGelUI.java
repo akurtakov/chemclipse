@@ -13,7 +13,6 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.swt;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -40,7 +39,6 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 	private IntensityGraphFigure intensityGraphFigure;
 
 	private EditorUpdateSupport editorUpdateSupport = new EditorUpdateSupport();
-	private List<IScanMSD> scanSelections = new ArrayList<>();
 
 	public MassSpectrumPseudoGelUI(Composite parent, int style) {
 
@@ -51,32 +49,31 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 	@Override
 	public void update() {
 
-		scanSelections = editorUpdateSupport.getMassSpectrumSelections();
-		updatePseudoGel();
+		List<IScanMSD> scanSelections = editorUpdateSupport.getMassSpectrumSelections();
+		updatePseudoGel(scanSelections);
 	}
 
-	private void updatePseudoGel() {
+	private void updatePseudoGel(List<IScanMSD> scanSelections) {
 
 		if(scanSelections != null) {
 			intensityGraphFigure = createIntensityGraphFigure(false);
+			lightweightSystem.setContents(intensityGraphFigure);
 			setPseudoGel(scanSelections);
 		} else {
-			clear();
+			intensityGraphFigure.erase();
 		}
 	}
 
 	private void setPseudoGel(List<IScanMSD> scanList) {
 
-		clear();
+		if(scanList.isEmpty()) {
+			return;
+		}
 
-		int dataWidth = 0;
 		int dataHeight = scanList.size();
 		double lowestIon = Double.MAX_VALUE;
 		double highestIon = 0;
 		for(IScanMSD scan : scanList) {
-			if(dataWidth < scan.getNumberOfIons()) {
-				dataWidth = scan.getNumberOfIons();
-			}
 			if(lowestIon > scan.getLowestIon().getIon()) {
 				lowestIon = scan.getLowestIon().getIon();
 			}
@@ -84,20 +81,23 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 				highestIon = scan.getHighestIon().getIon();
 			}
 		}
+
+		int dataWidth = (int)Math.ceil(highestIon - lowestIon) + 1;
 		float[] data = new float[dataWidth * dataHeight];
 		double highestAbundance = 0;
+
 		int i = 0;
-		int j = 0;
 		for(IScanMSD scan : scanList) {
-			i++;
 			if(highestAbundance < scan.getBasePeak()) {
 				highestAbundance = scan.getBasePeak();
 			}
 			for(IIon ion : scan.getIons()) {
-				data[j] = ion.getAbundance();
-				j++;
+				int x = (int)Math.round(ion.getIon() - lowestIon);
+				if(x >= 0 && x < dataWidth) {
+					data[i * dataWidth + x] = ion.getAbundance();
+				}
 			}
-			j = i * dataWidth; // align
+			i++;
 		}
 
 		intensityGraphFigure.getXAxis().setRange(new Range(lowestIon, highestIon));
@@ -109,13 +109,9 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 		intensityGraphFigure.setDataWidth(dataWidth);
 		intensityGraphFigure.setDataHeight(dataHeight);
 
-		intensityGraphFigure.getXAxis().setTitle("m/z");
-		intensityGraphFigure.getYAxis().setTitle("");
-
 		ColorMap reversedGrayScale = new ColorMap();
 		reversedGrayScale.setColorMap(getReversedGrayScaleMap());
 		intensityGraphFigure.setColorMap(reversedGrayScale);
-		lightweightSystem.setContents(intensityGraphFigure);
 		intensityGraphFigure.setDataArray(data);
 		intensityGraphFigure.repaint();
 	}
@@ -134,18 +130,6 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 			map.put(values[i], colors[i]);
 		}
 		return map;
-	}
-
-	public void clear() {
-
-		float[] heatmapData = new float[0];
-		intensityGraphFigure.setMin(0);
-		intensityGraphFigure.setMax(0);
-		intensityGraphFigure.setDataWidth(0);
-		intensityGraphFigure.setDataHeight(0);
-		intensityGraphFigure.setDataArray(heatmapData);
-		lightweightSystem.setContents(intensityGraphFigure);
-		intensityGraphFigure.repaint();
 	}
 
 	private void createControl() {
@@ -180,9 +164,15 @@ public class MassSpectrumPseudoGelUI extends Composite implements IExtendedPartU
 
 		IntensityGraphFigure intensityGraphFigure = new IntensityGraphFigure(zoom);
 		intensityGraphFigure.setForegroundColor(getDisplay().getSystemColor(SWT.COLOR_WIDGET_FOREGROUND));
-		intensityGraphFigure.getXAxis().setTitle("Retention Time [min]");
-		intensityGraphFigure.getYAxis().setTitle("Trace");
+		intensityGraphFigure.getXAxis().setTitle("m/z");
+		intensityGraphFigure.getYAxis().setTitle("");
 
 		return intensityGraphFigure;
+	}
+
+	@Override
+	public void dispose() {
+
+		intensityGraphFigure.dispose();
 	}
 }
