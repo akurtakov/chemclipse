@@ -345,7 +345,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 					 * Start Recording
 					 */
 					processMethodMacroRecorder = new ProcessMethod(new HashSet<>(Arrays.asList(DataCategory.CSD, DataCategory.MSD, DataCategory.VSD, DataCategory.WSD)));
-					MessageDialog.openInformation(e.display.getActiveShell(), ExtensionMessages.processMethod, ExtensionMessages.recordMethodMessage);
+					MessageDialog.openInformation(getShell(), ExtensionMessages.processMethod, ExtensionMessages.recordMethodMessage);
 				} else {
 					try {
 						/*
@@ -356,7 +356,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 						processMethodMacroRecorder.setCategory(ExtensionMessages.process);
 						processMethodMacroRecorder.setSupportResume(PreferenceSupplierMethods.isCreateMethodEnableResume());
 
-						if(MethodFileSupport.saveProccessMethod(e.display.getActiveShell(), processMethodMacroRecorder)) {
+						if(MethodFileSupport.saveProccessMethod(getShell(), processMethodMacroRecorder)) {
 							File file = processMethodMacroRecorder.getSourceFile();
 							if(file != null && file.exists()) {
 								MethodConverter.setUserMethodFile(file);
