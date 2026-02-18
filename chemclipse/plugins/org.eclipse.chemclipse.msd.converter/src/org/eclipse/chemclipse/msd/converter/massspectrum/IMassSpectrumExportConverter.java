@@ -25,41 +25,23 @@ public interface IMassSpectrumExportConverter extends IExportConverter {
 
 	/**
 	 * Exports the mass spectrum to the given file.
-	 *
-	 * @param file
-	 * @param massSpectrum
-	 * @param append
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
 	 */
 	IProcessingInfo<File> convert(File file, IScanMSD massSpectrum, boolean append, IProgressMonitor monitor);
 
 	/**
 	 * Exports the mass spectra to the given file.
-	 *
-	 * @param file
-	 * @param massSpectra
-	 * @param append
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
 	 */
 	IProcessingInfo<File> convert(File file, IMassSpectra massSpectra, boolean append, IProgressMonitor monitor);
 
 	/**
 	 * Checks the mass spectrum instance and throws an exception if the mass
 	 * spectrum is null.
-	 *
-	 * @param massSpectrum
-	 * @return {@link IProcessingInfo}
 	 */
 	IProcessingInfo<IScanMSD> validate(IScanMSD massSpectrum);
 
 	/**
 	 * Checks the mass spectra instance and throws an exception if the mass
 	 * spectrum is null.
-	 *
-	 * @param massSpectrum
-	 * @return {@link IProcessingInfo}
 	 */
 	IProcessingInfo<IMassSpectra> validate(IMassSpectra massSpectra);
 }

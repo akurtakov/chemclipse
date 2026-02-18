@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -51,10 +51,6 @@ public abstract class AbstractActivatorUI extends AbstractUIPlugin {
 	 */
 	private IEclipseContext eclipseContext = null;
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
-	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {
 
@@ -77,9 +73,6 @@ public abstract class AbstractActivatorUI extends AbstractUIPlugin {
 	 * Use the method e.g.:
 	 * 
 	 * getImage(ICON_WARN)
-	 * 
-	 * @param key
-	 * @return
 	 */
 	public Image getImage(String key) {
 
@@ -187,8 +180,6 @@ public abstract class AbstractActivatorUI extends AbstractUIPlugin {
 
 	/**
 	 * Initialize the preference store.
-	 * 
-	 * @param preferenceSupplier
 	 */
 	protected void initializePreferenceStore(IPreferenceSupplier preferenceSupplier) {
 
@@ -208,10 +199,12 @@ public abstract class AbstractActivatorUI extends AbstractUIPlugin {
 	 * Initialize the image registry.
 	 * Please supply a HashMap of used images/icons, e.g.:
 	 * 
+	 * <pre><code>
 	 * public static final String ICON_WARN = "ICON_WARN";
 	 * 
-	 * Map<String, String> imageHashMap = new HashMap<String, String>();
+	 * Map&lt;String, String&gt; imageHashMap = new HashMap&lt;&gt;();
 	 * imageHashMap.put(ICON_WARN, "icons/16x16/warn.gif");
+	 * </code></pre>
 	 * 
 	 * The icon path is set relative to the calling plugin.
 	 */
@@ -230,10 +223,6 @@ public abstract class AbstractActivatorUI extends AbstractUIPlugin {
 
 	/**
 	 * Helps to create an image descriptor.
-	 * 
-	 * @param bundle
-	 * @param string
-	 * @return ImageDescriptor
 	 */
 	private ImageDescriptor createImageDescriptor(Bundle bundle, String string) {
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -45,16 +45,12 @@ public interface IProcessEntry extends IProcessEntryContainer {
 
 	/**
 	 * Returns the active profile.
-	 * 
-	 * @return String
 	 */
 	@Override
 	String getActiveProfile();
 
 	/**
 	 * Set the active profile.
-	 * 
-	 * @param activeProfile
 	 */
 	@Override
 	void setActiveProfile(String activeProfile);
@@ -63,15 +59,11 @@ public interface IProcessEntry extends IProcessEntryContainer {
 
 	/**
 	 * Only use skip validation = true if you know exactly what you're doing.
-	 * 
-	 * @param skipValidation
 	 */
 	void setSkipValidation(boolean skipValidation);
 
 	/**
 	 * Deletes the profile.
-	 * 
-	 * @param profile
 	 */
 	@Override
 	void deleteProfile(String profile);
@@ -91,8 +83,6 @@ public interface IProcessEntry extends IProcessEntryContainer {
 	/**
 	 * The settings map contains the default "" and instrument specific settings.
 	 * Returns an unmodifiable map.
-	 * 
-	 * @return {@link Map}
 	 */
 	Map<String, String> getSettingsMap();
 
@@ -105,7 +95,6 @@ public interface IProcessEntry extends IProcessEntryContainer {
 	/**
 	 * Set the settings for this entry
 	 * 
-	 * @param settings
 	 * @throws IllegalArgumentException
 	 *             if the entry is readonly
 	 */
@@ -113,9 +102,6 @@ public interface IProcessEntry extends IProcessEntryContainer {
 
 	/**
 	 * Copy the settings from the given profile.
-	 * 
-	 * @param profile
-	 * @throws IllegalArgumentException
 	 */
 	void copySettings(String profile) throws IllegalArgumentException;
 
@@ -141,9 +127,6 @@ public interface IProcessEntry extends IProcessEntryContainer {
 	 * Compares this entry content to the other entries content, the default implementation compares {@link #getName()}, {@link #getDescription()}, {@link #getSettings()}, {@link #isReadOnly()} {@link #getProcessorId()},
 	 * this method is different to {@link #equals(Object)} that it does compares for user visible properties to be equal in contrast to objects identity and it allows to compare differnt instance type, this also means that it is not required that
 	 * Object1.contentEquals(Object2} == Object2.contentEquals(Object1}
-	 * 
-	 * @param other
-	 * @return
 	 */
 	default boolean contentEquals(IProcessEntry other) {
 

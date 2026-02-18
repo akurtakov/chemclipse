@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,7 +26,6 @@ public interface ListEditModel<T> {
 	/**
 	 * Edit the given item
 	 * 
-	 * @param item
 	 * @return <code>true</code> if item was edited <code>false</code> otherwise
 	 */
 	default boolean edit(T item) {
@@ -36,9 +35,6 @@ public interface ListEditModel<T> {
 
 	/**
 	 * notifies about the delete of the given item from the edit list
-	 * 
-	 * @param item
-	 * @return <code>true</code> if item was deleted, <code>false</code> otherwise
 	 */
 	default void delete(T item) {
 

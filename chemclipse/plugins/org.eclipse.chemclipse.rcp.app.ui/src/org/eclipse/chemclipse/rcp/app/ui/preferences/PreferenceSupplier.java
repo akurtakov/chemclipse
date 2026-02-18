@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -59,8 +59,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 	/**
 	 * Returns whether the perspective dialog should be shown or not.
-	 * 
-	 * @return boolean
 	 */
 	public static boolean getShowPerspectiveDialog() {
 
@@ -69,8 +67,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 	/**
 	 * Sets whether the perspective dialog should be shown or not.
-	 * 
-	 * @param showPerspectiveDialog
 	 */
 	public static void setShowPerspectiveDialog(boolean showPerspectiveDialog) {
 
@@ -79,8 +75,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 	/**
 	 * Returns whether the perspective should be changed automatically.
-	 * 
-	 * @return
 	 */
 	public static boolean getChangePerspectiveAutomatically() {
 
@@ -89,8 +83,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 	/**
 	 * Sets whether the perspective should be changed automatically.
-	 * 
-	 * @return
 	 */
 	public static void setChangePerspectiveAutomatically(boolean changePerspectiveAutomatically) {
 

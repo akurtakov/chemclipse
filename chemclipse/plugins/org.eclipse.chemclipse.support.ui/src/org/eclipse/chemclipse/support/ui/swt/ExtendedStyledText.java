@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,7 +16,7 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.widgets.Composite;
 
 /**
- * This widget doesn't allow copy & paste by default.
+ * This widget doesn't allow copy &amp; paste by default.
  * It can be enabled on demand.
  */
 public class ExtendedStyledText extends StyledText {

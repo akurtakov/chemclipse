@@ -21,7 +21,7 @@ import org.eclipse.chemclipse.support.traces.ITrace;
 import org.eclipse.chemclipse.support.traces.TraceEmpty;
 
 /**
- * This class implements a baseline segment used in {@link IChromatogramMSD} and {@link BaselineModel}.
+ * This class implements a baseline segment used in org.eclipse.chemclipse.msd.model.core.IChromatogramMSD and {@link BaselineModel}.
  */
 public class BaselineSegment implements IBaselineSegment {
 
@@ -33,10 +33,7 @@ public class BaselineSegment implements IBaselineSegment {
 	private ITrace trace = new TraceEmpty();
 
 	/**
-	 * The start retention time must be <= than the stop retention time.
-	 * 
-	 * @param startRetentionTime
-	 * @param stopRetentionTime
+	 * The start retention time must be &lt;= than the stop retention time.
 	 */
 	public BaselineSegment(int startRetentionTime, int stopRetentionTime, ITrace trace) {
 
