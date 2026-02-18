@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,7 +19,6 @@ import java.util.function.Consumer;
 /**
  * Extends {@link Callable} by {@link Consumer consumers} which can be used to
  * propagate progress information.
- * <p>
  *
  * <pre>
  * &#64;Override
@@ -30,16 +29,12 @@ import java.util.function.Consumer;
  * 	return ca.call();
  * }
  * </pre>
- * </p>
  *
  * @see Consumer
  * @see BiConsumer
  *
  *
  * @author Alexander Kerner
- *
- * @param <T>
- *            the type of the result
  */
 public abstract class ProgressMonitoringCallable<T> implements Callable<T> {
 

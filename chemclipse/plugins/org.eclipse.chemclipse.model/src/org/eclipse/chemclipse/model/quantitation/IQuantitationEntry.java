@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,17 +19,13 @@ public interface IQuantitationEntry extends Serializable {
 
 	/**
 	 * Legacy method - Better use:
-	 * List<Double> getSignals();
-	 * 
-	 * @return List<Double>
+	 * {@link #getSignals()}.
 	 */
 	double getSignal();
 
 	/**
 	 * Legacy method - Better use:
-	 * setSignals(List<Double> signals)
-	 * 
-	 * @param signal
+	 * {@link #setSignals(List)}
 	 */
 	void setSignal(double signal);
 

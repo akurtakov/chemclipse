@@ -24,9 +24,9 @@ public class BackgroundAbundanceRange implements IBackgroundAbundanceRange {
 	/**
 	 * Creates a new BackgroundAbundanceRange object. There are some
 	 * limitations:<br/>
-	 * The startBackgroundAbundance may not be < 0 and > MAX_BACKGROUND_ABUNDANCE. In such
+	 * The startBackgroundAbundance may not be &lt; 0 and &gt; MAX_BACKGROUND_ABUNDANCE. In such
 	 * a case it will be set to MIN_BACKGROUND_ABUNDANCE. The stopBackgroundAbundance
-	 * should be <= MAX_BACKGROUND_ABUNDANCE and >= 0 otherwise it will be set to
+	 * should be &lt;= MAX_BACKGROUND_ABUNDANCE and &gt;= 0 otherwise it will be set to
 	 * MAX_BACKGROUND_ABUNDANCE.
 	 * 
 	 * @param startBackgroundAbundance

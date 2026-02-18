@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,15 +18,11 @@ public interface IIdentificationResult {
 
 	/**
 	 * Adds a {@link IIdentificationTarget} to the results.
-	 * 
-	 * @param entry
 	 */
 	void add(IIdentificationTarget entry);
 
 	/**
 	 * Removes a {@link IIdentificationTarget} from the results.
-	 * 
-	 * @param entry
 	 */
 	void remove(IIdentificationTarget entry);
 
@@ -37,8 +33,6 @@ public interface IIdentificationResult {
 
 	/**
 	 * Returns the best {@link IIdentificationTarget} from the list.
-	 * 
-	 * @return
 	 */
 	IIdentificationTarget getBestHit();
 

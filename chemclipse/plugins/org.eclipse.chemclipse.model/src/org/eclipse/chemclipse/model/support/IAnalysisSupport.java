@@ -23,15 +23,11 @@ public interface IAnalysisSupport {
 	 * 441.<br/>
 	 * Why 441? 440x a segment width of 13 scans and 1x a segment width of 6
 	 * scans.
-	 * 
-	 * @return int
 	 */
 	int getNumberOfAnalysisSegments();
 
 	/**
 	 * Returns a list of the available analysis segments.
-	 * 
-	 * @return List<IAnalysisSegment>
 	 */
 	List<IAnalysisSegment> getAnalysisSegments();
 }

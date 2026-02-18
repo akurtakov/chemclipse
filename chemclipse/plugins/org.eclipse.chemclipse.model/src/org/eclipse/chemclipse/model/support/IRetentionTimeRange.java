@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -29,9 +29,6 @@ public interface IRetentionTimeRange {
 	 * Compares this objects content to the other objects content, the default implementation compares {@link #getStartRetentionTime()}, {@link #getStopRetentionTime()}
 	 * this method is different to {@link #equals(Object)} that it does compares for user visible properties to be equal in contrast to objects identity and it allows to compare different instance type, this also means that it is not required that
 	 * Object1.contentEquals(Object2} == Object2.contentEquals(Object1}
-	 * 
-	 * @param other
-	 * @return
 	 */
 	default boolean contentEquals(IRetentionTimeRange other) {
 

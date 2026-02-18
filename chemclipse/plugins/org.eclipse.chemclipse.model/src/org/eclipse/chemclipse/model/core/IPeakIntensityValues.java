@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,14 +23,14 @@ public interface IPeakIntensityValues extends IPeakIntensityValuesStrict {
 	 * Adds an relative intensity value. The intensity value is correlated with
 	 * a specific retention time.<br/>
 	 * The retention time is given in milliseconds.<br/>
-	 * The retention time must be >= 0<br/>
-	 * If the relative intensity is < 0 or > 100 the add operation will be
+	 * The retention time must be &gt;= 0<br/>
+	 * If the relative intensity is &lt; 0 or &gt; 100 the add operation will be
 	 * skipped.<br/>
 	 * If there is still an intensity value stored at the specified retention
 	 * time, the old value will be overwritten by the new one. A tabular model
 	 * of the peak intensity distribution is stored in the intensityValues
 	 * navigable map. How to use it?<br/>
-	 * NavigableMap<Integer, Float> means the integer values are the retention
+	 * NavigableMap&lt;Integer, Float&gt; means the integer values are the retention
 	 * times and the float values the relative abundances related to the peak
 	 * maximum. A value of 0 means 0% of the peak maximum and a value of 100
 	 * mean 100% of the peak maximum.<br/>
@@ -59,42 +59,31 @@ public interface IPeakIntensityValues extends IPeakIntensityValuesStrict {
 	 * If the peakMaximum has an abundance value of 58672 for the ion
 	 * ion 43 its abundance will be 7718.74835 at the retention time 125280
 	 * (2.088 min).
-	 * 
-	 * @param retentionTime
-	 * @param relativeIntensity
 	 */
 	void addIntensityValue(int retentionTime, float relativeIntensity);
 
 	/**
-	 * Returns the Map.Entry<Integer, Float> according to highest intensity
+	 * Returns the Map.Entry&lt;Integer, Float&gt; according to highest intensity
 	 * value (IPeakIntensityValues.MAX_INTENSITY).<br/>
 	 * If there is no such value stored, null will be returned.<br/>
 	 * Integer is the retention time in milliseconds and Float is the relative
 	 * intensity.
-	 * 
-	 * @return Map.Entry<Integer, Float>
 	 */
 	Map.Entry<Integer, Float> getHighestIntensityValue();
 
 	/**
 	 * Returns the number of the stored retentionTime - relativeIntensity
 	 * mappings.
-	 * 
-	 * @return int
 	 */
 	int size();
 
 	/**
 	 * Returns the start retention time of the peak in milliseconds.
-	 * 
-	 * @return int
 	 */
 	int getStartRetentionTime();
 
 	/**
 	 * Returns the stop retention time of the peak in milliseconds.
-	 * 
-	 * @return int
 	 */
 	int getStopRetentionTime();
 
@@ -102,24 +91,19 @@ public interface IPeakIntensityValues extends IPeakIntensityValuesStrict {
 	 * Replaces the existing retentionTimes by the new list.
 	 * Retention times are given in milliseconds.
 	 * Number of scans and list size must be equal.
-	 * 
-	 * @param retentionTimes
 	 */
 	void replaceRetentionTimes(List<Integer> retentionTimes);
 
 	/**
-	 * Returns an Map.Entry<Integer, Float> corresponding to the given retention
+	 * Returns an Map.Entry&lt;Integer, Float&gt; corresponding to the given retention
 	 * time.<br/>
 	 * Internally floorEntry() will be used.<br/>
 	 * It means that the entry - defined by its retention time key - will be
 	 * returned which is equal or lower to the given retention time key.<br/>
 	 * Only valid entries will be returned if the following condition is true:
-	 * "retentionTime >= getStartRetentionTime() && retentionTime <= getStopRetentionTime()"
+	 * "retentionTime &gt;= getStartRetentionTime() && retentionTime &lt;= getStopRetentionTime()"
 	 * , if it is not true, null will be returned.<br/>
 	 * If there is no entry available, null will be returned.
-	 * 
-	 * @param retentionTime
-	 * @return Map.Entry<Integer, Float>
 	 */
 	Map.Entry<Integer, Float> getIntensityValue(int retentionTime);
 
@@ -127,8 +111,6 @@ public interface IPeakIntensityValues extends IPeakIntensityValuesStrict {
 	 * Returns a list of the retention times of the peak model.<br/>
 	 * The retention times are sorted ascending. The retention times are given
 	 * in milliseconds.
-	 * 
-	 * @return List<Integer>
 	 */
 	List<Integer> getRetentionTimes();
 

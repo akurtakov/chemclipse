@@ -136,9 +136,9 @@ public interface IPeakModel extends IPeakModelStrict, Serializable {
 	 * Returns the tailing of the peak.<br/>
 	 * If the value is 1 the peak has an optimal distribution of leading and
 	 * tailing peak parts.<br/>
-	 * If the value is > 1 the tailing part of the peak is higher than the
+	 * If the value is &gt; 1 the tailing part of the peak is higher than the
 	 * leading part.<br/>
-	 * If the value is < 1 the leading part of the peak is higher than the
+	 * If the value is &lt; 1 the leading part of the peak is higher than the
 	 * tailing part.
 	 */
 	float getTailing();

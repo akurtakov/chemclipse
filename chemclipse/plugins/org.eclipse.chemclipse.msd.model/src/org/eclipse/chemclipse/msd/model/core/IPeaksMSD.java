@@ -36,8 +36,6 @@ public interface IPeaksMSD {
 
 	/**
 	 * Removes the peak from the list.
-	 * 
-	 * @return <code>true</code> if peak was removed, <code>false</code> otherwise
 	 */
 	void removePeak(IPeakMSD peak) throws UnsupportedOperationException;
 

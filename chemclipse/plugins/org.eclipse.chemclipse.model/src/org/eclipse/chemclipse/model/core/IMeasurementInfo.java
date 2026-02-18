@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -36,17 +36,12 @@ public interface IMeasurementInfo extends Serializable {
 
 	/**
 	 * The key must not be protected.
-	 * 
-	 * @param key
-	 * @throws InvalidHeaderModificationException
 	 */
 	void removeHeaderData(String key) throws InvalidHeaderModificationException;
 
 	/**
 	 * This map is unmodifiable. Please use the
 	 * putHeaderData method to add values.
-	 * 
-	 * @return Map<String, String>
 	 */
 	Map<String, String> getHeaderDataMap();
 

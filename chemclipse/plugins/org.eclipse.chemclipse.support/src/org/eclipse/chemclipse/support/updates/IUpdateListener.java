@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,7 +15,6 @@ package org.eclipse.chemclipse.support.updates;
 /**
  * If an update listener with Display is needed, have a look at:
  * org.eclipse.chemclipse.support.ui.updates.IUpdateListenerUI
- * {@link IUpdateListenerUI}
  */
 public interface IUpdateListener {
 

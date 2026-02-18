@@ -23,9 +23,6 @@ public class Calculations {
 
 	/**
 	 * Returns the sum of the given array.
-	 * 
-	 * @param values
-	 * @return
 	 */
 	public static int getSum(int[] values) {
 
@@ -38,9 +35,6 @@ public class Calculations {
 
 	/**
 	 * Returns the sum of the given array.
-	 * 
-	 * @param values
-	 * @return
 	 */
 	public static float getSum(float[] values) {
 
@@ -53,9 +47,6 @@ public class Calculations {
 
 	/**
 	 * Returns the sum of the given array.
-	 * 
-	 * @param values
-	 * @return
 	 */
 	public static double getSum(double[] values) {
 
@@ -70,9 +61,6 @@ public class Calculations {
 	 * Returns the euclidian length of the given array.<br/>
 	 * Each value will be squared, then added and afterward the square root will
 	 * be given back. (x21 + x22 + · · · + x2n)^1/2
-	 * 
-	 * @param values
-	 * @return
 	 */
 	public static double getEuclidianLength(double[] values) {
 
@@ -104,9 +92,6 @@ public class Calculations {
 	/**
 	 * Returns the minimum value of the given array.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @return double
 	 */
 	public static double getMin(double[] values) {
 
@@ -130,9 +115,6 @@ public class Calculations {
 	/**
 	 * Returns the maximum value of the given array.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @return double
 	 */
 	public static double getMax(double[] values) {
 
@@ -148,9 +130,6 @@ public class Calculations {
 	/**
 	 * Returns the minimum value of the given array.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @return float
 	 */
 	public static float getMin(float[] values) {
 
@@ -166,9 +145,6 @@ public class Calculations {
 	/**
 	 * Returns the maximum value of the given array.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @return float
 	 */
 	public static float getMax(float[] values) {
 
@@ -184,9 +160,6 @@ public class Calculations {
 	/**
 	 * Returns the mean value of an array of double values.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @return double
 	 */
 	public static double getMean(double[] values) {
 
@@ -210,9 +183,6 @@ public class Calculations {
 	/**
 	 * Returns the mean value of an array of float values.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @return float
 	 */
 	public static float getMean(float[] values) {
 
@@ -236,9 +206,6 @@ public class Calculations {
 	/**
 	 * Returns the mean value of an array of int values.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @return float
 	 */
 	public static int getMean(int[] values) {
 
@@ -278,9 +245,6 @@ public class Calculations {
 	/**
 	 * Returns the median of the given value list.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @return double
 	 */
 	public static double getMedian(List<Double> values) {
 
@@ -301,9 +265,6 @@ public class Calculations {
 	/**
 	 * Returns the median of the given value array.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @return
 	 */
 	public static double getMedian(double[] values) {
 
@@ -336,9 +297,6 @@ public class Calculations {
 	 * Returns the median of the float array.<br/>
 	 * It must contain at least 3 elements.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @return
 	 */
 	public static float getMedian(float[] values) {
 
@@ -371,9 +329,6 @@ public class Calculations {
 	 * Returns the median of the float array.<br/>
 	 * It must contain at least 3 elements.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @return
 	 */
 	public static int getMedian(int[] values) {
 
@@ -405,9 +360,6 @@ public class Calculations {
 	/**
 	 * Calculates the median from the squareroot((value[i] - mean)^2) values.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @return
 	 */
 	public static double getMedianDeviationFromMean(double[] values) {
 
@@ -441,9 +393,6 @@ public class Calculations {
 	 * median was thought to be calculated.<br/>
 	 * Use of the value "mean" is more robust so it is used here.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @return
 	 */
 	public static double getMedianDeviationFromMedian(double[] values) {
 
@@ -466,9 +415,6 @@ public class Calculations {
 	 * Returns the variance.<br/>
 	 * The size of the value array must be greater or equal than 2.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @return double
 	 */
 	public static double getVariance(double[] values) {
 
@@ -480,9 +426,6 @@ public class Calculations {
 	 * Returns the variance.<br/>
 	 * The size of the value array must be greater or equal than 2.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @return float
 	 */
 	public static float getVariance(float[] values) {
 
@@ -494,10 +437,6 @@ public class Calculations {
 	 * Returns the variance.<br/>
 	 * The size of the value array must be greater or equal than 2.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @param mean
-	 * @return double
 	 */
 	public static double getVariance(double[] values, double mean) {
 
@@ -519,10 +458,6 @@ public class Calculations {
 	 * Returns the variance.<br/>
 	 * The size of the value array must be greater or equal than 2.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @param mean
-	 * @return float
 	 */
 	public static float getVariance(float[] values, float mean) {
 
@@ -542,9 +477,6 @@ public class Calculations {
 
 	/**
 	 * Returns the standard deviation.
-	 * 
-	 * @param medianFromMean
-	 * @return double
 	 */
 	public static double getStandardDeviation(double medianFromMean) {
 
@@ -553,9 +485,6 @@ public class Calculations {
 
 	/**
 	 * Returns the standard deviation.
-	 * 
-	 * @param medianFromMean
-	 * @return float
 	 */
 	public static float getStandardDeviation(float medianFromMean) {
 
@@ -565,9 +494,6 @@ public class Calculations {
 	/**
 	 * Returns the standard deviation.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @return double
 	 */
 	public static double getStandardDeviation(double[] values) {
 
@@ -578,9 +504,6 @@ public class Calculations {
 	/**
 	 * Returns the standard deviation.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @return float
 	 */
 	public static float getStandardDeviation(float[] values) {
 
@@ -591,10 +514,6 @@ public class Calculations {
 	/**
 	 * Returns the standard deviation.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @param mean
-	 * @return double
 	 */
 	public static double getStandardDeviation(double[] values, double mean) {
 
@@ -605,10 +524,6 @@ public class Calculations {
 	/**
 	 * Returns the standard deviation.<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
-	 * @param mean
-	 * @return float
 	 */
 	public static float getStandardDeviation(float[] values, float mean) {
 
@@ -624,8 +539,6 @@ public class Calculations {
 	 * Then each value will be calculates as:<br/>
 	 * values[i] /= max;<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
 	 */
 	public static void normalize(float[] values) {
 
@@ -649,8 +562,6 @@ public class Calculations {
 	 * Then each value will be calculates as:<br/>
 	 * values[i] /= max;<br/>
 	 * The values will not be changed in order.
-	 * 
-	 * @param values
 	 */
 	public static void normalize(double[] values) {
 
@@ -673,9 +584,6 @@ public class Calculations {
 	 * "A noise and background reduction method for component detection in liquid chromatography mass spectrometry"
 	 * , Windig, W. and Phalp, J. M. and Payne, A. W., 1996<br/>
 	 * See Equations: #7,8
-	 * 
-	 * @param values
-	 * @param windowSize
 	 */
 	public static void smooth(double[] values, int windowSize) {
 
@@ -702,9 +610,9 @@ public class Calculations {
 
 	/**
 	 * Returns the reduced window length of the given array. The window must be
-	 * >= 1 and <= values.length. If values == null => 1 will be returned.<br/>
-	 * If window < 1 || window > values.length => values.length will be
-	 * returned.<br/>
+	 * &gt;= 1 and &lt;= values.length. If values == null =&gt; 1 will be returned.<br/>
+	 * If window &lt; 1 || window &gt; values.length =&gt; values.length will be
+	 * returned.
 	 */
 	public static int getWindowReducedLength(double[] values, int window) {
 
@@ -723,8 +631,6 @@ public class Calculations {
 	 * "A noise and background reduction method for component detection in liquid chromatography mass spectrometry"
 	 * , Windig, W. and Phalp, J. M. and Payne, A. W., 1996<br/>
 	 * See Equations: #1,2
-	 * 
-	 * @param values
 	 */
 	public static void scaleToEuclidianLength(double[] values) {
 
@@ -743,8 +649,6 @@ public class Calculations {
 	 * "A noise and background reduction method for component detection in liquid chromatography mass spectrometry"
 	 * , Windig, W. and Phalp, J. M. and Payne, A. W., 1996<br/>
 	 * See Equations: #3,4,5
-	 * 
-	 * @param values
 	 */
 	public static void scaleToStandardizedLength(double[] values) {
 
@@ -763,8 +667,6 @@ public class Calculations {
 	 * The sum of all array values will be 1 after calculation.<br/>
 	 * If the square root sum of the given values is 0, the function returns
 	 * without modifications.
-	 * 
-	 * @param values
 	 */
 	public static void scaleToNormalizedUnity(double[] values) {
 
@@ -781,9 +683,6 @@ public class Calculations {
 
 	/**
 	 * Returns the sum of the values in the given array powered by 2.
-	 * 
-	 * @param values
-	 * @return
 	 */
 	public static double calculateSumPow2(double[] values) {
 
@@ -797,9 +696,6 @@ public class Calculations {
 	/**
 	 * Returns the size of the double array.<br/>
 	 * If the array is null, 0 will be returned.
-	 * 
-	 * @param values
-	 * @return int
 	 */
 	private static int getSize(double[] values) {
 
@@ -815,9 +711,6 @@ public class Calculations {
 	/**
 	 * Returns the size of the double array.<br/>
 	 * If the array is null, 0 will be returned.
-	 * 
-	 * @param values
-	 * @return int
 	 */
 	private static int getSize(float[] values) {
 
@@ -833,9 +726,6 @@ public class Calculations {
 	/**
 	 * Returns the size of the double array.<br/>
 	 * If the array is null, 0 will be returned.
-	 * 
-	 * @param values
-	 * @return int
 	 */
 	private static int getSize(int[] values) {
 
@@ -850,8 +740,6 @@ public class Calculations {
 
 	/**
 	 * Checks whether the values are odd or even.
-	 * 
-	 * @return
 	 */
 	private static boolean isOdd(int size) {
 

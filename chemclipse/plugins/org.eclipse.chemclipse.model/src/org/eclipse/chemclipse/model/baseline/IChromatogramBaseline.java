@@ -24,22 +24,16 @@ public interface IChromatogramBaseline {
 	/**
 	 * Returns the active baseline model.<br/>
 	 * You can modify the baseline through this baseline model.
-	 * 
-	 * @return {IBaselineModel}
 	 */
 	IBaselineModel getBaselineModel();
 
 	/**
 	 * Return the set of available baseline ids.
-	 * 
-	 * @return {Set<String>}
 	 */
 	Set<String> getBaselineIds();
 
 	/**
 	 * Returns the active baseline id.
-	 * 
-	 * @return {String}
 	 */
 	String getActiveBaseline();
 
@@ -50,16 +44,12 @@ public interface IChromatogramBaseline {
 
 	/**
 	 * Empty or null is not allowed.
-	 * 
-	 * @param id
 	 */
 	void setActiveBaseline(String id);
 
 	/**
 	 * Removes the given baseline id.
 	 * The default id can't be removed.
-	 * 
-	 * @param id
 	 */
 	void removeBaseline(String id);
 }

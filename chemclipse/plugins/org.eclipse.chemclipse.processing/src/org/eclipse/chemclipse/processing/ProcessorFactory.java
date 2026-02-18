@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,7 +18,7 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 
 /**
- * A {@link ProcessorFactory} service allows access to all currently known {@link Filter} in the system
+ * A ProcessorFactory service allows access to all currently known {@link Filter} in the system
  * 
  * @author Christoph Läubrich
  *
@@ -26,7 +26,7 @@ import java.util.function.BiPredicate;
 public interface ProcessorFactory {
 
 	/**
-	 * Returns all processors know to this {@link ProcessorFactory} that match the given processorType and acceptor (if given)
+	 * Returns all processors know to this ProcessorFactory that match the given processorType and acceptor (if given)
 	 * 
 	 * @param processorType
 	 *            the subtype of the {@link Processor} to fetch
@@ -38,10 +38,7 @@ public interface ProcessorFactory {
 
 	/**
 	 * Helper method to create generic Class types for subinterfaces that satisfy the {@link #getFilters(Class, BiFunction)} method, e.g.
-	 * <pre>Collection&lt;IScanFilter<?>> scanFilter = filterFactory.getFilters(FilterFactory.genericClass(IScanFilter.class), new BiFunction&lt;IScanFilter<?>, Map&lt;String, ?>, Boolean>() { ...});</pre>
-	 * 
-	 * @param cls
-	 * @return
+	 * <pre>Collection&lt;IScanFilter&lt;?&gt;&gt; scanFilter = filterFactory.getFilters(FilterFactory.genericClass(IScanFilter.class), new BiFunction&lt;IScanFilter&lt;?&gt;, Map&lt;String, ?&gt;, Boolean&gt;() { ...});</pre>
 	 */
 	@SuppressWarnings("unchecked")
 	static <T> Class<T> genericClass(Class<?> cls) {

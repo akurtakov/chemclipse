@@ -17,7 +17,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- * A {@link IProcessEntryContainer} holds some {@link IProcessEntry}s
+ * An IProcessEntryContainer holds some {@link IProcessEntry}s
  *
  */
 public interface IProcessEntryContainer extends Iterable<IProcessEntry> {
@@ -37,15 +37,11 @@ public interface IProcessEntryContainer extends Iterable<IProcessEntry> {
 
 	/**
 	 * Returns the active profile.
-	 * 
-	 * @return String
 	 */
 	String getActiveProfile();
 
 	/**
 	 * Sets the active profile.
-	 * 
-	 * @param activeProfile
 	 */
 	void setActiveProfile(String activeProfile);
 
@@ -55,8 +51,6 @@ public interface IProcessEntryContainer extends Iterable<IProcessEntry> {
 
 	/**
 	 * Returns the unmodifiable set of profiles.
-	 * 
-	 * @return Set<String>
 	 */
 	Set<String> getProfiles();
 
@@ -73,8 +67,6 @@ public interface IProcessEntryContainer extends Iterable<IProcessEntry> {
 	 * Both resume and profile selection will be checked.
 	 * 
 	 * This option needs to be activated on purpose.
-	 * 
-	 * @return boolean
 	 */
 	boolean isSupportResume();
 
@@ -96,9 +88,6 @@ public interface IProcessEntryContainer extends Iterable<IProcessEntry> {
 	 * 
 	 * this method is different to {@link #equals(Object)} that it does compares for user visible properties to be equal in contrast to objects identity and it allows to compare different instance type, this also means that it is not required that
 	 * Object1.contentEquals(Object2} == Object2.contentEquals(Object1}
-	 * 
-	 * @param other
-	 * @return
 	 */
 	default boolean entriesEquals(IProcessEntryContainer other) {
 

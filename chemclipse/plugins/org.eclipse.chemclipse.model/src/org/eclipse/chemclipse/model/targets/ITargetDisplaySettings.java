@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -37,8 +37,6 @@ public interface ITargetDisplaySettings {
 
 	/**
 	 * Sets the rotation angel of the labels in degree
-	 * 
-	 * @param degree
 	 */
 	void setRotation(int degree);
 
@@ -55,8 +53,6 @@ public interface ITargetDisplaySettings {
 	/**
 	 * Returns the visibility map.
 	 * It's unmodifiable.
-	 * 
-	 * @return Map<String, Boolean>
 	 */
 	Map<String, Boolean> getVisibilityMap();
 

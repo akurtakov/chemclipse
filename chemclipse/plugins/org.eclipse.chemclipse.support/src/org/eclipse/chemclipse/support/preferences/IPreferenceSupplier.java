@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,24 +25,18 @@ public interface IPreferenceSupplier {
 
 	/**
 	 * Via the postfix, the key is modified dynamically.
-	 * 
-	 * @return {@link String}
 	 */
 	String getPostfix();
 
 	/**
 	 * Returns the scope context, e.g.:
 	 * InstanceScope.INSTANCE
-	 * 
-	 * @return {@link IScopeContext}
 	 */
 	IScopeContext getScopeContext();
 
 	/**
 	 * Returns the preference node, e.g.:
 	 * Activator.getContext().getBundle().getSymbolicName();
-	 * 
-	 * @return String
 	 */
 	String getPreferenceNode();
 
@@ -53,9 +47,6 @@ public interface IPreferenceSupplier {
 
 	/**
 	 * Puts the default value to the map.
-	 * 
-	 * @param key
-	 * @param def
 	 */
 	void putDefault(String key, Object def);
 
@@ -68,8 +59,6 @@ public interface IPreferenceSupplier {
 	 * 
 	 * Map<String, String> defaultValues = new HashMap<String, String>();
 	 * defaultValues.put(P_VERSION, DEF_VERSION);
-	 * 
-	 * @return {@link Map<String, String>}
 	 */
 	Map<String, String> getDefaultValues();
 
@@ -79,8 +68,6 @@ public interface IPreferenceSupplier {
 	 * 
 	 * IEclipsePreferences preferences = SCOPE_CONTEXT.getNode(PREFERENCE_NODE);
 	 * String myPreference = preferences.get(P_STRING , DEF_STRING);
-	 * 
-	 * @return {@link IEclipsePreferences}
 	 */
 	IEclipsePreferences getPreferences();
 
