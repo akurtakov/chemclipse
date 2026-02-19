@@ -27,7 +27,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.subtract.calculator.SubtractCalculator;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.subtract.settings.MassSpectrumFilterSettings;
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
-import org.eclipse.chemclipse.csd.model.core.IScanCSD;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
@@ -50,7 +49,6 @@ import org.eclipse.chemclipse.support.ui.updates.IUpdateListenerUI;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
-import org.eclipse.chemclipse.swt.ui.services.IScanIdentifierService;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
@@ -63,8 +61,6 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.runnables.LibraryServiceRunnab
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.ChromatogramUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ScanChartSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ScanDataSupport;
-import org.eclipse.chemclipse.vsd.model.core.IScanVSD;
-import org.eclipse.chemclipse.wsd.model.core.IScanWSD;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.e4.ui.di.Focus;
@@ -101,7 +97,6 @@ import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.IExtendedChart;
 import org.eclipse.swtchart.extensions.core.ISecondaryAxisSettings;
 import org.eclipse.swtchart.extensions.core.RangeRestriction;
-import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.themes.ITheme;
 import org.eclipse.ui.themes.IThemeManager;
@@ -934,41 +929,8 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		List<Class<? extends IPreferencePage>> preferencePages = new ArrayList<>();
 		preferencePages.add(PreferencePageScans.class);
 		preferencePages.add(PreferencePageSubtract.class);
-		/*
-		 * Additional pages.
-		 */
-		DataType scanDataType = getScanDataType();
-		Object[] scanIdentifierServices = Activator.getDefault().getScanIdentifierServices();
-		if(scanIdentifierServices != null) {
-			for(Object object : scanIdentifierServices) {
-				if(object instanceof IScanIdentifierService scanIdentifierService) {
-					DataType dataType = scanIdentifierService.getDataType();
-					if(scanDataType.equals(dataType)) {
-						Class<? extends IWorkbenchPreferencePage> preferencePage = scanIdentifierService.getPreferencePage();
-						if(preferencePage != null) {
-							preferencePages.add(preferencePage);
-						}
-					}
-				}
-			}
-		}
 
 		return preferencePages;
-	}
-
-	private DataType getScanDataType() {
-
-		if(scanUnknown instanceof IScanCSD) {
-			return DataType.CSD;
-		} else if(scanUnknown instanceof IScanMSD) {
-			return DataType.MSD;
-		} else if(scanUnknown instanceof IScanWSD) {
-			return DataType.WSD;
-		} else if(scanUnknown instanceof IScanVSD) {
-			return DataType.VSD;
-		}
-
-		return DataType.NONE;
 	}
 
 	private void updateInput(IScanMSD unknownMassSpectrum, IScanMSD referenceMassSpectrum) {

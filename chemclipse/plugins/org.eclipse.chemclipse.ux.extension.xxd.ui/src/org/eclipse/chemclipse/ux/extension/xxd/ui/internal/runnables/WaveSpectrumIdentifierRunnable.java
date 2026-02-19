@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.runnables;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import org.eclipse.chemclipse.chromatogram.wsd.identifier.settings.IWaveSpectrumIdentifierSettings;
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.wavespectrum.WaveSpectrumIdentifier;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.wsd.model.core.IScanWSD;
@@ -23,13 +24,15 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 
 public class WaveSpectrumIdentifierRunnable implements IRunnableWithProgress {
 
-	private final List<IScanWSD> scans;
-	private final String identifierId;
+	private List<IScanWSD> scans;
+	private String identifierId;
+	private IWaveSpectrumIdentifierSettings identifierSettings;
 
-	public WaveSpectrumIdentifierRunnable(List<IScanWSD> scans, String identifierId) {
+	public WaveSpectrumIdentifierRunnable(List<IScanWSD> scans, String identifierId, IWaveSpectrumIdentifierSettings identifierSettings) {
 
 		this.scans = scans;
 		this.identifierId = identifierId;
+		this.identifierSettings = identifierSettings;
 	}
 
 	@Override
@@ -37,7 +40,7 @@ public class WaveSpectrumIdentifierRunnable implements IRunnableWithProgress {
 
 		try {
 			monitor.beginTask(ExtensionMessages.scanIdentification, IProgressMonitor.UNKNOWN);
-			WaveSpectrumIdentifier.identify(scans, identifierId, monitor);
+			WaveSpectrumIdentifier.identify(scans, identifierSettings, identifierId, monitor);
 		} finally {
 			monitor.done();
 		}

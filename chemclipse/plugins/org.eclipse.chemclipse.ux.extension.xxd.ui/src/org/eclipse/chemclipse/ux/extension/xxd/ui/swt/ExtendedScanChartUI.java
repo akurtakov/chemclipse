@@ -43,7 +43,6 @@ import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
-import org.eclipse.chemclipse.swt.ui.services.IScanIdentifierService;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ChartGridSupport;
@@ -78,7 +77,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swtchart.IAxis;
 import org.eclipse.swtchart.Range;
 import org.eclipse.swtchart.extensions.core.BaseChart;
-import org.eclipse.ui.IWorkbenchPreferencePage;
 
 public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 
@@ -735,47 +733,11 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 
 	private List<Class<? extends IPreferencePage>> getPreferencePages() {
 
-		/*
-		 * Default pages
-		 */
 		List<Class<? extends IPreferencePage>> preferencePages = new ArrayList<>();
 		preferencePages.add(PreferencePageScans.class);
 		preferencePages.add(PreferencePageSubtract.class);
-		/*
-		 * Additional pages.
-		 */
-		DataType scanDataType = getScanDataType();
-		Object[] scanIdentifierServices = Activator.getDefault().getScanIdentifierServices();
-		if(scanIdentifierServices != null) {
-			for(Object object : scanIdentifierServices) {
-				if(object instanceof IScanIdentifierService scanIdentifierService) {
-					DataType dataType = scanIdentifierService.getDataType();
-					if(scanDataType.equals(dataType)) {
-						Class<? extends IWorkbenchPreferencePage> preferencePage = scanIdentifierService.getPreferencePage();
-						if(preferencePage != null) {
-							preferencePages.add(preferencePage);
-						}
-					}
-				}
-			}
-		}
 
 		return preferencePages;
-	}
-
-	private DataType getScanDataType() {
-
-		if(scan instanceof IScanCSD) {
-			return DataType.CSD;
-		} else if(scan instanceof IScanMSD) {
-			return DataType.MSD;
-		} else if(scan instanceof IScanWSD) {
-			return DataType.WSD;
-		} else if(scan instanceof IScanVSD) {
-			return DataType.VSD;
-		}
-
-		return DataType.NONE;
 	}
 
 	private void createSaveButton(Composite parent) {

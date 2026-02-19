@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,6 +16,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import org.eclipse.chemclipse.msd.identifier.MassSpectrumIdentifier;
+import org.eclipse.chemclipse.msd.identifier.settings.IMassSpectrumIdentifierSettings;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -23,13 +24,15 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 
 public class MassSpectrumIdentifierRunnable implements IRunnableWithProgress {
 
-	private final List<IScanMSD> scans;
-	private final String identifierId;
+	private List<IScanMSD> scans;
+	private String identifierId;
+	private IMassSpectrumIdentifierSettings identifierSettings;
 
-	public MassSpectrumIdentifierRunnable(List<IScanMSD> scans, String identifierId) {
+	public MassSpectrumIdentifierRunnable(List<IScanMSD> scans, String identifierId, IMassSpectrumIdentifierSettings identifierSettings) {
 
 		this.scans = scans;
 		this.identifierId = identifierId;
+		this.identifierSettings = identifierSettings;
 	}
 
 	@Override
@@ -37,7 +40,7 @@ public class MassSpectrumIdentifierRunnable implements IRunnableWithProgress {
 
 		try {
 			monitor.beginTask(ExtensionMessages.scanIdentification, IProgressMonitor.UNKNOWN);
-			MassSpectrumIdentifier.identify(scans, identifierId, monitor);
+			MassSpectrumIdentifier.identify(scans, identifierSettings, identifierId, monitor);
 		} finally {
 			monitor.done();
 		}
