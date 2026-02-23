@@ -36,7 +36,6 @@ import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePagePeakTraces;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageScans;
@@ -281,14 +280,7 @@ public class ExtendedPeakTracesUI extends Composite implements IExtendedPartUI {
 
 	private void createSettingsButton(Composite parent) {
 
-		createSettingsButton(parent, Arrays.asList(PreferencePagePeakTraces.class, PreferencePageScans.class), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings();
-			}
-		});
+		createSettingsButton(parent, Arrays.asList(PreferencePagePeakTraces.class, PreferencePageScans.class), display -> applySettings());
 	}
 
 	private void createPeakChart(Composite parent) {

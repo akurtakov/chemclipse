@@ -25,7 +25,6 @@ import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
-import org.eclipse.chemclipse.ux.extension.ui.model.IDataUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
@@ -36,7 +35,6 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.Activator;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d.LoadingBarChart;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.GC;
@@ -48,7 +46,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Scrollable;
-import org.eclipse.swtchart.ICustomPaintListener;
 import org.eclipse.swtchart.IPlotArea;
 import org.eclipse.swtchart.Range;
 import org.eclipse.swtchart.extensions.core.BaseChart;
@@ -73,40 +70,36 @@ public class ExtendedLoadingBarChart extends Composite implements IExtendedPartU
 		super(parent, style);
 		createControl();
 		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
-		dataUpdateSupport.add(new IDataUpdateListener() {
+		dataUpdateSupport.add((topic, objects) -> {
 
-			@Override
-			public void update(String topic, List<Object> objects) {
-
-				if(evaluationPCA != null) {
-					if(DataUpdateSupport.isVisible(control)) {
-						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGBAR_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGLIST_VARIABLE.equals(topic)) {
-							if(objects.size() == 1) {
-								Object object = objects.get(0);
-								ArrayList<IVariable> selectedVariables = new ArrayList<>();
-								if(object instanceof Object[] values) {
-									for(int i = 0; i < values.length; i++) {
-										if(values[i] instanceof Feature) {
-											Feature feature = (Feature)values[i];
-											selectedVariables.add(feature.getVariable());
-										} else if(values[i] instanceof IVariable) {
-											IVariable variable = (IVariable)values[i];
-											selectedVariables.add(variable);
-										}
+			if(evaluationPCA != null) {
+				if(DataUpdateSupport.isVisible(control)) {
+					if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGBAR_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGLIST_VARIABLE.equals(topic)) {
+						if(objects.size() == 1) {
+							Object object = objects.get(0);
+							ArrayList<IVariable> selectedVariables = new ArrayList<>();
+							if(object instanceof Object[] values) {
+								for(int i = 0; i < values.length; i++) {
+									if(values[i] instanceof Feature) {
+										Feature feature = (Feature)values[i];
+										selectedVariables.add(feature.getVariable());
+									} else if(values[i] instanceof IVariable) {
+										IVariable variable = (IVariable)values[i];
+										selectedVariables.add(variable);
 									}
 								}
-								evaluationPCA.setHighlightedVariables(selectedVariables);
-								setInput(evaluationPCA);
 							}
+							evaluationPCA.setHighlightedVariables(selectedVariables);
+							setInput(evaluationPCA);
 						}
 					}
-
 				}
+
 			}
 		});
 	}
@@ -427,31 +420,26 @@ public class ExtendedLoadingBarChart extends Composite implements IExtendedPartU
 
 		chart.applySettings(chartSettings);
 
-		chart.getBaseChart().getPlotArea().addCustomPaintListener(new ICustomPaintListener() {
+		chart.getBaseChart().getPlotArea().addCustomPaintListener(e -> {
 
-			@Override
-			public void paintControl(PaintEvent e) {
+			if(userSelection.isActive()) {
+				int xMin = Math.min(userSelection.getStartX(), userSelection.getStopX());
+				int xMax = Math.max(userSelection.getStartX(), userSelection.getStopX());
+				int y = Math.min(userSelection.getStartY(), userSelection.getStopY());
+				BaseChart baseChart = chartControl.get().getBaseChart();
+				IPlotArea plotArea = baseChart.getPlotArea();
+				Point rectangle = plotArea instanceof Scrollable scrollable ? scrollable.getSize() : plotArea.getSize();
 
-				if(userSelection.isActive()) {
-					int xMin = Math.min(userSelection.getStartX(), userSelection.getStopX());
-					int xMax = Math.max(userSelection.getStartX(), userSelection.getStopX());
-					int y = Math.min(userSelection.getStartY(), userSelection.getStopY());
-					BaseChart baseChart = chartControl.get().getBaseChart();
-					IPlotArea plotArea = baseChart.getPlotArea();
-					Point rectangle = plotArea instanceof Scrollable scrollable ? scrollable.getSize() : plotArea.getSize();
-
-					GC gc = e.gc;
-					gc.setBackground(Colors.RED);
-					gc.setForeground(Colors.DARK_RED);
-					gc.setAlpha(45);
-					gc.setLineStyle(SWT.LINE_DASH);
-					gc.setLineWidth(2);
-					gc.drawLine(xMin, 0, xMin, rectangle.y);
-					gc.drawLine(xMax, 0, xMax, rectangle.y);
-					gc.drawLine(xMin, y, xMax, y);
-				}
+				GC gc = e.gc;
+				gc.setBackground(Colors.RED);
+				gc.setForeground(Colors.DARK_RED);
+				gc.setAlpha(45);
+				gc.setLineStyle(SWT.LINE_DASH);
+				gc.setLineWidth(2);
+				gc.drawLine(xMin, 0, xMin, rectangle.y);
+				gc.drawLine(xMax, 0, xMax, rectangle.y);
+				gc.drawLine(xMin, y, xMax, y);
 			}
-
 		});
 
 		chartControl.set(chart);

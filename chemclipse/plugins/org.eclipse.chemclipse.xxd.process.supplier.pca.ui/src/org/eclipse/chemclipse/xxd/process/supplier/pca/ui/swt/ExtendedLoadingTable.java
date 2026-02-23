@@ -20,7 +20,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
-import org.eclipse.chemclipse.ux.extension.ui.model.IDataUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
@@ -48,48 +47,43 @@ public class ExtendedLoadingTable extends Composite implements IExtendedPartUI {
 		createControl();
 
 		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
-		dataUpdateSupport.add(new IDataUpdateListener() {
+		dataUpdateSupport.add((topic, objects) -> {
 
-			@Override
-			public void update(String topic, List<Object> objects) {
-
-				if(evaluationPCA != null) {
-					if(DataUpdateSupport.isVisible(control)) {
-						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGLIST_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGBAR_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE.equals(topic)) {
-							if(objects.size() == 1) {
-								Object object = objects.get(0);
-								ArrayList<IVariable> variables = new ArrayList<>();
-								if(object instanceof Object[] values) {
-									for(int i = 0; i < values.length; i++) {
-										if(values[i] instanceof IVariable variable) {
-											variables.add(variable);
+			if(evaluationPCA != null) {
+				if(DataUpdateSupport.isVisible(control)) {
+					if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGLIST_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGBAR_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE.equals(topic)) {
+						if(objects.size() == 1) {
+							Object object = objects.get(0);
+							ArrayList<IVariable> variables = new ArrayList<>();
+							if(object instanceof Object[] values) {
+								for(int i = 0; i < values.length; i++) {
+									if(values[i] instanceof IVariable variable) {
+										variables.add(variable);
+									}
+								}
+								if(!variables.isEmpty()) {
+									ArrayList<LoadingRow> loadingRows = new ArrayList<>();
+									for(IVariable variable : variables) {
+										@SuppressWarnings("unchecked")
+										LoadingRow row = ((ArrayList<LoadingRow>)listControl.get().getTableViewer().getInput()).stream().filter(x -> x.getVariableName().equals(variable.getValue())).findFirst().orElse(null);
+										if(row != null) {
+											loadingRows.add(row);
 										}
 									}
-									if(!variables.isEmpty()) {
-										ArrayList<LoadingRow> loadingRows = new ArrayList<>();
-										for(IVariable variable : variables) {
-											@SuppressWarnings("unchecked")
-											LoadingRow row = ((ArrayList<LoadingRow>)listControl.get().getTableViewer().getInput()).stream().filter(x -> x.getVariableName().equals(variable.getValue())).findFirst().orElse(null);
-											if(row != null) {
-												loadingRows.add(row);
-											}
-										}
-										if(!loadingRows.isEmpty()) {
-											listControl.get().getTableViewer().setSelection(new StructuredSelection(loadingRows));
-										}
-										evaluationPCA.setHighlightedVariables(variables);
+									if(!loadingRows.isEmpty()) {
+										listControl.get().getTableViewer().setSelection(new StructuredSelection(loadingRows));
 									}
+									evaluationPCA.setHighlightedVariables(variables);
 								}
 							}
 						}
 					}
 				}
-
 			}
 
 		});

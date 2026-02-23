@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,7 +15,6 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt;
 import java.util.Arrays;
 
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.chart2d.FilterDistributionChart;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePage;
@@ -24,7 +23,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 
 public class ExtendedFilterDistributionUI extends Composite implements IExtendedPartUI {
 
@@ -76,14 +74,7 @@ public class ExtendedFilterDistributionUI extends Composite implements IExtended
 
 	private void createSettingsButton(Composite parent) {
 
-		createSettingsButton(parent, Arrays.asList(PreferencePage.class, PreferencePageScorePlot.class), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings();
-			}
-		});
+		createSettingsButton(parent, Arrays.asList(PreferencePage.class, PreferencePageScorePlot.class), display -> applySettings());
 	}
 
 	private void applySettings() {

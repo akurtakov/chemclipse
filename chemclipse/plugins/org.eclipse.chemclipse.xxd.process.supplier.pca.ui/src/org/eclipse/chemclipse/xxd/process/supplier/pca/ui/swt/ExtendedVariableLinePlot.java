@@ -27,10 +27,8 @@ import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
-import org.eclipse.chemclipse.ux.extension.ui.model.IDataUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IEvaluation;
@@ -48,7 +46,6 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.GC;
@@ -58,13 +55,11 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Scrollable;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swtchart.IAxis;
-import org.eclipse.swtchart.ICustomPaintListener;
 import org.eclipse.swtchart.IPlotArea;
 import org.eclipse.swtchart.Range;
 import org.eclipse.swtchart.extensions.core.BaseChart;
@@ -93,32 +88,28 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 		super(parent, style);
 		createControl();
 		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
-		dataUpdateSupport.add(new IDataUpdateListener() {
+		dataUpdateSupport.add((topic, objects) -> {
 
-			@Override
-			public void update(String topic, List<Object> objects) {
-
-				if(evaluation != null) {
-					if(DataUpdateSupport.isVisible(control)) {
-						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREPLOT_SAMPLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREBAR_SAMPLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_ERRORRESIDUALS_SAMPLE.equals(topic)) {
-							if(objects.size() == 1) {
-								Object object = objects.get(0);
-								ArrayList<ISample> samples = new ArrayList<>();
-								if(object instanceof Object[] values) {
-									for(int i = 0; i < values.length; i++) {
-										if(values[i] instanceof ISample) {
-											samples.add((ISample)values[i]);
-										}
+			if(evaluation != null) {
+				if(DataUpdateSupport.isVisible(control)) {
+					if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREPLOT_SAMPLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREBAR_SAMPLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_ERRORRESIDUALS_SAMPLE.equals(topic)) {
+						if(objects.size() == 1) {
+							Object object = objects.get(0);
+							ArrayList<ISample> samples = new ArrayList<>();
+							if(object instanceof Object[] values) {
+								for(int i = 0; i < values.length; i++) {
+									if(values[i] instanceof ISample) {
+										samples.add((ISample)values[i]);
 									}
 								}
-								evaluation.setHighlightedSamples(samples);
-								setInput(evaluation);
 							}
+							evaluation.setHighlightedSamples(samples);
+							setInput(evaluation);
 						}
 					}
 				}
@@ -580,29 +571,25 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 		/*
 		 * Paint Listener
 		 */
-		plot.getBaseChart().getPlotArea().addCustomPaintListener(new ICustomPaintListener() {
+		plot.getBaseChart().getPlotArea().addCustomPaintListener(e -> {
 
-			@Override
-			public void paintControl(PaintEvent e) {
+			if(userSelection.isActive()) {
+				int xMin = Math.min(userSelection.getStartX(), userSelection.getStopX());
+				int xMax = Math.max(userSelection.getStartX(), userSelection.getStopX());
+				int y = Math.min(userSelection.getStartY(), userSelection.getStopY());
+				BaseChart baseChart = plotControl.get().getBaseChart();
+				IPlotArea plotArea = baseChart.getPlotArea();
+				Point rectangle = plotArea instanceof Scrollable scrollable ? scrollable.getSize() : plotArea.getSize();
 
-				if(userSelection.isActive()) {
-					int xMin = Math.min(userSelection.getStartX(), userSelection.getStopX());
-					int xMax = Math.max(userSelection.getStartX(), userSelection.getStopX());
-					int y = Math.min(userSelection.getStartY(), userSelection.getStopY());
-					BaseChart baseChart = plotControl.get().getBaseChart();
-					IPlotArea plotArea = baseChart.getPlotArea();
-					Point rectangle = plotArea instanceof Scrollable scrollable ? scrollable.getSize() : plotArea.getSize();
-
-					GC gc = e.gc;
-					gc.setBackground(Colors.RED);
-					gc.setForeground(Colors.DARK_RED);
-					gc.setAlpha(45);
-					gc.setLineStyle(SWT.LINE_DASH);
-					gc.setLineWidth(2);
-					gc.drawLine(xMin, 0, xMin, rectangle.y);
-					gc.drawLine(xMax, 0, xMax, rectangle.y);
-					gc.drawLine(xMin, y, xMax, y);
-				}
+				GC gc = e.gc;
+				gc.setBackground(Colors.RED);
+				gc.setForeground(Colors.DARK_RED);
+				gc.setAlpha(45);
+				gc.setLineStyle(SWT.LINE_DASH);
+				gc.setLineWidth(2);
+				gc.drawLine(xMin, 0, xMin, rectangle.y);
+				gc.drawLine(xMax, 0, xMax, rectangle.y);
+				gc.drawLine(xMin, y, xMax, y);
 			}
 		});
 		plotControl.set(plot);
@@ -611,14 +598,7 @@ public class ExtendedVariableLinePlot extends Composite implements IExtendedPart
 
 	private void createSettingsButton(Composite parent) {
 
-		createSettingsButton(parent, Arrays.asList(PreferencePage.class, PreferencePageFoldChangePlot.class), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings();
-			}
-		});
+		createSettingsButton(parent, Arrays.asList(PreferencePage.class, PreferencePageFoldChangePlot.class), display -> applySettings());
 	}
 
 	private void applySettings() {

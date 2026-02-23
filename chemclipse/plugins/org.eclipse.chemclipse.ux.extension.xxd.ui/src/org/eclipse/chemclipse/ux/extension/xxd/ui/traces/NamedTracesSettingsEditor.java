@@ -26,11 +26,9 @@ import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
-import org.eclipse.chemclipse.support.ui.events.IKeyEventProcessor;
 import org.eclipse.chemclipse.support.ui.menu.ITableMenuEntry;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.chemclipse.support.ui.swt.ITableSettings;
-import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.ux.extension.ui.methods.SettingsUIProvider;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
@@ -45,7 +43,6 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -186,14 +183,7 @@ public class NamedTracesSettingsEditor implements SettingsUIProvider.SettingsUIC
 
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		searchSupportUI.setSearchListener(new ISearchListener() {
-
-			@Override
-			public void performSearch(String searchText, boolean caseSensitive) {
-
-				listUI.setSearchText(searchText, caseSensitive);
-			}
-		});
+		searchSupportUI.setSearchListener(listUI::setSearchText);
 
 		toolbarSearch.set(searchSupportUI);
 	}
@@ -435,14 +425,10 @@ public class NamedTracesSettingsEditor implements SettingsUIProvider.SettingsUIC
 
 	private void addKeyEventProcessors(Shell shell, ITableSettings tableSettings) {
 
-		tableSettings.addKeyEventProcessor(new IKeyEventProcessor() {
+		tableSettings.addKeyEventProcessor((extendedTableViewer, e) -> {
 
-			@Override
-			public void handleEvent(ExtendedTableViewer extendedTableViewer, KeyEvent e) {
-
-				if(e.keyCode == SWT.DEL) {
-					deleteItems(shell);
-				}
+			if(e.keyCode == SWT.DEL) {
+				deleteItems(shell);
 			}
 		});
 	}

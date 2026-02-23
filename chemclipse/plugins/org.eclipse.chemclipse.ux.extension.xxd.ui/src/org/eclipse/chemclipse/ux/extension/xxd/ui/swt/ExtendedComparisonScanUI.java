@@ -45,13 +45,11 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
-import org.eclipse.chemclipse.support.ui.updates.IUpdateListenerUI;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.charts.LabelOption;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.model.ComparisonScanOption;
@@ -750,17 +748,13 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 	private void createScanIdentifierUI(Composite parent) {
 
 		ScanIdentifierUI scanIdentifierUI = new ScanIdentifierUI(parent, SWT.NONE);
-		scanIdentifierUI.setUpdateListener(new IUpdateListenerUI() {
+		scanIdentifierUI.setUpdateListener(display -> {
 
-			@Override
-			public void update(Display display) {
-
-				updateInput();
-				if(scanUnknownMaster != null) {
-					UpdateNotifierUI.update(display, scanUnknownMaster);
-					UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "Scan Chart identification has been performed.");
-					ChromatogramUpdateSupport.fireUpdateChromatogramSelection(display, scanUnknownMaster);
-				}
+			updateInput();
+			if(scanUnknownMaster != null) {
+				UpdateNotifierUI.update(display, scanUnknownMaster);
+				UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "Scan Chart identification has been performed.");
+				ChromatogramUpdateSupport.fireUpdateChromatogramSelection(display, scanUnknownMaster);
 			}
 		});
 
@@ -897,15 +891,6 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 	private void createSettingsButton(Composite parent) {
 
-		ISettingsHandler settingsHandler = new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings();
-			}
-		};
-
 		Button button = createSettingsButtonBasic(parent);
 		button.addSelectionListener(new SelectionAdapter() {
 
@@ -916,7 +901,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 				 * Dynamically show different settings, based on the selected scan type.
 				 */
 				List<Class<? extends IPreferencePage>> preferencePages = getPreferencePages();
-				showPreferencesDialog(event, preferencePages, settingsHandler, true);
+				showPreferencesDialog(event, preferencePages, display -> applySettings(), true);
 			}
 		});
 	}

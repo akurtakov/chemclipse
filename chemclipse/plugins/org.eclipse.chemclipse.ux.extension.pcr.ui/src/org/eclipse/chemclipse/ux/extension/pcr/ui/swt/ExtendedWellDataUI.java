@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,9 +28,7 @@ import org.eclipse.chemclipse.support.ui.menu.ITableMenuEntry;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.chemclipse.support.ui.swt.ITableSettings;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
-import org.eclipse.chemclipse.support.updates.IUpdateListener;
 import org.eclipse.chemclipse.swt.ui.components.DataMapSupportUI;
-import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
@@ -147,14 +145,7 @@ public class ExtendedWellDataUI extends Composite implements IExtendedPartUI {
 
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		searchSupportUI.setSearchListener(new ISearchListener() {
-
-			@Override
-			public void performSearch(String searchText, boolean caseSensitive) {
-
-				tableViewer.get().setSearchText(searchText, caseSensitive);
-			}
-		});
+		searchSupportUI.setSearchListener(tableViewer.get()::setSearchText);
 
 		toolbarSearch.set(searchSupportUI);
 	}
@@ -163,14 +154,7 @@ public class ExtendedWellDataUI extends Composite implements IExtendedPartUI {
 
 		DataMapSupportUI headerMapSupportUI = new DataMapSupportUI(parent, SWT.NONE);
 		headerMapSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		headerMapSupportUI.setUpdateListener(new IUpdateListener() {
-
-			@Override
-			public void update() {
-
-				updateInput();
-			}
-		});
+		headerMapSupportUI.setUpdateListener(this::updateInput);
 
 		toolbarEdit.set(headerMapSupportUI);
 	}

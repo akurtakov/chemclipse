@@ -34,7 +34,6 @@ import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
-import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.ux.extension.msd.ui.support.DatabaseImportRunnable;
 import org.eclipse.chemclipse.ux.extension.ui.methods.SettingsUIProvider;
@@ -200,14 +199,7 @@ public class TargetsSettingsEditor extends Composite implements SettingsUIProvid
 
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		searchSupportUI.setSearchListener(new ISearchListener() {
-
-			@Override
-			public void performSearch(String searchText, boolean caseSensitive) {
-
-				targetTemplateListControl.get().setSearchText(searchText, caseSensitive);
-			}
-		});
+		searchSupportUI.setSearchListener(targetTemplateListControl.get()::setSearchText);
 
 		toolbarSearch.set(searchSupportUI);
 	}

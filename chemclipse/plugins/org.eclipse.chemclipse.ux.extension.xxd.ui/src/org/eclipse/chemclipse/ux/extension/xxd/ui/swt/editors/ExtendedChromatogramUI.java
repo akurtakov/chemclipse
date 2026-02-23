@@ -95,7 +95,6 @@ import org.eclipse.chemclipse.ux.extension.ui.support.AuditTrailSupport;
 import org.eclipse.chemclipse.ux.extension.ui.support.PartSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ChartGridSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.ui.swt.SeparationColumnUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.actions.ILabelEditSettings;
@@ -1416,7 +1415,7 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 
 	private void createButtonSettings(Composite parent) {
 
-		createSettingsButton(parent, getPreferencePagesSupplier(), (ISettingsHandler)display -> applySettings(display), false);
+		createSettingsButton(parent, getPreferencePagesSupplier(), this::applySettings, false);
 	}
 
 	private Supplier<List<Class<? extends IPreferencePage>>> getPreferencePagesSupplier() {

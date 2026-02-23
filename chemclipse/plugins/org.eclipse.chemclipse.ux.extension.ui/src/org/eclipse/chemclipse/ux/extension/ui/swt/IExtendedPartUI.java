@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -277,14 +277,7 @@ public interface IExtendedPartUI {
 
 	default Button createSettingsButton(Composite parent, List<Class<? extends IPreferencePage>> preferencePages, ISettingsHandler settingsHandler, boolean sortByTitle) {
 
-		return createSettingsButton(parent, new Supplier<>() {
-
-			@Override
-			public List<Class<? extends IPreferencePage>> get() {
-
-				return preferencePages;
-			}
-		}, settingsHandler, sortByTitle);
+		return createSettingsButton(parent, () -> preferencePages, settingsHandler, sortByTitle);
 	}
 
 	default Button createSettingsButton(Composite parent, Supplier<List<Class<? extends IPreferencePage>>> supplierPreferencePages, ISettingsHandler settingsHandler, boolean sortByTitle) {

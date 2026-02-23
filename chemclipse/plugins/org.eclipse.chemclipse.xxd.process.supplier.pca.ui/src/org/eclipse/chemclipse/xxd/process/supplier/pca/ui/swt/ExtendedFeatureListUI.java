@@ -33,15 +33,11 @@ import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.chemclipse.support.ui.swt.ITableSettings;
-import org.eclipse.chemclipse.support.updates.IUpdateListener;
-import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
-import org.eclipse.chemclipse.ux.extension.ui.model.IDataUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.ProcessorPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.io.FeatureDataMatrixIO;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
@@ -92,40 +88,36 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 		createControl();
 
 		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
-		dataUpdateSupport.add(new IDataUpdateListener() {
+		dataUpdateSupport.add((topic, objects) -> {
 
-			@Override
-			public void update(String topic, List<Object> objects) {
-
-				if(evaluationPCA != null) {
-					if(DataUpdateSupport.isVisible(control)) {
-						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGBAR_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGLIST_VARIABLE.equals(topic)) {
-							if(objects.size() == 1) {
-								Object object = objects.get(0);
-								ArrayList<Feature> features = new ArrayList<>();
-								if(object instanceof Object[] values) {
-									int length = values.length;
-									for(int i = 0; i < length; i++) {
-										if(values[i] instanceof Feature feature) {
-											features.add(feature);
-										} else if(values[i] instanceof IVariable) {
-											IVariable variable = (IVariable)values[i];
-											for(Feature feature : evaluationPCA.getFeatureDataMatrix().getFeatures()) {
-												if(feature.getVariable().equals(variable)) {
-													features.add(feature);
-												}
+			if(evaluationPCA != null) {
+				if(DataUpdateSupport.isVisible(control)) {
+					if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGBAR_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGLIST_VARIABLE.equals(topic)) {
+						if(objects.size() == 1) {
+							Object object = objects.get(0);
+							ArrayList<Feature> features = new ArrayList<>();
+							if(object instanceof Object[] values) {
+								int length = values.length;
+								for(int i = 0; i < length; i++) {
+									if(values[i] instanceof Feature feature) {
+										features.add(feature);
+									} else if(values[i] instanceof IVariable) {
+										IVariable variable = (IVariable)values[i];
+										for(Feature feature : evaluationPCA.getFeatureDataMatrix().getFeatures()) {
+											if(feature.getVariable().equals(variable)) {
+												features.add(feature);
 											}
 										}
 									}
-									if(features.size() >= 0) {
-										listControl.get().setSelection(new StructuredSelection(features));
-										if(!features.isEmpty()) {
-											listControl.get().reveal(features.get(0));
-										}
+								}
+								if(features.size() >= 0) {
+									listControl.get().setSelection(new StructuredSelection(features));
+									if(!features.isEmpty()) {
+										listControl.get().reveal(features.get(0));
 									}
 								}
 							}
@@ -230,14 +222,10 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		searchSupportUI.setSearchListener(new ISearchListener() {
+		searchSupportUI.setSearchListener((searchText, caseSensitive) -> {
 
-			@Override
-			public void performSearch(String searchText, boolean caseSensitive) {
-
-				listControl.get().setSearchText(searchText, caseSensitive);
-				updateInfoLabel();
-			}
+			listControl.get().setSearchText(searchText, caseSensitive);
+			updateInfoLabel();
 		});
 
 		toolbarSearch.set(searchSupportUI);
@@ -317,14 +305,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 			}
 		});
 
-		featureListUI.setUpdateListener(new IUpdateListener() {
-
-			@Override
-			public void update() {
-
-				UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_PCA_UPDATE_FEATURES, evaluationPCA);
-			}
-		});
+		featureListUI.setUpdateListener(() -> UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_PCA_UPDATE_FEATURES, evaluationPCA));
 
 		listControl.set(featureListUI);
 	}
@@ -455,14 +436,7 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 
 	private void createSettingsButton(Composite parent) {
 
-		createSettingsButton(parent, Arrays.asList(PreferencePage.class), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings();
-			}
-		});
+		createSettingsButton(parent, Arrays.asList(PreferencePage.class), display -> applySettings());
 	}
 
 	private void applySettings() {

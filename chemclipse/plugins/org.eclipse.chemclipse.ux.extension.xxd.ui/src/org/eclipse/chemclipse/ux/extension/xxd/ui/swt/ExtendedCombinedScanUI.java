@@ -43,14 +43,12 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.text.ValueFormat;
-import org.eclipse.chemclipse.support.ui.updates.IUpdateListenerUI;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.swt.ui.services.IScanIdentifierService;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageScans;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageSubtract;
@@ -345,15 +343,11 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 	private ScanIdentifierUI createScanIdentifierUI(Composite parent) {
 
 		ScanIdentifierUI scanIdentifierUI = new ScanIdentifierUI(parent, SWT.NONE);
-		scanIdentifierUI.setUpdateListener(new IUpdateListenerUI() {
+		scanIdentifierUI.setUpdateListener(display -> {
 
-			@Override
-			public void update(Display display) {
-
-				if(combinedScan != null) {
-					tabFolder.setSelection(INDEX_TARGETS);
-					updateScan();
-				}
+			if(combinedScan != null) {
+				tabFolder.setSelection(INDEX_TARGETS);
+				updateScan();
 			}
 		});
 
@@ -434,14 +428,7 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 	private void createButtonSettings(Composite parent) {
 
 		List<Class<? extends IPreferencePage>> preferencePages = getPreferencePages();
-		createSettingsButton(parent, preferencePages, new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings();
-			}
-		});
+		createSettingsButton(parent, preferencePages, display -> applySettings());
 	}
 
 	private List<Class<? extends IPreferencePage>> getPreferencePages() {

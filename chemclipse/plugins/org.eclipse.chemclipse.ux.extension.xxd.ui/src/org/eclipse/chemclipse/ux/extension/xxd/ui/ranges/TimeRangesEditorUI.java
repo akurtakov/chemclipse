@@ -26,8 +26,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.swt.ITableSettings;
-import org.eclipse.chemclipse.support.updates.IUpdateListener;
-import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.ux.extension.ui.methods.IChangeListener;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
@@ -177,14 +175,7 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 		timeRangesListUI.setEditEnabled(true);
-		timeRangesListUI.setUpdateListener(new IUpdateListener() {
-
-			@Override
-			public void update() {
-
-				setInput();
-			}
-		});
+		timeRangesListUI.setUpdateListener(this::setInput);
 
 		ITableSettings tableSettings = timeRangesListUI.getTableSettings();
 		timeRangesListUI.applySettings(tableSettings);
@@ -217,14 +208,7 @@ public class TimeRangesEditorUI extends Composite implements IChangeListener, IE
 
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		searchSupportUI.setSearchListener(new ISearchListener() {
-
-			@Override
-			public void performSearch(String searchText, boolean caseSensitive) {
-
-				listControl.get().setSearchText(searchText, caseSensitive);
-			}
-		});
+		searchSupportUI.setSearchListener(listControl.get()::setSearchText);
 
 		toolbarSearch.set(searchSupportUI);
 	}

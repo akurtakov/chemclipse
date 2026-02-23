@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -33,7 +33,6 @@ import org.eclipse.chemclipse.ux.extension.pcr.ui.model.ColorCodes;
 import org.eclipse.chemclipse.ux.extension.pcr.ui.preferences.PreferencePagePlateChart;
 import org.eclipse.chemclipse.ux.extension.pcr.ui.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -43,7 +42,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swtchart.ILineSeries.PlotSymbolType;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
 import org.eclipse.swtchart.extensions.core.ISeriesData;
@@ -140,14 +138,7 @@ public class ExtendedPlateChartsUI extends Composite implements IExtendedPartUI 
 
 	private void createSettingsButton(Composite parent) {
 
-		createSettingsButton(parent, Arrays.asList(PreferencePagePlateChart.class), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				updateChart();
-			}
-		});
+		createSettingsButton(parent, Arrays.asList(PreferencePagePlateChart.class), display -> updateChart());
 	}
 
 	private void createResetButton(Composite parent) {

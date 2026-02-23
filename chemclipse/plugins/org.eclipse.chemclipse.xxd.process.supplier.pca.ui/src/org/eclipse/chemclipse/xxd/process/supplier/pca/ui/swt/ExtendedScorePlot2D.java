@@ -29,10 +29,8 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
-import org.eclipse.chemclipse.ux.extension.ui.model.IDataUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResultMVA;
@@ -44,7 +42,6 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.help.HelpContext;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePage;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePageScorePlot;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.GC;
@@ -53,9 +50,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
-import org.eclipse.swtchart.ICustomPaintListener;
 import org.eclipse.swtchart.Range;
 import org.eclipse.swtchart.extensions.core.BaseChart;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
@@ -82,33 +77,29 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 		super(parent, style);
 		createControl();
 		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
-		dataUpdateSupport.add(new IDataUpdateListener() {
+		dataUpdateSupport.add((topic, objects) -> {
 
-			@Override
-			public void update(String topic, List<Object> objects) {
-
-				if(evaluationPCA != null) {
-					if(DataUpdateSupport.isVisible(control)) {
-						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCORELIST_SAMPLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREPLOT_SAMPLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREBAR_SAMPLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_ERRORRESIDUALS_SAMPLE.equals(topic)) {
-							if(objects.size() == 1) {
-								Object object = objects.get(0);
-								ArrayList<ISample> samples = new ArrayList<>();
-								if(object instanceof Object[] values) {
-									for(int i = 0; i < values.length; i++) {
-										if(values[i] instanceof ISample) {
-											samples.add((ISample)values[i]);
-										}
+			if(evaluationPCA != null) {
+				if(DataUpdateSupport.isVisible(control)) {
+					if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCORELIST_SAMPLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREPLOT_SAMPLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREBAR_SAMPLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_ERRORRESIDUALS_SAMPLE.equals(topic)) {
+						if(objects.size() == 1) {
+							Object object = objects.get(0);
+							ArrayList<ISample> samples = new ArrayList<>();
+							if(object instanceof Object[] values) {
+								for(int i = 0; i < values.length; i++) {
+									if(values[i] instanceof ISample) {
+										samples.add((ISample)values[i]);
 									}
 								}
-								highlightClick = true;
-								evaluationPCA.setHighlightedSamples(samples);
-								setInput(evaluationPCA);
 							}
+							highlightClick = true;
+							evaluationPCA.setHighlightedSamples(samples);
+							setInput(evaluationPCA);
 						}
 					}
 				}
@@ -488,26 +479,22 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 		/*
 		 * Paint Listener
 		 */
-		scorePlot.getBaseChart().getPlotArea().addCustomPaintListener(new ICustomPaintListener() {
+		scorePlot.getBaseChart().getPlotArea().addCustomPaintListener(e -> {
 
-			@Override
-			public void paintControl(PaintEvent e) {
+			if(userSelection.isActive()) {
+				int x = Math.min(userSelection.getStartX(), userSelection.getStopX());
+				int y = Math.min(userSelection.getStartY(), userSelection.getStopY());
+				int width = Math.abs(userSelection.getStopX() - userSelection.getStartX());
+				int height = Math.abs(userSelection.getStopY() - userSelection.getStartY());
 
-				if(userSelection.isActive()) {
-					int x = Math.min(userSelection.getStartX(), userSelection.getStopX());
-					int y = Math.min(userSelection.getStartY(), userSelection.getStopY());
-					int width = Math.abs(userSelection.getStopX() - userSelection.getStartX());
-					int height = Math.abs(userSelection.getStopY() - userSelection.getStartY());
-
-					GC gc = e.gc;
-					gc.setBackground(Colors.RED);
-					gc.setForeground(Colors.DARK_RED);
-					gc.setAlpha(45);
-					gc.fillRectangle(x, y, width, height);
-					gc.setLineStyle(SWT.LINE_DASH);
-					gc.setLineWidth(2);
-					gc.drawRectangle(x, y, width, height);
-				}
+				GC gc = e.gc;
+				gc.setBackground(Colors.RED);
+				gc.setForeground(Colors.DARK_RED);
+				gc.setAlpha(45);
+				gc.fillRectangle(x, y, width, height);
+				gc.setLineStyle(SWT.LINE_DASH);
+				gc.setLineWidth(2);
+				gc.drawRectangle(x, y, width, height);
 			}
 		});
 
@@ -531,14 +518,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 	private void createPrincipalComponentUI(Composite parent) {
 
 		PrincipalComponentUI principalComponentUI = new PrincipalComponentUI(parent, SWT.NONE, PrincipalComponentUI.SPINNER_X | PrincipalComponentUI.SPINNER_Y);
-		principalComponentUI.setSelectionListener(new ISelectionListenerPCs() {
-
-			@Override
-			public void update(int pcX, int pcY, int pcZ) {
-
-				updatePlot(pcX, pcY);
-			}
-		});
+		principalComponentUI.setSelectionListener((pcX, pcY, pcZ) -> updatePlot(pcX, pcY));
 
 		principalComponentControl.set(principalComponentUI);
 	}
@@ -563,14 +543,7 @@ public class ExtendedScorePlot2D extends Composite implements IExtendedPartUI {
 
 	private void createSettingsButton(Composite parent) {
 
-		createSettingsButton(parent, Arrays.asList(PreferencePage.class, PreferencePageScorePlot.class), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings();
-			}
-		});
+		createSettingsButton(parent, Arrays.asList(PreferencePage.class, PreferencePageScorePlot.class), display -> applySettings());
 	}
 
 	private void applySettings() {

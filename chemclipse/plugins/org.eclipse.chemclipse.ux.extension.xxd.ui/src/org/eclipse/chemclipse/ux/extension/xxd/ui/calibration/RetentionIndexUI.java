@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.model.columns.IRetentionIndexEntry;
 import org.eclipse.chemclipse.model.columns.ISeparationColumnIndices;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.ui.updates.IUpdateListenerUI;
-import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.ux.extension.ui.support.PartSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
@@ -151,14 +150,10 @@ public class RetentionIndexUI extends Composite implements IExtendedPartUI {
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setBackground(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		searchSupportUI.setSearchListener(new ISearchListener() {
+		searchSupportUI.setSearchListener((searchText, caseSensitive) -> {
 
-			@Override
-			public void performSearch(String searchText, boolean caseSensitive) {
-
-				retentionIndexListUI.get().setSearchText(searchText, caseSensitive);
-				fireUpdate(Display.getDefault());
-			}
+			retentionIndexListUI.get().setSearchText(searchText, caseSensitive);
+			fireUpdate(Display.getDefault());
 		});
 
 		toolbarSearch.set(searchSupportUI);
@@ -224,14 +219,7 @@ public class RetentionIndexUI extends Composite implements IExtendedPartUI {
 		RetentionIndexTableViewerUI tableViewer = new RetentionIndexTableViewerUI(composite, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
 		tableViewer.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
 
-		tableViewer.setUpdateListener(new IUpdateListenerUI() {
-
-			@Override
-			public void update(Display display) {
-
-				notifyLibraryUpdate();
-			}
-		});
+		tableViewer.setUpdateListener(display -> notifyLibraryUpdate());
 
 		tableViewer.getTable().addSelectionListener(new SelectionAdapter() {
 
