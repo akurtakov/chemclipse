@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -310,9 +310,11 @@ public class DatabaseEditor extends EditorPart implements IChemClipseEditor {
 		/*
 		 * Add the mass spectra handling.
 		 */
-		massSpectra = runnable.getMassSpectra();
 		massSpectrumFile = file;
-		massSpectra.addUpdateListener(() -> updateMassSpectrumListUI());
+		massSpectra = runnable.getMassSpectra();
+		if(massSpectra != null) {
+			massSpectra.addUpdateListener(() -> updateMassSpectrumListUI());
+		}
 	}
 
 	private void loadMassSpectra() {
