@@ -26,10 +26,8 @@ import org.eclipse.chemclipse.numeric.core.Point;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
-import org.eclipse.chemclipse.ux.extension.ui.model.IDataUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Feature;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.FeatureDelta;
@@ -41,15 +39,12 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.help.HelpContext;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePage;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.preferences.PreferencePageLoadingPlot;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
-import org.eclipse.swtchart.ICustomPaintListener;
 import org.eclipse.swtchart.Range;
 import org.eclipse.swtchart.extensions.core.BaseChart;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
@@ -76,37 +71,33 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 		super(parent, style);
 		createControl();
 		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
-		dataUpdateSupport.add(new IDataUpdateListener() {
+		dataUpdateSupport.add((topic, objects) -> {
 
-			@Override
-			public void update(String topic, List<Object> objects) {
-
-				if(evaluationPCA != null) {
-					if(DataUpdateSupport.isVisible(control)) {
-						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGBAR_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGLIST_VARIABLE.equals(topic)) {
-							if(objects.size() == 1) {
-								Object object = objects.get(0);
-								ArrayList<IVariable> selectedVariables = new ArrayList<>();
-								if(object instanceof Object[] values) {
-									for(int i = 0; i < values.length; i++) {
-										if(values[i] instanceof Feature) {
-											Feature feature = (Feature)values[i];
-											selectedVariables.add(feature.getVariable());
-										} else if(values[i] instanceof IVariable) {
-											IVariable variable = (IVariable)values[i];
-											selectedVariables.add(variable);
-										}
+			if(evaluationPCA != null) {
+				if(DataUpdateSupport.isVisible(control)) {
+					if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_STATLIST_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGBAR_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGLIST_VARIABLE.equals(topic)) {
+						if(objects.size() == 1) {
+							Object object = objects.get(0);
+							ArrayList<IVariable> selectedVariables = new ArrayList<>();
+							if(object instanceof Object[] values) {
+								for(int i = 0; i < values.length; i++) {
+									if(values[i] instanceof Feature) {
+										Feature feature = (Feature)values[i];
+										selectedVariables.add(feature.getVariable());
+									} else if(values[i] instanceof IVariable) {
+										IVariable variable = (IVariable)values[i];
+										selectedVariables.add(variable);
 									}
 								}
-								evaluationPCA.setHighlightedVariables(selectedVariables);
-								highlightClick = true;
-								setInput(evaluationPCA);
 							}
+							evaluationPCA.setHighlightedVariables(selectedVariables);
+							highlightClick = true;
+							setInput(evaluationPCA);
 						}
 					}
 				}
@@ -500,26 +491,22 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 		/*
 		 * Paint Listener
 		 */
-		plot.getBaseChart().getPlotArea().addCustomPaintListener(new ICustomPaintListener() {
+		plot.getBaseChart().getPlotArea().addCustomPaintListener(e -> {
 
-			@Override
-			public void paintControl(PaintEvent e) {
+			if(userSelection.isActive()) {
+				int x = Math.min(userSelection.getStartX(), userSelection.getStopX());
+				int y = Math.min(userSelection.getStartY(), userSelection.getStopY());
+				int width = Math.abs(userSelection.getStopX() - userSelection.getStartX());
+				int height = Math.abs(userSelection.getStopY() - userSelection.getStartY());
 
-				if(userSelection.isActive()) {
-					int x = Math.min(userSelection.getStartX(), userSelection.getStopX());
-					int y = Math.min(userSelection.getStartY(), userSelection.getStopY());
-					int width = Math.abs(userSelection.getStopX() - userSelection.getStartX());
-					int height = Math.abs(userSelection.getStopY() - userSelection.getStartY());
-
-					GC gc = e.gc;
-					gc.setBackground(Colors.RED);
-					gc.setForeground(Colors.DARK_RED);
-					gc.setAlpha(45);
-					gc.fillRectangle(x, y, width, height);
-					gc.setLineStyle(SWT.LINE_DASH);
-					gc.setLineWidth(2);
-					gc.drawRectangle(x, y, width, height);
-				}
+				GC gc = e.gc;
+				gc.setBackground(Colors.RED);
+				gc.setForeground(Colors.DARK_RED);
+				gc.setAlpha(45);
+				gc.fillRectangle(x, y, width, height);
+				gc.setLineStyle(SWT.LINE_DASH);
+				gc.setLineWidth(2);
+				gc.drawRectangle(x, y, width, height);
 			}
 		});
 
@@ -551,28 +538,14 @@ public class ExtendedLoadingsPlot extends Composite implements IExtendedPartUI {
 	private void createPrincipalComponentUI(Composite parent) {
 
 		PrincipalComponentUI principalComponentUI = new PrincipalComponentUI(parent, SWT.NONE, PrincipalComponentUI.SPINNER_X | PrincipalComponentUI.SPINNER_Y);
-		principalComponentUI.setSelectionListener(new ISelectionListenerPCs() {
-
-			@Override
-			public void update(int pcX, int pcY, int pcZ) {
-
-				updatePlot(pcX, pcY);
-			}
-		});
+		principalComponentUI.setSelectionListener((pcX, pcY, pcZ) -> updatePlot(pcX, pcY));
 
 		principalComponentControl.set(principalComponentUI);
 	}
 
 	private void createSettingsButton(Composite parent) {
 
-		createSettingsButton(parent, Arrays.asList(PreferencePage.class, PreferencePageLoadingPlot.class), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings();
-			}
-		});
+		createSettingsButton(parent, Arrays.asList(PreferencePage.class, PreferencePageLoadingPlot.class), display -> applySettings());
 	}
 
 	private void applySettings() {

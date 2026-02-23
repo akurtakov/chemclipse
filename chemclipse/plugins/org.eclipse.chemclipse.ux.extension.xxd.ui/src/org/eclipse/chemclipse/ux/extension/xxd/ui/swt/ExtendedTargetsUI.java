@@ -27,7 +27,6 @@ import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.core.ITargetSupplier;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.updates.ITargetUpdateListener;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.rcp.app.undo.UndoContextFactory;
@@ -35,20 +34,16 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
-import org.eclipse.chemclipse.support.ui.events.IKeyEventProcessor;
 import org.eclipse.chemclipse.support.ui.menu.ITableMenuEntry;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.chemclipse.support.ui.swt.ITableSettings;
-import org.eclipse.chemclipse.support.ui.updates.IUpdateListenerUI;
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
-import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.swt.ui.preferences.PreferencePageSystem;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.help.HelpContext;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.operations.DeleteTargetsOperation;
@@ -67,7 +62,6 @@ import org.eclipse.core.commands.operations.IOperationHistory;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -282,18 +276,14 @@ public class ExtendedTargetsUI extends Composite implements IExtendedPartUI {
 	private void createScanIdentifierUI(Composite parent) {
 
 		ScanIdentifierUI scanIdentifierUI = new ScanIdentifierUI(parent, SWT.NONE);
-		scanIdentifierUI.setUpdateListener(new IUpdateListenerUI() {
+		scanIdentifierUI.setUpdateListener(display -> {
 
-			@Override
-			public void update(Display display) {
-
-				IScan scan = getScan();
-				if(scan != null) {
-					updateTargetsModify(display);
-					UpdateNotifierUI.update(display, scan);
-					UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "Scan Chart identification has been performed.");
-					ChromatogramUpdateSupport.fireUpdateChromatogramSelection(display, scan);
-				}
+			IScan scan = getScan();
+			if(scan != null) {
+				updateTargetsModify(display);
+				UpdateNotifierUI.update(display, scan);
+				UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "Scan Chart identification has been performed.");
+				ChromatogramUpdateSupport.fireUpdateChromatogramSelection(display, scan);
 			}
 		});
 
@@ -307,14 +297,7 @@ public class ExtendedTargetsUI extends Composite implements IExtendedPartUI {
 				PreferencePageTargetsList.class, //
 				PreferencePageSystem.class, //
 				PreferencePageLists.class //
-		), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings();
-			}
-		});
+		), display -> applySettings());
 	}
 
 	private void createToolbarInfo(Composite parent) {
@@ -329,14 +312,10 @@ public class ExtendedTargetsUI extends Composite implements IExtendedPartUI {
 
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		searchSupportUI.setSearchListener(new ISearchListener() {
+		searchSupportUI.setSearchListener((searchText, caseSensitive) -> {
 
-			@Override
-			public void performSearch(String searchText, boolean caseSensitive) {
-
-				targetListOther.get().setSearchText(searchText, caseSensitive);
-				targetListChromatogram.get().setSearchText(searchText, caseSensitive);
-			}
+			targetListOther.get().setSearchText(searchText, caseSensitive);
+			targetListChromatogram.get().setSearchText(searchText, caseSensitive);
 		});
 
 		toolbarSearch.set(searchSupportUI);
@@ -366,14 +345,10 @@ public class ExtendedTargetsUI extends Composite implements IExtendedPartUI {
 
 		ComboTarget comboTarget = new ComboTarget(parent, SWT.NONE);
 		comboTarget.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		comboTarget.setTargetUpdateListener(new ITargetUpdateListener() {
+		comboTarget.setTargetUpdateListener(identificationTarget -> {
 
-			@Override
-			public void update(IIdentificationTarget identificationTarget) {
-
-				if(identificationTarget != null) {
-					addTarget(comboTarget.getDisplay(), identificationTarget);
-				}
+			if(identificationTarget != null) {
+				addTarget(comboTarget.getDisplay(), identificationTarget);
 			}
 		});
 
@@ -479,14 +454,7 @@ public class ExtendedTargetsUI extends Composite implements IExtendedPartUI {
 			}
 		});
 
-		targetListUI.setUpdateListener(new IUpdateListener() {
-
-			@Override
-			public void update() {
-
-				fireUpdate();
-			}
-		});
+		targetListUI.setUpdateListener(this::fireUpdate);
 		/*
 		 * Sort the table
 		 */
@@ -579,33 +547,29 @@ public class ExtendedTargetsUI extends Composite implements IExtendedPartUI {
 
 	private void addKeyEventProcessors(Display display, ITableSettings tableSettings) {
 
-		tableSettings.addKeyEventProcessor(new IKeyEventProcessor() {
+		tableSettings.addKeyEventProcessor((extendedTableViewer, e) -> {
 
-			@Override
-			public void handleEvent(ExtendedTableViewer extendedTableViewer, KeyEvent e) {
-
-				if(e.keyCode == SWT.DEL) {
-					deleteTargetsSelected(display);
-				} else if((e.stateMask & SWT.MOD1) == SWT.MOD1) {
-					/*
-					 * CTRL
-					 */
-					if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_I) {
-						if((e.stateMask & SWT.MOD3) == SWT.MOD3) {
-							verifyTargets(false, display); // CTRL + ALT + i
-						} else {
-							verifyTargets(true, display); // CTRL + i
-						}
-					} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_D) {
-						deleteTargetsAll(e.display); // CTRL + d
-					} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_U) {
-						addTargetUnknown(e.display); // CTRL + u
-					} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_Q) {
-						scanIdentifierControl.get().runIdentification(); // CTRL + q
+			if(e.keyCode == SWT.DEL) {
+				deleteTargetsSelected(display);
+			} else if((e.stateMask & SWT.MOD1) == SWT.MOD1) {
+				/*
+				 * CTRL
+				 */
+				if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_I) {
+					if((e.stateMask & SWT.MOD3) == SWT.MOD3) {
+						verifyTargets(false, display); // CTRL + ALT + i
+					} else {
+						verifyTargets(true, display); // CTRL + i
 					}
-				} else {
-					propagateTarget(display);
+				} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_D) {
+					deleteTargetsAll(e.display); // CTRL + d
+				} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_U) {
+					addTargetUnknown(e.display); // CTRL + u
+				} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_Q) {
+					scanIdentifierControl.get().runIdentification(); // CTRL + q
 				}
+			} else {
+				propagateTarget(display);
 			}
 		});
 	}

@@ -31,7 +31,6 @@ import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.ux.extension.ui.support.PartSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.ui.swt.MethodTreeViewer;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ProcessMethodHeader;
 import org.eclipse.chemclipse.ux.extension.ui.swt.ProcessMethodProfiles;
@@ -48,7 +47,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swtchart.extensions.core.IKeyboardSupport;
 
 public class ExtendedMethodUI extends Composite implements IExtendedPartUI {
@@ -193,14 +191,7 @@ public class ExtendedMethodUI extends Composite implements IExtendedPartUI {
 
 	private void createSettingsButton(Composite parent) {
 
-		createSettingsButton(parent, Arrays.asList(PreferencePageReportExport.class, PreferencePageChromatogramExport.class), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings();
-			}
-		});
+		createSettingsButton(parent, Arrays.asList(PreferencePageReportExport.class, PreferencePageChromatogramExport.class), display -> applySettings());
 	}
 
 	private void applySettings() {

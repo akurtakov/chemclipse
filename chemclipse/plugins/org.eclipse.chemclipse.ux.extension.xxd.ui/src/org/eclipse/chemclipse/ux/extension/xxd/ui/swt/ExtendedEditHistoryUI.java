@@ -33,7 +33,6 @@ import org.eclipse.chemclipse.support.history.IEditHistory;
 import org.eclipse.chemclipse.support.history.IEditInformation;
 import org.eclipse.chemclipse.support.history.ProcessSupplierEntry;
 import org.eclipse.chemclipse.support.settings.UserManagement;
-import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
@@ -203,14 +202,7 @@ public class ExtendedEditHistoryUI extends Composite implements IExtendedPartUI 
 
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		searchSupportUI.setSearchListener(new ISearchListener() {
-
-			@Override
-			public void performSearch(String searchText, boolean caseSensitive) {
-
-				tableViewer.get().setSearchText(searchText, caseSensitive);
-			}
-		});
+		searchSupportUI.setSearchListener(tableViewer.get()::setSearchText);
 
 		toolbarSearch.set(searchSupportUI);
 	}

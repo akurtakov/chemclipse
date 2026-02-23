@@ -20,9 +20,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
-import org.eclipse.chemclipse.support.updates.IUpdateListener;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
-import org.eclipse.chemclipse.ux.extension.ui.model.IDataUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Feature;
@@ -55,40 +53,36 @@ public class ExtendedFeatureStatListUI extends Composite implements IExtendedPar
 		createControl();
 
 		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
-		dataUpdateSupport.add(new IDataUpdateListener() {
+		dataUpdateSupport.add((topic, objects) -> {
 
-			@Override
-			public void update(String topic, List<Object> objects) {
-
-				if(evaluation != null) {
-					if(DataUpdateSupport.isVisible(control)) {
-						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGBAR_VARIABLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGLIST_VARIABLE.equals(topic)) {
-							if(objects.size() == 1) {
-								Object object = objects.get(0);
-								ArrayList<Feature> features = new ArrayList<>();
-								if(object instanceof Object[] values) {
-									int length = values.length;
-									for(int i = 0; i < length; i++) {
-										if(values[i] instanceof Feature feature) {
-											features.add(feature);
-										} else if(values[i] instanceof IVariable) {
-											IVariable variable = (IVariable)values[i];
-											for(Feature feature : evaluation.getFeatureDataMatrix().getFeatures()) {
-												if(feature.getVariable().equals(variable)) {
-													features.add(feature);
-												}
+			if(evaluation != null) {
+				if(DataUpdateSupport.isVisible(control)) {
+					if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LIST_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_FOLDCHANGE_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGBAR_VARIABLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_LOADINGLIST_VARIABLE.equals(topic)) {
+						if(objects.size() == 1) {
+							Object object = objects.get(0);
+							ArrayList<Feature> features = new ArrayList<>();
+							if(object instanceof Object[] values) {
+								int length = values.length;
+								for(int i = 0; i < length; i++) {
+									if(values[i] instanceof Feature feature) {
+										features.add(feature);
+									} else if(values[i] instanceof IVariable) {
+										IVariable variable = (IVariable)values[i];
+										for(Feature feature : evaluation.getFeatureDataMatrix().getFeatures()) {
+											if(feature.getVariable().equals(variable)) {
+												features.add(feature);
 											}
 										}
 									}
-									if(features.size() >= 0) {
-										listControl.get().setSelection(new StructuredSelection(features));
-										if(!features.isEmpty()) {
-											listControl.get().reveal(features.get(0));
-										}
+								}
+								if(features.size() >= 0) {
+									listControl.get().setSelection(new StructuredSelection(features));
+									if(!features.isEmpty()) {
+										listControl.get().reveal(features.get(0));
 									}
 								}
 							}
@@ -178,14 +172,7 @@ public class ExtendedFeatureStatListUI extends Composite implements IExtendedPar
 			}
 		});
 
-		featureStatListUI.setUpdateListener(new IUpdateListener() {
-
-			@Override
-			public void update() {
-
-				UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_PCA_UPDATE_FEATURES, evaluation);
-			}
-		});
+		featureStatListUI.setUpdateListener(() -> UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_PCA_UPDATE_FEATURES, evaluation));
 
 		listControl.set(featureStatListUI);
 	}

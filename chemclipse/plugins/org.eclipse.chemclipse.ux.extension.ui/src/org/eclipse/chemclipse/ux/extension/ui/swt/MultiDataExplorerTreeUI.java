@@ -294,7 +294,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 
 	private void createSettingsButton(Composite parent) {
 
-		createSettingsButton(parent, getPreferencePages(), (ISettingsHandler)display -> {
+		createSettingsButton(parent, getPreferencePages(), display -> {
 
 			updateUserLocations();
 			setSupplierFileEditorSupport();

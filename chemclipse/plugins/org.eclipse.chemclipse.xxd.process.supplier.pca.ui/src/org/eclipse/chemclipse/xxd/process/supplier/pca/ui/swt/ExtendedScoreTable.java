@@ -20,7 +20,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
-import org.eclipse.chemclipse.ux.extension.ui.model.IDataUpdateListener;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
@@ -49,46 +48,41 @@ public class ExtendedScoreTable extends Composite implements IExtendedPartUI {
 		createControl();
 
 		DataUpdateSupport dataUpdateSupport = Activator.getDefault().getDataUpdateSupport();
-		dataUpdateSupport.add(new IDataUpdateListener() {
+		dataUpdateSupport.add((topic, objects) -> {
 
-			@Override
-			public void update(String topic, List<Object> objects) {
-
-				if(evaluationPCA != null) {
-					if(DataUpdateSupport.isVisible(control)) {
-						if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCORELIST_SAMPLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREPLOT_SAMPLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREBAR_SAMPLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE.equals(topic) || //
-								IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_ERRORRESIDUALS_SAMPLE.equals(topic)) {
-							if(objects.size() == 1) {
-								Object object = objects.get(0);
-								ArrayList<ISample> samples = new ArrayList<>();
-								if(object instanceof Object[] values) {
-									for(int i = 0; i < values.length; i++) {
-										if(values[i] instanceof ISample sample) {
-											samples.add(sample);
-										}
+			if(evaluationPCA != null) {
+				if(DataUpdateSupport.isVisible(control)) {
+					if(IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCORELIST_SAMPLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SAMPLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREPLOT_SAMPLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_SCOREBAR_SAMPLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_VARIABLELINE_SAMPLE.equals(topic) || //
+							IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_ERRORRESIDUALS_SAMPLE.equals(topic)) {
+						if(objects.size() == 1) {
+							Object object = objects.get(0);
+							ArrayList<ISample> samples = new ArrayList<>();
+							if(object instanceof Object[] values) {
+								for(int i = 0; i < values.length; i++) {
+									if(values[i] instanceof ISample sample) {
+										samples.add(sample);
 									}
-									if(!samples.isEmpty()) {
-										ArrayList<ScoreRow> scoreRows = new ArrayList<>();
-										for(ISample sample : samples) {
-											@SuppressWarnings("unchecked")
-											ScoreRow row = ((ArrayList<ScoreRow>)listControl.get().getTableViewer().getInput()).stream().filter(x -> x.getSampleName() == sample.getSampleName()).findFirst().get();
-											scoreRows.add(row);
-										}
-										if(!scoreRows.isEmpty()) {
-											listControl.get().getTableViewer().setSelection(new StructuredSelection(scoreRows));
-										}
-										evaluationPCA.setHighlightedSamples(samples);
+								}
+								if(!samples.isEmpty()) {
+									ArrayList<ScoreRow> scoreRows = new ArrayList<>();
+									for(ISample sample : samples) {
+										@SuppressWarnings("unchecked")
+										ScoreRow row = ((ArrayList<ScoreRow>)listControl.get().getTableViewer().getInput()).stream().filter(x -> x.getSampleName() == sample.getSampleName()).findFirst().get();
+										scoreRows.add(row);
 									}
+									if(!scoreRows.isEmpty()) {
+										listControl.get().getTableViewer().setSelection(new StructuredSelection(scoreRows));
+									}
+									evaluationPCA.setHighlightedSamples(samples);
 								}
 							}
 						}
 					}
 				}
-
 			}
 
 		});

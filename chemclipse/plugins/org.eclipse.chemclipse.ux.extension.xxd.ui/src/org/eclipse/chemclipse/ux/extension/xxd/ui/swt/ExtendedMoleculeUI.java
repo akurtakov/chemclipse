@@ -27,13 +27,11 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
-import org.eclipse.chemclipse.support.ui.updates.IUpdateListenerUI;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.services.IMoleculeImageService;
 import org.eclipse.chemclipse.swt.ui.services.ImageServiceInput;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageMolecule;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
@@ -274,19 +272,15 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 	private void createMoleculeUI(Composite parent) {
 
 		MoleculeUI moleculeUI = new MoleculeUI(parent, SWT.NONE);
-		moleculeUI.setUpdateListenerUI(new IUpdateListenerUI() {
+		moleculeUI.setUpdateListenerUI(display -> {
 
-			@Override
-			public void update(Display display) {
-
-				/*
-				 * Only update the combo box if the service has been
-				 * changed via the MoleculeServiceDialog.
-				 */
-				IMoleculeImageService moleculeImageService = MoleculeImageServiceSupport.getMoleculeImageServiceSelection();
-				if(moleculeImageService != null) {
-					comboViewerServices.get().setSelection(new StructuredSelection(moleculeImageService));
-				}
+			/*
+			 * Only update the combo box if the service has been
+			 * changed via the MoleculeServiceDialog.
+			 */
+			IMoleculeImageService moleculeImageService = MoleculeImageServiceSupport.getMoleculeImageServiceSelection();
+			if(moleculeImageService != null) {
+				comboViewerServices.get().setSelection(new StructuredSelection(moleculeImageService));
 			}
 		});
 
@@ -408,14 +402,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 			}
 		}
 
-		createSettingsButton(parent, preferencePages, new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				updateMoleculeService(display);
-			}
-		});
+		createSettingsButton(parent, preferencePages, this::updateMoleculeService);
 	}
 
 	private void updateMoleculeService(Display display) {

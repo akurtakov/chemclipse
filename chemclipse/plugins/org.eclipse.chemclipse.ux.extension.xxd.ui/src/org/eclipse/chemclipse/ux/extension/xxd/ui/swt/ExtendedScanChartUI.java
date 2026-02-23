@@ -38,7 +38,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.ui.swt.EnhancedCombo;
-import org.eclipse.chemclipse.support.ui.updates.IUpdateListenerUI;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
@@ -485,14 +484,10 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 
 		ScanFilterUI scanFilter = new ScanFilterUI(parent, SWT.NONE);
 		scanFilter.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		scanFilter.setUpdateListener(new IUpdateListenerUI() {
+		scanFilter.setUpdateListener(display -> {
 
-			@Override
-			public void update(Display display) {
-
-				updateScan(scan);
-				fireUpdate();
-			}
+			updateScan(scan);
+			fireUpdate();
 		});
 
 		scanFilterUI.set(scanFilter);
@@ -501,17 +496,13 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 	private void createScanIdentifierUI(Composite parent) {
 
 		ScanIdentifierUI scanIdentifierUI = new ScanIdentifierUI(parent, SWT.NONE);
-		scanIdentifierUI.setUpdateListener(new IUpdateListenerUI() {
+		scanIdentifierUI.setUpdateListener(display -> {
 
-			@Override
-			public void update(Display display) {
-
-				updateScan(scan);
-				UpdateNotifierUI.update(display, scan);
-				UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "Scan Chart identification has been performed.");
-				ChromatogramUpdateSupport.fireUpdateChromatogramSelection(display, scan);
-				fireUpdate();
-			}
+			updateScan(scan);
+			UpdateNotifierUI.update(display, scan);
+			UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "Scan Chart identification has been performed.");
+			ChromatogramUpdateSupport.fireUpdateChromatogramSelection(display, scan);
+			fireUpdate();
 		});
 
 		scanIdentifierControl.set(scanIdentifierUI);
@@ -704,16 +695,12 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 
 	private void createSettingsButton(Composite parent) {
 
-		ISettingsHandler settingsHandler = new ISettingsHandler() {
+		ISettingsHandler settingsHandler = display -> {
 
-			@Override
-			public void apply(Display display) {
-
-				updateScan(scan);
-				scanIdentifierControl.get().updateIdentifier();
-				tracesClipboardControl.get().updateOption();
-				fireUpdate();
-			}
+			updateScan(scan);
+			scanIdentifierControl.get().updateIdentifier();
+			tracesClipboardControl.get().updateOption();
+			fireUpdate();
 		};
 
 		Button button = createSettingsButtonBasic(parent);

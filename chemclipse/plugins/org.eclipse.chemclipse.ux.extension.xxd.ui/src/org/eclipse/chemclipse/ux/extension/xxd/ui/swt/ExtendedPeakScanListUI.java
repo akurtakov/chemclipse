@@ -47,12 +47,9 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
-import org.eclipse.chemclipse.support.ui.events.IKeyEventProcessor;
 import org.eclipse.chemclipse.support.ui.menu.ITableMenuEntry;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.chemclipse.support.ui.swt.ITableSettings;
-import org.eclipse.chemclipse.support.ui.updates.IUpdateListenerUI;
-import org.eclipse.chemclipse.swt.ui.components.ISearchListener;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
@@ -60,7 +57,6 @@ import org.eclipse.chemclipse.swt.ui.preferences.PreferencePageSystem;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.support.PartSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
-import org.eclipse.chemclipse.ux.extension.ui.swt.ISettingsHandler;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.dialogs.ClassifierDialog;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.dialogs.InternalStandardDialog;
@@ -318,14 +314,10 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		searchSupportUI.setSearchListener(new ISearchListener() {
+		searchSupportUI.setSearchListener((searchText, caseSensitive) -> {
 
-			@Override
-			public void performSearch(String searchText, boolean caseSensitive) {
-
-				tableViewer.get().setSearchText(searchText, caseSensitive);
-				updateLabel();
-			}
+			tableViewer.get().setSearchText(searchText, caseSensitive);
+			updateLabel();
 		});
 
 		toolbarSearch.set(searchSupportUI);
@@ -461,38 +453,34 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 
 	private void addKeyEventProcessors(Display display, ITableSettings tableSettings) {
 
-		tableSettings.addKeyEventProcessor(new IKeyEventProcessor() {
+		tableSettings.addKeyEventProcessor((extendedTableViewer, e) -> {
 
-			@Override
-			public void handleEvent(ExtendedTableViewer extendedTableViewer, KeyEvent e) {
-
-				if(matchesKeyPress("InternalStandard", e)) {
-					modifyInternalStandards(display);
-				} else if(matchesKeyPress("Classifier", e)) {
-					modifyClassifier(display);
-				} else if(matchesKeyPress("DeleteTargets", e)) {
-					deleteTargetsAll(e.display);
-				} else if(matchesKeyPress("Unknown", e)) {
-					addTargetsUnknown(e.display);
-				} else if(matchesKeyPress("Query", e)) {
-					scanIdentifierControl.get().runIdentification();
-					tableViewer.get().refresh();
-					UpdateNotifierUI.update(display, chromatogramSelection);
-				} else if(matchesKeyPress("ActiveAnalysis", e)) {
-					setPeaksActiveForAnalysis(true);
-				} else if(matchesKeyPress("InactiveAnalysis", e)) {
-					setPeaksActiveForAnalysis(false);
-				} else if(e.keyCode == SWT.DEL) {
-					deletePeaksOrIdentifications(display);
-				} else if((e.stateMask & SWT.MOD1) == SWT.MOD1) {
-					if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_A) {
-						if(showPeakProfilesSelectionAll) {
-							propagateSelection(display); // CTRL + A
-						}
+			if(matchesKeyPress("InternalStandard", e)) {
+				modifyInternalStandards(display);
+			} else if(matchesKeyPress("Classifier", e)) {
+				modifyClassifier(display);
+			} else if(matchesKeyPress("DeleteTargets", e)) {
+				deleteTargetsAll(e.display);
+			} else if(matchesKeyPress("Unknown", e)) {
+				addTargetsUnknown(e.display);
+			} else if(matchesKeyPress("Query", e)) {
+				scanIdentifierControl.get().runIdentification();
+				tableViewer.get().refresh();
+				UpdateNotifierUI.update(display, chromatogramSelection);
+			} else if(matchesKeyPress("ActiveAnalysis", e)) {
+				setPeaksActiveForAnalysis(true);
+			} else if(matchesKeyPress("InactiveAnalysis", e)) {
+				setPeaksActiveForAnalysis(false);
+			} else if(e.keyCode == SWT.DEL) {
+				deletePeaksOrIdentifications(display);
+			} else if((e.stateMask & SWT.MOD1) == SWT.MOD1) {
+				if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_A) {
+					if(showPeakProfilesSelectionAll) {
+						propagateSelection(display); // CTRL + A
 					}
-				} else {
-					propagateSelection(display);
 				}
+			} else {
+				propagateSelection(display);
 			}
 		});
 	}
@@ -897,15 +885,11 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 	private void createScanIdentifierUI(Composite parent) {
 
 		ScanIdentifierUI scanIdentifierUI = new ScanIdentifierUI(parent, SWT.NONE);
-		scanIdentifierUI.setUpdateListener(new IUpdateListenerUI() {
+		scanIdentifierUI.setUpdateListener(display -> {
 
-			@Override
-			public void update(Display display) {
-
-				if(chromatogramSelection != null) {
-					chromatogramSelection.getChromatogram().setDirty(true);
-					UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "Peaks/Scans have been identified.");
-				}
+			if(chromatogramSelection != null) {
+				chromatogramSelection.getChromatogram().setDirty(true);
+				UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "Peaks/Scans have been identified.");
 			}
 		});
 
@@ -1009,14 +993,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 				PreferencePageScans.class, //
 				PreferencePageTargets.class, //
 				PreferencePageLists.class //
-		), new ISettingsHandler() {
-
-			@Override
-			public void apply(Display display) {
-
-				applySettings();
-			}
-		});
+		), display -> applySettings());
 	}
 
 	private void updateLabel() {
