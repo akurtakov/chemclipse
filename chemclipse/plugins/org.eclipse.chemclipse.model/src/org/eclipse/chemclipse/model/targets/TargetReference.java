@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Christoph Läubrich - initial API and implementation
  * Philip Wenig - refactoring target label support
@@ -141,9 +141,6 @@ public class TargetReference implements ITargetReference {
 
 	/**
 	 * Create the visibility filter.
-	 * 
-	 * @param targetDisplaySettings
-	 * @return {@link Predicate}
 	 */
 	public static Predicate<ITargetReference> createVisibilityFilter(ITargetDisplaySettings targetDisplaySettings) {
 
@@ -151,20 +148,16 @@ public class TargetReference implements ITargetReference {
 			return always -> true;
 		}
 
-		return new Predicate<ITargetReference>() {
+		return targetReference -> {
 
-			@Override
-			public boolean test(ITargetReference targetReference) {
-
-				if(targetDisplaySettings.isVisible(targetReference)) {
-					if(TargetReferenceType.PEAK.equals(targetReference.getType())) {
-						return targetDisplaySettings.isShowPeakLabels();
-					} else if(TargetReferenceType.SCAN.equals(targetReference.getType())) {
-						return targetDisplaySettings.isShowScanLabels();
-					}
+			if(targetDisplaySettings.isVisible(targetReference)) {
+				if(TargetReferenceType.PEAK.equals(targetReference.getType())) {
+					return targetDisplaySettings.isShowPeakLabels();
+				} else if(TargetReferenceType.SCAN.equals(targetReference.getType())) {
+					return targetDisplaySettings.isShowScanLabels();
 				}
-				return false;
 			}
+			return false;
 		};
 	}
 }

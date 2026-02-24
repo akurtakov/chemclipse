@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Christoph Läubrich - initial API and implementation
  * Philip Wenig - refactorings
@@ -24,14 +24,11 @@ public interface IProcessSupplierContext {
 
 	/**
 	 * Gets the {@link IProcessSupplier} for the given id from this context or <code>null</code> if no supplier exits for the id
-	 * 
-	 * @param id
-	 * @return
 	 */
 	<T> IProcessSupplier<T> getSupplier(String id);
 
 	/**
-	 * 
+	 *
 	 * iterates all available {@link IProcessSupplier}
 	 */
 	void visitSupplier(Consumer<? super IProcessSupplier<?>> consumer);
@@ -54,18 +51,14 @@ public interface IProcessSupplierContext {
 			return test -> true;
 		}
 
-		return new Predicate<IProcessSupplier<?>>() {
+		return processSupplier -> {
 
-			@Override
-			public boolean test(IProcessSupplier<?> processSupplier) {
-
-				for(DataCategory dataType : dataTypes) {
-					if(processSupplier.getSupportedDataTypes().contains(dataType)) {
-						return true;
-					}
+			for(DataCategory dataType : dataTypes) {
+				if(processSupplier.getSupportedDataTypes().contains(dataType)) {
+					return true;
 				}
-				return false;
 			}
+			return false;
 		};
 	}
 

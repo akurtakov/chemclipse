@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - simplify API, deprecate individual getters in favor to a new filter approach
@@ -37,8 +37,6 @@ public interface IConverterSupport {
 	 * The filter extension are the specific chromatogram file extensions.
 	 * Agilent has for example an filter extension (.D) which represents a
 	 * chromatogram.
-	 * 
-	 * @return String[]
 	 */
 	default String[] getFilterExtensions(Predicate<? super ISupplier> filter) {
 
@@ -64,8 +62,6 @@ public interface IConverterSupport {
 	 * The filter names are the specific chromatogram file names to be displayed
 	 * for example in the SWT FileDialog. Agilent has for example an filter name
 	 * "Agilent Chromatogram (.D)".
-	 * 
-	 * @return String[]
 	 */
 	default String[] getFilterNames(Predicate<? super ISupplier> filter) {
 
@@ -80,22 +76,10 @@ public interface IConverterSupport {
 	 * Returns the converter id "org.eclipse.chemclipse.msd.converter.supplier.agilent" available in the list defined by its name, e.g. "Agilent Chromatogram (*.D/DATA.MS)".
 	 * If more converter with the given name "Agilent Chromatogram (*.D/DATA.MS)" are stored, the first match will be returned. If exportConverterOnly is true, only a converter
 	 * that is able to export the file will be returned.
-	 * 
-	 * @param name
-	 * @param exportConverterOnly
-	 * @return String
-	 * @throws NoConverterAvailableException
 	 */
 	default String getConverterId(String name, boolean exportConverterOnly) throws NoConverterAvailableException {
 
-		Collection<ISupplier> supplier = getSupplier(new Predicate<ISupplier>() {
-
-			@Override
-			public boolean test(ISupplier supplier) {
-
-				return supplier.getFilterName().equals(name) && (!exportConverterOnly || supplier.isExportable());
-			}
-		});
+		Collection<ISupplier> supplier = getSupplier(s -> s.getFilterName().equals(name) && (!exportConverterOnly || s.isExportable()));
 		if(supplier.isEmpty()) {
 			throw new NoConverterAvailableException();
 		} else {
@@ -110,10 +94,6 @@ public interface IConverterSupport {
 	 * The same thing if the file is a file and not a directory.<br/>
 	 * The header of {@link MethodConverter} lists some file format
 	 * endings.
-	 * 
-	 * @param file
-	 * @return List<String>
-	 * @throws NoConverterAvailableException
 	 */
 	default List<String> getAvailableConverterIds(File file) throws NoConverterAvailableException {
 
@@ -132,8 +112,6 @@ public interface IConverterSupport {
 
 	/**
 	 * Returns the list of all available suppliers
-	 * 
-	 * @return Collection<ISupplier>
 	 */
 	default Collection<ISupplier> getSupplier(Predicate<? super ISupplier> filter) {
 
@@ -151,10 +129,6 @@ public interface IConverterSupport {
 	/**
 	 * Returns the supplier with the given id.<br/>
 	 * If no supplier with the given id is available, throw an exception.
-	 * 
-	 * @param id
-	 * @throws NoConverterAvailableException
-	 * @return supplier
 	 */
 	default ISupplier getSupplier(String id) throws NoConverterAvailableException {
 
@@ -169,13 +143,13 @@ public interface IConverterSupport {
 	DataCategory getDataCategory();
 
 	/**
-	 * 
+	 *
 	 * @return a name of this converter so a user can identify this among others
 	 */
 	String getName();
 
 	/**
-	 * 
+	 *
 	 * @return an id that can be used to store a reference to this converter support
 	 */
 	default String getID() {
