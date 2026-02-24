@@ -26,7 +26,7 @@ public class TutorialHandler {
 	@Execute
 	void execute(ECommandService commandService, EHandlerService handlerService) {
 
-		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.cheatsheets.openCheatSheet", null);
+		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.cheatsheets.openCheatSheet");
 		if(handlerService.canExecute(command)) {
 			handlerService.executeHandler(command);
 		} else {

@@ -25,7 +25,7 @@ public class ExportHandler {
 	@Execute
 	void execute(ECommandService commandService, EHandlerService handlerService) {
 
-		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.file.export", null);
+		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.file.export");
 		if(handlerService.canExecute(command)) {
 			handlerService.executeHandler(command);
 		} else {

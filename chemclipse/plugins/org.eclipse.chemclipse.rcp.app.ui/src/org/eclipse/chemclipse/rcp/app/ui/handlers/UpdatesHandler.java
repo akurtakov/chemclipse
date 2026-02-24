@@ -25,7 +25,7 @@ public class UpdatesHandler {
 	@Execute
 	void execute(ECommandService commandService, EHandlerService handlerService) {
 
-		ParameterizedCommand command = commandService.createCommand("org.eclipse.equinox.p2.ui.sdk.update", null);
+		ParameterizedCommand command = commandService.createCommand("org.eclipse.equinox.p2.ui.sdk.update");
 		if(handlerService.canExecute(command)) {
 			handlerService.executeHandler(command);
 		} else {

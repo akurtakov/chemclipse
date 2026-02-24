@@ -25,7 +25,7 @@ public class AboutHandler {
 	@Execute
 	void execute(ECommandService commandService, EHandlerService handlerService) {
 
-		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.help.aboutAction", null);
+		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.help.aboutAction");
 		if(handlerService.canExecute(command)) {
 			handlerService.executeHandler(command);
 		} else {

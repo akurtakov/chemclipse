@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -54,7 +54,7 @@ public class SaveAsHandler {
 				if(object instanceof IChemClipseEditor editor) {
 					editor.saveAs();
 				} else {
-					ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.file.saveAs", null); // $NON-NLS-1$
+					ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.file.saveAs"); // $NON-NLS-1$
 					if(handlerService.canExecute(command)) {
 						handlerService.executeHandler(command);
 					} else {

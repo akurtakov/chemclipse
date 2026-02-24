@@ -26,7 +26,7 @@ public class SearchHelpHandler {
 	@Execute
 	void execute(ECommandService commandService, EHandlerService handlerService) {
 
-		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.help.helpSearch", null);
+		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.help.helpSearch");
 		if(handlerService.canExecute(command)) {
 			handlerService.executeHandler(command);
 		} else {

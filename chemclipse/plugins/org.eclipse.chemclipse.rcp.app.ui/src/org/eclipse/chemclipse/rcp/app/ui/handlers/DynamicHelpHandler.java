@@ -26,7 +26,7 @@ public class DynamicHelpHandler {
 	@Execute
 	void execute(ECommandService commandService, EHandlerService handlerService) {
 
-		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.help.dynamicHelp", null);
+		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.help.dynamicHelp");
 		if(handlerService.canExecute(command)) {
 			handlerService.executeHandler(command);
 		} else {

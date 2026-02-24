@@ -25,7 +25,7 @@ public class QuickAccessHandler {
 	@Execute
 	public void execute(ECommandService commandService, EHandlerService handlerService) {
 
-		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.window.quickAccess", null);
+		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.window.quickAccess");
 		if(handlerService.canExecute(command)) {
 			handlerService.executeHandler(command);
 		} else {

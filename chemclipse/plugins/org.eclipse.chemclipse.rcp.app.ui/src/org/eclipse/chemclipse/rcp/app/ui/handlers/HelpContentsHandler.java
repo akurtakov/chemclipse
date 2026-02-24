@@ -25,7 +25,7 @@ public class HelpContentsHandler {
 	@Execute
 	void execute(ECommandService commandService, EHandlerService handlerService) {
 
-		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.help.helpContents", null);
+		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.help.helpContents");
 		if(handlerService.canExecute(command)) {
 			handlerService.executeHandler(command);
 		} else {
