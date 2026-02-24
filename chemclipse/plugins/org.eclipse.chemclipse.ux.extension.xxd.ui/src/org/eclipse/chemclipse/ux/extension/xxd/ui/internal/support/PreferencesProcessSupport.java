@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -39,16 +39,12 @@ public class PreferencesProcessSupport {
 	public PreferencesProcessSupport(DataCategory dataCategory) {
 
 		this.dataCategory = dataCategory;
-		this.predicateProcessSupplier = new Predicate<IProcessSupplier<?>>() {
+		this.predicateProcessSupplier = processSupplier -> {
 
-			@Override
-			public boolean test(IProcessSupplier<?> processSupplier) {
-
-				if(processSupplier.getSupportedDataTypes().contains(DataCategory.AUTO_DETECT)) {
-					return true;
-				}
-				return processSupplier.getSupportedDataTypes().contains(getDataCategory());
+			if(processSupplier.getSupportedDataTypes().contains(DataCategory.AUTO_DETECT)) {
+				return true;
 			}
+			return processSupplier.getSupportedDataTypes().contains(getDataCategory());
 		};
 
 		updateProcessSuppliers();
