@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -33,6 +33,7 @@ import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.identifier.DeltaCalculationSupport;
 import org.eclipse.chemclipse.model.identifier.IComparisonResult;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
+import org.eclipse.chemclipse.model.identifier.IPeakIdentificationResult;
 import org.eclipse.chemclipse.model.identifier.IPeakIdentificationResults;
 import org.eclipse.chemclipse.model.identifier.MatchConstraints;
 import org.eclipse.chemclipse.model.identifier.PeakIdentificationResults;
@@ -46,6 +47,7 @@ import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.MassSpectra;
+import org.eclipse.chemclipse.msd.model.implementation.PeakIdentificationResult;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.support.settings.UserManagement;
 import org.eclipse.chemclipse.support.text.ValueFormat;
@@ -91,9 +93,10 @@ public class FileIdentifier {
 		 * Load the mass spectra database only if the raw file or its content has changed.
 		 */
 		List<String> files = extractFiles(fileIdentifierSettings.getMassSpectraFiles());
+		IPeakIdentificationResults identificationResults = new PeakIdentificationResults();
 		Map<String, IMassSpectra> databases = databasesCache.getDatabases(files, monitor);
 		for(Map.Entry<String, IMassSpectra> database : databases.entrySet()) {
-			compareMassSpectraAgainstDatabase(massSpectra.getList(), database.getValue().getList(), fileIdentifierSettings, identifier, database.getKey(), monitor);
+			compareMassSpectraAgainstDatabase(massSpectra.getList(), database.getValue().getList(), fileIdentifierSettings, identifier, database.getKey(), identificationResults, monitor);
 		}
 
 		return massSpectra;
@@ -126,7 +129,7 @@ public class FileIdentifier {
 		 * The LibraryService uses the identifier to get a mass spectrum of a given target.
 		 * It would then use this plugin instead of the plugin who used this identifier.
 		 */
-		IPeakIdentificationResults identificationResults = new PeakIdentificationResults();
+
 		String identifier = IDENTIFIER;
 		String alternateIdentifierId = peakIdentifierSettings.getAlternateIdentifierId();
 		if(alternateIdentifierId != null && !alternateIdentifierId.isEmpty()) {
@@ -137,8 +140,9 @@ public class FileIdentifier {
 		 */
 		List<String> files = extractFiles(peakIdentifierSettings.getMassSpectraFiles());
 		Map<String, IMassSpectra> databases = databasesCache.getDatabases(files, monitor);
+		IPeakIdentificationResults identificationResults = new PeakIdentificationResults();
 		for(Map.Entry<String, IMassSpectra> database : databases.entrySet()) {
-			comparePeaksAgainstDatabase(peaksToIdentify, database.getValue().getList(), peakIdentifierSettings, identifier, database.getKey(), monitor);
+			comparePeaksAgainstDatabase(peaksToIdentify, database.getValue().getList(), peakIdentifierSettings, identifier, database.getKey(), identificationResults, monitor);
 		}
 
 		return identificationResults;
@@ -195,17 +199,17 @@ public class FileIdentifier {
 		return databasesCache;
 	}
 
-	public static int compareMassSpectraAgainstDatabase(List<? extends IScanMSD> unknownList, List<? extends IScanMSD> references, ILibraryIdentifierSettings fileIdentifierSettings, String identifier, String databaseName, IProgressMonitor monitor) {
+	public static int compareMassSpectraAgainstDatabase(List<? extends IScanMSD> unknownList, List<? extends IScanMSD> references, ILibraryIdentifierSettings fileIdentifierSettings, String identifier, String databaseName, IPeakIdentificationResults identificationResults, IProgressMonitor monitor) {
 
-		return compareAgainstDatabase(unknownList, scan -> scan, references, fileIdentifierSettings, identifier, databaseName, monitor);
+		return compareAgainstDatabase(unknownList, scan -> scan, references, fileIdentifierSettings, identifier, databaseName, identificationResults, monitor);
 	}
 
-	public static int comparePeaksAgainstDatabase(List<? extends IPeakMSD> unknownList, List<IScanMSD> references, PeakIdentifierSettings fileIdentifierSettings, String identifier, String databaseName, IProgressMonitor monitor) {
+	public static int comparePeaksAgainstDatabase(List<? extends IPeakMSD> unknownList, List<IScanMSD> references, PeakIdentifierSettings fileIdentifierSettings, String identifier, String databaseName, IPeakIdentificationResults identificationResults, IProgressMonitor monitor) {
 
-		return compareAgainstDatabase(unknownList, peak -> peak.getPeakModel().getPeakMassSpectrum(), references, fileIdentifierSettings, identifier, databaseName, monitor);
+		return compareAgainstDatabase(unknownList, peak -> peak.getPeakModel().getPeakMassSpectrum(), references, fileIdentifierSettings, identifier, databaseName, identificationResults, monitor);
 	}
 
-	private static <T> int compareAgainstDatabase(Collection<T> unknownList, Function<T, IScanMSD> extractor, List<? extends IScanMSD> references, IFileIdentifierSettings fileIdentifierSettings, String identifier, String databaseName, IProgressMonitor monitor) {
+	private static <T> int compareAgainstDatabase(Collection<T> unknownList, Function<T, IScanMSD> extractor, List<? extends IScanMSD> references, IFileIdentifierSettings fileIdentifierSettings, String identifier, String databaseName, IPeakIdentificationResults identificationResults, IProgressMonitor monitor) {
 
 		int matched = 0;
 		long start = System.currentTimeMillis();
@@ -236,12 +240,15 @@ public class FileIdentifier {
 				List<IComparisonResult> resultList = new ArrayList<>(matches.keySet());
 				Collections.sort(resultList, RESULT_COMPARATOR);
 				int size = Math.min(fileIdentifierSettings.getNumberOfTargets(), matches.size());
+				IPeakIdentificationResult identificationResult = new PeakIdentificationResult();
 				for(int i = 0; i < size; i++) {
 					IComparisonResult comparisonResult = resultList.get(i);
 					IIdentificationTarget massSpectrumTarget = TARGETBUILDER.getMassSpectrumTarget(matches.get(comparisonResult), comparisonResult, identifier, databaseName);
 					massSpectrumTarget.getLibraryInformation().setMiscellaneous(comparatorName); // e.g. Cosine, Cosine Binary (0|1), ...
 					unknown.getTargets().add(massSpectrumTarget);
+					identificationResult.add(massSpectrumTarget);
 				}
+				identificationResults.add(identificationResult);
 			}
 
 			count++;
