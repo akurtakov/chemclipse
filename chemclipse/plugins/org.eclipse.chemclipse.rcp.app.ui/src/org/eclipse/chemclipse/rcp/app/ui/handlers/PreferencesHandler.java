@@ -29,7 +29,7 @@ public class PreferencesHandler {
 	@Execute
 	void execute(ECommandService commandService, EHandlerService handlerService) {
 
-		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.window.preferences", null);
+		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.window.preferences");
 		if(handlerService.canExecute(command)) {
 
 			List<String> preservePreferencePrefixes = new ArrayList<>();

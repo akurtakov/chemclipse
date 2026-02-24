@@ -25,7 +25,7 @@ public class ImportHandler {
 	@Execute
 	void execute(ECommandService commandService, EHandlerService handlerService) {
 
-		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.file.import", null);
+		ParameterizedCommand command = commandService.createCommand("org.eclipse.ui.file.import");
 		if(handlerService.canExecute(command)) {
 			handlerService.executeHandler(command);
 		} else {
