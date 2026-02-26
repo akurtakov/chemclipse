@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -78,21 +78,8 @@ public class DeleteTargetsOperation extends AbstractOperation {
 	public IStatus execute(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 
 		targetSupplier.getTargets().removeAll(targetsToDelete);
-		update(ExtensionMessages.targetsDeleted);
+
 		return Status.OK_STATUS;
-	}
-
-	private void update(String message) {
-
-		UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_IDENTIFICATION_TARGETS_UPDATE_SELECTION, message);
-		chromatogramSelection.getChromatogram().setDirty(true);
-		if(targetSupplier instanceof IPeak peak) {
-			chromatogramSelection.setSelectedPeak(peak);
-			UpdateNotifierUI.update(display, peak);
-		} else if(targetSupplier instanceof IScan scan) {
-			chromatogramSelection.getSelectedScan();
-			UpdateNotifierUI.update(display, scan);
-		}
 	}
 
 	@Override
@@ -111,7 +98,20 @@ public class DeleteTargetsOperation extends AbstractOperation {
 	public IStatus undo(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
 
 		targetSupplier.getTargets().addAll(targetsToDelete);
-		update(ExtensionMessages.targetsRestored);
+		notifyTargetsRestored();
 		return Status.OK_STATUS;
+	}
+
+	private void notifyTargetsRestored() {
+
+		UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_IDENTIFICATION_TARGETS_UPDATE_SELECTION, ExtensionMessages.targetsRestored);
+		chromatogramSelection.getChromatogram().setDirty(true);
+		if(targetSupplier instanceof IPeak peak) {
+			chromatogramSelection.setSelectedPeak(peak);
+			UpdateNotifierUI.update(display, peak);
+		} else if(targetSupplier instanceof IScan scan) {
+			chromatogramSelection.getSelectedScan();
+			UpdateNotifierUI.update(display, scan);
+		}
 	}
 }

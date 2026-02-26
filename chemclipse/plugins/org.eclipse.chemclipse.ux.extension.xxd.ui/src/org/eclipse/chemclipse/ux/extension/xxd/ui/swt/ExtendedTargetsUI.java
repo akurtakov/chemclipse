@@ -46,6 +46,7 @@ import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.help.HelpContext;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.operations.DeleteTargetsOperation;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageLists;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageTargets;
@@ -706,7 +707,7 @@ public class ExtendedTargetsUI extends Composite implements IExtendedPartUI {
 		AtomicReference<TargetsListUI> targetList = getActiveTargetList();
 		List<IIdentificationTarget> selection = targetList.get().getStructuredSelection().toList();
 		if(getObject() instanceof ITargetSupplier targetSupplier) {
-			DeleteTargetsOperation deleteTargetsOperation = new DeleteTargetsOperation(display, chromatogramSelection, targetSupplier, selection);
+			DeleteTargetsOperation deleteTargetsOperation = new DeleteTargetsOperation(getDisplay(), chromatogramSelection, targetSupplier, selection);
 			deleteTargetsOperation.addContext(UndoContextFactory.getUndoContext());
 			try {
 				getOperationHistory().execute(deleteTargetsOperation, null, null);
@@ -721,7 +722,7 @@ public class ExtendedTargetsUI extends Composite implements IExtendedPartUI {
 
 		if(chromatogramSelection != null && getObject() instanceof ITargetSupplier targetSupplier) {
 			Set<IIdentificationTarget> targetsToDelete = targetSupplier.getTargets();
-			DeleteTargetsOperation deleteTargetsOperation = new DeleteTargetsOperation(display, chromatogramSelection, targetSupplier, targetsToDelete);
+			DeleteTargetsOperation deleteTargetsOperation = new DeleteTargetsOperation(getDisplay(), chromatogramSelection, targetSupplier, targetsToDelete);
 			deleteTargetsOperation.addContext(UndoContextFactory.getUndoContext());
 			try {
 				getOperationHistory().execute(deleteTargetsOperation, null, null);
@@ -744,7 +745,7 @@ public class ExtendedTargetsUI extends Composite implements IExtendedPartUI {
 
 		setChromatogramDirty();
 		updateTargets(display);
-		UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "Targets have been deleted.");
+		UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, ExtensionMessages.targetsDeleted);
 	}
 
 	private void addTarget(Display display, IIdentificationTarget identificationTarget) {
