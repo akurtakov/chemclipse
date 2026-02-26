@@ -529,7 +529,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final String P_CHROMATOGRAM_IDENTIFIED_SCAN_MARKER_TYPE = "chromatogramIdentifiedScanMarkerType";
 	public static final String DEF_CHROMATOGRAM_IDENTIFIED_SCAN_MARKER_TYPE = PlotSymbolType.CIRCLE.toString();
 	public static final String P_MOVE_RETENTION_TIME_ON_PEAK_SELECTION = "moveRetentionTimeOnPeakSelection";
-	public static final boolean DEF_MOVE_RETENTION_TIME_ON_PEAK_SELECTION = true;
+	public static final boolean DEF_MOVE_RETENTION_TIME_ON_PEAK_SELECTION = false;
 	public static final String P_ALTERNATE_WINDOW_MOVE_DIRECTION = "useAlternateWindowMoveDirection";
 	public static final boolean DEF_ALTERNATE_WINDOW_MOVE_DIRECTION = false;
 	public static final String P_CONDENSE_CYCLE_NUMBER_SCANS = "condenseCycleNumberScans";
