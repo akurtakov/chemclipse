@@ -44,6 +44,7 @@ import org.eclipse.chemclipse.model.columns.ISeparationColumnIndices;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IIntegrationEntry;
 import org.eclipse.chemclipse.model.core.IMethod;
+import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.quantitation.IInternalStandard;
 import org.eclipse.chemclipse.model.quantitation.IQuantitationEntry;
 import org.eclipse.chemclipse.model.ranges.TimeRange;
@@ -347,7 +348,7 @@ public class ChromatogramWriter_1502 extends AbstractChromatogramWriter implemen
 		dataOutputStream.writeFloat(peakModel.getBackgroundAbundance(peakModel.getStartRetentionTime())); // Start Background Abundance
 		dataOutputStream.writeFloat(peakModel.getBackgroundAbundance(peakModel.getStopRetentionTime())); // Stop Background Abundance
 
-		IScanCSD scan = peakModel.getPeakMaximum();
+		IScan scan = peakModel.getPeakMaximum();
 		dataOutputStream.writeInt(scan.getRetentionTime()); // Retention Time
 		dataOutputStream.writeInt(scan.getRelativeRetentionTime());
 		dataOutputStream.writeFloat(scan.getTotalSignal()); // Total Signal

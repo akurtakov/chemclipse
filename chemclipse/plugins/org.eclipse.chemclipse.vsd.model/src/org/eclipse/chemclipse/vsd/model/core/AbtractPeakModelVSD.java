@@ -25,16 +25,4 @@ public abstract class AbtractPeakModelVSD extends PeakModel implements IPeakMode
 
 		super(peakMaximum, peakIntensityValues, startBackgroundAbundance, stopBackgroundAbundance);
 	}
-
-	@Override
-	public IScanVSD getPeakMaximum() {
-
-		return (IScanVSD)super.getPeakMaximum();
-	}
-
-	@Override
-	public IScanVSD getPeakScan(int retentionTime) {
-
-		return (IScanVSD)super.getPeakScan(retentionTime);
-	}
 }

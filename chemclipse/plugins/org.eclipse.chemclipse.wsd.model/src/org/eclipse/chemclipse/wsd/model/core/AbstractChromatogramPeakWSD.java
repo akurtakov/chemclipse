@@ -13,6 +13,7 @@
 package org.eclipse.chemclipse.wsd.model.core;
 
 import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.exceptions.PeakException;
 
 public abstract class AbstractChromatogramPeakWSD extends AbstractPeakWSD implements IChromatogramPeakWSD {
@@ -79,12 +80,14 @@ public abstract class AbstractChromatogramPeakWSD extends AbstractPeakWSD implem
 		/*
 		 * Extracted is the unknown and genuine the reference scan.
 		 */
-		IScanWSD peakScan = getPeakModel().getPeakMaximum();
-		IScanWSD genuineScanWSD = chromatogram.getScan(getScanMax());
-		if(genuineScanWSD != null) {
-			int numberOfSignals = genuineScanWSD.getNumberOfScanSignals();
-			if(numberOfSignals != 0) {
-				purity = peakScan.getNumberOfScanSignals() / (float)numberOfSignals;
+		IScan peakScan = getPeakModel().getPeakMaximum();
+		if(peakScan instanceof IScanWSD peakScanWSD) {
+			IScanWSD genuineScanWSD = chromatogram.getScan(getScanMax());
+			if(genuineScanWSD != null) {
+				int numberOfSignals = genuineScanWSD.getNumberOfScanSignals();
+				if(numberOfSignals != 0) {
+					purity = peakScanWSD.getNumberOfScanSignals() / (float)numberOfSignals;
+				}
 			}
 		}
 		return purity;
