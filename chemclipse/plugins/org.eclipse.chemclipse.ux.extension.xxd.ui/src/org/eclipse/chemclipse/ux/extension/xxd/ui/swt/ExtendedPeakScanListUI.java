@@ -62,6 +62,7 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.dialogs.ClassifierDialog;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.dialogs.InternalStandardDialog;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.help.HelpContext;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.support.TableConfigSupport;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.operations.DeletePeaksOperation;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.operations.DeleteScanTargetsOperation;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.operations.DeleteTargetsOperation;
@@ -460,7 +461,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 			} else if(matchesKeyPress("Classifier", e)) {
 				modifyClassifier(display);
 			} else if(matchesKeyPress("DeleteTargets", e)) {
-				deleteTargetsAll(e.display);
+				deleteTargetsAll();
 			} else if(matchesKeyPress("Unknown", e)) {
 				addTargetsUnknown(e.display);
 			} else if(matchesKeyPress("Query", e)) {
@@ -623,12 +624,12 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 		}
 	}
 
-	private void deleteTargetsAll(Display display) {
+	private void deleteTargetsAll() {
 
 		for(Object object : tableViewer.get().getStructuredSelection().toList()) {
 			if(object instanceof ITargetSupplier targetSupplier) {
 				Set<IIdentificationTarget> targetsToDelete = targetSupplier.getTargets();
-				DeleteTargetsOperation deleteTargetsOperation = new DeleteTargetsOperation(display, chromatogramSelection, targetSupplier, targetsToDelete);
+				DeleteTargetsOperation deleteTargetsOperation = new DeleteTargetsOperation(getDisplay(), chromatogramSelection, targetSupplier, targetsToDelete);
 				deleteTargetsOperation.addContext(UndoContextFactory.getUndoContext());
 
 				try {
@@ -649,7 +650,9 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 			 * Send update.
 			 */
 			tableViewer.get().refresh();
-			UpdateNotifierUI.update(display, chromatogramSelection);
+			chromatogramSelection.getChromatogram().setDirty(true);
+			UpdateNotifierUI.update(getDisplay(), chromatogramSelection);
+			UpdateNotifierUI.update(getDisplay(), IChemClipseEvents.TOPIC_IDENTIFICATION_TARGETS_UPDATE_SELECTION, ExtensionMessages.targetsDeleted);
 		}
 	}
 
