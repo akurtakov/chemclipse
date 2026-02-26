@@ -12,7 +12,6 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.swt;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,23 +31,17 @@ import org.eclipse.chemclipse.msd.identifier.IMassSpectrumIdentifierSupport;
 import org.eclipse.chemclipse.msd.identifier.MassSpectrumIdentifier;
 import org.eclipse.chemclipse.msd.identifier.settings.IMassSpectrumIdentifierSettings;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
-import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
-import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
-import org.eclipse.chemclipse.processing.supplier.IProcessorPreferences;
-import org.eclipse.chemclipse.processing.system.ProcessSettingsSupport;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.updates.IUpdateListenerUI;
-import org.eclipse.chemclipse.ux.extension.ui.methods.SettingsWizard;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.runnables.MassSpectrumIdentifierRunnable;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.runnables.WaveSpectrumIdentifierRunnable;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.support.ProcessorSettingsSupport;
 import org.eclipse.chemclipse.wsd.model.core.IScanWSD;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -76,8 +69,6 @@ public class ScanIdentifierUI extends Composite {
 	private List<IWaveSpectrumIdentifierSupplier> identifierSuppliersWSD = getIdentifierSuppliersWSD();
 	private IMassSpectrumIdentifierSupplier massSpectrumIdentifierSupplier;
 	private IWaveSpectrumIdentifierSupplier waveSpectrumIdentifierSupplier;
-
-	private final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
 	public ScanIdentifierUI(Composite parent, int style) {
 
@@ -250,11 +241,11 @@ public class ScanIdentifierUI extends Composite {
 		/*
 		 * Try to set the selected identifier.
 		 */
-		String id = preferenceStore.getString(PreferenceSupplier.P_SCAN_IDENTIFER_MSD);
-		if(!id.isEmpty()) {
+		String identifier = PreferenceSupplier.getScanIdentifierMSD();
+		if(!identifier.isEmpty()) {
 			exitloop:
 			for(IMassSpectrumIdentifierSupplier identifierSupplier : identifierSuppliers) {
-				if(id.equals(identifierSupplier.getId())) {
+				if(identifier.equals(identifierSupplier.getId())) {
 					massSpectrumIdentifierSupplier = identifierSupplier;
 					break exitloop;
 				}
@@ -279,11 +270,11 @@ public class ScanIdentifierUI extends Composite {
 		/*
 		 * Try to set the selected identifier.
 		 */
-		String id = preferenceStore.getString(PreferenceSupplier.P_SCAN_IDENTIFER_WSD);
-		if(!id.isEmpty()) {
+		String identifier = PreferenceSupplier.getScanIdentifierWSD();
+		if(!identifier.isEmpty()) {
 			exitloop:
 			for(IWaveSpectrumIdentifierSupplier identifierSupplier : identifierSuppliers) {
-				if(id.equals(identifierSupplier.getId())) {
+				if(identifier.equals(identifierSupplier.getId())) {
 					waveSpectrumIdentifierSupplier = identifierSupplier;
 					break exitloop;
 				}
@@ -322,7 +313,7 @@ public class ScanIdentifierUI extends Composite {
 				public void widgetSelected(SelectionEvent e) {
 
 					button.setToolTipText(identifierSupplier.getIdentifierName());
-					preferenceStore.setValue(PreferenceSupplier.P_SCAN_IDENTIFER_MSD, identifierSupplier.getId());
+					PreferenceSupplier.setScanIdentifierMSD(identifierSupplier.getId());
 					massSpectrumIdentifierSupplier = identifierSupplier;
 					runIdentification();
 				}
@@ -349,7 +340,7 @@ public class ScanIdentifierUI extends Composite {
 				public void widgetSelected(SelectionEvent e) {
 
 					button.setToolTipText(identifierSupplier.getIdentifierName());
-					preferenceStore.setValue(PreferenceSupplier.P_SCAN_IDENTIFER_WSD, identifierSupplier.getId());
+					PreferenceSupplier.setScanIdentifierWSD(identifierSupplier.getId());
 					waveSpectrumIdentifierSupplier = identifierSupplier;
 					runIdentification();
 				}
@@ -393,28 +384,13 @@ public class ScanIdentifierUI extends Composite {
 
 		if(!massSpectra.isEmpty() && massSpectrumIdentifierSupplier != null) {
 			/*
-			 * Retrieve the settings interactively.
-			 */
-			IMassSpectrumIdentifierSettings identifierSettings = null;
-			IProcessSupplierContext supplierContext = Activator.getProcessSupplierContext();
-			IProcessSupplier<? extends IMassSpectrumIdentifierSettings> processSupplier = supplierContext.getSupplier(massSpectrumIdentifierSupplier.getId());
-			if(processSupplier != null) {
-				try {
-					IProcessorPreferences<? extends IMassSpectrumIdentifierSettings> processorPreferences = SettingsWizard.getSettings(getShell(), ProcessSettingsSupport.getWorkspacePreferences(processSupplier), true);
-					if(processorPreferences != null) {
-						identifierSettings = processorPreferences.getSettings();
-					}
-				} catch(IOException e) {
-					logger.warn(e);
-				}
-			}
-			/*
 			 * Run the identification using the dynamic settings.
 			 */
-			IRunnableWithProgress runnable = new MassSpectrumIdentifierRunnable(massSpectra, massSpectrumIdentifierSupplier.getId(), identifierSettings);
-			ProgressMonitorDialog monitor = new ProgressMonitorDialog(display.getActiveShell());
 			try {
-				monitor.run(true, true, runnable);
+				IMassSpectrumIdentifierSettings identifierSettings = ProcessorSettingsSupport.getSettings(getShell(), massSpectrumIdentifierSupplier.getId());
+				IRunnableWithProgress runnable = new MassSpectrumIdentifierRunnable(massSpectra, massSpectrumIdentifierSupplier.getId(), identifierSettings);
+				ProgressMonitorDialog monitor = new ProgressMonitorDialog(display.getActiveShell());
+				monitor.run(false, true, runnable);
 				if(update) {
 					fireUpdate(display);
 				}
@@ -431,27 +407,12 @@ public class ScanIdentifierUI extends Composite {
 
 		if(!waveSpectra.isEmpty() && waveSpectrumIdentifierSupplier != null) {
 			/*
-			 * Retrieve the settings interactively.
-			 */
-			IWaveSpectrumIdentifierSettings identifierSettings = null;
-			IProcessSupplierContext supplierContext = Activator.getProcessSupplierContext();
-			IProcessSupplier<? extends IWaveSpectrumIdentifierSettings> processSupplier = supplierContext.getSupplier(waveSpectrumIdentifierSupplier.getId());
-			if(processSupplier != null) {
-				try {
-					IProcessorPreferences<? extends IWaveSpectrumIdentifierSettings> processorPreferences = SettingsWizard.getSettings(getShell(), ProcessSettingsSupport.getWorkspacePreferences(processSupplier), true);
-					if(processorPreferences != null) {
-						identifierSettings = processorPreferences.getSettings();
-					}
-				} catch(IOException e) {
-					logger.warn(e);
-				}
-			}
-			/*
 			 * Run the identification using the dynamic settings.
 			 */
-			IRunnableWithProgress runnable = new WaveSpectrumIdentifierRunnable(waveSpectra, waveSpectrumIdentifierSupplier.getId(), identifierSettings);
-			ProgressMonitorDialog monitor = new ProgressMonitorDialog(display.getActiveShell());
 			try {
+				IWaveSpectrumIdentifierSettings identifierSettings = ProcessorSettingsSupport.getSettings(getShell(), waveSpectrumIdentifierSupplier.getId());
+				IRunnableWithProgress runnable = new WaveSpectrumIdentifierRunnable(waveSpectra, waveSpectrumIdentifierSupplier.getId(), identifierSettings);
+				ProgressMonitorDialog monitor = new ProgressMonitorDialog(display.getActiveShell());
 				monitor.run(true, true, runnable);
 				if(update) {
 					fireUpdate(display);
