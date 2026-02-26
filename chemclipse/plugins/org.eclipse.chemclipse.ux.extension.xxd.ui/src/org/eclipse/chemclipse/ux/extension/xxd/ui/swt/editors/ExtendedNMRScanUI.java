@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
-import org.eclipse.chemclipse.model.core.PeakList;
 import org.eclipse.chemclipse.nmr.model.core.AcquisitionParameter;
 import org.eclipse.chemclipse.nmr.model.core.IMeasurementFID;
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
@@ -32,11 +31,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swtchart.ILineSeries.PlotSymbolType;
-import org.eclipse.swtchart.LineStyle;
 import org.eclipse.swtchart.extensions.core.AbstractAxisScaleConverter;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
-import org.eclipse.swtchart.extensions.core.ISeriesData;
 import org.eclipse.swtchart.extensions.linecharts.ILineSeriesData;
 import org.eclipse.swtchart.extensions.linecharts.ILineSeriesSettings;
 import org.eclipse.swtchart.extensions.linecharts.LineSeriesData;
@@ -84,7 +80,6 @@ public class ExtendedNMRScanUI implements PropertyChangeListener {
 				IComplexSignalMeasurement<?> measurement = getCurrentMeasurement();
 				AcquisitionParameter acquisitionParameter;
 				boolean enableArea;
-				ISeriesData peakSeriesData = null;
 				if(measurement instanceof ISpectrumMeasurement spectrumMeasurement) {
 					acquisitionParameter = spectrumMeasurement.getAcquisitionParameter();
 					chartNMR.setPPMconverter(new AbstractAxisScaleConverter() {
@@ -103,10 +98,6 @@ public class ExtendedNMRScanUI implements PropertyChangeListener {
 					});
 					chartNMR.modifyChart(false);
 					enableArea = true;
-					PeakList peakList = spectrumMeasurement.getMeasurementResult(PeakList.class);
-					if(peakList != null) {
-						peakSeriesData = ChartNMR.createPeakSeries(SERIES_ID + ".peaks", spectrumMeasurement.getSignals(), peakList.getResult(), 0, 0);
-					}
 				} else if(measurement instanceof IMeasurementFID fidMeasurement) {
 					acquisitionParameter = fidMeasurement.getAcquisitionParameter();
 					chartNMR.setPPMconverter(null);
@@ -118,31 +109,10 @@ public class ExtendedNMRScanUI implements PropertyChangeListener {
 				}
 				List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();
 				ILineSeriesData lineSeriesData = new LineSeriesData(ChartNMR.createSignalSeries(SERIES_ID, measurement.getSignals()));
-				if(Boolean.getBoolean("editor.nmr.debug.seriesdata")) {
-					System.out.println("============ " + measurement.getDataName() + " ==================");
-					AcquisitionParameter.print(acquisitionParameter);
-					ISeriesData data = lineSeriesData.getSeriesData();
-					double[] xSeries = data.getXSeries();
-					double[] ySeries = data.getYSeries();
-					for(int i = 0; i < xSeries.length; i++) {
-						if(i < 100 || i > xSeries.length - 100) {
-							System.out.println("[" + i + "] time = " + xSeries[i] + ", signal = " + ySeries[i]);
-						}
-					}
-				}
 				ILineSeriesSettings lineSeriesSettings = lineSeriesData.getSettings();
 				lineSeriesSettings.setEnableArea(enableArea);
 				lineSeriesSettings.setLineColor(Colors.RED);
 				lineSeriesDataList.add(lineSeriesData);
-				if(peakSeriesData != null) {
-					LineSeriesData peakSeries = new LineSeriesData(peakSeriesData);
-					lineSeriesDataList.add(peakSeries);
-					ILineSeriesSettings settings = peakSeries.getLineSeriesSettings();
-					settings.setLineStyle(LineStyle.NONE);
-					settings.setSymbolType(PlotSymbolType.INVERTED_TRIANGLE);
-					settings.setSymbolColor(Colors.BLACK);
-					settings.setSymbolSize(3);
-				}
 				chartNMR.addSeriesData(lineSeriesDataList);
 			}
 		} finally {

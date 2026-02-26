@@ -21,22 +21,17 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Consumer;
 
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.model.core.IMeasurement;
-import org.eclipse.chemclipse.model.core.PeakList;
-import org.eclipse.chemclipse.model.detector.IMeasurementPeakDetector;
 import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
 import org.eclipse.chemclipse.nmr.model.core.IMeasurementFID;
 import org.eclipse.chemclipse.nmr.model.core.ISpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.model.selection.DataNMRSelection;
 import org.eclipse.chemclipse.nmr.model.selection.IDataNMRSelection.ChangeType;
 import org.eclipse.chemclipse.processing.ProcessorFactory;
-import org.eclipse.chemclipse.processing.core.DefaultProcessingResult;
 import org.eclipse.chemclipse.processing.filter.Filtered;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
@@ -163,35 +158,8 @@ public class NMRMeasurementsUI implements PropertyChangeListener {
 				Set<IComplexSignalMeasurement<?>> measurements = Collections.singleton(selection.getMeasurement());
 				addFilter(menuManager, measurements);
 				menuManager.add(new Separator());
-				addDetectors(menuManager, measurements);
-				menuManager.add(new Separator());
 				menuManager.add(new DeleteAction());
 				menuManager.add(new FilterInfoAction());
-			}
-
-			private void addDetectors(IMenuManager mgr, Set<IComplexSignalMeasurement<?>> measurements) {
-
-				Collection<IMeasurementPeakDetector<?>> detectors = filterFactory.getProcessors(ProcessorFactory.genericClass(IMeasurementPeakDetector.class), (detector, u) -> detector.acceptsIMeasurements(measurements));
-				for(IMeasurementPeakDetector<?> peakDetector : detectors) {
-					mgr.add(new Action() {
-
-						@Override
-						public String getText() {
-
-							return peakDetector.getName();
-						}
-
-						@Override
-						public void run() {
-
-							Map<IComplexSignalMeasurement<?>, PeakList> peaks = peakDetector.detectIMeasurementPeaks(measurements, null, new DefaultProcessingResult<>(), null);
-							for(Entry<IComplexSignalMeasurement<?>, PeakList> entries : peaks.entrySet()) {
-								entries.getKey().addMeasurementResult(entries.getValue());
-							}
-							propertyChange(new PropertyChangeEvent(this, "PeakDetection", detectors, ChangeType.SELECTION_CHANGED));
-						}
-					});
-				}
 			}
 
 			private void addFilter(IMenuManager mgr, Set<IComplexSignalMeasurement<?>> measurements) {
