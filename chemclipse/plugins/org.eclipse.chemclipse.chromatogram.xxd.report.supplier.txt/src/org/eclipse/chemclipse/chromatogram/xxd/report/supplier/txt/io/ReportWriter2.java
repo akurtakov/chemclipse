@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -69,7 +69,7 @@ public class ReportWriter2 {
 	private void printHeader(PrintWriter printWriter, IChromatogram chromatogram) {
 
 		printWriter.println("File Name: " + chromatogram.getName());
-		printWriter.println("Sample Name: " + chromatogram.getDataName());
+		printWriter.println("Sample Name: " + chromatogram.getSampleName());
 		printWriter.println("Additional Info: " + chromatogram.getDetailedInfo() + " " + chromatogram.getMiscInfo()); // Don't change without team feedback.
 		printWriter.println("Acquisition Date: " + dateFormat.format(chromatogram.getDate()));
 		printWriter.println("Operator: " + chromatogram.getOperator());
