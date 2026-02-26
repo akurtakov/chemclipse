@@ -30,7 +30,6 @@ Service-Component: OSGI-INF/org.eclipse.chemclipse.nmr.processing.apodization.Ex
  OSGI-INF/org.eclipse.chemclipse.nmr.processing.digitalfilter.DigitalFilterRemoval.xml,
  OSGI-INF/org.eclipse.chemclipse.nmr.processing.ft.FourierTransformationProcessor.xml,
  OSGI-INF/org.eclipse.chemclipse.nmr.processing.ft.InverseFourierTransformationProcessor.xml,
- OSGI-INF/org.eclipse.chemclipse.nmr.processing.peakdetection.WaveletPeakDetectorProcessor.xml,
  OSGI-INF/org.eclipse.chemclipse.nmr.processing.phasecorrection.AutoPhaseCorrectionProcessor.xml,
  OSGI-INF/org.eclipse.chemclipse.nmr.processing.phasecorrection.PhaseCorrectionProcessor.xml,
  OSGI-INF/org.eclipse.chemclipse.nmr.processing.supplier.base.core.BaselineCorrectionProcessor.xml,

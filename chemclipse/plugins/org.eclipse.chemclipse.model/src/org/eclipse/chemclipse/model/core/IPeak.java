@@ -21,7 +21,7 @@ import org.eclipse.chemclipse.model.quantitation.IInternalStandard;
 import org.eclipse.chemclipse.model.quantitation.IQuantitationEntry;
 import org.eclipse.chemclipse.model.support.IIntegrationConstraints;
 
-public interface IPeak extends ITargetSupplier, PeakPosition, IClassifier, ISignal {
+public interface IPeak extends ITargetSupplier, IClassifier, ISignal {
 
 	/**
 	 * This comparator compares peaks based on the RT at the maximum of the intensity of the peak model
@@ -59,7 +59,6 @@ public interface IPeak extends ITargetSupplier, PeakPosition, IClassifier, ISign
 	 * BV - baseline valley<br/>
 	 * ... <br/>
 	 */
-	@Override
 	PeakType getPeakType();
 
 	/**
@@ -220,36 +219,6 @@ public interface IPeak extends ITargetSupplier, PeakPosition, IClassifier, ISign
 	 * but that doesn't make sense.
 	 */
 	void setMarkedAsDeleted(boolean markedAsDeleted);
-
-	/**
-	 * Returns the scan number at peak stop.
-	 */
-	@Override
-	default int getPeakEnd() {
-
-		IPeakModel peakModel = getPeakModel();
-		return peakModel.getPeakScan(peakModel.getStopRetentionTime()).getScanNumber() - 1;
-	}
-
-	/**
-	 * Returns the scan number at peak start.
-	 */
-	@Override
-	default int getPeakStart() {
-
-		IPeakModel peakModel = getPeakModel();
-		return peakModel.getPeakScan(peakModel.getStartRetentionTime()).getScanNumber() - 1;
-	}
-
-	/**
-	 * Returns the scan number at peak maximum.
-	 */
-	@Override
-	default int getPeakMaximum() {
-
-		IPeakModel peakModel = getPeakModel();
-		return peakModel.getPeakMaximum().getScanNumber() - 1;
-	}
 
 	/**
 	 * Returns the retention time at peak maximum in milliseconds.
