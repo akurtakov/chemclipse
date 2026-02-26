@@ -15,10 +15,4 @@ package org.eclipse.chemclipse.csd.model.core;
 import org.eclipse.chemclipse.model.core.IPeakModel;
 
 public interface IPeakModelCSD extends IPeakModel {
-
-	@Override
-	IScanCSD getPeakMaximum();
-
-	@Override
-	IScanCSD getPeakScan(int retentionTime);
 }

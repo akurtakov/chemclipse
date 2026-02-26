@@ -54,16 +54,4 @@ public abstract class AbstractPeakModelMSD extends PeakModel implements IPeakMod
 		}
 		return null;
 	}
-
-	@Override
-	public IScanMSD getPeakMaximum() {
-
-		return (IScanMSD)super.getPeakMaximum();
-	}
-
-	@Override
-	public IScanMSD getPeakScan(int retentionTime) {
-
-		return (IScanMSD)super.getPeakScan(retentionTime);
-	}
 }

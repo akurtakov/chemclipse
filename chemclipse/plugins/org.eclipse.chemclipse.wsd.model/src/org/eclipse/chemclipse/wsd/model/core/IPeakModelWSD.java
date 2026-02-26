@@ -15,10 +15,4 @@ package org.eclipse.chemclipse.wsd.model.core;
 import org.eclipse.chemclipse.model.core.IPeakModel;
 
 public interface IPeakModelWSD extends IPeakModel {
-
-	@Override
-	IScanWSD getPeakMaximum();
-
-	@Override
-	IScanWSD getPeakScan(int retentionTime);
 }

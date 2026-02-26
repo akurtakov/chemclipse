@@ -25,16 +25,4 @@ public abstract class AbstractPeakModelCSD extends PeakModel implements IPeakMod
 
 		super(peakMaximum, peakIntensityValues, startBackgroundAbundance, stopBackgroundAbundance);
 	}
-
-	@Override
-	public IScanCSD getPeakMaximum() {
-
-		return (IScanCSD)super.getPeakMaximum();
-	}
-
-	@Override
-	public IScanCSD getPeakScan(int retentionTime) {
-
-		return (IScanCSD)super.getPeakScan(retentionTime);
-	}
 }

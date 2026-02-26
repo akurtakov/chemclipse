@@ -60,10 +60,4 @@ public interface IPeakModelMSD extends IPeakModel {
 	 * @return IMassSpectrum
 	 */
 	IPeakMassSpectrum getPeakMassSpectrum(int retentionTime);
-
-	@Override
-	IScanMSD getPeakMaximum();
-
-	@Override
-	IScanMSD getPeakScan(int retentionTime);
 }

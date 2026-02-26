@@ -23,6 +23,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogramPeak;
 import org.eclipse.chemclipse.model.core.IPeak;
+import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
@@ -441,14 +442,16 @@ public class ExtendedPeakTracesUI extends Composite implements IExtendedPartUI {
 			}
 		} else if(peak instanceof IPeakWSD peakWSD) {
 			IPeakModelWSD peakModelWSD = peakWSD.getPeakModel();
-			IScanWSD scanWSD = peakModelWSD.getPeakMaximum();
-			int maxDeleteTraces = scanWSD.getNumberOfScanSignals() - 1;
-			if(traces.size() >= maxDeleteTraces) {
-				MessageDialog.openInformation(display.getActiveShell(), CATEGORY, "It's not possible to delete all wavelengths.");
-			} else {
-				scanWSD.removeScanSignals(traces);
-				updatePeak();
-				UpdateNotifierUI.update(display, peak);
+			IScan scan = peakModelWSD.getPeakMaximum();
+			if(scan instanceof IScanWSD scanWSD) {
+				int maxDeleteTraces = scanWSD.getNumberOfScanSignals() - 1;
+				if(traces.size() >= maxDeleteTraces) {
+					MessageDialog.openInformation(display.getActiveShell(), CATEGORY, "It's not possible to delete all wavelengths.");
+				} else {
+					scanWSD.removeScanSignals(traces);
+					updatePeak();
+					UpdateNotifierUI.update(display, peak);
+				}
 			}
 		}
 		if(peak instanceof IChromatogramPeak chromatogramPeak) {

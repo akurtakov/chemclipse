@@ -15,10 +15,4 @@ package org.eclipse.chemclipse.fsd.model.core;
 import org.eclipse.chemclipse.model.core.IPeakModel;
 
 public interface IPeakModelFSD extends IPeakModel {
-
-	@Override
-	IScanFSD getPeakMaximum();
-
-	@Override
-	IScanFSD getPeakScan(int retentionTime);
 }

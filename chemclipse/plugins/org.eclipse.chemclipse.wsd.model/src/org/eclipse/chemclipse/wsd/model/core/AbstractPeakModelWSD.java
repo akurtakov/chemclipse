@@ -25,16 +25,4 @@ public abstract class AbstractPeakModelWSD extends PeakModel implements IPeakMod
 
 		super(peakMaximum, peakIntensityValues, startBackgroundAbundance, stopBackgroundAbundance);
 	}
-
-	@Override
-	public IScanWSD getPeakMaximum() {
-
-		return (IScanWSD)super.getPeakMaximum();
-	}
-
-	@Override
-	public IScanWSD getPeakScan(int retentionTime) {
-
-		return (IScanWSD)super.getPeakScan(retentionTime);
-	}
 }

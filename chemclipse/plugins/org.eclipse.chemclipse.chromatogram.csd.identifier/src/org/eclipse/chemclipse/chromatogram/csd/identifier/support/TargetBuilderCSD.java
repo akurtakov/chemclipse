@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.chromatogram.csd.identifier.support;
 import org.eclipse.chemclipse.csd.model.core.IPeakCSD;
 import org.eclipse.chemclipse.csd.model.core.IScanCSD;
 import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.exceptions.ReferenceMustNotBeNullException;
 import org.eclipse.chemclipse.model.identifier.IComparisonResult;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
@@ -31,12 +32,14 @@ public class TargetBuilderCSD {
 
 		IIdentificationTarget identificationTarget = null;
 		try {
-			IScanCSD scan = peakCSD.getPeakModel().getPeakMaximum();
-			ILibraryInformation libraryInformation = UnknownTargetBuilder.getLibraryInformationUnknown(scan, targetUnknownSettings, "");
-			IComparisonResult comparisonResult = UnknownTargetBuilder.getComparisonResultUnknown(targetUnknownSettings.getMatchQuality());
-			identificationTarget = new IdentificationTarget(libraryInformation, comparisonResult);
-			identificationTarget.setIdentifier(identifier);
-			peakCSD.getTargets().add(identificationTarget);
+			IScan scan = peakCSD.getPeakModel().getPeakMaximum();
+			if(scan instanceof IScanCSD unknown) {
+				ILibraryInformation libraryInformation = UnknownTargetBuilder.getLibraryInformationUnknown(unknown, targetUnknownSettings, "");
+				IComparisonResult comparisonResult = UnknownTargetBuilder.getComparisonResultUnknown(targetUnknownSettings.getMatchQuality());
+				identificationTarget = new IdentificationTarget(libraryInformation, comparisonResult);
+				identificationTarget.setIdentifier(identifier);
+				peakCSD.getTargets().add(identificationTarget);
+			}
 		} catch(ReferenceMustNotBeNullException e) {
 			logger.warn(e);
 		}
