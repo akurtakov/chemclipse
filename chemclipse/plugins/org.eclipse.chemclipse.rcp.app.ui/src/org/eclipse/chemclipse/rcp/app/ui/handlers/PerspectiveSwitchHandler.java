@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -15,7 +15,6 @@ package org.eclipse.chemclipse.rcp.app.ui.handlers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.chemclipse.rcp.app.ui.Activator;
 import org.eclipse.chemclipse.rcp.app.ui.dialogs.PerspectiveChooserDialog;
 import org.eclipse.chemclipse.rcp.app.ui.dialogs.PerspectiveSwitcherDialog;
 import org.eclipse.chemclipse.rcp.app.ui.preferences.PreferenceSupplier;
@@ -95,12 +94,6 @@ public class PerspectiveSwitchHandler {
 				perspectiveSwitcher.focusView(viewId);
 			}
 		}
-	}
-
-	public static boolean isActivePerspective(String perspectiveId) {
-
-		String activePerspective = Activator.getDefault().getActivePerspective();
-		return activePerspective.equals(perspectiveId);
 	}
 
 	/*

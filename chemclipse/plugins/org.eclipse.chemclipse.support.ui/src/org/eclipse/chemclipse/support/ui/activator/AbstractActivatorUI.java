@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -71,7 +71,7 @@ public abstract class AbstractActivatorUI extends AbstractUIPlugin {
 	 * Returns the image given by the key.
 	 * Please initialize the image registry before using this function.
 	 * Use the method e.g.:
-	 * 
+	 *
 	 * getImage(ICON_WARN)
 	 */
 	public Image getImage(String key) {
@@ -97,11 +97,6 @@ public abstract class AbstractActivatorUI extends AbstractUIPlugin {
 	public EPartService getPartService() {
 
 		return getEclipseContext().get(EPartService.class);
-	}
-
-	public PartSupport getPartSupport() {
-
-		return getEclipseContext().get(PartSupport.class);
 	}
 
 	public PerspectiveSupport getPerspectiveSupport() {
@@ -168,16 +163,6 @@ public abstract class AbstractActivatorUI extends AbstractUIPlugin {
 		return eclipseContext;
 	}
 
-	public boolean saveDirtyParts() {
-
-		return getPartSupport().saveDirtyParts();
-	}
-
-	public String getActivePerspective() {
-
-		return getPerspectiveSupport().getActivePerspective();
-	}
-
 	/**
 	 * Initialize the preference store.
 	 */
@@ -198,14 +183,14 @@ public abstract class AbstractActivatorUI extends AbstractUIPlugin {
 	/**
 	 * Initialize the image registry.
 	 * Please supply a HashMap of used images/icons, e.g.:
-	 * 
+	 *
 	 * <pre><code>
 	 * public static final String ICON_WARN = "ICON_WARN";
-	 * 
+	 *
 	 * Map&lt;String, String&gt; imageHashMap = new HashMap&lt;&gt;();
 	 * imageHashMap.put(ICON_WARN, "icons/16x16/warn.gif");
 	 * </code></pre>
-	 * 
+	 *
 	 * The icon path is set relative to the calling plugin.
 	 */
 	protected void initializeImageRegistry(Map<String, String> imageHashMap) {
