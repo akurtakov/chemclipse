@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,8 +18,11 @@ import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.model.TracesExportOption;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.model.TracesSupport;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -32,6 +35,8 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 
 public class TracesClipboardUI extends Composite {
+
+	private static final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
 	private AtomicReference<Button> buttonClipboard = new AtomicReference<>();
 	private IScan scan = null;
@@ -119,7 +124,13 @@ public class TracesClipboardUI extends Composite {
 
 		if(scan != null) {
 			TracesExportOption tracesExportOption = TracesSupport.getTracesExportOption();
-			TracesSupport.copyTracesToClipboard(display, tracesExportOption, scan);
+			int maxCopyTraces = getNumberOfTraces();
+			TracesSupport.copyTracesToClipboard(display, tracesExportOption, scan, maxCopyTraces);
 		}
+	}
+
+	private static int getNumberOfTraces() {
+
+		return preferenceStore.getInt(PreferenceSupplier.P_MAX_COPY_SCAN_TRACES);
 	}
 }

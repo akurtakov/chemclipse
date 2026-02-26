@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,6 +15,7 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.preferences;
 import org.eclipse.chemclipse.support.ui.preferences.fieldeditors.ExtendedIntegerFieldEditor;
 import org.eclipse.chemclipse.support.ui.preferences.fieldeditors.FloatFieldEditor;
 import org.eclipse.chemclipse.support.ui.preferences.fieldeditors.SpacerFieldEditor;
+import org.eclipse.chemclipse.support.ui.preferences.fieldeditors.SpinnerFieldEditor;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ScanWebIdentifierUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.TargetWebIdentifierUI;
@@ -66,6 +67,7 @@ public class PreferencePageTargets extends FieldEditorPreferencePage implements 
 		addField(new FloatFieldEditor(PreferenceSupplier.P_MATCH_QUALITY_UNKNOWN_TARGET, "Match Quality (Unknown Target)", PreferenceSupplier.MIN_MATCH_QUALITY, PreferenceSupplier.MAX_MATCH_QUALITY, getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_UNKNOWN_TARGET_ADD_RETENTION_INDEX, "Add Retention Index (Unknown Target)", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_VERIFY_UNKNOWN_TARGET, "Verify (Unknown Target)", getFieldEditorParent()));
+		addField(new SpinnerFieldEditor(PreferenceSupplier.P_MAX_UNKNOWN_TRACES, "Show Traces", PreferenceSupplier.MIN_TRACES, PreferenceSupplier.MAX_TRACES, getFieldEditorParent()));
 	}
 
 	@Override

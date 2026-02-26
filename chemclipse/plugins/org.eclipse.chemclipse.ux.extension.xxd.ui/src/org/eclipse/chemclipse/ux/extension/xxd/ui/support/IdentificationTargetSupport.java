@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,6 +24,8 @@ public class IdentificationTargetSupport {
 
 	private static final String IDENTIFIER_UNKNOWN = "Manual Identification";
 
+	private static final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+
 	public static IIdentificationTarget getTargetUnknown(IScan scan) {
 
 		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
@@ -38,7 +40,8 @@ public class IdentificationTargetSupport {
 	public static String getUnknownTargetName(IScan scan, boolean addRetentionIndex) {
 
 		StringBuilder builder = new StringBuilder();
-		String traces = TracesSupport.getTraces(scan);
+		int maxCopyTraces = getNumberOfTraces();
+		String traces = TracesSupport.getTraces(scan, maxCopyTraces);
 
 		builder.append("Unknown");
 		if(!traces.isEmpty()) {
@@ -58,5 +61,10 @@ public class IdentificationTargetSupport {
 		}
 
 		return builder.toString();
+	}
+
+	private static int getNumberOfTraces() {
+
+		return preferenceStore.getInt(PreferenceSupplier.P_MAX_UNKNOWN_TRACES);
 	}
 }

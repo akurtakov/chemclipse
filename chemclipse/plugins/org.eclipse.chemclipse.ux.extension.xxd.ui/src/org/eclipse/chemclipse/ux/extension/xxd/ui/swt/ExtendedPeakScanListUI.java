@@ -462,7 +462,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 			} else if(matchesKeyPress("DeleteTargets", e)) {
 				deleteTargetsAll(e.display);
 			} else if(matchesKeyPress("Unknown", e)) {
-				addTargetsUnknown(e.display);
+				addTargetsUnknown();
 			} else if(matchesKeyPress("Query", e)) {
 				scanIdentifierControl.get().runIdentification();
 				tableViewer.get().refresh();
@@ -669,7 +669,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 		return null;
 	}
 
-	private void addTargetsUnknown(Display display) {
+	private void addTargetsUnknown() {
 
 		for(Object object : tableViewer.get().getStructuredSelection().toList()) {
 			IScan scan = getScan(object);
@@ -685,10 +685,10 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 		 * Send update.
 		 */
 		tableViewer.get().refresh();
-		UpdateNotifierUI.update(display, chromatogramSelection);
+		UpdateNotifierUI.update(getDisplay(), chromatogramSelection);
 
 		chromatogramSelection.getChromatogram().setDirty(true);
-		UpdateNotifierUI.update(display, IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "Peaks/Scans unknown targets have been set.");
+		UpdateNotifierUI.update(getDisplay(), IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "Peaks/Scans unknown targets have been set.");
 	}
 
 	private void propagateSelection(Display display) {
