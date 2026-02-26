@@ -1379,6 +1379,26 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		return INSTANCE().getBoolean(P_MERGE_PEAKS_DELETE_ORIGINS, DEF_MERGE_PEAKS_DELETE_ORIGINS);
 	}
 
+	public static String getScanIdentifierMSD() {
+
+		return INSTANCE().get(P_SCAN_IDENTIFER_MSD);
+	}
+
+	public static void setScanIdentifierMSD(String identifier) {
+
+		INSTANCE().set(P_SCAN_IDENTIFER_MSD, identifier);
+	}
+
+	public static String getScanIdentifierWSD() {
+
+		return INSTANCE().get(P_SCAN_IDENTIFER_WSD);
+	}
+
+	public static void setScanIdentifierWSD(String identifier) {
+
+		INSTANCE().set(P_SCAN_IDENTIFER_WSD, identifier);
+	}
+
 	public static String getListPathImport() {
 
 		return INSTANCE().get(P_LIST_PATH_IMPORT, DEF_LIST_PATH_IMPORT);
