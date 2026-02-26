@@ -250,6 +250,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_SCAN_CHART_ENABLE_COMPRESS = false;
 	public static final String P_MAX_COPY_SCAN_TRACES = "maxCopyScanTraces";
 	public static final int DEF_MAX_COPY_SCAN_TRACES = DEF_SCAN_TRACES;
+	public static final String P_MAX_UNKNOWN_TRACES = "maxUnknownTraces";
+	public static final int DEF_MAX_UNKNOWN_TRACES = DEF_SCAN_TRACES;
 	public static final String P_SORT_COPY_TRACES = "sortCopyTraces";
 	public static final boolean DEF_SORT_COPY_TRACES = true;
 	public static final String P_TRACES_EXPORT_OPTION = "tracesExportOption";
@@ -1024,6 +1026,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_RETENTION_INDEX_DEVIATION_ABS_OK, DEF_RETENTION_INDEX_DEVIATION_ABS_OK);
 		putDefault(P_RETENTION_INDEX_DEVIATION_ABS_WARN, DEF_RETENTION_INDEX_DEVIATION_ABS_WARN);
 		putDefault(P_ADD_UNKNOWN_AFTER_DELETE_TARGETS_ALL, DEF_ADD_UNKNOWN_AFTER_DELETE_TARGETS_ALL);
+		putDefault(P_MAX_UNKNOWN_TRACES, DEF_MAX_UNKNOWN_TRACES);
 		putDefault(P_MATCH_QUALITY_UNKNOWN_TARGET, DEF_MATCH_QUALITY_UNKNOWN_TARGET);
 		putDefault(P_UNKNOWN_TARGET_ADD_RETENTION_INDEX, DEF_UNKNOWN_TARGET_ADD_RETENTION_INDEX);
 		putDefault(P_VERIFY_UNKNOWN_TARGET, DEF_VERIFY_UNKNOWN_TARGET);

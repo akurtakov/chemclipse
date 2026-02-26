@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -48,10 +48,9 @@ public class TracesSupport {
 		preferenceStore.setValue(PreferenceSupplier.P_TRACES_EXPORT_OPTION, tracesExportOption.name());
 	}
 
-	public static String getTraces(Object scan) {
+	public static String getTraces(IScan scan, int maxCopyTraces) {
 
 		String traces;
-		int maxCopyTraces = getNumberOfTraces();
 		boolean sortTraces = isSortTraces();
 
 		if(scan instanceof IScanMSD scanMSD) {
@@ -67,9 +66,9 @@ public class TracesSupport {
 		return traces;
 	}
 
-	public static void copyTracesToClipboard(Display display, TracesExportOption tracesExportOption, Object scan) {
+	public static void copyTracesToClipboard(Display display, TracesExportOption tracesExportOption, IScan scan, int maxCopyTraces) {
 
-		String traces = getTraces(scan);
+		String traces = getTraces(scan, maxCopyTraces);
 		if(!traces.isEmpty()) {
 			switch(tracesExportOption) {
 				case NAMED_TRACE:
@@ -115,11 +114,6 @@ public class TracesSupport {
 		}
 
 		return scanInstance;
-	}
-
-	private static int getNumberOfTraces() {
-
-		return preferenceStore.getInt(PreferenceSupplier.P_MAX_COPY_SCAN_TRACES);
 	}
 
 	private static boolean isSortTraces() {
