@@ -70,7 +70,7 @@ public class ReportWriter2 {
 
 		printWriter.println("File Name: " + chromatogram.getName());
 		printWriter.println("Sample Name: " + chromatogram.getSampleName());
-		printWriter.println("Additional Info: " + chromatogram.getDetailedInfo() + " " + chromatogram.getMiscInfo()); // Don't change without team feedback.
+		printWriter.println("Additional Info: " + chromatogram.getDetailedInfo());
 		printWriter.println("Acquisition Date: " + dateFormat.format(chromatogram.getDate()));
 		printWriter.println("Operator: " + chromatogram.getOperator());
 		printWriter.println("Miscellaneous: " + chromatogram.getMiscInfo());
