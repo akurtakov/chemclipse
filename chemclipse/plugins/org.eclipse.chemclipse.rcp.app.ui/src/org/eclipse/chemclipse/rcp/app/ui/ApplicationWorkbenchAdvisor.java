@@ -42,10 +42,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 	 * org.eclipse.ui.wizards.import.Preferences
 	 * org.eclipse.ui.wizards.export.Preferences
 	 */
-	private static final String IMPORT_EXPORT_WIZARDS = "org\\.eclipse\\.ui\\.wizards\\.(import|export)\\.(?![Preferences|ExternalProject]).*";
-	private static final String EQUINOX_WIZARDS = "org\\.eclipse\\.equinox\\.p2\\.replication.*";
 	private static final String TEAM_E4_WIZARDS = "org\\.eclipse\\.(team|e4)\\.ui.*";
-	private static final String ECLIPSE_DEBUG = "org\\.eclipse\\.debug.*";
 
 	@Override
 	public WorkbenchWindowAdvisor createWorkbenchWindowAdvisor(IWorkbenchWindowConfigurer configurer) {
@@ -97,10 +94,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 		/*
 		 * Inspect the ids here.
 		 */
-		return id.matches(IMPORT_EXPORT_WIZARDS) || //
-				id.matches(EQUINOX_WIZARDS) || //
-				id.matches(TEAM_E4_WIZARDS) || //
-				id.matches(ECLIPSE_DEBUG); //
+		return id.matches(TEAM_E4_WIZARDS);
 	}
 
 	private IWizardDescriptor[] getAllWizards(IWizardCategory[] categories) {
