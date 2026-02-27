@@ -1,21 +1,18 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.rcp.app.ui.dialogs;
 
 import java.util.List;
-
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
 
 import org.eclipse.chemclipse.rcp.app.ui.provider.SelectViewContentProvider;
 import org.eclipse.chemclipse.rcp.app.ui.provider.SelectViewFilter;
@@ -48,6 +45,9 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+
 public class SelectViewDialog extends Dialog implements ISelectionChangedListener {
 
 	/*
@@ -72,9 +72,6 @@ public class SelectViewDialog extends Dialog implements ISelectionChangedListene
 	private EModelService modelService;
 	@Inject
 	private EPartService partService;
-	/*
-	 * 
-	 */
 	private List<MPart> parts;
 	private MPart selectedPart;
 
@@ -85,15 +82,12 @@ public class SelectViewDialog extends Dialog implements ISelectionChangedListene
 		setShellStyle(getShellStyle() | SWT.SHEET);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jface.window.Window#configureShell(org.eclipse.swt.widgets.Shell)
-	 */
+	@Override
 	protected void configureShell(Shell shell) {
 
 		super.configureShell(shell);
 		shell.setText("Select View");
-		parts = modelService.findElements(application, null, MPart.class, null);
+		parts = modelService.findElements(application, null, MPart.class);
 	}
 
 	@Override
@@ -116,11 +110,12 @@ public class SelectViewDialog extends Dialog implements ISelectionChangedListene
 	/**
 	 * Creates and returns the contents of the upper part of this dialog (above
 	 * the button bar).
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite to contain the dialog area
 	 * @return the dialog area control
 	 */
+	@Override
 	protected Control createDialogArea(Composite parent) {
 
 		Composite composite = (Composite)super.createDialogArea(parent);
@@ -139,10 +134,7 @@ public class SelectViewDialog extends Dialog implements ISelectionChangedListene
 		return composite;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
-	 */
+	@Override
 	protected void okPressed() {
 
 		super.okPressed();
@@ -164,7 +156,7 @@ public class SelectViewDialog extends Dialog implements ISelectionChangedListene
 
 	/**
 	 * Creates a text field to search the list of perspectives.
-	 * 
+	 *
 	 * @param parent
 	 */
 	private void createViewSearchTextField(Composite parent) {
@@ -196,7 +188,7 @@ public class SelectViewDialog extends Dialog implements ISelectionChangedListene
 
 	/**
 	 * Creates the list of available perspectives.
-	 * 
+	 *
 	 * @param parent
 	 */
 	private void createViewList(Composite parent) {
