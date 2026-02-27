@@ -14,8 +14,6 @@ package org.eclipse.chemclipse.support.ui.workbench;
 
 import java.util.List;
 
-import jakarta.inject.Inject;
-
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.e4.core.services.events.IEventBroker;
@@ -24,6 +22,8 @@ import org.eclipse.e4.ui.model.application.ui.advanced.MPerspective;
 import org.eclipse.e4.ui.model.application.ui.advanced.MPerspectiveStack;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
+
+import jakarta.inject.Inject;
 
 /**
  * A helper class that can be injected into E4 parts to perform common tasks related to perspectives
@@ -68,7 +68,7 @@ public class PerspectiveSupport {
 
 	private MPerspective getActiveMPerspective() {
 
-		List<MPerspectiveStack> perspectiveStacks = eModelService.findElements(mApplication, null, MPerspectiveStack.class, null);
+		List<MPerspectiveStack> perspectiveStacks = eModelService.findElements(mApplication, null, MPerspectiveStack.class);
 		if(!perspectiveStacks.isEmpty()) {
 			MPerspectiveStack perspectiveStack = perspectiveStacks.get(0);
 			return perspectiveStack.getSelectedElement();

@@ -1,20 +1,18 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.rcp.app.ui.switcher;
 
 import java.util.List;
-
-import jakarta.inject.Inject;
 
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.e4.core.services.events.IEventBroker;
@@ -25,6 +23,8 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
+
+import jakarta.inject.Inject;
 
 public class PerspectiveSwitcher {
 
@@ -42,12 +42,12 @@ public class PerspectiveSwitcher {
 
 	/**
 	 * Try to load the perspective.
-	 * 
+	 *
 	 * @param perspectiveId
 	 */
 	public void changePerspective(String perspectiveId) {
 
-		List<MPerspective> perspectives = modelService.findElements(application, null, MPerspective.class, null);
+		List<MPerspective> perspectives = modelService.findElements(application, null, MPerspective.class);
 		for(MPerspective mPerspective : perspectives) {
 			String elementId = mPerspective.getElementId();
 			String elementLabel = mPerspective.getLabel();
@@ -63,7 +63,7 @@ public class PerspectiveSwitcher {
 
 	/**
 	 * Load and show the view.
-	 * 
+	 *
 	 * @param viewId
 	 */
 	public void focusView(String viewId) {
