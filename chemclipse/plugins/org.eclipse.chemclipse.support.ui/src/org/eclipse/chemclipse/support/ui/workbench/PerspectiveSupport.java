@@ -6,15 +6,13 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Christoph Läubrich - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.support.ui.workbench;
 
 import java.util.List;
-
-import jakarta.inject.Inject;
 
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.e4.core.di.annotations.Creatable;
@@ -25,9 +23,11 @@ import org.eclipse.e4.ui.model.application.ui.advanced.MPerspectiveStack;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
+import jakarta.inject.Inject;
+
 /**
  * A helper class that can be injected into E4 parts to perform common tasks related to perspectives
- * 
+ *
  * @author Christoph Läubrich
  *
  */
@@ -68,7 +68,7 @@ public class PerspectiveSupport {
 
 	private MPerspective getActiveMPerspective() {
 
-		List<MPerspectiveStack> perspectiveStacks = eModelService.findElements(mApplication, null, MPerspectiveStack.class, null);
+		List<MPerspectiveStack> perspectiveStacks = eModelService.findElements(mApplication, null, MPerspectiveStack.class);
 		if(!perspectiveStacks.isEmpty()) {
 			MPerspectiveStack perspectiveStack = perspectiveStacks.get(0);
 			return perspectiveStack.getSelectedElement();
@@ -78,7 +78,7 @@ public class PerspectiveSupport {
 
 	/**
 	 * Try to load the perspective.
-	 * 
+	 *
 	 * @param perspectiveId
 	 */
 	public void changePerspective(String perspectiveId) {
@@ -97,7 +97,7 @@ public class PerspectiveSupport {
 	public MPerspective getPerspectiveModel(String perspectiveId) {
 
 		if(perspectiveId != null) {
-			List<MPerspective> elements = eModelService.findElements(mApplication, null, MPerspective.class, null);
+			List<MPerspective> elements = eModelService.findElements(mApplication, perspectiveId, MPerspective.class);
 			if(elements != null && !elements.isEmpty()) {
 				for(MPerspective perspective : elements) {
 					String elementId = perspective.getElementId();

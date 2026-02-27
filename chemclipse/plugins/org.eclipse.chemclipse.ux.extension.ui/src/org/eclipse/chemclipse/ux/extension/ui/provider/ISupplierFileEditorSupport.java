@@ -98,7 +98,7 @@ public interface ISupplierFileEditorSupport extends ISupplierFileIdentifier {
 			if(file != null) {
 				boolean sourceIsDirectory = file.isDirectory();
 				if(!PreferenceSupplierDataExplorer.isOpenEditorMultipleTimes()) {
-					List<MPart> parts = modelService.findElements(application, null, MPart.class, null);
+					List<MPart> parts = modelService.findElements(application, null, MPart.class);
 					if(parts != null) {
 						exitloop:
 						for(MPart part : parts) {

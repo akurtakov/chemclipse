@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - make UI configurable, support selection of existing process methods, support for init with different datatypes
@@ -238,7 +238,7 @@ public class ProcessMethodToolbar extends ToolBar {
 	/**
 	 * Delete the selected entries.
 	 * A message dialog is shown before deleting the entries.
-	 * 
+	 *
 	 * @param shell
 	 */
 	public void deleteSelectedProcessEntries(Shell shell) {
@@ -310,8 +310,7 @@ public class ProcessMethodToolbar extends ToolBar {
 		item.addListener(SWT.Selection, event -> {
 			if(event.detail == SWT.ARROW) {
 				Rectangle rectangle = item.getBounds();
-				Point point = new Point(rectangle.x, rectangle.y + rectangle.height);
-				point = toolBar.toDisplay(point);
+				Point point = toolBar.toDisplay(rectangle.x, rectangle.y + rectangle.height);
 
 				for(MenuItem menuItem : menu.getItems()) {
 					menuItem.dispose();
