@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,6 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.wizards;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,11 +32,10 @@ public class RetentionIndexWizardElements extends ChromatogramWizardElements {
 	private String startIndexName = "";
 	private String stopIndexName = "";
 	private boolean useAlreadyDetectedPeaks = false;
+	private File calibrationFile;
 
 	private IChromatogramSelection chromatogramSelection;
 	private ISeparationColumnIndices separationColumnIndices = new SeparationColumnIndices();
-
-	private boolean retentionIndexDataIsValidated = false;
 
 	public List<String> getSelectedIndices() {
 
@@ -161,13 +161,13 @@ public class RetentionIndexWizardElements extends ChromatogramWizardElements {
 		this.separationColumnIndices = separationColumnIndices;
 	}
 
-	public boolean isRetentionIndexDataValidated() {
+	public File getExportFilePath() {
 
-		return retentionIndexDataIsValidated;
+		return calibrationFile;
 	}
 
-	public void setRetentionIndexDataIsValidated(boolean retentionIndexDataIsValidated) {
+	public void setExportFilePath(File calibrationFile) {
 
-		this.retentionIndexDataIsValidated = retentionIndexDataIsValidated;
+		this.calibrationFile = calibrationFile;
 	}
 }

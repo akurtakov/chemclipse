@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,9 +12,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.wizards;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.impl.CalibrationFile;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.impl.RetentionIndexExtractor;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.io.StandardsReader;
 import org.eclipse.chemclipse.model.columns.IRetentionIndexEntry;
@@ -35,14 +38,17 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.widgets.Text;
 
 public class PageCalibrationTable extends AbstractExtendedWizardPage {
 
 	private RetentionIndexWizardElements wizardElements;
 
-	private Button checkBoxValidateRetentionIndices;
 	private ChromatogramPeakChart chromatogramPeakChart;
 	private ExtendedRetentionIndexListUI extendedRetentionIndexTableViewerUI;
 
@@ -57,7 +63,7 @@ public class PageCalibrationTable extends AbstractExtendedWizardPage {
 	@Override
 	public boolean canFinish() {
 
-		return wizardElements.isRetentionIndexDataValidated();
+		return wizardElements.getExportFilePath() != null;
 	}
 
 	@Override
@@ -90,29 +96,48 @@ public class PageCalibrationTable extends AbstractExtendedWizardPage {
 		composite.setBackgroundMode(SWT.INHERIT_DEFAULT);
 		composite.setLayout(new GridLayout(1, false));
 
-		createCheckBoxField(composite);
 		createChromatogramField(composite);
 		createTableField(composite);
+		createCalibrationFileField(composite);
 
 		validateSelection();
 		setControl(composite);
 	}
 
-	private void createCheckBoxField(Composite composite) {
+	private void createCalibrationFileField(Composite composite) {
 
-		checkBoxValidateRetentionIndices = new Button(composite, SWT.CHECK);
-		checkBoxValidateRetentionIndices.setText("Retention indices are valid.");
-		checkBoxValidateRetentionIndices.setSelection(false);
-		checkBoxValidateRetentionIndices.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		checkBoxValidateRetentionIndices.addSelectionListener(new SelectionAdapter() {
+		Composite parent = new Composite(composite, SWT.NONE);
+		parent.setLayoutData(new GridData(GridData.FILL_BOTH));
+		parent.setLayout(new GridLayout(3, false));
 
-			@Override
-			public void widgetSelected(SelectionEvent e) {
+		Label labelFile = new Label(parent, SWT.NONE);
+		labelFile.setText("Save as:");
 
-				wizardElements.setRetentionIndexDataIsValidated(checkBoxValidateRetentionIndices.getSelection());
-				validateSelection();
+		Text fileText = new Text(parent, SWT.BORDER);
+		fileText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+
+		Button buttonBrowse = new Button(parent, SWT.PUSH);
+		buttonBrowse.setText("Browse...");
+
+		buttonBrowse.addListener(SWT.Selection, e -> {
+			String selected = openFileDialog(getShell());
+			if(selected != null) {
+				fileText.setText(selected);
+				wizardElements.setExportFilePath(new File(selected));
 			}
+			validateSelection();
 		});
+	}
+
+	private String openFileDialog(Shell shell) {
+
+		FileDialog fileDialog = new FileDialog(shell, SWT.SAVE);
+		fileDialog.setOverwrite(true);
+		fileDialog.setText("Retention Index");
+		fileDialog.setFileName("RetentionIndices_" + new Date().getTime() + CalibrationFile.FILTER_EXTENSION);
+		fileDialog.setFilterExtensions(CalibrationFile.FILTER_EXTENSION);
+		fileDialog.setFilterNames(CalibrationFile.FILTER_NAME);
+		return fileDialog.open();
 	}
 
 	private void createChromatogramField(Composite composite) {
@@ -177,8 +202,9 @@ public class PageCalibrationTable extends AbstractExtendedWizardPage {
 	private void validateSelection() {
 
 		String message = null;
-		if(!checkBoxValidateRetentionIndices.getSelection()) {
-			message = "Please verify the data and activate the check box.";
+		File file = wizardElements.getExportFilePath();
+		if(file == null) {
+			message = "Please select a file location.";
 		}
 		/*
 		 * Updates the status
