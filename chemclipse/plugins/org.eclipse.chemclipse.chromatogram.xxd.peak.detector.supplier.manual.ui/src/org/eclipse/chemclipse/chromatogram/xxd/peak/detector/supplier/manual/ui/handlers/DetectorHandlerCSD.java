@@ -6,14 +6,11 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.manual.ui.handlers;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.eclipse.chemclipse.rcp.app.ui.handlers.PerspectiveSwitchHandler;
 import org.eclipse.e4.core.di.annotations.Execute;
@@ -31,9 +28,8 @@ public class DetectorHandlerCSD {
 		 * Try to select and show the perspective and view.
 		 */
 		String perspectiveId = "org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.manual.ui.perspective";
-		List<String> viewIds = new ArrayList<>();
-		viewIds.add("org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.manual.ui.views.manualDetectedPeakCSD");
-		viewIds.add("org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.manual.ui.views.chromatogramSelectionView");
+		String[] viewIds = {"org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.manual.ui.views.manualDetectedPeakCSD",
+				"org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.manual.ui.views.chromatogramSelectionView"};
 		PerspectiveSwitchHandler.focusPerspectiveAndView(perspectiveId, viewIds);
 	}
 }
