@@ -12,13 +12,11 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.rcp.app.ui.handlers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.chemclipse.rcp.app.ui.dialogs.PerspectiveChooserDialog;
 import org.eclipse.chemclipse.rcp.app.ui.dialogs.PerspectiveSwitcherDialog;
 import org.eclipse.chemclipse.rcp.app.ui.preferences.PreferenceSupplier;
-import org.eclipse.chemclipse.rcp.app.ui.switcher.PerspectiveSwitcher;
+import org.eclipse.chemclipse.support.ui.workbench.PartSupport;
+import org.eclipse.chemclipse.support.ui.workbench.PerspectiveSupport;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Execute;
@@ -34,7 +32,10 @@ public class PerspectiveSwitchHandler {
 
 	@Inject
 	private static MApplication application;
-	private static PerspectiveSwitcher perspectiveSwitcher;
+	@Inject
+	private static PartSupport partSupport;
+	@Inject
+	private static PerspectiveSupport perspectiveSupport;
 
 	@Execute
 	public void execute(MWindow window) {
@@ -43,22 +44,10 @@ public class PerspectiveSwitchHandler {
 		perspectiveSwitcherDialog.open();
 	}
 
-	public static void focusPerspectiveAndView(String perspectiveId, String viewId) {
-
-		List<String> viewIds = new ArrayList<>();
-		viewIds.add(viewId);
-		focusPerspectiveAndView(perspectiveId, viewIds);
-	}
-
-	public static void focusViews(List<String> viewIds) {
-
-		focusPerspectiveAndView(null, viewIds);
-	}
-
-	public static void focusPerspectiveAndView(String perspectiveId, List<String> viewIds) {
+	public static void focusPerspectiveAndView(String perspectiveId, String... viewIds) {
 
 		/*
-		 * Try to change the perspective and activate the requested view.
+		 * Try to change the perspective and activate the requested view
 		 */
 		boolean changePerspectiveAutomatically = PreferenceSupplier.getChangePerspectiveAutomatically();
 		if(!changePerspectiveAutomatically) {
@@ -70,7 +59,7 @@ public class PerspectiveSwitchHandler {
 			/*
 			 * Create the switcher if null.
 			 */
-			if(perspectiveSwitcher == null) {
+			if(perspectiveSupport == null) {
 				/*
 				 * The application should definitively exists.
 				 * But this is checked to avoid a NPE.
@@ -79,7 +68,7 @@ public class PerspectiveSwitchHandler {
 					MWindow window = application.getChildren().get(0);
 					if(window != null) {
 						IEclipseContext context = window.getContext();
-						perspectiveSwitcher = ContextInjectionFactory.make(PerspectiveSwitcher.class, context);
+						perspectiveSupport = ContextInjectionFactory.make(PerspectiveSupport.class, context);
 					}
 				}
 			}
@@ -87,11 +76,11 @@ public class PerspectiveSwitchHandler {
 			 * Change perspective and view.
 			 */
 			if(perspectiveId != null) {
-				perspectiveSwitcher.changePerspective(perspectiveId);
+				perspectiveSupport.changePerspective(perspectiveId);
 			}
 
 			for(String viewId : viewIds) {
-				perspectiveSwitcher.focusView(viewId);
+				partSupport.focusPart(viewId);
 			}
 		}
 	}

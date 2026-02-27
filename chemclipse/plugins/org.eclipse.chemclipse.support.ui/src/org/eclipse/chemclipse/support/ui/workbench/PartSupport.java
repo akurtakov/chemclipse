@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Christoph Läubrich - initial API and implementation
  *******************************************************************************/
@@ -14,10 +14,10 @@ package org.eclipse.chemclipse.support.ui.workbench;
 
 import java.util.Collection;
 
-import jakarta.inject.Inject;
-
+import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.events.IPerspectiveAndViewIds;
 import org.eclipse.e4.core.di.annotations.Creatable;
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
@@ -26,9 +26,11 @@ import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 
+import jakarta.inject.Inject;
+
 /**
  * A helper class that can be injected into E4 parts to perform common tasks
- * 
+ *
  * @author Christoph Läubrich
  *
  */
@@ -41,6 +43,8 @@ public class PartSupport {
 	private EModelService eModelService;
 	@Inject
 	private EPartService ePartService;
+	@Inject
+	private IEventBroker eventBroker;
 
 	public void removeEditorsFromPartStack() {
 
@@ -62,8 +66,6 @@ public class PartSupport {
 
 	/**
 	 * Load and show the part.
-	 * 
-	 * @param partId
 	 */
 	public void focusPart(String partId) {
 
@@ -73,6 +75,9 @@ public class PartSupport {
 				ePartService.createPart(part.getElementId());
 			}
 			ePartService.showPart(part, PartState.ACTIVATE);
+			if(eventBroker != null) {
+				eventBroker.send(IChemClipseEvents.TOPIC_APPLICATION_SELECT_VIEW, part.getLabel());
+			}
 		}
 	}
 

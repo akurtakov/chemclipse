@@ -21,17 +21,15 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.chemclipse.rcp.app.ui.provider.PerspectiveSwitcherContentProvider;
 import org.eclipse.chemclipse.rcp.app.ui.provider.PerspectiveSwitcherLabelProvider;
 import org.eclipse.chemclipse.rcp.app.ui.provider.PerspectiveSwitcherViewerFilter;
-import org.eclipse.chemclipse.support.events.IChemClipseEvents;
+import org.eclipse.chemclipse.support.ui.workbench.PerspectiveSupport;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.extensions.Preference;
-import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.advanced.MPerspective;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
-import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -78,9 +76,7 @@ public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChang
 	@Inject
 	private EModelService modelService;
 	@Inject
-	private EPartService partService;
-	@Inject
-	private IEventBroker eventBroker;
+	private PerspectiveSupport perspectiveSupport;
 	/*
 	 * Store the previous selected perspectives
 	 */
@@ -90,7 +86,7 @@ public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChang
 
 	private PerspectiveSwitcherViewerFilter perspectiveSwitcherViewerFilter = new PerspectiveSwitcherViewerFilter();
 	private List<MPerspective> perspectives = new ArrayList<>();
-	private MPerspective selectedPerspective = null;
+	private String selectedPerspectiveId = null;
 
 	@Inject
 	public PerspectiveSwitcherDialog(@Named(IServiceConstants.ACTIVE_SHELL) Shell shell) {
@@ -115,7 +111,7 @@ public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChang
 		 * Set the perspective selection.
 		 */
 		if(tableViewerControl.get().getStructuredSelection().getFirstElement() instanceof MPerspective perspective) {
-			selectedPerspective = perspective;
+			selectedPerspectiveId = perspective.getElementId();
 		}
 
 		validateSelection();
@@ -164,14 +160,8 @@ public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChang
 
 	private void switchPerspective() {
 
-		if(selectedPerspective != null) {
-			Display.getDefault().asyncExec(() -> {
-
-				partService.switchPerspective(selectedPerspective);
-				if(eventBroker != null) {
-					eventBroker.send(IChemClipseEvents.TOPIC_APPLICATION_SELECT_PERSPECTIVE, selectedPerspective.getLabel());
-				}
-			});
+		if(selectedPerspectiveId != null) {
+			Display.getDefault().asyncExec(() -> perspectiveSupport.changePerspective(selectedPerspectiveId));
 		}
 	}
 
