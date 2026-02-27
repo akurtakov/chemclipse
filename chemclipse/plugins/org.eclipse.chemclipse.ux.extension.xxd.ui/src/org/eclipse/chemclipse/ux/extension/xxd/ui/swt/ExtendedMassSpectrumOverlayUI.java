@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Matthias Mailänder - adapted for MALDI
@@ -36,7 +36,6 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.part.support.EditorUpdateSuppo
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageOverlay;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.e4.ui.model.application.MApplication;
-import org.eclipse.e4.ui.model.application.ui.basic.MBasicFactory;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
@@ -316,7 +315,7 @@ public class ExtendedMassSpectrumOverlayUI extends Composite implements IExtende
 		EPartService partService = Activator.getDefault().getPartService();
 
 		if(modelService != null && application != null && partService != null) {
-			MPart part = MBasicFactory.INSTANCE.createPart();
+			MPart part = modelService.createModelElement(MPart.class);
 			part.setLabel(name);
 			part.setCloseable(true);
 			part.setContributionURI("bundleclass://" + bundle + "/" + classPath);

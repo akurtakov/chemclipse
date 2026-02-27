@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - support for configuration, zoom lock
@@ -84,7 +84,6 @@ import org.eclipse.chemclipse.wsd.model.core.selection.IChromatogramSelectionWSD
 import org.eclipse.chemclipse.wsd.model.xwc.IExtractedWavelengthSignal;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.e4.ui.model.application.MApplication;
-import org.eclipse.e4.ui.model.application.ui.basic.MBasicFactory;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
@@ -467,7 +466,7 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 			EPartService partService = Activator.getDefault().getPartService();
 
 			if(modelService != null && application != null && partService != null) {
-				MPart part = MBasicFactory.INSTANCE.createPart();
+				MPart part = modelService.createModelElement(MPart.class);
 				part.setLabel(name);
 				part.setCloseable(true);
 				part.setContributionURI("bundleclass://" + bundle + "/" + classPath);
@@ -1350,7 +1349,7 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 
 	/**
 	 * Return the selected derivative or NONE as a default.
-	 * 
+	 *
 	 * @return {@link Derivative}
 	 */
 	private Derivative getSelectedDerivative() {
