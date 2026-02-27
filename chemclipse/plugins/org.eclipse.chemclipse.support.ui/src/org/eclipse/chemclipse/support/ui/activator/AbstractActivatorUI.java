@@ -99,11 +99,6 @@ public abstract class AbstractActivatorUI extends AbstractUIPlugin {
 		return getEclipseContext().get(EPartService.class);
 	}
 
-	public PerspectiveSupport getPerspectiveSupport() {
-
-		return getEclipseContext().get(PerspectiveSupport.class);
-	}
-
 	/**
 	 * If you get null pointer exceptions you may have called this too early in an Activator.
 	 */
