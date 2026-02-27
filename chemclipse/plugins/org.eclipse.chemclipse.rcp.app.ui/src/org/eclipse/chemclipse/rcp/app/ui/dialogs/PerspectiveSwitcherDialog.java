@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -14,11 +14,9 @@ package org.eclipse.chemclipse.rcp.app.ui.dialogs;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
-
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
 
 import org.eclipse.chemclipse.rcp.app.ui.provider.PerspectiveSwitcherContentProvider;
 import org.eclipse.chemclipse.rcp.app.ui.provider.PerspectiveSwitcherLabelProvider;
@@ -54,6 +52,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChangedListener {
 
@@ -98,6 +99,7 @@ public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChang
 		setShellStyle(getShellStyle() | SWT.SHEET);
 	}
 
+	@Override
 	protected void configureShell(Shell shell) {
 
 		super.configureShell(shell);
@@ -122,11 +124,12 @@ public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChang
 	/**
 	 * Creates and returns the contents of the upper part of this dialog (above
 	 * the button bar).
-	 * 
+	 *
 	 * @param parent
 	 *            the parent composite to contain the dialog area
 	 * @return the dialog area control
 	 */
+	@Override
 	protected Control createDialogArea(Composite parent) {
 
 		Composite composite = (Composite)super.createDialogArea(parent);
@@ -145,10 +148,7 @@ public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChang
 		return composite;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jface.dialogs.Dialog#okPressed()
-	 */
+	@Override
 	protected void okPressed() {
 
 		super.okPressed();
@@ -157,8 +157,8 @@ public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChang
 
 	private void initialize() {
 
-		perspectives.addAll(modelService.findElements(application, null, MPerspective.class, null));
-		Collections.sort(perspectives, (p1, p2) -> p1.getLabel().compareTo(p2.getLabel()));
+		perspectives.addAll(modelService.findElements(application, null, MPerspective.class));
+		Collections.sort(perspectives, Comparator.comparing(MPerspective::getLabel));
 		perspectiveSwitcherViewerFilter.setCaseInsensitive(true);
 	}
 
@@ -177,8 +177,6 @@ public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChang
 
 	/**
 	 * Creates a text field to search the list of perspectives.
-	 * 
-	 * @param parent
 	 */
 	private void createPerspectivesSearchTextField(Composite parent) {
 
@@ -213,8 +211,6 @@ public class PerspectiveSwitcherDialog extends Dialog implements ISelectionChang
 
 	/**
 	 * Creates the list of available perspectives.
-	 * 
-	 * @param parent
 	 */
 	private void createPerspectivesList(Composite parent) {
 
