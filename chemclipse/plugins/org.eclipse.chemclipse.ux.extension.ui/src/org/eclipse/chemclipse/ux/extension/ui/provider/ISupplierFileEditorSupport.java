@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - migrate from InputPart to Part
@@ -37,7 +37,6 @@ import org.eclipse.chemclipse.vsd.model.core.IChromatogramVSD;
 import org.eclipse.chemclipse.vsd.model.core.ISpectrumVSD;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
 import org.eclipse.e4.ui.model.application.MApplication;
-import org.eclipse.e4.ui.model.application.ui.basic.MBasicFactory;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
@@ -141,7 +140,7 @@ public interface ISupplierFileEditorSupport extends ISupplierFileIdentifier {
 				/*
 				 * Create the input part and prepare it.
 				 */
-				MPart part = MBasicFactory.INSTANCE.createPart();
+				MPart part = modelService.createModelElement(MPart.class);
 				part.getTags().add(EPartService.REMOVE_ON_HIDE_TAG);
 				part.setElementId(elementId);
 				part.setContributionURI(contributionURI);
