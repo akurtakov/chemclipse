@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Christoph Läubrich - initial API and implementation
  * Philip Wenig - improvements file selection
@@ -155,7 +155,7 @@ public class DataListUI implements ConfigurableUI<DataListUIConfig> {
 
 	/**
 	 * set the initial file list for this control and clears the dirty flag
-	 * 
+	 *
 	 * @param files
 	 */
 	public void setFiles(Collection<File> files) {
@@ -213,8 +213,7 @@ public class DataListUI implements ConfigurableUI<DataListUIConfig> {
 		item.addListener(SWT.Selection, event -> {
 			if(event.detail == SWT.ARROW) {
 				Rectangle rectangle = item.getBounds();
-				Point point = new Point(rectangle.x, rectangle.y + rectangle.height);
-				point = toolBar.toDisplay(point);
+				Point point = toolBar.toDisplay(rectangle.x, rectangle.y + rectangle.height);
 
 				for(MenuItem menuItem : menu.getItems()) {
 					menuItem.dispose();
