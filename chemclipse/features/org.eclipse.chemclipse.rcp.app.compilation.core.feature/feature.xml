@@ -13,7 +13,7 @@
    </description>
 
    <copyright url="http://www.chemclipse.net">
-      Copyright (c) 2014, 2025 Lablicate GmbH.
+      Copyright (c) 2014, 2026 Lablicate GmbH.
    </copyright>
 
    <license url="%licenseURL">
@@ -50,10 +50,6 @@
 
    <includes
          id="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.manual.feature"
          version="0.0.0"/>
 
    <includes
