@@ -85,6 +85,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.dnd.Clipboard;
+import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
@@ -146,7 +148,6 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 	public ExtendedPeakScanListUI(Composite parent, int style) {
 
 		super(parent, style);
-		contextService.activateContext("org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList");
 		createControl();
 	}
 
@@ -242,6 +243,8 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 	}
 
 	private void initialize() {
+
+		contextService.activateContext("org.eclipse.chemclipse.ux.extension.xxd.ui.PeakScanList");
 
 		enableToolbar(toolbarInfoTop, buttonToolbarInfo.get(), IApplicationImage.IMAGE_INFO, TOOLTIP_INFO, true);
 		enableToolbar(toolbarSearch, buttonToolbarSearch.get(), IMAGE_SEARCH, TOOLTIP_SEARCH, false);
@@ -343,13 +346,11 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 		 */
 		Display display = peakScanListUI.getTable().getDisplay();
 		ITableSettings tableSettings = peakScanListUI.getTableSettings();
-
 		addDeleteMenuItem(display, tableSettings, "Peak/Scan (Delete Identifications)");
 		addAnalysisActiveMenuItem(tableSettings, "Peaks (Activate for Analysis)", true);
 		addAnalysisActiveMenuItem(tableSettings, "Peaks (Deactivate for Analysis)", false);
 		addInternalStandardsMenuItem(display, tableSettings, "Peaks (Edit Internal Standard)");
 		addClassifierMenuItem(display, tableSettings, "Peaks (Edit Classifier)");
-
 		addKeyEventProcessors(display, tableSettings);
 		peakScanListUI.applySettings(tableSettings);
 
@@ -474,6 +475,17 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 				setPeaksActiveForAnalysis(false);
 			} else if(e.keyCode == SWT.DEL) {
 				deletePeaksOrIdentifications(display);
+			} else if(e.stateMask == SWT.MOD1 && e.keyCode == 'v') {
+				/*
+				 * Copy Target
+				 */
+				Clipboard clipboard = new Clipboard(e.display);
+				TextTransfer transfer = TextTransfer.getInstance();
+				if(clipboard.getContents(transfer) instanceof String content) {
+					if(!content.isBlank()) {
+						addTargetsUnknown(content.trim());
+					}
+				}
 			} else if((e.stateMask & SWT.MOD1) == SWT.MOD1) {
 				if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_A) {
 					if(showPeakProfilesSelectionAll) {
@@ -674,11 +686,24 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 
 	private void addTargetsUnknown() {
 
+		addTargetsUnknown("");
+	}
+
+	private void addTargetsUnknown(String name) {
+
 		for(Object object : tableViewer.get().getStructuredSelection().toList()) {
 			IScan scan = getScan(object);
 			if(scan instanceof ITargetSupplier targetSupplier) {
 				IIdentificationTarget identificationTarget = IdentificationTargetSupport.getTargetUnknown(scan);
 				if(identificationTarget != null) {
+					/*
+					 * Modify the identification target.
+					 * Set a specific name instead of the default unknown label on demand.
+					 */
+					if(isModifyIdentificationTarget(name)) {
+						targetSupplier.getTargets().clear();
+						identificationTarget.getLibraryInformation().setName(name);
+					}
 					targetSupplier.getTargets().add(identificationTarget);
 				}
 			}
@@ -692,6 +717,11 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 
 		chromatogramSelection.getChromatogram().setDirty(true);
 		UpdateNotifierUI.update(getDisplay(), IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_UPDATE, "Peaks/Scans unknown targets have been set.");
+	}
+
+	private boolean isModifyIdentificationTarget(String name) {
+
+		return name != null && !name.isBlank();
 	}
 
 	private void propagateSelection(Display display) {
