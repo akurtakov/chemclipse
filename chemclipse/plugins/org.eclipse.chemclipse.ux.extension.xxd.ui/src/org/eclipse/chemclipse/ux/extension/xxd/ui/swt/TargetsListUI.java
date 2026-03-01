@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -53,8 +53,6 @@ public class TargetsListUI extends ExtendedTableViewer {
 	private Float retentionIndex = null;
 
 	private IUpdateListener updateListener;
-
-	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
 	public TargetsListUI(Composite parent, int style) {
 
@@ -183,7 +181,7 @@ public class TargetsListUI extends ExtendedTableViewer {
 							int retentionTimeTarget = libraryInformation.getRetentionTime();
 
 							if(retentionTime != null && retentionTimeTarget != 0) {
-
+								IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 								boolean useAbsoluteDeviation = preferenceStore.getBoolean(PreferenceSupplier.P_USE_ABSOLUTE_DEVIATION_RETENTION_TIME);
 								double deviation;
 								double deviationWarn;
@@ -238,7 +236,7 @@ public class TargetsListUI extends ExtendedTableViewer {
 							float retentionIndexTarget = libraryInformation.getRetentionIndex();
 
 							if(retentionIndex != null && retentionIndexTarget != 0) {
-
+								IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 								boolean useAbsoluteDeviation = preferenceStore.getBoolean(PreferenceSupplier.P_USE_ABSOLUTE_DEVIATION_RETENTION_INDEX);
 								double deviation;
 								double deviationWarn;
