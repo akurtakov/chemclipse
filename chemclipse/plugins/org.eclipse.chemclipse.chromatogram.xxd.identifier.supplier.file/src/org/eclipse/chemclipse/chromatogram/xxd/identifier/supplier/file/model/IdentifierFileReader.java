@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,6 +21,8 @@ import org.eclipse.chemclipse.chromatogram.xxd.calculator.io.IColumnFormat;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.columns.ISeparationColumn;
 import org.eclipse.chemclipse.model.columns.SeparationColumnFactory;
+import org.eclipse.chemclipse.msd.converter.supplier.amdis.format.MSL;
+import org.eclipse.chemclipse.msd.converter.supplier.amdis.format.MSP;
 import org.eclipse.chemclipse.support.model.SeparationColumnType;
 
 public class IdentifierFileReader {
@@ -93,7 +95,7 @@ public class IdentifierFileReader {
 		boolean isSeparationColumnFile = false;
 		if(file != null && file.exists()) {
 			String name = file.getName().toLowerCase();
-			if(name.endsWith(".msl") || name.endsWith(".msp")) {
+			if(name.endsWith(MSL.FILE_EXTENSION.toLowerCase()) || name.endsWith(MSP.FILE_EXTENSION.toLowerCase())) {
 				isSeparationColumnFile = true;
 			}
 		}
