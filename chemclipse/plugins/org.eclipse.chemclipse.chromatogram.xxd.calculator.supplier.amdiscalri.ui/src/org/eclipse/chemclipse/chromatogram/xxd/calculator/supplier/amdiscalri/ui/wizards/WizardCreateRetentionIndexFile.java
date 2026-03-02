@@ -124,8 +124,8 @@ public class WizardCreateRetentionIndexFile extends AbstractWizard {
 			/*
 			 * Calibration File.
 			 */
-			if(!calibrationFile.getAbsolutePath().endsWith(CalibrationFile.FILTER_EXTENSION)) {
-				calibrationFile = new File(calibrationFile.getAbsolutePath() + CalibrationFile.FILTER_EXTENSION);
+			if(!calibrationFile.getAbsolutePath().endsWith(CalibrationFile.FILE_EXTENSION)) {
+				calibrationFile = new File(calibrationFile.getAbsolutePath() + CalibrationFile.FILE_EXTENSION);
 			}
 			CalibrationFileWriter calibrationFileWriter = new CalibrationFileWriter();
 			calibrationFileWriter.write(calibrationFile, wizardElements.getSeparationColumnIndices());
@@ -134,7 +134,7 @@ public class WizardCreateRetentionIndexFile extends AbstractWizard {
 			 * Export the chromatogram.
 			 */
 			String path = calibrationFile.getAbsolutePath();
-			File chromatogramFile = new File(path.substring(0, path.length() - CalibrationFile.FILTER_EXTENSION.length()) + VersionConstants.FILE_EXTENSION_CHROMATOGRAM);
+			File chromatogramFile = new File(path.substring(0, path.length() - CalibrationFile.FILE_EXTENSION.length()) + VersionConstants.FILE_EXTENSION_CHROMATOGRAM);
 			IChromatogramSelection chromatogramSelection = wizardElements.getChromatogramSelection();
 			if(wizardElements.isUseMassSpectrometryData()) {
 				if(chromatogramSelection instanceof IChromatogramSelectionMSD chromatogramSelectionMSD) {

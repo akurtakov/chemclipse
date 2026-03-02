@@ -134,7 +134,7 @@ public class PageCalibrationTable extends AbstractExtendedWizardPage {
 		FileDialog fileDialog = new FileDialog(shell, SWT.SAVE);
 		fileDialog.setOverwrite(true);
 		fileDialog.setText("Retention Index");
-		fileDialog.setFileName("RetentionIndices_" + new Date().getTime() + CalibrationFile.FILTER_EXTENSION);
+		fileDialog.setFileName("RetentionIndices_" + new Date().getTime());
 		fileDialog.setFilterExtensions(CalibrationFile.FILTER_EXTENSION);
 		fileDialog.setFilterNames(CalibrationFile.FILTER_NAME);
 		return fileDialog.open();
