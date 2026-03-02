@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,22 +12,30 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.process.supplier.batchprocess.ui.wizards;
 
+import java.io.File;
+
 import org.eclipse.chemclipse.chromatogram.xxd.process.supplier.batchprocess.io.JobWriter;
 import org.eclipse.chemclipse.chromatogram.xxd.process.supplier.batchprocess.model.BatchProcessJob;
 import org.eclipse.chemclipse.logging.core.Logger;
-import org.eclipse.chemclipse.support.ui.wizards.AbstractFileWizard;
-import org.eclipse.core.resources.IFile;
+import org.eclipse.chemclipse.model.types.DataType;
+import org.eclipse.chemclipse.support.l10n.SupportMessages;
+import org.eclipse.chemclipse.support.ui.wizards.AbstractWizard;
+import org.eclipse.chemclipse.ux.extension.ui.provider.ISupplierEditorSupport;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.editors.ProjectExplorerSupportFactory;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
-public class WizardProcessor extends AbstractFileWizard {
+public class WizardProcessor extends AbstractWizard {
 
 	private static final Logger logger = Logger.getLogger(WizardProcessor.class);
+
 	private PageDataType pageDataType;
+	private BatchProcessWizardElements wizardElements;
 
 	public WizardProcessor() {
 
-		super(BatchProcessJob.DESCRIPTION, BatchProcessJob.FILE_EXTENSION);
+		super(new BatchProcessWizardElements());
+		this.wizardElements = (BatchProcessWizardElements)getWizardElements();
 	}
 
 	@Override
@@ -35,29 +43,25 @@ public class WizardProcessor extends AbstractFileWizard {
 
 		super.addPages();
 
-		pageDataType = new PageDataType();
+		pageDataType = new PageDataType(wizardElements);
 		addPage(pageDataType);
 	}
 
 	@Override
 	public void doFinish(IProgressMonitor monitor) throws CoreException {
 
-		final IFile file = super.prepareProject(monitor);
-
+		File file = wizardElements.getBatchProcessFile();
 		try {
 			/*
 			 * Create the project.
 			 */
 			JobWriter jobWriter = new JobWriter();
-			jobWriter.writeBatchProcessJob(file.getLocation().toFile(), createBatchProcessJob(), monitor);
+			jobWriter.writeBatchProcessJob(file, createBatchProcessJob(), monitor);
 		} catch(Exception e) {
 			logger.warn(e);
 		}
-		/*
-		 * Refresh
-		 */
-		super.refreshWorkspace(monitor);
-		super.runOpenEditor(file, monitor);
+
+		runOpenEditor(file, monitor);
 	}
 
 	private BatchProcessJob createBatchProcessJob() {
@@ -66,5 +70,16 @@ public class WizardProcessor extends AbstractFileWizard {
 		batchProcessJob.setDataType(pageDataType.getDataType());
 
 		return batchProcessJob;
+	}
+
+	private void runOpenEditor(File file, IProgressMonitor monitor) {
+
+		monitor.subTask(SupportMessages.taskOpenEditor);
+		ISupplierEditorSupport supplierEditorSupport = new ProjectExplorerSupportFactory(DataType.OBJ).getInstanceEditorSupport();
+		getShell().getDisplay().asyncExec(() -> {
+			if(!supplierEditorSupport.openEditor(file)) {
+				logger.warn("Failed to open editor.");
+			}
+		});
 	}
 }

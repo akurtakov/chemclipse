@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -11,6 +11,9 @@
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.process.supplier.batchprocess.ui.wizards;
+
+import java.io.File;
+import java.util.Date;
 
 import org.eclipse.chemclipse.chromatogram.xxd.process.supplier.batchprocess.model.BatchProcessJob;
 import org.eclipse.chemclipse.model.types.DataType;
@@ -25,24 +28,31 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 
 public class PageDataType extends AbstractExtendedWizardPage {
 
 	private DataType dataType = BatchProcessJob.DATA_TYPE_DEFAULT;
+	private BatchProcessWizardElements wizardElements;
 
-	public PageDataType() {
+	public PageDataType(BatchProcessWizardElements wizardElements) {
 
 		super(PageDataType.class.getName());
 		setTitle("Chromatogram Batch Process");
-		setDescription("Select the data type to be analyzed.");
+		setDescription("Select the data type and export path.");
+		this.wizardElements = wizardElements;
 	}
 
 	@Override
 	public boolean canFinish() {
 
-		return true;
+		return wizardElements.getBatchProcessFile() != null;
 	}
 
 	@Override
@@ -68,6 +78,7 @@ public class PageDataType extends AbstractExtendedWizardPage {
 		composite.setLayout(new GridLayout(1, false));
 
 		createComboViewerDataTypes(composite);
+		createBatchProjectFileField(composite);
 
 		setControl(composite);
 	}
@@ -110,5 +121,52 @@ public class PageDataType extends AbstractExtendedWizardPage {
 		comboViewer.setSelection(new StructuredSelection(BatchProcessJob.DATA_TYPE_DEFAULT));
 
 		return comboViewer;
+	}
+
+	private void createBatchProjectFileField(Composite composite) {
+
+		Composite parent = new Composite(composite, SWT.NONE);
+		parent.setLayoutData(new GridData(GridData.FILL_BOTH));
+		parent.setLayout(new GridLayout(3, false));
+
+		Label labelFile = new Label(parent, SWT.NONE);
+		labelFile.setText("Save as:");
+
+		Text fileText = new Text(parent, SWT.BORDER);
+		fileText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+
+		Button buttonBrowse = new Button(parent, SWT.PUSH);
+		buttonBrowse.setText("Browse...");
+
+		buttonBrowse.addListener(SWT.Selection, e -> {
+			String selected = openFileDialog(getShell());
+			if(selected != null) {
+				fileText.setText(selected);
+				wizardElements.setBatchProcessFile(new File(selected));
+			}
+			validateSelection();
+		});
+	}
+
+	private String openFileDialog(Shell shell) {
+
+		FileDialog fileDialog = new FileDialog(shell, SWT.SAVE);
+		fileDialog.setOverwrite(true);
+		fileDialog.setText(BatchProcessJob.DESCRIPTION);
+		fileDialog.setFileName("BatchJob_" + new Date().getTime());
+		fileDialog.setFilterExtensions(BatchProcessJob.FILTER_EXTENSION);
+		fileDialog.setFilterNames(BatchProcessJob.FILTER_NAME);
+		return fileDialog.open();
+	}
+
+	private void validateSelection() {
+
+		String message = null;
+		File file = wizardElements.getBatchProcessFile();
+		if(file == null) {
+			message = "Please select a file location.";
+		}
+
+		updateStatus(message);
 	}
 }
