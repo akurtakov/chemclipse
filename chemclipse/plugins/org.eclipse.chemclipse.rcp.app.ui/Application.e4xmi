@@ -43,10 +43,6 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="_h0BcRzLzEeKMEOdllHiEaA" elementId="org.eclipse.chemclipse.rcp.app.ui.menu.item.about" label="%About" iconURI="platform:/plugin/org.eclipse.jface/icons/full/message_info.svg" tooltip="Show versions and licenses" command="_h0A1RDLzEeKMEOdllHiEaA"/>
       </children>
     </mainMenu>
-    <sharedElements xsi:type="basic:Part" xmi:id="_hwsHoEd8EeKxr87RO7WY0w" elementId="org.eclipse.ui.navigator.ProjectExplorer" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="%ProjectExplorer" iconURI="platform:/plugin/org.eclipse.ui.navigator.resources/icons/full/eview16/resource_persp.svg">
-      <tags>View</tags>
-      <tags>categoryTag:General</tags>
-    </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_twQ-EEjnEeKCXsBuXeeyZA" elementId="org.eclipse.ui.views.PropertySheet" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Property Sheet" iconURI="platform:/plugin/org.eclipse.ui.views/icons/full/eview16/prop_ps.svg">
       <tags>View</tags>
       <tags>categoryTag:General</tags>

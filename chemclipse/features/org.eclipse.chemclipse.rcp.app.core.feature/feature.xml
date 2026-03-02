@@ -141,10 +141,6 @@
          version="0.0.0"/>
 
    <plugin
-         id="org.eclipse.ui.navigator.resources"
-         version="0.0.0"/>
-
-   <plugin
          id="org.eclipse.ui.views"
          version="0.0.0"/>
 
