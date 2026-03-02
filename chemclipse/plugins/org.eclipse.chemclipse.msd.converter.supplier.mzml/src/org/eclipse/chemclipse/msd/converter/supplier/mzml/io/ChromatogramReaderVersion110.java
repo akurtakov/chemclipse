@@ -19,11 +19,13 @@ import java.util.zip.DataFormatException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.eclipse.chemclipse.converter.io.AbstractChromatogramReader;
 import org.eclipse.chemclipse.converter.l10n.ConverterMessages;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
+import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.msd.converter.io.IChromatogramMSDReader;
 import org.eclipse.chemclipse.msd.converter.supplier.mzml.converter.model.IVendorChromatogram;
 import org.eclipse.chemclipse.msd.converter.supplier.mzml.converter.model.VendorChromatogram;
@@ -48,6 +50,7 @@ import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.MzMLType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.ParamGroupType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.PrecursorType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.ProcessingMethodType;
+import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.ProductType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.ReferenceableParamGroupRefType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.RunType;
 import org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110.ScanType;
@@ -107,27 +110,14 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 
 	private void readTIC(RunType run, IVendorChromatogram chromatogram) {
 
-		double[] retentionTimes = null;
-		double[] intensities = null;
 		for(ChromatogramType chromatogramType : run.getChromatogramList().getChromatogram()) {
-			if(chromatogramType.getId().equals("TIC")) {
-				if(chromatogramType.getCvParam().stream().anyMatch(n -> n.getAccession().equals("MS:1000235") && n.getName().equals("total ion current chromatogram"))) {
-					for(BinaryDataArrayType binaryDataArrayType : chromatogramType.getBinaryDataArrayList().getBinaryDataArray()) {
-						try {
-							Pair<String, double[]> binaryData = BinaryReader110.parseBinaryData(binaryDataArrayType);
-							if(binaryData.getKey().equals("time")) {
-								retentionTimes = binaryData.getValue();
-							} else if(binaryData.getKey().equals("intensity")) {
-								intensities = binaryData.getValue();
-							}
-						} catch(DataFormatException e) {
-							logger.warn(e);
-						}
-					}
-				}
+			if(chromatogramType.getCvParam().stream().anyMatch(n -> //
+			n.getAccession().equals("MS:1000235") && n.getName().equals("total ion current chromatogram"))) {
+				chromatogram.setDataName(chromatogramType.getId());
+				Pair<double[], double[]> binaryData = readBinaryData(chromatogramType);
+				XmlChromatogramReader.addTotalSignals(binaryData.getValue(), binaryData.getKey(), chromatogram);
 			}
 		}
-		XmlChromatogramReader.addTotalSignals(intensities, retentionTimes, chromatogram);
 	}
 
 	private void readSpectrum(MzMLType mzML, IVendorChromatogram chromatogram, IProgressMonitor monitor) {
@@ -135,6 +125,7 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 		SpectrumListType spectrumList = mzML.getRun().getSpectrumList();
 		if(spectrumList == null) {
 			readTIC(mzML.getRun(), chromatogram);
+			readSRM(mzML.getRun(), chromatogram);
 			return;
 		}
 		monitor.beginTask(ConverterMessages.readScans, spectrumList.getCount().intValue());
@@ -167,6 +158,93 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 				}
 			}
 		}
+	}
+
+	private void readSRM(RunType run, IVendorChromatogram chromatogram) {
+
+		for(ChromatogramType chromatogramType : run.getChromatogramList().getChromatogram()) {
+			if(chromatogramType.getCvParam().stream().anyMatch(n -> //
+			n.getAccession().equals("MS:1001473") && n.getName().equals("selected reaction monitoring chromatogram"))) {
+				IVendorChromatogram referencedChromatogram = new VendorChromatogram();
+				referencedChromatogram.setDataName(chromatogramType.getId());
+
+				Pair<double[], double[]> binaryData = readBinaryData(chromatogramType);
+
+				double precursorIon = getPrecursorIon(chromatogramType);
+				double productIon = getProductIon(chromatogramType);
+				double collisionEnergy = getCollisionEnergy(chromatogramType);
+				IIonTransition ionTransition = new IonTransition(precursorIon, productIon, collisionEnergy, 1, 1, 0);
+				chromatogram.getIonTransitionSettings().getIonTransitions().add(ionTransition);
+
+				addIonSRM(binaryData.getValue(), binaryData.getKey(), ionTransition, referencedChromatogram);
+
+				for(CVParamType cvParam : chromatogramType.getCvParam()) {
+					for(IScan scan : referencedChromatogram.getScans()) {
+						if(scan instanceof IRegularMassSpectrum massSpectrum) {
+							setPolarity(cvParam, massSpectrum);
+						}
+					}
+				}
+
+				chromatogram.getReferencedChromatograms().add(referencedChromatogram);
+			}
+		}
+	}
+
+	public static void addIonSRM(double[] intensities, double[] retentionTimes, IIonTransition ionTransition, IVendorChromatogram chromatogram) {
+
+		int tic = Math.min(retentionTimes.length, intensities.length);
+		for(int i = 0; i < tic; i++) {
+			IRegularMassSpectrum massSpectrum = new RegularMassSpectrum();
+			int retentionTime = (int)(retentionTimes[i]);
+			massSpectrum.setRetentionTime(retentionTime);
+			float intensity = (float)intensities[i];
+			VendorIon ion = new VendorIon(ionTransition.getQ3Ion(), intensity, ionTransition);
+			massSpectrum.addIon(ion, false);
+			chromatogram.addScan(massSpectrum);
+		}
+	}
+
+	private double getPrecursorIon(ChromatogramType chromatogram) {
+
+		PrecursorType precursor = chromatogram.getPrecursor();
+		if(precursor == null) {
+			return 0;
+		}
+		for(CVParamType cvParam : precursor.getIsolationWindow().getCvParam()) {
+			if(cvParam.getAccession().equals("MS:1000827") && cvParam.getName().equals("isolation window target m/z")) {
+				return Double.parseDouble(cvParam.getValue());
+			}
+		}
+		return 0;
+	}
+
+	private double getCollisionEnergy(ChromatogramType chromatogram) {
+
+		PrecursorType precursor = chromatogram.getPrecursor();
+		if(precursor == null) {
+			return 0;
+		}
+		for(CVParamType cvParam : precursor.getActivation().getCvParam()) {
+			if(cvParam.getAccession().equals("MS:1000045") && cvParam.getName().equals("collision energy")) {
+				return Double.parseDouble(cvParam.getValue());
+			}
+		}
+		return 0;
+	}
+
+	private double getProductIon(ChromatogramType chromatogram) {
+
+		ProductType product = chromatogram.getProduct();
+		if(product == null) {
+			return 0;
+		}
+		for(CVParamType cvParam : product.getIsolationWindow().getCvParam()) {
+			if(cvParam.getAccession().equals("MS:1000827") && cvParam.getName().equals("isolation window target m/z")) {
+				return Double.parseDouble(cvParam.getValue());
+			}
+		}
+		return 0;
 	}
 
 	private void readEditHistory(MzMLType mzML, IVendorChromatogram chromatogram) {
@@ -288,11 +366,7 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 		List<ReferenceableParamGroupRefType> groupTypes = spectrum.getReferenceableParamGroupRef();
 		for(ReferenceableParamGroupRefType groupType : groupTypes) {
 			for(CVParamType cvParam : groupType.getRef().getCvParam()) {
-				if(cvParam.getAccession().equals("MS:1000129") && cvParam.getName().equals("negative scan")) {
-					massSpectrum.setPolarity(Polarity.NEGATIVE);
-				} else if(cvParam.getAccession().equals("MS:1000130") && cvParam.getName().equals("positive scan")) {
-					massSpectrum.setPolarity(Polarity.POSITIVE);
-				}
+				setPolarity(cvParam, massSpectrum);
 			}
 		}
 	}
@@ -327,5 +401,34 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 			}
 		}
 		return false;
+	}
+
+	private Pair<double[], double[]> readBinaryData(ChromatogramType chromatogramType) {
+
+		double[] retentionTimes = null;
+		double[] intensities = null;
+		for(BinaryDataArrayType binaryDataArrayType : chromatogramType.getBinaryDataArrayList().getBinaryDataArray()) {
+			try {
+				Pair<String, double[]> binaryData = BinaryReader110.parseBinaryData(binaryDataArrayType);
+				if(binaryData.getKey().equals("time")) {
+					retentionTimes = binaryData.getValue();
+				} else if(binaryData.getKey().equals("intensity")) {
+					intensities = binaryData.getValue();
+				}
+			} catch(DataFormatException e) {
+				logger.warn(e);
+			}
+		}
+
+		return new ImmutablePair<>(retentionTimes, intensities);
+	}
+
+	private void setPolarity(CVParamType cvParam, IRegularMassSpectrum massSpectrum) {
+
+		if(cvParam.getAccession().equals("MS:1000129") && cvParam.getName().equals("negative scan")) {
+			massSpectrum.setPolarity(Polarity.NEGATIVE);
+		} else if(cvParam.getAccession().equals("MS:1000130") && cvParam.getName().equals("positive scan")) {
+			massSpectrum.setPolarity(Polarity.POSITIVE);
+		}
 	}
 }

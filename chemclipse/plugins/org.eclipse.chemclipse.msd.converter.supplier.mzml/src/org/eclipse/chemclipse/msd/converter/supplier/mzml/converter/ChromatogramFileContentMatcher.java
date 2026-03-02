@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -52,10 +52,22 @@ public class ChromatogramFileContentMatcher extends AbstractFileContentMatcher i
 							if(innerEventType == XMLStreamConstants.START_ELEMENT && xmlStreamReader.getLocalName().equals("cvParam")) {
 								String accession = xmlStreamReader.getAttributeValue(null, "accession");
 								String paramName = xmlStreamReader.getAttributeValue(null, "name");
-								if(accession.equals("MS:1000579") && paramName.equals("MS1 spectrum") || //
-										accession.equals("MS:1000580") && paramName.equals("MSn spectrum")) {
-									hasMS = true;
-									break;
+								switch(accession) {
+									case "MS:1000579":
+										if("MS1 spectrum".equals(paramName)) {
+											hasMS = true;
+										}
+										break;
+									case "MS:1000580":
+										if("MSn spectrum".equals(paramName)) {
+											hasMS = true;
+										}
+										break;
+									case "MS:1001473":
+										if("selected reaction monitoring chromatogram".equals(paramName)) {
+											hasMS = true;
+										}
+										break;
 								}
 							}
 							if(innerEventType == XMLStreamConstants.END_ELEMENT && xmlStreamReader.getLocalName().equals("fileContent")) {
