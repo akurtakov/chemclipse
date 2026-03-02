@@ -80,7 +80,6 @@
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_T2mREFeKEeWJDdTjy0i2HA" elementId="org.eclipse.chemclipse.processing.ui.parts.ProcessingInfoPart" contributionURI="bundleclass://org.eclipse.chemclipse.processing.ui/org.eclipse.chemclipse.processing.ui.parts.ProcessingInfoPart" label="Feedback" iconURI="platform:/plugin/org.eclipse.jface/icons/full/message_info.svg"/>
     <sharedElements xsi:type="basic:Part" xmi:id="_W8FzsFuuEeWKQYKM0-fotA" elementId="org.eclipse.chemclipse.rcp.app.ui.part.editHistory" contributionURI="bundleclass://org.eclipse.chemclipse.support.ui/org.eclipse.chemclipse.support.ui.parts.EditHistoryPart" label="Edit History" iconURI="platform:/plugin/org.eclipse.jface/icons/full/message_info.svg"/>
-    <sharedElements xsi:type="basic:Part" xmi:id="_V3EBsHb_EeWs9YprkfnL3Q" elementId="org.eclipse.ease.ui.views.scriptShell" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Script Shell" iconURI="platform:/plugin/org.eclipse.chemclipse.rcp.ui.icons/icons/16x16/script_shell.png"/>
     <trimBars xmi:id="_h0BcTDLzEeKMEOdllHiEaA" elementId="org.eclipse.chemclipse.rcp.app.ui.trimbar.top">
       <children xsi:type="menu:ToolBar" xmi:id="_h0BcTTLzEeKMEOdllHiEaA" elementId="org.eclipse.chemclipse.rcp.app.ui.toolbar.main">
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_nIMLMINGEeOuPY34hxPAxA" elementId="org.eclipse.chemclipse.rcp.app.ui.toolbarseparator.3"/>
