@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -37,6 +37,9 @@ public class ProjectExplorerFileIdentifier extends AbstractSupplierFileIdentifie
 			case CAL:
 				supplier.add(new CalibrationFileSupplier());
 				break;
+			case OBJ:
+				supplier.add(new BatchJobFileSupplier());
+				break;
 			default:
 				// No action
 		}
@@ -49,6 +52,9 @@ public class ProjectExplorerFileIdentifier extends AbstractSupplierFileIdentifie
 		switch(dataType) {
 			case CAL:
 				type = TYPE_CAL;
+				break;
+			case OBJ:
+				type = TYPE_OBJ;
 				break;
 			default:
 				type = "";

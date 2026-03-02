@@ -757,6 +757,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final boolean DEF_SHOW_DATA_METHOD = true;
 	public static final String P_SHOW_DATA_QUANT_DB = "showDataQuantDB";
 	public static final boolean DEF_SHOW_DATA_QUANT_DB = true;
+	public static final String P_SHOW_BATCHJOBS = "showBatchJobs";
+	public static final boolean DEF_SHOW_BATCHJOBS = true;
 	/*
 	 * Lists
 	 */
@@ -1068,6 +1070,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 		putDefault(P_SHOW_DATA_SEQUENCE, DEF_SHOW_DATA_SEQUENCE);
 		putDefault(P_SHOW_DATA_METHOD, DEF_SHOW_DATA_METHOD);
 		putDefault(P_SHOW_DATA_QUANT_DB, DEF_SHOW_DATA_QUANT_DB);
+		putDefault(P_SHOW_BATCHJOBS, DEF_SHOW_BATCHJOBS);
 		/*
 		 * Lists
 		 */
