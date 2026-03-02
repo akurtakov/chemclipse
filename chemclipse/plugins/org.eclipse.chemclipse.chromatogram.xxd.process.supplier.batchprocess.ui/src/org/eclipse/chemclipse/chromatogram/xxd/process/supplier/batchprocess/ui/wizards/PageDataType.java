@@ -94,7 +94,7 @@ public class PageDataType extends AbstractExtendedWizardPage {
 			public String getText(Object element) {
 
 				if(element instanceof DataType dataType) {
-					return dataType.name();
+					return dataType.label();
 				}
 
 				return null;
