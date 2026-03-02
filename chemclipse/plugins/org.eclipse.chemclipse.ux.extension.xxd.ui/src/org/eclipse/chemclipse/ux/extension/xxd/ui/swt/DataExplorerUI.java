@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -165,6 +165,12 @@ public class DataExplorerUI extends MultiDataExplorerTreeUI {
 		 */
 		if(preferenceStore.getBoolean(PreferenceSupplier.P_SHOW_DATA_QUANT_DB)) {
 			editorSupportList.add(new SupplierEditorSupport(DataType.QDB, () -> context));
+		}
+		/*
+		 * OBJ
+		 */
+		if(preferenceStore.getBoolean(PreferenceSupplier.P_SHOW_BATCHJOBS)) {
+			editorSupportList.add(new ProjectExplorerSupportFactory(DataType.OBJ).getInstanceEditorSupport());
 		}
 
 		editorSupportList.add(new GenericSupplierEditorSupport(supplierFileIdentifier, () -> context));

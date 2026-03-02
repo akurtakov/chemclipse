@@ -35,6 +35,7 @@ public interface ISupplierFileIdentifier extends SupplierContext {
 	String TYPE_SCAN_WSD = "SCAN_WSD"; // UV/Vis
 	String TYPE_SCAN_FSD = "SCAN_FSD"; // Fluorescence
 	String TYPE_CAL = "CAL"; // RI Calibration
+	String TYPE_OBJ = "OBJ"; // Batch Job
 	String TYPE_PCR = "PCR"; // Polymerase Chain Reaction
 	String TYPE_SEQ = "SEQ"; // Sequence
 	String TYPE_MTH = "MTH"; // Method
