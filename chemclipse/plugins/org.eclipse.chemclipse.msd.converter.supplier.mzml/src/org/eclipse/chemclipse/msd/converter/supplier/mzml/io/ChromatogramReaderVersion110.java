@@ -133,6 +133,10 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 	private void readSpectrum(MzMLType mzML, IVendorChromatogram chromatogram, IProgressMonitor monitor) {
 
 		SpectrumListType spectrumList = mzML.getRun().getSpectrumList();
+		if(spectrumList == null) {
+			readTIC(mzML.getRun(), chromatogram);
+			return;
+		}
 		monitor.beginTask(ConverterMessages.readScans, spectrumList.getCount().intValue());
 		int cycleNumber = isMultiStageMassSpectrum(mzML) ? 1 : 0;
 		for(SpectrumType spectrum : mzML.getRun().getSpectrumList().getSpectrum()) {
