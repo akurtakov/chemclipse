@@ -28,8 +28,8 @@ import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.eclipse.chemclipse.support.l10n.SupportMessages;
 import org.eclipse.chemclipse.support.ui.wizards.AbstractWizard;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.part.support.SupplierEditorSupport;
+import org.eclipse.chemclipse.ux.extension.ui.provider.ISupplierEditorSupport;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.editors.ProjectExplorerSupportFactory;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -156,9 +156,11 @@ public class WizardCreateRetentionIndexFile extends AbstractWizard {
 	private void runOpenEditor(File file, IProgressMonitor monitor) {
 
 		monitor.subTask(SupportMessages.taskOpenEditor);
-		SupplierEditorSupport supplierEditorSupport = new SupplierEditorSupport(DataType.CAL, () -> Activator.getDefault().getEclipseContext());
-		if(!supplierEditorSupport.openEditor(file)) {
-			logger.warn("Failed to open editor.");
-		}
+		ISupplierEditorSupport supplierEditorSupport = new ProjectExplorerSupportFactory(DataType.CAL).getInstanceEditorSupport();
+		getShell().getDisplay().asyncExec(() -> {
+			if(!supplierEditorSupport.openEditor(file)) {
+				logger.warn("Failed to open editor.");
+			}
+		});
 	}
 }
