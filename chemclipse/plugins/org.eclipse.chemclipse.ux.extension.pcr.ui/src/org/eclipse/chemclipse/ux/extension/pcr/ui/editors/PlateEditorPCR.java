@@ -25,9 +25,7 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
-import org.eclipse.chemclipse.support.events.IPerspectiveAndViewIds;
 import org.eclipse.chemclipse.support.settings.UserManagement;
-import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.support.ui.workbench.EditorSupport;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.ux.extension.pcr.ui.Activator;
@@ -37,11 +35,8 @@ import org.eclipse.chemclipse.ux.extension.pcr.ui.support.PCRFileSupport;
 import org.eclipse.chemclipse.ux.extension.ui.editors.IChemClipseEditor;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
-import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
-import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
-import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
@@ -64,8 +59,6 @@ public class PlateEditorPCR implements IChemClipseEditor {
 
 	private final MPart part;
 	private final MDirtyable dirtyable;
-	private final EModelService modelService;
-	private final MApplication application;
 
 	private File plateFile;
 	private IPlate plate = null;
@@ -74,12 +67,10 @@ public class PlateEditorPCR implements IChemClipseEditor {
 	private final Shell shell;
 
 	@Inject
-	public PlateEditorPCR(Composite parent, MPart part, MDirtyable dirtyable, EModelService modelService, MApplication application, Shell shell) {
+	public PlateEditorPCR(Composite parent, MPart part, MDirtyable dirtyable, Shell shell) {
 
 		this.part = part;
 		this.dirtyable = dirtyable;
-		this.modelService = modelService;
-		this.application = application;
 		this.shell = shell;
 
 		initialize(parent);
@@ -95,13 +86,6 @@ public class PlateEditorPCR implements IChemClipseEditor {
 	protected void preDestroy() {
 
 		unloadPlate();
-
-		if(modelService != null && application != null) {
-			MPartStack partStack = (MPartStack)modelService.find(IPerspectiveAndViewIds.EDITOR_PART_STACK_ID, application);
-			part.setToBeRendered(false);
-			part.setVisible(false);
-			DisplayUtils.getDisplay().asyncExec(() -> partStack.getChildren().remove(part));
-		}
 	}
 
 	@Persist

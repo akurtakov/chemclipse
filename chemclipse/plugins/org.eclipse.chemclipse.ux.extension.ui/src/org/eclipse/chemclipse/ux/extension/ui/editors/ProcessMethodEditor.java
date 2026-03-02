@@ -30,12 +30,10 @@ import org.eclipse.chemclipse.processing.methods.IProcessMethod;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
-import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.ui.workbench.EditorSupport;
-import org.eclipse.chemclipse.support.ui.workbench.PartSupport;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.ux.extension.ui.methods.MethodFileSupport;
 import org.eclipse.chemclipse.ux.extension.ui.support.ProcessMethodNotifications;
@@ -50,7 +48,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
 import jakarta.inject.Inject;
 
 public class ProcessMethodEditor implements IModificationHandler, IChemClipseEditor {
@@ -70,8 +67,6 @@ public class ProcessMethodEditor implements IModificationHandler, IChemClipseEdi
 	private IProcessSupplierContext processSupplierContext;
 	@Inject
 	private ProcessMethodNotifications notifications;
-	@Inject
-	private PartSupport partsupport;
 
 	private File processMethodFile;
 	private ExtendedMethodUI extendedMethodUI;
@@ -81,12 +76,6 @@ public class ProcessMethodEditor implements IModificationHandler, IChemClipseEdi
 	public void setFocus() {
 
 		extendedMethodUI.setFocus();
-	}
-
-	@PreDestroy
-	private void preDestroy() {
-
-		partsupport.closePart(part);
 	}
 
 	@Persist

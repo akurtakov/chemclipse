@@ -33,7 +33,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
-import org.eclipse.chemclipse.support.events.IPerspectiveAndViewIds;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.support.ui.workbench.EditorSupport;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
@@ -44,11 +43,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
-import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
-import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
-import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.SWT;
@@ -86,10 +82,6 @@ public class DatabaseEditor extends EditorPart implements IChemClipseEditor {
 	private MPart part;
 	@Inject
 	private MDirtyable dirtyable;
-	@Inject
-	private MApplication application;
-	@Inject
-	private EModelService modelService;
 	@Inject
 	private IEventBroker eventBroker;
 	/*
@@ -353,13 +345,6 @@ public class DatabaseEditor extends EditorPart implements IChemClipseEditor {
 		 */
 		List<String> clearTopics = Arrays.asList(IChemClipseEvents.TOPIC_SCAN_XXD_UPDATE_SELECTION);
 		UpdateNotifier.update(IChemClipseEvents.TOPIC_EDITOR_LIBRARY_CLOSE, clearTopics);
-
-		if(modelService != null) {
-			MPartStack partStack = (MPartStack)modelService.find(IPerspectiveAndViewIds.EDITOR_PART_STACK_ID, application);
-			part.setToBeRendered(false);
-			part.setVisible(false);
-			partStack.getChildren().remove(part);
-		}
 	}
 
 	private EventHandler registerEventHandler(IEventBroker eventBroker, String topic, String[] properties) {

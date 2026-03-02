@@ -15,13 +15,11 @@ package org.eclipse.chemclipse.support.ui.workbench;
 import java.util.Collection;
 
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
-import org.eclipse.chemclipse.support.events.IPerspectiveAndViewIds;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
-import org.eclipse.e4.ui.model.application.ui.basic.MPartStack;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
@@ -48,13 +46,10 @@ public class PartSupport {
 
 	public void removeEditorsFromPartStack() {
 
-		MPartStack partStack = (MPartStack)eModelService.find(IPerspectiveAndViewIds.EDITOR_PART_STACK_ID, mApplication);
 		Collection<MPart> parts = ePartService.getParts();
 		for(MPart part : parts) {
 			if(part.getObject() != null) {
-				part.setToBeRendered(false);
-				part.setVisible(false);
-				partStack.getChildren().remove(part);
+				ePartService.hidePart(part, true);
 			}
 		}
 	}
@@ -87,12 +82,6 @@ public class PartSupport {
 			return;
 		}
 
-		part.setToBeRendered(false);
-		part.setVisible(false);
-
-		DisplayUtils.getDisplay().asyncExec(() -> {
-			MPartStack partStack = (MPartStack)eModelService.find(IPerspectiveAndViewIds.EDITOR_PART_STACK_ID, mApplication);
-			partStack.getChildren().remove(part);
-		});
+		ePartService.hidePart(part, true);
 	}
 }

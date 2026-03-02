@@ -55,7 +55,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.settings.UserManagement;
 import org.eclipse.chemclipse.support.ui.workbench.EditorSupport;
-import org.eclipse.chemclipse.support.ui.workbench.PartSupport;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.ux.extension.ui.editors.IChromatogramEditor;
 import org.eclipse.chemclipse.ux.extension.ui.parts.AbstractUpdater;
@@ -174,7 +173,7 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 	}
 
 	@PreDestroy
-	private void preDestroy(ProcessMethodNotifications notifications, MeasurementResultNotification measurementNotification, PartSupport partSupport) {
+	private void preDestroy(ProcessMethodNotifications notifications, MeasurementResultNotification measurementNotification) {
 
 		chromatogramFile = null;
 		notifications.removeObjectChangedListener(updateMenuListener);
@@ -185,7 +184,6 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 		UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_CHROMATOGRAM_XXD_UPDATE_SELECTION, null);
 		UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_CLOSE, "ChromatogramEditor4x Close");
 
-		partSupport.closePart(part);
 		extendedChromatogramUI.dispose();
 	}
 
