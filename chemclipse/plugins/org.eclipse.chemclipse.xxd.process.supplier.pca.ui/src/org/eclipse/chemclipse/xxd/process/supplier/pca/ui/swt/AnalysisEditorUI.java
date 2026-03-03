@@ -460,7 +460,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				createNamingWizard(e.display.getActiveShell());
+				createNamingWizard(getShell());
 				// applyColorScheme(e.display);
 			}
 		});
@@ -496,7 +496,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 			public void widgetSelected(SelectionEvent e) {
 
 				if(samples != null) {
-					FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.READ_ONLY);
+					FileDialog fileDialog = new FileDialog(getShell(), SWT.READ_ONLY);
 					fileDialog.setText("Import");
 					fileDialog.setFilterExtensions(SampleTemplateIO.FILTER_EXTENSION);
 					fileDialog.setFilterNames(SampleTemplateIO.FILTER_NAME);
@@ -509,7 +509,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 							SampleTemplateIO.read(file, samples.getSamples());
 							updateSampleList();
 						} catch(IOException e1) {
-							MessageDialog.openWarning(e.display.getActiveShell(), "Import", "Failed to read the sample template.");
+							MessageDialog.openWarning(getShell(), "Import", "Failed to read the sample template.");
 						}
 					}
 				}
@@ -530,7 +530,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 			public void widgetSelected(SelectionEvent e) {
 
 				if(samples != null) {
-					FileDialog fileDialog = new FileDialog(Display.getCurrent().getActiveShell(), SWT.SAVE);
+					FileDialog fileDialog = new FileDialog(getShell(), SWT.SAVE);
 					fileDialog.setOverwrite(true);
 					fileDialog.setText("Export");
 					fileDialog.setFilterExtensions(SampleTemplateIO.FILTER_EXTENSION);
@@ -543,9 +543,9 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 							PreferenceSupplier.setPathExportFile(fileDialog.getFilterPath());
 							File file = new File(path);
 							SampleTemplateIO.write(file, samples.getSamples());
-							MessageDialog.openInformation(e.display.getActiveShell(), "Export", "The sample template has been exported successfully.");
+							MessageDialog.openInformation(getShell(), "Export", "The sample template has been exported successfully.");
 						} catch(FileNotFoundException e1) {
-							MessageDialog.openWarning(e.display.getActiveShell(), "Export", "The sample template file couldn't be found.");
+							MessageDialog.openWarning(getShell(), "Export", "The sample template file couldn't be found.");
 						}
 					}
 				}
@@ -710,7 +710,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 					 * Run with or without dialog.
 					 */
 					CalculationExecutor runnable = new CalculationExecutor(samples, evaluation);
-					Shell shell = display.getActiveShell();
+					Shell shell = getShell();
 					if(shell != null) {
 						ProgressMonitorDialog monitor = new ProgressMonitorDialog(shell);
 						monitor.run(true, true, runnable);
@@ -784,7 +784,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 	private void applyColorScheme(Display display) {
 
 		if(samples != null) {
-			if(MessageDialog.openQuestion(display.getActiveShell(), "Color Scheme", "Would like to apply the current color scheme on the samples?")) {
+			if(MessageDialog.openQuestion(getShell(), "Color Scheme", "Would like to apply the current color scheme on the samples?")) {
 				String colorScheme = applyColorScheme();
 				if(colorScheme != null) {
 					UpdateNotifierUI.update(getDisplay(), IChemClipseEvents.TOPIC_PCA_UPDATE_COLORSCHEME, colorScheme);
