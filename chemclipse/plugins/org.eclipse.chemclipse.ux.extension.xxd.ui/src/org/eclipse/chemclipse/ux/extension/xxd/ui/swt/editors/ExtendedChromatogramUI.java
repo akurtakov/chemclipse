@@ -375,6 +375,9 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 
 	public synchronized void updateChromatogramSelection(IChromatogramSelection chromatogramSelection) {
 
+		if(chromatogramSelection == null) {
+			return;
+		}
 		toolbarReferencesControl.get().update(chromatogramSelection, this::setChromatogramSelectionInternal);
 		setChromatogramSelectionInternal(chromatogramSelection);
 		chromatogramBaselinesControl.get().update(chromatogramSelection.getChromatogram());
