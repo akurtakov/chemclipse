@@ -265,7 +265,7 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 	private synchronized void initialize(Composite parent) {
 
 		IChromatogramSelection chromatogramSelection = loadChromatogram();
-		createEditorPages(parent);
+		createChromatogramPage(parent);
 		extendedChromatogramUI.updateChromatogramSelection(chromatogramSelection);
 		processChromatogram(chromatogramSelection);
 		setControl(extendedChromatogramUI);
@@ -449,11 +449,6 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 				throw new NoChromatogramConverterAvailableException();
 			}
 		}
-	}
-
-	private void createEditorPages(Composite parent) {
-
-		createChromatogramPage(parent);
 	}
 
 	private void createChromatogramPage(Composite parent) {

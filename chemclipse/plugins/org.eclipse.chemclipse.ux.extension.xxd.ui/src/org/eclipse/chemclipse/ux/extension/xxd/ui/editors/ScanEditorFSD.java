@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Matthias Mailänder - initial API and implementation
  *******************************************************************************/
@@ -132,7 +132,7 @@ public class ScanEditorFSD implements IScanEditorFSD {
 	private void initialize(Composite parent) {
 
 		spectrumFSD = loadScan();
-		createEditorPages(parent);
+		extendedFSDScanUI = new ExtendedFSDScanUI(parent, SWT.NONE);
 		extendedFSDScanUI.update(spectrumFSD);
 	}
 
@@ -178,13 +178,4 @@ public class ScanEditorFSD implements IScanEditorFSD {
 		return runnable.getSpectrumFSD();
 	}
 
-	private void createEditorPages(Composite parent) {
-
-		createScanPage(parent);
-	}
-
-	private void createScanPage(Composite parent) {
-
-		extendedFSDScanUI = new ExtendedFSDScanUI(parent, SWT.NONE);
-	}
 }

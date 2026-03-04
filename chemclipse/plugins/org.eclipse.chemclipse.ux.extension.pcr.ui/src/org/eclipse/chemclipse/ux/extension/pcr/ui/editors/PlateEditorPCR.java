@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Matthias Mailänder - remember save location
@@ -146,7 +146,7 @@ public class PlateEditorPCR implements IChemClipseEditor {
 
 	private void initialize(Composite parent) {
 
-		createEditorPages(parent);
+		extendedPCRPlateUI = new ExtendedPCRPlateUI(parent, SWT.NONE);
 		plate = loadPlate();
 		extendedPCRPlateUI.update(plate);
 	}
@@ -186,16 +186,6 @@ public class PlateEditorPCR implements IChemClipseEditor {
 
 		plateFile = file;
 		return runnable.getPlate();
-	}
-
-	private void createEditorPages(Composite parent) {
-
-		createScanPage(parent);
-	}
-
-	private void createScanPage(Composite parent) {
-
-		extendedPCRPlateUI = new ExtendedPCRPlateUI(parent, SWT.NONE);
 	}
 
 	private void updatePlate() {
