@@ -173,49 +173,44 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		update(unknown, reference);
 	}
 
-	public void update(IScanMSD scanMSD) {
+	/**
+	 * Update the mass spectrum and target.
+	 * 
+	 * @param scanMSD
+	 * @param identificationTarget
+	 */
+	public void update(IScanMSD scanMSD, IIdentificationTarget identificationTarget) {
 
-		boolean update = false;
-		switch(getComparisonScanOption()) {
-			case UNKNOWN:
-				scanUnknownMaster = scanMSD;
-				assignScan(scanMSD, true);
-				update = true;
-				break;
-			case REFERENCE:
-				assignScan(scanMSD, false);
-				update = true;
-				break;
-			default:
-				break;
+		if(identificationTarget != null) {
+			if(isLibrarySearch()) {
+				if(scanMSD != null) {
+					scanUnknownMaster = scanMSD;
+					assignScan(scanMSD, true);
+				}
+				updateMolecularWeightUnknown();
+				updateIdentificationTarget(identificationTarget);
+				updateIdentifierControl();
+			}
+		} else {
+			switch(getComparisonScanOption()) {
+				case UNKNOWN:
+					scanUnknownMaster = scanMSD;
+					assignScan(scanMSD, true);
+					break;
+				case REFERENCE:
+					assignScan(scanMSD, false);
+					break;
+				default:
+					assignScan(scanMSD, true);
+					scanReference = null;
+					break;
+			}
 		}
-
-		if(update) {
-			updateInput();
-		}
-	}
-
-	public void update(IIdentificationTarget identificationTarget) {
-
-		if(isLibrarySearch()) {
-			updateIdentificationTarget(identificationTarget);
-			updateIdentifierControl();
-		}
-	}
-
-	public void update(IScanMSD massSpectrum, IIdentificationTarget identificationTarget) {
-
-		if(isLibrarySearch()) {
-			scanUnknownMaster = massSpectrum;
-			scanUnknown = copyScan(massSpectrum);
-			updateMolecularWeightUnknown();
-			updateIdentificationTarget(identificationTarget);
-			updateIdentifierControl();
-		}
+		updateInput();
 	}
 
 	/**
-	 * Update unknown and reference
+	 * Update unknown and reference mass spectrum.
 	 * 
 	 * @param unknownMassSpectrum
 	 * @param referenceMassSpectrum
