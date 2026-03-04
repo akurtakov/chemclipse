@@ -17,7 +17,6 @@ import java.util.Map;
 
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.support.preferences.IPreferenceSupplier;
-import org.eclipse.chemclipse.support.ui.workbench.PartSupport;
 import org.eclipse.chemclipse.support.ui.workbench.PerspectiveSupport;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
@@ -121,14 +120,8 @@ public abstract class AbstractActivatorUI extends AbstractUIPlugin {
 			 */
 			eclipseContext.set(EPartService.class, ContextAddon.getPartService());
 			/*
-			 * Part and Perspective Support
+			 * Perspective Support
 			 */
-			PartSupport partSupport = ContextInjectionFactory.make(PartSupport.class, eclipseContext);
-			if(partSupport == null) {
-				throw new NullPointerException("partSupport");
-			}
-
-			eclipseContext.set(PartSupport.class, partSupport);
 			PerspectiveSupport perspectiveSupport = ContextInjectionFactory.make(PerspectiveSupport.class, eclipseContext);
 			if(perspectiveSupport == null) {
 				throw new NullPointerException("perspectiveSupport");
