@@ -96,6 +96,18 @@ public class ProjectExplorerEditorSupport extends AbstractSupplierFileEditorSupp
 	@Override
 	public boolean openEditor(final File file, Map<HeaderField, String> headerMap, boolean batch) {
 
+		if(TYPE_OBJ.equals(type)) {
+			/*
+			 * Open the batch job as a pure E4 part.
+			 * null is passed for the 'object' parameter since the editor reads
+			 * the file from the map set via EditorSupport.MAP_FILE.
+			 */
+			openEditor(file, null, BatchJobFileSupplier.EDITOR_ID, BatchJobFileSupplier.EDITOR_CONTRIBUTION_URI, BatchJobFileSupplier.EDITOR_ICON_URI, BatchJobFileSupplier.EDITOR_TOOLTIP, headerMap, batch);
+			return true;
+		}
+		/*
+		 * Legacy Eclipse 3.x editor opening for CAL files.
+		 */
 		boolean success = false;
 		try {
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();

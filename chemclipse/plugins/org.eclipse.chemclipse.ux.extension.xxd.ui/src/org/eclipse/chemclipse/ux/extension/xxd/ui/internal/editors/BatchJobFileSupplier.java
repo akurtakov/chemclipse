@@ -15,8 +15,16 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.editors;
 import java.io.File;
 
 import org.eclipse.chemclipse.processing.converter.ISupplier;
+import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 
 public class BatchJobFileSupplier implements ISupplier {
+
+	public static final String EDITOR_ID = "org.eclipse.chemclipse.chromatogram.xxd.batchprocess.ui.editors.BatchProcessJobEditor";
+	public static final String EDITOR_CONTRIBUTION_URI = "bundleclass://org.eclipse.chemclipse.chromatogram.xxd.process.supplier.batchprocess.ui/org.eclipse.chemclipse.chromatogram.xxd.process.supplier.batchprocess.ui.editors.BatchJobEditor";
+	public static final String EDITOR_ICON_URI = ApplicationImageFactory.getInstance().getURI(IApplicationImage.IMAGE_BATCHPROCESS, IApplicationImageProvider.SIZE_16x16);
+	public static final String EDITOR_TOOLTIP = "Batch Process Job";
 
 	@Override
 	public String getId() {
