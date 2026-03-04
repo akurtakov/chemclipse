@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -132,7 +132,7 @@ public class ScanEditorWSD implements IScanEditorWSD {
 	private void initialize(Composite parent) {
 
 		spectrumWSD = loadScan();
-		createEditorPages(parent);
+		extendedScanWSDEditorUI = new ExtendedWSDScanUI(parent, SWT.NONE);
 		extendedScanWSDEditorUI.update(spectrumWSD);
 	}
 
@@ -176,15 +176,5 @@ public class ScanEditorWSD implements IScanEditorWSD {
 
 		scanFile = file;
 		return runnable.getSpectrumWSD();
-	}
-
-	private void createEditorPages(Composite parent) {
-
-		createScanPage(parent);
-	}
-
-	private void createScanPage(Composite parent) {
-
-		extendedScanWSDEditorUI = new ExtendedWSDScanUI(parent, SWT.NONE);
 	}
 }

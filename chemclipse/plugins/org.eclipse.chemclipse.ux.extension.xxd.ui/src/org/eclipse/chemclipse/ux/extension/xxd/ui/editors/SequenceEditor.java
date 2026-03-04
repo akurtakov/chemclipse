@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -99,7 +99,7 @@ public class SequenceEditor {
 
 	private void initialize(Composite parent) {
 
-		createEditorPages(parent);
+		extendedSequenceListUI = new ExtendedSequenceListUI(parent, SWT.NONE);
 		extendedSequenceListUI.update(loadSequence());
 	}
 
@@ -154,13 +154,4 @@ public class SequenceEditor {
 		return sequence;
 	}
 
-	private void createEditorPages(Composite parent) {
-
-		createPage(parent);
-	}
-
-	private void createPage(Composite parent) {
-
-		extendedSequenceListUI = new ExtendedSequenceListUI(parent, SWT.NONE);
-	}
 }
