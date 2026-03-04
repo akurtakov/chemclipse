@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -51,7 +51,6 @@ import org.eclipse.chemclipse.processing.filter.Filter;
 import org.eclipse.chemclipse.processing.filter.FilterContext;
 import org.eclipse.chemclipse.processing.filter.Filtered;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplierContext;
-import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
 import org.eclipse.chemclipse.progress.core.InfoType;
 import org.eclipse.chemclipse.progress.core.StatusLineLogger;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
@@ -59,7 +58,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.ui.workbench.EditorSupport;
-import org.eclipse.chemclipse.support.ui.workbench.PartSupport;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.ux.extension.ui.editors.IScanEditorNMR;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
@@ -103,13 +101,11 @@ public class ScanEditorNMR implements IScanEditorNMR {
 	private DataNMRSelection selection;
 	private NMRMeasurementsUI measurementsUI;
 	private final ProcessorFactory filterFactory;
-	private final PartSupport partSupport;
 	private IProcessSupplierContext processSupplierContext;
 
 	@Inject
-	public ScanEditorNMR(Composite parent, IEventBroker eventBroker, MPart part, MDirtyable dirtyable, Shell shell, ProcessorFactory filterFactory, PartSupport partSupport, IProcessSupplierContext context) {
+	public ScanEditorNMR(Composite parent, IEventBroker eventBroker, MPart part, MDirtyable dirtyable, Shell shell, ProcessorFactory filterFactory, IProcessSupplierContext context) {
 
-		this.partSupport = partSupport;
 		this.processSupplierContext = context;
 		parent.addDisposeListener(e -> executorService.shutdownNow());
 
@@ -178,25 +174,17 @@ public class ScanEditorNMR implements IScanEditorNMR {
 
 					IProcessingInfo<ISpectrumNMR> convert = ScanConverterNMR.convert(file, monitor);
 					Collection<IComplexSignalMeasurement<?>> result = convert.getProcessingResult().getComplexSignalMeasurements();
-					if(result != null) {
-						selection = new DataNMRSelection();
-						for(IComplexSignalMeasurement<?> measurement : result) {
-							selection.addMeasurement(measurement);
-						}
-						for(IComplexSignalMeasurement<?> measurement : result) {
-							if(measurement instanceof IMeasurementFID) {
-								selection.setActiveMeasurement(measurement);
-								break;
-							}
-						}
-						Display.getDefault().asyncExec(ScanEditorNMR.this::updateSelection);
-					} else {
-						Display.getDefault().asyncExec(() -> {
-
-							ProcessingInfoPartSupport.getInstance().update(convert);
-							partSupport.closePart(part);
-						});
+					selection = new DataNMRSelection();
+					for(IComplexSignalMeasurement<?> measurement : result) {
+						selection.addMeasurement(measurement);
 					}
+					for(IComplexSignalMeasurement<?> measurement : result) {
+						if(measurement instanceof IMeasurementFID) {
+							selection.setActiveMeasurement(measurement);
+							break;
+						}
+					}
+					Display.getDefault().asyncExec(ScanEditorNMR.this::updateSelection);
 				});
 			} catch(InvocationTargetException e) {
 				e.printStackTrace();
