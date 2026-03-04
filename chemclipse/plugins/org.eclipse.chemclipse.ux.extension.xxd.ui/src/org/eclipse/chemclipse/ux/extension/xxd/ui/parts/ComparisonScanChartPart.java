@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -59,6 +59,9 @@ public class ComparisonScanChartPart extends AbstractPart<ExtendedComparisonScan
 			if(objects.size() == 1) {
 				Object object = objects.get(0);
 				if(isPeakUpdateEvent(topic) || isScanUpdateEvent(topic)) {
+					/*
+					 * Scan/Peak with or without target.
+					 */
 					IScanMSD scan = null;
 					IIdentificationTarget identificationTarget = null;
 					if(object instanceof IScanMSD scanMSD) {
@@ -68,16 +71,8 @@ public class ComparisonScanChartPart extends AbstractPart<ExtendedComparisonScan
 						identificationTarget = IIdentificationTarget.getIdentificationTarget(peakMSD);
 						scan = peakMSD.getPeakModel().getPeakMassSpectrum();
 					}
-					/*
-					 * Scan/Peak with or without target.
-					 */
-					if(identificationTarget != null) {
-						getControl().update(scan, identificationTarget);
-						return true;
-					} else {
-						getControl().update(scan);
-						return true;
-					}
+					getControl().update(scan, identificationTarget);
+					return true;
 				} else if(isScanTargetComparisonEvent(topic)) {
 					if(object instanceof Object[] values) {
 						Object object1 = values[0];
