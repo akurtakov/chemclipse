@@ -53,9 +53,9 @@ public class EditorCalibration implements IChemClipseEditor {
 	private static final Logger logger = Logger.getLogger(EditorCalibration.class);
 
 	@Inject
-	private MPart part;
+	MPart part;
 	@Inject
-	private MDirtyable dirtyable;
+	MDirtyable dirtyable;
 
 	private PageCalibration pageCalibration;
 	private File file;
@@ -166,7 +166,7 @@ public class EditorCalibration implements IChemClipseEditor {
 	}
 
 	@PreDestroy
-	private void preDestroy() {
+	void preDestroy() {
 
 		IEventBroker eventBroker = Activator.getDefault().getEventBroker();
 		if(eventBroker != null) {

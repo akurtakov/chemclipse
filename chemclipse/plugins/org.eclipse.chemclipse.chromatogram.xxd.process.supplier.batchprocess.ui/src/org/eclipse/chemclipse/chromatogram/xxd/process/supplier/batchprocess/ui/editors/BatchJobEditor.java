@@ -74,9 +74,9 @@ public class BatchJobEditor implements IRunnableWithProgress, IModificationHandl
 	private static final Logger logger = Logger.getLogger(BatchJobEditor.class);
 
 	@Inject
-	private MPart part;
+	MPart part;
 	@Inject
-	private MDirtyable dirtyable;
+	MDirtyable dirtyable;
 
 	private File file;
 	private BatchProcessJob batchProcessJob;
