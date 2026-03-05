@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,8 +15,16 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.internal.editors;
 import java.io.File;
 
 import org.eclipse.chemclipse.processing.converter.ISupplier;
+import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 
 public class CalibrationFileSupplier implements ISupplier {
+
+	public static final String EDITOR_ID = "org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.editors.editorCalibration";
+	public static final String EDITOR_CONTRIBUTION_URI = "bundleclass://org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui/org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.editors.EditorCalibration";
+	public static final String EDITOR_ICON_URI = ApplicationImageFactory.getInstance().getURI(IApplicationImage.IMAGE_REPORT, IApplicationImageProvider.SIZE_16x16);
+	public static final String EDITOR_TOOLTIP = "Retention Index Calibration";
 
 	@Override
 	public String getId() {
