@@ -17,19 +17,18 @@ import java.io.File;
 
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.impl.CalibrationFile;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.io.CalibrationFileWriter;
+import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.editors.CalibrationEditorSupport;
 import org.eclipse.chemclipse.csd.converter.chromatogram.ChromatogramConverterCSD;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.csd.model.core.selection.IChromatogramSelectionCSD;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.eclipse.chemclipse.support.l10n.SupportMessages;
 import org.eclipse.chemclipse.support.ui.wizards.AbstractWizard;
-import org.eclipse.chemclipse.ux.extension.ui.provider.ISupplierEditorSupport;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.editors.ProjectExplorerSupportFactory;
+import org.eclipse.chemclipse.ux.extension.ui.provider.ISupplierFileEditorSupport;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -156,9 +155,9 @@ public class WizardCreateRetentionIndexFile extends AbstractWizard {
 	private void runOpenEditor(File file, IProgressMonitor monitor) {
 
 		monitor.subTask(SupportMessages.taskOpenEditor);
-		ISupplierEditorSupport supplierEditorSupport = new ProjectExplorerSupportFactory(DataType.CAL).getInstanceEditorSupport();
+		ISupplierFileEditorSupport editorSupport = new CalibrationEditorSupport();
 		getShell().getDisplay().asyncExec(() -> {
-			if(!supplierEditorSupport.openEditor(file)) {
+			if(!editorSupport.openEditor(file)) {
 				logger.warn("Failed to open editor.");
 			}
 		});

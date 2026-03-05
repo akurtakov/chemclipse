@@ -18,13 +18,14 @@ import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.io.CalibrationFileWriter;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.preferences.PreferenceSupplier;
+import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.editors.CalibrationEditorSupport;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.ui.activator.AbstractActivatorUI;
-import org.eclipse.chemclipse.support.ui.editors.SystemEditor;
 import org.eclipse.e4.core.contexts.EclipseContextFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.swt.widgets.Display;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.event.EventHandler;
 
@@ -101,7 +102,7 @@ public class Activator extends AbstractActivatorUI {
 								libraries.remove(library); // REMOVE
 							}
 						} else if(CalibrationFileWriter.TOPIC_PROCESSING_FILE_CREATED.equals(topic)) {
-							SystemEditor.open(file);
+							Display.getDefault().asyncExec(() -> new CalibrationEditorSupport().openEditor(file));
 						}
 						PreferenceSupplier.setRetentionIndexFiles(libraries);
 					}

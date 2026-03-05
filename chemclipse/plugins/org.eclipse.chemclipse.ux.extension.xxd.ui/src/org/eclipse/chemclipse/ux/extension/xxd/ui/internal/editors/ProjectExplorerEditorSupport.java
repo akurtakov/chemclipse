@@ -23,6 +23,9 @@ import org.eclipse.chemclipse.model.core.IMeasurementInfo;
 import org.eclipse.chemclipse.model.core.support.HeaderField;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.converter.ISupplier;
+import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
+import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.ux.extension.ui.provider.AbstractSupplierFileEditorSupport;
 import org.eclipse.chemclipse.ux.extension.ui.provider.ISupplierEditorSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
@@ -42,11 +45,13 @@ public class ProjectExplorerEditorSupport extends AbstractSupplierFileEditorSupp
 	private static final Logger logger = Logger.getLogger(ProjectExplorerEditorSupport.class);
 
 	private String type = "";
+	private DataType dataType;
 	private static final String DATA_EXPLORER = ExtensionMessages.dataExplorer;
 
 	public ProjectExplorerEditorSupport(DataType dataType) {
 
 		super(getSupplier(dataType));
+		this.dataType = dataType;
 		initialize(dataType);
 	}
 
@@ -96,6 +101,21 @@ public class ProjectExplorerEditorSupport extends AbstractSupplierFileEditorSupp
 	@Override
 	public boolean openEditor(final File file, Map<HeaderField, String> headerMap, boolean batch) {
 
+		if(DataType.CAL.equals(dataType)) {
+			/*
+			 * Pure E4 editor - open via part service instead of IDE.openEditor().
+			 * Note: The strings below correspond to EditorCalibration constants.
+			 * They cannot be referenced directly here to avoid a circular bundle dependency
+			 * (amdiscalri.ui already depends on ux.extension.xxd.ui).
+			 */
+			openEditor(file, null, //
+					"org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.editors.editorCalibration", //
+					"bundleclass://org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui/org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.editors.EditorCalibration", //
+					ApplicationImageFactory.getInstance().getURI(IApplicationImage.IMAGE_REPORT, IApplicationImageProvider.SIZE_16x16), //
+					"Retention Index Calibration", //
+					headerMap, batch);
+			return true;
+		}
 		boolean success = false;
 		try {
 			IWorkspace workspace = ResourcesPlugin.getWorkspace();
