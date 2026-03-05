@@ -12,14 +12,14 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.msd.ui.handlers;
 
+import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
-import org.eclipse.core.commands.IHandlerListener;
 import org.eclipse.swtchart.extensions.core.ScrollableChart;
 import org.eclipse.swtchart.extensions.menu.IChartMenuEntry;
 
-public class DynamicHandler implements IHandler {
+public class DynamicHandler extends AbstractHandler implements IHandler {
 
 	private IChartMenuEntry cachedEntry;
 	private ScrollableChart scrollableChart;
@@ -41,26 +41,5 @@ public class DynamicHandler implements IHandler {
 	public boolean isEnabled() {
 
 		return cachedEntry.isEnabled(scrollableChart);
-	}
-
-	@Override
-	public boolean isHandled() {
-
-		return true;
-	}
-
-	@Override
-	public void addHandlerListener(IHandlerListener handlerListener) {
-
-	}
-
-	@Override
-	public void removeHandlerListener(IHandlerListener handlerListener) {
-
-	}
-
-	@Override
-	public void dispose() {
-
 	}
 }

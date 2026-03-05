@@ -17,15 +17,22 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.IWorkbenchWindow;
 
 public class ResetPerspectiveHandler {
 
 	@Execute
 	public void execute(MWindow window, IEventBroker eventBroker) {
 
-		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-		page.resetPerspective();
-		eventBroker.post(IChemClipseEvents.TOPIC_APPLICATION_RESET_PERSPECTIVE, page.getPerspective().getLabel());
+		IWorkbenchWindow workbenchWindow = window.getContext().get(IWorkbenchWindow.class);
+		if(workbenchWindow != null) {
+			IWorkbenchPage page = workbenchWindow.getActivePage();
+			if(page != null) {
+				page.resetPerspective();
+				if(page.getPerspective() != null) {
+					eventBroker.post(IChemClipseEvents.TOPIC_APPLICATION_RESET_PERSPECTIVE, page.getPerspective().getLabel());
+				}
+			}
+		}
 	}
 }

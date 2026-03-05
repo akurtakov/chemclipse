@@ -20,12 +20,15 @@ import org.eclipse.chemclipse.support.events.IPerspectiveAndViewIds;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.e4.ui.di.UISynchronize;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
+
+import jakarta.inject.Inject;
 
 @Creatable
 public class ProcessingInfoPartSupport {
@@ -35,6 +38,8 @@ public class ProcessingInfoPartSupport {
 	private static final String TITLE = "Processing Error";
 	private static final String MESSAGE = "Please check the 'Feedback' part.";
 
+	@Inject
+	private EPartService partService;
 	private UISynchronize uiSynchronize = null;
 	private ProcessingInfoUpdateNotifier processingInfoUpdateNotifier = null;
 
@@ -93,10 +98,13 @@ public class ProcessingInfoPartSupport {
 					 * Focus the view if requested, this will open the feedback view if required.
 					 */
 					if(focusProcessingInfoPart) {
-						try {
-							PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(IPerspectiveAndViewIds.VIEW_FEEDBACK);
-						} catch(PartInitException e) {
-							logger.warn(e);
+						if(partService != null) {
+							MPart part = partService.findPart(IPerspectiveAndViewIds.VIEW_FEEDBACK);
+							if(part != null) {
+								partService.showPart(part, PartState.ACTIVATE);
+							}
+						} else {
+							logger.warn("EPartService is not available; the feedback view cannot be shown.");
 						}
 					}
 				});
