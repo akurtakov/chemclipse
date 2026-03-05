@@ -13,10 +13,6 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.rcp.app.ui;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.eclipse.chemclipse.support.ui.workbench.WorkbenchAdvisorSupport;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -25,24 +21,10 @@ import org.eclipse.ui.application.IWorkbenchConfigurer;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchAdvisor;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
-import org.eclipse.ui.internal.WorkbenchPlugin;
-import org.eclipse.ui.internal.dialogs.WorkbenchWizardElement;
-import org.eclipse.ui.internal.wizards.AbstractExtensionWizardRegistry;
-import org.eclipse.ui.wizards.IWizardCategory;
-import org.eclipse.ui.wizards.IWizardDescriptor;
-import org.eclipse.ui.wizards.IWizardRegistry;
 
-@SuppressWarnings("restriction")
 public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 
 	private static final String PERSPECTIVE_ID = "org.eclipse.chemclipse.ux.extension.xxd.ui.perspective.main";
-	/*
-	 * Hide all Java IDE related wizards by default, except:
-	 * org.eclipse.ui.wizards.import.ExternalProject
-	 * org.eclipse.ui.wizards.import.Preferences
-	 * org.eclipse.ui.wizards.export.Preferences
-	 */
-	private static final String TEAM_E4_WIZARDS = "org\\.eclipse\\.(team|e4)\\.ui.*";
 
 	@Override
 	public WorkbenchWindowAdvisor createWorkbenchWindowAdvisor(IWorkbenchWindowConfigurer configurer) {
@@ -56,9 +38,6 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 		super.initialize(configurer);
 		configurer.setSaveAndRestore(true);
 		WorkbenchAdvisorSupport.declareProjectExplorerImages(configurer);
-		WorkbenchPlugin workbenchPlugin = WorkbenchPlugin.getDefault();
-		removeWizards(workbenchPlugin.getImportWizardRegistry());
-		removeWizards(workbenchPlugin.getExportWizardRegistry());
 	}
 
 	@Override
@@ -72,39 +51,5 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		return workspace.getRoot();
-	}
-
-	private void removeWizards(IWizardRegistry wizardRegistry) {
-
-		if(wizardRegistry instanceof AbstractExtensionWizardRegistry abstractWizardRegistry) {
-			IWizardCategory[] categories = wizardRegistry.getRootCategory().getCategories();
-			for(IWizardDescriptor wizard : getAllWizards(categories)) {
-				if(wizard instanceof WorkbenchWizardElement wizardElement) {
-					if(removeWizard(wizardElement)) {
-						abstractWizardRegistry.removeExtension(wizardElement.getConfigurationElement().getDeclaringExtension(), new Object[]{wizardElement});
-					}
-				}
-			}
-		}
-	}
-
-	private boolean removeWizard(IWizardDescriptor wizard) {
-
-		String id = wizard.getId();
-		/*
-		 * Inspect the ids here.
-		 */
-		return id.matches(TEAM_E4_WIZARDS);
-	}
-
-	private IWizardDescriptor[] getAllWizards(IWizardCategory[] categories) {
-
-		List<IWizardDescriptor> results = new ArrayList<>();
-		for(IWizardCategory wizardCategory : categories) {
-			results.addAll(Arrays.asList(wizardCategory.getWizards()));
-			results.addAll(Arrays.asList(getAllWizards(wizardCategory.getCategories())));
-		}
-
-		return results.toArray(new IWizardDescriptor[0]);
 	}
 }

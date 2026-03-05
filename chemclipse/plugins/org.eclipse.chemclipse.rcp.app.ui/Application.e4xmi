@@ -43,10 +43,6 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="_h0BcRzLzEeKMEOdllHiEaA" elementId="org.eclipse.chemclipse.rcp.app.ui.menu.item.about" label="%About" iconURI="platform:/plugin/org.eclipse.jface/icons/full/message_info.svg" tooltip="Show versions and licenses" command="_h0A1RDLzEeKMEOdllHiEaA"/>
       </children>
     </mainMenu>
-    <sharedElements xsi:type="basic:Part" xmi:id="_hwsHoEd8EeKxr87RO7WY0w" elementId="org.eclipse.ui.navigator.ProjectExplorer" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="%ProjectExplorer" iconURI="platform:/plugin/org.eclipse.ui.navigator.resources/icons/full/eview16/resource_persp.svg">
-      <tags>View</tags>
-      <tags>categoryTag:General</tags>
-    </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_twQ-EEjnEeKCXsBuXeeyZA" elementId="org.eclipse.ui.views.PropertySheet" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Property Sheet" iconURI="platform:/plugin/org.eclipse.ui.views/icons/full/eview16/prop_ps.svg">
       <tags>View</tags>
       <tags>categoryTag:General</tags>
@@ -80,7 +76,6 @@
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_T2mREFeKEeWJDdTjy0i2HA" elementId="org.eclipse.chemclipse.processing.ui.parts.ProcessingInfoPart" contributionURI="bundleclass://org.eclipse.chemclipse.processing.ui/org.eclipse.chemclipse.processing.ui.parts.ProcessingInfoPart" label="Feedback" iconURI="platform:/plugin/org.eclipse.jface/icons/full/message_info.svg"/>
     <sharedElements xsi:type="basic:Part" xmi:id="_W8FzsFuuEeWKQYKM0-fotA" elementId="org.eclipse.chemclipse.rcp.app.ui.part.editHistory" contributionURI="bundleclass://org.eclipse.chemclipse.support.ui/org.eclipse.chemclipse.support.ui.parts.EditHistoryPart" label="Edit History" iconURI="platform:/plugin/org.eclipse.jface/icons/full/message_info.svg"/>
-    <sharedElements xsi:type="basic:Part" xmi:id="_V3EBsHb_EeWs9YprkfnL3Q" elementId="org.eclipse.ease.ui.views.scriptShell" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Script Shell" iconURI="platform:/plugin/org.eclipse.chemclipse.rcp.ui.icons/icons/16x16/script_shell.png"/>
     <trimBars xmi:id="_h0BcTDLzEeKMEOdllHiEaA" elementId="org.eclipse.chemclipse.rcp.app.ui.trimbar.top">
       <children xsi:type="menu:ToolBar" xmi:id="_h0BcTTLzEeKMEOdllHiEaA" elementId="org.eclipse.chemclipse.rcp.app.ui.toolbar.main">
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_nIMLMINGEeOuPY34hxPAxA" elementId="org.eclipse.chemclipse.rcp.app.ui.toolbarseparator.3"/>
