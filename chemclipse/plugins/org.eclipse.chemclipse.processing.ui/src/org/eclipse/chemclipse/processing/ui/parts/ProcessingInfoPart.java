@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Janos Binder - cleanup
@@ -47,10 +47,8 @@ public class ProcessingInfoPart {
 
 	@Inject
 	private Composite parent;
-	/*
-	 * The info is static to display it on focus.
-	 */
-	private ProcessingInfoUpdateNotifier updateNotifier = new ProcessingInfoUpdateNotifier();
+	@Inject
+	private ProcessingInfoUpdateNotifier updateNotifier;
 	private ProcessingInfoUI processingInfoUI;
 
 	@PostConstruct
