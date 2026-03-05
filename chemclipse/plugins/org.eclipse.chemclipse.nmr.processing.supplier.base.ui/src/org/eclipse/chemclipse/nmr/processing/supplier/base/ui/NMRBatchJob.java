@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Christoph Läubrich - initial API and implementation
  * Philip Wenig - refactoring
@@ -37,15 +37,21 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.BatchJobUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.DataListUI;
 import org.eclipse.chemclipse.xxd.process.support.ProcessTypeSupport;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
 
 public class NMRBatchJob implements IRunnableWithProgress {
 
+	@Inject
+	private ProcessingInfoPartSupport processingInfoPartSupport;
+	@Inject
+	private IEclipseContext context;
 	private BatchJobUI batchJobUI;
 	private IProcessSupplierContext processTypeSupport;
 
@@ -74,10 +80,10 @@ public class NMRBatchJob implements IRunnableWithProgress {
 		ProcessExecutionContext processExecutionContext = new ProcessExecutionContext(monitor, processingResult, processTypeSupport);
 		IProcessExecutionConsumer<Collection<? extends IMeasurement>> consumer = IMeasurementProcessSupplier.createConsumer(measurements);
 		Collection<? extends IMeasurement> results = AbstractProcessEntryContainer.applyProcessEntries(processMethod, processExecutionContext, consumer);
-		Display.getDefault().asyncExec(() -> ProcessingInfoPartSupport.getInstance().update(processingResult));
+		Display.getDefault().asyncExec(() -> processingInfoPartSupport.update(processingResult));
 
 		if(!processingResult.hasErrorMessages()) {
-			SupplierEditorSupport editorSupport = new SupplierEditorSupport(DataType.NMR, () -> Activator.getDefault().getEclipseContext());
+			SupplierEditorSupport editorSupport = new SupplierEditorSupport(DataType.NMR, () -> context);
 			for(IMeasurement measurement : results) {
 				Display.getDefault().asyncExec(() -> editorSupport.openEditor(measurement));
 			}
