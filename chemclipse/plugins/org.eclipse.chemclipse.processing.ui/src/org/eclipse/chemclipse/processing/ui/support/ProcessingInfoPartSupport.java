@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - use {@link IMessageProvider} interface, add support for E4 DI
@@ -27,6 +27,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
+import jakarta.inject.Inject;
+
 @Creatable
 public class ProcessingInfoPartSupport {
 
@@ -36,7 +38,8 @@ public class ProcessingInfoPartSupport {
 	private static final String MESSAGE = "Please check the 'Feedback' part.";
 
 	private UISynchronize uiSynchronize = null;
-	private ProcessingInfoUpdateNotifier processingInfoUpdateNotifier = null;
+	@Inject
+	private ProcessingInfoUpdateNotifier processingInfoUpdateNotifier;
 
 	/**
 	 * Use getInstance() instead or create this support via:
@@ -58,7 +61,7 @@ public class ProcessingInfoPartSupport {
 
 	/**
 	 * Update the message provider and show the processing info part on demand.
-	 * 
+	 *
 	 * @param messageProvider
 	 * @param focusProcessingInfoPart
 	 */
@@ -71,7 +74,7 @@ public class ProcessingInfoPartSupport {
 		 * Update the message.
 		 */
 		try {
-			getProcessingInfoUpdateNotifier().update(messageProvider);
+			processingInfoUpdateNotifier.update(messageProvider);
 		} catch(RuntimeException e) {
 			logger.error("Calling the info update notifier failed.", e);
 		}
@@ -106,7 +109,7 @@ public class ProcessingInfoPartSupport {
 
 	/**
 	 * Updates the messages and focus on the processing error part automatically.
-	 * 
+	 *
 	 * @param messageProvider
 	 */
 	public void update(final IMessageProvider messageProvider) {
@@ -157,12 +160,4 @@ public class ProcessingInfoPartSupport {
 		return uiSynchronize;
 	}
 
-	private ProcessingInfoUpdateNotifier getProcessingInfoUpdateNotifier() {
-
-		if(processingInfoUpdateNotifier == null) {
-			processingInfoUpdateNotifier = new ProcessingInfoUpdateNotifier();
-		}
-
-		return processingInfoUpdateNotifier;
-	}
 }
