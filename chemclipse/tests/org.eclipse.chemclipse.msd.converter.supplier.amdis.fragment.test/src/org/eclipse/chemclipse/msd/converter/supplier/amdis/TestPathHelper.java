@@ -53,7 +53,7 @@ public class TestPathHelper {
 	public static final String TESTDIR_EXPORT = "testData/files/export";
 	public static final String TESTFILE_EXPORT_DB_1_MSL = "DB1.msl";
 	public static final String TESTFILE_EXPORT_DB_2_MSL = "DB2.msl";
-	public static final String TESTFILE_EXPORT_DB_MSP = TESTDIR_EXPORT + "/DB.msp";
+	public static final String TESTFILE_EXPORT_DB_MSP = "DB.msp";
 	public static final String TESTFILE_EXPORT_DB_MSL_IDENTIFIER = "DB-Identifier.msl";
 	/*
 	 * SPECIFICATION VALIDATOR TEST MSL
