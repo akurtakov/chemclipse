@@ -126,6 +126,7 @@
             id="org.eclipse.chemclipse.nmr.converter.supplier.jcampdx"
             importConverter="org.eclipse.chemclipse.nmr.converter.supplier.jcampdx.converter.ScanImportConverterNMR"
             importMagicNumberMatcher="org.eclipse.chemclipse.nmr.converter.supplier.jcampdx.io.MagicNumberMatcherNMR"
+            importContentMatcher="org.eclipse.chemclipse.vsd.converter.supplier.jcampdx.io.FileContentMatcherNMR"
             isExportable="false"
             isImportable="true">
       </ScanSupplier>

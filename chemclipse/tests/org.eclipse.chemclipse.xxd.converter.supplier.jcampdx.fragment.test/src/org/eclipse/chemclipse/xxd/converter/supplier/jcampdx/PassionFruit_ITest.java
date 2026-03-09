@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,7 +15,6 @@ package org.eclipse.chemclipse.xxd.converter.supplier.jcampdx;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.csd.converter.supplier.jcampdx.converter.ChromatogramImportConverter;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
@@ -32,7 +31,7 @@ public class PassionFruit_ITest {
 	private IChromatogramCSD chromatogram;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		File file = new File(TestPathHelper.PASSION_FRUIT);
 		ChromatogramImportConverter chromatogramImportConverter = new ChromatogramImportConverter();
