@@ -17,7 +17,6 @@ public class TestPathHelper {
 	/*
 	 * IMPORT MSL
 	 */
-	public static final String TESTFILE_IMPORT_TEST = "testData/files/import/msl/Test.msl";
 	public static final String TESTFILE_IMPORT_CHROMATOGRAM = "testData/files/import/msl/Chromtogram.msl";
 	public static final String TESTFILE_IMPORT_EMPTY = "testData/files/import/msl/Empty.msl";
 	public static final String TESTFILE_IMPORT_NOT_READABLE = "testData/files/import/msl/NotReadable.msl";
@@ -52,11 +51,9 @@ public class TestPathHelper {
 	 * EXPORT
 	 */
 	public static final String TESTDIR_EXPORT = "testData/files/export";
-	public static final String TESTFILE_EXPORT_TEST_MSL = TESTDIR_EXPORT + "/Test.msl";
 	public static final String TESTFILE_EXPORT_DB_1_MSL = "DB1.msl";
 	public static final String TESTFILE_EXPORT_DB_2_MSL = "DB2.msl";
-	public static final String TESTFILE_EXPORT_TEST_MSP = TESTDIR_EXPORT + "/Test.msp";
-	public static final String TESTFILE_EXPORT_DB_MSP = TESTDIR_EXPORT + "/DB.msp";
+	public static final String TESTFILE_EXPORT_DB_MSP = "DB.msp";
 	public static final String TESTFILE_EXPORT_DB_MSL_IDENTIFIER = "DB-Identifier.msl";
 	/*
 	 * SPECIFICATION VALIDATOR TEST MSL
