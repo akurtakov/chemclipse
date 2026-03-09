@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.wsd.converter.supplier.jcampdx.converter.ScanImportConverter;
@@ -33,7 +32,7 @@ public class Grape_ITest {
 	private ISpectrumWSD spectrumWSD;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		File file = new File(TestPathHelper.GRAPE);
 		ScanImportConverter importConverter = new ScanImportConverter();

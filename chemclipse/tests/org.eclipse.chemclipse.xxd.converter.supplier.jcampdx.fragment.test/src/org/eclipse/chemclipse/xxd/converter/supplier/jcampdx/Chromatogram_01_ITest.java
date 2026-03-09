@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
@@ -36,7 +35,7 @@ public class Chromatogram_01_ITest {
 	private IChromatogramMSD chromatogram;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		File file = new File(TestPathHelper.CHROMATOGRAM_01);
 		ChromatogramImportConverter chromatogramImportConverter = new ChromatogramImportConverter();
