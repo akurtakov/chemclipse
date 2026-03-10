@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - use getScans() everywhere to access the scan datastructure, modcount support, analysis segment support
@@ -44,8 +44,8 @@ import org.eclipse.chemclipse.model.updates.IChromatogramUpdateListener;
 import org.eclipse.chemclipse.support.history.EditHistory;
 import org.eclipse.chemclipse.support.history.IEditHistory;
 import org.eclipse.chemclipse.support.model.SeparationColumnType;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.ISafeRunnable;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.SafeRunner;
 
 public abstract class AbstractChromatogram extends AbstractMeasurementTarget implements IChromatogram {
@@ -546,10 +546,9 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 	}
 
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public Object getAdapter(Class adapter) {
+	public <T> T getAdapter(Class<T> adapter) {
 
-		return Platform.getAdapterManager().getAdapter(this, adapter);
+		return Adapters.adapt(this, adapter);
 	}
 
 	@Override
@@ -726,7 +725,7 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 	 * Sets the master chromatogram. If null is provided, the link
 	 * to the master chromatogram is removed. This method is
 	 * primarily used when adding or removing reference chromatograms.
-	 * 
+	 *
 	 * @param masterChromatogram
 	 */
 	private void setMasterChromatogram(IChromatogram chromatogram, IChromatogram masterChromatogram) {

@@ -1,19 +1,18 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.logging.core;
 
 import org.eclipse.core.runtime.ILog;
-import org.eclipse.core.runtime.Platform;
 
 public class Category {
 
@@ -21,7 +20,7 @@ public class Category {
 
 	public Category(final Class<?> clazz) {
 
-		logger = Platform.getLog(clazz);
+		logger = ILog.of(clazz);
 	}
 
 	public void error(final String message) {

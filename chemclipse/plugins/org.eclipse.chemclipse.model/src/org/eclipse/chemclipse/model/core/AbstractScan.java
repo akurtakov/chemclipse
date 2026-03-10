@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Alexander Kerner - implementation
@@ -20,7 +20,7 @@ import java.util.Set;
 
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.support.model.SeparationColumnType;
-import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Adapters;
 
 public abstract class AbstractScan extends AbstractSignal implements IScan {
 
@@ -63,7 +63,7 @@ public abstract class AbstractScan extends AbstractSignal implements IScan {
 	/**
 	 * Creates a new instance of {@code AbstractScan} by creating a
 	 * shallow copy of provided {@code templateScan}.
-	 * 
+	 *
 	 * @param templateScan
 	 *            {@link IScan scan} that is used as a template
 	 */
@@ -304,10 +304,9 @@ public abstract class AbstractScan extends AbstractSignal implements IScan {
 	}
 
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public Object getAdapter(Class adapter) {
+	public <T> T getAdapter(Class<T> adapter) {
 
-		return Platform.getAdapterManager().getAdapter(this, adapter);
+		return Adapters.adapt(this, adapter);
 	}
 
 	@Override
