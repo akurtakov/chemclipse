@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2026 Lablicate GmbH.
+ * Copyright (c) 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -10,7 +10,7 @@
  * Contributors:
  * Matthias Mailänder - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.fsd.converter.ui.swt;
+package org.eclipse.chemclipse.nmr.converter.ui.swt;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -22,10 +22,9 @@ import org.apache.commons.io.FilenameUtils;
 import org.eclipse.chemclipse.converter.core.IConverterSupport;
 import org.eclipse.chemclipse.converter.scan.IScanConverterSupport;
 import org.eclipse.chemclipse.converter.ui.l10n.ConverterMessagesUI;
-import org.eclipse.chemclipse.fsd.converter.core.ScanConverterFSD;
-import org.eclipse.chemclipse.fsd.converter.ui.l10n.FluorescenceSpectroscopy;
-import org.eclipse.chemclipse.fsd.model.core.ISpectrumFSD;
 import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
+import org.eclipse.chemclipse.nmr.converter.core.ScanConverterNMR;
 import org.eclipse.chemclipse.processing.converter.ISupplier;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
@@ -39,30 +38,30 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 
-public class FluorescenceSpectrumFileSupport {
+public class SpectrumFileSupportNMR {
 
-	private static final Logger logger = Logger.getLogger(FluorescenceSpectrumFileSupport.class);
+	private static final Logger logger = Logger.getLogger(SpectrumFileSupportNMR.class);
 
 	/**
 	 * Use only static methods.
 	 */
-	private FluorescenceSpectrumFileSupport() {
+	private SpectrumFileSupportNMR() {
 
 	}
 
-	public static boolean saveSpectrum(ISpectrumFSD spectrum) {
+	public static boolean saveSpectrum(IComplexSignalMeasurement<?> complexSignalMeasurement) {
 
 		Shell shell = Display.getDefault().getActiveShell();
-		saveSpectrum(shell, spectrum, "Spectrum");
+		saveSpectrum(shell, complexSignalMeasurement, "SpectrumNMR");
 		return true;
 	}
 
 	/**
 	 * Opens a file dialog and tries to save the mass spectra
 	 */
-	public static void saveSpectrum(Shell shell, ISpectrumFSD spectrum, String fileName) {
+	public static void saveSpectrum(Shell shell, IComplexSignalMeasurement<?> complexSignalMeasurement, String fileName) {
 
-		if(spectrum == null) {
+		if(complexSignalMeasurement == null) {
 			return;
 		}
 		/*
@@ -72,7 +71,7 @@ public class FluorescenceSpectrumFileSupport {
 		dialog.setFileName(fileName);
 		dialog.setText(ConverterMessagesUI.saveSpectrumAs);
 		dialog.setOverwrite(true);
-		IScanConverterSupport converterSupport = ScanConverterFSD.getScanConverterSupport();
+		IScanConverterSupport converterSupport = ScanConverterNMR.getScanConverterSupport();
 		/*
 		 * Set the filters that allow an export of fluorescence data.
 		 */
@@ -83,7 +82,7 @@ public class FluorescenceSpectrumFileSupport {
 		String filename = dialog.open();
 		if(filename != null) {
 			Collection<ISupplier> suppliers = converterSupport.getSupplier(IConverterSupport.EXPORT_SUPPLIER);
-			validateFile(dialog, new ArrayList<>(suppliers), shell, spectrum);
+			validateFile(dialog, new ArrayList<>(suppliers), shell, complexSignalMeasurement);
 		}
 	}
 
@@ -91,13 +90,8 @@ public class FluorescenceSpectrumFileSupport {
 	 * Validates the selected file to save the spectrum. This method checks
 	 * if the spectrum is stored in a directory or not and prepares the file
 	 * system in a convenient way.
-	 * 
-	 * @param dialog
-	 * @param supplier
-	 * @param shell
-	 * @param spectrum
 	 */
-	private static void validateFile(FileDialog dialog, List<ISupplier> supplier, Shell shell, ISpectrumFSD spectrum) {
+	private static void validateFile(FileDialog dialog, List<ISupplier> supplier, Shell shell, IComplexSignalMeasurement<?> complexSignalMeasurement) {
 
 		boolean overwrite = dialog.getOverwrite();
 		ISupplier selectedSupplier = supplier.get(dialog.getFilterIndex());
@@ -129,19 +123,19 @@ public class FluorescenceSpectrumFileSupport {
 				filename = filename + fileExtension;
 			}
 		}
-		writeFile(shell, new File(filename), spectrum, selectedSupplier);
+		writeFile(shell, new File(filename), complexSignalMeasurement, selectedSupplier);
 	}
 
-	public static void writeFile(Shell shell, final File file, final ISpectrumFSD spectrum, final ISupplier supplier) {
+	public static void writeFile(Shell shell, final File file, final IComplexSignalMeasurement<?> complexSignalMeasurement, final ISupplier supplier) {
 
-		if(file == null || spectrum == null || supplier == null) {
+		if(file == null || complexSignalMeasurement == null || supplier == null) {
 			return;
 		}
 		ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
 		IRunnableWithProgress runnable = monitor -> {
 
-			monitor.beginTask(FluorescenceSpectroscopy.saveFluorescence, IProgressMonitor.UNKNOWN);
-			IProcessingInfo<File> processingInfo = ScanConverterFSD.convert(file, spectrum, supplier.getId(), monitor);
+			monitor.beginTask("Save NMR spectrum", IProgressMonitor.UNKNOWN);
+			IProcessingInfo<?> processingInfo = ScanConverterNMR.export(file, complexSignalMeasurement, supplier.getId(), monitor);
 			ProcessingInfoPartSupport.getInstance().update(processingInfo);
 			processingInfo.getProcessingResult();
 			monitor.done();
