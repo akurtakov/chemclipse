@@ -35,6 +35,7 @@ import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.model.core.IMeasurement;
 import org.eclipse.chemclipse.model.filter.IMeasurementFilter;
 import org.eclipse.chemclipse.nmr.converter.core.ScanConverterNMR;
+import org.eclipse.chemclipse.nmr.converter.ui.swt.SpectrumFileSupportNMR;
 import org.eclipse.chemclipse.nmr.model.core.FilteredFIDMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.FilteredSpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.model.core.IMeasurementFID;
@@ -139,6 +140,8 @@ public class ScanEditorNMR implements IScanEditorNMR {
 	@Override
 	public boolean saveAs() {
 
+		SpectrumFileSupportNMR.saveSpectrum(selection.getMeasurement());
+		dirtyable.setDirty(false);
 		return true;
 	}
 
