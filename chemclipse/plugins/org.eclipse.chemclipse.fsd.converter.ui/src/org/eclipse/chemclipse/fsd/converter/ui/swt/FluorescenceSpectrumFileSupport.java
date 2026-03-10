@@ -20,7 +20,6 @@ import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 import org.eclipse.chemclipse.converter.core.IConverterSupport;
-import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.converter.scan.IScanConverterSupport;
 import org.eclipse.chemclipse.converter.ui.l10n.ConverterMessagesUI;
 import org.eclipse.chemclipse.fsd.converter.core.ScanConverterFSD;
@@ -51,7 +50,7 @@ public class FluorescenceSpectrumFileSupport {
 
 	}
 
-	public static boolean saveSpectrum(ISpectrumFSD spectrum) throws NoConverterAvailableException {
+	public static boolean saveSpectrum(ISpectrumFSD spectrum) {
 
 		Shell shell = Display.getDefault().getActiveShell();
 		saveSpectrum(shell, spectrum, "Spectrum");
@@ -60,9 +59,6 @@ public class FluorescenceSpectrumFileSupport {
 
 	/**
 	 * Opens a file dialog and tries to save the mass spectra
-	 * 
-	 * @param spectrum
-	 * @throws NoConverterAvailableException
 	 */
 	public static void saveSpectrum(Shell shell, ISpectrumFSD spectrum, String fileName) {
 

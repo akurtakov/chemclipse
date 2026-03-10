@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.fsd.converter.ui.swt.FluorescenceSpectrumFileSupport;
 import org.eclipse.chemclipse.fsd.model.core.ISpectrumFSD;
 import org.eclipse.chemclipse.logging.core.Logger;
@@ -114,11 +113,7 @@ public class ScanEditorFSD implements IScanEditorFSD {
 	@Override
 	public boolean saveAs() {
 
-		try {
-			FluorescenceSpectrumFileSupport.saveSpectrum(spectrumFSD);
-		} catch(NoConverterAvailableException e) {
-			return false;
-		}
+		FluorescenceSpectrumFileSupport.saveSpectrum(spectrumFSD);
 		dirtyable.setDirty(false);
 		return true;
 	}
