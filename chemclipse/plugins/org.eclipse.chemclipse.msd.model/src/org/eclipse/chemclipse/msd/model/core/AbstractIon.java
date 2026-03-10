@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Alexander Kerner - implementation
@@ -14,7 +14,7 @@
 package org.eclipse.chemclipse.msd.model.core;
 
 import org.eclipse.chemclipse.model.math.IonRoundMethod;
-import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Adapters;
 
 /**
  * All ions implement the interface Serializable to enable an
@@ -215,10 +215,9 @@ public abstract class AbstractIon implements IIon {
 	}
 
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public Object getAdapter(Class adapter) {
+	public <T> T getAdapter(Class<T> adapter) {
 
-		return Platform.getAdapterManager().getAdapter(this, adapter);
+		return Adapters.adapt(this, adapter);
 	}
 
 	@Override
