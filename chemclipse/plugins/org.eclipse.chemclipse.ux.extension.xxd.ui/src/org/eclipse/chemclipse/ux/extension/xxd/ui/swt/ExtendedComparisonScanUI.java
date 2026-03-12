@@ -20,7 +20,10 @@ import static org.eclipse.chemclipse.msd.model.preferences.PreferenceSupplier.is
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -30,6 +33,7 @@ import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
+import org.eclipse.chemclipse.model.signals.ComparisonCalculator;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.model.types.SignalType;
 import org.eclipse.chemclipse.msd.model.core.IIon;
@@ -55,6 +59,7 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.charts.LabelOption;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.model.ComparisonScanOption;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageScans;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePageSubtract;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.runnables.LibraryServiceRunnable;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.ChromatogramUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ScanChartSupport;
@@ -82,11 +87,11 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swtchart.ISeries;
 import org.eclipse.swtchart.extensions.barcharts.IBarSeriesData;
 import org.eclipse.swtchart.extensions.barcharts.IBarSeriesSettings;
 import org.eclipse.swtchart.extensions.core.BaseChart;
@@ -135,6 +140,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 	private AtomicReference<Composite> toolbarHybridSearch = new AtomicReference<>();
 	private AtomicReference<Text> textWeightUnknownControl = new AtomicReference<>();
 	private AtomicReference<Text> textWeightReferenceControl = new AtomicReference<>();
+	private AtomicReference<Button> buttonAutoAdjustUnknownControl = new AtomicReference<>();
 	private AtomicReference<ScanChartUI> scanChartStackUnknownControl = new AtomicReference<>();
 	private AtomicReference<ScanChartUI> scanChartStackReferenceControl = new AtomicReference<>();
 
@@ -478,33 +484,129 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(3, true));
 
-		createTextWeightUnknown(composite);
-		createLabel(composite, "MW (Unknown vs. Reference)");
-		createTextWeightReference(composite);
+		createTextWeightUnknown(composite, "MW Unknkown");
+		createButtonAutoAdjustUnknown(composite);
+		createTextWeightReference(composite, "MW Reference");
 
 		toolbarHybridSearch.set(composite);
 	}
 
-	private void createLabel(Composite parent, String text) {
+	private void createButtonAutoAdjustUnknown(Composite parent) {
 
-		Label label = new Label(parent, SWT.NONE);
-		label.setText(text);
-		label.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, true, true));
+		Button button = new Button(parent, SWT.PUSH);
+		button.setText("Auto Adjust");
+		button.setToolTipText("Try to calculate the best mol weight to match the hybrid delta mass spectrum.");
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SHIFT_AUTO_MIRROR, IApplicationImageProvider.SIZE_16x16));
+		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				if(scanUnknown != null && scanReference != null) {
+					try {
+						int molWeightReference = Integer.parseInt(textWeightReferenceControl.get().getText().trim());
+						if(molWeightReference > 0) {
+							ScanChartUI scanChartUI = scanChartControl.get();
+							BaseChart baseChart = scanChartUI.getBaseChart();
+							/*
+							 * Reference - fixed mol weight as the spectrum is fetched from the database
+							 */
+							ISeries<?> seriesReference = baseChart.getSeriesSet().getSeries(ScanChartUI.LABEL_SCAN2);
+							Map<Integer, Double> referenceMap = new HashMap<>();
+							double[] xSeriesReference = seriesReference.getXSeries();
+							double[] ySeriesReference = seriesReference.getYSeries();
+							for(int i = 0; i < xSeriesReference.length; i++) {
+								referenceMap.put((int)Math.round(xSeriesReference[i] - molWeightReference), ySeriesReference[i] * -1);
+							}
+							Set<Integer> keysReference = referenceMap.keySet();
+							int minReferenceX = keysReference.stream().min(Integer::compare).get();
+							int maxReferenceX = keysReference.stream().max(Integer::compare).get();
+							/*
+							 * Unknown - get best matching mol weight
+							 */
+							int molWeightUnknown = -1;
+							double bestMatch = Double.MIN_VALUE;
+							ISeries<?> seriesUnknown = baseChart.getSeriesSet().getSeries(ScanChartUI.LABEL_SCAN1);
+							ComparisonCalculator comparisonCalculator = new ComparisonCalculator();
+							Map<Integer, Double> unknownMap = new HashMap<>();
+							int molWeightMin = PreferenceSupplier.getHybridSearchMolWeightMin();
+							int molWeightMax = PreferenceSupplier.getHybridSearchMolWeightMax();
+							for(int i = molWeightMin; i <= molWeightMax; i++) {
+								unknownMap.clear();
+								double[] xSeriesUnknown = seriesUnknown.getXSeries();
+								double[] ySeriesUnknown = seriesUnknown.getYSeries();
+								for(int j = 0; j < xSeriesUnknown.length; j++) {
+									unknownMap.put((int)Math.round(xSeriesUnknown[j] - i), ySeriesUnknown[j]);
+								}
+								/*
+								 * Determine the size of the arrays to be compared.
+								 */
+								Set<Integer> keysUnknown = unknownMap.keySet();
+								int minUnknownX = keysUnknown.stream().min(Integer::compare).get();
+								int maxUnknownX = keysUnknown.stream().max(Integer::compare).get();
+								int minX = Math.min(minReferenceX, minUnknownX);
+								int maxX = Math.max(maxReferenceX, maxUnknownX);
+								int size;
+								if(minX < 0 && maxX >= 0) {
+									size = minX * -1 + maxX + 1;
+								} else {
+									size = maxX - minX + 1;
+								}
+								/*
+								 * Fetch the unknown / reference array data.
+								 */
+								if(size > 0) {
+									double[] unknown = new double[size];
+									double[] reference = new double[size];
+									for(int k = minX,
+											m = 0; k <= maxX; k++, m++) {
+										unknown[m] = unknownMap.getOrDefault(k, 0.0d);
+										reference[m] = referenceMap.getOrDefault(k, 0.0d);
+									}
+									/*
+									 * Try to get the best matching mol weight.
+									 */
+									double currentMatch = comparisonCalculator.calculateMatch(unknown, reference);
+									if(currentMatch > bestMatch) {
+										bestMatch = currentMatch;
+										molWeightUnknown = i;
+									}
+								}
+							}
+							/*
+							 * Validate and set.
+							 */
+							if(molWeightUnknown >= 1) {
+								textWeightUnknownControl.get().setText(Integer.toString(molWeightUnknown));
+								updateChart();
+							}
+						}
+					} catch(NumberFormatException e1) {
+						logger.warn(e1);
+					}
+				}
+			}
+		});
+
+		buttonAutoAdjustUnknownControl.set(button);
 	}
 
-	private void createTextWeightUnknown(Composite parent) {
+	private void createTextWeightUnknown(Composite parent, String tooltip) {
 
-		textWeightUnknownControl.set(createText(parent));
+		textWeightUnknownControl.set(createText(parent, tooltip));
 	}
 
-	private void createTextWeightReference(Composite parent) {
+	private void createTextWeightReference(Composite parent, String tooltip) {
 
-		textWeightReferenceControl.set(createText(parent));
+		textWeightReferenceControl.set(createText(parent, tooltip));
 	}
 
-	private Text createText(Composite parent) {
+	private Text createText(Composite parent, String tooltip) {
 
 		Text text = new Text(parent, SWT.BORDER);
+		text.setText("");
+		text.setToolTipText(tooltip);
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		text.addKeyListener(new KeyAdapter() {
 
@@ -931,6 +1033,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		boolean enabled = scanUnknown != null && scanReference != null;
 		toolbarHybridSearch.get().setEnabled(enabled);
 		buttonSubtractReference.get().setEnabled(enabled);
+		buttonAutoAdjustUnknownControl.get().setEnabled(enabled);
 		updateIdentifierControl();
 	}
 

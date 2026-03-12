@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -81,6 +81,8 @@ public class PreferencePageScans extends FieldEditorPreferencePage implements IW
 
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new ExtendedIntegerFieldEditor(PreferenceSupplier.P_TRACES_VIRTUAL_TABLE, "Traces Virtual Table", PreferenceSupplier.MIN_TRACES_VIRTUAL_TABLE, PreferenceSupplier.MAX_TRACES_VIRTUAL_TABLE, getFieldEditorParent()));
+		addField(new ExtendedIntegerFieldEditor(PreferenceSupplier.P_HYBRID_SEARCH_MOL_WEIGHT_MIN, "Hybrid Search MW (Min)", PreferenceSupplier.MIN_MOL_WEIGHT, PreferenceSupplier.MAX_MOL_WEIGHT, getFieldEditorParent()));
+		addField(new ExtendedIntegerFieldEditor(PreferenceSupplier.P_HYBRID_SEARCH_MOL_WEIGHT_MAX, "Hybrid Search MW (Max)", PreferenceSupplier.MIN_MOL_WEIGHT, PreferenceSupplier.MAX_MOL_WEIGHT, getFieldEditorParent()));
 	}
 
 	@Override
