@@ -90,6 +90,9 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 	public static final int MIN_TIME_RANGE_SELECTION_OFFSET = -1; // No Selection
 	public static final int MAX_TIME_RANGE_SELECTION_OFFSET = Integer.MAX_VALUE;
+
+	public static final int MIN_MOL_WEIGHT = 1;
+	public static final int MAX_MOL_WEIGHT = 2000;
 	/*
 	 * General / Task Quick Access
 	 */
@@ -301,6 +304,10 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static final int DEF_TRACES_VIRTUAL_TABLE = 5000;
 	public static final String P_LIMIT_SIM_TRACES = "limitSimTraces";
 	public static final int DEF_LIMIT_SIM_TRACES = 5;
+	public static final String P_HYBRID_SEARCH_MOL_WEIGHT_MIN = "hybridSearchMolWeightMin";
+	public static final int DEF_HYBRID_SEARCH_MOL_WEIGHT_MIN = 18;
+	public static final String P_HYBRID_SEARCH_MOL_WEIGHT_MAX = "hybridSearchMolWeightMax";
+	public static final int DEF_HYBRID_SEARCH_MOL_WEIGHT_MAX = 550;
 
 	public static final String P_HEATMAP_SCALE_INTENSITY_MIN_MSD = "heatmapScaleIntensityMinMSD";
 	public static final int DEF_HEATMAP_SCALE_INTENSITY_MIN_MSD = 1;
@@ -953,6 +960,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 
 		putDefault(P_TRACES_VIRTUAL_TABLE, DEF_TRACES_VIRTUAL_TABLE);
 		putDefault(P_LIMIT_SIM_TRACES, DEF_LIMIT_SIM_TRACES);
+		putDefault(P_HYBRID_SEARCH_MOL_WEIGHT_MIN, DEF_HYBRID_SEARCH_MOL_WEIGHT_MIN);
+		putDefault(P_HYBRID_SEARCH_MOL_WEIGHT_MAX, DEF_HYBRID_SEARCH_MOL_WEIGHT_MAX);
 
 		putDefault(P_HEATMAP_SCALE_INTENSITY_MIN_MSD, DEF_HEATMAP_SCALE_INTENSITY_MIN_MSD);
 		putDefault(P_HEATMAP_SCALE_INTENSITY_MAX_MSD, DEF_HEATMAP_SCALE_INTENSITY_MAX_MSD);
@@ -1420,5 +1429,15 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier implements IP
 	public static void setListPathExport(String filterPath) {
 
 		INSTANCE().put(P_LIST_PATH_EXPORT, filterPath);
+	}
+
+	public static int getHybridSearchMolWeightMin() {
+
+		return INSTANCE().getInteger(P_HYBRID_SEARCH_MOL_WEIGHT_MIN, DEF_HYBRID_SEARCH_MOL_WEIGHT_MIN);
+	}
+
+	public static int getHybridSearchMolWeightMax() {
+
+		return INSTANCE().getInteger(P_HYBRID_SEARCH_MOL_WEIGHT_MAX, DEF_HYBRID_SEARCH_MOL_WEIGHT_MAX);
 	}
 }
