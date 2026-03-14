@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2026 Lablicate GmbH.
+ * Copyright (c) 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,22 +12,24 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.filter.chromatogram.settings;
 
+import org.eclipse.chemclipse.msd.model.core.ReagentGas;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
-public class TargetTransferFilterSettings extends TransferFilterSettings {
+public class ChemIonizationTransferFilterSettings extends TransferFilterSettings {
 
-	@JsonProperty(value = "Transfer Best Target Only", defaultValue = "false")
-	@JsonPropertyDescription(value = "If this value is true, only the best target will be transfered.")
-	private boolean useBestTargetOnly = false;
+	@JsonProperty(value = "Reagent Gas", defaultValue = "PROTONATION")
+	@JsonPropertyDescription(value = "Select the used reagent gas to apply the mass shift when creating a target.")
+	private ReagentGas reagentGas = ReagentGas.PROTONATION;
 
-	public boolean isUseBestTargetOnly() {
+	public ReagentGas getReagentGas() {
 
-		return useBestTargetOnly;
+		return reagentGas;
 	}
 
-	public void setUseBestTargetOnly(boolean useBestTargetOnly) {
+	public void setReagentGas(ReagentGas reagentGas) {
 
-		this.useBestTargetOnly = useBestTargetOnly;
+		this.reagentGas = reagentGas;
 	}
 }
