@@ -131,6 +131,7 @@ public class ChemIonizationTransferFilter implements IProcessTypeSupplier {
 													libraryInformation.setMolWeight(molecularWeight);
 													ComparisonResult comparisonResult = new ComparisonResult(matchQuality);
 													IIdentificationTarget identificationTarget = new IdentificationTarget(libraryInformation, comparisonResult);
+													identificationTarget.setIdentifier(NAME);
 													sinkPeak.getTargets().add(identificationTarget);
 													matchQuality--;
 												}
