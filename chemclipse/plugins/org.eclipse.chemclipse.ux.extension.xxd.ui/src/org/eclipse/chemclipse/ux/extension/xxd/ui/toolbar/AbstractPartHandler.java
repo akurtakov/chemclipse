@@ -47,7 +47,7 @@ public abstract class AbstractPartHandler implements IPartHandler {
 
 	public EPartService getPartService() {
 
-		return partService != null ? partService : ContextAddon.getPartService();
+		return partService != null ? partService : ContextAddon.getWindowPartService();
 	}
 
 	public EModelService getModelService() {

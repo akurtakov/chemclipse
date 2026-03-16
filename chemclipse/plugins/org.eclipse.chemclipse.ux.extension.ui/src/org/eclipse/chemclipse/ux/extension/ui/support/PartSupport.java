@@ -19,7 +19,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.descriptor.basic.MPartDescriptor;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
@@ -34,8 +33,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 
 public class PartSupport {
-
-	private static final Logger logger = Logger.getLogger(PartSupport.class);
 
 	public static final String PERSPECTIVE_DATA_ANALYSIS = "org.eclipse.chemclipse.ux.extension.xxd.ui.perspective.main";
 	public static final String AREA = "org.eclipse.chemclipse.rcp.app.ui.editor";
@@ -116,18 +113,10 @@ public class PartSupport {
 			 * Get the part or create it.
 			 */
 			if(!partService.getParts().contains(part)) {
-				try {
-					partService.createPart(part.getElementId());
-				} catch(IllegalStateException e) {
-					logger.warn(e);
-				}
+				partService.createPart(part.getElementId());
 			}
 		} else {
-			try {
-				part = partService.createPart(partId);
-			} catch(IllegalStateException e) {
-				logger.warn(e);
-			}
+			part = partService.createPart(partId);
 			if(part != null) {
 				MPartStack partStack = (MPartStack)modelService.find(partStackId, application);
 				partStack.getChildren().add(part);
