@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,25 +27,28 @@ import org.eclipse.chemclipse.msd.identifier.IMassSpectrumIdentifierSupplier;
 import org.eclipse.chemclipse.msd.identifier.MassSpectrumIdentifier;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import jakarta.inject.Named;
+
 public class ChromatogramFilter extends AbstractChromatogramFilter {
+
+	@Named(IServiceConstants.ACTIVE_SHELL)
+	private Shell shell;
 
 	@Override
 	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IChromatogramFilterSettings chromatogramFilterSettings, IProgressMonitor monitor) {
 
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = validate(chromatogramSelection, chromatogramFilterSettings);
 		if(!processingInfo.hasErrorMessages()) {
-			Shell shell = DisplayUtils.getShell();
 			if(shell != null) {
 				identifyScanMaxima(shell, chromatogramSelection, Display.getDefault(), monitor);
 			} else {
-				DisplayUtils.getDisplay().syncExec(() -> {
-
+				Display.getDefault().syncExec(() -> {
 					/*
 					 * Create a new shell and set
 					 * the size to 0 cause only the wizard
@@ -54,7 +57,6 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 					Shell temporaryShell = new Shell();
 					temporaryShell.setSize(0, 0);
 					temporaryShell.open();
-
 					identifyScanMaxima(temporaryShell, chromatogramSelection, Display.getDefault(), monitor);
 					temporaryShell.close();
 				});

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -37,16 +37,22 @@ import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.numeric.services.IMaximaDetectorService;
 import org.eclipse.chemclipse.numeric.services.IMaximaDetectorSettings;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.osgi.util.NLS;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+
+import jakarta.inject.Named;
 
 public class ChromatogramFilter extends AbstractChromatogramFilter {
 
 	private static final String DESCRIPTION = Messages.scanMaximaDetectorUI;
 	private static final String IDENTIFIER = "Scan Maxima Detector UI";
+
+	@Named(IServiceConstants.ACTIVE_SHELL)
+	private Shell shell;
 
 	@Override
 	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IChromatogramFilterSettings chromatogramFilterSettings, IProgressMonitor monitor) {
@@ -60,14 +66,14 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 			filterSettings = PreferenceSupplier.getMaxDetectorFilterSettings();
 			processingInfo.addWarnMessage(DESCRIPTION, NLS.bind(Messages.settingsNotOfType, MaxDetectorFilterSettings.class));
 		}
-
+		/*
+		 * Process
+		 */
 		if(!processingInfo.hasErrorMessages()) {
-			Shell shell = DisplayUtils.getShell();
 			if(shell != null) {
 				detectScanMaxima(shell, chromatogramSelection, filterSettings);
 			} else {
-				DisplayUtils.getDisplay().syncExec(() -> {
-
+				Display.getDefault().asyncExec(() -> {
 					/*
 					 * Create a new shell and set
 					 * the size to 0 cause only the wizard
@@ -76,11 +82,11 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 					Shell temporaryShell = new Shell();
 					temporaryShell.setSize(0, 0);
 					temporaryShell.open();
-
 					detectScanMaxima(temporaryShell, chromatogramSelection, filterSettings);
 					temporaryShell.close();
 				});
 			}
+			chromatogramSelection.getChromatogram().setDirty(true);
 			processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, Messages.scanMaximaDetectionSuccessful));
 		}
 		return processingInfo;
