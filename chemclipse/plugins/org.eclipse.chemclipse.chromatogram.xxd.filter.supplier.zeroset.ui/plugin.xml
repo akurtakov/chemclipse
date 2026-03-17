@@ -2,15 +2,6 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.eclipse.ui.preferencePages">
-      <page
-            category="org.eclipse.chemclipse.chromatogram.csd.filter.ui.preferences.filterPreferencePage"
-            class="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.zeroset.ui.preferences.PreferencePage"
-            id="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.zeroset.ui.preferences.preferencePage"
-            name="ZeroSet">
-      </page>
-   </extension>
-   <extension
          point="org.eclipse.chemclipse.xxd.process.ui.menu.icon">
       <icon
             class="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.zeroset.ui.icon.MenuIcon"
