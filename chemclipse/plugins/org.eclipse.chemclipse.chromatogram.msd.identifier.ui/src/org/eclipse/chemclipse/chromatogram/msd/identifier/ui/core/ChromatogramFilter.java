@@ -25,8 +25,10 @@ import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.msd.identifier.IMassSpectrumIdentifierSupplier;
 import org.eclipse.chemclipse.msd.identifier.MassSpectrumIdentifier;
+import org.eclipse.chemclipse.msd.identifier.settings.IMassSpectrumIdentifierSettings;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.support.ProcessorSettingsSupport;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -86,7 +88,6 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 				IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 				int startScan = chromatogramSelection.getStartScan();
 				int stopScan = chromatogramSelection.getStopScan();
-
 				List<IScanMSD> massSpectra = new ArrayList<>();
 				for(int i = startScan; i <= stopScan; i++) {
 					IScan scan = chromatogram.getScan(i);
@@ -95,12 +96,15 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 					}
 				}
 				/*
+				 * Retrieve the settings dynamically
+				 */
+				String id = massSpectrumIdentifierSupplier.getId();
+				IMassSpectrumIdentifierSettings identifierSettings = ProcessorSettingsSupport.getSettings(display.getActiveShell(), id);
+				/*
 				 * Identification
-				 * TODO - service settings could be displayed dynamically via JsonAnnotations in the dialog page.
 				 */
 				display.asyncExec(() -> {
-
-					MassSpectrumIdentifier.identify(massSpectra, massSpectrumIdentifierSupplier.getId(), monitor);
+					MassSpectrumIdentifier.identify(massSpectra, identifierSettings, id, monitor);
 					chromatogram.setDirty(true);
 				});
 			}
