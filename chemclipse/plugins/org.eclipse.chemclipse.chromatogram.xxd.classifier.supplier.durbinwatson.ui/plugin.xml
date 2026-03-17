@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
    <extension
-         point="org.eclipse.ui.preferencePages">
-      <page
-            category="org.eclipse.chemclipse.chromatogram.msd.classifier.ui.preferences.classifierPreferencePage"
-            class="org.eclipse.chemclipse.chromatogram.xxd.classifier.supplier.durbinwatson.ui.preferences.PreferencePage"
-            id="org.eclipse.chemclipse.chromatogram.xxd.classifier.supplier.durbinwatson.ui.preferences.wncClassifierPreferencePage"
-            name="Durbin-Watson">
-      </page>
-   </extension>
-   <extension
          point="org.eclipse.core.runtime.adapters">
       <factory
             adaptableType="org.eclipse.chemclipse.chromatogram.xxd.classifier.supplier.durbinwatson.result.IDurbinWatsonClassifierResult"

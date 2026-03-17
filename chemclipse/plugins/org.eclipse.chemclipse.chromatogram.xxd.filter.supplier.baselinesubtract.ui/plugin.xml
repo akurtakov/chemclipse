@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
    <extension
-         point="org.eclipse.ui.preferencePages">
-      <page
-            category="org.eclipse.chemclipse.chromatogram.filter.ui.preferences.filterPreferencePage"
-            class="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.baselinesubtract.ui.preferences.PreferencePage"
-            id="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.baselinesubtract.ui.preferences.preferencePage"
-            name="Baseline Subtract">
-      </page>
-   </extension>
-   <extension
          point="org.eclipse.chemclipse.chromatogram.filter.chromatogramFilterSupplier">
       <ChromatogramFilterSupplier
             description="This filters enables to remove the subtract another chromatogram."

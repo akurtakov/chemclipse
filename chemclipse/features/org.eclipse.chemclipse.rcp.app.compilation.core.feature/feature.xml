@@ -97,10 +97,6 @@
          version="0.0.0"/>
 
    <includes
-         id="org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.manual.feature"
-         version="0.0.0"/>
-
-   <includes
          id="org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.feature"
          version="0.0.0"/>
 

@@ -18,5 +18,4 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.zeroset.core,
- org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.zeroset.core.settings,
- org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.zeroset.preferences
+ org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.zeroset.core.settings

@@ -2,15 +2,6 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.eclipse.ui.preferencePages">
-      <page
-            category="org.eclipse.chemclipse.csd.converter.ui.converterPreferencePage"
-            class="org.eclipse.chemclipse.csd.converter.supplier.arw.ui.preferences.PreferencePage"
-            id="org.eclipse.chemclipse.csd.converter.supplier.arw.ui.preferences.converterPreferencePage"
-            name="ARW FID Converter">
-      </page>
-   </extension>
-   <extension
          point="org.eclipse.ui.editors">
       <editor
             class="org.eclipse.chemclipse.ux.extension.xxd.ui.editors.ChromatogramEditor3x"
