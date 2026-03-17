@@ -19,7 +19,6 @@ import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings.IUnknownSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings.IUnknownSettingsMSD;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings.IUnknownSettingsWSD;
-import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings.IdentifierSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings.MassSpectrumLibraryIdentifierSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings.MassSpectrumUnknownSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings.PeakIdentifierSettings;
@@ -30,7 +29,6 @@ import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings
 import org.eclipse.chemclipse.model.identifier.DeltaCalculation;
 import org.eclipse.chemclipse.model.identifier.IPenaltyCalculationSettings;
 import org.eclipse.chemclipse.model.identifier.PenaltyCalculation;
-import org.eclipse.chemclipse.model.support.CalculationType;
 import org.eclipse.chemclipse.msd.identifier.settings.IMassSpectrumComparatorSettings;
 import org.eclipse.chemclipse.support.preferences.AbstractPreferenceSupplier;
 import org.eclipse.chemclipse.support.preferences.IPreferenceSupplier;
@@ -118,15 +116,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 
 	public static final String P_FILTER_PATH_IDENTIFIER_FILES = "filterPathIdentifierFiles";
 	public static final String DEF_FILTER_PATH_IDENTIFIER_FILES = "";
-	/*
-	 * Combined Scan Identifier
-	 */
-	public static final String P_USE_NORMALIZED_SCAN = "useNormalizedScan";
-	public static final boolean DEF_USE_NORMALIZED_SCAN = true;
-	public static final String P_CALCULATION_TYPE = "calculationType";
-	public static final String DEF_CALCULATION_TYPE = CalculationType.SUM.name();
-	public static final String P_USE_PEAKS_INSTEAD_OF_SCANS = "usePeaksInsteadOfScans";
-	public static final boolean DEF_USE_PEAKS_INSTEAD_OF_SCANS = false;
 
 	public static IPreferenceSupplier INSTANCE() {
 
@@ -162,11 +151,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 		putDefault(P_PENALTY_LEVEL_FACTOR, Float.toString(DEF_PENALTY_LEVEL_FACTOR));
 		putDefault(P_MAX_PENALTY, Float.toString(DEF_MAX_PENALTY));
 		putDefault(P_FILTER_PATH_IDENTIFIER_FILES, DEF_FILTER_PATH_IDENTIFIER_FILES);
-
-		putDefault(P_USE_NORMALIZED_SCAN, Boolean.toString(DEF_USE_NORMALIZED_SCAN));
-		putDefault(P_CALCULATION_TYPE, DEF_CALCULATION_TYPE);
-		putDefault(P_USE_PEAKS_INSTEAD_OF_SCANS, Boolean.toString(DEF_USE_PEAKS_INSTEAD_OF_SCANS));
-
 	}
 
 	private void setUnknownValues(String postfix) {
@@ -298,36 +282,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static void setFilterPathIdentifierFiles(String filterPath) {
 
 		INSTANCE().put(P_FILTER_PATH_IDENTIFIER_FILES, filterPath);
-	}
-
-	public static IdentifierSettings getIdentifierSettings() {
-
-		IdentifierSettings settings = new IdentifierSettings();
-		settings.setUseNormalizedScan(isUseNormalizedScan());
-		settings.setCalculationType(getCalculationType());
-		settings.setUsePeaksInsteadOfScans(isUsePeaksInsteadOfScans());
-		initialize(settings);
-
-		return settings;
-	}
-
-	public static boolean isUseNormalizedScan() {
-
-		return INSTANCE().getBoolean(P_USE_NORMALIZED_SCAN, DEF_USE_NORMALIZED_SCAN);
-	}
-
-	public static boolean isUsePeaksInsteadOfScans() {
-
-		return INSTANCE().getBoolean(P_USE_PEAKS_INSTEAD_OF_SCANS, DEF_USE_PEAKS_INSTEAD_OF_SCANS);
-	}
-
-	public static CalculationType getCalculationType() {
-
-		try {
-			return CalculationType.valueOf(INSTANCE().get(P_CALCULATION_TYPE, DEF_CALCULATION_TYPE));
-		} catch(Exception e) {
-			return CalculationType.SUM;
-		}
 	}
 
 	private static DeltaCalculation getDeltaCalculation() {

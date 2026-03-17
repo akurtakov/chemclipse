@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -69,13 +69,13 @@ public class ChromatogramIdentifierProcessTypeSupplier implements IProcessTypeSu
 		public IChromatogramSelection apply(IChromatogramSelection chromatogramSelection, IChromatogramIdentifierSettings processSettings, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
 			if(chromatogramSelection instanceof IChromatogramSelectionMSD chromatogramSelectionMSD) {
-				if(processSettings == null) {
-					messageConsumer.addMessages(ChromatogramIdentifier.identify(chromatogramSelectionMSD, getId(), monitor));
-				} else {
+				if(processSettings != null) {
 					messageConsumer.addMessages(ChromatogramIdentifier.identify(chromatogramSelectionMSD, processSettings, getId(), monitor));
+				} else {
+					messageConsumer.addWarnMessage(getName(), "The chromatogram identifier settings are not available.");
 				}
 			} else {
-				messageConsumer.addWarnMessage(getName(), "Only MSD chromatograms are supported, processor was skipped");
+				messageConsumer.addWarnMessage(getName(), "Only MSD chromatograms are supported, processor was skipped.");
 			}
 			return chromatogramSelection;
 		}

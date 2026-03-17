@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -31,13 +31,4 @@ public interface IChromatogramIdentifier {
 	 * @return {@link IProcessingInfo}
 	 */
 	IProcessingInfo<IChromatogramIdentificationResult> identify(IChromatogramSelectionMSD chromatogramSelection, IChromatogramIdentifierSettings identifierSettings, IProgressMonitor monitor);
-
-	/**
-	 * The same as the other method but without settings.
-	 * 
-	 * @param chromatogramSelection
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
-	 */
-	IProcessingInfo<IChromatogramIdentificationResult> identify(IChromatogramSelectionMSD chromatogramSelection, IProgressMonitor monitor);
 }
