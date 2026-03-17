@@ -16,12 +16,4 @@ import org.eclipse.chemclipse.converter.core.AbstractSupplier;
 
 public class PlateSupplier extends AbstractSupplier implements IPlateSupplier {
 
-	@Override
-	public void setFileExtension(final String fileExtension) {
-
-		if(fileExtension != null && !fileExtension.isEmpty()) {
-			String cleanedExtension = fileExtension.startsWith(".") ? fileExtension.substring(1) : fileExtension;
-			super.setFileExtension(cleanedExtension);
-		}
-	}
 }
