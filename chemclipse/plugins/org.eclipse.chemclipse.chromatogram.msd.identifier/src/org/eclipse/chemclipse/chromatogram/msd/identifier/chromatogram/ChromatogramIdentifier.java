@@ -67,26 +67,6 @@ public class ChromatogramIdentifier {
 	}
 
 	/**
-	 * Runs the chromatogram identifier with the given id.
-	 * 
-	 * @param chromatogramSelection
-	 * @param identifierId
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
-	 */
-	public static IProcessingInfo<IChromatogramIdentificationResult> identify(IChromatogramSelectionMSD chromatogramSelection, String identifierId, IProgressMonitor monitor) {
-
-		IProcessingInfo<IChromatogramIdentificationResult> processingInfo;
-		IChromatogramIdentifier chromatogramIdentifier = getChromatogramIdentifier(identifierId);
-		if(chromatogramIdentifier != null) {
-			processingInfo = chromatogramIdentifier.identify(chromatogramSelection, monitor);
-		} else {
-			processingInfo = getNoIdentifierAvailableProcessingInfo();
-		}
-		return processingInfo;
-	}
-
-	/**
 	 * Returns an {@link IChromatogramIdentifierSupport} instance.
 	 * 
 	 * @return {@link IChromatogramIdentifierSupport}
