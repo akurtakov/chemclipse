@@ -19,7 +19,7 @@ import org.eclipse.chemclipse.chromatogram.xxd.integrator.result.ChromatogramInt
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.result.ChromatogramIntegrationResults;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.result.IChromatogramIntegrationResult;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.result.IChromatogramIntegrationResults;
-import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.Activator;
+import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.l10n.Messages;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.processor.BackgroundIntegrator;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.processor.ChromatogramIntegrator;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.settings.ChromatogramIntegrationSettings;
@@ -30,15 +30,11 @@ import org.eclipse.chemclipse.model.core.ISignal;
 import org.eclipse.chemclipse.model.implementation.IntegrationEntry;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
-import org.eclipse.chemclipse.support.l10n.TranslationSupport;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.e4.core.services.translation.TranslationService;
 
 public class ChromatogramIntegratorSupport {
 
-	private static TranslationService translationService = TranslationSupport.getTranslationService();
-
-	public static final String INTEGRATOR_DESCRIPTION = translationService.translate("%Trapezoid", Activator.getContributorURI());
+	public static final String INTEGRATOR_DESCRIPTION = Messages.trapezoid;
 
 	public IChromatogramIntegrationResults calculateChromatogramIntegrationResults(IChromatogramSelection chromatogramSelection, ChromatogramIntegrationSettings chromatogramIntegrationSettings, IProgressMonitor monitor) {
 

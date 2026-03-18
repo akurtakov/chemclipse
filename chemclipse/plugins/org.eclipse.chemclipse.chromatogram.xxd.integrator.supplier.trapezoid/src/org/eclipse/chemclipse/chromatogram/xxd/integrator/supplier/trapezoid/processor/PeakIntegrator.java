@@ -27,7 +27,7 @@ import org.eclipse.chemclipse.chromatogram.xxd.integrator.result.IPeakIntegratio
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.result.IPeakIntegrationResults;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.result.PeakIntegrationResult;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.result.PeakIntegrationResults;
-import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.Activator;
+import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.l10n.Messages;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.settings.PeakIntegrationSettings;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramPeakCSD;
 import org.eclipse.chemclipse.csd.model.core.IPeakCSD;
@@ -46,14 +46,12 @@ import org.eclipse.chemclipse.msd.model.core.IPeakMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
 import org.eclipse.chemclipse.msd.model.core.support.IIonPercentages;
 import org.eclipse.chemclipse.msd.model.core.support.IonPercentages;
-import org.eclipse.chemclipse.support.l10n.TranslationSupport;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramPeakWSD;
 import org.eclipse.chemclipse.wsd.model.core.IPeakModelWSD;
 import org.eclipse.chemclipse.wsd.model.core.IPeakWSD;
 import org.eclipse.chemclipse.wsd.model.core.IScanWSD;
 import org.eclipse.chemclipse.wsd.model.core.support.WavelengthPercentages;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.e4.core.services.translation.TranslationService;
 
 /**
  * This integrator implements the chemstation peak integrator routines.<br/>
@@ -68,8 +66,7 @@ public class PeakIntegrator extends AbstractIntegrator {
 	 * The FirstDerivative seems to use a correction factor.
 	 * Otherwise, the peak areas are too high.
 	 */
-	private static TranslationService translationService = TranslationSupport.getTranslationService();
-	private static final String INTEGRATOR_DESCRIPTION = translationService.translate("%Trapezoid", Activator.getContributorURI());
+	private static final String INTEGRATOR_DESCRIPTION = Messages.trapezoid;
 
 	public IPeakIntegrationResult integrate(IPeak peak, PeakIntegrationSettings peakIntegrationSettings) throws ValueMustNotBeNullException {
 
@@ -106,7 +103,7 @@ public class PeakIntegrator extends AbstractIntegrator {
 		 * Iterate through all peaks and decide if they should be reported.
 		 */
 		for(IPeak peak : peaks) {
-			monitor.subTask(MessageFormat.format(translationService.translate("%IntegratePeakNumber", Activator.getContributorURI()), peakNumber++));
+			monitor.subTask(MessageFormat.format(Messages.integratePeakNumber, peakNumber++));
 			try {
 				peakIntegrationResult = integrate(peak, peakIntegrationSettings);
 			} catch(ValueMustNotBeNullException e) {
@@ -489,7 +486,7 @@ public class PeakIntegrator extends AbstractIntegrator {
 		 * Reset some values. A summed peak has no S/N ration, respectively
 		 * purity ...
 		 */
-		peakIntegrationSumResult.setPeakType(translationService.translate("%SummedIntegratedArea", Activator.getContributorURI()));
+		peakIntegrationSumResult.setPeakType(Messages.summedIntegratedArea);
 		peakIntegrationSumResult.setPurity(0.0f);
 		peakIntegrationSumResult.setSN(0.0f);
 		peakIntegrationSumResult.setTailing(0.0f);
