@@ -388,11 +388,13 @@ public class ScanIdentifierUI extends Composite {
 			 */
 			try {
 				IMassSpectrumIdentifierSettings identifierSettings = ProcessorSettingsSupport.getSettings(getShell(), massSpectrumIdentifierSupplier.getId());
-				IRunnableWithProgress runnable = new MassSpectrumIdentifierRunnable(massSpectra, massSpectrumIdentifierSupplier.getId(), identifierSettings);
-				ProgressMonitorDialog monitor = new ProgressMonitorDialog(display.getActiveShell());
-				monitor.run(false, true, runnable);
-				if(update) {
-					fireUpdate(display);
+				if(identifierSettings != null) {
+					IRunnableWithProgress runnable = new MassSpectrumIdentifierRunnable(massSpectra, massSpectrumIdentifierSupplier.getId(), identifierSettings);
+					ProgressMonitorDialog monitor = new ProgressMonitorDialog(display.getActiveShell());
+					monitor.run(false, true, runnable);
+					if(update) {
+						fireUpdate(display);
+					}
 				}
 			} catch(InvocationTargetException e) {
 				logger.warn(e);

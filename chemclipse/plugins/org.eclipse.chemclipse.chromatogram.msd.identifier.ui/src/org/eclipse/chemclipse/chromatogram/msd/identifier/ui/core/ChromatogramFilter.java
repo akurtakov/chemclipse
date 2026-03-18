@@ -83,30 +83,32 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 			IMassSpectrumIdentifierSupplier massSpectrumIdentifierSupplier = dialog.getMassSpectrumIdentifierSupplier();
 			if(massSpectrumIdentifierSupplier != null) {
 				/*
-				 * Extract the selection.
-				 */
-				IChromatogram chromatogram = chromatogramSelection.getChromatogram();
-				int startScan = chromatogramSelection.getStartScan();
-				int stopScan = chromatogramSelection.getStopScan();
-				List<IScanMSD> massSpectra = new ArrayList<>();
-				for(int i = startScan; i <= stopScan; i++) {
-					IScan scan = chromatogram.getScan(i);
-					if(scan instanceof IScanMSD scanMSD && !scan.getTargets().isEmpty()) {
-						massSpectra.add(scanMSD);
-					}
-				}
-				/*
 				 * Retrieve the settings dynamically
 				 */
 				String id = massSpectrumIdentifierSupplier.getId();
 				IMassSpectrumIdentifierSettings identifierSettings = ProcessorSettingsSupport.getSettings(display.getActiveShell(), id);
-				/*
-				 * Identification
-				 */
-				display.asyncExec(() -> {
-					MassSpectrumIdentifier.identify(massSpectra, identifierSettings, id, monitor);
-					chromatogram.setDirty(true);
-				});
+				if(identifierSettings != null) {
+					/*
+					 * Extract the selection.
+					 */
+					IChromatogram chromatogram = chromatogramSelection.getChromatogram();
+					int startScan = chromatogramSelection.getStartScan();
+					int stopScan = chromatogramSelection.getStopScan();
+					List<IScanMSD> massSpectra = new ArrayList<>();
+					for(int i = startScan; i <= stopScan; i++) {
+						IScan scan = chromatogram.getScan(i);
+						if(scan instanceof IScanMSD scanMSD && !scan.getTargets().isEmpty()) {
+							massSpectra.add(scanMSD);
+						}
+					}
+					/*
+					 * Identification
+					 */
+					display.asyncExec(() -> {
+						MassSpectrumIdentifier.identify(massSpectra, identifierSettings, id, monitor);
+						chromatogram.setDirty(true);
+					});
+				}
 			}
 		}
 	}
