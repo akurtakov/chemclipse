@@ -47,7 +47,8 @@ public class SettingsWizard extends Wizard {
 	}
 
 	/**
-	 * Opens a wizard to edit the given preferences if the user confirms the given {@link IProcessorPreferences} are updated via the public set methods
+	 * Opens a wizard to edit the given preferences if the user confirms the given {@link IProcessorPreferences} are updated via the public set methods.
+	 * Returns false if the user pressed CANCEL.
 	 * 
 	 * @param shell
 	 * @param preferences
@@ -66,7 +67,6 @@ public class SettingsWizard extends Wizard {
 
 		WizardDialog wizardDialog = new WizardDialog(shell, settingsWizard);
 		wizardDialog.setMinimumPageSize(SettingsWizard.DEFAULT_WIDTH, SettingsWizard.DEFAULT_HEIGHT);
-
 		if(wizardDialog.open() == Window.OK) {
 			preferences.setAskForSettings(!settingsPreferencePage.getIsDontAskAgainEdited());
 			preferences.setUseSystemDefaults(false);
