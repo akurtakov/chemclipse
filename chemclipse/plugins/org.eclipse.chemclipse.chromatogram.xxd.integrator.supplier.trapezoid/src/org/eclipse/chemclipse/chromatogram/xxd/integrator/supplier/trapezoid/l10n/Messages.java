@@ -16,13 +16,13 @@ import org.eclipse.osgi.util.NLS;
 
 public class Messages extends NLS {
 
-	private static final String BUNDLE_NAME = "org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.l10n.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "OSGI-INF/l10n/bundle"; //$NON-NLS-1$
 
-	public static String integratePeak;
-	public static String integratePeakNumber;
-	public static String integratePeaks;
-	public static String summedIntegratedArea;
-	public static String trapezoid;
+	public static String IntegratePeak;
+	public static String IntegratePeakNumber;
+	public static String IntegratePeaks;
+	public static String SummedIntegratedArea;
+	public static String Trapezoid;
 
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

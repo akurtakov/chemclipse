@@ -66,7 +66,7 @@ public class PeakIntegrator extends AbstractIntegrator {
 	 * The FirstDerivative seems to use a correction factor.
 	 * Otherwise, the peak areas are too high.
 	 */
-	private static final String INTEGRATOR_DESCRIPTION = Messages.trapezoid;
+	private static final String INTEGRATOR_DESCRIPTION = Messages.Trapezoid;
 
 	public IPeakIntegrationResult integrate(IPeak peak, PeakIntegrationSettings peakIntegrationSettings) throws ValueMustNotBeNullException {
 
@@ -103,7 +103,7 @@ public class PeakIntegrator extends AbstractIntegrator {
 		 * Iterate through all peaks and decide if they should be reported.
 		 */
 		for(IPeak peak : peaks) {
-			monitor.subTask(MessageFormat.format(Messages.integratePeakNumber, peakNumber++));
+			monitor.subTask(MessageFormat.format(Messages.IntegratePeakNumber, peakNumber++));
 			try {
 				peakIntegrationResult = integrate(peak, peakIntegrationSettings);
 			} catch(ValueMustNotBeNullException e) {
@@ -486,7 +486,7 @@ public class PeakIntegrator extends AbstractIntegrator {
 		 * Reset some values. A summed peak has no S/N ration, respectively
 		 * purity ...
 		 */
-		peakIntegrationSumResult.setPeakType(Messages.summedIntegratedArea);
+		peakIntegrationSumResult.setPeakType(Messages.SummedIntegratedArea);
 		peakIntegrationSumResult.setPurity(0.0f);
 		peakIntegrationSumResult.setSN(0.0f);
 		peakIntegrationSumResult.setTailing(0.0f);

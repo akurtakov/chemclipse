@@ -34,7 +34,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ChromatogramIntegratorSupport {
 
-	public static final String INTEGRATOR_DESCRIPTION = Messages.trapezoid;
+	public static final String INTEGRATOR_DESCRIPTION = Messages.Trapezoid;
 
 	public IChromatogramIntegrationResults calculateChromatogramIntegrationResults(IChromatogramSelection chromatogramSelection, ChromatogramIntegrationSettings chromatogramIntegrationSettings, IProgressMonitor monitor) {
 

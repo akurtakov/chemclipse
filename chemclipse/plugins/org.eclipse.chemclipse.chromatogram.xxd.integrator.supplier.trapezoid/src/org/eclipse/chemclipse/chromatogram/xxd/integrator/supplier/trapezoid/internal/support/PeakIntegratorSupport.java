@@ -38,7 +38,7 @@ public class PeakIntegratorSupport {
 		/*
 		 * Get the peak integration results.
 		 */
-		monitor.subTask(Messages.integratePeaks);
+		monitor.subTask(Messages.IntegratePeaks);
 		IPeakIntegrationResults peakIntegrationResults;
 		if(peaks != null) {
 			PeakIntegrator peakIntegrator = new PeakIntegrator();
@@ -71,7 +71,7 @@ public class PeakIntegratorSupport {
 
 	public IPeakIntegrationResult calculatePeakIntegrationResult(IPeak peak, PeakIntegrationSettings peakIntegrationSettings, IProgressMonitor monitor) throws ValueMustNotBeNullException {
 
-		monitor.subTask(Messages.integratePeak);
+		monitor.subTask(Messages.IntegratePeak);
 		PeakIntegrator peakIntegrator = new PeakIntegrator();
 		return peakIntegrator.integrate(peak, peakIntegrationSettings);
 	}
