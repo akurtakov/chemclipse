@@ -2,19 +2,10 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.eclipse.ui.preferencePages">
-      <page
-            category="org.eclipse.chemclipse.chromatogram.msd.classifier.ui.preferences.classifierPreferencePage"
-            class="org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.preferences.PreferencePage"
-            id="org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.preferences.wncClassifierPreferencePage"
-            name="WNC">
-      </page>
-   </extension>
-   <extension
          point="org.eclipse.core.runtime.adapters">
       <factory
             adaptableType="org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.result.WncClassifierResult"
-            class="org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.internal.WncAdapterFactory">
+            class="org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.internal.AdapterFactory">
          <adapter
                type="org.eclipse.jface.viewers.IStructuredContentProvider">
          </adapter>

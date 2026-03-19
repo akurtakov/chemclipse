@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,18 +14,18 @@
 package org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.internal;
 
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.internal.provider.MeasurementResultTitles;
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.internal.provider.WncResultsContentProvider;
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.internal.provider.WncResultsLabelProvider;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.internal.provider.ResultsContentProvider;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.internal.provider.ResultsLabelProvider;
 import org.eclipse.chemclipse.support.ui.swt.columns.ColumnDefinitionProvider;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 
-public class WncAdapterFactory implements IAdapterFactory {
+public class AdapterFactory implements IAdapterFactory {
 
 	private static final MeasurementResultTitles TITLES = new MeasurementResultTitles();
-	private static final WncResultsLabelProvider LABEL_PROVIDER = new WncResultsLabelProvider();
-	private static final WncResultsContentProvider CONTENT_PROVIDER = new WncResultsContentProvider();
+	private static final ResultsLabelProvider LABEL_PROVIDER = new ResultsLabelProvider();
+	private static final ResultsContentProvider CONTENT_PROVIDER = new ResultsContentProvider();
 
 	@Override
 	public <T> T getAdapter(Object adaptableObject, Class<T> adapterType) {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,23 +12,40 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.HashMap;
+import java.util.StringTokenizer;
 
-public class TargetTraces {
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.validators.TargetTraceValidator;
+import org.eclipse.chemclipse.logging.core.Logger;
+import org.eclipse.core.runtime.IStatus;
 
-	private Map<Integer, TargetTrace> ions;
+public class TargetTraces extends HashMap<Integer, TargetTrace> {
 
-	public TargetTraces() {
+	private static final long serialVersionUID = -5237292924832144080L;
 
-		ions = new TreeMap<>();
+	private static final Logger logger = Logger.getLogger(TargetTraces.class);
+
+	public static final String ENTRY_DELIMITER = ";"; //$NON-NLS-1$
+	public static final String VALUE_DELIMITER = ":"; //$NON-NLS-1$
+
+	private TargetTraceValidator validator = new TargetTraceValidator();
+
+	public static TargetTraces getDefault() {
+
+		TargetTraces targetTraces = new TargetTraces();
+		targetTraces.add(new TargetTrace(18, "Water"));
+		targetTraces.add(new TargetTrace(28, "Nitrogen"));
+		targetTraces.add(new TargetTrace(32, "Oxygen"));
+		targetTraces.add(new TargetTrace(44, "Carbon Dioxide"));
+		targetTraces.add(new TargetTrace(84, "Solvent Tailing"));
+		targetTraces.add(new TargetTrace(207, "Column Bleed"));
+		return targetTraces;
 	}
 
 	public void add(TargetTrace targetTrace) {
 
 		if(targetTrace != null) {
-			ions.put(targetTrace.getIon(), targetTrace);
+			put(targetTrace.getIon(), targetTrace);
 		}
 	}
 
@@ -39,31 +56,94 @@ public class TargetTraces {
 		}
 	}
 
-	public void remove(Integer ion) {
+	public void load(String items) {
 
-		ions.remove(ion);
+		loadSettings(items);
 	}
 
-	public TargetTrace getTargetTrace(int ion) {
+	public String save() {
 
-		return ions.get(ion);
+		return extract();
 	}
 
-	public Object[] toArray() {
+	private void loadSettings(String content) {
 
-		return ions.values().toArray();
-	}
-
-	public void add(TargetTraces targetTraces) {
-
-		Set<Integer> keys = targetTraces.getKeys();
-		for(Integer key : keys) {
-			ions.put(key, targetTraces.getTargetTrace(key));
+		if(!content.isEmpty()) {
+			String[] items = parseString(content);
+			if(items.length > 0) {
+				String name;
+				Integer ion;
+				String[] values;
+				for(String item : items) {
+					try {
+						values = item.split(VALUE_DELIMITER);
+						if(values.length > 1) {
+							name = values[0];
+							ion = Integer.parseInt(values[1]);
+							add(new TargetTrace(ion, name));
+						}
+					} catch(NumberFormatException e) {
+						logger.warn(e);
+					}
+				}
+			}
 		}
 	}
 
-	public Set<Integer> getKeys() {
+	private String[] parseString(String stringList) {
 
-		return ions.keySet();
+		String[] decodedArray;
+		if(stringList.contains(ENTRY_DELIMITER)) {
+			StringTokenizer stringTokenizer = new StringTokenizer(stringList, ENTRY_DELIMITER);
+			int arraySize = stringTokenizer.countTokens();
+			decodedArray = new String[arraySize];
+			for(int i = 0; i < arraySize; i++) {
+				decodedArray[i] = stringTokenizer.nextToken(ENTRY_DELIMITER);
+			}
+		} else {
+			decodedArray = new String[1];
+			decodedArray[0] = stringList;
+		}
+		return decodedArray;
+	}
+
+	public TargetTrace extractSettingInstance(String item) {
+
+		return extract(item);
+	}
+
+	public String extractSetting(TargetTrace setting) {
+
+		TargetTraces targetTraces = new TargetTraces();
+		targetTraces.add(setting);
+		return targetTraces.save();
+	}
+
+	private TargetTrace extract(String text) {
+
+		TargetTrace setting = null;
+
+		IStatus status = validator.validate(text);
+		if(status.isOK()) {
+			setting = validator.getSetting();
+		} else {
+			logger.warn(status.getMessage());
+		}
+
+		return setting;
+	}
+
+	private String extract() {
+
+		StringBuilder builder = new StringBuilder();
+		for(TargetTrace targetTrace : values()) {
+			if(targetTrace != null) {
+				builder.append(targetTrace.getName());
+				builder.append(VALUE_DELIMITER);
+				builder.append(targetTrace.getIon());
+				builder.append(ENTRY_DELIMITER);
+			}
+		}
+		return builder.toString();
 	}
 }

@@ -9,27 +9,28 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Matthias Mailänder - port to validation API
  *******************************************************************************/
-package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.validators;
+package org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.validators;
 
-import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.model.IndexNameMarker;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.TargetTrace;
 import org.eclipse.chemclipse.support.util.ValueParserSupport;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
 
-public class RetentionIndexAssignerValidator extends ValueParserSupport implements IValidator<String> {
+public class TargetTraceValidator extends ValueParserSupport implements IValidator<String> {
 
-	public static final String EXAMPLE_SINGLE = "600 | Hexane";
+	public static final String EXAMPLE_SINGLE = "water:18";
 
 	public static final String WHITE_SPACE = " ";
 	public static final String SEPARATOR_TOKEN = ";";
-	public static final String SEPARATOR_ENTRY = "|";
+	public static final String SEPARATOR_ENTRY = ":";
 
 	private static final String ERROR_MESSAGE = "";
 	private static final String ERROR_TOKEN = "The item must not contain: " + SEPARATOR_TOKEN;
 
-	private int retentionIndex = 0;
+	private int mz = 0;
 	private String name = "";
 
 	@Override
@@ -48,11 +49,11 @@ public class RetentionIndexAssignerValidator extends ValueParserSupport implemen
 			} else {
 				String[] values = text.trim().split("\\" + SEPARATOR_ENTRY); // The pipe needs to be escaped.
 				if(values.length >= 2) {
-					retentionIndex = parseInteger(values, 0);
-					if(retentionIndex <= 0) {
-						message = "Please type in a valid retention index.";
+					mz = parseInteger(values, 1);
+					if(mz <= 0) {
+						message = "Please type in a valid named trace.";
 					} else {
-						name = parseString(values, 1);
+						name = parseString(values, 0);
 					}
 				}
 			}
@@ -67,12 +68,12 @@ public class RetentionIndexAssignerValidator extends ValueParserSupport implemen
 
 	private void clear() {
 
-		retentionIndex = 0;
+		mz = 0;
 		name = "";
 	}
 
-	public IndexNameMarker getSetting() {
+	public TargetTrace getSetting() {
 
-		return new IndexNameMarker(retentionIndex, name);
+		return new TargetTrace(mz, name);
 	}
 }

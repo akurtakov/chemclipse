@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,7 +18,6 @@ import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.exception
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.internal.core.support.Calculator;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.l10n.Messages;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.TargetTraces;
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.result.WncClassifierResult;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.settings.ClassifierSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.core.AbstractChromatogramClassifier;
@@ -49,18 +48,12 @@ public class Classifier extends AbstractChromatogramClassifier {
 	@Override
 	public IProcessingInfo<IChromatogramClassifierResult> applyClassifier(IChromatogramSelection chromatogramSelection, IChromatogramClassifierSettings chromatogramClassifierSettings, IProgressMonitor monitor) {
 
-		ClassifierSettings classifierSettings;
-		if(chromatogramClassifierSettings instanceof ClassifierSettings settings) {
-			classifierSettings = settings;
-		} else {
-			classifierSettings = PreferenceSupplier.getClassifierSettings();
-		}
-
 		IProcessingInfo<IChromatogramClassifierResult> processingInfo = validate(chromatogramSelection, chromatogramClassifierSettings);
 		if(!processingInfo.hasErrorMessages()) {
 			try {
 				IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 				if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
+					ClassifierSettings classifierSettings = (ClassifierSettings)chromatogramClassifierSettings;
 					TargetTraces targetTraces = Calculator.calculateIonPercentages(chromatogramMSD, chromatogramSelection, classifierSettings);
 					WncClassifierResult chromatogramClassifierResult = new WncClassifierResult(ResultStatus.OK, Messages.chromatogramClassified, targetTraces);
 					IMeasurementResult<?> measurementResult = new MeasurementResult(Messages.wncClassifier, IDENTIFIER, Messages.percentageAreaOfSelectedIons, chromatogramClassifierResult);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -11,8 +11,6 @@
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model;
-
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.preferences.PreferenceSupplier;
 
 public class TargetTrace {
 
@@ -29,8 +27,8 @@ public class TargetTrace {
 		 * They are used to persist the entries.
 		 */
 		name = name.trim();
-		name = name.replace(PreferenceSupplier.VALUE_DELIMITER, "");
-		name = name.replace(PreferenceSupplier.ENTRY_DELIMITER, "");
+		name = name.replace(TargetTraces.VALUE_DELIMITER, "");
+		name = name.replace(TargetTraces.ENTRY_DELIMITER, "");
 		this.name = name;
 	}
 
@@ -42,6 +40,11 @@ public class TargetTrace {
 	public String getName() {
 
 		return name;
+	}
+
+	public void setName(String name) {
+
+		this.name = name;
 	}
 
 	public double getPercentageMaxIntensity() {
@@ -62,6 +65,12 @@ public class TargetTrace {
 	public void setPercentageSumIntensity(double percentageSumIntensity) {
 
 		this.percentageSumIntensity = percentageSumIntensity;
+	}
+
+	public void copyFrom(TargetTrace targetTrace) {
+
+		this.ion = targetTrace.getIon();
+		this.name = targetTrace.getName();
 	}
 
 	@Override

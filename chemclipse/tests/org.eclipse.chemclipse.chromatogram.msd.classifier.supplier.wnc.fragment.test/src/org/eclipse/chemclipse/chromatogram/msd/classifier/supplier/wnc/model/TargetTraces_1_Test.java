@@ -41,13 +41,13 @@ public class TargetTraces_1_Test {
 	@Test
 	public void testWNCIons_1() {
 
-		assertEquals(3, targetTraces.getKeys().size());
+		assertEquals(3, targetTraces.size());
 	}
 
 	@Test
 	public void testWNCIons_2() {
 
-		targetTrace = targetTraces.getTargetTrace(18);
+		targetTrace = targetTraces.get(18);
 		assertEquals(18, targetTrace.getIon());
 		assertEquals("Water", targetTrace.getName());
 	}
@@ -55,7 +55,7 @@ public class TargetTraces_1_Test {
 	@Test
 	public void testWNCIons_3() {
 
-		targetTrace = targetTraces.getTargetTrace(28);
+		targetTrace = targetTraces.get(28);
 		assertEquals(28, targetTrace.getIon());
 		assertEquals("Nitrogen", targetTrace.getName());
 	}
@@ -63,7 +63,7 @@ public class TargetTraces_1_Test {
 	@Test
 	public void testWNCIons_4() {
 
-		targetTrace = targetTraces.getTargetTrace(44);
+		targetTrace = targetTraces.get(44);
 		assertEquals(44, targetTrace.getIon());
 		assertEquals("Carbon dioxide", targetTrace.getName());
 	}
@@ -71,7 +71,7 @@ public class TargetTraces_1_Test {
 	@Test
 	public void testWNCIons_5() {
 
-		targetTrace = targetTraces.getTargetTrace(45);
+		targetTrace = targetTraces.get(45);
 		assertNull(targetTrace);
 	}
 
@@ -80,8 +80,8 @@ public class TargetTraces_1_Test {
 
 		targetTraces.remove(18);
 		targetTraces.remove(28);
-		assertEquals(1, targetTraces.getKeys().size());
-		targetTrace = targetTraces.getTargetTrace(44);
+		assertEquals(1, targetTraces.size());
+		targetTrace = targetTraces.get(44);
 		assertEquals(44, targetTrace.getIon());
 		assertEquals("Carbon dioxide", targetTrace.getName());
 	}
@@ -91,10 +91,10 @@ public class TargetTraces_1_Test {
 
 		targetTraces.remove(18);
 		targetTraces.remove(28);
-		assertEquals(1, targetTraces.getKeys().size());
-		targetTrace = targetTraces.getTargetTrace(18);
+		assertEquals(1, targetTraces.size());
+		targetTrace = targetTraces.get(18);
 		assertNull(targetTrace);
-		targetTrace = targetTraces.getTargetTrace(28);
+		targetTrace = targetTraces.get(28);
 		assertNull(targetTrace);
 	}
 
@@ -104,6 +104,6 @@ public class TargetTraces_1_Test {
 		targetTraces.remove(18);
 		targetTraces.remove(28);
 		targetTraces.remove(44);
-		assertEquals(0, targetTraces.getKeys().size());
+		assertEquals(0, targetTraces.size());
 	}
 }
