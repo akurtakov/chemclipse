@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.Locale;
 
 import org.eclipse.chemclipse.converter.core.IConverterSupport;
+import org.eclipse.chemclipse.converter.support.FileExtensionCompiler;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.pcr.converter.core.PlateConverterPCR;
 import org.eclipse.chemclipse.pcr.converter.support.IPlateConverterSupport;
@@ -163,8 +164,9 @@ public class ChartPCR extends LineChart {
 					}
 					FileDialog fileDialog = new FileDialog(shell, SWT.SAVE);
 					fileDialog.setText(ExtensionMessages.pcrExport);
-					fileDialog.setFileName(plate.getName() + "." + supplier.getFileExtension()); //$NON-NLS-1$
-					fileDialog.setFilterExtensions("*" + supplier.getFileExtension()); //$NON-NLS-1$
+					fileDialog.setFileName(plate.getName());
+					FileExtensionCompiler fileExtensionCompiler = new FileExtensionCompiler(supplier.getFileExtension(), false);
+					fileDialog.setFilterExtensions(fileExtensionCompiler.getCompiledFileExtension());
 					fileDialog.setFilterNames(supplier.getFilterName());
 					String pathname = fileDialog.open();
 					if(pathname != null) {
