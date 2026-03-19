@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -65,77 +65,5 @@ public class ChromatogramType implements EventHandler {
 			eclipseContext.set(CHROMATOGRAM_SELECTION, chromatogramSelection);
 			eclipseContext.set(CHROMATOGRAM_TYPE, chromatogramType);
 		}
-	}
-
-	/**
-	 * Get the current chromatogram selection.
-	 * 
-	 * @return {@link IChromatogramSelection}
-	 */
-	public static IChromatogramSelection getChromatogramSelection() {
-
-		IEclipseContext eclipseContext = Activator.getDefault().getEclipseContext();
-		Object object = eclipseContext.get(ChromatogramType.CHROMATOGRAM_SELECTION);
-
-		IChromatogramSelection currentChromatogramSelection = null;
-		if(object instanceof IChromatogramSelection chromatogramSelection) {
-			currentChromatogramSelection = chromatogramSelection;
-		}
-
-		return currentChromatogramSelection;
-	}
-
-	/**
-	 * Get the current chromatogram selection.
-	 * 
-	 * @return {@link IChromatogramSelectionMSD}
-	 */
-	public static IChromatogramSelectionMSD getChromatogramSelectionMSD() {
-
-		IEclipseContext eclipseContext = Activator.getDefault().getEclipseContext();
-		Object object = eclipseContext.get(ChromatogramType.CHROMATOGRAM_SELECTION);
-
-		IChromatogramSelectionMSD currentChromatogramSelectionMSD = null;
-		if(object instanceof IChromatogramSelectionMSD chromatogramSelectionMSD) {
-			currentChromatogramSelectionMSD = chromatogramSelectionMSD;
-		}
-
-		return currentChromatogramSelectionMSD;
-	}
-
-	/**
-	 * Get the current chromatogram selection.
-	 * 
-	 * @return {@link IChromatogramSelectionCSD}
-	 */
-	public static IChromatogramSelectionCSD getChromatogramSelectionCSD() {
-
-		IEclipseContext eclipseContext = Activator.getDefault().getEclipseContext();
-		Object object = eclipseContext.get(ChromatogramType.CHROMATOGRAM_SELECTION);
-
-		IChromatogramSelectionCSD currentChromatogramSelectionCSD = null;
-		if(object instanceof IChromatogramSelectionCSD chromatogramSelectionCSD) {
-			currentChromatogramSelectionCSD = chromatogramSelectionCSD;
-		}
-
-		return currentChromatogramSelectionCSD;
-	}
-
-	/**
-	 * Get the current chromatogram selection.
-	 * 
-	 * @return {@link IChromatogramSelectionWSD}
-	 */
-	public static IChromatogramSelectionWSD getChromatogramSelectionWSD() {
-
-		IEclipseContext eclipseContext = Activator.getDefault().getEclipseContext();
-		Object object = eclipseContext.get(ChromatogramType.CHROMATOGRAM_SELECTION);
-
-		IChromatogramSelectionWSD currentChromatogramSelectionWSD = null;
-		if(object instanceof IChromatogramSelectionWSD chromatogramSelectionWSD) {
-			currentChromatogramSelectionWSD = chromatogramSelectionWSD;
-		}
-
-		return currentChromatogramSelectionWSD;
 	}
 }
