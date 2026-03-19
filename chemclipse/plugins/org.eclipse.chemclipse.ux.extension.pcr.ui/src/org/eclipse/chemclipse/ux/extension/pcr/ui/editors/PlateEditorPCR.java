@@ -67,7 +67,6 @@ public class PlateEditorPCR implements IChemClipseEditor {
 	private final EModelService modelService;
 	private final MApplication application;
 
-	private File plateFile;
 	private IPlate plate = null;
 	private ExtendedPCRPlateUI extendedPCRPlateUI;
 
@@ -107,11 +106,7 @@ public class PlateEditorPCR implements IChemClipseEditor {
 	@Persist
 	public void save() {
 
-		/*
-		 * Save the data is not supported yet.
-		 * dirtyable.setDirty(false);
-		 */
-		System.out.println("Plate File: " + plateFile);
+		dirtyable.setDirty(false);
 		saveAs();
 	}
 
@@ -184,7 +179,6 @@ public class PlateEditorPCR implements IChemClipseEditor {
 			Thread.currentThread().interrupt();
 		}
 
-		plateFile = file;
 		return runnable.getPlate();
 	}
 
