@@ -6,7 +6,7 @@
       <PlateSupplier
             description="Exports PCR Plate Data"
             exportConverter="org.eclipse.chemclipse.pcr.report.supplier.txt.core.PCRExportConverter"
-            fileExtension="txt"
+            fileExtension=".txt"
             fileName=""
             filterName="PCR Plate Report (*.txt)"
             id="org.eclipse.chemclipse.pcr.report.supplier.txt"

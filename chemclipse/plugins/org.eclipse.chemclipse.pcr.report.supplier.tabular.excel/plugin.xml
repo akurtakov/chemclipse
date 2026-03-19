@@ -6,7 +6,7 @@
       <PlateSupplier
             description="Exports PCR Plate Data to Excel"
             exportConverter="org.eclipse.chemclipse.pcr.report.supplier.tabular.excel.core.PCRExportConverter"
-            fileExtension="xlsx"
+            fileExtension=".xlsx"
             fileName=""
             filterName="Tabular Plate Report (*.xlsx)"
             id="org.eclipse.chemclipse.pcr.report.supplier.tabular.excel"
