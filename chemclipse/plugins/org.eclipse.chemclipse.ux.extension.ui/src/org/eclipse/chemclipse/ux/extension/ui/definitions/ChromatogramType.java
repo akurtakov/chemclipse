@@ -13,6 +13,7 @@
 package org.eclipse.chemclipse.ux.extension.ui.definitions;
 
 import org.eclipse.chemclipse.csd.model.core.selection.IChromatogramSelectionCSD;
+import org.eclipse.chemclipse.fsd.model.core.selection.IChromatogramSelectionFSD;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
@@ -30,6 +31,7 @@ public class ChromatogramType implements EventHandler {
 	public static final String CHROMATOGRAM_TYPE_MSD = "CHROMATOGRAM_TYPE_MSD";
 	public static final String CHROMATOGRAM_TYPE_CSD = "CHROMATOGRAM_TYPE_CSD";
 	public static final String CHROMATOGRAM_TYPE_WSD = "CHROMATOGRAM_TYPE_WSD";
+	public static final String CHROMATOGRAM_TYPE_FSD = "CHROMATOGRAM_TYPE_FSD";
 	public static final String CHROMATOGRAM_TYPE_XXD = "CHROMATOGRAM_TYPE_XXD";
 	public static final String CHROMATOGRAM_TYPE_NONE = "CHROMATOGRAM_TYPE_NONE";
 
@@ -43,12 +45,15 @@ public class ChromatogramType implements EventHandler {
 		if(topic.equals(IChemClipseEvents.TOPIC_CHROMATOGRAM_XXD_UPDATE_SELECTION)) {
 			Object object = event.getProperty(IChemClipseEvents.EVENT_BROKER_DATA);
 			if(object instanceof IChromatogramSelection chromatogramSelectionEvent) {
+				chromatogramSelection = chromatogramSelectionEvent;
 				if(chromatogramSelectionEvent instanceof IChromatogramSelectionCSD) {
 					chromatogramType = CHROMATOGRAM_TYPE_CSD;
 				} else if(chromatogramSelectionEvent instanceof IChromatogramSelectionMSD) {
 					chromatogramType = CHROMATOGRAM_TYPE_MSD;
 				} else if(chromatogramSelectionEvent instanceof IChromatogramSelectionWSD) {
 					chromatogramType = CHROMATOGRAM_TYPE_WSD;
+				} else if(chromatogramSelectionEvent instanceof IChromatogramSelectionFSD) {
+					chromatogramType = CHROMATOGRAM_TYPE_FSD;
 				}
 			}
 		} else if(topic.equals(IChemClipseEvents.TOPIC_EDITOR_CHROMATOGRAM_CLOSE)) {
