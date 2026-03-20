@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -55,22 +55,6 @@ public class CombinedIntegrator {
 		ICombinedIntegrator integrator = getCombinedIntegrator(integratorId);
 		if(integrator != null) {
 			processingInfo = integrator.integrate(chromatogramSelection, combinedIntegrationSettings, monitor);
-		} else {
-			processingInfo = getNoIntegratorAvailableProcessingInfo();
-		}
-		return processingInfo;
-	}
-
-	public static IProcessingInfo<ICombinedIntegrationResult> integrate(IChromatogramSelection chromatogramSelection, String integratorId, IProgressMonitor monitor) {
-
-		return integrate(chromatogramSelection, getCombinedIntegrator(integratorId), monitor);
-	}
-
-	public static IProcessingInfo<ICombinedIntegrationResult> integrate(IChromatogramSelection chromatogramSelection, ICombinedIntegrator integrator, IProgressMonitor monitor) {
-
-		IProcessingInfo<ICombinedIntegrationResult> processingInfo;
-		if(integrator != null) {
-			processingInfo = integrator.integrate(chromatogramSelection, monitor);
 		} else {
 			processingInfo = getNoIntegratorAvailableProcessingInfo();
 		}

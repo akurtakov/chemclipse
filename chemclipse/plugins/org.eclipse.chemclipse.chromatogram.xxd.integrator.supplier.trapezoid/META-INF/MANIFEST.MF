@@ -20,7 +20,6 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.core,
- org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.preferences,
  org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.processor,
  org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.settings
 Bundle-Vendor: ChemClipse

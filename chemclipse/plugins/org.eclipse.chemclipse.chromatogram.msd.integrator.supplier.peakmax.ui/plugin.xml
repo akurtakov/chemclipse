@@ -2,15 +2,6 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.eclipse.ui.preferencePages">
-      <page
-            category="org.eclipse.chemclipse.chromatogram.xxd.integrator.ui.preferences.integratorPreferencePage"
-            class="org.eclipse.chemclipse.chromatogram.msd.integrator.supplier.peakmax.ui.preferences.PreferencePage"
-            id="org.eclipse.chemclipse.chromatogram.msd.peak.detector.supplier.peakmax.ui.preferences.peakMaxPeakIntegratorPreferencePage"
-            name="PeakMax Peak Integrator">
-      </page>
-   </extension>
-   <extension
          point="org.eclipse.chemclipse.xxd.process.ui.menu.icon">
       <icon
             class="org.eclipse.chemclipse.chromatogram.msd.integrator.supplier.peakmax.ui.icon.MenuIcon"

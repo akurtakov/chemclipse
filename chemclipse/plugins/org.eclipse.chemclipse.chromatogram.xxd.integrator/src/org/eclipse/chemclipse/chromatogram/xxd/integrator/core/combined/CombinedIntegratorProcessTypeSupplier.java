@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -67,8 +67,6 @@ public class CombinedIntegratorProcessTypeSupplier implements IProcessTypeSuppli
 
 			if(processSettings instanceof ICombinedIntegrationSettings) {
 				messageConsumer.addMessages(CombinedIntegrator.integrate(chromatogramSelection, processSettings, getId(), monitor));
-			} else {
-				messageConsumer.addMessages(CombinedIntegrator.integrate(chromatogramSelection, getId(), monitor));
 			}
 			return chromatogramSelection;
 		}

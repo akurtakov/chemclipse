@@ -68,8 +68,6 @@ public class PeakIntegratorProcessTypeSupplier implements IProcessTypeSupplier {
 
 			if(processSettings instanceof IPeakIntegrationSettings) {
 				messageConsumer.addMessages(PeakIntegrator.integrate(chromatogramSelection, processSettings, getId(), monitor));
-			} else {
-				messageConsumer.addMessages(PeakIntegrator.integrate(chromatogramSelection, getId(), monitor));
 			}
 			return chromatogramSelection;
 		}

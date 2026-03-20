@@ -17,5 +17,4 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.chemclipse.chromatogram.msd.integrator.supplier.sumarea.core,
- org.eclipse.chemclipse.chromatogram.msd.integrator.supplier.sumarea.preferences,
  org.eclipse.chemclipse.chromatogram.msd.integrator.supplier.sumarea.settings

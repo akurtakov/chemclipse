@@ -110,26 +110,6 @@ public class PeakIntegrator {
 	}
 
 	/**
-	 * Integrates a list of single peaks, sets the area.
-	 *
-	 * @param peaks
-	 * @param integratorId
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
-	 */
-	public static IProcessingInfo<IPeakIntegrationResults> integrate(List<? extends IPeak> peaks, String integratorId, IProgressMonitor monitor) {
-
-		IProcessingInfo<IPeakIntegrationResults> processingInfo;
-		IPeakIntegrator integrator = getPeakIntegrator(integratorId);
-		if(integrator != null) {
-			processingInfo = integrator.integrate(peaks, monitor);
-		} else {
-			processingInfo = getNoIntegratorAvailableProcessingInfo();
-		}
-		return processingInfo;
-	}
-
-	/**
 	 * Integrates the peaks in the chromatogram selection.
 	 *
 	 * @param chromatogramSelection
@@ -144,27 +124,6 @@ public class PeakIntegrator {
 		IPeakIntegrator integrator = getPeakIntegrator(integratorId);
 		if(integrator != null) {
 			processingInfo = integrator.integrate(chromatogramSelection, peakIntegrationSettings, monitor);
-			chromatogramSelection.getChromatogram().setDirty(true);
-		} else {
-			processingInfo = getNoIntegratorAvailableProcessingInfo();
-		}
-		return processingInfo;
-	}
-
-	/**
-	 * Integrates the peaks in the chromatogram selection.
-	 *
-	 * @param chromatogramSelection
-	 * @param integratorId
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
-	 */
-	public static IProcessingInfo<IPeakIntegrationResults> integrate(IChromatogramSelection chromatogramSelection, String integratorId, IProgressMonitor monitor) {
-
-		IProcessingInfo<IPeakIntegrationResults> processingInfo;
-		IPeakIntegrator integrator = getPeakIntegrator(integratorId);
-		if(integrator != null) {
-			processingInfo = integrator.integrate(chromatogramSelection, monitor);
 			chromatogramSelection.getChromatogram().setDirty(true);
 		} else {
 			processingInfo = getNoIntegratorAvailableProcessingInfo();

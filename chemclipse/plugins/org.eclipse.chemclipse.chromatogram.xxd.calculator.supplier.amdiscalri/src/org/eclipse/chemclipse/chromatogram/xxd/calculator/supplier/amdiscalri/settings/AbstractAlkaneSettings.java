@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,8 +20,10 @@ public class AbstractAlkaneSettings extends AbstractIdentifierSettings implement
 
 	@JsonProperty(value = "Number of Targets", defaultValue = "15")
 	private int numberOfTargets = 15;
+
 	@JsonProperty(value = "Min Match Factor", defaultValue = "80.0")
 	private float minMatchFactor = 80.0f;
+
 	@JsonProperty(value = "Min Reverse Match Factor", defaultValue = "80.0")
 	private float minReverseMatchFactor = 80.0f;
 

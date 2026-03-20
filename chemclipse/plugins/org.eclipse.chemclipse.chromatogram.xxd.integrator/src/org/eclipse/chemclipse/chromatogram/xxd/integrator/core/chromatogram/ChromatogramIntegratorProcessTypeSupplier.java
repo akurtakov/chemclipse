@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -68,8 +68,6 @@ public class ChromatogramIntegratorProcessTypeSupplier implements IProcessTypeSu
 
 			if(processSettings instanceof IChromatogramIntegrationSettings) {
 				messageConsumer.addMessages(ChromatogramIntegrator.integrate(chromatogramSelection, processSettings, getId(), monitor));
-			} else {
-				messageConsumer.addMessages(ChromatogramIntegrator.integrate(chromatogramSelection, getId(), monitor));
 			}
 			return chromatogramSelection;
 		}
