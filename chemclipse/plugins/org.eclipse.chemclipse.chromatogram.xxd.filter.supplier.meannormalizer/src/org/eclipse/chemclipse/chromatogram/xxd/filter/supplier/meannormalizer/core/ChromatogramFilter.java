@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,7 +18,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResu
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.meannormalizer.exceptions.FilterException;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.meannormalizer.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.meannormalizer.settings.FilterSettings;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IScan;
@@ -52,14 +51,6 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 			}
 		}
 		return processingInfo;
-	}
-
-	// TODO Junit
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		FilterSettings filterSettings = PreferenceSupplier.getFilterSettings();
-		return applyFilter(chromatogramSelection, filterSettings, monitor);
 	}
 
 	private void applyMeanNormalizerFilter(IChromatogramSelection chromatogramSelection) throws FilterException {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,9 +15,10 @@ package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.preferences.PreferenceSupplier;
-
 public class ScanRemoverPattern {
+
+	public static final Character REMOVE_SIGN = 'X';
+	public static final Character PRESERVE_SIGN = 'O';
 
 	private List<Boolean> patternRemove = new ArrayList<>();
 	private int position = 0;
@@ -64,9 +65,9 @@ public class ScanRemoverPattern {
 		 */
 		for(int i = 0; i < chars.length; i++) {
 			char charSign = chars[i];
-			if(PreferenceSupplier.PRESERVE_SIGN.equals(charSign)) {
+			if(PRESERVE_SIGN.equals(charSign)) {
 				patternRemove.add(false);
-			} else if(PreferenceSupplier.REMOVE_SIGN.equals(charSign)) {
+			} else if(REMOVE_SIGN.equals(charSign)) {
 				patternRemove.add(true);
 			}
 		}

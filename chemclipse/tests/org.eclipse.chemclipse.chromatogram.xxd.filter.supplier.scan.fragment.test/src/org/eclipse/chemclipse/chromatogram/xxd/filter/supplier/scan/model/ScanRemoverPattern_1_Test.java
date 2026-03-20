@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,14 +14,13 @@ package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.preferences.PreferenceSupplier;
 import org.junit.jupiter.api.Test;
 
 public class ScanRemoverPattern_1_Test {
 
 	private ScanRemoverPattern scanRemoverPattern;
-	private String PRESERVE = PreferenceSupplier.PRESERVE_SIGN.toString();
-	private String REMOVE = PreferenceSupplier.REMOVE_SIGN.toString();
+	private String PRESERVE = ScanRemoverPattern.PRESERVE_SIGN.toString();
+	private String REMOVE = ScanRemoverPattern.REMOVE_SIGN.toString();
 	private String pattern;
 
 	@Test

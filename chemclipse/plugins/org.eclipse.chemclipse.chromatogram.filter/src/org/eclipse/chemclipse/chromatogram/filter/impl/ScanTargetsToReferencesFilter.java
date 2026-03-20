@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,7 +14,6 @@ package org.eclipse.chemclipse.chromatogram.filter.impl;
 
 import java.util.List;
 
-import org.eclipse.chemclipse.chromatogram.filter.impl.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.filter.impl.settings.ScanTargetsToReferencesSettings;
 import org.eclipse.chemclipse.chromatogram.filter.l10n.Messages;
 import org.eclipse.chemclipse.chromatogram.filter.result.ChromatogramFilterResult;
@@ -42,13 +41,6 @@ public class ScanTargetsToReferencesFilter extends AbstractTransferFilter {
 		}
 
 		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		ScanTargetsToReferencesSettings settings = PreferenceSupplier.getScansToReferencesTransferSettings();
-		return applyFilter(chromatogramSelection, settings, monitor);
 	}
 
 	private void transferTargets(IChromatogramSelection chromatogramSelection, ScanTargetsToReferencesSettings settings) {

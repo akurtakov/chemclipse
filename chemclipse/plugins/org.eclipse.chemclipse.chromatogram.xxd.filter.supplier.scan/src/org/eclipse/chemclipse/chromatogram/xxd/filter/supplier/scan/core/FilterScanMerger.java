@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,7 +23,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.ChromatogramFilterResul
 import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResult;
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.settings.FilterSettingsScanMerger;
 import org.eclipse.chemclipse.csd.model.core.IScanCSD;
 import org.eclipse.chemclipse.csd.model.implementation.ScanCSD;
@@ -60,13 +59,6 @@ public class FilterScanMerger extends AbstractChromatogramFilter {
 			}
 		}
 		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		FilterSettingsScanMerger filterSettings = PreferenceSupplier.getScanMergerFilterSettings();
-		return applyFilter(chromatogramSelection, filterSettings, monitor);
 	}
 
 	private void applyScanMergerFilter(IChromatogramSelection chromatogramSelection, FilterSettingsScanMerger settings, IProgressMonitor monitor) {

@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.chemclipse.chromatogram.filter.core.chromatogram.AbstractChromatogramFilter;
-import org.eclipse.chemclipse.chromatogram.filter.impl.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.filter.result.ChromatogramFilterResult;
 import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResult;
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
@@ -40,7 +39,6 @@ import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.dialogs.IDialogConstants;
-import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
@@ -48,7 +46,6 @@ import jakarta.inject.Named;
 
 public class ChromatogramFilter extends AbstractChromatogramFilter {
 
-	private static final String DESCRIPTION = Messages.scanMaximaDetectorUI;
 	private static final String IDENTIFIER = "Scan Maxima Detector UI";
 
 	@Named(IServiceConstants.ACTIVE_SHELL)
@@ -59,13 +56,7 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = validate(chromatogramSelection, chromatogramFilterSettings);
 
-		final MaxDetectorFilterSettings filterSettings;
-		if(chromatogramFilterSettings instanceof MaxDetectorFilterSettings maxDetectorFilterSettings) {
-			filterSettings = maxDetectorFilterSettings;
-		} else {
-			filterSettings = PreferenceSupplier.getMaxDetectorFilterSettings();
-			processingInfo.addWarnMessage(DESCRIPTION, NLS.bind(Messages.settingsNotOfType, MaxDetectorFilterSettings.class));
-		}
+		final MaxDetectorFilterSettings filterSettings = (MaxDetectorFilterSettings)chromatogramFilterSettings;
 		/*
 		 * Process
 		 */
@@ -90,13 +81,6 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 			processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, Messages.scanMaximaDetectionSuccessful));
 		}
 		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		IChromatogramFilterSettings filterSettings = new MaxDetectorFilterSettings();
-		return applyFilter(chromatogramSelection, filterSettings, monitor);
 	}
 
 	private void detectScanMaxima(Shell shell, IChromatogramSelection chromatogramSelection, MaxDetectorFilterSettings filterSettings) {

@@ -47,10 +47,4 @@ public class BaselineFilter extends AbstractChromatogramFilter {
 		chromatogramSelection.getChromatogram().setDirty(true);
 		return new ProcessingInfo<>();
 	}
-
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		return applyFilter(chromatogramSelection, null, monitor);
-	}
 }

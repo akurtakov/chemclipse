@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -34,17 +34,6 @@ public interface IChromatogramFilter {
 	 * @return {@link IProcessingInfo}
 	 */
 	IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IChromatogramFilterSettings chromatogramFilterSettings, IProgressMonitor monitor);
-
-	/**
-	 * Apply the filter in the given chromatogram selection.
-	 * Return an {@link IProcessingInfo} instance.<br/>
-	 * If there is no monitor instance, use a {@link NullProgressMonitor}.
-	 *
-	 * @param chromatogramSelection
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
-	 */
-	IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor);
 
 	/**
 	 * Validates the selection and settings and returns a process info instance.

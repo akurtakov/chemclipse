@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025, 2026  Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -54,13 +54,6 @@ public class FilterBufferIdentifier extends AbstractChromatogramFilter {
 			}
 		}
 		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		FilterSettingsBufferIdentifier settings = new FilterSettingsBufferIdentifier();
-		return applyFilter(chromatogramSelection, settings, monitor);
 	}
 
 	private void applyProcessor(IChromatogramSelection chromatogramSelection, BufferOption bufferOption, IProgressMonitor monitor) {

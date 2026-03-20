@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,7 +24,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResu
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.model.RetentionIndexOption;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.settings.FilterSettingsRetentionIndexSelector;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IPeak;
@@ -55,13 +54,6 @@ public class FilterRetentionIndexSelector extends AbstractChromatogramFilter {
 			}
 		}
 		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		FilterSettingsRetentionIndexSelector filterSettings = PreferenceSupplier.getFilterSettingsRetentionIndexSelector();
-		return applyFilter(chromatogramSelection, filterSettings, monitor);
 	}
 
 	private void selectRetentionIndices(IChromatogramSelection chromatogramSelection, FilterSettingsRetentionIndexSelector settings) {

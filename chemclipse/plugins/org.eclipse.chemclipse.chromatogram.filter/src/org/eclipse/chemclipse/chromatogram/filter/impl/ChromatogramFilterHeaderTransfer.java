@@ -13,7 +13,6 @@
 package org.eclipse.chemclipse.chromatogram.filter.impl;
 
 import org.eclipse.chemclipse.chromatogram.filter.core.chromatogram.AbstractChromatogramFilter;
-import org.eclipse.chemclipse.chromatogram.filter.impl.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.filter.impl.settings.FilterSettingsHeaderTransfer;
 import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResult;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
@@ -47,12 +46,5 @@ public class ChromatogramFilterHeaderTransfer extends AbstractChromatogramFilter
 		}
 
 		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		FilterSettingsHeaderTransfer filterSettings = PreferenceSupplier.getFilterSettingsHeaderTransfer();
-		return applyFilter(chromatogramSelection, filterSettings, monitor);
 	}
 }

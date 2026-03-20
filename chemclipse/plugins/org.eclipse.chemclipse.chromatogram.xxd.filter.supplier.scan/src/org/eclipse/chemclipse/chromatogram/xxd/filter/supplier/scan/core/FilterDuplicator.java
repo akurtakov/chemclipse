@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,7 +20,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResu
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.calculator.ScanProcessor;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.settings.FilterSettingsDelayInterval;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.settings.FilterSettingsDuplicator;
 import org.eclipse.chemclipse.model.core.IChromatogram;
@@ -46,13 +45,6 @@ public class FilterDuplicator extends AbstractChromatogramFilter {
 			}
 		}
 		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		FilterSettingsDuplicator filterSettings = PreferenceSupplier.getDuplicatorFilterSettings();
-		return applyFilter(chromatogramSelection, filterSettings, monitor);
 	}
 
 	private void applyScanDuplicatorFilter(IChromatogramSelection chromatogramSelection, FilterSettingsDuplicator settings, IProgressMonitor monitor) {

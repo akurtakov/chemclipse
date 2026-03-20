@@ -13,7 +13,6 @@
 package org.eclipse.chemclipse.chromatogram.filter.impl;
 
 import org.eclipse.chemclipse.chromatogram.filter.core.chromatogram.AbstractChromatogramFilter;
-import org.eclipse.chemclipse.chromatogram.filter.impl.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.filter.impl.settings.FilterSettingsTransform;
 import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResult;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
@@ -59,13 +58,6 @@ public class ChromatogramFilterTransform extends AbstractChromatogramFilter {
 		}
 
 		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		FilterSettingsTransform filterSettings = PreferenceSupplier.getFilterSettingsTransform();
-		return applyFilter(chromatogramSelection, filterSettings, monitor);
 	}
 
 	private IChromatogramMSD convertToMSD(IChromatogramCSD chromatogramCSD, int mz) {

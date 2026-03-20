@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,8 +17,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.ChromatogramFilterResul
 import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResult;
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.invert.preferences.PreferenceSupplier;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.invert.settings.FilterSettings;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
@@ -37,13 +35,6 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 			processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "The chromatogram selection was successfully inverted."));
 		}
 		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		FilterSettings filterSettings = PreferenceSupplier.getFilterSettings();
-		return applyFilter(chromatogramSelection, filterSettings, monitor);
 	}
 
 	private void applyFilter(IChromatogramSelection chromatogramSelection) {

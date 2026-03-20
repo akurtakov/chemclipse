@@ -18,7 +18,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResu
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.baselinesubtract.processor.BaselineSubtractProcessor;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.baselinesubtract.settings.ChromatogramFilterSettings;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -35,12 +34,5 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 			processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "The baseline was successfully removed."));
 		}
 		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		ChromatogramFilterSettings filterSettings = new ChromatogramFilterSettings();
-		return applyFilter(chromatogramSelection, filterSettings, monitor);
 	}
 }

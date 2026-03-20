@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,7 +13,6 @@
 package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.normalizer.settings;
 
 import org.eclipse.chemclipse.chromatogram.filter.settings.AbstractChromatogramFilterSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.normalizer.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.support.settings.FloatSettingsProperty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,8 +22,8 @@ public class FilterSettings extends AbstractChromatogramFilterSettings {
 
 	@JsonProperty(value = "Normalization Base", defaultValue = "1000")
 	@JsonPropertyDescription(value = "Use this value to normalize the chromatogram.")
-	@FloatSettingsProperty(minValue = PreferenceSupplier.MIN_NORMALIZATION_BASE, maxValue = PreferenceSupplier.MAX_NORMALIZATION_BASE)
-	private float normalizationBase = PreferenceSupplier.DEF_NORMALIZATION_BASE;
+	@FloatSettingsProperty(minValue = 1.0f, maxValue = Float.MAX_VALUE)
+	private float normalizationBase = 1000.0f;
 
 	public float getNormalizationBase() {
 
@@ -33,7 +32,7 @@ public class FilterSettings extends AbstractChromatogramFilterSettings {
 
 	public void setNormalizationBase(float normalizationBase) {
 
-		if(normalizationBase >= PreferenceSupplier.MIN_NORMALIZATION_BASE && !Float.isNaN(normalizationBase) && !Float.isInfinite(normalizationBase)) {
+		if(normalizationBase >= 1.0f && !Float.isNaN(normalizationBase) && !Float.isInfinite(normalizationBase)) {
 			this.normalizationBase = normalizationBase;
 		}
 	}

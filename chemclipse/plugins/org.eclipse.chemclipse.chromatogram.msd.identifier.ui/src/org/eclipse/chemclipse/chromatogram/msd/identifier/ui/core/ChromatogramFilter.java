@@ -69,13 +69,6 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 		return processingInfo;
 	}
 
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		IChromatogramFilterSettings filterSettings = new FilterSettings();
-		return applyFilter(chromatogramSelection, filterSettings, monitor);
-	}
-
 	private void identifyScanMaxima(Shell shell, IChromatogramSelection chromatogramSelection, Display display, IProgressMonitor monitor) {
 
 		ChromatogramFilterDialog dialog = new ChromatogramFilterDialog(shell);

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -14,7 +14,6 @@ package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.normalizer.setti
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.normalizer.preferences.PreferenceSupplier;
 import org.junit.jupiter.api.Test;
 
 public class NormalizerFilterSettings_1_Test {
@@ -24,7 +23,7 @@ public class NormalizerFilterSettings_1_Test {
 	@Test
 	public void testGetNormalizationBase_1() {
 
-		assertEquals(PreferenceSupplier.DEF_NORMALIZATION_BASE, normalizerFilterSettings.getNormalizationBase(), 0);
+		assertEquals(1000.0f, normalizerFilterSettings.getNormalizationBase(), 0);
 	}
 
 	@Test
@@ -45,34 +44,34 @@ public class NormalizerFilterSettings_1_Test {
 	public void testGetNormalizationBase_4() {
 
 		normalizerFilterSettings.setNormalizationBase(0.0f);
-		assertEquals(PreferenceSupplier.DEF_NORMALIZATION_BASE, normalizerFilterSettings.getNormalizationBase(), 0);
+		assertEquals(1000.0f, normalizerFilterSettings.getNormalizationBase(), 0);
 	}
 
 	@Test
 	public void testGetNormalizationBase_5() {
 
 		normalizerFilterSettings.setNormalizationBase(-1.0f);
-		assertEquals(PreferenceSupplier.DEF_NORMALIZATION_BASE, normalizerFilterSettings.getNormalizationBase(), 0);
+		assertEquals(1000.0f, normalizerFilterSettings.getNormalizationBase(), 0);
 	}
 
 	@Test
 	public void testGetNormalizationBase_6() {
 
 		normalizerFilterSettings.setNormalizationBase(Float.NaN);
-		assertEquals(PreferenceSupplier.DEF_NORMALIZATION_BASE, normalizerFilterSettings.getNormalizationBase(), 0);
+		assertEquals(1000.0f, normalizerFilterSettings.getNormalizationBase(), 0);
 	}
 
 	@Test
 	public void testGetNormalizationBase_7() {
 
 		normalizerFilterSettings.setNormalizationBase(Float.POSITIVE_INFINITY);
-		assertEquals(PreferenceSupplier.DEF_NORMALIZATION_BASE, normalizerFilterSettings.getNormalizationBase(), 0);
+		assertEquals(1000.0f, normalizerFilterSettings.getNormalizationBase(), 0);
 	}
 
 	@Test
 	public void testGetNormalizationBase_8() {
 
 		normalizerFilterSettings.setNormalizationBase(Float.NEGATIVE_INFINITY);
-		assertEquals(PreferenceSupplier.DEF_NORMALIZATION_BASE, normalizerFilterSettings.getNormalizationBase(), 0);
+		assertEquals(1000.0f, normalizerFilterSettings.getNormalizationBase(), 0);
 	}
 }

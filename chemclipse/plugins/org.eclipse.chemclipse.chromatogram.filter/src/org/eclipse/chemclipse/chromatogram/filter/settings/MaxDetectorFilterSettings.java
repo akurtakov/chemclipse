@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,7 +12,6 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.filter.settings;
 
-import org.eclipse.chemclipse.chromatogram.filter.impl.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.support.settings.FloatSettingsProperty;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
 import org.eclipse.chemclipse.support.settings.LabelProperty;
@@ -23,18 +22,21 @@ public class MaxDetectorFilterSettings extends AbstractChromatogramFilterSetting
 
 	@JsonProperty(value = "Target Name", defaultValue = "M")
 	@LabelProperty(value = "%TargetName", tooltip = "%TargetNameDescription")
-	private String targetName = PreferenceSupplier.DEF_MAX_DETECTOR_TARGET_NAME;
+	private String targetName = "M";
+
 	@JsonProperty(value = "Match Factor", defaultValue = "80.0")
 	@LabelProperty(value = "%MatchFactor")
-	@FloatSettingsProperty(minValue = PreferenceSupplier.MIN_FACTOR, maxValue = PreferenceSupplier.MAX_FACTOR)
-	private float matchFactor = PreferenceSupplier.DEF_MAX_DETECTOR_MATCH_FACTOR;
+	@FloatSettingsProperty(minValue = 0.0f, maxValue = 100.0f)
+	private float matchFactor = 80.0f;
+
 	@JsonProperty(value = "Minima", defaultValue = "false")
 	@LabelProperty(value = "%Minima", tooltip = "%MinimaDescription")
-	private boolean detectMinima = PreferenceSupplier.DEF_MAX_DETECTOR_MINIMA;
+	private boolean detectMinima = false;
+
 	@JsonProperty(value = "Count", defaultValue = "0")
 	@LabelProperty(value = "%Count", tooltip = "%CountDescription")
-	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_COUNT_MARKER, maxValue = PreferenceSupplier.MAX_COUNT_MARKER)
-	private int count = PreferenceSupplier.DEF_MAX_DETECTOR_COUNT;
+	@IntSettingsProperty(minValue = 0, maxValue = Integer.MAX_VALUE)
+	private int count = 0;
 
 	public String getTargetName() {
 

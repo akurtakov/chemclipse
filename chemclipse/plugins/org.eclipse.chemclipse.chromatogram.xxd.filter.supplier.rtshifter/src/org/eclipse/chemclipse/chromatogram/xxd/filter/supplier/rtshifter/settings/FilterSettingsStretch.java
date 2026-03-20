@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,7 +13,6 @@
 package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.rtshifter.settings;
 
 import org.eclipse.chemclipse.chromatogram.filter.settings.AbstractChromatogramFilterSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.rtshifter.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,11 +22,12 @@ public class FilterSettingsStretch extends AbstractChromatogramFilterSettings {
 
 	@JsonProperty(value = "Scan Delay [ms]", defaultValue = "0")
 	@JsonPropertyDescription(value = "Set the scan delay.")
-	@IntSettingsProperty(minValue = PreferenceSupplier.STRETCH_MILLISECONDS_SCAN_DELAY_MIN, maxValue = PreferenceSupplier.STRETCH_MILLISECONDS_SCAN_DELAY_MAX)
+	@IntSettingsProperty(minValue = 0, maxValue = Integer.MAX_VALUE)
 	private int scanDelay = 0;
+
 	@JsonProperty(value = "Chromatogram Runtime [ms]", defaultValue = "300000")
 	@JsonPropertyDescription(value = "Set the length of the chromatogram.")
-	@IntSettingsProperty(minValue = PreferenceSupplier.STRETCH_MILLISECONDS_LENGTH_MIN, maxValue = PreferenceSupplier.STRETCH_MILLISECONDS_LENGTH_MAX)
+	@IntSettingsProperty(minValue = 0, maxValue = Integer.MAX_VALUE)
 	private int chromatogramLength = 300000;
 
 	public FilterSettingsStretch() {
