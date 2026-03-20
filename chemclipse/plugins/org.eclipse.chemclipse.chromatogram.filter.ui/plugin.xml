@@ -2,15 +2,6 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.eclipse.ui.preferencePages">
-      <page
-      		category="org.eclipse.chemclipse.rcp.app.ui.preferences.preferencePage"      
-            class="org.eclipse.chemclipse.chromatogram.filter.ui.preferences.FilterPreferencePage"
-            id="org.eclipse.chemclipse.chromatogram.filter.ui.preferences.filterPreferencePage"
-            name="Filter">
-      </page>
-   </extension>
-   <extension
          point="org.eclipse.chemclipse.chromatogram.filter.chromatogramFilterSupplier">
       <ChromatogramFilterSupplier
             description="This filter tries to detect maxima in the chromatogram range."
