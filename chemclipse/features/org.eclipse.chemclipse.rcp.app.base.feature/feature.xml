@@ -233,10 +233,6 @@
          version="0.0.0"/>
 
    <plugin
-         id="org.eclipse.chemclipse.chromatogram.csd.filter.ui"
-         version="0.0.0"/>
-
-   <plugin
          id="org.eclipse.chemclipse.chromatogram.filter"
          version="0.0.0"/>
 
@@ -250,10 +246,6 @@
 
    <plugin
          id="org.eclipse.chemclipse.chromatogram.wsd.filter"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.chemclipse.chromatogram.wsd.filter.ui"
          version="0.0.0"/>
 
    <plugin
