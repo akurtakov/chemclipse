@@ -13,15 +13,12 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.identifier.supplier.nist.settings;
 
-import java.io.File;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.msd.identifier.settings.IPeakIdentifierSettingsMSD;
 import org.eclipse.chemclipse.model.identifier.IIdentifierSettings;
 import org.eclipse.chemclipse.support.literature.LiteratureReference;
 import org.eclipse.chemclipse.support.settings.ByteSettingsProperty;
-import org.eclipse.chemclipse.support.settings.FileSettingProperty;
-import org.eclipse.chemclipse.support.settings.FileSettingProperty.DialogType;
 import org.eclipse.chemclipse.support.settings.FloatSettingsProperty;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
 
@@ -29,11 +26,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 public class PeakIdentifierSettings implements ISearchSettings, IPeakIdentifierSettingsMSD {
-
-	@JsonProperty(value = "NIST Folder (MSSEARCH)", defaultValue = "")
-	@JsonPropertyDescription("Select the NIST-DB folder, called MSSEARCH.")
-	@FileSettingProperty(dialogType = DialogType.OPEN_DIALOG, onlyDirectory = true)
-	private File nistFolder = null;
 
 	@JsonProperty(value = "Limit Match Factor", defaultValue = "80.0")
 	@JsonPropertyDescription(value = "Run an identification if no target exists with a Match Factor >= the given limit.")
@@ -61,17 +53,6 @@ public class PeakIdentifierSettings implements ISearchSettings, IPeakIdentifierS
 	@JsonPropertyDescription(value = "The timeout in minutes to stop the action if something goes wrong.")
 	@IntSettingsProperty
 	private int timeoutInMinutes = 20;
-
-	@Override
-	public File getNistFolder() {
-
-		return nistFolder;
-	}
-
-	public void setNistFolder(File nistFolder) {
-
-		this.nistFolder = nistFolder;
-	}
 
 	@Override
 	public float getLimitMatchFactor() {

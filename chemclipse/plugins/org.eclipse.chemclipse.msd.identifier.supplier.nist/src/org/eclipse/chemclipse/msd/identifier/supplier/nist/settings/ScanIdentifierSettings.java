@@ -13,12 +13,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.identifier.supplier.nist.settings;
 
-import java.io.File;
-
 import org.eclipse.chemclipse.model.identifier.IIdentifierSettings;
 import org.eclipse.chemclipse.support.settings.ByteSettingsProperty;
-import org.eclipse.chemclipse.support.settings.FileSettingProperty;
-import org.eclipse.chemclipse.support.settings.FileSettingProperty.DialogType;
 import org.eclipse.chemclipse.support.settings.FloatSettingsProperty;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
 
@@ -26,11 +22,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 public class ScanIdentifierSettings extends AbstractScanSearchSettings {
-
-	@JsonProperty(value = "NIST Folder (MSSEARCH)", defaultValue = "")
-	@JsonPropertyDescription("Select the NIST-DB folder, called MSSEARCH.")
-	@FileSettingProperty(dialogType = DialogType.OPEN_DIALOG, onlyDirectory = true, allowEmpty = false)
-	private File nistFolder = null;
 
 	@JsonProperty(value = "Limit Match Factor", defaultValue = "80.0")
 	@JsonPropertyDescription(value = "Run an identification if no target exists with a Match Factor >= the given limit.")
@@ -58,17 +49,6 @@ public class ScanIdentifierSettings extends AbstractScanSearchSettings {
 	@JsonPropertyDescription(value = "The timeout in minutes to stop the background action if something goes wrong.")
 	@IntSettingsProperty
 	private int timeoutInMinutes = 20;
-
-	@Override
-	public File getNistFolder() {
-
-		return nistFolder;
-	}
-
-	public void setNistFolder(File nistFolder) {
-
-		this.nistFolder = nistFolder;
-	}
 
 	@Override
 	public float getLimitMatchFactor() {
