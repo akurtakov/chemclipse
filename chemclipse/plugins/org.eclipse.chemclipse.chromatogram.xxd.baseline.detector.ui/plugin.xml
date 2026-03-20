@@ -2,15 +2,6 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.eclipse.ui.preferencePages">
-      <page
-      		category="org.eclipse.chemclipse.rcp.app.ui.preferences.preferencePage"      
-            class="org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.ui.preferences.PreferencePage"
-            id="org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.ui.preferences.baselineDetectorPreferencePage"
-            name="Baseline Detector">
-      </page>
-   </extension>
-   <extension
          point="org.eclipse.chemclipse.xxd.process.ui.menu.icon">
       <icon
             class="org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.ui.icon.BaselineDeleteMenuIcon"
