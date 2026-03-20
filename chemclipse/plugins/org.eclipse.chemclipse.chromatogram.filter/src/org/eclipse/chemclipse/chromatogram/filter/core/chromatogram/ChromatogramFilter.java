@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -66,35 +66,6 @@ public class ChromatogramFilter {
 		if(chromatogramFilter != null) {
 			try {
 				processingInfo = chromatogramFilter.applyFilter(chromatogramSelection, chromatogramFilterSettings, monitor);
-			} catch(Exception e) {
-				logger.error(e);
-				processingInfo = new ProcessingInfo<>();
-				processingInfo.addErrorMessage(ICategories.CHROMATOGRAM_FILTER, e.getLocalizedMessage());
-			}
-		} else {
-			processingInfo = new ProcessingInfo<>();
-			processingInfo.addErrorMessage(ICategories.CHROMATOGRAM_FILTER, Messages.noChromatogramFilterAvailable);
-		}
-		return processingInfo;
-	}
-
-	// TODO JUnit
-	/**
-	 * Applies the specified filter, but retrieves the IChromatogramFilterSettings dynamically.<br/>
-	 * See also method: applyFilter(IChromatogramSelection chromatogramSelection, IChromatogramFilterSettings chromatogramFilterSettings, String filterId, IProgressMonitor monitor)
-	 * 
-	 * @param chromatogramSelection
-	 * @param filterId
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
-	 */
-	public static IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, String filterId, IProgressMonitor monitor) {
-
-		IProcessingInfo<IChromatogramFilterResult> processingInfo;
-		IChromatogramFilter chromatogramFilter = getChromatogramFilter(filterId);
-		if(chromatogramFilter != null) {
-			try {
-				processingInfo = chromatogramFilter.applyFilter(chromatogramSelection, monitor);
 			} catch(Exception e) {
 				logger.error(e);
 				processingInfo = new ProcessingInfo<>();

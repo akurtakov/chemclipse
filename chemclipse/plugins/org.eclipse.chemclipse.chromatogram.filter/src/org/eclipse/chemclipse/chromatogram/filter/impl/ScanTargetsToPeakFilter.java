@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -58,13 +58,6 @@ public class ScanTargetsToPeakFilter extends AbstractTransferFilter {
 		}
 
 		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		ScanTargetsToPeakSettings settings = new ScanTargetsToPeakSettings();
-		return applyFilter(chromatogramSelection, settings, monitor);
 	}
 
 	private void transferScanTargets(IChromatogramSelection chromatogramSelection, ScanTargetsToPeakSettings settings) {

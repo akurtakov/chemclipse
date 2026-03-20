@@ -57,13 +57,6 @@ public class FilterScanDensity extends AbstractChromatogramFilter {
 		return processingInfo;
 	}
 
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		FilterSettingsScanDensity filterSettings = new FilterSettingsScanDensity();
-		return applyFilter(chromatogramSelection, filterSettings, monitor);
-	}
-
 	private void applyScanDensityFilter(IChromatogramSelection chromatogramSelection, FilterSettingsScanDensity settings, IProgressMonitor monitor) {
 
 		int scanIntervalTarget = Math.round(1000.0f / settings.getScansPerSecond());

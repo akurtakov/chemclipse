@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,7 +13,6 @@
 package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.rtshifter.settings;
 
 import org.eclipse.chemclipse.chromatogram.filter.settings.AbstractChromatogramFilterSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.rtshifter.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,8 +22,9 @@ public class FilterSettingsShift extends AbstractChromatogramFilterSettings {
 
 	@JsonProperty(value = "Shift Retention Time [ms]", defaultValue = "0")
 	@JsonPropertyDescription(value = "Set retention time shift.")
-	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_MILLISECONDS_SHIFT, maxValue = PreferenceSupplier.MAX_MILLISECONDS_SHIFT)
+	@IntSettingsProperty(minValue = Integer.MIN_VALUE, maxValue = Integer.MAX_VALUE)
 	private int millisecondsShift = 0;
+
 	@JsonProperty(value = "Shift All Scans", defaultValue = "true")
 	@JsonPropertyDescription(value = "Set shift all scans.")
 	private boolean shiftAllScans = true;

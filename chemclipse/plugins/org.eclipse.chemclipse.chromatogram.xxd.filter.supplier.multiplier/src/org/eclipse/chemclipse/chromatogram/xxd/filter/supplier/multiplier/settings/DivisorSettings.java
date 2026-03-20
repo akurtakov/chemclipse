@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,7 +13,6 @@
 package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.multiplier.settings;
 
 import org.eclipse.chemclipse.chromatogram.filter.settings.AbstractChromatogramFilterSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.multiplier.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.support.settings.FloatSettingsProperty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,7 +22,7 @@ public class DivisorSettings extends AbstractChromatogramFilterSettings {
 
 	@JsonProperty(value = "Divisor", defaultValue = "1")
 	@JsonPropertyDescription(value = "The factor to divide the signals.")
-	@FloatSettingsProperty(minValue = PreferenceSupplier.MIN_DIVISOR, maxValue = PreferenceSupplier.MAX_DIVISOR)
+	@FloatSettingsProperty(minValue = 1.0E-12f, maxValue = Float.MAX_VALUE)
 	private float divisor = 1.0f;
 
 	public float getDivisor() {

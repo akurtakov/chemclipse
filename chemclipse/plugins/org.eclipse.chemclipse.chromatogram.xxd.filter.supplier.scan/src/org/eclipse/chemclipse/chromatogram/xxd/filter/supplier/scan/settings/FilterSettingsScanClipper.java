@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,7 +13,6 @@
 package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.settings;
 
 import org.eclipse.chemclipse.chromatogram.filter.settings.AbstractChromatogramFilterSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.support.settings.StringSettingsProperty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,10 +20,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 public class FilterSettingsScanClipper extends AbstractChromatogramFilterSettings {
 
-	@JsonProperty(value = "Scan Numbers", defaultValue = PreferenceSupplier.DEF_CLIP_SCAN_NUMBER_PATTERN)
+	@JsonProperty(value = "Scan Numbers", defaultValue = "1")
 	@JsonPropertyDescription(value = "List the scans by number that shall be removed.")
 	@StringSettingsProperty(allowEmpty = false)
-	private String scanNumberPattern = PreferenceSupplier.DEF_CLIP_SCAN_NUMBER_PATTERN;
+	private String scanNumberPattern = "1";
 
 	public String getScanNumberPattern() {
 

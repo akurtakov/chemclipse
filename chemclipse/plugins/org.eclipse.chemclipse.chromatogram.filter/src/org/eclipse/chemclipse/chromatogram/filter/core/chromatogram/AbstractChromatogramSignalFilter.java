@@ -56,17 +56,6 @@ public abstract class AbstractChromatogramSignalFilter extends AbstractChromatog
 		return processingInfo;
 	}
 
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		IProcessingInfo<IChromatogramFilterResult> processingInfo = validateChromatogramSelection(chromatogramSelection);
-		if(!processingInfo.hasErrorMessages()) {
-			IChromatogramFilterResult chromatogramFilterResult = process(chromatogramSelection, null, monitor);
-			processingInfo.setProcessingResult(chromatogramFilterResult);
-		}
-		return processingInfo;
-	}
-
 	private IChromatogramFilterResult process(IChromatogramSelection chromatogramSelection, IChromatogramFilterSettings chromatogramFilterSettings, IProgressMonitor monitor) {
 
 		if(chromatogramSelection instanceof IChromatogramSelectionMSD chromatogramSelectionMSD) {

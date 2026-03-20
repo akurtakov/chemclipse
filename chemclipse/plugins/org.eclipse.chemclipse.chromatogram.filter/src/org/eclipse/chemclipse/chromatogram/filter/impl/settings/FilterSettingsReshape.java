@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,7 +12,6 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.filter.impl.settings;
 
-import org.eclipse.chemclipse.chromatogram.filter.impl.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.filter.model.RangeOption;
 import org.eclipse.chemclipse.chromatogram.filter.settings.AbstractChromatogramFilterSettings;
 import org.eclipse.chemclipse.model.core.support.HeaderField;
@@ -26,16 +25,20 @@ public class FilterSettingsReshape extends AbstractChromatogramFilterSettings {
 	@JsonProperty(value = "Header Field", defaultValue = "DATA_NAME")
 	@JsonPropertyDescription(value = "Store the extracted transition in the selected header field.")
 	private HeaderField headerField = HeaderField.DATA_NAME;
+
 	@JsonProperty(value = "Range Option", defaultValue = "RETENTION_TIME_MIN")
 	@JsonPropertyDescription(value = "Select whether to use minutes or milliseconds.")
 	private RangeOption rangeOption = RangeOption.RETENTION_TIME_MIN;
+
 	@JsonProperty(value = "Segment Width (Default)", defaultValue = "3.0")
 	@JsonPropertyDescription(value = "Reshape the chromatogram and cut it into references given the segment width in minutes.")
-	@DoubleSettingsProperty(minValue = PreferenceSupplier.MIN_RETENTION_TIME_MINUTES, maxValue = PreferenceSupplier.MAX_RETENTION_TIME_MINUTES)
+	@DoubleSettingsProperty(minValue = 0.0d, maxValue = Double.MAX_VALUE)
 	private double segmentWidthDefault = 3.0d;
+
 	@JsonProperty(value = "Recurring Peak Name", defaultValue = "")
 	@JsonPropertyDescription(value = "Select a recurring target to automatically adjust the segment width to an optimal value.")
 	private String recurringPeakName = "";
+
 	@JsonProperty(value = "Reset Retention Times", defaultValue = "false")
 	@JsonPropertyDescription(value = "The retention times are recalculated for each chromatogram with a scan delay of 0.")
 	private boolean resetRetentionTimes = false;

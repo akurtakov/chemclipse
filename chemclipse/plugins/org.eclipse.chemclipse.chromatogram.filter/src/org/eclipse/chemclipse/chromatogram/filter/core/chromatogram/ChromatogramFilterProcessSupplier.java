@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -71,8 +71,6 @@ public class ChromatogramFilterProcessSupplier implements IProcessTypeSupplier {
 
 			if(processSettings instanceof IChromatogramFilterSettings) {
 				messageConsumer.addMessages(ChromatogramFilter.applyFilter(chromatogramSelection, processSettings, supplier.getId(), monitor));
-			} else {
-				messageConsumer.addMessages(ChromatogramFilter.applyFilter(chromatogramSelection, supplier.getId(), monitor));
 			}
 			return chromatogramSelection;
 		}

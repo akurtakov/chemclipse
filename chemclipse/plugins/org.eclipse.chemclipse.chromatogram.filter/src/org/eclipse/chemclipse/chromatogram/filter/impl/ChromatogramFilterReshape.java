@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.filter.core.chromatogram.AbstractChromatogramFilter;
-import org.eclipse.chemclipse.chromatogram.filter.impl.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.filter.impl.settings.FilterSettingsReshape;
 import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResult;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
@@ -234,13 +233,6 @@ public class ChromatogramFilterReshape extends AbstractChromatogramFilter {
 	private int getRetentionTime(IPeak peak) {
 
 		return peak.getPeakModel().getPeakMaximum().getRetentionTime();
-	}
-
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		FilterSettingsReshape filterSettings = PreferenceSupplier.getFilterSettingsReshape();
-		return applyFilter(chromatogramSelection, filterSettings, monitor);
 	}
 
 	private List<IPeak> getRecurringPeaks(IChromatogram chromatogram, String recurringPeakName) {

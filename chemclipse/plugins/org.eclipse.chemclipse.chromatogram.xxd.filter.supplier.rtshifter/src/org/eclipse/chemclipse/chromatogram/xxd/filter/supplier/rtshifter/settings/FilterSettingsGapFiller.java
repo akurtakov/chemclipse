@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,7 +13,6 @@
 package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.rtshifter.settings;
 
 import org.eclipse.chemclipse.chromatogram.filter.settings.AbstractChromatogramFilterSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.rtshifter.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,10 +20,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 public class FilterSettingsGapFiller extends AbstractChromatogramFilterSettings {
 
-	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_LIMIT_FACTOR, maxValue = PreferenceSupplier.MAX_LIMIT_FACTOR)
+	@IntSettingsProperty(minValue = 4, maxValue = 10000000)
 	@JsonProperty(value = "Limit Factor", defaultValue = "4")
 	@JsonPropertyDescription("The gap must be larger than the scan interval * limit factor to be filled.")
-	private int limitFactor = PreferenceSupplier.DEF_LIMIT_FACTOR;
+	private int limitFactor = 4;
 
 	public int getLimitFactor() {
 
