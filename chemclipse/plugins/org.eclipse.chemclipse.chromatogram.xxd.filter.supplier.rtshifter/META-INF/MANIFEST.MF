@@ -20,5 +20,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.rtshifter.core,
  org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.rtshifter.exceptions,
- org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.rtshifter.preferences,
  org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.rtshifter.settings

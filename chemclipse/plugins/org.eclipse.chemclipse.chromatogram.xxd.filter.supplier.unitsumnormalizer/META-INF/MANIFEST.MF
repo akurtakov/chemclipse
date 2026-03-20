@@ -15,5 +15,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.unitsumnormalizer.core,
  org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.unitsumnormalizer.exceptions,
- org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.unitsumnormalizer.preferences,
  org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.unitsumnormalizer.settings

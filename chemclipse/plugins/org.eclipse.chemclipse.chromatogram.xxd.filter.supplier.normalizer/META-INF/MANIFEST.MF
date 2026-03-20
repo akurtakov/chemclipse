@@ -15,5 +15,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-Vendor: Chemclipse
 Export-Package: org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.normalizer.core,
  org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.normalizer.exceptions,
- org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.normalizer.preferences,
  org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.normalizer.settings

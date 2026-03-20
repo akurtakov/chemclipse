@@ -24,6 +24,5 @@ Bundle-ActivationPolicy: lazy
 Import-Package: org.osgi.service.event;version="[1.0.0,2.0.0)"
 Export-Package: org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.core,
  org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.model,
- org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.preferences,
  org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.settings
 Service-Component: OSGI-INF/org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.core.FilterScanSelector.xml
