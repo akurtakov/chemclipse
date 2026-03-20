@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -62,28 +62,6 @@ public class PeakDetectorCSD {
 		IPeakDetectorCSD peakDetector = getPeakDetector(peakDetectorId);
 		if(peakDetector != null) {
 			processingInfo = peakDetector.detect(chromatogramSelection, peakDetectorSettings, monitor);
-			chromatogramSelection.getChromatogram().setDirty(true);
-		} else {
-			processingInfo = getNoPeakDetectorAvailableProcessingInfo();
-		}
-		return processingInfo;
-	}
-
-	// TODO JUnit
-	/**
-	 * Tries to detect the peaks in the chromatogram selection.
-	 * 
-	 * @param chromatogramSelection
-	 * @param peakDetectorId
-	 * @param monitor
-	 * @return IProcessingInfo
-	 */
-	public static IProcessingInfo<?> detect(IChromatogramSelectionCSD chromatogramSelection, String peakDetectorId, IProgressMonitor monitor) {
-
-		IProcessingInfo<?> processingInfo;
-		IPeakDetectorCSD peakDetector = getPeakDetector(peakDetectorId);
-		if(peakDetector != null) {
-			processingInfo = peakDetector.detect(chromatogramSelection, monitor);
 			chromatogramSelection.getChromatogram().setDirty(true);
 		} else {
 			processingInfo = getNoPeakDetectorAvailableProcessingInfo();

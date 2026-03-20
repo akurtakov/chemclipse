@@ -2,15 +2,6 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.eclipse.ui.preferencePages">
-      <page
-            category="org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderivative.ui.preferences.firstDerivativePeakDetectorPreferencePage"
-            class="org.eclipse.chemclipse.chromatogram.csd.peak.detector.supplier.firstderivative.ui.preferences.PreferencePageCSD"
-            id="org.eclipse.chemclipse.chromatogram.csd.peak.detector.supplier.firstderivative.ui.preferences.firstDerivativePeakDetectorPreferencePageCSD"
-            name="CSD">
-      </page>
-   </extension>
-      <extension
          point="org.eclipse.chemclipse.xxd.process.ui.menu.icon">
       <icon
             class="org.eclipse.chemclipse.chromatogram.csd.peak.detector.supplier.firstderivative.ui.icon.MenuIcon"

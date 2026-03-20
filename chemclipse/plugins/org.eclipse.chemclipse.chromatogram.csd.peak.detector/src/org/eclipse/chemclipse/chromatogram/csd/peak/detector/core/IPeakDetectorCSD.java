@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -30,13 +30,4 @@ public interface IPeakDetectorCSD extends IPeakDetector {
 	 * @throws ValueMustNotBeNullException
 	 */
 	IProcessingInfo<?> detect(IChromatogramSelectionCSD chromatogramSelection, IPeakDetectorSettingsCSD peakDetectorSettings, IProgressMonitor monitor);
-
-	/**
-	 * The same as the other method but without settings.
-	 * 
-	 * @param chromatogramSelection
-	 * @param monitor
-	 * @throws ValueMustNotBeNullException
-	 */
-	IProcessingInfo<?> detect(IChromatogramSelectionCSD chromatogramSelection, IProgressMonitor monitor);
 }

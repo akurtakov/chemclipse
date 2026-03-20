@@ -21,7 +21,6 @@ import java.util.List;
 import org.eclipse.chemclipse.chromatogram.csd.peak.detector.core.IPeakDetectorCSD;
 import org.eclipse.chemclipse.chromatogram.csd.peak.detector.settings.IPeakDetectorSettingsCSD;
 import org.eclipse.chemclipse.chromatogram.csd.peak.detector.supplier.firstderivative.Activator;
-import org.eclipse.chemclipse.chromatogram.csd.peak.detector.supplier.firstderivative.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.csd.peak.detector.supplier.firstderivative.settings.PeakDetectorSettingsCSD;
 import org.eclipse.chemclipse.chromatogram.peak.detector.exceptions.ValueMustNotBeNullException;
 import org.eclipse.chemclipse.chromatogram.peak.detector.model.Threshold;
@@ -97,14 +96,6 @@ public class PeakDetectorCSD extends BasePeakDetector implements IPeakDetectorCS
 			}
 		}
 		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<?> detect(IChromatogramSelectionCSD chromatogramSelection, IProgressMonitor monitor) {
-
-		PeakDetectorSettingsCSD peakDetectorSettings = PreferenceSupplier.getPeakDetectorSettingsCSD();
-		chromatogramSelection.getChromatogram().setDirty(true);
-		return detect(chromatogramSelection, peakDetectorSettings, monitor);
 	}
 
 	/**

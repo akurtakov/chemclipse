@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -51,18 +51,6 @@ public class PeakDetectorVSD {
 		IPeakDetectorVSD peakDetector = getPeakDetector(peakDetectorId);
 		if(peakDetector != null) {
 			processingInfo = peakDetector.detect(chromatogramSelection, peakDetectorSettings, monitor);
-		} else {
-			processingInfo = getNoPeakDetectorAvailableProcessingInfo();
-		}
-		return processingInfo;
-	}
-
-	public static IProcessingInfo<?> detect(IChromatogramSelectionVSD chromatogramSelection, String peakDetectorId, IProgressMonitor monitor) {
-
-		IProcessingInfo<?> processingInfo;
-		IPeakDetectorVSD peakDetector = getPeakDetector(peakDetectorId);
-		if(peakDetector != null) {
-			processingInfo = peakDetector.detect(chromatogramSelection, monitor);
 		} else {
 			processingInfo = getNoPeakDetectorAvailableProcessingInfo();
 		}
