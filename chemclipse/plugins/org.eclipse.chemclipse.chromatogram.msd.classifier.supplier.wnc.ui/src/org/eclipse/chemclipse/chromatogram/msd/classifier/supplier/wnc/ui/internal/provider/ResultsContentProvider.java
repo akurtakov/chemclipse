@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,7 +17,7 @@ import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.result.Wn
 import org.eclipse.chemclipse.model.core.IMeasurementResult;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 
-public class WncResultsContentProvider implements IStructuredContentProvider {
+public class ResultsContentProvider implements IStructuredContentProvider {
 
 	@Override
 	public Object[] getElements(Object inputElement) {
@@ -27,10 +27,10 @@ public class WncResultsContentProvider implements IStructuredContentProvider {
 			Object object = measurementResult.getResult();
 			if(object instanceof WncClassifierResult result) {
 				TargetTraces targetTraces = result.getTargetTraces();
-				return targetTraces.toArray();
+				return targetTraces.values().toArray();
 			}
 		} else if(inputElement instanceof TargetTraces targetTraces) {
-			return targetTraces.toArray();
+			return targetTraces.values().toArray();
 		}
 
 		return new Object[0];

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,13 +15,13 @@ package org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.ui.inter
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model.TargetTraces;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 
-public class WncIonContentProvider implements IStructuredContentProvider {
+public class TargetTracesContentProvider implements IStructuredContentProvider {
 
 	@Override
 	public Object[] getElements(Object inputElement) {
 
 		if(inputElement instanceof TargetTraces targetTraces) {
-			return targetTraces.toArray();
+			return targetTraces.values().toArray();
 		}
 
 		return new Object[0];

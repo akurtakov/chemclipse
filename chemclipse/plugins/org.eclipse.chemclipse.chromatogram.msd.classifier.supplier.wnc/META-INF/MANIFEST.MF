@@ -11,13 +11,21 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.chemclipse.processing;bundle-version="0.8.0",
  org.eclipse.chemclipse.model;bundle-version="0.8.0",
  org.eclipse.chemclipse.support;bundle-version="0.8.0",
- com.fasterxml.jackson.core.jackson-annotations;bundle-version="2.18.1"
+ com.fasterxml.jackson.core.jackson-annotations;bundle-version="2.18.1",
+ com.fasterxml.jackson.core.jackson-databind;bundle-version="2.21.0",
+ com.fasterxml.jackson.core.jackson-core;bundle-version="2.21.0",
+ org.eclipse.core.databinding;bundle-version="1.13.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-Vendor: ChemClipse
 Export-Package: org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.core,
  org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.exceptions,
  org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.model,
- org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.preferences,
  org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.result,
- org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.settings
+ org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.serializer,
+ org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.service,
+ org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.settings,
+ org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.validators
+Import-Package: org.osgi.framework;version="1.3.0",
+ org.osgi.service.component;version="1.5.1"
+Service-Component: OSGI-INF/org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.service.TargetTracesSerializationService.xml

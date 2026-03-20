@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -22,7 +22,7 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.provider.AbstractChemClipseLabelProvider;
 import org.eclipse.swt.graphics.Image;
 
-public class WncResultsLabelProvider extends AbstractChemClipseLabelProvider {
+public class ResultsLabelProvider extends AbstractChemClipseLabelProvider {
 
 	@Override
 	public Image getColumnImage(Object element, int columnIndex) {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,6 +19,7 @@ import java.io.IOException;
 
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.exceptions.ClassifierException;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.internal.core.support.ChromatogramTestCase;
+import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.settings.ClassifierSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.result.IChromatogramClassifierResult;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -40,7 +41,8 @@ public class WncClassifier_1_ITest extends ChromatogramTestCase {
 		super.setUp();
 		Classifier wncClassifier = new Classifier();
 		IChromatogramSelectionMSD chromatogramSelection = getChromatogramSelection();
-		IProcessingInfo<IChromatogramClassifierResult> processingInfo = wncClassifier.applyClassifier(chromatogramSelection, null, new NullProgressMonitor());
+		ClassifierSettings classifierSettings = new ClassifierSettings();
+		IProcessingInfo<IChromatogramClassifierResult> processingInfo = wncClassifier.applyClassifier(chromatogramSelection, classifierSettings, new NullProgressMonitor());
 		result = processingInfo.getProcessingResult();
 	}
 

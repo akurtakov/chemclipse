@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,10 +17,24 @@ import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
-import org.eclipse.chemclipse.support.ui.provider.AbstractChemClipseLabelProvider;
+import org.eclipse.jface.viewers.ITableLabelProvider;
+import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
-public class WncIonLabelProvider extends AbstractChemClipseLabelProvider {
+public class TargetTracesLabelProvider extends LabelProvider implements ITableLabelProvider {
+
+	public static final String NAME = "Name";
+	public static final String MZ = "m/z";
+
+	public static final String[] TITLES = { //
+			NAME, //
+			MZ //
+	};
+
+	public static final int[] BOUNDS = { //
+			200, //
+			100 //
+	};
 
 	@Override
 	public Image getColumnImage(Object element, int columnIndex) {
