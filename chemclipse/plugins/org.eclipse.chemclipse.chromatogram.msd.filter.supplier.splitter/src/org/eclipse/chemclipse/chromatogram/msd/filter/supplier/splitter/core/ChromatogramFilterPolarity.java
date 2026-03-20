@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,8 +17,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResu
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
 import org.eclipse.chemclipse.chromatogram.msd.filter.core.chromatogram.AbstractChromatogramFilterMSD;
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.preferences.PreferenceSupplier;
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.settings.FilterSettingsPolarity;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
@@ -47,13 +45,6 @@ public class ChromatogramFilterPolarity extends AbstractChromatogramFilterMSD {
 			processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "The chromatogram was splitted into polarity reference chromatograms."));
 		}
 		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelectionMSD chromatogramSelection, IProgressMonitor monitor) {
-
-		FilterSettingsPolarity splitterSettings = PreferenceSupplier.getFilterSettingsPolarity();
-		return applyFilter(chromatogramSelection, splitterSettings, monitor);
 	}
 
 	private void splitByPolarity(IChromatogramMSD chromatogramMSD) {

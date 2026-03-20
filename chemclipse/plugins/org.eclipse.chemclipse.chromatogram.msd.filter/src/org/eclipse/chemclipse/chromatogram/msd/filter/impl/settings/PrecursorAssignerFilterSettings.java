@@ -15,7 +15,6 @@ package org.eclipse.chemclipse.chromatogram.msd.filter.impl.settings;
 import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.chemclipse.chromatogram.msd.filter.impl.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.AbstractMassSpectrumFilterSettings;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.support.settings.DoubleSettingsProperty;
@@ -27,7 +26,7 @@ public class PrecursorAssignerFilterSettings extends AbstractMassSpectrumFilterS
 
 	@JsonProperty(value = "Precursor Ion", defaultValue = "0")
 	@JsonPropertyDescription(value = "Define the precursor that is assigned.")
-	@DoubleSettingsProperty(minValue = PreferenceSupplier.MIN_PRECURSOR, maxValue = PreferenceSupplier.MAX_PRECURSOR)
+	@DoubleSettingsProperty(minValue = 0.0d, maxValue = 100000.0d)
 	private double precursorIon = 0;
 
 	@Override

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,7 +20,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResu
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
 import org.eclipse.chemclipse.chromatogram.msd.filter.core.chromatogram.AbstractChromatogramFilterMSD;
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.settings.FilterSettingsSIM;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IScan;
@@ -41,12 +40,7 @@ public class ChromatogramFilterSIM extends AbstractChromatogramFilterMSD {
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = new ProcessingInfo<>();
 		processingInfo.addMessages(validation);
 
-		FilterSettingsSIM filterSettings;
-		if(chromatogramFilterSettings instanceof FilterSettingsSIM filterSettingsSIM) {
-			filterSettings = filterSettingsSIM;
-		} else {
-			filterSettings = PreferenceSupplier.getFilterSettingsSIM();
-		}
+		FilterSettingsSIM filterSettings = (FilterSettingsSIM)chromatogramFilterSettings;
 
 		if(!processingInfo.hasErrorMessages()) {
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
@@ -79,13 +73,6 @@ public class ChromatogramFilterSIM extends AbstractChromatogramFilterMSD {
 		}
 
 		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelectionMSD chromatogramSelection, IProgressMonitor monitor) {
-
-		FilterSettingsSIM settings = PreferenceSupplier.getFilterSettingsSIM();
-		return applyFilter(chromatogramSelection, settings, monitor);
 	}
 
 	private void addReferenceChromatogram(IChromatogramMSD chromatogramMSD, List<IScanMSD> scansReference) {

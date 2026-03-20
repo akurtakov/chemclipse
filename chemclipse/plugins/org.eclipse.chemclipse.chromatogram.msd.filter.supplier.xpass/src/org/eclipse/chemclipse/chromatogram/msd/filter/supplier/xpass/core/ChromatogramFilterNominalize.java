@@ -55,13 +55,6 @@ public class ChromatogramFilterNominalize extends AbstractChromatogramFilterMSD 
 		return processingInfo;
 	}
 
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelectionMSD chromatogramSelection, IProgressMonitor monitor) {
-
-		ChromatogramFilterNominalizeSettings filterSettings = new ChromatogramFilterNominalizeSettings();
-		return applyFilter(chromatogramSelection, filterSettings, monitor);
-	}
-
 	private void nominalize(IChromatogram chromatogram) {
 
 		if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {

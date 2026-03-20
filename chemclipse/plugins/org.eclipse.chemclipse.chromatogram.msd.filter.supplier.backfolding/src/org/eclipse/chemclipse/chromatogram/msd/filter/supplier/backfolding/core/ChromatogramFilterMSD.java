@@ -18,7 +18,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
 import org.eclipse.chemclipse.chromatogram.msd.filter.core.chromatogram.AbstractChromatogramFilterMSD;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.backfolding.detector.BackfoldingShifter;
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.backfolding.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.backfolding.settings.ChromatogramFilterSettings;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IIon;
@@ -45,14 +44,6 @@ public class ChromatogramFilterMSD extends AbstractChromatogramFilterMSD {
 		}
 		chromatogramSelection.getChromatogram().setDirty(true);
 		return processingInfo;
-	}
-
-	// TODO Junit
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelectionMSD chromatogramSelection, IProgressMonitor monitor) {
-
-		ChromatogramFilterSettings filterSettings = PreferenceSupplier.getFilterSettings();
-		return applyFilter(chromatogramSelection, filterSettings, monitor);
 	}
 
 	private void applyBackfoldingFilter(IChromatogramSelectionMSD chromatogramSelection, ChromatogramFilterSettings filterSettings, IProgressMonitor monitor) {

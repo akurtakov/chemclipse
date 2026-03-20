@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,7 +15,6 @@ package org.eclipse.chemclipse.chromatogram.xxd.classifier.supplier.durbinwatson
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.supplier.durbinwatson.result.IDurbinWatsonClassifierResult;
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.supplier.durbinwatson.result.SavitzkyGolayFilterRating;
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.supplier.durbinwatson.settings.ClassifierSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.processor.SavitzkyGolayProcessor;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.settings.ChromatogramFilterSettings;
 import org.eclipse.chemclipse.logging.core.Logger;
@@ -41,23 +40,23 @@ public class DurbinWatsonProcessor {
 			TotalScanSignalExtractor signalExtractor = new TotalScanSignalExtractor(chromatogram);
 			ITotalScanSignals totalScanSignals = signalExtractor.getTotalScanSignals(chromatogramSelection, false);
 			double[] valuesOriginal = getScanSignalsAsArray(totalScanSignals);
-			durbinWatsonMain(valuesOriginal, classifierSettings, durbinWatsonClassifierResult, monitor);
+			durbinWatsonMain(valuesOriginal, durbinWatsonClassifierResult, monitor);
 		} catch(ChromatogramIsNullException e) {
 			logger.warn(e);
 		}
 	}
 
-	public void durbinWatsonMain(double[] valuesOriginal, ClassifierSettings classifierSettings, IDurbinWatsonClassifierResult durbinWatsonClassifierResult, IProgressMonitor monitor) {
+	public void durbinWatsonMain(double[] valuesOriginal, IDurbinWatsonClassifierResult durbinWatsonClassifierResult, IProgressMonitor monitor) {
 
 		/*
 		 * Iterate through the width
 		 */
-		int minDerivative = PreferenceSupplier.MIN_DERIVATIVE;
-		int maxDerivative = PreferenceSupplier.MAX_DERIVATIVE;
-		int minOrder = PreferenceSupplier.MIN_ORDER;
-		int maxOrder = PreferenceSupplier.MAX_ORDER;
-		int minWidth = PreferenceSupplier.MIN_WIDTH;
-		int maxWidth = PreferenceSupplier.MAX_WIDTH;
+		int minDerivative = 0;
+		int maxDerivative = 5;
+		int minOrder = 2;
+		int maxOrder = 5;
+		int minWidth = 5;
+		int maxWidth = 51;
 		if(valuesOriginal.length < maxWidth) {
 			maxWidth = valuesOriginal.length;
 		}

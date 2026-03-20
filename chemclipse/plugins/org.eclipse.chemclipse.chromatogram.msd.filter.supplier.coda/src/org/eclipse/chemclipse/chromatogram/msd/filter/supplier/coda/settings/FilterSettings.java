@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,7 +17,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.filter.settings.AbstractChromatogramFilterSettings;
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.support.literature.LiteratureReference;
 import org.eclipse.chemclipse.support.settings.FloatSettingsProperty;
@@ -29,7 +28,7 @@ public class FilterSettings extends AbstractChromatogramFilterSettings {
 	private static final Logger logger = Logger.getLogger(FilterSettings.class);
 
 	@JsonProperty(value = "Coda Threshold", defaultValue = "0.75f")
-	@FloatSettingsProperty(minValue = PreferenceSupplier.CODA_THRESHOLD_MIN_VALUE, maxValue = PreferenceSupplier.CODA_THRESHOLD_MAX_VALUE, step = 0.05f)
+	@FloatSettingsProperty(minValue = 0.0f, maxValue = 1.0f, step = 0.05f)
 	private float codaThreshold;
 
 	public float getCodaThreshold() {

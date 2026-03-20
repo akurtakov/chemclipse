@@ -15,7 +15,6 @@ package org.eclipse.chemclipse.chromatogram.msd.filter.impl.settings;
 import java.util.Arrays;
 import java.util.List;
 
-import org.eclipse.chemclipse.chromatogram.msd.filter.impl.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.AbstractMassSpectrumFilterSettings;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.support.settings.ShortSettingsProperty;
@@ -27,8 +26,9 @@ public class ScanTypeAssignerFilterSettings extends AbstractMassSpectrumFilterSe
 
 	@JsonProperty(value = "Mass Spectrometer", defaultValue = "1")
 	@JsonPropertyDescription(value = "MS1, MS2, ...")
-	@ShortSettingsProperty(minValue = PreferenceSupplier.MIN_MASS_SPECTROMETER, maxValue = PreferenceSupplier.MAX_MASS_SPECTROMETER)
+	@ShortSettingsProperty(minValue = 1, maxValue = 100)
 	private short massSpectrometer = 1;
+
 	@JsonProperty(value = "Mass Spectrum Type", defaultValue = "CENTROID")
 	@JsonPropertyDescription(value = "Centroid or Profile")
 	private MassSpectrumType massSpectrumType = MassSpectrumType.CENTROID;

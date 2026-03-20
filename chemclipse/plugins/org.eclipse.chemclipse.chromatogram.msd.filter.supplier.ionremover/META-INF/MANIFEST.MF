@@ -17,6 +17,5 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: org.eclipse.chemclipse.chromatogram.msd.filter.supplier.ionremover.core,
  org.eclipse.chemclipse.chromatogram.msd.filter.supplier.ionremover.exceptions,
- org.eclipse.chemclipse.chromatogram.msd.filter.supplier.ionremover.preferences,
  org.eclipse.chemclipse.chromatogram.msd.filter.supplier.ionremover.settings
 Bundle-Vendor: ChemClipse

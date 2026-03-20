@@ -19,6 +19,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.calculator,
  org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.core,
  org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.exceptions,
- org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.preferences,
  org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.settings
 Bundle-Vendor: ChemClipse

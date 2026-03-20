@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,7 +13,6 @@
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.denoising.settings;
 
 import org.eclipse.chemclipse.chromatogram.filter.settings.AbstractChromatogramFilterSettings;
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.denoising.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty.Validation;
 import org.eclipse.chemclipse.support.settings.StringSettingsProperty;
@@ -27,19 +26,23 @@ public class FilterSettings extends AbstractChromatogramFilterSettings {
 	@JsonPropertyDescription(value = "List the ions to remove, separated by a white space.")
 	@StringSettingsProperty(regExp = "(^$|((\\d+[;|\\s]?)+))", description = "must be space separated digits.", isMultiLine = false, allowEmpty = false)
 	private String ionsToRemove = "18;28;84;207";
+
 	@JsonProperty(value = "Ions To Preserve", defaultValue = "103 104")
 	@JsonPropertyDescription(value = "List the ions to preserve, separated by a white space.")
 	@StringSettingsProperty(regExp = "(^$|((\\d+[;|\\s]?)+))", description = "must be space separated digits.", isMultiLine = false, allowEmpty = true)
 	private String ionsToPreserve = "103;104";
+
 	@JsonProperty(value = "Adjust Threshold Transitions", defaultValue = "true")
 	@JsonPropertyDescription(value = "Adjust zero threshold transitions.")
 	private boolean adjustThresholdTransitions = true;
+
 	@JsonProperty(value = "Number Used Ions For Coefficient", defaultValue = "1")
 	@JsonPropertyDescription(value = "The number of used ions for coefficient calculation.")
-	@IntSettingsProperty(minValue = PreferenceSupplier.NUMBER_OF_USE_IONS_FOR_COEFFICIENT_MIN, maxValue = PreferenceSupplier.NUMBER_OF_USE_IONS_FOR_COEFFICIENT_MAX)
+	@IntSettingsProperty(minValue = 1, maxValue = 20)
 	private int numberOfUsedIonsForCoefficient = 1;
+
 	@JsonProperty(value = "Segment Width", defaultValue = "13")
-	@IntSettingsProperty(minValue = PreferenceSupplier.SEGMENT_WIDTH_MIN, maxValue = PreferenceSupplier.SEGMENT_WIDTH_MAX, validation = Validation.ODD_NUMBER)
+	@IntSettingsProperty(minValue = 5, maxValue = 19, validation = Validation.ODD_NUMBER)
 	private int segmentWidth = 13;
 
 	public String getIonsToRemove() {

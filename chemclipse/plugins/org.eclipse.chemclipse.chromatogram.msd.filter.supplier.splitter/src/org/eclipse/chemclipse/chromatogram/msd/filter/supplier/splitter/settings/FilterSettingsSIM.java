@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,7 +13,6 @@
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.settings;
 
 import org.eclipse.chemclipse.chromatogram.filter.settings.AbstractChromatogramFilterSettings;
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.splitter.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -23,8 +22,8 @@ public class FilterSettingsSIM extends AbstractChromatogramFilterSettings {
 
 	@JsonProperty(value = "Limit Ions", defaultValue = "5")
 	@JsonPropertyDescription(value = "If the scan contains m/z values <= limit, then assume that it is a SIM.")
-	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_LIMIT_IONS_SIM, maxValue = PreferenceSupplier.MAX_LIMIT_IONS_SIM)
-	private int limitIons = PreferenceSupplier.DEF_LIMIT_IONS_SIM;
+	@IntSettingsProperty(minValue = 1, maxValue = Integer.MAX_VALUE)
+	private int limitIons = 5;
 
 	public int getLimitIons() {
 

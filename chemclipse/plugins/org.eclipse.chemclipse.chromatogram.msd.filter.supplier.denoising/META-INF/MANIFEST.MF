@@ -19,6 +19,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.chemclipse.rcp.app
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.chemclipse.chromatogram.msd.filter.supplier.denoising.preferences,
- org.eclipse.chemclipse.chromatogram.msd.filter.supplier.denoising.result,
+Export-Package: org.eclipse.chemclipse.chromatogram.msd.filter.supplier.denoising.result,
  org.eclipse.chemclipse.chromatogram.msd.filter.supplier.denoising.settings
