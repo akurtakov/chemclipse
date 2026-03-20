@@ -19,7 +19,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.AbstractMassSpectrumFilterSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.support.literature.LiteratureReference;
@@ -32,11 +31,11 @@ public class MassSpectrumFilterSettings extends AbstractMassSpectrumFilterSettin
 	private static final Logger logger = Logger.getLogger(MassSpectrumFilterSettings.class);
 
 	@JsonProperty(value = "Order", defaultValue = "3")
-	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_ORDER, maxValue = PreferenceSupplier.MAX_ORDER)
+	@IntSettingsProperty(minValue = 2, maxValue = 5)
 	private int order = 3;
 
 	@JsonProperty(value = "Width", defaultValue = "21")
-	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_WIDTH, maxValue = PreferenceSupplier.MAX_WIDTH)
+	@IntSettingsProperty(minValue = 5, maxValue = 51)
 	private int width = 21;
 
 	public int getDerivative() {

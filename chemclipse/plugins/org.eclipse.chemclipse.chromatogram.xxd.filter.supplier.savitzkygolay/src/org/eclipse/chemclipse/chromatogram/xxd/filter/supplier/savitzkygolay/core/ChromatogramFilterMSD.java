@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,8 +20,6 @@ import org.eclipse.chemclipse.chromatogram.msd.filter.core.chromatogram.Abstract
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.calculator.operations.ISavitzkyGolayOperation;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.calculator.operations.SavitzkyGolayPerIonOperation;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.calculator.operations.SavitzkyGolayTotalScanSignalOperation;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.preferences.PreferenceSupplier;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.settings.ChromatogramFilterSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.settings.ChromatogramFilterSettingsMSD;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
@@ -67,15 +65,6 @@ public class ChromatogramFilterMSD extends AbstractChromatogramFilterMSD {
 		if(processingInfo.getProcessingResult().getResultStatus().equals(ResultStatus.OK)) {
 			processingInfo.addInfoMessage(DESCRIPTION, processingInfo.getProcessingResult().getDescription());
 		}
-		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelectionMSD chromatogramSelection, IProgressMonitor monitor) {
-
-		ChromatogramFilterSettings chromatogramFilterSettings = PreferenceSupplier.getFilterSettingsMSD();
-		IProcessingInfo<IChromatogramFilterResult> processingInfo = new ProcessingInfo<>();
-		processingInfo.setProcessingResult(process(chromatogramSelection, chromatogramFilterSettings, monitor));
 		return processingInfo;
 	}
 }

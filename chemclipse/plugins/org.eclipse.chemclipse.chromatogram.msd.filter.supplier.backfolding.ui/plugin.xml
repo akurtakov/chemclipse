@@ -2,15 +2,6 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.eclipse.ui.preferencePages">
-      <page
-            category="org.eclipse.chemclipse.chromatogram.msd.filter.ui.preferences.filterPreferencePage"
-            class="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.backfolding.ui.preferences.FilterPreferencePage"
-            id="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.backfolding.ui.preferences.backfoldingFilterPreferencePage"
-            name="Backfolding">
-      </page>
-   </extension>
-   <extension
          point="org.eclipse.chemclipse.xxd.process.ui.menu.icon">
       <icon
             class="org.eclipse.chemclipse.chromatogram.msd.filter.supplier.backfolding.ui.icon.MenuIcon"

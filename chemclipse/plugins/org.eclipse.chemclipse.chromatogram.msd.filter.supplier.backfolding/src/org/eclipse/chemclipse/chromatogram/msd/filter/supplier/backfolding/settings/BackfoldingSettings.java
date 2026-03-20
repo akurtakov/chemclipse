@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,12 +12,10 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.backfolding.settings;
 
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.backfolding.preferences.PreferenceSupplier;
-
 public class BackfoldingSettings implements IBackfoldingSettings {
 
-	private int numberOfBackfoldingRuns = PreferenceSupplier.DEF_BACKFOLDING_RUNS;
-	private int maximumRetentionTimeShift = PreferenceSupplier.DEF_RETENTION_TIME_SHIFT;
+	private int numberOfBackfoldingRuns = 3;
+	private int maximumRetentionTimeShift = 5000;
 
 	@Override
 	public int getNumberOfBackfoldingRuns() {
@@ -28,7 +26,7 @@ public class BackfoldingSettings implements IBackfoldingSettings {
 	@Override
 	public void setNumberOfBackfoldingRuns(int numberOfBackfoldingRuns) {
 
-		if(numberOfBackfoldingRuns >= PreferenceSupplier.MIN_BACKFOLDING_RUNS && numberOfBackfoldingRuns <= PreferenceSupplier.MAX_BACKFOLDING_RUNS) {
+		if(numberOfBackfoldingRuns >= 1 && numberOfBackfoldingRuns <= 10) {
 			this.numberOfBackfoldingRuns = numberOfBackfoldingRuns;
 		}
 	}
@@ -42,7 +40,7 @@ public class BackfoldingSettings implements IBackfoldingSettings {
 	@Override
 	public void setMaximumRetentionTimeShift(int maximumRetentionTimeShift) {
 
-		if(maximumRetentionTimeShift >= PreferenceSupplier.MIN_RETENTION_TIME_SHIFT && maximumRetentionTimeShift <= PreferenceSupplier.MAX_RETENTION_TIME_SHIFT) {
+		if(maximumRetentionTimeShift >= 500 && maximumRetentionTimeShift <= 25000) {
 			this.maximumRetentionTimeShift = maximumRetentionTimeShift;
 		}
 	}

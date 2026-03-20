@@ -19,7 +19,6 @@ Export-Package: org.eclipse.chemclipse.chromatogram.msd.filter.core.chromatogram
  org.eclipse.chemclipse.chromatogram.msd.filter.core.peak,
  org.eclipse.chemclipse.chromatogram.msd.filter.exceptions,
  org.eclipse.chemclipse.chromatogram.msd.filter.impl,
- org.eclipse.chemclipse.chromatogram.msd.filter.impl.preferences,
  org.eclipse.chemclipse.chromatogram.msd.filter.impl.settings,
  org.eclipse.chemclipse.chromatogram.msd.filter.result,
  org.eclipse.chemclipse.chromatogram.msd.filter.settings

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.filter.settings.AbstractChromatogramFilterSettings;
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.backfolding.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.support.literature.LiteratureReference;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
@@ -29,10 +28,11 @@ public class ChromatogramFilterSettings extends AbstractChromatogramFilterSettin
 	private static final Logger logger = Logger.getLogger(ChromatogramFilterSettings.class);
 
 	@JsonProperty(value = "Backfolding Runs", defaultValue = "3")
-	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_BACKFOLDING_RUNS, maxValue = PreferenceSupplier.MAX_BACKFOLDING_RUNS)
+	@IntSettingsProperty(minValue = 1, maxValue = 10)
 	private int numberOfBackfoldingRuns = 3;
+
 	@JsonProperty(value = "Max Retention Time Shift (Milliseconds)", defaultValue = "5000")
-	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_RETENTION_TIME_SHIFT, maxValue = PreferenceSupplier.MAX_RETENTION_TIME_SHIFT)
+	@IntSettingsProperty(minValue = 500, maxValue = 25000)
 	private int maximumRetentionTimeShift = 5000;
 
 	public int getNumberOfBackfoldingRuns() {

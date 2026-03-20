@@ -109,10 +109,6 @@
          version="0.0.0"/>
 
    <plugin
-         id="org.eclipse.chemclipse.chromatogram.msd.filter.ui"
-         version="0.0.0"/>
-
-   <plugin
          id="org.eclipse.chemclipse.chromatogram.msd.identifier"
          version="0.0.0"/>
 

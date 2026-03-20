@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -64,29 +64,6 @@ public class ChromatogramFilterCSD {
 		IChromatogramFilterCSD chromatogramFilter = getChromatogramFilter(filterId);
 		if(chromatogramFilter != null) {
 			processingInfo = chromatogramFilter.applyFilter(chromatogramSelection, chromatogramFilterSettings, monitor);
-		} else {
-			processingInfo = new ProcessingInfo<>();
-			processingInfo.addErrorMessage(ICategories.CHROMATOGRAM_FILTER, Messages.noChromatogramFilterAvailable);
-		}
-		return processingInfo;
-	}
-
-	// TODO JUnit
-	/**
-	 * Applies the specified filter, but retrieves the IChromatogramFilterSettings dynamically.<br/>
-	 * See also method: applyFilter(IChromatogramSelection chromatogramSelection, IChromatogramFilterSettings chromatogramFilterSettings, String filterId, IProgressMonitor monitor)
-	 * 
-	 * @param chromatogramSelection
-	 * @param filterId
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
-	 */
-	public static IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelectionCSD chromatogramSelection, String filterId, IProgressMonitor monitor) {
-
-		IProcessingInfo<IChromatogramFilterResult> processingInfo;
-		IChromatogramFilterCSD chromatogramFilter = getChromatogramFilter(filterId);
-		if(chromatogramFilter != null) {
-			processingInfo = chromatogramFilter.applyFilter(chromatogramSelection, monitor);
 		} else {
 			processingInfo = new ProcessingInfo<>();
 			processingInfo.addErrorMessage(ICategories.CHROMATOGRAM_FILTER, Messages.noChromatogramFilterAvailable);

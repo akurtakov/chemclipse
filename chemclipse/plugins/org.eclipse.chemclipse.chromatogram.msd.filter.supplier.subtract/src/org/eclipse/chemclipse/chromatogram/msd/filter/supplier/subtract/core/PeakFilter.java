@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IPeakFilterSettings;
 import org.eclipse.chemclipse.chromatogram.msd.filter.core.peak.AbstractPeakFilter;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.subtract.calculator.SubtractCalculator;
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.subtract.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.subtract.settings.PeakFilterSettings;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -38,12 +37,7 @@ public class PeakFilter extends AbstractPeakFilter {
 	public IProcessingInfo<IPeakFilterResult> applyFilter(List<IPeakMSD> peaks, IPeakFilterSettings filterSettings, IProgressMonitor monitor) {
 
 		IProcessingInfo<IPeakFilterResult> processingInfo = new ProcessingInfo<>();
-		PeakFilterSettings peakFilterSettings;
-		if(filterSettings instanceof PeakFilterSettings settings) {
-			peakFilterSettings = settings;
-		} else {
-			peakFilterSettings = PreferenceSupplier.getPeakFilterSettings();
-		}
+		PeakFilterSettings peakFilterSettings = (PeakFilterSettings)filterSettings;
 		SubtractCalculator subtractCalculator = new SubtractCalculator();
 		subtractCalculator.subtractPeakMassSpectra(peaks, peakFilterSettings);
 		processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, DESCRIPTION, "The mass spectrum has been subtracted successfully from the peak selection."));

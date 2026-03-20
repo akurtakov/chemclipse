@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -74,8 +74,6 @@ public class ChromatogramFilterCSDProcessSupplier implements IProcessTypeSupplie
 			if(chromatogramSelection instanceof IChromatogramSelectionCSD chromatogramSelectionCSD) {
 				if(processSettings instanceof IChromatogramFilterSettings) {
 					messageConsumer.addMessages(ChromatogramFilterCSD.applyFilter(chromatogramSelectionCSD, processSettings, supplier.getId(), monitor));
-				} else {
-					messageConsumer.addMessages(ChromatogramFilterCSD.applyFilter(chromatogramSelectionCSD, supplier.getId(), monitor));
 				}
 			} else {
 				messageConsumer.addWarnMessage(getName(), Messages.onlyCSDchromatogramSupported);

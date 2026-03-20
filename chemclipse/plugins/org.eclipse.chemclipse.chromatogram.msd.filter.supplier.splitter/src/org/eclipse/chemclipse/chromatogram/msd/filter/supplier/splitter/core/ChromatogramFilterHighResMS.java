@@ -73,13 +73,6 @@ public class ChromatogramFilterHighResMS extends AbstractChromatogramFilterMSD {
 		return processingInfo;
 	}
 
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelectionMSD chromatogramSelection, IProgressMonitor monitor) {
-
-		FilterSettingsHighResMS splitterSettings = new FilterSettingsHighResMS();
-		return applyFilter(chromatogramSelection, splitterSettings, monitor);
-	}
-
 	private Set<TraceHighResMSD> getSpecificTraces(FilterSettingsHighResMS filterSettingsHighResMS) {
 
 		int ppm = filterSettingsHighResMS.getBinning();

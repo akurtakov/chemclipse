@@ -75,13 +75,6 @@ public class ChromatogramFilterTandemMS extends AbstractChromatogramFilterMSD {
 		return processingInfo;
 	}
 
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelectionMSD chromatogramSelection, IProgressMonitor monitor) {
-
-		FilterSettingsTandemMS splitterSettings = new FilterSettingsTandemMS();
-		return applyFilter(chromatogramSelection, splitterSettings, monitor);
-	}
-
 	private Set<TraceTandemMSD> getSpecificTraces(FilterSettingsTandemMS filterSettingsTandemMS) {
 
 		Set<TraceTandemMSD> specificTransitions = new HashSet<>();

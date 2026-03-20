@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,7 +19,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.filter.settings.AbstractChromatogramFilterSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.support.literature.LiteratureReference;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
@@ -35,12 +34,12 @@ public class ChromatogramFilterSettings extends AbstractChromatogramFilterSettin
 
 	@JsonProperty(value = "Order", defaultValue = "2")
 	@JsonPropertyDescription(value = "Order p of the polynomial to be fitted: Integer in the range from 2 to 5")
-	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_ORDER, maxValue = PreferenceSupplier.MAX_ORDER)
+	@IntSettingsProperty(minValue = 2, maxValue = 5)
 	private int order = 2;
 
 	@JsonProperty(value = "Width", defaultValue = "5")
 	@JsonPropertyDescription(value = "Filter width, uneven integer in the range from 5 to 51")
-	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_WIDTH, maxValue = PreferenceSupplier.MAX_WIDTH, validation = Validation.ODD_NUMBER)
+	@IntSettingsProperty(minValue = 5, maxValue = 51, validation = Validation.ODD_NUMBER)
 	private int width = 5;
 
 	@JsonIgnore

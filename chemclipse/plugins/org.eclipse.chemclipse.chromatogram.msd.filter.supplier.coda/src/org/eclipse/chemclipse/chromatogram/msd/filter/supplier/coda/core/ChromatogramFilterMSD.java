@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.calculator.I
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.calculator.MassChromatographicQualityCalculator;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.exceptions.CodaCalculatorException;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.exceptions.FilterException;
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.settings.FilterSettings;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
@@ -53,14 +52,6 @@ public class ChromatogramFilterMSD extends AbstractChromatogramFilterMSD {
 		}
 		chromatogramSelection.getChromatogram().setDirty(true);
 		return processingInfo;
-	}
-
-	// TODO JUnit
-	@Override
-	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelectionMSD chromatogramSelection, IProgressMonitor monitor) {
-
-		IChromatogramFilterSettings chromatogramFilterSettings = PreferenceSupplier.getChromatogramFilterSettings();
-		return applyFilter(chromatogramSelection, chromatogramFilterSettings, monitor);
 	}
 
 	private void applyCodaFilter(IChromatogramSelectionMSD chromatogramSelection, FilterSettings filterSettings) throws FilterException {
