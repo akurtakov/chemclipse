@@ -2,15 +2,6 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension
-         point="org.eclipse.ui.preferencePages">
-      <page
-            category="org.eclipse.chemclipse.chromatogram.xxd.integrator.ui.preferences.integratorPreferencePage"
-            class="org.eclipse.chemclipse.chromatogram.msd.integrator.supplier.sumarea.ui.preferences.PreferencePage"
-            id="org.eclipse.chemclipse.chromatogram.msd.integrator.supplier.sumarea.ui.ui.preferences.sumareaIntegratorPreferencePage"
-            name="Sumarea Integrator">
-      </page>
-   </extension>
-   <extension
          point="org.eclipse.chemclipse.xxd.process.ui.menu.icon">
       <icon
             class="org.eclipse.chemclipse.chromatogram.msd.integrator.supplier.sumarea.ui.icon.MenuIcon"

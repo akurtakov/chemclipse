@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -91,7 +91,7 @@ public class AlkanePatternDetectorMSD {
 				integrationSupport.setMinimumPeakWidth(0);
 				integrationSupport.setMinimumSignalToNoiseRatio(0);
 				peakIntegratorSettings.getMarkedTraces().clear();
-				peakIntegrator.integrate(chromatogramSelectionMSD, monitor);
+				peakIntegrator.integrate(chromatogramSelectionMSD, peakIntegratorSettings, monitor);
 				peaks = extractPeaks(chromatogramMSD);
 			}
 			/*

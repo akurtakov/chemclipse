@@ -84,26 +84,6 @@ public class ChromatogramIntegrator {
 		return processingInfo;
 	}
 
-	/**
-	 * Integrates a chromatogram.
-	 *
-	 * @param chromatogramSelection
-	 * @param integratorId
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
-	 */
-	public static IProcessingInfo<IChromatogramIntegrationResults> integrate(IChromatogramSelection chromatogramSelection, String integratorId, IProgressMonitor monitor) {
-
-		IProcessingInfo<IChromatogramIntegrationResults> processingInfo;
-		IChromatogramIntegrator integrator = getIntegrator(integratorId);
-		if(integrator != null) {
-			processingInfo = integrator.integrate(chromatogramSelection, monitor);
-		} else {
-			processingInfo = getNoIntegratorAvailableProcessingInfo();
-		}
-		return processingInfo;
-	}
-
 	// ---------------------------------------------------
 	public static IChromatogramIntegratorSupport getChromatogramIntegratorSupport() {
 

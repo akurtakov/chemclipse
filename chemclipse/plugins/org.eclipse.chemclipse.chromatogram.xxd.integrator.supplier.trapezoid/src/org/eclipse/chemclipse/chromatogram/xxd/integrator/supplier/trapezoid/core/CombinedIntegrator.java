@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.chromatogram.xxd.integrator.result.ICombinedIntegr
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.result.IPeakIntegrationResults;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.internal.support.ChromatogramIntegratorSupport;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.internal.support.PeakIntegratorSupport;
-import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.settings.CombinedIntegrationSettings;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
@@ -60,12 +59,5 @@ public class CombinedIntegrator extends AbstractCombinedIntegrator {
 			}
 		}
 		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<ICombinedIntegrationResult> integrate(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		CombinedIntegrationSettings combinedIntegrationSettings = PreferenceSupplier.getCombinedIntegrationSettings();
-		return integrate(chromatogramSelection, combinedIntegrationSettings, monitor);
 	}
 }

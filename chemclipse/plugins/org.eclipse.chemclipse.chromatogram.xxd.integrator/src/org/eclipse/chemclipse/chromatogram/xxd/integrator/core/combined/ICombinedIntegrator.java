@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -21,6 +21,4 @@ import org.eclipse.core.runtime.IProgressMonitor;
 public interface ICombinedIntegrator {
 
 	IProcessingInfo<ICombinedIntegrationResult> integrate(IChromatogramSelection chromatogramSelection, ICombinedIntegrationSettings combinedIntegrationSettings, IProgressMonitor monitor);
-
-	IProcessingInfo<ICombinedIntegrationResult> integrate(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor);
 }
