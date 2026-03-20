@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,7 +20,6 @@ import java.util.List;
 import org.eclipse.chemclipse.chromatogram.msd.identifier.peak.IPeakIdentifierMSD;
 import org.eclipse.chemclipse.chromatogram.msd.identifier.settings.IPeakIdentifierSettingsMSD;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.identifier.FileIdentifier;
-import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings.PeakIdentifierSettings;
 import org.eclipse.chemclipse.model.identifier.IPeakIdentificationResults;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
@@ -33,9 +32,6 @@ public class PeakIdentifierFile implements IPeakIdentifierMSD {
 	@Override
 	public IProcessingInfo<IPeakIdentificationResults> identify(List<? extends IPeakMSD> peaks, IPeakIdentifierSettingsMSD identifierSettings, IProgressMonitor monitor) {
 
-		if(identifierSettings == null) {
-			identifierSettings = PreferenceSupplier.getPeakIdentifierSettings();
-		}
 		IProcessingInfo<IPeakIdentificationResults> processingInfo = new ProcessingInfo<>();
 		if(identifierSettings instanceof PeakIdentifierSettings peakIdentifierSettings) {
 			try {

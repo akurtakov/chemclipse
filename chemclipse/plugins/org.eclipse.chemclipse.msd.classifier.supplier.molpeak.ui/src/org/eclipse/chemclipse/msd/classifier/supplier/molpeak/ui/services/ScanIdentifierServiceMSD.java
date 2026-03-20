@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,9 +13,7 @@
 package org.eclipse.chemclipse.msd.classifier.supplier.molpeak.ui.services;
 
 import org.eclipse.chemclipse.model.types.DataType;
-import org.eclipse.chemclipse.msd.classifier.supplier.molpeak.ui.preferences.PreferencePageSGHC;
 import org.eclipse.chemclipse.swt.ui.services.IScanIdentifierService;
-import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ConfigurationPolicy;
 
@@ -26,11 +24,5 @@ public class ScanIdentifierServiceMSD implements IScanIdentifierService {
 	public DataType getDataType() {
 
 		return DataType.MSD;
-	}
-
-	@Override
-	public Class<? extends IWorkbenchPreferencePage> getPreferencePage() {
-
-		return PreferencePageSGHC.class;
 	}
 }

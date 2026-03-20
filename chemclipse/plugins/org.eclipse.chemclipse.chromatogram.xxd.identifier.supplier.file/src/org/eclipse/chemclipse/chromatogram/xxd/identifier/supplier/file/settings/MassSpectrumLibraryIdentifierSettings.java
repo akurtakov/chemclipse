@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,7 +16,6 @@ package org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.setting
 import java.io.File;
 import java.util.StringJoiner;
 
-import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.msd.identifier.settings.AbstractMassSpectrumIdentifierSettings;
 import org.eclipse.chemclipse.support.settings.DoubleSettingsProperty;
 import org.eclipse.chemclipse.support.settings.FileSettingProperty;
@@ -40,19 +39,19 @@ public class MassSpectrumLibraryIdentifierSettings extends AbstractMassSpectrumI
 	private boolean usePreOptimization = false;
 
 	@JsonProperty(value = "Threshold Pre-Optimization", defaultValue = "0.12")
-	@DoubleSettingsProperty(minValue = PreferenceSupplier.MIN_THRESHOLD_PRE_OPTIMIZATION, maxValue = PreferenceSupplier.MAX_THRESHOLD_PRE_OPTIMIZATION, step = 0.1)
+	@DoubleSettingsProperty(minValue = 0.0d, maxValue = 1.0d, step = 0.1)
 	private double thresholdPreOptimization = 0.12;
 
 	@JsonProperty(value = "Number of Targets", defaultValue = "15")
-	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_NUMBER_OF_TARGETS, maxValue = PreferenceSupplier.MAX_NUMBER_OF_TARGETS)
+	@IntSettingsProperty(minValue = 1, maxValue = 100)
 	private int numberOfTargets = 15;
 
 	@JsonProperty(value = "Min. Match Factor", defaultValue = "80.0")
-	@FloatSettingsProperty(minValue = PreferenceSupplier.MIN_FACTOR, maxValue = PreferenceSupplier.MAX_FACTOR)
+	@FloatSettingsProperty(minValue = 0.0f, maxValue = 100.0f)
 	private float minMatchFactor = 80.0f;
 
 	@JsonProperty(value = "Min. Reverse Match Factor", defaultValue = "80.0")
-	@FloatSettingsProperty(minValue = PreferenceSupplier.MIN_FACTOR, maxValue = PreferenceSupplier.MAX_FACTOR)
+	@FloatSettingsProperty(minValue = 0.0f, maxValue = 100.0f)
 	private float minReverseMatchFactor = 80.0f;
 
 	@JsonIgnore

@@ -23,7 +23,6 @@ import org.eclipse.chemclipse.chromatogram.wsd.identifier.peak.IPeakIdentifierWS
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.settings.IPeakIdentifierSettingsWSD;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.identifier.UnknownIdentifier;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.model.UnknownSettingsSupport;
-import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings.IUnknownSettings;
 import org.eclipse.chemclipse.csd.model.core.IPeakCSD;
 import org.eclipse.chemclipse.model.core.IPeak;
@@ -41,10 +40,6 @@ public class PeakIdentifierUnknown implements IPeakIdentifierMSD, IPeakIdentifie
 	@Override
 	public IProcessingInfo<IPeakIdentificationResults> identify(List<? extends IPeakMSD> peaks, IPeakIdentifierSettingsMSD identifierSettings, IProgressMonitor monitor) {
 
-		if(identifierSettings == null) {
-			identifierSettings = PreferenceSupplier.getPeakUnknownSettingsMSD();
-		}
-
 		IUnknownSettings unknownSettings = identifierSettings instanceof IUnknownSettings settings ? settings : null;
 		return runIdentification(peaks, unknownSettings);
 	}
@@ -52,20 +47,12 @@ public class PeakIdentifierUnknown implements IPeakIdentifierMSD, IPeakIdentifie
 	@Override
 	public IProcessingInfo<IPeakIdentificationResults> identify(List<? extends IPeakCSD> peaks, IPeakIdentifierSettingsCSD identifierSettings, IProgressMonitor monitor) {
 
-		if(identifierSettings == null) {
-			identifierSettings = PreferenceSupplier.getPeakUnknownSettingsCSD();
-		}
-
 		IUnknownSettings unknownSettings = identifierSettings instanceof IUnknownSettings settings ? settings : null;
 		return runIdentification(peaks, unknownSettings);
 	}
 
 	@Override
 	public IProcessingInfo<IPeakIdentificationResults> identify(List<? extends IPeakWSD> peaks, IPeakIdentifierSettingsWSD identifierSettings, IProgressMonitor monitor) {
-
-		if(identifierSettings == null) {
-			identifierSettings = PreferenceSupplier.getPeakUnknownSettingsWSD();
-		}
 
 		IUnknownSettings unknownSettings = identifierSettings instanceof IUnknownSettings settings ? settings : null;
 		return runIdentification(peaks, unknownSettings);
