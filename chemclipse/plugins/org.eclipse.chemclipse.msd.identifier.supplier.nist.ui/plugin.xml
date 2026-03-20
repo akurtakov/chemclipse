@@ -9,12 +9,6 @@
             id="org.eclipse.chemclipse.msd.identifier.supplier.nist.ui.preferences.preferencePageInstallation"
             name="NIST (extern) - Installation">
       </page>         
-      <page
-            category="org.eclipse.chemclipse.msd.identifier.supplier.nist.ui.preferences.preferencePageInstallation"
-            class="org.eclipse.chemclipse.msd.identifier.supplier.nist.ui.preferences.PreferencePageSettings"
-            id="org.eclipse.chemclipse.msd.identifier.supplier.nist.ui.preferences.preferencePageSettings"
-            name="NIST (extern) - Settings">
-      </page>
    </extension>
    <extension
          point="org.eclipse.chemclipse.xxd.process.ui.menu.icon">

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,7 +24,6 @@ import org.eclipse.chemclipse.model.identifier.IPeakIdentificationResults;
 import org.eclipse.chemclipse.model.support.LimitSupport;
 import org.eclipse.chemclipse.msd.identifier.supplier.nist.core.support.Identifier;
 import org.eclipse.chemclipse.msd.identifier.supplier.nist.l10n.Messages;
-import org.eclipse.chemclipse.msd.identifier.supplier.nist.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.msd.identifier.supplier.nist.settings.PeakIdentifierSettings;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -39,10 +38,6 @@ public class PeakIdentifier extends AbstractPeakIdentifierMSD {
 	public IProcessingInfo<IPeakIdentificationResults> identify(List<? extends IPeakMSD> peaks, IPeakIdentifierSettingsMSD identifierSettings, IProgressMonitor monitor) {
 
 		IProcessingInfo<IPeakIdentificationResults> processingInfo = new ProcessingInfo<>();
-
-		if(identifierSettings == null) {
-			identifierSettings = PreferenceSupplier.getPeakIdentifierSettings();
-		}
 
 		if(identifierSettings instanceof PeakIdentifierSettings peakIdentifierSettings) {
 			try {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,7 +18,6 @@ import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.msd.identifier.settings.IPeakIdentifierSettingsMSD;
 import org.eclipse.chemclipse.model.identifier.IIdentifierSettings;
-import org.eclipse.chemclipse.msd.identifier.supplier.nist.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.support.literature.LiteratureReference;
 import org.eclipse.chemclipse.support.settings.ByteSettingsProperty;
 import org.eclipse.chemclipse.support.settings.FileSettingProperty;
@@ -35,23 +34,29 @@ public class PeakIdentifierSettings implements ISearchSettings, IPeakIdentifierS
 	@JsonPropertyDescription("Select the NIST-DB folder, called MSSEARCH.")
 	@FileSettingProperty(dialogType = DialogType.OPEN_DIALOG, onlyDirectory = true)
 	private File nistFolder = null;
+
 	@JsonProperty(value = "Limit Match Factor", defaultValue = "80.0")
 	@JsonPropertyDescription(value = "Run an identification if no target exists with a Match Factor >= the given limit.")
 	@FloatSettingsProperty(minValue = IIdentifierSettings.MIN_LIMIT_MATCH_FACTOR, maxValue = IIdentifierSettings.MAX_LIMIT_MATCH_FACTOR)
 	private float limitMatchFactor = 80.0f;
+
 	@JsonProperty(value = "Number of Targets", defaultValue = "3")
 	@JsonPropertyDescription(value = "The max. number of targets that will be stored.")
-	@ByteSettingsProperty(minValue = PreferenceSupplier.MIN_NUMBER_OF_TARGETS, maxValue = PreferenceSupplier.MAX_NUMBER_OF_TARGETS)
-	private byte numberOfTargets = PreferenceSupplier.DEF_NUMBER_OF_TARGETS;
+	@ByteSettingsProperty(minValue = 1, maxValue = 100)
+	private byte numberOfTargets = 15;
+
 	@JsonProperty(value = "Use Optimized Mass Spectrum", defaultValue = "true")
 	@JsonPropertyDescription(value = "If true, the optimized spectrum will be used if available.")
 	private boolean useOptimizedMassSpectrum = true;
+
 	@JsonProperty(value = "Min. Match Factor", defaultValue = "80.0")
-	@FloatSettingsProperty(minValue = PreferenceSupplier.MIN_FACTOR, maxValue = PreferenceSupplier.MAX_FACTOR)
+	@FloatSettingsProperty(minValue = 0.0f, maxValue = 100.0f)
 	private float minMatchFactor = 80.0f;
+
 	@JsonProperty(value = "Min. Reverse Match Factor", defaultValue = "80.0")
-	@FloatSettingsProperty(minValue = PreferenceSupplier.MIN_FACTOR, maxValue = PreferenceSupplier.MAX_FACTOR)
+	@FloatSettingsProperty(minValue = 0.0f, maxValue = 100.0f)
 	private float minReverseMatchFactor = 80.0f;
+
 	@JsonProperty(value = "Timeout [min]", defaultValue = "20")
 	@JsonPropertyDescription(value = "The timeout in minutes to stop the action if something goes wrong.")
 	@IntSettingsProperty
@@ -88,7 +93,7 @@ public class PeakIdentifierSettings implements ISearchSettings, IPeakIdentifierS
 
 	public void setNumberOfTargets(byte numberOfTargets) {
 
-		if(numberOfTargets >= PreferenceSupplier.MIN_NUMBER_OF_TARGETS && numberOfTargets <= PreferenceSupplier.MAX_NUMBER_OF_TARGETS) {
+		if(numberOfTargets >= 1 && numberOfTargets <= 100) {
 			this.numberOfTargets = numberOfTargets;
 		}
 	}

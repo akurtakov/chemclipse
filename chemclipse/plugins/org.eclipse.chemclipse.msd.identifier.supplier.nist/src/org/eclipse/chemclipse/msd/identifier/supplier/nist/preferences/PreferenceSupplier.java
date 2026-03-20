@@ -15,9 +15,6 @@ package org.eclipse.chemclipse.msd.identifier.supplier.nist.preferences;
 
 import java.io.File;
 
-import org.eclipse.chemclipse.msd.identifier.supplier.nist.settings.PeakIdentifierSettings;
-import org.eclipse.chemclipse.msd.identifier.supplier.nist.settings.ScanDirectIdentifierSettings;
-import org.eclipse.chemclipse.msd.identifier.supplier.nist.settings.ScanIdentifierSettings;
 import org.eclipse.chemclipse.support.preferences.AbstractPreferenceSupplier;
 import org.eclipse.chemclipse.support.preferences.IPreferenceSupplier;
 import org.eclipse.core.runtime.IStatus;
@@ -27,31 +24,13 @@ import org.osgi.framework.FrameworkUtil;
 
 public class PreferenceSupplier extends AbstractPreferenceSupplier {
 
-	public static final float MIN_FACTOR = 0.0f;
-	public static final float MAX_FACTOR = 100.0f;
-	public static final int MIN_NUMBER_OF_TARGETS = 1;
-	public static final int MAX_NUMBER_OF_TARGETS = 100;
 	public static final String MSP_EXPORT_FILE_NAME = "openchrom-unknown.msp";
 	/*
 	 * Preferences
 	 */
 	public static final String P_NIST_APPLICATION = "nistApplication";
-	public static final String P_LIMIT_MATCH_FACTOR = "limitMatchFactor";
-	public static final float DEF_LIMIT_MATCH_FACTOR = 80.0f;
-	public static final String P_NUMBER_OF_TARGETS = "numberOfTargets";
-	public static final byte DEF_NUMBER_OF_TARGETS = 15;
-	public static final String P_USE_OPTIMIZED_MASS_SPECTRUM = "useOptimizedMassSpectrum";
-	public static final boolean DEF_USE_OPTIMIZED_MASS_SPECTRUM = true;
 	public static final String P_MAC_WINE_BINARY = "macWineBinary";
 	public static final String DEF_MAC_WINE_BINARY = "/Applications/Wine.app";
-	public static final String P_TIMEOUT_IN_MINUTES = "timeoutInMinutes";
-	public static final int DEF_TIMEOUT_IN_MINUTES = 20;
-	public static final String P_WAIT_IN_SECONDS = "waitInSeconds";
-	public static final int DEF_WAIT_IN_SECONDS = 3;
-	public static final String P_MIN_MATCH_FACTOR = "minMatchFactor";
-	public static final float DEF_MIN_MATCH_FACTOR = 80.0f;
-	public static final String P_MIN_REVERSE_MATCH_FACTOR = "minReverseMatchFactor";
-	public static final float DEF_MIN_REVERSE_MATCH_FACTOR = 80.0f;
 
 	public static IPreferenceSupplier INSTANCE() {
 
@@ -68,13 +47,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public void initializeDefaults() {
 
 		putDefault(P_MAC_WINE_BINARY, DEF_MAC_WINE_BINARY);
-		putDefault(P_LIMIT_MATCH_FACTOR, Float.toString(DEF_LIMIT_MATCH_FACTOR));
-		putDefault(P_NUMBER_OF_TARGETS, Integer.toString(DEF_NUMBER_OF_TARGETS));
-		putDefault(P_USE_OPTIMIZED_MASS_SPECTRUM, Boolean.toString(DEF_USE_OPTIMIZED_MASS_SPECTRUM));
-		putDefault(P_TIMEOUT_IN_MINUTES, Integer.toString(DEF_TIMEOUT_IN_MINUTES));
-		putDefault(P_WAIT_IN_SECONDS, Integer.toString(DEF_WAIT_IN_SECONDS));
-		putDefault(P_MIN_MATCH_FACTOR, Float.toString(DEF_MIN_MATCH_FACTOR));
-		putDefault(P_MIN_REVERSE_MATCH_FACTOR, Float.toString(DEF_MIN_REVERSE_MATCH_FACTOR));
 	}
 
 	/**
@@ -147,44 +119,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	private static final IStatus error(String message) {
 
 		return Status.error(message);
-	}
-
-	public static PeakIdentifierSettings getPeakIdentifierSettings() {
-
-		PeakIdentifierSettings settings = new PeakIdentifierSettings();
-		settings.setNistFolder(PreferenceSupplier.getNistInstallationFolder());
-		settings.setLimitMatchFactor(INSTANCE().getFloat(P_LIMIT_MATCH_FACTOR, DEF_LIMIT_MATCH_FACTOR));
-		settings.setNumberOfTargets(INSTANCE().getByte(P_NUMBER_OF_TARGETS, DEF_NUMBER_OF_TARGETS));
-		settings.setUseOptimizedMassSpectrum(INSTANCE().getBoolean(P_USE_OPTIMIZED_MASS_SPECTRUM, DEF_USE_OPTIMIZED_MASS_SPECTRUM));
-		settings.setTimeoutInMinutes(INSTANCE().getInteger(P_TIMEOUT_IN_MINUTES, DEF_TIMEOUT_IN_MINUTES));
-		settings.setMinMatchFactor(INSTANCE().getFloat(P_MIN_MATCH_FACTOR, DEF_MIN_MATCH_FACTOR));
-		settings.setMinReverseMatchFactor(INSTANCE().getFloat(P_MIN_REVERSE_MATCH_FACTOR, DEF_MIN_REVERSE_MATCH_FACTOR));
-
-		return settings;
-	}
-
-	public static ScanIdentifierSettings getScanIdentifierSettings() {
-
-		ScanIdentifierSettings settings = new ScanIdentifierSettings();
-		settings.setNistFolder(PreferenceSupplier.getNistInstallationFolder());
-		settings.setLimitMatchFactor(INSTANCE().getFloat(P_LIMIT_MATCH_FACTOR, DEF_LIMIT_MATCH_FACTOR));
-		settings.setNumberOfTargets(INSTANCE().getByte(P_NUMBER_OF_TARGETS, DEF_NUMBER_OF_TARGETS));
-		settings.setUseOptimizedMassSpectrum(INSTANCE().getBoolean(P_USE_OPTIMIZED_MASS_SPECTRUM, DEF_USE_OPTIMIZED_MASS_SPECTRUM));
-		settings.setTimeoutInMinutes(INSTANCE().getInteger(P_TIMEOUT_IN_MINUTES, DEF_TIMEOUT_IN_MINUTES));
-		settings.setMinMatchFactor(INSTANCE().getFloat(P_MIN_MATCH_FACTOR, DEF_MIN_MATCH_FACTOR));
-		settings.setMinReverseMatchFactor(INSTANCE().getFloat(P_MIN_REVERSE_MATCH_FACTOR, DEF_MIN_REVERSE_MATCH_FACTOR));
-
-		return settings;
-	}
-
-	public static ScanDirectIdentifierSettings getScanDirectIdentifierSettings() {
-
-		ScanDirectIdentifierSettings settings = new ScanDirectIdentifierSettings();
-		settings.setNistFolder(PreferenceSupplier.getNistInstallationFolder());
-		settings.setUseOptimizedMassSpectrum(INSTANCE().getBoolean(P_USE_OPTIMIZED_MASS_SPECTRUM, DEF_USE_OPTIMIZED_MASS_SPECTRUM));
-		settings.setWaitInSeconds(INSTANCE().getInteger(P_WAIT_IN_SECONDS, DEF_WAIT_IN_SECONDS));
-
-		return settings;
 	}
 
 	public static String getMacWineBinary() {
