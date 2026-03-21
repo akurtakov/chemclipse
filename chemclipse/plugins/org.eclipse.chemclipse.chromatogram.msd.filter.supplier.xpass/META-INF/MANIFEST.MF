@@ -19,8 +19,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.chemclipse.rcp.app;bundle-version="0.9.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.filter,
- org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.preferences
+Export-Package: org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.filter
 Service-Component: OSGI-INF/org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.core.CutOffScanFilter.xml,
  OSGI-INF/org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.core.HighPassIonsFilter.xml,
  OSGI-INF/org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.core.LowPassIonsFilter.xml,

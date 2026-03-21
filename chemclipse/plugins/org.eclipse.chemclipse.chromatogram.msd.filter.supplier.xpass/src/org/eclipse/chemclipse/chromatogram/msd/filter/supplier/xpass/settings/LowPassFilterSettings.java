@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.AbstractMassSpectrumFilterSettings;
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
 
@@ -27,8 +26,8 @@ public class LowPassFilterSettings extends AbstractMassSpectrumFilterSettings {
 
 	@JsonProperty(value = "Number Lowest", defaultValue = "5")
 	@JsonPropertyDescription(value = "This value defines the number of n lowest ions to be preserved.")
-	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_NUMBER_LOWEST, maxValue = PreferenceSupplier.MAX_NUMBER_LOWEST)
-	private int numberLowest = PreferenceSupplier.DEF_NUMBER_LOWEST;
+	@IntSettingsProperty(minValue = 1, maxValue = Integer.MAX_VALUE)
+	private int numberLowest = 5;
 
 	public int getNumberLowest() {
 
