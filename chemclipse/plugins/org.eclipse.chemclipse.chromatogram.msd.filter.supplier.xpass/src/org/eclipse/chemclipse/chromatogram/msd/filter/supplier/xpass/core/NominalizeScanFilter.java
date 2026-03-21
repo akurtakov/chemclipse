@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,7 +20,6 @@ import org.eclipse.chemclipse.chromatogram.msd.filter.result.IMassSpectrumFilter
 import org.eclipse.chemclipse.chromatogram.msd.filter.result.MassSpectrumFilterResult;
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.IMassSpectrumFilterSettings;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.filter.XPassFilter;
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.settings.LowPassFilterSettings;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.xpass.settings.NominalizeFilterSettings;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
@@ -35,10 +34,6 @@ public class NominalizeScanFilter extends AbstractMassSpectrumFilter {
 
 	@Override
 	public IProcessingInfo<IMassSpectrumFilterResult> applyFilter(List<IScanMSD> massSpectra, IMassSpectrumFilterSettings filterSettings, IProgressMonitor monitor) {
-
-		if(filterSettings == null) {
-			filterSettings = PreferenceSupplier.getNominalizeFilterSettings();
-		}
 
 		IProcessingInfo<IMassSpectrumFilterResult> processingInfo = validate(massSpectra, filterSettings);
 		if(!processingInfo.hasErrorMessages()) {
