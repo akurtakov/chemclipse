@@ -90,7 +90,7 @@ public class Identifier {
 		/*
 		 * Get the OS NIST support. Use Wine in a non MS-Windows system.
 		 */
-		File nistFolder = searchSettings.getNistFolder();
+		File nistFolder = PreferenceSupplier.getNistInstallationFolder();
 		IStatus status = PreferenceSupplier.validateLocation(nistFolder);
 
 		if(status.isOK()) {
@@ -161,7 +161,7 @@ public class Identifier {
 		/*
 		 * Get the OS NIST support. Use Wine in a non MS-Windows system.
 		 */
-		File nistFolder = searchSettings.getNistFolder(); // PreferenceSupplier.getNistInstallationFolder();
+		File nistFolder = PreferenceSupplier.getNistInstallationFolder();
 		IStatus status = PreferenceSupplier.validateLocation(nistFolder);
 		if(status.isOK()) {
 			/*
@@ -222,7 +222,7 @@ public class Identifier {
 		/*
 		 * Get the OS NIST support. Use Wine in a non MS-Windows system.
 		 */
-		File nistFolder = searchSettings.getNistFolder(); // PreferenceSupplier.getNistInstallationFolder();
+		File nistFolder = PreferenceSupplier.getNistInstallationFolder();
 		IStatus status = PreferenceSupplier.validateLocation(nistFolder);
 		if(status.isOK()) {
 			IExtendedRuntimeSupport runtimeSupport = RuntimeSupportFactory.getRuntimeSupport(nistFolder);

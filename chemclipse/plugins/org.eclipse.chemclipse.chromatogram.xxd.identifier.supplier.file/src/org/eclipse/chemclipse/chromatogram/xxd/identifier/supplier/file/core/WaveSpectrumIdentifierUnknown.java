@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,7 +20,6 @@ import org.eclipse.chemclipse.chromatogram.wsd.identifier.wavespectrum.AbstractW
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.identifier.FileIdentifier;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.identifier.UnknownIdentifier;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.model.UnknownSettingsSupport;
-import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings.WaveSpectrumUnknownSettings;
 import org.eclipse.chemclipse.model.targets.TargetUnknownSettings;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -34,13 +33,7 @@ public class WaveSpectrumIdentifierUnknown extends AbstractWaveSpectrumIdentifie
 	@Override
 	public IProcessingInfo<WaveSpectra> identify(List<IScanWSD> waveSpectraList, IWaveSpectrumIdentifierSettings identifierSettings, IProgressMonitor monitor) {
 
-		WaveSpectrumUnknownSettings unknownSettings;
-		if(identifierSettings instanceof WaveSpectrumUnknownSettings settings) {
-			unknownSettings = settings;
-		} else {
-			unknownSettings = PreferenceSupplier.getWaveSpectrumUnknownSettings();
-		}
-
+		WaveSpectrumUnknownSettings unknownSettings = (WaveSpectrumUnknownSettings)identifierSettings;
 		IProcessingInfo<WaveSpectra> processingInfo = new ProcessingInfo<>();
 		TargetUnknownSettings targetUnknownSettings = UnknownSettingsSupport.getTargetUnknownSettings(unknownSettings);
 		float limitMatchFactor = unknownSettings.getLimitMatchFactor();

@@ -32,7 +32,6 @@ import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.model.support.CalculationType;
-import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.msd.model.core.ICombinedMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
@@ -46,7 +45,6 @@ import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
-import org.eclipse.chemclipse.swt.ui.services.IScanIdentifierService;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
@@ -71,7 +69,6 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.ui.IWorkbenchPreferencePage;
 
 public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI {
 
@@ -439,23 +436,6 @@ public class ExtendedCombinedScanUI extends Composite implements IExtendedPartUI
 		List<Class<? extends IPreferencePage>> preferencePages = new ArrayList<>();
 		preferencePages.add(PreferencePageScans.class);
 		preferencePages.add(PreferencePageSubtract.class);
-		/*
-		 * Additional pages.
-		 */
-		Object[] scanIdentifierServices = Activator.getDefault().getScanIdentifierServices();
-		if(scanIdentifierServices != null) {
-			for(Object object : scanIdentifierServices) {
-				if(object instanceof IScanIdentifierService scanIdentifierService) {
-					DataType dataType = scanIdentifierService.getDataType();
-					if(DataType.MSD.equals(dataType)) {
-						Class<? extends IWorkbenchPreferencePage> preferencePage = scanIdentifierService.getPreferencePage();
-						if(preferencePage != null) {
-							preferencePages.add(preferencePage);
-						}
-					}
-				}
-			}
-		}
 
 		return preferencePages;
 	}

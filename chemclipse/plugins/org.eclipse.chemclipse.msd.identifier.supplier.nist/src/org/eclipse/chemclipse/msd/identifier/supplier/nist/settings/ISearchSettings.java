@@ -13,14 +13,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.identifier.supplier.nist.settings;
 
-import java.io.File;
-
 public interface ISearchSettings {
-
-	/**
-	 * Return the MSSEARCH folder of the NIST installation.
-	 */
-	File getNistFolder();
 
 	/**
 	 * Retrieve the given number of targets from the database.

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,7 +12,6 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings;
 
-import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.model.identifier.AbstractIdentifierSettings;
 import org.eclipse.chemclipse.msd.identifier.settings.IMassSpectrumIdentifierSettings;
 import org.eclipse.chemclipse.support.settings.FloatSettingsProperty;
@@ -23,26 +22,33 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 public class MassSpectrumUnknownSettings extends AbstractIdentifierSettings implements IUnknownSettingsMSD, IMassSpectrumIdentifierSettings {
 
-	@JsonProperty(value = "Target Name", defaultValue = PreferenceSupplier.DEF_TARGET_NAME_UNKNOWN)
+	@JsonProperty(value = "Target Name", defaultValue = "Unknown")
 	private String targetName = "Unknown";
+
 	@JsonProperty(value = "Match Quality", defaultValue = "80.0")
 	@JsonPropertyDescription(value = "The match quality is set as the Match Factor.")
-	@FloatSettingsProperty(minValue = PreferenceSupplier.MIN_FACTOR, maxValue = PreferenceSupplier.MAX_FACTOR)
+	@FloatSettingsProperty(minValue = 0.0f, maxValue = 100.0f)
 	private float matchQuality = 80.0f;
+
 	@JsonProperty(value = "Number of m/z", defaultValue = "5")
 	@JsonPropertyDescription(value = "This is the number of m/z printed, sorted asc by intensity.")
-	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_NUMBER_OF_MZ, maxValue = PreferenceSupplier.MAX_NUMBER_OF_MZ)
+	@IntSettingsProperty(minValue = 0, maxValue = Integer.MAX_VALUE)
 	private int numberOfMZ = 5;
+
 	@JsonProperty(value = "Include Intensity [%]", defaultValue = "false")
 	private boolean includeIntensityPercent = false;
-	@JsonProperty(value = "Marker Start", defaultValue = PreferenceSupplier.DEF_MARKER_START_UNKNOWN)
+
+	@JsonProperty(value = "Marker Start", defaultValue = "[")
 	@JsonPropertyDescription(value = "Use e.g. a opening bracket.")
 	private String markerStart = "[";
-	@JsonProperty(value = "Marker Stop", defaultValue = PreferenceSupplier.DEF_MARKER_STOP_UNKNOWN)
+
+	@JsonProperty(value = "Marker Stop", defaultValue = "]")
 	@JsonPropertyDescription(value = "Use e.g. a closing bracket.")
 	private String markerStop = "]";
+
 	@JsonProperty(value = "Include Retention Time", defaultValue = "false")
 	private boolean includeRetentionTime = false;
+
 	@JsonProperty(value = "Include Retention Index", defaultValue = "false")
 	private boolean includeRetentionIndex = false;
 

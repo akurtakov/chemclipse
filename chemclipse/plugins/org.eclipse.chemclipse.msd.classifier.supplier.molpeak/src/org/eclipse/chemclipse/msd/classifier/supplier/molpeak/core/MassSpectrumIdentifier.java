@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,7 +17,6 @@ package org.eclipse.chemclipse.msd.classifier.supplier.molpeak.core;
 import java.util.List;
 
 import org.eclipse.chemclipse.msd.classifier.supplier.molpeak.identifier.BasePeakIdentifier;
-import org.eclipse.chemclipse.msd.classifier.supplier.molpeak.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.msd.classifier.supplier.molpeak.settings.MassSpectrumIdentifierSettings;
 import org.eclipse.chemclipse.msd.identifier.AbstractMassSpectrumIdentifier;
 import org.eclipse.chemclipse.msd.identifier.settings.IMassSpectrumIdentifierSettings;
@@ -32,12 +31,7 @@ public class MassSpectrumIdentifier extends AbstractMassSpectrumIdentifier {
 	@Override
 	public IProcessingInfo<IMassSpectra> identify(List<IScanMSD> massSpectrumList, IMassSpectrumIdentifierSettings identifierSettings, IProgressMonitor monitor) {
 
-		MassSpectrumIdentifierSettings massSpectrumIdentifierSettings;
-		if(identifierSettings instanceof MassSpectrumIdentifierSettings settings) {
-			massSpectrumIdentifierSettings = settings;
-		} else {
-			massSpectrumIdentifierSettings = PreferenceSupplier.getMassSpectrumIdentifierSettings();
-		}
+		MassSpectrumIdentifierSettings massSpectrumIdentifierSettings = (MassSpectrumIdentifierSettings)identifierSettings;
 		IProcessingInfo<IMassSpectra> processingInfo = new ProcessingInfo<>();
 		BasePeakIdentifier basePeakIdentifier = new BasePeakIdentifier();
 		basePeakIdentifier.identifyMassSpectra(massSpectrumList, massSpectrumIdentifierSettings, monitor);
