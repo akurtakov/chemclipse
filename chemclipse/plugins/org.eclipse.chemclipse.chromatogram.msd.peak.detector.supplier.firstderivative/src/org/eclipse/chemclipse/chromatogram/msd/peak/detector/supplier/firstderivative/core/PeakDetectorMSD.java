@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 import org.eclipse.chemclipse.chromatogram.msd.peak.detector.core.IPeakDetectorMSD;
 import org.eclipse.chemclipse.chromatogram.msd.peak.detector.settings.IPeakDetectorSettingsMSD;
 import org.eclipse.chemclipse.chromatogram.msd.peak.detector.supplier.firstderivative.Activator;
-import org.eclipse.chemclipse.chromatogram.msd.peak.detector.supplier.firstderivative.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.msd.peak.detector.supplier.firstderivative.settings.PeakDetectorSettingsMSD;
 import org.eclipse.chemclipse.chromatogram.peak.detector.core.FilterMode;
 import org.eclipse.chemclipse.chromatogram.peak.detector.exceptions.ValueMustNotBeNullException;
@@ -111,15 +110,6 @@ public class PeakDetectorMSD extends BasePeakDetector implements IPeakDetectorMS
 	public IPeakDetectorSettingsMSD getPeakDetectorSettings() {
 
 		return peakDetectorSettings;
-	}
-
-	@Override
-	public IProcessingInfo<?> detect(IChromatogramSelectionMSD chromatogramSelection, IProgressMonitor monitor) {
-
-		if(peakDetectorSettings == null) {
-			peakDetectorSettings = PreferenceSupplier.getPeakDetectorSettingsMSD();
-		}
-		return detect(chromatogramSelection, peakDetectorSettings, monitor);
 	}
 
 	/**

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -31,16 +31,4 @@ public interface IPeakDetectorWSD extends IPeakDetector {
 	 * @throws ValueMustNotBeNullException
 	 */
 	IProcessingInfo<?> detect(IChromatogramSelectionWSD chromatogramSelection, IPeakDetectorSettingsWSD peakDetectorSettings, IProgressMonitor monitor);
-
-	/**
-	 * The same as the other method but without settings.
-	 * 
-	 * @param chromatogramSelection
-	 * @param monitor
-	 * @throws ValueMustNotBeNullException
-	 */
-	default IProcessingInfo<?> detect(IChromatogramSelectionWSD chromatogramSelection, IProgressMonitor monitor) {
-
-		return detect(chromatogramSelection, null, monitor);
-	}
 }

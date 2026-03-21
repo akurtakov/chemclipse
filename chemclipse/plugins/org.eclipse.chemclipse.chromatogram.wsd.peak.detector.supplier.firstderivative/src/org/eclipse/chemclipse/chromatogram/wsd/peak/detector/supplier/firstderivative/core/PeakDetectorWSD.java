@@ -26,7 +26,6 @@ import org.eclipse.chemclipse.chromatogram.peak.detector.support.IRawPeak;
 import org.eclipse.chemclipse.chromatogram.wsd.peak.detector.core.IPeakDetectorWSD;
 import org.eclipse.chemclipse.chromatogram.wsd.peak.detector.settings.IPeakDetectorSettingsWSD;
 import org.eclipse.chemclipse.chromatogram.wsd.peak.detector.supplier.firstderivative.Activator;
-import org.eclipse.chemclipse.chromatogram.wsd.peak.detector.supplier.firstderivative.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.wsd.peak.detector.supplier.firstderivative.settings.PeakDetectorSettingsWSD;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.core.noise.NoiseChromatogramSupport;
 import org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderivative.core.BasePeakDetector;
@@ -102,14 +101,6 @@ public class PeakDetectorWSD extends BasePeakDetector implements IPeakDetectorWS
 			}
 		}
 		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<?> detect(IChromatogramSelectionWSD chromatogramSelection, IProgressMonitor monitor) {
-
-		PeakDetectorSettingsWSD peakDetectorSettings = PreferenceSupplier.getPeakDetectorSettingsWSD();
-		chromatogramSelection.getChromatogram().setDirty(true);
-		return detect(chromatogramSelection, peakDetectorSettings, monitor);
 	}
 
 	/**
