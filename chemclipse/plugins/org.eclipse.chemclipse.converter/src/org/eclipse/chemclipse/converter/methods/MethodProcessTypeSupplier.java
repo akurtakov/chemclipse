@@ -186,9 +186,15 @@ public class MethodProcessTypeSupplier implements IProcessTypeSupplier, BundleTr
 					try (InputStream inputStream = url.openStream()) {
 						/*
 						 * Try to resolve the file.
+						 * Use FileLocator to convert the bundleresource: URL directly to a
+						 * file: URL, which is robust across Java versions.
 						 */
-						String urlPath = url.getPath();
-						File sourceFile = PathResolver.getFile(bundle, urlPath);
+						File sourceFile = null;
+						try {
+							sourceFile = PathResolver.getFile(bundle, url.getPath());
+						} catch(IOException e) {
+							logger.warn("Could not resolve source file for URL: " + url);
+						}
 
 						String path = url.getPath().replace(PROCESSORS_ENTRY_PATH, "").replace(MethodConverter.FILE_EXTENSION, "");
 						String externalForm = url.toExternalForm();
@@ -200,13 +206,17 @@ public class MethodProcessTypeSupplier implements IProcessTypeSupplier, BundleTr
 							 * The containing bundle should define in the MANIFEST.MF:
 							 * Eclipse-BundleShape: dir
 							 */
-							if(processMethod instanceof ProcessMethod method && sourceFile.exists()) {
+							if(processMethod instanceof ProcessMethod method && sourceFile != null && sourceFile.exists()) {
 								method.setSourceFile(sourceFile);
 							}
 							processSupplierList.add(new MetaProcessorProcessSupplier(MethodProcessSupport.getID(processMethod, BUNDLE_PREFIX + bundle.getSymbolicName() + ":" + path), processMethod, this));
 						}
 					}
-				} catch(IOException e) {
+				} catch(IOException | RuntimeException e) {
+					/*
+					 * Catch RuntimeException to prevent a single malformed bundle method
+					 * entry from crashing the entire bundle tracker callback.
+					 */
 					logger.error("Failed to load the method from URL: " + url, e);
 				}
 			}

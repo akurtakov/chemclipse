@@ -16,6 +16,8 @@ package org.eclipse.chemclipse.rcp.ui.icons.core;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -120,7 +122,16 @@ public class ApplicationImage implements IApplicationImage {
 
 			IPath path = new Path(builder.toString());
 			URL url = FileLocator.find(bundle, path, null);
-			File directory = new File(FileLocator.toFileURL(url).getPath());
+			if(url == null) {
+				return images;
+			}
+			URL fileURL = FileLocator.toFileURL(url);
+			File directory;
+			try {
+				directory = new File(new URI(fileURL.getProtocol(), fileURL.getPath(), null));
+			} catch(URISyntaxException e) {
+				throw new IOException("Cannot convert URL to file: " + fileURL, e);
+			}
 			if(directory.isDirectory()) {
 				for(File file : directory.listFiles()) {
 					String name = file.getName().toLowerCase();

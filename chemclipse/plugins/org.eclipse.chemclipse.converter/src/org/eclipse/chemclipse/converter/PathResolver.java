@@ -14,6 +14,8 @@ package org.eclipse.chemclipse.converter;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.eclipse.core.runtime.FileLocator;
@@ -35,6 +37,20 @@ public class PathResolver {
 	public static File getFile(final Bundle bundle, final String path) throws IOException {
 
 		URL url = FileLocator.find(bundle, new Path(path), null);
-		return new File(FileLocator.toFileURL(url).getPath());
+		if(url == null) {
+			throw new IOException("Cannot find resource '" + path + "' in bundle '" + bundle.getSymbolicName() + "'");
+		}
+		URL fileURL = FileLocator.toFileURL(url);
+		try {
+			/*
+			 * Construct a properly encoded URI from the file: URL components.
+			 * Using new URI(scheme, ssp, fragment) encodes special characters
+			 * (e.g. spaces) and correctly handles Windows drive-letter paths
+			 * where URL.getPath() may include a leading slash (e.g. /C:/...).
+			 */
+			return new File(new URI(fileURL.getProtocol(), fileURL.getPath(), null));
+		} catch(URISyntaxException e) {
+			throw new IOException("Cannot convert URL to file: " + fileURL, e);
+		}
 	}
 }
