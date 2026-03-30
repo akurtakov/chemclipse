@@ -121,7 +121,7 @@ public class ApplicationImage implements IApplicationImage {
 
 			IPath path = new Path(builder.toString());
 			URL url = FileLocator.find(bundle, path, null);
-			File directory = new File(FileLocator.resolve(url).toURI());
+			File directory = new File(FileLocator.toFileURL(url).toURI());
 			if(directory.isDirectory()) {
 				for(File file : directory.listFiles()) {
 					String name = file.getName().toLowerCase();

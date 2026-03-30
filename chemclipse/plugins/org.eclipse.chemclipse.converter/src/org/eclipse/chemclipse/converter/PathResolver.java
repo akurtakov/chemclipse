@@ -37,7 +37,7 @@ public class PathResolver {
 
 		URL url = FileLocator.find(bundle, new Path(path), null);
 		try {
-			return new File(FileLocator.resolve(url).toURI());
+			return new File(FileLocator.toFileURL(url).toURI());
 		} catch(URISyntaxException e) {
 			throw new IOException(e);
 		}
