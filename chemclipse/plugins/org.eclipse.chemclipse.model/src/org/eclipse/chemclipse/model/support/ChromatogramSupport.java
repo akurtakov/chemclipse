@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,11 +13,19 @@
 package org.eclipse.chemclipse.model.support;
 
 import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.core.IScan;
 
 public class ChromatogramSupport {
 
 	private static final int DEFAULT_SCAN_DELAY = 0;
 	private static final int DEFAULT_SCAN_INTERVAL = 100;
+
+	public static void resetCycleNumber(IChromatogram chromatogram) {
+
+		for(IScan scan : chromatogram.getScans()) {
+			scan.setCycleNumber(1); // Default
+		}
+	}
 
 	public static void calculateScanIntervalAndDelay(IChromatogram chromatogram) {
 

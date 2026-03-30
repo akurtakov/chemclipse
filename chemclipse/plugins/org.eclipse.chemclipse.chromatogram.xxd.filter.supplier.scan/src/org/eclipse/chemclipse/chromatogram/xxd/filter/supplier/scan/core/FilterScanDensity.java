@@ -12,6 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.filter.core.chromatogram.AbstractChromatogramFilter;
@@ -26,6 +27,8 @@ import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.selection.ChromatogramSelection;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.model.support.ChromatogramSupport;
+import org.eclipse.chemclipse.msd.model.core.IIon;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.MessageType;
 import org.eclipse.chemclipse.processing.core.ProcessingMessage;
@@ -70,9 +73,23 @@ public class FilterScanDensity extends AbstractChromatogramFilter {
 			if(scanIntervalCurrent != scanIntervalTarget) {
 				ScanProcessor scanProcessor = new ScanProcessor();
 				List<IScan> scans = scanProcessor.recalculateScans(chromatogram, scanIntervalTarget, settings.isMergeScans());
+				for(IScan scan : scans) {
+					if(scan instanceof IScanMSD scanMSD) {
+						/*
+						 * Remove traces with 0 intensity.
+						 */
+						List<IIon> ions = new ArrayList<>(scanMSD.getIons());
+						for(IIon ion : ions) {
+							float abundance = ion.getAbundance();
+							if(abundance == 0) {
+								scanMSD.removeIon(ion);
+							}
+						}
+					}
+				}
 				chromatogram.replaceAllScans(scans);
-				chromatogram.recalculateScanNumbers();
 				ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
+				ChromatogramSupport.resetCycleNumber(chromatogram);
 				chromatogramSelection.reset();
 			}
 		}

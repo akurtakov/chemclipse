@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -149,6 +149,19 @@ public class ScanProcessor {
 					traces.addAll(createTraces(currentScan));
 				}
 				traces.addAll(createTraces(nextScan));
+				/*
+				 * Remove traces with 0 intensity.
+				 */
+				List<IIon> zeroTraces = new ArrayList<>();
+				for(IIon trace : traces) {
+					if(trace.getAbundance() == 0) {
+						zeroTraces.add(trace);
+					}
+				}
+				traces.removeAll(zeroTraces);
+				/*
+				 * Create a new scan.
+				 */
 				scanNew.addIons(traces, true);
 				scanNew.adjustTotalSignal(intensityNew);
 				return scanNew;
