@@ -16,6 +16,7 @@ package org.eclipse.chemclipse.ux.extension.ui.views;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
@@ -38,6 +39,8 @@ import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.swt.graphics.Image;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.FrameworkUtil;
 
 public class DemoWelcomeTile implements IWelcomeTileDefinition {
 
@@ -117,7 +120,15 @@ public class DemoWelcomeTile implements IWelcomeTileDefinition {
 
 	private void copyChromatogram(File file) throws IOException {
 
-		try (InputStream stream = DemoWelcomeTile.class.getResourceAsStream("/files/DemoChromatogram.ocb")) {
+		Bundle bundle = FrameworkUtil.getBundle(DemoWelcomeTile.class);
+		if(bundle == null) {
+			throw new IOException("DemoWelcomeTile is not running in an OSGi context");
+		}
+		URL resource = bundle.getEntry("files/DemoChromatogram.ocb");
+		if(resource == null) {
+			throw new IOException("DemoChromatogram.ocb not found in bundle " + bundle.getSymbolicName());
+		}
+		try(InputStream stream = resource.openStream()) {
 			Files.copy(stream, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
 		}
 	}
