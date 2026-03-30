@@ -14,6 +14,7 @@ package org.eclipse.chemclipse.converter;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.eclipse.core.runtime.FileLocator;
@@ -35,6 +36,10 @@ public class PathResolver {
 	public static File getFile(final Bundle bundle, final String path) throws IOException {
 
 		URL url = FileLocator.find(bundle, new Path(path), null);
-		return new File(FileLocator.resolve(url).getPath());
+		try {
+			return new File(FileLocator.resolve(url).toURI());
+		} catch(URISyntaxException e) {
+			throw new IOException(e);
+		}
 	}
 }

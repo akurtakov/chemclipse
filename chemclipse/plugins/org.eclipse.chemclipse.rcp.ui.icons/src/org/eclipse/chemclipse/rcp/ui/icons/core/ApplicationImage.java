@@ -16,6 +16,7 @@ package org.eclipse.chemclipse.rcp.ui.icons.core;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -120,7 +121,7 @@ public class ApplicationImage implements IApplicationImage {
 
 			IPath path = new Path(builder.toString());
 			URL url = FileLocator.find(bundle, path, null);
-			File directory = new File(FileLocator.resolve(url).getPath());
+			File directory = new File(FileLocator.resolve(url).toURI());
 			if(directory.isDirectory()) {
 				for(File file : directory.listFiles()) {
 					String name = file.getName().toLowerCase();
@@ -129,7 +130,7 @@ public class ApplicationImage implements IApplicationImage {
 					}
 				}
 			}
-		} catch(IOException e) {
+		} catch(IOException | URISyntaxException e) {
 			e.printStackTrace();
 		}
 
