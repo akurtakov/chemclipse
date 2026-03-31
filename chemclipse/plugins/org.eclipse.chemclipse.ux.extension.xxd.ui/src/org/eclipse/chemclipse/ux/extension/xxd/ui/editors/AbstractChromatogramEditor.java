@@ -322,23 +322,25 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 	}
 
 	private void processChromatogram(IChromatogramSelection chromatogramSelection) {
+		String loadProcessMethodPath = preferenceStore.getString(PreferenceSupplier.P_CHROMATOGRAM_LOAD_PROCESS_METHOD);
+		if(!loadProcessMethodPath.trim().isEmpty()) {
+			File file = new File(loadProcessMethodPath);
+			if(file.exists() && chromatogramSelection != null) {
+				try {
+					ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
+					dialog.run(false, false, monitor -> {
 
-		File file = new File(preferenceStore.getString(PreferenceSupplier.P_CHROMATOGRAM_LOAD_PROCESS_METHOD));
-		if(file.exists() && chromatogramSelection != null) {
-			try {
-				ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
-				dialog.run(false, false, monitor -> {
-
-					IProcessMethod processMethod = Adapters.adapt(file, IProcessMethod.class);
-					if(processMethod != null) {
-						AbstractProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, new ProcessingInfo<>(), processSupplierContext), IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection));
-					}
-				});
-			} catch(InvocationTargetException e) {
-				logger.warn(e);
-			} catch(InterruptedException e) {
-				logger.warn(e);
-				Thread.currentThread().interrupt();
+						IProcessMethod processMethod = Adapters.adapt(file, IProcessMethod.class);
+						if(processMethod != null) {
+							AbstractProcessEntryContainer.applyProcessEntries(processMethod, new ProcessExecutionContext(monitor, new ProcessingInfo<>(), processSupplierContext), IChromatogramSelectionProcessSupplier.createConsumer(chromatogramSelection));
+						}
+					});
+				} catch(InvocationTargetException e) {
+					logger.warn(e);
+				} catch(InterruptedException e) {
+					logger.warn(e);
+					Thread.currentThread().interrupt();
+				}
 			}
 		}
 	}
