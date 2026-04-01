@@ -21,6 +21,11 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        java-version: ['21', '25']
+
     steps:
 
     - name: Checkout ChemClipse
@@ -30,14 +35,14 @@ jobs:
       name: Setup Java
       with:
         distribution: 'temurin'
-        java-version: '21'
+        java-version: ${{ matrix.java-version }}
 
     - uses: sdkman/sdkman-action@main
       name: Setup Maven
       id: maven
       with:
         candidate: maven
-        version: 3.9.12
+        version: 3.9.14
 
     - name: Build with Maven
       env:
