@@ -6,12 +6,13 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.converter.massspectrum;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
@@ -37,7 +38,8 @@ public class AbstractMassSpectrumImportConverter_1_Test {
 	@Test
 	public void testFileNotFoundException_1() {
 
-		File file = new File("");
+		File file = new File("notexisting.weird.filename");
+		assertFalse(file.exists());
 		IProcessingInfo<IMassSpectra> processingInfo = importConverter.convert(file, new NullProgressMonitor());
 		assertTrue(processingInfo.hasErrorMessages());
 	}
