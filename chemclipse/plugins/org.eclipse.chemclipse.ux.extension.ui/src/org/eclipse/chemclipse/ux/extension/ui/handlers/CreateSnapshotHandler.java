@@ -84,7 +84,7 @@ public class CreateSnapshotHandler {
 		if(composite != null && composite.getParent() != null) {
 			Composite compositeParent = composite.getParent();
 			GC gc = null;
-			try {
+			try { 
 				gc = new GC(compositeParent);
 				Rectangle bounds = compositeParent.getBounds();
 				image = new Image(DisplayUtils.getDisplay(), bounds.x, bounds.y);
