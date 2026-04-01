@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Alexander Kerner - API
@@ -56,11 +56,11 @@ public abstract class AbstractMethodWriter implements IMethodWriter {
 
 	public void writeProcessMethod(ZipOutputStream zipOutputStream, IProcessMethod processMethod, IProgressMonitor monitor) throws IOException {
 
-		writeVersion(zipOutputStream, monitor);
-		writeData(zipOutputStream, processMethod, monitor);
+		writeVersion(zipOutputStream);
+		writeData(zipOutputStream, processMethod);
 	}
 
-	private void writeVersion(ZipOutputStream zipOutputStream, IProgressMonitor monitor) throws IOException {
+	private void writeVersion(ZipOutputStream zipOutputStream) throws IOException {
 
 		/*
 		 * Version
@@ -73,7 +73,7 @@ public abstract class AbstractMethodWriter implements IMethodWriter {
 		zipOutputStream.closeEntry();
 	}
 
-	private void writeData(ZipOutputStream zipOutputStream, IProcessMethod processMethod, IProgressMonitor monitor) throws IOException {
+	private void writeData(ZipOutputStream zipOutputStream, IProcessMethod processMethod) throws IOException {
 
 		/*
 		 * Data

@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -52,7 +52,7 @@ public class FilterScanMerger extends AbstractChromatogramFilter {
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = validate(chromatogramSelection, chromatogramFilterSettings);
 		if(!processingInfo.hasErrorMessages()) {
 			if(chromatogramFilterSettings instanceof FilterSettingsScanMerger settings) {
-				applyScanMergerFilter(chromatogramSelection, settings, monitor);
+				applyScanMergerFilter(chromatogramSelection, settings);
 				processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, "Scan Merger", MESSAGE));
 				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, MESSAGE));
 				chromatogramSelection.getChromatogram().setDirty(true);
@@ -61,7 +61,7 @@ public class FilterScanMerger extends AbstractChromatogramFilter {
 		return processingInfo;
 	}
 
-	private void applyScanMergerFilter(IChromatogramSelection chromatogramSelection, FilterSettingsScanMerger settings, IProgressMonitor monitor) {
+	private void applyScanMergerFilter(IChromatogramSelection chromatogramSelection, FilterSettingsScanMerger settings) {
 
 		if(chromatogramSelection != null) {
 			/*

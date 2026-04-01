@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Matthias Mailänder - initial API and implementation
  *******************************************************************************/
@@ -66,10 +66,10 @@ public class MassSpectrumWriterVersion22 implements IMassSpectraWriter {
 	@Override
 	public void write(File file, IMassSpectra massSpectra, boolean append, IProgressMonitor monitor) throws FileIsNotWriteableException, IOException {
 
-		writeMassSpectra(file, massSpectra, monitor);
+		writeMassSpectra(file, massSpectra);
 	}
 
-	private void writeMassSpectra(File file, IMassSpectra massSpectra, IProgressMonitor monitor) {
+	private void writeMassSpectra(File file, IMassSpectra massSpectra) {
 
 		for(int i = 1; i <= massSpectra.size(); i++) {
 			IScanMSD massSpectrum = massSpectra.getMassSpectrum(i);

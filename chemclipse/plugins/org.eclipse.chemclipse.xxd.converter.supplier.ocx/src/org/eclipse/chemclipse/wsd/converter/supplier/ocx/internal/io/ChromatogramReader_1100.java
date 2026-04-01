@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -71,7 +71,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		IChromatogramOverview chromatogramOverview = null;
 		try (ZipFile zipFile = new ZipFile(file)) {
 			if(isValidFileFormat(zipFile)) {
-				chromatogramOverview = readOverviewFromZipFile(zipFile, "", monitor);
+				chromatogramOverview = readOverviewFromZipFile(zipFile, "");
 			}
 		}
 		return chromatogramOverview;
@@ -94,12 +94,12 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		return readZipData(zipFile, directoryPrefix, file, monitor);
 	}
 
-	private IChromatogramOverview readOverviewFromZipFile(ZipFile zipFile, String directoryPrefix, IProgressMonitor monitor) throws IOException {
+	private IChromatogramOverview readOverviewFromZipFile(ZipFile zipFile, String directoryPrefix) throws IOException {
 
 		DataInputStream dataInputStream = getDataInputStream(zipFile, directoryPrefix + Format.FILE_TIC_WSD);
 
 		IVendorChromatogram chromatogram = new VendorChromatogram();
-		readScansOverview(dataInputStream, chromatogram, monitor);
+		readScansOverview(dataInputStream, chromatogram);
 
 		dataInputStream.close();
 
@@ -135,18 +135,18 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 			 * Read the chromatographic information.
 			 */
 			chromatogram = new VendorChromatogram();
-			readMethod(getDataInputStream(object, directoryPrefix + Format.FILE_SYSTEM_SETTINGS_WSD), closeStream, chromatogram, monitor);
+			readMethod(getDataInputStream(object, directoryPrefix + Format.FILE_SYSTEM_SETTINGS_WSD), closeStream, chromatogram);
 			subMonitor.worked(20);
-			readScans(getDataInputStream(object, directoryPrefix + Format.FILE_SCANS_WSD), closeStream, chromatogram, monitor);
+			readScans(getDataInputStream(object, directoryPrefix + Format.FILE_SCANS_WSD), closeStream, chromatogram);
 			subMonitor.worked(20);
-			readBaselines(getDataInputStream(object, directoryPrefix + Format.FILE_BASELINE_WSD), closeStream, chromatogram, monitor);
+			readBaselines(getDataInputStream(object, directoryPrefix + Format.FILE_BASELINE_WSD), closeStream, chromatogram);
 			subMonitor.worked(20);
-			readHistory(getDataInputStream(object, directoryPrefix + Format.FILE_HISTORY_WSD), closeStream, chromatogram, monitor);
+			readHistory(getDataInputStream(object, directoryPrefix + Format.FILE_HISTORY_WSD), closeStream, chromatogram);
 			subMonitor.worked(20);
-			readMiscellaneous(getDataInputStream(object, directoryPrefix + Format.FILE_MISC_WSD), closeStream, chromatogram, monitor);
+			readMiscellaneous(getDataInputStream(object, directoryPrefix + Format.FILE_MISC_WSD), closeStream, chromatogram);
 			subMonitor.worked(20);
 
-			setAdditionalInformation(file, chromatogram, monitor);
+			setAdditionalInformation(file, chromatogram);
 		} finally {
 			SubMonitor.done(subMonitor);
 		}
@@ -154,7 +154,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		return chromatogram;
 	}
 
-	private void readScansOverview(DataInputStream dataInputStream, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void readScansOverview(DataInputStream dataInputStream, IChromatogramWSD chromatogram) throws IOException {
 
 		int scans = dataInputStream.readInt();
 		for(int scan = 1; scan <= scans; ++scan) {
@@ -187,7 +187,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		}
 	}
 
-	private void readMethod(DataInputStream dataInputStream, boolean closeStream, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void readMethod(DataInputStream dataInputStream, boolean closeStream, IChromatogramWSD chromatogram) throws IOException {
 
 		IMethod method = chromatogram.getMethod();
 
@@ -205,7 +205,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		}
 	}
 
-	private void readScans(DataInputStream dataInputStream, boolean closeStream, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void readScans(DataInputStream dataInputStream, boolean closeStream, IChromatogramWSD chromatogram) throws IOException {
 
 		int scans = dataInputStream.readInt();
 		for(int scan = 1; scan <= scans; ++scan) {
@@ -254,7 +254,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		}
 	}
 
-	private void readBaselines(DataInputStream dataInputStream, boolean closeStream, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void readBaselines(DataInputStream dataInputStream, boolean closeStream, IChromatogramWSD chromatogram) throws IOException {
 
 		int scans = dataInputStream.readInt();
 		List<IBaselineElement> baselineElements = new ArrayList<>();
@@ -289,7 +289,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		}
 	}
 
-	private void readHistory(DataInputStream dataInputStream, boolean closeStream, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void readHistory(DataInputStream dataInputStream, boolean closeStream, IChromatogramWSD chromatogram) throws IOException {
 
 		IEditHistory editHistory = chromatogram.getEditHistory();
 		int numEntries = dataInputStream.readInt();
@@ -307,7 +307,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		}
 	}
 
-	private void readMiscellaneous(DataInputStream dataInputStream, boolean closeStream, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void readMiscellaneous(DataInputStream dataInputStream, boolean closeStream, IChromatogramWSD chromatogram) throws IOException {
 
 		long time = dataInputStream.readLong();
 		String miscInfo = readString(dataInputStream);
@@ -339,7 +339,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		return isValid;
 	}
 
-	private void setAdditionalInformation(File file, IChromatogramWSD chromatogram, IProgressMonitor monitor) {
+	private void setAdditionalInformation(File file, IChromatogramWSD chromatogram) {
 
 		chromatogram.setConverterId(Format.CONVERTER_ID_CHROMATOGRAM);
 		chromatogram.setFile(file);

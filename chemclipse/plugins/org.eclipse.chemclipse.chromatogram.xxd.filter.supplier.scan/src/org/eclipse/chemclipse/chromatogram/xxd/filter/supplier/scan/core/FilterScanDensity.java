@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -43,12 +43,12 @@ public class FilterScanDensity extends AbstractChromatogramFilter {
 		if(!processingInfo.hasErrorMessages()) {
 			if(chromatogramFilterSettings instanceof FilterSettingsScanDensity settings) {
 				if(chromatogramSelection != null) {
-					applyScanDensityFilter(chromatogramSelection, settings, monitor);
+					applyScanDensityFilter(chromatogramSelection, settings);
 					if(settings.isProcessReferencedChromatograms()) {
 						IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 						for(IChromatogram chromatogramReference : chromatogram.getReferencedChromatograms()) {
 							ChromatogramSelection chromatogramSelectionReference = new ChromatogramSelection(chromatogramReference);
-							applyScanDensityFilter(chromatogramSelectionReference, settings, monitor);
+							applyScanDensityFilter(chromatogramSelectionReference, settings);
 						}
 					}
 					processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, "Scan Density", "The chromatogram has been modified to reach the target scan density."));
@@ -60,7 +60,7 @@ public class FilterScanDensity extends AbstractChromatogramFilter {
 		return processingInfo;
 	}
 
-	private void applyScanDensityFilter(IChromatogramSelection chromatogramSelection, FilterSettingsScanDensity settings, IProgressMonitor monitor) {
+	private void applyScanDensityFilter(IChromatogramSelection chromatogramSelection, FilterSettingsScanDensity settings) {
 
 		int scanIntervalTarget = Math.round(1000.0f / settings.getScansPerSecond());
 		if(scanIntervalTarget > 0) {

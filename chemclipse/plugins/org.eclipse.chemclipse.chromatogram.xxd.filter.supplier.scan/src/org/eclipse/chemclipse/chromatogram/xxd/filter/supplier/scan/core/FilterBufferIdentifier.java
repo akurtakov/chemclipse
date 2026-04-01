@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -69,7 +69,7 @@ public class FilterBufferIdentifier extends AbstractChromatogramFilter {
 				bufferTargets(chromatogram, startScan, stopScan, monitor);
 				break;
 			case RESTORE_TARGERTS:
-				restoreTargets(chromatogram, retentionTimeStart, retentionTimeStop, monitor);
+				restoreTargets(chromatogram, retentionTimeStart, retentionTimeStop);
 				break;
 			case CLEAR_BUFFER:
 				clearBuffer(chromatogram);
@@ -108,7 +108,7 @@ public class FilterBufferIdentifier extends AbstractChromatogramFilter {
 		}
 	}
 
-	private void restoreTargets(IChromatogram chromatogram, int retentionTimeStart, int retentionTimeStop, IProgressMonitor monitor) {
+	private void restoreTargets(IChromatogram chromatogram, int retentionTimeStart, int retentionTimeStop) {
 
 		IMeasurementResult<?> measurementResult = chromatogram.getMeasurementResult(BufferedScanTargets.IDENTIFIER);
 		if(measurementResult != null) {

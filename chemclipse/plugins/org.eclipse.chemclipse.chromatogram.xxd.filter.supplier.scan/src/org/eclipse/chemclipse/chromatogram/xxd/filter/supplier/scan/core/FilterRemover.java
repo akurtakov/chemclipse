@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -40,7 +40,7 @@ public class FilterRemover extends AbstractChromatogramFilter {
 		if(!processingInfo.hasErrorMessages()) {
 			if(chromatogramFilterSettings instanceof FilterSettingsRemover settings) {
 				ScanRemoverPattern scanRemoverPattern = new ScanRemoverPattern(settings.getScanRemoverPattern());
-				applyScanRemoverFilter(chromatogramSelection, scanRemoverPattern, monitor);
+				applyScanRemoverFilter(chromatogramSelection, scanRemoverPattern);
 				processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, "Scan Remover", "Scans have been removed successfully."));
 				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "Scans have been removed successfully."));
 				chromatogramSelection.getChromatogram().setDirty(true);
@@ -52,11 +52,11 @@ public class FilterRemover extends AbstractChromatogramFilter {
 	/**
 	 * Removes the given ions stored in the excludedIons
 	 * instance from the chromatogram selection.
-	 * 
+	 *
 	 * @param chromatogramSelection
 	 * @throws FilterException
 	 */
-	private void applyScanRemoverFilter(IChromatogramSelection chromatogramSelection, ScanRemoverPattern scanRemoverPattern, IProgressMonitor monitor) {
+	private void applyScanRemoverFilter(IChromatogramSelection chromatogramSelection, ScanRemoverPattern scanRemoverPattern) {
 
 		if(chromatogramSelection != null && scanRemoverPattern != null) {
 			/*

@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -47,7 +47,7 @@ public class ChromatogramIntegratorSupport {
 		 */
 		double scaleFactor = chromatogramIntegrationSettings.getScaleFactor();
 		List<IIntegrationEntry> chromatogramIntegrationEntries = calculateChromatogramIntegrationEntry(chromatogramSelection, scaleFactor, monitor);
-		List<IIntegrationEntry> backgroundIntegrationEntries = calculateBackgroundIntegrationEntry(chromatogramSelection, scaleFactor, monitor);
+		List<IIntegrationEntry> backgroundIntegrationEntries = calculateBackgroundIntegrationEntry(chromatogramSelection, scaleFactor);
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 		chromatogram.setIntegratedArea(chromatogramIntegrationEntries, backgroundIntegrationEntries, INTEGRATOR_DESCRIPTION);
 		/*
@@ -63,7 +63,7 @@ public class ChromatogramIntegratorSupport {
 
 	/**
 	 * May return null.
-	 * 
+	 *
 	 * @param chromatogramSelection
 	 * @param monitor
 	 * @return
@@ -90,7 +90,7 @@ public class ChromatogramIntegratorSupport {
 		return chromatogramIntegrationEntries;
 	}
 
-	private List<IIntegrationEntry> calculateBackgroundIntegrationEntry(IChromatogramSelection chromatogramSelection, double scaleFactor, IProgressMonitor monitor) {
+	private List<IIntegrationEntry> calculateBackgroundIntegrationEntry(IChromatogramSelection chromatogramSelection, double scaleFactor) {
 
 		List<IIntegrationEntry> backgroundIntegrationEntries = new ArrayList<>();
 		BackgroundIntegrator backgroundIntegrator = new BackgroundIntegrator();

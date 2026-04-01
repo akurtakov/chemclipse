@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -62,7 +62,7 @@ public class ChromatogramReader_1006 extends AbstractChromatogramReader implemen
 		IChromatogramCSD chromatogram = null;
 		try (ZipFile zipFile = new ZipFile(file)) {
 			if(isValidFileFormat(zipFile)) {
-				chromatogram = readFromZipFile(zipFile, "", file, monitor);
+				chromatogram = readFromZipFile(zipFile, "", file);
 			}
 		}
 		return chromatogram;
@@ -74,7 +74,7 @@ public class ChromatogramReader_1006 extends AbstractChromatogramReader implemen
 		IChromatogramOverview chromatogramOverview = null;
 		try (ZipFile zipFile = new ZipFile(file)) {
 			if(isValidFileFormat(zipFile)) {
-				chromatogramOverview = readFromZipFile(zipFile, "", file, monitor);
+				chromatogramOverview = readFromZipFile(zipFile, "", file);
 			}
 		}
 		return chromatogramOverview;
@@ -83,18 +83,18 @@ public class ChromatogramReader_1006 extends AbstractChromatogramReader implemen
 	@Override
 	public IChromatogramCSD read(ZipInputStream zipInputStream, String directoryPrefix, IProgressMonitor monitor) throws IOException {
 
-		return readZipData(zipInputStream, directoryPrefix, null, monitor);
+		return readZipData(zipInputStream, directoryPrefix, null);
 	}
 
 	@Override
 	public IChromatogramCSD read(ZipFile zipFile, String directoryPrefix, IProgressMonitor monitor) throws IOException {
 
-		return readFromZipFile(zipFile, directoryPrefix, null, monitor);
+		return readFromZipFile(zipFile, directoryPrefix, null);
 	}
 
-	private IChromatogramCSD readFromZipFile(ZipFile zipFile, String directoryPrefix, File file, IProgressMonitor monitor) throws IOException {
+	private IChromatogramCSD readFromZipFile(ZipFile zipFile, String directoryPrefix, File file) throws IOException {
 
-		return readZipData(zipFile, directoryPrefix, file, monitor);
+		return readZipData(zipFile, directoryPrefix, file);
 	}
 
 	/*
@@ -103,7 +103,7 @@ public class ChromatogramReader_1006 extends AbstractChromatogramReader implemen
 	 * @param file
 	 * @return
 	 */
-	private IChromatogramCSD readZipData(Object object, String directoryPrefix, File file, IProgressMonitor monitor) throws IOException {
+	private IChromatogramCSD readZipData(Object object, String directoryPrefix, File file) throws IOException {
 
 		boolean closeStream;
 		if(object instanceof ZipFile) {
@@ -125,17 +125,17 @@ public class ChromatogramReader_1006 extends AbstractChromatogramReader implemen
 		 * Read the chromatographic information.
 		 */
 		chromatogram = new VendorChromatogram();
-		readMethod(getDataInputStream(object, directoryPrefix + Format.FILE_SYSTEM_SETTINGS_FID), closeStream, chromatogram, monitor);
-		readScans(getDataInputStream(object, directoryPrefix + Format.FILE_SCANS_FID), closeStream, chromatogram, monitor);
-		readBaseline(getDataInputStream(object, directoryPrefix + Format.FILE_BASELINE_FID), chromatogram, monitor);
-		readPeaks(getDataInputStream(object, directoryPrefix + Format.FILE_PEAKS_FID), closeStream, chromatogram, monitor);
+		readMethod(getDataInputStream(object, directoryPrefix + Format.FILE_SYSTEM_SETTINGS_FID), closeStream, chromatogram);
+		readScans(getDataInputStream(object, directoryPrefix + Format.FILE_SCANS_FID), closeStream, chromatogram);
+		readBaseline(getDataInputStream(object, directoryPrefix + Format.FILE_BASELINE_FID), chromatogram);
+		readPeaks(getDataInputStream(object, directoryPrefix + Format.FILE_PEAKS_FID), closeStream, chromatogram);
 
-		setAdditionalInformation(file, chromatogram, monitor);
+		setAdditionalInformation(file, chromatogram);
 
 		return chromatogram;
 	}
 
-	private void readMethod(DataInputStream dataInputStream, boolean closeStream, IChromatogramCSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void readMethod(DataInputStream dataInputStream, boolean closeStream, IChromatogramCSD chromatogram) throws IOException {
 
 		IMethod method = chromatogram.getMethod();
 
@@ -153,7 +153,7 @@ public class ChromatogramReader_1006 extends AbstractChromatogramReader implemen
 		}
 	}
 
-	private void readScans(DataInputStream dataInputStream, boolean closeStream, IChromatogramCSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void readScans(DataInputStream dataInputStream, boolean closeStream, IChromatogramCSD chromatogram) throws IOException {
 
 		int scans = dataInputStream.readInt();
 		for(int scan = 1; scan <= scans; scan++) {
@@ -188,7 +188,7 @@ public class ChromatogramReader_1006 extends AbstractChromatogramReader implemen
 		}
 	}
 
-	private void readBaseline(DataInputStream dataInputStream, IChromatogramCSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void readBaseline(DataInputStream dataInputStream, IChromatogramCSD chromatogram) throws IOException {
 
 		int scans = dataInputStream.readInt(); // Number of Scans
 		List<IBaselineElement> baselineElements = new ArrayList<>();
@@ -221,12 +221,12 @@ public class ChromatogramReader_1006 extends AbstractChromatogramReader implemen
 		dataInputStream.close();
 	}
 
-	private void readPeaks(DataInputStream dataInputStream, boolean closeStream, IChromatogramCSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void readPeaks(DataInputStream dataInputStream, boolean closeStream, IChromatogramCSD chromatogram) throws IOException {
 
 		int numberOfPeaks = dataInputStream.readInt();
 		for(int i = 1; i <= numberOfPeaks; i++) {
 			try {
-				IChromatogramPeakCSD peak = readPeak(dataInputStream, chromatogram, monitor);
+				IChromatogramPeakCSD peak = readPeak(dataInputStream, chromatogram);
 				chromatogram.getPeaks().add(peak);
 			} catch(PeakException e) {
 				logger.warn(e.getMessage());
@@ -238,7 +238,7 @@ public class ChromatogramReader_1006 extends AbstractChromatogramReader implemen
 		}
 	}
 
-	private IChromatogramPeakCSD readPeak(DataInputStream dataInputStream, IChromatogramCSD chromatogram, IProgressMonitor monitor) throws IOException, IllegalArgumentException, PeakException {
+	private IChromatogramPeakCSD readPeak(DataInputStream dataInputStream, IChromatogramCSD chromatogram) throws IOException, IllegalArgumentException, PeakException {
 
 		String detectorDescription = readString(dataInputStream); // Detector Description
 		String quantifierDescription = readString(dataInputStream);
@@ -300,7 +300,7 @@ public class ChromatogramReader_1006 extends AbstractChromatogramReader implemen
 		return peak;
 	}
 
-	private void setAdditionalInformation(File file, IChromatogramCSD chromatogram, IProgressMonitor monitor) {
+	private void setAdditionalInformation(File file, IChromatogramCSD chromatogram) {
 
 		chromatogram.setConverterId(Format.CONVERTER_ID_CHROMATOGRAM);
 		chromatogram.setFile(file);

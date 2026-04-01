@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -78,13 +78,13 @@ public class ReportWriter1 {
 			printWriter.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
 			for(IChromatogram chromatogram : chromatograms) {
-				printHeader(printWriter, chromatogram, monitor);
+				printHeader(printWriter, chromatogram);
 				reportChromatogram(printWriter, chromatogram, monitor);
 			}
 		}
 	}
 
-	private void printHeader(PrintWriter printWriter, IChromatogramOverview chromatogramOverview, IProgressMonitor monitor) {
+	private void printHeader(PrintWriter printWriter, IChromatogramOverview chromatogramOverview) {
 
 		printHeaderLine(printWriter, "Name", chromatogramOverview.getName());
 		printHeaderLine(printWriter, "Data Name", chromatogramOverview.getDataName());
@@ -129,7 +129,7 @@ public class ReportWriter1 {
 
 	/**
 	 * The report chromatogram is responsible how to print each section.
-	 * 
+	 *
 	 * @param printWriter
 	 * @param chromatogram
 	 * @param monitor
@@ -153,42 +153,42 @@ public class ReportWriter1 {
 		printWriter.println("");
 		printWriter.println("PEAK LIST OVERVIEW");
 		printWriter.println(HORIZONTAL_RULE);
-		reportPeaksOverview(printWriter, peaks, "Peaks are not available.", monitor);
+		reportPeaksOverview(printWriter, peaks, "Peaks are not available.");
 		printWriter.println("");
 		printWriter.println("");
 		printWriter.println("PEAK INTEGRATION RESULTS");
 		printWriter.println(HORIZONTAL_RULE);
-		reportPeakIntegrationResults(printWriter, peaks, "Peak integration results are not available.", monitor);
+		reportPeakIntegrationResults(printWriter, peaks, "Peak integration results are not available.");
 		printWriter.println("");
 		printWriter.println("");
 		printWriter.println("SCAN IDENTIFICATION RESULTS");
 		printWriter.println(HORIZONTAL_RULE);
-		reportScanIdentificationResults(printWriter, chromatogram, "Scan identification results are not available.", monitor);
+		reportScanIdentificationResults(printWriter, chromatogram, "Scan identification results are not available.");
 		printWriter.println("");
 		printWriter.println("");
 		printWriter.println("PEAK IDENTIFICATION RESULTS");
 		printWriter.println(HORIZONTAL_RULE);
-		reportPeakIdentificationResults(printWriter, peaks, "Peak identification results are not available.", monitor);
+		reportPeakIdentificationResults(printWriter, peaks, "Peak identification results are not available.");
 		printWriter.println("");
 		printWriter.println("");
 		printWriter.println("BACKGROUND INTEGRATION RESULTS");
 		printWriter.println(HORIZONTAL_RULE);
-		reportIntegrationResults(printWriter, chromatogram.getBackgroundIntegrationEntries(), "Background integration results are not available.", monitor);
+		reportIntegrationResults(printWriter, chromatogram.getBackgroundIntegrationEntries(), "Background integration results are not available.");
 		printWriter.println("");
 		printWriter.println("");
 		printWriter.println("CHROMATOGRAM INTEGRATION RESULTS");
 		printWriter.println(HORIZONTAL_RULE);
-		reportIntegrationResults(printWriter, chromatogram.getChromatogramIntegrationEntries(), "Chromatogram integration results are not available.", monitor);
+		reportIntegrationResults(printWriter, chromatogram.getChromatogramIntegrationEntries(), "Chromatogram integration results are not available.");
 		printWriter.println("");
 		printWriter.println("");
 		printWriter.println("CHROMATOGRAM IDENTIFICATION RESULTS");
 		printWriter.println(HORIZONTAL_RULE);
-		reportChromatogramIdentificationResults(printWriter, chromatogram, "Chromatogram identification results are not available.", monitor);
+		reportChromatogramIdentificationResults(printWriter, chromatogram, "Chromatogram identification results are not available.");
 		printWriter.println("");
 		printWriter.println("");
 		printWriter.println("PEAK QUANTITATION RESULTS");
 		printWriter.println(HORIZONTAL_RULE);
-		reportPeakQuantitationResults(printWriter, peaks, "Peak quantitation results are not available.", monitor);
+		reportPeakQuantitationResults(printWriter, peaks, "Peak quantitation results are not available.");
 		printWriter.println("");
 		printWriter.println("");
 		printWriter.println("PEAK QUANTITATION SUMMARY");
@@ -211,16 +211,16 @@ public class ReportWriter1 {
 		}
 	}
 
-	private void reportPeaksOverview(PrintWriter printWriter, List<IPeak> peaks, String messageNoResults, IProgressMonitor monitor) {
+	private void reportPeaksOverview(PrintWriter printWriter, List<IPeak> peaks, String messageNoResults) {
 
 		if(!peaks.isEmpty()) {
-			printPeaksOverview(printWriter, peaks, monitor);
+			printPeaksOverview(printWriter, peaks);
 		} else {
 			printWriter.println(messageNoResults);
 		}
 	}
 
-	private void printPeaksOverview(PrintWriter printWriter, List<IPeak> peaks, IProgressMonitor monitor) {
+	private void printPeaksOverview(PrintWriter printWriter, List<IPeak> peaks) {
 
 		/*
 		 * Headline
@@ -347,16 +347,16 @@ public class ReportWriter1 {
 		return builder.toString();
 	}
 
-	private void reportPeakIntegrationResults(PrintWriter printWriter, List<IPeak> peaks, String messageNoResults, IProgressMonitor monitor) {
+	private void reportPeakIntegrationResults(PrintWriter printWriter, List<IPeak> peaks, String messageNoResults) {
 
 		if(!peaks.isEmpty()) {
-			printPeakIntegrationResults(printWriter, peaks, monitor);
+			printPeakIntegrationResults(printWriter, peaks);
 		} else {
 			printWriter.println(messageNoResults);
 		}
 	}
 
-	private void printPeakIntegrationResults(PrintWriter printWriter, List<IPeak> peaks, IProgressMonitor monitor) {
+	private void printPeakIntegrationResults(PrintWriter printWriter, List<IPeak> peaks) {
 
 		/*
 		 * Headline
@@ -397,16 +397,16 @@ public class ReportWriter1 {
 		}
 	}
 
-	private void reportPeakIdentificationResults(PrintWriter printWriter, List<IPeak> peaks, String messageNoResults, IProgressMonitor monitor) {
+	private void reportPeakIdentificationResults(PrintWriter printWriter, List<IPeak> peaks, String messageNoResults) {
 
 		if(!peaks.isEmpty()) {
-			printPeakIdentificationResults(printWriter, peaks, monitor);
+			printPeakIdentificationResults(printWriter, peaks);
 		} else {
 			printWriter.println(messageNoResults);
 		}
 	}
 
-	private void printPeakIdentificationResults(PrintWriter printWriter, List<IPeak> peaks, IProgressMonitor monitor) {
+	private void printPeakIdentificationResults(PrintWriter printWriter, List<IPeak> peaks) {
 
 		/*
 		 * Headline
@@ -426,7 +426,7 @@ public class ReportWriter1 {
 		}
 	}
 
-	private void reportScanIdentificationResults(PrintWriter printWriter, IChromatogram chromatogram, String messageNoResults, IProgressMonitor monitor) {
+	private void reportScanIdentificationResults(PrintWriter printWriter, IChromatogram chromatogram, String messageNoResults) {
 
 		if(scanTargetsAvailable(chromatogram)) {
 			/*
@@ -461,7 +461,7 @@ public class ReportWriter1 {
 		return false;
 	}
 
-	private void reportChromatogramIdentificationResults(PrintWriter printWriter, IChromatogram chromatogram, String messageNoResults, IProgressMonitor monitor) {
+	private void reportChromatogramIdentificationResults(PrintWriter printWriter, IChromatogram chromatogram, String messageNoResults) {
 
 		/*
 		 * Get the targets
@@ -514,7 +514,7 @@ public class ReportWriter1 {
 
 	/**
 	 * Prefix could be null if not needed.
-	 * 
+	 *
 	 * @param printWriter
 	 * @param targets
 	 * @param prefix
@@ -529,7 +529,7 @@ public class ReportWriter1 {
 			ILibraryInformation libraryInformation = identificationTarget.getLibraryInformation();
 			IComparisonResult comparisonResult = identificationTarget.getComparisonResult();
 			/*
-			 * 
+			 *
 			 */
 			if(prefix != null) {
 				printWriter.print("[" + prefix + "]");
@@ -564,7 +564,7 @@ public class ReportWriter1 {
 		}
 	}
 
-	private void reportIntegrationResults(PrintWriter printWriter, List<IIntegrationEntry> integrationEntries, String messageNoResults, IProgressMonitor monitor) {
+	private void reportIntegrationResults(PrintWriter printWriter, List<IIntegrationEntry> integrationEntries, String messageNoResults) {
 
 		if(!integrationEntries.isEmpty()) {
 			printIntegrationEntries(printWriter, integrationEntries);
@@ -601,16 +601,16 @@ public class ReportWriter1 {
 		}
 	}
 
-	private void reportPeakQuantitationResults(PrintWriter printWriter, List<IPeak> peaks, String messageNoResults, IProgressMonitor monitor) {
+	private void reportPeakQuantitationResults(PrintWriter printWriter, List<IPeak> peaks, String messageNoResults) {
 
 		if(!peaks.isEmpty()) {
-			printPeakQuantitationResults(printWriter, peaks, monitor);
+			printPeakQuantitationResults(printWriter, peaks);
 		} else {
 			printWriter.println(messageNoResults);
 		}
 	}
 
-	private void printPeakQuantitationResults(PrintWriter printWriter, List<IPeak> peaks, IProgressMonitor monitor) {
+	private void printPeakQuantitationResults(PrintWriter printWriter, List<IPeak> peaks) {
 
 		/*
 		 * Headline

@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -74,7 +74,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 	public IChromatogramMSD read(File file, IProgressMonitor monitor) throws IOException {
 
 		if(isValidFileFormat(file)) {
-			return readChromatogram(file, monitor);
+			return readChromatogram(file);
 		}
 
 		return null;
@@ -84,13 +84,13 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 	public IChromatogramOverview readOverview(File file, IProgressMonitor monitor) throws IOException {
 
 		if(isValidFileFormat(file)) {
-			return readChromatogramOverview(file, monitor);
+			return readChromatogramOverview(file);
 		}
 
 		return null;
 	}
 
-	private IChromatogramMSD readChromatogram(File file, IProgressMonitor monitor) throws IOException {
+	private IChromatogramMSD readChromatogram(File file) throws IOException {
 
 		IVendorChromatogram chromatogram = new VendorChromatogram();
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
@@ -258,7 +258,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 		return new IdentificationTarget(libraryInformation, comparisonResult);
 	}
 
-	private IChromatogramMSD readChromatogramOverview(File file, IProgressMonitor monitor) throws IOException {
+	private IChromatogramMSD readChromatogramOverview(File file) throws IOException {
 
 		IVendorChromatogram chromatogram = new VendorChromatogram();
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {

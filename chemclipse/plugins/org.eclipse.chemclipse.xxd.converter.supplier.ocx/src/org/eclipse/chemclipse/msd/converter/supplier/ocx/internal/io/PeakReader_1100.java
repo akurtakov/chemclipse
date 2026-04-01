@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -99,7 +99,7 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 		try {
 			for(int i = 1; i <= numberOfPeaks; i++) {
 				try {
-					IPeakMSD peak = readPeak(dataInputStream, monitor);
+					IPeakMSD peak = readPeak(dataInputStream);
 					peaks.addPeak(peak);
 					subMonitor.worked(1);
 				} catch(PeakException e) {
@@ -116,7 +116,7 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 		return peaks;
 	}
 
-	private IPeakMSD readPeak(DataInputStream dataInputStream, IProgressMonitor monitor) throws IOException, IllegalArgumentException, PeakException {
+	private IPeakMSD readPeak(DataInputStream dataInputStream) throws IOException, IllegalArgumentException, PeakException {
 
 		IIonTransitionSettings ionTransitionSettings = new IonTransitionSettings();
 
@@ -131,7 +131,7 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 		float startBackgroundAbundance = dataInputStream.readFloat(); // Start Background Abundance
 		float stopBackgroundAbundance = dataInputStream.readFloat(); // Stop Background Abundance
 
-		IPeakMassSpectrum peakMaximum = readPeakMassSpectrum(dataInputStream, ionTransitionSettings, monitor);
+		IPeakMassSpectrum peakMaximum = readPeakMassSpectrum(dataInputStream, ionTransitionSettings);
 
 		int numberOfRetentionTimes = dataInputStream.readInt(); // Number Retention Times
 		IPeakIntensityValues intensityValues = new PeakIntensityValues(Float.MAX_VALUE);
@@ -158,18 +158,18 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 		/*
 		 * Identification Results
 		 */
-		readPeakIdentificationTargets(dataInputStream, peak, monitor);
+		readPeakIdentificationTargets(dataInputStream, peak);
 		/*
 		 * Quantitation Results
 		 */
-		readPeakQuantitationEntries(dataInputStream, peak, monitor);
+		readPeakQuantitationEntries(dataInputStream, peak);
 		/*
 		 * Optimized Mass Spectrum
 		 */
 		boolean readOptimizedMassSpectrum = dataInputStream.readBoolean();
 		if(readOptimizedMassSpectrum) {
 			IScanMSD optimizedMassSpectrum = new ScanMSD();
-			readNormalMassSpectrum(optimizedMassSpectrum, dataInputStream, ionTransitionSettings, monitor);
+			readNormalMassSpectrum(optimizedMassSpectrum, dataInputStream, ionTransitionSettings);
 			peakMaximum.setOptimizedMassSpectrum(optimizedMassSpectrum);
 		}
 
@@ -196,7 +196,7 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 		return internalStandards;
 	}
 
-	private IPeakMassSpectrum readPeakMassSpectrum(DataInputStream dataInputStream, IIonTransitionSettings ionTransitionSettings, IProgressMonitor monitor) throws IOException {
+	private IPeakMassSpectrum readPeakMassSpectrum(DataInputStream dataInputStream, IIonTransitionSettings ionTransitionSettings) throws IOException {
 
 		short massSpectrometer = dataInputStream.readShort(); // Mass Spectrometer
 		short massSpectrumType = dataInputStream.readShort(); // Mass Spectrum Type
@@ -207,12 +207,12 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 		massSpectrum.setMassSpectrumType(getMassSpectrumType(massSpectrumType));
 		massSpectrum.setPrecursorIon(precursorIon);
 
-		readNormalMassSpectrum(massSpectrum, dataInputStream, ionTransitionSettings, monitor);
+		readNormalMassSpectrum(massSpectrum, dataInputStream, ionTransitionSettings);
 
 		return massSpectrum;
 	}
 
-	private void readNormalMassSpectrum(IScanMSD massSpectrum, DataInputStream dataInputStream, IIonTransitionSettings ionTransitionSettings, IProgressMonitor monitor) throws IOException {
+	private void readNormalMassSpectrum(IScanMSD massSpectrum, DataInputStream dataInputStream, IIonTransitionSettings ionTransitionSettings) throws IOException {
 
 		int retentionTime = dataInputStream.readInt();
 		int retentionTimeColumn1 = dataInputStream.readInt();
@@ -246,10 +246,10 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 		/*
 		 * Identification Results
 		 */
-		readMassSpectrumIdentificationTargets(dataInputStream, massSpectrum, monitor);
+		readMassSpectrumIdentificationTargets(dataInputStream, massSpectrum);
 	}
 
-	private void readMassSpectrumIdentificationTargets(DataInputStream dataInputStream, IScanMSD massSpectrum, IProgressMonitor monitor) throws IOException {
+	private void readMassSpectrumIdentificationTargets(DataInputStream dataInputStream, IScanMSD massSpectrum) throws IOException {
 
 		int numberOfMassSpectrumTargets = dataInputStream.readInt(); // Number Mass Spectrum Targets
 		for(int i = 1; i <= numberOfMassSpectrumTargets; i++) {
@@ -355,7 +355,7 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 		return integrationEntries;
 	}
 
-	private void readPeakIdentificationTargets(DataInputStream dataInputStream, IPeakMSD peak, IProgressMonitor monitor) throws IOException {
+	private void readPeakIdentificationTargets(DataInputStream dataInputStream, IPeakMSD peak) throws IOException {
 
 		int numberOfPeakTargets = dataInputStream.readInt(); // Number Peak Targets
 		for(int i = 1; i <= numberOfPeakTargets; i++) {
@@ -414,7 +414,7 @@ public class PeakReader_1100 extends AbstractZipReader implements IPeakReader {
 		}
 	}
 
-	private void readPeakQuantitationEntries(DataInputStream dataInputStream, IPeakMSD peak, IProgressMonitor monitor) throws IOException {
+	private void readPeakQuantitationEntries(DataInputStream dataInputStream, IPeakMSD peak) throws IOException {
 
 		int numberOfQuantitationEntries = dataInputStream.readInt(); // Number Quantitation Entries
 		for(int i = 1; i <= numberOfQuantitationEntries; i++) {

@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - refactor to use noise segments for calculations
@@ -79,7 +79,7 @@ public class NoiseCalculator extends AbstractNoiseCalculator {
 	public List<INoiseSegment> getNoiseSegments(IChromatogram chromatogram, IProgressMonitor monitor) {
 
 		if(chromatogram instanceof IChromatogramMSD) {
-			return getNoiseSegments(chromatogram, IIon.TIC_ION, monitor);
+			return getNoiseSegments(chromatogram, IIon.TIC_ION);
 		} else if(chromatogram != null) {
 			ChromatogramSegmentation segmentation = chromatogram.getMeasurementResult(ChromatogramSegmentation.class);
 			if(segmentation != null) {
@@ -114,7 +114,7 @@ public class NoiseCalculator extends AbstractNoiseCalculator {
 	/**
 	 * See S.E. Stein:
 	 * "An Integrated Method for Spectrum Extraction and Compound Identification from Gas Chromatography/Mass Spectrometry Data"
-	 * 
+	 *
 	 * @param IChromatogram
 	 */
 	private float calculateNoiseFactor(IChromatogram chromatogram) {
@@ -150,9 +150,9 @@ public class NoiseCalculator extends AbstractNoiseCalculator {
 
 	/**
 	 * Calculates the noise factor for the given segment if the segment is valid.
-	 * 
+	 *
 	 * @param baseSegment
-	 * 
+	 *
 	 * @param values
 	 * @return
 	 */
@@ -170,7 +170,7 @@ public class NoiseCalculator extends AbstractNoiseCalculator {
 		}
 	}
 
-	private List<INoiseSegment> getNoiseSegments(IChromatogram chromatogram, double ion, IProgressMonitor monitor) {
+	private List<INoiseSegment> getNoiseSegments(IChromatogram chromatogram, double ion) {
 
 		if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
 			ChromatogramSegmentation segmentation = chromatogram.getMeasurementResult(ChromatogramSegmentation.class);

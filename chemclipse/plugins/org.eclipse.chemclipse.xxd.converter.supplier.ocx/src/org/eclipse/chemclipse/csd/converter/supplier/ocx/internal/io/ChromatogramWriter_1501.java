@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - adjust to API Changes
@@ -95,7 +95,7 @@ public class ChromatogramWriter_1501 extends AbstractChromatogramWriter implemen
 	@Override
 	public void writeChromatogram(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramCSD chromatogram, IProgressMonitor monitor) throws IOException {
 
-		writeVersion(zipOutputStream, directoryPrefix, monitor);
+		writeVersion(zipOutputStream, directoryPrefix);
 		writeChromatogramFolder(zipOutputStream, directoryPrefix, chromatogram, monitor);
 		/*
 		 * Referenced Chromatograms
@@ -105,7 +105,7 @@ public class ChromatogramWriter_1501 extends AbstractChromatogramWriter implemen
 		writeReferencedChromatograms(zipOutputStream, directoryPrefix, referencedChromatograms, monitor);
 	}
 
-	private void writeVersion(ZipOutputStream zipOutputStream, String directoryPrefix, IProgressMonitor monitor) throws IOException {
+	private void writeVersion(ZipOutputStream zipOutputStream, String directoryPrefix) throws IOException {
 
 		ZipEntry zipEntry;
 		DataOutputStream dataOutputStream;

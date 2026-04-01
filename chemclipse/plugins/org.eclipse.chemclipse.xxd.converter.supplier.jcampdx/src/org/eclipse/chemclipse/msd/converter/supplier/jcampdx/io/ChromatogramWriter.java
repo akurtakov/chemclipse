@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -31,14 +31,14 @@ public class ChromatogramWriter extends AbstractChromatogramMSDWriter {
 
 		PrintWriter printWriter = new PrintWriter(file);
 
-		writeHeader(chromatogram, printWriter, monitor);
+		writeHeader(chromatogram, printWriter);
 		writeScans(chromatogram, printWriter, monitor);
 
 		printWriter.flush();
 		printWriter.close();
 	}
 
-	private void writeHeader(IChromatogramMSD chromatogram, PrintWriter printWriter, IProgressMonitor monitor) {
+	private void writeHeader(IChromatogramMSD chromatogram, PrintWriter printWriter) {
 
 		printWriter.println("##TITLE= ");
 		printWriter.println("##JCAMP-DX= ");

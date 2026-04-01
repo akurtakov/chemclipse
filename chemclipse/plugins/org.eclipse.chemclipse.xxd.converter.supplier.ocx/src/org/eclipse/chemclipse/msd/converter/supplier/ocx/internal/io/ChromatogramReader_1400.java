@@ -131,7 +131,7 @@ public class ChromatogramReader_1400 extends AbstractChromatogramReader {
 		IChromatogramOverview chromatogramOverview = null;
 		try (ZipFile zipFile = new ZipFile(file)) {
 			if(isValidFileFormat(zipFile)) {
-				chromatogramOverview = readOverviewFromZipFile(zipFile, "", monitor);
+				chromatogramOverview = readOverviewFromZipFile(zipFile, "");
 			}
 		}
 		return chromatogramOverview;
@@ -240,7 +240,7 @@ public class ChromatogramReader_1400 extends AbstractChromatogramReader {
 		}
 	}
 
-	private IChromatogramOverview readOverviewFromZipFile(ZipFile zipFile, String directoryPrefix, IProgressMonitor monitor) throws IOException {
+	private IChromatogramOverview readOverviewFromZipFile(ZipFile zipFile, String directoryPrefix) throws IOException {
 
 		DataInputStream dataInputStream = getDataInputStream(zipFile, directoryPrefix + Format.FILE_TIC_MSD);
 

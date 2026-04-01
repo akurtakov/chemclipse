@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -44,16 +44,16 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 	@Override
 	public IChromatogramCSD read(File file, IProgressMonitor monitor) throws IOException {
 
-		return readChromatogram(file, monitor);
+		return readChromatogram(file);
 	}
 
 	@Override
 	public IChromatogramOverview readOverview(File file, IProgressMonitor monitor) throws IOException {
 
-		return readChromatogram(file, monitor);
+		return readChromatogram(file);
 	}
 
-	private IChromatogramCSD readChromatogram(File file, IProgressMonitor monitor) {
+	private IChromatogramCSD readChromatogram(File file) {
 
 		IVendorChromatogram chromatogram = new VendorChromatogram();
 		chromatogram.setFile(file);
