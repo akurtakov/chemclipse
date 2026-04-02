@@ -54,6 +54,7 @@ public class LongFileExtractor {
 	//
 	private TreeMap<Integer, Integer> filterDistribution;
 	private List<Map.Entry<String, Integer>> filterOverlapList;
+	//
 	private Map<String, Integer> filterOverlap = new HashMap<>();
 	private Map<String, Sample> sampleMap = new HashMap<>();
 	private Map<String, Map<String, Target>> samplesVariablesMap = new HashMap<>();
@@ -70,11 +71,8 @@ public class LongFileExtractor {
 
 	public Samples extract() {
 
-		Map<String, Sample> sampleMap = new HashMap<>();
-		Map<String, Map<String, Target>> samplesVariablesMap = new HashMap<>();
-		Map<String, Target> targetMap = new HashMap<>();
-		Map<String, Integer> filterOverlap = new HashMap<>();
-		TreeMap<Integer, Integer> filterDistribution = new TreeMap<>();
+		clearData();
+
 		if(filter) {
 			readFilterFile(filterDataInputEntries, targetMap);
 		}
@@ -120,6 +118,8 @@ public class LongFileExtractor {
 	}
 
 	public void readData() {
+
+		clearData();
 
 		filterDistribution = new TreeMap<>();
 		if(filter) {
@@ -176,6 +176,14 @@ public class LongFileExtractor {
 
 		return samples;
 
+	}
+
+	private void clearData() {
+
+		filterOverlap.clear();
+		sampleMap.clear();
+		samplesVariablesMap.clear();
+		targetMap.clear();
 	}
 
 	private TreeMap<Integer, Integer> createDistribution(List<Map.Entry<String, Integer>> overlaps) {
