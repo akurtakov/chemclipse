@@ -34,13 +34,20 @@ public class PeakIdentifier extends AbstractPeakIdentifierMSD {
 	public IProcessingInfo<IPeakIdentificationResults> identify(List<? extends IPeakMSD> peaks, IPeakIdentifierSettingsMSD identifierSettings, IProgressMonitor monitor) {
 
 		IProcessingInfo<IPeakIdentificationResults> processingInfo = new ProcessingInfo<>(new PeakIdentificationResults());
-
-		if(identifierSettings instanceof PeakIdentifierSettings peakIdentifierSettings) {
-			BasePeakIdentifier basePeakIdentifier = new BasePeakIdentifier();
-			basePeakIdentifier.identifyPeaks(peaks, peakIdentifierSettings, monitor);
-			processingInfo.addInfoMessage("BasePeakIdentifier", "Peaks have been identified.");
-		}
+		PeakIdentifierSettings peakIdentifierSettings = getPeakIdentifierSettings(identifierSettings, processingInfo);
+		BasePeakIdentifier basePeakIdentifier = new BasePeakIdentifier();
+		basePeakIdentifier.identifyPeaks(peaks, peakIdentifierSettings, monitor);
 
 		return processingInfo;
+	}
+
+	private PeakIdentifierSettings getPeakIdentifierSettings(IPeakIdentifierSettingsMSD identifierSettings, IProcessingInfo<?> processingInfo) {
+
+		if(identifierSettings instanceof PeakIdentifierSettings peakIdentifierSettings) {
+			return peakIdentifierSettings;
+		} else {
+			processingInfo.addWarnMessage(BasePeakIdentifier.IDENTIFIER, "Default identifier settings are used.");
+			return new PeakIdentifierSettings();
+		}
 	}
 }

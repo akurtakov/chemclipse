@@ -28,14 +28,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 public class LibraryService extends AbstractLibraryService {
 
-	private final BasePeakIdentifier basePeakIdentifier;
-
 	private static final Logger logger = Logger.getLogger(LibraryService.class);
-
-	public LibraryService() {
-
-		basePeakIdentifier = new BasePeakIdentifier();
-	}
 
 	@Override
 	public IProcessingInfo<IMassSpectra> identify(IIdentificationTarget identificationTarget, IProgressMonitor monitor) {
@@ -44,6 +37,7 @@ public class LibraryService extends AbstractLibraryService {
 		try {
 			monitor.subTask("Base Peak Identifier - get reference mass spectrum");
 			validateIdentificationTarget(identificationTarget);
+			BasePeakIdentifier basePeakIdentifier = new BasePeakIdentifier();
 			IMassSpectra massSpectra = basePeakIdentifier.getMassSpectra(identificationTarget);
 			processingInfo.setProcessingResult(massSpectra);
 		} catch(ValueMustNotBeNullException e) {
@@ -60,6 +54,7 @@ public class LibraryService extends AbstractLibraryService {
 	@Override
 	public boolean accepts(IIdentificationTarget identificationTarget) {
 
+		BasePeakIdentifier basePeakIdentifier = new BasePeakIdentifier();
 		return basePeakIdentifier.isValid(identificationTarget);
 	}
 
