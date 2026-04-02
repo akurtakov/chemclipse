@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -38,16 +38,16 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 	@Override
 	public IChromatogramCSD read(File file, IProgressMonitor monitor) throws IOException {
 
-		return readChromatogram(file, monitor);
+		return readChromatogram(file);
 	}
 
 	@Override
 	public IChromatogramOverview readOverview(File file, IProgressMonitor monitor) throws IOException {
 
-		return readChromatogram(file, monitor);
+		return readChromatogram(file);
 	}
 
-	private IChromatogramCSD readChromatogram(File file, IProgressMonitor monitor) throws IOException {
+	private IChromatogramCSD readChromatogram(File file) throws IOException {
 
 		IVendorChromatogram chromatogram = new VendorChromatogram();
 		chromatogram.setFile(file);
@@ -73,12 +73,12 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 		/*
 		 * Set scan delay and interval
 		 */
-		calculateScanIntervalAndDelay(chromatogram, monitor);
+		calculateScanIntervalAndDelay(chromatogram);
 
 		return chromatogram;
 	}
 
-	private void calculateScanIntervalAndDelay(IChromatogramCSD chromatogram, IProgressMonitor monitor) {
+	private void calculateScanIntervalAndDelay(IChromatogramCSD chromatogram) {
 
 		ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
 	}

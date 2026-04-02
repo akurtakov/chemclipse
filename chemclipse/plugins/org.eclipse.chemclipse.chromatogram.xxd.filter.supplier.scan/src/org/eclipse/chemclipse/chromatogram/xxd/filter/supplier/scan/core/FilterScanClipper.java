@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -41,7 +41,7 @@ public class FilterScanClipper extends AbstractChromatogramFilter {
 				/*
 				 * Run
 				 */
-				applyScanClipperFilter(chromatogramSelection, settings.getScanNumberPattern(), monitor);
+				applyScanClipperFilter(chromatogramSelection, settings.getScanNumberPattern());
 				/*
 				 * Result
 				 */
@@ -55,7 +55,7 @@ public class FilterScanClipper extends AbstractChromatogramFilter {
 		return processingInfo;
 	}
 
-	private void applyScanClipperFilter(IChromatogramSelection chromatogramSelection, String scanNumberPattern, IProgressMonitor monitor) {
+	private void applyScanClipperFilter(IChromatogramSelection chromatogramSelection, String scanNumberPattern) {
 
 		if(chromatogramSelection != null && scanNumberPattern != null) {
 			/*

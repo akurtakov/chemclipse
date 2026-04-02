@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - adjust to API Changes
@@ -105,7 +105,7 @@ public class ChromatogramReader_1502 extends AbstractChromatogramReader implemen
 		IChromatogramOverview chromatogramOverview = null;
 		try (ZipFile zipFile = new ZipFile(file)) {
 			if(isValidFileFormat(zipFile)) {
-				chromatogramOverview = readOverviewFromZipFile(zipFile, "", monitor);
+				chromatogramOverview = readOverviewFromZipFile(zipFile, "");
 			}
 		}
 		return chromatogramOverview;
@@ -128,12 +128,12 @@ public class ChromatogramReader_1502 extends AbstractChromatogramReader implemen
 		return readZipData(zipFile, directoryPrefix, file, monitor);
 	}
 
-	private IChromatogramOverview readOverviewFromZipFile(ZipFile zipFile, String directoryPrefix, IProgressMonitor monitor) throws IOException {
+	private IChromatogramOverview readOverviewFromZipFile(ZipFile zipFile, String directoryPrefix) throws IOException {
 
 		DataInputStream dataInputStream = getDataInputStream(zipFile, directoryPrefix + Format.FILE_TIC_WSD);
 
 		IVendorChromatogram chromatogram = new VendorChromatogram();
-		readScansOverview(dataInputStream, chromatogram, monitor);
+		readScansOverview(dataInputStream, chromatogram);
 
 		dataInputStream.close();
 
@@ -202,7 +202,7 @@ public class ChromatogramReader_1502 extends AbstractChromatogramReader implemen
 		return chromatogram;
 	}
 
-	private void readScansOverview(DataInputStream dataInputStream, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void readScansOverview(DataInputStream dataInputStream, IChromatogramWSD chromatogram) throws IOException {
 
 		int scans = dataInputStream.readInt();
 		for(int scan = 1; scan <= scans; ++scan) {

@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -49,9 +49,9 @@ public class JobReader {
 
 		try {
 			readHeader(file, batchProcessJob);
-			readDataTypeEntries(file, batchProcessJob, monitor);
+			readDataTypeEntries(file, batchProcessJob);
 			readChromatogramInputEntries(file, batchProcessJob, monitor);
-			readChromatogramProcessEntries(file, processMethod, monitor);
+			readChromatogramProcessEntries(file, processMethod);
 		} catch(XMLStreamException e) {
 			throw new IOException(e);
 		}
@@ -61,7 +61,7 @@ public class JobReader {
 
 	/**
 	 * Reads the header information.
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	private void readHeader(File file, BatchProcessJob batchProcessJob) throws XMLStreamException, IOException {
@@ -104,7 +104,7 @@ public class JobReader {
 		}
 	}
 
-	private void readDataTypeEntries(File file, BatchProcessJob batchProcessJob, IProgressMonitor monitor) throws XMLStreamException, IOException {
+	private void readDataTypeEntries(File file, BatchProcessJob batchProcessJob) throws XMLStreamException, IOException {
 
 		DataType dataType;
 		XMLEvent event;
@@ -144,7 +144,7 @@ public class JobReader {
 
 	/**
 	 * Read the chromatogram input entries.
-	 * 
+	 *
 	 * @param file
 	 * @param batchProcessJob
 	 * @param monitor
@@ -185,7 +185,7 @@ public class JobReader {
 		bufferedInputStream.close();
 	}
 
-	private void readChromatogramProcessEntries(File file, ProcessMethod method, IProgressMonitor monitor) throws XMLStreamException, IOException {
+	private void readChromatogramProcessEntries(File file, ProcessMethod method) throws XMLStreamException, IOException {
 
 		XMLEvent event;
 		Attribute attribute;

@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -63,12 +63,12 @@ public class ChromatogramWriter_1007 extends AbstractChromatogramWriter implemen
 	@Override
 	public void writeChromatogram(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
 
-		writeVersion(zipOutputStream, directoryPrefix, monitor);
-		writeOverviewFolder(zipOutputStream, directoryPrefix, chromatogram, monitor);
-		writeChromatogramFolder(zipOutputStream, directoryPrefix, chromatogram, monitor);
+		writeVersion(zipOutputStream, directoryPrefix);
+		writeOverviewFolder(zipOutputStream, directoryPrefix, chromatogram);
+		writeChromatogramFolder(zipOutputStream, directoryPrefix, chromatogram);
 	}
 
-	private void writeVersion(ZipOutputStream zipOutputStream, String directoryPrefix, IProgressMonitor monitor) throws IOException {
+	private void writeVersion(ZipOutputStream zipOutputStream, String directoryPrefix) throws IOException {
 
 		ZipEntry zipEntry;
 		DataOutputStream dataOutputStream;
@@ -86,7 +86,7 @@ public class ChromatogramWriter_1007 extends AbstractChromatogramWriter implemen
 		zipOutputStream.closeEntry();
 	}
 
-	private void writeOverviewFolder(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void writeOverviewFolder(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramWSD chromatogram) throws IOException {
 
 		ZipEntry zipEntry;
 		DataOutputStream dataOutputStream;
@@ -128,7 +128,7 @@ public class ChromatogramWriter_1007 extends AbstractChromatogramWriter implemen
 		zipOutputStream.closeEntry();
 	}
 
-	private void writeChromatogramFolder(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void writeChromatogramFolder(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramWSD chromatogram) throws IOException {
 
 		// the things we want in chromatogram folder rn ==> SCANS, MISC, HISTORY, BASELINE.
 		// others might be added later
@@ -143,14 +143,14 @@ public class ChromatogramWriter_1007 extends AbstractChromatogramWriter implemen
 		/*
 		 * WRITE THE FILES
 		 */
-		writeChromatogramMethod(zipOutputStream, directoryPrefix, chromatogram, monitor);
-		writeChromatogramScans(zipOutputStream, directoryPrefix, chromatogram, monitor);
-		writeChromatogramBaseline(zipOutputStream, directoryPrefix, chromatogram, monitor);
-		writeChromatogramHistory(zipOutputStream, directoryPrefix, chromatogram, monitor);
-		writeChromatogramMiscellaneous(zipOutputStream, directoryPrefix, chromatogram, monitor);
+		writeChromatogramMethod(zipOutputStream, directoryPrefix, chromatogram);
+		writeChromatogramScans(zipOutputStream, directoryPrefix, chromatogram);
+		writeChromatogramBaseline(zipOutputStream, directoryPrefix, chromatogram);
+		writeChromatogramHistory(zipOutputStream, directoryPrefix, chromatogram);
+		writeChromatogramMiscellaneous(zipOutputStream, directoryPrefix, chromatogram);
 	}
 
-	private void writeChromatogramMethod(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void writeChromatogramMethod(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramWSD chromatogram) throws IOException {
 
 		ZipEntry zipEntry;
 		DataOutputStream dataOutputStream;
@@ -175,7 +175,7 @@ public class ChromatogramWriter_1007 extends AbstractChromatogramWriter implemen
 		zipOutputStream.closeEntry();
 	}
 
-	private void writeChromatogramScans(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void writeChromatogramScans(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramWSD chromatogram) throws IOException {
 
 		ZipEntry zipEntry;
 		DataOutputStream dataOutputStream;
@@ -217,7 +217,7 @@ public class ChromatogramWriter_1007 extends AbstractChromatogramWriter implemen
 		zipOutputStream.closeEntry();
 	}
 
-	private void writeChromatogramBaseline(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void writeChromatogramBaseline(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramWSD chromatogram) throws IOException {
 
 		ZipEntry zipEntry;
 		DataOutputStream dataOutputStream;
@@ -243,7 +243,7 @@ public class ChromatogramWriter_1007 extends AbstractChromatogramWriter implemen
 		zipOutputStream.closeEntry();
 	}
 
-	private void writeChromatogramHistory(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void writeChromatogramHistory(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramWSD chromatogram) throws IOException {
 
 		ZipEntry zipEntry;
 		DataOutputStream dataOutputStream;
@@ -265,7 +265,7 @@ public class ChromatogramWriter_1007 extends AbstractChromatogramWriter implemen
 		zipOutputStream.closeEntry();
 	}
 
-	private void writeChromatogramMiscellaneous(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void writeChromatogramMiscellaneous(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramWSD chromatogram) throws IOException {
 
 		ZipEntry zipEntry;
 		DataOutputStream dataOutputStream;

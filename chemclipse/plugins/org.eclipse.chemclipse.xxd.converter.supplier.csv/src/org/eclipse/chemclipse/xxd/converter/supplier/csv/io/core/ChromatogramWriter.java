@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -61,13 +61,13 @@ public class ChromatogramWriter extends AbstractChromatogramWriter {
 		/*
 		 * Master / References
 		 */
-		writeChromatogramByType(file, chromatogram, monitor);
+		writeChromatogramByType(file, chromatogram);
 		if(PreferenceSupplier.isExportReferences()) {
-			writeChromatogramReferencesOnDemand(file, chromatogram, monitor);
+			writeChromatogramReferencesOnDemand(file, chromatogram);
 		}
 	}
 
-	private void writeChromatogramReferencesOnDemand(File file, IChromatogram chromatogram, IProgressMonitor monitor) throws IOException {
+	private void writeChromatogramReferencesOnDemand(File file, IChromatogram chromatogram) throws IOException {
 
 		if(PreferenceSupplier.isExportReferences()) {
 			/*
@@ -87,26 +87,26 @@ public class ChromatogramWriter extends AbstractChromatogramWriter {
 				builder.append(i);
 				builder.append(FILE_EXTENSION);
 				File fileReference = new File(builder.toString());
-				writeChromatogramByType(fileReference, chromatogramReference, monitor);
+				writeChromatogramByType(fileReference, chromatogramReference);
 				i++;
 			}
 		}
 	}
 
-	private void writeChromatogramByType(File file, IChromatogram chromatogram, IProgressMonitor monitor) throws IOException {
+	private void writeChromatogramByType(File file, IChromatogram chromatogram) throws IOException {
 
 		if(chromatogram instanceof IChromatogramCSD chromatogramCSD) {
-			writeChromatogram(file, chromatogramCSD, monitor);
+			writeChromatogram(file, chromatogramCSD);
 		} else if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
-			writeChromatogram(file, chromatogramMSD, monitor);
+			writeChromatogram(file, chromatogramMSD);
 		} else if(chromatogram instanceof IChromatogramWSD chromatogramWSD) {
-			writeChromatogram(file, chromatogramWSD, monitor);
+			writeChromatogram(file, chromatogramWSD);
 		} else if(chromatogram instanceof IChromatogramVSD chromatogramISD) {
-			writeChromatogram(file, chromatogramISD, monitor);
+			writeChromatogram(file, chromatogramISD);
 		}
 	}
 
-	private void writeChromatogram(File file, IChromatogramCSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void writeChromatogram(File file, IChromatogramCSD chromatogram) throws IOException {
 
 		try (CSVPrinter csvPrinter = new CSVPrinter(new FileWriter(file), CSVFormat.EXCEL)) {
 			writeTIC(csvPrinter, chromatogram);
@@ -115,7 +115,7 @@ public class ChromatogramWriter extends AbstractChromatogramWriter {
 		}
 	}
 
-	private void writeChromatogram(File file, IChromatogramMSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void writeChromatogram(File file, IChromatogramMSD chromatogram) throws IOException {
 
 		try (CSVPrinter csvPrinter = new CSVPrinter(new FileWriter(file), CSVFormat.EXCEL)) {
 			if(PreferenceSupplier.isExportUseTic()) {
@@ -136,7 +136,7 @@ public class ChromatogramWriter extends AbstractChromatogramWriter {
 		}
 	}
 
-	private void writeChromatogram(File file, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void writeChromatogram(File file, IChromatogramWSD chromatogram) throws IOException {
 
 		try (CSVPrinter csvPrinter = new CSVPrinter(new FileWriter(file), CSVFormat.EXCEL)) {
 			if(PreferenceSupplier.isExportUseTic()) {
@@ -157,7 +157,7 @@ public class ChromatogramWriter extends AbstractChromatogramWriter {
 		}
 	}
 
-	private void writeChromatogram(File file, IChromatogramVSD chromatogram, IProgressMonitor monitor) throws IOException {
+	private void writeChromatogram(File file, IChromatogramVSD chromatogram) throws IOException {
 
 		try (CSVPrinter csvPrinter = new CSVPrinter(new FileWriter(file), CSVFormat.EXCEL)) {
 			writeTIC(csvPrinter, chromatogram);

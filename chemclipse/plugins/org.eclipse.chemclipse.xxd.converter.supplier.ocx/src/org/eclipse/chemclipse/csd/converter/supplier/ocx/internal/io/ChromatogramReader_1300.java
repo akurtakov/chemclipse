@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - adjust to API Changes
@@ -592,11 +592,11 @@ public class ChromatogramReader_1300 extends AbstractChromatogramReader implemen
 				dataInputStream.close();
 			}
 
-			parseChromatogram(object, dataType, directory, chromatogram, closeStream, monitor);
+			parseChromatogram(object, dataType, directory, chromatogram, monitor);
 		}
 	}
 
-	private void parseChromatogram(Object object, String dataType, String directoryPrefix, IChromatogramCSD chromatogram, boolean closeStream, IProgressMonitor monitor) throws IOException {
+	private void parseChromatogram(Object object, String dataType, String directoryPrefix, IChromatogramCSD chromatogram, IProgressMonitor monitor) throws IOException {
 
 		String directory = directoryPrefix + Format.DIR_CHROMATOGRAM_REFERENCE + Format.DIR_SEPARATOR;
 		if(object instanceof ZipFile zipFile) {

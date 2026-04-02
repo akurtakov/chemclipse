@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - adjust to API Changes
@@ -96,17 +96,17 @@ public class ChromatogramWriter_1500 extends AbstractChromatogramWriter implemen
 	@Override
 	public void writeChromatogram(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramCSD chromatogram, IProgressMonitor monitor) throws IOException {
 
-		writeVersion(zipOutputStream, directoryPrefix, monitor);
+		writeVersion(zipOutputStream, directoryPrefix);
 		writeChromatogramFolder(zipOutputStream, directoryPrefix, chromatogram, monitor);
 		/*
 		 * Referenced Chromatograms
 		 */
 		List<IChromatogram> referencedChromatograms = chromatogram.getReferencedChromatograms();
-		writeChromatogramReferenceInfo(zipOutputStream, directoryPrefix, referencedChromatograms, monitor);
+		writeChromatogramReferenceInfo(zipOutputStream, directoryPrefix, referencedChromatograms);
 		writeReferencedChromatograms(zipOutputStream, directoryPrefix, referencedChromatograms, monitor);
 	}
 
-	private void writeVersion(ZipOutputStream zipOutputStream, String directoryPrefix, IProgressMonitor monitor) throws IOException {
+	private void writeVersion(ZipOutputStream zipOutputStream, String directoryPrefix) throws IOException {
 
 		ZipEntry zipEntry;
 		DataOutputStream dataOutputStream;
@@ -612,7 +612,7 @@ public class ChromatogramWriter_1500 extends AbstractChromatogramWriter implemen
 		zipOutputStream.closeEntry();
 	}
 
-	private void writeChromatogramReferenceInfo(ZipOutputStream zipOutputStream, String directoryPrefix, List<IChromatogram> referencedChromatograms, IProgressMonitor monitor) throws IOException {
+	private void writeChromatogramReferenceInfo(ZipOutputStream zipOutputStream, String directoryPrefix, List<IChromatogram> referencedChromatograms) throws IOException {
 
 		ZipEntry zipEntryType = new ZipEntry(directoryPrefix + Format.FILE_REFERENCE_INFO);
 		zipOutputStream.putNextEntry(zipEntryType);

@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -77,7 +77,7 @@ public class JobWriter {
 
 	/**
 	 * Writes the comment.
-	 * 
+	 *
 	 * @param eventWriter
 	 * @param eventFactory
 	 * @throws XMLStreamException
@@ -93,7 +93,7 @@ public class JobWriter {
 
 	/**
 	 * Writes the header.
-	 * 
+	 *
 	 * @param eventWriter
 	 * @param eventFactory
 	 * @param batchProcessJob
@@ -132,7 +132,7 @@ public class JobWriter {
 
 	/**
 	 * Writes the chromatogram input entries.
-	 * 
+	 *
 	 * @param eventWriter
 	 * @param eventFactory
 	 * @param inputEntries
@@ -176,7 +176,7 @@ public class JobWriter {
 
 	/**
 	 * Writes the chromatogram input entry.
-	 * 
+	 *
 	 * @param eventWriter
 	 * @param eventFactory
 	 * @param inputEntry
@@ -203,7 +203,7 @@ public class JobWriter {
 
 	/**
 	 * Writes the chromatogram process entries.
-	 * 
+	 *
 	 * @param eventWriter
 	 * @param eventFactory
 	 * @param processEntries
@@ -223,7 +223,7 @@ public class JobWriter {
 
 	/**
 	 * Writes the chromatogram process entry.
-	 * 
+	 *
 	 * @param eventWriter
 	 * @param eventFactory
 	 * @param processEntry

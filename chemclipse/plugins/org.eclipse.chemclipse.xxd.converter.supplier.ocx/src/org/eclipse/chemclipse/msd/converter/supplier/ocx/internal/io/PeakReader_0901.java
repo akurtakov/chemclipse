@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -70,7 +70,7 @@ public class PeakReader_0901 extends AbstractZipReader implements IPeakReader {
 		ZipFile zipFile = new ZipFile(file);
 		IProcessingInfo<IPeaksMSD> processingInfo = new ProcessingInfo<>();
 		try {
-			IPeaksMSD peaks = readPeaksFromZipFile(zipFile, monitor);
+			IPeaksMSD peaks = readPeaksFromZipFile(zipFile);
 			processingInfo.setProcessingResult(peaks);
 		} finally {
 			zipFile.close();
@@ -78,7 +78,7 @@ public class PeakReader_0901 extends AbstractZipReader implements IPeakReader {
 		return processingInfo;
 	}
 
-	private IPeaksMSD readPeaksFromZipFile(ZipFile zipFile, IProgressMonitor monitor) throws IOException {
+	private IPeaksMSD readPeaksFromZipFile(ZipFile zipFile) throws IOException {
 
 		IPeaksMSD peaks = new PeaksMSD();
 		DataInputStream dataInputStream = getDataInputStream(zipFile, Format.FILE_PEAKS);
@@ -86,7 +86,7 @@ public class PeakReader_0901 extends AbstractZipReader implements IPeakReader {
 		int numberOfPeaks = dataInputStream.readInt();
 		for(int i = 1; i <= numberOfPeaks; i++) {
 			try {
-				IPeakMSD peak = readPeak(dataInputStream, monitor);
+				IPeakMSD peak = readPeak(dataInputStream);
 				peaks.addPeak(peak);
 			} catch(PeakException e) {
 				logger.warn(e.getMessage());
@@ -99,7 +99,7 @@ public class PeakReader_0901 extends AbstractZipReader implements IPeakReader {
 		return peaks;
 	}
 
-	private IPeakMSD readPeak(DataInputStream dataInputStream, IProgressMonitor monitor) throws IOException, IllegalArgumentException, PeakException {
+	private IPeakMSD readPeak(DataInputStream dataInputStream) throws IOException, IllegalArgumentException, PeakException {
 
 		IIonTransitionSettings ionTransitionSettings = new IonTransitionSettings();
 
@@ -135,11 +135,11 @@ public class PeakReader_0901 extends AbstractZipReader implements IPeakReader {
 		/*
 		 * Identification Results
 		 */
-		readPeakIdentificationTargets(dataInputStream, peak, monitor);
+		readPeakIdentificationTargets(dataInputStream, peak);
 		/*
 		 * Quantitation Results
 		 */
-		readPeakQuantitationEntries(dataInputStream, peak, monitor);
+		readPeakQuantitationEntries(dataInputStream, peak);
 
 		return peak;
 	}
@@ -212,7 +212,7 @@ public class PeakReader_0901 extends AbstractZipReader implements IPeakReader {
 		return integrationEntries;
 	}
 
-	private void readPeakIdentificationTargets(DataInputStream dataInputStream, IPeakMSD peak, IProgressMonitor monitor) throws IOException {
+	private void readPeakIdentificationTargets(DataInputStream dataInputStream, IPeakMSD peak) throws IOException {
 
 		int numberOfPeakTargets = dataInputStream.readInt(); // Number Peak Targets
 		for(int i = 1; i <= numberOfPeakTargets; i++) {
@@ -248,7 +248,7 @@ public class PeakReader_0901 extends AbstractZipReader implements IPeakReader {
 		}
 	}
 
-	private void readPeakQuantitationEntries(DataInputStream dataInputStream, IPeakMSD peak, IProgressMonitor monitor) throws IOException {
+	private void readPeakQuantitationEntries(DataInputStream dataInputStream, IPeakMSD peak) throws IOException {
 
 		int numberOfQuantitationEntries = dataInputStream.readInt(); // Number Quantitation Entries
 		for(int i = 1; i <= numberOfQuantitationEntries; i++) {
