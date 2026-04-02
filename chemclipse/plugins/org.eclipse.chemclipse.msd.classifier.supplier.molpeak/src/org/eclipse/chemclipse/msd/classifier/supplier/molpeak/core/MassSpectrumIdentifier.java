@@ -31,10 +31,14 @@ public class MassSpectrumIdentifier extends AbstractMassSpectrumIdentifier {
 	@Override
 	public IProcessingInfo<IMassSpectra> identify(List<IScanMSD> massSpectrumList, IMassSpectrumIdentifierSettings identifierSettings, IProgressMonitor monitor) {
 
-		MassSpectrumIdentifierSettings massSpectrumIdentifierSettings = (MassSpectrumIdentifierSettings)identifierSettings;
 		IProcessingInfo<IMassSpectra> processingInfo = new ProcessingInfo<>();
-		BasePeakIdentifier basePeakIdentifier = new BasePeakIdentifier();
-		basePeakIdentifier.identifyMassSpectra(massSpectrumList, massSpectrumIdentifierSettings, monitor);
+		if(identifierSettings instanceof MassSpectrumIdentifierSettings massSpectrumIdentifierSettings) {
+			BasePeakIdentifier basePeakIdentifier = new BasePeakIdentifier();
+			basePeakIdentifier.identifyMassSpectra(massSpectrumList, massSpectrumIdentifierSettings, monitor);
+		} else {
+			processingInfo.addWarnMessage(BasePeakIdentifier.IDENTIFIER, "The identifier settings are not valid.");
+		}
+
 		return processingInfo;
 	}
 }
