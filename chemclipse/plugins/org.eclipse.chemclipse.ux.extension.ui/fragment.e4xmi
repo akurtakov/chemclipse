@@ -43,7 +43,6 @@
       </children>
     </elements>
     <elements xsi:type="menu:Menu" xmi:id="_QKMFgDL4EeKMEOdllHiEaA" elementId="org.eclipse.chemclipse.ux.extension.ui.menu.chromatogram" label="%Chromatogram">
-      <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_u2iyUMqWEe6-T8qSe20OHg" coreExpressionId="org.eclipse.chemclipse.ux.extension.ui.definitions.isChromatogramTypeXXD"/>
       <children xsi:type="menu:Menu" xmi:id="_eTFrIDL-EeKMEOdllHiEaA" elementId="org.eclipse.chemclipse.ux.extension.ui.menu.chromatogram.baselinedetector" label="%BaselineDetectors"/>
       <children xsi:type="menu:Menu" xmi:id="_BJuDcAPqEea988xguwzXfA" elementId="org.eclipse.chemclipse.ux.extension.ui.menu.chromatogram.calculators" label="%Calculators"/>
       <children xsi:type="menu:Menu" xmi:id="_6R6_cDL8EeKMEOdllHiEaA" elementId="org.eclipse.chemclipse.ux.extension.ui.menu.chromatogram.classifier" label="%Classifier"/>
