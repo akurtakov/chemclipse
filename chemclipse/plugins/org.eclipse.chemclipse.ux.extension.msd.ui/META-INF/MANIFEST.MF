@@ -54,3 +54,4 @@ Import-Package: jakarta.annotation;version="2.1.1",
  jakarta.inject;version="2.0.1",
  org.osgi.service.event;version="[1.0.0,2.0.0)"
 Bundle-Localization: OSGI-INF/l10n/bundle
+Service-Component: OSGI-INF/org.eclipse.chemclipse.ux.extension.msd.ui.processors.ResetDatabaseCacheProcessSupplier.xml
