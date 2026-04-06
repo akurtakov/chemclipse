@@ -68,27 +68,6 @@
    <extension
          point="org.eclipse.core.expressions.definitions">
       <definition
-            id="org.eclipse.chemclipse.ux.extension.ui.definitions.isLibraryTypeMSD">
-         <with
-               variable="org.eclipse.chemclipse.ux.extension.ui.definitions.libraryType">
-            <equals
-                  value="LIBRARY_TYPE_MSD">
-            </equals>
-         </with>
-      </definition>
-      <definition
-            id="org.eclipse.chemclipse.ux.extension.ui.definitions.isLibraryTypeNone">
-         <with
-               variable="org.eclipse.chemclipse.ux.extension.ui.definitions.libraryType">
-            <equals
-                  value="LIBRARY_TYPE_NONE">
-            </equals>
-         </with>
-      </definition>                         
-   </extension>      
-   <extension
-         point="org.eclipse.core.expressions.definitions">
-      <definition
             id="org.eclipse.chemclipse.ux.extension.ui.definitions.isPeakTypeMSD">
          <with
                variable="org.eclipse.chemclipse.ux.extension.ui.definitions.peakType">
