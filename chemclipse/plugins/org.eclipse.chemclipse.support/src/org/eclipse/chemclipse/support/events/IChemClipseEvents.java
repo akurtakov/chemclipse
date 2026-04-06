@@ -134,4 +134,8 @@ public interface IChemClipseEvents {
 	String TOPIC_EDITOR_PCA_CLOSE = "editor/pca/close";
 
 	String TOPIC_EDITOR_CHROMATOGRAM_TOOLBAR_UPDATE = "editor/chromatogram/toolbar/update";
+	/*
+	 * Keys for Process Data
+	 */
+	String KEY_PROCESS_DATA_COMBINED_MASS_SPECTRUM = "CombinedMassSpectrum";
 }

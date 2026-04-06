@@ -899,9 +899,13 @@ public class ExtendedTargetsUI extends Composite implements IExtendedPartUI {
 			return scanMSD;
 		} else if(object instanceof IPeakMSD peakMSD) {
 			return peakMSD.getExtractedMassSpectrum();
-		} else {
-			return null;
+		} else if(object instanceof IChromatogram chromatogram) {
+			if(chromatogram.getProcessDataMap().get(IChemClipseEvents.KEY_PROCESS_DATA_COMBINED_MASS_SPECTRUM) instanceof IScanMSD scanMSD) {
+				return scanMSD;
+			}
 		}
+
+		return null;
 	}
 
 	private Object getObject() {
