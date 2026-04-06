@@ -10,62 +10,6 @@
       </fragment>
    </extension>
    <extension
-         point="org.eclipse.core.expressions.definitions">
-      <definition
-            id="org.eclipse.chemclipse.ux.extension.ui.definitions.isPeakTypeMSD">
-         <with
-               variable="org.eclipse.chemclipse.ux.extension.ui.definitions.peakType">
-            <equals
-                  value="PEAK_TYPE_MSD">
-            </equals>
-         </with>
-      </definition>
-      <definition
-            id="org.eclipse.chemclipse.ux.extension.ui.definitions.isPeakTypeCSD">
-         <with
-               variable="org.eclipse.chemclipse.ux.extension.ui.definitions.peakType">
-            <equals
-                  value="PEAK_TYPE_CSD">
-            </equals>
-         </with>
-      </definition>
-      <definition
-            id="org.eclipse.chemclipse.ux.extension.ui.definitions.isPeakTypeWSD">
-         <with
-               variable="org.eclipse.chemclipse.ux.extension.ui.definitions.peakType">
-            <equals
-                  value="PEAK_TYPE_WSD">
-            </equals>
-         </with>
-      </definition>
-      <definition
-            id="org.eclipse.chemclipse.ux.extension.ui.definitions.isPeakTypeXXD">
-         <with
-               variable="org.eclipse.chemclipse.ux.extension.ui.definitions.peakType">
-            <or>
-               <equals
-                     value="PEAK_TYPE_MSD">
-               </equals>
-               <equals
-                     value="PEAK_TYPE_CSD">
-               </equals>
-               <equals
-                     value="PEAK_TYPE_WSD">
-               </equals>
-            </or>
-         </with>
-      </definition>      
-      <definition
-            id="org.eclipse.chemclipse.ux.extension.ui.definitions.isPeakTypeNone">
-         <with
-               variable="org.eclipse.chemclipse.ux.extension.ui.definitions.peakType">
-            <equals
-                  value="PEAK_TYPE_NONE">
-            </equals>
-         </with>
-      </definition>                        
-   </extension>     
-   <extension
          point="org.eclipse.ui.preferencePages">
       <page
             category="org.eclipse.chemclipse.rcp.app.ui.preferences.settingsPreferencePage"
