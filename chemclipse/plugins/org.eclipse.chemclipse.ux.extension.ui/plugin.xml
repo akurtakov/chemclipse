@@ -12,62 +12,6 @@
    <extension
          point="org.eclipse.core.expressions.definitions">
       <definition
-            id="org.eclipse.chemclipse.ux.extension.ui.definitions.isScanTypeMSD">
-         <with
-               variable="org.eclipse.chemclipse.ux.extension.ui.definitions.scanType">
-            <equals
-                  value="SCAN_TYPE_MSD">
-            </equals>
-         </with>
-      </definition>
-      <definition
-            id="org.eclipse.chemclipse.ux.extension.ui.definitions.isScanTypeCSD">
-         <with
-               variable="org.eclipse.chemclipse.ux.extension.ui.definitions.scanType">
-            <equals
-                  value="SCAN_TYPE_CSD">
-            </equals>
-         </with>
-      </definition>
-      <definition
-            id="org.eclipse.chemclipse.ux.extension.ui.definitions.isScanTypeWSD">
-         <with
-               variable="org.eclipse.chemclipse.ux.extension.ui.definitions.scanType">
-            <equals
-                  value="SCAN_TYPE_WSD">
-            </equals>
-         </with>
-      </definition>
-      <definition
-            id="org.eclipse.chemclipse.ux.extension.ui.definitions.isScanTypeXXD">
-         <with
-               variable="org.eclipse.chemclipse.ux.extension.ui.definitions.scanType">
-            <or>
-               <equals
-                     value="SCAN_TYPE_MSD">
-               </equals>
-               <equals
-                     value="SCAN_TYPE_CSD">
-               </equals>
-               <equals
-                     value="SCAN_TYPE_WSD">
-               </equals>
-            </or>
-         </with>
-      </definition>            
-      <definition
-            id="org.eclipse.chemclipse.ux.extension.ui.definitions.isScanTypeNone">
-         <with
-               variable="org.eclipse.chemclipse.ux.extension.ui.definitions.scanType">
-            <equals
-                  value="SCAN_TYPE_NONE">
-            </equals>
-         </with>
-      </definition>                        
-   </extension>
-   <extension
-         point="org.eclipse.core.expressions.definitions">
-      <definition
             id="org.eclipse.chemclipse.ux.extension.ui.definitions.isPeakTypeMSD">
          <with
                variable="org.eclipse.chemclipse.ux.extension.ui.definitions.peakType">

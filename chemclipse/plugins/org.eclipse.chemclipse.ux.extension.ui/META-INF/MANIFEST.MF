@@ -67,8 +67,6 @@ Import-Package: jakarta.annotation;version="2.1.1",
  jakarta.inject;version="2.0.1",
  org.osgi.framework;version="[1.0.0,2.0.0)",
  org.osgi.service.event;version="[1.0.0,2.0.0)"
-Service-Component: OSGI-INF/scanTypeXXD.xml,
- OSGI-INF/scanTypeUNLOAD.xml,
- OSGI-INF/peakTypeXXD.xml,
+Service-Component: OSGI-INF/peakTypeXXD.xml,
  OSGI-INF/peakTypeUNLOAD.xml
 Bundle-Localization: OSGI-INF/l10n/bundle
