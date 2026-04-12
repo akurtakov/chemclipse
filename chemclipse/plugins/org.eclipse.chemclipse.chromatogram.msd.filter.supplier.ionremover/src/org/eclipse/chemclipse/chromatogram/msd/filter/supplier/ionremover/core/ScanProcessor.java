@@ -1,0 +1,52 @@
+/*******************************************************************************
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
+ *
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ * 
+ * Contributors:
+ * Philip Wenig - initial API and implementation
+ *******************************************************************************/
+package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.ionremover.core;
+
+import java.util.List;
+
+import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.ionremover.settings.ITraceRemoverFilterSettings;
+import org.eclipse.chemclipse.model.core.MarkedTraceModus;
+import org.eclipse.chemclipse.msd.model.core.IScanMSD;
+import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
+import org.eclipse.chemclipse.msd.model.core.support.MarkedIons;
+import org.eclipse.chemclipse.support.traces.TraceFactory;
+import org.eclipse.chemclipse.support.traces.TraceNominalMSD;
+
+public class ScanProcessor {
+
+	public void apply(List<IScanMSD> massSpectra, ITraceRemoverFilterSettings traceRemoverFilterSettings) {
+
+		IMarkedIons markedIons = getMarkedIons(traceRemoverFilterSettings.getIonsToRemove(), traceRemoverFilterSettings.getMarkedTraceModus());
+		for(IScanMSD massSpectrum : massSpectra) {
+			massSpectrum.removeIons(markedIons);
+		}
+	}
+
+	private IMarkedIons getMarkedIons(String ions, MarkedTraceModus markedTraceModus) {
+
+		int[] ionsList = getIonsList(ions);
+		return new MarkedIons(ionsList, markedTraceModus);
+	}
+
+	private int[] getIonsList(String ions) {
+
+		List<TraceNominalMSD> traces = TraceFactory.parseTraces(ions, TraceNominalMSD.class);
+		int size = traces.size();
+		int[] ionsList = new int[size];
+		for(int i = 0; i < size; i++) {
+			ionsList[i] = traces.get(i).getMZ();
+		}
+
+		return ionsList;
+	}
+}

@@ -20,36 +20,28 @@ import org.eclipse.chemclipse.chromatogram.msd.filter.core.massspectrum.Abstract
 import org.eclipse.chemclipse.chromatogram.msd.filter.result.IMassSpectrumFilterResult;
 import org.eclipse.chemclipse.chromatogram.msd.filter.result.MassSpectrumFilterResult;
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.IMassSpectrumFilterSettings;
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.ionremover.settings.MassSpectrumFilterSettings;
+import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.ionremover.settings.ITraceRemoverFilterSettings;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
-import org.eclipse.chemclipse.msd.model.core.support.IMarkedIons;
-import org.eclipse.chemclipse.msd.model.core.support.MarkedIons;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.MessageType;
 import org.eclipse.chemclipse.processing.core.ProcessingMessage;
-import org.eclipse.chemclipse.support.util.TraceSettingUtil;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public class MassSpectrumFilter extends AbstractMassSpectrumFilter {
-
-	private static final String DESCRIPTION = "Ion Remover Mass Spectrum Filter";
 
 	@Override
 	public IProcessingInfo<IMassSpectrumFilterResult> applyFilter(List<IScanMSD> massSpectra, IMassSpectrumFilterSettings filterSettings, IProgressMonitor monitor) {
 
 		IProcessingInfo<IMassSpectrumFilterResult> processingInfo = validate(massSpectra, filterSettings);
 		if(!processingInfo.hasErrorMessages()) {
-			if(filterSettings instanceof MassSpectrumFilterSettings massSpectrumFilterSettings) {
-				TraceSettingUtil settingIon = new TraceSettingUtil();
-				IMarkedIons markedIons = new MarkedIons(settingIon.extractTraces(settingIon.deserialize(massSpectrumFilterSettings.getIonsToRemove())), massSpectrumFilterSettings.getMarkedTraceModus());
-				for(IScanMSD massSpectrum : massSpectra) {
-					massSpectrum.removeIons(markedIons);
-				}
-				processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, DESCRIPTION, "The mass spectrum has been optimized successfully."));
+			if(filterSettings instanceof ITraceRemoverFilterSettings traceRemoverFilterSettings) {
+				ScanProcessor scanProcessor = new ScanProcessor();
+				scanProcessor.apply(massSpectra, traceRemoverFilterSettings);
+				processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, ITraceRemoverFilterSettings.DESCRIPTION, "The mass spectrum has been optimized successfully."));
 				IMassSpectrumFilterResult massSpectrumFilterResult = new MassSpectrumFilterResult(ResultStatus.OK, "The ion remover filter has been applied successfully.");
 				processingInfo.setProcessingResult(massSpectrumFilterResult);
 			} else {
-				processingInfo.addErrorMessage(DESCRIPTION, "The filter settings instance is not a type of: " + MassSpectrumFilterSettings.class);
+				processingInfo.addErrorMessage(ITraceRemoverFilterSettings.DESCRIPTION, "The filter settings instance is not a type of: " + ITraceRemoverFilterSettings.class);
 			}
 		}
 
