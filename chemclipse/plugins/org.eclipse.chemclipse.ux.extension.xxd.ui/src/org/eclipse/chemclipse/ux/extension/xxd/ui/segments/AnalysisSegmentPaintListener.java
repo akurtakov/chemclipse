@@ -98,7 +98,6 @@ public class AnalysisSegmentPaintListener<X extends IAnalysisSegment> implements
 					}
 					alternate = !alternate;
 				}
-				colors.dispose();
 			}
 		}
 	}

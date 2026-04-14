@@ -57,13 +57,6 @@ public class AnalysisSegmentColorScheme {
 			}
 		}
 
-		public void dispose() {
-
-			for(Color color : colors) {
-				color.dispose();
-			}
-		}
-
 		public Color get(Type type) {
 
 			return colors[type.ordinal()];
