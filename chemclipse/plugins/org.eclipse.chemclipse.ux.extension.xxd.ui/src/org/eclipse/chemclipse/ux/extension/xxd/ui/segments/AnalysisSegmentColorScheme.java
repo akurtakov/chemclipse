@@ -1,19 +1,18 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Christoph Läubrich - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.segments;
 
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.RGB;
 
 public class AnalysisSegmentColorScheme {
@@ -41,20 +40,20 @@ public class AnalysisSegmentColorScheme {
 		this.rgb = colours;
 	}
 
-	public AnalysisSegmentColors create(GC gc) {
+	public AnalysisSegmentColors create() {
 
-		return new AnalysisSegmentColors(gc);
+		return new AnalysisSegmentColors();
 	}
 
 	public final class AnalysisSegmentColors {
 
 		private final Color[] colors;
 
-		public AnalysisSegmentColors(GC gc) {
+		public AnalysisSegmentColors() {
 
 			colors = new Color[rgb.length];
 			for(int i = 0; i < rgb.length; i++) {
-				colors[i] = new Color(gc.getDevice(), rgb[i]);
+				colors[i] = new Color(rgb[i]);
 			}
 		}
 

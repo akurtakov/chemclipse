@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Christoph Läubrich - initial API and implementation
  * Philip Wenig - formatting
@@ -60,7 +60,7 @@ public class AnalysisSegmentPaintListener<X extends IAnalysisSegment> implements
 			ISeries<?> series = chart.getSeriesSet().getSeries(ExtendedChromatogramUI.SERIES_ID_CHROMATOGRAM);
 			if(series != null) {
 				GC gc = evt.gc;
-				AnalysisSegmentColors colors = colorScheme.create(gc);
+				AnalysisSegmentColors colors = colorScheme.create();
 				IAxis xAxis = chart.getAxisSet().getXAxis(series.getXAxisId());
 				Rectangle clientArea = chart.getClientArea();
 				int y = clientArea.y;
