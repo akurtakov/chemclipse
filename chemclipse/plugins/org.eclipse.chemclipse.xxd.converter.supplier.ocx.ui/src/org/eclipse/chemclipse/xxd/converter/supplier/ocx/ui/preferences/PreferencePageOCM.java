@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -36,10 +36,11 @@ public class PreferencePageOCM extends FieldEditorPreferencePage implements IWor
 	 * GUI blocks needed to manipulate various types of preferences. Each field
 	 * editor knows how to save and restore itself.
 	 */
+	@Override
 	public void createFieldEditors() {
 
 		addField(new LabelFieldEditor("Save (*.ocm) as version: " + Format.METHOD_VERSION_LATEST, getFieldEditorParent()));
-		addField(new SpinnerFieldEditor(PreferenceSupplier.P_METHOD_COMPRESSION_LEVEL, "Compression 0 = off, 9 = best", PreferenceSupplier.MIN_COMPRESSION_LEVEL, PreferenceSupplier.MAX_COMPRESSION_LEVEL, getFieldEditorParent()));
+		addField(new SpinnerFieldEditor(PreferenceSupplier.P_METHOD_COMPRESSION_LEVEL, "Compression: fast/large to slow/small", PreferenceSupplier.MIN_COMPRESSION_LEVEL, PreferenceSupplier.MAX_COMPRESSION_LEVEL, getFieldEditorParent()));
 	}
 
 	/*
@@ -47,6 +48,7 @@ public class PreferencePageOCM extends FieldEditorPreferencePage implements IWor
 	 * @see
 	 * org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
 	 */
+	@Override
 	public void init(IWorkbench workbench) {
 
 	}
