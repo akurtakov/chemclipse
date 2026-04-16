@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -43,7 +43,7 @@ public class PreferencePageOCB extends FieldEditorPreferencePage implements IWor
 	public void createFieldEditors() {
 
 		addField(new LabelFieldEditor("Save (*.ocb) as version: " + Format.CHROMATOGRAM_VERSION_LATEST, getFieldEditorParent()));
-		addField(new ScaleFieldEditor(PreferenceSupplier.P_CHROMATOGRAM_COMPRESSION_LEVEL, "Compression: none to best", getFieldEditorParent(), PreferenceSupplier.MIN_COMPRESSION_LEVEL, PreferenceSupplier.MAX_COMPRESSION_LEVEL, 1, 1));
+		addField(new ScaleFieldEditor(PreferenceSupplier.P_CHROMATOGRAM_COMPRESSION_LEVEL, "Compression: fast/large to slow/small", getFieldEditorParent(), PreferenceSupplier.MIN_COMPRESSION_LEVEL, PreferenceSupplier.MAX_COMPRESSION_LEVEL, 1, 1));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_CHROMATGRAM_EXPORT_REFERENCES_SEPARATELY, "Export References Separately", getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_CHROMATGRAM_EXPORT_REFERENCES_HEADER_FIELD, "Header Field (Export References)", HeaderField.getOptions(), getFieldEditorParent()));
 	}
