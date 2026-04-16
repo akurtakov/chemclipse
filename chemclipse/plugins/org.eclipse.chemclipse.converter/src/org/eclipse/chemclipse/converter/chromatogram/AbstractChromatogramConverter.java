@@ -27,6 +27,7 @@ import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.IPeak;
+import org.eclipse.chemclipse.model.support.ChromatogramColumnSupport;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.IProcessingMessage;
@@ -260,6 +261,14 @@ public abstract class AbstractChromatogramConverter<P extends IPeak, T extends I
 		}
 
 		return processingInfo;
+	}
+
+	@Override
+	public void postProcessChromatogram(IProcessingInfo<T> processingInfo, IProgressMonitor monitor) {
+
+		if(processingInfo != null && processingInfo.getProcessingResult() instanceof IChromatogram chromatogram) {
+			ChromatogramColumnSupport.parseSeparationColumn(chromatogram);
+		}
 	}
 
 	@Override

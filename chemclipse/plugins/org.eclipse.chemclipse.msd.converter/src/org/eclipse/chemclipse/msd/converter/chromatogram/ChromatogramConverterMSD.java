@@ -29,7 +29,6 @@ import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.identifier.LibraryInformation;
 import org.eclipse.chemclipse.model.implementation.IdentificationTarget;
-import org.eclipse.chemclipse.model.support.ChromatogramColumnSupport;
 import org.eclipse.chemclipse.model.support.LibraryInformationSupport;
 import org.eclipse.chemclipse.msd.converter.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
@@ -61,7 +60,6 @@ public final class ChromatogramConverterMSD extends AbstractChromatogramConverte
 	public void postProcessChromatogram(IProcessingInfo<IChromatogramMSD> processingInfo, IProgressMonitor monitor) {
 
 		if(processingInfo != null && processingInfo.getProcessingResult() instanceof IChromatogramMSD chromatogramMSD) {
-			ChromatogramColumnSupport.parseSeparationColumn(chromatogramMSD);
 			parseAdditionalData(chromatogramMSD);
 		}
 	}
