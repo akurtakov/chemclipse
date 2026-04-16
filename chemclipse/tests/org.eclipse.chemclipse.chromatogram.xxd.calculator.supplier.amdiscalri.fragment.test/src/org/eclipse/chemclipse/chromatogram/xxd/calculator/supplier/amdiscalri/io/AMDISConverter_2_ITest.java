@@ -11,7 +11,7 @@
  * Philip Wenig - initial API and implementation
  * Alexander Kerner - Generics
  *******************************************************************************/
-package org.eclipse.chemclipse.chromatogram.xxd.calculator.io;
+package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.io;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -19,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.chromatogram.xxd.calculator.TestPathHelper;
 import org.eclipse.chemclipse.model.columns.IRetentionIndexEntry;
 import org.eclipse.chemclipse.model.columns.ISeparationColumnIndices;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -29,15 +28,15 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class MassLibConverter_1_ITest {
+public class AMDISConverter_2_ITest {
 
 	private ISeparationColumnIndices separationColumnIndices;
 
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		File file = new File(TestPathHelper.TESTFILE_IMPORT_CALIBRATION_INF_1);
-		MassLibConverter converter = new MassLibConverter();
+		File file = new File(TestPathHelper.TESTFILE_IMPORT_CALIBRATION_CAL_2);
+		AMDISConverter converter = new AMDISConverter();
 		IProcessingInfo<ISeparationColumnIndices> processingInfo = converter.parseRetentionIndices(file);
 		separationColumnIndices = processingInfo.getProcessingResult();
 	}
@@ -51,208 +50,223 @@ public class MassLibConverter_1_ITest {
 	@Test
 	public void test2() {
 
-		assertEquals(25, separationColumnIndices.size());
+		assertEquals(27, separationColumnIndices.size());
 	}
 
 	@Test
 	public void test3() {
 
 		IRetentionIndexEntry entry = separationColumnIndices.firstEntry().getValue();
-		assertEquals(149000, entry.getRetentionTime());
+		assertEquals(51943, entry.getRetentionTime());
 		assertEquals(800.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 800", entry.getName());
 	}
 
 	@Test
 	public void test4() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(170000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(65239);
 		assertEquals(900.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 900", entry.getName());
 	}
 
 	@Test
 	public void test5() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(204000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(82126);
 		assertEquals(1000.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 1000", entry.getName());
 	}
 
 	@Test
 	public void test6() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(256000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(110872);
 		assertEquals(1100.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 1100", entry.getName());
 	}
 
 	@Test
 	public void test7() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(324000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(155428);
 		assertEquals(1200.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 1200", entry.getName());
 	}
 
 	@Test
 	public void test8() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(402000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(214714);
 		assertEquals(1300.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 1300", entry.getName());
 	}
 
 	@Test
 	public void test9() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(485000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(285142);
 		assertEquals(1400.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 1400", entry.getName());
 	}
 
 	@Test
 	public void test10() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(568000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(358443);
 		assertEquals(1500.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 1500", entry.getName());
 	}
 
 	@Test
 	public void test11() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(649000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(433899);
 		assertEquals(1600.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 1600", entry.getName());
 	}
 
-	@Test
 	public void test12() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(728000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(507559);
 		assertEquals(1700.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 1700", entry.getName());
 	}
 
 	@Test
 	public void test13() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(804000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(580501);
 		assertEquals(1800.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 1800", entry.getName());
 	}
 
 	@Test
 	public void test14() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(875000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(648054);
 		assertEquals(1900.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 1900", entry.getName());
 	}
 
 	@Test
 	public void test15() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(945000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(715608);
 		assertEquals(2000.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 2000", entry.getName());
 	}
 
 	@Test
 	public void test16() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(999000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(777768);
 		assertEquals(2100.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 2100", entry.getName());
 	}
 
 	@Test
 	public void test17() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(1075000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(838854);
 		assertEquals(2200.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 2200", entry.getName());
 	}
 
 	@Test
 	public void test18() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(1135000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(897420);
 		assertEquals(2300.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 2300", entry.getName());
 	}
 
 	@Test
 	public void test19() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(1199000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(953832);
 		assertEquals(2400.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 2400", entry.getName());
 	}
 
 	@Test
 	public void test20() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(1272000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(1008090);
 		assertEquals(2500.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 2500", entry.getName());
 	}
 
 	@Test
 	public void test21() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(1359000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(1060908);
 		assertEquals(2600.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 2600", entry.getName());
 	}
 
 	@Test
 	public void test22() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(1466000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(1111572);
 		assertEquals(2700.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 2700", entry.getName());
 	}
 
 	@Test
 	public void test23() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(1601000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(1161876);
 		assertEquals(2800.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 2800", entry.getName());
 	}
 
 	@Test
 	public void test24() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(1771000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(1221528);
 		assertEquals(2900.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 2900", entry.getName());
 	}
 
 	@Test
 	public void test25() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(1988000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(1294470);
 		assertEquals(3000.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 3000", entry.getName());
 	}
 
 	@Test
 	public void test26() {
 
-		IRetentionIndexEntry entry = separationColumnIndices.get(2268000);
+		IRetentionIndexEntry entry = separationColumnIndices.get(1386096);
 		assertEquals(3100.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals("KW 3100", entry.getName());
+	}
+
+	@Test
+	public void test27() {
+
+		IRetentionIndexEntry entry = separationColumnIndices.get(1502154);
+		assertEquals(3200.0f, entry.getRetentionIndex(), 0);
+		assertEquals("KW 3200", entry.getName());
+	}
+
+	@Test
+	public void test28() {
+
+		IRetentionIndexEntry entry = separationColumnIndices.get(1649472);
+		assertEquals(3300.0f, entry.getRetentionIndex(), 0);
+		assertEquals("KW 3300", entry.getName());
 	}
 
 	@Test
 	public void testX() {
 
 		IRetentionIndexEntry entry = separationColumnIndices.lastEntry().getValue();
-		assertEquals(2631000, entry.getRetentionTime());
-		assertEquals(3200.0f, entry.getRetentionIndex(), 0);
-		assertEquals("", entry.getName());
+		assertEquals(1837398, entry.getRetentionTime());
+		assertEquals(3400.0f, entry.getRetentionIndex(), 0);
+		assertEquals("KW 3400", entry.getName());
 	}
 }

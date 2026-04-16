@@ -1,25 +1,26 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2026 Lablicate GmbH.
+ * Copyright (c) 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
- * Philip Wenig - initial API and implementation
+ * Matthias Mailänder - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.io;
+package org.eclipse.chemclipse.converter.services;
 
-import java.io.File;
+import org.eclipse.chemclipse.model.core.IChromatogram;
 
-import org.eclipse.chemclipse.model.columns.ISeparationColumnIndices;
+public interface IChromatogramConverterAdditionService {
 
-public class CalibrationFileReader {
+	String getName();
 
-	public ISeparationColumnIndices parse(File file) {
+	String getDescription();
 
-		return new AMDISConverter().parse(file);
-	}
+	String getVersion();
+
+	void parseAdditionalData(IChromatogram chromatogram);
 }

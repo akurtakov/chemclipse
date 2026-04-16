@@ -10,7 +10,7 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.chromatogram.xxd.calculator.io;
+package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.io;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,6 +18,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 
+import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.model.IColumnFormat;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.columns.IRetentionIndexEntry;
 import org.eclipse.chemclipse.model.columns.ISeparationColumn;

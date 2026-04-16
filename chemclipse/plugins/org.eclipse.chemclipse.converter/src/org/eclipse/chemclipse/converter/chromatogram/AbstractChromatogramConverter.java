@@ -18,11 +18,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.chemclipse.converter.Activator;
 import org.eclipse.chemclipse.converter.core.Converter;
 import org.eclipse.chemclipse.converter.core.IFileContentMatcher;
 import org.eclipse.chemclipse.converter.core.IMagicNumberMatcher;
 import org.eclipse.chemclipse.converter.core.NoFileContentMatcher;
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
+import org.eclipse.chemclipse.converter.services.IChromatogramConverterAdditionService;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
@@ -268,6 +270,10 @@ public abstract class AbstractChromatogramConverter<P extends IPeak, T extends I
 
 		if(processingInfo != null && processingInfo.getProcessingResult() instanceof IChromatogram chromatogram) {
 			ChromatogramColumnSupport.parseSeparationColumn(chromatogram);
+
+			for(IChromatogramConverterAdditionService service : Activator.getDefault().getChromatogramConverterAdditionService()) {
+				service.parseAdditionalData(chromatogram);
+			}
 		}
 	}
 
