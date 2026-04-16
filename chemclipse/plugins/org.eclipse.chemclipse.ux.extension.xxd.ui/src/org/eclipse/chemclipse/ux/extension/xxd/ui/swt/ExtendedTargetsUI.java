@@ -61,8 +61,13 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.targets.ComboTarget;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.IOperationHistory;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
+import org.eclipse.jface.bindings.TriggerSequence;
+import org.eclipse.jface.bindings.keys.KeySequence;
+import org.eclipse.jface.bindings.keys.KeyStroke;
+import org.eclipse.jface.bindings.keys.SWTKeySupport;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -76,8 +81,9 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.swtchart.extensions.core.IKeyboardSupport;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.contexts.IContextService;
+import org.eclipse.ui.keys.IBindingService;
 
 import jakarta.inject.Inject;
 
@@ -85,6 +91,11 @@ public class ExtendedTargetsUI extends Composite implements IExtendedPartUI {
 
 	private static final String MENU_CATEGORY_TARGETS = "Targets";
 	private static final int INDEX_CHROMATOGRAM = 1;
+
+	private static final String KEY_CLASS_PREFIX = "org.eclipse.chemclipse.ux.extension.xxd.ui.TargetsList.";
+
+	private IContextService contextService = (IContextService)PlatformUI.getWorkbench().getService(IContextService.class);
+	private IBindingService bindingService = PlatformUI.getWorkbench().getService(IBindingService.class);
 
 	private AtomicReference<Button> buttonToolbarInfo = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
@@ -118,6 +129,7 @@ public class ExtendedTargetsUI extends Composite implements IExtendedPartUI {
 
 		super(parent, style);
 		createControl();
+		contextService.activateContext("org.eclipse.chemclipse.ux.extension.xxd.ui.TargetsList");
 	}
 
 	@Override
@@ -552,27 +564,32 @@ public class ExtendedTargetsUI extends Composite implements IExtendedPartUI {
 
 			if(e.keyCode == SWT.DEL) {
 				deleteTargetsSelected(display);
-			} else if((e.stateMask & SWT.MOD1) == SWT.MOD1) {
-				/*
-				 * CTRL
-				 */
-				if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_I) {
-					if((e.stateMask & SWT.MOD3) == SWT.MOD3) {
-						verifyTargets(false, display); // CTRL + ALT + i
-					} else {
-						verifyTargets(true, display); // CTRL + i
-					}
-				} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_D) {
-					deleteTargetsAll(e.display); // CTRL + d
-				} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_U) {
-					addTargetUnknown(e.display); // CTRL + u
-				} else if(e.keyCode == IKeyboardSupport.KEY_CODE_LC_Q) {
-					scanIdentifierControl.get().runIdentification(); // CTRL + q
-				}
+			} else if(matchesKeyPress("VerifyTarget", e)) {
+				verifyTargets(true, display);
+			} else if(matchesKeyPress("UnverifyTarget", e)) {
+				verifyTargets(false, display);
+			} else if(matchesKeyPress("DeleteTargets", e)) {
+				deleteTargetsAll(display);
+			} else if(matchesKeyPress("Unknown", e)) {
+				addTargetUnknown(e.display);
+			} else if(matchesKeyPress("Query", e)) {
+				scanIdentifierControl.get().runIdentification();
 			} else {
 				propagateTarget(display);
 			}
 		});
+	}
+
+	private boolean matchesKeyPress(String commandSuffix, KeyEvent e) {
+
+		TriggerSequence triggerSequence = bindingService.getBestActiveBindingFor(KEY_CLASS_PREFIX + commandSuffix);
+		if(triggerSequence instanceof KeySequence keySequence) {
+			KeyStroke[] bindingStrokes = keySequence.getKeyStrokes();
+			int accelerator = SWTKeySupport.convertEventToUnmodifiedAccelerator(e);
+			KeyStroke eventStroke = SWTKeySupport.convertAcceleratorToKeyStroke(accelerator);
+			return bindingStrokes.length > 0 && bindingStrokes[0].equals(eventStroke);
+		}
+		return false;
 	}
 
 	private void verifyTargets(boolean verified, Display display) {
