@@ -42,6 +42,7 @@ import org.eclipse.chemclipse.ux.extension.ui.support.BaselineSelectionPaintList
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.help.HelpContext;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.listener.BoxSelectionPaintListener;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.support.ManualPeakDetector;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePagePeaks;
@@ -78,6 +79,7 @@ import org.eclipse.swtchart.extensions.events.AbstractHandledEventProcessor;
 import org.eclipse.swtchart.extensions.linecharts.ICompressionSupport;
 import org.eclipse.swtchart.extensions.linecharts.ILineSeriesData;
 import org.eclipse.swtchart.extensions.linecharts.ILineSeriesSettings;
+import org.eclipse.ui.PlatformUI;
 
 import jakarta.inject.Inject;
 
@@ -293,11 +295,11 @@ public class ExtendedPeakDetectorUI extends Composite implements IExtendedPartUI
 
 		super(parent, SWT.NONE);
 		detectionTypeDescriptions = new HashMap<>();
-		detectionTypeDescriptions.put(DETECTION_TYPE_BASELINE, "Modus (Baseline) [Key:" + KEY_BASELINE + "]");
-		detectionTypeDescriptions.put(DETECTION_TYPE_BOX_BB, "Modus (BB) [Key:" + KEY_BB + "]");
-		detectionTypeDescriptions.put(DETECTION_TYPE_BOX_VV, "Modus (VV) [Key:" + KEY_VV + "]");
-		detectionTypeDescriptions.put(DETECTION_TYPE_BOX_BV, "Modus (BV) [Key:" + KEY_BV + "]");
-		detectionTypeDescriptions.put(DETECTION_TYPE_BOX_VB, "Modus (VB) [Key:" + KEY_VB + "]");
+		detectionTypeDescriptions.put(DETECTION_TYPE_BASELINE, "Modus (Baseline)");
+		detectionTypeDescriptions.put(DETECTION_TYPE_BOX_BB, "Modus (BB)");
+		detectionTypeDescriptions.put(DETECTION_TYPE_BOX_VV, "Modus (VV)");
+		detectionTypeDescriptions.put(DETECTION_TYPE_BOX_BV, "Modus (BV)");
+		detectionTypeDescriptions.put(DETECTION_TYPE_BOX_VB, "Modus (VB)");
 		detectionTypeDescriptions.put(DETECTION_TYPE_NONE, "");
 
 		createControl();
@@ -380,6 +382,7 @@ public class ExtendedPeakDetectorUI extends Composite implements IExtendedPartUI
 	private void initialize() {
 
 		enableToolbar(toolbarInfo, buttonToolbarInfo, IMAGE_INFO, TOOLTIP_INFO, true);
+		PlatformUI.getWorkbench().getHelpSystem().setHelp(this, HelpContext.PEAK_DETECTOR);
 	}
 
 	private void createToolbarMain(Composite parent) {
@@ -387,7 +390,7 @@ public class ExtendedPeakDetectorUI extends Composite implements IExtendedPartUI
 		Composite composite = new Composite(parent, SWT.NONE);
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
-		composite.setLayout(new GridLayout(12, false));
+		composite.setLayout(new GridLayout(13, false));
 
 		labelDetectionType = createDetectionTypeLabel(composite);
 		labelDetectionModus = createDetectionModusLabel(composite);
@@ -400,6 +403,7 @@ public class ExtendedPeakDetectorUI extends Composite implements IExtendedPartUI
 		buttonAddPeak = createAddPeakButton(composite);
 		createButtonToggleChartLegend(composite, chartControl, IMAGE_LEGEND);
 		createDetectionTypeButton(composite, DETECTION_TYPE_NONE, IApplicationImage.IMAGE_RESET);
+		createButtonHelp(composite, HelpContext.PEAK_DETECTOR);
 		createSettingsButton(composite);
 	}
 

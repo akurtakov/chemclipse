@@ -9,6 +9,10 @@
       <description>This is the main editor. Right-click on it to choose chemometric operations.</description>
       <topic label="Controls" href="html/controls/chromatogram_editor.html"/>
    </context>
+   <context id="peak_detector" title="Peak Detector">
+   	 <description>Manual peak detection within Data Analysis.</description>
+  	 <topic label="Peak Detector" href="html/controls/peak_detector.html"/>
+   </context>
    <context id="peak_scan_list" title="Peak/Scan List">
    	 <description>The peak/scan list can be used to manage the peaks or scans shown in the current selection.</description>
   	 <topic label="Controls" href="html/controls/peak_scan_list.html"/>
