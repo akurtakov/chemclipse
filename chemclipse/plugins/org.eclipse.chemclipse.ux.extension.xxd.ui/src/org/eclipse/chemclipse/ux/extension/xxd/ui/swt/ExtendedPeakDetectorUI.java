@@ -106,6 +106,7 @@ public class ExtendedPeakDetectorUI extends Composite implements IExtendedPartUI
 	private static final char KEY_VV = IKeyboardSupport.KEY_CODE_LC_V;
 	private static final char KEY_BV = IKeyboardSupport.KEY_CODE_LC_N;
 	private static final char KEY_VB = IKeyboardSupport.KEY_CODE_LC_C;
+	private static final char KEY_ADD = IKeyboardSupport.KEY_CODE_LC_A;
 	/*
 	 * Detection Box
 	 */
@@ -466,29 +467,37 @@ public class ExtendedPeakDetectorUI extends Composite implements IExtendedPartUI
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				if(peak != null) {
-					IChromatogram chromatogram = chromatogramSelection.getChromatogram();
-					if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
-						if(peak instanceof IChromatogramPeakMSD peakMSD) {
-							chromatogramMSD.getPeaks().add(peakMSD);
-							peak = null;
-							setDetectionType(DETECTION_TYPE_NONE);
-							updateChromatogramAndPeak();
-							chromatogramSelection.update(true);
-						}
-					} else if(chromatogram instanceof IChromatogramCSD chromatogramCSD) {
-						if(peak instanceof IChromatogramPeakCSD peakCSD) {
-							chromatogramCSD.getPeaks().add(peakCSD);
-							peak = null;
-							setDetectionType(DETECTION_TYPE_NONE);
-							updateChromatogramAndPeak();
-							chromatogramSelection.update(true);
-						}
-					}
-				}
+				addPeak();
 			}
+
 		});
 		return button;
+	}
+
+	private void addPeak() {
+
+		if(peak == null) {
+			return;
+		}
+
+		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
+		if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
+			if(peak instanceof IChromatogramPeakMSD peakMSD) {
+				chromatogramMSD.getPeaks().add(peakMSD);
+				peak = null;
+				setDetectionType(DETECTION_TYPE_NONE);
+				updateChromatogramAndPeak();
+				chromatogramSelection.update(true);
+			}
+		} else if(chromatogram instanceof IChromatogramCSD chromatogramCSD) {
+			if(peak instanceof IChromatogramPeakCSD peakCSD) {
+				chromatogramCSD.getPeaks().add(peakCSD);
+				peak = null;
+				setDetectionType(DETECTION_TYPE_NONE);
+				updateChromatogramAndPeak();
+				chromatogramSelection.update(true);
+			}
+		}
 	}
 
 	private void createSettingsButton(Composite parent) {
@@ -519,6 +528,7 @@ public class ExtendedPeakDetectorUI extends Composite implements IExtendedPartUI
 		chartSettings.addHandledEventProcessor(new KeyPressedEventProcessor(KEY_VB));
 		chartSettings.addHandledEventProcessor(new KeyPressedEventProcessor(SWT.ARROW_LEFT));
 		chartSettings.addHandledEventProcessor(new KeyPressedEventProcessor(SWT.ARROW_RIGHT));
+		chartSettings.addHandledEventProcessor(new KeyPressedEventProcessor(KEY_ADD));
 		chartSettings.addHandledEventProcessor(new MouseDownEventProcessor());
 		chartSettings.addHandledEventProcessor(new MouseMoveEventProcessor());
 		chartSettings.addHandledEventProcessor(new MouseUpEventProcessor());
@@ -622,6 +632,9 @@ public class ExtendedPeakDetectorUI extends Composite implements IExtendedPartUI
 					redrawBoxPeakSelection(true);
 				}
 			}
+		}
+		if(event.keyCode == KEY_ADD) {
+			addPeak();
 		}
 	}
 
