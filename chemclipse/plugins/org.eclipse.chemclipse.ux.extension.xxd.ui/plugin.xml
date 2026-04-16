@@ -855,4 +855,84 @@
             sequence="M1+M3+I">
       </key>
    </extension>
+   <extension
+		point="org.eclipse.ui.contexts">
+		<context
+			name="Targets"
+			description="A list of database hits."
+			id="org.eclipse.chemclipse.ux.extension.xxd.ui.TargetsList"
+			parentId="org.eclipse.ui.contexts.window">
+		</context>
+	</extension>
+	<extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="Targets"
+            description="Related to database matching."
+            id="org.eclipse.chemclipse.ux.extension.xxd.ui.Targets">
+      </category>
+      <command
+            name="Query Database"
+            description="Query against a reference database"
+            categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.Targets"
+            id="org.eclipse.chemclipse.ux.extension.xxd.ui.TargetsList.Query">
+      </command>
+      <command
+            name="Mark Unknown"
+            description="Set as unknown and annotate with highest masses"
+            categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.Targets"
+            id="org.eclipse.chemclipse.ux.extension.xxd.ui.TargetsList.Unknown">
+      </command>
+      <command
+            name="Delete Targets"
+            description="Clear all database query matches."
+            categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.Targets"
+            id="org.eclipse.chemclipse.ux.extension.xxd.ui.TargetsList.DeleteTargets">
+      </command>
+      <command
+            name="Verify Target"
+            description="Manually set as best target."
+            categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.Targets"
+            id="org.eclipse.chemclipse.ux.extension.xxd.ui.TargetsList.VerifyTarget">
+      </command>
+      <command
+            name="Unverify Target"
+            description="Unset best manual target."
+            categoryId="org.eclipse.chemclipse.ux.extension.xxd.ui.Targets"
+            id="org.eclipse.chemclipse.ux.extension.xxd.ui.TargetsList.UnverifyTarget">
+      </command>
+   </extension>
+	   <extension
+         point="org.eclipse.ui.bindings">
+         <key
+	            commandId="org.eclipse.chemclipse.ux.extension.xxd.ui.TargetsList.VerifyTarget"
+	            contextId="org.eclipse.chemclipse.ux.extension.xxd.ui.TargetsList"
+	            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+	            sequence="M1+I">
+	      </key>
+	      <key
+	            commandId="org.eclipse.chemclipse.ux.extension.xxd.ui.TargetsList.UnverifyTarget"
+	            contextId="org.eclipse.chemclipse.ux.extension.xxd.ui.TargetsList"
+	            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+	            sequence="M1+M3+I">
+	      </key>
+	      <key
+	            commandId="org.eclipse.chemclipse.ux.extension.xxd.ui.TargetsList.DeleteTargets"
+	            contextId="org.eclipse.chemclipse.ux.extension.xxd.ui.TargetsList"
+	            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+	            sequence="M1+D">
+	      </key>
+	      <key
+	            commandId="org.eclipse.chemclipse.ux.extension.xxd.ui.TargetsList.Unknown"
+	            contextId="org.eclipse.chemclipse.ux.extension.xxd.ui.TargetsList"
+	            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+	            sequence="M1+U">
+	      </key>
+	      <key
+	            commandId="org.eclipse.chemclipse.ux.extension.xxd.ui.TargetsList.Query"
+	            contextId="org.eclipse.chemclipse.ux.extension.xxd.ui.TargetsList"
+	            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+	            sequence="M1+Q">
+	      </key>
+	</extension>
 </plugin>
