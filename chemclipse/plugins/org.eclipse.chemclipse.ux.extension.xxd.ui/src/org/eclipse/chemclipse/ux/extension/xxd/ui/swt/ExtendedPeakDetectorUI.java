@@ -23,6 +23,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramPeakCSD;
 import org.eclipse.chemclipse.csd.model.core.selection.IChromatogramSelectionCSD;
+import org.eclipse.chemclipse.fsd.model.core.IChromatogramFSD;
+import org.eclipse.chemclipse.fsd.model.core.IChromatogramPeakFSD;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IPeak;
@@ -50,6 +52,8 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ChromatogramChartSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ChromatogramDataSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.PeakChartSupport;
+import org.eclipse.chemclipse.vsd.model.core.IChromatogramPeakVSD;
+import org.eclipse.chemclipse.vsd.model.core.IChromatogramVSD;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramPeakWSD;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
 import org.eclipse.chemclipse.wsd.model.core.selection.IChromatogramSelectionWSD;
@@ -484,20 +488,29 @@ public class ExtendedPeakDetectorUI extends Composite implements IExtendedPartUI
 		if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
 			if(peak instanceof IChromatogramPeakMSD peakMSD) {
 				chromatogramMSD.getPeaks().add(peakMSD);
-				peak = null;
-				setDetectionType(DETECTION_TYPE_NONE);
-				updateChromatogramAndPeak();
-				chromatogramSelection.update(true);
 			}
 		} else if(chromatogram instanceof IChromatogramCSD chromatogramCSD) {
 			if(peak instanceof IChromatogramPeakCSD peakCSD) {
 				chromatogramCSD.getPeaks().add(peakCSD);
-				peak = null;
-				setDetectionType(DETECTION_TYPE_NONE);
-				updateChromatogramAndPeak();
-				chromatogramSelection.update(true);
+			}
+		} else if(chromatogram instanceof IChromatogramWSD chromatogramWSD) {
+			if(peak instanceof IChromatogramPeakWSD peakWSD) {
+				chromatogramWSD.getPeaks().add(peakWSD);
+			}
+		} else if(chromatogram instanceof IChromatogramFSD chromatogramFSD) {
+			if(peak instanceof IChromatogramPeakFSD peakFSD) {
+				chromatogramFSD.getPeaks().add(peakFSD);
+			}
+		} else if(chromatogram instanceof IChromatogramVSD chromatogramVSD) {
+			if(peak instanceof IChromatogramPeakVSD peakVSD) {
+				chromatogramVSD.getPeaks().add(peakVSD);
 			}
 		}
+
+		peak = null;
+		setDetectionType(DETECTION_TYPE_NONE);
+		updateChromatogramAndPeak();
+		chromatogramSelection.update(true);
 	}
 
 	private void createSettingsButton(Composite parent) {
