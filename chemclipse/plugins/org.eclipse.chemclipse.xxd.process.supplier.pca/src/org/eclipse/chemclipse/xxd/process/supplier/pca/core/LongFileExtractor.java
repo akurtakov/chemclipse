@@ -50,87 +50,41 @@ public class LongFileExtractor {
 	private final List<IDataInputEntry> dataInputEntries;
 	private final List<IDataInputEntry> filterDataInputEntries;
 	private int numberOfSamplesToFilter;
-	private final boolean filter;
+	private final boolean filterFileExists;
 	//
-	private TreeMap<Integer, Integer> filterDistribution;
-	private List<Map.Entry<String, Integer>> filterOverlapList;
+	private TreeMap<Integer, Integer> featureOverlapDistribution;
+	private List<Map.Entry<String, Integer>> featureOverlapList;
+	private List<Map.Entry<String, Double>> sampleRankingList;
 	//
-	private Map<String, Integer> filterOverlap = new HashMap<>();
+	private Map<String, Integer> featureOverlap = new HashMap<>();
+	private Map<String, Double> filterRanking = new HashMap<>();
 	private Map<String, Sample> sampleMap = new HashMap<>();
 	private Map<String, Map<String, Target>> samplesVariablesMap = new HashMap<>();
 	private Map<String, Target> targetMap = new HashMap<>();
 	private boolean dataRead = false;
+	//
+	private Map<String, Double> normalizedFilterVector = new HashMap<>();
 
 	public LongFileExtractor(List<IDataInputEntry> dataInputEntries, List<IDataInputEntry> filterDataInputEntries, int numberOfSamplesToFilter) {
 
 		this.dataInputEntries = dataInputEntries;
 		this.filterDataInputEntries = filterDataInputEntries;
 		this.numberOfSamplesToFilter = numberOfSamplesToFilter;
-		this.filter = !filterDataInputEntries.isEmpty();
-	}
-
-	public Samples extract() {
-
-		clearData();
-
-		if(filter) {
-			readFilterFile(filterDataInputEntries, targetMap);
-		}
-		readFile(dataInputEntries, sampleMap, samplesVariablesMap, targetMap, filterOverlap, "0");
-		if(filter) {
-			List<Map.Entry<String, Integer>> filterOverlapList = new ArrayList<>(filterOverlap.entrySet());
-			Collections.sort(filterOverlapList, (s1, s2) -> s1.getValue().compareTo(s2.getValue()));
-			filterOverlapList = filterOverlapList.reversed();
-			filterDistribution = createDistribution(filterOverlapList);
-
-			if(this.numberOfSamplesToFilter > filterOverlapList.size() || this.numberOfSamplesToFilter == 0) {
-				this.numberOfSamplesToFilter = filterOverlapList.size();
-			}
-			List<Map.Entry<String, Integer>> extractedSamples = new ArrayList<>();
-			for(int i = 0; i < this.numberOfSamplesToFilter; i++) {
-				extractedSamples.add(filterOverlapList.get(i));
-			}
-			filterOverlap.clear();
-			for(Map.Entry<String, Integer> entry : extractedSamples) {
-				filterOverlap.put(entry.getKey(), entry.getValue());
-			}
-		}
-		/*
-		 * Get Filter entries. These are additional to the user selected number of samples to extract
-		 */
-		readFile(filterDataInputEntries, sampleMap, samplesVariablesMap, targetMap, filterOverlap, "1");
-		/*
-		 * extract all variables
-		 */
-		List<Sample> sampleList = new ArrayList<>(sampleMap.values());
-		if(filter) {
-			sampleList = sampleList.stream().filter(s -> filterOverlap.containsKey(s.getSampleName())).collect(Collectors.toList());
-		}
-		Collections.sort(sampleList, (s1, s2) -> s1.getSampleName().compareTo(s2.getSampleName()));
-		Samples samples = new Samples(sampleList);
-		List<IVariable> variables = extractVariables(samplesVariablesMap);
-		samples.getVariables().addAll(variables);
-		setExtractData(samplesVariablesMap, samples);
-		IAnalysisSettings settings = samples.getAnalysisSettings();
-		settings.setFilterDistribution(filterDistribution);
-		samples.setAnalysisSettings(settings);
-		return samples;
+		this.filterFileExists = !filterDataInputEntries.isEmpty();
 	}
 
 	public void readData() {
 
 		clearData();
 
-		filterDistribution = new TreeMap<>();
-		if(filter) {
-			readFilterFile(filterDataInputEntries, targetMap);
+		featureOverlapDistribution = new TreeMap<>();
+		if(filterFileExists) {
+			readFilterFile(filterDataInputEntries);
 		}
-		readFile(dataInputEntries, sampleMap, samplesVariablesMap, targetMap, filterOverlap, "0");
-		if(filter) {
-			filterOverlapList = new ArrayList<>(filterOverlap.entrySet());
-			Collections.sort(filterOverlapList, (s1, s2) -> s1.getValue().compareTo(s2.getValue()));
-			filterOverlapList = filterOverlapList.reversed();
-			filterDistribution = createDistribution(filterOverlapList);
+		readFile(dataInputEntries, false);
+		if(filterFileExists) {
+			calculateFilterRanking();
+			calculateFeatureOverlapDistribution();
 		}
 		dataRead = true;
 	}
@@ -141,29 +95,67 @@ public class LongFileExtractor {
 			return null;
 		}
 		this.numberOfSamplesToFilter = numberOfSamplesToFilter;
-		if(filter) {
+		if(filterFileExists) {
 			List<Map.Entry<String, Integer>> extractedSamples = new ArrayList<>();
-			if(this.numberOfSamplesToFilter > filterOverlapList.size() || this.numberOfSamplesToFilter == 0) {
-				this.numberOfSamplesToFilter = filterOverlapList.size();
+			List<Map.Entry<String, Double>> rankedSamples = new ArrayList<>();
+			if(this.numberOfSamplesToFilter > sampleRankingList.size() || this.numberOfSamplesToFilter == 0) {
+				this.numberOfSamplesToFilter = sampleRankingList.size();
 			}
 			for(int i = 0; i < this.numberOfSamplesToFilter; i++) {
-				extractedSamples.add(filterOverlapList.get(i));
+				rankedSamples.add(sampleRankingList.get(i));
 			}
-			filterOverlap.clear();
+			filterRanking.clear();
+			for(Map.Entry<String, Double> entry : rankedSamples) {
+				filterRanking.put(entry.getKey(), entry.getValue());
+			}
+
+			if(this.numberOfSamplesToFilter > featureOverlapList.size() || this.numberOfSamplesToFilter == 0) {
+				this.numberOfSamplesToFilter = featureOverlapList.size();
+			}
+			for(int i = 0; i < this.numberOfSamplesToFilter; i++) {
+				extractedSamples.add(featureOverlapList.get(i));
+			}
+			featureOverlap.clear();
 			for(Map.Entry<String, Integer> entry : extractedSamples) {
-				filterOverlap.put(entry.getKey(), entry.getValue());
+				featureOverlap.put(entry.getKey(), entry.getValue());
 			}
+
 		}
 		/*
 		 * Get Filter entries. These are additional to the user selected number of samples to extract
 		 */
-		readFile(filterDataInputEntries, sampleMap, samplesVariablesMap, targetMap, filterOverlap, "1");
-		/*
-		 * extract all variables
-		 */
+		readFile(filterDataInputEntries, true);
+
+		return applyFilter();
+	}
+
+	public Samples extract() {
+
+		clearData();
+
+		if(filterFileExists) {
+			readFilterFile(filterDataInputEntries);
+		}
+		readFile(dataInputEntries, false);
+		if(filterFileExists) {
+
+			filterFeatureOverlap();
+			calculateFeatureOverlapDistribution();
+			readFile(filterDataInputEntries, true);
+			calculateFilterRanking();
+		}
+		return applyFilter();
+	}
+
+	private Samples applyFilter() {
+
 		List<Sample> sampleList = new ArrayList<>(sampleMap.values());
-		if(filter) {
-			sampleList = sampleList.stream().filter(s -> filterOverlap.containsKey(s.getSampleName())).collect(Collectors.toList());
+		if(filterFileExists) {
+			sampleList = sampleList.stream().filter(s -> featureOverlap.containsKey(s.getSampleName())).collect(Collectors.toList());
+			/*
+			 * Experimental Feature - Use Cosine Similarity for Ranking of Samples:
+			 * sampleList = sampleList.stream().filter(s -> filterRanking.containsKey(s.getSampleName())).collect(Collectors.toList());
+			 */
 		}
 		Collections.sort(sampleList, (s1, s2) -> s1.getSampleName().compareTo(s2.getSampleName()));
 		Samples samples = new Samples(sampleList);
@@ -171,81 +163,103 @@ public class LongFileExtractor {
 		samples.getVariables().addAll(variables);
 		setExtractData(samplesVariablesMap, samples);
 		IAnalysisSettings settings = samples.getAnalysisSettings();
-		settings.setFilterDistribution(filterDistribution);
+		settings.setFilterDistribution(featureOverlapDistribution);
 		samples.setAnalysisSettings(settings);
-
 		return samples;
+
+	}
+
+	private void calculateFilterRanking() {
+
+		/*
+		 * generate cosine similarity vector
+		 */
+		double dotProduct = 0;
+		double magnitude = 0;
+		double sumSqA = 0;
+		double sumSqB = 0;
+		double similarity = 0;
+		for(String sample : samplesVariablesMap.keySet()) {
+			if(featureOverlap.containsKey(sample)) {
+				dotProduct = 0;
+				magnitude = 0;
+				sumSqA = 0;
+				sumSqB = 0;
+				similarity = 0;
+				for(String feature : samplesVariablesMap.get(sample).keySet()) {
+					if(normalizedFilterVector.get(feature) != null) {
+						double value = normalizedFilterVector.get(feature);
+						double target = Double.parseDouble(samplesVariablesMap.get(sample).get(feature).getValue());
+						dotProduct += value * target;
+						sumSqB += target * target;
+					} else {
+						double target = Double.parseDouble(samplesVariablesMap.get(sample).get(feature).getValue());
+						sumSqB += target * target;
+					}
+
+				}
+				sumSqA = normalizedFilterVector.values().stream().mapToDouble(v -> v * v).sum();
+				magnitude = Math.sqrt(sumSqA) * Math.sqrt(sumSqB);
+				if(magnitude != 0.0) {
+					similarity = dotProduct / magnitude;
+					filterRanking.put(sample, similarity);
+				}
+			}
+
+		}
+		sampleRankingList = new ArrayList<>(filterRanking.entrySet());
+		sampleRankingList.sort(Map.Entry.<String, Double> comparingByValue().reversed());
+	}
+
+	private void filterFeatureOverlap() {
+
+		List<Map.Entry<String, Integer>> filterOverlapList = new ArrayList<>(featureOverlap.entrySet());
+		Collections.sort(filterOverlapList, (s1, s2) -> s1.getValue().compareTo(s2.getValue()));
+		filterOverlapList = filterOverlapList.reversed();
+
+		if(this.numberOfSamplesToFilter > filterOverlapList.size() || this.numberOfSamplesToFilter == 0) {
+			this.numberOfSamplesToFilter = filterOverlapList.size();
+		}
+		List<Map.Entry<String, Integer>> extractedSamples = new ArrayList<>();
+		for(int i = 0; i < this.numberOfSamplesToFilter; i++) {
+			extractedSamples.add(filterOverlapList.get(i));
+		}
+		featureOverlap.clear();
+		for(Map.Entry<String, Integer> entry : extractedSamples) {
+			featureOverlap.put(entry.getKey(), entry.getValue());
+		}
 
 	}
 
 	private void clearData() {
 
-		filterOverlap.clear();
+		featureOverlap.clear();
 		sampleMap.clear();
 		samplesVariablesMap.clear();
 		targetMap.clear();
 	}
 
-	private TreeMap<Integer, Integer> createDistribution(List<Map.Entry<String, Integer>> overlaps) {
+	private void calculateFeatureOverlapDistribution() {
 
-		TreeMap<Integer, Integer> filterDistribution = new TreeMap<>();
-		ListIterator<Entry<String, Integer>> iterator = overlaps.listIterator();
+		featureOverlapList = new ArrayList<>(featureOverlap.entrySet());
+		Collections.sort(featureOverlapList, (s1, s2) -> s1.getValue().compareTo(s2.getValue()));
+		featureOverlapList = featureOverlapList.reversed();
+
+		featureOverlapDistribution = new TreeMap<>();
+		ListIterator<Entry<String, Integer>> iterator = featureOverlapList.listIterator();
 		while(iterator.hasNext()) {
 			Map.Entry<String, Integer> entry = iterator.next();
 			int value = entry.getValue();
-			if(filterDistribution.containsKey(value)) {
-				int oldCount = filterDistribution.get(value);
-				filterDistribution.put(value, oldCount + 1);
+			if(featureOverlapDistribution.containsKey(value)) {
+				int oldCount = featureOverlapDistribution.get(value);
+				featureOverlapDistribution.put(value, oldCount + 1);
 			} else {
-				filterDistribution.put(value, 1);
-			}
-		}
-		return filterDistribution;
-	}
-
-	private void readFilterFile(List<IDataInputEntry> dataInputEntries, Map<String, Target> targetMap) {
-
-		for(IDataInputEntry dataInputEntry : dataInputEntries) {
-			String inputFile = dataInputEntry.getInputFile();
-			File file = new File(inputFile);
-			if(file.exists()) {
-				try (FileReader reader = new FileReader(file)) {
-					/*
-					 * Data
-					 */
-					CSVParser parser = CSVParser.parse(reader, CSVFormat.TDF.builder().setHeader().get());
-					for(CSVRecord record : parser.getRecords()) {
-						int size = record.size();
-						if(size == 7) {
-							/*
-							 * Header
-							 */
-							String sampleName = record.get(0).trim();
-							String variableName = record.get(2).trim();
-							String variableNameLong = record.get(3).trim();
-							Double value = Double.parseDouble(record.get(4).trim().replace(",", "."));
-							if(!sampleName.isEmpty()) {
-								if(!targetMap.containsKey(variableName)) {
-									String targetName = variableName;
-									Target target = new Target(targetName);
-									target.setValue(Double.toString(value));
-									target.setDescription(variableNameLong);
-									targetMap.put(targetName, target);
-								}
-							}
-						}
-					}
-					parser.close();
-				} catch(FileNotFoundException e) {
-					logger.warn(e);
-				} catch(IOException e) {
-					logger.warn(e);
-				}
+				featureOverlapDistribution.put(value, 1);
 			}
 		}
 	}
 
-	private void readFile(List<IDataInputEntry> dataInputEntries, Map<String, Sample> sampleMap, Map<String, Map<String, Target>> samplesVariablesMap, Map<String, Target> targetMap, Map<String, Integer> filterOverlap, String classification) {
+	private void readFile(List<IDataInputEntry> dataInputEntries, boolean readFilterFile) {
 
 		for(IDataInputEntry dataInputEntry : dataInputEntries) {
 			String inputFile = dataInputEntry.getInputFile();
@@ -257,13 +271,14 @@ public class LongFileExtractor {
 					 */
 					List<String> filterFileNames = new ArrayList<>();
 					CSVParser parser = CSVParser.parse(reader, CSVFormat.TDF.builder().setHeader().get());
+					String sampleName = "";
 					for(CSVRecord record : parser.getRecords()) {
 						int size = record.size();
 						if(size == 7) {
 							/*
 							 * Header
 							 */
-							String sampleName = record.get(0).trim();
+							sampleName = record.get(0).trim();
 							String sampleDetails = record.get(1).trim();
 							String variableName = record.get(2).trim();
 							String variableNameLong = record.get(3).trim();
@@ -271,24 +286,31 @@ public class LongFileExtractor {
 							String groupName = record.get(5).trim();
 							String description = record.get(6).trim();
 							if(!sampleName.isEmpty()) {
+
+								/*
+								 * If clause for the case, the current sample is
+								 * the same as the filter sample:
+								 * Modify sample name
+								 */
 								Sample sample = sampleMap.get(sampleName);
 								if(sample == null) {
-									sample = new Sample(sampleName, sampleDetails, groupName, classification, description);
+									sample = new Sample(sampleName, sampleDetails, groupName, (readFilterFile) ? "1" : "0", description);
 									sampleMap.put(sampleName, sample);
-									if(classification.equals("1")) {
+									if(readFilterFile) {
 										if(!filterFileNames.contains("sampleName")) {
 											filterFileNames.add(sampleName);
 										}
 									}
 								} else {
-									if(classification.equals("1")) {
+									if(readFilterFile) {
 										if(!filterFileNames.contains(sampleName)) {
 											sampleName = sampleName + "_F";
 										}
-										sample = new Sample(sampleName, sampleDetails, groupName, classification, description);
+										sample = new Sample(sampleName, sampleDetails, groupName, (readFilterFile) ? "1" : "0", description);
 										sampleMap.put(sampleName, sample);
 									}
 								}
+
 								Map<String, Target> variablesMap = samplesVariablesMap.get(sampleName);
 								if(variablesMap == null) {
 									variablesMap = new HashMap<>();
@@ -300,15 +322,18 @@ public class LongFileExtractor {
 								target.setDescription(variableNameLong);
 								variablesMap.put(targetName, target);
 								if(targetMap.containsKey(targetName)) {
-									if(filterOverlap.containsKey(sampleName)) {
-										int count = filterOverlap.get(sampleName) + 1;
-										filterOverlap.replace(sampleName, count);
+									if(featureOverlap.containsKey(sampleName)) {
+										int count = featureOverlap.get(sampleName) + 1;
+										featureOverlap.replace(sampleName, count);
 									} else {
-										filterOverlap.put(sampleName, 1);
+										featureOverlap.put(sampleName, 1);
 									}
 								}
 							}
 						}
+					}
+					if(readFilterFile) {
+						filterRanking.put(sampleName, 1.0);
 					}
 					parser.close();
 				} catch(FileNotFoundException e) {
@@ -318,6 +343,106 @@ public class LongFileExtractor {
 				}
 			}
 		}
+	}
+
+	private void readFilterFile(List<IDataInputEntry> dataInputEntries) {
+
+		Map<String, Map<String, Double>> filterVectors = new HashMap<>();
+		String currentFilter = "";
+		Map<String, Double> currentFilterVector = new HashMap<>();
+
+		for(IDataInputEntry dataInputEntry : dataInputEntries) {
+			String inputFile = dataInputEntry.getInputFile();
+			File file = new File(inputFile);
+			if(file.exists()) {
+				try (FileReader reader = new FileReader(file)) {
+					/*
+					 * Data
+					 */
+					CSVParser parser = CSVParser.parse(reader, CSVFormat.TDF.builder().setHeader().get());
+
+					for(CSVRecord record : parser.getRecords()) {
+						int size = record.size();
+						if(size == 7) {
+							/*
+							 * Header
+							 */
+							String filterName = record.get(0).trim();
+							String variableName = record.get(2).trim();
+							String variableNameLong = record.get(3).trim();
+							Double value = Double.parseDouble(record.get(4).trim().replace(",", "."));
+							if(!filterName.isEmpty()) {
+								if(currentFilter.contentEquals("")) {
+									currentFilter = filterName;
+								}
+								if(filterName.equals(currentFilter)) {
+									currentFilterVector.put(variableName, value);
+									if(!targetMap.containsKey(variableName)) {
+										String targetName = variableName;
+										Target target = new Target(targetName);
+										target.setValue(Double.toString(value));
+										target.setDescription(variableNameLong);
+										targetMap.put(targetName, target);
+									}
+								} else {
+									filterVectors.put(currentFilter, currentFilterVector);
+									currentFilter = filterName;
+									currentFilterVector = new HashMap<>();
+									if(!targetMap.containsKey(variableName)) {
+										String targetName = variableName;
+										Target target = new Target(targetName);
+										target.setValue(Double.toString(value));
+										target.setDescription(variableNameLong);
+										targetMap.put(targetName, target);
+									}
+								}
+
+							}
+						}
+					}
+					filterVectors.put(currentFilter, currentFilterVector);
+
+					parser.close();
+				} catch(FileNotFoundException e) {
+					logger.warn(e);
+				} catch(IOException e) {
+					logger.warn(e);
+				}
+			}
+		}
+		filterVectors.put(currentFilter, currentFilterVector);
+		normalizedFilterVector = normalizeFilterVector(filterVectors);
+
+	}
+
+	private Map<String, Double> normalizeFilterVector(Map<String, Map<String, Double>> filterVectors) {
+
+		HashMap<String, Double> aggregatedMap = new HashMap<>();
+		double totalSum = 0.0;
+
+		// 1. Sum up all entries into a single map
+		for(Map<String, Double> innerMap : filterVectors.values()) {
+			for(Map.Entry<String, Double> entry : innerMap.entrySet()) {
+				String key = entry.getKey();
+				Double value = entry.getValue();
+
+				aggregatedMap.put(key, aggregatedMap.getOrDefault(key, 0.0) + value);
+				totalSum += value;
+			}
+		}
+
+		// 2. Handle edge case: if the total sum is 0, we can't divide
+		if(totalSum == 0) {
+			return aggregatedMap;
+		}
+
+		// 3. Normalize the aggregated entries so they sum to 100.0
+		for(Map.Entry<String, Double> entry : aggregatedMap.entrySet()) {
+			double normalizedValue = (entry.getValue() / totalSum) * 100.0;
+			aggregatedMap.put(entry.getKey(), normalizedValue);
+		}
+
+		return aggregatedMap;
 	}
 
 	/**
