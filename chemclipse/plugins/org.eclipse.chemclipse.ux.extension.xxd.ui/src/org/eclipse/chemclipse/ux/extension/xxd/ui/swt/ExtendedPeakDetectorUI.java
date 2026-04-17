@@ -23,6 +23,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramPeakCSD;
 import org.eclipse.chemclipse.csd.model.core.selection.IChromatogramSelectionCSD;
+import org.eclipse.chemclipse.fsd.model.core.IChromatogramFSD;
+import org.eclipse.chemclipse.fsd.model.core.IChromatogramPeakFSD;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IPeak;
@@ -42,6 +44,7 @@ import org.eclipse.chemclipse.ux.extension.ui.support.BaselineSelectionPaintList
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChromatogramChart;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.help.HelpContext;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.listener.BoxSelectionPaintListener;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.support.ManualPeakDetector;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferencePagePeaks;
@@ -49,6 +52,8 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ChromatogramChartSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.ChromatogramDataSupport;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.support.charts.PeakChartSupport;
+import org.eclipse.chemclipse.vsd.model.core.IChromatogramPeakVSD;
+import org.eclipse.chemclipse.vsd.model.core.IChromatogramVSD;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramPeakWSD;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
 import org.eclipse.chemclipse.wsd.model.core.selection.IChromatogramSelectionWSD;
@@ -78,6 +83,7 @@ import org.eclipse.swtchart.extensions.events.AbstractHandledEventProcessor;
 import org.eclipse.swtchart.extensions.linecharts.ICompressionSupport;
 import org.eclipse.swtchart.extensions.linecharts.ILineSeriesData;
 import org.eclipse.swtchart.extensions.linecharts.ILineSeriesSettings;
+import org.eclipse.ui.PlatformUI;
 
 import jakarta.inject.Inject;
 
@@ -104,6 +110,7 @@ public class ExtendedPeakDetectorUI extends Composite implements IExtendedPartUI
 	private static final char KEY_VV = IKeyboardSupport.KEY_CODE_LC_V;
 	private static final char KEY_BV = IKeyboardSupport.KEY_CODE_LC_N;
 	private static final char KEY_VB = IKeyboardSupport.KEY_CODE_LC_C;
+	private static final char KEY_ADD = IKeyboardSupport.KEY_CODE_LC_A;
 	/*
 	 * Detection Box
 	 */
@@ -293,11 +300,11 @@ public class ExtendedPeakDetectorUI extends Composite implements IExtendedPartUI
 
 		super(parent, SWT.NONE);
 		detectionTypeDescriptions = new HashMap<>();
-		detectionTypeDescriptions.put(DETECTION_TYPE_BASELINE, "Modus (Baseline) [Key:" + KEY_BASELINE + "]");
-		detectionTypeDescriptions.put(DETECTION_TYPE_BOX_BB, "Modus (BB) [Key:" + KEY_BB + "]");
-		detectionTypeDescriptions.put(DETECTION_TYPE_BOX_VV, "Modus (VV) [Key:" + KEY_VV + "]");
-		detectionTypeDescriptions.put(DETECTION_TYPE_BOX_BV, "Modus (BV) [Key:" + KEY_BV + "]");
-		detectionTypeDescriptions.put(DETECTION_TYPE_BOX_VB, "Modus (VB) [Key:" + KEY_VB + "]");
+		detectionTypeDescriptions.put(DETECTION_TYPE_BASELINE, "Modus (Baseline)");
+		detectionTypeDescriptions.put(DETECTION_TYPE_BOX_BB, "Modus (BB)");
+		detectionTypeDescriptions.put(DETECTION_TYPE_BOX_VV, "Modus (VV)");
+		detectionTypeDescriptions.put(DETECTION_TYPE_BOX_BV, "Modus (BV)");
+		detectionTypeDescriptions.put(DETECTION_TYPE_BOX_VB, "Modus (VB)");
 		detectionTypeDescriptions.put(DETECTION_TYPE_NONE, "");
 
 		createControl();
@@ -380,6 +387,7 @@ public class ExtendedPeakDetectorUI extends Composite implements IExtendedPartUI
 	private void initialize() {
 
 		enableToolbar(toolbarInfo, buttonToolbarInfo, IMAGE_INFO, TOOLTIP_INFO, true);
+		PlatformUI.getWorkbench().getHelpSystem().setHelp(this, HelpContext.PEAK_DETECTOR);
 	}
 
 	private void createToolbarMain(Composite parent) {
@@ -387,7 +395,7 @@ public class ExtendedPeakDetectorUI extends Composite implements IExtendedPartUI
 		Composite composite = new Composite(parent, SWT.NONE);
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		composite.setLayoutData(gridData);
-		composite.setLayout(new GridLayout(12, false));
+		composite.setLayout(new GridLayout(13, false));
 
 		labelDetectionType = createDetectionTypeLabel(composite);
 		labelDetectionModus = createDetectionModusLabel(composite);
@@ -400,6 +408,7 @@ public class ExtendedPeakDetectorUI extends Composite implements IExtendedPartUI
 		buttonAddPeak = createAddPeakButton(composite);
 		createButtonToggleChartLegend(composite, chartControl, IMAGE_LEGEND);
 		createDetectionTypeButton(composite, DETECTION_TYPE_NONE, IApplicationImage.IMAGE_RESET);
+		createButtonHelp(composite, HelpContext.PEAK_DETECTOR);
 		createSettingsButton(composite);
 	}
 
@@ -462,29 +471,46 @@ public class ExtendedPeakDetectorUI extends Composite implements IExtendedPartUI
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				if(peak != null) {
-					IChromatogram chromatogram = chromatogramSelection.getChromatogram();
-					if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
-						if(peak instanceof IChromatogramPeakMSD peakMSD) {
-							chromatogramMSD.getPeaks().add(peakMSD);
-							peak = null;
-							setDetectionType(DETECTION_TYPE_NONE);
-							updateChromatogramAndPeak();
-							chromatogramSelection.update(true);
-						}
-					} else if(chromatogram instanceof IChromatogramCSD chromatogramCSD) {
-						if(peak instanceof IChromatogramPeakCSD peakCSD) {
-							chromatogramCSD.getPeaks().add(peakCSD);
-							peak = null;
-							setDetectionType(DETECTION_TYPE_NONE);
-							updateChromatogramAndPeak();
-							chromatogramSelection.update(true);
-						}
-					}
-				}
+				addPeak();
 			}
+
 		});
 		return button;
+	}
+
+	private void addPeak() {
+
+		if(peak == null) {
+			return;
+		}
+
+		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
+		if(chromatogram instanceof IChromatogramMSD chromatogramMSD) {
+			if(peak instanceof IChromatogramPeakMSD peakMSD) {
+				chromatogramMSD.getPeaks().add(peakMSD);
+			}
+		} else if(chromatogram instanceof IChromatogramCSD chromatogramCSD) {
+			if(peak instanceof IChromatogramPeakCSD peakCSD) {
+				chromatogramCSD.getPeaks().add(peakCSD);
+			}
+		} else if(chromatogram instanceof IChromatogramWSD chromatogramWSD) {
+			if(peak instanceof IChromatogramPeakWSD peakWSD) {
+				chromatogramWSD.getPeaks().add(peakWSD);
+			}
+		} else if(chromatogram instanceof IChromatogramFSD chromatogramFSD) {
+			if(peak instanceof IChromatogramPeakFSD peakFSD) {
+				chromatogramFSD.getPeaks().add(peakFSD);
+			}
+		} else if(chromatogram instanceof IChromatogramVSD chromatogramVSD) {
+			if(peak instanceof IChromatogramPeakVSD peakVSD) {
+				chromatogramVSD.getPeaks().add(peakVSD);
+			}
+		}
+
+		peak = null;
+		setDetectionType(DETECTION_TYPE_NONE);
+		updateChromatogramAndPeak();
+		chromatogramSelection.update(true);
 	}
 
 	private void createSettingsButton(Composite parent) {
@@ -515,6 +541,7 @@ public class ExtendedPeakDetectorUI extends Composite implements IExtendedPartUI
 		chartSettings.addHandledEventProcessor(new KeyPressedEventProcessor(KEY_VB));
 		chartSettings.addHandledEventProcessor(new KeyPressedEventProcessor(SWT.ARROW_LEFT));
 		chartSettings.addHandledEventProcessor(new KeyPressedEventProcessor(SWT.ARROW_RIGHT));
+		chartSettings.addHandledEventProcessor(new KeyPressedEventProcessor(KEY_ADD));
 		chartSettings.addHandledEventProcessor(new MouseDownEventProcessor());
 		chartSettings.addHandledEventProcessor(new MouseMoveEventProcessor());
 		chartSettings.addHandledEventProcessor(new MouseUpEventProcessor());
@@ -618,6 +645,9 @@ public class ExtendedPeakDetectorUI extends Composite implements IExtendedPartUI
 					redrawBoxPeakSelection(true);
 				}
 			}
+		}
+		if(event.keyCode == KEY_ADD) {
+			addPeak();
 		}
 	}
 
