@@ -34,6 +34,7 @@ import org.eclipse.chemclipse.processing.methods.IProcessMethod;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
 import org.eclipse.chemclipse.processing.supplier.IProcessSupplier;
 import org.eclipse.chemclipse.processing.supplier.IProcessTypeSupplier;
+import org.eclipse.core.runtime.Adapters;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
@@ -158,10 +159,11 @@ public class MethodProcessTypeSupplier implements IProcessTypeSupplier, BundleTr
 
 		List<IProcessSupplier<?>> processSupplierList = new ArrayList<>();
 
-		Collection<IProcessMethod> userMethods = MethodConverter.getUserMethods();
+		File[] files = MethodConverter.getUserMethods();
 		Set<String> processSupplierIds = new HashSet<>();
 
-		for(IProcessMethod processMethod : userMethods) {
+		for(File file : files) {
+			IProcessMethod processMethod = Adapters.adapt(file, IProcessMethod.class);
 			UserMethodProcessSupplier processSupplier = new UserMethodProcessSupplier(processMethod, this);
 			if(processSupplierIds.contains(processSupplier.getId())) {
 				logger.warn("Duplicate id detected for method: " + processMethod.getName() + " (id: " + processSupplier.getId() + ")");

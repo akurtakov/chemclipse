@@ -15,7 +15,6 @@ package org.eclipse.chemclipse.ux.extension.ui.swt;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -316,21 +315,22 @@ public class ProcessMethodToolbar extends ToolBar {
 					menuItem.dispose();
 				}
 
-				Collection<IProcessMethod> userMethods = MethodConverter.getUserMethods();
-				for(IProcessMethod method : userMethods) {
+				File[] userMethods = MethodConverter.getUserMethods();
+				for(File file : userMethods) {
 					MenuItem menuItem = new MenuItem(menu, SWT.NONE);
-					menuItem.setText(method.getName());
+					menuItem.setText(file.getName());
 					menuItem.addSelectionListener(new SelectionAdapter() {
 
 						@Override
 						public void widgetSelected(SelectionEvent e) {
 
+							IProcessMethod method = Adapters.adapt(file, IProcessMethod.class);
 							loadMethodFile(method);
 						}
 					});
 				}
 
-				if(!userMethods.isEmpty()) {
+				if(userMethods.length > 0) {
 					new MenuItem(menu, SWT.SEPARATOR);
 				}
 
