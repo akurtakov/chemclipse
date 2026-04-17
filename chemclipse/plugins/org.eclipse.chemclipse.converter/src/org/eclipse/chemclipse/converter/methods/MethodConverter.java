@@ -18,15 +18,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.chemclipse.converter.core.Converter;
 import org.eclipse.chemclipse.converter.core.IFileContentMatcher;
 import org.eclipse.chemclipse.converter.core.IMagicNumberMatcher;
 import org.eclipse.chemclipse.converter.core.NoFileContentMatcher;
-import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.converter.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.processing.converter.ISupplier;
@@ -34,7 +31,6 @@ import org.eclipse.chemclipse.processing.core.IMessageConsumer;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.ProcessingInfo;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
-import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
@@ -286,27 +282,13 @@ public class MethodConverter {
 		return fileContentMatcher;
 	}
 
-	public static Collection<IProcessMethod> getUserMethods() {
+	public static File[] getUserMethods() {
 
-		List<IProcessMethod> methodFiles = new ArrayList<>();
 		File directory = getUserMethodDirectory();
 		if(directory.exists() && directory.isDirectory()) {
-			try {
-				String[] extensions = MethodConverter.getMethodConverterSupport().getFilterExtensions();
-				for(File file : directory.listFiles()) {
-					for(String extension : extensions) {
-						if(file.getName().toLowerCase().endsWith(extension.toLowerCase())) {
-							IProcessMethod adapt = Adapters.adapt(file, IProcessMethod.class);
-							if(adapt != null) {
-								methodFiles.add(adapt);
-							}
-						}
-					}
-				}
-			} catch(NoConverterAvailableException e) {
-			}
+			return directory.listFiles();
 		}
-		return methodFiles;
+		return new File[0];
 	}
 
 	public static File getUserMethodDirectory() {
@@ -334,7 +316,7 @@ public class MethodConverter {
 			IProcessMethod processMethod = processingInfo.getProcessingResult();
 			if(processMethod != null) {
 				setUserMethodDirectory(file.getParentFile());
-				PreferenceSupplier.setSelectedMethodName(processMethod.getName());
+				PreferenceSupplier.setSelectedMethodFileName(file.getName());
 			}
 		}
 	}

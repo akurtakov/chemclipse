@@ -22,8 +22,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static final String DEF_CHROMATOGRAM_EXPORT_FOLDER = "";
 	public static final String P_METHOD_EXPLORER_PATH_ROOT_FOLDER = "methodExplorerPathRootFolder";
 	public static final String DEF_METHOD_EXPLORER_PATH_ROOT_FOLDER = "";
-	public static final String P_SELECTED_METHOD_NAME = "selectedMethodName";
-	public static final String DEF_SELECTED_METHOD_NAME = "";
+	public static final String P_SELECTED_METHOD_FILENAME = "selectedMethodName";
+	public static final String DEF_SELECTED_METHOD_FILENAME = "";
 
 	public static IPreferenceSupplier INSTANCE() {
 
@@ -41,7 +41,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 
 		putDefault(P_CHROMATOGRAM_EXPORT_FOLDER, DEF_CHROMATOGRAM_EXPORT_FOLDER);
 		putDefault(P_METHOD_EXPLORER_PATH_ROOT_FOLDER, DEF_METHOD_EXPLORER_PATH_ROOT_FOLDER);
-		putDefault(P_SELECTED_METHOD_NAME, DEF_SELECTED_METHOD_NAME);
+		putDefault(P_SELECTED_METHOD_FILENAME, DEF_SELECTED_METHOD_FILENAME);
 	}
 
 	public static String getSettings(String key, String def) {
@@ -54,14 +54,14 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 		return INSTANCE().get(P_CHROMATOGRAM_EXPORT_FOLDER, DEF_CHROMATOGRAM_EXPORT_FOLDER);
 	}
 
-	public static String getSelectedMethodName() {
+	public static String getSelectedMethodFileName() {
 
-		return INSTANCE().get(P_SELECTED_METHOD_NAME, DEF_SELECTED_METHOD_NAME);
+		return INSTANCE().get(P_SELECTED_METHOD_FILENAME, DEF_SELECTED_METHOD_FILENAME);
 	}
 
-	public static void setSelectedMethodName(String methodName) {
+	public static void setSelectedMethodFileName(String methodName) {
 
-		INSTANCE().put(P_SELECTED_METHOD_NAME, methodName);
+		INSTANCE().put(P_SELECTED_METHOD_FILENAME, methodName);
 	}
 
 	public static void setMethodExplorerPathRootFolder(String directory) {

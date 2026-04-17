@@ -18,7 +18,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -49,6 +48,7 @@ import org.eclipse.chemclipse.ux.extension.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierMethods;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
+import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -167,8 +167,8 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 			@Override
 			public String getText(Object element) {
 
-				if(element instanceof IProcessMethod processMethod) {
-					return processMethod.getName();
+				if(element instanceof File file) {
+					return file.getName();
 				}
 				return null;
 			}
@@ -184,8 +184,8 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 			public void widgetSelected(SelectionEvent e) {
 
 				Object object = comboViewer.getStructuredSelection().getFirstElement();
-				if(object instanceof IProcessMethod processMethod) {
-					PreferenceSupplier.setSelectedMethodName(processMethod.getName());
+				if(object instanceof File file) {
+					PreferenceSupplier.setSelectedMethodFileName(file.getName());
 				}
 				enableWidgets();
 			}
@@ -231,7 +231,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				File file = getFile(getProcessMethod());
+				File file = getFile();
 				if(file != null) {
 					openProcessMethodEditor(file);
 				}
@@ -266,7 +266,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 					/*
 					 * Single Method
 					 */
-					File fileSource = getFile(processMethod);
+					File fileSource = getFile();
 					if(fileSource != null && fileSource.exists()) {
 						if(MessageDialog.openQuestion(e.display.getActiveShell(), ExtensionMessages.copyMethod, MessageFormat.format(ExtensionMessages.shallCopyMethod, fileSource.getName()))) {
 							/*
@@ -390,11 +390,11 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 						}
 					}
 
-					File file = getFile(processMethod);
+					File file = getFile();
 					if(file != null && file.exists()) {
 						if(MessageDialog.openQuestion(e.display.getActiveShell(), ExtensionMessages.deleteMethod, MessageFormat.format(ExtensionMessages.shallDeleteMethod, file.getName()))) {
 							file.delete();
-							PreferenceSupplier.setSelectedMethodName("");
+							PreferenceSupplier.setSelectedMethodFileName("");
 							updateInput();
 						}
 						return;
@@ -487,7 +487,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 
 			IProcessingInfo<?> processingInfo = MethodConverter.convert(file, processMethod, MethodConverter.DEFAULT_METHOD_CONVERTER_ID, new NullProgressMonitor());
 			if(!processingInfo.hasErrorMessages()) {
-				PreferenceSupplier.setSelectedMethodName(file.getName());
+				PreferenceSupplier.setSelectedMethodFileName(file.getName());
 				if(openEditor) {
 					updateInput();
 					openProcessMethodEditor(file);
@@ -506,13 +506,13 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 			return;
 		}
 
-		List<IProcessMethod> methods = new ArrayList<>(MethodConverter.getUserMethods());
-		if(!methods.isEmpty()) {
+		List<File> files = Arrays.asList(MethodConverter.getUserMethods());
+		if(!files.isEmpty()) {
 			/*
 			 * Sort methods
 			 */
-			Collections.sort(methods, (m1, m2) -> m1.getName().compareToIgnoreCase(m2.getName()));
-			methodsControl.get().setInput(methods);
+			Collections.sort(files, (m1, m2) -> m1.getName().compareToIgnoreCase(m2.getName()));
+			methodsControl.get().setInput(files);
 			if(methodsControl.get().getCombo().getItemCount() > 0) {
 				updateProcessMethodSelection();
 			}
@@ -525,7 +525,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 
 	private void updateProcessMethodSelection() {
 
-		String selectedMethodName = PreferenceSupplier.getSelectedMethodName();
+		String selectedMethodName = PreferenceSupplier.getSelectedMethodFileName();
 		Combo combo = methodsControl.get().getCombo();
 
 		exitloop:
@@ -538,7 +538,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 
 		if(combo.getSelectionIndex() == -1) {
 			combo.select(0);
-			PreferenceSupplier.setSelectedMethodName(combo.getItem(0));
+			PreferenceSupplier.setSelectedMethodFileName(combo.getItem(0));
 		}
 	}
 
@@ -555,9 +555,9 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 		copyControl.get().setEnabled(true);
 		directoryControl.get().setEnabled(true);
 
-		IProcessMethod processMethod = getProcessMethod();
-		if(processMethod != null) {
-			boolean editable = getFile(processMethod) != null;
+		File file = getFile();
+		if(file != null) {
+			boolean editable = true;
 			editControl.get().setEnabled(editable);
 			copyControl.get().setEnabled(editable);
 			deleteControl.get().setEnabled(editable);
@@ -567,18 +567,19 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 
 	private IProcessMethod getProcessMethod() {
 
-		Object object = methodsControl.get().getStructuredSelection().getFirstElement();
-		if(object instanceof IProcessMethod processMethod) {
-			return processMethod;
+		File file = getFile();
+		if(file != null) {
+			return Adapters.adapt(file, IProcessMethod.class);
 		}
 
 		return null;
 	}
 
-	private File getFile(IProcessMethod processMethod) {
+	private File getFile() {
 
-		if(processMethod != null) {
-			return processMethod.getSourceFile();
+		Object object = methodsControl.get().getStructuredSelection().getFirstElement();
+		if(object instanceof File file) {
+			return file;
 		}
 
 		return null;

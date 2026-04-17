@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -35,7 +35,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 
 		addField(new DirectoryFieldEditor(PreferenceSupplier.P_CHROMATOGRAM_EXPORT_FOLDER, "Chromatogram Export Folder", getFieldEditorParent()));
 		addField(new DirectoryFieldEditor(PreferenceSupplier.P_METHOD_EXPLORER_PATH_ROOT_FOLDER, "Methods Folder", getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceSupplier.P_SELECTED_METHOD_NAME, "Method Name", getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceSupplier.P_SELECTED_METHOD_FILENAME, "Method Name", getFieldEditorParent()));
 	}
 
 	@Override
