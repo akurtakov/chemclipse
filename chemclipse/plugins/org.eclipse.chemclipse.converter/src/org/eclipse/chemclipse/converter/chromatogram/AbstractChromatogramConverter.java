@@ -18,15 +18,18 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.chemclipse.converter.Activator;
 import org.eclipse.chemclipse.converter.core.Converter;
 import org.eclipse.chemclipse.converter.core.IFileContentMatcher;
 import org.eclipse.chemclipse.converter.core.IMagicNumberMatcher;
 import org.eclipse.chemclipse.converter.core.NoFileContentMatcher;
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
+import org.eclipse.chemclipse.converter.services.IChromatogramConverterAdditionService;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.IPeak;
+import org.eclipse.chemclipse.model.support.ChromatogramColumnSupport;
 import org.eclipse.chemclipse.processing.DataCategory;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.core.IProcessingMessage;
@@ -260,6 +263,18 @@ public abstract class AbstractChromatogramConverter<P extends IPeak, T extends I
 		}
 
 		return processingInfo;
+	}
+
+	@Override
+	public void postProcessChromatogram(IProcessingInfo<T> processingInfo, IProgressMonitor monitor) {
+
+		if(processingInfo != null && processingInfo.getProcessingResult() instanceof IChromatogram chromatogram) {
+			ChromatogramColumnSupport.parseSeparationColumn(chromatogram);
+
+			for(IChromatogramConverterAdditionService service : Activator.getDefault().getChromatogramConverterAdditionService()) {
+				service.parseAdditionalData(chromatogram);
+			}
+		}
 	}
 
 	@Override

@@ -92,6 +92,15 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static final String DEF_LIST_PATH_IMPORT = "";
 	public static final String P_LIST_PATH_EXPORT = "listPathExport";
 	public static final String DEF_LIST_PATH_EXPORT = "";
+	/*
+	 * Chromatogram converter post processing
+	 */
+	public static final String P_PARSE_AMDIS_RETENTION_INDEX_DATA = "parseAMDISRetentionIndexData";
+	public static final boolean DEF_PARSE_AMDIS_RETENTION_INDEX_DATA = true;
+	public static final String P_USE_AMDIS_CHROMATOGRAM_NAME = "useAMDISChromatogramName";
+	public static final boolean DEF_USE_AMDIS_CHROMATOGRAM_NAME = false;
+	public static final String P_AMDIS_DEFAULT_NAME = "AMDISDefaultName";
+	public static final String DEF_AMDIS_DEFAULT_NAME = "calibration";
 
 	public static IPreferenceSupplier INSTANCE() {
 
@@ -129,6 +138,10 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 		putDefault(P_LIST_PATH_EXPORT_TEMPLATE, DEF_LIST_PATH_EXPORT_TEMPLATE);
 		putDefault(P_LIST_PATH_IMPORT, DEF_LIST_PATH_IMPORT);
 		putDefault(P_LIST_PATH_EXPORT, DEF_LIST_PATH_EXPORT);
+
+		putDefault(P_USE_AMDIS_CHROMATOGRAM_NAME, Boolean.toString(DEF_USE_AMDIS_CHROMATOGRAM_NAME));
+		putDefault(P_AMDIS_DEFAULT_NAME, DEF_AMDIS_DEFAULT_NAME);
+		putDefault(P_PARSE_AMDIS_RETENTION_INDEX_DATA, Boolean.toString(DEF_PARSE_AMDIS_RETENTION_INDEX_DATA));
 	}
 
 	public static PeakIdentifierAlkaneSettings getPeakIdentifierAlkaneSettings() {
@@ -328,5 +341,20 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static void setListPathExport(String filterPath) {
 
 		INSTANCE().put(P_LIST_PATH_EXPORT, filterPath);
+	}
+
+	public static boolean isUseChromatogramNameAMDIS() {
+
+		return INSTANCE().getBoolean(P_USE_AMDIS_CHROMATOGRAM_NAME, DEF_USE_AMDIS_CHROMATOGRAM_NAME);
+	}
+
+	public static String getDefaultNameAMDIS() {
+
+		return INSTANCE().get(P_AMDIS_DEFAULT_NAME, DEF_AMDIS_DEFAULT_NAME);
+	}
+
+	public static boolean isParseRetentionIndexDataAMDIS() {
+
+		return INSTANCE().getBoolean(P_PARSE_AMDIS_RETENTION_INDEX_DATA, DEF_PARSE_AMDIS_RETENTION_INDEX_DATA);
 	}
 }

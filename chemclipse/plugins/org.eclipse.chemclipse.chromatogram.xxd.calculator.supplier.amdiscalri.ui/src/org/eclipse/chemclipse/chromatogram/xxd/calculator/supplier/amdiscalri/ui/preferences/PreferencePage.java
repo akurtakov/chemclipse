@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,6 +19,7 @@ import org.eclipse.chemclipse.support.ui.preferences.fieldeditors.SpacerFieldEdi
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
@@ -44,6 +45,12 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		addField(new LabelFieldEditor("Import Calibration Files (*.cal)", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_DIRECTORY_IMPORT_CALIBRATION_FILES, "Use a standard directory", getFieldEditorParent()));
 		addField(new DirectoryFieldEditor(PreferenceSupplier.P_STANDARD_DIRECTORY_IMPORT_CALIBRATION_FILES, "Load files from directory", getFieldEditorParent()));
+
+		addField(new SpacerFieldEditor(getFieldEditorParent()));
+		addField(new LabelFieldEditor("Auto Loader", getFieldEditorParent()));
+		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_AMDIS_CHROMATOGRAM_NAME, "Use Chromatogram Name", getFieldEditorParent()));
+		addField(new StringFieldEditor(PreferenceSupplier.P_AMDIS_DEFAULT_NAME, "Default Name", getFieldEditorParent()));
+		addField(new BooleanFieldEditor(PreferenceSupplier.P_PARSE_AMDIS_RETENTION_INDEX_DATA, "Parse Retention Index Data", getFieldEditorParent()));
 	}
 
 	@Override

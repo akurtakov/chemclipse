@@ -52,4 +52,5 @@ Service-Component: OSGI-INF/org.eclipse.chemclipse.chromatogram.xxd.calculator.s
  OSGI-INF/org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.core.ChromatogramRetentionIndexer.xml,
  OSGI-INF/org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.service.RetentionIndexAssignerSerializationService.xml,
  OSGI-INF/org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.service.RetentionIndexMarkerSerializationService.xml,
- OSGI-INF/org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.system.ConverterProcessSupplier.xml
+ OSGI-INF/org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.system.ConverterProcessSupplier.xml,
+ OSGI-INF/org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.system.ChromatogramConverterAdditionService.xml

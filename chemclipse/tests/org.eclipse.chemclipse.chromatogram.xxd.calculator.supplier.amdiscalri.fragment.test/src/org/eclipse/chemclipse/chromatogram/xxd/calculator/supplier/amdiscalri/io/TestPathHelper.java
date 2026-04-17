@@ -10,7 +10,7 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.chromatogram.xxd.calculator;
+package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.io;
 
 public class TestPathHelper {
 
@@ -19,5 +19,4 @@ public class TestPathHelper {
 	 */
 	public static final String TESTFILE_IMPORT_CALIBRATION_CAL_1 = "testData/files/import/calibration1.cal";
 	public static final String TESTFILE_IMPORT_CALIBRATION_CAL_2 = "testData/files/import/calibration2.cal";
-	public static final String TESTFILE_IMPORT_CALIBRATION_INF_1 = "testData/files/import/calibration1.inf";
 }

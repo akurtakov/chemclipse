@@ -22,26 +22,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static final String DEF_REFERENCE_IDENTIFIER_MARKER = "";
 	public static final String P_REFERENCE_IDENTIFIER_PREFIX = "referenceIdentifierPrefix";
 	public static final String DEF_REFERENCE_IDENTIFIER_PREFIX = "";
-	/*
-	 * MassLib
-	 */
-	public static final String P_USE_MASSLIB_CHROMATOGRAM_NAME = "useMassLibChromatogramName";
-	public static final boolean DEF_USE_MASSLIB_CHROMATOGRAM_NAME = true;
-	public static final String P_MASSLIB_DEFAULT_NAME = "massLibDefaultName";
-	public static final String DEF_MASSLIB_DEFAULT_NAME = "calibration";
-	public static final String P_PARSE_MASSLIB_RETENTION_INDEX_DATA = "parseMassLibRetentionIndexData";
-	public static final boolean DEF_PARSE_MASSLIB_RETENTION_INDEX_DATA = true;
-	public static final String P_PARSE_MASSLIB_TARGET_DATA = "parseMassLibTargetData";
-	public static final boolean DEF_PARSE_MASSLIB_TARGET_DATA = true;
-	/*
-	 * AMDIS
-	 */
-	public static final String P_USE_AMDIS_CHROMATOGRAM_NAME = "useAMDISChromatogramName";
-	public static final boolean DEF_USE_AMDIS_CHROMATOGRAM_NAME = false;
-	public static final String P_AMDIS_DEFAULT_NAME = "AMDISDefaultName";
-	public static final String DEF_AMDIS_DEFAULT_NAME = "calibration";
-	public static final String P_PARSE_AMDIS_RETENTION_INDEX_DATA = "parseAMDISRetentionIndexData";
-	public static final boolean DEF_PARSE_AMDIS_RETENTION_INDEX_DATA = true;
 
 	public static IPreferenceSupplier INSTANCE() {
 
@@ -50,6 +30,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 
 	@Override
 	public String getPreferenceNode() {
+
 		return FrameworkUtil.getBundle(PreferenceSupplier.class).getSymbolicName();
 	}
 
@@ -58,15 +39,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 
 		putDefault(P_REFERENCE_IDENTIFIER_MARKER, DEF_REFERENCE_IDENTIFIER_MARKER);
 		putDefault(P_REFERENCE_IDENTIFIER_PREFIX, DEF_REFERENCE_IDENTIFIER_PREFIX);
-
-		putDefault(P_USE_MASSLIB_CHROMATOGRAM_NAME, Boolean.toString(DEF_USE_MASSLIB_CHROMATOGRAM_NAME));
-		putDefault(P_MASSLIB_DEFAULT_NAME, DEF_MASSLIB_DEFAULT_NAME);
-		putDefault(P_PARSE_MASSLIB_RETENTION_INDEX_DATA, Boolean.toString(DEF_PARSE_MASSLIB_RETENTION_INDEX_DATA));
-		putDefault(P_PARSE_MASSLIB_TARGET_DATA, Boolean.toString(DEF_PARSE_MASSLIB_TARGET_DATA));
-
-		putDefault(P_USE_AMDIS_CHROMATOGRAM_NAME, Boolean.toString(DEF_USE_AMDIS_CHROMATOGRAM_NAME));
-		putDefault(P_AMDIS_DEFAULT_NAME, DEF_AMDIS_DEFAULT_NAME);
-		putDefault(P_PARSE_AMDIS_RETENTION_INDEX_DATA, Boolean.toString(DEF_PARSE_AMDIS_RETENTION_INDEX_DATA));
 	}
 
 	public static String getReferenceIdentifierMarker() {
@@ -77,40 +49,5 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static String getReferenceIdentifierPrefix() {
 
 		return INSTANCE().get(P_REFERENCE_IDENTIFIER_PREFIX, DEF_REFERENCE_IDENTIFIER_PREFIX);
-	}
-
-	public static boolean isUseChromatogramNameMassLib() {
-
-		return INSTANCE().getBoolean(P_USE_MASSLIB_CHROMATOGRAM_NAME, DEF_USE_MASSLIB_CHROMATOGRAM_NAME);
-	}
-
-	public static String getDefaultNameMassLib() {
-
-		return INSTANCE().get(P_MASSLIB_DEFAULT_NAME, DEF_MASSLIB_DEFAULT_NAME);
-	}
-
-	public static boolean isParseRetentionIndexDataMassLib() {
-
-		return INSTANCE().getBoolean(P_PARSE_MASSLIB_RETENTION_INDEX_DATA, DEF_PARSE_MASSLIB_RETENTION_INDEX_DATA);
-	}
-
-	public static boolean isParseTargetDataMassLib() {
-
-		return INSTANCE().getBoolean(P_PARSE_MASSLIB_TARGET_DATA, DEF_PARSE_MASSLIB_TARGET_DATA);
-	}
-
-	public static boolean isUseChromatogramNameAMDIS() {
-
-		return INSTANCE().getBoolean(P_USE_AMDIS_CHROMATOGRAM_NAME, DEF_USE_AMDIS_CHROMATOGRAM_NAME);
-	}
-
-	public static String getDefaultNameAMDIS() {
-
-		return INSTANCE().get(P_AMDIS_DEFAULT_NAME, DEF_AMDIS_DEFAULT_NAME);
-	}
-
-	public static boolean isParseRetentionIndexDataAMDIS() {
-
-		return INSTANCE().getBoolean(P_PARSE_AMDIS_RETENTION_INDEX_DATA, DEF_PARSE_AMDIS_RETENTION_INDEX_DATA);
 	}
 }
