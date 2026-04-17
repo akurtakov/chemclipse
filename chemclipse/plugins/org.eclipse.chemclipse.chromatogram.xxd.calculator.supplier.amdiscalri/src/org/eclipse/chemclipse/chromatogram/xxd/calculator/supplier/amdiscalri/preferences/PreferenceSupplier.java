@@ -96,7 +96,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	 * Chromatogram converter post processing
 	 */
 	public static final String P_PARSE_AMDIS_RETENTION_INDEX_DATA = "parseAMDISRetentionIndexData";
-	public static final boolean DEF_PARSE_AMDIS_RETENTION_INDEX_DATA = true;
+	public static final boolean DEF_PARSE_AMDIS_RETENTION_INDEX_DATA = false;
 	public static final String P_USE_AMDIS_CHROMATOGRAM_NAME = "useAMDISChromatogramName";
 	public static final boolean DEF_USE_AMDIS_CHROMATOGRAM_NAME = false;
 	public static final String P_AMDIS_DEFAULT_NAME = "AMDISDefaultName";
