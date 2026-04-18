@@ -164,6 +164,9 @@ public class MethodProcessTypeSupplier implements IProcessTypeSupplier, BundleTr
 
 		for(File file : files) {
 			IProcessMethod processMethod = Adapters.adapt(file, IProcessMethod.class);
+			if(processMethod == null) {
+				continue;
+			}
 			UserMethodProcessSupplier processSupplier = new UserMethodProcessSupplier(processMethod, this);
 			if(processSupplierIds.contains(processSupplier.getId())) {
 				logger.warn("Duplicate id detected for method: " + processMethod.getName() + " (id: " + processSupplier.getId() + ")");
