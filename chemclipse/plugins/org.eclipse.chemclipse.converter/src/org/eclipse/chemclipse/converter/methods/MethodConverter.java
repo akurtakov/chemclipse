@@ -286,7 +286,7 @@ public class MethodConverter {
 
 		File directory = getUserMethodDirectory();
 		if(directory.exists() && directory.isDirectory()) {
-			return directory.listFiles();
+			return directory.listFiles(new MethodFilenameFilter());
 		}
 		return new File[0];
 	}
