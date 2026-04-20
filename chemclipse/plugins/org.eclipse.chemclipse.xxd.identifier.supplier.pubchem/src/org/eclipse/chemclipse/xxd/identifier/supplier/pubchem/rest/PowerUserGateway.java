@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Matthias Mailänder - initial API and implementation
  *******************************************************************************/
@@ -14,13 +14,13 @@ package org.eclipse.chemclipse.xxd.identifier.supplier.pubchem.rest;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 
@@ -63,9 +63,8 @@ public class PowerUserGateway {
 
 		String smiles = null;
 		String uri = getBestCompound(libraryInformation) + "/property/smiles/TXT";
-		try {
-			smiles = IOUtils.toString(new URI(uri).toURL(), StandardCharsets.UTF_8);
-			smiles = smiles.trim();
+		try (InputStream inputStream = new URI(uri).toURL().openStream()) {
+			smiles = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8).trim();
 		} catch(FileNotFoundException e) {
 			// 404
 		} catch(IOException e) {
@@ -80,8 +79,8 @@ public class PowerUserGateway {
 
 		List<Integer> cids = new ArrayList<>();
 		String uri = getBestCompound(libraryInformation) + "/cids/TXT";
-		try {
-			String output = IOUtils.toString(new URI(uri).toURL(), StandardCharsets.UTF_8);
+		try (InputStream inputStream = new URI(uri).toURL().openStream()) {
+			String output = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
 			String[] lines = output.split(System.lineSeparator());
 			for(String line : lines) {
 				cids.add(Integer.parseInt(line));
