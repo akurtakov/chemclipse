@@ -21,10 +21,13 @@ public class PreferenceSupplierDataExplorer extends AbstractPreferenceSupplier {
 
 	public static final String P_SELECTED_DRIVE_PATH = "selectedDrivePath";
 	public static final String DEF_SELECTED_DRIVE_PATH = "";
+
 	public static final String P_SELECTED_HOME_PATH = "selectedHomePath";
 	public static final String DEF_SELECTED_HOME_PATH = "";
+
 	public static final String P_SELECTED_WORKSPACE_PATH = "selectedWorkspacePath";
 	public static final String DEF_SELECTED_WORKSPACE_PATH = "";
+
 	public static final String P_SELECTED_USER_LOCATION_PATH = "selectedUserLocationPath";
 	public static final String DEF_SELECTED_USER_LOCATION_PATH = "";
 
@@ -46,6 +49,9 @@ public class PreferenceSupplierDataExplorer extends AbstractPreferenceSupplier {
 	 */
 	public static final String P_EXPAND_PRECHECK = "expandPrecheck";
 	public static final boolean DEF_EXPAND_PRECHECK = true;
+
+	public static final String P_EAGER_LOADING = "eagerLoading";
+	public static final boolean DEF_EAGER_LOADING = true;
 
 	public static final String P_FILTER_FILES = "filterFiles";
 	public static final boolean DEF_FILTER_FILES = true;
@@ -79,6 +85,7 @@ public class PreferenceSupplierDataExplorer extends AbstractPreferenceSupplier {
 		putDefault(P_USER_LOCATIONS_TEMPLATE_FOLDER, DEF_USER_LOCATIONS_TEMPLATE_FOLDER);
 
 		putDefault(P_EXPAND_PRECHECK, DEF_EXPAND_PRECHECK);
+		putDefault(P_EAGER_LOADING, DEF_EAGER_LOADING);
 		putDefault(P_FILTER_FILES, DEF_FILTER_FILES);
 		putDefault(P_SHOW_ICONS, DEF_SHOW_ICONS);
 	}
@@ -167,6 +174,12 @@ public class PreferenceSupplierDataExplorer extends AbstractPreferenceSupplier {
 
 		return INSTANCE().getBoolean(P_EXPAND_PRECHECK);
 	}
+
+	public static boolean eagerLoading() {
+
+		return INSTANCE().getBoolean(P_EAGER_LOADING);
+	}
+
 	public static boolean filterFiles() {
 
 		return INSTANCE().getBoolean(P_FILTER_FILES);

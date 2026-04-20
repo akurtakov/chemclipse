@@ -24,8 +24,10 @@ import org.eclipse.chemclipse.processing.converter.ISupplier;
 import org.eclipse.chemclipse.processing.converter.ISupplierFileIdentifier;
 import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.ux.extension.ui.listener.DataExplorerDragListener;
-import org.eclipse.chemclipse.ux.extension.ui.provider.DataExplorerContentProvider;
+import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierDataExplorer;
 import org.eclipse.chemclipse.ux.extension.ui.provider.DataExplorerLabelProvider;
+import org.eclipse.chemclipse.ux.extension.ui.provider.FileExplorerContentProvider;
+import org.eclipse.chemclipse.ux.extension.ui.provider.LazyDataExplorerContentProvider;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -154,11 +156,14 @@ public class DataExplorerTreeUI {
 	private void createTreeViewer(Composite parent, Function<File, Map<ISupplierFileIdentifier, Collection<ISupplier>>> identifier) {
 
 		TreeViewer treeViewer = new TreeViewer(parent, SWT.MULTI | SWT.VIRTUAL);
-
+		if(PreferenceSupplierDataExplorer.eagerLoading()) {
+			treeViewer.setContentProvider(new FileExplorerContentProvider());
+		} else {
+			treeViewer.setContentProvider(new LazyDataExplorerContentProvider(identifier));
+		}
+		treeViewer.setLabelProvider(new DataExplorerLabelProvider(identifier));
 		treeViewer.setUseHashlookup(true);
 		treeViewer.setExpandPreCheckFilters(PreferenceSupplierDataExplorer.expandPrecheck());
-		treeViewer.setContentProvider(new DataExplorerContentProvider(identifier));
-		treeViewer.setLabelProvider(new DataExplorerLabelProvider(identifier));
 		setInput(treeViewer);
 		treeViewerControl.set(treeViewer);
 	}
