@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -156,7 +156,7 @@ public class DataExplorerTreeUI {
 		TreeViewer treeViewer = new TreeViewer(parent, SWT.MULTI | SWT.VIRTUAL);
 
 		treeViewer.setUseHashlookup(true);
-		treeViewer.setExpandPreCheckFilters(true);
+		treeViewer.setExpandPreCheckFilters(PreferenceSupplierDataExplorer.expandPrecheck());
 		treeViewer.setContentProvider(new DataExplorerContentProvider(identifier));
 		treeViewer.setLabelProvider(new DataExplorerLabelProvider(identifier));
 		setInput(treeViewer);

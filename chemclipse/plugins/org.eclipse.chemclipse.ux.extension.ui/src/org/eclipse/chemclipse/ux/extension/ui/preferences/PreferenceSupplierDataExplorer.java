@@ -44,6 +44,9 @@ public class PreferenceSupplierDataExplorer extends AbstractPreferenceSupplier {
 	/*
 	 * Performance related workarounds. Set to false for less pretty but faster.
 	 */
+	public static final String P_EXPAND_PRECHECK = "expandPrecheck";
+	public static final boolean DEF_EXPAND_PRECHECK = true;
+
 	public static final String P_FILTER_FILES = "filterFiles";
 	public static final boolean DEF_FILTER_FILES = true;
 
@@ -75,6 +78,7 @@ public class PreferenceSupplierDataExplorer extends AbstractPreferenceSupplier {
 
 		putDefault(P_USER_LOCATIONS_TEMPLATE_FOLDER, DEF_USER_LOCATIONS_TEMPLATE_FOLDER);
 
+		putDefault(P_EXPAND_PRECHECK, DEF_EXPAND_PRECHECK);
 		putDefault(P_FILTER_FILES, DEF_FILTER_FILES);
 		putDefault(P_SHOW_ICONS, DEF_SHOW_ICONS);
 	}
@@ -159,6 +163,10 @@ public class PreferenceSupplierDataExplorer extends AbstractPreferenceSupplier {
 		INSTANCE().set(P_USER_LOCATIONS_TEMPLATE_FOLDER, filterPath);
 	}
 
+	public static boolean expandPrecheck() {
+
+		return INSTANCE().getBoolean(P_EXPAND_PRECHECK);
+	}
 	public static boolean filterFiles() {
 
 		return INSTANCE().getBoolean(P_FILTER_FILES);
