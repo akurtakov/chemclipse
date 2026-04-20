@@ -16,6 +16,7 @@ package org.eclipse.chemclipse.msd.converter.supplier.amdis.io;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -24,7 +25,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.io.FileUtils;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.core.IPeakIntensityValues;
@@ -71,7 +71,7 @@ public class ELUReader implements IPeakReader {
 
 		Charset charset = PreferenceSupplier.getCharsetImportELU();
 		IProcessingInfo<IPeaksMSD> processingInfo = new ProcessingInfo<>();
-		String content = FileUtils.readFileToString(file, charset);
+		String content = Files.readString(file.toPath(), charset);
 		int numberOfHits = getNumberOfHits(content);
 		if(numberOfHits <= 0) {
 			processingInfo.addErrorMessage("AMDIS ELU Parser", "There seems to be no peak in the file.");
