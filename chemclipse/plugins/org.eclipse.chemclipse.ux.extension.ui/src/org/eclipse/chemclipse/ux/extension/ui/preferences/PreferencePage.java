@@ -37,6 +37,8 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		addField(new BooleanFieldEditor(PreferenceSupplierDataExplorer.P_OPEN_EDITOR_MULTIPLE_TIMES, "Open Editor Multiple Times", getFieldEditorParent()));
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new LabelFieldEditor("Uncheck for better performance:", getFieldEditorParent()));
+		addField(new BooleanFieldEditor(PreferenceSupplierDataExplorer.P_EXPAND_PRECHECK, "Check if folders can be expanded.", getFieldEditorParent()));
+		addField(new BooleanFieldEditor(PreferenceSupplierDataExplorer.P_EAGER_LOADING, "Remember last location.", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplierDataExplorer.P_FILTER_FILES, "Only show applicable files.", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplierDataExplorer.P_SHOW_ICONS, "Display icons matching the file type.", getFieldEditorParent()));
 	}

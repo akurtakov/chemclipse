@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,14 +13,16 @@
 package org.eclipse.chemclipse.ux.extension.ui.provider;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierDataExplorer;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 
-public class FileExplorerContentProvider implements ITreeContentProvider {
+public class FileExplorerContentProvider implements ITreeContentProvider, FileFilter {
 
 	@Override
 	public Object[] getChildren(Object parentElement) {
@@ -118,9 +120,14 @@ public class FileExplorerContentProvider implements ITreeContentProvider {
 			/*
 			 * Check if the parent file is a chromatogram.
 			 */
-			File[] fileList = parentFile.listFiles();
+			File[] fileList;
+			if(PreferenceSupplierDataExplorer.filterFiles()) {
+				fileList = parentFile.listFiles(FileExplorerContentProvider.this);
+			} else {
+				fileList = parentFile.listFiles();
+			}
 			if(fileList != null) {
-				for(File file : parentFile.listFiles()) {
+				for(File file : fileList) {
 					if(!file.isHidden()) {
 						files.add(file);
 					}
@@ -132,5 +139,11 @@ public class FileExplorerContentProvider implements ITreeContentProvider {
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public boolean accept(File file) {
+
+		return !file.isHidden() && !file.getName().startsWith(".") && file.canRead();
 	}
 }

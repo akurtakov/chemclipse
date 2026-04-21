@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -24,8 +24,10 @@ import org.eclipse.chemclipse.processing.converter.ISupplier;
 import org.eclipse.chemclipse.processing.converter.ISupplierFileIdentifier;
 import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.ux.extension.ui.listener.DataExplorerDragListener;
-import org.eclipse.chemclipse.ux.extension.ui.provider.DataExplorerContentProvider;
+import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierDataExplorer;
 import org.eclipse.chemclipse.ux.extension.ui.provider.DataExplorerLabelProvider;
+import org.eclipse.chemclipse.ux.extension.ui.provider.FileExplorerContentProvider;
+import org.eclipse.chemclipse.ux.extension.ui.provider.LazyDataExplorerContentProvider;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -154,11 +156,14 @@ public class DataExplorerTreeUI {
 	private void createTreeViewer(Composite parent, Function<File, Map<ISupplierFileIdentifier, Collection<ISupplier>>> identifier) {
 
 		TreeViewer treeViewer = new TreeViewer(parent, SWT.MULTI | SWT.VIRTUAL);
-
-		treeViewer.setUseHashlookup(true);
-		treeViewer.setExpandPreCheckFilters(true);
-		treeViewer.setContentProvider(new DataExplorerContentProvider(identifier));
+		if(PreferenceSupplierDataExplorer.eagerLoading()) {
+			treeViewer.setContentProvider(new FileExplorerContentProvider());
+		} else {
+			treeViewer.setContentProvider(new LazyDataExplorerContentProvider(identifier));
+		}
 		treeViewer.setLabelProvider(new DataExplorerLabelProvider(identifier));
+		treeViewer.setUseHashlookup(true);
+		treeViewer.setExpandPreCheckFilters(PreferenceSupplierDataExplorer.expandPrecheck());
 		setInput(treeViewer);
 		treeViewerControl.set(treeViewer);
 	}

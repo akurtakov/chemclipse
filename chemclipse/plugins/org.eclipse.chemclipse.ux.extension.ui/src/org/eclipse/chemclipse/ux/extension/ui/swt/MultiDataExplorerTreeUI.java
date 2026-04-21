@@ -48,8 +48,8 @@ import org.eclipse.chemclipse.ux.extension.ui.model.DataExplorerTreeSettings;
 import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferencePage;
 import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferencePageUserLocations;
 import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierDataExplorer;
-import org.eclipse.chemclipse.ux.extension.ui.provider.DataExplorerContentProvider;
 import org.eclipse.chemclipse.ux.extension.ui.provider.ISupplierFileEditorSupport;
+import org.eclipse.chemclipse.ux.extension.ui.provider.LazyDataExplorerContentProvider;
 import org.eclipse.chemclipse.ux.extension.ui.provider.LazyFileExplorerContentProvider;
 import org.eclipse.chemclipse.xxd.process.files.SupplierFileIdentifierCache;
 import org.eclipse.jface.action.Action;
@@ -60,6 +60,7 @@ import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.preference.IPreferencePage;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -730,15 +731,15 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 	private void openOverview(File file, DataExplorerTreeUI dataExplorerTreeUI) {
 
 		if(file != null) {
-			DataExplorerContentProvider contentProvider = (DataExplorerContentProvider)dataExplorerTreeUI.getTreeViewer().getContentProvider();
 			/*
 			 * Update the directories content, until there is
 			 * actual no way to monitor the file system outside
 			 * of the workbench without using operating system
 			 * specific function via e.g. JNI.
 			 */
-			if(file.isDirectory()) {
-				contentProvider.refresh(file);
+			IContentProvider contentProvider = dataExplorerTreeUI.getTreeViewer().getContentProvider();
+			if(file.isDirectory() && contentProvider instanceof LazyDataExplorerContentProvider lazyDataExplorerContentProvider) {
+				lazyDataExplorerContentProvider.refresh(file);
 			}
 
 			Collection<ISupplierFileIdentifier> identifiers = getIdentifierSupplier().apply(file).keySet();
