@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -8,7 +8,7 @@
  * SPDX-License-Identifier: EPL-2.0
  * 
  * Contributors:
- * Lorenz Gerber - initial API and implementation, prediction
+ * Lorenz Gerber - initial API and implementation, prediction, pCorr
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.core.algorithms;
 
@@ -26,11 +26,33 @@ public class CalculatorOPLS extends AbstractMultivariateCalculator {
 
 	static final int SEED = 10;
 	private String oplsTargetGroup;
+	private DMatrixRMaj pCorrMatrix;
+	private DMatrixRMaj pCovarianceMatrix;
 
 	public CalculatorOPLS(int numObs, int numVars, int numComps, String oplsTargetGroup, int numPredictionSamples) throws MathIllegalArgumentException {
 
 		super(numObs, numVars, numComps, numPredictionSamples);
 		this.oplsTargetGroup = oplsTargetGroup;
+	}
+
+	public DMatrixRMaj getPCorrMatrix() {
+
+		return pCorrMatrix;
+	}
+
+	protected void setPCorrMatrix(DMatrixRMaj pCorrMatrix) {
+
+		this.pCorrMatrix = pCorrMatrix;
+	}
+
+	public DMatrixRMaj getPCovarianceMatrix() {
+
+		return pCovarianceMatrix;
+	}
+
+	protected void setPCovarianceMatrix(DMatrixRMaj pCovarianceMatrix) {
+
+		this.pCovarianceMatrix = pCovarianceMatrix;
 	}
 
 	private DMatrixRMaj getYVector() {
@@ -161,6 +183,67 @@ public class CalculatorOPLS extends AbstractMultivariateCalculator {
 		System.arraycopy(P_ortho.getData(), 0, combinedLoadings, numberOfVariables, (getNumComps() - 1) * numberOfVariables);
 		DMatrixRMaj loadings = new DMatrixRMaj(getNumComps(), numberOfVariables, true, combinedLoadings);
 		setLoadings(loadings);
+
+		DMatrixRMaj pCorrMatrix = calculatePCorrMatrix(te);
+		this.setPCovarianceMatrix(new DMatrixRMaj(p));
+		this.setPCorrMatrix(pCorrMatrix);
 		this.setComputeSuccess();
+	}
+
+	DMatrixRMaj calculatePCorrMatrix(DMatrixRMaj te) {
+
+		int numberOfSamples = getSampleData().getNumRows();
+		int numberOfVariables = getSampleData().getNumCols();
+
+		/*
+		 * Calculate p(corr)
+		 */
+
+		// 1. Get original un-deflated data and predictive scores
+		DMatrixRMaj originalX = getSampleData();
+		double[] tScores = te.getData();
+		double[] pCorrArray = new double[numberOfVariables];
+
+		// 2. Calculate Mean and Sum of Squares for 'te' (tScores)
+		double tMean = 0;
+		for(double val : tScores) {
+			tMean += val;
+		}
+		tMean /= numberOfSamples;
+
+		double tSumSq = 0;
+		for(double val : tScores) {
+			tSumSq += Math.pow(val - tMean, 2);
+		}
+
+		// 3. Calculate Pearson Correlation for each variable (column)
+		for(int j = 0; j < numberOfVariables; j++) {
+
+			// Calculate Mean for variable j
+			double xMean = 0;
+			for(int i = 0; i < numberOfSamples; i++) {
+				xMean += originalX.get(i, j);
+			}
+			xMean /= numberOfSamples;
+
+			// Calculate Sum of Squares for variable j & Cross Product
+			double xSumSq = 0;
+			double crossProduct = 0;
+			for(int i = 0; i < numberOfSamples; i++) {
+				double xDev = originalX.get(i, j) - xMean;
+				double tDev = tScores[i] - tMean;
+
+				xSumSq += Math.pow(xDev, 2);
+				crossProduct += (xDev * tDev);
+			}
+
+			// 4. Final Correlation calculation
+			if(xSumSq == 0 || tSumSq == 0) {
+				pCorrArray[j] = 0.0;
+			} else {
+				pCorrArray[j] = crossProduct / Math.sqrt(xSumSq * tSumSq);
+			}
+		}
+		return new DMatrixRMaj(1, numberOfVariables, true, pCorrArray);
 	}
 }
