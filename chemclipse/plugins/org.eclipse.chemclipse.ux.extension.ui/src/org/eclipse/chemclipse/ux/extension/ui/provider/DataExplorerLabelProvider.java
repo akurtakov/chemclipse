@@ -35,7 +35,6 @@ import org.eclipse.jface.resource.ResourceManager;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.navigator.IDescriptionProvider;
 
 public class DataExplorerLabelProvider extends ColumnLabelProvider implements IDescriptionProvider {
@@ -81,8 +80,8 @@ public class DataExplorerLabelProvider extends ColumnLabelProvider implements ID
 		cell.setText(getText(element));
 		Image image = getIcon(element);
 		// https://github.com/eclipse-platform/eclipse.platform.swt/issues/678
-		Display.getCurrent().asyncExec(() -> {
-			if(!cell.getControl().isDisposed()) {
+		cell.getItem().getDisplay().asyncExec(() -> {
+			if(!cell.getItem().isDisposed()) {
 				cell.setImage(image);
 			}
 		});
