@@ -25,8 +25,8 @@ import org.eclipse.chemclipse.processing.converter.ISupplierFileIdentifier;
 import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.ux.extension.ui.listener.DataExplorerDragListener;
 import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierDataExplorer;
+import org.eclipse.chemclipse.ux.extension.ui.provider.DataExplorerContentProvider;
 import org.eclipse.chemclipse.ux.extension.ui.provider.DataExplorerLabelProvider;
-import org.eclipse.chemclipse.ux.extension.ui.provider.FileExplorerContentProvider;
 import org.eclipse.chemclipse.ux.extension.ui.provider.LazyDataExplorerContentProvider;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
@@ -157,7 +157,7 @@ public class DataExplorerTreeUI {
 
 		TreeViewer treeViewer = new TreeViewer(parent, SWT.MULTI | SWT.VIRTUAL);
 		if(PreferenceSupplierDataExplorer.eagerLoading()) {
-			treeViewer.setContentProvider(new FileExplorerContentProvider());
+			treeViewer.setContentProvider(new DataExplorerContentProvider(identifier));
 		} else {
 			treeViewer.setContentProvider(new LazyDataExplorerContentProvider(identifier));
 		}
