@@ -14,7 +14,6 @@
 package org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.file.settings;
 
 import java.io.File;
-import java.util.StringJoiner;
 
 import org.eclipse.chemclipse.msd.identifier.settings.AbstractMassSpectrumIdentifierSettings;
 import org.eclipse.chemclipse.support.settings.DoubleSettingsProperty;
@@ -30,8 +29,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 public class MassSpectrumLibraryIdentifierSettings extends AbstractMassSpectrumIdentifierSettings implements ILibraryIdentifierSettings {
 
-	@JsonProperty(value = "Library File", defaultValue = "")
-	@JsonPropertyDescription("Select the library file.")
+	@JsonProperty(value = "Library File or Folder", defaultValue = "")
+	@JsonPropertyDescription("Select the library file or folder containing them.")
 	@FileSettingProperty(dialogType = DialogType.OPEN_DIALOG, onlyDirectory = false, allowEmpty = false)
 	private File libraryFile;
 
@@ -65,26 +64,12 @@ public class MassSpectrumLibraryIdentifierSettings extends AbstractMassSpectrumI
 
 		if(libraryFile != null) {
 			if(libraryFile.isDirectory()) {
-				return getAllContainingFilesAbsolutePath(libraryFile);
+				return FileListUtil.getAllContainingFilesAbsolutePath(libraryFile);
 			}
 			return libraryFile.getAbsolutePath();
 		} else {
 			return massSpectraFiles;
 		}
-	}
-
-	private static String getAllContainingFilesAbsolutePath(File directory) {
-
-		StringJoiner joiner = new StringJoiner(FileListUtil.SEPARATOR_TOKEN);
-		File[] files = directory.listFiles();
-		if(files != null) {
-			for(File file : files) {
-				if(file.isFile()) {
-					joiner.add(file.getAbsolutePath());
-				}
-			}
-		}
-		return joiner.toString();
 	}
 
 	@Override
