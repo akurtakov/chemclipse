@@ -17,9 +17,11 @@ package org.eclipse.chemclipse.xxd.filter.peaks;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.filter.IPeakFilter;
+import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.processing.Processor;
 import org.eclipse.chemclipse.processing.filter.Filter;
@@ -72,8 +74,29 @@ public class DeletePeaksFilter extends AbstractPeakFilter<DeletePeaksFilterSetti
 				switch(deletePeakOption) {
 					case UNIDENTIFIED:
 						for(IPeak peak : peaks) {
-							if(peak.getTargets().isEmpty()) {
+							Set<IIdentificationTarget> targets = peak.getTargets();
+							if(targets.isEmpty()) {
 								peaksToDelete.add(peak);
+							} else {
+								/*
+								 * It needs at least one target with name to
+								 * assume that the peak is identified.
+								 */
+								boolean isBlank = true;
+								exitloop:
+								for(IIdentificationTarget target : targets) {
+									if(!target.getLibraryInformation().getName().isBlank()) {
+										isBlank = false;
+										break exitloop;
+									}
+								}
+								/*
+								 * White space is used as a placeholder to
+								 * edit dynamically sometimes.
+								 */
+								if(isBlank) {
+									peaksToDelete.add(peak);
+								}
 							}
 							subMonitor.worked(1);
 						}
