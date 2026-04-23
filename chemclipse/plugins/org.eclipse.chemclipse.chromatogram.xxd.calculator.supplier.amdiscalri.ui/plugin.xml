@@ -17,7 +17,7 @@
             id="org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.editors.editorCalibration"
             name="Retention Index Calibration">
       </editor>
-   </extension>      
+   </extension>
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
