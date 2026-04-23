@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,6 +16,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.StringJoiner;
 
 public class FileListUtil {
 
@@ -74,5 +75,19 @@ public class FileListUtil {
 			}
 		}
 		return files;
+	}
+
+	public static String getAllContainingFilesAbsolutePath(File directory) {
+
+		StringJoiner joiner = new StringJoiner(SEPARATOR_TOKEN);
+		File[] files = directory.listFiles();
+		if(files != null) {
+			for(File file : files) {
+				if(file.isFile()) {
+					joiner.add(file.getAbsolutePath());
+				}
+			}
+		}
+		return joiner.toString();
 	}
 }

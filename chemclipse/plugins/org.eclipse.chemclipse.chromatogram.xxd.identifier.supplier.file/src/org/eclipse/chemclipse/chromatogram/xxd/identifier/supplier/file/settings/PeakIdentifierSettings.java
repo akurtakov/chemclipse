@@ -22,6 +22,7 @@ import org.eclipse.chemclipse.support.settings.FileSettingProperty;
 import org.eclipse.chemclipse.support.settings.FileSettingProperty.DialogType;
 import org.eclipse.chemclipse.support.settings.FloatSettingsProperty;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
+import org.eclipse.chemclipse.support.util.FileListUtil;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -30,9 +31,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 @GeneratedIdentifierSettings
 public class PeakIdentifierSettings extends AbstractPeakIdentifierSettingsMSD implements IFileIdentifierSettings {
 
-	@JsonProperty(value = "Library File", defaultValue = "")
-	@JsonPropertyDescription("Select the library file.")
-	@FileSettingProperty(dialogType = DialogType.OPEN_DIALOG, extensionNames = {"AMDIS (*.msl)", "NIST (*.msp)"}, validExtensions = {"*.msl;*.MSL", "*.msp;*.MSP"}, onlyDirectory = false, allowEmpty = false)
+	@JsonProperty(value = "Library File or Folder", defaultValue = "")
+	@JsonPropertyDescription("Select the library file or folder containing them.")
+	@FileSettingProperty(dialogType = DialogType.OPEN_DIALOG, onlyDirectory = false, allowEmpty = false)
 	private File libraryFile;
 
 	@JsonProperty(value = "Pre-Optimization", defaultValue = "false")
@@ -64,6 +65,9 @@ public class PeakIdentifierSettings extends AbstractPeakIdentifierSettingsMSD im
 	public String getMassSpectraFiles() {
 
 		if(libraryFile != null) {
+			if(libraryFile.isDirectory()) {
+				return FileListUtil.getAllContainingFilesAbsolutePath(libraryFile);
+			}
 			return libraryFile.getAbsolutePath();
 		} else {
 			return massSpectraFiles;
