@@ -27,10 +27,8 @@ import org.eclipse.chemclipse.msd.model.core.IRegularMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.Polarity;
 import org.eclipse.chemclipse.support.text.ValueFormat;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.charts.ChartSupport;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
-import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
 import org.eclipse.swtchart.extensions.core.IChartSettings;
 
 public class ScanDataSupport {
@@ -48,7 +46,6 @@ public class ScanDataSupport {
 	public static final String[] SIGNAL_TYPES_VSD = new String[]{SignalType.AUTO_DETECT.toString(), SignalType.CENTROID.toString(), SignalType.PROFILE.toString()};
 
 	private DecimalFormat decimalFormat = ValueFormat.getDecimalFormatEnglish("0.0##");
-	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
 	public String getRetentionTime(IScan scan) {
 
@@ -178,9 +175,9 @@ public class ScanDataSupport {
 
 	public void setDataTypeMSD(IChartSettings chartSettings) {
 
-		String titleX = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_MZ);
-		String titleY = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_INTENSITY);
-		String titleY1 = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
+		String titleX = ExtensionMessages.ion;
+		String titleY = ExtensionMessages.intensity;
+		String titleY1 = ExtensionMessages.relativeIntensity;
 
 		ChartSupport.setPrimaryAxisSet(chartSettings, titleX, true, titleY);
 		ChartSupport.clearSecondaryAxes(chartSettings);
@@ -189,10 +186,10 @@ public class ScanDataSupport {
 
 	public void setDataTypeCSD(IChartSettings chartSettings) {
 
-		String titleX = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_MILLISECONDS);
-		String titleX1 = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_MINUTES);
-		String titleY = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_INTENSITY);
-		String titleY1 = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
+		String titleX = ExtensionMessages.miliseconds;
+		String titleX1 = ExtensionMessages.minutes;
+		String titleY = ExtensionMessages.intensity;
+		String titleY1 = ExtensionMessages.relativeIntensity;
 
 		ChartSupport.setPrimaryAxisSet(chartSettings, titleX, false, titleY);
 		ChartSupport.clearSecondaryAxes(chartSettings);
@@ -202,9 +199,9 @@ public class ScanDataSupport {
 
 	public void setDataTypeWSD(IChartSettings chartSettings) {
 
-		String titleX = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_WAVELENGTH);
-		String titleY = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_INTENSITY);
-		String titleY1 = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
+		String titleX = ExtensionMessages.wavelength;
+		String titleY = ExtensionMessages.intensity;
+		String titleY1 = ExtensionMessages.relativeIntensity;
 
 		ChartSupport.setPrimaryAxisSet(chartSettings, titleX, true, titleY);
 		ChartSupport.clearSecondaryAxes(chartSettings);
@@ -213,9 +210,9 @@ public class ScanDataSupport {
 
 	public void setDataTypeVSD(IChartSettings chartSettings) {
 
-		String titleX = "Wavenumber";
-		String titleY = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_INTENSITY);
-		String titleY1 = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
+		String titleX = ExtensionMessages.wavenumber;
+		String titleY = ExtensionMessages.intensity;
+		String titleY1 = ExtensionMessages.relativeIntensity;
 
 		ChartSupport.setPrimaryAxisSet(chartSettings, titleX, true, titleY);
 		ChartSupport.clearSecondaryAxes(chartSettings);

@@ -285,21 +285,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static final String P_SCAN_CHART_FIXED_RANGE_STOP_Y = "scanChartFixedRangeStopY";
 	public static final double DEF_SCAN_CHART_FIXED_RANGE_STOP_Y = 0.0d;
 
-	public static final String P_TITLE_X_AXIS_MZ = "titleXAxisMZ";
-	public static final String DEF_TITLE_X_AXIS_MZ = "Ion [m/z]";
-	public static final String P_TITLE_X_AXIS_PARENT_MZ = "titleXAxisParentMZ";
-	public static final String DEF_TITLE_X_AXIS_PARENT_MZ = "Parent Ion [m/z]";
-	public static final String P_TITLE_X_AXIS_PARENT_RESOLUTION = "titleXAxisParentResolution";
-	public static final String DEF_TITLE_X_AXIS_PARENT_RESOLUTION = "Parent Resolution";
-	public static final String P_TITLE_X_AXIS_DAUGHTER_MZ = "titleXAxisDaughterMZ";
-	public static final String DEF_TITLE_X_AXIS_DAUGHTER_MZ = "Daughther Ion [m/z]";
-	public static final String P_TITLE_X_AXIS_DAUGHTER_RESOLUTION = "titleXAxisDaughterResolution";
-	public static final String DEF_TITLE_X_AXIS_DAUGHTER_RESOLUTION = "Daughter Resolution";
-	public static final String P_TITLE_X_AXIS_COLLISION_ENERGY = "titleXAxisCollisionEnergy";
-	public static final String DEF_TITLE_X_AXIS_COLLISION_ENERGY = "Collision Energy [eV]";
-	public static final String P_TITLE_X_AXIS_WAVELENGTH = "titleXAxisWavelength";
-	public static final String DEF_TITLE_X_AXIS_WAVELENGTH = "Wavelength [nm]";
-
 	public static final String P_TRACES_VIRTUAL_TABLE = "tracesVirtualTable";
 	public static final int DEF_TRACES_VIRTUAL_TABLE = 5000;
 	public static final String P_LIMIT_SIM_TRACES = "limitSimTraces";
@@ -590,8 +575,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static final String P_CHROMATOGRAM_SHOW_REFERENCES_COMBO = "chromatogramShowReferencesCombo";
 	public static final boolean DEF_CHROMATOGRAM_SHOW_REFERENCES_COMBO = false;
 
-	public static final String P_TITLE_X_AXIS_MILLISECONDS = "titleXAxisMilliseconds";
-	public static final String DEF_TITLE_X_AXIS_MILLISECONDS = "Time [ms]";
 	public static final String P_FORMAT_X_AXIS_MILLISECONDS = "formatXAxisMilliseconds";
 	public static final String DEF_FORMAT_X_AXIS_MILLISECONDS = "0.###";
 	public static final String P_SHOW_X_AXIS_MILLISECONDS = "showXAxisMilliseconds";
@@ -603,8 +586,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static final String P_SHOW_X_AXIS_TITLE_MILLISECONDS = "showXAxisTitleMilliseconds";
 	public static final boolean DEF_SHOW_X_AXIS_TITLE_MILLISECONDS = true;
 
-	public static final String P_TITLE_X_AXIS_RETENTION_INDEX = "titleXAxisRetentionIndex";
-	public static final String DEF_TITLE_X_AXIS_RETENTION_INDEX = "Retention Index";
 	public static final String P_FORMAT_X_AXIS_RETENTION_INDEX = "formatXAxisRetentionIndex";
 	public static final String DEF_FORMAT_X_AXIS_RETENTION_INDEX = "0.#";
 	public static final String P_SHOW_X_AXIS_RETENTION_INDEX = "showXAxisRetentionIndex";
@@ -616,8 +597,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static final String P_SHOW_X_AXIS_TITLE_RETENTION_INDEX = "showXAxisTitleRetentionIndex";
 	public static final boolean DEF_SHOW_X_AXIS_TITLE_RETENTION_INDEX = true;
 
-	public static final String P_TITLE_X_AXIS_SECONDS = "titleXAxisSeconds";
-	public static final String DEF_TITLE_X_AXIS_SECONDS = "Time [s]";
 	public static final String P_FORMAT_X_AXIS_SECONDS = "formatXAxisSeconds";
 	public static final String DEF_FORMAT_X_AXIS_SECONDS = "0.###";
 	public static final String P_SHOW_X_AXIS_SECONDS = "showXAxisSeconds";
@@ -629,8 +608,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static final String P_SHOW_X_AXIS_TITLE_SECONDS = "showXAxisTitleSeconds";
 	public static final boolean DEF_SHOW_X_AXIS_TITLE_SECONDS = true;
 
-	public static final String P_TITLE_X_AXIS_MINUTES = "titleXAxisMinutes";
-	public static final String DEF_TITLE_X_AXIS_MINUTES = "Time [min]";
 	public static final String P_FORMAT_X_AXIS_MINUTES = "formatXAxisMinutes";
 	public static final String DEF_FORMAT_X_AXIS_MINUTES = "0.###";
 	public static final String P_SHOW_X_AXIS_MINUTES = "showXAxisMinutes";
@@ -661,8 +638,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static final String P_SHOW_X_AXIS_TITLE_SCANS = "showXAxisTitleScans";
 	public static final boolean DEF_SHOW_X_AXIS_TITLE_SCANS = true;
 
-	public static final String P_TITLE_Y_AXIS_INTENSITY = "titleYAxisIntensity";
-	public static final String DEF_TITLE_Y_AXIS_INTENSITY = "Intensity";
 	public static final String P_FORMAT_Y_AXIS_INTENSITY = "formatYAxisIntensity";
 	public static final String DEF_FORMAT_Y_AXIS_INTENSITY = "0.0#E0";
 	public static final String P_SHOW_Y_AXIS_INTENSITY = "showYAxisIntensity";
@@ -674,8 +649,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static final String P_SHOW_Y_AXIS_TITLE_INTENSITY = "showYAxisTitleIntensity";
 	public static final boolean DEF_SHOW_Y_AXIS_TITLE_INTENSITY = true;
 
-	public static final String P_TITLE_Y_AXIS_RELATIVE_INTENSITY = "titleYAxisRelativeIntensity";
-	public static final String DEF_TITLE_Y_AXIS_RELATIVE_INTENSITY = "Intensity [%]";
 	public static final String P_FORMAT_Y_AXIS_RELATIVE_INTENSITY = "formatYAxisRelativeIntensity";
 	public static final String DEF_FORMAT_Y_AXIS_RELATIVE_INTENSITY = "0.###";
 	public static final String P_SHOW_Y_AXIS_RELATIVE_INTENSITY = "showYAxisRelativeIntensity";
@@ -950,14 +923,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 		putDefault(P_SCAN_CHART_FIXED_RANGE_START_Y, DEF_SCAN_CHART_FIXED_RANGE_START_Y);
 		putDefault(P_SCAN_CHART_FIXED_RANGE_STOP_Y, DEF_SCAN_CHART_FIXED_RANGE_STOP_Y);
 
-		putDefault(P_TITLE_X_AXIS_MZ, DEF_TITLE_X_AXIS_MZ);
-		putDefault(P_TITLE_X_AXIS_PARENT_MZ, DEF_TITLE_X_AXIS_PARENT_MZ);
-		putDefault(P_TITLE_X_AXIS_PARENT_RESOLUTION, DEF_TITLE_X_AXIS_PARENT_RESOLUTION);
-		putDefault(P_TITLE_X_AXIS_DAUGHTER_MZ, DEF_TITLE_X_AXIS_DAUGHTER_MZ);
-		putDefault(P_TITLE_X_AXIS_DAUGHTER_RESOLUTION, DEF_TITLE_X_AXIS_DAUGHTER_RESOLUTION);
-		putDefault(P_TITLE_X_AXIS_COLLISION_ENERGY, DEF_TITLE_X_AXIS_COLLISION_ENERGY);
-		putDefault(P_TITLE_X_AXIS_WAVELENGTH, DEF_TITLE_X_AXIS_WAVELENGTH);
-
 		putDefault(P_TRACES_VIRTUAL_TABLE, DEF_TRACES_VIRTUAL_TABLE);
 		putDefault(P_LIMIT_SIM_TRACES, DEF_LIMIT_SIM_TRACES);
 		putDefault(P_HYBRID_SEARCH_MOL_WEIGHT_MIN, DEF_HYBRID_SEARCH_MOL_WEIGHT_MIN);
@@ -1189,28 +1154,24 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 		putDefault(P_CHROMATOGRAM_SHOW_METHODS_TOOLBAR, DEF_CHROMATOGRAM_SHOW_METHODS_TOOLBAR);
 		putDefault(P_CHROMATOGRAM_SHOW_REFERENCES_COMBO, DEF_CHROMATOGRAM_SHOW_REFERENCES_COMBO);
 
-		putDefault(P_TITLE_X_AXIS_MILLISECONDS, DEF_TITLE_X_AXIS_MILLISECONDS);
 		putDefault(P_FORMAT_X_AXIS_MILLISECONDS, DEF_FORMAT_X_AXIS_MILLISECONDS);
 		putDefault(P_SHOW_X_AXIS_MILLISECONDS, DEF_SHOW_X_AXIS_MILLISECONDS);
 		putDefault(P_POSITION_X_AXIS_MILLISECONDS, DEF_POSITION_X_AXIS_MILLISECONDS);
 		putDefault(P_GRIDLINE_STYLE_X_AXIS_MILLISECONDS, DEF_GRIDLINE_STYLE_X_AXIS_MILLISECONDS);
 		putDefault(P_SHOW_X_AXIS_TITLE_MILLISECONDS, DEF_SHOW_X_AXIS_TITLE_MILLISECONDS);
 
-		putDefault(P_TITLE_X_AXIS_RETENTION_INDEX, DEF_TITLE_X_AXIS_RETENTION_INDEX);
 		putDefault(P_FORMAT_X_AXIS_RETENTION_INDEX, DEF_FORMAT_X_AXIS_RETENTION_INDEX);
 		putDefault(P_SHOW_X_AXIS_RETENTION_INDEX, DEF_SHOW_X_AXIS_RETENTION_INDEX);
 		putDefault(P_POSITION_X_AXIS_RETENTION_INDEX, DEF_POSITION_X_AXIS_RETENTION_INDEX);
 		putDefault(P_GRIDLINE_STYLE_X_AXIS_RETENTION_INDEX, DEF_GRIDLINE_STYLE_X_AXIS_RETENTION_INDEX);
 		putDefault(P_SHOW_X_AXIS_TITLE_RETENTION_INDEX, DEF_SHOW_X_AXIS_TITLE_RETENTION_INDEX);
 
-		putDefault(P_TITLE_X_AXIS_SECONDS, DEF_TITLE_X_AXIS_SECONDS);
 		putDefault(P_FORMAT_X_AXIS_SECONDS, DEF_FORMAT_X_AXIS_SECONDS);
 		putDefault(P_SHOW_X_AXIS_SECONDS, DEF_SHOW_X_AXIS_SECONDS);
 		putDefault(P_POSITION_X_AXIS_SECONDS, DEF_POSITION_X_AXIS_SECONDS);
 		putDefault(P_GRIDLINE_STYLE_X_AXIS_SECONDS, DEF_GRIDLINE_STYLE_X_AXIS_SECONDS);
 		putDefault(P_SHOW_X_AXIS_TITLE_SECONDS, DEF_SHOW_X_AXIS_TITLE_SECONDS);
 
-		putDefault(P_TITLE_X_AXIS_MINUTES, DEF_TITLE_X_AXIS_MINUTES);
 		putDefault(P_FORMAT_X_AXIS_MINUTES, DEF_FORMAT_X_AXIS_MINUTES);
 		putDefault(P_SHOW_X_AXIS_MINUTES, DEF_SHOW_X_AXIS_MINUTES);
 		putDefault(P_POSITION_X_AXIS_MINUTES, DEF_POSITION_X_AXIS_MINUTES);
@@ -1227,14 +1188,12 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 		putDefault(P_GRIDLINE_STYLE_X_AXIS_SCANS, DEF_GRIDLINE_STYLE_X_AXIS_SCANS);
 		putDefault(P_SHOW_X_AXIS_TITLE_SCANS, DEF_SHOW_X_AXIS_TITLE_SCANS);
 
-		putDefault(P_TITLE_Y_AXIS_INTENSITY, DEF_TITLE_Y_AXIS_INTENSITY);
 		putDefault(P_FORMAT_Y_AXIS_INTENSITY, DEF_FORMAT_Y_AXIS_INTENSITY);
 		putDefault(P_SHOW_Y_AXIS_INTENSITY, DEF_SHOW_Y_AXIS_INTENSITY);
 		putDefault(P_POSITION_Y_AXIS_INTENSITY, DEF_POSITION_Y_AXIS_INTENSITY);
 		putDefault(P_GRIDLINE_STYLE_Y_AXIS_INTENSITY, DEF_GRIDLINE_STYLE_Y_AXIS_INTENSITY);
 		putDefault(P_SHOW_Y_AXIS_TITLE_INTENSITY, DEF_SHOW_Y_AXIS_TITLE_INTENSITY);
 
-		putDefault(P_TITLE_Y_AXIS_RELATIVE_INTENSITY, DEF_TITLE_Y_AXIS_RELATIVE_INTENSITY);
 		putDefault(P_FORMAT_Y_AXIS_RELATIVE_INTENSITY, DEF_FORMAT_Y_AXIS_RELATIVE_INTENSITY);
 		putDefault(P_SHOW_Y_AXIS_RELATIVE_INTENSITY, DEF_SHOW_Y_AXIS_RELATIVE_INTENSITY);
 		putDefault(P_POSITION_Y_AXIS_RELATIVE_INTENSITY, DEF_POSITION_Y_AXIS_RELATIVE_INTENSITY);

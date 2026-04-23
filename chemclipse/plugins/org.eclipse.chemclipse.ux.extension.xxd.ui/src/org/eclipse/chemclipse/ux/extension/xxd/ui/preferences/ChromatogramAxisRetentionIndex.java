@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -35,7 +35,6 @@ public class ChromatogramAxisRetentionIndex extends FieldEditorPreferencePage im
 	@Override
 	public void createFieldEditors() {
 
-		addField(new StringFieldEditor(PreferenceSupplier.P_TITLE_X_AXIS_RETENTION_INDEX, ExtensionMessages.title + ":", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceSupplier.P_FORMAT_X_AXIS_RETENTION_INDEX, ExtensionMessages.format + ":", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_SHOW_X_AXIS_RETENTION_INDEX, ExtensionMessages.show, getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_POSITION_X_AXIS_RETENTION_INDEX, ExtensionMessages.position + ":", ChartOptions.POSITIONS, getFieldEditorParent()));

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -35,7 +35,6 @@ public class ChromatogramAxisMinutes extends FieldEditorPreferencePage implement
 	@Override
 	public void createFieldEditors() {
 
-		addField(new StringFieldEditor(PreferenceSupplier.P_TITLE_X_AXIS_MINUTES, ExtensionMessages.title + ":", getFieldEditorParent()));
 		addField(new StringFieldEditor(PreferenceSupplier.P_FORMAT_X_AXIS_MINUTES, ExtensionMessages.format + ":", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_SHOW_X_AXIS_MINUTES, ExtensionMessages.show, getFieldEditorParent()));
 		addField(new ComboFieldEditor(PreferenceSupplier.P_POSITION_X_AXIS_MINUTES, ExtensionMessages.position + ":", ChartOptions.POSITIONS, getFieldEditorParent()));

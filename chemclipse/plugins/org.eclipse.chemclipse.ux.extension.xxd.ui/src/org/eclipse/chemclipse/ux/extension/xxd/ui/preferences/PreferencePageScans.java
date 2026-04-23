@@ -23,7 +23,6 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.ScanIdentifierUI;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.ComboFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
-import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
@@ -39,21 +38,6 @@ public class PreferencePageScans extends FieldEditorPreferencePage implements IW
 
 	@Override
 	public void createFieldEditors() {
-
-		addField(new SpacerFieldEditor(getFieldEditorParent()));
-		addField(new LabelFieldEditor("General chromatogram and scan axis titles.", getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceSupplier.P_TITLE_Y_AXIS_INTENSITY, "Intensity:", getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY, "Relative Intensity:", getFieldEditorParent()));
-
-		addField(new SpacerFieldEditor(getFieldEditorParent()));
-		addField(new LabelFieldEditor("When changing the label fields, a restart is required.", getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceSupplier.P_TITLE_X_AXIS_MZ, "Ion [m/z]:", getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceSupplier.P_TITLE_X_AXIS_PARENT_MZ, "Parent Ion [m/z]:", getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceSupplier.P_TITLE_X_AXIS_PARENT_RESOLUTION, "Parent Resolution:", getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceSupplier.P_TITLE_X_AXIS_DAUGHTER_MZ, "Daughter Ion [m/z]:", getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceSupplier.P_TITLE_X_AXIS_DAUGHTER_RESOLUTION, "Daughter Resolution:", getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceSupplier.P_TITLE_X_AXIS_COLLISION_ENERGY, "Collision Energy [eV]:", getFieldEditorParent()));
-		addField(new StringFieldEditor(PreferenceSupplier.P_TITLE_X_AXIS_WAVELENGTH, "Wavelength [nm]:", getFieldEditorParent()));
 
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new SpinnerFieldEditor(PreferenceSupplier.P_SCAN_LABEL_HIGHEST_INTENSITIES, "Label Intensities:", PreferenceSupplier.MIN_SCAN_LABEL_HIGHEST_INTENSITIES, PreferenceSupplier.MAX_SCAN_LABEL_HIGHEST_INTENSITIES, getFieldEditorParent()));

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -13,10 +13,9 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.charts;
 
-import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.custom.IRangeSupport;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swtchart.IAxis;
@@ -35,8 +34,6 @@ import org.eclipse.swtchart.extensions.core.SecondaryAxisSettings;
 import org.eclipse.swtchart.extensions.linecharts.LineChart;
 
 public class ChromatogramChart extends LineChart implements IRangeSupport {
-
-	private final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
 	private String titleSeconds = "";
 	private String titleMinutes = "";
@@ -158,9 +155,9 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		/*
 		 * Initialize secondary axis titles.
 		 */
-		titleSeconds = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_SECONDS);
-		titleMinutes = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_MINUTES);
-		titleRelativeIntensity = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
+		titleSeconds = ExtensionMessages.seconds;
+		titleMinutes = ExtensionMessages.minutes;
+		titleRelativeIntensity = ExtensionMessages.relativeIntensity;
 
 		IChartSettings chartSettings = getChartSettings();
 		chartSettings.setTitle("");
@@ -189,7 +186,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 
 		IChartSettings chartSettings = getChartSettings();
 		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
-		primaryAxisSettingsX.setTitle(preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_MILLISECONDS));
+		primaryAxisSettingsX.setTitle(ExtensionMessages.miliseconds);
 
 		String positionNode = PreferenceSupplier.P_POSITION_X_AXIS_MILLISECONDS;
 		String patternNode = PreferenceSupplier.P_FORMAT_X_AXIS_MILLISECONDS;
@@ -205,7 +202,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 
 		IChartSettings chartSettings = getChartSettings();
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
-		primaryAxisSettingsY.setTitle(preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_INTENSITY));
+		primaryAxisSettingsY.setTitle(ExtensionMessages.intensity);
 
 		String positionNode = PreferenceSupplier.P_POSITION_Y_AXIS_INTENSITY;
 		String patternNode = PreferenceSupplier.P_FORMAT_Y_AXIS_INTENSITY;
@@ -229,7 +226,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_RELATIVE_INTENSITY);
 		boolean isShowAxisTitle = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_TITLE_RELATIVE_INTENSITY);
 
-		String title = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
+		String title = ExtensionMessages.relativeIntensity;
 
 		if(isShowAxis) {
 			if(axisSettings == null) {
@@ -269,7 +266,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_SECONDS);
 		boolean isShowAxisTitle = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_TITLE_SECONDS);
 
-		String title = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_SECONDS);
+		String title = ExtensionMessages.seconds;
 
 		if(isShowAxis) {
 			if(axisSettings == null) {
@@ -309,7 +306,7 @@ public class ChromatogramChart extends LineChart implements IRangeSupport {
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_MINUTES);
 		boolean isShowAxisTitle = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_TITLE_MINUTES);
 
-		String title = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_MINUTES);
+		String title = ExtensionMessages.minutes;
 		boolean drawAxisLine = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_LINE_MINUTES);
 		boolean drawPositionMarker = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_POSITION_MARKER_MINUTES);
 
