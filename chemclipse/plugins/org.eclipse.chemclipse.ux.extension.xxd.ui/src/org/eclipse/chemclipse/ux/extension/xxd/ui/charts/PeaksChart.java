@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,9 +12,8 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.charts;
 
-import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swtchart.extensions.axisconverter.MillisecondsToMinuteConverter;
@@ -27,8 +26,6 @@ import org.eclipse.swtchart.extensions.core.SecondaryAxisSettings;
 import org.eclipse.swtchart.extensions.linecharts.LineChart;
 
 public class PeaksChart extends LineChart {
-
-	private final IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 
 	private String titleMinutes = "";
 	private String titleRelativeIntensity = "";
@@ -50,8 +47,8 @@ public class PeaksChart extends LineChart {
 		/*
 		 * Initialize secondary axis titles.
 		 */
-		titleMinutes = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_MINUTES);
-		titleRelativeIntensity = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
+		titleMinutes = ExtensionMessages.minutes;
+		titleRelativeIntensity = ExtensionMessages.relativeIntensity;
 
 		IChartSettings chartSettings = getChartSettings();
 		chartSettings.setOrientation(SWT.HORIZONTAL);
@@ -86,7 +83,7 @@ public class PeaksChart extends LineChart {
 
 		IChartSettings chartSettings = getChartSettings();
 		IPrimaryAxisSettings primaryAxisSettingsX = chartSettings.getPrimaryAxisSettingsX();
-		primaryAxisSettingsX.setTitle(preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_MILLISECONDS));
+		primaryAxisSettingsX.setTitle(ExtensionMessages.miliseconds);
 
 		String positionNode = PreferenceSupplier.P_POSITION_X_AXIS_MILLISECONDS_PEAKS;
 		String pattern = "0.0##";
@@ -102,7 +99,7 @@ public class PeaksChart extends LineChart {
 
 		IChartSettings chartSettings = getChartSettings();
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
-		primaryAxisSettingsY.setTitle(preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_INTENSITY));
+		primaryAxisSettingsY.setTitle(ExtensionMessages.intensity);
 
 		String positionNode = PreferenceSupplier.P_POSITION_Y_AXIS_INTENSITY_PEAKS;
 		String pattern = "0.0#E0";
@@ -126,7 +123,7 @@ public class PeaksChart extends LineChart {
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_MINUTES_PEAKS);
 		boolean isShowAxisTitle = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_X_AXIS_TITLE_MINUTES);
 
-		String title = preferenceStore.getString(PreferenceSupplier.P_TITLE_X_AXIS_MINUTES);
+		String title = ExtensionMessages.minutes;
 
 		if(isShowAxis) {
 			if(axisSettings == null) {
@@ -166,7 +163,7 @@ public class PeaksChart extends LineChart {
 		boolean isShowAxis = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_RELATIVE_INTENSITY_PEAKS);
 		boolean isShowAxisTitle = ChartSupport.getBoolean(PreferenceSupplier.P_SHOW_Y_AXIS_TITLE_RELATIVE_INTENSITY);
 
-		String title = preferenceStore.getString(PreferenceSupplier.P_TITLE_Y_AXIS_RELATIVE_INTENSITY);
+		String title = ExtensionMessages.intensity;
 
 		if(isShowAxis) {
 			if(axisSettings == null) {

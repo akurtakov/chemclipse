@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -230,7 +230,6 @@ public class ExtensionMessages extends NLS {
 	public static String additional;
 	public static String addRemoveColorCodes;
 	public static String chromatogramIntensityYAxis;
-	public static String title;
 	public static String format;
 	public static String show;
 	public static String position;
@@ -269,6 +268,17 @@ public class ExtensionMessages extends NLS {
 	public static String process;
 	public static String peak;
 	public static String scan;
+	// Chart
+	public static String relativeIntensity;
+	public static String ion;
+	public static String minutes;
+	public static String seconds;
+	public static String miliseconds;
+	public static String parentIon; // outdated terminology
+	public static String parentResolution;
+	public static String daughterIon; // outdated terminology
+	public static String daughterResolution;
+	public static String collisionEnergy;
 
 	static {
 		NLS.initializeMessages("org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.messages", ExtensionMessages.class); //$NON-NLS-1$

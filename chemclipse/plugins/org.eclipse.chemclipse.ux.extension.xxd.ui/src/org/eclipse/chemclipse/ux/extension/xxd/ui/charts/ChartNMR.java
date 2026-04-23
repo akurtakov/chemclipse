@@ -35,6 +35,7 @@ import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
+import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
@@ -173,7 +174,7 @@ public class ChartNMR extends LineChart {
 		primaryAxisSettingsX.setReversed(false);
 
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
-		primaryAxisSettingsY.setTitle("Intensity");
+		primaryAxisSettingsY.setTitle(ExtensionMessages.intensity);
 		primaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.0#E0"), new DecimalFormatSymbols(Locale.ENGLISH)));
 	}
 
@@ -230,7 +231,7 @@ public class ChartNMR extends LineChart {
 		primaryAxisSettingsX.setExtraSpaceTitle(10);
 
 		IPrimaryAxisSettings primaryAxisSettingsY = chartSettings.getPrimaryAxisSettingsY();
-		primaryAxisSettingsY.setTitle("Intensity");
+		primaryAxisSettingsY.setTitle(ExtensionMessages.intensity);
 		primaryAxisSettingsY.setDecimalFormat(new DecimalFormat(("0.0#E0"), new DecimalFormatSymbols(Locale.ENGLISH)));
 		primaryAxisSettingsY.setGridLineStyle(LineStyle.NONE);
 	}
