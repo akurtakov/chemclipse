@@ -32,7 +32,7 @@
             id="org.eclipse.chemclipse.chromatogram.xxd.batchprocess.ui.editors.BatchProcessJobEditor"
             name="Batch Process Job">
       </editor>
-   </extension>   
+   </extension>
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
