@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -24,7 +24,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
 import org.eclipse.chemclipse.support.validators.TraceValidator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
@@ -130,7 +129,7 @@ public class NamedTracesUI extends Composite {
 
 	/**
 	 * Could be null if none has been set.
-	 * 
+	 *
 	 * @return {@link NamedTraces}
 	 */
 	public NamedTraces getNamedTraces() {
@@ -140,7 +139,7 @@ public class NamedTracesUI extends Composite {
 
 	/**
 	 * Could be null if none is selected.
-	 * 
+	 *
 	 * @return {@link NamedTrace}
 	 */
 	public NamedTrace getNamedTrace() {
@@ -166,7 +165,7 @@ public class NamedTracesUI extends Composite {
 
 	private void createComboViewer(Composite composite) {
 
-		ComboViewer comboViewer = new EnhancedComboViewer(composite, SWT.READ_ONLY);
+		ComboViewer comboViewer = new ComboViewer(composite, SWT.READ_ONLY);
 		Combo combo = comboViewer.getCombo();
 		comboViewer.setContentProvider(ArrayContentProvider.getInstance());
 		comboViewer.setLabelProvider(new AbstractLabelProvider() {

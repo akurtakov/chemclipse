@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -22,7 +22,6 @@ import org.eclipse.chemclipse.model.support.ColumnIndexSupport;
 import org.eclipse.chemclipse.model.ui.runnables.LibrarySearchSupport;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -126,7 +125,7 @@ public class RetentionIndexLibrarySettingsDialog extends TitleAreaDialog {
 
 		createLabel(parent, "Use Services:");
 
-		ComboViewer comboViewer = new EnhancedComboViewer(parent, SWT.READ_ONLY);
+		ComboViewer comboViewer = new ComboViewer(parent, SWT.READ_ONLY);
 		Combo combo = comboViewer.getCombo();
 		comboViewer.setContentProvider(ListContentProvider.getInstance());
 		comboViewer.setLabelProvider(new AbstractLabelProvider() {

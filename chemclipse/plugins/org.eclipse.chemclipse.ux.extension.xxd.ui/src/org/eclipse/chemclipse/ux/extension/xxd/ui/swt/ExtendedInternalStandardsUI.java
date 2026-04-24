@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -28,7 +28,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.menu.ITableMenuEntry;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.chemclipse.support.ui.swt.ITableSettings;
 import org.eclipse.chemclipse.support.validators.ConcentrationValidator;
@@ -293,7 +292,7 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 
 	private void createTextName(Composite parent) {
 
-		comboName = new EnhancedComboViewer(parent, SWT.BORDER);
+		comboName = new ComboViewer(parent, SWT.BORDER);
 		Combo combo = comboName.getCombo();
 		comboName.setContentProvider(ArrayContentProvider.getInstance());
 		comboName.setLabelProvider(new AbstractLabelProvider() {
@@ -344,7 +343,7 @@ public class ExtendedInternalStandardsUI extends Composite implements IExtendedP
 
 	private void createComboViewerFactor(Composite parent) {
 
-		comboViewerFactor = new EnhancedComboViewer(parent, SWT.READ_ONLY);
+		comboViewerFactor = new ComboViewer(parent, SWT.READ_ONLY);
 		Combo combo = comboViewerFactor.getCombo();
 		comboViewerFactor.setContentProvider(ArrayContentProvider.getInstance());
 		comboViewerFactor.setLabelProvider(new AbstractLabelProvider() {

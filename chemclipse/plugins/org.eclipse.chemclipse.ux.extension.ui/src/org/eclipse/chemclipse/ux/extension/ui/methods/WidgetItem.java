@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - support file selection, refactor for new settings model, use validators, support for longs
@@ -26,7 +26,6 @@ import org.eclipse.chemclipse.support.text.ILabel;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.provider.AdapterLabelProvider;
 import org.eclipse.chemclipse.support.ui.services.IAnnotationWidgetService;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.ux.extension.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
 import org.eclipse.core.databinding.validation.IValidator;
@@ -356,7 +355,7 @@ public class WidgetItem {
 
 	private ComboViewer createGenericCombo(Composite parent, ComboSupplier<?> comboSupplier) {
 
-		ComboViewer comboViewer = new EnhancedComboViewer(parent, SWT.READ_ONLY);
+		ComboViewer comboViewer = new ComboViewer(parent, SWT.READ_ONLY);
 		Combo combo = comboViewer.getCombo();
 		comboViewer.setContentProvider(ArrayContentProvider.getInstance());
 		comboViewer.setLabelProvider(new AdapterLabelProvider());
@@ -424,7 +423,7 @@ public class WidgetItem {
 					style = SWT.OPEN;
 				}
 				/*
-				 * 
+				 *
 				 */
 				if(filechooser) {
 					/*
@@ -529,7 +528,7 @@ public class WidgetItem {
 
 	private ComboViewer createLabeledEnumComboViewerWidget(Composite parent, Enum<?>[] input) {
 
-		ComboViewer comboViewer = new EnhancedComboViewer(parent, SWT.READ_ONLY);
+		ComboViewer comboViewer = new ComboViewer(parent, SWT.READ_ONLY);
 		Combo combo = comboViewer.getCombo();
 		comboViewer.setContentProvider(ArrayContentProvider.getInstance());
 		comboViewer.setLabelProvider(new AbstractLabelProvider() {

@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Jan Holy - initial API and implementation
  * Philip Wenig - improvements settings
@@ -16,7 +16,6 @@ package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.wizards;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.ExtractionOption;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.ValueOption;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Algorithm;
@@ -116,7 +115,7 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 
 	private ComboViewer createComboViewerDescriptionOption(Composite parent) {
 
-		ComboViewer comboViewer = new EnhancedComboViewer(parent, SWT.READ_ONLY);
+		ComboViewer comboViewer = new ComboViewer(parent, SWT.READ_ONLY);
 		comboViewer.setContentProvider(ArrayContentProvider.getInstance());
 		comboViewer.setLabelProvider(new AbstractLabelProvider() {
 
@@ -153,7 +152,7 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 
 	private ComboViewer createComboViewerExtractionOption(Composite parent) {
 
-		ComboViewer comboViewer = new EnhancedComboViewer(parent, SWT.READ_ONLY);
+		ComboViewer comboViewer = new ComboViewer(parent, SWT.READ_ONLY);
 		Combo combo = comboViewer.getCombo();
 		comboViewer.setContentProvider(ArrayContentProvider.getInstance());
 		comboViewer.setLabelProvider(new AbstractLabelProvider() {
@@ -191,7 +190,7 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 
 	private ComboViewer createComboViewerValueOption(Composite parent) {
 
-		ComboViewer comboViewer = new EnhancedComboViewer(parent, SWT.READ_ONLY);
+		ComboViewer comboViewer = new ComboViewer(parent, SWT.READ_ONLY);
 		comboViewer.setContentProvider(ArrayContentProvider.getInstance());
 		comboViewer.setLabelProvider(new AbstractLabelProvider() {
 
@@ -289,7 +288,7 @@ public class PeakSettingsWizardPage extends AbstractAnalysisWizardPage {
 
 	private ComboViewer createComboViewerAlgorithm(Composite parent) {
 
-		ComboViewer comboViewer = new EnhancedComboViewer(parent, SWT.READ_ONLY);
+		ComboViewer comboViewer = new ComboViewer(parent, SWT.READ_ONLY);
 		comboViewer.setContentProvider(ArrayContentProvider.getInstance());
 		comboViewer.setLabelProvider(new AbstractLabelProvider() {
 
