@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -22,7 +22,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.PcaExtractionFileBinary;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.PcaExtractionFileText;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Algorithm;
@@ -132,7 +131,7 @@ public class FileSettingsWizardPage extends AbstractAnalysisWizardPage {
 
 	private ComboViewer createComboViewerAlgorithm(Composite parent) {
 
-		ComboViewer comboViewer = new EnhancedComboViewer(parent, SWT.READ_ONLY);
+		ComboViewer comboViewer = new ComboViewer(parent, SWT.READ_ONLY);
 		comboViewer.setContentProvider(ArrayContentProvider.getInstance());
 		comboViewer.setInput(algorithms);
 		comboViewer.setLabelProvider(new AbstractLabelProvider() {

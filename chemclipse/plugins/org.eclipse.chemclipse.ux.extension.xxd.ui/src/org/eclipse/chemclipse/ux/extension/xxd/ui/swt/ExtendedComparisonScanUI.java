@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - make this configurable, null check for scan
@@ -48,7 +48,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
@@ -181,7 +180,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 	/**
 	 * Update the mass spectrum and target.
-	 * 
+	 *
 	 * @param scanMSD
 	 * @param identificationTarget
 	 */
@@ -217,7 +216,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 	/**
 	 * Update unknown and reference mass spectrum.
-	 * 
+	 *
 	 * @param unknownMassSpectrum
 	 * @param referenceMassSpectrum
 	 */
@@ -445,7 +444,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 
 	private void createComboViewerComparisonScanOption(Composite parent) {
 
-		ComboViewer comboViewer = new EnhancedComboViewer(parent, SWT.READ_ONLY);
+		ComboViewer comboViewer = new ComboViewer(parent, SWT.READ_ONLY);
 		Combo combo = comboViewer.getCombo();
 		comboViewer.setContentProvider(ArrayContentProvider.getInstance());
 		comboViewer.setLabelProvider(new AbstractLabelProvider() {

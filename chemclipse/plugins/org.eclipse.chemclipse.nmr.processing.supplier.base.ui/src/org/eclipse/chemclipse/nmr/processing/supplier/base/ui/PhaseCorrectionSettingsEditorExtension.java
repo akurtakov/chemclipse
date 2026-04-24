@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Christoph Läubrich - initial API and implementation
  * Alexander Stark - re-factoring
@@ -21,7 +21,6 @@ import java.text.ParseException;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.settings.PhaseCorrectionSettings;
 import org.eclipse.chemclipse.nmr.processing.supplier.base.settings.PhaseCorrectionSettings.PivotPointSelection;
 import org.eclipse.chemclipse.support.text.ValueFormat;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedComboViewer;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.editors.EditorExtension;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
@@ -94,7 +93,7 @@ public class PhaseCorrectionSettingsEditorExtension implements EditorExtension {
 			Composite composite = new Composite(parent, SWT.NONE);
 			composite.setLayout(new GridLayout(2, false));
 			Text textField = new Text(composite, SWT.BORDER);
-			ComboViewer pivotCombo = new EnhancedComboViewer(composite);
+			ComboViewer pivotCombo = new ComboViewer(composite);
 
 			pivotCombo.setContentProvider(ArrayContentProvider.getInstance());
 			pivotCombo.setInput(PivotPointSelection.values());
