@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - add support for configuration, improve user feedback for unsaved changes
@@ -37,7 +37,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedCombo;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
@@ -179,7 +178,7 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 
 	/**
 	 * Getting the updates from the system.
-	 * 
+	 *
 	 * @param scan
 	 */
 	private void update(IScan scan, Display display) {
@@ -542,7 +541,7 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 
 	private void createDataType(Composite parent) {
 
-		Combo combo = EnhancedCombo.create(parent, SWT.READ_ONLY);
+		Combo combo = new Combo(parent, SWT.READ_ONLY);
 		combo.setToolTipText("Data Type (MS, MS/MS, FID, DAD, ...)");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		combo.setItems(ScanDataSupport.DATA_TYPES_DEFAULT);
@@ -563,7 +562,7 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 
 	private void createSignalType(Composite parent) {
 
-		Combo combo = EnhancedCombo.create(parent, SWT.READ_ONLY);
+		Combo combo = new Combo(parent, SWT.READ_ONLY);
 		combo.setToolTipText("Signal Type (Centroid: Bar Series, Profile: Line Series)");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		combo.setItems(ScanDataSupport.SIGNAL_TYPES_DEFAULT);

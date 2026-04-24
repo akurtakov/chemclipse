@@ -53,7 +53,6 @@ import org.eclipse.chemclipse.support.traces.TraceGeneric;
 import org.eclipse.chemclipse.support.traces.TraceHighResMSD;
 import org.eclipse.chemclipse.support.traces.TraceType;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedCombo;
 import org.eclipse.chemclipse.support.validators.TraceValidator;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.ui.support.PartSupport;
@@ -356,7 +355,7 @@ public class ExtendedChromatogramOverlayUI extends Composite implements IExtende
 
 	private void createOverlayTypeCombo(Composite parent) {
 
-		Combo combo = EnhancedCombo.create(parent, SWT.READ_ONLY);
+		Combo combo = new Combo(parent, SWT.READ_ONLY);
 		combo.setToolTipText("Select the overlay display type");
 		GridData gridData = new GridData();
 		gridData.minimumWidth = 150;

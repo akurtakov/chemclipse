@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -20,7 +20,6 @@ import org.eclipse.chemclipse.chromatogram.xxd.report.model.ChromatogramReportSu
 import org.eclipse.chemclipse.chromatogram.xxd.report.model.IChromatogramReportSupplierEntry;
 import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.logging.core.Logger;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedCombo;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -39,7 +38,7 @@ import org.eclipse.swt.widgets.Text;
 
 /**
  * @author Dr. Philip Wenig
- * 
+ *
  */
 public class ChromatogramReportEntriesWizardPage extends WizardPage {
 
@@ -63,7 +62,7 @@ public class ChromatogramReportEntriesWizardPage extends WizardPage {
 
 	/**
 	 * Returns the report supplier id.
-	 * 
+	 *
 	 * @return String
 	 * @throws NoConverterAvailableException
 	 */
@@ -127,7 +126,7 @@ public class ChromatogramReportEntriesWizardPage extends WizardPage {
 			 * Output converter combo box.
 			 */
 			String[] filterNames = reportSupport.getFilterNames();
-			chromatogramReportSupplierComboBox = EnhancedCombo.create(composite, SWT.NONE);
+			chromatogramReportSupplierComboBox = new Combo(composite, SWT.NONE);
 			chromatogramReportSupplierComboBox.setItems(filterNames);
 			gridData = new GridData(GridData.FILL_HORIZONTAL);
 			gridData.horizontalSpan = 2;

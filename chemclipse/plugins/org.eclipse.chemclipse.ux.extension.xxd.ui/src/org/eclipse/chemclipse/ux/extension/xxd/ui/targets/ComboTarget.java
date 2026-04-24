@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -23,7 +23,6 @@ import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.targets.TargetListUtil;
 import org.eclipse.chemclipse.model.targets.TargetValidator;
 import org.eclipse.chemclipse.model.updates.ITargetUpdateListener;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedCombo;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.preferences.PreferenceSupplier;
 import org.eclipse.core.runtime.IStatus;
@@ -73,7 +72,7 @@ public class ComboTarget extends Composite {
 	/**
 	 * This methods tries to create a target using the stored text.
 	 * It may return null if the target validation fails.
-	 * 
+	 *
 	 * @return {@link IIdentificationTarget}
 	 */
 	public IIdentificationTarget createTarget() {
@@ -118,7 +117,7 @@ public class ComboTarget extends Composite {
 
 	private Combo createCombo(Composite parent) {
 
-		Combo combo = EnhancedCombo.create(parent, SWT.NONE);
+		Combo combo = new Combo(parent, SWT.NONE);
 		combo.setText("");
 		combo.setToolTipText("Select a target or type in a new substance name.");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));

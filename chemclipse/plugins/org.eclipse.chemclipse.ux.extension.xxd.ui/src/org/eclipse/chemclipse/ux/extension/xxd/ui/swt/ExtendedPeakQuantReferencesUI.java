@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -20,7 +20,6 @@ import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedCombo;
 import org.eclipse.chemclipse.support.util.QuantReferencesListUtil;
 import org.eclipse.chemclipse.support.validators.QuantReferenceValidator;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
@@ -177,7 +176,7 @@ public class ExtendedPeakQuantReferencesUI extends Composite implements IExtende
 
 	private Combo createComboQuantReferences(Composite parent) {
 
-		Combo combo = EnhancedCombo.create(parent, SWT.NONE);
+		Combo combo = new Combo(parent, SWT.NONE);
 		combo.setText("");
 		combo.setToolTipText("Select a quantitation reference or type in a new reference name.");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));

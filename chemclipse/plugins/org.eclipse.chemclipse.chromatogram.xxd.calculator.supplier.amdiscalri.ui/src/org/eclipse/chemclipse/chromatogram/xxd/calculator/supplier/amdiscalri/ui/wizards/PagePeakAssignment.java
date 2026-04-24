@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -38,7 +38,6 @@ import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedCombo;
 import org.eclipse.chemclipse.support.ui.wizards.AbstractExtendedWizardPage;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.PeakTableRetentionIndexViewerUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.PeakTargetsViewerUI;
@@ -195,7 +194,7 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 
 	private Combo createComboStartIndex(Composite parent) {
 
-		Combo combo = EnhancedCombo.create(parent, SWT.NONE);
+		Combo combo = new Combo(parent, SWT.NONE);
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		combo.setItems(availableStandards);
 		combo.setToolTipText("Start Index");
@@ -213,7 +212,7 @@ public class PagePeakAssignment extends AbstractExtendedWizardPage {
 
 	private Combo createComboStopIndex(Composite parent) {
 
-		Combo combo = EnhancedCombo.create(parent, SWT.NONE);
+		Combo combo = new Combo(parent, SWT.NONE);
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		combo.setItems(availableStandards);
 		combo.setToolTipText("Stop Index");

@@ -28,7 +28,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedCombo;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.validation.RetentionTimeValidator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.part.support.EditorUpdateSupport;
@@ -217,7 +216,7 @@ public class PeakTargetTransferUI extends Composite implements IChromatogramSele
 
 	private Combo createTypeCombo(Composite parent) {
 
-		Combo combo = EnhancedCombo.create(parent, SWT.READ_ONLY);
+		Combo combo = new Combo(parent, SWT.READ_ONLY);
 		combo.setItems(TYPE_ITEMS);
 		combo.select(0);
 		combo.setToolTipText("Select a type (Peaks or Scans) to be transfered.");
