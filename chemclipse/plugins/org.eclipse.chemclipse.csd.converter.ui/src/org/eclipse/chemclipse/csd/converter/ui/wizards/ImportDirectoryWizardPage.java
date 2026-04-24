@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -15,7 +15,6 @@ package org.eclipse.chemclipse.csd.converter.ui.wizards;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.chemclipse.support.ui.swt.EnhancedCombo;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -74,7 +73,7 @@ public class ImportDirectoryWizardPage extends WizardPage {
 		GridData gridDataCombo = new GridData(GridData.FILL_HORIZONTAL);
 		gridDataCombo.grabExcessHorizontalSpace = true;
 		gridDataCombo.horizontalSpan = 2;
-		comboConverter = EnhancedCombo.create(container, SWT.NONE);
+		comboConverter = new Combo(container, SWT.NONE);
 		comboConverter.select(1);
 		comboConverter.setItems(CONVERTER_LABEL_XY, CONVERTER_LABEL_OCB);
 		comboConverter.setLayoutData(gridDataCombo);

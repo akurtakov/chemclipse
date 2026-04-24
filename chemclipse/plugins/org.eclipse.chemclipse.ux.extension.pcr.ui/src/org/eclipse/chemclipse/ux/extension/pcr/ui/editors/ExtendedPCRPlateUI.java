@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -20,7 +20,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedCombo;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.ux.extension.pcr.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.ux.extension.pcr.ui.swt.PCRPlate;
@@ -90,7 +89,7 @@ public class ExtendedPCRPlateUI extends Composite implements IExtendedPartUI {
 
 	private Combo createComboSubsets(Composite parent) {
 
-		Combo combo = EnhancedCombo.create(parent, SWT.READ_ONLY);
+		Combo combo = new Combo(parent, SWT.READ_ONLY);
 		combo.setToolTipText(ExtensionMessages.subsetSelection);
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		combo.addSelectionListener(new SelectionAdapter() {
@@ -113,7 +112,7 @@ public class ExtendedPCRPlateUI extends Composite implements IExtendedPartUI {
 
 	private Combo createComboChannels(Composite parent) {
 
-		Combo combo = EnhancedCombo.create(parent, SWT.READ_ONLY);
+		Combo combo = new Combo(parent, SWT.READ_ONLY);
 		combo.setToolTipText(ExtensionMessages.channelSpecification);
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.widthHint = 150;

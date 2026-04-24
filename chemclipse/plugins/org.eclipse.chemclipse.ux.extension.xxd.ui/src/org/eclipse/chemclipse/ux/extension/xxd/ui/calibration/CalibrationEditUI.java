@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedCombo;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.validation.CalibrationNameValidator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.validation.RetentionIndexValidator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.validation.RetentionTimeValidator;
@@ -160,7 +159,7 @@ public class CalibrationEditUI extends Composite {
 
 	private Combo createComboReferences(Composite parent) {
 
-		Combo combo = EnhancedCombo.create(parent, SWT.BORDER);
+		Combo combo = new Combo(parent, SWT.BORDER);
 		combo.setText("");
 		combo.setItems(getAvailableStandards());
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));

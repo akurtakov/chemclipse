@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -18,7 +18,6 @@ import java.util.List;
 import org.eclipse.chemclipse.support.l10n.SupportMessages;
 import org.eclipse.chemclipse.support.ui.internal.provider.ProjectContentProvider;
 import org.eclipse.chemclipse.support.ui.internal.provider.ProjectLabelProvider;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedCombo;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -106,7 +105,7 @@ public class SelectProjectWizardPage extends AbstractExtendedWizardPage {
 		 * Existing projects
 		 */
 		String[] items = getProjectItems();
-		comboExistingProjects = EnhancedCombo.create(composite, SWT.READ_ONLY);
+		comboExistingProjects = new Combo(composite, SWT.READ_ONLY);
 		comboExistingProjects.setItems(items);
 		comboExistingProjects.setLayoutData(gridData);
 		comboExistingProjects.addSelectionListener(new SelectionAdapter() {
@@ -206,7 +205,7 @@ public class SelectProjectWizardPage extends AbstractExtendedWizardPage {
 
 	/**
 	 * Returns the open and accessible project names.
-	 * 
+	 *
 	 * @return String[]
 	 */
 	private String[] getProjectItems() {
@@ -232,10 +231,10 @@ public class SelectProjectWizardPage extends AbstractExtendedWizardPage {
 
 	/**
 	 * Enables/Disables selected elements.
-	 * 
+	 *
 	 * choice = true (select project)
 	 * choice = false (create project)
-	 * 
+	 *
 	 * @param choice
 	 */
 	private void enableWidgets(boolean choice) {

@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -18,7 +18,6 @@ import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException
 import org.eclipse.chemclipse.converter.model.ChromatogramOutputEntry;
 import org.eclipse.chemclipse.converter.model.IChromatogramOutputEntry;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
-import org.eclipse.chemclipse.support.ui.swt.EnhancedCombo;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -52,7 +51,7 @@ public class ChromatogramOutputEntriesWizardPage extends WizardPage {
 
 	/**
 	 * Returns the converter id.
-	 * 
+	 *
 	 * @return String
 	 * @throws NoConverterAvailableException
 	 */
@@ -110,7 +109,7 @@ public class ChromatogramOutputEntriesWizardPage extends WizardPage {
 		 * Output converter combo box.
 		 */
 		String[] filterNames = converterSupport.getFilterNames(IConverterSupport.EXPORT_SUPPLIER);
-		chromatogramConverterComboBox = EnhancedCombo.create(composite, SWT.NONE);
+		chromatogramConverterComboBox = new Combo(composite, SWT.NONE);
 		chromatogramConverterComboBox.setItems(filterNames);
 		chromatogramConverterComboBox.setLayoutData(gridData);
 		/*

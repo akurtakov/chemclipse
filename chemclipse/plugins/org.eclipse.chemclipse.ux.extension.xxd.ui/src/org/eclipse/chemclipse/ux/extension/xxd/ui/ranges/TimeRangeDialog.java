@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.eclipse.chemclipse.support.ui.swt.EnhancedCombo;
 import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -92,10 +91,7 @@ public class TimeRangeDialog extends Dialog {
 
 	private void createComboViewer(Composite parent) {
 
-		/*
-		 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=567652
-		 */
-		Combo combo = EnhancedCombo.create(parent, SWT.BORDER);
+		Combo combo = new Combo(parent, SWT.BORDER);
 		combo.setToolTipText("Select or type in a new name.");
 		combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
