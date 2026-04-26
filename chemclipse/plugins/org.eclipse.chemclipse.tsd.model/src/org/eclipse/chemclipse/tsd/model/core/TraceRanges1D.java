@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -146,18 +146,25 @@ public class TraceRanges1D extends ArrayList<TraceRange1D> {
 
 	private void loadRules(String input) {
 
-		String[] lines;
-		if(input.contains(SEPARATOR_TOKEN)) {
-			lines = input.split(SEPARATOR_TOKEN);
-		} else {
-			lines = new String[1];
-			lines[0] = input;
-		}
-
-		for(String line : lines) {
-			TraceRange1D traceRange = extract(line);
-			if(traceRange != null && !contains(traceRange)) {
-				add(traceRange);
+		if(input != null && !input.isBlank()) {
+			/*
+			 * Separate into lines.
+			 */
+			String[] lines;
+			if(input.contains(SEPARATOR_TOKEN)) {
+				lines = input.split(SEPARATOR_TOKEN);
+			} else {
+				lines = new String[1];
+				lines[0] = input;
+			}
+			/*
+			 * Parse 1D Traces.
+			 */
+			for(String line : lines) {
+				TraceRange1D traceRange = extract(line);
+				if(traceRange != null && !contains(traceRange)) {
+					add(traceRange);
+				}
 			}
 		}
 	}
