@@ -4,7 +4,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: MolPeak (SGH-C) UI
 Bundle-SymbolicName: org.eclipse.chemclipse.msd.classifier.supplier.molpeak.ui;singleton:=true
 Bundle-Version: 0.9.0.qualifier
-Bundle-Activator: org.eclipse.chemclipse.msd.classifier.supplier.molpeak.ui.Activator
 Bundle-Vendor: Chemclipse
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
