@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -55,7 +55,7 @@ public class ColumnUtil_1_Test {
 		ColumnField columnField = ColumnField.NAME;
 		assertEquals("Chromatogram", ColumnUtil.getColumnData(chromatogram, columnField, ""));
 		chromatogram.setFile(new File("Demo.ocb"));
-		assertEquals("Demo.ocb", ColumnUtil.getColumnData(chromatogram, columnField, ""));
+		assertEquals("Demo", ColumnUtil.getColumnData(chromatogram, columnField, ""));
 	}
 
 	@Test

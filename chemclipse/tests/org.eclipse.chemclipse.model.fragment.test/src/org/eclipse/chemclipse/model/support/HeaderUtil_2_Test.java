@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -56,7 +56,7 @@ public class HeaderUtil_2_Test {
 
 		HeaderField headerField = HeaderField.NAME;
 		HeaderUtil.setHeaderData(chromatogram, headerField, "Demo.ocb");
-		assertEquals("Demo.ocb", HeaderUtil.getHeaderData(chromatogram, headerField, ""));
+		assertEquals("Demo", HeaderUtil.getHeaderData(chromatogram, headerField, ""));
 	}
 
 	@Test
@@ -72,7 +72,7 @@ public class HeaderUtil_2_Test {
 
 		HeaderField headerField = HeaderField.NAME;
 		HeaderUtil.setHeaderData(chromatogram, headerField, "Demo.ocb", true);
-		assertEquals("Demo.ocb", HeaderUtil.getHeaderData(chromatogram, headerField, ""));
+		assertEquals("Demo", HeaderUtil.getHeaderData(chromatogram, headerField, ""));
 	}
 
 	@Test
@@ -80,7 +80,7 @@ public class HeaderUtil_2_Test {
 
 		HeaderField headerField = HeaderField.NAME;
 		HeaderUtil.setHeaderData(chromatogram, headerField, new File("Demo.ocb"));
-		assertEquals("Demo.ocb", HeaderUtil.getHeaderData(chromatogram, headerField, ""));
+		assertEquals("Demo", HeaderUtil.getHeaderData(chromatogram, headerField, ""));
 	}
 
 	@Test
@@ -88,7 +88,7 @@ public class HeaderUtil_2_Test {
 
 		HeaderField headerField = HeaderField.DEFAULT;
 		HeaderUtil.setHeaderData(chromatogram, headerField, new File("Demo.ocb"));
-		assertEquals("Demo.ocb", HeaderUtil.getHeaderData(chromatogram, HeaderField.NAME, ""));
+		assertEquals("Demo", HeaderUtil.getHeaderData(chromatogram, HeaderField.NAME, ""));
 	}
 
 	@Test

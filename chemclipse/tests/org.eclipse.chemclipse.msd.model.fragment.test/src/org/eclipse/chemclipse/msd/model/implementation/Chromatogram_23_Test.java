@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -41,6 +41,6 @@ public class Chromatogram_23_Test {
 
 		File file = new File("TestChromatogram.chrom");
 		chromatogram.setFile(file);
-		assertEquals("TestChromatogram.chrom", chromatogram.getName());
+		assertEquals("TestChromatogram", chromatogram.getName());
 	}
 }
