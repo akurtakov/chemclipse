@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.io.FilenameUtils;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.baseline.BaselineModel;
 import org.eclipse.chemclipse.model.baseline.IBaselineModel;
@@ -284,7 +285,7 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 	public String getName() {
 
 		if(file != null) {
-			return file.getName();
+			return FilenameUtils.getBaseName(file.getName());
 		} else {
 			String dataName = getDataName();
 			if(dataName != null && !dataName.isEmpty()) {
