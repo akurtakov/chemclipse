@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,12 +19,7 @@ public class VendorChromatogram extends AbstractChromatogramCSD implements IVend
 	private static final long serialVersionUID = 2347039581232324937L;
 
 	public VendorChromatogram() {
+
 		super();
-	}
-
-	@Override
-	public String getName() {
-
-		return extractNameFromFile("Chromatogram");
 	}
 }

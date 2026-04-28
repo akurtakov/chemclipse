@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,10 +17,4 @@ import org.eclipse.chemclipse.wsd.model.core.AbstractChromatogramWSD;
 public class VendorChromatogram extends AbstractChromatogramWSD implements IVendorChromatogram {
 
 	private static final long serialVersionUID = 8359641198674141730L;
-
-	@Override
-	public String getName() {
-
-		return extractNameFromFile("ARW-DAD");
-	}
 }

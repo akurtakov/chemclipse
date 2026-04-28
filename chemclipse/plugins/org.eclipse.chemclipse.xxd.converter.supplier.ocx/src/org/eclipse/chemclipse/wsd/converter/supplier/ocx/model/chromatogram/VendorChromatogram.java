@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Michael Chang.
+ * Copyright (c) 2015, 2026 Michael Chang.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -22,12 +22,6 @@ public class VendorChromatogram extends AbstractChromatogramWSD implements IVend
 	public VendorChromatogram() {
 
 		super();
-	}
-
-	@Override
-	public String getName() {
-
-		return extractNameFromFile("Chromatogram");
 	}
 
 	@Override
