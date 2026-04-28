@@ -160,18 +160,6 @@ public interface IChromatogram extends SegmentedMeasurement, IChromatogramOvervi
 	float getSignalToNoiseRatio(float abundance);
 
 	/**
-	 * Returns the chromatogram name from a directory.
-	 * E.g., if the filename is /.../chrom.D/DATA.MS, chrom will be returned.
-	 */
-	String extractNameFromDirectory(String nameDefault, String directoryExtension);
-
-	/**
-	 * Returns the chromatogram name from a file.
-	 * E.g., if the filename is /.../chrom.csv, chrom will be returned.
-	 */
-	String extractNameFromFile(String nameDefault);
-
-	/**
 	 * Returns the master chromatogram if it is set.
 	 * This method may return null.
 	 */

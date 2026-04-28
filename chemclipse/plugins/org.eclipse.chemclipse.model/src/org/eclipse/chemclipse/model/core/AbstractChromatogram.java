@@ -22,7 +22,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.StringTokenizer;
 
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.baseline.BaselineModel;
@@ -651,68 +650,6 @@ public abstract class AbstractChromatogram extends AbstractMeasurementTarget imp
 			};
 			SafeRunner.run(runnable);
 		}
-	}
-
-	@Override
-	public String extractNameFromDirectory(String nameDefault, String directoryExtension) {
-
-		File file = getFile();
-		if(file == null) {
-			return nameDefault;
-		}
-
-		StringTokenizer tokenizer = new StringTokenizer(getFile().getAbsolutePath(), File.separator);
-		int element = tokenizer.countTokens() - 1;
-		/*
-		 * Get the chromatogram directory.
-		 */
-		for(int i = 1; i < element; i++) {
-			if(tokenizer.hasMoreElements()) {
-				tokenizer.nextToken();
-			}
-		}
-		if(tokenizer.hasMoreElements()) {
-			nameDefault = tokenizer.nextToken();
-		}
-		/*
-		 * Shorten the directory. The extension is not needed, e.g. ".D" is not needed.
-		 */
-		if(nameDefault != null) {
-			nameDefault = nameDefault.substring(0, nameDefault.length() - directoryExtension.length());
-		}
-		return nameDefault;
-	}
-
-	@Override
-	public String extractNameFromFile(String nameDefault) {
-
-		File file = getFile();
-		if(file != null) {
-			String fileName = file.getName();
-			if(!"".equals(fileName) && fileName != null) {
-				/*
-				 * Extract the file name.
-				 */
-				String[] parts = fileName.split("\\.");
-				if(parts.length > 2) {
-					StringBuilder builder = new StringBuilder();
-					for(int i = 0; i < parts.length - 1; i++) {
-						builder.append(parts[i]);
-						builder.append(".");
-					}
-					String name = builder.toString();
-					nameDefault = name.substring(0, name.length() - 1);
-				} else {
-					/*
-					 * If there are not 2 parts, it's assumed that the file had no extension.
-					 */
-					if(parts.length == 2) {
-						nameDefault = parts[0];
-					}
-				}
-			}
-		}
-		return nameDefault;
 	}
 
 	@Override
