@@ -25,7 +25,6 @@ import org.eclipse.chemclipse.msd.model.xic.ExtractedIonSignal;
 import org.eclipse.chemclipse.msd.model.xic.ExtractedIonSignals;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignal;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignals;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -86,7 +85,7 @@ public class CalculatorSupport_4_Test {
 		IMarkedIons ionsToPreserve = new MarkedIons(MarkedTraceModus.INCLUDE);
 		ionsToPreserve.add(new MarkedIon(104));
 		ionsToPreserve.add(new MarkedIon(103));
-		noiseMassSpectrum = calculatorSupport.getNoiseMassSpectrum(combinedMassSpectrumCalculator, ionsToPreserve, new NullProgressMonitor());
+		noiseMassSpectrum = calculatorSupport.getNoiseMassSpectrum(combinedMassSpectrumCalculator, ionsToPreserve);
 	}
 
 	@Test

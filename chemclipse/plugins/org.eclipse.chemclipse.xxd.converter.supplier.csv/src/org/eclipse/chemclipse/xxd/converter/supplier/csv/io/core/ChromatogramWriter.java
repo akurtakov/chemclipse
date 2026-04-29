@@ -41,7 +41,6 @@ import org.eclipse.chemclipse.wsd.model.xwc.IExtractedWavelengthSignal;
 import org.eclipse.chemclipse.wsd.model.xwc.IExtractedWavelengthSignalExtractor;
 import org.eclipse.chemclipse.wsd.model.xwc.IExtractedWavelengthSignals;
 import org.eclipse.chemclipse.xxd.converter.supplier.csv.preferences.PreferenceSupplier;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ChromatogramWriter extends AbstractChromatogramWriter {
 
@@ -56,7 +55,7 @@ public class ChromatogramWriter extends AbstractChromatogramWriter {
 	public static final String RI_COLUMN = "RI";
 	public static final String TIC_COLUMN = "TIC";
 
-	public void writeChromatogram(File file, IChromatogram chromatogram, IProgressMonitor monitor) throws IOException {
+	public void writeChromatogram(File file, IChromatogram chromatogram) throws IOException {
 
 		/*
 		 * Master / References

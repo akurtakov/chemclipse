@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -32,7 +32,7 @@ public class PCRWriter {
 
 		File internalTemporaryFile = new File("rdml_data.xml");
 		PCRWriterVersion13 pcrWriter = new PCRWriterVersion13();
-		pcrWriter.writePlate(internalTemporaryFile, plate, monitor);
+		pcrWriter.writePlate(internalTemporaryFile, plate);
 		monitor.subTask("Compress the RDML");
 		try (ZipOutputStream zipOutputStream = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(file)))) {
 			zipOutputStream.setLevel(9);

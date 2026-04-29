@@ -37,17 +37,13 @@ public class Report1 extends AbstractReport {
 		IProcessingInfo<File> processingInfo = super.validate(file);
 
 		if(!processingInfo.hasErrorMessages()) {
-			if(settings instanceof ReportSettings1 reportSettings) {
-				ReportWriter1 chromatogramReport = new ReportWriter1();
-				try {
-					chromatogramReport.generate(file, append, chromatograms, reportSettings, monitor);
-					processingInfo.setProcessingResult(file);
-				} catch(IOException e) {
-					logger.warn(e);
-					processingInfo.addErrorMessage("Chromatogram Report", "The report couldn't be created. An error occured.");
-				}
-			} else {
-				logger.warn("The settings are not of type: " + ReportSettings1.class);
+			ReportWriter1 chromatogramReport = new ReportWriter1();
+			try {
+				chromatogramReport.generate(file, append, chromatograms, monitor);
+				processingInfo.setProcessingResult(file);
+			} catch(IOException e) {
+				logger.warn(e);
+				processingInfo.addErrorMessage("Chromatogram Report", "The report couldn't be created. An error occured.");
 			}
 		}
 

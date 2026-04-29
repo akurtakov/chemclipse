@@ -128,7 +128,7 @@ public class ChromatogramFileExportProcessSupplier implements IProcessTypeSuppli
 										 * WSD
 										 */
 										ChromatogramWriterWSD writer = new ChromatogramWriterWSD();
-										writer.writeChromatogram(file, version, chromatogramWSD, context.getProgressMonitor());
+										writer.writeChromatogram(file, chromatogramWSD, context.getProgressMonitor());
 									}
 								} catch(Exception e) {
 									logger.warn(e);

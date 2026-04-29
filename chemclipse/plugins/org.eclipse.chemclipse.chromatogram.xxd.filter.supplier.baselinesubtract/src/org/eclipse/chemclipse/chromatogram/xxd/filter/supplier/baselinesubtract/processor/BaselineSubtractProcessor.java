@@ -20,7 +20,6 @@ import org.eclipse.chemclipse.model.baseline.IBaselineModel;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 public class BaselineSubtractProcessor {
 
@@ -29,7 +28,7 @@ public class BaselineSubtractProcessor {
 	 * 
 	 * @param chromatogramSelection
 	 */
-	public static void removeBaseline(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
+	public static void removeBaseline(IChromatogramSelection chromatogramSelection) {
 
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 		int startScan = chromatogram.getScanNumber(chromatogramSelection.getStartRetentionTime());

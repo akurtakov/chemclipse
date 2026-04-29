@@ -50,7 +50,7 @@ public class SynonymsListUI extends ExtendedTableViewer {
 		setEditingSupport();
 	}
 
-	public void update(ILibraryInformation libraryInformation, boolean forceReload) {
+	public void update(ILibraryInformation libraryInformation) {
 
 		if(libraryInformation != null) {
 			setInput(libraryInformation.getSynonyms());

@@ -784,7 +784,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				IScanMSD scanMSD = subtractScanMSD(scanUnknown, scanReference);
+				IScanMSD scanMSD = subtractScanMSD(scanUnknown);
 				scanUnknown = copyScan(scanMSD, false);
 				if(scanUnknownMaster != null) {
 					scanUnknownMaster.setOptimizedMassSpectrum(scanUnknown);
@@ -798,7 +798,7 @@ public class ExtendedComparisonScanUI extends Composite implements IExtendedPart
 		buttonSubtractReference.set(button);
 	}
 
-	private IScanMSD subtractScanMSD(IScanMSD scanSource, IScanMSD scanSubtract) {
+	private IScanMSD subtractScanMSD(IScanMSD scanSource) {
 
 		/*
 		 * Settings

@@ -410,7 +410,7 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 		 * Update the content
 		 */
 		moleculeControl.get().setMoleculeImageService(MoleculeImageServiceSupport.getMoleculeImageServiceSelection());
-		moleculeControl.get().clear(display);
+		moleculeControl.get().clear();
 		updateContent(display);
 	}
 

@@ -21,7 +21,7 @@ public abstract class AbtractPeakModelVSD extends PeakModel implements IPeakMode
 
 	private static final long serialVersionUID = -7270343994063667596L;
 
-	public AbtractPeakModelVSD(IScan peakMaximum, IPeakIntensityValues peakIntensityValues, float startBackgroundAbundance, float stopBackgroundAbundance, int b) throws IllegalArgumentException, PeakException {
+	public AbtractPeakModelVSD(IScan peakMaximum, IPeakIntensityValues peakIntensityValues, float startBackgroundAbundance, float stopBackgroundAbundance) throws IllegalArgumentException, PeakException {
 
 		super(peakMaximum, peakIntensityValues, startBackgroundAbundance, stopBackgroundAbundance);
 	}

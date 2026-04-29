@@ -37,25 +37,25 @@ public class ScanTableComparator extends AbstractRecordTableComparator {
 		int sortOrder;
 		switch(dataType) {
 			case MSD_NOMINAL:
-				sortOrder = getNominalMSD(viewer, e1, e2);
+				sortOrder = getNominalMSD(e1, e2);
 				break;
 			case MSD_TANDEM:
-				sortOrder = getTandemMSD(viewer, e1, e2);
+				sortOrder = getTandemMSD(e1, e2);
 				break;
 			case MSD_HIGHRES:
-				sortOrder = getHighResolutionMSD(viewer, e1, e2);
+				sortOrder = getHighResolutionMSD(e1, e2);
 				break;
 			case CSD:
-				sortOrder = getCSD(viewer, e1, e2);
+				sortOrder = getCSD(e1, e2);
 				break;
 			case WSD:
-				sortOrder = getWSD(viewer, e1, e2);
+				sortOrder = getWSD(e1, e2);
 				break;
 			case VSD:
-				sortOrder = getVSD(viewer, e1, e2);
+				sortOrder = getVSD(e1, e2);
 				break;
 			case FSD:
-				sortOrder = getFSD(viewer, e1, e2);
+				sortOrder = getFSD(e1, e2);
 				break;
 			default:
 				sortOrder = 0;
@@ -63,7 +63,7 @@ public class ScanTableComparator extends AbstractRecordTableComparator {
 		return sortOrder;
 	}
 
-	private int getNominalMSD(Viewer viewer, Object e1, Object e2) {
+	private int getNominalMSD(Object e1, Object e2) {
 
 		int sortOrder = 0;
 		if(e1 instanceof IIon ion1 && e2 instanceof IIon ion2) {
@@ -88,7 +88,7 @@ public class ScanTableComparator extends AbstractRecordTableComparator {
 		return sortOrder;
 	}
 
-	private int getTandemMSD(Viewer viewer, Object e1, Object e2) {
+	private int getTandemMSD(Object e1, Object e2) {
 
 		int sortOrder = 0;
 		if(e1 instanceof IIon ion1 && e2 instanceof IIon ion2) {
@@ -130,7 +130,7 @@ public class ScanTableComparator extends AbstractRecordTableComparator {
 		return sortOrder;
 	}
 
-	private int getHighResolutionMSD(Viewer viewer, Object e1, Object e2) {
+	private int getHighResolutionMSD(Object e1, Object e2) {
 
 		int sortOrder = 0;
 		if(e1 instanceof IIon ion1 && e2 instanceof IIon ion2) {
@@ -155,7 +155,7 @@ public class ScanTableComparator extends AbstractRecordTableComparator {
 		return sortOrder;
 	}
 
-	private int getCSD(Viewer viewer, Object e1, Object e2) {
+	private int getCSD(Object e1, Object e2) {
 
 		int sortOrder = 0;
 		if(e1 instanceof IScanCSD scanCSD1 && e2 instanceof IScanCSD scanCSD2) {
@@ -180,7 +180,7 @@ public class ScanTableComparator extends AbstractRecordTableComparator {
 		return sortOrder;
 	}
 
-	private int getWSD(Viewer viewer, Object e1, Object e2) {
+	private int getWSD(Object e1, Object e2) {
 
 		int sortOrder = 0;
 		if(e1 instanceof IScanSignalWSD scanSignalWSD1 && e2 instanceof IScanSignalWSD scanSignalWSD2) {
@@ -205,7 +205,7 @@ public class ScanTableComparator extends AbstractRecordTableComparator {
 		return sortOrder;
 	}
 
-	private int getVSD(Viewer viewer, Object e1, Object e2) {
+	private int getVSD(Object e1, Object e2) {
 
 		int sortOrder = 0;
 		if(e1 instanceof ISignalVSD signal1 && e2 instanceof ISignalVSD signal2) {
@@ -230,7 +230,7 @@ public class ScanTableComparator extends AbstractRecordTableComparator {
 		return sortOrder;
 	}
 
-	private int getFSD(Viewer viewer, Object e1, Object e2) {
+	private int getFSD(Object e1, Object e2) {
 
 		int sortOrder = 0;
 		if(e1 instanceof IScanSignalFSD scanSignalFSD1 && e2 instanceof IScanSignalFSD scanSignalFSD2) {

@@ -100,7 +100,7 @@ public class CalibrationFileExportProcessSupplier implements IProcessTypeSupplie
 									PreferenceSupplier.setListPathExport(fileDialog.getFilterPath());
 									File file = new File(path);
 									ChromatogramWriter writer = new ChromatogramWriter();
-									writer.writeChromatogram(file, chromatogram, processSettings, context.getProgressMonitor());
+									writer.writeChromatogram(file, chromatogram, processSettings);
 								} catch(Exception e) {
 									logger.warn(e);
 								}

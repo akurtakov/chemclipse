@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -44,7 +44,6 @@ import org.eclipse.chemclipse.xxd.converter.supplier.cml.model.v3.SpectrumData;
 import org.eclipse.chemclipse.xxd.converter.supplier.cml.model.v3.SpectrumType;
 import org.eclipse.chemclipse.xxd.converter.supplier.cml.model.v3.Xaxis;
 import org.eclipse.chemclipse.xxd.converter.supplier.cml.model.v3.Yaxis;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.xml.sax.SAXException;
 
 import jakarta.xml.bind.JAXBException;
@@ -53,7 +52,7 @@ public class ScanReader {
 
 	private static final Logger logger = Logger.getLogger(ScanReader.class);
 
-	public IVendorSpectrumVSD read(File file, IProgressMonitor monitor) {
+	public IVendorSpectrumVSD read(File file) {
 
 		IVendorSpectrumVSD vendorScan = null;
 		try {
@@ -127,8 +126,8 @@ public class ScanReader {
 							} else {
 								waveNumbers = Arrays.stream( //
 										StringUtils.split(array.getValue())) //
-										.map(Double::parseDouble) //
-										.toList(); //
+													.map(Double::parseDouble) //
+													.toList(); //
 							}
 						}
 					}
@@ -139,13 +138,13 @@ public class ScanReader {
 							if(array.getUnits().equals("cml:absorbance")) {
 								absorbances = Arrays.stream( //
 										StringUtils.split(array.getValue())) //
-										.map(Double::parseDouble) //
-										.toList();
+													.map(Double::parseDouble) //
+													.toList();
 							} else if(array.getUnits().equals("jcampUnits:transmittance")) {
 								transmittances = Arrays.stream( //
 										StringUtils.split(array.getValue())) //
-										.map(Double::parseDouble) //
-										.toList(); //
+														.map(Double::parseDouble) //
+														.toList(); //
 							}
 						}
 					}

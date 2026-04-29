@@ -37,7 +37,6 @@ import org.eclipse.chemclipse.msd.model.core.IChromatogramPeakMSD;
 import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
 import org.eclipse.chemclipse.support.text.ValueFormat;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ReportWriter2 {
 
@@ -51,7 +50,7 @@ public class ReportWriter2 {
 	 */
 	private Map<IChromatogram, Double> chromatogramAreaMap = new HashMap<>();
 
-	public void generate(File file, boolean append, List<IChromatogram> chromatograms, ReportSettings2 reportSettings, IProgressMonitor monitor) throws IOException {
+	public void generate(File file, boolean append, List<IChromatogram> chromatograms, ReportSettings2 reportSettings) throws IOException {
 
 		try (PrintWriter printWriter = new PrintWriter(new FileWriter(file, append))) {
 			for(IChromatogram chromatogram : chromatograms) {

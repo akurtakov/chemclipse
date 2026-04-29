@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -81,7 +81,7 @@ public class MethodFileSupport {
 		ProcessMethod newMethod = (ProcessMethod)processMethod;
 		newMethod.setSourceFile(file);
 		newMethod.setName(newMethod.getName());
-		writeFile(shell, file, newMethod, selectedSupplier);
+		writeFile(file, newMethod, selectedSupplier);
 
 		return true;
 	}
@@ -97,7 +97,7 @@ public class MethodFileSupport {
 		return extensions;
 	}
 
-	public static void writeFile(Shell shell, final File file, final IProcessMethod processMethod, final ISupplier supplier) {
+	public static void writeFile(final File file, final IProcessMethod processMethod, final ISupplier supplier) {
 
 		if(file == null || processMethod == null || supplier == null) {
 			return;

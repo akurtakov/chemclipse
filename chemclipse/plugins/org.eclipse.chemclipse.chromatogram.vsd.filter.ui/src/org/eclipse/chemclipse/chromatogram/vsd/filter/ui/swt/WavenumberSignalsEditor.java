@@ -180,7 +180,7 @@ public class WavenumberSignalsEditor extends Composite implements IChangeListene
 		SearchSupportUI searchSupportUI = new SearchSupportUI(parent, SWT.NONE);
 		searchSupportUI.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		searchSupportUI.setSearchListener((String searchText, boolean caseSensitive) -> {
-			tableViewer.get().setSearchText(searchText, caseSensitive);
+			tableViewer.get().setSearchText(searchText);
 		});
 
 		toolbarSearch.set(searchSupportUI);

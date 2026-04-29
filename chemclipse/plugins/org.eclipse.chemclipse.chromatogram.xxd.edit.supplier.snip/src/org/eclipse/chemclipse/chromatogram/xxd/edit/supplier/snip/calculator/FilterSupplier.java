@@ -47,7 +47,7 @@ public class FilterSupplier {
 		/*
 		 * Run the SNIP baseline calculation.
 		 */
-		SnipCalculator.calculateBaselineIntensityValues(intensityValues, iterations, monitor);
+		SnipCalculator.calculateBaselineIntensityValues(intensityValues, iterations);
 		/*
 		 * Subtract the values.
 		 */

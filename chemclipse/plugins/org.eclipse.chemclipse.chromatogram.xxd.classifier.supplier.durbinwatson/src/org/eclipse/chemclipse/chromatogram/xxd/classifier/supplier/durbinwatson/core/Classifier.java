@@ -21,7 +21,6 @@ import org.eclipse.chemclipse.chromatogram.xxd.classifier.supplier.durbinwatson.
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.supplier.durbinwatson.result.DurbinWatsonClassifierResult;
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.supplier.durbinwatson.result.IChromatogramResultDurbinWatson;
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.supplier.durbinwatson.result.IDurbinWatsonClassifierResult;
-import org.eclipse.chemclipse.chromatogram.xxd.classifier.supplier.durbinwatson.settings.ClassifierSettings;
 import org.eclipse.chemclipse.model.core.IMeasurementResult;
 import org.eclipse.chemclipse.model.implementation.MeasurementResult;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
@@ -39,17 +38,11 @@ public class Classifier extends AbstractChromatogramClassifier {
 	@Override
 	public IProcessingInfo<IChromatogramClassifierResult> applyClassifier(IChromatogramSelection chromatogramSelection, IChromatogramClassifierSettings chromatogramClassifierSettings, IProgressMonitor monitor) {
 
-		ClassifierSettings classifierSettings;
-		if(chromatogramClassifierSettings instanceof ClassifierSettings settings) {
-			classifierSettings = settings;
-		} else {
-			classifierSettings = new ClassifierSettings();
-		}
-		IProcessingInfo<IChromatogramClassifierResult> processingInfo = validate(chromatogramSelection, chromatogramClassifierSettings);
+		IProcessingInfo<IChromatogramClassifierResult> processingInfo = validate(chromatogramSelection);
 		if(!processingInfo.hasErrorMessages()) {
 			DurbinWatsonProcessor durbinWatsonProcessor = new DurbinWatsonProcessor();
 			IDurbinWatsonClassifierResult durbinWatsonClassifierResult = new DurbinWatsonClassifierResult(ResultStatus.OK, "The chromatogram has been classified.");
-			durbinWatsonProcessor.run(chromatogramSelection, classifierSettings, durbinWatsonClassifierResult, monitor);
+			durbinWatsonProcessor.run(chromatogramSelection, durbinWatsonClassifierResult, monitor);
 			IMeasurementResult<?> measurementResult = new MeasurementResult(IChromatogramResultDurbinWatson.NAME, IChromatogramResultDurbinWatson.IDENTIFIER, "This is the Durbin-Watson classifier result.", durbinWatsonClassifierResult);
 			chromatogramSelection.getChromatogram().addMeasurementResult(measurementResult);
 			processingInfo.setProcessingResult(durbinWatsonClassifierResult);

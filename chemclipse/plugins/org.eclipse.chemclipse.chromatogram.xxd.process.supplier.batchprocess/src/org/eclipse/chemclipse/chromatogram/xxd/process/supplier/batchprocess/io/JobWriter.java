@@ -33,11 +33,10 @@ import org.eclipse.chemclipse.converter.model.IChromatogramInputEntry;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.methods.IProcessEntry;
 import org.eclipse.chemclipse.processing.methods.IProcessMethod;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 public class JobWriter {
 
-	public void writeBatchProcessJob(File file, BatchProcessJob batchProcessJob, IProgressMonitor monitor) throws IOException, XMLStreamException {
+	public void writeBatchProcessJob(File file, BatchProcessJob batchProcessJob) throws IOException, XMLStreamException {
 
 		XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
 		try (BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(file))) {
@@ -55,7 +54,7 @@ public class JobWriter {
 			/*
 			 * Write the header and the list informations.
 			 */
-			writeBatchProcessJobHeader(eventWriter, eventFactory, batchProcessJob);
+			writeBatchProcessJobHeader(eventWriter, eventFactory);
 			writeComment(eventWriter, eventFactory, "Data Types");
 			writeDataTypes(eventWriter, eventFactory, List.of(batchProcessJob.getDataType()));
 			writeComment(eventWriter, eventFactory, "Chromatograms");
@@ -99,7 +98,7 @@ public class JobWriter {
 	 * @param batchProcessJob
 	 * @throws XMLStreamException
 	 */
-	private void writeBatchProcessJobHeader(XMLEventWriter eventWriter, XMLEventFactory eventFactory, BatchProcessJob batchProcessJob) throws XMLStreamException {
+	private void writeBatchProcessJobHeader(XMLEventWriter eventWriter, XMLEventFactory eventFactory) throws XMLStreamException {
 
 		/*
 		 * Element and content definition.

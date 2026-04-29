@@ -73,7 +73,7 @@ public class BatchJobEditor extends EditorPart implements IRunnableWithProgress 
 			try {
 				JobWriter writer = new JobWriter();
 				batchProcessJob = getBatchProcessJob(batchJobUI.getDataType());
-				writer.writeBatchProcessJob(file, batchProcessJob, monitor);
+				writer.writeBatchProcessJob(file, batchProcessJob);
 				updateDirtyStatus(false);
 			} catch(FileNotFoundException e) {
 				logger.warn(e);

@@ -158,7 +158,7 @@ public class DatabaseEditor extends EditorPart implements IChemClipseEditor {
 		}
 	}
 
-	public void updateObjects(List<Object> objects, String topic) {
+	public void updateObjects(List<Object> objects) {
 
 		if(objects.size() == 1) {
 			Object object = objects.get(0);
@@ -372,7 +372,7 @@ public class DatabaseEditor extends EditorPart implements IChemClipseEditor {
 					Object object = event.getProperty(property);
 					objects.add(object);
 				}
-				update(topic);
+				update();
 			} catch(Exception e) {
 				logger.warn(e + "\t" + event);
 			}
@@ -401,12 +401,12 @@ public class DatabaseEditor extends EditorPart implements IChemClipseEditor {
 		}
 	}
 
-	private void update(String topic) {
+	private void update() {
 
 		MassSpectrumLibraryUI massSpectrumLibraryUI = massSpectrumLibraryControl.get();
 		if(massSpectrumLibraryUI != null) {
 			if(massSpectrumLibraryUI.isVisible()) {
-				updateObjects(objects, topic);
+				updateObjects(objects);
 			}
 		}
 	}

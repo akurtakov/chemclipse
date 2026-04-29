@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -36,7 +36,7 @@ public class ExportRunnable implements IRunnableWithProgress {
 
 		try {
 			JobWriter jobWriter = new JobWriter();
-			jobWriter.writeBatchProcessJob(file, batchProcessJob, monitor);
+			jobWriter.writeBatchProcessJob(file, batchProcessJob);
 		} catch(Exception e) {
 			throw new InterruptedException("Failed to process the file: " + file.getPath() + ".");
 		}

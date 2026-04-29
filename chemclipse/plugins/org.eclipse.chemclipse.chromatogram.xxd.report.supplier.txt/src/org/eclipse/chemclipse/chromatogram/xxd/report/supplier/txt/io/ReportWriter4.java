@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -52,7 +52,7 @@ public class ReportWriter4 {
 		try (PrintWriter printWriter = new PrintWriter(new FileWriter(file, append))) {
 			for(IChromatogram chromatogram : chromatograms) {
 				printHeader(printWriter, chromatogram);
-				reportChromatogram(printWriter, chromatogram, monitor);
+				reportChromatogram(printWriter, chromatogram);
 			}
 		}
 	}
@@ -76,7 +76,7 @@ public class ReportWriter4 {
 	 * @param chromatogram
 	 * @param monitor
 	 */
-	private void reportChromatogram(PrintWriter printWriter, IChromatogram chromatogram, IProgressMonitor monitor) {
+	private void reportChromatogram(PrintWriter printWriter, IChromatogram chromatogram) {
 
 		List<IPeak> peaks = new ArrayList<>(chromatogram.getPeaks());
 		Collections.sort(peaks, peakComparator);

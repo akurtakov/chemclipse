@@ -41,7 +41,7 @@ public class ScanImportConverterNMR extends AbstractScanImportConverter {
 		if(!processingInfo.hasErrorMessages()) {
 			ScanReaderNMR scanReader = new ScanReaderNMR();
 			try {
-				IComplexSignalMeasurement<?> complexSignalMeasurement = scanReader.read(file, monitor);
+				IComplexSignalMeasurement<?> complexSignalMeasurement = scanReader.read(file);
 				ISpectrumNMR spectrumNMR = new SpectrumNMR();
 				spectrumNMR.setComplexSignalMeasurements(Collections.singleton(complexSignalMeasurement));
 				processingInfo.setProcessingResult(spectrumNMR);

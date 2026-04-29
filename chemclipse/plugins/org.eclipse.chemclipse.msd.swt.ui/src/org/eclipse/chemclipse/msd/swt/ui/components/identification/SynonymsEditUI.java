@@ -56,7 +56,7 @@ public class SynonymsEditUI extends Composite {
 		initialize();
 	}
 
-	public void update(ILibraryInformation libraryInformation, boolean forceReload) {
+	public void update(ILibraryInformation libraryInformation) {
 
 		if(libraryInformation != null) {
 			this.libraryInformation = libraryInformation;
@@ -111,7 +111,7 @@ public class SynonymsEditUI extends Composite {
 					} else {
 						libraryInformation.getSynonyms().add(synonym);
 						textSynonym.setText("");
-						synonymsListUI.update(libraryInformation, true);
+						synonymsListUI.update(libraryInformation);
 						enableButtonFields(ACTION_INITIALIZE);
 					}
 				}
@@ -161,7 +161,7 @@ public class SynonymsEditUI extends Composite {
 								libraryInformation.getSynonyms().remove(object);
 							}
 						}
-						synonymsListUI.update(libraryInformation, true);
+						synonymsListUI.update(libraryInformation);
 					}
 				}
 			}

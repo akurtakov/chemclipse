@@ -36,7 +36,7 @@ public class PeakIdentifierFile implements IPeakIdentifierMSD {
 		if(identifierSettings instanceof PeakIdentifierSettings peakIdentifierSettings) {
 			try {
 				FileIdentifier fileIdentifier = new FileIdentifier();
-				IPeakIdentificationResults peakIdentificationResults = fileIdentifier.runPeakIdentification(peaks, peakIdentifierSettings, processingInfo, monitor);
+				IPeakIdentificationResults peakIdentificationResults = fileIdentifier.runPeakIdentification(peaks, peakIdentifierSettings, monitor);
 				processingInfo.setProcessingResult(peakIdentificationResults);
 				int results = peakIdentificationResults.getIdentificationResults().size();
 				processingInfo.addInfoMessage(FileIdentifier.IDENTIFIER, MessageFormat.format("{0} peaks have been identified.", results));

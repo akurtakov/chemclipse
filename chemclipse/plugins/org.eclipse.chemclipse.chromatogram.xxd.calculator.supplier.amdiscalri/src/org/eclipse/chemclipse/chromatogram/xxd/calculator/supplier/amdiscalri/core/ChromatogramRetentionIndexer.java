@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -63,7 +63,7 @@ public class ChromatogramRetentionIndexer implements IProcessTypeSupplier {
 			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 			boolean extrapolateLeft = processSettings.isExtrapolateLeft();
 			boolean extrapolateRight = processSettings.isExtrapolateRight();
-			RetentionIndexMarker retentionIndexMarker = RetentionIndexSupport.getRetentionIndexMarker(processSettings.getRetentionIndexMarker(), chromatogram, extrapolateLeft, extrapolateRight);
+			RetentionIndexMarker retentionIndexMarker = RetentionIndexSupport.getRetentionIndexMarker(processSettings.getRetentionIndexMarker(), extrapolateLeft, extrapolateRight);
 			boolean processReferenceChromatograms = processSettings.isProcessReferenceChromatograms();
 			RetentionIndexCalculator.calculateIndex(chromatogram, retentionIndexMarker, processReferenceChromatograms);
 			/*

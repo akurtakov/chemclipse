@@ -54,9 +54,9 @@ public class WavenumberSignalsUI extends ExtendedTableViewer {
 		setInput(null);
 	}
 
-	public void setSearchText(String searchText, boolean caseSensitive) {
+	public void setSearchText(String searchText) {
 
-		listFilter.setSearchText(searchText, caseSensitive);
+		listFilter.setSearchText(searchText);
 		refresh();
 	}
 

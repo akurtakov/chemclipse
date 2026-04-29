@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2021, 2025 Lablicate GmbH.
+ * Copyright (c) 2021, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,7 +27,6 @@ import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.vsd.converter.supplier.jcampdx.model.IVendorSpectrumVSD;
 import org.eclipse.chemclipse.vsd.converter.supplier.jcampdx.model.VendorSpectrumVSD;
 import org.eclipse.chemclipse.vsd.model.implementation.SignalInfrared;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 import jakarta.activation.UnsupportedDataTypeException;
 
@@ -52,7 +51,7 @@ public class ScanReader {
 	private static final String FIRSTY = "##FIRSTY=";
 	private static final String XYDATA = "##XYDATA=";
 
-	public IVendorSpectrumVSD read(File file, IProgressMonitor monitor) throws IOException {
+	public IVendorSpectrumVSD read(File file) throws IOException {
 
 		IVendorSpectrumVSD vendorScan = new VendorSpectrumVSD();
 		FileReader fileReader = new FileReader(file);

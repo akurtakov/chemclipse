@@ -111,12 +111,12 @@ public class MassSpectrumSettingsWizardPage extends AbstractAnalysisWizardPage {
 			}
 		});
 
-		combo.select(getSelectedAlgorithmIndex(comboViewer));
+		combo.select(getSelectedAlgorithmIndex());
 
 		return comboViewer;
 	}
 
-	private int getSelectedAlgorithmIndex(ComboViewer comboViewer) {
+	private int getSelectedAlgorithmIndex() {
 
 		for(int i = 0; i < algorithms.length; i++) {
 			Algorithm algorithm = algorithms[i];

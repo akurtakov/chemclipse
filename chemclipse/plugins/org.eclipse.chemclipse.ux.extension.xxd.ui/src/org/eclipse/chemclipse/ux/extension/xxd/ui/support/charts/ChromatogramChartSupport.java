@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -107,7 +107,7 @@ public class ChromatogramChartSupport {
 		resetColorMaps();
 	}
 
-	public Color getSeriesColor(String seriesId, DisplayType dataType) {
+	public Color getSeriesColor(String seriesId) {
 
 		Color color = usedColors.get(seriesId);
 		if(color == null) {
@@ -127,7 +127,7 @@ public class ChromatogramChartSupport {
 	public ILineSeriesData getLineSeriesDataChromatogram(IChromatogram chromatogram, String seriesId, Color color) {
 
 		DisplayType dataType = DisplayType.TIC;
-		return getLineSeriesData(chromatogram, seriesId, dataType, Derivative.NONE, color, null, false);
+		return getLineSeriesData(chromatogram, seriesId, dataType, Derivative.NONE, color, null);
 	}
 
 	public ILineSeriesData getLineSeriesDataBaseline(IChromatogramSelection chromatogramSelection, String seriesId, Color color) {
@@ -139,7 +139,7 @@ public class ChromatogramChartSupport {
 	public ILineSeriesData getLineSeriesDataBaseline(IChromatogram chromatogram, String seriesId, Color color) {
 
 		DisplayType dataType = DisplayType.TIC;
-		return getLineSeriesData(chromatogram, seriesId, dataType, Derivative.NONE, color, null, true);
+		return getLineSeriesData(chromatogram, seriesId, dataType, Derivative.NONE, color, null);
 	}
 
 	public ILineSeriesData getLineSeriesDataBaseline(IChromatogramSelection chromatogramSelection, String seriesId, DisplayType dataType, Color color, boolean timeIntervalSelection) {
@@ -149,7 +149,7 @@ public class ChromatogramChartSupport {
 
 	public ILineSeriesData getLineSeriesDataBaseline(IChromatogram chromatogram, String seriesId, DisplayType dataType, Color color, IMarkedTraces<? extends IMarkedTrace> signals) {
 
-		return getLineSeriesData(chromatogram, seriesId, dataType, Derivative.NONE, color, signals, true);
+		return getLineSeriesData(chromatogram, seriesId, dataType, Derivative.NONE, color, signals);
 	}
 
 	public ILineSeriesData getLineSeriesData(IChromatogram chromatogram, String seriesId, DisplayType displayType, Color color, IMarkedTraces<? extends IMarkedTrace> signals) {
@@ -180,7 +180,7 @@ public class ChromatogramChartSupport {
 		return getLineSeriesData(chromatogram, startScan, stopScan, seriesId, dataType, derivative, color, signals, baseline, false);
 	}
 
-	public ILineSeriesData getLineSeriesData(IChromatogram chromatogram, String seriesId, DisplayType displayType, Derivative derivative, Color color, IMarkedTraces<? extends IMarkedTrace> signals, boolean baseline) {
+	public ILineSeriesData getLineSeriesData(IChromatogram chromatogram, String seriesId, DisplayType displayType, Derivative derivative, Color color, IMarkedTraces<? extends IMarkedTrace> signals) {
 
 		return getLineSeriesData(chromatogram, seriesId, displayType, derivative, color, signals, false, false);
 	}
@@ -192,7 +192,7 @@ public class ChromatogramChartSupport {
 		return getLineSeriesData(chromatogram, startScan, stopScan, seriesId, displayType, derivative, color, signals, baseline, useRetentionIndex);
 	}
 
-	public ILineSeriesData getLineSeriesData(IChromatogram chromatogram, String seriesId, Derivative derivative, Color color, List<ITrace> traces, boolean baseline) {
+	public ILineSeriesData getLineSeriesData(IChromatogram chromatogram, String seriesId, Derivative derivative, Color color, List<ITrace> traces) {
 
 		return getLineSeriesData(chromatogram, seriesId, derivative, color, traces, false, false);
 	}
@@ -207,8 +207,7 @@ public class ChromatogramChartSupport {
 	@Deprecated
 	public ILineSeriesData getLineSeriesData(IExtractedWavelengthSignals extractedWavelengthSignals, int wavelength, String seriesId, DisplayType dataType) {
 
-		Color color = getSeriesColor(seriesId, dataType);
-		LineStyle lineStyle = getLineStyle(dataType);
+		Color color = getSeriesColor(seriesId);
 
 		int length = extractedWavelengthSignals.getExtractedWavelengthSignals().size();
 		double[] xSeries = new double[length];
@@ -250,7 +249,6 @@ public class ChromatogramChartSupport {
 			}
 		}
 
-		LineStyle lineStyle = getLineStyle(displayType);
 		boolean condenseCycleNumberScans = preferenceStore.getBoolean(PreferenceSupplier.P_CONDENSE_CYCLE_NUMBER_SCANS);
 		boolean handleScanCycleSeriesTIC = chromatogram.containsScanCycles() && condenseCycleNumberScans && displayType.equals(DisplayType.TIC);
 
@@ -530,11 +528,11 @@ public class ChromatogramChartSupport {
 		} else if(chromatogramSelection instanceof IChromatogramSelectionWSD chromatogramSelectionWSD) {
 			if(dataType.equals(DisplayType.SWC) || dataType.equals(DisplayType.XWC)) {
 				IMarkedWavelengths markedWavelengths = chromatogramSelectionWSD.getSelectedWavelengths();
-				return getLineSeriesData(chromatogram, seriesId, dataType, derivative, color, markedWavelengths, baseline);
+				return getLineSeriesData(chromatogram, seriesId, dataType, derivative, color, markedWavelengths);
 			} else if(dataType.equals(DisplayType.MPC)) {
 				IMarkedWavelengths markedWavelengths = new MarkedWavelengths();
 				markedWavelengths.add(chromatogramSelectionWSD.getChromatogram().getWavelengths());
-				return getLineSeriesData(chromatogram, seriesId, dataType, derivative, color, markedWavelengths, baseline);
+				return getLineSeriesData(chromatogram, seriesId, dataType, derivative, color, markedWavelengths);
 			}
 		} else if(dataType.equals(DisplayType.TSC)) {
 		} else if(dataType.equals(DisplayType.BPC)) {
@@ -688,11 +686,6 @@ public class ChromatogramChartSupport {
 		}
 
 		return intensity;
-	}
-
-	private LineStyle getLineStyle(DisplayType dataType) {
-
-		return lineStyle;
 	}
 
 	private double[] calculateDerivate(double[] values) {

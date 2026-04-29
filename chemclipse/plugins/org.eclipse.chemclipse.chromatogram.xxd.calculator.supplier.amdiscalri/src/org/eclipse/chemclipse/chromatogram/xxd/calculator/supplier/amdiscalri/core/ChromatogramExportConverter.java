@@ -40,7 +40,7 @@ public class ChromatogramExportConverter extends AbstractChromatogramExportConve
 				indexExportSettings.setUseCuratedNames(PreferenceSupplier.isCalibrationExportUseCuratedNames());
 				indexExportSettings.setDeriveMissingIndices(PreferenceSupplier.isCalibrationExportDeriveMissingIndices());
 				indexExportSettings.setOpenCalibrationFileAfterProcessing(PreferenceSupplier.isOpenCalibrationFileAfterProcessing());
-				writer.writeChromatogram(file, chromatogram, indexExportSettings, monitor);
+				writer.writeChromatogram(file, chromatogram, indexExportSettings);
 				processingInfo.setProcessingResult(file);
 			} catch(IOException e) {
 				logger.warn(e);

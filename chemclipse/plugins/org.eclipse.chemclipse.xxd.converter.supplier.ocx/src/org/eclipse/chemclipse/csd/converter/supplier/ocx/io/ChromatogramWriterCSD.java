@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -50,7 +50,7 @@ public class ChromatogramWriterCSD extends AbstractChromatogramWriter implements
 
 	public void writeChromatogram(File file, String version, IChromatogramCSD chromatogram, IProgressMonitor monitor) throws FileIsNotWriteableException, IOException {
 
-		IChromatogramCSDZipWriter chromatogramWriter = getChromatogramWriter(chromatogram, version, monitor);
+		IChromatogramCSDZipWriter chromatogramWriter = getChromatogramWriter(version, monitor);
 		chromatogramWriter.writeChromatogram(file, chromatogram, monitor);
 		/*
 		 * Export References
@@ -63,17 +63,15 @@ public class ChromatogramWriterCSD extends AbstractChromatogramWriter implements
 	@Override
 	public void writeChromatogram(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramCSD chromatogram, IProgressMonitor monitor) throws IOException {
 
-		IChromatogramCSDZipWriter chromatogramWriter = getChromatogramWriter(chromatogram, Format.CHROMATOGRAM_VERSION_LATEST, monitor);
+		IChromatogramCSDZipWriter chromatogramWriter = getChromatogramWriter(Format.CHROMATOGRAM_VERSION_LATEST, monitor);
 		chromatogramWriter.writeChromatogram(zipOutputStream, directoryPrefix, chromatogram, monitor);
 	}
 
-	private IChromatogramCSDZipWriter getChromatogramWriter(IChromatogramCSD chromatogram, String version, IProgressMonitor monitor) {
+	private IChromatogramCSDZipWriter getChromatogramWriter(String version, IProgressMonitor monitor) {
 
 		monitor.setTaskName("Open Chromatography Binary");
 		monitor.subTask(ConverterMessages.exportChromatogram);
-		IChromatogramCSDZipWriter chromatogramWriter = getChromatogramWriter(version);
-
-		return chromatogramWriter;
+		return getChromatogramWriter(version);
 	}
 
 	private IChromatogramCSDZipWriter getChromatogramWriter(String version) {

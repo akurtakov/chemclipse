@@ -23,7 +23,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.ChromatogramFilterResul
 import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResult;
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.scan.settings.FilterSettingsScanMerger;
 import org.eclipse.chemclipse.csd.model.core.IScanCSD;
 import org.eclipse.chemclipse.csd.model.implementation.ScanCSD;
 import org.eclipse.chemclipse.model.core.IChromatogram;
@@ -51,17 +50,15 @@ public class FilterScanMerger extends AbstractChromatogramFilter {
 
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = validate(chromatogramSelection, chromatogramFilterSettings);
 		if(!processingInfo.hasErrorMessages()) {
-			if(chromatogramFilterSettings instanceof FilterSettingsScanMerger settings) {
-				applyScanMergerFilter(chromatogramSelection, settings);
-				processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, "Scan Merger", MESSAGE));
-				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, MESSAGE));
-				chromatogramSelection.getChromatogram().setDirty(true);
-			}
+			applyScanMergerFilter(chromatogramSelection);
+			processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, "Scan Merger", MESSAGE));
+			processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, MESSAGE));
+			chromatogramSelection.getChromatogram().setDirty(true);
 		}
 		return processingInfo;
 	}
 
-	private void applyScanMergerFilter(IChromatogramSelection chromatogramSelection, FilterSettingsScanMerger settings) {
+	private void applyScanMergerFilter(IChromatogramSelection chromatogramSelection) {
 
 		if(chromatogramSelection != null) {
 			/*

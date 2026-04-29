@@ -53,7 +53,7 @@ public class ChromatogramReader_1005 extends AbstractChromatogramReader implemen
 		IChromatogramWSD chromatogram = null;
 		try (ZipFile zipFile = new ZipFile(file)) {
 			if(isValidFileFormat(zipFile)) {
-				chromatogram = readFromZipFile(zipFile, "", file);
+				chromatogram = readFromZipFile(zipFile, file);
 			}
 		}
 		return chromatogram;
@@ -80,10 +80,10 @@ public class ChromatogramReader_1005 extends AbstractChromatogramReader implemen
 	@Override
 	public IChromatogramWSD read(ZipFile zipFile, String directoryPrefix, IProgressMonitor monitor) throws IOException {
 
-		return readFromZipFile(zipFile, directoryPrefix, null);
+		return readFromZipFile(zipFile, null);
 	}
 
-	private IChromatogramWSD readFromZipFile(ZipFile zipFile, String directoryPrefix, File file) throws IOException {
+	private IChromatogramWSD readFromZipFile(ZipFile zipFile, File file) throws IOException {
 
 		return readZipData(zipFile, "", file);
 	}

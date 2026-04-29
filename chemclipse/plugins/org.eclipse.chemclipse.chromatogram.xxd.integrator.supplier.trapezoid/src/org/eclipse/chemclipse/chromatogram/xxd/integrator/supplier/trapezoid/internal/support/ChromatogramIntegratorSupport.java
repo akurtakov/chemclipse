@@ -46,7 +46,7 @@ public class ChromatogramIntegratorSupport {
 		 * Get the chromatogram and background area.
 		 */
 		double scaleFactor = chromatogramIntegrationSettings.getScaleFactor();
-		List<IIntegrationEntry> chromatogramIntegrationEntries = calculateChromatogramIntegrationEntry(chromatogramSelection, scaleFactor, monitor);
+		List<IIntegrationEntry> chromatogramIntegrationEntries = calculateChromatogramIntegrationEntry(chromatogramSelection, scaleFactor);
 		List<IIntegrationEntry> backgroundIntegrationEntries = calculateBackgroundIntegrationEntry(chromatogramSelection, scaleFactor);
 		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 		chromatogram.setIntegratedArea(chromatogramIntegrationEntries, backgroundIntegrationEntries, INTEGRATOR_DESCRIPTION);
@@ -68,7 +68,7 @@ public class ChromatogramIntegratorSupport {
 	 * @param monitor
 	 * @return
 	 */
-	private List<IIntegrationEntry> calculateChromatogramIntegrationEntry(IChromatogramSelection chromatogramSelection, double scaleFactor, IProgressMonitor monitor) {
+	private List<IIntegrationEntry> calculateChromatogramIntegrationEntry(IChromatogramSelection chromatogramSelection, double scaleFactor) {
 
 		List<IIntegrationEntry> chromatogramIntegrationEntries = new ArrayList<>();
 		ChromatogramIntegrator chromatogramIntegrator = new ChromatogramIntegrator();

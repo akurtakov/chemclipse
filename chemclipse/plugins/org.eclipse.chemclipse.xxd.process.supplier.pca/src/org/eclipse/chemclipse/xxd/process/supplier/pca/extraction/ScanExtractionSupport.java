@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -35,7 +35,6 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IDataInputEntry;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.PeakSampleData;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Sample;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Samples;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ScanExtractionSupport {
 
@@ -58,7 +57,7 @@ public class ScanExtractionSupport {
 		this.maximalNumberScans = maximalNumberScans;
 	}
 
-	public Samples process(Map<IDataInputEntry, Collection<IScan>> dataInput, IProgressMonitor monitor) {
+	public Samples process(Map<IDataInputEntry, Collection<IScan>> dataInput) {
 
 		/*
 		 * Initialize PCA Results

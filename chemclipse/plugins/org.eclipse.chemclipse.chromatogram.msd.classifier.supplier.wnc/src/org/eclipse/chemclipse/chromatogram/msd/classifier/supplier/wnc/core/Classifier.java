@@ -48,7 +48,7 @@ public class Classifier extends AbstractChromatogramClassifier {
 	@Override
 	public IProcessingInfo<IChromatogramClassifierResult> applyClassifier(IChromatogramSelection chromatogramSelection, IChromatogramClassifierSettings chromatogramClassifierSettings, IProgressMonitor monitor) {
 
-		IProcessingInfo<IChromatogramClassifierResult> processingInfo = validate(chromatogramSelection, chromatogramClassifierSettings);
+		IProcessingInfo<IChromatogramClassifierResult> processingInfo = validate(chromatogramSelection);
 		if(!processingInfo.hasErrorMessages()) {
 			try {
 				IChromatogram chromatogram = chromatogramSelection.getChromatogram();

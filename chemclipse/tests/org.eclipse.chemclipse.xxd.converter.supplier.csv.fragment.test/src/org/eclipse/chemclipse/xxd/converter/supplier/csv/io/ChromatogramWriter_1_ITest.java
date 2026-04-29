@@ -56,7 +56,7 @@ public class ChromatogramWriter_1_ITest {
 	@Test
 	public void testExport() throws IOException {
 
-		chromatogramWriter.writeChromatogram(file, chromatogram, new NullProgressMonitor());
+		chromatogramWriter.writeChromatogram(file, chromatogram);
 		assertTrue(file.length() > 0);
 	}
 }

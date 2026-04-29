@@ -31,7 +31,7 @@ public class ScanImportConverter extends AbstractScanImportConverter {
 		IProcessingInfo<ISpectrumWSD> processingInfo = new ProcessingInfo<>();
 		IVendorSpectrumWSD vendorScan = null;
 		ScanReader scanReader = new ScanReader();
-		vendorScan = scanReader.read(file, monitor);
+		vendorScan = scanReader.read(file);
 		processingInfo.setProcessingResult(vendorScan);
 		return processingInfo;
 	}

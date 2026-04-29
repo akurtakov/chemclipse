@@ -53,7 +53,7 @@ public class ChromatogramExportConverter extends AbstractChromatogramExportConve
 
 			if(writer != null) {
 				try {
-					writer.writeChromatogram(file, chromatogram, monitor);
+					writer.writeChromatogram(file, chromatogram);
 					processingInfo.setProcessingResult(file);
 				} catch(IOException e) {
 					logger.error(e);

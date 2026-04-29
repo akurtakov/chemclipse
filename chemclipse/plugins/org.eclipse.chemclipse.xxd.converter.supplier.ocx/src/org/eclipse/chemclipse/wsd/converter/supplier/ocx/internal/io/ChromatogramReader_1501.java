@@ -179,7 +179,7 @@ public class ChromatogramReader_1501 extends AbstractChromatogramReader implemen
 			reader1501.readIdentificationTargets(getDataInputStream(object, directoryPrefix + Format.FILE_IDENTIFICATION_WSD), closeStream, chromatogram);
 			readHistory(getDataInputStream(object, directoryPrefix + Format.FILE_HISTORY_WSD), closeStream, chromatogram);
 			subMonitor.worked(20);
-			readMiscellaneous(getDataInputStream(object, directoryPrefix + Format.FILE_MISC_WSD), closeStream, chromatogram);
+			readMiscellaneous(getDataInputStream(object, directoryPrefix + Format.FILE_MISC_WSD), chromatogram);
 			readSeparationColumn(getDataInputStream(object, directoryPrefix + Format.FILE_SEPARATION_COLUMN_WSD), closeStream, chromatogram);
 			setAdditionalInformation(file, chromatogram);
 			subMonitor.worked(20);
@@ -567,7 +567,7 @@ public class ChromatogramReader_1501 extends AbstractChromatogramReader implemen
 		}
 	}
 
-	private void readMiscellaneous(DataInputStream dataInputStream, boolean closeStream, IChromatogramWSD chromatogram) throws IOException {
+	private void readMiscellaneous(DataInputStream dataInputStream, IChromatogramWSD chromatogram) throws IOException {
 
 		/*
 		 * Header
@@ -645,11 +645,11 @@ public class ChromatogramReader_1501 extends AbstractChromatogramReader implemen
 				dataInputStream.close();
 			}
 
-			parseChromatogram(object, dataType, directory, chromatogram, closeStream, monitor);
+			parseChromatogram(object, dataType, directory, chromatogram, monitor);
 		}
 	}
 
-	private void parseChromatogram(Object object, String dataType, String directoryPrefix, IChromatogramWSD chromatogram, boolean closeStream, IProgressMonitor monitor) throws IOException {
+	private void parseChromatogram(Object object, String dataType, String directoryPrefix, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
 
 		String directory = directoryPrefix + Format.DIR_CHROMATOGRAM_REFERENCE + Format.DIR_SEPARATOR;
 		if(object instanceof ZipFile zipFile) {

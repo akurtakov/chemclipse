@@ -214,10 +214,10 @@ public class Identifier {
 
 		boolean isUseOptimizedMassSpectrum = searchSettings.isUseOptimizedMassSpectrum();
 		IMassSpectra massSpectra = getMassSpectraFromPeakList(peaks, isUseOptimizedMassSpectrum);
-		openNistForMassSpectrumIdentification(massSpectra, searchSettings, monitor);
+		openNistForMassSpectrumIdentification(massSpectra, monitor);
 	}
 
-	public void openNistForMassSpectrumIdentification(IMassSpectra massSpectra, ISearchSettings searchSettings, IProgressMonitor monitor) throws FileNotFoundException {
+	public void openNistForMassSpectrumIdentification(IMassSpectra massSpectra, IProgressMonitor monitor) throws FileNotFoundException {
 
 		/*
 		 * Get the OS NIST support. Use Wine in a non MS-Windows system.

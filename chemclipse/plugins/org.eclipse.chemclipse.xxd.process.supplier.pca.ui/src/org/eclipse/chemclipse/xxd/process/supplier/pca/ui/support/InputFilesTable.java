@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -45,7 +45,7 @@ public class InputFilesTable {
 		String[] titles = {"Name", "Group", "Filename", "Path"};
 		int[] bounds = {100, 100, 100, 100};
 		// first column is for the first name
-		TableViewerColumn tableViewerColumn = createTableViewerColumn(titles[0], bounds[0], 0);
+		TableViewerColumn tableViewerColumn = createTableViewerColumn(titles[0], bounds[0]);
 		tableViewerColumn.setLabelProvider(new ColumnLabelProvider() {
 
 			@Override
@@ -55,7 +55,7 @@ public class InputFilesTable {
 				return inputData.getSampleName();
 			}
 		});
-		tableViewerColumn = createTableViewerColumn(titles[1], bounds[1], 1);
+		tableViewerColumn = createTableViewerColumn(titles[1], bounds[1]);
 		tableViewerColumn.setLabelProvider(new CellLabelProvider() {
 
 			@Override
@@ -103,7 +103,7 @@ public class InputFilesTable {
 				update();
 			}
 		});
-		tableViewerColumn = createTableViewerColumn(titles[2], bounds[2], 2);
+		tableViewerColumn = createTableViewerColumn(titles[2], bounds[2]);
 		tableViewerColumn.setLabelProvider(new ColumnLabelProvider() {
 
 			@Override
@@ -113,7 +113,7 @@ public class InputFilesTable {
 				return inputData.getFileName();
 			}
 		});
-		tableViewerColumn = createTableViewerColumn(titles[3], bounds[3], 3);
+		tableViewerColumn = createTableViewerColumn(titles[3], bounds[3]);
 		tableViewerColumn.setLabelProvider(new ColumnLabelProvider() {
 
 			@Override
@@ -136,7 +136,7 @@ public class InputFilesTable {
 		createColumns();
 	}
 
-	private TableViewerColumn createTableViewerColumn(String title, int bound, final int colNumber) {
+	private TableViewerColumn createTableViewerColumn(String title, int bound) {
 
 		final TableViewerColumn viewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
 		final TableColumn column = viewerColumn.getColumn();

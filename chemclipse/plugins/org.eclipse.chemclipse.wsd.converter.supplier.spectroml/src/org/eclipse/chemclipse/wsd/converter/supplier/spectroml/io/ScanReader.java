@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -39,7 +39,6 @@ import org.eclipse.chemclipse.wsd.converter.supplier.spectroml.model.v1.SpectroM
 import org.eclipse.chemclipse.wsd.converter.supplier.spectroml.model.v1.TimeStamp;
 import org.eclipse.chemclipse.wsd.converter.supplier.spectroml.model.v1.Value;
 import org.eclipse.chemclipse.wsd.model.core.implementation.SignalWSD;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -52,7 +51,7 @@ public class ScanReader {
 
 	private static final Logger logger = Logger.getLogger(ScanReader.class);
 
-	public IVendorSpectrumWSD read(File file, IProgressMonitor monitor) {
+	public IVendorSpectrumWSD read(File file) {
 
 		IVendorSpectrumWSD vendorSpectrum = null;
 		try {
@@ -83,14 +82,14 @@ public class ScanReader {
 						if(values.getDimension().equals("x")) {
 							wavelengths = Arrays.stream( //
 									StringUtils.split(values.getValue())) //
-									.map(Double::parseDouble) //
-									.toList(); //
+												.map(Double::parseDouble) //
+												.toList(); //
 						}
 						if(values.getDimension().equals("y")) {
 							transmittances = Arrays.stream( //
 									StringUtils.split(values.getValue())) //
-									.map(Double::parseDouble) //
-									.toList(); //
+													.map(Double::parseDouble) //
+													.toList(); //
 						}
 					}
 					int scans = Math.min(wavelengths.size(), transmittances.size());

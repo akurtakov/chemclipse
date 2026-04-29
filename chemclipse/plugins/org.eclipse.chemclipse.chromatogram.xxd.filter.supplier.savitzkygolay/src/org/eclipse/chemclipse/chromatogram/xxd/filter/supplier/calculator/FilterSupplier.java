@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -46,7 +46,7 @@ public class FilterSupplier {
 		Collections.sort(ions, new IonValueComparator());
 		double[] intensityValues = getIntensityValues(ions);
 		SavitzkyGolayFilter filter = new SavitzkyGolayFilter(order, width, derivative);
-		double[] smoothed = SavitzkyGolayProcessor.smooth(intensityValues, filter, monitor);
+		double[] smoothed = SavitzkyGolayProcessor.smooth(intensityValues, filter);
 		int i = 0;
 		int smoothedIons = result.getProcessingResult();
 		for(IIon ion : ions) {

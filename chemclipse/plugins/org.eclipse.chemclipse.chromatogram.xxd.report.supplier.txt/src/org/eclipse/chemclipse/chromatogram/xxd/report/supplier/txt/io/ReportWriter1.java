@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.chemclipse.chromatogram.xxd.report.supplier.txt.settings.ReportSettings1;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.model.comparator.PeakRetentionTimeComparator;
 import org.eclipse.chemclipse.model.core.IChromatogram;
@@ -70,7 +69,7 @@ public class ReportWriter1 {
 	private IonAbundanceComparator ionComparator = new IonAbundanceComparator(SortOrder.DESC);
 	private PeakRetentionTimeComparator peakComparator = new PeakRetentionTimeComparator(SortOrder.ASC);
 
-	public void generate(File file, boolean append, List<IChromatogram> chromatograms, ReportSettings1 reportSettings, IProgressMonitor monitor) throws IOException {
+	public void generate(File file, boolean append, List<IChromatogram> chromatograms, IProgressMonitor monitor) throws IOException {
 
 		try (PrintWriter printWriter = new PrintWriter(new FileWriter(file, append))) {
 			printWriter.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -79,7 +78,7 @@ public class ReportWriter1 {
 
 			for(IChromatogram chromatogram : chromatograms) {
 				printHeader(printWriter, chromatogram);
-				reportChromatogram(printWriter, chromatogram, monitor);
+				reportChromatogram(printWriter, chromatogram);
 			}
 		}
 	}
@@ -134,7 +133,7 @@ public class ReportWriter1 {
 	 * @param chromatogram
 	 * @param monitor
 	 */
-	private void reportChromatogram(PrintWriter printWriter, IChromatogram chromatogram, IProgressMonitor monitor) {
+	private void reportChromatogram(PrintWriter printWriter, IChromatogram chromatogram) {
 
 		/*
 		 * Print

@@ -56,7 +56,7 @@ public class WizardProcessor extends AbstractWizard {
 			 * Create the project.
 			 */
 			JobWriter jobWriter = new JobWriter();
-			jobWriter.writeBatchProcessJob(file, createBatchProcessJob(), monitor);
+			jobWriter.writeBatchProcessJob(file, createBatchProcessJob());
 		} catch(Exception e) {
 			logger.warn(e);
 		}

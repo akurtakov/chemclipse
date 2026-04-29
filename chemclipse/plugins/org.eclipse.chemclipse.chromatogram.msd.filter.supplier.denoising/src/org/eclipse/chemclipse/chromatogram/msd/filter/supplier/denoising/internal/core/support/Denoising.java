@@ -93,7 +93,7 @@ public class Denoising {
 			 * A -> Remove the predefined ions.
 			 */
 			IExtractedIonSignals extractedIonSignals = extractedIonSignalExtractor.getExtractedIonSignals(chromatogramSelection);
-			extractedIonSignals = removeIonsInScanRange(extractedIonSignals, ionsToRemove, monitor);
+			extractedIonSignals = removeIonsInScanRange(extractedIonSignals, ionsToRemove);
 			subMonitor.worked(1);
 			/*
 			 * B -> Adjust zero values (see Stein et al.)
@@ -149,7 +149,7 @@ public class Denoising {
 	 * @param ionsToRemove
 	 * @param monitor
 	 */
-	private static IExtractedIonSignals removeIonsInScanRange(IExtractedIonSignals extractedIonSignals, IMarkedIons ionsToRemove, IProgressMonitor monitor) {
+	private static IExtractedIonSignals removeIonsInScanRange(IExtractedIonSignals extractedIonSignals, IMarkedIons ionsToRemove) {
 
 		int startScan = extractedIonSignals.getStartScan();
 		int stopScan = extractedIonSignals.getStopScan();
@@ -190,7 +190,7 @@ public class Denoising {
 		for(int scan = startScan; scan <= stopScan; scan++) {
 			try {
 				extractedIonSignal = extractedIonSignals.getExtractedIonSignal(scan);
-				subtractNoiseMassSpectrumFromScan(extractedIonSignal, noiseMassSpectrum, numberOfUsedIonsForCoefficient, monitor);
+				subtractNoiseMassSpectrumFromScan(extractedIonSignal, noiseMassSpectrum, numberOfUsedIonsForCoefficient);
 			} catch(NoExtractedIonSignalStoredException e) {
 				logger.warn(e);
 			}
@@ -204,7 +204,7 @@ public class Denoising {
 	 * @param noiseMassSpectrum
 	 * @param monitor
 	 */
-	private static void subtractNoiseMassSpectrumFromScan(IExtractedIonSignal extractedIonSignal, ICombinedMassSpectrum noiseMassSpectrum, int numberOfUsedIonsForCoefficient, IProgressMonitor monitor) {
+	private static void subtractNoiseMassSpectrumFromScan(IExtractedIonSignal extractedIonSignal, ICombinedMassSpectrum noiseMassSpectrum, int numberOfUsedIonsForCoefficient) {
 
 		IExtractedIonSignal noiseSignal = noiseMassSpectrum.getExtractedIonSignal();
 		float correlationFactor = calculateCoefficient(extractedIonSignal, noiseSignal, numberOfUsedIonsForCoefficient);
@@ -372,7 +372,7 @@ public class Denoising {
 			 * Calculate the noise mass spectrum and add it to the noise mass
 			 * spectra list.
 			 */
-			ICombinedMassSpectrum noiseMassSpectrum = calculator.getNoiseMassSpectrum(segmentNoiseMassSpectra, ionsToPreserve, monitor);
+			ICombinedMassSpectrum noiseMassSpectrum = calculator.getNoiseMassSpectrum(segmentNoiseMassSpectra, ionsToPreserve);
 			/*
 			 * Set the scan and retention time values to show in the noise mass
 			 * spectrum view.

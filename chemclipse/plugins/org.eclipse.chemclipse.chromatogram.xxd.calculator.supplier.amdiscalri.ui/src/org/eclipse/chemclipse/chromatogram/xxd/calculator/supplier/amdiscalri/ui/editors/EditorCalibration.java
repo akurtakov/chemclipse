@@ -178,7 +178,7 @@ public class EditorCalibration extends EditorPart {
 					Object object = event.getProperty(property);
 					objects.add(object);
 				}
-				update(topic);
+				update();
 			} catch(Exception e) {
 				logger.warn(e + "\t" + event);
 			}
@@ -187,7 +187,7 @@ public class EditorCalibration extends EditorPart {
 		return eventHandler;
 	}
 
-	private void update(String topic) {
+	private void update() {
 
 		updateObjects(objects);
 	}

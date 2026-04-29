@@ -83,7 +83,7 @@ public class MassSpectrumFileSupport {
 		 */
 		String filename = dialog.open();
 		if(filename != null) {
-			validateFile(dialog, converterSupport.getExportSupplier(), shell, converterSupport, massSpectra);
+			validateFile(dialog, converterSupport.getExportSupplier(), shell, massSpectra);
 		}
 	}
 
@@ -92,7 +92,7 @@ public class MassSpectrumFileSupport {
 	 * if the chromatogram is stored in a directory or not and prepares the file
 	 * system in a convenient way.
 	 */
-	private static void validateFile(FileDialog dialog, List<ISupplier> supplier, Shell shell, DatabaseConverterSupport converterSupport, IMassSpectra massSpectra) {
+	private static void validateFile(FileDialog dialog, List<ISupplier> supplier, Shell shell, IMassSpectra massSpectra) {
 
 		File massSpectrumFolder = null;
 		boolean overwrite = dialog.getOverwrite();

@@ -79,7 +79,7 @@ public class UserLocationsUI extends Composite {
 	public void setInput(UserLocations userLocations) {
 
 		this.userLocations = userLocations;
-		updateInput(null);
+		updateInput();
 	}
 
 	@Override
@@ -219,7 +219,7 @@ public class UserLocationsUI extends Composite {
 						if(userLocationNew != null) {
 							userLocations.add(userLocationNew);
 							userLocation = userLocationNew;
-							updateInput(userLocation.getName());
+							updateInput();
 							fireUpdate();
 						}
 					}
@@ -245,7 +245,7 @@ public class UserLocationsUI extends Composite {
 					if(object instanceof UserLocation selectedUserLocation) {
 						userLocation = null;
 						userLocations.remove(selectedUserLocation);
-						updateInput(null);
+						updateInput();
 						fireUpdate();
 					}
 				}
@@ -277,7 +277,7 @@ public class UserLocationsUI extends Composite {
 						File file = new File(path);
 						userLocations.importItems(file);
 						MessageDialog.openInformation(e.display.getActiveShell(), IMPORT_TITLE, MESSAGE_IMPORT_SUCCESSFUL);
-						updateInput(null);
+						updateInput();
 						fireUpdate();
 					}
 				}
@@ -321,7 +321,7 @@ public class UserLocationsUI extends Composite {
 		return button;
 	}
 
-	private void updateInput(String identifier) {
+	private void updateInput() {
 
 		userLocation = null;
 		if(userLocations != null) {

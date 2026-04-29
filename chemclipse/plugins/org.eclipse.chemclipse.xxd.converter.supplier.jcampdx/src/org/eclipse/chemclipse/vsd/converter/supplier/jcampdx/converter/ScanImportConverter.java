@@ -34,7 +34,7 @@ public class ScanImportConverter extends AbstractScanImportConverter {
 		IProcessingInfo<ISpectrumVSD> processingInfo = new ProcessingInfo<>();
 		try {
 			ScanReader scanReader = new ScanReader();
-			IVendorSpectrumVSD vendorScan = scanReader.read(file, monitor);
+			IVendorSpectrumVSD vendorScan = scanReader.read(file);
 			processingInfo.setProcessingResult(vendorScan);
 		} catch(IOException e) {
 			processingInfo.addErrorMessage("JCAMP-DX", "There was a problem to import the FT-IR file.");

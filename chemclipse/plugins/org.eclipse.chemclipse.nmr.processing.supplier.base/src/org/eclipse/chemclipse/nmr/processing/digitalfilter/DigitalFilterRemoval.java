@@ -89,7 +89,7 @@ public class DigitalFilterRemoval extends AbstractFIDSignalFilter<DigitalFilterR
 				default:
 					throw new IllegalArgumentException("unsupported TreatmentOptions: " + config.getTreatmentOptions());
 			}
-			DigitalFilterRemoval.removeDigitalFilter(fidData, leftRotationFid, treatmentOption, messageConsumer);
+			DigitalFilterRemoval.removeDigitalFilter(fidData, leftRotationFid, treatmentOption);
 			messageConsumer.addInfoMessage(FILTER_NAME, "Digital Filter was removed");
 		} else {
 			messageConsumer.addWarnMessage(FILTER_NAME, "Left Rotation value must be greater than zero, skipp processing");
@@ -99,7 +99,7 @@ public class DigitalFilterRemoval extends AbstractFIDSignalFilter<DigitalFilterR
 		return filteredFIDMeasurement;
 	}
 
-	private static void removeDigitalFilter(ComplexFIDData fidData, int leftRotationFid, int treatmentOption, IMessageConsumer messageConsumer) {
+	private static void removeDigitalFilter(ComplexFIDData fidData, int leftRotationFid, int treatmentOption) {
 
 		Complex[] digitalFilter = Arrays.copyOfRange(fidData.signals, 0, leftRotationFid);
 		Complex[] analogFID = Arrays.copyOfRange(fidData.signals, leftRotationFid, fidData.signals.length);

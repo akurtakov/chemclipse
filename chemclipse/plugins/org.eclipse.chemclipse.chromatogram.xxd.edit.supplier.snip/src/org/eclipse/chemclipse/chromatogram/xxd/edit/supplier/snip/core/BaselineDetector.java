@@ -217,7 +217,7 @@ public class BaselineDetector extends AbstractBaselineDetector {
 		for(ITotalScanSignal signal : totalIonSignals.getTotalScanSignals()) {
 			intensityValues[counter++] = signal.getTotalSignal();
 		}
-		SnipCalculator.calculateBaselineIntensityValues(intensityValues, iterations, monitor);
+		SnipCalculator.calculateBaselineIntensityValues(intensityValues, iterations);
 		/*
 		 * Set the calculated values.
 		 */

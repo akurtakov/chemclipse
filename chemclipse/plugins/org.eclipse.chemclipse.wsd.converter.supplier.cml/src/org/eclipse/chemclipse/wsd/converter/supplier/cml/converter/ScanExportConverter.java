@@ -29,7 +29,7 @@ public class ScanExportConverter extends AbstractScanExportConverter {
 		IProcessingInfo<File> processingInfo = validate(file);
 		if(!processingInfo.hasErrorMessages()) {
 			ScanWriter scanWriter = new ScanWriter();
-			scanWriter.write(file, scan, monitor);
+			scanWriter.write(file, scan);
 			processingInfo.setProcessingResult(file);
 		}
 		return processingInfo;

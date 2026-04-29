@@ -30,7 +30,6 @@ import org.eclipse.chemclipse.msd.classifier.supplier.molpeak.model.ILigninRatio
 import org.eclipse.chemclipse.msd.classifier.supplier.molpeak.results.BasePeakClassifierResult;
 import org.eclipse.chemclipse.msd.classifier.supplier.molpeak.results.IBasePeakClassifierResult;
 import org.eclipse.chemclipse.msd.classifier.supplier.molpeak.results.IChromatogramResultBasePeak;
-import org.eclipse.chemclipse.msd.classifier.supplier.molpeak.settings.ClassifierSettings;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -45,8 +44,7 @@ public class Classifier extends AbstractChromatogramClassifier {
 	@Override
 	public IProcessingInfo<IChromatogramClassifierResult> applyClassifier(IChromatogramSelection chromatogramSelection, IChromatogramClassifierSettings chromatogramClassifierSettings, IProgressMonitor monitor) {
 
-		ClassifierSettings classifierSettings = (ClassifierSettings)chromatogramClassifierSettings;
-		IProcessingInfo<IChromatogramClassifierResult> processingInfo = validate(chromatogramSelection, classifierSettings);
+		IProcessingInfo<IChromatogramClassifierResult> processingInfo = validate(chromatogramSelection);
 		if(!processingInfo.hasErrorMessages()) {
 			/*
 			 * Are identifications available already?

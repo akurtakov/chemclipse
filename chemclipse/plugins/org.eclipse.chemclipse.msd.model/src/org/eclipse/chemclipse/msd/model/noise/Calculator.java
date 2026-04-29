@@ -52,7 +52,7 @@ public class Calculator {
 	 * Calculates a noise mass spectrum, normalized to 1000 by the given noise
 	 * mass spectra.
 	 */
-	public ICombinedMassSpectrum getNoiseMassSpectrum(List<ICombinedMassSpectrum> noiseMassSpectra, IMarkedIons ionsToPreserve, IProgressMonitor monitor) {
+	public ICombinedMassSpectrum getNoiseMassSpectrum(List<ICombinedMassSpectrum> noiseMassSpectra, IMarkedIons ionsToPreserve) {
 
 		CombinedNominalMassSpectrumCalculator combinedMassSpectrumCalculator = new CombinedNominalMassSpectrumCalculator();
 		/*
@@ -67,7 +67,7 @@ public class Calculator {
 				combinedMassSpectrumCalculator.addIon(ion.getIon(), ion.getAbundance());
 			}
 		}
-		return calculatorSupport.getNoiseMassSpectrum(combinedMassSpectrumCalculator, ionsToPreserve, monitor);
+		return calculatorSupport.getNoiseMassSpectrum(combinedMassSpectrumCalculator, ionsToPreserve);
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class Calculator {
 				 * noise segment list.
 				 */
 				CombinedNominalMassSpectrumCalculator combinedMassSpectrumCalculator = calculatorSupport.getCombinedMassSpectrumCalculator(analysisSegment, extractedIonSignals);
-				ICombinedMassSpectrum noiseMassSpectrum = calculatorSupport.getNoiseMassSpectrum(combinedMassSpectrumCalculator, ionsToPreserve, monitor);
+				ICombinedMassSpectrum noiseMassSpectrum = calculatorSupport.getNoiseMassSpectrum(combinedMassSpectrumCalculator, ionsToPreserve);
 				INoiseSegmentMSD noiseSegment = new NoiseSegmentMSD(analysisSegment, noiseMassSpectrum);
 				noiseSegments.add(noiseSegment);
 			} else {

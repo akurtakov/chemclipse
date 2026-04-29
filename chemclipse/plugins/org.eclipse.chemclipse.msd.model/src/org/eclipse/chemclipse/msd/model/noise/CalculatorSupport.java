@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2025 Lablicate GmbH.
+ * Copyright (c) 2010, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,7 +26,6 @@ import org.eclipse.chemclipse.msd.model.exceptions.NoExtractedIonSignalStoredExc
 import org.eclipse.chemclipse.msd.model.support.CombinedNominalMassSpectrumCalculator;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignal;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignals;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 public class CalculatorSupport {
 
@@ -101,7 +100,7 @@ public class CalculatorSupport {
 	/*
 	 * Returns a combined mass spectrum.
 	 */
-	public ICombinedMassSpectrum getNoiseMassSpectrum(CombinedNominalMassSpectrumCalculator combinedMassSpectrumCalculator, IMarkedIons ionsToPreserve, IProgressMonitor monitor) {
+	public ICombinedMassSpectrum getNoiseMassSpectrum(CombinedNominalMassSpectrumCalculator combinedMassSpectrumCalculator, IMarkedIons ionsToPreserve) {
 
 		combinedMassSpectrumCalculator.removeIons(ionsToPreserve);
 		ICombinedMassSpectrum noiseMassSpectrum = combinedMassSpectrumCalculator.createMassSpectrum(CalculationType.SUM);

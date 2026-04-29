@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -194,7 +194,7 @@ public class SeriesConverter {
 		return scatterSeriesDataList;
 	}
 
-	public static List<ILineSeriesData> variableLineToSeries(ISamplesPCA<IVariable, ISample> samples, String comboViwewerVariable, FeatureColumnLabels categoryType, ArrayList<Integer> sortedSampleIndices) {
+	public static List<ILineSeriesData> variableLineToSeries(ISamplesPCA<IVariable, ISample> samples, String comboViwewerVariable, FeatureColumnLabels categoryType) {
 
 		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 		List<ILineSeriesData> lineSeriesDataList = new ArrayList<>();

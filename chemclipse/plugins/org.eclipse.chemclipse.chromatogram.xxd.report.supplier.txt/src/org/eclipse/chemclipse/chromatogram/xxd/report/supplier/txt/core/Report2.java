@@ -40,7 +40,7 @@ public class Report2 extends AbstractReport {
 			if(settings instanceof ReportSettings2 reportSettings) {
 				ReportWriter2 chromatogramReport = new ReportWriter2();
 				try {
-					chromatogramReport.generate(file, append, chromatograms, reportSettings, monitor);
+					chromatogramReport.generate(file, append, chromatograms, reportSettings);
 					processingInfo.setProcessingResult(file);
 				} catch(IOException e) {
 					logger.warn(e);

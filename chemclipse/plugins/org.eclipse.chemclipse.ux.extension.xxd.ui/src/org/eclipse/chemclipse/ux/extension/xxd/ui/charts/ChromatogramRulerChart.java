@@ -104,11 +104,11 @@ public class ChromatogramRulerChart extends ChromatogramChart {
 			 * If uncaught exceptions are thrown, the cursor
 			 * reset shall be not affected.
 			 */
-			calculateDimension(event, x1, y1, x2, y2);
+			calculateDimension(x1, y1, x2, y2);
 		}
 	}
 
-	private void calculateDimension(Event event, int xStart, int yStart, int xStop, int yStop) {
+	private void calculateDimension(int xStart, int yStart, int xStop, int yStop) {
 
 		BaseChart baseChart = getBaseChart();
 		IAxisSet axisSet = baseChart.getAxisSet();

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -37,7 +37,6 @@ import org.eclipse.chemclipse.pcr.converter.supplier.rdml.model.WellComparator;
 import org.eclipse.chemclipse.pcr.model.core.IChannel;
 import org.eclipse.chemclipse.pcr.model.core.IPlate;
 import org.eclipse.chemclipse.pcr.model.core.IWell;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -47,7 +46,7 @@ public class PCRWriterVersion13 {
 
 	private static final Logger logger = Logger.getLogger(PCRWriterVersion13.class);
 
-	public void writePlate(File file, IPlate plate, IProgressMonitor monitor) {
+	public void writePlate(File file, IPlate plate) {
 
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);

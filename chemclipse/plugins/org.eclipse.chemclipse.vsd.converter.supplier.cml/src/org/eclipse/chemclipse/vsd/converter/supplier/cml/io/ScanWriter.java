@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,7 +25,6 @@ import org.eclipse.chemclipse.xxd.converter.supplier.cml.model.v3.SpectrumData;
 import org.eclipse.chemclipse.xxd.converter.supplier.cml.model.v3.SpectrumType;
 import org.eclipse.chemclipse.xxd.converter.supplier.cml.model.v3.Xaxis;
 import org.eclipse.chemclipse.xxd.converter.supplier.cml.model.v3.Yaxis;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -35,7 +34,7 @@ public class ScanWriter {
 
 	private static final Logger logger = Logger.getLogger(ScanWriter.class);
 
-	public void write(File file, ISpectrumVSD ir, IProgressMonitor monitor) {
+	public void write(File file, ISpectrumVSD ir) {
 
 		try {
 			JAXBContext jaxbContext = JAXBContext.newInstance(Cml.class);

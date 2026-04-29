@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -30,11 +30,10 @@ import org.eclipse.chemclipse.msd.converter.supplier.ocx.internal.io.ReaderProxy
 import org.eclipse.chemclipse.msd.converter.supplier.ocx.model.chromatogram.IVendorScanProxy;
 import org.eclipse.chemclipse.msd.model.core.IIonTransitionSettings;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.settings.Format;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ProxyReaderMSD {
 
-	public void readMassSpectrum(File file, int offset, String version, IVendorScanProxy massSpectrum, IIonTransitionSettings ionTransitionSettings, IProgressMonitor monitor) throws IOException {
+	public void readMassSpectrum(File file, int offset, String version, IVendorScanProxy massSpectrum, IIonTransitionSettings ionTransitionSettings) throws IOException {
 
 		IReaderProxy scanReaderProxy = null;
 		if(version.equals(Format.CHROMATOGRAM_VERSION_1003)) {

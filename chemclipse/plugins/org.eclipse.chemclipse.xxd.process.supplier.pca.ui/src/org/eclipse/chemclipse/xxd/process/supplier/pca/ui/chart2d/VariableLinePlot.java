@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -84,7 +84,7 @@ public class VariableLinePlot extends LineChart implements IRangeSupport {
 			setCategories(samples.getSamples(), sortedSampleIndices);
 			adjustXAxisFont(evaluation.getSamples().getAnalysisSettings().getVariableLinePlotFontSize());
 			List<ILineSeriesData> series;
-			series = SeriesConverter.variableLineToSeries(samples, variable, categoryLabelType, sortedSampleIndices);
+			series = SeriesConverter.variableLineToSeries(samples, variable, categoryLabelType);
 			addSeriesData(series);
 			addHighlights(evaluation, sortedSampleIndices);
 

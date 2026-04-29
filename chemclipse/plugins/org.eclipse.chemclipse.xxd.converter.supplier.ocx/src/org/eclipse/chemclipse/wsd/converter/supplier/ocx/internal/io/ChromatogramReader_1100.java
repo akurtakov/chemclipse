@@ -143,7 +143,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 			subMonitor.worked(20);
 			readHistory(getDataInputStream(object, directoryPrefix + Format.FILE_HISTORY_WSD), closeStream, chromatogram);
 			subMonitor.worked(20);
-			readMiscellaneous(getDataInputStream(object, directoryPrefix + Format.FILE_MISC_WSD), closeStream, chromatogram);
+			readMiscellaneous(getDataInputStream(object, directoryPrefix + Format.FILE_MISC_WSD), chromatogram);
 			subMonitor.worked(20);
 
 			setAdditionalInformation(file, chromatogram);
@@ -307,7 +307,7 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader implemen
 		}
 	}
 
-	private void readMiscellaneous(DataInputStream dataInputStream, boolean closeStream, IChromatogramWSD chromatogram) throws IOException {
+	private void readMiscellaneous(DataInputStream dataInputStream, IChromatogramWSD chromatogram) throws IOException {
 
 		long time = dataInputStream.readLong();
 		String miscInfo = readString(dataInputStream);

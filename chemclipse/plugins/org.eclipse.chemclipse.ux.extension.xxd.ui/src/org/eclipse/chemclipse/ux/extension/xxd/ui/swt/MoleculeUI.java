@@ -105,7 +105,7 @@ public class MoleculeUI extends Composite implements IExtendedPartUI {
 		canvasMolecule.get().redraw();
 	}
 
-	public void clear(Display display) {
+	public void clear() {
 
 		scaleFactor = SCALE_DEFAULT;
 		libraryInformation = null;

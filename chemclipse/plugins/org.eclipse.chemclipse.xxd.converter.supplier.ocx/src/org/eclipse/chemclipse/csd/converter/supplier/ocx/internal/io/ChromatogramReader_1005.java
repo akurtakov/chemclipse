@@ -123,7 +123,7 @@ public class ChromatogramReader_1005 extends AbstractChromatogramReader implemen
 		 * Read the chromatographic information.
 		 */
 		chromatogram = new VendorChromatogram();
-		readMethod(getDataInputStream(object, directoryPrefix + Format.FILE_SYSTEM_SETTINGS_FID), closeStream, chromatogram);
+		readMethod(getDataInputStream(object, directoryPrefix + Format.FILE_SYSTEM_SETTINGS_FID), chromatogram);
 		readScans(getDataInputStream(object, directoryPrefix + Format.FILE_SCANS_FID), closeStream, chromatogram);
 		readBaseline(getDataInputStream(object, directoryPrefix + Format.FILE_BASELINE_FID), closeStream, chromatogram);
 		readPeaks(getDataInputStream(object, directoryPrefix + Format.FILE_PEAKS_FID), closeStream, chromatogram);
@@ -133,7 +133,7 @@ public class ChromatogramReader_1005 extends AbstractChromatogramReader implemen
 		return chromatogram;
 	}
 
-	private void readMethod(DataInputStream dataInputStream, boolean closeStream, IChromatogramCSD chromatogram) throws IOException {
+	private void readMethod(DataInputStream dataInputStream, IChromatogramCSD chromatogram) throws IOException {
 
 		IMethod method = chromatogram.getMethod();
 

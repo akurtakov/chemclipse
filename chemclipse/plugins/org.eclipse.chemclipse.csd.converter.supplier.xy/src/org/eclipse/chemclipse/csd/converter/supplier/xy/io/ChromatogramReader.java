@@ -17,8 +17,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 
 import org.eclipse.chemclipse.csd.converter.io.AbstractChromatogramCSDReader;
 import org.eclipse.chemclipse.csd.converter.supplier.xy.model.IVendorChromatogram;
@@ -60,10 +58,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 		/*
 		 * Read the chromatogram
 		 */
-		boolean importSuccessful = readChromatogram(file, Charset.defaultCharset(), chromatogram);
-		if(!importSuccessful) {
-			readChromatogram(file, StandardCharsets.UTF_16, chromatogram);
-		}
+		readChromatogram(file, chromatogram);
 		/*
 		 * Calculate the scanInterval and scanDelay.
 		 */
@@ -72,7 +67,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 		return chromatogram;
 	}
 
-	private boolean readChromatogram(File file, Charset charset, IVendorChromatogram chromatogram) {
+	private boolean readChromatogram(File file, IVendorChromatogram chromatogram) {
 
 		try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
 			try {

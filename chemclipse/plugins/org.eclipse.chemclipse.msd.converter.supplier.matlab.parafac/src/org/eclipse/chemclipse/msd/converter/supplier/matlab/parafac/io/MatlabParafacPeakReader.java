@@ -89,7 +89,7 @@ public class MatlabParafacPeakReader implements IPeakReader {
 						peakSupport = new PeakSupport();
 						parseStatus = ParseStatus.DESCRIPTION;
 					}
-					parseLine(line, peakSupport, processingInfo);
+					parseLine(line, peakSupport);
 				}
 				/*
 				 * Don't forget to add the last peak.
@@ -135,7 +135,7 @@ public class MatlabParafacPeakReader implements IPeakReader {
 	 * @param line
 	 * @param peakSupport
 	 */
-	private void parseLine(String line, PeakSupport peakSupport, IProcessingInfo<?> processingInfo) {
+	private void parseLine(String line, PeakSupport peakSupport) {
 
 		/*
 		 * 

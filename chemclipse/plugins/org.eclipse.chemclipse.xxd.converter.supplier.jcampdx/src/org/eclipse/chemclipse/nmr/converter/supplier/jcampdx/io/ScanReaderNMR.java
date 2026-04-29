@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -23,7 +23,6 @@ import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.nmr.converter.supplier.jcampdx.model.VendorSpectrumMeasurement;
 import org.eclipse.chemclipse.nmr.converter.supplier.jcampdx.model.VendorSpectrumSignal;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 import jakarta.activation.UnsupportedDataTypeException;
 
@@ -46,7 +45,7 @@ public class ScanReaderNMR {
 	private static final String FIRSTY = "##FIRSTY=";
 	private static final String XYDATA = "##XYDATA=";
 
-	public IComplexSignalMeasurement<?> read(File file, IProgressMonitor monitor) throws IOException {
+	public IComplexSignalMeasurement<?> read(File file) throws IOException {
 
 		VendorSpectrumMeasurement measurement = new VendorSpectrumMeasurement();
 

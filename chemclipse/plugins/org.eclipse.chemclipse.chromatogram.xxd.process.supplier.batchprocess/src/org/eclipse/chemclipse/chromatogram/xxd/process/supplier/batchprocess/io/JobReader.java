@@ -48,9 +48,9 @@ public class JobReader {
 		BatchProcessJob batchProcessJob = new BatchProcessJob(processMethod);
 
 		try {
-			readHeader(file, batchProcessJob);
+			readHeader(file);
 			readDataTypeEntries(file, batchProcessJob);
-			readChromatogramInputEntries(file, batchProcessJob, monitor);
+			readChromatogramInputEntries(file, batchProcessJob);
 			readChromatogramProcessEntries(file, processMethod);
 		} catch(XMLStreamException e) {
 			throw new IOException(e);
@@ -64,7 +64,7 @@ public class JobReader {
 	 *
 	 * @throws IOException
 	 */
-	private void readHeader(File file, BatchProcessJob batchProcessJob) throws XMLStreamException, IOException {
+	private void readHeader(File file) throws XMLStreamException, IOException {
 
 		/*
 		 * Open the streams.
@@ -151,7 +151,7 @@ public class JobReader {
 	 * @throws XMLStreamException
 	 * @throws IOException
 	 */
-	private void readChromatogramInputEntries(File file, BatchProcessJob batchProcessJob, IProgressMonitor monitor) throws XMLStreamException, IOException {
+	private void readChromatogramInputEntries(File file, BatchProcessJob batchProcessJob) throws XMLStreamException, IOException {
 
 		IChromatogramInputEntry inputEntry;
 		XMLEvent event;

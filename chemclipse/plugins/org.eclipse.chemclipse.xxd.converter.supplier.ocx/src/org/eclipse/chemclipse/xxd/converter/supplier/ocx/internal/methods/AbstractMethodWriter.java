@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -33,6 +33,7 @@ public abstract class AbstractMethodWriter implements IMethodWriter {
 	private final String version;
 
 	public AbstractMethodWriter(String version) {
+
 		this.version = version;
 	}
 
@@ -46,7 +47,7 @@ public abstract class AbstractMethodWriter implements IMethodWriter {
 		/*
 		 * Write the data
 		 */
-		writeProcessMethod(zipOutputStream, processMethod, monitor);
+		writeProcessMethod(zipOutputStream, processMethod);
 		/*
 		 * Flush and close the output stream.
 		 */
@@ -54,7 +55,7 @@ public abstract class AbstractMethodWriter implements IMethodWriter {
 		zipOutputStream.close();
 	}
 
-	public void writeProcessMethod(ZipOutputStream zipOutputStream, IProcessMethod processMethod, IProgressMonitor monitor) throws IOException {
+	public void writeProcessMethod(ZipOutputStream zipOutputStream, IProcessMethod processMethod) throws IOException {
 
 		writeVersion(zipOutputStream);
 		writeData(zipOutputStream, processMethod);

@@ -14,7 +14,6 @@ package org.eclipse.chemclipse.chromatogram.xxd.classifier.supplier.durbinwatson
 
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.supplier.durbinwatson.result.IDurbinWatsonClassifierResult;
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.supplier.durbinwatson.result.SavitzkyGolayFilterRating;
-import org.eclipse.chemclipse.chromatogram.xxd.classifier.supplier.durbinwatson.settings.ClassifierSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.processor.SavitzkyGolayProcessor;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.savitzkygolay.settings.ChromatogramFilterSettings;
 import org.eclipse.chemclipse.logging.core.Logger;
@@ -30,7 +29,7 @@ public class DurbinWatsonProcessor {
 
 	private static final Logger logger = Logger.getLogger(DurbinWatsonProcessor.class);
 
-	public void run(IChromatogramSelection chromatogramSelection, ClassifierSettings classifierSettings, IDurbinWatsonClassifierResult durbinWatsonClassifierResult, IProgressMonitor monitor) {
+	public void run(IChromatogramSelection chromatogramSelection, IDurbinWatsonClassifierResult durbinWatsonClassifierResult, IProgressMonitor monitor) {
 
 		try {
 			/*
@@ -73,7 +72,7 @@ public class DurbinWatsonProcessor {
 						filterSettings.setDerivative(derivative);
 						filterSettings.setOrder(order);
 						filterSettings.setWidth(width);
-						double[] valuesSmoothed = SavitzkyGolayProcessor.smooth(valuesOriginal, filterSettings, monitor);
+						double[] valuesSmoothed = SavitzkyGolayProcessor.smooth(valuesOriginal, filterSettings);
 						double rating = calculateDurbinWatsonRating(valuesOriginal, valuesSmoothed);
 						/*
 						 * Store the result

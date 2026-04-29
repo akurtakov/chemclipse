@@ -42,12 +42,7 @@ public class ChromatogramWriterWSD extends AbstractChromatogramWriter implements
 	@Override
 	public void writeChromatogram(File file, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws FileIsNotWriteableException, IOException {
 
-		writeChromatogram(file, Format.CHROMATOGRAM_VERSION_LATEST, chromatogram, monitor);
-	}
-
-	public void writeChromatogram(File file, String version, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws FileIsNotWriteableException, IOException {
-
-		IChromatogramWSDZipWriter chromatogramWriter = getChromatogramWriter(chromatogram, version, monitor);
+		IChromatogramWSDZipWriter chromatogramWriter = getChromatogramWriter(monitor);
 		chromatogramWriter.writeChromatogram(file, chromatogram, monitor);
 		/*
 		 * Export References
@@ -60,11 +55,11 @@ public class ChromatogramWriterWSD extends AbstractChromatogramWriter implements
 	@Override
 	public void writeChromatogram(ZipOutputStream zipOutputStream, String directoryPrefix, IChromatogramWSD chromatogram, IProgressMonitor monitor) throws IOException {
 
-		IChromatogramWSDZipWriter chromatogramWriter = getChromatogramWriter(chromatogram, Format.CHROMATOGRAM_VERSION_LATEST, monitor);
+		IChromatogramWSDZipWriter chromatogramWriter = getChromatogramWriter(monitor);
 		chromatogramWriter.writeChromatogram(zipOutputStream, directoryPrefix, chromatogram, monitor);
 	}
 
-	private IChromatogramWSDZipWriter getChromatogramWriter(IChromatogramWSD chromatogram, String version, IProgressMonitor monitor) {
+	private IChromatogramWSDZipWriter getChromatogramWriter(IProgressMonitor monitor) {
 
 		monitor.setTaskName("Open Chromatography Binary");
 		monitor.subTask(ConverterMessages.exportChromatogram);

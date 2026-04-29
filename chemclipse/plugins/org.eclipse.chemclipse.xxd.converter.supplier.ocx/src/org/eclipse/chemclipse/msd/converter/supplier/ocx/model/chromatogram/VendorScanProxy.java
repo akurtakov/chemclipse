@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -50,7 +50,7 @@ public class VendorScanProxy extends AbstractRegularMassSpectrumProxy implements
 
 		try {
 			ProxyReaderMSD scanProxyReaderMSD = new ProxyReaderMSD();
-			scanProxyReaderMSD.readMassSpectrum(file, offset, version, this, ionTransitionSettings, monitor);
+			scanProxyReaderMSD.readMassSpectrum(file, offset, version, this, ionTransitionSettings);
 		} catch(IOException e) {
 			logger.warn(e);
 		}

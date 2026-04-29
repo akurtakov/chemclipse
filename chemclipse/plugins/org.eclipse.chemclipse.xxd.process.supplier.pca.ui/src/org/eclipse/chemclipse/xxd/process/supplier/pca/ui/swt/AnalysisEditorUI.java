@@ -477,7 +477,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				applyColorScheme(e.display);
+				applyColorSchemeDialog();
 			}
 		});
 		return button;
@@ -694,7 +694,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 		if(samples != null) {
 			IAnalysisSettings analysisSettings = samples.getAnalysisSettings();
 			if(!PreferenceSupplier.getColorScheme().equals(analysisSettings.getColorScheme())) {
-				applyColorScheme(display);
+				applyColorSchemeDialog();
 			}
 		}
 		updateSampleList();
@@ -780,7 +780,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 		}
 	}
 
-	private void applyColorScheme(Display display) {
+	private void applyColorSchemeDialog() {
 
 		if(samples != null) {
 			if(MessageDialog.openQuestion(getShell(), "Color Scheme", "Would like to apply the current color scheme on the samples?")) {

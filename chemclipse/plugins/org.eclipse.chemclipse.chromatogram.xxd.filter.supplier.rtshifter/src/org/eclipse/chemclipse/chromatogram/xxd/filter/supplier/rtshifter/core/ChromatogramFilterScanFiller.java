@@ -18,7 +18,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResu
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.rtshifter.core.internal.support.ScanFiller;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.rtshifter.settings.FilterSettingsScanFiller;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -30,11 +29,9 @@ public class ChromatogramFilterScanFiller extends AbstractChromatogramFilter {
 
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = validate(chromatogramSelection, chromatogramFilterSettings);
 		if(!processingInfo.hasErrorMessages()) {
-			if(chromatogramFilterSettings instanceof FilterSettingsScanFiller filterSettings) {
-				ScanFiller.autofillScans(chromatogramSelection, filterSettings);
-				chromatogramSelection.getChromatogram().setDirty(true);
-				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "The chromatogram has been filled successfully."));
-			}
+			ScanFiller.autofillScans(chromatogramSelection);
+			chromatogramSelection.getChromatogram().setDirty(true);
+			processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "The chromatogram has been filled successfully."));
 		}
 		return processingInfo;
 	}

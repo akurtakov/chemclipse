@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -138,12 +138,7 @@ public class FeatureStatListUI extends org.eclipse.chemclipse.support.ui.swt.Ext
 
 		TableColumn[] columns = getTable().getColumns();
 		for(TableColumn column : columns) {
-			column.setAlignment(getStyle(column.getText()));
+			column.setAlignment(SWT.RIGHT);
 		}
-	}
-
-	private int getStyle(String label) {
-
-		return SWT.RIGHT;
 	}
 }

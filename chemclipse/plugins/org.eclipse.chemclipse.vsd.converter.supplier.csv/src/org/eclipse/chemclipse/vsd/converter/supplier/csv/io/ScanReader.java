@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,11 +20,10 @@ import java.io.IOException;
 import org.eclipse.chemclipse.vsd.converter.supplier.csv.model.IVendorSpectrumVSD;
 import org.eclipse.chemclipse.vsd.converter.supplier.csv.model.VendorSpectrumVSD;
 import org.eclipse.chemclipse.vsd.model.implementation.SignalInfrared;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ScanReader {
 
-	public IVendorSpectrumVSD read(File file, IProgressMonitor monitor) throws IOException {
+	public IVendorSpectrumVSD read(File file) throws IOException {
 
 		/*
 		 * 5.226228e+002,0.000000e+000

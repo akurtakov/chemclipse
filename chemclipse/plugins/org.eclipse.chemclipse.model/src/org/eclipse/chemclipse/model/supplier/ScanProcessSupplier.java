@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -31,7 +31,7 @@ public abstract class ScanProcessSupplier<SettingsClass> extends AbstractProcess
 		super(id, name, description, settingsClass, parent, convert(dataTypes));
 	}
 
-	protected ScanProcessSupplier(String id, String name, String description, Class<SettingsClass> settingsClass, IProcessTypeSupplier parent, int b, DataCategory... dataTypes) {
+	protected ScanProcessSupplier(String id, String name, String description, Class<SettingsClass> settingsClass, IProcessTypeSupplier parent, DataCategory... dataTypes) {
 
 		super(id, name, description, settingsClass, parent, dataTypes);
 	}

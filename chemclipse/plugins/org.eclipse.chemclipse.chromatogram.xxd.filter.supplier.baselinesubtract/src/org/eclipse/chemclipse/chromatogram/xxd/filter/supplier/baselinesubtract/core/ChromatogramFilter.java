@@ -29,7 +29,7 @@ public class ChromatogramFilter extends AbstractChromatogramFilter {
 
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = validate(chromatogramSelection, chromatogramFilterSettings);
 		if(!processingInfo.hasErrorMessages()) {
-			BaselineSubtractProcessor.removeBaseline(chromatogramSelection, monitor);
+			BaselineSubtractProcessor.removeBaseline(chromatogramSelection);
 			chromatogramSelection.getChromatogram().setDirty(true);
 			processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "The baseline was successfully removed."));
 		}

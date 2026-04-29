@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,7 +16,6 @@ package org.eclipse.chemclipse.chromatogram.xxd.classifier.core;
 
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.l10n.Messages;
 import org.eclipse.chemclipse.chromatogram.xxd.classifier.result.IChromatogramClassifierResult;
-import org.eclipse.chemclipse.chromatogram.xxd.classifier.settings.IChromatogramClassifierSettings;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -32,7 +31,7 @@ public abstract class AbstractChromatogramClassifier implements IChromatogramCla
 		this.dataTypes = dataTypes;
 	}
 
-	public IProcessingInfo<IChromatogramClassifierResult> validate(IChromatogramSelection chromatogramSelection, IChromatogramClassifierSettings chromatogramClassifierSettings) {
+	public IProcessingInfo<IChromatogramClassifierResult> validate(IChromatogramSelection chromatogramSelection) {
 
 		IProcessingInfo<IChromatogramClassifierResult> processingInfo = new ProcessingInfo<>();
 		validateChromatogramSelection(chromatogramSelection, processingInfo);

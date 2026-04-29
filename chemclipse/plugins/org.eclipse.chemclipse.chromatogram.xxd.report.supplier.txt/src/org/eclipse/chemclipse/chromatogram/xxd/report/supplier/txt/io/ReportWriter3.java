@@ -32,7 +32,6 @@ import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.quantitation.IQuantitationEntry;
 import org.eclipse.chemclipse.support.text.ValueFormat;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ReportWriter3 {
 
@@ -44,7 +43,7 @@ public class ReportWriter3 {
 	private DecimalFormat decimalFormatTraces = ValueFormat.getDecimalFormatEnglish("0");
 	private DateFormat dateFormat = ValueFormat.getDateFormatEnglish();
 
-	public void generate(File file, boolean append, List<IChromatogram> chromatograms, ReportSettings3 reportSettings, IProgressMonitor monitor) throws IOException {
+	public void generate(File file, boolean append, List<IChromatogram> chromatograms, ReportSettings3 reportSettings) throws IOException {
 
 		try (PrintWriter printWriter = new PrintWriter(new FileWriter(file, append))) {
 			for(IChromatogram chromatogram : chromatograms) {
@@ -52,7 +51,7 @@ public class ReportWriter3 {
 					printHeader(printWriter, chromatogram);
 					printWriter.println("");
 				}
-				printQuantitationResults(printWriter, chromatogram, reportSettings);
+				printQuantitationResults(printWriter, chromatogram);
 				printWriter.println("");
 			}
 			printWriter.flush();
@@ -69,7 +68,7 @@ public class ReportWriter3 {
 		printWriter.println("Miscellaneous: " + chromatogram.getMiscInfo());
 	}
 
-	private void printQuantitationResults(PrintWriter printWriter, IChromatogram chromatogram, ReportSettings3 reportSettings) {
+	private void printQuantitationResults(PrintWriter printWriter, IChromatogram chromatogram) {
 
 		printWriter.print("#");
 		printWriter.print(DELIMITER);

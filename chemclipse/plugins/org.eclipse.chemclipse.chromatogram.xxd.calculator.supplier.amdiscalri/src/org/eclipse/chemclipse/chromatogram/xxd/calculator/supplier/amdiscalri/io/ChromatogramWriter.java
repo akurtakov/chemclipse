@@ -20,11 +20,10 @@ import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.se
 import org.eclipse.chemclipse.model.columns.ISeparationColumnIndices;
 import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.notifier.UpdateNotifier;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ChromatogramWriter {
 
-	public void writeChromatogram(File file, IChromatogram chromatogram, IndexExportSettings indexExportSettings, IProgressMonitor monitor) throws IOException {
+	public void writeChromatogram(File file, IChromatogram chromatogram, IndexExportSettings indexExportSettings) throws IOException {
 
 		if(chromatogram == null || file == null) {
 			throw new IOException("The chromatogram and the file must be not null.");

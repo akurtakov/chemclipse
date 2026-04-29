@@ -112,7 +112,7 @@ public class FileIdentifier {
 	 * @return {@link IPeakIdentificationResults}
 	 * @throws FileNotFoundException
 	 */
-	public IPeakIdentificationResults runPeakIdentification(List<? extends IPeakMSD> peaks, PeakIdentifierSettings peakIdentifierSettings, IProcessingInfo<?> processingInfo, IProgressMonitor monitor) throws FileNotFoundException {
+	public IPeakIdentificationResults runPeakIdentification(List<? extends IPeakMSD> peaks, PeakIdentifierSettings peakIdentifierSettings, IProgressMonitor monitor) throws FileNotFoundException {
 
 		/*
 		 * Pre-filter the mass spectra to identify.

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -38,7 +38,7 @@ public class SavitzkyGolayProcessor {
 			TotalScanSignalExtractor signalExtractor = new TotalScanSignalExtractor(chromatogram);
 			ITotalScanSignals totalScanSignals = signalExtractor.getTotalScanSignals(chromatogramSelection, validatePositive);
 
-			double[] sgTic = smooth(totalScanSignals, filterSettings, monitor);
+			double[] sgTic = smooth(totalScanSignals, filterSettings);
 			int i = 0;
 			for(ITotalScanSignal signal : totalScanSignals.getTotalScanSignals()) {
 				signal.setTotalSignal((float)sgTic[i++]);
@@ -71,24 +71,24 @@ public class SavitzkyGolayProcessor {
 		return chromatogramFilterResult;
 	}
 
-	public static double[] smooth(double[] ticValues, SavitzkyGolayFilter filter, IProgressMonitor monitor) {
+	public static double[] smooth(double[] ticValues, SavitzkyGolayFilter filter) {
 
 		return smoothValues(ticValues, filter);
 	}
 
-	public static double[] smooth(double[] ticValues, ChromatogramFilterSettings filterSettings, IProgressMonitor monitor) {
+	public static double[] smooth(double[] ticValues, ChromatogramFilterSettings filterSettings) {
 
 		SavitzkyGolayFilter filter = new SavitzkyGolayFilter(filterSettings.getOrder(), filterSettings.getWidth(), filterSettings.getDerivative());
 		return smoothValues(ticValues, filter);
 	}
 
-	public static double[] smooth(double[] ticValues, int derivative, int order, int width, IProgressMonitor monitor) {
+	public static double[] smooth(double[] ticValues, int derivative, int order, int width) {
 
 		SavitzkyGolayFilter filter = new SavitzkyGolayFilter(order, width, derivative);
 		return smoothValues(ticValues, filter);
 	}
 
-	public static double[] smooth(ITotalScanSignals totalScanSignals, ChromatogramFilterSettings filterSettings, IProgressMonitor monitor) {
+	public static double[] smooth(ITotalScanSignals totalScanSignals, ChromatogramFilterSettings filterSettings) {
 
 		int size = totalScanSignals.size();
 		double[] ticValues = new double[size];
@@ -111,7 +111,7 @@ public class SavitzkyGolayProcessor {
 
 	public static IChromatogramFilterResult apply(ITotalScanSignals totalSignals, ChromatogramFilterSettings filterSettings, IProgressMonitor monitor) {
 
-		double[] sgTic = smooth(totalSignals, filterSettings, monitor);
+		double[] sgTic = smooth(totalSignals, filterSettings);
 		int i = 0;
 		for(ITotalScanSignal signal : totalSignals.getTotalScanSignals()) {
 			signal.setTotalSignal((float)sgTic[i++]);
