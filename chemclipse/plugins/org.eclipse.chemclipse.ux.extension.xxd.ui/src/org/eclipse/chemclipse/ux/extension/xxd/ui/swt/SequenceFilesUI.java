@@ -14,10 +14,10 @@ package org.eclipse.chemclipse.ux.extension.xxd.ui.swt;
 
 import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
+import org.eclipse.chemclipse.support.ui.swt.IRecordTableComparator;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.SequenceFilesFilter;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.SequenceFilesLabelProvider;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.SequenceFilesTableComparator;
-import org.eclipse.chemclipse.ux.extension.xxd.ui.internal.provider.TargetsComparator;
 import org.eclipse.swt.widgets.Composite;
 
 public class SequenceFilesUI extends ExtendedTableViewer {
@@ -46,7 +46,7 @@ public class SequenceFilesUI extends ExtendedTableViewer {
 	public void sortTable() {
 
 		int column = 0;
-		int sortOrder = TargetsComparator.DESCENDING;
+		int sortOrder = IRecordTableComparator.DESCENDING;
 
 		sequenceListTableComparator.setColumn(column);
 		sequenceListTableComparator.setDirection(sortOrder);

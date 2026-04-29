@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.chemclipse.model.quantitation.QuantitationSupport;
-import org.eclipse.chemclipse.msd.model.core.AbstractIon;
+import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -52,7 +52,7 @@ public class IntegrationQuantitationSupport_2_Test extends QuantitationCalculato
 	public void testValidateXIC_1() {
 
 		List<Double> selectedQuantitationIons = new ArrayList<>();
-		selectedQuantitationIons.add(AbstractIon.TIC_ION);
+		selectedQuantitationIons.add(IIon.TIC_ION);
 		assertFalse(support.validateXIC(selectedQuantitationIons));
 	}
 
