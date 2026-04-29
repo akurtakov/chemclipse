@@ -45,9 +45,9 @@ public class DigitalFilterRemoval extends AbstractFIDSignalFilter<DigitalFilterR
 	}
 
 	@Override
-	protected boolean accepts(IMeasurementFID item) {
+	public boolean acceptsIMeasurement(IMeasurement item) {
 
-		return item.getHeaderData(MARKER) == null;
+		return super.acceptsIMeasurement(item) && item.getHeaderData(MARKER) == null;
 	}
 
 	@Override

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -35,11 +35,6 @@ public abstract class AbstractSpectrumSignalFilter<ConfigType> extends AbstractC
 	@Override
 	public boolean acceptsIMeasurement(IMeasurement item) {
 
-		return item instanceof ISpectrumMeasurement spectrumMeasurement && accepts(spectrumMeasurement);
-	}
-
-	protected boolean accepts(ISpectrumMeasurement item) {
-
-		return true;
+		return item instanceof ISpectrumMeasurement;
 	}
 }

@@ -35,11 +35,6 @@ public abstract class AbstractFIDSignalFilter<ConfigType> extends AbstractComple
 	@Override
 	public boolean acceptsIMeasurement(IMeasurement item) {
 
-		return item instanceof IMeasurementFID fidMeasurement && accepts(fidMeasurement);
-	}
-
-	protected boolean accepts(IMeasurementFID item) {
-
-		return true;
+		return item instanceof IMeasurementFID;
 	}
 }
