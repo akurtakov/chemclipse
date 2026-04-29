@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -12,6 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.instruments;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.chemclipse.support.util.InstrumentListUtil;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
@@ -66,7 +67,9 @@ public class InstrumentValidator implements IValidator<Object> {
 
 	private String checkAlphaNumeric(String content) {
 
-		// TODO Check
+		if(!StringUtils.isAlphanumeric(content)) {
+			return "Input has to be alphanumeric.";
+		}
 		return null;
 	}
 
