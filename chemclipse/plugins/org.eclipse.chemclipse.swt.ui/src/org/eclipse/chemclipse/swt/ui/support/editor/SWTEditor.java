@@ -340,6 +340,10 @@ public class SWTEditor extends Composite {
 
 	void setStyle(int style) {
 
+		Point selection = styledText.getSelection();
+		if(selection.x == selection.y) {
+			return;
+		}
 		int[] ranges = styledText.getSelectionRanges();
 		int i = 0;
 		while(i < ranges.length) {
