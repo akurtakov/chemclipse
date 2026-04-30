@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.Bullet;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.ModifyListener;
@@ -332,20 +331,6 @@ public class SWTEditor extends Composite {
 			font.dispose();
 		}
 		font = null;
-	}
-
-	void setBullet(int type) {
-
-		Point selection = styledText.getSelection();
-		int lineStart = styledText.getLineAtOffset(selection.x);
-		int lineEnd = styledText.getLineAtOffset(selection.y);
-		StyleRange styleRange = new StyleRange();
-		Bullet bullet = new Bullet(type, styleRange);
-		bullet.text = ".";
-		for(int lineIndex = lineStart; lineIndex <= lineEnd; lineIndex++) {
-			Bullet oldBullet = styledText.getLineBullet(lineIndex);
-			styledText.setLineBullet(lineIndex, 1, oldBullet != null ? null : bullet);
-		}
 	}
 
 	void setStyle(int style) {
