@@ -342,6 +342,7 @@ public class SWTEditor extends Composite {
 
 		Point selection = styledText.getSelection();
 		if(selection.x == selection.y) {
+			updateToolBar();
 			return;
 		}
 		int[] ranges = styledText.getSelectionRanges();
