@@ -138,6 +138,9 @@ public class ChromatogramReaderVersion10 extends AbstractChromatogramReader impl
 			if(scan == null) {
 				continue;
 			}
+			if(monitor.isCanceled()) {
+				return;
+			}
 			IRegularMassSpectrum massSpectrum = readMassSpectrum(spectrum);
 			if(massSpectrum.getMassSpectrometer() < 2) {
 				cycleNumber++;

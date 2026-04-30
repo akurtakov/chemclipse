@@ -112,6 +112,9 @@ public class ChromatogramReaderVersion22 extends AbstractChromatogramReader {
 		List<Scan> scans = msRun.getScan();
 		monitor.beginTask(ConverterMessages.readScans, scans.size());
 		for(Scan scan : scans) {
+			if(monitor.isCanceled()) {
+				return;
+			}
 			IVendorScan massSpectrum = readScan(scan, chromatogram);
 			massSpectrum.setCycleNumber(cycleNumber);
 			chromatogram.addScan(massSpectrum);

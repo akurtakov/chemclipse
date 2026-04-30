@@ -42,23 +42,23 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 	@Override
 	public IChromatogramCSD read(File file, IProgressMonitor monitor) throws IOException {
 
-		return readChromatogram(file);
+		return readChromatogram(file, monitor);
 	}
 
 	@Override
 	public IChromatogramOverview readOverview(File file, IProgressMonitor monitor) throws IOException {
 
-		return readChromatogram(file);
+		return readChromatogram(file, monitor);
 	}
 
-	private IChromatogramCSD readChromatogram(File file) {
+	private IChromatogramCSD readChromatogram(File file, IProgressMonitor monitor) {
 
 		IVendorChromatogram chromatogram = new VendorChromatogram();
 		chromatogram.setFile(file);
 		/*
 		 * Read the chromatogram
 		 */
-		readChromatogram(file, chromatogram);
+		readChromatogram(file, chromatogram, monitor);
 		/*
 		 * Calculate the scanInterval and scanDelay.
 		 */
@@ -67,7 +67,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 		return chromatogram;
 	}
 
-	private boolean readChromatogram(File file, IVendorChromatogram chromatogram) {
+	private boolean readChromatogram(File file, IVendorChromatogram chromatogram, IProgressMonitor monitor) {
 
 		try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
 			try {
@@ -76,7 +76,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 				RetentionTimeFormat retentionTimeFormat = PreferenceSupplier.getRetentionTimeFormat();
 
 				String line;
-				while((line = bufferedReader.readLine()) != null) {
+				while((line = bufferedReader.readLine()) != null && !monitor.isCanceled()) {
 					/*
 					 * Parse each line.
 					 */
@@ -144,10 +144,10 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 			} catch(Exception e) {
 				logger.warn(e);
 			}
-		} catch(IOException e1) {
-			logger.warn(e1);
+		} catch(IOException ex) {
+			logger.warn(ex);
 		}
 
-		return (chromatogram.getNumberOfScans() > 0) ? true : false;
+		return chromatogram.getNumberOfScans() > 0;
 	}
 }

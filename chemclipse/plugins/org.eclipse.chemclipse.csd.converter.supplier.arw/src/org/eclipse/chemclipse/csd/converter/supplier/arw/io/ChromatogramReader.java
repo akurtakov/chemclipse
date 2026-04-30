@@ -38,16 +38,16 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 	@Override
 	public IChromatogramCSD read(File file, IProgressMonitor monitor) throws IOException {
 
-		return readChromatogram(file);
+		return readChromatogram(file, monitor);
 	}
 
 	@Override
 	public IChromatogramOverview readOverview(File file, IProgressMonitor monitor) throws IOException {
 
-		return readChromatogram(file);
+		return readChromatogram(file, monitor);
 	}
 
-	private IChromatogramCSD readChromatogram(File file) throws IOException {
+	private IChromatogramCSD readChromatogram(File file, IProgressMonitor monitor) throws IOException {
 
 		IVendorChromatogram chromatogram = new VendorChromatogram();
 		chromatogram.setFile(file);
@@ -56,7 +56,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 		IChromatogramArrayReader in = new ChromatogramArrayReader(file);
 		String input = in.readBytesAsString(in.getLength());
 		Matcher matcher = scanPattern.matcher(input);
-		while(matcher.find()) {
+		while(matcher.find() && !monitor.isCanceled()) {
 			String retentionTimeInMinutes = matcher.group(1).replace(",", ".");
 			String abundance = matcher.group(3).replace(",", ".");
 			try {

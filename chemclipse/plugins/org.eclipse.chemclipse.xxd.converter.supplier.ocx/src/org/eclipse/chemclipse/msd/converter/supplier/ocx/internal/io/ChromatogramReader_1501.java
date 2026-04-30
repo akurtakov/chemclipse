@@ -174,7 +174,7 @@ public class ChromatogramReader_1501 extends AbstractChromatogramReader {
 			if(useScanProxies) {
 				readScanProxies((ZipFile)object, directoryPrefix, file, chromatogram, monitor);
 			} else {
-				readScans(getDataInputStream(object, directoryPrefix + Format.FILE_SCANS_MSD), closeStream, chromatogram);
+				readScans(getDataInputStream(object, directoryPrefix + Format.FILE_SCANS_MSD), closeStream, chromatogram, monitor);
 			}
 			readBaseline(getDataInputStream(object, directoryPrefix + Format.FILE_BASELINE_MSD), closeStream, chromatogram);
 			subMonitor.worked(20);
@@ -293,7 +293,7 @@ public class ChromatogramReader_1501 extends AbstractChromatogramReader {
 		dataInputStream.close();
 	}
 
-	private void readScans(DataInputStream dataInputStream, boolean closeStream, IChromatogramMSD chromatogram) throws IOException {
+	private void readScans(DataInputStream dataInputStream, boolean closeStream, IChromatogramMSD chromatogram, IProgressMonitor monitor) throws IOException {
 
 		IIonTransitionSettings ionTransitionSettings = chromatogram.getIonTransitionSettings();
 		/*
@@ -301,6 +301,9 @@ public class ChromatogramReader_1501 extends AbstractChromatogramReader {
 		 */
 		int scans = dataInputStream.readInt();
 		for(int scan = 1; scan <= scans; scan++) {
+			if(monitor.isCanceled()) {
+				break;
+			}
 			IVendorScan massSpectrum = new VendorScan();
 			readerProxy.readMassSpectrum(massSpectrum, dataInputStream, ionTransitionSettings);
 			chromatogram.addScan(massSpectrum);

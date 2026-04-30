@@ -296,6 +296,9 @@ public class ChromatogramReader_1100 extends AbstractChromatogramReader {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, ConverterMessages.importScan, scans * 2);
 		try {
 			for(int scan = 1; scan <= scans; scan++) {
+				if(monitor.isCanceled()) {
+					break;
+				}
 				IVendorScan massSpectrum = new VendorScan();
 				readerProxy.readMassSpectrum(massSpectrum, dataInputStream, ionTransitionSettings);
 				chromatogram.addScan(massSpectrum);

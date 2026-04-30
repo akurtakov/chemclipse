@@ -322,6 +322,7 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 	}
 
 	private void processChromatogram(IChromatogramSelection chromatogramSelection) {
+
 		String loadProcessMethodPath = preferenceStore.getString(PreferenceSupplier.P_CHROMATOGRAM_LOAD_PROCESS_METHOD);
 		if(!loadProcessMethodPath.trim().isEmpty()) {
 			File file = new File(loadProcessMethodPath);
@@ -405,7 +406,7 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 			 * No fork, otherwise it might crash when loading a chromatogram takes too long.
 			 */
 			boolean fork = !batch;
-			dialog.run(fork, false, runnable);
+			dialog.run(fork, true, runnable);
 		} catch(InvocationTargetException e) {
 			logger.warn(e);
 			logger.warn(e.getCause());

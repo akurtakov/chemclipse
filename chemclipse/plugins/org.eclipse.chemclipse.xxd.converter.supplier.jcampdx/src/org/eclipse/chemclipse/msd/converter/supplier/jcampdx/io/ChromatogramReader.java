@@ -74,7 +74,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 	public IChromatogramMSD read(File file, IProgressMonitor monitor) throws IOException {
 
 		if(isValidFileFormat(file)) {
-			return readChromatogram(file);
+			return readChromatogram(file, monitor);
 		}
 
 		return null;
@@ -90,7 +90,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 		return null;
 	}
 
-	private IChromatogramMSD readChromatogram(File file) throws IOException {
+	private IChromatogramMSD readChromatogram(File file, IProgressMonitor monitor) throws IOException {
 
 		IVendorChromatogram chromatogram = new VendorChromatogram();
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
@@ -107,7 +107,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 			float totalSignalFromFile = 0.0f;
 
 			String line;
-			while((line = bufferedReader.readLine()) != null) {
+			while((line = bufferedReader.readLine()) != null && !monitor.isCanceled()) {
 				/*
 				 * Each scan starts with the marker:
 				 * ##SCAN_NUMBER= 1

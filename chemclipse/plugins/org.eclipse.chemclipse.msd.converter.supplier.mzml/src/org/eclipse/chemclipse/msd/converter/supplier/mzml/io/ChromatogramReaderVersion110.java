@@ -131,6 +131,9 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 		monitor.beginTask(ConverterMessages.readScans, spectrumList.getCount().intValue());
 		int cycleNumber = isMultiStageMassSpectrum(mzML) ? 1 : 0;
 		for(SpectrumType spectrum : mzML.getRun().getSpectrumList().getSpectrum()) {
+			if(monitor.isCanceled()) {
+				return;
+			}
 			IRegularMassSpectrum massSpectrum = readMassSpectrum(spectrum);
 			if(massSpectrum.getMassSpectrometer() < 2) {
 				cycleNumber++;
