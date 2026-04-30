@@ -16,9 +16,6 @@ import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.impl.CalculatorStrategy;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.settings.CalculatorSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.settings.MassSpectrumIdentifierAlkaneSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.settings.PeakIdentifierAlkaneSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.settings.ResetterSettings;
 import org.eclipse.chemclipse.support.preferences.AbstractPreferenceSupplier;
 import org.eclipse.chemclipse.support.preferences.IPreferenceSupplier;
 import org.eclipse.chemclipse.support.settings.UserManagement;
@@ -49,21 +46,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static final boolean DEF_USE_DIRECTORY_IMPORT_CALIBRATION_FILES = false;
 	public static final String P_STANDARD_DIRECTORY_IMPORT_CALIBRATION_FILES = "standardDirectoryImportCalibrationFiles";
 	public static final String DEF_STANDARD_DIRECTORY_IMPORT_CALIBRATION_FILES = UserManagement.getUserHome();
-	/*
-	 * Alkane Identifier
-	 */
-	public static final String P_NUMBER_OF_TARGETS = "numberOfTargets";
-	public static final int DEF_NUMBER_OF_TARGETS = 15;
-	public static final int MIN_NUMBER_OF_TARGETS = 1;
-	public static final int MAX_NUMBER_OF_TARGETS = 100;
-	public static final String P_MIN_MATCH_FACTOR = "minMatchFactor";
-	public static final float DEF_MIN_MATCH_FACTOR = 70.0f;
-	public static final float MIN_MIN_MATCH_FACTOR = 0.0f;
-	public static final float MAX_MIN_MATCH_FACTOR = 100.0f;
-	public static final String P_MIN_REVERSE_MATCH_FACTOR = "minReverseMatchFactor";
-	public static final float DEF_MIN_REVERSE_MATCH_FACTOR = 70.0f;
-	public static final float MIN_MIN_REVERSE_MATCH_FACTOR = 0.0f;
-	public static final float MAX_MIN_REVERSE_MATCH_FACTOR = 100.0f;
 	/*
 	 * Calibration File Export
 	 */
@@ -121,9 +103,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 		putDefault(P_USE_DEFAULT_COLUMN, Boolean.toString(DEF_USE_DEFAULT_COLUMN));
 		putDefault(P_PROCESS_REFERENCED_CHROMATOGRAMS, Boolean.toString(DEF_PROCESS_REFERENCED_CHROMATOGRAMS));
 		putDefault(P_OPEN_CALIBRATION_FILE_AFTER_PROCESSING, DEF_OPEN_CALIBRATION_FILE_AFTER_PROCESSING);
-		putDefault(P_NUMBER_OF_TARGETS, Integer.toString(DEF_NUMBER_OF_TARGETS));
-		putDefault(P_MIN_MATCH_FACTOR, Float.toString(DEF_MIN_MATCH_FACTOR));
-		putDefault(P_MIN_REVERSE_MATCH_FACTOR, Float.toString(DEF_MIN_REVERSE_MATCH_FACTOR));
 		putDefault(P_CALIBRATION_EXPORT_USE_CURATED_NAMES, Boolean.toString(DEF_CALIBRATION_EXPORT_USE_CURATED_NAMES));
 		putDefault(P_CALIBRATION_EXPORT_DERIVE_MISSING_INDICES, Boolean.toString(DEF_CALIBRATION_EXPORT_DERIVE_MISSING_INDICES));
 		putDefault(P_USE_DIRECTORY_IMPORT_CALIBRATION_FILES, DEF_USE_DIRECTORY_IMPORT_CALIBRATION_FILES);
@@ -144,24 +123,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 		putDefault(P_PARSE_AMDIS_RETENTION_INDEX_DATA, Boolean.toString(DEF_PARSE_AMDIS_RETENTION_INDEX_DATA));
 	}
 
-	public static PeakIdentifierAlkaneSettings getPeakIdentifierAlkaneSettings() {
-
-		PeakIdentifierAlkaneSettings settings = new PeakIdentifierAlkaneSettings();
-		settings.setNumberOfTargets(getNumberOfTargets());
-		settings.setMinMatchFactor(getMinMatchFactor());
-		settings.setMinReverseMatchFactor(getMinReverseMatchFactor());
-		return settings;
-	}
-
-	public static MassSpectrumIdentifierAlkaneSettings getMassSpectrumIdentifierAlkaneSettings() {
-
-		MassSpectrumIdentifierAlkaneSettings settings = new MassSpectrumIdentifierAlkaneSettings();
-		settings.setNumberOfTargets(getNumberOfTargets());
-		settings.setMinMatchFactor(getMinMatchFactor());
-		settings.setMinReverseMatchFactor(getMinReverseMatchFactor());
-		return settings;
-	}
-
 	public static CalculatorSettings getChromatogramCalculatorSettings() {
 
 		CalculatorSettings settings = new CalculatorSettings();
@@ -169,13 +130,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 		settings.setRetentionIndexFiles(getRetentionIndexFiles());
 		settings.setCalculatorStrategy(getCalculatorStrategy());
 		settings.setUseDefaultColumn(isUseDefaultColumn());
-		settings.setProcessReferencedChromatograms(isProcessReferencedChromatograms());
-		return settings;
-	}
-
-	public static ResetterSettings getChromatogramResetterSettings() {
-
-		ResetterSettings settings = new ResetterSettings();
 		settings.setProcessReferencedChromatograms(isProcessReferencedChromatograms());
 		return settings;
 	}
@@ -191,21 +145,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 		FileListUtil fileListUtil = new FileListUtil();
 		String[] items = retentionIndexFiles.toArray(new String[retentionIndexFiles.size()]);
 		INSTANCE().put(P_RETENTION_INDEX_FILES, fileListUtil.createList(items));
-	}
-
-	public static int getNumberOfTargets() {
-
-		return INSTANCE().getInteger(P_NUMBER_OF_TARGETS, DEF_NUMBER_OF_TARGETS);
-	}
-
-	public static float getMinMatchFactor() {
-
-		return INSTANCE().getFloat(P_MIN_MATCH_FACTOR, DEF_MIN_MATCH_FACTOR);
-	}
-
-	public static float getMinReverseMatchFactor() {
-
-		return INSTANCE().getFloat(P_MIN_REVERSE_MATCH_FACTOR, DEF_MIN_REVERSE_MATCH_FACTOR);
 	}
 
 	public static boolean isCalibrationExportUseCuratedNames() {
@@ -321,16 +260,6 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static void setListPathExportTemplate(String filterPath) {
 
 		INSTANCE().put(P_LIST_PATH_EXPORT_TEMPLATE, filterPath);
-	}
-
-	public static String getListPathImport() {
-
-		return INSTANCE().get(P_LIST_PATH_IMPORT, DEF_LIST_PATH_IMPORT);
-	}
-
-	public static void setListPathImport(String filterPath) {
-
-		INSTANCE().put(P_LIST_PATH_IMPORT, filterPath);
 	}
 
 	public static String getListPathExport() {

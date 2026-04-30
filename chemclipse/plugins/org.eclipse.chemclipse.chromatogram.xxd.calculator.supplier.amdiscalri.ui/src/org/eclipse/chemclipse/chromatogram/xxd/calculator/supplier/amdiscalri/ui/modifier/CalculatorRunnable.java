@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,6 +15,8 @@ package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.u
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.core.chromatogram.ChromatogramCalculator;
+import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.preferences.PreferenceSupplier;
+import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.settings.CalculatorSettings;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.processing.ui.support.ProcessingInfoPartSupport;
@@ -37,7 +39,8 @@ public class CalculatorRunnable implements IRunnableWithProgress {
 
 		try {
 			monitor.beginTask("Retention Index Calculator", IProgressMonitor.UNKNOWN);
-			IProcessingInfo<?> processingInfo = ChromatogramCalculator.applyCalculator(chromatogramSelection, CALCULATOR_ID, monitor);
+			CalculatorSettings settings = PreferenceSupplier.getChromatogramCalculatorSettings();
+			IProcessingInfo<?> processingInfo = ChromatogramCalculator.applyCalculator(chromatogramSelection, settings, CALCULATOR_ID, monitor);
 			ProcessingInfoPartSupport.getInstance().update(processingInfo, false);
 			updateSelection();
 		} finally {

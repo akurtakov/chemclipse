@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -40,12 +40,6 @@ public class ChromatogramCalculator extends AbstractChromatogramCalculator {
 			return applyCalculator(chromatogramSelection);
 		}
 		return null;
-	}
-
-	@Override
-	public IProcessingInfo<?> applyCalculator(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor) {
-
-		return applyCalculator(chromatogramSelection);
 	}
 
 	IProcessingInfo<IPeakResolutionResult> applyCalculator(IChromatogramSelection chromatogramSelection) {

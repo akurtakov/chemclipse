@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -39,17 +39,6 @@ public interface IChromatogramCalculator {
 	 * @return {@link IProcessingInfo}
 	 */
 	IProcessingInfo<?> applyCalculator(IChromatogramSelection chromatogramSelection, IChromatogramCalculatorSettings chromatogramCalculatorSettings, IProgressMonitor monitor);
-
-	/**
-	 * Apply the calculator in the given chromatogram selection.
-	 * Return an {@link IProcessingInfo} instance.<br/>
-	 * If there is no monitor instance, use a {@link NullProgressMonitor}.
-	 * 
-	 * @param chromatogramSelection
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
-	 */
-	IProcessingInfo<?> applyCalculator(IChromatogramSelection chromatogramSelection, IProgressMonitor monitor);
 
 	/**
 	 * Validates the selection and settings and returns a process info instance.

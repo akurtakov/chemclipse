@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,9 +26,11 @@ public class ResetterSettings extends AbstractChromatogramCalculatorSettings imp
 	@JsonProperty(value = "Clear Retention Indices (Stored)", defaultValue = "true")
 	@JsonPropertyDescription("The retention indices, that are stored in the chromatogram, will be cleared.")
 	private boolean clearStoredRetentionIndices = true;
+
 	@JsonProperty(value = "Process Referenced Chromatograms", defaultValue = "true")
 	@JsonPropertyDescription("Referenced chromatgrams will be also processed.")
 	private boolean processReferencedChromatograms = true;
+
 	@JsonIgnore
 	private List<String> retentionIndexFiles = new ArrayList<>();
 

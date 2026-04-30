@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -65,29 +65,6 @@ public class ChromatogramCalculator {
 		if(chromatogramCalculator != null) {
 			processingInfo = chromatogramCalculator.applyCalculator(chromatogramSelection, chromatogramCalculatorSettings, monitor);
 			chromatogramSelection.getChromatogram().setDirty(true);
-		} else {
-			processingInfo = new ProcessingInfo<>();
-			processingInfo.addErrorMessage(PROCESSING_DESCRIPTION, NO_CHROMATOGRAM_CALCULATOR_AVAILABLE);
-		}
-		return processingInfo;
-	}
-
-	// TODO JUnit
-	/**
-	 * Applies the specified filter, but retrieves the IChromatogramFilterSettings dynamically.<br/>
-	 * See also method: applyFilter(IChromatogramSelection chromatogramSelection, IChromatogramFilterSettings chromatogramFilterSettings, String filterId, IProgressMonitor monitor)
-	 * 
-	 * @param chromatogramSelection
-	 * @param calculatorId
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
-	 */
-	public static IProcessingInfo<?> applyCalculator(IChromatogramSelection chromatogramSelection, String calculatorId, IProgressMonitor monitor) {
-
-		IProcessingInfo<?> processingInfo;
-		IChromatogramCalculator chromatogramCalculator = getChromatogramCalculator(calculatorId);
-		if(chromatogramCalculator != null) {
-			processingInfo = chromatogramCalculator.applyCalculator(chromatogramSelection, monitor);
 		} else {
 			processingInfo = new ProcessingInfo<>();
 			processingInfo.addErrorMessage(PROCESSING_DESCRIPTION, NO_CHROMATOGRAM_CALCULATOR_AVAILABLE);

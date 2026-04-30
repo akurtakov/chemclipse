@@ -19,7 +19,6 @@ import java.util.List;
 import org.eclipse.chemclipse.chromatogram.msd.identifier.peak.AbstractPeakIdentifierMSD;
 import org.eclipse.chemclipse.chromatogram.msd.identifier.settings.IPeakIdentifierSettingsMSD;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.impl.AlkaneIdentifier;
-import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.settings.PeakIdentifierAlkaneSettings;
 import org.eclipse.chemclipse.model.identifier.IPeakIdentificationResults;
 import org.eclipse.chemclipse.msd.model.core.IPeakMSD;
@@ -33,17 +32,11 @@ public class PeakIdentifier extends AbstractPeakIdentifierMSD {
 	public IProcessingInfo<IPeakIdentificationResults> identify(List<? extends IPeakMSD> peaks, IPeakIdentifierSettingsMSD peakIdentifierSettings, IProgressMonitor monitor) {
 
 		ProcessingInfo<IPeakIdentificationResults> processingInfo = new ProcessingInfo<>();
-		AlkaneIdentifier alkaneIdentifier = new AlkaneIdentifier();
-		PeakIdentifierAlkaneSettings alkaneSettings;
+
 		if(peakIdentifierSettings instanceof PeakIdentifierAlkaneSettings settings) {
-			alkaneSettings = settings;
-		} else {
-			alkaneSettings = PreferenceSupplier.getPeakIdentifierAlkaneSettings();
+			AlkaneIdentifier alkaneIdentifier = new AlkaneIdentifier();
+			processingInfo.addMessages(alkaneIdentifier.runPeakIdentification(peaks, settings, monitor));
 		}
-		/*
-		 * Run the identifier.
-		 */
-		processingInfo.addMessages(alkaneIdentifier.runPeakIdentification(peaks, alkaneSettings, monitor));
 
 		return processingInfo;
 	}
