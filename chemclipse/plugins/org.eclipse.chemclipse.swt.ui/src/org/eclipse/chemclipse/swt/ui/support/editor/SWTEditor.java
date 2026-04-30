@@ -48,7 +48,7 @@ public class SWTEditor extends Composite {
 	Display display;
 	Composite parent;
 	StyledText styledText;
-	ToolItem boldControl, italicControl, underlineControl, strikeoutControl;
+	ToolItem boldControl, italicControl, underlineControl, strikeoutControl, clearControl;
 
 	boolean insert = true;
 	boolean readOnly = false;
@@ -58,7 +58,7 @@ public class SWTEditor extends Composite {
 	String link;
 
 	// Resources
-	Image iBold, iItalic, iUnderline, iStrikeout;
+	Image iBold, iItalic, iUnderline, iStrikeout, iClear;
 	Image iSpacing, iIndent, iBulletList, iNumberedList;
 	Font font, textFont;
 
@@ -171,6 +171,13 @@ public class SWTEditor extends Composite {
 			setStyle(STRIKEOUT);
 		}));
 
+		new ToolItem(styleToolBar, SWT.SEPARATOR);
+
+		clearControl = new ToolItem(styleToolBar, SWT.PUSH);
+		clearControl.setImage(iClear);
+		clearControl.setToolTipText(getResourceString("Clear Formatting")); //$NON-NLS-1$
+		clearControl.addSelectionListener(widgetSelectedAdapter(event -> clearFormatting()));
+
 	}
 
 	void disposeRanges(StyleRange[] ranges) {
@@ -271,6 +278,7 @@ public class SWTEditor extends Composite {
 		iItalic = loadImage(display, "italic"); //$NON-NLS-1$
 		iUnderline = loadImage(display, "underline"); //$NON-NLS-1$
 		iStrikeout = loadImage(display, "strikeout"); //$NON-NLS-1$
+		iClear = loadImage(display, "clear"); //$NON-NLS-1$
 		iBulletList = loadImage(display, "para_bul"); //$NON-NLS-1$
 		iNumberedList = loadImage(display, "para_num"); //$NON-NLS-1$
 	}
@@ -308,6 +316,8 @@ public class SWTEditor extends Composite {
 		iUnderline = null;
 		iStrikeout.dispose();
 		iStrikeout = null;
+		iClear.dispose();
+		iClear = null;
 		iBulletList.dispose();
 		iBulletList = null;
 		iNumberedList.dispose();
@@ -452,6 +462,28 @@ public class SWTEditor extends Composite {
 		}
 		styledText.setStyleRanges(start, length, newRanges, newStyles);
 		disposeRanges(styles);
+	}
+
+	void clearFormatting() {
+
+		Point selection = styledText.getSelection();
+		int start;
+		int length;
+		if(selection.x == selection.y) {
+			start = 0;
+			length = styledText.getCharCount();
+		} else {
+			start = selection.x;
+			length = selection.y - selection.x;
+		}
+		if(length > 0) {
+			StyleRange[] oldStyles = styledText.getStyleRanges(start, length, false);
+			styledText.setStyleRanges(start, length, new int[0], new StyleRange[0]);
+			disposeRanges(oldStyles);
+		}
+		styleState = 0;
+		textFont = null;
+		updateToolBar();
 	}
 
 	void showError(String title, String message) {
