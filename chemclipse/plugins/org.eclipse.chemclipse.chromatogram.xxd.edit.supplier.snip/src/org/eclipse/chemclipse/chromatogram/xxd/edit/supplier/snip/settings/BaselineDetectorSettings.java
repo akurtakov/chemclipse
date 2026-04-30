@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.xxd.baseline.detector.settings.AbstractBaselineDetectorSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.support.literature.LiteratureReference;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
@@ -35,13 +34,15 @@ public class BaselineDetectorSettings extends AbstractBaselineDetectorSettings {
 
 	@JsonProperty(value = "Number of Iterations", defaultValue = "100")
 	@JsonPropertyDescription(value = "The number of iterations to apply the SNIP filter.")
-	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_ITERATIONS, maxValue = PreferenceSupplier.MAX_ITERATIONS)
+	@IntSettingsProperty(minValue = 5, maxValue = 2000)
 	private int iterations = 100;
+
 	@JsonProperty(value = "Window Size", defaultValue = "5")
 	@JsonPropertyDescription(value = "Window Size: 3, 5, 7, ..., 45")
 	@JsonDeserialize(using = WindowSizeDeserializer.class)
-	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_WINDOW_SIZE, maxValue = PreferenceSupplier.MAX_WINDOW_SIZE, validation = Validation.ODD_NUMBER_INCLUDING_ZERO)
+	@IntSettingsProperty(minValue = 0, maxValue = 45, validation = Validation.ODD_NUMBER_INCLUDING_ZERO)
 	private int windowSize = 5;
+
 	@JsonProperty(value = "Specific Traces", defaultValue = "")
 	@JsonPropertyDescription(value = "Instead of the total signal, use the following traces (ions or wavelenghts) to calculate the baseline.")
 	private String specificTraces = "";

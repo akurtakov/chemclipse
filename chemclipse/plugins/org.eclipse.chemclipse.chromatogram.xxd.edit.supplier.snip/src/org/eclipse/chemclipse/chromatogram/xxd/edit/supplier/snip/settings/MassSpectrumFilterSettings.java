@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,7 +17,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.msd.filter.settings.AbstractMassSpectrumFilterSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.edit.supplier.snip.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.support.literature.LiteratureReference;
@@ -33,17 +32,17 @@ public class MassSpectrumFilterSettings extends AbstractMassSpectrumFilterSettin
 
 	@JsonProperty(value = "Iterations", defaultValue = "100")
 	@JsonPropertyDescription(value = "The number of iterations to run the filter.")
-	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_ITERATIONS, maxValue = PreferenceSupplier.MAX_ITERATIONS)
+	@IntSettingsProperty(minValue = 5, maxValue = 2000)
 	private int iterations = 100;
 
 	@JsonProperty(value = "Magnification Factor", defaultValue = "1.0")
 	@JsonPropertyDescription(value = "The magnification factor run the filter.")
-	@DoubleSettingsProperty(minValue = PreferenceSupplier.MIN_MAGNIFICATION_FACTOR, maxValue = PreferenceSupplier.MAX_MAGNIFICATION_FACTOR)
+	@DoubleSettingsProperty(minValue = 0.01d, maxValue = 5.0d)
 	private double magnificationFactor = 1.0d;
 
 	@JsonProperty(value = "Transitions", defaultValue = "1")
 	@JsonPropertyDescription(value = "The number of transitions run the filter.")
-	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_TRANSITIONS, maxValue = PreferenceSupplier.MAX_TRANSITIONS)
+	@IntSettingsProperty(minValue = 1, maxValue = 100)
 	private int transitions = 1;
 
 	public int getIterations() {
