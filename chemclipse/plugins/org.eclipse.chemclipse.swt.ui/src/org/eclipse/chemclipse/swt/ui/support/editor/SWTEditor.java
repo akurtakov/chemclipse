@@ -453,7 +453,6 @@ public class SWTEditor extends Composite {
 
 		Point selection = styledText.getSelection();
 		if(selection.x == selection.y) {
-			updateToolBar();
 			return;
 		}
 		int start = selection.x;
@@ -466,6 +465,7 @@ public class SWTEditor extends Composite {
 		styleState = 0;
 		textFont = null;
 		updateToolBar();
+		styledText.notifyListeners(SWT.Modify, new Event());
 	}
 
 	void showError(String title, String message) {
