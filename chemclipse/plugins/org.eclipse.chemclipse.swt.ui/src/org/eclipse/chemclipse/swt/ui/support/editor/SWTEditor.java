@@ -95,6 +95,7 @@ public class SWTEditor extends Composite {
 
 		HTMLReader parser = new HTMLReader(text);
 		parser.applyTo(styledText);
+		updateToolBar();
 	}
 
 	public String getText() {
