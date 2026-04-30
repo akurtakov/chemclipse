@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,13 +26,15 @@ public class ConverterProcessSettings implements ISystemProcessSettings {
 	 * Chromatogram
 	 * The data is always saved in latest version. For a specific version, use ChromatogramExportSettings.
 	 */
-	@JsonProperty(value = "Compression Level Chromatogram (*.ocb)", defaultValue = "0")
+	@JsonProperty(value = "Compression Level Chromatogram (*.ocb)", defaultValue = "" + PreferenceSupplier.DEF_CHROMATOGRAM_COMPRESSION_LEVEL)
 	@JsonPropertyDescription(value = "Compression level for the chromatogram, 0 = off, 9 = best.")
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_COMPRESSION_LEVEL, maxValue = PreferenceSupplier.MAX_COMPRESSION_LEVEL)
 	private int chromatogramCompressionLevel = 0;
+
 	@JsonProperty(value = "Export References Separately", defaultValue = "false")
 	@JsonPropertyDescription(value = "Export all reference chromatograms into a separate file.")
 	private boolean exportReferencesSeparately = false;
+
 	@JsonProperty(value = "Header Field (Export References)", defaultValue = "DATA_NAME")
 	@JsonPropertyDescription(value = "Use the data from the given header field to mark the exported references.")
 	private HeaderField headerFieldReferencesExport = HeaderField.DATA_NAME;
@@ -40,7 +42,7 @@ public class ConverterProcessSettings implements ISystemProcessSettings {
 	 * Method
 	 * The data is always saved in latest version.
 	 */
-	@JsonProperty(value = "Compression Level Method (*.ocm)", defaultValue = "0")
+	@JsonProperty(value = "Compression Level Method (*.ocm)", defaultValue = "" + PreferenceSupplier.DEF_METHOD_COMPRESSION_LEVEL)
 	@JsonPropertyDescription(value = "Compression level for the method, 0 = off, 9 = best.")
 	@IntSettingsProperty(minValue = PreferenceSupplier.MIN_COMPRESSION_LEVEL, maxValue = PreferenceSupplier.MAX_COMPRESSION_LEVEL)
 	private int methodCompressionLevel = 0;
