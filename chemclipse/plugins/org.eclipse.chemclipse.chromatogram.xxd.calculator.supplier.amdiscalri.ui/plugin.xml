@@ -32,12 +32,6 @@
             id="org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.preferences.preferencePageCalculator"
             name="Calculator">
       </page>
-      <page
-            category="org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.preferences.preferencePage"
-            class="org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.preferences.PreferencePageIdentifier"
-            id="org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.ui.preferences.preferencePageIdentifier"
-            name="Alkanes">
-      </page>      
    </extension>
    <extension
          point="org.eclipse.ui.newWizards">
