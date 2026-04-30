@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Aleksandar Kurtakov - initial API and implementation
  *******************************************************************************/
@@ -77,13 +77,14 @@ public class HTMLReader {
             } else {
                 String tag = m.group(2).toLowerCase();
                 boolean closing = m.group(1) != null;
-                String attrs = m.group(3);
 
                 if (closing) {
-                    if (!stack.isEmpty()) stack.pop();
+                    if (!stack.isEmpty()) {
+						stack.pop();
+					}
                 } else {
                     CurrentStyle cs = copy(stack.peek());
-                    applyTagToStyle(cs, tag, attrs);
+                    applyTagToStyle(cs, tag);
                     stack.push(cs);
                     if (tag.equals("br")) {
                     	stack.pop();
@@ -95,7 +96,9 @@ public class HTMLReader {
     }
 
     private void appendText(String t) {
-        if (t.isEmpty()) return;
+        if (t.isEmpty()) {
+			return;
+		}
         CurrentStyle cs = stack.peek();
         int start = text.length();
         text.append(t);
@@ -105,11 +108,13 @@ public class HTMLReader {
         sr.length = len;
         sr.fontStyle = cs.fontStyle;
         sr.underline = cs.underline;
-        if (cs.fontData != null) sr.font = new Font(display, cs.fontData);
+        if (cs.fontData != null) {
+			sr.font = new Font(display, cs.fontData);
+		}
         styles.add(sr);
     }
 
-    private void applyTagToStyle(CurrentStyle cs, String tag, String attrs) {
+    private void applyTagToStyle(CurrentStyle cs, String tag) {
         switch (tag) {
             case "b":
             case "strong":
