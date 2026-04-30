@@ -467,15 +467,12 @@ public class SWTEditor extends Composite {
 	void clearFormatting() {
 
 		Point selection = styledText.getSelection();
-		int start;
-		int length;
 		if(selection.x == selection.y) {
-			start = 0;
-			length = styledText.getCharCount();
-		} else {
-			start = selection.x;
-			length = selection.y - selection.x;
+			updateToolBar();
+			return;
 		}
+		int start = selection.x;
+		int length = selection.y - selection.x;
 		if(length > 0) {
 			StyleRange[] oldStyles = styledText.getStyleRanges(start, length, false);
 			styledText.setStyleRanges(start, length, new int[0], new StyleRange[0]);
