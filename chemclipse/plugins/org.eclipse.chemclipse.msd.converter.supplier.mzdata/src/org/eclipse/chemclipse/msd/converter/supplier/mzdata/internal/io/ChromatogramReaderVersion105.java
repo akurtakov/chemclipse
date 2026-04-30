@@ -84,6 +84,9 @@ public class ChromatogramReaderVersion105 extends AbstractChromatogramReader {
 			 * Mass Spectra
 			 */
 			for(Spectrum spectrum : mzData.getSpectrumList().getSpectrum()) {
+				if(monitor.isCanceled()) {
+					break;
+				}
 				IVendorScan massSpectrum = new VendorScan();
 				SpectrumInstrument spectrumInstrument = spectrum.getSpectrumDesc().getSpectrumSettings().getSpectrumInstrument();
 				setPolarity(spectrumInstrument, massSpectrum);

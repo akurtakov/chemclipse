@@ -139,7 +139,7 @@ public class ChromatogramEditorTSD implements IChemClipseEditor {
 			 * No fork, otherwise it might crash when loading the data takes too long.
 			 */
 			boolean fork = !batch;
-			dialog.run(fork, false, runnable);
+			dialog.run(fork, true, runnable);
 		} catch(InvocationTargetException e) {
 			logger.warn(e);
 		} catch(InterruptedException e) {

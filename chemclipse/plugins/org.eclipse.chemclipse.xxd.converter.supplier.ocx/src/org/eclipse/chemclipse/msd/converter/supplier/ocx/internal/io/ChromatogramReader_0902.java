@@ -88,7 +88,7 @@ public class ChromatogramReader_0902 extends AbstractChromatogramReader {
 		IChromatogramMSD chromatogram = null;
 		try (ZipFile zipFile = new ZipFile(file)) {
 			if(isValidFileFormat(zipFile)) {
-				chromatogram = readFromZipFile(zipFile, "", file);
+				chromatogram = readFromZipFile(zipFile, "", file, monitor);
 			}
 		}
 		return chromatogram;
@@ -109,18 +109,18 @@ public class ChromatogramReader_0902 extends AbstractChromatogramReader {
 	@Override
 	public IChromatogramMSD read(ZipInputStream zipInputStream, String directoryPrefix, IProgressMonitor monitor) throws IOException {
 
-		return readZipData(zipInputStream, directoryPrefix, null);
+		return readZipData(zipInputStream, directoryPrefix, null, monitor);
 	}
 
 	@Override
 	public IChromatogramMSD read(ZipFile zipFile, String directoryPrefix, IProgressMonitor monitor) throws IOException {
 
-		return readFromZipFile(zipFile, directoryPrefix, null);
+		return readFromZipFile(zipFile, directoryPrefix, null, monitor);
 	}
 
-	private IChromatogramMSD readFromZipFile(ZipFile zipFile, String directoryPrefix, File file) throws IOException {
+	private IChromatogramMSD readFromZipFile(ZipFile zipFile, String directoryPrefix, File file, IProgressMonitor monitor) throws IOException {
 
-		return readZipData(zipFile, directoryPrefix, file);
+		return readZipData(zipFile, directoryPrefix, file, monitor);
 	}
 
 	/*
@@ -129,7 +129,7 @@ public class ChromatogramReader_0902 extends AbstractChromatogramReader {
 	 * @param file
 	 * @return
 	 */
-	private IChromatogramMSD readZipData(Object object, String directoryPrefix, File file) throws IOException {
+	private IChromatogramMSD readZipData(Object object, String directoryPrefix, File file, IProgressMonitor monitor) throws IOException {
 
 		boolean closeStream;
 
@@ -149,7 +149,7 @@ public class ChromatogramReader_0902 extends AbstractChromatogramReader {
 
 		IVendorChromatogram chromatogram = new VendorChromatogram();
 
-		readScans(getDataInputStream(object, directoryPrefix + Format.FILE_SCANS), closeStream, chromatogram);
+		readScans(getDataInputStream(object, directoryPrefix + Format.FILE_SCANS), closeStream, chromatogram, monitor);
 		readBaseline(getDataInputStream(object, directoryPrefix + Format.FILE_BASELINE), closeStream, chromatogram);
 		readPeaks(getDataInputStream(object, directoryPrefix + Format.FILE_PEAKS), closeStream, chromatogram);
 		readArea(getDataInputStream(object, directoryPrefix + Format.FILE_AREA), closeStream, chromatogram);
@@ -198,7 +198,7 @@ public class ChromatogramReader_0902 extends AbstractChromatogramReader {
 		ChromatogramSupport.calculateScanIntervalAndDelay(chromatogram);
 	}
 
-	private void readScans(DataInputStream dataInputStream, boolean closeStream, IChromatogramMSD chromatogram) throws IOException {
+	private void readScans(DataInputStream dataInputStream, boolean closeStream, IChromatogramMSD chromatogram, IProgressMonitor monitor) throws IOException {
 
 		IIonTransitionSettings ionTransitionSettings = chromatogram.getIonTransitionSettings();
 		/*
@@ -206,6 +206,9 @@ public class ChromatogramReader_0902 extends AbstractChromatogramReader {
 		 */
 		int scans = dataInputStream.readInt();
 		for(int scan = 1; scan <= scans; scan++) {
+			if(monitor.isCanceled()) {
+				break;
+			}
 			IVendorScan massSpectrum = readMassSpectrum(dataInputStream, ionTransitionSettings);
 			chromatogram.addScan(massSpectrum);
 		}

@@ -48,7 +48,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 	public IChromatogramMSD read(File file, IProgressMonitor monitor) throws IOException {
 
 		if(isValidFileFormat(file)) {
-			return readChromatogram(file, false);
+			return readChromatogram(file, false, monitor);
 		}
 		return null;
 	}
@@ -57,7 +57,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 	public IChromatogramOverview readOverview(File file, IProgressMonitor monitor) throws IOException {
 
 		if(isValidFileFormat(file)) {
-			return readChromatogram(file, true);
+			return readChromatogram(file, true, monitor);
 		}
 		return null;
 	}
@@ -75,7 +75,7 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 		}
 	}
 
-	private IChromatogramMSD readChromatogram(File file, boolean overview) throws IOException {
+	private IChromatogramMSD readChromatogram(File file, boolean overview, IProgressMonitor monitor) throws IOException {
 
 		IChromatogramMSD chromatogram = null;
 
@@ -97,6 +97,9 @@ public class ChromatogramReader extends AbstractChromatogramMSDReader {
 			 */
 			Map<Integer, Float> ionsMap = getIonMap(csvParser);
 			for(CSVRecord csvRecord : csvParser.getRecords()) {
+				if(monitor.isCanceled()) {
+					break;
+				}
 				IScanMSD scanMSD = getScan(csvRecord, ionsMap, zeroMarker, overview);
 				chromatogram.addScan(scanMSD);
 			}

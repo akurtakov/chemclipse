@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -75,9 +75,9 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 
 		DataTypeXY dataTypeXY = isDataTypeXY(file);
 		if(dataTypeXY == DataTypeXY.X_COMMA_Y || dataTypeXY == DataTypeXY.XY_RANGE) {
-			return readChromatogramDataXY(file);
+			return readChromatogramDataXY(file, monitor);
 		} else if(dataTypeXY == DataTypeXY.X_INCREMENTAL_Y_RANGE) {
-			return readChromatogramDataRepeatedY(file);
+			return readChromatogramDataRepeatedY(file, monitor);
 		}
 		return null;
 	}
@@ -88,7 +88,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 		return read(file, monitor);
 	}
 
-	private IChromatogramCSD readChromatogramDataXY(File file) throws IOException {
+	private IChromatogramCSD readChromatogramDataXY(File file, IProgressMonitor monitor) throws IOException {
 
 		IVendorChromatogram chromatogram = new VendorChromatogram();
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
@@ -97,7 +97,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 			 */
 			String line;
 			String name = "";
-			while((line = bufferedReader.readLine()) != null) {
+			while((line = bufferedReader.readLine()) != null && !monitor.isCanceled()) {
 				/*
 				 * Each scan starts with the marker:
 				 * [##NAME=Acetoin (Butanon-2, 3-hydroxy-)]
@@ -193,7 +193,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 		return chromatogram;
 	}
 
-	private IChromatogramCSD readChromatogramDataRepeatedY(File file) throws IOException {
+	private IChromatogramCSD readChromatogramDataRepeatedY(File file, IProgressMonitor monitor) throws IOException {
 
 		IVendorChromatogram chromatogram = new VendorChromatogram();
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
@@ -208,7 +208,7 @@ public class ChromatogramReader extends AbstractChromatogramCSDReader {
 			int nPoints = 0;
 			int index = 0;
 
-			while((line = bufferedReader.readLine()) != null) {
+			while((line = bufferedReader.readLine()) != null && !monitor.isCanceled()) {
 				if(line.contains(COMMENT_MARKER)) {
 					line = line.substring(0, line.indexOf(COMMENT_MARKER));
 				}

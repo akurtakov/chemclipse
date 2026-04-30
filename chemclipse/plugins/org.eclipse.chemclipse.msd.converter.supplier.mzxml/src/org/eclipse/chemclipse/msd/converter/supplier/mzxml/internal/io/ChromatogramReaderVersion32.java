@@ -97,6 +97,9 @@ public class ChromatogramReaderVersion32 extends AbstractChromatogramReader {
 			List<Scan> scans = msRun.getScan();
 			monitor.beginTask(ConverterMessages.readScans, scans.size());
 			for(Scan scan : scans) {
+				if(monitor.isCanceled()) {
+					break;
+				}
 				/*
 				 * Get the mass spectra.
 				 */

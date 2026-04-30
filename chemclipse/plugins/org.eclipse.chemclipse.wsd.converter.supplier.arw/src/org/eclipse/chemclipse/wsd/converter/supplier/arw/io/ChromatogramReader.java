@@ -44,16 +44,16 @@ public class ChromatogramReader extends AbstractChromatogramWSDReader {
 	@Override
 	public IChromatogramWSD read(File file, IProgressMonitor monitor) throws IOException {
 
-		return readChromatogram(file);
+		return readChromatogram(file, monitor);
 	}
 
 	@Override
 	public IChromatogramOverview readOverview(File file, IProgressMonitor monitor) throws IOException {
 
-		return readChromatogram(file);
+		return readChromatogram(file, monitor);
 	}
 
-	private IChromatogramWSD readChromatogram(File file) throws IOException {
+	private IChromatogramWSD readChromatogram(File file, IProgressMonitor monitor) throws IOException {
 
 		/*
 		 * It's a simple text format:
@@ -73,7 +73,7 @@ public class ChromatogramReader extends AbstractChromatogramWSDReader {
 		List<Float> wavelengths = new ArrayList<>();
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
 			String line = null;
-			while((line = bufferedReader.readLine()) != null) {
+			while((line = bufferedReader.readLine()) != null && !monitor.isCanceled()) {
 				if(line.startsWith(WAVELENGTH)) {
 					/*
 					 * Wavelengths
