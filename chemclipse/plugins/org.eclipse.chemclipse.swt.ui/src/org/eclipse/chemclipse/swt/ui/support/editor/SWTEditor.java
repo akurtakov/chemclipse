@@ -229,7 +229,11 @@ public class SWTEditor extends Composite {
 
 	void handleModify() {
 
-		if(newCharCount > 0 && start >= 0) {
+		int charCount = newCharCount;
+		int charStart = start;
+		newCharCount = 0;
+		start = -1;
+		if(charCount > 0 && charStart >= 0) {
 			StyleRange style = new StyleRange();
 			if(textFont != null && !textFont.equals(styledText.getFont())) {
 				style.font = textFont;
@@ -250,9 +254,9 @@ public class SWTEditor extends Composite {
 			if((styleState & STRIKEOUT) != 0) {
 				style.strikeout = true;
 			}
-			int[] ranges = {start, newCharCount};
+			int[] ranges = {charStart, charCount};
 			StyleRange[] styles = {style};
-			styledText.setStyleRanges(start, newCharCount, ranges, styles);
+			styledText.setStyleRanges(charStart, charCount, ranges, styles);
 		}
 		disposeRanges(selectedRanges);
 	}
