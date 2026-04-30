@@ -18,8 +18,6 @@ import org.eclipse.chemclipse.chromatogram.filter.result.ChromatogramFilterResul
 import org.eclipse.chemclipse.chromatogram.filter.result.IChromatogramFilterResult;
 import org.eclipse.chemclipse.chromatogram.filter.result.ResultStatus;
 import org.eclipse.chemclipse.chromatogram.filter.settings.IChromatogramFilterSettings;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.mediannormalizer.preferences.PreferenceSupplier;
-import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.mediannormalizer.settings.FilterSettings;
 import org.eclipse.chemclipse.model.exceptions.CalculationException;
 import org.eclipse.chemclipse.model.exceptions.NoTotalSignalStoredException;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
@@ -46,12 +44,5 @@ public class ChromatogramFilter extends AbstractChromatogramSignalFilter {
 			return new ChromatogramFilterResult(ResultStatus.EXCEPTION, e.getMessage());
 		}
 		return new ChromatogramFilterResult(ResultStatus.OK, "The chromatogram selection was successfully normalized.");
-	}
-
-	@Override
-	protected IChromatogramFilterResult applyFilter(ITotalScanSignals totalSignals, IProgressMonitor monitor) {
-
-		FilterSettings filterSettings = PreferenceSupplier.getFilterSettings();
-		return applyFilter(totalSignals, filterSettings, monitor);
 	}
 }

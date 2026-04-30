@@ -13,6 +13,5 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.mediannormalizer.core,
- org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.mediannormalizer.exceptions,
- org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.mediannormalizer.preferences
+ org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.mediannormalizer.exceptions
 Bundle-Vendor: Chemclipse

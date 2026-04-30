@@ -42,8 +42,6 @@ public abstract class AbstractChromatogramSignalFilter extends AbstractChromatog
 
 	protected abstract IChromatogramFilterResult applyFilter(ITotalScanSignals totalSignals, IChromatogramFilterSettings filterSettings, IProgressMonitor monitor);
 
-	protected abstract IChromatogramFilterResult applyFilter(ITotalScanSignals totalSignals, IProgressMonitor monitor);
-
 	@Override
 	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelection chromatogramSelection, IChromatogramFilterSettings chromatogramFilterSettings, IProgressMonitor monitor) {
 
@@ -175,10 +173,6 @@ public abstract class AbstractChromatogramSignalFilter extends AbstractChromatog
 
 	public IChromatogramFilterResult filterProcess(ITotalScanSignals totalScanSignals, IChromatogramFilterSettings chromatogramFilterSettings, IProgressMonitor monitor) {
 
-		if(chromatogramFilterSettings == null) {
-			return applyFilter(totalScanSignals, monitor);
-		} else {
-			return applyFilter(totalScanSignals, chromatogramFilterSettings, monitor);
-		}
+		return applyFilter(totalScanSignals, chromatogramFilterSettings, monitor);
 	}
 }
