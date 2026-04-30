@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2025 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Aleksandar Kurtakov - initial API and implementation
  *******************************************************************************/
@@ -23,7 +23,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.Bullet;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.graphics.Font;
@@ -84,8 +83,9 @@ public class SWTEditor extends Composite {
 		shell.setSize(1000, 700);
 		shell.open();
 		while(!shell.isDisposed()) {
-			if(!display.readAndDispatch())
+			if(!display.readAndDispatch()) {
 				display.sleep();
+			}
 		}
 		editor.releaseResources();
 		display.dispose();
@@ -184,32 +184,38 @@ public class SWTEditor extends Composite {
 					break;
 				}
 			}
-			if(disposeFont && rangeToDispose.font != textFont && rangeToDispose.font != null)
+			if(disposeFont && rangeToDispose.font != textFont && rangeToDispose.font != null) {
 				rangeToDispose.font.dispose();
+			}
 
 			Object data = rangeToDispose.data;
 			if(data != null) {
-				if(data instanceof Image)
+				if(data instanceof Image) {
 					((Image)data).dispose();
-				if(data instanceof Control)
+				}
+				if(data instanceof Control) {
 					((Control)data).dispose();
+				}
 			}
 		}
 	}
 
 	void disposeResource(Font font) {
 
-		if(font == null)
+		if(font == null) {
 			return;
+		}
 		StyleRange[] styles = styledText.getStyleRanges(0, styledText.getCharCount(), false);
 		int index = 0;
 		while(index < styles.length) {
-			if(styles[index].font == font)
+			if(styles[index].font == font) {
 				break;
+			}
 			index++;
 		}
-		if(index == styles.length)
+		if(index == styles.length) {
 			font.dispose();
+		}
 	}
 
 	void handleKeyDown(Event event) {
@@ -219,7 +225,7 @@ public class SWTEditor extends Composite {
 		}
 	}
 
-	void handleModify(ModifyEvent event) {
+	void handleModify() {
 
 		if(newCharCount > 0 && start >= 0) {
 			StyleRange style = new StyleRange();
@@ -227,10 +233,12 @@ public class SWTEditor extends Composite {
 				style.font = textFont;
 			} else {
 				style.fontStyle = SWT.NONE;
-				if(boldControl.getSelection())
+				if(boldControl.getSelection()) {
 					style.fontStyle |= SWT.BOLD;
-				if(italicControl.getSelection())
+				}
+				if(italicControl.getSelection()) {
 					style.fontStyle |= SWT.ITALIC;
+				}
 			}
 			int underlineStyle = styleState & UNDERLINE;
 			if(underlineStyle != 0) {
@@ -274,7 +282,7 @@ public class SWTEditor extends Composite {
 		});
 		styledText.addListener(SWT.KeyDown, this::handleKeyDown);
 		styledText.addVerifyListener(this::handleVerifyText);
-		styledText.addModifyListener(this::handleModify);
+		styledText.addModifyListener(event -> handleModify());
 	}
 
 	Image loadImage(Display display, String fileName) {
@@ -305,12 +313,14 @@ public class SWTEditor extends Composite {
 		iNumberedList.dispose();
 		iNumberedList = null;
 
-		if(textFont != null)
+		if(textFont != null) {
 			textFont.dispose();
+		}
 		textFont = null;
 
-		if(font != null)
+		if(font != null) {
 			font.dispose();
+		}
 		font = null;
 	}
 
@@ -342,8 +352,9 @@ public class SWTEditor extends Composite {
 
 	void setStyle(int style, int start, int length) {
 
-		if(length == 0)
+		if(length == 0) {
 			return;
+		}
 
 		/* Create new style range */
 		StyleRange newRange = new StyleRange();
@@ -459,7 +470,9 @@ public class SWTEditor extends Composite {
 	}
 
 	void updateToolBar() {
-		if (readOnly) return;
+		if (readOnly) {
+			return;
+		}
 		styleState = 0;
 		link = null;
 		boolean bold = false, italic = false;
@@ -473,10 +486,12 @@ public class SWTEditor extends Composite {
 				FontData[] fds = font.getFontData();
 				for(FontData fd : fds) {
 					int fontStyle = fd.getStyle();
-					if(!bold && (fontStyle & SWT.BOLD) != 0)
+					if(!bold && (fontStyle & SWT.BOLD) != 0) {
 						bold = true;
-					if(!italic && (fontStyle & SWT.ITALIC) != 0)
+					}
+					if(!italic && (fontStyle & SWT.ITALIC) != 0) {
 						italic = true;
+					}
 				}
 			} else {
 				bold = (range.fontStyle & SWT.BOLD) != 0;
