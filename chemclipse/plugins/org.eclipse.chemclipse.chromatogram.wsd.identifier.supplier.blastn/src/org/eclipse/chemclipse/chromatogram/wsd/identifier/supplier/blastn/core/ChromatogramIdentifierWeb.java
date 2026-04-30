@@ -17,7 +17,6 @@ import java.io.IOException;
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.chromatogram.AbstractChromatogramIdentifier;
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.chromatogram.IChromatogramIdentifierSettings;
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.io.WebNucleotideBLAST;
-import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.chromatogram.wsd.identifier.supplier.blastn.settings.WebIdentifierSettings;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.identifier.IChromatogramIdentificationResult;
@@ -49,12 +48,5 @@ public class ChromatogramIdentifierWeb extends AbstractChromatogramIdentifier {
 			}
 		}
 		return processingInfo;
-	}
-
-	@Override
-	public IProcessingInfo<IChromatogramIdentificationResult> identify(IChromatogramSelectionWSD chromatogramSelection, IProgressMonitor monitor) {
-
-		IChromatogramIdentifierSettings identifierSettings = PreferenceSupplier.getIdentifierSettings();
-		return identify(chromatogramSelection, identifierSettings, monitor);
 	}
 }

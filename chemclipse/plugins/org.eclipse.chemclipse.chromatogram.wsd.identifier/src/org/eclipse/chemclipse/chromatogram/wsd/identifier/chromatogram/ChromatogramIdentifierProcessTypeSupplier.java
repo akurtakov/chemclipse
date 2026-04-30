@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -68,11 +68,7 @@ public class ChromatogramIdentifierProcessTypeSupplier implements IProcessTypeSu
 		public IChromatogramSelection apply(IChromatogramSelection chromatogramSelection, IChromatogramIdentifierSettings processSettings, IMessageConsumer messageConsumer, IProgressMonitor monitor) {
 
 			if(chromatogramSelection instanceof IChromatogramSelectionWSD chromatogramSelectionWSD) {
-				if(processSettings == null) {
-					messageConsumer.addMessages(ChromatogramIdentifier.identify(chromatogramSelectionWSD, getId(), monitor));
-				} else {
-					messageConsumer.addMessages(ChromatogramIdentifier.identify(chromatogramSelectionWSD, processSettings, getId(), monitor));
-				}
+				messageConsumer.addMessages(ChromatogramIdentifier.identify(chromatogramSelectionWSD, processSettings, getId(), monitor));
 			} else {
 				messageConsumer.addWarnMessage(getName(), "Only WSD chromatograms are supported, processor was skipped");
 			}

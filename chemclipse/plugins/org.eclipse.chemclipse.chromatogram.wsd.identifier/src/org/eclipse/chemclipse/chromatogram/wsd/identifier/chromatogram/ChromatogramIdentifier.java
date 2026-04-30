@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -60,26 +60,6 @@ public class ChromatogramIdentifier {
 		IChromatogramIdentifier chromatogramIdentifier = getChromatogramIdentifier(identifierId);
 		if(chromatogramIdentifier != null) {
 			processingInfo = chromatogramIdentifier.identify(chromatogramSelection, identifierSettings, monitor);
-		} else {
-			processingInfo = getNoIdentifierAvailableProcessingInfo();
-		}
-		return processingInfo;
-	}
-
-	/**
-	 * Runs the chromatogram identifier with the given id.
-	 * 
-	 * @param chromatogramSelection
-	 * @param identifierId
-	 * @param monitor
-	 * @return {@link IProcessingInfo}
-	 */
-	public static IProcessingInfo<IChromatogramIdentificationResult> identify(IChromatogramSelectionWSD chromatogramSelection, String identifierId, IProgressMonitor monitor) {
-
-		IProcessingInfo<IChromatogramIdentificationResult> processingInfo;
-		IChromatogramIdentifier chromatogramIdentifier = getChromatogramIdentifier(identifierId);
-		if(chromatogramIdentifier != null) {
-			processingInfo = chromatogramIdentifier.identify(chromatogramSelection, monitor);
 		} else {
 			processingInfo = getNoIdentifierAvailableProcessingInfo();
 		}
