@@ -78,7 +78,7 @@ public class SWTEditor extends Composite {
 		Display display = new Display();
 		Shell shell = new Shell(display);
 		shell.setLayout(new FillLayout());
-		SWTEditor editor = new SWTEditor(shell, SWT.READ_ONLY);
+		SWTEditor editor = new SWTEditor(shell, SWT.NULL);
 		editor.setText("<b>test</b>");
 		shell.setSize(1000, 700);
 		shell.open();
