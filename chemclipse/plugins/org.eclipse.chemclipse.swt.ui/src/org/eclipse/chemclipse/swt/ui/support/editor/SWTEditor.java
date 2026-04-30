@@ -48,7 +48,7 @@ public class SWTEditor extends Composite {
 	Display display;
 	Composite parent;
 	StyledText styledText;
-	ToolItem boldControl, italicControl;
+	ToolItem boldControl, italicControl, underlineControl, strikeoutControl;
 
 	boolean insert = true;
 	boolean readOnly = false;
@@ -157,14 +157,14 @@ public class SWTEditor extends Composite {
 		italicControl.setToolTipText(getResourceString("Italic")); //$NON-NLS-1$
 		italicControl.addSelectionListener(widgetSelectedAdapter(event -> setStyle(ITALIC)));
 
-		final ToolItem underlineControl = new ToolItem(styleToolBar, SWT.CHECK);
+		underlineControl = new ToolItem(styleToolBar, SWT.CHECK);
 		underlineControl.setImage(iUnderline);
 		underlineControl.setToolTipText(getResourceString("Underline")); //$NON-NLS-1$
 		underlineControl.addSelectionListener(widgetSelectedAdapter(event -> {
 			setStyle(UNDERLINE);
 		}));
 
-		ToolItem strikeoutControl = new ToolItem(styleToolBar, SWT.CHECK);
+		strikeoutControl = new ToolItem(styleToolBar, SWT.CHECK);
 		strikeoutControl.setImage(iStrikeout);
 		strikeoutControl.setToolTipText(getResourceString("Strikeout")); //$NON-NLS-1$
 		strikeoutControl.addSelectionListener(widgetSelectedAdapter(event -> {
@@ -507,6 +507,8 @@ public class SWTEditor extends Composite {
 
 		boldControl.setSelection(bold);
 		italicControl.setSelection(italic);
+		underlineControl.setSelection((styleState & UNDERLINE) != 0);
+		strikeoutControl.setSelection((styleState & STRIKEOUT) != 0);
 
 		textFont = font;
 	}
