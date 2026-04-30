@@ -12,7 +12,6 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.timeranges.settings;
 
-import org.eclipse.chemclipse.chromatogram.xxd.identifier.supplier.timeranges.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.model.identifier.IIdentifierSettings;
 import org.eclipse.chemclipse.model.ranges.TimeRanges;
 import org.eclipse.chemclipse.model.validators.TimeRangesValidator;
@@ -29,13 +28,16 @@ public class PeakIdentifierFilterSettings {
 	@JsonPropertyDescription(value = "Run an identification if no target exists with a Match Factor >= the given limit.")
 	@FloatSettingsProperty(minValue = IIdentifierSettings.MIN_LIMIT_MATCH_FACTOR, maxValue = IIdentifierSettings.MAX_LIMIT_MATCH_FACTOR)
 	private float limitMatchFactor = 80.0f;
+
 	@JsonProperty(value = "Match Quality", defaultValue = "80.0")
 	@JsonPropertyDescription(value = "The match quality is set as the Match Factor.")
-	@FloatSettingsProperty(minValue = PreferenceSupplier.MIN_FACTOR, maxValue = PreferenceSupplier.MAX_FACTOR)
+	@FloatSettingsProperty(minValue = 0.0f, maxValue = 100.0f)
 	private float matchQuality = 80.0f;
+
 	@JsonProperty(value = "Filter Option", defaultValue = "AREA")
 	@JsonPropertyDescription(value = "Select the option to filter the peaks.")
 	private PeakFilterOption peakFilterOption = PeakFilterOption.AREA;
+
 	@JsonProperty(value = "Time Ranges", defaultValue = "")
 	@JsonPropertyDescription(value = "Use the time ranges to identify the peaks.")
 	@ValidatorSettingsProperty(validator = TimeRangesValidator.class)
