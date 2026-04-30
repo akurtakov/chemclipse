@@ -159,16 +159,12 @@ public class SWTEditor extends Composite {
 		underlineControl = new ToolItem(styleToolBar, SWT.CHECK);
 		underlineControl.setImage(iUnderline);
 		underlineControl.setToolTipText(getResourceString("Underline")); //$NON-NLS-1$
-		underlineControl.addSelectionListener(widgetSelectedAdapter(event -> {
-			setStyle(UNDERLINE);
-		}));
+		underlineControl.addSelectionListener(widgetSelectedAdapter(event -> setStyle(UNDERLINE)));
 
 		strikeoutControl = new ToolItem(styleToolBar, SWT.CHECK);
 		strikeoutControl.setImage(iStrikeout);
 		strikeoutControl.setToolTipText(getResourceString("Strikeout")); //$NON-NLS-1$
-		strikeoutControl.addSelectionListener(widgetSelectedAdapter(event -> {
-			setStyle(STRIKEOUT);
-		}));
+		strikeoutControl.addSelectionListener(widgetSelectedAdapter(event -> setStyle(STRIKEOUT)));
 
 		new ToolItem(styleToolBar, SWT.SEPARATOR);
 
@@ -458,7 +454,7 @@ public class SWTEditor extends Composite {
 		int start = selection.x;
 		int length = selection.y - selection.x;
 		if(length > 0) {
-			StyleRange[] oldStyles = styledText.getStyleRanges(start, length, false);
+			StyleRange[] oldStyles = styledText.getStyleRanges(start, length, true);
 			styledText.setStyleRanges(start, length, new int[0], new StyleRange[0]);
 			disposeRanges(oldStyles);
 		}
