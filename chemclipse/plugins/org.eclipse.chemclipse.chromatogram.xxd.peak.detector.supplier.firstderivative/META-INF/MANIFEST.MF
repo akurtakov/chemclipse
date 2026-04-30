@@ -20,8 +20,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderivative.core,
  org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderivative.model,
  org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderivative.services,
- org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderivative.support,
- org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderivative.preferences
+ org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderivative.support
 Bundle-Vendor: ChemClipse
 Import-Package: com.fasterxml.jackson.databind.annotation;version="2.9.93",
  org.apache.commons.lang3;version="3.1.0"

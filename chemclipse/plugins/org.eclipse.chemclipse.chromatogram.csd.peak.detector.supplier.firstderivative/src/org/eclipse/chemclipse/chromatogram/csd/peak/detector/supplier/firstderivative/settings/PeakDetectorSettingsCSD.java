@@ -16,7 +16,6 @@ package org.eclipse.chemclipse.chromatogram.csd.peak.detector.supplier.firstderi
 import org.eclipse.chemclipse.chromatogram.csd.peak.detector.settings.AbstractPeakDetectorCSDSettings;
 import org.eclipse.chemclipse.chromatogram.peak.detector.model.Threshold;
 import org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderivative.model.DetectorType;
-import org.eclipse.chemclipse.chromatogram.xxd.peak.detector.supplier.firstderivative.preferences.AbstractFirstDerivativePreferenceSupplier;
 import org.eclipse.chemclipse.support.settings.FloatSettingsProperty;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty;
 import org.eclipse.chemclipse.support.settings.IntSettingsProperty.Validation;
@@ -44,7 +43,7 @@ public class PeakDetectorSettingsCSD extends AbstractPeakDetectorCSDSettings {
 	@JsonProperty(value = "Window Size", defaultValue = "5")
 	@LabelProperty(value = "%WindowSize", tooltip = "%WindowSizeDescription")
 	@JsonDeserialize(using = WindowSizeDeserializer.class)
-	@IntSettingsProperty(minValue = AbstractFirstDerivativePreferenceSupplier.MIN_WINDOW_SIZE, maxValue = AbstractFirstDerivativePreferenceSupplier.MAX_WINDOW_SIZE, validation = Validation.ODD_NUMBER_INCLUDING_ZERO)
+	@IntSettingsProperty(minValue = 0, maxValue = 45, validation = Validation.ODD_NUMBER_INCLUDING_ZERO)
 	private int windowSize = 5;
 
 	@JsonProperty(value = "Use Noise-Segments", defaultValue = "false")
