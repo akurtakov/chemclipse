@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.Bullet;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.ModifyListener;
@@ -48,7 +47,7 @@ public class SWTEditor extends Composite {
 	Display display;
 	Composite parent;
 	StyledText styledText;
-	ToolItem boldControl, italicControl;
+	ToolItem boldControl, italicControl, underlineControl, strikeoutControl, clearControl;
 
 	boolean insert = true;
 	boolean readOnly = false;
@@ -58,7 +57,7 @@ public class SWTEditor extends Composite {
 	String link;
 
 	// Resources
-	Image iBold, iItalic, iUnderline, iStrikeout;
+	Image iBold, iItalic, iUnderline, iStrikeout, iClear;
 	Image iSpacing, iIndent, iBulletList, iNumberedList;
 	Font font, textFont;
 
@@ -78,7 +77,7 @@ public class SWTEditor extends Composite {
 		Display display = new Display();
 		Shell shell = new Shell(display);
 		shell.setLayout(new FillLayout());
-		SWTEditor editor = new SWTEditor(shell, SWT.READ_ONLY);
+		SWTEditor editor = new SWTEditor(shell, SWT.NULL);
 		editor.setText("<b>test</b>");
 		shell.setSize(1000, 700);
 		shell.open();
@@ -96,6 +95,7 @@ public class SWTEditor extends Composite {
 
 		HTMLReader parser = new HTMLReader(text);
 		parser.applyTo(styledText);
+		updateToolBar();
 	}
 
 	public String getText() {
@@ -157,19 +157,22 @@ public class SWTEditor extends Composite {
 		italicControl.setToolTipText(getResourceString("Italic")); //$NON-NLS-1$
 		italicControl.addSelectionListener(widgetSelectedAdapter(event -> setStyle(ITALIC)));
 
-		final ToolItem underlineControl = new ToolItem(styleToolBar, SWT.CHECK);
+		underlineControl = new ToolItem(styleToolBar, SWT.CHECK);
 		underlineControl.setImage(iUnderline);
 		underlineControl.setToolTipText(getResourceString("Underline")); //$NON-NLS-1$
-		underlineControl.addSelectionListener(widgetSelectedAdapter(event -> {
-			setStyle(UNDERLINE);
-		}));
+		underlineControl.addSelectionListener(widgetSelectedAdapter(event -> setStyle(UNDERLINE)));
 
-		ToolItem strikeoutControl = new ToolItem(styleToolBar, SWT.CHECK);
+		strikeoutControl = new ToolItem(styleToolBar, SWT.CHECK);
 		strikeoutControl.setImage(iStrikeout);
 		strikeoutControl.setToolTipText(getResourceString("Strikeout")); //$NON-NLS-1$
-		strikeoutControl.addSelectionListener(widgetSelectedAdapter(event -> {
-			setStyle(STRIKEOUT);
-		}));
+		strikeoutControl.addSelectionListener(widgetSelectedAdapter(event -> setStyle(STRIKEOUT)));
+
+		new ToolItem(styleToolBar, SWT.SEPARATOR);
+
+		clearControl = new ToolItem(styleToolBar, SWT.PUSH);
+		clearControl.setImage(iClear);
+		clearControl.setToolTipText(getResourceString("Clear Formatting")); //$NON-NLS-1$
+		clearControl.addSelectionListener(widgetSelectedAdapter(event -> clearFormatting()));
 
 	}
 
@@ -227,7 +230,11 @@ public class SWTEditor extends Composite {
 
 	void handleModify() {
 
-		if(newCharCount > 0 && start >= 0) {
+		int charCount = newCharCount;
+		int charStart = start;
+		newCharCount = 0;
+		start = -1;
+		if(charCount > 0 && charStart >= 0) {
 			StyleRange style = new StyleRange();
 			if(textFont != null && !textFont.equals(styledText.getFont())) {
 				style.font = textFont;
@@ -248,9 +255,9 @@ public class SWTEditor extends Composite {
 			if((styleState & STRIKEOUT) != 0) {
 				style.strikeout = true;
 			}
-			int[] ranges = {start, newCharCount};
+			int[] ranges = {charStart, charCount};
 			StyleRange[] styles = {style};
-			styledText.setStyleRanges(start, newCharCount, ranges, styles);
+			styledText.setStyleRanges(charStart, charCount, ranges, styles);
 		}
 		disposeRanges(selectedRanges);
 	}
@@ -271,6 +278,7 @@ public class SWTEditor extends Composite {
 		iItalic = loadImage(display, "italic"); //$NON-NLS-1$
 		iUnderline = loadImage(display, "underline"); //$NON-NLS-1$
 		iStrikeout = loadImage(display, "strikeout"); //$NON-NLS-1$
+		iClear = loadImage(display, "clear"); //$NON-NLS-1$
 		iBulletList = loadImage(display, "para_bul"); //$NON-NLS-1$
 		iNumberedList = loadImage(display, "para_num"); //$NON-NLS-1$
 	}
@@ -308,6 +316,8 @@ public class SWTEditor extends Composite {
 		iUnderline = null;
 		iStrikeout.dispose();
 		iStrikeout = null;
+		iClear.dispose();
+		iClear = null;
 		iBulletList.dispose();
 		iBulletList = null;
 		iNumberedList.dispose();
@@ -324,22 +334,13 @@ public class SWTEditor extends Composite {
 		font = null;
 	}
 
-	void setBullet(int type) {
-
-		Point selection = styledText.getSelection();
-		int lineStart = styledText.getLineAtOffset(selection.x);
-		int lineEnd = styledText.getLineAtOffset(selection.y);
-		StyleRange styleRange = new StyleRange();
-		Bullet bullet = new Bullet(type, styleRange);
-		bullet.text = ".";
-		for(int lineIndex = lineStart; lineIndex <= lineEnd; lineIndex++) {
-			Bullet oldBullet = styledText.getLineBullet(lineIndex);
-			styledText.setLineBullet(lineIndex, 1, oldBullet != null ? null : bullet);
-		}
-	}
-
 	void setStyle(int style) {
 
+		Point selection = styledText.getSelection();
+		if(selection.x == selection.y) {
+			updateToolBar();
+			return;
+		}
 		int[] ranges = styledText.getSelectionRanges();
 		int i = 0;
 		while(i < ranges.length) {
@@ -449,6 +450,25 @@ public class SWTEditor extends Composite {
 		disposeRanges(styles);
 	}
 
+	void clearFormatting() {
+
+		Point selection = styledText.getSelection();
+		if(selection.x == selection.y) {
+			return;
+		}
+		int start = selection.x;
+		int length = selection.y - selection.x;
+		if(length > 0) {
+			StyleRange[] oldStyles = styledText.getStyleRanges(start, length, true);
+			styledText.setStyleRanges(start, length, new int[0], new StyleRange[0]);
+			disposeRanges(oldStyles);
+		}
+		styleState = 0;
+		textFont = null;
+		updateToolBar();
+		styledText.notifyListeners(SWT.Modify, new Event());
+	}
+
 	void showError(String title, String message) {
 
 		MessageBox messageBox = new MessageBox(parent.getShell(), SWT.ICON_ERROR | SWT.CLOSE);
@@ -507,6 +527,8 @@ public class SWTEditor extends Composite {
 
 		boldControl.setSelection(bold);
 		italicControl.setSelection(italic);
+		underlineControl.setSelection((styleState & UNDERLINE) != 0);
+		strikeoutControl.setSelection((styleState & STRIKEOUT) != 0);
 
 		textFont = font;
 	}
