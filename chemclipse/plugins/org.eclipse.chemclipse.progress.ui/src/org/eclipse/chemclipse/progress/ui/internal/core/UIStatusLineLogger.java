@@ -23,6 +23,11 @@ import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.jface.action.IStatusLineManager;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.IViewSite;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchWindow;
 
 /**
  * Prints messages to the status line.
@@ -57,10 +62,23 @@ public class UIStatusLineLogger implements IStatusLineMessageListener {
 
 		MApplication application = ContextAddon.getApplication();
 		if(application != null && !application.getChildren().isEmpty()) {
-			MWindow window = application.getChildren().get(0);
-			IEclipseContext context = window.getContext();
+			MWindow mWindow = application.getChildren().get(0);
+			IEclipseContext context = mWindow.getContext();
 			if(context != null) {
-				return context.get(IStatusLineManager.class);
+				IWorkbenchWindow workbenchWindow = context.get(IWorkbenchWindow.class);
+				if(workbenchWindow != null) {
+					IWorkbenchPage page = workbenchWindow.getActivePage();
+					if(page != null) {
+						IWorkbenchPart part = page.getActivePart();
+						if(part != null) {
+							if(part.getSite() instanceof IViewSite viewSite) {
+								return viewSite.getActionBars().getStatusLineManager();
+							} else if(part.getSite() instanceof IEditorSite editorSite) {
+								return editorSite.getActionBars().getStatusLineManager();
+							}
+						}
+					}
+				}
 			}
 		}
 		logger.warn("IStatusLineManager is not available.");
