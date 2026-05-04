@@ -4,7 +4,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: org.eclipse.chemclipse.progress.ui;singleton:=true
 Bundle-Version: 0.9.0.qualifier
-Bundle-Activator: org.eclipse.chemclipse.progress.ui.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.chemclipse.progress;bundle-version="0.8.0",
@@ -12,3 +11,4 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.chemclipse.support.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-Vendor: %Bundle-Vendor
+Import-Package: jakarta.annotation;version="2.1.1"
