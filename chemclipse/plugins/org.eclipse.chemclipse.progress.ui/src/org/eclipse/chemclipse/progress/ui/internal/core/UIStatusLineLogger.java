@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2025 Lablicate GmbH.
+ * Copyright (c) 2008, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -16,19 +16,13 @@ package org.eclipse.chemclipse.progress.ui.internal.core;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.progress.core.IStatusLineMessageListener;
 import org.eclipse.chemclipse.progress.core.InfoType;
-import org.eclipse.chemclipse.progress.ui.exceptions.StatusLineManagerException;
+import org.eclipse.chemclipse.support.ui.activator.ContextAddon;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
+import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.jface.action.IStatusLineManager;
-import org.eclipse.jface.action.StatusLineManager;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.IViewSite;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.IWorkbenchPartSite;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
 
 /**
  * Prints messages to the status line.
@@ -38,7 +32,6 @@ import org.eclipse.ui.PlatformUI;
 public class UIStatusLineLogger implements IStatusLineMessageListener {
 
 	private static final Logger logger = Logger.getLogger(UIStatusLineLogger.class);
-	private IStatusLineManager statusLineManager;
 
 	@Override
 	public void setInfo(final InfoType infoType, final String message) {
@@ -46,8 +39,8 @@ public class UIStatusLineLogger implements IStatusLineMessageListener {
 		Display display = DisplayUtils.getDisplay();
 		display.asyncExec(() -> {
 
-			try {
-				IStatusLineManager statusLineManager = getStatusLineManager();
+			IStatusLineManager statusLineManager = getStatusLineManager();
+			if(statusLineManager != null) {
 				switch(infoType) {
 					case MESSAGE:
 						statusLineManager.setMessage(message);
@@ -56,105 +49,21 @@ public class UIStatusLineLogger implements IStatusLineMessageListener {
 						statusLineManager.setErrorMessage(message);
 						break;
 				}
-			} catch(StatusLineManagerException e) {
-				logger.warn(e);
 			}
 		});
 	}
 
-	/**
-	 * Initializes the status line manager.
-	 */
-	private IStatusLineManager getStatusLineManager() throws StatusLineManagerException {
+	private IStatusLineManager getStatusLineManager() {
 
-		/*
-		 * If the status line manager is null, try to get a valid instance.
-		 */
-		if(statusLineManager == null) {
-			IWorkbenchWindow workbenchWindow = getWorkbenchWindow();
-			IWorkbenchPage workbenchPage = getWorkbenchPage(workbenchWindow);
-			IWorkbenchPart workbenchPart = getWorkbenchPart(workbenchPage);
-			IActionBars actionBars = getActionBars(workbenchPart.getSite());
-			statusLineManager = getStatusLineManager(actionBars);
+		MApplication application = ContextAddon.getApplication();
+		if(application != null && !application.getChildren().isEmpty()) {
+			MWindow window = application.getChildren().get(0);
+			IEclipseContext context = window.getContext();
+			if(context != null) {
+				return context.get(IStatusLineManager.class);
+			}
 		}
-		return statusLineManager;
-	}
-
-	/**
-	 * Get the status line manager.
-	 * 
-	 * @return {@link StatusLineManager}
-	 * @param actionBars
-	 */
-	private IStatusLineManager getStatusLineManager(IActionBars actionBars) throws StatusLineManagerException {
-
-		if(actionBars != null) {
-			return actionBars.getStatusLineManager();
-		} else {
-			throw new StatusLineManagerException("IActionBars instance is not available.");
-		}
-	}
-
-	/**
-	 * Returns a valid workbench window instance.
-	 * 
-	 * @return {@link IWorkbenchWindow}
-	 * @throws StatusLineManagerException
-	 */
-	private IWorkbenchWindow getWorkbenchWindow() throws StatusLineManagerException {
-
-		IWorkbenchWindow workbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-		if(workbenchWindow == null) {
-			throw new StatusLineManagerException("IWorkbenchWindow instance is not available.");
-		}
-		return workbenchWindow;
-	}
-
-	/**
-	 * Returns a workbench page instance.
-	 * 
-	 * @param workbenchWindow
-	 * @return {@link IWorkbenchPage}
-	 * @throws StatusLineManagerException
-	 */
-	private IWorkbenchPage getWorkbenchPage(IWorkbenchWindow workbenchWindow) throws StatusLineManagerException {
-
-		assert (workbenchWindow != null) : "The workbenchWindow instance must not be null.";
-		IWorkbenchPage workbenchPage = workbenchWindow.getActivePage();
-		if(workbenchPage == null) {
-			throw new StatusLineManagerException("IWorkbenchPage instance is not available.");
-		}
-		return workbenchPage;
-	}
-
-	private IWorkbenchPart getWorkbenchPart(IWorkbenchPage workbenchPage) throws StatusLineManagerException {
-
-		assert (workbenchPage != null) : "The workbenchPage instance must not be null.";
-		IWorkbenchPart workbenchPart = workbenchPage.getActivePart();
-		if(workbenchPart == null) {
-			throw new StatusLineManagerException("IWorkbenchPart instance is not available.");
-		}
-		return workbenchPart;
-	}
-
-	/**
-	 * Returns the action bars.
-	 * 
-	 * @param workbenchPartSite
-	 * @return {@link IActionBars}
-	 * @throws StatusLineManagerException
-	 */
-	private IActionBars getActionBars(IWorkbenchPartSite workbenchPartSite) throws StatusLineManagerException {
-
-		IActionBars actionBars;
-		if(workbenchPartSite instanceof IViewSite viewSite) {
-			actionBars = viewSite.getActionBars();
-			return actionBars;
-		} else if(workbenchPartSite instanceof IEditorSite editorSite) {
-			actionBars = editorSite.getActionBars();
-			return actionBars;
-		} else {
-			throw new StatusLineManagerException("IViewSite or IEditorSite instances are not available.");
-		}
+		logger.warn("IStatusLineManager is not available.");
+		return null;
 	}
 }
