@@ -6,14 +6,13 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.ui.provider;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.util.Collection;
 import java.util.Map;
 import java.util.function.Function;
@@ -25,7 +24,7 @@ import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierData
 import org.eclipse.chemclipse.ux.extension.ui.swt.IdentifierCacheSupport;
 import org.eclipse.jface.viewers.Viewer;
 
-public class DataExplorerContentProvider extends FileExplorerContentProvider implements FileFilter {
+public class DataExplorerContentProvider extends FileExplorerContentProvider {
 
 	private File[] root;
 
