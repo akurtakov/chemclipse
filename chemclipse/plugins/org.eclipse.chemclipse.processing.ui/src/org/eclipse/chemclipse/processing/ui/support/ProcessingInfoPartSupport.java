@@ -98,10 +98,10 @@ public class ProcessingInfoPartSupport {
 					 * Focus the view if requested, this will open the feedback view if required.
 					 */
 					if(focusProcessingInfoPart) {
-						if(ePartService != null) {
+						try {
 							ePartService.showPart(IPerspectiveAndViewIds.VIEW_FEEDBACK, PartState.VISIBLE);
-						} else {
-							logger.warn("EPartService is not available, cannot show feedback view.");
+						} catch(IllegalStateException e) {
+							logger.warn(e);
 						}
 					}
 				});
