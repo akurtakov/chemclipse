@@ -12,9 +12,6 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.progress.ui;
 
-import org.eclipse.chemclipse.progress.core.StatusLineLogger;
-import org.eclipse.chemclipse.progress.ui.internal.core.UIStatusLineLogger;
-
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -54,13 +51,6 @@ public class Activator extends AbstractUIPlugin {
 
 		plugin = null;
 		super.stop(context);
-		/*
-		 * Remove the logger if exists.
-		 */
-		UIStatusLineLogger logger = PluginStartup.getUIStatusLineLogger();
-		if(logger != null) {
-			StatusLineLogger.remove(logger);
-		}
 	}
 
 	/**

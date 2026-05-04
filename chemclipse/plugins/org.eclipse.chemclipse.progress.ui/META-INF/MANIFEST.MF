@@ -12,3 +12,4 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.chemclipse.support.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-Vendor: %Bundle-Vendor
+Import-Package: jakarta.annotation;version="2.1.1"
