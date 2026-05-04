@@ -20,12 +20,12 @@ import org.eclipse.chemclipse.support.events.IPerspectiveAndViewIds;
 import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.e4.ui.di.UISynchronize;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService.PartState;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
 
 import jakarta.inject.Inject;
 
@@ -40,6 +40,8 @@ public class ProcessingInfoPartSupport {
 	private UISynchronize uiSynchronize = null;
 	@Inject
 	private ProcessingInfoUpdateNotifier processingInfoUpdateNotifier;
+	@Inject
+	private EPartService ePartService;
 
 	/**
 	 * Use getInstance() instead or create this support via:
@@ -96,11 +98,7 @@ public class ProcessingInfoPartSupport {
 					 * Focus the view if requested, this will open the feedback view if required.
 					 */
 					if(focusProcessingInfoPart) {
-						try {
-							PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(IPerspectiveAndViewIds.VIEW_FEEDBACK);
-						} catch(PartInitException e) {
-							logger.warn(e);
-						}
+						ePartService.showPart(IPerspectiveAndViewIds.VIEW_FEEDBACK, PartState.VISIBLE);
 					}
 				});
 			}
