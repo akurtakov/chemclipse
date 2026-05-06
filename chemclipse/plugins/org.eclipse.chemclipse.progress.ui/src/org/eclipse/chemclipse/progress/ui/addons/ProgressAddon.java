@@ -10,34 +10,30 @@
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
-package org.eclipse.chemclipse.progress.ui;
+package org.eclipse.chemclipse.progress.ui.addons;
 
 import org.eclipse.chemclipse.progress.core.StatusLineLogger;
 import org.eclipse.chemclipse.progress.ui.internal.core.UIStatusLineLogger;
-import org.eclipse.ui.IStartup;
 
-public class PluginStartup implements IStartup {
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 
-	private static UIStatusLineLogger uiStatusLineLogger;
+public class ProgressAddon {
 
-	@Override
-	public void earlyStartup() {
+	private UIStatusLineLogger uiStatusLineLogger;
 
-		/*
-		 * Create a new ui status line logger instance and add it as a listener
-		 * to StatusLineLogger.
-		 */
+	@PostConstruct
+	public void postConstruct() {
+
 		uiStatusLineLogger = new UIStatusLineLogger();
 		StatusLineLogger.add(uiStatusLineLogger);
 	}
 
-	/**
-	 * Returns the instance of ui status line logger or null if not exists.
-	 * 
-	 * @return
-	 */
-	public static UIStatusLineLogger getUIStatusLineLogger() {
+	@PreDestroy
+	public void preDestroy() {
 
-		return uiStatusLineLogger;
+		if(uiStatusLineLogger != null) {
+			StatusLineLogger.remove(uiStatusLineLogger);
+		}
 	}
 }
