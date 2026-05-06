@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - fix bug with local perspectives
@@ -19,8 +19,6 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
-import jakarta.inject.Inject;
-
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.e4.core.services.translation.TranslationService;
 import org.eclipse.e4.ui.model.application.ui.advanced.MPerspective;
@@ -28,6 +26,8 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
+
+import jakarta.inject.Inject;
 
 public class PerspectiveSwitcherLabelProvider extends LabelProvider implements ITableLabelProvider {
 
@@ -89,7 +89,7 @@ public class PerspectiveSwitcherLabelProvider extends LabelProvider implements I
 		if(element instanceof MPerspective perspective) {
 			switch(columnIndex) {
 				case 0:
-					text = perspective.getLabel();
+					text = perspective.getLocalizedLabel();
 					if(text == null || text.equals("")) {
 						text = "Nameless perspective";
 					} else if(text.startsWith("<") && text.endsWith(">")) {
