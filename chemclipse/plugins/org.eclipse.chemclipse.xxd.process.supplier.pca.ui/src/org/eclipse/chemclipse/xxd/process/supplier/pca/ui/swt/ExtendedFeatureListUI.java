@@ -384,13 +384,20 @@ public class ExtendedFeatureListUI extends Composite implements IExtendedPartUI 
 
 				boolean active = button.getSelection();
 				setButtonImage(button, IMAGE_FILTER_VISUAL_SELECTED, PREFIX_ENABLE, PREFIX_DISABLE, TOOLTIP_FILTER_VISUAL_SELECTED, active);
+
 				TableItem[] selectedTableItems = listControl.get().getTable().getSelection();
 				List<Feature> selectedFeatures = new ArrayList<>();
+				List<IVariable> selectedVariables = new ArrayList<>();
 				for(TableItem item : selectedTableItems) {
-					selectedFeatures.add((Feature)item.getData());
+					Feature feature = (Feature)item.getData();
+					selectedFeatures.add(feature);
+					selectedVariables.add(feature.getVariable());
 				}
+
+				listControl.get().setHighlightedVariables(selectedVariables);
 				listControl.get().enableVisualSelection(active);
 				updateInput();
+
 				UpdateNotifierUI.update(Display.getDefault(), IChemClipseEvents.TOPIC_PCA_UPDATE_HIGHLIGHT_PLOT_VARIABLE, selectedFeatures.toArray());
 			}
 		});

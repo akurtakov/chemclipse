@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
@@ -86,6 +87,12 @@ public class FeatureListUI extends ExtendedTableViewer {
 	public void enableVisualSelection(boolean enable) {
 
 		selectFilter.setMode(enable);
+		refresh();
+	}
+
+	public void setHighlightedVariables(List<IVariable> highlightedVariables) {
+
+		selectFilter.setHighlightedVariables(highlightedVariables);
 		refresh();
 	}
 
