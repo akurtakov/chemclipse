@@ -102,16 +102,6 @@ public class FileIdentifier {
 		return massSpectra;
 	}
 
-	/**
-	 * Run the peak identification.
-	 *
-	 * @param peaks
-	 * @param peakIdentifierSettings
-	 * @param processingInfo
-	 * @param monitor
-	 * @return {@link IPeakIdentificationResults}
-	 * @throws FileNotFoundException
-	 */
 	public IPeakIdentificationResults runPeakIdentification(List<? extends IPeakMSD> peaks, PeakIdentifierSettings peakIdentifierSettings, IProgressMonitor monitor) throws FileNotFoundException {
 
 		/*
