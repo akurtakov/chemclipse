@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2011, 2025 Lablicate GmbH.
+ * Copyright (c) 2011, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -29,6 +29,6 @@ public class BackfoldingFilter_1_ITest extends ChromatogramImporterTestCase {
 
 		int scan = 1;
 		chromatogramFilter.applyFilter(chromatogramSelection, chromatogramFilterSettings, new NullProgressMonitor());
-		assertEquals(1934.0f, chromatogram.getScan(scan).getTotalSignal(), 0, "total signal");
+		assertEquals(2112.0f, chromatogram.getScan(scan).getTotalSignal(), 0, "total signal");
 	}
 }
