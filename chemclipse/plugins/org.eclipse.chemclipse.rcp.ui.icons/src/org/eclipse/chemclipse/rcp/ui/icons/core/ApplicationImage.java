@@ -52,6 +52,7 @@ public class ApplicationImage implements IApplicationImage {
 		this.bundle = bundle;
 	}
 
+	@SuppressWarnings("restriction")
 	@Override
 	public Image getImage(String fileName, String size) {
 
