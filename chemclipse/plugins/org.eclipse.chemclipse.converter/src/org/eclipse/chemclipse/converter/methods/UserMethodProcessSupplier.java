@@ -40,6 +40,11 @@ public final class UserMethodProcessSupplier extends AbstractProcessSupplier<Voi
 		this.processMethod = processMethod;
 	}
 
+	public IProcessMethod getProcessMethod() {
+
+		return processMethod;
+	}
+
 	@Override
 	public Iterator<IProcessEntry> iterator() {
 

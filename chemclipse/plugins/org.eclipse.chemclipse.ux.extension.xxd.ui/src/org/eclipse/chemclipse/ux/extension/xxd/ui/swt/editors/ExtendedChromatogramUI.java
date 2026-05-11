@@ -32,6 +32,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import org.eclipse.chemclipse.converter.methods.MetaProcessorProcessSupplier;
+import org.eclipse.chemclipse.converter.methods.UserMethodProcessSupplier;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.csd.model.core.selection.IChromatogramSelectionCSD;
 import org.eclipse.chemclipse.logging.core.Logger;
@@ -718,6 +719,11 @@ public class ExtendedChromatogramUI extends Composite implements IToolbarConfig,
 			 */
 			if(processSupplier instanceof MetaProcessorProcessSupplier metaProcessorProcessSupplier) {
 				IProcessMethod processMethod = metaProcessorProcessSupplier.getProcessMethod();
+				MethodParameters methodParameters = ResumeMethodSupport.selectMethodParameters(shell, processMethod);
+				processMethod.setActiveProfile(methodParameters.getProfile());
+				processMethod.setResumeIndex(methodParameters.getResumeIndex());
+			} else if(processSupplier instanceof UserMethodProcessSupplier userProcessorProcessSupplier) {
+				IProcessMethod processMethod = userProcessorProcessSupplier.getProcessMethod();
 				MethodParameters methodParameters = ResumeMethodSupport.selectMethodParameters(shell, processMethod);
 				processMethod.setActiveProfile(methodParameters.getProfile());
 				processMethod.setResumeIndex(methodParameters.getResumeIndex());
