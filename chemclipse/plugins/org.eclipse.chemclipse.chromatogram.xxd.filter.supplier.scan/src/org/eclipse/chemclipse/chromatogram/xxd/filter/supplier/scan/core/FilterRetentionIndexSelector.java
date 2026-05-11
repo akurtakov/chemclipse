@@ -31,6 +31,7 @@ import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.model.identifier.IColumnIndexMarker;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
+import org.eclipse.chemclipse.model.notifier.UpdateNotifier;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.model.support.ColumnIndexSupport;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -51,6 +52,7 @@ public class FilterRetentionIndexSelector extends AbstractChromatogramFilter {
 				processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, "Select Retention Index", "The retention indices have been selected successfully."));
 				processingInfo.setProcessingResult(new ChromatogramFilterResult(ResultStatus.OK, "Retention Index selection was successful."));
 				chromatogramSelection.getChromatogram().setDirty(true);
+				UpdateNotifier.update(chromatogramSelection);
 			}
 		}
 		return processingInfo;
