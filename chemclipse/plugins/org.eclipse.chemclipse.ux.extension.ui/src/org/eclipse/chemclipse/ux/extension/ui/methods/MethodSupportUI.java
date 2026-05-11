@@ -63,7 +63,6 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.FileDialog;
-import org.eclipse.swt.widgets.Shell;
 import org.osgi.service.event.EventHandler;
 
 public class MethodSupportUI extends Composite implements IExtendedPartUI {
@@ -204,14 +203,13 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				Shell shell = e.display.getActiveShell();
 				File directory = MethodConverter.getUserMethodDirectory();
 				if(directory.exists()) {
-					createNewMethod(shell, true);
-				} else if(selectMethodDirectory(shell)) {
-					createNewMethod(shell, true);
+					createNewMethod(true);
+				} else if(selectMethodDirectory()) {
+					createNewMethod(true);
 				} else {
-					MessageDialog.openError(shell, ExtensionMessages.methodEditor, ExtensionMessages.selectMethodsDirectory);
+					MessageDialog.openError(getShell(), ExtensionMessages.methodEditor, ExtensionMessages.selectMethodsDirectory);
 				}
 			}
 		});
@@ -277,7 +275,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 								/*
 								 * Process Method (Sink)
 								 */
-								File fileSink = createNewMethod(e.display.getActiveShell(), false);
+								File fileSink = createNewMethod(false);
 								if(fileSink != null && fileSink.exists()) {
 									try (InputStream inputStreamSink = new FileInputStream(fileSink)) {
 										IProcessingInfo<IProcessMethod> processingInfoSink = MethodConverter.load(inputStreamSink, fileSource.getAbsolutePath(), null);
@@ -440,7 +438,7 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				selectMethodDirectory(e.display.getActiveShell());
+				selectMethodDirectory();
 				updateInput();
 			}
 		});
@@ -448,9 +446,9 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 		directoryControl.set(button);
 	}
 
-	private boolean selectMethodDirectory(Shell shell) {
+	private boolean selectMethodDirectory() {
 
-		DirectoryDialog directoryDialog = new DirectoryDialog(shell);
+		DirectoryDialog directoryDialog = new DirectoryDialog(getShell());
 		directoryDialog.setText(ExtensionMessages.methodDirectory);
 		directoryDialog.setFilterPath(MethodConverter.getUserMethodDirectory().getAbsolutePath());
 
@@ -463,9 +461,9 @@ public class MethodSupportUI extends Composite implements IExtendedPartUI {
 		}
 	}
 
-	private File createNewMethod(Shell shell, boolean openEditor) {
+	private File createNewMethod(boolean openEditor) {
 
-		FileDialog fileDialog = new FileDialog(shell, SWT.SAVE);
+		FileDialog fileDialog = new FileDialog(getShell(), SWT.SAVE);
 		fileDialog.setOverwrite(true);
 		fileDialog.setText(ExtensionMessages.processMethod);
 		fileDialog.setFileName(MethodConverter.FILE_NAME);
