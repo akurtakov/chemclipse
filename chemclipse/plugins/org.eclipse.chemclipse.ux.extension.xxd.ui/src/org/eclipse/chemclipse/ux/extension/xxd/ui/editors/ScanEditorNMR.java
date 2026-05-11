@@ -65,7 +65,6 @@ import org.eclipse.chemclipse.ux.extension.xxd.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.DynamicSettingsUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.NMRMeasurementsUI;
 import org.eclipse.chemclipse.ux.extension.xxd.ui.swt.editors.ExtendedNMRScanUI;
-import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
@@ -105,7 +104,7 @@ public class ScanEditorNMR implements IScanEditorNMR {
 	private IProcessSupplierContext processSupplierContext;
 
 	@Inject
-	public ScanEditorNMR(Composite parent, IEventBroker eventBroker, MPart part, MDirtyable dirtyable, Shell shell, ProcessorFactory filterFactory, IProcessSupplierContext context) {
+	public ScanEditorNMR(Composite parent, MPart part, MDirtyable dirtyable, Shell shell, ProcessorFactory filterFactory, IProcessSupplierContext context) {
 
 		this.processSupplierContext = context;
 		parent.addDisposeListener(e -> executorService.shutdownNow());
