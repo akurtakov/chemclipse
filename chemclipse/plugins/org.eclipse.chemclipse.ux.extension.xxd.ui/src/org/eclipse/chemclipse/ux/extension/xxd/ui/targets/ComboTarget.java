@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.targets.TargetListUtil;
@@ -145,13 +146,26 @@ public class ComboTarget extends Composite {
 
 		IContentProposalProvider proposalProvider = (String contents, int position) -> {
 			List<ContentProposal> list = new ArrayList<>();
+
+			// Trim search results for performance.
 			if(contents != null) {
-				// Trim search results for performance.
-				String[] filtered = Arrays.stream(items) //
-											.filter(Objects::nonNull) //
-											.filter(s -> s.toLowerCase().contains(contents)) //
-											.limit(100) //
-											.toArray(String[]::new); //
+				// Prefer exact matches.
+				List<String> startsWith = Arrays.stream(items) //
+												.filter(Objects::nonNull) //
+												.filter(s -> s.toLowerCase().startsWith(contents)) //
+												.limit(100) //
+												.toList(); //
+				// Then do fuzzier searches.
+				List<String> contains = List.of();
+				if(startsWith.size() < 100) {
+					contains = Arrays.stream(items) //
+										.filter(Objects::nonNull) //
+										.filter(s -> s.toLowerCase().contains(contents)) //
+										.limit(100 - startsWith.size()).toList(); //
+				}
+
+				// Merge keeping their order.
+				String[] filtered = Stream.concat(startsWith.stream(), contains.stream()).toArray(String[]::new);
 
 				// Dynamically add back the entries so they can be selected.
 				String text = combo.getText();
@@ -161,10 +175,8 @@ public class ComboTarget extends Composite {
 				combo.setText(text);
 				combo.setSelection(selection);
 
-				for(String item : items) {
-					if(item.toLowerCase().contains(contents.toLowerCase())) {
-						list.add(new ContentProposal(item));
-					}
+				for(String item : filtered) {
+					list.add(new ContentProposal(item));
 				}
 			}
 			return list.toArray(new IContentProposal[0]);
