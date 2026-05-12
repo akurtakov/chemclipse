@@ -28,6 +28,7 @@ import org.eclipse.chemclipse.model.statistics.ISamples;
 import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.algorithms.CalculatorNIPALS;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.algorithms.CalculatorOPLS;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.core.algorithms.CalculatorOPLSRegression;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.algorithms.CalculatorSVD;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.exception.MathIllegalArgumentException;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Algorithm;
@@ -115,7 +116,6 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 			}
 		}
 
-		final Set<String> classifications = samples.getSamples().stream().map(ISample::getClassification).distinct().limit(2).collect(Collectors.toSet());
 		for(S sample : samples.getSamples()) {
 			double[] selectedSampleData = null;
 			if(sample.isSelected()) {
@@ -132,9 +132,10 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 			}
 		}
 
-		if(algorithm.equals(Algorithm.OPLS)) {
-			Map<S, double[]> classificationSelected = selectedSamples.entrySet().stream().filter(e -> classifications.contains(e.getKey().getClassification())).collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
-			return classificationSelected;
+		if(algorithm.equals(Algorithm.OPLS_DA) && "--".equals(settings.getOplsTargetGroupName())) {
+			final Set<String> classifications = samples.getSamples().stream().filter(ISample::isSelected).map(ISample::getClassification).distinct().limit(2).collect(Collectors.toSet());
+
+			return selectedSamples.entrySet().stream().filter(e -> classifications.contains(e.getKey().getClassification())).collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue()));
 		}
 
 		return selectedSamples;
@@ -235,8 +236,10 @@ public abstract class AbstractProcessorMultivariateAanalysis {
 			principalComponentAnalysis = new CalculatorNIPALS(numSamples, sampleSize, numberOfPrincipalComponents, numberPredictionSamples);
 		} else if(algorithm.equals(Algorithm.SVD)) {
 			principalComponentAnalysis = new CalculatorSVD(numSamples, sampleSize, numberOfPrincipalComponents, numberPredictionSamples);
-		} else if(algorithm.equals(Algorithm.OPLS)) {
+		} else if(algorithm.equals(Algorithm.OPLS_DA)) {
 			principalComponentAnalysis = new CalculatorOPLS(numSamples, sampleSize, numberOfPrincipalComponents, oplsTargetGroup, numberPredictionSamples);
+		} else if(algorithm.equals(Algorithm.OPLS)) {
+			principalComponentAnalysis = new CalculatorOPLSRegression(numSamples, sampleSize, numberOfPrincipalComponents, numberPredictionSamples);
 		}
 		/*
 		 * Add the samples.

@@ -500,7 +500,7 @@ public class ExtendedSPlot extends Composite implements IExtendedPartUI {
 			return false;
 		}
 		IAnalysisSettings analysisSettings = evaluationPCA.getSamples().getAnalysisSettings();
-		if(analysisSettings == null || analysisSettings.getAlgorithm() != Algorithm.OPLS) {
+		if(analysisSettings == null || (analysisSettings.getAlgorithm() != Algorithm.OPLS_DA && analysisSettings.getAlgorithm() != Algorithm.OPLS)) {
 			return false;
 		}
 		IResultsMVA results = evaluationPCA.getResults();
