@@ -23,6 +23,7 @@ import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.model.statistics.ISampleData;
 import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.algorithms.CalculatorOPLS;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.core.algorithms.CalculatorOPLSRegression;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.exception.MathIllegalArgumentException;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Algorithm;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.EvaluationPCA;
@@ -140,7 +141,14 @@ public class ProcessorPCA extends AbstractProcessorMultivariateAanalysis impleme
 				results.setLoadingVectors(loadingVectors);
 				results.setExplainedVariances(explainedVariances);
 				results.setCumulativeExplainedVariances(cumulativeExplainedVariances);
-				if(Algorithm.OPLS == algorithm && principalComponentAnalysis instanceof CalculatorOPLS calculatorOPLS) {
+				if(Algorithm.OPLS_DA == algorithm && principalComponentAnalysis instanceof CalculatorOPLS calculatorOPLS) {
+					if(calculatorOPLS.getPCovarianceMatrix() != null) {
+						results.setPCovarianceValues(calculatorOPLS.getPCovarianceMatrix().getData().clone());
+					}
+					if(calculatorOPLS.getPCorrMatrix() != null) {
+						results.setPCorrValues(calculatorOPLS.getPCorrMatrix().getData().clone());
+					}
+				} else if(Algorithm.OPLS == algorithm && principalComponentAnalysis instanceof CalculatorOPLSRegression calculatorOPLS) {
 					if(calculatorOPLS.getPCovarianceMatrix() != null) {
 						results.setPCovarianceValues(calculatorOPLS.getPCovarianceMatrix().getData().clone());
 					}

@@ -241,7 +241,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 						if(analysisSettings != null) {
 							analysisSettings.setAlgorithm(algorithm);
 							analysisSettings.setOplsTargetGroupName(comboViewerOplsTarget.get().getStructuredSelection().getFirstElement().toString());
-							if(algorithm.equals(Algorithm.OPLS)) {
+							if(Algorithm.OPLS_DA.equals(analysisSettings.getAlgorithm())) {
 								comboViewerOplsTarget.get().getControl().setEnabled(true);
 							} else {
 								comboViewerOplsTarget.get().getControl().setEnabled(false);

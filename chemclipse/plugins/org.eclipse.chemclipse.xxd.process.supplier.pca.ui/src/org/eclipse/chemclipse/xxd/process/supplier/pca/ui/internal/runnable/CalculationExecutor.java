@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -83,6 +83,8 @@ public class CalculationExecutor implements IRunnableWithProgress {
 			return new ProcessorPCA();
 		} else if(Algorithm.SVD == algorithm) {
 			return new ProcessorPCA();
+		} else if(Algorithm.OPLS_DA == algorithm) {
+			return new ProcessorPCA();
 		} else if(Algorithm.OPLS == algorithm) {
 			return new ProcessorPCA();
 		}
@@ -91,7 +93,7 @@ public class CalculationExecutor implements IRunnableWithProgress {
 
 	private ICrossValidationProcessor getCrossValidationProcessor(Algorithm algorithm) {
 
-		if(Algorithm.OPLS == algorithm) {
+		if(Algorithm.OPLS_DA == algorithm) {
 			return new CrossValidatorOPLS();
 		}
 		return null;
