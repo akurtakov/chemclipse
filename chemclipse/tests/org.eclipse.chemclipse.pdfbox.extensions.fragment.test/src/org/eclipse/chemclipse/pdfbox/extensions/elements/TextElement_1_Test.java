@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.awt.Color;
 
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.Standard14Fonts.FontName;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.ReferenceX;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.ReferenceY;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.TextOption;
@@ -75,14 +76,14 @@ public class TextElement_1_Test {
 	@Test
 	public void test4() {
 
-		assertEquals(PDType1Font.HELVETICA, element.getFont());
+		assertEquals(FontName.HELVETICA.getName(), element.getFont().getName());
 	}
 
 	@Test
 	public void test4a() {
 
-		element.setFont(PDType1Font.COURIER);
-		assertEquals(PDType1Font.COURIER, element.getFont());
+		element.setFont(new PDType1Font(FontName.COURIER));
+		assertEquals(FontName.COURIER.getName(), element.getFont().getName());
 	}
 
 	@Test

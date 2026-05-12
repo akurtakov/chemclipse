@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -16,11 +16,12 @@ import java.awt.Color;
 
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.Standard14Fonts.FontName;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.TextOption;
 
 public class TextElement extends AbstractReferenceElement<TextElement> {
 
-	private PDFont font = PDType1Font.HELVETICA;
+	private PDFont font = new PDType1Font(FontName.HELVETICA);
 	private float fontSize = 12; // pt
 	private Color color = Color.BLACK;
 	private float minHeight = -1;

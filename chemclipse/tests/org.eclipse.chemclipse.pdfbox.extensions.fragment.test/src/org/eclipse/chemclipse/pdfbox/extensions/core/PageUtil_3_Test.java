@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -20,6 +20,7 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.Standard14Fonts.FontName;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.PageBase;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.PageSettings;
 import org.eclipse.chemclipse.pdfbox.extensions.settings.Unit;
@@ -33,7 +34,7 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 public class PageUtil_3_Test {
 
 	private static final String TEXT = "Hallo Welt!";
-	private static final PDFont FONT_REGULAR = PDType1Font.HELVETICA;
+	private static final PDFont FONT_REGULAR = new PDType1Font(FontName.HELVETICA);
 	private static final float FONT_SIZE_12 = 12.0f;
 
 	private PDDocument document;

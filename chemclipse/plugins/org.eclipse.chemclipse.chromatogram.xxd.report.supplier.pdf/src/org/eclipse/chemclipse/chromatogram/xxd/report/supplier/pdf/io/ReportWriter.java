@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Matthias Mailänder - initial API and implementation
  *******************************************************************************/
@@ -18,11 +18,13 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
+import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.PDPageContentStream.AppendMode;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.Standard14Fonts.FontName;
 import org.apache.pdfbox.util.Matrix;
 import org.eclipse.chemclipse.chromatogram.xxd.report.supplier.pdf.settings.ReportSettings;
 import org.eclipse.chemclipse.chromatogram.xxd.report.supplier.pdf.support.ValueScaling;
@@ -46,6 +48,7 @@ public class ReportWriter {
 
 	private static final Logger logger = Logger.getLogger(ReportWriter.class);
 	private static final DecimalFormat decimalFormat = new DecimalFormat("0.0E0", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+	private static final PDType1Font HELVETICA = new PDType1Font(FontName.HELVETICA);
 
 	private static final Unit PAGE_UNIT = Unit.PT;
 	private static final boolean LANDSCAPE = true;
@@ -53,7 +56,7 @@ public class ReportWriter {
 	public void generate(File file, boolean append, IChromatogram chromatogram, ReportSettings reportSettings, IProgressMonitor monitor) throws IOException {
 
 		if(file.exists() && append) {
-			try (PDDocument document = PDDocument.load(file)) {
+			try (PDDocument document = Loader.loadPDF(file)) {
 				addPages(document, file, chromatogram, reportSettings, monitor);
 			}
 		}
@@ -85,11 +88,11 @@ public class ReportWriter {
 
 		try (PDPageContentStream contentStream = new PDPageContentStream(pageUtil.getDocument(), pageUtil.getPage(), AppendMode.APPEND, false, false);) {
 			String name = chromatogram.getDataName().isBlank() ? chromatogram.getFile().getName() : chromatogram.getDataName();
-			float textWidth = pageUtil.calculateTextWidth(PDType1Font.HELVETICA, 12, name);
-			float textHeight = pageUtil.calculateTextHeight(PDType1Font.HELVETICA, 12);
+			float textWidth = pageUtil.calculateTextWidth(HELVETICA, 12, name);
+			float textHeight = pageUtil.calculateTextHeight(HELVETICA, 12);
 			float center = (350 + textWidth) / 2;
 			contentStream.beginText();
-			contentStream.setFont(PDType1Font.HELVETICA, 12);
+			contentStream.setFont(HELVETICA, 12);
 			contentStream.newLineAtOffset(center, 575 - textHeight);
 			contentStream.showText(name);
 			contentStream.endText();
@@ -148,7 +151,7 @@ public class ReportWriter {
 	private void drawAxisLabels(PDPageContentStream contentStream) throws IOException {
 
 		contentStream.beginText();
-		contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+		contentStream.setFont(new PDType1Font(FontName.HELVETICA_BOLD), 12);
 		contentStream.newLineAtOffset(400, 15);
 		contentStream.showText("Time [min]");
 		contentStream.setTextMatrix(Matrix.getRotateInstance(Math.PI / 2, 20, 300));
@@ -158,7 +161,7 @@ public class ReportWriter {
 
 	private void drawXAxisMarkers(PDPageContentStream contentStream, ITotalScanSignals scans) throws IOException {
 
-		contentStream.setFont(PDType1Font.HELVETICA, 8);
+		contentStream.setFont(HELVETICA, 8);
 		double startTime = scans.getFirstTotalScanSignal().getRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR;
 		double stopTime = scans.getLastTotalScanSignal().getRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR;
 		float ticks = Math.round(stopTime - startTime);
@@ -178,7 +181,7 @@ public class ReportWriter {
 
 	private void drawYAxisMarkers(PDPageContentStream contentStream, IChromatogram chromatogram) throws IOException {
 
-		contentStream.setFont(PDType1Font.HELVETICA, 8);
+		contentStream.setFont(HELVETICA, 8);
 		float minY = 50;
 		float maxY = 500;
 		float logMin = (float)Math.log10(chromatogram.getMinSignal());
@@ -202,10 +205,10 @@ public class ReportWriter {
 
 	private void drawPeaks(IChromatogram chromatogram, ValueScaling valueScaling, PageUtil pageUtil) throws IOException {
 
-		float textHeight = pageUtil.calculateTextHeight(PDType1Font.HELVETICA, 8);
+		float textHeight = pageUtil.calculateTextHeight(HELVETICA, 8);
 		try (PDPageContentStream contentStream = new PDPageContentStream(pageUtil.getDocument(), pageUtil.getPage(), AppendMode.APPEND, false, false)) {
 			contentStream.beginText();
-			contentStream.setFont(PDType1Font.HELVETICA, 8);
+			contentStream.setFont(HELVETICA, 8);
 			for(IPeak peak : chromatogram.getPeaks()) {
 				IPeakModel peakModel = peak.getPeakModel();
 				float x = valueScaling.getX(peakModel.getRetentionTimeAtPeakMaximum()) + (textHeight / 2);
@@ -214,7 +217,7 @@ public class ReportWriter {
 				}
 				float y = valueScaling.getY(peakModel.getBackgroundAbundance() + peakModel.getPeakAbundance());
 				String target = TargetSupport.getBestTargetLibraryField(peak);
-				float textWidth = pageUtil.calculateTextWidth(PDType1Font.HELVETICA, 8, target);
+				float textWidth = pageUtil.calculateTextWidth(HELVETICA, 8, target);
 				if(y + textWidth > 500) {
 					y -= textWidth;
 					if(y < 0) {
