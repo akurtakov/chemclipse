@@ -14,7 +14,9 @@ package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.i
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.amdiscalri.model.RetentionIndexMarker;
@@ -22,6 +24,7 @@ import org.eclipse.chemclipse.model.columns.IRetentionIndexEntry;
 import org.eclipse.chemclipse.model.columns.ISeparationColumnIndices;
 import org.eclipse.chemclipse.model.columns.RetentionIndexEntry;
 import org.eclipse.chemclipse.model.core.IChromatogram;
+import org.eclipse.chemclipse.model.support.RetentionIndexMath;
 
 public class RetentionIndexSupport {
 
@@ -122,5 +125,63 @@ public class RetentionIndexSupport {
 	public static boolean extrapolateData(boolean extrapolateLeft, boolean extrapolateRight) {
 
 		return extrapolateLeft == true || extrapolateRight == true;
+	}
+
+	public static void deriveMissingIndices(TreeMap<Integer, Integer> retentionIndexPeakMap, Set<Integer> availableIndices, String[] standards, ISeparationColumnIndices separationColumnIndices) {
+
+		if(retentionIndexPeakMap.size() >= 2) {
+			/*
+			 * Calculate the alkanes in between.
+			 */
+			List<IRetentionIndexEntry> derivedRetentionIndexEntries = new ArrayList<>();
+			int minAlkane = (int)Math.round(retentionIndexPeakMap.firstKey() / 100.0d);
+			int maxAlkane = (int)Math.round(retentionIndexPeakMap.lastKey() / 100.0d);
+
+			for(int alkane = minAlkane; alkane <= maxAlkane; alkane++) {
+				int retentionIndex = alkane * 100;
+				if(!availableIndices.contains(retentionIndex)) {
+					Map.Entry<Integer, Integer> floorEntry = retentionIndexPeakMap.floorEntry(retentionIndex);
+					if(floorEntry != null) {
+						Map.Entry<Integer, Integer> ceilingEntry = retentionIndexPeakMap.ceilingEntry(retentionIndex);
+						if(ceilingEntry != null) {
+							/*
+							 * Derived Entry
+							 */
+							int retentionTime = 0;
+							if(floorEntry.getKey() == retentionIndex) {
+								retentionTime = floorEntry.getValue();
+							} else if(ceilingEntry.getKey() == retentionIndex) {
+								retentionTime = ceilingEntry.getValue();
+							} else {
+								int retentionIndexLow = floorEntry.getKey();
+								int retentionTimeLow = floorEntry.getValue();
+								int retentionIndexHigh = ceilingEntry.getKey();
+								int retentionTimeHigh = ceilingEntry.getValue();
+								retentionTime = RetentionIndexMath.calculateRetentionTime(retentionIndex, retentionIndexLow, retentionIndexHigh, retentionTimeLow, retentionTimeHigh);
+							}
+							/*
+							 * Add
+							 */
+							if(retentionTime > 0) {
+								String name = getRetentionIndexName(standards, alkane);
+								derivedRetentionIndexEntries.add(new RetentionIndexEntry(retentionTime, retentionIndex, name));
+							}
+						}
+					}
+				}
+			}
+			/*
+			 * Transfer
+			 */
+			for(IRetentionIndexEntry derivedRetentionIndexEntry : derivedRetentionIndexEntries) {
+				separationColumnIndices.put(derivedRetentionIndexEntry);
+			}
+		}
+
+	}
+
+	public static String getRetentionIndexName(String[] standards, int index) {
+
+		return RetentionIndexCalculator.getAlkaneLabel(standards, index) + " -> Derived";
 	}
 }
