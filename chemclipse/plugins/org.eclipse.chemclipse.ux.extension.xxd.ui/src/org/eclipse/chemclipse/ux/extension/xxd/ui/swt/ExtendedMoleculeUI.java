@@ -479,11 +479,14 @@ public class ExtendedMoleculeUI extends Composite implements IExtendedPartUI {
 
 	private void setTextMolecule() {
 
+		String content = "";
 		if(libraryInformation != null) {
-			textMolecule.get().setText(libraryInformation.getMoleculeStructure());
-		} else {
-			textMolecule.get().setText("");
+			String moleculeStructure = libraryInformation.getMoleculeStructure();
+			if(moleculeStructure != null) {
+				content = moleculeStructure;
+			}
 		}
+		textMolecule.get().setText(content);
 	}
 
 	private void setTextInput() {
