@@ -32,7 +32,7 @@ public class WindowsSupport_1_ITest extends AbstractBackgroundTestCase {
 	public void setUp() throws IOException {
 
 		super.setUp();
-		File nistApplication = new File(TestPathHelper.TESTFILE_WINDOWS_NIST_APPLICATION);
+		File nistApplication = new File("testData/files/windows/programs/nist/nistms$.exe");
 		nistApplicationPath = nistApplication.getParentFile().getAbsolutePath();
 		runtimeSupport = new WindowsSupport(nistApplication.getParentFile(), parameterBackground);
 	}

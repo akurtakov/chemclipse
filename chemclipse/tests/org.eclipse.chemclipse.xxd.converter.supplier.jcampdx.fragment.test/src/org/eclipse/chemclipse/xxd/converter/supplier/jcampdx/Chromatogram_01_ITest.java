@@ -37,7 +37,7 @@ public class Chromatogram_01_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File file = new File(TestPathHelper.CHROMATOGRAM_01);
+		File file = new File("testData/Chromatogram_01.jdx");
 		ChromatogramImportConverter chromatogramImportConverter = new ChromatogramImportConverter();
 		IProcessingInfo<IChromatogramMSD> processingInfo = chromatogramImportConverter.convert(file, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();

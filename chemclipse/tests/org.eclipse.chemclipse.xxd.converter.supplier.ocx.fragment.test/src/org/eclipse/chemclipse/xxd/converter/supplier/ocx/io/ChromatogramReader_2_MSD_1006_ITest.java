@@ -27,7 +27,6 @@ import org.eclipse.chemclipse.msd.model.core.IIonTransitionGroup;
 import org.eclipse.chemclipse.msd.model.core.IIonTransitionSettings;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.xxd.converter.supplier.ocx.TestPathHelper;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.jupiter.api.BeforeAll;
@@ -43,7 +42,7 @@ public class ChromatogramReader_2_MSD_1006_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File fileImport = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_2_MSD_1006);
+		File fileImport = new File("testData/files/import/Chromatogram2-1006.ocb");
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();
 	}

@@ -34,7 +34,7 @@ public class Pepsi_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File file = new File(TestPathHelper.PEPSI);
+		File file = new File("testData/pepsi.jdx");
 		ScanImportConverter importConverter = new ScanImportConverter();
 		IProcessingInfo<ISpectrumWSD> processingInfo = importConverter.convert(file, new NullProgressMonitor());
 		spectrumWSD = processingInfo.getProcessingResult();

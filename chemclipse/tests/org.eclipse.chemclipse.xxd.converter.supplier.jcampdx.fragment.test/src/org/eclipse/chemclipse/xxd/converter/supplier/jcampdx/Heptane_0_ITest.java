@@ -36,7 +36,7 @@ public class Heptane_0_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File file = new File(TestPathHelper.HEPTANE_0);
+		File file = new File("testData/Heptane_0.JDX");
 		IProcessingInfo<IMassSpectra> processingInfo = DatabaseConverter.convert(file, new NullProgressMonitor());
 		massSpectra = processingInfo.getProcessingResult();
 	}

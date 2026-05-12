@@ -40,7 +40,7 @@ public class Heptane_3_ITest {
 		PreferenceSupplier.setSeparationColumnTypeRetentionIndex1(SeparationColumnType.NON_POLAR);
 		PreferenceSupplier.setSeparationColumnTypeRetentionIndex2(SeparationColumnType.POLAR);
 		PreferenceSupplier.setSeparationColumnTypeRetentionIndex3(SeparationColumnType.SEMI_POLAR);
-		File file = new File(TestPathHelper.HEPTANE_3);
+		File file = new File("testData/Heptane_3.JDX");
 		IProcessingInfo<IMassSpectra> processingInfo = DatabaseConverter.convert(file, new NullProgressMonitor());
 		massSpectra = processingInfo.getProcessingResult();
 	}

@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.model.columns.IRetentionIndexEntry;
 import org.eclipse.chemclipse.model.columns.ISeparationColumnIndices;
@@ -33,9 +32,9 @@ public class AMDISConverter_2_ITest {
 	private ISeparationColumnIndices separationColumnIndices;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
-		File file = new File(TestPathHelper.TESTFILE_IMPORT_CALIBRATION_CAL_2);
+		File file = new File("testData/files/import/calibration2.cal");
 		AMDISConverter converter = new AMDISConverter();
 		IProcessingInfo<ISeparationColumnIndices> processingInfo = converter.parseRetentionIndices(file);
 		separationColumnIndices = processingInfo.getProcessingResult();

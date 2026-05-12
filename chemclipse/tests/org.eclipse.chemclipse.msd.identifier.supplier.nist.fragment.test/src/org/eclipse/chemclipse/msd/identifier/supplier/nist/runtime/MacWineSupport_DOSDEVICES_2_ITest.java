@@ -19,7 +19,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.identifier.supplier.nist.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -37,7 +36,7 @@ public class MacWineSupport_DOSDEVICES_2_ITest extends AbstractBackgroundTestCas
 	@Test
 	public void testConstruct_1() throws IOException {
 
-		File nistApp = new File(TestPathHelper.TESTFILE_WINE_DOSDEVICES_NIST_APPLICATION);
+		File nistApp = new File("testData/files/wine/dosdevices/c/programs/nist/nistms$.exe");
 		runtimeSupport = new MacWineSupport(nistApp.getParentFile(), parameterBackground);
 		assertNotNull(runtimeSupport);
 	}

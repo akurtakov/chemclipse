@@ -15,9 +15,7 @@ package org.eclipse.chemclipse.msd.model.core;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.model.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.junit.jupiter.api.Test;
 
@@ -26,23 +24,23 @@ public class AbstractChromatogram_3_Test {
 	private ChromatogramMSD chromatogram = new ChromatogramMSD();
 
 	@Test
-	public void testExtractNameFromDirectory_1() throws IOException {
+	public void testExtractNameFromDirectory_1() {
 
-		chromatogram.setFile(new File(TestPathHelper.TESTFILE_IMPORT_DIR_20120319));
+		chromatogram.setFile(new File("testData/files/import/PW2012.03.19.D"));
 		assertEquals("PW2012.03.19", chromatogram.getName());
 	}
 
 	@Test
-	public void testExtractNameFromDirectory_2() throws IOException {
+	public void testExtractNameFromDirectory_2() {
 
-		chromatogram.setFile(new File(TestPathHelper.TESTFILE_IMPORT_DIR_20120320));
+		chromatogram.setFile(new File("testData/files/import/PW20120320"));
 		assertEquals("PW20120320", chromatogram.getName());
 	}
 
 	@Test
-	public void testExtractNameFromDirectory_3() throws IOException {
+	public void testExtractNameFromDirectory_3() {
 
-		chromatogram.setFile(new File(TestPathHelper.TESTFILE_IMPORT_DIR_20120321_1));
+		chromatogram.setFile(new File("testData/files/import/PW20120321-1.D"));
 		assertEquals("PW20120321-1", chromatogram.getName());
 	}
 }

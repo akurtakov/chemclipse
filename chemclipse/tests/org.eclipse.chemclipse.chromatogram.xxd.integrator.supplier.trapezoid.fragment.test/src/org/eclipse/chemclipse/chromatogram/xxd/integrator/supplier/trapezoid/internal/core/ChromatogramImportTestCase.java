@@ -13,7 +13,6 @@
 package org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.internal.core;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
@@ -31,7 +30,7 @@ public class ChromatogramImportTestCase {
 	protected String chromatogramRelativePath;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		File fileImport = new File(chromatogramRelativePath);
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileImport, new NullProgressMonitor());

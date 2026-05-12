@@ -20,7 +20,6 @@ import org.eclipse.chemclipse.csd.converter.chromatogram.ChromatogramConverterCS
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
 import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.xxd.converter.supplier.ocx.TestPathHelper;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.jupiter.api.BeforeAll;
@@ -36,7 +35,7 @@ public class ChromatogramReader_3_FID_1100_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File fileImport = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_3_FID_1100);
+		File fileImport = new File("testData/files/import/Chromatogram3-1100.ocb");
 		IProcessingInfo<IChromatogramCSD> processingInfo = ChromatogramConverterCSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();
 	}

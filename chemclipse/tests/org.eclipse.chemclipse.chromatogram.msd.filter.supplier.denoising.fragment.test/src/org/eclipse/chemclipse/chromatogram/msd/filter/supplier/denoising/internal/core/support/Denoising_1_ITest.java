@@ -14,7 +14,6 @@ package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.denoising.intern
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.chemclipse.model.core.MarkedTraceModus;
@@ -36,7 +35,7 @@ public class Denoising_1_ITest extends ChromatogramImporterTestCase {
 
 	@Override
 	@BeforeAll
-	public void setUp() throws IOException, FilterException {
+	public void setUp() throws FilterException {
 
 		super.setUp();
 		IMarkedIons ionsToRemove = new MarkedIons(MarkedTraceModus.INCLUDE);

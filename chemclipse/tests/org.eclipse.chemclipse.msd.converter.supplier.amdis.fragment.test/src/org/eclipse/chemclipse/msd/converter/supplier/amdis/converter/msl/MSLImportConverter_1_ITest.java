@@ -15,10 +15,8 @@ package org.eclipse.chemclipse.msd.converter.supplier.amdis.converter.msl;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.msd.converter.database.IDatabaseImportConverter;
-import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.jupiter.api.Test;
@@ -40,9 +38,9 @@ public class MSLImportConverter_1_ITest {
 	}
 
 	@Test
-	public void testExceptions_2() throws IOException {
+	public void testExceptions_2() {
 
-		importFile = new File(TestPathHelper.TESTFILE_IMPORT_EMPTY);
+		importFile = new File("testData/files/import/msl/Empty.msl");
 		IProcessingInfo<?> processingInfo = importConverter.convert(importFile, new NullProgressMonitor());
 		assertTrue(processingInfo.hasErrorMessages());
 	}
@@ -56,9 +54,9 @@ public class MSLImportConverter_1_ITest {
 	}
 
 	@Test
-	public void testExceptions_4() throws IOException {
+	public void testExceptions_4() {
 
-		importFile = new File(TestPathHelper.TESTFILE_IMPORT_NOT_READABLE);
+		importFile = new File("testData/files/import/msl/NotReadable.msl");
 		importFile.setReadable(false);
 		try {
 			IProcessingInfo<?> processingInfo = importConverter.convert(importFile, new NullProgressMonitor());

@@ -16,9 +16,7 @@ package org.eclipse.chemclipse.msd.converter.supplier.matlab.parafac.converter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.converter.supplier.matlab.parafac.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IPeaksMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -33,10 +31,10 @@ public class MatlabParafacPeakImportConverter_7_ITest {
 	private IPeaksMSD peaks;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		MatlabParafacPeakImportConverter converter = new MatlabParafacPeakImportConverter();
-		File file = new File(TestPathHelper.TESTFILE_IMPORT_PARAFAC_TEST_3);
+		File file = new File("testData/files/import/parafac/test3.mpl");
 		IProcessingInfo<IPeaksMSD> processingInfo = converter.convert(file, new NullProgressMonitor());
 		peaks = processingInfo.getProcessingResult();
 	}

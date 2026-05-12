@@ -32,7 +32,7 @@ public class LinuxWineSupport_DOSDEVICES_1_ITest extends AbstractBackgroundTestC
 	public void setUp() throws IOException {
 
 		super.setUp();
-		File testfileNistApplication = new File(TestPathHelper.TESTFILE_WINE_DOSDEVICES_NIST_APPLICATION);
+		File testfileNistApplication = new File("testData/files/wine/dosdevices/c/programs/nist/nistms$.exe");
 		nistApplicationPath = testfileNistApplication.getParentFile().getAbsolutePath();
 		runtimeSupport = new LinuxWineSupport(testfileNistApplication.getParentFile(), parameterBackground);
 	}

@@ -35,7 +35,7 @@ public class BrukerAFFN_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File file = new File(TestPathHelper.REAL_SPECTRUM_ASCII_FREE_FORMAT_NUMERIC);
+		File file = new File("testData/BRUKAFFN.DX");
 		ScanImportConverterNMR importConverter = new ScanImportConverterNMR();
 		IProcessingInfo<ISpectrumNMR> processingInfo = importConverter.convert(file, new NullProgressMonitor());
 		complexSignalMeasurement = processingInfo.getProcessingResult().getComplexSignalMeasurements().iterator().next();

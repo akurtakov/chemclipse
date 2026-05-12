@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 
-import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.model.IVendorLibraryMassSpectrum;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -31,7 +30,7 @@ public class MassSpectrumImportConverter_DB_3_ITest extends ImportConverterMslTe
 	@BeforeAll
 	public void setUp() {
 
-		importFile = new File(TestPathHelper.TESTFILE_IMPORT_DB_3);
+		importFile = new File("testData/files/import/msl/DB3.msl");
 		super.setUp();
 	}
 

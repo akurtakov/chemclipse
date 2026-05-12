@@ -15,11 +15,9 @@ package org.eclipse.chemclipse.converter.core;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.chemclipse.converter.TestPathHelper;
 import org.junit.jupiter.api.Test;
 
 public class MagicNumberMatcher_9_ITest {
@@ -42,9 +40,9 @@ public class MagicNumberMatcher_9_ITest {
 	private IMagicNumberMatcher magicNumberMatcher = new MagicNumberMatcher();
 
 	@Test
-	public void test1() throws IOException {
+	public void test1() {
 
-		File file = new File(TestPathHelper.TESTFILE_IMPORT_BIN_TEST);
+		File file = new File("testData/files/import/bin-test");
 		assertTrue(magicNumberMatcher.checkFileFormat(file));
 	}
 }

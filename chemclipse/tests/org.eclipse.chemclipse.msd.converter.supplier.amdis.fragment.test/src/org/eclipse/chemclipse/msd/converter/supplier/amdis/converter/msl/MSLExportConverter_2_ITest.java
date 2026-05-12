@@ -27,7 +27,6 @@ import org.eclipse.chemclipse.model.identifier.ColumnIndexMarker;
 import org.eclipse.chemclipse.model.identifier.IColumnIndexMarker;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.msd.converter.database.IDatabaseExportConverter;
-import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.io.ImportConverterMslTestCase;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.model.IVendorLibraryMassSpectrum;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.model.VendorLibraryMassSpectrum;
@@ -55,8 +54,8 @@ public class MSLExportConverter_2_ITest extends ImportConverterMslTestCase {
 		 * Export
 		 */
 		IDatabaseExportConverter exportConverter = new MSLDatabaseExportConverter();
-		File exportFolder = new File(TestPathHelper.TESTDIR_EXPORT);
-		File exportFile = new File(exportFolder, File.separator + TestPathHelper.TESTFILE_EXPORT_DB_2_MSL);
+		File exportFolder = new File("testData/files/export");
+		File exportFile = new File(exportFolder, File.separator + "DB2.msl");
 		IVendorLibraryMassSpectrum scanMSD = new VendorLibraryMassSpectrum();
 		ILibraryInformation libraryInformationMS = scanMSD.getLibraryInformation();
 		libraryInformationMS.setName("Benzoic acid, 2-hydroxy-, ethyl ester");

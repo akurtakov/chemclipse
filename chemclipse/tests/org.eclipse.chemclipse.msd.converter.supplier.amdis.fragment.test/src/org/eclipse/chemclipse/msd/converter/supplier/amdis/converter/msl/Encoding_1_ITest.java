@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 
-import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.io.ImportConverterMslTestCase;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.model.IVendorLibraryMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
@@ -33,7 +32,7 @@ public class Encoding_1_ITest extends ImportConverterMslTestCase {
 	@BeforeAll
 	public void setUp() {
 
-		importFile = new File(TestPathHelper.TESTFILE_IMPORT_ENCODING_MSL);
+		importFile = new File("testData/files/import/msl/Encoding.msl");
 		super.setUp();
 	}
 

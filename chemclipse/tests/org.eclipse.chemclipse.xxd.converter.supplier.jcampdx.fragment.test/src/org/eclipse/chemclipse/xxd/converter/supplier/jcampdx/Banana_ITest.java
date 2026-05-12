@@ -15,7 +15,6 @@ package org.eclipse.chemclipse.xxd.converter.supplier.jcampdx;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.csd.converter.supplier.jcampdx.converter.ChromatogramImportConverter;
 import org.eclipse.chemclipse.csd.model.core.IChromatogramCSD;
@@ -32,9 +31,9 @@ public class Banana_ITest {
 	private IChromatogramCSD chromatogram;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
-		File file = new File(TestPathHelper.BANANA);
+		File file = new File("testData/banana.jdx");
 		ChromatogramImportConverter chromatogramImportConverter = new ChromatogramImportConverter();
 		IProcessingInfo<IChromatogramCSD> processingInfo = chromatogramImportConverter.convert(file, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();

@@ -14,8 +14,6 @@ package org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.normalizer.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.IOException;
-
 import org.eclipse.chemclipse.chromatogram.filter.core.chromatogram.IChromatogramFilter;
 import org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.normalizer.settings.FilterSettings;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -32,7 +30,7 @@ public class NormalizerFilter_1_Test extends ChromatogramImporterTestCase {
 
 	@Override
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		super.setUp();
 		chromatogramFilter = new ChromatogramFilter();

@@ -33,7 +33,7 @@ public class Lime_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File file = new File(TestPathHelper.LIME);
+		File file = new File("testData/lime.jdx");
 		ChromatogramImportConverter chromatogramImportConverter = new ChromatogramImportConverter();
 		IProcessingInfo<IChromatogramCSD> processingInfo = chromatogramImportConverter.convert(file, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();

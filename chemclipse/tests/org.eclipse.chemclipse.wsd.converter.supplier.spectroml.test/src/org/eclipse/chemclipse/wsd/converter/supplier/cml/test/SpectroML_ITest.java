@@ -37,7 +37,7 @@ public class SpectroML_ITest {
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		File file = new File(TestPathHelper.SAMPLE);
+		File file = new File("testData/SpectroML.xml");
 		ScanImportConverter importConverter = new ScanImportConverter();
 		IProcessingInfo<ISpectrumWSD> processingInfo = importConverter.convert(file, new NullProgressMonitor());
 		spectrumWSD = processingInfo.getProcessingResult();

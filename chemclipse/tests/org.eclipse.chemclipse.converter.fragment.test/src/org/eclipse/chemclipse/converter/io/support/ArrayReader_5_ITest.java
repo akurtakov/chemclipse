@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.converter.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -40,7 +39,7 @@ public class ArrayReader_5_ITest {
 		 * F0 A7 C1 0B 04 9F 01 3B
 		 * 11110000 10100111 11000001 00001011 00000100 10011111 00000001 00111011
 		 */
-		File file = new File(TestPathHelper.TESTFILE_IMPORT_BIN_TEST);
+		File file = new File("testData/files/import/bin-test");
 		IArrayReader arrayReader = new ArrayReaderTestImplementation(file);
 		tmp = arrayReader.readBytes(prefix, 4);
 	}

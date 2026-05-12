@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.io.ELUReader;
 import org.eclipse.chemclipse.msd.model.core.IPeaksMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -37,7 +36,7 @@ public class ELUReader_2_ITest {
 	public void setUp() throws IOException {
 
 		ELUReader reader = new ELUReader();
-		File file = new File(TestPathHelper.TESTFILE_IMPORT_PEAKS_1_ELU);
+		File file = new File("testData/files/import/elu/Peaks1.ELU");
 		processingInfo = reader.read(file, new NullProgressMonitor());
 	}
 

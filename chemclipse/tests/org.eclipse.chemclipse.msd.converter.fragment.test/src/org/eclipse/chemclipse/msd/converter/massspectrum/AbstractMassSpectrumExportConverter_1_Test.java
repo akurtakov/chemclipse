@@ -15,9 +15,7 @@ package org.eclipse.chemclipse.msd.converter.massspectrum;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.converter.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.implementation.ScanMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
@@ -46,10 +44,10 @@ public class AbstractMassSpectrumExportConverter_1_Test {
 	}
 
 	@Test
-	public void testFileNotWritableException_1() throws IOException {
+	public void testFileNotWritableException_1() {
 
 		File file = null;
-		file = new File(TestPathHelper.TESTFILE_EXPORT_MASSSPECTRUM_NOT_WRITEABLE);
+		file = new File("testData/files/export/NOT_WRITEABLE.msl");
 		file.setWritable(false);
 		IProcessingInfo<?> processingInfo = ec.convert(file, massSpectrum, false, new NullProgressMonitor());
 		assertTrue(processingInfo.hasErrorMessages());

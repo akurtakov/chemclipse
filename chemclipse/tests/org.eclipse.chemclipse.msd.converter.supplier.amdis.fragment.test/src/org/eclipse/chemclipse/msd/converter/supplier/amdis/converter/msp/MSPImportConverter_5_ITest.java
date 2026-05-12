@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
 
-import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.io.ImportConverterMspTestCase;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.model.IVendorLibraryMassSpectrum;
 import org.junit.jupiter.api.BeforeAll;
@@ -32,7 +31,7 @@ public class MSPImportConverter_5_ITest extends ImportConverterMspTestCase {
 	@BeforeAll
 	public void setUp() {
 
-		importFile = new File(TestPathHelper.TESTFILE_IMPORT_GOLMDB_TEST_MSP);
+		importFile = new File("testData/files/import/msp/GolmDB-Test.MSP");
 		super.setUp();
 	}
 

@@ -17,9 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
-import java.io.IOException;
 
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.TestPathHelper;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.exceptions.CodaCalculatorException;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
@@ -40,9 +38,9 @@ public class MassChromatographicQualityResult_1_ITest {
 	private IChromatogramSelectionMSD chromatogramSelection;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
-		File importFile = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
+		File importFile = new File("testData/files/import/Chromatogram1.ocb");
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(importFile, new NullProgressMonitor());
 		IChromatogramMSD chromatogram = processingInfo.getProcessingResult();
 		chromatogramSelection = new ChromatogramSelectionMSD(chromatogram);

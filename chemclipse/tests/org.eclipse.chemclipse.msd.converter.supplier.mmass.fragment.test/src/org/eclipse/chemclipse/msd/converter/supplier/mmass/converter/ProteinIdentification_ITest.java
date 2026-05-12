@@ -15,13 +15,11 @@ package org.eclipse.chemclipse.msd.converter.supplier.mmass.converter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.chemclipse.model.core.IMassSpectrumPeak;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
-import org.eclipse.chemclipse.msd.converter.supplier.mmass.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
@@ -38,9 +36,9 @@ public class ProteinIdentification_ITest {
 	private IStandaloneMassSpectrum massSpectrum;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
-		File importFile = new File(TestPathHelper.TESTFILE_PROTEIN_IDENTIFICATION);
+		File importFile = new File("testData/Protein Identification.msd");
 		MassSpectrumImportConverter converter = new MassSpectrumImportConverter();
 		IProcessingInfo<IMassSpectra> processingInfo = converter.convert(importFile, new NullProgressMonitor());
 		massSpectrum = (IStandaloneMassSpectrum)processingInfo.getProcessingResult().getMassSpectrum(1);

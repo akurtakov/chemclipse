@@ -20,7 +20,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.ZipInputStream;
 
-import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.TestPathHelper;
 import org.eclipse.chemclipse.chromatogram.msd.classifier.supplier.wnc.exceptions.ClassifierException;
 import org.eclipse.chemclipse.model.settings.Delimiter;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
@@ -48,11 +47,11 @@ public class ChromatogramTestCase {
 	public void setUp() throws IOException, ClassifierException {
 
 		PreferenceSupplier.setImportDelimiter(Delimiter.SEMICOLON);
-		File file = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_ZIP);
+		File file = new File("testData/files/import/Chromatogram1.csv.zip");
 		try (ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(file))) {
 			zipInputStream.getNextEntry();
-			File folder = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_FOLDER);
-			chromatogramFile = new File(folder, File.separator + TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1_NAME);
+			File folder = new File("testData/files/unzipped-files");
+			chromatogramFile = new File(folder, File.separator + "Chromatogram1.csv");
 			if(chromatogramFile.exists()) {
 				chromatogramFile.delete();
 			}
