@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 
 import org.eclipse.chemclipse.msd.converter.database.IDatabaseImportConverter;
-import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.ILibraryMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
@@ -37,7 +36,7 @@ public class MSPImportConverter_2_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File importFile = new File(TestPathHelper.TESTFILE_IMPORT_LIB_2_MSP);
+		File importFile = new File("testData/files/import/msp/Lib2.msp");
 		IDatabaseImportConverter importConverter = new MSPDatabaseImportConverter();
 		IProcessingInfo<IMassSpectra> processingInfo = importConverter.convert(importFile, new NullProgressMonitor());
 		massSpectra = processingInfo.getProcessingResult();

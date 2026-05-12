@@ -14,9 +14,7 @@
 package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.backfolding.core;
 
 import java.io.File;
-import java.io.IOException;
 
-import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.backfolding.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.msd.model.core.selection.ChromatogramSelectionMSD;
@@ -37,12 +35,12 @@ public class ChromatogramImporterTestCase {
 	protected IChromatogramSelectionMSD chromatogramSelection;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		/*
 		 * Import
 		 */
-		File fileImport = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
+		File fileImport = new File("testData/files/import/Chromatogram1.ocb");
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();
 		chromatogramSelection = new ChromatogramSelectionMSD(chromatogram);

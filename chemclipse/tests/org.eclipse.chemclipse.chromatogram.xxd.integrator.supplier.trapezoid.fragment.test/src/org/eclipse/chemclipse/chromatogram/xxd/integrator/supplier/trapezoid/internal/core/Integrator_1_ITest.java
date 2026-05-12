@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.result.IPeakIntegrationResults;
-import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.TestPathHelper;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.processor.BackgroundIntegrator;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.processor.ChromatogramIntegrator;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.processor.PeakIntegrator;
@@ -44,7 +43,7 @@ public class Integrator_1_ITest extends ChromatogramImportOCBTestCase {
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		chromatogramRelativePath = TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_2;
+		chromatogramRelativePath = "testData/files/import/Chromatogram2.ocb";
 		super.setUp();
 		chromatogramIntegrator = new ChromatogramIntegrator();
 		backgroundIntegrator = new BackgroundIntegrator();

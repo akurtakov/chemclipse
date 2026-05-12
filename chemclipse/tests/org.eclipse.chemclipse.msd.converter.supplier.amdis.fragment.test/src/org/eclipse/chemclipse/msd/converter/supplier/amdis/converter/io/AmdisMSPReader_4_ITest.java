@@ -19,7 +19,6 @@ import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
-import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.io.MSPReader;
 import org.eclipse.chemclipse.msd.model.core.ILibraryMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
@@ -38,7 +37,7 @@ public class AmdisMSPReader_4_ITest {
 	@BeforeAll
 	public void setUp() throws IOException {
 
-		File file = new File(TestPathHelper.TESTFILE_IMPORT_PEAKS_4_MSP);
+		File file = new File("testData/files/import/msp/Peaks4.MSP");
 		MSPReader reader = new MSPReader();
 		massSpectra = reader.read(file, new NullProgressMonitor());
 	}

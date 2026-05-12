@@ -34,7 +34,7 @@ public class FixedDecrease1_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File file = new File(TestPathHelper.FIXDEC1);
+		File file = new File("testData/fixdec1.jdx");
 		ScanImportConverter importConverter = new ScanImportConverter();
 		IProcessingInfo<ISpectrumVSD> processingInfo = importConverter.convert(file, new NullProgressMonitor());
 		spectrumVSD = processingInfo.getProcessingResult();

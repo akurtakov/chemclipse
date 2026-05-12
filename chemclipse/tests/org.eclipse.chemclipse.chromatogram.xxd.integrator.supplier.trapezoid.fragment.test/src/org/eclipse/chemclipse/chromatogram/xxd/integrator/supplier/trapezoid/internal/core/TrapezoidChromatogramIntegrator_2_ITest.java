@@ -14,9 +14,6 @@ package org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.in
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.IOException;
-
-import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.TestPathHelper;
 import org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.processor.ChromatogramIntegrator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -30,9 +27,9 @@ public class TrapezoidChromatogramIntegrator_2_ITest extends ChromatogramImportT
 
 	@Override
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
-		chromatogramRelativePath = TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1;
+		chromatogramRelativePath = "testData/files/import/Chromatogram1.ocb";
 		super.setUp();
 		integrator = new ChromatogramIntegrator();
 	}

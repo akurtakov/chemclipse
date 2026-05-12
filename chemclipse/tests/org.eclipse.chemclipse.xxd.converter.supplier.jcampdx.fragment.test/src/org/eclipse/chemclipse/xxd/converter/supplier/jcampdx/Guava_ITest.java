@@ -33,7 +33,7 @@ public class Guava_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File file = new File(TestPathHelper.GUAVA);
+		File file = new File("testData/guava.jdx");
 		ChromatogramImportConverter chromatogramImportConverter = new ChromatogramImportConverter();
 		IProcessingInfo<IChromatogramCSD> processingInfo = chromatogramImportConverter.convert(file, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();

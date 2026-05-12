@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
 
-import org.eclipse.chemclipse.msd.model.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.implementation.ChromatogramMSD;
 import org.junit.jupiter.api.Test;
 
@@ -27,42 +26,42 @@ public class AbstractChromatogram_2_Test {
 	@Test
 	public void testExtractNameFromFile_1() {
 
-		chromatogram.setFile(new File(TestPathHelper.TESTFILE_IMPORT_FILE_10102040_CDF));
+		chromatogram.setFile(new File("testData/files/import/10.102040.cdf"));
 		assertEquals("10.102040", chromatogram.getName());
 	}
 
 	@Test
 	public void testExtractNameFromFile_2() {
 
-		chromatogram.setFile(new File(TestPathHelper.TESTFILE_IMPORT_FILE_102040_MZXML));
+		chromatogram.setFile(new File("testData/files/import/102040.mzXML"));
 		assertEquals("102040", chromatogram.getName());
 	}
 
 	@Test
 	public void testExtractNameFromFile_3() {
 
-		chromatogram.setFile(new File(TestPathHelper.TESTFILE_IMPORT_FILE_2012102040_SMS));
+		chromatogram.setFile(new File("testData/files/import/2012.102040.SMS"));
 		assertEquals("2012.102040", chromatogram.getName());
 	}
 
 	@Test
 	public void testExtractNameFromFile_4() {
 
-		chromatogram.setFile(new File(TestPathHelper.TESTFILE_IMPORT_FILE_201220102078_SMS));
+		chromatogram.setFile(new File("testData/files/import/2012.20.102078.SMS"));
 		assertEquals("2012.20.102078", chromatogram.getName());
 	}
 
 	@Test
 	public void testExtractNameFromFile_5() {
 
-		chromatogram.setFile(new File(TestPathHelper.TESTFILE_IMPORT_FILE_POLYETHYLENE_CDF));
+		chromatogram.setFile(new File("testData/files/import/polyethylene.cdf"));
 		assertEquals("polyethylene", chromatogram.getName());
 	}
 
 	@Test
 	public void testExtractNameFromFile_6() {
 
-		chromatogram.setFile(new File(TestPathHelper.TESTFILE_IMPORT_FILE_POLYETHYLENE_TEST));
+		chromatogram.setFile(new File("testData/files/import/polyethylene-test"));
 		assertEquals("polyethylene-test", chromatogram.getName());
 	}
 }

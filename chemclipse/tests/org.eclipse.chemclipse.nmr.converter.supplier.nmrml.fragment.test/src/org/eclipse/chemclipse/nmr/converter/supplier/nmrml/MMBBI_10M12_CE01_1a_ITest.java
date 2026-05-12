@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.model.core.IComplexSignalMeasurement;
 import org.eclipse.chemclipse.nmr.converter.supplier.nmrml.converter.ScanImportConverter;
@@ -35,9 +34,9 @@ public class MMBBI_10M12_CE01_1a_ITest {
 	private ISpectrumNMR spectrumNMR;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
-		File file = new File(TestPathHelper.MMBBI_10M12_CE01_1a);
+		File file = new File("testData/MMBBI_10M12-CE01-1a.nmrML");
 		ScanImportConverter importConverter = new ScanImportConverter();
 		IProcessingInfo<ISpectrumNMR> processingInfo = importConverter.convert(file, new NullProgressMonitor());
 		spectrumNMR = processingInfo.getProcessingResult();

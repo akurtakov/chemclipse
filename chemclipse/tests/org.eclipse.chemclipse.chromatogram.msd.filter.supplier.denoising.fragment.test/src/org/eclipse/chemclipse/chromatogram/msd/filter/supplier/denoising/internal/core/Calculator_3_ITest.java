@@ -14,7 +14,6 @@ package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.denoising.intern
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.denoising.internal.core.support.ChromatogramImporterTestCase;
@@ -42,7 +41,7 @@ public class Calculator_3_ITest extends ChromatogramImporterTestCase {
 
 	@Override
 	@BeforeAll
-	public void setUp() throws FilterException, IOException {
+	public void setUp() throws FilterException {
 
 		super.setUp();
 		IMarkedIons ionsToPreserve = new MarkedIons(MarkedTraceModus.INCLUDE);

@@ -14,7 +14,6 @@
 package org.eclipse.chemclipse.chromatogram.xxd.calculator.supplier.noise.stein.core;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
@@ -31,7 +30,7 @@ public class ChromatogramReaderTestCase {
 	protected File fileImport;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();

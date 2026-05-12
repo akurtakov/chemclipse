@@ -15,9 +15,7 @@ package org.eclipse.chemclipse.msd.converter.chromatogram;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.converter.TestPathHelper;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.jupiter.api.Test;
@@ -42,10 +40,10 @@ public class ChromatogramExportConverter_1_Test {
 	}
 
 	@Test
-	public void testFileNotWritableException_1() throws IOException {
+	public void testFileNotWritableException_1() {
 
 		File file = null;
-		file = new File(TestPathHelper.TESTFILE_EXPORT_CHROMATOGRAM_NOT_WRITEABLE);
+		file = new File("testData/files/export/NOT_WRITEABLE.D/DATA.MS");
 		file.setWritable(false);
 		IProcessingInfo<File> processingInfo = ec.convert(file, null, new NullProgressMonitor());
 		assertTrue(processingInfo.hasErrorMessages());

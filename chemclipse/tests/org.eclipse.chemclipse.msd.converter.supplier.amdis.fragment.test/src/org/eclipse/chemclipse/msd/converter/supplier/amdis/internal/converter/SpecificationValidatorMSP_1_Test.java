@@ -15,9 +15,7 @@ package org.eclipse.chemclipse.msd.converter.supplier.amdis.internal.converter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -30,31 +28,31 @@ public class SpecificationValidatorMSP_1_Test {
 	private String spec;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
-		spec = new File(TestPathHelper.VALIDATOR_TEST_SPEC_MSP).getAbsolutePath();
+		spec = new File("testData/files/import/msp/MASSSPECTRA.MSP").getAbsolutePath();
 	}
 
 	@Test
-	public void testValidateSpecification_1() throws IOException {
+	public void testValidateSpecification_1() {
 
-		file = new File(TestPathHelper.VALIDATOR_TEST_MSP_1);
+		file = new File("testData/files/import/msp/MASSSPECTRA.MSP");
 		file = SpecificationValidatorMSP.validateSpecification(file);
 		assertEquals(spec, file.getAbsolutePath());
 	}
 
 	@Test
-	public void testValidateSpecification_3() throws IOException {
+	public void testValidateSpecification_3() {
 
-		file = new File(TestPathHelper.VALIDATOR_TEST_MSP_2);
+		file = new File("testData/files/import/msp/MASSSPECTRA");
 		file = SpecificationValidatorMSP.validateSpecification(file);
 		assertEquals(spec, file.getAbsolutePath());
 	}
 
 	@Test
-	public void testValidateSpecification_4() throws IOException {
+	public void testValidateSpecification_4() {
 
-		file = new File(TestPathHelper.VALIDATOR_TEST_MSP_3);
+		file = new File("testData/files/import/msp");
 		file = SpecificationValidatorMSP.validateSpecification(file);
 		assertEquals(spec, file.getAbsolutePath());
 	}

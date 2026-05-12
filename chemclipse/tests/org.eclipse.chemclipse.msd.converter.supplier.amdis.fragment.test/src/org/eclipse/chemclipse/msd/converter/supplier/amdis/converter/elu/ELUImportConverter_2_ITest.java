@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.chemclipse.model.core.PeakType;
-import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.io.ELUReader;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.msd.model.core.IIon;
@@ -45,7 +44,7 @@ public class ELUImportConverter_2_ITest {
 	public void setUp() {
 
 		reader = new ELUReader();
-		file = new File(TestPathHelper.TESTFILE_IMPORT_PEAKS_1_ELU);
+		file = new File("testData/files/import/elu/Peaks1.ELU");
 	}
 
 	@Test

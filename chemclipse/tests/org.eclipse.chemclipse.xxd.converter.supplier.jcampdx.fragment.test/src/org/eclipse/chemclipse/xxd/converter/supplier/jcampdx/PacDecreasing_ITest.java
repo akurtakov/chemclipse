@@ -34,7 +34,7 @@ public class PacDecreasing_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File file = new File(TestPathHelper.PACDEC1);
+		File file = new File("testData/pacdec1.jdx");
 		ScanImportConverter importConverter = new ScanImportConverter();
 		IProcessingInfo<ISpectrumVSD> processingInfo = importConverter.convert(file, new NullProgressMonitor());
 		spectrumVSD = processingInfo.getProcessingResult();

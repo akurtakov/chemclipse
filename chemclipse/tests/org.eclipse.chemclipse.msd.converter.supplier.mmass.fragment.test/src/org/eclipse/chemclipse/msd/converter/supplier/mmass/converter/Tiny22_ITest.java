@@ -15,9 +15,7 @@ package org.eclipse.chemclipse.msd.converter.supplier.mmass.converter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.converter.supplier.mmass.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IStandaloneMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
@@ -34,9 +32,9 @@ public class Tiny22_ITest {
 	private IStandaloneMassSpectrum massSpectrum;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
-		File importFile = new File(TestPathHelper.TESTFILE_MMASS_TINY_22);
+		File importFile = new File("testData/mMass 2.2 tiny.msd");
 		MassSpectrumImportConverter converter = new MassSpectrumImportConverter();
 		IProcessingInfo<IMassSpectra> processingInfo = converter.convert(importFile, new NullProgressMonitor());
 		massSpectrum = (IStandaloneMassSpectrum)processingInfo.getProcessingResult().getMassSpectrum(1);

@@ -33,7 +33,7 @@ public class Piment_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File file = new File(TestPathHelper.PIMENT);
+		File file = new File("testData/piment1.jdx");
 		ChromatogramImportConverter chromatogramImportConverter = new ChromatogramImportConverter();
 		IProcessingInfo<IChromatogramCSD> processingInfo = chromatogramImportConverter.convert(file, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();

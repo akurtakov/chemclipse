@@ -15,7 +15,6 @@ package org.eclipse.chemclipse.pcr.converter.supplier.rdml.fragement.test.io;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneId;
@@ -23,7 +22,6 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 
 import org.eclipse.chemclipse.pcr.converter.supplier.rdml.core.PCRImportConverter;
-import org.eclipse.chemclipse.pcr.converter.supplier.rdml.fragment.test.TestPathHelper;
 import org.eclipse.chemclipse.pcr.model.core.IChannel;
 import org.eclipse.chemclipse.pcr.model.core.IPlate;
 import org.eclipse.chemclipse.pcr.model.core.IWell;
@@ -40,9 +38,9 @@ public class Test_Example_11_ITest {
 	private IPlate plate;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
-		File importFile = new File(TestPathHelper.EXAMPLE_1_1);
+		File importFile = new File("testdata/example_1_1.rdml");
 		IProcessingInfo<IPlate> importProcessingInfo = PCRImportConverter.getInstance().convert(importFile, new NullProgressMonitor());
 		plate = importProcessingInfo.getProcessingResult();
 	}

@@ -19,7 +19,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.amdis.model.IVendorLibraryMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.junit.jupiter.api.BeforeAll;
@@ -34,7 +33,7 @@ public class MassSpectrumImportConverter_DB_1_ITest extends ImportConverterMslTe
 	@BeforeAll
 	public void setUp() {
 
-		importFile = new File(TestPathHelper.TESTFILE_IMPORT_DB_1);
+		importFile = new File("testData/files/import/msl/DB1.msl");
 		super.setUp();
 	}
 

@@ -16,10 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.model.core.IChromatogram;
-import org.eclipse.chemclipse.msd.converter.TestPathHelper;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.junit.jupiter.api.Test;
@@ -45,10 +43,10 @@ public class ChromatogramImportConverter_1_Test {
 	}
 
 	@Test
-	public void testFileIsNotReadableException_1() throws IOException {
+	public void testFileIsNotReadableException_1() {
 
 		File file = null;
-		file = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_NOT_READABLE);
+		file = new File("testData/files/import/NOT_READABLE.D/DATA.MS");
 		file.setReadable(false);
 		IProcessingInfo<IChromatogram> processingInfo = ic.convert(file, new NullProgressMonitor());
 		assertTrue(processingInfo.hasErrorMessages());
@@ -58,10 +56,10 @@ public class ChromatogramImportConverter_1_Test {
 	}
 
 	@Test
-	public void testFileIsEmptyException_1() throws IOException {
+	public void testFileIsEmptyException_1() {
 
 		File file = null;
-		file = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_EMPTY);
+		file = new File("testData/files/import/EMPTY.D/DATA.MS");
 		IProcessingInfo<IChromatogram> processingInfo = ic.convert(file, new NullProgressMonitor());
 		assertTrue(processingInfo.hasErrorMessages());
 	}

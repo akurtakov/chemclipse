@@ -20,7 +20,6 @@ import org.eclipse.chemclipse.model.core.IScan;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.xxd.converter.supplier.ocx.TestPathHelper;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -39,7 +38,7 @@ public class ChromatogramReader_3_MSD_1003_ITest {
 	public void setUp() {
 
 		PreferenceSupplier.setForceLoadAlternateDetector(true);
-		File fileImport = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_3_FID_1003);
+		File fileImport = new File("testData/files/import/Chromatogram3-1003.ocb");
 		IProcessingInfo<IChromatogramMSD> processingInfo = ChromatogramConverterMSD.getInstance().convert(fileImport, VersionConstants.CONVERTER_ID_CHROMATOGRAM, new NullProgressMonitor());
 		chromatogram = processingInfo.getProcessingResult();
 	}

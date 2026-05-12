@@ -15,10 +15,8 @@ package org.eclipse.chemclipse.wsd.converter.supplier.mzml.converter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.wsd.converter.supplier.mzml.TestPathHelper;
 import org.eclipse.chemclipse.wsd.converter.supplier.mzml.model.IVendorChromatogram;
 import org.eclipse.chemclipse.wsd.converter.supplier.mzml.model.VendorChromatogram;
 import org.eclipse.chemclipse.wsd.model.core.IChromatogramWSD;
@@ -35,9 +33,9 @@ public class ChromatogramImportConverterHandCrafted110_ITest {
 	private IVendorChromatogram chromatogram;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
-		File importFile = new File(TestPathHelper.TESTFILE_PDA_HANDCRAFTED);
+		File importFile = new File("testData/PDA.mzML");
 		ChromatogramImportConverter converter = new ChromatogramImportConverter();
 		IProcessingInfo<IChromatogramWSD> processingInfo = converter.convert(importFile, new NullProgressMonitor());
 		chromatogram = (VendorChromatogram)processingInfo.getProcessingResult();

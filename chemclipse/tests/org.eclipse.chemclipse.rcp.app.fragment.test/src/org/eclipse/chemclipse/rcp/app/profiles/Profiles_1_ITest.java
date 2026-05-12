@@ -18,7 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.chemclipse.rcp.app.TestPathHelper;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.junit.jupiter.api.Test;
@@ -28,7 +27,7 @@ public class Profiles_1_ITest {
 	@Test
 	public void test1() throws CoreException, IOException {
 
-		File file = new File(new File(TestPathHelper.TESTFILE_EXPORT_DIR), TestPathHelper.TESTFILE_EXPORT_NAME);
+		File file = new File(new File("testData/files/export/"), "preferences.epf");
 		try {
 			Profiles.exportProfile(file);
 			assertTrue(file.delete());
@@ -36,16 +35,14 @@ public class Profiles_1_ITest {
 			/*
 			 * Safety delete if something goes wrong.
 			 */
-			if(file != null) {
-				file.delete();
-			}
+			file.delete();
 		}
 	}
 
 	@Test
 	public void test2() throws CoreException, IOException {
 
-		File file = new File(TestPathHelper.TESTFILE_IMPORT_PREFS_1);
+		File file = new File("testData/files/import/preferences.epf");
 		IStatus status = Profiles.importProfile(file);
 		assertEquals(IStatus.OK, status.getCode());
 	}

@@ -16,10 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
-import org.eclipse.chemclipse.msd.converter.supplier.cml.TestPathHelper;
 import org.eclipse.chemclipse.msd.converter.supplier.cml.model.VendorLibraryMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
@@ -36,9 +34,9 @@ public class MassSpectrumImportConverterSP03_ITest {
 	private IScanMSD massSpectrum;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
-		File file = new File(TestPathHelper.TESTFILE_SP03);
+		File file = new File("testData/sp03.cml");
 		DatabaseImportConverter importConverter = new DatabaseImportConverter();
 		IProcessingInfo<IMassSpectra> processingInfo = importConverter.convert(file, new NullProgressMonitor());
 		massSpectrum = processingInfo.getProcessingResult().getMassSpectrum(1);

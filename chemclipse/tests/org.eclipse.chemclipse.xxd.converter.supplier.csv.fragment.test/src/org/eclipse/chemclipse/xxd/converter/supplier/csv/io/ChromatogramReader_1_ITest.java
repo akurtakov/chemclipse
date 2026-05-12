@@ -16,13 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.chemclipse.model.settings.Delimiter;
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
-import org.eclipse.chemclipse.xxd.converter.supplier.csv.TestPathHelper;
 import org.eclipse.chemclipse.xxd.converter.supplier.csv.preferences.PreferenceSupplier;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -39,7 +37,7 @@ public class ChromatogramReader_1_ITest {
 	private IChromatogramMSD chromatogram;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		PreferenceSupplier.setImportDelimiter(Delimiter.COMMA);
 		PreferenceSupplier.setImportZeroMarker("0.0");
@@ -54,13 +52,13 @@ public class ChromatogramReader_1_ITest {
 		/*
 		 * Import the chromatogram.
 		 */
-		File fileImport = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
+		File fileImport = new File("testData/files/import/Chromatogram1.ocb");
 		IProcessingInfo<IChromatogramMSD> processingInfoImport = ChromatogramConverterMSD.getInstance().convert(fileImport, extensionPointImport, new NullProgressMonitor());
 		IChromatogramMSD chromatogramImport = processingInfoImport.getProcessingResult();
 		/*
 		 * Export the chromatogram.
 		 */
-		fileExport = new File(new File(TestPathHelper.DIRECTORY_EXPORT_TEST), File.separator + "Test.csv");
+		fileExport = new File(new File("testData/files/export"), File.separator + "Test.csv");
 		IProcessingInfo<File> processingInfoExport = ChromatogramConverterMSD.getInstance().convert(fileExport, chromatogramImport, extensionPointExportReimport, new NullProgressMonitor());
 		fileExport = processingInfoExport.getProcessingResult();
 		/*

@@ -34,7 +34,7 @@ public class Grape_ITest {
 	@BeforeAll
 	public void setUp() {
 
-		File file = new File(TestPathHelper.GRAPE);
+		File file = new File("testData/grape.jdx");
 		ScanImportConverter importConverter = new ScanImportConverter();
 		IProcessingInfo<ISpectrumWSD> processingInfo = importConverter.convert(file, new NullProgressMonitor());
 		spectrumWSD = processingInfo.getProcessingResult();

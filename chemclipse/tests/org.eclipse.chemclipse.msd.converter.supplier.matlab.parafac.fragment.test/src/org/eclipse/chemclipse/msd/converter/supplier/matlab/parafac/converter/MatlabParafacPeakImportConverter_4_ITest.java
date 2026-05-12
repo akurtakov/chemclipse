@@ -16,9 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
-import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.converter.supplier.matlab.parafac.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IPeaksMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -35,15 +33,15 @@ public class MatlabParafacPeakImportConverter_4_ITest {
 	public void testImport_1() {
 
 		assertThrows(NullPointerException.class, () -> {
-			File file = new File(TestPathHelper.TESTFILE_IMPORT_EMPTY);
+			File file = new File("testData/files/import/tests/Empty.mpl");
 			converter.convert(file, new NullProgressMonitor());
 		});
 	}
 
 	@Test
-	public void testImport_2() throws IOException {
+	public void testImport_2() {
 
-		File file = new File(TestPathHelper.TESTFILE_IMPORT_NOT_READABLE);
+		File file = new File("testData/files/import/tests/NotReadable.mpl");
 		file.setReadable(false);
 		IProcessingInfo<IPeaksMSD> processingInfo = converter.convert(file, new NullProgressMonitor());
 		assertNull(processingInfo.getProcessingResult());
@@ -54,7 +52,7 @@ public class MatlabParafacPeakImportConverter_4_ITest {
 	public void testImport_3() {
 
 		assertThrows(NullPointerException.class, () -> {
-			File file = new File(TestPathHelper.TESTFILE_IMPORT_PEAKS);
+			File file = new File("testData/files/import/tests/peaks");
 			converter.convert(file, new NullProgressMonitor());
 		});
 	}
@@ -63,7 +61,7 @@ public class MatlabParafacPeakImportConverter_4_ITest {
 	public void testImport_4() {
 
 		assertThrows(NullPointerException.class, () -> {
-			File file = new File(TestPathHelper.TESTFILE_IMPORT_PEAKS_EXTENSION);
+			File file = new File("testData/files/import/tests/peaks.mpl");
 			converter.convert(file, new NullProgressMonitor());
 		});
 	}

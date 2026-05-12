@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Set;
 
-import org.eclipse.chemclipse.msd.converter.supplier.amdis.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.ILibraryMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
@@ -39,7 +38,7 @@ public class MSPReader_1_ITest {
 	public void setUp() throws IOException {
 
 		MSPReader reader = new MSPReader();
-		File file = new File(TestPathHelper.TESTFILE_IMPORT_SYNONYMS);
+		File file = new File("testData/files/import/msp/Synonyms.MSP");
 		massSpectra = reader.read(file, new NullProgressMonitor());
 	}
 

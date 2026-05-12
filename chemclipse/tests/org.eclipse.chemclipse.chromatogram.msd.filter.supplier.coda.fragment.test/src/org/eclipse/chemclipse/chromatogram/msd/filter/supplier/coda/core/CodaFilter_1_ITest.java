@@ -14,8 +14,6 @@ package org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.IOException;
-
 import org.eclipse.chemclipse.chromatogram.msd.filter.core.chromatogram.IChromatogramFilterMSD;
 import org.eclipse.chemclipse.chromatogram.msd.filter.supplier.coda.settings.FilterSettings;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -32,7 +30,7 @@ public class CodaFilter_1_ITest extends ChromatogramImporterTestCase {
 
 	@Override
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		super.setUp();
 	}

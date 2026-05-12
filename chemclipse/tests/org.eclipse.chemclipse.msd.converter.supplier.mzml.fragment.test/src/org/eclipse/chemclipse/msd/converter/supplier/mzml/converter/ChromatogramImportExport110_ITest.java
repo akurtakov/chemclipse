@@ -19,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.io.File;
 
 import org.eclipse.chemclipse.msd.converter.chromatogram.ChromatogramConverterMSD;
-import org.eclipse.chemclipse.msd.converter.supplier.mzml.TestPathHelper;
 import org.eclipse.chemclipse.msd.model.core.IChromatogramMSD;
 import org.eclipse.chemclipse.processing.core.IProcessingInfo;
 import org.eclipse.chemclipse.xxd.converter.supplier.ocx.versions.VersionConstants;
@@ -46,19 +45,19 @@ public class ChromatogramImportExport110_ITest {
 		/*
 		 * Export/Reimport
 		 */
-		File directory = new File(TestPathHelper.DIRECTORY_EXPORT_TEST);
+		File directory = new File("testData/files/export");
 		directory.mkdir();
 		String extensionPointExportReimport = "org.eclipse.chemclipse.msd.converter.supplier.mzml";
 		/*
 		 * Import the chromatogram.
 		 */
-		File fileImport = new File(TestPathHelper.TESTFILE_IMPORT_CHROMATOGRAM_1);
+		File fileImport = new File("testData/files/import/Chromatogram1.ocb");
 		IProcessingInfo<IChromatogramMSD> processingInfoImport = ChromatogramConverterMSD.getInstance().convert(fileImport, extensionPointImport, new NullProgressMonitor());
 		IChromatogramMSD chromatogramImport = processingInfoImport.getProcessingResult();
 		/*
 		 * Export the chromatogram.
 		 */
-		fileExport = new File(TestPathHelper.DIRECTORY_EXPORT_TEST + File.separator + "Test.mzML");
+		fileExport = new File("testData/files/export" + File.separator + "Test.mzML");
 		IProcessingInfo<File> processingInfoExport = ChromatogramConverterMSD.getInstance().convert(fileExport, chromatogramImport, extensionPointExportReimport, new NullProgressMonitor());
 		fileExport = processingInfoExport.getProcessingResult();
 		/*

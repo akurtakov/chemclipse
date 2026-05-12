@@ -32,7 +32,7 @@ public class LinuxWineSupport_DRIVE_1_ITest extends AbstractBackgroundTestCase {
 	public void setUp() throws IOException {
 
 		super.setUp();
-		File nistApplication = new File(TestPathHelper.TESTFILE_WINE_DRIVE_NIST_APPLICATION);
+		File nistApplication = new File("testData/files/wine/drive_c/programs/nist/nistms$.exe");
 		nistApplicationPath = nistApplication.getParentFile().getAbsolutePath();
 		runtimeSupport = new LinuxWineSupport(nistApplication.getParentFile(), parameterBackground);
 	}

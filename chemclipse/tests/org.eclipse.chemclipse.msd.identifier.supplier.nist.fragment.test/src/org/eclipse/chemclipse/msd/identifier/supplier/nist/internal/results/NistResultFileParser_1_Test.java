@@ -16,9 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.File;
-import java.io.IOException;
 
-import org.eclipse.chemclipse.msd.identifier.supplier.nist.TestPathHelper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -30,10 +28,10 @@ public class NistResultFileParser_1_Test {
 	private Compounds compounds;
 
 	@BeforeAll
-	public void setUp() throws IOException {
+	public void setUp() {
 
 		NistResultFileParser nistResultFileParser = new NistResultFileParser();
-		File results = new File(TestPathHelper.TESTFILE_NIST_SRCRESLT_1);
+		File results = new File("testData/files/nist/SRCRESLT-1.TXT");
 		compounds = nistResultFileParser.getCompounds(results);
 	}
 
