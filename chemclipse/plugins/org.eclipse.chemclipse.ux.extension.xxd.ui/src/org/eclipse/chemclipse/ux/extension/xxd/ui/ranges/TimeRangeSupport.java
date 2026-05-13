@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -72,7 +72,7 @@ public class TimeRangeSupport {
 			if(!timeRangeList.isEmpty()) {
 				if(timeRange == null) {
 					/*
-					 * No selection yet
+					 * No selection yet (select the first element)
 					 */
 					timeRange = timeRangeList.get(0);
 				} else {
@@ -104,11 +104,9 @@ public class TimeRangeSupport {
 			if(!timeRangeList.isEmpty()) {
 				if(timeRange == null) {
 					/*
-					 * No selection yet
+					 * No selection yet (select the first element)
 					 */
-					int last = timeRangeList.size() - 1;
-					last = (last < 0) ? 0 : last;
-					timeRange = timeRangeList.get(last);
+					timeRange = timeRangeList.get(0);
 				} else {
 					/*
 					 * Previous or first
