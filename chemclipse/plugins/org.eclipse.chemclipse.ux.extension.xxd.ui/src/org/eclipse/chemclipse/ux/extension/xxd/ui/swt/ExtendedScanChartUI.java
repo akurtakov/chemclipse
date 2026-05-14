@@ -37,7 +37,6 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
-import org.eclipse.chemclipse.support.ui.workbench.DisplayUtils;
 import org.eclipse.chemclipse.support.updates.IUpdateListener;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
@@ -102,14 +101,10 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 	private AtomicReference<ScanIdentifierUI> scanIdentifierControl = new AtomicReference<>();
 	private AtomicReference<ScanWebIdentifierUI> scanWebIdentifierUI = new AtomicReference<>();
 
-	private ChartGridSupport chartGridSupport = new ChartGridSupport();
-	private ScanDataSupport scanDataSupport = new ScanDataSupport();
-	private IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 	private boolean editModus = false;
 	private boolean subtractModus = false;
 	private IUpdateListener updateListener = null;
-
-	private IScan scan;
+	private IScan scan = null;
 
 	public ExtendedScanChartUI(Composite parent, int style) {
 
@@ -167,7 +162,20 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 
 	public void update(IScan scan) {
 
-		this.update(scan, DisplayUtils.getDisplay());
+		this.update(scan, getDisplay());
+	}
+
+	public void mirror(IScan scanReference) {
+
+		if(scanReference != null) {
+			if(scan instanceof IScanMSD) {
+				if(scanReference instanceof IScanMSD) {
+					chartControl.get().setInput(scan, scanReference, true);
+				}
+			}
+		} else {
+			this.update(scan, getDisplay());
+		}
 	}
 
 	@Override
@@ -200,6 +208,7 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 							 */
 							logger.info("Subtract Scan: " + scanNumberSource + " - " + scanNumberSubtract);
 							subtractScanMSD(scanSource, scanSubtract);
+							IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 							if(!preferenceStore.getBoolean(PreferenceSupplier.P_ENABLE_MULTI_SUBTRACT)) {
 								setSubtractModus(display, false, false);
 								updateInfoLabels();
@@ -229,6 +238,8 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 
 		this.scan = scan;
 
+		IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
+		ScanDataSupport scanDataSupport = new ScanDataSupport();
 		scanFilterUI.get().setInput(scan);
 		scanIdentifierControl.get().setInput(scan);
 		scanWebIdentifierUI.get().setInput(scan);
@@ -296,7 +307,7 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 		enableToolbar(toolbarInfo, buttonToolbarInfo.get(), IApplicationImage.IMAGE_INFO, TOOLTIP_INFO, true);
 		enableToolbar(toolbarTypes, buttonToolbarTypes.get(), IMAGE_TYPES, TOOLTIP_TYPES, false);
 		enableToolbar(toolbarEdit, buttonToolbarEdit.get(), IMAGE_EDIT, TOOLTIP_EDIT, false);
-		enableChartGrid(chartControl, buttonChartGrid.get(), IMAGE_CHART_GRID, chartGridSupport);
+		enableChartGrid(chartControl, buttonChartGrid.get(), IMAGE_CHART_GRID, new ChartGridSupport());
 
 		updateButtons();
 	}
@@ -354,7 +365,7 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 
 	private void createButtonToggleGrid(Composite parent) {
 
-		buttonChartGrid.set(createButtonToggleChartGrid(parent, chartControl, IMAGE_CHART_GRID, chartGridSupport));
+		buttonChartGrid.set(createButtonToggleChartGrid(parent, chartControl, IMAGE_CHART_GRID, new ChartGridSupport()));
 	}
 
 	private void createInfoLabelEdit(Composite parent) {
@@ -471,6 +482,7 @@ public class ExtendedScanChartUI extends Composite implements IExtendedPartUI {
 		buttonSubtractOption.get().setImage(ApplicationImageFactory.getInstance().getImage(fileName, IApplicationImageProvider.SIZE_16x16));
 
 		if(this.subtractModus && showDialog) {
+			IPreferenceStore preferenceStore = Activator.getDefault().getPreferenceStore();
 			if(preferenceStore.getBoolean(PreferenceSupplier.P_SHOW_SUBTRACT_DIALOG)) {
 				if(display != null) {
 					SubtractScanWizard.openWizard(display.getActiveShell());
