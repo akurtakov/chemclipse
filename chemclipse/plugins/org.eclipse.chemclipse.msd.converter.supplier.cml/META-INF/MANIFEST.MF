@@ -1,7 +1,6 @@
 Manifest-Version: 1.0
 Automatic-Module-Name: org.eclipse.chemclipse.msd.converter.supplier.cml
 Eclipse-RegisterBuddy: org.eclipse.chemclipse.model, org.eclipse.chemclipse.msd.model
-Export-Package: org.eclipse.chemclipse.msd.converter.supplier.cml
 Bundle-ManifestVersion: 2
 Bundle-Name: CML Mass Spectra
 Bundle-SymbolicName: org.eclipse.chemclipse.msd.converter.supplier.cml;singleton:=true
