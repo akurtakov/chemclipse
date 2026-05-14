@@ -109,10 +109,6 @@ public class PreprocessingSettingsUI extends Composite {
 		setLayout(new GridLayout(3, false));
 		setBackgroundMode(SWT.INHERIT_DEFAULT);
 
-		createLabel(this, LABEL_NORMALIZE);
-		comboViewerNormalize = createComboViewerNormalize(this);
-		createButtonInfoFormula(this, comboViewerNormalize);
-
 		createLabel(this, LABEL_REPLACE);
 		comboViewerReplacer = createComboViewerReplace(this);
 		createButtonInfoFormula(this, comboViewerReplacer);
@@ -120,6 +116,10 @@ public class PreprocessingSettingsUI extends Composite {
 		createLabel(this, LABEL_TRANSFORM);
 		comboViewerTransformation = createComboViewerTransform(this);
 		createButtonInfoFormula(this, comboViewerTransformation);
+
+		createLabel(this, LABEL_NORMALIZE);
+		comboViewerNormalize = createComboViewerNormalize(this);
+		createButtonInfoFormula(this, comboViewerNormalize);
 
 		createLabel(this, LABEL_CENTER);
 		comboViewerCentering = createComboViewerCenter(this);
