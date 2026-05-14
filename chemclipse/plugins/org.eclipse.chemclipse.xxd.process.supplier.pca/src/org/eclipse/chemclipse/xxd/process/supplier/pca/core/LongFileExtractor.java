@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2026 Lablicate GmbH.
+ * Copyright (c) 2025, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -47,6 +47,8 @@ public class LongFileExtractor {
 	public static final String FILE_NAME = DESCRIPTION.replaceAll("\\s", "") + FILE_EXTENSION;
 	public static final String FILTER_EXTENSION = "*" + FILE_EXTENSION;
 	public static final String FILTER_NAME = DESCRIPTION + " (*" + FILE_EXTENSION + ")";
+	public static final int MAX_RANKED_SAMPLES = 5000;
+
 	private final List<IDataInputEntry> dataInputEntries;
 	private final List<IDataInputEntry> filterDataInputEntries;
 	private int numberOfSamplesToFilter;
@@ -96,7 +98,6 @@ public class LongFileExtractor {
 		}
 		this.numberOfSamplesToFilter = numberOfSamplesToFilter;
 		if(filterFileExists) {
-			List<Map.Entry<String, Integer>> extractedSamples = new ArrayList<>();
 			List<Map.Entry<String, Double>> rankedSamples = new ArrayList<>();
 			if(this.numberOfSamplesToFilter > sampleRankingList.size() || this.numberOfSamplesToFilter == 0) {
 				this.numberOfSamplesToFilter = sampleRankingList.size();
@@ -108,18 +109,6 @@ public class LongFileExtractor {
 			for(Map.Entry<String, Double> entry : rankedSamples) {
 				filterRanking.put(entry.getKey(), entry.getValue());
 			}
-
-			if(this.numberOfSamplesToFilter > featureOverlapList.size() || this.numberOfSamplesToFilter == 0) {
-				this.numberOfSamplesToFilter = featureOverlapList.size();
-			}
-			for(int i = 0; i < this.numberOfSamplesToFilter; i++) {
-				extractedSamples.add(featureOverlapList.get(i));
-			}
-			featureOverlap.clear();
-			for(Map.Entry<String, Integer> entry : extractedSamples) {
-				featureOverlap.put(entry.getKey(), entry.getValue());
-			}
-
 		}
 		/*
 		 * Get Filter entries. These are additional to the user selected number of samples to extract
@@ -138,11 +127,8 @@ public class LongFileExtractor {
 		}
 		readFile(dataInputEntries, false);
 		if(filterFileExists) {
-
-			filterFeatureOverlap();
-			calculateFeatureOverlapDistribution();
-			readFile(filterDataInputEntries, true);
 			calculateFilterRanking();
+			readFile(filterDataInputEntries, true);
 		}
 		return applyFilter();
 	}
@@ -151,11 +137,7 @@ public class LongFileExtractor {
 
 		List<Sample> sampleList = new ArrayList<>(sampleMap.values());
 		if(filterFileExists) {
-			sampleList = sampleList.stream().filter(s -> featureOverlap.containsKey(s.getSampleName())).collect(Collectors.toList());
-			/*
-			 * Experimental Feature - Use Cosine Similarity for Ranking of Samples:
-			 * sampleList = sampleList.stream().filter(s -> filterRanking.containsKey(s.getSampleName())).collect(Collectors.toList());
-			 */
+			sampleList = sampleList.stream().filter(s -> filterRanking.containsKey(s.getSampleName())).collect(Collectors.toList());
 		}
 		Collections.sort(sampleList, (s1, s2) -> s1.getSampleName().compareTo(s2.getSampleName()));
 		Samples samples = new Samples(sampleList);
@@ -166,77 +148,64 @@ public class LongFileExtractor {
 		settings.setFilterDistribution(featureOverlapDistribution);
 		samples.setAnalysisSettings(settings);
 		return samples;
+	}
 
+	public List<Map.Entry<String, Double>> getRankedSamples() {
+
+		if(sampleRankingList == null) {
+			return Collections.emptyList();
+		}
+		int max = Math.min(sampleRankingList.size(), MAX_RANKED_SAMPLES);
+		return new ArrayList<>(sampleRankingList.subList(0, max));
 	}
 
 	private void calculateFilterRanking() {
 
-		/*
-		 * generate cosine similarity vector
-		 */
+		filterRanking.clear();
+
 		double dotProduct = 0;
 		double magnitude = 0;
 		double sumSqA = 0;
 		double sumSqB = 0;
 		double similarity = 0;
+
 		for(String sample : samplesVariablesMap.keySet()) {
 			if(featureOverlap.containsKey(sample)) {
 				dotProduct = 0;
 				magnitude = 0;
-				sumSqA = 0;
+				sumSqA = normalizedFilterVector.values().stream().mapToDouble(v -> v * v).sum();
 				sumSqB = 0;
 				similarity = 0;
+
 				for(String feature : samplesVariablesMap.get(sample).keySet()) {
+					double target = Double.parseDouble(samplesVariablesMap.get(sample).get(feature).getValue());
 					if(normalizedFilterVector.get(feature) != null) {
 						double value = normalizedFilterVector.get(feature);
-						double target = Double.parseDouble(samplesVariablesMap.get(sample).get(feature).getValue());
 						dotProduct += value * target;
-						sumSqB += target * target;
-					} else {
-						double target = Double.parseDouble(samplesVariablesMap.get(sample).get(feature).getValue());
-						sumSqB += target * target;
 					}
-
+					sumSqB += target * target;
 				}
-				sumSqA = normalizedFilterVector.values().stream().mapToDouble(v -> v * v).sum();
+
 				magnitude = Math.sqrt(sumSqA) * Math.sqrt(sumSqB);
 				if(magnitude != 0.0) {
 					similarity = dotProduct / magnitude;
 					filterRanking.put(sample, similarity);
 				}
 			}
-
 		}
+
 		sampleRankingList = new ArrayList<>(filterRanking.entrySet());
 		sampleRankingList.sort(Map.Entry.<String, Double> comparingByValue().reversed());
-	}
-
-	private void filterFeatureOverlap() {
-
-		List<Map.Entry<String, Integer>> filterOverlapList = new ArrayList<>(featureOverlap.entrySet());
-		Collections.sort(filterOverlapList, (s1, s2) -> s1.getValue().compareTo(s2.getValue()));
-		filterOverlapList = filterOverlapList.reversed();
-
-		if(this.numberOfSamplesToFilter > filterOverlapList.size() || this.numberOfSamplesToFilter == 0) {
-			this.numberOfSamplesToFilter = filterOverlapList.size();
-		}
-		List<Map.Entry<String, Integer>> extractedSamples = new ArrayList<>();
-		for(int i = 0; i < this.numberOfSamplesToFilter; i++) {
-			extractedSamples.add(filterOverlapList.get(i));
-		}
-		featureOverlap.clear();
-		for(Map.Entry<String, Integer> entry : extractedSamples) {
-			featureOverlap.put(entry.getKey(), entry.getValue());
-		}
-
 	}
 
 	private void clearData() {
 
 		featureOverlap.clear();
+		filterRanking.clear();
 		sampleMap.clear();
 		samplesVariablesMap.clear();
 		targetMap.clear();
+		sampleRankingList = new ArrayList<>();
 	}
 
 	private void calculateFeatureOverlapDistribution() {
@@ -266,18 +235,12 @@ public class LongFileExtractor {
 			File file = new File(inputFile);
 			if(file.exists()) {
 				try (FileReader reader = new FileReader(file)) {
-					/*
-					 * Data
-					 */
 					List<String> filterFileNames = new ArrayList<>();
 					CSVParser parser = CSVParser.parse(reader, CSVFormat.TDF.builder().setHeader().get());
 					String sampleName = "";
 					for(CSVRecord record : parser.getRecords()) {
 						int size = record.size();
 						if(size == 7) {
-							/*
-							 * Header
-							 */
 							sampleName = record.get(0).trim();
 							String sampleDetails = record.get(1).trim();
 							String variableName = record.get(2).trim();
@@ -286,12 +249,6 @@ public class LongFileExtractor {
 							String groupName = record.get(5).trim();
 							String description = record.get(6).trim();
 							if(!sampleName.isEmpty()) {
-
-								/*
-								 * If clause for the case, the current sample is
-								 * the same as the filter sample:
-								 * Modify sample name
-								 */
 								Sample sample = sampleMap.get(sampleName);
 								if(sample == null) {
 									sample = new Sample(sampleName, sampleDetails, groupName, (readFilterFile) ? "1" : "0", description);
@@ -356,17 +313,11 @@ public class LongFileExtractor {
 			File file = new File(inputFile);
 			if(file.exists()) {
 				try (FileReader reader = new FileReader(file)) {
-					/*
-					 * Data
-					 */
 					CSVParser parser = CSVParser.parse(reader, CSVFormat.TDF.builder().setHeader().get());
 
 					for(CSVRecord record : parser.getRecords()) {
 						int size = record.size();
 						if(size == 7) {
-							/*
-							 * Header
-							 */
 							String filterName = record.get(0).trim();
 							String variableName = record.get(2).trim();
 							String variableNameLong = record.get(3).trim();
@@ -388,6 +339,7 @@ public class LongFileExtractor {
 									filterVectors.put(currentFilter, currentFilterVector);
 									currentFilter = filterName;
 									currentFilterVector = new HashMap<>();
+									currentFilterVector.put(variableName, value);
 									if(!targetMap.containsKey(variableName)) {
 										String targetName = variableName;
 										Target target = new Target(targetName);
@@ -396,7 +348,6 @@ public class LongFileExtractor {
 										targetMap.put(targetName, target);
 									}
 								}
-
 							}
 						}
 					}
@@ -412,7 +363,6 @@ public class LongFileExtractor {
 		}
 		filterVectors.put(currentFilter, currentFilterVector);
 		normalizedFilterVector = normalizeFilterVector(filterVectors);
-
 	}
 
 	private Map<String, Double> normalizeFilterVector(Map<String, Map<String, Double>> filterVectors) {
@@ -420,7 +370,6 @@ public class LongFileExtractor {
 		HashMap<String, Double> aggregatedMap = new HashMap<>();
 		double totalSum = 0.0;
 
-		// 1. Sum up all entries into a single map
 		for(Map<String, Double> innerMap : filterVectors.values()) {
 			for(Map.Entry<String, Double> entry : innerMap.entrySet()) {
 				String key = entry.getKey();
@@ -431,12 +380,10 @@ public class LongFileExtractor {
 			}
 		}
 
-		// 2. Handle edge case: if the total sum is 0, we can't divide
 		if(totalSum == 0) {
 			return aggregatedMap;
 		}
 
-		// 3. Normalize the aggregated entries so they sum to 100.0
 		for(Map.Entry<String, Double> entry : aggregatedMap.entrySet()) {
 			double normalizedValue = (entry.getValue() / totalSum) * 100.0;
 			aggregatedMap.put(entry.getKey(), normalizedValue);
@@ -445,19 +392,9 @@ public class LongFileExtractor {
 		return aggregatedMap;
 	}
 
-	/**
-	 * Map - sample id, Map
-	 * Map - variable id, IVariable
-	 * 
-	 * @param samplesVariablesMap
-	 * @return
-	 */
 	private List<IVariable> extractVariables(Map<String, Map<String, Target>> samplesVariablesMap) {
 
 		Map<String, Target> targets = new HashMap<>();
-		/*
-		 * Map the variables
-		 */
 		for(Map<String, Target> variableMap : samplesVariablesMap.values()) {
 			for(Target mappedVariable : variableMap.values()) {
 				String key = mappedVariable.getTarget();
@@ -502,8 +439,6 @@ public class LongFileExtractor {
 					}
 				}
 			}
-
 		}
 	}
-
 }
