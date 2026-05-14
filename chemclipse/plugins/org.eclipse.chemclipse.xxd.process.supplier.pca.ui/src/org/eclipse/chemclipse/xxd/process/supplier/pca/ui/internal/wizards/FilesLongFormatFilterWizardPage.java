@@ -12,18 +12,17 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.wizards;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
 
 import org.eclipse.chemclipse.model.statistics.ISample;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.LongFileExtractor;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IDataInputEntry;
-import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Samples;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.preferences.PreferenceSupplier;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -32,6 +31,9 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
+import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -42,26 +44,51 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.swtchart.IAxis;
-import org.eclipse.swtchart.IBarSeries;
-import org.eclipse.swtchart.IBarSeries.BarWidthStyle;
-import org.eclipse.swtchart.ISeries;
-import org.eclipse.swtchart.Range;
-import org.eclipse.swtchart.extensions.barcharts.BarChart;
-import org.eclipse.swtchart.extensions.barcharts.BarSeriesData;
-import org.eclipse.swtchart.extensions.barcharts.IBarSeriesData;
-import org.eclipse.swtchart.extensions.barcharts.IBarSeriesSettings;
-import org.eclipse.swtchart.extensions.core.BaseChart;
-import org.eclipse.swtchart.extensions.core.IChartSettings;
-import org.eclipse.swtchart.extensions.core.IPrimaryAxisSettings;
-import org.eclipse.swtchart.extensions.core.ISeriesData;
-import org.eclipse.swtchart.extensions.core.RangeRestriction;
-import org.eclipse.swtchart.extensions.core.SeriesData;
 
 public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage {
 
-	private BarChart chart;
+	private static final DecimalFormat COSINE_FORMAT = new DecimalFormat("0.000000");
+
+	private static class RankedSampleRow {
+
+		private final int rank;
+		private final String sampleName;
+		private final String sampleDetails;
+		private final double cosineSimilarity;
+
+		public RankedSampleRow(int rank, String sampleName, String sampleDetails, double cosineSimilarity) {
+
+			this.rank = rank;
+			this.sampleName = sampleName;
+			this.sampleDetails = sampleDetails;
+			this.cosineSimilarity = cosineSimilarity;
+		}
+
+		public int getRank() {
+
+			return rank;
+		}
+
+		public String getSampleName() {
+
+			return sampleName;
+		}
+
+		public String getSampleDetails() {
+
+			return sampleDetails;
+		}
+
+		public double getCosineSimilarity() {
+
+			return cosineSimilarity;
+		}
+	}
+
+	private TableViewer rankingTableViewer;
 	private Samples samples;
 	private Spinner sampleSpinner;
 	private Group sampleSpinnerGroup;
@@ -91,60 +118,84 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		Composite container = new Composite(parent, SWT.NONE);
 		container.setLayout(new GridLayout(2, false));
 
-		createChartArea(container);
+		createRankingTableArea(container);
 		createControlArea(container);
 
 		setControl(container);
 	}
 
-	private void createChartArea(Composite parent) {
+	private void createRankingTableArea(Composite parent) {
 
-		chart = new BarChart(parent, SWT.NONE);
+		rankingTableViewer = new TableViewer(parent, SWT.BORDER | SWT.FULL_SELECTION | SWT.V_SCROLL | SWT.H_SCROLL);
+		Table table = rankingTableViewer.getTable();
 		GridData gd = new GridData(SWT.FILL, SWT.FILL, false, true);
-		gd.widthHint = 500;
-		gd.heightHint = 200;
-		chart.setLayoutData(gd);
+		gd.widthHint = 700;
+		gd.heightHint = 300;
+		table.setLayoutData(gd);
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
 
-		IChartSettings chartSettings = chart.getChartSettings();
-		chartSettings.clearHandledEventProcessors();
-		chartSettings.setHorizontalSliderVisible(false);
-		chartSettings.setVerticalSliderVisible(false);
-		chartSettings.setOrientation(SWT.HORIZONTAL);
-		chartSettings.setCreateMenu(false);
-		chartSettings.setTitle("... Loading Data...");
-		chartSettings.setTitleVisible(true);
+		rankingTableViewer.setContentProvider(ArrayContentProvider.getInstance());
 
-		IPrimaryAxisSettings xAxisSettings = chartSettings.getPrimaryAxisSettingsX();
-		xAxisSettings.setTitle("# of Analyte overlaps");
+		TableViewerColumn rankColumn = new TableViewerColumn(rankingTableViewer, SWT.NONE);
+		rankColumn.getColumn().setText("Rank");
+		rankColumn.getColumn().setWidth(70);
+		rankColumn.setLabelProvider(new ColumnLabelProvider() {
 
-		IPrimaryAxisSettings yAxisSettings = chartSettings.getPrimaryAxisSettingsY();
-		yAxisSettings.setTitle("Sample count");
+			@Override
+			public String getText(Object element) {
 
-		RangeRestriction rangeRestriction = chartSettings.getRangeRestriction();
-		rangeRestriction.setZeroY(true);
-		rangeRestriction.setForceZeroMinY(true);
+				if(element instanceof RankedSampleRow row) {
+					return Integer.toString(row.getRank());
+				}
+				return "";
+			}
+		});
 
-		chart.applySettings(chartSettings);
+		TableViewerColumn sampleColumn = new TableViewerColumn(rankingTableViewer, SWT.NONE);
+		sampleColumn.getColumn().setText("Sample");
+		sampleColumn.getColumn().setWidth(220);
+		sampleColumn.setLabelProvider(new ColumnLabelProvider() {
 
-		double[] xValues = new double[]{0, 1, 2, 3};
-		double[] yValues = new double[]{0.0, 0.0, 0.0, 0.0};
-		String[] xLabels = DoubleStream.of(xValues).mapToObj(d -> Integer.toString((int)d)).toArray(String[]::new);
-		ISeriesData seriesData = new SeriesData(xValues, yValues, "Distribution");
-		IBarSeriesData barSeriesData = new BarSeriesData(seriesData);
+			@Override
+			public String getText(Object element) {
 
-		IBarSeriesSettings barSeriesSettings = barSeriesData.getSettings();
-		barSeriesSettings.setBarWidthStyle(BarWidthStyle.STRETCHED);
+				if(element instanceof RankedSampleRow row) {
+					return row.getSampleName();
+				}
+				return "";
+			}
+		});
 
-		IAxis xAxis = chart.getBaseChart().getAxisSet().getXAxis(0);
-		xAxis.enableCategory(true);
-		xAxis.setRange(new Range(0, yValues.length));
-		xAxis.setCategorySeries(xLabels);
+		TableViewerColumn detailsColumn = new TableViewerColumn(rankingTableViewer, SWT.NONE);
+		detailsColumn.getColumn().setText("Sample Detail");
+		detailsColumn.getColumn().setWidth(280);
+		detailsColumn.setLabelProvider(new ColumnLabelProvider() {
 
-		ArrayList<IBarSeriesData> barSeriesDataList = new ArrayList<>();
-		barSeriesDataList.add(barSeriesData);
+			@Override
+			public String getText(Object element) {
 
-		chart.addSeriesData(barSeriesDataList);
+				if(element instanceof RankedSampleRow row) {
+					return row.getSampleDetails() != null ? row.getSampleDetails() : "";
+				}
+				return "";
+			}
+		});
 
+		TableViewerColumn similarityColumn = new TableViewerColumn(rankingTableViewer, SWT.NONE);
+		similarityColumn.getColumn().setText("Cosine Similarity");
+		similarityColumn.getColumn().setWidth(140);
+		similarityColumn.setLabelProvider(new ColumnLabelProvider() {
+
+			@Override
+			public String getText(Object element) {
+
+				if(element instanceof RankedSampleRow row) {
+					return COSINE_FORMAT.format(row.getCosineSimilarity());
+				}
+				return "";
+			}
+		});
 	}
 
 	private void createControlArea(Composite parent) {
@@ -160,14 +211,10 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		createInExClusionSelection(container);
 		createGroupSelection(container);
 		createMatchCount(container);
-
 	}
 
 	private void createSampleSpinner(Composite parent) {
 
-		/*
-		 * Grouping Sample number Spinner
-		 */
 		sampleSpinnerGroup = new Group(parent, SWT.NONE);
 		sampleSpinnerGroup.setText("# of Samples to use");
 		sampleSpinnerGroup.setLayout(new GridLayout(1, false));
@@ -175,9 +222,6 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		sampleSpinnerGroup.setVisible(false);
 		((GridData)sampleSpinnerGroup.getLayoutData()).exclude = true;
 
-		/*
-		 * Number of Samples Spinner
-		 */
 		sampleSpinner = new Spinner(sampleSpinnerGroup, SWT.BORDER);
 		sampleSpinner.setToolTipText("Number of Samples to Filter");
 		sampleSpinner.setMinimum(PreferenceSupplier.MIN_NUMBER_OF_SAMPLES_TO_FILTER);
@@ -190,35 +234,25 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 
 		sampleSpinner.addListener(SWT.Selection, e -> {
 
-			if(extractor != null && filterFile.size() != 0) {
+			if(extractor != null && filterFile != null && !filterFile.isEmpty()) {
 				samples = extractor.filter(sampleSpinner.getSelection());
+				updateRankingTable();
 			}
 			updateMatchCount();
-
 		});
-
 	}
 
 	private void createInExClusionSelection(Composite parent) {
 
-		/*
-		 * Two Columns for in/exclusion selection
-		 */
 		Composite nameSelection = new Composite(parent, SWT.NONE);
 		nameSelection.setLayout(new GridLayout(2, false));
 		nameSelection.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 
-		/*
-		 * Grouping for in/exclusion
-		 */
 		Group includeGroup = new Group(nameSelection, SWT.NONE);
 		includeGroup.setText("Include names");
 		includeGroup.setLayout(new GridLayout(1, false));
 		includeGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 
-		/*
-		 * Name Inclusion Selection
-		 */
 		Composite includeInputArea = new Composite(includeGroup, SWT.NONE);
 		includeInputArea.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 		includeInputArea.setLayout(new GridLayout(2, false));
@@ -237,9 +271,6 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		Button includeRemoveBtn = new Button(includeGroup, SWT.PUSH);
 		includeRemoveBtn.setText("Remove selected");
 
-		/*
-		 * Name Exclusion Selection
-		 */
 		Group excludeGroup = new Group(nameSelection, SWT.NONE);
 		excludeGroup.setText("Exclude names");
 		excludeGroup.setLayout(new GridLayout(1, false));
@@ -268,8 +299,9 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 			if(!text.isEmpty()) {
 				includeList.add(text);
 				includeText.setText("");
-				if(extractor != null && filterFile.size() != 0) {
+				if(extractor != null && filterFile != null && !filterFile.isEmpty()) {
 					samples = extractor.filter(sampleSpinner.getSelection());
+					updateRankingTable();
 				}
 				updateMatchCount();
 			}
@@ -279,8 +311,9 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 			int idx = includeList.getSelectionIndex();
 			if(idx >= 0) {
 				includeList.remove(idx);
-				if(extractor != null && filterFile.size() != 0) {
+				if(extractor != null && filterFile != null && !filterFile.isEmpty()) {
 					samples = extractor.filter(sampleSpinner.getSelection());
+					updateRankingTable();
 				}
 				updateMatchCount();
 			}
@@ -291,8 +324,9 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 			if(!text.isEmpty()) {
 				excludeList.add(text);
 				excludeText.setText("");
-				if(extractor != null && filterFile.size() != 0) {
+				if(extractor != null && filterFile != null && !filterFile.isEmpty()) {
 					samples = extractor.filter(sampleSpinner.getSelection());
+					updateRankingTable();
 				}
 				updateMatchCount();
 			}
@@ -302,20 +336,17 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 			int idx = excludeList.getSelectionIndex();
 			if(idx >= 0) {
 				excludeList.remove(idx);
-				if(extractor != null && filterFile.size() != 0) {
+				if(extractor != null && filterFile != null && !filterFile.isEmpty()) {
 					samples = extractor.filter(sampleSpinner.getSelection());
+					updateRankingTable();
 				}
 				updateMatchCount();
 			}
 		});
-
 	}
 
 	private void createGroupSelection(Composite parent) {
 
-		/*
-		 * Group Selection
-		 */
 		Label groupLabel = new Label(parent, SWT.NONE);
 		groupLabel.setText("Groups to include:");
 
@@ -333,12 +364,12 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		groupViewer.setAllChecked(true);
 
 		groupViewer.addCheckStateListener(e -> {
-			if(extractor != null && filterFile.size() != 0) {
+			if(extractor != null && filterFile != null && !filterFile.isEmpty()) {
 				samples = extractor.filter(sampleSpinner.getSelection());
+				updateRankingTable();
 			}
 			updateMatchCount();
 		});
-
 	}
 
 	private void createMatchCount(Composite parent) {
@@ -365,51 +396,69 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		return samples;
 	}
 
+	private boolean matchesCurrentFilters(ISample sample) {
+
+		if(sample == null) {
+			return false;
+		}
+
+		boolean includeOK = includeList.getItemCount() == 0;
+		for(String rule : includeList.getItems()) {
+			if(matches(sample.getSampleName(), rule) || matches(sample.getSampleDetails(), rule)) {
+				includeOK = true;
+				break;
+			}
+		}
+
+		boolean excludeHit = false;
+		for(String rule : excludeList.getItems()) {
+			if(matches(sample.getSampleName(), rule) || matches(sample.getSampleDetails(), rule)) {
+				excludeHit = true;
+				break;
+			}
+		}
+
+		Object[] checked = groupViewer.getCheckedElements();
+		Set<String> includedGroups = Arrays.stream(checked).map(String.class::cast).collect(Collectors.toSet());
+		boolean groupIncluded = includedGroups.contains(sample.getDescription());
+
+		return includeOK && !excludeHit && groupIncluded;
+	}
+
+	private ISample findSampleByName(String sampleName) {
+
+		if(sampleName == null || samples == null || samples.getSamples() == null) {
+			return null;
+		}
+
+		for(ISample sample : samples.getSamples()) {
+			if(sampleName.equals(sample.getSampleName())) {
+				return sample;
+			}
+		}
+		return null;
+	}
+
 	private void updateMatchCount() {
 
 		samplesToRemove = new ArrayList<>();
 
 		Samples allSamples = samples;
+		if(allSamples == null) {
+			matchCountLabel.setText("Matches: 0 of 0 samples");
+			matchCountLabel.getParent().layout();
+			return;
+		}
 
 		int matched = 0;
 
 		for(ISample sample : allSamples.getSamples()) {
-			boolean includeOK = includeList.getItemCount() == 0;
-
-			for(String rule : includeList.getItems()) {
-				if(matches(sample.getSampleName(), rule)) {
-					includeOK = true;
-					break;
-				}
-				if(matches(sample.getSampleDetails(), rule)) {
-					includeOK = true;
-					break;
-				}
-			}
-
-			boolean excludeHit = false;
-			for(String rule : excludeList.getItems()) {
-				if(matches(sample.getSampleName(), rule)) {
-					excludeHit = true;
-					break;
-				}
-				if(matches(sample.getSampleDetails(), rule)) {
-					excludeHit = true;
-					break;
-				}
-			}
-
-			Object[] checked = groupViewer.getCheckedElements();
-			Set<String> includedGroups = Arrays.stream(checked).map(String.class::cast).collect(Collectors.toSet());
-			boolean groupIncluded = includedGroups.contains(sample.getDescription());
-
-			if(includeOK && !excludeHit && groupIncluded) {
+			if(matchesCurrentFilters(sample)) {
 				matched++;
 			} else {
-				if(sample.getClassification() == "0") {
+				if("0".equals(sample.getClassification())) {
 					samplesToRemove.add(sample);
 				}
-
 			}
 		}
 		int total = samples.getSamples().size();
@@ -420,6 +469,9 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 
 	private boolean matches(String sample, String rule) {
 
+		if(sample == null || rule == null) {
+			return false;
+		}
 		return sample.toLowerCase().contains(rule.toLowerCase());
 	}
 
@@ -451,11 +503,11 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 
 		super.setVisible(visible);
 		if(visible) {
-			boolean needsReload = filesHaveChanged(); // || !dataAlreadyLoaded;
+			boolean needsReload = filesHaveChanged();
 
-			if(filterFile.size() != 0) {
-				chart.setVisible(true);
-				GridData gd = (GridData)chart.getLayoutData();
+			if(filterFile != null && !filterFile.isEmpty()) {
+				rankingTableViewer.getTable().setVisible(true);
+				GridData gd = (GridData)rankingTableViewer.getTable().getLayoutData();
 				gd.exclude = false;
 				sampleSpinnerGroup.setVisible(true);
 				GridData gdGroup = (GridData)sampleSpinnerGroup.getLayoutData();
@@ -465,24 +517,24 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 					extractor = new LongFileExtractor(mainFile, filterFile, 100);
 					extractInitial = sampleSpinner.getSelection();
 				}
-				chart.getParent().layout(true, true);
+				rankingTableViewer.getTable().getParent().layout(true, true);
 
 				if(needsReload) {
 					startLoadingData();
 				}
 			} else {
-				chart.setVisible(false);
+				rankingTableViewer.getTable().setVisible(false);
 
 				if(needsReload) {
 					extractor = new LongFileExtractor(mainFile, filterFile, 100);
 				}
-				GridData gd = (GridData)chart.getLayoutData();
+				GridData gd = (GridData)rankingTableViewer.getTable().getLayoutData();
 				gd.exclude = true;
 
 				sampleSpinnerGroup.setVisible(false);
 				GridData gdGroup = (GridData)sampleSpinnerGroup.getLayoutData();
 				gdGroup.exclude = true;
-				chart.getParent().layout(true, true);
+				rankingTableViewer.getTable().getParent().layout(true, true);
 
 				if(needsReload) {
 					startLoadingData();
@@ -498,7 +550,7 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 
-				if(filterFile.size() != 0) {
+				if(filterFile != null && !filterFile.isEmpty()) {
 					extractor.readData();
 					samples = extractor.filter(extractInitial);
 				} else {
@@ -506,68 +558,61 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 				}
 
 				Display.getDefault().asyncExec(() -> {
-					if(chart.isDisposed()) {
+					if(rankingTableViewer.getTable().isDisposed()) {
 						return;
 					}
-					if(filterFile.size() != 0) {
-						updateChart(samples);
-					}
+
 					java.util.List<String> groups = samples.getSamples().stream().map(x -> x.getDescription()).distinct().toList();
 					groupViewer.setInput(groups);
 					groupViewer.setAllChecked(true);
 
-					updateMatchCount();
+					if(filterFile != null && !filterFile.isEmpty()) {
+						updateRankingTable();
+					}
 
+					updateMatchCount();
 				});
 
 				return Status.OK_STATUS;
 			}
-
 		};
 
 		loadJob.schedule();
 	}
 
-	private void updateChart(ISamplesPCA<?, ?> samples) {
+	private void updateRankingTable() {
 
-		double fixedUpperChartRange = 2000.0;
-
-		IChartSettings chartSettings = chart.getChartSettings();
-		chartSettings.setTitle("");
-		chart.applySettings(chartSettings);
-
-		double[] yValues = new double[samples.getAnalysisSettings().getFilterDistribution().values().size()];
-		int index = samples.getAnalysisSettings().getFilterDistribution().values().size() - 1;
-		for(Map.Entry<Integer, Integer> entry : samples.getAnalysisSettings().getFilterDistribution().entrySet()) {
-			yValues[index--] = (entry.getValue() > fixedUpperChartRange) ? fixedUpperChartRange : entry.getValue();
+		if(extractor == null || rankingTableViewer == null || rankingTableViewer.getTable().isDisposed()) {
+			return;
 		}
 
-		Set<Integer> keys = samples.getAnalysisSettings().getFilterDistribution().reversed().keySet();
-		String[] xLabels = keys.stream().map(Object::toString).toArray(String[]::new);
+		java.util.List<Map.Entry<String, Double>> rankedSamples = extractor.getRankedSamples();
+		java.util.List<RankedSampleRow> rows = new ArrayList<>();
 
-		double[] xValues = keys.stream().mapToDouble(Integer::doubleValue).toArray();
-
-		BaseChart baseChart = chart.getBaseChart();
-		ISeries<?> series = baseChart.getSeriesSet().getSeries("Distribution");
-		if(series instanceof IBarSeries) {
-
-			IBarSeries<?> barSeries = (IBarSeries<?>)series;
-
-			barSeries.setXSeries(xValues);
-			barSeries.setYSeries(yValues);
-
-			IAxis xAxis = baseChart.getAxisSet().getXAxis(0);
-			xAxis.enableCategory(true);
-			xAxis.setRange(new Range(0, yValues.length));
-			xAxis.setCategorySeries(xLabels);
-
-			IAxis yAxis = baseChart.getAxisSet().getYAxis(0);
-			yAxis.setRange(new Range(0, fixedUpperChartRange));
-
-			baseChart.redraw();
-
+		int limit = rankedSamples.size();
+		if(sampleSpinner != null && !sampleSpinner.isDisposed()) {
+			int selected = sampleSpinner.getSelection();
+			if(selected > 0) {
+				limit = selected;
+			}
 		}
 
+		int rank = 1;
+		for(Map.Entry<String, Double> entry : rankedSamples) {
+			ISample sample = findSampleByName(entry.getKey());
+			if(matchesCurrentFilters(sample)) {
+				String sampleDetails = sample != null ? sample.getSampleDetails() : "";
+				rows.add(new RankedSampleRow(rank++, entry.getKey(), sampleDetails, entry.getValue()));
+				if(rows.size() >= limit) {
+					break;
+				}
+			}
+		}
+
+		rankingTableViewer.setInput(rows);
+
+		for(TableColumn column : rankingTableViewer.getTable().getColumns()) {
+			column.pack();
+		}
 	}
-
 }
