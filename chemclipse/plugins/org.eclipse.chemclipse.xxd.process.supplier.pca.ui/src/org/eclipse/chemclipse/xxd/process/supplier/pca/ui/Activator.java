@@ -37,6 +37,7 @@ public class Activator extends AbstractActivatorUI {
 	public static final String ICON_REPLACE_MEAN = "ICON_REPLACE_MEAN"; // $NON-NLS-1$
 	public static final String ICON_REPLACE_MEDIAN = "ICON_REPLACE_MEDIAN"; // $NON-NLS-1$
 	public static final String ICON_REPLACE_RANDOM = "ICON_REPLACE_RANDOM"; // $NON-NLS-1$
+	public static final String ICON_REPLACE_HALF_MIN = "ICON_REPLACE_HALF_MIN"; // $NON-NLS-1$
 	public static final String ICON_CENTER_MEAN = "ICON_CENTER_MEAN"; // $NON-NLS-1$
 	public static final String ICON_CENTER_MEDIAN = "ICON_CENTER_MEDIAN"; // $NON-NLS-1$
 	public static final String ICON_DEVIATION = "ICON_DEVIATION"; // $NON-NLS-1$

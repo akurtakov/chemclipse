@@ -21,6 +21,7 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.core.IPreprocessingSettin
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.PreprocessingSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing.CenteringMean;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing.CenteringMedian;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing.HalfMinimumValuesReplacer;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing.ICentering;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing.INormalization;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.core.preprocessing.IPreprocessing;
@@ -80,7 +81,7 @@ public class PreprocessingSettingsUI extends Composite {
 	private Canvas canvasFormula;
 
 	private Object[] normalizeInput = new Object[]{"--", new Normalization1Norm(), new Normalization2Norm(), new NormalizationInfNorm()};
-	private Object[] replacerInput = new Object[]{new MeanValuesReplacer(), new MedianValuesReplacer(), new SmallValuesReplacer()};
+	private Object[] replacerInput = new Object[]{new MeanValuesReplacer(), new MedianValuesReplacer(), new SmallValuesReplacer(), new HalfMinimumValuesReplacer()};
 	private Object[] transformationInput = new Object[]{"--", new TransformationLOG10(), new TransformationPower()};
 	private Object[] centeringInput = new Object[]{"--", new CenteringMean(), new CenteringMedian()};
 	private Object[] scaleInputEmpty = new Object[]{"--"};
@@ -465,6 +466,8 @@ public class PreprocessingSettingsUI extends Composite {
 				image = Activator.getDefault().getImage(Activator.ICON_REPLACE_MEDIAN);
 			} else if(object instanceof SmallValuesReplacer) {
 				image = Activator.getDefault().getImage(Activator.ICON_REPLACE_RANDOM);
+			} else if(object instanceof HalfMinimumValuesReplacer) {
+				image = Activator.getDefault().getImage(Activator.ICON_REPLACE_HALF_MIN);
 			}
 		} else if(comboViewer == comboViewerTransformation) {
 			if(object instanceof TransformationLOG10) {
