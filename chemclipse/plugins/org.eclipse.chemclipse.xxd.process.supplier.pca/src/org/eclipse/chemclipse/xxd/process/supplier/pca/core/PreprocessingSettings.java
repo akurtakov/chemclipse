@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -31,10 +31,10 @@ public class PreprocessingSettings implements IPreprocessingSettings {
 	 * Replace must be set.
 	 * By default, the small values replace is the most robust choice.
 	 */
-	private ICentering centering = new ScalingAuto(ICentering.MEAN);
-	private INormalization normalization = new Normalization1Norm();
-	private ITransformation transformation = null;
 	private IReplacer replacer = new SmallValuesReplacer();
+	private ITransformation transformation = null;
+	private INormalization normalization = new Normalization1Norm();
+	private ICentering centering = new ScalingAuto(ICentering.MEAN);
 
 	public PreprocessingSettings() {
 
@@ -42,10 +42,10 @@ public class PreprocessingSettings implements IPreprocessingSettings {
 
 	public PreprocessingSettings(IPreprocessingSettings preprocessingSettings) {
 
-		setCentering(preprocessingSettings.getCentering());
-		setNormalization(preprocessingSettings.getNormalization());
-		setTransformation(preprocessingSettings.getTransformation());
 		setReplacer(preprocessingSettings.getReplacer());
+		setTransformation(preprocessingSettings.getTransformation());
+		setNormalization(preprocessingSettings.getNormalization());
+		setCentering(preprocessingSettings.getCentering());
 	}
 
 	@Override
@@ -116,9 +116,9 @@ public class PreprocessingSettings implements IPreprocessingSettings {
 			});
 		}
 
-		normalize(samples);
 		replaceEmptyValues(samples);
 		transform(samples);
+		normalize(samples);
 		centerAndScale(samples);
 	}
 
