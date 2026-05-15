@@ -12,6 +12,7 @@
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.internal.wizards;
 
+import java.lang.reflect.InvocationTargetException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +29,11 @@ import org.eclipse.chemclipse.xxd.process.supplier.pca.preferences.PreferenceSup
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.JobChangeAdapter;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CheckboxTableViewer;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -45,7 +50,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage {
@@ -104,6 +108,12 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 
 	private String previousMainFilePath = null;
 	private String previousFilterFilePath = null;
+
+	private Button chkCountPunish;
+	private Text txtCountExponent;
+	private Button chkSumPunish;
+	private Text txtSumExponent;
+	private Button applyButton;
 
 	protected FilesLongFormatFilterWizardPage() {
 
@@ -210,6 +220,8 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		createSampleSpinner(container);
 		createInExClusionSelection(container);
 		createGroupSelection(container);
+		createPunishmentControls(container);
+		createApplyButton(container);
 		createMatchCount(container);
 	}
 
@@ -372,6 +384,102 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		});
 	}
 
+	private void createPunishmentControls(Composite parent) {
+
+		Group punishGroup = new Group(parent, SWT.NONE);
+		punishGroup.setText("Similarity Punishments");
+		punishGroup.setLayout(new GridLayout(3, false));
+		punishGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
+
+		chkCountPunish = new Button(punishGroup, SWT.CHECK);
+		chkCountPunish.setText("Enable count-based punishment (Matching Count Features / total Count Features)");
+		GridData chkGd = new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1);
+		chkCountPunish.setLayoutData(chkGd);
+		chkCountPunish.setSelection(false);
+
+		Label lblCountExp = new Label(punishGroup, SWT.NONE);
+		lblCountExp.setText("Count exponent (0.0 - 10.0):");
+		txtCountExponent = new Text(punishGroup, SWT.BORDER);
+		txtCountExponent.setText("1.0");
+		txtCountExponent.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		new Label(punishGroup, SWT.NONE);
+
+		chkSumPunish = new Button(punishGroup, SWT.CHECK);
+		chkSumPunish.setText("Enable sum-based punishment (sum Matching Features / sum Total Features)");
+		GridData chkGd2 = new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1);
+		chkSumPunish.setLayoutData(chkGd2);
+		chkSumPunish.setSelection(false);
+
+		Label lblSumExp = new Label(punishGroup, SWT.NONE);
+		lblSumExp.setText("Sum exponent (0.0 - 10.0):");
+		txtSumExponent = new Text(punishGroup, SWT.BORDER);
+		txtSumExponent.setText("1.0");
+		txtSumExponent.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		new Label(punishGroup, SWT.NONE);
+
+	}
+
+	/**
+	 * Create the Apply button (user triggers recalculation) and place it above the match count label.
+	 */
+	private void createApplyButton(Composite parent) {
+
+		Composite applyArea = new Composite(parent, SWT.NONE);
+		applyArea.setLayout(new GridLayout(2, false));
+		applyArea.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+
+		applyButton = new Button(applyArea, SWT.PUSH);
+		applyButton.setText("Apply");
+		applyButton.setToolTipText("Apply changes to punishment factors and (re)load the data.");
+		applyButton.addListener(SWT.Selection, e -> {
+			applyPunishmentSettingsToExtractor();
+			if(extractor == null) {
+				extractor = new LongFileExtractor(mainFile, filterFile, 100);
+			}
+			startLoadingData(true);
+		});
+
+		// filler label to align layout
+		new Label(applyArea, SWT.NONE);
+	}
+
+	/**
+	 * Read values from the UI, sanitize and apply to the extractor.
+	 */
+	private void applyPunishmentSettingsToExtractor() {
+
+		if(extractor == null)
+			return;
+		
+		boolean useCount = chkCountPunish != null && !chkCountPunish.isDisposed() && chkCountPunish.getSelection();
+		double countExp = parseExponent(txtCountExponent.getText(), 1.0);
+		extractor.setUseCountPunishment(useCount);
+		extractor.setCountExponent(countExp);
+
+		boolean useSum = chkSumPunish != null && !chkSumPunish.isDisposed() && chkSumPunish.getSelection();
+		double sumExp = parseExponent(txtSumExponent.getText(), 1.0);
+		extractor.setUseSumPunishment(useSum);
+		extractor.setSumExponent(sumExp);
+	}
+
+	private double parseExponent(String text, double def) {
+
+		if(text == null)
+			return def;
+		try {
+			double v = Double.parseDouble(text.trim());
+			if(Double.isNaN(v) || Double.isInfinite(v))
+				return def;
+			if(v < 0.0)
+				v = 0.0;
+			if(v > 10.0)
+				v = 10.0;
+			return v;
+		} catch(NumberFormatException ex) {
+			return def;
+		}
+	}
+
 	private void createMatchCount(Composite parent) {
 
 		matchCountLabel = new Label(parent, SWT.NONE);
@@ -515,18 +623,17 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 
 				if(needsReload) {
 					extractor = new LongFileExtractor(mainFile, filterFile, 100);
+					startLoadingData(true);
 					extractInitial = sampleSpinner.getSelection();
 				}
 				rankingTableViewer.getTable().getParent().layout(true, true);
 
-				if(needsReload) {
-					startLoadingData();
-				}
 			} else {
 				rankingTableViewer.getTable().setVisible(false);
 
 				if(needsReload) {
 					extractor = new LongFileExtractor(mainFile, filterFile, 100);
+					startLoadingData(true);
 				}
 				GridData gd = (GridData)rankingTableViewer.getTable().getLayoutData();
 				gd.exclude = true;
@@ -535,33 +642,53 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 				GridData gdGroup = (GridData)sampleSpinnerGroup.getLayoutData();
 				gdGroup.exclude = true;
 				rankingTableViewer.getTable().getParent().layout(true, true);
-
-				if(needsReload) {
-					startLoadingData();
-				}
 			}
 		}
 	}
 
-	private void startLoadingData() {
+	/**
+	 * Start loading data. If modal==true a modal progress dialog is shown and controls are disabled
+	 * until the load finishes. If modal==false a background Job is used but controls still disabled
+	 * until the background work completes.
+	 */
+	private void startLoadingData(boolean modal) {
 
-		Job loadJob = new Job("Loading data") {
+		if(extractor == null)
+			return;
 
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
+		setControlsEnabled(false);
+
+		final Samples[] loaded = new Samples[1];
+
+		IRunnableWithProgress runnable = monitor -> {
+			monitor.beginTask("Loading PCA long-format data...", IProgressMonitor.UNKNOWN);
+			try {
+				// ensure extractor has latest settings from UI in case Apply was pressed earlier
+				Display.getDefault().syncExec(() -> applyPunishmentSettingsToExtractor());
+
+				extractor.readData();
 
 				if(filterFile != null && !filterFile.isEmpty()) {
-					extractor.readData();
-					samples = extractor.filter(extractInitial);
+					loaded[0] = extractor.filter(extractInitial);
 				} else {
-					samples = extractor.extract();
+					loaded[0] = extractor.extract();
 				}
+			} finally {
+				monitor.done();
+			}
+		};
 
-				Display.getDefault().asyncExec(() -> {
-					if(rankingTableViewer.getTable().isDisposed()) {
-						return;
-					}
-
+		if(modal) {
+			ProgressMonitorDialog dialog = new ProgressMonitorDialog(getShell());
+			try {
+				dialog.run(true, true, runnable);
+			} catch(InvocationTargetException e) {
+			} catch(InterruptedException e) {
+			}
+			final Samples result = loaded[0];
+			Display.getDefault().asyncExec(() -> {
+				if(result != null) {
+					samples = result;
 					java.util.List<String> groups = samples.getSamples().stream().map(x -> x.getDescription()).distinct().toList();
 					groupViewer.setInput(groups);
 					groupViewer.setAllChecked(true);
@@ -569,15 +696,49 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 					if(filterFile != null && !filterFile.isEmpty()) {
 						updateRankingTable();
 					}
-
 					updateMatchCount();
-				});
+				}
+				setControlsEnabled(true);
+			});
+		} else {
+			Job loadJob = new Job("Loading data") {
 
-				return Status.OK_STATUS;
-			}
-		};
+				@Override
+				protected IStatus run(IProgressMonitor monitor) {
 
-		loadJob.schedule();
+					try {
+						runnable.run(monitor);
+					} catch(Exception e) {
+					}
+					return Status.OK_STATUS;
+				}
+			};
+
+			loadJob.addJobChangeListener(new JobChangeAdapter() {
+
+				@Override
+				public void done(IJobChangeEvent event) {
+
+					Display.getDefault().asyncExec(() -> {
+						Samples res = loaded[0];
+						if(res != null) {
+							samples = res;
+							java.util.List<String> groups = samples.getSamples().stream().map(x -> x.getDescription()).distinct().toList();
+							groupViewer.setInput(groups);
+							groupViewer.setAllChecked(true);
+
+							if(filterFile != null && !filterFile.isEmpty()) {
+								updateRankingTable();
+							}
+							updateMatchCount();
+						}
+						setControlsEnabled(true);
+					});
+				}
+			});
+
+			loadJob.schedule();
+		}
 	}
 
 	private void updateRankingTable() {
@@ -593,7 +754,7 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		if(sampleSpinner != null && !sampleSpinner.isDisposed()) {
 			int selected = sampleSpinner.getSelection();
 			if(selected > 0) {
-				limit = selected;
+				limit = Math.min(limit, selected);
 			}
 		}
 
@@ -611,8 +772,38 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 
 		rankingTableViewer.setInput(rows);
 
-		for(TableColumn column : rankingTableViewer.getTable().getColumns()) {
+		for(org.eclipse.swt.widgets.TableColumn column : rankingTableViewer.getTable().getColumns()) {
 			column.pack();
 		}
+	}
+
+	/**
+	 * Enable/disable interactive controls while loading to prevent concurrent edits.
+	 */
+	private void setControlsEnabled(boolean enabled) {
+
+		if(includeList != null && !includeList.isDisposed())
+			includeList.setEnabled(enabled);
+		if(excludeList != null && !excludeList.isDisposed())
+			excludeList.setEnabled(enabled);
+		if(groupViewer != null && !groupViewer.getTable().isDisposed())
+			groupViewer.getTable().setEnabled(enabled);
+		if(sampleSpinner != null && !sampleSpinner.isDisposed())
+			sampleSpinner.setEnabled(enabled);
+
+		if(chkCountPunish != null && !chkCountPunish.isDisposed())
+			chkCountPunish.setEnabled(enabled);
+		if(txtCountExponent != null && !txtCountExponent.isDisposed())
+			txtCountExponent.setEnabled(enabled);
+		if(chkSumPunish != null && !chkSumPunish.isDisposed())
+			chkSumPunish.setEnabled(enabled);
+		if(txtSumExponent != null && !txtSumExponent.isDisposed())
+			txtSumExponent.setEnabled(enabled);
+
+		if(applyButton != null && !applyButton.isDisposed())
+			applyButton.setEnabled(enabled);
+
+		if(rankingTableViewer != null && !rankingTableViewer.getTable().isDisposed())
+			rankingTableViewer.getTable().setEnabled(enabled);
 	}
 }
