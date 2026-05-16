@@ -66,6 +66,14 @@ public class LongFileExtractor {
 	private boolean dataRead = false;
 	//
 	private Map<String, Double> normalizedFilterVector = new HashMap<>();
+	private boolean useCountPunishment = false;
+	private double countExponent = 0.0;
+	private boolean useSumPunishment = false;
+	private double sumExponent = 0.0;
+
+	// Small floor to avoid NaN/pow(0, x) surprises; set to 0.0 to allow exact zero
+	private static final double MIN_RATIO = 1e-12;
+
 
 	public LongFileExtractor(List<IDataInputEntry> dataInputEntries, List<IDataInputEntry> filterDataInputEntries, int numberOfSamplesToFilter) {
 
@@ -73,6 +81,54 @@ public class LongFileExtractor {
 		this.filterDataInputEntries = filterDataInputEntries;
 		this.numberOfSamplesToFilter = numberOfSamplesToFilter;
 		this.filterFileExists = !filterDataInputEntries.isEmpty();
+	}
+
+	public void setUseCountPunishment(boolean useCountPunishment) {
+
+		this.useCountPunishment = useCountPunishment;
+	}
+
+	public boolean isUseCountPunishment() {
+
+		return useCountPunishment;
+	}
+
+	public void setCountExponent(double countExponent) {
+
+		if(countExponent < 0.0)
+			countExponent = 0.0;
+		if(countExponent > 10.0)
+			countExponent = 10.0;
+		this.countExponent = countExponent;
+	}
+
+	public double getCountExponent() {
+
+		return countExponent;
+	}
+
+	public void setUseSumPunishment(boolean useSumPunishment) {
+
+		this.useSumPunishment = useSumPunishment;
+	}
+
+	public boolean isUseSumPunishment() {
+
+		return useSumPunishment;
+	}
+
+	public void setSumExponent(double sumExponent) {
+
+		if(sumExponent < 0.0)
+			sumExponent = 0.0;
+		if(sumExponent > 10.0)
+			sumExponent = 10.0;
+		this.sumExponent = sumExponent;
+	}
+
+	public double getSumExponent() {
+
+		return sumExponent;
 	}
 
 	public void readData() {
@@ -159,15 +215,21 @@ public class LongFileExtractor {
 		return new ArrayList<>(sampleRankingList.subList(0, max));
 	}
 
+	/**
+	 * Updated ranking calculation:
+	 * - Compute cosine similarity
+	 * - Compute count-based and sum-based punishments (both yield [0,1])
+	 * - Adjust similarity = cosine * p1 * p2
+	 */
 	private void calculateFilterRanking() {
 
 		filterRanking.clear();
 
-		double dotProduct = 0;
-		double magnitude = 0;
-		double sumSqA = 0;
-		double sumSqB = 0;
-		double similarity = 0;
+		double dotProduct;
+		double magnitude;
+		double sumSqA;
+		double sumSqB;
+		double similarity;
 
 		for(String sample : samplesVariablesMap.keySet()) {
 			if(featureOverlap.containsKey(sample)) {
@@ -177,11 +239,27 @@ public class LongFileExtractor {
 				sumSqB = 0;
 				similarity = 0;
 
-				for(String feature : samplesVariablesMap.get(sample).keySet()) {
-					double target = Double.parseDouble(samplesVariablesMap.get(sample).get(feature).getValue());
+				int matchingCount = 0;
+				int totalMainCount = 0;
+				double sumMatchingValues = 0.0;
+				double sumMainValues = 0.0;
+
+				Map<String, Target> mainVars = samplesVariablesMap.get(sample);
+				totalMainCount = mainVars.size();
+
+				for(String feature : mainVars.keySet()) {
+					double target = 0.0;
+					try {
+						target = Double.parseDouble(mainVars.get(feature).getValue());
+					} catch(NumberFormatException e) {
+						target = 0.0;
+					}
+					sumMainValues += target;
 					if(normalizedFilterVector.get(feature) != null) {
 						double value = normalizedFilterVector.get(feature);
 						dotProduct += value * target;
+						matchingCount++;
+						sumMatchingValues += target;
 					}
 					sumSqB += target * target;
 				}
@@ -189,7 +267,36 @@ public class LongFileExtractor {
 				magnitude = Math.sqrt(sumSqA) * Math.sqrt(sumSqB);
 				if(magnitude != 0.0) {
 					similarity = dotProduct / magnitude;
-					filterRanking.put(sample, similarity);
+
+					// p1: count-based
+					double p1 = 1.0;
+					if(useCountPunishment) {
+						if(totalMainCount <= 0) {
+							p1 = 1.0;
+						} else {
+							double ratioCount = (double)matchingCount / (double)totalMainCount;
+							ratioCount = Math.max(MIN_RATIO, Math.min(1.0, ratioCount));
+							p1 = Math.pow(ratioCount, countExponent);
+						}
+					}
+
+					// p2: sum-based
+					double p2 = 1.0;
+					if(useSumPunishment) {
+						if(sumMainValues <= 0.0) {
+							// can't compute ratio; skip punishment
+							p2 = 1.0;
+						} else {
+							double ratioSum = sumMatchingValues / sumMainValues;
+							ratioSum = Math.max(MIN_RATIO, Math.min(1.0, ratioSum));
+							p2 = Math.pow(ratioSum, sumExponent);
+						}
+					}
+
+					double adjusted = similarity * p1 * p2;
+					// clamp into [0,1]
+					adjusted = Math.max(0.0, Math.min(1.0, adjusted));
+					filterRanking.put(sample, adjusted);
 				}
 			}
 		}
