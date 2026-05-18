@@ -3,6 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Entropy
 Bundle-SymbolicName: org.eclipse.chemclipse.chromatogram.msd.comparison.supplier.entropy;singleton:=true
 Bundle-Version: 0.9.0.qualifier
+Export-Package: org.eclipse.chemclipse.chromatogram.msd.comparison.supplier.entropy.comparator
 Bundle-Vendor: ChemClipse
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.chemclipse.msd.identifier;bundle-version="0.8.0",
