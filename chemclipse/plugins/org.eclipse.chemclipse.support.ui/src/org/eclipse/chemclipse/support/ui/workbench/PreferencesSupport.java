@@ -15,14 +15,9 @@ package org.eclipse.chemclipse.support.ui.workbench;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.chemclipse.support.settings.OperatingSystemUtils;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.preference.IPreferenceNode;
 import org.eclipse.jface.preference.PreferenceManager;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.RGB;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 
 public class PreferencesSupport {
@@ -42,13 +37,7 @@ public class PreferencesSupport {
 	// Workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=564022
 	public static boolean isDarkTheme() {
 
-		if(OperatingSystemUtils.isMac()) {
-			Color background = Display.getDefault().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND);
-			RGB rgb = background.getRGB();
-			return (rgb.red < 128 && rgb.green < 128 && rgb.blue < 128);
-		} else {
-			return Platform.getPreferencesService().getString("org.eclipse.e4.ui.css.swt.theme", "themeid", "", null).endsWith("dark");
-		}
+		return Platform.getPreferencesService().getString("org.eclipse.e4.ui.css.swt.theme", "themeid", "", null).endsWith("dark");
 	}
 
 	/**
