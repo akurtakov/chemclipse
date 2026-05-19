@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -11,12 +11,17 @@
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - remove ModelAddon dependency
  * Philip Wenig - get rid of JavaFX
+ * Lorenz Gerber - create part with existing IEvaluation
  *******************************************************************************/
 package org.eclipse.chemclipse.xxd.process.supplier.pca.ui.handlers;
 
 import jakarta.inject.Named;
 
+import org.eclipse.chemclipse.model.statistics.ISample;
+import org.eclipse.chemclipse.model.statistics.IVariable;
 import org.eclipse.chemclipse.rcp.app.ui.handlers.OpenSnippetHandler;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IEvaluation;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResult;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Execute;
@@ -39,6 +44,18 @@ public class CreatePcaEvaluation {
 
 		OpenSnippetHandler.openSnippet(EDITOR_ID, context, PCA_EDITOR_STACK, (eclipseContext, part) -> {
 			eclipseContext.set(ISamplesPCA.class, samples);
+			if(title != null && !title.isEmpty() && !title.isBlank()) {
+				part.setLabel(title);
+			}
+			return null;
+		});
+	}
+
+	public static void createPart(IEvaluation<IVariable, ISample, IResult> evaluation, IEclipseContext context, String title) {
+
+		OpenSnippetHandler.openSnippet(EDITOR_ID, context, PCA_EDITOR_STACK, (eclipseContext, part) -> {
+			eclipseContext.set(IEvaluation.class, evaluation);
+			eclipseContext.set(ISamplesPCA.class, evaluation.getSamples());
 			if(title != null && !title.isEmpty() && !title.isBlank()) {
 				part.setLabel(title);
 			}
