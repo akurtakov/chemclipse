@@ -20,6 +20,8 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-Vendor: ChemClipse
 Export-Package: org.eclipse.chemclipse.msd.converter.supplier.amdis.converter.misc,
+ org.eclipse.chemclipse.msd.converter.supplier.amdis.converter.msl,
+ org.eclipse.chemclipse.msd.converter.supplier.amdis.converter.msp,
  org.eclipse.chemclipse.msd.converter.supplier.amdis.format,
  org.eclipse.chemclipse.msd.converter.supplier.amdis.io,
  org.eclipse.chemclipse.msd.converter.supplier.amdis.model,
