@@ -105,18 +105,6 @@
 			</dependency>
 			<dependency>
 				<groupId>org.ejml</groupId>
-				<artifactId>ejml-fdense</artifactId>
-				<version>0.44.0</version>
-				<type>jar</type>
-			</dependency>
-			<dependency>
-				<groupId>org.ejml</groupId>
-				<artifactId>ejml-fdense</artifactId>
-				<version>0.44.0</version>
-				<type>jar</type>
-			</dependency>
-			<dependency>
-				<groupId>org.ejml</groupId>
 				<artifactId>ejml-simple</artifactId>
 				<version>0.44.0</version>
 				<type>jar</type>
