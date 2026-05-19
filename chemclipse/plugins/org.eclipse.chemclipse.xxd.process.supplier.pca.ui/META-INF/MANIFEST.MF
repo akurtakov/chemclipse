@@ -56,4 +56,5 @@ Service-Component: OSGI-INF/org.eclipse.chemclipse.xxd.process.supplier.pca.ui.q
  OSGI-INF/org.eclipse.chemclipse.xxd.process.supplier.pca.ui.quickstart.FilesLongFormatTileDefinition.xml,
  OSGI-INF/org.eclipse.chemclipse.xxd.process.supplier.pca.ui.quickstart.MassSpectrumTileDefinition.xml,
  OSGI-INF/org.eclipse.chemclipse.xxd.process.supplier.pca.ui.quickstart.PeakTileDefinition.xml,
- OSGI-INF/org.eclipse.chemclipse.xxd.process.supplier.pca.ui.quickstart.ScanTileDefinition.xml
+ OSGI-INF/org.eclipse.chemclipse.xxd.process.supplier.pca.ui.quickstart.ScanTileDefinition.xml,
+ OSGI-INF/org.eclipse.chemclipse.xxd.process.supplier.pca.ui.quickstart.WorkspaceTileDefinition.xml

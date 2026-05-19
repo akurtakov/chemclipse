@@ -41,6 +41,7 @@ import org.eclipse.chemclipse.swt.ui.support.Colors;
 import org.eclipse.chemclipse.ux.extension.ui.support.DataUpdateSupport;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.io.SampleTemplateIO;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.io.WorkspaceIO;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.Algorithm;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IAnalysisSettings;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IEvaluation;
@@ -145,6 +146,16 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 		updateOplsGroupTargets();
 		applyColorScheme();
 		updateControls();
+	}
+
+	public void setInput(IEvaluation<IVariable, ISample, IResult> evaluation) {
+
+		this.evaluation = evaluation;
+		this.samples = evaluation.getSamples();
+		updateOplsGroupTargets();
+		applyColorScheme();
+		updateControls();
+		fireUpdate(Display.getDefault(), evaluation);
 	}
 
 	private void createControl() {
@@ -351,7 +362,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridData);
-		composite.setLayout(new GridLayout(7, false));
+		composite.setLayout(new GridLayout(8, false));
 		createButtonToggleToolbar(composite);
 		createButtonNamingWizard(composite);
 		createComboViewerTargetOPLS(composite);
@@ -359,6 +370,7 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 		createButtonColorScheme(composite);
 		createButtonImport(composite);
 		createButtonExport(composite);
+		createButtonSaveWorkspace(composite);
 	}
 
 	private void createButtonToggleToolbar(Composite parent) {
@@ -546,6 +558,46 @@ public class AnalysisEditorUI extends Composite implements IExtendedPartUI {
 						} catch(FileNotFoundException e1) {
 							MessageDialog.openWarning(getShell(), "Export", "The sample template file couldn't be found.");
 						}
+					}
+				}
+			}
+		});
+		return button;
+	}
+
+	private Button createButtonSaveWorkspace(Composite parent) {
+
+		Button button = new Button(parent, SWT.PUSH);
+		button.setText("");
+		button.setToolTipText("Save workspace (experimental).");
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_SAVE, IApplicationImageProvider.SIZE_16x16));
+		button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				FileDialog fileDialog = new FileDialog(getShell(), SWT.SAVE);
+				fileDialog.setOverwrite(true);
+				fileDialog.setText("Save Workspace");
+				fileDialog.setFilterExtensions(WorkspaceIO.FILTER_EXTENSION);
+				fileDialog.setFilterNames(WorkspaceIO.FILTER_NAME);
+				fileDialog.setFileName(WorkspaceIO.FILE_NAME);
+				fileDialog.setFilterPath(PreferenceSupplier.getPathExportFile());
+				String path = fileDialog.open();
+				if(path != null) {
+					if(evaluation == null) {
+						MessageDialog.openWarning(getShell(), "Save Workspace", "No analysis results available. Please run an analysis before saving the workspace.");
+						return;
+					}
+					if(!path.endsWith(WorkspaceIO.FILE_EXTENSION)) {
+						path += WorkspaceIO.FILE_EXTENSION;
+					}
+					try {
+						PreferenceSupplier.setPathExportFile(fileDialog.getFilterPath());
+						WorkspaceIO.write(new File(path), evaluation);
+						MessageDialog.openInformation(getShell(), "Save Workspace", "The workspace has been saved successfully.");
+					} catch(IOException e1) {
+						MessageDialog.openWarning(getShell(), "Save Workspace", "Failed to save the workspace.");
 					}
 				}
 			}

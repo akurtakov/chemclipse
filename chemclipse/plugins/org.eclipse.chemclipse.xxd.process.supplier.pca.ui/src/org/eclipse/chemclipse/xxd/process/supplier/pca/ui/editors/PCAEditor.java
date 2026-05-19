@@ -24,6 +24,8 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.events.IChemClipseEvents;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IEvaluation;
+import org.eclipse.chemclipse.xxd.process.supplier.pca.model.IResult;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.model.ISamplesPCA;
 import org.eclipse.chemclipse.xxd.process.supplier.pca.ui.swt.AnalysisEditorUI;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -56,9 +58,15 @@ public class PCAEditor {
 	public void createControl() {
 
 		analysisEditorUI = new AnalysisEditorUI(parent, SWT.NONE);
+
 		if(context != null) {
-			ISamplesPCA<IVariable, ISample> samples = context.get(ISamplesPCA.class);
-			analysisEditorUI.setInput(samples);
+			IEvaluation<IVariable, ISample, IResult> evaluation = context.get(IEvaluation.class);
+			if(evaluation != null) {
+				analysisEditorUI.setInput(evaluation);
+			} else {
+				ISamplesPCA<IVariable, ISample> samples = context.get(ISamplesPCA.class);
+				analysisEditorUI.setInput(samples);
+			}
 		}
 	}
 
@@ -67,6 +75,7 @@ public class PCAEditor {
 
 		if(context != null) {
 			context.remove(ISamplesPCA.class);
+			context.remove(IEvaluation.class);
 		}
 
 		List<String> clearTopics = Arrays.asList(IChemClipseEvents.TOPIC_PCA_UPDATE_SELECTION);
