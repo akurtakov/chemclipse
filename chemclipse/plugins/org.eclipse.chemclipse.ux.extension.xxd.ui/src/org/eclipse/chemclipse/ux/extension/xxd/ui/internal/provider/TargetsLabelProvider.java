@@ -18,6 +18,7 @@ import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.identifier.IComparisonResult;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
+import org.eclipse.chemclipse.model.support.DatabaseResolver;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
@@ -269,7 +270,14 @@ public class TargetsLabelProvider extends AbstractChemClipseLabelProvider {
 					text = libraryInformation.getComments();
 					break;
 				case 19:
-					text = libraryInformation.getDatabase();
+					/*
+					 * UUID or resolved name.
+					 */
+					if(PreferenceSupplier.isResolveDatabaseUUID()) {
+						text = DatabaseResolver.getDatabaseName(libraryInformation.getDatabase());
+					} else {
+						text = libraryInformation.getDatabase();
+					}
 					break;
 				case 20:
 					text = Integer.toString(libraryInformation.getDatabaseIndex());

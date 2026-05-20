@@ -49,6 +49,9 @@ public class PreferencePageTargets extends FieldEditorPreferencePage implements 
 		addField(new ComboFieldEditor(PreferenceSupplier.P_SCAN_IDENTIFER, "Scan Identifier:", ScanWebIdentifierUI.getScanIdentifier(), getFieldEditorParent()));
 
 		addField(new SpacerFieldEditor(getFieldEditorParent()));
+		addField(new BooleanFieldEditor(PreferenceSupplier.P_RESOLVE_DATABASE_UUID, "Resolve Database UUID", getFieldEditorParent()));
+
+		addField(new SpacerFieldEditor(getFieldEditorParent()));
 		addField(new BooleanFieldEditor(PreferenceSupplier.P_USE_ABSOLUTE_DEVIATION_RETENTION_TIME, "Retention Time: Use absolute deviation", getFieldEditorParent()));
 		addField(new FloatFieldEditor(PreferenceSupplier.P_RETENTION_TIME_DEVIATION_REL_OK, "Allowed Deviation [%]", PreferenceSupplier.MIN_DEVIATION_RELATIVE, PreferenceSupplier.MAX_DEVIATION_RELATIVE, getFieldEditorParent()));
 		addField(new FloatFieldEditor(PreferenceSupplier.P_RETENTION_TIME_DEVIATION_REL_WARN, "Warn Deviation [%]", PreferenceSupplier.MIN_DEVIATION_RELATIVE, PreferenceSupplier.MAX_DEVIATION_RELATIVE, getFieldEditorParent()));
