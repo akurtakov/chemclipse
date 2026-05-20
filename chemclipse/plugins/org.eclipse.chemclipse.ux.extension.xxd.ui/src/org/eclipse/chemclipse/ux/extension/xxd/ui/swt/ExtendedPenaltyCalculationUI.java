@@ -36,13 +36,12 @@ public class ExtendedPenaltyCalculationUI extends Composite implements IExtended
 	private static final String TOOLTIP_CALCULATION = "calculation details.";
 	private static final String IMAGE_CALCULATION = IApplicationImage.IMAGE_CALCULATE;
 
-	private Button buttonToolbarInfo;
+	private AtomicReference<Button> buttonToolbarInfo = new AtomicReference<>();
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
-	private Button buttonToolbarCalculation;
+	private AtomicReference<Button> buttonToolbarCalculation = new AtomicReference<>();
 	private AtomicReference<PenaltyCalculationUI> toolbarCalculation = new AtomicReference<>();
 	private AtomicReference<PenaltyCalculationChart> chartControl = new AtomicReference<>();
 
-	private final PeakDataSupport peakDataSupport = new PeakDataSupport();
 	private IPeak peak = null;
 
 	public ExtendedPenaltyCalculationUI(Composite parent, int style) {
@@ -84,8 +83,8 @@ public class ExtendedPenaltyCalculationUI extends Composite implements IExtended
 
 	private void initialize() {
 
-		enableToolbar(toolbarInfo, buttonToolbarInfo, IMAGE_INFO, TOOLTIP_INFO, true);
-		enableToolbar(toolbarCalculation, buttonToolbarCalculation, IMAGE_CALCULATION, TOOLTIP_CALCULATION, true);
+		enableToolbar(toolbarInfo, buttonToolbarInfo.get(), IMAGE_INFO, TOOLTIP_INFO, true);
+		enableToolbar(toolbarCalculation, buttonToolbarCalculation.get(), IMAGE_CALCULATION, TOOLTIP_CALCULATION, true);
 		applySettings();
 	}
 
@@ -97,9 +96,19 @@ public class ExtendedPenaltyCalculationUI extends Composite implements IExtended
 		composite.setLayoutData(gridData);
 		composite.setLayout(new GridLayout(3, false));
 
-		buttonToolbarInfo = createButtonToggleToolbar(composite, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO);
-		buttonToolbarCalculation = createButtonToggleToolbar(composite, toolbarCalculation, IMAGE_CALCULATION, TOOLTIP_CALCULATION);
+		createButtonInfo(composite);
+		createButtonCalculation(composite);
 		createButtonSettings(composite);
+	}
+
+	private void createButtonInfo(Composite parent) {
+
+		buttonToolbarInfo.set(createButtonToggleToolbar(parent, toolbarInfo, IMAGE_INFO, TOOLTIP_INFO));
+	}
+
+	private void createButtonCalculation(Composite parent) {
+
+		buttonToolbarCalculation.set(createButtonToggleToolbar(parent, toolbarCalculation, IMAGE_CALCULATION, TOOLTIP_CALCULATION));
 	}
 
 	private void createToolbarInfo(Composite parent) {
@@ -149,6 +158,7 @@ public class ExtendedPenaltyCalculationUI extends Composite implements IExtended
 
 	private void updateLabel() {
 
+		PeakDataSupport peakDataSupport = new PeakDataSupport();
 		toolbarInfo.get().setText(peakDataSupport.getPeakLabel(peak));
 	}
 

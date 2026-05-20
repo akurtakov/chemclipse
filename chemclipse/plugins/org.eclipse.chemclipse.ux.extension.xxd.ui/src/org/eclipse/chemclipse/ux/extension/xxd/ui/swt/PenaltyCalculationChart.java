@@ -245,7 +245,7 @@ public class PenaltyCalculationChart extends ChromatogramChart {
 		for(double value : series) {
 			seriesAdjusted[index++] = value;
 		}
-		seriesAdjusted[index + 1] = stop;
+		seriesAdjusted[index++] = stop;
 
 		return seriesAdjusted;
 	}
