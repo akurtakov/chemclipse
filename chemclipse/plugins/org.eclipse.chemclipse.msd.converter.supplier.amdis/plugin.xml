@@ -27,7 +27,6 @@
       </DatabaseSupplier>
       <DatabaseSupplier
             description="Reads NIST Text (FIN) mass spectra."
-            exportConverter="org.eclipse.chemclipse.msd.converter.supplier.amdis.converter.fin.DatabaseExportConverter"
             fileExtension=".FIN"
             filterName="NIST Text (*.FIN)"
             id="org.eclipse.chemclipse.msd.converter.supplier.amdis.massspectrum.fin"
