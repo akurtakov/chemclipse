@@ -271,7 +271,9 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static final String DEF_TARGET_IDENTIFER = "org.eclipse.chemclipse.xxd.identifier.supplier.pubchem.identifier";
 	public static final String P_SCAN_IDENTIFER = "scanIdentifier";
 	public static final String DEF_SCAN_IDENTIFER = "";
+	public static final String P_RESOLVE_DATABASE_UUID = "resolveDatabaseUUID";
 
+	public static final boolean DEF_RESOLVE_DATABASE_UUID = false;
 	public static final String P_SCAN_CHART_ENABLE_FIXED_RANGE_X = "scanChartEnableFixedRangeX";
 	public static final boolean DEF_SCAN_CHART_ENABLE_FIXED_RANGE_X = false;
 	public static final String P_SCAN_CHART_FIXED_RANGE_START_X = "scanChartFixedRangeStartX";
@@ -915,6 +917,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 		putDefault(P_ENABLE_MULTI_SUBTRACT, DEF_ENABLE_MULTI_SUBTRACT);
 		putDefault(P_TARGET_IDENTIFER, DEF_TARGET_IDENTIFER);
 		putDefault(P_SCAN_IDENTIFER, DEF_SCAN_IDENTIFER);
+		putDefault(P_RESOLVE_DATABASE_UUID, DEF_RESOLVE_DATABASE_UUID);
 
 		putDefault(P_SCAN_CHART_ENABLE_FIXED_RANGE_X, DEF_SCAN_CHART_ENABLE_FIXED_RANGE_X);
 		putDefault(P_SCAN_CHART_FIXED_RANGE_START_X, DEF_SCAN_CHART_FIXED_RANGE_START_X);
@@ -1398,5 +1401,10 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static int getHybridSearchMolWeightMax() {
 
 		return INSTANCE().getInteger(P_HYBRID_SEARCH_MOL_WEIGHT_MAX, DEF_HYBRID_SEARCH_MOL_WEIGHT_MAX);
+	}
+
+	public static boolean isResolveDatabaseUUID() {
+
+		return INSTANCE().getBoolean(P_RESOLVE_DATABASE_UUID, DEF_RESOLVE_DATABASE_UUID);
 	}
 }
