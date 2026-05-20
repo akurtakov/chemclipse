@@ -61,7 +61,6 @@
             fileExtension=".csv"
             filterName="CSV Mass Spectrum Peak List (*.csv)"
             id="org.eclipse.chemclipse.msd.converter.supplier.csv"
-            importConverter="org.eclipse.chemclipse.xxd.converter.supplier.csv.core.DatabaseImportConverter"
             importMagicNumberMatcher="org.eclipse.chemclipse.xxd.converter.supplier.csv.core.MagicNumberMatcher"
             isExportable="true"
             isImportable="false">

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -212,8 +212,7 @@ public class DatabaseConverter {
 	 */
 	private static IDatabaseImportConverter getDatabaseImportConverter(final String converterId) {
 
-		IConfigurationElement element;
-		element = getConfigurationElement(converterId);
+		IConfigurationElement element = getConfigurationElement(converterId);
 		IDatabaseImportConverter instance = null;
 		if(element != null) {
 			try {
@@ -234,8 +233,7 @@ public class DatabaseConverter {
 	 */
 	private static <T> IDatabaseExportConverter getDatabaseExportConverter(final String converterId) {
 
-		IConfigurationElement element;
-		element = getConfigurationElement(converterId);
+		IConfigurationElement element = getConfigurationElement(converterId);
 		IDatabaseExportConverter instance = null;
 		if(element != null) {
 			try {

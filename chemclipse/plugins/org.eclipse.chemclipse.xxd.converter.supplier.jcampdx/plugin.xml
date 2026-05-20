@@ -19,7 +19,6 @@
          point="org.eclipse.chemclipse.msd.converter.databaseSupplier">
       <DatabaseSupplier
             description="Reads and writes JCAMP-DX (JDX) library."
-            exportConverter="org.eclipse.chemclipse.msd.converter.supplier.jcampdx.converter.DatabaseExportConverter"
             fileExtension=".jdx"
             filterName="JCAMP-DX Library (*.jdx)"
             id="org.eclipse.chemclipse.msd.converter.supplier.jcampdx.library.jdx"
@@ -47,7 +46,6 @@
          point="org.eclipse.chemclipse.msd.converter.databaseSupplier">
       <DatabaseSupplier
             description="Reads JDL library."
-            exportConverter="org.eclipse.chemclipse.msd.converter.supplier.jcampdx.converter.DatabaseExportConverter"
             fileExtension=".jdl"
             filterName="JDL Library (*.jdl)"
             id="org.eclipse.chemclipse.msd.converter.supplier.jcampdx.library.jdl"
