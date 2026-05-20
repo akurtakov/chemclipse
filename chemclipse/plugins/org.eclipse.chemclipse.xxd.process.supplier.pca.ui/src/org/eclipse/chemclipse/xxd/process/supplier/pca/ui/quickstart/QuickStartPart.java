@@ -44,7 +44,7 @@ public class QuickStartPart {
 		 */
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		store.setDefault(WelcomeViewExtensionHandler.PREFERENCE_MAX_TILES, 3);
-		store.setDefault(WelcomeViewExtensionHandler.PREFERENCE_MIN_TILES, 1);
+		store.setDefault(WelcomeViewExtensionHandler.PREFERENCE_MIN_TILES, 0);
 
 		new WelcomeViewExtensionHandler(tileContainer, store, CreatePcaEvaluation.PCA_PERSPECTIVE);
 	}
