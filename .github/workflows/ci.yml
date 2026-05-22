@@ -41,4 +41,4 @@ jobs:
       env:
         MAVEN_ARGS: "--batch-mode --no-transfer-progress -Dstyle.color=always"
       run: |
-        mvn -f chemclipse/pom.xml -T 1C verify -Pci
+        mvn -f chemclipse/pom.xml -T 1C verify -Pci -Pjavadoc
