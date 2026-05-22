@@ -68,10 +68,10 @@ public class PeakMassSpectrum extends AbstractPeakMassSpectrum {
 	 * percentageIntensity of 125.0f will be provided, the total intensity of
 	 * the returned peak mass spectrum will be 45600.<br/>
 	 * Some examples:<br/>
-	 * 97.2% actual: 6514141.6f -&gt; 100% : 6701791.77f<br/>
-	 * 100% actual: 6514141.6f -&gt; 100% : 6514141.6f<br/>
-	 * 120% actual: 6514141.6f -&gt; 100% : 5428451.333f<br/>
-	 * 50% actual: 6514141.6f -&gt; 100% : 13028283.2f<br/>
+	 * 97.2% actual: 6514141.6f → 100% : 6701791.77f<br/>
+	 * 100% actual: 6514141.6f → 100% : 6514141.6f<br/>
+	 * 120% actual: 6514141.6f → 100% : 5428451.333f<br/>
+	 * 50% actual: 6514141.6f → 100% : 13028283.2f<br/>
 	 */
 	public PeakMassSpectrum(IScanMSD massSpectrum, float actualPercentageIntensity) throws IllegalArgumentException {
 

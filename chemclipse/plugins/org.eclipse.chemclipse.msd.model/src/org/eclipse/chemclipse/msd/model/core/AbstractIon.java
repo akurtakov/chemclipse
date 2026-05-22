@@ -133,12 +133,12 @@ public abstract class AbstractIon implements IIon {
 	 * E.g.:
 	 * <ul>
 	 * <li>ion = 28.78749204</li>
-	 * <li>precision 1 =&gt; 28.8</li>
-	 * <li>precision 2 =&gt; 28.79</li>
-	 * <li>precision 3 =&gt; 28.787</li>
-	 * <li>precision 4 =&gt; 28.7875</li>
-	 * <li>precision 5 =&gt; 28.78749</li>
-	 * <li>precision 6 =&gt; 28.787492</li>
+	 * <li>precision 1 ⇒ 28.8</li>
+	 * <li>precision 2 ⇒ 28.79</li>
+	 * <li>precision 3 ⇒ 28.787</li>
+	 * <li>precision 4 ⇒ 28.7875</li>
+	 * <li>precision 5 ⇒ 28.78749</li>
+	 * <li>precision 6 ⇒ 28.787492</li>
 	 * </ul>
 	 *
 	 * The precision of 6 is the maximum. If the precious is outward of

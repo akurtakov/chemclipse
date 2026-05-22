@@ -8,7 +8,7 @@
          These are two distinct processes in this software.
          <br/>
          <br/>
-         To learn more about using cheat sheets, click the help (?) button in the top right corner. 
+         To learn more about using cheat sheets, click the help (?) button in the top right corner.
       </description>
    </intro>
 
@@ -17,12 +17,12 @@
 		 dialog="false">
 		<description>
 			Switch to correct perspective if you haven't already.
-		</description>			
-		<subitem label="Select &quot;Window-&gt;Switch Perspective&quot; from the main menu and choose &quot;Data Analysis (Main)&quot; in order to open the general chromatography perspective" 
+		</description>
+		<subitem label="Select &quot;Window→Switch Perspective&quot; from the main menu and choose &quot;Data Analysis (Main)&quot; in order to open the general chromatography perspective"
         	     skip="false">
 		</subitem>
    </item>
-   
+
    <item title="Open File"
 		 dialog="true"
 		 skip="false">
@@ -32,7 +32,7 @@
 			<br/>
 			This example assumes you have a mass selective detector (MSD) but the procedure is similar for others.
 		</description>
-   </item> 
+   </item>
 
    <item title="Peak Detection"
          dialog="true"
@@ -40,11 +40,11 @@
       <description>
          To detect peaks in your chromatogram with MSD signals:
       </description>
-      <subitem label="Right-click in the chromatogram and select &quot;Peak Detector-&gt;First Derivative&quot;." 
+      <subitem label="Right-click in the chromatogram and select &quot;Peak Detector→First Derivative&quot;."
                skip="false">
          	   <command serialization="PeakDetectorMSD.org.eclipse.chemclipse.chromatogram.msd.peak.detector.supplier.firstderivative"/>
       </subitem>
-      <subitem label="You can use (default) system options for this example. Click &quot;Complete&quot; to execute the operation." 
+      <subitem label="You can use (default) system options for this example. Click &quot;Complete&quot; to execute the operation."
                skip="false">
       </subitem>
    </item>
@@ -55,11 +55,11 @@
       <description>
          To get the area below the peaks:
       </description>
-      <subitem label="Right-click in the chromatogram and select &quot;Peak Integrator-&gt;Peak Integrator Trapezoid&quot;." 
+      <subitem label="Right-click in the chromatogram and select &quot;Peak Integrator→Peak Integrator Trapezoid&quot;."
                skip="false">
          	   <command serialization="org.eclipse.chemclipse.chromatogram.xxd.integrator.supplier.trapezoid.peakIntegrator"/>
       </subitem>
-      <subitem label="You can use (default) system options for this example. Click &quot;Complete&quot; to execute the operation." 
+      <subitem label="You can use (default) system options for this example. Click &quot;Complete&quot; to execute the operation."
                skip="false">
       </subitem>
    </item>
@@ -70,7 +70,7 @@
       <description>
          To display the integrated peaks:
       </description>
-      <subitem label="In the main toolbar choose &quot;Peaks-&gt;Peak/Scan List&quot;." 
+      <subitem label="In the main toolbar choose &quot;Peaks→Peak/Scan List&quot;."
                skip="false">
       </subitem>
    </item>
@@ -80,7 +80,7 @@
 		 skip="false">
 		<description>
 			Notice how both peak detection and integration offer multiple choices. You can recombine and compare them individually.
-		</description>			
+		</description>
    </item>
 
 </cheatsheet>

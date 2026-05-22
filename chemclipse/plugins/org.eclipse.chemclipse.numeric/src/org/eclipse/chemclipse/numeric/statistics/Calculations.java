@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - add method for float values
@@ -610,8 +610,8 @@ public class Calculations {
 
 	/**
 	 * Returns the reduced window length of the given array. The window must be
-	 * &gt;= 1 and &lt;= values.length. If values == null =&gt; 1 will be returned.<br/>
-	 * If window &lt; 1 || window &gt; values.length =&gt; values.length will be
+	 * &gt;= 1 and &lt;= values.length. If values == null ⇒ 1 will be returned.<br/>
+	 * If window &lt; 1 || window &gt; values.length ⇒ values.length will be
 	 * returned.
 	 */
 	public static int getWindowReducedLength(double[] values, int window) {

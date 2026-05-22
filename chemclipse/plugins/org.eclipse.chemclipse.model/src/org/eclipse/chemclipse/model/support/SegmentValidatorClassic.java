@@ -23,7 +23,7 @@ public class SegmentValidatorClassic implements ISegmentValidator {
 	 * E.g.: If the segment has 13 scans. There must
 	 * be at least 6 crossings for the segment to be accepted.<br/>
 	 * length =
-	 * 13 - 1 =&gt; 12<br/>
+	 * 13 - 1 ⇒ 12<br/>
 	 * length / 2 = 6<br/>
 	 * With crossings &lt;= 6 there must
 	 * be at least 7 crossings.
