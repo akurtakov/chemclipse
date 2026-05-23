@@ -111,7 +111,7 @@ public class PcaUtils {
 	}
 
 	/**
-	 * @return all groupName {@link IResultMVA#getOplsTargetGroupName()}
+	 * @return all group names from the provided results
 	 */
 	public static Set<String> getGroupNames(List<IResultMVA> pcaResults) {
 
@@ -281,7 +281,7 @@ public class PcaUtils {
 	}
 
 	/**
-	 * sort list by name {@link ISample#getName()}
+	 * sort list by name {@link ISample#getSampleName()}
 	 */
 	public static <S extends ISample> void sortSampleListByName(List<S> samples) {
 
