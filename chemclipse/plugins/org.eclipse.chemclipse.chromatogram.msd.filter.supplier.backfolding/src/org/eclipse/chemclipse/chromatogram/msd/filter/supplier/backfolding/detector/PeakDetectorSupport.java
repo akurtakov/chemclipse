@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -49,10 +49,6 @@ public class PeakDetectorSupport {
 
 	/**
 	 * Returns a {@link IBackfoldingDetectorSlopes} instance.
-	 * 
-	 * @param totalIonSignals
-	 * @param peakDetectorSettings
-	 * @return {@link IBackfoldingDetectorSlopes}
 	 */
 	public static IBackfoldingDetectorSlopes getBackfoldingSlopes(ITotalScanSignals totalIonSignals, IPeakDetectorSettingsMSD peakDetectorSettings) {
 
@@ -62,10 +58,6 @@ public class PeakDetectorSupport {
 
 	/**
 	 * Returns the raw peaks detected in the slopes instance.
-	 * 
-	 * @param slopes
-	 * @param peakDetectorSettings
-	 * @return List<IRawPeak>
 	 */
 	public static List<IRawPeak> getRawPeaks(IBackfoldingDetectorSlopes slopes, IPeakDetectorSettingsMSD peakDetectorSettings) {
 
@@ -106,9 +98,6 @@ public class PeakDetectorSupport {
 
 	/**
 	 * Initializes the slope values.
-	 * 
-	 * @param chromatogramSelection
-	 * @return {@link IFirstDerivativeDetectorSlopes}
 	 */
 	private static IBackfoldingDetectorSlopes getBackfoldingSlopes(ITotalScanSignals totalIonSignals) {
 
@@ -141,8 +130,6 @@ public class PeakDetectorSupport {
 
 	/**
 	 * Marks the peaks with start, stop and max.
-	 * 
-	 * @param slopeList
 	 */
 	private static List<IRawPeak> getRawPeaks(IBackfoldingDetectorSlopes slopes) {
 
@@ -195,9 +182,6 @@ public class PeakDetectorSupport {
 	/**
 	 * Checks if the peak is a valid raw peak.<br/>
 	 * For example if it contains not less than the needed amount of scans.
-	 * 
-	 * @param rawPeak
-	 * @return boolean
 	 */
 	private static boolean isValidRawPeak(IRawPeak rawPeak) {
 
@@ -211,11 +195,6 @@ public class PeakDetectorSupport {
 
 	/**
 	 * Detects the peak start.
-	 * 
-	 * @param slope
-	 * @param startScan
-	 * @param scanOffset
-	 * @return int
 	 */
 	private static int detectPeakStart(IBackfoldingDetectorSlopes slopes, int startScan, int scanOffset) {
 
@@ -245,11 +224,6 @@ public class PeakDetectorSupport {
 	/**
 	 * Detects the peak maxima.<br/>
 	 * The peak start and stops needs to be detected previously.
-	 * 
-	 * @param slope
-	 * @param startScan
-	 * @param scanOffset
-	 * @return int
 	 */
 	private static int detectPeakMaximum(IBackfoldingDetectorSlopes slopes, int startScan, int scanOffset) {
 
@@ -269,11 +243,6 @@ public class PeakDetectorSupport {
 
 	/**
 	 * Detects the peak stops.
-	 * 
-	 * @param slope
-	 * @param startScan
-	 * @param scanOffset
-	 * @return int
 	 */
 	private static int detectPeakStop(IBackfoldingDetectorSlopes slopes, int startScan, int scanOffset) {
 

@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Alexander Kerner - implementation
@@ -27,7 +27,6 @@ import org.eclipse.chemclipse.chromatogram.msd.peak.detector.settings.IPeakDetec
 import org.eclipse.chemclipse.chromatogram.msd.peak.detector.supplier.firstderivative.Activator;
 import org.eclipse.chemclipse.chromatogram.msd.peak.detector.supplier.firstderivative.settings.PeakDetectorSettingsMSD;
 import org.eclipse.chemclipse.chromatogram.peak.detector.core.FilterMode;
-import org.eclipse.chemclipse.chromatogram.peak.detector.exceptions.ValueMustNotBeNullException;
 import org.eclipse.chemclipse.chromatogram.peak.detector.model.Threshold;
 import org.eclipse.chemclipse.chromatogram.peak.detector.support.IRawPeak;
 import org.eclipse.chemclipse.chromatogram.xxd.calculator.core.noise.NoiseChromatogramSupport;
@@ -117,9 +116,6 @@ public class PeakDetectorMSD extends BasePeakDetector implements IPeakDetectorMS
 	 * Detect the peaks in the selection.
 	 * This method does not add the peaks to the chromatogram.
 	 * It needs to be handled separately.
-	 * 
-	 * @param chromatogramSelection
-	 * @throws ValueMustNotBeNullException
 	 */
 	public List<IChromatogramPeakMSD> detectPeaks(IChromatogramSelectionMSD chromatogramSelection, PeakDetectorSettingsMSD peakDetectorSettings, IProgressMonitor monitor) {
 
@@ -206,7 +202,7 @@ public class PeakDetectorMSD extends BasePeakDetector implements IPeakDetectorMS
 	/**
 	 * Builds from each raw peak a valid {@link IChromatogramPeakMSD} and adds it to the
 	 * chromatogram.
-	 * 
+	 *
 	 * @param rawPeaks
 	 * @param chromatogram
 	 * @return List<IChromatogramPeakCSD>
@@ -262,7 +258,7 @@ public class PeakDetectorMSD extends BasePeakDetector implements IPeakDetectorMS
 
 	/**
 	 * Initializes the slope values.
-	 * 
+	 *
 	 * @param chromatogramSelection
 	 * @param windowSize
 	 * @return {@link IFirstDerivativeDetectorSlopes}
@@ -336,7 +332,7 @@ public class PeakDetectorMSD extends BasePeakDetector implements IPeakDetectorMS
 	/**
 	 * Checks that the peak is not null and that it matches
 	 * the min S/N requirements.
-	 * 
+	 *
 	 * @param peak
 	 * @return boolean
 	 */

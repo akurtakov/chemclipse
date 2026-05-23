@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Alexander Stark - initial API and implementation
  * Philip Wenig - refactoring ILabel support
@@ -17,9 +17,11 @@ import org.eclipse.chemclipse.support.text.ILabel;
 
 /**
  * Describes the criterion to select the peak area:
+ * <ul>
  * <li>{@link #AREA_LESS_THAN_MINIMUM}</li>
  * <li>{@link #AREA_GREATER_THAN_MAXIMUM}</li>
  * <li>{@link #AREA_NOT_WITHIN_RANGE}</li>
+ * </ul>
  */
 public enum AreaCriterion implements ILabel {
 	AREA_LESS_THAN_MINIMUM("Area < Minimum"), // Select peak areas smaller than the defined minimum
