@@ -18,7 +18,6 @@ import org.eclipse.chemclipse.chromatogram.xxd.report.core.IChromatogramReportSu
 import org.eclipse.chemclipse.chromatogram.xxd.report.exceptions.NoReportSupplierAvailableException;
 import org.eclipse.chemclipse.chromatogram.xxd.report.model.ChromatogramReportSupplierEntry;
 import org.eclipse.chemclipse.chromatogram.xxd.report.model.IChromatogramReportSupplierEntry;
-import org.eclipse.chemclipse.converter.exceptions.NoConverterAvailableException;
 import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -50,9 +49,6 @@ public class ChromatogramReportEntriesWizardPage extends WizardPage {
 	private Button buttonSelectFileOrFolder;
 	private Label label;
 
-	/**
-	 * @param pageName
-	 */
 	protected ChromatogramReportEntriesWizardPage(String pageName) {
 
 		super(pageName);
@@ -62,9 +58,6 @@ public class ChromatogramReportEntriesWizardPage extends WizardPage {
 
 	/**
 	 * Returns the report supplier id.
-	 *
-	 * @return String
-	 * @throws NoConverterAvailableException
 	 */
 	public IChromatogramReportSupplierEntry getChromatogramReportEntry() throws NoReportSupplierAvailableException {
 

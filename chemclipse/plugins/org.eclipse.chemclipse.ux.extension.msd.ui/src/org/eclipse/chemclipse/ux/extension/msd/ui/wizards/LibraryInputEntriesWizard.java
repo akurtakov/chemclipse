@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -50,8 +50,6 @@ public class LibraryInputEntriesWizard extends Wizard {
 
 	/**
 	 * Returns the selected libraries.
-	 * 
-	 * @return List<String>
 	 */
 	public List<String> getSelectedLibraries() {
 

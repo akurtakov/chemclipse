@@ -30,8 +30,8 @@ import jakarta.inject.Inject;
 /**
  * fragment.e4xmi
  *
- * @Evaluate is used by the "Imperative Expression"
- * @Execute is used by "Direct Menu Item"
+ * Evaluate is used by the "Imperative Expression"
+ * Execute is used by "Direct Menu Item"
  *
  */
 public abstract class AbstractPartHandler implements IPartHandler {
