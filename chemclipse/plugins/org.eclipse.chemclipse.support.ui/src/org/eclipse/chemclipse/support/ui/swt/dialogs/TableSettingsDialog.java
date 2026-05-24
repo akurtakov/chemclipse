@@ -54,7 +54,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
-public class ClipboardSettingsDialog extends Dialog {
+public class TableSettingsDialog extends Dialog {
 
 	public static final int DEFAULT_WIDTH = 400;
 	public static final int DEFAULT_HEIGHT = 600;
@@ -87,7 +87,7 @@ public class ClipboardSettingsDialog extends Dialog {
 		}
 	}
 
-	public ClipboardSettingsDialog(Shell shell) {
+	public TableSettingsDialog(Shell shell) {
 
 		super(shell);
 	}
@@ -129,7 +129,7 @@ public class ClipboardSettingsDialog extends Dialog {
 	protected void configureShell(Shell shell) {
 
 		super.configureShell(shell);
-		shell.setText(SupportMessages.clipboardSettings);
+		shell.setText(SupportMessages.tableSettings);
 	}
 
 	@Override
@@ -235,7 +235,7 @@ public class ClipboardSettingsDialog extends Dialog {
 		composite.setLayout(new GridLayout(3, false));
 
 		Label visibleLabel = new Label(composite, SWT.NONE);
-		visibleLabel.setText(SupportMessages.visible);
+		visibleLabel.setText(SupportMessages.columnVisibility);
 
 		createButtonSelectAll(composite, SupportMessages.selectAll, () -> {
 			for(ColumnEntry entry : columnEntries) {

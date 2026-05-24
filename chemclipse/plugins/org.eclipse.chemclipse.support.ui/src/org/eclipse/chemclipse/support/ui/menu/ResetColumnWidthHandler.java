@@ -20,7 +20,7 @@ public class ResetColumnWidthHandler extends AbstractTableMenuEntry {
 	@Override
 	public String getCategory() {
 
-		return SupportMessages.columns;
+		return SupportMessages.settings;
 	}
 
 	@Override

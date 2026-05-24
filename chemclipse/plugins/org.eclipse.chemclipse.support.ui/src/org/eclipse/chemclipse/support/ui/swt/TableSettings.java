@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2025 Lablicate GmbH.
+ * Copyright (c) 2017, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -18,13 +18,13 @@ import java.util.Set;
 
 import org.eclipse.chemclipse.support.ui.events.CopyToClipboardEvent;
 import org.eclipse.chemclipse.support.ui.events.IKeyEventProcessor;
-import org.eclipse.chemclipse.support.ui.menu.ClipboardSettingsHandler;
 import org.eclipse.chemclipse.support.ui.menu.CopyClipboardHandler;
 import org.eclipse.chemclipse.support.ui.menu.DeselectAllHandler;
 import org.eclipse.chemclipse.support.ui.menu.ITableMenuEntry;
 import org.eclipse.chemclipse.support.ui.menu.ResetColumnOrderHandler;
 import org.eclipse.chemclipse.support.ui.menu.ResetColumnWidthHandler;
 import org.eclipse.chemclipse.support.ui.menu.SelectAllHandler;
+import org.eclipse.chemclipse.support.ui.menu.TableSettingsHandler;
 
 public class TableSettings implements ITableSettings {
 
@@ -41,7 +41,7 @@ public class TableSettings implements ITableSettings {
 		menuEntries.add(new DeselectAllHandler());
 		menuEntries.add(new ResetColumnOrderHandler());
 		menuEntries.add(new ResetColumnWidthHandler());
-		menuEntries.add(new ClipboardSettingsHandler());
+		menuEntries.add(new TableSettingsHandler());
 		menuEntries.add(new CopyClipboardHandler());
 		/*
 		 * Default key processors
