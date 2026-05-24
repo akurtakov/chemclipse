@@ -27,14 +27,21 @@ import org.eclipse.chemclipse.support.ui.l10n.SupportMessages;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.support.CopyColumnsSupport;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
+import org.eclipse.chemclipse.support.ui.swt.TableSupport;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jface.viewers.CheckboxCellEditor;
+import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -44,19 +51,41 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 
 public class ClipboardSettingsDialog extends Dialog {
 
-	public static final int DEFAULT_WIDTH = 300;
-	public static final int DEFAULT_HEIGHT = 500;
+	public static final int DEFAULT_WIDTH = 400;
+	public static final int DEFAULT_HEIGHT = 600;
 
 	private ExtendedTableViewer extendedTableViewer;
-	private List<Button> columnCheckBoxes = new ArrayList<>();
+	private TableViewer columnTableViewer;
+	private List<ColumnEntry> columnEntries = new ArrayList<>();
 
 	private boolean copyHeader = true;
 	private ValueDelimiter valueDelimiter = ValueDelimiter.TAB;
 	private Set<Integer> columnSelections = new HashSet<>();
+
+	private static class ColumnEntry {
+
+		final String name;
+		final String tooltip;
+		final int index;
+		boolean selected;
+		boolean visible;
+		int width;
+
+		ColumnEntry(String name, String tooltip, int index, boolean selected, boolean visible, int width) {
+
+			this.name = name;
+			this.tooltip = tooltip;
+			this.index = index;
+			this.selected = selected;
+			this.visible = visible;
+			this.width = width;
+		}
+	}
 
 	public ClipboardSettingsDialog(Shell shell) {
 
@@ -144,26 +173,89 @@ public class ClipboardSettingsDialog extends Dialog {
 
 	private void createSettingsSection(Composite parent) {
 
-		createButtonCopyHeader(parent);
 		createToolbarMain(parent);
+		createToolbarColumns(parent);
 		createTableColumnsSection(parent);
-	}
-
-	private void createButtonCopyHeader(Composite parent) {
-
-		createButtonCheck(parent, SupportMessages.copyHeaderToClipboard, SupportMessages.copyHeaderToolTip, copyHeader, selection -> copyHeader = selection);
 	}
 
 	private void createToolbarMain(Composite parent) {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		composite.setLayout(new GridLayout(4, false));
+		composite.setLayout(new GridLayout(2, false));
 
-		createLabel(composite, SupportMessages.tableColumns);
-		createButtonSelectAll(composite);
-		createButtonDeselectAll(composite);
+		createButtonCheck(composite, SupportMessages.copyHeaderToClipboard, SupportMessages.copyHeaderToolTip, copyHeader, selection -> copyHeader = selection);
 		createComboViewerDelimiter(composite);
+	}
+
+	private void createToolbarColumns(Composite parent) {
+
+		Composite composite = new Composite(parent, SWT.NONE);
+		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		composite.setLayout(new GridLayout(2, true));
+
+		createSectionExport(composite);
+		createSectionVisible(composite);
+	}
+
+	private void createSectionExport(Composite parent) {
+
+		Composite composite = new Composite(parent, SWT.NONE);
+		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		composite.setLayout(new GridLayout(3, false));
+
+		Label exportLabel = new Label(composite, SWT.NONE);
+		exportLabel.setText(SupportMessages.export);
+
+		createButtonSelectAll(composite, SupportMessages.selectAll, () -> {
+			for(ColumnEntry entry : columnEntries) {
+				entry.selected = true;
+				columnSelections.add(entry.index);
+			}
+			if(columnTableViewer != null) {
+				columnTableViewer.refresh();
+			}
+		});
+
+		createButtonDeselectAll(composite, SupportMessages.deselectAll, () -> {
+			for(ColumnEntry entry : columnEntries) {
+				entry.selected = false;
+			}
+			columnSelections.clear();
+			if(columnTableViewer != null) {
+				columnTableViewer.refresh();
+			}
+		});
+	}
+
+	private void createSectionVisible(Composite parent) {
+
+		Composite composite = new Composite(parent, SWT.NONE);
+		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		composite.setLayout(new GridLayout(3, false));
+
+		Label visibleLabel = new Label(composite, SWT.NONE);
+		visibleLabel.setText(SupportMessages.visible);
+
+		createButtonSelectAll(composite, SupportMessages.selectAll, () -> {
+			for(ColumnEntry entry : columnEntries) {
+				entry.visible = true;
+			}
+			applyColumnWidths();
+			if(columnTableViewer != null) {
+				columnTableViewer.refresh();
+			}
+		});
+
+		createButtonDeselectAll(composite, SupportMessages.deselectAll, () -> {
+			for(ColumnEntry entry : columnEntries) {
+				entry.visible = false;
+			}
+			applyColumnWidths();
+			if(columnTableViewer != null) {
+				columnTableViewer.refresh();
+			}
+		});
 	}
 
 	private void createTableColumnsSection(Composite parent) {
@@ -171,33 +263,184 @@ public class ClipboardSettingsDialog extends Dialog {
 		List<TableViewerColumn> tableViewerColumns = extendedTableViewer.getTableViewerColumns();
 		int numberColumns = tableViewerColumns.size();
 
+		columnEntries.clear();
 		for(int i = 0; i < numberColumns; i++) {
-			/*
-			 * Columns
-			 */
 			TableViewerColumn tableViewerColumn = tableViewerColumns.get(i);
 			TableColumn tableColumn = tableViewerColumn.getColumn();
-			String title = tableColumn.getText();
-			String tooltip = tableColumn.getToolTipText();
-			/*
-			 * Selection
-			 */
-			final int index = i;
 			boolean selected = isColumnSelected(i);
 			if(selected) {
 				columnSelections.add(i);
 			}
-
-			Button button = createButtonCheck(parent, title, tooltip, selected, selection -> {
-
-				if(selection) {
-					columnSelections.add(index);
-				} else {
-					columnSelections.remove(index);
-				}
-			});
-			columnCheckBoxes.add(button);
+			int columnWidth = tableColumn.getWidth();
+			boolean visible = columnWidth > 0;
+			int savedWidth = visible ? columnWidth : 100;
+			columnEntries.add(new ColumnEntry(tableColumn.getText(), tableColumn.getToolTipText(), i, selected, visible, savedWidth));
 		}
+
+		columnTableViewer = new TableViewer(parent, SWT.BORDER | SWT.FULL_SELECTION | SWT.V_SCROLL | SWT.H_SCROLL);
+		Table table = columnTableViewer.getTable();
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		table.setLayoutData(new GridData(GridData.FILL_BOTH));
+
+		TableViewerColumn columnName = new TableViewerColumn(columnTableViewer, SWT.NONE);
+		columnName.getColumn().setText(SupportMessages.columns);
+		columnName.getColumn().setWidth(200);
+		columnName.setLabelProvider(new ColumnLabelProvider() {
+
+			@Override
+			public String getText(Object element) {
+
+				if(element instanceof ColumnEntry entry) {
+					return entry.name;
+				}
+				return "";
+			}
+
+			@Override
+			public String getToolTipText(Object element) {
+
+				if(element instanceof ColumnEntry entry) {
+					return entry.tooltip;
+				}
+				return "";
+			}
+		});
+
+		TableViewerColumn columnExport = new TableViewerColumn(columnTableViewer, SWT.CENTER);
+		columnExport.getColumn().setText(SupportMessages.export);
+		columnExport.getColumn().setWidth(80);
+		columnExport.setLabelProvider(new ColumnLabelProvider() {
+
+			@Override
+			public String getText(Object element) {
+
+				return "";
+			}
+
+			@Override
+			public Image getImage(Object element) {
+
+				if(element instanceof ColumnEntry entry) {
+					String fileName = entry.selected ? IApplicationImage.IMAGE_SELECTED : IApplicationImage.IMAGE_DESELECTED;
+					return ApplicationImageFactory.getInstance().getImage(fileName, IApplicationImageProvider.SIZE_16x16);
+				}
+				return null;
+			}
+		});
+		columnExport.setEditingSupport(new EditingSupport(columnTableViewer) {
+
+			@Override
+			protected CellEditor getCellEditor(Object element) {
+
+				return new CheckboxCellEditor(table);
+			}
+
+			@Override
+			protected boolean canEdit(Object element) {
+
+				return true;
+			}
+
+			@Override
+			protected Object getValue(Object element) {
+
+				if(element instanceof ColumnEntry entry) {
+					return entry.selected;
+				}
+				return false;
+			}
+
+			@Override
+			protected void setValue(Object element, Object value) {
+
+				if(element instanceof ColumnEntry entry) {
+					entry.selected = Boolean.TRUE.equals(value);
+					if(entry.selected) {
+						columnSelections.add(entry.index);
+					} else {
+						columnSelections.remove(entry.index);
+					}
+					columnTableViewer.refresh();
+				}
+			}
+		});
+
+		TableViewerColumn columnVisible = new TableViewerColumn(columnTableViewer, SWT.CENTER);
+		columnVisible.getColumn().setText(SupportMessages.visible);
+		columnVisible.getColumn().setWidth(80);
+		columnVisible.setLabelProvider(new ColumnLabelProvider() {
+
+			@Override
+			public String getText(Object element) {
+
+				return "";
+			}
+
+			@Override
+			public Image getImage(Object element) {
+
+				if(element instanceof ColumnEntry entry) {
+					String fileName = entry.visible ? IApplicationImage.IMAGE_SELECTED : IApplicationImage.IMAGE_DESELECTED;
+					return ApplicationImageFactory.getInstance().getImage(fileName, IApplicationImageProvider.SIZE_16x16);
+				}
+				return null;
+			}
+		});
+		columnVisible.setEditingSupport(new EditingSupport(columnTableViewer) {
+
+			@Override
+			protected CellEditor getCellEditor(Object element) {
+
+				return new CheckboxCellEditor(table);
+			}
+
+			@Override
+			protected boolean canEdit(Object element) {
+
+				return true;
+			}
+
+			@Override
+			protected Object getValue(Object element) {
+
+				if(element instanceof ColumnEntry entry) {
+					return entry.visible;
+				}
+				return false;
+			}
+
+			@Override
+			protected void setValue(Object element, Object value) {
+
+				if(element instanceof ColumnEntry entry) {
+					entry.visible = Boolean.TRUE.equals(value);
+					applyColumnWidths();
+					columnTableViewer.refresh();
+				}
+			}
+		});
+
+		columnTableViewer.setContentProvider(ArrayContentProvider.getInstance());
+		columnTableViewer.setInput(columnEntries);
+	}
+
+	private void applyColumnWidths() {
+
+		List<TableViewerColumn> viewerColumns = extendedTableViewer.getTableViewerColumns();
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < columnEntries.size(); i++) {
+			if(i > 0) {
+				sb.append(" ");
+			}
+			ColumnEntry entry = columnEntries.get(i);
+			sb.append(entry.visible ? entry.width : 0);
+		}
+		for(int i = columnEntries.size(); i < viewerColumns.size(); i++) {
+			sb.append(" ");
+			sb.append(viewerColumns.get(i).getColumn().getWidth());
+		}
+		TableSupport.setColumnWidth(extendedTableViewer.getTable(), sb.toString());
 	}
 
 	private boolean isColumnSelected(int i) {
@@ -245,45 +488,36 @@ public class ClipboardSettingsDialog extends Dialog {
 		return label;
 	}
 
-	private Button createButtonSelectAll(Composite parent) {
+	private Button createButtonSelectAll(Composite parent, String tooltip, Runnable action) {
 
 		Button button = new Button(parent, SWT.PUSH);
-		button.setText("");
-		button.setToolTipText(SupportMessages.selectAll);
+		button.setToolTipText(tooltip);
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CHECK_ALL, IApplicationImageProvider.SIZE_16x16));
-		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				int numberColumns = getNumberColumns();
-				for(int i = 0; i < numberColumns; i++) {
-					columnSelections.add(i);
-				}
-				updateButtons(true);
+				action.run();
 			}
 		});
 
 		return button;
 	}
 
-	private Button createButtonDeselectAll(Composite parent) {
+	private Button createButtonDeselectAll(Composite parent, String tooltip, Runnable action) {
 
 		Button button = new Button(parent, SWT.PUSH);
-		button.setText("");
-		button.setToolTipText(SupportMessages.deselectAll);
+		button.setToolTipText(tooltip);
 		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_UNCHECK_ALL, IApplicationImageProvider.SIZE_16x16));
-		button.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				columnSelections.clear();
-				updateButtons(false);
+				action.run();
 			}
 		});
 
@@ -324,13 +558,6 @@ public class ClipboardSettingsDialog extends Dialog {
 		comboViewer.setSelection(new StructuredSelection(valueDelimiter));
 
 		return comboViewer;
-	}
-
-	private void updateButtons(boolean selected) {
-
-		for(Button button : columnCheckBoxes) {
-			button.setSelection(selected);
-		}
 	}
 
 	private int getNumberColumns() {
