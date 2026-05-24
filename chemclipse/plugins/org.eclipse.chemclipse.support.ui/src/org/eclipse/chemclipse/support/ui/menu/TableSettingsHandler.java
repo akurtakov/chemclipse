@@ -14,33 +14,33 @@ package org.eclipse.chemclipse.support.ui.menu;
 
 import org.eclipse.chemclipse.support.ui.l10n.SupportMessages;
 import org.eclipse.chemclipse.support.ui.swt.ExtendedTableViewer;
-import org.eclipse.chemclipse.support.ui.swt.dialogs.ClipboardSettingsDialog;
+import org.eclipse.chemclipse.support.ui.swt.dialogs.TableSettingsDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
 
-public class ClipboardSettingsHandler extends AbstractTableMenuEntry {
+public class TableSettingsHandler extends AbstractTableMenuEntry {
 
 	@Override
 	public String getCategory() {
 
-		return SupportMessages.exportTableSelection;
+		return SupportMessages.settings;
 	}
 
 	@Override
 	public String getName() {
 
-		return SupportMessages.clipboardSettings;
+		return SupportMessages.tableSettings;
 	}
 
 	@Override
 	public void execute(ExtendedTableViewer extendedTableViewer) {
 
-		ClipboardSettingsDialog clipboardSettingsDialog = new ClipboardSettingsDialog(Display.getDefault().getActiveShell());
-		clipboardSettingsDialog.setExtendedTableViewer(extendedTableViewer);
-		if(clipboardSettingsDialog.open() == Window.OK) {
-			extendedTableViewer.setCopyHeaderToClipboard(clipboardSettingsDialog.isCopyHeader());
-			extendedTableViewer.setCopyValueDelimiterClipboard(clipboardSettingsDialog.getValueDelimiter());
-			extendedTableViewer.setCopyColumnsToClipboard(clipboardSettingsDialog.getColumnsSelection());
+		TableSettingsDialog tableSettingsDialog = new TableSettingsDialog(Display.getDefault().getActiveShell());
+		tableSettingsDialog.setExtendedTableViewer(extendedTableViewer);
+		if(tableSettingsDialog.open() == Window.OK) {
+			extendedTableViewer.setCopyHeaderToClipboard(tableSettingsDialog.isCopyHeader());
+			extendedTableViewer.setCopyValueDelimiterClipboard(tableSettingsDialog.getValueDelimiter());
+			extendedTableViewer.setCopyColumnsToClipboard(tableSettingsDialog.getColumnsSelection());
 		}
 	}
 }

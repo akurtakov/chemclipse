@@ -24,7 +24,7 @@ public class SupportMessages extends NLS {
 	public static String clear;
 	public static String clipboardTableDefaultSorting;
 	public static String copyClipboard;
-	public static String clipboardSettings;
+	public static String tableSettings;
 	public static String copyHeaderToClipboard;
 	public static String copyHeaderToolTip;
 	public static String valueDelimiterToolTip;
@@ -69,6 +69,7 @@ public class SupportMessages extends NLS {
 	public static String wavelengthValueAlreadyExists;
 	public static String standardWavelengthRanges;
 	public static String enterWavelength;
+	public static String columnVisibility;
 
 	static {
 		NLS.initializeMessages("org.eclipse.chemclipse.support.ui.l10n.messages", SupportMessages.class); //$NON-NLS-1$
