@@ -190,10 +190,6 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 			 * Set the columns.
 			 */
 			for(int i = 0; i < titles.length; i++) {
-				/*
-				 * Column sort.
-				 */
-				final int index = i;
 				final TableViewerColumn tableViewerColumn = createTableColumn(titles[i], bounds[i]);
 				final TableColumn tableColumn = tableViewerColumn.getColumn();
 
@@ -202,7 +198,7 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 
-						sortColumn(table, index, tableColumn);
+						sortColumn(table, tableColumn);
 					}
 				});
 
@@ -469,6 +465,20 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 		updateColumnOrderAndWith();
 
 		return tableViewerColumn;
+	}
+
+	protected void sortColumn(Table table, final TableColumn tableColumn) {
+
+		int index = -1;
+		for(int i = 0; i < tableViewerColumns.size(); i++) {
+			if(tableViewerColumns.get(i).getColumn() == tableColumn) {
+				index = i;
+				break;
+			}
+		}
+		if(index >= 0) {
+			sortColumn(table, index, tableColumn);
+		}
 	}
 
 	protected void sortColumn(Table table, final int index, final TableColumn tableColumn) {
