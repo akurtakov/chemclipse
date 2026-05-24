@@ -77,6 +77,7 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 	private final Set<KeyListener> userDefinedKeyListeners = new HashSet<>();
 	private final List<IColumnMoveListener> columnMoveListeners = new ArrayList<>();
 	private boolean editEnabled = true;
+	private int[] defaultColumnWidths = new int[0];
 
 	private boolean copyHeaderToClipboard = PreferenceSupplier.DEF_CLIPBOARD_COPY_HEADER;
 	private ValueDelimiter copyValueDelimiterClipboard = ValueDelimiter.TAB;
@@ -103,17 +104,29 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 	@Override
 	public void resetColumnOrder() {
 
-		String columnOrder = PreferenceSupplier.DEF_COLUMN_ORDER;
-		TableSupport.setColumnOrder(getTable(), columnOrder);
-		PreferenceSupplier.setColumnOrder(getPreferenceName(PreferenceSupplier.P_COLUMN_ORDER), columnOrder);
+		PreferenceSupplier.setColumnOrder(getPreferenceName(PreferenceSupplier.P_COLUMN_ORDER), PreferenceSupplier.DEF_COLUMN_ORDER);
+		Table table = getTable();
+		int columnCount = table.getColumnCount();
+		if(columnCount > 0) {
+			int[] order = new int[columnCount];
+			for(int i = 0; i < columnCount; i++) {
+				order[i] = i;
+			}
+			table.setColumnOrder(order);
+		}
 	}
 
 	@Override
 	public void resetColumnWidth() {
 
-		String columnWidth = PreferenceSupplier.DEF_COLUMN_WIDTH;
-		TableSupport.setColumnWidth(getTable(), columnWidth);
-		PreferenceSupplier.setColumnWidth(getPreferenceName(PreferenceSupplier.P_COLUMN_WIDTH), columnWidth);
+		PreferenceSupplier.setColumnWidth(getPreferenceName(PreferenceSupplier.P_COLUMN_WIDTH), PreferenceSupplier.DEF_COLUMN_WIDTH);
+		Table table = getTable();
+		TableColumn[] columns = table.getColumns();
+		if(columns.length == defaultColumnWidths.length) {
+			for(int i = 0; i < columns.length; i++) {
+				columns[i].setWidth(defaultColumnWidths[i]);
+			}
+		}
 	}
 
 	public void setControlListener(ControlListener controlListener) {
@@ -155,6 +168,7 @@ public class ExtendedTableViewer extends TableViewer implements IExtendedTableVi
 	@Override
 	public void createColumns(String[] titles, int[] bounds) {
 
+		defaultColumnWidths = Arrays.copyOf(bounds, bounds.length);
 		/*
 		 * Clear the table and all existing columns.
 		 */
