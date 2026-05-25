@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -61,7 +61,10 @@ public class LibrarySearchRunnable implements IRunnableWithProgress {
 		boolean caseSensitive = retentionIndexLibrarySettings.isCaseSensitive();
 		boolean removeWhiteSpace = retentionIndexLibrarySettings.isRemoveWhiteSpace();
 		boolean matchPartly = retentionIndexLibrarySettings.isMatchPartly();
-
+		/*
+		 * TODO - the column fallback is not used here yet.
+		 */
+		// SeparationColumnType separationColumnTypeFallback = retentionIndexLibrarySettings.getSeparationColumnTypeFallback();
 		for(ILibraryInformation libraryInformation : libraryInformations) {
 			float retentionIndexColumn = ColumnIndexSupport.getRetentionIndex(retentionIndex, libraryInformation.getColumnIndexMarkers(), searchColumn, caseSensitive, removeWhiteSpace, matchPartly);
 			libraryInformation.setRetentionIndex(retentionIndexColumn);

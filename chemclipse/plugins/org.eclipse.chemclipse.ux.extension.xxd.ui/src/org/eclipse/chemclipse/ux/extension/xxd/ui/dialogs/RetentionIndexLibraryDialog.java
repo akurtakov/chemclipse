@@ -45,7 +45,6 @@ public class RetentionIndexLibraryDialog {
 		this.display = display;
 		this.retentionTime = retentionTime;
 		this.retentionIndex = retentionIndex;
-
 		retentionIndexLibrarySettingsDialog = new RetentionIndexLibrarySettingsDialog(display.getActiveShell());
 	}
 
