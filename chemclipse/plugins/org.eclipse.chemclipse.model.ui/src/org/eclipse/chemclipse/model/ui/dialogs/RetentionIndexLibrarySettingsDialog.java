@@ -20,9 +20,11 @@ import org.eclipse.chemclipse.model.services.IRetentionIndexLibraryService;
 import org.eclipse.chemclipse.model.services.RetentionIndexLibrarySettings;
 import org.eclipse.chemclipse.model.support.ColumnIndexSupport;
 import org.eclipse.chemclipse.model.ui.runnables.LibrarySearchSupport;
+import org.eclipse.chemclipse.support.model.SeparationColumnType;
 import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
+import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
@@ -55,6 +57,7 @@ public class RetentionIndexLibrarySettingsDialog extends TitleAreaDialog {
 	private AtomicReference<Text> textSearchColumnControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonCaseSensitiveControl = new AtomicReference<>();
 	private AtomicReference<Button> buttonRemoveWhitespaceControl = new AtomicReference<>();
+	private AtomicReference<ComboViewer> comboViewerDefaultColumnControl = new AtomicReference<>();
 	private AtomicReference<Spinner> spinnerRetentionIndexDeltaControl = new AtomicReference<>();
 	private AtomicReference<Text> textSpecificDatabaseControl = new AtomicReference<>();
 
@@ -93,6 +96,7 @@ public class RetentionIndexLibrarySettingsDialog extends TitleAreaDialog {
 		createSectionSearchColumn(composite);
 		createSectionCaseSensitive(composite);
 		createSectionRemoveWhiteSpace(composite);
+		createComboViewerDefaultColumn(composite);
 		createSectionRetentionIndexDelta(composite);
 		createSectionSpecificDatabase(composite);
 
@@ -108,9 +112,16 @@ public class RetentionIndexLibrarySettingsDialog extends TitleAreaDialog {
 		List<Object> services = new ArrayList<>();
 		services.add(USE_ALL_SERVICES);
 		services.addAll(retentionIndexLibraryServices);
-		comboViewerServicesControl.get().setInput(services);
-		comboViewerServicesControl.get().setSelection(new StructuredSelection(USE_ALL_SERVICES));
+		ComboViewer comboViewerServices = comboViewerServicesControl.get();
+		comboViewerServices.setInput(services);
+		comboViewerServices.setSelection(new StructuredSelection(USE_ALL_SERVICES));
 		retentionIndexLibrarySettings.getRetentionIndexLibraryServices().addAll(retentionIndexLibraryServices);
+		/*
+		 * Default Column
+		 */
+		ComboViewer comboViewerColumn = comboViewerDefaultColumnControl.get();
+		comboViewerColumn.setInput(SeparationColumnType.values());
+		comboViewerColumn.setSelection(new StructuredSelection(retentionIndexLibrarySettings.getSeparationColumnTypeFallback()));
 		/*
 		 * Settings
 		 */
@@ -217,6 +228,44 @@ public class RetentionIndexLibrarySettingsDialog extends TitleAreaDialog {
 		});
 
 		buttonRemoveWhitespaceControl.set(button);
+	}
+
+	private void createComboViewerDefaultColumn(Composite parent) {
+
+		createLabel(parent, "Separation Column (Fallback):");
+
+		ComboViewer comboViewer = new ComboViewer(parent, SWT.READ_ONLY);
+		Combo combo = comboViewer.getCombo();
+		comboViewer.setContentProvider(ArrayContentProvider.getInstance());
+		comboViewer.setLabelProvider(new AbstractLabelProvider() {
+
+			@Override
+			public String getText(Object element) {
+
+				if(element instanceof SeparationColumnType separationColumnType) {
+					return separationColumnType.label();
+				}
+				return null;
+			}
+		});
+
+		combo.setToolTipText("Use the following separation column if the above column can't be matched.");
+		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
+		gridData.widthHint = 150;
+		combo.setLayoutData(gridData);
+		combo.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				Object object = comboViewer.getStructuredSelection().getFirstElement();
+				if(object instanceof SeparationColumnType separationColumnType) {
+					retentionIndexLibrarySettings.setSeparationColumnTypeFallback(separationColumnType);
+				}
+			}
+		});
+
+		comboViewerDefaultColumnControl.set(comboViewer);
 	}
 
 	private void createSectionRetentionIndexDelta(Composite parent) {

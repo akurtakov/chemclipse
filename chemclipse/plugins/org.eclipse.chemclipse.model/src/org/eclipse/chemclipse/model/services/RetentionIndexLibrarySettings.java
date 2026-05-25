@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -15,12 +15,15 @@ package org.eclipse.chemclipse.model.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.chemclipse.support.model.SeparationColumnType;
+
 public class RetentionIndexLibrarySettings {
 
 	private String searchColumn = "DB5";
 	private boolean caseSensitive = false;
 	private boolean removeWhiteSpace = false;
 	private boolean matchPartly = false;
+	private SeparationColumnType separationColumnTypeFallback = SeparationColumnType.DEFAULT;
 	private int retentionIndexDelta = 10;
 	private String specificDatabase = ""; // If empty, take all.
 
@@ -64,6 +67,16 @@ public class RetentionIndexLibrarySettings {
 	public void setMatchPartly(boolean matchPartly) {
 
 		this.matchPartly = matchPartly;
+	}
+
+	public SeparationColumnType getSeparationColumnTypeFallback() {
+
+		return separationColumnTypeFallback;
+	}
+
+	public void setSeparationColumnTypeFallback(SeparationColumnType separationColumnTypeFallback) {
+
+		this.separationColumnTypeFallback = separationColumnTypeFallback;
 	}
 
 	public int getRetentionIndexDelta() {
