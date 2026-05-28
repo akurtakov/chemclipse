@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.eclipse.chemclipse.container.definition.IFileContentProvider;
+import org.eclipse.chemclipse.container.support.FileContainerSupport;
 import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferenceSupplierDataExplorer;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
@@ -103,7 +105,7 @@ public class FileExplorerContentProvider implements ITreeContentProvider, FileFi
 				return null;
 			}
 		} else {
-			return null;
+			return getContainerContents(parentFile);
 		}
 	}
 
@@ -137,7 +139,7 @@ public class FileExplorerContentProvider implements ITreeContentProvider, FileFi
 				return false;
 			}
 		} else {
-			return false;
+			return hasContainerContents(parentFile);
 		}
 	}
 
@@ -145,5 +147,20 @@ public class FileExplorerContentProvider implements ITreeContentProvider, FileFi
 	public boolean accept(File file) {
 
 		return !file.isHidden() && !file.getName().startsWith(".") && file.canRead();
+	}
+
+	private boolean hasContainerContents(File file) {
+
+		IFileContentProvider fileContentProvider = FileContainerSupport.getCache().getFileContentProvider(file);
+		return fileContentProvider != null && fileContentProvider.hasContainerContents(file);
+	}
+
+	private File[] getContainerContents(File file) {
+
+		IFileContentProvider fileContentProvider = FileContainerSupport.getCache().getFileContentProvider(file);
+		if(fileContentProvider != null) {
+			return fileContentProvider.getContents(file);
+		}
+		return new File[0];
 	}
 }
