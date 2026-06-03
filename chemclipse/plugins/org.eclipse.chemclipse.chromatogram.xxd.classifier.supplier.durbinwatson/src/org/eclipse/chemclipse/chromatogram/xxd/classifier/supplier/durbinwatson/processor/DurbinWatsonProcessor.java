@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -23,13 +23,12 @@ import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignal;
 import org.eclipse.chemclipse.model.signals.ITotalScanSignals;
 import org.eclipse.chemclipse.model.signals.TotalScanSignalExtractor;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 public class DurbinWatsonProcessor {
 
 	private static final Logger logger = Logger.getLogger(DurbinWatsonProcessor.class);
 
-	public void run(IChromatogramSelection chromatogramSelection, IDurbinWatsonClassifierResult durbinWatsonClassifierResult, IProgressMonitor monitor) {
+	public void run(IChromatogramSelection chromatogramSelection, IDurbinWatsonClassifierResult durbinWatsonClassifierResult) {
 
 		try {
 			/*
@@ -39,13 +38,13 @@ public class DurbinWatsonProcessor {
 			TotalScanSignalExtractor signalExtractor = new TotalScanSignalExtractor(chromatogram);
 			ITotalScanSignals totalScanSignals = signalExtractor.getTotalScanSignals(chromatogramSelection, false);
 			double[] valuesOriginal = getScanSignalsAsArray(totalScanSignals);
-			durbinWatsonMain(valuesOriginal, durbinWatsonClassifierResult, monitor);
+			durbinWatsonMain(valuesOriginal, durbinWatsonClassifierResult);
 		} catch(ChromatogramIsNullException e) {
 			logger.warn(e);
 		}
 	}
 
-	public void durbinWatsonMain(double[] valuesOriginal, IDurbinWatsonClassifierResult durbinWatsonClassifierResult, IProgressMonitor monitor) {
+	public void durbinWatsonMain(double[] valuesOriginal, IDurbinWatsonClassifierResult durbinWatsonClassifierResult) {
 
 		/*
 		 * Iterate through the width

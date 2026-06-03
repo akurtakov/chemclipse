@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - add generics, remove obsolete methods
@@ -53,7 +53,7 @@ public class MassSpectrumFilter extends AbstractMassSpectrumFilter {
 			int iterations = massSpectrumFilterSettings.getIterations();
 			int transitions = massSpectrumFilterSettings.getTransitions();
 			double magnificationFactor = massSpectrumFilterSettings.getMagnificationFactor();
-			filterSupplier.applySnipFilter(massSpectra, iterations, transitions, magnificationFactor, monitor);
+			filterSupplier.applySnipFilter(massSpectra, iterations, transitions, magnificationFactor);
 
 			processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, DESCRIPTION, "The mass spectrum has been optimized successfully."));
 			IMassSpectrumFilterResult massSpectrumFilterResult = new MassSpectrumFilterResult(ResultStatus.OK, "The SNIP filter has been applied successfully.");

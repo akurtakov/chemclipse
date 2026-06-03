@@ -110,7 +110,7 @@ public class Denoising {
 			 * C -> Calculate the noise segments and remove the noise sequentially.
 			 */
 			Calculator calculator = new Calculator();
-			List<INoiseSegmentMSD> noiseSegments = calculator.getNoiseSegments(extractedIonSignals, ionsToPreserve, segmentWidth, monitor);
+			List<INoiseSegmentMSD> noiseSegments = calculator.getNoiseSegments(extractedIonSignals, ionsToPreserve, segmentWidth);
 			subMonitor.worked(1);
 			/*
 			 * D -> Iterate through all noise segments and remove the noise between

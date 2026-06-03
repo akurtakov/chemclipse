@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Matthias Mailänder - initial API and implementation
  * Lorenz Gerber - initial API and implementation
@@ -73,7 +73,7 @@ public class SavitzkyGolayTotalScanSignalOperation extends AbstractOperation imp
 		TotalScanSignalExtractor totalScanSignalExtractor = new TotalScanSignalExtractor(chromatogramMSD);
 		totalScanSignals = totalScanSignalExtractor.getTotalScanSignals(chromatogramSelection, true);
 		previousTotalScanSignals = totalScanSignals.makeDeepCopy();
-		chromatogramFilterResult = SavitzkyGolayProcessor.apply(totalScanSignals, filterSettings, monitor);
+		chromatogramFilterResult = SavitzkyGolayProcessor.apply(totalScanSignals, filterSettings);
 		totalScanSignals.setNegativeTotalSignalsToZero();
 		if(chromatogramFilterResult.getResultStatus().equals(ResultStatus.OK)) {
 			updateSignal(totalScanSignals, chromatogramMSD);

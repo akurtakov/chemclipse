@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Matthias Mailänder - initial API and implementation
@@ -24,23 +24,20 @@ import org.eclipse.chemclipse.msd.model.core.IIonProvider;
 import org.eclipse.chemclipse.msd.model.core.comparator.IonValueComparator;
 import org.eclipse.chemclipse.processing.core.DefaultProcessingResult;
 import org.eclipse.chemclipse.processing.core.IProcessingResult;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.SubMonitor;
 
 public class FilterSupplier {
 
-	public IProcessingResult<Integer> applySavitzkyGolayFilter(List<? extends IIonProvider> massSpectra, int derivative, int order, int width, IProgressMonitor monitor) {
+	public IProcessingResult<Integer> applySavitzkyGolayFilter(List<? extends IIonProvider> massSpectra, int derivative, int order, int width) {
 
-		SubMonitor subMonitor = SubMonitor.convert(monitor, massSpectra.size());
 		DefaultProcessingResult<Integer> result = new DefaultProcessingResult<>();
 		result.setProcessingResult(0);
 		for(IIonProvider massSpectrum : massSpectra) {
-			applySavitzkyGolay(massSpectrum, derivative, order, width, subMonitor.split(1), result);
+			applySavitzkyGolay(massSpectrum, derivative, order, width, result);
 		}
 		return result;
 	}
 
-	private void applySavitzkyGolay(IIonProvider massSpectrum, int derivative, int order, int width, IProgressMonitor monitor, IProcessingResult<Integer> result) {
+	private void applySavitzkyGolay(IIonProvider massSpectrum, int derivative, int order, int width, IProcessingResult<Integer> result) {
 
 		List<IIon> ions = new ArrayList<>(massSpectrum.getIons());
 		Collections.sort(ions, new IonValueComparator());

@@ -31,7 +31,6 @@ import org.eclipse.chemclipse.model.implementation.IntegrationEntry;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
 import org.eclipse.chemclipse.msd.model.core.selection.IChromatogramSelectionMSD;
 import org.eclipse.chemclipse.support.l10n.TranslationSupport;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.services.translation.TranslationService;
 
 public class ChromatogramIntegratorSupport {
@@ -40,7 +39,7 @@ public class ChromatogramIntegratorSupport {
 
 	public static final String INTEGRATOR_DESCRIPTION = translationService.translate("%Trapezoid", Activator.getContributorURI());
 
-	public IChromatogramIntegrationResults calculateChromatogramIntegrationResults(IChromatogramSelection chromatogramSelection, ChromatogramIntegrationSettings chromatogramIntegrationSettings, IProgressMonitor monitor) {
+	public IChromatogramIntegrationResults calculateChromatogramIntegrationResults(IChromatogramSelection chromatogramSelection, ChromatogramIntegrationSettings chromatogramIntegrationSettings) {
 
 		/*
 		 * Get the chromatogram and background area.

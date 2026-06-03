@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2014, 2025 Lablicate GmbH.
+ * Copyright (c) 2014, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - adjust to new API
@@ -54,7 +54,7 @@ public class PeakFilter extends AbstractPeakFilter {
 		int iterations = peakFilterSettings.getIterations();
 		int transitions = peakFilterSettings.getTransitions();
 		double magnificationFactor = peakFilterSettings.getMagnificationFactor();
-		filterSupplier.applySnipFilter(getMassSpectra(peaks), iterations, transitions, magnificationFactor, monitor);
+		filterSupplier.applySnipFilter(getMassSpectra(peaks), iterations, transitions, magnificationFactor);
 		IProcessingInfo<IPeakFilterResult> processingInfo = new ProcessingInfo<>();
 		processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, DESCRIPTION, "The mass spectrum has been optimized successfully."));
 		IPeakFilterResult peakFilterResult = new PeakFilterResult(ResultStatus.OK, "The SNIP filter has been applied successfully.");

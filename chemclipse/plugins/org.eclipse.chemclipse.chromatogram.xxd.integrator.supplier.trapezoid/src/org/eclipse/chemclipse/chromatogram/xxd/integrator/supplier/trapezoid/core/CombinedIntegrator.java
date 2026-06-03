@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -47,7 +47,7 @@ public class CombinedIntegrator extends AbstractCombinedIntegrator {
 					 * Chromatogram Integration Results.
 					 */
 					ChromatogramIntegratorSupport chromatogramIntegratorSupport = new ChromatogramIntegratorSupport();
-					IChromatogramIntegrationResults chromatogramIntegrationResults = chromatogramIntegratorSupport.calculateChromatogramIntegrationResults(chromatogramSelection, combinedIntegrationSettings.getChromatogramIntegrationSettings(), monitor);
+					IChromatogramIntegrationResults chromatogramIntegrationResults = chromatogramIntegratorSupport.calculateChromatogramIntegrationResults(chromatogramSelection, combinedIntegrationSettings.getChromatogramIntegrationSettings());
 					/*
 					 * Build the result and return it.
 					 */

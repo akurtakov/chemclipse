@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Matthias Mailänder - initial API and implementation
@@ -43,7 +43,7 @@ public class MassSpectrumFilter extends AbstractMassSpectrumFilter {
 				int derivative = savitzkyGolayMassSpectrumFilterSettings.getDerivative();
 				int order = savitzkyGolayMassSpectrumFilterSettings.getOrder();
 				int width = savitzkyGolayMassSpectrumFilterSettings.getWidth();
-				filterSupplier.applySavitzkyGolayFilter(massSpectra, derivative, order, width, monitor);
+				filterSupplier.applySavitzkyGolayFilter(massSpectra, derivative, order, width);
 
 				processingInfo.addMessage(new ProcessingMessage(MessageType.INFO, DESCRIPTION, "The mass spectrum has been successfully smoothed."));
 				IMassSpectrumFilterResult massSpectrumFilterResult = new MassSpectrumFilterResult(ResultStatus.OK, "The Savitzky-Golay filter has been applied successfully.");

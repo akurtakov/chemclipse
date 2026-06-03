@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - adjust to new API
@@ -42,7 +42,7 @@ public class Classifier extends AbstractChromatogramClassifier {
 		if(!processingInfo.hasErrorMessages()) {
 			DurbinWatsonProcessor durbinWatsonProcessor = new DurbinWatsonProcessor();
 			IDurbinWatsonClassifierResult durbinWatsonClassifierResult = new DurbinWatsonClassifierResult(ResultStatus.OK, "The chromatogram has been classified.");
-			durbinWatsonProcessor.run(chromatogramSelection, durbinWatsonClassifierResult, monitor);
+			durbinWatsonProcessor.run(chromatogramSelection, durbinWatsonClassifierResult);
 			IMeasurementResult<?> measurementResult = new MeasurementResult(IChromatogramResultDurbinWatson.NAME, IChromatogramResultDurbinWatson.IDENTIFIER, "This is the Durbin-Watson classifier result.", durbinWatsonClassifierResult);
 			chromatogramSelection.getChromatogram().addMeasurementResult(measurementResult);
 			processingInfo.setProcessingResult(durbinWatsonClassifierResult);

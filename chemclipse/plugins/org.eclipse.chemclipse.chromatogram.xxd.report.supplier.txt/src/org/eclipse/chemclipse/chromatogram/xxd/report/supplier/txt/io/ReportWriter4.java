@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Lorenz Gerber - initial API and implementation
  *******************************************************************************/
@@ -33,7 +33,6 @@ import org.eclipse.chemclipse.msd.model.core.IPeakModelMSD;
 import org.eclipse.chemclipse.msd.model.core.comparator.IonAbundanceComparator;
 import org.eclipse.chemclipse.support.comparator.SortOrder;
 import org.eclipse.chemclipse.support.text.ValueFormat;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ReportWriter4 {
 
@@ -47,7 +46,7 @@ public class ReportWriter4 {
 	private IonAbundanceComparator ionComparator = new IonAbundanceComparator(SortOrder.DESC);
 	private PeakRetentionTimeComparator peakComparator = new PeakRetentionTimeComparator(SortOrder.ASC);
 
-	public void generate(File file, boolean append, List<IChromatogram> chromatograms, IProgressMonitor monitor) throws IOException {
+	public void generate(File file, boolean append, List<IChromatogram> chromatograms) throws IOException {
 
 		try (PrintWriter printWriter = new PrintWriter(new FileWriter(file, append))) {
 			for(IChromatogram chromatogram : chromatograms) {
@@ -71,7 +70,7 @@ public class ReportWriter4 {
 
 	/**
 	 * The report chromatogram is responsible how to print each section.
-	 * 
+	 *
 	 * @param printWriter
 	 * @param chromatogram
 	 * @param monitor

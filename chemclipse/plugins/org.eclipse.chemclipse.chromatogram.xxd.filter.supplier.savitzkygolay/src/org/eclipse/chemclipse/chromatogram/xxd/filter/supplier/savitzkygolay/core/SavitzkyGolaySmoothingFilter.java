@@ -1,12 +1,12 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Christoph Läubrich - initial API and implementation
  * Philip Wenig - refactorings
@@ -69,7 +69,7 @@ public class SavitzkyGolaySmoothingFilter implements IScanFilter<MassSpectrumFil
 		int derivative = configuration.getDerivative();
 		int order = configuration.getOrder();
 		int width = configuration.getWidth();
-		IProcessingResult<Integer> golayFilter = new FilterSupplier().applySavitzkyGolayFilter(massSpectra, derivative, order, width, monitor);
+		IProcessingResult<Integer> golayFilter = new FilterSupplier().applySavitzkyGolayFilter(massSpectra, derivative, order, width);
 		result.setProcessingResult(golayFilter.getProcessingResult() > 0);
 		result.addMessages(golayFilter);
 		result.addInfoMessage(getName(), filterItems.size() + " scans were smoothed with derivative=" + derivative + ", order=" + order + ", width=" + width);
@@ -95,7 +95,7 @@ public class SavitzkyGolaySmoothingFilter implements IScanFilter<MassSpectrumFil
 
 		DefaultProcessingResult<Boolean> result = new DefaultProcessingResult<>();
 		for(ITotalScanSignals signals : filterItems) {
-			IChromatogramFilterResult filterResult = SavitzkyGolayProcessor.apply(signals, chromatogramFilterSettings, monitor);
+			IChromatogramFilterResult filterResult = SavitzkyGolayProcessor.apply(signals, chromatogramFilterSettings);
 			if(filterResult.getResultStatus() != ResultStatus.OK) {
 				result.addErrorMessage(getName(), filterResult.getDescription());
 				break;

@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Lorenz Gerber - Ion-wise msd chromatogram filter
@@ -109,7 +109,7 @@ public class SavitzkyGolayProcessor {
 		return filter.apply(ticValues);
 	}
 
-	public static IChromatogramFilterResult apply(ITotalScanSignals totalSignals, ChromatogramFilterSettings filterSettings, IProgressMonitor monitor) {
+	public static IChromatogramFilterResult apply(ITotalScanSignals totalSignals, ChromatogramFilterSettings filterSettings) {
 
 		double[] sgTic = smooth(totalSignals, filterSettings);
 		int i = 0;
