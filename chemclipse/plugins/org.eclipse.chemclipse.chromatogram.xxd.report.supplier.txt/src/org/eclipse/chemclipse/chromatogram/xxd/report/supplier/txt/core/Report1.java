@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -39,7 +39,7 @@ public class Report1 extends AbstractReport {
 		if(!processingInfo.hasErrorMessages()) {
 			ReportWriter1 chromatogramReport = new ReportWriter1();
 			try {
-				chromatogramReport.generate(file, append, chromatograms, monitor);
+				chromatogramReport.generate(file, append, chromatograms);
 				processingInfo.setProcessingResult(file);
 			} catch(IOException e) {
 				logger.warn(e);

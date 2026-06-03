@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Chrsitoph Läubrich - don't use exceptions as return values
@@ -29,7 +29,6 @@ import org.eclipse.chemclipse.msd.model.support.CombinedNominalMassSpectrumCalcu
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignal;
 import org.eclipse.chemclipse.msd.model.xic.IExtractedIonSignals;
 import org.eclipse.chemclipse.numeric.statistics.Calculations;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 public class Calculator {
 
@@ -73,7 +72,7 @@ public class Calculator {
 	/**
 	 * Calculates the noise segments. May return null.
 	 */
-	public List<INoiseSegmentMSD> getNoiseSegments(IExtractedIonSignals extractedIonSignals, IMarkedIons ionsToPreserve, int segmentWidth, IProgressMonitor monitor) throws FilterException {
+	public List<INoiseSegmentMSD> getNoiseSegments(IExtractedIonSignals extractedIonSignals, IMarkedIons ionsToPreserve, int segmentWidth) throws FilterException {
 
 		/*
 		 * Check the scan range.
@@ -88,7 +87,7 @@ public class Calculator {
 		try {
 			AnalysisSupport analysisSupport = new AnalysisSupport(scanRange, width);
 			List<IAnalysisSegment> analysisSegments = analysisSupport.getAnalysisSegments();
-			noiseSegments = calculateNoiseSegments(analysisSegments, extractedIonSignals, ionsToPreserve, monitor);
+			noiseSegments = calculateNoiseSegments(analysisSegments, extractedIonSignals, ionsToPreserve);
 		} catch(AnalysisSupportException e) {
 			logger.warn(e);
 		}
@@ -101,7 +100,7 @@ public class Calculator {
 	 * "An Integrated Method for Spectrum Extraction and Compound Identification from Gas Chromatography/Mass Spectrometry Data"
 	 * .
 	 */
-	private List<INoiseSegmentMSD> calculateNoiseSegments(List<IAnalysisSegment> analysisSegments, IExtractedIonSignals extractedIonSignals, IMarkedIons ionsToPreserve, IProgressMonitor monitor) {
+	private List<INoiseSegmentMSD> calculateNoiseSegments(List<IAnalysisSegment> analysisSegments, IExtractedIonSignals extractedIonSignals, IMarkedIons ionsToPreserve) {
 
 		@SuppressWarnings("unused")
 		int rejected = 0;

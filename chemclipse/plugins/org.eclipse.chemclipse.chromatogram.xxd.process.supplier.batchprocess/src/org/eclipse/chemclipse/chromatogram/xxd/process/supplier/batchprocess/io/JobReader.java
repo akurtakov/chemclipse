@@ -36,13 +36,12 @@ import org.eclipse.chemclipse.logging.core.Logger;
 import org.eclipse.chemclipse.model.types.DataType;
 import org.eclipse.chemclipse.processing.methods.ProcessEntry;
 import org.eclipse.chemclipse.processing.methods.ProcessMethod;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 public class JobReader {
 
 	private static final Logger logger = Logger.getLogger(JobReader.class);
 
-	public BatchProcessJob read(File file, IProgressMonitor monitor) throws IOException {
+	public BatchProcessJob read(File file) throws IOException {
 
 		ProcessMethod processMethod = new ProcessMethod(ProcessMethod.CHROMATOGRAPHY);
 		BatchProcessJob batchProcessJob = new BatchProcessJob(processMethod);

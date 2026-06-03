@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
@@ -19,11 +19,10 @@ import java.util.List;
 import org.eclipse.chemclipse.msd.model.core.IIon;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.comparator.IonValueComparator;
-import org.eclipse.core.runtime.IProgressMonitor;
 
 public class FilterSupplier {
 
-	public void applySnipFilter(List<IScanMSD> massSpectra, int iterations, int transitions, double magnificationFactor, IProgressMonitor monitor) {
+	public void applySnipFilter(List<IScanMSD> massSpectra, int iterations, int transitions, double magnificationFactor) {
 
 		for(IScanMSD massSpectrum : massSpectra) {
 			/*
@@ -33,12 +32,12 @@ public class FilterSupplier {
 				/*
 				 * Do the subtraction n times.
 				 */
-				applySnipTransition(massSpectrum, iterations, magnificationFactor, monitor);
+				applySnipTransition(massSpectrum, iterations, magnificationFactor);
 			}
 		}
 	}
 
-	private void applySnipTransition(IScanMSD massSpectrum, int iterations, double magnificationFactor, IProgressMonitor monitor) {
+	private void applySnipTransition(IScanMSD massSpectrum, int iterations, double magnificationFactor) {
 
 		int extraValues = 6; // Leading and tailing extra values.
 		List<IIon> ions = new ArrayList<>(massSpectrum.getIons());

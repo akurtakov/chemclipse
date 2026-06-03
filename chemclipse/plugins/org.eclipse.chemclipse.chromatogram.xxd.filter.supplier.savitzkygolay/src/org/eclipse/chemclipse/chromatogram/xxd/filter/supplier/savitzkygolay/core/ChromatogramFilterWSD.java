@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Lorenz Gerber - Ion-wise msd chromatogram filter
  * Philip Wenig - return type generics
@@ -33,13 +33,13 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ChromatogramFilterWSD extends AbstractChromatogramFilterWSD {
 
-	private IChromatogramFilterResult process(IChromatogramSelectionWSD chromatogramSelection, IChromatogramFilterSettings chromatogramFilterSettings, IProgressMonitor monitor) {
+	private IChromatogramFilterResult process(IChromatogramSelectionWSD chromatogramSelection, IChromatogramFilterSettings chromatogramFilterSettings) {
 
 		IChromatogramWSD chromatogramWSD = chromatogramSelection.getChromatogram();
 		TotalScanSignalExtractor totalScanSignalExtractor = new TotalScanSignalExtractor(chromatogramWSD);
 		// Don't check if values are negative (unlike CSD/MSD)
 		ITotalScanSignals totalSignals = totalScanSignalExtractor.getTotalScanSignals(chromatogramSelection, false);
-		IChromatogramFilterResult chromatogramFilterResult = SavitzkyGolayProcessor.apply(totalSignals, (ChromatogramFilterSettings)chromatogramFilterSettings, monitor);
+		IChromatogramFilterResult chromatogramFilterResult = SavitzkyGolayProcessor.apply(totalSignals, (ChromatogramFilterSettings)chromatogramFilterSettings);
 		if(chromatogramFilterResult.getResultStatus().equals(ResultStatus.OK)) {
 			Iterator<Integer> iteratorScan = totalSignals.iterator();
 			while(iteratorScan.hasNext()) {
@@ -57,7 +57,7 @@ public class ChromatogramFilterWSD extends AbstractChromatogramFilterWSD {
 	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelectionWSD chromatogramSelection, IChromatogramFilterSettings chromatogramFilterSettings, IProgressMonitor monitor) {
 
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = new ProcessingInfo<>();
-		processingInfo.setProcessingResult(process(chromatogramSelection, chromatogramFilterSettings, monitor));
+		processingInfo.setProcessingResult(process(chromatogramSelection, chromatogramFilterSettings));
 		return processingInfo;
 	}
 }

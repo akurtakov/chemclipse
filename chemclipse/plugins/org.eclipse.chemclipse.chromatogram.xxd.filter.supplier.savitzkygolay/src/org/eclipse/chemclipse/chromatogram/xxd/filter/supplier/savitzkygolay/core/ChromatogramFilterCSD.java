@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Lorenz Gerber - Ion-wise msd chromatogram filter
@@ -33,12 +33,12 @@ import org.eclipse.core.runtime.IProgressMonitor;
 
 public class ChromatogramFilterCSD extends AbstractChromatogramFilterCSD {
 
-	private IChromatogramFilterResult process(IChromatogramSelectionCSD chromatogramSelection, IChromatogramFilterSettings chromatogramFilterSettings, IProgressMonitor monitor) {
+	private IChromatogramFilterResult process(IChromatogramSelectionCSD chromatogramSelection, IChromatogramFilterSettings chromatogramFilterSettings) {
 
 		IChromatogramCSD chromatogramCSD = chromatogramSelection.getChromatogram();
 		TotalScanSignalExtractor totalScanSignalExtractor = new TotalScanSignalExtractor(chromatogramCSD);
 		ITotalScanSignals totalSignals = totalScanSignalExtractor.getTotalScanSignals(chromatogramSelection, false);
-		IChromatogramFilterResult chromatogramFilterResult = SavitzkyGolayProcessor.apply(totalSignals, (ChromatogramFilterSettings)chromatogramFilterSettings, monitor);
+		IChromatogramFilterResult chromatogramFilterResult = SavitzkyGolayProcessor.apply(totalSignals, (ChromatogramFilterSettings)chromatogramFilterSettings);
 		chromatogramSelection.getChromatogram().setDirty(true);
 		if(chromatogramFilterResult.getResultStatus().equals(ResultStatus.OK)) {
 			updateSignal(totalSignals, chromatogramCSD);
@@ -50,7 +50,7 @@ public class ChromatogramFilterCSD extends AbstractChromatogramFilterCSD {
 	public IProcessingInfo<IChromatogramFilterResult> applyFilter(IChromatogramSelectionCSD chromatogramSelection, IChromatogramFilterSettings chromatogramFilterSettings, IProgressMonitor monitor) {
 
 		IProcessingInfo<IChromatogramFilterResult> processingInfo = new ProcessingInfo<>();
-		processingInfo.setProcessingResult(process(chromatogramSelection, chromatogramFilterSettings, monitor));
+		processingInfo.setProcessingResult(process(chromatogramSelection, chromatogramFilterSettings));
 		chromatogramSelection.getChromatogram().setDirty(true);
 		return processingInfo;
 	}

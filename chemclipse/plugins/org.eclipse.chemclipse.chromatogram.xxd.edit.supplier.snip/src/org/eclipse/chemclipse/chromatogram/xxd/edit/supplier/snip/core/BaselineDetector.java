@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - use static {@link SnipCalculator} method, remove warnings and make method static for reuse
@@ -137,7 +137,7 @@ public class BaselineDetector extends AbstractBaselineDetector {
 
 	private static void applyBaseline(ITotalScanSignals totalScanSignals, IChromatogram chromatogram, int startScan, int stopScan, int iterations, ITrace trace, IProgressMonitor monitor) {
 
-		calculate(totalScanSignals, iterations, monitor);
+		calculate(totalScanSignals, iterations);
 		IBaselineModel baselineModel = chromatogram.getBaselineModel();
 		apply(baselineModel, totalScanSignals, startScan, stopScan, trace, monitor);
 	}
@@ -209,7 +209,7 @@ public class BaselineDetector extends AbstractBaselineDetector {
 		return unitResolutionTraces;
 	}
 
-	private static void calculate(ITotalScanSignals totalIonSignals, int iterations, IProgressMonitor monitor) {
+	private static void calculate(ITotalScanSignals totalIonSignals, int iterations) {
 
 		int size = totalIonSignals.size();
 		float[] intensityValues = new float[size];
