@@ -101,7 +101,6 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 	private CheckboxTableViewer groupViewer;
 	private Label matchCountLabel;
 	private LongFileExtractor extractor;
-	private int extractInitial;
 	private java.util.List<IDataInputEntry> mainFile;
 	private java.util.List<IDataInputEntry> filterFile;
 	private java.util.List<ISample> samplesToRemove;
@@ -624,7 +623,6 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 				if(needsReload) {
 					extractor = new LongFileExtractor(mainFile, filterFile, 100);
 					startLoadingData(true);
-					extractInitial = sampleSpinner.getSelection();
 				}
 				rankingTableViewer.getTable().getParent().layout(true, true);
 
@@ -658,6 +656,7 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 
 		setControlsEnabled(false);
 
+		final int sampleLimit = (sampleSpinner != null && !sampleSpinner.isDisposed()) ? sampleSpinner.getSelection() : PreferenceSupplier.DEF_NUMBER_OF_SAMPLES_TO_FILTER;
 		final Samples[] loaded = new Samples[1];
 
 		IRunnableWithProgress runnable = monitor -> {
@@ -669,7 +668,7 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 				extractor.readData();
 
 				if(filterFile != null && !filterFile.isEmpty()) {
-					loaded[0] = extractor.filter(extractInitial);
+					loaded[0] = extractor.filter(sampleLimit);
 				} else {
 					loaded[0] = extractor.extract();
 				}
