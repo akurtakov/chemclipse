@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -294,7 +294,7 @@ public abstract class AbstractMultivariateCalculator implements IMultivariateCal
 		}
 		for(int i = 0; i < matrix.numCols; i++) {
 			if(colSums.get(i) == 0 || Double.isNaN(colSums.get(i))) {
-				CommonOps_DDRM.insert(CommonOps_DDRM.add(randCol, CommonOps_DDRM.extractColumn(matrix, i, null), null), matrix, 0, i);
+				CommonOps_DDRM.insert(randCol, matrix, 0, i);
 			}
 		}
 	}
