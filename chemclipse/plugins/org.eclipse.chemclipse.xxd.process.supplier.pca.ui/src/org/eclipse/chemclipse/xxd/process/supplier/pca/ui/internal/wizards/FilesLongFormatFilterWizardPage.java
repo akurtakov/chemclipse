@@ -459,7 +459,7 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		Label lblCountExp = new Label(punishGroup, SWT.NONE);
 		lblCountExp.setText("Count exponent (0.0 - 10.0):");
 		txtCountExponent = new Text(punishGroup, SWT.BORDER);
-		txtCountExponent.setText("1.0");
+		txtCountExponent.setText(Double.toString(PreferenceSupplier.getCountExponent()));
 		txtCountExponent.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 		new Label(punishGroup, SWT.NONE);
 
@@ -472,7 +472,7 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		Label lblSumExp = new Label(punishGroup, SWT.NONE);
 		lblSumExp.setText("Sum exponent (0.0 - 10.0):");
 		txtSumExponent = new Text(punishGroup, SWT.BORDER);
-		txtSumExponent.setText("1.0");
+		txtSumExponent.setText(Double.toString(PreferenceSupplier.getSumExponent()));
 		txtSumExponent.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 		new Label(punishGroup, SWT.NONE);
 
@@ -514,14 +514,16 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		extractor.setUseLogTransform(useLog);
 
 		boolean useCount = chkCountPunish != null && !chkCountPunish.isDisposed() && chkCountPunish.getSelection();
-		double countExp = parseExponent(txtCountExponent.getText(), 1.0);
+		double countExp = parseExponent(txtCountExponent.getText(), PreferenceSupplier.DEF_COUNT_EXPONENT);
 		extractor.setUseCountPunishment(useCount);
 		extractor.setCountExponent(countExp);
+		PreferenceSupplier.setCountExponent(countExp);
 
 		boolean useSum = chkSumPunish != null && !chkSumPunish.isDisposed() && chkSumPunish.getSelection();
-		double sumExp = parseExponent(txtSumExponent.getText(), 1.0);
+		double sumExp = parseExponent(txtSumExponent.getText(), PreferenceSupplier.DEF_SUM_EXPONENT);
 		extractor.setUseSumPunishment(useSum);
 		extractor.setSumExponent(sumExp);
+		PreferenceSupplier.setSumExponent(sumExp);
 	}
 
 	private double parseExponent(String text, double def) {
