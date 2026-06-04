@@ -112,6 +112,7 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 	private String previousFilterFilePath = null;
 
 	private Button radioAnd;
+	private Button chkLogTransform;
 	private Button chkCountPunish;
 	private Text txtCountExponent;
 	private Button chkSumPunish;
@@ -234,6 +235,7 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		cosimilarityTab.setText("Cosine Similarity");
 		Composite cosimilarityComposite = new Composite(tabFolder, SWT.NONE);
 		cosimilarityComposite.setLayout(new GridLayout(1, false));
+		createTransformControls(cosimilarityComposite);
 		createPunishmentControls(cosimilarityComposite);
 		createApplyButton(cosimilarityComposite);
 		cosimilarityTab.setControl(cosimilarityComposite);
@@ -428,6 +430,19 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		});
 	}
 
+	private void createTransformControls(Composite parent) {
+
+		Group transformGroup = new Group(parent, SWT.NONE);
+		transformGroup.setText("Feature Transform");
+		transformGroup.setLayout(new GridLayout(1, false));
+		transformGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+
+		chkLogTransform = new Button(transformGroup, SWT.CHECK);
+		chkLogTransform.setText("Log transform features — reduces dominance of large components (e.g. solvent)");
+		chkLogTransform.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		chkLogTransform.setSelection(false);
+	}
+
 	private void createPunishmentControls(Composite parent) {
 
 		Group punishGroup = new Group(parent, SWT.NONE);
@@ -494,6 +509,9 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 
 		if(extractor == null)
 			return;
+
+		boolean useLog = chkLogTransform != null && !chkLogTransform.isDisposed() && chkLogTransform.getSelection();
+		extractor.setUseLogTransform(useLog);
 
 		boolean useCount = chkCountPunish != null && !chkCountPunish.isDisposed() && chkCountPunish.getSelection();
 		double countExp = parseExponent(txtCountExponent.getText(), 1.0);
