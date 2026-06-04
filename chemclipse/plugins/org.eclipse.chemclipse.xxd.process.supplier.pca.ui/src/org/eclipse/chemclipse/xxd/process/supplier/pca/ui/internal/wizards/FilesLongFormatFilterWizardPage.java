@@ -774,6 +774,7 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		for(org.eclipse.swt.widgets.TableColumn column : rankingTableViewer.getTable().getColumns()) {
 			column.pack();
 		}
+		rankingTableViewer.getTable().redraw();
 	}
 
 	/**
