@@ -70,6 +70,7 @@ public class LongFileExtractor {
 	private double countExponent = 0.0;
 	private boolean useSumPunishment = false;
 	private double sumExponent = 0.0;
+	private boolean useLogTransform = false;
 
 	// Small floor to avoid NaN/pow(0, x) surprises; set to 0.0 to allow exact zero
 	private static final double MIN_RATIO = 1e-12;
@@ -129,6 +130,16 @@ public class LongFileExtractor {
 	public double getSumExponent() {
 
 		return sumExponent;
+	}
+
+	public void setUseLogTransform(boolean useLogTransform) {
+
+		this.useLogTransform = useLogTransform;
+	}
+
+	public boolean isUseLogTransform() {
+
+		return useLogTransform;
 	}
 
 	public void readData() {
@@ -225,79 +236,85 @@ public class LongFileExtractor {
 
 		filterRanking.clear();
 
-		double dotProduct;
-		double magnitude;
-		double sumSqA;
-		double sumSqB;
-		double similarity;
+		// sumSqA is constant for all samples; compute once
+		double sumSqA = normalizedFilterVector.values().stream().mapToDouble(v -> v * v).sum();
 
 		for(String sample : samplesVariablesMap.keySet()) {
-			if(featureOverlap.containsKey(sample)) {
-				dotProduct = 0;
-				magnitude = 0;
-				sumSqA = normalizedFilterVector.values().stream().mapToDouble(v -> v * v).sum();
-				sumSqB = 0;
-				similarity = 0;
+			if(!featureOverlap.containsKey(sample)) {
+				continue;
+			}
 
-				int matchingCount = 0;
-				int totalMainCount = 0;
-				double sumMatchingValues = 0.0;
-				double sumMainValues = 0.0;
+			Map<String, Target> mainVars = samplesVariablesMap.get(sample);
+			int totalMainCount = mainVars.size();
 
-				Map<String, Target> mainVars = samplesVariablesMap.get(sample);
-				totalMainCount = mainVars.size();
+			// Step 1: read raw values and compute sample total for L1-normalisation
+			Map<String, Double> rawValues = new HashMap<>();
+			double sampleRawSum = 0.0;
+			for(Map.Entry<String, Target> entry : mainVars.entrySet()) {
+				double raw = 0.0;
+				try {
+					raw = Double.parseDouble(entry.getValue().getValue());
+				} catch(NumberFormatException e) {
+					// keep 0.0
+				}
+				rawValues.put(entry.getKey(), raw);
+				sampleRawSum += raw;
+			}
 
-				for(String feature : mainVars.keySet()) {
-					double target = 0.0;
-					try {
-						target = Double.parseDouble(mainVars.get(feature).getValue());
-					} catch(NumberFormatException e) {
-						target = 0.0;
-					}
-					sumMainValues += target;
-					if(normalizedFilterVector.get(feature) != null) {
-						double value = normalizedFilterVector.get(feature);
-						dotProduct += value * target;
-						matchingCount++;
-						sumMatchingValues += target;
-					}
-					sumSqB += target * target;
+			// Step 2: compute dot product and magnitudes using (optionally) log-transformed values
+			double dotProduct = 0.0;
+			double sumSqB = 0.0;
+			int matchingCount = 0;
+			double sumMatchingValues = 0.0; // pre-log percentage values for sum punishment
+			double sumMainValues = 0.0;     // pre-log percentage values for sum punishment
+
+			for(Map.Entry<String, Double> entry : rawValues.entrySet()) {
+				String feature = entry.getKey();
+				double raw = entry.getValue();
+
+				double transformed; // value used for cosine calculation
+				double punishValue; // pre-log percentage value used for sum punishment ratio
+
+				if(useLogTransform && sampleRawSum > 0.0) {
+					double pct = (raw / sampleRawSum) * 100.0;
+					transformed = Math.log1p(pct);
+					punishValue = pct;
+				} else {
+					transformed = raw;
+					punishValue = raw;
 				}
 
-				magnitude = Math.sqrt(sumSqA) * Math.sqrt(sumSqB);
-				if(magnitude != 0.0) {
-					similarity = dotProduct / magnitude;
+				sumSqB += transformed * transformed;
+				sumMainValues += punishValue;
 
-					// p1: count-based
-					double p1 = 1.0;
-					if(useCountPunishment) {
-						if(totalMainCount <= 0) {
-							p1 = 1.0;
-						} else {
-							double ratioCount = (double)matchingCount / (double)totalMainCount;
-							ratioCount = Math.max(MIN_RATIO, Math.min(1.0, ratioCount));
-							p1 = Math.pow(ratioCount, countExponent);
-						}
-					}
-
-					// p2: sum-based
-					double p2 = 1.0;
-					if(useSumPunishment) {
-						if(sumMainValues <= 0.0) {
-							// can't compute ratio; skip punishment
-							p2 = 1.0;
-						} else {
-							double ratioSum = sumMatchingValues / sumMainValues;
-							ratioSum = Math.max(MIN_RATIO, Math.min(1.0, ratioSum));
-							p2 = Math.pow(ratioSum, sumExponent);
-						}
-					}
-
-					double adjusted = similarity * p1 * p2;
-					// clamp into [0,1]
-					adjusted = Math.max(0.0, Math.min(1.0, adjusted));
-					filterRanking.put(sample, adjusted);
+				Double filterValue = normalizedFilterVector.get(feature);
+				if(filterValue != null) {
+					dotProduct += filterValue * transformed;
+					matchingCount++;
+					sumMatchingValues += punishValue;
 				}
+			}
+
+			double magnitude = Math.sqrt(sumSqA) * Math.sqrt(sumSqB);
+			if(magnitude != 0.0) {
+				double similarity = dotProduct / magnitude;
+
+				// p1: count-based punishment
+				double p1 = 1.0;
+				if(useCountPunishment && totalMainCount > 0) {
+					double ratioCount = Math.max(MIN_RATIO, Math.min(1.0, (double)matchingCount / totalMainCount));
+					p1 = Math.pow(ratioCount, countExponent);
+				}
+
+				// p2: sum-based punishment (uses pre-log percentage values)
+				double p2 = 1.0;
+				if(useSumPunishment && sumMainValues > 0.0) {
+					double ratioSum = Math.max(MIN_RATIO, Math.min(1.0, sumMatchingValues / sumMainValues));
+					p2 = Math.pow(ratioSum, sumExponent);
+				}
+
+				double adjusted = Math.max(0.0, Math.min(1.0, similarity * p1 * p2));
+				filterRanking.put(sample, adjusted);
 			}
 		}
 
@@ -492,8 +509,8 @@ public class LongFileExtractor {
 		}
 
 		for(Map.Entry<String, Double> entry : aggregatedMap.entrySet()) {
-			double normalizedValue = (entry.getValue() / totalSum) * 100.0;
-			aggregatedMap.put(entry.getKey(), normalizedValue);
+			double pct = (entry.getValue() / totalSum) * 100.0;
+			aggregatedMap.put(entry.getKey(), useLogTransform ? Math.log1p(pct) : pct);
 		}
 
 		return aggregatedMap;

@@ -47,6 +47,15 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 
 	public static final String P_CROSS_VALIDATION = "crossValidation";
 	public static final boolean DEF_CROSS_VALIDATION = false;
+
+	public static final String P_COUNT_EXPONENT = "countExponent";
+	public static final double DEF_COUNT_EXPONENT = 1.0;
+	public static final double MIN_COUNT_EXPONENT = 0.0;
+	public static final double MAX_COUNT_EXPONENT = 10.0;
+	public static final String P_SUM_EXPONENT = "sumExponent";
+	public static final double DEF_SUM_EXPONENT = 1.0;
+	public static final double MIN_SUM_EXPONENT = 0.0;
+	public static final double MAX_SUM_EXPONENT = 10.0;
 	/*
 	 * Score Plot general Settings
 	 */
@@ -141,6 +150,8 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 		putDefault(P_PATH_IMPORT_FILE, DEF_PATH_IMPORT_FILE);
 		putDefault(P_PATH_EXPORT_FILE, DEF_PATH_EXPORT_FILE);
 		putDefault(P_MAIN_DATA_FILE, DEF_MAIN_DATA_FILE);
+		putDefault(P_COUNT_EXPONENT, Double.toString(DEF_COUNT_EXPONENT));
+		putDefault(P_SUM_EXPONENT, Double.toString(DEF_SUM_EXPONENT));
 	}
 
 	public static IAnalysisSettings getPcaSettings() {
@@ -227,5 +238,25 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static Boolean isCrossValidation() {
 
 		return INSTANCE().getBoolean(P_CROSS_VALIDATION, DEF_CROSS_VALIDATION);
+	}
+
+	public static double getCountExponent() {
+
+		return INSTANCE().getDouble(P_COUNT_EXPONENT, DEF_COUNT_EXPONENT);
+	}
+
+	public static void setCountExponent(double value) {
+
+		INSTANCE().setDouble(P_COUNT_EXPONENT, Math.max(MIN_COUNT_EXPONENT, Math.min(MAX_COUNT_EXPONENT, value)));
+	}
+
+	public static double getSumExponent() {
+
+		return INSTANCE().getDouble(P_SUM_EXPONENT, DEF_SUM_EXPONENT);
+	}
+
+	public static void setSumExponent(double value) {
+
+		INSTANCE().setDouble(P_SUM_EXPONENT, Math.max(MIN_SUM_EXPONENT, Math.min(MAX_SUM_EXPONENT, value)));
 	}
 }

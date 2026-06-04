@@ -48,7 +48,10 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.swt.widgets.TabFolder;
+import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
@@ -108,6 +111,8 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 	private String previousMainFilePath = null;
 	private String previousFilterFilePath = null;
 
+	private Button radioAnd;
+	private Button chkLogTransform;
 	private Button chkCountPunish;
 	private Text txtCountExponent;
 	private Button chkSumPunish;
@@ -210,18 +215,30 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 	private void createControlArea(Composite parent) {
 
 		Composite container = new Composite(parent, SWT.NONE);
-		GridLayout controlsLayout = new GridLayout(1, false);
-		container.setLayout(controlsLayout);
+		container.setLayout(new GridLayout(1, false));
+		container.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-		GridData controlsData = new GridData(SWT.FILL, SWT.FILL, true, true);
-		container.setLayoutData(controlsData);
+		TabFolder tabFolder = new TabFolder(container, SWT.NONE);
+		tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-		createSampleSpinner(container);
-		createInExClusionSelection(container);
-		createGroupSelection(container);
-		createPunishmentControls(container);
-		createApplyButton(container);
-		createMatchCount(container);
+		TabItem filtersTab = new TabItem(tabFolder, SWT.NONE);
+		filtersTab.setText("Filters");
+		Composite filtersComposite = new Composite(tabFolder, SWT.NONE);
+		filtersComposite.setLayout(new GridLayout(1, false));
+		createSampleSpinner(filtersComposite);
+		createInExClusionSelection(filtersComposite);
+		createGroupSelection(filtersComposite);
+		createMatchCount(filtersComposite);
+		filtersTab.setControl(filtersComposite);
+
+		TabItem cosimilarityTab = new TabItem(tabFolder, SWT.NONE);
+		cosimilarityTab.setText("Cosine Similarity");
+		Composite cosimilarityComposite = new Composite(tabFolder, SWT.NONE);
+		cosimilarityComposite.setLayout(new GridLayout(1, false));
+		createTransformControls(cosimilarityComposite);
+		createPunishmentControls(cosimilarityComposite);
+		createApplyButton(cosimilarityComposite);
+		cosimilarityTab.setControl(cosimilarityComposite);
 	}
 
 	private void createSampleSpinner(Composite parent) {
@@ -255,7 +272,26 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 
 	private void createInExClusionSelection(Composite parent) {
 
-		Composite nameSelection = new Composite(parent, SWT.NONE);
+		Group nameFilterGroup = new Group(parent, SWT.NONE);
+		nameFilterGroup.setText("Name Filter");
+		nameFilterGroup.setLayout(new GridLayout(1, false));
+		nameFilterGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+
+		Composite logicRow = new Composite(nameFilterGroup, SWT.NONE);
+		logicRow.setLayout(new GridLayout(3, false));
+		logicRow.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+
+		Label logicLabel = new Label(logicRow, SWT.NONE);
+		logicLabel.setText("Include logic:");
+
+		Button radioOr = new Button(logicRow, SWT.RADIO);
+		radioOr.setText("OR");
+		radioOr.setSelection(true);
+
+		radioAnd = new Button(logicRow, SWT.RADIO);
+		radioAnd.setText("AND");
+
+		Composite nameSelection = new Composite(nameFilterGroup, SWT.NONE);
 		nameSelection.setLayout(new GridLayout(2, false));
 		nameSelection.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 
@@ -304,6 +340,17 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 
 		Button excludeRemoveBtn = new Button(excludeGroup, SWT.PUSH);
 		excludeRemoveBtn.setText("Remove selected");
+
+		Listener radioListener = e -> {
+			if(((Button)e.widget).getSelection()) {
+				if(extractor != null && filterFile != null && !filterFile.isEmpty()) {
+					updateRankingTable();
+				}
+				updateMatchCount();
+			}
+		};
+		radioOr.addListener(SWT.Selection, radioListener);
+		radioAnd.addListener(SWT.Selection, radioListener);
 
 		includeAddBtn.addListener(SWT.Selection, e -> {
 			String text = includeText.getText().trim();
@@ -383,6 +430,19 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		});
 	}
 
+	private void createTransformControls(Composite parent) {
+
+		Group transformGroup = new Group(parent, SWT.NONE);
+		transformGroup.setText("Feature Transform");
+		transformGroup.setLayout(new GridLayout(1, false));
+		transformGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+
+		chkLogTransform = new Button(transformGroup, SWT.CHECK);
+		chkLogTransform.setText("Log transform features — reduces dominance of large components (e.g. solvent)");
+		chkLogTransform.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		chkLogTransform.setSelection(false);
+	}
+
 	private void createPunishmentControls(Composite parent) {
 
 		Group punishGroup = new Group(parent, SWT.NONE);
@@ -399,7 +459,7 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		Label lblCountExp = new Label(punishGroup, SWT.NONE);
 		lblCountExp.setText("Count exponent (0.0 - 10.0):");
 		txtCountExponent = new Text(punishGroup, SWT.BORDER);
-		txtCountExponent.setText("1.0");
+		txtCountExponent.setText(Double.toString(PreferenceSupplier.getCountExponent()));
 		txtCountExponent.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 		new Label(punishGroup, SWT.NONE);
 
@@ -412,7 +472,7 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 		Label lblSumExp = new Label(punishGroup, SWT.NONE);
 		lblSumExp.setText("Sum exponent (0.0 - 10.0):");
 		txtSumExponent = new Text(punishGroup, SWT.BORDER);
-		txtSumExponent.setText("1.0");
+		txtSumExponent.setText(Double.toString(PreferenceSupplier.getSumExponent()));
 		txtSumExponent.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 		new Label(punishGroup, SWT.NONE);
 
@@ -449,16 +509,21 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 
 		if(extractor == null)
 			return;
-		
+
+		boolean useLog = chkLogTransform != null && !chkLogTransform.isDisposed() && chkLogTransform.getSelection();
+		extractor.setUseLogTransform(useLog);
+
 		boolean useCount = chkCountPunish != null && !chkCountPunish.isDisposed() && chkCountPunish.getSelection();
-		double countExp = parseExponent(txtCountExponent.getText(), 1.0);
+		double countExp = parseExponent(txtCountExponent.getText(), PreferenceSupplier.DEF_COUNT_EXPONENT);
 		extractor.setUseCountPunishment(useCount);
 		extractor.setCountExponent(countExp);
+		PreferenceSupplier.setCountExponent(countExp);
 
 		boolean useSum = chkSumPunish != null && !chkSumPunish.isDisposed() && chkSumPunish.getSelection();
-		double sumExp = parseExponent(txtSumExponent.getText(), 1.0);
+		double sumExp = parseExponent(txtSumExponent.getText(), PreferenceSupplier.DEF_SUM_EXPONENT);
 		extractor.setUseSumPunishment(useSum);
 		extractor.setSumExponent(sumExp);
+		PreferenceSupplier.setSumExponent(sumExp);
 	}
 
 	private double parseExponent(String text, double def) {
@@ -509,11 +574,27 @@ public class FilesLongFormatFilterWizardPage extends AbstractAnalysisWizardPage 
 			return false;
 		}
 
-		boolean includeOK = includeList.getItemCount() == 0;
-		for(String rule : includeList.getItems()) {
-			if(matches(sample.getSampleName(), rule) || matches(sample.getSampleDetails(), rule)) {
-				includeOK = true;
-				break;
+		boolean includeOK;
+		String[] includeRules = includeList.getItems();
+		if(includeRules.length == 0) {
+			includeOK = true;
+		} else if(radioAnd != null && !radioAnd.isDisposed() && radioAnd.getSelection()) {
+			// AND: every rule must match at least one of name or details
+			includeOK = true;
+			for(String rule : includeRules) {
+				if(!matches(sample.getSampleName(), rule) && !matches(sample.getSampleDetails(), rule)) {
+					includeOK = false;
+					break;
+				}
+			}
+		} else {
+			// OR: at least one rule must match
+			includeOK = false;
+			for(String rule : includeRules) {
+				if(matches(sample.getSampleName(), rule) || matches(sample.getSampleDetails(), rule)) {
+					includeOK = true;
+					break;
+				}
 			}
 		}
 
