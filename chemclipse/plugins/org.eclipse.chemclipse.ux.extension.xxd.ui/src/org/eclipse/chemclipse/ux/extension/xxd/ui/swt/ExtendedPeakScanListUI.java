@@ -6,7 +6,7 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  * Christoph Läubrich - update chromatogram selection after delete, allow updating of selection
@@ -128,7 +128,6 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 	private AtomicReference<Button> buttonMerge = new AtomicReference<>();
 	private AtomicReference<Button> buttonDelete = new AtomicReference<>();
 	private AtomicReference<ScanIdentifierUI> scanIdentifierControl = new AtomicReference<>();
-	private AtomicReference<Button> buttonTableEdit = new AtomicReference<>();
 	private AtomicReference<PeakScanListUI> tableViewer = new AtomicReference<>();
 
 	private IChromatogramSelection chromatogramSelection;
@@ -249,7 +248,6 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 		enableToolbar(toolbarSearch, buttonToolbarSearch.get(), IMAGE_SEARCH, TOOLTIP_SEARCH, false);
 		enableToolbar(toolbarInfoBottom, buttonToolbarInfo.get(), IApplicationImage.IMAGE_INFO, TOOLTIP_INFO, true);
 
-		enableEdit(tableViewer, buttonTableEdit.get(), IMAGE_EDIT_ENTRY, false);
 		buttonComparison.get().setEnabled(false);
 		buttonMerge.get().setEnabled(false);
 		buttonDelete.get().setEnabled(false);
@@ -267,7 +265,6 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 
 		createButtonInfo(composite);
 		createButtonSearch(composite);
-		createButtonEdit(composite);
 		createButtonComparison(composite);
 		createButtonMerge(composite);
 		createButtonDelete(composite);
@@ -288,11 +285,6 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 	private void createButtonSearch(Composite parent) {
 
 		buttonToolbarSearch.set(createButtonToggleToolbar(parent, toolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH));
-	}
-
-	private void createButtonEdit(Composite parent) {
-
-		buttonTableEdit.set(createButtonToggleEditTable(parent, tableViewer, IMAGE_EDIT_ENTRY));
 	}
 
 	private void createToolbarInfoTop(Composite parent) {
@@ -668,7 +660,7 @@ public class ExtendedPeakScanListUI extends Composite implements IExtendedPartUI
 
 	/**
 	 * May return null.
-	 * 
+	 *
 	 * @return IScan
 	 */
 	private IScan getScan(Object object) {
