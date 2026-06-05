@@ -119,7 +119,9 @@ public class PeakScanListUI extends ExtendedTableViewer {
 		for(int i = 0; i < tableViewerColumns.size(); i++) {
 			TableViewerColumn tableViewerColumn = tableViewerColumns.get(i);
 			String label = tableViewerColumn.getColumn().getText();
-			tableViewerColumn.setEditingSupport(new PeakScanListEditingSupport(this, label));
+			if(label.equals(PeakScanListLabelProvider.ACTIVE_FOR_ANALYSIS)) {
+				tableViewerColumn.setEditingSupport(new PeakScanListEditingSupport(this, label));
+			}
 		}
 	}
 
