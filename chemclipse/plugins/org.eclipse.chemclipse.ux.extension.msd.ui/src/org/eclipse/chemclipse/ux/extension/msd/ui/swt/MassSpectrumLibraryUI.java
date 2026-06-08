@@ -36,11 +36,15 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.swt.ui.components.InformationUI;
 import org.eclipse.chemclipse.swt.ui.components.SearchSupportUI;
 import org.eclipse.chemclipse.swt.ui.preferences.PreferencePageSystem;
+import org.eclipse.chemclipse.ux.extension.msd.ui.dialogs.LibraryEntryEditDialog;
 import org.eclipse.chemclipse.ux.extension.msd.ui.help.HelpContext;
 import org.eclipse.chemclipse.ux.extension.msd.ui.internal.runnables.LibraryImportRunnable;
 import org.eclipse.chemclipse.ux.extension.ui.swt.IExtendedPartUI;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.FillLayout;
@@ -61,7 +65,6 @@ public class MassSpectrumLibraryUI extends Composite implements IExtendedPartUI 
 	private AtomicReference<InformationUI> toolbarInfo = new AtomicReference<>();
 	private AtomicReference<Button> buttonToolbarSearch = new AtomicReference<>();
 	private AtomicReference<SearchSupportUI> toolbarSearch = new AtomicReference<>();
-	private AtomicReference<Button> buttonTableEditControl = new AtomicReference<>();
 	private AtomicReference<MassSpectrumListUI> massSpectrumListControl = new AtomicReference<>();
 
 	private IMassSpectra massSpectra;
@@ -105,7 +108,7 @@ public class MassSpectrumLibraryUI extends Composite implements IExtendedPartUI 
 
 		enableToolbar(toolbarInfo, buttonToolbarInfo.get(), IApplicationImage.IMAGE_INFO, TOOLTIP_INFO, true);
 		enableToolbar(toolbarSearch, buttonToolbarSearch.get(), IMAGE_SEARCH, TOOLTIP_SEARCH, false);
-		enableEdit(massSpectrumListControl, buttonTableEditControl.get(), IMAGE_EDIT, false);
+		massSpectrumListControl.get().setEditEnabled(false);
 	}
 
 	private void createToolbarMain(Composite parent) {
@@ -115,13 +118,12 @@ public class MassSpectrumLibraryUI extends Composite implements IExtendedPartUI 
 		GridData gridDataStatus = new GridData(GridData.FILL_HORIZONTAL);
 		gridDataStatus.horizontalAlignment = SWT.END;
 		composite.setLayoutData(gridDataStatus);
-		composite.setLayout(new GridLayout(7, false));
+		composite.setLayout(new GridLayout(6, false));
 
 		createButtonToggleToolbarInfo(composite);
 		createButtonToggleToolbarSearch(composite);
 		createButtonLibraryImport(composite);
 		createButtonDeleteEntries(composite);
-		createButtonToggleEditTable(composite);
 		createButtonHelp(composite, HelpContext.MASS_SPECTRUM_SEARCH);
 		createButtonSettings(composite);
 	}
@@ -136,12 +138,6 @@ public class MassSpectrumLibraryUI extends Composite implements IExtendedPartUI 
 
 		Button button = createButtonToggleToolbar(parent, toolbarSearch, IMAGE_SEARCH, TOOLTIP_SEARCH);
 		buttonToolbarSearch.set(button);
-	}
-
-	private void createButtonToggleEditTable(Composite parent) {
-
-		Button button = createButtonToggleEditTable(parent, massSpectrumListControl, IMAGE_EDIT_ENTRY);
-		buttonTableEditControl.set(button);
 	}
 
 	private void createButtonSettings(Composite parent) {
@@ -286,6 +282,27 @@ public class MassSpectrumLibraryUI extends Composite implements IExtendedPartUI 
 				massSpectrumListUI.getTable().setFocus();
 			}
 		});
+		massSpectrumListUI.getTable().addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+
+				Table table = massSpectrumListUI.getTable();
+				int index = table.getSelectionIndex();
+				if(index >= 0) {
+					Object data = table.getItem(index).getData();
+					if(data instanceof IRegularLibraryMassSpectrum libraryMassSpectrum) {
+						LibraryEntryEditDialog dialog = new LibraryEntryEditDialog(getShell(), libraryMassSpectrum);
+						if(dialog.open() == Window.OK) {
+							if(massSpectra != null) {
+								massSpectra.setDirty(true);
+							}
+							massSpectrumListUI.refresh();
+						}
+					}
+				}
+			}
+		});
 
 		massSpectrumListControl.set(massSpectrumListUI);
 	}
@@ -323,8 +340,7 @@ public class MassSpectrumLibraryUI extends Composite implements IExtendedPartUI 
 	private void updateLabel() {
 
 		String filterInformation = "[" + toolbarSearch.get().getSearchText() + "]";
-		String editInformation = massSpectrumListControl.get().isEditEnabled() ? "Edit is enabled." : "Edit is disabled.";
-		toolbarInfo.get().setText("Mass Spectra: " + (massSpectra != null ? massSpectra.size() : 0) + " " + filterInformation + " - " + editInformation);
+		toolbarInfo.get().setText("Mass Spectra: " + (massSpectra != null ? massSpectra.size() : 0) + " " + filterInformation);
 	}
 
 	private void applySettings() {
