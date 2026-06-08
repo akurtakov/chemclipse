@@ -78,7 +78,7 @@ public class TraceRange2DEditingSupport extends EditingSupport {
 					return getComboIndexType(traceRange.getSecondDimensionHint(), secondDimensionValues);
 			}
 		}
-		return false;
+		return "";
 	}
 
 	@Override

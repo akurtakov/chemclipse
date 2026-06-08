@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2024, 2025 Lablicate GmbH.
+ * Copyright (c) 2024, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -55,13 +55,13 @@ public class TraceRange1DEditingSupport extends EditingSupport {
 
 		if(element instanceof TraceRange1D traceRange) {
 			switch(column) {
-				case TraceRange2DLabelProvider.NAME:
+				case TraceRange1DLabelProvider.NAME:
 					return traceRange.getName();
-				case TraceRange2DLabelProvider.TRACES:
+				case TraceRange1DLabelProvider.TRACES:
 					return traceRange.getTraces();
 			}
 		}
-		return false;
+		return "";
 	}
 
 	@Override
