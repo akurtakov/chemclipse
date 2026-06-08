@@ -71,9 +71,6 @@ public interface IChemClipseEvents {
 	String TOPIC_WELL_PCR_UPDATE_SELECTION = "well/pcr/update/selection";
 	String TOPIC_PLATE_PCR_UPDATE_SELECTION = "plate/pcr/update/selection";
 
-	String TOPIC_LIBRARY_MSD_ADD_TO_DB_SEARCH = "library/msd/add/dbsearch";
-	String TOPIC_LIBRARY_MSD_REMOVE_FROM_DB_SEARCH = "library/msd/remove/dbsearch";
-
 	String TOPIC_RI_LIBRARY_ADD_ADD_TO_PROCESS = "ri/library/add/process";
 	String TOPIC_RI_LIBRARY_REMOVE_FROM_PROCESS = "ri/library/remove/process";
 	String TOPIC_RI_LIBRARY_UPDATE = "ri/library/update";
