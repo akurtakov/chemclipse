@@ -6,11 +6,13 @@
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.swt.ui.components.identification;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
@@ -24,29 +26,16 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 public class SynonymsEditUI extends Composite {
 
-	private static final String ACTION_INITIALIZE = "ACTION_INITIALIZE";
-	private static final String ACTION_CANCEL = "ACTION_CANCEL";
-	private static final String ACTION_ADD = "ACTION_ADD";
-	private static final String ACTION_DELETE = "ACTION_DELETE";
-	private static final String ACTION_SELECT = "ACTION_SELECT";
-
-	private SynonymsListUI synonymsListUI;
-
-	private Button buttonCancel;
-	private Button buttonDelete;
-	private Button buttonAdd;
-
-	private Text textSynonym;
-	private Button buttonSynonymAdd;
+	private AtomicReference<Text> textSynonym = new AtomicReference<>();
+	private AtomicReference<Button> buttonAdd = new AtomicReference<>();
+	private AtomicReference<Button> buttonDelete = new AtomicReference<>();
+	private AtomicReference<SynonymsListUI> synonymsListUI = new AtomicReference<>();
 
 	private ILibraryInformation libraryInformation;
 
@@ -58,11 +47,9 @@ public class SynonymsEditUI extends Composite {
 
 	public void update(ILibraryInformation libraryInformation) {
 
+		this.libraryInformation = libraryInformation;
 		if(libraryInformation != null) {
-			this.libraryInformation = libraryInformation;
-			synonymsListUI.setInput(libraryInformation.getSynonyms());
-		} else {
-			this.libraryInformation = null;
+			synonymsListUI.get().setInput(libraryInformation.getSynonyms());
 		}
 	}
 
@@ -70,171 +57,108 @@ public class SynonymsEditUI extends Composite {
 
 		setLayout(new FillLayout());
 		Composite composite = new Composite(this, SWT.NONE);
-		composite.setLayout(new GridLayout(4, false));
+		composite.setLayout(new GridLayout(1, false));
 
-		createButtonField(composite);
-		createTableField(composite);
-
-		enableButtonFields(ACTION_INITIALIZE);
+		createToolbar(composite);
+		createTable(composite);
 	}
 
-	private void createButtonField(Composite composite) {
+	private void createToolbar(Composite parent) {
 
-		/*
-		 * Text synonym
-		 */
-		textSynonym = new Text(composite, SWT.BORDER);
-		textSynonym.setText("");
-		textSynonym.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		Composite composite = new Composite(parent, SWT.NONE);
+		composite.setBackground(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
+		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		composite.setLayout(new GridLayout(3, false));
 
-		buttonSynonymAdd = new Button(composite, SWT.PUSH);
-		buttonSynonymAdd.setText("Add");
-		buttonSynonymAdd.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_EXECUTE, IApplicationImageProvider.SIZE_16x16));
-		buttonSynonymAdd.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-
-				Shell shell = Display.getCurrent().getActiveShell();
-				String synonym = textSynonym.getText().trim();
-				if("".equals(synonym)) {
-					MessageBox messageBox = new MessageBox(shell, SWT.ICON_WARNING | SWT.OK);
-					messageBox.setText("Add synonym");
-					messageBox.setMessage("Please type in a new synonym.");
-					messageBox.open();
-				} else {
-					if(libraryInformation.getSynonyms().contains(synonym)) {
-						MessageBox messageBox = new MessageBox(shell, SWT.ICON_WARNING | SWT.OK);
-						messageBox.setText("Add synonym");
-						messageBox.setMessage("The synonym already exists.");
-						messageBox.open();
-					} else {
-						libraryInformation.getSynonyms().add(synonym);
-						textSynonym.setText("");
-						synonymsListUI.update(libraryInformation);
-						enableButtonFields(ACTION_INITIALIZE);
-					}
-				}
-			}
-		});
-		/*
-		 * Buttons
-		 */
-		Composite compositeButtons = new Composite(composite, SWT.NONE);
-		compositeButtons.setLayout(new GridLayout(3, true));
-		GridData gridDataComposite = new GridData();
-		gridDataComposite.horizontalAlignment = SWT.RIGHT;
-		compositeButtons.setLayoutData(gridDataComposite);
-
-		buttonCancel = new Button(compositeButtons, SWT.PUSH);
-		buttonCancel.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_CANCEL, IApplicationImageProvider.SIZE_16x16));
-		buttonCancel.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-
-				enableButtonFields(ACTION_CANCEL);
-			}
-		});
-
-		buttonDelete = new Button(compositeButtons, SWT.PUSH);
-		buttonDelete.setEnabled(false);
-		buttonDelete.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DELETE, IApplicationImageProvider.SIZE_16x16));
-		buttonDelete.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-
-				Table table = synonymsListUI.getTable();
-				int index = table.getSelectionIndex();
-				if(index >= 0) {
-					MessageBox messageBox = new MessageBox(Display.getCurrent().getActiveShell(), SWT.ICON_WARNING | SWT.OK | SWT.CANCEL);
-					messageBox.setText("Delete synonyms?");
-					messageBox.setMessage("Would you like to delete the synonyms?");
-					if(messageBox.open() == SWT.OK) {
-
-						enableButtonFields(ACTION_DELETE);
-						TableItem[] tableItems = table.getSelection();
-						for(TableItem tableItem : tableItems) {
-							Object object = tableItem.getData();
-							if(object instanceof String) {
-								libraryInformation.getSynonyms().remove(object);
-							}
-						}
-						synonymsListUI.update(libraryInformation);
-					}
-				}
-			}
-		});
-
-		buttonAdd = new Button(compositeButtons, SWT.PUSH);
-		buttonAdd.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ADD, IApplicationImageProvider.SIZE_16x16));
-		buttonAdd.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-
-				enableButtonFields(ACTION_ADD);
-			}
-		});
+		createTextSynonym(composite);
+		createButtonAdd(composite);
+		createButtonDelete(composite);
 	}
 
-	private void createTableField(Composite composite) {
+	private void createTextSynonym(Composite parent) {
 
-		Composite compositeTable = new Composite(composite, SWT.NONE);
-		GridData gridData = new GridData(GridData.FILL_BOTH);
-		gridData.horizontalSpan = 4;
-		compositeTable.setLayoutData(gridData);
-		compositeTable.setLayout(new FillLayout());
+		Text text = new Text(parent, SWT.BORDER);
+		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		text.addTraverseListener(e -> {
 
-		synonymsListUI = new SynonymsListUI(compositeTable, SWT.BORDER | SWT.MULTI);
-		synonymsListUI.getTable().addSelectionListener(new SelectionAdapter() {
+			if(e.detail == SWT.TRAVERSE_RETURN) {
+				addSynonym();
+				e.doit = false;
+			}
+		});
+		textSynonym.set(text);
+	}
+
+	private void createButtonAdd(Composite parent) {
+
+		Button button = new Button(parent, SWT.PUSH);
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_ADD, IApplicationImageProvider.SIZE_16x16));
+		button.addSelectionListener(new SelectionAdapter() {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				enableButtonFields(ACTION_SELECT);
+				addSynonym();
 			}
 		});
+		buttonAdd.set(button);
 	}
 
-	private void enableButtonFields(String action) {
+	private void createButtonDelete(Composite parent) {
 
-		enableFields(false);
-		switch(action) {
-			case ACTION_INITIALIZE:
-				buttonAdd.setEnabled(true);
-				break;
-			case ACTION_CANCEL:
-				buttonAdd.setEnabled(true);
-				break;
-			case ACTION_ADD:
-				buttonCancel.setEnabled(true);
-				textSynonym.setEnabled(true);
-				buttonSynonymAdd.setEnabled(true);
-				break;
-			case ACTION_DELETE:
-				buttonAdd.setEnabled(true);
-				break;
-			case ACTION_SELECT:
-				buttonAdd.setEnabled(true);
+		Button button = new Button(parent, SWT.PUSH);
+		button.setEnabled(false);
+		button.setImage(ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_DELETE, IApplicationImageProvider.SIZE_16x16));
+		button.addSelectionListener(new SelectionAdapter() {
 
-				if(synonymsListUI.getTable().getSelectionIndex() >= 0) {
-					buttonDelete.setEnabled(true);
-				} else {
-					buttonDelete.setEnabled(false);
-				}
-				break;
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				deleteSynonyms();
+			}
+		});
+		buttonDelete.set(button);
+	}
+
+	private void createTable(Composite parent) {
+
+		SynonymsListUI listUI = new SynonymsListUI(parent, SWT.BORDER | SWT.MULTI);
+		listUI.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
+		listUI.getTable().addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				buttonDelete.get().setEnabled(listUI.getTable().getSelectionIndex() >= 0);
+			}
+		});
+		synonymsListUI.set(listUI);
+	}
+
+	private void addSynonym() {
+
+		if(libraryInformation != null) {
+			String synonym = textSynonym.get().getText().trim();
+			if(!synonym.isEmpty() && !libraryInformation.getSynonyms().contains(synonym)) {
+				libraryInformation.getSynonyms().add(synonym);
+				textSynonym.get().setText("");
+				synonymsListUI.get().update(libraryInformation);
+			}
 		}
 	}
 
-	private void enableFields(boolean enabled) {
+	private void deleteSynonyms() {
 
-		buttonCancel.setEnabled(enabled);
-		buttonDelete.setEnabled(enabled);
-		buttonAdd.setEnabled(enabled);
-
-		textSynonym.setEnabled(enabled);
-		buttonSynonymAdd.setEnabled(enabled);
+		if(libraryInformation != null) {
+			Table table = synonymsListUI.get().getTable();
+			for(TableItem tableItem : table.getSelection()) {
+				Object object = tableItem.getData();
+				if(object instanceof String synonym) {
+					libraryInformation.getSynonyms().remove(synonym);
+				}
+			}
+			synonymsListUI.get().update(libraryInformation);
+			buttonDelete.get().setEnabled(false);
+		}
 	}
 }
