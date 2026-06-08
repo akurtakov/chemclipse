@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2025 Lablicate GmbH.
+ * Copyright (c) 2016, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -11,7 +11,7 @@
  * Philip Wenig - initial API and implementation
  * Alexander Kerner - Generics
  *******************************************************************************/
-package org.eclipse.chemclipse.msd.swt.ui.internal.runnables;
+package org.eclipse.chemclipse.ux.extension.msd.ui.internal.runnables;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
