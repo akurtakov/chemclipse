@@ -13,10 +13,10 @@
 package org.eclipse.chemclipse.msd.converter.supplier.amdis.preferences;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import org.eclipse.chemclipse.support.preferences.AbstractPreferenceSupplier;
 import org.eclipse.chemclipse.support.preferences.IPreferenceSupplier;
-import org.eclipse.chemclipse.support.text.CharsetNIO;
 import org.osgi.framework.FrameworkUtil;
 
 public class PreferenceSupplier extends AbstractPreferenceSupplier {
@@ -39,13 +39,13 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	public static final boolean DEF_PARSE_MOL_INFORMATION = true;
 
 	public static final String P_CHARSET_IMPORT_MSL = "charsetImportMSL";
-	public static final String DEF_CHARSET_IMPORT_MSL = CharsetNIO.US_ASCII.name();
+	public static final String DEF_CHARSET_IMPORT_MSL = StandardCharsets.US_ASCII.name();
 	public static final String P_CHARSET_IMPORT_MSP = "charsetImportMSP";
-	public static final String DEF_CHARSET_IMPORT_MSP = CharsetNIO.US_ASCII.name();
+	public static final String DEF_CHARSET_IMPORT_MSP = StandardCharsets.US_ASCII.name();
 	public static final String P_CHARSET_IMPORT_FIN = "charsetImportFIN";
-	public static final String DEF_CHARSET_IMPORT_FIN = CharsetNIO.US_ASCII.name();
+	public static final String DEF_CHARSET_IMPORT_FIN = StandardCharsets.US_ASCII.name();
 	public static final String P_CHARSET_IMPORT_ELU = "charsetImportELU";
-	public static final String DEF_CHARSET_IMPORT_ELU = CharsetNIO.US_ASCII.name();
+	public static final String DEF_CHARSET_IMPORT_ELU = StandardCharsets.US_ASCII.name();
 
 	public static final String P_PATH_IMPORT = "pathImport";
 	public static final String DEF_PATH_IMPORT = "";
@@ -129,7 +129,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 		return getCharset(P_CHARSET_IMPORT_MSL, DEF_CHARSET_IMPORT_MSL);
 	}
 
-	public static void setCharsetImportMSL(CharsetNIO charsetNIO) {
+	public static void setCharsetImportMSL(Charset charsetNIO) {
 
 		setCharset(P_CHARSET_IMPORT_MSL, charsetNIO);
 	}
@@ -139,7 +139,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 		return getCharset(P_CHARSET_IMPORT_MSP, DEF_CHARSET_IMPORT_MSP);
 	}
 
-	public static void setCharsetImportMSP(CharsetNIO charsetNIO) {
+	public static void setCharsetImportMSP(Charset charsetNIO) {
 
 		setCharset(P_CHARSET_IMPORT_MSP, charsetNIO);
 	}
@@ -149,7 +149,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 		return getCharset(P_CHARSET_IMPORT_FIN, DEF_CHARSET_IMPORT_FIN);
 	}
 
-	public static void setCharsetImportFIN(CharsetNIO charsetNIO) {
+	public static void setCharsetImportFIN(Charset charsetNIO) {
 
 		setCharset(P_CHARSET_IMPORT_FIN, charsetNIO);
 	}
@@ -159,7 +159,7 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 		return getCharset(P_CHARSET_IMPORT_ELU, DEF_CHARSET_IMPORT_ELU);
 	}
 
-	public static void setCharsetImportELU(CharsetNIO charsetNIO) {
+	public static void setCharsetImportELU(Charset charsetNIO) {
 
 		setCharset(P_CHARSET_IMPORT_ELU, charsetNIO);
 	}
@@ -187,13 +187,13 @@ public class PreferenceSupplier extends AbstractPreferenceSupplier {
 	private static Charset getCharset(String key, String def) {
 
 		try {
-			return CharsetNIO.valueOf(INSTANCE().get(key, def)).getCharset();
+			return Charset.forName(INSTANCE().get(key, def));
 		} catch(Exception e) {
-			return CharsetNIO.US_ASCII.getCharset();
+			return StandardCharsets.US_ASCII;
 		}
 	}
 
-	private static void setCharset(String key, CharsetNIO charsetNIO) {
+	private static void setCharset(String key, Charset charsetNIO) {
 
 		INSTANCE().put(key, charsetNIO.name());
 	}
