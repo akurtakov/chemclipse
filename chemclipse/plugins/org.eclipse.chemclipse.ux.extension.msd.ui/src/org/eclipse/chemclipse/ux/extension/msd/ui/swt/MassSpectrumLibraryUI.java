@@ -297,7 +297,7 @@ public class MassSpectrumLibraryUI extends Composite implements IExtendedPartUI 
 							if(massSpectra != null) {
 								massSpectra.setDirty(true);
 							}
-							massSpectrumListUI.refresh();
+							massSpectrumListUI.updateDuplicates();
 						}
 					}
 				}

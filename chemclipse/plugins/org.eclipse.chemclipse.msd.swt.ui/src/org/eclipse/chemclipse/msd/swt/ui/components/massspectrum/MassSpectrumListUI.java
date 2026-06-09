@@ -34,13 +34,11 @@ import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ILazyContentProvider;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
-import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 
 public class MassSpectrumListUI extends ExtendedTableViewer {
 
@@ -97,11 +95,11 @@ public class MassSpectrumListUI extends ExtendedTableViewer {
 			300 //
 	};
 
-	private ITableLabelProvider labelProvider;
-	private IStructuredContentProvider normalContentProvider;
-	private ILazyContentProvider lazyContentProvider;
-	private MassSpectrumListFilter massSpectrumListFilter;
-	private ViewerComparator tableComparator;
+	private MassSpectrumListLabelProvider labelProvider = new MassSpectrumListLabelProvider();
+	private IStructuredContentProvider normalContentProvider = new MassSpectrumListContentProvider();
+	private ILazyContentProvider lazyContentProvider = new MassSpectrumListContentProviderLazy(this);
+	private MassSpectrumListFilter massSpectrumListFilter = new MassSpectrumListFilter();
+	private ViewerComparator tableComparator = new MassSpectrumListTableComparator();
 	/*
 	 * Store an instance of the mass spectra.
 	 * SWT.VIRTUAL supports no filtering by default.
@@ -144,7 +142,7 @@ public class MassSpectrumListUI extends ExtendedTableViewer {
 
 	public MassSpectrumListUI(Composite parent) {
 
-		this(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.VIRTUAL);
+		this(parent, SWT.MULTI | SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.V_SCROLL | SWT.VIRTUAL);
 	}
 
 	public MassSpectrumListUI(Composite parent, int style) {
@@ -171,8 +169,7 @@ public class MassSpectrumListUI extends ExtendedTableViewer {
 					 * Filter DB
 					 */
 					try {
-						Shell shell = Display.getDefault().getActiveShell();
-						ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
+						ProgressMonitorDialog dialog = new ProgressMonitorDialog(Display.getDefault().getActiveShell());
 						DatabaseSearchRunnable databaseSearchRunnable = new DatabaseSearchRunnable();
 						dialog.run(true, false, databaseSearchRunnable);
 						updateInput(databaseSearchRunnable.getFilteredMassSpectra());
@@ -199,12 +196,19 @@ public class MassSpectrumListUI extends ExtendedTableViewer {
 		updateInput(massSpectra);
 	}
 
+	public void updateDuplicates() {
+
+		labelProvider.setInput(massSpectra);
+		refresh();
+	}
+
 	private void updateInput(IMassSpectra massSpectra) {
 
 		if(massSpectra != null) {
 			boolean massiveData = isMassiveData(massSpectra);
 			super.setInput(null); // Can only enable the hash look up before input has been set
 			setLabelAndContentProviders(massiveData);
+			labelProvider.setInput(massSpectra);
 			super.setInput(massSpectra);
 			setItemCount(massSpectra.size());
 		}
@@ -213,14 +217,7 @@ public class MassSpectrumListUI extends ExtendedTableViewer {
 	private void createColumns() {
 
 		createColumns(titles, bounds);
-
-		labelProvider = new MassSpectrumListLabelProvider();
-		normalContentProvider = new MassSpectrumListContentProvider();
-		lazyContentProvider = new MassSpectrumListContentProviderLazy(this);
-		tableComparator = new MassSpectrumListTableComparator();
-
 		setLabelAndContentProviders(isVirtualTable());
-		massSpectrumListFilter = new MassSpectrumListFilter();
 		setFilters(massSpectrumListFilter);
 		setEditingSupport();
 	}

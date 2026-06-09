@@ -1,23 +1,30 @@
 /*******************************************************************************
- * Copyright (c) 2013, 2025 Lablicate GmbH.
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Philip Wenig - initial API and implementation
  *******************************************************************************/
 package org.eclipse.chemclipse.msd.swt.ui.internal.provider;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.chemclipse.model.core.IChromatogramOverview;
 import org.eclipse.chemclipse.model.identifier.IIdentificationTarget;
 import org.eclipse.chemclipse.model.identifier.ILibraryInformation;
 import org.eclipse.chemclipse.model.preferences.PreferenceSupplier;
+import org.eclipse.chemclipse.msd.model.core.IMassSpectra;
 import org.eclipse.chemclipse.msd.model.core.IRegularLibraryMassSpectrum;
 import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.splash.SplashFactory;
@@ -25,18 +32,82 @@ import org.eclipse.chemclipse.rcp.ui.icons.core.ApplicationImageFactory;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImage;
 import org.eclipse.chemclipse.rcp.ui.icons.core.IApplicationImageProvider;
 import org.eclipse.chemclipse.support.ui.provider.AbstractChemClipseLabelProvider;
+import org.eclipse.chemclipse.swt.ui.support.Colors;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 
 public class MassSpectrumListLabelProvider extends AbstractChemClipseLabelProvider {
+
+	private Set<IScanMSD> duplicateEntries = new HashSet<>();
+
+	public void setInput(IMassSpectra massSpectra) {
+
+		duplicateEntries.clear();
+		if(massSpectra != null) {
+			/*
+			 * Collect
+			 */
+			Map<String, List<IScanMSD>> nameEntryMap = new HashMap<>();
+			Map<String, List<IScanMSD>> casEntryMap = new HashMap<>();
+			for(IScanMSD scan : massSpectra.getList()) {
+				ILibraryInformation info = getLibraryInformation(scan);
+				if(info != null) {
+					String name = info.getName();
+					if(name != null && !name.isBlank()) {
+						nameEntryMap.computeIfAbsent(name.toLowerCase(), k -> new ArrayList<>()).add(scan);
+					}
+					String cas = info.getCasNumber();
+					if(cas != null && !cas.isBlank()) {
+						casEntryMap.computeIfAbsent(cas, k -> new ArrayList<>()).add(scan);
+					}
+				}
+			}
+			/*
+			 * Map by Name
+			 */
+			for(List<IScanMSD> list : nameEntryMap.values()) {
+				if(list.size() > 1) {
+					duplicateEntries.addAll(list);
+				}
+			}
+			/*
+			 * Map by CAS#
+			 */
+			for(List<IScanMSD> list : casEntryMap.values()) {
+				if(list.size() > 1) {
+					duplicateEntries.addAll(list);
+				}
+			}
+		}
+	}
+
+	private ILibraryInformation getLibraryInformation(IScanMSD scan) {
+
+		if(scan instanceof IRegularLibraryMassSpectrum libraryMassSpectrum) {
+			return libraryMassSpectrum.getLibraryInformation();
+		}
+		return IIdentificationTarget.getLibraryInformation(scan);
+	}
+
+	@Override
+	public Color getBackground(Object element) {
+
+		if(element instanceof IScanMSD scan && duplicateEntries.contains(scan)) {
+			return Colors.LIGHT_YELLOW;
+		}
+		return super.getBackground(element);
+	}
 
 	@Override
 	public Image getColumnImage(Object element, int columnIndex) {
 
 		if(columnIndex == 0) {
-			return getImage(element);
-		} else {
-			return null;
+			if(element instanceof IScanMSD scan && duplicateEntries.contains(scan)) {
+				return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_STATUS_WARN, IApplicationImageProvider.SIZE_16x16);
+			}
+			return ApplicationImageFactory.getInstance().getImage(IApplicationImage.IMAGE_STATUS_OK, IApplicationImageProvider.SIZE_16x16);
 		}
+		return null;
 	}
 
 	@Override
