@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2020, 2025 Lablicate GmbH.
+ * Copyright (c) 2020, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -9,6 +9,7 @@
  * 
  * Contributors:
  * Philip Wenig - initial API and implementation
+ * Lorenz Gerber - set TimeRanges toolbar visibility setter public
  *******************************************************************************/
 package org.eclipse.chemclipse.ux.extension.xxd.ui.ranges;
 
@@ -273,7 +274,7 @@ public class TimeRangesChromatogramUI extends Composite implements IExtendedPart
 		return timeRangeMarker;
 	}
 
-	private void setTimeRangesVisible(boolean visible) {
+	public void setTimeRangesVisible(boolean visible) {
 
 		TimeRangesUI timeRangesUI = rangesControl.get();
 		if(timeRangesUI != null) {
