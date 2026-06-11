@@ -69,12 +69,12 @@ public class TableSettingsDialog extends Dialog {
 
 	private static class ColumnEntry {
 
-		final String name;
-		final String tooltip;
-		final int index;
-		boolean selected;
-		boolean visible;
-		int width;
+		private final String name;
+		private final String tooltip;
+		private final int index;
+		private boolean selected;
+		private boolean visible;
+		private int width;
 
 		ColumnEntry(String name, String tooltip, int index, boolean selected, boolean visible, int width) {
 
@@ -184,74 +184,62 @@ public class TableSettingsDialog extends Dialog {
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		composite.setLayout(new GridLayout(2, false));
 
-		createButtonCheck(composite, SupportMessages.copyHeaderToClipboard, SupportMessages.copyHeaderToolTip, copyHeader, selection -> copyHeader = selection);
 		createComboViewerDelimiter(composite);
+		createButtonCheck(composite, SupportMessages.copyHeaderToClipboard, SupportMessages.copyHeaderToolTip, copyHeader, selection -> copyHeader = selection);
 	}
 
 	private void createToolbarColumns(Composite parent) {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		composite.setLayout(new GridLayout(2, true));
+		composite.setLayout(new GridLayout(4, false));
 
-		createSectionExport(composite);
-		createSectionVisible(composite);
-	}
+		Button radioExport = new Button(composite, SWT.RADIO);
+		radioExport.setText(SupportMessages.export);
+		radioExport.setSelection(true);
 
-	private void createSectionExport(Composite parent) {
-
-		Composite composite = new Composite(parent, SWT.NONE);
-		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		composite.setLayout(new GridLayout(3, false));
-
-		Label exportLabel = new Label(composite, SWT.NONE);
-		exportLabel.setText(SupportMessages.export);
-
+		Button radioVisible = new Button(composite, SWT.RADIO);
+		radioVisible.setText(SupportMessages.visible);
+		/*
+		 * Select
+		 */
 		createButtonSelectAll(composite, SupportMessages.selectAll, () -> {
-			for(ColumnEntry entry : columnEntries) {
-				entry.selected = true;
-				columnSelections.add(entry.index);
+			if(radioExport.getSelection()) {
+				for(ColumnEntry entry : columnEntries) {
+					entry.selected = true;
+					columnSelections.add(entry.index);
+				}
+			} else {
+				for(ColumnEntry entry : columnEntries) {
+					entry.visible = true;
+				}
+				applyColumnWidths();
 			}
+			/*
+			 * Refresh
+			 */
 			if(columnTableViewer != null) {
 				columnTableViewer.refresh();
 			}
 		});
-
+		/*
+		 * Deselect
+		 */
 		createButtonDeselectAll(composite, SupportMessages.deselectAll, () -> {
-			for(ColumnEntry entry : columnEntries) {
-				entry.selected = false;
+			if(radioExport.getSelection()) {
+				for(ColumnEntry entry : columnEntries) {
+					entry.selected = false;
+				}
+				columnSelections.clear();
+			} else {
+				for(ColumnEntry entry : columnEntries) {
+					entry.visible = false;
+				}
+				applyColumnWidths();
 			}
-			columnSelections.clear();
-			if(columnTableViewer != null) {
-				columnTableViewer.refresh();
-			}
-		});
-	}
-
-	private void createSectionVisible(Composite parent) {
-
-		Composite composite = new Composite(parent, SWT.NONE);
-		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		composite.setLayout(new GridLayout(3, false));
-
-		Label visibleLabel = new Label(composite, SWT.NONE);
-		visibleLabel.setText(SupportMessages.columnVisibility);
-
-		createButtonSelectAll(composite, SupportMessages.selectAll, () -> {
-			for(ColumnEntry entry : columnEntries) {
-				entry.visible = true;
-			}
-			applyColumnWidths();
-			if(columnTableViewer != null) {
-				columnTableViewer.refresh();
-			}
-		});
-
-		createButtonDeselectAll(composite, SupportMessages.deselectAll, () -> {
-			for(ColumnEntry entry : columnEntries) {
-				entry.visible = false;
-			}
-			applyColumnWidths();
+			/*
+			 * Refresh
+			 */
 			if(columnTableViewer != null) {
 				columnTableViewer.refresh();
 			}
@@ -445,15 +433,15 @@ public class TableSettingsDialog extends Dialog {
 
 	private boolean isColumnSelected(int i) {
 
-		int[] copyColumnsToClipboard = CopyColumnsSupport.getColumns(extendedTableViewer.getCopyColumnsToClipboard());
-		if(copyColumnsToClipboard != null) {
-			for(int j : copyColumnsToClipboard) {
-				if(j == i) {
-					return true;
-				}
-			}
-		} else {
+		String copyColumnsToClipboard = extendedTableViewer.getCopyColumnsToClipboard();
+		if(copyColumnsToClipboard == null || copyColumnsToClipboard.isEmpty()) {
 			return true;
+		}
+
+		for(int j : CopyColumnsSupport.getColumns(copyColumnsToClipboard)) {
+			if(j == i) {
+				return true;
+			}
 		}
 
 		return false;
