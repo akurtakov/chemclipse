@@ -61,6 +61,7 @@ public class DeleteTargetsFilter extends AbstractPeakFilter<DeleteTargetsFilterS
 			TargetsFilter.filter(peak, configuration);
 			subMonitor.worked(1);
 		}
+		updateChromatogramSelection(chromatogramSelection);
 	}
 
 	@Override
@@ -69,5 +70,11 @@ public class DeleteTargetsFilter extends AbstractPeakFilter<DeleteTargetsFilterS
 		List<String> legacyIDs = new ArrayList<>();
 		legacyIDs.add("PeakFilter:filter:processor:class:org.eclipse.chemclipse.xxd.model.filter.peaks.DeleteTargetsFilter");
 		return legacyIDs;
+	}
+
+	private void updateChromatogramSelection(IChromatogramSelection chromatogramSelection) {
+
+		chromatogramSelection.update(true);
+		chromatogramSelection.getChromatogram().setDirty(true);
 	}
 }
