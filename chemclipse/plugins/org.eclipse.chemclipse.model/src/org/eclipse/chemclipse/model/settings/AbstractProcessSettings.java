@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -78,6 +78,10 @@ public abstract class AbstractProcessSettings implements IProcessSettings {
 		fileName = replaceVariable(fileName, VARIABLE_CHROMATOGRAM_DATANAME, chromatogram.getDataName(), "DataName");
 		fileName = replaceVariable(fileName, VARIABLE_CHROMATOGRAM_SAMPLEGROUP, chromatogram.getSampleGroup(), "SampleGroup");
 		fileName = replaceVariable(fileName, VARIABLE_CHROMATOGRAM_SHORTINFO, chromatogram.getShortInfo(), "ShortInfo");
+		fileName = replaceVariable(fileName, VARIABLE_CHROMATOGRAM_SAMPLENAME, chromatogram.getSampleName(), "SampleName");
+		fileName = replaceVariable(fileName, VARIABLE_CHROMATOGRAM_OPERATOR, chromatogram.getOperator(), "Operator");
+		fileName = replaceVariable(fileName, VARIABLE_CHROMATOGRAM_INSTRUMENT, chromatogram.getInstrument(), "Instrument");
+		fileName = replaceVariable(fileName, VARIABLE_CHROMATOGRAM_TAGS, chromatogram.getTags(), "Tags");
 
 		return fileName;
 	}

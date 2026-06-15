@@ -31,11 +31,16 @@ public class PeakExportSettings extends AbstractProcessSettings {
 	@FileSettingProperty(onlyDirectory = true, dialogType = DialogType.SAVE_DIALOG)
 	private File exportFolder;
 	@JsonProperty(value = "File Name", defaultValue = VARIABLE_CHROMATOGRAM_NAME + VARIABLE_EXTENSION)
-	@JsonPropertyDescription("Set a specific name or use the variables or a combination. Variables: " + //
+	@JsonPropertyDescription("Set a specific name or use the variables or a combination.\n" + //
+			"Variables:\n" + //
 			VARIABLE_CHROMATOGRAM_NAME + "\n" + //
 			VARIABLE_CHROMATOGRAM_DATANAME + "\n" + //
 			VARIABLE_CHROMATOGRAM_SAMPLEGROUP + "\n" + //
 			VARIABLE_CHROMATOGRAM_SHORTINFO + "\n" + //
+			VARIABLE_CHROMATOGRAM_SAMPLENAME + "\n" + //
+			VARIABLE_CHROMATOGRAM_OPERATOR + "\n" + //
+			VARIABLE_CHROMATOGRAM_INSTRUMENT + "\n" + //
+			VARIABLE_CHROMATOGRAM_TAGS + "\n" + //
 			VARIABLE_EXTENSION //
 	)
 	private String filenamePattern = VARIABLE_CHROMATOGRAM_NAME + VARIABLE_EXTENSION;
