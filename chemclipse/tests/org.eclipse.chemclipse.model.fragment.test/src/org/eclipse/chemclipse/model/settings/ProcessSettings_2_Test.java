@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -35,6 +35,10 @@ public class ProcessSettings_2_Test {
 		chromatogram.putHeaderData("Data Name", null);
 		chromatogram.putHeaderData("Sample Group", null);
 		chromatogram.putHeaderData("Short Info", null);
+		chromatogram.putHeaderData("Sample Name", null);
+		chromatogram.putHeaderData("Operator", null);
+		chromatogram.putHeaderData("Instrument", null);
+		chromatogram.putHeaderData("Tags", null);
 	}
 
 	@Test
@@ -75,5 +79,37 @@ public class ProcessSettings_2_Test {
 		String fileNamePattern = "{chromatogram_dataname} {chromatogram_samplegroup} {chromatogram_shortinfo}{extension}";
 		String fileName = processSettings.getFileName(chromatogram, fileNamePattern, ".ocb");
 		assertEquals("DataName SampleGroup ShortInfo.ocb", fileName);
+	}
+
+	@Test
+	public void test6() {
+
+		String fileNamePattern = "{chromatogram_samplename}{extension}";
+		String fileName = processSettings.getFileName(chromatogram, fileNamePattern, ".ocb");
+		assertEquals("SampleName.ocb", fileName);
+	}
+
+	@Test
+	public void test7() {
+
+		String fileNamePattern = "{chromatogram_operator}{extension}";
+		String fileName = processSettings.getFileName(chromatogram, fileNamePattern, ".ocb");
+		assertEquals("Operator.ocb", fileName);
+	}
+
+	@Test
+	public void test8() {
+
+		String fileNamePattern = "{chromatogram_instrument}{extension}";
+		String fileName = processSettings.getFileName(chromatogram, fileNamePattern, ".ocb");
+		assertEquals("Instrument.ocb", fileName);
+	}
+
+	@Test
+	public void test9() {
+
+		String fileNamePattern = "{chromatogram_tags}{extension}";
+		String fileName = processSettings.getFileName(chromatogram, fileNamePattern, ".ocb");
+		assertEquals("Tags.ocb", fileName);
 	}
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2025 Lablicate GmbH.
+ * Copyright (c) 2012, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -40,6 +40,10 @@ public abstract class AbstractChromatogramReportSettings extends AbstractProcess
 			VARIABLE_CHROMATOGRAM_DATANAME + "\n" + //
 			VARIABLE_CHROMATOGRAM_SAMPLEGROUP + "\n" + //
 			VARIABLE_CHROMATOGRAM_SHORTINFO + "\n" + //
+			VARIABLE_CHROMATOGRAM_SAMPLENAME + "\n" + //
+			VARIABLE_CHROMATOGRAM_OPERATOR + "\n" + //
+			VARIABLE_CHROMATOGRAM_INSTRUMENT + "\n" + //
+			VARIABLE_CHROMATOGRAM_TAGS + "\n" + //
 			VARIABLE_EXTENSION //
 	)
 	private String filenamePattern = VARIABLE_CHROMATOGRAM_NAME + VARIABLE_EXTENSION;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2022, 2025 Lablicate GmbH.
+ * Copyright (c) 2022, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -37,6 +37,10 @@ public class ProcessSettings_1_Test {
 		chromatogram.putHeaderData("Data Name", "This is");
 		chromatogram.putHeaderData("Sample Group", "a group name");
 		chromatogram.putHeaderData("Short Info", "and short info demo");
+		chromatogram.putHeaderData("Sample Name", "PW12345");
+		chromatogram.putHeaderData("Operator", "Philip");
+		chromatogram.putHeaderData("Instrument", "X100");
+		chromatogram.putHeaderData("Tags", "Pyrolysis");
 	}
 
 	@Test
@@ -77,5 +81,37 @@ public class ProcessSettings_1_Test {
 		String fileNamePattern = "{chromatogram_dataname} {chromatogram_samplegroup} {chromatogram_shortinfo}{extension}";
 		String fileName = processSettings.getFileName(chromatogram, fileNamePattern, ".ocb");
 		assertEquals("This is a group name and short info demo.ocb", fileName);
+	}
+
+	@Test
+	public void test6() {
+
+		String fileNamePattern = "{chromatogram_samplename}{extension}";
+		String fileName = processSettings.getFileName(chromatogram, fileNamePattern, ".ocb");
+		assertEquals("PW12345.ocb", fileName);
+	}
+
+	@Test
+	public void test7() {
+
+		String fileNamePattern = "{chromatogram_operator}{extension}";
+		String fileName = processSettings.getFileName(chromatogram, fileNamePattern, ".ocb");
+		assertEquals("Philip.ocb", fileName);
+	}
+
+	@Test
+	public void test8() {
+
+		String fileNamePattern = "{chromatogram_instrument}{extension}";
+		String fileName = processSettings.getFileName(chromatogram, fileNamePattern, ".ocb");
+		assertEquals("X100.ocb", fileName);
+	}
+
+	@Test
+	public void test9() {
+
+		String fileNamePattern = "{chromatogram_tags}{extension}";
+		String fileName = processSettings.getFileName(chromatogram, fileNamePattern, ".ocb");
+		assertEquals("Pyrolysis.ocb", fileName);
 	}
 }

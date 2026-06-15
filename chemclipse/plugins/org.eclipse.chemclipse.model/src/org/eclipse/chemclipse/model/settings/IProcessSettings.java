@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,6 +25,11 @@ public interface IProcessSettings {
 	public static final String VARIABLE_CHROMATOGRAM_DATANAME = "{chromatogram_dataname}";
 	public static final String VARIABLE_CHROMATOGRAM_SAMPLEGROUP = "{chromatogram_samplegroup}";
 	public static final String VARIABLE_CHROMATOGRAM_SHORTINFO = "{chromatogram_shortinfo}";
+	public static final String VARIABLE_CHROMATOGRAM_SAMPLENAME = "{chromatogram_samplename}";
+	public static final String VARIABLE_CHROMATOGRAM_OPERATOR = "{chromatogram_operator}";
+	public static final String VARIABLE_CHROMATOGRAM_INSTRUMENT = "{chromatogram_instrument}";
+	public static final String VARIABLE_CHROMATOGRAM_TAGS = "{chromatogram_tags}";
+
 	public static final String VARIABLE_EXTENSION = "{extension}";
 	/*
 	 * Directory placeholder
