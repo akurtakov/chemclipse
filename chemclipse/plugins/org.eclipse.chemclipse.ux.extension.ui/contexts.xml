@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?NLS TYPE="org.eclipse.help.contexts"?>
+<contexts>
+   <context id="data_explorer" title="Data Explorer">
+      <description>Search for files and open them.</description>
+      <topic label="Icons" href="../org.eclipse.chemclipse.rcp.ui.icons/html/data_explorer_icons.html"/>
+   </context>
+</contexts>

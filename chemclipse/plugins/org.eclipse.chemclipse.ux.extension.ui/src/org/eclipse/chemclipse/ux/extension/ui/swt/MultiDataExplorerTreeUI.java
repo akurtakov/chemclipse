@@ -42,6 +42,7 @@ import org.eclipse.chemclipse.support.ui.provider.AbstractLabelProvider;
 import org.eclipse.chemclipse.support.ui.provider.ListContentProvider;
 import org.eclipse.chemclipse.swt.ui.notifier.UpdateNotifierUI;
 import org.eclipse.chemclipse.swt.ui.preferences.PreferencePageSystem;
+import org.eclipse.chemclipse.ux.extension.ui.help.HelpContext;
 import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
 import org.eclipse.chemclipse.ux.extension.ui.model.DataExplorerTreeSettings;
 import org.eclipse.chemclipse.ux.extension.ui.preferences.PreferencePage;
@@ -251,7 +252,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		composite.setLayout(new GridLayout(4, false));
+		composite.setLayout(new GridLayout(5, false));
 
 		if(dataExplorerTreeRoot == DataExplorerTreeRoot.USER_LOCATION) {
 			createComboViewerLocations(composite);
@@ -263,6 +264,7 @@ public class MultiDataExplorerTreeUI extends Composite implements IExtendedPartU
 		 * Add custom elements.
 		 */
 		createResetButton(composite);
+		createButtonHelp(composite, HelpContext.DATA_EXPLORER);
 		createSettingsButton(composite);
 	}
 

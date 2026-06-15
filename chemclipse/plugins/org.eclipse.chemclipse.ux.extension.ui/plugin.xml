@@ -40,4 +40,11 @@
          </description>
       </cheatsheet>
    </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="contexts.xml"
+            plugin="org.eclipse.chemclipse.ux.extension.ui">
+      </contexts>
+   </extension>
 </plugin>
