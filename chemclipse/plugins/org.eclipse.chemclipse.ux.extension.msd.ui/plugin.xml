@@ -14,5 +14,5 @@
             file="contexts.xml"
             plugin="org.eclipse.chemclipse.ux.extension.msd.ui">
       </contexts>
-   </extension>   
+   </extension>
 </plugin>
