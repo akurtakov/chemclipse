@@ -44,28 +44,37 @@ import org.eclipse.swt.widgets.ToolItem;
 
 public class SWTEditor extends Composite {
 
-	Display display;
-	Composite parent;
-	StyledText styledText;
-	ToolItem boldControl, italicControl, underlineControl, strikeoutControl, clearControl;
+	private Display display;
+	private Composite parent;
+	private StyledText styledText;
+	private ToolItem boldControl;
+	private ToolItem italicControl;
+	private ToolItem underlineControl;
+	private ToolItem strikeoutControl;
+	private ToolItem clearControl;
+	private boolean insert = true;
+	private boolean readOnly = false;
+	private StyleRange[] selectedRanges;
+	private int newCharCount, start;
+	private int styleState;
+	/*
+	 * Resources
+	 */
+	private Image imageBold;
+	private Image imageItalic;
+	private Image imageUnderline;
+	private Image imageStrikeout;
+	private Image imageClear;
+	private Image imageBulletList;
+	private Image imageNumberedList;
+	private Font font;
+	private Font textFont;
 
-	boolean insert = true;
-	boolean readOnly = false;
-	StyleRange[] selectedRanges;
-	int newCharCount, start;
-	int styleState;
-	String link;
-
-	// Resources
-	Image iBold, iItalic, iUnderline, iStrikeout, iClear;
-	Image iSpacing, iIndent, iBulletList, iNumberedList;
-	Font font, textFont;
-
-	static final int MARGIN = 5;
-	static final int FONT_STYLE = BOLD | ITALIC;
-	static final int STRIKEOUT = 1 << 3;
-	static final int FONT = 1 << 6;
-	static final int UNDERLINE = 1 << 9;
+	private static final int MARGIN = 5;
+	private static final int FONT_STYLE = BOLD | ITALIC;
+	private static final int STRIKEOUT = 1 << 3;
+	private static final int FONT = 1 << 6;
+	private static final int UNDERLINE = 1 << 9;
 
 	static String getResourceString(String key) {
 
@@ -88,7 +97,6 @@ public class SWTEditor extends Composite {
 		}
 		editor.releaseResources();
 		display.dispose();
-
 	}
 
 	public void setText(String text) {
@@ -108,16 +116,23 @@ public class SWTEditor extends Composite {
 		super(parent, style);
 		setLayout(new GridLayout(1, true));
 		this.parent = parent;
-		initResources();
-		if ((style & SWT.READ_ONLY) != 0 ) {
-			readOnly= true;
+		if((style & SWT.READ_ONLY) != 0) {
+			readOnly = true;
 		}
-		if (readOnly) {
-			styledText = new StyledText(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL| SWT.READ_ONLY);
+		/*
+		 * Read only or normal edit.
+		 */
+		if(readOnly) {
+			styledText = new StyledText(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.READ_ONLY);
 		} else {
+			initResources();
 			createToolBar();
 			styledText = new StyledText(this, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+			addDisposeListener(e -> releaseResources());
 		}
+		/*
+		 * Layout
+		 */
 		GridData gridData = new GridData();
 		gridData.horizontalAlignment = GridData.FILL;
 		gridData.verticalAlignment = GridData.FILL;
@@ -148,29 +163,29 @@ public class SWTEditor extends Composite {
 
 		ToolBar styleToolBar = new ToolBar(this, SWT.FLAT);
 		boldControl = new ToolItem(styleToolBar, SWT.CHECK);
-		boldControl.setImage(iBold);
+		boldControl.setImage(imageBold);
 		boldControl.setToolTipText(getResourceString("Bold")); //$NON-NLS-1$
 		boldControl.addSelectionListener(widgetSelectedAdapter(event -> setStyle(BOLD)));
 
 		italicControl = new ToolItem(styleToolBar, SWT.CHECK);
-		italicControl.setImage(iItalic);
+		italicControl.setImage(imageItalic);
 		italicControl.setToolTipText(getResourceString("Italic")); //$NON-NLS-1$
 		italicControl.addSelectionListener(widgetSelectedAdapter(event -> setStyle(ITALIC)));
 
 		underlineControl = new ToolItem(styleToolBar, SWT.CHECK);
-		underlineControl.setImage(iUnderline);
+		underlineControl.setImage(imageUnderline);
 		underlineControl.setToolTipText(getResourceString("Underline")); //$NON-NLS-1$
 		underlineControl.addSelectionListener(widgetSelectedAdapter(event -> setStyle(UNDERLINE)));
 
 		strikeoutControl = new ToolItem(styleToolBar, SWT.CHECK);
-		strikeoutControl.setImage(iStrikeout);
+		strikeoutControl.setImage(imageStrikeout);
 		strikeoutControl.setToolTipText(getResourceString("Strikeout")); //$NON-NLS-1$
 		strikeoutControl.addSelectionListener(widgetSelectedAdapter(event -> setStyle(STRIKEOUT)));
 
 		new ToolItem(styleToolBar, SWT.SEPARATOR);
 
 		clearControl = new ToolItem(styleToolBar, SWT.PUSH);
-		clearControl.setImage(iClear);
+		clearControl.setImage(imageClear);
 		clearControl.setToolTipText(getResourceString("Clear Formatting")); //$NON-NLS-1$
 		clearControl.addSelectionListener(widgetSelectedAdapter(event -> clearFormatting()));
 
@@ -274,13 +289,13 @@ public class SWTEditor extends Composite {
 
 	void initResources() {
 
-		iBold = loadImage(display, "bold"); //$NON-NLS-1$
-		iItalic = loadImage(display, "italic"); //$NON-NLS-1$
-		iUnderline = loadImage(display, "underline"); //$NON-NLS-1$
-		iStrikeout = loadImage(display, "strikeout"); //$NON-NLS-1$
-		iClear = loadImage(display, "clear"); //$NON-NLS-1$
-		iBulletList = loadImage(display, "para_bul"); //$NON-NLS-1$
-		iNumberedList = loadImage(display, "para_num"); //$NON-NLS-1$
+		imageBold = loadImage(display, "bold"); //$NON-NLS-1$
+		imageItalic = loadImage(display, "italic"); //$NON-NLS-1$
+		imageUnderline = loadImage(display, "underline"); //$NON-NLS-1$
+		imageStrikeout = loadImage(display, "strikeout"); //$NON-NLS-1$
+		imageClear = loadImage(display, "clear"); //$NON-NLS-1$
+		imageBulletList = loadImage(display, "para_bul"); //$NON-NLS-1$
+		imageNumberedList = loadImage(display, "para_num"); //$NON-NLS-1$
 	}
 
 	void installListeners() {
@@ -308,20 +323,34 @@ public class SWTEditor extends Composite {
 
 	void releaseResources() {
 
-		iBold.dispose();
-		iBold = null;
-		iItalic.dispose();
-		iItalic = null;
-		iUnderline.dispose();
-		iUnderline = null;
-		iStrikeout.dispose();
-		iStrikeout = null;
-		iClear.dispose();
-		iClear = null;
-		iBulletList.dispose();
-		iBulletList = null;
-		iNumberedList.dispose();
-		iNumberedList = null;
+		if(imageBold != null) {
+			imageBold.dispose();
+			imageBold = null;
+		}
+		if(imageItalic != null) {
+			imageItalic.dispose();
+			imageItalic = null;
+		}
+		if(imageUnderline != null) {
+			imageUnderline.dispose();
+			imageUnderline = null;
+		}
+		if(imageStrikeout != null) {
+			imageStrikeout.dispose();
+			imageStrikeout = null;
+		}
+		if(imageClear != null) {
+			imageClear.dispose();
+			imageClear = null;
+		}
+		if(imageBulletList != null) {
+			imageBulletList.dispose();
+			imageBulletList = null;
+		}
+		if(imageNumberedList != null) {
+			imageNumberedList.dispose();
+			imageNumberedList = null;
+		}
 
 		if(textFont != null) {
 			textFont.dispose();
@@ -490,11 +519,12 @@ public class SWTEditor extends Composite {
 	}
 
 	void updateToolBar() {
-		if (readOnly) {
+
+		if(readOnly) {
 			return;
 		}
+
 		styleState = 0;
-		link = null;
 		boolean bold = false, italic = false;
 		Font font = null;
 
@@ -536,7 +566,5 @@ public class SWTEditor extends Composite {
 	public void addModifyListener(ModifyListener listener) {
 
 		styledText.addModifyListener(listener);
-
 	}
-
 }
