@@ -20,7 +20,10 @@ import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.ui.advanced.MPerspective;
 import org.eclipse.e4.ui.model.application.ui.advanced.MPerspectiveStack;
+import org.eclipse.e4.ui.workbench.UIEvents;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
+import org.osgi.service.event.Event;
+import org.osgi.service.event.EventHandler;
 
 import jakarta.annotation.PostConstruct;
 
@@ -55,6 +58,41 @@ public class PerspectiveApplicationAddon {
 		perspectiveStack.setSelectedElement(perspective);
 		if(eventBroker != null) {
 			eventBroker.send(IChemClipseEvents.TOPIC_APPLICATION_SELECT_PERSPECTIVE, perspective.getLabel());
+			scheduleSnapshot(application, modelService, perspectiveStack, eventBroker);
+		}
+	}
+
+	/*
+	 * The perspectives are snapshotted as snippets so that the reset perspective command can clone
+	 * them later. Snapshotting is deferred until the UI has been rendered, because adding snippets
+	 * while the model is still being processed disturbs the initial trim layout.
+	 */
+	private void scheduleSnapshot(MApplication application, EModelService modelService, MPerspectiveStack perspectiveStack, IEventBroker eventBroker) {
+
+		eventBroker.subscribe(UIEvents.UILifeCycle.APP_STARTUP_COMPLETE, new EventHandler() {
+
+			@Override
+			public void handleEvent(Event event) {
+
+				eventBroker.unsubscribe(this);
+				snapshotPerspectives(application, modelService, perspectiveStack);
+			}
+		});
+	}
+
+	private void snapshotPerspectives(MApplication application, EModelService modelService, MPerspectiveStack perspectiveStack) {
+
+		for(MPerspective perspective : perspectiveStack.getChildren()) {
+			String perspectiveId = perspective.getElementId();
+			if(perspectiveId == null || perspectiveId.isEmpty()) {
+				continue;
+			}
+			/*
+			 * The model is rebuilt from the fragments each start and the snapshot is always pristine.
+			 */
+			if(modelService.findSnippet(application, perspectiveId) == null) {
+				modelService.cloneElement(perspective, application);
+			}
 		}
 	}
 }
