@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -30,12 +30,15 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class AcquisitionSettingsType extends ParamGroupType {
 
 	protected SourceFileRefListType sourceFileRefList;
+
 	protected TargetListType targetList;
+
 	@XmlAttribute(name = "id", required = true)
 	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
 	@XmlID
 	@XmlSchemaType(name = "ID")
 	protected String id;
+
 	@XmlAttribute(name = "instrumentConfigurationRef", required = true)
 	@XmlIDREF
 	@XmlSchemaType(name = "IDREF")

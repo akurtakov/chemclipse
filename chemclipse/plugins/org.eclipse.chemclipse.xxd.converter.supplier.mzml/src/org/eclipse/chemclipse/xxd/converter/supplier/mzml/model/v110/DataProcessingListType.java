@@ -29,6 +29,7 @@ public class DataProcessingListType {
 
 	@XmlElement(required = true)
 	private List<DataProcessingType> dataProcessing;
+
 	@XmlAttribute(name = "count", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	private BigInteger count;

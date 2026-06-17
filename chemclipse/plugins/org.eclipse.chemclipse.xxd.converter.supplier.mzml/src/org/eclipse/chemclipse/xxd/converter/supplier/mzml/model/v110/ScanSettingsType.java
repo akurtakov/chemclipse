@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,7 +26,9 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class ScanSettingsType extends ParamGroupType {
 
 	private SourceFileRefListType sourceFileRefList;
+
 	private TargetListType targetList;
+
 	@XmlAttribute(name = "id", required = true)
 	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
 	@XmlID

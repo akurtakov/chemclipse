@@ -29,6 +29,7 @@ public class ScanSettingsListType {
 
 	@XmlElement(required = true)
 	private List<ScanSettingsType> scanSettings;
+
 	@XmlAttribute(name = "count", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	private BigInteger count;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,22 +26,31 @@ import jakarta.xml.bind.annotation.XmlType;
 public class SpectrumType extends ParamGroupType {
 
 	private ScanListType scanList;
+
 	private PrecursorListType precursorList;
+
 	private ProductListType productList;
+
 	private BinaryDataArrayListType binaryDataArrayList;
+
 	@XmlAttribute(name = "id", required = true)
 	private String id;
+
 	@XmlAttribute(name = "spotID")
 	private String spotID;
+
 	@XmlAttribute(name = "index", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger") // zero based
 	private BigInteger index;
+
 	@XmlAttribute(name = "defaultArrayLength", required = true)
 	private int defaultArrayLength;
+
 	@XmlAttribute(name = "dataProcessingRef")
 	@XmlIDREF
 	@XmlSchemaType(name = "IDREF")
 	private Object dataProcessingRef;
+
 	@XmlAttribute(name = "sourceFileRef")
 	@XmlIDREF
 	@XmlSchemaType(name = "IDREF")

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,16 +28,20 @@ public class AcquisitionType extends ParamGroupType {
 
 	@XmlAttribute(name = "number", required = true)
 	protected int number;
+
 	@XmlAttribute(name = "spectrumRef")
 	@XmlIDREF
 	@XmlSchemaType(name = "IDREF")
 	protected Object spectrumRef;
+
 	@XmlAttribute(name = "sourceFileRef")
 	@XmlIDREF
 	@XmlSchemaType(name = "IDREF")
 	protected Object sourceFileRef;
+
 	@XmlAttribute(name = "externalNativeID")
 	protected String externalNativeID;
+
 	@XmlAttribute(name = "externalSpectrumID")
 	protected String externalSpectrumID;
 

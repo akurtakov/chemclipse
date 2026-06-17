@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -30,9 +30,11 @@ public class ChromatogramListType {
 
 	@XmlElement(required = true)
 	private List<ChromatogramType> chromatogram;
+
 	@XmlAttribute(name = "count", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	private BigInteger count;
+
 	@XmlAttribute(name = "defaultDataProcessingRef", required = true)
 	@XmlIDREF
 	@XmlSchemaType(name = "IDREF")

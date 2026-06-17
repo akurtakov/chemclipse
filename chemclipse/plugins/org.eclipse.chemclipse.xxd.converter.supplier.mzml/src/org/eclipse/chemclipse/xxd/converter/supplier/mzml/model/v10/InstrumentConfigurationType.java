@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -31,7 +31,9 @@ public class InstrumentConfigurationType extends ParamGroupType {
 
 	@XmlElement(required = true)
 	protected ComponentListType componentList;
+
 	protected SoftwareRefType softwareRef;
+
 	@XmlAttribute(name = "id", required = true)
 	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
 	@XmlID

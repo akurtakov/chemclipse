@@ -29,7 +29,9 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class ReferenceableParamGroupType {
 
 	private List<CVParamType> cvParam;
+
 	private List<UserParamType> userParam;
+
 	@XmlAttribute(name = "id", required = true)
 	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
 	@XmlID

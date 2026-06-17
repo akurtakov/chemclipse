@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,14 +25,19 @@ public class UserParamType {
 
 	@XmlAttribute(name = "name", required = true)
 	private String name;
+
 	@XmlAttribute(name = "type")
 	private String type;
+
 	@XmlAttribute(name = "value")
 	private String value;
+
 	@XmlAttribute(name = "unitAccession")
 	private String unitAccession;
+
 	@XmlAttribute(name = "unitName")
 	private String unitName;
+
 	@XmlAttribute(name = "unitCvRef")
 	@XmlIDREF
 	@XmlSchemaType(name = "IDREF")

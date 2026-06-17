@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -25,15 +25,20 @@ import jakarta.xml.bind.annotation.XmlType;
 public class PrecursorType {
 
 	private ParamGroupType isolationWindow;
+
 	private SelectedIonListType selectedIonList;
+
 	@XmlElement(required = true)
 	private ParamGroupType activation;
+
 	@XmlAttribute(name = "spectrumRef")
 	private String spectrumRef;
+
 	@XmlAttribute(name = "sourceFileRef")
 	@XmlIDREF
 	@XmlSchemaType(name = "IDREF")
 	private Object sourceFileRef;
+
 	@XmlAttribute(name = "externalSpectrumID")
 	private String externalSpectrumID;
 

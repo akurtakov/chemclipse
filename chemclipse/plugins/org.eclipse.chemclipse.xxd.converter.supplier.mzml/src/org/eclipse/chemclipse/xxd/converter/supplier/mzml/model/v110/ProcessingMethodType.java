@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,6 +28,7 @@ public class ProcessingMethodType extends ParamGroupType {
 	@XmlAttribute(name = "order", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	private BigInteger order;
+
 	@XmlAttribute(name = "softwareRef", required = true)
 	@XmlIDREF
 	@XmlSchemaType(name = "IDREF")

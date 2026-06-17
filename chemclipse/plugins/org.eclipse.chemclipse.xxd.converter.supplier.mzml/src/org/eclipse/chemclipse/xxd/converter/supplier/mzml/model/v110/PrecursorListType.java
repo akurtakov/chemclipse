@@ -29,6 +29,7 @@ public class PrecursorListType {
 
 	@XmlElement(required = true)
 	private List<PrecursorType> precursor;
+
 	@XmlAttribute(name = "count", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	private BigInteger count;

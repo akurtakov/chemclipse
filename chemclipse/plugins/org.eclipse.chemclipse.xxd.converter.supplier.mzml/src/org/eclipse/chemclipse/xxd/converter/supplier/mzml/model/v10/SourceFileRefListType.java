@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,6 +27,7 @@ import jakarta.xml.bind.annotation.XmlType;
 public class SourceFileRefListType {
 
 	protected List<SourceFileRefType> sourceFileRef;
+
 	@XmlAttribute(name = "count", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	protected BigInteger count;
