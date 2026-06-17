@@ -150,7 +150,7 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 		}
 	}
 
-	private void setRetentionTime(SpectrumType spectrum, IRegularMassSpectrum massSpectrum) {
+	public static void setRetentionTime(SpectrumType spectrum, IRegularMassSpectrum massSpectrum) {
 
 		for(ScanType scanType : spectrum.getScanList().getScan()) {
 			for(CVParamType cvParam : scanType.getCvParam()) {
@@ -158,6 +158,17 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 					float multiplicator = XmlReader110.getTimeMultiplicator(cvParam);
 					int retentionTime = Math.round(Float.parseFloat(cvParam.getValue()) * multiplicator);
 					massSpectrum.setRetentionTime(retentionTime);
+				}
+			}
+		}
+	}
+
+	public static void setTotalIonCurrent(SpectrumType spectrum, IRegularMassSpectrum massSpectrum) {
+
+		for(ScanType scanType : spectrum.getScanList().getScan()) {
+			for(CVParamType cvParam : scanType.getCvParam()) {
+				if(cvParam.getAccession().equals("MS:1000285") && cvParam.getName().equals("total ion current")) {
+					massSpectrum.adjustTotalSignal(Float.parseFloat(cvParam.getValue()));
 				}
 			}
 		}
@@ -273,7 +284,7 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 		}
 	}
 
-	private double getSelectedIon(SpectrumType spectrum) {
+	private static double getSelectedIon(SpectrumType spectrum) {
 
 		if(spectrum.getPrecursorList() != null) {
 			for(PrecursorType precursorType : spectrum.getPrecursorList().getPrecursor()) {
@@ -292,7 +303,7 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 		return 0;
 	}
 
-	private double getSelectedIonPeakIntensity(SpectrumType spectrum) {
+	private static double getSelectedIonPeakIntensity(SpectrumType spectrum) {
 
 		if(spectrum.getPrecursorList() != null) {
 			for(PrecursorType precursorType : spectrum.getPrecursorList().getPrecursor()) {
@@ -311,7 +322,7 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 		return 0;
 	}
 
-	private double getCollisionEnergy(SpectrumType spectrum) {
+	private static double getCollisionEnergy(SpectrumType spectrum) {
 
 		if(spectrum.getPrecursorList() != null) {
 			for(PrecursorType precursorType : spectrum.getPrecursorList().getPrecursor()) {
@@ -325,7 +336,7 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 		return 0;
 	}
 
-	private void readIons(SpectrumType spectrum, IRegularMassSpectrum massSpectrum, IVendorChromatogram chromatogram) {
+	public static void readIons(SpectrumType spectrum, IRegularMassSpectrum massSpectrum, IVendorChromatogram chromatogram) {
 
 		double[] intensities = null;
 		double[] mzs = null;
@@ -361,7 +372,7 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 		}
 	}
 
-	private void setReferencedPolarity(SpectrumType spectrum, IRegularMassSpectrum massSpectrum) {
+	private static void setReferencedPolarity(SpectrumType spectrum, IRegularMassSpectrum massSpectrum) {
 
 		if(spectrum.getReferenceableParamGroupRef() == null) {
 			return;
@@ -374,7 +385,7 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 		}
 	}
 
-	private IRegularMassSpectrum readMassSpectrum(SpectrumType spectrum) {
+	public static IRegularMassSpectrum readMassSpectrum(SpectrumType spectrum) {
 
 		IRegularMassSpectrum massSpectrum = new RegularMassSpectrum();
 		for(CVParamType cvParam : spectrum.getCvParam()) {
@@ -406,7 +417,7 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 		return false;
 	}
 
-	private Pair<double[], double[]> readBinaryData(ChromatogramType chromatogramType) {
+	public static Pair<double[], double[]> readBinaryData(ChromatogramType chromatogramType) {
 
 		double[] retentionTimes = null;
 		double[] intensities = null;
@@ -426,7 +437,7 @@ public class ChromatogramReaderVersion110 extends AbstractChromatogramReader imp
 		return new ImmutablePair<>(retentionTimes, intensities);
 	}
 
-	private void setPolarity(CVParamType cvParam, IRegularMassSpectrum massSpectrum) {
+	private static void setPolarity(CVParamType cvParam, IRegularMassSpectrum massSpectrum) {
 
 		if(cvParam.getAccession().equals("MS:1000129") && cvParam.getName().equals("negative scan")) {
 			massSpectrum.setPolarity(Polarity.NEGATIVE);

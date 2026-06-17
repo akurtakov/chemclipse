@@ -18,11 +18,13 @@ import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlIDREF;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlSchemaType;
 import jakarta.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SpectrumType", propOrder = {"scanList", "precursorList", "productList", "binaryDataArrayList"})
+@XmlRootElement(name = "spectrum")
 public class SpectrumType extends ParamGroupType {
 
 	private ScanListType scanList;

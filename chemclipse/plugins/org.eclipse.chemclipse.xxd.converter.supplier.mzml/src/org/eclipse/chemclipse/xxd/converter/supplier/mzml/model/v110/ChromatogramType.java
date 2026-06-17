@@ -19,11 +19,13 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlIDREF;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlSchemaType;
 import jakarta.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ChromatogramType", propOrder = {"precursor", "product", "binaryDataArrayList"})
+@XmlRootElement(name = "chromatogram")
 public class ChromatogramType extends ParamGroupType {
 
 	private PrecursorType precursor;
