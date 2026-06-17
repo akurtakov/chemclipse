@@ -29,6 +29,7 @@ public class ProductListType {
 
 	@XmlElement(required = true)
 	private List<ProductType> product;
+
 	@XmlAttribute(name = "count", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	private BigInteger count;

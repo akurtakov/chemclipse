@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2023, 2025 Lablicate GmbH.
+ * Copyright (c) 2023, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -34,18 +34,23 @@ public class ChromatogramType extends ParamGroupType {
 
 	@XmlElement(required = true)
 	protected BinaryDataArrayListType binaryDataArrayList;
+
 	@XmlAttribute(name = "id", required = true)
 	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
 	@XmlID
 	@XmlSchemaType(name = "ID")
 	protected String id;
+
 	@XmlAttribute(name = "nativeID", required = true)
 	protected String nativeID;
+
 	@XmlAttribute(name = "index", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	protected BigInteger index;
+
 	@XmlAttribute(name = "defaultArrayLength", required = true)
 	protected int defaultArrayLength;
+
 	@XmlAttribute(name = "dataProcessingRef")
 	@XmlIDREF
 	@XmlSchemaType(name = "IDREF")

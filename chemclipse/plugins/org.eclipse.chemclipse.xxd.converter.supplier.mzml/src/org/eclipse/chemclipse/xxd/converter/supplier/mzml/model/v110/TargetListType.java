@@ -29,6 +29,7 @@ public class TargetListType {
 
 	@XmlElement(required = true)
 	private List<ParamGroupType> target;
+
 	@XmlAttribute(name = "count", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	private BigInteger count;

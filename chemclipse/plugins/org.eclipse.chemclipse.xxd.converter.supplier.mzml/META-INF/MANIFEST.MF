@@ -20,6 +20,11 @@ Import-Package: jakarta.xml.bind,
  jakarta.xml.bind.annotation,
  jakarta.xml.bind.annotation.adapters
 Export-Package: org.eclipse.chemclipse.xxd.converter.supplier.mzml.converter,
+ org.eclipse.chemclipse.xxd.converter.supplier.mzml.idx.model.v100,
+ org.eclipse.chemclipse.xxd.converter.supplier.mzml.idx.model.v110,
+ org.eclipse.chemclipse.xxd.converter.supplier.mzml.idx.model.v111,
+ org.eclipse.chemclipse.xxd.converter.supplier.mzml.idx.model.v112,
+ org.eclipse.chemclipse.xxd.converter.supplier.mzml.idx.model.v113,
  org.eclipse.chemclipse.xxd.converter.supplier.mzml.io,
  org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v10,
  org.eclipse.chemclipse.xxd.converter.supplier.mzml.model.v110

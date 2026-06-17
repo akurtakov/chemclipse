@@ -27,6 +27,7 @@ public class ScanWindowListType {
 
 	@XmlElement(required = true)
 	private List<ParamGroupType> scanWindow;
+
 	@XmlAttribute(name = "count", required = true)
 	private int count;
 

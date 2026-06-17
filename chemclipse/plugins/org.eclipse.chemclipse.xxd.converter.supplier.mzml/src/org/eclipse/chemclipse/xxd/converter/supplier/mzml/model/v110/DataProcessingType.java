@@ -31,6 +31,7 @@ public class DataProcessingType {
 
 	@XmlElement(required = true)
 	private List<ProcessingMethodType> processingMethod;
+
 	@XmlAttribute(name = "id", required = true)
 	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
 	@XmlID

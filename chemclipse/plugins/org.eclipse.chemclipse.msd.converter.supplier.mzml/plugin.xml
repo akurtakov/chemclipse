@@ -4,6 +4,20 @@
    <extension
          point="org.eclipse.chemclipse.msd.converter.chromatogramSupplier">
       <ChromatogramSupplier
+            description="Reads indexed mzML Chromatograms"
+            fileExtension=".mzML"
+            filterName="indexed mzML Chromatogram (*.mzML)"
+            id="org.eclipse.chemclipse.msd.converter.supplier.mzml.indexed"
+            importContentMatcher="org.eclipse.chemclipse.msd.converter.supplier.mzml.converter.ChromatogramFileContentMatcherIndexed"
+            importConverter="org.eclipse.chemclipse.msd.converter.supplier.mzml.converter.ChromatogramImportConverterIndexed"
+            importMagicNumberMatcher="org.eclipse.chemclipse.xxd.converter.supplier.mzml.converter.MagicNumberMatcher"
+            isExportable="false"
+            isImportable="true">
+      </ChromatogramSupplier>
+   </extension>
+   <extension
+         point="org.eclipse.chemclipse.msd.converter.chromatogramSupplier">
+      <ChromatogramSupplier
             description="Reads mzML Chromatograms"
             exportConverter="org.eclipse.chemclipse.msd.converter.supplier.mzml.converter.ChromatogramExportConverter"
             fileExtension=".mzML"

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -27,25 +27,37 @@ import jakarta.xml.bind.annotation.XmlType;
 public class MzMLType implements Serializable {
 
 	private static final long serialVersionUID = 110L;
+
 	@XmlElement(required = true)
 	private CVListType cvList;
+
 	@XmlElement(required = true)
 	private FileDescriptionType fileDescription;
+
 	private ReferenceableParamGroupListType referenceableParamGroupList;
+
 	private SampleListType sampleList;
+
 	@XmlElement(required = true)
 	private SoftwareListType softwareList;
+
 	private ScanSettingsListType scanSettingsList;
+
 	@XmlElement(required = true)
 	private InstrumentConfigurationListType instrumentConfigurationList;
+
 	@XmlElement(required = true)
 	private DataProcessingListType dataProcessingList;
+
 	@XmlElement(required = true)
 	private RunType run;
+
 	@XmlAttribute(name = "accession")
 	private String accession;
+
 	@XmlAttribute(name = "version", required = true)
 	private String version;
+
 	@XmlAttribute(name = "id")
 	private String id;
 

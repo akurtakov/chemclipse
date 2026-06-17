@@ -29,10 +29,13 @@ public class ComponentListType {
 
 	@XmlElement(required = true)
 	private List<SourceComponentType> source;
+
 	@XmlElement(required = true)
 	private List<AnalyzerComponentType> analyzer;
+
 	@XmlElement(required = true)
 	private List<DetectorComponentType> detector;
+
 	@XmlAttribute(name = "count", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	private BigInteger count;

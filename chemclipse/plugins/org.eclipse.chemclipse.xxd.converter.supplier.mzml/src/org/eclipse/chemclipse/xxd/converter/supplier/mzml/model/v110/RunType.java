@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -29,24 +29,30 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class RunType extends ParamGroupType {
 
 	private SpectrumListType spectrumList;
+
 	private ChromatogramListType chromatogramList;
+
 	@XmlAttribute(name = "id", required = true)
 	@XmlJavaTypeAdapter(CollapsedStringAdapter.class)
 	@XmlID
 	@XmlSchemaType(name = "ID")
 	private String id;
+
 	@XmlAttribute(name = "defaultInstrumentConfigurationRef", required = true)
 	@XmlIDREF
 	@XmlSchemaType(name = "IDREF")
 	private InstrumentConfigurationType defaultInstrumentConfigurationRef;
+
 	@XmlAttribute(name = "defaultSourceFileRef")
 	@XmlIDREF
 	@XmlSchemaType(name = "IDREF")
 	private SourceFileType defaultSourceFileRef;
+
 	@XmlAttribute(name = "sampleRef")
 	@XmlIDREF
 	@XmlSchemaType(name = "IDREF")
 	private SampleType sampleRef;
+
 	@XmlAttribute(name = "startTimeStamp")
 	@XmlSchemaType(name = "dateTime")
 	private XMLGregorianCalendar startTimeStamp;

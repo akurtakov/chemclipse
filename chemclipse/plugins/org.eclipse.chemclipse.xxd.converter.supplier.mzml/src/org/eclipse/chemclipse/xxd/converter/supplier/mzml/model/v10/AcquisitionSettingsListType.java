@@ -32,6 +32,7 @@ public class AcquisitionSettingsListType {
 
 	@XmlElement(required = true)
 	protected List<AcquisitionSettingsType> acquisitionSettings;
+
 	@XmlAttribute(name = "count", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	protected BigInteger count;

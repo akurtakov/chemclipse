@@ -32,6 +32,7 @@ public class BinaryDataArrayListType {
 
 	@XmlElement(required = true)
 	protected List<BinaryDataArrayType> binaryDataArray;
+
 	@XmlAttribute(name = "count", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	protected BigInteger count;

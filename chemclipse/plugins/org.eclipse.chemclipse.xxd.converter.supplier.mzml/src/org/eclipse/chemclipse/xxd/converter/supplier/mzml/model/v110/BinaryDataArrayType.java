@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -28,13 +28,16 @@ public class BinaryDataArrayType extends ParamGroupType {
 
 	@XmlElement(required = true)
 	private byte[] binary;
+
 	@XmlAttribute(name = "arrayLength")
 	@XmlSchemaType(name = "nonNegativeInteger")
 	private BigInteger arrayLength; // optional, may override defaultArrayLength, not to be used for m/z, intensity and time
+
 	@XmlAttribute(name = "dataProcessingRef")
 	@XmlIDREF
 	@XmlSchemaType(name = "IDREF")
 	private Object dataProcessingRef;
+
 	@XmlAttribute(name = "encodedLength", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	private BigInteger encodedLength;

@@ -29,6 +29,7 @@ public class ReferenceableParamGroupListType {
 
 	@XmlElement(required = true)
 	private List<ReferenceableParamGroupType> referenceableParamGroup;
+
 	@XmlAttribute(name = "count", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	private BigInteger count;

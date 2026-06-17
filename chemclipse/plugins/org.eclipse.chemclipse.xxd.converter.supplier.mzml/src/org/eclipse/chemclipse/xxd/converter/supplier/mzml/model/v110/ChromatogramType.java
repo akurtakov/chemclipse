@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -19,24 +19,32 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlIDREF;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlSchemaType;
 import jakarta.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ChromatogramType", propOrder = {"precursor", "product", "binaryDataArrayList"})
+@XmlRootElement(name = "chromatogram")
 public class ChromatogramType extends ParamGroupType {
 
 	private PrecursorType precursor;
+
 	private ProductType product;
+
 	@XmlElement(required = true)
 	private BinaryDataArrayListType binaryDataArrayList;
+
 	@XmlAttribute(name = "id", required = true)
 	private String id;
+
 	@XmlAttribute(name = "index", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	private BigInteger index;
+
 	@XmlAttribute(name = "defaultArrayLength", required = true)
 	private int defaultArrayLength;
+
 	@XmlAttribute(name = "dataProcessingRef")
 	@XmlIDREF
 	@XmlSchemaType(name = "IDREF")

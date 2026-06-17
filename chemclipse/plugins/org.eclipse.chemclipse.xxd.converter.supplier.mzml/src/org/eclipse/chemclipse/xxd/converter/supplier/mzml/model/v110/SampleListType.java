@@ -29,6 +29,7 @@ public class SampleListType {
 
 	@XmlElement(required = true)
 	private List<SampleType> sample;
+
 	@XmlAttribute(name = "count", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	private BigInteger count;

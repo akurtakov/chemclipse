@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2025 Lablicate GmbH.
+ * Copyright (c) 2015, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -26,7 +26,9 @@ public class FileDescriptionType {
 
 	@XmlElement(required = true)
 	private ParamGroupType fileContent;
+
 	private SourceFileListType sourceFileList;
+
 	private List<ParamGroupType> contact;
 
 	public ParamGroupType getFileContent() {

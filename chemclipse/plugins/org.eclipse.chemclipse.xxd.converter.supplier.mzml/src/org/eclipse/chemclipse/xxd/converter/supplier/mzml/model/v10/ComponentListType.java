@@ -34,6 +34,7 @@ public class ComponentListType {
 
 	@XmlElementRefs({@XmlElementRef(name = "source", namespace = "http://psi.hupo.org/schema_revision/mzML_1.0.0", type = JAXBElement.class, required = false), @XmlElementRef(name = "detector", namespace = "http://psi.hupo.org/schema_revision/mzML_1.0.0", type = JAXBElement.class, required = false), @XmlElementRef(name = "analyzer", namespace = "http://psi.hupo.org/schema_revision/mzML_1.0.0", type = JAXBElement.class, required = false)})
 	protected List<JAXBElement<ComponentType>> sourceOrAnalyzerOrDetector;
+
 	@XmlAttribute(name = "count", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	protected BigInteger count;

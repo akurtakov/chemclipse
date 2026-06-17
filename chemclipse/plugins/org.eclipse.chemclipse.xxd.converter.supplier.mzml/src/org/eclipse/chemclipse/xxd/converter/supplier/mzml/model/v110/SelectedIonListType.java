@@ -29,6 +29,7 @@ public class SelectedIonListType {
 
 	@XmlElement(required = true)
 	private List<ParamGroupType> selectedIon;
+
 	@XmlAttribute(name = "count", required = true)
 	@XmlSchemaType(name = "nonNegativeInteger")
 	private BigInteger count;
