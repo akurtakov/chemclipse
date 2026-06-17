@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.chemclipse.model.core.IChromatogram;
 import org.eclipse.chemclipse.model.core.IPeak;
 import org.eclipse.chemclipse.model.filter.IPeakFilter;
 import org.eclipse.chemclipse.model.selection.IChromatogramSelection;
@@ -59,13 +60,22 @@ public class LowPassPeaksFilter extends AbstractPeakFilter<LowPassPeaksFilterSet
 		/*
 		 * 0 is the conditional option to skip this processor.
 		 */
+		List<IPeak> peaksToDelete;
 		int numberLowest = configuration.getNumberLowest();
 		if(numberLowest > 0) {
 			PeakFilterOption peakFilterOption = configuration.getPeakFilterOption();
-			List<IPeak> peaksToDelete = XPassPeaksFilter.filterPeaks(peaks, context, peakFilterOption, numberLowest, false);
-			deletePeaks(peaksToDelete, chromatogramSelection);
-			resetPeakSelection(chromatogramSelection);
+			peaksToDelete = XPassPeaksFilter.filterPeaks(peaks, context, peakFilterOption, numberLowest, false);
+		} else {
+			IChromatogram chromatogram = chromatogramSelection.getChromatogram();
+			int startRetentionTime = chromatogramSelection.getStartRetentionTime();
+			int stopRetentionTime = chromatogramSelection.getStopRetentionTime();
+			peaksToDelete = new ArrayList<>(chromatogram.getPeaks(startRetentionTime, stopRetentionTime));
 		}
+		/*
+		 * Run
+		 */
+		deletePeaks(peaksToDelete, chromatogramSelection);
+		resetPeakSelection(chromatogramSelection);
 	}
 
 	@Override
