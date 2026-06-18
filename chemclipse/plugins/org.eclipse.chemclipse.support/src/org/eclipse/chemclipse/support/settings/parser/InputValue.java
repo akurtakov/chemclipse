@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -36,6 +36,7 @@ public class InputValue {
 	private String label = "";
 	private String tooltip = "";
 	private String contributorURI = "";
+	private String[] proposals = new String[0];
 
 	public boolean hasRegexConstraint() {
 
@@ -153,5 +154,15 @@ public class InputValue {
 	public void setTooltip(String tooltip) {
 
 		this.tooltip = tooltip;
+	}
+
+	public String[] getProposals() {
+
+		return proposals;
+	}
+
+	public void setProposals(String[] proposals) {
+
+		this.proposals = (proposals != null) ? proposals : new String[0];
 	}
 }
