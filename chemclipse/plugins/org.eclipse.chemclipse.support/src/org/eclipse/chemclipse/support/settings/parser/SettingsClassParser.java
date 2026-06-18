@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2019, 2025 Lablicate GmbH.
+ * Copyright (c) 2019, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -146,6 +146,7 @@ public class SettingsClassParser<SettingType> implements SettingsParser<SettingT
 									inputValue.addValidator(new RegularExpressionValidator(name, Pattern.compile(regExp), description, settingsProperty.isMultiLine(), settingsProperty.allowEmpty()));
 								}
 								inputValue.setMultiLine(settingsProperty.isMultiLine());
+								inputValue.setProposals(settingsProperty.proposals());
 							} else if(annotation instanceof FileSettingProperty fileSettingProperty) {
 								inputValue.setFileSettingProperty(fileSettingProperty);
 							} else if(annotation instanceof ComboSettingsProperty comboSettingsProperty) {

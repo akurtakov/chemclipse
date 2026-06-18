@@ -30,8 +30,11 @@ import org.eclipse.chemclipse.ux.extension.ui.Activator;
 import org.eclipse.chemclipse.ux.extension.ui.l10n.ExtensionMessages;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.jface.fieldassist.ContentProposalAdapter;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
+import org.eclipse.jface.fieldassist.SimpleContentProposalProvider;
+import org.eclipse.jface.fieldassist.TextContentAdapter;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -304,7 +307,15 @@ public class WidgetItem {
 				if(inputValue.isMultiLine()) {
 					return createTextWidgetMultiLine(parent);
 				} else {
-					return createTextWidgetNormal(parent);
+					Control textControl = createTextWidgetNormal(parent);
+					String[] proposals = inputValue.getProposals();
+					if(proposals != null && proposals.length > 0) {
+						SimpleContentProposalProvider proposalProvider = new SimpleContentProposalProvider(proposals);
+						proposalProvider.setFiltering(true);
+						ContentProposalAdapter adapter = new ContentProposalAdapter(textControl, new TextContentAdapter(), proposalProvider, null, null);
+						adapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
+					}
+					return textControl;
 				}
 			} else if(rawType == boolean.class || rawType == Boolean.class) {
 				/*
