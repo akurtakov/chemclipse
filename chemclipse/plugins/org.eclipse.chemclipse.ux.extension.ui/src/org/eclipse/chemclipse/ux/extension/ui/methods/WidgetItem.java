@@ -131,7 +131,13 @@ public class WidgetItem {
 				}
 			}
 
-			combo.select(selectedIndex);
+			if(selectedIndex >= 0) {
+				combo.select(selectedIndex);
+			} else if((combo.getStyle() & SWT.READ_ONLY) == 0) {
+				combo.setText(label);
+			} else {
+				combo.select(selectedIndex);
+			}
 			if(selection instanceof Enum<?> enumeration) {
 				currentSelection = enumeration.name();
 			} else {
@@ -201,11 +207,7 @@ public class WidgetItem {
 			 * Text
 			 */
 			if(control instanceof Text text) {
-				/*
-				 * Text
-				 */
 				String textValue = text.getText().trim();
-
 				if(rawType == int.class || rawType == Integer.class) {
 					if(textValue.isEmpty()) {
 						return 0;
@@ -250,6 +252,12 @@ public class WidgetItem {
 				 */
 				ComboSupplier<?> comboSupplier = inputValue.getComboSupplier();
 				if(comboSupplier != null) {
+					if(inputValue.isComboEdit()) {
+						String userSpecificSelection = currentSelection.toString();
+						if(!userSpecificSelection.isBlank()) {
+							return userSpecificSelection;
+						}
+					}
 					return getValueAsString(comboSupplier);
 				} else if(rawType.isEnum()) {
 					return currentSelection.toString();
@@ -279,6 +287,20 @@ public class WidgetItem {
 		} catch(ClassCastException cce) {
 			return null;
 		}
+	}
+
+	private void initializeComboEditDefault(ComboViewer comboViewer, ComboSupplier<?> comboSupplier) {
+
+		Object defaultValue = inputValue.getDefaultValue();
+		if(defaultValue != null) {
+			Object defaultItem = comboSupplier.fromString(defaultValue.toString());
+			if(defaultItem != null) {
+				comboViewer.setSelection(new StructuredSelection(defaultItem));
+				currentSelection = defaultItem;
+				return;
+			}
+		}
+		comboViewer.setSelection(StructuredSelection.EMPTY);
 	}
 
 	private Control createControl(Composite parent) {
@@ -366,7 +388,7 @@ public class WidgetItem {
 
 	private ComboViewer createGenericCombo(Composite parent, ComboSupplier<?> comboSupplier) {
 
-		ComboViewer comboViewer = new ComboViewer(parent, SWT.READ_ONLY);
+		ComboViewer comboViewer = new ComboViewer(parent, inputValue.isComboEdit() ? SWT.NONE : SWT.READ_ONLY);
 		Combo combo = comboViewer.getCombo();
 		comboViewer.setContentProvider(ArrayContentProvider.getInstance());
 		comboViewer.setLabelProvider(new AdapterLabelProvider());
@@ -379,13 +401,23 @@ public class WidgetItem {
 		if(currentSelection instanceof String stringSelection) {
 			Object currentValue = comboSupplier.fromString(stringSelection);
 			if(currentValue != null) {
-				comboViewer.setSelection(new StructuredSelection(currentValue));
+				if(inputValue.isComboEdit()) {
+					comboViewer.getCombo().setText(stringSelection);
+				} else {
+					comboViewer.setSelection(new StructuredSelection(currentValue));
+				}
+				currentSelection = currentValue;
+			} else if(inputValue.isComboEdit()) {
+				if(!stringSelection.isEmpty()) {
+					combo.setText(stringSelection);
+				} else {
+					initializeComboEditDefault(comboViewer, comboSupplier);
+				}
 			} else {
 				comboViewer.setSelection(StructuredSelection.EMPTY);
+				currentSelection = null;
 			}
-			currentSelection = currentValue;
 		}
-
 		comboViewer.addSelectionChangedListener(event -> currentSelection = comboViewer.getStructuredSelection().getFirstElement());
 
 		return comboViewer;
