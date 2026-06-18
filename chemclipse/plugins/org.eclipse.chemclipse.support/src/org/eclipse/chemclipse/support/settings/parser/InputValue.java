@@ -33,6 +33,7 @@ public class InputValue {
 	private FileSettingProperty fileSettingProperty;
 	private final List<IValidator<Object>> validators = new ArrayList<>();
 	private ComboSupplier<?> comboSupplier;
+	private boolean comboEdit = false;
 	private String label = "";
 	private String tooltip = "";
 	private String contributorURI = "";
@@ -124,6 +125,16 @@ public class InputValue {
 	public ComboSupplier<?> getComboSupplier() {
 
 		return comboSupplier;
+	}
+
+	public boolean isComboEdit() {
+
+		return comboEdit;
+	}
+
+	public void setComboEdit(boolean comboEdit) {
+
+		this.comboEdit = comboEdit;
 	}
 
 	public String getContributorURI() {
