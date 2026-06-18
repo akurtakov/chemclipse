@@ -109,6 +109,14 @@ public class ProcessorToolbarSelectionUI extends Composite {
 			}
 		});
 		/*
+		 * Prevent that the dialog is closed on enter search.
+		 */
+		text.addTraverseListener(e -> {
+			if(e.detail == SWT.TRAVERSE_RETURN) {
+				e.doit = false;
+			}
+		});
+		/*
 		 * Click on the icons.
 		 */
 		text.addSelectionListener(new SelectionAdapter() {
