@@ -195,7 +195,12 @@ public class SupplierEditorSupport extends AbstractSupplierFileEditorSupport imp
 			parameterContext.dispose();
 		}
 
-		return openEditor(file, headerMap, false);
+		if(isSupplierFile(file)) {
+			refreshEditorReferences();
+			openEditor(file, null, elementId, contributionURI, iconURI, tooltip, headerMap, supplier.getId(), false);
+			return true;
+		}
+		return false;
 	}
 
 	@Override

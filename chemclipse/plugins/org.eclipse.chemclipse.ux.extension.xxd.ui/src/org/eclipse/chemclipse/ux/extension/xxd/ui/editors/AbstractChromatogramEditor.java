@@ -358,7 +358,8 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 				 */
 				File file = new File((String)map.get(EditorSupport.MAP_FILE));
 				boolean batch = (boolean)map.get(EditorSupport.MAP_BATCH);
-				chromatogramSelection = loadChromatogramSelection(file, batch);
+				String supplierId = (String)map.get(EditorSupport.MAP_SUPPLIER_ID);
+				chromatogramSelection = loadChromatogramSelection(file, supplierId, batch);
 				if(chromatogramSelection != null) {
 					IChromatogram chromatogram = chromatogramSelection.getChromatogram();
 					if(map.get(EditorSupport.MAP_HEADER_MAP) instanceof Map headerMap) {
@@ -395,11 +396,11 @@ public abstract class AbstractChromatogramEditor extends AbstractUpdater<Extende
 		return chromatogramSelection;
 	}
 
-	private synchronized IChromatogramSelection loadChromatogramSelection(File file, boolean batch) throws ChromatogramIsNullException {
+	private synchronized IChromatogramSelection loadChromatogramSelection(File file, String supplierId, boolean batch) throws ChromatogramIsNullException {
 
 		IChromatogramSelection chromatogramSelection = null;
 		ProgressMonitorDialog dialog = new ProgressMonitorDialog(shell);
-		ChromatogramImportRunnable runnable = new ChromatogramImportRunnable(file, dataType);
+		ChromatogramImportRunnable runnable = new ChromatogramImportRunnable(file, dataType, supplierId);
 
 		try {
 			/*

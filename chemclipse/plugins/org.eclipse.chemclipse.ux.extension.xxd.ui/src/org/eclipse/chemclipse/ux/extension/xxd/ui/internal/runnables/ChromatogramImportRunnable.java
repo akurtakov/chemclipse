@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -48,11 +48,19 @@ public class ChromatogramImportRunnable implements IRunnableWithProgress {
 
 	private List<File> files = new ArrayList<>();
 	private DataType dataType;
+	private String supplierId;
 	private List<IChromatogramSelection> chromatogramSelections = new ArrayList<>();
 
 	public ChromatogramImportRunnable(File file, DataType dataType) {
 
-		this(Arrays.asList(file), dataType);
+		this(file, dataType, null);
+	}
+
+	public ChromatogramImportRunnable(File file, DataType dataType, String supplierId) {
+
+		this.files.addAll(Arrays.asList(file));
+		this.dataType = dataType;
+		this.supplierId = supplierId;
 	}
 
 	public ChromatogramImportRunnable(List<File> files, DataType dataType) {
@@ -90,31 +98,56 @@ public class ChromatogramImportRunnable implements IRunnableWithProgress {
 					case MSD_TANDEM:
 					case MSD_HIGHRES:
 					case MSD:
-						IProcessingInfo<IChromatogramMSD> processingInfoMSD = ChromatogramConverterMSD.getInstance().convert(file, monitor);
+						IProcessingInfo<IChromatogramMSD> processingInfoMSD;
+						if(supplierId != null) {
+							processingInfoMSD = ChromatogramConverterMSD.getInstance().convert(file, supplierId, monitor);
+						} else {
+							processingInfoMSD = ChromatogramConverterMSD.getInstance().convert(file, monitor);
+						}
 						ProcessingInfoPartSupport.getInstance().update(processingInfoMSD);
 						IChromatogramMSD chromatogramMSD = processingInfoMSD.getProcessingResult();
 						chromatogramSelections.add(new ChromatogramSelectionMSD(chromatogramMSD, fireUpdate));
 						break;
 					case CSD:
-						IProcessingInfo<IChromatogramCSD> processingInfoCSD = ChromatogramConverterCSD.getInstance().convert(file, monitor);
+						IProcessingInfo<IChromatogramCSD> processingInfoCSD;
+						if(supplierId != null) {
+							processingInfoCSD = ChromatogramConverterCSD.getInstance().convert(file, supplierId, monitor);
+						} else {
+							processingInfoCSD = ChromatogramConverterCSD.getInstance().convert(file, monitor);
+						}
 						ProcessingInfoPartSupport.getInstance().update(processingInfoCSD);
 						IChromatogramCSD chromatogramCSD = processingInfoCSD.getProcessingResult();
 						chromatogramSelections.add(new ChromatogramSelectionCSD(chromatogramCSD, fireUpdate));
 						break;
 					case WSD:
-						IProcessingInfo<IChromatogramWSD> processingInfoWSD = ChromatogramConverterWSD.getInstance().convert(file, monitor);
+						IProcessingInfo<IChromatogramWSD> processingInfoWSD;
+						if(supplierId != null) {
+							processingInfoWSD = ChromatogramConverterWSD.getInstance().convert(file, supplierId, monitor);
+						} else {
+							processingInfoWSD = ChromatogramConverterWSD.getInstance().convert(file, monitor);
+						}
 						ProcessingInfoPartSupport.getInstance().update(processingInfoWSD);
 						IChromatogramWSD chromatogramWSD = processingInfoWSD.getProcessingResult();
 						chromatogramSelections.add(new ChromatogramSelectionWSD(chromatogramWSD, fireUpdate));
 						break;
 					case VSD:
-						IProcessingInfo<IChromatogramVSD> processingInfoVSD = ChromatogramConverterVSD.getInstance().convert(file, monitor);
+						IProcessingInfo<IChromatogramVSD> processingInfoVSD;
+						if(supplierId != null) {
+							processingInfoVSD = ChromatogramConverterVSD.getInstance().convert(file, supplierId, monitor);
+						} else {
+							processingInfoVSD = ChromatogramConverterVSD.getInstance().convert(file, monitor);
+						}
 						ProcessingInfoPartSupport.getInstance().update(processingInfoVSD);
 						IChromatogramVSD chromatogramVSD = processingInfoVSD.getProcessingResult();
 						chromatogramSelections.add(new ChromatogramSelectionVSD(chromatogramVSD, fireUpdate));
 						break;
 					case FSD:
-						IProcessingInfo<IChromatogramFSD> processingInfoFSD = ChromatogramConverterFSD.getInstance().convert(file, monitor);
+						IProcessingInfo<IChromatogramFSD> processingInfoFSD;
+						if(supplierId != null) {
+							processingInfoFSD = ChromatogramConverterFSD.getInstance().convert(file, supplierId, monitor);
+						} else {
+							processingInfoFSD = ChromatogramConverterFSD.getInstance().convert(file, monitor);
+						}
 						ProcessingInfoPartSupport.getInstance().update(processingInfoFSD);
 						IChromatogramFSD chromatogramFSD = processingInfoFSD.getProcessingResult();
 						chromatogramSelections.add(new ChromatogramSelectionFSD(chromatogramFSD, fireUpdate));
