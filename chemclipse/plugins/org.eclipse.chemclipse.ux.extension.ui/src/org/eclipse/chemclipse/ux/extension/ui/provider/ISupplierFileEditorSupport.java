@@ -86,6 +86,11 @@ public interface ISupplierFileEditorSupport extends ISupplierFileIdentifier {
 
 	default void openEditor(File file, Object object, String elementId, String contributionURI, String iconURI, String tooltip, Map<HeaderField, String> headerMap, boolean batch) {
 
+		openEditor(file, object, elementId, contributionURI, iconURI, tooltip, headerMap, null, batch);
+	}
+
+	default void openEditor(File file, Object object, String elementId, String contributionURI, String iconURI, String tooltip, Map<HeaderField, String> headerMap, String supplierId, boolean batch) {
+
 		EModelService modelService = Activator.getDefault().getModelService();
 		MApplication application = Activator.getDefault().getApplication();
 		EPartService partService = Activator.getDefault().getPartService();
@@ -175,6 +180,7 @@ public interface ISupplierFileEditorSupport extends ISupplierFileIdentifier {
 					map.put(EditorSupport.MAP_FILE, file.getAbsolutePath());
 					map.put(EditorSupport.MAP_BATCH, batch);
 					map.put(EditorSupport.MAP_HEADER_MAP, headerMap);
+					map.put(EditorSupport.MAP_SUPPLIER_ID, supplierId);
 					part.setObject(map);
 					part.setLabel(file.getName());
 				}

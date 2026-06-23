@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018, 2025 Lablicate GmbH.
+ * Copyright (c) 2018, 2026 Lablicate GmbH.
  *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
@@ -20,6 +20,7 @@ public class EditorSupport {
 	 * Use: Map<HeaderField, String>
 	 */
 	public static final String MAP_HEADER_MAP = "HeaderMap"; //$NON-NLS-1$
+	public static final String MAP_SUPPLIER_ID = "SupplierId"; //$NON-NLS-1$
 
 	private EditorSupport() {
 
