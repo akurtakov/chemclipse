@@ -1,0 +1,21 @@
+/*******************************************************************************
+ * Copyright (c) 2013, 2026 Lablicate GmbH.
+ *
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ * 
+ * Contributors:
+ * Philip Wenig - initial API and implementation
+ * Matthias Mailänder - additional header data
+ *******************************************************************************/
+package org.eclipse.chemclipse.msd.converter.supplier.mzml.converter.model;
+
+import org.eclipse.chemclipse.msd.model.core.AbstractChromatogramMSD;
+
+public class VendorChromatogramMSD extends AbstractChromatogramMSD implements IVendorChromatogramMSD {
+
+	private static final long serialVersionUID = 5321085504577993958L;
+}

@@ -25,23 +25,11 @@
    </url>
 
    <plugin
-         id="org.eclipse.chemclipse.msd.converter.supplier.mzml"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.chemclipse.msd.converter.supplier.mzml.ui"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.chemclipse.wsd.converter.supplier.mzml"
-         version="0.0.0"/>
-
-   <plugin
          id="org.eclipse.chemclipse.xxd.converter.supplier.mzml"
          version="0.0.0"/>
 
    <plugin
-         id="org.eclipse.chemclipse.wsd.converter.supplier.mzml.ui"
+         id="org.eclipse.chemclipse.xxd.converter.supplier.mzml.ui"
          version="0.0.0"/>
 
 </feature>
