@@ -135,6 +135,7 @@ public class ExtendedChromatogramStatisticsUI extends Composite implements IExte
 			 * Map
 			 */
 			addTimeData(chromatogramSelection, dataMap);
+			addSignalData(chromatogramSelection, dataMap);
 			addScanData(chromatogramSelection, dataMap);
 			addPeakData(chromatogramSelection, dataMap);
 			addIonTransitionData(chromatogramSelection, dataMap);
@@ -154,6 +155,13 @@ public class ExtendedChromatogramStatisticsUI extends Composite implements IExte
 		dataMap.put("Stop Total [min]", decimalFormat.format(chromatogram.getStopRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
 		dataMap.put("Start Selection [min]", decimalFormat.format(chromatogramSelection.getStartRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
 		dataMap.put("Stop Selection [min]", decimalFormat.format(chromatogramSelection.getStopRetentionTime() / IChromatogramOverview.MINUTE_CORRELATION_FACTOR));
+	}
+
+	private void addSignalData(IChromatogramSelection chromatogramSelection, Map<String, String> dataMap) {
+
+		IChromatogram chromatogram = chromatogramSelection.getChromatogram();
+		dataMap.put("Signal TIC (Min)", Float.toString(chromatogram.getMinSignal()));
+		dataMap.put("Signal TIC (Max)", Float.toString(chromatogram.getMaxSignal()));
 	}
 
 	private void addScanData(IChromatogramSelection chromatogramSelection, Map<String, String> dataMap) {
