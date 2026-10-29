@@ -22,11 +22,4 @@
             name="PCR Channel Mappings">
       </page>
    </extension>
-   <extension
-         point="org.eclipse.chemclipse.xxd.process.ui.menu.icon">
-      <icon
-            class="org.eclipse.chemclipse.pcr.report.supplier.tabular.excel.ui.icon.MenuIcon"
-            id="org.eclipse.chemclipse.pcr.report.supplier.tabular.excel">
-      </icon>
-   </extension>
 </plugin>

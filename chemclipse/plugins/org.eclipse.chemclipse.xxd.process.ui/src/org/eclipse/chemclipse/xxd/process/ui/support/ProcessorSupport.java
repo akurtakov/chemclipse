@@ -16,8 +16,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import org.eclipse.chemclipse.logging.core.Logger;
@@ -49,6 +52,7 @@ public class ProcessorSupport {
 	private static final String PROCESSOR_DELIMITER = "%";
 
 	private static ValueParserSupport valueParseSupport = new ValueParserSupport();
+	private static final Map<String, Optional<Image>> menuIcons = new ConcurrentHashMap<>();
 
 	public static List<Processor> getActiveProcessors(Set<IProcessSupplier<?>> processSuppliers, String settings) {
 
@@ -152,21 +156,54 @@ public class ProcessorSupport {
 	 */
 	public static Image getMenuIcon(IProcessSupplier<?> processSupplier) {
 
+		return getMenuIcon(processSupplier.getId());
+	}
+
+	/**
+	 * Returns the menu icon of the given supplier id or null. The icons of the
+	 * ChemClipse processors are listed in MenuIcons, other plug-ins
+	 * contribute theirs via the menu icon extension point. The longest id that
+	 * is part of the supplier id wins, as some process type suppliers add
+	 * hard-coded prefixes.
+	 */
+	public static Image getMenuIcon(String supplierId) {
+
+		return menuIcons.computeIfAbsent(supplierId, id -> Optional.ofNullable(createMenuIcon(id))).orElse(null);
+	}
+
+	private static Image createMenuIcon(String supplierId) {
+
+		String imageId = null;
+		for(String id : MenuIcons.IMAGES.keySet()) {
+			if(supplierId.contains(id) && (imageId == null || id.length() > imageId.length())) {
+				imageId = id;
+			}
+		}
+
+		IConfigurationElement contribution = null;
+		String contributionId = null;
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
-		IConfigurationElement[] config = registry.getConfigurationElementsFor(IMenuIcon.EXTENSION_POINT_ID);
-		try {
-			for(IConfigurationElement element : config) {
-				final String id = element.getAttribute("id");
-				if(!processSupplier.getId().contains(id)) {
-					continue;
-				}
-				final Object object = element.createExecutableExtension("class");
-				if(object instanceof IMenuIcon menuIcon) {
+		for(IConfigurationElement element : registry.getConfigurationElementsFor(IMenuIcon.EXTENSION_POINT_ID)) {
+			String id = element.getAttribute("id");
+			if(id != null && supplierId.contains(id) && (contributionId == null || id.length() > contributionId.length())) {
+				contribution = element;
+				contributionId = id;
+			}
+		}
+
+		if(contribution != null && (imageId == null || contributionId.length() > imageId.length())) {
+			try {
+				if(contribution.createExecutableExtension("class") instanceof IMenuIcon menuIcon) {
 					return menuIcon.getImage();
 				}
+			} catch(CoreException e) {
+				logger.warn(e);
 			}
-		} catch(CoreException e) {
-			logger.warn(e);
+			return null;
+		}
+
+		if(imageId != null) {
+			return ApplicationImageFactory.getInstance().getImage(MenuIcons.IMAGES.get(imageId), IApplicationImageProvider.SIZE_16x16);
 		}
 		return null;
 	}

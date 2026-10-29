@@ -10,11 +10,4 @@
             id="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.chromatogramsubtract">
       </ChromatogramFilterSupplier>
    </extension>
-   <extension
-         point="org.eclipse.chemclipse.xxd.process.ui.menu.icon">
-      <icon
-            class="org.eclipse.chemclipse.chromatogram.xxd.filter.supplier.baselinesubtract.ui.icon.BaselineSubtractMenuIcon"
-            id="org.eclipse.chemclipse.msd.filter.supplier.baseline.subtract">
-      </icon>
-   </extension>
 </plugin>

@@ -26,19 +26,4 @@
          </adapter>
       </factory>
    </extension>
-   <extension
-         point="org.eclipse.chemclipse.xxd.process.ui.menu.icon">
-      <icon
-            class="org.eclipse.chemclipse.chromatogram.xxd.calculator.ui.icon.MenuIconNoise"
-            id="org.eclipse.chemclipse.chromatogram.xxd.calculator.noise.ChromatogramClassifierSupplier">
-      </icon>
-      <icon
-            class="org.eclipse.chemclipse.chromatogram.xxd.calculator.ui.icon.MenuIconNoise"
-            id="org.eclipse.chemclipse.chromatogram.xxd.calculator.noise.noiseSegmentSetter">
-      </icon>
-      <icon
-            class="org.eclipse.chemclipse.chromatogram.xxd.calculator.ui.icon.MenuIconColumn"
-            id="org.eclipse.chemclipse.chromatogram.xxd.calculator.column.chromatogramColumnParser">
-      </icon>            
-   </extension>
 </plugin>

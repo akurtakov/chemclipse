@@ -28,8 +28,4 @@
          id="org.eclipse.chemclipse.pcr.converter.supplier.rdml"
          version="0.0.0"/>
 
-   <plugin
-         id="org.eclipse.chemclipse.pcr.converter.supplier.rdml.ui"
-         version="0.0.0"/>
-
 </feature>
