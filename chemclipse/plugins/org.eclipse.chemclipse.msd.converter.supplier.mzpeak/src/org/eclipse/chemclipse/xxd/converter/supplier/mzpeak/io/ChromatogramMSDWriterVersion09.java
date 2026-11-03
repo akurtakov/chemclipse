@@ -60,6 +60,7 @@ import org.eclipse.chemclipse.msd.model.core.IScanMSD;
 import org.eclipse.chemclipse.msd.model.core.MassSpectrumType;
 import org.eclipse.chemclipse.msd.model.core.Polarity;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
@@ -123,17 +124,16 @@ public class ChromatogramMSDWriterVersion09 extends AbstractChromatogramWriter i
 	public void writeChromatogram(File file, IChromatogramMSD chromatogram, IProgressMonitor monitor) throws IOException {
 
 		List<IScanMSD> scans = getScans(chromatogram);
-		monitor.beginTask(ConverterMessages.exportChromatogram, scans.size());
+		SubMonitor subMonitor = SubMonitor.convert(monitor, ConverterMessages.exportChromatogram, scans.size());
 		Path directory = Files.createTempDirectory("mzpeak");
 		try {
 			MzPeakIndex mzPeakIndex = new MzPeakIndex();
-			writeSpectra(directory, scans, mzPeakIndex, monitor);
+			writeSpectra(directory, scans, mzPeakIndex, subMonitor);
 			writeChromatograms(directory, scans, mzPeakIndex);
 			mzPeakIndex.setMetadata(createMetadata(chromatogram, scans));
 			writeArchive(file, directory, mzPeakIndex);
 		} finally {
 			delete(directory);
-			monitor.done();
 		}
 	}
 
@@ -148,7 +148,7 @@ public class ChromatogramMSDWriterVersion09 extends AbstractChromatogramWriter i
 		return scans;
 	}
 
-	private static void writeSpectra(Path directory, List<IScanMSD> scans, MzPeakIndex mzPeakIndex, IProgressMonitor monitor) throws IOException {
+	private static void writeSpectra(Path directory, List<IScanMSD> scans, MzPeakIndex mzPeakIndex, SubMonitor subMonitor) throws IOException {
 
 		boolean hasCentroids = scans.stream().anyMatch(scan -> !isProfile(scan));
 		boolean hasProfiles = scans.stream().anyMatch(ChromatogramMSDWriterVersion09::isProfile);
@@ -168,7 +168,7 @@ public class ChromatogramMSDWriterVersion09 extends AbstractChromatogramWriter i
 				writePoints(isProfile(scan) ? dataWriter : peaksWriter, pointsFactory, index, ions);
 				metadataWriter.write(createSpectrumMetadata(metadataFactory, index, scan, ions));
 				scansWriter.write(createScan(scansFactory, index, scan));
-				monitor.worked(1);
+				subMonitor.worked(1);
 			}
 		}
 

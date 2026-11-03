@@ -26,6 +26,7 @@ import org.eclipse.chemclipse.msd.converter.supplier.mzpeak.model.IVendorIon;
 import org.eclipse.chemclipse.msd.converter.supplier.mzpeak.model.IVendorScanProxy;
 import org.eclipse.chemclipse.msd.converter.supplier.mzpeak.model.VendorIon;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 
 public class ReaderProxy implements IReaderProxy {
 
@@ -45,11 +46,10 @@ public class ReaderProxy implements IReaderProxy {
 	@Override
 	public void readMassSpectrum(IVendorScanProxy scanProxy, IProgressMonitor monitor) throws IOException {
 
-		monitor.beginTask(ConverterMessages.importScan, IProgressMonitor.UNKNOWN);
-
 		int spectrumIndex = scanProxy.getScanNumber() - 1;
 
 		try (ParquetFileReader parquetFileReader = ParquetReaderSupport.open(spectraParquet)) {
+			SubMonitor subMonitor = SubMonitor.convert(monitor, ConverterMessages.importScan, (int)Math.min(Integer.MAX_VALUE, parquetFileReader.getRecordCount()));
 			MessageType schema = parquetFileReader.getFooter().getFileMetaData().getSchema();
 			PageReadStore pageReadStore;
 			while((pageReadStore = parquetFileReader.readNextRowGroup()) != null) {
@@ -68,14 +68,12 @@ public class ReaderProxy implements IReaderProxy {
 							readChunk(scanProxy, chunk);
 						}
 					}
-					monitor.worked(1);
+					subMonitor.worked(1);
 				}
 			}
 		} catch(IOException e) {
 			logger.error(e);
 		}
-
-		monitor.done();
 	}
 
 	private static void readChunk(IVendorScanProxy scanProxy, Group chunk) {
